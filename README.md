@@ -26,7 +26,7 @@ WPF の WebBrowser コントロール上で艦これを表示し、FiddlerCore �
 * Windows 8 以降
 * .NET Framework 4.5
 
-ドックや遠征の通知機能は Windows 8 以降でないと動作しません。
+Windows 7 でも動かないことはないと思いますが、ドックや遠征の通知機能は Windows 8 以降でないと動作しません。
 基本的に Windows 8 以降でしか動作の確認をしていないので、Windows 7 で何らかの不具合が発生した場合はご連絡ください。
 
 
