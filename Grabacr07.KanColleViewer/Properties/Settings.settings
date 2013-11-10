@@ -1,0 +1,26 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Grabacr07.KanColleViewer.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="LocalProxyPort" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">37564</Value>
+    </Setting>
+    <Setting Name="KanColleUrl" Type="System.Uri" Scope="Application">
+      <Value Profile="(Default)">http://www.dmm.com/netgame/social/application/-/detail/=/app_id=854854/</Value>
+    </Setting>
+    <Setting Name="OverrideStyleSheet" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">body {
+    margin:0;
+    overflow:hidden
+}
+
+#game_frame {
+    position:fixed;
+    left:50%;
+    top:-16px;
+    margin-left:-450px;
+    z-index:1
+}</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

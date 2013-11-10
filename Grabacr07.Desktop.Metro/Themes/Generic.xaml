@@ -1,0 +1,168 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:chrome="clr-namespace:Grabacr07.Desktop.Metro.Chrome">
+
+	<Style TargetType="{x:Type chrome:MetroWindow}">
+		<Setter Property="Padding"
+				Value="0" />
+		<Setter Property="Foreground"
+				Value="{DynamicResource ActiveForegroundBrushKey}" />
+		<Setter Property="Background"
+				Value="{DynamicResource ThemeBrushKey}" />
+		<Setter Property="BorderBrush"
+				Value="{DynamicResource AccentBrushKey}" />
+		<Setter Property="BorderThickness"
+				Value="1" />
+		<Setter Property="SnapsToDevicePixels"
+				Value="True" />
+		<Setter Property="TextOptions.TextFormattingMode"
+				Value="Display" />
+		<Setter Property="WindowChrome.WindowChrome"
+				Value="{Binding RelativeSource={RelativeSource Self}, Path=WindowChrome}" />
+		<Setter Property="Height"
+				Value="600" />
+		<Setter Property="WindowChrome">
+			<Setter.Value>
+				<WindowChrome CaptionHeight="{x:Static SystemParameters.CaptionHeight}"
+							  ResizeBorderThickness="{x:Static SystemParameters.WindowResizeBorderThickness}" />
+			</Setter.Value>
+		</Setter>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type chrome:MetroWindow}">
+					<Border Background="{TemplateBinding Background}"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}"
+							SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+						<ContentPresenter Margin="{TemplateBinding Padding}"
+										  LayoutTransform="{TemplateBinding DpiScaleTransform}" />
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Style.Triggers>
+			<Trigger Property="WindowState"
+					 Value="Maximized">
+				<Setter Property="Padding"
+						Value="8" />
+			</Trigger>
+		</Style.Triggers>
+	</Style>
+
+
+	<Style TargetType="{x:Type chrome:GlowMetroWindow}">
+		<Setter Property="Padding"
+				Value="0" />
+		<Setter Property="Foreground"
+				Value="{DynamicResource ActiveForegroundBrushKey}" />
+		<Setter Property="Background"
+				Value="{DynamicResource ThemeBrushKey}" />
+		<Setter Property="SnapsToDevicePixels"
+				Value="True" />
+		<Setter Property="TextOptions.TextFormattingMode"
+				Value="Display" />
+		<Setter Property="WindowChrome.WindowChrome"
+				Value="{Binding RelativeSource={RelativeSource Self}, Path=WindowChrome}" />
+		<Setter Property="Height"
+				Value="600" />
+		<Setter Property="WindowChrome">
+			<Setter.Value>
+				<WindowChrome CaptionHeight="{x:Static SystemParameters.CaptionHeight}"
+							  ResizeBorderThickness="{x:Static SystemParameters.WindowResizeBorderThickness}" />
+			</Setter.Value>
+		</Setter>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type chrome:GlowMetroWindow}">
+					<Border Background="{TemplateBinding Background}"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}"
+							SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+						<ContentPresenter Margin="{TemplateBinding Padding}"
+										  LayoutTransform="{TemplateBinding DpiScaleTransform}" />
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Style.Triggers>
+			<Trigger Property="IsActive"
+					 Value="False">
+				<Setter Property="Foreground"
+						Value="{DynamicResource ForegroundBrushKey}" />
+			</Trigger>
+			<Trigger Property="WindowState"
+					 Value="Maximized">
+				<Setter Property="Padding"
+						Value="8" />
+			</Trigger>
+		</Style.Triggers>
+	</Style>
+
+
+	<Style TargetType="{x:Type chrome:GlowWindow}">
+		<Setter Property="Background"
+				Value="Transparent" />
+		<Setter Property="Foreground"
+				Value="{DynamicResource AccentBrushKey}" />
+		<Setter Property="Padding"
+				Value="0,8" />
+		<Setter Property="SnapsToDevicePixels"
+				Value="True" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type chrome:GlowWindow}">
+					<Border Background="{TemplateBinding Background}"
+							SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+						<Grid x:Name="GlowContent"
+							  Width="1"
+							  Margin="{TemplateBinding Padding}"
+							  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+							  VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+							<Border x:Name="LineBorder"
+									Background="{TemplateBinding Foreground}" />
+							<Border x:Name="BlurBorder"
+									Margin="-1,0"
+									Opacity="0.5"
+									Background="{TemplateBinding Foreground}">
+								<Border.Effect>
+									<BlurEffect Radius="8" />
+								</Border.Effect>
+							</Border>
+						</Grid>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsGlow"
+								 Value="False">
+							<Setter TargetName="LineBorder"
+									Property="Background"
+									Value="{DynamicResource BorderBrushKey}" />
+							<Setter TargetName="BlurBorder"
+									Property="Background"
+									Value="{DynamicResource BorderBrushKey}" />
+						</Trigger>
+						<Trigger Property="Orientation"
+								 Value="Horizontal">
+							<Setter TargetName="GlowContent"
+									Property="Width"
+									Value="Auto" />
+							<Setter TargetName="GlowContent"
+									Property="Height"
+									Value="1" />
+							<Setter TargetName="BlurBorder"
+									Property="Margin"
+									Value="0,-1" />
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Style.Triggers>
+			<Trigger Property="Orientation"
+					 Value="Horizontal">
+				<Setter Property="Padding"
+						Value="0" />
+			</Trigger>
+		</Style.Triggers>
+	</Style>
+
+</ResourceDictionary>

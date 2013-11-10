@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Settings"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
+			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+			 xmlns:controls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+			 mc:Ignorable="d"
+			 d:DesignWidth="700"
+			 d:DesignHeight="300">
+	<UserControl.DataContext>
+		<viewModels:SettingsViewModel />
+	</UserControl.DataContext>
+
+	<StackPanel Margin="10,0,10,10">
+		<TextBlock>
+			<Run Text="スクリーンショット設定"
+				 Style="{DynamicResource PickupTextElementStyleKey}" />
+		</TextBlock>
+		<Grid Margin="10,5">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="保存先フォルダー: "
+					   VerticalAlignment="Center"
+					   Margin="0,6" />
+			<controls:PromptTextBox Grid.Row="0"
+									Grid.Column="1"
+									Text="{Binding ScreenshotFolder}"
+									Prompt="保存先フォルダー パス"
+									Margin="5,3"
+									Padding="2" />
+
+			<!--<TextBlock Grid.Row="1"
+					   Text="ファイル名: "
+					   VerticalAlignment="Center"
+					   Margin="0,6" />
+			<controls:PromptTextBox Grid.Row="1"
+									Grid.Column="1"
+									Text="{Binding ScreenshotFilename}"
+									Prompt="ファイル名"
+									Margin="5,3"
+									Padding="2" />-->
+		</Grid>
+
+		<Rectangle Height="1"
+				   Style="{DynamicResource SeparatorRectangleStyleKey}"
+				   Margin="0,5" />
+	</StackPanel>
+</UserControl>

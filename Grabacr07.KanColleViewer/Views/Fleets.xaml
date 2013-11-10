@@ -1,0 +1,255 @@
+﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Fleets"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:fleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Fleets"
+			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
+			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
+			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+			 xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
+			 mc:Ignorable="d"
+			 d:DesignWidth="800"
+			 d:DesignHeight="300"
+			 d:DataContext="{d:DesignInstance fleets:FleetsViewModel}"
+			 SnapsToDevicePixels="True">
+	<Grid d:DataContext="{d:DesignData /SampleData/FleetsViewModelSampleData.xaml}">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<ListBox ItemsSource="{Binding Fleets}"
+				 SelectedValue="{Binding SelectedFleet, Mode=TwoWay}">
+			<ItemsControl.Template>
+				<ControlTemplate TargetType="{x:Type ItemsControl}">
+					<StackPanel IsItemsHost="True"
+								Orientation="Horizontal" />
+				</ControlTemplate>
+			</ItemsControl.Template>
+			<ItemsControl.ItemContainerStyle>
+				<Style TargetType="{x:Type ListBoxItem}">
+					<Setter Property="OverridesDefaultStyle"
+							Value="True" />
+					<Setter Property="Foreground"
+							Value="{DynamicResource InactiveForegroundBrushKey}" />
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="{x:Type ListBoxItem}">
+								<ContentPresenter />
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+					<Style.Triggers>
+						<Trigger Property="IsSelected"
+								 Value="True">
+							<Setter Property="Foreground"
+									Value="{DynamicResource ActiveForegroundBrushKey}" />
+						</Trigger>
+						<Trigger Property="IsMouseOver"
+								 Value="True">
+							<Setter Property="Foreground"
+									Value="{DynamicResource AccentHighlightBrushKey}" />
+						</Trigger>
+					</Style.Triggers>
+				</Style>
+			</ItemsControl.ItemContainerStyle>
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<Border x:Name="Border"
+							Padding="10,0,10,5">
+						<TextBlock Text="{Binding Name}"
+								   FontSize="14"
+								   Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" />
+					</Border>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ListBox>
+
+		<ContentControl Grid.Row="1"
+						Margin="9,3"
+						Content="{Binding SelectedFleet.State}">
+			<ContentControl.Resources>
+				<DataTemplate DataType="{x:Type vm:ExpeditionViewModel}">
+					<Border Padding="10,5"
+							Background="#FF204080">
+						<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}">
+							<Run Text="この艦隊は遠征中です。" />
+							<Run Text=" 完了時刻:" />
+							<Run Text="{Binding ReturnTime, Mode=OneWay}" />
+							<Run Text=" 帰投まで:" />
+							<Run Text="{Binding Remaining, Mode=OneWay}" />
+						</TextBlock>
+					</Border>
+				</DataTemplate>
+				<DataTemplate DataType="{x:Type fleets:ReSortieBarViewModel}">
+					<Border x:Name="Border"
+							Padding="10,5"
+							Background="#FF5A4020">
+						<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}">
+							<i:Interaction.Behaviors>
+								<behaviors:TimerBehavior Proc="{Binding TimerProc}" />
+							</i:Interaction.Behaviors>
+						</TextBlock>
+					</Border>
+					<DataTemplate.Triggers>
+						<DataTrigger Binding="{Binding CanReSortie}"
+									 Value="True">
+							<Setter TargetName="Border"
+									Property="Background"
+									Value="#FF5A2020" />
+						</DataTrigger>
+					</DataTemplate.Triggers>
+				</DataTemplate>
+				<DataTemplate DataType="{x:Type fleets:RepairingBarViewModel}">
+					<Border Padding="10,5"
+							Background="#FF5A4020">
+						<TextBlock Text="{Binding Message}"
+								   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+					</Border>
+				</DataTemplate>
+			</ContentControl.Resources>
+		</ContentControl>
+
+		<Grid Grid.Row="2"
+			  DataContext="{Binding SelectedFleet}"
+			  d:DataContext="{d:DesignData /SampleData/FleetViewModelSampleData.xaml}">
+			<ItemsControl ItemsSource="{Binding Ships}"
+						  Grid.IsSharedSizeScope="True">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<DataTemplate.Resources>
+							<Style TargetType="{x:Type TextBlock}"
+								   BasedOn="{StaticResource {x:Type TextBlock}}">
+								<Setter Property="Margin"
+										Value="10,0" />
+								<Setter Property="VerticalAlignment"
+										Value="Bottom" />
+							</Style>
+						</DataTemplate.Resources>
+						<StackPanel>
+							<Grid HorizontalAlignment="Left"
+								  Margin="0,5">
+								<Grid.RowDefinitions>
+									<RowDefinition />
+									<RowDefinition Height="Auto" />
+								</Grid.RowDefinitions>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition SharedSizeGroup="Name" />
+									<ColumnDefinition Width="Auto"
+													  SharedSizeGroup="Level" />
+									<ColumnDefinition Width="Auto"
+													  SharedSizeGroup="HP" />
+									<ColumnDefinition Width="Auto"
+													  SharedSizeGroup="Condition" />
+									<ColumnDefinition Width="Auto"
+													  SharedSizeGroup="Resources" />
+									<ColumnDefinition Width="Auto"
+													  SharedSizeGroup="SlotItems" />
+								</Grid.ColumnDefinitions>
+
+								<TextBlock Grid.Column="1"
+										   Grid.Row="0"
+										   Grid.RowSpan="2">
+									<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
+										 FontSize="14" />
+									<Run Text=""
+										 FontSize="22" />
+									<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
+										 FontSize="22"
+										 Style="{DynamicResource PickupTextElementStyleKey}" />
+								</TextBlock>
+
+								<TextBlock Grid.Column="2"
+										   Grid.Row="0">
+									<Run Text="Lv." />
+									<Run Text="{Binding Ship.Level, Mode=OneWay}"
+										 Style="{DynamicResource PickupTextElementStyleKey}" />
+								</TextBlock>
+								<TextBlock Grid.Column="2"
+										   Grid.Row="1">
+									<Run Text="Next:"
+										 FontSize="9" />
+									<Run Text="{Binding Ship.ExpForNextLevel, Mode=OneWay}"
+										 FontSize="9" />
+									<!--<Run Text="&#x9;" />-->
+								</TextBlock>
+
+								<TextBlock Grid.Column="3"
+										   Grid.Row="0">
+									<Run Text="HP:" />
+									<Run Text="{Binding Ship.HP.Current, Mode=OneWay}"
+										 Style="{DynamicResource PickupTextElementStyleKey}" />
+									<Run Text="/" />
+									<Run Text="{Binding Ship.HP.Maximum, Mode=OneWay}" />
+								</TextBlock>
+								<controls:ColorIndicator Grid.Row="1"
+														 Grid.Column="3"
+														 Height="6"
+														 VerticalAlignment="Bottom"
+														 Margin="10,2"
+														 LimitedValue="{Binding Ship.HP, Mode=OneWay}" />
+
+								<TextBlock Grid.Column="4"
+										   Grid.Row="0">
+									<InlineUIContainer>
+										<controls:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
+									</InlineUIContainer>
+									<Run Text="{Binding Ship.Condition, Mode=OneWay}"
+										 Style="{DynamicResource PickupTextElementStyleKey}" />
+								</TextBlock>
+								<TextBlock Grid.Column="4"
+										   Grid.Row="1">
+									<Run Text="condition"
+										 FontSize="9" />
+								</TextBlock>
+
+								<controls:ColorIndicator Grid.Column="5"
+														 Grid.Row="0"
+														 Width="55"
+														 LimitedValue="{Binding Ship.Fuel, Mode=OneWay}"
+														 Height="6" />
+								<controls:ColorIndicator Grid.Column="5"
+														 Grid.Row="1"
+														 Width="55"
+														 LimitedValue="{Binding Ship.Bull, Mode=OneWay}"
+														 Height="6"
+														 VerticalAlignment="Top" />
+
+								<ItemsControl Grid.Column="6"
+											  Grid.Row="0"
+											  Grid.RowSpan="2"
+											  ItemsSource="{Binding Ship.SlotItems}"
+											  Margin="7,0">
+									<ItemsControl.Template>
+										<ControlTemplate TargetType="{x:Type ItemsControl}">
+											<StackPanel IsItemsHost="True"
+														Orientation="Horizontal" />
+										</ControlTemplate>
+									</ItemsControl.Template>
+									<ItemsControl.ItemTemplate>
+										<DataTemplate>
+											<Border ToolTip="{Binding Info.Name}"
+													Background="Transparent">
+												<controls:SlotItemIcon Type="{Binding Info.IconType}"
+																	   Margin="3,0" />
+											</Border>
+										</DataTemplate>
+									</ItemsControl.ItemTemplate>
+								</ItemsControl>
+							</Grid>
+							<Rectangle Height="1"
+									   Style="{DynamicResource SeparatorRectangleStyleKey}"
+									   Margin="10,0" />
+						</StackPanel>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</Grid>
+	</Grid>
+</UserControl>

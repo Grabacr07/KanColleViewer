@@ -1,0 +1,148 @@
+﻿<chrome:GlowMetroWindow x:Class="Grabacr07.KanColleViewer.Views.MainWindow"
+						x:Name="GlowMetroWindow"
+						xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+						xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+						xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+						xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+						xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+						xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+						xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+						xmlns:chrome="clr-namespace:Grabacr07.Desktop.Metro.Chrome;assembly=Desktop.Metro"
+						xmlns:behaviors="clr-namespace:Grabacr07.Desktop.Metro.Behaviors;assembly=Desktop.Metro"
+						xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
+						xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+						xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
+						xmlns:localbehaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
+						xmlns:controls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+						mc:Ignorable="d"
+						Title="{Binding Title}"
+						MinWidth="{Binding ElementName=WebBrowser, Path=Width}"
+						SizeToContent="WidthAndHeight"
+						FontSize="12"
+						Background="{DynamicResource ThemeBrushKey}">
+
+	<chrome:MetroWindow.WindowChrome>
+		<WindowChrome CaptionHeight="{Binding ActualHeight, ElementName=CaptionBar, Mode=OneWay}"
+					  ResizeBorderThickness="1"
+					  GlassFrameThickness="0"
+					  CornerRadius="0" />
+	</chrome:MetroWindow.WindowChrome>
+
+	<Window.DataContext>
+		<vm:MainWindowViewModel />
+	</Window.DataContext>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="25" />
+		</Grid.RowDefinitions>
+
+		<!-- #region CaptionBar -->
+		<Border x:Name="CaptionBar"
+				Panel.ZIndex="100">
+			<i:Interaction.Behaviors>
+				<behaviors:InactiveOpacityBehavior IsActive="{Binding ElementName=GlowMetroWindow, Path=IsActive, Mode=OneWay}" />
+			</i:Interaction.Behaviors>
+
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+
+				<chrome:CaptionButton Grid.Column="0"
+									  Margin="0"
+									  Padding="10,7"
+									  Width="Auto"
+									  Height="Auto"
+									  WindowChrome.IsHitTestVisibleInChrome="True">
+					<Path Width="20"
+						  Height="20"
+						  Style="{DynamicResource ApplicationIconKey}" />
+				</chrome:CaptionButton>
+
+				<TextBlock Grid.Column="1"
+						   Text="{Binding Title}"
+						   FontFamily="Segoe UI"
+						   FontSize="18"
+						   Margin="3,8,8,8"
+						   VerticalAlignment="Center"
+						   TextTrimming="CharacterEllipsis"
+						   Opacity="0.85" />
+
+				<StackPanel Grid.Column="2"
+							Orientation="Horizontal"
+							HorizontalAlignment="Right"
+							VerticalAlignment="Top">
+					<chrome:CaptionButton WindowAction="Minimize" />
+					<chrome:CaptionButton WindowAction="Maximize" />
+					<chrome:CaptionButton WindowAction="Normalize" />
+					<chrome:CaptionButton WindowAction="Close" />
+				</StackPanel>
+			</Grid>
+		</Border>
+		<!-- #endregion -->
+
+		<WebBrowser x:Name="WebBrowser"
+					Grid.Row="1"
+					Width="960"
+					Height="572">
+			<i:Interaction.Behaviors>
+				<localbehaviors:SetStyleSheetBehavior />
+				<livet:WebBrowserSetStateToControlBehavior Source="{Binding Source={x:Static properties:Settings.Default}, Path=KanColleUrl, Mode=OneTime}"
+														   Property="Source" />
+			</i:Interaction.Behaviors>
+			<i:Interaction.Triggers>
+				<livet:InteractionMessageTrigger Messenger="{Binding Content.Messenger}"
+												 MessageKey="Screenshot/Save">
+					<localbehaviors:ScreenshotAction />
+				</livet:InteractionMessageTrigger>
+			</i:Interaction.Triggers>
+		</WebBrowser>
+
+		<!--<Grid Grid.Row="2">
+			<controls:PromptTextBox Text="{Binding ElementName=WebBrowser, Path=Source, Mode=OneWay}"
+									BorderThickness="0,1"
+									Padding="2" />
+		</Grid>-->
+
+		<ContentControl Grid.Row="3"
+						Content="{Binding Content}">
+			<ContentControl.Resources>
+				<DataTemplate DataType="{x:Type vm:NotStartedViewModel}">
+					<views:NotStarted />
+				</DataTemplate>
+				<DataTemplate DataType="{x:Type vm:KanColleMonitorViewModel}">
+					<views:KanColleMonitor />
+				</DataTemplate>
+			</ContentControl.Resources>
+		</ContentControl>
+
+		<!-- region Status area -->
+		<Grid Grid.Row="4"
+			  Background="{DynamicResource AccentBrushKey}"
+			  Panel.ZIndex="100">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="8" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+
+			<TextBlock Grid.Column="0"
+					   Text="{Binding NotificationMessage}"
+					   TextTrimming="CharacterEllipsis"
+					   Foreground="{DynamicResource AccentForegroundBrushKey}"
+					   VerticalAlignment="Center"
+					   Margin="5,0" />
+
+			<chrome:ResizeGrip Grid.Column="3" />
+		</Grid>
+		<!-- endregion -->
+	</Grid>
+</chrome:GlowMetroWindow>
