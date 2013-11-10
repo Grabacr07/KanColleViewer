@@ -26,8 +26,10 @@ WPF の WebBrowser コントロール上で艦これを表示し、FiddlerCore �
 * Windows 8 以降
 * .NET Framework 4.5
 
-Windows 7 でも動かないことはないと思いますが、ドックや遠征の通知機能は Windows 8 以降でないと動作しません。
-基本的に Windows 8 以降でしか動作の確認をしていないので、Windows 7 で何らかの不具合が発生した場合はご連絡ください。
+開発者 ([@Grabacr07](https://twitter.com/Grabacr07)) は Windows 8.1 Pro + Visual Studio Premium 2013 で開発＆ビルドしています。
+
+Windows 7 でも起動はできますが、遠征や建造の終了時にトースト通知関連の不具合でアプリが落ちます。対応まで暫くお待ちください。。。
+基本的に Windows 8 以降でしか動作の確認をしていないので、Windows 7 でその他何らかの不具合が発生した場合はご連絡ください。
 
 
 
