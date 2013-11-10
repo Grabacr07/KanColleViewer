@@ -66,7 +66,7 @@ namespace Grabacr07.KanColleViewer.Model
 		/// トースト通期機能をサポートしているかどうかを示す値を取得します。
 		/// </summary>
 		/// <returns>
-		/// 動作しているオペレーティング システムが Windows 8.0 (NT 6.2) 以降の場合は true、それ以外の場合は false。
+		/// 動作しているオペレーティング システムが Windows 8 (NT 6.2) 以降の場合は true、それ以外の場合は false。
 		/// </returns>
 		public static bool IsSupported
 		{
@@ -77,8 +77,6 @@ namespace Grabacr07.KanColleViewer.Model
 			string header, string body,
 			Action activated, Action<ToastDismissalReason> dismissed = null, Action<Exception> failed = null)
 		{
-			if (!IsSupported) return;
-
 			var toast = new Toast(header, body);
 			toast.Activated += (sender, args) => activated();
 			if (dismissed != null) toast.Dismissed += (sender, args) => dismissed(args.Reason);

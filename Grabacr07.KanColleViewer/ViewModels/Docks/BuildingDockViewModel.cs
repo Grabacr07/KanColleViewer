@@ -85,16 +85,19 @@ namespace Grabacr07.KanColleViewer.ViewModels.Docks
 			this.source = source;
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(source, (sender, args) => this.RaisePropertyChanged(args.PropertyName)));
 
-			source.Completed += (sender, args) =>
+			if (Helper.IsWindows8OrGreater)
 			{
-				if (this.IsNotifyCompleted)
+				source.Completed += (sender, args) =>
 				{
-					Toast.Show(
-						"建造完了",
-						string.Format("工廠第 {0} ドックでの{1}の建造が完了しました。", this.Id, this.CanDisplayShipName ? this.Ship : "艦娘"),
-						() => this.Messenger.Raise(new WindowActionMessage(WindowAction.Active, "Window/Activate")));
-				}
-			};
+					if (this.IsNotifyCompleted)
+					{
+						Toast.Show(
+							"建造完了",
+							string.Format("工廠第 {0} ドックでの{1}の建造が完了しました。", this.Id, this.CanDisplayShipName ? this.Ship : "艦娘"),
+							() => this.Messenger.Raise(new WindowActionMessage(WindowAction.Active, "Window/Activate")));
+					}
+				};
+			}
 		}
 	}
 }

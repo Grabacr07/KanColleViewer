@@ -91,6 +91,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Fleets
 		private void UpdateFleets()
 		{
 			this.Fleets = KanColleClient.Current.Homeport.Fleets.Select(kvp => new FleetViewModel(kvp.Value)).ToArray();
+			this.SelectedFleet = this.Fleets.FirstOrDefault();
 			this.Fleets.ForEach(x => x.Expedition.IsNotifyReturned = this.IsNotifyReturned);
 		}
 	}

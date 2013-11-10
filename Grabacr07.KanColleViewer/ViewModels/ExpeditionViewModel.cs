@@ -54,16 +54,19 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			this.source = expedition;
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(expedition, (sender, args) => this.RaisePropertyChanged(args.PropertyName)));
 
-			expedition.Returned += (sender, args) =>
+			if (Helper.IsWindows8OrGreater)
 			{
-				if (this.IsNotifyReturned)
+				expedition.Returned += (sender, args) =>
 				{
-					Toast.Show(
-						"遠征完了",
-						"'" + args.FleetName + "' が遠征から帰投しました。",
-						() => this.Messenger.Raise(new WindowActionMessage(WindowAction.Active, "Window/Activate")));
-				}
-			};
+					if (this.IsNotifyReturned)
+					{
+						Toast.Show(
+							"遠征完了",
+							"'" + args.FleetName + "' が遠征から帰投しました。",
+							() => this.Messenger.Raise(new WindowActionMessage(WindowAction.Active, "Window/Activate")));
+					}
+				};
+			}
 		}
 	}
 }

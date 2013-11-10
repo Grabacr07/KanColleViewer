@@ -39,6 +39,15 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 			}
 		}
 
+
+		/// <summary>
+		/// <see cref="WebBrowser.Document"/> (<see cref="HTMLDocument"/>) から艦これの Flash 要素を特定し、指定したパスにスクリーンショットを保存します。
+		/// </summary>
+		/// <remarks>
+		/// 本スクリーンショット機能は、「艦これ 司令部室」開発者の @haxe さんより多大なご協力を頂き実装できました。
+		/// ありがとうございました。
+		/// </remarks>
+		/// <param name="path"></param>
 		private void SaveCore(string path)
 		{
 			const string notFoundMessage = "艦これの Flash 要素が見つかりません。";
