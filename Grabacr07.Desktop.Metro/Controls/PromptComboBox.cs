@@ -8,6 +8,9 @@ using System.Windows.Media;
 
 namespace Grabacr07.Desktop.Metro.Controls
 {
+	/// <summary>
+	/// 未入力時にプロンプトを表示できる <see cref="ComboBox"/> を表します。
+	/// </summary>
 	[TemplateVisualState(Name = "Empty", GroupName = "TextStates")]
 	[TemplateVisualState(Name = "NotEmpty", GroupName = "TextStates")]
 	public class PromptComboBox : ComboBox
