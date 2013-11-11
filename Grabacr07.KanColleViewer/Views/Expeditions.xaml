@@ -35,7 +35,7 @@
 					        BorderBrush="{DynamicResource ActiveBorderBrushKey}"
 					        Padding="10,8">
 						<i:Interaction.Triggers>
-							<livet:InteractionMessageTrigger Messenger="{Binding Messenger, Mode=OneWay}"
+							<livet:InteractionMessageTrigger Messenger="{Binding Expedition.Messenger, Mode=OneWay}"
 							                                 MessageKey="Window/Activate">
 								<livet:WindowInteractionMessageAction />
 							</livet:InteractionMessageTrigger>
