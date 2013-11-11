@@ -147,7 +147,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 			if (this.CompleteTime.HasValue)
 			{
-				var remaining = this.CompleteTime.Value.Subtract(DateTimeOffset.Now);
+				var remaining = this.CompleteTime.Value - TimeSpan.FromMinutes(1.0) - DateTimeOffset.Now;
 				if (remaining.Ticks < 0) remaining = TimeSpan.Zero;
 
 				this.Remaining = remaining;
