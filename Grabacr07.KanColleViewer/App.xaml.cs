@@ -6,8 +6,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Grabacr07.KanColleViewer.Model;
+using Grabacr07.KanColleViewer.ViewModels;
+using Grabacr07.KanColleViewer.Views;
 using Grabacr07.KanColleWrapper;
-using Settings = Grabacr07.KanColleViewer.Properties.Settings;
+using AppSettings = Grabacr07.KanColleViewer.Properties.Settings;
+using Settings = Grabacr07.KanColleViewer.Model.Settings;
 
 namespace Grabacr07.KanColleViewer
 {
@@ -16,23 +19,23 @@ namespace Grabacr07.KanColleViewer
 	/// </summary>
 	public partial class App
 	{
-		public new App Current
-		{
-			get { return (App)Application.Current; }
-		}
-
+		public static MainWindowViewModel ViewModelRoot { get; private set; }
 
 		protected override void OnStartup(StartupEventArgs e)
 		{
 			base.OnStartup(e);
 
-			KanColleClient.Current.Proxy.Startup(Settings.Default.LocalProxyPort);
-			Model.Settings.Load();
+			KanColleClient.Current.Proxy.Startup(AppSettings.Default.LocalProxyPort);
+			Settings.Load();
 
 			if (Toast.IsSupported)
 			{
 				Toast.TryInstallShortcut();
 			}
+
+			ViewModelRoot = new MainWindowViewModel();
+			this.MainWindow = new MainWindow { DataContext = ViewModelRoot };
+			this.MainWindow.Show();
 		}
 
 		protected override void OnExit(ExitEventArgs e)
@@ -40,7 +43,7 @@ namespace Grabacr07.KanColleViewer
 			base.OnExit(e);
 
 			KanColleClient.Current.Proxy.Shutdown();
-			Model.Settings.Current.Save();
+			Settings.Current.Save();
 		}
 	}
 }

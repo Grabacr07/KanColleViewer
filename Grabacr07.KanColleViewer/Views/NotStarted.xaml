@@ -8,36 +8,24 @@
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+			 xmlns:common="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 mc:Ignorable="d"
 			 d:DesignWidth="800"
 			 d:DataContext="{d:DesignInstance viewModels:NotStartedViewModel}"
 			 Background="{DynamicResource ThemeBrushKey}">
-	
-	<Grid Margin="10">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="Auto" />
-		</Grid.ColumnDefinitions>
 
-		<TextBlock Text="艦これの開始を待っています..."
-				   VerticalAlignment="Center" />
+	<Grid ClipToBounds="True">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
 
-		<!--<StackPanel Grid.Column="1"
-					Orientation="Horizontal"
-					Margin="4,0">
-			<controls:MuteButton Padding="10,5"
-								 Margin="6,0"
-								 Width="50"
-								 Height="38"
-								 IsMute="{Binding IsMute, Mode=OneWay}">
-				<i:Interaction.Triggers>
-					<i:EventTrigger EventName="Click">
-						<livet:LivetCallMethodAction MethodTarget="{Binding}"
-													 MethodName="ToggleMute" />
-					</i:EventTrigger>
-				</i:Interaction.Triggers>
-			</controls:MuteButton>
-		</StackPanel>-->
+		<views:BrowserNavigator Margin="6,-5,6,0" />
+
+		<TextBlock Grid.Row="1"
+				   Text="艦これの開始を待っています..."
+				   VerticalAlignment="Center"
+				   Margin="10" />
 	</Grid>
 </UserControl>

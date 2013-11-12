@@ -15,11 +15,12 @@
 						xmlns:localbehaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
 						xmlns:controls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 						mc:Ignorable="d"
+						d:DataContext="{d:DesignInstance vm:MainWindowViewModel}"
 						Title="{Binding Title}"
-						MinWidth="{Binding ElementName=WebBrowser, Path=Width}"
-						SizeToContent="WidthAndHeight"
 						FontSize="12"
-						Background="{DynamicResource ThemeBrushKey}">
+						Background="{DynamicResource ThemeBrushKey}"
+						MinWidth="{Binding ElementName=WebBrowser, Path=Width}"
+						SizeToContent="WidthAndHeight">
 
 	<chrome:MetroWindow.WindowChrome>
 		<WindowChrome CaptionHeight="{Binding ActualHeight, ElementName=CaptionBar, Mode=OneWay}"
@@ -27,10 +28,6 @@
 					  GlassFrameThickness="0"
 					  CornerRadius="0" />
 	</chrome:MetroWindow.WindowChrome>
-
-	<Window.DataContext>
-		<vm:MainWindowViewModel />
-	</Window.DataContext>
 
 	<Grid>
 		<Grid.RowDefinitions>
@@ -94,6 +91,7 @@
 					Height="572">
 			<i:Interaction.Behaviors>
 				<localbehaviors:SetStyleSheetBehavior />
+				<localbehaviors:NavigatorBehavior Navigator="{Binding Navigator}" />
 				<livet:WebBrowserSetStateToControlBehavior Source="{Binding Source={x:Static properties:Settings.Default}, Path=KanColleUrl, Mode=OneTime}"
 														   Property="Source" />
 			</i:Interaction.Behaviors>
@@ -115,7 +113,7 @@
 						Content="{Binding Content}">
 			<ContentControl.Resources>
 				<DataTemplate DataType="{x:Type vm:NotStartedViewModel}">
-					<views:NotStarted />
+					<views:NotStarted Width="{Binding ElementName=WebBrowser, Path=Width}" />
 				</DataTemplate>
 				<DataTemplate DataType="{x:Type vm:KanColleMonitorViewModel}">
 					<views:KanColleMonitor />

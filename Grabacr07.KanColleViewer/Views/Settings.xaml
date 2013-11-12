@@ -16,32 +16,45 @@
 		<viewModels:SettingsViewModel />
 	</UserControl.DataContext>
 
-	<StackPanel Margin="10,0,10,10">
-		<TextBlock>
-			<Run Text="スクリーンショット設定"
-				 Style="{DynamicResource PickupTextElementStyleKey}" />
-		</TextBlock>
-		<Grid Margin="10,5">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto" />
-				<RowDefinition Height="Auto" />
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="Auto" />
-			</Grid.ColumnDefinitions>
-			<TextBlock Text="保存先フォルダー: "
-					   VerticalAlignment="Center"
-					   Margin="0,6" />
-			<controls:PromptTextBox Grid.Row="0"
-									Grid.Column="1"
-									Text="{Binding ScreenshotFolder}"
-									Prompt="保存先フォルダー パス"
-									Margin="5,3"
-									Padding="2" />
+	<StackPanel Margin="10,0">
+		<StackPanel>
+			<TextBlock>
+				<Run Text="ブラウザー操作"
+					 Style="{DynamicResource PickupTextElementStyleKey}" />
+			</TextBlock>
 
-			<!--<TextBlock Grid.Row="1"
+			<Border ClipToBounds="True">
+				<views:BrowserNavigator Margin="10,6,10,-4" />
+			</Border>
+		</StackPanel>
+
+		<Rectangle Height="1"
+				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+		
+		<StackPanel Margin="0,12">
+			<TextBlock>
+				<Run Text="スクリーンショット設定"
+					 Style="{DynamicResource PickupTextElementStyleKey}" />
+			</TextBlock>
+			<Grid Margin="10,5,10,0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<TextBlock Text="保存先フォルダー  "
+						   VerticalAlignment="Center"
+						   Margin="0,6" />
+				<controls:PromptTextBox Grid.Row="0"
+										Grid.Column="1"
+										Text="{Binding ScreenshotFolder}"
+										Prompt="保存先フォルダー パス"
+										Padding="2" />
+				<!--<TextBlock Grid.Row="1"
 					   Text="ファイル名: "
 					   VerticalAlignment="Center"
 					   Margin="0,6" />
@@ -51,10 +64,9 @@
 									Prompt="ファイル名"
 									Margin="5,3"
 									Padding="2" />-->
-		</Grid>
-
+			</Grid>
+		</StackPanel>
 		<Rectangle Height="1"
-				   Style="{DynamicResource SeparatorRectangleStyleKey}"
-				   Margin="0,5" />
+				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 	</StackPanel>
 </UserControl>

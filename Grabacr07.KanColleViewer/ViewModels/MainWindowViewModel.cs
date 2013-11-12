@@ -11,6 +11,25 @@ namespace Grabacr07.KanColleViewer.ViewModels
 {
 	public class MainWindowViewModel : WindowViewModel
 	{
+		#region Navigator 変更通知プロパティ
+
+		private NavigatorViewModel _Navigator;
+
+		public NavigatorViewModel Navigator
+		{
+			get { return this._Navigator; }
+			private set
+			{
+				if (this._Navigator != value)
+				{
+					this._Navigator = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		#region NotificationMessage 変更通知プロパティ
 
 		private string _NotificationMessage;
@@ -52,6 +71,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		public MainWindowViewModel()
 		{
 			this.Title = "提督業も忙しい！";
+			this.Navigator = new NavigatorViewModel();
 
 			this.Content = new NotStartedViewModel();
 			//this.Content = new KanColleMonitorViewModel();

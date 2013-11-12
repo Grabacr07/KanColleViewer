@@ -125,16 +125,23 @@
     <Compile Include="ViewModels\Fleets\RepairingBarViewModel.cs" />
     <Compile Include="ViewModels\Fleets\TimerViewModel.cs" />
     <Compile Include="ViewModels\HomeportViewModel.cs" />
+    <Compile Include="Model\INavigator.cs" />
     <Compile Include="ViewModels\MaterialsViewModel.cs" />
     <Compile Include="ViewModels\Messages\ScreenshotMessage.cs" />
     <Compile Include="ViewModels\Messages\Response.cs" />
+    <Compile Include="ViewModels\NavigatorViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShipsViewModel.cs" />
     <Compile Include="ViewModels\SlotItemsViewModel.cs" />
+    <Compile Include="Views\Behaviors\NavigatorBehavior.cs" />
     <Compile Include="Views\Behaviors\ScreenshotAction.cs" />
     <Compile Include="Views\Behaviors\SetStyleSheetBehavior.cs" />
+    <Compile Include="Views\BrowserNavigator.xaml.cs">
+      <DependentUpon>BrowserNavigator.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Controls\BuildingDock.cs" />
     <Compile Include="Views\Controls\MuteButton.cs" />
+    <Compile Include="Views\Controls\NavigationButton.cs" />
     <Compile Include="Views\Controls\SlotItemIcon.cs" />
     <Compile Include="Views\Controls\TabHeader.cs" />
     <Compile Include="Views\Dockyard.xaml.cs">
@@ -162,6 +169,10 @@
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\BrowserNavigator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Expeditions.xaml">
       <SubType>Designer</SubType>
