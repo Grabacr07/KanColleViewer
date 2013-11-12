@@ -24,6 +24,7 @@
 
 		<controls:NavigationButton Width="48"
 								   IsEnabled="{Binding CanGoBack}"
+								   ToolTip="前のページに戻る"
 								   Height="48">
 			<i:Interaction.Triggers>
 				<i:EventTrigger EventName="Click">
@@ -35,6 +36,7 @@
 
 		<controls:NavigationButton Grid.Column="1"
 								   Direction="GoForward"
+								   ToolTip="次のページに進む"
 								   IsEnabled="{Binding CanGoForward}"
 								   Width="{Binding ElementName=UrlBox, Path=ActualHeight}"
 								   Height="{Binding ElementName=UrlBox, Path=ActualHeight}"
@@ -50,6 +52,7 @@
 		<common:PromptTextBox Grid.Column="2"
 							  x:Name="UrlBox"
 							  Text="{Binding SourceString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+							  Prompt="URL を入力し、Enter キーで移動します。"
 							  VerticalAlignment="Center"
 							  VerticalContentAlignment="Center"
 							  Padding="2,3">
@@ -61,6 +64,7 @@
 
 		<controls:NavigationButton Grid.Column="3"
 								   Direction="Reload"
+								   ToolTip="ページのリロード"
 								   Width="{Binding ElementName=UrlBox, Path=ActualHeight}"
 								   Height="{Binding ElementName=UrlBox, Path=ActualHeight}"
 								   Margin="6,0,0,0">
