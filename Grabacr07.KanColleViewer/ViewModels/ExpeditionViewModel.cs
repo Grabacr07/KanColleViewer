@@ -27,7 +27,18 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		public string Remaining
 		{
-			get { return source.Remaining.HasValue ? source.Remaining.Value.ToString(@"hh\:mm\:ss") : "--:--:--"; }
+			get
+			{
+				if (source.Remaining.HasValue)
+				{
+					var remaining = source.Remaining.Value;
+					return string.Format(remaining.ToString(@"'{0}'\:mm\:ss"), (int)remaining.TotalHours);
+				}
+				else
+				{
+					return "--:--:--";
+				}
+			}
 		}
 
 		#region IsNotifyReturned 変更通知プロパティ
