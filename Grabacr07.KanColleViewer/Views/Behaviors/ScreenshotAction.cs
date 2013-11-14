@@ -80,16 +80,23 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 				var iframeDocument = webBrowser.Document as HTMLDocument;
 				if (iframeDocument == null) continue;
 
-				var target = iframeDocument.getElementById("externalswf") as HTMLEmbed;
-				if (target == null) continue;
-
-				var viewObject = target as IViewObject;
-				if (viewObject == null) continue;
+				//flash要素が<embed>である場合と<object>である場合を判別して抽出
+				IViewObject viewObject = null;
+				int width = 0, height = 0;
+				var swf = iframeDocument.getElementById("externalswf");
+				if (swf == null) continue;
+				Func<dynamic,bool> function = target => 
+				{
+					if (target == null) return false;
+					viewObject = target as IViewObject;
+					if (viewObject == null) return false;
+					width = int.Parse(target.width);
+					height = int.Parse(target.height);
+					return true;
+				};
+				if (!function(swf as HTMLEmbed) && !function(swf as HTMLObjectElement)) continue;
 
 				find = true;
-
-				var width = int.Parse(target.width);
-				var height = int.Parse(target.height);
 
 				var image = new Bitmap(width, height, PixelFormat.Format24bppRgb);
 				var rect = new RECT { left = 0, top = 0, width = width, height = height, };
