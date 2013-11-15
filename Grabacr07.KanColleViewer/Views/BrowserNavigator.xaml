@@ -22,10 +22,10 @@
 			<ColumnDefinition Width="Auto" />
 		</Grid.ColumnDefinitions>
 
-		<controls:NavigationButton Width="48"
+		<controls:NavigationButton Width="42"
+								   Height="42"
 								   IsEnabled="{Binding CanGoBack}"
-								   ToolTip="前のページに戻る"
-								   Height="48">
+								   ToolTip="前のページに戻る">
 			<i:Interaction.Triggers>
 				<i:EventTrigger EventName="Click">
 					<livet:LivetCallMethodAction MethodTarget="{Binding}"

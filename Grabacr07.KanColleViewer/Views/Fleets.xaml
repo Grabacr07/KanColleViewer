@@ -140,6 +140,8 @@
 								</Grid.RowDefinitions>
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition SharedSizeGroup="Type"
+													  Width="Auto" />
 									<ColumnDefinition SharedSizeGroup="Name" />
 									<ColumnDefinition Width="Auto"
 													  SharedSizeGroup="Level" />
@@ -155,24 +157,36 @@
 
 								<TextBlock Grid.Column="1"
 										   Grid.Row="0"
-										   Grid.RowSpan="2">
+										   Grid.RowSpan="2"
+										   HorizontalAlignment="Right"
+										   Margin="10,0,0,0">
 									<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
 										 FontSize="14" />
 									<Run Text=""
-										 FontSize="22" />
-									<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
 										 FontSize="22"
 										 Style="{DynamicResource PickupTextElementStyleKey}" />
 								</TextBlock>
 
 								<TextBlock Grid.Column="2"
-										   Grid.Row="0">
+										   Grid.Row="0"
+										   Grid.RowSpan="2"
+										   Margin="4,0,10,0">
+									<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
+										 FontSize="22"
+										 Style="{DynamicResource PickupTextElementStyleKey}" />
+								</TextBlock>
+
+								<TextBlock Grid.Column="3"
+										   Grid.Row="0"
+										   Margin="10,0,10,10"
+										   Grid.RowSpan="2">
 									<Run Text="Lv." />
 									<Run Text="{Binding Ship.Level, Mode=OneWay}"
 										 Style="{DynamicResource PickupTextElementStyleKey}" />
 								</TextBlock>
-								<TextBlock Grid.Column="2"
-										   Grid.Row="1">
+								<TextBlock Grid.Column="3"
+										   Grid.Row="1"
+										   Margin="10,0,10,-1">
 									<Run Text="Next:"
 										 FontSize="9" />
 									<Run Text="{Binding Ship.ExpForNextLevel, Mode=OneWay}"
@@ -180,8 +194,10 @@
 									<!--<Run Text="&#x9;" />-->
 								</TextBlock>
 
-								<TextBlock Grid.Column="3"
-										   Grid.Row="0">
+								<TextBlock Grid.Column="4"
+										   Grid.Row="0"
+										   Margin="10,0,10,10"
+										   Grid.RowSpan="2">
 									<Run Text="HP:" />
 									<Run Text="{Binding Ship.HP.Current, Mode=OneWay}"
 										 Style="{DynamicResource PickupTextElementStyleKey}" />
@@ -189,39 +205,43 @@
 									<Run Text="{Binding Ship.HP.Maximum, Mode=OneWay}" />
 								</TextBlock>
 								<controls:ColorIndicator Grid.Row="1"
-														 Grid.Column="3"
+														 Grid.Column="4"
 														 Height="6"
 														 VerticalAlignment="Bottom"
-														 Margin="10,2"
+														 Margin="10,0,10,2"
 														 LimitedValue="{Binding Ship.HP, Mode=OneWay}" />
 
-								<TextBlock Grid.Column="4"
-										   Grid.Row="0">
+								<TextBlock Grid.Column="5"
+										   Grid.Row="0"
+										   Margin="10,0,10,10"
+										   Grid.RowSpan="2">
 									<InlineUIContainer>
 										<controls:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
 									</InlineUIContainer>
 									<Run Text="{Binding Ship.Condition, Mode=OneWay}"
 										 Style="{DynamicResource PickupTextElementStyleKey}" />
 								</TextBlock>
-								<TextBlock Grid.Column="4"
-										   Grid.Row="1">
+								<TextBlock Grid.Column="5"
+										   Grid.Row="1"
+										   Margin="10,0,10,-1">
 									<Run Text="condition"
 										 FontSize="9" />
 								</TextBlock>
 
-								<controls:ColorIndicator Grid.Column="5"
+								<controls:ColorIndicator Grid.Column="6"
 														 Grid.Row="0"
 														 Width="55"
 														 LimitedValue="{Binding Ship.Fuel, Mode=OneWay}"
-														 Height="6" />
-								<controls:ColorIndicator Grid.Column="5"
+														 Height="6"
+														 Margin="0,6,0,7" />
+								<controls:ColorIndicator Grid.Column="6"
 														 Grid.Row="1"
 														 Width="55"
 														 LimitedValue="{Binding Ship.Bull, Mode=OneWay}"
 														 Height="6"
 														 VerticalAlignment="Top" />
 
-								<ItemsControl Grid.Column="6"
+								<ItemsControl Grid.Column="7"
 											  Grid.Row="0"
 											  Grid.RowSpan="2"
 											  ItemsSource="{Binding Ship.SlotItems}"

@@ -21,7 +21,7 @@
 			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 
-		<views:BrowserNavigator Margin="6,-5,6,0" />
+		<views:BrowserNavigator Margin="6,-3,6,0" />
 
 		<TextBlock Grid.Row="1"
 				   Text="艦これの開始を待っています..."
