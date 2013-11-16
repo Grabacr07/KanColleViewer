@@ -32,7 +32,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				if (source.Remaining.HasValue)
 				{
 					var remaining = source.Remaining.Value;
-					return string.Format(remaining.ToString(@"'{0}'\:mm\:ss"), (int)remaining.TotalHours);
+					return string.Format(remaining.ToString(@"'{0:00}'\:mm\:ss"), (int)remaining.TotalHours);
 				}
 				else
 				{
