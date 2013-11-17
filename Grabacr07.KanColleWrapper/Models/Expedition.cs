@@ -119,14 +119,12 @@ namespace Grabacr07.KanColleWrapper.Models
 				this.Id = (int)rawData[1];
 				this.ReturnTime = Definitions.UnixEpoch.AddMilliseconds(rawData[2]);
 				this.IsInExecution = true;
-				this.Tick();
+				this.UpdateCore();
 			}
 		}
 
-		protected override void Tick()
+		private void UpdateCore()
 		{
-			base.Tick();
-
 			if (this.ReturnTime.HasValue)
 			{
 				var remaining = this.ReturnTime.Value - TimeSpan.FromMinutes(1.0) - DateTimeOffset.Now;
@@ -144,6 +142,12 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				this.Remaining = null;
 			}
+		}
+
+		protected override void Tick()
+		{
+			base.Tick();
+			this.UpdateCore();
 		}
 	}
 }

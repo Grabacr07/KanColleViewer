@@ -6,7 +6,6 @@ using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Livet;
 using Livet.EventListeners;
-using SHDocVw;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Fleets
 {
@@ -16,6 +15,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Fleets
 	public class FleetViewModel : ViewModel
 	{
 		private readonly Fleet source;
+
+		public ReSortieBarViewModel ReSortie { get; private set; }
+		public ExpeditionViewModel Expedition { get; private set; }
 
 		public int Id
 		{
@@ -35,6 +37,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Fleets
 			get { return this.source.GetShips().Select(x => new ShipViewModel(x)).ToArray(); }
 		}
 
+		/// <summary>
+		/// 艦隊の状態を取得します。
+		/// </summary>
 		public ViewModel State
 		{
 			get
@@ -51,11 +56,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Fleets
 				{
 					return new RepairingBarViewModel(source);
 				}
-				return new ReSortieBarViewModel(source);
+				return this.ReSortie;
 			}
 		}
-
-		public ExpeditionViewModel Expedition { get; private set; }
 
 		public FleetViewModel(Fleet fleet)
 		{
@@ -63,9 +66,14 @@ namespace Grabacr07.KanColleViewer.ViewModels.Fleets
 
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet)
 			{
-				{ (sender, args) => this.RaisePropertyChanged(args.PropertyName) },
+				(sender, args) => this.RaisePropertyChanged(args.PropertyName),
 			});
+
+			this.ReSortie = new ReSortieBarViewModel(this, fleet.ReSortie);
+			this.CompositeDisposable.Add(this.ReSortie);
+
 			this.Expedition = new ExpeditionViewModel(fleet.Expedition);
+			this.CompositeDisposable.Add(this.Expedition);
 		}
 	}
 }

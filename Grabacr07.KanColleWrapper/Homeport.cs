@@ -210,6 +210,7 @@ namespace Grabacr07.KanColleWrapper
 			}
 			else
 			{
+				this.Fleets.ForEach(x => x.Value.Dispose());
 				this.Fleets = new MemberTable<Fleet>(source.Select(x => new Fleet(this, x)));
 			}
 		}

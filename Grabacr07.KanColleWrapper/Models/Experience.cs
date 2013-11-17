@@ -24,7 +24,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#region table
 
-		private static Experience[] table = new[]
+		private static readonly Experience[] table =
 		{
 			new Experience(1, 100, 0),
 			new Experience(2, 200, 100),

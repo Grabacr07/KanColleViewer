@@ -3,140 +3,158 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Grabacr07.KanColleViewer.Model;
 using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
+using Livet;
+using Livet.Behaviors.ControlBinding.OneWay;
+using Livet.EventListeners;
+using Livet.Messaging.Windows;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Fleets
 {
 	/// <summary>
 	/// 艦隊の再出撃に関する情報を提供します。
 	/// </summary>
-	public class ReSortieBarViewModel : TimerViewModel
+	public class ReSortieBarViewModel : ViewModel
 	{
-		[Flags]
-		public enum CanReSortieReason
+		private readonly FleetReSortie source;
+
+		#region CanReSortie 変更通知プロパティ
+
+		private bool _CanReSortie;
+
+		public bool CanReSortie
 		{
-			/// <summary>
-			/// 再出撃に際して問題がないことを表します。
-			/// </summary>
-			NoProblem = 0,
-			/// <summary>
-			/// 艦隊にダメージを受けている艦娘がいることを表します。
-			/// </summary>
-			Wounded = 0x1,
-			/// <summary>
-			/// 艦隊に資源が不十分な艦娘がいることを表します。
-			/// </summary>
-			LackForResources = 0x2,
-			/// <summary>
-			/// 艦隊に疲労している艦娘がいることを表します。
-			/// </summary>
-			BadCondition = 0x4,
-		}
-
-		private readonly Fleet source;
-
-		private DateTimeOffset period;
-
-		#region Reason 変更通知プロパティ
-
-		private CanReSortieReason _Reason;
-
-		/// <summary>
-		/// 艦隊が再出撃可能かどうかを示す値を取得します。
-		/// </summary>
-		public CanReSortieReason Reason
-		{
-			get
+			get { return this._CanReSortie; }
+			set
 			{
-				return this._Reason;
-			}
-			private set
-			{
-				if (this._Reason != value)
+				if (this._CanReSortie != value)
 				{
-					this._Reason = value;
+					this._CanReSortie = value;
 					this.RaisePropertyChanged();
-					this.RaisePropertyChanged(() => CanReSortie);
 				}
 			}
 		}
 
 		#endregion
 
-		public bool CanReSortie
+		#region Message 変更通知プロパティ
+
+		private string _Message;
+
+		public string Message
 		{
-			get { return this.Reason == CanReSortieReason.NoProblem; }
-		}
-
-		public ReSortieBarViewModel(Fleet fleet)
-		{
-			this.source = fleet;
-		}
-
-		protected override string CreateMessage()
-		{
-			this.Update();
-
-			if (this.CanReSortie)
+			get { return this._Message; }
+			set
 			{
-				return "出撃可能！";
-			}
-
-			var remaining = period - DateTimeOffset.Now;
-			if (this.Reason.HasFlag(CanReSortieReason.BadCondition) && remaining <= TimeSpan.Zero)
-			{
-				this.Reason ^= CanReSortieReason.BadCondition;
-			}
-
-			var message = new StringBuilder();
-
-			if (this.Reason.HasFlag(CanReSortieReason.Wounded))
-			{
-				message.Append("艦隊に中破以上の艦娘がいます。");
-			}
-			if (this.Reason.HasFlag(CanReSortieReason.LackForResources))
-			{
-				message.Append("艦隊の補給が不十分です。");
-			}
-			if (this.Reason.HasFlag(CanReSortieReason.BadCondition))
-			{
-				message.Append("艦隊に疲労中の艦娘がいます。");
-			}
-
-			if (remaining > TimeSpan.Zero)
-			{
-				message.AppendFormat("再出撃までの目安: {0}", remaining.ToString("mm\\:ss"));
-			}
-
-			return message.ToString();
-		}
-		private void Update()
-		{
-			var reason = CanReSortieReason.NoProblem;
-
-			if (this.source.GetShips().Any(s => (s.HP.Current / (double) s.HP.Maximum) <= 0.5))
-			{
-				reason |= CanReSortieReason.Wounded;
-			}
-
-			if (this.source.GetShips().Any(s => s.Fuel.Current < s.Fuel.Maximum || s.Bull.Current < s.Bull.Maximum))
-			{
-				reason |= CanReSortieReason.LackForResources;
-			}
-
-			var minCondition = source.GetShips().Min(s => s.Condition);
-			if (minCondition < 40)
-			{
-				if (!this.Reason.HasFlag(CanReSortieReason.BadCondition))
+				if (this._Message != value)
 				{
-					// 疲労状態に遷移したので、再出撃目安時刻を更新
-					this.period = DateTimeOffset.Now.Add(TimeSpan.FromMinutes(40 - minCondition));
+					this._Message = value;
+					this.RaisePropertyChanged();
 				}
-				reason |= CanReSortieReason.BadCondition;
+			}
+		}
+
+		#endregion
+
+		#region Remaining 変更通知プロパティ
+
+		private string _Remaining;
+
+		public string Remaining
+		{
+			get { return this._Remaining; }
+			set
+			{
+				if (this._Remaining != value)
+				{
+					this._Remaining = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region IsNotifyReadied 変更通知プロパティ
+
+		private bool _IsNotifyReadied;
+
+		public bool IsNotifyReadied
+		{
+			get { return this._IsNotifyReadied; }
+			set
+			{
+				if (this._IsNotifyReadied != value)
+				{
+					this._IsNotifyReadied = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		public ReSortieBarViewModel(FleetViewModel parent, FleetReSortie reSortie)
+		{
+			this.source = reSortie;
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(reSortie)
+			{
+				{ () => reSortie.Reason, (sender, args) => this.UpdateMessage() },
+				{ () => reSortie.Remaining, (sender, args) => this.UpdateRemaining() },
+			});
+
+			this.UpdateMessage();
+			this.UpdateRemaining();
+
+			if (Helper.IsWindows8OrGreater)
+			{
+				reSortie.Readied += (sender, args) =>
+				{
+					if (this.IsNotifyReadied)
+					{
+						Toast.Show(
+							"疲労回復完了",
+							"「" + parent.Name + "」の全艦娘の疲労が回復しました。",
+							() => this.Messenger.Raise(new WindowActionMessage(WindowAction.Active, "Window/Activate")));
+					}
+				};
+			}
+		}
+
+
+		private void UpdateMessage()
+		{
+			if (this.source.CanReSortie)
+			{
+				this.Message = "出撃可能！";
+				this.CanReSortie = true;
+				return;
 			}
 
-			this.Reason = reason;
+			var list = new List<string>();
+
+			if (this.source.Reason.HasFlag(CanReSortieReason.Wounded))
+			{
+				list.Add("中破以上の艦娘");
+			}
+			if (this.source.Reason.HasFlag(CanReSortieReason.LackForResources))
+			{
+				list.Add("未補給の艦娘");
+			}
+			if (this.source.Reason.HasFlag(CanReSortieReason.BadCondition))
+			{
+				list.Add("疲労中の艦娘");
+			}
+
+			this.Message = string.Format("艦隊に{0}がいます。", list.ToString("・"));
+			this.CanReSortie = false;
+		}
+
+		private void UpdateRemaining()
+		{
+			this.Remaining = this.source.Remaining.HasValue ? "再出撃までの目安: " + this.source.Remaining.Value.ToString(@"mm\:ss") : "";
 		}
 	}
 }

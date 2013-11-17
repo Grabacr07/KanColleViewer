@@ -10,7 +10,7 @@ using Livet;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
-	public class Fleet : NotificationObject, IIdentifiable
+	public class Fleet : NotificationObject, IDisposable, IIdentifiable
 	{
 		private readonly Homeport homeport;
 
@@ -93,6 +93,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
+		public FleetReSortie ReSortie { get; private set; }
 		public Expedition Expedition { get; private set; }
 
 
@@ -100,6 +101,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			this.homeport = parent;
 
+			this.ReSortie = new FleetReSortie();
 			this.Expedition = new Expedition(this);
 			this.Update(rawData);
 		}
@@ -110,6 +112,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.Id = rawData.api_id;
 			this.Name = rawData.api_name;
 			this.Ships = rawData.api_ship.Select(id => this.homeport.Ships[id]).Where(x => x != null).ToArray();
+			this.ReSortie.Update(this.Ships);
 			this.Expedition.Update(rawData.api_mission);
 
 			this.UpdateStatus();
@@ -126,6 +129,12 @@ namespace Grabacr07.KanColleWrapper.Models
 		public override string ToString()
 		{
 			return string.Format("ID = {0}, Name = \"{1}\", Ships = {2}", this.Id, this.Name, this.GetShips().Select(s => "\"" + s.Info.Name + "\"").ToString(","));
+		}
+
+		public virtual void Dispose()
+		{
+			this.ReSortie.SafeDispose();
+			this.Expedition.SafeDispose();
 		}
 	}
 }

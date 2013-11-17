@@ -10,6 +10,9 @@ using Livet;
 
 namespace Grabacr07.KanColleWrapper
 {
+	/// <summary>
+	/// 1 秒刻みのタイマー機能をサポートする変更通知オブジェクトを表します。
+	/// </summary>
 	public class TimerNotificator : NotificationObject, IDisposable
 	{
 		#region static members
@@ -33,7 +36,7 @@ namespace Grabacr07.KanColleWrapper
 
 		protected virtual void Tick() { }
 		
-		public void Dispose()
+		public virtual void Dispose()
 		{
 			this.subscriber.SafeDispose();
 		}

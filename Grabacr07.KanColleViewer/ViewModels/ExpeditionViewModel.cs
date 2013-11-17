@@ -22,22 +22,23 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		public string ReturnTime
 		{
-			get { return source.ReturnTime.HasValue ? source.ReturnTime.Value.LocalDateTime.ToString("MM/dd HH:mm") : "--/-- --:--:--"; }
+			get
+			{
+				return this.source.ReturnTime.HasValue
+					? this.source.ReturnTime.Value.LocalDateTime.ToString("MM/dd HH:mm")
+					: "--/-- --:--";
+			}
 		}
 
 		public string Remaining
 		{
 			get
 			{
-				if (source.Remaining.HasValue)
-				{
-					var remaining = source.Remaining.Value;
-					return string.Format(remaining.ToString(@"'{0:00}'\:mm\:ss"), (int)remaining.TotalHours);
-				}
-				else
-				{
-					return "--:--:--";
-				}
+				return this.source.Remaining.HasValue
+					? string.Format("{0:D2}:{1}",
+						(int)this.source.Remaining.Value.TotalHours,
+						this.source.Remaining.Value.ToString(@"mm\:ss"))
+					: "--:--:--";
 			}
 		}
 
