@@ -12,6 +12,7 @@ namespace Grabacr07.KanColleWrapper.Models
 	/// </summary>
 	public class RepairingDock : TimerNotificator, IIdentifiable
 	{
+		private readonly Homeport homeport;
 		private bool notificated;
 
 		#region Id 変更通知プロパティ
@@ -52,24 +53,34 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
-		#region Ship 変更通知プロパティ
+		#region ShipId / Ship 変更通知プロパティ
 
+		private int _ShipId;
 		private Ship _Ship;
+
+		/// <summary>
+		/// 入渠中の艦娘を一意に識別する ID を取得します。
+		/// </summary>
+		public int ShipId
+		{
+			get { return this._ShipId; }
+			private set
+			{
+				if (this._ShipId != value)
+				{
+					this._ShipId = value;
+					this.RaisePropertyChanged();
+					this.RaisePropertyChanged("Ship");
+				}
+			}
+		}
 
 		/// <summary>
 		/// 入渠中の艦娘の情報を取得します。
 		/// </summary>
 		public Ship Ship
 		{
-			get { return this._Ship; }
-			private set
-			{
-				if (this._Ship != value)
-				{
-					this._Ship = value;
-					this.RaisePropertyChanged();
-				}
-			}
+			get { return this.State == RepairingDockState.Repairing ? this._Ship ?? (this._Ship = this.homeport.Ships[this.ShipId]) : null; }
 		}
 
 		#endregion
@@ -124,8 +135,9 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public event EventHandler<RepairingCompletedEventArgs> Completed;
 
-		internal RepairingDock(kcsapi_ndock rawData)
+		internal RepairingDock(Homeport parent, kcsapi_ndock rawData)
 		{
+			this.homeport = parent;
 			this.Update(rawData);
 		}
 
@@ -133,9 +145,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			this.Id = rawData.api_id;
 			this.State = (RepairingDockState)rawData.api_state;
-			this.Ship = this.State == RepairingDockState.Repairing
-				? KanColleClient.Current.Homeport.Ships[rawData.api_ship_id]
-				: null;
+			this.ShipId = rawData.api_ship_id;
 			this.CompleteTime = this.State == RepairingDockState.Repairing
 				? (DateTimeOffset?)Definitions.UnixEpoch.AddMilliseconds(rawData.api_complete_time)
 				: null;

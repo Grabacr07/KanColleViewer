@@ -24,7 +24,7 @@
 			</TextBlock>
 
 			<Border ClipToBounds="True">
-				<views:BrowserNavigator Margin="10,6,10,-4" />
+				<views:BrowserNavigator Margin="10,6,10,-2" />
 			</Border>
 		</StackPanel>
 
@@ -36,7 +36,7 @@
 				<Run Text="スクリーンショット設定"
 					 Style="{DynamicResource PickupTextElementStyleKey}" />
 			</TextBlock>
-			<Grid Margin="10,5,10,0">
+			<Grid Margin="10,6,10,0">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto" />
 					<RowDefinition Height="Auto" />

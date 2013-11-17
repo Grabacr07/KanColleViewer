@@ -16,6 +16,8 @@ namespace Grabacr07.KanColleWrapper
 	/// </summary>
 	public class Repairyard : NotificationObject
 	{
+		private readonly Homeport homeport;
+
 		#region Docks 変更通知プロパティ
 
 		private MemberTable<RepairingDock> _Docks;
@@ -35,8 +37,9 @@ namespace Grabacr07.KanColleWrapper
 
 		#endregion
 
-		internal Repairyard(KanColleProxy proxy)
+		internal Repairyard(Homeport parent, KanColleProxy proxy)
 		{
+			this.homeport = parent;
 			this.Docks = new MemberTable<RepairingDock>();
 
 			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/ndock")
@@ -56,8 +59,12 @@ namespace Grabacr07.KanColleWrapper
 			}
 			else
 			{
-				this.Docks = new MemberTable<RepairingDock>(source.Select(x => new RepairingDock(x)));
+				this.Docks = new MemberTable<RepairingDock>(source.Select(x => new RepairingDock(homeport, x)));
 			}
+
+			// 艦娘を入渠させたとき、ship2 -> ndock の順でデータが来るため、
+			// ndock の後で改めて各艦隊のステータスを更新してやらないと入渠ステータスに変更できない
+			this.homeport.Fleets.ForEach(x => x.Value.UpdateStatus());
 		}
 
 		/// <summary>
@@ -66,7 +73,7 @@ namespace Grabacr07.KanColleWrapper
 		/// <param name="shipId">艦隊に所属する艦娘の ID。</param>
 		public bool CheckRepairing(int shipId)
 		{
-			return this.Docks.Values.Where(x => x.Ship != null).Any(x => x.Ship.Id == shipId);
+			return this.Docks.Values.Where(x => x.Ship != null).Any(x => x.ShipId == shipId);
 		}
 
 		/// <summary>
@@ -74,7 +81,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public bool CheckRepairing(Fleet fleet)
 		{
-			var repairingShipIds = this.Docks.Values.Where(x => x.Ship != null).Select(x => x.Ship.Id).ToArray();
+			var repairingShipIds = this.Docks.Values.Where(x => x.Ship != null).Select(x => x.ShipId).ToArray();
 			return fleet.GetShips().Where(x => x != null).Any(x => repairingShipIds.Any(id => id == x.Id));
 		}
 	}

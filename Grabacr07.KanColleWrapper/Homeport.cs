@@ -165,16 +165,12 @@ namespace Grabacr07.KanColleWrapper
 				.Subscribe(x => this.Materials = new Materials(x.Select(m => new Material(m)).ToArray()));
 
 			this.Ships = new MemberTable<Ship>();
-			//proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/ship")
-			//	.TryParse<kcsapi_ship2[]>()
-			//	.Subscribe(x => this.Ships = new MemberTable<Ship>(x.Select(s => new Ship(s))));
-
 			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/ship2")
 				.Select(x => { SvData<kcsapi_ship2[]> result; return SvData.TryParse(x, out result) ? result : null; })
 				.Where(x => x != null && x.IsSuccess)
 				.Subscribe(x =>
 				{
-					this.Ships = new MemberTable<Ship>(x.Data.Select(s => new Ship(s)));
+					this.Ships = new MemberTable<Ship>(x.Data.Select(s => new Ship(this, s)));
 					this.UpdateFleets(x.Fleets);
 				});
 
@@ -198,7 +194,7 @@ namespace Grabacr07.KanColleWrapper
 				.Subscribe(this.UpdateFleets);
 
 			this.Dockyard = new Dockyard(proxy);
-			this.Repairyard = new Repairyard(proxy);
+			this.Repairyard = new Repairyard(this, proxy);
 		}
 
 
@@ -214,7 +210,7 @@ namespace Grabacr07.KanColleWrapper
 			}
 			else
 			{
-				this.Fleets = new MemberTable<Fleet>(source.Select(x => new Fleet(x)));
+				this.Fleets = new MemberTable<Fleet>(source.Select(x => new Fleet(this, x)));
 			}
 		}
 	}

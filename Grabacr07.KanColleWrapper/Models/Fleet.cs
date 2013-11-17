@@ -12,6 +12,8 @@ namespace Grabacr07.KanColleWrapper.Models
 {
 	public class Fleet : NotificationObject, IIdentifiable
 	{
+		private readonly Homeport homeport;
+
 		#region Id 変更通知プロパティ
 
 		private int _Id;
@@ -94,8 +96,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		public Expedition Expedition { get; private set; }
 
 
-		internal Fleet(kcsapi_deck rawData)
+		internal Fleet(Homeport parent, kcsapi_deck rawData)
 		{
+			this.homeport = parent;
+
 			this.Expedition = new Expedition(this);
 			this.Update(rawData);
 		}
@@ -105,11 +109,17 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			this.Id = rawData.api_id;
 			this.Name = rawData.api_name;
-			this.Ships = rawData.api_ship.Select(id => KanColleClient.Current.Homeport.Ships[id]).Where(x => x != null).ToArray();
+			this.Ships = rawData.api_ship.Select(id => this.homeport.Ships[id]).Where(x => x != null).ToArray();
 			this.Expedition.Update(rawData.api_mission);
 
-			if (this.Expedition.IsInExecution) this.State = FleetState.Expedition;
-			else if(KanColleClient.Current.Homeport.Repairyard.CheckRepairing(this)) this.State = FleetState.Repairing;
+			this.UpdateStatus();
+		}
+
+		internal void UpdateStatus()
+		{
+			if (this.Ships.Length == 0) this.State = FleetState.Empty;
+			else if (this.Expedition.IsInExecution) this.State = FleetState.Expedition;
+			else if (this.homeport.Repairyard.CheckRepairing(this)) this.State = FleetState.Repairing;
 			else this.State = FleetState.Ready;
 		}
 

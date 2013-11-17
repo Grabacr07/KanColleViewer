@@ -8,6 +8,8 @@ namespace Grabacr07.KanColleWrapper.Models
 {
 	public enum FleetState
 	{
+		Empty,
+
 		/// <summary>
 		/// 出撃準備ができています。
 		/// </summary>

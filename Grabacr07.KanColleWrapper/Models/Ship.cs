@@ -14,6 +14,8 @@ namespace Grabacr07.KanColleWrapper.Models
 	/// </summary>
 	public class Ship : RawDataWrapper<kcsapi_ship2>, IIdentifiable
 	{
+		private readonly Homeport homeport;
+
 		/// <summary>
 		/// この艦娘を識別する ID を取得します。
 		/// </summary>
@@ -112,11 +114,12 @@ namespace Grabacr07.KanColleWrapper.Models
 		public SlotItem[] SlotItems { get; private set; }
 
 
-		internal Ship(kcsapi_ship2 rawData)
+		internal Ship(Homeport parent, kcsapi_ship2 rawData)
 			: base(rawData)
 		{
+			this.homeport = parent;
+
 			this.Info = KanColleClient.Current.Master.Ships[rawData.api_ship_id] ?? ShipInfo.Dummy;
-			
 			this.HP = new LimitedValue(this.RawData.api_nowhp, this.RawData.api_maxhp, 0);
 			this.Fuel = new LimitedValue(this.RawData.api_fuel, this.Info.RawData.api_fuel_max, 0);
 			this.Bull = new LimitedValue(this.RawData.api_bull, this.Info.RawData.api_bull_max, 0);
@@ -129,7 +132,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				this.Armer = new ModernizableStatus(this.Info.RawData.api_souk, this.RawData.api_kyouka[3]);
 			}
 
-			this.SlotItems = this.RawData.api_slot.Select(id => KanColleClient.Current.Homeport.SlotItems[id]).Where(x => x != null).ToArray();
+			this.SlotItems = this.RawData.api_slot.Select(id => this.homeport.SlotItems[id]).Where(x => x != null).ToArray();
 		}
 
 

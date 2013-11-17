@@ -22,8 +22,8 @@
 			<ColumnDefinition Width="Auto" />
 		</Grid.ColumnDefinitions>
 
-		<controls:NavigationButton Width="42"
-								   Height="42"
+		<controls:NavigationButton Width="40"
+								   Height="40"
 								   IsEnabled="{Binding CanGoBack}"
 								   ToolTip="前のページに戻る">
 			<i:Interaction.Triggers>
@@ -40,7 +40,7 @@
 								   IsEnabled="{Binding CanGoForward}"
 								   Width="{Binding ElementName=UrlBox, Path=ActualHeight}"
 								   Height="{Binding ElementName=UrlBox, Path=ActualHeight}"
-								   Margin="6">
+								   Margin="4,0">
 			<i:Interaction.Triggers>
 				<i:EventTrigger EventName="Click">
 					<livet:LivetCallMethodAction MethodTarget="{Binding}"
@@ -55,7 +55,7 @@
 							  Prompt="URL を入力し、Enter キーで移動します。"
 							  VerticalAlignment="Center"
 							  VerticalContentAlignment="Center"
-							  Padding="2,3">
+							  Padding="2,2">
 			<common:PromptTextBox.InputBindings>
 				<KeyBinding Key="Enter"
 							Command="{Binding NavigateCommand}" />
@@ -67,7 +67,7 @@
 								   ToolTip="ページのリロード"
 								   Width="{Binding ElementName=UrlBox, Path=ActualHeight}"
 								   Height="{Binding ElementName=UrlBox, Path=ActualHeight}"
-								   Margin="6,0,0,0">
+								   Margin="4,0,0,0">
 			<i:Interaction.Triggers>
 				<i:EventTrigger EventName="Click">
 					<livet:LivetCallMethodAction MethodTarget="{Binding}"
