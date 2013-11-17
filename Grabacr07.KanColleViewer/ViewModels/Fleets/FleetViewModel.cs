@@ -49,7 +49,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Fleets
 				}
 				if (this.source.State == FleetState.Repairing)
 				{
-					return new RepairingBarViewModel();
+					return new RepairingBarViewModel(source);
 				}
 				return new ReSortieBarViewModel(source);
 			}

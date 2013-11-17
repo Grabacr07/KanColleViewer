@@ -106,10 +106,14 @@
 					</DataTemplate.Triggers>
 				</DataTemplate>
 				<DataTemplate DataType="{x:Type fleets:RepairingBarViewModel}">
-					<Border Padding="10,5"
+					<Border x:Name="Border"
+							Padding="10,5"
 							Background="#FF5A4020">
-						<TextBlock Text="{Binding Message}"
-								   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+						<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}">
+							<i:Interaction.Behaviors>
+								<behaviors:TimerBehavior Proc="{Binding TimerProc}" />
+							</i:Interaction.Behaviors>
+						</TextBlock>
 					</Border>
 				</DataTemplate>
 			</ContentControl.Resources>
