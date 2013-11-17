@@ -17,6 +17,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Fleets
 	{
 		private readonly Fleet source;
 
+		public FleetConditionViewModel Condition { get; private set; }
+		public ExpeditionViewModel Expedition { get; private set; }
+
 		public int Id
 		{
 			get { return this.source.Id; }
@@ -35,6 +38,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Fleets
 			get { return this.source.GetShips().Select(x => new ShipViewModel(x)).ToArray(); }
 		}
 
+		/// <summary>
+		/// 艦隊の状態を取得します。
+		/// </summary>
 		public ViewModel State
 		{
 			get
@@ -51,11 +57,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Fleets
 				{
 					return new RepairingBarViewModel();
 				}
-				return new ReSortieBarViewModel(source);
+				return this.Condition;
 			}
 		}
-
-		public ExpeditionViewModel Expedition { get; private set; }
 
 		public FleetViewModel(Fleet fleet)
 		{
@@ -63,8 +67,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Fleets
 
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet)
 			{
-				{ (sender, args) => this.RaisePropertyChanged(args.PropertyName) },
+				(sender, args) => this.RaisePropertyChanged(args.PropertyName),
 			});
+
+			this.Condition = new FleetConditionViewModel(fleet.Condition);
 			this.Expedition = new ExpeditionViewModel(fleet.Expedition);
 		}
 	}

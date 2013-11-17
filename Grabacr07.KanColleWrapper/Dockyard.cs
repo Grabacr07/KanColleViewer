@@ -56,6 +56,7 @@ namespace Grabacr07.KanColleWrapper
 			}
 			else
 			{
+				this.Docks.ForEach(x => x.Value.Dispose());
 				this.Docks = new MemberTable<BuildingDock>(source.Select(x => new BuildingDock(x)));
 			}
 		}

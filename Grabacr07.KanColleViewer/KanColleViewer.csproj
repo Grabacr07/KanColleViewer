@@ -122,6 +122,7 @@
     <Compile Include="ViewModels\Docks\RepairingDockViewModel.cs" />
     <Compile Include="ViewModels\Docks\RepairyardViewModel.cs" />
     <Compile Include="ViewModels\ExpeditionViewModel.cs" />
+    <Compile Include="ViewModels\Fleets\FleetConditionViewModel.cs" />
     <Compile Include="ViewModels\Fleets\RepairingBarViewModel.cs" />
     <Compile Include="ViewModels\Fleets\TimerViewModel.cs" />
     <Compile Include="ViewModels\HomeportViewModel.cs" />

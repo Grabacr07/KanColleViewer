@@ -88,6 +88,7 @@
     <Compile Include="Fleets.cs" />
     <Compile Include="MemberTable.cs" />
     <Compile Include="Models\ExpeditionReturnedEventArgs.cs" />
+    <Compile Include="Models\FleetCondition.cs" />
     <Compile Include="Models\FleetState.cs" />
     <Compile Include="Models\RepairingCompletedEventArgs.cs" />
     <Compile Include="Models\BuildingCompletedEventArgs.cs" />
