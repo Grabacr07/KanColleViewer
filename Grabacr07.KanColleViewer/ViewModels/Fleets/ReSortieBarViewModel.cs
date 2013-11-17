@@ -38,15 +38,21 @@ namespace Grabacr07.KanColleViewer.ViewModels.Fleets
 
 		public ReSortieBarViewModel(Fleet fleet)
 		{
-			var minCondition = fleet.GetShips().Select(s => s.Condition).Min();
-			if (minCondition >= 40)
+			if (fleet.GetShips().Any(s => s.Fuel.Current < s.Fuel.Maximum || s.Bull.Current < s.Bull.Maximum))
 			{
-				this.CanReSortie = true;
+				this.CanReSortie = false;
+				return;
 			}
-			else
+
+			var minCondition = fleet.GetShips().Min(s => s.Condition);
+			if (minCondition <= 40)
 			{
+				this.CanReSortie = false;
 				this.period = DateTimeOffset.Now.Add(TimeSpan.FromMinutes(40 - minCondition));
+				return;
 			}
+
+			this.CanReSortie = true;
 		}
 
 		protected override string CreateMessage()
@@ -56,14 +62,22 @@ namespace Grabacr07.KanColleViewer.ViewModels.Fleets
 				return "出撃可能！";
 			}
 
+			if (period == default(DateTimeOffset))
+			{
+				return "艦隊の補給が不十分です。";
+				
+			}
+
 			var remaining = period - DateTimeOffset.Now;
 			if (remaining.Ticks <= 0)
 			{
 				this.CanReSortie = true;
 				return "出撃可能！";
 			}
-
-			return string.Format("艦隊に疲労中の艦娘がいます。再出撃までの目安: {0}", remaining.ToString("mm\\:ss"));
+			else
+			{
+				return string.Format("艦隊に疲労中の艦娘がいます。再出撃までの目安: {0}", remaining.ToString("mm\\:ss"));
+			}
 		}
 	}
 }
