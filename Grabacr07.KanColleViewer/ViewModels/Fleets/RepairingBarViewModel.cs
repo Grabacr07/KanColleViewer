@@ -1,38 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing.Text;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Livet;
+using Livet.EventListeners;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Fleets
 {
-	public class RepairingBarViewModel : ViewModel
+	public class RepairingBarViewModel : TimerViewModel
 	{
-		#region Message 変更通知プロパティ
+		private readonly Fleet source;
 
-		private string _Message;
-
-		public string Message
+		public RepairingBarViewModel(Fleet fleet)
 		{
-			get { return this._Message; }
-			set
-			{
-				if (this._Message != value)
-				{
-					this._Message = value;
-					this.RaisePropertyChanged();
-				}
-			}
+			this.source = fleet;
 		}
 
-		#endregion
-
-		public RepairingBarViewModel()
+		protected override string CreateMessage()
 		{
-			this.Message = "艦隊に入渠中の艦娘がいます。";
-		}	
+			var dock = source.Ships
+				.Join(KanColleClient.Current.Homeport.Repairyard.Docks.Values.Where(d => d.Ship != null), s => s.Id, d => d.Ship.Id, (s, d) => d)
+				.OrderByDescending(d => d.CompleteTime)
+				.FirstOrDefault();
+			if (dock == null)
+			{
+				return "艦隊に入渠中の艦娘がいます。";
+			}
+			var remaining = dock.CompleteTime.Value - DateTimeOffset.Now - TimeSpan.FromMinutes(1.0);
+			return string.Format(@"艦隊に入渠中の艦娘がいます。 完了時刻: {0:MM/dd HH\:mm} 完了まで: {1}:{2:mm\:ss}",
+				dock.CompleteTime.Value, (int) remaining.TotalHours, remaining);
+		}
 	}
 }

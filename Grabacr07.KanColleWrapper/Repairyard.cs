@@ -81,8 +81,8 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public bool CheckRepairing(Fleet fleet)
 		{
-			var repairingShipIds = this.Docks.Values.Where(x => x.Ship != null).Select(x => x.ShipId).ToArray();
-			return fleet.GetShips().Where(x => x != null).Any(x => repairingShipIds.Any(id => id == x.Id));
+			var repairingShipIds = this.Docks.Values.Where(x => x.Ship != null).Select(x => x.Ship.Id).ToArray();
+			return fleet.GetShips().Any(x => repairingShipIds.Any(id => id == x.Id));
 		}
 	}
 }
