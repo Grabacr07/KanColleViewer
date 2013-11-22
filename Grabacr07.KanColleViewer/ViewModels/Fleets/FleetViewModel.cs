@@ -38,6 +38,24 @@ namespace Grabacr07.KanColleViewer.ViewModels.Fleets
 		}
 
 		/// <summary>
+		/// 艦隊に所属している艦娘が装備している艦載機を集計したコレクションを取得します。
+		/// </summary>
+		public IEnumerable<PlaneViewModel> Planes
+		{
+			get
+			{
+				return this.source.Ships
+					.Select(x => x.SlotItems
+						//.Where(y => y.Info.)
+						.Select((y, i) => new { Item = y.Info, Count = x.OnSlot[i] }))
+					.SelectMany(x => x)
+					.GroupBy(x => x.Item.Id, x => x)
+					.Select(x => new { x.First().Item, Count = x.Aggregate(0, (i, y) => i + y.Count) })
+					.Select(x => new PlaneViewModel(x.Item, x.Count));
+			}
+		}
+
+		/// <summary>
 		/// 艦隊の状態を取得します。
 		/// </summary>
 		public ViewModel State
@@ -67,6 +85,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Fleets
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet)
 			{
 				(sender, args) => this.RaisePropertyChanged(args.PropertyName),
+				{ () => fleet.Ships, (sender, args) => this.RaisePropertyChanged("Planes") },
 			});
 
 			this.ReSortie = new ReSortieBarViewModel(this, fleet.ReSortie);
