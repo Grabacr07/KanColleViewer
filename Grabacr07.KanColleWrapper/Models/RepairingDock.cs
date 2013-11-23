@@ -70,7 +70,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				{
 					this._ShipId = value;
 					this.RaisePropertyChanged();
-					this.RaisePropertyChanged("Ship");
+					this.UpdateShip();
 				}
 			}
 		}
@@ -80,7 +80,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public Ship Ship
 		{
-			get { return this.State == RepairingDockState.Repairing ? this._Ship ?? (this._Ship = this.homeport.Ships[this.ShipId]) : null; }
+			get { return this.State == RepairingDockState.Repairing ? _Ship : null; }
 		}
 
 		#endregion
@@ -149,6 +149,16 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.CompleteTime = this.State == RepairingDockState.Repairing
 				? (DateTimeOffset?)Definitions.UnixEpoch.AddMilliseconds(rawData.api_complete_time)
 				: null;
+
+			// ShipId の Setter で呼び出されるため、ここで UpdateShip() は呼び出さない
+			// 何らかの原因で Ship の作成に失敗した場合は Tick() 時に再設定する
+		}
+
+		// Setterで処理できないため、更新用関数を作成。
+		internal void UpdateShip()
+		{
+			this._Ship = this.homeport.Ships[this.ShipId];
+			this.RaisePropertyChanged(() => Ship);
 		}
 
 		protected override void Tick()
@@ -161,6 +171,13 @@ namespace Grabacr07.KanColleWrapper.Models
 				if (remaining.Ticks < 0) remaining = TimeSpan.Zero;
 
 				this.Remaining = remaining;
+
+				// 何らかの原因で Ship の作成に失敗していた場合に再設定
+				// 初回起動時等 this.homeport.Ships が不定のタイミングで発生
+				if (null == Ship)
+				{
+					this.UpdateShip();
+				}
 
 				if (!this.notificated && this.Completed != null && remaining.Ticks <= 0)
 				{
