@@ -80,7 +80,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public Ship Ship
 		{
-			get { return this.State == RepairingDockState.Repairing ? _Ship : null; }
+			get { return this.State == RepairingDockState.Repairing ? this._Ship : null; }
 		}
 
 		#endregion
@@ -158,7 +158,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		internal void UpdateShip()
 		{
 			this._Ship = this.homeport.Ships[this.ShipId];
-			this.RaisePropertyChanged(() => Ship);
+			this.RaisePropertyChanged(() => this.Ship);
 		}
 
 		protected override void Tick()
@@ -174,7 +174,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 				// 何らかの原因で Ship の作成に失敗していた場合に再設定
 				// 初回起動時等 this.homeport.Ships が不定のタイミングで発生
-				if (null == Ship)
+				if (null == this.Ship)
 				{
 					this.UpdateShip();
 				}
