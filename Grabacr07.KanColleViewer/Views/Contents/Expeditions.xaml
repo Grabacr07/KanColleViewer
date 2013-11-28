@@ -123,8 +123,7 @@
 		<StackPanel Grid.Column="2"
 					Orientation="Vertical"
 					VerticalAlignment="Bottom">
-			<StackPanel Margin="10,10,10,4"
-						IsEnabled="{Binding IsSupportedNotification, Mode=OneWay}">
+			<StackPanel Margin="10,10,10,4">
 				<StackPanel.Style>
 					<Style TargetType="{x:Type StackPanel}">
 						<Style.Triggers>
@@ -139,11 +138,10 @@
 				<TextBlock Margin="5">
 					<Run Text="通知設定"
 						 Style="{DynamicResource PickupTextElementStyleKey}" />
-					<Run Text="(Windows 8 以降)" />
 				</TextBlock>
 				<RadioButton Margin="8,5"
 							 IsChecked="{Binding IsNotifyReturned}">
-					<TextBlock Text="遠征帰投時にトースト通知を表示する" />
+					<TextBlock Text="遠征帰投時に通知を表示する" />
 				</RadioButton>
 				<RadioButton Margin="8,5"
 							 IsEnabled="False">

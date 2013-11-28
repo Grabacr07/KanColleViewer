@@ -106,19 +106,25 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			this.UpdateMessage();
 			this.UpdateRemaining();
 
-			if (Helper.IsWindows8OrGreater)
+			reSortie.Readied += (sender, args) =>
 			{
-				reSortie.Readied += (sender, args) =>
+				if (this.IsNotifyReadied)
 				{
-					if (this.IsNotifyReadied)
+					if (Helper.IsWindows8OrGreater)
 					{
 						Toast.Show(
 							"疲労回復完了",
 							"「" + parent.Name + "」の全艦娘の疲労が回復しました。",
 							() => App.ViewModelRoot.Messenger.Raise(new WindowActionMessage(WindowAction.Active, "Window/Activate")));
 					}
-				};
-			}
+					else
+					{
+						NotifyIconWrapper.Show(
+							"疲労回復完了",
+							"「" + parent.Name + "」の全艦娘の疲労が回復しました。");
+					}
+				}
+			};
 		}
 
 

@@ -120,7 +120,7 @@ namespace Grabacr07.KanColleViewer.Model
 
 		public bool NotifyBuildingCompleted
 		{
-			get { return this._NotifyBuildingCompleted && Helper.IsWindows8OrGreater; }
+            get { return this._NotifyBuildingCompleted; }
 			set
 			{
 				if (this._NotifyBuildingCompleted != value)
@@ -139,7 +139,7 @@ namespace Grabacr07.KanColleViewer.Model
 
 		public bool NotifyExpeditionReturned
 		{
-			get { return this._NotifyExpeditionReturned && Helper.IsWindows8OrGreater; }
+			get { return this._NotifyExpeditionReturned; }
 			set
 			{
 				if (this._NotifyExpeditionReturned != value)
@@ -158,7 +158,7 @@ namespace Grabacr07.KanColleViewer.Model
 
 		public bool NotifyRepairingCompleted
 		{
-			get { return this._NotifyRepairingCompleted && Helper.IsWindows8OrGreater; }
+			get { return this._NotifyRepairingCompleted; }
 			set
 			{
 				if (this._NotifyRepairingCompleted != value)

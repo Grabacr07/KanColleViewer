@@ -41,6 +41,10 @@ namespace Grabacr07.KanColleViewer
 			{
 				Toast.TryInstallShortcut();
 			}
+			else
+			{
+				NotifyIconWrapper.Initialize();
+			}
 
 			ThemeService.Current.Initialize(this);
 
