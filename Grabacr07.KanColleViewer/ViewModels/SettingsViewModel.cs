@@ -18,6 +18,25 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			set { Settings.Current.ScreenshotFolder = value; }
 		}
 
+		public string ProxyHost
+		{
+			get { return Settings.Current.ProxyHost; }
+			set { Settings.Current.ProxyHost = value; }
+		}
+
+		public string ProxyPort
+		{
+			get { return Settings.Current.ProxyPort.ToString(); }
+			set
+			{
+				UInt16 NumberPort;
+				if (UInt16.TryParse(value, out NumberPort))
+				{
+					Settings.Current.ProxyPort = NumberPort;
+				}
+			}
+		}
+
 		public SettingsViewModel()
 		{
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(Settings.Current)
