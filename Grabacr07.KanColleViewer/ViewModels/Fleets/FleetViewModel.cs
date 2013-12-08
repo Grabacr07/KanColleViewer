@@ -29,6 +29,16 @@ namespace Grabacr07.KanColleViewer.ViewModels.Fleets
 			get { return string.IsNullOrEmpty(this.source.Name.Trim()) ? "(第 " + this.source.Id + " 艦隊)" : this.source.Name; }
 		}
 
+		public string AverageLevel
+		{
+			get { return this.source.AverageLevel.ToString("##.##"); }
+		}
+
+		public string Speed
+		{
+			get { return this.source.Speed == KanColleWrapper.Models.Speed.Fast ? "高速艦隊" : "低速艦隊"; }
+		}
+
 		/// <summary>
 		/// 艦隊に所属している艦娘のコレクションを取得します。
 		/// </summary>
@@ -45,10 +55,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Fleets
 			get
 			{
 				return this.source.Ships
-					.Select(x => x.SlotItems
-						//.Where(y => y.Info.)
+					.SelectMany(x => x.SlotItems
+						.Where(y => y.Info.IsAircraft || y.Info.IsSeaplane)
 						.Select((y, i) => new { Item = y.Info, Count = x.OnSlot[i] }))
-					.SelectMany(x => x)
 					.GroupBy(x => x.Item.Id, x => x)
 					.Select(x => new { x.First().Item, Count = x.Aggregate(0, (i, y) => i + y.Count) })
 					.Select(x => new PlaneViewModel(x.Item, x.Count));
