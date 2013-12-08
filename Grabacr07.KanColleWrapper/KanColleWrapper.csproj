@@ -91,6 +91,8 @@
     <Compile Include="Models\ExpeditionReturnedEventArgs.cs" />
     <Compile Include="Models\FleetReSortie.cs" />
     <Compile Include="Models\FleetState.cs" />
+    <Compile Include="Models\Raw\kcsapi_ship3.cs" />
+    <Compile Include="Models\Raw\kcsapi_slot_data.cs" />
     <Compile Include="Models\RepairingCompletedEventArgs.cs" />
     <Compile Include="Models\BuildingCompletedEventArgs.cs" />
     <Compile Include="Models\ConditionType.cs" />

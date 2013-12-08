@@ -53,10 +53,9 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
-		#region ShipId / Ship 変更通知プロパティ
+		#region ShipId 変更通知プロパティ
 
 		private int _ShipId;
-		private Ship _Ship;
 
 		/// <summary>
 		/// 入渠中の艦娘を一意に識別する ID を取得します。
@@ -70,17 +69,30 @@ namespace Grabacr07.KanColleWrapper.Models
 				{
 					this._ShipId = value;
 					this.RaisePropertyChanged();
-					this.RaisePropertyChanged("Ship");
 				}
 			}
 		}
+
+		#endregion
+
+		#region Ship 変更通知プロパティ
+
+		private Ship _Ship;
 
 		/// <summary>
 		/// 入渠中の艦娘の情報を取得します。
 		/// </summary>
 		public Ship Ship
 		{
-			get { return this.State == RepairingDockState.Repairing ? this._Ship ?? (this._Ship = this.homeport.Ships[this.ShipId]) : null; }
+			get { return this._Ship; }
+			private set
+			{
+				if (this._Ship != value)
+				{
+					this._Ship = value;
+					this.RaisePropertyChanged();
+				}
+			}
 		}
 
 		#endregion
@@ -146,6 +158,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.Id = rawData.api_id;
 			this.State = (RepairingDockState)rawData.api_state;
 			this.ShipId = rawData.api_ship_id;
+			this.Ship = this.State == RepairingDockState.Repairing ? this.homeport.Ships[this.ShipId] : null;
 			this.CompleteTime = this.State == RepairingDockState.Repairing
 				? (DateTimeOffset?)Definitions.UnixEpoch.AddMilliseconds(rawData.api_complete_time)
 				: null;
