@@ -139,6 +139,7 @@
 					   VerticalAlignment="Center"
 					   Margin="5,0" />
 
+			<ContentControl Grid.Column="1" />
 			<chrome:ResizeGrip Grid.Column="3" />
 		</Grid>
 		<!-- endregion -->
