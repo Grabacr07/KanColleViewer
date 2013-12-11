@@ -71,7 +71,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 弾薬を取得します。
 		/// </summary>
-		public LimitedValue Bull { get; private set; } 
+		public LimitedValue Bull { get; private set; }
 
 		/// <summary>
 		/// 火力ステータス値を取得します。
