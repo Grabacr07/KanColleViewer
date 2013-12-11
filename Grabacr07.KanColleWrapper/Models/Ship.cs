@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Fiddler;
+using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models.Raw;
 
 namespace Grabacr07.KanColleWrapper.Models
@@ -47,7 +48,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public int Exp
 		{
-			get { return this.RawData.api_exp; }
+			get { return this.RawData.api_exp.Get(0) ?? 0; }
 		}
 
 		/// <summary>
@@ -55,7 +56,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public int ExpForNextLevel
 		{
-			get { return Experience.GetShipExpForNextLevel(this.RawData.api_lv, this.RawData.api_exp); }
+			get { return this.RawData.api_exp.Get(1) ?? 0; }
 		}
 
 		/// <summary>
@@ -71,7 +72,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 弾薬を取得します。
 		/// </summary>
-		public LimitedValue Bull { get; private set; }
+		public LimitedValue Bull { get; private set; } 
 
 		/// <summary>
 		/// 火力ステータス値を取得します。

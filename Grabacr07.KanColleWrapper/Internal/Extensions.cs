@@ -59,7 +59,7 @@ namespace Grabacr07.KanColleWrapper.Internal
 		/// </summary>
 		public static int? Get(this int[] array, int index)
 		{
-			return array.Length <= index + 1 ? (int?)array[index] : null;
+			return array.Length > index ? (int?)array[index] : null;
 		}
 	}
 }

@@ -11,7 +11,7 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public int api_sortno { get; set; }
 		public int api_ship_id { get; set; }
 		public int api_lv { get; set; }
-		public int api_exp { get; set; }
+		public int[] api_exp { get; set; }
 		public int api_nowhp { get; set; }
 		public int api_maxhp { get; set; }
 		public int api_leng { get; set; }
