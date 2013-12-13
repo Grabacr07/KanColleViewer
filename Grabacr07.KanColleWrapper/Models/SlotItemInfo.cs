@@ -39,9 +39,9 @@ namespace Grabacr07.KanColleWrapper.Models
 			get
 			{
 				return this.IconType == SlotItemIconType.Fighter ||
-				       this.IconType == SlotItemIconType.TorpedoBomber ||
-				       this.IconType == SlotItemIconType.DiveBomber ||
-				       this.IconType == SlotItemIconType.ReconPlane;
+					   this.IconType == SlotItemIconType.TorpedoBomber ||
+					   this.IconType == SlotItemIconType.DiveBomber ||
+					   this.IconType == SlotItemIconType.ReconPlane;
 			}
 		}
 
