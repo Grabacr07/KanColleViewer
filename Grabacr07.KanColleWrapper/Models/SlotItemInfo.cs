@@ -32,6 +32,14 @@ namespace Grabacr07.KanColleWrapper.Models
 		}
 
 		/// <summary>
+		/// 対空値を取得します。
+		/// </summary>
+		public int AA
+		{
+			get { return this.RawData.api_tyku; }
+		}
+
+		/// <summary>
 		/// この装備アイテムが艦載機かどうかを示す値を取得します。
 		/// </summary>
 		public bool IsAircraft

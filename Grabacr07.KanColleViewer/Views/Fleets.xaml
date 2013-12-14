@@ -16,6 +16,7 @@
 			 d:DesignHeight="400"
 			 d:DataContext="{d:DesignInstance fleets:FleetsViewModel}"
 			 SnapsToDevicePixels="True">
+
 	<Grid d:DataContext="{d:DesignData /SampleData/FleetsViewModelSampleData.xaml}">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -139,9 +140,6 @@
 							</Style>
 						</DataTemplate.Resources>
 						<StackPanel>
-							<Rectangle Height="1"
-									   Style="{DynamicResource SeparatorRectangleStyleKey}"
-									   Margin="10,0" />
 							<Grid HorizontalAlignment="Left"
 								  Margin="0,5">
 								<Grid.RowDefinitions>
@@ -273,6 +271,9 @@
 									</ItemsControl.ItemTemplate>
 								</ItemsControl>
 							</Grid>
+							<Rectangle Height="1"
+									   Style="{DynamicResource SeparatorRectangleStyleKey}"
+									   Margin="10,0" />
 						</StackPanel>
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>
@@ -297,15 +298,12 @@
 			</TextBlock>
 		</Grid>-->
 
-		<ItemsControl Grid.Row="4"
+		<!--<ItemsControl Grid.Row="4"
 					  DataContext="{Binding SelectedFleet}"
 					  ItemsSource="{Binding Planes}">
 			<ItemsControl.Template>
 				<ControlTemplate TargetType="{x:Type ItemsControl}">
 					<StackPanel>
-						<Rectangle Height="1"
-								   Style="{DynamicResource SeparatorRectangleStyleKey}"
-								   Margin="10,0" />
 						<WrapPanel IsItemsHost="True"
 								   Margin="10,5" />
 					</StackPanel>
@@ -321,6 +319,12 @@
 					</TextBlock>
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>
-		</ItemsControl>
+		</ItemsControl>-->
+
+		<TextBlock Grid.Row="4"
+				   Margin="10,5">
+			<Run Text="制空能力:" />
+			<Run Text="{Binding SelectedFleet.AirSuperiorityPotential, Mode=OneWay}" />
+		</TextBlock>
 	</Grid>
 </UserControl>

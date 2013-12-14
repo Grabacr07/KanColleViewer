@@ -39,6 +39,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Fleets
 			get { return this.source.Speed == KanColleWrapper.Models.Speed.Fast ? "高速艦隊" : "低速艦隊"; }
 		}
 
+		public int AirSuperiorityPotential
+		{
+			get { return this.source.AirSuperiorityPotential; }
+		}
+
 		/// <summary>
 		/// 艦隊に所属している艦娘のコレクションを取得します。
 		/// </summary>
