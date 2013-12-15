@@ -16,11 +16,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		public ShipsViewModel Ships { get; private set; }
 		public SlotItemsViewModel SlotItems { get; private set; }
 
-		//public FleetsViewModel Fleets { get; private set; }
-		//public RepairyardViewModel Repairyard { get; private set; }
-		//public DockyardViewModel Dockyard { get; private set; }
-		//public ExpeditionsViewModel Expeditions { get; private set; }
-
 		public IList<TabItemViewModel> TabItems { get; set; }
 		public IList<TabItemViewModel> SystemTabItems { get; set; }
 
@@ -37,6 +32,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				{
 					this._SelectedItem = value;
 					this.RaisePropertyChanged();
+
+					App.ViewModelRoot.StatusBar = value;
 				}
 			}
 		}
@@ -66,11 +63,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				new SettingsViewModel(),
 			};
 			this.SelectedItem = this.TabItems.FirstOrDefault();
-
-			//this.Fleets = new FleetsViewModel();
-			//this.Repairyard = new RepairyardViewModel();
-			//this.Dockyard = new DockyardViewModel();
-			//this.Expeditions = new ExpeditionsViewModel();
 		}
 	}
 }

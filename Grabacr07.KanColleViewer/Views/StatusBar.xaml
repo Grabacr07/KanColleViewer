@@ -5,6 +5,10 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
 			 xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
+			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+			 xmlns:vmDocks="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Docks"
+			 xmlns:vmFleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
+			 xmlns:vmContents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 mc:Ignorable="d"
 			 d:DesignHeight="25"
 			 d:DesignWidth="780">
@@ -24,7 +28,26 @@
 
 		<ContentControl Grid.Column="1"
 						Content="{Binding Source={x:Static root:App.ViewModelRoot}, Path=StatusBar}">
-			
+			<ContentControl.Resources>
+				<DataTemplate DataType="{x:Type vmFleets:FleetsViewModel}">
+					<TextBlock DataContext="{Binding SelectedFleet}"
+							   Foreground="{DynamicResource AccentForegroundBrushKey}">
+						<Run Text="        " />
+						<Run Text="平均レベル:" />
+						<Run Text="{Binding AverageLevel, Mode=OneWay}" />
+						<Run Text="        " />
+						<Run Text="制空戦力:" />
+						<Run Text="{Binding AirSuperiorityPotential, Mode=OneWay}" />
+						<Run Text="        " />
+						<Run Text="{Binding Speed, Mode=OneWay}" />
+					</TextBlock>
+				</DataTemplate>
+				<DataTemplate DataType="{x:Type vmDocks:RepairyardViewModel}" />
+				<DataTemplate DataType="{x:Type vmDocks:DockyardViewModel}" />
+				<DataTemplate DataType="{x:Type vmContents:MissionsViewModel}" />
+				<DataTemplate DataType="{x:Type vmContents:ExpeditionsViewModel}" />
+				<DataTemplate DataType="{x:Type vm:SettingsViewModel}" />
+			</ContentControl.Resources>
 		</ContentControl>
 	</Grid>
 </UserControl>

@@ -20,8 +20,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		public NavigatorViewModel Navigator { get; private set; }
 		public VolumeViewModel Volume { get; private set; }
 
-		public MainContentViewModel MainContent { get; private set; }
-
 		#region Content 変更通知プロパティ
 
 		private ViewModel _Content;
@@ -67,11 +65,10 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			this.Navigator = new NavigatorViewModel();
 			this.Volume = new VolumeViewModel();
 			this.Content = NotStartedViewModel.Instance;
-			this.MainContent = new MainContentViewModel();
 
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current)
 			{
-				{ "IsStarted", (sender, args) => this.Content = KanColleClient.Current.IsStarted ? this.MainContent : NotStartedViewModel.Instance as ViewModel },
+				{ "IsStarted", (sender, args) => this.Content = KanColleClient.Current.IsStarted ? new MainContentViewModel() : NotStartedViewModel.Instance as ViewModel },
 			});
 		}
 

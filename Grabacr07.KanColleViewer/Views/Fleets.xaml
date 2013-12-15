@@ -128,6 +128,7 @@
 			  DataContext="{Binding SelectedFleet}"
 			  d:DataContext="{d:DesignData /SampleData/FleetViewModelSampleData.xaml}">
 			<ItemsControl ItemsSource="{Binding Ships}"
+						  Margin="0,0,0,10"
 						  Grid.IsSharedSizeScope="True">
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
