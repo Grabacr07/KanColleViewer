@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Grabacr07.KanColleViewer.Model
 {
@@ -29,5 +31,13 @@ namespace Grabacr07.KanColleViewer.Model
 		/// Windows 8 またはそれ以降のバージョンで動作しているかどうかを確認します。
 		/// </summary>
 		public static bool IsWindows8OrGreater { get; private set; }
+
+		/// <summary>
+		/// デザイナーのコンテキストで実行されているかどうかを取得します。
+		/// </summary>
+		public static bool IsInDesignMode
+		{
+			get { return DesignerProperties.GetIsInDesignMode(new DependencyObject()); }
+		}
 	}
 }

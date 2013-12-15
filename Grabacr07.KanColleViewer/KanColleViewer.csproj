@@ -116,52 +116,64 @@
     <Compile Include="Model\Settings.cs" />
     <Compile Include="Model\Toast.cs" />
     <Compile Include="Model\Volume.cs" />
-    <Compile Include="ViewModels\AdmiralViewModel.cs" />
-    <Compile Include="ViewModels\Docks\BuildingDockViewModel.cs" />
-    <Compile Include="ViewModels\Docks\DockyardViewModel.cs" />
-    <Compile Include="ViewModels\Docks\RepairingDockViewModel.cs" />
-    <Compile Include="ViewModels\Docks\RepairyardViewModel.cs" />
-    <Compile Include="ViewModels\ExpeditionViewModel.cs" />
-    <Compile Include="ViewModels\Fleets\PlaneViewModel.cs" />
-    <Compile Include="ViewModels\Fleets\RepairingBarViewModel.cs" />
-    <Compile Include="ViewModels\Fleets\TimerViewModel.cs" />
-    <Compile Include="ViewModels\HomeportViewModel.cs" />
+    <Compile Include="ViewModels\Contents\AdmiralViewModel.cs" />
+    <Compile Include="ViewModels\Contents\Docks\BuildingDockViewModel.cs" />
+    <Compile Include="ViewModels\Contents\Docks\RepairingDockViewModel.cs" />
+    <Compile Include="ViewModels\Contents\Docks\RepairyardViewModel.cs" />
+    <Compile Include="ViewModels\Contents\ExpeditionsViewModel.cs" />
+    <Compile Include="ViewModels\Contents\Fleets\ExpeditionViewModel.cs" />
+    <Compile Include="ViewModels\Contents\Fleets\PlaneViewModel.cs" />
+    <Compile Include="ViewModels\Contents\Fleets\RepairingBarViewModel.cs" />
+    <Compile Include="ViewModels\Contents\Fleets\TimerViewModel.cs" />
+    <Compile Include="ViewModels\Contents\MissionsViewModel.cs" />
+    <Compile Include="ViewModels\MainContentViewModel.cs" />
     <Compile Include="Model\INavigator.cs" />
-    <Compile Include="ViewModels\MaterialsViewModel.cs" />
+    <Compile Include="ViewModels\Contents\MaterialsViewModel.cs" />
+    <Compile Include="ViewModels\Contents\Docks\DockyardViewModel.cs" />
     <Compile Include="ViewModels\Messages\ScreenshotMessage.cs" />
     <Compile Include="ViewModels\Messages\Response.cs" />
     <Compile Include="ViewModels\NavigatorViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
-    <Compile Include="ViewModels\ShipsViewModel.cs" />
-    <Compile Include="ViewModels\SlotItemsViewModel.cs" />
+    <Compile Include="ViewModels\Contents\ShipsViewModel.cs" />
+    <Compile Include="ViewModels\Contents\SlotItemsViewModel.cs" />
+    <Compile Include="ViewModels\StatusBarItemViewModel.cs" />
+    <Compile Include="ViewModels\StatusBarViewModel.cs" />
+    <Compile Include="ViewModels\TabItemViewModel.cs" />
+    <Compile Include="ViewModels\VolumeViewModel.cs" />
     <Compile Include="Views\Behaviors\NavigatorBehavior.cs" />
     <Compile Include="Views\Behaviors\ScreenshotAction.cs" />
     <Compile Include="Views\Behaviors\SetStyleSheetBehavior.cs" />
     <Compile Include="Views\BrowserNavigator.xaml.cs">
       <DependentUpon>BrowserNavigator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Contents\Homeport.xaml.cs">
+      <DependentUpon>Homeport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contents\Missions.xaml.cs">
+      <DependentUpon>Missions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Controls\BuildingDock.cs" />
     <Compile Include="Views\Controls\MuteButton.cs" />
     <Compile Include="Views\Controls\NavigationButton.cs" />
     <Compile Include="Views\Controls\SlotItemIcon.cs" />
     <Compile Include="Views\Controls\TabHeader.cs" />
-    <Compile Include="Views\Dockyard.xaml.cs">
+    <Compile Include="Views\Contents\Dockyard.xaml.cs">
       <DependentUpon>Dockyard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Expeditions.xaml.cs">
+    <Compile Include="Views\Contents\Expeditions.xaml.cs">
       <DependentUpon>Expeditions.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NotStarted.xaml.cs">
       <DependentUpon>NotStarted.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Quests.xaml.cs">
-      <DependentUpon>Quests.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Repairyard.xaml.cs">
+    <Compile Include="Views\Contents\Repairyard.xaml.cs">
       <DependentUpon>Repairyard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StatusBar.xaml.cs">
+      <DependentUpon>StatusBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StatusBarContentTemplateSelector.cs" />
     <Compile Include="Win32\DVTARGETDEVICE.cs" />
@@ -176,7 +188,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Expeditions.xaml">
+    <Page Include="Views\Contents\Homeport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Contents\Expeditions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Contents\Missions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -184,11 +204,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Quests.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Repairyard.xaml">
+    <Page Include="Views\Contents\Repairyard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -196,11 +212,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\StatusBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Resource Include="Themes\Mukyutter.Dark.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Resource>
-    <Page Include="Views\Dockyard.xaml">
+    <Page Include="Views\Contents\Dockyard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -208,7 +228,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\KanColleMonitor.xaml">
+    <Page Include="Views\MainContent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -222,13 +242,12 @@
     </Compile>
     <Compile Include="Win32\IViewObject.cs" />
     <Compile Include="Win32\NativeMethods.cs" />
-    <Compile Include="ViewModels\Fleets\ReSortieBarViewModel.cs" />
-    <Compile Include="ViewModels\Fleets\FleetsViewModel.cs" />
-    <Compile Include="ViewModels\Fleets\FleetViewModel.cs" />
-    <Compile Include="ViewModels\KanColleMonitorViewModel.cs" />
+    <Compile Include="ViewModels\Contents\Fleets\ReSortieBarViewModel.cs" />
+    <Compile Include="ViewModels\Contents\Fleets\FleetsViewModel.cs" />
+    <Compile Include="ViewModels\Contents\Fleets\FleetViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\NotStartedViewModel.cs" />
-    <Compile Include="ViewModels\ShipViewModel.cs" />
+    <Compile Include="ViewModels\Contents\ShipViewModel.cs" />
     <Compile Include="ViewModels\WindowViewModel.cs" />
     <Compile Include="Views\Behaviors\CountdownBehavior.cs" />
     <Compile Include="Views\Behaviors\TimerBehavior.cs" />
@@ -237,8 +256,8 @@
     <Compile Include="Views\Fleets.xaml.cs">
       <DependentUpon>Fleets.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\KanColleMonitor.xaml.cs">
-      <DependentUpon>KanColleMonitor.xaml</DependentUpon>
+    <Compile Include="Views\MainContent.xaml.cs">
+      <DependentUpon>MainContent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

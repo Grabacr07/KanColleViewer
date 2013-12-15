@@ -1,13 +1,14 @@
-﻿<Fleets:FleetsViewModel xmlns:Fleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Fleets"
-                        xmlns:Livet="clr-namespace:Livet;assembly=Livet"
-                        xmlns:Messaging="clr-namespace:Livet.Messaging;assembly=Livet"
-                        xmlns:ViewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
-                        xmlns:Models="clr-namespace:Grabacr07.KanColleWrapper.Models;assembly=KanColleWrapper">
-	<Fleets:FleetsViewModel.Fleets>
-		<Fleets:FleetViewModel Id="1"
+﻿<fleets:FleetsViewModel xmlns:Livet="clr-namespace:Livet;assembly=Livet"
+						xmlns:Messaging="clr-namespace:Livet.Messaging;assembly=Livet"
+						xmlns:ViewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+						xmlns:Models="clr-namespace:Grabacr07.KanColleWrapper.Models;assembly=KanColleWrapper"
+						xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
+						xmlns:fleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets">
+	<fleets:FleetsViewModel.Fleets>
+		<fleets:FleetViewModel Id="1"
 							   Name="サンプル第一艦隊">
-			<ViewModels:ShipViewModel>
-				<ViewModels:ShipViewModel.Ship>
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
 					<Models:Ship ConditionType="Brilliant"
 								 Condition="80"
 								 ExpForNextLevel="15000"
@@ -76,11 +77,11 @@
 													   Upgraded="55" />
 						</Models:Ship.Torpedo>
 					</Models:Ship>
-				</ViewModels:ShipViewModel.Ship>
-			</ViewModels:ShipViewModel>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
 
-			<ViewModels:ShipViewModel>
-				<ViewModels:ShipViewModel.Ship>
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
 					<Models:Ship ConditionType="Tired"
 								 Condition="35"
 								 ExpForNextLevel="15000"
@@ -149,11 +150,11 @@
 													   Upgraded="55" />
 						</Models:Ship.Torpedo>
 					</Models:Ship>
-				</ViewModels:ShipViewModel.Ship>
-			</ViewModels:ShipViewModel>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
 
-			<ViewModels:ShipViewModel>
-				<ViewModels:ShipViewModel.Ship>
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
 					<Models:Ship ConditionType="OrangeTired"
 								 Condition="25"
 								 ExpForNextLevel="15000"
@@ -222,11 +223,11 @@
 													   Upgraded="55" />
 						</Models:Ship.Torpedo>
 					</Models:Ship>
-				</ViewModels:ShipViewModel.Ship>
-			</ViewModels:ShipViewModel>
-			
-			<ViewModels:ShipViewModel>
-				<ViewModels:ShipViewModel.Ship>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
 					<Models:Ship ConditionType="RedTired"
 								 Condition="8"
 								 ExpForNextLevel="15000"
@@ -295,11 +296,11 @@
 													   Upgraded="55" />
 						</Models:Ship.Torpedo>
 					</Models:Ship>
-				</ViewModels:ShipViewModel.Ship>
-			</ViewModels:ShipViewModel>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
 
-			<ViewModels:ShipViewModel>
-				<ViewModels:ShipViewModel.Ship>
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
 					<Models:Ship ConditionType="Normal"
 								 Condition="45"
 								 ExpForNextLevel="15000"
@@ -368,11 +369,11 @@
 													   Upgraded="55" />
 						</Models:Ship.Torpedo>
 					</Models:Ship>
-				</ViewModels:ShipViewModel.Ship>
-			</ViewModels:ShipViewModel>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
 
-			<ViewModels:ShipViewModel>
-				<ViewModels:ShipViewModel.Ship>
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
 					<Models:Ship ConditionType="Brilliant"
 								 Condition="80"
 								 ExpForNextLevel="15000"
@@ -441,14 +442,14 @@
 													   Upgraded="55" />
 						</Models:Ship.Torpedo>
 					</Models:Ship>
-				</ViewModels:ShipViewModel.Ship>
-			</ViewModels:ShipViewModel>
-		</Fleets:FleetViewModel>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+		</fleets:FleetViewModel>
 
-		<Fleets:FleetViewModel Id="2"
+		<fleets:FleetViewModel Id="2"
 							   Name="サンプル第二艦隊">
-			<ViewModels:ShipViewModel>
-				<ViewModels:ShipViewModel.Ship>
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
 					<Models:Ship ConditionType="Brilliant"
 								 Condition="80"
 								 ExpForNextLevel="15000"
@@ -517,11 +518,11 @@
 													   Upgraded="55" />
 						</Models:Ship.Torpedo>
 					</Models:Ship>
-				</ViewModels:ShipViewModel.Ship>
-			</ViewModels:ShipViewModel>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
 
-			<ViewModels:ShipViewModel>
-				<ViewModels:ShipViewModel.Ship>
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
 					<Models:Ship ConditionType="Tired"
 								 Condition="35"
 								 ExpForNextLevel="15000"
@@ -590,11 +591,11 @@
 													   Upgraded="55" />
 						</Models:Ship.Torpedo>
 					</Models:Ship>
-				</ViewModels:ShipViewModel.Ship>
-			</ViewModels:ShipViewModel>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
 
-			<ViewModels:ShipViewModel>
-				<ViewModels:ShipViewModel.Ship>
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
 					<Models:Ship ConditionType="OrangeTired"
 								 Condition="25"
 								 ExpForNextLevel="15000"
@@ -663,11 +664,11 @@
 													   Upgraded="55" />
 						</Models:Ship.Torpedo>
 					</Models:Ship>
-				</ViewModels:ShipViewModel.Ship>
-			</ViewModels:ShipViewModel>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
 
-			<ViewModels:ShipViewModel>
-				<ViewModels:ShipViewModel.Ship>
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
 					<Models:Ship ConditionType="RedTired"
 								 Condition="8"
 								 ExpForNextLevel="15000"
@@ -736,14 +737,14 @@
 													   Upgraded="55" />
 						</Models:Ship.Torpedo>
 					</Models:Ship>
-				</ViewModels:ShipViewModel.Ship>
-			</ViewModels:ShipViewModel>
-		</Fleets:FleetViewModel>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+		</fleets:FleetViewModel>
 
-		<Fleets:FleetViewModel Id="3"
+		<fleets:FleetViewModel Id="3"
 							   Name="ほむ">
-			<ViewModels:ShipViewModel>
-				<ViewModels:ShipViewModel.Ship>
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
 					<Models:Ship ConditionType="Brilliant"
 								 Condition="80"
 								 ExpForNextLevel="15000"
@@ -812,11 +813,11 @@
 													   Upgraded="55" />
 						</Models:Ship.Torpedo>
 					</Models:Ship>
-				</ViewModels:ShipViewModel.Ship>
-			</ViewModels:ShipViewModel>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
 
-			<ViewModels:ShipViewModel>
-				<ViewModels:ShipViewModel.Ship>
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
 					<Models:Ship ConditionType="Tired"
 								 Condition="35"
 								 ExpForNextLevel="15000"
@@ -885,11 +886,11 @@
 													   Upgraded="55" />
 						</Models:Ship.Torpedo>
 					</Models:Ship>
-				</ViewModels:ShipViewModel.Ship>
-			</ViewModels:ShipViewModel>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
 
-			<ViewModels:ShipViewModel>
-				<ViewModels:ShipViewModel.Ship>
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
 					<Models:Ship ConditionType="OrangeTired"
 								 Condition="25"
 								 ExpForNextLevel="15000"
@@ -958,11 +959,11 @@
 													   Upgraded="55" />
 						</Models:Ship.Torpedo>
 					</Models:Ship>
-				</ViewModels:ShipViewModel.Ship>
-			</ViewModels:ShipViewModel>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
 
-			<ViewModels:ShipViewModel>
-				<ViewModels:ShipViewModel.Ship>
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
 					<Models:Ship ConditionType="RedTired"
 								 Condition="8"
 								 ExpForNextLevel="15000"
@@ -1031,14 +1032,14 @@
 													   Upgraded="55" />
 						</Models:Ship.Torpedo>
 					</Models:Ship>
-				</ViewModels:ShipViewModel.Ship>
-			</ViewModels:ShipViewModel>
-		</Fleets:FleetViewModel>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+		</fleets:FleetViewModel>
 
-		<Fleets:FleetViewModel Id="4"
+		<fleets:FleetViewModel Id="4"
 							   Name="サンプル第四艦隊のようなもの">
-			<ViewModels:ShipViewModel>
-				<ViewModels:ShipViewModel.Ship>
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
 					<Models:Ship ConditionType="Brilliant"
 								 Condition="80"
 								 ExpForNextLevel="15000"
@@ -1107,11 +1108,11 @@
 													   Upgraded="55" />
 						</Models:Ship.Torpedo>
 					</Models:Ship>
-				</ViewModels:ShipViewModel.Ship>
-			</ViewModels:ShipViewModel>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
 
-			<ViewModels:ShipViewModel>
-				<ViewModels:ShipViewModel.Ship>
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
 					<Models:Ship ConditionType="Tired"
 								 Condition="35"
 								 ExpForNextLevel="15000"
@@ -1180,11 +1181,11 @@
 													   Upgraded="55" />
 						</Models:Ship.Torpedo>
 					</Models:Ship>
-				</ViewModels:ShipViewModel.Ship>
-			</ViewModels:ShipViewModel>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
 
-			<ViewModels:ShipViewModel>
-				<ViewModels:ShipViewModel.Ship>
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
 					<Models:Ship ConditionType="OrangeTired"
 								 Condition="25"
 								 ExpForNextLevel="15000"
@@ -1253,11 +1254,11 @@
 													   Upgraded="55" />
 						</Models:Ship.Torpedo>
 					</Models:Ship>
-				</ViewModels:ShipViewModel.Ship>
-			</ViewModels:ShipViewModel>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
 
-			<ViewModels:ShipViewModel>
-				<ViewModels:ShipViewModel.Ship>
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
 					<Models:Ship ConditionType="RedTired"
 								 Condition="8"
 								 ExpForNextLevel="15000"
@@ -1326,16 +1327,16 @@
 													   Upgraded="55" />
 						</Models:Ship.Torpedo>
 					</Models:Ship>
-				</ViewModels:ShipViewModel.Ship>
-			</ViewModels:ShipViewModel>
-		</Fleets:FleetViewModel>	
-	</Fleets:FleetsViewModel.Fleets>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+		</fleets:FleetViewModel>
+	</fleets:FleetsViewModel.Fleets>
 
-	<Fleets:FleetsViewModel.SelectedFleet>
-		<Fleets:FleetViewModel Id="1"
+	<fleets:FleetsViewModel.SelectedFleet>
+		<fleets:FleetViewModel Id="1"
 							   Name="サンプル第一艦隊">
-			<ViewModels:ShipViewModel>
-				<ViewModels:ShipViewModel.Ship>
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
 					<Models:Ship ConditionType="Brilliant"
 								 Condition="80"
 								 ExpForNextLevel="15000"
@@ -1404,11 +1405,11 @@
 													   Upgraded="55" />
 						</Models:Ship.Torpedo>
 					</Models:Ship>
-				</ViewModels:ShipViewModel.Ship>
-			</ViewModels:ShipViewModel>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
 
-			<ViewModels:ShipViewModel>
-				<ViewModels:ShipViewModel.Ship>
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
 					<Models:Ship ConditionType="Tired"
 								 Condition="35"
 								 ExpForNextLevel="15000"
@@ -1477,11 +1478,11 @@
 													   Upgraded="55" />
 						</Models:Ship.Torpedo>
 					</Models:Ship>
-				</ViewModels:ShipViewModel.Ship>
-			</ViewModels:ShipViewModel>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
 
-			<ViewModels:ShipViewModel>
-				<ViewModels:ShipViewModel.Ship>
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
 					<Models:Ship ConditionType="OrangeTired"
 								 Condition="25"
 								 ExpForNextLevel="15000"
@@ -1550,11 +1551,11 @@
 													   Upgraded="55" />
 						</Models:Ship.Torpedo>
 					</Models:Ship>
-				</ViewModels:ShipViewModel.Ship>
-			</ViewModels:ShipViewModel>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
 
-			<ViewModels:ShipViewModel>
-				<ViewModels:ShipViewModel.Ship>
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
 					<Models:Ship ConditionType="RedTired"
 								 Condition="8"
 								 ExpForNextLevel="15000"
@@ -1623,11 +1624,11 @@
 													   Upgraded="55" />
 						</Models:Ship.Torpedo>
 					</Models:Ship>
-				</ViewModels:ShipViewModel.Ship>
-			</ViewModels:ShipViewModel>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
 
-			<ViewModels:ShipViewModel>
-				<ViewModels:ShipViewModel.Ship>
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
 					<Models:Ship ConditionType="Normal"
 								 Condition="45"
 								 ExpForNextLevel="15000"
@@ -1696,11 +1697,11 @@
 													   Upgraded="55" />
 						</Models:Ship.Torpedo>
 					</Models:Ship>
-				</ViewModels:ShipViewModel.Ship>
-			</ViewModels:ShipViewModel>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
 
-			<ViewModels:ShipViewModel>
-				<ViewModels:ShipViewModel.Ship>
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
 					<Models:Ship ConditionType="Brilliant"
 								 Condition="80"
 								 ExpForNextLevel="15000"
@@ -1769,8 +1770,8 @@
 													   Upgraded="55" />
 						</Models:Ship.Torpedo>
 					</Models:Ship>
-				</ViewModels:ShipViewModel.Ship>
-			</ViewModels:ShipViewModel>
-		</Fleets:FleetViewModel>
-	</Fleets:FleetsViewModel.SelectedFleet>
-</Fleets:FleetsViewModel>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+		</fleets:FleetViewModel>
+	</fleets:FleetsViewModel.SelectedFleet>
+</fleets:FleetsViewModel>

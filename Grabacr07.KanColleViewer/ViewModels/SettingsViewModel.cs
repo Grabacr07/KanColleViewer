@@ -10,7 +10,7 @@ using Livet.EventListeners;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {
-	public class SettingsViewModel : ViewModel
+	public class SettingsViewModel : TabItemViewModel
 	{
 		public string ScreenshotFolder
 		{
@@ -20,6 +20,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		public SettingsViewModel()
 		{
+			this.Name = "設定";
+
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(Settings.Current)
 			{
 				(sender, args) => this.RaisePropertyChanged(args.PropertyName),

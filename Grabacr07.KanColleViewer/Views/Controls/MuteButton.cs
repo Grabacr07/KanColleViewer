@@ -12,13 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Grabacr07.Desktop.Metro.Controls;
 
 namespace Grabacr07.KanColleViewer.Views.Controls
 {
 	/// <summary>
-	/// 
+	/// ミュートの切り替え機能を提供する <see cref="Button"/> を表します。
 	/// </summary>
-	public class MuteButton : Button
+	public class MuteButton : CallMethodButton
 	{
 		static MuteButton()
 		{

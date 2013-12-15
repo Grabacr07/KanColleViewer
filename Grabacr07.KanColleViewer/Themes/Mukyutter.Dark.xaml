@@ -168,7 +168,7 @@
 		</Setter>
 	</Style>
 
-	
+
 	<Style TargetType="{x:Type Button}">
 		<Setter Property="Background"
 				Value="{DynamicResource BackgroundBrushKey}" />
@@ -1172,6 +1172,74 @@
 	</Style>
 
 
+
+	<Style TargetType="{x:Type controls:CallMethodButton}">
+		<Setter Property="Background"
+				Value="{DynamicResource BackgroundBrushKey}" />
+		<Setter Property="BorderBrush"
+				Value="{DynamicResource BorderBrushKey}" />
+		<Setter Property="Foreground"
+				Value="{DynamicResource ActiveForegroundBrushKey}" />
+		<Setter Property="BorderThickness"
+				Value="1" />
+		<Setter Property="Padding"
+				Value="8,2" />
+		<Setter Property="HorizontalContentAlignment"
+				Value="Center" />
+		<Setter Property="VerticalContentAlignment"
+				Value="Center" />
+		<Setter Property="SnapsToDevicePixels"
+				Value="True" />
+		<Setter Property="TextOptions.TextFormattingMode"
+				Value="Display" />
+		<Setter Property="FocusVisualStyle"
+				Value="{DynamicResource {x:Static SystemParameters.FocusVisualStyleKey}}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type controls:CallMethodButton}">
+					<Border x:Name="border"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}"
+							SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+							Background="{TemplateBinding Background}">
+						<ContentPresenter x:Name="contentPresenter"
+										  Margin="{TemplateBinding Padding}"
+										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Style.Triggers>
+			<Trigger Property="IsMouseOver"
+					 Value="True">
+				<Setter Property="Background"
+						Value="{DynamicResource ActiveBackgroundBrushKey}" />
+				<Setter Property="BorderBrush"
+						Value="{DynamicResource ActiveBorderBrushKey}" />
+			</Trigger>
+			<Trigger Property="IsPressed"
+					 Value="True">
+				<Setter Property="Background"
+						Value="{DynamicResource AccentBrushKey}" />
+				<Setter Property="BorderBrush"
+						Value="{DynamicResource ActiveBorderBrushKey}" />
+				<Setter Property="Foreground"
+						Value="{DynamicResource AccentForegroundBrushKey}" />
+			</Trigger>
+			<Trigger Property="IsEnabled"
+					 Value="False">
+				<Setter Property="Background"
+						Value="{DynamicResource InactiveBackgroundBrushKey}" />
+				<Setter Property="BorderBrush"
+						Value="{DynamicResource InactiveBorderBrushKey}" />
+				<Setter Property="Foreground"
+						Value="{DynamicResource InactiveForegroundBrushKey}" />
+			</Trigger>
+		</Style.Triggers>
+	</Style>
+
+
 	<Style TargetType="{x:Type controls:PromptTextBox}">
 		<Setter Property="Background"
 				Value="{DynamicResource SemiactiveBackgroundBrushKey}" />
@@ -1658,6 +1726,119 @@
 		</Setter>
 	</Style>
 
+
+
+	<Style TargetType="controls:TabView">
+		<Setter Property="SelectionMode"
+				Value="Single" />
+		<Setter Property="Background"
+				Value="Transparent" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type controls:TabView}">
+					<StackPanel Background="{TemplateBinding Background}">
+						<StackPanel IsItemsHost="True" />
+					</StackPanel>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+
+		<Setter Property="ItemContainerStyle">
+			<Setter.Value>
+				<Style TargetType="{x:Type ListBoxItem}">
+					<Setter Property="Foreground"
+							Value="{DynamicResource ActiveForegroundBrushKey}" />
+					<Setter Property="Height"
+							Value="38" />
+					<Setter Property="IsSelected"
+							Value="{Binding IsSelected}" />
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="{x:Type ListBoxItem}">
+								<Border Background="{TemplateBinding Background}">
+									<ContentPresenter />
+								</Border>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+					<Setter Property="FocusVisualStyle"
+							Value="{DynamicResource {x:Static SystemParameters.FocusVisualStyleKey}}" />
+					<Style.Triggers>
+						<Trigger Property="IsMouseOver"
+								 Value="True">
+							<Setter Property="Background"
+									Value="{DynamicResource AccentHighlightBrushKey}" />
+							<Setter Property="Foreground"
+									Value="{DynamicResource AccentForegroundBrushKey}" />
+						</Trigger>
+						<Trigger Property="IsSelected"
+								 Value="True">
+							<Setter Property="Background"
+									Value="{DynamicResource AccentBrushKey}" />
+							<Setter Property="Foreground"
+									Value="{DynamicResource AccentForegroundBrushKey}" />
+						</Trigger>
+					</Style.Triggers>
+				</Style>
+			</Setter.Value>
+		</Setter>
+
+		<Setter Property="ItemTemplate">
+			<Setter.Value>
+				<DataTemplate DataType="{x:Type controls:ITabItem}">
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="20" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="25" />
+						</Grid.ColumnDefinitions>
+						<TextBlock Grid.Column="1"
+								   Text="{Binding Name}"
+								   FontSize="14"
+								   Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Path=Foreground}"
+								   VerticalAlignment="Center"
+								   TextTrimming="CharacterEllipsis"
+								   TextOptions.TextFormattingMode="Display" />
+						<controls:Badge Grid.Column="1"
+										Grid.ColumnSpan="2"
+										Count="{Binding Badge}"
+										Margin="0,4,4,0"
+										HorizontalAlignment="Right"
+										VerticalAlignment="Top" />
+					</Grid>
+				</DataTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+
+	<Style TargetType="controls:Badge">
+		<Setter Property="Width"
+				Value="22" />
+		<Setter Property="Height"
+				Value="22" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="controls:Badge">
+					<Grid>
+						<Border CornerRadius="100"
+								Background="{DynamicResource AccentHighlightBrushKey}"
+								BorderThickness="0"
+								BorderBrush="{DynamicResource AccentHighlightBrushKey}">
+						</Border>
+						<TextBlock x:Name="PART_CountHost"
+								   x:FieldModifier="private"
+								   FontSize="11"
+								   FontFamily="Segoe UI"
+								   Foreground="{DynamicResource AccentForegroundBrushKey}"
+								   VerticalAlignment="Center"
+								   HorizontalAlignment="Center" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 
 
 	<Style x:Key="ChromeIconBaseKey"

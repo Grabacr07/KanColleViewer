@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.StatusBar"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
+			 xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
+			 mc:Ignorable="d"
+			 d:DesignHeight="25"
+			 d:DesignWidth="780">
+
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="Auto" />
+		</Grid.ColumnDefinitions>
+
+		<TextBlock Grid.Column="0"
+				   Text="準備完了"
+				   TextTrimming="CharacterEllipsis"
+				   Foreground="{DynamicResource AccentForegroundBrushKey}"
+				   VerticalAlignment="Center"
+				   Margin="5,0" />
+
+		<ContentControl Grid.Column="1"
+						Content="{Binding Source={x:Static root:App.ViewModelRoot}, Path=StatusBar}">
+			
+		</ContentControl>
+	</Grid>
+</UserControl>

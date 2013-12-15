@@ -1,14 +1,13 @@
-﻿<Fleets:FleetViewModel xmlns:Fleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Fleets"
-					   xmlns:Livet="clr-namespace:Livet;assembly=Livet"
-					   xmlns:Messaging="clr-namespace:Livet.Messaging;assembly=Livet"
-					   xmlns:ViewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+﻿<fleets:FleetViewModel xmlns:Livet="clr-namespace:Livet;assembly=Livet"
 					   xmlns:Models="clr-namespace:Grabacr07.KanColleWrapper.Models;assembly=KanColleWrapper"
+					   xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
+					   xmlns:fleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 					   Id="18"
 					   Name="サンプル第一艦隊">
-	<Fleets:FleetViewModel.Ships>
+	<fleets:FleetViewModel.Ships>
 
-		<ViewModels:ShipViewModel>
-			<ViewModels:ShipViewModel.Ship>
+		<contents:ShipViewModel>
+			<contents:ShipViewModel.Ship>
 				<Models:Ship ConditionType="Brilliant"
 							 Condition="80"
 							 ExpForNextLevel="15000"
@@ -32,7 +31,7 @@
 							</Models:ShipInfo.ShipType>
 						</Models:ShipInfo>
 					</Models:Ship.Info>
-					
+
 					<Models:Ship.SlotItems>
 						<Models:SlotItem>
 							<Models:SlotItem.Info>
@@ -55,7 +54,7 @@
 							</Models:SlotItem.Info>
 						</Models:SlotItem>
 					</Models:Ship.SlotItems>
-					
+
 					<Models:Ship.HP>
 						<Models:LimitedValue Minimum="0"
 											 Maximum="82"
@@ -101,12 +100,12 @@
 												   Upgraded="55" />
 					</Models:Ship.Torpedo>
 				</Models:Ship>
-			</ViewModels:ShipViewModel.Ship>
-		</ViewModels:ShipViewModel>
+			</contents:ShipViewModel.Ship>
+		</contents:ShipViewModel>
 
 
-		<ViewModels:ShipViewModel>
-			<ViewModels:ShipViewModel.Ship>
+		<contents:ShipViewModel>
+			<contents:ShipViewModel.Ship>
 				<Models:Ship ConditionType="Normal"
 							 Condition="45"
 							 ExpForNextLevel="15000"
@@ -199,13 +198,13 @@
 												   Upgraded="55" />
 					</Models:Ship.Torpedo>
 				</Models:Ship>
-			</ViewModels:ShipViewModel.Ship>
-		</ViewModels:ShipViewModel>
+			</contents:ShipViewModel.Ship>
+		</contents:ShipViewModel>
 
 
 
-		<ViewModels:ShipViewModel>
-			<ViewModels:ShipViewModel.Ship>
+		<contents:ShipViewModel>
+			<contents:ShipViewModel.Ship>
 				<Models:Ship ConditionType="Tired"
 							 Condition="35"
 							 ExpForNextLevel="15000"
@@ -274,13 +273,13 @@
 												   Upgraded="55" />
 					</Models:Ship.Torpedo>
 				</Models:Ship>
-			</ViewModels:ShipViewModel.Ship>
-		</ViewModels:ShipViewModel>
+			</contents:ShipViewModel.Ship>
+		</contents:ShipViewModel>
 
 
 
-		<ViewModels:ShipViewModel>
-			<ViewModels:ShipViewModel.Ship>
+		<contents:ShipViewModel>
+			<contents:ShipViewModel.Ship>
 				<Models:Ship ConditionType="OrangeTired"
 							 Condition="25"
 							 ExpForNextLevel="15000"
@@ -349,12 +348,12 @@
 												   Upgraded="55" />
 					</Models:Ship.Torpedo>
 				</Models:Ship>
-			</ViewModels:ShipViewModel.Ship>
-		</ViewModels:ShipViewModel>
+			</contents:ShipViewModel.Ship>
+		</contents:ShipViewModel>
 
 
-		<ViewModels:ShipViewModel>
-			<ViewModels:ShipViewModel.Ship>
+		<contents:ShipViewModel>
+			<contents:ShipViewModel.Ship>
 				<Models:Ship ConditionType="RedTired"
 							 Condition="8"
 							 ExpForNextLevel="15000"
@@ -423,12 +422,12 @@
 												   Upgraded="55" />
 					</Models:Ship.Torpedo>
 				</Models:Ship>
-			</ViewModels:ShipViewModel.Ship>
-		</ViewModels:ShipViewModel>
+			</contents:ShipViewModel.Ship>
+		</contents:ShipViewModel>
 
 
-		<ViewModels:ShipViewModel>
-			<ViewModels:ShipViewModel.Ship>
+		<contents:ShipViewModel>
+			<contents:ShipViewModel.Ship>
 				<Models:Ship ConditionType="Brilliant"
 							 Condition="80"
 							 ExpForNextLevel="15000"
@@ -497,12 +496,12 @@
 												   Upgraded="55" />
 					</Models:Ship.Torpedo>
 				</Models:Ship>
-			</ViewModels:ShipViewModel.Ship>
-		</ViewModels:ShipViewModel>
+			</contents:ShipViewModel.Ship>
+		</contents:ShipViewModel>
 
-	</Fleets:FleetViewModel.Ships>
-	<Fleets:FleetViewModel.State>
+	</fleets:FleetViewModel.Ships>
+	<fleets:FleetViewModel.State>
 		<Livet:ViewModel>
 		</Livet:ViewModel>
-	</Fleets:FleetViewModel.State>
-</Fleets:FleetViewModel>
+	</fleets:FleetViewModel.State>
+</fleets:FleetViewModel>

@@ -48,6 +48,25 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region IsNavigating 変更通知プロパティ
+
+		private bool _IsNavigating;
+
+		public bool IsNavigating
+		{
+			get { return this._IsNavigating; }
+			set
+			{
+				if (this._IsNavigating != value)
+				{
+					this._IsNavigating = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		#region CanGoBack 変更通知プロパティ
 
 		private bool _CanGoBack;
