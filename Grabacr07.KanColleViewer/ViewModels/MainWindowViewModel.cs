@@ -17,8 +17,40 @@ namespace Grabacr07.KanColleViewer.ViewModels
 {
 	public class MainWindowViewModel : WindowViewModel
 	{
+		private Mode currentMode;
+		private MainContentViewModel mainContent;
+
 		public NavigatorViewModel Navigator { get; private set; }
 		public VolumeViewModel Volume { get; private set; }
+
+		#region Mode 変更通知プロパティ
+
+		public Mode Mode
+		{
+			get { return this.currentMode; }
+			set
+			{
+				this.currentMode = value;
+				switch (value)
+				{
+					case Mode.NotStarted:
+						this.Content = NotStartedViewModel.Instance;
+						StatusService.Current.Set("艦これの起動を待っています");
+						break;
+					case Mode.Started:
+						this.Content = this.mainContent ?? (this.mainContent = new MainContentViewModel());
+						StatusService.Current.Set("準備完了");
+						break;
+					case Mode.InSortie:
+						// 今後
+						break;
+				}
+
+				this.RaisePropertyChanged();
+			}
+		}
+
+		#endregion
 
 		#region Content 変更通知プロパティ
 
@@ -32,6 +64,25 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				if (this._Content != value)
 				{
 					this._Content = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region StatusMessage 変更通知プロパティ
+
+		private string _StatusMessage;
+
+		public string StatusMessage
+		{
+			get { return this._StatusMessage; }
+			set
+			{
+				if (this._StatusMessage != value)
+				{
+					this._StatusMessage = value;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -58,18 +109,22 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-
 		public MainWindowViewModel()
 		{
 			this.Title = "提督業も忙しい！";
 			this.Navigator = new NavigatorViewModel();
 			this.Volume = new VolumeViewModel();
-			this.Content = NotStartedViewModel.Instance;
 
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(StatusService.Current)
+			{
+				{ () => StatusService.Current.Message, (sender, args) => this.StatusMessage = StatusService.Current.Message },
+			});
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current)
 			{
-				{ "IsStarted", (sender, args) => this.Content = KanColleClient.Current.IsStarted ? new MainContentViewModel() : NotStartedViewModel.Instance as ViewModel },
+				{ () => KanColleClient.Current.IsStarted, (sender, args) => this.Mode = Mode.Started },
 			});
+
+			this.Mode = Mode.NotStarted;
 		}
 
 		public void TakeScreenshot()

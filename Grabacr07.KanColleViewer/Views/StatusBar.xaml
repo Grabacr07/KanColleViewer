@@ -20,7 +20,7 @@
 		</Grid.ColumnDefinitions>
 
 		<TextBlock Grid.Column="0"
-				   Text="準備完了"
+				   Text="{Binding Source={x:Static root:App.ViewModelRoot}, Path=StatusMessage}"
 				   TextTrimming="CharacterEllipsis"
 				   Foreground="{DynamicResource AccentForegroundBrushKey}"
 				   VerticalAlignment="Center"

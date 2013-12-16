@@ -49,8 +49,8 @@
 			</i:Interaction.Triggers>
 		</controls:NavigationButton>
 
-		<common:PromptTextBox Grid.Column="2"
-							  x:Name="UrlBox"
+		<common:PromptTextBox x:Name="UrlBox"
+							  Grid.Column="2"
 							  Text="{Binding SourceString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 							  Prompt="URL を入力し、Enter キーで移動します。"
 							  VerticalAlignment="Center"
