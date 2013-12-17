@@ -9,6 +9,9 @@ using Livet;
 
 namespace Grabacr07.KanColleViewer.Model
 {
+	/// <summary>
+	/// 主にメイン ウィンドウのステータス バーに表示する
+	/// </summary>
 	public class StatusService : NotificationObject
 	{
 		#region static members

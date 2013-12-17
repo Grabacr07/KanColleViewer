@@ -116,6 +116,7 @@
     <Compile Include="Model\Mode.cs" />
     <Compile Include="Model\StatusService.cs" />
     <Compile Include="Model\Settings.cs" />
+    <Compile Include="Model\ThemeService.cs" />
     <Compile Include="Model\Toast.cs" />
     <Compile Include="Model\Volume.cs" />
     <Compile Include="ViewModels\Contents\AdmiralViewModel.cs" />
