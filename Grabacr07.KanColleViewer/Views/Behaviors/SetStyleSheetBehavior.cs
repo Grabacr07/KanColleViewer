@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interactivity;
 using System.Windows.Navigation;
@@ -46,6 +47,8 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 
 				var dpi = this.AssociatedObject.GetSystemDpi();
 
+				var window = Window.GetWindow(this.AssociatedObject);
+				if (window != null) window.SizeToContent = SizeToContent.WidthAndHeight;
 				this.AssociatedObject.Width = 800 / dpi.ScaleX;
 				this.AssociatedObject.Height = 480 / dpi.ScaleY;
 			}

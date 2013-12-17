@@ -8,6 +8,7 @@ namespace Grabacr07.KanColleViewer.Model
 	public interface INavigator
 	{
 		Uri Source { get; set; }
+		bool IsNavigating { get; set; }
 		bool CanGoBack { get; set; }
 		bool CanGoForward { get; set; }
 

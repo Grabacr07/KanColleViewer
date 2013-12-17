@@ -74,6 +74,72 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
+		#region AverageLevel 変更通知プロパティ
+
+		private double _AverageLevel;
+
+		/// <summary>
+		/// 艦隊の平均レベルを取得します。
+		/// </summary>
+		public double AverageLevel
+		{
+			get { return this._AverageLevel; }
+			private set
+			{
+				if (this._AverageLevel != value)
+				{
+					this._AverageLevel = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region AirSuperiorityPotential 変更通知プロパティ
+
+		private int _AirSuperiorityPotential;
+
+		/// <summary>
+		/// 艦隊の制空能力を取得します。
+		/// </summary>
+		public int AirSuperiorityPotential
+		{
+			get { return this._AirSuperiorityPotential; }
+			private set
+			{
+				if (this._AirSuperiorityPotential != value)
+				{
+					this._AirSuperiorityPotential = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region Speed 変更通知プロパティ
+
+		private Speed _Speed;
+
+		/// <summary>
+		/// 艦隊の速力を取得します。
+		/// </summary>
+		public Speed Speed
+		{
+			get { return this._Speed; }
+			private set
+			{
+				if (this._Speed != value)
+				{
+					this._Speed = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		#region State 変更通知プロパティ
 
 		private FleetState _State;
@@ -96,7 +162,6 @@ namespace Grabacr07.KanColleWrapper.Models
 		public FleetReSortie ReSortie { get; private set; }
 		public Expedition Expedition { get; private set; }
 
-
 		internal Fleet(Homeport parent, kcsapi_deck rawData)
 		{
 			this.homeport = parent;
@@ -112,6 +177,9 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.Id = rawData.api_id;
 			this.Name = rawData.api_name;
 			this.Ships = rawData.api_ship.Select(id => this.homeport.Ships[id]).Where(x => x != null).ToArray();
+			this.AverageLevel = this.Ships.HasValue() ? this.Ships.Average(s => s.Level) : 0.0;
+			this.AirSuperiorityPotential = this.Ships.Sum(s => s.CalcAirSuperiorityPotential());
+			this.Speed = this.Ships.All(s => s.Info.Speed == Speed.Fast) ? Speed.Fast : Speed.Low;
 			this.ReSortie.Update(this.Ships);
 			this.Expedition.Update(rawData.api_mission);
 

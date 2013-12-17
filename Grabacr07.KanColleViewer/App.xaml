@@ -6,6 +6,7 @@
 	<Application.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="/KanColleViewer;component/Themes/Accent.Purple.xaml" />
 				<ResourceDictionary Source="/KanColleViewer;component/Themes/Mukyutter.Dark.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 
@@ -33,6 +34,8 @@
 						Value="{DynamicResource ForegroundBrushKey}" />
 				<Setter Property="TextTrimming"
 						Value="WordEllipsis" />
+				<Setter Property="VerticalAlignment"
+						Value="Center" />
 				<Style.Triggers>
 					<Trigger Property="IsEnabled"
 							 Value="False">

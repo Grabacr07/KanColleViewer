@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Interop;
 using Grabacr07.Desktop.Metro.Win32;
 
@@ -69,6 +70,9 @@ namespace Grabacr07.Desktop.Metro.Chrome
 			this.Orientation = processor.Orientation;
 			this.HorizontalContentAlignment = processor.HorizontalAlignment;
 			this.VerticalContentAlignment = processor.VerticalAlignment;
+
+			var binding = new Binding("BorderBrush") { Source = this.owner, };
+			this.SetBinding(ForegroundProperty, binding);
 		}
 
 		protected override void OnSourceInitialized(EventArgs e)

@@ -1,90 +1,156 @@
-﻿<Docks:RepairyardViewModel xmlns:Docks="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Docks" xmlns:Livet="clr-namespace:Livet;assembly=Livet" xmlns:Messaging="clr-namespace:Livet.Messaging;assembly=Livet" IsSupportedNotification="False" IsNotifyCompleted="True">
-	<Docks:RepairyardViewModel.CompositeDisposable>
-		<Livet:LivetCompositeDisposable Count="23" IsReadOnly="True"/>
-	</Docks:RepairyardViewModel.CompositeDisposable>
-	<Docks:RepairyardViewModel.Docks>
-		<Docks:RepairingDockViewModel CompleteTime="November 5, 2003" Id="41" IsNotifyCompleted="True" Remaining="8:20:14 AM" Ship="Aaberg, Jesper" State="Unlocked">
+﻿<docks:RepairyardViewModel xmlns:Docks="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Docks"
+						   xmlns:Livet="clr-namespace:Livet;assembly=Livet"
+						   xmlns:Messaging="clr-namespace:Livet.Messaging;assembly=Livet"
+						   xmlns:docks="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Docks"
+						   IsSupportedNotification="False"
+						   IsNotifyCompleted="True">
+	<docks:RepairyardViewModel.CompositeDisposable>
+		<Livet:LivetCompositeDisposable Count="23"
+										IsReadOnly="True" />
+	</docks:RepairyardViewModel.CompositeDisposable>
+	<docks:RepairyardViewModel.Docks>
+		<Docks:RepairingDockViewModel CompleteTime="November 5, 2003"
+									  Id="41"
+									  IsNotifyCompleted="True"
+									  Remaining="8:20:14 AM"
+									  Ship="Aaberg, Jesper"
+									  State="Unlocked">
 			<Docks:RepairingDockViewModel.CompositeDisposable>
-				<Livet:LivetCompositeDisposable Count="19" IsReadOnly="False"/>
+				<Livet:LivetCompositeDisposable Count="19"
+												IsReadOnly="False" />
 			</Docks:RepairingDockViewModel.CompositeDisposable>
 			<Docks:RepairingDockViewModel.Messenger>
-				<Messaging:InteractionMessenger/>
+				<Messaging:InteractionMessenger />
 			</Docks:RepairingDockViewModel.Messenger>
 		</Docks:RepairingDockViewModel>
-		<Docks:RepairingDockViewModel CompleteTime="December 29, 2006" Id="10" IsNotifyCompleted="True" Remaining="7:06:05 AM" Ship="Adams, Ellen" State="Repairing">
+		<Docks:RepairingDockViewModel CompleteTime="December 29, 2006"
+									  Id="10"
+									  IsNotifyCompleted="True"
+									  Remaining="7:06:05 AM"
+									  Ship="Adams, Ellen"
+									  State="Repairing">
 			<Docks:RepairingDockViewModel.CompositeDisposable>
-				<Livet:LivetCompositeDisposable Count="66" IsReadOnly="False"/>
+				<Livet:LivetCompositeDisposable Count="66"
+												IsReadOnly="False" />
 			</Docks:RepairingDockViewModel.CompositeDisposable>
 			<Docks:RepairingDockViewModel.Messenger>
-				<Messaging:InteractionMessenger/>
+				<Messaging:InteractionMessenger />
 			</Docks:RepairingDockViewModel.Messenger>
 		</Docks:RepairingDockViewModel>
-		<Docks:RepairingDockViewModel CompleteTime="January 19, 2004" Id="39" IsNotifyCompleted="True" Remaining="4:26:00 PM" Ship="Adams, Terry" State="Unlocked">
+		<Docks:RepairingDockViewModel CompleteTime="January 19, 2004"
+									  Id="39"
+									  IsNotifyCompleted="True"
+									  Remaining="4:26:00 PM"
+									  Ship="Adams, Terry"
+									  State="Unlocked">
 			<Docks:RepairingDockViewModel.CompositeDisposable>
-				<Livet:LivetCompositeDisposable Count="99" IsReadOnly="False"/>
+				<Livet:LivetCompositeDisposable Count="99"
+												IsReadOnly="False" />
 			</Docks:RepairingDockViewModel.CompositeDisposable>
 			<Docks:RepairingDockViewModel.Messenger>
-				<Messaging:InteractionMessenger/>
+				<Messaging:InteractionMessenger />
 			</Docks:RepairingDockViewModel.Messenger>
 		</Docks:RepairingDockViewModel>
-		<Docks:RepairingDockViewModel CompleteTime="December 22, 2007" Id="18" IsNotifyCompleted="True" Remaining="7:13:04 AM" Ship="Adams, Terry" State="Locked">
+		<Docks:RepairingDockViewModel CompleteTime="December 22, 2007"
+									  Id="18"
+									  IsNotifyCompleted="True"
+									  Remaining="7:13:04 AM"
+									  Ship="Adams, Terry"
+									  State="Locked">
 			<Docks:RepairingDockViewModel.CompositeDisposable>
-				<Livet:LivetCompositeDisposable Count="44" IsReadOnly="False"/>
+				<Livet:LivetCompositeDisposable Count="44"
+												IsReadOnly="False" />
 			</Docks:RepairingDockViewModel.CompositeDisposable>
 			<Docks:RepairingDockViewModel.Messenger>
-				<Messaging:InteractionMessenger/>
+				<Messaging:InteractionMessenger />
 			</Docks:RepairingDockViewModel.Messenger>
 		</Docks:RepairingDockViewModel>
-		<Docks:RepairingDockViewModel CompleteTime="August 23, 2003" Id="55" IsNotifyCompleted="True" Remaining="5:44:29 PM" Ship="Pfeiffer, Michael" State="Locked">
+		<Docks:RepairingDockViewModel CompleteTime="August 23, 2003"
+									  Id="55"
+									  IsNotifyCompleted="True"
+									  Remaining="5:44:29 PM"
+									  Ship="Pfeiffer, Michael"
+									  State="Locked">
 			<Docks:RepairingDockViewModel.CompositeDisposable>
-				<Livet:LivetCompositeDisposable Count="83" IsReadOnly="False"/>
+				<Livet:LivetCompositeDisposable Count="83"
+												IsReadOnly="False" />
 			</Docks:RepairingDockViewModel.CompositeDisposable>
 			<Docks:RepairingDockViewModel.Messenger>
-				<Messaging:InteractionMessenger/>
+				<Messaging:InteractionMessenger />
 			</Docks:RepairingDockViewModel.Messenger>
 		</Docks:RepairingDockViewModel>
-		<Docks:RepairingDockViewModel CompleteTime="May 27, 2007" Id="75" IsNotifyCompleted="True" Remaining="11:38:50 PM" Ship="Philips, Carol" State="Locked">
+		<Docks:RepairingDockViewModel CompleteTime="May 27, 2007"
+									  Id="75"
+									  IsNotifyCompleted="True"
+									  Remaining="11:38:50 PM"
+									  Ship="Philips, Carol"
+									  State="Locked">
 			<Docks:RepairingDockViewModel.CompositeDisposable>
-				<Livet:LivetCompositeDisposable Count="47" IsReadOnly="False"/>
+				<Livet:LivetCompositeDisposable Count="47"
+												IsReadOnly="False" />
 			</Docks:RepairingDockViewModel.CompositeDisposable>
 			<Docks:RepairingDockViewModel.Messenger>
-				<Messaging:InteractionMessenger/>
+				<Messaging:InteractionMessenger />
 			</Docks:RepairingDockViewModel.Messenger>
 		</Docks:RepairingDockViewModel>
-		<Docks:RepairingDockViewModel CompleteTime="May 24, 2006" Id="12" IsNotifyCompleted="True" Remaining="8:33:47 AM" Ship="Poe, Toni" State="Repairing">
+		<Docks:RepairingDockViewModel CompleteTime="May 24, 2006"
+									  Id="12"
+									  IsNotifyCompleted="True"
+									  Remaining="8:33:47 AM"
+									  Ship="Poe, Toni"
+									  State="Repairing">
 			<Docks:RepairingDockViewModel.CompositeDisposable>
-				<Livet:LivetCompositeDisposable Count="32" IsReadOnly="False"/>
+				<Livet:LivetCompositeDisposable Count="32"
+												IsReadOnly="False" />
 			</Docks:RepairingDockViewModel.CompositeDisposable>
 			<Docks:RepairingDockViewModel.Messenger>
-				<Messaging:InteractionMessenger/>
+				<Messaging:InteractionMessenger />
 			</Docks:RepairingDockViewModel.Messenger>
 		</Docks:RepairingDockViewModel>
-		<Docks:RepairingDockViewModel CompleteTime="September 19, 2004" Id="15" IsNotifyCompleted="True" Remaining="7:13:20 AM" Ship="Hicks, Cassie" State="Locked">
+		<Docks:RepairingDockViewModel CompleteTime="September 19, 2004"
+									  Id="15"
+									  IsNotifyCompleted="True"
+									  Remaining="7:13:20 AM"
+									  Ship="Hicks, Cassie"
+									  State="Locked">
 			<Docks:RepairingDockViewModel.CompositeDisposable>
-				<Livet:LivetCompositeDisposable Count="77" IsReadOnly="False"/>
+				<Livet:LivetCompositeDisposable Count="77"
+												IsReadOnly="False" />
 			</Docks:RepairingDockViewModel.CompositeDisposable>
 			<Docks:RepairingDockViewModel.Messenger>
-				<Messaging:InteractionMessenger/>
+				<Messaging:InteractionMessenger />
 			</Docks:RepairingDockViewModel.Messenger>
 		</Docks:RepairingDockViewModel>
-		<Docks:RepairingDockViewModel CompleteTime="August 10, 2003" Id="48" IsNotifyCompleted="True" Remaining="11:05:39 PM" Ship="Argentiero, Luca" State="Unlocked">
+		<Docks:RepairingDockViewModel CompleteTime="August 10, 2003"
+									  Id="48"
+									  IsNotifyCompleted="True"
+									  Remaining="11:05:39 PM"
+									  Ship="Argentiero, Luca"
+									  State="Unlocked">
 			<Docks:RepairingDockViewModel.CompositeDisposable>
-				<Livet:LivetCompositeDisposable Count="86" IsReadOnly="False"/>
+				<Livet:LivetCompositeDisposable Count="86"
+												IsReadOnly="False" />
 			</Docks:RepairingDockViewModel.CompositeDisposable>
 			<Docks:RepairingDockViewModel.Messenger>
-				<Messaging:InteractionMessenger/>
+				<Messaging:InteractionMessenger />
 			</Docks:RepairingDockViewModel.Messenger>
 		</Docks:RepairingDockViewModel>
-		<Docks:RepairingDockViewModel CompleteTime="September 20, 2007" Id="79" IsNotifyCompleted="True" Remaining="5:25:58 AM" Ship="Perry, Brian" State="Repairing">
+		<Docks:RepairingDockViewModel CompleteTime="September 20, 2007"
+									  Id="79"
+									  IsNotifyCompleted="True"
+									  Remaining="5:25:58 AM"
+									  Ship="Perry, Brian"
+									  State="Repairing">
 			<Docks:RepairingDockViewModel.CompositeDisposable>
-				<Livet:LivetCompositeDisposable Count="64" IsReadOnly="False"/>
+				<Livet:LivetCompositeDisposable Count="64"
+												IsReadOnly="False" />
 			</Docks:RepairingDockViewModel.CompositeDisposable>
 			<Docks:RepairingDockViewModel.Messenger>
-				<Messaging:InteractionMessenger/>
+				<Messaging:InteractionMessenger />
 			</Docks:RepairingDockViewModel.Messenger>
 		</Docks:RepairingDockViewModel>
-	</Docks:RepairyardViewModel.Docks>
-	<Docks:RepairyardViewModel.Messenger>
-		<Messaging:InteractionMessenger/>
-	</Docks:RepairyardViewModel.Messenger>
-</Docks:RepairyardViewModel>
+	</docks:RepairyardViewModel.Docks>
+	<docks:RepairyardViewModel.Messenger>
+		<Messaging:InteractionMessenger />
+	</docks:RepairyardViewModel.Messenger>
+	</>

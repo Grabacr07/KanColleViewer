@@ -8,19 +8,24 @@
 						xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 						xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 						xmlns:chrome="clr-namespace:Grabacr07.Desktop.Metro.Chrome;assembly=Desktop.Metro"
-						xmlns:behaviors="clr-namespace:Grabacr07.Desktop.Metro.Behaviors;assembly=Desktop.Metro"
+						xmlns:metroBehaviors="clr-namespace:Grabacr07.Desktop.Metro.Behaviors;assembly=Desktop.Metro"
+						xmlns:metroControls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 						xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
-						xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 						xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
-						xmlns:localbehaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
-						xmlns:controls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+						xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+						xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
+						xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
+						xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
 						mc:Ignorable="d"
-						d:DataContext="{d:DesignInstance vm:MainWindowViewModel}"
+						d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
 						Title="{Binding Title}"
+						SizeToContent="Height"
+						Width="960"
+						MinWidth="{Binding ElementName=WebBrowser, Path=ActualWidth}"
 						FontSize="12"
 						Background="{DynamicResource ThemeBrushKey}"
-						MinWidth="{Binding ElementName=WebBrowser, Path=Width}"
-						SizeToContent="WidthAndHeight">
+						Foreground="{DynamicResource ActiveForegroundBrushKey}"
+						BorderBrush="{DynamicResource AccentBrushKey}">
 
 	<chrome:MetroWindow.WindowChrome>
 		<WindowChrome CaptionHeight="{Binding ActualHeight, ElementName=CaptionBar, Mode=OneWay}"
@@ -33,16 +38,15 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
-			<RowDefinition Height="25" />
+			<RowDefinition Height="23" />
 		</Grid.RowDefinitions>
 
 		<!-- #region CaptionBar -->
 		<Border x:Name="CaptionBar"
 				Panel.ZIndex="100">
 			<i:Interaction.Behaviors>
-				<behaviors:InactiveOpacityBehavior IsActive="{Binding ElementName=GlowMetroWindow, Path=IsActive, Mode=OneWay}" />
+				<metroBehaviors:InactiveOpacityBehavior IsActive="{Binding ElementName=GlowMetroWindow, Path=IsActive, Mode=OneWay}" />
 			</i:Interaction.Behaviors>
 
 			<Grid>
@@ -90,56 +94,47 @@
 					Width="960"
 					Height="572">
 			<i:Interaction.Behaviors>
-				<localbehaviors:SetStyleSheetBehavior />
-				<localbehaviors:NavigatorBehavior Navigator="{Binding Navigator}" />
+				<behaviors:SetStyleSheetBehavior />
+				<behaviors:NavigatorBehavior Navigator="{Binding Navigator}" />
 				<livet:WebBrowserSetStateToControlBehavior Source="{Binding Source={x:Static properties:Settings.Default}, Path=KanColleUrl, Mode=OneTime}"
 														   Property="Source" />
 			</i:Interaction.Behaviors>
 			<i:Interaction.Triggers>
-				<livet:InteractionMessageTrigger Messenger="{Binding Content.Messenger}"
+				<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
 												 MessageKey="Screenshot/Save">
-					<localbehaviors:ScreenshotAction />
+					<behaviors:ScreenshotAction />
 				</livet:InteractionMessageTrigger>
 			</i:Interaction.Triggers>
 		</WebBrowser>
 
-		<!--<Grid Grid.Row="2">
-			<controls:PromptTextBox Text="{Binding ElementName=WebBrowser, Path=Source, Mode=OneWay}"
-									BorderThickness="0,1"
-									Padding="2" />
-		</Grid>-->
-
-		<ContentControl Grid.Row="3"
+		<ContentControl Grid.Row="2"
 						Content="{Binding Content}">
 			<ContentControl.Resources>
-				<DataTemplate DataType="{x:Type vm:NotStartedViewModel}">
-					<views:NotStarted Width="{Binding ElementName=WebBrowser, Path=Width}" />
+				<DataTemplate DataType="{x:Type viewModels:NotStartedViewModel}">
+					<Border ClipToBounds="True"
+							Width="{Binding ElementName=WebBrowser, Path=Width}">
+						<views:BrowserNavigator Margin="6,-4,6,10"
+												VerticalAlignment="Top" />
+					</Border>
 				</DataTemplate>
-				<DataTemplate DataType="{x:Type vm:KanColleMonitorViewModel}">
-					<views:KanColleMonitor />
+				<DataTemplate DataType="{x:Type viewModels:MainContentViewModel}">
+					<views:MainContent />
 				</DataTemplate>
 			</ContentControl.Resources>
 		</ContentControl>
 
 		<!-- region Status area -->
-		<Grid Grid.Row="4"
+		<Grid Grid.Row="3"
 			  Background="{DynamicResource AccentBrushKey}"
 			  Panel.ZIndex="100">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="8" />
-				<ColumnDefinition Width="Auto" />
 			</Grid.ColumnDefinitions>
 
-			<TextBlock Grid.Column="0"
-					   Text="{Binding NotificationMessage}"
-					   TextTrimming="CharacterEllipsis"
-					   Foreground="{DynamicResource AccentForegroundBrushKey}"
-					   VerticalAlignment="Center"
-					   Margin="5,0" />
-
-			<chrome:ResizeGrip Grid.Column="3" />
+			<views:StatusBar />
+			<chrome:ResizeGrip Grid.Column="1"
+							   Margin="5,3,2,2" />
 		</Grid>
 		<!-- endregion -->
 	</Grid>

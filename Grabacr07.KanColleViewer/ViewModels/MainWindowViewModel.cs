@@ -1,8 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using Grabacr07.KanColleViewer.Model;
+using Grabacr07.KanColleViewer.ViewModels.Contents;
+using Grabacr07.KanColleViewer.ViewModels.Messages;
 using Grabacr07.KanColleWrapper;
 using Livet;
 using Livet.EventListeners;
@@ -11,39 +18,39 @@ namespace Grabacr07.KanColleViewer.ViewModels
 {
 	public class MainWindowViewModel : WindowViewModel
 	{
-		#region Navigator 変更通知プロパティ
+		private Mode currentMode;
+		private MainContentViewModel mainContent;
 
-		private NavigatorViewModel _Navigator;
+		public NavigatorViewModel Navigator { get; private set; }
+		public VolumeViewModel Volume { get; private set; }
 
-		public NavigatorViewModel Navigator
+		#region Mode 変更通知プロパティ
+
+		public Mode Mode
 		{
-			get { return this._Navigator; }
-			private set
-			{
-				if (this._Navigator != value)
-				{
-					this._Navigator = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region NotificationMessage 変更通知プロパティ
-
-		private string _NotificationMessage;
-
-		public string NotificationMessage
-		{
-			get { return this._NotificationMessage; }
+			get { return this.currentMode; }
 			set
 			{
-				if (this._NotificationMessage != value)
+				this.currentMode = value;
+				switch (value)
 				{
-					this._NotificationMessage = value;
-					this.RaisePropertyChanged();
+					case Mode.NotStarted:
+						this.Content = NotStartedViewModel.Instance;
+						StatusService.Current.Set("艦これの起動を待っています");
+						ThemeService.Current.Accent = Accent.Purple;
+						break;
+					case Mode.Started:
+						this.Content = this.mainContent ?? (this.mainContent = new MainContentViewModel());
+						StatusService.Current.Set("準備完了");
+						ThemeService.Current.Accent = Accent.Blue;
+						break;
+					case Mode.InSortie:
+						// 今後の実装にご期待ください
+						ThemeService.Current.Accent = Accent.Orange;
+						break;
 				}
+
+				this.RaisePropertyChanged();
 			}
 		}
 
@@ -68,17 +75,73 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region StatusMessage 変更通知プロパティ
+
+		private string _StatusMessage;
+
+		public string StatusMessage
+		{
+			get { return this._StatusMessage; }
+			set
+			{
+				if (this._StatusMessage != value)
+				{
+					this._StatusMessage = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region StatusBar 変更通知プロパティ
+
+		private ViewModel _StatusBar;
+
+		public ViewModel StatusBar
+		{
+			get { return this._StatusBar; }
+			set
+			{
+				if (this._StatusBar != value)
+				{
+					this._StatusBar = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		public MainWindowViewModel()
 		{
 			this.Title = "提督業も忙しい！";
 			this.Navigator = new NavigatorViewModel();
+			this.Volume = new VolumeViewModel();
 
-			this.Content = new NotStartedViewModel();
-			//this.Content = new KanColleMonitorViewModel();
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(StatusService.Current)
+			{
+				{ () => StatusService.Current.Message, (sender, args) => this.StatusMessage = StatusService.Current.Message },
+			});
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current)
 			{
-				{ "IsStarted", (sender, args) => this.Content = KanColleClient.Current.IsStarted ? new KanColleMonitorViewModel() : new NotStartedViewModel() as ViewModel },
+				{ () => KanColleClient.Current.IsStarted, (sender, args) => this.Mode = Mode.Started },
 			});
+
+			this.Mode = Mode.NotStarted;
+		}
+
+		public void TakeScreenshot()
+		{
+			var path = Helper.CreateScreenshotFilePath();
+			var message = new ScreenshotMessage("Screenshot/Save") { Path = path, };
+
+			this.Messenger.Raise(message);
+
+			var notify = message.Response.IsSuccess
+				? "スクリーンショットを保存しました: " + Path.GetFileName(path)
+				: "スクリーンショットの保存に失敗しました: " + message.Response.Exception.Message;
+			StatusService.Current.Notify(notify);
 		}
 	}
 }

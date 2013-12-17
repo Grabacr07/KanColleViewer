@@ -72,7 +72,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 弾薬を取得します。
 		/// </summary>
-		public LimitedValue Bull { get; private set; }
+		public LimitedValue Bull { get; private set; } 
 
 		/// <summary>
 		/// 火力ステータス値を取得します。
@@ -113,7 +113,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 
 		public SlotItem[] SlotItems { get; private set; }
-
+		public int[] OnSlot { get; private set; }
 
 		internal Ship(Homeport parent, kcsapi_ship2 rawData)
 			: base(rawData)
@@ -134,6 +134,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			}
 
 			this.SlotItems = this.RawData.api_slot.Select(id => this.homeport.SlotItems[id]).Where(x => x != null).ToArray();
+			this.OnSlot = this.RawData.api_onslot;
 		}
 
 

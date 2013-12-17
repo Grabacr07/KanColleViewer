@@ -14,6 +14,8 @@ namespace Grabacr07.KanColleWrapper.Models
 	/// </summary>
 	public class SlotItemInfo : RawDataWrapper<kcsapi_master_slotitem>, IIdentifiable
 	{
+		private SlotItemIconType? iconType;
+
 		public int Id
 		{
 			get { return this.RawData.api_id; }
@@ -26,7 +28,37 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public SlotItemIconType IconType
 		{
-			get { return this.RawData.api_type.Length == 4 ? (SlotItemIconType)this.RawData.api_type[3] : SlotItemIconType.Unknown; }
+			get { return this.iconType ?? (this.iconType = this.RawData.api_type.Length == 4 ? (SlotItemIconType)this.RawData.api_type[3] : SlotItemIconType.Unknown).Value; }
+		}
+
+		/// <summary>
+		/// 対空値を取得します。
+		/// </summary>
+		public int AA
+		{
+			get { return this.RawData.api_tyku; }
+		}
+
+		/// <summary>
+		/// この装備アイテムが艦載機かどうかを示す値を取得します。
+		/// </summary>
+		public bool IsAircraft
+		{
+			get
+			{
+				return this.IconType == SlotItemIconType.Fighter ||
+					   this.IconType == SlotItemIconType.TorpedoBomber ||
+					   this.IconType == SlotItemIconType.DiveBomber ||
+					   this.IconType == SlotItemIconType.ReconPlane;
+			}
+		}
+
+		/// <summary>
+		/// この装備アイテムが水上機かどうかを示す値を取得します。
+		/// </summary>
+		public bool IsSeaplane
+		{
+			get { return this.IconType == SlotItemIconType.ReconSeaplane; }
 		}
 
 		internal SlotItemInfo(kcsapi_master_slotitem rawData) : base(rawData) { }
