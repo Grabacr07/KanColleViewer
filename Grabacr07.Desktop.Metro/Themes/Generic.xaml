@@ -100,11 +100,11 @@
 							  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 							  VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
 							<Border x:Name="LineBorder"
-									Background="{TemplateBinding Foreground}" />
+									Background="{TemplateBinding ActiveGlowBrush}" />
 							<Border x:Name="BlurBorder"
 									Margin="-1,0"
 									Opacity="0.5"
-									Background="{TemplateBinding Foreground}">
+									Background="{TemplateBinding ActiveGlowBrush}">
 								<Border.Effect>
 									<BlurEffect Radius="8" />
 								</Border.Effect>
@@ -116,10 +116,10 @@
 								 Value="False">
 							<Setter TargetName="LineBorder"
 									Property="Background"
-									Value="{DynamicResource BorderBrushKey}" />
+									Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type chrome:GlowWindow}}, Path=InactiveGlowBrush}" />
 							<Setter TargetName="BlurBorder"
 									Property="Background"
-									Value="{DynamicResource BorderBrushKey}" />
+									Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type chrome:GlowWindow}}, Path=InactiveGlowBrush}" />
 						</Trigger>
 						<Trigger Property="Orientation"
 								 Value="Horizontal">

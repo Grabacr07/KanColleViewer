@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Interop;
+using System.Windows.Media;
 using Grabacr07.Desktop.Metro.Win32;
 
 namespace Grabacr07.Desktop.Metro.Chrome
@@ -46,6 +47,31 @@ namespace Grabacr07.Desktop.Metro.Chrome
 
 		#endregion
 
+		#region ActiveGlowBrush 依存関係プロパティ
+
+		public Brush ActiveGlowBrush
+		{
+			get { return (Brush)this.GetValue(ActiveGlowBrushProperty); }
+			set { this.SetValue(ActiveGlowBrushProperty, value); }
+		}
+		public static readonly DependencyProperty ActiveGlowBrushProperty =
+			DependencyProperty.Register("ActiveGlowBrush", typeof(Brush), typeof(GlowWindow), new UIPropertyMetadata(null));
+
+		#endregion
+
+		#region InactiveGlowBrush 依存関係プロパティ
+
+		public Brush InactiveGlowBrush
+		{
+			get { return (Brush)this.GetValue(InactiveGlowBrushProperty); }
+			set { this.SetValue(InactiveGlowBrushProperty, value); }
+		}
+		public static readonly DependencyProperty InactiveGlowBrushProperty =
+			DependencyProperty.Register("InactiveGlowBrush", typeof(Brush), typeof(GlowWindow), new UIPropertyMetadata(null));
+
+		#endregion
+
+
 		private IntPtr handle;
 		private readonly GlowWindowProcessor processor;
 
@@ -71,8 +97,11 @@ namespace Grabacr07.Desktop.Metro.Chrome
 			this.HorizontalContentAlignment = processor.HorizontalAlignment;
 			this.VerticalContentAlignment = processor.VerticalAlignment;
 
-			var binding = new Binding("BorderBrush") { Source = this.owner, };
-			this.SetBinding(ForegroundProperty, binding);
+			var bindingActive = new Binding("BorderBrush") { Source = this.owner, };
+			this.SetBinding(ActiveGlowBrushProperty, bindingActive);
+
+			var bindingInactive = new Binding("InactiveBorderBrush") { Source = this.owner, };
+			this.SetBinding(InactiveGlowBrushProperty, bindingInactive);
 		}
 
 		protected override void OnSourceInitialized(EventArgs e)

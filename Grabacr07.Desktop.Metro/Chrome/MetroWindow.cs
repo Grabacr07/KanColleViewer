@@ -65,6 +65,21 @@ namespace Grabacr07.Desktop.Metro.Chrome
 
 		#endregion
 
+		#region InactiveBorderBrush 依存関係プロパティ
+
+		/// <summary>
+		/// このウィンドウの非アクティブ時、ウィンドウの境界の塗りつぶしに使用するブラシを取得または設定します。
+		/// </summary>
+		public Brush InactiveBorderBrush
+		{
+			get { return (Brush)this.GetValue(InactiveBorderBrushProperty); }
+			set { this.SetValue(InactiveBorderBrushProperty, value); }
+		}
+		public static readonly DependencyProperty InactiveBorderBrushProperty =
+			DependencyProperty.Register("InactiveBorderBrush", typeof(Brush), typeof(MetroWindow), new UIPropertyMetadata(null));
+
+		#endregion
+
 		protected override void OnSourceInitialized(EventArgs e)
 		{
 			base.OnSourceInitialized(e);

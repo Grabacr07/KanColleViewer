@@ -25,7 +25,8 @@
 						FontSize="12"
 						Background="{DynamicResource ThemeBrushKey}"
 						Foreground="{DynamicResource ActiveForegroundBrushKey}"
-						BorderBrush="{DynamicResource AccentBrushKey}">
+						BorderBrush="{DynamicResource AccentBrushKey}"
+						InactiveBorderBrush="{DynamicResource BorderBrushKey}">
 
 	<chrome:MetroWindow.WindowChrome>
 		<WindowChrome CaptionHeight="{Binding ActualHeight, ElementName=CaptionBar, Mode=OneWay}"
