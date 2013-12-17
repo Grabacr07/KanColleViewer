@@ -30,7 +30,7 @@
 
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-		
+	
 		<StackPanel Margin="0,12">
 			<TextBlock>
 				<Run Text="スクリーンショット設定"
@@ -68,5 +68,25 @@
 		</StackPanel>
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+		<StackPanel>
+			<TextBlock>
+				<Run Text="プロキシサーバー" Style="{DynamicResource PickupTextElementStyleKey}"/>
+			</TextBlock>
+			<Grid Margin="10,6,10,0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" MinWidth="52"/>
+					<ColumnDefinition/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+				<TextBlock Grid.Row="0" Margin="0,6" Text="アドレス" VerticalAlignment="Center"/>
+				<controls:PromptTextBox Grid.Column="1" Grid.Row="0" Padding="2" TextWrapping="Wrap" Prompt="アドレス" Text="{Binding ProxyHost}"/>
+				<TextBlock Grid.Row="1" Margin="0,6" Text="ポート" VerticalAlignment="Center"/>
+				<controls:PromptTextBox Grid.Column="1" Grid.Row="1" Padding="2" TextWrapping="Wrap" Prompt="ポート番号" Text="{Binding ProxyPort}"/>
+			</Grid>
+		</StackPanel>
 	</StackPanel>
 </UserControl>

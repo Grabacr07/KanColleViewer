@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Model.Data.Xml;
+using Grabacr07.KanColleWrapper;
 using Livet;
 
 namespace Grabacr07.KanColleViewer.Model
@@ -164,6 +165,52 @@ namespace Grabacr07.KanColleViewer.Model
 				if (this._NotifyRepairingCompleted != value)
 				{
 					this._NotifyRepairingCompleted = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region ProxyHost 変更通知プロパティ
+
+		private string _ProxyHost;
+
+		/// <summary>
+		/// プロキシサーバーのホスト名を取得または設定します。
+		/// </summary>
+		public string ProxyHost
+		{
+			get { return this._ProxyHost; }
+			set
+			{
+				if (this._ProxyHost != value)
+				{
+					this._ProxyHost = value;
+					KanColleClient.Current.Proxy.UpstreamProxyHost = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region ProxyPort 変更通知プロパティ
+
+		private UInt16 _ProxyPort;
+
+		/// <summary>
+		/// プロキシサーバーのポート番号を取得または設定します。
+		/// </summary>
+		public UInt16 ProxyPort
+		{
+			get { return this._ProxyPort; }
+			set
+			{
+				if (this._ProxyPort != value)
+				{
+					this._ProxyPort = value;
+					KanColleClient.Current.Proxy.UpstreamProxyPort = value;
 					this.RaisePropertyChanged();
 				}
 			}
