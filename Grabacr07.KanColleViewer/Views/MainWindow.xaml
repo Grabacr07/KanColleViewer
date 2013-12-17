@@ -39,7 +39,7 @@
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
-			<RowDefinition Height="25" />
+			<RowDefinition Height="23" />
 		</Grid.RowDefinitions>
 
 		<!-- #region CaptionBar -->
@@ -134,7 +134,7 @@
 
 			<views:StatusBar />
 			<chrome:ResizeGrip Grid.Column="1"
-							   Margin="5,0,0,0" />
+							   Margin="5,3,2,2" />
 		</Grid>
 		<!-- endregion -->
 	</Grid>
