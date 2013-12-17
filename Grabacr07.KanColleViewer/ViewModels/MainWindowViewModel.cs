@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,13 +37,16 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					case Mode.NotStarted:
 						this.Content = NotStartedViewModel.Instance;
 						StatusService.Current.Set("艦これの起動を待っています");
+						ThemeService.Current.Accent = Accent.Purple;
 						break;
 					case Mode.Started:
 						this.Content = this.mainContent ?? (this.mainContent = new MainContentViewModel());
 						StatusService.Current.Set("準備完了");
+						ThemeService.Current.Accent = Accent.Blue;
 						break;
 					case Mode.InSortie:
-						// 今後
+						// 今後の実装にご期待ください
+						ThemeService.Current.Accent = Accent.Orange;
 						break;
 				}
 
@@ -129,12 +133,15 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		public void TakeScreenshot()
 		{
-			var message = new ScreenshotMessage("Screenshot/Save")
-			{
-				Path = Helper.CreateScreenshotFilePath(),
-			};
+			var path = Helper.CreateScreenshotFilePath();
+			var message = new ScreenshotMessage("Screenshot/Save") { Path = path, };
 
 			this.Messenger.Raise(message);
+
+			var notify = message.Response.IsSuccess
+				? "スクリーンショットを保存しました: " + Path.GetFileName(path)
+				: "スクリーンショットの保存に失敗しました: " + message.Response.Exception.Message;
+			StatusService.Current.Notify(notify);
 		}
 	}
 }

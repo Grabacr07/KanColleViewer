@@ -19,11 +19,13 @@
 			<ColumnDefinition Width="Auto" />
 		</Grid.ColumnDefinitions>
 
+		<Rectangle x:Name="Col0"
+				   Margin="5,0" />
 		<TextBlock Grid.Column="0"
 				   Text="{Binding Source={x:Static root:App.ViewModelRoot}, Path=StatusMessage}"
 				   TextTrimming="CharacterEllipsis"
 				   Foreground="{DynamicResource AccentForegroundBrushKey}"
-				   VerticalAlignment="Center"
+				   MaxWidth="{Binding ElementName=Col0, Path=ActualWidth}"
 				   Margin="5,0" />
 
 		<ContentControl Grid.Column="1"

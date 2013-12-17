@@ -8,47 +8,6 @@
 	<converters:WindowStateToVisibilityConverter x:Key="WindowStateToVisiblityConverter" />
 
 
-	<!-- region Accent colors -->
-
-	<Color x:Key="AccentColorKey">#FF68217A</Color>
-	<SolidColorBrush x:Key="AccentBrushKey"
-					 Color="{DynamicResource AccentColorKey}" />
-
-	<Color x:Key="AccentHighlightColorKey">#FF8C46A0</Color>
-	<SolidColorBrush x:Key="AccentHighlightBrushKey"
-					 Color="{DynamicResource AccentHighlightColorKey}" />
-
-	<Color x:Key="AccentActiveColorKey">#FF5A1464</Color>
-	<SolidColorBrush x:Key="AccentActiveBrushKey"
-					 Color="{DynamicResource AccentActiveColorKey}" />
-
-	<Color x:Key="AccentForegroundColorKey">White</Color>
-	<SolidColorBrush x:Key="AccentForegroundBrushKey"
-					 Color="{DynamicResource AccentForegroundColorKey}" />
-
-	<!-- region Accent 1 -->
-
-	<Color x:Key="Accent1ColorKey">#FF68217A</Color>
-	<SolidColorBrush x:Key="Accent1BrushKey"
-					 Color="{DynamicResource Accent1ColorKey}" />
-
-	<Color x:Key="Accent1HighlightColorKey">#FF8C46A0</Color>
-	<SolidColorBrush x:Key="Accent1HighlightBrushKey"
-					 Color="{DynamicResource Accent1HighlightColorKey}" />
-
-	<Color x:Key="Accent1ActiveColorKey">#FF5A1464</Color>
-	<SolidColorBrush x:Key="Accent1ActiveBrushKey"
-					 Color="{DynamicResource Accent1ActiveColorKey}" />
-
-	<Color x:Key="Accent1ForegroundColorKey">White</Color>
-	<SolidColorBrush x:Key="Accent1ForegroundBrushKey"
-					 Color="{DynamicResource Accent1ForegroundColorKey}" />
-
-	<!-- endregion -->
-
-	<!-- endregion -->
-
-
 	<Color x:Key="ThemeColorKey">#FF2D2D30</Color>
 	<SolidColorBrush x:Key="ThemeBrushKey"
 					 Color="#FF2D2D30" />

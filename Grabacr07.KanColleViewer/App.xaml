@@ -6,6 +6,7 @@
 	<Application.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="/KanColleViewer;component/Themes/Accent.Purple.xaml" />
 				<ResourceDictionary Source="/KanColleViewer;component/Themes/Mukyutter.Dark.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 
