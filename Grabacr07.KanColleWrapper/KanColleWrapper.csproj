@@ -86,12 +86,17 @@
     <Compile Include="Calculator.cs" />
     <Compile Include="Dockyard.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="Fleets.cs" />
     <Compile Include="MemberTable.cs" />
     <Compile Include="Models\CanReSortieReason.cs" />
     <Compile Include="Models\ExpeditionReturnedEventArgs.cs" />
     <Compile Include="Models\FleetReSortie.cs" />
     <Compile Include="Models\FleetState.cs" />
+    <Compile Include="Models\Quest.cs" />
+    <Compile Include="Models\QuestCategory.cs" />
+    <Compile Include="Models\QuestState.cs" />
+    <Compile Include="Models\QuestType.cs" />
+    <Compile Include="Models\Raw\kcsapi_quest.cs" />
+    <Compile Include="Models\Raw\kcsapi_questlist.cs" />
     <Compile Include="Models\Raw\kcsapi_ship3.cs" />
     <Compile Include="Models\Raw\kcsapi_slot_data.cs" />
     <Compile Include="Models\RepairingCompletedEventArgs.cs" />
@@ -149,6 +154,7 @@
     <Compile Include="Master.cs" />
     <Compile Include="MasterTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Quests.cs" />
     <Compile Include="Repairyard.cs" />
     <Compile Include="TimerNotificator.cs" />
     <Compile Include="Win32\INTERNET_PROXY_INFO.cs" />

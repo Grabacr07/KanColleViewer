@@ -121,8 +121,8 @@
 						<DataTemplate DataType="{x:Type vmDocks:DockyardViewModel}">
 							<contents:Dockyard />
 						</DataTemplate>
-						<DataTemplate DataType="{x:Type vmContents:MissionsViewModel}">
-							<contents:Missions />
+						<DataTemplate DataType="{x:Type vmContents:QuestsViewModel}">
+							<contents:Quests />
 						</DataTemplate>
 						<DataTemplate DataType="{x:Type vmContents:ExpeditionsViewModel}">
 							<contents:Expeditions />

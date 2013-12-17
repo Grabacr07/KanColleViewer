@@ -13,16 +13,13 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Grabacr07.KanColleViewer.Views.Contents
+namespace Grabacr07.KanColleViewer.Views.Controls
 {
-	/// <summary>
-	/// Missions.xaml の相互作用ロジック
-	/// </summary>
-	public partial class Missions : UserControl
+	public class Quest : Control
 	{
-		public Missions()
+		static Quest()
 		{
-			InitializeComponent();
+			DefaultStyleKeyProperty.OverrideMetadata(typeof(Quest), new FrameworkPropertyMetadata(typeof(Quest)));
 		}
 	}
 }

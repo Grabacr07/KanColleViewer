@@ -128,7 +128,8 @@
     <Compile Include="ViewModels\Contents\Fleets\PlaneViewModel.cs" />
     <Compile Include="ViewModels\Contents\Fleets\RepairingBarViewModel.cs" />
     <Compile Include="ViewModels\Contents\Fleets\TimerViewModel.cs" />
-    <Compile Include="ViewModels\Contents\MissionsViewModel.cs" />
+    <Compile Include="ViewModels\Contents\QuestsViewModel.cs" />
+    <Compile Include="ViewModels\Contents\QuestViewModel.cs" />
     <Compile Include="ViewModels\MainContentViewModel.cs" />
     <Compile Include="Model\INavigator.cs" />
     <Compile Include="ViewModels\Contents\MaterialsViewModel.cs" />
@@ -152,12 +153,13 @@
     <Compile Include="Views\Contents\Homeport.xaml.cs">
       <DependentUpon>Homeport.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Contents\Missions.xaml.cs">
-      <DependentUpon>Missions.xaml</DependentUpon>
+    <Compile Include="Views\Contents\Quests.xaml.cs">
+      <DependentUpon>Quests.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\BuildingDock.cs" />
     <Compile Include="Views\Controls\MuteButton.cs" />
     <Compile Include="Views\Controls\NavigationButton.cs" />
+    <Compile Include="Views\Controls\Quest.cs" />
     <Compile Include="Views\Controls\SlotItemIcon.cs" />
     <Compile Include="Views\Controls\TabHeader.cs" />
     <Compile Include="Views\Contents\Dockyard.xaml.cs">
@@ -211,7 +213,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Contents\Missions.xaml">
+    <Page Include="Views\Contents\Quests.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

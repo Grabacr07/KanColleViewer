@@ -55,7 +55,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				fleets,
 				new RepairyardViewModel(),
 				new DockyardViewModel(),
-				new MissionsViewModel(),
+				new QuestsViewModel(),
 				new ExpeditionsViewModel(fleets),
 			};
 			this.SystemTabItems = new List<TabItemViewModel>
