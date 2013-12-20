@@ -93,6 +93,7 @@
     <Compile Include="Models\FleetState.cs" />
     <Compile Include="Models\Quest.cs" />
     <Compile Include="Models\QuestCategory.cs" />
+    <Compile Include="Models\QuestProgress.cs" />
     <Compile Include="Models\QuestState.cs" />
     <Compile Include="Models\QuestType.cs" />
     <Compile Include="Models\Raw\kcsapi_quest.cs" />

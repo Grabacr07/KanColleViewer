@@ -156,6 +156,7 @@
     <Compile Include="Views\Contents\Quests.xaml.cs">
       <DependentUpon>Quests.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Contents\QuestViewSource.cs" />
     <Compile Include="Views\Controls\BuildingDock.cs" />
     <Compile Include="Views\Controls\MuteButton.cs" />
     <Compile Include="Views\Controls\NavigationButton.cs" />
@@ -296,9 +297,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ja-JP.resx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

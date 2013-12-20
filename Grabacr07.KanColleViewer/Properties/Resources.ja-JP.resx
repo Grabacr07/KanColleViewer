@@ -124,6 +124,6 @@
     <value>任務画面の全ページにアクセスしてください。</value>
   </data>
   <data name="Quest_Title_Untaken" xml:space="preserve">
-    <value>(Untaken quest)</value>
+    <value>(未取得の任務)</value>
   </data>
 </root>

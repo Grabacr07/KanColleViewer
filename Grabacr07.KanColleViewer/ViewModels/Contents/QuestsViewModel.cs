@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper;
+using Grabacr07.KanColleWrapper.Models;
 using Livet.EventListeners;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents
@@ -47,21 +48,47 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 		#endregion
 
+		#region IsUntaken 変更通知プロパティ
+
+		private bool _IsUntaken;
+
+		public bool IsUntaken
+		{
+			get { return this._IsUntaken; }
+			set
+			{
+				if (this._IsUntaken != value)
+				{
+					this._IsUntaken = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+
 		public QuestsViewModel()
 		{
 			this.Name = "任務";
 
+			this.IsUntaken = KanColleClient.Current.Homeport.Quests.IsUntaken;
+			this.Quests = KanColleClient.Current.Homeport.Quests.All.Select(x => new QuestViewModel(x)).ToArray();
+			this.Current = KanColleClient.Current.Homeport.Quests.Current.Select(x => new QuestViewModel(x)).ToArray();
+
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport.Quests)
 			{
 				{
+					() => KanColleClient.Current.Homeport.Quests.IsUntaken,
+					(sender, args) => this.IsUntaken = KanColleClient.Current.Homeport.Quests.IsUntaken
+				},
+				{
 					() => KanColleClient.Current.Homeport.Quests.All,
-					(sender, args) => this.Quests = KanColleClient.Current.Homeport.Quests.All.Select(
-						x => new QuestViewModel(x)).ToArray()
+					(sender, args) => this.Quests = KanColleClient.Current.Homeport.Quests.All.Select(x => new QuestViewModel(x)).ToArray()
 				},
 				{
 					() => KanColleClient.Current.Homeport.Quests.Current,
-					(sender, args) => this.Current = KanColleClient.Current.Homeport.Quests.Current.Select(
-						x => x == null ? new UntakenQuestViewModel() : new QuestViewModel(x)).ToArray()
+					(sender, args) => this.Current = KanColleClient.Current.Homeport.Quests.Current.Select(x => new QuestViewModel(x)).ToArray()
 				},
 			});
 		}

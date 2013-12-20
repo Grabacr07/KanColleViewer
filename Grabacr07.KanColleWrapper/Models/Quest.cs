@@ -39,6 +39,14 @@ namespace Grabacr07.KanColleWrapper.Models
 		}
 
 		/// <summary>
+		/// 任務の進捗状況を取得します。
+		/// </summary>
+		public QuestProgress Progress
+		{
+			get { return (QuestProgress)this.RawData.api_progress_flag; }
+		}
+
+		/// <summary>
 		/// 任務名を取得します。
 		/// </summary>
 		public string Title
@@ -56,5 +64,11 @@ namespace Grabacr07.KanColleWrapper.Models
 
 
 		public Quest(kcsapi_quest rawData) : base(rawData) { }
+
+
+		public override string ToString()
+		{
+			return string.Format("ID = {0}, Category = {1}, Title = \"{2}\", Type = {3}, State = {4}", this.Id, this.Category, this.Title, this.Type, this.State);
+		}
 	}
 }

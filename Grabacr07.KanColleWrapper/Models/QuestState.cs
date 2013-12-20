@@ -11,16 +11,16 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 任務を遂行していません。
 		/// </summary>
-		None,
+		None = 1,
 
 		/// <summary>
 		/// 任務を遂行中です。
 		/// </summary>
-		TakeOn,
+		TakeOn = 2,
 
 		/// <summary>
 		/// 任務が完了しました。
 		/// </summary>
-		Accomplished,
+		Accomplished = 3,
 	}
 }

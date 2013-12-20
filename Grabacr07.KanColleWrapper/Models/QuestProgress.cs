@@ -6,24 +6,21 @@ using System.Threading.Tasks;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
-	/// <summary>
-	/// 任務の種類を示す識別子を定義します。
-	/// </summary>
-	public enum QuestType
+	public enum QuestProgress
 	{
 		/// <summary>
-		/// 1 回のみの任務。
+		/// 進捗ダメです。
 		/// </summary>
-		OneTime = 1,
+		None = 0,
 
 		/// <summary>
-		/// デイリー任務。
+		/// 50 % 以上達成。
 		/// </summary>
-		Daily = 2,
+		Progress50 = 1,
 
 		/// <summary>
-		/// ウィークリー任務。
+		/// 80 % 以上達成。
 		/// </summary>
-		Weekly = 3,
+		Progress80 = 2,
 	}
 }
