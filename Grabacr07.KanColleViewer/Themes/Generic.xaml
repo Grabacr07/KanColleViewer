@@ -933,6 +933,8 @@
 
 
 	<Style TargetType="{x:Type controls:Quest}">
+		<Setter Property="Background"
+				Value="Transparent" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type controls:Quest}">
@@ -990,7 +992,7 @@
 								 Value="Progress50">
 							<Setter TargetName="State"
 									Property="Text"
-									Value=" 50 % " />
+									Value="{Binding Source={x:Static properties:Resources.Quest_Progress_50}, Mode=OneWay}" />
 							<Setter TargetName="State"
 									Property="Background"
 									Value="#FF208040" />
@@ -999,7 +1001,7 @@
 								 Value="Progress80">
 							<Setter TargetName="State"
 									Property="Text"
-									Value=" 80 % " />
+									Value="{Binding Source={x:Static properties:Resources.Quest_Progress_80}, Mode=OneWay}" />
 							<Setter TargetName="State"
 									Property="Background"
 									Value="#FF206040" />
@@ -1008,7 +1010,7 @@
 								 Value="Accomplished">
 							<Setter TargetName="State"
 									Property="Text"
-									Value=" 完了 " />
+									Value="{Binding Source={x:Static properties:Resources.Quest_State_Accomplished}, Mode=OneWay}" />
 							<Setter TargetName="State"
 									Property="Background"
 									Value="#FF326480" />

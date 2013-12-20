@@ -6,25 +6,32 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:vContents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
 			 xmlns:vmContents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 mc:Ignorable="d"
 			 d:DesignWidth="700"
 			 d:DesignHeight="300"
-			 d:DataContext="{d:DesignInstance vmContents:QuestsViewModel}">
-	<Grid Margin="0,0,0,10">
+			 d:DataContext="{d:DesignInstance vmContents:QuestsViewModel}"
+			 Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}, Path=ActualWidth}">
+	<Grid>
 		<Grid Visibility="{Binding IsUntaken, Converter={StaticResource UniversalBooleanToVisibilityConverter}, ConverterParameter=Collapsed:Visible}">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="3*" />
+				<ColumnDefinition Width="5*" />
 				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="2*" />
+				<ColumnDefinition Width="4*" />
 			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
 
 			<Grid>
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto" />
 					<RowDefinition Height="*" />
+					<RowDefinition Height="Auto" />
 				</Grid.RowDefinitions>
 
 				<TextBlock Text="{Binding Source={StaticResource LocalizeResourcesKey}, Path=Quests_CurrentQuestList}"
@@ -49,11 +56,14 @@
 				</ItemsControl>
 			</Grid>
 
-			<Rectangle Grid.Column="1"
+			<Rectangle Grid.Row="0"
+					   Grid.Column="1"
 					   Width="1"
+					   Margin="0,3"
 					   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-			<TabControl Grid.Column="2">
+			<TabControl Grid.Row="0"
+						Grid.Column="2">
 				<TabControl.Template>
 					<ControlTemplate TargetType="{x:Type TabControl}">
 						<Grid>
@@ -77,7 +87,8 @@
 						<Setter Property="Template">
 							<Setter.Value>
 								<ControlTemplate TargetType="{x:Type TabItem}">
-									<Border x:Name="Border">
+									<Border x:Name="Border"
+											Background="Transparent">
 										<ContentPresenter x:Name="ContentSite"
 														  ContentSource="Header" />
 									</Border>
@@ -105,14 +116,20 @@
 						<Setter Property="ItemTemplate">
 							<Setter.Value>
 								<DataTemplate DataType="{x:Type vmContents:QuestViewModel}">
-									<controls:Quest IsUntaken="{Binding IsUntaken}"
-													Title="{Binding Title}"
-													Detail="{Binding Detail}"
-													Category="{Binding Category}"
-													Progress="{Binding Progress}"
-													State="{Binding State}"
-													IsDetailView="False"
-													Margin="0,0,0,10" />
+									<ToggleButton>
+										<ToggleButton.Template>
+											<ControlTemplate TargetType="{x:Type ToggleButton}">
+												<controls:Quest IsUntaken="{Binding IsUntaken}"
+																Title="{Binding Title}"
+																Detail="{Binding Detail}"
+																Category="{Binding Category}"
+																Progress="{Binding Progress}"
+																State="{Binding State}"
+																IsDetailView="{TemplateBinding IsChecked}"
+																Margin="0,0,0,10" />
+											</ControlTemplate>
+										</ToggleButton.Template>
+									</ToggleButton>
 								</DataTemplate>
 							</Setter.Value>
 						</Setter>
@@ -128,7 +145,7 @@
 
 				<TabItem>
 					<TabItem.Header>
-						<TextBlock Text="デイリー任務"
+						<TextBlock Text="{Binding Source={x:Static properties:Resources.Quests_Daily}, Mode=OneWay}"
 								   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
 								   Margin="10,0,10,10"
 								   FontSize="14" />
@@ -138,7 +155,7 @@
 
 				<TabItem>
 					<TabItem.Header>
-						<TextBlock Text="ウィークリー任務"
+						<TextBlock Text="{Binding Source={x:Static properties:Resources.Quests_Weekly}, Mode=OneWay}"
 								   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
 								   Margin="10,0,10,10"
 								   FontSize="14" />
@@ -146,10 +163,19 @@
 					<ItemsControl ItemsSource="{Binding Source={StaticResource WeeklyQuestSourceKey}}" />
 				</TabItem>
 			</TabControl>
+
+			<TextBlock Grid.Row="1"
+					   Grid.Column="0"
+					   Grid.ColumnSpan="3"
+					   Text="{Binding Source={x:Static properties:Resources.Quests_Notice}, Mode=OneWay}"
+					   FontSize="10.5"
+					   TextTrimming="None"
+					   TextWrapping="Wrap"
+					   Margin="10" />
 		</Grid>
 
 		<TextBlock Grid.ColumnSpan="3"
-				   Text="ゲーム内で [任務 (クエスト)] 画面を開いて、任務一覧を取得してください。"
+				   Text="{Binding Source={x:Static properties:Resources.Quests_Untaken}, Mode=OneWay}"
 				   TextWrapping="Wrap"
 				   FontSize="16"
 				   Visibility="{Binding IsUntaken, Converter={StaticResource BooleanToVisibilityConverter}}"

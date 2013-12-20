@@ -26,7 +26,9 @@
 						Background="{DynamicResource ThemeBrushKey}"
 						Foreground="{DynamicResource ActiveForegroundBrushKey}"
 						BorderBrush="{DynamicResource AccentBrushKey}"
-						InactiveBorderBrush="{DynamicResource BorderBrushKey}">
+						InactiveBorderBrush="{DynamicResource BorderBrushKey}"
+						SnapsToDevicePixels="True"
+						TextOptions.TextFormattingMode="Display">
 
 	<chrome:MetroWindow.WindowChrome>
 		<WindowChrome CaptionHeight="{Binding ActualHeight, ElementName=CaptionBar, Mode=OneWay}"

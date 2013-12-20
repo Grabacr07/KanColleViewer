@@ -70,6 +70,33 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///    50 %  に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Quest_Progress_50 {
+            get {
+                return ResourceManager.GetString("Quest_Progress_50", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    80 %  に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Quest_Progress_80 {
+            get {
+                return ResourceManager.GetString("Quest_Progress_80", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    完了  に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Quest_State_Accomplished {
+            get {
+                return ResourceManager.GetString("Quest_State_Accomplished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   (Untaken quest) に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Quest_Title_Untaken {
@@ -84,6 +111,42 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Quests_CurrentQuestList {
             get {
                 return ResourceManager.GetString("Quests_CurrentQuestList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Daily quests に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Quests_Daily {
+            get {
+                return ResourceManager.GetString("Quests_Daily", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ※進捗状況 (50 %, 80 %) はゲーム内の表示と同じです。敵艦隊の撃破数や遠征の成功回数のカウント等は行っていません。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Quests_Notice {
+            get {
+                return ResourceManager.GetString("Quests_Notice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ゲーム内で [任務 (クエスト)] 画面を開いて、任務一覧を取得してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Quests_Untaken {
+            get {
+                return ResourceManager.GetString("Quests_Untaken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Weekly quests に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Quests_Weekly {
+            get {
+                return ResourceManager.GetString("Quests_Weekly", resourceCulture);
             }
         }
     }
