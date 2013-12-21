@@ -37,6 +37,13 @@
 					  CornerRadius="0" />
 	</chrome:MetroWindow.WindowChrome>
 
+	<i:Interaction.Triggers>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+										 MessageKey="Window/Location">
+			<behaviors:SetWindowLocationAction />
+		</livet:InteractionMessageTrigger>
+	</i:Interaction.Triggers>
+
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -106,6 +113,10 @@
 				<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
 												 MessageKey="Screenshot/Save">
 					<behaviors:ScreenshotAction />
+				</livet:InteractionMessageTrigger>
+				<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+												 MessageKey="WebBrowser/Zoom">
+					<behaviors:ZoomAction />
 				</livet:InteractionMessageTrigger>
 			</i:Interaction.Triggers>
 		</WebBrowser>

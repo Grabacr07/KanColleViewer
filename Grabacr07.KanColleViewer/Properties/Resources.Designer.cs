@@ -151,6 +151,33 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   ブラウザー操作 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Settings_BrowserControl {
+            get {
+                return ResourceManager.GetString("Settings_BrowserControl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ズーム倍率を 100 % に戻す に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Settings_BrowserControl_ClearZoomFactorButton {
+            get {
+                return ResourceManager.GetString("Settings_BrowserControl_ClearZoomFactorButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   (表示) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Settings_BrowserControl_Display {
+            get {
+                return ResourceManager.GetString("Settings_BrowserControl_Display", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   (ゲームのページから移動します。ご注意ください) に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Settings_BrowserControl_Notice {
@@ -183,6 +210,51 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Settings_Screenshot_OpenFolderButton {
             get {
                 return ResourceManager.GetString("Settings_Screenshot_OpenFolderButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ウィンドウ操作 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Settings_WindowControl {
+            get {
+                return ResourceManager.GetString("Settings_WindowControl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ウィンドウをモニターの左端に寄せる に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Settings_WindowControl_LocationLeftButton {
+            get {
+                return ResourceManager.GetString("Settings_WindowControl_LocationLeftButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   8 インチタブレット (800 x 1280) 用 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Settings_WindowControl_LocationLeftButton_Sub {
+            get {
+                return ResourceManager.GetString("Settings_WindowControl_LocationLeftButton_Sub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ズーム {0} % はサポートされていません。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ZoomAction_OutOfRange {
+            get {
+                return ResourceManager.GetString("ZoomAction_OutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ズームに失敗しました: {0} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ZoomAction_ZoomFailed {
+            get {
+                return ResourceManager.GetString("ZoomAction_ZoomFailed", resourceCulture);
             }
         }
     }

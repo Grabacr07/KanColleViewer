@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Model;
 using Grabacr07.KanColleViewer.Properties;
+using Grabacr07.KanColleViewer.ViewModels.Messages;
 using Livet;
 using Livet.EventListeners;
 using Livet.Messaging.IO;
@@ -87,6 +88,16 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					Debug.WriteLine(ex);
 				}
 			}
+		}
+
+		public void ClearZoomFactor()
+		{
+			App.ViewModelRoot.Messenger.Raise(new ZoomMessage { MessageKey = "WebBrowser/Zoom", ZoomFactor = 100 });
+		}
+
+		public void SetLocationLeft()
+		{
+			App.ViewModelRoot.Messenger.Raise(new SetWindowLocationMessage { MessageKey = "Window/Location", Left = 0.0 });
 		}
 	}
 }

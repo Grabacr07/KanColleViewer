@@ -159,4 +159,28 @@
   <data name="Settings_Screenshot_OpenFolderButton" xml:space="preserve">
     <value>フォルダーを開く</value>
   </data>
+  <data name="ZoomAction_OutOfRange" xml:space="preserve">
+    <value>ズーム {0} % はサポートされていません。</value>
+  </data>
+  <data name="ZoomAction_ZoomFailed" xml:space="preserve">
+    <value>ズームに失敗しました: {0}</value>
+  </data>
+  <data name="Settings_BrowserControl" xml:space="preserve">
+    <value>ブラウザー操作</value>
+  </data>
+  <data name="Settings_BrowserControl_ClearZoomFactorButton" xml:space="preserve">
+    <value>ズーム倍率を 100 % に戻す</value>
+  </data>
+  <data name="Settings_BrowserControl_Display" xml:space="preserve">
+    <value>(表示)</value>
+  </data>
+  <data name="Settings_WindowControl" xml:space="preserve">
+    <value>ウィンドウ操作</value>
+  </data>
+  <data name="Settings_WindowControl_LocationLeftButton" xml:space="preserve">
+    <value>ウィンドウをモニターの左端に寄せる</value>
+  </data>
+  <data name="Settings_WindowControl_LocationLeftButton_Sub" xml:space="preserve">
+    <value>8 インチタブレット (800 x 1280) 用</value>
+  </data>
 </root>
