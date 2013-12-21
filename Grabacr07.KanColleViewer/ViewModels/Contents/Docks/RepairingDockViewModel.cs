@@ -31,7 +31,14 @@ namespace Grabacr07.KanColleViewer.ViewModels.Docks
 
 		public string Remaining
 		{
-			get { return source.Remaining.HasValue ? source.Remaining.Value.ToString(@"hh\:mm\:ss") : "--:--:--"; }
+			get
+			{
+				return this.source.Remaining.HasValue
+					? string.Format("{0:D2}:{1}",
+						(int)this.source.Remaining.Value.TotalHours,
+						this.source.Remaining.Value.ToString(@"mm\:ss"))
+					: "--:--:--";
+			}
 		}
 
 		public RepairingDockState State

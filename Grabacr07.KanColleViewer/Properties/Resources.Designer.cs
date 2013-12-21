@@ -149,5 +149,41 @@ namespace Grabacr07.KanColleViewer.Properties {
                 return ResourceManager.GetString("Quests_Weekly", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   (ゲームのページから移動します。ご注意ください) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Settings_BrowserControl_Notice {
+            get {
+                return ResourceManager.GetString("Settings_BrowserControl_Notice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   選択 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Settings_Screenshot_FolderSelectionDialog_OpenButton {
+            get {
+                return ResourceManager.GetString("Settings_Screenshot_FolderSelectionDialog_OpenButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   スクリーンショットの保存先を指定 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Settings_Screenshot_FolderSelectionDialog_Title {
+            get {
+                return ResourceManager.GetString("Settings_Screenshot_FolderSelectionDialog_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   フォルダーを開く に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Settings_Screenshot_OpenFolderButton {
+            get {
+                return ResourceManager.GetString("Settings_Screenshot_OpenFolderButton", resourceCulture);
+            }
+        }
     }
 }

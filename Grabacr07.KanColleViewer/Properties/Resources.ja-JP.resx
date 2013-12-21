@@ -147,4 +147,16 @@
   <data name="Quests_Notice" xml:space="preserve">
     <value>※進捗状況 (50 %, 80 %) はゲーム内の表示と同じです。敵艦隊の撃破数や遠征の成功回数のカウント等は行っていません。</value>
   </data>
+  <data name="Settings_BrowserControl_Notice" xml:space="preserve">
+    <value>(ゲームのページから移動します。ご注意ください)</value>
+  </data>
+  <data name="Settings_Screenshot_FolderSelectionDialog_OpenButton" xml:space="preserve">
+    <value>選択</value>
+  </data>
+  <data name="Settings_Screenshot_FolderSelectionDialog_Title" xml:space="preserve">
+    <value>スクリーンショットの保存先を指定</value>
+  </data>
+  <data name="Settings_Screenshot_OpenFolderButton" xml:space="preserve">
+    <value>フォルダーを開く</value>
+  </data>
 </root>

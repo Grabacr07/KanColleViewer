@@ -9,6 +9,7 @@
 			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:controls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 mc:Ignorable="d"
 			 d:DesignWidth="700"
 			 d:DesignHeight="300">
@@ -16,21 +17,29 @@
 		<viewModels:SettingsViewModel />
 	</UserControl.DataContext>
 
+	<i:Interaction.Triggers>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+										 MessageKey="OpenFolderDialog/Screensgot">
+			<livet:FolderBrowserDialogInteractionMessageAction />
+		</livet:InteractionMessageTrigger>							 
+	</i:Interaction.Triggers>
+	
 	<StackPanel Margin="10,0">
 		<StackPanel>
 			<TextBlock>
 				<Run Text="ブラウザー操作"
 					 Style="{DynamicResource PickupTextElementStyleKey}" />
+				<Run Text="{Binding Source={x:Static properties:Resources.Settings_BrowserControl_Notice}, Mode=OneWay}" />
 			</TextBlock>
 
 			<Border ClipToBounds="True">
-				<views:BrowserNavigator Margin="10,6,10,-2" />
+				<views:BrowserNavigator Margin="10,6,10,6" />
 			</Border>
 		</StackPanel>
 
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-		
+
 		<StackPanel Margin="0,12">
 			<TextBlock>
 				<Run Text="スクリーンショット設定"
@@ -45,25 +54,27 @@
 					<ColumnDefinition Width="Auto" />
 					<ColumnDefinition Width="*" />
 					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="Auto" />
 				</Grid.ColumnDefinitions>
 				<TextBlock Text="保存先フォルダー  "
 						   VerticalAlignment="Center"
 						   Margin="0,6" />
 				<controls:PromptTextBox Grid.Row="0"
 										Grid.Column="1"
-										Text="{Binding ScreenshotFolder}"
+										Text="{Binding ScreenshotFolder, UpdateSourceTrigger=PropertyChanged}"
 										Prompt="保存先フォルダー パス"
 										Padding="2" />
-				<!--<TextBlock Grid.Row="1"
-					   Text="ファイル名: "
-					   VerticalAlignment="Center"
-					   Margin="0,6" />
-			<controls:PromptTextBox Grid.Row="1"
-									Grid.Column="1"
-									Text="{Binding ScreenshotFilename}"
-									Prompt="ファイル名"
-									Margin="5,3"
-									Padding="2" />-->
+				<controls:CallMethodButton Grid.Row="0"
+										   Grid.Column="2"
+										   Content="{Binding Source={x:Static properties:Resources.Settings_Screenshot_FolderSelectionDialog_OpenButton}}"
+										   MethodName="OpenScreenshotFolderSelectionDialog"
+										   Margin="6,0" />
+				<controls:CallMethodButton Grid.Row="0"
+										   Grid.Column="3"
+										   Content="{Binding Source={x:Static properties:Resources.Settings_Screenshot_OpenFolderButton}}"
+										   IsEnabled="{Binding CanOpenScreenshotFolder}"
+										   MethodName="OpenScreenshotFolder"
+										   Margin="0" />
 			</Grid>
 		</StackPanel>
 		<Rectangle Height="1"
