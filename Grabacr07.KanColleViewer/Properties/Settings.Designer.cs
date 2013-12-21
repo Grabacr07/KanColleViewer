@@ -50,5 +50,14 @@ namespace Grabacr07.KanColleViewer.Properties {
                 return ((string)(this["OverrideStyleSheet"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("333")]
+        public double UIContentHight {
+            get {
+                return ((double)(this["UIContentHight"]));
+            }
+        }
     }
 }

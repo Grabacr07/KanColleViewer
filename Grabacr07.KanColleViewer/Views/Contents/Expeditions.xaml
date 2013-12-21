@@ -17,7 +17,8 @@
              d:DesignHeight="300"
              d:DataContext="{d:DesignInstance vmContents:ExpeditionsViewModel}">
 
-	<Grid DataContext="{Binding Fleets}">
+	<Grid DataContext="{Binding Fleets}"
+		  VerticalAlignment="Top">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="Auto" />

@@ -21,7 +21,6 @@
 			 xmlns:vmFleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 			 mc:Ignorable="d"
 			 d:DesignWidth="800"
-			 d:DesignHeight="350"
 			 d:DataContext="{d:DesignInstance vm:MainContentViewModel}"
 			 Background="{DynamicResource ThemeBrushKey}">
 
@@ -107,10 +106,10 @@
 			</ScrollViewer>
 
 			<ScrollViewer Grid.Column="1"
-						  VerticalScrollBarVisibility="Auto">
+						  VerticalScrollBarVisibility="Auto"
+						  Height="{Binding Source={x:Static properties:Settings.Default}, Path=UIContentHight}">
 				<ContentControl DataContext="{Binding SelectedItem}"
-								Content="{Binding}"
-								VerticalAlignment="Top">
+								Content="{Binding}">
 					<ContentControl.Resources>
 						<DataTemplate DataType="{x:Type vmFleets:FleetsViewModel}">
 							<views:Fleets />

@@ -22,5 +22,8 @@
     z-index:1
 }</Value>
     </Setting>
+    <Setting Name="UIContentHight" Type="System.Double" Scope="Application">
+      <Value Profile="(Default)">333</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
