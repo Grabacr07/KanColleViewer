@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Quests_CurrentQuestList" xml:space="preserve">
-    <value>Current Active Quests</value>
+    <value>Active Quests</value>
   </data>
   <data name="Quest_Detail_Untaken" xml:space="preserve">
     <value>Please visit all of the quest pages.</value>
@@ -142,10 +142,10 @@
     <value> 80% </value>
   </data>
   <data name="Quest_State_Accomplished" xml:space="preserve">
-    <value>Completed</value>
+    <value> Complete </value>
   </data>
   <data name="Quests_Notice" xml:space="preserve">
-    <value>※The progress indicators (50%, 80%) are the same as the in-game indicators. There is no counter for enemy fleet kills, successful expeditions, etc.</value>
+    <value>※The indicators (50%, 80%) mirror in-game indicators. Enemy fleet kills, successful expeditions, etc are not actively counted.</value>
   </data>
   <data name="Settings_BrowserControl_Notice" xml:space="preserve">
     <value>(This will leave the game, so use with caution)</value>

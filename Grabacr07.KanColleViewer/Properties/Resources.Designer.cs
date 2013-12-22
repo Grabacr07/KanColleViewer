@@ -70,7 +70,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  50 % .
+        ///   Looks up a localized string similar to  50% .
         /// </summary>
         public static string Quest_Progress_50 {
             get {
@@ -79,7 +79,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  80 % .
+        ///   Looks up a localized string similar to  80% .
         /// </summary>
         public static string Quest_Progress_80 {
             get {
@@ -88,7 +88,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Completed.
+        ///   Looks up a localized string similar to  Complete .
         /// </summary>
         public static string Quest_State_Accomplished {
             get {
@@ -106,7 +106,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current Active Quests.
+        ///   Looks up a localized string similar to Active Quests.
         /// </summary>
         public static string Quests_CurrentQuestList {
             get {
@@ -124,7 +124,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ※The progress indicators (50 %, 80 %) are the same as the in-game indicators. There is no counter for enemy fleet kills, successful expeditions, and so on..
+        ///   Looks up a localized string similar to ※The indicators (50%, 80%) mirror in-game indicators. Enemy fleet kills, successful expeditions, etc are not actively counted..
         /// </summary>
         public static string Quests_Notice {
             get {
@@ -160,7 +160,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ズーム倍率を 100 % に戻す.
+        ///   Looks up a localized string similar to Reset zoom magnification to 100%.
         /// </summary>
         public static string Settings_BrowserControl_ClearZoomFactorButton {
             get {
@@ -223,7 +223,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ウィンドウをモニターの左端に寄せる.
+        ///   Looks up a localized string similar to Dock the Window on the left side of the screen..
         /// </summary>
         public static string Settings_WindowControl_LocationLeftButton {
             get {
@@ -232,7 +232,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 8 インチタブレット (800 x 1280) 用.
+        ///   Looks up a localized string similar to For use with 8 inch tablets (800x1280).
         /// </summary>
         public static string Settings_WindowControl_LocationLeftButton_Sub {
             get {
@@ -241,7 +241,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ズーム {0} % はサポートされていません。.
+        ///   Looks up a localized string similar to {0}% zoom is not supported..
         /// </summary>
         public static string ZoomAction_OutOfRange {
             get {
@@ -250,7 +250,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ズームに失敗しました: {0}.
+        ///   Looks up a localized string similar to Zoom Failed: {0}.
         /// </summary>
         public static string ZoomAction_ZoomFailed {
             get {
