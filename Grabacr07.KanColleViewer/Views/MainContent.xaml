@@ -107,9 +107,10 @@
 
 			<ScrollViewer Grid.Column="1"
 						  VerticalScrollBarVisibility="Auto"
-						  Height="{Binding Source={x:Static properties:Settings.Default}, Path=UIContentHight}">
+						  VerticalAlignment="Top">
 				<ContentControl DataContext="{Binding SelectedItem}"
-								Content="{Binding}">
+								Content="{Binding}"
+								Height="{Binding Source={x:Static properties:Settings.Default}, Path=UIContentHight}">
 					<ContentControl.Resources>
 						<DataTemplate DataType="{x:Type vmFleets:FleetsViewModel}">
 							<views:Fleets />

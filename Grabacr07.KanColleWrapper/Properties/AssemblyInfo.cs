@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("Grabacr07.KanColleWrapper")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("KanColleWrapper")]
+[assembly: AssemblyDescription("KanColleWrapper")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Grabacr07.KanColleWrapper")]
-[assembly: AssemblyCopyright("Copyright ©  2013")]
+[assembly: AssemblyCompany("grabacr.net")]
+[assembly: AssemblyProduct("KanColleWrapper")]
+[assembly: AssemblyCopyright("Copyright © 2013 Grabacr07")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

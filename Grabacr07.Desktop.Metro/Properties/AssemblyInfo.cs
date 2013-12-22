@@ -8,11 +8,11 @@ using System.Windows;
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
 [assembly: AssemblyTitle("Grabacr07.Desktop.Metro")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Grabacr07.Desktop.Metro")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("grabacr.net")]
 [assembly: AssemblyProduct("Grabacr07.Desktop.Metro")]
-[assembly: AssemblyCopyright("Copyright ©  2013")]
+[assembly: AssemblyCopyright("Copyright © 2013 Grabacr07")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
