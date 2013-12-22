@@ -127,7 +127,7 @@
     <value>(Unknown quest)</value>
   </data>
   <data name="Quests_Untaken" xml:space="preserve">
-    <value>Please open the Quests screen in-game to populate the Quest list.</value>
+    <value>Please open the in-game Quests menu to populate the Quest list.</value>
   </data>
   <data name="Quests_Daily" xml:space="preserve">
     <value>Daily Quests</value>

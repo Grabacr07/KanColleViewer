@@ -133,7 +133,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please open the Quests screen in-game to populate the Quest list..
+        ///   Looks up a localized string similar to Please open the in-game Quests menu to populate the Quest list..
         /// </summary>
         public static string Quests_Untaken {
             get {
