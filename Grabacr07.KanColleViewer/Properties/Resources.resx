@@ -118,69 +118,69 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Quests_CurrentQuestList" xml:space="preserve">
-    <value>現在遂行中の任務</value>
+    <value>Current Active Quests</value>
   </data>
   <data name="Quest_Detail_Untaken" xml:space="preserve">
-    <value>任務画面の全ページにアクセスしてください。</value>
+    <value>Please visit all of the quest pages.</value>
   </data>
   <data name="Quest_Title_Untaken" xml:space="preserve">
-    <value>(Untaken quest)</value>
+    <value>(Unknown quest)</value>
   </data>
   <data name="Quests_Untaken" xml:space="preserve">
-    <value>ゲーム内で [任務 (クエスト)] 画面を開いて、任務一覧を取得してください。</value>
+    <value>Please open the Quests screen in-game to populate the Quest list.</value>
   </data>
   <data name="Quests_Daily" xml:space="preserve">
-    <value>Daily quests</value>
+    <value>Daily Quests</value>
   </data>
   <data name="Quests_Weekly" xml:space="preserve">
-    <value>Weekly quests</value>
+    <value>Weekly Quests</value>
   </data>
   <data name="Quest_Progress_50" xml:space="preserve">
-    <value> 50 % </value>
+    <value> 50% </value>
   </data>
   <data name="Quest_Progress_80" xml:space="preserve">
-    <value> 80 % </value>
+    <value> 80% </value>
   </data>
   <data name="Quest_State_Accomplished" xml:space="preserve">
-    <value> 完了 </value>
+    <value>Completed</value>
   </data>
   <data name="Quests_Notice" xml:space="preserve">
-    <value>※進捗状況 (50 %, 80 %) はゲーム内の表示と同じです。敵艦隊の撃破数や遠征の成功回数のカウント等は行っていません。</value>
+    <value>※The progress indicators (50%, 80%) are the same as the in-game indicators. There is no counter for enemy fleet kills, successful expeditions, etc.</value>
   </data>
   <data name="Settings_BrowserControl_Notice" xml:space="preserve">
-    <value>(ゲームのページから移動します。ご注意ください)</value>
+    <value>(This will leave the game, so use with caution)</value>
   </data>
   <data name="Settings_Screenshot_FolderSelectionDialog_OpenButton" xml:space="preserve">
-    <value>選択</value>
+    <value>Browse</value>
   </data>
   <data name="Settings_Screenshot_FolderSelectionDialog_Title" xml:space="preserve">
-    <value>スクリーンショットの保存先を指定</value>
+    <value>Select a location to save screenshots</value>
   </data>
   <data name="Settings_Screenshot_OpenFolderButton" xml:space="preserve">
-    <value>フォルダーを開く</value>
+    <value>Open Folder</value>
   </data>
   <data name="ZoomAction_OutOfRange" xml:space="preserve">
-    <value>ズーム {0} % はサポートされていません。</value>
+    <value>{0}% zoom is not supported.</value>
   </data>
   <data name="ZoomAction_ZoomFailed" xml:space="preserve">
-    <value>ズームに失敗しました: {0}</value>
+    <value>Zoom Failed: {0}</value>
   </data>
   <data name="Settings_BrowserControl" xml:space="preserve">
-    <value>ブラウザー操作</value>
+    <value>Browser Controls</value>
   </data>
   <data name="Settings_BrowserControl_ClearZoomFactorButton" xml:space="preserve">
-    <value>ズーム倍率を 100 % に戻す</value>
+    <value>Reset zoom magnification to 100%</value>
   </data>
   <data name="Settings_BrowserControl_Display" xml:space="preserve">
-    <value>(表示)</value>
+    <value>(Display)</value>
   </data>
   <data name="Settings_WindowControl" xml:space="preserve">
-    <value>ウィンドウ操作</value>
+    <value>Window Controls</value>
   </data>
   <data name="Settings_WindowControl_LocationLeftButton" xml:space="preserve">
-    <value>ウィンドウをモニターの左端に寄せる</value>
+    <value>Dock the Window on the left side of the screen.</value>
   </data>
   <data name="Settings_WindowControl_LocationLeftButton_Sub" xml:space="preserve">
-    <value>8 インチタブレット (800 x 1280) 用</value>
+    <value>For use with 8 inch tablets (800x1280)</value>
   </data>
 </root>
