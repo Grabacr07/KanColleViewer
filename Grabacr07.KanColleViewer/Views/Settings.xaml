@@ -12,7 +12,7 @@
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 mc:Ignorable="d"
 			 d:DesignWidth="700"
-			 d:DesignHeight="300">
+			 d:DesignHeight="400">
 	<UserControl.DataContext>
 		<viewModels:SettingsViewModel />
 	</UserControl.DataContext>
@@ -122,5 +122,58 @@
 		</StackPanel>
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+		<StackPanel Margin="0,12">
+			<TextBlock>
+				<Run Text="{Binding Settings_Proxy, Mode=OneWay, Source={StaticResource LocalizeResourcesKey}}" Style="{DynamicResource PickupTextElementStyleKey}"/>
+			</TextBlock>
+			<Grid Margin="10,6,10,0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="200"/>
+					<ColumnDefinition Width="10"/>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="70"/>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+				<TextBlock
+					Margin="0,6"
+					Text="{Binding Settings_Proxy_Host, Mode=OneWay, Source={StaticResource LocalizeResourcesKey}}"
+					VerticalAlignment="Center"/>
+				<controls:PromptTextBox
+					Grid.Column="1"
+					Padding="2"
+					TextWrapping="Wrap"
+					Prompt="{Binding Settings_Proxy_Host, Mode=OneWay, Source={StaticResource LocalizeResourcesKey}}"
+					Text="{Binding ProxyHost}"
+					Margin="6,0"/>
+				<TextBlock
+					Grid.Column="3"
+					Margin="0,6"
+					Text="{Binding Settings_Proxy_Port, Mode=OneWay, Source={StaticResource LocalizeResourcesKey}}"
+					VerticalAlignment="Center"/>
+				<controls:PromptTextBox
+					Grid.Column="4"
+					Padding="2"
+					TextWrapping="Wrap"
+					Prompt="{Binding Settings_Proxy_Port, Mode=OneWay, Source={StaticResource LocalizeResourcesKey}}"
+					Text="{Binding ProxyPort}"
+					Margin="6,0"
+					TextAlignment="Right"/>
+				<CheckBox
+					Content="{Binding Settings_Proxy_Enable, Source={StaticResource LocalizeResourcesKey}}"
+					Grid.Column="5"
+					IsChecked="{Binding UseProxy}"
+					Margin="6,0"/>
+				<CheckBox
+					Content="{Binding Settings_Proxy_Enable_4_SSL, Source={StaticResource LocalizeResourcesKey}}"
+					Grid.Column="6"
+					IsChecked="{Binding UseProxyForSSL}"
+					Margin="6,0"/>
+			</Grid>
+		</StackPanel>
 	</StackPanel>
 </UserControl>

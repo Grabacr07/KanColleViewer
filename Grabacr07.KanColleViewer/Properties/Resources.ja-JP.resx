@@ -183,4 +183,19 @@
   <data name="Settings_WindowControl_LocationLeftButton_Sub" xml:space="preserve">
     <value>8 インチタブレット (800 x 1280) 用</value>
   </data>
+  <data name="Settings_Proxy" xml:space="preserve">
+    <value>プロキシ設定</value>
+  </data>
+	<data name="Settings_Proxy_Host" xml:space="preserve">
+    <value>サーバー</value>
+  </data>
+	<data name="Settings_Proxy_Port" xml:space="preserve">
+    <value>ポート</value>
+  </data>
+	<data name="Settings_Proxy_Enable" xml:space="preserve">
+    <value>使用</value>
+  </data>
+	<data name="Settings_Proxy_Enable_4_SSL" xml:space="preserve">
+    <value>SSLでも使用</value>
+  </data>
 </root>

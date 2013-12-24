@@ -183,4 +183,19 @@
   <data name="Settings_WindowControl_LocationLeftButton_Sub" xml:space="preserve">
     <value>For use with 8 inch tablets (800x1280)</value>
   </data>
+  <data name="Settings_Proxy" xml:space="preserve">
+    <value>Proxy Settings</value>
+  </data>
+	<data name="Settings_Proxy_Host" xml:space="preserve">
+    <value>Host</value>
+  </data>
+	<data name="Settings_Proxy_Port" xml:space="preserve">
+    <value>Port</value>
+  </data>
+	<data name="Settings_Proxy_Enable" xml:space="preserve">
+    <value>Use proxy</value>
+  </data>
+	<data name="Settings_Proxy_Enable_4_SSL" xml:space="preserve">
+    <value>Use proxy for SSL too</value>
+  </data>
 </root>

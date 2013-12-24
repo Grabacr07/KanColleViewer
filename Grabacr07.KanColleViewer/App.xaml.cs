@@ -30,6 +30,13 @@ namespace Grabacr07.KanColleViewer
 			KanColleClient.Current.Proxy.Startup(AppSettings.Default.LocalProxyPort);
 			Settings.Load();
 
+			KanColleProxy proxy = KanColleClient.Current.Proxy;
+
+			proxy.UpstreamProxyHost = Settings.Current.ProxyHost;
+			proxy.UpstreamProxyPort = Settings.Current.ProxyPort;
+			proxy.UseProxyOnConnect = Settings.Current.EnableProxy;
+			proxy.UseProxyOnSSLConnect = Settings.Current.EnableSSLProxy;
+
 			if (Toast.IsSupported)
 			{
 				Toast.TryInstallShortcut();
