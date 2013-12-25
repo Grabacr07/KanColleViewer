@@ -104,5 +104,20 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 機関部強化。
 		/// </summary>
 		EngineImprovement = 19,
+
+		/// <summary>
+		/// 上陸用舟艇。
+		/// </summary>
+		LandingCraft = 20,
+
+		/// <summary>
+		/// オートジャイロ。
+		/// </summary>
+		Autogyro = 21,
+
+		/// <summary>
+		/// 指揮連絡機。
+		/// </summary>
+		ArtillerySpotter = 22,
 	}
 }
