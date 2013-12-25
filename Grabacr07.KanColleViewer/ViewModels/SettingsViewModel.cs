@@ -36,6 +36,77 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region ProxyHost 変更通知プロパティ
+
+		public string ProxyHost
+		{
+			get { return Settings.Current.ProxyHost; }
+			set
+			{
+				if (Settings.Current.ProxyHost != value)
+				{
+					Settings.Current.ProxyHost = value;
+					KanColleWrapper.KanColleClient.Current.Proxy.UpstreamProxyHost = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region ProxyPort 変更通知プロパティ
+
+		public string ProxyPort
+		{
+			get { return Settings.Current.ProxyPort.ToString(); }
+			set
+			{
+				UInt16 numberPort;
+				if (UInt16.TryParse(value, out numberPort))
+				{
+					Settings.Current.ProxyPort = numberPort;
+					KanColleWrapper.KanColleClient.Current.Proxy.UpstreamProxyPort = numberPort;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region UseProxy 変更通知プロパティ
+		public string UseProxy
+		{
+			get { return Settings.Current.EnableProxy.ToString(); }
+			set
+			{
+				bool booleanValue;
+				if (Boolean.TryParse(value, out booleanValue))
+				{
+					Settings.Current.EnableProxy = booleanValue;
+					KanColleWrapper.KanColleClient.Current.Proxy.UseProxyOnConnect = booleanValue;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
+
+		#region UseProxyForSSL 変更通知プロパティ
+		public string UseProxyForSSL
+		{
+			get { return Settings.Current.EnableSSLProxy.ToString(); }
+			set
+			{
+				bool booleanValue;
+				if (Boolean.TryParse(value, out booleanValue))
+				{
+					Settings.Current.EnableSSLProxy = booleanValue;
+					KanColleWrapper.KanColleClient.Current.Proxy.UseProxyOnSSLConnect = booleanValue;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
+
 		#region CanOpenScreenshotFolder 変更通知プロパティ
 
 		public bool CanOpenScreenshotFolder
