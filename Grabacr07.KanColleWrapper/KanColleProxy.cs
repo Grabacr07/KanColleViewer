@@ -29,6 +29,26 @@ namespace Grabacr07.KanColleWrapper
 			get { return this.apiSource.AsObservable(); }
 		}
 
+		/// <summary>
+		/// Fiddlerからリクエストが送られる際に使用されるプロキシサーバーのホスト名を取得または設定します。
+		/// </summary>
+		public string UpstreamProxyHost { get; set; }
+
+		/// <summary>
+		/// Fiddlerからリクエストが送られる際に使用されるプロキシサーバーのポート番号を取得または設定します。
+		/// </summary>
+		public UInt16 UpstreamProxyPort { get; set; }
+
+		/// <summary>
+		/// リクエスト時にプロキシサーバーを経由するかどうかを取得または設定します。
+		/// </summary>
+		public bool UseProxyOnConnect { get; set; }
+
+		/// <summary>
+		/// SSLリクエスト時にプロキシサーバーを経由するかどうかを取得または設定します。
+		/// </summary>
+		public bool UseProxyOnSSLConnect { get; set; }
+
 
 		public KanColleProxy()
 		{
@@ -102,33 +122,12 @@ namespace Grabacr07.KanColleWrapper
 
 
 		/// <summary>
-		/// Fiddlerからリクエストが送られる際に使用されるプロキシサーバーのホスト名を取得または設定します。
-		/// </summary>
-		public string UpstreamProxyHost;
-
-		/// <summary>
-		/// Fiddlerからリクエストが送られる際に使用されるプロキシサーバーのポート番号を取得または設定します。
-		/// </summary>
-		public UInt16 UpstreamProxyPort;
-
-		/// <summary>
-		/// リクエスト時にプロキシサーバーを経由するかどうかを取得または設定します。
-		/// </summary>
-		public bool UseProxyOnConnect;
-
-		/// <summary>
-		/// SSLリクエスト時にプロキシサーバーを経由するかどうかを取得または設定します。
-		/// </summary>
-		public bool UseProxyOnSSLConnect;
-
-
-		/// <summary>
 		/// Fiddlerからのリクエスト発行時にプロキシを挟む設定を行います。
 		/// </summary>
 		/// <param name="requestingSession">通信を行おうとしているセッション</param>
 		private void SetUpstreamProxyHandler(Session requestingSession)
 		{
-			var isHostValid = (this.UpstreamProxyHost != null) && (this.UpstreamProxyHost.Length > 0);
+			var isHostValid = !string.IsNullOrEmpty(this.UpstreamProxyHost);
 			bool useGateway;
 			string gateway;
 

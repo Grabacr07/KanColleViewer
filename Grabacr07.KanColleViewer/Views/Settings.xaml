@@ -124,8 +124,12 @@
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 		<StackPanel Margin="0,12">
 			<TextBlock>
-				<Run Text="{Binding Settings_Proxy, Mode=OneWay, Source={StaticResource LocalizeResourcesKey}}" Style="{DynamicResource PickupTextElementStyleKey}"/>
+				<Run Text="{Binding Mode=OneWay,Source={x:Static properties:Resources.Settings_Proxy}}" Style="{DynamicResource PickupTextElementStyleKey}"/>
 			</TextBlock>
+			<CheckBox x:Name="checkboxUseProxy"
+				Content="{Binding Source={x:Static properties:Resources.Settings_Proxy_Enable}}"
+				IsChecked="{Binding UseProxy}"
+				Margin="6,5,6,0"/>
 			<Grid Margin="10,6,10,0">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto" />
@@ -141,38 +145,32 @@
 				</Grid.ColumnDefinitions>
 				<TextBlock
 					Margin="0,6"
-					Text="{Binding Settings_Proxy_Host, Mode=OneWay, Source={StaticResource LocalizeResourcesKey}}"
-					VerticalAlignment="Center"/>
+					Text="{Binding Mode=OneWay, Source={x:Static properties:Resources.Settings_Proxy_Host}}"
+					VerticalAlignment="Center" IsEnabled="{Binding IsChecked, ElementName=checkboxUseProxy}"/>
 				<controls:PromptTextBox
 					Grid.Column="1"
 					Padding="2"
 					TextWrapping="Wrap"
-					Prompt="{Binding Settings_Proxy_Host, Mode=OneWay, Source={StaticResource LocalizeResourcesKey}}"
+					Prompt="{Binding Mode=OneWay, Source={x:Static properties:Resources.Settings_Proxy_Host}}"
 					Text="{Binding ProxyHost}"
-					Margin="6,0"/>
+					Margin="6,0" IsEnabled="{Binding IsChecked, ElementName=checkboxUseProxy}"/>
 				<TextBlock
 					Grid.Column="3"
 					Margin="0,6"
-					Text="{Binding Settings_Proxy_Port, Mode=OneWay, Source={StaticResource LocalizeResourcesKey}}"
-					VerticalAlignment="Center"/>
+					Text="{Binding Mode=OneWay, Source={x:Static properties:Resources.Settings_Proxy_Port}}"
+					VerticalAlignment="Center" IsEnabled="{Binding IsChecked, ElementName=checkboxUseProxy}"/>
 				<controls:PromptTextBox
 					Grid.Column="4"
 					Padding="2"
 					TextWrapping="Wrap"
-					Prompt="{Binding Settings_Proxy_Port, Mode=OneWay, Source={StaticResource LocalizeResourcesKey}}"
+					Prompt="{Binding Mode=OneWay, Source={x:Static properties:Resources.Settings_Proxy_Port}}"
 					Text="{Binding ProxyPort}"
 					Margin="6,0"
-					TextAlignment="Right"/>
+					TextAlignment="Right" IsEnabled="{Binding IsChecked, ElementName=checkboxUseProxy}"/>
 				<CheckBox
-					Content="{Binding Settings_Proxy_Enable, Source={StaticResource LocalizeResourcesKey}}"
-					Grid.Column="5"
-					IsChecked="{Binding UseProxy}"
-					Margin="6,0"/>
-				<CheckBox
-					Content="{Binding Settings_Proxy_Enable_4_SSL, Source={StaticResource LocalizeResourcesKey}}"
+					Content="{Binding Source={x:Static properties:Resources.Settings_Proxy_Enable_4_SSL}}"
 					Grid.Column="6"
-					IsChecked="{Binding UseProxyForSSL}"
-					Margin="6,0"/>
+					Margin="6,0" IsEnabled="{Binding IsChecked, ElementName=checkboxUseProxy}"/>
 			</Grid>
 		</StackPanel>
 	</StackPanel>
