@@ -171,6 +171,94 @@ namespace Grabacr07.KanColleViewer.Model
 
 		#endregion
 
+		#region ProxyHost 変更通知プロパティ
+
+		private string _ProxyHost;
+
+		/// <summary>
+		/// プロキシサーバーのホスト名を取得または設定します。
+		/// </summary>
+		public string ProxyHost
+		{
+			get { return this._ProxyHost; }
+			set
+			{
+				if (this._ProxyHost != value)
+				{
+					this._ProxyHost = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region ProxyPort 変更通知プロパティ
+
+		private UInt16 _ProxyPort;
+
+		/// <summary>
+		/// プロキシサーバーのポート番号を取得または設定します。
+		/// </summary>
+		public UInt16 ProxyPort
+		{
+			get { return this._ProxyPort; }
+			set
+			{
+				if (this._ProxyPort != value)
+				{
+					this._ProxyPort = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region EnableProxy 変更通知プロパティ
+
+		private bool _EnableProxy;
+
+		/// <summary>
+		/// プロキシサーバーを使用して通信をするかどうかを取得または設定します。
+		/// </summary>
+		public bool EnableProxy
+		{
+			get { return this._EnableProxy; }
+			set
+			{
+				if (this._EnableProxy != value)
+				{
+					this._EnableProxy = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region EnableSSLProxy 変更通知プロパティ
+
+		private bool _EnableSSLProxy;
+
+		/// <summary>
+		/// プロキシサーバーを使用して SSL 通信をするかどうかを取得または設定します。
+		/// </summary>
+		public bool EnableSSLProxy
+		{
+			get { return this._EnableSSLProxy; }
+			set
+			{
+				if (this._EnableSSLProxy != value)
+				{
+					this._EnableSSLProxy = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 
 		public void Save()
 		{
