@@ -47,7 +47,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				{
 					Settings.Current.ProxyHost = value;
 					this.RaisePropertyChanged();
-					this.RaisePropertyChanged("ProxyHost");
 				}
 			}
 		}
@@ -66,7 +65,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				{
 					Settings.Current.ProxyPort = NumberPort;
 					this.RaisePropertyChanged();
-					this.RaisePropertyChanged("ProxyPort");
 				}
 			}
 		}
@@ -84,7 +82,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				{
 					Settings.Current.EnableProxy = booleanValue;
 					this.RaisePropertyChanged();
-					this.RaisePropertyChanged("UseProxy");
 				}
 			}
 		}
@@ -101,7 +98,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				{
 					Settings.Current.EnableSSLProxy = booleanValue;
 					this.RaisePropertyChanged();
-					this.RaisePropertyChanged("UseProxyForSSL");
 				}
 			}
 		}
