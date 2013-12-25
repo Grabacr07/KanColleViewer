@@ -196,6 +196,6 @@
     <value>Use proxy to connect the server</value>
   </data>
   <data name="Settings_Proxy_Enable_4_SSL" xml:space="preserve">
-    <value>SSL</value>
+    <value>SSL 接続時もプロキシサーバーを使用する</value>
   </data>
 </root>

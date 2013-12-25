@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Model;
 using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleViewer.ViewModels.Messages;
+using Grabacr07.KanColleWrapper;
 using Livet;
 using Livet.EventListeners;
 using Livet.Messaging.IO;
@@ -36,6 +37,15 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region CanOpenScreenshotFolder 変更通知プロパティ
+
+		public bool CanOpenScreenshotFolder
+		{
+			get { return Directory.Exists(this.ScreenshotFolder); }
+		}
+
+		#endregion
+
 		#region ProxyHost 変更通知プロパティ
 
 		public string ProxyHost
@@ -46,7 +56,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				if (Settings.Current.ProxyHost != value)
 				{
 					Settings.Current.ProxyHost = value;
-					KanColleWrapper.KanColleClient.Current.Proxy.UpstreamProxyHost = value;
+					KanColleClient.Current.Proxy.UpstreamProxyHost = value;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -65,7 +75,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				if (UInt16.TryParse(value, out numberPort))
 				{
 					Settings.Current.ProxyPort = numberPort;
-					KanColleWrapper.KanColleClient.Current.Proxy.UpstreamProxyPort = numberPort;
+					KanColleClient.Current.Proxy.UpstreamProxyPort = numberPort;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -74,6 +84,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		#endregion
 
 		#region UseProxy 変更通知プロパティ
+
 		public string UseProxy
 		{
 			get { return Settings.Current.EnableProxy.ToString(); }
@@ -83,36 +94,30 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				if (Boolean.TryParse(value, out booleanValue))
 				{
 					Settings.Current.EnableProxy = booleanValue;
-					KanColleWrapper.KanColleClient.Current.Proxy.UseProxyOnConnect = booleanValue;
+					KanColleClient.Current.Proxy.UseProxyOnConnect = booleanValue;
 					this.RaisePropertyChanged();
 				}
 			}
 		}
+
 		#endregion
 
 		#region UseProxyForSSL 変更通知プロパティ
-		public string UseProxyForSSL
+
+		public bool UseProxyForSSL
 		{
-			get { return Settings.Current.EnableSSLProxy.ToString(); }
+			get { return Settings.Current.EnableSSLProxy; }
 			set
 			{
-				bool booleanValue;
-				if (Boolean.TryParse(value, out booleanValue))
+				if (Settings.Current.EnableSSLProxy != value)
 				{
-					Settings.Current.EnableSSLProxy = booleanValue;
-					KanColleWrapper.KanColleClient.Current.Proxy.UseProxyOnSSLConnect = booleanValue;
+					Settings.Current.EnableSSLProxy = value;
+					KanColleClient.Current.Proxy.UseProxyOnSSLConnect = value;
 					this.RaisePropertyChanged();
 				}
 			}
 		}
-		#endregion
 
-		#region CanOpenScreenshotFolder 変更通知プロパティ
-
-		public bool CanOpenScreenshotFolder
-		{
-			get { return Directory.Exists(this.ScreenshotFolder); }
-		}
 		#endregion
 
 

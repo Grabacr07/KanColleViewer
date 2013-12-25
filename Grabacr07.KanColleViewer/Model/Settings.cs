@@ -242,7 +242,7 @@ namespace Grabacr07.KanColleViewer.Model
 		private bool _EnableSSLProxy;
 
 		/// <summary>
-		/// プロキシサーバーを使用してSSL通信をするかどうかを取得または設定します。
+		/// プロキシサーバーを使用して SSL 通信をするかどうかを取得または設定します。
 		/// </summary>
 		public bool EnableSSLProxy
 		{

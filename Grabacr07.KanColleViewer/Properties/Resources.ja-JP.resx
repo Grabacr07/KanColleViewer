@@ -193,9 +193,9 @@
     <value>ポート</value>
   </data>
   <data name="Settings_Proxy_Enable" xml:space="preserve">
-    <value>通信にプロキシサーバーを使用する</value>
+    <value>通信にプロキシ サーバーを使用する</value>
   </data>
   <data name="Settings_Proxy_Enable_4_SSL" xml:space="preserve">
-    <value>SSL</value>
+    <value>SSL 接続時もプロキシサーバーを使用する</value>
   </data>
 </root>

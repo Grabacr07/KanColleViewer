@@ -17,7 +17,6 @@ namespace Grabacr07.KanColleWrapper
 		private readonly IConnectableObservable<Session> connectableSessionSource;
 		private readonly IConnectableObservable<Session> apiSource;
 		private readonly LivetCompositeDisposable compositeDisposable;
-		private readonly SessionStateHandler setUpstreamProxy;
 
 		public IObservable<Session> SessionSource
 		{
@@ -30,14 +29,14 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// Fiddlerからリクエストが送られる際に使用されるプロキシサーバーのホスト名を取得または設定します。
+		/// Fiddler からリクエストが送られる際に使用されるプロキシサーバーのホスト名を取得または設定します。
 		/// </summary>
 		public string UpstreamProxyHost { get; set; }
 
 		/// <summary>
-		/// Fiddlerからリクエストが送られる際に使用されるプロキシサーバーのポート番号を取得または設定します。
+		/// Fiddler からリクエストが送られる際に使用されるプロキシサーバーのポート番号を取得または設定します。
 		/// </summary>
-		public UInt16 UpstreamProxyPort { get; set; }
+		public ushort UpstreamProxyPort { get; set; }
 
 		/// <summary>
 		/// リクエスト時にプロキシサーバーを経由するかどうかを取得または設定します。
@@ -45,14 +44,13 @@ namespace Grabacr07.KanColleWrapper
 		public bool UseProxyOnConnect { get; set; }
 
 		/// <summary>
-		/// SSLリクエスト時にプロキシサーバーを経由するかどうかを取得または設定します。
+		/// SSL リクエスト時のみプロキシサーバーを経由するかどうかを取得または設定します。
 		/// </summary>
 		public bool UseProxyOnSSLConnect { get; set; }
 
 
 		public KanColleProxy()
 		{
-			this.setUpstreamProxy = new SessionStateHandler(SetUpstreamProxyHandler);
 			this.compositeDisposable = new LivetCompositeDisposable();
 
 			this.connectableSessionSource = Observable
@@ -67,7 +65,7 @@ namespace Grabacr07.KanColleWrapper
 				.Where(s => s.oResponse.MIMEType.Equals("text/plain"))
 				#region .Do(debug)
 #if DEBUG
-				.Do(session =>
+.Do(session =>
 				{
 					Debug.WriteLine("==================================================");
 					Debug.WriteLine("Fiddler session: ");
@@ -75,7 +73,7 @@ namespace Grabacr07.KanColleWrapper
 					Debug.WriteLine("");
 				})
 #endif
-				#endregion
+			#endregion
 				.Publish();
 		}
 
@@ -83,8 +81,7 @@ namespace Grabacr07.KanColleWrapper
 		public void Startup(int proxy = 37564)
 		{
 			FiddlerApplication.Startup(proxy, false, true);
-			// プロキシを通すための処理を追加する
-			FiddlerApplication.BeforeRequest += this.setUpstreamProxy;
+			FiddlerApplication.BeforeRequest += this.SetUpstreamProxyHandler;
 			SetIESettings("localhost:" + proxy);
 
 			this.compositeDisposable.Add(this.connectableSessionSource.Connect());
@@ -95,8 +92,7 @@ namespace Grabacr07.KanColleWrapper
 		{
 			this.compositeDisposable.Dispose();
 
-			// プロキシを通すための処理を削除する
-			FiddlerApplication.BeforeRequest -= this.setUpstreamProxy;
+			FiddlerApplication.BeforeRequest -= this.SetUpstreamProxyHandler;
 			FiddlerApplication.Shutdown();
 		}
 
@@ -122,50 +118,31 @@ namespace Grabacr07.KanColleWrapper
 
 
 		/// <summary>
-		/// Fiddlerからのリクエスト発行時にプロキシを挟む設定を行います。
+		/// Fiddler からのリクエスト発行時にプロキシを挟む設定を行います。
 		/// </summary>
-		/// <param name="requestingSession">通信を行おうとしているセッション</param>
+		/// <param name="requestingSession">通信を行おうとしているセッション。</param>
 		private void SetUpstreamProxyHandler(Session requestingSession)
 		{
-			var isHostValid = !string.IsNullOrEmpty(this.UpstreamProxyHost);
-			bool useGateway;
-			string gateway;
+			var useGateway = !string.IsNullOrEmpty(this.UpstreamProxyHost) && this.UseProxyOnConnect;
+			if (!useGateway || (IsSessionSSL(requestingSession) && !this.UseProxyOnSSLConnect)) return;
+			
+			var gateway = this.UpstreamProxyHost.Contains(":")
+				// IPv6 アドレスをプロキシホストにした場合はホストアドレス部分を [] で囲う形式にする。
+				? string.Format("[{0}]:{1}", this.UpstreamProxyHost, this.UpstreamProxyPort)
+				: string.Format("{0}:{1}", this.UpstreamProxyHost, this.UpstreamProxyPort);
 
-			// 「http://www.dmm.com:433/」の場合もあり、これはSession.isHTTPSでは判定できない。
-			if (IsSessionSSL(requestingSession))
-			{
-				useGateway = isHostValid && this.UseProxyOnSSLConnect;
-			}
-			else
-			{
-				useGateway = isHostValid && this.UseProxyOnConnect;
-			}
-
-			if (useGateway)
-			{
-				if (this.UpstreamProxyHost.Contains(":"))
-				{
-					// IPv6アドレスをプロキシホストにした場合はホストアドレス部分を[]で囲う形式にする。
-					gateway = String.Format("[{0}]:{1}", this.UpstreamProxyHost, this.UpstreamProxyPort);
-				}
-				else
-				{
-					gateway = String.Format("{0}:{1}", this.UpstreamProxyHost, this.UpstreamProxyPort);
-				}
-
-				requestingSession["X-OverrideGateway"] = gateway;
-			}
+			requestingSession["X-OverrideGateway"] = gateway;
 		}
 
 		/// <summary>
-		/// セッションがSSL接続を使用しているかどうかを返します。
+		/// セッションが SSL 接続を使用しているかどうかを返します。
 		/// </summary>
-		/// <param name="session">セッション</param>
-		/// <returns>セッションがSSL接続を使用する場合はtrue、そうでない場合はfalseを返します。</returns>
+		/// <param name="session">セッション。</param>
+		/// <returns>セッションが SSL 接続を使用する場合は true、そうでない場合は false。</returns>
 		internal static bool IsSessionSSL(Session session)
 		{
-			var uri = session.fullUrl;
-			return (uri.Substring(0, 6) == "https:") || (uri.Contains(":443"));
+			// 「http://www.dmm.com:433/」の場合もあり、これは Session.isHTTPS では判定できない
+			return session.isHTTPS || session.fullUrl.StartsWith("https:") || session.fullUrl.Contains(":443");
 		}
 	}
 }
