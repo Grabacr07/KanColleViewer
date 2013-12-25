@@ -259,6 +259,50 @@ namespace Grabacr07.KanColleViewer.Model
 
 		#endregion
 
+		#region TopMost 変更通知プロパティ
+
+		private bool _TopMost;
+
+		/// <summary>
+		/// メイン ウィンドウを常に最前面に表示するかどうかを示す値を取得または設定します。
+		/// </summary>
+		public bool TopMost
+		{
+			get { return this._TopMost; }
+			set
+			{
+				if (this._TopMost != value)
+				{
+					this._TopMost = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region ReSortieCondition 変更通知プロパティ
+
+		private ushort _ReSortieCondition = 40;
+
+		/// <summary>
+		/// 艦隊が再出撃可能と判断する基準となるコンディション値を取得または設定します。
+		/// </summary>
+		public ushort ReSortieCondition
+		{
+			get { return this._ReSortieCondition; }
+			set
+			{
+				if (this._ReSortieCondition != value)
+				{
+					this._ReSortieCondition = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 
 		public void Save()
 		{

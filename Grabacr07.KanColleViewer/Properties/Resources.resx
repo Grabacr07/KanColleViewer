@@ -148,7 +148,7 @@
     <value>※The indicators (50%, 80%) mirror in-game indicators. Enemy fleet kills, successful expeditions, etc are not actively counted.</value>
   </data>
   <data name="Settings_BrowserControl_Notice" xml:space="preserve">
-    <value>(This will leave the game, so use with caution)</value>
+    <value>※This will leave the game, so use with caution</value>
   </data>
   <data name="Settings_Screenshot_FolderSelectionDialog_OpenButton" xml:space="preserve">
     <value>Browse</value>

@@ -27,6 +27,7 @@
 						Foreground="{DynamicResource ActiveForegroundBrushKey}"
 						BorderBrush="{DynamicResource AccentBrushKey}"
 						InactiveBorderBrush="{DynamicResource BorderBrushKey}"
+						Topmost="{Binding TopMost}"
 						SnapsToDevicePixels="True"
 						TextOptions.TextFormattingMode="Display">
 

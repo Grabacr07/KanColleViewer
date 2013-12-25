@@ -10,9 +10,11 @@
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:controls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
+			 xmlns:kanColleViewer="clr-namespace:Grabacr07.KanColleViewer"
 			 mc:Ignorable="d"
 			 d:DesignWidth="700"
-			 d:DesignHeight="400">
+			 d:DesignHeight="400"
+			 Background="{DynamicResource ThemeBrushKey}">
 	<UserControl.DataContext>
 		<viewModels:SettingsViewModel />
 	</UserControl.DataContext>
@@ -24,151 +26,297 @@
 		</livet:InteractionMessageTrigger>
 	</i:Interaction.Triggers>
 
-	<StackPanel Margin="10,0">
-		<StackPanel>
-			<TextBlock>
-				<Run Text="{Binding Source={x:Static properties:Resources.Settings_BrowserControl}, Mode=OneWay}"
-					 Style="{DynamicResource PickupTextElementStyleKey}" />
-				<Run Text="{Binding Source={x:Static properties:Resources.Settings_BrowserControl_Notice}, Mode=OneWay}" />
-			</TextBlock>
+	<TabControl>
+		<TabControl.Template>
+			<ControlTemplate TargetType="{x:Type TabControl}">
+				<Border>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+						<StackPanel x:Name="HeaderPanel"
+									IsItemsHost="True"
+									Background="{DynamicResource BackgroundBrushKey}" />
+						<Border x:Name="ContentSize"
+								Grid.Column="1">
+							<ContentPresenter x:Name="PART_SelectedContentHost"
+											  ContentSource="SelectedContent"
+											  Width="{Binding ElementName=ContentSize, Path=ActualWidth}" />
+						</Border>
+					</Grid>
+				</Border>
+			</ControlTemplate>
+		</TabControl.Template>
+		<TabControl.Resources>
+			<Style TargetType="{x:Type TabItem}">
+				<Setter Property="OverridesDefaultStyle"
+						Value="True" />
+				<Setter Property="Height"
+						Value="38" />
+				<Setter Property="Foreground"
+						Value="{DynamicResource ForegroundBrushKey}" />
+				<Setter Property="Background"
+						Value="Transparent" />
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type TabItem}">
+							<Border x:Name="Border"
+									Background="{TemplateBinding Background}">
+								<ContentPresenter x:Name="ContentSite"
+												  ContentSource="Header" />
+							</Border>
+							<ControlTemplate.Triggers>
+								<Trigger Property="IsSelected"
+										 Value="True">
+									<Setter Property="Background"
+											Value="{DynamicResource ThemeBrushKey}" />
+								</Trigger>
+								<Trigger SourceName="Border"
+										 Property="IsMouseOver"
+										 Value="True">
+									<Setter Property="Background"
+											Value="Transparent" />
+									<Setter Property="Background"
+											Value="{DynamicResource ActiveBackgroundBrushKey}" />
+								</Trigger>
+							</ControlTemplate.Triggers>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
 
-			<views:BrowserNavigator Margin="10,6,10,6" />
-		</StackPanel>
+			<Style x:Key="HeaderTextBlockStyleKey"
+				   TargetType="{x:Type TextBlock}">
+				<Setter Property="Margin"
+						Value="0,0,0,10" />
+				<Setter Property="FontSize"
+						Value="15" />
+				<Setter Property="Foreground"
+						Value="{DynamicResource ActiveForegroundBrushKey}" />
+			</Style>
+		</TabControl.Resources>
 
-		<Rectangle Height="1"
-				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+		<TabItem>
+			<TabItem.Header>
+				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_BrowserControl}, Mode=OneWay}"
+						   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
+						   Margin="12,0"
+						   FontSize="14" />
+			</TabItem.Header>
 
-		<StackPanel Orientation="Horizontal"
-					Margin="0,12">
-			<StackPanel Margin="0,0,50,0">
-				<TextBlock>
-					<Run Text="{Binding Source={x:Static properties:Resources.Settings_BrowserControl}, Mode=OneWay}"
-						 Style="{DynamicResource PickupTextElementStyleKey}" />
-					<Run Text="{Binding Source={x:Static properties:Resources.Settings_BrowserControl_Display}, Mode=OneWay}" />
-				</TextBlock>
+			<StackPanel ClipToBounds="True"
+						Margin="10,0">
+				<views:BrowserNavigator />
+				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_BrowserControl_Notice}, Mode=OneWay}"
+						   Margin="43,-2,0,10" />
 
-				<WrapPanel Margin="10,6,10,0">
-					<controls:CallMethodButton MethodName="ClearZoomFactor"
-											   Padding="12,11">
-						<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_BrowserControl_ClearZoomFactorButton}, Mode=OneWay}"
+				<Rectangle Height="1"
+						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+				<controls:CallMethodButton MethodName="ClearZoomFactor"
+										   Padding="20,11"
+										   Margin="0,10"
+										   HorizontalAlignment="Left">
+					<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_BrowserControl_ClearZoomFactorButton}, Mode=OneWay}"
+							   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:CallMethodButton}}, Path=Foreground}"
+							   FontSize="13" />
+				</controls:CallMethodButton>
+
+			</StackPanel>
+		</TabItem>
+
+		<TabItem>
+			<TabItem.Header>
+				<TextBlock Text="ウィンドウ設定"
+						   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
+						   Margin="12,0"
+						   FontSize="14" />
+			</TabItem.Header>
+
+			<StackPanel Margin="10,0">
+				<TextBlock Text="表示設定"
+						   Style="{DynamicResource HeaderTextBlockStyleKey}" />
+
+				<CheckBox IsChecked="{Binding Source={x:Static kanColleViewer:App.ViewModelRoot}, Path=TopMost, Mode=TwoWay}"
+						  Margin="15,0,0,10">
+					<TextBlock Text="ウィンドウを常に最前面に表示する"
+							   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type CheckBox}}, Path=Foreground}"
+							   FontSize="13"
+							   Background="Transparent" />
+				</CheckBox>
+
+				<Rectangle Height="1"
+						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_WindowControl}}"
+						   Style="{DynamicResource HeaderTextBlockStyleKey}"
+						   Margin="0,10" />
+				<controls:CallMethodButton MethodName="SetLocationLeft"
+										   Padding="20,4"
+										   Margin="15,0,0,10"
+										   HorizontalAlignment="Left">
+					<StackPanel>
+						<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_WindowControl_LocationLeftButton}, Mode=OneWay}"
 								   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:CallMethodButton}}, Path=Foreground}"
-								   FontSize="13" />
-					</controls:CallMethodButton>
-				</WrapPanel>
+								   FontSize="13"
+								   HorizontalAlignment="Center" />
+						<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_WindowControl_LocationLeftButton_Sub}, Mode=OneWay}"
+								   HorizontalAlignment="Center"
+								   FontSize="11" />
+					</StackPanel>
+				</controls:CallMethodButton>
+				
+				<Rectangle Height="1"
+						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+				
 			</StackPanel>
+		</TabItem>
 
-			<StackPanel Margin="0,0,20,0">
-				<TextBlock>
-					<Run Text="{Binding Source={x:Static properties:Resources.Settings_WindowControl}, Mode=OneWay}"
-						 Style="{DynamicResource PickupTextElementStyleKey}" />
-				</TextBlock>
+		<TabItem>
+			<TabItem.Header>
+				<TextBlock Text="動作設定"
+						   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
+						   Margin="12,0"
+						   FontSize="14" />
+			</TabItem.Header>
 
-				<WrapPanel Margin="10,6,10,0">
-					<controls:CallMethodButton MethodName="SetLocationLeft"
-											   Padding="12,4">
-						<StackPanel>
-							<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_WindowControl_LocationLeftButton}, Mode=OneWay}"
-									   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:CallMethodButton}}, Path=Foreground}"
-									   FontSize="13"
-									   HorizontalAlignment="Center" />
-							<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_WindowControl_LocationLeftButton_Sub}, Mode=OneWay}"
-									   HorizontalAlignment="Center"
-									   FontSize="11" />
-						</StackPanel>
-					</controls:CallMethodButton>
-				</WrapPanel>
+			<StackPanel Margin="10,0">
+				<TextBlock Text="出撃コンディション"
+						   Style="{DynamicResource HeaderTextBlockStyleKey}" />
+
+				<StackPanel Margin="15,0,0,0">
+					<TextBlock>
+						<Run Text="艦隊内の全艦のコンディションが次の数値以上になったとき、出撃可能と判断する" />
+					</TextBlock>
+
+					<Grid Margin="0,10">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="10" />
+							<ColumnDefinition />
+						</Grid.ColumnDefinitions>
+
+						<controls:PromptTextBox Text="{Binding ReSortieCondition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnNotifyDataErrors=True}"
+												Prompt="例: 40"
+												ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"
+												Width="60"
+												VerticalAlignment="Top" />
+						<TextBlock Grid.Column="2"
+								   TextWrapping="Wrap"
+								   Foreground="{DynamicResource InactiveForegroundBrushKey}">
+							<Run Text="※通常は、間宮アイコンが消灯する 40 か、自然回復上限の 49 に設定します。" />
+						</TextBlock>
+					</Grid>
+				</StackPanel>
+
+				<Rectangle Height="1"
+						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+				
 			</StackPanel>
-		</StackPanel>
+		</TabItem>
 
-		<Rectangle Height="1"
-				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+		<TabItem>
+			<TabItem.Header>
+				<TextBlock Text="通信設定"
+						   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
+						   Margin="12,0"
+						   FontSize="14" />
+			</TabItem.Header>
 
-		<StackPanel Margin="0,12">
-			<TextBlock>
-				<Run Text="スクリーンショット設定"
-					 Style="{DynamicResource PickupTextElementStyleKey}" />
-			</TextBlock>
-			<Grid Margin="10,6,10,0">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto" />
-					<RowDefinition Height="Auto" />
-				</Grid.RowDefinitions>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto" />
-					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="Auto" />
-					<ColumnDefinition Width="Auto" />
-				</Grid.ColumnDefinitions>
-				<TextBlock Text="保存先フォルダー  "
-						   VerticalAlignment="Center"
-						   Margin="0,6" />
-				<controls:PromptTextBox Grid.Row="0"
-										Grid.Column="1"
-										Text="{Binding ScreenshotFolder, UpdateSourceTrigger=PropertyChanged}"
-										Prompt="保存先フォルダー パス"
-										Padding="2" />
-				<controls:CallMethodButton Grid.Row="0"
-										   Grid.Column="2"
-										   Content="{Binding Source={x:Static properties:Resources.Settings_Screenshot_FolderSelectionDialog_OpenButton}}"
-										   MethodName="OpenScreenshotFolderSelectionDialog"
-										   Margin="6,0" />
-				<controls:CallMethodButton Grid.Row="0"
-										   Grid.Column="3"
-										   Content="{Binding Source={x:Static properties:Resources.Settings_Screenshot_OpenFolderButton}}"
-										   IsEnabled="{Binding CanOpenScreenshotFolder}"
-										   MethodName="OpenScreenshotFolder"
-										   Margin="0" />
-			</Grid>
-		</StackPanel>
+			<StackPanel Margin="10,0">
+				<TextBlock Text="{Binding Mode=OneWay,Source={x:Static properties:Resources.Settings_Proxy}}"
+						   Style="{DynamicResource HeaderTextBlockStyleKey}" />
 
-		<Rectangle Height="1"
-				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+				<CheckBox x:Name="CheckboxUseProxy"
+						  Content="{Binding Source={x:Static properties:Resources.Settings_Proxy_Enable}}"
+						  IsChecked="{Binding UseProxy}" />
+				<StackPanel IsEnabled="{Binding IsChecked, ElementName=CheckboxUseProxy}"
+							Margin="15,6,0,6">
+					<Grid Margin="0,4">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="15" />
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="Auto" />
+						</Grid.ColumnDefinitions>
 
-		<StackPanel Margin="0,12">
-			<TextBlock>
-				<Run Text="{Binding Mode=OneWay,Source={x:Static properties:Resources.Settings_Proxy}}"
-					 Style="{DynamicResource PickupTextElementStyleKey}" />
-			</TextBlock>
-			<CheckBox x:Name="CheckboxUseProxy"
-					  Content="{Binding Source={x:Static properties:Resources.Settings_Proxy_Enable}}"
-					  IsChecked="{Binding UseProxy}"
-					  Margin="6,5,6,0" />
-			<Grid Margin="10,6,10,0">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto" />
-				</Grid.RowDefinitions>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto" />
-					<ColumnDefinition Width="200" />
-					<ColumnDefinition Width="10" />
-					<ColumnDefinition Width="Auto" />
-					<ColumnDefinition Width="70" />
-					<ColumnDefinition Width="Auto" />
-					<ColumnDefinition Width="Auto" />
-				</Grid.ColumnDefinitions>
-				<TextBlock Text="{Binding Mode=OneWay, Source={x:Static properties:Resources.Settings_Proxy_Host}}"
-						   IsEnabled="{Binding IsChecked, ElementName=CheckboxUseProxy}" />
-				<controls:PromptTextBox Grid.Column="1"
-										Padding="2"
-										Text="{Binding ProxyHost}"
-										Prompt="{Binding Mode=OneWay, Source={x:Static properties:Resources.Settings_Proxy_Host}}"
-										IsEnabled="{Binding IsChecked, ElementName=CheckboxUseProxy}"
-										Margin="6,0" />
-				<TextBlock Grid.Column="3"
-						   Text="{Binding Mode=OneWay, Source={x:Static properties:Resources.Settings_Proxy_Port}}"
-						   IsEnabled="{Binding IsChecked, ElementName=CheckboxUseProxy}" />
-				<controls:PromptTextBox Grid.Column="4"
-										Padding="2"
-										Text="{Binding ProxyPort}"
-										Prompt="{Binding Mode=OneWay, Source={x:Static properties:Resources.Settings_Proxy_Port}}"
-										IsEnabled="{Binding IsChecked, ElementName=CheckboxUseProxy}"
-										Margin="6,0" />
-				<CheckBox Grid.Column="6"
-						  Content="{Binding Source={x:Static properties:Resources.Settings_Proxy_Enable_4_SSL}}"
-						  IsChecked="{Binding UseProxyForSSL}"
-						  IsEnabled="{Binding IsChecked, ElementName=CheckboxUseProxy}"
-						  Margin="6,0" />
-			</Grid>
-		</StackPanel>
-	</StackPanel>
+						<TextBlock Grid.Column="0">
+							<Run Text="{Binding Source={x:Static properties:Resources.Settings_Proxy_Host}, Mode=OneWay}" />
+							<Run Text=": " />
+						</TextBlock>
+						<controls:PromptTextBox Grid.Column="1"
+												Text="{Binding ProxyHost}"
+												Prompt="{Binding Source={x:Static properties:Resources.Settings_Proxy_Host}, Mode=OneWay}" />
+						<TextBlock Grid.Column="3">
+							<Run Text="{Binding Source={x:Static properties:Resources.Settings_Proxy_Port}, Mode=OneWay}" />
+							<Run Text=": " />
+						</TextBlock>
+						<controls:PromptTextBox Grid.Column="4"
+												Text="{Binding ProxyPort}"
+												Prompt="{Binding Source={x:Static properties:Resources.Settings_Proxy_Port}, Mode=OneWay}"
+												Width="80" />
+					</Grid>
+					<CheckBox Content="{Binding Source={x:Static properties:Resources.Settings_Proxy_Enable_4_SSL}}"
+							  IsChecked="{Binding UseProxyForSSL}"
+							  Margin="0,4" />
+				</StackPanel>
+
+				<Rectangle Height="1"
+						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+			</StackPanel>
+		</TabItem>
+
+		<TabItem>
+			<TabItem.Header>
+				<TextBlock Text="その他"
+						   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
+						   Margin="12,0"
+						   FontSize="14" />
+			</TabItem.Header>
+
+			<StackPanel Margin="10,0">
+				<TextBlock Text="スクリーンショット"
+						   Style="{DynamicResource HeaderTextBlockStyleKey}" />
+				<Grid Margin="15,0,0,10">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<TextBlock Text="保存先フォルダー  "
+							   VerticalAlignment="Center"
+							   Margin="0,6" />
+					<controls:PromptTextBox Grid.Row="0"
+											Grid.Column="1"
+											Text="{Binding ScreenshotFolder, UpdateSourceTrigger=PropertyChanged}"
+											Prompt="保存先フォルダー パス" />
+					<controls:CallMethodButton Grid.Row="0"
+											   Grid.Column="2"
+											   Content="{Binding Source={x:Static properties:Resources.Settings_Screenshot_FolderSelectionDialog_OpenButton}}"
+											   MethodName="OpenScreenshotFolderSelectionDialog"
+											   Margin="6,0" />
+					<controls:CallMethodButton Grid.Row="0"
+											   Grid.Column="3"
+											   Content="{Binding Source={x:Static properties:Resources.Settings_Screenshot_OpenFolderButton}}"
+											   IsEnabled="{Binding CanOpenScreenshotFolder}"
+											   MethodName="OpenScreenshotFolder"
+											   Margin="0" />
+				</Grid>
+
+				<Rectangle Height="1"
+						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+			</StackPanel>
+		</TabItem>
+
+	</TabControl>
+
 </UserControl>

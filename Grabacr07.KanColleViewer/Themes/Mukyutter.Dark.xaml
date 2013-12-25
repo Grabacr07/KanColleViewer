@@ -1212,6 +1212,8 @@
 				Value="1,1,1,1" />
 		<Setter Property="Padding"
 				Value="1" />
+		<Setter Property="VerticalContentAlignment"
+				Value="Center" />
 		<Setter Property="Text"
 				Value="" />
 		<Setter Property="Prompt"

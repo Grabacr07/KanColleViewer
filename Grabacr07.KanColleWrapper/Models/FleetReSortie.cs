@@ -12,6 +12,8 @@ namespace Grabacr07.KanColleWrapper.Models
 	/// </summary>
 	public class FleetReSortie : TimerNotificator
 	{
+		public static int ReSortieCondition { get; set; }
+
 		private bool notificated;
 		private int minCondition;
 

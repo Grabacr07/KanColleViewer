@@ -178,7 +178,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   (This will leave the game, so use with caution) に類似しているローカライズされた文字列を検索します。
+        ///   ※This will leave the game, so use with caution に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Settings_BrowserControl_Notice {
             get {

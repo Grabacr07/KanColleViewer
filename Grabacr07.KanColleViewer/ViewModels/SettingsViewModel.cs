@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Model;
@@ -17,7 +20,7 @@ using Settings = Grabacr07.KanColleViewer.Model.Settings;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {
-	public class SettingsViewModel : TabItemViewModel
+	public class SettingsViewModel : TabItemViewModel, INotifyDataErrorInfo
 	{
 		#region ScreenshotFolder 変更通知プロパティ
 
@@ -120,6 +123,44 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region ReSortieCondition 変更通知プロパティ
+
+		private string _ReSortieCondition = Settings.Current.ReSortieCondition.ToString(CultureInfo.InvariantCulture);
+		private string reSortieConditionError;
+
+		public string ReSortieCondition
+		{
+			get { return this._ReSortieCondition; }
+			set
+			{
+				if (this._ReSortieCondition != value)
+				{
+					ushort cond;
+					if (ushort.TryParse(value, out cond) && cond <= 49)
+					{
+						Settings.Current.ReSortieCondition = cond;
+						this.reSortieConditionError = null;
+					}
+					else
+					{
+						this.reSortieConditionError = "コンディション値は 0 ～ 49 の数値で入力してください。";
+					}
+
+					this._ReSortieCondition = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		public bool HasErrors
+		{
+			get { return this.reSortieConditionError != null; }
+		}
+
+		public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+
 
 		public SettingsViewModel()
 		{
@@ -174,6 +215,32 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		public void SetLocationLeft()
 		{
 			App.ViewModelRoot.Messenger.Raise(new SetWindowLocationMessage { MessageKey = "Window/Location", Left = 0.0 });
+		}
+
+
+		public IEnumerable GetErrors(string propertyName)
+		{
+			var errors = new List<string>();
+
+			switch (propertyName)
+			{
+				case "ReSortieCondition":
+					if (this.reSortieConditionError != null)
+					{
+						errors.Add(this.reSortieConditionError);
+					}
+					break;
+			}
+
+			return errors.HasValue() ? errors : null;
+		}
+
+		protected void RaiseErrorsChanged([CallerMemberName]string propertyName = "")
+		{
+			if (this.ErrorsChanged != null)
+			{
+				this.ErrorsChanged(this, new DataErrorsChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

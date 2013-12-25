@@ -113,6 +113,24 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region TopMost 変更通知プロパティ
+
+		public bool TopMost
+		{
+			get { return Settings.Current.TopMost; }
+			set
+			{
+				if (Settings.Current.TopMost != value)
+				{
+					Settings.Current.TopMost = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+
 		public MainWindowViewModel()
 		{
 			this.Title = "提督業も忙しい！";
