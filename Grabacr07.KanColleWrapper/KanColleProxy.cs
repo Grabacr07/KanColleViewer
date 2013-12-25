@@ -128,7 +128,7 @@ namespace Grabacr07.KanColleWrapper
 		/// <param name="requestingSession">通信を行おうとしているセッション</param>
 		private void SetUpstreamProxyHandler(Session requestingSession)
 		{
-			bool isHostValid = (this.UpstreamProxyHost != null) && (this.UpstreamProxyHost.Length > 0);
+			var isHostValid = (this.UpstreamProxyHost != null) && (this.UpstreamProxyHost.Length > 0);
 			bool useGateway;
 			string gateway;
 
@@ -165,7 +165,7 @@ namespace Grabacr07.KanColleWrapper
 		/// <returns>セッションがSSL接続を使用する場合はtrue、そうでない場合はfalseを返します。</returns>
 		internal static bool IsSessionSSL(Session session)
 		{
-			string uri = session.fullUrl;
+			var uri = session.fullUrl;
 			return (uri.Substring(0, 6) == "https:") || (uri.Contains(":443"));
 		}
 	}

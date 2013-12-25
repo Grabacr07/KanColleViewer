@@ -125,7 +125,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				(sender, args) => this.RaisePropertyChanged(args.PropertyName),
 			});
 
-			PropertyChangedEventListener listener = new PropertyChangedEventListener(this);
+			var listener = new PropertyChangedEventListener(this);
 			listener.RegisterHandler(UpdateProxySettings);
 			this.CompositeDisposable.Add(listener);
 		}
