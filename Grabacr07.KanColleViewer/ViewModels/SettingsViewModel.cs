@@ -46,6 +46,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				if (Settings.Current.ProxyHost != value)
 				{
 					Settings.Current.ProxyHost = value;
+					KanColleWrapper.KanColleClient.Current.Proxy.UpstreamProxyHost = value;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -60,10 +61,11 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			get { return Settings.Current.ProxyPort.ToString(); }
 			set
 			{
-				UInt16 NumberPort;
-				if (UInt16.TryParse(value, out NumberPort))
+				UInt16 numberPort;
+				if (UInt16.TryParse(value, out numberPort))
 				{
-					Settings.Current.ProxyPort = NumberPort;
+					Settings.Current.ProxyPort = numberPort;
+					KanColleWrapper.KanColleClient.Current.Proxy.UpstreamProxyPort = numberPort;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -81,6 +83,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				if (Boolean.TryParse(value, out booleanValue))
 				{
 					Settings.Current.EnableProxy = booleanValue;
+					KanColleWrapper.KanColleClient.Current.Proxy.UseProxyOnConnect = booleanValue;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -97,6 +100,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				if (Boolean.TryParse(value, out booleanValue))
 				{
 					Settings.Current.EnableSSLProxy = booleanValue;
+					KanColleWrapper.KanColleClient.Current.Proxy.UseProxyOnSSLConnect = booleanValue;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -120,10 +124,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			{
 				(sender, args) => this.RaisePropertyChanged(args.PropertyName),
 			});
-
-			var listener = new PropertyChangedEventListener(this);
-			listener.RegisterHandler(UpdateProxySettings);
-			this.CompositeDisposable.Add(listener);
 		}
 
 		public void OpenScreenshotFolderSelectionDialog()
@@ -169,32 +169,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		public void SetLocationLeft()
 		{
 			App.ViewModelRoot.Messenger.Raise(new SetWindowLocationMessage { MessageKey = "Window/Location", Left = 0.0 });
-		}
-
-		private void UpdateProxySettings(object sender, PropertyChangedEventArgs eventArguments)
-		{
-			switch (eventArguments.PropertyName)
-			{
-				case "ProxyHost":
-
-					KanColleWrapper.KanColleClient.Current.Proxy.UpstreamProxyHost = Settings.Current.ProxyHost;
-					break;
-
-				case "ProxyPort":
-
-					KanColleWrapper.KanColleClient.Current.Proxy.UpstreamProxyPort = Settings.Current.ProxyPort;
-					break;
-
-				case "UseProxy":
-
-					KanColleWrapper.KanColleClient.Current.Proxy.UseProxyOnConnect = Settings.Current.EnableProxy;
-					break;
-
-				case "UseProxyForSSL":
-
-					KanColleWrapper.KanColleClient.Current.Proxy.UseProxyOnSSLConnect = Settings.Current.EnableSSLProxy;
-					break;
-			}
 		}
 	}
 }
