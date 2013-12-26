@@ -1116,4 +1116,24 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+
+
+	<Style TargetType="{x:Type controls:ColorIndicator}">
+		<Setter Property="Background"
+				Value="White" />
+		<Setter Property="HorizontalContentAlignment"
+				Value="Left" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type controls:ColorIndicator}">
+					<Grid Background="{TemplateBinding Background}">
+						<Border x:Name="PART_Track" />
+						<Border x:Name="PART_Indicator"
+								Background="{TemplateBinding Foreground}"
+								HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 </ResourceDictionary>
