@@ -128,19 +128,19 @@
 
 		<TabItem>
 			<TabItem.Header>
-				<TextBlock Text="ウィンドウ設定"
+				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Window}, Mode=OneWay}"
 						   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
 						   Margin="12,0"
 						   FontSize="14" />
 			</TabItem.Header>
 
 			<StackPanel Margin="10,0">
-				<TextBlock Text="表示設定"
+				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Display}, Mode=OneWay}"
 						   Style="{DynamicResource HeaderTextBlockStyleKey}" />
 
 				<CheckBox IsChecked="{Binding Source={x:Static kanColleViewer:App.ViewModelRoot}, Path=TopMost, Mode=TwoWay}"
 						  Margin="15,0,0,10">
-					<TextBlock Text="ウィンドウを常に最前面に表示する"
+					<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Window_TopMost}, Mode=OneWay}"
 							   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type CheckBox}}, Path=Foreground}"
 							   FontSize="13"
 							   Background="Transparent" />
@@ -175,7 +175,7 @@
 
 		<TabItem>
 			<TabItem.Header>
-				<TextBlock Text="動作設定"
+				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Operation}, Mode=OneWay}"
 						   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
 						   Margin="12,0"
 						   FontSize="14" />
@@ -187,7 +187,7 @@
 					<Run Text="出撃コンディション"
 						 Style="{DynamicResource PickupTextElementStyleKey}" />
 					<Run Text=" " />
-					<Run Text="※近日実装予定" />
+					<Run Text="{Binding Source={x:Static properties:Resources.Common_Implement_Oncoming}, Mode=OneWay}" />
 				</TextBlock>
 
 				<StackPanel Margin="15,0,0,0">
@@ -223,7 +223,7 @@
 
 		<TabItem>
 			<TabItem.Header>
-				<TextBlock Text="通信設定"
+				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Network}, Mode=OneWay}"
 						   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
 						   Margin="12,0"
 						   FontSize="14" />
@@ -276,14 +276,14 @@
 
 		<TabItem>
 			<TabItem.Header>
-				<TextBlock Text="その他"
+				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Other}, Mode=OneWay}"
 						   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
 						   Margin="12,0"
 						   FontSize="14" />
 			</TabItem.Header>
 
 			<StackPanel Margin="10,0">
-				<TextBlock Text="スクリーンショット"
+				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Screenshot}}"
 						   Style="{DynamicResource HeaderTextBlockStyleKey}" />
 				<Grid Margin="15,0,0,10">
 					<Grid.RowDefinitions>
@@ -296,13 +296,14 @@
 						<ColumnDefinition Width="Auto" />
 						<ColumnDefinition Width="Auto" />
 					</Grid.ColumnDefinitions>
-					<TextBlock Text="保存先フォルダー  "
-							   VerticalAlignment="Center"
-							   Margin="0,6" />
+					<TextBlock Margin="0,6">
+						<Run Text="{Binding Source={x:Static properties:Resources.Settings_Screenshot_FolderTextBox_Label}, Mode=OneWay}" />
+						<Run Text=": " />
+					</TextBlock>
 					<controls:PromptTextBox Grid.Row="0"
 											Grid.Column="1"
 											Text="{Binding ScreenshotFolder, UpdateSourceTrigger=PropertyChanged}"
-											Prompt="保存先フォルダー パス" />
+											Prompt="{Binding Source={x:Static properties:Resources.Settings_Screenshot_FolderTextBox_Prompt}, Mode=OneWay}" />
 					<controls:CallMethodButton Grid.Row="0"
 											   Grid.Column="2"
 											   Content="{Binding Source={x:Static properties:Resources.Settings_Screenshot_FolderSelectionDialog_OpenButton}}"

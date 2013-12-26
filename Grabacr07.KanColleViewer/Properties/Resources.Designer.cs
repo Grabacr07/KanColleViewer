@@ -61,6 +61,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   ※近日実装予定 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Common_Implement_Oncoming {
+            get {
+                return ResourceManager.GetString("Common_Implement_Oncoming", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Please visit all of the quest pages. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Quest_Detail_Untaken {
@@ -187,6 +196,42 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   表示設定 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Settings_Display {
+            get {
+                return ResourceManager.GetString("Settings_Display", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   通信設定 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Settings_Network {
+            get {
+                return ResourceManager.GetString("Settings_Network", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   動作設定 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Settings_Operation {
+            get {
+                return ResourceManager.GetString("Settings_Operation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   その他 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Settings_Other {
+            get {
+                return ResourceManager.GetString("Settings_Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Proxy Settings に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Settings_Proxy {
@@ -232,6 +277,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   スクリーンショット に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Settings_Screenshot {
+            get {
+                return ResourceManager.GetString("Settings_Screenshot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Browse に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Settings_Screenshot_FolderSelectionDialog_OpenButton {
@@ -250,11 +304,47 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   保存先 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Settings_Screenshot_FolderTextBox_Label {
+            get {
+                return ResourceManager.GetString("Settings_Screenshot_FolderTextBox_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   保存先フォルダーのパス に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Settings_Screenshot_FolderTextBox_Prompt {
+            get {
+                return ResourceManager.GetString("Settings_Screenshot_FolderTextBox_Prompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Open Folder に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Settings_Screenshot_OpenFolderButton {
             get {
                 return ResourceManager.GetString("Settings_Screenshot_OpenFolderButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ウィンドウ設定 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Settings_Window {
+            get {
+                return ResourceManager.GetString("Settings_Window", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ウィンドウを常に最前面に表示する に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Settings_Window_TopMost {
+            get {
+                return ResourceManager.GetString("Settings_Window_TopMost", resourceCulture);
             }
         }
         

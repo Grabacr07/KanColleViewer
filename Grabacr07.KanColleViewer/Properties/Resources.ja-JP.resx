@@ -198,4 +198,34 @@
   <data name="Settings_Proxy_Enable_4_SSL" xml:space="preserve">
     <value>SSL 接続時もプロキシサーバーを使用する</value>
   </data>
+  <data name="Settings_Display" xml:space="preserve">
+    <value>表示設定</value>
+  </data>
+  <data name="Settings_Network" xml:space="preserve">
+    <value>通信設定</value>
+  </data>
+  <data name="Settings_Operation" xml:space="preserve">
+    <value>動作設定</value>
+  </data>
+  <data name="Settings_Screenshot" xml:space="preserve">
+    <value>スクリーンショット</value>
+  </data>
+  <data name="Settings_Screenshot_FolderTextBox_Label" xml:space="preserve">
+    <value>保存先</value>
+  </data>
+  <data name="Settings_Screenshot_FolderTextBox_Prompt" xml:space="preserve">
+    <value>保存先フォルダーのパス</value>
+  </data>
+  <data name="Settings_Window" xml:space="preserve">
+    <value>ウィンドウ設定</value>
+  </data>
+  <data name="Settings_Window_TopMost" xml:space="preserve">
+    <value>ウィンドウを常に最前面に表示する</value>
+  </data>
+  <data name="Common_Implement_Oncoming" xml:space="preserve">
+    <value>※近日実装予定</value>
+  </data>
+  <data name="Settings_Other" xml:space="preserve">
+    <value>その他</value>
+  </data>
 </root>
