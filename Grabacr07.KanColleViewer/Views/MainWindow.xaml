@@ -43,6 +43,10 @@
 										 MessageKey="Window/Location">
 			<behaviors:SetWindowLocationAction />
 		</livet:InteractionMessageTrigger>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger, Mode=OneWay}"
+										 MessageKey="Window/Activate">
+			<livet:WindowInteractionMessageAction />
+		</livet:InteractionMessageTrigger>
 	</i:Interaction.Triggers>
 
 	<Grid>

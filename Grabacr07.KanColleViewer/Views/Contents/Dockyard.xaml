@@ -28,13 +28,6 @@
 							BorderThickness="1"
 							BorderBrush="{DynamicResource ActiveBorderBrushKey}"
 							Padding="5,8">
-						<i:Interaction.Triggers>
-							<livet:InteractionMessageTrigger Messenger="{Binding Messenger, Mode=OneWay}"
-															 MessageKey="Window/Activate">
-								<livet:WindowInteractionMessageAction />
-							</livet:InteractionMessageTrigger>
-						</i:Interaction.Triggers>
-
 						<Grid x:Name="Root">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="Auto"

@@ -74,7 +74,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 						Toast.Show(
 							"遠征完了",
 							"「" + args.FleetName + "」が遠征から帰投しました。",
-							() => this.Messenger.Raise(new WindowActionMessage(WindowAction.Active, "Window/Activate")));
+							() => App.ViewModelRoot.Messenger.Raise(new WindowActionMessage(WindowAction.Active, "Window/Activate")));
 					}
 				};
 			}

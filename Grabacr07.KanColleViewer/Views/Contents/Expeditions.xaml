@@ -32,17 +32,10 @@
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
 					<Border x:Name="Root"
-					        Margin="5,0,5,10"
-					        BorderThickness="1"
-					        BorderBrush="{DynamicResource ActiveBorderBrushKey}"
-					        Padding="10,8">
-						<i:Interaction.Triggers>
-							<livet:InteractionMessageTrigger Messenger="{Binding Expedition.Messenger, Mode=OneWay}"
-							                                 MessageKey="Window/Activate">
-								<livet:WindowInteractionMessageAction />
-							</livet:InteractionMessageTrigger>
-						</i:Interaction.Triggers>
-
+							Margin="5,0,5,10"
+							BorderThickness="1"
+							BorderBrush="{DynamicResource ActiveBorderBrushKey}"
+							Padding="10,8">
 						<Grid>
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="*"

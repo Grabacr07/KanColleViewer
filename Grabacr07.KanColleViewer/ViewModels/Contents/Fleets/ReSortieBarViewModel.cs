@@ -115,7 +115,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 						Toast.Show(
 							"疲労回復完了",
 							"「" + parent.Name + "」の全艦娘の疲労が回復しました。",
-							() => this.Messenger.Raise(new WindowActionMessage(WindowAction.Active, "Window/Activate")));
+							() => App.ViewModelRoot.Messenger.Raise(new WindowActionMessage(WindowAction.Active, "Window/Activate")));
 					}
 				};
 			}
