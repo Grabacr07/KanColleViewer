@@ -1287,6 +1287,12 @@
 
 			<Trigger Property="IsEnabled"
 					 Value="False">
+				<Setter Property="Background"
+						Value="{DynamicResource InactiveBackgroundBrushKey}" />
+				<Setter Property="BorderBrush"
+						Value="{DynamicResource InactiveBorderBrushKey}" />
+				<Setter Property="Foreground"
+						Value="{DynamicResource InactiveForegroundBrushKey}" />
 				<Setter Property="PromptBrush"
 						Value="Transparent" />
 			</Trigger>
