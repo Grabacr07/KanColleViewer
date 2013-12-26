@@ -166,10 +166,10 @@
 								   FontSize="11" />
 					</StackPanel>
 				</controls:CallMethodButton>
-				
+
 				<Rectangle Height="1"
 						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-				
+
 			</StackPanel>
 		</TabItem>
 
@@ -181,9 +181,14 @@
 						   FontSize="14" />
 			</TabItem.Header>
 
-			<StackPanel Margin="10,0">
-				<TextBlock Text="出撃コンディション"
-						   Style="{DynamicResource HeaderTextBlockStyleKey}" />
+			<StackPanel Margin="10,0"
+						IsEnabled="False">
+				<TextBlock Margin="0,0,0,10">
+					<Run Text="出撃コンディション"
+						 Style="{DynamicResource PickupTextElementStyleKey}" />
+					<Run Text=" " />
+					<Run Text="※近日実装予定" />
+				</TextBlock>
 
 				<StackPanel Margin="15,0,0,0">
 					<TextBlock>
@@ -212,7 +217,7 @@
 
 				<Rectangle Height="1"
 						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-				
+
 			</StackPanel>
 		</TabItem>
 
