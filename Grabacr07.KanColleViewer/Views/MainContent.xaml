@@ -46,7 +46,7 @@
 									 Margin="6,0"
 									 Width="50"
 									 Height="38"
-									 DataContext="{Binding Source={x:Static root:App.ViewModelRoot}, Path=Volume}"
+									 DataContext="{Binding Volume}"
 									 IsMute="{Binding IsMute, Mode=OneWay}"
 									 MethodName="ToggleMute" />
 

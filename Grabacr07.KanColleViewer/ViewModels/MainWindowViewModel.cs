@@ -22,7 +22,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		private MainContentViewModel mainContent;
 
 		public NavigatorViewModel Navigator { get; private set; }
-		public VolumeViewModel Volume { get; private set; }
 
 		#region Mode 変更通知プロパティ
 
@@ -135,7 +134,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		{
 			this.Title = "提督業も忙しい！";
 			this.Navigator = new NavigatorViewModel();
-			this.Volume = new VolumeViewModel();
 
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(StatusService.Current)
 			{

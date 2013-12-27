@@ -19,6 +19,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		public IList<TabItemViewModel> TabItems { get; set; }
 		public IList<TabItemViewModel> SystemTabItems { get; set; }
 
+		public VolumeViewModel Volume { get; private set; }
+
 		#region SelectedItem 変更通知プロパティ
 
 		private TabItemViewModel _SelectedItem;
@@ -63,6 +65,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				new SettingsViewModel(),
 			};
 			this.SelectedItem = this.TabItems.FirstOrDefault();
+
+			this.Volume = new VolumeViewModel();
 		}
 	}
 }
