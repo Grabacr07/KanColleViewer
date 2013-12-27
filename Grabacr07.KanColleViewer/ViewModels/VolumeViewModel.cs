@@ -33,6 +33,12 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+
+		public VolumeViewModel()
+		{
+			this.CreateVolumeInstanceIfNull();
+		}
+
 		public void ToggleMute()
 		{
 			if (this.CreateVolumeInstanceIfNull())
