@@ -71,16 +71,11 @@
 					<ColumnDefinition Width="Auto" />
 				</Grid.ColumnDefinitions>
 
-				<chrome:CaptionButton Grid.Column="0"
-									  Margin="0"
-									  Padding="10,7"
-									  Width="Auto"
-									  Height="Auto"
-									  WindowChrome.IsHitTestVisibleInChrome="True">
-					<Path Width="20"
-						  Height="20"
-						  Style="{DynamicResource ApplicationIconKey}" />
-				</chrome:CaptionButton>
+				<controls:AppIcon Width="40"
+								  Height="40"
+								  Background="Transparent"
+								  AnchorVisibility="Collapsed"
+								  BandVisibility="Collapsed"/>
 
 				<TextBlock Grid.Column="1"
 						   Text="{Binding Title}"
