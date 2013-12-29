@@ -314,7 +314,7 @@
 							   FontSize="16"
 							   Margin="0,-9,0,0" />
 					<TextBlock Margin="-1,0,0,-4">
-						<Run Text="{Binding Source={x:Static kanColleViewer:App.ProductInfo}, Path=Title}"
+						<Run Text="{Binding Source={x:Static kanColleViewer:App.ProductInfo}, Path=Title, Mode=OneWay}"
 							 FontFamily="Yu Gothic Light"
 							 FontSize="20"
 							 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
