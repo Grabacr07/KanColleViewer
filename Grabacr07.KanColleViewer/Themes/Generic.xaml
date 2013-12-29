@@ -671,10 +671,6 @@
 				Value="1" />
 		<Setter Property="Padding"
 				Value="8,2" />
-		<Setter Property="SnapsToDevicePixels"
-				Value="True" />
-		<Setter Property="TextOptions.TextFormattingMode"
-				Value="Display" />
 		<Setter Property="FocusVisualStyle"
 				Value="{DynamicResource {x:Static SystemParameters.FocusVisualStyleKey}}" />
 		<Setter Property="Template">

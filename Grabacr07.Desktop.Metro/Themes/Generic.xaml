@@ -7,10 +7,6 @@
 				Value="0" />
 		<Setter Property="BorderThickness"
 				Value="1" />
-		<Setter Property="SnapsToDevicePixels"
-				Value="True" />
-		<Setter Property="TextOptions.TextFormattingMode"
-				Value="Display" />
 		<Setter Property="WindowChrome.WindowChrome"
 				Value="{Binding RelativeSource={RelativeSource Self}, Path=WindowChrome}" />
 		<Setter Property="WindowChrome">
@@ -49,10 +45,6 @@
 				Value="480" />
 		<Setter Property="Padding"
 				Value="0" />
-		<Setter Property="SnapsToDevicePixels"
-				Value="True" />
-		<Setter Property="TextOptions.TextFormattingMode"
-				Value="Display" />
 		<Setter Property="WindowChrome.WindowChrome"
 				Value="{Binding RelativeSource={RelativeSource Self}, Path=WindowChrome}" />
 		<Setter Property="WindowChrome">

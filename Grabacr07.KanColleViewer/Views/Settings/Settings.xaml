@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Settings"
+﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Settings.Settings"
 			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -7,10 +7,12 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
+			 xmlns:metroControls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
-			 xmlns:controls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:kanColleViewer="clr-namespace:Grabacr07.KanColleViewer"
+			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
+			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 mc:Ignorable="d"
 			 d:DesignWidth="700"
 			 d:DesignHeight="400"
@@ -42,7 +44,8 @@
 								Grid.Column="1">
 							<ContentPresenter x:Name="PART_SelectedContentHost"
 											  ContentSource="SelectedContent"
-											  Width="{Binding ElementName=ContentSize, Path=ActualWidth}" />
+											  Width="{Binding ElementName=ContentSize, Path=ActualWidth}"
+											  Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=ActualHeight}" />
 						</Border>
 					</Grid>
 				</Border>
@@ -114,14 +117,14 @@
 				<Rectangle Height="1"
 						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-				<controls:CallMethodButton MethodName="ClearZoomFactor"
-										   Padding="20,11"
-										   Margin="0,10"
-										   HorizontalAlignment="Left">
+				<metroControls:CallMethodButton MethodName="ClearZoomFactor"
+												Padding="20,11"
+												Margin="0,10"
+												HorizontalAlignment="Left">
 					<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_BrowserControl_ClearZoomFactorButton}, Mode=OneWay}"
-							   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:CallMethodButton}}, Path=Foreground}"
+							   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type metroControls:CallMethodButton}}, Path=Foreground}"
 							   FontSize="13" />
-				</controls:CallMethodButton>
+				</metroControls:CallMethodButton>
 
 			</StackPanel>
 		</TabItem>
@@ -152,20 +155,20 @@
 				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_WindowControl}}"
 						   Style="{DynamicResource HeaderTextBlockStyleKey}"
 						   Margin="0,10" />
-				<controls:CallMethodButton MethodName="SetLocationLeft"
-										   Padding="20,4"
-										   Margin="15,0,0,10"
-										   HorizontalAlignment="Left">
+				<metroControls:CallMethodButton MethodName="SetLocationLeft"
+												Padding="20,4"
+												Margin="15,0,0,10"
+												HorizontalAlignment="Left">
 					<StackPanel>
 						<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_WindowControl_LocationLeftButton}, Mode=OneWay}"
-								   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:CallMethodButton}}, Path=Foreground}"
+								   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type metroControls:CallMethodButton}}, Path=Foreground}"
 								   FontSize="13"
 								   HorizontalAlignment="Center" />
 						<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_WindowControl_LocationLeftButton_Sub}, Mode=OneWay}"
 								   HorizontalAlignment="Center"
 								   FontSize="11" />
 					</StackPanel>
-				</controls:CallMethodButton>
+				</metroControls:CallMethodButton>
 
 				<Rectangle Height="1"
 						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
@@ -202,11 +205,11 @@
 							<ColumnDefinition />
 						</Grid.ColumnDefinitions>
 
-						<controls:PromptTextBox Text="{Binding ReSortieCondition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnNotifyDataErrors=True}"
-												Prompt="例: 40"
-												ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"
-												Width="60"
-												VerticalAlignment="Top" />
+						<metroControls:PromptTextBox Text="{Binding ReSortieCondition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnNotifyDataErrors=True}"
+													 Prompt="例: 40"
+													 ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"
+													 Width="60"
+													 VerticalAlignment="Top" />
 						<TextBlock Grid.Column="2"
 								   TextWrapping="Wrap"
 								   Foreground="{DynamicResource InactiveForegroundBrushKey}">
@@ -229,49 +232,7 @@
 						   FontSize="14" />
 			</TabItem.Header>
 
-			<StackPanel Margin="10,0">
-				<TextBlock Text="{Binding Mode=OneWay,Source={x:Static properties:Resources.Settings_Proxy}}"
-						   Style="{DynamicResource HeaderTextBlockStyleKey}" />
-
-				<CheckBox x:Name="CheckboxUseProxy"
-						  Content="{Binding Source={x:Static properties:Resources.Settings_Proxy_Enable}}"
-						  IsChecked="{Binding UseProxy}" />
-				<StackPanel IsEnabled="{Binding IsChecked, ElementName=CheckboxUseProxy}"
-							Margin="15,6,0,6">
-					<Grid Margin="0,4">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto" />
-							<ColumnDefinition Width="*" />
-							<ColumnDefinition Width="15" />
-							<ColumnDefinition Width="Auto" />
-							<ColumnDefinition Width="Auto" />
-						</Grid.ColumnDefinitions>
-
-						<TextBlock Grid.Column="0">
-							<Run Text="{Binding Source={x:Static properties:Resources.Settings_Proxy_Host}, Mode=OneWay}" />
-							<Run Text=": " />
-						</TextBlock>
-						<controls:PromptTextBox Grid.Column="1"
-												Text="{Binding ProxyHost}"
-												Prompt="{Binding Source={x:Static properties:Resources.Settings_Proxy_Host}, Mode=OneWay}" />
-						<TextBlock Grid.Column="3">
-							<Run Text="{Binding Source={x:Static properties:Resources.Settings_Proxy_Port}, Mode=OneWay}" />
-							<Run Text=": " />
-						</TextBlock>
-						<controls:PromptTextBox Grid.Column="4"
-												Text="{Binding ProxyPort}"
-												Prompt="{Binding Source={x:Static properties:Resources.Settings_Proxy_Port}, Mode=OneWay}"
-												Width="80" />
-					</Grid>
-					<CheckBox Content="{Binding Source={x:Static properties:Resources.Settings_Proxy_Enable_4_SSL}}"
-							  IsChecked="{Binding UseProxyForSSL}"
-							  Margin="0,4" />
-				</StackPanel>
-
-				<Rectangle Height="1"
-						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-
-			</StackPanel>
+			<settings:Network Margin="10,0" />
 		</TabItem>
 
 		<TabItem>
@@ -300,21 +261,21 @@
 						<Run Text="{Binding Source={x:Static properties:Resources.Settings_Screenshot_FolderTextBox_Label}, Mode=OneWay}" />
 						<Run Text=": " />
 					</TextBlock>
-					<controls:PromptTextBox Grid.Row="0"
-											Grid.Column="1"
-											Text="{Binding ScreenshotFolder, UpdateSourceTrigger=PropertyChanged}"
-											Prompt="{Binding Source={x:Static properties:Resources.Settings_Screenshot_FolderTextBox_Prompt}, Mode=OneWay}" />
-					<controls:CallMethodButton Grid.Row="0"
-											   Grid.Column="2"
-											   Content="{Binding Source={x:Static properties:Resources.Settings_Screenshot_FolderSelectionDialog_OpenButton}}"
-											   MethodName="OpenScreenshotFolderSelectionDialog"
-											   Margin="6,0" />
-					<controls:CallMethodButton Grid.Row="0"
-											   Grid.Column="3"
-											   Content="{Binding Source={x:Static properties:Resources.Settings_Screenshot_OpenFolderButton}}"
-											   IsEnabled="{Binding CanOpenScreenshotFolder}"
-											   MethodName="OpenScreenshotFolder"
-											   Margin="0" />
+					<metroControls:PromptTextBox Grid.Row="0"
+												 Grid.Column="1"
+												 Text="{Binding ScreenshotFolder, UpdateSourceTrigger=PropertyChanged}"
+												 Prompt="{Binding Source={x:Static properties:Resources.Settings_Screenshot_FolderTextBox_Prompt}, Mode=OneWay}" />
+					<metroControls:CallMethodButton Grid.Row="0"
+													Grid.Column="2"
+													Content="{Binding Source={x:Static properties:Resources.Settings_Screenshot_FolderSelectionDialog_OpenButton}}"
+													MethodName="OpenScreenshotFolderSelectionDialog"
+													Margin="6,0" />
+					<metroControls:CallMethodButton Grid.Row="0"
+													Grid.Column="3"
+													Content="{Binding Source={x:Static properties:Resources.Settings_Screenshot_OpenFolderButton}}"
+													IsEnabled="{Binding CanOpenScreenshotFolder}"
+													MethodName="OpenScreenshotFolder"
+													Margin="0" />
 				</Grid>
 
 				<Rectangle Height="1"
@@ -323,6 +284,135 @@
 			</StackPanel>
 		</TabItem>
 
+		<TabItem>
+			<TabItem.Header>
+				<TextBlock Text="バージョン情報"
+						   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
+						   Margin="12,0"
+						   FontSize="14" />
+			</TabItem.Header>
+
+			<Grid Margin="18,0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+
+				<StackPanel Grid.ColumnSpan="2"
+							TextOptions.TextFormattingMode="Ideal">
+					<TextBlock Text="{Binding Source={x:Static kanColleViewer:App.ProductInfo}, Path=Product, Mode=OneWay}"
+							   FontFamily="Segoe UI Light"
+							   FontSize="44"
+							   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+							   Margin="-3,-14,0,0" />
+					<TextBlock Text="tool of the admiral, by the admiral, for the admiral"
+							   FontFamily="Segoe UI Light"
+							   FontSize="16"
+							   Margin="0,-9,0,0" />
+					<TextBlock Margin="-1,0,0,-4">
+						<Run Text="提督業も忙しい！"
+							 FontFamily="Yu Gothic Light"
+							 FontSize="20"
+							 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+						<Run Text="  " />
+						<Run Text="{Binding Source={x:Static kanColleViewer:App.ProductInfo}, Path=VersionString, StringFormat=Version {0}, Mode=OneWay}"
+							 FontFamily="Segoe UI Light"
+							 FontSize="20"
+							 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+					</TextBlock>
+
+					<Rectangle Height="1"
+							   Margin="0,10"
+							   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+				</StackPanel>
+
+				<StackPanel Grid.Row="1"
+							Grid.Column="0">
+
+					<TextBlock FontFamily="Segoe UI">
+						<Run Text="Project home:" />
+						<metroControls:HyperlinkEx Uri="http://grabacr.net/kancolleviewer">
+							<Run Text="http://grabacr.net/kancolleviewer" />
+						</metroControls:HyperlinkEx>
+
+						<LineBreak />
+
+						<Run Text="Source code:" />
+						<metroControls:HyperlinkEx Uri="https://github.com/Grabacr07/KanColleViewer">
+							<Run Text="https://github.com/Grabacr07/KanColleViewer" />
+						</metroControls:HyperlinkEx>
+
+						<LineBreak />
+
+						<Run Text="Author / Developer:" />
+						<metroControls:HyperlinkEx Uri="https://twitter.com/Grabacr07">
+							<Run Text="@Grabacr07" />
+						</metroControls:HyperlinkEx>
+
+						<LineBreak />
+						<LineBreak />
+
+						<Run Text="Icon design:" />
+						<metroControls:HyperlinkEx Uri="https://twitter.com/Nrtwd/">
+							<Run Text="@Nrtwd" />
+						</metroControls:HyperlinkEx>
+					</TextBlock>
+
+					<Rectangle Height="1"
+							   Margin="0,10"
+							   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+					<metroControls:BindableTextBlock TextSource="{Binding Libraries}"
+													 TextWrapping="Wrap"
+													 FontFamily="Segoe UI"
+													 FontSize="11">
+						<metroControls:BindableTextBlock.TextTemplates>
+							<DataTemplate DataType="{x:Type viewModels:HyperlinkViewModel}">
+								<metroControls:InlineHolder>
+									<metroControls:HyperlinkEx Uri="{Binding Uri}">
+										<Run Text="{Binding Text, Mode=OneWay}" />
+									</metroControls:HyperlinkEx>
+								</metroControls:InlineHolder>
+							</DataTemplate>
+							<DataTemplate DataType="{x:Type viewModels:BindableTextViewModel}">
+								<metroControls:InlineHolder>
+									<Run Text="{Binding Text, Mode=OneWay}" />
+								</metroControls:InlineHolder>
+							</DataTemplate>
+						</metroControls:BindableTextBlock.TextTemplates>
+					</metroControls:BindableTextBlock>
+				</StackPanel>
+
+				<TextBlock Grid.Row="1"
+						   Grid.Column="0"
+						   FontFamily="Segoe UI"
+						   VerticalAlignment="Bottom"
+						   Margin="0,0,0,16"
+						   TextWrapping="Wrap">
+					<Run Text="{Binding Source={x:Static kanColleViewer:App.ProductInfo}, Path=Copyright, Mode=OneWay}" />
+					<LineBreak />
+					<Run Text="{Binding Source={x:Static kanColleViewer:App.ProductInfo}, Path=Product, Mode=OneWay}" />
+					<Run Text="is" />
+					<Run Text="OSS"
+						 ToolTip="Open Source Software" />
+					<Run Text="released under" />
+					<metroControls:HyperlinkEx Uri="https://github.com/Grabacr07/KanColleViewer/blob/master/LICENSE.txt">
+						<Run Text="The MIT License." />
+					</metroControls:HyperlinkEx>
+				</TextBlock>
+
+				<controls:AppIcon Grid.Row="1"
+								  Grid.Column="1"
+								  Width="210"
+								  HorizontalAlignment="Right"
+								  Background="{DynamicResource ThemeBrushKey}"
+								  VerticalAlignment="Bottom" />
+			</Grid>
+		</TabItem>
 	</TabControl>
 
 </UserControl>

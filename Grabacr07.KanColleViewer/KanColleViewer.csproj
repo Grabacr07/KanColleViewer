@@ -118,6 +118,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\ProductInfo.cs" />
     <Compile Include="Model\Data\Xml\XmlFileReader.cs" />
     <Compile Include="Model\Data\Xml\XmlFileWriter.cs" />
     <Compile Include="Model\Data\Xml\XmlSerializableDictionary.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="ViewModels\Contents\Fleets\TimerViewModel.cs" />
     <Compile Include="ViewModels\Contents\QuestsViewModel.cs" />
     <Compile Include="ViewModels\Contents\QuestViewModel.cs" />
+    <Compile Include="ViewModels\BindableTextViewModel.cs" />
     <Compile Include="ViewModels\MainContentViewModel.cs" />
     <Compile Include="Model\INavigator.cs" />
     <Compile Include="ViewModels\Contents\MaterialsViewModel.cs" />
@@ -189,8 +191,11 @@
     <Compile Include="Views\Contents\Repairyard.xaml.cs">
       <DependentUpon>Repairyard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Settings.xaml.cs">
+    <Compile Include="Views\Settings\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\Network.xaml.cs">
+      <DependentUpon>Network.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StatusBar.xaml.cs">
       <DependentUpon>StatusBar.xaml</DependentUpon>
@@ -240,9 +245,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Settings.xaml">
+    <Page Include="Views\Settings\Settings.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Settings\Network.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\StatusBar.xaml">
       <SubType>Designer</SubType>

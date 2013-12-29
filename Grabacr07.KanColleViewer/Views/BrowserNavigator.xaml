@@ -71,7 +71,7 @@
 			<i:Interaction.Triggers>
 				<i:EventTrigger EventName="Click">
 					<livet:LivetCallMethodAction MethodTarget="{Binding}"
-												 MethodName="Refresh" />
+												 MethodName="ReNavigate" />
 				</i:EventTrigger>
 			</i:Interaction.Triggers>
 		</controls:NavigationButton>

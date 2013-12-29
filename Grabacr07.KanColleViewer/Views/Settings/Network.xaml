@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Settings.Network"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
+			 xmlns:controls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+			 mc:Ignorable="d"
+			 d:DesignWidth="500"
+			 d:DesignHeight="300"
+			 d:DataContext="{d:DesignInstance viewModels:SettingsViewModel}">
+	<UserControl.Resources>
+		<Style x:Key="HeaderTextBlockStyleKey"
+			   TargetType="{x:Type TextBlock}">
+			<Setter Property="Margin"
+					Value="0,0,0,10" />
+			<Setter Property="FontSize"
+					Value="15" />
+			<Setter Property="Foreground"
+					Value="{DynamicResource ActiveForegroundBrushKey}" />
+		</Style>
+	</UserControl.Resources>
+
+	<StackPanel>
+		<TextBlock Text="{Binding Mode=OneWay,Source={x:Static properties:Resources.Settings_Proxy}}"
+				   Style="{DynamicResource HeaderTextBlockStyleKey}" />
+
+		<CheckBox x:Name="CheckboxUseProxy"
+				  Content="{Binding Source={x:Static properties:Resources.Settings_Proxy_Enable}}"
+				  IsChecked="{Binding UseProxy}" />
+		<StackPanel IsEnabled="{Binding IsChecked, ElementName=CheckboxUseProxy}"
+					Margin="15,6,0,6">
+			<Grid Margin="0,4">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="15" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+
+				<TextBlock Grid.Column="0">
+							<Run Text="{Binding Source={x:Static properties:Resources.Settings_Proxy_Host}, Mode=OneWay}" />
+							<Run Text=": " />
+				</TextBlock>
+				<controls:PromptTextBox Grid.Column="1"
+										Text="{Binding ProxyHost}"
+										Prompt="{Binding Source={x:Static properties:Resources.Settings_Proxy_Host}, Mode=OneWay}" />
+				<TextBlock Grid.Column="3">
+							<Run Text="{Binding Source={x:Static properties:Resources.Settings_Proxy_Port}, Mode=OneWay}" />
+							<Run Text=": " />
+				</TextBlock>
+				<controls:PromptTextBox Grid.Column="4"
+										Text="{Binding ProxyPort}"
+										Prompt="{Binding Source={x:Static properties:Resources.Settings_Proxy_Port}, Mode=OneWay}"
+										Width="80" />
+			</Grid>
+			<CheckBox Content="{Binding Source={x:Static properties:Resources.Settings_Proxy_Enable_4_SSL}}"
+					  IsChecked="{Binding UseProxyForSSL}"
+					  Margin="0,4" />
+		</StackPanel>
+
+		<Rectangle Height="1"
+				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+	</StackPanel>
+</UserControl>

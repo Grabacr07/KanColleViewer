@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using Grabacr07.KanColleViewer.Model;
 using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleViewer.ViewModels.Messages;
@@ -154,6 +155,26 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region Libraries 変更通知プロパティ
+
+		private IEnumerable<BindableTextViewModel> _Libraries;
+
+		public IEnumerable<BindableTextViewModel> Libraries
+		{
+			get { return this._Libraries; }
+			set
+			{
+				if (this._Libraries != value)
+				{
+					this._Libraries = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+
 		public bool HasErrors
 		{
 			get { return this.reSortieConditionError != null; }
@@ -164,7 +185,18 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		public SettingsViewModel()
 		{
+			if (Helper.IsInDesignMode) return;
+
 			this.Name = "設定";
+
+			this.Libraries = App.ProductInfo.Libraries.Aggregate(
+				new List<BindableTextViewModel>(),
+				(list, lib) =>
+				{
+					list.Add(new BindableTextViewModel { Text = list.Count == 0 ? "Build with " : ", " });
+					list.Add(new HyperlinkViewModel { Text = lib.Name.Replace(' ', Convert.ToChar(160)), Uri = lib.Url });
+					return list;
+				});
 
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(Settings.Current)
 			{

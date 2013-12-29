@@ -137,10 +137,6 @@
 				Value="{DynamicResource ActiveForegroundBrushKey}" />
 		<Setter Property="Padding"
 				Value="8,2" />
-		<Setter Property="SnapsToDevicePixels"
-				Value="True" />
-		<Setter Property="TextOptions.TextFormattingMode"
-				Value="Display" />
 		<Setter Property="FocusVisualStyle"
 				Value="{DynamicResource {x:Static SystemParameters.FocusVisualStyleKey}}" />
 		<Setter Property="Template">
@@ -198,10 +194,6 @@
 				Value="{DynamicResource ActiveForegroundBrushKey}" />
 		<Setter Property="Padding"
 				Value="8,2" />
-		<Setter Property="SnapsToDevicePixels"
-				Value="True" />
-		<Setter Property="TextOptions.TextFormattingMode"
-				Value="Display" />
 		<Setter Property="FocusVisualStyle"
 				Value="{DynamicResource {x:Static SystemParameters.FocusVisualStyleKey}}" />
 		<Setter Property="Template">
@@ -1147,10 +1139,6 @@
 				Value="Center" />
 		<Setter Property="VerticalContentAlignment"
 				Value="Center" />
-		<Setter Property="SnapsToDevicePixels"
-				Value="True" />
-		<Setter Property="TextOptions.TextFormattingMode"
-				Value="Display" />
 		<Setter Property="FocusVisualStyle"
 				Value="{DynamicResource {x:Static SystemParameters.FocusVisualStyleKey}}" />
 		<Setter Property="Template">
@@ -1218,8 +1206,6 @@
 				Value="" />
 		<Setter Property="Prompt"
 				Value="プロンプト" />
-		<Setter Property="TextOptions.TextFormattingMode"
-				Value="Display" />
 		<Setter Property="FocusVisualStyle"
 				Value="{DynamicResource {x:Static SystemParameters.FocusVisualStyleKey}}" />
 		<Setter Property="Template">
@@ -1692,6 +1678,41 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+	
+	
+	
+	<Style TargetType="{x:Type controls:BindableRichTextBox}">
+		<Setter Property="Background"
+				Value="Transparent" />
+		<Setter Property="Foreground"
+				Value="{DynamicResource ActiveForegroundBrushKey}" />
+		<Setter Property="AutoWordSelection"
+				Value="False" />
+		<Setter Property="IsReadOnly"
+				Value="True" />
+		<Setter Property="AcceptsReturn"
+				Value="True" />
+		<Setter Property="FocusVisualStyle"
+				Value="{DynamicResource {x:Static SystemParameters.FocusVisualStyleKey}}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type controls:BindableRichTextBox}">
+					<Border Background="{TemplateBinding Background}"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}"
+							SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+							Padding="{TemplateBinding Padding}">
+						<ScrollViewer x:Name="PART_ContentHost"
+									  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+									  HorizontalScrollBarVisibility="{TemplateBinding HorizontalScrollBarVisibility}"
+									  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+									  VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}"
+									  Margin="-5,0" />
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 
 
 
@@ -1765,8 +1786,7 @@
 								   FontSize="14"
 								   Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Path=Foreground}"
 								   VerticalAlignment="Center"
-								   TextTrimming="CharacterEllipsis"
-								   TextOptions.TextFormattingMode="Display" />
+								   TextTrimming="CharacterEllipsis" />
 						<controls:Badge Grid.Column="1"
 										Grid.ColumnSpan="2"
 										Count="{Binding Badge}"

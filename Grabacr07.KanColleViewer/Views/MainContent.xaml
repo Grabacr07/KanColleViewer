@@ -19,6 +19,7 @@
 			 xmlns:vmContents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 xmlns:vmDocks="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Docks"
 			 xmlns:vmFleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
+			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
 			 mc:Ignorable="d"
 			 d:DesignWidth="800"
 			 d:DataContext="{d:DesignInstance vm:MainContentViewModel}"
@@ -110,7 +111,7 @@
 						  VerticalAlignment="Top">
 				<ContentControl DataContext="{Binding SelectedItem}"
 								Content="{Binding}"
-								Height="{Binding Source={x:Static properties:Settings.Default}, Path=UIContentHight}">
+								MinHeight="{Binding Source={x:Static properties:Settings.Default}, Path=UIContentHight}">
 					<ContentControl.Resources>
 						<DataTemplate DataType="{x:Type vmFleets:FleetsViewModel}">
 							<views:Fleets />
@@ -128,7 +129,7 @@
 							<contents:Expeditions />
 						</DataTemplate>
 						<DataTemplate DataType="{x:Type vm:SettingsViewModel}">
-							<views:Settings />
+							<settings:Settings />
 						</DataTemplate>
 					</ContentControl.Resources>
 				</ContentControl>

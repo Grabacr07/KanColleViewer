@@ -76,8 +76,11 @@
   <ItemGroup>
     <Compile Include="Behaviors\InactiveOpacityBehavior.cs" />
     <Compile Include="Controls\Badge.cs" />
+    <Compile Include="Controls\BindableRichTextBox.cs" />
+    <Compile Include="Controls\BindableTextBlock.cs" />
     <Compile Include="Controls\CallMethodButton.cs" />
     <Compile Include="Controls\ExpanderButton.cs" />
+    <Compile Include="Controls\HyperlinkEx.cs" />
     <Compile Include="Controls\ITabItem.cs" />
     <Compile Include="Controls\LinkButton.cs" />
     <Compile Include="Controls\PromptComboBox.cs" />

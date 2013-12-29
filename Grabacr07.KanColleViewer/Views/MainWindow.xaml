@@ -71,8 +71,8 @@
 					<ColumnDefinition Width="Auto" />
 				</Grid.ColumnDefinitions>
 
-				<controls:AppIcon Width="40"
-								  Height="40"
+				<controls:AppIcon Width="36"
+								  Height="36"
 								  Background="Transparent"
 								  AnchorVisibility="Collapsed"
 								  BandVisibility="Collapsed"/>
@@ -80,10 +80,8 @@
 				<TextBlock Grid.Column="1"
 						   Text="{Binding Title}"
 						   FontFamily="Segoe UI"
-						   FontSize="18"
-						   Margin="3,8,8,8"
-						   VerticalAlignment="Center"
-						   TextTrimming="CharacterEllipsis"
+						   FontSize="16"
+						   Margin="4,2,8,2"
 						   Opacity="0.85" />
 
 				<StackPanel Grid.Column="2"

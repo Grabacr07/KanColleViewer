@@ -140,6 +140,11 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		public void Refresh()
 		{
+			if (this.UriRequested != null) this.RefreshRequested(this, new EventArgs());
+		}
+
+		public void ReNavigate()
+		{
 			if (this.UriRequested != null) this.UriRequested(this, this.Source);
 		}
 
