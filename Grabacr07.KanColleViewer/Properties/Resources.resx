@@ -145,10 +145,10 @@
     <value> Complete </value>
   </data>
   <data name="Quests_Notice" xml:space="preserve">
-    <value>※The indicators (50%, 80%) mirror in-game indicators. Enemy fleet kills, successful expeditions, etc are not actively counted.</value>
+    <value>※ The indicators (50%, 80%) mirror in-game indicators. Enemy fleet kills, successful expeditions, etc are not actively counted.</value>
   </data>
   <data name="Settings_BrowserControl_Notice" xml:space="preserve">
-    <value>※This will leave the game, so use with caution</value>
+    <value>※ This will leave the game, so use with caution</value>
   </data>
   <data name="Settings_Screenshot_FolderSelectionDialog_OpenButton" xml:space="preserve">
     <value>Browse</value>
@@ -166,10 +166,10 @@
     <value>Zoom Failed: {0}</value>
   </data>
   <data name="Settings_BrowserControl" xml:space="preserve">
-    <value>Browser Controls</value>
+    <value>Browser</value>
   </data>
   <data name="Settings_BrowserControl_ClearZoomFactorButton" xml:space="preserve">
-    <value>Reset zoom magnification to 100%</value>
+    <value>Reset zoom to 100%</value>
   </data>
   <data name="Settings_BrowserControl_Display" xml:space="preserve">
     <value>(Display)</value>
@@ -178,7 +178,7 @@
     <value>Window Controls</value>
   </data>
   <data name="Settings_WindowControl_LocationLeftButton" xml:space="preserve">
-    <value>Dock the Window on the left side of the screen.</value>
+    <value>Dock window to left of screen.</value>
   </data>
   <data name="Settings_WindowControl_LocationLeftButton_Sub" xml:space="preserve">
     <value>For use with 8 inch tablets (800x1280)</value>
@@ -193,39 +193,39 @@
     <value>Port</value>
   </data>
   <data name="Settings_Proxy_Enable" xml:space="preserve">
-    <value>Use proxy to connect the server</value>
+    <value>Use a proxy to connect the server</value>
   </data>
   <data name="Settings_Proxy_Enable_4_SSL" xml:space="preserve">
-    <value>SSL 接続時もプロキシサーバーを使用する</value>
+    <value>Use the proxy for SSL connections</value>
   </data>
   <data name="Settings_Display" xml:space="preserve">
-    <value>表示設定</value>
+    <value>Display Settings</value>
   </data>
   <data name="Settings_Network" xml:space="preserve">
-    <value>通信設定</value>
+    <value>Network</value>
   </data>
   <data name="Settings_Operation" xml:space="preserve">
-    <value>動作設定</value>
+    <value>Behaviour</value>
   </data>
   <data name="Settings_Screenshot" xml:space="preserve">
-    <value>スクリーンショット</value>
+    <value>Screenshot Settings</value>
   </data>
   <data name="Settings_Screenshot_FolderTextBox_Label" xml:space="preserve">
-    <value>保存先</value>
+    <value>Destination</value>
   </data>
   <data name="Settings_Screenshot_FolderTextBox_Prompt" xml:space="preserve">
-    <value>保存先フォルダーのパス</value>
+    <value>Destination Folder Path</value>
   </data>
   <data name="Settings_Window" xml:space="preserve">
-    <value>ウィンドウ設定</value>
+    <value>Window</value>
   </data>
   <data name="Settings_Window_TopMost" xml:space="preserve">
-    <value>ウィンドウを常に最前面に表示する</value>
+    <value>Always on top of everything</value>
   </data>
   <data name="Common_Implement_Oncoming" xml:space="preserve">
-    <value>※近日実装予定</value>
+    <value>※ To be implemented</value>
   </data>
   <data name="Settings_Other" xml:space="preserve">
-    <value>その他</value>
+    <value>Other</value>
   </data>
 </root>
