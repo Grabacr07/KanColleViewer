@@ -228,4 +228,7 @@
   <data name="Settings_Other" xml:space="preserve">
     <value>Other</value>
   </data>
+  <data name="Settings_VersionInfo" xml:space="preserve">
+    <value>バージョン情報</value>
+  </data>
 </root>

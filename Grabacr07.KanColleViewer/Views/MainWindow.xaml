@@ -81,7 +81,7 @@
 						   Text="{Binding Title}"
 						   FontFamily="Segoe UI"
 						   FontSize="16"
-						   Margin="4,2,8,2"
+						   Margin="2,2,8,2"
 						   Opacity="0.85" />
 
 				<StackPanel Grid.Column="2"

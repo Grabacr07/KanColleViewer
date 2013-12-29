@@ -132,7 +132,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		public MainWindowViewModel()
 		{
-			this.Title = "提督業も忙しい！";
+			this.Title = App.ProductInfo.Title;
 			this.Navigator = new NavigatorViewModel();
 
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(StatusService.Current)

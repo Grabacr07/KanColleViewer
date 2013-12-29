@@ -286,7 +286,7 @@
 
 		<TabItem>
 			<TabItem.Header>
-				<TextBlock Text="バージョン情報"
+				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_VersionInfo}}"
 						   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
 						   Margin="12,0"
 						   FontSize="14" />
@@ -314,7 +314,7 @@
 							   FontSize="16"
 							   Margin="0,-9,0,0" />
 					<TextBlock Margin="-1,0,0,-4">
-						<Run Text="提督業も忙しい！"
+						<Run Text="{Binding Source={x:Static kanColleViewer:App.ProductInfo}, Path=Title}"
 							 FontFamily="Yu Gothic Light"
 							 FontSize="20"
 							 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
