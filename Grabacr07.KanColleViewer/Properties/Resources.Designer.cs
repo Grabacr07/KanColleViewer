@@ -160,7 +160,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Browser Controls.
+        ///   Looks up a localized string similar to Browser.
         /// </summary>
         public static string Settings_BrowserControl {
             get {
@@ -205,7 +205,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Network Settings.
+        ///   Looks up a localized string similar to Network.
         /// </summary>
         public static string Settings_Network {
             get {
@@ -214,7 +214,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Behaviour Settings.
+        ///   Looks up a localized string similar to Behaviour.
         /// </summary>
         public static string Settings_Operation {
             get {
@@ -223,7 +223,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Other Settings.
+        ///   Looks up a localized string similar to Other.
         /// </summary>
         public static string Settings_Other {
             get {
@@ -331,7 +331,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Window Settings.
+        ///   Looks up a localized string similar to Window.
         /// </summary>
         public static string Settings_Window {
             get {
