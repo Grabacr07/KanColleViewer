@@ -120,7 +120,7 @@ namespace Grabacr07.KanColleViewer.Model
 
 		public bool NotifyBuildingCompleted
 		{
-            get { return this._NotifyBuildingCompleted; }
+			get { return this._NotifyBuildingCompleted; }
 			set
 			{
 				if (this._NotifyBuildingCompleted != value)
