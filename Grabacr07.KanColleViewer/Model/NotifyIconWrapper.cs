@@ -8,7 +8,7 @@ namespace Grabacr07.KanColleViewer.Model
 	public class NotifyIconWrapper
 	{
 		private static NotifyIcon _notifyIcon;
-		public NotifyIconWrapper() { }
+		private NotifyIconWrapper() { }
 
 		public static void Initialize()
 		{
@@ -21,6 +21,11 @@ namespace Grabacr07.KanColleViewer.Model
 		public static void Show(string title, string text)
 		{
 			_notifyIcon.ShowBalloonTip(1000, title, text, ToolTipIcon.None);
+		}
+
+		public static void Dispose()
+		{
+			_notifyIcon.Dispose();
 		}
 	}
 }

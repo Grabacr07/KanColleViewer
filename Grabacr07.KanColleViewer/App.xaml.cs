@@ -57,6 +57,7 @@ namespace Grabacr07.KanColleViewer
 		{
 			base.OnExit(e);
 
+			NotifyIconWrapper.Dispose();
 			KanColleClient.Current.Proxy.Shutdown();
 			Settings.Current.Save();
 		}
