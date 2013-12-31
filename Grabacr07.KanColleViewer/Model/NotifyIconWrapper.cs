@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Grabacr07.KanColleViewer.Model
 {
@@ -14,7 +16,9 @@ namespace Grabacr07.KanColleViewer.Model
 		{
 			_notifyIcon = new NotifyIcon();
 			_notifyIcon.Text = "KanColleViewer";
-			_notifyIcon.Icon = KanColleViewer.Resource1.Icon1;
+			var uri = new Uri("pack://application:,,,/KanColleViewer;Component/Assets/app.ico");
+			var stream = System.Windows.Application.GetResourceStream(uri).Stream;
+			_notifyIcon.Icon = new Icon(stream);
 			_notifyIcon.Visible = true;
 		}
 
