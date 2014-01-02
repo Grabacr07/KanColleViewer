@@ -82,7 +82,6 @@
 
 			<ScrollViewer VerticalScrollBarVisibility="Auto">
 				<Grid MinWidth="100"
-					  MaxWidth="120"
 					  Background="{DynamicResource ActiveBackgroundBrushKey}">
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto" />
