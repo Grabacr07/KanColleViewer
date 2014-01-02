@@ -5,6 +5,7 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
 			 xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
+			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:vmDocks="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Docks"
 			 xmlns:vmFleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
@@ -35,10 +36,10 @@
 					<TextBlock DataContext="{Binding SelectedFleet}"
 							   Foreground="{DynamicResource AccentForegroundBrushKey}">
 						<Run Text="        " />
-						<Run Text="平均レベル:" />
+						<Run Text="{x:Static properties:Resources.StatusBar_AverageLevel}" />
 						<Run Text="{Binding AverageLevel, Mode=OneWay}" />
 						<Run Text="        " />
-						<Run Text="制空戦力:" />
+						<Run Text="{x:Static properties:Resources.StatusBar_AirSuperiorityPotential}" />
 						<Run Text="{Binding AirSuperiorityPotential, Mode=OneWay}" />
 						<Run Text="        " />
 						<Run Text="{Binding Speed, Mode=OneWay}" />
