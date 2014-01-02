@@ -220,7 +220,7 @@
     <value>Window</value>
   </data>
   <data name="Settings_Window_TopMost" xml:space="preserve">
-    <value>Always on top of everything</value>
+    <value>Keep window on top</value>
   </data>
   <data name="Common_Implement_Oncoming" xml:space="preserve">
     <value>※ To be implemented</value>
@@ -289,7 +289,7 @@
     <value>Notify Upon Completion</value>
   </data>
   <data name="Expedition_Notifications_Individual" xml:space="preserve">
-    <value>Per-Fleet Settings</value>
+    <value>Individual Fleet Settings</value>
   </data>
   <data name="Expedition_TimeComplete" xml:space="preserve">
     <value>Completion Time</value>
@@ -304,7 +304,7 @@
     <value>Notify Upon Completion</value>
   </data>
   <data name="Repairyard_Notifications_Individual" xml:space="preserve">
-    <value>Per-Dock Settings</value>
+    <value>Individual Dock Settings</value>
   </data>
   <data name="Repairyard_ShipName" xml:space="preserve">
     <value>Docked Ship</value>

@@ -124,7 +124,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Per-Fleet Settings.
+        ///   Looks up a localized string similar to Individual Fleet Settings.
         /// </summary>
         public static string Expedition_Notifications_Individual {
             get {
@@ -304,7 +304,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Per-Dock Settings.
+        ///   Looks up a localized string similar to Individual Dock Settings.
         /// </summary>
         public static string Repairyard_Notifications_Individual {
             get {
@@ -556,7 +556,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Always on top of everything.
+        ///   Looks up a localized string similar to Keep window on top.
         /// </summary>
         public static string Settings_Window_TopMost {
             get {
