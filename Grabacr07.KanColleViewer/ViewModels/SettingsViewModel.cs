@@ -204,7 +204,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		{
 			if (Helper.IsInDesignMode) return;
 
-			this.Name = "設定";
+			this.Name = Properties.Resources.ViewModels_Settings;
 
 			this.Libraries = App.ProductInfo.Libraries.Aggregate(
 				new List<BindableTextViewModel>(),

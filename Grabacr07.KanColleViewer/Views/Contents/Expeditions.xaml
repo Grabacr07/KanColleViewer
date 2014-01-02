@@ -9,6 +9,7 @@
 			 xmlns:v="clr-namespace:Grabacr07.KanColleViewer.Views"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
+			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:vmContents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
@@ -61,7 +62,7 @@
 									   Grid.Column="1"
 									   VerticalAlignment="Center"
 									   Margin="10,0">
-								<Run Text="終了時刻"
+								<Run Text="{x:Static properties:Resources.Expedition_TimeComplete}"
 									 FontSize="14" />
 								<LineBreak />
 								<Run Text="{Binding Expedition.ReturnTime, Mode=OneWay}"
@@ -72,7 +73,7 @@
 									   Grid.Column="2"
 									   VerticalAlignment="Center"
 									   Margin="10,0">
-								<Run Text="艦隊帰投まで"
+								<Run Text="{x:Static properties:Resources.Expedition_TimeRemaining}"
 									 FontSize="14" />
 								<LineBreak />
 								<Run Text="{Binding Expedition.Remaining, Mode=OneWay}"
@@ -86,7 +87,7 @@
 									   VerticalAlignment="Center"
 									   Margin="30,0"
 									   Visibility="Collapsed">
-								<Run Text="遠征に出ていません。"
+								<Run Text="{x:Static properties:Resources.Expedition_NoExpedition}"
 									 FontSize="18" />
 							</TextBlock>
 						</Grid>
@@ -137,25 +138,25 @@
 					</Style>
 				</StackPanel.Style>
 				<TextBlock Margin="5">
-					<Run Text="通知設定"
+					<Run Text="{x:Static properties:Resources.Common_Notifications_Title}"
 						 Style="{DynamicResource PickupTextElementStyleKey}" />
-					<Run Text="(Windows 8 以降)" />
+					<Run Text="{x:Static properties:Resources.Common_Notifications_Windows8}" />
 				</TextBlock>
 				<RadioButton Margin="8,5"
 							 IsChecked="{Binding IsNotifyReturned}">
-					<TextBlock Text="遠征帰投時にトースト通知を表示する" />
+					<TextBlock Text="{x:Static properties:Resources.Expedition_Notifications_Enable}" />
 				</RadioButton>
 				<RadioButton Margin="8,5"
 							 IsEnabled="False">
 					<TextBlock>
-						<Run Text="艦隊ごとに個別に設定する"
+						<Run Text="{x:Static properties:Resources.Expedition_Notifications_Individual}"
 							 TextDecorations="Strikethrough" />
-						<Run Text="(未実装)" />
+						<Run Text="{x:Static properties:Resources.Common_Notifications_NotImplemented}" />
 					</TextBlock>
 				</RadioButton>
 				<RadioButton Margin="8,5"
 							 IsChecked="True">
-					<TextBlock Text="通知しない" />
+					<TextBlock Text="{x:Static properties:Resources.Common_Notifications_Disable}" />
 				</RadioButton>
 			</StackPanel>
 		</StackPanel>

@@ -8,6 +8,7 @@
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
+			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
 			 xmlns:docks="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Docks"
@@ -58,7 +59,7 @@
 									   Grid.Column="1"
 									   VerticalAlignment="Center"
 									   Margin="10,0">
-								<Run Text="入渠中の艦"
+								<Run Text="{x:Static properties:Resources.Repairyard_ShipName}"
 									 FontSize="14" />
 								<LineBreak />
 								<Run Text="{Binding Ship, Mode=OneWay}"
@@ -69,7 +70,7 @@
 									   Grid.Column="2"
 									   VerticalAlignment="Center"
 									   Margin="10,0">
-								<Run Text="完了時刻"
+								<Run Text="{x:Static properties:Resources.Repairyard_TimeComplete}"
 									 FontSize="14" />
 								<LineBreak />
 								<Run Text="{Binding CompleteTime, Mode=OneWay}"
@@ -80,7 +81,7 @@
 									   Grid.Column="3"
 									   VerticalAlignment="Center"
 									   Margin="10,0">
-								<Run Text="整備完了まで"
+								<Run Text="{x:Static properties:Resources.Repairyard_TimeRemaining}"
 									 FontSize="14" />
 								<LineBreak />
 								<Run Text="{Binding Remaining, Mode=OneWay}"
@@ -95,7 +96,7 @@
 									   VerticalAlignment="Center"
 									   Margin="30,0"
 									   Visibility="Collapsed">
-								<Run Text="未使用"
+								<Run Text="{x:Static properties:Resources.Reparyard_Unused}"
 									 FontSize="18" />
 							</TextBlock>
 							<TextBlock x:Name="LockedMessage"
@@ -105,7 +106,7 @@
 									   VerticalAlignment="Center"
 									   Margin="30,0"
 									   Visibility="Collapsed">
-								<Run Text="ロックされています"
+								<Run Text="{x:Static properties:Resources.Repairyard_Locked}"
 									 FontSize="18" />
 							</TextBlock>
 						</Grid>
@@ -172,25 +173,25 @@
 					</Style>
 				</StackPanel.Style>
 				<TextBlock Margin="5">
-					<Run Text="通知設定"
+					<Run Text="{x:Static properties:Resources.Common_Notifications_Title}"
 						 Style="{DynamicResource PickupTextElementStyleKey}" />
-					<Run Text="(Windows 8 以降)" />
+					<Run Text="{x:Static properties:Resources.Common_Notifications_Windows8}" />
 				</TextBlock>
 				<RadioButton Margin="8,5"
 							 IsChecked="{Binding IsNotifyCompleted}">
-					<TextBlock Text="整備完了時にトースト通知を表示する" />
+					<TextBlock Text="{x:Static properties:Resources.Repairyard_Notifications_Enable}" />
 				</RadioButton>
 				<RadioButton Margin="8,5"
 							 IsEnabled="False">
 					<TextBlock>
-						<Run Text="ドックごとに個別に設定する"
+						<Run Text="{x:Static properties:Resources.Repairyard_Notifications_Individual}"
 							 TextDecorations="Strikethrough" />
-						<Run Text="(未実装)" />
+						<Run Text="{x:Static properties:Resources.Common_Notifications_NotImplemented}" />
 					</TextBlock>
 				</RadioButton>
 				<RadioButton Margin="8,5"
 							 IsChecked="True">
-					<TextBlock Text="通知しない" />
+					<TextBlock Text="{x:Static properties:Resources.Common_Notifications_Disable}" />
 				</RadioButton>
 			</StackPanel>
 		</StackPanel>

@@ -35,12 +35,12 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				{
 					case Mode.NotStarted:
 						this.Content = NotStartedViewModel.Instance;
-						StatusService.Current.Set("艦これの起動を待っています");
+						StatusService.Current.Set(Properties.Resources.StatusBar_NotStarted);
 						ThemeService.Current.Accent = Accent.Purple;
 						break;
 					case Mode.Started:
 						this.Content = this.mainContent ?? (this.mainContent = new MainContentViewModel());
-						StatusService.Current.Set("準備完了");
+						StatusService.Current.Set(Properties.Resources.StatusBar_Ready);
 						ThemeService.Current.Accent = Accent.Blue;
 						break;
 					case Mode.InSortie:
@@ -155,8 +155,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			this.Messenger.Raise(message);
 
 			var notify = message.Response.IsSuccess
-				? "スクリーンショットを保存しました: " + Path.GetFileName(path)
-				: "スクリーンショットの保存に失敗しました: " + message.Response.Exception.Message;
+				? Properties.Resources.Screenshot_Saved + Path.GetFileName(path)
+				: Properties.Resources.Screenshot_Failed + message.Response.Exception.Message;
 			StatusService.Current.Notify(notify);
 		}
 	}
