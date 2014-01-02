@@ -255,4 +255,19 @@
   <data name="Screenshot_Saved" xml:space="preserve">
     <value>Screenshot saved: </value>
   </data>
+  <data name="Homeport_FleetHQ" xml:space="preserve">
+    <value>Fleet HQ</value>
+  </data>
+  <data name="Homeport_InstantBuild" xml:space="preserve">
+    <value>Instant Build Materials:  </value>
+  </data>
+  <data name="Homeport_InstantRepair" xml:space="preserve">
+    <value>Instant Repair Materials:</value>
+  </data>
+  <data name="Homeport_NoOfEquipment" xml:space="preserve">
+    <value>Equipment:</value>
+  </data>
+  <data name="Homeport_NoOfShips" xml:space="preserve">
+    <value>Ship Girls:  </value>
+  </data>
 </root>

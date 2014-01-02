@@ -255,4 +255,19 @@
   <data name="Screenshot_Saved" xml:space="preserve">
     <value>スクリーンショットを保存しました: </value>
   </data>
+  <data name="Homeport_FleetHQ" xml:space="preserve">
+    <value>司令部</value>
+  </data>
+  <data name="Homeport_InstantBuild" xml:space="preserve">
+    <value>高速建造材:</value>
+  </data>
+  <data name="Homeport_InstantRepair" xml:space="preserve">
+    <value>高速修復材:</value>
+  </data>
+  <data name="Homeport_NoOfItems" xml:space="preserve">
+    <value>保有装備:</value>
+  </data>
+  <data name="Homeport_NoOfShips" xml:space="preserve">
+    <value>所属艦娘:</value>
+  </data>
 </root>

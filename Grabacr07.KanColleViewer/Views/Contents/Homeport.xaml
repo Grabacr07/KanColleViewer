@@ -46,7 +46,7 @@
 			</TextBlock>
 
 			<TextBlock>
-					<Run Text="司令部" />
+					<Run Text="{x:Static properties:Resources.Homeport_FleetHQ}" />
 					<Run Text="Lv."
 						 Style="{DynamicResource PickupTextElementStyleKey}"
 						 FontSize="14" />
@@ -74,11 +74,11 @@
 
 				<TextBlock Grid.Row="0"
 						   Grid.Column="1">
-						<Run Text="高速修復材:" />
+						<Run Text="{x:Static properties:Resources.Homeport_InstantRepair}" />
 						<Run Text="{Binding Materials.Model.InstantRepairMaterials, Mode=OneWay}"
 							 Style="{DynamicResource PickupTextElementStyleKey}" />
 						<LineBreak />
-						<Run Text="高速建造材:" />
+						<Run Text="{x:Static properties:Resources.Homeport_InstantBuild}" />
 						<Run Text="{Binding Materials.Model.InstantBuildMaterials, Mode=OneWay}"
 							 Style="{DynamicResource PickupTextElementStyleKey}" />
 				</TextBlock>
@@ -96,13 +96,13 @@
 
 				<TextBlock Grid.Row="0"
 						   Grid.Column="1">
-						<Run Text="所属艦娘:" />
+						<Run Text="{x:Static properties:Resources.Homeport_NoOfShips}" />
 						<Run Text="{Binding Ships.Count, Mode=OneWay}"
 							 Style="{DynamicResource PickupTextElementStyleKey}" />
 						<Run Text="/" />
 						<Run Text="{Binding Admiral.Model.MaxShipCount, Mode=OneWay}" />
 						<LineBreak />
-						<Run Text="保有装備:" />
+						<Run Text="{x:Static properties:Resources.Homeport_NoOfEquipment}" />
 						<Run Text="{Binding SlotItems.Count, Mode=OneWay}"
 							 Style="{DynamicResource PickupTextElementStyleKey}" />
 						<Run Text="/" />

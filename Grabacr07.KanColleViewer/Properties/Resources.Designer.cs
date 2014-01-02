@@ -70,6 +70,51 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fleet HQ.
+        /// </summary>
+        public static string Homeport_FleetHQ {
+            get {
+                return ResourceManager.GetString("Homeport_FleetHQ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Instant Build Materials:  .
+        /// </summary>
+        public static string Homeport_InstantBuild {
+            get {
+                return ResourceManager.GetString("Homeport_InstantBuild", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Instant Repair Materials:.
+        /// </summary>
+        public static string Homeport_InstantRepair {
+            get {
+                return ResourceManager.GetString("Homeport_InstantRepair", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Equipment:.
+        /// </summary>
+        public static string Homeport_NoOfEquipment {
+            get {
+                return ResourceManager.GetString("Homeport_NoOfEquipment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ship Girls:  .
+        /// </summary>
+        public static string Homeport_NoOfShips {
+            get {
+                return ResourceManager.GetString("Homeport_NoOfShips", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please visit all of the quest pages..
         /// </summary>
         public static string Quest_Detail_Untaken {
