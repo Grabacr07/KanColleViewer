@@ -385,6 +385,60 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Air Superiority Potential:.
+        /// </summary>
+        public static string StatusBar_AirSuperiorityPotential {
+            get {
+                return ResourceManager.GetString("StatusBar_AirSuperiorityPotential", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Average Level:.
+        /// </summary>
+        public static string StatusBar_AverageLevel {
+            get {
+                return ResourceManager.GetString("StatusBar_AverageLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting for KanColle to start.
+        /// </summary>
+        public static string StatusBar_NotStarted {
+            get {
+                return ResourceManager.GetString("StatusBar_NotStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready.
+        /// </summary>
+        public static string StatusBar_Ready {
+            get {
+                return ResourceManager.GetString("StatusBar_Ready", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fast Fleet.
+        /// </summary>
+        public static string StatusBar_Speed_Fast {
+            get {
+                return ResourceManager.GetString("StatusBar_Speed_Fast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Slow Fleet.
+        /// </summary>
+        public static string StatusBar_Speed_Slow {
+            get {
+                return ResourceManager.GetString("StatusBar_Speed_Slow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0}% zoom is not supported..
         /// </summary>
         public static string ZoomAction_OutOfRange {

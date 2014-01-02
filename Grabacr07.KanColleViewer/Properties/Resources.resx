@@ -231,4 +231,22 @@
   <data name="Settings_VersionInfo" xml:space="preserve">
     <value>Version Info</value>
   </data>
+  <data name="StatusBar_AirSuperiorityPotential" xml:space="preserve">
+    <value>Air Superiority Potential:</value>
+  </data>
+  <data name="StatusBar_AverageLevel" xml:space="preserve">
+    <value>Average Level:</value>
+  </data>
+  <data name="StatusBar_NotStarted" xml:space="preserve">
+    <value>Waiting for KanColle to start</value>
+  </data>
+  <data name="StatusBar_Ready" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+  <data name="StatusBar_Speed_Fast" xml:space="preserve">
+    <value>Fast Fleet</value>
+  </data>
+  <data name="StatusBar_Speed_Slow" xml:space="preserve">
+    <value>Slow Fleet</value>
+  </data>
 </root>
