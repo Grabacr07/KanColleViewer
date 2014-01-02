@@ -160,6 +160,24 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Screenshot save failed: .
+        /// </summary>
+        public static string Screenshot_Failed {
+            get {
+                return ResourceManager.GetString("Screenshot_Failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Screenshot saved: .
+        /// </summary>
+        public static string Screenshot_Saved {
+            get {
+                return ResourceManager.GetString("Screenshot_Saved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Browser.
         /// </summary>
         public static string Settings_BrowserControl {

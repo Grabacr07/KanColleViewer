@@ -249,4 +249,10 @@
   <data name="StatusBar_Speed_Slow" xml:space="preserve">
     <value>低速艦隊</value>
   </data>
+  <data name="Screenshot_Failed" xml:space="preserve">
+    <value>スクリーンショットの保存に失敗しました: </value>
+  </data>
+  <data name="Screenshot_Saved" xml:space="preserve">
+    <value>スクリーンショットを保存しました: </value>
+  </data>
 </root>

@@ -155,8 +155,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			this.Messenger.Raise(message);
 
 			var notify = message.Response.IsSuccess
-				? "スクリーンショットを保存しました: " + Path.GetFileName(path)
-				: "スクリーンショットの保存に失敗しました: " + message.Response.Exception.Message;
+				? Properties.Resources.Screenshot_Saved + Path.GetFileName(path)
+				: Properties.Resources.Screenshot_Failed + message.Response.Exception.Message;
 			StatusService.Current.Notify(notify);
 		}
 	}
