@@ -1,6 +1,7 @@
 ﻿<Application x:Class="Grabacr07.KanColleViewer.App"
 			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:localConverters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters"
 			 xmlns:metroControls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:metroConverters="clr-namespace:Grabacr07.Desktop.Metro.Converters;assembly=Desktop.Metro"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
@@ -15,6 +16,7 @@
 			<properties:Resources x:Key="LocalizeResourcesKey" />
 
 			<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+			<localConverters:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
 			<metroConverters:UniversalBooleanToVisibilityConverter x:Key="UniversalBooleanToVisibilityConverter" />
 			<metroConverters:StringToVisiblityConverter x:Key="StringToVisiblityConverter" />
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.ViewModels.Messages;
@@ -138,7 +139,11 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 				graphics.ReleaseHdc(hdc);
 			}
 
-			image.Save(path, ImageFormat.Png);
+			var format = Path.GetExtension(path) == ".jpg"
+				? ImageFormat.Jpeg 
+				: ImageFormat.Png;
+
+			image.Save(path, format);
 		}
 	}
 }
