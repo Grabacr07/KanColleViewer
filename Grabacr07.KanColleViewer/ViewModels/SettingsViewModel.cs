@@ -50,6 +50,23 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region ScreenshotImageFormat 変更通知プロパティ
+
+		public SupportedImageFormat ScreenshotImageFormat
+		{
+			get { return Settings.Current.ScreenshotImageFormat; }
+			set
+			{
+				if (Settings.Current.ScreenshotImageFormat != value)
+				{
+					Settings.Current.ScreenshotImageFormat = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		#region ProxyHost 変更通知プロパティ
 
 		public string ProxyHost

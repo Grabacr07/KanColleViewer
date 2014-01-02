@@ -21,7 +21,13 @@ namespace Grabacr07.KanColleViewer.Model
 		{
 			var filePath = Path.Combine(
 				Settings.Current.ScreenshotFolder,
-				string.Format("KanColle-{0}.png", DateTimeOffset.Now.LocalDateTime.ToString("yyMMdd-HHmmssff")));
+				string.Format("KanColle-{0}", DateTimeOffset.Now.LocalDateTime.ToString("yyMMdd-HHmmssff")));
+
+			filePath = Path.ChangeExtension(
+				filePath,
+				Settings.Current.ScreenshotImageFormat == SupportedImageFormat.Jpeg
+					? ".jpg"
+					: ".png");
 
 			return filePath;
 		}

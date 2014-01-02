@@ -619,6 +619,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Image Format.
+        /// </summary>
+        public static string Settings_Screenshot_ImageFormat_Label {
+            get {
+                return ResourceManager.GetString("Settings_Screenshot_ImageFormat_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open Folder.
         /// </summary>
         public static string Settings_Screenshot_OpenFolderButton {

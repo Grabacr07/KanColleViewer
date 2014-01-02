@@ -231,6 +231,9 @@
   <data name="Settings_VersionInfo" xml:space="preserve">
     <value>Version Info</value>
   </data>
+  <data name="Settings_Screenshot_ImageFormat_Label" xml:space="preserve">
+    <value>Image Format</value>
+  </data>
   <data name="StatusBar_AirSuperiorityPotential" xml:space="preserve">
     <value>Air Superiority Potential:</value>
   </data>
