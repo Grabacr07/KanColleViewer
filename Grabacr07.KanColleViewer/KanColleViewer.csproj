@@ -139,6 +139,7 @@
     <Compile Include="ViewModels\Contents\Fleets\PlaneViewModel.cs" />
     <Compile Include="ViewModels\Contents\Fleets\RepairingBarViewModel.cs" />
     <Compile Include="ViewModels\Contents\Fleets\TimerViewModel.cs" />
+    <Compile Include="ViewModels\Contents\GeneralViewModel.cs" />
     <Compile Include="ViewModels\Contents\QuestsViewModel.cs" />
     <Compile Include="ViewModels\Contents\QuestViewModel.cs" />
     <Compile Include="ViewModels\BindableTextViewModel.cs" />
@@ -165,6 +166,9 @@
     <Compile Include="Views\Behaviors\ZoomAction.cs" />
     <Compile Include="Views\BrowserNavigator.xaml.cs">
       <DependentUpon>BrowserNavigator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contents\General.xaml.cs">
+      <DependentUpon>General.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Contents\Homeport.xaml.cs">
       <DependentUpon>Homeport.xaml</DependentUpon>
@@ -224,6 +228,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\BrowserNavigator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Contents\General.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

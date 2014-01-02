@@ -1,0 +1,193 @@
+﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Contents.General"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:metroControls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
+			 xmlns:vContents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
+			 xmlns:vmContents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
+			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
+			 mc:Ignorable="d"
+			 d:DataContext="{d:DesignInstance vmContents:GeneralViewModel}"
+			 d:DesignWidth="680"
+			 d:DesignHeight="333">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<Style TargetType="{x:Type Border}">
+				<Setter Property="BorderBrush"
+						Value="{DynamicResource BorderBrushKey}" />
+				<Setter Property="BorderThickness"
+						Value="1" />
+				<Setter Property="Padding"
+						Value="8" />
+				<Setter Property="Margin"
+						Value="5,0,5,10" />
+			</Style>
+		</ResourceDictionary>
+	</UserControl.Resources>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
+		</Grid.ColumnDefinitions>
+
+		<Grid Grid.Column="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+
+			<Border Grid.Row="0"
+					Grid.Column="0">
+				<StackPanel>
+					<TextBlock>
+						<Run Text="データ" />
+					</TextBlock>
+
+					<Rectangle Height="1"
+							   Margin="0,7,0,3"
+							   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+					<metroControls:CallMethodButton Content="艦娘一覧"
+													Padding="12,8"
+													Margin="0,5,0,8" />
+
+					<metroControls:CallMethodButton Content="装備一覧"
+													Padding="12,8" />
+				</StackPanel>
+			</Border>
+
+			<Border Grid.Row="0"
+					Grid.Column="1">
+				<StackPanel>
+					<TextBlock>
+						<Run Text="遠征" />
+					</TextBlock>
+
+					<Rectangle Height="1"
+							   Margin="0,7,0,3"
+							   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+					<TextBlock Margin="0,2">
+						<Run Text="/2"
+							 Style="{DynamicResource PickupTextElementStyleKey}" />
+						<Run Text="-" />
+						<Run Text="25:11:40" />
+					</TextBlock>
+					<TextBlock Margin="0,2">
+						<Run Text="/3"
+							 Style="{DynamicResource PickupTextElementStyleKey}" />
+						<Run Text="-" />
+						<Run Text="25:11:40" />
+					</TextBlock>
+					<TextBlock Margin="0,2">
+						<Run Text="/4"
+							 Style="{DynamicResource PickupTextElementStyleKey}" />
+						<Run Text="-" />
+						<Run Text="25:11:40" />
+					</TextBlock>
+				</StackPanel>
+			</Border>
+
+			<Border Grid.Row="1"
+					Grid.Column="0"
+					Grid.ColumnSpan="2">
+				<StackPanel>
+					<TextBlock>
+						<Run Text="任務" />
+					</TextBlock>
+
+					<Rectangle Height="1"
+							   Margin="0,7,0,3"
+							   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+				</StackPanel>
+			</Border>
+
+		</Grid>
+
+		<StackPanel Grid.Column="2">
+			<Border>
+				<StackPanel>
+					<TextBlock>
+						<Run Text="入渠ドック" />
+					</TextBlock>
+
+					<Rectangle Height="1"
+							   Margin="0,7,0,3"
+							   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+					<TextBlock Margin="0,2">
+						<Run Text="蒼龍改"
+							 Style="{DynamicResource PickupTextElementStyleKey}" />
+						<Run Text="-" />
+						<Run Text="25:11:40" />
+					</TextBlock>
+					<TextBlock Margin="0,2">
+						<Run Text="蒼龍改"
+							 Style="{DynamicResource PickupTextElementStyleKey}" />
+						<Run Text="-" />
+						<Run Text="25:11:40" />
+					</TextBlock>
+					<TextBlock Margin="0,2">
+						<Run Text="蒼龍改"
+							 Style="{DynamicResource PickupTextElementStyleKey}" />
+						<Run Text="-" />
+						<Run Text="25:11:40" />
+					</TextBlock>
+					<TextBlock Margin="0,2">
+						<Run Text="蒼龍改"
+							 Style="{DynamicResource PickupTextElementStyleKey}" />
+						<Run Text="-" />
+						<Run Text="25:11:40" />
+					</TextBlock>
+				</StackPanel>
+			</Border>
+
+			<Border>
+				<StackPanel>
+					<TextBlock>
+						<Run Text="建造ドック" />
+					</TextBlock>
+
+					<Rectangle Height="1"
+							   Margin="0,7,0,3"
+							   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+					<TextBlock Margin="0,2">
+						<Run Text="蒼龍改"
+							 Style="{DynamicResource PickupTextElementStyleKey}" />
+						<Run Text="-" />
+						<Run Text="25:11:40" />
+					</TextBlock>
+					<TextBlock Margin="0,2">
+						<Run Text="蒼龍改"
+							 Style="{DynamicResource PickupTextElementStyleKey}" />
+						<Run Text="-" />
+						<Run Text="25:11:40" />
+					</TextBlock>
+					<TextBlock Margin="0,2">
+						<Run Text="蒼龍改"
+							 Style="{DynamicResource PickupTextElementStyleKey}" />
+						<Run Text="-" />
+						<Run Text="25:11:40" />
+					</TextBlock>
+					<TextBlock Margin="0,2">
+						<Run Text="蒼龍改"
+							 Style="{DynamicResource PickupTextElementStyleKey}" />
+						<Run Text="-" />
+						<Run Text="25:11:40" />
+					</TextBlock>
+				</StackPanel>
+			</Border>
+		</StackPanel>
+	</Grid>
+</UserControl>
