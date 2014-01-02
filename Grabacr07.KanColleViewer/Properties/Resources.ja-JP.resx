@@ -267,7 +267,7 @@
   <data name="Homeport_InstantRepair" xml:space="preserve">
     <value>高速修復材:</value>
   </data>
-  <data name="Homeport_NoOfItems" xml:space="preserve">
+  <data name="Homeport_NoOfEquipment" xml:space="preserve">
     <value>保有装備:</value>
   </data>
   <data name="Homeport_NoOfShips" xml:space="preserve">
