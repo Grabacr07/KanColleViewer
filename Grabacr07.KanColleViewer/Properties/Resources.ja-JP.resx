@@ -231,4 +231,7 @@
   <data name="Settings_VersionInfo" xml:space="preserve">
     <value>バージョン情報</value>
   </data>
+  <data name="Settings_Screenshot_ImageFormat_Label" xml:space="preserve">
+    <value>画像形式</value>
+  </data>
 </root>
