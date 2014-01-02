@@ -126,6 +126,7 @@
     <Compile Include="Model\Mode.cs" />
     <Compile Include="Model\StatusService.cs" />
     <Compile Include="Model\Settings.cs" />
+    <Compile Include="Model\SupportedImageFormat.cs" />
     <Compile Include="Model\ThemeService.cs" />
     <Compile Include="Model\Toast.cs" />
     <Compile Include="Model\Volume.cs" />
@@ -185,6 +186,7 @@
     <Compile Include="Views\Contents\Expeditions.xaml.cs">
       <DependentUpon>Expeditions.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Converters\EnumToBooleanConverter.cs" />
     <Compile Include="Views\NotStarted.xaml.cs">
       <DependentUpon>NotStarted.xaml</DependentUpon>
     </Compile>
