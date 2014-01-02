@@ -282,6 +282,24 @@
   <data name="Common_Notifications_Windows8" xml:space="preserve">
     <value>(Windows 8+)</value>
   </data>
+  <data name="Dockyard_Complete" xml:space="preserve">
+    <value>Complete!</value>
+  </data>
+  <data name="Dockyard_Locked" xml:space="preserve">
+    <value>Locked</value>
+  </data>
+  <data name="Dockyard_ShipName" xml:space="preserve">
+    <value>Ship In Progress</value>
+  </data>
+  <data name="Dockyard_TimeComplete" xml:space="preserve">
+    <value>Completion Time</value>
+  </data>
+  <data name="Dockyard_TimeRemaining" xml:space="preserve">
+    <value>Remaining Time</value>
+  </data>
+  <data name="Dockyard_Unused" xml:space="preserve">
+    <value>Empty</value>
+  </data>
   <data name="Expedition_NoExpedition" xml:space="preserve">
     <value>Not on an Expedition.</value>
   </data>
@@ -335,5 +353,17 @@
   </data>
   <data name="ViewModels_Settings" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="Dockyard_Display_Reveal" xml:space="preserve">
+    <value>Reveal Ship Names</value>
+  </data>
+  <data name="Dockyard_Display_Title" xml:space="preserve">
+    <value>Display Settings</value>
+  </data>
+  <data name="Dockyard_Notifications_Enable" xml:space="preserve">
+    <value>Notify Upon Completion</value>
+  </data>
+  <data name="Dockyard_Notifications_Individual" xml:space="preserve">
+    <value>Individual Dock Settings</value>
   </data>
 </root>
