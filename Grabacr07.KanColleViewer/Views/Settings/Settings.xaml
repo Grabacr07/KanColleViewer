@@ -278,6 +278,7 @@
 													Margin="0" />
 
 					<TextBlock Grid.Row="1"
+							   Grid.Column="0"
 							   Margin="0,6">
 						<Run Text="{Binding Source={x:Static properties:Resources.Settings_Screenshot_ImageFormat_Label}, Mode=OneWay}" />
 						<Run Text=": " />
@@ -289,7 +290,7 @@
 						<RadioButton IsChecked="{Binding ScreenshotImageFormat, Mode=TwoWay, ConverterParameter=Png, Converter={StaticResource EnumToBooleanConverter}}">
 							<TextBlock Text="PNG"/>
 						</RadioButton>
-						<RadioButton Margin="6, 0, 0, 0"
+						<RadioButton Margin="10,0,0,0"
 									 IsChecked="{Binding ScreenshotImageFormat, Mode=TwoWay, ConverterParameter=Jpeg, Converter={StaticResource EnumToBooleanConverter}}">
 							<TextBlock Text="JPG"/>
 						</RadioButton>
