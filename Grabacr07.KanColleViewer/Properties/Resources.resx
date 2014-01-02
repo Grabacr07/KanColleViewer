@@ -297,4 +297,22 @@
   <data name="Expedition_TimeRemaining" xml:space="preserve">
     <value>Remaining Time</value>
   </data>
+  <data name="ViewModels_Dockyard" xml:space="preserve">
+    <value>Construction</value>
+  </data>
+  <data name="ViewModels_Expeditions" xml:space="preserve">
+    <value>Expeditions</value>
+  </data>
+  <data name="ViewModels_Fleets" xml:space="preserve">
+    <value>Fleets</value>
+  </data>
+  <data name="ViewModels_Quests" xml:space="preserve">
+    <value>Quests</value>
+  </data>
+  <data name="ViewModels_Repairyard" xml:space="preserve">
+    <value>Repair</value>
+  </data>
+  <data name="ViewModels_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
 </root>

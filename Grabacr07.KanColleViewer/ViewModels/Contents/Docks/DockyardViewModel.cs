@@ -73,7 +73,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Docks
 
 		public DockyardViewModel()
 		{
-			this.Name = "建造ドック";
+			this.Name = Properties.Resources.ViewModels_Dockyard;
 
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport.Dockyard)
 			{

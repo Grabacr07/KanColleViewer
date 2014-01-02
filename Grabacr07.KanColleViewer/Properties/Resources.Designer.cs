@@ -583,6 +583,60 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Construction.
+        /// </summary>
+        public static string ViewModels_Dockyard {
+            get {
+                return ResourceManager.GetString("ViewModels_Dockyard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expeditions.
+        /// </summary>
+        public static string ViewModels_Expeditions {
+            get {
+                return ResourceManager.GetString("ViewModels_Expeditions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fleets.
+        /// </summary>
+        public static string ViewModels_Fleets {
+            get {
+                return ResourceManager.GetString("ViewModels_Fleets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quests.
+        /// </summary>
+        public static string ViewModels_Quests {
+            get {
+                return ResourceManager.GetString("ViewModels_Quests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repair.
+        /// </summary>
+        public static string ViewModels_Repairyard {
+            get {
+                return ResourceManager.GetString("ViewModels_Repairyard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string ViewModels_Settings {
+            get {
+                return ResourceManager.GetString("ViewModels_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0}% zoom is not supported..
         /// </summary>
         public static string ZoomAction_OutOfRange {

@@ -297,4 +297,22 @@
   <data name="Expedition_TimeRemaining" xml:space="preserve">
     <value>艦隊帰投まで</value>
   </data>
+  <data name="ViewModels_Dockyard" xml:space="preserve">
+    <value>建造ドック</value>
+  </data>
+  <data name="ViewModels_Expeditions" xml:space="preserve">
+    <value>遠征</value>
+  </data>
+  <data name="ViewModels_Fleets" xml:space="preserve">
+    <value>艦隊</value>
+  </data>
+  <data name="ViewModels_Quests" xml:space="preserve">
+    <value>任務</value>
+  </data>
+  <data name="ViewModels_Repairyard" xml:space="preserve">
+    <value>入渠ドック</value>
+  </data>
+  <data name="ViewModels_Settings" xml:space="preserve">
+    <value>設定</value>
+  </data>
 </root>
