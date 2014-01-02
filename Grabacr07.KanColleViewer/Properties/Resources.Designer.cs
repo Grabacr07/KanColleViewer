@@ -70,6 +70,87 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No Notifications.
+        /// </summary>
+        public static string Common_Notifications_Disable {
+            get {
+                return ResourceManager.GetString("Common_Notifications_Disable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (planned).
+        /// </summary>
+        public static string Common_Notifications_NotImplemented {
+            get {
+                return ResourceManager.GetString("Common_Notifications_NotImplemented", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notifications.
+        /// </summary>
+        public static string Common_Notifications_Title {
+            get {
+                return ResourceManager.GetString("Common_Notifications_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Windows 8+).
+        /// </summary>
+        public static string Common_Notifications_Windows8 {
+            get {
+                return ResourceManager.GetString("Common_Notifications_Windows8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not on an Expedition..
+        /// </summary>
+        public static string Expedition_NoExpedition {
+            get {
+                return ResourceManager.GetString("Expedition_NoExpedition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notify Upon Completion.
+        /// </summary>
+        public static string Expedition_Notifications_Enable {
+            get {
+                return ResourceManager.GetString("Expedition_Notifications_Enable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Per-Fleet Settings.
+        /// </summary>
+        public static string Expedition_Notifications_Individual {
+            get {
+                return ResourceManager.GetString("Expedition_Notifications_Individual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Completion Time.
+        /// </summary>
+        public static string Expedition_TimeComplete {
+            get {
+                return ResourceManager.GetString("Expedition_TimeComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remaining Time.
+        /// </summary>
+        public static string Expedition_TimeRemaining {
+            get {
+                return ResourceManager.GetString("Expedition_TimeRemaining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fleet HQ.
         /// </summary>
         public static string Homeport_FleetHQ {

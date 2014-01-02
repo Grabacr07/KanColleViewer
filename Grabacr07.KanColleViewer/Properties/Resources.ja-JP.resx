@@ -270,4 +270,31 @@
   <data name="Homeport_NoOfShips" xml:space="preserve">
     <value>所属艦娘:</value>
   </data>
+  <data name="Common_Notifications_Disable" xml:space="preserve">
+    <value>通知しない</value>
+  </data>
+  <data name="Common_Notifications_NotImplemented" xml:space="preserve">
+    <value>(未実装)</value>
+  </data>
+  <data name="Common_Notifications_Title" xml:space="preserve">
+    <value>通知設定</value>
+  </data>
+  <data name="Common_Notifications_Windows8" xml:space="preserve">
+    <value>(Windows 8 以降)</value>
+  </data>
+  <data name="Expedition_NoExpedition" xml:space="preserve">
+    <value>遠征に出ていません。</value>
+  </data>
+  <data name="Expedition_Notifications_Enable" xml:space="preserve">
+    <value>遠征帰投時にトースト通知を表示する</value>
+  </data>
+  <data name="Expedition_Notifications_Individual" xml:space="preserve">
+    <value>艦隊ごとに個別に設定する</value>
+  </data>
+  <data name="Expedition_TimeComplete" xml:space="preserve">
+    <value>終了時刻</value>
+  </data>
+  <data name="Expedition_TimeRemaining" xml:space="preserve">
+    <value>艦隊帰投まで</value>
+  </data>
 </root>
