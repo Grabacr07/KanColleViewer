@@ -286,6 +286,69 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Locked.
+        /// </summary>
+        public static string Repairyard_Locked {
+            get {
+                return ResourceManager.GetString("Repairyard_Locked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notify Upon Completion.
+        /// </summary>
+        public static string Repairyard_Notifications_Enable {
+            get {
+                return ResourceManager.GetString("Repairyard_Notifications_Enable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Per-Dock Settings.
+        /// </summary>
+        public static string Repairyard_Notifications_Individual {
+            get {
+                return ResourceManager.GetString("Repairyard_Notifications_Individual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Docked Ship.
+        /// </summary>
+        public static string Repairyard_ShipName {
+            get {
+                return ResourceManager.GetString("Repairyard_ShipName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Completion Time.
+        /// </summary>
+        public static string Repairyard_TimeComplete {
+            get {
+                return ResourceManager.GetString("Repairyard_TimeComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remaining Time.
+        /// </summary>
+        public static string Repairyard_TimeRemaining {
+            get {
+                return ResourceManager.GetString("Repairyard_TimeRemaining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Empty.
+        /// </summary>
+        public static string Reparyard_Unused {
+            get {
+                return ResourceManager.GetString("Reparyard_Unused", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Screenshot save failed: .
         /// </summary>
         public static string Screenshot_Failed {

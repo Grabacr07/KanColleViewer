@@ -297,6 +297,27 @@
   <data name="Expedition_TimeRemaining" xml:space="preserve">
     <value>艦隊帰投まで</value>
   </data>
+  <data name="Repairyard_Locked" xml:space="preserve">
+    <value>ロックされています</value>
+  </data>
+  <data name="Repairyard_Notifications_Enable" xml:space="preserve">
+    <value>整備完了時にトースト通知を表示する</value>
+  </data>
+  <data name="Repairyard_Notifications_Individual" xml:space="preserve">
+    <value>ドックごとに個別に設定する</value>
+  </data>
+  <data name="Repairyard_ShipName" xml:space="preserve">
+    <value>入渠中の艦</value>
+  </data>
+  <data name="Repairyard_TimeComplete" xml:space="preserve">
+    <value>完了時刻</value>
+  </data>
+  <data name="Repairyard_TimeRemaining" xml:space="preserve">
+    <value>整備完了まで</value>
+  </data>
+  <data name="Reparyard_Unused" xml:space="preserve">
+    <value>未使用</value>
+  </data>
   <data name="ViewModels_Dockyard" xml:space="preserve">
     <value>建造ドック</value>
   </data>
