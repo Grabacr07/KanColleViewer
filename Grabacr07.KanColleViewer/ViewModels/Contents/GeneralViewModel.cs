@@ -25,6 +25,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 			switch (tabName)
 			{
+				case "Fleets":
+					target = this.Content.Fleets;
+					break;
 				case "Expeditions":
 					target = this.Content.Expeditions;
 					break;

@@ -53,6 +53,92 @@
 							  MinWidth="140" />
 		</Grid.ColumnDefinitions>
 
+		<metroControls:CallMethodButton Style="{DynamicResource JumbButtonStyleKey}"
+										VerticalAlignment="Top"
+										MethodName="Jump"
+										MethodParameter="Fleets">
+			<Grid DataContext="{Binding Content.Fleets.SelectedFleet}">
+				<StackPanel d:DataContext="{d:DesignData /SampleData/FleetViewModelSampleData.xaml}">
+					<TextBlock>
+						<Run Text="{Binding Id, StringFormat=/{0} - , Mode=OneWay}" />
+						<Run Text="{Binding Name, Mode=OneWay}"
+							 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+					</TextBlock>
+
+					<ItemsControl ItemsSource="{Binding Ships}"
+								  Margin="0,3,0,0"
+								  Grid.IsSharedSizeScope="True">
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<StackPanel Margin="0,4,0,0">
+									<Rectangle Height="1"
+											   Margin="0,0,0,4"
+											   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+									
+									<Grid HorizontalAlignment="Left">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition SharedSizeGroup="Name" />
+											<ColumnDefinition Width="Auto"
+															  SharedSizeGroup="Level" />
+											<ColumnDefinition Width="Auto"
+															  SharedSizeGroup="HP" />
+											<ColumnDefinition Width="Auto"
+															  SharedSizeGroup="Condition" />
+										</Grid.ColumnDefinitions>
+
+										<TextBlock>
+											<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
+												 Style="{DynamicResource PickupTextElementStyleKey}" />
+											<LineBreak />
+											<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
+												 FontSize="11" />
+										</TextBlock>
+										<TextBlock Grid.Column="1"
+												   Margin="12,0,0,0">
+											<Run Text="Lv." />
+											<Run Text="{Binding Ship.Level, Mode=OneWay}"
+												 Style="{DynamicResource PickupTextElementStyleKey}" />
+											<LineBreak />
+											<Run Text="{Binding Ship.ExpForNextLevel, StringFormat=Next: {0}, Mode=OneWay}"
+												 FontSize="9" />
+										</TextBlock>
+										<Grid Grid.Column="2"
+											  Margin="12,1,0,0">
+											<Grid.RowDefinitions>
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+											</Grid.RowDefinitions>
+											<TextBlock>
+												<Run Text="HP:" />
+												<Run Text="{Binding Ship.HP.Current, Mode=OneWay}"
+													 Style="{DynamicResource PickupTextElementStyleKey}" />
+												<Run Text="{Binding Ship.HP.Maximum, StringFormat=/{0}, Mode=OneWay}" />
+											</TextBlock>
+											<controls:ColorIndicator Grid.Row="1"
+																	 Height="6"
+																	 LimitedValue="{Binding Ship.HP, Mode=OneWay}"
+																	 Margin="0,2,0,0" />
+										</Grid>
+										<TextBlock Grid.Column="3"
+												   Margin="12,0,0,0">
+											<InlineUIContainer>
+												<controls:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
+											</InlineUIContainer>
+											<Run Text="{Binding Ship.Condition, Mode=OneWay}"
+												 Style="{DynamicResource PickupTextElementStyleKey}" />
+											<LineBreak />
+											<Run Text="condition"
+												 FontSize="9" />
+										</TextBlock>
+									</Grid>
+								</StackPanel>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
+				</StackPanel>
+			</Grid>
+		</metroControls:CallMethodButton>
+
 		<Grid Grid.Column="1">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
@@ -145,7 +231,8 @@
 					<TextBlock Text="{Binding Source={x:Static properties:Resources.Quests_Untaken}, Mode=OneWay}"
 							   TextWrapping="Wrap"
 							   Visibility="{Binding IsUntaken, Converter={StaticResource BooleanToVisibilityConverter}}"
-							   HorizontalAlignment="Center" />
+							   HorizontalAlignment="Center"
+							   Margin="0,5,0,0" />
 
 					<ItemsControl ItemsSource="{Binding Current}"
 								  Visibility="{Binding IsUntaken, Converter={StaticResource UniversalBooleanToVisibilityConverter}, ConverterParameter=Collapsed:Visible}">
@@ -169,9 +256,18 @@
 									<TextBlock Grid.Column="1"
 											   VerticalAlignment="Center"
 											   Margin="4,0,0,0">
-										<Run Text="{Binding Title, Mode=OneWay}" />
+										<Run x:Name="Title"
+											 Text="{Binding Title, Mode=OneWay}" />
 									</TextBlock>
 								</Grid>
+								<DataTemplate.Triggers>
+									<DataTrigger Binding="{Binding IsUntaken}"
+												 Value="True">
+										<Setter TargetName="Title"
+												Property="Text"
+												Value="{Binding Source={x:Static properties:Resources.Quest_Title_Untaken}, Mode=OneWay}" />
+									</DataTrigger>
+								</DataTemplate.Triggers>
 							</DataTemplate>
 						</ItemsControl.ItemTemplate>
 					</ItemsControl>
