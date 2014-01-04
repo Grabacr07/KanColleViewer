@@ -4,13 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using Grabacr07.Desktop.Metro.Controls;
 
 namespace Grabacr07.Desktop.Metro.Chrome
 {
 	/// <summary>
 	/// ウィンドウのキャプション部分で使用するために最適化された <see cref="Button"/> コントロールを表します。
 	/// </summary>
-	public class CaptionButton : Button
+	public class CaptionButton : CallMethodButton
 	{
 		static CaptionButton()
 		{
@@ -37,6 +38,30 @@ namespace Grabacr07.Desktop.Metro.Chrome
 			DependencyProperty.Register("WindowAction", typeof(WindowAction), typeof(CaptionButton), new UIPropertyMetadata(WindowAction.None));
 
 		#endregion
+		
+		#region Mode 依存関係プロパティ
+
+		public CaptionButtonMode Mode
+		{
+			get { return (CaptionButtonMode)this.GetValue(ModeProperty); }
+			set { this.SetValue(ModeProperty, value); }
+		}
+		public static readonly DependencyProperty ModeProperty =
+			DependencyProperty.Register("Mode", typeof(CaptionButtonMode), typeof(CaptionButton), new UIPropertyMetadata(CaptionButtonMode.Normal));	
+
+		#endregion
+
+		#region IsChecked 依存関係プロパティ
+
+		public bool IsChecked
+		{
+			get { return (bool)this.GetValue(IsCheckedProperty); }
+			set { this.SetValue(IsCheckedProperty, value); }
+		}
+		public static readonly DependencyProperty IsCheckedProperty =
+			DependencyProperty.Register("IsChecked", typeof(bool), typeof(CaptionButton), new UIPropertyMetadata(false));
+
+		#endregion
 
 		protected override void OnInitialized(EventArgs e)
 		{
@@ -53,6 +78,9 @@ namespace Grabacr07.Desktop.Metro.Chrome
 		protected override void OnClick()
 		{
 			this.WindowAction.Invoke(this);
+
+			if (this.Mode == CaptionButtonMode.Toggle) this.IsChecked = !this.IsChecked;
+
 			base.OnClick();
 		}
 

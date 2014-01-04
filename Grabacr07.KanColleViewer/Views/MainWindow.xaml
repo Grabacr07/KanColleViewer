@@ -75,7 +75,7 @@
 								  Height="36"
 								  Background="Transparent"
 								  AnchorVisibility="Collapsed"
-								  BandVisibility="Collapsed"/>
+								  BandVisibility="Collapsed" />
 
 				<TextBlock Grid.Column="1"
 						   Text="{Binding Title}"
@@ -88,6 +88,9 @@
 							Orientation="Horizontal"
 							HorizontalAlignment="Right"
 							VerticalAlignment="Top">
+					<chrome:CaptionButton IsChecked="{Binding TopMost, Mode=TwoWay}"
+										  ToolTip="{Binding Source={x:Static properties:Resources.Settings_Window_TopMost}}"
+										  Style="{DynamicResource PinButtonStyleKey}" />
 					<chrome:CaptionButton WindowAction="Minimize" />
 					<chrome:CaptionButton WindowAction="Maximize" />
 					<chrome:CaptionButton WindowAction="Normalize" />
