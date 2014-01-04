@@ -995,7 +995,7 @@
 
 							<TextBlock Grid.Row="0"
 									   Grid.Column="1"
-									   TextWrapping="Wrap"
+									   TextWrapping="{TemplateBinding TextWrapping}"
 									   VerticalAlignment="Center">
 								<Run x:Name="Title"
 									 Text="{TemplateBinding Title}"

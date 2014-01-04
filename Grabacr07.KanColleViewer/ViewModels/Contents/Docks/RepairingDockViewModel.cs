@@ -8,7 +8,7 @@ using Livet;
 using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
-namespace Grabacr07.KanColleViewer.ViewModels.Docks
+namespace Grabacr07.KanColleViewer.ViewModels.Contents.Docks
 {
 	public class RepairingDockViewModel : ViewModel
 	{
@@ -21,12 +21,12 @@ namespace Grabacr07.KanColleViewer.ViewModels.Docks
 
 		public string Ship
 		{
-			get { return source.Ship == null ? "----" : source.Ship.Info.Name; }
+			get { return this.source.Ship == null ? "----" : this.source.Ship.Info.Name; }
 		}
 
 		public string CompleteTime
 		{
-			get { return source.CompleteTime.HasValue ? source.CompleteTime.Value.LocalDateTime.ToString("MM/dd HH:mm") : "--/-- --:--:--"; }
+			get { return this.source.CompleteTime.HasValue ? this.source.CompleteTime.Value.LocalDateTime.ToString("MM/dd HH:mm") : "--/-- --:--:--"; }
 		}
 
 		public string Remaining

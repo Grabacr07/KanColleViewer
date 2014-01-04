@@ -106,5 +106,17 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			DependencyProperty.Register("IsUntaken", typeof(bool), typeof(Quest), new UIPropertyMetadata(false));
 
 		#endregion
+
+		#region TextWrapping 依存関係プロパティ
+
+		public TextWrapping TextWrapping
+		{
+			get { return (TextWrapping)this.GetValue(TextWrappingProperty); }
+			set { this.SetValue(TextWrappingProperty, value); }
+		}
+		public static readonly DependencyProperty TextWrappingProperty =
+			DependencyProperty.Register("TextWrapping", typeof(TextWrapping), typeof(Quest), new UIPropertyMetadata(TextWrapping.Wrap));
+
+		#endregion
 	}
 }

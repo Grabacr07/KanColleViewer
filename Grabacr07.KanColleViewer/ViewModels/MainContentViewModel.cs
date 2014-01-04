@@ -16,6 +16,12 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		public ShipsViewModel Ships { get; private set; }
 		public SlotItemsViewModel SlotItems { get; private set; }
 
+		public FleetsViewModel Fleets { get; private set; }
+		public DockyardViewModel Dockyard { get; private set; }
+		public RepairyardViewModel Repairyard { get; private set; }
+		public QuestsViewModel Quests { get; private set; }
+		public ExpeditionsViewModel Expeditions { get; private set; }
+
 		public IList<TabItemViewModel> TabItems { get; set; }
 		public IList<TabItemViewModel> SystemTabItems { get; set; }
 
@@ -50,15 +56,20 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			this.Ships = new ShipsViewModel();
 			this.SlotItems = new SlotItemsViewModel();
 
-			var fleets = new FleetsViewModel();
+			this.Fleets = new FleetsViewModel();
+			this.Dockyard = new DockyardViewModel();
+			this.Repairyard = new RepairyardViewModel();
+			this.Quests = new QuestsViewModel();
+			this.Expeditions = new ExpeditionsViewModel(this.Fleets);
 
 			this.TabItems = new List<TabItemViewModel>
 			{
-				fleets,
-				new RepairyardViewModel(),
-				new DockyardViewModel(),
-				new QuestsViewModel(),
-				new ExpeditionsViewModel(fleets),
+				new GeneralViewModel(this),
+				this.Fleets,
+				this.Repairyard,
+				this.Dockyard,
+				this.Quests,
+				this.Expeditions,
 			};
 			this.SystemTabItems = new List<TabItemViewModel>
 			{

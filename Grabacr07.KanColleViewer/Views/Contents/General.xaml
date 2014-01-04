@@ -11,6 +11,7 @@
 			 xmlns:vContents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
 			 xmlns:vmContents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
+			 xmlns:converters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters"
 			 mc:Ignorable="d"
 			 d:DataContext="{d:DesignInstance vmContents:GeneralViewModel}"
 			 d:DesignWidth="680"
@@ -32,8 +33,9 @@
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="Auto" />
-			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="220" />
+			<ColumnDefinition Width="Auto"
+							  MinWidth="140" />
 		</Grid.ColumnDefinitions>
 
 		<Grid Grid.Column="1">
@@ -43,7 +45,7 @@
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
 
 			<Border Grid.Row="0"
@@ -70,31 +72,40 @@
 					Grid.Column="1">
 				<StackPanel>
 					<TextBlock>
-						<Run Text="遠征" />
+						<Run Text="{Binding Content.Expeditions.Name}" />
 					</TextBlock>
 
 					<Rectangle Height="1"
 							   Margin="0,7,0,3"
 							   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-					<TextBlock Margin="0,2">
-						<Run Text="/2"
-							 Style="{DynamicResource PickupTextElementStyleKey}" />
-						<Run Text="-" />
-						<Run Text="25:11:40" />
-					</TextBlock>
-					<TextBlock Margin="0,2">
-						<Run Text="/3"
-							 Style="{DynamicResource PickupTextElementStyleKey}" />
-						<Run Text="-" />
-						<Run Text="25:11:40" />
-					</TextBlock>
-					<TextBlock Margin="0,2">
-						<Run Text="/4"
-							 Style="{DynamicResource PickupTextElementStyleKey}" />
-						<Run Text="-" />
-						<Run Text="25:11:40" />
-					</TextBlock>
+					<ItemsControl ItemsSource="{Binding Content.Expeditions.Fleets.Fleets}">
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<TextBlock x:Name="Expedition"
+										   Margin="0,4,0,0">
+									<Run Text="{Binding Id, Mode=OneWay, StringFormat=/{0}}"
+										 Style="{DynamicResource PickupTextElementStyleKey}" />
+									<Run x:Name="Remaining"
+										 Text="{Binding Expedition.Remaining, StringFormat=- {0}, Mode=OneWay}" />
+								</TextBlock>
+								<DataTemplate.Triggers>
+									<DataTrigger Binding="{Binding Id, Mode=OneWay}"
+												 Value="1">
+										<Setter TargetName="Expedition"
+												Property="Visibility"
+												Value="Collapsed" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding Expedition.IsInExecution}"
+												 Value="False">
+										<Setter TargetName="Remaining"
+												Property="Text"
+												Value="" />
+									</DataTrigger>
+								</DataTemplate.Triggers>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
 				</StackPanel>
 			</Border>
 
@@ -103,12 +114,46 @@
 					Grid.ColumnSpan="2">
 				<StackPanel>
 					<TextBlock>
-						<Run Text="任務" />
+						<Run Text="{Binding Content.Quests.Name}" />
 					</TextBlock>
 
 					<Rectangle Height="1"
 							   Margin="0,7,0,3"
 							   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+					<TextBlock Text="{Binding Source={x:Static properties:Resources.Quests_Untaken}, Mode=OneWay}"
+							   TextWrapping="Wrap"
+							   Visibility="{Binding Content.Quests.IsUntaken, Converter={StaticResource BooleanToVisibilityConverter}}"
+							   HorizontalAlignment="Center" />
+
+					<ItemsControl ItemsSource="{Binding Content.Quests.Current}"
+								  Visibility="{Binding Content.Quests.IsUntaken, Converter={StaticResource UniversalBooleanToVisibilityConverter}, ConverterParameter=Collapsed:Visible}">
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<Grid Margin="0,4,0,0">
+									<Grid.Resources>
+										<converters:QuestCategoryToColorConverter x:Key="QuestCategoryToColorConverterKey" />
+									</Grid.Resources>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<Rectangle Width="10"
+											   Height="10"
+											   VerticalAlignment="Center">
+										<Rectangle.Fill>
+											<SolidColorBrush Color="{Binding Category, Converter={StaticResource QuestCategoryToColorConverterKey}, Mode=OneWay}" />
+										</Rectangle.Fill>
+									</Rectangle>
+									<TextBlock Grid.Column="1"
+											   VerticalAlignment="Center"
+											   Margin="4,0,0,0">
+										<Run Text="{Binding Title, Mode=OneWay}" />
+									</TextBlock>
+								</Grid>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
 				</StackPanel>
 			</Border>
 
@@ -118,74 +163,101 @@
 			<Border>
 				<StackPanel>
 					<TextBlock>
-						<Run Text="入渠ドック" />
+						<Run Text="{Binding Content.Repairyard.Name}" />
 					</TextBlock>
 
 					<Rectangle Height="1"
 							   Margin="0,7,0,3"
 							   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-					<TextBlock Margin="0,2">
-						<Run Text="蒼龍改"
-							 Style="{DynamicResource PickupTextElementStyleKey}" />
-						<Run Text="-" />
-						<Run Text="25:11:40" />
-					</TextBlock>
-					<TextBlock Margin="0,2">
-						<Run Text="蒼龍改"
-							 Style="{DynamicResource PickupTextElementStyleKey}" />
-						<Run Text="-" />
-						<Run Text="25:11:40" />
-					</TextBlock>
-					<TextBlock Margin="0,2">
-						<Run Text="蒼龍改"
-							 Style="{DynamicResource PickupTextElementStyleKey}" />
-						<Run Text="-" />
-						<Run Text="25:11:40" />
-					</TextBlock>
-					<TextBlock Margin="0,2">
-						<Run Text="蒼龍改"
-							 Style="{DynamicResource PickupTextElementStyleKey}" />
-						<Run Text="-" />
-						<Run Text="25:11:40" />
-					</TextBlock>
+					<ItemsControl ItemsSource="{Binding Content.Repairyard.Docks}">
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<TextBlock Margin="0,4,0,0">
+									<Run x:Name="ShipName"
+										 Text="{Binding Ship, Mode=OneWay}"
+										 Style="{DynamicResource PickupTextElementStyleKey}" />
+									<Run x:Name="Remaining"
+										 Text="{Binding Remaining, StringFormat=/ {0}, Mode=OneWay}" />
+								</TextBlock>
+								<DataTemplate.Triggers>
+									<DataTrigger Binding="{Binding State}"
+												 Value="Locked">
+										<Setter TargetName="Remaining"
+												Property="Text"
+												Value="{Binding Source={x:Static properties:Resources.Repairyard_Locked}, Mode=OneWay}" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding State}"
+												 Value="Unlocked">
+										<Setter TargetName="Remaining"
+												Property="Text"
+												Value="{Binding Source={x:Static properties:Resources.Reparyard_Unused}, Mode=OneWay}" />
+										<Setter TargetName="ShipName"
+												Property="Text"
+												Value="" />
+									</DataTrigger>
+								</DataTemplate.Triggers>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
 				</StackPanel>
 			</Border>
 
 			<Border>
 				<StackPanel>
 					<TextBlock>
-						<Run Text="建造ドック" />
+						<Run Text="{Binding Content.Dockyard.Name, Mode=OneWay}" />
 					</TextBlock>
 
 					<Rectangle Height="1"
 							   Margin="0,7,0,3"
 							   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-					<TextBlock Margin="0,2">
-						<Run Text="蒼龍改"
-							 Style="{DynamicResource PickupTextElementStyleKey}" />
-						<Run Text="-" />
-						<Run Text="25:11:40" />
-					</TextBlock>
-					<TextBlock Margin="0,2">
-						<Run Text="蒼龍改"
-							 Style="{DynamicResource PickupTextElementStyleKey}" />
-						<Run Text="-" />
-						<Run Text="25:11:40" />
-					</TextBlock>
-					<TextBlock Margin="0,2">
-						<Run Text="蒼龍改"
-							 Style="{DynamicResource PickupTextElementStyleKey}" />
-						<Run Text="-" />
-						<Run Text="25:11:40" />
-					</TextBlock>
-					<TextBlock Margin="0,2">
-						<Run Text="蒼龍改"
-							 Style="{DynamicResource PickupTextElementStyleKey}" />
-						<Run Text="-" />
-						<Run Text="25:11:40" />
-					</TextBlock>
+					<ItemsControl ItemsSource="{Binding Content.Dockyard.Docks}">
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<TextBlock Margin="0,4,0,0">
+									<Run x:Name="ShipName"
+										 Text="{Binding Ship, Mode=OneWay}"
+										 Style="{DynamicResource PickupTextElementStyleKey}" />
+									<Run x:Name="Remaining"
+										 Text="{Binding Remaining, StringFormat=/ {0}, Mode=OneWay}" />
+								</TextBlock>
+								<DataTemplate.Triggers>
+									<DataTrigger Binding="{Binding CanDisplayShipName}"
+												 Value="False">
+										<Setter TargetName="ShipName"
+												Property="Text"
+												Value="???" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding State}"
+												 Value="Locked">
+										<Setter TargetName="Remaining"
+												Property="Text"
+												Value="{Binding Source={x:Static properties:Resources.Dockyard_Locked}, Mode=OneWay}" />
+										<Setter TargetName="ShipName"
+												Property="Text"
+												Value="" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding State}"
+												 Value="Unlocked">
+										<Setter TargetName="Remaining"
+												Property="Text"
+												Value="{Binding Source={x:Static properties:Resources.Dockyard_Unused}, Mode=OneWay}" />
+										<Setter TargetName="ShipName"
+												Property="Text"
+												Value="" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding State}"
+												 Value="Completed">
+										<Setter TargetName="Remaining"
+												Property="Text"
+												Value="{Binding Source={x:Static properties:Resources.Dockyard_Complete}, Mode=OneWay}" />
+									</DataTrigger>
+								</DataTemplate.Triggers>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
 				</StackPanel>
 			</Border>
 		</StackPanel>

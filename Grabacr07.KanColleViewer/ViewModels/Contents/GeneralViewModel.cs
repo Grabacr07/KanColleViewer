@@ -13,6 +13,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 		public GeneralViewModel(MainContentViewModel owner)
 		{
+			this.Name = "総合";
+
 			this.Content = owner;
 		}
 	}

@@ -11,7 +11,6 @@
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
-			 xmlns:docks="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Docks"
 			 xmlns:kanColleViewer="clr-namespace:Grabacr07.KanColleViewer"
 			 xmlns:docks1="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Docks"
 			 mc:Ignorable="d"

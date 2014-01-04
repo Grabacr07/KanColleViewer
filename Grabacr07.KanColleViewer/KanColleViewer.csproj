@@ -191,6 +191,7 @@
       <DependentUpon>Expeditions.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Converters\EnumToBooleanConverter.cs" />
+    <Compile Include="Views\Converters\QuestCategoryToColorConverter.cs" />
     <Compile Include="Views\NotStarted.xaml.cs">
       <DependentUpon>NotStarted.xaml</DependentUpon>
     </Compile>
