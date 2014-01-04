@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviors\InactiveOpacityBehavior.cs" />
+    <Compile Include="Chrome\CaptionButtonMode.cs" />
     <Compile Include="Controls\Badge.cs" />
     <Compile Include="Controls\BindableRichTextBox.cs" />
     <Compile Include="Controls\BindableTextBlock.cs" />

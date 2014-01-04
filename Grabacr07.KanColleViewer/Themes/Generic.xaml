@@ -2,7 +2,8 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
 					xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
-					xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls">
+					xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
+					xmlns:chrome="clr-namespace:Grabacr07.Desktop.Metro.Chrome;assembly=Desktop.Metro">
 
 	<Style TargetType="{x:Type controls:ConditionIcon}">
 		<Setter Property="Width"
@@ -1193,7 +1194,7 @@
 										  Canvas.Top="48.217"
 										  Width="181.144" />
 								</Canvas>
-									<Canvas x:Name="桜"
+								<Canvas x:Name="桜"
 										Height="935.819"
 										Canvas.Left="204.174"
 										Canvas.Top="226.079"
