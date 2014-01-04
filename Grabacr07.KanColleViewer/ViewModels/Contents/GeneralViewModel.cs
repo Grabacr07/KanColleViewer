@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Grabacr07.KanColleViewer.Properties;
 using Livet;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents
@@ -13,7 +14,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 		public GeneralViewModel(MainContentViewModel owner)
 		{
-			this.Name = "総合";
+			this.Name = Resources.IntegratedView;
 
 			this.Content = owner;
 		}

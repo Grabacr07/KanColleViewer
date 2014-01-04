@@ -106,6 +106,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Construction に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Dockyard {
+            get {
+                return ResourceManager.GetString("Dockyard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Complete! に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Dockyard_Complete {
@@ -196,6 +205,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Expeditions に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Expedition {
+            get {
+                return ResourceManager.GetString("Expedition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Not on an Expedition. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Expedition_NoExpedition {
@@ -237,6 +255,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Expedition_TimeRemaining {
             get {
                 return ResourceManager.GetString("Expedition_TimeRemaining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Fleets に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Fleets {
+            get {
+                return ResourceManager.GetString("Fleets", resourceCulture);
             }
         }
         
@@ -286,6 +313,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   総合 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string IntegratedView {
+            get {
+                return ResourceManager.GetString("IntegratedView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Please visit all of the quest pages. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Quest_Detail_Untaken {
@@ -331,6 +367,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Quests に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Quests {
+            get {
+                return ResourceManager.GetString("Quests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Active Quests に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Quests_CurrentQuestList {
@@ -372,6 +417,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Quests_Weekly {
             get {
                 return ResourceManager.GetString("Quests_Weekly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Repair に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Repairyard {
+            get {
+                return ResourceManager.GetString("Repairyard", resourceCulture);
             }
         }
         
@@ -453,6 +507,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Screenshot_Saved {
             get {
                 return ResourceManager.GetString("Screenshot_Saved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Settings に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
             }
         }
         
@@ -741,60 +804,6 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string StatusBar_Speed_Slow {
             get {
                 return ResourceManager.GetString("StatusBar_Speed_Slow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Construction に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ViewModels_Dockyard {
-            get {
-                return ResourceManager.GetString("ViewModels_Dockyard", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Expeditions に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ViewModels_Expeditions {
-            get {
-                return ResourceManager.GetString("ViewModels_Expeditions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Fleets に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ViewModels_Fleets {
-            get {
-                return ResourceManager.GetString("ViewModels_Fleets", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Quests に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ViewModels_Quests {
-            get {
-                return ResourceManager.GetString("ViewModels_Quests", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Repair に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ViewModels_Repairyard {
-            get {
-                return ResourceManager.GetString("ViewModels_Repairyard", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Settings に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ViewModels_Settings {
-            get {
-                return ResourceManager.GetString("ViewModels_Settings", resourceCulture);
             }
         }
         

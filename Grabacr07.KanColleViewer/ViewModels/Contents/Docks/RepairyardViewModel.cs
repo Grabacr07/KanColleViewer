@@ -56,7 +56,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Docks
 
 		public RepairyardViewModel()
 		{
-			this.Name = Properties.Resources.ViewModels_Repairyard;
+			this.Name = Properties.Resources.Repairyard;
 
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport.Repairyard)
 			{

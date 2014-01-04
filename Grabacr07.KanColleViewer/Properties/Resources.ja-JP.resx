@@ -339,22 +339,22 @@
   <data name="Reparyard_Unused" xml:space="preserve">
     <value>未使用</value>
   </data>
-  <data name="ViewModels_Dockyard" xml:space="preserve">
+  <data name="Dockyard" xml:space="preserve">
     <value>建造ドック</value>
   </data>
-  <data name="ViewModels_Expeditions" xml:space="preserve">
+  <data name="Expedition" xml:space="preserve">
     <value>遠征</value>
   </data>
-  <data name="ViewModels_Fleets" xml:space="preserve">
+  <data name="Fleets" xml:space="preserve">
     <value>艦隊</value>
   </data>
-  <data name="ViewModels_Quests" xml:space="preserve">
+  <data name="Quests" xml:space="preserve">
     <value>任務</value>
   </data>
-  <data name="ViewModels_Repairyard" xml:space="preserve">
+  <data name="Repairyard" xml:space="preserve">
     <value>入渠ドック</value>
   </data>
-  <data name="ViewModels_Settings" xml:space="preserve">
+  <data name="Settings" xml:space="preserve">
     <value>設定</value>
   </data>
   <data name="Dockyard_Display_Reveal" xml:space="preserve">
@@ -368,5 +368,8 @@
   </data>
   <data name="Dockyard_Notifications_Individual" xml:space="preserve">
     <value>ドックごとに個別に設定する</value>
+  </data>
+  <data name="IntegratedView" xml:space="preserve">
+    <value>総合</value>
   </data>
 </root>
