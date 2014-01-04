@@ -28,6 +28,21 @@
 				<Setter Property="Margin"
 						Value="5,0,5,10" />
 			</Style>
+
+			<Style x:Key="JumbButtonStyleKey"
+				   TargetType="{x:Type metroControls:CallMethodButton}"
+				   BasedOn="{StaticResource {x:Type metroControls:CallMethodButton}}">
+				<Setter Property="Background"
+						Value="Transparent" />
+				<Setter Property="Padding"
+						Value="8" />
+				<Setter Property="HorizontalContentAlignment"
+						Value="Stretch" />
+				<Setter Property="VerticalContentAlignment"
+						Value="Stretch" />
+				<Setter Property="Margin"
+						Value="5,0,5,10" />
+			</Style>
 		</ResourceDictionary>
 	</UserControl.Resources>
 	<Grid>
@@ -68,18 +83,21 @@
 				</StackPanel>
 			</Border>
 
-			<Border Grid.Row="0"
-					Grid.Column="1">
-				<StackPanel>
+			<metroControls:CallMethodButton Grid.Row="0"
+											Grid.Column="1"
+											Style="{StaticResource JumbButtonStyleKey}"
+											MethodName="Jump"
+											MethodParameter="Expeditions">
+				<StackPanel DataContext="{Binding Content.Expeditions}">
 					<TextBlock>
-						<Run Text="{Binding Content.Expeditions.Name}" />
+						<Run Text="{Binding Name}" />
 					</TextBlock>
 
 					<Rectangle Height="1"
 							   Margin="0,7,0,3"
 							   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-					<ItemsControl ItemsSource="{Binding Content.Expeditions.Fleets.Fleets}">
+					<ItemsControl ItemsSource="{Binding Fleets.Fleets}">
 						<ItemsControl.ItemTemplate>
 							<DataTemplate>
 								<TextBlock x:Name="Expedition"
@@ -107,14 +125,17 @@
 						</ItemsControl.ItemTemplate>
 					</ItemsControl>
 				</StackPanel>
-			</Border>
+			</metroControls:CallMethodButton>
 
-			<Border Grid.Row="1"
-					Grid.Column="0"
-					Grid.ColumnSpan="2">
-				<StackPanel>
+			<metroControls:CallMethodButton Grid.Row="1"
+											Grid.Column="0"
+											Grid.ColumnSpan="2"
+											Style="{StaticResource JumbButtonStyleKey}"
+											MethodName="Jump"
+											MethodParameter="Quests">
+				<StackPanel DataContext="{Binding Content.Quests}">
 					<TextBlock>
-						<Run Text="{Binding Content.Quests.Name}" />
+						<Run Text="{Binding Name}" />
 					</TextBlock>
 
 					<Rectangle Height="1"
@@ -123,11 +144,11 @@
 
 					<TextBlock Text="{Binding Source={x:Static properties:Resources.Quests_Untaken}, Mode=OneWay}"
 							   TextWrapping="Wrap"
-							   Visibility="{Binding Content.Quests.IsUntaken, Converter={StaticResource BooleanToVisibilityConverter}}"
+							   Visibility="{Binding IsUntaken, Converter={StaticResource BooleanToVisibilityConverter}}"
 							   HorizontalAlignment="Center" />
 
-					<ItemsControl ItemsSource="{Binding Content.Quests.Current}"
-								  Visibility="{Binding Content.Quests.IsUntaken, Converter={StaticResource UniversalBooleanToVisibilityConverter}, ConverterParameter=Collapsed:Visible}">
+					<ItemsControl ItemsSource="{Binding Current}"
+								  Visibility="{Binding IsUntaken, Converter={StaticResource UniversalBooleanToVisibilityConverter}, ConverterParameter=Collapsed:Visible}">
 						<ItemsControl.ItemTemplate>
 							<DataTemplate>
 								<Grid Margin="0,4,0,0">
@@ -155,22 +176,23 @@
 						</ItemsControl.ItemTemplate>
 					</ItemsControl>
 				</StackPanel>
-			</Border>
-
+			</metroControls:CallMethodButton>
 		</Grid>
 
 		<StackPanel Grid.Column="2">
-			<Border>
-				<StackPanel>
+			<metroControls:CallMethodButton Style="{StaticResource JumbButtonStyleKey}"
+											MethodName="Jump"
+											MethodParameter="Repairyard">
+				<StackPanel DataContext="{Binding Content.Repairyard}">
 					<TextBlock>
-						<Run Text="{Binding Content.Repairyard.Name}" />
+						<Run Text="{Binding Name}" />
 					</TextBlock>
 
 					<Rectangle Height="1"
 							   Margin="0,7,0,3"
 							   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-					<ItemsControl ItemsSource="{Binding Content.Repairyard.Docks}">
+					<ItemsControl ItemsSource="{Binding Docks}">
 						<ItemsControl.ItemTemplate>
 							<DataTemplate>
 								<TextBlock Margin="0,4,0,0">
@@ -201,19 +223,21 @@
 						</ItemsControl.ItemTemplate>
 					</ItemsControl>
 				</StackPanel>
-			</Border>
+			</metroControls:CallMethodButton>
 
-			<Border>
-				<StackPanel>
+			<metroControls:CallMethodButton Style="{StaticResource JumbButtonStyleKey}"
+											MethodName="Jump"
+											MethodParameter="Dockyard">
+				<StackPanel DataContext="{Binding Content.Dockyard}">
 					<TextBlock>
-						<Run Text="{Binding Content.Dockyard.Name, Mode=OneWay}" />
+						<Run Text="{Binding Name, Mode=OneWay}" />
 					</TextBlock>
 
 					<Rectangle Height="1"
 							   Margin="0,7,0,3"
 							   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-					<ItemsControl ItemsSource="{Binding Content.Dockyard.Docks}">
+					<ItemsControl ItemsSource="{Binding Docks}">
 						<ItemsControl.ItemTemplate>
 							<DataTemplate>
 								<TextBlock Margin="0,4,0,0">
@@ -259,7 +283,7 @@
 						</ItemsControl.ItemTemplate>
 					</ItemsControl>
 				</StackPanel>
-			</Border>
+			</metroControls:CallMethodButton>
 		</StackPanel>
 	</Grid>
 </UserControl>

@@ -17,5 +17,29 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 			this.Content = owner;
 		}
+
+
+		public void Jump(string tabName)
+		{
+			TabItemViewModel target = null;
+
+			switch (tabName)
+			{
+				case "Expeditions":
+					target = this.Content.Expeditions;
+					break;
+				case "Quests":
+					target = this.Content.Quests;
+					break;
+				case "Repairyard":
+					target = this.Content.Repairyard;
+					break;
+				case "Dockyard":
+					target = this.Content.Dockyard;
+					break;
+			}
+
+			if (target != null) target.IsSelected = true;
+		}
 	}
 }
