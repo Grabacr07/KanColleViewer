@@ -276,8 +276,27 @@
 													IsEnabled="{Binding CanOpenScreenshotFolder}"
 													MethodName="OpenScreenshotFolder"
 													Margin="0" />
-				</Grid>
 
+					<TextBlock Grid.Row="1"
+							   Grid.Column="0"
+							   Margin="0,6">
+						<Run Text="{Binding Source={x:Static properties:Resources.Settings_Screenshot_ImageFormat_Label}, Mode=OneWay}" />
+						<Run Text=": " />
+					</TextBlock>
+					<StackPanel Grid.Row="1"
+								Grid.Column="1"
+								Grid.ColumnSpan="3"
+								Orientation="Horizontal">
+						<RadioButton IsChecked="{Binding ScreenshotImageFormat, Mode=TwoWay, ConverterParameter=Png, Converter={StaticResource EnumToBooleanConverter}}">
+							<TextBlock Text="PNG"/>
+						</RadioButton>
+						<RadioButton Margin="10,0,0,0"
+									 IsChecked="{Binding ScreenshotImageFormat, Mode=TwoWay, ConverterParameter=Jpeg, Converter={StaticResource EnumToBooleanConverter}}">
+							<TextBlock Text="JPG"/>
+						</RadioButton>
+					</StackPanel>
+				</Grid>
+				
 				<Rectangle Height="1"
 						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 

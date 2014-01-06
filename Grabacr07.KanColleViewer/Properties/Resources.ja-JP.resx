@@ -231,4 +231,142 @@
   <data name="Settings_VersionInfo" xml:space="preserve">
     <value>バージョン情報</value>
   </data>
+  <data name="Settings_Screenshot_ImageFormat_Label" xml:space="preserve">
+    <value>画像形式</value>
+  </data>
+  <data name="StatusBar_AirSuperiorityPotential" xml:space="preserve">
+    <value>制空戦力:</value>
+  </data>
+  <data name="StatusBar_AverageLevel" xml:space="preserve">
+    <value>平均レベル:</value>
+  </data>
+  <data name="StatusBar_NotStarted" xml:space="preserve">
+    <value>艦これの起動を待っています</value>
+  </data>
+  <data name="StatusBar_Ready" xml:space="preserve">
+    <value>準備完了</value>
+  </data>
+  <data name="StatusBar_Speed_Fast" xml:space="preserve">
+    <value>高速艦隊</value>
+  </data>
+  <data name="StatusBar_Speed_Slow" xml:space="preserve">
+    <value>低速艦隊</value>
+  </data>
+  <data name="Screenshot_Failed" xml:space="preserve">
+    <value>スクリーンショットの保存に失敗しました: </value>
+  </data>
+  <data name="Screenshot_Saved" xml:space="preserve">
+    <value>スクリーンショットを保存しました: </value>
+  </data>
+  <data name="Homeport_FleetHQ" xml:space="preserve">
+    <value>司令部</value>
+  </data>
+  <data name="Homeport_InstantBuild" xml:space="preserve">
+    <value>高速建造材:</value>
+  </data>
+  <data name="Homeport_InstantRepair" xml:space="preserve">
+    <value>高速修復材:</value>
+  </data>
+  <data name="Homeport_NoOfEquipment" xml:space="preserve">
+    <value>保有装備:</value>
+  </data>
+  <data name="Homeport_NoOfShips" xml:space="preserve">
+    <value>所属艦娘:</value>
+  </data>
+  <data name="Common_Notifications_Disable" xml:space="preserve">
+    <value>通知しない</value>
+  </data>
+  <data name="Common_Notifications_NotImplemented" xml:space="preserve">
+    <value>(未実装)</value>
+  </data>
+  <data name="Common_Notifications_Title" xml:space="preserve">
+    <value>通知設定</value>
+  </data>
+  <data name="Common_Notifications_Windows8" xml:space="preserve">
+    <value>(Windows 8 以降)</value>
+  </data>
+  <data name="Dockyard_Complete" xml:space="preserve">
+    <value>完成！</value>
+  </data>
+  <data name="Dockyard_Locked" xml:space="preserve">
+    <value>ロックされています</value>
+  </data>
+  <data name="Dockyard_ShipName" xml:space="preserve">
+    <value>建造中の艦</value>
+  </data>
+  <data name="Dockyard_TimeComplete" xml:space="preserve">
+    <value>完成時刻</value>
+  </data>
+  <data name="Dockyard_TimeRemaining" xml:space="preserve">
+    <value>建造完了まで</value>
+  </data>
+  <data name="Dockyard_Unused" xml:space="preserve">
+    <value>未使用</value>
+  </data>
+  <data name="Expedition_NoExpedition" xml:space="preserve">
+    <value>遠征に出ていません。</value>
+  </data>
+  <data name="Expedition_Notifications_Enable" xml:space="preserve">
+    <value>遠征帰投時にトースト通知を表示する</value>
+  </data>
+  <data name="Expedition_Notifications_Individual" xml:space="preserve">
+    <value>艦隊ごとに個別に設定する</value>
+  </data>
+  <data name="Expedition_TimeComplete" xml:space="preserve">
+    <value>終了時刻</value>
+  </data>
+  <data name="Expedition_TimeRemaining" xml:space="preserve">
+    <value>艦隊帰投まで</value>
+  </data>
+  <data name="Repairyard_Locked" xml:space="preserve">
+    <value>ロックされています</value>
+  </data>
+  <data name="Repairyard_Notifications_Enable" xml:space="preserve">
+    <value>整備完了時にトースト通知を表示する</value>
+  </data>
+  <data name="Repairyard_Notifications_Individual" xml:space="preserve">
+    <value>ドックごとに個別に設定する</value>
+  </data>
+  <data name="Repairyard_ShipName" xml:space="preserve">
+    <value>入渠中の艦</value>
+  </data>
+  <data name="Repairyard_TimeComplete" xml:space="preserve">
+    <value>完了時刻</value>
+  </data>
+  <data name="Repairyard_TimeRemaining" xml:space="preserve">
+    <value>整備完了まで</value>
+  </data>
+  <data name="Reparyard_Unused" xml:space="preserve">
+    <value>未使用</value>
+  </data>
+  <data name="ViewModels_Dockyard" xml:space="preserve">
+    <value>建造ドック</value>
+  </data>
+  <data name="ViewModels_Expeditions" xml:space="preserve">
+    <value>遠征</value>
+  </data>
+  <data name="ViewModels_Fleets" xml:space="preserve">
+    <value>艦隊</value>
+  </data>
+  <data name="ViewModels_Quests" xml:space="preserve">
+    <value>任務</value>
+  </data>
+  <data name="ViewModels_Repairyard" xml:space="preserve">
+    <value>入渠ドック</value>
+  </data>
+  <data name="ViewModels_Settings" xml:space="preserve">
+    <value>設定</value>
+  </data>
+  <data name="Dockyard_Display_Reveal" xml:space="preserve">
+    <value>建造中の艦名をネタバレする</value>
+  </data>
+  <data name="Dockyard_Display_Title" xml:space="preserve">
+    <value>表示設定</value>
+  </data>
+  <data name="Dockyard_Notifications_Enable" xml:space="preserve">
+    <value>建造完了時にトースト通知を表示する</value>
+  </data>
+  <data name="Dockyard_Notifications_Individual" xml:space="preserve">
+    <value>ドックごとに個別に設定する</value>
+  </data>
 </root>
