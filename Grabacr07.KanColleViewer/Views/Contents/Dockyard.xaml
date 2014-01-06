@@ -191,8 +191,7 @@
 				</CheckBox>
 			</StackPanel>
 
-			<StackPanel Margin="10,10,10,4"
-						IsEnabled="{Binding IsSupportedNotification, Mode=OneWay}">
+			<StackPanel Margin="10,10,10,4">
 				<StackPanel.Style>
 					<Style TargetType="{x:Type StackPanel}">
 						<Style.Triggers>
@@ -207,7 +206,6 @@
 				<TextBlock Margin="5">
 					<Run Text="{x:Static properties:Resources.Common_Notifications_Title}"
 						 Style="{DynamicResource PickupTextElementStyleKey}" />
-					<Run Text="{x:Static properties:Resources.Common_Notifications_Windows8}" />
 				</TextBlock>
 				<RadioButton Margin="8,5"
 							 IsChecked="{Binding IsNotifyCompleted}">
