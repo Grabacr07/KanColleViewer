@@ -121,7 +121,7 @@
     <value>现在进行中的任务</value>
   </data>
   <data name="Quest_Detail_Untaken" xml:space="preserve">
-    <value>请浏览所有的人物画面</value>
+    <value>请浏览所有的任务画面</value>
   </data>
   <data name="Quest_Title_Untaken" xml:space="preserve">
     <value>(未接受的任务)</value>
