@@ -70,7 +70,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 		public QuestsViewModel()
 		{
-			this.Name = "任務";
+			this.Name = Properties.Resources.ViewModels_Quests;
 
 			this.IsUntaken = KanColleClient.Current.Homeport.Quests.IsUntaken;
 			this.Quests = KanColleClient.Current.Homeport.Quests.All.Select(x => new QuestViewModel(x)).ToArray();
