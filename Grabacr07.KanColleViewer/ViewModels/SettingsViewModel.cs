@@ -50,6 +50,23 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region ScreenshotImageFormat 変更通知プロパティ
+
+		public SupportedImageFormat ScreenshotImageFormat
+		{
+			get { return Settings.Current.ScreenshotImageFormat; }
+			set
+			{
+				if (Settings.Current.ScreenshotImageFormat != value)
+				{
+					Settings.Current.ScreenshotImageFormat = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		#region ProxyHost 変更通知プロパティ
 
 		public string ProxyHost
@@ -187,7 +204,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		{
 			if (Helper.IsInDesignMode) return;
 
-			this.Name = "設定";
+			this.Name = Properties.Resources.ViewModels_Settings;
 
 			this.Libraries = App.ProductInfo.Libraries.Aggregate(
 				new List<BindableTextViewModel>(),

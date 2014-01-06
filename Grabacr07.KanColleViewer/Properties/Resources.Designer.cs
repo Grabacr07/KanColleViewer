@@ -70,6 +70,222 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No Notifications.
+        /// </summary>
+        public static string Common_Notifications_Disable {
+            get {
+                return ResourceManager.GetString("Common_Notifications_Disable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (planned).
+        /// </summary>
+        public static string Common_Notifications_NotImplemented {
+            get {
+                return ResourceManager.GetString("Common_Notifications_NotImplemented", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notifications.
+        /// </summary>
+        public static string Common_Notifications_Title {
+            get {
+                return ResourceManager.GetString("Common_Notifications_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Windows 8+).
+        /// </summary>
+        public static string Common_Notifications_Windows8 {
+            get {
+                return ResourceManager.GetString("Common_Notifications_Windows8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complete!.
+        /// </summary>
+        public static string Dockyard_Complete {
+            get {
+                return ResourceManager.GetString("Dockyard_Complete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reveal Ship Names.
+        /// </summary>
+        public static string Dockyard_Display_Reveal {
+            get {
+                return ResourceManager.GetString("Dockyard_Display_Reveal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display Settings.
+        /// </summary>
+        public static string Dockyard_Display_Title {
+            get {
+                return ResourceManager.GetString("Dockyard_Display_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Locked.
+        /// </summary>
+        public static string Dockyard_Locked {
+            get {
+                return ResourceManager.GetString("Dockyard_Locked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notify Upon Completion.
+        /// </summary>
+        public static string Dockyard_Notifications_Enable {
+            get {
+                return ResourceManager.GetString("Dockyard_Notifications_Enable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Individual Dock Settings.
+        /// </summary>
+        public static string Dockyard_Notifications_Individual {
+            get {
+                return ResourceManager.GetString("Dockyard_Notifications_Individual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ship In Progress.
+        /// </summary>
+        public static string Dockyard_ShipName {
+            get {
+                return ResourceManager.GetString("Dockyard_ShipName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Completion Time.
+        /// </summary>
+        public static string Dockyard_TimeComplete {
+            get {
+                return ResourceManager.GetString("Dockyard_TimeComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remaining Time.
+        /// </summary>
+        public static string Dockyard_TimeRemaining {
+            get {
+                return ResourceManager.GetString("Dockyard_TimeRemaining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Empty.
+        /// </summary>
+        public static string Dockyard_Unused {
+            get {
+                return ResourceManager.GetString("Dockyard_Unused", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not on an Expedition..
+        /// </summary>
+        public static string Expedition_NoExpedition {
+            get {
+                return ResourceManager.GetString("Expedition_NoExpedition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notify Upon Completion.
+        /// </summary>
+        public static string Expedition_Notifications_Enable {
+            get {
+                return ResourceManager.GetString("Expedition_Notifications_Enable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Individual Fleet Settings.
+        /// </summary>
+        public static string Expedition_Notifications_Individual {
+            get {
+                return ResourceManager.GetString("Expedition_Notifications_Individual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Completion Time.
+        /// </summary>
+        public static string Expedition_TimeComplete {
+            get {
+                return ResourceManager.GetString("Expedition_TimeComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remaining Time.
+        /// </summary>
+        public static string Expedition_TimeRemaining {
+            get {
+                return ResourceManager.GetString("Expedition_TimeRemaining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fleet HQ.
+        /// </summary>
+        public static string Homeport_FleetHQ {
+            get {
+                return ResourceManager.GetString("Homeport_FleetHQ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Instant Build Materials:  .
+        /// </summary>
+        public static string Homeport_InstantBuild {
+            get {
+                return ResourceManager.GetString("Homeport_InstantBuild", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Instant Repair Materials:.
+        /// </summary>
+        public static string Homeport_InstantRepair {
+            get {
+                return ResourceManager.GetString("Homeport_InstantRepair", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Equipment:.
+        /// </summary>
+        public static string Homeport_NoOfEquipment {
+            get {
+                return ResourceManager.GetString("Homeport_NoOfEquipment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ship Girls:  .
+        /// </summary>
+        public static string Homeport_NoOfShips {
+            get {
+                return ResourceManager.GetString("Homeport_NoOfShips", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please visit all of the quest pages..
         /// </summary>
         public static string Quest_Detail_Untaken {
@@ -156,6 +372,87 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Quests_Weekly {
             get {
                 return ResourceManager.GetString("Quests_Weekly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Locked.
+        /// </summary>
+        public static string Repairyard_Locked {
+            get {
+                return ResourceManager.GetString("Repairyard_Locked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notify Upon Completion.
+        /// </summary>
+        public static string Repairyard_Notifications_Enable {
+            get {
+                return ResourceManager.GetString("Repairyard_Notifications_Enable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Individual Dock Settings.
+        /// </summary>
+        public static string Repairyard_Notifications_Individual {
+            get {
+                return ResourceManager.GetString("Repairyard_Notifications_Individual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Docked Ship.
+        /// </summary>
+        public static string Repairyard_ShipName {
+            get {
+                return ResourceManager.GetString("Repairyard_ShipName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Completion Time.
+        /// </summary>
+        public static string Repairyard_TimeComplete {
+            get {
+                return ResourceManager.GetString("Repairyard_TimeComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remaining Time.
+        /// </summary>
+        public static string Repairyard_TimeRemaining {
+            get {
+                return ResourceManager.GetString("Repairyard_TimeRemaining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Empty.
+        /// </summary>
+        public static string Reparyard_Unused {
+            get {
+                return ResourceManager.GetString("Reparyard_Unused", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Screenshot save failed: .
+        /// </summary>
+        public static string Screenshot_Failed {
+            get {
+                return ResourceManager.GetString("Screenshot_Failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Screenshot saved: .
+        /// </summary>
+        public static string Screenshot_Saved {
+            get {
+                return ResourceManager.GetString("Screenshot_Saved", resourceCulture);
             }
         }
         
@@ -322,6 +619,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Image Format.
+        /// </summary>
+        public static string Settings_Screenshot_ImageFormat_Label {
+            get {
+                return ResourceManager.GetString("Settings_Screenshot_ImageFormat_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open Folder.
         /// </summary>
         public static string Settings_Screenshot_OpenFolderButton {
@@ -349,7 +655,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Always on top of everything.
+        ///   Looks up a localized string similar to Keep window on top.
         /// </summary>
         public static string Settings_Window_TopMost {
             get {
@@ -381,6 +687,114 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Settings_WindowControl_LocationLeftButton_Sub {
             get {
                 return ResourceManager.GetString("Settings_WindowControl_LocationLeftButton_Sub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Air Superiority Potential:.
+        /// </summary>
+        public static string StatusBar_AirSuperiorityPotential {
+            get {
+                return ResourceManager.GetString("StatusBar_AirSuperiorityPotential", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Average Level:.
+        /// </summary>
+        public static string StatusBar_AverageLevel {
+            get {
+                return ResourceManager.GetString("StatusBar_AverageLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting for KanColle to start.
+        /// </summary>
+        public static string StatusBar_NotStarted {
+            get {
+                return ResourceManager.GetString("StatusBar_NotStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready.
+        /// </summary>
+        public static string StatusBar_Ready {
+            get {
+                return ResourceManager.GetString("StatusBar_Ready", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fast Fleet.
+        /// </summary>
+        public static string StatusBar_Speed_Fast {
+            get {
+                return ResourceManager.GetString("StatusBar_Speed_Fast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Slow Fleet.
+        /// </summary>
+        public static string StatusBar_Speed_Slow {
+            get {
+                return ResourceManager.GetString("StatusBar_Speed_Slow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Construction.
+        /// </summary>
+        public static string ViewModels_Dockyard {
+            get {
+                return ResourceManager.GetString("ViewModels_Dockyard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expeditions.
+        /// </summary>
+        public static string ViewModels_Expeditions {
+            get {
+                return ResourceManager.GetString("ViewModels_Expeditions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fleets.
+        /// </summary>
+        public static string ViewModels_Fleets {
+            get {
+                return ResourceManager.GetString("ViewModels_Fleets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quests.
+        /// </summary>
+        public static string ViewModels_Quests {
+            get {
+                return ResourceManager.GetString("ViewModels_Quests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repair.
+        /// </summary>
+        public static string ViewModels_Repairyard {
+            get {
+                return ResourceManager.GetString("ViewModels_Repairyard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string ViewModels_Settings {
+            get {
+                return ResourceManager.GetString("ViewModels_Settings", resourceCulture);
             }
         }
         

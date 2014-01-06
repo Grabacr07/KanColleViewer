@@ -220,7 +220,7 @@
     <value>Window</value>
   </data>
   <data name="Settings_Window_TopMost" xml:space="preserve">
-    <value>Always on top of everything</value>
+    <value>Keep window on top</value>
   </data>
   <data name="Common_Implement_Oncoming" xml:space="preserve">
     <value>※ To be implemented</value>
@@ -230,5 +230,143 @@
   </data>
   <data name="Settings_VersionInfo" xml:space="preserve">
     <value>Version Info</value>
+  </data>
+  <data name="Settings_Screenshot_ImageFormat_Label" xml:space="preserve">
+    <value>Image Format</value>
+  </data>
+  <data name="StatusBar_AirSuperiorityPotential" xml:space="preserve">
+    <value>Air Superiority Potential:</value>
+  </data>
+  <data name="StatusBar_AverageLevel" xml:space="preserve">
+    <value>Average Level:</value>
+  </data>
+  <data name="StatusBar_NotStarted" xml:space="preserve">
+    <value>Waiting for KanColle to start</value>
+  </data>
+  <data name="StatusBar_Ready" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+  <data name="StatusBar_Speed_Fast" xml:space="preserve">
+    <value>Fast Fleet</value>
+  </data>
+  <data name="StatusBar_Speed_Slow" xml:space="preserve">
+    <value>Slow Fleet</value>
+  </data>
+  <data name="Screenshot_Failed" xml:space="preserve">
+    <value>Screenshot save failed: </value>
+  </data>
+  <data name="Screenshot_Saved" xml:space="preserve">
+    <value>Screenshot saved: </value>
+  </data>
+  <data name="Homeport_FleetHQ" xml:space="preserve">
+    <value>Fleet HQ</value>
+  </data>
+  <data name="Homeport_InstantBuild" xml:space="preserve">
+    <value>Instant Build Materials:  </value>
+  </data>
+  <data name="Homeport_InstantRepair" xml:space="preserve">
+    <value>Instant Repair Materials:</value>
+  </data>
+  <data name="Homeport_NoOfEquipment" xml:space="preserve">
+    <value>Equipment:</value>
+  </data>
+  <data name="Homeport_NoOfShips" xml:space="preserve">
+    <value>Ship Girls:  </value>
+  </data>
+  <data name="Common_Notifications_Disable" xml:space="preserve">
+    <value>No Notifications</value>
+  </data>
+  <data name="Common_Notifications_NotImplemented" xml:space="preserve">
+    <value>(planned)</value>
+  </data>
+  <data name="Common_Notifications_Title" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="Common_Notifications_Windows8" xml:space="preserve">
+    <value>(Windows 8+)</value>
+  </data>
+  <data name="Dockyard_Complete" xml:space="preserve">
+    <value>Complete!</value>
+  </data>
+  <data name="Dockyard_Locked" xml:space="preserve">
+    <value>Locked</value>
+  </data>
+  <data name="Dockyard_ShipName" xml:space="preserve">
+    <value>Ship In Progress</value>
+  </data>
+  <data name="Dockyard_TimeComplete" xml:space="preserve">
+    <value>Completion Time</value>
+  </data>
+  <data name="Dockyard_TimeRemaining" xml:space="preserve">
+    <value>Remaining Time</value>
+  </data>
+  <data name="Dockyard_Unused" xml:space="preserve">
+    <value>Empty</value>
+  </data>
+  <data name="Expedition_NoExpedition" xml:space="preserve">
+    <value>Not on an Expedition.</value>
+  </data>
+  <data name="Expedition_Notifications_Enable" xml:space="preserve">
+    <value>Notify Upon Completion</value>
+  </data>
+  <data name="Expedition_Notifications_Individual" xml:space="preserve">
+    <value>Individual Fleet Settings</value>
+  </data>
+  <data name="Expedition_TimeComplete" xml:space="preserve">
+    <value>Completion Time</value>
+  </data>
+  <data name="Expedition_TimeRemaining" xml:space="preserve">
+    <value>Remaining Time</value>
+  </data>
+  <data name="Repairyard_Locked" xml:space="preserve">
+    <value>Locked</value>
+  </data>
+  <data name="Repairyard_Notifications_Enable" xml:space="preserve">
+    <value>Notify Upon Completion</value>
+  </data>
+  <data name="Repairyard_Notifications_Individual" xml:space="preserve">
+    <value>Individual Dock Settings</value>
+  </data>
+  <data name="Repairyard_ShipName" xml:space="preserve">
+    <value>Docked Ship</value>
+  </data>
+  <data name="Repairyard_TimeComplete" xml:space="preserve">
+    <value>Completion Time</value>
+  </data>
+  <data name="Repairyard_TimeRemaining" xml:space="preserve">
+    <value>Remaining Time</value>
+  </data>
+  <data name="Reparyard_Unused" xml:space="preserve">
+    <value>Empty</value>
+  </data>
+  <data name="ViewModels_Dockyard" xml:space="preserve">
+    <value>Construction</value>
+  </data>
+  <data name="ViewModels_Expeditions" xml:space="preserve">
+    <value>Expeditions</value>
+  </data>
+  <data name="ViewModels_Fleets" xml:space="preserve">
+    <value>Fleets</value>
+  </data>
+  <data name="ViewModels_Quests" xml:space="preserve">
+    <value>Quests</value>
+  </data>
+  <data name="ViewModels_Repairyard" xml:space="preserve">
+    <value>Repair</value>
+  </data>
+  <data name="ViewModels_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Dockyard_Display_Reveal" xml:space="preserve">
+    <value>Reveal Ship Names</value>
+  </data>
+  <data name="Dockyard_Display_Title" xml:space="preserve">
+    <value>Display Settings</value>
+  </data>
+  <data name="Dockyard_Notifications_Enable" xml:space="preserve">
+    <value>Notify Upon Completion</value>
+  </data>
+  <data name="Dockyard_Notifications_Individual" xml:space="preserve">
+    <value>Individual Dock Settings</value>
   </data>
 </root>

@@ -81,7 +81,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 		public FleetsViewModel()
 		{
-			this.Name = "艦隊";
+			this.Name = Properties.Resources.ViewModels_Fleets;
 
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport)
 			{
