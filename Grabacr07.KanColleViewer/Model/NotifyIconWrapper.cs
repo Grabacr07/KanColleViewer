@@ -9,27 +9,27 @@ namespace Grabacr07.KanColleViewer.Model
 	/// </summary>
 	public class NotifyIconWrapper
 	{
-		private static NotifyIcon _notifyIcon;
+		private static NotifyIcon notifyIcon;
 		private NotifyIconWrapper() { }
 
 		public static void Initialize()
 		{
-			_notifyIcon = new NotifyIcon();
-			_notifyIcon.Text = "KanColleViewer";
+			notifyIcon = new NotifyIcon();
+			notifyIcon.Text = "KanColleViewer";
 			var uri = new Uri("pack://application:,,,/KanColleViewer;Component/Assets/app.ico");
 			var stream = System.Windows.Application.GetResourceStream(uri).Stream;
-			_notifyIcon.Icon = new Icon(stream);
-			_notifyIcon.Visible = true;
+			notifyIcon.Icon = new Icon(stream);
+			notifyIcon.Visible = true;
 		}
 
 		public static void Show(string title, string text)
 		{
-			_notifyIcon.ShowBalloonTip(1000, title, text, ToolTipIcon.None);
+			notifyIcon.ShowBalloonTip(1000, title, text, ToolTipIcon.None);
 		}
 
 		public static void Dispose()
 		{
-			_notifyIcon.Dispose();
+			notifyIcon.Dispose();
 		}
 	}
 }
