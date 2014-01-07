@@ -196,7 +196,7 @@
     <value>使用代理来连接服务器</value>
   </data>
   <data name="Settings_Proxy_Enable_4_SSL" xml:space="preserve">
-    <value>使用SSL来连接代理服务器</value>
+    <value>使用SSL时也使用代理服务器</value>
   </data>
   <data name="Settings_Display" xml:space="preserve">
     <value>显示设置</value>
@@ -304,7 +304,7 @@
     <value>未使用</value>
   </data>
   <data name="Expedition_NoExpedition" xml:space="preserve">
-    <value>没有舰队在远征中</value>
+    <value>该舰队没有在远征中</value>
   </data>
   <data name="Expedition_Notifications_Enable" xml:space="preserve">
     <value>舰队远征结束时通知</value>
