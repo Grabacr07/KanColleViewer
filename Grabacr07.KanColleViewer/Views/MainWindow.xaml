@@ -12,6 +12,7 @@
 						xmlns:metroControls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 						xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 						xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
+						xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
 						xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 						xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
 						xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
@@ -46,6 +47,27 @@
 		<livet:InteractionMessageTrigger Messenger="{Binding Messenger, Mode=OneWay}"
 										 MessageKey="Window/Activate">
 			<livet:WindowInteractionMessageAction />
+		</livet:InteractionMessageTrigger>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger, Mode=OneWay}"
+										 MessageKey="Window/ShowSettings">
+			<ei:ChangePropertyAction TargetObject="{Binding ElementName=WebBrowser}"
+									 PropertyName="Visibility">
+				<ei:ChangePropertyAction.Value>
+					<Visibility>Hidden</Visibility>
+				</ei:ChangePropertyAction.Value>
+			</ei:ChangePropertyAction>
+			<ei:ChangePropertyAction TargetObject="{Binding ElementName=ContentPane}"
+									 PropertyName="Visibility">
+				<ei:ChangePropertyAction.Value>
+					<Visibility>Hidden</Visibility>
+				</ei:ChangePropertyAction.Value>
+			</ei:ChangePropertyAction>
+			<ei:ChangePropertyAction TargetObject="{Binding ElementName=Settings}"
+									 PropertyName="Visibility">
+				<ei:ChangePropertyAction.Value>
+					<Visibility>Visible</Visibility>
+				</ei:ChangePropertyAction.Value>
+			</ei:ChangePropertyAction>
 		</livet:InteractionMessageTrigger>
 	</i:Interaction.Triggers>
 
@@ -119,7 +141,8 @@
 			</i:Interaction.Triggers>
 		</WebBrowser>
 
-		<ContentControl Grid.Row="2"
+		<ContentControl x:Name="ContentPane"
+						Grid.Row="2"
 						Content="{Binding Content}">
 			<ContentControl.Resources>
 				<DataTemplate DataType="{x:Type viewModels:NotStartedViewModel}">
@@ -134,6 +157,48 @@
 				</DataTemplate>
 			</ContentControl.Resources>
 		</ContentControl>
+
+		<Grid x:Name="Settings"
+			  Grid.Row="1"
+			  Visibility="Hidden">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="60" />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+			<controls:NavigationButton Width="30"
+									   Height="30"
+									   VerticalAlignment="Top"
+									   ToolTip="戻る">
+				<i:Interaction.Triggers>
+					<i:EventTrigger EventName="Click">
+						<ei:ChangePropertyAction TargetObject="{Binding ElementName=WebBrowser}"
+												 PropertyName="Visibility">
+							<ei:ChangePropertyAction.Value>
+								<Visibility>Visible</Visibility>
+							</ei:ChangePropertyAction.Value>
+						</ei:ChangePropertyAction>
+						<ei:ChangePropertyAction TargetObject="{Binding ElementName=ContentPane}"
+												 PropertyName="Visibility">
+							<ei:ChangePropertyAction.Value>
+								<Visibility>Visible</Visibility>
+							</ei:ChangePropertyAction.Value>
+						</ei:ChangePropertyAction>
+						<ei:ChangePropertyAction TargetObject="{Binding ElementName=Settings}"
+												 PropertyName="Visibility">
+							<ei:ChangePropertyAction.Value>
+								<Visibility>Hidden</Visibility>
+							</ei:ChangePropertyAction.Value>
+						</ei:ChangePropertyAction>
+					</i:EventTrigger>
+				</i:Interaction.Triggers>
+			</controls:NavigationButton>
+			<settings:Network Grid.Column="1"
+							  Margin="0,0,10,0">
+				<settings:Network.DataContext>
+					<viewModels:SettingsViewModel />
+				</settings:Network.DataContext>
+			</settings:Network>
+		</Grid>
 
 		<!-- region Status area -->
 		<Grid Grid.Row="3"

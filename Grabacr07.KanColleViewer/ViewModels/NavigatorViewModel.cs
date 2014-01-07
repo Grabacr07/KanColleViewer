@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Model;
 using Grabacr07.KanColleViewer.Views.Controls;
+using Grabacr07.KanColleWrapper;
 using Livet;
 using Livet.Commands;
+using Livet.Messaging;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {
@@ -105,6 +107,15 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region IsNotStarted 変更通知プロパティ
+
+		public bool IsNotStarted
+		{
+			get { return !KanColleClient.Current.IsStarted; }
+		}
+
+		#endregion
+
 		#region NavigateCommand コマンド
 
 		private ViewModelCommand _NavigateCommand;
@@ -155,6 +166,11 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			{
 				this.UriRequested(this, uri);
 			}
+		}
+
+		public void ShowSettings()
+		{
+			App.ViewModelRoot.Messenger.Raise(new InteractionMessage("Window/ShowSettings"));
 		}
 	}
 }

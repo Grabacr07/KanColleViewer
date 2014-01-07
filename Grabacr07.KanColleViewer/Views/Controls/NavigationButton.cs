@@ -20,6 +20,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 		GoBack,
 		GoForward,
 		Reload,
+		Settings,
 	}
 
 
