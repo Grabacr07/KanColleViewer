@@ -143,6 +143,8 @@
     <Compile Include="ViewModels\Contents\QuestsViewModel.cs" />
     <Compile Include="ViewModels\Contents\QuestViewModel.cs" />
     <Compile Include="ViewModels\BindableTextViewModel.cs" />
+    <Compile Include="ViewModels\Catalogs\ShipTypeViewModel.cs" />
+    <Compile Include="ViewModels\Catalogs\ShipCatalogWindowViewModel.cs" />
     <Compile Include="ViewModels\MainContentViewModel.cs" />
     <Compile Include="Model\INavigator.cs" />
     <Compile Include="ViewModels\Contents\MaterialsViewModel.cs" />
@@ -166,6 +168,9 @@
     <Compile Include="Views\Behaviors\ZoomAction.cs" />
     <Compile Include="Views\BrowserNavigator.xaml.cs">
       <DependentUpon>BrowserNavigator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Catalogs\ShipCatalogWindow.xaml.cs">
+      <DependentUpon>ShipCatalogWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Contents\General.xaml.cs">
       <DependentUpon>General.xaml</DependentUpon>
@@ -229,6 +234,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\BrowserNavigator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Catalogs\ShipCatalogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -393,6 +402,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

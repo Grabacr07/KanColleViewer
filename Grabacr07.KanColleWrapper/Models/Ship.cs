@@ -94,6 +94,13 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public ModernizableStatus Armer { get; private set; }
 
+		/// <summary>
+		/// 火力・雷装・対空・装甲のすべてのステータス値が最大値に達しているかどうかを示す値を取得します。
+		/// </summary>
+		public bool IsMaxModernized
+		{
+			get { return this.Firepower.IsMax && this.Torpedo.IsMax && this.AA.IsMax && this.Armer.IsMax; }
+		}
 
 		/// <summary>
 		/// 現在のコンディション値を取得します。
