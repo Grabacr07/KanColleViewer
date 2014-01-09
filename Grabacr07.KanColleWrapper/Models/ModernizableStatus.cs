@@ -35,6 +35,14 @@ namespace Grabacr07.KanColleWrapper.Models
 		}
 
 		/// <summary>
+		/// このステータスが上限に達するのに必要な値を取得します。
+		/// </summary>
+		public int Shortfall
+		{
+			get { return this.Max - this.Upgraded; }
+		}
+
+		/// <summary>
 		/// このステータスが上限に達しているかどうかを示す値を取得します。
 		/// </summary>
 		public bool IsMax

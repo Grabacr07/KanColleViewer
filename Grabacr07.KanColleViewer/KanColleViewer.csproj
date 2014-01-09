@@ -169,6 +169,7 @@
     <Compile Include="Views\BrowserNavigator.xaml.cs">
       <DependentUpon>BrowserNavigator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Catalogs\Modernizable.cs" />
     <Compile Include="Views\Catalogs\ShipCatalogWindow.xaml.cs">
       <DependentUpon>ShipCatalogWindow.xaml</DependentUpon>
     </Compile>
