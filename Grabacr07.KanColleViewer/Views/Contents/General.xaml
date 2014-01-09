@@ -12,6 +12,7 @@
 			 xmlns:vmContents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 xmlns:converters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters"
+			 xmlns:catalogs="clr-namespace:Grabacr07.KanColleViewer.Views.Catalogs"
 			 mc:Ignorable="d"
 			 d:DataContext="{d:DesignInstance vmContents:GeneralViewModel}"
 			 d:DesignWidth="680"
@@ -45,6 +46,17 @@
 			</Style>
 		</ResourceDictionary>
 	</UserControl.Resources>
+
+	<i:Interaction.Triggers>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+										 MessageKey="Show/ShipCatalogWindow">
+			<livet:TransitionInteractionMessageAction Mode="NewOrActive"
+													  WindowType="catalogs:ShipCatalogWindow"
+													  IsOwned="False" />
+		</livet:InteractionMessageTrigger>
+	</i:Interaction.Triggers>
+
+
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" />
@@ -74,7 +86,7 @@
 									<Rectangle Height="1"
 											   Margin="0,0,0,4"
 											   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-									
+
 									<Grid HorizontalAlignment="Left">
 										<Grid.ColumnDefinitions>
 											<ColumnDefinition SharedSizeGroup="Name" />
@@ -162,7 +174,8 @@
 
 					<metroControls:CallMethodButton Content="艦娘一覧"
 													Padding="12,8"
-													Margin="0,5,0,8" />
+													Margin="0,5,0,8"
+													MethodName="ShowShipCatalog" />
 
 					<metroControls:CallMethodButton Content="装備一覧"
 													Padding="12,8" />

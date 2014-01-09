@@ -20,7 +20,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public bool CheckAllShipTypes
 		{
 			get { return this.ShipTypes.All(x => x.IsSelected); }
-			set { this.ShipTypes.ForEach(x => x.IsSelected = value); this.Update(); }
+			set { this.ShipTypes.ForEach(x => x.Set(value)); this.Update(); }
 		}
 
 		#region Ships 変更通知プロパティ
@@ -44,7 +44,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#region WithoutLv1Ship 変更通知プロパティ
 
-		private bool _WithoutLv1Ship;
+		private bool _WithoutLv1Ship = true;
 
 		/// <summary>
 		/// Lv.1 の艦を除くかどうかを示す値を取得または設定します。
@@ -58,7 +58,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				{
 					this._WithoutLv1Ship = value;
 					this.RaisePropertyChanged();
-					this.UpdateCore();
+					this.Update();
 				}
 			}
 		}
@@ -81,7 +81,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				{
 					this._WithoutMaxModernizedShip = value;
 					this.RaisePropertyChanged();
-					this.UpdateCore();
+					this.Update();
 				}
 			}
 		}
@@ -94,7 +94,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			this.Title = "所属艦娘一覧";
 
 			this.ShipTypes = KanColleClient.Current.Master.ShipTypes
-				.Select(kvp => new ShipTypeViewModel(kvp.Value) { SelectionChangedAction = () => this.Update() })
+				.Select(kvp => new ShipTypeViewModel(kvp.Value)
+				{
+					IsSelected = true,
+					SelectionChangedAction = () => this.Update()
+				})
 				.ToList();
 
 			this.updateSource.Throttle(TimeSpan.FromSeconds(1.0)).Subscribe(_ => this.UpdateCore());

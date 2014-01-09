@@ -1,4 +1,5 @@
 ﻿<chrome:GlowMetroWindow x:Class="Grabacr07.KanColleViewer.Views.Catalogs.ShipCatalogWindow"
+						x:Name="GlowMetroWindow"
 						xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 						xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 						xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -19,8 +20,8 @@
 						mc:Ignorable="d"
 						d:DataContext="{d:DesignInstance viewModels:ShipCatalogWindowViewModel}"
 						Title="{Binding Title}"
-						SizeToContent="Height"
-						Width="960"
+						Width="900"
+						Height="600"
 						FontSize="12"
 						Background="{DynamicResource ThemeBrushKey}"
 						Foreground="{DynamicResource ActiveForegroundBrushKey}"
@@ -117,12 +118,13 @@
 						</Grid.RowDefinitions>
 
 						<TextBlock Margin="0,2">
-						<Run Text="艦種フィルター" />
-						<Run Text=":" />
+							<Run Text="艦種フィルター" />
+							<Run Text=":" />
 						</TextBlock>
 
 						<CheckBox Grid.Row="1"
 								  Grid.Column="0"
+								  IsChecked="{Binding CheckAllShipTypes, Mode=TwoWay}"
 								  Margin="0,2">
 							<TextBlock Text="すべて選択" />
 						</CheckBox>
@@ -138,7 +140,7 @@
 							</ItemsControl.ItemsPanel>
 							<ItemsControl.ItemTemplate>
 								<DataTemplate>
-									<CheckBox Checked="{Binding IsSelected, Mode=TwoWay}"
+									<CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}"
 											  Margin="2,2,14,2">
 										<TextBlock Text="{Binding ShipType.Name, Mode=OneWay}" />
 									</CheckBox>
@@ -153,13 +155,13 @@
 						Margin="8,0,8,8"
 						Padding="5">
 					<WrapPanel>
-						<CheckBox Checked="{Binding WithoutLv1Ship, Mode=TwoWay}"
-								  Margin="0,2">
+						<CheckBox IsChecked="{Binding WithoutLv1Ship, Mode=TwoWay}"
+								  Margin="0,2,20,2">
 							<TextBlock Text="Lv.1 の艦娘を表示しない" />
 						</CheckBox>
 
-						<CheckBox Checked="{Binding WithoutMaxModernizedShip, Mode=TwoWay}"
-								  Margin="20,2,0,2">
+						<CheckBox IsChecked="{Binding WithoutMaxModernizedShip, Mode=TwoWay}"
+								  Margin="0,2">
 							<TextBlock Text="近代化改修 MAX の艦娘を表示しない" />
 						</CheckBox>
 					</WrapPanel>
@@ -167,138 +169,158 @@
 			</StackPanel>
 
 			<Border Grid.Row="1"
-					Grid.IsSharedSizeScope="True"
+					BorderBrush="{DynamicResource BorderBrushKey}"
+					BorderThickness="1"
 					Margin="8,0,8,8">
 
-				<StackPanel Grid.IsSharedSizeScope="True">
-					<Grid>
+				<Grid Grid.IsSharedSizeScope="True">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition />
+					</Grid.RowDefinitions>
+					<Grid.Resources>
+						<Style TargetType="{x:Type metroControls:CallMethodButton}"
+							   BasedOn="{StaticResource {x:Type metroControls:CallMethodButton}}">
+							<Setter Property="BorderThickness"
+									Value="0,0,1,1" />
+							<Setter Property="Padding"
+									Value="6,4" />
+						</Style>
+					</Grid.Resources>
+
+					<Grid HorizontalAlignment="Left">
 						<Grid.ColumnDefinitions>
-							<ColumnDefinition SharedSizeGroup="Id" />
-							<ColumnDefinition SharedSizeGroup="Type" />
-							<ColumnDefinition SharedSizeGroup="Name" />
-							<ColumnDefinition SharedSizeGroup="Level" />
-							<ColumnDefinition SharedSizeGroup="Condition" />
-							<ColumnDefinition SharedSizeGroup="Firepower" />
-							<ColumnDefinition SharedSizeGroup="Torpedo" />
-							<ColumnDefinition SharedSizeGroup="AA" />
-							<ColumnDefinition SharedSizeGroup="Armer" />
+							<ColumnDefinition Width="50" />
+							<ColumnDefinition Width="90" />
+							<ColumnDefinition Width="110" />
+							<ColumnDefinition Width="120" />
+							<ColumnDefinition Width="50" />
+							<ColumnDefinition Width="64" />
+							<ColumnDefinition Width="64" />
+							<ColumnDefinition Width="64" />
+							<ColumnDefinition Width="64" />
+							<ColumnDefinition Width="64" />
+							<ColumnDefinition />
 						</Grid.ColumnDefinitions>
-						<Grid.Resources>
-							<Style TargetType="{x:Type TextBlock}"
-								   BasedOn="{StaticResource {x:Type TextBlock}}">
-							</Style>
-							<Style TargetType="{x:Type Border}">
-								<Setter Property="Padding"
-										Value="5,3,5,3" />
-								<Setter Property="BorderBrush"
-										Value="{DynamicResource BorderBrushKey}" />
-								<Setter Property="BorderThickness"
-										Value="0,0,1,0" />
-							</Style>
-						</Grid.Resources>
 
-						<Border Grid.Column="0">
-							<TextBlock Text="1234" />
-						</Border>
-
-						<Border Grid.Column="1">
-							<TextBlock Text="正規空母" />
-						</Border>
-
-						<Border Grid.Column="2">
-							<TextBlock Text="蒼龍改"
-									   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
-						</Border>
-
-						<Border Grid.Column="3">
-							<TextBlock FontSize="9">
-								<Run Text="Lv." />
-								<Run Text="98"
-									 FontSize="12"
-									 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
-								<Run Text=" Next:14500" />
-							</TextBlock>
-						</Border>
-
-						<Border Grid.Column="4">
-						</Border>
-
-						<catalogs:Modernizable Grid.Column="5"
-											   Background="DarkRed" />
-
-						<catalogs:Modernizable Grid.Column="6"
-											   Background="DarkBlue" />
-
-						<catalogs:Modernizable Grid.Column="7"
-											   Background="DarkGoldenrod" />
-
-						<catalogs:Modernizable Grid.Column="8"
-											   Background="DarkOrange" />
-
+						<metroControls:CallMethodButton Grid.Column="0"
+														Content="ID" />
+						<metroControls:CallMethodButton Grid.Column="1"
+														Content="艦種" />
+						<metroControls:CallMethodButton Grid.Column="2"
+														Content="艦名" />
+						<metroControls:CallMethodButton Grid.Column="3"
+														Content="レベル" />
+						<metroControls:CallMethodButton Grid.Column="4"
+														Content="cond." />
 					</Grid>
-					<Rectangle Style="{DynamicResource SeparatorRectangleStyleKey}"
-							   Height="1" />
 
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition SharedSizeGroup="Id" />
-							<ColumnDefinition SharedSizeGroup="Type" />
-							<ColumnDefinition SharedSizeGroup="Name" />
-							<ColumnDefinition SharedSizeGroup="Level" />
-							<ColumnDefinition SharedSizeGroup="Firepower" />
-							<ColumnDefinition SharedSizeGroup="Torpedo" />
-							<ColumnDefinition SharedSizeGroup="AA" />
-							<ColumnDefinition SharedSizeGroup="Armer" />
-						</Grid.ColumnDefinitions>
-						<Grid.Resources>
-							<Style TargetType="{x:Type TextBlock}"
-								   BasedOn="{StaticResource {x:Type TextBlock}}">
-							</Style>
-							<Style TargetType="{x:Type Border}">
-								<Setter Property="Padding"
-										Value="5,3,5,3" />
-								<Setter Property="BorderBrush"
-										Value="{DynamicResource BorderBrushKey}" />
-								<Setter Property="BorderThickness"
-										Value="0,0,1,0" />
-							</Style>
-						</Grid.Resources>
+					<ItemsControl Grid.Row="1"
+								  ItemsSource="{Binding Ships}">
+						<ItemsControl.Template>
+							<ControlTemplate>
+								<ScrollViewer HorizontalScrollBarVisibility="Auto"
+											  VerticalScrollBarVisibility="Visible">
+									<VirtualizingStackPanel IsItemsHost="True"
+															IsVirtualizing="True"
+															HorizontalAlignment="Left" />
+								</ScrollViewer>
+							</ControlTemplate>
+						</ItemsControl.Template>
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<Border BorderThickness="0,0,0,1"
+										BorderBrush="{DynamicResource BorderBrushKey}">
+									<Grid HorizontalAlignment="Left">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="50" />
+											<ColumnDefinition Width="90" />
+											<ColumnDefinition Width="110" />
+											<ColumnDefinition Width="120" />
+											<ColumnDefinition Width="50" />
+											<ColumnDefinition Width="64" />
+											<ColumnDefinition Width="64" />
+											<ColumnDefinition Width="64" />
+											<ColumnDefinition Width="64" />
+											<ColumnDefinition Width="64" />
+											<ColumnDefinition />
+										</Grid.ColumnDefinitions>
+										<Grid.Resources>
+											<Style TargetType="{x:Type Border}">
+												<Setter Property="Padding"
+														Value="5,3,5,3" />
+												<Setter Property="BorderBrush"
+														Value="{DynamicResource BorderBrushKey}" />
+												<Setter Property="BorderThickness"
+														Value="0,0,1,0" />
+											</Style>
+											<Style TargetType="{x:Type metroControls:CallMethodButton}"
+												   BasedOn="{StaticResource {x:Type metroControls:CallMethodButton}}">
+												<Setter Property="BorderThickness"
+														Value="0,0,1,1" />
+												<Setter Property="Padding"
+														Value="6,4" />
+											</Style>
+										</Grid.Resources>
 
-						<Border Grid.Column="0">
-							<TextBlock Text="54321" />
-						</Border>
+										<Border Grid.Column="0">
+											<TextBlock Text="{Binding Ship.Id, Mode=OneWay}" />
+										</Border>
 
-						<Border Grid.Column="1">
-							<TextBlock Text="軽空母" />
-						</Border>
+										<Border Grid.Column="1">
+											<TextBlock Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}" />
+										</Border>
 
-						<Border Grid.Column="2">
-							<TextBlock Text="千代田航改二"
-									   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
-						</Border>
+										<Border Grid.Column="2">
+											<TextBlock Text="{Binding Ship.Info.Name, Mode=OneWay}"
+													   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+										</Border>
 
-						<Border Grid.Column="3">
-							<TextBlock>
-								<Run Text="Lv." />
-								<Run Text="80"
-									 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
-							</TextBlock>
-						</Border>
+										<Border Grid.Column="3">
+											<TextBlock FontSize="9">
+												<Run Text="Lv." />
+												<Run Text="{Binding Ship.Level, Mode=OneWay}"
+													 FontSize="12"
+													 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+												<Run Text="" />
+												<Run Text="{Binding Ship.ExpForNextLevel, StringFormat=Next:{0}, Mode=OneWay}" />
+											</TextBlock>
+										</Border>
 
-						<Border Grid.Column="4">
-							<TextBlock>
-								<Run Text="19"
-									 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
-								<Run Text="+10"
-									 FontSize="9" />
-							</TextBlock>
-						</Border>
+										<Border Grid.Column="4">
+											<TextBlock FontSize="9">
+												<InlineUIContainer>
+													<controls:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}"
+																			Width="9"
+																			Height="9" />
+												</InlineUIContainer>
+												<Run Text="{Binding Ship.Condition, Mode=OneWay}"
+													 FontSize="12"
+													 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+											</TextBlock>
+										</Border>
 
+										<catalogs:Modernizable Grid.Column="5"
+															   Status="{Binding Ship.Firepower, Mode=OneWay}"
+															   Background="#7FB13B2A" />
 
-					</Grid>
-					<Rectangle Style="{DynamicResource SeparatorRectangleStyleKey}"
-							   Height="1" />
-				</StackPanel>
+										<catalogs:Modernizable Grid.Column="6"
+															   Status="{Binding Ship.Torpedo, Mode=OneWay}"
+															   Background="#7F2970AB" />
+
+										<catalogs:Modernizable Grid.Column="7"
+															   Status="{Binding Ship.AA, Mode=OneWay}"
+															   Background="#7FDF6A0C" />
+
+										<catalogs:Modernizable Grid.Column="8"
+															   Status="{Binding Ship.Armer, Mode=OneWay}"
+															   Background="#7FD8981A" />
+									</Grid>
+								</Border>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
+				</Grid>
 			</Border>
 		</Grid>
 	</Grid>

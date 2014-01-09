@@ -1306,15 +1306,15 @@
 						</TextBlock>
 					</Border>
 					<ControlTemplate.Triggers>
-						<DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type catalogs:Modernizable}}, Path=Status.IsMax, Mode=OneWay}"
-									 Value="True">
+						<Trigger Property="IsMax"
+								 Value="True">
 							<Setter TargetName="Info"
 									Property="Text"
 									Value="MAX" />
 							<Setter TargetName="Border"
 									Property="Background"
-									Value="{TemplateBinding Background}" />
-						</DataTrigger>
+									Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type catalogs:Modernizable}}, Path=Background}" />
+						</Trigger>
 					</ControlTemplate.Triggers>
 				</ControlTemplate>
 			</Setter.Value>

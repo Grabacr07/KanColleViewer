@@ -26,21 +26,39 @@ namespace Grabacr07.KanColleViewer.Views.Catalogs
 			DefaultStyleKeyProperty.OverrideMetadata(typeof(Modernizable), new FrameworkPropertyMetadata(typeof(Modernizable)));
 		}
 
-		
-		#region Value 依存関係プロパティ
+
+		#region Status 依存関係プロパティ
 
 		public ModernizableStatus Status
 		{
-			get { return (ModernizableStatus)this.GetValue(ValueProperty); }
-			set { this.SetValue(ValueProperty, value); }
+			get { return (ModernizableStatus)this.GetValue(StatusProperty); }
+			set { this.SetValue(StatusProperty, value); }
 		}
-		/// <summary>
-		/// <see cref="Status"/> 依存関係プロパティを識別します。
-		/// </summary>
-		public static readonly DependencyProperty ValueProperty =
-			DependencyProperty.Register("Status", typeof(ModernizableStatus), typeof(Modernizable), new UIPropertyMetadata(new ModernizableStatus()));
+		public static readonly DependencyProperty StatusProperty =
+			DependencyProperty.Register("Status", typeof(ModernizableStatus), typeof(Modernizable), new UIPropertyMetadata(ModernizableStatus.Dummy, StatusPropertyChangedCallback));
+
+		private static void StatusPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			var source = (Modernizable)d;
+			var status = (ModernizableStatus)e.NewValue;
+
+			source.IsMax = status.IsMax;
+		}
 
 		#endregion
+
+		#region IsMax 依存関係プロパティ
+
+		public bool IsMax
+		{
+			get { return (bool)this.GetValue(IsMaxProperty); }
+			private set { this.SetValue(IsMaxProperty, value); }
+		}
+		public static readonly DependencyProperty IsMaxProperty =
+			DependencyProperty.Register("IsMax", typeof(bool), typeof(Modernizable), new UIPropertyMetadata(false));
+
+		#endregion
+
 
 	}
 }

@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Properties;
+using Grabacr07.KanColleViewer.ViewModels.Catalogs;
 using Livet;
+using Livet.Messaging;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents
 {
@@ -44,6 +46,13 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			}
 
 			if (target != null) target.IsSelected = true;
+		}
+
+		public void ShowShipCatalog()
+		{
+			var catalog = new ShipCatalogWindowViewModel();
+			var message = new TransitionMessage(catalog, "Show/ShipCatalogWindow");
+			this.Messenger.Raise(message);
 		}
 	}
 }

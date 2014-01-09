@@ -95,6 +95,11 @@ namespace Grabacr07.KanColleWrapper.Models
 		public ModernizableStatus Armer { get; private set; }
 
 		/// <summary>
+		/// 運のステータス値を取得します。
+		/// </summary>
+		public ModernizableStatus Luck { get; private set; }
+
+		/// <summary>
 		/// 火力・雷装・対空・装甲のすべてのステータス値が最大値に達しているかどうかを示す値を取得します。
 		/// </summary>
 		public bool IsMaxModernized
@@ -132,12 +137,13 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.Fuel = new LimitedValue(this.RawData.api_fuel, this.Info.RawData.api_fuel_max, 0);
 			this.Bull = new LimitedValue(this.RawData.api_bull, this.Info.RawData.api_bull_max, 0);
 
-			if (this.RawData.api_kyouka.Length == 4)
+			if (this.RawData.api_kyouka.Length >= 5)
 			{
 				this.Firepower = new ModernizableStatus(this.Info.RawData.api_houg, this.RawData.api_kyouka[0]);
 				this.Torpedo = new ModernizableStatus(this.Info.RawData.api_raig, this.RawData.api_kyouka[1]);
 				this.AA = new ModernizableStatus(this.Info.RawData.api_tyku, this.RawData.api_kyouka[2]);
 				this.Armer = new ModernizableStatus(this.Info.RawData.api_souk, this.RawData.api_kyouka[3]);
+				this.Luck = new ModernizableStatus(this.Info.RawData.api_luck, this.RawData.api_kyouka[4]);
 			}
 
 			this.SlotItems = this.RawData.api_slot.Select(id => this.homeport.SlotItems[id]).Where(x => x != null).ToArray();

@@ -25,6 +25,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				{
 					this._IsSelected = value;
 					this.RaisePropertyChanged();
+					if (this.SelectionChangedAction != null) this.SelectionChangedAction();
 				}
 			}
 		}
@@ -36,9 +37,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			this.ShipType = stype;
 		}
 
-		public void SelectionChangedHandler()
+		public void Set(bool selected)
 		{
-			if (this.SelectionChangedAction != null) this.SelectionChangedAction();
+			this._IsSelected = selected;
+			this.RaisePropertyChanged("IsSelected");
 		}
 	}
 }
