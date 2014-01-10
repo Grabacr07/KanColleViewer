@@ -188,7 +188,7 @@
 						</Style>
 					</Grid.Resources>
 
-					<Grid HorizontalAlignment="Left">
+					<!--<Grid HorizontalAlignment="Left">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="50" />
 							<ColumnDefinition Width="90" />
@@ -213,10 +213,11 @@
 														Content="レベル" />
 						<metroControls:CallMethodButton Grid.Column="4"
 														Content="cond." />
-					</Grid>
+					</Grid>-->
 
 					<ItemsControl Grid.Row="1"
-								  ItemsSource="{Binding Ships}">
+								  ItemsSource="{Binding Ships}"
+								  d:IsHidden="True">
 						<ItemsControl.Template>
 							<ControlTemplate>
 								<ScrollViewer HorizontalScrollBarVisibility="Auto"
@@ -320,6 +321,38 @@
 							</DataTemplate>
 						</ItemsControl.ItemTemplate>
 					</ItemsControl>
+
+
+					<ListView Grid.Row="1"
+							  ItemsSource="{Binding Ships}"
+							  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}">
+						<ListView.View>
+							<GridView>
+								<GridViewColumn Header="ID"
+												Width="50">
+									<GridViewColumn.CellTemplate>
+										<DataTemplate>
+											<TextBlock Text="{Binding Ship.Id, Mode=OneWay}" />
+										</DataTemplate>
+									</GridViewColumn.CellTemplate>
+								</GridViewColumn>
+
+								<GridViewColumn Header="艦種"
+												Width="90">
+									<GridViewColumn.CellTemplate>
+										<DataTemplate />
+									</GridViewColumn.CellTemplate>
+								</GridViewColumn>
+
+								<GridViewColumn Header="艦名"
+												Width="110">
+									<GridViewColumn.CellTemplate>
+										<DataTemplate />
+									</GridViewColumn.CellTemplate>
+								</GridViewColumn>
+							</GridView>
+						</ListView.View>
+					</ListView>
 				</Grid>
 			</Border>
 		</Grid>
