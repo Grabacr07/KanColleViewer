@@ -20,7 +20,7 @@
 						mc:Ignorable="d"
 						d:DataContext="{d:DesignInstance viewModels:ShipCatalogWindowViewModel}"
 						Title="{Binding Title}"
-						Width="900"
+						Width="800"
 						Height="600"
 						FontSize="12"
 						Background="{DynamicResource ThemeBrushKey}"
@@ -100,260 +100,289 @@
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
 
-			<StackPanel>
-				<Border BorderThickness="1"
-						BorderBrush="{DynamicResource BorderBrushKey}"
-						Margin="8"
-						Padding="5">
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto" />
-							<ColumnDefinition Width="24" />
-							<ColumnDefinition Width="*" />
-						</Grid.ColumnDefinitions>
-						<Grid.RowDefinitions>
-							<RowDefinition Height="Auto" />
-							<RowDefinition Height="Auto" />
-							<RowDefinition Height="*" />
-						</Grid.RowDefinitions>
+			<Expander Margin="8">
+				<Expander.Header>
+					<TextBlock Text="フィルター設定"
+							   FontSize="14" />
+				</Expander.Header>
+				<StackPanel Grid.IsSharedSizeScope="True">
+					<Border BorderThickness="1"
+							BorderBrush="{DynamicResource BorderBrushKey}"
+							Padding="5"
+							Margin="0,8,0,0">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto"
+												  SharedSizeGroup="FilterName" />
+								<ColumnDefinition Width="10" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="*" />
+							</Grid.RowDefinitions>
 
-						<TextBlock Margin="0,2">
-							<Run Text="艦種フィルター" />
-							<Run Text=":" />
-						</TextBlock>
+							<TextBlock Margin="0,2">
+								<Run Text="艦種" />
+								<Run Text=":" />
+							</TextBlock>
 
-						<CheckBox Grid.Row="1"
-								  Grid.Column="0"
-								  IsChecked="{Binding CheckAllShipTypes, Mode=TwoWay}"
-								  Margin="0,2">
-							<TextBlock Text="すべて選択" />
-						</CheckBox>
-
-						<ItemsControl Grid.Row="0"
-									  Grid.RowSpan="3"
+							<CheckBox Grid.Row="0"
 									  Grid.Column="2"
-									  ItemsSource="{Binding ShipTypes}">
-							<ItemsControl.ItemsPanel>
-								<ItemsPanelTemplate>
-									<WrapPanel />
-								</ItemsPanelTemplate>
-							</ItemsControl.ItemsPanel>
-							<ItemsControl.ItemTemplate>
-								<DataTemplate>
-									<CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}"
-											  Margin="2,2,14,2">
-										<TextBlock Text="{Binding ShipType.Name, Mode=OneWay}" />
+									  IsChecked="{Binding CheckAllShipTypes, Mode=TwoWay}"
+									  Margin="0,2">
+								<TextBlock Text="すべて選択" />
+							</CheckBox>
+
+							<ItemsControl Grid.Row="1"
+										  Grid.Column="2"
+										  ItemsSource="{Binding ShipTypes}">
+								<ItemsControl.ItemsPanel>
+									<ItemsPanelTemplate>
+										<WrapPanel />
+									</ItemsPanelTemplate>
+								</ItemsControl.ItemsPanel>
+								<ItemsControl.ItemTemplate>
+									<DataTemplate>
+										<CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}"
+												  Margin="0,2,15,2">
+											<TextBlock Text="{Binding DisplayName, Mode=OneWay}" />
+										</CheckBox>
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
+						</Grid>
+					</Border>
+
+					<Border BorderThickness="1"
+							BorderBrush="{DynamicResource BorderBrushKey}"
+							Margin="0,8,0,0"
+							Padding="5">
+						<StackPanel>
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto"
+													  SharedSizeGroup="FilterName" />
+									<ColumnDefinition Width="10" />
+									<ColumnDefinition Width="*" />
+								</Grid.ColumnDefinitions>
+								<TextBlock Margin="0,2">
+									<Run Text="レベル" />
+									<Run Text=":" />
+								</TextBlock>
+								<WrapPanel Grid.Column="2">
+									<CheckBox IsChecked="{Binding WithoutLv1Ship, Mode=TwoWay}"
+											  Margin="0,2,20,2">
+										<TextBlock Text="Lv.1 の艦娘を表示しない" />
 									</CheckBox>
-								</DataTemplate>
-							</ItemsControl.ItemTemplate>
-						</ItemsControl>
-					</Grid>
-				</Border>
+								</WrapPanel>
+							</Grid>
 
-				<Border BorderThickness="1"
-						BorderBrush="{DynamicResource BorderBrushKey}"
-						Margin="8,0,8,8"
-						Padding="5">
-					<WrapPanel>
-						<CheckBox IsChecked="{Binding WithoutLv1Ship, Mode=TwoWay}"
-								  Margin="0,2,20,2">
-							<TextBlock Text="Lv.1 の艦娘を表示しない" />
-						</CheckBox>
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto"
+													  SharedSizeGroup="FilterName" />
+									<ColumnDefinition Width="10" />
+									<ColumnDefinition Width="*" />
+								</Grid.ColumnDefinitions>
+								<TextBlock Margin="0,2">
+									<Run Text="ステータス" />
+									<Run Text=":" />
+								</TextBlock>
+								<WrapPanel Grid.Column="2">
+									<CheckBox IsChecked="{Binding WithoutMaxModernizedShip, Mode=TwoWay}"
+											  Margin="0,2">
+										<TextBlock Text="近代化改修 MAX の艦娘を表示しない" />
+									</CheckBox>
+								</WrapPanel>
+							</Grid>
 
-						<CheckBox IsChecked="{Binding WithoutMaxModernizedShip, Mode=TwoWay}"
-								  Margin="0,2">
-							<TextBlock Text="近代化改修 MAX の艦娘を表示しない" />
-						</CheckBox>
-					</WrapPanel>
-				</Border>
-			</StackPanel>
+						</StackPanel>
+					</Border>
+				</StackPanel>
+			</Expander>
 
 			<Border Grid.Row="1"
 					BorderBrush="{DynamicResource BorderBrushKey}"
 					BorderThickness="1"
 					Margin="8,0,8,8">
 
-				<Grid Grid.IsSharedSizeScope="True">
-					<Grid.RowDefinitions>
-						<RowDefinition Height="Auto" />
-						<RowDefinition />
-					</Grid.RowDefinitions>
-					<Grid.Resources>
-						<Style TargetType="{x:Type metroControls:CallMethodButton}"
-							   BasedOn="{StaticResource {x:Type metroControls:CallMethodButton}}">
-							<Setter Property="BorderThickness"
-									Value="0,0,1,1" />
-							<Setter Property="Padding"
-									Value="6,4" />
+				<ListView ItemsSource="{Binding Ships}"
+						  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}">
+					<ListView.Resources>
+						<Style TargetType="{x:Type TextBlock}">
+							<Setter Property="Margin"
+									Value="5,4" />
 						</Style>
-					</Grid.Resources>
+					</ListView.Resources>
+					<ListView.View>
+						<GridView>
+							<GridViewColumn Width="50">
+								<GridViewColumn.Header>
+									<TextBlock Text="ID" />
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding Ship.Id, Mode=OneWay}"
+												   Margin="0,3" />
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
 
-					<!--<Grid HorizontalAlignment="Left">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="50" />
-							<ColumnDefinition Width="90" />
-							<ColumnDefinition Width="110" />
-							<ColumnDefinition Width="120" />
-							<ColumnDefinition Width="50" />
-							<ColumnDefinition Width="64" />
-							<ColumnDefinition Width="64" />
-							<ColumnDefinition Width="64" />
-							<ColumnDefinition Width="64" />
-							<ColumnDefinition Width="64" />
-							<ColumnDefinition />
-						</Grid.ColumnDefinitions>
+							<GridViewColumn Width="90">
+								<GridViewColumn.Header>
+									<TextBlock Text="艦種" />
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
+												   Margin="0,3" />
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
 
-						<metroControls:CallMethodButton Grid.Column="0"
-														Content="ID" />
-						<metroControls:CallMethodButton Grid.Column="1"
-														Content="艦種" />
-						<metroControls:CallMethodButton Grid.Column="2"
-														Content="艦名" />
-						<metroControls:CallMethodButton Grid.Column="3"
-														Content="レベル" />
-						<metroControls:CallMethodButton Grid.Column="4"
-														Content="cond." />
-					</Grid>-->
+							<GridViewColumn Width="100">
+								<GridViewColumn.Header>
+									<TextBlock Text="艦名" />
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding Ship.Info.Name, Mode=OneWay}"
+												   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+												   Margin="0,3" />
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
 
-					<ItemsControl Grid.Row="1"
-								  ItemsSource="{Binding Ships}"
-								  d:IsHidden="True">
-						<ItemsControl.Template>
-							<ControlTemplate>
-								<ScrollViewer HorizontalScrollBarVisibility="Auto"
-											  VerticalScrollBarVisibility="Visible">
-									<VirtualizingStackPanel IsItemsHost="True"
-															IsVirtualizing="True"
-															HorizontalAlignment="Left" />
-								</ScrollViewer>
-							</ControlTemplate>
-						</ItemsControl.Template>
-						<ItemsControl.ItemTemplate>
-							<DataTemplate>
-								<Border BorderThickness="0,0,0,1"
-										BorderBrush="{DynamicResource BorderBrushKey}">
-									<Grid HorizontalAlignment="Left">
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="50" />
-											<ColumnDefinition Width="90" />
-											<ColumnDefinition Width="110" />
-											<ColumnDefinition Width="120" />
-											<ColumnDefinition Width="50" />
-											<ColumnDefinition Width="64" />
-											<ColumnDefinition Width="64" />
-											<ColumnDefinition Width="64" />
-											<ColumnDefinition Width="64" />
-											<ColumnDefinition Width="64" />
-											<ColumnDefinition />
-										</Grid.ColumnDefinitions>
-										<Grid.Resources>
-											<Style TargetType="{x:Type Border}">
-												<Setter Property="Padding"
-														Value="5,3,5,3" />
-												<Setter Property="BorderBrush"
-														Value="{DynamicResource BorderBrushKey}" />
-												<Setter Property="BorderThickness"
-														Value="0,0,1,0" />
-											</Style>
-											<Style TargetType="{x:Type metroControls:CallMethodButton}"
-												   BasedOn="{StaticResource {x:Type metroControls:CallMethodButton}}">
-												<Setter Property="BorderThickness"
-														Value="0,0,1,1" />
-												<Setter Property="Padding"
-														Value="6,4" />
-											</Style>
-										</Grid.Resources>
+							<GridViewColumn Width="110">
+								<GridViewColumn.Header>
+									<TextBlock Text="レベル" />
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<TextBlock FontSize="9"
+												   Margin="0,3">
+											<Run Text="Lv." />
+											<Run Text="{Binding Ship.Level, Mode=OneWay}"
+												 FontSize="12"
+												 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+											<Run Text="" />
+											<Run Text="{Binding Ship.ExpForNextLevel, StringFormat=Next:{0}, Mode=OneWay}" />
+										</TextBlock>
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
 
-										<Border Grid.Column="0">
-											<TextBlock Text="{Binding Ship.Id, Mode=OneWay}" />
-										</Border>
+							<GridViewColumn Width="50">
+								<GridViewColumn.Header>
+									<TextBlock Text="cond." />
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<TextBlock FontSize="9"
+												   Margin="0,3">
+											<InlineUIContainer>
+												<controls:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}"
+																		Width="9"
+																		Height="9" />
+											</InlineUIContainer>
+											<Run Text="{Binding Ship.Condition, Mode=OneWay}"
+												 FontSize="12"
+												 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+										</TextBlock>
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
 
-										<Border Grid.Column="1">
-											<TextBlock Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}" />
-										</Border>
+							<GridViewColumn Width="64">
+								<GridViewColumn.Header>
+									<TextBlock Text="火力" />
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<catalogs:Modernizable Status="{Binding Ship.Firepower, Mode=OneWay}"
+															   Background="#7FB13B2A"
+															   MinWidth="64"
+															   Margin="-5,0" />
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
 
-										<Border Grid.Column="2">
-											<TextBlock Text="{Binding Ship.Info.Name, Mode=OneWay}"
-													   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
-										</Border>
+							<GridViewColumn Width="64">
+								<GridViewColumn.Header>
+									<TextBlock Text="雷装" />
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<catalogs:Modernizable Status="{Binding Ship.Torpedo, Mode=OneWay}"
+															   Background="#7F2970AB"
+															   MinWidth="64"
+															   Margin="-5,0" />
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
 
-										<Border Grid.Column="3">
-											<TextBlock FontSize="9">
-												<Run Text="Lv." />
-												<Run Text="{Binding Ship.Level, Mode=OneWay}"
-													 FontSize="12"
-													 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
-												<Run Text="" />
-												<Run Text="{Binding Ship.ExpForNextLevel, StringFormat=Next:{0}, Mode=OneWay}" />
-											</TextBlock>
-										</Border>
+							<GridViewColumn Width="64">
+								<GridViewColumn.Header>
+									<TextBlock Text="対空" />
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<catalogs:Modernizable Status="{Binding Ship.AA, Mode=OneWay}"
+															   Background="#7FDF6A0C"
+															   MinWidth="64"
+															   Margin="-5,0" />
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
 
-										<Border Grid.Column="4">
-											<TextBlock FontSize="9">
-												<InlineUIContainer>
-													<controls:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}"
-																			Width="9"
-																			Height="9" />
-												</InlineUIContainer>
-												<Run Text="{Binding Ship.Condition, Mode=OneWay}"
-													 FontSize="12"
-													 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
-											</TextBlock>
-										</Border>
+							<GridViewColumn Width="64">
+								<GridViewColumn.Header>
+									<TextBlock Text="装甲" />
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<catalogs:Modernizable Status="{Binding Ship.Armer, Mode=OneWay}"
+															   Background="#7FD8981A"
+															   MinWidth="64"
+															   Margin="-5,0" />
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
 
-										<catalogs:Modernizable Grid.Column="5"
-															   Status="{Binding Ship.Firepower, Mode=OneWay}"
-															   Background="#7FB13B2A" />
+							<GridViewColumn Width="64">
+								<GridViewColumn.Header>
+									<TextBlock Text="運" />
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<catalogs:Modernizable Status="{Binding Ship.Luck, Mode=OneWay}"
+															   Background="#7F808080"
+															   MinWidth="64"
+															   Margin="-5,0" />
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+						</GridView>
+					</ListView.View>
+				</ListView>
+			</Border>
 
-										<catalogs:Modernizable Grid.Column="6"
-															   Status="{Binding Ship.Torpedo, Mode=OneWay}"
-															   Background="#7F2970AB" />
-
-										<catalogs:Modernizable Grid.Column="7"
-															   Status="{Binding Ship.AA, Mode=OneWay}"
-															   Background="#7FDF6A0C" />
-
-										<catalogs:Modernizable Grid.Column="8"
-															   Status="{Binding Ship.Armer, Mode=OneWay}"
-															   Background="#7FD8981A" />
-									</Grid>
-								</Border>
-							</DataTemplate>
-						</ItemsControl.ItemTemplate>
-					</ItemsControl>
-
-
-					<ListView Grid.Row="1"
-							  ItemsSource="{Binding Ships}"
-							  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}">
-						<ListView.View>
-							<GridView>
-								<GridViewColumn Header="ID"
-												Width="50">
-									<GridViewColumn.CellTemplate>
-										<DataTemplate>
-											<TextBlock Text="{Binding Ship.Id, Mode=OneWay}" />
-										</DataTemplate>
-									</GridViewColumn.CellTemplate>
-								</GridViewColumn>
-
-								<GridViewColumn Header="艦種"
-												Width="90">
-									<GridViewColumn.CellTemplate>
-										<DataTemplate />
-									</GridViewColumn.CellTemplate>
-								</GridViewColumn>
-
-								<GridViewColumn Header="艦名"
-												Width="110">
-									<GridViewColumn.CellTemplate>
-										<DataTemplate />
-									</GridViewColumn.CellTemplate>
-								</GridViewColumn>
-							</GridView>
-						</ListView.View>
-					</ListView>
-				</Grid>
+			<Border Grid.Row="1"
+					Background="{DynamicResource ThemeBrushKey}"
+					BorderBrush="{DynamicResource BorderBrushKey}"
+					BorderThickness="1"
+					Opacity="0.75"
+					Margin="8,0,8,8"
+					Padding="20"
+					Visibility="{Binding IsReloading, Converter={StaticResource BooleanToVisibilityConverter}}"
+					d:IsHidden="True">
+				<TextBlock Text="表示を更新しています..."
+						   FontSize="16"
+						   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+						   Background="{DynamicResource ThemeBrushKey}"
+						   TextWrapping="Wrap"
+						   HorizontalAlignment="Center" />
 			</Border>
 		</Grid>
 	</Grid>

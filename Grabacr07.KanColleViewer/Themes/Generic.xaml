@@ -1286,7 +1286,7 @@
 		<Setter Property="BorderBrush"
 				Value="{DynamicResource BorderBrushKey}" />
 		<Setter Property="BorderThickness"
-				Value="0,0,1,0" />
+				Value="0" />
 		<Setter Property="Padding"
 				Value="5,3,5,3" />
 		<Setter Property="Template">

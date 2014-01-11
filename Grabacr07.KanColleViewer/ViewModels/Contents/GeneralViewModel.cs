@@ -12,13 +12,17 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 {
 	public class GeneralViewModel : TabItemViewModel
 	{
+		private ShipCatalogWindowViewModel shipCatalog;
+
 		public MainContentViewModel Content { get; private set; }
+
 
 		public GeneralViewModel(MainContentViewModel owner)
 		{
 			this.Name = Resources.IntegratedView;
-
 			this.Content = owner;
+
+			this.CompositeDisposable.Add(() => { if (this.shipCatalog != null) this.shipCatalog.Dispose(); });
 		}
 
 
@@ -50,9 +54,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 		public void ShowShipCatalog()
 		{
-			var catalog = new ShipCatalogWindowViewModel();
+			var catalog = this.shipCatalog ?? (this.shipCatalog = new ShipCatalogWindowViewModel());
 			var message = new TransitionMessage(catalog, "Show/ShipCatalogWindow");
-			this.Messenger.Raise(message);
+			this.Messenger.RaiseAsync(message);
 		}
 	}
 }

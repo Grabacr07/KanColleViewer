@@ -8,26 +8,32 @@ using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.ViewModels.Contents;
 using Grabacr07.KanColleWrapper;
 using Livet;
+using Livet.EventListeners;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 {
 	public class ShipCatalogWindowViewModel : WindowViewModel
 	{
 		private readonly Subject<Unit> updateSource = new Subject<Unit>();
+		private readonly Homeport homeport = KanColleClient.Current.Homeport;
 
-		public IReadOnlyList<ShipTypeViewModel> ShipTypes { get; private set; }
+		public IReadOnlyCollection<ShipTypeViewModel> ShipTypes { get; private set; }
 
 		public bool CheckAllShipTypes
 		{
 			get { return this.ShipTypes.All(x => x.IsSelected); }
-			set { this.ShipTypes.ForEach(x => x.Set(value)); this.Update(); }
+			set
+			{
+				this.ShipTypes.ForEach(x => x.Set(value));
+				this.Update();
+			}
 		}
 
 		#region Ships 変更通知プロパティ
 
-		private IReadOnlyList<ShipViewModel> _Ships;
+		private IReadOnlyCollection<ShipViewModel> _Ships;
 
-		public IReadOnlyList<ShipViewModel> Ships
+		public IReadOnlyCollection<ShipViewModel> Ships
 		{
 			get { return this._Ships; }
 			set
@@ -88,6 +94,24 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#endregion
 
+		#region IsReloading 変更通知プロパティ
+
+		private bool _IsReloading;
+
+		public bool IsReloading
+		{
+			get { return this._IsReloading; }
+			set
+			{
+				if (this._IsReloading != value)
+				{
+					this._IsReloading = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
 
 		public ShipCatalogWindowViewModel()
 		{
@@ -101,10 +125,19 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				})
 				.ToList();
 
-			this.updateSource.Throttle(TimeSpan.FromSeconds(1.0)).Subscribe(_ => this.UpdateCore());
+			this.updateSource
+				.Do(_ => this.IsReloading = true)
+				.Throttle(TimeSpan.FromSeconds(1.0))
+				.Do(_ => this.UpdateCore())
+				.Subscribe(_ => this.IsReloading = false);
 			this.CompositeDisposable.Add(this.updateSource);
 
-			this.UpdateCore();
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(this.homeport)
+			{
+				{ () => this.homeport.Ships, (sender, args) => this.Update() },
+			});
+
+			this.Update();
 		}
 
 		public void Update()
@@ -115,8 +148,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		private void UpdateCore()
 		{
-			this.Ships = KanColleClient.Current.Homeport.Ships
-				.Where(x => this.ShipTypes.Where(t => t.IsSelected).Any(t => x.Value.Info.ShipType.Id == t.ShipType.Id))
+			this.Ships = this.homeport.Ships
+				.Where(x => this.ShipTypes.Where(t => t.IsSelected).Any(t => x.Value.Info.ShipType.Id == t.Id))
 				.Where(x => !this.WithoutLv1Ship || x.Value.Level != 1)
 				.Where(x => !this.WithoutMaxModernizedShip || !x.Value.IsMaxModernized)
 				.Select(x => new ShipViewModel(x.Value))

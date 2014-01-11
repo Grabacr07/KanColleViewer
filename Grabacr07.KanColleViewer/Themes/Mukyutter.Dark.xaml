@@ -1139,7 +1139,8 @@
 							BorderBrush="{TemplateBinding BorderBrush}"
 							Background="{TemplateBinding Background}"
 							Padding="{TemplateBinding Padding}">
-						<ScrollViewer Style="{DynamicResource {x:Static GridView.GridViewScrollViewerStyleKey}}">
+						<ScrollViewer Style="{DynamicResource {x:Static GridView.GridViewScrollViewerStyleKey}}"
+									  HorizontalScrollBarVisibility="Auto">
 							<ItemsPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 											VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
 						</ScrollViewer>
@@ -1159,6 +1160,8 @@
 				Value="{DynamicResource BorderBrushKey}" />
 		<Setter Property="BorderThickness"
 				Value="0,0,0,1" />
+		<Setter Property="FocusVisualStyle"
+				Value="{x:Null}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type ListViewItem}">
@@ -1188,8 +1191,6 @@
 				Value="{DynamicResource BorderBrushKey}" />
 		<Setter Property="Background"
 				Value="{DynamicResource BackgroundBrushKey}" />
-		<Setter Property="Padding"
-				Value="6,4" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
@@ -1237,6 +1238,44 @@
 						Value="{DynamicResource AccentForegroundBrushKey}" />
 			</Trigger>
 		</Style.Triggers>
+	</Style>
+
+
+
+	<Style TargetType="{x:Type Expander}">
+		<Setter Property="OverridesDefaultStyle"
+				Value="True" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Expander}">
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition x:Name="ContentRow"
+										   Height="0" />
+						</Grid.RowDefinitions>
+
+						<controls:ExpanderButton x:Name="ExpanderButton"
+												 Direction="Right"
+												 IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+							<ContentPresenter ContentSource="Header"
+											  RecognizesAccessKey="True" />
+						</controls:ExpanderButton>
+
+						<ContentPresenter Grid.Row="1"
+										  Margin="{TemplateBinding Padding}" />
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsExpanded"
+								 Value="True">
+							<Setter TargetName="ContentRow"
+									Property="Height"
+									Value="{Binding DesiredHeight, ElementName=Content}" />
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
 	</Style>
 
 
@@ -1651,10 +1690,6 @@
 
 
 	<Style TargetType="{x:Type controls:ExpanderButton}">
-		<Setter Property="Background"
-				Value="{DynamicResource SemiactiveBackgroundBrushKey}" />
-		<Setter Property="BorderBrush"
-				Value="{DynamicResource SemiactiveBorderBrushKey}" />
 		<Setter Property="Foreground"
 				Value="{DynamicResource ForegroundBrushKey}" />
 		<Setter Property="VerticalContentAlignment"
@@ -1662,32 +1697,34 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type controls:ExpanderButton}">
-					<Grid SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto" />
-							<ColumnDefinition Width="*" />
-							<ColumnDefinition Width="Auto" />
-						</Grid.ColumnDefinitions>
-						<ContentPresenter x:Name="content"
-										  Grid.Column="1"
-										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-						<Grid x:Name="expander"
-							  Grid.Column="2"
-							  Margin="5,0,0,0"
-							  Width="19"
-							  Height="19">
-							<Ellipse x:Name="circle"
-									 Fill="{DynamicResource SemiactiveBackgroundBrushKey}"
-									 Stroke="{DynamicResource ForegroundBrushKey}" />
-							<Path x:Name="arrow"
-								  Data="M 1,1.5 L 4.5,5 8,1.5"
-								  Stroke="{DynamicResource ForegroundBrushKey}"
-								  StrokeThickness="2"
-								  HorizontalAlignment="Center"
-								  VerticalAlignment="Center" />
+					<Border Background="Transparent">
+						<Grid SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+							</Grid.ColumnDefinitions>
+							<ContentPresenter x:Name="content"
+											  Grid.Column="1"
+											  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+							<Grid x:Name="expander"
+								  Grid.Column="2"
+								  Margin="5,0,0,0"
+								  Width="19"
+								  Height="19">
+								<Ellipse x:Name="circle"
+										 Fill="{DynamicResource SemiactiveBackgroundBrushKey}"
+										 Stroke="{DynamicResource ForegroundBrushKey}" />
+								<Path x:Name="arrow"
+									  Data="M 1,1.5 L 4.5,5 8,1.5"
+									  Stroke="{DynamicResource ForegroundBrushKey}"
+									  StrokeThickness="2"
+									  HorizontalAlignment="Center"
+									  VerticalAlignment="Center" />
+							</Grid>
 						</Grid>
-					</Grid>
+					</Border>
 					<ControlTemplate.Triggers>
 						<Trigger Property="Direction"
 								 Value="Right">
@@ -1696,7 +1733,7 @@
 									Value="0" />
 							<Setter TargetName="expander"
 									Property="Margin"
-									Value="0,0,0,5" />
+									Value="0,0,5,0" />
 						</Trigger>
 						<Trigger Property="IsMouseOver"
 								 Value="True">
