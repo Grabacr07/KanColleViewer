@@ -123,6 +123,7 @@
     <Compile Include="Model\Data\Xml\XmlFileWriter.cs" />
     <Compile Include="Model\Data\Xml\XmlSerializableDictionary.cs" />
     <Compile Include="Model\Helper.cs" />
+    <Compile Include="Model\NotifyIconWrapper.cs" />
     <Compile Include="Model\Mode.cs" />
     <Compile Include="Model\StatusService.cs" />
     <Compile Include="Model\Settings.cs" />
