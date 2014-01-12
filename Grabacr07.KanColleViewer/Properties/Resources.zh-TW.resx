@@ -124,7 +124,7 @@
     <value>請瀏覽所有的任務頁面。</value>
   </data>
   <data name="Quest_Title_Untaken" xml:space="preserve">
-    <value>(任務尚未取得)</value>
+    <value>(未知的任務)</value>
   </data>
   <data name="Quests_Untaken" xml:space="preserve">
     <value>請打開遊戲中的 [任務 (クエスト)] 畫面，以取得任務訊息。</value>
@@ -181,7 +181,7 @@
     <value>將視窗放在顯示器左側</value>
   </data>
   <data name="Settings_WindowControl_LocationLeftButton_Sub" xml:space="preserve">
-    <value>8 英吋平板用 (800 x 1280)</value>
+    <value>8 吋平板用 (800 x 1280)</value>
   </data>
   <data name="Settings_Proxy" xml:space="preserve">
     <value>代理服務器設定</value>
