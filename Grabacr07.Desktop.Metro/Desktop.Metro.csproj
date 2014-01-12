@@ -86,6 +86,8 @@
     <Compile Include="Controls\LinkButton.cs" />
     <Compile Include="Controls\PromptComboBox.cs" />
     <Compile Include="Controls\PromptTextBox.cs" />
+    <Compile Include="Controls\SortButton.cs" />
+    <Compile Include="Controls\SortDirection.cs" />
     <Compile Include="Controls\Spinner.cs" />
     <Compile Include="Controls\TabView.cs" />
     <Compile Include="Converters\StringToVisiblityConverter.cs" />

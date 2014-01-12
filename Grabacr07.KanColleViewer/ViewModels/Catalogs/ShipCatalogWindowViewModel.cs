@@ -5,7 +5,9 @@ using System.Reactive;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
+using Grabacr07.Desktop.Metro.Controls;
 using Grabacr07.KanColleViewer.ViewModels.Contents;
+using Grabacr07.KanColleViewer.Views.Catalogs;
 using Grabacr07.KanColleWrapper;
 using Livet;
 using Livet.EventListeners;
@@ -17,6 +19,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		private readonly Subject<Unit> updateSource = new Subject<Unit>();
 		private readonly Homeport homeport = KanColleClient.Current.Homeport;
 
+		public ShipCatalogSortWorker SortWorker { get; private set; }
 		public IReadOnlyCollection<ShipTypeViewModel> ShipTypes { get; private set; }
 
 		public bool CheckAllShipTypes
@@ -41,6 +44,25 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				if (this._Ships != value)
 				{
 					this._Ships = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region IsOpenSettings 変更通知プロパティ
+
+		private bool _IsOpenSettings;
+
+		public bool IsOpenSettings
+		{
+			get { return this._IsOpenSettings; }
+			set
+			{
+				if (this._IsOpenSettings != value)
+				{
+					this._IsOpenSettings = value;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -116,6 +138,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public ShipCatalogWindowViewModel()
 		{
 			this.Title = "所属艦娘一覧";
+			this.IsOpenSettings = true;
+
+			this.SortWorker = new ShipCatalogSortWorker();
 
 			this.ShipTypes = KanColleClient.Current.Master.ShipTypes
 				.Select(kvp => new ShipTypeViewModel(kvp.Value)
@@ -127,7 +152,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 			this.updateSource
 				.Do(_ => this.IsReloading = true)
-				.Throttle(TimeSpan.FromSeconds(1.0))
+				.Throttle(TimeSpan.FromMilliseconds(500.0))
 				.Do(_ => this.UpdateCore())
 				.Subscribe(_ => this.IsReloading = false);
 			this.CompositeDisposable.Add(this.updateSource);
@@ -140,20 +165,28 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			this.Update();
 		}
 
+
 		public void Update()
 		{
 			this.RaisePropertyChanged("AllShipTypes");
 			this.updateSource.OnNext(Unit.Default);
 		}
 
+		public void Update(ShipCatalogSortTarget sortTarget)
+		{
+			this.SortWorker.SetTarget(sortTarget);
+			this.Update();
+		}
+
 		private void UpdateCore()
 		{
-			this.Ships = this.homeport.Ships
+			var list = this.homeport.Ships
 				.Where(x => this.ShipTypes.Where(t => t.IsSelected).Any(t => x.Value.Info.ShipType.Id == t.Id))
 				.Where(x => !this.WithoutLv1Ship || x.Value.Level != 1)
 				.Where(x => !this.WithoutMaxModernizedShip || !x.Value.IsMaxModernized)
-				.Select(x => new ShipViewModel(x.Value))
-				.ToList();
+				.Select(x => new ShipViewModel(x.Value));
+
+			this.Ships = this.SortWorker.Sort(list).ToList();
 		}
 	}
 }

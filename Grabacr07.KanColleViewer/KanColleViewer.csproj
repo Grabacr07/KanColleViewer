@@ -130,6 +130,8 @@
     <Compile Include="Model\ThemeService.cs" />
     <Compile Include="Model\Toast.cs" />
     <Compile Include="Model\Volume.cs" />
+    <Compile Include="ViewModels\Catalogs\SortableColumnViewModel.cs" />
+    <Compile Include="ViewModels\Catalogs\ShipCatalogSortWorker.cs" />
     <Compile Include="ViewModels\Contents\AdmiralViewModel.cs" />
     <Compile Include="ViewModels\Contents\Docks\BuildingDockViewModel.cs" />
     <Compile Include="ViewModels\Contents\Docks\RepairingDockViewModel.cs" />
@@ -173,6 +175,7 @@
     <Compile Include="Views\Catalogs\ShipCatalogWindow.xaml.cs">
       <DependentUpon>ShipCatalogWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Catalogs\ShipCatalogSortTarget.cs" />
     <Compile Include="Views\Contents\General.xaml.cs">
       <DependentUpon>General.xaml</DependentUpon>
     </Compile>
