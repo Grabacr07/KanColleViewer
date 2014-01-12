@@ -7,29 +7,43 @@ namespace Grabacr07.KanColleViewer.Model
 	/// <summary>
 	/// 通知領域アイコンを利用した通知を提供します。
 	/// </summary>
-	public class NotifyIconWrapper
+	public static class NotifyIconWrapper
 	{
 		private static NotifyIcon notifyIcon;
-		private NotifyIconWrapper() { }
 
 		public static void Initialize()
 		{
-			notifyIcon = new NotifyIcon();
-			notifyIcon.Text = "KanColleViewer";
-			var uri = new Uri("pack://application:,,,/KanColleViewer;Component/Assets/app.ico");
-			var stream = System.Windows.Application.GetResourceStream(uri).Stream;
-			notifyIcon.Icon = new Icon(stream);
-			notifyIcon.Visible = true;
+			var icon = "pack://application:,,,/KanColleViewer;Component/Assets/app.ico";
+			Uri uri = null;
+
+			if (Uri.TryCreate(icon, UriKind.Absolute, out uri))
+			{
+				using (var stream = App.GetResourceStream(uri).Stream)
+				{
+					notifyIcon = new NotifyIcon
+					{
+						Text = App.ProductInfo.Title,
+						Icon = new Icon(stream),
+						Visible = true,
+					};
+				}
+			}
 		}
 
 		public static void Show(string title, string text)
 		{
-			notifyIcon.ShowBalloonTip(1000, title, text, ToolTipIcon.None);
+			if (notifyIcon != null)
+			{
+				notifyIcon.ShowBalloonTip(1000, title, text, ToolTipIcon.None);
+			}
 		}
 
 		public static void Dispose()
 		{
-			notifyIcon.Dispose();
+			if (notifyIcon != null)
+			{
+				notifyIcon.Dispose();
+			}
 		}
 	}
 }
