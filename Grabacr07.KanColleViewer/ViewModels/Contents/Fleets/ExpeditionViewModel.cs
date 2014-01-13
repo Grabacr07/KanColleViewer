@@ -65,31 +65,16 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			this.source = expedition;
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(expedition, (sender, args) => this.RaisePropertyChanged(args.PropertyName)));
 
-			if (Toast.IsSupported)
+			expedition.Returned += (sender, args) =>
 			{
-				expedition.Returned += (sender, args) =>
+				if (this.IsNotifyReturned)
 				{
-					if (this.IsNotifyReturned)
-					{
-						Toast.Show(
-							"遠征完了",
-							"「" + args.FleetName + "」が遠征から帰投しました。",
-							() => App.ViewModelRoot.Activate());
-					}
-				};
-			}
-			else
-			{
-				expedition.Returned += (sender, args) =>
-				{
-					if (this.IsNotifyReturned)
-					{
-						NotifyIconWrapper.Show(
-							"遠征完了",
-							"「" + args.FleetName + "」 が遠征から帰投しました。");
-					}
-				};
-			}
+					WindowsNotifier.Current.Show(
+						"遠征完了",
+						"「" + args.FleetName + "」が遠征から帰投しました。",
+						() => App.ViewModelRoot.Activate());
+				}
+			};
 		}
 	}
 }
