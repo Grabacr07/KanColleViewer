@@ -46,7 +46,7 @@ namespace Grabacr07.KanColleViewer.Model
 		public event TypedEventHandler<ToastNotification, ToastDismissedEventArgs> Dismissed
 		{
 			add { this.toast.Dismissed += value; }
-			remove { this.toast.Dismissed += value; }
+			remove { this.toast.Dismissed -= value; }
 		}
 
 		public event TypedEventHandler<ToastNotification, ToastFailedEventArgs> ToastFailed
