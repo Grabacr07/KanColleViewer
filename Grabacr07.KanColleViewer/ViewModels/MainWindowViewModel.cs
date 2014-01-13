@@ -13,6 +13,7 @@ using Grabacr07.KanColleViewer.ViewModels.Messages;
 using Grabacr07.KanColleWrapper;
 using Livet;
 using Livet.EventListeners;
+using Livet.Messaging.Windows;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {
@@ -158,6 +159,15 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				? Properties.Resources.Screenshot_Saved + Path.GetFileName(path)
 				: Properties.Resources.Screenshot_Failed + message.Response.Exception.Message;
 			StatusService.Current.Notify(notify);
+		}
+
+
+		/// <summary>
+		/// メイン ウィンドウをアクティブ化することを試みます。
+		/// </summary>
+		public void Activate()
+		{
+			this.Messenger.Raise(new WindowActionMessage(WindowAction.Active, "Window/Activate"));
 		}
 	}
 }
