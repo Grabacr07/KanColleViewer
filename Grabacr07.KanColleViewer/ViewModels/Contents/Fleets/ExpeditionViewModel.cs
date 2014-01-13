@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Model;
+using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleWrapper.Models;
 using Livet;
 using Livet.EventListeners;
@@ -72,8 +73,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 					if (this.IsNotifyReturned)
 					{
 						Toast.Show(
-							"遠征完了",
-							"「" + args.FleetName + "」が遠征から帰投しました。",
+							Resources.Expedition_NotificationMessage_Title,
+							string.Format(Resources.Expedition_NotificationMessage, args.FleetName),
 							() => App.ViewModelRoot.Activate());
 					}
 				};
@@ -85,8 +86,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 					if (this.IsNotifyReturned)
 					{
 						NotifyIconWrapper.Show(
-							"遠征完了",
-							"「" + args.FleetName + "」 が遠征から帰投しました。");
+							Resources.Expedition_NotificationMessage_Title,
+							string.Format(Resources.Expedition_NotificationMessage, args.FleetName));
 					}
 				};
 			}

@@ -372,4 +372,31 @@
   <data name="IntegratedView" xml:space="preserve">
     <value>総合</value>
   </data>
+  <data name="Dockyard_NotificationMessage" xml:space="preserve">
+    <value>工廠第 {0} ドックでの「{1}」の建造が完了しました。</value>
+  </data>
+  <data name="Dockyard_NotificationMessage_Title" xml:space="preserve">
+    <value>建造完了</value>
+  </data>
+  <data name="Common_ShipGirl" xml:space="preserve">
+    <value>艦娘</value>
+  </data>
+  <data name="Expedition_NotificationMessage" xml:space="preserve">
+    <value>「{0}」が遠征から帰投しました。</value>
+  </data>
+  <data name="Expedition_NotificationMessage_Title" xml:space="preserve">
+    <value>遠征完了</value>
+  </data>
+  <data name="Repairyard_NotificationMessage" xml:space="preserve">
+    <value>入渠第 {0} ドックでの「{1}」の整備が完了しました。</value>
+  </data>
+  <data name="Repairyard_NotificationMessage_Title" xml:space="preserve">
+    <value>整備完了</value>
+  </data>
+  <data name="ReSortie_NotificationMessage" xml:space="preserve">
+    <value>「{0}」の全艦娘の疲労が回復しました。</value>
+  </data>
+  <data name="ReSortie_NotificationMessage_Title" xml:space="preserve">
+    <value>疲労回復完了</value>
+  </data>
 </root>

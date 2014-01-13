@@ -106,6 +106,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   艦娘 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Common_ShipGirl {
+            get {
+                return ResourceManager.GetString("Common_ShipGirl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Construction に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Dockyard {
@@ -147,6 +156,24 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Dockyard_Locked {
             get {
                 return ResourceManager.GetString("Dockyard_Locked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   工廠第 {0} ドックでの「{1}」の建造が完了しました。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Dockyard_NotificationMessage {
+            get {
+                return ResourceManager.GetString("Dockyard_NotificationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   建造完了 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Dockyard_NotificationMessage_Title {
+            get {
+                return ResourceManager.GetString("Dockyard_NotificationMessage_Title", resourceCulture);
             }
         }
         
@@ -219,6 +246,24 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Expedition_NoExpedition {
             get {
                 return ResourceManager.GetString("Expedition_NoExpedition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   「{0}」が遠征から帰投しました。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Expedition_NotificationMessage {
+            get {
+                return ResourceManager.GetString("Expedition_NotificationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   遠征完了 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Expedition_NotificationMessage_Title {
+            get {
+                return ResourceManager.GetString("Expedition_NotificationMessage_Title", resourceCulture);
             }
         }
         
@@ -439,6 +484,24 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   入渠第 {0} ドックでの「{1}」の整備が完了しました。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Repairyard_NotificationMessage {
+            get {
+                return ResourceManager.GetString("Repairyard_NotificationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   整備完了 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Repairyard_NotificationMessage_Title {
+            get {
+                return ResourceManager.GetString("Repairyard_NotificationMessage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Notify Upon Completion に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Repairyard_Notifications_Enable {
@@ -489,6 +552,24 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Reparyard_Unused {
             get {
                 return ResourceManager.GetString("Reparyard_Unused", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   「{0}」の全艦娘の疲労が回復しました。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ReSortie_NotificationMessage {
+            get {
+                return ResourceManager.GetString("ReSortie_NotificationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   疲労回復完了 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ReSortie_NotificationMessage_Title {
+            get {
+                return ResourceManager.GetString("ReSortie_NotificationMessage_Title", resourceCulture);
             }
         }
         

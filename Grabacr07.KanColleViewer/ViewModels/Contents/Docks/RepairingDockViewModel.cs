@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Model;
+using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleWrapper.Models;
 using Livet;
 using Livet.EventListeners;
@@ -77,8 +78,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Docks
 					if (this.IsNotifyCompleted)
 					{
 						Toast.Show(
-							"整備完了",
-							string.Format("入渠第 {0} ドックでの「{1}」の整備が完了しました。", this.Id, this.Ship),
+							Resources.Repairyard_NotificationMessage_Title,
+							string.Format(Resources.Repairyard_NotificationMessage, this.Id, this.Ship),
 							() => App.ViewModelRoot.Activate());
 					}
 				};
@@ -90,8 +91,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Docks
 					if (this.IsNotifyCompleted)
 					{
 						NotifyIconWrapper.Show(
-							"整備完了",
-							string.Format("入渠第 {0} ドックでの「{1}」の整備が完了しました。", this.Id, this.Ship));
+							Resources.Repairyard_NotificationMessage_Title,
+							string.Format(Resources.Repairyard_NotificationMessage, this.Id, this.Ship));
 					}
 				};
 			}
