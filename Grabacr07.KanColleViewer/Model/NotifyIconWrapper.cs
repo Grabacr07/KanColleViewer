@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Windows.UI.Notifications;
 using Application = System.Windows.Application;
 
 namespace Grabacr07.KanColleViewer.Model
@@ -8,11 +9,11 @@ namespace Grabacr07.KanColleViewer.Model
 	/// <summary>
 	/// 通知領域アイコンを利用した通知を提供します。
 	/// </summary>
-	public static class NotifyIconWrapper
+	public class NotifyIconWrapper : INotifyWrapper, IDisposable
 	{
-		private static NotifyIcon notifyIcon;
+		private NotifyIcon notifyIcon;
 
-		public static void Initialize()
+		public void Initialize()
 		{
 			const string iconUri = "pack://application:,,,/KanColleViewer;Component/Assets/app.ico";
 			
@@ -33,15 +34,17 @@ namespace Grabacr07.KanColleViewer.Model
 			}
 		}
 
-		public static void Show(string title, string text)
+		public void Show(
+			string header, string body, 
+			Action activated, Action<ToastDismissalReason> dismissed = null, Action<Exception> failed = null)
 		{
 			if (notifyIcon != null)
 			{
-				notifyIcon.ShowBalloonTip(1000, title, text, ToolTipIcon.None);
+				notifyIcon.ShowBalloonTip(1000, header, body, ToolTipIcon.None);
 			}
 		}
 
-		public static void Dispose()
+		public void Dispose()
 		{
 			if (notifyIcon != null)
 			{
