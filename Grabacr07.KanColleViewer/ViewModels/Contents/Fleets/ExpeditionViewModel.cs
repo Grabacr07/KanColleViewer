@@ -65,7 +65,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			this.source = expedition;
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(expedition, (sender, args) => this.RaisePropertyChanged(args.PropertyName)));
 
-			if (Helper.IsWindows8OrGreater)
+			if (Toast.IsSupported)
 			{
 				expedition.Returned += (sender, args) =>
 				{
@@ -74,7 +74,19 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 						Toast.Show(
 							"遠征完了",
 							"「" + args.FleetName + "」が遠征から帰投しました。",
-							() => App.ViewModelRoot.Messenger.Raise(new WindowActionMessage(WindowAction.Active, "Window/Activate")));
+							() => App.ViewModelRoot.Activate());
+					}
+				};
+			}
+			else
+			{
+				expedition.Returned += (sender, args) =>
+				{
+					if (this.IsNotifyReturned)
+					{
+						NotifyIconWrapper.Show(
+							"遠征完了",
+							"「" + args.FleetName + "」 が遠征から帰投しました。");
 					}
 				};
 			}
