@@ -118,6 +118,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\INotifyWrapper.cs" />
     <Compile Include="Model\ProductInfo.cs" />
     <Compile Include="Model\Data\Xml\XmlFileReader.cs" />
     <Compile Include="Model\Data\Xml\XmlFileWriter.cs" />
@@ -130,9 +131,11 @@
     <Compile Include="Model\SupportedImageFormat.cs" />
     <Compile Include="Model\ThemeService.cs" />
     <Compile Include="Model\Toast.cs" />
+    <Compile Include="Model\ToastHelper.cs" />
     <Compile Include="Model\Volume.cs" />
     <Compile Include="ViewModels\Catalogs\SortableColumnViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogSortWorker.cs" />
+    <Compile Include="Model\WindowsNotifier.cs" />
     <Compile Include="ViewModels\Contents\AdmiralViewModel.cs" />
     <Compile Include="ViewModels\Contents\Docks\BuildingDockViewModel.cs" />
     <Compile Include="ViewModels\Contents\Docks\RepairingDockViewModel.cs" />

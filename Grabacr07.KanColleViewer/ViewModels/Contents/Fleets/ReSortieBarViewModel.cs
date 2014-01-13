@@ -107,31 +107,16 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			this.UpdateMessage();
 			this.UpdateRemaining();
 
-			if (Toast.IsSupported)
+			reSortie.Readied += (sender, args) =>
 			{
-				reSortie.Readied += (sender, args) =>
+				if (this.IsNotifyReadied)
 				{
-					if (this.IsNotifyReadied)
-					{
-						Toast.Show(
-							Resources.ReSortie_NotificationMessage_Title,
-							string.Format(Resources.ReSortie_NotificationMessage, parent.Name),
-							() => App.ViewModelRoot.Activate());
-					}
-				};
-			}
-			else
-			{
-				reSortie.Readied += (sender, args) =>
-				{
-					if (this.IsNotifyReadied)
-					{
-						NotifyIconWrapper.Show(
-							Resources.ReSortie_NotificationMessage_Title,
-							string.Format(Resources.ReSortie_NotificationMessage, parent.Name));
-					}
-				};
-			}
+					WindowsNotifier.Current.Show(
+						Resources.ReSortie_NotificationMessage_Title,
+						string.Format(Resources.ReSortie_NotificationMessage, parent.Name),
+						() => App.ViewModelRoot.Activate());
+				}
+			};
 		}
 
 
