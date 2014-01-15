@@ -39,6 +39,15 @@
 	</chrome:MetroWindow.WindowChrome>
 
 	<i:Interaction.Triggers>
+		<i:EventTrigger EventName="ContentRendered">
+			<livet:LivetCallMethodAction MethodTarget="{Binding}"
+										 MethodName="Initialize" />
+		</i:EventTrigger>
+
+		<i:EventTrigger EventName="Closed">
+			<livet:DataContextDisposeAction />
+		</i:EventTrigger>
+
 		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
 										 MessageKey="Window/Location">
 			<behaviors:SetWindowLocationAction />

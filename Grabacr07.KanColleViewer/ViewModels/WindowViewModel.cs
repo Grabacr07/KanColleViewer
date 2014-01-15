@@ -242,5 +242,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		}
 
 		#endregion
+
+
+		public virtual void Initialize() { }
 	}
 }

@@ -1252,8 +1252,7 @@
 					<Grid>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="Auto" />
-							<RowDefinition x:Name="ContentRow"
-										   Height="0" />
+							<RowDefinition Height="Auto" />
 						</Grid.RowDefinitions>
 
 						<controls:ExpanderButton x:Name="ExpanderButton"
@@ -1263,15 +1262,16 @@
 											  RecognizesAccessKey="True" />
 						</controls:ExpanderButton>
 
-						<ContentPresenter Grid.Row="1"
+						<ContentPresenter x:Name="Content"
+										  Grid.Row="1"
 										  Margin="{TemplateBinding Padding}" />
 					</Grid>
 					<ControlTemplate.Triggers>
 						<Trigger Property="IsExpanded"
-								 Value="True">
-							<Setter TargetName="ContentRow"
-									Property="Height"
-									Value="{Binding DesiredHeight, ElementName=Content}" />
+								 Value="False">
+							<Setter TargetName="Content"
+									Property="Visibility"
+									Value="Collapsed" />
 						</Trigger>
 					</ControlTemplate.Triggers>
 				</ControlTemplate>
