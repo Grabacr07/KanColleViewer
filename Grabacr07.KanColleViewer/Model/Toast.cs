@@ -18,6 +18,21 @@ namespace Grabacr07.KanColleViewer.Model
 	/// </summary>
 	public class Toast
 	{
+		#region static members
+
+		/// <summary>
+		/// トースト通期機能をサポートしているかどうかを示す値を取得します。
+		/// </summary>
+		/// <returns>
+		/// 動作しているオペレーティング システムが Windows 8 (NT 6.2) 以降の場合は true、それ以外の場合は false。
+		/// </returns>
+		public static bool IsSupported
+		{
+			get { return Helper.IsWindows8OrGreater; }
+		}
+
+		#endregion
+
 		public const string AppId = "Grabacr07.KanColleViewer";
 
 		private readonly ToastNotification toast;
@@ -31,7 +46,7 @@ namespace Grabacr07.KanColleViewer.Model
 		public event TypedEventHandler<ToastNotification, ToastDismissedEventArgs> Dismissed
 		{
 			add { this.toast.Dismissed += value; }
-			remove { this.toast.Dismissed += value; }
+			remove { this.toast.Dismissed -= value; }
 		}
 
 		public event TypedEventHandler<ToastNotification, ToastFailedEventArgs> ToastFailed
@@ -58,66 +73,5 @@ namespace Grabacr07.KanColleViewer.Model
 		{
 			ToastNotificationManager.CreateToastNotifier(AppId).Show(this.toast);
 		}
-
-
-		#region static members
-
-		/// <summary>
-		/// トースト通期機能をサポートしているかどうかを示す値を取得します。
-		/// </summary>
-		/// <returns>
-		/// 動作しているオペレーティング システムが Windows 8 (NT 6.2) 以降の場合は true、それ以外の場合は false。
-		/// </returns>
-		public static bool IsSupported
-		{
-			get { return Helper.IsWindows8OrGreater; }
-		}
-
-		public static void Show(
-			string header, string body,
-			Action activated, Action<ToastDismissalReason> dismissed = null, Action<Exception> failed = null)
-		{
-			var toast = new Toast(header, body);
-			toast.Activated += (sender, args) => activated();
-			if (dismissed != null) toast.Dismissed += (sender, args) => dismissed(args.Reason);
-			if (failed != null) toast.ToastFailed += (sender, args) => failed(args.ErrorCode);
-
-			toast.Show();
-		}
-
-		public static bool TryInstallShortcut()
-		{
-			var shortcutPath = Environment.GetFolderPath(Environment.SpecialFolder.StartMenu) + "\\Programs\\提督業も忙しい！.lnk";
-
-			if (!File.Exists(shortcutPath))
-			{
-				InstallShortcut(shortcutPath);
-				return true;
-			}
-			return false;
-		}
-
-		private static void InstallShortcut(string shortcutPath)
-		{
-			var exePath = Process.GetCurrentProcess().MainModule.FileName;
-			var newShortcut = (IShellLinkW)new CShellLink();
-
-			ErrorHelper.VerifySucceeded(newShortcut.SetPath(exePath));
-			ErrorHelper.VerifySucceeded(newShortcut.SetArguments(""));
-
-			var newShortcutProperties = (IPropertyStore)newShortcut;
-
-			using (var appId = new PropVariant(AppId))
-			{
-				ErrorHelper.VerifySucceeded(newShortcutProperties.SetValue(SystemProperties.System.AppUserModel.ID, appId));
-				ErrorHelper.VerifySucceeded(newShortcutProperties.Commit());
-			}
-
-			var newShortcutSave = (IPersistFile)newShortcut;
-
-			ErrorHelper.VerifySucceeded(newShortcutSave.Save(shortcutPath, true));
-		}
-
-		#endregion
 	}
 }

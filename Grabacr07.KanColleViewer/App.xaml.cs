@@ -46,14 +46,7 @@ namespace Grabacr07.KanColleViewer
 			proxy.UseProxyOnConnect = Settings.Current.EnableProxy;
 			proxy.UseProxyOnSSLConnect = Settings.Current.EnableSSLProxy;
 
-			if (Toast.IsSupported)
-			{
-				Toast.TryInstallShortcut();
-			}
-			else
-			{
-				NotifyIconWrapper.Initialize();
-			}
+			WindowsNotifier.Initialize();
 
 			ThemeService.Current.Initialize(this);
 
@@ -66,10 +59,12 @@ namespace Grabacr07.KanColleViewer
 		{
 			base.OnExit(e);
 
-			if (!Toast.IsSupported)
+			var disposableNotifier = WindowsNotifier.Current as IDisposable;
+			if (disposableNotifier != null)
 			{
-				NotifyIconWrapper.Dispose();
+				disposableNotifier.Dispose();
 			}
+
 			KanColleClient.Current.Proxy.Shutdown();
 			Settings.Current.Save();
 		}

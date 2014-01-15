@@ -86,37 +86,19 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Docks
 			this.source = source;
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(source, (sender, args) => this.RaisePropertyChanged(args.PropertyName)));
 
-			if (Toast.IsSupported)
+			source.Completed += (sender, args) =>
 			{
-				source.Completed += (sender, args) =>
+				if (this.IsNotifyCompleted)
 				{
-					if (this.IsNotifyCompleted)
-					{
-						Toast.Show(
-							Resources.Dockyard_NotificationMessage_Title,
-							string.Format(
+					WindowsNotifier.Current.Show(
+						Resources.Dockyard_NotificationMessage_Title,
+						string.Format(
 								Resources.Dockyard_NotificationMessage,
 								this.Id,
 								this.CanDisplayShipName ? this.Ship : Resources.Common_ShipGirl),
-							() => App.ViewModelRoot.Activate());
-					}
-				};
-			}
-			else
-			{
-				source.Completed += (sender, args) =>
-				{
-					if (this.IsNotifyCompleted)
-					{
-						NotifyIconWrapper.Show(
-							Resources.Dockyard_NotificationMessage_Title,
-							string.Format(
-								Resources.Dockyard_NotificationMessage,
-								this.Id,
-								this.CanDisplayShipName ? this.Ship : Resources.Common_ShipGirl));
-					}
-				};
-			}
+						() => App.ViewModelRoot.Activate());
+				}
+			};
 		}
 	}
 }

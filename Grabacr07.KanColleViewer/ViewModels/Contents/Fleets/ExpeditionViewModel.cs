@@ -66,31 +66,16 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			this.source = expedition;
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(expedition, (sender, args) => this.RaisePropertyChanged(args.PropertyName)));
 
-			if (Toast.IsSupported)
+			expedition.Returned += (sender, args) =>
 			{
-				expedition.Returned += (sender, args) =>
+				if (this.IsNotifyReturned)
 				{
-					if (this.IsNotifyReturned)
-					{
-						Toast.Show(
-							Resources.Expedition_NotificationMessage_Title,
-							string.Format(Resources.Expedition_NotificationMessage, args.FleetName),
-							() => App.ViewModelRoot.Activate());
-					}
-				};
-			}
-			else
-			{
-				expedition.Returned += (sender, args) =>
-				{
-					if (this.IsNotifyReturned)
-					{
-						NotifyIconWrapper.Show(
-							Resources.Expedition_NotificationMessage_Title,
-							string.Format(Resources.Expedition_NotificationMessage, args.FleetName));
-					}
-				};
-			}
+					WindowsNotifier.Current.Show(
+						Resources.Expedition_NotificationMessage_Title,
+						string.Format(Resources.Expedition_NotificationMessage, args.FleetName),
+						() => App.ViewModelRoot.Activate());
+				}
+			};
 		}
 	}
 }
