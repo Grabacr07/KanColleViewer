@@ -111,7 +111,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			{
 				if (this.IsNotifyReadied)
 				{
-					WindowsNotifier.Current.Show(
+					WindowsNotification.Notifier.Show(
 						Resources.ReSortie_NotificationMessage_Title,
 						string.Format(Resources.ReSortie_NotificationMessage, parent.Name),
 						() => App.ViewModelRoot.Activate());

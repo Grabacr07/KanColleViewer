@@ -10,6 +10,7 @@
 			 xmlns:vmDocks="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Docks"
 			 xmlns:vmFleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 			 xmlns:vmContents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
+			 xmlns:dev="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Dev"
 			 mc:Ignorable="d"
 			 d:DesignHeight="25"
 			 d:DesignWidth="780">
@@ -51,6 +52,7 @@
 				<DataTemplate DataType="{x:Type vmContents:QuestsViewModel}" />
 				<DataTemplate DataType="{x:Type vmContents:ExpeditionsViewModel}" />
 				<DataTemplate DataType="{x:Type vm:SettingsViewModel}" />
+				<DataTemplate DataType="{x:Type dev:DebugTabViewModel}" />
 			</ContentControl.Resources>
 		</ContentControl>
 	</Grid>

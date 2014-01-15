@@ -90,7 +90,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Docks
 			{
 				if (this.IsNotifyCompleted)
 				{
-					WindowsNotifier.Current.Show(
+					WindowsNotification.Notifier.Show(
 						Resources.Dockyard_NotificationMessage_Title,
 						string.Format(
 								Resources.Dockyard_NotificationMessage,

@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Dev.DebugTab"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
+			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Dev"
+			 xmlns:controls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+			 mc:Ignorable="d"
+			 d:DesignWidth="700"
+			 d:DesignHeight="300"
+			 d:DataContext="{d:DesignInstance vm:DebugTabViewModel}">
+	<StackPanel Margin="10,0,10,10">
+		<controls:CallMethodButton Content="Test notify"
+								   HorizontalAlignment="Left"
+								   Padding="20,5"
+								   MethodName="Notify" />
+	</StackPanel>
+</UserControl>

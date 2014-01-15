@@ -35,18 +35,16 @@ namespace Grabacr07.KanColleViewer
 			this.DispatcherUnhandledException += (sender, args) => ReportException(sender, args.Exception);
 
 			DispatcherHelper.UIDispatcher = this.Dispatcher;
-			KanColleClient.Current.Proxy.Startup(AppSettings.Default.LocalProxyPort);
-			Settings.Load();
-
 			ProductInfo = new ProductInfo();
 
-			var proxy = KanColleClient.Current.Proxy;
-			proxy.UpstreamProxyHost = Settings.Current.ProxyHost;
-			proxy.UpstreamProxyPort = Settings.Current.ProxyPort;
-			proxy.UseProxyOnConnect = Settings.Current.EnableProxy;
-			proxy.UseProxyOnSSLConnect = Settings.Current.EnableSSLProxy;
+			Settings.Load();
+			WindowsNotification.Notifier.Initialize();
 
-			WindowsNotifier.Initialize();
+			KanColleClient.Current.Proxy.Startup(AppSettings.Default.LocalProxyPort);
+			KanColleClient.Current.Proxy.UpstreamProxyHost = Settings.Current.ProxyHost;
+			KanColleClient.Current.Proxy.UpstreamProxyPort = Settings.Current.ProxyPort;
+			KanColleClient.Current.Proxy.UseProxyOnConnect = Settings.Current.EnableProxy;
+			KanColleClient.Current.Proxy.UseProxyOnSSLConnect = Settings.Current.EnableSSLProxy;
 
 			ThemeService.Current.Initialize(this);
 
@@ -59,13 +57,9 @@ namespace Grabacr07.KanColleViewer
 		{
 			base.OnExit(e);
 
-			var disposableNotifier = WindowsNotifier.Current as IDisposable;
-			if (disposableNotifier != null)
-			{
-				disposableNotifier.Dispose();
-			}
-
 			KanColleClient.Current.Proxy.Shutdown();
+
+			WindowsNotification.Notifier.Dispose();
 			Settings.Current.Save();
 		}
 

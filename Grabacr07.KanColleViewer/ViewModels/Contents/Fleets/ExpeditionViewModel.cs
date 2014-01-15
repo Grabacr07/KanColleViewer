@@ -70,7 +70,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			{
 				if (this.IsNotifyReturned)
 				{
-					WindowsNotifier.Current.Show(
+					WindowsNotification.Notifier.Show(
 						Resources.Expedition_NotificationMessage_Title,
 						string.Format(Resources.Expedition_NotificationMessage, args.FleetName),
 						() => App.ViewModelRoot.Activate());

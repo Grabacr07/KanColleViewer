@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.ViewModels.Contents;
 using Grabacr07.KanColleViewer.ViewModels.Contents.Docks;
 using Grabacr07.KanColleViewer.ViewModels.Contents.Fleets;
+using Grabacr07.KanColleViewer.ViewModels.Dev;
 using Livet;
 
 namespace Grabacr07.KanColleViewer.ViewModels
@@ -74,6 +75,11 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			this.SystemTabItems = new List<TabItemViewModel>
 			{
 				new SettingsViewModel(),
+				#region DEBUG
+#if DEBUG
+				new DebugTabViewModel(),
+#endif
+				#endregion
 			};
 			this.SelectedItem = this.TabItems.FirstOrDefault();
 

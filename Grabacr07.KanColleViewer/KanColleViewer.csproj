@@ -118,24 +118,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\INotifyWrapper.cs" />
+    <Compile Include="Model\IWindowsNotifier.cs" />
     <Compile Include="Model\ProductInfo.cs" />
     <Compile Include="Model\Data\Xml\XmlFileReader.cs" />
     <Compile Include="Model\Data\Xml\XmlFileWriter.cs" />
     <Compile Include="Model\Data\Xml\XmlSerializableDictionary.cs" />
     <Compile Include="Model\Helper.cs" />
-    <Compile Include="Model\NotifyIconWrapper.cs" />
+    <Compile Include="Model\Internal\Windows7Notifier.cs" />
     <Compile Include="Model\Mode.cs" />
     <Compile Include="Model\StatusService.cs" />
     <Compile Include="Model\Settings.cs" />
     <Compile Include="Model\SupportedImageFormat.cs" />
     <Compile Include="Model\ThemeService.cs" />
     <Compile Include="Model\Toast.cs" />
-    <Compile Include="Model\ToastHelper.cs" />
+    <Compile Include="Model\Internal\Windows8Notifier.cs" />
     <Compile Include="Model\Volume.cs" />
     <Compile Include="ViewModels\Catalogs\SortableColumnViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogSortWorker.cs" />
-    <Compile Include="Model\WindowsNotifier.cs" />
+    <Compile Include="Model\WindowsNotification.cs" />
     <Compile Include="ViewModels\Contents\AdmiralViewModel.cs" />
     <Compile Include="ViewModels\Contents\Docks\BuildingDockViewModel.cs" />
     <Compile Include="ViewModels\Contents\Docks\RepairingDockViewModel.cs" />
@@ -151,6 +151,7 @@
     <Compile Include="ViewModels\BindableTextViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipTypeViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogWindowViewModel.cs" />
+    <Compile Include="ViewModels\Dev\DebugTabViewModel.cs" />
     <Compile Include="ViewModels\MainContentViewModel.cs" />
     <Compile Include="Model\INavigator.cs" />
     <Compile Include="ViewModels\Contents\MaterialsViewModel.cs" />
@@ -205,6 +206,9 @@
     </Compile>
     <Compile Include="Views\Converters\EnumToBooleanConverter.cs" />
     <Compile Include="Views\Converters\QuestCategoryToColorConverter.cs" />
+    <Compile Include="Views\Dev\DebugTab.xaml.cs">
+      <DependentUpon>DebugTab.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NotStarted.xaml.cs">
       <DependentUpon>NotStarted.xaml</DependentUpon>
     </Compile>
@@ -262,6 +266,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Contents\Quests.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dev\DebugTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

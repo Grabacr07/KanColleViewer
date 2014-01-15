@@ -20,6 +20,8 @@
 			 xmlns:vmDocks="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Docks"
 			 xmlns:vmFleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
+			 xmlns:devVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Dev"
+			 xmlns:dev="clr-namespace:Grabacr07.KanColleViewer.Views.Dev"
 			 mc:Ignorable="d"
 			 d:DesignWidth="800"
 			 d:DataContext="{d:DesignInstance vm:MainContentViewModel}"
@@ -132,6 +134,9 @@
 						</DataTemplate>
 						<DataTemplate DataType="{x:Type vm:SettingsViewModel}">
 							<settings:Settings />
+						</DataTemplate>
+						<DataTemplate DataType="{x:Type devVm:DebugTabViewModel}">
+							<dev:DebugTab />
 						</DataTemplate>
 					</ContentControl.Resources>
 				</ContentControl>
