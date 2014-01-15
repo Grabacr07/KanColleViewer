@@ -38,14 +38,14 @@ namespace Grabacr07.KanColleViewer.Model.Internal
 
 		public void Show(string header, string body, Action activated, Action<Exception> failed = null)
 		{
-			if (notifyIcon == null) return;
+			if (this.notifyIcon == null) return;
 
 			if (activated != null)
 			{
-				notifyIcon.BalloonTipClicked -= this.activatedAction;
+				this.notifyIcon.BalloonTipClicked -= this.activatedAction;
 
 				this.activatedAction = (sender, args) => activated();
-				notifyIcon.BalloonTipClicked += this.activatedAction;
+				this.notifyIcon.BalloonTipClicked += this.activatedAction;
 			}
 
 			notifyIcon.ShowBalloonTip(1000, header, body, ToolTipIcon.None);
