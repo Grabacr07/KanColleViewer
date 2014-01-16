@@ -10,7 +10,8 @@ namespace Grabacr07.KanColleViewer.Model
 {
 	public enum Theme
 	{
-		Dark, //Light,
+		Dark, 
+		Light,
 	}
 
 	public enum Accent

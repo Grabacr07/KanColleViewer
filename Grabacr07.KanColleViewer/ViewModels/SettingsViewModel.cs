@@ -191,6 +191,46 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region IsDarkTheme 変更通知プロパティ
+
+		private bool _IsDarkTheme;
+
+		public bool IsDarkTheme
+		{
+			get { return this._IsDarkTheme; }
+			set
+			{
+				if (this._IsDarkTheme != value)
+				{
+					this._IsDarkTheme = value;
+					this.RaisePropertyChanged();
+					if (value) ThemeService.Current.Theme = Theme.Dark;
+				}
+			}
+		}
+
+		#endregion
+
+		#region IsLightTheme 変更通知プロパティ
+
+		private bool _IsLightTheme;
+
+		public bool IsLightTheme
+		{
+			get { return this._IsLightTheme; }
+			set
+			{
+				if (this._IsLightTheme != value)
+				{
+					this._IsLightTheme = value;
+					this.RaisePropertyChanged();
+					if (value) ThemeService.Current.Theme = Theme.Light;
+				}
+			}
+		}
+
+		#endregion
+
 
 		public bool HasErrors
 		{
@@ -220,6 +260,9 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			{
 				(sender, args) => this.RaisePropertyChanged(args.PropertyName),
 			});
+
+			this._IsDarkTheme = ThemeService.Current.Theme == Theme.Dark;
+			this._IsLightTheme = ThemeService.Current.Theme == Theme.Light;
 		}
 
 		public void OpenScreenshotFolderSelectionDialog()

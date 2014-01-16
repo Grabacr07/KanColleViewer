@@ -288,15 +288,38 @@
 								Grid.ColumnSpan="3"
 								Orientation="Horizontal">
 						<RadioButton IsChecked="{Binding ScreenshotImageFormat, Mode=TwoWay, ConverterParameter=Png, Converter={StaticResource EnumToBooleanConverter}}">
-							<TextBlock Text="PNG"/>
+							<TextBlock Text="PNG" />
 						</RadioButton>
 						<RadioButton Margin="10,0,0,0"
 									 IsChecked="{Binding ScreenshotImageFormat, Mode=TwoWay, ConverterParameter=Jpeg, Converter={StaticResource EnumToBooleanConverter}}">
-							<TextBlock Text="JPG"/>
+							<TextBlock Text="JPG" />
 						</RadioButton>
 					</StackPanel>
 				</Grid>
-				
+
+				<Rectangle Height="1"
+						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+				<TextBlock Text="テーマ"
+						   Style="{DynamicResource HeaderTextBlockStyleKey}"
+						   Margin="0,10" />
+
+				<WrapPanel Margin="0,0,0,10">
+					<RadioButton IsChecked="{Binding IsDarkTheme, Mode=TwoWay}"
+								 Margin="0,0,20,0">
+						<TextBlock Text="Dark"
+								   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}"
+								   FontSize="13"
+								   Background="Transparent" />
+					</RadioButton>
+					<RadioButton IsChecked="{Binding IsLightTheme, Mode=TwoWay}">
+						<TextBlock Text="Light"
+								   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}"
+								   FontSize="13"
+								   Background="Transparent" />
+					</RadioButton>
+				</WrapPanel>
+
 				<Rectangle Height="1"
 						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 

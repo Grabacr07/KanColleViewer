@@ -81,7 +81,7 @@
 				<DataTemplate DataType="{x:Type fleets:ExpeditionViewModel}">
 					<Border Padding="10,5"
 							Background="#FF204080">
-						<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}">
+						<TextBlock Foreground="White">
 							<Run Text="この艦隊は遠征中です。" />
 							<Run Text=" 完了時刻:" />
 							<Run Text="{Binding ReturnTime, Mode=OneWay}" />
@@ -95,7 +95,7 @@
 							Padding="10,5"
 							Background="#FF5A2020">
 						<Grid>
-							<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}">
+							<TextBlock Foreground="White">
 								<Run Text="{Binding Message, Mode=OneWay}" />
 								<Run Text="{Binding Remaining, Mode=OneWay}" />
 							</TextBlock>
@@ -114,7 +114,7 @@
 					<Border x:Name="Border"
 							Padding="10,5"
 							Background="#FF5A4020">
-						<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}">
+						<TextBlock Foreground="White">
 							<i:Interaction.Behaviors>
 								<behaviors:TimerBehavior Proc="{Binding TimerProc}" />
 							</i:Interaction.Behaviors>
