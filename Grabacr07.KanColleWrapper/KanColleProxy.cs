@@ -82,8 +82,6 @@ namespace Grabacr07.KanColleWrapper
 		{
 			FiddlerApplication.Startup(proxy, false, true);
 			FiddlerApplication.BeforeRequest += this.SetUpstreamProxyHandler;
-			FiddlerApplication.BeforeRequest += SetBufferResponse;
-			FiddlerApplication.BeforeResponse += SetEmulateIE8;
 
 			SetIESettings("localhost:" + proxy);
 
@@ -95,8 +93,6 @@ namespace Grabacr07.KanColleWrapper
 		{
 			this.compositeDisposable.Dispose();
 
-			FiddlerApplication.BeforeResponse -= SetEmulateIE8;
-			FiddlerApplication.BeforeRequest -= SetBufferResponse;
 			FiddlerApplication.BeforeRequest -= this.SetUpstreamProxyHandler;
 			FiddlerApplication.Shutdown();
 		}
@@ -119,18 +115,6 @@ namespace Grabacr07.KanColleWrapper
 			Marshal.StructureToPtr(proxyInfo, proxyInfoPtr, true);
 
 			NativeMethods.InternetSetOption(IntPtr.Zero, INTERNET_OPTION_PROXY, proxyInfoPtr, proxyInfoSize);
-		}
-
-
-		private static void SetBufferResponse(Session session)
-		{
-			session.bBufferResponse = true;
-		}
-
-		private static void SetEmulateIE8(Session session)
-		{
-			session.utilDecodeResponse();
-			session.utilReplaceInResponse("<head>", "<head><meta http-equiv=\"X-UA-Compatible\" content=\"IE=EmulateIE8\" />");
 		}
 
 		/// <summary>

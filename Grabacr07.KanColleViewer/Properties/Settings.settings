@@ -25,5 +25,8 @@
     <Setting Name="UIContentHight" Type="System.Double" Scope="Application">
       <Value Profile="(Default)">333</Value>
     </Setting>
+    <Setting Name="FeatureBrowserEmulation" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">8000</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

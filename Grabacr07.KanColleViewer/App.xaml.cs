@@ -39,6 +39,7 @@ namespace Grabacr07.KanColleViewer
 
 			Settings.Load();
 			WindowsNotification.Notifier.Initialize();
+			Helper.SetRegistryFeatureBrowserEmulation();
 
 			KanColleClient.Current.Proxy.Startup(AppSettings.Default.LocalProxyPort);
 			KanColleClient.Current.Proxy.UpstreamProxyHost = Settings.Current.ProxyHost;
