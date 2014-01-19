@@ -35,6 +35,7 @@ namespace Grabacr07.KanColleViewer
 			this.DispatcherUnhandledException += (sender, args) => ReportException(sender, args.Exception);
 
 			DispatcherHelper.UIDispatcher = this.Dispatcher;
+			Helper.SetRegistryFeatureBrowserEmulation();
 			KanColleClient.Current.Proxy.Startup(AppSettings.Default.LocalProxyPort);
 			Settings.Load();
 

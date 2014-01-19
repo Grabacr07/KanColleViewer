@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Microsoft.Win32;
 
 namespace Grabacr07.KanColleViewer.Model
 {
@@ -44,6 +46,29 @@ namespace Grabacr07.KanColleViewer.Model
 		public static bool IsInDesignMode
 		{
 			get { return DesignerProperties.GetIsInDesignMode(new DependencyObject()); }
+		}
+
+
+		/// <summary>
+		/// HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION
+		/// に WebBrowser コントロールの動作バージョンを設定します。
+		/// </summary>
+		public static void SetRegistryFeatureBrowserEmulation()
+		{
+			const string key = @"HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION";
+
+			try
+			{
+				var valueName = Process.GetCurrentProcess().ProcessName + ".exe";
+				if (Registry.GetValue(key, valueName, null) == null)
+				{
+					Registry.SetValue(key, valueName, Properties.Settings.Default.FeatureBrowserEmulation, RegistryValueKind.DWord);
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex);
+			}
 		}
 	}
 }

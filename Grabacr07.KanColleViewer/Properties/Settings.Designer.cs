@@ -59,5 +59,14 @@ namespace Grabacr07.KanColleViewer.Properties {
                 return ((double)(this["UIContentHight"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("8000")]
+        public int FeatureBrowserEmulation {
+            get {
+                return ((int)(this["FeatureBrowserEmulation"]));
+            }
+        }
     }
 }
