@@ -44,20 +44,26 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public static SvData<T> Parse<T>(Session session)
 		{
+			var bytes = Encoding.UTF8.GetBytes(session.GetResponseAsJson());
 			var serializer = new DataContractJsonSerializer(typeof(svdata<T>));
-			var rawResult = serializer.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(session.GetResponseAsJson()))) as svdata<T>;
-			var result = new SvData<T>(rawResult);
-
-			return result;
+			using (var stream = new MemoryStream(bytes))
+			{
+				var rawResult = serializer.ReadObject(stream) as svdata<T>;
+				var result = new SvData<T>(rawResult);
+				return result;
+			}
 		}
 
 		public static SvData Parse(Session session)
 		{
+			var bytes = Encoding.UTF8.GetBytes(session.GetResponseAsJson());
 			var serializer = new DataContractJsonSerializer(typeof(svdata));
-			var rawResult = serializer.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(session.GetResponseAsJson()))) as svdata;
-			var result = new SvData(rawResult);
-
-			return result;
+			using (var stream = new MemoryStream(bytes))
+			{
+				var rawResult = serializer.ReadObject(stream) as svdata;
+				var result = new SvData(rawResult);
+				return result;
+			}
 		}
 
 		public static bool TryParse<T>(Session session, out SvData<T> result)
