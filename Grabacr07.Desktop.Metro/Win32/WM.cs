@@ -920,7 +920,7 @@ namespace Grabacr07.Desktop.Metro.Win32
 		/// </summary>
 		SYSTIMER = 0x118,
 
-		
+
 		DPICHANGED = 0x02E0,
 	}
 }
