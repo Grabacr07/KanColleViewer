@@ -373,7 +373,7 @@
     <value>Overview</value>
   </data>
   <data name="Dockyard_NotificationMessage" xml:space="preserve">
-    <value>Construction of {1} in Dock #{0} has been completed.</value>
+    <value>Construction of {1} in Dock {0} has been completed.</value>
   </data>
   <data name="Dockyard_NotificationMessage_Title" xml:space="preserve">
     <value>Construction Completed</value>
@@ -388,7 +388,7 @@
     <value>Expedition Completed</value>
   </data>
   <data name="Repairyard_NotificationMessage" xml:space="preserve">
-    <value>Repairs on {1} in Dock #{0} have been completed.</value>
+    <value>Repairs on {1} in Dock {0} have been completed.</value>
   </data>
   <data name="Repairyard_NotificationMessage_Title" xml:space="preserve">
     <value>Repairs Completed</value>

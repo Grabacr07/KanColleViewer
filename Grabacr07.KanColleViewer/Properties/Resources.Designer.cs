@@ -160,7 +160,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Construction of {1} in Dock #{0} has been completed..
+        ///   Looks up a localized string similar to Construction of {1} in Dock {0} has been completed..
         /// </summary>
         public static string Dockyard_NotificationMessage {
             get {
@@ -484,7 +484,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Repairs on {1} in Dock #{0} have been completed..
+        ///   Looks up a localized string similar to Repairs on {1} in Dock {0} have been completed..
         /// </summary>
         public static string Repairyard_NotificationMessage {
             get {
