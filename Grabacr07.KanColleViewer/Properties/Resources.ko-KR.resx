@@ -124,10 +124,10 @@
     <value>알리지않음</value>
   </data>
   <data name="Common_Notifications_NotImplemented" xml:space="preserve">
-    <value>(미구현)</value>
+    <value>(미실장)</value>
   </data>
   <data name="Common_Notifications_Title" xml:space="preserve">
-    <value>알림설정</value>
+    <value>알리미설정</value>
   </data>
   <data name="Common_Notifications_Windows8" xml:space="preserve">
     <value>(Windows 8 이상)</value>
@@ -136,7 +136,7 @@
     <value>완성!</value>
   </data>
   <data name="Dockyard_Display_Reveal" xml:space="preserve">
-    <value>건조중인 칸무스 이름을 스포일러하기</value>
+    <value>건조중인 배 이름을 스포일러하기</value>
   </data>
   <data name="Dockyard_Display_Title" xml:space="preserve">
     <value>표시 설정</value>
@@ -145,40 +145,40 @@
     <value>잠겨있습니다</value>
   </data>
   <data name="Dockyard_Notifications_Enable" xml:space="preserve">
-    <value>건조 완료시 알림 표시</value>
+    <value>건조 완료시 알림을 표시</value>
   </data>
   <data name="Dockyard_Notifications_Individual" xml:space="preserve">
-    <value>도크별로 설정</value>
+    <value>도크마다 개별로 설정</value>
   </data>
   <data name="Dockyard_ShipName" xml:space="preserve">
     <value>건조중인 함선</value>
   </data>
   <data name="Dockyard_TimeComplete" xml:space="preserve">
-    <value>완성시간</value>
+    <value>완성시각</value>
   </data>
   <data name="Dockyard_TimeRemaining" xml:space="preserve">
-    <value>완성까지</value>
+    <value>건조완료까지</value>
   </data>
   <data name="Dockyard_Unused" xml:space="preserve">
     <value>미사용</value>
   </data>
   <data name="Expedition_NoExpedition" xml:space="preserve">
-    <value>진수부에서 대기중입니다</value>
+    <value>원정 나가 있지 않습니다.</value>
   </data>
   <data name="Expedition_Notifications_Enable" xml:space="preserve">
-    <value>원정 귀환시 알림 표시</value>
+    <value>원정 귀환시 알림을 표시</value>
   </data>
   <data name="Expedition_Notifications_Individual" xml:space="preserve">
-    <value>함대별로 설정</value>
+    <value>함대마다 개별 설정</value>
   </data>
   <data name="Expedition_TimeComplete" xml:space="preserve">
     <value>종료시간</value>
   </data>
   <data name="Expedition_TimeRemaining" xml:space="preserve">
-    <value>함대 귀환까지</value>
+    <value>함대복귀까지</value>
   </data>
   <data name="Homeport_FleetHQ" xml:space="preserve">
-    <value>진수부</value>
+    <value>사령부</value>
   </data>
   <data name="Homeport_InstantBuild" xml:space="preserve">
     <value>고속건조재:</value>
@@ -190,25 +190,25 @@
     <value>보유장비:</value>
   </data>
   <data name="Homeport_NoOfShips" xml:space="preserve">
-    <value>보유칸무스:</value>
+    <value>소속칸무스:</value>
   </data>
   <data name="Quests_CurrentQuestList" xml:space="preserve">
     <value>현재 수행중인 임무</value>
   </data>
   <data name="Quests_Daily" xml:space="preserve">
-    <value>일일임무</value>
+    <value>데일리 임무</value>
   </data>
   <data name="Quests_Notice" xml:space="preserve">
-    <value>※ 진행도(50 %, 80 %)는 게임 내 표시와 동일합니다. 적의 함대의 격파 수와 원정의 성공 횟수의 카운트 등은 하지 않습니다.</value>
+    <value>※진행상태 (50 %, 80 %) 는 게임내의 표시와 동일합니다. 적함대의 격파수나 원정 성공횟수 카운트 등은 제공되지 않습니다.</value>
   </data>
   <data name="Quests_Untaken" xml:space="preserve">
-    <value>게임 내에서 임무화면을 열고 임무 목록을 취득해주세요</value>
+    <value>게임안에서 [임무(퀘스트)] 화면을 열어서, 임무 목록을 갱신 해 주십시오.</value>
   </data>
   <data name="Quests_Weekly" xml:space="preserve">
-    <value>주간임무</value>
+    <value>위클리 임무</value>
   </data>
   <data name="Quest_Detail_Untaken" xml:space="preserve">
-    <value>임무 화면의 모든 페이지에 액세스하십시오.</value>
+    <value>임무화면의 모든 페이지에 접속해 주십시오.</value>
   </data>
   <data name="Quest_Progress_50" xml:space="preserve">
     <value> 50 % </value>
@@ -220,22 +220,22 @@
     <value> 완료 </value>
   </data>
   <data name="Quest_Title_Untaken" xml:space="preserve">
-    <value>(미취득임무)</value>
+    <value>(미습득임무)</value>
   </data>
   <data name="Repairyard_Locked" xml:space="preserve">
     <value>잠겨있습니다</value>
   </data>
   <data name="Repairyard_Notifications_Enable" xml:space="preserve">
-    <value>정비완료시 알람을 표시</value>
+    <value>정비완료시에 알림을 표시</value>
   </data>
   <data name="Repairyard_Notifications_Individual" xml:space="preserve">
-    <value>도크별로 설정</value>
+    <value>도크마다 개별로 설정</value>
   </data>
   <data name="Repairyard_ShipName" xml:space="preserve">
     <value>입거중인 함선</value>
   </data>
   <data name="Repairyard_TimeComplete" xml:space="preserve">
-    <value>완료시간</value>
+    <value>완료시각</value>
   </data>
   <data name="Repairyard_TimeRemaining" xml:space="preserve">
     <value>정비완료까지</value>
@@ -247,43 +247,43 @@
     <value>스크린샷 저장에 실패했습니다: </value>
   </data>
   <data name="Screenshot_Saved" xml:space="preserve">
-    <value>스크린샷 저장에 성공했습니다: </value>
+    <value>스크린샷을 저장했습니다: </value>
   </data>
   <data name="Settings_BrowserControl" xml:space="preserve">
-    <value>브라우저 작업</value>
+    <value>브라우저 조작</value>
   </data>
   <data name="Settings_BrowserControl_ClearZoomFactorButton" xml:space="preserve">
-    <value>줌 배율을 100%로 돌리기</value>
+    <value>줌 배율을 100%로 되돌림</value>
   </data>
   <data name="Settings_BrowserControl_Display" xml:space="preserve">
     <value>(표시)</value>
   </data>
   <data name="Settings_BrowserControl_Notice" xml:space="preserve">
-    <value>※게임페이지에서 이동해버릴 수 있습니다. 주의해주십시오</value>
+    <value>※게임 페이지에서 이동합니다. 주의해주십시오</value>
   </data>
   <data name="Settings_Display" xml:space="preserve">
-    <value>표시</value>
+    <value>표시설정</value>
   </data>
   <data name="Settings_Network" xml:space="preserve">
     <value>네트워크</value>
   </data>
   <data name="Settings_Operation" xml:space="preserve">
-    <value>동작</value>
+    <value>동작설정</value>
   </data>
   <data name="Settings_Other" xml:space="preserve">
     <value>기타</value>
   </data>
   <data name="Settings_Proxy" xml:space="preserve">
-    <value>프록시</value>
+    <value>프록시설정</value>
   </data>
   <data name="Settings_Proxy_Enable" xml:space="preserve">
-    <value>프록시 서버를 사용</value>
+    <value>통신에 프록시 서버를 사용한다</value>
   </data>
   <data name="Settings_Proxy_Enable_4_SSL" xml:space="preserve">
-    <value>SSL 연결할때도 프록시 서버를 사용</value>
+    <value>SSL 접속시에도 프록시 서버를 사용한다</value>
   </data>
   <data name="Settings_Proxy_Host" xml:space="preserve">
-    <value>호스트</value>
+    <value>서버</value>
   </data>
   <data name="Settings_Proxy_Port" xml:space="preserve">
     <value>포트</value>
@@ -298,10 +298,10 @@
     <value>스크린샷 저장위치를 지정</value>
   </data>
   <data name="Settings_Screenshot_FolderTextBox_Label" xml:space="preserve">
-    <value>대상</value>
+    <value>저장경로</value>
   </data>
   <data name="Settings_Screenshot_FolderTextBox_Prompt" xml:space="preserve">
-    <value>대상 폴더의 경로</value>
+    <value>저장경로 폴더의 설정</value>
   </data>
   <data name="Settings_Screenshot_ImageFormat_Label" xml:space="preserve">
     <value>이미지 형식</value>
@@ -328,13 +328,13 @@
     <value>창을 항상 맨 위에 표시</value>
   </data>
   <data name="StatusBar_AirSuperiorityPotential" xml:space="preserve">
-    <value>제공수치:</value>
+    <value>제공전력:</value>
   </data>
   <data name="StatusBar_AverageLevel" xml:space="preserve">
     <value>평균레벨: </value>
   </data>
   <data name="StatusBar_NotStarted" xml:space="preserve">
-    <value>칸코레 구동을 기다리고있습니다</value>
+    <value>칸코레의 기동을 기다리고 있습니다</value>
   </data>
   <data name="StatusBar_Ready" xml:space="preserve">
     <value>준비 완료</value>
@@ -358,7 +358,7 @@
     <value>임무</value>
   </data>
   <data name="ViewModels_Repairyard" xml:space="preserve">
-    <value>입거</value>
+    <value>입거도크</value>
   </data>
   <data name="ViewModels_Settings" xml:space="preserve">
     <value>설정</value>
