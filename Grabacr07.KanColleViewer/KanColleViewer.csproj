@@ -330,7 +330,7 @@
     <EmbeddedResource Include="Properties\Resources.ja-JP.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-CN.resx">
     </EmbeddedResource>
-	<EmbeddedResource Include="Properties\Resources.ko.resx">
+	<EmbeddedResource Include="Properties\Resources.ko-KR.resx">
 	</EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
