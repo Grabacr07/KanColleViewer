@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
-using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
-using Grabacr07.Desktop.Metro.Controls;
 using Grabacr07.KanColleViewer.ViewModels.Contents;
-using Grabacr07.KanColleViewer.Views.Catalogs;
 using Grabacr07.KanColleWrapper;
-using Livet;
 using Livet.EventListeners;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Catalogs

@@ -54,6 +54,12 @@
 													  WindowType="catalogs:ShipCatalogWindow"
 													  IsOwned="False" />
 		</livet:InteractionMessageTrigger>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+										 MessageKey="Show/SlotItemCatalogWindow">
+			<livet:TransitionInteractionMessageAction Mode="NewOrActive"
+													  WindowType="catalogs:SlotItemCatalogWindow"
+													  IsOwned="False" />
+		</livet:InteractionMessageTrigger>
 	</i:Interaction.Triggers>
 
 
@@ -178,7 +184,8 @@
 													MethodName="ShowShipCatalog" />
 
 					<metroControls:CallMethodButton Content="装備一覧"
-													Padding="12,8" />
+													Padding="12,8"
+													MethodName="ShowSlotItemCatalog" />
 				</StackPanel>
 			</Border>
 

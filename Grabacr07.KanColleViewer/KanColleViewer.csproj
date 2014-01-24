@@ -133,6 +133,7 @@
     <Compile Include="Model\Toast.cs" />
     <Compile Include="Model\Internal\Windows8Notifier.cs" />
     <Compile Include="Model\Volume.cs" />
+    <Compile Include="ViewModels\Catalogs\SlotItemCatalogViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\SortableColumnViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogSortWorker.cs" />
     <Compile Include="Model\WindowsNotification.cs" />
@@ -181,6 +182,9 @@
       <DependentUpon>ShipCatalogWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Catalogs\ShipCatalogSortTarget.cs" />
+    <Compile Include="Views\Catalogs\SlotItemCatalogWindow.xaml.cs">
+      <DependentUpon>SlotItemCatalogWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Contents\General.xaml.cs">
       <DependentUpon>General.xaml</DependentUpon>
     </Compile>
@@ -254,6 +258,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Catalogs\ShipCatalogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Catalogs\SlotItemCatalogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
