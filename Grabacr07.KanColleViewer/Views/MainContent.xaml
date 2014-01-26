@@ -6,13 +6,11 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
-			 xmlns:chrome="clr-namespace:Grabacr07.Desktop.Metro.Chrome;assembly=Desktop.Metro"
-			 xmlns:metroBehaviors="clr-namespace:Grabacr07.Desktop.Metro.Behaviors;assembly=Desktop.Metro"
-			 xmlns:metroControls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
-			 xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
 			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
@@ -53,18 +51,18 @@
 									 IsMute="{Binding IsMute, Mode=OneWay}"
 									 MethodName="ToggleMute" />
 
-				<metroControls:CallMethodButton Padding="10,5"
-												Margin="6,0"
-												Width="50"
-												Height="38"
-												MethodTarget="{Binding Source={x:Static root:App.ViewModelRoot}}"
-												MethodName="TakeScreenshot">
+				<metro2:CallMethodButton Padding="10,5"
+										 Margin="6,0"
+										 Width="50"
+										 Height="38"
+										 MethodTarget="{Binding Source={x:Static root:App.ViewModelRoot}}"
+										 MethodName="TakeScreenshot">
 					<Viewbox>
 						<Path Data="M54.443001,31.656001 C43.397305,31.656 34.443001,40.610305 34.443002,51.656 34.443001,62.701694 43.397305,71.656 54.443001,71.656 65.488695,71.656 74.443001,62.701694 74.443001,51.656 74.443001,40.610305 65.488695,31.656 54.443001,31.656001 z M8.9445,0 L44.722501,0 44.722501,13.41675 107.334,13.41675 107.334,89.445002 0,89.445002 0,13.41675 8.9445,13.41675 z"
 							  Stretch="Uniform"
 							  Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}, Path=Foreground}" />
 					</Viewbox>
-				</metroControls:CallMethodButton>
+				</metro2:CallMethodButton>
 			</StackPanel>
 		</Grid>
 
@@ -91,8 +89,8 @@
 						<RowDefinition Height="Auto" />
 					</Grid.RowDefinitions>
 
-					<metroControls:TabView ItemsSource="{Binding TabItems}"
-										   SelectedValue="{Binding SelectedItem}" />
+					<metro:TabView ItemsSource="{Binding TabItems}"
+								   SelectedValue="{Binding SelectedItem}" />
 
 					<Rectangle Grid.Row="1"
 							   Height="1"
@@ -100,10 +98,10 @@
 							   Fill="{DynamicResource InactiveForegroundBrushKey}"
 							   Opacity="0.5" />
 
-					<metroControls:TabView Grid.Row="2"
-										   ItemsSource="{Binding SystemTabItems}"
-										   SelectedValue="{Binding SelectedItem}"
-										   Margin="0,0,0,20" />
+					<metro:TabView Grid.Row="2"
+								   ItemsSource="{Binding SystemTabItems}"
+								   SelectedValue="{Binding SelectedItem}"
+								   Margin="0,0,0,20" />
 				</Grid>
 			</ScrollViewer>
 

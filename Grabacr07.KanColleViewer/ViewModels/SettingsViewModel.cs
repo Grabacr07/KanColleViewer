@@ -17,6 +17,7 @@ using Grabacr07.KanColleWrapper;
 using Livet;
 using Livet.EventListeners;
 using Livet.Messaging.IO;
+using MetroRadiance;
 using Settings = Grabacr07.KanColleViewer.Model.Settings;
 
 namespace Grabacr07.KanColleViewer.ViewModels
@@ -204,7 +205,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				{
 					this._IsDarkTheme = value;
 					this.RaisePropertyChanged();
-					if (value) ThemeService.Current.Theme = Theme.Dark;
+					if (value) ThemeService.Current.ChangeTheme(Theme.Dark);
 				}
 			}
 		}
@@ -224,7 +225,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				{
 					this._IsLightTheme = value;
 					this.RaisePropertyChanged();
-					if (value) ThemeService.Current.Theme = Theme.Light;
+					if (value) ThemeService.Current.ChangeTheme(Theme.Light);
 				}
 			}
 		}
@@ -244,7 +245,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		{
 			if (Helper.IsInDesignMode) return;
 
-			this.Name = Properties.Resources.Settings;
+			this.Name = Resources.Settings;
 
 			this.Libraries = App.ProductInfo.Libraries.Aggregate(
 				new List<BindableTextViewModel>(),

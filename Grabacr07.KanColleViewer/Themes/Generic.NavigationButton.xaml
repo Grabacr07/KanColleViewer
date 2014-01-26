@@ -1,0 +1,112 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls">
+
+	<Style TargetType="{x:Type controls:NavigationButton}">
+		<Setter Property="Background"
+				Value="Transparent" />
+		<Setter Property="BorderThickness"
+				Value="1" />
+		<Setter Property="BorderBrush"
+				Value="{DynamicResource ForegroundBrushKey}" />
+		<Setter Property="Foreground"
+				Value="{DynamicResource ActiveForegroundBrushKey}" />
+		<Setter Property="SnapsToDevicePixels"
+				Value="True" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type controls:NavigationButton}">
+					<Grid>
+						<Ellipse StrokeThickness="{TemplateBinding BorderThickness}"
+								 Stroke="{TemplateBinding BorderBrush}"
+								 Fill="{TemplateBinding Background}" />
+						<Viewbox>
+							<Path x:Name="Arrow"
+								  Width="100"
+								  Height="100"
+								  Data="M236,635 L322,635 322,662 236,662 267.38109,693.21587 249,709 186.51152,648.30247 249.11957,587.44094 267,605 z"
+								  Stretch="Uniform"
+								  StrokeThickness="0"
+								  Fill="{TemplateBinding Foreground}"
+								  HorizontalAlignment="Center"
+								  VerticalAlignment="Center"
+								  Margin="35"
+								  RenderTransformOrigin="0.5,0.5">
+								<Path.RenderTransform>
+									<RotateTransform />
+								</Path.RenderTransform>
+							</Path>
+						</Viewbox>
+						<Viewbox>
+							<Path x:Name="Refresh"
+								  Width="100"
+								  Height="100"
+								  Data="M71.250362,19.026718 C87.549878,35.326143 87.549878,61.752731 71.250361,78.052151 C54.950857,94.351575 28.52413,94.351575 12.224626,78.052142 C-4.0748791,61.752713 -4.0748735,35.326143 12.224633,19.026718 L22.165807,28.967843 C11.356664,39.776937 11.356664,57.301935 22.165813,68.111024 C32.974958,78.920118 50.500051,78.920113 61.309192,68.11102 C72.118337,57.301926 72.118337,39.776937 61.309192,28.967843 z M41.970467,8.2158559E-07 L31.632566,38.452467 L3.5180002,10.337902 z"
+								  Stretch="Uniform"
+								  StrokeThickness="1"
+								  Stroke="{TemplateBinding Foreground}"
+								  Fill="{TemplateBinding Foreground}"
+								  HorizontalAlignment="Center"
+								  VerticalAlignment="Center"
+								  Margin="35"
+								  Visibility="Collapsed"
+								  RenderTransformOrigin="0.5,0.5">
+								<Path.RenderTransform>
+									<RotateTransform />
+								</Path.RenderTransform>
+							</Path>
+						</Viewbox>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="Direction"
+								 Value="GoForward">
+							<Setter TargetName="Arrow"
+									Property="RenderTransform">
+								<Setter.Value>
+									<RotateTransform Angle="180" />
+								</Setter.Value>
+							</Setter>
+						</Trigger>
+						<Trigger Property="Direction"
+								 Value="Reload">
+							<Setter TargetName="Refresh"
+									Property="Visibility"
+									Value="Visible" />
+							<Setter TargetName="Arrow"
+									Property="Visibility"
+									Value="Collapsed" />
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Style.Triggers>
+			<Trigger Property="IsMouseOver"
+					 Value="True">
+				<Setter Property="Background"
+						Value="{DynamicResource AccentBrushKey}" />
+				<Setter Property="BorderBrush"
+						Value="{DynamicResource ActiveForegroundBrushKey}" />
+				<Setter Property="Foreground"
+						Value="{DynamicResource AccentForegroundBrushKey}" />
+			</Trigger>
+			<Trigger Property="IsPressed"
+					 Value="True">
+				<Setter Property="Background"
+						Value="{DynamicResource AccentHighlightBrushKey}" />
+				<Setter Property="BorderBrush"
+						Value="{DynamicResource ActiveForegroundBrushKey}" />
+				<Setter Property="Foreground"
+						Value="{DynamicResource AccentForegroundBrushKey}" />
+			</Trigger>
+			<Trigger Property="IsEnabled"
+					 Value="False">
+				<Setter Property="BorderBrush"
+						Value="{DynamicResource InactiveBorderBrushKey}" />
+				<Setter Property="Foreground"
+						Value="{DynamicResource InactiveForegroundBrushKey}" />
+			</Trigger>
+		</Style.Triggers>
+	</Style>
+
+</ResourceDictionary>

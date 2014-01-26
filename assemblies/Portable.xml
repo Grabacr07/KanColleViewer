@@ -1,0 +1,310 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Portable</name>
+    </assembly>
+    <members>
+        <member name="F:Grabacr07.Portable.Definitions.UnixEpoch">
+            <summary>
+            UNIX Time の基準時間 (世界協定時 1970 年 1 月 1 日 0 時 0 分 0 秒) を表します。
+            </summary>
+        </member>
+        <member name="T:Grabacr07.Portable.Definitions.Regex">
+            <summary>
+            正規表現に関する固有の値を定義します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.Portable.Definitions.Regex.Url">
+            <summary>
+            HTTP URL を抽出可能な正規表現を取得します。
+            </summary>
+        </member>
+        <member name="T:Grabacr07.Portable.Extensions">
+            <summary>
+            汎用的な拡張メソッドを定義します。
+            </summary>
+        </member>
+        <member name="M:Grabacr07.Portable.Extensions.Compare(System.String,System.String)">
+            <summary>
+            現在の文字列と、指定した文字列を比較します。大文字と小文字は区別されません。
+            </summary>
+        </member>
+        <member name="M:Grabacr07.Portable.Extensions.Flatten(System.String,System.String)">
+            <summary>
+            現在の文字列の改行コードを置き換え、フラットな文字列を作成します。
+            </summary>
+            <param name="str">元の文字列。</param>
+            <param name="replace">改行コードを置き換える文字列。既定値は半角スペースです。</param>
+        </member>
+        <member name="M:Grabacr07.Portable.Extensions.Wrap(System.String,System.String)">
+            <summary>
+            現在の文字列の前後に、指定したラップ文字列を追加した文字列を返します。
+            </summary>
+            <param name="input">対象の文字列。</param>
+            <param name="wrapper">ラップ文字列。</param>
+            <returns>対象の文字列の前後にラップ文字列を追加した文字列。</returns>
+        </member>
+        <member name="M:Grabacr07.Portable.Extensions.DecodeCER(System.String)">
+            <summary>
+            現在の文字列内の文字実体参照 (CER:Character Entity Reference) を実体に変換します。
+            </summary>
+            <param name="text">対象の文字列。</param>
+        </member>
+        <member name="M:Grabacr07.Portable.Extensions.IsNullOrEmpty(System.String)">
+            <summary>
+            現在のテキストが null または System.String.Empty 文字列であるかどうかを示します。
+            </summary>
+            <param name="targetStr">現在のテキスト。</param>
+            <returns>現在のテキストが null または System.String.Empty 文字列の場合は true、それ以外は false。</returns>
+        </member>
+        <member name="M:Grabacr07.Portable.Extensions.IsNotNullOrEmpty(System.String)">
+            <summary>
+            現在のテキストが null または System.String.Empty 文字列以外の文字列であるかどうかを示します。
+            </summary>
+            <param name="targetStr">現在のテキスト。</param>
+            <returns>現在のテキストが null または System.String.Empty 文字列でない場合は true、それ以外は false。</returns>
+        </member>
+        <member name="M:Grabacr07.Portable.Extensions.SafeFormatting(System.String,System.Object[])">
+            <summary>
+            例外をスローさせずに、現在の文字列を使用して string.Format メソッドを呼び出します。呼び出しで例外がスローされた場合、このメソッドは例外をスローする代わりに元の文字列をそのまま返します。
+            </summary>
+        </member>
+        <member name="M:Grabacr07.Portable.Extensions.ToString``1(System.Collections.Generic.IEnumerable{``0},System.String)">
+            <summary>
+            コレクションを展開し、メンバーの文字列表現を指定したセパレーターで連結した文字列を返します。
+            </summary>
+            <typeparam name="T">コレクションに含まれる任意の型。</typeparam>
+            <param name="source">対象のコレクション。</param>
+            <param name="separator">セパレーターとして使用する文字列。</param>
+            <returns>コレクションの文字列表現を展開し、指定したセパレーターで連結した文字列。</returns>
+        </member>
+        <member name="M:Grabacr07.Portable.Extensions.HasValue``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            シーケンスが null でなく、1 つ以上の要素を含んでいるかどうかを確認します。
+            </summary>
+        </member>
+        <member name="M:Grabacr07.Portable.Extensions.ToUnixTime(System.DateTimeOffset)">
+            <summary>
+            現在の日時を UNIX 時間として取得します。
+            </summary>
+            <param name="target">日時。</param>
+            <returns>UNIX 時間として表される整数値。</returns>
+        </member>
+        <member name="M:Grabacr07.Portable.Extensions.IsValidIndex(System.Int32,System.Int32)">
+            <summary>
+            値が有効なインデックス範囲内かどうかを確認します。
+            </summary>
+            <param name="index">インデックス値。</param>
+            <param name="count">コレクションの項目数。</param>
+            <returns>
+                <paramref name="index" /> が有効なインデックス範囲内の場合は true、それ以外の場合は false。
+            </returns>
+        </member>
+        <member name="M:Grabacr07.Portable.Extensions.IsValidIndex(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            値が有効なインデックス範囲内かどうかを確認します。
+            </summary>
+            <param name="index">インデックス値。</param>
+            <param name="start">開始位置。</param>
+            <param name="count">コレクションの項目数。</param>
+            <returns>
+                <paramref name="index" /> が有効なインデックス範囲内の場合は true、それ以外の場合は false。
+            </returns>
+        </member>
+        <member name="T:Grabacr07.Portable.Notificator">
+            <summary>
+            プロパティの変更通知をサポートします。このクラスは抽象クラスです。
+            </summary>
+        </member>
+        <member name="M:Grabacr07.Portable.Notificator.SetProperty``1(``0@,``0,System.String)">
+            <summary>
+            プロパティが既に目的の値と一致しているかどうかを確認します。必要な場合のみ、プロパティを設定し、リスナーに通知します。
+            </summary>
+            <typeparam name="T">プロパティの型。</typeparam>
+            <param name="storage">get アクセス操作子と set アクセス操作子の両方を使用したプロパティへの参照。</param>
+            <param name="value">プロパティに必要な値。</param>
+            <param name="propertyName">リスナーに通知するために使用するプロパティの名前。この値は省略可能で、CallerMemberName をサポートするコンパイラから呼び出す場合に自動的に指定できます。</param>
+            <returns>値が変更された場合は true、既存の値が目的の値に一致した場合は false です。</returns>
+        </member>
+        <member name="M:Grabacr07.Portable.Notificator.RaisePropertyChanged(System.String)">
+            <summary>
+            プロパティ値が変更されたことをリスナーに通知します。
+            </summary>
+            <param name="propertyName">リスナーに通知するために使用するプロパティの名前。
+            この値は省略可能で、
+            <see cref="T:System.Runtime.CompilerServices.CallerMemberNameAttribute"/> をサポートするコンパイラから呼び出す場合に自動的に指定できます。</param>
+        </member>
+        <member name="E:Grabacr07.Portable.Notificator.PropertyChanged">
+            <summary>
+            プロパティの変更を通知するためのマルチキャスト イベント。
+            </summary>
+        </member>
+        <member name="T:Grabacr07.Portable.SynchronizedObservableCollection`1">
+            <summary>
+            変更通知をサポートする、スレッド セーフなコレクションを表します。
+            </summary>
+            <typeparam name="T">コレクション内の要素の型。</typeparam>
+        </member>
+        <member name="T:Grabacr07.Portable.Synchronizer">
+            <summary>
+            内部でマルチ スレッド処理をサポートします。このクラスは抽象クラスです。
+            </summary>
+        </member>
+        <member name="M:Grabacr07.Portable.Synchronizer.DoReadLockAction(System.Action)">
+            <summary>
+            読み取り専用ロック状態に設定し、指定したメソッドを実行します。<paramref name="readAction"/>
+            内では、アップグレード可能モードまたは書き込みモードでロックを行うような操作は実行しないでください。
+            </summary>
+            <param name="readAction">読み取り専用ロックに設定してから実行するメソッド。</param>
+        </member>
+        <member name="M:Grabacr07.Portable.Synchronizer.DoReadWriteLockAction(System.Action,System.Action)">
+            <summary>
+            スレッドをアップグレード可能モードでロックし、書き込みロックで <paramref name="writeAction"/>
+            を、読み取りロックで <paramref name="readActionAfterWrite"/> をこの順番に実行します。
+            </summary>
+            <param name="writeAction">最初に書き込みロックで実行するメソッド。</param>
+            <param name="readActionAfterWrite">2 番目に読み取りロックで実行するメソッド。</param>
+        </member>
+        <member name="M:Grabacr07.Portable.Synchronizer.DoReadWriteLockAction``1(System.Func{``0},System.Action{``0},System.Action{``0})">
+            <summary>
+            スレッドをアップグレード可能モードでロックし、読み取りロックで <paramref name="readActionBeforeWrite"/>
+            を、書き込みロックで <paramref name="writeAction"/> を、読み取りロックで <paramref name="readActionAfterWrite"/>
+            をこの順番に実行します。
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="readActionBeforeWrite">最初に読み取りロックで実行するメソッド。</param>
+            <param name="writeAction">2 番目に書き込みロックで実行するメソッド。</param>
+            <param name="readActionAfterWrite">3 番目に読み取りロックで実行するメソッド。</param>
+        </member>
+        <member name="M:Grabacr07.Portable.SynchronizedObservableCollection`1.#ctor">
+            <summary>
+            変更通知をサポートする、スレッド セーフなコレクションを作成します。
+            </summary>
+        </member>
+        <member name="M:Grabacr07.Portable.SynchronizedObservableCollection`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            変更通知をサポートする、スレッド セーフなコレクションを作成します。初期値として
+            <paramref name="source"/> からコピーした要素を格納します。
+            </summary>
+        </member>
+        <member name="M:Grabacr07.Portable.SynchronizedObservableCollection`1.IndexOf(`0)">
+            <summary>
+            指定したオブジェクトを検索し、最初に見つかった位置の 0 から始まるインデックスを返します。
+            </summary>
+            <param name="item">検索するオブジェクト</param>
+            <returns>最初に見つかった位置のインデックス</returns>
+        </member>
+        <member name="M:Grabacr07.Portable.SynchronizedObservableCollection`1.Insert(System.Int32,`0)">
+            <summary>
+            指定したインデックスの位置に要素を挿入します。
+            </summary>
+            <param name="index">指定するインデックス</param>
+            <param name="item">挿入するオブジェクト</param>
+        </member>
+        <member name="M:Grabacr07.Portable.SynchronizedObservableCollection`1.RemoveAt(System.Int32)">
+            <summary>
+            指定したインデックスにある要素を削除します。
+            </summary>
+            <param name="index">指定するインデックス</param>
+        </member>
+        <member name="M:Grabacr07.Portable.SynchronizedObservableCollection`1.Add(`0)">
+            <summary>
+            末尾にオブジェクトを追加します。
+            </summary>
+            <param name="item">追加するオブジェクト</param>
+        </member>
+        <member name="M:Grabacr07.Portable.SynchronizedObservableCollection`1.Clear">
+            <summary>
+            すべての要素を削除します。
+            </summary>
+        </member>
+        <member name="M:Grabacr07.Portable.SynchronizedObservableCollection`1.Contains(`0)">
+            <summary>
+            ある要素がこのコレクションに含まれているかどうかを判断します。
+            </summary>
+            <param name="item">コレクションに含まれているか判断したい要素</param>
+            <returns>このコレクションに含まれているかどうか</returns>
+        </member>
+        <member name="M:Grabacr07.Portable.SynchronizedObservableCollection`1.CopyTo(`0[],System.Int32)">
+            <summary>
+            全体を互換性のある1次元の配列にコピーします。コピー操作は、コピー先の配列の指定したインデックスから始まります。
+            </summary>
+            <param name="array">コピー先の配列</param>
+            <param name="arrayIndex">コピー先の配列のどこからコピー操作をするかのインデックス</param>
+        </member>
+        <member name="M:Grabacr07.Portable.SynchronizedObservableCollection`1.Remove(`0)">
+            <summary>
+            最初に見つかった特定のオブジェクトを削除します。
+            </summary>
+            <param name="item">削除したいオブジェクト</param>
+            <returns>削除できたかどうか</returns>
+        </member>
+        <member name="M:Grabacr07.Portable.SynchronizedObservableCollection`1.Move(System.Int32,System.Int32)">
+            <summary>
+            指定されたインデックスの要素を指定されたインデックスに移動します。
+            </summary>
+            <param name="oldIndex">移動したい要素のインデックス</param>
+            <param name="newIndex">移動先のインデックス</param>
+        </member>
+        <member name="M:Grabacr07.Portable.SynchronizedObservableCollection`1.GetEnumerator">
+            <summary>
+            反復処理するためのスナップショットの列挙子を返します。
+            </summary>
+            <returns>列挙子</returns>
+        </member>
+        <member name="M:Grabacr07.Portable.SynchronizedObservableCollection`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            反復処理するためのスナップショットの列挙子を返します。
+            </summary>
+            <returns>列挙子</returns>
+        </member>
+        <member name="M:Grabacr07.Portable.SynchronizedObservableCollection`1.CopyTo(System.Array,System.Int32)">
+            <summary>
+            全体を互換性のある1次元の配列にコピーします。コピー操作は、コピー先の配列の指定したインデックスから始まります。
+            </summary>
+            <param name="array">コピー先の配列</param>
+            <param name="index">コピー先の配列のどこからコピー操作をするかのインデックス</param>
+        </member>
+        <member name="M:Grabacr07.Portable.SynchronizedObservableCollection`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
+            <summary>
+            <see cref="E:Grabacr07.Portable.SynchronizedObservableCollection`1.CollectionChanged"/> イベントを発生させます。
+            </summary>
+        </member>
+        <member name="M:Grabacr07.Portable.SynchronizedObservableCollection`1.OnPropertyChanged(System.String)">
+            <summary>
+            <see cref="E:Grabacr07.Portable.SynchronizedObservableCollection`1.PropertyChanged"/> イベントを発生させます。
+            </summary>
+            <param name="propertyName">変更されたプロパティの名前。</param>
+        </member>
+        <member name="P:Grabacr07.Portable.SynchronizedObservableCollection`1.Count">
+            <summary>
+            実際に格納されている要素の数を取得します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.Portable.SynchronizedObservableCollection`1.IsReadOnly">
+            <summary>
+            このコレクションが読み取り専用かどうかを取得します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.Portable.SynchronizedObservableCollection`1.IsSynchronized">
+            <summary>
+            このコレクションがスレッドセーフであるかどうかを取得します。この実装は常に true を返します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.Portable.SynchronizedObservableCollection`1.SyncRoot">
+            <summary>
+            このコレクションへのスレッドセーフなアクセスに使用できる同期オブジェクトを返します。
+            </summary>
+        </member>
+        <member name="E:Grabacr07.Portable.SynchronizedObservableCollection`1.CollectionChanged">
+            <summary>
+            コレクションが変更されると発生します。
+            </summary>
+        </member>
+        <member name="E:Grabacr07.Portable.SynchronizedObservableCollection`1.PropertyChanged">
+            <summary>
+            プロパティが変更されると発生します。
+            </summary>
+        </member>
+    </members>
+</doc>

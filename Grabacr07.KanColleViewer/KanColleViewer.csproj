@@ -53,13 +53,22 @@
   <ItemGroup>
     <Reference Include="CoreAudioApi, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>assemblies\CoreAudioApi.dll</HintPath>
+      <HintPath>..\assemblies\CoreAudioApi.dll</HintPath>
     </Reference>
     <Reference Include="Livet">
       <HintPath>..\packages\LivetCask.1.1.0.0\lib\net45\Livet.dll</HintPath>
     </Reference>
     <Reference Include="Livet.Extensions">
       <HintPath>..\packages\LivetExtensions.1.1.0.0\lib\net45\Livet.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroRadiance">
+      <HintPath>..\assemblies\MetroRadiance.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroRadiance.Chrome">
+      <HintPath>..\assemblies\MetroRadiance.Chrome.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroRadiance.Core">
+      <HintPath>..\assemblies\MetroRadiance.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Expression.Drawing" />
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -129,7 +138,6 @@
     <Compile Include="Model\StatusService.cs" />
     <Compile Include="Model\Settings.cs" />
     <Compile Include="Model\SupportedImageFormat.cs" />
-    <Compile Include="Model\ThemeService.cs" />
     <Compile Include="Model\Toast.cs" />
     <Compile Include="Model\Internal\Windows8Notifier.cs" />
     <Compile Include="Model\Volume.cs" />
@@ -201,14 +209,12 @@
     <Compile Include="Views\Controls\NavigationButton.cs" />
     <Compile Include="Views\Controls\Quest.cs" />
     <Compile Include="Views\Controls\SlotItemIcon.cs" />
-    <Compile Include="Views\Controls\TabHeader.cs" />
     <Compile Include="Views\Contents\Dockyard.xaml.cs">
       <DependentUpon>Dockyard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Contents\Expeditions.xaml.cs">
       <DependentUpon>Expeditions.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Converters\EnumToBooleanConverter.cs" />
     <Compile Include="Views\Converters\QuestCategoryToColorConverter.cs" />
     <Compile Include="Views\Dev\DebugTab.xaml.cs">
       <DependentUpon>DebugTab.xaml</DependentUpon>
@@ -233,23 +239,75 @@
     <Compile Include="Win32\IServiceProvider.cs" />
     <Compile Include="Win32\RECT.cs" />
     <Compile Include="Win32\ShellHelpers.cs" />
-    <Page Include="Themes\Accent.Orange.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Styles\Controls.ListView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <DependentUpon>Controls.xaml</DependentUpon>
     </Page>
-    <Page Include="Themes\Accent.Blue.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Styles\Controls.PinButton.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <DependentUpon>Controls.xaml</DependentUpon>
     </Page>
-    <Page Include="Themes\Accent.Purple.xaml">
+    <Page Include="Styles\Controls.Text.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <DependentUpon>Controls.xaml</DependentUpon>
+    </Page>
+    <Page Include="Styles\Controls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Accents\Red.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.AppIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <DependentUpon>Generic.xaml</DependentUpon>
+    </Page>
+    <Page Include="Themes\Generic.BuildingDock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <DependentUpon>Generic.xaml</DependentUpon>
+    </Page>
+    <Page Include="Themes\Generic.ColorIndicator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <DependentUpon>Generic.xaml</DependentUpon>
+    </Page>
+    <Page Include="Themes\Generic.ConditionIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <DependentUpon>Generic.xaml</DependentUpon>
+    </Page>
+    <Page Include="Themes\Generic.Modernizable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <DependentUpon>Generic.xaml</DependentUpon>
+    </Page>
+    <Page Include="Themes\Generic.MuteButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <DependentUpon>Generic.xaml</DependentUpon>
+    </Page>
+    <Page Include="Themes\Generic.NavigationButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <DependentUpon>Generic.xaml</DependentUpon>
+    </Page>
+    <Page Include="Themes\Generic.Quest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <DependentUpon>Generic.xaml</DependentUpon>
+    </Page>
+    <Page Include="Themes\Generic.SlotItemIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <DependentUpon>Generic.xaml</DependentUpon>
     </Page>
     <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\Mukyutter.Light.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -305,10 +363,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Resource Include="Themes\Mukyutter.Dark.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Resource>
     <Page Include="Views\Contents\Dockyard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -420,9 +474,6 @@
     <DesignData Include="SampleData\FleetsViewModelSampleData.xaml" />
     <DesignData Include="SampleData\FleetViewModelSampleData.xaml" />
     <DesignData Include="SampleData\RepairyardViewModelSampleData.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="assemblies\CoreAudioApi.dll" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\app.ico" />

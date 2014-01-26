@@ -6,11 +6,9 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
-			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
-			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
-			 xmlns:common="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
-			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
 			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
+			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 mc:Ignorable="d"
 			 d:DesignWidth="800"
 			 DataContext="{Binding Source={x:Static root:App.ViewModelRoot}, Path=Navigator}">
@@ -49,18 +47,18 @@
 			</i:Interaction.Triggers>
 		</controls:NavigationButton>
 
-		<common:PromptTextBox x:Name="UrlBox"
-							  Grid.Column="2"
-							  Text="{Binding SourceString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-							  Prompt="URL を入力し、Enter キーで移動します。"
-							  VerticalAlignment="Center"
-							  VerticalContentAlignment="Center"
-							  Padding="2,2">
-			<common:PromptTextBox.InputBindings>
+		<metro:PromptTextBox x:Name="UrlBox"
+							 Grid.Column="2"
+							 Text="{Binding SourceString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+							 Prompt="URL を入力し、Enter キーで移動します。"
+							 VerticalAlignment="Center"
+							 VerticalContentAlignment="Center"
+							 Padding="2,2">
+			<metro:PromptTextBox.InputBindings>
 				<KeyBinding Key="Enter"
 							Command="{Binding NavigateCommand}" />
-			</common:PromptTextBox.InputBindings>
-		</common:PromptTextBox>
+			</metro:PromptTextBox.InputBindings>
+		</metro:PromptTextBox>
 
 		<controls:NavigationButton Grid.Column="3"
 								   Direction="Reload"

@@ -13,6 +13,7 @@ using Grabacr07.KanColleViewer.ViewModels;
 using Grabacr07.KanColleViewer.Views;
 using Grabacr07.KanColleWrapper;
 using Livet;
+using MetroRadiance;
 using AppSettings = Grabacr07.KanColleViewer.Properties.Settings;
 using Settings = Grabacr07.KanColleViewer.Model.Settings;
 
@@ -47,7 +48,7 @@ namespace Grabacr07.KanColleViewer
 			KanColleClient.Current.Proxy.UseProxyOnConnect = Settings.Current.EnableProxy;
 			KanColleClient.Current.Proxy.UseProxyOnSSLConnect = Settings.Current.EnableSSLProxy;
 
-			ThemeService.Current.Initialize(this);
+			ThemeService.Current.Initialize(this, Theme.Dark, Accent.Purple);
 
 			ViewModelRoot = new MainWindowViewModel();
 			this.MainWindow = new MainWindow { DataContext = ViewModelRoot };

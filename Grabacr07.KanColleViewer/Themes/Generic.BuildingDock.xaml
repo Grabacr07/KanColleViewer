@@ -1,0 +1,161 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls">
+
+	<Style TargetType="{x:Type controls:BuildingDock}">
+		<Setter Property="Margin"
+				Value="5,0,5,10" />
+		<Setter Property="Padding"
+				Value="5,8" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type controls:BuildingDock}">
+					<Border Background="{TemplateBinding Background}"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}"
+							Padding="{TemplateBinding Padding}">
+						<Grid x:Name="Root">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto"
+												  SharedSizeGroup="Number" />
+								<ColumnDefinition Width="Auto"
+												  SharedSizeGroup="ShipName" />
+								<ColumnDefinition Width="Auto"
+												  SharedSizeGroup="CompleteTime" />
+								<ColumnDefinition Width="Auto"
+												  SharedSizeGroup="RemainingTime" />
+							</Grid.ColumnDefinitions>
+
+							<TextBlock Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:BuildingDock}}, Path=Number, Mode=OneWay}"
+									   FontFamily="Segoe UI"
+									   FontSize="28"
+									   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+									   VerticalAlignment="Center"
+									   HorizontalAlignment="Center"
+									   Margin="10,0" />
+							<TextBlock x:Name="ShipName"
+									   Grid.Column="1"
+									   VerticalAlignment="Center"
+									   Margin="10,0">
+								<Run Text="建造中の艦"
+									 FontSize="14" />
+								<LineBreak />
+								<Run Text="{TemplateBinding ShipName}"
+									 FontSize="20"
+									 Style="{DynamicResource PickupTextElementStyleKey}" />
+							</TextBlock>
+							<TextBlock x:Name="CompleteTime"
+									   Grid.Column="2"
+									   VerticalAlignment="Center"
+									   Margin="10,0">
+								<Run Text="完成時刻"
+									 FontSize="14" />
+								<LineBreak />
+								<Run Text="{TemplateBinding CompleteTime}"
+									 FontSize="20"
+									 Style="{DynamicResource PickupTextElementStyleKey}" />
+							</TextBlock>
+							<TextBlock x:Name="RemainingTime"
+									   Grid.Column="3"
+									   VerticalAlignment="Center"
+									   Margin="10,0">
+								<Run Text="建造完了まで"
+									 FontSize="14" />
+								<LineBreak />
+								<Run Text="{TemplateBinding RemainingTime}"
+									 FontSize="20"
+									 Style="{DynamicResource PickupTextElementStyleKey}" />
+							</TextBlock>
+
+							<TextBlock x:Name="UnlockedMessage"
+									   Grid.Column="1"
+									   Grid.ColumnSpan="3"
+									   HorizontalAlignment="Center"
+									   VerticalAlignment="Center"
+									   Margin="30,0"
+									   Visibility="Collapsed">
+								<Run Text="未使用"
+									 FontSize="20" />
+							</TextBlock>
+							<TextBlock x:Name="LockedMessage"
+									   Grid.Column="1"
+									   Grid.ColumnSpan="3"
+									   HorizontalAlignment="Center"
+									   VerticalAlignment="Center"
+									   Margin="30,0"
+									   Visibility="Collapsed">
+								<Run Text="ロックされています"
+									 FontSize="20" />
+							</TextBlock>
+							<TextBlock x:Name="CompletedMessage"
+									   Grid.Column="2"
+									   Grid.ColumnSpan="2"
+									   HorizontalAlignment="Center"
+									   VerticalAlignment="Center"
+									   Margin="30,0"
+									   Visibility="Collapsed">
+								<Run Text="完成！"
+									 FontSize="20"
+									 Style="{DynamicResource PickupTextElementStyleKey}" />
+							</TextBlock>
+						</Grid>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsDisplayShipName"
+								 Value="False">
+							<Setter TargetName="ShipName"
+									Property="Visibility"
+									Value="Collapsed" />
+						</Trigger>
+						<Trigger Property="State"
+								 Value="Locked">
+							<Setter TargetName="Root"
+									Property="Opacity"
+									Value="0.5" />
+							<Setter TargetName="ShipName"
+									Property="Visibility"
+									Value="Collapsed" />
+							<Setter TargetName="CompleteTime"
+									Property="Visibility"
+									Value="Collapsed" />
+							<Setter TargetName="RemainingTime"
+									Property="Visibility"
+									Value="Collapsed" />
+							<Setter TargetName="LockedMessage"
+									Property="Visibility"
+									Value="Visible" />
+						</Trigger>
+						<Trigger Property="State"
+								 Value="Unlocked">
+							<Setter TargetName="ShipName"
+									Property="Visibility"
+									Value="Collapsed" />
+							<Setter TargetName="CompleteTime"
+									Property="Visibility"
+									Value="Collapsed" />
+							<Setter TargetName="RemainingTime"
+									Property="Visibility"
+									Value="Collapsed" />
+							<Setter TargetName="UnlockedMessage"
+									Property="Visibility"
+									Value="Visible" />
+						</Trigger>
+						<Trigger Property="State"
+								 Value="Completed">
+							<Setter TargetName="CompleteTime"
+									Property="Visibility"
+									Value="Collapsed" />
+							<Setter TargetName="RemainingTime"
+									Property="Visibility"
+									Value="Collapsed" />
+							<Setter TargetName="CompletedMessage"
+									Property="Visibility"
+									Value="Visible" />
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+</ResourceDictionary>

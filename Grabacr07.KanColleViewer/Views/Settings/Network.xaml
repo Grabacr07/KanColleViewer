@@ -3,6 +3,7 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:controls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
@@ -41,20 +42,20 @@
 				</Grid.ColumnDefinitions>
 
 				<TextBlock Grid.Column="0">
-							<Run Text="{Binding Source={x:Static properties:Resources.Settings_Proxy_Host}, Mode=OneWay}" />
-							<Run Text=": " />
+					<Run Text="{Binding Source={x:Static properties:Resources.Settings_Proxy_Host}, Mode=OneWay}" />
+					<Run Text=": " />
 				</TextBlock>
-				<controls:PromptTextBox Grid.Column="1"
-										Text="{Binding ProxyHost}"
-										Prompt="{Binding Source={x:Static properties:Resources.Settings_Proxy_Host}, Mode=OneWay}" />
+				<metro:PromptTextBox Grid.Column="1"
+									 Text="{Binding ProxyHost}"
+									 Prompt="{Binding Source={x:Static properties:Resources.Settings_Proxy_Host}, Mode=OneWay}" />
 				<TextBlock Grid.Column="3">
-							<Run Text="{Binding Source={x:Static properties:Resources.Settings_Proxy_Port}, Mode=OneWay}" />
-							<Run Text=": " />
+					<Run Text="{Binding Source={x:Static properties:Resources.Settings_Proxy_Port}, Mode=OneWay}" />
+					<Run Text=": " />
 				</TextBlock>
-				<controls:PromptTextBox Grid.Column="4"
-										Text="{Binding ProxyPort}"
-										Prompt="{Binding Source={x:Static properties:Resources.Settings_Proxy_Port}, Mode=OneWay}"
-										Width="80" />
+				<metro:PromptTextBox Grid.Column="4"
+									 Text="{Binding ProxyPort}"
+									 Prompt="{Binding Source={x:Static properties:Resources.Settings_Proxy_Port}, Mode=OneWay}"
+									 Width="80" />
 			</Grid>
 			<CheckBox Content="{Binding Source={x:Static properties:Resources.Settings_Proxy_Enable_4_SSL}}"
 					  IsChecked="{Binding UseProxyForSSL}"

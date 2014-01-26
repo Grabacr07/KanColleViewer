@@ -14,6 +14,7 @@ using Grabacr07.KanColleWrapper;
 using Livet;
 using Livet.EventListeners;
 using Livet.Messaging.Windows;
+using MetroRadiance;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {
@@ -37,16 +38,16 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					case Mode.NotStarted:
 						this.Content = NotStartedViewModel.Instance;
 						StatusService.Current.Set(Properties.Resources.StatusBar_NotStarted);
-						ThemeService.Current.Accent = Accent.Purple;
+						ThemeService.Current.ChangeAccent(Accent.Purple);
 						break;
 					case Mode.Started:
 						this.Content = this.mainContent ?? (this.mainContent = new MainContentViewModel());
 						StatusService.Current.Set(Properties.Resources.StatusBar_Ready);
-						ThemeService.Current.Accent = Accent.Blue;
+						ThemeService.Current.ChangeAccent(Accent.Blue);
 						break;
 					case Mode.InSortie:
 						// 今後の実装にご期待ください
-						ThemeService.Current.Accent = Accent.Orange;
+						ThemeService.Current.ChangeAccent(Accent.Orange);
 						break;
 				}
 

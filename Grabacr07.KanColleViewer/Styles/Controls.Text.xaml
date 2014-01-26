@@ -1,0 +1,30 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<Style TargetType="{x:Type TextBlock}">
+		<Setter Property="FontSize"
+				Value="12" />
+		<Setter Property="Foreground"
+				Value="{DynamicResource ForegroundBrushKey}" />
+		<Setter Property="TextTrimming"
+				Value="WordEllipsis" />
+		<Setter Property="VerticalAlignment"
+				Value="Center" />
+		<Style.Triggers>
+			<Trigger Property="IsEnabled"
+					 Value="False">
+				<Setter Property="Opacity"
+						Value="0.75" />
+			</Trigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style x:Key="PickupTextElementStyleKey"
+		   TargetType="{x:Type Run}">
+		<Setter Property="FontSize"
+				Value="15" />
+		<Setter Property="Foreground"
+				Value="{DynamicResource ActiveForegroundBrushKey}" />
+	</Style>
+
+</ResourceDictionary>

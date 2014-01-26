@@ -8,6 +8,7 @@ using System.Windows.Interactivity;
 using System.Windows.Navigation;
 using Grabacr07.Desktop.Metro;
 using Grabacr07.KanColleViewer.Properties;
+using MetroRadiance.Core;
 using mshtml;
 
 namespace Grabacr07.KanColleViewer.Views.Behaviors

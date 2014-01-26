@@ -74,38 +74,14 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Behaviors\InactiveOpacityBehavior.cs" />
-    <Compile Include="Chrome\CaptionButtonMode.cs" />
-    <Compile Include="Controls\Badge.cs" />
-    <Compile Include="Controls\BindableRichTextBox.cs" />
-    <Compile Include="Controls\BindableTextBlock.cs" />
     <Compile Include="Controls\CallMethodButton.cs" />
-    <Compile Include="Controls\ExpanderButton.cs" />
     <Compile Include="Controls\HyperlinkEx.cs" />
-    <Compile Include="Controls\ITabItem.cs" />
-    <Compile Include="Controls\LinkButton.cs" />
-    <Compile Include="Controls\PromptComboBox.cs" />
-    <Compile Include="Controls\PromptTextBox.cs" />
     <Compile Include="Controls\SortButton.cs" />
     <Compile Include="Controls\SortDirection.cs" />
-    <Compile Include="Controls\Spinner.cs" />
-    <Compile Include="Controls\TabView.cs" />
+    <Compile Include="Controls\TabHeader.cs" />
+    <Compile Include="Converters\EnumToBooleanConverter.cs" />
     <Compile Include="Converters\StringToVisiblityConverter.cs" />
     <Compile Include="Converters\UniversalBooleanToVisibilityConverter.cs" />
-    <Compile Include="Dpi.cs" />
-    <Compile Include="MonitorDpiType.cs" />
-    <Compile Include="PerMonitorDpiService.cs" />
-    <Compile Include="Win32\ClassLongFlags.cs" />
-    <Compile Include="Win32\ClassStyles.cs" />
-    <Compile Include="Win32\GWL.cs" />
-    <Compile Include="Win32\HitTestValues.cs" />
-    <Compile Include="Win32\MonitorDefaultTo.cs" />
-    <Compile Include="Win32\NativeExtensions.cs" />
-    <Compile Include="Win32\NativeMethods.cs" />
-    <Compile Include="Win32\SWP.cs" />
-    <Compile Include="Win32\WM.cs" />
-    <Compile Include="Win32\WS.cs" />
-    <Compile Include="Win32\WSEX.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -119,20 +95,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Behaviors\DirectWindowAction.cs" />
-    <Compile Include="Chrome\CaptionButton.cs" />
-    <Compile Include="Chrome\GlowWindow.cs" />
-    <Compile Include="Chrome\GlowWindowProcessor.cs" />
-    <Compile Include="Chrome\GlowWindowProcessorBottom.cs" />
-    <Compile Include="Chrome\GlowWindowProcessorLeft.cs" />
-    <Compile Include="Chrome\GlowWindowProcessorRight.cs" />
-    <Compile Include="Chrome\GlowWindowProcessorTop.cs" />
-    <Compile Include="Chrome\MetroWindow.cs" />
-    <Compile Include="Chrome\GlowMetroWindow.cs" />
-    <Compile Include="Chrome\ResizeGrip.cs" />
-    <Compile Include="Chrome\WindowAction.cs" />
-    <Compile Include="Converters\WindowStateToVisibilityConverter.cs" />
-    <Compile Include="Extensions.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -145,16 +107,24 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Themes\Generic.CallMethodButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <DependentUpon>Generic.xaml</DependentUpon>
+    </Page>
+    <Page Include="Themes\Generic.SortButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <DependentUpon>Generic.xaml</DependentUpon>
+    </Page>
+    <Page Include="Themes\Generic.TabHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="assemblies\Portable.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="assemblies\Portable.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

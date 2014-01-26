@@ -1,0 +1,404 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+					xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls">
+
+	<Style TargetType="{x:Type controls:SlotItemIcon}">
+		<Setter Property="Width"
+				Value="26" />
+		<Setter Property="Height"
+				Value="26" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+					<Path Stretch="Uniform"
+						  Data="M27.773438,67.182709 L39.9375,67.182709 L39.9375,76.323334 L27.773438,76.323334 z M35.4375,22.288177 C41.0625,22.288181 45.521484,23.547947 48.814453,26.067474 C52.107418,28.587006 53.753902,31.944427 53.753906,36.13974 C53.753902,40.006927 52.681637,43.329193 50.537109,46.106537 C48.392578,48.883881 44.566406,51.51474 39.058594,53.999115 L39.058594,61.73349 L28.476563,61.73349 L28.476563,50.448334 C33.492188,48.643646 36.990234,46.756927 38.970703,44.788177 C40.951172,42.819427 41.941406,40.569427 41.941406,38.038177 C41.941406,33.32724 38.917969,30.971771 32.871094,30.971771 C29.003904,30.971771 25.007811,32.260834 20.882813,34.838959 L19.792969,34.838959 L19.792969,25.206146 C25.183592,23.260838 30.398436,22.288181 35.4375,22.288177 z"
+						  Fill="{DynamicResource InactiveForegroundBrushKey}"
+						  Margin="3" />
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Style.Triggers>
+			<Trigger Property="Type"
+					 Value="MainCanonLight">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Path Stretch="Uniform"
+								  Data="M99.25,53.75 L72.75,68.5 75.75,74.5 58.5,84.75 61,88.25 77.75,78.75 80,81.25 65.25,91.5 68.25,94 83.5,84.75 94.5,93 115,79.5 118,64.25 z"
+								  Fill="#FFD15B5B" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="MainCanonMedium">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Path Stretch="Uniform"
+								  Data="M343,264 L305,296 305,321 240,367 238,429 156,494 167,504 257,442 269,453 187,515 200,526 286,468 309,483 357,479 443,401 440,383 471,353 404,291 379,293 z"
+								  Fill="#FFCC3D3D" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="MainCanonHeavy">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Path Stretch="Uniform"
+								  Data="M588,341 L636,398 720,418 802,471 811,453 736,406 747,393 821,441 830,429 759,383 769,371 843,414 852,401 777,353 749,334 750,319 711,284 722,270 688,234 671,239 667.81112,248.02099 646,248 595,281 596,295&#xD;&#xA;557,320 570,350 z"
+								  Fill="#FFC22222" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="HighAngleGun">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Path Stretch="Uniform"
+								  Data="M336,484 L476,491 481,479 498,478 519,460 518,413 493,379 467,381 464,368 418,364 C418,364 400,305 397,305 394,305 355,306 355,306 L383,378 336,412 z"
+								  Fill="#FF66CC77"
+								  Margin="3" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="SecondaryCanon">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Path Stretch="Uniform"
+								  Data="M526,421 L507,399 425,394 384,423 301,372 290,392 375,440 370,473 415,512 480,517 511,492 z"
+								  Fill="#FFFFEA00" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="Torpedo">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Path Stretch="Uniform"
+								  Data="M325,381 L376,381 387,359 408,362 420,379 419,415 387,430 391,448 376,465 351,465 349,451 333,450 293,478 277,478 269,456 250,457 247,427 257,427 258,387 284,388 291,372 311,371 z"
+								  Fill="#FF5887AB" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="Fighter">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Data="M699,293 L652,300 620,314 581,288 551,285 548,299 578,319 578,335 570,336 556,315 548,319 560,336 556,354 569,362 580,391 589,386 579,364 600,364 613,350 648,379 672,391 681,371 662,348 727,316&#xD;&#xA;737,304 751,307 761,317 783,312 755,291 764,258 746,252 735,284 711,275 699,277 z"
+										  Fill="#FF39B74E"
+										  HorizontalAlignment="Left"
+										  Height="139"
+										  Stretch="Uniform"
+										  VerticalAlignment="Top"
+										  Width="235" />
+									<ed:RegularPolygon PointCount="6"
+													   InnerRadius="1"
+													   Stretch="Fill"
+													   Stroke="Black"
+													   StrokeThickness="2"
+													   Fill="#FF39B74E"
+													   Width="126"
+													   Height="146"
+													   HorizontalAlignment="Left"
+													   VerticalAlignment="Top"
+													   Margin="91.033,50.606,0,0" />
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="TorpedoBomber">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Data="M699,293 L652,300 620,314 581,288 551,285 548,299 578,319 578,335 570,336 556,315 548,319 560,336 556,354 569,362 580,391 589,386 579,364 600,364 613,350 648,379 672,391 681,371 662,348 727,316&#xD;&#xA;737,304 751,307 761,317 783,312 755,291 764,258 746,252 735,284 711,275 699,277 z"
+										  Fill="#FF39B74E"
+										  HorizontalAlignment="Left"
+										  Height="139"
+										  Stretch="Uniform"
+										  VerticalAlignment="Top"
+										  Width="235" />
+									<ed:RegularPolygon PointCount="6"
+													   InnerRadius="1"
+													   Stretch="Fill"
+													   Stroke="Black"
+													   StrokeThickness="2"
+													   Fill="#FF62B5F5"
+													   Width="126"
+													   Height="146"
+													   HorizontalAlignment="Left"
+													   VerticalAlignment="Top"
+													   Margin="91.033,50.606,0,0" />
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="DiveBomber">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Data="M699,293 L652,300 620,314 581,288 551,285 548,299 578,319 578,335 570,336 556,315 548,319 560,336 556,354 569,362 580,391 589,386 579,364 600,364 613,350 648,379 672,391 681,371 662,348 727,316&#xD;&#xA;737,304 751,307 761,317 783,312 755,291 764,258 746,252 735,284 711,275 699,277 z"
+										  Fill="#FF39B74E"
+										  HorizontalAlignment="Left"
+										  Height="139"
+										  Stretch="Uniform"
+										  VerticalAlignment="Top"
+										  Width="235" />
+									<ed:RegularPolygon PointCount="6"
+													   InnerRadius="1"
+													   Stretch="Fill"
+													   Stroke="Black"
+													   StrokeThickness="2"
+													   Fill="#FFEE6B6B"
+													   Width="126"
+													   Height="146"
+													   HorizontalAlignment="Left"
+													   VerticalAlignment="Top"
+													   Margin="91.033,50.606,0,0" />
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="ReconPlane">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Data="M699,293 L652,300 620,314 581,288 551,285 548,299 578,319 578,335 570,336 556,315 548,319 560,336 556,354 569,362 580,391 589,386 579,364 600,364 613,350 648,379 672,391 681,371 662,348 727,316&#xD;&#xA;737,304 751,307 761,317 783,312 755,291 764,258 746,252 735,284 711,275 699,277 z"
+										  Fill="#FF39B74E"
+										  HorizontalAlignment="Left"
+										  Height="139"
+										  Stretch="Uniform"
+										  VerticalAlignment="Top"
+										  Width="235" />
+									<ed:RegularPolygon PointCount="6"
+													   InnerRadius="1"
+													   Stretch="Fill"
+													   Stroke="Black"
+													   StrokeThickness="2"
+													   Fill="#FFFDC313"
+													   Width="126"
+													   Height="146"
+													   HorizontalAlignment="Left"
+													   VerticalAlignment="Top"
+													   Margin="91.033,50.606,0,0" />
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="ReconSeaplane">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Path Stretch="Uniform"
+								  Data="M527,367 L570.5,358.5 598.5,366.5 628.5,360.5 628.5,342.5 646.5,328.5 650.5,358.5 674.5,375.5 663.5,386.5 637.5,376.5 592.5,389.5 691.5,437.5 684.5,456.5 624.5,430.5 C577.41145,453.12769 531.42243,465.35719 486.5,467.5 L487.12055,449.64236 C524.65829,444.13561 563.32124,431.03936 588.08498,422.61458 L566.5,412.5 C546.20053,428.36347 518.47025,436.27185 484.5,437.5 L443.5,416.5 500.5,412.5 474.5,391.5 493.5,374.5 493.5,366.5 478.5,361.5 495.5,350.5 z"
+								  Fill="#FF96FAA0" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="Rader">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid Width="250"
+									  Height="250"
+									  Margin="10">
+									<ed:Arc ArcThickness="20"
+											ArcThicknessUnit="Pixel"
+											EndAngle="360"
+											Fill="#FFE7A044"
+											Stretch="None"
+											StartAngle="0" />
+									<Path Data="M377,362 L428,363 455,300 465,327 494,264 514,381 544,327 548,363 568,364"
+										  Height="120"
+										  Stretch="Fill"
+										  Stroke="#FFE7A044"
+										  StrokeThickness="20"
+										  VerticalAlignment="Center"
+										  Margin="0,0,0,20" />
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="EngineImprovement">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Path Stretch="Uniform"
+								  Data="M161.17936,82.5 C116.99657,82.5 81.179356,118.31722 81.179352,162.5 81.179356,206.68279 116.99657,242.5 161.17936,242.5 205.36214,242.5 241.17936,206.68277 241.17936,162.5 241.17936,118.31721 205.36214,82.5 161.17936,82.5 z M153.06824,0 L175.29047,0 181.08063,39.083595 183.30643,39.452364 C185.13398,39.778808 186.94774,40.14497 188.74685,40.549926 L190.52224,40.970342 216.40705,5.7890644 236.04319,16.193331 222.76596,53.707785 224.0521,54.439255 C227.53556,56.470409 230.91191,58.665178 234.17063,61.013031 L235.10048,61.705854 267.1363,37.249794 283.06359,52.746519 259.54256,85.373585 260.03827,85.992523 C261.06246,87.313999 262.06075,88.656567 263.03235,90.019466 L265.20124,93.194607 306.33463,81.558884 315.45182,101.82472 280.25426,124.37691 280.83977,126.24195 C281.70792,129.11089 282.47571,132.0234 283.13909,134.97543 L283.78171,138.10171 324.00397,143.42633 324.34757,165.64589 285.82027,171.96394 285.75202,172.91042 C285.48668,176.12856 285.09946,179.31213 284.59494,182.45653 L284.38776,183.60677 319.16257,203.72852 310.97193,224.38622 274.26633,215.77631 273.20775,218.01183 C272.73728,218.95947 272.25512,219.90031 271.76149,220.83415 L270.54688,223.06294 298.34577,254.15102 284.13005,271.23143 249.99846,250.44397 249.35517,251.10037 C247.59259,252.85455 245.77797,254.5565 243.91382,256.20367 L241.49237,258.28011 257.44327,295.12628 238.56392,306.84796 212.76699,276.38828 212.55213,276.48921 C207.95928,278.56236 203.21869,280.36609 198.35053,281.88025 L197.83329,282.0341 200.98079,317.5813 179.3714,322.76407 165.15743,287.4306 164.40566,287.45918 C163.33353,287.48634 162.25804,287.5 161.17936,287.5 158.8929,287.5 156.62078,287.43861 154.36457,287.3174 L152.39848,287.18533 139.34298,320.71942 117.67687,315.77908 120.38856,280.68192 118.83883,280.1469 C115.78751,279.04857 112.79123,277.8349 109.85527,276.51117 L108.8506,276.04422 86.00885,303.39078 67.049959,291.79823 81.176231,258.5463 81.062046,258.453 C79.615761,257.24411 78.197224,256.00313 76.807529,254.73116 L75.055401,253.07146 47.019424,272.68716 31.749124,256.54265 54.477091,227.62634 52.640606,224.54572 C51.204095,222.03818 49.851976,219.4761 48.588122,216.86337 L48.088152,215.7989 12.916401,224.96114 4.2234917,204.50972 37.99761,183.84941 37.560954,181.14813 C37.270529,179.2065 37.024756,177.25027 36.82472,175.28052 L36.565223,172.35826 0.36689377,167.6049 0,145.3857 38.381116,139.05035 38.681811,137.49014 C39.666405,132.64166 40.931637,127.8951 42.459806,123.26817 L42.790283,122.30401 11.323431,101.05779 20.92533,81.017067 57.693169,92.379654 58.379978,91.365559 C60.972229,87.62645 63.763235,84.035583 66.737707,80.608238 L67.434011,79.832169 44.287209,47.763164 60.205572,32.25726 93.333931,57.517181 95.03886,56.412115 C97.395252,54.939919 99.804226,53.544048 102.26233,52.227969 L102.72861,51.984987 92.385658,11.080109 112.8989,2.5341225 135.53485,40.141278 136.70342,39.895241 C139.52228,39.33565 142.37527,38.870843 145.25893,38.504283 L147.40017,38.259517 z"
+								  Fill="#FFFAC04B" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="AAShell">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Path Stretch="Uniform"
+								  Data="M12.5,94.499999 C19.127419,94.499999 24.5,99.872581 24.5,106.5 24.5,113.12742 19.127417,118.5 12.5,118.5 5.8725815,118.5 0.5,113.12742 0.5,106.5 0.5,99.872581 5.8725834,94.499999 12.5,94.499999 z M26.433056,15.500003 L56.232243,17.486589 89.011345,33.379268 164.50262,104.89632 C168.47585,133.7018 140.66345,170.45363 111.85739,162.50729 L31.399589,87.017058 16.499993,52.251822 16.499993,23.446342 z M109.855,0.5 C116.48242,0.49999905 121.855,5.8725815 121.855,12.499998 121.855,19.127416 116.48242,24.499999 109.855,24.499998 103.22758,24.499999 97.855003,19.127416 97.855003,12.499998 97.855003,5.8725815 103.22758,0.49999905 109.855,0.5 z M74.855,0.5 C78.720993,0.49999905 81.854996,3.6340055 81.854996,7.5 81.854996,11.365993 78.720993,14.499999 74.855,14.499998 70.989006,14.499999 67.855,11.365993 67.855,7.5 67.855,3.6340055 70.989006,0.49999905 74.855,0.5 z"
+								  Fill="#FF79C181"
+								  StrokeThickness="1"
+								  Stroke="Black" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="APShell">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Path Stretch="Uniform"
+								  Data="M120.07708,99.499985 L124.167,104.97839 C114.91628,119.77269 102.50251,129.81078 84.333672,136.333 L80.000019,131.33304 C95.904018,122.60918 108.51467,113.43003 120.07708,99.499985 z M107.33399,85.667007 L116.00003,95.000103 C108.40511,107.28752 94.890766,118.13739 76.000065,127.99999 L67.000002,116.33333 C80.57048,111.17476 94.236183,99.815147 107.33399,85.667007 z M76.000172,51.999988 L103.66501,81.330999 C94.39233,95.02079 82.006401,105.0639 63.665117,111.99699 L42.000008,81.999998 C60.11021,74.942457 70.022787,65.66259 76.000172,51.999988 z M0,0 L32.666843,8.6666641 31.333671,21.999998 46.666775,25.666662 70.999989,47.333329 C65.68775,61.221688 54.628798,71.181351 37.999653,77.332994 L15.666666,49.333537 16.333336,31.667002 3.6666718,29.99999 z"
+								  Fill="#FFD15B5B" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="AAGun">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Path Stretch="Uniform"
+								  Data="M834,314.33333 L824.66667,324.33368 811.33257,397.00312 735.33151,399.00318 714.66483,373.66899 712.66449,341.00123 721.99768,327.66746 737.33133,334.33435 739.99806,325.66739 733.99793,322.33394 738.66469,316.33374 680.66349,274.99903 699.33027,267.66544 765.33177,312.33338 779.99877,308.33324 784.66554,295.66611 817.99964,295.66611 z"
+								  Fill="#FF66CC77" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="DamageControl">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Path Stretch="Uniform"
+								  Data="M553,463 L584,442 641,512 652,504 607,428 651,382 643,370 584,392 533,433 z"
+								  Fill="White"
+								  StrokeThickness="1"
+								  Stroke="Black" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="ASW">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Path Stretch="Uniform"
+								  Data="M59.604974,142.983 C64.851682,142.983 69.104978,147.23629 69.104978,152.483 69.104978,157.7297 64.851682,161.983 59.604974,161.983 54.35827,161.983 50.104974,157.7297 50.104974,152.483 50.104974,147.23629 54.35827,142.983 59.604974,142.983 z M113.44697,132.983 C121.45511,132.983 127.94697,139.47487 127.94697,147.483 127.94697,155.49113 121.45511,161.983 113.44697,161.983 105.43885,161.983 98.946974,155.49113 98.946974,147.483 98.946974,139.47487 105.43885,132.983 113.44697,132.983 z M157.95797,106.983 C165.9661,106.983 172.45797,113.47487 172.45797,121.483 172.45797,129.49113 165.9661,135.983 157.95797,135.983 149.94985,135.983 143.45797,129.49113 143.45797,121.483 143.45797,113.47487 149.94985,106.983 157.95797,106.983 z M169.95797,68.982998 C175.20469,68.983 179.45797,73.236294 179.45797,78.483002 179.45797,83.729706 175.20469,87.983002 169.95797,87.983002 164.71126,87.983002 160.45797,83.729706 160.45797,78.483002 160.45797,73.236294 164.71126,68.983 169.95797,68.982998 z M113.89787,0.50000381 C154.79064,0.51414108 164.1968,45.02995 141.44636,70.404039 L78.354284,124.48321 78.059576,124.78241 C76.34213,126.48811 74.478323,128.11414 72.465543,129.64591 L71.447881,130.40302 71.446729,130.404 70.159361,131.03953 C15.734297,157.07981 -29.127312,73.173737 24.9466,43.903094 L24.950994,43.901715 94.446607,3.4040833 C101.57165,1.4041595 108.05605,0.49798203 113.89787,0.50000381 z"
+								  Fill="#FF7ECCD8"
+								  StrokeThickness="1"
+								  Stroke="Black" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="Soner">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid Width="250"
+									  Height="250"
+									  Margin="10">
+									<ed:Arc ArcThickness="20"
+											ArcThicknessUnit="Pixel"
+											EndAngle="360"
+											Fill="#FF66B1BB"
+											Stretch="None"
+											StartAngle="0" />
+									<Path Data="M377,362 L428,363 455,300 465,327 494,264 514,381 544,327 548,363 568,364"
+										  Height="120"
+										  Stretch="Fill"
+										  Stroke="#FF66B1BB"
+										  StrokeThickness="20"
+										  VerticalAlignment="Center"
+										  Margin="0,0,0,20" />
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="LandingCraft">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Path Stretch="Uniform"
+								  Data="M315.33333,315.66667 C314.33333,315.66667 283.00034,314.99966 283.00034,314.99966 267.1645,311.93616 256.15676,308.2415 249.33366,303.99979 L267.00052,342.33202 350.66684,342.66569 357.66645,337.66549 357.99944,328.33242 352.99951,327.9991 352.99951,318.33271 358.33278,313.33285 357.33314,307.33302 C351.62269,311.69489 344.41764,314.3931 335.33331,314.99947 L334.99998,294.66672 315.33347,294.66672 z"
+								  Fill="#FF9AA55D" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="Autogyro">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Path Stretch="Uniform"
+								  Data="M1108,511.5 L1086.25,491 1078.5,492 1104,517.25001 1081.25,531.00001 1083.75,535 1106,521.5 1106.25,529.00001 1083.25,540 1072.5,539.75 1072.25,547 1083.5,546.75 1084.75,550.75 1090,547.25 1095.75,548 1096,553.5 1092.5,558.5 1093.75,563.75 C1093.75,563.75 1100,565.25 1100,564.5 1100,563.75 1099.75,558.25002 1099.75,558.25002 L1103.75,548.00002 1112.25,548.50002 1117,548.25002 1118.25,548.00002 1126.75,562.00002 1132,560.25002 1127,553.00002 1127.25,545.25002 1128.75,540.00001 1139.75,540.25001 1141.5,533.50001 1125.25,533.50001 1123.25,529.25001 1111.75,529.00001 1111.25,520.50001 1149,523.75001 1150,517.75001 1111.25,515.00001 z"
+								  Fill="#FF6DC267" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="ArtillerySpotter">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Path Stretch="Uniform"
+								  Data="M977,411.983 L978.5,415.983 998.5,428 1005.5,427 1009,422.5 982.5,406 991.5,404 993,399.5 1004.5,405 1011,403 1002.5,397 1002,383.5 995,390.5 987,388.5 984,393.5 988,397 975.5,401.5 944.5,381.5 933.5,385.5 958.5,403 958.5,406.5 948.5,409 945,407.983 955,421.5&#xD;&#xA;956,417.483 958,418 964.5,415.5 969,427.5 972,428 969.5,415 z"
+								  Fill="#FF94C4F0" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+		</Style.Triggers>
+	</Style>
+	
+</ResourceDictionary>

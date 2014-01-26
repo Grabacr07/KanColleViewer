@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MetroRadiance.Chrome</name>
+    </assembly>
+    <members>
+        <member name="T:MetroRadiance.Chrome.Internal.GlowWindow">
+            <summary>
+            ウィンドウの四辺にアタッチされる発光ウィンドウを表します。
+            </summary>
+        </member>
+        <member name="T:MetroRadiance.Chrome.Internal.GlowWindowProcessor">
+            <summary>
+            <see cref="T:MetroRadiance.Chrome.Internal.GlowWindow"/> の各種座標を計算します。
+            </summary>
+        </member>
+        <member name="M:MetroRadiance.Chrome.Internal.GlowWindowProcessor.GetLeft(System.Double,System.Double)">
+            <summary>
+            派生クラスでオーバーライドされると、<see cref="T:MetroRadiance.Chrome.Internal.GlowWindow"/>
+            の左端座標を取得します。
+            </summary>
+            <param name="ownerLeft">アタッチ先ウィンドウの左端座標。</param>
+            <param name="ownerWidth">アタッチ先ウィンドウの現在の横幅。</param>
+        </member>
+        <member name="M:MetroRadiance.Chrome.Internal.GlowWindowProcessor.GetTop(System.Double,System.Double)">
+            <summary>
+            派生クラスでオーバーライドされると、<see cref="T:MetroRadiance.Chrome.Internal.GlowWindow"/>
+            の上端座標を取得します。
+            </summary>
+            <param name="ownerTop">アタッチ先ウィンドウの上端座標。</param>
+            <param name="ownerHeight">アタッチ先ウィンドウの現在の縦幅。</param>
+        </member>
+        <member name="M:MetroRadiance.Chrome.Internal.GlowWindowProcessor.GetWidth(System.Double,System.Double)">
+            <summary>
+            派生クラスでオーバーライドされると、<see cref="T:MetroRadiance.Chrome.Internal.GlowWindow"/>
+            の横幅を取得します。
+            </summary>
+            <param name="ownerLeft">アタッチ先ウィンドウの左端座標。</param>
+            <param name="ownerWidth">アタッチ先ウィンドウの現在の横幅。</param>
+        </member>
+        <member name="M:MetroRadiance.Chrome.Internal.GlowWindowProcessor.GetHeight(System.Double,System.Double)">
+            <summary>
+            派生クラスでオーバーライドされると、<see cref="T:MetroRadiance.Chrome.Internal.GlowWindow"/>
+            の縦幅を取得します。
+            </summary>
+            <param name="ownerTop">アタッチ先ウィンドウの上端座標。</param>
+            <param name="ownerHeight">アタッチ先ウィンドウの現在の縦幅。</param>
+        </member>
+        <member name="M:MetroRadiance.Chrome.Internal.GlowWindowProcessor.GetHitTestValue(System.Windows.Point,System.Double,System.Double)">
+            <summary>
+            派生クラスでオーバーライドされると、<paramref name="point"/> 座標でのヒットテスト結果を返します。
+            </summary>
+            <param name="point">ウィンドウ メッセージで受け取ったマウス座標。</param>
+            <param name="actualWidht">発光ウィンドウの現在の幅。</param>
+            <param name="actualHeight">発光ウィンドウの現在の高さ。</param>
+            <returns>ヒットテスト結果。</returns>
+        </member>
+        <member name="M:MetroRadiance.Chrome.Internal.GlowWindowProcessor.GetCursor(System.Windows.Point,System.Double,System.Double)">
+            <summary>
+            派生クラスでオーバーライドされると、<paramref name="point"/> 座標でのカーソルを返します。
+            </summary>
+            <param name="point">ウィンドウ メッセージで受け取ったマウス座標。</param>
+            <param name="actualWidht">発光ウィンドウの現在の幅。</param>
+            <param name="actualHeight">発光ウィンドウの現在の高さ。</param>
+            <returns>マウスカーソル。</returns>
+        </member>
+        <member name="P:MetroRadiance.Chrome.Internal.GlowWindowProcessor.GlowSize">
+            <summary>
+            ウィンドウの発光サイズを取得します。
+            </summary>
+        </member>
+        <member name="P:MetroRadiance.Chrome.Internal.GlowWindowProcessor.EdgeSize">
+            <summary>
+            ウィンドウの発光効果のエッジサイズを取得します。
+            </summary>
+        </member>
+        <member name="P:MetroRadiance.Chrome.Internal.GlowWindowProcessor.HorizontalAlignment">
+            <summary>
+            派生クラスでオーバーライドされると、<see cref="T:MetroRadiance.Chrome.Internal.GlowWindow"/>
+            に設定する <see cref="P:System.Windows.Controls.Control.HorizontalContentAlignment"/> プロパティの値を取得します。
+            </summary>
+        </member>
+        <member name="P:MetroRadiance.Chrome.Internal.GlowWindowProcessor.VerticalAlignment">
+            <summary>
+            派生クラスでオーバーライドされると、<see cref="T:MetroRadiance.Chrome.Internal.GlowWindow"/>
+            に設定する <see cref="P:System.Windows.Controls.Control.VerticalContentAlignment"/> プロパティの値を取得します。
+            </summary>
+        </member>
+        <member name="T:MetroRadiance.Chrome.Properties.Resources">
+            <summary>
+              ローカライズされた文字列などを検索するための、厳密に型指定されたリソース クラスです。
+            </summary>
+        </member>
+        <member name="P:MetroRadiance.Chrome.Properties.Resources.ResourceManager">
+            <summary>
+              このクラスに使用される、キャッシュされた ResourceManager のインスタンスを返します。
+            </summary>
+        </member>
+        <member name="P:MetroRadiance.Chrome.Properties.Resources.Culture">
+            <summary>
+              厳密に型指定されたこのリソース クラスを使用して、すべての検索リソースに対し、
+              現在のスレッドの CurrentUICulture プロパティをオーバーライドします。
+            </summary>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
+            </summary>
+        </member>
+    </members>
+</doc>

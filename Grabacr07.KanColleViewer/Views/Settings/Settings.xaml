@@ -6,8 +6,9 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
-			 xmlns:metroControls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:kanColleViewer="clr-namespace:Grabacr07.KanColleViewer"
@@ -117,14 +118,14 @@
 				<Rectangle Height="1"
 						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-				<metroControls:CallMethodButton MethodName="ClearZoomFactor"
-												Padding="20,11"
-												Margin="0,10"
-												HorizontalAlignment="Left">
+				<metro2:CallMethodButton MethodName="ClearZoomFactor"
+										 Padding="20,11"
+										 Margin="0,10"
+										 HorizontalAlignment="Left">
 					<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_BrowserControl_ClearZoomFactorButton}, Mode=OneWay}"
-							   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type metroControls:CallMethodButton}}, Path=Foreground}"
+							   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type metro2:CallMethodButton}}, Path=Foreground}"
 							   FontSize="13" />
-				</metroControls:CallMethodButton>
+				</metro2:CallMethodButton>
 
 			</StackPanel>
 		</TabItem>
@@ -155,20 +156,20 @@
 				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_WindowControl}}"
 						   Style="{DynamicResource HeaderTextBlockStyleKey}"
 						   Margin="0,10" />
-				<metroControls:CallMethodButton MethodName="SetLocationLeft"
-												Padding="20,4"
-												Margin="15,0,0,10"
-												HorizontalAlignment="Left">
+				<metro2:CallMethodButton MethodName="SetLocationLeft"
+										 Padding="20,4"
+										 Margin="15,0,0,10"
+										 HorizontalAlignment="Left">
 					<StackPanel>
 						<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_WindowControl_LocationLeftButton}, Mode=OneWay}"
-								   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type metroControls:CallMethodButton}}, Path=Foreground}"
+								   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type metro2:CallMethodButton}}, Path=Foreground}"
 								   FontSize="13"
 								   HorizontalAlignment="Center" />
 						<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_WindowControl_LocationLeftButton_Sub}, Mode=OneWay}"
 								   HorizontalAlignment="Center"
 								   FontSize="11" />
 					</StackPanel>
-				</metroControls:CallMethodButton>
+				</metro2:CallMethodButton>
 
 				<Rectangle Height="1"
 						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
@@ -205,11 +206,11 @@
 							<ColumnDefinition />
 						</Grid.ColumnDefinitions>
 
-						<metroControls:PromptTextBox Text="{Binding ReSortieCondition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnNotifyDataErrors=True}"
-													 Prompt="例: 40"
-													 ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"
-													 Width="60"
-													 VerticalAlignment="Top" />
+						<metro:PromptTextBox Text="{Binding ReSortieCondition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnNotifyDataErrors=True}"
+											 Prompt="例: 40"
+											 ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"
+											 Width="60"
+											 VerticalAlignment="Top" />
 						<TextBlock Grid.Column="2"
 								   TextWrapping="Wrap"
 								   Foreground="{DynamicResource InactiveForegroundBrushKey}">
@@ -261,21 +262,21 @@
 						<Run Text="{Binding Source={x:Static properties:Resources.Settings_Screenshot_FolderTextBox_Label}, Mode=OneWay}" />
 						<Run Text=": " />
 					</TextBlock>
-					<metroControls:PromptTextBox Grid.Row="0"
-												 Grid.Column="1"
-												 Text="{Binding ScreenshotFolder, UpdateSourceTrigger=PropertyChanged}"
-												 Prompt="{Binding Source={x:Static properties:Resources.Settings_Screenshot_FolderTextBox_Prompt}, Mode=OneWay}" />
-					<metroControls:CallMethodButton Grid.Row="0"
-													Grid.Column="2"
-													Content="{Binding Source={x:Static properties:Resources.Settings_Screenshot_FolderSelectionDialog_OpenButton}}"
-													MethodName="OpenScreenshotFolderSelectionDialog"
-													Margin="6,0" />
-					<metroControls:CallMethodButton Grid.Row="0"
-													Grid.Column="3"
-													Content="{Binding Source={x:Static properties:Resources.Settings_Screenshot_OpenFolderButton}}"
-													IsEnabled="{Binding CanOpenScreenshotFolder}"
-													MethodName="OpenScreenshotFolder"
-													Margin="0" />
+					<metro:PromptTextBox Grid.Row="0"
+										 Grid.Column="1"
+										 Text="{Binding ScreenshotFolder, UpdateSourceTrigger=PropertyChanged}"
+										 Prompt="{Binding Source={x:Static properties:Resources.Settings_Screenshot_FolderTextBox_Prompt}, Mode=OneWay}" />
+					<metro2:CallMethodButton Grid.Row="0"
+											 Grid.Column="2"
+											 Content="{Binding Source={x:Static properties:Resources.Settings_Screenshot_FolderSelectionDialog_OpenButton}}"
+											 MethodName="OpenScreenshotFolderSelectionDialog"
+											 Margin="6,0" />
+					<metro2:CallMethodButton Grid.Row="0"
+											 Grid.Column="3"
+											 Content="{Binding Source={x:Static properties:Resources.Settings_Screenshot_OpenFolderButton}}"
+											 IsEnabled="{Binding CanOpenScreenshotFolder}"
+											 MethodName="OpenScreenshotFolder"
+											 Margin="0" />
 
 					<TextBlock Grid.Row="1"
 							   Grid.Column="0"
@@ -377,56 +378,56 @@
 
 					<TextBlock FontFamily="Segoe UI">
 						<Run Text="Project home:" />
-						<metroControls:HyperlinkEx Uri="http://grabacr.net/kancolleviewer">
+						<metro2:HyperlinkEx Uri="http://grabacr.net/kancolleviewer">
 							<Run Text="http://grabacr.net/kancolleviewer" />
-						</metroControls:HyperlinkEx>
+						</metro2:HyperlinkEx>
 
 						<LineBreak />
 
 						<Run Text="Source code:" />
-						<metroControls:HyperlinkEx Uri="https://github.com/Grabacr07/KanColleViewer">
+						<metro2:HyperlinkEx Uri="https://github.com/Grabacr07/KanColleViewer">
 							<Run Text="https://github.com/Grabacr07/KanColleViewer" />
-						</metroControls:HyperlinkEx>
+						</metro2:HyperlinkEx>
 
 						<LineBreak />
 
 						<Run Text="Author / Developer:" />
-						<metroControls:HyperlinkEx Uri="https://twitter.com/Grabacr07">
+						<metro2:HyperlinkEx Uri="https://twitter.com/Grabacr07">
 							<Run Text="@Grabacr07" />
-						</metroControls:HyperlinkEx>
+						</metro2:HyperlinkEx>
 
 						<LineBreak />
 						<LineBreak />
 
 						<Run Text="Icon design:" />
-						<metroControls:HyperlinkEx Uri="https://twitter.com/Nrtwd/">
+						<metro2:HyperlinkEx Uri="https://twitter.com/Nrtwd/">
 							<Run Text="@Nrtwd" />
-						</metroControls:HyperlinkEx>
+						</metro2:HyperlinkEx>
 					</TextBlock>
 
 					<Rectangle Height="1"
 							   Margin="0,10"
 							   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-					<metroControls:BindableTextBlock TextSource="{Binding Libraries}"
-													 TextWrapping="Wrap"
-													 FontFamily="Segoe UI"
-													 FontSize="11">
-						<metroControls:BindableTextBlock.TextTemplates>
+					<metro:BindableTextBlock TextSource="{Binding Libraries}"
+											 TextWrapping="Wrap"
+											 FontFamily="Segoe UI"
+											 FontSize="11">
+						<metro:BindableTextBlock.TextTemplates>
 							<DataTemplate DataType="{x:Type viewModels:HyperlinkViewModel}">
-								<metroControls:InlineHolder>
-									<metroControls:HyperlinkEx Uri="{Binding Uri}">
+								<metro:InlineHolder>
+									<metro2:HyperlinkEx Uri="{Binding Uri}">
 										<Run Text="{Binding Text, Mode=OneWay}" />
-									</metroControls:HyperlinkEx>
-								</metroControls:InlineHolder>
+									</metro2:HyperlinkEx>
+								</metro:InlineHolder>
 							</DataTemplate>
 							<DataTemplate DataType="{x:Type viewModels:BindableTextViewModel}">
-								<metroControls:InlineHolder>
+								<metro:InlineHolder>
 									<Run Text="{Binding Text, Mode=OneWay}" />
-								</metroControls:InlineHolder>
+								</metro:InlineHolder>
 							</DataTemplate>
-						</metroControls:BindableTextBlock.TextTemplates>
-					</metroControls:BindableTextBlock>
+						</metro:BindableTextBlock.TextTemplates>
+					</metro:BindableTextBlock>
 				</StackPanel>
 
 				<TextBlock Grid.Row="1"
@@ -442,9 +443,9 @@
 					<Run Text="OSS"
 						 ToolTip="Open Source Software" />
 					<Run Text="released under" />
-					<metroControls:HyperlinkEx Uri="https://github.com/Grabacr07/KanColleViewer/blob/master/LICENSE.txt">
+					<metro2:HyperlinkEx Uri="https://github.com/Grabacr07/KanColleViewer/blob/master/LICENSE.txt">
 						<Run Text="The MIT License." />
-					</metroControls:HyperlinkEx>
+					</metro2:HyperlinkEx>
 				</TextBlock>
 
 				<controls:AppIcon Grid.Row="1"

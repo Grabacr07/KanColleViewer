@@ -6,14 +6,10 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
-			 xmlns:chrome="clr-namespace:Grabacr07.Desktop.Metro.Chrome;assembly=Desktop.Metro"
-			 xmlns:metroBehaviors="clr-namespace:Grabacr07.Desktop.Metro.Behaviors;assembly=Desktop.Metro"
-			 xmlns:metroControls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
-			 xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
 			 mc:Ignorable="d"
@@ -35,28 +31,28 @@
 		<StackPanel Orientation="Horizontal"
 					DataContext="{Binding Admiral}">
 			<TextBlock>
-					<Run Text="{Binding Model.Nickname, Mode=OneWay}"
-						 Style="{DynamicResource PickupTextElementStyleKey}"
-						 FontSize="18" />
-					<Run Text="{Binding Model.Rank, Mode=OneWay}"
-						 Style="{DynamicResource PickupTextElementStyleKey}"
-						 FontSize="14" />
-					<LineBreak />
-					<Run Text="{Binding Model.Comment, Mode=OneWay}" />
+				<Run Text="{Binding Model.Nickname, Mode=OneWay}"
+					 Style="{DynamicResource PickupTextElementStyleKey}"
+					 FontSize="18" />
+				<Run Text="{Binding Model.Rank, Mode=OneWay}"
+					 Style="{DynamicResource PickupTextElementStyleKey}"
+					 FontSize="14" />
+				<LineBreak />
+				<Run Text="{Binding Model.Comment, Mode=OneWay}" />
 			</TextBlock>
 
 			<TextBlock>
-					<Run Text="{x:Static properties:Resources.Homeport_FleetHQ}" />
-					<Run Text="Lv."
-						 Style="{DynamicResource PickupTextElementStyleKey}"
-						 FontSize="14" />
-					<Run Text="{Binding Model.Level, Mode=OneWay}"
-						 Style="{DynamicResource PickupTextElementStyleKey}"
-						 FontSize="18" />
-					<LineBreak />
-					<Run Text="Next:" />
-					<Run Text="{Binding Model.ExperienceForNexeLevel, Mode=OneWay}" />
-					<Run Text="exp." />
+				<Run Text="{x:Static properties:Resources.Homeport_FleetHQ}" />
+				<Run Text="Lv."
+					 Style="{DynamicResource PickupTextElementStyleKey}"
+					 FontSize="14" />
+				<Run Text="{Binding Model.Level, Mode=OneWay}"
+					 Style="{DynamicResource PickupTextElementStyleKey}"
+					 FontSize="18" />
+				<LineBreak />
+				<Run Text="Next:" />
+				<Run Text="{Binding Model.ExperienceForNexeLevel, Mode=OneWay}" />
+				<Run Text="exp." />
 			</TextBlock>
 		</StackPanel>
 
@@ -74,13 +70,13 @@
 
 				<TextBlock Grid.Row="0"
 						   Grid.Column="1">
-						<Run Text="{x:Static properties:Resources.Homeport_InstantRepair}" />
-						<Run Text="{Binding Materials.Model.InstantRepairMaterials, Mode=OneWay}"
-							 Style="{DynamicResource PickupTextElementStyleKey}" />
-						<LineBreak />
-						<Run Text="{x:Static properties:Resources.Homeport_InstantBuild}" />
-						<Run Text="{Binding Materials.Model.InstantBuildMaterials, Mode=OneWay}"
-							 Style="{DynamicResource PickupTextElementStyleKey}" />
+					<Run Text="{x:Static properties:Resources.Homeport_InstantRepair}" />
+					<Run Text="{Binding Materials.Model.InstantRepairMaterials, Mode=OneWay}"
+						 Style="{DynamicResource PickupTextElementStyleKey}" />
+					<LineBreak />
+					<Run Text="{x:Static properties:Resources.Homeport_InstantBuild}" />
+					<Run Text="{Binding Materials.Model.InstantBuildMaterials, Mode=OneWay}"
+						 Style="{DynamicResource PickupTextElementStyleKey}" />
 				</TextBlock>
 			</Grid>
 
@@ -96,17 +92,17 @@
 
 				<TextBlock Grid.Row="0"
 						   Grid.Column="1">
-						<Run Text="{x:Static properties:Resources.Homeport_NoOfShips}" />
-						<Run Text="{Binding Ships.Count, Mode=OneWay}"
-							 Style="{DynamicResource PickupTextElementStyleKey}" />
-						<Run Text="/" />
-						<Run Text="{Binding Admiral.Model.MaxShipCount, Mode=OneWay}" />
-						<LineBreak />
-						<Run Text="{x:Static properties:Resources.Homeport_NoOfEquipment}" />
-						<Run Text="{Binding SlotItems.Count, Mode=OneWay}"
-							 Style="{DynamicResource PickupTextElementStyleKey}" />
-						<Run Text="/" />
-						<Run Text="{Binding Admiral.Model.MaxSlotItemCount, Mode=OneWay}" />
+					<Run Text="{x:Static properties:Resources.Homeport_NoOfShips}" />
+					<Run Text="{Binding Ships.Count, Mode=OneWay}"
+						 Style="{DynamicResource PickupTextElementStyleKey}" />
+					<Run Text="/" />
+					<Run Text="{Binding Admiral.Model.MaxShipCount, Mode=OneWay}" />
+					<LineBreak />
+					<Run Text="{x:Static properties:Resources.Homeport_NoOfEquipment}" />
+					<Run Text="{Binding SlotItems.Count, Mode=OneWay}"
+						 Style="{DynamicResource PickupTextElementStyleKey}" />
+					<Run Text="/" />
+					<Run Text="{Binding Admiral.Model.MaxSlotItemCount, Mode=OneWay}" />
 				</TextBlock>
 			</Grid>
 		</StackPanel>
