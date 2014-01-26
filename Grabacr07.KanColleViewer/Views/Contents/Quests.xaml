@@ -54,6 +54,11 @@
 						</DataTemplate>
 					</ItemsControl.ItemTemplate>
 				</ItemsControl>
+
+				<TextBlock Grid.Row="1"
+						   Text="発生中の任務はありません"
+						   HorizontalAlignment="Center"
+						   Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
 			</Grid>
 
 			<Rectangle Grid.Row="0"

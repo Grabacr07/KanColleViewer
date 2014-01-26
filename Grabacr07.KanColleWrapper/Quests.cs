@@ -75,6 +75,25 @@ namespace Grabacr07.KanColleWrapper
 
 		#endregion
 
+		#region IsEmpty 変更通知プロパティ
+
+		private bool _IsEmpty;
+
+		public bool IsEmpty
+		{
+			get { return this._IsEmpty; }
+			set
+			{
+				if (this._IsEmpty != value)
+				{
+					this._IsEmpty = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 
 		internal Quests(KanColleProxy proxy)
 		{
@@ -101,22 +120,25 @@ namespace Grabacr07.KanColleWrapper
 					api_exec_count = Convert.ToInt32(djson.api_data.api_exec_count),
 				};
 
-				var list = new List<kcsapi_quest>();
-				var serializer = new DataContractJsonSerializer(typeof(kcsapi_quest));
-				foreach (var x in (object[])djson.api_data.api_list)
+				if (djson.api_data.api_list != null)
 				{
-					try
+					var list = new List<kcsapi_quest>();
+					var serializer = new DataContractJsonSerializer(typeof(kcsapi_quest));
+					foreach (var x in (object[])djson.api_data.api_list)
 					{
-						list.Add(serializer.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(x.ToString()))) as kcsapi_quest);
+						try
+						{
+							list.Add(serializer.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(x.ToString()))) as kcsapi_quest);
+						}
+						catch (SerializationException ex)
+						{
+							// 最後のページで任務数が 5 に満たないとき、api_list が -1 で埋められるというクソ API のせい
+							Debug.WriteLine(ex.Message);
+						}
 					}
-					catch (SerializationException ex)
-					{
-						// 最後のページで任務数が 5 に満たないとき、api_list が -1 で埋められるというクソ API のせい
-						Debug.WriteLine(ex.Message);
-					}
-				}
 
-				questlist.api_list = list.ToArray();
+					questlist.api_list = list.ToArray();
+				}
 
 				return questlist;
 			}
@@ -144,17 +166,28 @@ namespace Grabacr07.KanColleWrapper
 				while (this.questPages.Count < questlist.api_page_count) this.questPages.Add(null);
 			}
 
-			this.questPages[questlist.api_disp_page - 1]  = new ConcurrentDictionary<int, Quest>();
-			questlist.api_list.Select(x => new Quest(x))
-				.ForEach(x => this.questPages[questlist.api_disp_page - 1].AddOrUpdate(x.Id, x, (_, __) => x));
+			this.questPages[questlist.api_disp_page - 1] = new ConcurrentDictionary<int, Quest>();
 
-			var current = this.All.Where(x => x.State == QuestState.TakeOn || x.State == QuestState.Accomplished)
-				.OrderBy(x => x.Id)
-				.ToList();
+			if (questlist.api_list == null)
+			{
+				this.IsEmpty = true;
+				this.Current = new List<Quest>();
+			}
+			else
+			{
+				this.IsEmpty = false;
 
-			// 遂行中の任務数に満たない場合、未取得分として null で埋める
-			while (current.Count < questlist.api_exec_count) current.Add(null);
-			this.Current = current;
+				questlist.api_list.Select(x => new Quest(x))
+					.ForEach(x => this.questPages[questlist.api_disp_page - 1].AddOrUpdate(x.Id, x, (_, __) => x));
+
+				var current = this.All.Where(x => x.State == QuestState.TakeOn || x.State == QuestState.Accomplished)
+					.OrderBy(x => x.Id)
+					.ToList();
+
+				// 遂行中の任務数に満たない場合、未取得分として null で埋める
+				while (current.Count < questlist.api_exec_count) current.Add(null);
+				this.Current = current;
+			}
 
 			this.RaisePropertyChanged("All");
 		}
