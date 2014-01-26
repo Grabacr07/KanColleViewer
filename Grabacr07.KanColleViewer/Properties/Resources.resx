@@ -370,33 +370,33 @@
     <value>Individual Dock Settings</value>
   </data>
   <data name="IntegratedView" xml:space="preserve">
-    <value>総合</value>
+    <value>Overview</value>
   </data>
   <data name="Dockyard_NotificationMessage" xml:space="preserve">
-    <value>工廠第 {0} ドックでの「{1}」の建造が完了しました。</value>
+    <value>Construction of {1} in Dock {0} has been completed.</value>
   </data>
   <data name="Dockyard_NotificationMessage_Title" xml:space="preserve">
-    <value>建造完了</value>
+    <value>Construction Completed</value>
   </data>
   <data name="Common_ShipGirl" xml:space="preserve">
-    <value>艦娘</value>
+    <value>Shipgirl</value>
   </data>
   <data name="Expedition_NotificationMessage" xml:space="preserve">
-    <value>「{0}」が遠征から帰投しました。</value>
+    <value>「{0}」 has returned from an expedition.</value>
   </data>
   <data name="Expedition_NotificationMessage_Title" xml:space="preserve">
-    <value>遠征完了</value>
+    <value>Expedition Completed</value>
   </data>
   <data name="Repairyard_NotificationMessage" xml:space="preserve">
-    <value>入渠第 {0} ドックでの「{1}」の整備が完了しました。</value>
+    <value>Repairs on {1} in Dock {0} have been completed.</value>
   </data>
   <data name="Repairyard_NotificationMessage_Title" xml:space="preserve">
-    <value>整備完了</value>
+    <value>Repairs Completed</value>
   </data>
   <data name="ReSortie_NotificationMessage" xml:space="preserve">
-    <value>「{0}」の全艦娘の疲労が回復しました。</value>
+    <value>All ships in 「{0}」 have fully recovered from fatigue.</value>
   </data>
   <data name="ReSortie_NotificationMessage_Title" xml:space="preserve">
-    <value>疲労回復完了</value>
+    <value>Fatigue Recovery Completed</value>
   </data>
 </root>
