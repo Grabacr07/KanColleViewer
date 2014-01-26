@@ -3,8 +3,6 @@
 					xmlns:controls="clr-namespace:Grabacr07.Desktop.Metro.Controls">
 
 	<Style TargetType="{x:Type controls:SortButton}">
-		<Setter Property="OverridesDefaultStyle"
-				Value="True" />
 		<Setter Property="BorderThickness"
 				Value="0" />
 		<Setter Property="BorderBrush"
