@@ -142,7 +142,7 @@
     <value> 80 % </value>
   </data>
   <data name="Quest_State_Accomplished" xml:space="preserve">
-    <value>完成</value>
+    <value> 完成 </value>
   </data>
   <data name="Quests_Notice" xml:space="preserve">
     <value>※任務進度 (50 %, 80 %) 和遊戲中顯示的相同。它不會對敵方艦隊的擊破數和遠征的成功數做計數。</value>
@@ -157,7 +157,7 @@
     <value>指定螢幕截圖的儲存位置</value>
   </data>
   <data name="Settings_Screenshot_OpenFolderButton" xml:space="preserve">
-    <value>打開資料夾</value>
+    <value>開啟資料夾</value>
   </data>
   <data name="ZoomAction_OutOfRange" xml:space="preserve">
     <value>無法在 {0} % 範圍內縮放。</value>
@@ -178,13 +178,13 @@
     <value>視窗操作</value>
   </data>
   <data name="Settings_WindowControl_LocationLeftButton" xml:space="preserve">
-    <value>將視窗放在顯示器左側</value>
+    <value>將視窗置於螢幕左側</value>
   </data>
   <data name="Settings_WindowControl_LocationLeftButton_Sub" xml:space="preserve">
     <value>8 吋平板用 (800 x 1280)</value>
   </data>
   <data name="Settings_Proxy" xml:space="preserve">
-    <value>代理服務器設定</value>
+    <value>Proxy 設定</value>
   </data>
   <data name="Settings_Proxy_Host" xml:space="preserve">
     <value>位址</value>
@@ -193,10 +193,10 @@
     <value>連接埠</value>
   </data>
   <data name="Settings_Proxy_Enable" xml:space="preserve">
-    <value>使用代理服務器</value>
+    <value>使用 Proxy 伺服器</value>
   </data>
   <data name="Settings_Proxy_Enable_4_SSL" xml:space="preserve">
-    <value>SSL 連接時也使用代理伺服器</value>
+    <value>SSL 連接時也使用 Proxy 伺服器</value>
   </data>
   <data name="Settings_Display" xml:space="preserve">
     <value>顯示設定</value>
@@ -325,7 +325,7 @@
     <value>修理完成時顯示快顯通知</value>
   </data>
   <data name="Repairyard_Notifications_Individual" xml:space="preserve">
-    <value>單獨設定每個船塢</value>
+    <value>單獨設定每個碼頭</value>
   </data>
   <data name="Repairyard_ShipName" xml:space="preserve">
     <value>入渠中的艦娘</value>
