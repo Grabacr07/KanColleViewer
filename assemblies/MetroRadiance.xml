@@ -29,19 +29,34 @@
             このウィンドウが表示されているモニターの現在の DPI。
             </summary>
         </member>
-        <member name="F:MetroRadiance.Controls.MetroWindow.DpiScaleTransformProperty">
-            <summary>
-            <see cref="P:MetroRadiance.Controls.MetroWindow.DpiScaleTransform"/> 依存関係プロパティを識別します。
-            </summary>
-        </member>
         <member name="P:MetroRadiance.Controls.MetroWindow.DpiScaleTransform">
             <summary>
             DPI スケーリングを実現する <see cref="T:System.Windows.Media.Transform"/> を取得または設定します。
             </summary>
         </member>
+        <member name="P:MetroRadiance.Controls.MetroWindow.WindowChrome">
+            <summary>
+            ウインドウの非クライアント領域のカスタマイズ方法を指定した <see cref="P:MetroRadiance.Controls.MetroWindow.WindowChrome"/> を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:MetroRadiance.Controls.MetroWindow.MetroChromeBehavior">
+            <summary>
+            ウィンドウの枠を光らせるための <see cref="P:MetroRadiance.Controls.MetroWindow.MetroChromeBehavior"/> を取得または設定します。
+            </summary>
+        </member>
         <member name="P:MetroRadiance.Controls.MetroWindow.IsRestoringWindowPlacement">
             <summary>
             ウィンドウの位置とサイズを復元できるようにするかどうかを示す値を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:MetroRadiance.Controls.MetroWindow.WindowSettings">
+            <summary>
+            ウィンドウの位置とサイズを保存または復元する方法を指定するオブジェクトを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:MetroRadiance.Controls.MetroWindow.CaptionBarHeight">
+            <summary>
+            IsCaptionBar 添付プロパティで指定したキャプション バーの高さを取得します。
             </summary>
         </member>
         <member name="T:MetroRadiance.Controls.PromptComboBox">

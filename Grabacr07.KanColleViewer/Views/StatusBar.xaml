@@ -33,7 +33,7 @@
 		<ContentControl Grid.Column="1"
 						Content="{Binding Source={x:Static root:App.ViewModelRoot}, Path=StatusBar}">
 			<ContentControl.Resources>
-				<DataTemplate DataType="{x:Type vmContents:GeneralViewModel}" />
+				<DataTemplate DataType="{x:Type vmContents:OverviewViewModel}" />
 				<DataTemplate DataType="{x:Type vmFleets:FleetsViewModel}">
 					<TextBlock DataContext="{Binding SelectedFleet}"
 							   Foreground="{DynamicResource AccentForegroundBrushKey}">

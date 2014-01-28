@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Grabacr07.KanColleViewer.Views.Contents
 {
 	/// <summary>
-	/// General.xaml の相互作用ロジック
+	/// Overview.xaml の相互作用ロジック
 	/// </summary>
-	public partial class General : UserControl
+	public partial class Overview
 	{
-		public General()
+		public Overview()
 		{
 			InitializeComponent();
 		}

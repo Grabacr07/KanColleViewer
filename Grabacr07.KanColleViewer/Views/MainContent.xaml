@@ -112,8 +112,8 @@
 								Content="{Binding}"
 								MinHeight="{Binding Source={x:Static properties:Settings.Default}, Path=UIContentHight}">
 					<ContentControl.Resources>
-						<DataTemplate DataType="{x:Type vmContents:GeneralViewModel}">
-							<contents:General />
+						<DataTemplate DataType="{x:Type vmContents:OverviewViewModel}">
+							<contents:Overview />
 						</DataTemplate>
 						<DataTemplate DataType="{x:Type vmFleets:FleetsViewModel}">
 							<views:Fleets />

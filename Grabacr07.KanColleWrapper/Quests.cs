@@ -22,17 +22,24 @@ namespace Grabacr07.KanColleWrapper
 	{
 		private readonly List<ConcurrentDictionary<int, Quest>> questPages;
 
+		#region All 変更通知プロパティ
+
+		private IReadOnlyCollection<Quest> _All;
+
 		public IReadOnlyCollection<Quest> All
 		{
-			get
+			get { return this._All; }
+			set
 			{
-				return this.questPages.Where(x => x != null)
-					.SelectMany(x => x.Select(kvp => kvp.Value))
-					.Distinct(x => x.Id)
-					.OrderBy(x => x.Id)
-					.ToList();
+				if (this._All != value)
+				{
+					this._All = value;
+					this.RaisePropertyChanged();
+				}
 			}
 		}
+
+		#endregion
 
 		#region Current 変更通知プロパティ
 
@@ -99,7 +106,7 @@ namespace Grabacr07.KanColleWrapper
 		{
 			this.questPages = new List<ConcurrentDictionary<int, Quest>>();
 			this.IsUntaken = true;
-			this.Current = new List<Quest>();
+			this.All = this.Current = new List<Quest>();
 
 			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/questlist")
 				.Select(Serialize)
@@ -171,7 +178,7 @@ namespace Grabacr07.KanColleWrapper
 			if (questlist.api_list == null)
 			{
 				this.IsEmpty = true;
-				this.Current = new List<Quest>();
+				this.All = this.Current = new List<Quest>();
 			}
 			else
 			{
@@ -179,6 +186,12 @@ namespace Grabacr07.KanColleWrapper
 
 				questlist.api_list.Select(x => new Quest(x))
 					.ForEach(x => this.questPages[questlist.api_disp_page - 1].AddOrUpdate(x.Id, x, (_, __) => x));
+
+				this.All = this.questPages.Where(x => x != null)
+					.SelectMany(x => x.Select(kvp => kvp.Value))
+					.Distinct(x => x.Id)
+					.OrderBy(x => x.Id)
+					.ToList();
 
 				var current = this.All.Where(x => x.State == QuestState.TakeOn || x.State == QuestState.Accomplished)
 					.OrderBy(x => x.Id)
@@ -188,8 +201,6 @@ namespace Grabacr07.KanColleWrapper
 				while (current.Count < questlist.api_exec_count) current.Add(null);
 				this.Current = current;
 			}
-
-			this.RaisePropertyChanged("All");
 		}
 	}
 }

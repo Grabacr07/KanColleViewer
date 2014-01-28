@@ -58,7 +58,8 @@
 				<TextBlock Grid.Row="1"
 						   Text="発生中の任務はありません"
 						   HorizontalAlignment="Center"
-						   Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
+						   Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}"
+						   Margin="10" />
 			</Grid>
 
 			<Rectangle Grid.Row="0"

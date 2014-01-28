@@ -18,10 +18,10 @@
 							BorderThickness="{TemplateBinding BorderThickness}"
 							Padding="{TemplateBinding Padding}">
 						<TextBlock>
-							<Run Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type catalogs:Modernizable}}, Path=Status.Current, Mode=OneWay}"
+							<Run Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Status.Current, Mode=OneWay}"
 								 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 							<Run x:Name="Info"
-								 Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type catalogs:Modernizable}}, Path=Status.Shortfall, StringFormat=+{0}, Mode=OneWay}"
+								 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Status.Shortfall, StringFormat=+{0}, Mode=OneWay}"
 								 FontSize="9" />
 						</TextBlock>
 					</Border>
@@ -33,7 +33,7 @@
 									Value="MAX" />
 							<Setter TargetName="Border"
 									Property="Background"
-									Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type catalogs:Modernizable}}, Path=Background}" />
+									Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background}" />
 						</Trigger>
 					</ControlTemplate.Triggers>
 				</ControlTemplate>

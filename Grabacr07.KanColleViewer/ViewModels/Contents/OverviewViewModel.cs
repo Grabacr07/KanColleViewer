@@ -10,12 +10,12 @@ using Livet.Messaging;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents
 {
-	public class GeneralViewModel : TabItemViewModel
+	public class OverviewViewModel : TabItemViewModel
 	{
 		public MainContentViewModel Content { get; private set; }
 
 
-		public GeneralViewModel(MainContentViewModel owner)
+		public OverviewViewModel(MainContentViewModel owner)
 		{
 			this.Name = Resources.IntegratedView;
 			this.Content = owner;

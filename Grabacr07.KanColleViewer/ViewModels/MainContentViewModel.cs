@@ -65,7 +65,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 			this.TabItems = new List<TabItemViewModel>
 			{
-				new GeneralViewModel(this),
+				new OverviewViewModel(this),
 				this.Fleets,
 				this.Repairyard,
 				this.Dockyard,

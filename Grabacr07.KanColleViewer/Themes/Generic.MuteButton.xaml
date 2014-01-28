@@ -30,9 +30,9 @@
 								<Grid.Resources>
 									<Style TargetType="{x:Type Path}">
 										<Setter Property="Fill"
-												Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MuteButton}}, Path=Foreground}" />
+												Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" />
 										<Setter Property="Stroke"
-												Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MuteButton}}, Path=Foreground}" />
+												Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" />
 										<Setter Property="StrokeThickness"
 												Value="3" />
 										<Setter Property="Stretch"
