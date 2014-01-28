@@ -11,6 +11,7 @@
 				<ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Themes/Dark.xaml" />
 				<ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Themes/Accents/Purple.xaml" />
 
+				<ResourceDictionary Source="pack://application:,,,/KanColleViewer;component/Styles/Colors.xaml" />
 				<ResourceDictionary Source="pack://application:,,,/KanColleViewer;component/Styles/Controls.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 

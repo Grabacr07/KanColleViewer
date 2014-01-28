@@ -64,11 +64,38 @@
 			</ItemsControl.ItemContainerStyle>
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
-					<Border x:Name="Border"
-							Padding="10,0,10,5">
-						<TextBlock Text="{Binding Name}"
-								   FontSize="14"
-								   Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" />
+					<Border Padding="10,0,10,5"
+							Background="Transparent">
+						<StackPanel Orientation="Horizontal">
+							<ContentControl Content="{Binding State}"
+											Width="14"
+											Height="14"
+											Margin="0,2,4,0">
+								<ContentControl.Resources>
+									<DataTemplate DataType="{x:Type fleets:ExpeditionViewModel}">
+										<Border Background="{DynamicResource FleetExpeditionBrushKey}" />
+									</DataTemplate>
+									<DataTemplate DataType="{x:Type fleets:ReSortieBarViewModel}">
+										<Border x:Name="Border"
+												Background="{DynamicResource FleetReSortieBrushKey}" />
+										<DataTemplate.Triggers>
+											<DataTrigger Binding="{Binding CanReSortie}"
+														 Value="False">
+												<Setter TargetName="Border"
+														Property="Background"
+														Value="{DynamicResource FleetRepairingBrushKey}" />
+											</DataTrigger>
+										</DataTemplate.Triggers>
+									</DataTemplate>
+									<DataTemplate DataType="{x:Type fleets:RepairingBarViewModel}">
+										<Border Background="{DynamicResource FleetRepairingBrushKey}" />
+									</DataTemplate>
+								</ContentControl.Resources>
+							</ContentControl>
+							<TextBlock Text="{Binding Name}"
+									   FontSize="14"
+									   Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" />
+						</StackPanel>
 					</Border>
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>
@@ -93,7 +120,7 @@
 				<DataTemplate DataType="{x:Type fleets:ReSortieBarViewModel}">
 					<Border x:Name="Border"
 							Padding="10,5"
-							Background="#FF5A2020">
+							Background="{DynamicResource FleetReSortieBrushKey}">
 						<Grid>
 							<TextBlock Foreground="White">
 								<Run Text="{Binding Message, Mode=OneWay}" />
@@ -106,14 +133,14 @@
 									 Value="False">
 							<Setter TargetName="Border"
 									Property="Background"
-									Value="#FF5A4020" />
+									Value="{DynamicResource FleetRepairingBrushKey}" />
 						</DataTrigger>
 					</DataTemplate.Triggers>
 				</DataTemplate>
 				<DataTemplate DataType="{x:Type fleets:RepairingBarViewModel}">
 					<Border x:Name="Border"
 							Padding="10,5"
-							Background="#FF5A4020">
+							Background="{DynamicResource FleetRepairingBrushKey}">
 						<TextBlock Foreground="White">
 							<i:Interaction.Behaviors>
 								<behaviors:TimerBehavior Proc="{Binding TimerProc}" />
