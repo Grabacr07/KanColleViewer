@@ -52,7 +52,7 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 
 			target.createStyleSheet().cssText = Properties.Settings.Default.OverrideStyleSheet;
 
-			var dpi = this.AssociatedObject.GetSystemDpi();
+			var dpi = this.AssociatedObject.GetSystemDpi() ?? Dpi.Default;
 
 			var window = Window.GetWindow(this.AssociatedObject);
 			if (window != null && window.WindowState == WindowState.Normal)
