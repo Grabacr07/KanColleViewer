@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Livet;
 
-namespace Grabacr07.KanColleViewer.Model
+namespace Grabacr07.KanColleViewer.Models
 {
 	/// <summary>
 	/// 主にメイン ウィンドウのステータス バーに表示する

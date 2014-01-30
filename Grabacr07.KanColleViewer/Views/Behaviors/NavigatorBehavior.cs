@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interactivity;
 using System.Windows.Navigation;
-using Grabacr07.KanColleViewer.Model;
+using Grabacr07.KanColleViewer.Models;
 
 namespace Grabacr07.KanColleViewer.Views.Behaviors
 {

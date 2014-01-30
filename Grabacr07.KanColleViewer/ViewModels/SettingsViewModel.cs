@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents;
-using Grabacr07.KanColleViewer.Model;
+using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleViewer.ViewModels.Messages;
 using Grabacr07.KanColleWrapper;
@@ -18,7 +18,7 @@ using Livet;
 using Livet.EventListeners;
 using Livet.Messaging.IO;
 using MetroRadiance;
-using Settings = Grabacr07.KanColleViewer.Model.Settings;
+using Settings = Grabacr07.KanColleViewer.Models.Settings;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {

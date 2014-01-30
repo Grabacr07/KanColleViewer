@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Grabacr07.KanColleViewer.Model.Internal;
+using Grabacr07.KanColleViewer.Models.Internal;
 
-namespace Grabacr07.KanColleViewer.Model
+namespace Grabacr07.KanColleViewer.Models
 {
 	/// <summary>
 	/// Windows の通知機能を提供します。Windows のバージョンに依存する実装の差異は隠蔽されます。

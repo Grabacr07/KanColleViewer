@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI.Notifications;
 
-namespace Grabacr07.KanColleViewer.Model
+namespace Grabacr07.KanColleViewer.Models
 {
 	/// <summary>
 	/// Windows 8 のトースト通知機能を提供します。

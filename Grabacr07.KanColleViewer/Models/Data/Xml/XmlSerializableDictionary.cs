@@ -5,7 +5,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace Grabacr07.KanColleViewer.Model.Data.Xml
+namespace Grabacr07.KanColleViewer.Models.Data.Xml
 {
 	/// <summary>
 	/// XML シリアライズ可能なキーと値のコレクションを表します。
@@ -15,7 +15,7 @@ namespace Grabacr07.KanColleViewer.Model.Data.Xml
 	public class XmlSerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IXmlSerializable
 	{
 		/// <summary>
-		/// 空で、規定の初期量を備え、キーの型の規定の等値比較子を使用する、<see cref="T:Grabacr07.KanColleViewer.Model.Data.Xml.XmlSerializableDictionary`2"/>
+		/// 空で、規定の初期量を備え、キーの型の規定の等値比較子を使用する、<see cref="T:Grabacr07.KanColleViewer.Models.Data.Xml.XmlSerializableDictionary`2"/>
 		/// クラスの新しいインスタンスを初期化します。
 		/// </summary>
 		public XmlSerializableDictionary() : base() { }

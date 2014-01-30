@@ -127,24 +127,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\IWindowsNotifier.cs" />
-    <Compile Include="Model\ProductInfo.cs" />
-    <Compile Include="Model\Data\Xml\XmlFileReader.cs" />
-    <Compile Include="Model\Data\Xml\XmlFileWriter.cs" />
-    <Compile Include="Model\Data\Xml\XmlSerializableDictionary.cs" />
-    <Compile Include="Model\Helper.cs" />
-    <Compile Include="Model\Internal\Windows7Notifier.cs" />
-    <Compile Include="Model\Mode.cs" />
-    <Compile Include="Model\StatusService.cs" />
-    <Compile Include="Model\Settings.cs" />
-    <Compile Include="Model\SupportedImageFormat.cs" />
-    <Compile Include="Model\Toast.cs" />
-    <Compile Include="Model\Internal\Windows8Notifier.cs" />
-    <Compile Include="Model\Volume.cs" />
+    <Compile Include="Models\IWindowsNotifier.cs" />
+    <Compile Include="Models\ProductInfo.cs" />
+    <Compile Include="Models\Data\Xml\XmlFileReader.cs" />
+    <Compile Include="Models\Data\Xml\XmlFileWriter.cs" />
+    <Compile Include="Models\Data\Xml\XmlSerializableDictionary.cs" />
+    <Compile Include="Models\Helper.cs" />
+    <Compile Include="Models\Internal\Windows7Notifier.cs" />
+    <Compile Include="Models\Mode.cs" />
+    <Compile Include="Models\StatusService.cs" />
+    <Compile Include="Models\Settings.cs" />
+    <Compile Include="Models\SupportedImageFormat.cs" />
+    <Compile Include="Models\Toast.cs" />
+    <Compile Include="Models\Internal\Windows8Notifier.cs" />
+    <Compile Include="Models\Volume.cs" />
     <Compile Include="ViewModels\Catalogs\SlotItemCatalogViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\SortableColumnViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogSortWorker.cs" />
-    <Compile Include="Model\WindowsNotification.cs" />
+    <Compile Include="Models\WindowsNotification.cs" />
     <Compile Include="ViewModels\Contents\AdmiralViewModel.cs" />
     <Compile Include="ViewModels\Contents\Docks\BuildingDockViewModel.cs" />
     <Compile Include="ViewModels\Contents\Docks\RepairingDockViewModel.cs" />
@@ -162,7 +162,7 @@
     <Compile Include="ViewModels\Catalogs\ShipCatalogWindowViewModel.cs" />
     <Compile Include="ViewModels\Dev\DebugTabViewModel.cs" />
     <Compile Include="ViewModels\MainContentViewModel.cs" />
-    <Compile Include="Model\INavigator.cs" />
+    <Compile Include="Models\INavigator.cs" />
     <Compile Include="ViewModels\Contents\MaterialsViewModel.cs" />
     <Compile Include="ViewModels\Contents\Docks\DockyardViewModel.cs" />
     <Compile Include="ViewModels\Messages\ScreenshotMessage.cs" />
@@ -243,7 +243,6 @@
     <Compile Include="Views\StatusBar.xaml.cs">
       <DependentUpon>StatusBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\StatusBarContentTemplateSelector.cs" />
     <Compile Include="Win32\DVTARGETDEVICE.cs" />
     <Compile Include="Win32\IServiceProvider.cs" />
     <Compile Include="Win32\RECT.cs" />

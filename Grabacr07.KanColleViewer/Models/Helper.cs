@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Win32;
 
-namespace Grabacr07.KanColleViewer.Model
+namespace Grabacr07.KanColleViewer.Models
 {
 	internal static class Helper
 	{

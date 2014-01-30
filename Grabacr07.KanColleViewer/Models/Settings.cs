@@ -5,10 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Grabacr07.KanColleViewer.Model.Data.Xml;
+using Grabacr07.KanColleViewer.Models.Data.Xml;
 using Livet;
 
-namespace Grabacr07.KanColleViewer.Model
+namespace Grabacr07.KanColleViewer.Models
 {
 	public class Settings : NotificationObject
 	{

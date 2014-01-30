@@ -8,7 +8,7 @@ using CoreAudioApi;
 using CoreAudioApi.Interfaces;
 using Livet;
 
-namespace Grabacr07.KanColleViewer.Model
+namespace Grabacr07.KanColleViewer.Models
 {
 	public class Volume : NotificationObject, IAudioSessionEvents
 	{

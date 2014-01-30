@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Application = System.Windows.Application;
 
-namespace Grabacr07.KanColleViewer.Model.Internal
+namespace Grabacr07.KanColleViewer.Models.Internal
 {
 	/// <summary>
 	/// 通知領域アイコンを利用した通知機能を提供します。

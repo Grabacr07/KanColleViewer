@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using Grabacr07.KanColleViewer.Model;
-using Grabacr07.KanColleViewer.ViewModels.Contents;
+using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.ViewModels.Messages;
 using Grabacr07.KanColleWrapper;
 using Livet;
@@ -119,12 +114,12 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		public bool TopMost
 		{
-			get { return Model.Settings.Current.TopMost; }
+			get { return Models.Settings.Current.TopMost; }
 			set
 			{
-				if (Model.Settings.Current.TopMost != value)
+				if (Models.Settings.Current.TopMost != value)
 				{
-					Model.Settings.Current.TopMost = value;
+					Models.Settings.Current.TopMost = value;
 					this.RaisePropertyChanged();
 				}
 			}

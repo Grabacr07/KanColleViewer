@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
 
-namespace Grabacr07.KanColleViewer.Model.Data.Xml
+namespace Grabacr07.KanColleViewer.Models.Data.Xml
 {
 	/// <summary>
 	/// XML ファイルへの書き込みを行う静的メソッドを公開します。
