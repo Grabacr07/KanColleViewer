@@ -1,27 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Grabacr07.KanColleViewer.Views.Catalogs
 {
 	/// <summary>
-	/// ShipCatalogWindow.xaml の相互作用ロジック
+	/// 艦娘一覧ウィンドウを表します。
 	/// </summary>
-	public partial class ShipCatalogWindow
+	partial class ShipCatalogWindow
 	{
 		public ShipCatalogWindow()
 		{
-			InitializeComponent();
+			this.InitializeComponent();
+
+			MainWindow.Current.Closed += (sender, args) => this.Close();
 		}
 	}
 }

@@ -1,30 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
-using Grabacr07.KanColleViewer.Models;
-using Grabacr07.KanColleViewer.Properties;
-using Grabacr07.KanColleViewer.Win32;
-using mshtml;
-using SHDocVw;
 
 namespace Grabacr07.KanColleViewer.Views
 {
 	/// <summary>
-	/// MainWindow.xaml の相互作用ロジック
+	/// KanColleViewer のメイン ウィンドウを表します。
 	/// </summary>
-	public partial class MainWindow
+	partial class MainWindow
 	{
+		public static MainWindow Current { get; private set; }
+
 		public MainWindow()
 		{
 			InitializeComponent();
+			Current = this;
+		}
+
+		protected override void OnClosing(CancelEventArgs e)
+		{
+			// ToDo: 確認ダイアログを実装したかった…
+			//e.Cancel = true;
+
+			//var dialog = new ExitDialog { Owner = this, };
+			//dialog.Show();
+
+			base.OnClosing(e);
 		}
 	}
 }

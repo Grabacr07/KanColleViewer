@@ -1,5 +1,4 @@
 ﻿<metro:MetroWindow x:Class="Grabacr07.KanColleViewer.Views.MainWindow"
-				   x:Name="GlowMetroWindow"
 				   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 				   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 				   xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"

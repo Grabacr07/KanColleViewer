@@ -1,0 +1,49 @@
+﻿<metro:MetroWindow x:Class="Grabacr07.KanColleViewer.Views.ExitDialog"
+				   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+				   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				   xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+				   xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+				   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+				   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+				   xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+				   xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+				   xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+				   xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
+				   xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
+				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+				   xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
+				   xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
+				   mc:Ignorable="d"
+				   d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
+				   Style="{DynamicResource MetroDialogStyleKey}"
+				   Title="EXIT KanColleViewer"
+				   WindowStartupLocation="CenterScreen"
+				   SizeToContent="Height">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<TextBlock Text="「提督業も忙しい！」 を終了します。 よろしいですか？"
+				   FontSize="13"
+				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+				   Margin="10,0"
+				   HorizontalAlignment="Left" />
+
+		<StackPanel Grid.Row="1"
+					Orientation="Horizontal"
+					HorizontalAlignment="Right"
+					Margin="14,7,14,14">
+			
+			<metro2:CallMethodButton Content="OK"
+									 MinWidth="100"
+									 Padding="20,5"
+									 Margin="12,0,0,0" />
+			<metro2:CallMethodButton Content="Cancel"
+									 MinWidth="100"
+									 Padding="20,5"
+									 Margin="12,0,0,0" />
+		</StackPanel>
+	</Grid>
+</metro:MetroWindow>
