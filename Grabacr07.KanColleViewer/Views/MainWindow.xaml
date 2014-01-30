@@ -88,7 +88,8 @@
 
 			<WebBrowser x:Name="WebBrowser"
 						Width="960"
-						Height="572">
+						Height="572"
+						controls:WebBrowserHelper.ScriptErrorsSuppressed="True">
 				<i:Interaction.Behaviors>
 					<behaviors:SetStyleSheetBehavior />
 					<behaviors:NavigatorBehavior Navigator="{Binding Navigator}" />
