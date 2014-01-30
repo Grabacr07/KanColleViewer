@@ -19,8 +19,7 @@
 									Grid.Column="1">
 								<ContentPresenter x:Name="PART_SelectedContentHost"
 												  ContentSource="SelectedContent"
-												  Width="{Binding ElementName=ContentSize, Path=ActualWidth}"
-												  Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=ActualHeight}" />
+												  Width="{Binding ElementName=ContentSize, Path=ActualWidth}"/>
 							</Border>
 						</Grid>
 					</Border>
