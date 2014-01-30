@@ -18,9 +18,9 @@ namespace Grabacr07.KanColleViewer.Views
 	/// <summary>
 	/// NotStarted.xaml の相互作用ロジック
 	/// </summary>
-	public partial class NotStarted : UserControl
+	public partial class StartContent
 	{
-		public NotStarted()
+		public StartContent()
 		{
 			InitializeComponent();
 		}

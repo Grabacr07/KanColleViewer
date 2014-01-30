@@ -8,19 +8,24 @@
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
 			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
 			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
-			 xmlns:kanColleViewer="clr-namespace:Grabacr07.KanColleViewer"
 			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 mc:Ignorable="d"
 			 d:DesignWidth="700"
 			 d:DesignHeight="400"
+			 DataContext="{Binding Source={x:Static root:App.ViewModelRoot}, Path=Settings}"
 			 Background="{DynamicResource ThemeBrushKey}">
-	<UserControl.DataContext>
-		<viewModels:SettingsViewModel />
-	</UserControl.DataContext>
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="Common.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
 
 	<i:Interaction.Triggers>
 		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
@@ -29,78 +34,7 @@
 		</livet:InteractionMessageTrigger>
 	</i:Interaction.Triggers>
 
-	<TabControl>
-		<TabControl.Template>
-			<ControlTemplate TargetType="{x:Type TabControl}">
-				<Border>
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto" />
-							<ColumnDefinition Width="*" />
-						</Grid.ColumnDefinitions>
-						<StackPanel x:Name="HeaderPanel"
-									IsItemsHost="True"
-									Background="{DynamicResource BackgroundBrushKey}" />
-						<Border x:Name="ContentSize"
-								Grid.Column="1">
-							<ContentPresenter x:Name="PART_SelectedContentHost"
-											  ContentSource="SelectedContent"
-											  Width="{Binding ElementName=ContentSize, Path=ActualWidth}"
-											  Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=ActualHeight}" />
-						</Border>
-					</Grid>
-				</Border>
-			</ControlTemplate>
-		</TabControl.Template>
-		<TabControl.Resources>
-			<Style TargetType="{x:Type TabItem}">
-				<Setter Property="OverridesDefaultStyle"
-						Value="True" />
-				<Setter Property="Height"
-						Value="38" />
-				<Setter Property="Foreground"
-						Value="{DynamicResource ForegroundBrushKey}" />
-				<Setter Property="Background"
-						Value="Transparent" />
-				<Setter Property="Template">
-					<Setter.Value>
-						<ControlTemplate TargetType="{x:Type TabItem}">
-							<Border x:Name="Border"
-									Background="{TemplateBinding Background}">
-								<ContentPresenter x:Name="ContentSite"
-												  ContentSource="Header" />
-							</Border>
-							<ControlTemplate.Triggers>
-								<Trigger Property="IsSelected"
-										 Value="True">
-									<Setter Property="Background"
-											Value="{DynamicResource ThemeBrushKey}" />
-								</Trigger>
-								<Trigger SourceName="Border"
-										 Property="IsMouseOver"
-										 Value="True">
-									<Setter Property="Background"
-											Value="Transparent" />
-									<Setter Property="Background"
-											Value="{DynamicResource ActiveBackgroundBrushKey}" />
-								</Trigger>
-							</ControlTemplate.Triggers>
-						</ControlTemplate>
-					</Setter.Value>
-				</Setter>
-			</Style>
-
-			<Style x:Key="HeaderTextBlockStyleKey"
-				   TargetType="{x:Type TextBlock}">
-				<Setter Property="Margin"
-						Value="0,0,0,10" />
-				<Setter Property="FontSize"
-						Value="15" />
-				<Setter Property="Foreground"
-						Value="{DynamicResource ActiveForegroundBrushKey}" />
-			</Style>
-		</TabControl.Resources>
-
+	<TabControl Style="{StaticResource TabControlStyleKey}">
 		<TabItem>
 			<TabItem.Header>
 				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_BrowserControl}, Mode=OneWay}"
@@ -138,43 +72,7 @@
 						   FontSize="14" />
 			</TabItem.Header>
 
-			<StackPanel Margin="10,0">
-				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Display}, Mode=OneWay}"
-						   Style="{DynamicResource HeaderTextBlockStyleKey}" />
-
-				<CheckBox IsChecked="{Binding Source={x:Static kanColleViewer:App.ViewModelRoot}, Path=TopMost, Mode=TwoWay}"
-						  Margin="15,0,0,10">
-					<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Window_TopMost}, Mode=OneWay}"
-							   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type CheckBox}}, Path=Foreground}"
-							   FontSize="13"
-							   Background="Transparent" />
-				</CheckBox>
-
-				<Rectangle Height="1"
-						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-
-				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_WindowControl}}"
-						   Style="{DynamicResource HeaderTextBlockStyleKey}"
-						   Margin="0,10" />
-				<metro2:CallMethodButton MethodName="SetLocationLeft"
-										 Padding="20,4"
-										 Margin="15,0,0,10"
-										 HorizontalAlignment="Left">
-					<StackPanel>
-						<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_WindowControl_LocationLeftButton}, Mode=OneWay}"
-								   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type metro2:CallMethodButton}}, Path=Foreground}"
-								   FontSize="13"
-								   HorizontalAlignment="Center" />
-						<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_WindowControl_LocationLeftButton_Sub}, Mode=OneWay}"
-								   HorizontalAlignment="Center"
-								   FontSize="11" />
-					</StackPanel>
-				</metro2:CallMethodButton>
-
-				<Rectangle Height="1"
-						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-
-			</StackPanel>
+			<settings:Window Margin="10,0" />
 		</TabItem>
 
 		<TabItem>
@@ -185,44 +83,7 @@
 						   FontSize="14" />
 			</TabItem.Header>
 
-			<StackPanel Margin="10,0"
-						IsEnabled="False">
-				<TextBlock Margin="0,0,0,10">
-					<Run Text="出撃コンディション"
-						 Style="{DynamicResource PickupTextElementStyleKey}" />
-					<Run Text=" " />
-					<Run Text="{Binding Source={x:Static properties:Resources.Common_Implement_Oncoming}, Mode=OneWay}" />
-				</TextBlock>
-
-				<StackPanel Margin="15,0,0,0">
-					<TextBlock>
-						<Run Text="艦隊内の全艦のコンディションが次の数値以上になったとき、出撃可能と判断する" />
-					</TextBlock>
-
-					<Grid Margin="0,10">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto" />
-							<ColumnDefinition Width="10" />
-							<ColumnDefinition />
-						</Grid.ColumnDefinitions>
-
-						<metro:PromptTextBox Text="{Binding ReSortieCondition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnNotifyDataErrors=True}"
-											 Prompt="例: 40"
-											 ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"
-											 Width="60"
-											 VerticalAlignment="Top" />
-						<TextBlock Grid.Column="2"
-								   TextWrapping="Wrap"
-								   Foreground="{DynamicResource InactiveForegroundBrushKey}">
-							<Run Text="※通常は、間宮アイコンが消灯する 40 か、自然回復上限の 49 に設定します。" />
-						</TextBlock>
-					</Grid>
-				</StackPanel>
-
-				<Rectangle Height="1"
-						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-
-			</StackPanel>
+			<settings:Operation Margin="10,0" />
 		</TabItem>
 
 		<TabItem>
@@ -244,87 +105,7 @@
 						   FontSize="14" />
 			</TabItem.Header>
 
-			<StackPanel Margin="10,0">
-				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Screenshot}}"
-						   Style="{DynamicResource HeaderTextBlockStyleKey}" />
-				<Grid Margin="15,0,0,10">
-					<Grid.RowDefinitions>
-						<RowDefinition Height="Auto" />
-						<RowDefinition Height="Auto" />
-					</Grid.RowDefinitions>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="Auto" />
-						<ColumnDefinition Width="*" />
-						<ColumnDefinition Width="Auto" />
-						<ColumnDefinition Width="Auto" />
-					</Grid.ColumnDefinitions>
-					<TextBlock Margin="0,6">
-						<Run Text="{Binding Source={x:Static properties:Resources.Settings_Screenshot_FolderTextBox_Label}, Mode=OneWay}" />
-						<Run Text=": " />
-					</TextBlock>
-					<metro:PromptTextBox Grid.Row="0"
-										 Grid.Column="1"
-										 Text="{Binding ScreenshotFolder, UpdateSourceTrigger=PropertyChanged}"
-										 Prompt="{Binding Source={x:Static properties:Resources.Settings_Screenshot_FolderTextBox_Prompt}, Mode=OneWay}" />
-					<metro2:CallMethodButton Grid.Row="0"
-											 Grid.Column="2"
-											 Content="{Binding Source={x:Static properties:Resources.Settings_Screenshot_FolderSelectionDialog_OpenButton}}"
-											 MethodName="OpenScreenshotFolderSelectionDialog"
-											 Margin="6,0" />
-					<metro2:CallMethodButton Grid.Row="0"
-											 Grid.Column="3"
-											 Content="{Binding Source={x:Static properties:Resources.Settings_Screenshot_OpenFolderButton}}"
-											 IsEnabled="{Binding CanOpenScreenshotFolder}"
-											 MethodName="OpenScreenshotFolder"
-											 Margin="0" />
-
-					<TextBlock Grid.Row="1"
-							   Grid.Column="0"
-							   Margin="0,6">
-						<Run Text="{Binding Source={x:Static properties:Resources.Settings_Screenshot_ImageFormat_Label}, Mode=OneWay}" />
-						<Run Text=": " />
-					</TextBlock>
-					<StackPanel Grid.Row="1"
-								Grid.Column="1"
-								Grid.ColumnSpan="3"
-								Orientation="Horizontal">
-						<RadioButton IsChecked="{Binding ScreenshotImageFormat, Mode=TwoWay, ConverterParameter=Png, Converter={StaticResource EnumToBooleanConverter}}">
-							<TextBlock Text="PNG" />
-						</RadioButton>
-						<RadioButton Margin="10,0,0,0"
-									 IsChecked="{Binding ScreenshotImageFormat, Mode=TwoWay, ConverterParameter=Jpeg, Converter={StaticResource EnumToBooleanConverter}}">
-							<TextBlock Text="JPG" />
-						</RadioButton>
-					</StackPanel>
-				</Grid>
-
-				<Rectangle Height="1"
-						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-
-				<TextBlock Text="テーマ"
-						   Style="{DynamicResource HeaderTextBlockStyleKey}"
-						   Margin="0,10" />
-
-				<WrapPanel Margin="0,0,0,10">
-					<RadioButton IsChecked="{Binding IsDarkTheme, Mode=TwoWay}"
-								 Margin="0,0,20,0">
-						<TextBlock Text="Dark"
-								   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}"
-								   FontSize="13"
-								   Background="Transparent" />
-					</RadioButton>
-					<RadioButton IsChecked="{Binding IsLightTheme, Mode=TwoWay}">
-						<TextBlock Text="Light"
-								   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}"
-								   FontSize="13"
-								   Background="Transparent" />
-					</RadioButton>
-				</WrapPanel>
-
-				<Rectangle Height="1"
-						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-
-			</StackPanel>
+			<settings:Others Margin="10,0" />
 		</TabItem>
 
 		<TabItem>
@@ -347,7 +128,7 @@
 
 				<StackPanel Grid.ColumnSpan="2"
 							TextOptions.TextFormattingMode="Ideal">
-					<TextBlock Text="{Binding Source={x:Static kanColleViewer:App.ProductInfo}, Path=Product, Mode=OneWay}"
+					<TextBlock Text="{Binding Source={x:Static root:App.ProductInfo}, Path=Product, Mode=OneWay}"
 							   FontFamily="Segoe UI Light"
 							   FontSize="44"
 							   Foreground="{DynamicResource ActiveForegroundBrushKey}"
@@ -357,12 +138,12 @@
 							   FontSize="16"
 							   Margin="0,-9,0,0" />
 					<TextBlock Margin="-1,0,0,-4">
-						<Run Text="{Binding Source={x:Static kanColleViewer:App.ProductInfo}, Path=Title, Mode=OneWay}"
+						<Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=Title, Mode=OneWay}"
 							 FontFamily="Yu Gothic Light"
 							 FontSize="20"
 							 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 						<Run Text="  " />
-						<Run Text="{Binding Source={x:Static kanColleViewer:App.ProductInfo}, Path=VersionString, StringFormat=Version {0}, Mode=OneWay}"
+						<Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=VersionString, StringFormat=Version {0}, Mode=OneWay}"
 							 FontFamily="Segoe UI Light"
 							 FontSize="20"
 							 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
@@ -436,9 +217,9 @@
 						   VerticalAlignment="Bottom"
 						   Margin="0,0,0,16"
 						   TextWrapping="Wrap">
-					<Run Text="{Binding Source={x:Static kanColleViewer:App.ProductInfo}, Path=Copyright, Mode=OneWay}" />
+					<Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=Copyright, Mode=OneWay}" />
 					<LineBreak />
-					<Run Text="{Binding Source={x:Static kanColleViewer:App.ProductInfo}, Path=Product, Mode=OneWay}" />
+					<Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=Product, Mode=OneWay}" />
 					<Run Text="is" />
 					<Run Text="OSS"
 						 ToolTip="Open Source Software" />

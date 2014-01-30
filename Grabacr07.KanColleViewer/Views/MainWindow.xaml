@@ -112,19 +112,9 @@
 							Content="{Binding Content}">
 				<ContentControl.Resources>
 					<DataTemplate DataType="{x:Type viewModels:NotStartedViewModel}">
-						<Grid>
-							<Grid.RowDefinitions>
-								<RowDefinition Height="Auto" />
-								<RowDefinition Height="*" />
-							</Grid.RowDefinitions>
-							<Border ClipToBounds="True"
-									Width="{Binding ElementName=WebBrowser, Path=Width}">
-								<views:BrowserNavigator Margin="6,-4,6,10"
-														VerticalAlignment="Top" />
-							</Border>
-						</Grid>
+						<views:StartContent />
 					</DataTemplate>
-					
+
 					<DataTemplate DataType="{x:Type viewModels:MainContentViewModel}">
 						<views:MainContent />
 					</DataTemplate>

@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Settings.Window"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
+			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+			 xmlns:kanColleViewer="clr-namespace:Grabacr07.KanColleViewer"
+			 mc:Ignorable="d"
+			 d:DesignWidth="500"
+			 d:DesignHeight="300"
+			 d:DataContext="{d:DesignInstance viewModels:SettingsViewModel}">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="Common.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+
+	<StackPanel>
+		<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Display}, Mode=OneWay}"
+				   Style="{DynamicResource HeaderTextBlockStyleKey}" />
+
+		<CheckBox IsChecked="{Binding Source={x:Static kanColleViewer:App.ViewModelRoot}, Path=TopMost, Mode=TwoWay}"
+				  Margin="15,0,0,10">
+			<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Window_TopMost}, Mode=OneWay}"
+					   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type CheckBox}}, Path=Foreground}"
+					   FontSize="13"
+					   Background="Transparent" />
+		</CheckBox>
+
+		<Rectangle Height="1"
+				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+		<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_WindowControl}}"
+				   Style="{DynamicResource HeaderTextBlockStyleKey}"
+				   Margin="0,10" />
+		<metro2:CallMethodButton MethodName="SetLocationLeft"
+								 Padding="20,4"
+								 Margin="15,0,0,10"
+								 HorizontalAlignment="Left">
+			<StackPanel>
+				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_WindowControl_LocationLeftButton}, Mode=OneWay}"
+						   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type metro2:CallMethodButton}}, Path=Foreground}"
+						   FontSize="13"
+						   HorizontalAlignment="Center" />
+				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_WindowControl_LocationLeftButton_Sub}, Mode=OneWay}"
+						   HorizontalAlignment="Center"
+						   FontSize="11" />
+			</StackPanel>
+		</metro2:CallMethodButton>
+
+		<Rectangle Height="1"
+				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+	</StackPanel>
+</UserControl>

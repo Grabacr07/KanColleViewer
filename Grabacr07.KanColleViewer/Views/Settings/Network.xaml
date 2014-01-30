@@ -12,15 +12,11 @@
 			 d:DesignHeight="300"
 			 d:DataContext="{d:DesignInstance viewModels:SettingsViewModel}">
 	<UserControl.Resources>
-		<Style x:Key="HeaderTextBlockStyleKey"
-			   TargetType="{x:Type TextBlock}">
-			<Setter Property="Margin"
-					Value="0,0,0,10" />
-			<Setter Property="FontSize"
-					Value="15" />
-			<Setter Property="Foreground"
-					Value="{DynamicResource ActiveForegroundBrushKey}" />
-		</Style>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="Common.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
 	</UserControl.Resources>
 
 	<StackPanel>
