@@ -16,6 +16,15 @@ namespace Grabacr07.KanColleViewer.Models.Internal
 	/// </summary>
 	internal class Windows8Notifier : IWindowsNotifier
 	{
+		#region static members
+
+		public static bool IsSupported
+		{
+			get { return Toast.IsSupported; }
+		}
+
+		#endregion
+
 		public void Initialize()
 		{
 			try

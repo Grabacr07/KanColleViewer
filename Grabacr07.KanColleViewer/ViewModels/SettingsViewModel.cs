@@ -68,43 +68,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-		#region ProxyHost 変更通知プロパティ
-
-		public string ProxyHost
-		{
-			get { return Settings.Current.ProxyHost; }
-			set
-			{
-				if (Settings.Current.ProxyHost != value)
-				{
-					Settings.Current.ProxyHost = value;
-					KanColleClient.Current.Proxy.UpstreamProxyHost = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region ProxyPort 変更通知プロパティ
-
-		public string ProxyPort
-		{
-			get { return Settings.Current.ProxyPort.ToString(); }
-			set
-			{
-				UInt16 numberPort;
-				if (UInt16.TryParse(value, out numberPort))
-				{
-					Settings.Current.ProxyPort = numberPort;
-					KanColleClient.Current.Proxy.UpstreamProxyPort = numberPort;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
 		#region UseProxy 変更通知プロパティ
 
 		public string UseProxy
@@ -135,6 +98,43 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				{
 					Settings.Current.EnableSSLProxy = value;
 					KanColleClient.Current.Proxy.UseProxyOnSSLConnect = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region ProxyHost 変更通知プロパティ
+
+		public string ProxyHost
+		{
+			get { return Settings.Current.ProxyHost; }
+			set
+			{
+				if (Settings.Current.ProxyHost != value)
+				{
+					Settings.Current.ProxyHost = value;
+					KanColleClient.Current.Proxy.UpstreamProxyHost = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region ProxyPort 変更通知プロパティ
+
+		public string ProxyPort
+		{
+			get { return Settings.Current.ProxyPort.ToString(); }
+			set
+			{
+				UInt16 numberPort;
+				if (UInt16.TryParse(value, out numberPort))
+				{
+					Settings.Current.ProxyPort = numberPort;
+					KanColleClient.Current.Proxy.UpstreamProxyPort = numberPort;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -182,7 +182,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			get { return this._Libraries; }
 			set
 			{
-				if (this._Libraries != value)
+				if (!Equals(this._Libraries, value))
 				{
 					this._Libraries = value;
 					this.RaisePropertyChanged();

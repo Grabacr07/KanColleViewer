@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using Grabacr07.KanColleViewer.Models;
@@ -43,10 +40,10 @@ namespace Grabacr07.KanColleViewer
 			Helper.SetRegistryFeatureBrowserEmulation();
 
 			KanColleClient.Current.Proxy.Startup(AppSettings.Default.LocalProxyPort);
-			KanColleClient.Current.Proxy.UpstreamProxyHost = Settings.Current.ProxyHost;
-			KanColleClient.Current.Proxy.UpstreamProxyPort = Settings.Current.ProxyPort;
 			KanColleClient.Current.Proxy.UseProxyOnConnect = Settings.Current.EnableProxy;
 			KanColleClient.Current.Proxy.UseProxyOnSSLConnect = Settings.Current.EnableSSLProxy;
+			KanColleClient.Current.Proxy.UpstreamProxyHost = Settings.Current.ProxyHost;
+			KanColleClient.Current.Proxy.UpstreamProxyPort = Settings.Current.ProxyPort;
 
 			ThemeService.Current.Initialize(this, Theme.Dark, Accent.Purple);
 
