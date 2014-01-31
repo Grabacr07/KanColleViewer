@@ -38,6 +38,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		public SlotItemCatalogViewModel()
 		{
+			this.Title = "所有装備一覧";
 			this.UpdateCore();
 		}
 

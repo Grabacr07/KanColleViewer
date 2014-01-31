@@ -150,7 +150,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 			this.updateSource
 				.Do(_ => this.IsReloading = true)
-				.Throttle(TimeSpan.FromMilliseconds(500.0))
+				.Throttle(TimeSpan.FromMilliseconds(7.0))
 				.Do(_ => this.UpdateCore())
 				.Subscribe(_ => this.IsReloading = false);
 			this.CompositeDisposable.Add(this.updateSource);

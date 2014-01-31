@@ -66,5 +66,21 @@
 		</Border>
 		<!-- #endregion -->
 
+		<StackPanel Grid.Row="1"
+					VerticalAlignment="Center"
+					Opacity="0.5">
+			<TextBlock Text="ヾ(๑╹◡╹)ﾉ"
+					   FontSize="80"
+					   HorizontalAlignment="Center" />
+
+			<TextBlock Text="まだ完成してません"
+					   FontSize="30"
+					   Margin="0,30,0,0"
+					   HorizontalAlignment="Center" />
+
+			<TextBlock Text="近日公開予定..."
+					   FontSize="20"
+					   HorizontalAlignment="Center" />
+		</StackPanel>
 	</Grid>
 </metro:MetroWindow>

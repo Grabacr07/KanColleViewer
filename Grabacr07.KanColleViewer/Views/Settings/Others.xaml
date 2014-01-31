@@ -18,7 +18,7 @@
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</UserControl.Resources>
-	
+
 	<StackPanel>
 		<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Screenshot}}"
 				   Style="{DynamicResource HeaderTextBlockStyleKey}" />
@@ -76,7 +76,7 @@
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-		<TextBlock Text="テーマ"
+		<!--<TextBlock Text="テーマ"
 				   Style="{DynamicResource HeaderTextBlockStyleKey}"
 				   Margin="0,10" />
 
@@ -97,7 +97,7 @@
 		</WrapPanel>
 
 		<Rectangle Height="1"
-				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+				   Style="{DynamicResource SeparatorRectangleStyleKey}" />-->
 
 	</StackPanel>
 </UserControl>

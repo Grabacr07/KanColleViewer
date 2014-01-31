@@ -142,7 +142,7 @@
 			</StackPanel>
 
 			<Grid Grid.Column="1"
-				  Margin="0,8,6,0"
+				  Margin="0,8,0,0"
 				  Visibility="{Binding ElementName=InformationTab, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="Auto" />
@@ -154,7 +154,7 @@
 								  Height="200"
 								  HorizontalAlignment="Right"
 								  VerticalAlignment="Bottom"
-								  Margin="0,0,10,0"
+								  Margin="0,0,30,-4"
 								  Opacity="0.25" />
 
 				<Border Grid.Column="0"
@@ -164,17 +164,17 @@
 								  Padding="10,0,20,14">
 						<StackPanel Margin="0,-9,0,0">
 							<TextBlock>
-								<Run Text="KanColleViewer"
+								<Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=Product, Mode=OneWay}"
 									 FontFamily="Segoe UI Light"
 									 FontSize="30"
 									 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 								<LineBreak />
-								<Run Text="提督業も忙しい！"
+								<Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=Title, Mode=OneWay}"
 									 FontSize="16" />
 							</TextBlock>
 
 							<TextBlock Margin="0,8,0,0">
-								<Run Text="Version 1.2.1"
+								<Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=VersionString, StringFormat=Version {0}, Mode=OneWay}"
 									 FontFamily="Segoe UI Light"
 									 FontSize="20"
 									 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
@@ -229,8 +229,7 @@
 						   Grid.Column="1" />
 
 				<Border Grid.Column="1">
-					<FlowDocumentScrollViewer VerticalScrollBarVisibility="Auto"
-											  Padding="0,-18,0,0">
+					<FlowDocumentScrollViewer Padding="0,-18,0,0">
 						<FlowDocument FontSize="12"
 									  Foreground="{DynamicResource ForegroundBrushKey}"
 									  FontFamily="Meiryo UI"
@@ -246,17 +245,35 @@
 								<Run Text="艦これは、内臓された Internet Explorer (IE) 上で動作します。通信内容の変更、サーバーに対する情報の送信、Flash 抽出、マクロ・チートの類は一切行っていません。" />
 							</Paragraph>
 							<Paragraph Language="ja-jp">
-								<Run Text="ゲームが正しく表示されない等の現象が発生した場合は、IE の設定や、IE 上で Flash が表示できるかどうかをご確認ください。また、艦これ本体のアップデート後などにスクリプトエラーが頻発する場合は、IE のキャッシュを削除してください。" />
+								<Run Text="ゲームが正しく表示されない場合や、スクリプトエラーが頻発する場合は、IE のキャッシュを削除してみてください。改善しない場合は、IE の設定や、通常の IE 上で Flash が表示できるかどうか等をご確認ください。" />
 							</Paragraph>
 							<BlockUIContainer>
 								<metro2:CallMethodButton Content="{Binding DeleteInternetCacheButtonContent}"
 														 MethodName="DeleteInternetCache"
 														 IsEnabled="{Binding CanDeleteInternetCache}"
 														 HorizontalAlignment="Left"
-														 Padding="30,5" />
+														 Padding="30,5"
+														 SnapsToDevicePixels="True" />
+							</BlockUIContainer>
+							<BlockUIContainer>
+								<Rectangle Height="1"
+										   Style="{DynamicResource SeparatorRectangleStyleKey}"
+										   Margin="0,16,0,0"
+										   SnapsToDevicePixels="True" />
 							</BlockUIContainer>
 							<Paragraph Language="ja-jp">
-								<Run Text="" />
+								<Run Text="ツールは不定期に更新されています。適宜、更新の確認をお願いします。" />
+								<LineBreak />
+								<LineBreak />
+								<Run Text="Project home:" />
+								<metro2:HyperlinkEx Uri="http://grabacr.net/kancolleviewer">
+									<Run Text="http://grabacr.net/kancolleviewer" />
+								</metro2:HyperlinkEx>
+								<LineBreak />
+								<Run Text="Source code:" />
+								<metro2:HyperlinkEx Uri="https://github.com/Grabacr07/KanColleViewer">
+									<Run Text="https://github.com/Grabacr07/KanColleViewer" />
+								</metro2:HyperlinkEx>
 							</Paragraph>
 						</FlowDocument>
 					</FlowDocumentScrollViewer>
