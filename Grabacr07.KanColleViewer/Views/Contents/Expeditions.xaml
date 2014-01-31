@@ -48,9 +48,7 @@
 							</Grid.ColumnDefinitions>
 
 							<TextBlock>
-								<Run Text="/"
-									 FontSize="18" />
-								<Run Text="{Binding Id, Mode=OneWay}"
+								<Run Text="{Binding Id, StringFormat=/{0}, Mode=OneWay}"
 									 FontSize="18" />
 								<LineBreak />
 								<Run Text="{Binding Name, Mode=OneWay}"
