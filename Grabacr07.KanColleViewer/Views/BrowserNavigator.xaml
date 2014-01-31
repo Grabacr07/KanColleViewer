@@ -20,7 +20,8 @@
 			<ColumnDefinition Width="Auto" />
 			<ColumnDefinition />
 			<ColumnDefinition Width="Auto" />
-		</Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
 
 		<controls:NavigationButton Width="40"
 								   Height="40"
@@ -75,5 +76,18 @@
 				</i:EventTrigger>
 			</i:Interaction.Triggers>
 		</controls:NavigationButton>
-	</Grid>
+        <controls:NavigationButton Grid.Column="4"
+								   Direction="ClearCache"
+								   ToolTip="キャッシュのクリア"
+								   Width="{Binding ElementName=UrlBox, Path=ActualHeight}"
+								   Height="{Binding ElementName=UrlBox, Path=ActualHeight}"
+								   Margin="4,0,0,0">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <livet:LivetCallMethodAction MethodTarget="{Binding}"
+												 MethodName="ClearCache" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </controls:NavigationButton>
+    </Grid>
 </UserControl>

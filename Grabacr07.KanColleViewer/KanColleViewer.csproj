@@ -204,6 +204,7 @@
       <DependentUpon>StatusBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StatusBarContentTemplateSelector.cs" />
+    <Compile Include="Win32\DeleteCache.cs" />
     <Compile Include="Win32\DVTARGETDEVICE.cs" />
     <Compile Include="Win32\IServiceProvider.cs" />
     <Compile Include="Win32\RECT.cs" />
@@ -381,6 +382,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\app.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\00693.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
