@@ -16,7 +16,7 @@
 			 mc:Ignorable="d"
 			 d:DesignWidth="800"
 			 d:DesignHeight="350"
-			 d:DataContext="{d:DesignInstance vm:NotStartedViewModel}"
+			 d:DataContext="{d:DesignInstance vm:StartContentViewModel}"
 			 Background="{DynamicResource ThemeBrushKey}">
 	<UserControl.Resources>
 		<ResourceDictionary>
@@ -191,8 +191,7 @@
 								</metro2:HyperlinkEx>
 							</TextBlock>
 
-							<TextBlock FontFamily="Segoe UI"
-									   Margin="0,6,0,0">
+							<TextBlock FontFamily="Segoe UI">
 								<Run Text="Icon design:" />
 								<metro2:HyperlinkEx Uri="https://twitter.com/Nrtwd/">
 									<Run Text="@Nrtwd" />
@@ -209,7 +208,7 @@
 							</TextBlock>
 
 							<TextBlock FontFamily="Segoe UI"
-									   Margin="0,8,0,0"
+									   Margin="0,10,0,0"
 									   TextWrapping="Wrap">
 								<Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=Product, Mode=OneWay}" />
 								<Run Text="is" />
@@ -226,12 +225,44 @@
 					</ScrollViewer>
 				</Border>
 
+				<Rectangle x:Name="Dummy"
+						   Grid.Column="1" />
+
 				<Border Grid.Column="1">
-					<ScrollViewer VerticalScrollBarVisibility="Auto">
-						
-					</ScrollViewer>
+					<FlowDocumentScrollViewer VerticalScrollBarVisibility="Auto"
+											  Padding="0,-18,0,0">
+						<FlowDocument FontSize="12"
+									  Foreground="{DynamicResource ForegroundBrushKey}"
+									  FontFamily="Meiryo UI"
+									  TextAlignment="Left">
+							<Paragraph>
+								<Run Foreground="White"
+									 FontSize="20"
+									 Text="ようこそ" />
+							</Paragraph>
+							<Paragraph Language="ja-jp">
+								<Run Text="「提督業も忙しい！」は、艦これを遊びやすくするためのツールです。" />
+								<LineBreak />
+								<Run Text="艦これは、内臓された Internet Explorer (IE) 上で動作します。通信内容の変更、サーバーに対する情報の送信、Flash 抽出、マクロ・チートの類は一切行っていません。" />
+							</Paragraph>
+							<Paragraph Language="ja-jp">
+								<Run Text="ゲームが正しく表示されない等の現象が発生した場合は、IE の設定や、IE 上で Flash が表示できるかどうかをご確認ください。また、艦これ本体のアップデート後などにスクリプトエラーが頻発する場合は、IE のキャッシュを削除してください。" />
+							</Paragraph>
+							<BlockUIContainer>
+								<metro2:CallMethodButton Content="{Binding DeleteInternetCacheButtonContent}"
+														 MethodName="DeleteInternetCache"
+														 IsEnabled="{Binding CanDeleteInternetCache}"
+														 HorizontalAlignment="Left"
+														 Padding="30,5" />
+							</BlockUIContainer>
+							<Paragraph Language="ja-jp">
+								<Run Text="" />
+							</Paragraph>
+						</FlowDocument>
+					</FlowDocumentScrollViewer>
 				</Border>
 			</Grid>
+
 
 			<Border Grid.Column="1"
 					BorderThickness="1,1,0,0"

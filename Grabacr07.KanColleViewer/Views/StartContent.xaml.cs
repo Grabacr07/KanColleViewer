@@ -24,5 +24,13 @@ namespace Grabacr07.KanColleViewer.Views
 		{
 			InitializeComponent();
 		}
+
+		private void FlowDocumentScrollViewerOnLoaded(object sender, RoutedEventArgs e)
+		{
+			//var viewer = sender as FlowDocumentScrollViewer;
+			//if (viewer == null) return;
+
+			//viewer.MaxWidth = viewer.ActualWidth;
+		}
 	}
 }

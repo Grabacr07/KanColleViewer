@@ -247,6 +247,8 @@
     <Compile Include="Views\StatusBar.xaml.cs">
       <DependentUpon>StatusBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Win32\INTERNET_CACHE_ENTRY_INFOA.cs" />
+    <Compile Include="Win32\WinInet.cs" />
     <Compile Include="Win32\DVTARGETDEVICE.cs" />
     <Compile Include="Win32\IServiceProvider.cs" />
     <Compile Include="Win32\RECT.cs" />
@@ -425,7 +427,7 @@
     <Compile Include="ViewModels\Contents\Fleets\FleetsViewModel.cs" />
     <Compile Include="ViewModels\Contents\Fleets\FleetViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="ViewModels\NotStartedViewModel.cs" />
+    <Compile Include="ViewModels\StartContentViewModel.cs" />
     <Compile Include="ViewModels\Contents\ShipViewModel.cs" />
     <Compile Include="ViewModels\WindowViewModel.cs" />
     <Compile Include="Views\Behaviors\CountdownBehavior.cs" />

@@ -17,7 +17,7 @@
 				   Title="{Binding Title}"
 				   Width="960"
 				   Height="945"
-				   MinWidth="{Binding ElementName=WebBrowser, Path=ActualWidth}"
+				   MinWidth="{Binding ElementName=WebBrowser, Path=Width}"
 				   Topmost="{Binding TopMost}"
 				   FontSize="12"
 				   Background="{DynamicResource ThemeBrushKey}"
@@ -111,7 +111,7 @@
 			<ContentControl Grid.Row="1"
 							Content="{Binding Content}">
 				<ContentControl.Resources>
-					<DataTemplate DataType="{x:Type viewModels:NotStartedViewModel}">
+					<DataTemplate DataType="{x:Type viewModels:StartContentViewModel}">
 						<views:StartContent />
 					</DataTemplate>
 

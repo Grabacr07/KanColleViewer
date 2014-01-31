@@ -32,7 +32,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				switch (value)
 				{
 					case Mode.NotStarted:
-						this.Content = NotStartedViewModel.Instance;
+						this.Content = StartContentViewModel.Instance;
 						StatusService.Current.Set(Properties.Resources.StatusBar_NotStarted);
 						ThemeService.Current.ChangeAccent(Accent.Purple);
 						break;
