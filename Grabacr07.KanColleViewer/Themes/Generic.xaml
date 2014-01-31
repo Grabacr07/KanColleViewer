@@ -910,7 +910,16 @@
 								</Path.RenderTransform>
 							</Path>
 						</Viewbox>
-					</Grid>
+                        <Viewbox>
+                            <Image x:Name="ClearCache"
+                                   Width="100"
+                                   Height="100"
+                                   Source="/KanColleViewer;component/Assets/00693.png"
+                                   Stretch="Uniform"
+                                   Visibility="Collapsed"
+                                   />
+                        </Viewbox>
+                    </Grid>
 					<ControlTemplate.Triggers>
 						<Trigger Property="Direction"
 								 Value="GoForward">
@@ -930,7 +939,16 @@
 									Property="Visibility"
 									Value="Collapsed" />
 						</Trigger>
-					</ControlTemplate.Triggers>
+                        <Trigger Property="Direction"
+								 Value="ClearCache">
+                            <Setter TargetName="ClearCache"
+									Property="Visibility"
+									Value="Visible" />
+                            <Setter TargetName="Arrow"
+									Property="Visibility"
+									Value="Collapsed" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>

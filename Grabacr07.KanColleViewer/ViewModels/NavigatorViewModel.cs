@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Model;
 using Grabacr07.KanColleViewer.Views.Controls;
+using Grabacr07.KanColleViewer.Win32;
 using Livet;
 using Livet.Commands;
+using System.Runtime.InteropServices;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {
@@ -127,6 +129,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		public event EventHandler GoForwardRequested;
 		public event EventHandler RefreshRequested;
 		public event EventHandler<Uri> UriRequested;
+        public event EventHandler ClearCacheRequested;
 
 		public void GoBack()
 		{
@@ -156,5 +159,53 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				this.UriRequested(this, uri);
 			}
 		}
+
+        public void ClearCache()
+        {
+            if (this.ClearCacheRequested != null) this.ClearCacheRequested(this, new EventArgs());
+
+            // No more items have been found.
+            const int ERROR_NO_MORE_ITEMS = 259;
+
+            // Local variables
+            int cacheEntryInfoBufferSizeInitial = 0;
+            int cacheEntryInfoBufferSize = 0;
+            IntPtr cacheEntryInfoBuffer = IntPtr.Zero;
+            DeleteCache.INTERNET_CACHE_ENTRY_INFOA internetCacheEntry;
+            IntPtr enumHandle = IntPtr.Zero;
+            bool returnValue = false;
+
+            // Start to delete URLs that do not belong to any group.
+            enumHandle = DeleteCache.FindFirstUrlCacheEntry(null, IntPtr.Zero, ref cacheEntryInfoBufferSizeInitial);
+            if (enumHandle != IntPtr.Zero && ERROR_NO_MORE_ITEMS == Marshal.GetLastWin32Error())
+                return;
+
+            cacheEntryInfoBufferSize = cacheEntryInfoBufferSizeInitial;
+            cacheEntryInfoBuffer = Marshal.AllocHGlobal(cacheEntryInfoBufferSize);
+            enumHandle = DeleteCache.FindFirstUrlCacheEntry(null, cacheEntryInfoBuffer, ref cacheEntryInfoBufferSizeInitial);
+
+            while (true)
+            {
+                internetCacheEntry = (DeleteCache.INTERNET_CACHE_ENTRY_INFOA)Marshal.PtrToStructure(cacheEntryInfoBuffer, typeof(DeleteCache.INTERNET_CACHE_ENTRY_INFOA));
+
+                cacheEntryInfoBufferSizeInitial = cacheEntryInfoBufferSize;
+                returnValue = DeleteCache.DeleteUrlCacheEntry(internetCacheEntry.lpszSourceUrlName);
+                if (!returnValue)
+                {
+                    returnValue = DeleteCache.FindNextUrlCacheEntry(enumHandle, cacheEntryInfoBuffer, ref cacheEntryInfoBufferSizeInitial);
+                }
+                if (!returnValue && ERROR_NO_MORE_ITEMS == Marshal.GetLastWin32Error())
+                {
+                    break;
+                }
+                if (!returnValue && cacheEntryInfoBufferSizeInitial > cacheEntryInfoBufferSize)
+                {
+                    cacheEntryInfoBufferSize = cacheEntryInfoBufferSizeInitial;
+                    cacheEntryInfoBuffer = Marshal.ReAllocHGlobal(cacheEntryInfoBuffer, (IntPtr)cacheEntryInfoBufferSize);
+                    returnValue = DeleteCache.FindNextUrlCacheEntry(enumHandle, cacheEntryInfoBuffer, ref cacheEntryInfoBufferSizeInitial);
+                }
+            }
+            Marshal.FreeHGlobal(cacheEntryInfoBuffer);
+        }
 	}
 }
