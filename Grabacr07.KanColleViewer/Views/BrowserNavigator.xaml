@@ -11,6 +11,7 @@
 			 xmlns:common="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
+			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 mc:Ignorable="d"
 			 d:DesignWidth="800"
 			 DataContext="{Binding Source={x:Static root:App.ViewModelRoot}, Path=Navigator}">
@@ -19,6 +20,7 @@
 			<ColumnDefinition Width="Auto" />
 			<ColumnDefinition Width="Auto" />
 			<ColumnDefinition />
+			<ColumnDefinition Width="Auto" />
 			<ColumnDefinition Width="Auto" />
 		</Grid.ColumnDefinitions>
 
@@ -72,6 +74,21 @@
 				<i:EventTrigger EventName="Click">
 					<livet:LivetCallMethodAction MethodTarget="{Binding}"
 												 MethodName="ReNavigate" />
+				</i:EventTrigger>
+			</i:Interaction.Triggers>
+		</controls:NavigationButton>
+
+		<controls:NavigationButton Grid.Column="4"
+								   Direction="Settings"
+								   ToolTip="{Binding Mode=OneWay,Source={x:Static properties:Resources.Settings_Proxy}}"
+								   Width="{Binding ElementName=UrlBox, Path=ActualHeight}"
+								   Height="{Binding ElementName=UrlBox, Path=ActualHeight}"
+								   Margin="4,0,0,0"
+								   Visibility="{Binding IsNotStarted, Converter={StaticResource BooleanToVisibilityConverter}}">
+			<i:Interaction.Triggers>
+				<i:EventTrigger EventName="Click">
+					<livet:LivetCallMethodAction MethodTarget="{Binding}"
+												 MethodName="ShowSettings" />
 				</i:EventTrigger>
 			</i:Interaction.Triggers>
 		</controls:NavigationButton>
