@@ -135,6 +135,7 @@
     <Compile Include="Models\Helper.cs" />
     <Compile Include="Models\Internal\Windows7Notifier.cs" />
     <Compile Include="Models\Mode.cs" />
+    <Compile Include="Models\ResourceService.cs" />
     <Compile Include="Models\StatusService.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Models\SupportedImageFormat.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="ViewModels\Catalogs\ShipTypeViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogWindowViewModel.cs" />
     <Compile Include="ViewModels\Dev\DebugTabViewModel.cs" />
+    <Compile Include="ViewModels\CultureViewModel.cs" />
     <Compile Include="ViewModels\MainContentViewModel.cs" />
     <Compile Include="Models\INavigator.cs" />
     <Compile Include="ViewModels\Contents\MaterialsViewModel.cs" />

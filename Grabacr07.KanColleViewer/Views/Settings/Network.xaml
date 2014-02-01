@@ -7,6 +7,7 @@
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:controls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 mc:Ignorable="d"
 			 d:DesignWidth="500"
 			 d:DesignHeight="300"
@@ -20,11 +21,11 @@
 	</UserControl.Resources>
 
 	<StackPanel>
-		<TextBlock Text="{Binding Mode=OneWay,Source={x:Static properties:Resources.Settings_Proxy}}"
+		<TextBlock Text="{Binding Resources.Settings_Proxy, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource HeaderTextBlockStyleKey}" />
 
 		<CheckBox x:Name="CheckboxUseProxy"
-				  Content="{Binding Source={x:Static properties:Resources.Settings_Proxy_Enable}}"
+				  Content="{Binding Resources.Settings_Proxy_Enable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				  IsChecked="{Binding UseProxy}" />
 		<StackPanel IsEnabled="{Binding IsChecked, ElementName=CheckboxUseProxy}"
 					Margin="15,6,0,6">
@@ -38,22 +39,22 @@
 				</Grid.ColumnDefinitions>
 
 				<TextBlock Grid.Column="0">
-					<Run Text="{Binding Source={x:Static properties:Resources.Settings_Proxy_Host}, Mode=OneWay}" />
+					<Run Text="{Binding Resources.Settings_Proxy_Host, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 					<Run Text=": " />
 				</TextBlock>
 				<metro:PromptTextBox Grid.Column="1"
 									 Text="{Binding ProxyHost}"
-									 Prompt="{Binding Source={x:Static properties:Resources.Settings_Proxy_Host}, Mode=OneWay}" />
+									 Prompt="{Binding Resources.Settings_Proxy_Host, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 				<TextBlock Grid.Column="3">
-					<Run Text="{Binding Source={x:Static properties:Resources.Settings_Proxy_Port}, Mode=OneWay}" />
+					<Run Text="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 					<Run Text=": " />
 				</TextBlock>
 				<metro:PromptTextBox Grid.Column="4"
 									 Text="{Binding ProxyPort}"
-									 Prompt="{Binding Source={x:Static properties:Resources.Settings_Proxy_Port}, Mode=OneWay}"
+									 Prompt="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 Width="80" />
 			</Grid>
-			<CheckBox Content="{Binding Source={x:Static properties:Resources.Settings_Proxy_Enable_4_SSL}}"
+			<CheckBox Content="{Binding Resources.Settings_Proxy_Enable_4_SSL, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					  IsChecked="{Binding UseProxyForSSL}"
 					  Margin="0,4" />
 		</StackPanel>
