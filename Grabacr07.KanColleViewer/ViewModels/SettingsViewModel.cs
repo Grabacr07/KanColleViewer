@@ -268,7 +268,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		public void OpenScreenshotFolderSelectionDialog()
 		{
-			var message = new FolderSelectionMessage("OpenFolderDialog/Screensgot")
+			var message = new FolderSelectionMessage("OpenFolderDialog/Screenshot")
 			{
 				Title = Resources.Settings_Screenshot_FolderSelectionDialog_Title,
 				DialogPreference = Helper.IsWindows8OrGreater

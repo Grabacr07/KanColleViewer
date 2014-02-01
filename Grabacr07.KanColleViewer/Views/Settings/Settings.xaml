@@ -29,7 +29,7 @@
 
 	<i:Interaction.Triggers>
 		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
-										 MessageKey="OpenFolderDialog/Screensgot">
+										 MessageKey="OpenFolderDialog/Screenshot">
 			<livet:FolderBrowserDialogInteractionMessageAction />
 		</livet:InteractionMessageTrigger>
 	</i:Interaction.Triggers>
