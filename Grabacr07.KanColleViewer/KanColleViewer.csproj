@@ -467,6 +467,7 @@
     <EmbeddedResource Include="Properties\Resources.ja-JP.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-CN.resx">
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.zh-TW.resx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
