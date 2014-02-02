@@ -156,5 +156,15 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				this.UriRequested(this, uri);
 			}
 		}
+        public void GoGame()
+        {
+            Uri uri;
+            string SauceCookie;
+            SauceCookie = "javascript:document.cookie=\"ckcy=1;domain=.dmm.com;path=/\";location.href=\"http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/\";";
+            if (this.UriRequested != null && Uri.TryCreate(SauceCookie, UriKind.Absolute, out uri))
+            {
+                this.UriRequested(this, uri);
+            }
+        }
 	}
 }

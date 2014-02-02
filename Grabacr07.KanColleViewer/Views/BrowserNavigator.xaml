@@ -12,66 +12,79 @@
 			 mc:Ignorable="d"
 			 d:DesignWidth="800"
 			 DataContext="{Binding Source={x:Static root:App.ViewModelRoot}, Path=Navigator}">
-	<Grid>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="Auto" />
-			<ColumnDefinition Width="Auto" />
-			<ColumnDefinition />
-			<ColumnDefinition Width="Auto" />
-		</Grid.ColumnDefinitions>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
 
-		<controls:NavigationButton Width="40"
+        <controls:NavigationButton Width="40"
 								   Height="40"
 								   IsEnabled="{Binding CanGoBack}"
 								   ToolTip="전 페이지로 이동">
-			<i:Interaction.Triggers>
-				<i:EventTrigger EventName="Click">
-					<livet:LivetCallMethodAction MethodTarget="{Binding}"
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <livet:LivetCallMethodAction MethodTarget="{Binding}"
 												 MethodName="GoBack" />
-				</i:EventTrigger>
-			</i:Interaction.Triggers>
-		</controls:NavigationButton>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </controls:NavigationButton>
 
-		<controls:NavigationButton Grid.Column="1"
+        <controls:NavigationButton Grid.Column="1"
 								   Direction="GoForward"
 								   ToolTip="앞 페이지로 이동"
 								   IsEnabled="{Binding CanGoForward}"
 								   Width="{Binding ElementName=UrlBox, Path=ActualHeight}"
 								   Height="{Binding ElementName=UrlBox, Path=ActualHeight}"
-								   Margin="4,0">
-			<i:Interaction.Triggers>
-				<i:EventTrigger EventName="Click">
-					<livet:LivetCallMethodAction MethodTarget="{Binding}"
+								   Margin="4,7">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <livet:LivetCallMethodAction MethodTarget="{Binding}"
 												 MethodName="GoForward" />
-				</i:EventTrigger>
-			</i:Interaction.Triggers>
-		</controls:NavigationButton>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </controls:NavigationButton>
 
-		<metro:PromptTextBox x:Name="UrlBox"
+        <metro:PromptTextBox x:Name="UrlBox"
 							 Grid.Column="2"
 							 Text="{Binding SourceString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 							 Prompt="URL을 입력하고 엔터키로 이동합니다."
 							 VerticalAlignment="Center"
 							 VerticalContentAlignment="Center"
-							 Padding="2,2">
-			<metro:PromptTextBox.InputBindings>
-				<KeyBinding Key="Enter"
+							 Padding="2,2" Margin="0,7,0,7">
+            <metro:PromptTextBox.InputBindings>
+                <KeyBinding Key="Enter"
 							Command="{Binding NavigateCommand}" />
-			</metro:PromptTextBox.InputBindings>
-		</metro:PromptTextBox>
+            </metro:PromptTextBox.InputBindings>
+        </metro:PromptTextBox>
 
-		<controls:NavigationButton Grid.Column="3"
+        <controls:NavigationButton Grid.Column="3"
 								   Direction="Reload"
 								   ToolTip="새로고침"
 								   Width="{Binding ElementName=UrlBox, Path=ActualHeight}"
 								   Height="{Binding ElementName=UrlBox, Path=ActualHeight}"
-								   Margin="4,0,0,0">
-			<i:Interaction.Triggers>
-				<i:EventTrigger EventName="Click">
-					<livet:LivetCallMethodAction MethodTarget="{Binding}"
+								   Margin="1" BorderThickness="4,1,1,1">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <livet:LivetCallMethodAction MethodTarget="{Binding}"
 												 MethodName="ReNavigate" />
-				</i:EventTrigger>
-			</i:Interaction.Triggers>
-		</controls:NavigationButton>
-	</Grid>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </controls:NavigationButton>
+        <controls:NavigationButton Grid.Column="4"
+								   ToolTip="게임페이지로 이동"
+								   Width="{Binding ElementName=UrlBox, Path=ActualHeight}"
+								   Height="{Binding ElementName=UrlBox, Path=ActualHeight}"
+								   Margin="1" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <livet:LivetCallMethodAction MethodTarget="{Binding}"
+                                                 MethodName="GoGame"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </controls:NavigationButton>
+    </Grid>
 </UserControl>
