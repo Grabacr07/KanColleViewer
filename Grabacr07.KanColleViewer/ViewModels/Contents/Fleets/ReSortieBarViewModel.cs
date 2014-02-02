@@ -124,7 +124,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		{
 			if (this.source.CanReSortie)
 			{
-				this.Message = "出撃可能！";
+				this.Message = "출격가능!";
 				this.CanReSortie = true;
 				return;
 			}
@@ -133,24 +133,24 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 			if (this.source.Reason.HasFlag(CanReSortieReason.Wounded))
 			{
-				list.Add("中破以上の艦娘");
+				list.Add("중파이상인 칸무스");
 			}
 			if (this.source.Reason.HasFlag(CanReSortieReason.LackForResources))
 			{
-				list.Add("未補給の艦娘");
+				list.Add("보급 못받은 칸무스");
 			}
 			if (this.source.Reason.HasFlag(CanReSortieReason.BadCondition))
 			{
-				list.Add("疲労中の艦娘");
+				list.Add("피로한 칸무스");
 			}
 
-			this.Message = string.Format("艦隊に{0}がいます。", list.ToString("・"));
+			this.Message = string.Format("함대에 {0}가 있습니다.", list.ToString("・"));
 			this.CanReSortie = false;
 		}
 
 		private void UpdateRemaining()
 		{
-			this.Remaining = this.source.Remaining.HasValue ? "再出撃までの目安: " + this.source.Remaining.Value.ToString(@"mm\:ss") : "";
+			this.Remaining = this.source.Remaining.HasValue ? "출격가능까지: " + this.source.Remaining.Value.ToString(@"mm\:ss") : "";
 		}
 	}
 }

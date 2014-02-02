@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Models.Raw;
 using Grabacr07.KanColleWrapper.Internal;
+using System.IO;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
@@ -33,7 +34,33 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public string Name
 		{
-			get { return this.RawData.api_name; }
+            //원본코드.
+			//get { return this.RawData.api_name; }
+            //commit발췌.https://github.com/Zharay/KanColleViewer/commit/ba21e509635aa59343b1070abd97702d1b060eb4
+            //수정코드.https://github.com/Zharay/KanColleViewer/blob/ba21e509635aa59343b1070abd97702d1b060eb4/Grabacr07.KanColleWrapper/Models/ShipInfo.cs
+            get
+            {
+                var location = System.Reflection.Assembly.GetEntryAssembly().Location;
+                string Main_folder = Path.GetDirectoryName(location);
+                
+                System.IO.StreamReader filereader = new System.IO.StreamReader(Main_folder+"\\ship.txt", System.Text.Encoding.UTF8, true);
+                string read_line = null;
+                string jap_name = null;
+                string eng_name = null;
+                while (true)
+                {
+                    read_line = filereader.ReadLine();
+                    if (String.IsNullOrEmpty(read_line)) { filereader.Close(); break; }
+                    else
+                    {
+                        char[] delimiter = { ';', ',' };
+                        jap_name = read_line.Split(delimiter)[0];
+                        eng_name = read_line.Split(delimiter)[1];
+                        if (String.Equals(RawData.api_name, jap_name)) { filereader.Close(); return eng_name; }
+                    }
+                }
+                return this.RawData.api_name;
+            }
 		}
 
 		/// <summary>

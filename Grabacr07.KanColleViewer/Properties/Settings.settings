@@ -6,7 +6,7 @@
       <Value Profile="(Default)">37564</Value>
     </Setting>
     <Setting Name="KanColleUrl" Type="System.Uri" Scope="Application">
-      <Value Profile="(Default)">http://www.dmm.com/netgame/social/application/-/detail/=/app_id=854854/</Value>
+      <Value Profile="(Default)">https://www.dmm.com/my/-/login/</Value>
     </Setting>
     <Setting Name="OverrideStyleSheet" Type="System.String" Scope="Application">
       <Value Profile="(Default)">body {

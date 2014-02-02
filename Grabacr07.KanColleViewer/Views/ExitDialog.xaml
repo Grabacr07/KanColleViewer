@@ -25,7 +25,7 @@
 			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 
-		<TextBlock Text="「提督業も忙しい！」 を終了します。 よろしいですか？"
+		<TextBlock Text="「제독업무도 바빠!」를 종료하시겠습니까?"
 				   FontSize="13"
 				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 				   Margin="10,0"

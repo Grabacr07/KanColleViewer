@@ -25,10 +25,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				.FirstOrDefault();
 			if (dock == null)
 			{
-				return "艦隊に入渠中の艦娘がいます。";
+				return "함대에 입거중인 칸무스가 있습니다.";
 			}
 			var remaining = dock.CompleteTime.Value.LocalDateTime - DateTimeOffset.Now - TimeSpan.FromMinutes(1.0);
-			return string.Format(@"艦隊に入渠中の艦娘がいます。 完了時刻: {0:MM/dd HH\:mm} 完了まで: {1}:{2:mm\:ss}",
+            return string.Format(@"함대에 입거중인 칸무스가 있습니다. 완료시각: {0:MM/dd HH\:mm} 완료까지: {1}:{2:mm\:ss}",
 				dock.CompleteTime.Value.LocalDateTime, (int)remaining.TotalHours, remaining);
 		}
 	}

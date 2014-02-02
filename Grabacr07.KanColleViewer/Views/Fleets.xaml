@@ -109,10 +109,10 @@
 					<Border Padding="10,5"
 							Background="#FF204080">
 						<TextBlock Foreground="White">
-							<Run Text="この艦隊は遠征中です。" />
-							<Run Text=" 完了時刻:" />
+							<Run Text="이 함대는 원정중입니다." />
+							<Run Text=" 완료시각:" />
 							<Run Text="{Binding ReturnTime, Mode=OneWay}" />
-							<Run Text=" 帰投まで:" />
+							<Run Text=" 귀환까지:" />
 							<Run Text="{Binding Remaining, Mode=OneWay}" />
 						</TextBlock>
 					</Border>

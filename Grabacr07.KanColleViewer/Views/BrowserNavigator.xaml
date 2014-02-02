@@ -23,7 +23,7 @@
 		<controls:NavigationButton Width="40"
 								   Height="40"
 								   IsEnabled="{Binding CanGoBack}"
-								   ToolTip="前のページに戻る">
+								   ToolTip="전 페이지로 이동">
 			<i:Interaction.Triggers>
 				<i:EventTrigger EventName="Click">
 					<livet:LivetCallMethodAction MethodTarget="{Binding}"
@@ -34,7 +34,7 @@
 
 		<controls:NavigationButton Grid.Column="1"
 								   Direction="GoForward"
-								   ToolTip="次のページに進む"
+								   ToolTip="앞 페이지로 이동"
 								   IsEnabled="{Binding CanGoForward}"
 								   Width="{Binding ElementName=UrlBox, Path=ActualHeight}"
 								   Height="{Binding ElementName=UrlBox, Path=ActualHeight}"
@@ -50,7 +50,7 @@
 		<metro:PromptTextBox x:Name="UrlBox"
 							 Grid.Column="2"
 							 Text="{Binding SourceString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-							 Prompt="URL を入力し、Enter キーで移動します。"
+							 Prompt="URL을 입력하고 엔터키로 이동합니다."
 							 VerticalAlignment="Center"
 							 VerticalContentAlignment="Center"
 							 Padding="2,2">
@@ -62,7 +62,7 @@
 
 		<controls:NavigationButton Grid.Column="3"
 								   Direction="Reload"
-								   ToolTip="ページのリロード"
+								   ToolTip="새로고침"
 								   Width="{Binding ElementName=UrlBox, Path=ActualHeight}"
 								   Height="{Binding ElementName=UrlBox, Path=ActualHeight}"
 								   Margin="4,0,0,0">

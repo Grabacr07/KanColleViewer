@@ -56,7 +56,7 @@
 				</ItemsControl>
 
 				<TextBlock Grid.Row="1"
-						   Text="発生中の任務はありません"
+						   Text="임무가 없습니다."
 						   HorizontalAlignment="Center"
 						   Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}"
 						   Margin="10" />

@@ -72,15 +72,15 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				this.Quests,
 				this.Expeditions,
 			};
-			this.SystemTabItems = new List<TabItemViewModel>
-			{
-				new SettingsViewModel(),
-				#region DEBUG
+            this.SystemTabItems = new List<TabItemViewModel>
+            {
+                new SettingsViewModel(),
+                #region DEBUG
 #if DEBUG
-				new DebugTabViewModel(),
+                //new DebugTabViewModel(),
 #endif
-				#endregion
-			};
+                #endregion
+            };
 			this.SelectedItem = this.TabItems.FirstOrDefault();
 
 			this.Volume = new VolumeViewModel();

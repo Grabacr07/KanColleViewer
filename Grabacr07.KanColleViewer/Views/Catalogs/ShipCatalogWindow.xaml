@@ -94,7 +94,7 @@
 			<Expander Margin="8"
 					  IsExpanded="{Binding IsOpenSettings, Mode=TwoWay}">
 				<Expander.Header>
-					<TextBlock Text="フィルター設定"
+					<TextBlock Text="필터 설정"
 							   FontSize="14" />
 				</Expander.Header>
 				<StackPanel Grid.IsSharedSizeScope="True">
@@ -115,7 +115,7 @@
 							</Grid.RowDefinitions>
 
 							<TextBlock Margin="0,2">
-								<Run Text="艦種" />
+								<Run Text="함종" />
 								<Run Text=":" />
 							</TextBlock>
 
@@ -123,7 +123,7 @@
 									  Grid.Column="2"
 									  IsChecked="{Binding CheckAllShipTypes, Mode=TwoWay}"
 									  Margin="0,2">
-								<TextBlock Text="すべて選択" />
+								<TextBlock Text="모두 선택" />
 							</CheckBox>
 
 							<ItemsControl Grid.Row="1"
@@ -159,13 +159,13 @@
 									<ColumnDefinition Width="*" />
 								</Grid.ColumnDefinitions>
 								<TextBlock Margin="0,2">
-									<Run Text="レベル" />
+									<Run Text="레벨" />
 									<Run Text=":" />
 								</TextBlock>
 								<WrapPanel Grid.Column="2">
 									<CheckBox IsChecked="{Binding WithoutLv1Ship, Mode=TwoWay}"
 											  Margin="0,2,20,2">
-										<TextBlock Text="Lv.1 の艦娘を表示しない" />
+										<TextBlock Text="Lv.1 칸무스 표시 안하기" />
 									</CheckBox>
 								</WrapPanel>
 							</Grid>
@@ -178,13 +178,13 @@
 									<ColumnDefinition Width="*" />
 								</Grid.ColumnDefinitions>
 								<TextBlock Margin="0,2">
-									<Run Text="ステータス" />
+									<Run Text="스테이터스" />
 									<Run Text=":" />
 								</TextBlock>
 								<WrapPanel Grid.Column="2">
 									<CheckBox IsChecked="{Binding WithoutMaxModernizedShip, Mode=TwoWay}"
 											  Margin="0,2">
-										<TextBlock Text="近代化改修 MAX の艦娘を表示しない" />
+										<TextBlock Text="근대화개수 MAX인 칸무스 표시 안하기" />
 									</CheckBox>
 								</WrapPanel>
 							</Grid>
@@ -271,7 +271,7 @@
 										<metro2:SortButton.MethodParameter>
 											<viewModels:ShipCatalogSortTarget>Type</viewModels:ShipCatalogSortTarget>
 										</metro2:SortButton.MethodParameter>
-										<TextBlock Text="艦種" />
+										<TextBlock Text="함종" />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
@@ -289,7 +289,7 @@
 										<metro2:SortButton.MethodParameter>
 											<viewModels:ShipCatalogSortTarget>Name</viewModels:ShipCatalogSortTarget>
 										</metro2:SortButton.MethodParameter>
-										<TextBlock Text="艦名" />
+										<TextBlock Text="함명" />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
@@ -308,7 +308,7 @@
 										<metro2:SortButton.MethodParameter>
 											<viewModels:ShipCatalogSortTarget>Level</viewModels:ShipCatalogSortTarget>
 										</metro2:SortButton.MethodParameter>
-										<TextBlock Text="レベル" />
+										<TextBlock Text="레벨" />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
@@ -355,7 +355,7 @@
 
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
-									<TextBlock Text="火力" />
+									<TextBlock Text="화력" />
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -369,7 +369,7 @@
 
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
-									<TextBlock Text="雷装" />
+									<TextBlock Text="뇌장" />
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -383,7 +383,7 @@
 
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
-									<TextBlock Text="対空" />
+									<TextBlock Text="대공" />
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -397,7 +397,7 @@
 
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
-									<TextBlock Text="装甲" />
+									<TextBlock Text="장갑" />
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -411,7 +411,7 @@
 
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
-									<TextBlock Text="運" />
+									<TextBlock Text="운" />
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -436,7 +436,7 @@
 					Padding="20"
 					Visibility="{Binding IsReloading, Converter={StaticResource BooleanToVisibilityConverter}}"
 					d:IsHidden="True">
-				<TextBlock Text="表示を更新しています..."
+				<TextBlock Text="표시내용을 업데이트합니다..."
 						   FontSize="16"
 						   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 						   Background="{DynamicResource ThemeBrushKey}"

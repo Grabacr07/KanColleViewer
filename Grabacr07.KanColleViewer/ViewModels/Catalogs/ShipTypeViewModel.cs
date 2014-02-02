@@ -76,7 +76,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 			// [ID = 8 (金剛型戦艦)] と [ID = 9 (金剛型以外の戦艦)] がどちらも "戦艦" 表記で区別がつかないため、
 			// ID = 8 の方を "巡洋戦艦" に変更
-			this.DisplayName = (stype.Id == 8 && stype.Name == "戦艦") ? "巡洋戦艦" : stype.Name;
+			this.DisplayName = (stype.Id == 8 && stype.Name == "전함") ? "순양전함" : stype.Name;
 		}
 
 		public void Set(bool selected)

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Models.Raw;
+using System.IO;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
@@ -51,7 +52,34 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public string Title
 		{
-			get { return this.RawData.api_title; }
+            //원본 코드. api값을 그대로 출력한다
+			//get { return this.RawData.api_title; }
+            //commit발췌.https://github.com/Zharay/KanColleViewer/commit/ba21e509635aa59343b1070abd97702d1b060eb4
+            //수정코드.https://github.com/Zharay/KanColleViewer/blob/ba21e509635aa59343b1070abd97702d1b060eb4/Grabacr07.KanColleWrapper/Models/Quest.cs
+            get
+            {
+                var location = System.Reflection.Assembly.GetEntryAssembly().Location;
+                string Main_folder = Path.GetDirectoryName(location);
+
+                System.IO.StreamReader filereader = new System.IO.StreamReader(Main_folder + "\\quest.txt", System.Text.Encoding.UTF8, true);
+                string read_line = null;
+                string jap_name = null;
+                string eng_name = null;
+                while (true)
+                {
+                    read_line = filereader.ReadLine();
+                    if (String.IsNullOrEmpty(read_line)) { filereader.Close(); break; }
+                    else
+                    {
+                        char[] delimiter = { ';' };
+                        jap_name = read_line.Split(delimiter)[1];
+                        eng_name = read_line.Split(delimiter)[2];
+                        if (String.Equals(RawData.api_title, jap_name)) { filereader.Close(); return eng_name; }
+                    }
+                }
+                return this.RawData.api_title;
+            }
+
 		}
 
 		/// <summary>
@@ -59,7 +87,34 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public string Detail
 		{
-			get { return this.RawData.api_detail; }
+			//원본코드
+            //get { return this.RawData.api_detail; }
+            //commit발췌.https://github.com/Zharay/KanColleViewer/commit/ba21e509635aa59343b1070abd97702d1b060eb4
+            //수정코드.https://github.com/Zharay/KanColleViewer/blob/ba21e509635aa59343b1070abd97702d1b060eb4/Grabacr07.KanColleWrapper/Models/Quest.cs
+            get
+            {
+                var location = System.Reflection.Assembly.GetEntryAssembly().Location;
+                string Main_folder = Path.GetDirectoryName(location);
+
+                System.IO.StreamReader filereader = new System.IO.StreamReader(Main_folder+"\\quest.txt", System.Text.Encoding.UTF8, true);
+                string read_line = null;
+                string jap_name = null;
+                string eng_name = null;
+                while (true)
+                {
+                    read_line = filereader.ReadLine();
+                    if (String.IsNullOrEmpty(read_line)) { filereader.Close(); break; }
+                    else
+                    {
+                        char[] delimiter = { ';' };
+                        jap_name = read_line.Split(delimiter)[3];
+                        eng_name = read_line.Split(delimiter)[4];
+                        if (String.Equals(RawData.api_detail, jap_name)) { filereader.Close(); return eng_name; }
+                    }
+                }
+                return this.RawData.api_detail;
+            }
+
 		}
 
 

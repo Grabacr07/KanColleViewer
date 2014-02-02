@@ -171,19 +171,19 @@
 					Grid.Column="0">
 				<StackPanel>
 					<TextBlock>
-						<Run Text="データ" />
+						<Run Text="데이터" />
 					</TextBlock>
 
 					<Rectangle Height="1"
 							   Margin="0,7,0,3"
 							   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-					<metroControls:CallMethodButton Content="艦娘一覧"
+					<metroControls:CallMethodButton Content="함선목록"
 													Padding="12,8"
 													Margin="0,5,0,8"
 													MethodName="ShowShipCatalog" />
 
-					<metroControls:CallMethodButton Content="装備一覧"
+					<metroControls:CallMethodButton Content="장비목록"
 													Padding="12,8"
 													MethodName="ShowSlotItemCatalog" />
 				</StackPanel>

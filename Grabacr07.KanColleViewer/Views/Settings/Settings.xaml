@@ -164,6 +164,13 @@
 						</metro2:HyperlinkEx>
 
 						<LineBreak />
+                                                        <Run Text="Korean Source code:" />
+                                <metro2:HyperlinkEx Uri="https://github.com/FreyYa/KanColleViewer">
+                                    <Run Text="https://github.com/FreyYa/KanColleViewer" />
+                                </metro2:HyperlinkEx>
+
+                                <LineBreak />
+
 
 						<Run Text="Source code:" />
 						<metro2:HyperlinkEx Uri="https://github.com/Grabacr07/KanColleViewer">
