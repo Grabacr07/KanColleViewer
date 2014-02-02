@@ -32,25 +32,31 @@ namespace Grabacr07.KanColleWrapper.Models
             {
                 var location = System.Reflection.Assembly.GetEntryAssembly().Location;
                 string Main_folder = Path.GetDirectoryName(location);
-
-                System.IO.StreamReader filereader = new System.IO.StreamReader(Main_folder + "\\equipment.txt", System.Text.Encoding.UTF8, true);
-                string read_line = null;
-                string jap_name = null;
-                string eng_name = null;
-                while (true)
+                if (System.IO.File.Exists(Main_folder + "\\equipment.txt") == true)
                 {
-                    read_line = filereader.ReadLine();
-                    if (String.IsNullOrEmpty(read_line)) { filereader.Close(); break; }
-                    else
+                    System.IO.StreamReader filereader = new System.IO.StreamReader(Main_folder + "\\equipment.txt", System.Text.Encoding.UTF8, true);
+                    string read_line = null;
+                    string jap_name = null;
+                    string eng_name = null;
+                    while (true)
                     {
-                        char[] delimiter = { ';', ',' };
-                        jap_name = read_line.Split(delimiter)[0];
-                        eng_name = read_line.Split(delimiter)[1];
-                        if (String.Equals(RawData.api_name, jap_name))
-                        { filereader.Close(); return eng_name; }
+                        read_line = filereader.ReadLine();
+                        if (String.IsNullOrEmpty(read_line)) { filereader.Close(); break; }
+                        else
+                        {
+                            char[] delimiter = { ';', ',' };
+                            jap_name = read_line.Split(delimiter)[0];
+                            eng_name = read_line.Split(delimiter)[1];
+                            if (String.Equals(RawData.api_name, jap_name))
+                            { filereader.Close(); return eng_name; }
+                        }
                     }
+                    return this.RawData.api_name;
                 }
-                return this.RawData.api_name;
+                else
+                {
+                    return this.RawData.api_name;
+                }
             }
 		}
 
