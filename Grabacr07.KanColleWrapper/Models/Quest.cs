@@ -102,10 +102,11 @@ namespace Grabacr07.KanColleWrapper.Models
             {//get시작
                 var location = System.Reflection.Assembly.GetEntryAssembly().Location;
                 string Main_folder = Path.GetDirectoryName(location);
-
-                System.IO.StreamReader filereader = new System.IO.StreamReader(Main_folder+"\\quest.txt", System.Text.Encoding.UTF8, true);
                 if (System.IO.File.Exists(Main_folder + "\\quest.txt") == true)
                 {
+                System.IO.StreamReader filereader = new System.IO.StreamReader(Main_folder+"\\quest.txt", System.Text.Encoding.UTF8, true);
+                
+                
                     string read_line = null;
                     string jap_name = null;
                     string eng_name = null;

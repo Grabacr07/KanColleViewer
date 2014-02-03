@@ -250,7 +250,7 @@
     <value>스크린샷을 저장했습니다: </value>
   </data>
   <data name="Settings_BrowserControl" xml:space="preserve">
-    <value>브라우저 조작</value>
+    <value>브라우저</value>
   </data>
   <data name="Settings_BrowserControl_ClearZoomFactorButton" xml:space="preserve">
     <value>줌 배율을 100%로 되돌림</value>

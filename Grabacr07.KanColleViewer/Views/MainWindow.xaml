@@ -15,9 +15,9 @@
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
 				   Title="{Binding Title}"
-				   Width="960"
-				   Height="945"
+				   Width="1440"
 				   MinWidth="{Binding ElementName=WebBrowser, Path=Width}"
+                   MinHeight="525"
 				   Topmost="{Binding TopMost}"
 				   FontSize="12"
 				   Background="{DynamicResource ThemeBrushKey}"
@@ -41,7 +41,7 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
-			<RowDefinition Height="23" />
+			<RowDefinition Height="18" />
 		</Grid.RowDefinitions>
 
 		<!-- #region CaptionBar -->
@@ -54,8 +54,8 @@
 					<ColumnDefinition Width="Auto" />
 				</Grid.ColumnDefinitions>
 
-				<controls:AppIcon Width="36"
-								  Height="36"
+				<controls:AppIcon Width="24"
+								  Height="24"
 								  Background="Transparent"
 								  AnchorVisibility="Collapsed"
 								  BandVisibility="Collapsed" />
@@ -67,28 +67,31 @@
 						   Margin="2,2,8,2"
 						   Opacity="0.85" />
 
-				<StackPanel Grid.Column="2"
+                <StackPanel Grid.Column="2"
 							Orientation="Horizontal"
 							HorizontalAlignment="Right"
 							VerticalAlignment="Top">
-					<metro:CaptionButton IsChecked="{Binding TopMost, Mode=TwoWay}"
-										 ToolTip="{Binding Source={x:Static properties:Resources.Settings_Window_TopMost}}"
-										 Style="{DynamicResource PinButtonStyleKey}" />
-					<metro:SystemButtons />
-				</StackPanel>
+
+                    <metro:CaptionButton IsChecked="{Binding TopMost, Mode=TwoWay}"
+						ToolTip="{Binding Source={x:Static properties:Resources.Settings_Window_TopMost}}"
+						Style="{DynamicResource PinButtonStyleKey}" />
+                    <metro:SystemButtons />
+
+                </StackPanel>
 			</Grid>
 		</Border>
 		<!-- #endregion -->
 
 		<Grid Grid.Row="1">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto" />
-				<RowDefinition Height="*" />
-			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
 
 			<WebBrowser x:Name="WebBrowser"
-						Width="960"
-						Height="572"
+                        Grid.Column="0"
+						Width="800"
+						Height="480"
 						controls:WebBrowserHelper.ScriptErrorsSuppressed="True">
 				<i:Interaction.Behaviors>
 					<behaviors:SetStyleSheetBehavior />
@@ -107,9 +110,10 @@
 					</livet:InteractionMessageTrigger>
 				</i:Interaction.Triggers>
 			</WebBrowser>
-
-			<ContentControl Grid.Row="1"
-							Content="{Binding Content}">
+            <DockPanel Grid.Column="1">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                               VerticalScrollBarVisibility="Disabled">
+                    <ContentControl Content="{Binding Content}">
 				<ContentControl.Resources>
 					<DataTemplate DataType="{x:Type viewModels:StartContentViewModel}">
 						<views:StartContent />
@@ -119,11 +123,14 @@
 						<views:MainContent />
 					</DataTemplate>
 				</ContentControl.Resources>
-			</ContentControl>
+                    </ContentControl>
+                </ScrollViewer>
+            </DockPanel>
+            
 		</Grid>
 
 		<!-- region Status area -->
-		<Grid Grid.Row="2"
+		<Grid Grid.Row="3"
 			  Background="{DynamicResource AccentBrushKey}"
 			  Panel.ZIndex="100">
 			<Grid.ColumnDefinitions>
@@ -132,7 +139,8 @@
 			</Grid.ColumnDefinitions>
 
 			<views:StatusBar />
-			<metro:ResizeGrip Grid.Column="1" />
+			<metro:ResizeGrip Grid.Column="1" 
+                              Margin="5,3,2,2" />
 		</Grid>
 		<!-- endregion -->
 	</Grid>

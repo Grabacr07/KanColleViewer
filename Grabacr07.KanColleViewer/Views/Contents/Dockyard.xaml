@@ -180,7 +180,7 @@
 		<StackPanel Grid.Column="2"
 					Orientation="Vertical"
 					VerticalAlignment="Bottom">
-			<StackPanel Margin="10">
+			<StackPanel Margin="0">
 				<TextBlock Margin="5">
 					<Run Text="{x:Static properties:Resources.Dockyard_Display_Title}"
 						 Style="{DynamicResource PickupTextElementStyleKey}" />
@@ -191,7 +191,7 @@
 				</CheckBox>
 			</StackPanel>
 
-			<StackPanel Margin="10,10,10,4">
+			<StackPanel Margin="0,10,0,4">
 				<StackPanel.Style>
 					<Style TargetType="{x:Type StackPanel}">
 						<Style.Triggers>

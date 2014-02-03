@@ -196,7 +196,7 @@
 										   Grid.Row="0"
 										   Grid.RowSpan="2"
 										   HorizontalAlignment="Right"
-										   Margin="10,0,0,0">
+										   Margin="5,0,0,0">
 									<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
 										 FontSize="14" />
 									<Run Text=""
@@ -207,7 +207,7 @@
 								<TextBlock Grid.Column="2"
 										   Grid.Row="0"
 										   Grid.RowSpan="2"
-										   Margin="4,0,10,0">
+										   Margin="4,0,5,0">
 									<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
 										 FontSize="22"
 										 Style="{DynamicResource PickupTextElementStyleKey}" />
@@ -215,7 +215,7 @@
 
 								<TextBlock Grid.Column="3"
 										   Grid.Row="0"
-										   Margin="10,0,10,10"
+										   Margin="5,0,5,10"
 										   Grid.RowSpan="2">
 									<Run Text="Lv." />
 									<Run Text="{Binding Ship.Level, Mode=OneWay}"
@@ -223,7 +223,7 @@
 								</TextBlock>
 								<TextBlock Grid.Column="3"
 										   Grid.Row="1"
-										   Margin="10,0,10,-1">
+										   Margin="5,0,5,-1">
 									<Run Text="Next:"
 										 FontSize="9" />
 									<Run Text="{Binding Ship.ExpForNextLevel, Mode=OneWay}"
@@ -233,7 +233,7 @@
 
 								<TextBlock Grid.Column="4"
 										   Grid.Row="0"
-										   Margin="10,0,10,10"
+										   Margin="5,0,5,10"
 										   Grid.RowSpan="2">
 									<Run Text="HP:" />
 									<Run Text="{Binding Ship.HP.Current, Mode=OneWay}"
@@ -250,7 +250,7 @@
 
 								<TextBlock Grid.Column="5"
 										   Grid.Row="0"
-										   Margin="10,0,10,10"
+										   Margin="5,0,5,10"
 										   Grid.RowSpan="2">
 									<InlineUIContainer>
 										<controls:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
@@ -260,7 +260,7 @@
 								</TextBlock>
 								<TextBlock Grid.Column="5"
 										   Grid.Row="1"
-										   Margin="10,0,10,-1">
+										   Margin="5,0,5,-1">
 									<Run Text="condition"
 										 FontSize="9" />
 								</TextBlock>
@@ -282,7 +282,7 @@
 											  Grid.Row="0"
 											  Grid.RowSpan="2"
 											  ItemsSource="{Binding Ship.SlotItems}"
-											  Margin="7,0">
+											  Margin="5,0">
 									<ItemsControl.Template>
 										<ControlTemplate TargetType="{x:Type ItemsControl}">
 											<StackPanel IsItemsHost="True"
@@ -294,7 +294,7 @@
 											<Border ToolTip="{Binding Info.Name}"
 													Background="Transparent">
 												<controls:SlotItemIcon Type="{Binding Info.IconType}"
-																	   Margin="3,0" />
+																	   Margin="0,0" />
 											</Border>
 										</DataTemplate>
 									</ItemsControl.ItemTemplate>
