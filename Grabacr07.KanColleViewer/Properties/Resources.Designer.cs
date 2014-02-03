@@ -61,7 +61,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   ※ To be implemented과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   ※近日実装予定과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Common_Implement_Oncoming {
             get {
@@ -70,7 +70,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   No Notifications과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   通知しない과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Common_Notifications_Disable {
             get {
@@ -79,7 +79,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   (planned)과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   (未実装)과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Common_Notifications_NotImplemented {
             get {
@@ -88,7 +88,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Notifications과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   通知設定과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Common_Notifications_Title {
             get {
@@ -97,7 +97,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   (Windows 8+)과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   (Windows 8 以降)과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Common_Notifications_Windows8 {
             get {
@@ -106,7 +106,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Shipgirl과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   艦娘과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Common_ShipGirl {
             get {
@@ -115,7 +115,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Construction과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   建造ドック과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Dockyard {
             get {
@@ -124,7 +124,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Complete!과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   完成！과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Dockyard_Complete {
             get {
@@ -133,7 +133,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Reveal Ship Names과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   建造中の艦名をネタバレする과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Dockyard_Display_Reveal {
             get {
@@ -142,7 +142,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Display Settings과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   表示設定과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Dockyard_Display_Title {
             get {
@@ -151,7 +151,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Locked과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   ロックされています과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Dockyard_Locked {
             get {
@@ -160,7 +160,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Construction of {1} in Dock {0} has been completed.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   工廠第 {0} ドックでの{1}の建造が完了しました。과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Dockyard_NotificationMessage {
             get {
@@ -169,7 +169,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Construction Completed과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   建造完了과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Dockyard_NotificationMessage_Title {
             get {
@@ -178,7 +178,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Notify Upon Completion과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   建造完了時に通知を表示する과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Dockyard_Notifications_Enable {
             get {
@@ -187,7 +187,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Individual Dock Settings과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   ドックごとに個別に設定する과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Dockyard_Notifications_Individual {
             get {
@@ -196,7 +196,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Ship In Progress과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   建造中の艦과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Dockyard_ShipName {
             get {
@@ -205,7 +205,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Completion Time과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   完成時刻과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Dockyard_TimeComplete {
             get {
@@ -214,7 +214,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Remaining Time과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   建造完了まで과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Dockyard_TimeRemaining {
             get {
@@ -223,7 +223,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Empty과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   未使用과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Dockyard_Unused {
             get {
@@ -232,7 +232,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Expeditions과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   遠征과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Expedition {
             get {
@@ -241,7 +241,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Not on an Expedition.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   遠征に出ていません。과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Expedition_NoExpedition {
             get {
@@ -250,7 +250,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   「{0}」 has returned from an expedition.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   「{0}」が遠征から帰投しました。과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Expedition_NotificationMessage {
             get {
@@ -259,7 +259,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Expedition Completed과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   遠征完了과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Expedition_NotificationMessage_Title {
             get {
@@ -268,7 +268,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Notify Upon Completion과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   遠征帰投時に通知を表示する과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Expedition_Notifications_Enable {
             get {
@@ -277,7 +277,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Individual Fleet Settings과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   艦隊ごとに個別に設定する과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Expedition_Notifications_Individual {
             get {
@@ -286,7 +286,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Completion Time과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   終了時刻과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Expedition_TimeComplete {
             get {
@@ -295,7 +295,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Remaining Time과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   艦隊帰投まで과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Expedition_TimeRemaining {
             get {
@@ -304,7 +304,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Fleets과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   艦隊과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Fleets {
             get {
@@ -313,7 +313,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Fleet HQ과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   司令部과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Homeport_FleetHQ {
             get {
@@ -322,7 +322,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Instant Build Materials:  과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   高速建造材:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Homeport_InstantBuild {
             get {
@@ -331,7 +331,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Instant Repair Materials:과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   高速修復材:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Homeport_InstantRepair {
             get {
@@ -340,7 +340,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Equipment:과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   保有装備:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Homeport_NoOfEquipment {
             get {
@@ -349,7 +349,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Ship Girls:  과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   所属艦娘:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Homeport_NoOfShips {
             get {
@@ -358,7 +358,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Overview과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   総合과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string IntegratedView {
             get {
@@ -367,7 +367,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Please visit all of the quest pages.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   任務画面の全ページにアクセスしてください。과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Quest_Detail_Untaken {
             get {
@@ -376,7 +376,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///    50% 과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///    50 % 과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Quest_Progress_50 {
             get {
@@ -385,7 +385,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///    80% 과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///    80 % 과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Quest_Progress_80 {
             get {
@@ -394,7 +394,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///    Complete 과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///    完了 과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Quest_State_Accomplished {
             get {
@@ -403,7 +403,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   (Unknown quest)과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   (未取得の任務)과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Quest_Title_Untaken {
             get {
@@ -412,7 +412,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Quests과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   任務과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Quests {
             get {
@@ -421,7 +421,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Active Quests과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   現在遂行中の任務과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Quests_CurrentQuestList {
             get {
@@ -430,7 +430,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Daily Quests과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   デイリー任務과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Quests_Daily {
             get {
@@ -439,7 +439,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   ※ The indicators (50%, 80%) mirror in-game indicators. Enemy fleet kills, successful expeditions, etc are not actively counted.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   ※進捗状況 (50 %, 80 %) はゲーム内の表示と同じです。敵艦隊の撃破数や遠征の成功回数のカウント等は行っていません。과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Quests_Notice {
             get {
@@ -448,7 +448,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Please open the in-game Quests menu to populate the Quest list.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   ゲーム内で [任務 (クエスト)] 画面を開いて、任務一覧を取得してください。과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Quests_Untaken {
             get {
@@ -457,7 +457,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Weekly Quests과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   ウィークリー任務과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Quests_Weekly {
             get {
@@ -466,7 +466,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Repair과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   入渠ドック과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Repairyard {
             get {
@@ -475,7 +475,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Locked과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   ロックされています과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Repairyard_Locked {
             get {
@@ -484,7 +484,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Repairs on {1} in Dock {0} have been completed.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   入渠第 {0} ドックでの「{1}」の整備が完了しました。과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Repairyard_NotificationMessage {
             get {
@@ -493,7 +493,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Repairs Completed과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   整備完了과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Repairyard_NotificationMessage_Title {
             get {
@@ -502,7 +502,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Notify Upon Completion과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   整備完了時に通知を表示する과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Repairyard_Notifications_Enable {
             get {
@@ -511,7 +511,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Individual Dock Settings과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   ドックごとに個別に設定する과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Repairyard_Notifications_Individual {
             get {
@@ -520,7 +520,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Docked Ship과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   入渠中の艦과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Repairyard_ShipName {
             get {
@@ -529,7 +529,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Completion Time과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   完了時刻과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Repairyard_TimeComplete {
             get {
@@ -538,7 +538,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Remaining Time과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   整備完了まで과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Repairyard_TimeRemaining {
             get {
@@ -547,7 +547,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Empty과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   未使用과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Reparyard_Unused {
             get {
@@ -556,7 +556,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   All ships in 「{0}」 have fully recovered from fatigue.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   「{0}」の全艦娘の疲労が回復しました。과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ReSortie_NotificationMessage {
             get {
@@ -565,7 +565,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Fatigue Recovery Completed과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   疲労回復完了과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ReSortie_NotificationMessage_Title {
             get {
@@ -574,7 +574,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Screenshot save failed: 과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   スクリーンショットの保存に失敗しました: 과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Screenshot_Failed {
             get {
@@ -583,7 +583,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Screenshot saved: 과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   スクリーンショットを保存しました: 과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Screenshot_Saved {
             get {
@@ -592,7 +592,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Settings과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   設定과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings {
             get {
@@ -601,7 +601,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Browser과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   ブラウザー操作과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_BrowserControl {
             get {
@@ -610,7 +610,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Reset zoom to 100%과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   ズーム倍率を 100 % に戻す과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_BrowserControl_ClearZoomFactorButton {
             get {
@@ -619,7 +619,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   (Display)과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   (表示)과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_BrowserControl_Display {
             get {
@@ -628,7 +628,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   ※ This will leave the game, so use with caution과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   ※ゲームのページから移動します。ご注意ください과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_BrowserControl_Notice {
             get {
@@ -637,7 +637,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Display Settings과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   表示設定과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Display {
             get {
@@ -646,7 +646,25 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Network과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Logging과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Settings_Logging {
+            get {
+                return ResourceManager.GetString("Settings_Logging", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Log drops and crafting results to file과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Settings_Logging_Enable {
+            get {
+                return ResourceManager.GetString("Settings_Logging_Enable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   通信設定과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Network {
             get {
@@ -655,7 +673,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Behaviour과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   動作設定과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Operation {
             get {
@@ -664,7 +682,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Other과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   その他과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Other {
             get {
@@ -673,7 +691,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Proxy Settings과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   プロキシ設定과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Proxy {
             get {
@@ -682,7 +700,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Use a proxy to connect the server과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   通信にプロキシ サーバーを使用する과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Proxy_Enable {
             get {
@@ -691,7 +709,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Use the proxy for SSL connections과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   SSL 接続時もプロキシサーバーを使用する과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Proxy_Enable_4_SSL {
             get {
@@ -700,7 +718,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Host과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   サーバー과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Proxy_Host {
             get {
@@ -709,7 +727,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Port과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   ポート과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Proxy_Port {
             get {
@@ -718,7 +736,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Screenshot Settings과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   スクリーンショット과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Screenshot {
             get {
@@ -727,7 +745,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Browse과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   選択과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Screenshot_FolderSelectionDialog_OpenButton {
             get {
@@ -736,7 +754,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Select a location to save screenshots과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   スクリーンショットの保存先を指定과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Screenshot_FolderSelectionDialog_Title {
             get {
@@ -745,7 +763,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Destination과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   保存先과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Screenshot_FolderTextBox_Label {
             get {
@@ -754,7 +772,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Destination Folder Path과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   保存先フォルダーのパス과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Screenshot_FolderTextBox_Prompt {
             get {
@@ -763,7 +781,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Image Format과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   画像形式과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Screenshot_ImageFormat_Label {
             get {
@@ -772,7 +790,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Open Folder과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   フォルダーを開く과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Screenshot_OpenFolderButton {
             get {
@@ -781,7 +799,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Version Info과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   バージョン情報과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_VersionInfo {
             get {
@@ -790,7 +808,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Window과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   ウィンドウ設定과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Window {
             get {
@@ -799,7 +817,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Keep window on top과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   ウィンドウを常に最前面に表示する과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Window_TopMost {
             get {
@@ -808,7 +826,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Window Controls과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   ウィンドウ操作과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_WindowControl {
             get {
@@ -817,7 +835,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Dock window to left of screen.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   ウィンドウをモニターの左端に寄せる과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_WindowControl_LocationLeftButton {
             get {
@@ -826,7 +844,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   For use with 8 inch tablets (800x1280)과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   8 インチタブレット (800 x 1280) 用과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_WindowControl_LocationLeftButton_Sub {
             get {
@@ -835,7 +853,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Air Superiority Potential:과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   制空戦力:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string StatusBar_AirSuperiorityPotential {
             get {
@@ -844,7 +862,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Average Level:과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   平均レベル:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string StatusBar_AverageLevel {
             get {
@@ -853,7 +871,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Waiting for KanColle to start과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   艦これの起動を待っています과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string StatusBar_NotStarted {
             get {
@@ -862,7 +880,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Ready과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   準備完了과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string StatusBar_Ready {
             get {
@@ -871,7 +889,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Fast Fleet과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   高速艦隊과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string StatusBar_Speed_Fast {
             get {
@@ -880,7 +898,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Slow Fleet과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   低速艦隊과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string StatusBar_Speed_Slow {
             get {
@@ -889,7 +907,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   {0}% zoom is not supported.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   ズーム {0} % はサポートされていません。과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ZoomAction_OutOfRange {
             get {
@@ -898,7 +916,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Zoom Failed: {0}과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   ズームに失敗しました: {0}과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ZoomAction_ZoomFailed {
             get {

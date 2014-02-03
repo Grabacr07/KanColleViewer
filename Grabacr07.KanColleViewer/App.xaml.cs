@@ -45,6 +45,9 @@ namespace Grabacr07.KanColleViewer
 			KanColleClient.Current.Proxy.UpstreamProxyHost = Settings.Current.ProxyHost;
 			KanColleClient.Current.Proxy.UpstreamProxyPort = Settings.Current.ProxyPort;
 
+            KanColleClient.Current.Homeport.Logger.EnableLogging = Settings.Current.EnableLogging;
+
+
 			ThemeService.Current.Initialize(this, Theme.Dark, Accent.Purple);
 
 			ViewModelRoot = new MainWindowViewModel();

@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Text;
+using System.Web;
+using System.Collections.Specialized;
 using System.Threading.Tasks;
 using Fiddler;
 using Grabacr07.KanColleWrapper.Models.Raw;
@@ -29,7 +31,15 @@ namespace Grabacr07.KanColleWrapper.Models
 			get { return this.RawData.api_data_deck; }
 		}
 
-		public SvData(svdata<T> rawData) : base(rawData) { }
+        public NameValueCollection RequestBody { get; set; }
+
+
+        public SvData(svdata<T> rawData, string reqBody)
+            : base(rawData)
+        {
+            this.RequestBody = HttpUtility.ParseQueryString(reqBody);
+        }
+
 	}
 
 	internal class SvData : RawDataWrapper<svdata>
@@ -39,7 +49,15 @@ namespace Grabacr07.KanColleWrapper.Models
 			get { return this.RawData.api_result == 1; }
 		}
 
-		public SvData(svdata rawData) : base(rawData) { }
+        public NameValueCollection RequestBody { get; set; }
+
+
+        public SvData(svdata rawData, string reqBody)
+            : base(rawData)
+        {
+            this.RequestBody = HttpUtility.ParseQueryString(reqBody);
+        }
+
 
 
 		public static SvData<T> Parse<T>(Session session)
@@ -49,8 +67,8 @@ namespace Grabacr07.KanColleWrapper.Models
 			using (var stream = new MemoryStream(bytes))
 			{
 				var rawResult = serializer.ReadObject(stream) as svdata<T>;
-				var result = new SvData<T>(rawResult);
-				return result;
+                var result = new SvData<T>(rawResult, session.GetRequestBodyAsString());
+                return result;
 			}
 		}
 
@@ -61,7 +79,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			using (var stream = new MemoryStream(bytes))
 			{
 				var rawResult = serializer.ReadObject(stream) as svdata;
-				var result = new SvData(rawResult);
+                var result = new SvData(rawResult, session.GetRequestBodyAsString());
 				return result;
 			}
 		}
