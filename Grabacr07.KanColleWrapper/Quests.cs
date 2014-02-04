@@ -172,8 +172,17 @@ namespace Grabacr07.KanColleWrapper
 			{
 				while (this.questPages.Count < questlist.api_page_count) this.questPages.Add(null);
 			}
+            //decimal calc_quest_page;
+            if (questlist.api_disp_page - 1 < 0)
+            {
+                questlist.api_disp_page = questlist.api_page_count;
+                this.questPages[questlist.api_disp_page] = new ConcurrentDictionary<int, Quest>();
+            }
 
-			this.questPages[questlist.api_disp_page - 1] = new ConcurrentDictionary<int, Quest>();
+            else
+            {
+                this.questPages[questlist.api_disp_page - 1] = new ConcurrentDictionary<int, Quest>();
+            }
 
 			if (questlist.api_list == null)
 			{
