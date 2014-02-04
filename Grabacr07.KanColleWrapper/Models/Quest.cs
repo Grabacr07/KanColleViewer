@@ -82,7 +82,7 @@ namespace Grabacr07.KanColleWrapper.Models
                 }
                 else
                 {
-                    return this.RawData.api_detail;
+                    return this.RawData.api_title;
                 }
             }
 
