@@ -177,10 +177,6 @@ namespace Grabacr07.KanColleWrapper
 			if (page >= this.questPages.Count) page = this.questPages.Count - 1;
 
 			this.questPages[page] = new ConcurrentDictionary<int, Quest>();
-<<<<<<< HEAD
-
-=======
->>>>>>> 1ec79f0463e39c5994f00e12be0b96b80330ea74
 
 			if (questlist.api_list == null)
 			{
