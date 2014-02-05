@@ -27,7 +27,7 @@ namespace Grabacr07.KanColleViewer.Models
 		/// <summary>
 		/// サポートされているカルチャの名前。
 		/// </summary>
-		private readonly string[] SupportedCultureNames = new[]
+		private readonly string[] supportedCultureNames =
 		{ 
 			"en-US",
 			"ja-JP",
@@ -35,7 +35,7 @@ namespace Grabacr07.KanColleViewer.Models
 		};
 
 		private readonly Resources _Resources = new Resources();
-		private readonly IEnumerable<CultureInfo> _SupportedCultures;
+		private readonly IReadOnlyCollection<CultureInfo> _SupportedCultures;
 
 		/// <summary>
 		/// リソースを取得します。
@@ -48,14 +48,14 @@ namespace Grabacr07.KanColleViewer.Models
 		/// <summary>
 		/// サポートされているカルチャを取得します。
 		/// </summary>
-		public IEnumerable<CultureInfo> SupportedCultures
+		public IReadOnlyCollection<CultureInfo> SupportedCultures
 		{
 			get { return this._SupportedCultures; }
 		}
 
 		private ResourceService()
 		{
-			this._SupportedCultures = SupportedCultureNames
+			this._SupportedCultures = this.supportedCultureNames
 				.Select(x =>
 				{
 					try
@@ -67,7 +67,8 @@ namespace Grabacr07.KanColleViewer.Models
 						return null;
 					}
 				})
-				.Where(x => x != null);
+				.Where(x => x != null)
+				.ToList();
 		}
 
 		/// <summary>
@@ -76,8 +77,7 @@ namespace Grabacr07.KanColleViewer.Models
 		/// <param name="name">カルチャの名前。</param>
 		public void ChangeCulture(string name)
 		{
-			Resources.Culture = this.SupportedCultures
-				.SingleOrDefault(x => x.Name == name);
+			Resources.Culture = this.SupportedCultures.SingleOrDefault(x => x.Name == name);
 
 			// リソースの変更を受けて設定に適切な値を適用します。
 			Settings.Current.Culture = Resources.Culture != null

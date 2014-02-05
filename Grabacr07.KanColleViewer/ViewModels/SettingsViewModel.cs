@@ -240,9 +240,9 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#region Cultures 変更通知プロパティ
 
-		private IEnumerable<CultureViewModel> _Cultures;
+		private IReadOnlyCollection<CultureViewModel> _Cultures;
 
-		public IEnumerable<CultureViewModel> Cultures
+		public IReadOnlyCollection<CultureViewModel> Cultures
 		{
 			get { return this._Cultures; }
 			set
@@ -299,10 +299,11 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					return list;
 				});
 
-			this.Cultures = new[] { new CultureViewModel() { DisplayName = "(auto)" } }
+			this.Cultures = new[] { new CultureViewModel { DisplayName = "(auto)" } }
 				.Concat(ResourceService.Current.SupportedCultures
-					.Select(x => new CultureViewModel() { DisplayName = x.EnglishName, Name = x.Name })
-					.OrderBy(x => x.DisplayName));
+					.Select(x => new CultureViewModel { DisplayName = x.EnglishName, Name = x.Name })
+					.OrderBy(x => x.DisplayName))
+				.ToList();
 
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(Settings.Current)
 			{
