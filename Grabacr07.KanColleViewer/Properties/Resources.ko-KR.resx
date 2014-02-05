@@ -196,7 +196,7 @@
     <value>현재 수행중인 임무</value>
   </data>
   <data name="Quests_Daily" xml:space="preserve">
-    <value>데일리 임무</value>
+    <value>일일 임무</value>
   </data>
   <data name="Quests_Notice" xml:space="preserve">
     <value>※진행상태 (50 %, 80 %) 는 게임내의 표시와 동일합니다. 적함대의 격파수나 원정 성공횟수 카운트 등은 제공되지 않습니다.</value>
@@ -205,7 +205,7 @@
     <value>게임안에서 [임무(퀘스트)] 화면을 열어서, 임무 목록을 갱신 해 주십시오.</value>
   </data>
   <data name="Quests_Weekly" xml:space="preserve">
-    <value>위클리 임무</value>
+    <value>주간 임무</value>
   </data>
   <data name="Quest_Detail_Untaken" xml:space="preserve">
     <value>임무화면의 모든 페이지에 접속해 주십시오.</value>
