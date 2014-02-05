@@ -18,7 +18,7 @@ namespace Grabacr07.KanColleViewer.Models
 		/// </summary>
 		public static IWindowsNotifier Notifier
 		{
-			get { return notifier ?? (notifier = Windows8Notifier.IsSupported ? (IWindowsNotifier)new Windows7Notifier() : new Windows7Notifier()); }
+			get { return notifier ?? (notifier = Windows8Notifier.IsSupported ? (IWindowsNotifier)new Windows8Notifier() : new Windows7Notifier()); }
 		}
 	}
 }
