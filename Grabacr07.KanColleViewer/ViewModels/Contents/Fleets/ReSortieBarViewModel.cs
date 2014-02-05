@@ -124,7 +124,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		{
 			if (this.source.CanReSortie)
 			{
-				this.Message = "出撃可能！";
+				this.Message = Properties.Resources.MessageBar_ReSortie_CanReSortie;
 				this.CanReSortie = true;
 				return;
 			}
@@ -133,24 +133,24 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 			if (this.source.Reason.HasFlag(CanReSortieReason.Wounded))
 			{
-				list.Add("中破以上の艦娘");
+				list.Add(Properties.Resources.MessageBar_ReSortie_Wounded);
 			}
 			if (this.source.Reason.HasFlag(CanReSortieReason.LackForResources))
 			{
-				list.Add("未補給の艦娘");
+				list.Add(Properties.Resources.MessageBar_ReSortie_LackForResources);
 			}
 			if (this.source.Reason.HasFlag(CanReSortieReason.BadCondition))
 			{
-				list.Add("疲労中の艦娘");
+				list.Add(Properties.Resources.MessageBar_ReSortie_BadCondition);
 			}
 
-			this.Message = string.Format("艦隊に{0}がいます。", list.ToString("・"));
+			this.Message = string.Format(Properties.Resources.MessageBar_ReSortie_CanNotReSortie, list.ToString(Properties.Resources.MessageBar_ReSortie_Separator));
 			this.CanReSortie = false;
 		}
 
 		private void UpdateRemaining()
 		{
-			this.Remaining = this.source.Remaining.HasValue ? "再出撃までの目安: " + this.source.Remaining.Value.ToString(@"mm\:ss") : "";
+			this.Remaining = this.source.Remaining.HasValue ? Properties.Resources.MessageBar_ReSortie_Remaining + this.source.Remaining.Value.ToString(@"mm\:ss") : "";
 		}
 	}
 }

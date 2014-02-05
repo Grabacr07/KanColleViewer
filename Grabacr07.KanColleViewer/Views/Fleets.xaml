@@ -12,6 +12,8 @@
 			 xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
 			 xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 xmlns:fleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
+			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 mc:Ignorable="d"
 			 d:DesignWidth="800"
 			 d:DesignHeight="400"
@@ -109,10 +111,10 @@
 					<Border Padding="10,5"
 							Background="#FF204080">
 						<TextBlock Foreground="White">
-							<Run Text="この艦隊は遠征中です。" />
-							<Run Text=" 完了時刻:" />
+							<Run Text="{Binding Resources.MessageBar_Expedition, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+							<Run Text="{Binding Resources.MessageBar_Expedition_TimeCompletion, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 							<Run Text="{Binding ReturnTime, Mode=OneWay}" />
-							<Run Text=" 帰投まで:" />
+							<Run Text="{Binding Resources.MessageBar_Expedition_TimeRemaining, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 							<Run Text="{Binding Remaining, Mode=OneWay}" />
 						</TextBlock>
 					</Border>
