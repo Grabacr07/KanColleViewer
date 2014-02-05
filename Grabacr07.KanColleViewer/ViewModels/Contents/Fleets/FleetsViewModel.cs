@@ -11,6 +11,12 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 {
 	public class FleetsViewModel : TabItemViewModel
 	{
+		public override string Name
+		{
+			get { return Properties.Resources.Fleets; }
+			protected set { throw new NotImplementedException(); }
+		}
+
 		#region Fleets 変更通知プロパティ
 
 		private FleetViewModel[] _Fleets;
@@ -81,8 +87,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 		public FleetsViewModel()
 		{
-			this.Name = Properties.Resources.Fleets;
-
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport)
 			{
 				{ "Fleets", (sender, args) => this.UpdateFleets() },

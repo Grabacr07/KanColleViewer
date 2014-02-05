@@ -10,6 +10,7 @@
 			 xmlns:vContents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
 			 xmlns:vmContents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 mc:Ignorable="d"
 			 d:DesignWidth="700"
 			 d:DesignHeight="300"
@@ -34,7 +35,7 @@
 					<RowDefinition Height="Auto" />
 				</Grid.RowDefinitions>
 
-				<TextBlock Text="{Binding Source={StaticResource LocalizeResourcesKey}, Path=Quests_CurrentQuestList}"
+				<TextBlock Text="{Binding Resources.Quests_CurrentQuestList, Source={x:Static models:ResourceService.Current}}"
 						   Margin="10,0,10,10"
 						   FontSize="14" />
 
@@ -151,7 +152,7 @@
 
 				<TabItem>
 					<TabItem.Header>
-						<TextBlock Text="{Binding Source={x:Static properties:Resources.Quests_Daily}, Mode=OneWay}"
+						<TextBlock Text="{Binding Resources.Quests_Daily, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 								   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
 								   Margin="10,0,10,10"
 								   FontSize="14" />
@@ -161,7 +162,7 @@
 
 				<TabItem>
 					<TabItem.Header>
-						<TextBlock Text="{Binding Source={x:Static properties:Resources.Quests_Weekly}, Mode=OneWay}"
+						<TextBlock Text="{Binding Resources.Quests_Weekly, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 								   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
 								   Margin="10,0,10,10"
 								   FontSize="14" />
@@ -173,7 +174,7 @@
 			<TextBlock Grid.Row="1"
 					   Grid.Column="0"
 					   Grid.ColumnSpan="3"
-					   Text="{Binding Source={x:Static properties:Resources.Quests_Notice}, Mode=OneWay}"
+					   Text="{Binding Resources.Quests_Notice, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					   FontSize="10.5"
 					   TextTrimming="None"
 					   TextWrapping="Wrap"
@@ -181,7 +182,7 @@
 		</Grid>
 
 		<TextBlock Grid.ColumnSpan="3"
-				   Text="{Binding Source={x:Static properties:Resources.Quests_Untaken}, Mode=OneWay}"
+				   Text="{Binding Resources.Quests_Untaken, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   TextWrapping="Wrap"
 				   FontSize="16"
 				   Visibility="{Binding IsUntaken, Converter={StaticResource BooleanToVisibilityConverter}}"

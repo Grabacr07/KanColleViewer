@@ -11,6 +11,12 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Docks
 {
 	public class RepairyardViewModel : TabItemViewModel
 	{
+		public override string Name
+		{
+			get { return Properties.Resources.Repairyard; }
+			protected set { throw new NotImplementedException(); }
+		}
+
 		#region Docks 変更通知プロパティ
 
 		private RepairingDockViewModel[] _Docks;
@@ -56,8 +62,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Docks
 
 		public RepairyardViewModel()
 		{
-			this.Name = Properties.Resources.Repairyard;
-
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport.Repairyard)
 			{
 				{ "Docks", (sender, args) => this.Update() },

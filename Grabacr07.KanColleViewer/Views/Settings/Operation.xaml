@@ -6,6 +6,7 @@
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 mc:Ignorable="d"
 			 d:DesignWidth="500"
 			 d:DesignHeight="300"
@@ -23,7 +24,7 @@
 			<Run Text="出撃コンディション"
 				 Style="{DynamicResource PickupTextElementStyleKey}" />
 			<Run Text=" " />
-			<Run Text="{Binding Source={x:Static properties:Resources.Common_Implement_Oncoming}, Mode=OneWay}" />
+			<Run Text="{Binding Resources.Common_Implement_Oncoming, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 		</TextBlock>
 
 		<StackPanel Margin="15,0,0,0">

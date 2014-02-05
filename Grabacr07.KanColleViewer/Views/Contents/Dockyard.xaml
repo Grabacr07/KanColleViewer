@@ -8,6 +8,7 @@
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:docks="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Docks"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 mc:Ignorable="d"
 			 d:DesignWidth="700"
 			 d:DesignHeight="300"
@@ -52,7 +53,7 @@
 									   Grid.Column="1"
 									   VerticalAlignment="Center"
 									   Margin="10,0">
-								<Run Text="{x:Static properties:Resources.Dockyard_ShipName}"
+								<Run Text="{Binding Resources.Dockyard_ShipName, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 FontSize="14" />
 								<LineBreak />
 								<Run Text="{Binding Ship, Mode=OneWay}"
@@ -63,7 +64,7 @@
 									   Grid.Column="2"
 									   VerticalAlignment="Center"
 									   Margin="10,0">
-								<Run Text="{x:Static properties:Resources.Dockyard_TimeComplete}"
+								<Run Text="{Binding Resources.Dockyard_TimeComplete, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 FontSize="14" />
 								<LineBreak />
 								<Run Text="{Binding CompleteTime, Mode=OneWay}"
@@ -74,7 +75,7 @@
 									   Grid.Column="3"
 									   VerticalAlignment="Center"
 									   Margin="10,0">
-								<Run Text="{x:Static properties:Resources.Dockyard_TimeRemaining}"
+								<Run Text="{Binding Resources.Dockyard_TimeRemaining, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 FontSize="14" />
 								<LineBreak />
 								<Run Text="{Binding Remaining, Mode=OneWay}"
@@ -89,7 +90,7 @@
 									   VerticalAlignment="Center"
 									   Margin="30,0"
 									   Visibility="Collapsed">
-								<Run Text="{x:Static properties:Resources.Dockyard_Unused}"
+								<Run Text="{Binding Resources.Dockyard_Unused, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 FontSize="18" />
 							</TextBlock>
 							<TextBlock x:Name="LockedMessage"
@@ -99,7 +100,7 @@
 									   VerticalAlignment="Center"
 									   Margin="30,0"
 									   Visibility="Collapsed">
-								<Run Text="{x:Static properties:Resources.Dockyard_Locked}"
+								<Run Text="{Binding Resources.Dockyard_Locked, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 FontSize="18" />
 							</TextBlock>
 							<TextBlock x:Name="CompletedMessage"
@@ -109,7 +110,7 @@
 									   VerticalAlignment="Center"
 									   Margin="30,0"
 									   Visibility="Collapsed">
-								<Run Text="{x:Static properties:Resources.Dockyard_Complete}"
+								<Run Text="{Binding Resources.Dockyard_Complete, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 FontSize="18"
 									 Style="{DynamicResource PickupTextElementStyleKey}" />
 							</TextBlock>
@@ -182,12 +183,12 @@
 					VerticalAlignment="Bottom">
 			<StackPanel Margin="10">
 				<TextBlock Margin="5">
-					<Run Text="{x:Static properties:Resources.Dockyard_Display_Title}"
+					<Run Text="{Binding Resources.Dockyard_Display_Title, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 						 Style="{DynamicResource PickupTextElementStyleKey}" />
 				</TextBlock>
 				<CheckBox Margin="8,5"
 						  IsChecked="{Binding CanDisplayShipName, Mode=TwoWay}">
-					<TextBlock Text="{x:Static properties:Resources.Dockyard_Display_Reveal}" />
+					<TextBlock Text="{Binding Resources.Dockyard_Display_Reveal, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 				</CheckBox>
 			</StackPanel>
 
@@ -204,24 +205,24 @@
 					</Style>
 				</StackPanel.Style>
 				<TextBlock Margin="5">
-					<Run Text="{x:Static properties:Resources.Common_Notifications_Title}"
+					<Run Text="{Binding Resources.Common_Notifications_Title, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 						 Style="{DynamicResource PickupTextElementStyleKey}" />
 				</TextBlock>
 				<RadioButton Margin="8,5"
 							 IsChecked="{Binding IsNotifyCompleted}">
-					<TextBlock Text="{x:Static properties:Resources.Dockyard_Notifications_Enable}" />
+					<TextBlock Text="{Binding Resources.Dockyard_Notifications_Enable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 				</RadioButton>
 				<RadioButton Margin="8,5"
 							 IsEnabled="False">
 					<TextBlock>
-						<Run Text="{x:Static properties:Resources.Dockyard_Notifications_Individual}"
+						<Run Text="{Binding Resources.Dockyard_Notifications_Individual, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 							 TextDecorations="Strikethrough" />
-						<Run Text="{x:Static properties:Resources.Common_Notifications_NotImplemented}" />
+						<Run Text="{Binding Resources.Common_Notifications_NotImplemented, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 					</TextBlock>
 				</RadioButton>
 				<RadioButton Margin="8,5"
 							 IsChecked="True">
-					<TextBlock Text="{x:Static properties:Resources.Common_Notifications_Disable}" />
+					<TextBlock Text="{Binding Resources.Common_Notifications_Disable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 				</RadioButton>
 			</StackPanel>
 		</StackPanel>

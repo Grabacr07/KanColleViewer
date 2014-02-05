@@ -11,6 +11,7 @@
 			 xmlns:vmFleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 			 xmlns:vmContents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 xmlns:dev="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Dev"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 mc:Ignorable="d"
 			 d:DesignHeight="25"
 			 d:DesignWidth="780">
@@ -38,10 +39,10 @@
 					<TextBlock DataContext="{Binding SelectedFleet}"
 							   Foreground="{DynamicResource AccentForegroundBrushKey}">
 						<Run Text="        " />
-						<Run Text="{x:Static properties:Resources.StatusBar_AverageLevel}" />
+						<Run Text="{Binding Resources.StatusBar_AverageLevel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 						<Run Text="{Binding AverageLevel, Mode=OneWay}" />
 						<Run Text="        " />
-						<Run Text="{x:Static properties:Resources.StatusBar_AirSuperiorityPotential}" />
+						<Run Text="{Binding Resources.StatusBar_AirSuperiorityPotential, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 						<Run Text="{Binding AirSuperiorityPotential, Mode=OneWay}" />
 						<Run Text="        " />
 						<Run Text="{Binding Speed, Mode=OneWay}" />
