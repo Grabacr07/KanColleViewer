@@ -1,4 +1,5 @@
-﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Contents.Repairyard"
+﻿
+<UserControl x:Class="Grabacr07.KanColleViewer.Views.Contents.Repairyard"
 			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -158,7 +159,7 @@
 		<StackPanel Grid.Column="2"
 					Orientation="Vertical"
 					VerticalAlignment="Bottom">
-			<StackPanel Margin="10,10,10,4">
+			<StackPanel Margin="0,10,10,4">
 				<StackPanel.Style>
 					<Style TargetType="{x:Type StackPanel}">
 						<Style.Triggers>

@@ -58,7 +58,8 @@ namespace Grabacr07.KanColleViewer.Models.Internal{
             var location = System.Reflection.Assembly.GetEntryAssembly().Location;
             string Main_folder = Path.GetDirectoryName(location);
             SoundPlayer notify_sound = new SoundPlayer(Main_folder + "\\notify.wav");
-            if(System.IO.File.Exists(Main_folder + "\\notify.wav")==true){
+            if (System.IO.File.Exists(Main_folder + "\\notify.wav") == true)
+            {
                 notify_sound.Load();
             }
             var checkV=Volume.GetInstance();

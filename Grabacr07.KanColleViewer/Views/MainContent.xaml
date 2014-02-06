@@ -32,7 +32,7 @@
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
-		<Grid Margin="4,10">
+		<Grid Margin="4,3">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="Auto" />
@@ -43,27 +43,26 @@
 			<StackPanel Grid.Column="1"
 						Orientation="Horizontal"
 						Margin="10,0">
-				<controls:MuteButton Padding="10,5"
-									 Margin="6,0"
-									 Width="50"
-									 Height="38"
-									 DataContext="{Binding Volume}"
-									 IsMute="{Binding IsMute, Mode=OneWay}"
-									 MethodName="ToggleMute" />
-
-				<metro2:CallMethodButton Padding="10,5"
-										 Margin="6,0"
-										 Width="50"
-										 Height="38"
-										 MethodTarget="{Binding Source={x:Static root:App.ViewModelRoot}}"
-										 MethodName="TakeScreenshot">
-					<Viewbox>
-						<Path Data="M54.443001,31.656001 C43.397305,31.656 34.443001,40.610305 34.443002,51.656 34.443001,62.701694 43.397305,71.656 54.443001,71.656 65.488695,71.656 74.443001,62.701694 74.443001,51.656 74.443001,40.610305 65.488695,31.656 54.443001,31.656001 z M8.9445,0 L44.722501,0 44.722501,13.41675 107.334,13.41675 107.334,89.445002 0,89.445002 0,13.41675 8.9445,13.41675 z"
-							  Stretch="Uniform"
-							  Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}, Path=Foreground}" />
-					</Viewbox>
-				</metro2:CallMethodButton>
-			</StackPanel>
+                <metro2:CallMethodButton Padding="10,5"
+					Margin="6,2,6,3"
+					Width="50"
+					Height="38"
+					MethodTarget="{Binding Source={x:Static root:App.ViewModelRoot}}"
+					MethodName="TakeScreenshot">
+                    <Viewbox>
+                        <Path Data="M54.443001,31.656001 C43.397305,31.656 34.443001,40.610305 34.443002,51.656 34.443001,62.701694 43.397305,71.656 54.443001,71.656 65.488695,71.656 74.443001,62.701694 74.443001,51.656 74.443001,40.610305 65.488695,31.656 54.443001,31.656001 z M8.9445,0 L44.722501,0 44.722501,13.41675 107.334,13.41675 107.334,89.445002 0,89.445002 0,13.41675 8.9445,13.41675 z"
+							Stretch="Uniform"
+							Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" />
+                    </Viewbox>
+                </metro2:CallMethodButton>
+                <controls:MuteButton Padding="10,5"
+					Margin="6,0"
+					Width="50"
+					Height="38"
+					DataContext="{Binding Volume}"
+					IsMute="{Binding IsMute, Mode=OneWay}"
+					MethodName="ToggleMute" />
+            </StackPanel>
 		</Grid>
 
 		<!--<Border Grid.Row="1"

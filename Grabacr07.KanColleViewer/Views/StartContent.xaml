@@ -14,7 +14,7 @@
 			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
 			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 mc:Ignorable="d"
-			 d:DesignWidth="800"
+			 d:DesignWidth="638"
 			 d:DesignHeight="350"
 			 d:DataContext="{d:DesignInstance vm:StartContentViewModel}"
 			 Background="{DynamicResource ThemeBrushKey}">
@@ -52,7 +52,7 @@
 								<Path x:Name="Arrow"
 									  Grid.Column="1"
 									  Data="M 0,0 0,10 30,5 z"
-									  Width="20"
+									  Width="10"
 									  Fill="{TemplateBinding Background}"
 									  Stretch="Fill" />
 								<ContentPresenter Grid.Column="0"
@@ -113,8 +113,8 @@
 		</Grid.RowDefinitions>
 
 		<Border ClipToBounds="True"
-				Width="{Binding ElementName=WebBrowser, Path=Width}">
-			<views:BrowserNavigator Margin="6,-4,6,10"
+				Width="500" HorizontalAlignment="Left">
+            <views:BrowserNavigator Margin="6,-4,6,10"
 									VerticalAlignment="Top" />
 		</Border>
 
@@ -129,7 +129,7 @@
 				<RadioButton x:Name="InformationTab"
 							 Style="{StaticResource TabLikeRadioButtonStyleKey}"
 							 IsChecked="True">
-					<TextBlock Text="Information"
+					<TextBlock Text="About"
 							   FontSize="18"
 							   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}" />
 				</RadioButton>
@@ -300,7 +300,7 @@
 					DataContext="{Binding Source={x:Static root:App.ViewModelRoot}, Path=Settings}"
 					Visibility="{Binding ElementName=SettingsTab, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
 				<ScrollViewer VerticalScrollBarVisibility="Auto">
-					<TabControl Width="640"
+					<TabControl Width="540"
 								HorizontalAlignment="Left"
 								Style="{StaticResource TabControlStyleKey}">
 						<TabItem>

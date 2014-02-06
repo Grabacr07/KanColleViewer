@@ -106,6 +106,9 @@ namespace Grabacr07.KanColleWrapper.Models
                 {
                 System.IO.StreamReader filereader = new System.IO.StreamReader(Main_folder+"\\quest.txt", System.Text.Encoding.UTF8, true);
                 
+
+                
+
                     string read_line = null;
                     string jap_name = null;
                     string eng_name = null;
