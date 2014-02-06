@@ -108,7 +108,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 			var reason = CanReSortieReason.NoProblem;
 
-			if (ships.Any(s => (s.HP.Current / (double)s.HP.Maximum) <= 0.5))
+			if (ships.Any(s => (s.HP.Current / (double)s.HP.Maximum) <= 0.25))
 			{
 				reason |= CanReSortieReason.Wounded;
 			}

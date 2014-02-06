@@ -133,7 +133,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 			if (this.source.Reason.HasFlag(CanReSortieReason.Wounded))
 			{
-				list.Add("중파이상인 칸무스");
+				list.Add("대파이상인 칸무스");
 			}
 			if (this.source.Reason.HasFlag(CanReSortieReason.LackForResources))
 			{
