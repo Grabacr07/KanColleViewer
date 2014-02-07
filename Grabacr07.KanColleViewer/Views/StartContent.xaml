@@ -199,6 +199,13 @@
 								</metro2:HyperlinkEx>
 							</TextBlock>
 
+							<TextBlock FontFamily="Segoe UI">
+								<Run Text="Localization (English):" />
+								<metro2:HyperlinkEx Uri="https://twitter.com/southrop113">
+									<Run Text="@southrop113" />
+								</metro2:HyperlinkEx>
+							</TextBlock>
+
 							<Rectangle Height="1"
 									   Margin="0,12"
 									   Style="{DynamicResource SeparatorRectangleStyleKey}" />

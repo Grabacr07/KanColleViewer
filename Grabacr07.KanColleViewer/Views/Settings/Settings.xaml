@@ -185,6 +185,13 @@
 						<metro2:HyperlinkEx Uri="https://twitter.com/Nrtwd/">
 							<Run Text="@Nrtwd" />
 						</metro2:HyperlinkEx>
+						
+						<LineBreak />
+						
+						<Run Text="Localization (English):" />
+						<metro2:HyperlinkEx Uri="https://twitter.com/southrop113">
+							<Run Text="@southrop113" />
+						</metro2:HyperlinkEx>
 					</TextBlock>
 
 					<Rectangle Height="1"
