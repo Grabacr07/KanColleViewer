@@ -185,7 +185,8 @@
 									   Margin="0,12"
 									   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-							<TextBlock FontFamily="Segoe UI">
+							<TextBlock FontFamily="Segoe UI"
+									   Margin="0,0,0,8">
 								<Run Text="Author / Developer:" />
 								<metro2:HyperlinkEx Uri="https://twitter.com/Grabacr07">
 									<Run Text="@Grabacr07" />
@@ -200,7 +201,10 @@
 							</TextBlock>
 
 							<TextBlock FontFamily="Segoe UI">
-								<Run Text="Localization (English):" />
+								<Run Text="Localization" />
+								<Run Text="(English)"
+									 FontSize="10" />
+								<Run Text=":" />
 								<metro2:HyperlinkEx Uri="https://twitter.com/southrop113">
 									<Run Text="@southrop113" />
 								</metro2:HyperlinkEx>
