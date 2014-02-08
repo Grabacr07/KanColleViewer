@@ -143,6 +143,7 @@
     <Compile Include="Models\Internal\Windows8Notifier.cs" />
     <Compile Include="Models\Volume.cs" />
     <Compile Include="ViewModels\Catalogs\SlotItemCatalogViewModel.cs" />
+    <Compile Include="ViewModels\Catalogs\SlotItemViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\SortableColumnViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogSortWorker.cs" />
     <Compile Include="Models\WindowsNotification.cs" />
