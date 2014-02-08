@@ -77,12 +77,12 @@
 										VerticalAlignment="Top"
 										MethodName="Jump"
 										MethodParameter="Fleets">
-            <i:Interaction.Triggers>
-                <behaviors:FlickTrigger>
-                    <behaviors:FlickFleetsAction TargetObject="{Binding Content.Fleets}" IsCyclic="True" Orientation="Horizontal"/>
-                </behaviors:FlickTrigger>
-            </i:Interaction.Triggers>
-            <Grid DataContext="{Binding Content.Fleets.SelectedFleet}">
+			<i:Interaction.Triggers>
+				<behaviors:FlickTrigger>
+					<behaviors:FlickFleetsAction TargetObject="{Binding Content.Fleets}" IsCyclic="True" Orientation="Horizontal"/>
+				</behaviors:FlickTrigger>
+			</i:Interaction.Triggers>
+			<Grid DataContext="{Binding Content.Fleets.SelectedFleet}">
 				<StackPanel d:DataContext="{d:DesignData /SampleData/FleetViewModelSampleData.xaml}">
 					<TextBlock>
 						<Run Text="{Binding Id, StringFormat=/{0} - , Mode=OneWay}" />
