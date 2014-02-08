@@ -148,8 +148,7 @@
 							<GridViewColumn Width="82">
 								<GridViewColumn.Header>
 									<TextBlock>
-										<Run Text="所持数"
-											 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+										<Run Text="所持数" />
 										<Run Text="(余り)"
 											 FontSize="11" />
 									</TextBlock>
