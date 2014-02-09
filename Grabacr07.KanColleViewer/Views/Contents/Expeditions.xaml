@@ -13,6 +13,7 @@
 			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:vmContents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 mc:Ignorable="d"
 			 d:DesignWidth="700"
 			 d:DesignHeight="300"
@@ -60,7 +61,7 @@
 									   Grid.Column="1"
 									   VerticalAlignment="Center"
 									   Margin="10,0">
-								<Run Text="{x:Static properties:Resources.Expedition_TimeComplete}"
+								<Run Text="{Binding Resources.Expedition_TimeComplete, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 FontSize="14" />
 								<LineBreak />
 								<Run Text="{Binding Expedition.ReturnTime, Mode=OneWay}"
@@ -71,7 +72,7 @@
 									   Grid.Column="2"
 									   VerticalAlignment="Center"
 									   Margin="10,0">
-								<Run Text="{x:Static properties:Resources.Expedition_TimeRemaining}"
+								<Run Text="{Binding Resources.Expedition_TimeRemaining, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 FontSize="14" />
 								<LineBreak />
 								<Run Text="{Binding Expedition.Remaining, Mode=OneWay}"
@@ -85,7 +86,7 @@
 									   VerticalAlignment="Center"
 									   Margin="30,0"
 									   Visibility="Collapsed">
-								<Run Text="{x:Static properties:Resources.Expedition_NoExpedition}"
+								<Run Text="{Binding Resources.Expedition_NoExpedition, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 FontSize="18" />
 							</TextBlock>
 						</Grid>
@@ -135,24 +136,24 @@
 					</Style>
 				</StackPanel.Style>
 				<TextBlock Margin="5">
-					<Run Text="{x:Static properties:Resources.Common_Notifications_Title}"
+					<Run Text="{Binding Resources.Common_Notifications_Title, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 						 Style="{DynamicResource PickupTextElementStyleKey}" />
 				</TextBlock>
 				<RadioButton Margin="8,5"
 							 IsChecked="{Binding IsNotifyReturned}">
-					<TextBlock Text="{x:Static properties:Resources.Expedition_Notifications_Enable}" />
+					<TextBlock Text="{Binding Resources.Expedition_Notifications_Enable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 				</RadioButton>
 				<RadioButton Margin="8,5"
 							 IsEnabled="False">
 					<TextBlock>
-						<Run Text="{x:Static properties:Resources.Expedition_Notifications_Individual}"
+						<Run Text="{Binding Resources.Expedition_Notifications_Individual, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 							 TextDecorations="Strikethrough" />
-						<Run Text="{x:Static properties:Resources.Common_Notifications_NotImplemented}" />
+						<Run Text="{Binding Resources.Common_Notifications_NotImplemented, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 					</TextBlock>
 				</RadioButton>
 				<RadioButton Margin="8,5"
 							 IsChecked="True">
-					<TextBlock Text="{x:Static properties:Resources.Common_Notifications_Disable}" />
+					<TextBlock Text="{Binding Resources.Common_Notifications_Disable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 				</RadioButton>
 			</StackPanel>
 		</StackPanel>

@@ -124,7 +124,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		{
 			if (this.source.CanReSortie)
 			{
-				this.Message = "출격가능!";
+				this.Message = Properties.Resources.MessageBar_ReSortie_CanReSortie;
 				this.CanReSortie = true;
 				return;
 			}
@@ -133,24 +133,24 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 			if (this.source.Reason.HasFlag(CanReSortieReason.Wounded))
 			{
-				list.Add("대파이상인 칸무스");
+				list.Add(Properties.Resources.MessageBar_ReSortie_Wounded);
 			}
 			if (this.source.Reason.HasFlag(CanReSortieReason.LackForResources))
 			{
-				list.Add("보급 못받은 칸무스");
+				list.Add(Properties.Resources.MessageBar_ReSortie_LackForResources);
 			}
 			if (this.source.Reason.HasFlag(CanReSortieReason.BadCondition))
 			{
-				list.Add("피로한 칸무스");
+				list.Add(Properties.Resources.MessageBar_ReSortie_BadCondition);
 			}
 
-			this.Message = string.Format("함대에 {0}가 있습니다.", list.ToString("・"));
+			this.Message = string.Format(Properties.Resources.MessageBar_ReSortie_CanNotReSortie, list.ToString(Properties.Resources.MessageBar_ReSortie_Separator));
 			this.CanReSortie = false;
 		}
 
 		private void UpdateRemaining()
 		{
-			this.Remaining = this.source.Remaining.HasValue ? "출격가능까지: " + this.source.Remaining.Value.ToString(@"mm\:ss") : "";
+			this.Remaining = this.source.Remaining.HasValue ? Properties.Resources.MessageBar_ReSortie_Remaining + this.source.Remaining.Value.ToString(@"mm\:ss") : "";
 		}
 	}
 }

@@ -12,12 +12,17 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 {
 	public class OverviewViewModel : TabItemViewModel
 	{
+		public override string Name
+		{
+			get { return Resources.IntegratedView; }
+			protected set { throw new NotImplementedException(); }
+		}
+	
 		public MainContentViewModel Content { get; private set; }
 
 
 		public OverviewViewModel(MainContentViewModel owner)
 		{
-			this.Name = Resources.IntegratedView;
 			this.Content = owner;
 		}
 
