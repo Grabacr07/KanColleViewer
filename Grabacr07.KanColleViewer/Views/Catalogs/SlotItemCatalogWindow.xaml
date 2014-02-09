@@ -127,7 +127,7 @@
 						<GridView>
 							<GridViewColumn Width="180">
 								<GridViewColumn.Header>
-									<TextBlock Text="装備名" />
+									<TextBlock Text="장비명" />
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate DataType="{x:Type viewModels:SlotItemViewModel}">
@@ -148,8 +148,8 @@
 							<GridViewColumn Width="82">
 								<GridViewColumn.Header>
 									<TextBlock>
-										<Run Text="所持数" />
-										<Run Text="(余り)"
+										<Run Text="보유수" />
+										<Run Text="(여분)"
 											 FontSize="11" />
 									</TextBlock>
 								</GridViewColumn.Header>
@@ -167,7 +167,7 @@
 
 							<GridViewColumn Width="550">
 								<GridViewColumn.Header>
-									<TextBlock Text="装備している艦娘" />
+									<TextBlock Text="장비하고있는 칸무스" />
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate DataType="{x:Type viewModels:SlotItemViewModel}">

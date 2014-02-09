@@ -69,7 +69,7 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="280"/>
             <ColumnDefinition Width="210" 
 							  MinWidth="210"/>
         </Grid.ColumnDefinitions>
@@ -149,7 +149,7 @@
                                             <TextBlock Grid.Column="3"
 												Margin="12,0,0,0">
 										<InlineUIContainer>
-											<controls:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
+											<controls:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" Width="10" Height="10" />
 										</InlineUIContainer>
 										<Run Text="{Binding Ship.Condition, Mode=OneWay}"
 												Style="{DynamicResource PickupTextElementStyleKey}" />
@@ -246,7 +246,7 @@
 					Grid.Column="0">
                 <StackPanel>
                     <TextBlock>
-						<Run Text="Inventory" />
+						<Run Text="데이터" />
                     </TextBlock>
 
 
@@ -255,17 +255,17 @@
 							   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
 
-                    <metroControls:CallMethodButton Content="Ship List"
+                    <metroControls:CallMethodButton Content="함선목록"
 													Padding="12,8"
 													Margin="0,5,0,8"
-													MethodName="ShowShipCatalog" />
+													MethodName="ShowShipCatalog"
+													ToolTip="보유하고있는 함선목록을 보여줍니다" />
 
 
-                    <metroControls:CallMethodButton Content="Eq. List"
+                    <metroControls:CallMethodButton Content="장비목록"
 													Padding="12,8"
 													MethodName="ShowSlotItemCatalog"
-													IsEnabled="False" 
-													ToolTip="Not Implemented Yet" />
+													ToolTip="보유하고있는 장비목록을 보여줍니다" />
                 </StackPanel>
             </Border>
 
