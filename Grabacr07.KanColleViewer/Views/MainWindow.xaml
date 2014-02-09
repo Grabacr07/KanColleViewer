@@ -18,6 +18,7 @@
 				   Title="{Binding Title}"
 				   Width="1440"
 				   MinWidth="{Binding ElementName=WebBrowser, Path=Width}"
+                   MaxWidth="{x:Static SystemParameters.FullPrimaryScreenWidth}"
                    MinHeight="525"
 				   Topmost="{Binding TopMost}"
 				   FontSize="12"

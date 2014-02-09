@@ -68,5 +68,14 @@ namespace Grabacr07.KanColleViewer.Properties {
                 return ((int)(this["FeatureBrowserEmulation"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("500")]
+        public string UIContentWidth {
+            get {
+                return ((string)(this["UIContentWidth"]));
+            }
+        }
     }
 }

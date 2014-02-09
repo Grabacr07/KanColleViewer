@@ -14,17 +14,19 @@
 			 d:DesignHeight="300"
 			 d:DataContext="{d:DesignInstance docks:DockyardViewModel}">
 	<Grid VerticalAlignment="Top">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
 			<ColumnDefinition Width="Auto" />
-			<ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 
 		<ItemsControl ItemsSource="{Binding Docks}"
 					  Margin="5,0"
 					  d:DataContext="{d:DesignData /SampleData/DockyardViewModelSampleData.xaml}"
-					  Grid.IsSharedSizeScope="True">
-			<ItemsControl.ItemTemplate>
+					  Grid.IsSharedSizeScope="True"
+                      MinWidth="{Binding Source={x:Static properties:Settings.Default}, Path=UIContentWidth}">
+
+            <ItemsControl.ItemTemplate>
 				<DataTemplate>
 					<Border Margin="5,0,5,10"
 							BorderThickness="1"

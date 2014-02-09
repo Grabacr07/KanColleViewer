@@ -22,15 +22,15 @@
 	<Grid DataContext="{Binding Fleets}"
 		  VerticalAlignment="Top">
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="Auto" />
-			<ColumnDefinition Width="Auto" />
-		</Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
 		<ItemsControl ItemsSource="{Binding Fleets}"
 					  Margin="5,0"
 					  Grid.IsSharedSizeScope="True"
-					  d:DataContext="{d:DesignData /SampleData/FleetsViewModelSampleData.xaml}">
+					  d:DataContext="{d:DesignData /SampleData/FleetsViewModelSampleData.xaml}" MinWidth="481">
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
 					<Border x:Name="Root"

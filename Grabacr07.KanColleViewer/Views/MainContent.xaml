@@ -25,110 +25,129 @@
 			 d:DataContext="{d:DesignInstance vm:MainContentViewModel}"
 			 Background="{DynamicResource ThemeBrushKey}">
 
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="*" />
-		</Grid.RowDefinitions>
 
-		<Grid Margin="4,3">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="Auto" />
-			</Grid.ColumnDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-			<contents:Homeport />
 
-			<StackPanel Grid.Column="1"
+        <Grid Margin="4,3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+
+            <contents:Homeport />
+
+
+            <StackPanel Grid.Column="1"
 						Orientation="Horizontal"
 						Margin="10,0">
+                <controls:MuteButton Padding="10,5"
+									 Margin="6,0"
+									 Width="50"
+									 Height="38"
+									 DataContext="{Binding Volume}"
+									 IsMute="{Binding IsMute, Mode=OneWay}"
+									 MethodName="ToggleMute" />
+
+
                 <metro2:CallMethodButton Padding="10,5"
-					Margin="6,2,6,3"
-					Width="50"
-					Height="38"
-					MethodTarget="{Binding Source={x:Static root:App.ViewModelRoot}}"
-					MethodName="TakeScreenshot">
+										 Margin="6,0"
+										 Width="50"
+										 Height="38"
+										 MethodTarget="{Binding Source={x:Static root:App.ViewModelRoot}}"
+										 MethodName="TakeScreenshot">
                     <Viewbox>
                         <Path Data="M54.443001,31.656001 C43.397305,31.656 34.443001,40.610305 34.443002,51.656 34.443001,62.701694 43.397305,71.656 54.443001,71.656 65.488695,71.656 74.443001,62.701694 74.443001,51.656 74.443001,40.610305 65.488695,31.656 54.443001,31.656001 z M8.9445,0 L44.722501,0 44.722501,13.41675 107.334,13.41675 107.334,89.445002 0,89.445002 0,13.41675 8.9445,13.41675 z"
-							Stretch="Uniform"
-							Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" />
+							  Stretch="Uniform"
+							  Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}, Path=Foreground}" />
                     </Viewbox>
                 </metro2:CallMethodButton>
-                <controls:MuteButton Padding="10,5"
-					Margin="6,0"
-					Width="50"
-					Height="38"
-					DataContext="{Binding Volume}"
-					IsMute="{Binding IsMute, Mode=OneWay}"
-					MethodName="ToggleMute" />
             </StackPanel>
-		</Grid>
+        </Grid>
 
-		<!--<Border Grid.Row="1"
+
+        <!--<Border Grid.Row="1"
 				Background="#FFFFFFA0">
-			<TextBlock Text="所属艦娘の数が上限に達しています！"
+			<TextBlock Text="????????????????!"
 					   FontSize="14"
 					   Foreground="Black"
 					   Margin="20, 5" />
 		</Border>-->
 
-		<Grid Grid.Row="2">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="*" />
-			</Grid.ColumnDefinitions>
 
-			<ScrollViewer VerticalScrollBarVisibility="Auto">
-				<Grid MinWidth="100"
-					  Background="{DynamicResource ActiveBackgroundBrushKey}">
-					<Grid.RowDefinitions>
-						<RowDefinition Height="Auto" />
-						<RowDefinition Height="Auto" />
-						<RowDefinition Height="Auto" />
-					</Grid.RowDefinitions>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-					<metro:TabView ItemsSource="{Binding TabItems}"
-								   SelectedValue="{Binding SelectedItem}" />
 
-					<Rectangle Grid.Row="1"
-							   Height="1"
-							   Margin="20,10"
-							   Fill="{DynamicResource InactiveForegroundBrushKey}"
-							   Opacity="0.5" />
+            <Grid Height="38"
+				  Background="{DynamicResource ActiveBackgroundBrushKey}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-					<metro:TabView Grid.Row="2"
-								   ItemsSource="{Binding SystemTabItems}"
-								   SelectedValue="{Binding SelectedItem}"
-								   Margin="0,0,0,20" />
-				</Grid>
-			</ScrollViewer>
 
-			<ScrollViewer Grid.Column="1"
+                <metro:TabView ItemsSource="{Binding TabItems}"
+							   SelectedValue="{Binding SelectedItem}" >
+                    <metro:TabView.Template>
+                        <ControlTemplate TargetType="{x:Type metro:TabView}">
+                            <StackPanel Background="{TemplateBinding Background}">
+                                <StackPanel Orientation="Horizontal" IsItemsHost="True"></StackPanel>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </metro:TabView.Template>
+                </metro:TabView>
+
+
+                <Rectangle Grid.Column="1"
+						   Width="1"
+						   Margin="10,5"
+						   Fill="{DynamicResource InactiveForegroundBrushKey}"
+						   Opacity="0.5" />
+
+
+                <metro:TabView Grid.Column="2"
+							   ItemsSource="{Binding SystemTabItems}"
+							   SelectedValue="{Binding SelectedItem}"/>
+            </Grid>
+
+
+            <ScrollViewer Grid.Row="1"
 						  VerticalScrollBarVisibility="Auto"
-						  VerticalAlignment="Top">
-				<ContentControl DataContext="{Binding SelectedItem}"
+						  VerticalAlignment="Top"
+                          Margin="4,10">
+                <ContentControl DataContext="{Binding SelectedItem}"
 								Content="{Binding}"
 								MinHeight="{Binding Source={x:Static properties:Settings.Default}, Path=UIContentHight}">
-					<ContentControl.Resources>
-						<DataTemplate DataType="{x:Type vmContents:OverviewViewModel}">
-							<contents:Overview />
-						</DataTemplate>
-						<DataTemplate DataType="{x:Type vmFleets:FleetsViewModel}">
-							<views:Fleets />
-						</DataTemplate>
-						<DataTemplate DataType="{x:Type vmDocks:RepairyardViewModel}">
-							<contents:Repairyard />
-						</DataTemplate>
-						<DataTemplate DataType="{x:Type vmDocks:DockyardViewModel}">
-							<contents:Dockyard />
-						</DataTemplate>
-						<DataTemplate DataType="{x:Type vmContents:QuestsViewModel}">
-							<contents:Quests />
-						</DataTemplate>
-						<DataTemplate DataType="{x:Type vmContents:ExpeditionsViewModel}">
-							<contents:Expeditions />
-						</DataTemplate>
+                    <ContentControl.Resources>
+                        <DataTemplate DataType="{x:Type vmContents:OverviewViewModel}">
+                            <contents:Overview />
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type vmFleets:FleetsViewModel}">
+                            <views:Fleets />
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type vmDocks:RepairyardViewModel}">
+                            <contents:Repairyard />
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type vmDocks:DockyardViewModel}">
+                            <contents:Dockyard />
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type vmContents:QuestsViewModel}">
+                            <contents:Quests />
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type vmContents:ExpeditionsViewModel}">
+                            <contents:Expeditions />
+                        </DataTemplate>
                         <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
                             <settings:Settings />
                         </DataTemplate>
@@ -136,8 +155,9 @@
                             <dev:DebugTab />
                         </DataTemplate>
                     </ContentControl.Resources>
-				</ContentControl>
-			</ScrollViewer>
-		</Grid>
-	</Grid>
+                </ContentControl>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
 </UserControl>
+

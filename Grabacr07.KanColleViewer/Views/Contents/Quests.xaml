@@ -31,9 +31,9 @@
 			<Grid>
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto" />
-					<RowDefinition Height="*" />
-					<RowDefinition Height="Auto" />
-				</Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
 				<TextBlock Text="{Binding Resources.Quests_CurrentQuestList, Source={x:Static models:ResourceService.Current}}"
 						   Margin="10,0,10,10"
@@ -41,7 +41,8 @@
 
 				<ItemsControl Grid.Row="1"
 							  ItemsSource="{Binding Current}"
-							  Margin="10,0">
+							  Margin="10,0"
+                              MinWidth="{Binding Source={x:Static properties:Settings.Default}, Path=UIContentWidth}">
 					<ItemsControl.ItemTemplate>
 						<DataTemplate>
 							<controls:Quest IsUntaken="{Binding IsUntaken}"
