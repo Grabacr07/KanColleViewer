@@ -24,6 +24,12 @@ namespace Grabacr07.KanColleViewer.ViewModels
 {
 	public class SettingsViewModel : TabItemViewModel, INotifyDataErrorInfo
 	{
+		public override string Name
+		{
+			get { return Resources.Settings; }
+			protected set { throw new NotImplementedException(); }
+		}
+
 		#region ScreenshotFolder 変更通知プロパティ
 
 		public string ScreenshotFolder
@@ -232,6 +238,44 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region Cultures 変更通知プロパティ
+
+		private IReadOnlyCollection<CultureViewModel> _Cultures;
+
+		public IReadOnlyCollection<CultureViewModel> Cultures
+		{
+			get { return this._Cultures; }
+			set
+			{
+				if (!Equals(this._Cultures, value))
+				{
+					this._Cultures = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region Culture 変更通知プロパティ
+
+		/// <summary>
+		/// カルチャを取得または設定します。
+		/// </summary>
+		public string Culture
+		{
+			get { return Settings.Current.Culture; }
+			set
+			{
+				if (Settings.Current.Culture != value)
+				{
+					ResourceService.Current.ChangeCulture(value);
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
 
 		public bool HasErrors
 		{
@@ -245,8 +289,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		{
 			if (Helper.IsInDesignMode) return;
 
-			this.Name = Resources.Settings;
-
 			this.Libraries = App.ProductInfo.Libraries.Aggregate(
 				new List<BindableTextViewModel>(),
 				(list, lib) =>
@@ -256,6 +298,12 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					// プロダクト名の途中で改行されないように、space を non-break space に置き換えてあげてるんだからねっっ
 					return list;
 				});
+
+			this.Cultures = new[] { new CultureViewModel { DisplayName = "(auto)" } }
+				.Concat(ResourceService.Current.SupportedCultures
+					.Select(x => new CultureViewModel { DisplayName = x.EnglishName, Name = x.Name })
+					.OrderBy(x => x.DisplayName))
+				.ToList();
 
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(Settings.Current)
 			{
@@ -268,7 +316,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		public void OpenScreenshotFolderSelectionDialog()
 		{
-			var message = new FolderSelectionMessage("OpenFolderDialog/Screensgot")
+			var message = new FolderSelectionMessage("OpenFolderDialog/Screenshot")
 			{
 				Title = Resources.Settings_Screenshot_FolderSelectionDialog_Title,
 				DialogPreference = Helper.IsWindows8OrGreater

@@ -9,15 +9,15 @@ namespace Grabacr07.KanColleViewer.ViewModels.Dev
 {
 	public class DebugTabViewModel : TabItemViewModel
 	{
-		public DebugTabViewModel()
+		public override string Name
 		{
-			this.Name = "Debug";
+			get { return Properties.Resources.Debug; }
+			protected set { throw new NotImplementedException(); }
 		}
-
-
+		
 		public void Notify()
 		{
-			WindowsNotification.Notifier.Show("テスト", "これはテスト通知です。", () => App.ViewModelRoot.Activate());
+			WindowsNotification.Notifier.Show(Properties.Resources.Debug_NotificationMessage_Title, Properties.Resources.Debug_NotificationMessage, () => App.ViewModelRoot.Activate());
 		}
 
 	}

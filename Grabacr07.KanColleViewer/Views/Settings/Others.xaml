@@ -7,6 +7,7 @@
 			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 mc:Ignorable="d"
 			 d:DesignWidth="500"
 			 d:DesignHeight="300"
@@ -20,7 +21,7 @@
 	</UserControl.Resources>
 
 	<StackPanel>
-		<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Screenshot}}"
+		<TextBlock Text="{Binding Resources.Settings_Screenshot, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource HeaderTextBlockStyleKey}" />
 		<Grid Margin="15,0,0,10">
 			<Grid.RowDefinitions>
@@ -34,21 +35,21 @@
 				<ColumnDefinition Width="Auto" />
 			</Grid.ColumnDefinitions>
 			<TextBlock Margin="0,6">
-						<Run Text="{Binding Source={x:Static properties:Resources.Settings_Screenshot_FolderTextBox_Label}, Mode=OneWay}" />
+						<Run Text="{Binding Resources.Settings_Screenshot_FolderTextBox_Label, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 						<Run Text=": " />
 			</TextBlock>
 			<metro:PromptTextBox Grid.Row="0"
 								 Grid.Column="1"
 								 Text="{Binding ScreenshotFolder, UpdateSourceTrigger=PropertyChanged}"
-								 Prompt="{Binding Source={x:Static properties:Resources.Settings_Screenshot_FolderTextBox_Prompt}, Mode=OneWay}" />
+								 Prompt="{Binding Resources.Settings_Screenshot_FolderTextBox_Prompt, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 			<metro2:CallMethodButton Grid.Row="0"
 									 Grid.Column="2"
-									 Content="{Binding Source={x:Static properties:Resources.Settings_Screenshot_FolderSelectionDialog_OpenButton}}"
+									 Content="{Binding Resources.Settings_Screenshot_FolderSelectionDialog_OpenButton, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 MethodName="OpenScreenshotFolderSelectionDialog"
 									 Margin="6,0" />
 			<metro2:CallMethodButton Grid.Row="0"
 									 Grid.Column="3"
-									 Content="{Binding Source={x:Static properties:Resources.Settings_Screenshot_OpenFolderButton}}"
+									 Content="{Binding Resources.Settings_Screenshot_OpenFolderButton, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 IsEnabled="{Binding CanOpenScreenshotFolder}"
 									 MethodName="OpenScreenshotFolder"
 									 Margin="0" />
@@ -56,7 +57,7 @@
 			<TextBlock Grid.Row="1"
 					   Grid.Column="0"
 					   Margin="0,6">
-						<Run Text="{Binding Source={x:Static properties:Resources.Settings_Screenshot_ImageFormat_Label}, Mode=OneWay}" />
+						<Run Text="{Binding Resources.Settings_Screenshot_ImageFormat_Label, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 						<Run Text=": " />
 			</TextBlock>
 			<StackPanel Grid.Row="1"
@@ -99,5 +100,22 @@
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />-->
 
+		<TextBlock Text="{Binding Resources.Settings_Language, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+				   Style="{DynamicResource HeaderTextBlockStyleKey}"
+				   Margin="0,10" />
+
+		<metro:PromptComboBox Margin="15,0,0,12"
+							  HorizontalAlignment="Left"
+							  Prompt=""
+							  ItemsSource="{Binding Cultures}"
+							  DisplayMemberPath="DisplayName"
+							  SelectedValuePath="Name"
+							  SelectedValue="{Binding Culture, Mode=TwoWay}"
+							  IsReadOnly="True"
+							  MinWidth="250" />
+
+		<Rectangle Height="1"
+				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+		
 	</StackPanel>
 </UserControl>

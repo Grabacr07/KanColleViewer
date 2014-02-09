@@ -8,7 +8,7 @@
 				   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 				   xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 				   xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
-				   xmlns:metroControls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+				   xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 				   xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 				   xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Catalogs"
@@ -18,9 +18,9 @@
 				   xmlns:catalogs="clr-namespace:Grabacr07.KanColleViewer.Views.Catalogs"
 				   x:Name="GlowMetroWindow"
 				   mc:Ignorable="d"
-				   d:DataContext="{d:DesignInstance viewModels:ShipCatalogWindowViewModel}"
+				   d:DataContext="{d:DesignInstance viewModels:SlotItemCatalogViewModel}"
 				   Title="{Binding Title}"
-				   Width="800"
+				   Width="900"
 				   Height="800"
 				   FontSize="12"
 				   Background="{DynamicResource ThemeBrushKey}"
@@ -66,21 +66,157 @@
 		</Border>
 		<!-- #endregion -->
 
-		<StackPanel Grid.Row="1"
-					VerticalAlignment="Center"
-					Opacity="0.5">
-			<TextBlock Text="ヾ(๑╹◡╹)ﾉ"
-					   FontSize="80"
-					   HorizontalAlignment="Center" />
+		<DockPanel Grid.Row="1">
+			<!--<Border DockPanel.Dock="Top"
+					Margin="8,0,8,8">
+				<metro2:CallMethodButton Content="表示の更新"
+										 Padding="40,6"
+										 MethodName="Update"
+										 HorizontalAlignment="Left" />
+			</Border>-->
 
-			<TextBlock Text="まだ完成してません"
-					   FontSize="30"
-					   Margin="0,30,0,0"
-					   HorizontalAlignment="Center" />
+			<Border BorderBrush="{DynamicResource BorderBrushKey}"
+					BorderThickness="1"
+					Margin="8">
+				<ListView ItemsSource="{Binding SlotItems}"
+						  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}">
+					<ListView.Resources>
+						<Style TargetType="{x:Type TextBlock}">
+							<Setter Property="Margin"
+									Value="5,4" />
+						</Style>
+						<Style TargetType="{x:Type GridViewColumnHeader}">
+							<Setter Property="OverridesDefaultStyle"
+									Value="True" />
+							<Setter Property="BorderThickness"
+									Value="0,0,0,1" />
+							<Setter Property="BorderBrush"
+									Value="{DynamicResource BorderBrushKey}" />
+							<Setter Property="Background"
+									Value="{DynamicResource BackgroundBrushKey}" />
+							<Setter Property="Template">
+								<Setter.Value>
+									<ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+										<Grid>
+											<Border BorderThickness="{TemplateBinding BorderThickness}"
+													BorderBrush="{TemplateBinding BorderBrush}"
+													Background="{TemplateBinding Background}">
+												<ContentPresenter Margin="{TemplateBinding Padding}" />
+											</Border>
+											<Thumb x:Name="PART_HeaderGripper"
+												   HorizontalAlignment="Right"
+												   BorderBrush="{TemplateBinding BorderBrush}"
+												   Margin="0,0,-6,0">
+												<Thumb.Template>
+													<ControlTemplate TargetType="{x:Type Thumb}">
+														<Border Background="Transparent"
+																Width="13">
+															<Rectangle Width="1"
+																	   Stroke="{TemplateBinding BorderBrush}" />
+														</Border>
+													</ControlTemplate>
+												</Thumb.Template>
+											</Thumb>
+										</Grid>
+									</ControlTemplate>
+								</Setter.Value>
+							</Setter>
+						</Style>
+					</ListView.Resources>
+					<ListView.View>
+						<GridView>
+							<GridViewColumn Width="180">
+								<GridViewColumn.Header>
+									<TextBlock Text="装備名" />
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate DataType="{x:Type viewModels:SlotItemViewModel}">
+										<StackPanel Orientation="Horizontal">
+											<Border Padding="0,1,5,1">
+												<Viewbox Width="20">
+													<controls:SlotItemIcon Type="{Binding SlotItem.IconType}" />
+												</Viewbox>
+											</Border>
+											<TextBlock Text="{Binding SlotItem.Name}"
+													   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+													   Margin="0,4" />
+										</StackPanel>
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
 
-			<TextBlock Text="近日公開予定..."
-					   FontSize="20"
+							<GridViewColumn Width="82">
+								<GridViewColumn.Header>
+									<TextBlock>
+										<Run Text="所持数" />
+										<Run Text="(余り)"
+											 FontSize="11" />
+									</TextBlock>
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate DataType="{x:Type viewModels:SlotItemViewModel}">
+										<TextBlock Margin="0,4">
+											<Run Text="{Binding Count, Mode=OneWay}"
+												 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+											<Run Text="{Binding Remainder, StringFormat=({0}), Mode=OneWay}"
+												 FontSize="11" />
+										</TextBlock>
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+
+							<GridViewColumn Width="550">
+								<GridViewColumn.Header>
+									<TextBlock Text="装備している艦娘" />
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate DataType="{x:Type viewModels:SlotItemViewModel}">
+										<ItemsControl ItemsSource="{Binding Ships}">
+											<ItemsControl.Template>
+												<ControlTemplate TargetType="{x:Type ItemsControl}">
+													<WrapPanel IsItemsHost="True"
+															   Margin="0,0,0,4" />
+												</ControlTemplate>
+											</ItemsControl.Template>
+											<ItemsControl.ItemTemplate>
+												<DataTemplate>
+													<TextBlock Margin="0,4,18,0">
+														<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
+															 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+														<Run Text="{Binding Ship.Level, StringFormat=Lv.{0}, Mode=OneWay}"
+															 FontSize="11" />
+														<Run Text="{Binding CountString, Mode=OneWay}"
+															 Background="{DynamicResource BackgroundBrushKey}"
+															 FontSize="11" />
+													</TextBlock>
+												</DataTemplate>
+											</ItemsControl.ItemTemplate>
+										</ItemsControl>
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+						</GridView>
+					</ListView.View>
+				</ListView>
+			</Border>
+		</DockPanel>
+
+		<Border Grid.Row="1"
+				Background="{DynamicResource ThemeBrushKey}"
+				BorderBrush="{DynamicResource BorderBrushKey}"
+				BorderThickness="1"
+				Opacity="0.75"
+				Margin="8,0,8,8"
+				Padding="20"
+				Visibility="{Binding IsReloading, Converter={StaticResource BooleanToVisibilityConverter}}"
+				d:IsHidden="True">
+			<TextBlock Text="一覧を生成しています..."
+					   FontSize="16"
+					   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+					   Background="{DynamicResource ThemeBrushKey}"
+					   TextWrapping="Wrap"
 					   HorizontalAlignment="Center" />
-		</StackPanel>
+		</Border>
+
 	</Grid>
 </metro:MetroWindow>

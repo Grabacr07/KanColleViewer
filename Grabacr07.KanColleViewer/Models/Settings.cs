@@ -316,6 +316,28 @@ namespace Grabacr07.KanColleViewer.Models
 
 		#endregion
 
+		#region Culture 変更通知プロパティ
+
+		private string _Culture;
+
+		/// <summary>
+		/// カルチャを取得または設定します。
+		/// </summary>
+		public string Culture
+		{
+			get { return this._Culture; }
+			set
+			{
+				if (this._Culture != value)
+				{
+					this._Culture = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		#region ReSortieCondition 変更通知プロパティ
 
 		private ushort _ReSortieCondition = 40;

@@ -12,6 +12,7 @@
 				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 				   xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
 				   xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
+				   xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
 				   Title="{Binding Title}"
@@ -72,7 +73,7 @@
 							HorizontalAlignment="Right"
 							VerticalAlignment="Top">
 					<metro:CaptionButton IsChecked="{Binding TopMost, Mode=TwoWay}"
-										 ToolTip="{Binding Source={x:Static properties:Resources.Settings_Window_TopMost}}"
+										 ToolTip="{Binding Resources.Settings_Window_TopMost, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 										 Style="{DynamicResource PinButtonStyleKey}" />
 					<metro:SystemButtons />
 				</StackPanel>

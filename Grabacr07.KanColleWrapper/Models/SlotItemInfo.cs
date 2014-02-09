@@ -15,6 +15,7 @@ namespace Grabacr07.KanColleWrapper.Models
 	public class SlotItemInfo : RawDataWrapper<kcsapi_master_slotitem>, IIdentifiable
 	{
 		private SlotItemIconType? iconType;
+		private int? categoryId;
 
 		public int Id
 		{
@@ -28,7 +29,12 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public SlotItemIconType IconType
 		{
-			get { return this.iconType ?? (this.iconType = this.RawData.api_type.Length == 4 ? (SlotItemIconType)this.RawData.api_type[3] : SlotItemIconType.Unknown).Value; }
+			get { return this.iconType ?? (SlotItemIconType)(this.iconType = (SlotItemIconType)(this.RawData.api_type.Get(3) ?? 0)); }
+		}
+
+		public int CategoryId
+		{
+			get { return this.categoryId ?? (int)(this.categoryId = this.RawData.api_type.Get(2) ?? int.MaxValue); }
 		}
 
 		/// <summary>

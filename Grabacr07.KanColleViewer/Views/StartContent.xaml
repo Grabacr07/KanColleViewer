@@ -13,6 +13,7 @@
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
 			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 mc:Ignorable="d"
 			 d:DesignWidth="800"
 			 d:DesignHeight="350"
@@ -184,7 +185,8 @@
 									   Margin="0,12"
 									   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-							<TextBlock FontFamily="Segoe UI">
+							<TextBlock FontFamily="Segoe UI"
+									   Margin="0,0,0,8">
 								<Run Text="Author / Developer:" />
 								<metro2:HyperlinkEx Uri="https://twitter.com/Grabacr07">
 									<Run Text="@Grabacr07" />
@@ -195,6 +197,16 @@
 								<Run Text="Icon design:" />
 								<metro2:HyperlinkEx Uri="https://twitter.com/Nrtwd/">
 									<Run Text="@Nrtwd" />
+								</metro2:HyperlinkEx>
+							</TextBlock>
+
+							<TextBlock FontFamily="Segoe UI">
+								<Run Text="Localization" />
+								<Run Text="(English)"
+									 FontSize="10" />
+								<Run Text=":" />
+								<metro2:HyperlinkEx Uri="https://twitter.com/southrop113">
+									<Run Text="@southrop113" />
 								</metro2:HyperlinkEx>
 							</TextBlock>
 
@@ -226,7 +238,8 @@
 				</Border>
 
 				<Rectangle x:Name="Dummy"
-						   Grid.Column="1" />
+						   Grid.Column="1"
+						   Margin="16,0,31,0" />
 
 				<Border Grid.Column="1">
 					<FlowDocumentScrollViewer Padding="0,-18,0,0">
@@ -242,25 +255,29 @@
 							<Paragraph Language="ja-jp">
 								<Run Text="「提督業も忙しい！」は、艦これを遊びやすくするためのツールです。" />
 								<LineBreak />
-								<Run Text="艦これは、内臓された Internet Explorer (IE) 上で動作します。通信内容の変更、サーバーに対する情報の送信、Flash 抽出、マクロ・チートの類は一切行っていません。" />
+								<Run Text="艦これは、内臓された Internet Explorer (IE) 上で動作します。艦これのサーバーに対し一切の負荷をかけないように設計・開発しており、通信内容の変更やサーバーに対する情報の送信、Flash 抽出、マクロ・チートの類は一切行っていません。" />
 							</Paragraph>
 							<Paragraph Language="ja-jp">
-								<Run Text="ゲームが正しく表示されない場合や、スクリプトエラーが頻発する場合は、IE のキャッシュを削除してみてください。改善しない場合は、IE の設定や、通常の IE 上で Flash が表示できるかどうか等をご確認ください。" />
+								<Run Text="ゲームが正しく表示されない場合や、スクリプトエラーが頻発する場合は、IE のキャッシュを削除してみてください。改善されない場合は、IE の設定や、通常の IE 上で Flash が表示できるかどうか等をご確認ください。" />
 							</Paragraph>
-							<BlockUIContainer>
-								<metro2:CallMethodButton Content="{Binding DeleteInternetCacheButtonContent}"
-														 MethodName="DeleteInternetCache"
-														 IsEnabled="{Binding CanDeleteInternetCache}"
-														 HorizontalAlignment="Left"
-														 Padding="30,5"
-														 SnapsToDevicePixels="True" />
-							</BlockUIContainer>
-							<BlockUIContainer>
-								<Rectangle Height="1"
-										   Style="{DynamicResource SeparatorRectangleStyleKey}"
-										   Margin="0,16,0,0"
-										   SnapsToDevicePixels="True" />
-							</BlockUIContainer>
+							<Paragraph>
+								<InlineUIContainer>
+									<metro2:CallMethodButton Content="{Binding DeleteInternetCacheButtonContent}"
+															 MethodName="DeleteInternetCache"
+															 IsEnabled="{Binding CanDeleteInternetCache}"
+															 HorizontalAlignment="Left"
+															 Padding="30,5"
+															 SnapsToDevicePixels="True" />
+								</InlineUIContainer>
+								<LineBreak />
+								<InlineUIContainer>
+									<Rectangle Width="{Binding ElementName=Dummy, Path=ActualWidth}"
+											   Height="1"
+											   Style="{DynamicResource SeparatorRectangleStyleKey}"
+											   Margin="0,16,0,0"
+											   SnapsToDevicePixels="True" />
+								</InlineUIContainer>
+							</Paragraph>
 							<Paragraph Language="ja-jp">
 								<Run Text="ツールは不定期に更新されています。適宜、更新の確認をお願いします。" />
 								<LineBreak />
@@ -293,7 +310,7 @@
 								Style="{StaticResource TabControlStyleKey}">
 						<TabItem>
 							<TabItem.Header>
-								<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Window}, Mode=OneWay}"
+								<TextBlock Text="{Binding Resources.Settings_Window, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 										   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
 										   Margin="12,0"
 										   FontSize="14" />
@@ -304,7 +321,7 @@
 
 						<TabItem>
 							<TabItem.Header>
-								<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Operation}, Mode=OneWay}"
+								<TextBlock Text="{Binding Resources.Settings_Operation, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 										   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
 										   Margin="12,0"
 										   FontSize="14" />
@@ -315,7 +332,7 @@
 
 						<TabItem>
 							<TabItem.Header>
-								<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Network}, Mode=OneWay}"
+								<TextBlock Text="{Binding Resources.Settings_Network, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 										   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
 										   Margin="12,0"
 										   FontSize="14" />
@@ -326,7 +343,7 @@
 
 						<TabItem>
 							<TabItem.Header>
-								<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Other}, Mode=OneWay}"
+								<TextBlock Text="{Binding Resources.Settings_Other, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 										   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
 										   Margin="12,0"
 										   FontSize="14" />

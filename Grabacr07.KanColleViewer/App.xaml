@@ -17,8 +17,6 @@
 				<ResourceDictionary Source="pack://application:,,,/KanColleViewer;component/Styles/Controls.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 
-			<properties:Resources x:Key="LocalizeResourcesKey" />
-
 			<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 			<converters:UniversalBooleanToVisibilityConverter x:Key="UniversalBooleanToVisibilityConverter" />
 			<converters:StringToVisiblityConverter x:Key="StringToVisiblityConverter" />

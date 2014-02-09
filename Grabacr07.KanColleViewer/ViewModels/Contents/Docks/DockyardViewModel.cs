@@ -10,6 +10,12 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Docks
 {
 	public class DockyardViewModel : TabItemViewModel
 	{
+		public override string Name
+		{
+			get { return Properties.Resources.Dockyard; }
+			protected set { throw new NotImplementedException(); }
+		}
+
 		#region Docks 変更通知プロパティ
 
 		private BuildingDockViewModel[] _Docks;
@@ -73,8 +79,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Docks
 
 		public DockyardViewModel()
 		{
-			this.Name = Properties.Resources.Dockyard;
-
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport.Dockyard)
 			{
 				{ "Docks", (sender, args) => this.Update() },

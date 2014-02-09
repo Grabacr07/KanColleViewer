@@ -8,6 +8,7 @@
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:kanColleViewer="clr-namespace:Grabacr07.KanColleViewer"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 mc:Ignorable="d"
 			 d:DesignWidth="500"
 			 d:DesignHeight="300"
@@ -21,12 +22,12 @@
 	</UserControl.Resources>
 
 	<StackPanel>
-		<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Display}, Mode=OneWay}"
+		<TextBlock Text="{Binding Resources.Settings_Display, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource HeaderTextBlockStyleKey}" />
 
 		<CheckBox IsChecked="{Binding Source={x:Static kanColleViewer:App.ViewModelRoot}, Path=TopMost, Mode=TwoWay}"
 				  Margin="15,0,0,10">
-			<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Window_TopMost}, Mode=OneWay}"
+			<TextBlock Text="{Binding Resources.Settings_Window_TopMost, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type CheckBox}}, Path=Foreground}"
 					   FontSize="13"
 					   Background="Transparent" />
@@ -35,7 +36,7 @@
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-		<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_WindowControl}}"
+		<TextBlock Text="{Binding Resources.Settings_WindowControl, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource HeaderTextBlockStyleKey}"
 				   Margin="0,10" />
 		<metro2:CallMethodButton MethodName="SetLocationLeft"
@@ -43,11 +44,11 @@
 								 Margin="15,0,0,10"
 								 HorizontalAlignment="Left">
 			<StackPanel>
-				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_WindowControl_LocationLeftButton}, Mode=OneWay}"
+				<TextBlock Text="{Binding Resources.Settings_WindowControl_LocationLeftButton, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 						   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type metro2:CallMethodButton}}, Path=Foreground}"
 						   FontSize="13"
 						   HorizontalAlignment="Center" />
-				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_WindowControl_LocationLeftButton_Sub}, Mode=OneWay}"
+				<TextBlock Text="{Binding Resources.Settings_WindowControl_LocationLeftButton_Sub, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 						   HorizontalAlignment="Center"
 						   FontSize="11" />
 			</StackPanel>

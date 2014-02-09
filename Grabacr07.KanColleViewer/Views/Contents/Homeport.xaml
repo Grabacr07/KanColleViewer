@@ -12,6 +12,7 @@
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 mc:Ignorable="d"
 			 d:DesignWidth="600"
 			 d:DataContext="{d:DesignInstance viewModels:MainContentViewModel}">
@@ -42,7 +43,7 @@
 			</TextBlock>
 
 			<TextBlock>
-				<Run Text="{x:Static properties:Resources.Homeport_FleetHQ}" />
+				<Run Text="{Binding Resources.Homeport_FleetHQ, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 				<Run Text="Lv."
 					 Style="{DynamicResource PickupTextElementStyleKey}"
 					 FontSize="14" />
@@ -70,11 +71,11 @@
 
 				<TextBlock Grid.Row="0"
 						   Grid.Column="1">
-					<Run Text="{x:Static properties:Resources.Homeport_InstantRepair}" />
+					<Run Text="{Binding Resources.Homeport_InstantRepair, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 					<Run Text="{Binding Materials.Model.InstantRepairMaterials, Mode=OneWay}"
 						 Style="{DynamicResource PickupTextElementStyleKey}" />
 					<LineBreak />
-					<Run Text="{x:Static properties:Resources.Homeport_InstantBuild}" />
+					<Run Text="{Binding Resources.Homeport_InstantBuild, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 					<Run Text="{Binding Materials.Model.InstantBuildMaterials, Mode=OneWay}"
 						 Style="{DynamicResource PickupTextElementStyleKey}" />
 				</TextBlock>
@@ -92,13 +93,13 @@
 
 				<TextBlock Grid.Row="0"
 						   Grid.Column="1">
-					<Run Text="{x:Static properties:Resources.Homeport_NoOfShips}" />
+					<Run Text="{Binding Resources.Homeport_NoOfShips, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 					<Run Text="{Binding Ships.Count, Mode=OneWay}"
 						 Style="{DynamicResource PickupTextElementStyleKey}" />
 					<Run Text="/" />
 					<Run Text="{Binding Admiral.Model.MaxShipCount, Mode=OneWay}" />
 					<LineBreak />
-					<Run Text="{x:Static properties:Resources.Homeport_NoOfEquipment}" />
+					<Run Text="{Binding Resources.Homeport_NoOfEquipment, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 					<Run Text="{Binding SlotItems.Count, Mode=OneWay}"
 						 Style="{DynamicResource PickupTextElementStyleKey}" />
 					<Run Text="/" />

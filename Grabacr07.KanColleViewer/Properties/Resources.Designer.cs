@@ -115,6 +115,33 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Debug.
+        /// </summary>
+        public static string Debug {
+            get {
+                return ResourceManager.GetString("Debug", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is a test notification..
+        /// </summary>
+        public static string Debug_NotificationMessage {
+            get {
+                return ResourceManager.GetString("Debug_NotificationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test.
+        /// </summary>
+        public static string Debug_NotificationMessage_Title {
+            get {
+                return ResourceManager.GetString("Debug_NotificationMessage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Construction.
         /// </summary>
         public static string Dockyard {
@@ -363,6 +390,114 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string IntegratedView {
             get {
                 return ResourceManager.GetString("IntegratedView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This fleet is on an expedition..
+        /// </summary>
+        public static string MessageBar_Expedition {
+            get {
+                return ResourceManager.GetString("MessageBar_Expedition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  Completion Time:.
+        /// </summary>
+        public static string MessageBar_Expedition_TimeCompletion {
+            get {
+                return ResourceManager.GetString("MessageBar_Expedition_TimeCompletion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  Remaining Time:.
+        /// </summary>
+        public static string MessageBar_Expedition_TimeRemaining {
+            get {
+                return ResourceManager.GetString("MessageBar_Expedition_TimeRemaining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are ships in your fleet currently docked for repairs. Completion Time: {0:MM/dd HH\:mm}  Remaining Time: {1}:{2:mm\:ss}.
+        /// </summary>
+        public static string MessageBar_Repairing {
+            get {
+                return ResourceManager.GetString("MessageBar_Repairing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are ships in your fleet currently docked for repairs..
+        /// </summary>
+        public static string MessageBar_Repairing_Null {
+            get {
+                return ResourceManager.GetString("MessageBar_Repairing_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to are fatigued.
+        /// </summary>
+        public static string MessageBar_ReSortie_BadCondition {
+            get {
+                return ResourceManager.GetString("MessageBar_ReSortie_BadCondition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are ships in your fleet that {0}..
+        /// </summary>
+        public static string MessageBar_ReSortie_CanNotReSortie {
+            get {
+                return ResourceManager.GetString("MessageBar_ReSortie_CanNotReSortie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready to sortie!.
+        /// </summary>
+        public static string MessageBar_ReSortie_CanReSortie {
+            get {
+                return ResourceManager.GetString("MessageBar_ReSortie_CanReSortie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to need resupplying.
+        /// </summary>
+        public static string MessageBar_ReSortie_LackForResources {
+            get {
+                return ResourceManager.GetString("MessageBar_ReSortie_LackForResources", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time until ready again: .
+        /// </summary>
+        public static string MessageBar_ReSortie_Remaining {
+            get {
+                return ResourceManager.GetString("MessageBar_ReSortie_Remaining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to , .
+        /// </summary>
+        public static string MessageBar_ReSortie_Separator {
+            get {
+                return ResourceManager.GetString("MessageBar_ReSortie_Separator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to are heavily damaged.
+        /// </summary>
+        public static string MessageBar_ReSortie_Wounded {
+            get {
+                return ResourceManager.GetString("MessageBar_ReSortie_Wounded", resourceCulture);
             }
         }
         
@@ -646,6 +781,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        public static string Settings_Language {
+            get {
+                return ResourceManager.GetString("Settings_Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Network.
         /// </summary>
         public static string Settings_Network {
@@ -831,6 +975,24 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Settings_WindowControl_LocationLeftButton_Sub {
             get {
                 return ResourceManager.GetString("Settings_WindowControl_LocationLeftButton_Sub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear cache.
+        /// </summary>
+        public static string StartContent_ClearCacheButton {
+            get {
+                return ResourceManager.GetString("StartContent_ClearCacheButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Browser cache cleared.
+        /// </summary>
+        public static string StartContent_ClearCacheButtonMessage {
+            get {
+                return ResourceManager.GetString("StartContent_ClearCacheButtonMessage", resourceCulture);
             }
         }
         

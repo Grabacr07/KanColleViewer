@@ -13,6 +13,7 @@
 			 xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
 			 xmlns:kanColleViewer="clr-namespace:Grabacr07.KanColleViewer"
 			 xmlns:docks1="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Docks"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 mc:Ignorable="d"
 			 d:DesignWidth="700"
 			 d:DesignHeight="300"
@@ -58,7 +59,7 @@
 									   Grid.Column="1"
 									   VerticalAlignment="Center"
 									   Margin="10,0">
-								<Run Text="{x:Static properties:Resources.Repairyard_ShipName}"
+								<Run Text="{Binding Resources.Repairyard_ShipName, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 FontSize="14" />
 								<LineBreak />
 								<Run Text="{Binding Ship, Mode=OneWay}"
@@ -69,7 +70,7 @@
 									   Grid.Column="2"
 									   VerticalAlignment="Center"
 									   Margin="10,0">
-								<Run Text="{x:Static properties:Resources.Repairyard_TimeComplete}"
+								<Run Text="{Binding Resources.Repairyard_TimeComplete, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 FontSize="14" />
 								<LineBreak />
 								<Run Text="{Binding CompleteTime, Mode=OneWay}"
@@ -80,7 +81,7 @@
 									   Grid.Column="3"
 									   VerticalAlignment="Center"
 									   Margin="10,0">
-								<Run Text="{x:Static properties:Resources.Repairyard_TimeRemaining}"
+								<Run Text="{Binding Resources.Repairyard_TimeRemaining, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 FontSize="14" />
 								<LineBreak />
 								<Run Text="{Binding Remaining, Mode=OneWay}"
@@ -95,7 +96,7 @@
 									   VerticalAlignment="Center"
 									   Margin="30,0"
 									   Visibility="Collapsed">
-								<Run Text="{x:Static properties:Resources.Reparyard_Unused}"
+								<Run Text="{Binding Resources.Reparyard_Unused, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 FontSize="18" />
 							</TextBlock>
 							<TextBlock x:Name="LockedMessage"
@@ -105,7 +106,7 @@
 									   VerticalAlignment="Center"
 									   Margin="30,0"
 									   Visibility="Collapsed">
-								<Run Text="{x:Static properties:Resources.Repairyard_Locked}"
+								<Run Text="{Binding Resources.Repairyard_Locked, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 FontSize="18" />
 							</TextBlock>
 						</Grid>
@@ -171,24 +172,24 @@
 					</Style>
 				</StackPanel.Style>
 				<TextBlock Margin="5">
-					<Run Text="{x:Static properties:Resources.Common_Notifications_Title}"
+					<Run Text="{Binding Resources.Common_Notifications_Title, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 						 Style="{DynamicResource PickupTextElementStyleKey}" />
 				</TextBlock>
 				<RadioButton Margin="8,5"
 							 IsChecked="{Binding IsNotifyCompleted}">
-					<TextBlock Text="{x:Static properties:Resources.Repairyard_Notifications_Enable}" />
+					<TextBlock Text="{Binding Resources.Repairyard_Notifications_Enable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 				</RadioButton>
 				<RadioButton Margin="8,5"
 							 IsEnabled="False">
 					<TextBlock>
-						<Run Text="{x:Static properties:Resources.Repairyard_Notifications_Individual}"
+						<Run Text="{Binding Resources.Repairyard_Notifications_Individual, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 							 TextDecorations="Strikethrough" />
-						<Run Text="{x:Static properties:Resources.Common_Notifications_NotImplemented}" />
+						<Run Text="{Binding Resources.Common_Notifications_NotImplemented, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 					</TextBlock>
 				</RadioButton>
 				<RadioButton Margin="8,5"
 							 IsChecked="True">
-					<TextBlock Text="{x:Static properties:Resources.Common_Notifications_Disable}" />
+					<TextBlock Text="{Binding Resources.Common_Notifications_Disable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 				</RadioButton>
 			</StackPanel>
 		</StackPanel>
