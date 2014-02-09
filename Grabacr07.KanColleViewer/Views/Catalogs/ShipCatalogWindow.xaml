@@ -426,7 +426,7 @@
 
 							<GridViewColumn Width="110">
 								<GridViewColumn.Header>
-									<TextBlock Text="装備" />
+									<TextBlock Text="장비" />
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate DataType="{x:Type contentsVm:ShipViewModel}">
