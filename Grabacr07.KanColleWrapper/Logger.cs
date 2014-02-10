@@ -94,14 +94,14 @@ namespace Grabacr07.KanColleWrapper
                     string Main_folder = Path.GetDirectoryName(location);
                     if (System.IO.File.Exists(Main_folder + "\\Create_Item_log.csv") == true)
                     {
-                        using (StreamWriter w = File.AppendText("Create_Item_log.csv"))
+                        using (StreamWriter w = File.AppendText(Main_folder + "\\Create_Item_log.csv"))
                         {
                             w.WriteLine(format, args);
                         }
                     }
                     else
                     {
-                        using (StreamWriter w = File.AppendText("Create_Item_log.csv"))
+                        using (StreamWriter w = File.AppendText(Main_folder + "\\Create_Item_log.csv"))
                         {
                             w.WriteLine("장비명,비서함,연,탄,강,보키", args);
                             w.WriteLine(format, args);
@@ -114,14 +114,14 @@ namespace Grabacr07.KanColleWrapper
                     string Main_folder = Path.GetDirectoryName(location);
                     if (System.IO.File.Exists(Main_folder + "\\Create_Ship_log.csv") == true)
                     {
-                        using (StreamWriter w = File.AppendText("Create_Ship_log.csv"))
+                        using (StreamWriter w = File.AppendText(Main_folder + "\\Create_Ship_log.csv"))
                         {
                             w.WriteLine(format, args);
                         }
                     }
                     else
                     {
-                        using (StreamWriter w = File.AppendText("Create_Ship_log.csv"))
+                        using (StreamWriter w = File.AppendText(Main_folder + "\\Create_Ship_log.csv"))
                         {
                             w.WriteLine("결과,연,탄,강,보키,개발자재", args);
                             w.WriteLine(format, args);
@@ -133,14 +133,14 @@ namespace Grabacr07.KanColleWrapper
                     string Main_folder = Path.GetDirectoryName(location);
                     if (System.IO.File.Exists(Main_folder + "\\Battle_log.csv") == true)
                     {
-                        using (StreamWriter w = File.AppendText("Battle_log.csv"))
+                        using (StreamWriter w = File.AppendText(Main_folder + "\\Battle_log.csv"))
                         {
                             w.WriteLine(format, args);
                         }
                     }
                     else
                     {
-                        using (StreamWriter w = File.AppendText("Battle_log.csv"))
+                        using (StreamWriter w = File.AppendText(Main_folder + "\\Battle_log.csv"))
                         {
                             w.WriteLine("결과,해역,적 함대,랭크", args);
                             w.WriteLine(format, args);
