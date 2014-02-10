@@ -399,17 +399,11 @@
   <data name="Settings" xml:space="preserve">
     <value>설정</value>
   </data>
-  <data name="Settings_Logging" xml:space="preserve">
-    <value>로그저장</value>
-  </data>
-  <data name="Settings_Logging_Enable" xml:space="preserve">
-    <value>드랍 칸무스와 아이템/함선 제작 로그를 저장</value>
-  </data>
   <data name="Settings_Language" xml:space="preserve">
     <value>언어설정</value>
   </data>
   <data name="MessageBar_Repairing" xml:space="preserve">
-<value>함대에 입거중인 칸무스가 있습니다. 완료시각: {0:MM/dd HH\:mm} 완료까지: {1}:{2:mm\:ss}</value>
+    <value>함대에 입거중인 칸무스가 있습니다. 완료시각: {0:MM/dd HH\:mm} 완료까지: {1}:{2:mm\:ss}</value>
   </data>
   <data name="MessageBar_ReSortie_CanNotReSortie" xml:space="preserve">
     <value>함대에 {0}가 있습니다.</value>
@@ -424,7 +418,7 @@
     <value>, </value>
   </data>
   <data name="MessageBar_ReSortie_Wounded" xml:space="preserve">
-    <value>중파이상인 칸무스</value>
+    <value>대파이상인 칸무스</value>
   </data>
   <data name="MessageBar_ReSortie_CanReSortie" xml:space="preserve">
     <value>출격가능!</value>
