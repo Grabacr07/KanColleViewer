@@ -129,7 +129,7 @@
 
 
 
-        <metro:PromptComboBox Margin="15,0,0,12"
+		<metro:PromptComboBox Margin="15,0,0,12"
 							  HorizontalAlignment="Left"
 							  Prompt=""
 							  ItemsSource="{Binding Cultures}"
@@ -138,22 +138,7 @@
 							  SelectedValue="{Binding Culture, Mode=TwoWay}"
 							  IsReadOnly="True"
 							  MinWidth="250" />
-
-
-
-
-        <Rectangle Height="1"
-				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-        <Rectangle Height="1"
-				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-        <TextBlock Text="{Binding Resources.Settings_Logging, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" 
-                   Style="{DynamicResource HeaderTextBlockStyleKey}"
-				   Margin="0,10" />
-        <CheckBox Content="{Binding Resources.Settings_Logging_Enable,Source={x:Static models:ResourceService.Current}, Mode=OneWay}" IsChecked="{Binding EnableLogging}" Height="17" Margin="15,0,0,10"/>
-
-
-
-
-    </StackPanel>
+		
+	</StackPanel>
 </UserControl>
 

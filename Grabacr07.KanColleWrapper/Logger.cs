@@ -21,7 +21,6 @@ namespace Grabacr07.KanColleWrapper
 {
     public class Logger : NotificationObject
     {
-        public bool EnableLogging { get; set; }
 
         private bool waitingForShip = false;
         private int dockid;
@@ -86,8 +85,6 @@ namespace Grabacr07.KanColleWrapper
         
         private void Log(string Type,string format, params object[] args)
         {
-            if (EnableLogging)
-            {
                 if (Type == "Item")
                 {
                     var location = System.Reflection.Assembly.GetEntryAssembly().Location;
@@ -147,8 +144,6 @@ namespace Grabacr07.KanColleWrapper
                         }
                     }
                 }
-                
-            }
         }
     }
 }

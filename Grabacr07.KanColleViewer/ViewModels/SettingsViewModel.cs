@@ -179,25 +179,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-        #region EnableLogging 変更通知プロパティ
-
-
-        public bool EnableLogging
-        {
-            get { return Settings.Current.EnableLogging; }
-            set
-            {
-                if (Settings.Current.EnableLogging != value)
-                {
-                    Settings.Current.EnableLogging = value;
-                    KanColleClient.Current.Homeport.Logger.EnableLogging = value;
-                    this.RaisePropertyChanged();
-                }
-            }
-        }
-
-
-        #endregion
 
 
         #region Libraries 変更通知プロパティ
