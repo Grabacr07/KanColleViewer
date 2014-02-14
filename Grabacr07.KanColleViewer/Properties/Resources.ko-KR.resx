@@ -418,13 +418,13 @@
     <value>, </value>
   </data>
   <data name="MessageBar_ReSortie_Wounded" xml:space="preserve">
-    <value>대파이상인 칸무스</value>
+    <value>중파이상인 칸무스</value>
   </data>
   <data name="MessageBar_ReSortie_CanReSortie" xml:space="preserve">
     <value>출격가능!</value>
   </data>
   <data name="MessageBar_ReSortie_Remaining" xml:space="preserve">
-    <value>출격가능까지: </value>
+    <value>재출격가능까지: </value>
   </data>
   <data name="Debug" xml:space="preserve">
     <value>디버그</value>
