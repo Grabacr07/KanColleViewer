@@ -31,7 +31,8 @@ namespace Grabacr07.KanColleViewer.Models
 		{ 
 			"en-US",
 			"ja-JP",
-			"zh-CN"
+			"zh-CN",
+			"ko-KR"
 		};
 
 		private readonly Resources _Resources = new Resources();
