@@ -14,6 +14,7 @@
 			 xmlns:converters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters"
 			 xmlns:catalogs="clr-namespace:Grabacr07.KanColleViewer.Views.Catalogs"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
 			 mc:Ignorable="d"
 			 d:DataContext="{d:DesignInstance vmContents:OverviewViewModel}"
 			 d:DesignWidth="680"
@@ -76,6 +77,11 @@
 										VerticalAlignment="Top"
 										MethodName="Jump"
 										MethodParameter="Fleets">
+			<i:Interaction.Triggers>
+				<behaviors:FlickTrigger>
+					<behaviors:FlickFleetsAction TargetObject="{Binding Content.Fleets}" IsCyclic="True" Orientation="Horizontal"/>
+				</behaviors:FlickTrigger>
+			</i:Interaction.Triggers>
 			<Grid DataContext="{Binding Content.Fleets.SelectedFleet}">
 				<StackPanel d:DataContext="{d:DesignData /SampleData/FleetViewModelSampleData.xaml}">
 					<TextBlock>
