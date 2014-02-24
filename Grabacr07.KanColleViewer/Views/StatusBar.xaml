@@ -3,6 +3,8 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
 			 xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
@@ -12,6 +14,7 @@
 			 xmlns:vmContents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 xmlns:dev="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Dev"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 			 mc:Ignorable="d"
 			 d:DesignHeight="25"
 			 d:DesignWidth="780">
@@ -34,15 +37,18 @@
 		<ContentControl Grid.Column="1"
 						Content="{Binding Source={x:Static root:App.ViewModelRoot}, Path=StatusBar}">
 			<ContentControl.Resources>
+				<DataTemplate DataType="{x:Type vm:StartContentViewModel}" />
 				<DataTemplate DataType="{x:Type vmContents:OverviewViewModel}" />
 				<DataTemplate DataType="{x:Type vmFleets:FleetsViewModel}">
 					<TextBlock DataContext="{Binding SelectedFleet}"
 							   Foreground="{DynamicResource AccentForegroundBrushKey}">
 						<Run Text="        " />
-						<Run Text="{Binding Resources.StatusBar_AverageLevel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+						<Run
+							Text="{Binding Resources.StatusBar_AverageLevel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 						<Run Text="{Binding AverageLevel, Mode=OneWay}" />
 						<Run Text="        " />
-						<Run Text="{Binding Resources.StatusBar_AirSuperiorityPotential, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+						<Run
+							Text="{Binding Resources.StatusBar_AirSuperiorityPotential, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 						<Run Text="{Binding AirSuperiorityPotential, Mode=OneWay}" />
 						<Run Text="        " />
 						<Run Text="{Binding Speed, Mode=OneWay}" />

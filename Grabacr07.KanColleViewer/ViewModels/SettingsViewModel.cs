@@ -16,6 +16,7 @@ using Grabacr07.KanColleViewer.ViewModels.Messages;
 using Grabacr07.KanColleWrapper;
 using Livet;
 using Livet.EventListeners;
+using Livet.Messaging;
 using Livet.Messaging.IO;
 using MetroRadiance;
 using Settings = Grabacr07.KanColleViewer.Models.Settings;
@@ -277,6 +278,27 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region BrowserZoomFactor 変更通知プロパティ
+
+		private BrowserZoomFactor _BrowserZoomFactor;
+
+		public BrowserZoomFactor BrowserZoomFactor
+		{
+			get { return this._BrowserZoomFactor; }
+			private set
+			{
+				if (this._BrowserZoomFactor != value)
+				{
+					this._BrowserZoomFactor = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+
+
 		public bool HasErrors
 		{
 			get { return this.reSortieConditionError != null; }
@@ -312,7 +334,15 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 			this._IsDarkTheme = ThemeService.Current.Theme == Theme.Dark;
 			this._IsLightTheme = ThemeService.Current.Theme == Theme.Light;
+
+			var zoomFactor = new BrowserZoomFactor { Current = Settings.Current.BrowserZoomFactor };
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(zoomFactor)
+			{
+				{ "Current", (sender, args) => Settings.Current.BrowserZoomFactor = zoomFactor.Current },
+			});
+			this.BrowserZoomFactor = zoomFactor;
 		}
+
 
 		public void OpenScreenshotFolderSelectionDialog()
 		{
@@ -351,7 +381,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		public void ClearZoomFactor()
 		{
-			App.ViewModelRoot.Messenger.Raise(new ZoomMessage { MessageKey = "WebBrowser/Zoom", ZoomFactor = 100 });
+			App.ViewModelRoot.Messenger.Raise(new InteractionMessage { MessageKey = "WebBrowser/Zoom" });
 		}
 
 		public void SetLocationLeft()

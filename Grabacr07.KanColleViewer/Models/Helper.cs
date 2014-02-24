@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using Grabacr07.KanColleViewer.Win32;
+using MetroRadiance.Core;
 using Microsoft.Win32;
 
 namespace Grabacr07.KanColleViewer.Models

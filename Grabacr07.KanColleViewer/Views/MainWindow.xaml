@@ -18,7 +18,7 @@
 				   Title="{Binding Title}"
 				   Width="960"
 				   Height="945"
-				   MinWidth="{Binding ElementName=WebBrowser, Path=Width}"
+				   MinWidth="{Binding ElementName=KanColleHost, Path=MinWidth}"
 				   Topmost="{Binding TopMost}"
 				   FontSize="12"
 				   Background="{DynamicResource ThemeBrushKey}"
@@ -71,7 +71,11 @@
 				<StackPanel Grid.Column="2"
 							Orientation="Horizontal"
 							HorizontalAlignment="Right"
-							VerticalAlignment="Top">
+							VerticalAlignment="Top"
+							WindowChrome.IsHitTestVisibleInChrome="True">
+					<controls:ZoomFactorSelector ZoomFactor="{Binding Settings.BrowserZoomFactor, Mode=OneWay}"
+												 ToolTip="Internet Explorer の表示サイズを調整"
+												 Margin="4,0" />
 					<metro:CaptionButton IsChecked="{Binding TopMost, Mode=TwoWay}"
 										 ToolTip="{Binding Resources.Settings_Window_TopMost, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 										 Style="{DynamicResource PinButtonStyleKey}" />
@@ -87,27 +91,28 @@
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
 
-			<WebBrowser x:Name="WebBrowser"
-						Width="960"
-						Height="572"
-						controls:WebBrowserHelper.ScriptErrorsSuppressed="True">
-				<i:Interaction.Behaviors>
-					<behaviors:SetStyleSheetBehavior />
-					<behaviors:NavigatorBehavior Navigator="{Binding Navigator}" />
-					<livet:WebBrowserSetStateToControlBehavior Source="{Binding Source={x:Static properties:Settings.Default}, Path=KanColleUrl, Mode=OneTime}"
-															   Property="Source" />
-				</i:Interaction.Behaviors>
+			<controls:KanColleHost x:Name="KanColleHost"
+								   ZoomFactor="{Binding Settings.BrowserZoomFactor.Current}">
 				<i:Interaction.Triggers>
-					<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
-													 MessageKey="Screenshot/Save">
-						<behaviors:ScreenshotAction />
-					</livet:InteractionMessageTrigger>
 					<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
 													 MessageKey="WebBrowser/Zoom">
 						<behaviors:ZoomAction />
 					</livet:InteractionMessageTrigger>
 				</i:Interaction.Triggers>
-			</WebBrowser>
+				<WebBrowser controls:WebBrowserHelper.ScriptErrorsSuppressed="True">
+					<i:Interaction.Behaviors>
+						<behaviors:NavigatorBehavior Navigator="{Binding Navigator}" />
+						<livet:WebBrowserSetStateToControlBehavior Source="{Binding Source={x:Static properties:Settings.Default}, Path=KanColleUrl, Mode=OneTime}"
+																   Property="Source" />
+					</i:Interaction.Behaviors>
+					<i:Interaction.Triggers>
+						<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+														 MessageKey="Screenshot/Save">
+							<behaviors:ScreenshotAction />
+						</livet:InteractionMessageTrigger>
+					</i:Interaction.Triggers>
+				</WebBrowser>
+			</controls:KanColleHost>
 
 			<ContentControl Grid.Row="1"
 							Content="{Binding Content}">
