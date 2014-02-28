@@ -119,5 +119,20 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 指揮連絡機。
 		/// </summary>
 		ArtillerySpotter = 22,
+
+		/// <summary>
+		/// 増設バルジ。
+		/// </summary>
+		AntiTorpedoBulge = 23,
+
+		/// <summary>
+		/// 探照灯。
+		/// </summary>
+		Searchlight = 24,
+
+		/// <summary>
+		/// ドラム缶。
+		/// </summary>
+		DrumCanister = 25,
 	}
 }

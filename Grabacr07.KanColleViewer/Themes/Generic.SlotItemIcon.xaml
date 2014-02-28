@@ -398,7 +398,147 @@
 					</Setter.Value>
 				</Setter>
 			</Trigger>
+			<Trigger Property="Type"
+					 Value="AntiTorpedoBulge">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Data="M104.42984,-2.0858351 L0.052009951,120.35882 73.77914,191.14556 178.88225,60.239018 z"
+										  Fill="#FF9B80B0"
+										  Margin="8.068,-2.086,8.103,10"
+										  Stretch="Fill"
+										  HorizontalAlignment="Left"
+										  VerticalAlignment="Top" />
+									<Path Data="M10,121.02083 L11,134 81,195 181,83 181,66 80.362843,180.27867 z"
+										  Fill="#FF5E497C"
+										  Margin="8.068,60,0,0"
+										  Stretch="Fill"
+										  HorizontalAlignment="Left"
+										  VerticalAlignment="Top"
+										  Width="178.83"
+										  Height="141.145" />
+									<Ellipse Fill="#FF806F98"
+											 HorizontalAlignment="Left"
+											 Height="20"
+											 Margin="29.241,105.094,0,0"
+											 VerticalAlignment="Top"
+											 Width="20" />
+									<Ellipse Fill="#FF806F98"
+											 HorizontalAlignment="Left"
+											 Height="20"
+											 Margin="69.47,141.52,0,0"
+											 VerticalAlignment="Top"
+											 Width="20" />
+									<Ellipse Fill="#FF806F98"
+											 HorizontalAlignment="Left"
+											 Height="20"
+											 Margin="65.301,63.001,0,0"
+											 VerticalAlignment="Top"
+											 Width="20" />
+									<Ellipse Fill="#FF806F98"
+											 HorizontalAlignment="Left"
+											 Height="20"
+											 Margin="105.442,97.921,0,0"
+											 VerticalAlignment="Top"
+											 Width="20" />
+									<Ellipse Fill="#FF806F98"
+											 HorizontalAlignment="Left"
+											 Height="20"
+											 Margin="99.439,20.84,0,0"
+											 VerticalAlignment="Top"
+											 Width="20" />
+									<Ellipse Fill="#FF806F98"
+											 HorizontalAlignment="Left"
+											 Height="20"
+											 Margin="141.488,53.91,0,0"
+											 VerticalAlignment="Top"
+											 Width="20" />
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="Searchlight">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Data="M262,1125 L423,1125 399.33333,1101.3332 397.33333,1049.9996 391.18515,1077.2217 379.78187,1090.3435 303.66667,1090.0311 291.52357,1076.9093 286.66667,1050.9996 283.33333,1101.6667 z"
+										  Fill="#FFE66915"
+										  HorizontalAlignment="Left"
+										  Height="54.164"
+										  Stretch="Fill"
+										  VerticalAlignment="Top"
+										  Width="116.273"
+										  Margin="0,68.284,0,0" />
+									<Path Data="M341.99974,944.49997 C310.99937,944.08311 290.10749,963.87054 284.5,986.5 273.08307,988.39547 264.33296,995.99988 265.5,1007.5 265.99963,1016.9999 271.34626,1023.8371 284,1027.5 L286.5,1073 296.49958,1054.4999 314,1071 372.56573,1070.8997 387.03145,1053.7427 397.66659,1069.3333 401.6666,1024.9999 C414.10395,1022.2355 418.99999,1014.7499 420.74999,1006.4999 418.97769,995.82497 414.58082,990.43434 400.5,989 392.13335,962.68449 373.34676,944.9215 341.99974,944.49997 z"
+										  Fill="#FFE66915"
+										  HorizontalAlignment="Left"
+										  Height="92.806"
+										  Margin="1.927,-0.425,0,0"
+										  Stretch="Fill"
+										  VerticalAlignment="Top"
+										  Width="112.195" />
+									<Ellipse Fill="#FFF28D4A"
+											 HorizontalAlignment="Left"
+											 Height="72.22"
+											 Margin="21.573,9.27,0,0"
+											 VerticalAlignment="Top"
+											 Width="72.219" />
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="DrumCanister">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Ellipse Fill="#FFA2A2A2"
+											 HorizontalAlignment="Left"
+											 Height="70"
+											 VerticalAlignment="Top"
+											 Width="241.002" />
+									<Path Data="M686,1031 L686.01612,1107.5798 C714.90659,1147.3637 893.2341,1151.3216 926.84511,1107.3545 L926.91994,1030.6062 C898.90781,1071.3939 714.92213,1070.4292 686,1031 z"
+										  Fill="#FFA2A2A2"
+										  HorizontalAlignment="Left"
+										  Height="108.289"
+										  Margin="0,42.349,0,0"
+										  Stretch="Fill"
+										  VerticalAlignment="Top"
+										  Width="240.92" />
+									<Path Data="M686,1031 L686.01612,1107.5798 C714.90659,1147.3637 893.2341,1151.3216 926.84511,1107.3545 L926.91994,1030.6062 C898.90781,1071.3939 714.92213,1070.4292 686,1031 z"
+										  Fill="#FFA2A2A2"
+										  HorizontalAlignment="Left"
+										  Height="108.289"
+										  Margin="0,122.442,0,0"
+										  Stretch="Fill"
+										  VerticalAlignment="Top"
+										  Width="240.92" />
+									<Path Data="M686,1031 L686.01612,1138.8062 C714.90659,1178.5901 893.2341,1182.548 926.84511,1138.5809 L926.91994,1030.6062 C898.90781,1071.3939 714.92213,1070.4292 686,1031 z"
+										  Fill="#FFA2A2A2"
+										  HorizontalAlignment="Left"
+										  Height="139.517"
+										  Margin="0,203.535,0,0"
+										  Stretch="Fill"
+										  VerticalAlignment="Top"
+										  Width="240.92" />
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
 		</Style.Triggers>
 	</Style>
-	
+
 </ResourceDictionary>
