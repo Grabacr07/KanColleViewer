@@ -64,7 +64,7 @@
 									   HorizontalAlignment="Center">
 								<TextBlock.Text>
 									<Binding Path="BrowserZoomFactor.CurrentParcentage"
-											 StringFormat="IE 表示サイズを {0} % に戻す"
+											 StringFormat="ゲーム画面を {0} % に戻す"
 											 Mode="OneWay" />
 								</TextBlock.Text>
 							</TextBlock>
@@ -83,7 +83,7 @@
 
 					<TextBlock Margin="8,0,10,0"
 							   TextWrapping="Wrap">
-						<Run Text="ウィンドウ上部のボタンでブラウザー部分 (Internet Explorer) の表示サイズを変更できます。" />
+						<Run Text="ウィンドウ上部のボタンでゲーム画面 (Internet Explorer) の表示サイズを変更できます。" />
 						<Run Text="スクリーンショットは常に 100 % のサイズで撮影され、表示サイズ設定の影響を受けません。" />
 					</TextBlock>
 				</DockPanel>
