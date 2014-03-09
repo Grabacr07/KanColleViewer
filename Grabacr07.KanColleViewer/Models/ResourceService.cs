@@ -1,22 +1,22 @@
-﻿using Grabacr07.KanColleViewer.Properties;
-using Livet;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Grabacr07.KanColleViewer.Properties;
+using Livet;
 
 namespace Grabacr07.KanColleViewer.Models
 {
 	/// <summary>
-	/// リソースを提供します。
+	/// 多言語化されたリソースへのアクセスを提供します。
 	/// </summary>
 	public class ResourceService : NotificationObject
 	{
 		#region static members
 
 		private static readonly ResourceService current = new ResourceService();
+
 		public static ResourceService Current
 		{
 			get { return current; }
@@ -28,18 +28,18 @@ namespace Grabacr07.KanColleViewer.Models
 		/// サポートされているカルチャの名前。
 		/// </summary>
 		private readonly string[] supportedCultureNames =
-		{ 
-			"en-US",
-			"ja-JP",
+		{
+			"ja", // Resources.resx
+			"en",
 			"zh-CN",
-			"ko-KR"
+			"ko-KR",
 		};
 
 		private readonly Resources _Resources = new Resources();
 		private readonly IReadOnlyCollection<CultureInfo> _SupportedCultures;
 
 		/// <summary>
-		/// リソースを取得します。
+		/// 多言語化されたリソースを取得します。
 		/// </summary>
 		public Resources Resources
 		{
