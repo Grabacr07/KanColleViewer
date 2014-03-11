@@ -128,7 +128,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\BrowserZoomFactor.cs" />
-    <Compile Include="Models\IWindowsNotifier.cs" />
+    <Compile Include="Models\WindowsNotifier.cs" />
     <Compile Include="Models\IZoomFactor.cs" />
     <Compile Include="Models\ProductInfo.cs" />
     <Compile Include="Models\Data\Xml\XmlFileReader.cs" />

@@ -11,14 +11,14 @@ namespace Grabacr07.KanColleViewer.Models
 	/// </summary>
 	public static class WindowsNotification
 	{
-		private static IWindowsNotifier notifier;
+		private static WindowsNotifier notifier;
 
 		/// <summary>
 		/// 現在の OS バージョンに適合する通知機能へアクセスできるようにします。
 		/// </summary>
-		public static IWindowsNotifier Notifier
+		public static WindowsNotifier Notifier
 		{
-			get { return notifier ?? (notifier = Windows8Notifier.IsSupported ? (IWindowsNotifier)new Windows8Notifier() : new Windows7Notifier()); }
+			get { return notifier ?? (notifier = Windows8Notifier.IsSupported ? (WindowsNotifier)new Windows8Notifier() : new Windows7Notifier()); }
 		}
 	}
 }

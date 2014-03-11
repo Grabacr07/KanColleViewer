@@ -14,7 +14,7 @@ namespace Grabacr07.KanColleViewer.Models.Internal
 	/// <summary>
 	/// トーストを使用した通知機能を提供します。
 	/// </summary>
-	internal class Windows8Notifier : IWindowsNotifier
+	internal class Windows8Notifier : WindowsNotifier
 	{
 		#region static members
 
@@ -25,7 +25,7 @@ namespace Grabacr07.KanColleViewer.Models.Internal
 
 		#endregion
 
-		public void Initialize()
+		public override void abstractinit()
 		{
 			try
 			{
@@ -39,10 +39,7 @@ namespace Grabacr07.KanColleViewer.Models.Internal
 				InstallShortcut(shortcutPath);
 #endif
 			}
-			catch (Exception ex)
-			{
-				Debug.WriteLine(ex);
-			}
+			catch { throw; }
 		}
 
 		private static void InstallShortcut(string shortcutPath)
@@ -66,7 +63,7 @@ namespace Grabacr07.KanColleViewer.Models.Internal
 			ErrorHelper.VerifySucceeded(newShortcutSave.Save(shortcutPath, true));
 		}
 
-		public void Show(string header, string body, Action activated, Action<Exception> failed = null)
+		public override void Show(string header, string body, Action activated, Action<Exception> failed = null)
 		{
 			var toast = new Toast(header, body);
 			toast.Activated += (sender, args) => activated();
@@ -75,6 +72,6 @@ namespace Grabacr07.KanColleViewer.Models.Internal
 			toast.Show();
 		}
 
-		public void Dispose() { }
+		public override void Dispose() { }
 	}
 }
