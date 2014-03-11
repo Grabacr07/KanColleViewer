@@ -10,20 +10,29 @@ namespace Grabacr07.KanColleViewer.Models.Internal
 	/// <summary>
 	/// 通知領域アイコンを利用した通知機能を提供します。
 	/// </summary>
-	internal class Windows7Notifier : IWindowsNotifier
+	internal class Windows7Notifier : WindowsNotifier
 	{
 		private NotifyIcon notifyIcon;
 		private EventHandler activatedAction;
 
-		public void Initialize()
+		public override void abstractInit()
 		{
 			const string iconUri = "pack://application:,,,/KanColleViewer;Component/Assets/app.ico";
 
 			Uri uri;
-			if (!Uri.TryCreate(iconUri, UriKind.Absolute, out uri)) return;
+			if (!Uri.TryCreate(iconUri, UriKind.Absolute, out uri))
+			{
+				throw new System.InvalidOperationException
+				(
+					String.Format
+					(
+						"Windows7Notifier Uri create failed! UriString: {0}, UriKind: {1}", iconUri.ToString(), UriKind.Absolute.ToString()
+					)
+				);
+			}
 
 			var streamResourceInfo = Application.GetResourceStream(uri);
-			if (streamResourceInfo == null) return;
+			if (streamResourceInfo == null) throw new System.InvalidOperationException("Windows7Notifier Application.GetResourceStream returned null data");
 
 			using (var stream = streamResourceInfo.Stream)
 			{
@@ -36,7 +45,7 @@ namespace Grabacr07.KanColleViewer.Models.Internal
 			}
 		}
 
-		public void Show(string header, string body, Action activated, Action<Exception> failed = null)
+		public override void Show(string header, string body, Action activated, Action<Exception> failed = null)
 		{
 			if (this.notifyIcon == null) return;
 
@@ -51,7 +60,7 @@ namespace Grabacr07.KanColleViewer.Models.Internal
 			notifyIcon.ShowBalloonTip(1000, header, body, ToolTipIcon.None);
 		}
 
-		public void Dispose()
+		public override void Dispose()
 		{
 			if (this.notifyIcon != null)
 			{
