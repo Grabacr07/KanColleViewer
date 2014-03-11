@@ -14,17 +14,13 @@ namespace Grabacr07.KanColleViewer.Models
 	{
 		public void Initialize()
 		{
-			try
-			{
-				abstractinit();
-			}
-			catch (Exception ex)
-			{
-				Debug.WriteLine(ex);
-			}
+			try { abstractInit(); }
+			catch (Exception ex) { hookDebug(ex); }
 		}
 
-		public abstract void abstractinit();
+		protected void hookDebug(Exception ex) { Debug.WriteLine(ex); }
+
+		public abstract void abstractInit();
 		public abstract void Dispose();
 		public abstract void Show(string header, string body, Action activated, Action<Exception> failed = null);
 

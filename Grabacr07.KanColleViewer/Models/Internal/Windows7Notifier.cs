@@ -15,7 +15,7 @@ namespace Grabacr07.KanColleViewer.Models.Internal
 		private NotifyIcon notifyIcon;
 		private EventHandler activatedAction;
 
-		public override void abstractinit()
+		public override void abstractInit()
 		{
 			const string iconUri = "pack://application:,,,/KanColleViewer;Component/Assets/app.ico";
 

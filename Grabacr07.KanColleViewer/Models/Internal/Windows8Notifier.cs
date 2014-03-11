@@ -25,7 +25,7 @@ namespace Grabacr07.KanColleViewer.Models.Internal
 
 		#endregion
 
-		public override void abstractinit()
+		public override void abstractInit()
 		{
 			try
 			{
