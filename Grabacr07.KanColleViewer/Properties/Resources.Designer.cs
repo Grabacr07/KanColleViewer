@@ -340,6 +340,60 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   制空戦力 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Fleets_AirSuperiorityPotential {
+            get {
+                return ResourceManager.GetString("Fleets_AirSuperiorityPotential", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   平均 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Fleets_Average {
+            get {
+                return ResourceManager.GetString("Fleets_Average", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   レベル に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Fleets_Level {
+            get {
+                return ResourceManager.GetString("Fleets_Level", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   高速艦隊 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Fleets_Speed_Fast {
+            get {
+                return ResourceManager.GetString("Fleets_Speed_Fast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   低速艦隊 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Fleets_Speed_Slow {
+            get {
+                return ResourceManager.GetString("Fleets_Speed_Slow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   合計 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Fleets_Total {
+            get {
+                return ResourceManager.GetString("Fleets_Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   司令部 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Homeport_FleetHQ {
@@ -1015,24 +1069,6 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   制空戦力: に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string StatusBar_AirSuperiorityPotential {
-            get {
-                return ResourceManager.GetString("StatusBar_AirSuperiorityPotential", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   平均レベル: に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string StatusBar_AverageLevel {
-            get {
-                return ResourceManager.GetString("StatusBar_AverageLevel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   艦これの起動を待っています に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string StatusBar_NotStarted {
@@ -1047,24 +1083,6 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string StatusBar_Ready {
             get {
                 return ResourceManager.GetString("StatusBar_Ready", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   高速艦隊 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string StatusBar_Speed_Fast {
-            get {
-                return ResourceManager.GetString("StatusBar_Speed_Fast", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   低速艦隊 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string StatusBar_Speed_Slow {
-            get {
-                return ResourceManager.GetString("StatusBar_Speed_Slow", resourceCulture);
             }
         }
         

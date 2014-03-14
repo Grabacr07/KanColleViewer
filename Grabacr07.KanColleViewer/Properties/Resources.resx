@@ -435,11 +435,11 @@
   <data name="StartContent_Welcom" xml:space="preserve">
     <value>ようこそ</value>
   </data>
-  <data name="StatusBar_AirSuperiorityPotential" xml:space="preserve">
-    <value>制空戦力:</value>
+  <data name="Fleets_AirSuperiorityPotential" xml:space="preserve">
+    <value>制空戦力</value>
   </data>
-  <data name="StatusBar_AverageLevel" xml:space="preserve">
-    <value>平均レベル:</value>
+  <data name="Fleets_Average" xml:space="preserve">
+    <value>平均</value>
   </data>
   <data name="StatusBar_NotStarted" xml:space="preserve">
     <value>艦これの起動を待っています</value>
@@ -447,10 +447,10 @@
   <data name="StatusBar_Ready" xml:space="preserve">
     <value>準備完了</value>
   </data>
-  <data name="StatusBar_Speed_Fast" xml:space="preserve">
+  <data name="Fleets_Speed_Fast" xml:space="preserve">
     <value>高速艦隊</value>
   </data>
-  <data name="StatusBar_Speed_Slow" xml:space="preserve">
+  <data name="Fleets_Speed_Slow" xml:space="preserve">
     <value>低速艦隊</value>
   </data>
   <data name="ZoomAction_OutOfRange" xml:space="preserve">
@@ -458,5 +458,11 @@
   </data>
   <data name="ZoomAction_ZoomFailed" xml:space="preserve">
     <value>ズームに失敗しました: {0}</value>
+  </data>
+  <data name="Fleets_Level" xml:space="preserve">
+    <value>レベル</value>
+  </data>
+  <data name="Fleets_Total" xml:space="preserve">
+    <value>合計</value>
   </data>
 </root>

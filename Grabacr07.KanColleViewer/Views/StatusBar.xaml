@@ -40,19 +40,29 @@
 				<DataTemplate DataType="{x:Type vm:StartContentViewModel}" />
 				<DataTemplate DataType="{x:Type vmContents:OverviewViewModel}" />
 				<DataTemplate DataType="{x:Type vmFleets:FleetsViewModel}">
-					<TextBlock DataContext="{Binding SelectedFleet}"
-							   Foreground="{DynamicResource AccentForegroundBrushKey}">
-						<Run Text="        " />
-						<Run
-							Text="{Binding Resources.StatusBar_AverageLevel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-						<Run Text="{Binding AverageLevel, Mode=OneWay}" />
-						<Run Text="        " />
-						<Run
-							Text="{Binding Resources.StatusBar_AirSuperiorityPotential, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-						<Run Text="{Binding AirSuperiorityPotential, Mode=OneWay}" />
-						<Run Text="        " />
-						<Run Text="{Binding Speed, Mode=OneWay}" />
-					</TextBlock>
+					<StackPanel Orientation="Horizontal"
+								DataContext="{Binding SelectedFleet}">
+						<StackPanel.Resources>
+							<Style TargetType="{x:Type TextBlock}"
+								   BasedOn="{StaticResource {x:Type TextBlock}}">
+								<Setter Property="Foreground"
+										Value="{DynamicResource AccentForegroundBrushKey}" />
+							</Style>
+						</StackPanel.Resources>
+
+						<TextBlock Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Fleets_Level, StringFormat='{}{0} '}" />
+						<TextBlock Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Fleets_Total, StringFormat='{}{0}: '}" />
+						<TextBlock Text="{Binding TotalLevel}"
+								   MinWidth="35" />
+						<TextBlock Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Fleets_Average, StringFormat='{}{0}: '}" />
+						<TextBlock Text="{Binding AverageLevel}"
+								   MinWidth="75" />
+						<TextBlock Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Fleets_AirSuperiorityPotential, StringFormat='{}{0}: '}" />
+						<TextBlock Text="{Binding AirSuperiorityPotential}"
+								   MinWidth="60" />
+						<TextBlock Text="{Binding Speed}"
+								   MinWidth="60" />
+					</StackPanel>
 				</DataTemplate>
 				<DataTemplate DataType="{x:Type vmDocks:RepairyardViewModel}" />
 				<DataTemplate DataType="{x:Type vmDocks:DockyardViewModel}" />

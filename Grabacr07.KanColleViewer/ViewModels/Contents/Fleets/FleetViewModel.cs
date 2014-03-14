@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Livet;
@@ -29,6 +30,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			get { return string.IsNullOrEmpty(this.source.Name.Trim()) ? "(第 " + this.source.Id + " 艦隊)" : this.source.Name; }
 		}
 
+		public string TotalLevel
+		{
+			get { return this.source.TotalLevel.ToString("####"); }
+		}
+
 		public string AverageLevel
 		{
 			get { return this.source.AverageLevel.ToString("##.##"); }
@@ -36,7 +42,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 		public string Speed
 		{
-			get { return this.source.Speed == KanColleWrapper.Models.Speed.Fast ? Properties.Resources.StatusBar_Speed_Fast : Properties.Resources.StatusBar_Speed_Slow; }
+			get { return this.source.Speed == KanColleWrapper.Models.Speed.Fast ? Resources.Fleets_Speed_Fast : Resources.Fleets_Speed_Slow; }
 		}
 
 		public int AirSuperiorityPotential
