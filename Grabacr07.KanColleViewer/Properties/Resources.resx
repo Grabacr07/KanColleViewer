@@ -399,6 +399,7 @@
   <data name="ReSortie_NotificationMessage_Title" xml:space="preserve">
     <value>Fatigue Recovery Completed</value>
   </data>
+<<<<<<< HEAD
   <data name="Settings_Language" xml:space="preserve">
     <value>Language</value>
   </data>
@@ -453,4 +454,6 @@
   <data name="StartContent_ClearCacheButtonMessage" xml:space="preserve">
     <value>Browser cache cleared</value>
   </data>
+=======
+>>>>>>> parent of 6913fb4... 言語設定対応
 </root>

@@ -318,6 +318,7 @@ namespace Grabacr07.KanColleViewer.Models
 
 		#endregion
 
+<<<<<<< HEAD
 		#region Culture 変更通知プロパティ
 
 		private string _Culture;
@@ -374,6 +375,8 @@ namespace Grabacr07.KanColleViewer.Models
 
 		#endregion
 
+=======
+>>>>>>> parent of 6913fb4... 言語設定対応
 		#region ReSortieCondition 変更通知プロパティ
 
 		private ushort _ReSortieCondition = 40;

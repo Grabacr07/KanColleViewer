@@ -5,19 +5,30 @@ using System.Text;
 using System.Threading.Tasks;
 using Livet;
 using MetroRadiance.Controls;
-using Grabacr07.KanColleViewer.Models;
-using Livet.EventListeners;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {
-	public abstract class TabItemViewModel : ViewModel, ITabItem
+	public class TabItemViewModel : ViewModel, ITabItem
 	{
 		#region Name 変更通知プロパティ
+
+		private string _Name;
 
 		/// <summary>
 		/// タブ名を取得します。
 		/// </summary>
-		public abstract string Name { get; protected set; }
+		public virtual string Name
+		{
+			get { return this._Name; }
+			protected set
+			{
+				if (this._Name != value)
+				{
+					this._Name = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
 
 		#endregion
 
@@ -84,14 +95,5 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-		public TabItemViewModel()
-		{
-			if (Helper.IsInDesignMode) return;
-
-			this.CompositeDisposable.Add(new PropertyChangedEventListener(ResourceService.Current)
-			{
-				(sender, args) => this.RaisePropertyChanged("Name"),
-			});
-		}
 	}
 }

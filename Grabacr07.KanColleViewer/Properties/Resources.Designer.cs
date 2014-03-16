@@ -115,6 +115,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+<<<<<<< HEAD
         ///   Looks up a localized string similar to Debug.
         /// </summary>
         public static string Debug {
@@ -142,6 +143,8 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+=======
+>>>>>>> parent of 6913fb4... 言語設定対応
         ///   Looks up a localized string similar to Construction.
         /// </summary>
         public static string Dockyard {
@@ -394,6 +397,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+<<<<<<< HEAD
         ///   Looks up a localized string similar to This fleet is on an expedition..
         /// </summary>
         public static string MessageBar_Expedition {
@@ -502,6 +506,8 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+=======
+>>>>>>> parent of 6913fb4... 言語設定対応
         ///   Looks up a localized string similar to Please visit all of the quest pages..
         /// </summary>
         public static string Quest_Detail_Untaken {
@@ -781,6 +787,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+<<<<<<< HEAD
         ///   Looks up a localized string similar to Language.
         /// </summary>
         public static string Settings_Language {
@@ -790,6 +797,8 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+=======
+>>>>>>> parent of 6913fb4... 言語設定対応
         ///   Looks up a localized string similar to Network.
         /// </summary>
         public static string Settings_Network {
@@ -979,6 +988,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+<<<<<<< HEAD
         ///   Looks up a localized string similar to Clear cache.
         /// </summary>
         public static string StartContent_ClearCacheButton {
@@ -997,6 +1007,8 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+=======
+>>>>>>> parent of 6913fb4... 言語設定対応
         ///   Looks up a localized string similar to Air Superiority Potential:.
         /// </summary>
         public static string StatusBar_AirSuperiorityPotential {
