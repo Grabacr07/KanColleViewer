@@ -465,4 +465,10 @@
   <data name="Fleets_Total" xml:space="preserve">
     <value>合計</value>
   </data>
+  <data name="ZoomFactorSelector" xml:space="preserve">
+    <value>ゲーム画面の表示サイズ</value>
+  </data>
+  <data name="ZoomFactorSelector_Tooltip" xml:space="preserve">
+    <value>ゲーム画面の表示サイズを調整</value>
+  </data>
 </root>

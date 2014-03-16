@@ -34,7 +34,7 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// シーケンスが null でなく、1 つ以上の要素を含んでいるかどうかを確認します。
 		/// </summary>
-		public static bool HasValue<T>(this IEnumerable<T> source)
+		public static bool HasItems<T>(this IEnumerable<T> source)
 		{
 			return source != null && source.Any();
 		}

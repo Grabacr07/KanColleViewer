@@ -44,6 +44,14 @@ namespace Grabacr07.KanColleWrapper.Models
 		}
 
 		/// <summary>
+		/// 艦娘がロックされているかどうかを示す値を取得します。
+		/// </summary>
+		public bool IsLocked
+		{
+			get { return this.RawData.api_locked == 1; }
+		}
+
+		/// <summary>
 		/// 艦娘の現在の累積経験値を取得します。
 		/// </summary>
 		public int Exp
@@ -72,7 +80,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 弾薬を取得します。
 		/// </summary>
-		public LimitedValue Bull { get; private set; } 
+		public LimitedValue Bull { get; private set; }
 
 		/// <summary>
 		/// 火力ステータス値を取得します。

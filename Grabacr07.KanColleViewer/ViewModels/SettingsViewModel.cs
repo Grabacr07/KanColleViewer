@@ -404,7 +404,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					break;
 			}
 
-			return errors.HasValue() ? errors : null;
+			return errors.HasItems() ? errors : null;
 		}
 
 		protected void RaiseErrorsChanged([CallerMemberName]string propertyName = "")

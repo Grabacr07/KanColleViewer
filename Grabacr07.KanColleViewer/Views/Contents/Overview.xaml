@@ -6,7 +6,7 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
-			 xmlns:metroControls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:vContents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
 			 xmlns:vmContents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
@@ -15,6 +15,7 @@
 			 xmlns:catalogs="clr-namespace:Grabacr07.KanColleViewer.Views.Catalogs"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
+			 xmlns:fleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 			 mc:Ignorable="d"
 			 d:DataContext="{d:DesignInstance vmContents:OverviewViewModel}"
 			 d:DesignWidth="680"
@@ -33,8 +34,8 @@
 			</Style>
 
 			<Style x:Key="JumbButtonStyleKey"
-				   TargetType="{x:Type metroControls:CallMethodButton}"
-				   BasedOn="{StaticResource {x:Type metroControls:CallMethodButton}}">
+				   TargetType="{x:Type metro2:CallMethodButton}"
+				   BasedOn="{StaticResource {x:Type metro2:CallMethodButton}}">
 				<Setter Property="Background"
 						Value="Transparent" />
 				<Setter Property="Padding"
@@ -73,79 +74,125 @@
 							  MinWidth="140" />
 		</Grid.ColumnDefinitions>
 
-		<metroControls:CallMethodButton Style="{DynamicResource JumbButtonStyleKey}"
-										VerticalAlignment="Top"
-										MethodName="Jump"
-										MethodParameter="Fleets">
-			<i:Interaction.Triggers>
-				<behaviors:FlickTrigger>
-					<behaviors:FlickFleetsAction TargetObject="{Binding Content.Fleets}" IsCyclic="True" Orientation="Horizontal"/>
-				</behaviors:FlickTrigger>
-			</i:Interaction.Triggers>
-			<Grid DataContext="{Binding Content.Fleets.SelectedFleet}">
-				<StackPanel d:DataContext="{d:DesignData /SampleData/FleetViewModelSampleData.xaml}">
-					<TextBlock>
-						<Run Text="{Binding Id, StringFormat=/{0} - , Mode=OneWay}" />
-						<Run Text="{Binding Name, Mode=OneWay}"
-							 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
-					</TextBlock>
+		<Border VerticalAlignment="Top">
+			<DockPanel DataContext="{Binding Content.Fleets}">
+				<ListBox DockPanel.Dock="Top"
+						 ItemsSource="{Binding Fleets}"
+						 SelectedValue="{Binding SelectedFleet, Mode=TwoWay}"
+						 d:DataContext="{d:DesignData /SampleData/FleetsViewModelSampleData.xaml}"
+						 Style="{DynamicResource HorizontalFlatListBoxStyleKey}">
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<Border Padding="0,0,18,0"
+									Background="Transparent">
+								<StackPanel Orientation="Horizontal">
+									<ContentControl Content="{Binding State}"
+													Width="12"
+													Height="12"
+													Margin="0,2,4,1">
+										<ContentControl.Resources>
+											<DataTemplate DataType="{x:Type fleets:ExpeditionViewModel}">
+												<Border Background="{DynamicResource FleetExpeditionBrushKey}" />
+											</DataTemplate>
+											<DataTemplate DataType="{x:Type fleets:ReSortieBarViewModel}">
+												<Border x:Name="Border"
+														Background="{DynamicResource FleetReSortieBrushKey}" />
+												<DataTemplate.Triggers>
+													<DataTrigger Binding="{Binding CanReSortie}"
+																 Value="False">
+														<Setter TargetName="Border"
+																Property="Background"
+																Value="{DynamicResource FleetRepairingBrushKey}" />
+													</DataTrigger>
+												</DataTemplate.Triggers>
+											</DataTemplate>
+											<DataTemplate DataType="{x:Type fleets:RepairingBarViewModel}">
+												<Border Background="{DynamicResource FleetRepairingBrushKey}" />
+											</DataTemplate>
+										</ContentControl.Resources>
+									</ContentControl>
+									<TextBlock x:Name="FleetName"
+											   Text="{Binding Id, StringFormat='/{0}'}"
+											   FontSize="12"
+											   Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" />
+								</StackPanel>
+							</Border>
+							<DataTemplate.Triggers>
+								<DataTrigger Binding="{Binding IsSelected}"
+											 Value="True">
+									<Setter TargetName="FleetName"
+											Property="Text"
+											Value="{Binding Name}" />
+								</DataTrigger>
+							</DataTemplate.Triggers>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ListBox>
 
-					<ItemsControl ItemsSource="{Binding Ships}"
-								  Margin="0,3,0,0"
-								  Grid.IsSharedSizeScope="True">
-						<ItemsControl.ItemTemplate>
-							<DataTemplate>
-								<StackPanel Margin="0,4,0,0">
-									<Rectangle Height="1"
-											   Margin="0,0,0,4"
-											   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+				<ItemsControl ItemsSource="{Binding SelectedFleet.Ships}"
+							  Background="Transparent"
+							  Margin="0,3,0,0"
+							  Grid.IsSharedSizeScope="True">
+					<i:Interaction.Triggers>
+						<behaviors:FlickTrigger>
+							<behaviors:FlickFleetsAction TargetObject="{Binding}"
+														 IsCyclic="True"
+														 Orientation="Horizontal" />
+						</behaviors:FlickTrigger>
+					</i:Interaction.Triggers>
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<StackPanel Margin="0,4,0,0">
+								<Rectangle Height="1"
+										   Margin="0,0,0,4"
+										   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-									<Grid HorizontalAlignment="Left">
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition SharedSizeGroup="Name" />
-											<ColumnDefinition Width="Auto"
-															  SharedSizeGroup="Level" />
-											<ColumnDefinition Width="Auto"
-															  SharedSizeGroup="HP" />
-											<ColumnDefinition Width="Auto"
-															  SharedSizeGroup="Condition" />
-										</Grid.ColumnDefinitions>
+								<Grid HorizontalAlignment="Left">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition SharedSizeGroup="Name" />
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="Level" />
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="HP" />
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="Condition" />
+									</Grid.ColumnDefinitions>
 
-										<TextBlock>
+									<TextBlock>
 											<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
 												 Style="{DynamicResource PickupTextElementStyleKey}" />
 											<LineBreak />
 											<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
 												 FontSize="11" />
-										</TextBlock>
-										<TextBlock Grid.Column="1"
-												   Margin="12,0,0,0">
+									</TextBlock>
+									<TextBlock Grid.Column="1"
+											   Margin="12,0,0,0">
 											<Run Text="Lv." />
 											<Run Text="{Binding Ship.Level, Mode=OneWay}"
 												 Style="{DynamicResource PickupTextElementStyleKey}" />
 											<LineBreak />
 											<Run Text="{Binding Ship.ExpForNextLevel, StringFormat=Next: {0}, Mode=OneWay}"
 												 FontSize="9" />
-										</TextBlock>
-										<Grid Grid.Column="2"
-											  Margin="12,1,0,0">
-											<Grid.RowDefinitions>
-												<RowDefinition Height="Auto" />
-												<RowDefinition Height="Auto" />
-											</Grid.RowDefinitions>
-											<TextBlock>
+									</TextBlock>
+									<Grid Grid.Column="2"
+										  Margin="12,1,0,0">
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto" />
+											<RowDefinition Height="Auto" />
+										</Grid.RowDefinitions>
+										<TextBlock>
 												<Run Text="HP:" />
 												<Run Text="{Binding Ship.HP.Current, Mode=OneWay}"
 													 Style="{DynamicResource PickupTextElementStyleKey}" />
 												<Run Text="{Binding Ship.HP.Maximum, StringFormat=/{0}, Mode=OneWay}" />
-											</TextBlock>
-											<controls:ColorIndicator Grid.Row="1"
-																	 Height="6"
-																	 LimitedValue="{Binding Ship.HP, Mode=OneWay}"
-																	 Margin="0,2,0,0" />
-										</Grid>
-										<TextBlock Grid.Column="3"
-												   Margin="12,0,0,0">
+										</TextBlock>
+										<controls:ColorIndicator Grid.Row="1"
+																 Height="6"
+																 LimitedValue="{Binding Ship.HP, Mode=OneWay}"
+																 Margin="0,2,0,0" />
+									</Grid>
+									<TextBlock Grid.Column="3"
+											   Margin="12,0,0,0">
 											<InlineUIContainer>
 												<controls:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
 											</InlineUIContainer>
@@ -154,15 +201,14 @@
 											<LineBreak />
 											<Run Text="condition"
 												 FontSize="9" />
-										</TextBlock>
-									</Grid>
-								</StackPanel>
-							</DataTemplate>
-						</ItemsControl.ItemTemplate>
-					</ItemsControl>
-				</StackPanel>
-			</Grid>
-		</metroControls:CallMethodButton>
+									</TextBlock>
+								</Grid>
+							</StackPanel>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</DockPanel>
+		</Border>
 
 		<Grid Grid.Column="1">
 			<Grid.RowDefinitions>
@@ -185,22 +231,22 @@
 							   Margin="0,7,0,3"
 							   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-					<metroControls:CallMethodButton Content="艦娘一覧"
-													Padding="12,8"
-													Margin="0,5,0,8"
-													MethodName="ShowShipCatalog" />
+					<metro2:CallMethodButton Content="艦娘一覧"
+											 Padding="12,8"
+											 Margin="0,5,0,8"
+											 MethodName="ShowShipCatalog" />
 
-					<metroControls:CallMethodButton Content="装備一覧"
-													Padding="12,8"
-													MethodName="ShowSlotItemCatalog" />
+					<metro2:CallMethodButton Content="装備一覧"
+											 Padding="12,8"
+											 MethodName="ShowSlotItemCatalog" />
 				</StackPanel>
 			</Border>
 
-			<metroControls:CallMethodButton Grid.Row="0"
-											Grid.Column="1"
-											Style="{StaticResource JumbButtonStyleKey}"
-											MethodName="Jump"
-											MethodParameter="Expeditions">
+			<metro2:CallMethodButton Grid.Row="0"
+									 Grid.Column="1"
+									 Style="{StaticResource JumbButtonStyleKey}"
+									 MethodName="Jump"
+									 MethodParameter="Expeditions">
 				<StackPanel DataContext="{Binding Content.Expeditions}">
 					<TextBlock>
 						<Run Text="{Binding Name}" />
@@ -238,14 +284,14 @@
 						</ItemsControl.ItemTemplate>
 					</ItemsControl>
 				</StackPanel>
-			</metroControls:CallMethodButton>
+			</metro2:CallMethodButton>
 
-			<metroControls:CallMethodButton Grid.Row="1"
-											Grid.Column="0"
-											Grid.ColumnSpan="2"
-											Style="{StaticResource JumbButtonStyleKey}"
-											MethodName="Jump"
-											MethodParameter="Quests">
+			<metro2:CallMethodButton Grid.Row="1"
+									 Grid.Column="0"
+									 Grid.ColumnSpan="2"
+									 Style="{StaticResource JumbButtonStyleKey}"
+									 MethodName="Jump"
+									 MethodParameter="Quests">
 				<StackPanel DataContext="{Binding Content.Quests}">
 					<TextBlock>
 						<Run Text="{Binding Name}" />
@@ -299,13 +345,13 @@
 						</ItemsControl.ItemTemplate>
 					</ItemsControl>
 				</StackPanel>
-			</metroControls:CallMethodButton>
+			</metro2:CallMethodButton>
 		</Grid>
 
 		<StackPanel Grid.Column="2">
-			<metroControls:CallMethodButton Style="{StaticResource JumbButtonStyleKey}"
-											MethodName="Jump"
-											MethodParameter="Repairyard">
+			<metro2:CallMethodButton Style="{StaticResource JumbButtonStyleKey}"
+									 MethodName="Jump"
+									 MethodParameter="Repairyard">
 				<StackPanel DataContext="{Binding Content.Repairyard}">
 					<TextBlock>
 						<Run Text="{Binding Name}" />
@@ -346,11 +392,11 @@
 						</ItemsControl.ItemTemplate>
 					</ItemsControl>
 				</StackPanel>
-			</metroControls:CallMethodButton>
+			</metro2:CallMethodButton>
 
-			<metroControls:CallMethodButton Style="{StaticResource JumbButtonStyleKey}"
-											MethodName="Jump"
-											MethodParameter="Dockyard">
+			<metro2:CallMethodButton Style="{StaticResource JumbButtonStyleKey}"
+									 MethodName="Jump"
+									 MethodParameter="Dockyard">
 				<StackPanel DataContext="{Binding Content.Dockyard}">
 					<TextBlock>
 						<Run Text="{Binding Name, Mode=OneWay}" />
@@ -406,7 +452,7 @@
 						</ItemsControl.ItemTemplate>
 					</ItemsControl>
 				</StackPanel>
-			</metroControls:CallMethodButton>
+			</metro2:CallMethodButton>
 		</StackPanel>
 	</Grid>
 </UserControl>

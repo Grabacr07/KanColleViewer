@@ -14,6 +14,7 @@
 			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 mc:Ignorable="d"
 			 d:DesignHeight="26"
 			 UseLayoutRounding="True">
@@ -68,7 +69,7 @@
 							BorderBrush="{DynamicResource AccentBrushKey}"
 							BorderThickness="1">
 						<StackPanel Margin="8">
-							<TextBlock Text="ゲーム画面の表示サイズ" />
+							<TextBlock Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.ZoomFactorSelector}" />
 							<Rectangle Height="1"
 									   Fill="{DynamicResource InactiveForegroundBrushKey}"
 									   Margin="0,8" />
