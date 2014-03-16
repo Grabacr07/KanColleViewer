@@ -25,12 +25,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 {
 	public class SettingsViewModel : TabItemViewModel, INotifyDataErrorInfo
 	{
-		public override string Name
-		{
-			get { return Resources.Settings; }
-			protected set { throw new NotImplementedException(); }
-		}
-
 		#region ScreenshotFolder 変更通知プロパティ
 
 		public string ScreenshotFolder
@@ -239,6 +233,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+<<<<<<< HEAD
 		#region Cultures 変更通知プロパティ
 
 		private IReadOnlyCollection<CultureViewModel> _Cultures;
@@ -277,6 +272,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		}
 
 		#endregion
+=======
+>>>>>>> parent of 6913fb4... 言語設定対応
 
 		#region BrowserZoomFactor 変更通知プロパティ
 
@@ -311,6 +308,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		{
 			if (Helper.IsInDesignMode) return;
 
+			this.Name = Resources.Settings;
+
 			this.Libraries = App.ProductInfo.Libraries.Aggregate(
 				new List<BindableTextViewModel>(),
 				(list, lib) =>
@@ -321,12 +320,15 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					return list;
 				});
 
+<<<<<<< HEAD
 			this.Cultures = new[] { new CultureViewModel { DisplayName = "(auto)" } }
 				.Concat(ResourceService.Current.SupportedCultures
 					.Select(x => new CultureViewModel { DisplayName = x.EnglishName, Name = x.Name })
 					.OrderBy(x => x.DisplayName))
 				.ToList();
 
+=======
+>>>>>>> parent of 6913fb4... 言語設定対応
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(Settings.Current)
 			{
 				(sender, args) => this.RaisePropertyChanged(args.PropertyName),

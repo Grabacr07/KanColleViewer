@@ -14,7 +14,6 @@
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
-			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 mc:Ignorable="d"
 			 d:DesignWidth="700"
 			 d:DesignHeight="400"
@@ -38,7 +37,7 @@
 	<TabControl Style="{StaticResource TabControlStyleKey}">
 		<TabItem>
 			<TabItem.Header>
-				<TextBlock Text="{Binding Resources.Settings_BrowserControl, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_BrowserControl}, Mode=OneWay}"
 						   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
 						   Margin="12,0"
 						   FontSize="14" />
@@ -47,12 +46,13 @@
 			<StackPanel ClipToBounds="True"
 						Margin="10,0">
 				<views:BrowserNavigator />
-				<TextBlock Text="{Binding Resources.Settings_BrowserControl_Notice, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_BrowserControl_Notice}, Mode=OneWay}"
 						   Margin="43,-2,0,10" />
 
 				<Rectangle Height="1"
 						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
+<<<<<<< HEAD
 				<DockPanel Margin="0,10">
 					<metro2:CallMethodButton DockPanel.Dock="Right"
 											 MethodName="ClearZoomFactor"
@@ -90,13 +90,23 @@
 
 				<Rectangle Height="1"
 						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+=======
+				<metro2:CallMethodButton MethodName="ClearZoomFactor"
+										 Padding="20,11"
+										 Margin="0,10"
+										 HorizontalAlignment="Left">
+					<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_BrowserControl_ClearZoomFactorButton}, Mode=OneWay}"
+							   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type metro2:CallMethodButton}}, Path=Foreground}"
+							   FontSize="13" />
+				</metro2:CallMethodButton>
+>>>>>>> parent of 6913fb4... 言語設定対応
 
 			</StackPanel>
 		</TabItem>
 
 		<TabItem>
 			<TabItem.Header>
-				<TextBlock Text="{Binding Resources.Settings_Window, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Window}, Mode=OneWay}"
 						   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
 						   Margin="12,0"
 						   FontSize="14" />
@@ -107,7 +117,7 @@
 
 		<TabItem>
 			<TabItem.Header>
-				<TextBlock Text="{Binding Resources.Settings_Operation, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Operation}, Mode=OneWay}"
 						   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
 						   Margin="12,0"
 						   FontSize="14" />
@@ -118,7 +128,7 @@
 
 		<TabItem>
 			<TabItem.Header>
-				<TextBlock Text="{Binding Resources.Settings_Network, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Network}, Mode=OneWay}"
 						   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
 						   Margin="12,0"
 						   FontSize="14" />
@@ -129,7 +139,7 @@
 
 		<TabItem>
 			<TabItem.Header>
-				<TextBlock Text="{Binding Resources.Settings_Other, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Other}, Mode=OneWay}"
 						   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
 						   Margin="12,0"
 						   FontSize="14" />
@@ -140,7 +150,7 @@
 
 		<TabItem>
 			<TabItem.Header>
-				<TextBlock Text="{Binding Resources.Settings_VersionInfo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+				<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_VersionInfo}}"
 						   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
 						   Margin="12,0"
 						   FontSize="14" />

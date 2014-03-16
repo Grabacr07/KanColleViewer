@@ -399,6 +399,7 @@
   <data name="ReSortie_NotificationMessage_Title" xml:space="preserve">
     <value>疲労回復完了</value>
   </data>
+<<<<<<< HEAD
   <data name="Settings_Language" xml:space="preserve">
     <value>言語</value>
   </data>
@@ -453,4 +454,6 @@
   <data name="StartContent_ClearCacheButtonMessage" xml:space="preserve">
     <value>キャッシュを削除しました</value>
   </data>
+=======
+>>>>>>> parent of 6913fb4... 言語設定対応
 </root>

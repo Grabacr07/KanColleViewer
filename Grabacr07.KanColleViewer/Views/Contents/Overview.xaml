@@ -13,8 +13,11 @@
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 xmlns:converters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters"
 			 xmlns:catalogs="clr-namespace:Grabacr07.KanColleViewer.Views.Catalogs"
+<<<<<<< HEAD
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
+=======
+>>>>>>> parent of 6913fb4... 言語設定対応
 			 mc:Ignorable="d"
 			 d:DataContext="{d:DesignInstance vmContents:OverviewViewModel}"
 			 d:DesignWidth="680"
@@ -255,7 +258,7 @@
 							   Margin="0,7,0,3"
 							   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-					<TextBlock Text="{Binding Resources.Quests_Untaken, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+					<TextBlock Text="{Binding Source={x:Static properties:Resources.Quests_Untaken}, Mode=OneWay}"
 							   TextWrapping="Wrap"
 							   Visibility="{Binding IsUntaken, Converter={StaticResource BooleanToVisibilityConverter}}"
 							   HorizontalAlignment="Center"
@@ -292,7 +295,7 @@
 												 Value="True">
 										<Setter TargetName="Title"
 												Property="Text"
-												Value="{Binding Resources.Quest_Title_Untaken, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+												Value="{Binding Source={x:Static properties:Resources.Quest_Title_Untaken}, Mode=OneWay}" />
 									</DataTrigger>
 								</DataTemplate.Triggers>
 							</DataTemplate>
@@ -330,13 +333,13 @@
 												 Value="Locked">
 										<Setter TargetName="Remaining"
 												Property="Text"
-												Value="{Binding Resources.Repairyard_Locked, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+												Value="{Binding Source={x:Static properties:Resources.Repairyard_Locked}, Mode=OneWay}" />
 									</DataTrigger>
 									<DataTrigger Binding="{Binding State}"
 												 Value="Unlocked">
 										<Setter TargetName="Remaining"
 												Property="Text"
-												Value="{Binding Resources.Reparyard_Unused, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+												Value="{Binding Source={x:Static properties:Resources.Reparyard_Unused}, Mode=OneWay}" />
 										<Setter TargetName="ShipName"
 												Property="Text"
 												Value="" />
@@ -381,7 +384,7 @@
 												 Value="Locked">
 										<Setter TargetName="Remaining"
 												Property="Text"
-												Value="{Binding Resources.Dockyard_Locked, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+												Value="{Binding Source={x:Static properties:Resources.Dockyard_Locked}, Mode=OneWay}" />
 										<Setter TargetName="ShipName"
 												Property="Text"
 												Value="" />
@@ -390,7 +393,7 @@
 												 Value="Unlocked">
 										<Setter TargetName="Remaining"
 												Property="Text"
-												Value="{Binding Resources.Dockyard_Unused, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+												Value="{Binding Source={x:Static properties:Resources.Dockyard_Unused}, Mode=OneWay}" />
 										<Setter TargetName="ShipName"
 												Property="Text"
 												Value="" />
@@ -399,7 +402,7 @@
 												 Value="Completed">
 										<Setter TargetName="Remaining"
 												Property="Text"
-												Value="{Binding Resources.Dockyard_Complete, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+												Value="{Binding Source={x:Static properties:Resources.Dockyard_Complete}, Mode=OneWay}" />
 									</DataTrigger>
 								</DataTemplate.Triggers>
 							</DataTemplate>
