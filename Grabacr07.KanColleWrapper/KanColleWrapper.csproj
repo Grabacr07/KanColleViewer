@@ -158,6 +158,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quests.cs" />
     <Compile Include="Repairyard.cs" />
+    <Compile Include="SortieLogger.cs" />
     <Compile Include="TimerNotificator.cs" />
     <Compile Include="Win32\INTERNET_PROXY_INFO.cs" />
     <Compile Include="Win32\NativeMethods.cs" />
