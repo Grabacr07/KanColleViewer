@@ -116,7 +116,7 @@
     <Compile Include="Models\Raw\kcsapi_kdock.cs" />
     <Compile Include="Models\Raw\kcsapi_material.cs" />
     <Compile Include="Models\Raw\kcsapi_ndock.cs" />
-    <Compile Include="Models\Raw\kcsapi_start.cs" />
+    <Compile Include="Models\Raw\kcsapi_map_start.cs" />
     <Compile Include="Models\Raw\kcsapi_stype.cs" />
     <Compile Include="Models\RepairingDock.cs" />
     <Compile Include="Models\RepairingDockState.cs" />
