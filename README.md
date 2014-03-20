@@ -1,4 +1,4 @@
-提督業も忙しい！ (KanColleViewer)
+﻿提督業も忙しい！ (KanColleViewer)
 --
 
 艦これブラウザーのようなもの。

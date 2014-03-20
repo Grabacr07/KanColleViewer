@@ -98,6 +98,26 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			}
 		}
 
+		#region IsSelected 変更通知プロパティ
+
+		private bool _IsSelected;
+
+		public bool IsSelected
+		{
+			get { return this._IsSelected; }
+			set
+			{
+				if (this._IsSelected != value)
+				{
+					this._IsSelected = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+
 		public FleetViewModel(Fleet fleet)
 		{
 			this.source = fleet;

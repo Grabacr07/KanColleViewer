@@ -121,6 +121,15 @@ namespace Grabacr07.KanColleWrapper.Models
 			get { return (Speed)this.RawData.api_sokuh; }
 		}
 
+		/// <summary>
+		/// 次の改造が実施できるレベルを取得します。
+		/// </summary>
+		public int? NextRemodelingLevel
+		{
+			get { return this.RawData.api_afterlv == 0 ? null : (int?)this.RawData.api_afterlv; }
+		}
+
+
 		internal ShipInfo(kcsapi_master_ship rawData) : base(rawData) { }
 
 		public override string ToString()

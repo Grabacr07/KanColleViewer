@@ -1103,5 +1103,23 @@ namespace Grabacr07.KanColleViewer.Properties {
                 return ResourceManager.GetString("ZoomAction_ZoomFailed", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   ゲーム画面の表示サイズ に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ZoomFactorSelector {
+            get {
+                return ResourceManager.GetString("ZoomFactorSelector", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ゲーム画面の表示サイズを調整 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ZoomFactorSelector_Tooltip {
+            get {
+                return ResourceManager.GetString("ZoomFactorSelector_Tooltip", resourceCulture);
+            }
+        }
     }
 }

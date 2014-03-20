@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.Desktop.Metro.Controls;
 using Grabacr07.KanColleViewer.ViewModels.Contents;
+using Grabacr07.KanColleWrapper.Models;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 {
@@ -63,7 +64,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			this.sortableColumns.Where(x => x.Target != target.Target).ForEach(x => x.Direction = SortDirection.None);
 		}
 
-		public IEnumerable<ShipViewModel> Sort(IEnumerable<ShipViewModel> shipList)
+		public IEnumerable<Ship> Sort(IEnumerable<Ship> shipList)
 		{
 			return this.currentSortTarget.Sort(shipList);
 		}

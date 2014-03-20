@@ -115,7 +115,7 @@
 
 		<Border ClipToBounds="True"
 				Width="{Binding ElementName=WebBrowser, Path=Width}">
-			<views:BrowserNavigator Margin="6,-4,6,10"
+			<views:BrowserNavigator Margin="6,-5,6,10"
 									VerticalAlignment="Top" />
 		</Border>
 
