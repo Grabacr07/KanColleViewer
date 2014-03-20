@@ -131,7 +131,7 @@
 							<contents:Overview />
 						</DataTemplate>
 						<DataTemplate DataType="{x:Type vmFleets:FleetsViewModel}">
-							<views:Fleets />
+							<contents:Fleets />
 						</DataTemplate>
 						<DataTemplate DataType="{x:Type vmDocks:RepairyardViewModel}">
 							<contents:Repairyard />
