@@ -4,18 +4,19 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Codeplex.Data;
 using Fiddler;
 using Grabacr07.KanColleWrapper.Internal;
+using Grabacr07.KanColleWrapper.Models;
+using Grabacr07.KanColleWrapper.Models.Raw;
 using Livet;
 
 namespace Grabacr07.KanColleWrapper
 {
 	public class SortieLogger : NotificationObject
 	{
-		private Sortie current;
-
 		#region IsInSortie 変更通知プロパティ
 
 		private bool _IsInSortie;
@@ -38,23 +39,60 @@ namespace Grabacr07.KanColleWrapper
 
 		#endregion
 
-		
+		#region Current 変更通知プロパティ
+
+		private Sortie _Current;
+
+		public Sortie Current
+		{
+			get { return this._Current; }
+			set
+			{
+				if (this._Current != value)
+				{
+					this._Current = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 
 		internal SortieLogger(KanColleProxy proxy)
 		{
-			var start = proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_map/start");
+			var start = proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/mapcell");
 			var end = proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_auth_member/logincheck");
 
-			var sortieLog = proxy.ApiSessionSource
+			var log = proxy.ApiSessionSource
 				.SkipUntil(start.Do(_ => this.Sortie()))
 				.TakeUntil(end)
 				.Finally(this.Homing)
-				.Repeat();
+				.Repeat()
+				.Where(_ => this.CheckLogging())
+				.Publish();
 
-			sortieLog.Subscribe(x =>
-			{
-				if (this.current != null) current.Set(x);
-			});
+			log.Where(x => x.PathAndQuery == "/kcsapi/api_req_map/start")
+				.TryParse<kcsapi_map_next>()
+				.Select(x => new MapCellEvent(x))
+				.Subscribe(_ => { });
+
+			log.Where(x => x.PathAndQuery == "/kcsapi/api_req_map/next")
+				.TryParse<kcsapi_map_next>()
+				.Select(x => new MapCellEvent(x))
+				.Subscribe(_ => { });
+
+			log.Where(x => x.PathAndQuery == "/kcsapi/api_req_sortie/battle")
+				.TryParse<kcsapi_battle>()
+				.Select(x => new Battle(x))
+				.Subscribe(_ => { });
+
+			log.Where(x => x.PathAndQuery == "/kcsapi/api_req_sortie/battleresult")
+				.TryParse<kcsapi_battleresult>()
+				.Select(x => new BattleResult(x))
+				.Subscribe(_ => { });
+
+			log.Connect();
 		}
 
 
@@ -65,7 +103,7 @@ namespace Grabacr07.KanColleWrapper
 		{
 			this.IsInSortie = true;
 
-			this.current = new Sortie();
+			this.Current = new Sortie();
 		}
 
 		/// <summary>
@@ -75,24 +113,39 @@ namespace Grabacr07.KanColleWrapper
 		{
 			this.IsInSortie = false;
 		}
+
+		private bool CheckLogging()
+		{
+			return this.IsInSortie && this.Current != null;
+		}
+
 	}
 
-	public class Sortie : NotificationObject, IDisposable
+	public class Sortie : NotificationObject
 	{
-		private readonly CompositeDisposable compositeDisposable = new CompositeDisposable();
+		internal Sortie() { }
+	}
 
-		#region Trajectories 変更通知プロパティ
 
-		private ObservableSynchronizedCollection<Trajectory> _Trajectories;
+	public class SortieLog : NotificationObject
+	{
+	}
 
-		public ObservableSynchronizedCollection<Trajectory> Trajectories
+	public class BattleLog : SortieLog
+	{
+
+		#region Result 変更通知プロパティ
+
+		private BattleResult _Result;
+
+		public BattleResult Result
 		{
-			get { return this._Trajectories; }
+			get { return this._Result; }
 			set
 			{
-				if (this._Trajectories != value)
+				if (this._Result != value)
 				{
-					this._Trajectories = value;
+					this._Result = value;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -100,49 +153,11 @@ namespace Grabacr07.KanColleWrapper
 
 		#endregion
 
-
-		internal Sortie() { }
-
-		internal Sortie(KanColleProxy proxy)
-		{
-			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_map/start")
-				.Select(x => x.GetResponseAsJson());
-
-		}
-
-		internal void Set(Session session)
-		{
-			
-		}
-
-
-
-		private void ParseCell(string json)
-		{
-			var djson = DynamicJson.Parse(json);
-
-			//djson.IsDefined("enemy");
-		}
-
-
-
-
-		public void Dispose()
-		{
-			this.compositeDisposable.Dispose();	
-		}
 	}
 
-	/// <summary>
-	/// 
-	/// </summary>
-	public class Trajectory
+	public class ItemGet : SortieLog
 	{
-		
-	}
-
-	public class Battle : Trajectory
-	{
-		
+		public int Count { get; internal set; }
+		public int IconId { get; internal set; }
 	}
 }
