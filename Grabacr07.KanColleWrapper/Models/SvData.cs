@@ -31,12 +31,13 @@ namespace Grabacr07.KanColleWrapper.Models
 			get { return this.RawData.api_data_deck; }
 		}
 
-        public NameValueCollection RequestBody { get; set; }
+		public NameValueCollection RequestBody { get; set; }
 
-		public SvData(svdata<T> rawData, string reqBody) : base(rawData)
-        {
-            this.RequestBody = HttpUtility.ParseQueryString(reqBody);
-        }
+		public SvData(svdata<T> rawData, string reqBody)
+			: base(rawData)
+		{
+			this.RequestBody = HttpUtility.ParseQueryString(reqBody);
+		}
 	}
 
 	internal class SvData : RawDataWrapper<svdata>
@@ -46,12 +47,13 @@ namespace Grabacr07.KanColleWrapper.Models
 			get { return this.RawData.api_result == 1; }
 		}
 
-        public NameValueCollection RequestBody { get; set; }
+		public NameValueCollection RequestBody { get; set; }
 
-		public SvData(svdata rawData, string reqBody) : base(rawData) 
-        {
-            this.RequestBody = HttpUtility.ParseQueryString(reqBody);
-        }
+		public SvData(svdata rawData, string reqBody)
+			: base(rawData)
+		{
+			this.RequestBody = HttpUtility.ParseQueryString(reqBody);
+		}
 
 
 		public static SvData<T> Parse<T>(Session session)
