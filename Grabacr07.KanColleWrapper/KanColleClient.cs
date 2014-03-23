@@ -38,6 +38,11 @@ namespace Grabacr07.KanColleWrapper
 		public Homeport Homeport { get; private set; }
 
 		/// <summary>
+		/// 出撃ログへアクセスできるようにします。
+		/// </summary>
+		public SortieLogger SortieLogger { get; private set; }
+
+		/// <summary>
 		/// 発生したエラー情報のコレクションを取得します。
 		/// </summary>
 		public ObservableSynchronizedCollection<KanColleError> Errors { get; private set; }
@@ -71,6 +76,7 @@ namespace Grabacr07.KanColleWrapper
 			this.Proxy = new KanColleProxy();
 			this.Master = new Master(this.Proxy);
 			this.Homeport = new Homeport(this.Proxy);
+			this.SortieLogger = new SortieLogger(this.Proxy);
 
 			this.Proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_start")
 				.TryParse()

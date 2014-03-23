@@ -48,7 +48,10 @@ namespace Grabacr07.KanColleWrapper
 				.Finally(this.Homing)
 				.Repeat();
 
-
+			sortieLog.Subscribe(x =>
+			{
+				if (this.current != null) current.Set(x);
+			});
 		}
 
 
@@ -69,9 +72,6 @@ namespace Grabacr07.KanColleWrapper
 		{
 			this.IsInSortie = false;
 		}
-
-
-
 	}
 
 	public class Sortie : NotificationObject
