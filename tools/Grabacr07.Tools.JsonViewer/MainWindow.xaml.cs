@@ -30,7 +30,7 @@ namespace Grabacr07.Tools.JsonViewer
 			{
 				var obj = DynamicJson.Parse(target);
 			}
-			// ↖ ここでブレークポイントを仕掛けよう
+			// ↖ ここにブレークポイントを仕掛けよう
 		}
 	}
 }
