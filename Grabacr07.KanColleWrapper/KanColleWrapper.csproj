@@ -72,6 +72,7 @@
     </Reference>
     <Reference Include="System.Runtime" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\LivetCask.1.1.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -87,6 +88,7 @@
     <Compile Include="Calculator.cs" />
     <Compile Include="Dockyard.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="MemberTable.cs" />
     <Compile Include="Models\CanReSortieReason.cs" />
     <Compile Include="Models\ExpeditionReturnedEventArgs.cs" />
@@ -97,6 +99,9 @@
     <Compile Include="Models\QuestProgress.cs" />
     <Compile Include="Models\QuestState.cs" />
     <Compile Include="Models\QuestType.cs" />
+    <Compile Include="Models\Raw\kcsapi_battleresult.cs" />
+    <Compile Include="Models\Raw\kcsapi_createitem.cs" />
+    <Compile Include="Models\Raw\kcsapi_createship.cs" />
     <Compile Include="Models\Raw\kcsapi_quest.cs" />
     <Compile Include="Models\Raw\kcsapi_questlist.cs" />
     <Compile Include="Models\Raw\kcsapi_ship3.cs" />

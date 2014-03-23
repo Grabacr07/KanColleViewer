@@ -844,6 +844,24 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   ログ に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Settings_Logging {
+            get {
+                return ResourceManager.GetString("Settings_Logging", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ドロップ・建造・開発ログを記録する に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Settings_Logging_Enable {
+            get {
+                return ResourceManager.GetString("Settings_Logging_Enable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   通信設定 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Settings_Network {
