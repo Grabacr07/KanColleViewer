@@ -471,4 +471,10 @@
   <data name="ZoomFactorSelector_Tooltip" xml:space="preserve">
     <value>ゲーム画面の表示サイズを調整</value>
   </data>
+  <data name="Settings_Logging" xml:space="preserve">
+    <value>Logging</value>
+  </data>
+  <data name="Settings_Logging_Enable" xml:space="preserve">
+    <value>Log drops and crafting results to file</value>
+  </data>
 </root>

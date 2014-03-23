@@ -47,6 +47,8 @@ namespace Grabacr07.KanColleViewer
 
 			ResourceService.Current.ChangeCulture(Settings.Current.Culture);
 
+			KanColleClient.Current.Homeport.Logger.EnableLogging = Settings.Current.EnableLogging;
+
 			ThemeService.Current.Initialize(this, Theme.Dark, Accent.Purple);
 
 			ViewModelRoot = new MainWindowViewModel();
