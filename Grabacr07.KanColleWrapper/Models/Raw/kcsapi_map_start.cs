@@ -12,4 +12,5 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 
 
 	}
+
 }

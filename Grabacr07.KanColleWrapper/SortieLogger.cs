@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Codeplex.Data;
 using Fiddler;
+using Grabacr07.KanColleWrapper.Internal;
 using Livet;
 
 namespace Grabacr07.KanColleWrapper
@@ -74,13 +77,72 @@ namespace Grabacr07.KanColleWrapper
 		}
 	}
 
-	public class Sortie : NotificationObject
+	public class Sortie : NotificationObject, IDisposable
 	{
+		private readonly CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+		#region Trajectories 変更通知プロパティ
+
+		private ObservableSynchronizedCollection<Trajectory> _Trajectories;
+
+		public ObservableSynchronizedCollection<Trajectory> Trajectories
+		{
+			get { return this._Trajectories; }
+			set
+			{
+				if (this._Trajectories != value)
+				{
+					this._Trajectories = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+
 		internal Sortie() { }
+
+		internal Sortie(KanColleProxy proxy)
+		{
+			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_map/start")
+				.Select(x => x.GetResponseAsJson());
+
+		}
 
 		internal void Set(Session session)
 		{
 			
 		}
+
+
+
+		private void ParseCell(string json)
+		{
+			var djson = DynamicJson.Parse(json);
+
+			//djson.IsDefined("enemy");
+		}
+
+
+
+
+		public void Dispose()
+		{
+			this.compositeDisposable.Dispose();	
+		}
+	}
+
+	/// <summary>
+	/// 
+	/// </summary>
+	public class Trajectory
+	{
+		
+	}
+
+	public class Battle : Trajectory
+	{
+		
 	}
 }
