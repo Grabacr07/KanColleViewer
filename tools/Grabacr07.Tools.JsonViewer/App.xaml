@@ -9,8 +9,6 @@
 				<ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Styles/Icons.xaml" />
 				<ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Themes/Dark.xaml" />
 				<ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Themes/Accents/Orange.xaml" />
-
-				<ResourceDictionary Source="pack://application:,,,/Desktop.Metro;component/Styles/Controls.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 
 		</ResourceDictionary>
