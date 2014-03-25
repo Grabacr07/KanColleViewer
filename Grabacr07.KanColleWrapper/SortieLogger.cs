@@ -84,12 +84,12 @@ namespace Grabacr07.KanColleWrapper
 
 			log.Where(x => x.PathAndQuery == "/kcsapi/api_req_sortie/battle")
 				.TryParse<kcsapi_battle>()
-				.Select(x => new Battle(x))
+				.Select(x => new Combat(x))
 				.Subscribe(_ => { });
 
 			log.Where(x => x.PathAndQuery == "/kcsapi/api_req_sortie/battleresult")
 				.TryParse<kcsapi_battleresult>()
-				.Select(x => new BattleResult(x))
+				.Select(x => new CombatResult(x))
 				.Subscribe(_ => { });
 
 			log.Connect();
@@ -136,9 +136,9 @@ namespace Grabacr07.KanColleWrapper
 
 		#region Result 変更通知プロパティ
 
-		private BattleResult _Result;
+		private CombatResult _Result;
 
-		public BattleResult Result
+		public CombatResult Result
 		{
 			get { return this._Result; }
 			set

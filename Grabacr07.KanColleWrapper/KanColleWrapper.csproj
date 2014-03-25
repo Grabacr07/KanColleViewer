@@ -90,8 +90,10 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="MemberTable.cs" />
-    <Compile Include="Models\Battle.cs" />
-    <Compile Include="Models\BattleResult.cs" />
+    <Compile Include="Models\Combat.cs" />
+    <Compile Include="Models\CombatEngagementForm.cs" />
+    <Compile Include="Models\CombatFormation.cs" />
+    <Compile Include="Models\CombatResult.cs" />
     <Compile Include="Models\CanReSortieReason.cs" />
     <Compile Include="Models\ExpeditionReturnedEventArgs.cs" />
     <Compile Include="Models\FleetReSortie.cs" />
