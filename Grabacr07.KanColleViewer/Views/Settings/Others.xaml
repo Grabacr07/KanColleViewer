@@ -117,13 +117,14 @@
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-		<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Logging}, Mode=OneWay}"
+		<!--<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Logging}, Mode=OneWay}"
 				   Style="{DynamicResource HeaderTextBlockStyleKey}"
 				   Margin="0,10" />
 		<CheckBox Content="{Binding Source={x:Static properties:Resources.Settings_Logging_Enable}, Mode=OneWay}"
 				  IsChecked="{Binding EnableLogging}"
+				  IsEnabled="False"
 				  Height="17"
-				  Margin="15,0,0,10" />
+				  Margin="15,0,0,10" />-->
 
 	</StackPanel>
 </UserControl>
