@@ -117,13 +117,13 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		{
 			if (this.Direction == SortDirection.Ascending)
 			{
-				return list.OrderByDescending(x => x.Level)
+				return list.OrderBy(x => x.Level)
 					.ThenBy(x => x.Info.SortId)
 					.ThenBy(x => x.Id);
 			}
 			if (this.Direction == SortDirection.Descending)
 			{
-				return list.OrderBy(x => x.Level)
+				return list.OrderByDescending(x => x.Level)
 					.ThenByDescending(x => x.Info.SortId)
 					.ThenByDescending(x => x.Id);
 			}
@@ -139,17 +139,41 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		{
 			if (this.Direction == SortDirection.Ascending)
 			{
-				return list.OrderByDescending(x => x.Condition)
+				return list.OrderBy(x => x.Condition)
 					.ThenBy(x => x.Info.ShipType.Id)
 					.ThenBy(x => x.Level)
 					.ThenBy(x => x.Info.SortId);
 			}
 			if (this.Direction == SortDirection.Descending)
 			{
-				return list.OrderBy(x => x.Condition)
+				return list.OrderByDescending(x => x.Condition)
 					.ThenByDescending(x => x.Info.ShipType.Id)
 					.ThenByDescending(x => x.Level)
 					.ThenByDescending(x => x.Info.SortId);
+			}
+			return list;
+		}
+	}
+
+	public class ViewRangeColumnViewModel : SortableColumnViewModel
+	{
+		public ViewRangeColumnViewModel() : base(ShipCatalogSortTarget.ViewRange) { }
+
+		public override IEnumerable<Ship> Sort(IEnumerable<Ship> list)
+		{
+			if (this.Direction == SortDirection.Ascending)
+			{
+				return list.OrderBy(x => x.ViewRange)
+					.ThenBy(x => x.Info.ShipType.Id)
+					.ThenBy(x => x.Level)
+					.ThenBy(x => x.Info.SortId);
+			}
+			if (this.Direction == SortDirection.Descending)
+			{
+				return list.OrderByDescending(x => x.ViewRange)
+					.ThenBy(x => x.Info.ShipType.Id)
+					.ThenBy(x => x.Level)
+					.ThenBy(x => x.Info.SortId);
 			}
 			return list;
 		}

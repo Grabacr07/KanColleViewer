@@ -138,6 +138,28 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
+		#region TotalViewRange 変更通知プロパティ
+
+		private int _TotalViewRange;
+
+		/// <summary>
+		/// 各艦娘の装備によるボーナスを含めた、艦隊の索敵合計値を取得します。
+		/// </summary>
+		public int TotalViewRange
+		{
+			get { return this._TotalViewRange; }
+			set
+			{
+				if (this._TotalViewRange != value)
+				{
+					this._TotalViewRange = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		#region Speed 変更通知プロパティ
 
 		private Speed _Speed;
@@ -200,6 +222,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.TotalLevel = this.Ships.HasItems() ? this.Ships.Sum(x => x.Level) : 0;
 			this.AverageLevel = this.Ships.HasItems() ? (double)this.TotalLevel / this.Ships.Length : 0.0;
 			this.AirSuperiorityPotential = this.Ships.Sum(s => s.CalcAirSuperiorityPotential());
+			this.TotalViewRange = this.Ships.Sum(s => s.ViewRange);
 			this.Speed = this.Ships.All(s => s.Info.Speed == Speed.Fast) ? Speed.Fast : Speed.Low;
 			this.ReSortie.Update(this.Ships);
 			this.Expedition.Update(rawData.api_mission);

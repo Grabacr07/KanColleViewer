@@ -57,6 +57,9 @@
 						<TextBlock Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Fleets_Average, StringFormat='{}{0}: '}" />
 						<TextBlock Text="{Binding AverageLevel}"
 								   MinWidth="75" />
+						<TextBlock Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Fleets_ViewRange, StringFormat='{}{0}: '}" />
+						<TextBlock Text="{Binding TotalViewRange}"
+								   MinWidth="60" />
 						<TextBlock Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Fleets_AirSuperiorityPotential, StringFormat='{}{0}: '}" />
 						<TextBlock Text="{Binding AirSuperiorityPotential}"
 								   MinWidth="60" />

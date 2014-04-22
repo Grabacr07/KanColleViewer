@@ -477,4 +477,7 @@
   <data name="Settings_Logging_Enable" xml:space="preserve">
     <value>ドロップ・建造・開発ログを記録する</value>
   </data>
+  <data name="Fleets_ViewRange" xml:space="preserve">
+    <value>索敵能力</value>
+  </data>
 </root>

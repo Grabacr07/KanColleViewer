@@ -13,5 +13,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		Name,
 		Level,
 		Cond,
+		ViewRange,
 	}
 }

@@ -50,6 +50,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			get { return this.source.AirSuperiorityPotential; }
 		}
 
+		public string TotalViewRange
+		{
+			get { return this.source.TotalViewRange.ToString("####"); }
+		}
+
 		/// <summary>
 		/// 艦隊に所属している艦娘のコレクションを取得します。
 		/// </summary>
