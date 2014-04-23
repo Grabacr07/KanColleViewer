@@ -12,7 +12,7 @@ namespace Grabacr07.KanColleWrapper.Models
 	/// <summary>
 	/// 装備アイテムの種類に基づく情報を表します。
 	/// </summary>
-	public class SlotItemInfo : RawDataWrapper<kcsapi_master_slotitem>, IIdentifiable
+	public class SlotItemInfo : RawDataWrapper<kcsapi_mst_slotitem>, IIdentifiable
 	{
 		private SlotItemIconType? iconType;
 		private int? categoryId;
@@ -67,7 +67,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			get { return this.IconType == SlotItemIconType.ReconSeaplane; }
 		}
 
-		internal SlotItemInfo(kcsapi_master_slotitem rawData) : base(rawData) { }
+		internal SlotItemInfo(kcsapi_mst_slotitem rawData) : base(rawData) { }
 
 		public override string ToString()
 		{
@@ -76,7 +76,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#region static members
 
-		private static readonly SlotItemInfo dummy = new SlotItemInfo(new kcsapi_master_slotitem()
+		private static readonly SlotItemInfo dummy = new SlotItemInfo(new kcsapi_mst_slotitem()
 		{
 			api_id = 0,
 			api_name = "？？？",

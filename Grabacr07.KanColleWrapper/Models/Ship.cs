@@ -167,6 +167,14 @@ namespace Grabacr07.KanColleWrapper.Models
 		}
 
 
+		internal void Charge(int fuel, int bull, int[] onslot)
+		{
+			this.Fuel = this.Fuel.Update(fuel);
+			this.Bull = this.Bull.Update(bull);
+			this.OnSlot = onslot;
+		}
+
+
 		public override string ToString()
 		{
 			return string.Format("ID = {0}, Name = \"{1}\", ShipType = \"{2}\", Level = {3}", this.Id, this.Info.Name, this.Info.ShipType.Name, this.Level);

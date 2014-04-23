@@ -47,7 +47,7 @@ namespace Grabacr07.KanColleWrapper
 				.Subscribe(this.Update);
 		}
 
-		private void Update(kcsapi_ndock[] source)
+		internal void Update(kcsapi_ndock[] source)
 		{
 			if (this.Docks.Count == source.Length)
 			{

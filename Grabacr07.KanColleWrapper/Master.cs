@@ -35,27 +35,12 @@ namespace Grabacr07.KanColleWrapper
 		public MasterTable<ShipType> ShipTypes { get; private set; }
 
 
-		internal Master(KanColleProxy proxy)
+		internal Master(kcsapi_start2 start2)
 		{
-			this.Ships = new MasterTable<ShipInfo>();
-			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_master/ship")
-				.TryParse<kcsapi_master_ship[]>()
-				.Subscribe(x => this.Ships = new MasterTable<ShipInfo>(x.Select(s => new ShipInfo(s))));
-
-			this.SlotItems = new MasterTable<SlotItemInfo>();
-			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_master/slotitem")
-				.TryParse<kcsapi_master_slotitem[]>()
-				.Subscribe(x => this.SlotItems = new MasterTable<SlotItemInfo>(x.Select(s => new SlotItemInfo(s))));
-
-			this.UseItems = new MasterTable<UseItemInfo>();
-			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_master/useitem")
-				.TryParse<kcsapi_master_useitem[]>()
-				.Subscribe(x => this.UseItems = new MasterTable<UseItemInfo>(x.Select(s => new UseItemInfo(s))));
-
-			this.ShipTypes = new MasterTable<ShipType>();
-			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_master/stype")
-				.TryParse<kcsapi_stype[]>()
-				.Subscribe(x => this.ShipTypes = new MasterTable<ShipType>(x.Select(s => new ShipType(s))));
+			this.ShipTypes = new MasterTable<ShipType>(start2.api_mst_stype.Select(x => new ShipType(x)));
+			this.Ships = new MasterTable<ShipInfo>(start2.api_mst_ship.Select(x => new ShipInfo(x)));
+			this.SlotItems = new MasterTable<SlotItemInfo>(start2.api_mst_slotitem.Select(x => new SlotItemInfo(x)));
+			this.UseItems = new MasterTable<UseItemInfo>(start2.api_mst_useitem.Select(x => new UseItemInfo(x)));
 		}
 	}
 }

@@ -11,7 +11,7 @@ namespace Grabacr07.KanColleWrapper.Models
 	/// <summary>
 	/// 艦娘の種類に基づく情報を表します。
 	/// </summary>
-	public class ShipInfo : RawDataWrapper<kcsapi_master_ship>, IIdentifiable
+	public class ShipInfo : RawDataWrapper<kcsapi_mst_ship>, IIdentifiable
 	{
 		private ShipType shipType;
 
@@ -130,7 +130,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		}
 
 
-		internal ShipInfo(kcsapi_master_ship rawData) : base(rawData) { }
+		internal ShipInfo(kcsapi_mst_ship rawData) : base(rawData) { }
 
 		public override string ToString()
 		{
@@ -139,7 +139,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#region static members
 
-		private static readonly ShipInfo dummy = new ShipInfo(new kcsapi_master_ship
+		private static readonly ShipInfo dummy = new ShipInfo(new kcsapi_mst_ship
 		{
 			api_id = 0,
 			api_name = "？？？"

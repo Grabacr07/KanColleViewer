@@ -9,34 +9,8 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 	// ReSharper disable InconsistentNaming
 	public class kcsapi_slotitem
 	{
-		public int api_member_id { get; set; }
 		public int api_id { get; set; }
 		public int api_slotitem_id { get; set; }
-		public string api_name { get; set; }
-		public int[] api_type { get; set; }
-		public int api_taik { get; set; }
-		public int api_souk { get; set; }
-		public int api_houg { get; set; }
-		public int api_raig { get; set; }
-		public int api_soku { get; set; }
-		public int api_baku { get; set; }
-		public int api_tyku { get; set; }
-		public int api_tais { get; set; }
-		public int api_atap { get; set; }
-		public int api_houm { get; set; }
-		public int api_raim { get; set; }
-		public int api_kaih { get; set; }
-		public int api_houk { get; set; }
-		public int api_raik { get; set; }
-		public int api_bakk { get; set; }
-		public int api_saku { get; set; }
-		public int api_sakb { get; set; }
-		public int api_luck { get; set; }
-		public int api_leng { get; set; }
-		public int api_rare { get; set; }
-		public int[] api_broken { get; set; }
-		public string api_info { get; set; }
-		public string[] api_flag { get; set; }
 	}
 	// ReSharper restore InconsistentNaming
 }

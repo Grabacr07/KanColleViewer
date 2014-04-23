@@ -11,7 +11,7 @@ namespace Grabacr07.KanColleWrapper.Models
 	/// <summary>
 	/// 消費アイテムの種類に基づく情報を表します。
 	/// </summary>
-	public class UseItemInfo : RawDataWrapper<kcsapi_master_useitem>, IIdentifiable
+	public class UseItemInfo : RawDataWrapper<kcsapi_mst_useitem>, IIdentifiable
 	{
 		public int Id
 		{
@@ -23,7 +23,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			get { return this.RawData.api_name; }
 		}
 
-		internal UseItemInfo(kcsapi_master_useitem rawData) : base(rawData) { }
+		internal UseItemInfo(kcsapi_mst_useitem rawData) : base(rawData) { }
 
 		public override string ToString()
 		{

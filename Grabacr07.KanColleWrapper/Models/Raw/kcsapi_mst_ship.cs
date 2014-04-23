@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Grabacr07.KanColleWrapper.Models.Raw
 {
 	// ReSharper disable InconsistentNaming
-	public class kcsapi_master_ship
+	public class kcsapi_mst_ship
 	{
 		public int api_id { get; set; }
 		public int api_sortno { get; set; }

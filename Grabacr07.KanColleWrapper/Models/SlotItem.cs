@@ -15,11 +15,6 @@ namespace Grabacr07.KanColleWrapper.Models
 			get { return this.RawData.api_id; }
 		}
 
-		public string Name
-		{
-			get { return this.RawData.api_name; }
-		}
-
 		public SlotItemInfo Info { get; private set; }
 
 		internal SlotItem(kcsapi_slotitem rawData) : base(rawData)
@@ -29,7 +24,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public override string ToString()
 		{
-			return string.Format("ID = {0}, Name = \"{1}\"", this.Id, this.Name);
+			return string.Format("ID = {0}, Name = \"{1}\"", this.Id, this.Info.Name);
 		}
 	}
 }

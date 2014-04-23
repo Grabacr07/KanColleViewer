@@ -238,6 +238,13 @@ namespace Grabacr07.KanColleWrapper.Models
 			else this.State = FleetState.Ready;
 		}
 
+		internal void UpdateShips()
+		{
+			this.RaisePropertyChanged("Ships");
+			this.ReSortie.Update(this.Ships);
+			this.UpdateStatus();
+		}
+
 		public override string ToString()
 		{
 			return string.Format("ID = {0}, Name = \"{1}\", Ships = {2}", this.Id, this.Name, this.GetShips().Select(s => "\"" + s.Info.Name + "\"").ToString(","));

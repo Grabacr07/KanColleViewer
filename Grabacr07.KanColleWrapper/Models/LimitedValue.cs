@@ -33,6 +33,11 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.Maximum = maximum;
 			this.Minimum = minimum;
 		}
+
+		public LimitedValue Update(int current)
+		{
+			return new LimitedValue(current, this.Maximum, this.Minimum);
+		}
 	}
 
 	/// <summary>

@@ -165,16 +165,39 @@ namespace Grabacr07.KanColleWrapper
 
 		internal Homeport(KanColleProxy proxy)
 		{
+			this.Ships = new MemberTable<Ship>();
+			this.Fleets = new MemberTable<Fleet>();
+			this.SlotItems = new MemberTable<SlotItem>();
+			this.UseItems = new MemberTable<UseItem>();
+			this.Dockyard = new Dockyard(proxy);
+			this.Repairyard = new Repairyard(this, proxy);
+			this.Logger = new Logger(proxy);
+			this.Quests = new Quests(proxy);
+
+			// ToDo: カオスってるので、あとで整理する
+
 			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/basic")
 				.TryParse<kcsapi_basic>()
 				.Subscribe(x => this.Admiral = new Admiral(x));
+
+			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_port/port")
+				.TryParse<kcsapi_port>()
+				.Subscribe(x =>
+				{
+					this.Ships = new MemberTable<Ship>(x.api_ship.Select(s => new Ship(this, s)));
+					this.Materials = new Materials(x.api_material.Select(m => new Material(m)).ToArray());
+					this.Repairyard.Update(x.api_ndock);
+					this.UpdateFleets(x.api_deck_port);
+				});
+
+			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_hokyu/charge")
+				.TryParse<kcsapi_charge>()
+				.Subscribe(this.Charge);
 
 			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/material")
 				.TryParse<kcsapi_material[]>()
 				.Subscribe(x => this.Materials = new Materials(x.Select(m => new Material(m)).ToArray()));
 
-			this.Ships = new MemberTable<Ship>();
-			this.Fleets = new MemberTable<Fleet>();
 			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/ship")
 				.Select(x => { SvData<kcsapi_ship2[]> result; return SvData.TryParse(x, out result) ? result : null; })
 				.Where(x => x != null && x.IsSuccess)
@@ -196,12 +219,10 @@ namespace Grabacr07.KanColleWrapper
 					this.UpdateFleets(x.api_deck_data);
 				});
 
-			this.SlotItems = new MemberTable<SlotItem>();
-			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/slotitem")
+			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/slot_item")
 				.TryParse<kcsapi_slotitem[]>()
 				.Subscribe(x => this.SlotItems = new MemberTable<SlotItem>(x.Select(s => new SlotItem(s))));
 
-			this.UseItems = new MemberTable<UseItem>();
 			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/useitem")
 				.TryParse<kcsapi_useitem[]>()
 				.Subscribe(x => this.UseItems = new MemberTable<UseItem>(x.Select(s => new UseItem(s))));
@@ -213,11 +234,6 @@ namespace Grabacr07.KanColleWrapper
 			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/deck_port")
 				.TryParse<kcsapi_deck[]>()
 				.Subscribe(this.UpdateFleets);
-
-			this.Dockyard = new Dockyard(proxy);
-			this.Repairyard = new Repairyard(this, proxy);
-			this.Logger = new Logger(proxy);
-			this.Quests = new Quests(proxy);
 		}
 
 
@@ -236,6 +252,21 @@ namespace Grabacr07.KanColleWrapper
 				this.Fleets.ForEach(x => x.Value.Dispose());
 				this.Fleets = new MemberTable<Fleet>(source.Select(x => new Fleet(this, x)));
 			}
+		}
+
+		private void Charge(kcsapi_charge charge)
+		{
+			if (charge == null) return;
+			
+			foreach (var ship in charge.api_ship)
+			{
+				var target = this.Ships[ship.api_id];
+				if (target == null) continue;
+
+				target.Charge(ship.api_fuel, ship.api_bull, ship.api_onslot);
+			}
+
+			foreach (var f in Fleets.Values) f.UpdateShips();
 		}
 	}
 }
