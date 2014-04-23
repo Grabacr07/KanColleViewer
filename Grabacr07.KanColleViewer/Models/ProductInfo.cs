@@ -56,7 +56,11 @@ namespace Grabacr07.KanColleViewer.Models
 
 		public string VersionString
 		{
+#if BETA
+			get { return this.Version.ToString(3) + " β"; }
+#else
 			get { return this.Version.ToString(3); }
+#endif
 		}
 
 		public IReadOnlyCollection<Library> Libraries

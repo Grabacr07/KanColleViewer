@@ -50,6 +50,16 @@
   <PropertyGroup>
     <ApplicationIcon>Assets\app.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release %28beta%29|AnyCPU'">
+    <OutputPath>bin\Release %28beta%29\</OutputPath>
+    <DefineConstants>TRACE;BETA</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CoreAudioApi, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

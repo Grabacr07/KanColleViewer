@@ -27,6 +27,8 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86
+		Release (beta)|Any CPU = Release (beta)|Any CPU
+		Release (beta)|x86 = Release (beta)|x86
 		Release|Any CPU = Release|Any CPU
 		Release|x86 = Release|x86
 	EndGlobalSection
@@ -34,18 +36,27 @@ Global
 		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Release (beta)|Any CPU.ActiveCfg = Release (beta)|Any CPU
+		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Release (beta)|Any CPU.Build.0 = Release (beta)|Any CPU
+		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Release (beta)|x86.ActiveCfg = Release (beta)|Any CPU
 		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Release|x86.ActiveCfg = Release|Any CPU
 		{0BC8CF79-76D9-46AD-867F-FEC6C6AD4594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0BC8CF79-76D9-46AD-867F-FEC6C6AD4594}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BC8CF79-76D9-46AD-867F-FEC6C6AD4594}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0BC8CF79-76D9-46AD-867F-FEC6C6AD4594}.Release (beta)|Any CPU.ActiveCfg = Release (beta)|Any CPU
+		{0BC8CF79-76D9-46AD-867F-FEC6C6AD4594}.Release (beta)|Any CPU.Build.0 = Release (beta)|Any CPU
+		{0BC8CF79-76D9-46AD-867F-FEC6C6AD4594}.Release (beta)|x86.ActiveCfg = Release (beta)|Any CPU
 		{0BC8CF79-76D9-46AD-867F-FEC6C6AD4594}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BC8CF79-76D9-46AD-867F-FEC6C6AD4594}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0BC8CF79-76D9-46AD-867F-FEC6C6AD4594}.Release|x86.ActiveCfg = Release|Any CPU
 		{F00FC570-2A80-4F61-8364-798CD44514B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F00FC570-2A80-4F61-8364-798CD44514B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F00FC570-2A80-4F61-8364-798CD44514B2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F00FC570-2A80-4F61-8364-798CD44514B2}.Release (beta)|Any CPU.ActiveCfg = Release (beta)|Any CPU
+		{F00FC570-2A80-4F61-8364-798CD44514B2}.Release (beta)|Any CPU.Build.0 = Release (beta)|Any CPU
+		{F00FC570-2A80-4F61-8364-798CD44514B2}.Release (beta)|x86.ActiveCfg = Release (beta)|Any CPU
 		{F00FC570-2A80-4F61-8364-798CD44514B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F00FC570-2A80-4F61-8364-798CD44514B2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F00FC570-2A80-4F61-8364-798CD44514B2}.Release|x86.ActiveCfg = Release|Any CPU

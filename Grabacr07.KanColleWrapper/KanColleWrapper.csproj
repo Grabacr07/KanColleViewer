@@ -40,6 +40,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release %28beta%29|AnyCPU'">
+    <OutputPath>bin\Release %28beta%29\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="FiddlerCore4, Version=4.4.5.3, Culture=neutral, PublicKeyToken=67cb91587178ac5a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
