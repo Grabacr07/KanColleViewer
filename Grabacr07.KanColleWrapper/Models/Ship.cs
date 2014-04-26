@@ -147,6 +147,13 @@ namespace Grabacr07.KanColleWrapper.Models
 			: base(rawData)
 		{
 			this.homeport = parent;
+			this.Update(rawData);
+		}
+
+		internal void Update(kcsapi_ship2 rawData)
+		{
+			if (rawData != this.RawData)
+				base.UpdateRaw(rawData);
 
 			this.Info = KanColleClient.Current.Master.Ships[rawData.api_ship_id] ?? ShipInfo.Dummy;
 			this.HP = new LimitedValue(this.RawData.api_nowhp, this.RawData.api_maxhp, 0);
