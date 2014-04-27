@@ -24,5 +24,15 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			this.RawData = rawData;
 		}
+
+		/// <summary>
+		/// Update the RawData for all derived classes.
+		/// </summary>
+		/// <param name="rawData">RawData to update to.</param>
+		protected void UpdateRaw(T rawData)
+		{
+			this.RawData = rawData;
+		}
+
 	}
 }
