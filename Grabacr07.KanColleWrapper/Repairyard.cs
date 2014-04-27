@@ -42,9 +42,7 @@ namespace Grabacr07.KanColleWrapper
 			this.homeport = parent;
 			this.Docks = new MemberTable<RepairingDock>();
 
-			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/ndock")
-				.TryParse<kcsapi_ndock[]>()
-				.Subscribe(this.Update);
+			proxy.api_get_member_ndock.TryParse<kcsapi_ndock[]>().Subscribe(x => this.Update(x.Data));
 		}
 
 		internal void Update(kcsapi_ndock[] source)
@@ -62,10 +60,6 @@ namespace Grabacr07.KanColleWrapper
 				this.Docks.ForEach(x => x.Value.Dispose());
 				this.Docks = new MemberTable<RepairingDock>(source.Select(x => new RepairingDock(homeport, x)));
 			}
-
-			// 艦娘を入渠させたとき、ship2 -> ndock の順でデータが来るため、
-			// ndock の後で改めて各艦隊のステータスを更新してやらないと入渠ステータスに変更できない
-			this.homeport.Fleets.ForEach(x => x.Value.UpdateStatus());
 		}
 
 		/// <summary>
@@ -83,7 +77,7 @@ namespace Grabacr07.KanColleWrapper
 		public bool CheckRepairing(Fleet fleet)
 		{
 			var repairingShipIds = this.Docks.Values.Where(x => x.Ship != null).Select(x => x.Ship.Id).ToArray();
-			return fleet.GetShips().Any(x => repairingShipIds.Any(id => id == x.Id));
+			return fleet.Ships.Any(x => repairingShipIds.Any(id => id == x.Id));
 		}
 	}
 }

@@ -13,11 +13,11 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public kcsapi_mst_slotitem[] api_mst_slotitem { get; set; }
 		public kcsapi_mst_useitem[] api_mst_useitem { get; set; }
 		public kcsapi_mst_stype[] api_mst_stype { get; set; }
+		public kcsapi_mst_slotitem_equiptype[] api_mst_slotitem_equiptype { get; set; }
 
 		// ↓ とりあえずそのまま。
 
 		public Api_Mst_Shipgraph[] api_mst_shipgraph { get; set; }
-		public Api_Mst_Slotitem_Equiptype[] api_mst_slotitem_equiptype { get; set; }
 		public Api_Mst_Slotitemgraph[] api_mst_slotitemgraph { get; set; }
 		public Api_Mst_Furniture[] api_mst_furniture { get; set; }
 		public Api_Mst_Furnituregraph[] api_mst_furnituregraph { get; set; }
@@ -128,13 +128,6 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public int[] api_battle_d { get; set; }
 		public int[] api_weda { get; set; }
 		public int[] api_wedb { get; set; }
-	}
-
-	public class Api_Mst_Slotitem_Equiptype
-	{
-		public int api_id { get; set; }
-		public string api_name { get; set; }
-		public int api_show_flg { get; set; }
 	}
 
 	public class Api_Mst_Stype

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Text;
@@ -16,24 +18,15 @@ namespace Grabacr07.KanColleWrapper
 	/// </summary>
 	public class Homeport : NotificationObject
 	{
-		#region Fleets 変更通知プロパティ
+		/// <summary>
+		/// 艦隊の編成状況にアクセスできるようにします。
+		/// </summary>
+		public Organization Organization { get; private set; }
 
-		private MemberTable<Fleet> _Fleets;
-
-		public MemberTable<Fleet> Fleets
-		{
-			get { return this._Fleets; }
-			set
-			{
-				if (this._Fleets != value)
-				{
-					this._Fleets = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
+		/// <summary>
+		/// 資源および資材の保有状況にアクセスできるようにします。
+		/// </summary>
+		public Materials Materials { get; private set; }
 
 		/// <summary>
 		/// 複数の建造ドックを持つ工廠を取得します。
@@ -61,6 +54,7 @@ namespace Grabacr07.KanColleWrapper
 
 		/// <summary>
 		/// 現在ログインしている提督を取得します。
+		/// <see cref="INotifyPropertyChanged.PropertyChanged"/> イベントによる変更通知をサポートします。
 		/// </summary>
 		public Admiral Admiral
 		{
@@ -77,56 +71,13 @@ namespace Grabacr07.KanColleWrapper
 
 		#endregion
 
-		#region Materials 変更通知プロパティ
-
-		private Materials _Materials;
-
-		/// <summary>
-		/// 艦隊司令部の資源および資材の保有状況にアクセスできるようにします。
-		/// </summary>
-		public Materials Materials
-		{
-			get { return this._Materials; }
-			set
-			{
-				if (this._Materials != value)
-				{
-					this._Materials = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region Ships 変更通知プロパティ
-
-		private MemberTable<Ship> _Ships;
-
-		/// <summary>
-		/// 艦隊司令部に所属しているすべての艦娘を取得します。艦娘の ID を使用して添え字アクセスできます。
-		/// </summary>
-		public MemberTable<Ship> Ships
-		{
-			get { return this._Ships; }
-			set
-			{
-				if (this._Ships != value)
-				{
-					this._Ships = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
 		#region SlotItems 変更通知プロパティ
 
 		private MemberTable<SlotItem> _SlotItems;
 
 		/// <summary>
-		/// 艦隊司令部が保有しているすべての装備を取得します。装備の ID を使用して添え字アクセスできます。
+		/// 艦隊司令部が保有しているすべての装備を取得します。
+		/// <see cref="INotifyPropertyChanged.PropertyChanged"/> イベントによる変更通知をサポートします。
 		/// </summary>
 		public MemberTable<SlotItem> SlotItems
 		{
@@ -147,6 +98,10 @@ namespace Grabacr07.KanColleWrapper
 
 		private MemberTable<UseItem> _UseItems;
 
+		/// <summary>
+		/// 母港が所有するすべての消費アイテムを取得します。
+		/// <see cref="INotifyPropertyChanged.PropertyChanged"/> イベントによる変更通知をサポートします。
+		/// </summary>
 		public MemberTable<UseItem> UseItems
 		{
 			get { return this._UseItems; }
@@ -165,124 +120,43 @@ namespace Grabacr07.KanColleWrapper
 
 		internal Homeport(KanColleProxy proxy)
 		{
-			this.Ships = new MemberTable<Ship>();
-			this.Fleets = new MemberTable<Fleet>();
 			this.SlotItems = new MemberTable<SlotItem>();
 			this.UseItems = new MemberTable<UseItem>();
-			this.Dockyard = new Dockyard(proxy);
+
+			this.Materials = new Materials();
+			this.Organization = new Organization(this, proxy);
 			this.Repairyard = new Repairyard(this, proxy);
-			this.Logger = new Logger(proxy);
+			this.Dockyard = new Dockyard(proxy);
 			this.Quests = new Quests(proxy);
+			this.Logger = new Logger(proxy);
 
-			// ToDo: カオスってるので、あとで整理する
-
-			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/basic")
-				.TryParse<kcsapi_basic>()
-				.Subscribe(x => this.Admiral = new Admiral(x));
-
-			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_port/port")
-				.TryParse<kcsapi_port>()
-				.Subscribe(x =>
-				{
-					this.UpdateShips(x.api_ship);
-					this.Materials = new Materials(x.api_material.Select(m => new Material(m)).ToArray());
-					this.Repairyard.Update(x.api_ndock);
-					this.UpdateFleets(x.api_deck_port);
-				});
-
-			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_hokyu/charge")
-				.TryParse<kcsapi_charge>()
-				.Subscribe(this.Charge);
-
-			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/material")
-				.TryParse<kcsapi_material[]>()
-				.Subscribe(x => this.Materials = new Materials(x.Select(m => new Material(m)).ToArray()));
-
-			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/ship")
-				.Select(x => { SvData<kcsapi_ship2[]> result; return SvData.TryParse(x, out result) ? result : null; })
-				.Where(x => x != null && x.IsSuccess)
-				.Subscribe(x => this.UpdateShips(x.Data));
-
-			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/ship2")
-				.Select(x => { SvData<kcsapi_ship2[]> result; return SvData.TryParse(x, out result) ? result : null; })
-				.Where(x => x != null && x.IsSuccess)
-				.Subscribe(x =>
-				{
-					this.UpdateShips(x.Data);
-					this.UpdateFleets(x.Fleets);
-				});
-			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/ship3")
-				.TryParse<kcsapi_ship3>()
-				.Subscribe(x =>
-				{
-					this.UpdateShips(x.api_ship_data);
-					this.UpdateFleets(x.api_deck_data);
-				});
-
-			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/slot_item")
-				.TryParse<kcsapi_slotitem[]>()
-				.Subscribe(x => this.SlotItems = new MemberTable<SlotItem>(x.Select(s => new SlotItem(s))));
-
-			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/useitem")
-				.TryParse<kcsapi_useitem[]>()
-				.Subscribe(x => this.UseItems = new MemberTable<UseItem>(x.Select(s => new UseItem(s))));
-
-			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/deck")
-				.TryParse<kcsapi_deck[]>()
-				.Subscribe(this.UpdateFleets);
-
-			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/deck_port")
-				.TryParse<kcsapi_deck[]>()
-				.Subscribe(this.UpdateFleets);
+			proxy.api_port.TryParse<kcsapi_port>().Subscribe(x =>
+			{
+				this.Organization.Update(x.Data.api_ship);
+				this.Repairyard.Update(x.Data.api_ndock);
+				this.Organization.Update(x.Data.api_deck_port);
+				this.Materials.Update(x.Data.api_material);
+			});
+			proxy.api_get_member_basic.TryParse<kcsapi_basic>().Subscribe(x => this.UpdateAdmiral(x.Data));
+			proxy.api_get_member_slot_item.TryParse<kcsapi_slotitem[]>().Subscribe(x => this.UpdateSlotItems(x.Data));
+			proxy.api_get_member_useitem.TryParse<kcsapi_useitem[]>().Subscribe(x => this.UpdateUseItems(x.Data));
+			proxy.api_get_member_material.TryParse<kcsapi_material[]>().Subscribe(x => this.Materials.Update(x.Data));
 		}
 
 
-		private void UpdateFleets(kcsapi_deck[] source)
+		internal void UpdateAdmiral(kcsapi_basic data)
 		{
-			if (this.Fleets.Count == source.Length)
-			{
-				foreach (var raw in source)
-				{
-					var target = this.Fleets[raw.api_id];
-					if (target != null) target.Update(raw);
-				}
-			}
-			else
-			{
-				this.Fleets.ForEach(x => x.Value.Dispose());
-				this.Fleets = new MemberTable<Fleet>(source.Select(x => new Fleet(this, x)));
-			}
+			this.Admiral = new Admiral(data);
 		}
 
-		private void UpdateShips(kcsapi_ship2[] source)
+		internal void UpdateSlotItems(kcsapi_slotitem[] source)
 		{
-			if (source.Length <= 1)
-			{
-				foreach (var ship in source)
-				{
-					var target = this.Ships[ship.api_id];
-					if (target != null) target.Update(ship);
-				}
-			}
-			else
-			{
-				this.Ships = new MemberTable<Ship>(source.Select(s => new Ship(this, s)));
-			}
+			this.SlotItems = new MemberTable<SlotItem>(source.Select(x => new SlotItem(x)));
 		}
 
-		private void Charge(kcsapi_charge charge)
+		internal void UpdateUseItems(kcsapi_useitem[] source)
 		{
-			if (charge == null) return;
-			
-			foreach (var ship in charge.api_ship)
-			{
-				var target = this.Ships[ship.api_id];
-				if (target == null) continue;
-
-				target.Charge(ship.api_fuel, ship.api_bull, ship.api_onslot);
-			}
-
-			foreach (var f in Fleets.Values) f.UpdateShips();
+			this.UseItems = new MemberTable<UseItem>(source.Select(x => new UseItem(x)));
 		}
 	}
 }

@@ -124,9 +124,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				.Subscribe(_ => this.IsReloading = false);
 			this.CompositeDisposable.Add(this.updateSource);
 
-			this.CompositeDisposable.Add(new PropertyChangedEventListener(this.homeport)
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(this.homeport.Organization)
 			{
-				{ () => this.homeport.Ships, (sender, args) => this.Update() },
+				{ "Ships", (sender, args) => this.Update() },
 			});
 
 			this.Update();
@@ -135,7 +135,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		public void Update()
 		{
-			this.ShipExpeditionFilter.SetFleets(this.homeport.Fleets);
+			this.ShipExpeditionFilter.SetFleets(this.homeport.Organization.Fleets);
 
 			this.RaisePropertyChanged("CheckAllShipTypes");
 			this.updateSource.OnNext(Unit.Default);
@@ -154,7 +154,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		private void UpdateCore()
 		{
-			var list = this.homeport.Ships.Values
+			var list = this.homeport.Organization.Ships
+				.Select(kvp => kvp.Value)
 				.Where(x => this.ShipTypes.Where(t => t.IsSelected).Any(t => x.Info.ShipType.Id == t.Id))
 				.Where(this.ShipLevelFilter.Predicate)
 				.Where(this.ShipLockFilter.Predicate)

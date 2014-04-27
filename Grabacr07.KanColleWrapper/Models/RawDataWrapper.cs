@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Livet;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
@@ -9,7 +10,7 @@ namespace Grabacr07.KanColleWrapper.Models
 	/// 艦これ API からの応答に含まれる api_data (生のデータ) をラップします。
 	/// </summary>
 	/// <typeparam name="T">ラップする api_data (生のデータ) の型。</typeparam>
-	public abstract class RawDataWrapper<T>
+	public abstract class RawDataWrapper<T> : NotificationObject
 	{
 		/// <summary>
 		/// 艦これ API からの応答に含まれる api_data をパースした生のデータを取得します。
@@ -29,10 +30,9 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// Update the RawData for all derived classes.
 		/// </summary>
 		/// <param name="rawData">RawData to update to.</param>
-		protected void UpdateRaw(T rawData)
+		protected void UpdateRawData(T rawData)
 		{
 			this.RawData = rawData;
 		}
-
 	}
 }

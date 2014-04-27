@@ -158,7 +158,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.Id = rawData.api_id;
 			this.State = (RepairingDockState)rawData.api_state;
 			this.ShipId = rawData.api_ship_id;
-			this.Ship = this.State == RepairingDockState.Repairing ? this.homeport.Ships[this.ShipId] : null;
+			this.Ship = this.State == RepairingDockState.Repairing ? this.homeport.Organization.Ships[this.ShipId] : null;
 			this.CompleteTime = this.State == RepairingDockState.Repairing
 				? (DateTimeOffset?)Definitions.UnixEpoch.AddMilliseconds(rawData.api_complete_time)
 				: null;

@@ -453,7 +453,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 			this.shipIds = new HashSet<int>(fleets
 				.Where(x => x.Value.Expedition.IsInExecution)
-				.SelectMany(x => x.Value.GetShips().Select(s => s.Id)));
+				.SelectMany(x => x.Value.Ships.Select(s => s.Id)));
 		}
 	}
 }

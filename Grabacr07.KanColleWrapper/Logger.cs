@@ -32,37 +32,16 @@ namespace Grabacr07.KanColleWrapper
 		{
 			this.shipmats = new int[5];
 
-			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_kousyou/createitem")
-				.Select(x =>
-				{
-					SvData<kcsapi_createitem> result;
-					return SvData.TryParse(x, out result) ? result : null;
-				})
-				.Where(x => x != null && x.IsSuccess)
-				.Subscribe(x => this.CreateItem(x.Data, x.RequestBody));
-
-			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_kousyou/createship")
-				.Select(x =>
-				{
-					SvData<kcsapi_createship> result;
-					return SvData.TryParse(x, out result) ? result : null;
-				})
-				.Where(x => x != null && x.IsSuccess)
-				.Subscribe(x => this.CreateShip(x.RequestBody));
-
-			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/kdock")
-				.TryParse<kcsapi_kdock[]>()
-				.Subscribe(this.KDock);
-
-			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_sortie/battleresult")
-				.TryParse<kcsapi_battleresult>()
-				.Subscribe(this.BattleResult);
+			proxy.api_req_kousyou_createitem.TryParse<kcsapi_createitem>().Subscribe(x => this.CreateItem(x.Data, x.Request));
+			proxy.api_req_kousyou_createship.TryParse<kcsapi_createship>().Subscribe(x => this.CreateShip(x.Request));
+			proxy.api_get_member_kdock.TryParse<kcsapi_kdock[]>().Subscribe(x => this.KDock(x.Data));
+			proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => this.BattleResult(x.Data));
 		}
 
 		private void CreateItem(kcsapi_createitem item, NameValueCollection req)
 		{
 			this.Log(LogType.BuildItem, "{0},{1},{2},{3},{4},{5},{6}", item.api_create_flag == 1 ? KanColleClient.Current.Master.SlotItems[item.api_slotitem_id].Name : "NA",
-				KanColleClient.Current.Homeport.Fleets[1].Ships[0].Info.ShipType.Name,
+				KanColleClient.Current.Homeport.Organization.Fleets[1].Ships[0].Info.ShipType.Name,
 				req["api_item1"], req["api_item2"], req["api_item3"], req["api_item4"], DateTime.Now.ToString("M/d/yyyy H:mm"));
 		}
 

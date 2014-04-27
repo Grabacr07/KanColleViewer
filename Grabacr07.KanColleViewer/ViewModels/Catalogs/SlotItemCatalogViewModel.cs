@@ -68,7 +68,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			// これはひどい
 			// あとでちゃんと書き直す
 
-			var ships = KanColleClient.Current.Homeport.Ships;
+			var ships = KanColleClient.Current.Homeport.Organization.Ships;
 			var items = KanColleClient.Current.Homeport.SlotItems;
 			var master = KanColleClient.Current.Master.SlotItems;
 

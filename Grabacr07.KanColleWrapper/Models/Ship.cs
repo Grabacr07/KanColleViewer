@@ -72,15 +72,41 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public LimitedValue HP { get; private set; }
 
+		#region Fuel 変更通知プロパティ
+
+		private LimitedValue _Fuel;
+
 		/// <summary>
 		/// 燃料を取得します。
 		/// </summary>
-		public LimitedValue Fuel { get; private set; }
+		public LimitedValue Fuel
+		{
+			get { return this._Fuel; }
+			private set
+			{
+				this._Fuel = value;
+				this.RaisePropertyChanged();
+			}
+		}
 
-		/// <summary>
-		/// 弾薬を取得します。
-		/// </summary>
-		public LimitedValue Bull { get; private set; }
+		#endregion
+
+		#region Bull 変更通知プロパティ
+
+		private LimitedValue _Bull;
+
+		public LimitedValue Bull
+		{
+			get { return this._Bull; }
+			private set
+			{
+				this._Bull = value;
+				this.RaisePropertyChanged();
+			}
+		}
+
+		#endregion
+
 
 		/// <summary>
 		/// 火力ステータス値を取得します。
@@ -141,7 +167,29 @@ namespace Grabacr07.KanColleWrapper.Models
 
 
 		public SlotItem[] SlotItems { get; private set; }
-		public int[] OnSlot { get; private set; }
+
+		#region OnSlot 変更通知プロパティ
+
+		private int[] _OnSlot;
+
+		/// <summary>
+		/// 各装備スロットの艦載機数を取得します。
+		/// </summary>
+		public int[] OnSlot
+		{
+			get { return this._OnSlot; }
+			private set
+			{
+				if (this._OnSlot != value)
+				{
+					this._OnSlot = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 
 		internal Ship(Homeport parent, kcsapi_ship2 rawData)
 			: base(rawData)
@@ -152,8 +200,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		internal void Update(kcsapi_ship2 rawData)
 		{
-			if (rawData != this.RawData)
-				base.UpdateRaw(rawData);
+			this.UpdateRawData(rawData);
 
 			this.Info = KanColleClient.Current.Master.Ships[rawData.api_ship_id] ?? ShipInfo.Dummy;
 			this.HP = new LimitedValue(this.RawData.api_nowhp, this.RawData.api_maxhp, 0);

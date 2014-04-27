@@ -108,7 +108,7 @@ namespace Grabacr07.KanColleWrapper
 			this.IsUntaken = true;
 			this.All = this.Current = new List<Quest>();
 
-			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/questlist")
+			proxy.api_get_member_questlist
 				.Select(Serialize)
 				.Where(x => x != null)
 				.Subscribe(this.Update);

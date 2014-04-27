@@ -60,7 +60,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		/// </summary>
 		public ShipViewModel[] Ships
 		{
-			get { return this.source.GetShips().Select(x => new ShipViewModel(x)).ToArray(); }
+			get { return this.source.Ships.Select(x => new ShipViewModel(x)).ToArray(); }
 		}
 
 		/// <summary>

@@ -97,6 +97,12 @@
     <Compile Include="Calculator.cs" />
     <Compile Include="Dockyard.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Organization.cs" />
+    <Compile Include="KanColleProxy.Endpoints.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KanColleProxy.Endpoints.tt</DependentUpon>
+    </Compile>
     <Compile Include="Logger.cs" />
     <Compile Include="MemberTable.cs" />
     <Compile Include="Models\CanReSortieReason.cs" />
@@ -112,6 +118,7 @@
     <Compile Include="Models\Raw\kcsapi_battleresult.cs" />
     <Compile Include="Models\Raw\kcsapi_createitem.cs" />
     <Compile Include="Models\Raw\kcsapi_createship.cs" />
+    <Compile Include="Models\Raw\kcsapi_mst_slotitem_equiptype.cs" />
     <Compile Include="Models\Raw\kcsapi_port.cs" />
     <Compile Include="Models\Raw\kcsapi_quest.cs" />
     <Compile Include="Models\Raw\kcsapi_questlist.cs" />
@@ -133,7 +140,6 @@
     <Compile Include="Models\Raw\kcsapi_kdock.cs" />
     <Compile Include="Models\Raw\kcsapi_material.cs" />
     <Compile Include="Models\Raw\kcsapi_ndock.cs" />
-    <Compile Include="Models\Raw\kcsapi_start.cs" />
     <Compile Include="Models\Raw\kcsapi_mst_stype.cs" />
     <Compile Include="Models\RepairingDock.cs" />
     <Compile Include="Models\RepairingDockState.cs" />
@@ -180,13 +186,19 @@
     <Compile Include="Win32\NativeMethods.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="KanColleProxy.Endpoints.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>KanColleProxy.Endpoints.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assemblies\FiddlerCore4.dll" />
     <None Include="assemblies\FiddlerCore4.XML" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

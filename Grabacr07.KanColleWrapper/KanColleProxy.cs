@@ -12,7 +12,7 @@ using Livet;
 
 namespace Grabacr07.KanColleWrapper
 {
-	public class KanColleProxy
+	public partial class KanColleProxy
 	{
 		private readonly IConnectableObservable<Session> connectableSessionSource;
 		private readonly IConnectableObservable<Session> apiSource;
