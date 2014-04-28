@@ -123,7 +123,7 @@ namespace Grabacr07.KanColleWrapper
 			this.SlotItems = new MemberTable<SlotItem>();
 			this.UseItems = new MemberTable<UseItem>();
 
-			this.Materials = new Materials();
+			this.Materials = new Materials(proxy);
 			this.Organization = new Organization(this, proxy);
 			this.Repairyard = new Repairyard(this, proxy);
 			this.Dockyard = new Dockyard(proxy);
@@ -140,7 +140,6 @@ namespace Grabacr07.KanColleWrapper
 			proxy.api_get_member_basic.TryParse<kcsapi_basic>().Subscribe(x => this.UpdateAdmiral(x.Data));
 			proxy.api_get_member_slot_item.TryParse<kcsapi_slotitem[]>().Subscribe(x => this.UpdateSlotItems(x.Data));
 			proxy.api_get_member_useitem.TryParse<kcsapi_useitem[]>().Subscribe(x => this.UpdateUseItems(x.Data));
-			proxy.api_get_member_material.TryParse<kcsapi_material[]>().Subscribe(x => this.Materials.Update(x.Data));
 		}
 
 

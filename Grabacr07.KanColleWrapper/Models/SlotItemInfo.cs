@@ -53,7 +53,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			get
 			{
 				var type = this.RawData.api_type.Get(2);
-				return type == 6 || type == 7 || type == 11;
+				return type.HasValue && (type == 6 || type == 7 || type == 8 || type == 11);
 			}
 		}
 

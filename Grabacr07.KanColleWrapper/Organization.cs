@@ -87,6 +87,8 @@ namespace Grabacr07.KanColleWrapper
 			proxy.api_req_hensei_change.TryParse().Subscribe(this.Change);
 			proxy.api_req_hokyu_charge.TryParse<kcsapi_charge>().Subscribe(x => this.Charge(x.Data));
 			proxy.api_req_kaisou_powerup.TryParse<kcsapi_powerup>().Subscribe(this.Powerup);
+			proxy.api_req_kousyou_getship.TryParse<kcsapi_kdock_getship>().Subscribe(x => this.GetShip(x.Data));
+			proxy.api_req_kousyou_destroyship.TryParse<kcsapi_destroyship>().Subscribe(this.DestoryShip);
 		}
 
 
@@ -208,8 +210,6 @@ namespace Grabacr07.KanColleWrapper
 			}
 
 			if (fleet != null) fleet.UpdateStatus();
-
-			this.homeport.Materials.Update(source.api_material);
 		}
 
 		private void Powerup(SvData<kcsapi_powerup> svd)
@@ -236,6 +236,27 @@ namespace Grabacr07.KanColleWrapper
 			catch (Exception ex)
 			{
 				Debug.WriteLine("近代化改修による更新に失敗しました: {0}", ex);
+			}
+		}
+
+		private void GetShip(kcsapi_kdock_getship source)
+		{
+			this.Ships = new MemberTable<Ship>(this.Ships.Select(kvp => kvp.Value).Concat(new[] { new Ship(this.homeport, source.api_ship) }));
+		}
+
+		private void DestoryShip(SvData<kcsapi_destroyship> svd)
+		{
+			try
+			{
+				var ship = this.Ships[int.Parse(svd.Request["api_ship_id"])];
+				if (ship != null)
+				{
+					this.Ships = new MemberTable<Ship>(this.Ships.Select(kvp => kvp.Value).Except(new[] { ship }));
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine("解体による更新に失敗しました。");
 			}
 		}
 	}

@@ -97,6 +97,8 @@
     <Compile Include="Calculator.cs" />
     <Compile Include="Dockyard.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Models\Raw\kcsapi_destroyship.cs" />
+    <Compile Include="Models\Raw\kcsapi_kdock_getship.cs" />
     <Compile Include="Models\Raw\kcsapi_powerup.cs" />
     <Compile Include="Organization.cs" />
     <Compile Include="KanColleProxy.Endpoints.cs">
@@ -135,7 +137,6 @@
     <Compile Include="Models\Experience.cs" />
     <Compile Include="Models\Fleet.cs" />
     <Compile Include="Models\IIdentifiable.cs" />
-    <Compile Include="Models\Material.cs" />
     <Compile Include="Materials.cs" />
     <Compile Include="Models\LimitedValue.cs" />
     <Compile Include="Models\Raw\kcsapi_kdock.cs" />

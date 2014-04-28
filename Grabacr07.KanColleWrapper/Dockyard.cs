@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models;
@@ -35,12 +34,15 @@ namespace Grabacr07.KanColleWrapper
 
 		#endregion
 
+
 		internal Dockyard(KanColleProxy proxy)
 		{
 			this.Docks = new MemberTable<BuildingDock>();
 
 			proxy.api_get_member_kdock.TryParse<kcsapi_kdock[]>().Subscribe(x => this.Update(x.Data));
+			proxy.api_req_kousyou_getship.TryParse<kcsapi_kdock_getship>().Subscribe(x => this.GetShip(x.Data));
 		}
+
 
 		internal void Update(kcsapi_kdock[] source)
 		{
@@ -57,6 +59,11 @@ namespace Grabacr07.KanColleWrapper
 				this.Docks.ForEach(x => x.Value.Dispose());
 				this.Docks = new MemberTable<BuildingDock>(source.Select(x => new BuildingDock(x)));
 			}
+		}
+
+		private void GetShip(kcsapi_kdock_getship source)
+		{
+			this.Update(source.api_kdock);
 		}
 	}
 }

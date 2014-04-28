@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models.Raw;
 using Livet;
 
@@ -175,7 +176,14 @@ namespace Grabacr07.KanColleWrapper
 
 		#endregion
 
-		internal Materials() { }
+
+		internal Materials(KanColleProxy proxy)
+		{
+			proxy.api_get_member_material.TryParse<kcsapi_material[]>().Subscribe(x => this.Update(x.Data));
+			proxy.api_req_hokyu_charge.TryParse<kcsapi_charge>().Subscribe(x => this.Update(x.Data.api_material));
+			proxy.api_req_kousyou_destroyship.TryParse<kcsapi_destroyship>().Subscribe(x => this.Update(x.Data.api_material));
+		}
+
 
 		internal void Update(kcsapi_material[] source)
 		{
@@ -191,7 +199,7 @@ namespace Grabacr07.KanColleWrapper
 			}
 		}
 
-		internal void Update(int[] source)
+		private void Update(int[] source)
 		{
 			if (source != null && source.Length == 4)
 			{
