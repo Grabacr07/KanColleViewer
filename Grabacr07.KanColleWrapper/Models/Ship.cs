@@ -122,30 +122,105 @@ namespace Grabacr07.KanColleWrapper.Models
 		#endregion
 
 
+		#region Firepower 変更通知プロパティ
+
+		private ModernizableStatus _Firepower;
+
 		/// <summary>
 		/// 火力ステータス値を取得します。
 		/// </summary>
-		public ModernizableStatus Firepower { get; private set; }
+		public ModernizableStatus Firepower
+		{
+			get { return this._Firepower; }
+			private set
+			{
+				this._Firepower = value;
+				this.RaisePropertyChanged();
+
+			}
+		}
+
+		#endregion
+
+		#region Torpedo 変更通知プロパティ
+
+		private ModernizableStatus _Torpedo;
 
 		/// <summary>
 		/// 雷装ステータス値を取得します。
 		/// </summary>
-		public ModernizableStatus Torpedo { get; private set; }
+		public ModernizableStatus Torpedo
+		{
+			get { return this._Torpedo; }
+			private set
+			{
+				this._Torpedo = value;
+				this.RaisePropertyChanged();
+
+			}
+		}
+
+		#endregion
+
+		#region AA 変更通知プロパティ
+
+		private ModernizableStatus _AA;
 
 		/// <summary>
 		/// 対空ステータス値を取得します。
 		/// </summary>
-		public ModernizableStatus AA { get; private set; }
+		public ModernizableStatus AA
+		{
+			get { return this._AA; }
+			private set
+			{
+				this._AA = value;
+				this.RaisePropertyChanged();
+			}
+
+		}
+
+		#endregion
+
+		#region Armer 変更通知プロパティ
+
+		private ModernizableStatus _Armer;
 
 		/// <summary>
 		/// 装甲ステータス値を取得します。
 		/// </summary>
-		public ModernizableStatus Armer { get; private set; }
+		public ModernizableStatus Armer
+		{
+			get { return this._Armer; }
+			private set
+			{
+				this._Armer = value;
+				this.RaisePropertyChanged();
+
+			}
+		}
+
+		#endregion
+
+		#region Luck 変更通知プロパティ
+
+		private ModernizableStatus _Luck;
 
 		/// <summary>
 		/// 運のステータス値を取得します。
 		/// </summary>
-		public ModernizableStatus Luck { get; private set; }
+		public ModernizableStatus Luck
+		{
+			get { return this._Luck; }
+			private set
+			{
+				this._Luck = value;
+				this.RaisePropertyChanged();
+			}
+		}
+
+		#endregion
+
 
 		/// <summary>
 		/// 装備によるボーナスを含めた索敵ステータス値を取得します。

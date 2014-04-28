@@ -255,7 +255,7 @@ namespace Grabacr07.KanColleWrapper
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine("解体による更新に失敗しました。");
+				System.Diagnostics.Debug.WriteLine("解体による更新に失敗しました: {0}", ex);
 			}
 		}
 	}
