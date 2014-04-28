@@ -41,6 +41,7 @@ namespace Grabacr07.KanColleWrapper
 
 			proxy.api_get_member_kdock.TryParse<kcsapi_kdock[]>().Subscribe(x => this.Update(x.Data));
 			proxy.api_req_kousyou_getship.TryParse<kcsapi_kdock_getship>().Subscribe(x => this.GetShip(x.Data));
+			proxy.api_req_kousyou_createship_speedchange.TryParse().Subscribe(this.ChangeSpeed);
 		}
 
 
@@ -64,6 +65,21 @@ namespace Grabacr07.KanColleWrapper
 		private void GetShip(kcsapi_kdock_getship source)
 		{
 			this.Update(source.api_kdock);
+		}
+
+		private void ChangeSpeed(SvData svd)
+		{
+			try
+			{
+				var dock = this.Docks[int.Parse(svd.Request["api_kdock_id"])];
+				var highspeed = svd.Request["api_highspeed"] == "1";
+
+				if (highspeed) dock.Finish();
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine("高速建造材使用の解析に失敗しました: {0}", ex);
+			}
 		}
 	}
 }

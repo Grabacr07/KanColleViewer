@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Internal;
@@ -188,7 +187,7 @@ namespace Grabacr07.KanColleWrapper
 			}
 			catch (Exception ex)
 			{
-				Debug.WriteLine("編成の変更に失敗しました: {0}", ex);
+				System.Diagnostics.Debug.WriteLine("編成の変更に失敗しました: {0}", ex);
 			}
 		}
 
@@ -235,7 +234,7 @@ namespace Grabacr07.KanColleWrapper
 			}
 			catch (Exception ex)
 			{
-				Debug.WriteLine("近代化改修による更新に失敗しました: {0}", ex);
+				System.Diagnostics.Debug.WriteLine("近代化改修による更新に失敗しました: {0}", ex);
 			}
 		}
 
@@ -256,7 +255,7 @@ namespace Grabacr07.KanColleWrapper
 			}
 			catch (Exception ex)
 			{
-				Debug.WriteLine("解体による更新に失敗しました。");
+				System.Diagnostics.Debug.WriteLine("解体による更新に失敗しました。");
 			}
 		}
 	}

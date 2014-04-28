@@ -168,6 +168,14 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
+		/// エンド ポイント "/kcsapi/api_req_kousyou/createship_speedchange" からのセッションを配信します。
+		/// </summary>
+		public IObservable<Session> api_req_kousyou_createship_speedchange
+		{
+			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_kousyou/createship_speedchange"); }
+		}
+
+		/// <summary>
 		/// エンド ポイント "/kcsapi/api_req_kousyou/destroyship" からのセッションを配信します。
 		/// </summary>
 		public IObservable<Session> api_req_kousyou_destroyship

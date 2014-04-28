@@ -17,6 +17,7 @@ namespace Grabacr07.KanColleViewer.Models
 		private string _Copyright;
 		private string _Trademark;
 		private Version _Version;
+		private string _VersionString;
 		private IReadOnlyCollection<Library> _Libraries;
 
 		public string Title
@@ -56,12 +57,19 @@ namespace Grabacr07.KanColleViewer.Models
 
 		public string VersionString
 		{
+			get { return this._VersionString ?? (this._VersionString = string.Format("{0}{1}{2}", this.Version.ToString(3), this.IsBetaRelease ? " β" : "", this.Version.Revision == 0 ? "" : " rev." + this.Version.Revision)); }
+		}
+
+		public bool IsBetaRelease
+		{
+			
 #if BETA
-			get { return this.Version.ToString(3) + " β"; }
+			get { return true; }
 #else
-			get { return this.Version.ToString(3); }
+			get { return false; }
 #endif
 		}
+
 
 		public IReadOnlyCollection<Library> Libraries
 		{

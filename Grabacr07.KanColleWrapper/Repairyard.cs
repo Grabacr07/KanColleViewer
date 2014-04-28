@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models;
@@ -106,7 +104,7 @@ namespace Grabacr07.KanColleWrapper
 			}
 			catch (Exception ex)
 			{
-				Debug.WriteLine("入渠開始の解析に失敗しました: {0}", ex);
+				System.Diagnostics.Debug.WriteLine("入渠開始の解析に失敗しました: {0}", ex);
 			}
 		}
 
@@ -125,7 +123,7 @@ namespace Grabacr07.KanColleWrapper
 			}
 			catch (Exception ex)
 			{
-				Debug.WriteLine("高速修復材の解析に失敗しました: {0}", ex);
+				System.Diagnostics.Debug.WriteLine("高速修復材の解析に失敗しました: {0}", ex);
 			}
 		}
 	}

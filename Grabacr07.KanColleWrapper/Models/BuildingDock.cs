@@ -128,6 +128,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.Update(rawData);
 		}
 
+
 		internal void Update(kcsapi_kdock rawData)
 		{
 			this.Id = rawData.api_id;
@@ -139,6 +140,13 @@ namespace Grabacr07.KanColleWrapper.Models
 				? (DateTimeOffset?)Definitions.UnixEpoch.AddMilliseconds(rawData.api_complete_time)
 				: null;
 		}
+
+		internal void Finish()
+		{
+			this.State = BuildingDockState.Completed;
+			this.CompleteTime = null;
+		}
+
 
 		protected override void Tick()
 		{
