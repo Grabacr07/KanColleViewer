@@ -70,10 +70,10 @@ namespace Grabacr07.KanColleWrapper
 			var basic = proxy.api_get_member_basic.TryParse<kcsapi_basic>().FirstAsync().ToTask();
 			var kdock = proxy.api_get_member_kdock.TryParse<kcsapi_kdock[]>().FirstAsync().ToTask();
 			var sitem = proxy.api_get_member_slot_item.TryParse<kcsapi_slotitem[]>().FirstAsync().ToTask();
-			var timeout = Task.Delay(TimeSpan.FromSeconds(20));
 
 			proxy.api_start2.FirstAsync().Subscribe(async session =>
 			{
+				var timeout = Task.Delay(TimeSpan.FromSeconds(20));
 				var canInitialize = await Task.WhenAny(new Task[] { basic, kdock, sitem }.WhenAll(), timeout) != timeout;
 
 				// タイムアウト仕掛けてるのは、今後のアップデートで basic, kdock, slot_item のいずれかが来なくなったときに
