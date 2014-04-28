@@ -17,7 +17,7 @@ namespace Grabacr07.KanColleWrapper
 		/// <returns></returns>
 		public static int CalcAirSuperiorityPotential(this SlotItem slotItem, int onslot)
 		{
-			if (slotItem.Info.IsAircraft || slotItem.Info.IsSeaplane)
+			if (slotItem.Info.IsAirSuperiorityFighter)
 			{
 				return (int)(slotItem.Info.AA * Math.Sqrt(onslot));
 			}

@@ -46,26 +46,17 @@ namespace Grabacr07.KanColleWrapper.Models
 		}
 
 		/// <summary>
-		/// この装備アイテムが艦載機かどうかを示す値を取得します。
+		/// 制空戦に参加できる戦闘機または水上機かどうかを示す値を取得します。
 		/// </summary>
-		public bool IsAircraft
+		public bool IsAirSuperiorityFighter
 		{
 			get
 			{
-				return this.IconType == SlotItemIconType.Fighter ||
-					   this.IconType == SlotItemIconType.TorpedoBomber ||
-					   this.IconType == SlotItemIconType.DiveBomber ||
-					   this.IconType == SlotItemIconType.ReconPlane;
+				var type = this.RawData.api_type.Get(2);
+				return type == 6 || type == 7 || type == 11;
 			}
 		}
 
-		/// <summary>
-		/// この装備アイテムが水上機かどうかを示す値を取得します。
-		/// </summary>
-		public bool IsSeaplane
-		{
-			get { return this.IconType == SlotItemIconType.ReconSeaplane; }
-		}
 
 		internal SlotItemInfo(kcsapi_mst_slotitem rawData) : base(rawData) { }
 

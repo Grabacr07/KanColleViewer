@@ -28,6 +28,8 @@
 		"/kcsapi/api_req_hokyu/charge",
 		"/kcsapi/api_req_hensei/change",
 		"/kcsapi/api_req_kaisou/powerup",
+		"/kcsapi/api_req_nyukyo/start",
+		"/kcsapi/api_req_nyukyo/speedchange",
 	};
 #>
 // 

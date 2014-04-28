@@ -67,10 +67,24 @@ namespace Grabacr07.KanColleWrapper.Models
 			get { return this.RawData.api_exp.Get(1) ?? 0; }
 		}
 
+		#region HP 変更通知プロパティ
+
+		private LimitedValue _HP;
+
 		/// <summary>
 		/// 耐久値を取得します。
 		/// </summary>
-		public LimitedValue HP { get; private set; }
+		public LimitedValue HP
+		{
+			get { return this._HP; }
+			private set
+			{
+				this._HP = value;
+				this.RaisePropertyChanged();
+			}
+		}
+
+		#endregion
 
 		#region Fuel 変更通知プロパティ
 
@@ -228,6 +242,11 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.OnSlot = onslot;
 		}
 
+		internal void Repair()
+		{
+			var max = this.HP.Maximum;
+			this.HP = this.HP.Update(max);
+		}
 
 		public override string ToString()
 		{

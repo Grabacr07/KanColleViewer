@@ -64,23 +64,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		}
 
 		/// <summary>
-		/// 艦隊に所属している艦娘が装備している艦載機を集計したコレクションを取得します。
-		/// </summary>
-		public IEnumerable<PlaneViewModel> Planes
-		{
-			get
-			{
-				return this.source.Ships
-					.SelectMany(x => x.SlotItems
-						.Where(y => y.Info.IsAircraft || y.Info.IsSeaplane)
-						.Select((y, i) => new { Item = y.Info, Count = x.OnSlot[i] }))
-					.GroupBy(x => x.Item.Id, x => x)
-					.Select(x => new { x.First().Item, Count = x.Aggregate(0, (i, y) => i + y.Count) })
-					.Select(x => new PlaneViewModel(x.Item, x.Count));
-			}
-		}
-
-		/// <summary>
 		/// 艦隊の状態を取得します。
 		/// </summary>
 		public ViewModel State
