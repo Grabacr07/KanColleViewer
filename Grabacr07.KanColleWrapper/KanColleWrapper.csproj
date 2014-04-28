@@ -97,6 +97,7 @@
     <Compile Include="Calculator.cs" />
     <Compile Include="Dockyard.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Models\Raw\kcsapi_powerup.cs" />
     <Compile Include="Organization.cs" />
     <Compile Include="KanColleProxy.Endpoints.cs">
       <AutoGen>True</AutoGen>

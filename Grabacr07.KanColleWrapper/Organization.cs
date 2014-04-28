@@ -86,6 +86,7 @@ namespace Grabacr07.KanColleWrapper
 
 			proxy.api_req_hensei_change.TryParse().Subscribe(this.Change);
 			proxy.api_req_hokyu_charge.TryParse<kcsapi_charge>().Subscribe(x => this.Charge(x.Data));
+			proxy.api_req_kaisou_powerup.TryParse<kcsapi_powerup>().Subscribe(this.Powerup);
 		}
 
 
@@ -158,7 +159,7 @@ namespace Grabacr07.KanColleWrapper
 					fleet.UnsetAll();
 					return;
 				}
-				
+
 				var ship = this.Ships[int.Parse(data.Request["api_ship_id"])];
 				if (ship == null)
 				{
@@ -174,7 +175,7 @@ namespace Grabacr07.KanColleWrapper
 					fleet.Change(index, ship);
 					return;
 				}
-				
+
 				// ship が、現状いずれかの艦隊に所属しているケース
 				var currentIndex = Array.IndexOf(currentFleet.Ships, ship);
 				var old = fleet.Change(index, ship);
@@ -191,8 +192,6 @@ namespace Grabacr07.KanColleWrapper
 
 		private void Charge(kcsapi_charge source)
 		{
-			if (source == null) return;
-
 			Fleet fleet = null;	// 補給した艦が所属している艦隊。艦隊をまたいで補給はできないので、必ず 1 つに絞れる
 
 			foreach (var ship in source.api_ship)
@@ -211,6 +210,33 @@ namespace Grabacr07.KanColleWrapper
 			if (fleet != null) fleet.UpdateStatus();
 
 			this.homeport.Materials.Update(source.api_material);
+		}
+
+		private void Powerup(SvData<kcsapi_powerup> svd)
+		{
+			try
+			{
+				var target = this.Ships[svd.Data.api_ship.api_id];
+				if (target != null)
+				{
+					target.Update(svd.Data.api_ship);
+				}
+
+				var items = svd.Request["api_id_items"]
+					.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+					.Select(int.Parse)
+					.Where(x => this.Ships.ContainsKey(x))
+					.Select(x => this.Ships[x]);
+
+				// (改修に使った艦娘のこと item って呼ぶのどうなの…)
+
+				this.Ships = new MemberTable<Ship>(this.Ships.Select(kvp => kvp.Value).Except(items));
+				this.Update(svd.Data.api_deck);
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine("近代化改修による更新に失敗しました: {0}", ex);
+			}
 		}
 	}
 }

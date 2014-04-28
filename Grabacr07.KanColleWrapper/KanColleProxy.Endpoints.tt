@@ -27,6 +27,7 @@
 		"/kcsapi/api_req_sortie/battleresult",
 		"/kcsapi/api_req_hokyu/charge",
 		"/kcsapi/api_req_hensei/change",
+		"/kcsapi/api_req_kaisou/powerup",
 	};
 #>
 // 

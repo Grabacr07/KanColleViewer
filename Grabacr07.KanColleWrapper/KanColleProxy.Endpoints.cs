@@ -167,6 +167,14 @@ namespace Grabacr07.KanColleWrapper
 			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_hensei/change"); }
 		}
 
+		/// <summary>
+		/// エンド ポイント "/kcsapi/api_req_kaisou/powerup" からのセッションを配信します。
+		/// </summary>
+		public IObservable<Session> api_req_kaisou_powerup
+		{
+			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_kaisou/powerup"); }
+		}
+
 		// ReSharper restore InconsistentNaming
 	}
 }
