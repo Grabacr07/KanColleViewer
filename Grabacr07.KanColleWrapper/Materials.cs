@@ -196,6 +196,7 @@ namespace Grabacr07.KanColleWrapper
 				this.DevelopmentMaterials = source[6].api_value;
 				this.InstantRepairMaterials = source[5].api_value;
 				this.InstantBuildMaterials = source[4].api_value;
+                KanColleClient.Current.Homeport.Logger.UpdateMaterial();
 			}
 		}
 
@@ -207,6 +208,7 @@ namespace Grabacr07.KanColleWrapper
 				this.Ammunition = source[1];
 				this.Steel = source[2];
 				this.Bauxite = source[3];
+                KanColleClient.Current.Homeport.Logger.UpdateMaterial();
 			}
 		}
 	}

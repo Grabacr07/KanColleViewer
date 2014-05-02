@@ -48,6 +48,8 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public bool UseProxyOnSSLConnect { get; set; }
 
+        public bool EnableLogging { get; set; }
+
 
 		public KanColleProxy()
 		{
