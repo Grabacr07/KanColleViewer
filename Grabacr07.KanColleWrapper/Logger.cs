@@ -46,7 +46,7 @@ namespace Grabacr07.KanColleWrapper
             if (DateTime.UtcNow.Subtract(this.lastMatLog).TotalSeconds > 300.0)
             {
                 this.lastMatLog = DateTime.UtcNow;
-                this.Log(Logger.LogType.MaterialLog, "{0},{1},{2},{2},{4},{5},{6},{7}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), KanColleClient.Current.Homeport.Materials.Fuel, KanColleClient.Current.Homeport.Materials.Ammunition, KanColleClient.Current.Homeport.Materials.Steel,
+                this.Log(Logger.LogType.MaterialLog, "{0},{1},{2},{3},{4},{5},{6},{7}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), KanColleClient.Current.Homeport.Materials.Fuel, KanColleClient.Current.Homeport.Materials.Ammunition, KanColleClient.Current.Homeport.Materials.Steel,
                     KanColleClient.Current.Homeport.Materials.Bauxite, KanColleClient.Current.Homeport.Materials.InstantRepairMaterials, KanColleClient.Current.Homeport.Materials.InstantBuildMaterials, KanColleClient.Current.Homeport.Materials.DevelopmentMaterials);
             }
         }
