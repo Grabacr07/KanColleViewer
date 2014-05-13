@@ -223,7 +223,22 @@ namespace Grabacr07.KanColleWrapper
 			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_kaisou/powerup"); }
 		}
 
+		/// <summary>
+		/// エンド ポイント "/kcsapi/api_req_member/updatedeckname" からのセッションを配信します。
+		/// </summary>
+		public IObservable<Session> api_req_member_updatedeckname
+		{
+			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_member/updatedeckname"); }
+		}
+
+		/// <summary>
+		/// エンド ポイント "/kcsapi/api_req_member/updatecomment" からのセッションを配信します。
+		/// </summary>
+		public IObservable<Session> api_req_member_updatecomment
+		{
+			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_member/updatecomment"); }
+		}
+
 		// ReSharper restore InconsistentNaming
 	}
 }
-

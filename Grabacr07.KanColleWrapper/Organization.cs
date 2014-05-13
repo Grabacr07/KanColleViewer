@@ -88,6 +88,7 @@ namespace Grabacr07.KanColleWrapper
 			proxy.api_req_kaisou_powerup.TryParse<kcsapi_powerup>().Subscribe(this.Powerup);
 			proxy.api_req_kousyou_getship.TryParse<kcsapi_kdock_getship>().Subscribe(x => this.GetShip(x.Data));
 			proxy.api_req_kousyou_destroyship.TryParse<kcsapi_destroyship>().Subscribe(this.DestoryShip);
+			proxy.api_req_member_updatedeckname.TryParse().Subscribe(this.UpdateFleetName);
 		}
 
 
@@ -256,6 +257,24 @@ namespace Grabacr07.KanColleWrapper
 			catch (Exception ex)
 			{
 				System.Diagnostics.Debug.WriteLine("解体による更新に失敗しました: {0}", ex);
+			}
+		}
+
+
+		private void UpdateFleetName(SvData data)
+		{
+			if (data == null || !data.IsSuccess) return;
+
+			try
+			{
+				var fleet = this.Fleets[int.Parse(data.Request["api_deck_id"])];
+				var name = data.Request["api_name"];
+
+				fleet.Name = name;
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine("艦隊名の変更に失敗しました: {0}", ex);
 			}
 		}
 	}

@@ -140,6 +140,7 @@ namespace Grabacr07.KanColleWrapper
 			proxy.api_get_member_basic.TryParse<kcsapi_basic>().Subscribe(x => this.UpdateAdmiral(x.Data));
 			proxy.api_get_member_slot_item.TryParse<kcsapi_slotitem[]>().Subscribe(x => this.UpdateSlotItems(x.Data));
 			proxy.api_get_member_useitem.TryParse<kcsapi_useitem[]>().Subscribe(x => this.UpdateUseItems(x.Data));
+			proxy.api_req_member_updatecomment.TryParse().Subscribe(this.UpdateComment);
 		}
 
 
@@ -156,6 +157,20 @@ namespace Grabacr07.KanColleWrapper
 		internal void UpdateUseItems(kcsapi_useitem[] source)
 		{
 			this.UseItems = new MemberTable<UseItem>(source.Select(x => new UseItem(x)));
+		}
+
+		private void UpdateComment(SvData data)
+		{
+			if (data == null || !data.IsSuccess) return;
+
+			try
+			{
+				this.Admiral.Comment = data.Request["api_cmt"];
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine("艦隊名の変更に失敗しました: {0}", ex);
+			}
 		}
 	}
 }

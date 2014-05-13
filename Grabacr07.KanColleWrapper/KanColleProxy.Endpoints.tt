@@ -34,6 +34,8 @@
 		"/kcsapi/api_req_nyukyo/speedchange",
 		"/kcsapi/api_req_hokyu/charge",
 		"/kcsapi/api_req_kaisou/powerup",
+		"/kcsapi/api_req_member/updatedeckname",
+		"/kcsapi/api_req_member/updatecomment",
 	};
 #>
 // 
@@ -78,19 +80,3 @@ namespace Grabacr07.KanColleWrapper
 		// ReSharper restore InconsistentNaming
 	}
 }
-
-<#+
-	private class Node
-	{
-		public string Name { get; private set; }
-		public List<string> Methods { get; private set; }
-		public List<Node> Children { get; private set; }
-
-		public Node(string name)
-		{
-			this.Name = name;
-			this.Methods = new List<string>();
-			this.Children = new List<Node>();
-		}
-	}
-#>

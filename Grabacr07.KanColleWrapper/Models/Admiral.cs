@@ -24,10 +24,26 @@ namespace Grabacr07.KanColleWrapper.Models
 			get { return this.RawData.api_nickname; }
 		}
 
+
+		#region Comment 変更通知プロパティ
+
+		private string _Comment;
+
 		public string Comment
 		{
-			get { return this.RawData.api_comment; }
+			get { return this._Comment; }
+			set
+			{
+				if (this._Comment != value)
+				{
+					this._Comment = value;
+					this.RaisePropertyChanged();
+				}
+			}
 		}
+
+		#endregion
+
 
 		/// <summary>
 		/// 提督経験値を取得します。
@@ -107,7 +123,11 @@ namespace Grabacr07.KanColleWrapper.Models
 		}
 
 
-		internal Admiral(kcsapi_basic rawData) : base(rawData) { }
+		internal Admiral(kcsapi_basic rawData)
+			: base(rawData)
+		{
+			this.Comment = this.RawData.api_comment;
+		}
 
 		public override string ToString()
 		{

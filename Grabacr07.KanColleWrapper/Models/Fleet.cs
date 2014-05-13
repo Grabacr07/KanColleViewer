@@ -39,7 +39,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		public string Name
 		{
 			get { return this._Name; }
-			private set
+			internal set
 			{
 				if (this._Name != value)
 				{
