@@ -22,7 +22,6 @@
 		"/kcsapi/api_get_member/kdock",
 		"/kcsapi/api_get_member/material",
 		"/kcsapi/api_get_member/questlist",
-		"/kcsapi/api_req_sortie/battleresult",
 		"/kcsapi/api_req_hensei/change",
 		"/kcsapi/api_req_kousyou/getship",
 		"/kcsapi/api_req_kousyou/createitem",
@@ -36,6 +35,8 @@
 		"/kcsapi/api_req_kaisou/powerup",
 		"/kcsapi/api_req_member/updatedeckname",
 		"/kcsapi/api_req_member/updatecomment",
+		"/kcsapi/api_req_sortie/battle",
+		"/kcsapi/api_req_sortie/battleresult",
 	};
 #>
 // 

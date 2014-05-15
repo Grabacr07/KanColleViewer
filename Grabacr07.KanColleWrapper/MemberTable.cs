@@ -33,6 +33,23 @@ namespace Grabacr07.KanColleWrapper
 			this.dictionary = source.ToDictionary(x => x.Id);
 		}
 
+
+		internal void Add(TValue value)
+		{
+			this.dictionary.Add(value.Id, value);
+		}
+
+		internal void Remove(TValue value)
+		{
+			this.dictionary.Remove(value.Id);
+		}
+
+		internal void Remove(int id)
+		{
+			this.dictionary.Remove(id);
+		}
+
+
 		#region IReadOnlyDictionary<TK, TV> members
 
 		public IEnumerator<KeyValuePair<int, TValue>> GetEnumerator()

@@ -69,7 +69,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			// あとでちゃんと書き直す
 
 			var ships = KanColleClient.Current.Homeport.Organization.Ships;
-			var items = KanColleClient.Current.Homeport.SlotItems;
+			var items = KanColleClient.Current.Homeport.Itemyard.SlotItems;
 			var master = KanColleClient.Current.Master.SlotItems;
 
 			return Task.Factory.StartNew(() =>

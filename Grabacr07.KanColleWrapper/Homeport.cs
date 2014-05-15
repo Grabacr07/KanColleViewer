@@ -29,6 +29,11 @@ namespace Grabacr07.KanColleWrapper
 		public Materials Materials { get; private set; }
 
 		/// <summary>
+		/// 装備や消費アイテムの保有状況にアクセスできるようにします。
+		/// </summary>
+		public Itemyard Itemyard { get; private set; }
+
+		/// <summary>
 		/// 複数の建造ドックを持つ工廠を取得します。
 		/// </summary>
 		public Dockyard Dockyard { get; private set; }
@@ -71,59 +76,12 @@ namespace Grabacr07.KanColleWrapper
 
 		#endregion
 
-		#region SlotItems 変更通知プロパティ
-
-		private MemberTable<SlotItem> _SlotItems;
-
-		/// <summary>
-		/// 艦隊司令部が保有しているすべての装備を取得します。
-		/// <see cref="INotifyPropertyChanged.PropertyChanged"/> イベントによる変更通知をサポートします。
-		/// </summary>
-		public MemberTable<SlotItem> SlotItems
-		{
-			get { return this._SlotItems; }
-			set
-			{
-				if (this._SlotItems != value)
-				{
-					this._SlotItems = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region UseItems 変更通知プロパティ
-
-		private MemberTable<UseItem> _UseItems;
-
-		/// <summary>
-		/// 母港が所有するすべての消費アイテムを取得します。
-		/// <see cref="INotifyPropertyChanged.PropertyChanged"/> イベントによる変更通知をサポートします。
-		/// </summary>
-		public MemberTable<UseItem> UseItems
-		{
-			get { return this._UseItems; }
-			set
-			{
-				if (this._UseItems != value)
-				{
-					this._UseItems = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
 
 
 		internal Homeport(KanColleProxy proxy)
 		{
-			this.SlotItems = new MemberTable<SlotItem>();
-			this.UseItems = new MemberTable<UseItem>();
-
 			this.Materials = new Materials(proxy);
+			this.Itemyard = new Itemyard(proxy);
 			this.Organization = new Organization(this, proxy);
 			this.Repairyard = new Repairyard(this, proxy);
 			this.Dockyard = new Dockyard(proxy);
@@ -138,8 +96,6 @@ namespace Grabacr07.KanColleWrapper
 				this.Materials.Update(x.Data.api_material);
 			});
 			proxy.api_get_member_basic.TryParse<kcsapi_basic>().Subscribe(x => this.UpdateAdmiral(x.Data));
-			proxy.api_get_member_slot_item.TryParse<kcsapi_slotitem[]>().Subscribe(x => this.UpdateSlotItems(x.Data));
-			proxy.api_get_member_useitem.TryParse<kcsapi_useitem[]>().Subscribe(x => this.UpdateUseItems(x.Data));
 			proxy.api_req_member_updatecomment.TryParse().Subscribe(this.UpdateComment);
 		}
 
@@ -147,16 +103,6 @@ namespace Grabacr07.KanColleWrapper
 		internal void UpdateAdmiral(kcsapi_basic data)
 		{
 			this.Admiral = new Admiral(data);
-		}
-
-		internal void UpdateSlotItems(kcsapi_slotitem[] source)
-		{
-			this.SlotItems = new MemberTable<SlotItem>(source.Select(x => new SlotItem(x)));
-		}
-
-		internal void UpdateUseItems(kcsapi_useitem[] source)
-		{
-			this.UseItems = new MemberTable<UseItem>(source.Select(x => new UseItem(x)));
 		}
 
 		private void UpdateComment(SvData data)
