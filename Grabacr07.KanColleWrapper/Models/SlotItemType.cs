@@ -134,5 +134,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// ドラム缶。
 		/// </summary>
 		DrumCanister = 25,
+
+		/// <summary>
+		/// 施設。
+		/// </summary>
+		Facility = 26,
 	}
 }
