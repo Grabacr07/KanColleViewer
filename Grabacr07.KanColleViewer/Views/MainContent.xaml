@@ -23,6 +23,7 @@
 			 xmlns:dev="clr-namespace:Grabacr07.KanColleViewer.Views.Dev"
 			 mc:Ignorable="d"
 			 d:DesignWidth="800"
+			 d:DesignHeight="400"
 			 d:DataContext="{d:DesignInstance vm:MainContentViewModel}"
 			 Background="{DynamicResource ThemeBrushKey}">
 
@@ -121,11 +122,9 @@
 			</ScrollViewer>
 
 			<ScrollViewer Grid.Column="1"
-						  VerticalScrollBarVisibility="Auto"
-						  VerticalAlignment="Top">
+						  VerticalScrollBarVisibility="Auto">
 				<ContentControl DataContext="{Binding SelectedItem}"
-								Content="{Binding}"
-								MinHeight="{Binding Source={x:Static properties:Settings.Default}, Path=UIContentHight}">
+								Content="{Binding}">
 					<ContentControl.Resources>
 						<DataTemplate DataType="{x:Type vmContents:OverviewViewModel}">
 							<contents:Overview />
@@ -144,6 +143,9 @@
 						</DataTemplate>
 						<DataTemplate DataType="{x:Type vmContents:ExpeditionsViewModel}">
 							<contents:Expeditions />
+						</DataTemplate>
+						<DataTemplate DataType="{x:Type vm:ToolsViewModel}">
+							<contents:Tools />
 						</DataTemplate>
 						<DataTemplate DataType="{x:Type vm:SettingsViewModel}">
 							<settings:Settings />

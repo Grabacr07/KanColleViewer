@@ -71,6 +71,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				this.Dockyard,
 				this.Quests,
 				this.Expeditions,
+				new ToolsViewModel(),
 			};
 			this.SystemTabItems = new List<TabItemViewModel>
 			{

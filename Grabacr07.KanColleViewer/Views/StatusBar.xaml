@@ -71,6 +71,7 @@
 				<DataTemplate DataType="{x:Type vmDocks:DockyardViewModel}" />
 				<DataTemplate DataType="{x:Type vmContents:QuestsViewModel}" />
 				<DataTemplate DataType="{x:Type vmContents:ExpeditionsViewModel}" />
+				<DataTemplate DataType="{x:Type vm:ToolsViewModel}" />
 				<DataTemplate DataType="{x:Type vm:SettingsViewModel}" />
 				<DataTemplate DataType="{x:Type dev:DebugTabViewModel}" />
 			</ContentControl.Resources>
