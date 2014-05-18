@@ -119,42 +119,40 @@
 								   Margin="0,0,0,20" />
 				</Grid>
 			</ScrollViewer>
-
-			<ScrollViewer Grid.Column="1"
-						  VerticalScrollBarVisibility="Auto">
-				<ContentControl DataContext="{Binding SelectedItem}"
-								Content="{Binding}">
-					<ContentControl.Resources>
-						<DataTemplate DataType="{x:Type vmContents:OverviewViewModel}">
-							<contents:Overview />
-						</DataTemplate>
-						<DataTemplate DataType="{x:Type vmFleets:FleetsViewModel}">
-							<contents:Fleets />
-						</DataTemplate>
-						<DataTemplate DataType="{x:Type vmDocks:RepairyardViewModel}">
-							<contents:Repairyard />
-						</DataTemplate>
-						<DataTemplate DataType="{x:Type vmDocks:DockyardViewModel}">
-							<contents:Dockyard />
-						</DataTemplate>
-						<DataTemplate DataType="{x:Type vmContents:QuestsViewModel}">
-							<contents:Quests />
-						</DataTemplate>
-						<DataTemplate DataType="{x:Type vmContents:ExpeditionsViewModel}">
-							<contents:Expeditions />
-						</DataTemplate>
-						<DataTemplate DataType="{x:Type vmContents:ToolsViewModel}">
-							<contents:Tools />
-						</DataTemplate>
-						<DataTemplate DataType="{x:Type vm:SettingsViewModel}">
-							<settings:Settings />
-						</DataTemplate>
-						<DataTemplate DataType="{x:Type devVm:DebugTabViewModel}">
-							<dev:DebugTab />
-						</DataTemplate>
-					</ContentControl.Resources>
-				</ContentControl>
-			</ScrollViewer>
+			
+			<ContentControl Grid.Column="1"
+							DataContext="{Binding SelectedItem}"
+							Content="{Binding}">
+				<ContentControl.Resources>
+					<DataTemplate DataType="{x:Type vmContents:OverviewViewModel}">
+						<contents:Overview />
+					</DataTemplate>
+					<DataTemplate DataType="{x:Type vmFleets:FleetsViewModel}">
+						<contents:Fleets />
+					</DataTemplate>
+					<DataTemplate DataType="{x:Type vmDocks:RepairyardViewModel}">
+						<contents:Repairyard />
+					</DataTemplate>
+					<DataTemplate DataType="{x:Type vmDocks:DockyardViewModel}">
+						<contents:Dockyard />
+					</DataTemplate>
+					<DataTemplate DataType="{x:Type vmContents:QuestsViewModel}">
+						<contents:Quests />
+					</DataTemplate>
+					<DataTemplate DataType="{x:Type vmContents:ExpeditionsViewModel}">
+						<contents:Expeditions />
+					</DataTemplate>
+					<DataTemplate DataType="{x:Type vmContents:ToolsViewModel}">
+						<contents:Tools />
+					</DataTemplate>
+					<DataTemplate DataType="{x:Type vm:SettingsViewModel}">
+						<settings:Settings />
+					</DataTemplate>
+					<DataTemplate DataType="{x:Type devVm:DebugTabViewModel}">
+						<dev:DebugTab />
+					</DataTemplate>
+				</ContentControl.Resources>
+			</ContentControl>
 		</Grid>
 	</Grid>
 </UserControl>

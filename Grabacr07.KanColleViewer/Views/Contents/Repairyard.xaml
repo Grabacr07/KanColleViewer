@@ -18,180 +18,183 @@
 			 d:DesignWidth="700"
 			 d:DesignHeight="300"
 			 d:DataContext="{d:DesignInstance docks1:RepairyardViewModel}">
-	<Grid VerticalAlignment="Top">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="Auto" />
-			<ColumnDefinition Width="Auto" />
-		</Grid.ColumnDefinitions>
 
-		<ItemsControl ItemsSource="{Binding Docks}"
-					  Margin="5,0"
-					  d:DataContext="{d:DesignData /SampleData/RepairyardViewModelSampleData.xaml}"
-					  Grid.IsSharedSizeScope="True">
-			<ItemsControl.ItemTemplate>
-				<DataTemplate>
-					<Border Margin="5,0,5,10"
-							BorderThickness="1"
-							BorderBrush="{DynamicResource ActiveBorderBrushKey}"
-							Padding="5,8">
-						<Grid x:Name="Root">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto"
-												  SharedSizeGroup="Number" />
-								<ColumnDefinition Width="Auto"
-												  SharedSizeGroup="ShipName" />
-								<ColumnDefinition Width="Auto"
-												  SharedSizeGroup="CompleteTime" />
-								<ColumnDefinition Width="Auto"
-												  SharedSizeGroup="RemainingTime" />
-							</Grid.ColumnDefinitions>
+	<ScrollViewer VerticalScrollBarVisibility="Auto">
+		<Grid VerticalAlignment="Top">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
 
-							<TextBlock Text="{Binding Id, Mode=OneWay}"
-									   FontFamily="Segoe UI"
-									   FontSize="28"
-									   Foreground="{DynamicResource ActiveForegroundBrushKey}"
-									   VerticalAlignment="Center"
-									   HorizontalAlignment="Center"
-									   Margin="10,0" />
+			<ItemsControl ItemsSource="{Binding Docks}"
+						  Margin="5,0"
+						  d:DataContext="{d:DesignData /SampleData/RepairyardViewModelSampleData.xaml}"
+						  Grid.IsSharedSizeScope="True">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<Border Margin="5,0,5,10"
+								BorderThickness="1"
+								BorderBrush="{DynamicResource ActiveBorderBrushKey}"
+								Padding="5,8">
+							<Grid x:Name="Root">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto"
+													  SharedSizeGroup="Number" />
+									<ColumnDefinition Width="Auto"
+													  SharedSizeGroup="ShipName" />
+									<ColumnDefinition Width="Auto"
+													  SharedSizeGroup="CompleteTime" />
+									<ColumnDefinition Width="Auto"
+													  SharedSizeGroup="RemainingTime" />
+								</Grid.ColumnDefinitions>
 
-							<TextBlock x:Name="ShipName"
-									   Grid.Column="1"
-									   VerticalAlignment="Center"
-									   Margin="10,0">
+								<TextBlock Text="{Binding Id, Mode=OneWay}"
+										   FontFamily="Segoe UI"
+										   FontSize="28"
+										   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+										   VerticalAlignment="Center"
+										   HorizontalAlignment="Center"
+										   Margin="10,0" />
+
+								<TextBlock x:Name="ShipName"
+										   Grid.Column="1"
+										   VerticalAlignment="Center"
+										   Margin="10,0">
 								<Run Text="{Binding Resources.Repairyard_ShipName, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 FontSize="14" />
 								<LineBreak />
 								<Run Text="{Binding Ship, Mode=OneWay}"
 									 FontSize="18"
 									 Style="{DynamicResource PickupTextElementStyleKey}" />
-							</TextBlock>
-							<TextBlock x:Name="CompleteTime"
-									   Grid.Column="2"
-									   VerticalAlignment="Center"
-									   Margin="10,0">
+								</TextBlock>
+								<TextBlock x:Name="CompleteTime"
+										   Grid.Column="2"
+										   VerticalAlignment="Center"
+										   Margin="10,0">
 								<Run Text="{Binding Resources.Repairyard_TimeComplete, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 FontSize="14" />
 								<LineBreak />
 								<Run Text="{Binding CompleteTime, Mode=OneWay}"
 									 FontSize="18"
 									 Style="{DynamicResource PickupTextElementStyleKey}" />
-							</TextBlock>
-							<TextBlock x:Name="RemainingTime"
-									   Grid.Column="3"
-									   VerticalAlignment="Center"
-									   Margin="10,0">
+								</TextBlock>
+								<TextBlock x:Name="RemainingTime"
+										   Grid.Column="3"
+										   VerticalAlignment="Center"
+										   Margin="10,0">
 								<Run Text="{Binding Resources.Repairyard_TimeRemaining, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 FontSize="14" />
 								<LineBreak />
 								<Run Text="{Binding Remaining, Mode=OneWay}"
 									 FontSize="18"
 									 Style="{DynamicResource PickupTextElementStyleKey}" />
-							</TextBlock>
+								</TextBlock>
 
-							<TextBlock x:Name="UnlockedMessage"
-									   Grid.Column="1"
-									   Grid.ColumnSpan="3"
-									   HorizontalAlignment="Center"
-									   VerticalAlignment="Center"
-									   Margin="30,0"
-									   Visibility="Collapsed">
+								<TextBlock x:Name="UnlockedMessage"
+										   Grid.Column="1"
+										   Grid.ColumnSpan="3"
+										   HorizontalAlignment="Center"
+										   VerticalAlignment="Center"
+										   Margin="30,0"
+										   Visibility="Collapsed">
 								<Run Text="{Binding Resources.Reparyard_Unused, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 FontSize="18" />
-							</TextBlock>
-							<TextBlock x:Name="LockedMessage"
-									   Grid.Column="1"
-									   Grid.ColumnSpan="3"
-									   HorizontalAlignment="Center"
-									   VerticalAlignment="Center"
-									   Margin="30,0"
-									   Visibility="Collapsed">
+								</TextBlock>
+								<TextBlock x:Name="LockedMessage"
+										   Grid.Column="1"
+										   Grid.ColumnSpan="3"
+										   HorizontalAlignment="Center"
+										   VerticalAlignment="Center"
+										   Margin="30,0"
+										   Visibility="Collapsed">
 								<Run Text="{Binding Resources.Repairyard_Locked, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 FontSize="18" />
-							</TextBlock>
-						</Grid>
-					</Border>
-					<DataTemplate.Triggers>
-						<DataTrigger Binding="{Binding State, Mode=OneWay}"
-									 Value="Locked">
-							<Setter TargetName="Root"
-									Property="Opacity"
-									Value="0.5" />
-							<Setter TargetName="ShipName"
-									Property="Visibility"
-									Value="Collapsed" />
-							<Setter TargetName="CompleteTime"
-									Property="Visibility"
-									Value="Collapsed" />
-							<Setter TargetName="RemainingTime"
-									Property="Visibility"
-									Value="Collapsed" />
-							<Setter TargetName="LockedMessage"
-									Property="Visibility"
-									Value="Visible" />
-						</DataTrigger>
-						<DataTrigger Binding="{Binding State, Mode=OneWay}"
-									 Value="Unlocked">
-							<Setter TargetName="ShipName"
-									Property="Visibility"
-									Value="Collapsed" />
-							<Setter TargetName="CompleteTime"
-									Property="Visibility"
-									Value="Collapsed" />
-							<Setter TargetName="RemainingTime"
-									Property="Visibility"
-									Value="Collapsed" />
-							<Setter TargetName="UnlockedMessage"
-									Property="Visibility"
-									Value="Visible" />
-						</DataTrigger>
-					</DataTemplate.Triggers>
-				</DataTemplate>
-			</ItemsControl.ItemTemplate>
-		</ItemsControl>
+								</TextBlock>
+							</Grid>
+						</Border>
+						<DataTemplate.Triggers>
+							<DataTrigger Binding="{Binding State, Mode=OneWay}"
+										 Value="Locked">
+								<Setter TargetName="Root"
+										Property="Opacity"
+										Value="0.5" />
+								<Setter TargetName="ShipName"
+										Property="Visibility"
+										Value="Collapsed" />
+								<Setter TargetName="CompleteTime"
+										Property="Visibility"
+										Value="Collapsed" />
+								<Setter TargetName="RemainingTime"
+										Property="Visibility"
+										Value="Collapsed" />
+								<Setter TargetName="LockedMessage"
+										Property="Visibility"
+										Value="Visible" />
+							</DataTrigger>
+							<DataTrigger Binding="{Binding State, Mode=OneWay}"
+										 Value="Unlocked">
+								<Setter TargetName="ShipName"
+										Property="Visibility"
+										Value="Collapsed" />
+								<Setter TargetName="CompleteTime"
+										Property="Visibility"
+										Value="Collapsed" />
+								<Setter TargetName="RemainingTime"
+										Property="Visibility"
+										Value="Collapsed" />
+								<Setter TargetName="UnlockedMessage"
+										Property="Visibility"
+										Value="Visible" />
+							</DataTrigger>
+						</DataTemplate.Triggers>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
 
 
-		<!--<Rectangle Grid.Column="1"
+			<!--<Rectangle Grid.Column="1"
 				   Width="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}"
 				   Margin="0,0,0,10" />-->
 
-		<StackPanel Grid.Column="2"
-					Orientation="Vertical"
-					VerticalAlignment="Bottom">
-			<StackPanel Margin="10,10,10,4">
-				<StackPanel.Style>
-					<Style TargetType="{x:Type StackPanel}">
-						<Style.Triggers>
-							<Trigger Property="IsEnabled"
-									 Value="False">
-								<Setter Property="Opacity"
-										Value="0.5" />
-							</Trigger>
-						</Style.Triggers>
-					</Style>
-				</StackPanel.Style>
-				<TextBlock Margin="5">
+			<StackPanel Grid.Column="2"
+						Orientation="Vertical"
+						VerticalAlignment="Bottom">
+				<StackPanel Margin="10,10,10,4">
+					<StackPanel.Style>
+						<Style TargetType="{x:Type StackPanel}">
+							<Style.Triggers>
+								<Trigger Property="IsEnabled"
+										 Value="False">
+									<Setter Property="Opacity"
+											Value="0.5" />
+								</Trigger>
+							</Style.Triggers>
+						</Style>
+					</StackPanel.Style>
+					<TextBlock Margin="5">
 					<Run Text="{Binding Resources.Common_Notifications_Title, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 						 Style="{DynamicResource PickupTextElementStyleKey}" />
-				</TextBlock>
-				<RadioButton Margin="8,5"
-							 IsChecked="{Binding IsNotifyCompleted}">
-					<TextBlock Text="{Binding Resources.Repairyard_Notifications_Enable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-				</RadioButton>
-				<RadioButton Margin="8,5"
-							 IsEnabled="False">
-					<TextBlock>
+					</TextBlock>
+					<RadioButton Margin="8,5"
+								 IsChecked="{Binding IsNotifyCompleted}">
+						<TextBlock Text="{Binding Resources.Repairyard_Notifications_Enable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+					</RadioButton>
+					<RadioButton Margin="8,5"
+								 IsEnabled="False">
+						<TextBlock>
 						<Run Text="{Binding Resources.Repairyard_Notifications_Individual, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 							 TextDecorations="Strikethrough" />
 						<Run Text="{Binding Resources.Common_Notifications_NotImplemented, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-					</TextBlock>
-				</RadioButton>
-				<RadioButton Margin="8,5"
-							 IsChecked="True">
-					<TextBlock Text="{Binding Resources.Common_Notifications_Disable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-				</RadioButton>
+						</TextBlock>
+					</RadioButton>
+					<RadioButton Margin="8,5"
+								 IsChecked="True">
+						<TextBlock Text="{Binding Resources.Common_Notifications_Disable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+					</RadioButton>
+				</StackPanel>
 			</StackPanel>
-		</StackPanel>
-	</Grid>
+		</Grid>
+	</ScrollViewer>
 </UserControl>

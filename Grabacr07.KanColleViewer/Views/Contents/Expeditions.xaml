@@ -19,144 +19,146 @@
 			 d:DesignHeight="300"
 			 d:DataContext="{d:DesignInstance vmContents:ExpeditionsViewModel}">
 
-	<Grid DataContext="{Binding Fleets}"
-		  VerticalAlignment="Top">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="Auto" />
-			<ColumnDefinition Width="Auto" />
-		</Grid.ColumnDefinitions>
+	<ScrollViewer VerticalScrollBarVisibility="Auto">
+		<Grid DataContext="{Binding Fleets}"
+			  VerticalAlignment="Top">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
 
-		<ItemsControl ItemsSource="{Binding Fleets}"
-					  Margin="5,0"
-					  Grid.IsSharedSizeScope="True"
-					  d:DataContext="{d:DesignData /SampleData/FleetsViewModelSampleData.xaml}">
-			<ItemsControl.ItemTemplate>
-				<DataTemplate>
-					<Border x:Name="Root"
-							Margin="5,0,5,10"
-							BorderThickness="1"
-							BorderBrush="{DynamicResource ActiveBorderBrushKey}"
-							Padding="10,8">
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="*"
-												  SharedSizeGroup="FleetName" />
-								<ColumnDefinition Width="Auto"
-												  SharedSizeGroup="CompleteTime" />
-								<ColumnDefinition Width="Auto"
-												  SharedSizeGroup="RemainingTime" />
-							</Grid.ColumnDefinitions>
+			<ItemsControl ItemsSource="{Binding Fleets}"
+						  Margin="5,0"
+						  Grid.IsSharedSizeScope="True"
+						  d:DataContext="{d:DesignData /SampleData/FleetsViewModelSampleData.xaml}">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<Border x:Name="Root"
+								Margin="5,0,5,10"
+								BorderThickness="1"
+								BorderBrush="{DynamicResource ActiveBorderBrushKey}"
+								Padding="10,8">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*"
+													  SharedSizeGroup="FleetName" />
+									<ColumnDefinition Width="Auto"
+													  SharedSizeGroup="CompleteTime" />
+									<ColumnDefinition Width="Auto"
+													  SharedSizeGroup="RemainingTime" />
+								</Grid.ColumnDefinitions>
 
-							<TextBlock>
+								<TextBlock>
 								<Run Text="{Binding Id, StringFormat=/{0}, Mode=OneWay}"
 									 FontSize="18" />
 								<LineBreak />
 								<Run Text="{Binding Name, Mode=OneWay}"
 									 FontSize="14"
 									 Style="{DynamicResource PickupTextElementStyleKey}" />
-							</TextBlock>
+								</TextBlock>
 
-							<TextBlock x:Name="ReturnTime"
-									   Grid.Column="1"
-									   VerticalAlignment="Center"
-									   Margin="10,0">
+								<TextBlock x:Name="ReturnTime"
+										   Grid.Column="1"
+										   VerticalAlignment="Center"
+										   Margin="10,0">
 								<Run Text="{Binding Resources.Expedition_TimeComplete, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 FontSize="14" />
 								<LineBreak />
 								<Run Text="{Binding Expedition.ReturnTime, Mode=OneWay}"
 									 FontSize="18"
 									 Style="{DynamicResource PickupTextElementStyleKey}" />
-							</TextBlock>
-							<TextBlock x:Name="RemainingTime"
-									   Grid.Column="2"
-									   VerticalAlignment="Center"
-									   Margin="10,0">
+								</TextBlock>
+								<TextBlock x:Name="RemainingTime"
+										   Grid.Column="2"
+										   VerticalAlignment="Center"
+										   Margin="10,0">
 								<Run Text="{Binding Resources.Expedition_TimeRemaining, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 FontSize="14" />
 								<LineBreak />
 								<Run Text="{Binding Expedition.Remaining, Mode=OneWay}"
 									 FontSize="18"
 									 Style="{DynamicResource PickupTextElementStyleKey}" />
-							</TextBlock>
-							<TextBlock x:Name="NotExecutionMessage"
-									   Grid.Column="1"
-									   Grid.ColumnSpan="2"
-									   HorizontalAlignment="Center"
-									   VerticalAlignment="Center"
-									   Margin="30,0"
-									   Visibility="Collapsed">
+								</TextBlock>
+								<TextBlock x:Name="NotExecutionMessage"
+										   Grid.Column="1"
+										   Grid.ColumnSpan="2"
+										   HorizontalAlignment="Center"
+										   VerticalAlignment="Center"
+										   Margin="30,0"
+										   Visibility="Collapsed">
 								<Run Text="{Binding Resources.Expedition_NoExpedition, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 FontSize="18" />
-							</TextBlock>
-						</Grid>
-					</Border>
-					<DataTemplate.Triggers>
-						<DataTrigger Binding="{Binding Id, Mode=OneWay}"
-									 Value="1">
-							<Setter TargetName="Root"
-									Property="Visibility"
-									Value="Collapsed" />
-						</DataTrigger>
-						<DataTrigger Binding="{Binding Expedition.IsInExecution, Mode=OneWay}"
-									 Value="False">
-							<Setter TargetName="ReturnTime"
-									Property="Visibility"
-									Value="Collapsed" />
-							<Setter TargetName="RemainingTime"
-									Property="Visibility"
-									Value="Collapsed" />
-							<Setter TargetName="NotExecutionMessage"
-									Property="Visibility"
-									Value="Visible" />
-						</DataTrigger>
-					</DataTemplate.Triggers>
-				</DataTemplate>
-			</ItemsControl.ItemTemplate>
-		</ItemsControl>
+								</TextBlock>
+							</Grid>
+						</Border>
+						<DataTemplate.Triggers>
+							<DataTrigger Binding="{Binding Id, Mode=OneWay}"
+										 Value="1">
+								<Setter TargetName="Root"
+										Property="Visibility"
+										Value="Collapsed" />
+							</DataTrigger>
+							<DataTrigger Binding="{Binding Expedition.IsInExecution, Mode=OneWay}"
+										 Value="False">
+								<Setter TargetName="ReturnTime"
+										Property="Visibility"
+										Value="Collapsed" />
+								<Setter TargetName="RemainingTime"
+										Property="Visibility"
+										Value="Collapsed" />
+								<Setter TargetName="NotExecutionMessage"
+										Property="Visibility"
+										Value="Visible" />
+							</DataTrigger>
+						</DataTemplate.Triggers>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
 
-		<!--<Rectangle Grid.Column="1"
+			<!--<Rectangle Grid.Column="1"
 				   Width="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}"
 				   Margin="0,0,0,10" />-->
 
-		<StackPanel Grid.Column="2"
-					Orientation="Vertical"
-					VerticalAlignment="Bottom">
-			<StackPanel Margin="10,10,10,4">
-				<StackPanel.Style>
-					<Style TargetType="{x:Type StackPanel}">
-						<Style.Triggers>
-							<Trigger Property="IsEnabled"
-									 Value="False">
-								<Setter Property="Opacity"
-										Value="0.5" />
-							</Trigger>
-						</Style.Triggers>
-					</Style>
-				</StackPanel.Style>
-				<TextBlock Margin="5">
+			<StackPanel Grid.Column="2"
+						Orientation="Vertical"
+						VerticalAlignment="Bottom">
+				<StackPanel Margin="10,10,10,4">
+					<StackPanel.Style>
+						<Style TargetType="{x:Type StackPanel}">
+							<Style.Triggers>
+								<Trigger Property="IsEnabled"
+										 Value="False">
+									<Setter Property="Opacity"
+											Value="0.5" />
+								</Trigger>
+							</Style.Triggers>
+						</Style>
+					</StackPanel.Style>
+					<TextBlock Margin="5">
 					<Run Text="{Binding Resources.Common_Notifications_Title, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 						 Style="{DynamicResource PickupTextElementStyleKey}" />
-				</TextBlock>
-				<RadioButton Margin="8,5"
-							 IsChecked="{Binding IsNotifyReturned}">
-					<TextBlock Text="{Binding Resources.Expedition_Notifications_Enable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-				</RadioButton>
-				<RadioButton Margin="8,5"
-							 IsEnabled="False">
-					<TextBlock>
+					</TextBlock>
+					<RadioButton Margin="8,5"
+								 IsChecked="{Binding IsNotifyReturned}">
+						<TextBlock Text="{Binding Resources.Expedition_Notifications_Enable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+					</RadioButton>
+					<RadioButton Margin="8,5"
+								 IsEnabled="False">
+						<TextBlock>
 						<Run Text="{Binding Resources.Expedition_Notifications_Individual, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 							 TextDecorations="Strikethrough" />
 						<Run Text="{Binding Resources.Common_Notifications_NotImplemented, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-					</TextBlock>
-				</RadioButton>
-				<RadioButton Margin="8,5"
-							 IsChecked="True">
-					<TextBlock Text="{Binding Resources.Common_Notifications_Disable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-				</RadioButton>
+						</TextBlock>
+					</RadioButton>
+					<RadioButton Margin="8,5"
+								 IsChecked="True">
+						<TextBlock Text="{Binding Resources.Common_Notifications_Disable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+					</RadioButton>
+				</StackPanel>
 			</StackPanel>
-		</StackPanel>
-	</Grid>
+		</Grid>
+	</ScrollViewer>
 </UserControl>
 	

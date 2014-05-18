@@ -16,177 +16,179 @@
 			 d:DesignHeight="300"
 			 d:DataContext="{d:DesignInstance vmContents:QuestsViewModel}"
 			 Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}, Path=ActualWidth}">
-	<Grid>
-		<Grid Visibility="{Binding IsUntaken, Converter={StaticResource UniversalBooleanToVisibilityConverter}, ConverterParameter=Collapsed:Visible}">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="5*" />
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="4*" />
-			</Grid.ColumnDefinitions>
-			<Grid.RowDefinitions>
-				<RowDefinition />
-				<RowDefinition Height="Auto" />
-			</Grid.RowDefinitions>
-
-			<Grid>
+	<ScrollViewer VerticalScrollBarVisibility="Auto">
+		<Grid>
+			<Grid Visibility="{Binding IsUntaken, Converter={StaticResource UniversalBooleanToVisibilityConverter}, ConverterParameter=Collapsed:Visible}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="5*" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="4*" />
+				</Grid.ColumnDefinitions>
 				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto" />
-					<RowDefinition Height="*" />
+					<RowDefinition />
 					<RowDefinition Height="Auto" />
 				</Grid.RowDefinitions>
 
-				<TextBlock Text="{Binding Resources.Quests_CurrentQuestList, Source={x:Static models:ResourceService.Current}}"
-						   Margin="10,0,10,10"
-						   FontSize="14" />
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="*" />
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
 
-				<ItemsControl Grid.Row="1"
-							  ItemsSource="{Binding Current}"
-							  Margin="10,0">
-					<ItemsControl.ItemTemplate>
-						<DataTemplate>
-							<controls:Quest IsUntaken="{Binding IsUntaken}"
-											Title="{Binding Title}"
-											Detail="{Binding Detail}"
-											Category="{Binding Category}"
-											Progress="{Binding Progress}"
-											State="{Binding State}"
-											IsDetailView="True"
-											Margin="0,0,0,12" />
-						</DataTemplate>
-					</ItemsControl.ItemTemplate>
-				</ItemsControl>
+					<TextBlock Text="{Binding Resources.Quests_CurrentQuestList, Source={x:Static models:ResourceService.Current}}"
+							   Margin="10,0,10,10"
+							   FontSize="14" />
+
+					<ItemsControl Grid.Row="1"
+								  ItemsSource="{Binding Current}"
+								  Margin="10,0">
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<controls:Quest IsUntaken="{Binding IsUntaken}"
+												Title="{Binding Title}"
+												Detail="{Binding Detail}"
+												Category="{Binding Category}"
+												Progress="{Binding Progress}"
+												State="{Binding State}"
+												IsDetailView="True"
+												Margin="0,0,0,12" />
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
+
+					<TextBlock Grid.Row="1"
+							   Text="発生中の任務はありません"
+							   HorizontalAlignment="Center"
+							   Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}"
+							   Margin="10" />
+				</Grid>
+
+				<Rectangle Grid.Row="0"
+						   Grid.Column="1"
+						   Width="1"
+						   Margin="0,3"
+						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+				<TabControl Grid.Row="0"
+							Grid.Column="2">
+					<TabControl.Template>
+						<ControlTemplate TargetType="{x:Type TabControl}">
+							<Grid>
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="*" />
+								</Grid.RowDefinitions>
+								<WrapPanel IsItemsHost="True" />
+								<ContentPresenter x:Name="PART_SelectedContentHost"
+												  Grid.Row="1"
+												  ContentSource="SelectedContent" />
+							</Grid>
+						</ControlTemplate>
+					</TabControl.Template>
+					<TabControl.Resources>
+						<Style TargetType="{x:Type TabItem}">
+							<Setter Property="OverridesDefaultStyle"
+									Value="True" />
+							<Setter Property="Foreground"
+									Value="{DynamicResource InactiveForegroundBrushKey}" />
+							<Setter Property="Template">
+								<Setter.Value>
+									<ControlTemplate TargetType="{x:Type TabItem}">
+										<Border x:Name="Border"
+												Background="Transparent">
+											<ContentPresenter x:Name="ContentSite"
+															  ContentSource="Header" />
+										</Border>
+										<ControlTemplate.Triggers>
+											<Trigger Property="IsSelected"
+													 Value="True">
+												<Setter Property="Foreground"
+														Value="{DynamicResource ForegroundBrushKey}" />
+											</Trigger>
+											<Trigger SourceName="Border"
+													 Property="IsMouseOver"
+													 Value="True">
+												<Setter Property="Foreground"
+														Value="{DynamicResource AccentHighlightBrushKey}" />
+											</Trigger>
+										</ControlTemplate.Triggers>
+									</ControlTemplate>
+								</Setter.Value>
+							</Setter>
+						</Style>
+
+						<Style TargetType="{x:Type ItemsControl}">
+							<Setter Property="Margin"
+									Value="10,0,10,5" />
+							<Setter Property="ItemTemplate">
+								<Setter.Value>
+									<DataTemplate DataType="{x:Type vmContents:QuestViewModel}">
+										<ToggleButton>
+											<ToggleButton.Template>
+												<ControlTemplate TargetType="{x:Type ToggleButton}">
+													<controls:Quest IsUntaken="{Binding IsUntaken}"
+																	Title="{Binding Title}"
+																	Detail="{Binding Detail}"
+																	Category="{Binding Category}"
+																	Progress="{Binding Progress}"
+																	State="{Binding State}"
+																	IsDetailView="{TemplateBinding IsChecked}"
+																	Margin="0,0,0,10" />
+												</ControlTemplate>
+											</ToggleButton.Template>
+										</ToggleButton>
+									</DataTemplate>
+								</Setter.Value>
+							</Setter>
+						</Style>
+
+						<vContents:QuestViewSource x:Key="DailyQuestSourceKey"
+												   Source="{Binding Quests}"
+												   Type="Daily" />
+						<vContents:QuestViewSource x:Key="WeeklyQuestSourceKey"
+												   Source="{Binding Quests}"
+												   Type="Weekly" />
+					</TabControl.Resources>
+
+					<TabItem>
+						<TabItem.Header>
+							<TextBlock Text="{Binding Resources.Quests_Daily, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+									   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
+									   Margin="10,0,10,10"
+									   FontSize="14" />
+						</TabItem.Header>
+						<ItemsControl ItemsSource="{Binding Source={StaticResource DailyQuestSourceKey}}" />
+					</TabItem>
+
+					<TabItem>
+						<TabItem.Header>
+							<TextBlock Text="{Binding Resources.Quests_Weekly, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+									   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
+									   Margin="10,0,10,10"
+									   FontSize="14" />
+						</TabItem.Header>
+						<ItemsControl ItemsSource="{Binding Source={StaticResource WeeklyQuestSourceKey}}" />
+					</TabItem>
+				</TabControl>
 
 				<TextBlock Grid.Row="1"
-						   Text="発生中の任務はありません"
-						   HorizontalAlignment="Center"
-						   Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}"
+						   Grid.Column="0"
+						   Grid.ColumnSpan="3"
+						   Text="{Binding Resources.Quests_Notice, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+						   FontSize="10.5"
+						   TextTrimming="None"
+						   TextWrapping="Wrap"
 						   Margin="10" />
 			</Grid>
 
-			<Rectangle Grid.Row="0"
-					   Grid.Column="1"
-					   Width="1"
-					   Margin="0,3"
-					   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-
-			<TabControl Grid.Row="0"
-						Grid.Column="2">
-				<TabControl.Template>
-					<ControlTemplate TargetType="{x:Type TabControl}">
-						<Grid>
-							<Grid.RowDefinitions>
-								<RowDefinition Height="Auto" />
-								<RowDefinition Height="*" />
-							</Grid.RowDefinitions>
-							<WrapPanel IsItemsHost="True" />
-							<ContentPresenter x:Name="PART_SelectedContentHost"
-											  Grid.Row="1"
-											  ContentSource="SelectedContent" />
-						</Grid>
-					</ControlTemplate>
-				</TabControl.Template>
-				<TabControl.Resources>
-					<Style TargetType="{x:Type TabItem}">
-						<Setter Property="OverridesDefaultStyle"
-								Value="True" />
-						<Setter Property="Foreground"
-								Value="{DynamicResource InactiveForegroundBrushKey}" />
-						<Setter Property="Template">
-							<Setter.Value>
-								<ControlTemplate TargetType="{x:Type TabItem}">
-									<Border x:Name="Border"
-											Background="Transparent">
-										<ContentPresenter x:Name="ContentSite"
-														  ContentSource="Header" />
-									</Border>
-									<ControlTemplate.Triggers>
-										<Trigger Property="IsSelected"
-												 Value="True">
-											<Setter Property="Foreground"
-													Value="{DynamicResource ForegroundBrushKey}" />
-										</Trigger>
-										<Trigger SourceName="Border"
-												 Property="IsMouseOver"
-												 Value="True">
-											<Setter Property="Foreground"
-													Value="{DynamicResource AccentHighlightBrushKey}" />
-										</Trigger>
-									</ControlTemplate.Triggers>
-								</ControlTemplate>
-							</Setter.Value>
-						</Setter>
-					</Style>
-
-					<Style TargetType="{x:Type ItemsControl}">
-						<Setter Property="Margin"
-								Value="10,0,10,5" />
-						<Setter Property="ItemTemplate">
-							<Setter.Value>
-								<DataTemplate DataType="{x:Type vmContents:QuestViewModel}">
-									<ToggleButton>
-										<ToggleButton.Template>
-											<ControlTemplate TargetType="{x:Type ToggleButton}">
-												<controls:Quest IsUntaken="{Binding IsUntaken}"
-																Title="{Binding Title}"
-																Detail="{Binding Detail}"
-																Category="{Binding Category}"
-																Progress="{Binding Progress}"
-																State="{Binding State}"
-																IsDetailView="{TemplateBinding IsChecked}"
-																Margin="0,0,0,10" />
-											</ControlTemplate>
-										</ToggleButton.Template>
-									</ToggleButton>
-								</DataTemplate>
-							</Setter.Value>
-						</Setter>
-					</Style>
-
-					<vContents:QuestViewSource x:Key="DailyQuestSourceKey"
-											   Source="{Binding Quests}"
-											   Type="Daily" />
-					<vContents:QuestViewSource x:Key="WeeklyQuestSourceKey"
-											   Source="{Binding Quests}"
-											   Type="Weekly" />
-				</TabControl.Resources>
-
-				<TabItem>
-					<TabItem.Header>
-						<TextBlock Text="{Binding Resources.Quests_Daily, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-								   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
-								   Margin="10,0,10,10"
-								   FontSize="14" />
-					</TabItem.Header>
-					<ItemsControl ItemsSource="{Binding Source={StaticResource DailyQuestSourceKey}}" />
-				</TabItem>
-
-				<TabItem>
-					<TabItem.Header>
-						<TextBlock Text="{Binding Resources.Quests_Weekly, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-								   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
-								   Margin="10,0,10,10"
-								   FontSize="14" />
-					</TabItem.Header>
-					<ItemsControl ItemsSource="{Binding Source={StaticResource WeeklyQuestSourceKey}}" />
-				</TabItem>
-			</TabControl>
-
-			<TextBlock Grid.Row="1"
-					   Grid.Column="0"
-					   Grid.ColumnSpan="3"
-					   Text="{Binding Resources.Quests_Notice, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-					   FontSize="10.5"
-					   TextTrimming="None"
+			<TextBlock Grid.ColumnSpan="3"
+					   Text="{Binding Resources.Quests_Untaken, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					   TextWrapping="Wrap"
-					   Margin="10" />
+					   FontSize="16"
+					   Visibility="{Binding IsUntaken, Converter={StaticResource BooleanToVisibilityConverter}}"
+					   HorizontalAlignment="Center"
+					   Margin="20,40" />
 		</Grid>
-
-		<TextBlock Grid.ColumnSpan="3"
-				   Text="{Binding Resources.Quests_Untaken, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-				   TextWrapping="Wrap"
-				   FontSize="16"
-				   Visibility="{Binding IsUntaken, Converter={StaticResource BooleanToVisibilityConverter}}"
-				   HorizontalAlignment="Center"
-				   Margin="20,40" />
-	</Grid>
+	</ScrollViewer>
 </UserControl>
