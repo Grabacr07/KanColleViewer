@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Internal;
+using Grabacr07.KanColleWrapper.Models.Raw;
 using Livet;
 
 namespace Grabacr07.KanColleWrapper
@@ -53,6 +54,19 @@ namespace Grabacr07.KanColleWrapper
 			proxy.api_req_hokyu_charge
 				.TryParse()
 				.Where(x => x.IsSuccess)
+				.Subscribe(_ => this.Count++);
+		}
+	}
+
+
+	public class MissionCounter : CounterBase
+	{
+		public MissionCounter(KanColleProxy proxy)
+		{
+			proxy.api_req_mission_result
+				.TryParse<kcsapi_mission_result>()
+				.Where(x => x.IsSuccess)
+				.Where(x => x.Data.api_clear_result == 1)
 				.Subscribe(_ => this.Count++);
 		}
 	}

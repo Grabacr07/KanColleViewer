@@ -9,7 +9,7 @@
 			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:wrapper="clr-namespace:Grabacr07.KanColleWrapper;assembly=KanColleWrapper"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
-			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 mc:Ignorable="d"
 			 d:DesignWidth="700"
 			 d:DesignHeight="300"
@@ -72,11 +72,11 @@
 
 		<GroupBox Header="Counter"
 				  Margin="5,0">
-			<DockPanel>
-				<TextBlock DockPanel.Dock="Bottom"
-						   Text="※アプリケーションが起動している間に発生した回数のみをカウントしています。"
-						   TextWrapping="Wrap"
-						   Margin="8" />
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
 				<ItemsControl ItemsSource="{Binding Counters}">
 					<ItemsControl.Template>
 						<ControlTemplate TargetType="{x:Type ItemsControl}">
@@ -122,9 +122,31 @@
 								</DockPanel>
 							</Border>
 						</DataTemplate>
+						<DataTemplate DataType="{x:Type wrapper:MissionCounter}">
+							<Border Margin="4"
+									Padding="0,0,0,8"
+									BorderThickness="0,0,0,1"
+									BorderBrush="{DynamicResource BorderBrushKey}">
+								<DockPanel>
+									<metro2:CallMethodButton DockPanel.Dock="Right"
+															 Content="リセット"
+															 MethodName="Reset" />
+									<TextBlock>
+										<Run Text="遠征に成功した回数:" />
+										<Run Text="{Binding Count}"
+											 Style="{DynamicResource PickupTextElementStyleKey}" />
+									</TextBlock>
+								</DockPanel>
+							</Border>
+						</DataTemplate>
 					</ItemsControl.Resources>
 				</ItemsControl>
-			</DockPanel>
+
+				<TextBlock Grid.Row="1"
+						   Text="※アプリケーションが起動している間に発生した回数のみをカウントしています。"
+						   TextWrapping="Wrap"
+						   Margin="8" />
+			</Grid>
 		</GroupBox>
 
 		<GroupBox Grid.Column="1"

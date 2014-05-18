@@ -26,7 +26,6 @@
 			 d:DesignHeight="400"
 			 d:DataContext="{d:DesignInstance vm:MainContentViewModel}"
 			 Background="{DynamicResource ThemeBrushKey}">
-
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -144,7 +143,7 @@
 						<DataTemplate DataType="{x:Type vmContents:ExpeditionsViewModel}">
 							<contents:Expeditions />
 						</DataTemplate>
-						<DataTemplate DataType="{x:Type vm:ToolsViewModel}">
+						<DataTemplate DataType="{x:Type vmContents:ToolsViewModel}">
 							<contents:Tools />
 						</DataTemplate>
 						<DataTemplate DataType="{x:Type vm:SettingsViewModel}">

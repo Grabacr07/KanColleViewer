@@ -191,7 +191,7 @@
     <Compile Include="ViewModels\Contents\SlotItemsViewModel.cs" />
     <Compile Include="ViewModels\StatusBarViewModel.cs" />
     <Compile Include="ViewModels\TabItemViewModel.cs" />
-    <Compile Include="ViewModels\ToolsViewModel.cs" />
+    <Compile Include="ViewModels\Contents\ToolsViewModel.cs" />
     <Compile Include="ViewModels\VolumeViewModel.cs" />
     <Compile Include="Views\Behaviors\FlickFleetsAction.cs" />
     <Compile Include="Views\Behaviors\FlickTrigger.cs" />

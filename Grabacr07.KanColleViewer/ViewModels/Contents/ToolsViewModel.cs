@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleWrapper;
-using Livet;
 
-namespace Grabacr07.KanColleViewer.ViewModels
+namespace Grabacr07.KanColleViewer.ViewModels.Contents
 {
 	public class ToolsViewModel : TabItemViewModel
 	{
@@ -43,6 +41,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			{
 				new SupplyCounter(KanColleClient.Current.Proxy),
 				new ItemDestroyCounter(KanColleClient.Current.Proxy),
+				new MissionCounter(KanColleClient.Current.Proxy),
 			};
 		}
 	}

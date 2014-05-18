@@ -14,11 +14,9 @@
 			 xmlns:vmContents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 xmlns:dev="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Dev"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
-			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 			 mc:Ignorable="d"
 			 d:DesignHeight="25"
 			 d:DesignWidth="780">
-
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" />
@@ -71,7 +69,7 @@
 				<DataTemplate DataType="{x:Type vmDocks:DockyardViewModel}" />
 				<DataTemplate DataType="{x:Type vmContents:QuestsViewModel}" />
 				<DataTemplate DataType="{x:Type vmContents:ExpeditionsViewModel}" />
-				<DataTemplate DataType="{x:Type vm:ToolsViewModel}" />
+				<DataTemplate DataType="{x:Type vmContents:ToolsViewModel}" />
 				<DataTemplate DataType="{x:Type vm:SettingsViewModel}" />
 				<DataTemplate DataType="{x:Type dev:DebugTabViewModel}" />
 			</ContentControl.Resources>
