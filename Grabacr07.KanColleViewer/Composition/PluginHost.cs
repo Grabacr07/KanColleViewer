@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -10,6 +11,8 @@ namespace Grabacr07.KanColleViewer.Composition
 {
 	public class PluginHost : IDisposable
 	{
+		public const string PluginsDirectory = "Plugins";
+
 		private static readonly PluginHost _instance = new PluginHost();
 
 		private readonly CompositionContainer _container;
@@ -17,14 +20,16 @@ namespace Grabacr07.KanColleViewer.Composition
 		public static PluginHost Instance { get { return _instance; } }
 
 		[ImportMany]
-		public IList<INotifier> Notifiers { get; set; }
+		public IEnumerable<INotifier> Notifiers { get; set; }
 
-		public PluginHost()
+		private PluginHost()
 		{
-			this._container = new CompositionContainer(new AggregateCatalog(
-				new AssemblyCatalog(Assembly.GetExecutingAssembly()),
-				new DirectoryCatalog("Plugins")
-			));
+			var catalog = new AggregateCatalog(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
+			if (Directory.Exists(PluginsDirectory))
+			{
+				catalog.Catalogs.Add(new DirectoryCatalog("Plugins"));
+			}
+			this._container = new CompositionContainer(catalog);
 		}
 
 		public void Dispose()
