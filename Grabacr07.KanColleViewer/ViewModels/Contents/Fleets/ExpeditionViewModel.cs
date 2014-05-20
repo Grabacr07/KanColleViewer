@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleWrapper.Models;
@@ -70,7 +71,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			{
 				if (this.IsNotifyReturned)
 				{
-					WindowsNotification.Notifier.Show(
+					PluginHost.Instance.GetNotifier().Show(
+						NotifyType.Expedition,
 						Resources.Expedition_NotificationMessage_Title,
 						string.Format(Resources.Expedition_NotificationMessage, args.FleetName),
 						() => App.ViewModelRoot.Activate());
