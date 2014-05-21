@@ -19,7 +19,7 @@ namespace Grabacr07.KanColleViewer.Composition
 
 		public static PluginHost Instance { get { return _instance; } }
 
-		[ImportMany]
+		[ImportMany(typeof(INotifier))]
 		public IEnumerable<INotifier> Notifiers { get; set; }
 
 		private PluginHost()

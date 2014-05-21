@@ -7,7 +7,7 @@ namespace Grabacr07.KanColleViewer.Composition
 {
 	public enum NotifyType
 	{
-		Unknown = 0,
+		Debug = 0,
 		Expedition,
 		Repair,
 		Build,

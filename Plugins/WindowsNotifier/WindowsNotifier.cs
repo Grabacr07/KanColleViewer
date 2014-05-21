@@ -7,7 +7,7 @@ using Grabacr07.KanColleViewer.Composition;
 
 namespace Grabacr07.KanColleViewer.Plugins
 {
-	[Export]
+	[Export(typeof(INotifier))]
 	public class WindowsNotifier : INotifier
 	{
 		private readonly INotifier _notifier;
