@@ -2,35 +2,31 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-[assembly: AssemblyTitle("WindowsNotifier")]
-[assembly: AssemblyDescription("")]
+// アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
+// アセンブリに関連付けられている情報を変更するには、
+// これらの属性値を変更してください。
+[assembly: AssemblyTitle("提督業も忙しい！ Windows 通知プラグイン")]
+[assembly: AssemblyDescription("提督業も忙しい！ Windows 通知プラグイン")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("WindowsNotifier")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCompany("grabacr.net")]
+[assembly: AssemblyProduct("KanColleViewer")]
+[assembly: AssemblyCopyright("Copyright © 2013 Grabacr07")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-// Setting ComVisible to false makes the types in this assembly not visible 
-// to COM components.  If you need to access a type in this assembly from 
-// COM, set the ComVisible attribute to true on that type.
+// ComVisible を false に設定すると、その型はこのアセンブリ内で COM コンポーネントから
+// 参照不可能になります。COM からこのアセンブリ内の型にアクセスする場合は、
+// その型の ComVisible 属性を true に設定してください。
 [assembly: ComVisible(false)]
 
-// The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("4b7f8d7f-d4ac-43f1-bfab-23362a851ab5")]
-
-// Version information for an assembly consists of the following four values:
+// アセンブリのバージョン情報は、以下の 4 つの値で構成されています:
 //
 //      Major Version
 //      Minor Version 
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
+// すべての値を指定するか、下のように '*' を使ってビルドおよびリビジョン番号を 
+// 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]

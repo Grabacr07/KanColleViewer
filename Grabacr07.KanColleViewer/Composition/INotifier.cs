@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Grabacr07.KanColleViewer.Composition
 {
 	/// <summary>
-	/// Windows の通知機能を公開します。
+	/// 通知機能を公開します。
 	/// </summary>
 	public interface INotifier : IDisposable
 	{
