@@ -10,26 +10,26 @@ namespace Grabacr07.KanColleViewer.Composition
 	/// </summary>
 	public class AggregateNotifier : INotifier
 	{
-		public readonly INotifier[] _notifiers;
+		private readonly INotifier[] notifiers;
 
 		public AggregateNotifier(IEnumerable<INotifier> notifiers)
 		{
-			this._notifiers = notifiers.ToArray();
+			this.notifiers = notifiers.ToArray();
 		}
 
 		public void Dispose()
 		{
-			this._notifiers.ForEach(x => x.Dispose());
+			this.notifiers.ForEach(x => x.Dispose());
 		}
 
 		public void Initialize()
 		{
-			this._notifiers.ForEach(x => x.Initialize());
+			this.notifiers.ForEach(x => x.Initialize());
 		}
 
 		public void Show(NotifyType type, string header, string body, Action activated, Action<Exception> failed = null)
 		{
-			this._notifiers.ForEach(x => x.Show(type, header, body, activated, failed));
+			this.notifiers.ForEach(x => x.Show(type, header, body, activated, failed));
 		}
 	}
 }

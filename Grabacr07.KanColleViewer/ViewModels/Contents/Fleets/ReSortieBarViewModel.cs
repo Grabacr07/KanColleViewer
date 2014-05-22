@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Composition;
-using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Livet;
 using Livet.EventListeners;
-using Livet.Messaging.Windows;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 {
@@ -126,7 +124,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		{
 			if (this.source.CanReSortie)
 			{
-				this.Message = Properties.Resources.MessageBar_ReSortie_CanReSortie;
+				this.Message = Resources.MessageBar_ReSortie_CanReSortie;
 				this.CanReSortie = true;
 				return;
 			}
@@ -135,24 +133,24 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 			if (this.source.Reason.HasFlag(CanReSortieReason.Wounded))
 			{
-				list.Add(Properties.Resources.MessageBar_ReSortie_Wounded);
+				list.Add(Resources.MessageBar_ReSortie_Wounded);
 			}
 			if (this.source.Reason.HasFlag(CanReSortieReason.LackForResources))
 			{
-				list.Add(Properties.Resources.MessageBar_ReSortie_LackForResources);
+				list.Add(Resources.MessageBar_ReSortie_LackForResources);
 			}
 			if (this.source.Reason.HasFlag(CanReSortieReason.BadCondition))
 			{
-				list.Add(Properties.Resources.MessageBar_ReSortie_BadCondition);
+				list.Add(Resources.MessageBar_ReSortie_BadCondition);
 			}
 
-			this.Message = string.Format(Properties.Resources.MessageBar_ReSortie_CanNotReSortie, list.ToString(Properties.Resources.MessageBar_ReSortie_Separator));
+			this.Message = string.Format(Resources.MessageBar_ReSortie_CanNotReSortie, list.ToString(Properties.Resources.MessageBar_ReSortie_Separator));
 			this.CanReSortie = false;
 		}
 
 		private void UpdateRemaining()
 		{
-			this.Remaining = this.source.Remaining.HasValue ? Properties.Resources.MessageBar_ReSortie_Remaining + this.source.Remaining.Value.ToString(@"mm\:ss") : "";
+			this.Remaining = this.source.Remaining.HasValue ? Resources.MessageBar_ReSortie_Remaining + this.source.Remaining.Value.ToString(@"mm\:ss") : "";
 		}
 	}
 }

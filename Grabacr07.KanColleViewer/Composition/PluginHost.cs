@@ -20,15 +20,15 @@ namespace Grabacr07.KanColleViewer.Composition
 		/// <value>プラグインを検索するディレクトリへの相対パスを表す文字列。</value>
 		public const string PluginsDirectory = "Plugins";
 
-		private static readonly PluginHost _instance = new PluginHost();
+		private static readonly PluginHost instance = new PluginHost();
 
-		private readonly CompositionContainer _container;
+		private readonly CompositionContainer container;
 
 		/// <summary>
 		/// <see cref="PluginHost"/> のインスタンスを取得します。
 		/// </summary>
 		/// <value><see cref="PluginHost"/> のインスタンス。</value>
-		public static PluginHost Instance { get { return _instance; } }
+		public static PluginHost Instance { get { return instance; } }
 
 		/// <summary>
 		/// プラグインによって提供される通知機能を表すオブジェクトのシーケンスを取得します。
@@ -44,12 +44,12 @@ namespace Grabacr07.KanColleViewer.Composition
 			{
 				catalog.Catalogs.Add(new DirectoryCatalog("Plugins"));
 			}
-			this._container = new CompositionContainer(catalog);
+			this.container = new CompositionContainer(catalog);
 		}
 
 		public void Dispose()
 		{
-			this._container.Dispose();
+			this.container.Dispose();
 			this.GetNotifier().Dispose();
 		}
 
@@ -58,7 +58,7 @@ namespace Grabacr07.KanColleViewer.Composition
 		/// </summary>
 		public void Initialize()
 		{
-			this._container.ComposeParts(this);
+			this.container.ComposeParts(this);
 			this.GetNotifier().Initialize();
 		}
 
