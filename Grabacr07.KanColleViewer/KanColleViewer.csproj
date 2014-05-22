@@ -84,15 +84,8 @@
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\LivetCask.1.1.0.0\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\LivetExtensions.1.1.0.0\lib\net45\Microsoft.WindowsAPICodePack.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\LivetExtensions.1.1.0.0\lib\net45\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Interactive">
@@ -125,9 +118,6 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="Windows">
-      <HintPath>C:\Program Files (x86)\Windows Kits\8.0\References\CommonConfiguration\Neutral\Windows.winmd</HintPath>
-    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -137,22 +127,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Composition\AggregateNotifier.cs" />
+    <Compile Include="Composition\INotifier.cs" />
+    <Compile Include="Composition\NotifyType.cs" />
+    <Compile Include="Composition\PluginHost.cs" />
     <Compile Include="Models\BrowserZoomFactor.cs" />
-    <Compile Include="Models\IWindowsNotifier.cs" />
     <Compile Include="Models\IZoomFactor.cs" />
     <Compile Include="Models\ProductInfo.cs" />
     <Compile Include="Models\Data\Xml\XmlFileReader.cs" />
     <Compile Include="Models\Data\Xml\XmlFileWriter.cs" />
     <Compile Include="Models\Data\Xml\XmlSerializableDictionary.cs" />
     <Compile Include="Models\Helper.cs" />
-    <Compile Include="Models\Internal\Windows7Notifier.cs" />
     <Compile Include="Models\Mode.cs" />
     <Compile Include="Models\ResourceService.cs" />
     <Compile Include="Models\StatusService.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Models\SupportedImageFormat.cs" />
-    <Compile Include="Models\Toast.cs" />
-    <Compile Include="Models\Internal\Windows8Notifier.cs" />
     <Compile Include="Models\Volume.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogFilter.cs" />
     <Compile Include="ViewModels\Catalogs\ShipViewModel.cs" />
@@ -160,7 +150,6 @@
     <Compile Include="ViewModels\Catalogs\SlotItemViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\SortableColumnViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogSortWorker.cs" />
-    <Compile Include="Models\WindowsNotification.cs" />
     <Compile Include="ViewModels\Contents\AdmiralViewModel.cs" />
     <Compile Include="ViewModels\Contents\Docks\BuildingDockViewModel.cs" />
     <Compile Include="ViewModels\Contents\Docks\RepairingDockViewModel.cs" />
@@ -275,7 +264,6 @@
     <Compile Include="Win32\DVTARGETDEVICE.cs" />
     <Compile Include="Win32\IServiceProvider.cs" />
     <Compile Include="Win32\RECT.cs" />
-    <Compile Include="Win32\ShellHelpers.cs" />
     <Page Include="Styles\Colors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
