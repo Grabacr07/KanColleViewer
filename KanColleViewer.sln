@@ -1,9 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanColleViewer", "Grabacr07.KanColleViewer\KanColleViewer.csproj", "{C5F0111F-3F68-4A74-BB20-BB762564D080}"
+	ProjectSection(ProjectDependencies) = postProject
+		{21B4AD15-D9FA-4873-BFAD-1EEEFBC6C264} = {21B4AD15-D9FA-4873-BFAD-1EEEFBC6C264}
+		{A6B0A741-5BE0-479D-B813-E65672350057} = {A6B0A741-5BE0-479D-B813-E65672350057}
+		{0AF0B9FF-D981-4D0F-A41F-C3AB6FE2F16D} = {0AF0B9FF-D981-4D0F-A41F-C3AB6FE2F16D}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B8B36616-103B-4D8B-A752-A7C07FE1BA70}"
 	ProjectSection(SolutionItems) = preProject
@@ -22,10 +27,26 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{7F9428F0-290D-4DBC-80ED-A704ECB12C64}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desktop.Metro", "Grabacr07.Desktop.Metro\Desktop.Metro.csproj", "{F00FC570-2A80-4F61-8364-798CD44514B2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{21B4AD15-D9FA-4873-BFAD-1EEEFBC6C264} = {21B4AD15-D9FA-4873-BFAD-1EEEFBC6C264}
+		{A6B0A741-5BE0-479D-B813-E65672350057} = {A6B0A741-5BE0-479D-B813-E65672350057}
+		{0AF0B9FF-D981-4D0F-A41F-C3AB6FE2F16D} = {0AF0B9FF-D981-4D0F-A41F-C3AB6FE2F16D}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{D844E42C-9406-43BF-9681-4F06F6CB3AD9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsNotifier", "Plugins\WindowsNotifier\WindowsNotifier.csproj", "{55C0036D-3206-4C63-A2C0-447C41CAFAF5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MetroRadiance", "MetroRadiance", "{6FE85CE3-7479-4630-B746-EA18BCE3311D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroRadiance", "MetroRadiance\MetroRadiance\MetroRadiance.csproj", "{0AF0B9FF-D981-4D0F-A41F-C3AB6FE2F16D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroRadiance.Chrome", "MetroRadiance\MetroRadiance.Chrome\MetroRadiance.Chrome.csproj", "{21B4AD15-D9FA-4873-BFAD-1EEEFBC6C264}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A6B0A741-5BE0-479D-B813-E65672350057} = {A6B0A741-5BE0-479D-B813-E65672350057}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroRadiance.Core", "MetroRadiance\MetroRadiance.Core\MetroRadiance.Core.csproj", "{A6B0A741-5BE0-479D-B813-E65672350057}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +94,33 @@ Global
 		{55C0036D-3206-4C63-A2C0-447C41CAFAF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55C0036D-3206-4C63-A2C0-447C41CAFAF5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{55C0036D-3206-4C63-A2C0-447C41CAFAF5}.Release|x86.ActiveCfg = Release|Any CPU
+		{0AF0B9FF-D981-4D0F-A41F-C3AB6FE2F16D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AF0B9FF-D981-4D0F-A41F-C3AB6FE2F16D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AF0B9FF-D981-4D0F-A41F-C3AB6FE2F16D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0AF0B9FF-D981-4D0F-A41F-C3AB6FE2F16D}.Release (beta)|Any CPU.ActiveCfg = Release|Any CPU
+		{0AF0B9FF-D981-4D0F-A41F-C3AB6FE2F16D}.Release (beta)|Any CPU.Build.0 = Release|Any CPU
+		{0AF0B9FF-D981-4D0F-A41F-C3AB6FE2F16D}.Release (beta)|x86.ActiveCfg = Release|Any CPU
+		{0AF0B9FF-D981-4D0F-A41F-C3AB6FE2F16D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AF0B9FF-D981-4D0F-A41F-C3AB6FE2F16D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AF0B9FF-D981-4D0F-A41F-C3AB6FE2F16D}.Release|x86.ActiveCfg = Release|Any CPU
+		{21B4AD15-D9FA-4873-BFAD-1EEEFBC6C264}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21B4AD15-D9FA-4873-BFAD-1EEEFBC6C264}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21B4AD15-D9FA-4873-BFAD-1EEEFBC6C264}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{21B4AD15-D9FA-4873-BFAD-1EEEFBC6C264}.Release (beta)|Any CPU.ActiveCfg = Release|Any CPU
+		{21B4AD15-D9FA-4873-BFAD-1EEEFBC6C264}.Release (beta)|Any CPU.Build.0 = Release|Any CPU
+		{21B4AD15-D9FA-4873-BFAD-1EEEFBC6C264}.Release (beta)|x86.ActiveCfg = Release|Any CPU
+		{21B4AD15-D9FA-4873-BFAD-1EEEFBC6C264}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21B4AD15-D9FA-4873-BFAD-1EEEFBC6C264}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21B4AD15-D9FA-4873-BFAD-1EEEFBC6C264}.Release|x86.ActiveCfg = Release|Any CPU
+		{A6B0A741-5BE0-479D-B813-E65672350057}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6B0A741-5BE0-479D-B813-E65672350057}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6B0A741-5BE0-479D-B813-E65672350057}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A6B0A741-5BE0-479D-B813-E65672350057}.Release (beta)|Any CPU.ActiveCfg = Release|Any CPU
+		{A6B0A741-5BE0-479D-B813-E65672350057}.Release (beta)|Any CPU.Build.0 = Release|Any CPU
+		{A6B0A741-5BE0-479D-B813-E65672350057}.Release (beta)|x86.ActiveCfg = Release|Any CPU
+		{A6B0A741-5BE0-479D-B813-E65672350057}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6B0A741-5BE0-479D-B813-E65672350057}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6B0A741-5BE0-479D-B813-E65672350057}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,5 +128,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F00FC570-2A80-4F61-8364-798CD44514B2} = {7F9428F0-290D-4DBC-80ED-A704ECB12C64}
 		{55C0036D-3206-4C63-A2C0-447C41CAFAF5} = {D844E42C-9406-43BF-9681-4F06F6CB3AD9}
+		{0AF0B9FF-D981-4D0F-A41F-C3AB6FE2F16D} = {6FE85CE3-7479-4630-B746-EA18BCE3311D}
+		{21B4AD15-D9FA-4873-BFAD-1EEEFBC6C264} = {6FE85CE3-7479-4630-B746-EA18BCE3311D}
+		{A6B0A741-5BE0-479D-B813-E65672350057} = {6FE85CE3-7479-4630-B746-EA18BCE3311D}
 	EndGlobalSection
 EndGlobal
