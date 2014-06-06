@@ -47,6 +47,30 @@
 				<Setter Property="Margin"
 						Value="5,0,5,10" />
 			</Style>
+
+			<Style TargetType="{x:Type ToolTip}">
+				<Setter Property="OverridesDefaultStyle"
+						Value="True" />
+				<Setter Property="HasDropShadow"
+						Value="True" />
+				<Setter Property="Foreground"
+						Value="{DynamicResource AccentForegroundBrushKey}" />
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="ToolTip">
+							<Border Name="Border"
+									BorderThickness="1"
+									BorderBrush="{DynamicResource BorderBrushKey}"
+									Background="{DynamicResource BackgroundBrushKey}"
+									Padding="8,4"
+									SnapsToDevicePixels="True">
+								<ContentPresenter />
+							</Border>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
+
 		</ResourceDictionary>
 	</UserControl.Resources>
 
@@ -80,7 +104,6 @@
 					<ListBox DockPanel.Dock="Top"
 							 ItemsSource="{Binding Fleets}"
 							 SelectedValue="{Binding SelectedFleet, Mode=TwoWay}"
-							 d:DataContext="{d:DesignData /SampleData/FleetsViewModelSampleData.xaml}"
 							 Style="{DynamicResource HorizontalFlatListBoxStyleKey}">
 						<ItemsControl.ItemTemplate>
 							<DataTemplate>
@@ -148,9 +171,9 @@
 											   Margin="0,0,0,4"
 											   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-									<Grid HorizontalAlignment="Left">
+									<Grid>
 										<Grid.ColumnDefinitions>
-											<ColumnDefinition SharedSizeGroup="Name" />
+											<ColumnDefinition />
 											<ColumnDefinition Width="Auto"
 															  SharedSizeGroup="Level" />
 											<ColumnDefinition Width="Auto"
@@ -159,13 +182,25 @@
 															  SharedSizeGroup="Condition" />
 										</Grid.ColumnDefinitions>
 
-										<TextBlock>
+										<TextBlock ToolTipService.Placement="Relative"
+												   ToolTipService.HorizontalOffset="-9"
+												   ToolTipService.VerticalOffset="-5">
 											<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
 												 Style="{DynamicResource PickupTextElementStyleKey}" />
 											<LineBreak />
 											<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
 												 FontSize="11" />
+											<TextBlock.ToolTip>
+												<TextBlock>
+													<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
+														 Style="{DynamicResource PickupTextElementStyleKey}" />
+													<LineBreak />
+													<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
+														 FontSize="11" />
+												</TextBlock>
+											</TextBlock.ToolTip>
 										</TextBlock>
+
 										<TextBlock Grid.Column="1"
 												   Margin="12,0,0,0">
 											<Run Text="Lv." />
@@ -225,7 +260,7 @@
 						Grid.Column="0">
 					<StackPanel>
 						<TextBlock>
-						<Run Text="データ" />
+							<Run Text="データ" />
 						</TextBlock>
 
 						<Rectangle Height="1"
@@ -250,7 +285,7 @@
 										 MethodParameter="Expeditions">
 					<StackPanel DataContext="{Binding Content.Expeditions}">
 						<TextBlock>
-						<Run Text="{Binding Name}" />
+							<Run Text="{Binding Name}" />
 						</TextBlock>
 
 						<Rectangle Height="1"
@@ -262,10 +297,10 @@
 								<DataTemplate>
 									<TextBlock x:Name="Expedition"
 											   Margin="0,4,0,0">
-									<Run Text="{Binding Id, Mode=OneWay, StringFormat=/{0}}"
-										 Style="{DynamicResource PickupTextElementStyleKey}" />
-									<Run x:Name="Remaining"
-										 Text="{Binding Expedition.Remaining, StringFormat=- {0}, Mode=OneWay}" />
+										<Run Text="{Binding Id, Mode=OneWay, StringFormat=/{0}}"
+											 Style="{DynamicResource PickupTextElementStyleKey}" />
+										<Run x:Name="Remaining"
+											 Text="{Binding Expedition.Remaining, StringFormat=- {0}, Mode=OneWay}" />
 									</TextBlock>
 									<DataTemplate.Triggers>
 										<DataTrigger Binding="{Binding Id, Mode=OneWay}"
@@ -295,7 +330,7 @@
 										 MethodParameter="Quests">
 					<StackPanel DataContext="{Binding Content.Quests}">
 						<TextBlock>
-						<Run Text="{Binding Name}" />
+							<Run Text="{Binding Name}" />
 						</TextBlock>
 
 						<Rectangle Height="1"
@@ -330,8 +365,8 @@
 										<TextBlock Grid.Column="1"
 												   VerticalAlignment="Center"
 												   Margin="4,0,0,0">
-										<Run x:Name="Title"
-											 Text="{Binding Title, Mode=OneWay}" />
+											<Run x:Name="Title"
+												 Text="{Binding Title, Mode=OneWay}" />
 										</TextBlock>
 									</Grid>
 									<DataTemplate.Triggers>
@@ -355,7 +390,7 @@
 										 MethodParameter="Repairyard">
 					<StackPanel DataContext="{Binding Content.Repairyard}">
 						<TextBlock>
-						<Run Text="{Binding Name}" />
+							<Run Text="{Binding Name}" />
 						</TextBlock>
 
 						<Rectangle Height="1"
@@ -366,11 +401,11 @@
 							<ItemsControl.ItemTemplate>
 								<DataTemplate>
 									<TextBlock Margin="0,4,0,0">
-									<Run x:Name="ShipName"
-										 Text="{Binding Ship, Mode=OneWay}"
-										 Style="{DynamicResource PickupTextElementStyleKey}" />
-									<Run x:Name="Remaining"
-										 Text="{Binding Remaining, StringFormat=- {0}, Mode=OneWay}" />
+										<Run x:Name="ShipName"
+											 Text="{Binding Ship, Mode=OneWay}"
+											 Style="{DynamicResource PickupTextElementStyleKey}" />
+										<Run x:Name="Remaining"
+											 Text="{Binding Remaining, StringFormat=- {0}, Mode=OneWay}" />
 									</TextBlock>
 									<DataTemplate.Triggers>
 										<DataTrigger Binding="{Binding State}"
@@ -400,7 +435,7 @@
 										 MethodParameter="Dockyard">
 					<StackPanel DataContext="{Binding Content.Dockyard}">
 						<TextBlock>
-						<Run Text="{Binding Name, Mode=OneWay}" />
+							<Run Text="{Binding Name, Mode=OneWay}" />
 						</TextBlock>
 
 						<Rectangle Height="1"
@@ -411,11 +446,11 @@
 							<ItemsControl.ItemTemplate>
 								<DataTemplate>
 									<TextBlock Margin="0,4,0,0">
-									<Run x:Name="ShipName"
-										 Text="{Binding Ship, Mode=OneWay}"
-										 Style="{DynamicResource PickupTextElementStyleKey}" />
-									<Run x:Name="Remaining"
-										 Text="{Binding Remaining, StringFormat=- {0}, Mode=OneWay}" />
+										<Run x:Name="ShipName"
+											 Text="{Binding Ship, Mode=OneWay}"
+											 Style="{DynamicResource PickupTextElementStyleKey}" />
+										<Run x:Name="Remaining"
+											 Text="{Binding Remaining, StringFormat=- {0}, Mode=OneWay}" />
 									</TextBlock>
 									<DataTemplate.Triggers>
 										<DataTrigger Binding="{Binding CanDisplayShipName}"
