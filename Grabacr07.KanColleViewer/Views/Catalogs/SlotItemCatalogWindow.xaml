@@ -79,7 +79,8 @@
 					BorderThickness="1"
 					Margin="8">
 				<ListView ItemsSource="{Binding SlotItems}"
-						  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}">
+						  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}"
+						  ScrollViewer.PanningMode="Both">
 					<ListView.Resources>
 						<Style TargetType="{x:Type TextBlock}">
 							<Setter Property="Margin"

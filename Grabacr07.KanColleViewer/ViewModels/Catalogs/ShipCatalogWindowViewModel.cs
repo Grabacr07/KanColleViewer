@@ -101,6 +101,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			this.IsOpenSettings = true;
 
 			this.SortWorker = new ShipCatalogSortWorker();
+			this.SortWorker.SetTarget(ShipCatalogSortTarget.Level, true);
 
 			this.ShipTypes = KanColleClient.Current.Master.ShipTypes
 				.Select(kvp => new ShipTypeViewModel(kvp.Value)

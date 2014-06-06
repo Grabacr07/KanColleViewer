@@ -405,7 +405,8 @@
 					Margin="8,0,8,8">
 
 				<ListView ItemsSource="{Binding Ships}"
-						  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}">
+						  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}"
+						  ScrollViewer.PanningMode="Both">
 					<ListView.Resources>
 						<Style TargetType="{x:Type TextBlock}">
 							<Setter Property="Margin"
