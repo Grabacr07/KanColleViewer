@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
@@ -52,6 +51,11 @@ namespace Grabacr07.KanColleViewer.Plugins
 			}
 
 			notifyIcon.ShowBalloonTip(1000, header, body, ToolTipIcon.None);
+		}
+
+		public object GetSettingsView()
+		{
+			return null;
 		}
 
 		public void Dispose()

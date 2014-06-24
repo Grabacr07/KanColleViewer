@@ -33,5 +33,10 @@ namespace Grabacr07.KanColleViewer.Plugins
 		{
 			this.notifier.Show(type, header, body, activated, failed);
 		}
+
+		public object GetSettingsView()
+		{
+			return this.notifier.GetSettingsView();
+		}
 	}
 }

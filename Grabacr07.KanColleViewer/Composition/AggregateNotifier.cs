@@ -31,5 +31,10 @@ namespace Grabacr07.KanColleViewer.Composition
 		{
 			this.notifiers.ForEach(x => x.Show(type, header, body, activated, failed));
 		}
+
+		public object GetSettingsView()
+		{
+			return null;
+		}
 	}
 }

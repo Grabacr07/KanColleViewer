@@ -75,6 +75,11 @@ namespace Grabacr07.KanColleViewer.Plugins
 			toast.Show();
 		}
 
+		public object GetSettingsView()
+		{
+			return null;
+		}
+
 		public void Dispose()
 		{
 		}

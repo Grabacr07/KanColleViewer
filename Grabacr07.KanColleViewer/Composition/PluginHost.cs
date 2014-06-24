@@ -20,15 +20,19 @@ namespace Grabacr07.KanColleViewer.Composition
 		/// <value>プラグインを検索するディレクトリへの相対パスを表す文字列。</value>
 		public const string PluginsDirectory = "Plugins";
 
-		private static readonly PluginHost instance = new PluginHost();
+		#region singleton members
 
-		private readonly CompositionContainer container;
+		private static readonly PluginHost instance = new PluginHost();
 
 		/// <summary>
 		/// <see cref="PluginHost"/> のインスタンスを取得します。
 		/// </summary>
 		/// <value><see cref="PluginHost"/> のインスタンス。</value>
 		public static PluginHost Instance { get { return instance; } }
+
+		#endregion
+
+		private readonly CompositionContainer container;
 
 		/// <summary>
 		/// プラグインによって提供される通知機能を表すオブジェクトのシーケンスを取得します。
@@ -37,13 +41,27 @@ namespace Grabacr07.KanColleViewer.Composition
 		[ImportMany(typeof(INotifier))]
 		public IEnumerable<INotifier> Notifiers { get; set; }
 
+		/// <summary>
+		/// インポートされたプラグインのシーケンスを取得します。
+		/// </summary>
+		[ImportMany(typeof(IPlugin))]
+		public IEnumerable<Lazy<IPlugin, IPluginMetadata>> Plugins { get; set; }
+
+
 		private PluginHost()
 		{
 			var catalog = new AggregateCatalog(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
-			if (Directory.Exists(PluginsDirectory))
+
+			var current = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
+			if (current != null)
 			{
-				catalog.Catalogs.Add(new DirectoryCatalog("Plugins"));
+				var pluginsPath = Path.Combine(current, PluginsDirectory);
+				if (Directory.Exists(pluginsPath))
+				{
+					catalog.Catalogs.Add(new DirectoryCatalog(pluginsPath));
+				}
 			}
+
 			this.container = new CompositionContainer(catalog);
 		}
 
