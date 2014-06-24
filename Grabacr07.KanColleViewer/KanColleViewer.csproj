@@ -123,6 +123,7 @@
     <Compile Include="Composition\NotifyType.cs" />
     <Compile Include="Composition\PluginHost.cs" />
     <Compile Include="Models\BrowserZoomFactor.cs" />
+    <Compile Include="Composition\IPlugin.cs" />
     <Compile Include="Models\IZoomFactor.cs" />
     <Compile Include="Models\ProductInfo.cs" />
     <Compile Include="Models\Data\Xml\XmlFileReader.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="Models\Data\Xml\XmlSerializableDictionary.cs" />
     <Compile Include="Models\Helper.cs" />
     <Compile Include="Models\Mode.cs" />
+    <Compile Include="Models\ProxySettings.cs" />
     <Compile Include="Models\ResourceService.cs" />
     <Compile Include="Models\StatusService.cs" />
     <Compile Include="Models\Settings.cs" />

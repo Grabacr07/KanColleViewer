@@ -52,11 +52,11 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 			if (oldBrowser != null)
 			{
-				oldBrowser.LoadCompleted -= instance.ApplyStyleSheet;
+				oldBrowser.LoadCompleted -= instance.HandleLoadCompleted;
 			}
 			if (newBrowser != null)
 			{
-				newBrowser.LoadCompleted += instance.ApplyStyleSheet;
+				newBrowser.LoadCompleted += instance.HandleLoadCompleted;
 			}
 			if (instance.scrollViewer != null)
 			{
@@ -162,12 +162,28 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			}
 		}
 
-		private void ApplyStyleSheet(object sender, NavigationEventArgs e)
+		private void HandleLoadCompleted(object sender, NavigationEventArgs e)
+		{
+			if (this.ApplyStyleSheet())
+			{
+				WebBrowserHelper.SetScriptErrorsSuppressed(this.WebBrowser, true);
+			}
+
+			this.Update();
+
+			var window = Window.GetWindow(this.WebBrowser);
+			if (window != null)
+			{
+				window.Width = this.WebBrowser.Width;
+			}
+		}
+
+		private bool ApplyStyleSheet()
 		{
 			try
 			{
 				var document = this.WebBrowser.Document as HTMLDocument;
-				if (document == null) return;
+				if (document == null) return false;
 
 				var gameFrame = document.getElementById("game_frame");
 				if (gameFrame == null)
@@ -185,6 +201,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 					{
 						target.createStyleSheet().cssText = Properties.Settings.Default.OverrideStyleSheet;
 						this.styleSheetApplied = true;
+						return true;
 					}
 				}
 			}
@@ -193,13 +210,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 				StatusService.Current.Notify("failed to apply css: " + ex.Message);
 			}
 
-			this.Update();
-
-			var window = Window.GetWindow(this.WebBrowser);
-			if (window != null)
-			{
-				window.Width = this.WebBrowser.Width;
-			}
+			return false;
 		}
 	}
 }

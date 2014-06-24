@@ -3,11 +3,13 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:controls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 			 mc:Ignorable="d"
 			 d:DesignWidth="500"
 			 d:DesignHeight="300"
@@ -24,11 +26,11 @@
 		<TextBlock Text="{Binding Resources.Settings_Proxy, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource HeaderTextBlockStyleKey}" />
 
-		<CheckBox x:Name="CheckboxUseProxy"
+		<CheckBox x:Name="CheckBoxUseProxy"
 				  Content="{Binding Resources.Settings_Proxy_Enable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-				  IsChecked="{Binding UseProxy}" />
-		<StackPanel IsEnabled="{Binding IsChecked, ElementName=CheckboxUseProxy}"
-					Margin="15,6,0,6">
+				  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=ProxySettings.IsEnabled}" />
+		<StackPanel IsEnabled="{Binding IsChecked, ElementName=CheckBoxUseProxy}"
+					Margin="20,6,0,6">
 			<Grid Margin="0,4">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="Auto" />
@@ -43,7 +45,7 @@
 					<Run Text=": " />
 				</TextBlock>
 				<metro:PromptTextBox Grid.Column="1"
-									 Text="{Binding ProxyHost}"
+									 Text="{Binding Source={x:Static models:Settings.Current}, Path=ProxySettings.Host, Mode=TwoWay}"
 									 Prompt="{Binding Resources.Settings_Proxy_Host, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 				<TextBlock Grid.Column="3">
 					<Run Text="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
@@ -54,9 +56,47 @@
 									 Prompt="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 Width="80" />
 			</Grid>
+			
 			<CheckBox Content="{Binding Resources.Settings_Proxy_Enable_4_SSL, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-					  IsChecked="{Binding UseProxyForSSL}"
+					  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=ProxySettings.IsEnabledOnSSL}"
 					  Margin="0,4" />
+
+			<CheckBox x:Name="CheckBoxAuthRequired"
+					  Content="プロキシ サーバーにユーザー名とパスワードが必要"
+					  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=ProxySettings.IsAuthRequired}"
+					  Margin="0,4" />
+
+			<Grid IsEnabled="{Binding ElementName=CheckBoxAuthRequired, Path=IsChecked}"
+				  Margin="0,4">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="20" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="15" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+
+				<TextBlock Grid.Column="1">
+					<Run Text="ユーザー名" />
+					<Run Text=": " />
+				</TextBlock>
+				<metro:PromptTextBox Grid.Column="2"
+									 Text="{Binding Source={x:Static models:Settings.Current}, Path=ProxySettings.Username, Mode=TwoWay}"
+									 Prompt="ユーザー名" />
+				<TextBlock Grid.Column="4">
+					<Run Text="パスワード" />
+					<Run Text=": " />
+				</TextBlock>
+				<PasswordBox Grid.Column="5">
+					<i:Interaction.Triggers>
+						<i:EventTrigger EventName="LostFocus">
+							<livet:PasswordBoxSetStateToSourceAction Property="Password"
+																	 Source="{Binding Source={x:Static models:Settings.Current}, Path=ProxySettings.Password, Mode=TwoWay}" />
+						</i:EventTrigger>
+					</i:Interaction.Triggers>
+				</PasswordBox>
+			</Grid>
 		</StackPanel>
 
 		<Rectangle Height="1"

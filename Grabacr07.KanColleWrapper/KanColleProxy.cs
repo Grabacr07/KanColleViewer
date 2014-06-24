@@ -28,25 +28,7 @@ namespace Grabacr07.KanColleWrapper
 			get { return this.apiSource.AsObservable(); }
 		}
 
-		/// <summary>
-		/// Fiddler からリクエストが送られる際に使用されるプロキシサーバーのホスト名を取得または設定します。
-		/// </summary>
-		public string UpstreamProxyHost { get; set; }
-
-		/// <summary>
-		/// Fiddler からリクエストが送られる際に使用されるプロキシサーバーのポート番号を取得または設定します。
-		/// </summary>
-		public ushort UpstreamProxyPort { get; set; }
-
-		/// <summary>
-		/// リクエスト時にプロキシサーバーを経由するかどうかを取得または設定します。
-		/// </summary>
-		public bool UseProxyOnConnect { get; set; }
-
-		/// <summary>
-		/// SSL リクエスト時のみプロキシサーバーを経由するかどうかを取得または設定します。
-		/// </summary>
-		public bool UseProxyOnSSLConnect { get; set; }
+		public IProxySettings UpstreamProxySettings { get; set; }
 
 
 		public KanColleProxy()
@@ -123,13 +105,16 @@ namespace Grabacr07.KanColleWrapper
 		/// <param name="requestingSession">通信を行おうとしているセッション。</param>
 		private void SetUpstreamProxyHandler(Session requestingSession)
 		{
-			var useGateway = !string.IsNullOrEmpty(this.UpstreamProxyHost) && this.UseProxyOnConnect;
-			if (!useGateway || (IsSessionSSL(requestingSession) && !this.UseProxyOnSSLConnect)) return;
+			var settings = this.UpstreamProxySettings;
+			if (settings == null) return;
 
-			var gateway = this.UpstreamProxyHost.Contains(":")
+			var useGateway = !string.IsNullOrEmpty(settings.Host) && settings.IsEnabled;
+			if (!useGateway || (IsSessionSSL(requestingSession) && !settings.IsEnabledOnSSL)) return;
+
+			var gateway = settings.Host.Contains(":")
 				// IPv6 アドレスをプロキシホストにした場合はホストアドレス部分を [] で囲う形式にする。
-				? string.Format("[{0}]:{1}", this.UpstreamProxyHost, this.UpstreamProxyPort)
-				: string.Format("{0}:{1}", this.UpstreamProxyHost, this.UpstreamProxyPort);
+				? string.Format("[{0}]:{1}", settings.Host, settings.Port)
+				: string.Format("{0}:{1}", settings.Host, settings.Port);
 
 			requestingSession["X-OverrideGateway"] = gateway;
 		}

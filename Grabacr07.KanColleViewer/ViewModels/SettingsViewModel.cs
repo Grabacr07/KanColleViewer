@@ -7,14 +7,11 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Documents;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleViewer.ViewModels.Messages;
 using Grabacr07.KanColleWrapper;
-using Livet;
 using Livet.EventListeners;
 using Livet.Messaging;
 using Livet.Messaging.IO;
@@ -75,73 +72,17 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-		#region UseProxy 変更通知プロパティ
-
-		public string UseProxy
-		{
-			get { return Settings.Current.EnableProxy.ToString(); }
-			set
-			{
-				bool booleanValue;
-				if (Boolean.TryParse(value, out booleanValue))
-				{
-					Settings.Current.EnableProxy = booleanValue;
-					KanColleClient.Current.Proxy.UseProxyOnConnect = booleanValue;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region UseProxyForSSL 変更通知プロパティ
-
-		public bool UseProxyForSSL
-		{
-			get { return Settings.Current.EnableSSLProxy; }
-			set
-			{
-				if (Settings.Current.EnableSSLProxy != value)
-				{
-					Settings.Current.EnableSSLProxy = value;
-					KanColleClient.Current.Proxy.UseProxyOnSSLConnect = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region ProxyHost 変更通知プロパティ
-
-		public string ProxyHost
-		{
-			get { return Settings.Current.ProxyHost; }
-			set
-			{
-				if (Settings.Current.ProxyHost != value)
-				{
-					Settings.Current.ProxyHost = value;
-					KanColleClient.Current.Proxy.UpstreamProxyHost = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
 		#region ProxyPort 変更通知プロパティ
 
 		public string ProxyPort
 		{
-			get { return Settings.Current.ProxyPort.ToString(); }
+			get { return Settings.Current.ProxySettings.Port.ToString(CultureInfo.InvariantCulture); }
 			set
 			{
-				UInt16 numberPort;
-				if (UInt16.TryParse(value, out numberPort))
+				ushort port;
+				if (ushort.TryParse(value, out port) && Settings.Current.ProxySettings.Port != port)
 				{
-					Settings.Current.ProxyPort = numberPort;
-					KanColleClient.Current.Proxy.UpstreamProxyPort = numberPort;
+					Settings.Current.ProxySettings.Port = port;
 					this.RaisePropertyChanged();
 				}
 			}

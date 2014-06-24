@@ -52,7 +52,7 @@
   <ItemGroup>
     <Reference Include="FiddlerCore4, Version=4.4.5.3, Culture=neutral, PublicKeyToken=67cb91587178ac5a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>assemblies\FiddlerCore4.dll</HintPath>
+      <HintPath>..\assemblies\FiddlerCore4.dll</HintPath>
     </Reference>
     <Reference Include="Livet">
       <HintPath>..\packages\LivetCask.1.1.0.0\lib\net45\Livet.dll</HintPath>
@@ -99,6 +99,7 @@
     <Compile Include="Dockyard.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Itemyard.cs" />
+    <Compile Include="IProxySettings.cs" />
     <Compile Include="Models\Raw\kcsapi_destroyitem2.cs" />
     <Compile Include="Models\Raw\kcsapi_destroyship.cs" />
     <Compile Include="Models\Raw\kcsapi_kdock_getship.cs" />
@@ -197,10 +198,6 @@
       <LastGenOutput>KanColleProxy.Endpoints.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="assemblies\FiddlerCore4.dll" />
-    <None Include="assemblies\FiddlerCore4.XML" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
