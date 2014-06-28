@@ -14,7 +14,7 @@ using Grabacr07.KanColleWrapper.Internal;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
-	internal class SvData<T> : RawDataWrapper<svdata<T>>
+	public class SvData<T> : RawDataWrapper<svdata<T>>
 	{
 		public NameValueCollection Request { get; private set; }
 
@@ -40,7 +40,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		}
 	}
 
-	internal class SvData : RawDataWrapper<svdata>
+	public class SvData : RawDataWrapper<svdata>
 	{
 		public NameValueCollection Request { get; private set; }
 

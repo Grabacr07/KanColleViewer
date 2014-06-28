@@ -164,10 +164,8 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 		private void HandleLoadCompleted(object sender, NavigationEventArgs e)
 		{
-			if (this.ApplyStyleSheet())
-			{
-				WebBrowserHelper.SetScriptErrorsSuppressed(this.WebBrowser, true);
-			}
+			this.ApplyStyleSheet();
+			WebBrowserHelper.SetScriptErrorsSuppressed(this.WebBrowser, true);
 
 			this.Update();
 
@@ -178,12 +176,12 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			}
 		}
 
-		private bool ApplyStyleSheet()
+		private void ApplyStyleSheet()
 		{
 			try
 			{
 				var document = this.WebBrowser.Document as HTMLDocument;
-				if (document == null) return false;
+				if (document == null) return;
 
 				var gameFrame = document.getElementById("game_frame");
 				if (gameFrame == null)
@@ -201,7 +199,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 					{
 						target.createStyleSheet().cssText = Properties.Settings.Default.OverrideStyleSheet;
 						this.styleSheetApplied = true;
-						return true;
+						return;
 					}
 				}
 			}
@@ -210,7 +208,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 				StatusService.Current.Notify("failed to apply css: " + ex.Message);
 			}
 
-			return false;
+			return;
 		}
 	}
 }

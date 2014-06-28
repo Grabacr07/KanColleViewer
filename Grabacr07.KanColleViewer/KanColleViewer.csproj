@@ -119,6 +119,7 @@
     </ApplicationDefinition>
     <Compile Include="Composition\AggregateNotifier.cs" />
     <Compile Include="Composition\INotifier.cs" />
+    <Compile Include="Composition\IToolPlugin.cs" />
     <Compile Include="Composition\NotifyType.cs" />
     <Compile Include="Composition\PluginHost.cs" />
     <Compile Include="Models\BrowserZoomFactor.cs" />
@@ -271,6 +272,11 @@
       <DependentUpon>Controls.xaml</DependentUpon>
     </Page>
     <Page Include="Styles\Controls.PinButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <DependentUpon>Controls.xaml</DependentUpon>
+    </Page>
+    <Page Include="Styles\Controls.TabControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <DependentUpon>Controls.xaml</DependentUpon>

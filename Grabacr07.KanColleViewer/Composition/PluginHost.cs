@@ -42,6 +42,12 @@ namespace Grabacr07.KanColleViewer.Composition
 		public IEnumerable<INotifier> Notifiers { get; set; }
 
 		/// <summary>
+		/// プラグインによって提供される
+		/// </summary>
+		[ImportMany(typeof(IToolPlugin))]
+		public IEnumerable<IToolPlugin> Tools { get; set; }
+
+		/// <summary>
 		/// インポートされたプラグインのシーケンスを取得します。
 		/// </summary>
 		[ImportMany(typeof(IPlugin))]

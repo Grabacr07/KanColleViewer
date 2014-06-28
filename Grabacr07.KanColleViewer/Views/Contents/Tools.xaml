@@ -6,6 +6,7 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
 			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:wrapper="clr-namespace:Grabacr07.KanColleWrapper;assembly=KanColleWrapper"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
@@ -14,148 +15,83 @@
 			 d:DesignWidth="700"
 			 d:DesignHeight="300"
 			 d:DataContext="{d:DesignInstance vm:ToolsViewModel}">
-	<UserControl.Resources>
-		<Style TargetType="{x:Type GroupBox}">
-			<Setter Property="OverridesDefaultStyle"
-					Value="True" />
-			<Setter Property="BorderThickness"
-					Value="1" />
-			<Setter Property="BorderBrush"
-					Value="{DynamicResource BorderBrushKey}" />
-			<Setter Property="Background"
-					Value="{DynamicResource BorderBrushKey}" />
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="{x:Type GroupBox}">
-						<Border BorderThickness="{TemplateBinding BorderThickness}"
-								BorderBrush="{TemplateBinding BorderBrush}">
-							<Grid>
-								<Grid.RowDefinitions>
-									<RowDefinition Height="Auto" />
-									<RowDefinition />
-								</Grid.RowDefinitions>
-
-								<Border Background="{TemplateBinding Background}">
-									<ContentPresenter ContentSource="Header"
-													  ContentTemplate="{TemplateBinding HeaderTemplate}" />
-								</Border>
-
-								<ContentPresenter Grid.Row="1"
-												  ContentTemplate="{TemplateBinding ContentTemplate}"
-												  Margin="{TemplateBinding Padding}" />
-							</Grid>
-						</Border>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-
-			<Setter Property="HeaderTemplate">
-				<Setter.Value>
-					<DataTemplate>
-						<Border Margin="9,5">
-							<TextBlock Text="{Binding}"
-									   FontFamily="Segoe UI Light"
-									   FontSize="15"
-									   Foreground="{DynamicResource ForegroundBrushKey}" />
-						</Border>
-					</DataTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-	</UserControl.Resources>
-
-	<Grid Margin="5,0,5,10">
+	<Grid>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="1.5*" />
-			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="Auto"
+							  MinWidth="100" />
+			<ColumnDefinition />
 		</Grid.ColumnDefinitions>
 
-		<GroupBox Header="Counter"
-				  Margin="5,0">
-			<Grid>
-				<Grid.RowDefinitions>
-					<RowDefinition />
-					<RowDefinition Height="Auto" />
-				</Grid.RowDefinitions>
-				<ItemsControl ItemsSource="{Binding Counters}">
-					<ItemsControl.Template>
-						<ControlTemplate TargetType="{x:Type ItemsControl}">
-							<ScrollViewer HorizontalScrollBarVisibility="Disabled"
-										  VerticalScrollBarVisibility="Auto">
-								<StackPanel IsItemsHost="True"
-											Margin="4" />
-							</ScrollViewer>
-						</ControlTemplate>
-					</ItemsControl.Template>
-					<ItemsControl.Resources>
-						<DataTemplate DataType="{x:Type wrapper:SupplyCounter}">
-							<Border Margin="4"
-									Padding="0,0,0,8"
-									BorderThickness="0,0,0,1"
-									BorderBrush="{DynamicResource BorderBrushKey}">
-								<DockPanel>
-									<metro2:CallMethodButton DockPanel.Dock="Right"
-															 Content="リセット"
-															 MethodName="Reset" />
-									<TextBlock>
-										<Run Text="艦娘に補給した回数:" />
-										<Run Text="{Binding Count}"
-											 Style="{DynamicResource PickupTextElementStyleKey}" />
-									</TextBlock>
-								</DockPanel>
-							</Border>
-						</DataTemplate>
-						<DataTemplate DataType="{x:Type wrapper:ItemDestroyCounter}">
-							<Border Margin="4"
-									Padding="0,0,0,8"
-									BorderThickness="0,0,0,1"
-									BorderBrush="{DynamicResource BorderBrushKey}">
-								<DockPanel>
-									<metro2:CallMethodButton DockPanel.Dock="Right"
-															 Content="リセット"
-															 MethodName="Reset" />
-									<TextBlock>
-										<Run Text="装備を破棄した回数:" />
-										<Run Text="{Binding Count}"
-											 Style="{DynamicResource PickupTextElementStyleKey}" />
-									</TextBlock>
-								</DockPanel>
-							</Border>
-						</DataTemplate>
-						<DataTemplate DataType="{x:Type wrapper:MissionCounter}">
-							<Border Margin="4"
-									Padding="0,0,0,8"
-									BorderThickness="0,0,0,1"
-									BorderBrush="{DynamicResource BorderBrushKey}">
-								<DockPanel>
-									<metro2:CallMethodButton DockPanel.Dock="Right"
-															 Content="リセット"
-															 MethodName="Reset" />
-									<TextBlock>
-										<Run Text="遠征に成功した回数:" />
-										<Run Text="{Binding Count}"
-											 Style="{DynamicResource PickupTextElementStyleKey}" />
-									</TextBlock>
-								</DockPanel>
-							</Border>
-						</DataTemplate>
-					</ItemsControl.Resources>
-				</ItemsControl>
+		<ListBox ItemsSource="{Binding Tools}"
+				 SelectedValue="{Binding SelectedTool}"
+				 Background="{DynamicResource BackgroundBrushKey}">
+			<ListBox.Template>
+				<ControlTemplate TargetType="{x:Type ListBox}">
+					<StackPanel Background="{TemplateBinding Background}">
+						<StackPanel IsItemsHost="True" />
+					</StackPanel>
+				</ControlTemplate>
+			</ListBox.Template>
 
-				<TextBlock Grid.Row="1"
-						   Text="※アプリケーションが起動している間に発生した回数のみをカウントしています。"
-						   TextWrapping="Wrap"
-						   Margin="8" />
-			</Grid>
-		</GroupBox>
+			<ListBox.ItemContainerStyle>
+				<Style TargetType="{x:Type ListBoxItem}">
+					<Setter Property="Foreground"
+							Value="{DynamicResource ActiveForegroundBrushKey}" />
+					<Setter Property="Height"
+							Value="34" />
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="{x:Type ListBoxItem}">
+								<Border Background="{TemplateBinding Background}">
+									<ContentPresenter />
+								</Border>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+					<Setter Property="FocusVisualStyle"
+							Value="{DynamicResource {x:Static SystemParameters.FocusVisualStyleKey}}" />
+					<Style.Triggers>
+						<Trigger Property="IsMouseOver"
+								 Value="True">
+							<Setter Property="Background"
+									Value="{DynamicResource ActiveBackgroundBrushKey}" />
+							<Setter Property="Foreground"
+									Value="{DynamicResource ActiveForegroundBrushKey}" />
+						</Trigger>
+						<Trigger Property="IsSelected"
+								 Value="True">
+							<Setter Property="Background"
+									Value="{DynamicResource ThemeBrushKey}" />
+							<Setter Property="Foreground"
+									Value="{DynamicResource ActiveForegroundBrushKey}" />
+						</Trigger>
+					</Style.Triggers>
+				</Style>
+			</ListBox.ItemContainerStyle>
 
-		<GroupBox Grid.Column="1"
-				  Header="coming soon ...?"
-				  Margin="5,0">
-			<TextBlock Text="どんなツールがあったら便利か考え中です..."
-					   TextWrapping="Wrap"
-					   HorizontalAlignment="Center"
-					   Margin="10" />
-		</GroupBox>
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="10" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="15" />
+						</Grid.ColumnDefinitions>
+						<TextBlock Grid.Column="1"
+								   Text="{Binding Name}"
+								   FontSize="13"
+								   Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Path=Foreground}"
+								   VerticalAlignment="Center"
+								   TextTrimming="CharacterEllipsis" />
+					</Grid>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+
+		<ScrollViewer Grid.Column="1"
+					  VerticalScrollBarVisibility="Auto">
+			<ContentControl Content="{Binding SelectedTool.View}"
+							Margin="8,0,8,8" />
+		</ScrollViewer>
 	</Grid>
 </UserControl>

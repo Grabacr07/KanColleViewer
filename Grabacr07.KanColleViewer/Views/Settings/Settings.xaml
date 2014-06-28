@@ -35,7 +35,7 @@
 		</livet:InteractionMessageTrigger>
 	</i:Interaction.Triggers>
 
-	<TabControl Style="{StaticResource TabControlStyleKey}">
+	<TabControl Style="{DynamicResource VerticalTabControlStyleKey}">
 		<TabItem>
 			<TabItem.Header>
 				<TextBlock Text="{Binding Resources.Settings_BrowserControl, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
