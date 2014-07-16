@@ -279,6 +279,28 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
+		#region IsInRepairing 変更通知プロパティ
+
+		private bool _IsInRepairing;
+
+		/// <summary>
+		/// この艦が入渠中かどうかを示す値を取得します。
+		/// </summary>
+		public bool IsInRepairing
+		{
+			get { return this._IsInRepairing; }
+			internal set
+			{
+				if (this._IsInRepairing != value)
+				{
+					this._IsInRepairing = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 
 		internal Ship(Homeport parent, kcsapi_ship2 rawData)
 			: base(rawData)

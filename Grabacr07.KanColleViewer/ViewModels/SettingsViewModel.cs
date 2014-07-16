@@ -92,7 +92,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#region ReSortieCondition 変更通知プロパティ
 
-		private string _ReSortieCondition = Settings.Current.ReSortieCondition.ToString(CultureInfo.InvariantCulture);
+		private string _ReSortieCondition = Settings.Current.KanColleClientSettings.ReSortieCondition.ToString(CultureInfo.InvariantCulture);
 		private string reSortieConditionError;
 
 		public string ReSortieCondition
@@ -105,7 +105,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					ushort cond;
 					if (ushort.TryParse(value, out cond) && cond <= 49)
 					{
-						Settings.Current.ReSortieCondition = cond;
+						Settings.Current.KanColleClientSettings.ReSortieCondition = cond;
 						this.reSortieConditionError = null;
 					}
 					else
@@ -242,12 +242,12 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		public bool EnableLogging
 		{
-			get { return Settings.Current.EnableLogging; }
+			get { return Settings.Current.KanColleClientSettings.EnableLogging; }
 			set
 			{
-				if (Settings.Current.EnableLogging != value)
+				if (Settings.Current.KanColleClientSettings.EnableLogging != value)
 				{
-					Settings.Current.EnableLogging = value;
+					Settings.Current.KanColleClientSettings.EnableLogging = value;
 					KanColleClient.Current.Homeport.Logger.EnableLogging = value;
 					this.RaisePropertyChanged();
 				}

@@ -8,21 +8,16 @@ using Livet.EventListeners;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 {
-	public class ExpeditionViewModel : ViewModel
+	public class ConditionViewModel : ViewModel
 	{
-		private readonly Expedition source;
+		private readonly FleetCondition source;
 
-		public bool IsInExecution
-		{
-			get { return this.source.IsInExecution; }
-		}
-
-		public string ReturnTime
+		public string RejuvenateTime
 		{
 			get
 			{
-				return this.source.ReturnTime.HasValue
-					? this.source.ReturnTime.Value.LocalDateTime.ToString("MM/dd HH:mm")
+				return this.source.RejuvenateTime.HasValue
+					? this.source.RejuvenateTime.Value.LocalDateTime.ToString("MM/dd HH:mm")
 					: "--/-- --:--";
 			}
 		}
@@ -39,10 +34,16 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			}
 		}
 
-		public ExpeditionViewModel(Expedition expedition)
+		public bool IsRejuvenating
 		{
-			this.source = expedition;
-			this.CompositeDisposable.Add(new PropertyChangedEventListener(expedition, (sender, args) => this.RaisePropertyChanged(args.PropertyName)));
+			get { return this.source.IsRejuvenating; }
+		}
+
+
+		public ConditionViewModel(FleetCondition condition)
+		{
+			this.source = condition;
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(condition, (sender, args) => this.RaisePropertyChanged(args.PropertyName)));
 		}
 	}
 }

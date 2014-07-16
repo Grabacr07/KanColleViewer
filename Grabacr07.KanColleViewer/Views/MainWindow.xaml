@@ -25,7 +25,8 @@
 				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 				   IsRestoringWindowPlacement="True"
 				   SnapsToDevicePixels="True"
-				   TextOptions.TextFormattingMode="Display">
+				   TextOptions.TextFormattingMode="Display"
+				   UseLayoutRounding="True">
 
 	<i:Interaction.Triggers>
 		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"

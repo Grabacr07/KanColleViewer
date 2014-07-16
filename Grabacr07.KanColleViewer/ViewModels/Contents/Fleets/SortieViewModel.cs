@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Grabacr07.KanColleWrapper.Models;
 using Livet;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 {
-	public abstract class TimerViewModel : ViewModel
+	public class SortieViewModel : ViewModel
 	{
-		public Func<string> TimerProc
-		{
-			get { return this.CreateMessage; }
-		}
+		public Fleet Fleet { get; private set; }
 
-		protected abstract string CreateMessage();
+		public SortieViewModel(Fleet fleet)
+		{
+			this.Fleet = fleet;
+		}
 	}
 }

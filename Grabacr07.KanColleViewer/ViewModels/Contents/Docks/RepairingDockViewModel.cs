@@ -69,18 +69,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Docks
 		{
 			this.source = source;
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(source, (sender, args) => this.RaisePropertyChanged(args.PropertyName)));
-
-			source.Completed += (sender, args) =>
-			{
-				if (this.IsNotifyCompleted)
-				{
-					PluginHost.Instance.GetNotifier().Show(
-						NotifyType.Repair,
-						Resources.Repairyard_NotificationMessage_Title,
-						string.Format(Resources.Repairyard_NotificationMessage, this.Id, this.Ship),
-						() => App.ViewModelRoot.Activate());
-				}
-			};
 		}
 	}
 }

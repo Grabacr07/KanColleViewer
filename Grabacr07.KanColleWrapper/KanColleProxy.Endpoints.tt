@@ -33,6 +33,7 @@
 		"/kcsapi/api_req_kousyou/destroyitem2",
 		"/kcsapi/api_req_nyukyo/start",
 		"/kcsapi/api_req_nyukyo/speedchange",
+		"/kcsapi/api_req_map/start",
 		"/kcsapi/api_req_member/updatedeckname",
 		"/kcsapi/api_req_member/updatecomment",
 		"/kcsapi/api_req_mission/result",

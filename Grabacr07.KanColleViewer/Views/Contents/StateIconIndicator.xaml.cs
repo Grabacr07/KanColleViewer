@@ -12,26 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Codeplex.Data;
 
-namespace Grabacr07.Tools.JsonViewer
+namespace Grabacr07.KanColleViewer.Views.Contents
 {
-	partial class MainWindow
+	/// <summary>
+	/// StateIconIndicator.xaml の相互作用ロジック
+	/// </summary>
+	public partial class StateIconIndicator : UserControl
 	{
-		public MainWindow()
+		public StateIconIndicator()
 		{
 			InitializeComponent();
-		}
-
-		private void Parse(object sender, RoutedEventArgs e)
-		{
-			var target = this.TextBox.Text;
-			if (!string.IsNullOrEmpty(target))
-			{
-				target = target.Replace("&quot;", "\"");
-				var obj = DynamicJson.Parse(target);
-			}
-			// ↖ ここにブレークポイントを仕掛けよう
 		}
 	}
 }

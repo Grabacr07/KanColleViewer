@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Grabacr07.KanColleViewer.Models.Data.Xml;
+using Grabacr07.KanColleWrapper;
 using Livet;
 
 namespace Grabacr07.KanColleViewer.Models
@@ -43,6 +44,7 @@ namespace Grabacr07.KanColleViewer.Models
 				ScreenshotFilename = "KanColle-{0:d04}.png",
 				ScreenshotImageFormat = SupportedImageFormat.Png,
 				CanDisplayBuildingShipName = false,
+				KanColleClientSettings = new KanColleClientSettings(),
 			};
 		}
 
@@ -206,6 +208,25 @@ namespace Grabacr07.KanColleViewer.Models
 
 		#endregion
 
+		#region NotifyFleetRejuvenated 変更通知プロパティ
+
+		private bool _NotifyFleetRejuvenated;
+
+		public bool NotifyFleetRejuvenated
+		{
+			get { return this._NotifyFleetRejuvenated; }
+			set
+			{
+				if (this._NotifyFleetRejuvenated != value)
+				{
+					this._NotifyFleetRejuvenated = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		#region ProxySettings 変更通知プロパティ
 
 		private ProxySettings _ProxySettings;
@@ -331,46 +352,23 @@ namespace Grabacr07.KanColleViewer.Models
 
 		#endregion
 
-		#region ReSortieCondition 変更通知プロパティ
+		#region KanColleClientSettings 変更通知プロパティ
 
-		private ushort _ReSortieCondition = 40;
-
-		/// <summary>
-		/// 艦隊が再出撃可能と判断する基準となるコンディション値を取得または設定します。
-		/// </summary>
-		public ushort ReSortieCondition
+		public KanColleClientSettings KanColleClientSettings
 		{
-			get { return this._ReSortieCondition; }
+			get { return KanColleClient.Current.Settings; }
 			set
 			{
-				if (this._ReSortieCondition != value)
+				if (KanColleClient.Current.Settings != value)
 				{
-					this._ReSortieCondition = value;
+					KanColleClient.Current.Settings = value;
 					this.RaisePropertyChanged();
 				}
 			}
 		}
 
 		#endregion
-
-		#region EnableLogging 変更通知プロパティ
-
-		private bool _EnableLogging;
-
-		public bool EnableLogging
-		{
-			get { return this._EnableLogging; }
-			set
-			{
-				if (this._EnableLogging != value)
-				{
-					this._EnableLogging = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
+		
 
 		public void Save()
 		{

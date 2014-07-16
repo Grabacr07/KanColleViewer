@@ -15,7 +15,6 @@
 			 xmlns:catalogs="clr-namespace:Grabacr07.KanColleViewer.Views.Catalogs"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
-			 xmlns:fleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 			 mc:Ignorable="d"
 			 d:DataContext="{d:DesignInstance vmContents:OverviewViewModel}"
 			 d:DesignWidth="680"
@@ -110,31 +109,9 @@
 								<Border Padding="0,0,18,0"
 										Background="Transparent">
 									<StackPanel Orientation="Horizontal">
-										<ContentControl Content="{Binding State}"
-														Width="12"
-														Height="12"
-														Margin="0,2,4,1">
-											<ContentControl.Resources>
-												<DataTemplate DataType="{x:Type fleets:ExpeditionViewModel}">
-													<Border Background="{DynamicResource FleetExpeditionBrushKey}" />
-												</DataTemplate>
-												<DataTemplate DataType="{x:Type fleets:ReSortieBarViewModel}">
-													<Border x:Name="Border"
-															Background="{DynamicResource FleetReSortieBrushKey}" />
-													<DataTemplate.Triggers>
-														<DataTrigger Binding="{Binding CanReSortie}"
-																	 Value="False">
-															<Setter TargetName="Border"
-																	Property="Background"
-																	Value="{DynamicResource FleetRepairingBrushKey}" />
-														</DataTrigger>
-													</DataTemplate.Triggers>
-												</DataTemplate>
-												<DataTemplate DataType="{x:Type fleets:RepairingBarViewModel}">
-													<Border Background="{DynamicResource FleetRepairingBrushKey}" />
-												</DataTemplate>
-											</ContentControl.Resources>
-										</ContentControl>
+										<vContents:StateIconIndicator Width="12"
+																	  Height="12"
+																	  Margin="0,2,4,1" />
 										<TextBlock x:Name="FleetName"
 												   Text="{Binding Id, StringFormat='/{0}'}"
 												   FontSize="12"
@@ -153,9 +130,12 @@
 						</ItemsControl.ItemTemplate>
 					</ListBox>
 
+					<vContents:StateDetailIndicator DockPanel.Dock="Top"
+													DataContext="{Binding SelectedFleet}"
+													Margin="0,7,0,3" />
+
 					<ItemsControl ItemsSource="{Binding SelectedFleet.Ships}"
 								  Background="Transparent"
-								  Margin="0,3,0,0"
 								  Grid.IsSharedSizeScope="True">
 						<i:Interaction.Triggers>
 							<behaviors:FlickTrigger>
@@ -166,11 +146,7 @@
 						</i:Interaction.Triggers>
 						<ItemsControl.ItemTemplate>
 							<DataTemplate>
-								<StackPanel Margin="0,4,0,0">
-									<Rectangle Height="1"
-											   Margin="0,0,0,4"
-											   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-
+								<StackPanel Margin="0,2,0,0">
 									<Grid>
 										<Grid.ColumnDefinitions>
 											<ColumnDefinition />
@@ -184,14 +160,14 @@
 
 										<TextBlock ToolTipService.Placement="Relative"
 												   ToolTipService.HorizontalOffset="-9"
-												   ToolTipService.VerticalOffset="-5">
+												   ToolTipService.VerticalOffset="-3">
 											<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
 												 Style="{DynamicResource PickupTextElementStyleKey}" />
 											<LineBreak />
 											<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
 												 FontSize="11" />
 											<TextBlock.ToolTip>
-												<TextBlock>
+												<TextBlock Margin="0,-2,0,0">
 													<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
 														 Style="{DynamicResource PickupTextElementStyleKey}" />
 													<LineBreak />
@@ -210,8 +186,10 @@
 											<Run Text="{Binding Ship.ExpForNextLevel, StringFormat=Next: {0}, Mode=OneWay}"
 												 FontSize="9" />
 										</TextBlock>
-										<Grid Grid.Column="2"
-											  Margin="12,1,0,0">
+
+										<Grid x:Name="HPIndicator"
+											  Grid.Column="2"
+											  Margin="12,1,12,0">
 											<Grid.RowDefinitions>
 												<RowDefinition Height="Auto" />
 												<RowDefinition Height="Auto" />
@@ -227,8 +205,21 @@
 																	 LimitedValue="{Binding Ship.HP, Mode=OneWay}"
 																	 Margin="0,2,0,0" />
 										</Grid>
-										<TextBlock Grid.Column="3"
-												   Margin="12,0,0,0">
+
+										<Grid x:Name="RepairIndicator"
+											  Grid.Column="2"
+											  Visibility="Collapsed"
+											  Margin="8,2,8,0">
+											<Border Background="{DynamicResource FleetRepairingBrushKey}"
+													Opacity=".4" />
+											<TextBlock HorizontalAlignment="Center"
+													   VerticalAlignment="Center">
+												<Run Text="入渠中"
+													 Style="{DynamicResource PickupTextElementStyleKey}" />
+											</TextBlock>
+										</Grid>
+
+										<TextBlock Grid.Column="3">
 											<InlineUIContainer>
 												<controls:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
 											</InlineUIContainer>
@@ -239,7 +230,22 @@
 												 FontSize="9" />
 										</TextBlock>
 									</Grid>
+									<Rectangle Height="1"
+											   Margin="0,4,0,0"
+											   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 								</StackPanel>
+
+								<DataTemplate.Triggers>
+									<DataTrigger Binding="{Binding Ship.IsInRepairing}"
+												 Value="True">
+										<Setter TargetName="HPIndicator"
+												Property="Opacity"
+												Value=".2" />
+										<Setter TargetName="RepairIndicator"
+												Property="Visibility"
+												Value="Visible" />
+									</DataTrigger>
+								</DataTemplate.Triggers>
 							</DataTemplate>
 						</ItemsControl.ItemTemplate>
 					</ItemsControl>

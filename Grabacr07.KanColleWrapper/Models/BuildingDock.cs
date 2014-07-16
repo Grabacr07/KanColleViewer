@@ -11,7 +11,7 @@ namespace Grabacr07.KanColleWrapper.Models
 	/// <summary>
 	/// 建造ドックを表します。
 	/// </summary>
-	public class BuildingDock : TimerNotificator, IIdentifiable
+	public class BuildingDock : TimerNotifier, IIdentifiable
 	{
 		private bool notificated;
 

@@ -82,20 +82,25 @@
     <Reference Include="System.Interactive">
       <HintPath>..\packages\Ix-Main.1.2.2\lib\net45\System.Interactive.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reactive.Core">
-      <HintPath>..\packages\Rx-Core.2.2.2\lib\net45\System.Reactive.Core.dll</HintPath>
+    <Reference Include="System.Reactive.Core, Version=2.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Rx-Core.2.2.4\lib\net45\System.Reactive.Core.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reactive.Interfaces">
-      <HintPath>..\packages\Rx-Interfaces.2.2.2\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+    <Reference Include="System.Reactive.Interfaces, Version=2.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Rx-Interfaces.2.2.4\lib\net45\System.Reactive.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reactive.Linq">
-      <HintPath>..\packages\Rx-Linq.2.2.2\lib\net45\System.Reactive.Linq.dll</HintPath>
+    <Reference Include="System.Reactive.Linq, Version=2.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Rx-Linq.2.2.4\lib\net45\System.Reactive.Linq.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reactive.PlatformServices">
-      <HintPath>..\packages\Rx-PlatformServices.2.2.2\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+    <Reference Include="System.Reactive.PlatformServices, Version=2.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Rx-PlatformServices.2.2.4\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reactive.Windows.Threading">
-      <HintPath>..\packages\Rx-XAML.2.2.2\lib\net45\System.Reactive.Windows.Threading.dll</HintPath>
+    <Reference Include="System.Reactive.Windows.Threading, Version=2.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Rx-Xaml.2.2.4\lib\net45\System.Reactive.Windows.Threading.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\LivetCask.1.1.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -125,6 +130,7 @@
     <Compile Include="Models\BrowserZoomFactor.cs" />
     <Compile Include="Composition\IPlugin.cs" />
     <Compile Include="Models\IZoomFactor.cs" />
+    <Compile Include="Models\NotifierHost.cs" />
     <Compile Include="Models\ProductInfo.cs" />
     <Compile Include="Models\Data\Xml\XmlFileReader.cs" />
     <Compile Include="Models\Data\Xml\XmlFileWriter.cs" />
@@ -148,9 +154,10 @@
     <Compile Include="ViewModels\Contents\Docks\RepairingDockViewModel.cs" />
     <Compile Include="ViewModels\Contents\Docks\RepairyardViewModel.cs" />
     <Compile Include="ViewModels\Contents\ExpeditionsViewModel.cs" />
+    <Compile Include="ViewModels\Contents\Fleets\ConditionViewModel.cs" />
     <Compile Include="ViewModels\Contents\Fleets\ExpeditionViewModel.cs" />
-    <Compile Include="ViewModels\Contents\Fleets\RepairingBarViewModel.cs" />
-    <Compile Include="ViewModels\Contents\Fleets\TimerViewModel.cs" />
+    <Compile Include="ViewModels\Contents\Fleets\HomeportViewModel.cs" />
+    <Compile Include="ViewModels\Contents\Fleets\SortieViewModel.cs" />
     <Compile Include="ViewModels\Contents\OverviewViewModel.cs" />
     <Compile Include="ViewModels\Contents\QuestsViewModel.cs" />
     <Compile Include="ViewModels\Contents\QuestViewModel.cs" />
@@ -181,6 +188,12 @@
     <Compile Include="Views\Behaviors\ScreenshotAction.cs" />
     <Compile Include="Views\Behaviors\SetStyleSheetBehavior.cs" />
     <Compile Include="Views\Behaviors\SetWindowLocationAction.cs" />
+    <Compile Include="Views\Contents\StateDetailIndicator.xaml.cs">
+      <DependentUpon>StateDetailIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contents\StateIconIndicator.xaml.cs">
+      <DependentUpon>StateIconIndicator.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Contents\Tools.xaml.cs">
       <DependentUpon>Tools.xaml</DependentUpon>
     </Compile>
@@ -350,6 +363,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Contents\StateDetailIndicator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Contents\StateIconIndicator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Contents\Overview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -440,7 +461,6 @@
     </Compile>
     <Compile Include="Win32\IViewObject.cs" />
     <Compile Include="Win32\NativeMethods.cs" />
-    <Compile Include="ViewModels\Contents\Fleets\ReSortieBarViewModel.cs" />
     <Compile Include="ViewModels\Contents\Fleets\FleetsViewModel.cs" />
     <Compile Include="ViewModels\Contents\Fleets\FleetViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />

@@ -38,6 +38,7 @@ namespace Grabacr07.KanColleViewer
 
 			Settings.Load();
 			PluginHost.Instance.Initialize();
+			NotifierHost.Instance.Initialize(KanColleClient.Current);
 			Helper.SetRegistryFeatureBrowserEmulation();
 
 			KanColleClient.Current.Proxy.Startup(AppSettings.Default.LocalProxyPort);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models;
@@ -89,6 +90,13 @@ namespace Grabacr07.KanColleWrapper
 			proxy.api_req_kousyou_getship.TryParse<kcsapi_kdock_getship>().Subscribe(x => this.GetShip(x.Data));
 			proxy.api_req_kousyou_destroyship.TryParse<kcsapi_destroyship>().Subscribe(this.DestoryShip);
 			proxy.api_req_member_updatedeckname.TryParse().Subscribe(this.UpdateFleetName);
+
+			proxy.ApiSessionSource
+				.SkipUntil(proxy.api_req_sortie_battle.TryParse<kcsapi_battle>().Do(this.Sortie))
+				.TakeUntil(proxy.api_port)
+				.Finally(this.Homing)
+				.Repeat()
+				.Subscribe();
 		}
 
 
@@ -295,6 +303,24 @@ namespace Grabacr07.KanColleWrapper
 		private void RaiseShipsChanged()
 		{
 			this.RaisePropertyChanged("Ships");
+		}
+
+
+		private void Sortie(SvData<kcsapi_battle> battle)
+		{
+			var target = this.Fleets[battle.Data.api_dock_id];
+			if (target != null)
+			{
+				target.Sortie();
+			}
+		}
+
+		private void Homing()
+		{
+			foreach (var target in this.Fleets.Values)
+			{
+				target.Homing();
+			}
 		}
 	}
 }

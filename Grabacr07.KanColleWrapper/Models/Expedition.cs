@@ -10,32 +10,10 @@ namespace Grabacr07.KanColleWrapper.Models
 	/// <summary>
 	/// 遠征を表します。
 	/// </summary>
-	public class Expedition : TimerNotificator, IIdentifiable
+	public class Expedition : TimerNotifier, IIdentifiable
 	{
 		private readonly Fleet fleet;
 		private bool notificated;
-
-		#region IsInExecution 変更通知プロパティ
-
-		private bool _IsInExecution;
-
-		/// <summary>
-		/// 現在遠征を実行中かどうかを示す値を取得します。
-		/// </summary>
-		public bool IsInExecution
-		{
-			get { return this._IsInExecution; }
-			private set
-			{
-				if (this._IsInExecution != value)
-				{
-					this._IsInExecution = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
 
 		#region Id 変更通知プロパティ
 
@@ -56,7 +34,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
-		#region ReturnTime 変更通知プロパティ
+		#region ReturnTime / IsInExecution 変更通知プロパティ
 
 		private DateTimeOffset? _ReturnTime;
 
@@ -70,9 +48,20 @@ namespace Grabacr07.KanColleWrapper.Models
 					this._ReturnTime = value;
 					this.notificated = false;
 					this.RaisePropertyChanged();
+					this.RaisePropertyChanged("IsInExecution");
 				}
 			}
 		}
+
+
+		/// <summary>
+		/// 現在遠征を実行中かどうかを示す値を取得します。
+		/// </summary>
+		public bool IsInExecution
+		{
+			get { return this.ReturnTime.HasValue; }
+		}
+
 
 		#endregion
 
@@ -110,7 +99,6 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			if (rawData.Length != 4 || rawData.All(x => x == 0))
 			{
-				this.IsInExecution = false;
 				this.ReturnTime = null;
 				this.Remaining = null;
 			}
@@ -118,7 +106,6 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				this.Id = (int)rawData[1];
 				this.ReturnTime = Definitions.UnixEpoch.AddMilliseconds(rawData[2]);
-				this.IsInExecution = true;
 				this.UpdateCore();
 			}
 		}
@@ -127,7 +114,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			if (this.ReturnTime.HasValue)
 			{
-				var remaining = this.ReturnTime.Value - TimeSpan.FromMinutes(1.0) - DateTimeOffset.Now;
+				var remaining = this.ReturnTime.Value - TimeSpan.FromSeconds(KanColleClient.Current.Settings.NotificationShorteningTime) - DateTimeOffset.Now;
 				if (remaining.Ticks < 0) remaining = TimeSpan.Zero;
 
 				this.Remaining = remaining;

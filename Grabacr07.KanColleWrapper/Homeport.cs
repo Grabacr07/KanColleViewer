@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
-using Grabacr07.KanColleWrapper.Internal;
 using Livet;
 
 namespace Grabacr07.KanColleWrapper
@@ -118,5 +114,12 @@ namespace Grabacr07.KanColleWrapper
 				System.Diagnostics.Debug.WriteLine("艦隊名の変更に失敗しました: {0}", ex);
 			}
 		}
+
+
+		internal void StartConditionCount()
+		{
+			//Observable.Timer(TimeSpan.FromSeconds(10), TimeSpan.FromMinutes(3))
+		}
+		
 	}
 }
