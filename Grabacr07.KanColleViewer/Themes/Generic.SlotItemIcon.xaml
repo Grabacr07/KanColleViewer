@@ -550,6 +550,34 @@
 					</Setter.Value>
 				</Setter>
 			</Trigger>
+			<Trigger Property="Type"
+					 Value="Flare">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Data="F1 M 72.2026,167.702L 139.417,115.677L 135.434,113.378L 157.419,126.071M 66.8756,163.139L 83.6495,83.4816L 127.455,108.771M 53.7013,66.1893L 71.689,76.5751L 60.182,160.761M 179.297,129.645C 183.582,122.223 188.225,114.179 188.225,114.179C 195.325,101.885 221.402,56.7185 151.59,16.4122C 81.7758,-23.8941 55.6985,21.2728 48.6002,33.5663L 39.6705,49.032C 37.6083,52.6055 39.1912,57.809 39.1912,57.809L 53.2186,166.772C 53.9759,166.561 57.5348,167.401 62.6943,170.382C 67.6735,173.256 70.1095,175.83 70.3077,176.57L 171.915,134.44C 171.915,134.44 177.235,133.218 179.297,129.645 Z "
+										  VerticalAlignment="Top"
+										  HorizontalAlignment="Left"
+										  Margin="66.6108,0.0173542,0,0"
+										  Width="160.28" 
+										  Height="176.552" 
+										  Stretch="Uniform" 
+										  Fill="#FFEE9103"/>
+									<Ellipse Width="77.2229" 
+											 Height="77.2229" 
+											 VerticalAlignment="Top"
+											 HorizontalAlignment="Left"
+											 Margin="28.1272,172.698,0,0"
+											 Stretch="Uniform" 
+											 Fill="#FFFABF61"/>
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
 		</Style.Triggers>
 	</Style>
 
