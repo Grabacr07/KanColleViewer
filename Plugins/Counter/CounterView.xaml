@@ -47,7 +47,7 @@
 								<Run Text="{Binding Text, Mode=OneWay}" />
 								<Run Text=":" />
 								<Run Text="{Binding Count}"
-									 Style="{DynamicResource PickupTextElementStyleKey}" />
+									 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 							</TextBlock>
 							<controls:CallMethodButton Grid.Column="2"
 													   Content="リセット"

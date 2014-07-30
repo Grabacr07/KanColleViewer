@@ -19,18 +19,12 @@
 		</ResourceDictionary>
 	</UserControl.Resources>
 
-	<StackPanel IsEnabled="False">
-		<TextBlock Margin="0,0,0,10">
-			<Run Text="出撃コンディション"
-				 Style="{DynamicResource PickupTextElementStyleKey}" />
-			<Run Text=" " />
-			<Run Text="{Binding Resources.Common_Implement_Oncoming, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-		</TextBlock>
+	<StackPanel>
+		<TextBlock Text="出撃コンディション"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
-		<StackPanel Margin="15,0,0,0">
-			<TextBlock>
-				<Run Text="艦隊内の全艦のコンディションが次の数値以上になったとき、出撃可能と判断する" />
-			</TextBlock>
+		<StackPanel Margin="20,0,0,0">
+			<TextBlock Text="艦隊内の全艦のコンディションが次の数値以上になったとき、出撃可能と判断する" />
 
 			<Grid Margin="0,10">
 				<Grid.ColumnDefinitions>
@@ -39,14 +33,21 @@
 					<ColumnDefinition />
 				</Grid.ColumnDefinitions>
 
-				<metro:PromptTextBox Text="{Binding ReSortieCondition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnNotifyDataErrors=True}"
-									 Prompt="例: 40"
-									 ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"
-									 Width="60"
-									 VerticalAlignment="Top" />
+				<metro:PromptTextBox Prompt="例: 40"
+									 Width="60">
+					<metro:PromptTextBox.Text>
+						<Binding Source="{x:Static models:Settings.Current}"
+								 Path="KanColleClientSettings.ReSortieCondition"
+								 UpdateSourceTrigger="PropertyChanged">
+							<Binding.ValidationRules>
+								<metro:Int32Rule Min="0"
+												 Max="49" />
+							</Binding.ValidationRules>
+						</Binding>
+					</metro:PromptTextBox.Text>
+				</metro:PromptTextBox>
 				<TextBlock Grid.Column="2"
-						   TextWrapping="Wrap"
-						   Foreground="{DynamicResource InactiveForegroundBrushKey}">
+						   Style="{DynamicResource DetailTextStyleKey}">
 					<Run Text="※通常は、間宮アイコンが消灯する 40 か、自然回復上限の 49 に設定します。" />
 				</TextBlock>
 			</Grid>

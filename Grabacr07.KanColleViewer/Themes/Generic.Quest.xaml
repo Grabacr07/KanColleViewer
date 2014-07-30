@@ -35,26 +35,24 @@
 
 							<TextBlock Grid.Row="0"
 									   Grid.Column="1"
-									   TextWrapping="{TemplateBinding TextWrapping}"
-									   VerticalAlignment="Center">
+									   Style="{DynamicResource DefaultTextStyleKey}"
+									   TextWrapping="{TemplateBinding TextWrapping}">
 								<Run x:Name="Title"
 									 Text="{TemplateBinding Title}"
-									 Style="{DynamicResource PickupTextElementStyleKey}" />
+									 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 								<Run Text=" " />
 								<Run x:Name="State"
 									 Text=""
 									 FontSize="13"
-									 Style="{DynamicResource PickupTextElementStyleKey}"
+									 Style="{DynamicResource EmphaticTextElementStyleKey}"
 									 Background="Transparent" />
 							</TextBlock>
 							<Border x:Name="DetailView"
 									Grid.Row="1"
 									Grid.Column="1">
-								<TextBlock TextWrapping="Wrap">
-									<Run x:Name="Detail"
-										 Text="{TemplateBinding Detail}"
-										 FontSize="10.5" />
-								</TextBlock>
+								<TextBlock x:Name="Detail"
+										   Text="{TemplateBinding Detail}"
+										   Style="{DynamicResource DetailTextStyleKey}" />
 							</Border>
 						</Grid>
 					</Border>

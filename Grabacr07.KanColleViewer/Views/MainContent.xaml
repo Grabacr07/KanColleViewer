@@ -119,11 +119,37 @@
 								   Margin="0,0,0,20" />
 				</Grid>
 			</ScrollViewer>
-			
-			<ContentControl Grid.Column="1"
-							DataContext="{Binding SelectedItem}"
-							Content="{Binding}">
-				<ContentControl.Resources>
+
+			<Grid Grid.Column="1">
+				<ItemsControl ItemsSource="{Binding TabItems}">
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<Grid />
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+					<ItemsControl.ItemTemplate>
+						<DataTemplate DataType="{x:Type vm:TabItemViewModel}">
+							<ContentControl Content="{Binding}"
+											Visibility="{Binding IsSelected, Converter={StaticResource BooleanToVisibilityConverter}}" />
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+
+				<ItemsControl ItemsSource="{Binding SystemTabItems}">
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<Grid />
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+					<ItemsControl.ItemTemplate>
+						<DataTemplate DataType="{x:Type vm:TabItemViewModel}">
+							<ContentControl Content="{Binding}"
+											Visibility="{Binding IsSelected, Converter={StaticResource BooleanToVisibilityConverter}}" />
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+
+				<Grid.Resources>
 					<DataTemplate DataType="{x:Type vmContents:OverviewViewModel}">
 						<contents:Overview />
 					</DataTemplate>
@@ -151,8 +177,8 @@
 					<DataTemplate DataType="{x:Type devVm:DebugTabViewModel}">
 						<dev:DebugTab />
 					</DataTemplate>
-				</ContentControl.Resources>
-			</ContentControl>
+				</Grid.Resources>
+			</Grid>
 		</Grid>
 	</Grid>
 </UserControl>

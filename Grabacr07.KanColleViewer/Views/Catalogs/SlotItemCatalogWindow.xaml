@@ -54,10 +54,8 @@
 
 				<TextBlock Grid.Column="1"
 						   Text="{Binding Title}"
-						   FontFamily="Segoe UI"
-						   FontSize="16"
-						   Margin="2,2,8,2"
-						   Opacity="0.85" />
+						   Style="{DynamicResource CaptionTextStyleKey}"
+						   Margin="2,0,8,0" />
 
 				<metro:SystemButtons Grid.Column="2"
 									 HorizontalAlignment="Right"
@@ -67,13 +65,13 @@
 		<!-- #endregion -->
 
 		<DockPanel Grid.Row="1">
-			<!--<Border DockPanel.Dock="Top"
-					Margin="8,0,8,8">
+			<Border DockPanel.Dock="Top"
+					Margin="8,0">
 				<metro2:CallMethodButton Content="表示の更新"
 										 Padding="40,6"
 										 MethodName="Update"
 										 HorizontalAlignment="Left" />
-			</Border>-->
+			</Border>
 
 			<Border BorderBrush="{DynamicResource BorderBrushKey}"
 					BorderThickness="1"
@@ -85,6 +83,8 @@
 						<Style TargetType="{x:Type TextBlock}">
 							<Setter Property="Margin"
 									Value="5,4" />
+							<Setter Property="Foreground"
+									Value="{DynamicResource ForegroundBrushKey}" />
 						</Style>
 						<Style TargetType="{x:Type GridViewColumnHeader}">
 							<Setter Property="OverridesDefaultStyle"
@@ -212,10 +212,9 @@
 				Visibility="{Binding IsReloading, Converter={StaticResource BooleanToVisibilityConverter}}"
 				d:IsHidden="True">
 			<TextBlock Text="一覧を生成しています..."
+					   Style="{DynamicResource EmphaticTextStyleKey}"
 					   FontSize="16"
-					   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 					   Background="{DynamicResource ThemeBrushKey}"
-					   TextWrapping="Wrap"
 					   HorizontalAlignment="Center" />
 		</Border>
 

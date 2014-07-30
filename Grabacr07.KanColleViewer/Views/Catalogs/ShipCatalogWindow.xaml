@@ -75,10 +75,8 @@
 
 				<TextBlock Grid.Column="1"
 						   Text="{Binding Title}"
-						   FontFamily="Segoe UI"
-						   FontSize="16"
-						   Margin="2,2,8,2"
-						   Opacity="0.85" />
+						   Style="{DynamicResource CaptionTextStyleKey}"
+						   Margin="2,0,8,0" />
 
 				<metro:SystemButtons Grid.Column="2"
 									 HorizontalAlignment="Right"
@@ -97,7 +95,8 @@
 					  IsExpanded="{Binding IsOpenSettings, Mode=TwoWay}">
 				<Expander.Header>
 					<TextBlock Text="フィルター設定"
-							   FontSize="14" />
+							   Style="{DynamicResource HeaderTextStyleKey}"
+							   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 				</Expander.Header>
 				<StackPanel Grid.IsSharedSizeScope="True">
 					<Border BorderThickness="1"
@@ -124,10 +123,9 @@
 
 							<CheckBox Grid.Row="0"
 									  Grid.Column="2"
+									  Content="すべて選択"
 									  IsChecked="{Binding CheckAllShipTypes, Mode=TwoWay}"
-									  Margin="0,2">
-								<TextBlock Text="すべて選択" />
-							</CheckBox>
+									  Margin="0,2" />
 
 							<ItemsControl Grid.Row="1"
 										  Grid.Column="2"
@@ -261,15 +259,12 @@
 										<Run Text=":" />
 									</TextBlock>
 									<WrapPanel Grid.Column="2">
-										<RadioButton IsChecked="{Binding Both, Mode=TwoWay}">
-											<TextBlock Text="すべて" />
-										</RadioButton>
-										<RadioButton IsChecked="{Binding Level2OrMore, Mode=TwoWay}">
-											<TextBlock Text="Lv.2 以上" />
-										</RadioButton>
-										<RadioButton IsChecked="{Binding Level1, Mode=TwoWay}">
-											<TextBlock Text="Lv.1" />
-										</RadioButton>
+										<RadioButton Content="すべて"
+													 IsChecked="{Binding Both, Mode=TwoWay}" />
+										<RadioButton Content="Lv.2 以上"
+													 IsChecked="{Binding Level2OrMore, Mode=TwoWay}" />
+										<RadioButton Content="Lv.1"
+													 IsChecked="{Binding Level1, Mode=TwoWay}" />
 									</WrapPanel>
 								</Grid>
 
@@ -286,15 +281,12 @@
 										<Run Text=":" />
 									</TextBlock>
 									<WrapPanel Grid.Column="2">
-										<RadioButton IsChecked="{Binding Both, Mode=TwoWay}">
-											<TextBlock Text="すべて" />
-										</RadioButton>
-										<RadioButton IsChecked="{Binding Locked, Mode=TwoWay}">
-											<TextBlock Text="ロックしている" />
-										</RadioButton>
-										<RadioButton IsChecked="{Binding Unlocked, Mode=TwoWay}">
-											<TextBlock Text="ロックしていない" />
-										</RadioButton>
+										<RadioButton Content="すべて"
+													 IsChecked="{Binding Both, Mode=TwoWay}" />
+										<RadioButton Content="ロックしている"
+													 IsChecked="{Binding Locked, Mode=TwoWay}" />
+										<RadioButton Content="ロックしていない"
+													 IsChecked="{Binding Unlocked, Mode=TwoWay}" />
 									</WrapPanel>
 								</Grid>
 
@@ -311,9 +303,8 @@
 										<Run Text=":" />
 									</TextBlock>
 									<WrapPanel Grid.Column="2">
-										<CheckBox IsChecked="{Binding WithoutExpedition, Mode=TwoWay}">
-											<TextBlock Text="遠征中の艦を除外する" />
-										</CheckBox>
+										<CheckBox Content="遠征中の艦を除外する"
+												  IsChecked="{Binding WithoutExpedition, Mode=TwoWay}" />
 									</WrapPanel>
 								</Grid>
 							</StackPanel>
@@ -332,15 +323,12 @@
 										<Run Text=":" />
 									</TextBlock>
 									<WrapPanel Grid.Column="2">
-										<RadioButton IsChecked="{Binding Both, Mode=TwoWay}">
-											<TextBlock Text="すべて" />
-										</RadioButton>
-										<RadioButton IsChecked="{Binding Fast, Mode=TwoWay}">
-											<TextBlock Text="高速" />
-										</RadioButton>
-										<RadioButton IsChecked="{Binding Low, Mode=TwoWay}">
-											<TextBlock Text="低速" />
-										</RadioButton>
+										<RadioButton Content="すべて"
+													 IsChecked="{Binding Both, Mode=TwoWay}" />
+										<RadioButton Content="高速"
+													 IsChecked="{Binding Fast, Mode=TwoWay}" />
+										<RadioButton Content="低速"
+													 IsChecked="{Binding Low, Mode=TwoWay}" />
 									</WrapPanel>
 								</Grid>
 
@@ -357,15 +345,12 @@
 										<Run Text=":" />
 									</TextBlock>
 									<WrapPanel Grid.Column="2">
-										<RadioButton IsChecked="{Binding Both, Mode=TwoWay}">
-											<TextBlock Text="すべて" />
-										</RadioButton>
-										<RadioButton IsChecked="{Binding AlreadyRemodeling, Mode=TwoWay}">
-											<TextBlock Text="改造完了" />
-										</RadioButton>
-										<RadioButton IsChecked="{Binding NotAlreadyRemodeling, Mode=TwoWay}">
-											<TextBlock Text="改造未完" />
-										</RadioButton>
+										<RadioButton Content="すべて"
+													 IsChecked="{Binding Both, Mode=TwoWay}" />
+										<RadioButton Content="改造完了"
+													 IsChecked="{Binding AlreadyRemodeling, Mode=TwoWay}" />
+										<RadioButton Content="改造未完"
+													 IsChecked="{Binding NotAlreadyRemodeling, Mode=TwoWay}" />
 									</WrapPanel>
 								</Grid>
 
@@ -382,15 +367,12 @@
 										<Run Text=":" />
 									</TextBlock>
 									<WrapPanel Grid.Column="2">
-										<RadioButton IsChecked="{Binding Both, Mode=TwoWay}">
-											<TextBlock Text="すべて" />
-										</RadioButton>
-										<RadioButton IsChecked="{Binding MaxModernized, Mode=TwoWay}">
-											<TextBlock Text="改修完了" />
-										</RadioButton>
-										<RadioButton IsChecked="{Binding NotMaxModernized, Mode=TwoWay}">
-											<TextBlock Text="改修未完" />
-										</RadioButton>
+										<RadioButton Content="すべて"
+													 IsChecked="{Binding Both, Mode=TwoWay}" />
+										<RadioButton Content="改修完了"
+													 IsChecked="{Binding MaxModernized, Mode=TwoWay}" />
+										<RadioButton Content="改修未完"
+													 IsChecked="{Binding NotMaxModernized, Mode=TwoWay}" />
 									</WrapPanel>
 								</Grid>
 							</StackPanel>
@@ -708,11 +690,10 @@
 					Padding="20"
 					Visibility="{Binding IsReloading, Converter={StaticResource BooleanToVisibilityConverter}}"
 					d:IsHidden="True">
-				<TextBlock Text="表示を更新しています..."
+				<TextBlock Text="一覧を生成しています..."
+						   Style="{DynamicResource EmphaticTextStyleKey}"
 						   FontSize="16"
-						   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 						   Background="{DynamicResource ThemeBrushKey}"
-						   TextWrapping="Wrap"
 						   HorizontalAlignment="Center" />
 			</Border>
 		</Grid>

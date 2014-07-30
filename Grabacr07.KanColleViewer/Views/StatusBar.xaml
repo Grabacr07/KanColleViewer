@@ -27,8 +27,9 @@
 				   Margin="5,0" />
 		<TextBlock Grid.Column="0"
 				   Text="{Binding Source={x:Static root:App.ViewModelRoot}, Path=StatusMessage}"
-				   TextTrimming="CharacterEllipsis"
+				   Style="{DynamicResource DefaultTextStyleKey}"
 				   Foreground="{DynamicResource AccentForegroundBrushKey}"
+				   TextWrapping="NoWrap"
 				   MaxWidth="{Binding ElementName=Col0, Path=ActualWidth}"
 				   Margin="5,0" />
 
@@ -41,10 +42,15 @@
 					<StackPanel Orientation="Horizontal"
 								DataContext="{Binding SelectedFleet}">
 						<StackPanel.Resources>
-							<Style TargetType="{x:Type TextBlock}"
-								   BasedOn="{StaticResource {x:Type TextBlock}}">
+							<Style TargetType="{x:Type TextBlock}">
 								<Setter Property="Foreground"
 										Value="{DynamicResource AccentForegroundBrushKey}" />
+								<Setter Property="FontFamily"
+										Value="{DynamicResource DefaultFontFamilyKey}" />
+								<Setter Property="FontSize"
+										Value="{DynamicResource DefaultFontSizeKey}" />
+								<Setter Property="VerticalAlignment"
+										Value="Center" />
 							</Style>
 						</StackPanel.Resources>
 

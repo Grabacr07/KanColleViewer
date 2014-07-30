@@ -241,11 +241,20 @@
     <Compile Include="Views\ExitDialog.xaml.cs">
       <DependentUpon>ExitDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Settings\Browser.xaml.cs">
+      <DependentUpon>Browser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\Notification.xaml.cs">
+      <DependentUpon>Notification.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Settings\Operation.xaml.cs">
       <DependentUpon>Operation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings\Others.xaml.cs">
       <DependentUpon>Others.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\VersionInfo.xaml.cs">
+      <DependentUpon>VersionInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings\Window.xaml.cs">
       <DependentUpon>Window.xaml</DependentUpon>
@@ -403,7 +412,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Settings\Browser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Settings\Common.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\Notification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -412,6 +429,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Settings\Others.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\VersionInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

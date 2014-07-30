@@ -20,6 +20,7 @@
 							Background="#FF5A4020"
 							Padding="8,4">
 						<TextBlock x:Name="Text"
+								   Style="{DynamicResource DefaultTextStyleKey}"
 								   Foreground="{DynamicResource ActiveForegroundBrushKey}">
 							<TextBlock.Text>
 								<MultiBinding StringFormat="疲労回復まで: {0}">
@@ -86,15 +87,16 @@
 							Background="Transparent"
 							Padding="8,4">
 						<TextBlock x:Name="Text"
-								   Foreground="{DynamicResource ActiveForegroundBrushKey}"
-								   Text="艦隊は出撃中です！">
+								   Text="艦隊は出撃中です！"
+								   Style="{DynamicResource DefaultTextStyleKey}"
+								   Foreground="{DynamicResource ActiveForegroundBrushKey}">
 							<i:Interaction.Behaviors>
 								<ei:DataStateBehavior Binding="{Binding Fleet.IsWounded}"
 													  Value="True"
 													  TrueState="Blinking"
 													  FalseState="Normal" />
 							</i:Interaction.Behaviors>
-							<!-- 何故か☝の DataStateBehavior が最初だけ走ってくれない -->
+							<!-- 何故か☝の DataStateBehavior が最初だけ走ってくれない (◞‸◟) -->
 							<!-- ので、☟で最初の GoToState をやっておく -->
 							<i:Interaction.Triggers>
 								<i:EventTrigger EventName="Loaded">
@@ -130,7 +132,8 @@
 			<DataTemplate DataType="{x:Type fleets:ExpeditionViewModel}">
 				<Border Padding="8,4"
 						Background="#FF204080">
-					<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}">
+					<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+							   Foreground="{DynamicResource ActiveForegroundBrushKey}">
 						<Run Text="{Binding Resources.MessageBar_Expedition, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 						<Run Text="{Binding Resources.MessageBar_Expedition_TimeRemaining, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 						<Run Text="{Binding Remaining, Mode=OneWay}" />

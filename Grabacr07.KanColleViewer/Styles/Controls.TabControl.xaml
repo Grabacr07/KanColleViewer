@@ -50,14 +50,16 @@
 											 Value="True">
 										<Setter Property="Background"
 												Value="{DynamicResource ThemeBrushKey}" />
+										<Setter Property="Foreground"
+												Value="{DynamicResource AccentHighlightBrushKey}" />
 									</Trigger>
 									<Trigger SourceName="Border"
 											 Property="IsMouseOver"
 											 Value="True">
 										<Setter Property="Background"
-												Value="Transparent" />
-										<Setter Property="Background"
 												Value="{DynamicResource ActiveBackgroundBrushKey}" />
+										<Setter Property="Foreground"
+												Value="{DynamicResource ActiveForegroundBrushKey}" />
 									</Trigger>
 								</ControlTemplate.Triggers>
 							</ControlTemplate>

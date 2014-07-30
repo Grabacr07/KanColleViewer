@@ -20,7 +20,7 @@ using Settings = Grabacr07.KanColleViewer.Models.Settings;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {
-	public class SettingsViewModel : TabItemViewModel, INotifyDataErrorInfo
+	public class SettingsViewModel : TabItemViewModel
 	{
 		public override string Name
 		{
@@ -65,55 +65,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				if (Settings.Current.ScreenshotImageFormat != value)
 				{
 					Settings.Current.ScreenshotImageFormat = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region ProxyPort 変更通知プロパティ
-
-		public string ProxyPort
-		{
-			get { return Settings.Current.ProxySettings.Port.ToString(CultureInfo.InvariantCulture); }
-			set
-			{
-				ushort port;
-				if (ushort.TryParse(value, out port) && Settings.Current.ProxySettings.Port != port)
-				{
-					Settings.Current.ProxySettings.Port = port;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region ReSortieCondition 変更通知プロパティ
-
-		private string _ReSortieCondition = Settings.Current.KanColleClientSettings.ReSortieCondition.ToString(CultureInfo.InvariantCulture);
-		private string reSortieConditionError;
-
-		public string ReSortieCondition
-		{
-			get { return this._ReSortieCondition; }
-			set
-			{
-				if (this._ReSortieCondition != value)
-				{
-					ushort cond;
-					if (ushort.TryParse(value, out cond) && cond <= 49)
-					{
-						Settings.Current.KanColleClientSettings.ReSortieCondition = cond;
-						this.reSortieConditionError = null;
-					}
-					else
-					{
-						this.reSortieConditionError = "コンディション値は 0 ～ 49 の数値で入力してください。";
-					}
-
-					this._ReSortieCondition = value;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -257,12 +208,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		#endregion
 
 
-
-		public bool HasErrors
-		{
-			get { return this.reSortieConditionError != null; }
-		}
-
 		public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
 
@@ -346,24 +291,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		public void SetLocationLeft()
 		{
 			App.ViewModelRoot.Messenger.Raise(new SetWindowLocationMessage { MessageKey = "Window/Location", Left = 0.0 });
-		}
-
-
-		public IEnumerable GetErrors(string propertyName)
-		{
-			var errors = new List<string>();
-
-			switch (propertyName)
-			{
-				case "ReSortieCondition":
-					if (this.reSortieConditionError != null)
-					{
-						errors.Add(this.reSortieConditionError);
-					}
-					break;
-			}
-
-			return errors.HasItems() ? errors : null;
 		}
 
 		protected void RaiseErrorsChanged([CallerMemberName]string propertyName = "")

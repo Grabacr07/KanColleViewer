@@ -84,7 +84,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-		public TabItemViewModel()
+		protected TabItemViewModel()
 		{
 			if (Helper.IsInDesignMode) return;
 

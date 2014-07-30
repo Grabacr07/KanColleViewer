@@ -130,13 +130,15 @@
 							 Style="{StaticResource TabLikeRadioButtonStyleKey}"
 							 IsChecked="True">
 					<TextBlock Text="Information"
-							   FontSize="18"
+							   FontFamily="{DynamicResource EmphaticFontFamilyKey}"
+							   FontSize="16"
 							   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}" />
 				</RadioButton>
 				<RadioButton x:Name="SettingsTab"
 							 Style="{StaticResource TabLikeRadioButtonStyleKey}">
 					<TextBlock Text="Settings"
-							   FontSize="18"
+							   FontFamily="{DynamicResource EmphaticFontFamilyKey}"
+							   FontSize="16"
 							   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}" />
 				</RadioButton>
 			</StackPanel>
@@ -307,47 +309,55 @@
 					<TabControl Width="640"
 								HorizontalAlignment="Left"
 								Style="{StaticResource VerticalTabControlStyleKey}">
+						<TabControl.Resources>
+							<Style x:Key="TabHeaderTextStyleKey"
+								   TargetType="{x:Type TextBlock}"
+								   BasedOn="{StaticResource {x:Type TextBlock}}">
+								<Setter Property="Foreground"
+										Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}" />
+								<Setter Property="Margin"
+										Value="12,0" />
+								<Setter Property="FontSize"
+										Value="14" />
+							</Style>
+						</TabControl.Resources>
 						<TabItem>
 							<TabItem.Header>
 								<TextBlock Text="{Binding Resources.Settings_Window, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-										   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
-										   Margin="12,0"
-										   FontSize="14" />
+										   Style="{DynamicResource TabHeaderTextStyleKey}" />
 							</TabItem.Header>
-
 							<settings:Window Margin="10,9" />
 						</TabItem>
 
 						<TabItem>
 							<TabItem.Header>
 								<TextBlock Text="{Binding Resources.Settings_Operation, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-										   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
-										   Margin="12,0"
-										   FontSize="14" />
+										   Style="{DynamicResource TabHeaderTextStyleKey}" />
 							</TabItem.Header>
-
 							<settings:Operation Margin="10,9" />
 						</TabItem>
 
 						<TabItem>
 							<TabItem.Header>
-								<TextBlock Text="{Binding Resources.Settings_Network, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-										   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
-										   Margin="12,0"
-										   FontSize="14" />
+								<TextBlock Text="通知設定"
+										   Style="{DynamicResource TabHeaderTextStyleKey}" />
 							</TabItem.Header>
+							<settings:Notification Margin="10,9" />
+						</TabItem>
 
+						<TabItem>
+							<TabItem.Header>
+								<TextBlock Text="{Binding Resources.Settings_Network, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+										   Style="{DynamicResource TabHeaderTextStyleKey}" />
+							</TabItem.Header>
 							<settings:Network Margin="10,9" />
 						</TabItem>
 
 						<TabItem>
 							<TabItem.Header>
 								<TextBlock Text="{Binding Resources.Settings_Other, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-										   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
-										   Margin="12,0"
-										   FontSize="14" />
+										   Style="{DynamicResource TabHeaderTextStyleKey}" />
 							</TabItem.Header>
-
 							<settings:Others Margin="10,9" />
 						</TabItem>
 					</TabControl>

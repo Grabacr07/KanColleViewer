@@ -1,3 +1,3 @@
-﻿[submodule "MetroRadiance"]
+[submodule "MetroRadiance"]
 	path = MetroRadiance
-	url = git://github.com/Grabacr07/MetroRadiance
+url=https://github.com/Grabacr07/MetroRadiance

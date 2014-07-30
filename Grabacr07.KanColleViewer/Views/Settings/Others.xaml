@@ -1,8 +1,10 @@
 ﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Settings.Others"
 			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
 			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
@@ -20,10 +22,17 @@
 		</ResourceDictionary>
 	</UserControl.Resources>
 
+	<i:Interaction.Triggers>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+										 MessageKey="OpenFolderDialog/Screenshot">
+			<livet:FolderBrowserDialogInteractionMessageAction />
+		</livet:InteractionMessageTrigger>
+	</i:Interaction.Triggers>
+
 	<StackPanel>
 		<TextBlock Text="{Binding Resources.Settings_Screenshot, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-				   Style="{DynamicResource HeaderTextBlockStyleKey}" />
-		<Grid Margin="15,0,0,10">
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+		<Grid Margin="20,0,0,10">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
@@ -35,8 +44,8 @@
 				<ColumnDefinition Width="Auto" />
 			</Grid.ColumnDefinitions>
 			<TextBlock Margin="0,6">
-						<Run Text="{Binding Resources.Settings_Screenshot_FolderTextBox_Label, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-						<Run Text=": " />
+				<Run Text="{Binding Resources.Settings_Screenshot_FolderTextBox_Label, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+				<Run Text=":  " />
 			</TextBlock>
 			<metro:PromptTextBox Grid.Row="0"
 								 Grid.Column="1"
@@ -57,31 +66,29 @@
 			<TextBlock Grid.Row="1"
 					   Grid.Column="0"
 					   Margin="0,6">
-						<Run Text="{Binding Resources.Settings_Screenshot_ImageFormat_Label, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-						<Run Text=": " />
+				<Run Text="{Binding Resources.Settings_Screenshot_ImageFormat_Label, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+				<Run Text=":  " />
 			</TextBlock>
 			<StackPanel Grid.Row="1"
 						Grid.Column="1"
 						Grid.ColumnSpan="3"
 						Orientation="Horizontal">
-				<RadioButton IsChecked="{Binding ScreenshotImageFormat, Mode=TwoWay, ConverterParameter=Png, Converter={StaticResource EnumToBooleanConverter}}">
-					<TextBlock Text="PNG" />
-				</RadioButton>
-				<RadioButton Margin="10,0,0,0"
-							 IsChecked="{Binding ScreenshotImageFormat, Mode=TwoWay, ConverterParameter=Jpeg, Converter={StaticResource EnumToBooleanConverter}}">
-					<TextBlock Text="JPG" />
-				</RadioButton>
+				<RadioButton Content="PNG"
+							 IsChecked="{Binding ScreenshotImageFormat, Mode=TwoWay, ConverterParameter=Png, Converter={StaticResource EnumToBooleanConverter}}" />
+				<RadioButton Content="JPG"
+							 Margin="16,0,0,0"
+							 IsChecked="{Binding ScreenshotImageFormat, Mode=TwoWay, ConverterParameter=Jpeg, Converter={StaticResource EnumToBooleanConverter}}" />
 			</StackPanel>
 		</Grid>
 
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-		<TextBlock Text="テーマ"
-				   Style="{DynamicResource HeaderTextBlockStyleKey}"
+		<!--<TextBlock Text="テーマ"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
 				   Margin="0,10" />
 
-		<WrapPanel Margin="15,0,0,10">
+		<WrapPanel Margin="20,0,0,10">
 			<RadioButton IsChecked="{Binding IsDarkTheme, Mode=TwoWay}"
 						 Margin="0,0,24,0">
 				<TextBlock Text="Dark"
@@ -98,13 +105,13 @@
 		</WrapPanel>
 
 		<Rectangle Height="1"
-				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+				   Style="{DynamicResource SeparatorRectangleStyleKey}" />-->
 
 		<TextBlock Text="{Binding Resources.Settings_Language, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-				   Style="{DynamicResource HeaderTextBlockStyleKey}"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
 				   Margin="0,10" />
 
-		<metro:PromptComboBox Margin="15,0,0,12"
+		<metro:PromptComboBox Margin="20,0,0,10"
 							  HorizontalAlignment="Left"
 							  Prompt=""
 							  ItemsSource="{Binding Cultures}"

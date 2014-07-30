@@ -34,12 +34,12 @@ namespace Grabacr07.KanColleWrapper
 
 		#region ReSortieCondition 変更通知プロパティ
 
-		private ushort _ReSortieCondition = 40;
+		private int _ReSortieCondition = 40;
 
 		/// <summary>
 		/// 艦隊が再出撃可能と判断する基準となるコンディション値を取得または設定します。
 		/// </summary>
-		public ushort ReSortieCondition
+		public int ReSortieCondition
 		{
 			get { return this._ReSortieCondition; }
 			set

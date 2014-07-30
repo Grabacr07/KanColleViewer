@@ -79,9 +79,8 @@
 						</Grid.ColumnDefinitions>
 						<TextBlock Grid.Column="1"
 								   Text="{Binding Name}"
-								   FontSize="13"
+								   Style="{DynamicResource HeaderTextStyleKey}"
 								   Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Path=Foreground}"
-								   VerticalAlignment="Center"
 								   TextTrimming="CharacterEllipsis" />
 					</Grid>
 				</DataTemplate>

@@ -59,7 +59,7 @@
 								<LineBreak />
 								<Run Text="{Binding Ship, Mode=OneWay}"
 									 FontSize="18"
-									 Style="{DynamicResource PickupTextElementStyleKey}" />
+									 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 								</TextBlock>
 								<TextBlock x:Name="CompleteTime"
 										   Grid.Column="2"
@@ -70,7 +70,7 @@
 								<LineBreak />
 								<Run Text="{Binding CompleteTime, Mode=OneWay}"
 									 FontSize="18"
-									 Style="{DynamicResource PickupTextElementStyleKey}" />
+									 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 								</TextBlock>
 								<TextBlock x:Name="RemainingTime"
 										   Grid.Column="3"
@@ -81,7 +81,7 @@
 								<LineBreak />
 								<Run Text="{Binding Remaining, Mode=OneWay}"
 									 FontSize="18"
-									 Style="{DynamicResource PickupTextElementStyleKey}" />
+									 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 								</TextBlock>
 
 								<TextBlock x:Name="UnlockedMessage"
@@ -113,7 +113,7 @@
 										   Visibility="Collapsed">
 								<Run Text="{Binding Resources.Dockyard_Complete, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 FontSize="18"
-									 Style="{DynamicResource PickupTextElementStyleKey}" />
+									 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 								</TextBlock>
 							</Grid>
 						</Border>
@@ -185,7 +185,7 @@
 				<StackPanel Margin="10">
 					<TextBlock Margin="5">
 					<Run Text="{Binding Resources.Dockyard_Display_Title, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-						 Style="{DynamicResource PickupTextElementStyleKey}" />
+						 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 					</TextBlock>
 					<CheckBox Margin="8,5"
 							  IsChecked="{Binding CanDisplayShipName, Mode=TwoWay}">
@@ -207,7 +207,7 @@
 					</StackPanel.Style>
 					<TextBlock Margin="5">
 					<Run Text="{Binding Resources.Common_Notifications_Title, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-						 Style="{DynamicResource PickupTextElementStyleKey}" />
+						 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 					</TextBlock>
 					<RadioButton Margin="8,5"
 								 IsChecked="{Binding IsNotifyCompleted}">

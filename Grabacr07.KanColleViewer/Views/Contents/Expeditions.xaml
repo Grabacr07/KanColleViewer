@@ -55,7 +55,7 @@
 								<LineBreak />
 								<Run Text="{Binding Name, Mode=OneWay}"
 									 FontSize="14"
-									 Style="{DynamicResource PickupTextElementStyleKey}" />
+									 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 								</TextBlock>
 
 								<TextBlock x:Name="ReturnTime"
@@ -67,7 +67,7 @@
 								<LineBreak />
 								<Run Text="{Binding Expedition.ReturnTime, Mode=OneWay}"
 									 FontSize="18"
-									 Style="{DynamicResource PickupTextElementStyleKey}" />
+									 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 								</TextBlock>
 								<TextBlock x:Name="RemainingTime"
 										   Grid.Column="2"
@@ -78,7 +78,7 @@
 								<LineBreak />
 								<Run Text="{Binding Expedition.Remaining, Mode=OneWay}"
 									 FontSize="18"
-									 Style="{DynamicResource PickupTextElementStyleKey}" />
+									 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 								</TextBlock>
 								<TextBlock x:Name="NotExecutionMessage"
 										   Grid.Column="1"
@@ -138,7 +138,7 @@
 					</StackPanel.Style>
 					<TextBlock Margin="5">
 					<Run Text="{Binding Resources.Common_Notifications_Title, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-						 Style="{DynamicResource PickupTextElementStyleKey}" />
+						 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 					</TextBlock>
 					<RadioButton Margin="8,5"
 								 IsChecked="{Binding IsNotifyReturned}">

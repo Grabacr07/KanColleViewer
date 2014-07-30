@@ -64,10 +64,8 @@
 
 				<TextBlock Grid.Column="1"
 						   Text="{Binding Title}"
-						   FontFamily="Segoe UI"
-						   FontSize="16"
-						   Margin="2,2,8,2"
-						   Opacity="0.85" />
+						   Style="{DynamicResource CaptionTextStyleKey}"
+						   Margin="2,0,8,0" />
 
 				<StackPanel Grid.Column="2"
 							Orientation="Horizontal"
