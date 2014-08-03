@@ -459,4 +459,25 @@
   <data name="ZoomAction_ZoomFailed" xml:space="preserve">
     <value>缩放失败: {0}</value>
   </data>
+  <data name="Fleets_Level" xml:space="preserve">
+    <value>等级</value>
+  </data>
+  <data name="Fleets_Total" xml:space="preserve">
+    <value>总计</value>
+  </data>
+  <data name="ZoomFactorSelector" xml:space="preserve">
+    <value>游戏画面大小</value>
+  </data>
+  <data name="ZoomFactorSelector_Tooltip" xml:space="preserve">
+    <value>调整游戏画面大小</value>
+  </data>
+  <data name="Settings_Logging" xml:space="preserve">
+    <value>日志</value>
+  </data>
+  <data name="Settings_Logging_Enable" xml:space="preserve">
+    <value>记录ドロップ・建造・开发日志</value>
+  </data>
+  <data name="Fleets_ViewRange" xml:space="preserve">
+    <value>索敌能力</value>
+  </data>
 </root>
