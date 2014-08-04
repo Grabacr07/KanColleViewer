@@ -136,7 +136,7 @@
     <value>舰娘</value>
   </data>
   <data name="Debug" xml:space="preserve">
-    <value>Debug</value>
+    <value>调试</value>
   </data>
   <data name="Debug_NotificationMessage" xml:space="preserve">
     <value>这是一条测试通知。</value>
@@ -244,16 +244,16 @@
     <value>舰队中有停靠在船坞的舰娘。</value>
   </data>
   <data name="MessageBar_ReSortie_BadCondition" xml:space="preserve">
-    <value>疲労中の艦娘</value>
+    <value>疲劳度低的舰娘</value>
   </data>
   <data name="MessageBar_ReSortie_CanNotReSortie" xml:space="preserve">
-    <value>艦隊に{0}がいます。</value>
+    <value>舰队中有{0}。</value>
   </data>
   <data name="MessageBar_ReSortie_CanReSortie" xml:space="preserve">
     <value>可以出击！</value>
   </data>
   <data name="MessageBar_ReSortie_LackForResources" xml:space="preserve">
-    <value>未補給の艦娘</value>
+    <value>没有补给的舰娘</value>
   </data>
   <data name="MessageBar_ReSortie_Remaining" xml:space="preserve">
     <value>距离可出击: </value>
@@ -475,7 +475,7 @@
     <value>日志</value>
   </data>
   <data name="Settings_Logging_Enable" xml:space="preserve">
-    <value>记录ドロップ・建造・开发日志</value>
+    <value>记录掉落・建造・开发日志</value>
   </data>
   <data name="Fleets_ViewRange" xml:space="preserve">
     <value>索敌能力</value>
