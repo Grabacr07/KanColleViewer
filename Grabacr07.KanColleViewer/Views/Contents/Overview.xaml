@@ -392,14 +392,14 @@
 				<metro2:CallMethodButton Style="{StaticResource JumbButtonStyleKey}"
 										 MethodName="Jump"
 										 MethodParameter="Repairyard">
-					<StackPanel DataContext="{Binding Content.Repairyard}">
-						<TextBlock Text="{Binding Name}" />
+					<StackPanel DataContext="{Binding Content.Shipyard}">
+						<TextBlock Text="入渠ドック" />
 
 						<Rectangle Height="1"
 								   Margin="0,7,0,3"
 								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-						<ItemsControl ItemsSource="{Binding Docks}">
+						<ItemsControl ItemsSource="{Binding RepairingDocks}">
 							<ItemsControl.ItemTemplate>
 								<DataTemplate>
 									<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
@@ -436,14 +436,14 @@
 				<metro2:CallMethodButton Style="{StaticResource JumbButtonStyleKey}"
 										 MethodName="Jump"
 										 MethodParameter="Dockyard">
-					<StackPanel DataContext="{Binding Content.Dockyard}">
-						<TextBlock Text="{Binding Name}" />
+					<StackPanel DataContext="{Binding Content.Shipyard}">
+						<TextBlock Text="建造ドック" />
 
 						<Rectangle Height="1"
 								   Margin="0,7,0,3"
 								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-						<ItemsControl ItemsSource="{Binding Docks}">
+						<ItemsControl ItemsSource="{Binding BuildingDocks}">
 							<ItemsControl.ItemTemplate>
 								<DataTemplate>
 									<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
@@ -455,7 +455,7 @@
 											 Text="{Binding Remaining, StringFormat=- {0}, Mode=OneWay}" />
 									</TextBlock>
 									<DataTemplate.Triggers>
-										<DataTrigger Binding="{Binding CanDisplayShipName}"
+										<DataTrigger Binding="{Binding Source={x:Static models:Settings.Current}, Path=CanDisplayBuildingShipName}"
 													 Value="False">
 											<Setter TargetName="ShipName"
 													Property="Text"

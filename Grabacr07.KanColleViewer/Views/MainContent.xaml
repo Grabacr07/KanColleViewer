@@ -16,7 +16,6 @@
 			 xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
 			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:vmContents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
-			 xmlns:vmDocks="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Docks"
 			 xmlns:vmFleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
 			 xmlns:devVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Dev"
@@ -156,11 +155,8 @@
 					<DataTemplate DataType="{x:Type vmFleets:FleetsViewModel}">
 						<contents:Fleets />
 					</DataTemplate>
-					<DataTemplate DataType="{x:Type vmDocks:RepairyardViewModel}">
-						<contents:Repairyard />
-					</DataTemplate>
-					<DataTemplate DataType="{x:Type vmDocks:DockyardViewModel}">
-						<contents:Dockyard />
+					<DataTemplate DataType="{x:Type vmContents:ShipyardViewModel}">
+						<contents:Shipyard />
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type vmContents:QuestsViewModel}">
 						<contents:Quests />

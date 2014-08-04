@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.ViewModels.Contents;
-using Grabacr07.KanColleViewer.ViewModels.Contents.Docks;
 using Grabacr07.KanColleViewer.ViewModels.Contents.Fleets;
 using Grabacr07.KanColleViewer.ViewModels.Dev;
 using Livet;
@@ -18,8 +17,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		public SlotItemsViewModel SlotItems { get; private set; }
 
 		public FleetsViewModel Fleets { get; private set; }
-		public DockyardViewModel Dockyard { get; private set; }
-		public RepairyardViewModel Repairyard { get; private set; }
+		public ShipyardViewModel Shipyard { get; private set; }
 		public QuestsViewModel Quests { get; private set; }
 		public ExpeditionsViewModel Expeditions { get; private set; }
 
@@ -58,8 +56,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			this.SlotItems = new SlotItemsViewModel();
 
 			this.Fleets = new FleetsViewModel();
-			this.Dockyard = new DockyardViewModel();
-			this.Repairyard = new RepairyardViewModel();
+			this.Shipyard = new ShipyardViewModel();
 			this.Quests = new QuestsViewModel();
 			this.Expeditions = new ExpeditionsViewModel(this.Fleets);
 
@@ -67,8 +64,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			{
 				new OverviewViewModel(this),
 				this.Fleets,
-				this.Repairyard,
-				this.Dockyard,
+				this.Shipyard,
 				this.Quests,
 				this.Expeditions,
 				new ToolsViewModel(),

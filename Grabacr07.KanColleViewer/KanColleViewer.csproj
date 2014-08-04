@@ -150,9 +150,9 @@
     <Compile Include="ViewModels\Catalogs\SortableColumnViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogSortWorker.cs" />
     <Compile Include="ViewModels\Contents\AdmiralViewModel.cs" />
-    <Compile Include="ViewModels\Contents\Docks\BuildingDockViewModel.cs" />
-    <Compile Include="ViewModels\Contents\Docks\RepairingDockViewModel.cs" />
-    <Compile Include="ViewModels\Contents\Docks\RepairyardViewModel.cs" />
+    <Compile Include="ViewModels\Contents\BuildingDockViewModel.cs" />
+    <Compile Include="ViewModels\Contents\CreatedSlotItemViewModel.cs" />
+    <Compile Include="ViewModels\Contents\RepairingDockViewModel.cs" />
     <Compile Include="ViewModels\Contents\ExpeditionsViewModel.cs" />
     <Compile Include="ViewModels\Contents\Fleets\ConditionViewModel.cs" />
     <Compile Include="ViewModels\Contents\Fleets\ExpeditionViewModel.cs" />
@@ -164,12 +164,12 @@
     <Compile Include="ViewModels\BindableTextViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipTypeViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogWindowViewModel.cs" />
+    <Compile Include="ViewModels\Contents\ShipyardViewModel.cs" />
     <Compile Include="ViewModels\Dev\DebugTabViewModel.cs" />
     <Compile Include="ViewModels\CultureViewModel.cs" />
     <Compile Include="ViewModels\MainContentViewModel.cs" />
     <Compile Include="Models\INavigator.cs" />
     <Compile Include="ViewModels\Contents\MaterialsViewModel.cs" />
-    <Compile Include="ViewModels\Contents\Docks\DockyardViewModel.cs" />
     <Compile Include="ViewModels\Messages\ScreenshotMessage.cs" />
     <Compile Include="ViewModels\Messages\Response.cs" />
     <Compile Include="ViewModels\Messages\SetWindowLocationMessage.cs" />
@@ -225,8 +225,8 @@
     <Compile Include="Views\Controls\BuildingDock.cs" />
     <Compile Include="Views\Controls\Quest.cs" />
     <Compile Include="Views\Controls\SlotItemIcon.cs" />
-    <Compile Include="Views\Contents\Dockyard.xaml.cs">
-      <DependentUpon>Dockyard.xaml</DependentUpon>
+    <Compile Include="Views\Contents\Shipyard.xaml.cs">
+      <DependentUpon>Shipyard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Contents\Expeditions.xaml.cs">
       <DependentUpon>Expeditions.xaml</DependentUpon>
@@ -261,9 +261,6 @@
     </Compile>
     <Compile Include="Views\StartContent.xaml.cs">
       <DependentUpon>StartContent.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Contents\Repairyard.xaml.cs">
-      <DependentUpon>Repairyard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
@@ -444,10 +441,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Contents\Repairyard.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Settings\Settings.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -460,7 +453,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Contents\Dockyard.xaml">
+    <Page Include="Views\Contents\Shipyard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -584,10 +577,11 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <DesignData Include="SampleData\DockyardViewModelSampleData.xaml" />
+    <DesignData Include="SampleData\ShipyardViewModelSampleData.xaml">
+      <SubType>Designer</SubType>
+    </DesignData>
     <DesignData Include="SampleData\FleetsViewModelSampleData.xaml" />
     <DesignData Include="SampleData\FleetViewModelSampleData.xaml" />
-    <DesignData Include="SampleData\RepairyardViewModelSampleData.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\app.ico" />

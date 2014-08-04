@@ -34,6 +34,28 @@ namespace Grabacr07.KanColleWrapper
 
 		#endregion
 
+		#region CreatedSlotItem 変更通知プロパティ
+
+		private CreatedSlotItem _CreatedSlotItem;
+		
+		/// <summary>
+		/// 最後に開発された装備アイテムの情報を取得します。
+		/// </summary>
+		public CreatedSlotItem CreatedSlotItem
+		{
+			get { return this._CreatedSlotItem; }
+			private set
+			{
+				if (this._CreatedSlotItem != value)
+				{
+					this._CreatedSlotItem = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 
 		internal Dockyard(KanColleProxy proxy)
 		{
@@ -42,6 +64,7 @@ namespace Grabacr07.KanColleWrapper
 			proxy.api_get_member_kdock.TryParse<kcsapi_kdock[]>().Subscribe(x => this.Update(x.Data));
 			proxy.api_req_kousyou_getship.TryParse<kcsapi_kdock_getship>().Subscribe(x => this.GetShip(x.Data));
 			proxy.api_req_kousyou_createship_speedchange.TryParse().Subscribe(this.ChangeSpeed);
+			proxy.api_req_kousyou_createitem.TryParse<kcsapi_createitem>().Subscribe(this.CreateSlotItem);
 		}
 
 
@@ -80,6 +103,11 @@ namespace Grabacr07.KanColleWrapper
 			{
 				System.Diagnostics.Debug.WriteLine("高速建造材使用の解析に失敗しました: {0}", ex);
 			}
+		}
+
+		private void CreateSlotItem(SvData<kcsapi_createitem> svd)
+		{
+			this.CreatedSlotItem = new CreatedSlotItem(svd.Data);
 		}
 	}
 }
