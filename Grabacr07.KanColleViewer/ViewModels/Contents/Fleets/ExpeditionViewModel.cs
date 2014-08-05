@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Livet;
 using Livet.EventListeners;
@@ -11,6 +12,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 	public class ExpeditionViewModel : ViewModel
 	{
 		private readonly Expedition source;
+
+		public Mission Mission
+		{
+			get { return this.source.Mission; }
+		}
 
 		public bool IsInExecution
 		{

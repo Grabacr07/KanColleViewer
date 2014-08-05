@@ -62,8 +62,7 @@
 					<DataTemplate>
 						<Border Margin="9,5">
 							<TextBlock Text="{Binding}"
-									   FontFamily="Segoe UI Light"
-									   FontSize="15"
+									   FontSize="{DynamicResource EmphaticFontSizeKey}"
 									   Foreground="{DynamicResource ForegroundBrushKey}"
 									   HorizontalAlignment="Center" />
 						</Border>

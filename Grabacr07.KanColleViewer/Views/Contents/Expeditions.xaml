@@ -18,147 +18,144 @@
 			 d:DesignWidth="700"
 			 d:DesignHeight="300"
 			 d:DataContext="{d:DesignInstance vmContents:ExpeditionsViewModel}">
-
-	<ScrollViewer VerticalScrollBarVisibility="Auto">
-		<Grid DataContext="{Binding Fleets}"
-			  VerticalAlignment="Top">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="Auto" />
-			</Grid.ColumnDefinitions>
-
-			<ItemsControl ItemsSource="{Binding Fleets}"
-						  Margin="5,0"
-						  Grid.IsSharedSizeScope="True"
-						  d:DataContext="{d:DesignData /SampleData/FleetsViewModelSampleData.xaml}">
-				<ItemsControl.ItemTemplate>
-					<DataTemplate>
-						<Border x:Name="Root"
-								Margin="5,0,5,10"
-								BorderThickness="1"
-								BorderBrush="{DynamicResource ActiveBorderBrushKey}"
-								Padding="10,8">
+	<UserControl.Resources>
+		<Style TargetType="{x:Type GroupBox}">
+			<Setter Property="OverridesDefaultStyle"
+					Value="True" />
+			<Setter Property="BorderThickness"
+					Value="1" />
+			<Setter Property="BorderBrush"
+					Value="{DynamicResource BorderBrushKey}" />
+			<Setter Property="Background"
+					Value="{DynamicResource BorderBrushKey}" />
+			<Setter Property="TextOptions.TextFormattingMode"
+					Value="Display" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type GroupBox}">
+						<Border BorderThickness="{TemplateBinding BorderThickness}"
+								BorderBrush="{TemplateBinding BorderBrush}">
 							<Grid>
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="*"
-													  SharedSizeGroup="FleetName" />
-									<ColumnDefinition Width="Auto"
-													  SharedSizeGroup="CompleteTime" />
-									<ColumnDefinition Width="Auto"
-													  SharedSizeGroup="RemainingTime" />
-								</Grid.ColumnDefinitions>
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto" />
+									<RowDefinition />
+								</Grid.RowDefinitions>
 
-								<TextBlock>
-								<Run Text="{Binding Id, StringFormat=/{0}, Mode=OneWay}"
-									 FontSize="18" />
-								<LineBreak />
-								<Run Text="{Binding Name, Mode=OneWay}"
-									 FontSize="14"
-									 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-								</TextBlock>
+								<Border Background="{TemplateBinding Background}">
+									<ContentPresenter Content="{TemplateBinding Header}"
+													  ContentTemplate="{TemplateBinding HeaderTemplate}"
+													  ContentStringFormat="{TemplateBinding HeaderStringFormat}" />
+								</Border>
 
-								<TextBlock x:Name="ReturnTime"
-										   Grid.Column="1"
-										   VerticalAlignment="Center"
-										   Margin="10,0">
-								<Run Text="{Binding Resources.Expedition_TimeComplete, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-									 FontSize="14" />
-								<LineBreak />
-								<Run Text="{Binding Expedition.ReturnTime, Mode=OneWay}"
-									 FontSize="18"
-									 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-								</TextBlock>
-								<TextBlock x:Name="RemainingTime"
-										   Grid.Column="2"
-										   VerticalAlignment="Center"
-										   Margin="10,0">
-								<Run Text="{Binding Resources.Expedition_TimeRemaining, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-									 FontSize="14" />
-								<LineBreak />
-								<Run Text="{Binding Expedition.Remaining, Mode=OneWay}"
-									 FontSize="18"
-									 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-								</TextBlock>
-								<TextBlock x:Name="NotExecutionMessage"
-										   Grid.Column="1"
-										   Grid.ColumnSpan="2"
-										   HorizontalAlignment="Center"
-										   VerticalAlignment="Center"
-										   Margin="30,0"
-										   Visibility="Collapsed">
-								<Run Text="{Binding Resources.Expedition_NoExpedition, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-									 FontSize="18" />
-								</TextBlock>
+								<ContentPresenter Grid.Row="1"
+												  Content="{TemplateBinding Content}"
+												  ContentTemplate="{TemplateBinding ContentTemplate}"
+												  ContentStringFormat="{TemplateBinding ContentStringFormat}"
+												  Margin="{TemplateBinding Padding}" />
 							</Grid>
 						</Border>
-						<DataTemplate.Triggers>
-							<DataTrigger Binding="{Binding Id, Mode=OneWay}"
-										 Value="1">
-								<Setter TargetName="Root"
-										Property="Visibility"
-										Value="Collapsed" />
-							</DataTrigger>
-							<DataTrigger Binding="{Binding Expedition.IsInExecution, Mode=OneWay}"
-										 Value="False">
-								<Setter TargetName="ReturnTime"
-										Property="Visibility"
-										Value="Collapsed" />
-								<Setter TargetName="RemainingTime"
-										Property="Visibility"
-										Value="Collapsed" />
-								<Setter TargetName="NotExecutionMessage"
-										Property="Visibility"
-										Value="Visible" />
-							</DataTrigger>
-						</DataTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+
+			<Setter Property="HeaderTemplate">
+				<Setter.Value>
+					<DataTemplate>
+						<Border Margin="9,5">
+							<TextBlock Text="{Binding}"
+									   FontSize="{DynamicResource EmphaticFontSizeKey}"
+									   Foreground="{DynamicResource ForegroundBrushKey}" />
+						</Border>
 					</DataTemplate>
-				</ItemsControl.ItemTemplate>
-			</ItemsControl>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</UserControl.Resources>
 
-			<!--<Rectangle Grid.Column="1"
-				   Width="1"
-				   Style="{DynamicResource SeparatorRectangleStyleKey}"
-				   Margin="0,0,0,10" />-->
+	<ScrollViewer DataContext="{Binding Fleets}"
+				  VerticalScrollBarVisibility="Auto">
+		<ItemsControl ItemsSource="{Binding Fleets}"
+					  Margin="5,0,5,5"
+					  d:DataContext="{d:DesignData /SampleData/FleetsViewModelSampleData.xaml}">
+			<ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<UniformGrid Rows="1" />
+				</ItemsPanelTemplate>
+			</ItemsControl.ItemsPanel>
+			<ItemsControl.ItemContainerStyle>
+				<Style TargetType="{x:Type ContentPresenter}">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Id, Mode=OneWay}"
+									 Value="1">
+							<Setter Property="Visibility"
+									Value="Collapsed" />
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</ItemsControl.ItemContainerStyle>
 
-			<StackPanel Grid.Column="2"
-						Orientation="Vertical"
-						VerticalAlignment="Bottom">
-				<StackPanel Margin="10,10,10,4">
-					<StackPanel.Style>
-						<Style TargetType="{x:Type StackPanel}">
-							<Style.Triggers>
-								<Trigger Property="IsEnabled"
-										 Value="False">
-									<Setter Property="Opacity"
-											Value="0.5" />
-								</Trigger>
-							</Style.Triggers>
-						</Style>
-					</StackPanel.Style>
-					<TextBlock Margin="5">
-					<Run Text="{Binding Resources.Common_Notifications_Title, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-						 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-					</TextBlock>
-					<RadioButton Margin="8,5"
-								 IsChecked="{Binding IsNotifyReturned}">
-						<TextBlock Text="{Binding Resources.Expedition_Notifications_Enable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-					</RadioButton>
-					<RadioButton Margin="8,5"
-								 IsEnabled="False">
-						<TextBlock>
-						<Run Text="{Binding Resources.Expedition_Notifications_Individual, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-							 TextDecorations="Strikethrough" />
-						<Run Text="{Binding Resources.Common_Notifications_NotImplemented, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-						</TextBlock>
-					</RadioButton>
-					<RadioButton Margin="8,5"
-								 IsChecked="True">
-						<TextBlock Text="{Binding Resources.Common_Notifications_Disable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-					</RadioButton>
-				</StackPanel>
-			</StackPanel>
-		</Grid>
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<GroupBox Header="{Binding Name}"
+							  Margin="5,0,5,5"
+							  Padding="8">
+						<Grid>
+							<TextBlock x:Name="NotExcution"
+									   Text="遠征に出ていません。"
+									   Style="{DynamicResource EmphaticTextStyleKey}"
+									   Visibility="Collapsed" />
+
+							<StackPanel x:Name="ExpeditionInfo">
+								<TextBlock Text="{Binding Expedition.Mission.Title}"
+										   Style="{DynamicResource EmphaticTextStyleKey}" />
+								<Border Height="4" />
+								<TextBlock Text="{Binding Expedition.Mission.Detail}"
+										   Style="{DynamicResource DefaultTextStyleKey}" />
+
+								<Border Height="1"
+										BorderThickness="1"
+										BorderBrush="{DynamicResource BorderBrushKey}"
+										Margin="0,8" />
+
+								<TextBlock Text="{Binding Resources.Expedition_TimeComplete, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+										   Style="{DynamicResource HeaderTextStyleKey}" />
+								<Border Height="4" />
+								<TextBlock Text="{Binding Expedition.ReturnTime, Mode=OneWay}"
+										   Style="{DynamicResource EmphaticTextStyleKey}"
+										   Margin="8,0" />
+
+								<Border Height="1"
+										BorderThickness="1"
+										BorderBrush="{DynamicResource BorderBrushKey}"
+										Margin="0,8" />
+
+								<TextBlock Text="{Binding Resources.Expedition_TimeRemaining, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+										   Style="{DynamicResource HeaderTextStyleKey}" />
+								<Border Height="4" />
+								<TextBlock Text="{Binding Expedition.Remaining, Mode=OneWay}"
+										   Style="{DynamicResource EmphaticTextStyleKey}"
+										   Margin="8,0" />
+
+								<Border Height="1"
+										BorderThickness="1"
+										BorderBrush="{DynamicResource BorderBrushKey}"
+										Margin="0,8" />
+							</StackPanel>
+						</Grid>
+					</GroupBox>
+					<DataTemplate.Triggers>
+						<DataTrigger Binding="{Binding Expedition.IsInExecution}"
+									 Value="False">
+							<Setter TargetName="NotExcution"
+									Property="Visibility"
+									Value="Visible" />
+							<Setter TargetName="ExpeditionInfo"
+									Property="Visibility"
+									Value="Collapsed" />
+						</DataTrigger>
+					</DataTemplate.Triggers>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
 	</ScrollViewer>
 </UserControl>
-	
