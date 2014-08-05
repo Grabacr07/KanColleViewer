@@ -40,7 +40,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				switch (this.source.State)
 				{
 					case FleetState.Empty:
-						return null;
+						return NullViewModel.Instance;
 
 					case FleetState.Sortie:
 						return this.Sortie;

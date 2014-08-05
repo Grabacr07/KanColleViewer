@@ -7,6 +7,7 @@
 			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 			 xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 mc:Ignorable="d"
 			 d:DesignWidth="300"
 			 d:DesignHeight="30"
@@ -138,6 +139,15 @@
 						<Run Text="{Binding Resources.MessageBar_Expedition_TimeRemaining, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 						<Run Text="{Binding Remaining, Mode=OneWay}" />
 					</TextBlock>
+				</Border>
+			</DataTemplate>
+
+			<DataTemplate DataType="{x:Type vm:NullViewModel}">
+				<Border Padding="8,4"
+						Background="#FF3E3E42">
+					<TextBlock Text="艦隊に艦娘が編成されていません。"
+							   Style="{DynamicResource DefaultTextStyleKey}"
+							   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 				</Border>
 			</DataTemplate>
 		</ContentControl.Resources>

@@ -78,6 +78,12 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			this.ships = s;
 
+			if (this.ships.Length == 0)
+			{
+				this.RejuvenateTime = null;
+				return;
+			}
+
 			var condition = this.ships.Min(x => x.Condition);
 			if (condition != this.minCondition)
 			{
@@ -96,8 +102,6 @@ namespace Grabacr07.KanColleWrapper.Models
 					? (DateTimeOffset?)null
 					: rejuvnate;
 			}
-
-			System.Diagnostics.Debug.WriteLine("FleetCondition.Update() - {0}", this.RejuvenateTime);
 		}
 
 
