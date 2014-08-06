@@ -2,7 +2,7 @@
 <root>
   <!-- 
     zhCN localization file update by Diablohu (http://dreamgen.cn | http://acgdb.com)
-    last update: 2014/07/28
+    last update: 2014/08/06
    
     Microsoft ResX Schema 
     
@@ -205,10 +205,10 @@
     <value>仅通知指定的舰队</value>
   </data>
   <data name="Expedition_TimeComplete" xml:space="preserve">
-    <value>舰队返回时间</value>
+    <value>返航时间</value>
   </data>
   <data name="Expedition_TimeRemaining" xml:space="preserve">
-    <value>距离舰队返回还有</value>
+    <value>距离返航还有</value>
   </data>
   <data name="Fleets" xml:space="preserve">
     <value>舰队</value>
@@ -262,7 +262,7 @@
     <value>再出击剩余时间: </value>
   </data>
   <data name="MessageBar_ReSortie_Separator" xml:space="preserve">
-    <value>・</value>
+    <value>、</value>
   </data>
   <data name="MessageBar_ReSortie_Wounded" xml:space="preserve">
     <value>中破及以上的舰娘</value>
@@ -439,7 +439,7 @@
     <value>欢迎提督</value>
   </data>
   <data name="StatusBar_AirSuperiorityPotential" xml:space="preserve">
-    <value>对空战斗力:</value>
+    <value>制空战斗力:</value>
   </data>
   <data name="StatusBar_AverageLevel" xml:space="preserve">
     <value>平均等级:</value>
@@ -461,5 +461,26 @@
   </data>
   <data name="ZoomAction_ZoomFailed" xml:space="preserve">
     <value>缩放失败: {0}</value>
+  </data>
+  <data name="Fleets_Level" xml:space="preserve">
+    <value>等级</value>
+  </data>
+  <data name="Fleets_Total" xml:space="preserve">
+    <value>总计</value>
+  </data>
+  <data name="ZoomFactorSelector" xml:space="preserve">
+    <value>游戏画面尺寸</value>
+  </data>
+  <data name="ZoomFactorSelector_Tooltip" xml:space="preserve">
+    <value>游戏画面尺寸调整</value>
+  </data>
+  <data name="Settings_Logging" xml:space="preserve">
+    <value>记录</value>
+  </data>
+  <data name="Settings_Logging_Enable" xml:space="preserve">
+    <value>对掉落、建造、开发进行记录</value>
+  </data>
+  <data name="Fleets_ViewRange" xml:space="preserve">
+    <value>索敌能力</value>
   </data>
 </root>
