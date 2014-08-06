@@ -139,12 +139,14 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			if (this.ReturnTime.HasValue)
 			{
-				var remaining = this.ReturnTime.Value - TimeSpan.FromSeconds(KanColleClient.Current.Settings.NotificationShorteningTime) - DateTimeOffset.Now;
+				var remaining = this.ReturnTime.Value - DateTimeOffset.Now;
 				if (remaining.Ticks < 0) remaining = TimeSpan.Zero;
 
 				this.Remaining = remaining;
 
-				if (!this.notificated && this.Returned != null && remaining.Ticks <= 0)
+				if (!this.notificated
+					&& this.Returned != null
+					&& remaining <= TimeSpan.FromSeconds(KanColleClient.Current.Settings.NotificationShorteningTime))
 				{
 					this.Returned(this, new ExpeditionReturnedEventArgs(this.fleet.Name));
 					this.notificated = true;

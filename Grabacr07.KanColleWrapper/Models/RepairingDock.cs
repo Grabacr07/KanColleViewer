@@ -186,12 +186,14 @@ namespace Grabacr07.KanColleWrapper.Models
 
 			if (this.CompleteTime.HasValue)
 			{
-				var remaining = this.CompleteTime.Value - TimeSpan.FromSeconds(KanColleClient.Current.Settings.NotificationShorteningTime) - DateTimeOffset.Now;
+				var remaining = this.CompleteTime.Value - DateTimeOffset.Now;
 				if (remaining.Ticks < 0) remaining = TimeSpan.Zero;
 
 				this.Remaining = remaining;
 
-				if (!this.notificated && this.Completed != null && remaining.Ticks <= 0)
+				if (!this.notificated
+					&& this.Completed != null
+					&& remaining <= TimeSpan.FromSeconds(KanColleClient.Current.Settings.NotificationShorteningTime))
 				{
 					this.Completed(this, new RepairingCompletedEventArgs(this.Id, this.Ship));
 					this.notificated = true;
