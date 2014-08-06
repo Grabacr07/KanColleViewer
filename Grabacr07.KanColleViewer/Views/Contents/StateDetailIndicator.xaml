@@ -135,8 +135,10 @@
 						Background="#FF204080">
 					<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
 							   Foreground="{DynamicResource ActiveForegroundBrushKey}">
-						<Run Text="{Binding Resources.MessageBar_Expedition, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-						<Run Text="{Binding Resources.MessageBar_Expedition_TimeRemaining, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+						<Run Text="遠征中" />
+						<Run Text=":" />
+						<Run Text="{Binding Mission.Title, Mode=OneWay}" />
+						<Run Text="-" />
 						<Run Text="{Binding Remaining, Mode=OneWay}" />
 					</TextBlock>
 				</Border>
