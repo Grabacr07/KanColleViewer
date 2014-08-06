@@ -124,8 +124,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			if (this.Direction == SortDirection.Descending)
 			{
 				return list.OrderByDescending(x => x.Level)
-					.ThenByDescending(x => x.Info.SortId)
-					.ThenByDescending(x => x.Id);
+					.ThenBy(x => x.Info.SortId)
+					.ThenBy(x => x.Id);
 			}
 			return list;
 		}
@@ -147,9 +147,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			if (this.Direction == SortDirection.Descending)
 			{
 				return list.OrderByDescending(x => x.Condition)
-					.ThenByDescending(x => x.Info.ShipType.Id)
-					.ThenByDescending(x => x.Level)
-					.ThenByDescending(x => x.Info.SortId);
+					.ThenBy(x => x.Info.ShipType.Id)
+					.ThenBy(x => x.Level)
+					.ThenBy(x => x.Info.SortId);
 			}
 			return list;
 		}

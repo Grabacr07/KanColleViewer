@@ -13,7 +13,7 @@
 	<DockPanel>
 		<TextBlock DockPanel.Dock="Bottom"
 				   Text="※アプリケーションが起動している間に発生した回数のみをカウントしています。"
-				   TextWrapping="Wrap"
+				   Style="{DynamicResource DefaultTextStyleKey}"
 				   Margin="4"
 				   Padding="0,8,0,0" />
 

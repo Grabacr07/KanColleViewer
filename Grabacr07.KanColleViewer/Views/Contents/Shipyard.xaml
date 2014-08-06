@@ -39,7 +39,8 @@
 								<Border Background="{TemplateBinding Background}">
 									<ContentPresenter Content="{TemplateBinding Header}"
 													  ContentTemplate="{TemplateBinding HeaderTemplate}"
-													  ContentStringFormat="{TemplateBinding HeaderStringFormat}">
+													  ContentStringFormat="{TemplateBinding HeaderStringFormat}"
+													  SnapsToDevicePixels="True">
 										<ContentPresenter.LayoutTransform>
 											<RotateTransform Angle="-90" />
 										</ContentPresenter.LayoutTransform>
@@ -76,7 +77,7 @@
 				  Grid.IsSharedSizeScope="True">
 		<StackPanel VerticalAlignment="Top"
 					d:DataContext="{d:DesignData /SampleData/ShipyardViewModelSampleData.xaml}">
-			<GroupBox Header="ドック"
+			<GroupBox Header="入渠"
 					  Margin="10,0">
 				<Grid>
 					<Grid.ColumnDefinitions>
@@ -211,7 +212,7 @@
 				</Grid>
 			</GroupBox>
 
-			<GroupBox Header="工廠"
+			<GroupBox Header="建造"
 					  Margin="10">
 				<Grid>
 					<Grid.ColumnDefinitions>
@@ -292,8 +293,8 @@
 													   Text="{Binding Remaining, Mode=OneWay}" />
 
 											<TextBlock x:Name="Message"
-													   Grid.Column="1"
-													   Grid.ColumnSpan="3"
+													   Grid.Column="2"
+													   Grid.ColumnSpan="2"
 													   Text="{Binding Resources.Dockyard_Unused, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 													   Style="{DynamicResource EmphaticTextStyleKey}"
 													   Foreground="{DynamicResource ForegroundBrushKey}"
@@ -352,9 +353,6 @@
 											<Setter TargetName="Message"
 													Property="Text"
 													Value="{Binding Resources.Dockyard_Complete, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-											<Setter TargetName="Message"
-													Property="Grid.Column"
-													Value="2" />
 											<Setter TargetName="CompleteTime"
 													Property="Visibility"
 													Value="Hidden" />

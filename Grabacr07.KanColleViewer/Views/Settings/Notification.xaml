@@ -89,7 +89,7 @@
 
 			<StackPanel Margin="20,0,0,0">
 				<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}"
-						   Margin="0,3">
+						   Margin="0,3,0,1">
 					<Run Text="再出撃可能とするコンディション値" />
 					<Run Text=":" />
 					<Run Text="{Binding Source={x:Static models:Settings.Current}, Path=KanColleClientSettings.ReSortieCondition}" />
