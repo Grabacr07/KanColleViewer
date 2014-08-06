@@ -48,40 +48,7 @@ namespace Grabacr07.KanColleWrapper
 			this.Ships = new MasterTable<ShipInfo>(start2.api_mst_ship.Select(x => new ShipInfo(x)));
 			this.SlotItems = new MasterTable<SlotItemInfo>(start2.api_mst_slotitem.Select(x => new SlotItemInfo(x)));
 			this.UseItems = new MasterTable<UseItemInfo>(start2.api_mst_useitem.Select(x => new UseItemInfo(x)));
-
-			this.ReloadMissions();
-		}
-
-
-		public void ReloadMissions()
-		{
-			try
-			{
-				this.Missions = new MasterTable<Mission>(GetMissions());
-			}
-			catch (Exception ex)
-			{
-				System.Diagnostics.Debug.WriteLine(ex);
-				this.Missions = new MasterTable<Mission>();
-			}
-		}
-
-		private static IEnumerable<Mission> GetMissions()
-		{
-			var csv = Path.Combine(
-				// ReSharper disable once AssignNullToNotNullAttribute
-				Path.GetDirectoryName(Assembly.GetEntryAssembly().Location),
-				@"Assets\missions.csv");
-
-			foreach (var values in File.ReadAllLines(csv, Encoding.UTF8)
-				.Select(x => x.Split(','))
-				.Where(x => x.Length == 3))
-			{
-				int id;
-				if (!int.TryParse(values[0], out id)) continue;
-
-				yield return new Mission(id, values[1], values[2]);
-			}
+			this.Missions = new MasterTable<Mission>(start2.api_mst_mission.Select(x => new Mission(x)));
 		}
 	}
 }

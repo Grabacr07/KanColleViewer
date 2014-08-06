@@ -100,7 +100,7 @@
     <Compile Include="Calculator.cs" />
     <Compile Include="Counter.cs" />
     <Compile Include="Dockyard.cs" />
-    <Compile Include="Mission.cs" />
+    <Compile Include="Models\Mission.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Itemyard.cs" />
     <Compile Include="IProxySettings.cs" />
@@ -112,6 +112,7 @@
     <Compile Include="Models\Raw\kcsapi_destroyitem2.cs" />
     <Compile Include="Models\Raw\kcsapi_destroyship.cs" />
     <Compile Include="Models\Raw\kcsapi_kdock_getship.cs" />
+    <Compile Include="Models\Raw\kcsapi_mission.cs" />
     <Compile Include="Models\Raw\kcsapi_mission_result.cs" />
     <Compile Include="Models\Raw\kcsapi_powerup.cs" />
     <Compile Include="Organization.cs" />
@@ -210,11 +211,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\missions.csv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

@@ -129,7 +129,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			else
 			{
 				this.Id = (int)rawData[1];
-				this.Mission = KanColleClient.Current.Master.Missions[this.Id] ?? Mission.Unknown;
+				this.Mission = KanColleClient.Current.Master.Missions[this.Id];
 				this.ReturnTime = Definitions.UnixEpoch.AddMilliseconds(rawData[2]);
 				this.UpdateCore();
 			}
