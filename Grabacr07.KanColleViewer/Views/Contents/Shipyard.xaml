@@ -74,6 +74,7 @@
 	</UserControl.Resources>
 
 	<ScrollViewer VerticalScrollBarVisibility="Auto"
+				  PanningMode="Both"
 				  Grid.IsSharedSizeScope="True">
 		<StackPanel VerticalAlignment="Top"
 					d:DataContext="{d:DesignData /SampleData/ShipyardViewModelSampleData.xaml}">

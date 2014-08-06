@@ -91,7 +91,8 @@
 	</i:Interaction.Triggers>
 
 
-	<ScrollViewer VerticalScrollBarVisibility="Auto">
+	<ScrollViewer VerticalScrollBarVisibility="Auto"
+				  PanningMode="Both">
 		<Grid>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" />

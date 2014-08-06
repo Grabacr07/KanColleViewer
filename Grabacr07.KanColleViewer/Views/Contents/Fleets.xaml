@@ -17,7 +17,8 @@
 			 d:DesignHeight="400"
 			 d:DataContext="{d:DesignInstance fleets:FleetsViewModel}">
 
-	<ScrollViewer VerticalScrollBarVisibility="Auto">
+	<ScrollViewer VerticalScrollBarVisibility="Auto"
+				  PanningMode="Both">
 		<Grid d:DataContext="{d:DesignData /SampleData/FleetsViewModelSampleData.xaml}">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />

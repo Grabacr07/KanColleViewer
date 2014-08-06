@@ -73,7 +73,8 @@
 	</UserControl.Resources>
 
 	<ScrollViewer DataContext="{Binding Fleets}"
-				  VerticalScrollBarVisibility="Auto">
+				  VerticalScrollBarVisibility="Auto"
+				  PanningMode="Both">
 		<ItemsControl ItemsSource="{Binding Fleets}"
 					  Margin="5,0,5,5"
 					  d:DataContext="{d:DesignData /SampleData/FleetsViewModelSampleData.xaml}">

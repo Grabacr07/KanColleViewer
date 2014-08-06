@@ -16,7 +16,8 @@
 			 d:DesignHeight="300"
 			 d:DataContext="{d:DesignInstance vmContents:QuestsViewModel}"
 			 Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}, Path=ActualWidth}">
-	<ScrollViewer VerticalScrollBarVisibility="Auto">
+	<ScrollViewer VerticalScrollBarVisibility="Auto"
+				  PanningMode="Both">
 		<Grid>
 			<Grid Visibility="{Binding IsUntaken, Converter={StaticResource UniversalBooleanToVisibilityConverter}, ConverterParameter=Collapsed:Visible}">
 				<Grid.ColumnDefinitions>

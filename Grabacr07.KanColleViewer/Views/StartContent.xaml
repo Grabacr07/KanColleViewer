@@ -124,24 +124,28 @@
 				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
 
-			<StackPanel Margin="0,8,10,8"
-						TextOptions.TextFormattingMode="Ideal">
-				<RadioButton x:Name="InformationTab"
-							 Style="{StaticResource TabLikeRadioButtonStyleKey}"
-							 IsChecked="True">
-					<TextBlock Text="Information"
-							   FontFamily="{DynamicResource EmphaticFontFamilyKey}"
-							   FontSize="16"
-							   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}" />
-				</RadioButton>
-				<RadioButton x:Name="SettingsTab"
-							 Style="{StaticResource TabLikeRadioButtonStyleKey}">
-					<TextBlock Text="Settings"
-							   FontFamily="{DynamicResource EmphaticFontFamilyKey}"
-							   FontSize="16"
-							   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}" />
-				</RadioButton>
-			</StackPanel>
+			<ScrollViewer VerticalScrollBarVisibility="Auto"
+						  PanningMode="Both"
+						  Margin="0,8,0,0">
+				<StackPanel Margin="0,0,10,8"
+							TextOptions.TextFormattingMode="Ideal">
+					<RadioButton x:Name="InformationTab"
+								 Style="{StaticResource TabLikeRadioButtonStyleKey}"
+								 IsChecked="True">
+						<TextBlock Text="Information"
+								   FontFamily="{DynamicResource EmphaticFontFamilyKey}"
+								   FontSize="16"
+								   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}" />
+					</RadioButton>
+					<RadioButton x:Name="SettingsTab"
+								 Style="{StaticResource TabLikeRadioButtonStyleKey}">
+						<TextBlock Text="Settings"
+								   FontFamily="{DynamicResource EmphaticFontFamilyKey}"
+								   FontSize="16"
+								   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}" />
+					</RadioButton>
+				</StackPanel>
+			</ScrollViewer>
 
 			<Grid Grid.Column="1"
 				  Margin="0,8,0,0"
@@ -163,6 +167,7 @@
 						BorderBrush="{DynamicResource BorderBrushKey}"
 						BorderThickness="1,0,1,0">
 					<ScrollViewer VerticalScrollBarVisibility="Auto"
+								  PanningMode="Both"
 								  Padding="10,0,20,14">
 						<StackPanel Margin="0,-9,0,0">
 							<TextBlock>
@@ -305,7 +310,8 @@
 					Margin="0,8,0,0"
 					DataContext="{Binding Source={x:Static root:App.ViewModelRoot}, Path=Settings}"
 					Visibility="{Binding ElementName=SettingsTab, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
-				<ScrollViewer VerticalScrollBarVisibility="Auto">
+				<ScrollViewer VerticalScrollBarVisibility="Auto"
+							  PanningMode="Both">
 					<TabControl Width="640"
 								HorizontalAlignment="Left"
 								Style="{StaticResource VerticalTabControlStyleKey}">

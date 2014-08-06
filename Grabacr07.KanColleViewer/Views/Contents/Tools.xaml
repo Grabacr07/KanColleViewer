@@ -24,7 +24,8 @@
 
 		<ListBox ItemsSource="{Binding Tools}"
 				 SelectedValue="{Binding SelectedTool}"
-				 Background="{DynamicResource BackgroundBrushKey}">
+				 Background="{DynamicResource BackgroundBrushKey}"
+				 ScrollViewer.PanningMode="Both">
 			<ListBox.Template>
 				<ControlTemplate TargetType="{x:Type ListBox}">
 					<StackPanel Background="{TemplateBinding Background}">
@@ -88,7 +89,8 @@
 		</ListBox>
 
 		<ScrollViewer Grid.Column="1"
-					  VerticalScrollBarVisibility="Auto">
+					  VerticalScrollBarVisibility="Auto"
+					  PanningMode="Both">
 			<ContentControl Content="{Binding SelectedTool.View}"
 							Margin="8,0,8,8" />
 		</ScrollViewer>

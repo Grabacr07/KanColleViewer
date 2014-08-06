@@ -32,62 +32,65 @@
 		</ResourceDictionary>
 	</UserControl.Resources>
 
-	<TabControl Style="{DynamicResource VerticalTabControlStyleKey}">
-		<TabItem>
-			<TabItem.Header>
-				<TextBlock Text="{Binding Resources.Settings_BrowserControl, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-						   Style="{StaticResource TabHeaderTextStyleKey}" />
-			</TabItem.Header>
-			<settings:Browser Margin="10,0" />
-		</TabItem>
+	<ScrollViewer VerticalScrollBarVisibility="Auto"
+				  PanningMode="Both">
+		<TabControl Style="{DynamicResource VerticalTabControlStyleKey}">
+			<TabItem>
+				<TabItem.Header>
+					<TextBlock Text="{Binding Resources.Settings_BrowserControl, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+							   Style="{StaticResource TabHeaderTextStyleKey}" />
+				</TabItem.Header>
+				<settings:Browser Margin="10,0" />
+			</TabItem>
 
-		<TabItem>
-			<TabItem.Header>
-				<TextBlock Text="{Binding Resources.Settings_Window, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-						   Style="{StaticResource TabHeaderTextStyleKey}" />
-			</TabItem.Header>
-			<settings:Window Margin="10,0" />
-		</TabItem>
+			<TabItem>
+				<TabItem.Header>
+					<TextBlock Text="{Binding Resources.Settings_Window, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+							   Style="{StaticResource TabHeaderTextStyleKey}" />
+				</TabItem.Header>
+				<settings:Window Margin="10,0" />
+			</TabItem>
 
-		<TabItem>
-			<TabItem.Header>
-				<TextBlock Text="{Binding Resources.Settings_Operation, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-						   Style="{StaticResource TabHeaderTextStyleKey}" />
-			</TabItem.Header>
-			<settings:Operation Margin="10,0" />
-		</TabItem>
+			<TabItem>
+				<TabItem.Header>
+					<TextBlock Text="{Binding Resources.Settings_Operation, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+							   Style="{StaticResource TabHeaderTextStyleKey}" />
+				</TabItem.Header>
+				<settings:Operation Margin="10,0" />
+			</TabItem>
 
-		<TabItem>
-			<TabItem.Header>
-				<TextBlock Text="通知設定"
-						   Style="{StaticResource TabHeaderTextStyleKey}" />
-			</TabItem.Header>
-			<settings:Notification Margin="10,0" />
-		</TabItem>
+			<TabItem>
+				<TabItem.Header>
+					<TextBlock Text="通知設定"
+							   Style="{StaticResource TabHeaderTextStyleKey}" />
+				</TabItem.Header>
+				<settings:Notification Margin="10,0" />
+			</TabItem>
 
-		<TabItem>
-			<TabItem.Header>
-				<TextBlock Text="{Binding Resources.Settings_Network, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-						   Style="{StaticResource TabHeaderTextStyleKey}" />
-			</TabItem.Header>
-			<settings:Network Margin="10,0" />
-		</TabItem>
+			<TabItem>
+				<TabItem.Header>
+					<TextBlock Text="{Binding Resources.Settings_Network, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+							   Style="{StaticResource TabHeaderTextStyleKey}" />
+				</TabItem.Header>
+				<settings:Network Margin="10,0" />
+			</TabItem>
 
-		<TabItem>
-			<TabItem.Header>
-				<TextBlock Text="{Binding Resources.Settings_Other, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-						   Style="{StaticResource TabHeaderTextStyleKey}" />
-			</TabItem.Header>
-			<settings:Others Margin="10,0" />
-		</TabItem>
+			<TabItem>
+				<TabItem.Header>
+					<TextBlock Text="{Binding Resources.Settings_Other, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+							   Style="{StaticResource TabHeaderTextStyleKey}" />
+				</TabItem.Header>
+				<settings:Others Margin="10,0" />
+			</TabItem>
 
-		<TabItem>
-			<TabItem.Header>
-				<TextBlock Text="{Binding Resources.Settings_VersionInfo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-						   Style="{StaticResource TabHeaderTextStyleKey}" />
-			</TabItem.Header>
-			<settings:VersionInfo Margin="10,0" />
-		</TabItem>
-	</TabControl>
+			<TabItem>
+				<TabItem.Header>
+					<TextBlock Text="{Binding Resources.Settings_VersionInfo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+							   Style="{StaticResource TabHeaderTextStyleKey}" />
+				</TabItem.Header>
+				<settings:VersionInfo Margin="10,0" />
+			</TabItem>
+		</TabControl>
+	</ScrollViewer>
 
 </UserControl>
