@@ -89,7 +89,7 @@ namespace Counter
 			proxy.api_req_mission_result
 				.TryParse<kcsapi_mission_result>()
 				.Where(x => x.IsSuccess)
-				.Where(x => x.Data.api_clear_result == 1)
+				.Where(x => x.Data.api_clear_result == 1 || x.Data.api_clear_result == 2)
 				.Subscribe(_ => this.Count++);
 
 			this.Text = "遠征に成功した回数";
