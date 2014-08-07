@@ -80,10 +80,14 @@ namespace Grabacr07.KanColleViewer.Models
 				{
 					if (Settings.Current.NotifyBuildingCompleted)
 					{
+						var shipName = Settings.Current.CanDisplayBuildingShipName 
+							? args.Ship.Name 
+							: Resources.Common_ShipGirl;
+
 						PluginHost.Instance.GetNotifier().Show(
 							NotifyType.Build,
 							Resources.Dockyard_NotificationMessage_Title,
-							string.Format(Resources.Dockyard_NotificationMessage, args.DockId, args.Ship.Name),
+							string.Format(Resources.Dockyard_NotificationMessage, args.DockId, shipName),
 							() => App.ViewModelRoot.Activate());
 					}
 				};
