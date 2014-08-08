@@ -23,12 +23,13 @@ namespace Grabacr07.KanColleViewer.Plugins
 		}
 
 		#endregion
+		CustomSound sound = new CustomSound();
 
 		public void Initialize()
 		{
 			try
 			{
-				var shortcutPath = Environment.GetFolderPath(Environment.SpecialFolder.StartMenu) + "\\Programs\\提督業も忙しい！.lnk";
+				var shortcutPath = Environment.GetFolderPath(Environment.SpecialFolder.StartMenu) + "\\Programs\\제독업무도 바빠！.lnk";
 #if DEBUG
 				if (!File.Exists(shortcutPath))
 				{
@@ -71,7 +72,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 			toast.Activated += (sender, args) => activated();
 			if (failed != null)
 				toast.ToastFailed += (sender, args) => failed(args.ErrorCode);
-
+			sound.SoundOutput(header, true);
 			toast.Show();
 		}
 

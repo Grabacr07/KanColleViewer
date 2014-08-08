@@ -13,26 +13,26 @@ namespace Grabacr07.KanColleWrapper.Models
 			switch (rank)
 			{
 				case 1:
-					return "元帥";
+					return "원수";
 				case 2:
-					return "大将";
+					return "대장";
 				case 3:
-					return "中将";
+					return "중장";
 				case 4:
-					return "少将";
+					return "소장";
 				case 5:
-					return "大佐";
+					return "대령";
 				case 6:
-					return "中佐";
+					return "중령";
 				case 7:
-					return "新米中佐";
+					return "햅쌀중령";
 				case 8:
-					return "少佐";
+					return "소령";
 				case 9:
-					return "中堅少佐";
+					return "중견소령";
 				case 10:
 				default:
-					return "新米少佐";
+					return "햅쌀소령";
 			}
 		}
 	}

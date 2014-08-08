@@ -15,6 +15,25 @@ namespace Grabacr07.KanColleWrapper.Models
 		private readonly Homeport homeport;
 		private bool notificated;
 
+		#region Level 変更通知プロパティ
+
+		private int _Level;
+
+		public int Level
+		{
+			get { return this._Level; }
+			private set
+			{
+				if (this._Level != value)
+				{
+					this._Level = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		#region Id 変更通知プロパティ
 
 		private int _Id;
@@ -169,6 +188,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.CompleteTime = this.State == RepairingDockState.Repairing
 				? (DateTimeOffset?)Definitions.UnixEpoch.AddMilliseconds(rawData.api_complete_time)
 				: null;
+			this.Level = this.State == RepairingDockState.Repairing? this.Ship.Level:0;
 		}
 
 		internal void Finish()

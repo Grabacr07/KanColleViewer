@@ -93,6 +93,15 @@
 				<metro2:HyperlinkEx Uri="https://twitter.com/southrop113">
 					<Run Text="@southrop113" />
 				</metro2:HyperlinkEx>
+                <LineBreak />
+
+						<Run Text="Localization (Korean):" />
+						<metro2:HyperlinkEx Uri="https://twitter.com/FreyYa312">
+									<Run Text="@FreyYa312," />
+								</metro2:HyperlinkEx>
+								<metro2:HyperlinkEx Uri="http://kaster.egloos.com">
+									<Run Text="Kaster" />
+								</metro2:HyperlinkEx>
 			</TextBlock>
 
 			<Rectangle Height="1"

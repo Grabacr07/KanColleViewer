@@ -1,11 +1,17 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Collections.Specialized;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
-using System.Reflection;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
+using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Specialized;
+using Codeplex.Data;
+using Fiddler;
 using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
@@ -17,33 +23,30 @@ namespace Grabacr07.KanColleWrapper
 	{
 		public bool EnableLogging { get; set; }
 
-		private bool waitingForShip;
+		private bool waitingForShip = false;
 		private int dockid;
-		private readonly int[] shipmats;
+		private int[] shipmats;
 
-		private enum LogType
-		{
-			BuildItem,
-			BuildShip,
-			ShipDrop
-		};
+		enum LogType { BuildItem, BuildShip, ShipDrop };
 
 		internal Logger(KanColleProxy proxy)
 		{
 			this.shipmats = new int[5];
 
 			// ちょっと考えなおす
-			//proxy.api_req_kousyou_createitem.TryParse<kcsapi_createitem>().Subscribe(x => this.CreateItem(x.Data, x.Request));
-			//proxy.api_req_kousyou_createship.TryParse<kcsapi_createship>().Subscribe(x => this.CreateShip(x.Request));
-			//proxy.api_get_member_kdock.TryParse<kcsapi_kdock[]>().Subscribe(x => this.KDock(x.Data));
-			//proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => this.BattleResult(x.Data));
+			proxy.api_req_kousyou_createitem.TryParse<kcsapi_createitem>().Subscribe(x => this.CreateItem(x.Data, x.Request));
+			proxy.api_req_kousyou_createship.TryParse<kcsapi_createship>().Subscribe(x => this.CreateShip(x.Request));
+			proxy.api_get_member_kdock.TryParse<kcsapi_kdock[]>().Subscribe(x => this.KDock(x.Data));
+			proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => this.BattleResult(x.Data));
 		}
 
-		private void CreateItem(kcsapi_createitem item, NameValueCollection req)
+		private void CreateItem(kcsapi_createitem source, NameValueCollection req)
 		{
-			this.Log(LogType.BuildItem, "{0},{1},{2},{3},{4},{5},{6}", item.api_create_flag == 1 ? KanColleClient.Current.Master.SlotItems[item.api_slotitem_id].Name : "NA",
+			this.Log(LogType.BuildItem, "{0},{1},{2},{3},{4},{5},{6}", DateTime.Now.ToString("yyyy/M/d H:mm"),
+				source.api_create_flag == 1 ? KanColleClient.Current.Master.SlotItems[source.api_slot_item.api_slotitem_id].Name : "NA",
 				KanColleClient.Current.Homeport.Organization.Fleets[1].Ships[0].Info.ShipType.Name,
-				req["api_item1"], req["api_item2"], req["api_item3"], req["api_item4"], DateTime.Now.ToString("M/d/yyyy H:mm"));
+				req["api_item1"], req["api_item2"], req["api_item3"], req["api_item4"]);
+
 		}
 
 		private void CreateShip(NameValueCollection req)
@@ -59,70 +62,82 @@ namespace Grabacr07.KanColleWrapper
 
 		private void KDock(kcsapi_kdock[] docks)
 		{
-			foreach (var dock in docks.Where(dock => this.waitingForShip && dock.api_id == this.dockid))
+			foreach (var dock in docks)
 			{
-				this.Log(LogType.BuildShip, "{0},{1},{2},{3},{4},{5},{6}", KanColleClient.Current.Master.Ships[dock.api_created_ship_id].Name, this.shipmats[0], this.shipmats[1], this.shipmats[2], this.shipmats[3], this.shipmats[4], DateTime.Now.ToString("M/d/yyyy H:mm"));
-				this.waitingForShip = false;
+				if (waitingForShip && dock.api_id == dockid)
+				{
+					Log(LogType.BuildShip, "{0},{1},{2},{3},{4},{5},{6}", DateTime.Now.ToString("yyyy/M/d H:mm"),KanColleClient.Current.Master.Ships[dock.api_created_ship_id].Name, shipmats[0], shipmats[1], shipmats[2], shipmats[3], shipmats[4]);
+					waitingForShip = false;
+				}
 			}
 		}
 
 		private void BattleResult(kcsapi_battleresult br)
 		{
-			if (br.api_get_ship == null)
-				return;
+			string ShipName="";
+			string ShipType="";
+			if (br.api_get_ship != null)
+			{
+			ShipName = KanColleClient.Current.Translations.GetTranslation(br.api_get_ship.api_ship_name, TranslationType.Ships, br);
+			ShipType = KanColleClient.Current.Translations.GetTranslation(br.api_quest_name, TranslationType.OperationMaps, br);
+			}
 
-			this.Log(LogType.ShipDrop, "{0},{1},{2},{3},{4}", br.api_get_ship.api_ship_name, br.api_quest_name, br.api_enemy_info.api_deck_name, br.api_win_rank, DateTime.Now.ToString("M/d/yyyy H:mm"));
+			Log(LogType.ShipDrop, "{0},{1},{2},{3},{4}",DateTime.Now.ToString("yyyy/M/d H:mm"),ShipName,ShipType,
+				KanColleClient.Current.Translations.GetTranslation(br.api_enemy_info.api_deck_name, TranslationType.OperationSortie, br),
+				br.api_win_rank);
 		}
 
-		private void Log(LogType type, string format, params object[] args)
+		private void Log(LogType Type, string format, params object[] args)
 		{
-			if (!this.EnableLogging) return;
+			if (!EnableLogging)
+				return;
 
-			var mainFolder = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+			string MainFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
 
-			switch (type)
+			if (Type == LogType.BuildItem)
 			{
-				case LogType.BuildItem:
-					if (!File.Exists(mainFolder + "\\ItemBuildLog.csv"))
+				if (!System.IO.File.Exists(MainFolder + "\\ItemBuildLog.csv"))
+				{
+					using (StreamWriter w = File.AppendText(MainFolder + "\\ItemBuildLog.csv"))
 					{
-						using (var w = File.AppendText(mainFolder + "\\ItemBuildLog.csv"))
-						{
-							w.WriteLine("Result,Secretary,Fuel,Ammo,Steel,Bauxite,Date", args);
-						}
+						w.WriteLine("날짜,결과,비서함,연료,탄,강재,보크사이트", args);
 					}
-					using (var w = File.AppendText(mainFolder + "\\ItemBuildLog.csv"))
-					{
-						w.WriteLine(format, args);
-					}
-					break;
+				}
 
-				case LogType.BuildShip:
-					if (!File.Exists(mainFolder + "\\ShipBuildLog.csv"))
+				using (StreamWriter w = File.AppendText(MainFolder + "\\ItemBuildLog.csv"))
+				{
+					w.WriteLine(format, args);
+				}
+			}
+			else if (Type == LogType.BuildShip)
+			{
+				if (!System.IO.File.Exists(MainFolder + "\\ShipBuildLog.csv"))
+				{
+					using (StreamWriter w = File.AppendText(MainFolder + "\\ShipBuildLog.csv"))
 					{
-						using (var w = File.AppendText(mainFolder + "\\ShipBuildLog.csv"))
-						{
-							w.WriteLine("Result,Fuel,Ammo,Steel,Bauxite,# of Build Materials,Date", args);
-						}
+						w.WriteLine("날짜,결과,연료,탄,강재,보크사이트,개발자재", args);
 					}
-					using (var w = File.AppendText(mainFolder + "\\ShipBuildLog.csv"))
-					{
-						w.WriteLine(format, args);
-					}
-					break;
+				}
 
-				case LogType.ShipDrop:
-					if (!File.Exists(mainFolder + "\\DropLog.csv"))
+				using (StreamWriter w = File.AppendText(MainFolder + "\\ShipBuildLog.csv"))
+				{
+					w.WriteLine(format, args);
+				}
+			}
+			else if (Type == LogType.ShipDrop)
+			{
+				if (!System.IO.File.Exists(MainFolder + "\\DropLog.csv"))
+				{
+					using (StreamWriter w = File.AppendText(MainFolder + "\\DropLog.csv"))
 					{
-						using (var w = File.AppendText(mainFolder + "\\DropLog.csv"))
-						{
-							w.WriteLine("Result,Operation,Enemy Fleet,Rank,Date", args);
-						}
+						w.WriteLine("날짜,드랍,해역,적 함대,랭크", args);
 					}
-					using (var w = File.AppendText(mainFolder + "\\DropLog.csv"))
-					{
-						w.WriteLine(format, args);
-					}
-					break;
+				}
+
+				using (StreamWriter w = File.AppendText(MainFolder + "\\DropLog.csv"))
+				{
+					w.WriteLine(format, args);
+				}
 			}
 		}
 	}

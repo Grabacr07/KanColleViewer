@@ -1,68 +1,78 @@
-﻿提督業も忙しい！ (KanColleViewer)
+﻿﻿제독업무도 바빠！ (KanColleViewer)
 --
 
-提督業も忙しい！ (KanColleViewer) は、DMM.com が配信しているブラウザゲーム「艦隊これくしょん ～艦これ～」をより遊びやすくするためのツールです。
+본 프로그램은 칸코레 전용 브라우저같은 용도로 사용됩니다.
+함대 컬렉션~칸코레~를 더 쉽고 재미있게 플레이하기 위해 사용되는 툴입니다.
+해당 버전은 기존 오리지널 칸코레 뷰어에다가 한국 유저들이 좀 더 쉽게 칸코레를 즐기기 위한 기능들을 추가한 버전입니다.
 
-詳しくは、[特設ページ](http://grabacr.net/kancolleviewer) をご覧ください。
-
-
-
-### このプロジェクトについて
-
-IE コンポーネント (WPF の WebBrowser コントロール) 上で艦これを表示し、[FiddlerCore](http://fiddler2.com/fiddlercore) で通信内容をキャプチャしています。
-艦これの動作は、Internet Explorer 上で動作しているものと同じです。
-**当然ですが、通信内容の変更や、DMM/艦これのサーバーに対する情報の送信等 (マクロ・チート行為) は一切行っていません。**
+사용 설명 및 기타 내용은 [이 페이지](http://kancolleviewerkr.tk) 에서 확인할 수 있습니다.
 
 
-### 主な機能
+### 이 프로젝트에 대해서
 
-* 高速修復材や高速建造材 (ゲーム内で確認しにくいやつ) のリアルタイム表示
-* 所属している艦娘の数、保有している装備の数のリアルタイム表示
-* 艦隊と、艦隊に属する艦娘の一覧表示
-* 装備と、それぞれを装備している艦娘の一覧表示
-* コンディションが回復し艦隊が出撃可能になったタイミングでのトースト通知
-* 入渠ドック・建造ドックの使用状況と、整備・建造終了時のトースト通知
-* 現在遂行中の任務の一覧表示と、残っているデイリー/ウィークリー任務の一覧表示
-* 遠征の状況と、終了時のトースト通知
-* スクリーンショット保存
-* ミュート
+WPF WebBrowser 컨트롤 (IE구성요소) 를 기반으로、[FiddlerCore](http://fiddler2.com/fiddlercore) 를 이용하여 통신내역을 캡쳐합니다.
 
+당연하지만 통신내역의 변경, 칸코레서버에 대한 정보의 전송 등은 하지 않습니다.
 
+### 주요기능
+* 고속수복제 및 고속건조제 (게임 내에서 확인 하기 어려운 것들) 의 실시간 표시
+* 사령부에 소속된 칸무스 수, 보유하고 있는 장비수의 실시간 표시
+* 함대와 함대에 속해있는 칸무스 목록 보기
+* 입거도크,건조도크의 사용과 입거 ​​· 건조 종료시 알림 메시지
+* 현재 수행중인 임무를 나열하고 남아있는 일일 / 주간 임무 목록 보기
+* 원정상황과 종료시 알림 메시지
+* 스크린샷 저장
+* 음소거
 
-### 動作環境
+### 해당 한글화 버전 주요기능
 
-* Windows 8 以降
-* Windows 7
-
-開発者 ([@Grabacr07](https://twitter.com/Grabacr07)) は Windows 8.1 Pro でのみ動作確認を行っております。
-Windows 7 では、遠征や建造の終了時のトースト通知が動作しません (代わりに、タスクトレイからのバルーン通知になります)。 Windows 8 以降での使用を推奨します。
-
-* [.NET Framework 4.5](http://www.microsoft.com/ja-jp/download/details.aspx?id=30653)
-
-Windows 7 で使用する場合、.NET Framework 4.5 のインストールが必要です。  
-Windows 8 以降の場合は標準でインストールされています。
-
-IE コンポーネントを使用しており、ブラウザー部分は Internet Explorer の設定に依存します。 また、ゲームが正しく表示されない等の現象が発生した場合は、IE の設定や、IE 上で Flash が表示できるかどうかをご確認ください。
-
-なお、艦これゲーム部分のサイズ (800 x 480) と Internet Explorer (WebBrowser コントロール) のサイズをぴったり合わせて表示しているだけで、Flash 抽出等も行っていません。
+* 입거, 대파경고, 원정 알림음을 원하는 소리로 설정가능(CustomSound.cs)
+* 경험치 계산기 제공(CalExp)
+* 칸무스 이름, 장비 이름, 퀘스트에 대한 한글 번역 지원
+* 원정 리스트 지원
+* 쿠키 조작기능을 통한 해외지역(일본외)에서의 칸코레 접속
+* 업데이트 알림 및 번역내용 자동갱신기능
 
 
+### 작동환경
+* Windows 8 이상
+* Windows 7 (문제가 발생할 수 있음)
 
-### 開発環境・言語・ライブラリ
 
-C# + WPF で開発しています。開発環境は Windows 8.1 Pro + Visual Studio Premium 2013 です。以下のライブラリを使用しています。
+Windows 7은 지원하긴 하지만 개발자([@Grabacr07](https://twitter.com/Grabacr07)) 도 그렇고 지금 버전을 올리는 쪽([@FreyYa312](https://twitter.com/Freyya312))도 기능 업데이트 도중 해당 OS를 통한 별도의 테스트를 진행하지 않습니다.
+ 
+최대한 피드백을 받아서 발생하는 문제들은 해결하고있지만 추후에 정식버전에 추가되는 기능들이 제한될 수도 있습니다.
+
+ * [.NET Framework 4.5](http://www.microsoft.com/ko-kr/download/details.aspx?id=30653)
+
+윈도우7의 경우 .NET Framework 4.5의 설치가 별도로 필요합니다. 윈도우8이상의 경우 별도 설치할 필요없습니다.
+
+되도록이면 Windows 8이상 버전에서 사용을 권장합니다.
+
+
+### 개발환경, 언어, 라이브러리
+
+C # + WPF에서 개발하고 있습니다.
 
 * [Reactive Extensions](http://rx.codeplex.com/)
 * Interactive Extensions
 * [Windows API Code Pack](http://archive.msdn.microsoft.com/WindowsAPICodePack)
-* [Livet](http://ugaya40.net/livet) (MVVM インフラストラクチャ)
-* [DynamicJson](http://dynamicjson.codeplex.com/) (一部の JSON デシリアライズ処理)
-* [FiddlerCore](http://fiddler2.com/fiddlercore) (ネットワークキャプチャ)
+* [Livet](http://ugaya40.net/livet) (MVVM 인프라스트럭처)
+* [DynamicJson](http://dynamicjson.codeplex.com/) (일부 JSON 직렬화 처리)
+* [FiddlerCore](http://fiddler2.com/fiddlercore) (네트워크 캡처)
+* [NAudio](http://naudio.codeplex.com/) 알림음 송출
+
+### 기타사항
+
+* [Zharay](ttps://github.com/Zharay/KanColleViewer)님의 코드를 많이 참고하였습니다.
+* 프로그래밍 기술이 많이 부족한 면이 있어서 직접 추가하거나 수정한 코드쪽은 매우 지저분합니다. 양해부탁드립니다.
+* 해당 프로그램을 사용하다가 발생하는 문제에 대해서는 책임을 지지 않습니다.
+* 버그신고나 기능추가 제안에 대한것은 Github 이슈항목이나 트위터, DC인사이드 칸코레 갤러리에서 받고있습니다.
 
 
-#### ライセンス
-
+#### 라이센스
 * MIT License
 
-MIT ライセンスの下で公開する、オープンソース / フリーソフトウェアです。
+MIT 라이센스하에 공개하는 오픈 소스 / 자유 소프트웨어입니다.
+
 

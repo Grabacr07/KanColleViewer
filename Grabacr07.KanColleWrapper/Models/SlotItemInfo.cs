@@ -24,7 +24,10 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public string Name
 		{
-			get { return this.RawData.api_name; }
+			get
+			{
+				return KanColleClient.Current.Translations.GetTranslation(this.RawData.api_name, TranslationType.Equipment, this.RawData);
+			}
 		}
 
 		public SlotItemIconType IconType

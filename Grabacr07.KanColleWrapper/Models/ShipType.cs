@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Models.Raw;
+using Grabacr07.KanColleWrapper.Internal;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
@@ -20,7 +21,10 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public string Name
 		{
-			get { return this.RawData.api_name; }
+			get
+			{
+				return KanColleClient.Current.Translations.GetTranslation(RawData.api_name, TranslationType.ShipTypes, this.RawData, this.Id);
+			}
 		}
 
 		public int SortNumber

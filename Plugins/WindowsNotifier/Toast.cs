@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.Data.Xml.Dom;
 using Windows.Foundation;
 using Windows.UI.Notifications;
+using Grabacr07.KanColleViewer.Models;
 
 namespace Grabacr07.KanColleViewer.Plugins
 {
@@ -33,6 +35,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 		#endregion
 
 		public const string AppId = "Grabacr07.KanColleViewer";
+		CustomSound sound = new CustomSound();
 
 		private readonly ToastNotification toast;
 
@@ -56,7 +59,16 @@ namespace Grabacr07.KanColleViewer.Plugins
 
 		public Toast(string header, string body)
 		{
-			var toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
+			XmlDocument doc = new XmlDocument(); ;
+			doc = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
+
+			var test = doc.DocumentElement;
+			XmlElement audio = doc.CreateElement("audio");
+			if (!string.IsNullOrEmpty(sound.FileCheck(header))) audio.SetAttribute("silent", "true");
+			test.AppendChild(audio);
+			doc = test.OwnerDocument;
+
+			var toastXml = doc;
 
 			var stringElements = toastXml.GetElementsByTagName("text");
 			if (stringElements.Length == 2)

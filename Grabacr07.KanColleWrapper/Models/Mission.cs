@@ -20,8 +20,10 @@ namespace Grabacr07.KanColleWrapper.Models
 			: base(mission)
 		{
 			this.Id = mission.api_id;
-			this.Title = mission.api_name;
-			this.Detail = mission.api_details;
+			//this.Title = mission.api_name;
+			//this.Detail = mission.api_details;
+			this.Title = KanColleClient.Current.Translations.GetQuestTranslation(mission.api_name, TranslationType.ExpeditionTitle, this.RawData, mission.api_id);
+			this.Detail = KanColleClient.Current.Translations.GetQuestTranslation(mission.api_details, TranslationType.ExpeditionDetail, this.RawData, mission.api_id);
 		}
 	}
 }

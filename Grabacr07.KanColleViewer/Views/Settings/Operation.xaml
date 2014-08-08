@@ -20,11 +20,11 @@
 	</UserControl.Resources>
 
 	<StackPanel>
-		<TextBlock Text="出撃コンディション"
+		<TextBlock Text="출격 컨디션"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 		<StackPanel Margin="20,0,0,0">
-			<TextBlock Text="艦隊内の全艦のコンディションが次の数値以上になったとき、出撃可能と判断する" />
+			<TextBlock Text="칸무스가 출격 가능하다고 판단되는 컨디션으로 설정" />
 
 			<Grid Margin="0,10">
 				<Grid.ColumnDefinitions>
@@ -33,7 +33,7 @@
 					<ColumnDefinition />
 				</Grid.ColumnDefinitions>
 
-				<metro:PromptTextBox Prompt="例: 40"
+				<metro:PromptTextBox Prompt="예: 40"
 									 Width="60">
 					<metro:PromptTextBox.Text>
 						<Binding Source="{x:Static models:Settings.Current}"
@@ -48,13 +48,21 @@
 				</metro:PromptTextBox>
 				<TextBlock Grid.Column="2"
 						   Style="{DynamicResource DetailTextStyleKey}">
-					<Run Text="※通常は、間宮アイコンが消灯する 40 か、自然回復上限の 49 に設定します。" />
-				</TextBlock>
+                    <Run Text="※보통 마미야 점등이 꺼지는 40이나 최대 자연회복치인 49로 설정합니다." />
+                </TextBlock>
 			</Grid>
 		</StackPanel>
 
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+        
 
-	</StackPanel>
+        <TextBlock Text="{Binding Resources.Settings_FleetCondition, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
+                   Margin="0,10"/>
+        <CheckBox Content="{Binding Source={x:Static properties:Resources.Settings_Notify_CriticalCondition}, Mode=OneWay}" IsChecked="{Binding EnableCriticalNotify}" Height="17" Margin="15,0,0,10"/>
+		<CheckBox Content="해역돌파중 대파된 칸무스가 있을때 팝업을 띄움" IsChecked="{Binding EnableCriticalPopup}" Height="17" Margin="15,0,0,10"/>
+		<CheckBox Content="{Binding Source={x:Static properties:Resources.Settings_Accent_CriticalCondition}, Mode=OneWay}" IsChecked="{Binding EnableCriticalAccent}" Height="17" Margin="15,0,0,10"/>
+
+    </StackPanel>
 </UserControl>

@@ -59,6 +59,42 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+        #region CanSetRegionCookie 変更通知プロパティ
+
+        private bool _CanSetRegionCookie = true;
+
+        public bool CanSetRegionCookie
+        {
+            get { return this._CanSetRegionCookie; }
+            set
+            {
+                if (this._CanSetRegionCookie != value)
+                {
+                    this._CanSetRegionCookie = value;
+                    this.RaisePropertyChanged();
+                }
+            }
+        }
+
+        #endregion
+        #region SetRegionCookieButtonContent 変更通知プロパティ
+        private string _SetRegionCookieButtonContent = Properties.Resources.StartContent_SetRegionCookieButton;
+
+        public string SetRegionCookieButtonContent
+        {
+            get { return this._SetRegionCookieButtonContent; }
+            set
+            {
+                if (this._SetRegionCookieButtonContent != value)
+                {
+                    this._SetRegionCookieButtonContent = value;
+                    this.RaisePropertyChanged();
+                }
+            }
+        }
+        #endregion
+
+
 		private StartContentViewModel() { }
 
 		public async void DeleteInternetCache()
@@ -84,6 +120,12 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			{
 				Debug.WriteLine(ex);
 			}
+		}
+        public void SetRegionCookie()
+		{
+            App.ViewModelRoot.Navigator.GoGame();
+            this.SetRegionCookieButtonContent = Properties.Resources.StartContent_SetRegionCookieMessage;
+            this.CanSetRegionCookie = false;
 		}
 	}
 }

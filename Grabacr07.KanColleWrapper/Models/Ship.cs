@@ -42,10 +42,17 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			get { return this.RawData.api_lv; }
 		}
-
+		public string LvName
+		{
+			get { return "[Lv." + this.Level + "]  \t" + this.Info.Name; }
+		}
+		public string NameLv
+		{
+			get { return string.Format("{0, -20} [Lv.{1}]", this.Info.Name, this.Level); }
+		}
 		/// <summary>
-		/// 艦娘がロックされているかどうかを示す値を取得します。
-		/// </summary>
+		/// 艦娘がロックされているかどうかを示
+
 		public bool IsLocked
 		{
 			get { return this.RawData.api_locked == 1; }

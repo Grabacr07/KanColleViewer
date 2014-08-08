@@ -39,6 +39,9 @@
 		"/kcsapi/api_req_mission/result",
 		"/kcsapi/api_req_sortie/battle",
 		"/kcsapi/api_req_sortie/battleresult",
+		"/kcsapi/api_req_battle_midnight/battle",
+		"/kcsapi/api_req_battle_midnight/sp_midnight",
+		"/kcsapi/api_req_sortie/night_to_day",
 	};
 #>
 // 

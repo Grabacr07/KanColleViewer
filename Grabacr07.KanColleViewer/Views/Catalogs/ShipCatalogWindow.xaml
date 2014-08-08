@@ -94,7 +94,7 @@
 			<Expander Margin="8"
 					  IsExpanded="{Binding IsOpenSettings, Mode=TwoWay}">
 				<Expander.Header>
-					<TextBlock Text="フィルター設定"
+					<TextBlock Text="필터 설정"
 							   Style="{DynamicResource HeaderTextStyleKey}"
 							   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 				</Expander.Header>
@@ -117,13 +117,13 @@
 							</Grid.RowDefinitions>
 
 							<TextBlock Margin="0,2">
-								<Run Text="艦種" />
+								<Run Text="함종" />
 								<Run Text=":" />
 							</TextBlock>
 
 							<CheckBox Grid.Row="0"
 									  Grid.Column="2"
-									  Content="すべて選択"
+									  Content="모두선택"
 									  IsChecked="{Binding CheckAllShipTypes, Mode=TwoWay}"
 									  Margin="0,2" />
 
@@ -159,14 +159,14 @@
 									</Style>
 								</WrapPanel.Resources>
 								<!-- これっきりボタン -->
-								<metro2:CallMethodButton Content="駆逐艦">
+								<metro2:CallMethodButton Content="구축함">
 									<metro2:CallMethodButton.MethodParameter>
 										<x:Array Type="s:Int32">
 											<s:Int32>2</s:Int32>
 										</x:Array>
 									</metro2:CallMethodButton.MethodParameter>
 								</metro2:CallMethodButton>
-								<metro2:CallMethodButton Content="軽巡・雷巡">
+								<metro2:CallMethodButton Content="경순・뇌순">
 									<metro2:CallMethodButton.MethodParameter>
 										<x:Array Type="s:Int32">
 											<s:Int32>3</s:Int32>
@@ -174,7 +174,7 @@
 										</x:Array>
 									</metro2:CallMethodButton.MethodParameter>
 								</metro2:CallMethodButton>
-								<metro2:CallMethodButton Content="重巡・航巡">
+								<metro2:CallMethodButton Content="중순・항순">
 									<metro2:CallMethodButton.MethodParameter>
 										<x:Array Type="s:Int32">
 											<s:Int32>5</s:Int32>
@@ -182,7 +182,7 @@
 										</x:Array>
 									</metro2:CallMethodButton.MethodParameter>
 								</metro2:CallMethodButton>
-								<metro2:CallMethodButton Content="戦艦">
+								<metro2:CallMethodButton Content="전함">
 									<metro2:CallMethodButton.MethodParameter>
 										<x:Array Type="s:Int32">
 											<s:Int32>8</s:Int32>
@@ -192,7 +192,7 @@
 										</x:Array>
 									</metro2:CallMethodButton.MethodParameter>
 								</metro2:CallMethodButton>
-								<metro2:CallMethodButton Content="航空母艦">
+								<metro2:CallMethodButton Content="항공모함">
 									<metro2:CallMethodButton.MethodParameter>
 										<x:Array Type="s:Int32">
 											<s:Int32>7</s:Int32>
@@ -201,7 +201,7 @@
 										</x:Array>
 									</metro2:CallMethodButton.MethodParameter>
 								</metro2:CallMethodButton>
-								<metro2:CallMethodButton Content="潜水艦">
+								<metro2:CallMethodButton Content="잠수함">
 									<metro2:CallMethodButton.MethodParameter>
 										<x:Array Type="s:Int32">
 											<s:Int32>13</s:Int32>
@@ -209,7 +209,7 @@
 										</x:Array>
 									</metro2:CallMethodButton.MethodParameter>
 								</metro2:CallMethodButton>
-								<metro2:CallMethodButton Content="航戦・航巡">
+								<metro2:CallMethodButton Content="항전・항순">
 									<metro2:CallMethodButton.MethodParameter>
 										<x:Array Type="s:Int32">
 											<s:Int32>6</s:Int32>
@@ -255,13 +255,13 @@
 									</Grid.ColumnDefinitions>
 									<TextBlock Margin="0,2"
 											   HorizontalAlignment="Right">
-										<Run Text="レベル" />
+										<Run Text="레벨" />
 										<Run Text=":" />
 									</TextBlock>
 									<WrapPanel Grid.Column="2">
-										<RadioButton Content="すべて"
+										<RadioButton Content="모두"
 													 IsChecked="{Binding Both, Mode=TwoWay}" />
-										<RadioButton Content="Lv.2 以上"
+										<RadioButton Content="Lv.2 이상"
 													 IsChecked="{Binding Level2OrMore, Mode=TwoWay}" />
 										<RadioButton Content="Lv.1"
 													 IsChecked="{Binding Level1, Mode=TwoWay}" />
@@ -277,15 +277,15 @@
 									</Grid.ColumnDefinitions>
 									<TextBlock Margin="0,2"
 											   HorizontalAlignment="Right">
-										<Run Text="ロック" />
+										<Run Text="자물쇠" />
 										<Run Text=":" />
 									</TextBlock>
 									<WrapPanel Grid.Column="2">
-										<RadioButton Content="すべて"
+										<RadioButton Content="모두"
 													 IsChecked="{Binding Both, Mode=TwoWay}" />
-										<RadioButton Content="ロックしている"
+										<RadioButton Content="채워져있음"
 													 IsChecked="{Binding Locked, Mode=TwoWay}" />
-										<RadioButton Content="ロックしていない"
+										<RadioButton Content="안채워져있음"
 													 IsChecked="{Binding Unlocked, Mode=TwoWay}" />
 									</WrapPanel>
 								</Grid>
@@ -299,11 +299,11 @@
 									</Grid.ColumnDefinitions>
 									<TextBlock Margin="0,2"
 											   HorizontalAlignment="Right">
-										<Run Text="遠征" />
+										<Run Text="원정" />
 										<Run Text=":" />
 									</TextBlock>
 									<WrapPanel Grid.Column="2">
-										<CheckBox Content="遠征中の艦を除外する"
+										<CheckBox Content="원정중인 칸무스를 제외"
 												  IsChecked="{Binding WithoutExpedition, Mode=TwoWay}" />
 									</WrapPanel>
 								</Grid>
@@ -319,15 +319,15 @@
 									</Grid.ColumnDefinitions>
 									<TextBlock Margin="0,2"
 											   HorizontalAlignment="Right">
-										<Run Text="速力" />
+										<Run Text="속력" />
 										<Run Text=":" />
 									</TextBlock>
 									<WrapPanel Grid.Column="2">
-										<RadioButton Content="すべて"
+										<RadioButton Content="모두"
 													 IsChecked="{Binding Both, Mode=TwoWay}" />
-										<RadioButton Content="高速"
+										<RadioButton Content="고속"
 													 IsChecked="{Binding Fast, Mode=TwoWay}" />
-										<RadioButton Content="低速"
+										<RadioButton Content="저속"
 													 IsChecked="{Binding Low, Mode=TwoWay}" />
 									</WrapPanel>
 								</Grid>
@@ -341,15 +341,15 @@
 									</Grid.ColumnDefinitions>
 									<TextBlock Margin="0,2"
 											   HorizontalAlignment="Right">
-										<Run Text="改造" />
+										<Run Text="개조" />
 										<Run Text=":" />
 									</TextBlock>
 									<WrapPanel Grid.Column="2">
-										<RadioButton Content="すべて"
+										<RadioButton Content="모두"
 													 IsChecked="{Binding Both, Mode=TwoWay}" />
-										<RadioButton Content="改造完了"
+										<RadioButton Content="개조완료"
 													 IsChecked="{Binding AlreadyRemodeling, Mode=TwoWay}" />
-										<RadioButton Content="改造未完"
+										<RadioButton Content="개조미완"
 													 IsChecked="{Binding NotAlreadyRemodeling, Mode=TwoWay}" />
 									</WrapPanel>
 								</Grid>
@@ -363,15 +363,15 @@
 									</Grid.ColumnDefinitions>
 									<TextBlock Margin="0,2"
 											   HorizontalAlignment="Right">
-										<Run Text="近代化改修" />
+										<Run Text="근대화개수" />
 										<Run Text=":" />
 									</TextBlock>
 									<WrapPanel Grid.Column="2">
-										<RadioButton Content="すべて"
+										<RadioButton Content="모두"
 													 IsChecked="{Binding Both, Mode=TwoWay}" />
-										<RadioButton Content="改修完了"
+										<RadioButton Content="개수완료"
 													 IsChecked="{Binding MaxModernized, Mode=TwoWay}" />
-										<RadioButton Content="改修未完"
+										<RadioButton Content="개수미완"
 													 IsChecked="{Binding NotMaxModernized, Mode=TwoWay}" />
 									</WrapPanel>
 								</Grid>
@@ -474,7 +474,7 @@
 										<metro2:SortButton.MethodParameter>
 											<viewModels:ShipCatalogSortTarget>Type</viewModels:ShipCatalogSortTarget>
 										</metro2:SortButton.MethodParameter>
-										<TextBlock Text="艦種" />
+										<TextBlock Text="함종" />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
@@ -492,7 +492,7 @@
 										<metro2:SortButton.MethodParameter>
 											<viewModels:ShipCatalogSortTarget>Name</viewModels:ShipCatalogSortTarget>
 										</metro2:SortButton.MethodParameter>
-										<TextBlock Text="艦名" />
+										<TextBlock Text="함명" />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
@@ -511,7 +511,7 @@
 										<metro2:SortButton.MethodParameter>
 											<viewModels:ShipCatalogSortTarget>Level</viewModels:ShipCatalogSortTarget>
 										</metro2:SortButton.MethodParameter>
-										<TextBlock Text="レベル" />
+										<TextBlock Text="레벨" />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
@@ -558,7 +558,7 @@
 
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
-									<TextBlock Text="火力" />
+									<TextBlock Text="화력" />
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -572,7 +572,7 @@
 
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
-									<TextBlock Text="雷装" />
+									<TextBlock Text="뇌장" />
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -586,7 +586,7 @@
 
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
-									<TextBlock Text="対空" />
+									<TextBlock Text="대공" />
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -600,7 +600,7 @@
 
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
-									<TextBlock Text="装甲" />
+									<TextBlock Text="장갑" />
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -614,7 +614,7 @@
 
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
-									<TextBlock Text="運" />
+									<TextBlock Text="운" />
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -630,11 +630,11 @@
 								<GridViewColumn.Header>
 									<metro2:SortButton Direction="{Binding SortWorker.ViewRangeColumn.Direction}"
 													   MethodName="UpdateReverse"
-													   ToolTip="索敵のみ装備によるステータス上昇を含んだ値です">
+													   ToolTip="장비+칸무스 스텟">
 										<metro2:SortButton.MethodParameter>
 											<viewModels:ShipCatalogSortTarget>ViewRange</viewModels:ShipCatalogSortTarget>
 										</metro2:SortButton.MethodParameter>
-										<TextBlock Text="索敵" />
+										<TextBlock Text="색적" />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
@@ -648,7 +648,7 @@
 
 							<GridViewColumn Width="110">
 								<GridViewColumn.Header>
-									<TextBlock Text="装備" />
+									<TextBlock Text="장비" />
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate DataType="{x:Type contentsVm:ShipViewModel}">
@@ -690,7 +690,7 @@
 					Padding="20"
 					Visibility="{Binding IsReloading, Converter={StaticResource BooleanToVisibilityConverter}}"
 					d:IsHidden="True">
-				<TextBlock Text="一覧を生成しています..."
+				<TextBlock Text="화면을 갱신중입니다..."
 						   Style="{DynamicResource EmphaticTextStyleKey}"
 						   FontSize="16"
 						   Background="{DynamicResource ThemeBrushKey}"

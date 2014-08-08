@@ -78,7 +78,7 @@
 				  Grid.IsSharedSizeScope="True">
 		<StackPanel VerticalAlignment="Top"
 					d:DataContext="{d:DesignData /SampleData/ShipyardViewModelSampleData.xaml}">
-			<GroupBox Header="入渠"
+			<GroupBox Header="입거"
 					  Margin="10,0">
 				<Grid>
 					<Grid.ColumnDefinitions>
@@ -145,7 +145,8 @@
 																  SharedSizeGroup="RemainingTime" />
 											</Grid.ColumnDefinitions>
 
-											<TextBlock Text="{Binding Id, Mode=OneWay}" />
+											<TextBlock x:Name="Level" 
+													   Text="{Binding Level, Mode=OneWay}" />
 											<TextBlock x:Name="ShipName"
 													   Grid.Column="1"
 													   Text="{Binding Ship, Mode=OneWay}"
@@ -183,6 +184,9 @@
 											<Setter TargetName="ShipName"
 													Property="Visibility"
 													Value="Hidden" />
+											<Setter TargetName="Level"
+													Property="Visibility"
+													Value="Hidden" />
 											<Setter TargetName="CompleteTime"
 													Property="Visibility"
 													Value="Hidden" />
@@ -196,6 +200,9 @@
 													Property="Visibility"
 													Value="Visible" />
 											<Setter TargetName="ShipName"
+													Property="Visibility"
+													Value="Hidden" />
+											<Setter TargetName="Level"
 													Property="Visibility"
 													Value="Hidden" />
 											<Setter TargetName="CompleteTime"
@@ -213,7 +220,7 @@
 				</Grid>
 			</GroupBox>
 
-			<GroupBox Header="建造"
+			<GroupBox Header="건조"
 					  Margin="10">
 				<Grid>
 					<Grid.ColumnDefinitions>
@@ -383,7 +390,7 @@
 							<StackPanel>
 								<Border Background="{DynamicResource BorderBrushKey}"
 										Padding="8,6">
-									<TextBlock Text="装備開発"
+									<TextBlock Text="장비개발"
 											   Style="{DynamicResource HeaderTextStyleKey}" />
 								</Border>
 								<DockPanel HorizontalAlignment="Left"
@@ -394,7 +401,7 @@
 											<Style TargetType="{x:Type TextBlock}"
 												   BasedOn="{StaticResource DefaultTextStyleKey}">
 												<Setter Property="Text"
-														Value="成功" />
+														Value="성공" />
 												<Setter Property="Foreground"
 														Value="{DynamicResource AccentForegroundBrushKey}" />
 												<Setter Property="Background"
@@ -403,7 +410,7 @@
 													<DataTrigger Binding="{Binding CreatedSlotItem.Succeed}"
 																 Value="False">
 														<Setter Property="Text"
-																Value="失敗" />
+																Value="실패" />
 														<Setter Property="Foreground"
 																Value="{DynamicResource ForegroundBrushKey}" />
 														<Setter Property="Background"
@@ -412,7 +419,7 @@
 													<DataTrigger Binding="{Binding CreatedSlotItem.Succeed}"
 																 Value="{x:Null}">
 														<Setter Property="Text"
-																Value="結果なし" />
+																Value="결과없음" />
 														<Setter Property="Foreground"
 																Value="{DynamicResource ForegroundBrushKey}" />
 														<Setter Property="Background"

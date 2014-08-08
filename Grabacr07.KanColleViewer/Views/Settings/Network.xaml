@@ -71,7 +71,7 @@
 					  Margin="0,4" />
 
 			<CheckBox x:Name="CheckBoxAuthRequired"
-					  Content="プロキシ サーバーにユーザー名とパスワードが必要"
+					  Content="프록시서버에 사용자ID와 비밀번호가 필요한경우"
 					  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=ProxySettings.IsAuthRequired}"
 					  Margin="0,4" />
 
@@ -87,14 +87,14 @@
 				</Grid.ColumnDefinitions>
 
 				<TextBlock Grid.Column="1">
-					<Run Text="ユーザー名" />
+					<Run Text="유저명" />
 					<Run Text=": " />
 				</TextBlock>
 				<metro:PromptTextBox Grid.Column="2"
 									 Text="{Binding Source={x:Static models:Settings.Current}, Path=ProxySettings.Username, Mode=TwoWay}"
-									 Prompt="ユーザー名" />
+									 Prompt="유저명" />
 				<TextBlock Grid.Column="4">
-					<Run Text="パスワード" />
+					<Run Text="비밀번호" />
 					<Run Text=": " />
 				</TextBlock>
 				<PasswordBox Grid.Column="5">

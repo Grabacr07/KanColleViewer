@@ -4,9 +4,9 @@
 
 	<Style TargetType="{x:Type controls:ConditionIcon}">
 		<Setter Property="Width"
-				Value="12" />
+				Value="10" />
 		<Setter Property="Height"
-				Value="12" />
+				Value="10" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type controls:ConditionIcon}">

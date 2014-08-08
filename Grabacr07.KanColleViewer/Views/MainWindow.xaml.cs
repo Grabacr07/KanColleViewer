@@ -34,5 +34,9 @@ namespace Grabacr07.KanColleViewer.Views
 
 			base.OnClosing(e);
 		}
+		public void RefreshNavigator()
+		{
+			App.ViewModelRoot.Navigator.Refresh();
+		}
 	}
 }

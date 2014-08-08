@@ -83,6 +83,7 @@ namespace Grabacr07.KanColleViewer.Models
 					new Library("Livet", new Uri("http://ugaya40.net/livet")),
 					new Library("DynamicJson", new Uri("http://dynamicjson.codeplex.com/")),
 					new Library("FiddlerCore", new Uri("http://fiddler2.com/fiddlercore")),
+					new Library("NAudio", new Uri("http://naudio.codeplex.com/")),
 				});
 			}
 		}

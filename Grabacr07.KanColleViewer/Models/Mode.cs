@@ -22,5 +22,9 @@ namespace Grabacr07.KanColleViewer.Models
 		/// 艦これが起動されており、艦隊が出撃中です。
 		/// </summary>
 		InSortie,
+		/// <summary>
+		/// When any ship in the fleet is in critical condition.
+		/// </summary>
+		CriticalCondition,
 	}
 }

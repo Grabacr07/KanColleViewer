@@ -10,6 +10,7 @@ using Livet;
 using Livet.EventListeners;
 using Livet.Messaging.Windows;
 using MetroRadiance;
+using System.Windows.Input;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {
@@ -20,6 +21,15 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		public NavigatorViewModel Navigator { get; private set; }
 		public SettingsViewModel Settings { get; private set; }
+		#region RefreshNavigator
+
+		private ICommand _RefreshNavigator;
+		public ICommand RefreshNavigator
+		{
+			get { return _RefreshNavigator; }
+		}
+
+		#endregion
 
 		#region Mode 変更通知プロパティ
 
@@ -40,10 +50,15 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					case Mode.Started:
 						this.Content = this.mainContent ?? (this.mainContent = new MainContentViewModel());
 						StatusService.Current.Set(Properties.Resources.StatusBar_Ready);
+						if (ThemeService.Current.Theme == Theme.CriticalRed) ThemeService.Current.ChangeTheme(Theme.Dark);
 						ThemeService.Current.ChangeAccent(Accent.Blue);
 						break;
 					case Mode.InSortie:
 						ThemeService.Current.ChangeAccent(Accent.Orange);
+						break;
+					case Mode.CriticalCondition:
+						ThemeService.Current.ChangeAccent(Accent.Red);
+						if (!Models.Settings.Current.EnableCriticalPopup) ThemeService.Current.ChangeTheme(Theme.CriticalRed);
 						break;
 				}
 
@@ -145,6 +160,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			});
 
 			this.UpdateMode();
+
+			_RefreshNavigator = new RelayCommand(Navigator.ReNavigate);
 		}
 
 		public void TakeScreenshot()

@@ -13,7 +13,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 	{
 		public override string Name
 		{
-			get { return "ツール"; }
+			get { return "툴"; }
 			protected set { throw new NotImplementedException(); }
 		}
 

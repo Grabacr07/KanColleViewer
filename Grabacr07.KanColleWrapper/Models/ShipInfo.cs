@@ -33,7 +33,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public string Name
 		{
-			get { return this.RawData.api_name; }
+			get
+			{
+				return KanColleClient.Current.Translations.GetTranslation(RawData.api_name, TranslationType.Ships, this.RawData);
+			}
 		}
 
 		/// <summary>

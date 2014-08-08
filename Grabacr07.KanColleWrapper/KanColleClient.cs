@@ -25,6 +25,19 @@ namespace Grabacr07.KanColleWrapper
 		#endregion
 
 		/// <summary>
+		/// Application update notifications and downloads.
+		/// </summary>
+		public Updater Updater { get; private set; }
+		/// <summary>
+		/// Logs events such as ship drops, crafts, and item developments.
+		/// </summary>
+		public Logger Logger { get; private set; }
+
+		/// <summary>
+		/// Translation engine for ships, equipment, quests, and sorties.
+		/// </summary>
+		public Translations Translations { get; private set; }
+		/// <summary>
 		/// 艦これの通信をフックするプロキシを取得します。
 		/// </summary>
 		public KanColleProxy Proxy { get; private set; }
@@ -38,6 +51,9 @@ namespace Grabacr07.KanColleWrapper
 		/// 母港の情報を取得します。
 		/// </summary>
 		public Homeport Homeport { get; private set; }
+
+		public PreviewBattle PreviewBattle { get; private set; }
+
 
 		#region IsStarted 変更通知プロパティ
 
@@ -151,6 +167,11 @@ namespace Grabacr07.KanColleWrapper
 
 				this.IsStarted = true;
 			});
+
+			this.Updater = new Updater();
+			this.Logger = new Logger(proxy);
+			this.Translations = new Translations();
+			this.PreviewBattle = new PreviewBattle(proxy);
 		}
 	}
 }

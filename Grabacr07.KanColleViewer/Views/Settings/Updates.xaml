@@ -1,0 +1,236 @@
+﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Settings.Updates"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
+			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
+			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 mc:Ignorable="d"
+			 d:DesignWidth="500"
+			 d:DesignHeight="300"
+			 d:DataContext="{d:DesignInstance viewModels:SettingsViewModel}">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="Common.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+
+	<StackPanel>
+		<TextBlock Text="업데이트 확인"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+
+		<Grid Margin="6,0">
+			<Grid.RowDefinitions>
+				<RowDefinition />
+				<RowDefinition />
+				<RowDefinition />
+				<RowDefinition />
+				<RowDefinition />
+				<RowDefinition />
+				<RowDefinition />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="20" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+
+			<metro2:CallMethodButton Width="140"
+									 Content="{Binding Resources.Settings_Updates_CheckUpdatesBtn, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+                                     ToolTip="{Binding Resources.Settings_Updates_CheckUpdatesBtn_ToolTip, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+									 MethodName="CheckForUpdates"
+									 Margin="6,0,0,8"
+                                     Padding="3"
+                                     Grid.Row="1"
+                                     Grid.RowSpan="2"/>
+
+
+			<!--  <metro2:CallMethodButton Width="140"
+									 Content="Link to Latest KCV"
+                                     ToolTip="Only downloads for selected UI language!"
+									 MethodName="UpdateTranslations"
+									 Margin="6,0,0,8"
+                                     Padding="3"
+                                     Grid.Row="3"
+                                     Grid.RowSpan="2"/> -->
+
+			<metro2:CallMethodButton Width="140"
+									 Content="{Binding Resources.Settings_Updates_UpdateTransBtn, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+                                     ToolTip="{Binding Resources.Settings_Updates_UpdateTransBtn_ToolTip, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+									 MethodName="UpdateTranslations"
+									 Margin="6,0,0,8"
+                                     Padding="3"
+                                     Grid.Row="5"
+                                     Grid.RowSpan="2"/>
+
+			<TextBlock Grid.Column="3"
+                       Grid.Row="0"
+                       Margin="8,0"
+                       FontSize="14"
+                       Text="{Binding Resources.Settings_Updates_CurrentVersion, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+			<TextBlock Grid.Column="4"
+                       Grid.Row="0"
+                       Margin="8,0"
+                       FontSize="14"
+                       Text="{Binding Resources.Settings_Updates_OnlineVersion, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+
+			<TextBlock Grid.Column="2"
+                       Grid.Row="1"
+                       Margin="8,0,8,2" VerticalAlignment="Bottom">프로그램 버전</TextBlock>
+			<TextBlock Grid.Column="3"
+                       Grid.Row="1"
+                       Margin="0,2"
+                       HorizontalAlignment="Center"
+                       Text="{Binding Source={x:Static root:App.ProductInfo}, Path=VersionString, Mode=OneWay}"/>
+			<TextBlock Grid.Column="4"
+                       Grid.Row="1"
+                       Margin="0,2"
+                       HorizontalAlignment="Center">
+                <metro2:HyperlinkEx Uri="{Binding AppOnlineVersionURL, Mode=OneWay}"
+                                    ToolTip="{Binding AppOnlineVersionURL, Mode=OneWay}">
+                    <Run Text="{Binding AppOnlineVersion, Mode=OneWay}" />
+                </metro2:HyperlinkEx>
+			</TextBlock>
+
+			<TextBlock Grid.Column="2"
+                       Grid.Row="2"
+                       Margin="8,0">장비목록</TextBlock>
+			<TextBlock Grid.Column="3"
+                       Grid.Row="2"
+                       Margin="0,2"
+                       HorizontalAlignment="Center"
+                       Text="{Binding EquipmentVersion, Mode=OneWay}"/>
+			<TextBlock Grid.Column="4"
+                       Grid.Row="2"
+                       Margin="0,2"
+                       HorizontalAlignment="Center">
+                <metro2:HyperlinkEx Uri="{Binding EquipmentOnlineVersionURL, Mode=OneWay}"
+                                    ToolTip="{Binding EquipmentOnlineVersionURL, Mode=OneWay}">
+                    <Run Text="{Binding EquipmentOnlineVersion, Mode=OneWay}" />
+                </metro2:HyperlinkEx>
+			</TextBlock>
+
+			<TextBlock Grid.Column="2"
+                       Grid.Row="3"
+                       Margin="8,0">해역리스트</TextBlock>
+			<TextBlock Grid.Column="3"
+                       Grid.Row="3"
+                       Margin="0,2"
+                       HorizontalAlignment="Center"
+                       Text="{Binding OperationsVersion, Mode=OneWay}"/>
+			<TextBlock Grid.Column="4"
+                       Grid.Row="3"
+                       Margin="0,2"
+                       HorizontalAlignment="Center">
+                <metro2:HyperlinkEx Uri="{Binding OperationsOnlineVersionURL, Mode=OneWay}"
+                                    ToolTip="{Binding OperationsOnlineVersionURL, Mode=OneWay}">
+                    <Run Text="{Binding OperationsOnlineVersion, Mode=OneWay}" />
+                </metro2:HyperlinkEx>
+			</TextBlock>
+
+			<TextBlock Grid.Column="2"
+                       Grid.Row="4"
+                       Margin="8,0">퀘스트 목록</TextBlock>
+			<TextBlock Grid.Column="3"
+                       Grid.Row="4"
+                       Margin="0,2"
+                       HorizontalAlignment="Center"
+                       Text="{Binding QuestsVersion, Mode=OneWay}"/>
+			<TextBlock Grid.Column="4"
+                       Grid.Row="4"
+                       Margin="0,2"
+                       HorizontalAlignment="Center">
+                <metro2:HyperlinkEx Uri="{Binding QuestsOnlineVersionURL, Mode=OneWay}"
+                                    ToolTip="{Binding QuestsOnlineVersionURL, Mode=OneWay}">
+                    <Run Text="{Binding QuestsOnlineVersion, Mode=OneWay}" />
+                </metro2:HyperlinkEx>
+			</TextBlock>
+
+			<TextBlock Grid.Column="2"
+                       Grid.Row="5"
+                       Margin="8,0">칸무스 목록</TextBlock>
+			<TextBlock Grid.Column="3"
+                       Grid.Row="5"
+                       Margin="0,2"
+                       HorizontalAlignment="Center"
+                       Text="{Binding ShipsVersion, Mode=OneWay}"/>
+			<TextBlock Grid.Column="4"
+                       Grid.Row="5"
+                       Margin="0,2"
+                       HorizontalAlignment="Center">
+                <metro2:HyperlinkEx Uri="{Binding ShipsOnlineVersionURL, Mode=OneWay}"
+                                    ToolTip="{Binding ShipsOnlineVersionURL, Mode=OneWay}">
+                    <Run Text="{Binding ShipsOnlineVersion, Mode=OneWay}" />
+                </metro2:HyperlinkEx>
+			</TextBlock>
+
+			<TextBlock Grid.Column="2"
+                       Grid.Row="6"
+                       Margin="8,0">칸무스 타입</TextBlock>
+			<TextBlock Grid.Column="3"
+                       Grid.Row="6"
+                       Margin="0,2"
+                       HorizontalAlignment="Center"
+                       Text="{Binding ShipTypesVersion, Mode=OneWay}"/>
+			<TextBlock Grid.Column="4"
+                       Grid.Row="6"
+                       Margin="0,2"
+                       HorizontalAlignment="Center">
+                <metro2:HyperlinkEx Uri="{Binding ShipTypesOnlineVersionURL, Mode=OneWay}"
+                                    ToolTip="{Binding ShipTypesOnlineVersionURL, Mode=OneWay}">
+                    <Run Text="{Binding ShipTypesOnlineVersion, Mode=OneWay}" />
+                </metro2:HyperlinkEx>
+			</TextBlock>
+			<TextBlock Grid.Column="2"
+                       Grid.Row="7"
+                       Margin="8,0">원정 번역정보</TextBlock>
+			<TextBlock Grid.Column="3"
+                       Grid.Row="7"
+                       Margin="0,2"
+                       HorizontalAlignment="Center"
+                       Text="{Binding ExpeditionsVersion, Mode=OneWay}"/>
+			<TextBlock Grid.Column="4"
+                       Grid.Row="7"
+                       Margin="0,2"
+                       HorizontalAlignment="Center">
+                <metro2:HyperlinkEx Uri="{Binding ExpeditionsOnlineVersionURL, Mode=OneWay}"
+                                    ToolTip="{Binding ExpeditionsOnlineVersionURL, Mode=OneWay}">
+                    <Run Text="{Binding ExpeditionsOnlineVersion, Mode=OneWay}" />
+                </metro2:HyperlinkEx>
+			</TextBlock>
+		</Grid>
+		<TextBlock Margin="6,10,0,0">
+			<Run Text="다운로드/패치로그 링크:" />
+			<metro2:HyperlinkEx Uri="http://KancolleViewerKr.tk">
+				<Run Text="http://KancolleViewerKr.tk" />
+			</metro2:HyperlinkEx>
+		</TextBlock>
+
+		<Rectangle Height="1"
+				   Margin="0,10"
+				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+        <TextBlock Text="업데이트 설정" Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+
+		<CheckBox Content="{Binding Resources.Settings_Updates_UpdateOnStartup, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" 
+                  IsChecked="{Binding EnableUpdateNotification}" 
+                  Height="17" 
+                  Margin="15,0,0,10"/>
+		<CheckBox Content="{Binding Resources.Settings_Updates_AutoUpdateTrans, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" 
+                  IsChecked="{Binding EnableUpdateTransOnStart}" 
+                  Height="17" 
+                  Margin="15,0,0,10"/>
+
+
+	</StackPanel>
+</UserControl>

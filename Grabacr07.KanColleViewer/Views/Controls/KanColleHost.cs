@@ -20,10 +20,15 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 	[TemplatePart(Name = PART_ContentHost, Type = typeof(ScrollViewer))]
 	public class KanColleHost : Control
 	{
+		private static readonly KanColleHost current = new KanColleHost();
+
 		private const string PART_ContentHost = "PART_ContentHost";
 		private static readonly Size kanColleSize = new Size(800.0, 480.0);
 		private static readonly Size browserSize = new Size(960.0, 572.0);
-
+		public static KanColleHost Current
+		{
+			get { return current; }
+		}
 		static KanColleHost()
 		{
 			DefaultStyleKeyProperty.OverrideMetadata(typeof(KanColleHost), new FrameworkPropertyMetadata(typeof(KanColleHost)));
@@ -92,6 +97,22 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 		#endregion
 
+		#region EnableResizing 変更通知プロパティ
+
+		public bool EnableResizing
+		{
+			get { return Models.Settings.Current.EnableResizing; }
+			set
+			{
+				if (Models.Settings.Current.EnableResizing != value)
+				{
+					Models.Settings.Current.EnableResizing = value;
+				}
+			}
+		}
+
+		#endregion
+
 
 		public KanColleHost()
 		{
@@ -129,8 +150,17 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			else
 			{
 				this.WebBrowser.Width = double.NaN;
-				this.WebBrowser.Height = (browserSize.Height * (zoomFactor / dpi.ScaleY)) / dpi.ScaleY;
-				this.MinWidth = (browserSize.Width * (zoomFactor / dpi.ScaleX)) / dpi.ScaleX;
+				if (!EnableResizing)//리사이징이 꺼져있을때는 100%해상도인 800,480을 최소값으로
+				{
+					Size SmallbrowserSize = new Size(800.0, 480.0);
+					this.WebBrowser.Height = (SmallbrowserSize.Height * (zoomFactor / dpi.ScaleY)) / dpi.ScaleY;
+					this.MinWidth = (SmallbrowserSize.Width * (zoomFactor / dpi.ScaleX)) / dpi.ScaleX;
+				}
+				else
+				{
+					this.WebBrowser.Height = (browserSize.Height * (zoomFactor / dpi.ScaleY)) / dpi.ScaleY;
+					this.MinWidth = (browserSize.Width * (zoomFactor / dpi.ScaleX)) / dpi.ScaleX;
+				}
 			}
 		}
 
@@ -170,9 +200,12 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			this.Update();
 
 			var window = Window.GetWindow(this.WebBrowser);
-			if (window != null)
+			if (EnableResizing)
 			{
-				window.Width = this.WebBrowser.Width;
+				if (window != null)
+				{
+					window.Width = this.WebBrowser.Width;
+				}
 			}
 		}
 

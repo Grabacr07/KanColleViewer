@@ -263,6 +263,30 @@ namespace Grabacr07.KanColleWrapper
 			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_sortie/battleresult"); }
 		}
 
+		/// <summary>
+		/// エンド ポイント "/kcsapi/api_req_battle_midnight/battle" からのセッションを配信します。
+		/// </summary>
+		public IObservable<Session> api_req_battle_midnight_battle
+		{
+			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_battle_midnight/battle"); }
+		}
+
+		/// <summary>
+		/// エンド ポイント "/kcsapi/api_req_battle_midnight/sp_midnight" からのセッションを配信します。
+		/// </summary>
+		public IObservable<Session> api_req_battle_midnight_sp_midnight
+		{
+			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_battle_midnight/sp_midnight"); }
+		}
+
+		/// <summary>
+		/// エンド ポイント "/kcsapi/api_req_sortie/night_to_day" からのセッションを配信します。
+		/// </summary>
+		public IObservable<Session> api_req_sortie_night_to_day
+		{
+			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_sortie/night_to_day"); }
+		}
+
 		// ReSharper restore InconsistentNaming
 	}
 }

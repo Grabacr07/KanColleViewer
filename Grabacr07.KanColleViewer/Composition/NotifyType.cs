@@ -30,5 +30,13 @@ namespace Grabacr07.KanColleViewer.Composition
 		/// 疲労回復の完了。
 		/// </summary>
 		Rejuvenated,
+		/// <summary>
+		/// 대파알림
+		/// </summary>
+		Critical,
+		/// <summary>
+		/// 업데이트
+		/// </summary>
+		Update,
 	}
 }

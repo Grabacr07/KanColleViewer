@@ -16,7 +16,16 @@
 			 d:DataContext="{d:DesignInstance viewModels:SettingsViewModel}">
 	<UserControl.Resources>
 		<ResourceDictionary>
-			<ResourceDictionary.MergedDictionaries>
+            <ObjectDataProvider x:Key="EnumerableRange"
+								xmlns:sys="clr-namespace:System;assembly=mscorlib"
+								xmlns:linq="clr-namespace:System.Linq;assembly=System.Core"
+								ObjectType="{x:Type linq:Enumerable}" MethodName="Range">
+                <ObjectDataProvider.MethodParameters>
+                    <sys:Int32>0</sys:Int32>
+                    <sys:Int32>100</sys:Int32>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+            <ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="Common.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
@@ -83,8 +92,11 @@
 
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+        <TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Logging}, Mode=OneWay}" Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+        <CheckBox Content="{Binding Source={x:Static properties:Resources.Settings_Logging_Enable}, Mode=OneWay}" IsChecked="{Binding EnableLogging}" Height="17" Margin="15,0,0,10"/>
 
-		<!--<TextBlock Text="テーマ"
+        
+        <!--<TextBlock Text="テーマ"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
 				   Margin="0,10" />
 
@@ -102,29 +114,35 @@
 						   FontSize="13"
 						   Background="Transparent" />
 			</RadioButton>
-		</WrapPanel>
+		</WrapPanel>-->
+        
+        <Rectangle Height="1"
+                       Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-		<Rectangle Height="1"
-				   Style="{DynamicResource SeparatorRectangleStyleKey}" />-->
+        <TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_CustomSound}, Mode=OneWay}" Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
-		<TextBlock Text="{Binding Resources.Settings_Language, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
-				   Margin="0,10" />
+        <Grid Margin="15,0,15,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-		<metro:PromptComboBox Margin="20,0,0,10"
-							  HorizontalAlignment="Left"
-							  Prompt=""
-							  ItemsSource="{Binding Cultures}"
-							  DisplayMemberPath="DisplayName"
-							  SelectedValuePath="Name"
-							  SelectedValue="{Binding Culture, Mode=TwoWay}"
-							  IsReadOnly="True"
-							  MinWidth="250" />
+            <TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_CustomSound_Volume}, Mode=OneWay}" />
 
-		<Rectangle Height="1"
+            <metro:PromptComboBox Margin="8"
+								  ItemsSource="{Binding Source={StaticResource EnumerableRange}}"
+								  HorizontalAlignment="Left"
+								  Prompt=""
+								  SelectedValue="{Binding CustomSoundVolume, Mode=TwoWay}"
+								  IsReadOnly="True"
+								  MinWidth="50"
+								  Grid.Column="1"/>
+        </Grid>
+        <Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-
-		<!--<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Logging}, Mode=OneWay}"
+        <TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Resizing}, Mode=OneWay}" Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+        <CheckBox Content="{Binding Source={x:Static properties:Resources.Settings_Resizing_Enable}, Mode=OneWay}" IsChecked="{Binding EnableResizing}" Height="17" Margin="15,0,0,10"/>
+        <!--<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Logging}, Mode=OneWay}"
 				   Style="{DynamicResource HeaderTextBlockStyleKey}"
 				   Margin="0,10" />
 		<CheckBox Content="{Binding Source={x:Static properties:Resources.Settings_Logging_Enable}, Mode=OneWay}"

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -7,7 +6,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleViewer.ViewModels.Messages;
@@ -17,6 +15,9 @@ using Livet.Messaging;
 using Livet.Messaging.IO;
 using MetroRadiance;
 using Settings = Grabacr07.KanColleViewer.Models.Settings;
+using Grabacr07.KanColleViewer.Composition;
+using Grabacr07.KanColleWrapper.Models;
+using Grabacr07.KanColleViewer.Views.Controls;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {
@@ -199,7 +200,414 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				if (Settings.Current.KanColleClientSettings.EnableLogging != value)
 				{
 					Settings.Current.KanColleClientSettings.EnableLogging = value;
-					KanColleClient.Current.Homeport.Logger.EnableLogging = value;
+					KanColleClient.Current.Logger.EnableLogging = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region EnableTranslations 変更通知プロパティ
+
+		public bool EnableTranslations
+		{
+			get { return Settings.Current.EnableTranslations; }
+			set
+			{
+				if (Settings.Current.EnableTranslations != value)
+				{
+					Settings.Current.EnableTranslations = value;
+					KanColleClient.Current.Translations.EnableTranslations = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region EnableAddUntranslated 変更通知プロパティ
+
+		public bool EnableAddUntranslated
+		{
+			get { return Settings.Current.EnableAddUntranslated; }
+			set
+			{
+				if (Settings.Current.EnableAddUntranslated != value)
+				{
+					Settings.Current.EnableAddUntranslated = value;
+					KanColleClient.Current.Translations.EnableAddUntranslated = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+		#region EnableCriticalNotify 変更通知プロパティ
+
+		public bool EnableCriticalNotify
+		{
+			get { return Settings.Current.EnableCriticalNotify; }
+			set
+			{
+				if (Settings.Current.EnableCriticalNotify != value)
+				{
+					Settings.Current.EnableCriticalNotify = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region EnableCriticalAccent 変更通知プロパティ
+
+		public bool EnableCriticalAccent
+		{
+			get { return Settings.Current.EnableCriticalAccent; }
+			set
+			{
+				if (Settings.Current.EnableCriticalAccent != value)
+				{
+					Settings.Current.EnableCriticalAccent = value;
+					if (Settings.Current.EnableCriticalPopup || !Settings.Current.EnableCriticalAccent && App.ViewModelRoot.Mode == Mode.CriticalCondition)
+						App.ViewModelRoot.Mode = Mode.Started;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region EnableCriticalPopup 変更通知プロパティ
+
+		public bool EnableCriticalPopup
+		{
+			get { return Settings.Current.EnableCriticalPopup; }
+			set
+			{
+				if (Settings.Current.EnableCriticalPopup != value)
+				{
+					Settings.Current.EnableCriticalPopup = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+		
+		#region EquipmentVersion 変更通知プロパティ
+
+		public string EquipmentVersion
+		{
+			get { return KanColleClient.Current.Translations.EquipmentVersion; }
+			set
+			{
+				if (KanColleClient.Current.Translations.EquipmentVersion != value)
+				{
+					KanColleClient.Current.Translations.EquipmentVersion = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region OperationsVersion 変更通知プロパティ
+
+		public string OperationsVersion
+		{
+			get { return KanColleClient.Current.Translations.OperationsVersion; }
+			set
+			{
+				if (KanColleClient.Current.Translations.OperationsVersion != value)
+				{
+					KanColleClient.Current.Translations.OperationsVersion = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region QuestsVersion 変更通知プロパティ
+
+		public string QuestsVersion
+		{
+			get { return KanColleClient.Current.Translations.QuestsVersion; }
+			set
+			{
+				if (KanColleClient.Current.Translations.QuestsVersion != value)
+				{
+					KanColleClient.Current.Translations.QuestsVersion = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region ShipsVersion 変更通知プロパティ
+
+		public string ShipsVersion
+		{
+			get { return KanColleClient.Current.Translations.ShipsVersion; }
+			set
+			{
+				if (KanColleClient.Current.Translations.ShipsVersion != value)
+				{
+					KanColleClient.Current.Translations.ShipsVersion = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region ShipTypesVersion 変更通知プロパティ
+
+		public string ShipTypesVersion
+		{
+			get { return KanColleClient.Current.Translations.ShipTypesVersion; }
+			set
+			{
+				if (KanColleClient.Current.Translations.ShipTypesVersion != value)
+				{
+					KanColleClient.Current.Translations.ShipTypesVersion = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region ExpeditionsVersion 変更通知プロパティ
+
+		public string ExpeditionsVersion
+		{
+			get { return KanColleClient.Current.Translations.ExpeditionsVersion; }
+			set
+			{
+				if (KanColleClient.Current.Translations.ExpeditionsVersion != value)
+				{
+					KanColleClient.Current.Translations.ExpeditionsVersion = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region AppOnlineVersion 変更通知プロパティ
+
+		private string _AppOnlineVersion;
+		public string AppOnlineVersionURL { get; set; }
+
+		public string AppOnlineVersion
+		{
+			get { return _AppOnlineVersion; }
+			set
+			{
+				if (_AppOnlineVersion != value)
+				{
+					_AppOnlineVersion = value;
+					this.RaisePropertyChanged();
+					this.RaisePropertyChanged("AppOnlineVersionURL");
+				}
+			}
+		}
+
+		#endregion
+
+		#region EquipmentOnlineVersion 変更通知プロパティ
+
+		private string _EquipmentOnlineVersion;
+		public string EquipmentOnlineVersionURL { get; set; }
+
+		public string EquipmentOnlineVersion
+		{
+			get { return _EquipmentOnlineVersion; }
+			set
+			{
+				if (_EquipmentOnlineVersion != value)
+				{
+					_EquipmentOnlineVersion = value;
+					this.RaisePropertyChanged();
+					this.RaisePropertyChanged("EquipmentOnlineVersionURL");
+				}
+			}
+		}
+
+		#endregion
+
+		#region OperationsOnlineVersion 変更通知プロパティ
+
+		private string _OperationsOnlineVersion;
+		public string OperationsOnlineVersionURL { get; set; }
+
+		public string OperationsOnlineVersion
+		{
+			get { return _OperationsOnlineVersion; }
+			set
+			{
+				if (_OperationsOnlineVersion != value)
+				{
+					_OperationsOnlineVersion = value;
+					this.RaisePropertyChanged();
+					this.RaisePropertyChanged("OperationsOnlineVersionURL");
+				}
+			}
+		}
+
+		#endregion
+
+		#region QuestsOnlineVersion 変更通知プロパティ
+
+		private string _QuestsOnlineVersion;
+		public string QuestsOnlineVersionURL { get; set; }
+
+		public string QuestsOnlineVersion
+		{
+			get { return _QuestsOnlineVersion; }
+			set
+			{
+				if (_QuestsOnlineVersion != value)
+				{
+					_QuestsOnlineVersion = value;
+					this.RaisePropertyChanged();
+					this.RaisePropertyChanged("QuestsOnlineVersionURL");
+				}
+			}
+		}
+
+		#endregion
+
+		#region ShipsOnlineVersion 変更通知プロパティ
+
+		private string _ShipsOnlineVersion;
+		public string ShipsOnlineVersionURL { get; set; }
+
+		public string ShipsOnlineVersion
+		{
+			get { return _ShipsOnlineVersion; }
+			set
+			{
+				if (_ShipsOnlineVersion != value)
+				{
+					_ShipsOnlineVersion = value;
+					this.RaisePropertyChanged();
+					this.RaisePropertyChanged("ShipsOnlineVersionURL");
+				}
+			}
+		}
+
+		#endregion
+
+		#region ShipTypesOnlineVersion 変更通知プロパティ
+
+		private string _ShipTypesOnlineVersion;
+		public string ShipTypesOnlineVersionURL { get; set; }
+
+		public string ShipTypesOnlineVersion
+		{
+			get { return _ShipTypesOnlineVersion; }
+			set
+			{
+				if (_ShipTypesOnlineVersion != value)
+				{
+					_ShipTypesOnlineVersion = value;
+					this.RaisePropertyChanged();
+					this.RaisePropertyChanged("ShipTypesOnlineVersionURL");
+				}
+			}
+		}
+
+		#endregion
+
+		#region ExpeditionsOnlineVersion 変更通知プロパティ
+
+		private string _ExpeditionsOnlineVersion;
+		public string ExpeditionsOnlineVersionURL { get; set; }
+
+		public string ExpeditionsOnlineVersion
+		{
+			get { return _ExpeditionsOnlineVersion; }
+			set
+			{
+				if (_ExpeditionsOnlineVersion != value)
+				{
+					_ExpeditionsOnlineVersion = value;
+					this.RaisePropertyChanged();
+					this.RaisePropertyChanged("ExpeditionsOnlineVersionURL");
+				}
+			}
+		}
+
+		#endregion
+
+
+		#region EnableUpdateNotification 変更通知プロパティ
+
+		public bool EnableUpdateNotification
+		{
+			get { return Settings.Current.EnableUpdateNotification; }
+			set
+			{
+				if (Settings.Current.EnableUpdateNotification != value)
+				{
+					Settings.Current.EnableUpdateNotification = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region EnableUpdateTransOnStart 変更通知プロパティ
+
+		public bool EnableUpdateTransOnStart
+		{
+			get { return Settings.Current.EnableUpdateTransOnStart; }
+			set
+			{
+				if (Settings.Current.EnableUpdateTransOnStart != value)
+				{
+					Settings.Current.EnableUpdateTransOnStart = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region CustomSoundVolume 変更通知プロパティ
+
+		public int CustomSoundVolume
+		{
+			get { return Settings.Current.CustomSoundVolume; }
+			set
+			{
+				if (Settings.Current.CustomSoundVolume != value)
+				{
+					Settings.Current.CustomSoundVolume = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region EnableResizing 変更通知プロパティ
+
+		public bool EnableResizing
+		{
+			get { return Settings.Current.EnableResizing; }
+			set
+			{
+				if (Settings.Current.EnableResizing != value)
+				{
+					Settings.Current.EnableResizing = value;
+					KanColleHost.Current.EnableResizing = value;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -299,6 +707,66 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			{
 				this.ErrorsChanged(this, new DataErrorsChangedEventArgs(propertyName));
 			}
+		}
+		public void CheckForUpdates()
+		{
+			if (KanColleClient.Current.Updater.LoadVersion(Properties.Settings.Default.KCVUpdateUrl.AbsoluteUri))
+			{
+				AppOnlineVersionURL = KanColleClient.Current.Updater.GetOnlineVersion(TranslationType.App, true);
+				EquipmentOnlineVersionURL = KanColleClient.Current.Updater.GetOnlineVersion(TranslationType.Equipment, true);
+				OperationsOnlineVersionURL = KanColleClient.Current.Updater.GetOnlineVersion(TranslationType.Operations, true);
+				QuestsOnlineVersionURL = KanColleClient.Current.Updater.GetOnlineVersion(TranslationType.Quests, true);
+				ShipsOnlineVersionURL = KanColleClient.Current.Updater.GetOnlineVersion(TranslationType.Ships, true);
+				ShipTypesOnlineVersionURL = KanColleClient.Current.Updater.GetOnlineVersion(TranslationType.ShipTypes, true);
+				ExpeditionsOnlineVersionURL = KanColleClient.Current.Updater.GetOnlineVersion(TranslationType.Expeditions, true);
+
+				AppOnlineVersion = KanColleClient.Current.Updater.GetOnlineVersion(TranslationType.App);
+				EquipmentOnlineVersion = KanColleClient.Current.Updater.GetOnlineVersion(TranslationType.Equipment);
+				OperationsOnlineVersion = KanColleClient.Current.Updater.GetOnlineVersion(TranslationType.Operations);
+				QuestsOnlineVersion = KanColleClient.Current.Updater.GetOnlineVersion(TranslationType.Quests);
+				ShipsOnlineVersion = KanColleClient.Current.Updater.GetOnlineVersion(TranslationType.Ships);
+				ShipTypesOnlineVersion = KanColleClient.Current.Updater.GetOnlineVersion(TranslationType.ShipTypes);
+				ExpeditionsOnlineVersion = KanColleClient.Current.Updater.GetOnlineVersion(TranslationType.Expeditions);
+			}
+			else
+			{
+				PluginHost.Instance.GetNotifier().Show(
+					NotifyType.Update,
+					Resources.Updater_Notification_Title,
+					Resources.Updater_Notification_CheckFailed,
+					() => App.ViewModelRoot.Activate());
+			}
+		}
+
+		public void UpdateTranslations()
+		{
+			int UpdateStatus = KanColleClient.Current.Updater.UpdateTranslations(Properties.Settings.Default.XMLTransUrl.AbsoluteUri, KanColleClient.Current.Translations);
+
+			if (UpdateStatus > 0)
+			{
+				PluginHost.Instance.GetNotifier().Show(
+					NotifyType.Update,
+					Resources.Updater_Notification_Title,
+					Resources.Updater_Notification_TransUpdate_Success,
+					() => App.ViewModelRoot.Activate());
+			}
+			else if (UpdateStatus < 0)
+			{
+				PluginHost.Instance.GetNotifier().Show(
+					NotifyType.Update,
+					Resources.Updater_Notification_Title,
+					Resources.Updater_Notification_TransUpdate_Fail,
+					() => App.ViewModelRoot.Activate());
+			}
+			else
+			{
+				PluginHost.Instance.GetNotifier().Show(
+					NotifyType.Update,
+					Resources.Updater_Notification_Title,
+					Resources.Updater_Notification_TransUpdate_Same,
+					() => App.ViewModelRoot.Activate());
+			}
+
 		}
 	}
 }

@@ -66,7 +66,7 @@ namespace Grabacr07.KanColleWrapper
 			proxy.api_req_mission_result
 				.TryParse<kcsapi_mission_result>()
 				.Where(x => x.IsSuccess)
-				.Where(x => x.Data.api_clear_result == 1)
+				.Where(x => x.Data.api_clear_result >= 1)
 				.Subscribe(_ => this.Count++);
 		}
 	}

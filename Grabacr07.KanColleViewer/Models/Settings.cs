@@ -20,7 +20,7 @@ namespace Grabacr07.KanColleViewer.Models
 			"grabacr.net",
 			"KanColleViewer",
 			"Settings.xml");
-
+		private static readonly string CurrentSettingsVersion = "1.2";
 		public static Settings Current { get; set; }
 
 		public static void Load()
@@ -28,6 +28,8 @@ namespace Grabacr07.KanColleViewer.Models
 			try
 			{
 				Current = filePath.ReadXml<Settings>();
+				if (Current.SettingsVersion != CurrentSettingsVersion)
+					Current = GetInitialSettings();
 			}
 			catch (Exception ex)
 			{
@@ -40,17 +42,47 @@ namespace Grabacr07.KanColleViewer.Models
 		{
 			return new Settings
 			{
+				SettingsVersion = CurrentSettingsVersion,
 				ScreenshotFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures),
 				ScreenshotFilename = "KanColle-{0:d04}.png",
 				ScreenshotImageFormat = SupportedImageFormat.Png,
 				CanDisplayBuildingShipName = false,
+				EnableLogging = true,
+				EnableTranslations = true,
+				EnableAddUntranslated = true,
+				EnableCriticalNotify = true,
+				EnableCriticalAccent = true,
+				EnableCriticalPopup = true,
+				EnableUpdateNotification = true,
+				EnableUpdateTransOnStart = true,
+				NotifyBuildingCompleted = true,
+				NotifyRepairingCompleted = true,
+				NotifyExpeditionReturned = true,
+				CustomSoundVolume = 99,
+				EnableResizing = true,
 				KanColleClientSettings = new KanColleClientSettings(),
 			};
 		}
 
 		#endregion
 
+		#region SettingsVersion 変更通知プロパティ
 
+		private string _SettingsVersion;
+
+		public string SettingsVersion
+		{
+			get { return this._SettingsVersion; }
+			set
+			{
+				if (this._SettingsVersion != value)
+				{
+					this._SettingsVersion = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
 		#region ScreenshotFolder 変更通知プロパティ
 
 		private string _ScreenshotFolder;
@@ -368,8 +400,193 @@ namespace Grabacr07.KanColleViewer.Models
 		}
 
 		#endregion
-		
 
+		#region EnableLogging 変更通知プロパティ
+
+		private bool _EnableLogging;
+
+		public bool EnableLogging
+		{
+			get { return this._EnableLogging; }
+			set
+			{
+				if (this._EnableLogging != value)
+				{
+					this._EnableLogging = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region EnableTranslations 変更通知プロパティ
+
+		private bool _EnableTranslations;
+
+		public bool EnableTranslations
+		{
+			get { return this._EnableTranslations; }
+			set
+			{
+				if (this._EnableTranslations != value)
+				{
+					this._EnableTranslations = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
+
+		#region EnableResizing 変更通知プロパティ
+
+		private bool _EnableResizing;
+
+		public bool EnableResizing
+		{
+			get { return this._EnableResizing; }
+			set
+			{
+				if (this._EnableResizing != value)
+				{
+					this._EnableResizing = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region CustomSoundVolume 変更通知プロパティ
+
+		private int _CustomSoundVolume;
+
+		public int CustomSoundVolume
+		{
+			get { return this._CustomSoundVolume; }
+			set
+			{
+				if (this._CustomSoundVolume != value)
+				{
+					this._CustomSoundVolume = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
+
+		#region EnableAddUntranslated 変更通知プロパティ
+
+		private bool _EnableAddUntranslated;
+
+		public bool EnableAddUntranslated
+		{
+			get { return this._EnableAddUntranslated; }
+			set
+			{
+				if (this._EnableAddUntranslated != value)
+				{
+					this._EnableAddUntranslated = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
+
+		#region EnableCriticalNotify 変更通知プロパティ
+
+		private bool _EnableCriticalNotify;
+
+		public bool EnableCriticalNotify
+		{
+			get { return this._EnableCriticalNotify; }
+			set
+			{
+				if (this._EnableCriticalNotify != value)
+				{
+					this._EnableCriticalNotify = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region EnableCriticalAccent 変更通知プロパティ
+
+		private bool _EnableCriticalAccent;
+
+		public bool EnableCriticalAccent
+		{
+			get { return this._EnableCriticalAccent; }
+			set
+			{
+				if (this._EnableCriticalAccent != value)
+				{
+					this._EnableCriticalAccent = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region EnableCriticalPopup 変更通知プロパティ
+
+		private bool _EnableCriticalPopup;
+
+		public bool EnableCriticalPopup
+		{
+			get { return this._EnableCriticalPopup; }
+			set
+			{
+				if (this._EnableCriticalPopup != value)
+				{
+					this._EnableCriticalPopup = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region EnableUpdateNotification 変更通知プロパティ
+
+		private bool _EnableUpdateNotification;
+
+		public bool EnableUpdateNotification
+		{
+			get { return this._EnableUpdateNotification; }
+			set
+			{
+				if (this._EnableUpdateNotification != value)
+				{
+					this._EnableUpdateNotification = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region EnableUpdateTransOnStart 変更通知プロパティ
+
+		private bool _EnableUpdateTransOnStart;
+
+		public bool EnableUpdateTransOnStart
+		{
+			get { return this._EnableUpdateTransOnStart; }
+			set
+			{
+				if (this._EnableUpdateTransOnStart != value)
+				{
+					this._EnableUpdateTransOnStart = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
 		public void Save()
 		{
 			try

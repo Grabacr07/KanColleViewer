@@ -23,11 +23,11 @@
 	</UserControl.Resources>
 
 	<StackPanel>
-		<TextBlock Text="通知設定"
+		<TextBlock Text="알림설정"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 		<StackPanel Margin="20,-5,0,10">
-			<CheckBox Content="建造完了時に通知する"
+			<CheckBox Content="건조알림"
 					  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=NotifyBuildingCompleted}"
 					  Margin="0,5" />
 
@@ -37,11 +37,11 @@
 
 			<DockPanel>
 				<StackPanel VerticalAlignment="Center">
-					<CheckBox Content="遠征帰投時に通知する"
+					<CheckBox Content="원정알림"
 							  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=NotifyExpeditionReturned}"
 							  Margin="0,5" />
 
-					<CheckBox Content="入渠完了時に通知する"
+					<CheckBox Content="입거완료알림"
 							  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=NotifyRepairingCompleted}"
 							  Margin="0,5" />
 				</StackPanel>
@@ -53,7 +53,7 @@
 				<StackPanel Orientation="Horizontal"
 							VerticalAlignment="Center">
 					<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}">
-						<Run Text="通知を早める" />
+						<Run Text="알림시간 조절" />
 						<Run Text=":" />
 					</TextBlock>
 					<metro:PromptTextBox Margin="4,0"
@@ -69,13 +69,13 @@
 							</Binding>
 						</metro:PromptTextBox.Text>
 					</metro:PromptTextBox>
-					<TextBlock Text="秒"
+					<TextBlock Text="초"
 							   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 				</StackPanel>
 
 				<Border Margin="8" />
 
-				<TextBlock Text="艦これ本体の仕様により、最大 1 分間短縮できます。サーバー時刻とのずれを加味し、40 ～ 50 秒に設定することを推奨します。"
+                <TextBlock Text="칸코레 본래 사양인 최대 1분까지 줄일 수 있습니다. 서버와 컴퓨터의 시간차이가 있으므로 40~50초정도로 설정하는것을 권장합니다."
 						   Style="{DynamicResource DetailTextStyleKey}" />
 			</DockPanel>
 
@@ -83,22 +83,22 @@
 					Background="{DynamicResource ActiveBorderBrushKey}"
 					Margin="0,5" />
 
-			<CheckBox Content="艦隊に編成されている艦娘の疲労が回復したら通知する"
+            <CheckBox Content="함대에 편성되어있는 칸무스의 피로가 모두 회복되면 알림"
 					  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=NotifyFleetRejuvenated}"
 					  Margin="0,5" />
 
 			<StackPanel Margin="20,0,0,0">
 				<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}"
-						   Margin="0,3,0,1">
-					<Run Text="再出撃可能とするコンディション値" />
+						   Margin="0,3">
+                    <Run Text="재출격가능 컨디션 설정" />
 					<Run Text=":" />
 					<Run Text="{Binding Source={x:Static models:Settings.Current}, Path=KanColleClientSettings.ReSortieCondition}" />
 				</TextBlock>
-				<TextBlock Text="※[動作設定] > [出撃コンディション] から設定できます。"
-						   Style="{DynamicResource DetailTextStyleKey}"
+                <TextBlock Text="※[동작설정] > [출격 컨디션]에서 설정가능합니다."
+                           Style="{DynamicResource DetailTextStyleKey}"
 						   FontSize="10.5"
 						   Margin="0,0,0,8" />
-				<TextBlock Text="艦隊に編成されているすべて艦娘のコンディション値が上記の値以上になったときに通知されます。コンディション値は 3 分間で 3 ずつ回復しますが、KanColleViewer 実装の仕様により、通知タイミングは数秒 ～ 最大 3 分程度遅れる可能性があること予めご了承ください。"
+                <TextBlock Text="함대에 편성된 모든 칸무스가 설정된 컨디션 이상이 되면 알립니다. 컨디션은 3분당 3씩 회복되지만 칸코레 뷰어 구현상 알림시점의 오차는 몇초~3분정도까지 늦춰질 수 있습니다. 양해바랍니다."
 						   Style="{DynamicResource DetailTextStyleKey}" />
 			</StackPanel>
 		</StackPanel>

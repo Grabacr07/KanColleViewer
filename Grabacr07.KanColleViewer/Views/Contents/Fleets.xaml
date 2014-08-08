@@ -159,7 +159,7 @@
 										<Border Background="{DynamicResource FleetRepairingBrushKey}"
 												Opacity=".4"
 												Margin="5,0" />
-										<TextBlock Text="入渠中"
+										<TextBlock Text="입거중"
 												   Style="{DynamicResource EmphaticTextStyleKey}"
 												   HorizontalAlignment="Center" />
 									</Grid>
@@ -177,8 +177,8 @@
 									<TextBlock Grid.Column="5"
 											   Grid.Row="1"
 											   Margin="10,0,10,-1">
-										<Run Text="condition"
-											 FontSize="9" />
+										<Run Text="컨디션"
+											 FontSize="8" />
 									</TextBlock>
 
 									<controls:ColorIndicator Grid.Column="6"

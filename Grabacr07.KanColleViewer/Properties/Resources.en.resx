@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -297,8 +297,8 @@
   <data name="Quest_Title_Untaken" xml:space="preserve">
     <value>(Unknown quest)</value>
   </data>
-  <data name="Repairyard" xml:space="preserve">
-    <value>Repair</value>
+  <data name="Shipyard" xml:space="preserve">
+    <value>Shipyard</value>
   </data>
   <data name="Repairyard_Locked" xml:space="preserve">
     <value>Locked</value>
@@ -327,10 +327,10 @@
   <data name="Reparyard_Unused" xml:space="preserve">
     <value>Empty</value>
   </data>
-  <data name="ReSortie_NotificationMessage" xml:space="preserve">
+  <data name="Rejuvenated_NotificationMessage" xml:space="preserve">
     <value>All ships in 「{0}」 have fully recovered from fatigue.</value>
   </data>
-  <data name="ReSortie_NotificationMessage_Title" xml:space="preserve">
+  <data name="Rejuvenated_NotificationMessage_Title" xml:space="preserve">
     <value>Fatigue Recovery Completed</value>
   </data>
   <data name="Screenshot_Failed" xml:space="preserve">

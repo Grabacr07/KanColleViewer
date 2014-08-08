@@ -52,6 +52,7 @@ namespace Grabacr07.KanColleViewer.Models
 				if (args.PropertyName == "Fleets") UpdateExpedition(client.Homeport.Organization);
 			};
 			UpdateExpedition(client.Homeport.Organization);
+			UpdateCritical();
 		}
 
 		private static void UpdateRepairyard(Repairyard repairyard)
@@ -80,10 +81,9 @@ namespace Grabacr07.KanColleViewer.Models
 				{
 					if (Settings.Current.NotifyBuildingCompleted)
 					{
-						var shipName = Settings.Current.CanDisplayBuildingShipName 
-							? args.Ship.Name 
+						var shipName = Settings.Current.CanDisplayBuildingShipName
+							? args.Ship.Name
 							: Resources.Common_ShipGirl;
-
 						PluginHost.Instance.GetNotifier().Show(
 							NotifyType.Build,
 							Resources.Dockyard_NotificationMessage_Title,
@@ -92,6 +92,47 @@ namespace Grabacr07.KanColleViewer.Models
 					}
 				};
 			}
+		}
+
+		private static void UpdateCritical()
+		{
+			KanColleClient.Current.PreviewBattle.CriticalCondition += () =>
+			{
+				if (KanColleClient.Current.PreviewBattle.EventChecker)
+				{
+					if (Models.Settings.Current.EnableCriticalNotify)
+					{
+						PluginHost.Instance.GetNotifier().Show(
+							NotifyType.Critical,
+							Resources.ReSortie_CriticalConditionMessage_Title, Resources.ReSortie_CriticalConditionMessage,
+						() => App.ViewModelRoot.Activate());
+					}
+					if (Models.Settings.Current.EnableCriticalPopup)
+					{
+						//Dispatcher시작. 사실 이렇게 쓰는건지 확실하게 모르겠음. App.CriticalPupup()이 혼자서 작동 못하니 이게 맞다곤 생각하지만...
+						App.Current.Dispatcher.Invoke(
+							System.Windows.Threading.DispatcherPriority.Normal,
+							new Action(
+								delegate()
+								{
+									App.CriticalPupup();
+								})
+							);
+						//Dispatcher종료
+					}
+
+					if (Models.Settings.Current.EnableCriticalAccent)
+						App.ViewModelRoot.Mode = Mode.CriticalCondition;
+					KanColleClient.Current.PreviewBattle.EventChecker = false;
+				}
+			};
+
+
+			KanColleClient.Current.PreviewBattle.CriticalCleared += () =>
+			{
+				if (!KanColleClient.Current.PreviewBattle.EventChecker) App.ViewModelRoot.Mode = Mode.Started;
+			};
+
 		}
 
 		private static void UpdateExpedition(Organization organization)
@@ -116,8 +157,8 @@ namespace Grabacr07.KanColleViewer.Models
 					{
 						PluginHost.Instance.GetNotifier().Show(
 							NotifyType.Rejuvenated,
-							"疲労回復完了",
-							string.Format("「{0}」に編成されている艦娘の疲労が回復しました。", args.FleetName),
+							Resources.Rejuvenated_NotificationMessage_Title,
+							string.Format(Resources.Rejuvenated_NotificationMessage, args.FleetName),
 							() => App.ViewModelRoot.Activate());
 					}
 				};
