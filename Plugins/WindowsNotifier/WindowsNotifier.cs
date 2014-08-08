@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Composition;
 
 namespace Grabacr07.KanColleViewer.Plugins
 {
 	[Export(typeof(INotifier))]
+	[ExportMetadata("Title", "WindowsNotifier")]
+	[ExportMetadata("Description", "Windows OS の機能 (トースト通知・バルーン通知) を使用して通知します。")]
+	[ExportMetadata("Version", "1.0")]
+	[ExportMetadata("Author", "@Grabacr07")]
 	public class WindowsNotifier : INotifier
 	{
 		private readonly INotifier notifier;

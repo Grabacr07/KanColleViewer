@@ -71,7 +71,7 @@
     <Reference Include="Livet.Extensions">
       <HintPath>..\packages\LivetExtensions.1.1.0.0\lib\net45\Livet.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Expression.Drawing" />
+    <Reference Include="Microsoft.Expression.Drawing, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\LivetCask.1.1.0.0\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
@@ -124,6 +124,7 @@
     </ApplicationDefinition>
     <Compile Include="Composition\AggregateNotifier.cs" />
     <Compile Include="Composition\INotifier.cs" />
+    <Compile Include="Composition\IPluginMetadata.cs" />
     <Compile Include="Composition\IToolPlugin.cs" />
     <Compile Include="Composition\NotifyType.cs" />
     <Compile Include="Composition\PluginHost.cs" />
@@ -149,6 +150,10 @@
     <Compile Include="ViewModels\Catalogs\SlotItemViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\SortableColumnViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogSortWorker.cs" />
+    <Compile Include="ViewModels\Composition\NotifierViewModel.cs" />
+    <Compile Include="ViewModels\Composition\PluginViewModel.cs" />
+    <Compile Include="ViewModels\Composition\PluginViewModelBase.cs" />
+    <Compile Include="ViewModels\Composition\ToolViewModel.cs" />
     <Compile Include="ViewModels\Contents\AdmiralViewModel.cs" />
     <Compile Include="ViewModels\Contents\BuildingDockViewModel.cs" />
     <Compile Include="ViewModels\Contents\CreatedSlotItemViewModel.cs" />
@@ -253,6 +258,9 @@
     </Compile>
     <Compile Include="Views\Settings\Others.xaml.cs">
       <DependentUpon>Others.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\PluginInfo.xaml.cs">
+      <DependentUpon>PluginInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings\VersionInfo.xaml.cs">
       <DependentUpon>VersionInfo.xaml</DependentUpon>
@@ -427,6 +435,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Settings\Others.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\PluginInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

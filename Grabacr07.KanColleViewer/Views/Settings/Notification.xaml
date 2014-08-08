@@ -10,9 +10,9 @@
 			 xmlns:controls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
 			 mc:Ignorable="d"
 			 d:DesignWidth="550"
-			 d:DesignHeight="300"
 			 d:DataContext="{d:DesignInstance viewModels:SettingsViewModel}">
 	<UserControl.Resources>
 		<ResourceDictionary>
@@ -106,5 +106,38 @@
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
+		<TextBlock Text="通知プラグイン"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
+				   Margin="0,10,0,8" />
+
+		<TextBlock Text="以下のプラグインを使用して通知されます。"
+				   Style="{DynamicResource DetailTextStyleKey}"
+				   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+
+		<ItemsControl ItemsSource="{Binding NotifierPlugins}"
+					  Margin="0,5">
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<Border BorderThickness="1"
+							BorderBrush="{DynamicResource BorderBrushKey}"
+							Margin="0,5"
+							Padding="5">
+						<DockPanel>
+							<TextBlock DockPanel.Dock="Bottom"
+									   Text="{Binding ErrorMessage}"
+									   HorizontalAlignment="Right"
+									   Visibility="{Binding ErrorMessage, Converter={StaticResource StringToVisiblityConverter}}" />
+							<controls:CallMethodButton DockPanel.Dock="Right"
+													   Content="テスト"
+													   MethodName="Test"
+													   Padding="8,6"
+													   Margin="5,0,0,0"
+													   VerticalAlignment="Center" />
+							<settings:PluginInfo />
+						</DockPanel>
+					</Border>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
 	</StackPanel>
 </UserControl>

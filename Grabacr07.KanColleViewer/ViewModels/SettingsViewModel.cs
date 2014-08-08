@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Properties;
+using Grabacr07.KanColleViewer.ViewModels.Composition;
 using Grabacr07.KanColleViewer.ViewModels.Messages;
 using Grabacr07.KanColleWrapper;
 using Livet.EventListeners;
@@ -208,7 +208,44 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		#endregion
 
 
-		public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+		#region NotifierPlugins 変更通知プロパティ
+
+		private List<NotifierViewModel> _NotifierPlugins;
+
+		public List<NotifierViewModel> NotifierPlugins
+		{
+			get { return this._NotifierPlugins; }
+			set
+			{
+				if (this._NotifierPlugins != value)
+				{
+					this._NotifierPlugins = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region ToolPlugins 変更通知プロパティ
+
+		private List<ToolViewModel> _ToolPlugins;
+
+		public List<ToolViewModel> ToolPlugins
+		{
+			get { return this._ToolPlugins; }
+			set
+			{
+				if (this._ToolPlugins != value)
+				{
+					this._ToolPlugins = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 
 
 		public SettingsViewModel()
@@ -245,6 +282,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				{ "Current", (sender, args) => Settings.Current.BrowserZoomFactor = zoomFactor.Current },
 			});
 			this.BrowserZoomFactor = zoomFactor;
+
+			this.ReloadPlugins();
 		}
 
 
@@ -293,12 +332,11 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			App.ViewModelRoot.Messenger.Raise(new SetWindowLocationMessage { MessageKey = "Window/Location", Left = 0.0 });
 		}
 
-		protected void RaiseErrorsChanged([CallerMemberName]string propertyName = "")
+
+		public void ReloadPlugins()
 		{
-			if (this.ErrorsChanged != null)
-			{
-				this.ErrorsChanged(this, new DataErrorsChangedEventArgs(propertyName));
-			}
+			this.NotifierPlugins = new List<NotifierViewModel>(PluginHost.Instance.Notifiers.Select(x => new NotifierViewModel(x)));
+			this.ToolPlugins = new List<ToolViewModel>(PluginHost.Instance.Tools.Select(x => new ToolViewModel(x)));
 		}
 	}
 }
