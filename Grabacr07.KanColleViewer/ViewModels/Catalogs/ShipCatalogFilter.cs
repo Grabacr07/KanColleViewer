@@ -456,4 +456,79 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				.SelectMany(x => x.Value.Ships.Select(s => s.Id)));
 		}
 	}
+
+	public class ShipSallyAreaFilter : ShipCatalogFilter
+	{
+		#region None 変更通知プロパティ
+
+		private bool _None = true;
+
+		public bool None
+		{
+			get { return this._None; }
+			set
+			{
+				if (this._None != value)
+				{
+					this._None = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+
+		#region Aleutian 変更通知プロパティ
+
+		private bool _Aleutian = true;
+
+		public bool Aleutian
+		{
+			get { return this._Aleutian; }
+			set
+			{
+				if (this._Aleutian != value)
+				{
+					this._Aleutian = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+
+		#region Midway 変更通知プロパティ
+
+		private bool _Midway = true;
+
+		public bool Midway
+		{
+			get { return this._Midway; }
+			set
+			{
+				if (this._Midway != value)
+				{
+					this._Midway = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+
+
+		public ShipSallyAreaFilter(Action updateAction) : base(updateAction) { }
+
+		public override bool Predicate(Ship ship)
+		{
+			if (this.None && ship.SallyArea == 0) return true;
+			if (this.Aleutian && ship.SallyArea == 1) return true;
+			if (this.Midway && ship.SallyArea == 2) return true;
+
+			return false;
+		}
+	}
 }
