@@ -670,7 +670,7 @@
 
 							<GridViewColumn Width="65">
 								<GridViewColumn.Header>
-									<TextBlock Text="出撃海域" />
+									<TextBlock Text="출격해역" />
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -686,7 +686,7 @@
 														 Value="1">
 												<Setter TargetName="Text"
 														Property="Text"
-														Value="AL 作戦" />
+														Value="AL작전" />
 												<Setter TargetName="Border"
 														Property="Background"
 														Value="#FF204080" />
@@ -695,7 +695,7 @@
 														 Value="2">
 												<Setter TargetName="Text"
 														Property="Text"
-														Value="MI 作戦" />
+														Value="MI작전" />
 												<Setter TargetName="Border"
 														Property="Background"
 														Value="#FF804020" />

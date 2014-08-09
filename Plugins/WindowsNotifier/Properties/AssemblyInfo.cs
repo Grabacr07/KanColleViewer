@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("提督業も忙しい！ Windows 通知プラグイン")]
-[assembly: AssemblyDescription("提督業も忙しい！ Windows 通知プラグイン")]
+[assembly: AssemblyTitle("제독업무도 바빠！ Windows 알림 플러그인")]
+[assembly: AssemblyDescription("기존 버전의 개조버전 플러그인입니다. Sounds폴더 안에 mp3,wav를 배치하여 알림음을 설정할 수 있습니다.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("grabacr.net")]
 [assembly: AssemblyProduct("KanColleViewer")]
