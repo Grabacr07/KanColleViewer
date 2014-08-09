@@ -38,19 +38,19 @@ namespace Grabacr07.KanColleViewer.Composition
 		/// プラグインによって提供される通知機能を表すオブジェクトのシーケンスを取得します。
 		/// </summary>
 		/// <value>プラグインによって提供される通知機能を表すオブジェクトのシーケンス。</value>
-		[ImportMany(typeof(INotifier))]
-		public IEnumerable<INotifier> Notifiers { get; set; }
+		[ImportMany]
+		public IEnumerable<Lazy<INotifier, IPluginMetadata>> Notifiers { get; set; }
 
 		/// <summary>
-		/// プラグインによって提供される
+		/// プラグインによって提供されるツール機能を表すオブジェクトのシーケンスを取得します。
 		/// </summary>
-		[ImportMany(typeof(IToolPlugin))]
-		public IEnumerable<IToolPlugin> Tools { get; set; }
+		[ImportMany]
+		public IEnumerable<Lazy<IToolPlugin, IPluginMetadata>> Tools { get; set; }
 
 		/// <summary>
 		/// インポートされたプラグインのシーケンスを取得します。
 		/// </summary>
-		[ImportMany(typeof(IPlugin))]
+		[ImportMany]
 		public IEnumerable<Lazy<IPlugin, IPluginMetadata>> Plugins { get; set; }
 
 
@@ -92,7 +92,7 @@ namespace Grabacr07.KanColleViewer.Composition
 		/// <returns>ロードされている全ての通知機能を集約して操作するオブジェクト。</returns>
 		public INotifier GetNotifier()
 		{
-			return new AggregateNotifier(this.Notifiers);
+			return new AggregateNotifier(this.Notifiers.Select(x => x.Value));
 		}
 	}
 }

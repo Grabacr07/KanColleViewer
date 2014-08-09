@@ -10,9 +10,9 @@
 			 xmlns:controls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
 			 mc:Ignorable="d"
 			 d:DesignWidth="550"
-			 d:DesignHeight="300"
 			 d:DataContext="{d:DesignInstance viewModels:SettingsViewModel}">
 	<UserControl.Resources>
 		<ResourceDictionary>
@@ -75,36 +75,69 @@
 
 				<Border Margin="8" />
 
-                <TextBlock Text="칸코레 본래 사양인 최대 1분까지 줄일 수 있습니다. 서버와 컴퓨터의 시간차이가 있으므로 40~50초정도로 설정하는것을 권장합니다."
-						   Style="{DynamicResource DetailTextStyleKey}" />
+				<TextBlock Text="칸코레 본래 사양인 최대 1분까지 줄일 수 있습니다. 서버와 컴퓨터의 시간차이가 있으므로 40~50초정도로 설정하는것을 권장합니다."
+			 Style="{DynamicResource DetailTextStyleKey}" />
 			</DockPanel>
 
 			<Border Height="1"
 					Background="{DynamicResource ActiveBorderBrushKey}"
 					Margin="0,5" />
 
-            <CheckBox Content="함대에 편성되어있는 칸무스의 피로가 모두 회복되면 알림"
-					  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=NotifyFleetRejuvenated}"
-					  Margin="0,5" />
+			<CheckBox Content="함대에 편성되어있는 칸무스의 피로가 모두 회복되면 알림"
+			IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=NotifyFleetRejuvenated}"
+			Margin="0,5" />
 
 			<StackPanel Margin="20,0,0,0">
 				<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}"
-						   Margin="0,3">
-                    <Run Text="재출격가능 컨디션 설정" />
+						   Margin="0,3,0,1">
+					<Run Text="재출격가능 컨디션 설정" />
 					<Run Text=":" />
 					<Run Text="{Binding Source={x:Static models:Settings.Current}, Path=KanColleClientSettings.ReSortieCondition}" />
 				</TextBlock>
-                <TextBlock Text="※[동작설정] > [출격 컨디션]에서 설정가능합니다."
-                           Style="{DynamicResource DetailTextStyleKey}"
-						   FontSize="10.5"
-						   Margin="0,0,0,8" />
-                <TextBlock Text="함대에 편성된 모든 칸무스가 설정된 컨디션 이상이 되면 알립니다. 컨디션은 3분당 3씩 회복되지만 칸코레 뷰어 구현상 알림시점의 오차는 몇초~3분정도까지 늦춰질 수 있습니다. 양해바랍니다."
-						   Style="{DynamicResource DetailTextStyleKey}" />
+				<TextBlock Text="※[동작설정] > [출격 컨디션]에서 설정가능합니다."
+									 Style="{DynamicResource DetailTextStyleKey}"
+			 FontSize="10.5"
+			 Margin="0,0,0,8" />
+				<TextBlock Text="함대에 편성된 모든 칸무스가 설정된 컨디션 이상이 되면 알립니다. 컨디션은 3분당 3씩 회복되지만 칸코레 뷰어 구현상 알림시점의 오차는 몇초~3분정도까지 늦춰질 수 있습니다. 양해바랍니다."
+			 Style="{DynamicResource DetailTextStyleKey}" />
 			</StackPanel>
 		</StackPanel>
 
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
+		<TextBlock Text="플러그인 알림"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
+				   Margin="0,10,0,8" />
+
+		<TextBlock Text="이하의 플러인을 사용하여 통지됩니다."
+				   Style="{DynamicResource DetailTextStyleKey}"
+				   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+
+		<ItemsControl ItemsSource="{Binding NotifierPlugins}"
+					  Margin="0,5">
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<Border BorderThickness="1"
+							BorderBrush="{DynamicResource BorderBrushKey}"
+							Margin="0,5"
+							Padding="5">
+						<DockPanel>
+							<TextBlock DockPanel.Dock="Bottom"
+									   Text="{Binding ErrorMessage}"
+									   HorizontalAlignment="Right"
+									   Visibility="{Binding ErrorMessage, Converter={StaticResource StringToVisiblityConverter}}" />
+							<controls:CallMethodButton DockPanel.Dock="Right"
+													   Content="테스트"
+													   MethodName="Test"
+													   Padding="8,6"
+													   Margin="5,0,0,0"
+													   VerticalAlignment="Center" />
+							<settings:PluginInfo />
+						</DockPanel>
+					</Border>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
 	</StackPanel>
 </UserControl>

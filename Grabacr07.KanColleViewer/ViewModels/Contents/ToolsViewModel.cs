@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Composition;
+using Grabacr07.KanColleViewer.ViewModels.Composition;
 using Grabacr07.KanColleWrapper;
 using Livet;
 
@@ -60,31 +62,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 		{
 			this.Tools = new List<ToolViewModel>(PluginHost.Instance.Tools.Select(x => new ToolViewModel(x)));
 			this.SelectedTool = this.Tools.FirstOrDefault();
-		}
-	}
-
-	public class ToolViewModel : ViewModel
-	{
-		private readonly IToolPlugin plugin;
-
-		public string Name
-		{
-			get { return this.plugin.ToolName; }
-		}
-
-		public object View
-		{
-			get { return this.plugin.GetToolView(); }
-		}
-
-		public ToolViewModel(IToolPlugin plugin)
-		{
-			this.plugin = plugin;
-		}
-
-		public override string ToString()
-		{
-			return this.Name;
 		}
 	}
 }

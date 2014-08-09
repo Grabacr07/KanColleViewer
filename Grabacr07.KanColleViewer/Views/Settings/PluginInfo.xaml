@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Settings.PluginInfo"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:composition="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Composition"
+			 mc:Ignorable="d"
+			 d:DesignWidth="400"
+			 d:DataContext="{d:DesignInstance composition:PluginViewModel}">
+	<StackPanel>
+		<TextBlock Style="{DynamicResource DefaultTextStyleKey}">
+			<Run Text="{Binding Title, Mode=OneWay}"
+				 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+			<Run Text=" " />
+			<Run Text="version" />
+			<Run Text="{Binding Version, Mode=OneWay}" />
+			<Run Text=" / " />
+			<Run Text="{Binding Author, Mode=OneWay}" />
+		</TextBlock>
+
+		<Border Height="4" />
+
+		<TextBlock Text="{Binding Description, Mode=OneWay}"
+				   Style="{DynamicResource DefaultTextStyleKey}" />
+	</StackPanel>
+</UserControl>
