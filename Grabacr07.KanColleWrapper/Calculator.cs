@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models;
 
 namespace Grabacr07.KanColleWrapper
 {
-	static class Calculator
+	internal static class Calculator
 	{
 		/// <summary>
 		/// 装備と搭載数を指定して、スロット単位の制空能力を計算します。
@@ -54,17 +53,21 @@ namespace Grabacr07.KanColleWrapper
 				// [索敵装備と装備例] によって示されている計算式
 				// stype=7 が偵察機 (2 倍する索敵値)、stype=8 が電探
 
-				Func<SlotItemInfo, int, int> calcSlotItems = (item, slot) =>
-				{
-					var stype = item.RawData.api_type.Get(1);
-					if (stype == null) return 0;
+				var spotter = fleet.Ships.SelectMany(
+					x => x.SlotItems
+						.Zip(x.OnSlot, (i, o) => new { Item = i.Info, Slot = o })
+						.Where(a => a.Item.RawData.api_type.Get(1) == 7)
+						.Where(a => a.Slot > 0)
+						.Select(a => a.Item.RawData.api_saku)
+					).Sum();
 
-					if (stype == 7 && slot > 0) return item.RawData.api_saku * 2;
-					if (stype == 8) return item.RawData.api_saku;
-					return 0;
-				};
-				var items = fleet.Ships.SelectMany(x => x.SlotItems.Zip(x.OnSlot, (s, o) => calcSlotItems(s.Info, o))).Sum();
-				return items + (int)Math.Sqrt(fleet.Ships.Sum(x => x.ViewRange) - items);
+				var radar = fleet.Ships.SelectMany(
+					x => x.SlotItems
+						.Where(i => i.Info.RawData.api_type.Get(1) == 8)
+						.Select(i => i.Info.RawData.api_saku)
+					).Sum();
+
+				return (spotter * 2) + radar + (int)Math.Sqrt(fleet.Ships.Sum(x => x.ViewRange) - spotter - radar);
 			}
 
 			return 0;
