@@ -10,6 +10,10 @@ using Grabacr07.KanColleWrapper;
 namespace Counter
 {
 	[Export(typeof(IToolPlugin))]
+	[ExportMetadata("Title", "KanColleCounter")]
+	[ExportMetadata("Description", "シンプルな回数カウント機能を提供します。")]
+	[ExportMetadata("Version", "1.0")]
+	[ExportMetadata("Author", "@Grabacr07")]
 	public class KanColleCounter : IToolPlugin
 	{
 		private readonly CounterViewModel viewmodel = new CounterViewModel

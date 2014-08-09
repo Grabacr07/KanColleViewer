@@ -378,6 +378,28 @@
 							</StackPanel>
 						</WrapPanel>
 					</Border>
+
+					<Border BorderThickness="1"
+							BorderBrush="{DynamicResource BorderBrushKey}"
+							Margin="0,8,0,0"
+							Padding="5">
+						<WrapPanel DataContext="{Binding ShipSallyAreaFilter}">
+							<TextBlock Margin="0,2">
+								<Run Text="출격한해역" />
+								<Run Text=":" />
+							</TextBlock>
+
+							<CheckBox Content="작전출격한적 없음"
+									  IsChecked="{Binding None}"
+									  Margin="10,0" />
+							<CheckBox Content="AL작전참가"
+									  IsChecked="{Binding Aleutian}"
+									  Margin="10,0" />
+							<CheckBox Content="MI작전참가"
+									  IsChecked="{Binding Midway}"
+									  Margin="10,0" />
+						</WrapPanel>
+					</Border>
 				</StackPanel>
 			</Expander>
 
@@ -642,6 +664,43 @@
 										<TextBlock Text="{Binding Ship.ViewRange, Mode=OneWay}"
 												   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 												   Margin="0,3" />
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+
+							<GridViewColumn Width="65">
+								<GridViewColumn.Header>
+									<TextBlock Text="出撃海域" />
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<Border x:Name="Border"
+												Margin="-2,0">
+											<TextBlock x:Name="Text"
+													   Text=""
+													   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+													   Margin="5,3" />
+										</Border>
+										<DataTemplate.Triggers>
+											<DataTrigger Binding="{Binding Ship.SallyArea}"
+														 Value="1">
+												<Setter TargetName="Text"
+														Property="Text"
+														Value="AL 作戦" />
+												<Setter TargetName="Border"
+														Property="Background"
+														Value="#FF204080" />
+											</DataTrigger>
+											<DataTrigger Binding="{Binding Ship.SallyArea}"
+														 Value="2">
+												<Setter TargetName="Text"
+														Property="Text"
+														Value="MI 作戦" />
+												<Setter TargetName="Border"
+														Property="Background"
+														Value="#FF804020" />
+											</DataTrigger>
+										</DataTemplate.Triggers>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
