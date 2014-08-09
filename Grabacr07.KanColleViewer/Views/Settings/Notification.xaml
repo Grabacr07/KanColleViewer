@@ -110,34 +110,36 @@
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
 				   Margin="0,10,0,8" />
 
-		<TextBlock Text="以下のプラグインを使用して通知されます。"
-				   Style="{DynamicResource DetailTextStyleKey}"
-				   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+		<StackPanel Margin="20,0,0,0">
+			<TextBlock Text="以下のプラグインを使用して通知されます。"
+					   Style="{DynamicResource DetailTextStyleKey}"
+					   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 
-		<ItemsControl ItemsSource="{Binding NotifierPlugins}"
-					  Margin="0,5">
-			<ItemsControl.ItemTemplate>
-				<DataTemplate>
-					<Border BorderThickness="1"
-							BorderBrush="{DynamicResource BorderBrushKey}"
-							Margin="0,5"
-							Padding="5">
-						<DockPanel>
-							<TextBlock DockPanel.Dock="Bottom"
-									   Text="{Binding ErrorMessage}"
-									   HorizontalAlignment="Right"
-									   Visibility="{Binding ErrorMessage, Converter={StaticResource StringToVisiblityConverter}}" />
-							<controls:CallMethodButton DockPanel.Dock="Right"
-													   Content="テスト"
-													   MethodName="Test"
-													   Padding="8,6"
-													   Margin="5,0,0,0"
-													   VerticalAlignment="Center" />
-							<settings:PluginInfo />
-						</DockPanel>
-					</Border>
-				</DataTemplate>
-			</ItemsControl.ItemTemplate>
-		</ItemsControl>
+			<ItemsControl ItemsSource="{Binding NotifierPlugins}"
+						  Margin="0,5">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<Border BorderThickness="1"
+								BorderBrush="{DynamicResource BorderBrushKey}"
+								Margin="0,5"
+								Padding="5">
+							<DockPanel>
+								<TextBlock DockPanel.Dock="Bottom"
+										   Text="{Binding ErrorMessage}"
+										   HorizontalAlignment="Right"
+										   Visibility="{Binding ErrorMessage, Converter={StaticResource StringToVisiblityConverter}}" />
+								<controls:CallMethodButton DockPanel.Dock="Right"
+														   Content="テスト"
+														   MethodName="Test"
+														   Padding="8,6"
+														   Margin="5,0,0,0"
+														   VerticalAlignment="Center" />
+								<settings:PluginInfo />
+							</DockPanel>
+						</Border>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</StackPanel>
 	</StackPanel>
 </UserControl>

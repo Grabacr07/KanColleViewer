@@ -73,5 +73,23 @@ namespace Grabacr07.KanColleWrapper
 
 		#endregion
 
+		#region ViewRangeCalcLogic 変更通知プロパティ
+
+		private ViewRangeCalcLogic _ViewRangeCalcLogic;
+
+		public ViewRangeCalcLogic ViewRangeCalcLogic
+		{
+			get { return this._ViewRangeCalcLogic; }
+			set
+			{
+				if (this._ViewRangeCalcLogic != value)
+				{
+					this._ViewRangeCalcLogic = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
 	}
 }
