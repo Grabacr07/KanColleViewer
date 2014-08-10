@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Models.Raw;
 using Grabacr07.KanColleWrapper.Internal;
 using Livet;
+using Livet.EventListeners.WeakEvents;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
@@ -16,6 +17,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		private readonly Homeport homeport;
 		private Ship[] originalShips; // null も含んだやつ
 		private bool isInSortie;
+		private LivetCompositeDisposable compositeDisposable;
 
 		#region Id 変更通知プロパティ
 
@@ -311,6 +313,14 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.Condition = new FleetCondition(this);
 			this.Expedition = new Expedition(this);
 			this.Update(rawData);
+
+			this.compositeDisposable = new LivetCompositeDisposable
+			{
+				new PropertyChangedWeakEventListener(KanColleClient.Current.Settings)
+				{
+					{ "ViewRangeCalcLogic", (sender, args) => this.Calculate() }
+				}
+			};
 		}
 
 
@@ -395,7 +405,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.TotalLevel = this.Ships.HasItems() ? this.Ships.Sum(x => x.Level) : 0;
 			this.AverageLevel = this.Ships.HasItems() ? (double)this.TotalLevel / this.Ships.Length : 0.0;
 			this.AirSuperiorityPotential = this.Ships.Sum(s => s.CalcAirSuperiorityPotential());
-			this.TotalViewRange = this.Ships.Sum(s => s.ViewRange);
+			this.TotalViewRange = this.CalcFleetViewRange(KanColleClient.Current.Settings.ViewRangeCalcLogic);
 			this.Speed = this.Ships.All(s => s.Info.Speed == Speed.Fast) ? Speed.Fast : Speed.Low;
 		}
 
@@ -473,6 +483,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public virtual void Dispose()
 		{
+			this.compositeDisposable.Dispose();
 			this.Expedition.SafeDispose();
 			this.Condition.SafeDispose();
 		}

@@ -56,5 +56,50 @@
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
+		<TextBlock Text="索敵値計算"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
+				   Margin="0,10" />
+
+		<StackPanel Margin="20,0,0,0">
+			<TextBlock Text="艦隊の索敵値の算出に使用する計算式は、以下を使用する" />
+
+			<StackPanel Margin="0,5">
+				<RadioButton IsChecked="{Binding ViewRangeType1}"
+							 Margin="0,5">
+					<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+							   LineHeight="16">
+						<Run Text="艦娘と装備の索敵値の単純な合計"
+							 Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}" />
+						<LineBreak />
+						<Run Text="KanColleViewer での従来の計算方法" />
+					</TextBlock>
+				</RadioButton>
+
+				<RadioButton IsChecked="{Binding ViewRangeType2}"
+							 Margin="0,5">
+					<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+							   LineHeight="18">
+						<Run Text="(偵察機 × 2) + (電探) + √(装備込みの艦隊索敵値合計 - 偵察機 - 電探)"
+							 Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}" />
+						<LineBreak />
+						<Run Text="装備による索敵値が重要とされる場合の計算方法 (推定)" />
+						<LineBreak />
+						<Run Text="偵察機" />
+						<Run Text="…" />
+						<Run Text="水上偵察機"
+							 ToolTip="零式水上偵察機、零式水上観測機、九八式水上偵察機(夜偵)" />
+						<Run Text="・" />
+						<Run Text="水上爆撃機"
+							 ToolTip="瑞雲、瑞雲(六三四空)、試製晴嵐" />
+						<Run Text="・" />
+						<Run Text="艦上偵察機"
+							 ToolTip="彩雲、二式艦上偵察機" />
+					</TextBlock>
+				</RadioButton>
+			</StackPanel>
+		</StackPanel>
+
+		<Rectangle Height="1"
+				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 	</StackPanel>
 </UserControl>

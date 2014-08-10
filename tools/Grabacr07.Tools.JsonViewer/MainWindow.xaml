@@ -8,7 +8,7 @@
 				   Background="{DynamicResource ThemeBrushKey}"
 				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 				   IsRestoringWindowPlacement="True"
-				   SnapsToDevicePixels="True">
+				   UseLayoutRounding="True">
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />

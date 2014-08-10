@@ -6,22 +6,15 @@ using System.Threading.Tasks;
 
 namespace Grabacr07.KanColleViewer.Composition
 {
+	/// <summary>
+	/// KanColleViewer プラグインの機能を公開します。
+	/// </summary>
 	public interface IPlugin
 	{
 		/// <summary>
 		/// プラグインの設定画面を取得します。
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>プラグインの設定画面に表示する UI 要素。</returns>
 		object GetSettingsView();
-	}
-
-	public interface IPluginMetadata
-	{
-		string Name { get; }
-
-		[DefaultValue("1.0")]
-		string Version { get; }
-
-		string Author { get; }
 	}
 }

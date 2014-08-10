@@ -7,12 +7,12 @@ using System.Windows;
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("提督業も忙しい！")]
-[assembly: AssemblyDescription("提督業も忙しい！")]
+[assembly: AssemblyTitle("MasterDataViewer")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("grabacr.net")]
-[assembly: AssemblyProduct("KanColleViewer")]
-[assembly: AssemblyCopyright("Copyright © 2013 Grabacr07")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("MasterDataViewer")]
+[assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -31,13 +31,13 @@ using System.Windows;
 //[assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.Satellite)]
 
 
-[assembly: ThemeInfo(
-	ResourceDictionaryLocation.None, //テーマ固有のリソース ディクショナリが置かれている場所
-	//(リソースがページ、
-	//またはアプリケーション リソース ディクショナリに見つからない場合に使用されます)
-	ResourceDictionaryLocation.SourceAssembly //汎用リソース ディクショナリが置かれている場所
-	//(リソースがページ、
-	//アプリケーション、またはいずれのテーマ固有のリソース ディクショナリにも見つからない場合に使用されます)
+[assembly:ThemeInfo(
+    ResourceDictionaryLocation.None, //テーマ固有のリソース ディクショナリが置かれている場所
+                             //(リソースがページ、
+                             //またはアプリケーション リソース ディクショナリに見つからない場合に使用されます)
+    ResourceDictionaryLocation.SourceAssembly //汎用リソース ディクショナリが置かれている場所
+                                      //(リソースがページ、
+                                      //アプリケーション、またはいずれのテーマ固有のリソース ディクショナリにも見つからない場合に使用されます)
 )]
 
 
@@ -51,4 +51,5 @@ using System.Windows;
 // すべての値を指定するか、下のように '*' を使ってビルドおよびリビジョン番号を 
 // 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("3.1.0.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

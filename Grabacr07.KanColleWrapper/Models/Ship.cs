@@ -301,6 +301,14 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
+		/// <summary>
+		/// この艦が出撃した海域を識別する整数値を取得します。
+		/// </summary>
+		public int SallyArea
+		{
+			get { return this.RawData.api_sally_area; }
+		}
+
 
 		internal Ship(Homeport parent, kcsapi_ship2 rawData)
 			: base(rawData)
