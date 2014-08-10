@@ -4,14 +4,33 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.Plugins.ViewModels"
-			 xmlns:converters="clr-namespace:Grabacr07.Desktop.Metro.Converters;assembly=Desktop.Metro"
+			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 mc:Ignorable="d"
 			 d:DesignHeight="300"
 			 d:DesignWidth="300"
 			 d:DataContext="{d:DesignInstance viewModels:PortalViewModel}">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Styles/Controls.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Styles/Icons.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Themes/Dark.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Themes/Accents/Purple.xaml" />
 
-	<StackPanel>
+				<ResourceDictionary Source="pack://application:,,,/Desktop.Metro;component/Styles/Controls.xaml" />
+
+				<ResourceDictionary Source="pack://application:,,,/KanColleViewer;component/Styles/Colors.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/KanColleViewer;component/Styles/Controls.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+
+			<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+		</ResourceDictionary>
+	</UserControl.Resources>
+
+	<StackPanel Margin="8,0,8,8">
 		<TextBlock Text="艦これのマスター データを閲覧します。"
 				   Style="{DynamicResource HeaderTextStyleKey}" />
+		
+		<metro2:CallMethodButton />
 	</StackPanel>
 </UserControl>
