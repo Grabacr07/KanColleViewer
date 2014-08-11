@@ -144,5 +144,15 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 照明弾。
 		/// </summary>
 		Flare = 27,
+
+		/// <summary>
+		/// 司令部施設。
+		/// </summary>
+		FleetCommandFacility = 28,
+
+		/// <summary>
+		/// 航空要員。
+		/// </summary>
+		MaintenancePersonnel = 29,
 	}
 }

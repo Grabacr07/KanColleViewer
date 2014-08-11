@@ -39,6 +39,10 @@
 		"/kcsapi/api_req_mission/result",
 		"/kcsapi/api_req_sortie/battle",
 		"/kcsapi/api_req_sortie/battleresult",
+		"/kcsapi/api_req_hensei/combined",
+		"/kcsapi/api_req_combined_battle/battle",
+		"/kcsapi/api_req_combined_battle/airbattle",
+		"/kcsapi/api_req_combined_battle/battleresult",
 	};
 #>
 // 
