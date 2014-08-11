@@ -561,19 +561,32 @@
 										  VerticalAlignment="Top"
 										  HorizontalAlignment="Left"
 										  Margin="66.6108,0.0173542,0,0"
-										  Width="160.28" 
-										  Height="176.552" 
-										  Stretch="Uniform" 
-										  Fill="#FFEE9103"/>
-									<Ellipse Width="77.2229" 
-											 Height="77.2229" 
+										  Width="160.28"
+										  Height="176.552"
+										  Stretch="Uniform"
+										  Fill="#FFEE9103" />
+									<Ellipse Width="77.2229"
+											 Height="77.2229"
 											 VerticalAlignment="Top"
 											 HorizontalAlignment="Left"
 											 Margin="28.1272,172.698,0,0"
-											 Stretch="Uniform" 
-											 Fill="#FFFABF61"/>
+											 Stretch="Uniform"
+											 Fill="#FFFABF61" />
 								</Grid>
 							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="MaintenancePersonnel">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Path Stretch="Uniform"
+								  Data="M1251.3259,705.00208 L1316,705.5 1341.8731,742.84374 1340.3806,805.58124 1412,889.5 1416.5,928.5 1406,940 1363.2662,940.01875 1304.5597,833.96249 1261.2761,828.48541 1244,808 1218.5,780.5 1216.5,744 1229.4353,742.84374 1264.2612,777.69791 1291.4585,774.37846 1287.4784,743.17569 1251.8234,721.43332 z"
+								  Margin="0,1"
+								  Fill="#FCCDA269" />
 						</ControlTemplate>
 					</Setter.Value>
 				</Setter>
