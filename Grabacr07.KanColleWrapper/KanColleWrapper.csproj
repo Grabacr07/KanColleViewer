@@ -108,10 +108,15 @@
     <Compile Include="Models\ConditionRejuvenatedEventArgs.cs" />
     <Compile Include="Models\CreatedSlotItem.cs" />
     <Compile Include="Models\FleetCondition.cs" />
+    <Compile Include="Models\Raw\kcsapi_hensei_combined.cs" />
+    <Compile Include="Models\Raw\kcsapi_combined_battle_battleresult.cs" />
+    <Compile Include="Models\Raw\kcsapi_combined_battle_airbattle.cs" />
+    <Compile Include="Models\Raw\kcsapi_combined_battle.cs" />
     <Compile Include="Models\Raw\kcsapi_battle.cs" />
     <Compile Include="Models\Raw\kcsapi_destroyitem2.cs" />
     <Compile Include="Models\Raw\kcsapi_destroyship.cs" />
     <Compile Include="Models\Raw\kcsapi_kdock_getship.cs" />
+    <Compile Include="Models\Raw\kcsapi_map_start.cs" />
     <Compile Include="Models\Raw\kcsapi_mission.cs" />
     <Compile Include="Models\Raw\kcsapi_mission_result.cs" />
     <Compile Include="Models\Raw\kcsapi_powerup.cs" />

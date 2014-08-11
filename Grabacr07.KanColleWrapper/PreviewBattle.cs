@@ -29,6 +29,10 @@ namespace Grabacr07.KanColleWrapper.Models
 			proxy.api_req_battle_midnight_sp_midnight.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(x.Data));
 			proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => this.Result(x.Data));
 			proxy.api_port.TryParse<kcsapi_battleresult>().Subscribe(x => this.Cleared(x.Data));
+			//proxy.api_req_combined_battle_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(x.Data));
+			//proxy.api_req_combined_battle.TryParse<kcsapi_battleresult>().Subscribe(x => this.Result(x.Data));
+			//"/kcsapi/api_req_combined_battle/airbattle",
+
 		}
 		private void Cleared(kcsapi_battleresult cleared)
 		{

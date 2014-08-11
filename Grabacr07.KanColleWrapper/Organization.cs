@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
 using Livet;
@@ -61,7 +60,29 @@ namespace Grabacr07.KanColleWrapper
 
 		#endregion
 
+		#region Combined 変更通知プロパティ
 
+		private bool _Combined;
+
+		/// <summary>
+		/// 第一・第二艦隊による連合艦隊が編成されているかどうかを示す値を取得または設定します。
+		/// </summary>
+		public bool Combined
+		{
+			get { return this._Combined; }
+			set
+			{
+				if (this._Combined != value)
+				{
+					this._Combined = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		
 		public Organization(Homeport parent, KanColleProxy proxy)
 		{
 			this.homeport = parent;
@@ -91,8 +112,11 @@ namespace Grabacr07.KanColleWrapper
 			proxy.api_req_kousyou_destroyship.TryParse<kcsapi_destroyship>().Subscribe(this.DestoryShip);
 			proxy.api_req_member_updatedeckname.TryParse().Subscribe(this.UpdateFleetName);
 
+			proxy.api_req_hensei_combined.TryParse<kcsapi_hensei_combined>()
+				.Subscribe(x => this.Combined = x.Data.api_combined == 1);
+
 			proxy.ApiSessionSource
-				.SkipUntil(proxy.api_req_sortie_battle.TryParse<kcsapi_battle>().Do(this.Sortie))
+				.SkipUntil(proxy.api_req_map_start.TryParse().Do(this.Sortie))
 				.TakeUntil(proxy.api_port)
 				.Finally(this.Homing)
 				.Repeat()
@@ -306,12 +330,21 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 
-		private void Sortie(SvData<kcsapi_battle> battle)
+		private void Sortie(SvData data)
 		{
-			var target = this.Fleets[battle.Data.api_dock_id];
-			if (target != null)
+			if (data == null || !data.IsSuccess) return;
+
+			try
 			{
-				target.Sortie();
+				var id = int.Parse(data.Request["api_deck_id"]);
+				var fleet = this.Fleets[id];
+				fleet.Sortie();
+
+				if (this.Combined && id == 1) this.Fleets[2].Sortie();
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine("艦隊の出撃を検知できませんでした: {0}", ex);
 			}
 		}
 

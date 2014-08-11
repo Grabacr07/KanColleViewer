@@ -42,6 +42,10 @@
 		"/kcsapi/api_req_battle_midnight/battle",
 		"/kcsapi/api_req_battle_midnight/sp_midnight",
 		"/kcsapi/api_req_sortie/night_to_day",
+		"/kcsapi/api_req_hensei/combined",
+		"/kcsapi/api_req_combined_battle/battle",
+		"/kcsapi/api_req_combined_battle/airbattle",
+		"/kcsapi/api_req_combined_battle/battleresult",
 	};
 #>
 // 
