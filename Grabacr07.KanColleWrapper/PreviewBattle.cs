@@ -76,8 +76,6 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <param name="battle"></param>
 		private void Battle(kcsapi_battle battle)
 		{
-			int[] Maxhps = battle.api_maxhps;
-			int[] Nowhps = battle.api_nowhps;
 			IsCritical = false;
 			List<listup> lists = new List<listup>();
 			List<int> HPList = new List<int>();
@@ -100,7 +98,6 @@ namespace Grabacr07.KanColleWrapper.Models
 				int[] numlist = battle.api_raigeki.api_erai;
 				decimal[] damlist = battle.api_raigeki.api_eydam;
 				gyoListmake(numlist, damlist, lists);
-
 			}
 			//뇌격전 끝
 
@@ -127,51 +124,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			}
 			//개막전 끝
 
-			//총 HP와 현재 HP의 리스트를 작성한다. 빈칸과 적은 제외. 여기서 적까지 포함시키고 별도의 함수를 추가하면 전투 미리보기 구현도 가능
-			for (int i = 0; i < 7; i++)
-			{
-				if (Maxhps[i] != -1) MHPList.Add(Maxhps[i]);
-				if (Nowhps[i] != -1) HPList.Add(Nowhps[i]);
-			}
-			//만들어진 데미지 리스트와 HP리스트를 총계내어서 현재 HP를 갱신한다.
-			for (int i = 0; i < HPList.Count; i++)
-			{
-				int MaxHP = MHPList[i];
-				int CurrentHP = HPList[i];
-
-				for (int j = 0; j < lists.Count; j++)
-				{
-					decimal rounded = decimal.Round(lists[j].Damage);
-					int damage = (int)rounded;
-					if (lists[j].Num == i + 1) CurrentHP = CurrentHP - damage;
-				}
-				CurrentHPList.Add(CurrentHP);
-			}
-			List<bool> result = new List<bool>();
-
-			//현재 HP가 25%이하인지 판별한다.
-			//지금 기능은 25퍼센트 이하인경우 리스트에 true값을 넣고 아니면 false를 넣는다.
-			for (int i = 0; i < CurrentHPList.Count; i++)
-			{
-				double temp = (double)CurrentHPList[i] / (double)Maxhps[i + 1];
-				if (temp <= 0.25) result.Add(true);
-				else result.Add(false);
-			}
-			//아군이 아닌경우 모두 false를 집어넣는다. 전투 미리보기를 구현한다면 수정을 해야하는 부분
-			for (int i = CurrentHPList.Count + 1; i < Maxhps.Count(); i++)
-			{
-				result.Add(false);
-			}
-			//result가 true인 경우 IsCritical과 EventChecker를 True로 한다.
-			foreach (bool t in result)
-			{
-				if (t)
-				{
-					IsCritical = true;
-					EventChecker = true;
-					break;
-				}
-			}
+			BattleCalc(HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps);
 		}
 		/// <summary>
 		/// battle의 야전버전. Battle과 구조는 동일. 다만 전투의 양상이 조금 다르기때문에 분리
@@ -179,8 +132,6 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <param name="battle"></param>
 		private void MidBattle(kcsapi_midnight_battle battle)
 		{
-			int[] Maxhps = battle.api_maxhps;
-			int[] Nowhps = battle.api_nowhps;
 			IsCritical = false;
 			List<listup> lists = new List<listup>();
 			List<int> HPList = new List<int>();
@@ -189,12 +140,29 @@ namespace Grabacr07.KanColleWrapper.Models
 			//포격전 리스트를 작성. 주간과 달리 1차 포격전밖에 없음.
 			if (battle.api_hougeki != null)
 				Listmake(battle.api_hougeki.api_df_list, battle.api_hougeki.api_damage, lists);
-			//HP리스트를 작성
+
+			BattleCalc(HPList, MHPList, lists, CurrentHPList, battle.api_maxhps,battle.api_nowhps);
+		}
+
+		//BattleCalc는 아직 미완성 코드. 가장 좋은 방법은 HPList에서 해당되는 값을 찾아 수정하는것이라 생각하지만...
+		/// <summary>
+		/// 전투결과 계산의 총계를 낸다.
+		/// </summary>
+		/// <param name="HPList">api_nowhps에서 필요한 값만 입력받을 빈 리스트</param>
+		/// <param name="MHPList">api_maxhps에서 필요한 값만 입력받을 빈 리스트</param>
+		/// <param name="lists">데미지를 모두 저장한 리스트를 입력.</param>
+		/// <param name="CurrentHPList">계산이 끝난 HP리스트를 적제한다. HPList를 수정하는 방향이 더 좋겠지만...</param>
+		/// <param name="Maxhps">api_maxhps를 가져온다.</param>
+		/// <param name="NowHps">api_nowhps를 가져온다.</param>
+		private void BattleCalc(List<int> HPList, List<int> MHPList, List<listup> lists, List<int> CurrentHPList, int[] Maxhps,int[] NowHps)
+		{
+			//총 HP와 현재 HP의 리스트를 작성한다. 빈칸과 적은 제외. 여기서 적까지 포함시키고 별도의 함수를 추가하면 전투 미리보기 구현도 가능
 			for (int i = 0; i < 7; i++)
 			{
 				if (Maxhps[i] != -1) MHPList.Add(Maxhps[i]);
-				if (Nowhps[i] != -1) HPList.Add(Nowhps[i]);
+				if (NowHps[i] != -1) HPList.Add(NowHps[i]);
 			}
+
 			//데미지를 계산하여 현재 HP에 적용
 			for (int i = 0; i < HPList.Count; i++)
 			{
@@ -233,7 +201,6 @@ namespace Grabacr07.KanColleWrapper.Models
 				}
 			}
 		}
-
 
 		//리스트 작성부분은 좀 더 매끄러운 방법이 있는 것 같기도 하지만 일단 능력이 여기까지이므로
 		/// <summary>
@@ -277,7 +244,5 @@ namespace Grabacr07.KanColleWrapper.Models
 			}
 
 		}
-
-
 	}
 }
