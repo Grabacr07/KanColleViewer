@@ -58,6 +58,7 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 	public class api_stage3
 	{
 		public int[] api_frai_flag;
+		public int[] api_fbak_flag;
 		public decimal[] api_fdam;
 	}
 	public class listup
