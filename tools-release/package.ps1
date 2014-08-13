@@ -9,7 +9,7 @@
         $bin = '..\Grabacr07.KanColleViewer\bin\'
  
         $targetKeywords = '*.exe','*.dll','*.exe.config','*.txt','*.VisualElementsManifest.xml'
-        $ignoreKeywords = '*.vshost.exe','Microsoft.*.resources.dll','ExPlugin.*.dll'
+        $ignoreKeywords = '*.vshost.*','Microsoft.*.resources.dll','ExPlugin.*.dll'
  
         $exeSource  = 'KanColleViewer.exe'
  
