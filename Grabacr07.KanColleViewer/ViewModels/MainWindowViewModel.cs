@@ -50,7 +50,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					case Mode.Started:
 						this.Content = this.mainContent ?? (this.mainContent = new MainContentViewModel());
 						StatusService.Current.Set(Properties.Resources.StatusBar_Ready);
-						if (ThemeService.Current.Theme == Theme.CriticalRed) ThemeService.Current.ChangeTheme(Theme.Dark);
+						ThemeService.Current.ChangeTheme(Theme.Dark);
 						ThemeService.Current.ChangeAccent(Accent.Blue);
 						break;
 					case Mode.InSortie:
@@ -58,7 +58,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 						break;
 					case Mode.CriticalCondition:
 						ThemeService.Current.ChangeAccent(Accent.Red);
-						if (!Models.Settings.Current.EnableCriticalPopup) ThemeService.Current.ChangeTheme(Theme.CriticalRed);
+						ThemeService.Current.ChangeTheme(Theme.CriticalRed);
 						break;
 				}
 

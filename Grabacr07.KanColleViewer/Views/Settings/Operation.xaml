@@ -63,7 +63,6 @@
         <CheckBox Content="{Binding Source={x:Static properties:Resources.Settings_Notify_CriticalCondition}, Mode=OneWay}" IsChecked="{Binding EnableCriticalNotify}" Height="17" Margin="15,0,0,10"/>
 		<CheckBox Content="해역돌파중 대파된 칸무스가 있을때 팝업을 띄움" IsChecked="{Binding EnableCriticalPopup}" Height="17" Margin="15,0,0,10"/>
 		<CheckBox Content="{Binding Source={x:Static properties:Resources.Settings_Accent_CriticalCondition}, Mode=OneWay}" IsChecked="{Binding EnableCriticalAccent}" Height="17" Margin="15,0,0,10"/>
-		<TextBlock Foreground="#FFFF5151" Text="※팝업 띄우는 옵션을 해제하면 대파시 화면이 붉은색으로 변하는 기존의 방식으로 사용할 수 있습니다." FontSize="9" Margin="15,0,0,10"/>
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 		

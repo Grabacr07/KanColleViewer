@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Properties;
@@ -16,7 +14,6 @@ using Livet.Messaging;
 using Livet.Messaging.IO;
 using MetroRadiance;
 using Settings = Grabacr07.KanColleViewer.Models.Settings;
-using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleViewer.Views.Controls;
 
@@ -244,6 +241,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		}
 
 		#endregion
+		
 		#region EnableCriticalNotify 変更通知プロパティ
 
 		public bool EnableCriticalNotify
@@ -271,7 +269,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				if (Settings.Current.EnableCriticalAccent != value)
 				{
 					Settings.Current.EnableCriticalAccent = value;
-					if (Settings.Current.EnableCriticalPopup || !Settings.Current.EnableCriticalAccent && App.ViewModelRoot.Mode == Mode.CriticalCondition)
+					if (!Settings.Current.EnableCriticalAccent && App.ViewModelRoot.Mode == Mode.CriticalCondition)
 						App.ViewModelRoot.Mode = Mode.Started;
 					this.RaisePropertyChanged();
 				}
@@ -545,7 +543,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		}
 
 		#endregion
-
 
 		#region EnableUpdateNotification 変更通知プロパティ
 

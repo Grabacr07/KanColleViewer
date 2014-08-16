@@ -122,16 +122,16 @@ namespace Grabacr07.KanColleWrapper
 		private KanColleClient()
 		{
 			this.Initialieze();
+			//색이 마음에 안든다는 요청에 따라 일단 비활성화.
+			//var start = this.Proxy.api_req_map_start;
+			//var end = this.Proxy.api_port;
 
-			var start = this.Proxy.api_req_map_start;
-			var end = this.Proxy.api_port;
-
-			this.Proxy.ApiSessionSource
-				.SkipUntil(start.Do(_ => this.IsInSortie = true))
-				.TakeUntil(end)
-				.Finally(() => this.IsInSortie = false)
-				.Repeat()
-				.Subscribe();
+			//this.Proxy.ApiSessionSource
+			//	.SkipUntil(start.Do(_ => this.IsInSortie = true))
+			//	.TakeUntil(end)
+			//	.Finally(() => this.IsInSortie = false)
+			//	.Repeat()
+			//	.Subscribe();
 		}
 
 
