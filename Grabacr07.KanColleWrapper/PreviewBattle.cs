@@ -27,8 +27,6 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 팝업을 한번만 뜨도록 하기위해 존재하는 bool값. 필요없을지도?
 		/// </summary>
-		//public bool EventChecker { get; set; }
-
 		public delegate void CriticalEventHandler();
 		/// <summary>
 		/// 크리티컬 컨디션 이벤트
@@ -38,6 +36,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 크리티컬 컨디션을 더이상 적용시키지 않기 위해 사용
 		/// </summary>
 		public event CriticalEventHandler CriticalCleared;
+		/// <summary>
+		/// 전투결과를 미리 계산합니다. 현재는 대파알림 전용으로 만들어져있습니다.
+		/// </summary>
+		/// <param name="proxy"></param>
 		public PreviewBattle(KanColleProxy proxy)
 		{
 			proxy.api_req_sortie_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false, x.Data));
@@ -158,9 +160,10 @@ namespace Grabacr07.KanColleWrapper.Models
 			BattleCalc(HPList, MHPList, Combinelists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined);
 		}
 		/// <summary>
-		/// 일반 포격전, 개막뇌격, 개막 항공전등을 계산. 현재 조금 분할해야할 필요성을 느낌.
+		/// 일반 포격전, 개막뇌격, 개막 항공전등을 계산.
 		/// </summary>
 		/// <param name="battle"></param>
+		/// <param name="IsCombined">연합함대인경우 True로 설정합니다.</param>
 		private void Battle(bool IsCombined, kcsapi_battle battle)
 		{
 			this.IsCritical = false;
@@ -314,7 +317,6 @@ namespace Grabacr07.KanColleWrapper.Models
 				if (t)
 				{
 					this.IsCritical = true;
-					//EventChecker = true;
 					break;
 				}
 			}
