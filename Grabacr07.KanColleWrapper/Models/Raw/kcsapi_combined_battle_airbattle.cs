@@ -67,7 +67,7 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public int[] api_ebak_flag { get; set; }
 		public int[] api_fcl_flag { get; set; }
 		public int[] api_ecl_flag { get; set; }
-		public int[] api_fdam { get; set; }
+		public decimal[] api_fdam { get; set; }
 		public int[] api_edam { get; set; }
 	}
 
@@ -76,7 +76,7 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public int[] api_frai_flag { get; set; }
 		public int[] api_fbak_flag { get; set; }
 		public int[] api_fcl_flag { get; set; }
-		public int[] api_fdam { get; set; }
+		public decimal[] api_fdam { get; set; }
 	}
 	// ReSharper restore InconsistentNaming
 }

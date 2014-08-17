@@ -14,9 +14,13 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public api_hougeki2 api_hougeki2;
 		public api_hougeki3 api_hougeki3;
 		public api_kouku api_kouku;
+		public Api_Kouku2 api_kouku2;
 		public api_raigeki api_raigeki;
 		public int[] api_maxhps;//it works well
 		public int[] api_nowhps;
+		//combined전용
+		public int[] api_nowhps_combined;
+		public int[] api_maxhps_combined;
 	}
 	public class kcsapi_midnight_battle
 	{
@@ -24,6 +28,9 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public api_stage3 api_stage3;
 		public int[] api_maxhps;//it works well
 		public int[] api_nowhps;
+		public int[] api_nowhps_combined;
+		public int[] api_maxhps_combined;
+
 	}
 	public class api_hougeki
 	{
@@ -54,11 +61,20 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 	public class api_kouku
 	{
 		public api_stage3 api_stage3;
+		public api_Stage3_combined api_stage3_combined;
 	}
 	public class api_stage3
 	{
 		public int[] api_frai_flag;
 		public int[] api_fbak_flag;
+		public int[] api_fcl_flag;
+		public decimal[] api_fdam;
+	}
+	public class api_Stage3_combined
+	{
+		public int[] api_frai_flag;
+		public int[] api_fbak_flag;
+		public int[] api_fcl_flag;
 		public decimal[] api_fdam;
 	}
 	public class listup
