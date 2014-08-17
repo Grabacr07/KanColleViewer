@@ -152,7 +152,10 @@
 								<StackPanel Margin="0,2,0,0">
 									<StackPanel.Resources>
 										<Style TargetType="{x:Type TextBlock}"
-											   BasedOn="{StaticResource DefaultTextStyleKey}" />
+											   BasedOn="{StaticResource DefaultTextStyleKey}">
+											<Setter Property="TextWrapping"
+													Value="NoWrap" />
+										</Style>
 									</StackPanel.Resources>
 
 									<Grid>
