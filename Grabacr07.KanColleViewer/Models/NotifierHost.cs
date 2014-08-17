@@ -98,8 +98,7 @@ namespace Grabacr07.KanColleViewer.Models
 		{
 			KanColleClient.Current.PreviewBattle.CriticalCondition += () =>
 			{
-				if (KanColleClient.Current.PreviewBattle.EventChecker)
-				{
+
 					if (Models.Settings.Current.EnableCriticalNotify)
 					{
 						PluginHost.Instance.GetNotifier().Show(
@@ -123,14 +122,12 @@ namespace Grabacr07.KanColleViewer.Models
 
 					if (Models.Settings.Current.EnableCriticalAccent)
 						App.ViewModelRoot.Mode = Mode.CriticalCondition;
-					KanColleClient.Current.PreviewBattle.EventChecker = false;
-				}
 			};
 
 
 			KanColleClient.Current.PreviewBattle.CriticalCleared += () =>
 			{
-				if (!KanColleClient.Current.PreviewBattle.EventChecker) App.ViewModelRoot.Mode = Mode.Started;
+				App.ViewModelRoot.Mode = Mode.Started;
 			};
 
 		}

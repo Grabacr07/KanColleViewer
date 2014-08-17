@@ -20,15 +20,15 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 언젠가 전투 미리보기가 실장될 경우를 대비한 부분.
 		/// </summary>
 		public bool EnablePreviewBattle { get; set; }
-
+		private List<int> CurrentHPList = new List<int>();
 		/// <summary>
 		/// 내부에서 크리티컬이 맞는지 조회하는 부분
 		/// </summary>
 		private bool IsCritical { get; set; }
 		/// <summary>
-		/// 팝업을 한번만 뜨도록 하기위해 존재하는 bool값
+		/// 팝업을 한번만 뜨도록 하기위해 존재하는 bool값. 필요없을지도?
 		/// </summary>
-		public bool EventChecker { get; set; }
+		//public bool EventChecker { get; set; }
 
 		public delegate void CriticalEventHandler();
 		/// <summary>
@@ -45,29 +45,26 @@ namespace Grabacr07.KanColleWrapper.Models
 			proxy.api_req_sortie_night_to_day.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(x.Data));
 			proxy.api_req_battle_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(x.Data));
 			proxy.api_req_battle_midnight_sp_midnight.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(x.Data));
-			proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => this.Result(x.Data));
-			proxy.api_port.TryParse<kcsapi_battleresult>().Subscribe(x => this.Cleared(x.Data));
+			proxy.api_req_sortie_battleresult.TryParse().Subscribe(x => this.Result());
+			proxy.api_port.TryParse().Subscribe(x => this.Cleared());
 			//proxy.api_req_combined_battle_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(x.Data));
 			//proxy.api_req_combined_battle.TryParse<kcsapi_battleresult>().Subscribe(x => this.Result(x.Data));
 			//"/kcsapi/api_req_combined_battle/airbattle",
-
 		}
 		/// <summary>
-		/// 대파 메시지가 한번만 뜨도록 조정하는걸 도와주는 부분. 현재 새로바뀐 구조에선 필요없을지도?
+		/// 회항하였을때 테마와 악센트를 원래대로
 		/// </summary>
 		/// <param name="cleared"></param>
-		private void Cleared(kcsapi_battleresult cleared)
+		private void Cleared()
 		{
 			if (IsCritical) this.CriticalCleared();
 		}
-
 		/// <summary>
 		/// battleresult창이 떴을때 IsCritical이 True이면 CriticalCondition이벤트를 발생
 		/// </summary>
 		/// <param name="results"></param>
-		private void Result(kcsapi_battleresult results)
+		private void Result()
 		{
-			//if (IsCritical) MessageBox.Show("대파!");
 			if (IsCritical) this.CriticalCondition();
 		}
 		/// <summary>
@@ -80,7 +77,6 @@ namespace Grabacr07.KanColleWrapper.Models
 			List<listup> lists = new List<listup>();
 			List<int> HPList = new List<int>();
 			List<int> MHPList = new List<int>();
-			List<int> CurrentHPList = new List<int>();
 			//모든 형태의 전투에서 타게팅이 되는 함선의 번호와 데미지를 순서대로 입력한다.
 
 			//포격전 시작
@@ -196,7 +192,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				if (t)
 				{
 					IsCritical = true;
-					EventChecker = true;
+					//EventChecker = true;
 					break;
 				}
 			}
