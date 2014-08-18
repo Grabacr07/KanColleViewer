@@ -14,7 +14,7 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public api_hougeki2 api_hougeki2;
 		public api_hougeki3 api_hougeki3;
 		public api_kouku api_kouku;
-		public Api_Kouku2 api_kouku2;
+		public api_kouku2 api_kouku2;
 		public api_raigeki api_raigeki;
 		public int[] api_maxhps;//it works well
 		public int[] api_nowhps;
@@ -59,6 +59,11 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public int[] api_erai;
 	}
 	public class api_kouku
+	{
+		public api_stage3 api_stage3;
+		public api_Stage3_combined api_stage3_combined;
+	}
+	public class api_kouku2
 	{
 		public api_stage3 api_stage3;
 		public api_Stage3_combined api_stage3_combined;

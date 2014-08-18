@@ -25,6 +25,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		private bool IsCritical { get; set; }
 		/// <summary>
+		/// 연합함대가 크리티컬이 맞는지 조회하는 부분
+		/// </summary>
+		private bool IsCombineCritical { get; set; }
+		/// <summary>
 		/// 팝업을 한번만 뜨도록 하기위해 존재하는 bool값. 필요없을지도?
 		/// </summary>
 		public delegate void CriticalEventHandler();
@@ -61,7 +65,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <param name="cleared"></param>
 		private void Cleared()
 		{
-			if (this.IsCritical) this.CriticalCleared();
+			if (this.IsCombineCritical || this.IsCritical) this.CriticalCleared();
 		}
 		/// <summary>
 		/// battleresult창이 떴을때 IsCritical이 True이면 CriticalCondition이벤트를 발생
@@ -69,7 +73,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <param name="results"></param>
 		private void Result()
 		{
-			if (this.IsCritical) this.CriticalCondition();
+			if (this.IsCombineCritical || this.IsCritical) this.CriticalCondition();
 		}
 		/// <summary>
 		/// 연합함대를 사용한 전투에서 항공전을 처리하는데 사용.
@@ -78,6 +82,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		private void AirBattle(kcsapi_battle battle)
 		{
 			this.IsCritical = false;
+			this.IsCombineCritical = false;
 			List<listup> lists = new List<listup>();
 			List<int> CurrentHPList = new List<int>();
 			List<int> HPList = new List<int>();
@@ -150,14 +155,14 @@ namespace Grabacr07.KanColleWrapper.Models
 				}//연합함대 리스트 작성 끝
 			}
 			//api_kouku끝
-			BattleCalc(HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps);
+			BattleCalc(false,HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps);
 
 			//재활용 위해 초기화
 			CurrentHPList = new List<int>();
 			HPList = new List<int>();
 			MHPList = new List<int>();
 
-			BattleCalc(HPList, MHPList, Combinelists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined);
+			BattleCalc(true,HPList, MHPList, Combinelists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined);
 		}
 		/// <summary>
 		/// 일반 포격전, 개막뇌격, 개막 항공전등을 계산.
@@ -167,6 +172,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		private void Battle(bool IsCombined, kcsapi_battle battle)
 		{
 			this.IsCritical = false;
+			this.IsCombineCritical = false;
 			List<int> CurrentHPList = new List<int>();
 			List<listup> lists = new List<listup>();
 			List<int> HPList = new List<int>();
@@ -191,7 +197,10 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				int[] numlist = battle.api_raigeki.api_erai;
 				decimal[] damlist = battle.api_raigeki.api_eydam;
-				DecimalListmake(numlist, damlist, lists);
+				if (!IsCombined && battle.api_hougeki1 != null) 
+					DecimalListmake(numlist, damlist, lists);
+				else if (IsCombined && battle.api_hougeki1 != null)//1차 포격전은 2함대만 맞을지도...?
+					DecimalListmake(numlist, damlist, Combinelists);
 			}
 			//뇌격전 끝
 
@@ -233,7 +242,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			}
 			//개막전 끝
 
-			BattleCalc(HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps);
+			BattleCalc(false,HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps);
 
 			if (IsCombined)//연합함대인경우 연산을 한번 더 시행
 			{
@@ -241,7 +250,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				CurrentHPList = new List<int>();
 				HPList = new List<int>();
 				MHPList = new List<int>();
-				BattleCalc(HPList, MHPList, Combinelists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined);
+				BattleCalc(true,HPList, MHPList, Combinelists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined);
 			}
 		}
 		/// <summary>
@@ -252,6 +261,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		private void MidBattle(bool IsCombined, kcsapi_midnight_battle battle)
 		{
 			this.IsCritical = false;
+			this.IsCombineCritical = false;
 			List<listup> lists = new List<listup>();
 			List<int> HPList = new List<int>();
 			List<int> MHPList = new List<int>();
@@ -261,9 +271,9 @@ namespace Grabacr07.KanColleWrapper.Models
 				ObjectListmake(battle.api_hougeki.api_df_list, battle.api_hougeki.api_damage, lists);
 
 			if (IsCombined && battle.api_maxhps_combined != null && battle.api_nowhps_combined != null)
-				BattleCalc(HPList, MHPList, lists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined);
+				BattleCalc(true,HPList, MHPList, lists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined);
 			else
-				BattleCalc(HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps);
+				BattleCalc(false,HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps);
 		}
 
 		/// <summary>
@@ -275,7 +285,8 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <param name="CurrentHPList">계산이 끝난 HP리스트를 적제한다. HPList를 수정하는 방향이 더 좋겠지만...</param>
 		/// <param name="Maxhps">api_maxhps를 가져온다.</param>
 		/// <param name="NowHps">api_nowhps를 가져온다.</param>
-		private void BattleCalc(List<int> HPList, List<int> MHPList, List<listup> lists, List<int> CurrentHPList, int[] Maxhps, int[] NowHps)
+		/// <param name="IsCombined">연합함대인지 설정</param>
+		private void BattleCalc(bool IsCombined,List<int> HPList, List<int> MHPList, List<listup> lists, List<int> CurrentHPList, int[] Maxhps, int[] NowHps)
 		{
 			//총 HP와 현재 HP의 리스트를 작성한다. 빈칸과 적은 제외. 여기서 적까지 포함시키고 별도의 함수를 추가하면 전투 미리보기 구현도 가능
 			for (int i = 0; i < 7; i++)
@@ -316,7 +327,8 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				if (t)
 				{
-					this.IsCritical = true;
+					if (!IsCombined) this.IsCritical = true;
+					else if (IsCombined) this.IsCombineCritical = true;
 					break;
 				}
 			}
@@ -343,16 +355,16 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// object 데미지 리스트를 생성. object로 포장되어 있어 이걸 분해하여 리스트로 넣어줍니다.
 		/// </summary>
-		/// <param name="ho_target">타겟 리스트</param>
-		/// <param name="ho_damage">데미지 리스트. 한 리스트에 object로 0~2까지 포장되어있음. 보통은 1까지만 쓰이는 모양</param>
+		/// <param name="target">타겟 리스트</param>
+		/// <param name="damage">데미지 리스트. 한 리스트에 object로 0~2까지 포장되어있음. 보통은 1까지만 쓰이는 모양</param>
 		/// <param name="list"></param>
-		private void ObjectListmake(object[] ho_target, object[] ho_damage, List<listup> list)
+		private void ObjectListmake(object[] target, object[] damage, List<listup> list)
 		{
-			for (int i = 1; i < ho_target.Count(); i++)//-1제외
+			for (int i = 1; i < target.Count(); i++)//-1제외
 			{
 				listup d = new listup();
-				dynamic listNum = ho_target[i];
-				dynamic damNum = ho_damage[i];
+				dynamic listNum = target[i];
+				dynamic damNum = damage[i];
 				d.Num = listNum[0];
 				d.Damage = damNum[0];
 
