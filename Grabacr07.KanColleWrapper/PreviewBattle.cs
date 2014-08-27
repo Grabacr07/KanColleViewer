@@ -28,9 +28,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 연합함대가 크리티컬이 맞는지 조회하는 부분
 		/// </summary>
 		private bool IsCombineCritical { get; set; }
-		/// <summary>
-		/// 팝업을 한번만 뜨도록 하기위해 존재하는 bool값. 필요없을지도?
-		/// </summary>
+
 		public delegate void CriticalEventHandler();
 		/// <summary>
 		/// 크리티컬 컨디션 이벤트
