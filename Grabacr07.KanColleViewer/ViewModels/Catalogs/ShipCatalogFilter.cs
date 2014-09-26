@@ -524,11 +524,13 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		public override bool Predicate(Ship ship)
 		{
-			if (this.None && ship.SallyArea == 0) return true;
-			if (this.Aleutian && ship.SallyArea == 1) return true;
-			if (this.Midway && ship.SallyArea == 2) return true;
+			//if (this.None && ship.SallyArea == 0) return true;
+			//if (this.Aleutian && ship.SallyArea == 1) return true;
+			//if (this.Midway && ship.SallyArea == 2) return true;
 
-			return false;
+			//return false;
+
+			return true;
 		}
 	}
 }
