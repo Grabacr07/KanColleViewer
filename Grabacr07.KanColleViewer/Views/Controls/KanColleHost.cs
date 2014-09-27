@@ -62,6 +62,8 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			{
 				instance.scrollViewer.Content = newBrowser;
 			}
+
+			WebBrowserHelper.SetAllowWebBrowserDrop(newBrowser, false);
 		}
 
 		#endregion

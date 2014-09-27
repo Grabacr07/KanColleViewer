@@ -579,6 +579,20 @@
 				</Setter>
 			</Trigger>
 			<Trigger Property="Type"
+					 Value="FleetCommandFacility">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Path Stretch="Uniform"
+								  Data="M4096 5484l208 619 208 619 -416 0 -416 0 208 -619 208 -619zm161 1824l853 0 358 1236 -1212 -1236 1 0zm442 1184l602 619 -1204 0 -1204 0 602 -619 601 -619 602 619 -1 0zm-200 -3212l0 -985 2776 -913 0 -492 -2776 913 -240 0 0 -1182 -321 0 0 1182 -240 0 0 -1970 -413 0 -4 1833 -2358 -776 0 492 2776 913 0 985 -2283 6009 803 0 678 -1785 803 0 803 0 803 0 678 1785 803 0 -2283 -6009 -1 0zm-1415 2028l853 0 -1214 1239 361 -1239z
+										M3998,2498 5141,918 5571,1541 6652,-11 5490,2217 5044,1597 z"
+								  Margin="0,1"
+								  Fill="#FCCDADFD" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
 					 Value="MaintenancePersonnel">
 				<Setter Property="Template">
 					<Setter.Value>
