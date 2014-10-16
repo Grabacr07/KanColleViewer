@@ -65,7 +65,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 			string SelFolder = "";
 			if (header == Resources.Expedition_NotificationMessage_Title) SelFolder = "\\expedition";//원정
 			else if (header == Resources.Repairyard_NotificationMessage_Title) SelFolder = "\\repair";//수리
-            else if (header == Resources.Rejuvenated_NotificationMessage_Title) SelFolder = "\\Rejuvenated";//피로회복
+            else if (header == Resources.ReSortie_NotificationMessage_Title) SelFolder = "\\Rejuvenated";//피로회복
 			else if (header == Resources.ReSortie_CriticalConditionMessage_Title) SelFolder = "\\critical";//대파
 			else if (header == Resources.Dockyard_NotificationMessage_Title) SelFolder = "\\Dockyard";//건조
 			else return string.Empty;//해당되는 헤더가 없을 경우 empty을 반환

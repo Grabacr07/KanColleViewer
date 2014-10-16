@@ -327,10 +327,10 @@
 	<data name="Reparyard_Unused" xml:space="preserve">
     <value>미사용</value>
   </data>
-	<data name="Rejuvenated_NotificationMessage" xml:space="preserve">
+	<data name="ReSortie_NotificationMessage" xml:space="preserve">
     <value>「{0}」의 모든 칸무스 피로회복이 완료되었습니다</value>
   </data>
-	<data name="Rejuvenated_NotificationMessage_Title" xml:space="preserve">
+	<data name="ReSortie_NotificationMessage_Title" xml:space="preserve">
     <value>피로회복완료</value>
   </data>
 	<data name="Screenshot_Failed" xml:space="preserve">

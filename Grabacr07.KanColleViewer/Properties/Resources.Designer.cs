@@ -664,24 +664,6 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   「{0}」の全艦娘の疲労が回復しました。과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        public static string Rejuvenated_NotificationMessage {
-            get {
-                return ResourceManager.GetString("Rejuvenated_NotificationMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   疲労回復完了과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        public static string Rejuvenated_NotificationMessage_Title {
-            get {
-                return ResourceManager.GetString("Rejuvenated_NotificationMessage_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Locked과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Repairyard_Locked {
@@ -777,6 +759,24 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string ReSortie_CriticalConditionMessage_Title {
             get {
                 return ResourceManager.GetString("ReSortie_CriticalConditionMessage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   「{0}」の全艦娘の疲労が回復しました。과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ReSortie_NotificationMessage {
+            get {
+                return ResourceManager.GetString("ReSortie_NotificationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   疲労回復完了과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ReSortie_NotificationMessage_Title {
+            get {
+                return ResourceManager.GetString("ReSortie_NotificationMessage_Title", resourceCulture);
             }
         }
         

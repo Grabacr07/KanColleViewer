@@ -330,10 +330,10 @@
   <data name="Reparyard_Unused" xml:space="preserve">
     <value>未使用</value>
   </data>
-  <data name="Rejuvenated_NotificationMessage" xml:space="preserve">
+  <data name="ReSortie_NotificationMessage" xml:space="preserve">
     <value>「{0}」の全艦娘の疲労が回復しました。</value>
   </data>
-  <data name="Rejuvenated_NotificationMessage_Title" xml:space="preserve">
+  <data name="ReSortie_NotificationMessage_Title" xml:space="preserve">
     <value>疲労回復完了</value>
   </data>
   <data name="Screenshot_Failed" xml:space="preserve">
