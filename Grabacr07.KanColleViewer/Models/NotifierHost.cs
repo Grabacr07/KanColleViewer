@@ -155,7 +155,7 @@ namespace Grabacr07.KanColleViewer.Models
 						PluginHost.Instance.GetNotifier().Show(
 							NotifyType.Rejuvenated,
 							Resources.ReSortie_NotificationMessage_Title,
-                            string.Format(Resources.ReSortie_NotificationMessage, args.FleetName),
+							string.Format(Resources.ReSortie_NotificationMessage, args.FleetName),
 							() => App.ViewModelRoot.Activate());
 					}
 				};
