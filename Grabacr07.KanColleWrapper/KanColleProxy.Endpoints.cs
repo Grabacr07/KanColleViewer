@@ -16,7 +16,7 @@ namespace Grabacr07.KanColleWrapper
 		// ReSharper disable InconsistentNaming
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_start2" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_start2" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_start2
 		{
@@ -24,7 +24,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_port/port" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_port/port" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_port
 		{
@@ -32,7 +32,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_get_member/basic" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_get_member/basic" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_get_member_basic
 		{
@@ -40,7 +40,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_get_member/ship" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_get_member/ship" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_get_member_ship
 		{
@@ -48,7 +48,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_get_member/ship2" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_get_member/ship2" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_get_member_ship2
 		{
@@ -56,7 +56,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_get_member/ship3" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_get_member/ship3" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_get_member_ship3
 		{
@@ -64,7 +64,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_get_member/slot_item" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_get_member/slot_item" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_get_member_slot_item
 		{
@@ -72,7 +72,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_get_member/useitem" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_get_member/useitem" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_get_member_useitem
 		{
@@ -80,7 +80,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_get_member/deck" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_get_member/deck" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_get_member_deck
 		{
@@ -88,7 +88,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_get_member/deck_port" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_get_member/deck_port" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_get_member_deck_port
 		{
@@ -96,7 +96,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_get_member/ndock" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_get_member/ndock" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_get_member_ndock
 		{
@@ -104,7 +104,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_get_member/kdock" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_get_member/kdock" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_get_member_kdock
 		{
@@ -112,7 +112,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_get_member/material" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_get_member/material" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_get_member_material
 		{
@@ -120,7 +120,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_get_member/questlist" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_get_member/questlist" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_get_member_questlist
 		{
@@ -128,7 +128,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_req_hensei/change" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_req_hensei/change" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_hensei_change
 		{
@@ -136,7 +136,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_req_hokyu/charge" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_req_hokyu/charge" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_hokyu_charge
 		{
@@ -144,7 +144,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_req_kaisou/powerup" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_req_kaisou/powerup" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_kaisou_powerup
 		{
@@ -152,7 +152,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_req_kousyou/getship" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_req_kousyou/getship" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_kousyou_getship
 		{
@@ -160,7 +160,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_req_kousyou/createitem" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_req_kousyou/createitem" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_kousyou_createitem
 		{
@@ -168,7 +168,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_req_kousyou/createship" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_req_kousyou/createship" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_kousyou_createship
 		{
@@ -176,7 +176,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_req_kousyou/createship_speedchange" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_req_kousyou/createship_speedchange" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_kousyou_createship_speedchange
 		{
@@ -184,7 +184,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_req_kousyou/destroyship" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_req_kousyou/destroyship" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_kousyou_destroyship
 		{
@@ -192,7 +192,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_req_kousyou/destroyitem2" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_req_kousyou/destroyitem2" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_kousyou_destroyitem2
 		{
@@ -200,7 +200,15 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_req_nyukyo/start" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_req_kousyou/remodel_slot" 에서 세션을 제공합니다.
+		/// </summary>
+		public IObservable<Session> api_req_kousyou_remodel_slot
+		{
+			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_kousyou/remodel_slot"); }
+		}
+
+		/// <summary>
+		/// 엔드포인트 "/kcsapi/api_req_nyukyo/start" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_nyukyo_start
 		{
@@ -208,7 +216,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_req_nyukyo/speedchange" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_req_nyukyo/speedchange" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_nyukyo_speedchange
 		{
@@ -216,7 +224,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_req_map/start" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_req_map/start" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_map_start
 		{
@@ -224,7 +232,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_req_member/updatedeckname" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_req_member/updatedeckname" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_member_updatedeckname
 		{
@@ -232,7 +240,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_req_member/updatecomment" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_req_member/updatecomment" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_member_updatecomment
 		{
@@ -240,7 +248,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_req_mission/result" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_req_mission/result" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_mission_result
 		{
@@ -248,7 +256,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_req_sortie/battle" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_req_sortie/battle" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_sortie_battle
 		{
@@ -256,7 +264,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_req_sortie/battleresult" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_req_sortie/battleresult" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_sortie_battleresult
 		{
@@ -264,7 +272,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_req_battle_midnight/battle" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_req_battle_midnight/battle" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_battle_midnight_battle
 		{
@@ -272,7 +280,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_req_battle_midnight/sp_midnight" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_req_battle_midnight/sp_midnight" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_battle_midnight_sp_midnight
 		{
@@ -280,7 +288,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_req_sortie/night_to_day" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_req_sortie/night_to_day" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_sortie_night_to_day
 		{
@@ -288,7 +296,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_req_hensei/combined" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_req_hensei/combined" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_hensei_combined
 		{
@@ -296,7 +304,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_req_combined_battle/battle" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_req_combined_battle/battle" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_combined_battle_battle
 		{
@@ -304,7 +312,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_req_combined_battle/midnight_battle" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_req_combined_battle/midnight_battle" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_combined_battle_midnight_battle
 		{
@@ -312,7 +320,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_req_combined_battle/airbattle" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_req_combined_battle/airbattle" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_combined_battle_airbattle
 		{
@@ -320,7 +328,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_req_combined_battle/battleresult" からのセッションを配信します。
+		/// 엔드포인트 "/kcsapi/api_req_combined_battle/battleresult" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_combined_battle_battleresult
 		{

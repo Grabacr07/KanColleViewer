@@ -71,8 +71,8 @@
 
 				<TextBlock Grid.Row="0"
 						   Grid.Column="1">
-					<Run Text="{Binding Resources.Homeport_InstantRepair, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-					<Run Text="{Binding Materials.Model.InstantRepairMaterials, Mode=OneWay}"
+					<Run Text="{Binding Resources.Homeport_RemodelKit, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+					<Run Text="{Binding Materials.Model.RemodelKitMaterials, Mode=OneWay}"
 						 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 					<LineBreak />
 					<Run Text="{Binding Resources.Homeport_InstantBuild, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />

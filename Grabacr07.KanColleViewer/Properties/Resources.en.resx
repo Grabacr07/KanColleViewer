@@ -465,4 +465,7 @@
   <data name="Settings_Logging_Enable" xml:space="preserve">
     <value>Log drops and crafting results to file</value>
   </data>
+  <data name="Homeport_RemodelKit" xml:space="preserve">
+    <value>Remodeling Kits:</value>
+  </data>
 </root>

@@ -567,4 +567,7 @@
 	<data name="Settings_Resizing_Enable" xml:space="preserve">
     <value>게임을 시작할때 화면 가로크기를 자동으로 조정</value>
   </data>
+  <data name="Homeport_RemodelKit" xml:space="preserve">
+    <value>개수자재:</value>
+  </data>
 </root>

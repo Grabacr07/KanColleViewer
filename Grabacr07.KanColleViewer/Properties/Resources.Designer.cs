@@ -448,6 +448,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   改修資材:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Homeport_RemodelKit {
+            get {
+                return ResourceManager.GetString("Homeport_RemodelKit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   総合과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string IntegratedView {

@@ -608,4 +608,7 @@ Low: Performance over quality. Ugliest setting.</value>
   <data name="Settings_Resizing_Enable" xml:space="preserve">
     <value>Resize the Window's Width when Game starts</value>
   </data>
+  <data name="Homeport_RemodelKit" xml:space="preserve">
+    <value>改修資材:</value>
+  </data>
 </root>

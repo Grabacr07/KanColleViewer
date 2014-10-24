@@ -31,6 +31,7 @@
 		"/kcsapi/api_req_kousyou/createship_speedchange",
 		"/kcsapi/api_req_kousyou/destroyship",
 		"/kcsapi/api_req_kousyou/destroyitem2",
+		"/kcsapi/api_req_kousyou/remodel_slot",
 		"/kcsapi/api_req_nyukyo/start",
 		"/kcsapi/api_req_nyukyo/speedchange",
 		"/kcsapi/api_req_map/start",
@@ -78,7 +79,7 @@ namespace Grabacr07.KanColleWrapper
 		var name = "api_" + string.Join("_", names);
 #>
 		/// <summary>
-		/// エンド ポイント "<#= endpoint #>" からのセッションを配信します。
+		/// 엔드포인트 "<#= endpoint #>" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> <#= name #>
 		{

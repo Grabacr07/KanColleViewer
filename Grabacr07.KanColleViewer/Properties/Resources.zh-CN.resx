@@ -459,4 +459,7 @@
   <data name="ZoomAction_ZoomFailed" xml:space="preserve">
     <value>缩放失败: {0}</value>
   </data>
+  <data name="Homeport_RemodelKit" xml:space="preserve">
+    <value>Remodeling Kits:</value>
+  </data>
 </root>

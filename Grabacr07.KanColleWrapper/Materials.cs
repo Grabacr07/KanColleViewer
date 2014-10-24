@@ -176,18 +176,41 @@ namespace Grabacr07.KanColleWrapper
 
 		#endregion
 
+		#region RemodelKitMaterials 変更通知プロパティ
+
+		private int _RemodelKitMaterials;
+
+		/// <summary>
+		/// 보유하고있는 개수자재의 개수
+		/// </summary>
+		public int RemodelKitMaterials
+		{
+			get { return this._RemodelKitMaterials; }
+			private set
+			{
+				if (this._RemodelKitMaterials != value)
+				{
+					this._RemodelKitMaterials = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 
 		internal Materials(KanColleProxy proxy)
 		{
 			proxy.api_get_member_material.TryParse<kcsapi_material[]>().Subscribe(x => this.Update(x.Data));
 			proxy.api_req_hokyu_charge.TryParse<kcsapi_charge>().Subscribe(x => this.Update(x.Data.api_material));
 			proxy.api_req_kousyou_destroyship.TryParse<kcsapi_destroyship>().Subscribe(x => this.Update(x.Data.api_material));
+			proxy.api_req_kousyou_remodel_slot.TryParse<kcsapi_remodel_slot>().Subscribe(x => this.Update(x.Data.api_after_material));
 		}
 
 
 		internal void Update(kcsapi_material[] source)
 		{
-			if (source != null && source.Length >= 7)
+			if (source != null && source.Length >= 8)
 			{
 				this.Fuel = source[0].api_value;
 				this.Ammunition = source[1].api_value;
@@ -196,6 +219,7 @@ namespace Grabacr07.KanColleWrapper
 				this.DevelopmentMaterials = source[6].api_value;
 				this.InstantRepairMaterials = source[5].api_value;
 				this.InstantBuildMaterials = source[4].api_value;
+				this.RemodelKitMaterials = source[7].api_value;
 			}
 		}
 
