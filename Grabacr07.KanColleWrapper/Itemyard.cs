@@ -85,6 +85,7 @@ namespace Grabacr07.KanColleWrapper
 			proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => this.DropShip(x.Data));
 
 			proxy.api_get_member_useitem.TryParse<kcsapi_useitem[]>().Subscribe(x => this.Update(x.Data));
+			proxy.api_req_kousyou_remodel_slot.TryParse<kcsapi_remodel_slot>().Subscribe(x => this.DestroyItem(x.Data));
 		}
 
 
@@ -126,7 +127,17 @@ namespace Grabacr07.KanColleWrapper
 			}
 			this.RaiseSlotItemsChanged();
 		}
-
+		private void DestroyItem(kcsapi_remodel_slot data)
+		{
+			if (data.api_use_slot_id != null)
+			{
+				if( data.api_use_slot_id.Length >= 1){
+					for (int i = 0; i < data.api_use_slot_id.Length; i++) this.SlotItems.Remove(data.api_use_slot_id[i]);
+					
+					this.RaiseSlotItemsChanged();
+				}
+			}
+		}
 		private void DestroyItem(SvData<kcsapi_destroyitem2> data)
 		{
 			if (data == null || !data.IsSuccess) return;

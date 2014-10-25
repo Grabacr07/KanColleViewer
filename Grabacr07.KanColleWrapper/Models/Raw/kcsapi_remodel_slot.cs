@@ -13,6 +13,7 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		//public int api_remodel_flag { get; set; }
 		public int[] api_remodel_id { get; set; }
 		//public int api_voice_id { get; set; }
+		public int[] api_use_slot_id { get; set; }
 
 	}
 	public class AfterSlot
