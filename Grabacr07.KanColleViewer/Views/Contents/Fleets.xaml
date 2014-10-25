@@ -207,11 +207,19 @@
 										</ItemsControl.Template>
 										<ItemsControl.ItemTemplate>
 											<DataTemplate>
-												<Border ToolTip="{Binding Info.Name}"
+												<Grid ToolTip="{Binding Info.Name}"
 														Background="Transparent">
+													<TextBlock 
+														Foreground="White" Background="#33000000" 
+														Text="{Binding ItemLv}" 
+														VerticalAlignment="Bottom" 
+														HorizontalAlignment="Right" 
+														Panel.ZIndex="1" 
+														Width="Auto" 
+														Height="15"/>
 													<controls:SlotItemIcon Type="{Binding Info.IconType}"
 																		   Margin="3,0" />
-												</Border>
+												</Grid>
 											</DataTemplate>
 										</ItemsControl.ItemTemplate>
 									</ItemsControl>
