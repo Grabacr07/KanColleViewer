@@ -202,6 +202,7 @@ namespace Grabacr07.KanColleWrapper
 		internal Materials(KanColleProxy proxy)
 		{
 			proxy.api_get_member_material.TryParse<kcsapi_material[]>().Subscribe(x => this.Update(x.Data));
+			proxy.api_req_kousyou_remodel_slot.TryParse<kcsapi_remodel_slot>().Subscribe(x => this.Update(x.Data));
 			proxy.api_req_hokyu_charge.TryParse<kcsapi_charge>().Subscribe(x => this.Update(x.Data.api_material));
 			proxy.api_req_kousyou_destroyship.TryParse<kcsapi_destroyship>().Subscribe(x => this.Update(x.Data.api_material));
 		}
@@ -221,7 +222,14 @@ namespace Grabacr07.KanColleWrapper
 				this.RemodelKitMaterials = source[7].api_value;
 			}
 		}
-
+		internal void Update(kcsapi_remodel_slot source)
+		{
+			if (source != null & source.api_after_material.Length >= 8)
+			{
+				this.DevelopmentMaterials = source.api_after_material[6];
+				this.RemodelKitMaterials = source.api_after_material[7];
+			}
+		}
 		private void Update(int[] source)
 		{
 			if (source != null && source.Length == 4)
