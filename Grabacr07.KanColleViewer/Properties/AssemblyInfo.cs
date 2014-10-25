@@ -7,7 +7,7 @@ using System.Windows;
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("제독업무도 바빠! R130")]
+[assembly: AssemblyTitle("제독업무도 바빠! R131")]
 [assembly: AssemblyDescription("제독업무도 바빠!")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("grabacr.net")]
@@ -51,4 +51,4 @@ using System.Windows;
 // すべての値を指定するか、下のように '*' を使ってビルドおよびリビジョン番号を 
 // 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("3.4.0.130")]
+[assembly: AssemblyVersion("3.4.0.131")]
