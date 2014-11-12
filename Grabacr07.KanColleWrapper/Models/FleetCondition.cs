@@ -84,7 +84,10 @@ namespace Grabacr07.KanColleWrapper.Models
 				return;
 			}
 
+			if (this.ships.Any(p => (p.HP.Current / (double)p.HP.Maximum) <= 0.25)) KanColleClient.Current.PreviewBattle.AfterResult();
+			
 			var condition = this.ships.Min(x => x.Condition);
+			
 			if (condition != this.minCondition)
 			{
 				this.minCondition = condition;

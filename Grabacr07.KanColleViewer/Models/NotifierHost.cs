@@ -127,7 +127,7 @@ namespace Grabacr07.KanColleViewer.Models
 
 			KanColleClient.Current.PreviewBattle.CriticalCleared += () =>
 			{
-				App.ViewModelRoot.Mode = Mode.Started;
+				if (App.ViewModelRoot.Mode!=Mode.Started) App.ViewModelRoot.Mode = Mode.Started;
 			};
 
 		}

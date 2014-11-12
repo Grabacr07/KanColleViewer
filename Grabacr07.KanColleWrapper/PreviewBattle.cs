@@ -74,6 +74,18 @@ namespace Grabacr07.KanColleWrapper.Models
 			if (this.IsCombineCritical || this.IsCritical) this.CriticalCondition();
 		}
 		/// <summary>
+		/// 대파알림 계산이 잘못되었거나 문제가 생겼을때를 대비한 코드.
+		/// </summary>
+		public void AfterResult()
+		{
+			if (!this.IsCritical)
+			{
+				this.CriticalCondition();
+				this.IsCritical = true;
+			}
+		}
+
+		/// <summary>
 		/// 연합함대를 사용한 전투에서 항공전을 처리하는데 사용.
 		/// </summary>
 		/// <param name="battle"></param>
