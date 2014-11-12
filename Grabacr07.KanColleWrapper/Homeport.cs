@@ -88,6 +88,7 @@ namespace Grabacr07.KanColleWrapper
 				this.Organization.Update(x.Data.api_deck_port);
 				this.Organization.Combined = x.Data.api_combined_flag == 1;
 				this.Materials.Update(x.Data.api_material);
+				this.UpdateAdmiral(x.Data.api_basic);
 			});
 			proxy.api_get_member_basic.TryParse<kcsapi_basic>().Subscribe(x => this.UpdateAdmiral(x.Data));
 			proxy.api_req_member_updatecomment.TryParse().Subscribe(this.UpdateComment);
