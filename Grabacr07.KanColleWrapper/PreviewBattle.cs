@@ -198,14 +198,14 @@ namespace Grabacr07.KanColleWrapper.Models
 			//모든 형태의 전투에서 타게팅이 되는 함선의 번호와 데미지를 순서대로 입력한다.
 
 			//포격전 시작
-			if (!IsCombined && battle.api_hougeki1 != null)
-				ObjectListmake(battle.api_hougeki1.api_df_list, battle.api_hougeki1.api_damage, lists);
-			else if (IsCombined && battle.api_hougeki1 != null)//1차 포격전은 2함대만 맞을지도...?
-				ObjectListmake(battle.api_hougeki1.api_df_list, battle.api_hougeki1.api_damage, Combinelists);
+			if (!IsCombined && battle.api_hougeki3 != null)
+				ObjectListmake(battle.api_hougeki3.api_df_list, battle.api_hougeki3.api_damage, lists);
+			else if (IsCombined && battle.api_hougeki3 != null)//1차 포격전은 2함대만 맞을지도...?
+				ObjectListmake(battle.api_hougeki3.api_df_list, battle.api_hougeki3.api_damage, Combinelists);
 			if (battle.api_hougeki2 != null)
 				ObjectListmake(battle.api_hougeki2.api_df_list, battle.api_hougeki2.api_damage, lists);
-			if (battle.api_hougeki3 != null)
-				ObjectListmake(battle.api_hougeki3.api_df_list, battle.api_hougeki3.api_damage, lists);
+			if (battle.api_hougeki1 != null)
+				ObjectListmake(battle.api_hougeki1.api_df_list, battle.api_hougeki1.api_damage, lists);
 			//포격전 끝
 
 			//뇌격전 시작
