@@ -52,6 +52,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			proxy.api_req_combined_battle_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(true, x.Data));
 			proxy.api_req_combined_battle_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(true, x.Data));
 			proxy.api_req_combined_battle_battle_water.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(true, x.Data));
+			proxy.api_req_map_start.Subscribe(x => this.Cleared());
 
 			proxy.api_req_sortie_battleresult.TryParse().Subscribe(x => this.Result());
 			proxy.api_req_combined_battle_battleresult.TryParse().Subscribe(x => this.Result());
