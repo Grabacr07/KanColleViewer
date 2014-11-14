@@ -64,7 +64,21 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <param name="cleared"></param>
 		private void Cleared()
 		{
-			if (this.IsCombineCritical || this.IsCritical) this.CriticalCleared();
+			if (this.IsCombineCritical || this.IsCritical)
+			{
+				this.CriticalCleared();
+
+				this.IsCombineCritical = false;
+				this.IsCritical = false;
+			}
+		}
+				/// <summary>
+		/// 대파상태 강제제거
+		/// </summary>
+		public void ClearFleets()
+		{
+			this.CriticalCleared();
+
 			this.IsCombineCritical = false;
 			this.IsCritical = false;
 		}
@@ -86,13 +100,6 @@ namespace Grabacr07.KanColleWrapper.Models
 				this.CriticalCondition();
 				this.IsCritical = true;
 			}
-		}
-		/// <summary>
-		/// 대파상태 강제제거
-		/// </summary>
-		public void ClearFleets()
-		{
-			this.CriticalCleared();
 		}
 		/// <summary>
 		/// 연합함대를 사용한 전투에서 항공전을 처리하는데 사용.
