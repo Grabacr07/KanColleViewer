@@ -67,20 +67,9 @@ namespace Grabacr07.KanColleWrapper.Models
 			if (this.IsCombineCritical || this.IsCritical)
 			{
 				this.CriticalCleared();
-
-				this.IsCombineCritical = false;
 				this.IsCritical = false;
+				this.IsCombineCritical = false;
 			}
-		}
-				/// <summary>
-		/// 대파상태 강제제거
-		/// </summary>
-		public void ClearFleets()
-		{
-			this.CriticalCleared();
-
-			this.IsCombineCritical = false;
-			this.IsCritical = false;
 		}
 		/// <summary>
 		/// battleresult창이 떴을때 IsCritical이 True이면 CriticalCondition이벤트를 발생
