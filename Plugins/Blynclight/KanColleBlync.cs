@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using BlyncLightSDK;
 using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.Models;
@@ -44,10 +46,12 @@ namespace Grabacr07.KanColleViewer.Plugins
 
             this.compositDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current)
             {
-                { nameof(Organization.Fleets), (sender, e) => this.ChangeFleets() },
+                { nameof(KanColleClient.IsStarted), (sender, e) => { Thread.Sleep(10000); this.ChangeFleets(); } },
                 { nameof(KanColleClient.IsInSortie), (sender, e) => this.UpdateBlync() },
             });
             this.ChangeFleets();
+
+            this.BlyncCore(BlyncLightController.Color.Yellow, BlyncLightController.Speed.Normal);
         }
 
 
@@ -69,7 +73,7 @@ namespace Grabacr07.KanColleViewer.Plugins
                 foreach (var fleet in this.fleets) fleet.Dispose();
             }
 
-            this.fleets = KanColleClient.Current.Homeport.Organization.Fleets
+            this.fleets = KanColleClient.Current?.Homeport?.Organization?.Fleets
                 .Select(x => new FleetMonitor(x.Value, this.UpdateBlync))
                 .ToArray();
         }

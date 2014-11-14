@@ -51,25 +51,28 @@ namespace Grabacr07.KanColleViewer.Composition
 		/// インポートされたプラグインのシーケンスを取得します。
 		/// </summary>
 		[ImportMany]
-		public IEnumerable<Lazy<IPlugin, IPluginMetadata>> Plugins { get; set; }
+		public IEnumerable<IPlugin> Plugins { get; set; }
+
+        // ToDo: Plugins を Lazy に
+        // ToDo: IPlugin に Initialize() と Dispose() がほしい
 
 
-		private PluginHost()
-		{
-			var catalog = new AggregateCatalog(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
+        private PluginHost()
+        {
+            var catalog = new AggregateCatalog(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
 
-			var current = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
-			if (current != null)
-			{
-				var pluginsPath = Path.Combine(current, PluginsDirectory);
-				if (Directory.Exists(pluginsPath))
-				{
-					catalog.Catalogs.Add(new DirectoryCatalog(pluginsPath));
-				}
-			}
+            var current = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
+            if (current != null)
+            {
+                var pluginsPath = Path.Combine(current, PluginsDirectory);
+                if (Directory.Exists(pluginsPath))
+                {
+                    catalog.Catalogs.Add(new DirectoryCatalog(pluginsPath));
+                }
+            }
 
-			this.container = new CompositionContainer(catalog);
-		}
+            this.container = new CompositionContainer(catalog);
+        }
 
 		public void Dispose()
 		{
@@ -84,6 +87,7 @@ namespace Grabacr07.KanColleViewer.Composition
 		{
 			this.container.ComposeParts(this);
 			this.GetNotifier().Initialize();
+            foreach (var p in this.Plugins) p.GetSettingsView();
 		}
 
 		/// <summary>
