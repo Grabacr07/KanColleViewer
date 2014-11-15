@@ -48,14 +48,14 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <param name="proxy"></param>
 		public PreviewBattle(KanColleProxy proxy)
 		{
-			proxy.api_req_sortie_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false, x.Data));
-			proxy.api_req_sortie_night_to_day.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false, x.Data));
+			proxy.api_req_sortie_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false,false, x.Data));
+			proxy.api_req_sortie_night_to_day.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false,false, x.Data));
 			proxy.api_req_battle_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(false, x.Data));
 			proxy.api_req_battle_midnight_sp_midnight.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(false, x.Data));
 			proxy.api_req_combined_battle_airbattle.TryParse<kcsapi_battle>().Subscribe(x => this.AirBattle(x.Data));
-			proxy.api_req_combined_battle_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(true, x.Data));
+			proxy.api_req_combined_battle_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(true,false, x.Data));
 			proxy.api_req_combined_battle_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(true, x.Data));
-			proxy.api_req_combined_battle_battle_water.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(true, x.Data));
+			proxy.api_req_combined_battle_battle_water.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(true,true, x.Data));
 			
 			proxy.api_req_map_start.Subscribe(x => this.Cleared(false));
 
@@ -196,7 +196,8 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		/// <param name="battle"></param>
 		/// <param name="IsCombined">연합함대인경우 True로 설정합니다.</param>
-		private void Battle(bool IsCombined, kcsapi_battle battle)
+		/// <param name="IsWater">수뢰전대인지 채크합니다</param>
+		private void Battle(bool IsCombined,bool IsWater, kcsapi_battle battle)
 		{
 			this.IsCritical = false;
 			this.IsCombineCritical = false;
@@ -207,16 +208,28 @@ namespace Grabacr07.KanColleWrapper.Models
 
 			List<listup> Combinelists = new List<listup>();
 			//모든 형태의 전투에서 타게팅이 되는 함선의 번호와 데미지를 순서대로 입력한다.
-
 			//포격전 시작
-			if (!IsCombined && battle.api_hougeki3 != null)
-				ObjectListmake(battle.api_hougeki3.api_df_list, battle.api_hougeki3.api_damage, lists);
-			else if (IsCombined && battle.api_hougeki3 != null)//1차 포격전은 2함대만 맞을지도...?
-				ObjectListmake(battle.api_hougeki3.api_df_list, battle.api_hougeki3.api_damage, Combinelists);
+			if (IsWater)
+			{
+				if (!IsCombined && battle.api_hougeki3 != null)
+					ObjectListmake(battle.api_hougeki3.api_df_list, battle.api_hougeki3.api_damage, lists);
+				else if (IsCombined && battle.api_hougeki3 != null)//1차 포격전은 2함대만 맞을지도...?
+					ObjectListmake(battle.api_hougeki3.api_df_list, battle.api_hougeki3.api_damage, Combinelists);
+				if (battle.api_hougeki1 != null)
+					ObjectListmake(battle.api_hougeki1.api_df_list, battle.api_hougeki1.api_damage, lists);
+			}
+			else
+			{
+				if (!IsCombined && battle.api_hougeki1 != null)
+					ObjectListmake(battle.api_hougeki1.api_df_list, battle.api_hougeki1.api_damage, lists);
+				else if (IsCombined && battle.api_hougeki1 != null)//1차 포격전은 2함대만 맞을지도...?
+					ObjectListmake(battle.api_hougeki1.api_df_list, battle.api_hougeki1.api_damage, Combinelists);
+				if (battle.api_hougeki3 != null)
+					ObjectListmake(battle.api_hougeki3.api_df_list, battle.api_hougeki3.api_damage, lists);
+			}
 			if (battle.api_hougeki2 != null)
 				ObjectListmake(battle.api_hougeki2.api_df_list, battle.api_hougeki2.api_damage, lists);
-			if (battle.api_hougeki1 != null)
-				ObjectListmake(battle.api_hougeki1.api_df_list, battle.api_hougeki1.api_damage, lists);
+			
 			//포격전 끝
 
 			//뇌격전 시작
