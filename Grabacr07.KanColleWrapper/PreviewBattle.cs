@@ -25,6 +25,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		private bool IsCritical { get; set; }
 		/// <summary>
+		/// 전투가 끝나고 모항에 돌아왔는지를 채크
+		/// </summary>
+		private bool BattleEnd { get; set; }
+		/// <summary>
 		/// 연합함대가 크리티컬이 맞는지 조회하는 부분
 		/// </summary>
 		private bool IsCombineCritical { get; set; }
@@ -52,24 +56,28 @@ namespace Grabacr07.KanColleWrapper.Models
 			proxy.api_req_combined_battle_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(true, x.Data));
 			proxy.api_req_combined_battle_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(true, x.Data));
 			proxy.api_req_combined_battle_battle_water.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(true, x.Data));
-			proxy.api_req_map_start.Subscribe(x => this.Cleared());
+			
+			proxy.api_req_map_start.Subscribe(x => this.Cleared(false));
 
 			proxy.api_req_sortie_battleresult.TryParse().Subscribe(x => this.Result());
 			proxy.api_req_combined_battle_battleresult.TryParse().Subscribe(x => this.Result());
-			proxy.api_port.TryParse().Subscribe(x => this.Cleared());
+			proxy.api_port.TryParse().Subscribe(x => this.Cleared(true));
 		}
 
 		/// <summary>
 		/// 회항하였을때 테마와 악센트를 원래대로
 		/// </summary>
-		/// <param name="cleared"></param>
-		private void Cleared()
+		/// <param name="IsEnd">전투가 끝난건지 안 끝난건지의 여부를 입력</param>
+		private void Cleared(bool IsEnd)
 		{
 			if (this.IsCombineCritical || this.IsCritical)
 			{
 				this.CriticalCleared();
 				this.IsCritical = false;
 				this.IsCombineCritical = false;
+				
+				if (IsEnd) this.BattleEnd = true;
+				else this.BattleEnd = false;
 			}
 		}
 		/// <summary>
@@ -87,8 +95,11 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			if (!this.IsCritical && !this.IsCombineCritical)
 			{
-				this.CriticalCondition();
-				this.IsCritical = true;
+				if (!this.BattleEnd)
+				{
+					this.CriticalCondition();
+					this.IsCritical = true;
+				}
 			}
 		}
 		/// <summary>
