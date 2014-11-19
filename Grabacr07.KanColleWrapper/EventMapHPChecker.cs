@@ -1,0 +1,53 @@
+﻿using Grabacr07.KanColleWrapper.Models.Raw;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+
+namespace Grabacr07.KanColleWrapper.Models
+{
+	public class EventMapHPChecker
+	{
+		public bool EnableEventMapInfo { get; set; }
+		public List<Maplists> Lists = new List<Maplists>();
+		private StringBuilder SeaList= new StringBuilder();
+		//public delegate void MapListEventHandler();
+
+		//public event MapListEventHandler EventMapEnable;
+		
+		public EventMapHPChecker(KanColleProxy proxy)
+		{
+			proxy.api_get_member_mapinfo.TryParse<kcsapi_mapinfo[]>().Subscribe(x => this.EventMapList(x.Data));
+		}
+
+		private void EventMapList(kcsapi_mapinfo[] list)
+		{
+			int j = 1;
+
+			for (int i = 0; i < list.Length; i++)
+			{
+				if (list[i].api_eventmap != null)
+				{
+					Maplists t = new Maplists();
+					t.MaxHp = list[i].api_eventmap.api_max_maphp;
+					t.NowHp = list[i].api_eventmap.api_now_maphp;
+					t.Num = j;
+					this.Lists.Add(t);
+					j++;
+				}
+			}
+			if (this.Lists.Count >= 1)
+			{
+				for (int i = 0; i < Lists.Count; i++)
+				{
+					SeaList.Append("E-" + Lists[i].Num.ToString() + "해역 HP:" + Lists[i].NowHp.ToString() + "/" + Lists[i].MaxHp.ToString()+"\r");
+				}
+				MessageBox.Show(SeaList.ToString(),"이벤트 해역정보");
+			}
+			Lists.Clear();
+			SeaList.Clear();
+		}
+	}
+}

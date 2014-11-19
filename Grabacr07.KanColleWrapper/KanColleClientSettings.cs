@@ -73,6 +73,25 @@ namespace Grabacr07.KanColleWrapper
 
 		#endregion
 
+		#region EnableEventMapInfo 変更通知プロパティ
+
+		private bool _EnableEventMapInfo;
+
+		public bool EnableEventMapInfo
+		{
+			get { return this._EnableEventMapInfo; }
+			set
+			{
+				if (this._EnableEventMapInfo != value)
+				{
+					this._EnableEventMapInfo = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		#region ViewRangeCalcLogic 変更通知プロパティ
 
 		private ViewRangeCalcLogic _ViewRangeCalcLogic;

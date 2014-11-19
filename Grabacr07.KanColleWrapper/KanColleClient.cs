@@ -54,6 +54,7 @@ namespace Grabacr07.KanColleWrapper
 
 		public PreviewBattle PreviewBattle { get; private set; }
 
+		public EventMapHPChecker EventMapHPChecker { get; private set; }
 
 		#region IsStarted 変更通知プロパティ
 
@@ -172,6 +173,7 @@ namespace Grabacr07.KanColleWrapper
 			this.Logger = new Logger(proxy);
 			this.Translations = new Translations();
 			this.PreviewBattle = new PreviewBattle(proxy);
+			if(KanColleClient.Current.Settings.EnableEventMapInfo) this.EventMapHPChecker = new EventMapHPChecker(proxy);
 		}
 	}
 }

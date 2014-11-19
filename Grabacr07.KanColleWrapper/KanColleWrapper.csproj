@@ -100,6 +100,7 @@
     <Compile Include="Calculator.cs" />
     <Compile Include="Counter.cs" />
     <Compile Include="Dockyard.cs" />
+    <Compile Include="EventMapHPChecker.cs" />
     <Compile Include="Models\Mission.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Itemyard.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Models\Raw\kcsapi_destroyitem2.cs" />
     <Compile Include="Models\Raw\kcsapi_destroyship.cs" />
     <Compile Include="Models\Raw\kcsapi_kdock_getship.cs" />
+    <Compile Include="Models\Raw\kcsapi_mapinfo.cs" />
     <Compile Include="Models\Raw\kcsapi_map_start.cs" />
     <Compile Include="Models\Raw\kcsapi_mission.cs" />
     <Compile Include="Models\Raw\kcsapi_mission_result.cs" />

@@ -20,7 +20,7 @@ namespace Grabacr07.KanColleViewer.Models
 			"grabacr.net",
 			"KanColleViewer",
 			"Settings.xml");
-		private static readonly string CurrentSettingsVersion = "1.2";
+		private static readonly string CurrentSettingsVersion = "1.3";
 		public static Settings Current { get; set; }
 
 		public static void Load()
@@ -60,6 +60,7 @@ namespace Grabacr07.KanColleViewer.Models
 				NotifyExpeditionReturned = true,
 				CustomSoundVolume = 99,
 				EnableResizing = true,
+				EnableEventMapInfo = true,
 				KanColleClientSettings = new KanColleClientSettings(),
 			};
 		}
@@ -450,6 +451,25 @@ namespace Grabacr07.KanColleViewer.Models
 				if (this._EnableResizing != value)
 				{
 					this._EnableResizing = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region EnableEventMapInfo 変更通知プロパティ
+
+		private bool _EnableEventMapInfo;
+
+		public bool EnableEventMapInfo
+		{
+			get { return this._EnableEventMapInfo; }
+			set
+			{
+				if (this._EnableEventMapInfo != value)
+				{
+					this._EnableEventMapInfo = value;
 					this.RaisePropertyChanged();
 				}
 			}
