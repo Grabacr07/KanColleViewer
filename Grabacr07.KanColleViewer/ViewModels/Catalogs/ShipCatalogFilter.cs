@@ -526,7 +526,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		{
 			if (this.None && ship.SallyArea == 0) return true;
 			if (this.FirstMap && ship.SallyArea == 1) return true;
-			if (this.SecondMap && ship.SallyArea >= 2) return true;
+			if (this.SecondMap && ship.SallyArea == 2) return true;
 
 			return false;
 
