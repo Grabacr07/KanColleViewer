@@ -173,7 +173,7 @@ namespace Grabacr07.KanColleWrapper
 			this.Logger = new Logger(proxy);
 			this.Translations = new Translations();
 			this.PreviewBattle = new PreviewBattle(proxy);
-			if(KanColleClient.Current.Settings.EnableEventMapInfo) this.EventMapHPChecker = new EventMapHPChecker(proxy);
+			this.EventMapHPChecker = new EventMapHPChecker(proxy);
 		}
 	}
 }

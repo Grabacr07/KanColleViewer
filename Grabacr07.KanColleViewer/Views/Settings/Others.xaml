@@ -153,7 +153,7 @@
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 		<TextBlock Text="이벤트해역 정보알림" Style="{DynamicResource SettingsHeaderTextStyleKey}" />
-		<CheckBox Content="이벤트 해역의 정보를 출격 전에 메시지박스로 보고받습니다, Mode=OneWay}" IsChecked="{Binding EnableEventMapInfo}" Height="17" Margin="15,0,0,10"/>
+		<CheckBox Content="이벤트 해역의 정보를 출격 전에 메시지박스로 보고받습니다" IsChecked="{Binding EnableEventMapInfo}" Height="17" Margin="15,0,0,10"/>
 
 	</StackPanel>
 </UserControl>

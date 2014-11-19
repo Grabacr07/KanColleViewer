@@ -24,6 +24,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		private void EventMapList(kcsapi_mapinfo[] list)
 		{
+			if (!KanColleClient.Current.EventMapHPChecker.EnableEventMapInfo) return;
 			int j = 1;
 
 			for (int i = 0; i < list.Length; i++)
