@@ -28,10 +28,6 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 전투가 끝나고 모항에 돌아왔는지를 채크
 		/// </summary>
 		private bool BattleEnd { get; set; }
-		/// <summary>
-		/// 연합함대가 크리티컬이 맞는지 조회하는 부분
-		/// </summary>
-		//private bool IsCombineCritical { get; set; }
 
 		public delegate void CriticalEventHandler();
 		/// <summary>
@@ -50,11 +46,11 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			proxy.api_req_sortie_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false,false, x.Data));
 			proxy.api_req_sortie_night_to_day.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false,false, x.Data));
-			proxy.api_req_battle_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(false,false, x.Data));
-			proxy.api_req_battle_midnight_sp_midnight.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(true,false, x.Data));
+			proxy.api_req_battle_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(false, x.Data));
+			proxy.api_req_battle_midnight_sp_midnight.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(false, x.Data));
 			proxy.api_req_combined_battle_airbattle.TryParse<kcsapi_battle>().Subscribe(x => this.AirBattle(x.Data));
 			proxy.api_req_combined_battle_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(true,false, x.Data));
-			proxy.api_req_combined_battle_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(true,true, x.Data));
+			proxy.api_req_combined_battle_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(true, x.Data));
 			proxy.api_req_combined_battle_battle_water.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(true,true, x.Data));
 			
 			proxy.api_req_map_start.Subscribe(x => this.Cleared(false));
@@ -70,12 +66,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <param name="IsEnd">전투가 끝난건지 안 끝난건지의 여부를 입력</param>
 		private void Cleared(bool IsEnd)
 		{
-			//if (this.IsCombineCritical || this.IsCritical)
 			if (this.IsCritical)
 			{
 				this.CriticalCleared();
 				this.IsCritical = false;
-				//this.IsCombineCritical = false;
 				
 				if (IsEnd) this.BattleEnd = true;
 				else this.BattleEnd = false;
@@ -110,7 +104,6 @@ namespace Grabacr07.KanColleWrapper.Models
 		private void AirBattle(kcsapi_battle battle)
 		{
 			this.IsCritical = false;
-			//this.IsCombineCritical = false;
 			List<listup> lists = new List<listup>();
 			List<int> CurrentHPList = new List<int>();
 			List<int> HPList = new List<int>();
@@ -123,7 +116,6 @@ namespace Grabacr07.KanColleWrapper.Models
 			if (battle.api_kouku != null && battle.api_kouku.api_stage3 != null)
 			{
 				int[] numlist = battle.api_kouku.api_stage3.api_frai_flag;
-				//int[] numlistCl = battle.api_kouku.api_stage3.api_fcl_flag;//이건 뭐지?
 
 				decimal[] damlist = battle.api_kouku.api_stage3.api_fdam;
 
@@ -136,7 +128,6 @@ namespace Grabacr07.KanColleWrapper.Models
 				if (battle.api_kouku != null && battle.api_kouku.api_stage3_combined != null)
 				{
 					numlist = battle.api_kouku.api_stage3_combined.api_frai_flag;
-					//numlistCl = battle.api_kouku.api_stage3_combined.api_fcl_flag;//이건 뭐지?
 
 					damlist = battle.api_kouku.api_stage3_combined.api_fdam;
 
@@ -154,7 +145,6 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				int[] numlist = battle.api_kouku2.api_stage3.api_frai_flag;//뇌격
 				int[] numlistBak = battle.api_kouku2.api_stage3.api_fbak_flag;//폭격
-				//int[] numlistCl = battle.api_kouku2.api_stage3.api_fcl_flag;//이건 뭐지?
 
 				decimal[] damlist = battle.api_kouku2.api_stage3.api_fdam;
 
@@ -168,7 +158,6 @@ namespace Grabacr07.KanColleWrapper.Models
 				{
 					numlist = battle.api_kouku2.api_stage3_combined.api_frai_flag;//뇌격
 					numlistBak = battle.api_kouku2.api_stage3_combined.api_fbak_flag;//폭격
-					//numlistCl = battle.api_kouku2.api_stage3_combined.api_fcl_flag;//이건 뭐지?
 
 					damlist = battle.api_kouku2.api_stage3_combined.api_fdam;
 					for (int i = 0; i < battle.api_kouku2.api_stage3_combined.api_frai_flag.Count(); i++)//컴바인 함대 플래그
@@ -201,7 +190,6 @@ namespace Grabacr07.KanColleWrapper.Models
 		private void Battle(bool IsCombined,bool IsWater, kcsapi_battle battle)
 		{
 			this.IsCritical = false;
-			//this.IsCombineCritical = false;
 			List<int> CurrentHPList = new List<int>();
 			List<listup> lists = new List<listup>();
 			List<int> HPList = new List<int>();
@@ -249,7 +237,6 @@ namespace Grabacr07.KanColleWrapper.Models
 			if (battle.api_kouku != null && battle.api_kouku.api_stage3 != null)
 			{
 				int[] numlist = battle.api_kouku.api_stage3.api_frai_flag;//뇌격
-				//int[] numlistCl = battle.api_kouku.api_stage3.api_fcl_flag;//이건 뭐지?
 
 				decimal[] damlist = battle.api_kouku.api_stage3.api_fdam;
 				ChangeKoukuFlagToNumber(battle.api_kouku.api_stage3.api_frai_flag,
@@ -262,7 +249,6 @@ namespace Grabacr07.KanColleWrapper.Models
 					if (battle.api_kouku.api_stage3_combined != null)
 					{
 						numlist = battle.api_kouku.api_stage3_combined.api_frai_flag;//뇌격
-						//numlistCl = battle.api_kouku.api_stage3_combined.api_fcl_flag;//이건 뭐지?
 
 						damlist = battle.api_kouku.api_stage3_combined.api_fdam;
 						ChangeKoukuFlagToNumber(battle.api_kouku.api_stage3_combined.api_frai_flag,
@@ -299,11 +285,9 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		/// <param name="battle"></param>
 		/// <param name="IsCombined">연합함대인지 아닌지 입력합니다.연합함대인경우 True입니다.</param>
-		private void MidBattle(bool IsMidBattleStart,bool IsCombined, kcsapi_midnight_battle battle)
+		private void MidBattle(bool IsCombined, kcsapi_midnight_battle battle)
 		{
-			//if(IsCombined && IsMidBattleStart) this.IsCombineCritical = false;
-			if (IsCombined && IsMidBattleStart) this.IsCritical = false;
-			else if (!IsCombined) this.IsCritical = false;
+			if (!IsCombined) this.IsCritical = false;
 
 			List<listup> lists = new List<listup>();
 			List<int> HPList = new List<int>();
