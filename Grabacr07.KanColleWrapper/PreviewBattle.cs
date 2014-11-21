@@ -31,7 +31,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 연합함대가 크리티컬이 맞는지 조회하는 부분
 		/// </summary>
-		private bool IsCombineCritical { get; set; }
+		//private bool IsCombineCritical { get; set; }
 
 		public delegate void CriticalEventHandler();
 		/// <summary>
@@ -70,11 +70,12 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <param name="IsEnd">전투가 끝난건지 안 끝난건지의 여부를 입력</param>
 		private void Cleared(bool IsEnd)
 		{
-			if (this.IsCombineCritical || this.IsCritical)
+			//if (this.IsCombineCritical || this.IsCritical)
+			if (this.IsCritical)
 			{
 				this.CriticalCleared();
 				this.IsCritical = false;
-				this.IsCombineCritical = false;
+				//this.IsCombineCritical = false;
 				
 				if (IsEnd) this.BattleEnd = true;
 				else this.BattleEnd = false;
@@ -86,19 +87,19 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <param name="results"></param>
 		private void Result()
 		{
-			if (this.IsCombineCritical || this.IsCritical) this.CriticalCondition();
+			if (this.IsCritical) this.CriticalCondition();
 		}
 		/// <summary>
 		/// 대파알림 계산이 잘못되었거나 문제가 생겼을때를 대비한 코드.
 		/// </summary>
 		public void AfterResult()
 		{
-			if (!this.IsCritical && !this.IsCombineCritical)
+			if (!this.IsCritical)
 			{
 				if (!this.BattleEnd)
 				{
 					this.CriticalCondition();
-					this.IsCombineCritical = true;
+					this.IsCritical = true;
 				}
 			}
 		}
@@ -109,7 +110,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		private void AirBattle(kcsapi_battle battle)
 		{
 			this.IsCritical = false;
-			this.IsCombineCritical = false;
+			//this.IsCombineCritical = false;
 			List<listup> lists = new List<listup>();
 			List<int> CurrentHPList = new List<int>();
 			List<int> HPList = new List<int>();
@@ -182,14 +183,14 @@ namespace Grabacr07.KanColleWrapper.Models
 				}//연합함대 리스트 작성 끝
 			}
 			//api_kouku끝
-			BattleCalc(false,HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps);
+			BattleCalc(HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps);
 
 			//재활용 위해 초기화
 			CurrentHPList = new List<int>();
 			HPList = new List<int>();
 			MHPList = new List<int>();
 
-			BattleCalc(true,HPList, MHPList, Combinelists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined);
+			BattleCalc(HPList, MHPList, Combinelists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined);
 		}
 		/// <summary>
 		/// 일반 포격전, 개막뇌격, 개막 항공전등을 계산.
@@ -200,7 +201,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		private void Battle(bool IsCombined,bool IsWater, kcsapi_battle battle)
 		{
 			this.IsCritical = false;
-			this.IsCombineCritical = false;
+			//this.IsCombineCritical = false;
 			List<int> CurrentHPList = new List<int>();
 			List<listup> lists = new List<listup>();
 			List<int> HPList = new List<int>();
@@ -281,16 +282,16 @@ namespace Grabacr07.KanColleWrapper.Models
 				DecimalListmake(numlist, damlist, lists);
 			}
 			//개막전 끝
-			if (!IsCombined) BattleCalc(false, HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps);
+			if (!IsCombined) BattleCalc(HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps);
 
 			else if (IsCombined)//연합함대인경우 연산을 한번 더 시행
 			{
-				BattleCalc(true,HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps);
+				BattleCalc(HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps);
 				//재활용 위해 초기화.
 				CurrentHPList = new List<int>();
 				HPList = new List<int>();
 				MHPList = new List<int>();
-				BattleCalc(true,HPList, MHPList, Combinelists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined);
+				BattleCalc(HPList, MHPList, Combinelists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined);
 			}
 		}
 		/// <summary>
@@ -300,8 +301,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <param name="IsCombined">연합함대인지 아닌지 입력합니다.연합함대인경우 True입니다.</param>
 		private void MidBattle(bool IsMidBattleStart,bool IsCombined, kcsapi_midnight_battle battle)
 		{
-			if(IsCombined && IsMidBattleStart) this.IsCombineCritical = false;
-			this.IsCritical = false;
+			//if(IsCombined && IsMidBattleStart) this.IsCombineCritical = false;
+			if (IsCombined && IsMidBattleStart) this.IsCritical = false;
+			else if (!IsCombined) this.IsCritical = false;
+
 			List<listup> lists = new List<listup>();
 			List<int> HPList = new List<int>();
 			List<int> MHPList = new List<int>();
@@ -311,9 +314,9 @@ namespace Grabacr07.KanColleWrapper.Models
 				ObjectListmake(battle.api_hougeki.api_df_list, battle.api_hougeki.api_damage, lists);
 
 			if (IsCombined && battle.api_maxhps_combined != null && battle.api_nowhps_combined != null)
-				BattleCalc(true,HPList, MHPList, lists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined);
+				BattleCalc(HPList, MHPList, lists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined);
 			else
-				BattleCalc(false,HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps);
+				BattleCalc(HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps);
 		}
 
 		/// <summary>
@@ -326,7 +329,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <param name="Maxhps">api_maxhps를 가져온다.</param>
 		/// <param name="NowHps">api_nowhps를 가져온다.</param>
 		/// <param name="IsCombined">연합함대인지 설정</param>
-		private void BattleCalc(bool IsCombined,List<int> HPList, List<int> MHPList, List<listup> lists, List<int> CurrentHPList, int[] Maxhps, int[] NowHps)
+		private void BattleCalc(List<int> HPList, List<int> MHPList, List<listup> lists, List<int> CurrentHPList, int[] Maxhps, int[] NowHps)
 		{
 			//총 HP와 현재 HP의 리스트를 작성한다. 빈칸과 적은 제외. 여기서 적까지 포함시키고 별도의 함수를 추가하면 전투 미리보기 구현도 가능
 			for (int i = 0; i < 7; i++)
@@ -367,8 +370,9 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				if (t)
 				{
-					if (!IsCombined) this.IsCritical = true;
-					else if (IsCombined) this.IsCombineCritical = true;
+					//if (!IsCombined) this.IsCritical = true;
+					//else if (IsCombined) this.IsCombineCritical = true;
+					this.IsCritical = true;
 					break;
 				}
 			}
