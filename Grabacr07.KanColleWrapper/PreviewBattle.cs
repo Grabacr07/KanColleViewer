@@ -50,11 +50,11 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			proxy.api_req_sortie_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false,false, x.Data));
 			proxy.api_req_sortie_night_to_day.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false,false, x.Data));
-			proxy.api_req_battle_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(false, x.Data));
-			proxy.api_req_battle_midnight_sp_midnight.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(false, x.Data));
+			proxy.api_req_battle_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(false,false, x.Data));
+			proxy.api_req_battle_midnight_sp_midnight.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(true,false, x.Data));
 			proxy.api_req_combined_battle_airbattle.TryParse<kcsapi_battle>().Subscribe(x => this.AirBattle(x.Data));
 			proxy.api_req_combined_battle_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(true,false, x.Data));
-			proxy.api_req_combined_battle_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(true, x.Data));
+			proxy.api_req_combined_battle_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(true,true, x.Data));
 			proxy.api_req_combined_battle_battle_water.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(true,true, x.Data));
 			
 			proxy.api_req_map_start.Subscribe(x => this.Cleared(false));
@@ -98,7 +98,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				if (!this.BattleEnd)
 				{
 					this.CriticalCondition();
-					this.IsCritical = true;
+					this.IsCombineCritical = true;
 				}
 			}
 		}
@@ -237,9 +237,9 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				int[] numlist = battle.api_raigeki.api_erai;
 				decimal[] damlist = battle.api_raigeki.api_eydam;
-				if (!IsCombined && battle.api_hougeki1 != null) 
+				if (!IsCombined) 
 					DecimalListmake(numlist, damlist, lists);
-				else if (IsCombined && battle.api_hougeki1 != null)//1차 포격전은 2함대만 맞을지도...?
+				else if (IsCombined)
 					DecimalListmake(numlist, damlist, Combinelists);
 			}
 			//뇌격전 끝
@@ -281,11 +281,11 @@ namespace Grabacr07.KanColleWrapper.Models
 				DecimalListmake(numlist, damlist, lists);
 			}
 			//개막전 끝
+			if (!IsCombined) BattleCalc(false, HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps);
 
-			BattleCalc(false,HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps);
-
-			if (IsCombined)//연합함대인경우 연산을 한번 더 시행
+			else if (IsCombined)//연합함대인경우 연산을 한번 더 시행
 			{
+				BattleCalc(true,HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps);
 				//재활용 위해 초기화.
 				CurrentHPList = new List<int>();
 				HPList = new List<int>();
@@ -298,10 +298,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		/// <param name="battle"></param>
 		/// <param name="IsCombined">연합함대인지 아닌지 입력합니다.연합함대인경우 True입니다.</param>
-		private void MidBattle(bool IsCombined, kcsapi_midnight_battle battle)
+		private void MidBattle(bool IsMidBattleStart,bool IsCombined, kcsapi_midnight_battle battle)
 		{
+			if(IsCombined && IsMidBattleStart) this.IsCombineCritical = false;
 			this.IsCritical = false;
-			this.IsCombineCritical = false;
 			List<listup> lists = new List<listup>();
 			List<int> HPList = new List<int>();
 			List<int> MHPList = new List<int>();
