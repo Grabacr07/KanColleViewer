@@ -43,7 +43,8 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				for (int i = 0; i < Lists.Count; i++)
 				{
-					if (((double)Lists[i].NowHp / (double)Lists[i].MaxHp)>0) SeaList.Append("E-" + Lists[i].Num.ToString() + "해역 HP:" + Lists[i].NowHp.ToString() + "/" + Lists[i].MaxHp.ToString() + "\r");
+					if ((double)Lists[i].NowHp / (double)Lists[i].MaxHp == 1) SeaList.Append("E-" + Lists[i].Num.ToString() + "해역 HP: 100%" + "\r");
+					else if (((double)Lists[i].NowHp / (double)Lists[i].MaxHp) > 0) SeaList.Append("E-" + Lists[i].Num.ToString() + "해역 HP:" + Lists[i].NowHp.ToString() + "/" + Lists[i].MaxHp.ToString() + "\r");
 				}
 				if(SeaList.Length!=0)MessageBox.Show(SeaList.ToString(),"이벤트 해역정보");
 				if (SeaList.Length == 0) KanColleClient.Current.EventMapHPChecker.EnableEventMapInfo=false;
