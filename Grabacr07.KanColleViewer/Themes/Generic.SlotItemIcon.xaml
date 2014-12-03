@@ -605,6 +605,24 @@
 					</Setter.Value>
 				</Setter>
 			</Trigger>
+			<Trigger Property="Type"
+					 Value="AntiAircraftFireDirector">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Width="149.01" Height="83.692" Data="M413.3,62.496h-40.969V46.944c-25.56-12.6-73.224-21.384-125.207-23.76V0h-72v24.12 c-39.528,2.951-77.04,10.224-104.76,22.896v57.168H9.379c-13.32,5.832-11.664,65.52,0,73.008h60.984v32.976 c86.4,38.952,232.488,33.12,301.967,0v-75.023H413.3c7.848-16.416,15.768-51.912,0-72.504V62.496z"
+									  Stretch="Fill"
+									  Fill="#8A9A4D" />
+									<Polygon Fill="#373435" StrokeThickness="3" Points="226.964,73.224 226.964,145.224 279.523,145.224 279.523,73.224 158.275,53.136" Width="42.774" Height="32.487" Margin="55.836,18.745,50.4,32.46" Stretch="Fill"/>
+									<Polygon Fill="#373435" StrokeThickness="3" Points="341.371,60.624 341.371,125.352 362.684,125.352 362.684,60.624 276.932,49.608" Width="30.251" Height="26.721" Margin="97.695,17.5,21.063,39.471" Stretch="Fill"/>
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
 		</Style.Triggers>
 	</Style>
 
