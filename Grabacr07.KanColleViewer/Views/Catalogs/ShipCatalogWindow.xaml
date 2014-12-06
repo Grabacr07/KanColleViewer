@@ -392,11 +392,14 @@
 							<CheckBox Content="작전출격한적 없음"
 									  IsChecked="{Binding None}"
 									  Margin="10,0" />
-							<CheckBox Content="1,2해역참가"
+							<CheckBox Content="1분류"
 									  IsChecked="{Binding FirstMap}"
 									  Margin="10,0" />
-							<CheckBox Content="3해역참가"
+							<CheckBox Content="2분류"
 									  IsChecked="{Binding SecondMap}"
+									  Margin="10,0" />
+							<CheckBox Content="3분류"
+									  IsChecked="{Binding ThirdMap}"
 									  Margin="10,0" />
 						</WrapPanel>
 					</Border>
@@ -686,7 +689,7 @@
 														 Value="1">
 												<Setter TargetName="Text"
 														Property="Text"
-														Value="1,2해역" />
+														Value="1분류" />
 												<Setter TargetName="Border"
 														Property="Background"
 														Value="#FF204080" />
@@ -695,10 +698,19 @@
 														 Value="2">
 												<Setter TargetName="Text"
 														Property="Text"
-														Value="3해역" />
+														Value="2분류" />
 												<Setter TargetName="Border"
 														Property="Background"
 														Value="#FF804020" />
+											</DataTrigger>
+											<DataTrigger Binding="{Binding Ship.SallyArea}"
+														 Value="3">
+												<Setter TargetName="Text"
+														Property="Text"
+														Value="3분류" />
+												<Setter TargetName="Border"
+														Property="Background"
+														Value="#FF68CFF5" />
 											</DataTrigger>
 										</DataTemplate.Triggers>
 									</DataTemplate>

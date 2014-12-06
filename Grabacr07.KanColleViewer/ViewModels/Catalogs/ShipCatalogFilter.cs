@@ -519,6 +519,26 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#endregion
 
+		#region ThirdMap 変更通知プロパティ
+
+		private bool _ThirdMap = true;
+
+		public bool ThirdMap
+		{
+			get { return this._ThirdMap; }
+			set
+			{
+				if (this._ThirdMap != value)
+				{
+					this._ThirdMap = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+
 
 		public ShipSallyAreaFilter(Action updateAction) : base(updateAction) { }
 
@@ -527,6 +547,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			if (this.None && ship.SallyArea == 0) return true;
 			if (this.FirstMap && ship.SallyArea == 1) return true;
 			if (this.SecondMap && ship.SallyArea == 2) return true;
+			if (this.ThirdMap && ship.SallyArea == 3) return true;
 
 			return false;
 
