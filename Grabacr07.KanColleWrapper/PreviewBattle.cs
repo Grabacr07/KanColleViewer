@@ -354,8 +354,6 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				if (t)
 				{
-					//if (!IsCombined) this.IsCritical = true;
-					//else if (IsCombined) this.IsCombineCritical = true;
 					this.IsCritical = true;
 					break;
 				}
