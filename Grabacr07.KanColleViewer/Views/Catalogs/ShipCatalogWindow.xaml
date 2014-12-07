@@ -403,6 +403,30 @@
 									  Margin="10,0" />
 						</WrapPanel>
 					</Border>
+					<Border BorderThickness="1"
+							BorderBrush="{DynamicResource BorderBrushKey}"
+							Margin="0,8,0,0"
+							Padding="5">
+						<WrapPanel DataContext="{Binding ShipNameSearchFilter}">
+							<TextBlock Margin="0,2">
+								<Run Text="칸무스 검색" />
+								<Run Text=":" />
+							</TextBlock>
+
+							<metro:PromptTextBox Grid.Column="2"
+												 Text="{Binding NameString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+												 Prompt="칸무스 이름을 입력하고 Enter를 눌러 검색"
+												 VerticalAlignment="Center"
+												 VerticalContentAlignment="Center"
+												 Padding="2">
+								<metro:PromptTextBox.InputBindings>
+									<KeyBinding Key="Enter"
+												Command="{Binding SearchCommand}" />
+								</metro:PromptTextBox.InputBindings>
+							</metro:PromptTextBox>
+						</WrapPanel>
+					</Border>
+
 				</StackPanel>
 			</Expander>
 

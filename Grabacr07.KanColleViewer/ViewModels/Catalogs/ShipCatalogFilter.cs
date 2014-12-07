@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Livet;
+using Livet.Commands;
+using System.Windows;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 {
@@ -552,6 +554,55 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			return false;
 
 			//return true;
+		}
+	}
+
+	public class ShipNameSearchFilter : ShipCatalogFilter
+	{
+		#region SearchCommand コマンド
+
+		private ViewModelCommand _SearchCommand;
+
+		public ViewModelCommand SearchCommand
+		{
+			get
+			{
+				if (this._SearchCommand == null)
+				{
+					this._SearchCommand = new ViewModelCommand(this.Update);
+				}
+				return this._SearchCommand;
+			}
+		}
+
+		#endregion
+
+		#region NameString 変更通知プロパティ
+
+		private string _NameString;
+
+		public string NameString
+		{
+			get { return this._NameString; }
+			set
+			{
+				if (this._NameString != value)
+				{
+					this._NameString = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		public ShipNameSearchFilter(Action updateAction) : base(updateAction) { }
+
+		public override bool Predicate(Ship ship)
+		{
+			if (this.NameString == null) return true;
+			if (ship.Info.Name.Contains(this.NameString)) return true;
+			return false;
 		}
 	}
 }
