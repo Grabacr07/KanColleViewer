@@ -108,10 +108,25 @@
 									<TextBlock Grid.Column="2"
 											   Grid.Row="0"
 											   Grid.RowSpan="2"
-											   Margin="4,0,10,0">
+											   Margin="4,0,10,0"
+											   MaxWidth="145"
+											   ToolTipService.Placement="Relative"
+											   ToolTipService.HorizontalOffset="-9"
+											   ToolTipService.VerticalOffset="-3"
+											   TextWrapping="NoWrap">
 										<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
 											 FontSize="22"
-											 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+											 Style="{DynamicResource EmphaticTextElementStyleKey}"/>
+										<TextBlock.ToolTip>
+											<TextBlock Margin="0,-2,0,0">
+												<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
+													 Style="{DynamicResource EmphaticTextElementStyleKey}"
+													 FontSize="14"/>
+												<LineBreak />
+												<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
+													 FontSize="11" />
+											</TextBlock>
+										</TextBlock.ToolTip>
 									</TextBlock>
 
 									<TextBlock Grid.Column="3"
