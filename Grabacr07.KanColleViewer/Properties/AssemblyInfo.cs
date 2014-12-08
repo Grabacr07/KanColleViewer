@@ -7,7 +7,7 @@ using System.Windows;
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("제독업무도 바빠! R136")]
+[assembly: AssemblyTitle("제독업무도 바빠!")]
 [assembly: AssemblyDescription("제독업무도 바빠!")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("grabacr.net")]
