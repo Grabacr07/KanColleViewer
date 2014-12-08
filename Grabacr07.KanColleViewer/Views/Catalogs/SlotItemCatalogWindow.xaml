@@ -182,6 +182,8 @@
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
 													<TextBlock Margin="0,4,18,0">
+														<Run Text="{Binding EquipStar,Mode=OneWay}"
+															 FontSize="11"/>
 														<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
 															 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 														<Run Text="{Binding Ship.Level, StringFormat=Lv.{0}, Mode=OneWay}"

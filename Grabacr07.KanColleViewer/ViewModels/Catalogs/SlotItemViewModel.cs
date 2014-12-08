@@ -33,6 +33,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			{
 				get { return this.Count == 1 ? "" : " x " + this.Count + " "; }
 			}
+			public string EquipStar { get; set; }
 		}
 
 
@@ -53,18 +54,20 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		}
 
 
-		public void AddShip(Ship ship)
+		public void AddShip(Ship ship,bool InEnhanceEquipment)
 		{
 			var target = this.Ships.FirstOrDefault(x => x.Ship.Id == ship.Id);
 			if (target == null)
 			{
-				this.Ships.Add(new Counter { Ship = ship, Count = 1 });
+				if (InEnhanceEquipment)
+					this.Ships.Add(new Counter { Ship = ship, Count = 1 ,EquipStar="★"});
+				else
+					this.Ships.Add(new Counter { Ship = ship, Count = 1});;
 			}
 			else
 			{
 				target.Count++;
 			}
-
 			this.Remainder--;
 		}
 	}
