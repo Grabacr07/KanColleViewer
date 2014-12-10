@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Grabacr07.KanColleViewer.Composition;
+﻿using Grabacr07.KanColleViewer.Composition;
 using Livet;
+using System;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Composition
 {

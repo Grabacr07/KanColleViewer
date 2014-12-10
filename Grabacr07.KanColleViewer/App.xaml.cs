@@ -1,17 +1,17 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Windows;
-using Grabacr07.KanColleViewer.Composition;
+﻿using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.ViewModels;
 using Grabacr07.KanColleViewer.Views;
+using Grabacr07.KanColleViewer.Views.Controls;
 using Grabacr07.KanColleWrapper;
 using Livet;
 using MetroRadiance;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Windows;
 using AppSettings = Grabacr07.KanColleViewer.Properties.Settings;
 using Settings = Grabacr07.KanColleViewer.Models.Settings;
-using Grabacr07.KanColleViewer.Views.Controls;
 
 namespace Grabacr07.KanColleViewer
 {

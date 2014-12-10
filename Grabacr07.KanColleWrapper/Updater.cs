@@ -1,13 +1,10 @@
-﻿using System;
+﻿using Grabacr07.KanColleWrapper.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
-using System.Xml.Linq;
+using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
-using Grabacr07.KanColleWrapper.Internal;
-using Grabacr07.KanColleWrapper.Models;
+using System.Xml.Linq;
 
 namespace Grabacr07.KanColleWrapper
 {

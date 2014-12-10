@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Threading.Tasks;
-using Grabacr07.KanColleViewer.Composition;
+﻿using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.Plugins.ViewModels;
 using Grabacr07.KanColleViewer.Plugins.Views;
+using System.ComponentModel.Composition;
 
 namespace Grabacr07.KanColleViewer.Plugins
 {

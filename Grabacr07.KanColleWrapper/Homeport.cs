@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Reactive.Linq;
-using Grabacr07.KanColleWrapper.Models;
+﻿using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
 using Livet;
+using System;
+using System.ComponentModel;
 
 namespace Grabacr07.KanColleWrapper
 {

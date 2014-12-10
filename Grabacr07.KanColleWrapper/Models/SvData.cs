@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Fiddler;
+using Grabacr07.KanColleWrapper.Internal;
+using Grabacr07.KanColleWrapper.Models.Raw;
+using System;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Text;
-using System.Threading.Tasks;
 using System.Web;
-using System.Collections.Specialized;
-using Fiddler;
-using Grabacr07.KanColleWrapper.Models.Raw;
-using Grabacr07.KanColleWrapper.Internal;
 
 namespace Grabacr07.KanColleWrapper.Models
 {

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Livet;
 using System.Windows;
 using System.Windows.Media;
-using Livet;
-using Livet.Messaging;
-using Livet.Messaging.Windows;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {

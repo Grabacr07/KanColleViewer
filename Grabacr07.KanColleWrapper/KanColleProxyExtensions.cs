@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reactive.Linq;
-using System.Threading.Tasks;
-using Fiddler;
+﻿using Fiddler;
 using Grabacr07.KanColleWrapper.Models;
+using System;
+using System.Reactive.Linq;
 
 namespace Grabacr07.KanColleWrapper
 {

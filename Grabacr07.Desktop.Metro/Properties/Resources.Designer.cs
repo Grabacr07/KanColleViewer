@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Grabacr07.Desktop.Metro.Properties {
-    using System;
-    
-    
-    /// <summary>
+namespace Grabacr07.Desktop.Metro.Properties
+{
+
+
+	/// <summary>
     ///   ローカライズされた文字列などを検索するための、厳密に型指定されたリソース クラスです。
     /// </summary>
     // このクラスは StronglyTypedResourceBuilder クラスが ResGen

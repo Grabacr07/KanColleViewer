@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using Fiddler;
+using Grabacr07.KanColleWrapper.Win32;
+using Livet;
+using System;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Runtime.InteropServices;
-using System.Threading.Tasks;
-using Fiddler;
-using Grabacr07.KanColleWrapper.Win32;
-using Livet;
 
 namespace Grabacr07.KanColleWrapper
 {

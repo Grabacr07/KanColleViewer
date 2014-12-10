@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Grabacr07.KanColleViewer.Models;
+﻿using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleWrapper;
-using Livet;
 using Livet.EventListeners;
+using System;
+using System.Linq;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 {

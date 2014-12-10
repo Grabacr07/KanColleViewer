@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Windows.Data.Xml.Dom;
 using Windows.Foundation;
 using Windows.UI.Notifications;
-using Grabacr07.KanColleViewer.Models;
 
 namespace Grabacr07.KanColleViewer.Plugins
 {

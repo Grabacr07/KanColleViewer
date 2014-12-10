@@ -1,21 +1,9 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Reactive.Linq;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.Specialized;
-using Codeplex.Data;
-using Fiddler;
-using Grabacr07.KanColleWrapper.Internal;
-using Grabacr07.KanColleWrapper.Models;
+﻿using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
 using Livet;
+using System;
+using System.Collections.Specialized;
+using System.IO;
 
 namespace Grabacr07.KanColleWrapper
 {

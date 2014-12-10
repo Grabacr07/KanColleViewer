@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Grabacr07.KanColleViewer.Composition;
+using Grabacr07.KanColleWrapper;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
-using System.Linq;
-using System.Threading.Tasks;
-using Grabacr07.KanColleViewer.Composition;
-using Grabacr07.KanColleWrapper;
 
 namespace Counter
 {

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Grabacr07.KanColleWrapper.Internal;
+using Livet;
+using System;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Text;
-using System.Threading.Tasks;
-using Grabacr07.KanColleWrapper.Internal;
-using Livet;
 
 namespace Grabacr07.KanColleWrapper
 {

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CoreAudioApi;
+﻿using CoreAudioApi;
 using CoreAudioApi.Interfaces;
 using Livet;
+using System;
+using System.Diagnostics;
 
 namespace Grabacr07.KanColleViewer.Models
 {

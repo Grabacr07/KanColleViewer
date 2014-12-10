@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
-using Grabacr07.KanColleViewer.Composition;
+﻿using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.ViewModels.Composition;
-using Grabacr07.KanColleWrapper;
-using Livet;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents
 {

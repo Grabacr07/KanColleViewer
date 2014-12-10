@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reactive.Linq;
-using System.Threading.Tasks;
-using Grabacr07.KanColleWrapper;
+﻿using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models.Raw;
 using Livet;
+using System;
+using System.Reactive.Linq;
 
 namespace Counter
 {

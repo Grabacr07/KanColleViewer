@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Grabacr07.KanColleWrapper.Models.Raw;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Grabacr07.KanColleWrapper.Models.Raw;
 
 namespace Grabacr07.KanColleWrapper.Models
 {

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Grabacr07.KanColleViewer.ViewModels.Contents;
+using Grabacr07.KanColleWrapper.Models;
 using System.Windows;
 using System.Windows.Data;
-using Grabacr07.KanColleViewer.ViewModels.Contents;
-using Grabacr07.KanColleWrapper.Models;
 
 namespace Grabacr07.KanColleViewer.Views.Contents
 {

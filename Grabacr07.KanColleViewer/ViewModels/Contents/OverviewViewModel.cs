@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Grabacr07.KanColleViewer.Properties;
+﻿using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleViewer.ViewModels.Catalogs;
 using Livet.Messaging;
+using System;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents
 {

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Grabacr07.KanColleViewer.Models;
 using Livet;
-using MetroRadiance.Controls;
-using Grabacr07.KanColleViewer.Models;
 using Livet.EventListeners;
+using MetroRadiance.Controls;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {

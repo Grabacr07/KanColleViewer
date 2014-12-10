@@ -1,5 +1,5 @@
-﻿using System;
-using Grabacr07.KanColleViewer.Composition;
+﻿using Grabacr07.KanColleViewer.Composition;
+using System;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Dev
 {

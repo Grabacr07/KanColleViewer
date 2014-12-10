@@ -1,11 +1,7 @@
-﻿using System;
+﻿using Grabacr07.Desktop.Metro.Controls;
+using Grabacr07.KanColleWrapper.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Grabacr07.Desktop.Metro.Controls;
-using Grabacr07.KanColleViewer.ViewModels.Contents;
-using Grabacr07.KanColleWrapper.Models;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 {

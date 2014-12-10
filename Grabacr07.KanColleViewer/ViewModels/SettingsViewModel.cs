@@ -1,21 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using Grabacr07.KanColleViewer.Composition;
+﻿using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleViewer.ViewModels.Composition;
 using Grabacr07.KanColleViewer.ViewModels.Messages;
+using Grabacr07.KanColleViewer.Views.Controls;
 using Grabacr07.KanColleWrapper;
+using Grabacr07.KanColleWrapper.Models;
 using Livet.EventListeners;
 using Livet.Messaging;
 using Livet.Messaging.IO;
 using MetroRadiance;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using Settings = Grabacr07.KanColleViewer.Models.Settings;
-using Grabacr07.KanColleWrapper.Models;
-using Grabacr07.KanColleViewer.Views.Controls;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {

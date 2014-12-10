@@ -1,15 +1,12 @@
-﻿using System;
+﻿using Grabacr07.KanColleWrapper;
+using Grabacr07.KanColleWrapper.Models;
+using Livet.EventListeners;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Threading.Tasks;
-using Grabacr07.KanColleViewer.ViewModels.Catalogs;
-using Grabacr07.KanColleWrapper;
-using Grabacr07.KanColleWrapper.Models;
-using Livet.EventListeners;
-using Grabacr07.KanColleViewer.ViewModels.Contents;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 {

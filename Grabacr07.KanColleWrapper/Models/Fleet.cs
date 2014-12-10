@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models.Raw;
-using Grabacr07.KanColleWrapper.Internal;
 using Livet;
 using Livet.EventListeners.WeakEvents;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Grabacr07.KanColleWrapper.Models
 {

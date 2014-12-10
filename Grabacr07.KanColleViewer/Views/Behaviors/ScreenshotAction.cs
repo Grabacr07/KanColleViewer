@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Grabacr07.KanColleViewer.ViewModels.Messages;
+﻿using Grabacr07.KanColleViewer.ViewModels.Messages;
 using Grabacr07.KanColleViewer.Win32;
 using Livet.Behaviors.Messaging;
 using Livet.Messaging;
 using mshtml;
 using SHDocVw;
+using System;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using IServiceProvider = Grabacr07.KanColleViewer.Win32.IServiceProvider;
 using WebBrowser = System.Windows.Controls.WebBrowser;
 
