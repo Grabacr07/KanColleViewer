@@ -14,6 +14,9 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public int api_max_maphp { get; set; }
 		public int api_state { get; set; }
 	}
+	/// <summary>
+	/// NOT API. for calculate
+	/// </summary>
 	public class Maplists
 	{
 		public int MaxHp { get; set; }
