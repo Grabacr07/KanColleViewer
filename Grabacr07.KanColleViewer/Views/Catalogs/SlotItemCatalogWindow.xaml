@@ -168,7 +168,7 @@
 
 							<GridViewColumn Width="550">
 								<GridViewColumn.Header>
-									<TextBlock Text="장비하고있는 칸무스" />
+									<TextBlock Text="장비하고있는 칸무스(★: 강화장비장착)" />
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate DataType="{x:Type viewModels:SlotItemViewModel}">
