@@ -151,17 +151,17 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				this.UriRequested(this, uri);
 			}
 		}
-        public void GoGame()
-        {
-            Uri uri;
-            string SauceCookie;
+		public void GoGame()
+		{
+			Uri uri;
+			string SauceCookie;
 			SauceCookie = "javascript:void(eval(\"document.cookie = 'cklg=ja;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=dmm.com;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=osapi.dmm.com;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=203.104.209.7;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=www.dmm.com;path=/netgame/';\"));location.href=\"";
 			SauceCookie += this.SourceString + "\";";
-            if (this.UriRequested != null && Uri.TryCreate(SauceCookie, UriKind.Absolute, out uri))
-            {
-                this.UriRequested(this, uri);
-            }
-        }
+			if (this.UriRequested != null && Uri.TryCreate(SauceCookie, UriKind.Absolute, out uri))
+			{
+				this.UriRequested(this, uri);
+			}
+		}
 		public void OldGoGame()
 		{
 			Uri uri;
