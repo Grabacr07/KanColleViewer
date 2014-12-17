@@ -43,6 +43,15 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			}
 		}
 
+		public bool IsExistSoundDevice()
+		{
+			if (this.CreateVolumeInstanceIfNull())
+			{
+				return true;
+			}
+			else return false;
+		}
+
 		private bool CreateVolumeInstanceIfNull()
 		{
 			if (this.volume == null)
