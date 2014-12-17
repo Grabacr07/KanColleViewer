@@ -70,16 +70,14 @@ namespace Grabacr07.KanColleViewer.Plugins
 			else return string.Empty;//해당되는 헤더가 없을 경우 empty을 반환
 			if (!Directory.Exists(Main_folder + SelFolder)) return string.Empty;//폴더검사해서 폴더가 없으면 empty 출력
 			
-			Volume checkV = null;
-			VolumeViewModel checkT = new VolumeViewModel();
+			VolumeViewModel checkVolume = new VolumeViewModel();
 
-			if (checkT.IsExistSoundDevice()) checkV = Volume.GetInstance();
-			else return string.Empty;
+			if (!checkVolume.IsExistSoundDevice()) return string.Empty;
 
 			List<string> FileList = Directory.GetFiles(Main_folder+SelFolder, "*.wav", SearchOption.AllDirectories)
 	.Concat(Directory.GetFiles(Main_folder + SelFolder, "*.mp3", SearchOption.AllDirectories)).ToList();
 
-			if (!checkV.IsMute && FileList.Count > 0)
+			if (!checkVolume.IsMute && FileList.Count > 0)
 			{
 				Random Rnd = new Random();
 				return FileList[Rnd.Next(0, FileList.Count)];
