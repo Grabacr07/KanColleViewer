@@ -70,7 +70,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 			if (!Directory.Exists(Main_folder + SelFolder)) return string.Empty;//폴더검사해서 폴더가 없으면 empty 출력
 
 			Volume checkV = Volume.GetInstance();
-			if (checkV.IsMute == null) return string.Empty;
+			if (checkV == null) return string.Empty;
 
 			List<string> FileList = Directory.GetFiles(Main_folder+SelFolder, "*.wav", SearchOption.AllDirectories)
 	.Concat(Directory.GetFiles(Main_folder + SelFolder, "*.mp3", SearchOption.AllDirectories)).ToList();
