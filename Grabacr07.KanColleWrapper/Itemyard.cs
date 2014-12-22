@@ -128,9 +128,10 @@ namespace Grabacr07.KanColleWrapper
 		{
 			if (data.api_use_slot_id != null)
 			{
-				if( data.api_use_slot_id.Length >= 1){
+				if (data.api_use_slot_id.Length >= 1)
+				{
 					for (int i = 0; i < data.api_use_slot_id.Length; i++) this.SlotItems.Remove(data.api_use_slot_id[i]);
-					
+
 					this.RaiseSlotItemsChanged();
 				}
 			}
@@ -161,7 +162,7 @@ namespace Grabacr07.KanColleWrapper
 			if (target == null) return;
 			//api_defeq is missing! I don't know how to fix this problem.
 			//this.droppedItemsCount += target.RawData.api_defeq.Count(x => x != -1);
-            
+
 			this.RaisePropertyChanged("SlotItemsCount");
 		}
 

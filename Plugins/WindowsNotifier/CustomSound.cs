@@ -1,5 +1,4 @@
-﻿using Grabacr07.KanColleViewer.Models;
-using Grabacr07.KanColleViewer.Properties;
+﻿using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleViewer.ViewModels;
 using NAudio.Wave;
 using System;
@@ -54,7 +53,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 			/**
 			 * 
 			 * 이 코드 안에서 팝업 타이틀 검증과 음소거에 대한 채크를 모두 수행합니다.
-			 * 타이틀이 업데이트인경우, 파일이 존재하지 않는경우, 칸코레 뷰어가 음소거인 경우는 Empty을 return합니다
+			 * 타이틀이 업데이트인경우, 파일이 존재하지 않는경우, 칸코레 뷰어가 음소거인 경우,사운드출력을 할 수 없는 경우는 Empty을 return합니다
 			 * 
 			 * 그 외의 경우는 exe파일이 존재하는 기본 루트 폴더의 경로를 반환합니다.
 			 * 파일은 MP3파일이 우선권을 가지며 그 다음으로 WAV파일, 해당 경로에 파일이 없는경우에는 루트 폴더에서 알림음을 찾습니다

@@ -13,7 +13,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 언젠가 전투 미리보기가 실장될 경우를 대비한 부분.
 		/// </summary>
-		protected bool EnablePreviewBattle { get; set; }
+		//protected bool EnablePreviewBattle { get; set; }
 		/// <summary>
 		/// 내부에서 크리티컬이 맞는지 조회하는 부분
 		/// </summary>
@@ -344,14 +344,22 @@ namespace Grabacr07.KanColleWrapper.Models
 				result.Add(false);
 			}
 			//리스트 전체에 true가 있는지 확인
-			foreach (bool t in result)
+			for (int i = 0; i < result.Count; i++)
 			{
-				if (t)
+				if (result[i])
 				{
 					this.IsCritical = true;
 					break;
 				}
 			}
+			//foreach (bool t in result)
+			//{
+			//	if (t)
+			//	{
+			//		this.IsCritical = true;
+			//		break;
+			//	}
+			//}
 		}
 
 		//리스트 작성부분은 좀 더 매끄러운 방법이 있는 것 같기도 하지만 일단 능력이 여기까지이므로
@@ -365,9 +373,11 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			for (int i = 1; i < target.Count(); i++)//-1제외
 			{
-				listup d = new listup();
-				d.Num = target[i];
-				d.Damage = damage[i];
+				listup d = new listup
+				{ 
+					Num= target[i],
+					Damage= damage[i]
+				};
 				if (d.Num != 0) list.Add(d);
 			}
 
@@ -382,11 +392,13 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			for (int i = 1; i < target.Count(); i++)//-1제외
 			{
-				listup d = new listup();
 				dynamic listNum = target[i];
 				dynamic damNum = damage[i];
-				d.Num = listNum[0];
-				d.Damage = damNum[0];
+				listup d = new listup
+				{ 
+					Num = listNum[0],
+					Damage = damNum[0]
+				};
 
 				if (damNum.Length > 1)
 				{

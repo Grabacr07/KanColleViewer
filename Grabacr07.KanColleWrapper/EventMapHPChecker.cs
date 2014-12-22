@@ -29,10 +29,11 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				if (list[i].api_eventmap != null)
 				{
-					Maplists t = new Maplists();
-					t.MaxHp = list[i].api_eventmap.api_max_maphp;
-					t.NowHp = list[i].api_eventmap.api_now_maphp;
-					t.Num = j;
+					Maplists t = new Maplists { 
+						MaxHp = list[i].api_eventmap.api_max_maphp,
+						NowHp = list[i].api_eventmap.api_now_maphp,
+						Num=j
+					};
 					this.Lists.Add(t);
 					j++;
 				}

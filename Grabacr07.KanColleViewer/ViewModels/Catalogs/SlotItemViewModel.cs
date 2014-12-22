@@ -15,16 +15,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			public Ship Ship { get; set; }
 			public int Count { get; set; }
 
-			public string ShipName
-			{
-				get { return this.Ship.Info.Name; }
-			}
-
-			public string ShipLevel
-			{
-				get { return "Lv." + this.Ship.Level; }
-			}
-
 			public string CountString
 			{
 				get { return this.Count == 1 ? "" : " x " + this.Count + " "; }
