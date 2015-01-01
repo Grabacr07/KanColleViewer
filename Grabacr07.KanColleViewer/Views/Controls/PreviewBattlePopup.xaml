@@ -1,0 +1,149 @@
+﻿<UserControl x:Name="PopupViewer"
+			 x:FieldModifier="public"
+			 x:Class="Grabacr07.KanColleViewer.Views.Controls.PreviewBattlePopup"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
+			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
+			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
+			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
+			 mc:Ignorable="d" 
+			 d:DesignHeight="26"
+			 UseLayoutRounding="True">
+	<Grid>
+		<DockPanel>
+			<ToggleButton x:Name="PreviewButton"
+					  x:FieldModifier="private"
+					  Width="Auto">
+				<DockPanel Height="13.167">
+					<Path Data="M0.5,0.5 L1.029,0.5 10.035489,9.4139994 18.858999,0.5 19.5,0.5 19.5,12.667 0.5,12.667 z M1.029,0.5 L18.858999,0.5 10.035489,9.4139994 z" HorizontalAlignment="Left" Height="13.167" 
+						  Stroke="White"
+						  Stretch="Fill"
+						  Width="20"/>
+				</DockPanel>
+				<ToggleButton.Template>
+					<ControlTemplate TargetType="{x:Type ToggleButton}">
+						<Border Background="Transparent">
+							<ContentPresenter Margin="8,0,10,0" />
+						</Border>
+					</ControlTemplate>
+				</ToggleButton.Template>
+			</ToggleButton>
+
+			<Popup x:Name="Popup"
+			   x:FieldModifier="private"
+			   Placement="Custom"
+			   PlacementTarget="{Binding ElementName=PreviewButton}"
+			   PlacementRectangle="-9,20,0,0"
+			   IsOpen="{Binding ElementName=PreviewButton, Path=IsChecked}"
+			   StaysOpen="False"
+			   PopupAnimation="Fade"
+			   AllowsTransparency="True">
+				<Border Background="{DynamicResource BackgroundBrushKey}">
+					<Grid>
+
+						<Rectangle Stroke="{DynamicResource AccentBrushKey}"
+							   StrokeThickness="3">
+							<Rectangle.Effect>
+								<BlurEffect Radius="8" />
+							</Rectangle.Effect>
+						</Rectangle>
+						<Border Width="Auto"
+								Height="Auto"
+								BorderBrush="{DynamicResource AccentBrushKey}"
+								BorderThickness="1">
+							<StackPanel Margin="8">
+								<TextBlock Text="테스트입니다. 테스트입니다." Foreground="Pink" FontWeight="Bold"/>
+								<TextBlock Text="중요하니까 두번 말했습니다." Foreground="red" FontWeight="Bold"/>
+								<TextBlock/>
+								<!--<TextBlock Text="{Binding , Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Foreground="White" Name="Test"/>-->
+								<ListView ItemsSource="{Binding ResultReport,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+										  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}">
+									<ListView.Resources>
+										<Style TargetType="{x:Type TextBlock}">
+											<Setter Property="Margin"
+													Value="5,4" />
+										</Style>
+										<Style TargetType="{x:Type GridViewColumnHeader}">
+											<Setter Property="OverridesDefaultStyle"
+													Value="True" />
+											<Setter Property="BorderThickness"
+													Value="0,0,0,1" />
+											<Setter Property="BorderBrush"
+													Value="{DynamicResource BorderBrushKey}" />
+											<Setter Property="Background"
+													Value="{DynamicResource BackgroundBrushKey}" />
+											<Setter Property="Template">
+												<Setter.Value>
+													<ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+														<Grid>
+															<Border BorderThickness="{TemplateBinding BorderThickness}"
+																	BorderBrush="{TemplateBinding BorderBrush}"
+																	Background="{TemplateBinding Background}">
+																<ContentPresenter Margin="{TemplateBinding Padding}" />
+															</Border>
+															<Thumb x:Name="PART_HeaderGripper"
+																   HorizontalAlignment="Right"
+																   BorderBrush="{TemplateBinding BorderBrush}"
+																   Margin="0,0,-6,0">
+																<Thumb.Template>
+																	<ControlTemplate TargetType="{x:Type Thumb}">
+																		<Border Background="Transparent"
+																				Width="13">
+																			<Rectangle Width="1"
+																					   Stroke="{TemplateBinding BorderBrush}" />
+																		</Border>
+																	</ControlTemplate>
+																</Thumb.Template>
+															</Thumb>
+														</Grid>
+													</ControlTemplate>
+												</Setter.Value>
+											</Setter>
+										</Style>
+									</ListView.Resources>
+									<ListView.View>
+										<GridView>
+											<GridViewColumn Width="Auto">
+												<GridViewColumnHeader>
+													<TextBlock Text="적이름"/>
+												</GridViewColumnHeader>
+												<GridViewColumn.CellTemplate>
+													<DataTemplate>
+														<TextBlock Margin="6,3,0,3" Text="{Binding EnemyName}"  Foreground="White"/>
+													</DataTemplate>
+												</GridViewColumn.CellTemplate>
+											</GridViewColumn>
+											<GridViewColumn Width="Auto">
+												<GridViewColumnHeader>
+													<TextBlock Text="대파여부"/>
+												</GridViewColumnHeader>
+												<GridViewColumn.CellTemplate>
+													<DataTemplate>
+														<TextBlock Margin="6,3,0,3" Text="{Binding KanStatus}" Foreground="White"/>
+													</DataTemplate>
+												</GridViewColumn.CellTemplate>
+											</GridViewColumn>
+
+										</GridView>
+									</ListView.View>
+								</ListView>
+							</StackPanel>
+						</Border>
+					</Grid>
+				</Border>
+			</Popup>
+		</DockPanel>
+
+	</Grid>
+</UserControl>

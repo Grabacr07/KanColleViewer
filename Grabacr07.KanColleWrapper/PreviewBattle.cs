@@ -11,9 +11,13 @@ namespace Grabacr07.KanColleWrapper.Models
 	public class PreviewBattle
 	{
 		/// <summary>
-		/// 언젠가 전투 미리보기가 실장될 경우를 대비한 부분.
+		/// 전투 미리보기 리스트
 		/// </summary>
-		//protected bool EnablePreviewBattle { get; set; }
+		public List<PreviewBattleResults> Results = new List<PreviewBattleResults>();
+		/// <summary>
+		/// 전투 미리보기를 활성화
+		/// </summary>
+		public bool EnablePreviewBattle { get; set; }
 		/// <summary>
 		/// 내부에서 크리티컬이 맞는지 조회하는 부분
 		/// </summary>
@@ -22,6 +26,8 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 전투가 끝나고 모항에 돌아왔는지를 채크
 		/// </summary>
 		private bool BattleEnd { get; set; }
+
+		private int[] Enemy { get; set; }
 
 		public delegate void CriticalEventHandler();
 		/// <summary>
@@ -33,25 +39,54 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public event CriticalEventHandler CriticalCleared;
 		/// <summary>
-		/// 전투결과를 미리 계산합니다. 현재는 대파알림 전용으로 만들어져있습니다.
+		/// 크리티컬 컨디션을 미리 알리기 위한 이벤트.
+		/// </summary>
+		public event CriticalEventHandler PreviewCriticalCondition;
+		/// <summary>
+		/// 전투결과를 미리 계산합니다. 옵션 설정으로 미리 전투결과를 보거나 보지 않을 수 있습니다.
 		/// </summary>
 		/// <param name="proxy"></param>
 		public PreviewBattle(KanColleProxy proxy)
 		{
-			proxy.api_req_sortie_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false,false, x.Data));
-			proxy.api_req_sortie_night_to_day.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false,false, x.Data));
+			proxy.api_req_sortie_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false, false, x.Data));
+			proxy.api_req_sortie_night_to_day.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false, false, x.Data));
 			proxy.api_req_battle_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(false, x.Data));
 			proxy.api_req_battle_midnight_sp_midnight.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(false, x.Data));
 			proxy.api_req_combined_battle_airbattle.TryParse<kcsapi_battle>().Subscribe(x => this.AirBattle(x.Data));
-			proxy.api_req_combined_battle_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(true,false, x.Data));
+			proxy.api_req_combined_battle_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(true, false, x.Data));
 			proxy.api_req_combined_battle_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(true, x.Data));
-			proxy.api_req_combined_battle_battle_water.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(true,true, x.Data));
-			
+			proxy.api_req_combined_battle_battle_water.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(true, true, x.Data));
+
 			proxy.api_req_map_start.Subscribe(x => this.Cleared(false));
 
 			proxy.api_req_sortie_battleresult.TryParse().Subscribe(x => this.Result());
 			proxy.api_req_combined_battle_battleresult.TryParse().Subscribe(x => this.Result());
 			proxy.api_port.TryParse().Subscribe(x => this.Cleared(true));
+		}
+
+		/// <summary>
+		/// 전투결과를 CriticalPreviewPopup으로 보냅니다.
+		/// </summary>
+		/// <returns></returns>
+		public List<PreviewBattleResults> TotalResult()
+		{
+			var ships = KanColleClient.Current.Master.Ships;
+			for (int i = 0; i < this.Enemy.Length; i++)
+			{
+				PreviewBattleResults e = new PreviewBattleResults();
+				int temp = this.Enemy[i];
+				foreach (var item in ships.Where(x => x.Value.Id == temp).ToArray())
+				{
+					if (ships.Any(x => x.Value.Id == temp))
+					{
+						e.EnemyName=item.Value.Name;
+						e.EnemyId=item.Value.Id;
+						e.KanStatus="대파";
+						Results.Add(e);
+					}
+				}
+			}
+			return Results;
 		}
 
 		/// <summary>
@@ -62,9 +97,9 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			if (this.IsCritical)
 			{
-				this.CriticalCleared();
 				this.IsCritical = false;
-				
+				this.CriticalCleared();
+
 				if (IsEnd) this.BattleEnd = true;
 				else this.BattleEnd = false;
 			}
@@ -102,6 +137,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			List<int> CurrentHPList = new List<int>();
 			List<int> HPList = new List<int>();
 			List<int> MHPList = new List<int>();
+			this.Enemy = battle.api_ship_ke;
 
 			List<listup> Combinelists = new List<listup>();
 
@@ -174,6 +210,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			MHPList = new List<int>();
 
 			BattleCalc(HPList, MHPList, Combinelists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined);
+			this.PreviewCriticalCondition();
 		}
 		/// <summary>
 		/// 일반 포격전, 개막뇌격, 개막 항공전등을 계산.
@@ -181,13 +218,14 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <param name="battle"></param>
 		/// <param name="IsCombined">연합함대인경우 True로 설정합니다.</param>
 		/// <param name="IsWater">수뢰전대인지 채크합니다</param>
-		private void Battle(bool IsCombined,bool IsWater, kcsapi_battle battle)
+		private void Battle(bool IsCombined, bool IsWater, kcsapi_battle battle)
 		{
 			this.IsCritical = false;
 			List<int> CurrentHPList = new List<int>();
 			List<listup> lists = new List<listup>();
 			List<int> HPList = new List<int>();
 			List<int> MHPList = new List<int>();
+			this.Enemy = battle.api_ship_ke;
 
 			List<listup> Combinelists = new List<listup>();
 			//모든 형태의 전투에서 타게팅이 되는 함선의 번호와 데미지를 순서대로 입력한다.
@@ -212,7 +250,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			}
 			if (battle.api_hougeki2 != null)
 				ObjectListmake(battle.api_hougeki2.api_df_list, battle.api_hougeki2.api_damage, lists);
-			
+
 			//포격전 끝
 
 			//뇌격전 시작
@@ -220,7 +258,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				int[] numlist = battle.api_raigeki.api_erai;
 				decimal[] damlist = battle.api_raigeki.api_eydam;
-				if (!IsCombined) 
+				if (!IsCombined)
 					DecimalListmake(numlist, damlist, lists);
 				else if (IsCombined)
 					DecimalListmake(numlist, damlist, Combinelists);
@@ -273,6 +311,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				MHPList = new List<int>();
 				BattleCalc(HPList, MHPList, Combinelists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined);
 			}
+			this.PreviewCriticalCondition();
 		}
 		/// <summary>
 		/// battle의 야전버전. Battle과 구조는 동일. 다만 전투의 양상이 조금 다르기때문에 분리. 연합함대와 아닌경우의 구분을 한다.
@@ -287,6 +326,8 @@ namespace Grabacr07.KanColleWrapper.Models
 			List<int> HPList = new List<int>();
 			List<int> MHPList = new List<int>();
 			List<int> CurrentHPList = new List<int>();
+			this.Enemy = battle.api_ship_ke;
+
 			//포격전 리스트를 작성. 주간과 달리 1차 포격전밖에 없음.
 			if (battle.api_hougeki != null)
 				ObjectListmake(battle.api_hougeki.api_df_list, battle.api_hougeki.api_damage, lists);
@@ -295,6 +336,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				BattleCalc(HPList, MHPList, lists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined);
 			else
 				BattleCalc(HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps);
+			this.PreviewCriticalCondition();
 		}
 
 		/// <summary>
@@ -352,14 +394,6 @@ namespace Grabacr07.KanColleWrapper.Models
 					break;
 				}
 			}
-			//foreach (bool t in result)
-			//{
-			//	if (t)
-			//	{
-			//		this.IsCritical = true;
-			//		break;
-			//	}
-			//}
 		}
 
 		//리스트 작성부분은 좀 더 매끄러운 방법이 있는 것 같기도 하지만 일단 능력이 여기까지이므로
@@ -374,9 +408,9 @@ namespace Grabacr07.KanColleWrapper.Models
 			for (int i = 1; i < target.Count(); i++)//-1제외
 			{
 				listup d = new listup
-				{ 
-					Num= target[i],
-					Damage= damage[i]
+				{
+					Num = target[i],
+					Damage = damage[i]
 				};
 				if (d.Num != 0) list.Add(d);
 			}
@@ -395,7 +429,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				dynamic listNum = target[i];
 				dynamic damNum = damage[i];
 				listup d = new listup
-				{ 
+				{
 					Num = listNum[0],
 					Damage = damNum[0]
 				};
@@ -422,5 +456,17 @@ namespace Grabacr07.KanColleWrapper.Models
 				else numlist[i] = 0;
 			}
 		}
+	}
+	public class PreviewBattleResults
+	{
+		public string EnemyName { get; set; }
+		public int EnemyId { get; set; }
+		public int EnemyMaxHP { get; set; }
+		public int EnemyCurrentHP { get; set; }
+		public string KanStatus { get; set; }
+		public int KanMaxHP { get; set; }
+		public int KanCurrentHP { get; set; }
+		public string KanName { get; set; }
+
 	}
 }

@@ -26,7 +26,7 @@
 				   IsRestoringWindowPlacement="True"
 				   SnapsToDevicePixels="True"
 				   TextOptions.TextFormattingMode="Display"
-                   UseLayoutRounding="True">
+				   UseLayoutRounding="True">
 	<Window.InputBindings>
 		<KeyBinding Key="F5" Command="{Binding RefreshNavigator}" />
 	</Window.InputBindings>
@@ -75,6 +75,7 @@
 							HorizontalAlignment="Right"
 							VerticalAlignment="Top"
 							WindowChrome.IsHitTestVisibleInChrome="True">
+					<controls:PreviewBattlePopup/>
 					<controls:ZoomFactorSelector ZoomFactor="{Binding Settings.BrowserZoomFactor, Mode=OneWay}"
 												 ToolTip="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.ZoomFactorSelector_Tooltip}"
 												 Margin="4,0" />

@@ -1,10 +1,12 @@
 ﻿using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.ViewModels.Messages;
 using Grabacr07.KanColleWrapper;
+using Grabacr07.KanColleWrapper.Models;
 using Livet;
 using Livet.EventListeners;
 using Livet.Messaging.Windows;
 using MetroRadiance;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Input;
 
@@ -138,6 +140,36 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region ResultReport 変更通知プロパティ
+
+		private List<PreviewBattleResults> _ResultReport;
+
+		public List<PreviewBattleResults> ResultReport
+		{
+			get { return this._ResultReport; }
+			set
+			{
+				if (this._ResultReport != value)
+				{
+					this._ResultReport = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		private void Tester(){
+			KanColleClient.Current.PreviewBattle.PreviewCriticalCondition += () =>
+			{
+				this.ResultReport = KanColleClient.Current.PreviewBattle.TotalResult();
+			};
+			KanColleClient.Current.PreviewBattle.CriticalCleared += () =>
+			{
+				this.ResultReport.Clear();
+			};
+
+		}
 
 		public MainWindowViewModel()
 		{
@@ -156,7 +188,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			});
 
 			this.UpdateMode();
-
+			this.Tester();
 			_RefreshNavigator = new RelayCommand(Navigator.ReNavigate);
 		}
 

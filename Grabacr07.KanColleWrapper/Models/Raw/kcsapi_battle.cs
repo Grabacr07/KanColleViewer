@@ -16,6 +16,8 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		//combined전용
 		public int[] api_nowhps_combined;
 		public int[] api_maxhps_combined;
+		//심해서함 ID
+		public int[] api_ship_ke;
 	}
 	public class kcsapi_midnight_battle
 	{
@@ -25,6 +27,7 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public int[] api_nowhps;
 		public int[] api_nowhps_combined;
 		public int[] api_maxhps_combined;
+		public int[] api_ship_ke;
 
 	}
 	public class api_hougeki

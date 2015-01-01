@@ -238,6 +238,9 @@
       <DependentUpon>Tools.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\KanColleHost.cs" />
+    <Compile Include="Views\Controls\PreviewBattlePopup.xaml.cs">
+      <DependentUpon>PreviewBattlePopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Controls\WebBrowserHelper.cs" />
     <Compile Include="Views\Behaviors\ZoomAction.cs" />
     <Compile Include="Views\BrowserNavigator.xaml.cs">
@@ -458,6 +461,10 @@
     <Page Include="Views\Contents\Quests.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\PreviewBattlePopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\CriticalDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
