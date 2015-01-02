@@ -159,9 +159,31 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region IsCombined 変更通知プロパティ
+
+		private double _IsCombined;
+
+		public double IsCombined
+		{
+			get { return this._IsCombined; }
+			set
+			{
+				if (this._IsCombined != value)
+				{
+					this._IsCombined = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		private void Tester(){
 			KanColleClient.Current.PreviewBattle.PreviewCriticalCondition += () =>
 			{
+				if (KanColleClient.Current.Homeport.Organization.Combined) this.IsCombined = double.NaN;
+				else this.IsCombined = 0.0;
+
 				this.ResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.TotalResult());
 			};
 		}

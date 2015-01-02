@@ -47,9 +47,9 @@
 			   PlacementRectangle="-9,20,0,0"
 			   IsOpen="{Binding ElementName=PreviewButton, Path=IsChecked}"
 			   StaysOpen="False"
-			   PopupAnimation="Fade"
 			   AllowsTransparency="True">
-				<Border Background="{DynamicResource BackgroundBrushKey}">
+				<!--PopupAnimation="Fade"-->
+				<Border Background="#B21B1B1C">
 					<Grid>
 
 						<Rectangle Stroke="{DynamicResource AccentBrushKey}"
@@ -82,7 +82,7 @@
 											<Setter Property="BorderBrush"
 													Value="{DynamicResource BorderBrushKey}" />
 											<Setter Property="Background"
-													Value="{DynamicResource BackgroundBrushKey}" />
+													Value="#B21B1B1C" />
 											<Setter Property="Template">
 												<Setter.Value>
 													<ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
@@ -101,7 +101,7 @@
 																		<Border Background="Transparent"
 																				Width="13">
 																			<Rectangle Width="1"
-																					   Stroke="{TemplateBinding BorderBrush}" />
+																					   Stroke="#B23F3F46" />
 																		</Border>
 																	</ControlTemplate>
 																</Thumb.Template>
@@ -114,6 +114,82 @@
 									</ListView.Resources>
 									<ListView.View>
 										<GridView>
+											<!--1함대-->
+											<GridViewColumn Width="Auto">
+												<GridViewColumnHeader>
+													<TextBlock Text="칸무스 이름"/>
+												</GridViewColumnHeader>
+												<GridViewColumn.CellTemplate>
+													<DataTemplate>
+														<TextBlock Margin="6,3,0,3" Text="{Binding KanName}" Foreground="White"/>
+													</DataTemplate>
+												</GridViewColumn.CellTemplate>
+											</GridViewColumn>
+											<GridViewColumn Width="Auto">
+												<GridViewColumnHeader>
+													<TextBlock Text="HP"/>
+												</GridViewColumnHeader>
+												<GridViewColumn.CellTemplate>
+													<DataTemplate>
+														<TextBlock Margin="6,3,0,3" Text="{Binding KanHP}" Foreground="White"/>
+													</DataTemplate>
+												</GridViewColumn.CellTemplate>
+											</GridViewColumn>
+											<GridViewColumn Width="Auto">
+												<GridViewColumnHeader>
+													<TextBlock Text="상태"/>
+												</GridViewColumnHeader>
+												<GridViewColumn.CellTemplate>
+													<DataTemplate>
+														<TextBlock Margin="6,3,0,3" Text="{Binding KanStatus}" Foreground="White"/>
+													</DataTemplate>
+												</GridViewColumn.CellTemplate>
+											</GridViewColumn>
+											<!--2함대(연합함대용)-->
+											<GridViewColumn Width="{Binding IsCombined}">
+												<!--일단 지금은 숨겨놓지 않습니다. 연합함대로 테스트를 할수있을때 Hidden으로 지정할것..-->
+												<GridViewColumnHeader>
+													<TextBlock Text="2함대"/>
+												</GridViewColumnHeader>
+												<GridViewColumn.CellTemplate>
+													<DataTemplate>
+														<TextBlock Margin="6,3,0,3" Text="{Binding SecondKanName}" Foreground="White"/>
+													</DataTemplate>
+												</GridViewColumn.CellTemplate>
+											</GridViewColumn>
+											<GridViewColumn Width="{Binding IsCombined}">
+												<GridViewColumnHeader>
+													<TextBlock Text="HP"/>
+												</GridViewColumnHeader>
+												<GridViewColumn.CellTemplate>
+													<DataTemplate>
+														<TextBlock Margin="6,3,0,3" Text="{Binding SecondKanHP}" Foreground="White"/>
+													</DataTemplate>
+												</GridViewColumn.CellTemplate>
+											</GridViewColumn>
+											<GridViewColumn Width="{Binding IsCombined}">
+												<GridViewColumnHeader>
+													<TextBlock Text="대파여부"/>
+												</GridViewColumnHeader>
+												<GridViewColumn.CellTemplate>
+													<DataTemplate>
+														<TextBlock Margin="6,3,0,3" Text="{Binding SecondKanStatus}" Foreground="White"/>
+													</DataTemplate>
+												</GridViewColumn.CellTemplate>
+											</GridViewColumn>
+											<!--빈공간. 여기에 전투랭크 등을 기입예정-->
+											<GridViewColumn Width="130">
+												<GridViewColumnHeader>
+													<TextBlock Text=""/>
+												</GridViewColumnHeader>
+												<GridViewColumn.CellTemplate>
+													<DataTemplate>
+														<TextBlock Margin="6,3,0,3" Text="" Foreground="White"/>
+													</DataTemplate>
+												</GridViewColumn.CellTemplate>
+											</GridViewColumn>
+
+											<!--적 함대 정보-->
 											<GridViewColumn Width="Auto">
 												<GridViewColumnHeader>
 													<TextBlock Text="적이름"/>
@@ -126,15 +202,24 @@
 											</GridViewColumn>
 											<GridViewColumn Width="Auto">
 												<GridViewColumnHeader>
-													<TextBlock Text="대파여부"/>
+													<TextBlock Text="HP"/>
 												</GridViewColumnHeader>
 												<GridViewColumn.CellTemplate>
 													<DataTemplate>
-														<TextBlock Margin="6,3,0,3" Text="{Binding KanStatus}" Foreground="White"/>
+														<TextBlock Margin="6,3,0,3" Text="{Binding EnemyHP}" Foreground="White"/>
 													</DataTemplate>
 												</GridViewColumn.CellTemplate>
 											</GridViewColumn>
-
+											<GridViewColumn Width="Auto">
+												<GridViewColumnHeader>
+													<TextBlock Text="상태"/>
+												</GridViewColumnHeader>
+												<GridViewColumn.CellTemplate>
+													<DataTemplate>
+														<TextBlock Margin="6,3,0,3" Text="{Binding EnemyStatus}" Foreground="White"/>
+													</DataTemplate>
+												</GridViewColumn.CellTemplate>
+											</GridViewColumn>
 										</GridView>
 									</ListView.View>
 								</ListView>

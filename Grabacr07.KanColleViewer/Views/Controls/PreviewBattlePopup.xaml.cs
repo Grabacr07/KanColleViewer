@@ -23,7 +23,6 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			this.Popup.CustomPopupPlacementCallback = this.PopupPlacementCallback;
 			this.Popup.Opened += (sender, args) => this.ChangeBackground();
 			this.Popup.Closed += (sender, args) => this.ChangeBackground();
-			
 		}
 		
 

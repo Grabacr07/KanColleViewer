@@ -26,9 +26,37 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 전투가 끝나고 모항에 돌아왔는지를 채크
 		/// </summary>
 		private bool BattleEnd { get; set; }
-
+		/// <summary>
+		/// 심해서함의 ID를 저장
+		/// </summary>
 		private int[] Enemy { get; set; }
-
+		/// <summary>
+		/// 함대의 HP정보를 저장
+		/// </summary>
+		private List<string> HpResults = new List<string>();
+		/// <summary>
+		/// 연합함대의 HP정보를 저장
+		/// </summary>
+		private List<string> ComHpResults = new List<string>();
+		/// <summary>
+		/// 적 함대의 HP정보를 저장
+		/// </summary>
+		private List<string> EnemyHpResults = new List<string>();
+		/// <summary>
+		/// 함대의 HP계산결과를 저장
+		/// </summary>
+		private List<string> CalResults = new List<string>();
+		/// <summary>
+		/// 연합함대의 HP계산결과를 저장
+		/// </summary>
+		private List<string> ComCalResults = new List<string>();
+		/// <summary>
+		/// 적 함대의 HP계산결과를 저장
+		/// </summary>
+		private List<string> EnemyCalResults = new List<string>();
+		/// <summary>
+		/// 이벤트 핸들러
+		/// </summary>
 		public delegate void CriticalEventHandler();
 		/// <summary>
 		/// 크리티컬 컨디션 이벤트
@@ -72,21 +100,41 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			var ships = KanColleClient.Current.Master.Ships;
 			this.Results.Clear();
-			for (int i = 0; i < this.Enemy.Length; i++)
+			for (int i = 0; i < 6; i++)
 			{
 				PreviewBattleResults e = new PreviewBattleResults();
-				int temp = this.Enemy[i];
-
-				foreach (var item in ships.Where(x => x.Value.Id == temp).ToArray())
+				if (this.Enemy.Length > i + 1)
 				{
-					if (ships.Any(x => x.Value.Id == temp))
+					int temp = this.Enemy[i + 1];
+					//심해서함 ID로 이름 찾기
+					foreach (var item in ships.Where(x => x.Value.Id == temp).ToArray())
 					{
-						e.EnemyName = item.Value.Name;
-						e.EnemyId = item.Value.Id;
-						e.KanStatus = "대파";
-						this.Results.Add(e);
+						if (ships.Any(x => x.Value.Id == temp))
+						{
+							e.EnemyName = item.Value.Name;
+							//e.EnemyId = item.Value.Id;
+							e.EnemyHP = this.EnemyHpResults[i];
+							e.EnemyStatus = this.EnemyCalResults[i];
+						}
 					}
 				}
+				if (!KanColleClient.Current.Homeport.Organization.Combined && KanColleClient.Current.Homeport.Organization.Fleets[1].Ships.Length > i)
+				{
+					e.KanName = KanColleClient.Current.Homeport.Organization.Fleets[1].Ships[i].LvName;
+					e.KanHP = this.HpResults[i];
+					e.KanStatus = this.CalResults[i];
+				}
+				else if (KanColleClient.Current.Homeport.Organization.Fleets[1].Ships.Length > i)
+				{
+					e.KanName = KanColleClient.Current.Homeport.Organization.Fleets[1].Ships[i].LvName;
+					e.KanHP = this.HpResults[i];
+					e.KanStatus = this.CalResults[i];
+
+					e.SecondKanName = KanColleClient.Current.Homeport.Organization.Fleets[2].Ships[i].LvName;
+					e.SecondKanHP = this.ComHpResults[i];
+					e.SecondKanStatus = this.ComCalResults[i];
+				}
+				this.Results.Add(e);
 			}
 			return this.Results;
 		}
@@ -148,7 +196,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			//api_kouku시작
 			if (battle.api_kouku != null && battle.api_kouku.api_stage3 != null)
 			{
-				int[] numlist = null;
+				int[] numlist = new int[7];
 				decimal[] damlist = battle.api_kouku.api_stage3.api_fdam;
 
 				ChangeKoukuFlagToNumber(
@@ -158,7 +206,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				DecimalListmake(numlist, damlist, lists, true);
 
 				//적에게 준 데미지
-				numlist = null;
+				numlist = new int[7];
 				damlist = battle.api_kouku.api_stage3.api_edam;
 
 				ChangeKoukuFlagToNumber(
@@ -170,7 +218,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				//리스트의 재활용. 여기부터 연합함대 리스트 작성
 				if (battle.api_kouku != null && battle.api_kouku.api_stage3_combined != null)
 				{
-					numlist = null;
+					numlist = new int[7];
 					damlist = battle.api_kouku.api_stage3_combined.api_fdam;
 
 					ChangeKoukuFlagToNumber(
@@ -180,7 +228,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					DecimalListmake(numlist, damlist, Combinelists, true);
 
 					//적에게 준 데미지
-					numlist = null;
+					numlist = new int[7];
 					damlist = battle.api_kouku.api_stage3_combined.api_edam;
 
 					ChangeKoukuFlagToNumber(
@@ -195,7 +243,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			//api_kouku2시작
 			if (battle.api_kouku2 != null && battle.api_kouku2.api_stage3 != null)
 			{
-				int[] numlist = null;
+				int[] numlist = new int[7];
 				decimal[] damlist = battle.api_kouku2.api_stage3.api_fdam;
 
 				ChangeKoukuFlagToNumber(battle.api_kouku2.api_stage3.api_frai_flag,
@@ -204,7 +252,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				DecimalListmake(numlist, damlist, lists, true);//메인 함대 리스트 작성 끝
 
 				//적에게 준 데미지
-				numlist = null;
+				numlist = new int[7];
 				damlist = battle.api_kouku2.api_stage3.api_edam;
 
 				ChangeKoukuFlagToNumber(
@@ -216,7 +264,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				//리스트의 재활용. 여기부터 연합함대 리스트 작성
 				if (battle.api_kouku2 != null && battle.api_kouku2.api_stage3_combined != null)
 				{
-					numlist = null;
+					numlist = new int[7];
 					damlist = battle.api_kouku2.api_stage3_combined.api_fdam;
 					for (int i = 0; i < battle.api_kouku2.api_stage3_combined.api_frai_flag.Count(); i++)//컴바인 함대 플래그
 					{
@@ -229,7 +277,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					DecimalListmake(numlist, damlist, Combinelists, true);
 
 					//적에게 준 데미지
-					numlist = null;
+					numlist = new int[7];
 					damlist = battle.api_kouku2.api_stage3_combined.api_edam;
 					for (int i = 0; i < battle.api_kouku2.api_stage3_combined.api_erai_flag.Count(); i++)//컴바인 함대 플래그
 					{
@@ -243,7 +291,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				}//연합함대 리스트 작성 끝
 			}
 			//api_kouku끝
-			BattleCalc(HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps);
+			BattleCalc(HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps, false);
 
 
 			//적 HP계산을 위해 아군리스트와 적군 리스트를 병합.
@@ -274,7 +322,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			MHPList = new List<int>();
 			HPList = new List<int>();
 
-			BattleCalc(HPList, MHPList, Combinelists, CurrentHPList, CombinePlusEnemyMaxHPs, CombinePlusEnemyNowHPs);
+			BattleCalc(HPList, MHPList, Combinelists, CurrentHPList, CombinePlusEnemyMaxHPs, CombinePlusEnemyNowHPs, true);
 			//BattleCalc(HPList, MHPList, Combinelists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined);
 			this.PreviewCriticalCondition();
 		}
@@ -327,20 +375,23 @@ namespace Grabacr07.KanColleWrapper.Models
 				decimal[] damlist = battle.api_raigeki.api_eydam;
 				if (!IsCombined)
 					DecimalListmake(numlist, damlist, lists, true);
-				else if (IsCombined)
+				else
 					DecimalListmake(numlist, damlist, Combinelists, true);
 
 				//적 뇌격 데미지
 				numlist = battle.api_raigeki.api_frai;
 				damlist = battle.api_raigeki.api_fydam;
-				DecimalListmake(numlist, damlist, lists, false);
+				if (!IsCombined)
+					DecimalListmake(numlist, damlist, lists, false);
+				else
+					DecimalListmake(numlist, damlist, Combinelists, false);
 			}
 			//뇌격전 끝
 
 			//항공전 시작. 폭장과 뇌격 데미지는 합산되어있고 플래그로 맞는 녀석을 선별. ChangeKoukuFlagToNumber에 모든 플래그를 집어넣어서 합산시킴.
 			if (battle.api_kouku != null && battle.api_kouku.api_stage3 != null)
 			{
-				int[] numlist = null;
+				int[] numlist = new int[7];
 				decimal[] damlist = battle.api_kouku.api_stage3.api_fdam;
 
 				ChangeKoukuFlagToNumber(battle.api_kouku.api_stage3.api_frai_flag,
@@ -349,7 +400,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				DecimalListmake(numlist, damlist, lists, true);
 
 				//적군 데미지
-				numlist = null;
+				numlist = new int[7];
 				damlist = battle.api_kouku.api_stage3.api_edam;
 				ChangeKoukuFlagToNumber(
 					battle.api_kouku.api_stage3.api_erai_flag,
@@ -361,7 +412,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				{
 					if (battle.api_kouku.api_stage3_combined != null)
 					{
-						numlist = null;
+						numlist = new int[7];
 
 						damlist = battle.api_kouku.api_stage3_combined.api_fdam;
 						ChangeKoukuFlagToNumber(battle.api_kouku.api_stage3_combined.api_frai_flag,
@@ -371,7 +422,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 
 						//적군피해
-						numlist = null;
+						numlist = new int[7];
 
 						damlist = battle.api_kouku.api_stage3_combined.api_edam;
 						ChangeKoukuFlagToNumber(battle.api_kouku.api_stage3_combined.api_erai_flag,
@@ -396,11 +447,11 @@ namespace Grabacr07.KanColleWrapper.Models
 				DecimalListmake(numlist, damlist, lists, false);
 			}
 			//개막전 끝
-			if (!IsCombined) BattleCalc(HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps);
+			if (!IsCombined) BattleCalc(HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps, false);
 
 			else if (IsCombined)//연합함대인경우 연산을 한번 더 시행
 			{
-				BattleCalc(HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps);
+				BattleCalc(HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps, false);
 
 				//적 HP계산을 위해 아군리스트와 적군 리스트를 병합.
 				int[] CombinePlusEnemyMaxHPs = null;
@@ -430,7 +481,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				MHPList = new List<int>();
 				HPList = new List<int>();
 
-				BattleCalc(HPList, MHPList, Combinelists, CurrentHPList, CombinePlusEnemyMaxHPs, CombinePlusEnemyNowHPs);
+				BattleCalc(HPList, MHPList, Combinelists, CurrentHPList, CombinePlusEnemyMaxHPs, CombinePlusEnemyNowHPs, true);
 				//BattleCalc(HPList, MHPList, Combinelists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined);
 			}
 			this.PreviewCriticalCondition();
@@ -481,11 +532,11 @@ namespace Grabacr07.KanColleWrapper.Models
 					{
 						CombinePlusEnemyNowHPs[i] = battle.api_nowhps[i];
 					}
-					BattleCalc(HPList, MHPList, lists, CurrentHPList, CombinePlusEnemyMaxHPs, CombinePlusEnemyNowHPs);
+					BattleCalc(HPList, MHPList, lists, CurrentHPList, CombinePlusEnemyMaxHPs, CombinePlusEnemyNowHPs, true);
 					//BattleCalc(HPList, MHPList, lists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined);
 				}
 				else
-					BattleCalc(HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps);
+					BattleCalc(HPList, MHPList, lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps, false);
 			}
 			this.PreviewCriticalCondition();
 		}
@@ -500,15 +551,19 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <param name="Maxhps">api_maxhps를 가져온다.</param>
 		/// <param name="NowHps">api_nowhps를 가져온다.</param>
 		/// <param name="IsCombined">연합함대인지 설정</param>
-		private void BattleCalc(List<int> HPList, List<int> MHPList, List<listup> lists, List<int> CurrentHPList, int[] Maxhps, int[] NowHps)
+		private void BattleCalc(List<int> HPList, List<int> MHPList, List<listup> lists, List<int> CurrentHPList, int[] Maxhps, int[] NowHps, bool IsCombined)
 		{
-			//총 HP와 현재 HP의 리스트를 작성한다. 빈칸은 0을 채운다.
+			this.CalResults.Clear();
+			this.HpResults.Clear();
+			this.EnemyHpResults.Clear();
+			this.EnemyCalResults.Clear();
+			//총 HP와 현재 HP의 리스트를 작성한다. 빈칸은 -1을 채운다.
 			for (int i = 0; i < Maxhps.Length; i++)
 			{
 				if (Maxhps[i] != -1) MHPList.Add(Maxhps[i]);
-				else MHPList.Add(0);
+				else MHPList.Add(-1);
 				if (NowHps[i] != -1) HPList.Add(NowHps[i]);
-				else HPList.Add(0);
+				else HPList.Add(-1);
 			}
 
 			//데미지를 계산하여 현재 HP에 적용
@@ -521,7 +576,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				{
 					decimal rounded = decimal.Round(lists[j].Damage);
 					int damage = (int)rounded;
-					if (lists[j].Num == i + 1) CurrentHP = CurrentHP - damage;
+					if (lists[j].Num == i) CurrentHP = CurrentHP - damage;
 				}
 				CurrentHPList.Add(CurrentHP);
 			}
@@ -529,23 +584,43 @@ namespace Grabacr07.KanColleWrapper.Models
 			List<bool> result = new List<bool>();
 			for (int i = 0; i < CurrentHPList.Count; i++)
 			{
-				if (Maxhps[i] != -1 && CurrentHPList[i] != 0)
+				if (Maxhps[i] != -1)
 				{
 					double temp = (double)CurrentHPList[i] / (double)Maxhps[i];
 					if (temp <= 0.25) result.Add(true);
 					else result.Add(false);
+
+					//이하부터 전투 미리보기 시작.
+					//HP정보를 리스트에 저장
+					if (i < 7)//아군정보
+					{
+						if (CurrentHPList[i] > 0) this.HpResults.Add(CurrentHPList[i].ToString() + "/" + Maxhps[i].ToString());
+						else this.HpResults.Add("0/" + Maxhps[i].ToString());
+
+						if (temp <= 0) this.CalResults.Add("굉침");
+						else if (temp <= 0.25) this.CalResults.Add("대파");
+						else if (temp <= 0.5) this.CalResults.Add("중파");
+						else if (temp <= 0.75) this.CalResults.Add("소파");
+						else this.CalResults.Add("");
+
+					}
+					else//적군정보
+					{
+						if (CurrentHPList[i] > 0) this.EnemyHpResults.Add(CurrentHPList[i].ToString() + "/" + Maxhps[i].ToString());
+						else this.EnemyHpResults.Add("0/" + Maxhps[i].ToString());
+
+						if (temp <= 0) this.EnemyCalResults.Add("굉침");
+						else if (temp <= 0.25) this.EnemyCalResults.Add("대파");
+						else if (temp <= 0.5) this.EnemyCalResults.Add("중파");
+						else if (temp <= 0.75) this.EnemyCalResults.Add("소파");
+						else this.EnemyCalResults.Add("");
+					}
 				}
 				else result.Add(false);
 			}
-			////빈칸과 적칸에 모두 false를 입력
-			//for (int i = CurrentHPList.Count + 1; i < Maxhps.Count(); i++)
-			//{
-			//	result.Add(false);
-			//}
-			////리스트 전체에 true가 있는지 확인
 			for (int i = 0; i < result.Count; i++)
 			{
-				if (result[i] && i<6)
+				if (result[i] && i < 7)
 				{
 					this.IsCritical = true;
 					break;
@@ -565,12 +640,11 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			for (int i = 1; i < target.Count(); i++)//-1제외
 			{
-				int j;
-				if (Friendly) j = i;
-				else j = i + 6;
+				int j = (Friendly == true) ? 0 : 6;
+
 				listup d = new listup
 				{
-					Num = target[j],
+					Num = target[i] + j,
 					Damage = damage[i]
 				};
 				if (d.Num != 0) list.Add(d);
@@ -599,17 +673,13 @@ namespace Grabacr07.KanColleWrapper.Models
 				{
 					for (int j = 0; j < listNum.Length; j++)
 					{
-						d.Num = listNum[j];
-						d.Damage = damNum[j];
-						list.Add(d);
+						listup e = new listup();
+						e.Num = listNum[j];
+						e.Damage = damNum[j];
+						list.Add(e);
 					}
-					return;
 				}
-				if (damNum.Length > 1)
-				{
-					if (damNum[1] > 0) d.Damage = damNum[0] + damNum[1];
-				}
-				list.Add(d);
+				else list.Add(d);
 			}
 
 		}
@@ -628,16 +698,26 @@ namespace Grabacr07.KanColleWrapper.Models
 			}
 		}
 	}
+
+	/// <summary>
+	/// 미리보기 데이터를 저장하는 클래스
+	/// </summary>
 	public class PreviewBattleResults
 	{
+		//이름
 		public string EnemyName { get; set; }
-		public int EnemyId { get; set; }
-		public int EnemyMaxHP { get; set; }
-		public int EnemyCurrentHP { get; set; }
-		public string KanStatus { get; set; }
-		public int KanMaxHP { get; set; }
-		public int KanCurrentHP { get; set; }
 		public string KanName { get; set; }
+		public string SecondKanName { get; set; }
+		//HP
+		public string EnemyHP { get; set; }
+		public string SecondKanHP { get; set; }
+		public string KanHP { get; set; }
+		//상태
+		public string EnemyStatus { get; set; }
+		public string SecondKanStatus { get; set; }
+		public string KanStatus { get; set; }
 
+		//테스트용도
+		//public int EnemyId { get; set; }
 	}
 }
