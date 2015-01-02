@@ -55,6 +55,9 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 	{
 		public decimal[] api_eydam;
 		public int[] api_erai;
+		//적 데미지
+		public decimal[] api_fydam;
+		public int[] api_frai;
 	}
 	public class api_kouku
 	{
@@ -70,8 +73,14 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 	{
 		public int[] api_frai_flag;
 		public int[] api_fbak_flag;
-		public int[] api_fcl_flag;
+		public int[] api_fcl_flag;//사용 용도 불명
 		public decimal[] api_fdam;
+
+		//적군
+		public int[] api_erai_flag;
+		public int[] api_ebak_flag;
+		public int[] api_ecl_flag;//사용 용도 불명
+		public decimal[] api_edam;
 	}
 	public class api_Stage3_combined
 	{
@@ -79,6 +88,12 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public int[] api_fbak_flag;
 		public int[] api_fcl_flag;
 		public decimal[] api_fdam;
+
+		//적군
+		public int[] api_erai_flag;
+		public int[] api_ebak_flag;
+		public int[] api_ecl_flag;//사용 용도 불명
+		public decimal[] api_edam;
 	}
 	public class listup
 	{
@@ -89,5 +104,9 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 	{
 		public decimal[] api_eydam;
 		public int[] api_erai;
+
+		//개막전. 적 부분
+		public decimal[] api_fydam;
+		public int[] api_frai;
 	}
 }

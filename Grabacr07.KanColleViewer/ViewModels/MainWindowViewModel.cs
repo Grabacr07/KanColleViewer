@@ -162,13 +162,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		private void Tester(){
 			KanColleClient.Current.PreviewBattle.PreviewCriticalCondition += () =>
 			{
-				this.ResultReport = KanColleClient.Current.PreviewBattle.TotalResult();
+				this.ResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.TotalResult());
 			};
-			KanColleClient.Current.PreviewBattle.CriticalCleared += () =>
-			{
-				this.ResultReport.Clear();
-			};
-
 		}
 
 		public MainWindowViewModel()
