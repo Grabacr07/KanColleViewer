@@ -25,11 +25,39 @@
 			<ToggleButton x:Name="PreviewButton"
 					  x:FieldModifier="private"
 					  Width="Auto">
-				<DockPanel Height="13.167">
-					<Path Data="M0.5,0.5 L1.029,0.5 10.035489,9.4139994 18.858999,0.5 19.5,0.5 19.5,12.667 0.5,12.667 z M1.029,0.5 L18.858999,0.5 10.035489,9.4139994 z" HorizontalAlignment="Left" Height="13.167" 
+				<DockPanel Height="15.4">
+					<!--<Path Data="M0.5,0.5 L1.029,0.5 10.035489,9.4139994 18.858999,0.5 19.5,0.5 19.5,12.667 0.5,12.667 z M1.029,0.5 L18.858999,0.5 10.035489,9.4139994 z" HorizontalAlignment="Left" Height="13.167" 
 						  Stroke="White"
 						  Stretch="Fill"
-						  Width="20"/>
+						  Width="20"/>-->
+					<Grid>
+						<Path HorizontalAlignment="Left"
+							  Fill="{DynamicResource ForegroundBrushKey}"
+							  VerticalAlignment="Top"
+							  Margin="0,4.017,0,0"
+							  Data="M10.48,0.05 L20.897682,6.8159994 20.949999,6.8159994 20.949999,10.840999 0.05,10.840999 0.05,6.8239998 0.05,6.8159994 0.062318354,6.8159994 z"
+							  Height="10.891"
+							  RenderTransformOrigin="0.499047647098898,0.315581673913621"
+							  Stretch="Fill"
+							  Width="21">
+							<Path.RenderTransform>
+								<TransformGroup>
+									<ScaleTransform ScaleY="-1"/>
+									<SkewTransform/>
+									<RotateTransform/>
+									<TranslateTransform/>
+								</TransformGroup>
+							</Path.RenderTransform>
+						</Path>
+						<Path Clip="F1 M-2.3329999,6.1669998 L25.916,6.1669998 25.916,17.5 -2.3329999,17.5 -2.3329999,6.1669998 z"
+							  Data="M0.5,0.5 L20.5,0.5 L20.5,14.9 L0.5,14.9 z"
+							  HorizontalAlignment="Left"
+							  Height="15.4"
+							  Stretch="Fill"
+							  Stroke="{DynamicResource ForegroundBrushKey}"
+							  VerticalAlignment="Top"
+							  Width="21" />
+					</Grid>
 				</DockPanel>
 				<ToggleButton.Template>
 					<ControlTemplate TargetType="{x:Type ToggleButton}">
@@ -68,7 +96,10 @@
 								<TextBlock/>
 								<!--<TextBlock Text="{Binding , Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Foreground="White" Name="Test"/>-->
 								<ListView ItemsSource="{Binding ResultReport,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-										  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}">
+										  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}" 
+										  Opacity="0.65" 
+										  ScrollViewer.VerticalScrollBarVisibility="Disabled"
+										  x:Name="PreviewListView">
 									<ListView.Resources>
 										<Style TargetType="{x:Type TextBlock}">
 											<Setter Property="Margin"
@@ -80,7 +111,7 @@
 											<Setter Property="BorderThickness"
 													Value="0,0,0,1" />
 											<Setter Property="BorderBrush"
-													Value="{DynamicResource BorderBrushKey}" />
+													Value="#B23F3F46" />
 											<Setter Property="Background"
 													Value="#B21B1B1C" />
 											<Setter Property="Template">
@@ -101,7 +132,7 @@
 																		<Border Background="Transparent"
 																				Width="13">
 																			<Rectangle Width="1"
-																					   Stroke="#B23F3F46" />
+																					   Stroke="{TemplateBinding BorderBrush}" />
 																		</Border>
 																	</ControlTemplate>
 																</Thumb.Template>
@@ -114,8 +145,9 @@
 									</ListView.Resources>
 									<ListView.View>
 										<GridView>
+											<!--크기조절에 대한 완전한 대책이 마련되기 전까지는 크기조절 가능으로 설정.-->
 											<!--1함대-->
-											<GridViewColumn Width="Auto">
+											<GridViewColumn Width="{Binding IsRefreshed}">
 												<GridViewColumnHeader>
 													<TextBlock Text="칸무스 이름"/>
 												</GridViewColumnHeader>
@@ -125,7 +157,7 @@
 													</DataTemplate>
 												</GridViewColumn.CellTemplate>
 											</GridViewColumn>
-											<GridViewColumn Width="Auto">
+											<GridViewColumn Width="{Binding IsRefreshed}">
 												<GridViewColumnHeader>
 													<TextBlock Text="HP"/>
 												</GridViewColumnHeader>
@@ -135,7 +167,7 @@
 													</DataTemplate>
 												</GridViewColumn.CellTemplate>
 											</GridViewColumn>
-											<GridViewColumn Width="Auto">
+											<GridViewColumn Width="{Binding IsRefreshed}">
 												<GridViewColumnHeader>
 													<TextBlock Text="상태"/>
 												</GridViewColumnHeader>
@@ -177,9 +209,9 @@
 													</DataTemplate>
 												</GridViewColumn.CellTemplate>
 											</GridViewColumn>
-											<!--빈공간. 여기에 전투랭크 등을 기입예정-->
-											<GridViewColumn Width="130">
-												<GridViewColumnHeader>
+											<!--빈공간. 가독성을 높이기 위해 존재. 크기조절방지-->
+											<GridViewColumn Width="50">
+												<GridViewColumnHeader IsEnabled="False">
 													<TextBlock Text=""/>
 												</GridViewColumnHeader>
 												<GridViewColumn.CellTemplate>
@@ -190,7 +222,7 @@
 											</GridViewColumn>
 
 											<!--적 함대 정보-->
-											<GridViewColumn Width="Auto">
+											<GridViewColumn Width="{Binding IsRefreshed}">
 												<GridViewColumnHeader>
 													<TextBlock Text="적이름"/>
 												</GridViewColumnHeader>
@@ -200,7 +232,7 @@
 													</DataTemplate>
 												</GridViewColumn.CellTemplate>
 											</GridViewColumn>
-											<GridViewColumn Width="Auto">
+											<GridViewColumn Width="{Binding IsRefreshed}">
 												<GridViewColumnHeader>
 													<TextBlock Text="HP"/>
 												</GridViewColumnHeader>
@@ -210,7 +242,7 @@
 													</DataTemplate>
 												</GridViewColumn.CellTemplate>
 											</GridViewColumn>
-											<GridViewColumn Width="Auto">
+											<GridViewColumn Width="{Binding IsRefreshed}">
 												<GridViewColumnHeader>
 													<TextBlock Text="상태"/>
 												</GridViewColumnHeader>

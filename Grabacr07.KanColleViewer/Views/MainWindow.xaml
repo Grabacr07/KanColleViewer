@@ -75,7 +75,10 @@
 							HorizontalAlignment="Right"
 							VerticalAlignment="Top"
 							WindowChrome.IsHitTestVisibleInChrome="True">
-					<controls:PreviewBattlePopup/>
+					<!--IsEnabled Vs Visibility-->
+					<controls:PreviewBattlePopup ToolTip="전투결과를 미리 볼 수 있습니다."
+												 IsEnabled="True"
+												 Visibility="Visible"/>
 					<controls:ZoomFactorSelector ZoomFactor="{Binding Settings.BrowserZoomFactor, Mode=OneWay}"
 												 ToolTip="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.ZoomFactorSelector_Tooltip}"
 												 Margin="4,0" />
