@@ -140,78 +140,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-		#region ResultReport 変更通知プロパティ
-
-		private List<PreviewBattleResults> _ResultReport;
-
-		public List<PreviewBattleResults> ResultReport
-		{
-			get { return this._ResultReport; }
-			set
-			{
-				if (this._ResultReport != value)
-				{
-					this._ResultReport = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region IsCombined 変更通知プロパティ
-
-		private double _IsCombined;
-
-		public double IsCombined
-		{
-			get { return this._IsCombined; }
-			set
-			{
-				if (this._IsCombined != value)
-				{
-					this._IsCombined = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region IsRefreshed 変更通知プロパティ
-
-		private double _IsRefreshed;
-
-		public double IsRefreshed
-		{
-			get { return this._IsRefreshed; }
-			set
-			{
-				if (this._IsRefreshed != value)
-				{
-					this._IsRefreshed = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-
-		private void Tester()
-		{
-			KanColleClient.Current.PreviewBattle.PreviewCriticalCondition += () =>
-			{
-				if (KanColleClient.Current.Homeport.Organization.Combined) this.IsCombined = double.NaN;
-				else this.IsCombined = 0.0;
-
-				//항목이 사라지는것에 대한 임시조치
-				this.IsRefreshed = 0.0;
-				this.IsRefreshed = double.NaN;
-
-				this.ResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.TotalResult());
-			};
-		}
 
 		public MainWindowViewModel()
 		{
@@ -230,7 +158,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			});
 
 			this.UpdateMode();
-			this.Tester();
+			//this.Tester();
 			_RefreshNavigator = new RelayCommand(Navigator.ReNavigate);
 		}
 

@@ -1,9 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
-VisualStudioVersion = 12.0.30501.0
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanColleViewer", "Grabacr07.KanColleViewer\KanColleViewer.csproj", "{C5F0111F-3F68-4A74-BB20-BB762564D080}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -53,6 +51,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Counter", "Plugins\Counter\Counter.csproj", "{DE2400A1-2AAE-4AB0-BCD5-A88DC78033A7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterDataViewer", "Plugins\MasterDataViewer\MasterDataViewer.csproj", "{08226BB3-A7A0-49E3-84DE-ED5B7A7D293E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattlePreview", "Plugins\BattlePreview\BattlePreview.csproj", "{AAB0175C-6DEF-47B1-904D-497730527E54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -145,6 +145,15 @@ Global
 		{08226BB3-A7A0-49E3-84DE-ED5B7A7D293E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08226BB3-A7A0-49E3-84DE-ED5B7A7D293E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{08226BB3-A7A0-49E3-84DE-ED5B7A7D293E}.Release|x86.ActiveCfg = Release|Any CPU
+		{AAB0175C-6DEF-47B1-904D-497730527E54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAB0175C-6DEF-47B1-904D-497730527E54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAB0175C-6DEF-47B1-904D-497730527E54}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AAB0175C-6DEF-47B1-904D-497730527E54}.Release (beta)|Any CPU.ActiveCfg = Release|Any CPU
+		{AAB0175C-6DEF-47B1-904D-497730527E54}.Release (beta)|Any CPU.Build.0 = Release|Any CPU
+		{AAB0175C-6DEF-47B1-904D-497730527E54}.Release (beta)|x86.ActiveCfg = Release|Any CPU
+		{AAB0175C-6DEF-47B1-904D-497730527E54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAB0175C-6DEF-47B1-904D-497730527E54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAB0175C-6DEF-47B1-904D-497730527E54}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -157,5 +166,6 @@ Global
 		{A6B0A741-5BE0-479D-B813-E65672350057} = {6FE85CE3-7479-4630-B746-EA18BCE3311D}
 		{DE2400A1-2AAE-4AB0-BCD5-A88DC78033A7} = {D844E42C-9406-43BF-9681-4F06F6CB3AD9}
 		{08226BB3-A7A0-49E3-84DE-ED5B7A7D293E} = {D844E42C-9406-43BF-9681-4F06F6CB3AD9}
+		{AAB0175C-6DEF-47B1-904D-497730527E54} = {D844E42C-9406-43BF-9681-4F06F6CB3AD9}
 	EndGlobalSection
 EndGlobal

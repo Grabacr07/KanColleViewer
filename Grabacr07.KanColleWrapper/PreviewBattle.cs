@@ -27,6 +27,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		private bool BattleEnd { get; set; }
 		/// <summary>
+		/// 연합함대 여부를 저장(수뢰전대 API때문에 넣는 임시 코드)
+		/// </summary>
+		private bool Combined { get; set; }
+		/// <summary>
 		/// 심해서함의 ID를 저장
 		/// </summary>
 		private int[] Enemy { get; set; }
@@ -99,7 +103,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		public List<PreviewBattleResults> TotalResult()
 		{
 			var ships = KanColleClient.Current.Master.Ships;
+			var Organization = KanColleClient.Current.Homeport.Organization;
+
 			this.Results.Clear();
+
 			for (int i = 0; i < 6; i++)
 			{
 				PreviewBattleResults e = new PreviewBattleResults();
@@ -118,21 +125,34 @@ namespace Grabacr07.KanColleWrapper.Models
 						}
 					}
 				}
-				if (!KanColleClient.Current.Homeport.Organization.Combined && KanColleClient.Current.Homeport.Organization.Fleets[1].Ships.Length > i)
+				if (this.Combined)
 				{
-					e.KanName = KanColleClient.Current.Homeport.Organization.Fleets[1].Ships[i].LvName;
-					e.KanHP = this.HpResults[i];
-					e.KanStatus = this.CalResults[i];
+					if (Organization.Fleets[1].Ships.Length > i)
+					{
+						e.KanName = Organization.Fleets[1].Ships[i].LvName;
+						e.KanHP = this.HpResults[i];
+						e.KanStatus = this.CalResults[i];
+					}
+					if (Organization.Fleets[2].Ships.Length > i)
+					{
+						e.SecondKanName = Organization.Fleets[2].Ships[i].LvName;
+						e.SecondKanHP = this.ComHpResults[i];
+						e.SecondKanStatus = this.ComCalResults[i];
+					}
 				}
-				else if (KanColleClient.Current.Homeport.Organization.Fleets[1].Ships.Length > i)
+				else
 				{
-					e.KanName = KanColleClient.Current.Homeport.Organization.Fleets[1].Ships[i].LvName;
-					e.KanHP = this.HpResults[i];
-					e.KanStatus = this.CalResults[i];
+					for (int j = 1; j < Organization.Fleets.Count; j++)
+					{
+						//수뢰전대 연합함대가 나오면 추가수정 필요.
 
-					e.SecondKanName = KanColleClient.Current.Homeport.Organization.Fleets[2].Ships[i].LvName;
-					e.SecondKanHP = this.ComHpResults[i];
-					e.SecondKanStatus = this.ComCalResults[i];
+						if (Organization.Fleets[j].State == FleetState.Sortie && Organization.Fleets[j].Ships.Length > i)
+						{
+							e.KanName = Organization.Fleets[j].Ships[i].LvName;
+							e.KanHP = this.HpResults[i];
+							e.KanStatus = this.CalResults[i];
+						}
+					}
 				}
 				this.Results.Add(e);
 			}
@@ -182,6 +202,8 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <param name="battle"></param>
 		private void AirBattle(kcsapi_battle battle)
 		{
+			this.Combined = true;
+
 			this.IsCritical = false;
 			List<listup> lists = new List<listup>();
 			List<int> CurrentHPList = new List<int>();
@@ -334,6 +356,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <param name="IsWater">수뢰전대인지 채크합니다</param>
 		private void Battle(bool IsCombined, bool IsWater, kcsapi_battle battle)
 		{
+			this.Combined = IsCombined;
 			this.IsCritical = false;
 			List<int> CurrentHPList = new List<int>();
 			List<listup> lists = new List<listup>();
@@ -494,7 +517,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		private void MidBattle(bool IsCombined, kcsapi_midnight_battle battle)
 		{
 			if (!IsCombined) this.IsCritical = false;
-
+			this.Combined = IsCombined;
 			List<listup> lists = new List<listup>();
 			List<int> HPList = new List<int>();
 			List<int> MHPList = new List<int>();
@@ -668,7 +691,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					Num = listNum[0],
 					Damage = damNum[0]
 				};
-				//혹시 모르는 부분을 대비해서 별도 추가. 한 공격자의 타겟이 여러개인 부분을 상정. 사례가 없어서 어림짐작 코드에 불과함.
+				//혹시 모르는 부분을 대비해서 별도 추가. 한 공격자의 타겟이 여러개인 부분을 상정. 일반적으로 타겟은 일정하기때문에 동일타겟이 연속으로 데미지를 입는다.
 				if (listNum.Length > 1 && damNum.Length > 1 && listNum.Length == damNum.Length)
 				{
 					for (int j = 0; j < listNum.Length; j++)
