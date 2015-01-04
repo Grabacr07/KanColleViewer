@@ -272,7 +272,7 @@ namespace Grabacr07.KanColleWrapper
 			}
 			return null;
 		}
-		public string GetQuestTranslation(string JPString, TranslationType Type, Object RawData, int ID)
+		public string GetTranslation(string JPString, TranslationType Type, Object RawData, int ID)
 		{
 			if (!EnableTranslations)
 				return JPString;
@@ -284,7 +284,8 @@ namespace Grabacr07.KanColleWrapper
 				if (TranslationList == null)
 				{
 					AddTranslation(RawData, Type);
-					return "[" + ID.ToString() + "] " + JPString;
+					if (ID < 0) return "[" + ID.ToString() + "] " + JPString;
+					else return JPString;
 				}
 
 				string JPChildElement = "JP-Name";
@@ -297,23 +298,34 @@ namespace Grabacr07.KanColleWrapper
 					TRChildElement = "TR-Detail";
 				}
 
-				IEnumerable<XElement> FoundTranslation = TranslationList.Where(b => b.Element(IDElement).Value.Equals(ID.ToString()));
-				IEnumerable<XElement> OldFoundTranslation = TranslationList.Where(b => b.Element(JPChildElement).Value.Equals(JPString));
-
-				foreach (XElement el in FoundTranslation)
+				IEnumerable<XElement> OldFoundTranslation = TranslationList.Where(b => b.Element(JPChildElement).Value.Equals(JPString));//string 비교검색
+				if(ID<0)//일반적 번역
 				{
+					foreach (XElement el in OldFoundTranslation)
+					{
+						return el.Element(TRChildElement).Value;
+					}
+				}
+				else//퀘스트,원정 번역
+				{
+					IEnumerable<XElement> FoundTranslation = TranslationList.Where(b => b.Element(IDElement).Value.Equals(ID.ToString()));//퀘스트 ID검색
+
+					foreach (XElement el in FoundTranslation)
+					{
 #if DEBUG
 					if (ID >= 0 && el.Element("ID") != null && Convert.ToInt32(el.Element("ID").Value) == ID)
 						Debug.WriteLine(string.Format("Translation: {0,-20} {1,-20} {2}", JPString, el.Element(TRChildElement).Value, ID));
 #endif
-					if (ID >= 0 && el.Element("ID") != null && Convert.ToInt32(el.Element("ID").Value) == ID)
-						return el.Element(TRChildElement).Value;
+						if (ID >= 0 && el.Element("ID") != null && Convert.ToInt32(el.Element("ID").Value) == ID)
+							return el.Element(TRChildElement).Value;
 
-				}
-				foreach (XElement el in OldFoundTranslation)
-				{
+					}
+					foreach (XElement el in OldFoundTranslation)
+					{
 						return el.Element(TRChildElement).Value;
+					}
 				}
+
 #if DEBUG
 				Debug.WriteLine(string.Format("Can't find Translation: {0,-20} {1}", JPString, ID));
 #endif
@@ -321,57 +333,58 @@ namespace Grabacr07.KanColleWrapper
 			catch { }
 
 			AddTranslation(RawData, Type);
-
-			return "["+ID.ToString()+"] "+ JPString;
+			if (ID < 0) return JPString;
+			else return "["+ID.ToString()+"] "+ JPString;
 		}
-		public string GetTranslation(string JPString, TranslationType Type, Object RawData, int ID = -1)
-		{
-			if (!EnableTranslations)
-				return JPString;
+		//Old GetTranslation
+//		public string GetTranslation(string JPString, TranslationType Type, Object RawData, int ID)
+//		{
+//			if (!EnableTranslations)
+//				return JPString;
 
-			try
-			{
-				IEnumerable<XElement> TranslationList = GetTranslationList(Type);
+//			try
+//			{
+//				IEnumerable<XElement> TranslationList = GetTranslationList(Type);
 
-				if (TranslationList == null)
-				{
-					AddTranslation(RawData, Type);
-					return JPString;
-				}
+//				if (TranslationList == null)
+//				{
+//					AddTranslation(RawData, Type);
+//					return JPString;
+//				}
 
-				string JPChildElement = "JP-Name";
-				string TRChildElement = "TR-Name";
+//				string JPChildElement = "JP-Name";
+//				string TRChildElement = "TR-Name";
 
-				if (Type == TranslationType.QuestDetail)
-				{
-					JPChildElement = "JP-Detail";
-					TRChildElement = "TR-Detail";
-				}
+//				if (Type == TranslationType.QuestDetail)
+//				{
+//					JPChildElement = "JP-Detail";
+//					TRChildElement = "TR-Detail";
+//				}
 
-				IEnumerable<XElement> FoundTranslation = TranslationList.Where(b => b.Element(JPChildElement).Value.Equals(JPString));
+//				IEnumerable<XElement> FoundTranslation = TranslationList.Where(b => b.Element(JPChildElement).Value.Equals(JPString));
 
-				foreach (XElement el in FoundTranslation)
-				{
-#if DEBUG
-					if (ID >= 0 && el.Element("ID") != null && Convert.ToInt32(el.Element("ID").Value) == ID)
-						Debug.WriteLine(string.Format("Translation: {0,-20} {1,-20} {2}", JPString, el.Element(TRChildElement).Value, ID));
-#endif
-					if (ID >= 0 && el.Element("ID") != null && Convert.ToInt32(el.Element("ID").Value) == ID)
-						return el.Element(TRChildElement).Value;
-					else if (ID < 0)
-						return el.Element(TRChildElement).Value;
+//				foreach (XElement el in FoundTranslation)
+//				{
+//#if DEBUG
+//					if (ID >= 0 && el.Element("ID") != null && Convert.ToInt32(el.Element("ID").Value) == ID)
+//						Debug.WriteLine(string.Format("Translation: {0,-20} {1,-20} {2}", JPString, el.Element(TRChildElement).Value, ID));
+//#endif
+//					if (ID >= 0 && el.Element("ID") != null && Convert.ToInt32(el.Element("ID").Value) == ID)
+//						return el.Element(TRChildElement).Value;
+//					else if (ID < 0)
+//						return el.Element(TRChildElement).Value;
 
-				}
-#if DEBUG
-				Debug.WriteLine(string.Format("Can't find Translation: {0,-20} {1}", JPString, ID));
-#endif
-			}
-			catch { }
+//				}
+//#if DEBUG
+//				Debug.WriteLine(string.Format("Can't find Translation: {0,-20} {1}", JPString, ID));
+//#endif
+//			}
+//			catch { }
 
-			AddTranslation(RawData, Type);
+//			AddTranslation(RawData, Type);
 
-			return JPString;
-		}
+//			return JPString;
+//		}
 
 		public void AddTranslation(Object RawData, TranslationType Type)
 		{
