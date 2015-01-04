@@ -192,12 +192,12 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		public bool EnableLogging
 		{
-			get { return Settings.Current.KanColleClientSettings.EnableLogging; }
+			get { return Settings.Current.EnableLogging; }
 			set
 			{
-				if (Settings.Current.KanColleClientSettings.EnableLogging != value)
+				if (Settings.Current.EnableLogging != value)
 				{
-					Settings.Current.KanColleClientSettings.EnableLogging = value;
+					Settings.Current.EnableLogging = value;
 					KanColleClient.Current.Logger.EnableLogging = value;
 					this.RaisePropertyChanged();
 				}
@@ -259,6 +259,24 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region EnableBattlePreview 変更通知プロパティ
+
+		public bool EnableBattlePreview
+		{
+			get { return Settings.Current.EnableBattlePreview; }
+			set
+			{
+				if (Settings.Current.EnableBattlePreview != value)
+				{
+					Settings.Current.EnableBattlePreview = value;
+					KanColleClient.Current.PreviewBattle.EnableBattlePreview = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		#region EnableCriticalAccent 変更通知プロパティ
 
 		public bool EnableCriticalAccent
@@ -294,7 +312,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		}
 
 		#endregion
-		
+
 		#region EquipmentVersion 変更通知プロパティ
 
 		public string EquipmentVersion

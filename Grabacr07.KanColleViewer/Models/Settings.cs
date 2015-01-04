@@ -17,7 +17,7 @@ namespace Grabacr07.KanColleViewer.Models
 			"grabacr.net",
 			"KanColleViewer",
 			"Settings.xml");
-		private static readonly string CurrentSettingsVersion = "1.3";
+		private static readonly string CurrentSettingsVersion = "1.4";
 		public static Settings Current { get; set; }
 
 		public static void Load()
@@ -58,6 +58,7 @@ namespace Grabacr07.KanColleViewer.Models
 				CustomSoundVolume = 99,
 				EnableResizing = true,
 				EnableEventMapInfo = true,
+				EnableBattlePreview=true,
 				KanColleClientSettings = new KanColleClientSettings(),
 			};
 		}
@@ -81,6 +82,7 @@ namespace Grabacr07.KanColleViewer.Models
 			}
 		}
 		#endregion
+
 		#region ScreenshotFolder 変更通知プロパティ
 
 		private string _ScreenshotFolder;
@@ -560,6 +562,25 @@ namespace Grabacr07.KanColleViewer.Models
 				if (this._EnableCriticalPopup != value)
 				{
 					this._EnableCriticalPopup = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region EnableBattlePreview 変更通知プロパティ
+
+		private bool _EnableBattlePreview;
+
+		public bool EnableBattlePreview
+		{
+			get { return this._EnableBattlePreview; }
+			set
+			{
+				if (this._EnableBattlePreview != value)
+				{
+					this._EnableBattlePreview = value;
 					this.RaisePropertyChanged();
 				}
 			}

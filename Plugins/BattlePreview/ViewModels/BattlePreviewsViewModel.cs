@@ -1,6 +1,7 @@
 ﻿using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Livet;
+using System;
 using System.Collections.Generic;
 
 namespace Grabacr07.KanColleViewer.Plugins.ViewModels
@@ -70,18 +71,32 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 		}
 		private void UpdateFleetStatus()
 		{
-			KanColleClient.Current.PreviewBattle.PreviewCriticalCondition += () =>
+			try
 			{
-				this.ResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.TotalResult());
+				if (KanColleClient.Current.PreviewBattle.EnableBattlePreview)
+				{
+					KanColleClient.Current.PreviewBattle.PreviewCriticalCondition += () =>
+					{
+						this.ResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.TotalResult());
 
-				//연합함대가 편성되었을때는 연합함대 항목을 확장시켜준다. 임시코드
-				if (KanColleClient.Current.Homeport.Organization.Combined) this.IsCombined = double.NaN;
-				else this.IsCombined = 0.0;
+						//연합함대가 편성되었을때는 연합함대 항목을 확장시켜준다. 임시코드
+						if (KanColleClient.Current.Homeport.Organization.Combined) 
+						{
+							this.IsCombined = 0.0;
+							this.IsCombined = double.NaN;
+						}
+						else this.IsCombined = 0.0;
 
-				//항목이 사라지는것에 대한 임시조치
-				this.IsRefreshed = 0.0;
-				this.IsRefreshed = double.NaN;
-			};
+						//항목이 사라지는것에 대한 임시조치
+						this.IsRefreshed = 0.0;
+						this.IsRefreshed = double.NaN;
+					};
+				}
+			}
+			catch(Exception e)
+			{
+				System.Diagnostics.Debug.WriteLine(e);
+			}
 		}
 
 	}

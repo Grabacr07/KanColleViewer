@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 어셈블리의 일반 정보는 다음 특성 집합을 통해 제어됩니다. 
 // 어셈블리와 관련된 정보를 수정하려면
 // 이 특성 값을 변경하십시오.
-[assembly: AssemblyTitle("전투예보")]
+[assembly: AssemblyTitle("제독업무도 바빠! 전투예보 출력 플러그인")]
 [assembly: AssemblyDescription("전투계산결과를 출력하는 플러그인입니다. 현 버전은 한글버전에서만 작동합니다.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("KancolleViewerKr.tk")]
-[assembly: AssemblyProduct("전투예보")]
-[assembly: AssemblyCopyright("Copyright ©  2015  FreyYa")]
+[assembly: AssemblyProduct("KanColleViewer")]
+[assembly: AssemblyCopyright("Copyright © 2015 FreyYa")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

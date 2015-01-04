@@ -69,7 +69,7 @@
 
 				<Run Text="Source code:" />
 				<metro2:HyperlinkEx Uri="https://github.com/Grabacr07/KanColleViewer">
-					<Run Text="https://github.com/Grabacr07/KanColleViewer" />
+					<Run Text="GitHub/Grabacr07/KanColleViewer" />
 				</metro2:HyperlinkEx>
 
 				<LineBreak />
@@ -93,7 +93,7 @@
 				<metro2:HyperlinkEx Uri="https://twitter.com/southrop113">
 					<Run Text="@southrop113" />
 				</metro2:HyperlinkEx>
-                <LineBreak />
+				<LineBreak />
 
 						<Run Text="Localization (Korean):" />
 						<metro2:HyperlinkEx Uri="https://twitter.com/FreyYa312">
@@ -111,7 +111,7 @@
 			<metro:BindableTextBlock TextSource="{Binding Libraries}"
 									 TextWrapping="Wrap"
 									 FontFamily="Segoe UI"
-									 FontSize="11">
+									 FontSize="11" Margin="0,0,0,12">
 				<metro:BindableTextBlock.TextTemplates>
 					<DataTemplate DataType="{x:Type viewModels:HyperlinkViewModel}">
 						<metro:InlineHolder>
@@ -134,8 +134,8 @@
 				   Grid.Column="0"
 				   FontFamily="Segoe UI"
 				   VerticalAlignment="Bottom"
-				   Margin="0,0,0,16"
 				   TextWrapping="Wrap">
+			<LineBreak />
 			<Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=Copyright, Mode=OneWay}" />
 			<LineBreak />
 			<Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=Product, Mode=OneWay}" />

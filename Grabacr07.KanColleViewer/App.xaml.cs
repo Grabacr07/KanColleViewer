@@ -47,6 +47,7 @@ namespace Grabacr07.KanColleViewer
 			KanColleHost.Current.EnableResizing = Settings.Current.EnableResizing;
 			KanColleClient.Current.Logger.EnableLogging = Settings.Current.EnableLogging;
 			KanColleClient.Current.EventMapHPChecker.EnableEventMapInfo = Settings.Current.EnableEventMapInfo;
+			KanColleClient.Current.PreviewBattle.EnableBattlePreview = Settings.Current.EnableBattlePreview;
 			// Initialize translations
 			KanColleClient.Current.Translations.EnableTranslations = Settings.Current.EnableTranslations;
 			KanColleClient.Current.Translations.EnableAddUntranslated = Settings.Current.EnableAddUntranslated;
