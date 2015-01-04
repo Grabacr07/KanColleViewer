@@ -38,7 +38,9 @@
 						</Style>
 						<Style TargetType="{x:Type GridViewColumnHeader}">
 							<Setter Property="OverridesDefaultStyle"
-									Value="True" />
+									Value="True"/>
+							<!--<Setter Property="IsEnabled"
+									Value="False"/>-->
 							<Setter Property="BorderThickness"
 									Value="0,0,0,1" />
 							<Setter Property="BorderBrush"
@@ -51,8 +53,7 @@
 										<Grid>
 											<Border BorderThickness="{TemplateBinding BorderThickness}"
 													BorderBrush="{TemplateBinding BorderBrush}"
-													Background="{TemplateBinding Background}"
-													IsEnabled="False">
+													Background="{TemplateBinding Background}">
 												<ContentPresenter Margin="{TemplateBinding Padding}" />
 											</Border>
 											<Thumb x:Name="PART_HeaderGripper"
@@ -133,7 +134,7 @@
 							</GridViewColumn>
 							<GridViewColumn Width="{Binding IsCombined,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
 								<GridViewColumnHeader>
-									<TextBlock Text="대파여부"/>
+									<TextBlock Text="상태"/>
 								</GridViewColumnHeader>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -143,7 +144,7 @@
 							</GridViewColumn>
 							<!--빈공간. 가독성을 높이기 위해 존재. 크기조절방지-->
 							<GridViewColumn Width="50">
-								<GridViewColumnHeader IsEnabled="False">
+								<GridViewColumnHeader>
 									<TextBlock Text=""/>
 								</GridViewColumnHeader>
 								<GridViewColumn.CellTemplate>
