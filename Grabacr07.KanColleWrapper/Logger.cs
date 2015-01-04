@@ -67,8 +67,8 @@ namespace Grabacr07.KanColleWrapper
 			string ShipType="";
 			if (br.api_get_ship != null)
 			{
-			ShipName = KanColleClient.Current.Translations.GetTranslation(br.api_get_ship.api_ship_name, TranslationType.Ships, br,-1);
-			ShipType = KanColleClient.Current.Translations.GetTranslation(br.api_quest_name, TranslationType.OperationMaps, br,-1);
+			ShipName = KanColleClient.Current.Translations.GetTranslation(br.api_get_ship.api_ship_name, TranslationType.Ships, br);
+			ShipType = KanColleClient.Current.Translations.GetTranslation(br.api_quest_name, TranslationType.OperationMaps, br);
 			}
 
 			Log(LogType.ShipDrop, "{0},{1},{2},{3},{4}",DateTime.Now.ToString("yyyy/M/d H:mm"),ShipName,ShipType,

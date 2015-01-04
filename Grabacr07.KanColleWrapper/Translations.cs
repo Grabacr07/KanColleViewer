@@ -272,7 +272,7 @@ namespace Grabacr07.KanColleWrapper
 			}
 			return null;
 		}
-		public string GetTranslation(string JPString, TranslationType Type, Object RawData, int ID)
+		public string GetTranslation(string JPString, TranslationType Type, Object RawData, int ID=-1)
 		{
 			if (!EnableTranslations)
 				return JPString;
@@ -336,55 +336,6 @@ namespace Grabacr07.KanColleWrapper
 			if (ID < 0) return JPString;
 			else return "["+ID.ToString()+"] "+ JPString;
 		}
-		//Old GetTranslation
-//		public string GetTranslation(string JPString, TranslationType Type, Object RawData, int ID)
-//		{
-//			if (!EnableTranslations)
-//				return JPString;
-
-//			try
-//			{
-//				IEnumerable<XElement> TranslationList = GetTranslationList(Type);
-
-//				if (TranslationList == null)
-//				{
-//					AddTranslation(RawData, Type);
-//					return JPString;
-//				}
-
-//				string JPChildElement = "JP-Name";
-//				string TRChildElement = "TR-Name";
-
-//				if (Type == TranslationType.QuestDetail)
-//				{
-//					JPChildElement = "JP-Detail";
-//					TRChildElement = "TR-Detail";
-//				}
-
-//				IEnumerable<XElement> FoundTranslation = TranslationList.Where(b => b.Element(JPChildElement).Value.Equals(JPString));
-
-//				foreach (XElement el in FoundTranslation)
-//				{
-//#if DEBUG
-//					if (ID >= 0 && el.Element("ID") != null && Convert.ToInt32(el.Element("ID").Value) == ID)
-//						Debug.WriteLine(string.Format("Translation: {0,-20} {1,-20} {2}", JPString, el.Element(TRChildElement).Value, ID));
-//#endif
-//					if (ID >= 0 && el.Element("ID") != null && Convert.ToInt32(el.Element("ID").Value) == ID)
-//						return el.Element(TRChildElement).Value;
-//					else if (ID < 0)
-//						return el.Element(TRChildElement).Value;
-
-//				}
-//#if DEBUG
-//				Debug.WriteLine(string.Format("Can't find Translation: {0,-20} {1}", JPString, ID));
-//#endif
-//			}
-//			catch { }
-
-//			AddTranslation(RawData, Type);
-
-//			return JPString;
-//		}
 
 		public void AddTranslation(Object RawData, TranslationType Type)
 		{
