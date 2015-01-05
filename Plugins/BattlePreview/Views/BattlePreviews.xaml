@@ -25,6 +25,7 @@
 			<StackPanel Margin="8">
 				<TextBlock Text="테스트입니다. 테스트입니다." Foreground="Pink" FontWeight="Bold"/>
 				<TextBlock Text="중요하니까 두번 말했습니다." Foreground="red" FontWeight="Bold"/>
+				<TextBlock Text="{Binding Rank, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"/>
 				<TextBlock/>
 				<!--<TextBlock Text="{Binding , Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Foreground="White" Name="Test"/>-->
 				<ListView ItemsSource="{Binding ResultReport,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"

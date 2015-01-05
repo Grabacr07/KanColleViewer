@@ -65,6 +65,26 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 
 		#endregion
 
+		#region Rank 変更通知プロパティ
+
+		private string _Rank;
+
+		public string Rank
+		{
+			get { return this._Rank; }
+			set
+			{
+				if (this._Rank != value)
+				{
+					this._Rank = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+
 		public BattlePreviewsViewModel()
 		{
 			this.UpdateFleetStatus();
@@ -78,6 +98,7 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 					KanColleClient.Current.PreviewBattle.PreviewCriticalCondition += () =>
 					{
 						this.ResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.TotalResult());
+						this.Rank = this.ResultReport[6].Rank;
 
 						//연합함대가 편성되었을때는 연합함대 항목을 확장시켜준다. 임시코드
 						if (KanColleClient.Current.Homeport.Organization.Combined) 

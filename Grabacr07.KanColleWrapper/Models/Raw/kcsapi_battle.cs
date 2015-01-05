@@ -95,6 +95,9 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public int[] api_ecl_flag;//사용 용도 불명
 		public decimal[] api_edam;
 	}
+	/// <summary>
+	/// 데미지와 타겟을 저장
+	/// </summary>
 	public class listup
 	{
 		public decimal Damage;
