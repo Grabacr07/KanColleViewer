@@ -690,7 +690,8 @@ namespace Grabacr07.KanColleWrapper.Models
 						DataLists.IsMidDamage = true;//1초과 2.5이하
 					else DataLists.IsScratch = true;//1미만
 				}
-				else if(KanDamage==0) DataLists.IsOverDamage = true;//아군피해 0인 경우
+				else if (KanDamage == 0 && EnemyDamage == 0) DataLists.IsScratch = true;
+				else if (KanDamage == 0) DataLists.IsOverDamage = true;//아군피해 0인 경우
 
 				if (DataLists.IsEnemyDamaged) if (EnemyDamage <= 0.001 && EnemyDamage>0) DataLists.IsEnemyDamaged = false;
 
