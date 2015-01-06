@@ -34,11 +34,16 @@ namespace Grabacr07.KanColleWrapper.Models
 	/// </summary>
 	public class ResultCalLists
 	{
+		public int DockId { get; set; }
 		public string RankString { get; set; }
 		/// <summary>
-		/// 심해서함의 ID를 저장. 심해서함의 이름을 출력하는데 필요
+		/// 적의 ID를 저장. 적의 이름을 출력하는데 필요
 		/// </summary>
-		public int[] Enemy { get; set; }
+		public int[] EnemyID { get; set; }
+		/// <summary>
+		/// 적의 레벨을 저장.
+		/// </summary>
+		public int[] EnemyLv { get; set; }
 		/// <summary>
 		/// 함대의 HP정보를 저장
 		/// </summary>

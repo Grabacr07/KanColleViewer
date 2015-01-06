@@ -50,6 +50,9 @@
 		"/kcsapi/api_req_combined_battle/battleresult",
 		"/kcsapi/api_req_combined_battle/battle_water",
 		"/kcsapi/api_get_member/mapinfo",
+		"/kcsapi/api_req_practice/battle",
+		"/kcsapi/api_req_practice/battle_result",
+		"/kcsapi/api_req_practice/midnight_battle",
 	};
 #>
 // 
