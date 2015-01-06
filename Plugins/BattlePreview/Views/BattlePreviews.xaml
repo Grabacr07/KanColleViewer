@@ -81,7 +81,7 @@
 						<GridView>
 							<!--크기조절에 대한 완전한 대책이 마련되기 전까지는 크기조절 가능으로 설정.-->
 							<!--1함대-->
-							<GridViewColumn Width="{Binding IsRefreshed,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+							<GridViewColumn Width="Auto">
 								<GridViewColumnHeader>
 									<TextBlock Text="칸무스 이름"/>
 								</GridViewColumnHeader>
@@ -91,7 +91,7 @@
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
-							<GridViewColumn Width="{Binding IsRefreshed,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+							<GridViewColumn Width="Auto">
 								<GridViewColumnHeader>
 									<TextBlock Text="HP"/>
 								</GridViewColumnHeader>
@@ -101,7 +101,7 @@
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
-							<GridViewColumn Width="{Binding IsRefreshed,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+							<GridViewColumn Width="Auto">
 								<GridViewColumnHeader>
 									<TextBlock Text="상태"/>
 								</GridViewColumnHeader>
@@ -112,7 +112,7 @@
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
 							<!--2함대(연합함대용)-->
-							<GridViewColumn Width="{Binding IsCombined,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+							<GridViewColumn Width="0">
 								<!--일단 지금은 숨겨놓지 않습니다. 연합함대로 테스트를 할수있을때 Hidden으로 지정할것..-->
 								<GridViewColumnHeader>
 									<TextBlock Text="2함대"/>
@@ -123,7 +123,7 @@
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
-							<GridViewColumn Width="{Binding IsCombined,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+							<GridViewColumn Width="0">
 								<GridViewColumnHeader>
 									<TextBlock Text="HP"/>
 								</GridViewColumnHeader>
@@ -133,7 +133,7 @@
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
-							<GridViewColumn Width="{Binding IsCombined,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+							<GridViewColumn Width="0">
 								<GridViewColumnHeader>
 									<TextBlock Text="상태"/>
 								</GridViewColumnHeader>
@@ -156,7 +156,7 @@
 							</GridViewColumn>
 
 							<!--적 함대 정보-->
-							<GridViewColumn Width="{Binding IsRefreshed,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+							<GridViewColumn Width="Auto">
 								<GridViewColumnHeader>
 									<TextBlock Text="적이름"/>
 								</GridViewColumnHeader>
@@ -166,7 +166,7 @@
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
-							<GridViewColumn Width="{Binding IsRefreshed,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+							<GridViewColumn Width="Auto">
 								<GridViewColumnHeader>
 									<TextBlock Text="HP"/>
 								</GridViewColumnHeader>
@@ -176,7 +176,7 @@
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
-							<GridViewColumn Width="{Binding IsRefreshed,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+							<GridViewColumn Width="Auto">
 								<GridViewColumnHeader>
 									<TextBlock Text="상태"/>
 								</GridViewColumnHeader>
