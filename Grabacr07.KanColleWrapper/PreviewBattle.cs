@@ -634,8 +634,6 @@ namespace Grabacr07.KanColleWrapper.Models
 							else if (temp <= 0.75) DataLists.CalResults.Add("소파");
 							else DataLists.CalResults.Add("");
 
-							if (NowHps[i] - CurrentHPList[i] > 0 && !DataLists.IsKanDamaged) DataLists.IsKanDamaged = true;
-
 							KanEveryCHP = KanEveryCHP + (NowHps[i]- CurrentHPList[i]);
 							KanEveryMHP = KanEveryMHP + NowHps[i];
 
@@ -692,6 +690,9 @@ namespace Grabacr07.KanColleWrapper.Models
 				}
 				else if (KanDamage == 0 && EnemyDamage == 0) DataLists.IsScratch = true;
 				else if (KanDamage == 0) DataLists.IsOverDamage = true;//아군피해 0인 경우
+
+				if (KanDamage == 0) DataLists.IsKanDamaged = false;
+				else DataLists.IsKanDamaged = true;
 
 				if (DataLists.IsEnemyDamaged) if (EnemyDamage <= 0.001 && EnemyDamage>0) DataLists.IsEnemyDamaged = false;
 
