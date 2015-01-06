@@ -23,7 +23,7 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 	}
 	public class kcsapi_midnight_battle
 	{
-		public int api_dock_id { get; set; }
+		public int api_deck_id { get; set; }
 		public api_hougeki api_hougeki;
 		public api_stage3 api_stage3;
 		public int[] api_maxhps;//it works well

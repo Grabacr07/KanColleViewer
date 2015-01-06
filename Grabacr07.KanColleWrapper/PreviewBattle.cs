@@ -518,7 +518,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				DataLists.EnemyID = battle.api_ship_ke;
 				DataLists.EnemyLv = null;
 				DataLists.EnemyLv = battle.api_ship_lv;
-				DataLists.DockId = battle.api_dock_id;
+				DataLists.DockId = battle.api_deck_id;
 			}
 
 			//포격전 리스트를 작성. 주간과 달리 1차 포격전밖에 없음.
