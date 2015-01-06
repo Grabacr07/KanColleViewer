@@ -99,7 +99,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{
 						if (ships.Any(x => x.Value.Id == temp))
 						{
-							e.EnemyName = "[Lv."+DataLists.EnemyLv[i+1]+"] "+item.Value.Name;
+							e.EnemyName = "[Lv." + DataLists.EnemyLv[i + 1] + "] " + item.Value.Name;
 							//e.EnemyId = item.Value.Id;
 							e.EnemyHP = this.DataLists.EnemyHpResults[i];
 							e.EnemyStatus = this.DataLists.EnemyCalResults[i];
@@ -123,16 +123,10 @@ namespace Grabacr07.KanColleWrapper.Models
 				}
 				else
 				{
-					try
-					{
-						e.KanName = Organization.Fleets[DataLists.DockId].Ships[i].LvName;
-						e.KanHP = this.DataLists.HpResults[i];
-						e.KanStatus = this.DataLists.CalResults[i];
-					}
-					catch (Exception ex)
-					{
-						System.Diagnostics.Debug.WriteLine(ex);
-					}
+					e.KanName = Organization.Fleets[DataLists.DockId].Ships[i].LvName;
+					e.KanHP = this.DataLists.HpResults[i];
+					e.KanStatus = this.DataLists.CalResults[i];
+
 				}
 				this.Results.Add(e);
 			}
@@ -300,7 +294,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				}//연합함대 리스트 작성 끝
 			}
 			//api_kouku끝
-			BattleCalc(lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps, false, false,false);
+			BattleCalc(lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps, false, false, false);
 
 
 			//적 HP계산을 위해 아군리스트와 적군 리스트를 병합.
@@ -329,7 +323,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			//재활용 위해 초기화.
 			CurrentHPList = new List<int>();
 
-			BattleCalc(Combinelists, CurrentHPList, CombinePlusEnemyMaxHPs, CombinePlusEnemyNowHPs, true, false,false);
+			BattleCalc(Combinelists, CurrentHPList, CombinePlusEnemyMaxHPs, CombinePlusEnemyNowHPs, true, false, false);
 			//BattleCalc(HPList, MHPList, Combinelists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined,true);
 
 			if (EnableBattlePreview) this.PreviewCriticalCondition();
@@ -462,7 +456,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				DecimalListmake(numlist, damlist, lists, false);
 			}
 			//개막전 끝
-			if (!IsCombined) BattleCalc(lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps, false, false,IsPractice);
+			if (!IsCombined) BattleCalc(lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps, false, false, IsPractice);
 
 			else if (IsCombined)//연합함대인경우 연산을 한번 더 시행
 			{
@@ -759,9 +753,6 @@ namespace Grabacr07.KanColleWrapper.Models
 					DataLists.RankString = "예측불능";
 					System.Diagnostics.Debug.WriteLine(e);
 				}
-
-
-
 			}
 			if (!IsPractice)
 			{
