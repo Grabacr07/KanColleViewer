@@ -121,12 +121,11 @@ namespace Grabacr07.KanColleWrapper.Models
 						e.SecondKanStatus = this.DataLists.ComCalResults[i];
 					}
 				}
-				else
+				else if (Organization.Fleets[DataLists.DockId].Ships.Length > i)
 				{
 					e.KanName = Organization.Fleets[DataLists.DockId].Ships[i].LvName;
 					e.KanHP = this.DataLists.HpResults[i];
 					e.KanStatus = this.DataLists.CalResults[i];
-
 				}
 				this.Results.Add(e);
 			}
