@@ -10,6 +10,7 @@ namespace Grabacr07.KanColleViewer.Plugins.Views
 		public BattlePreviews()
 		{
 			InitializeComponent();
+			
 		}
 	}
 }

@@ -3,6 +3,7 @@ using Grabacr07.KanColleWrapper.Models;
 using Livet;
 using System;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 {
@@ -99,17 +100,17 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 					{
 						this.ResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.TotalResult());
 						this.Rank = this.ResultReport[6].Rank;
-
+						
 						//연합함대가 편성되었을때는 연합함대 항목을 확장시켜준다. 임시코드
-						if (KanColleClient.Current.Homeport.Organization.Combined) 
+						if (KanColleClient.Current.Homeport.Organization.Combined)
 						{
-							this.IsCombined = 0.0;
+							this.IsCombined = (double)1;
 							this.IsCombined = double.NaN;
 						}
 						else this.IsCombined = 0.0;
 
 						//항목이 사라지는것에 대한 임시조치
-						this.IsRefreshed = 0.0;
+						this.IsRefreshed = (double)1;
 						this.IsRefreshed = double.NaN;
 					};
 				}
