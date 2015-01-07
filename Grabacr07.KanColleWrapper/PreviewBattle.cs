@@ -714,6 +714,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				{
 					if ((double)EnemyDeadCount / (double)EnemyCount >= 0.5)
 						DataLists.IsEnemyDeadOverHalf = true;
+					else DataLists.IsEnemyDeadOverHalf = false;
 				}
 				else if (EnemyCount > 1 && (double)EnemyDeadCount / (double)EnemyCount > 0.5) DataLists.IsEnemyDeadOverHalf = true;
 				else DataLists.IsEnemyDeadOverHalf = false;
