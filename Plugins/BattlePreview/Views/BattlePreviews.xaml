@@ -25,7 +25,57 @@
 			<StackPanel Margin="8">
 				<TextBlock Text="테스트입니다. 테스트입니다." Foreground="Pink" FontWeight="Bold"/>
 				<TextBlock Text="중요하니까 두번 말했습니다." Foreground="red" FontWeight="Bold"/>
-				<TextBlock Text="{Binding Rank, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"/>
+				<!--<TextBlock Text="{Binding Rank, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"/>-->
+				<Grid HorizontalAlignment="Center">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
+					</Grid.ColumnDefinitions>
+					<TextBlock Text="예상 랭크: "
+							   VerticalAlignment="Center"/>
+					<TextBlock Grid.Column="1"
+							   FontWeight="ExtraBold"
+							   Text="완전승리 S"
+							   Foreground="#FFFFE558"
+							   FontSize="20"
+							   Visibility="{Binding PerfectRank,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
+					<TextBlock Grid.Column="1"
+							   FontWeight="ExtraBold"
+							   Text="S승리"
+							   Foreground="Gold"
+							   FontSize="20"
+							   Visibility="{Binding RankS,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
+					<TextBlock Grid.Column="1"
+							   FontWeight="ExtraBold"
+							   Text="A승리"
+							   Foreground="#FFD10000"
+							   FontSize="20"
+							   Visibility="{Binding RankA,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
+					<TextBlock Grid.Column="1"
+							   FontWeight="ExtraBold"
+							   Text="B승리"
+							   Foreground="#FFD43353"
+							   FontSize="20"
+							   Visibility="{Binding RankB,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
+					<TextBlock Grid.Column="1"
+							   FontWeight="ExtraBold"
+							   Text="C패배"
+							   Foreground="#FF42428F"
+							   FontSize="20"
+							   Visibility="{Binding RankC,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
+					<TextBlock Grid.Column="1"
+							   FontWeight="ExtraBold"
+							   Text="D패배"
+							   Foreground="#FF02A43D"
+							   FontSize="20"
+							   Visibility="{Binding RankD,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
+					<TextBlock Grid.Column="1"
+							   FontWeight="ExtraBold"
+							   Text="완전승리S"
+							   Foreground="Gold"
+							   FontSize="20"
+							   Visibility="{Binding RankOut,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
+				</Grid>
 				<TextBlock/>
 				<!--<TextBlock Text="{Binding , Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Foreground="White" Name="Test"/>-->
 				<ListView ItemsSource="{Binding ResultReport,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"

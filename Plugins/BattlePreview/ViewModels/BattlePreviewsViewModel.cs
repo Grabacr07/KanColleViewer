@@ -28,24 +28,215 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 
 		#endregion
 
-		#region Rank 変更通知プロパティ
+		#region PerfectRank 変更通知プロパティ
 
-		private string _Rank;
+		private Visibility _PerfectRank;
 
-		public string Rank
+		public Visibility PerfectRank
 		{
-			get { return this._Rank; }
+			get { return this._PerfectRank; }
 			set
 			{
-				if (this._Rank != value)
+				if (this._PerfectRank != value)
 				{
-					this._Rank = value;
-					this.RaisePropertyChanged();
+					this._PerfectRank = value;
 				}
 			}
 		}
 
 		#endregion
+
+		#region RankS 変更通知プロパティ
+
+		private Visibility _RankS;
+
+		public Visibility RankS
+		{
+			get { return this._RankS; }
+			set
+			{
+				if (this._RankS != value)
+				{
+					this._RankS = value;
+				}
+			}
+		}
+
+		#endregion
+
+		#region RankA 変更通知プロパティ
+
+		private Visibility _RankA;
+
+		public Visibility RankA
+		{
+			get { return this._RankA; }
+			set
+			{
+				if (this._RankA != value)
+				{
+					this._RankA = value;
+				}
+			}
+		}
+
+		#endregion
+
+		#region RankB 変更通知プロパティ
+
+		private Visibility _RankB;
+
+		public Visibility RankB
+		{
+			get { return this._RankB; }
+			set
+			{
+				if (this._RankB != value)
+				{
+					this._RankB = value;
+				}
+			}
+		}
+
+		#endregion
+
+		#region RankC 変更通知プロパティ
+
+		private Visibility _RankC;
+
+		public Visibility RankC
+		{
+			get { return this._RankC; }
+			set
+			{
+				if (this._RankC != value)
+				{
+					this._RankC = value;
+				}
+			}
+		}
+
+		#endregion
+
+		#region RankD 変更通知プロパティ
+
+		private Visibility _RankD;
+
+		public Visibility RankD
+		{
+			get { return this._RankD; }
+			set
+			{
+				if (this._RankD != value)
+				{
+					this._RankD = value;
+				}
+			}
+		}
+
+		#endregion
+
+		#region RankOut 変更通知プロパティ
+
+		private Visibility _RankOut;
+
+		public Visibility RankOut
+		{
+			get { return this._RankOut; }
+			set
+			{
+				if (this._RankOut != value)
+				{
+					this._RankOut = value;
+				}
+			}
+		}
+
+		#endregion
+
+		private void RankIntToVisibility(int value)
+		{
+			switch (value)
+			{
+				case 0:
+					PerfectRank = Visibility.Visible;
+					RankS = Visibility.Hidden;
+					RankA = Visibility.Hidden;
+					RankB = Visibility.Hidden;
+					RankC = Visibility.Hidden;
+					RankD = Visibility.Hidden;
+					RankOut = Visibility.Hidden;
+					this.RaisePropertyChanged();
+
+					break;
+				case 1:
+					PerfectRank = Visibility.Hidden;
+					RankS = Visibility.Visible;
+					RankA = Visibility.Hidden;
+					RankB = Visibility.Hidden;
+					RankC = Visibility.Hidden;
+					RankD = Visibility.Hidden;
+					RankOut = Visibility.Hidden;
+					this.RaisePropertyChanged();
+
+					break;
+				case 2:
+					PerfectRank = Visibility.Hidden;
+					RankS = Visibility.Hidden;
+					RankA = Visibility.Visible;
+					RankB = Visibility.Hidden;
+					RankC = Visibility.Hidden;
+					RankD = Visibility.Hidden;
+					RankOut = Visibility.Hidden;
+					this.RaisePropertyChanged();
+
+					break;
+				case 3:
+					PerfectRank = Visibility.Hidden;
+					RankS = Visibility.Hidden;
+					RankA = Visibility.Hidden;
+					RankB = Visibility.Visible;
+					RankC = Visibility.Hidden;
+					RankD = Visibility.Hidden;
+					RankOut = Visibility.Hidden;
+					this.RaisePropertyChanged();
+
+					break;
+				case 4:
+					PerfectRank = Visibility.Hidden;
+					RankS = Visibility.Hidden;
+					RankA = Visibility.Hidden;
+					RankB = Visibility.Hidden;
+					RankC = Visibility.Visible;
+					RankD = Visibility.Hidden;
+					RankOut = Visibility.Hidden;
+					this.RaisePropertyChanged();
+
+					break;
+				case 5:
+					PerfectRank = Visibility.Hidden;
+					RankS = Visibility.Hidden;
+					RankA = Visibility.Hidden;
+					RankB = Visibility.Hidden;
+					RankC = Visibility.Hidden;
+					RankD = Visibility.Visible;
+					RankOut = Visibility.Hidden;
+					this.RaisePropertyChanged();
+
+					break;
+				case -1:
+					PerfectRank = Visibility.Hidden;
+					RankS = Visibility.Hidden;
+					RankA = Visibility.Hidden;
+					RankB = Visibility.Hidden;
+					RankC = Visibility.Hidden;
+					RankD = Visibility.Hidden;
+					RankOut = Visibility.Visible;
+					this.RaisePropertyChanged();
+
+					break;
+			}
+		}
 
 
 		public BattlePreviewsViewModel()
@@ -61,11 +252,11 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 					KanColleClient.Current.PreviewBattle.PreviewCriticalCondition += () =>
 					{
 						this.ResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.TotalResult());
-						this.Rank = this.ResultReport[6].Rank;
+						this.RankIntToVisibility(this.ResultReport[6].RankNum);
 					};
 				}
 			}
-			catch(Exception e)
+			catch (Exception e)
 			{
 				System.Diagnostics.Debug.WriteLine(e);
 			}

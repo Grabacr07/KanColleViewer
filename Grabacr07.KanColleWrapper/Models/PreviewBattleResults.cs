@@ -23,9 +23,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		public string EnemyStatus { get; set; }
 		public string SecondKanStatus { get; set; }
 		public string KanStatus { get; set; }
-
-
-		public string Rank { get; set; }
+		/// <summary>
+		/// Rank int
+		/// </summary>
+		public int RankNum { get; set; }
 		//테스트용도
 		//public int EnemyId { get; set; }
 	}
@@ -35,7 +36,7 @@ namespace Grabacr07.KanColleWrapper.Models
 	public class ResultCalLists
 	{
 		public int DockId { get; set; }
-		public string RankString { get; set; }
+		public int RankInt { get; set; }
 		/// <summary>
 		/// 적의 ID를 저장. 적의 이름을 출력하는데 필요
 		/// </summary>

@@ -130,7 +130,9 @@ namespace Grabacr07.KanColleWrapper.Models
 				this.Results.Add(e);
 			}
 			PreviewBattleResults f = new PreviewBattleResults();
-			f.Rank = this.DataLists.RankString;//7번째가 된다.
+
+			f.RankNum = this.DataLists.RankInt;//test
+
 			this.Results.Add(f);
 			return this.Results;
 		}
@@ -573,7 +575,6 @@ namespace Grabacr07.KanColleWrapper.Models
 				DataLists.EnemyHpResults.Clear();
 				DataLists.EnemyCalResults.Clear();
 				DataLists.IsEnemyFlagDead = false;
-				DataLists.RankString = string.Empty;
 				if (!IsMidnight)
 				{
 					DataLists.EnemyDayBattleDamage = 0;
@@ -723,34 +724,11 @@ namespace Grabacr07.KanColleWrapper.Models
 				//랭크 연산 적용
 				try
 				{
-					switch (this.RankCalc())
-					{
-						case 0:
-							DataLists.RankString = "완전승리";
-							break;
-						case 1:
-							DataLists.RankString = "S승리";
-							break;
-						case 2:
-							DataLists.RankString = "A승리";
-							break;
-						case 3:
-							DataLists.RankString = "B승리";
-							break;
-						case 4:
-							DataLists.RankString = "C패배";
-							break;
-						case 5:
-							DataLists.RankString = "D패배";
-							break;
-						case -1:
-							DataLists.RankString = "예측불능";
-							break;
-					}
+					DataLists.RankInt= this.RankCalc();
 				}
 				catch (Exception e)
 				{
-					DataLists.RankString = "예측불능";
+					DataLists.RankInt = -1;
 					System.Diagnostics.Debug.WriteLine(e);
 				}
 			}
