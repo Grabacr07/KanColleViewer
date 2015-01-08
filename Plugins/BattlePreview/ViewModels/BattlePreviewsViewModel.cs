@@ -40,6 +40,7 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 				if (this._PerfectRank != value)
 				{
 					this._PerfectRank = value;
+					this.RaisePropertyChanged();
 				}
 			}
 		}
@@ -58,6 +59,7 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 				if (this._RankS != value)
 				{
 					this._RankS = value;
+					this.RaisePropertyChanged();
 				}
 			}
 		}
@@ -76,6 +78,7 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 				if (this._RankA != value)
 				{
 					this._RankA = value;
+					this.RaisePropertyChanged();
 				}
 			}
 		}
@@ -94,6 +97,7 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 				if (this._RankB != value)
 				{
 					this._RankB = value;
+					this.RaisePropertyChanged();
 				}
 			}
 		}
@@ -112,6 +116,7 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 				if (this._RankC != value)
 				{
 					this._RankC = value;
+					this.RaisePropertyChanged();
 				}
 			}
 		}
@@ -130,6 +135,7 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 				if (this._RankD != value)
 				{
 					this._RankD = value;
+					this.RaisePropertyChanged();
 				}
 			}
 		}
@@ -148,6 +154,7 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 				if (this._RankOut != value)
 				{
 					this._RankOut = value;
+					this.RaisePropertyChanged();
 				}
 			}
 		}
@@ -166,7 +173,6 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 					RankC = Visibility.Hidden;
 					RankD = Visibility.Hidden;
 					RankOut = Visibility.Hidden;
-					this.RaisePropertyChanged();
 
 					break;
 				case 1:
@@ -177,7 +183,6 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 					RankC = Visibility.Hidden;
 					RankD = Visibility.Hidden;
 					RankOut = Visibility.Hidden;
-					this.RaisePropertyChanged();
 
 					break;
 				case 2:
@@ -188,7 +193,6 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 					RankC = Visibility.Hidden;
 					RankD = Visibility.Hidden;
 					RankOut = Visibility.Hidden;
-					this.RaisePropertyChanged();
 
 					break;
 				case 3:
@@ -199,7 +203,6 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 					RankC = Visibility.Hidden;
 					RankD = Visibility.Hidden;
 					RankOut = Visibility.Hidden;
-					this.RaisePropertyChanged();
 
 					break;
 				case 4:
@@ -210,7 +213,6 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 					RankC = Visibility.Visible;
 					RankD = Visibility.Hidden;
 					RankOut = Visibility.Hidden;
-					this.RaisePropertyChanged();
 
 					break;
 				case 5:
@@ -221,7 +223,6 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 					RankC = Visibility.Hidden;
 					RankD = Visibility.Visible;
 					RankOut = Visibility.Hidden;
-					this.RaisePropertyChanged();
 
 					break;
 				case -1:
@@ -232,7 +233,6 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 					RankC = Visibility.Hidden;
 					RankD = Visibility.Hidden;
 					RankOut = Visibility.Visible;
-					this.RaisePropertyChanged();
 
 					break;
 			}
@@ -241,6 +241,13 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 
 		public BattlePreviewsViewModel()
 		{
+			PerfectRank = Visibility.Hidden;
+			RankS = Visibility.Hidden;
+			RankA = Visibility.Hidden;
+			RankB = Visibility.Hidden;
+			RankC = Visibility.Hidden;
+			RankD = Visibility.Hidden;
+			RankOut = Visibility.Hidden;
 			this.UpdateFleetStatus();
 		}
 		private void UpdateFleetStatus()
@@ -252,6 +259,7 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 					KanColleClient.Current.PreviewBattle.PreviewCriticalCondition += () =>
 					{
 						this.ResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.TotalResult());
+
 						this.RankIntToVisibility(this.ResultReport[6].RankNum);
 					};
 				}
