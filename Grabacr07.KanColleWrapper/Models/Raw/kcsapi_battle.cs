@@ -20,6 +20,32 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public int[] api_ship_ke;
 		//적 Lv
 		public int[] api_ship_lv;
+		//지원함대
+		public int api_support_flag;
+		public api_support_info api_support_info;
+	}
+	public class api_support_info
+	{
+		public api_support_hourai api_support_hourai;
+		public api_support_airatack api_support_airatack;
+	}
+	public class api_support_hourai
+	{
+		public int api_deck_id;
+		public int[] api_ship_id;
+		public int[] api_undressing_flag;
+		public int[] api_cl_list;
+		public decimal[] api_damage;
+
+	}
+	public class api_support_airatack
+	{
+		public int api_deck_id;
+		public int[] api_ship_id;
+		public int[] api_undressing_flag;
+		public int[] api_stage_flag;
+		public object[] api_plane_from;
+		public api_stage3 api_stage3;
 	}
 	public class kcsapi_midnight_battle
 	{

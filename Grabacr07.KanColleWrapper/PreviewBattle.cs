@@ -70,7 +70,6 @@ namespace Grabacr07.KanColleWrapper.Models
 			proxy.api_req_sortie_battleresult.TryParse().Subscribe(x => this.Result());
 			proxy.api_req_combined_battle_battleresult.TryParse().Subscribe(x => this.Result());
 			proxy.api_port.TryParse().Subscribe(x => this.Cleared(true));
-
 			//연습전. Result는 사실상 필요없음.
 			proxy.api_req_practice_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false, false, true, x.Data));
 			proxy.api_req_practice_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(false, true, true, x.Data));
@@ -193,6 +192,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				DataLists.EnemyLv = battle.api_ship_lv;
 				DataLists.DockId = battle.api_dock_id;
 			}
+			if (battle.api_support_flag != null) Support(battle.api_support_flag, battle, lists);
 
 			List<listup> Combinelists = new List<listup>();
 
@@ -299,8 +299,8 @@ namespace Grabacr07.KanColleWrapper.Models
 
 
 			//적 HP계산을 위해 아군리스트와 적군 리스트를 병합.
-			int[] CombinePlusEnemyMaxHPs = null;
-			int[] CombinePlusEnemyNowHPs = null;
+			int[] CombinePlusEnemyMaxHPs = new int[13];
+			int[] CombinePlusEnemyNowHPs = new int[13];
 			//최대 HP병합
 			for (int i = 0; i < battle.api_maxhps_combined.Length; i++)
 			{
@@ -351,7 +351,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				DataLists.EnemyLv = battle.api_ship_lv;
 				DataLists.DockId = battle.api_dock_id;
 			}
-
+			if (battle.api_support_flag != null) Support(battle.api_support_flag, battle, lists);
 			List<listup> Combinelists = new List<listup>();
 			//모든 형태의 전투에서 타게팅이 되는 함선의 번호와 데미지를 순서대로 입력한다.
 			//포격전 시작
@@ -464,8 +464,8 @@ namespace Grabacr07.KanColleWrapper.Models
 				BattleCalc(lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps, false, false, IsPractice);
 
 				//적 HP계산을 위해 아군리스트와 적군 리스트를 병합.
-				int[] CombinePlusEnemyMaxHPs = null;
-				int[] CombinePlusEnemyNowHPs = null;
+				int[] CombinePlusEnemyMaxHPs = new int[13];
+				int[] CombinePlusEnemyNowHPs = new int[13];
 				//최대 HP병합
 				for (int i = 0; i < battle.api_maxhps_combined.Length; i++)
 				{
@@ -525,8 +525,8 @@ namespace Grabacr07.KanColleWrapper.Models
 				{
 					//현재 이 부분은 API가 정확히 기억이 나지 않기때문에 일단은 이렇게 처리.
 					//적 HP계산을 위해 아군리스트와 적군 리스트를 병합.
-					int[] CombinePlusEnemyMaxHPs = null;
-					int[] CombinePlusEnemyNowHPs = null;
+					int[] CombinePlusEnemyMaxHPs = new int[13];
+					int[] CombinePlusEnemyNowHPs = new int[13];
 					//최대 HP병합
 					for (int i = 0; i < battle.api_maxhps_combined.Length; i++)
 					{
@@ -724,7 +724,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				//랭크 연산 적용
 				try
 				{
-					DataLists.RankInt= this.RankCalc();
+					DataLists.RankInt = this.RankCalc();
 				}
 				catch (Exception e)
 				{
@@ -865,6 +865,48 @@ namespace Grabacr07.KanColleWrapper.Models
 
 			}
 			else return -1;//예측불능
+		}
+		/// <summary>
+		/// 지원함대 데미지를 계산합니다.
+		/// </summary>
+		/// <param name="SupportFlag">지원함대 플래그를 입력합니다. 0:지원x 1:항공	2:포격	3:뇌격</param>
+		/// <param name="battle"></param>
+		/// <param name="lists"></param>
+		private void Support(int SupportFlag, kcsapi_battle battle, List<listup> lists)
+		{
+			if (battle.api_support_flag == 0) return;
+			if (battle.api_support_flag == 1)//항공지원
+			{
+				decimal[] Damage;
+
+				if (battle.api_support_info.api_support_airatack == null) return;
+
+				Damage = battle.api_support_info.api_support_airatack.api_stage3.api_edam;
+				int[] Numlist = new int[Damage.Length];
+
+				ChangeKoukuFlagToNumber(
+					battle.api_support_info.api_support_airatack.api_stage3.api_erai_flag,
+					battle.api_support_info.api_support_airatack.api_stage3.api_ebak_flag,
+					Numlist);
+				DecimalListmake(Numlist, Damage, lists, false);
+			}
+			else if (battle.api_support_flag == 2 || battle.api_support_flag == 3)//포격,뇌격지원. 포격:2 뇌격:3
+			{
+				decimal[] Damage;
+
+				if (battle.api_support_info.api_support_hourai == null) return;
+
+				Damage = battle.api_support_info.api_support_hourai.api_damage;
+				int[] Numlist = new int[Damage.Length];
+
+				for (int i = 0; i < Damage.Length; i++)
+				{
+					if (Damage[i] > 0) Numlist[i] = i;
+					else Numlist[i] = 0;
+				}
+
+				DecimalListmake(Numlist, Damage, lists, false);
+			}
 		}
 	}
 }
