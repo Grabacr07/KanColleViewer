@@ -192,7 +192,15 @@ namespace Grabacr07.KanColleWrapper.Models
 				DataLists.EnemyLv = battle.api_ship_lv;
 				DataLists.DockId = battle.api_dock_id;
 			}
-			if (battle.api_support_flag != null) Support(battle.api_support_flag, battle, lists);
+			try
+			{
+				if (battle.api_support_flag != 0) Support(battle.api_support_flag, battle, lists);
+			}
+			catch(Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(ex);
+			}
+			
 
 			List<listup> Combinelists = new List<listup>();
 
@@ -351,7 +359,14 @@ namespace Grabacr07.KanColleWrapper.Models
 				DataLists.EnemyLv = battle.api_ship_lv;
 				DataLists.DockId = battle.api_dock_id;
 			}
-			if (battle.api_support_flag != null) Support(battle.api_support_flag, battle, lists);
+			try
+			{
+				if (battle.api_support_flag != 0) Support(battle.api_support_flag, battle, lists);
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(ex);
+			}
 			List<listup> Combinelists = new List<listup>();
 			//모든 형태의 전투에서 타게팅이 되는 함선의 번호와 데미지를 순서대로 입력한다.
 			//포격전 시작
@@ -628,16 +643,18 @@ namespace Grabacr07.KanColleWrapper.Models
 					{
 						if (CurrentHPList[i] < 0) CurrentHPList[i] = 0;
 						//HP정보를 리스트에 저장
+
+						//연합함대 수정필요
 						if (i < 7)//아군정보
 						{
 							if (CurrentHPList[i] > 0) DataLists.HpResults.Add(CurrentHPList[i].ToString() + "/" + Maxhps[i].ToString());
 							else DataLists.HpResults.Add("0/" + Maxhps[i].ToString());
 
-							if (temp <= 0) DataLists.CalResults.Add("굉침");
-							else if (temp <= 0.25) DataLists.CalResults.Add("대파");
-							else if (temp <= 0.5) DataLists.CalResults.Add("중파");
-							else if (temp <= 0.75) DataLists.CalResults.Add("소파");
-							else DataLists.CalResults.Add("");
+							if (temp <= 0) DataLists.CalResults.Add(4);//굉침
+							else if (temp <= 0.25) DataLists.CalResults.Add(3);//대파
+							else if (temp <= 0.5) DataLists.CalResults.Add(2);//중파
+							else if (temp <= 0.75) DataLists.CalResults.Add(1);//소파
+							else DataLists.CalResults.Add(0);//통상
 
 							KanEveryCHP = KanEveryCHP + (NowHps[i] - CurrentHPList[i]);
 							KanEveryMHP = KanEveryMHP + NowHps[i];
@@ -650,11 +667,11 @@ namespace Grabacr07.KanColleWrapper.Models
 							if (CurrentHPList[i] > 0) DataLists.EnemyHpResults.Add(CurrentHPList[i].ToString() + "/" + Maxhps[i].ToString());
 							else DataLists.EnemyHpResults.Add("0/" + Maxhps[i].ToString());
 
-							if (temp <= 0) DataLists.EnemyCalResults.Add("굉침");
-							else if (temp <= 0.25) DataLists.EnemyCalResults.Add("대파");
-							else if (temp <= 0.5) DataLists.EnemyCalResults.Add("중파");
-							else if (temp <= 0.75) DataLists.EnemyCalResults.Add("소파");
-							else DataLists.EnemyCalResults.Add("");
+							if (temp <= 0) DataLists.EnemyCalResults.Add(4);//굉침
+							else if (temp <= 0.25) DataLists.EnemyCalResults.Add(3);//대파
+							else if (temp <= 0.5) DataLists.EnemyCalResults.Add(2);//중파
+							else if (temp <= 0.75) DataLists.EnemyCalResults.Add(1);//소파
+							else DataLists.EnemyCalResults.Add(0);//통상
 
 							EnemyEveryCHP = EnemyEveryCHP + (NowHps[i] - CurrentHPList[i]);
 							EnemyEveryMHP = EnemyEveryMHP + NowHps[i];

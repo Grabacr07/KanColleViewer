@@ -20,9 +20,9 @@ namespace Grabacr07.KanColleWrapper.Models
 		public string SecondKanHP { get; set; }
 		public string KanHP { get; set; }
 		//상태
-		public string EnemyStatus { get; set; }
-		public string SecondKanStatus { get; set; }
-		public string KanStatus { get; set; }
+		public int EnemyStatus { get; set; }
+		public int SecondKanStatus { get; set; }
+		public int KanStatus { get; set; }
 		/// <summary>
 		/// Rank int
 		/// </summary>
@@ -60,15 +60,15 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 함대의 HP계산결과를 저장
 		/// </summary>
-		public List<string> CalResults = new List<string>();
+		public List<int> CalResults = new List<int>();
 		/// <summary>
 		/// 연합함대의 HP계산결과를 저장
 		/// </summary>
-		public List<string> ComCalResults = new List<string>();
+		public List<int> ComCalResults = new List<int>();
 		/// <summary>
 		/// 적 함대의 HP계산결과를 저장
 		/// </summary>
-		public List<string> EnemyCalResults = new List<string>();
+		public List<int> EnemyCalResults = new List<int>();
 		/// <summary>
 		/// 주간전의 아군피해를 저장
 		/// </summary>

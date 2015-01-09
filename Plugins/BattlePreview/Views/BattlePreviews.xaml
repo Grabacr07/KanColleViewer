@@ -13,19 +13,25 @@
 			 d:DataContext="{d:DesignInstance viewModels:BattlePreviewsViewModel}">
 
 	<Grid>
-
-		<!--<Rectangle Stroke="{DynamicResource AccentBrushKey}"
-							   StrokeThickness="3">
-			<Rectangle.Effect>
-				<BlurEffect Radius="8" />
-			</Rectangle.Effect>
-		</Rectangle>-->
 		<Border Width="Auto"
 				Height="Auto">
 			<StackPanel Margin="8">
-				<TextBlock Text="테스트입니다. 테스트입니다." Foreground="Pink" FontWeight="Bold"/>
-				<TextBlock Text="중요하니까 두번 말했습니다." Foreground="red" FontWeight="Bold"/>
-				<!--<TextBlock Text="{Binding Rank, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"/>-->
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="Auto"/>
+					</Grid.ColumnDefinitions>
+					<StackPanel>
+						<TextBlock Text="테스트입니다. 테스트입니다." Foreground="Pink" FontWeight="Bold"/>
+						<TextBlock Text="중요하니까 두번 말했습니다." Foreground="red" FontWeight="Bold"/>
+					</StackPanel>
+					<Grid Grid.Column="1">
+						<metro2:CallMethodButton Content="크기 재설정"
+												 Margin="6,0" 
+												 Click="CallMethodButton_Click"
+												 ToolTip="내용에 맞춰서 표의 크기를 재설정합니다" />
+					</Grid>
+				</Grid>
 				<Grid HorizontalAlignment="Center"
 					  VerticalAlignment="Center">
 					<Grid.ColumnDefinitions>
@@ -33,53 +39,52 @@
 						<ColumnDefinition Width="Auto"/>
 					</Grid.ColumnDefinitions>
 					<TextBlock Text="예상 랭크: "
-							   VerticalAlignment="Center"/>
+							   VerticalAlignment="Center" Margin="0,7"/>
 					<TextBlock Grid.Column="1"
 							   FontWeight="ExtraBold"
 							   Text="완전승리 S"
 							   Foreground="#FFFFE558"
 							   FontSize="20"
-							   Visibility="{Binding PerfectRank,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+							   Visibility="{Binding PerfectRank, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 					<TextBlock Grid.Column="1"
 							   FontWeight="ExtraBold"
 							   Text="S승리"
 							   Foreground="Gold"
 							   FontSize="20"
-							   Visibility="{Binding RankS,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+							   Visibility="{Binding RankS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 					<TextBlock Grid.Column="1"
 							   FontWeight="ExtraBold"
 							   Text="A승리"
 							   Foreground="#FFD10000"
 							   FontSize="20"
-							   Visibility="{Binding RankA,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+							   Visibility="{Binding RankA, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 					<TextBlock Grid.Column="1"
 							   FontWeight="ExtraBold"
 							   Text="B승리"
 							   Foreground="#FFD43353"
 							   FontSize="20"
-							   Visibility="{Binding RankB,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+							   Visibility="{Binding RankB, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 					<TextBlock Grid.Column="1"
 							   FontWeight="ExtraBold"
 							   Text="C패배"
 							   Foreground="#FF42428F"
 							   FontSize="20"
-							   Visibility="{Binding RankC,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+							   Visibility="{Binding RankC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 					<TextBlock Grid.Column="1"
 							   FontWeight="ExtraBold"
 							   Text="D패배"
 							   Foreground="#FF02A43D"
 							   FontSize="20"
-							   Visibility="{Binding RankD,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+							   Visibility="{Binding RankD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 					<TextBlock Grid.Column="1"
 							   FontWeight="ExtraBold"
 							   Text="완전승리S"
 							   Foreground="Gold"
 							   FontSize="20"
-							   Visibility="{Binding RankOut,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+							   Visibility="{Binding RankOut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 				</Grid>
 				<TextBlock/>
-				<!--<TextBlock Text="{Binding , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="White" Name="Test"/>-->
-				<ListView ItemsSource="{Binding ResultReport,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+				<ListView ItemsSource="{Binding ResultReport, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 										  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}"
 										  ScrollViewer.VerticalScrollBarVisibility="Disabled"
 										  x:Name="PreviewListView">
@@ -91,8 +96,6 @@
 						<Style TargetType="{x:Type GridViewColumnHeader}">
 							<Setter Property="OverridesDefaultStyle"
 									Value="True"/>
-							<!--<Setter Property="IsEnabled"
-									Value="False"/>-->
 							<Setter Property="BorderThickness"
 									Value="0,0,0,1" />
 							<Setter Property="BorderBrush"
@@ -131,46 +134,104 @@
 					<ListView.View>
 						<GridView>
 							<!--크기조절에 대한 완전한 대책이 마련되기 전까지는 크기조절 가능으로 설정.-->
-							<!--1함대-->
-							<GridViewColumn Width="Auto">
+							<GridViewColumn Width="Auto" x:Name="Kanname">
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<TextBlock Margin="6,3,0,3" Text="{Binding KanName}" 
+											Foreground="{DynamicResource ActiveForegroundBrushKey}"/>
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
 								<GridViewColumnHeader>
 									<TextBlock Text="칸무스 이름"/>
 								</GridViewColumnHeader>
+							</GridViewColumn>
+							<GridViewColumn Width="Auto" x:Name="Kanhp">
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<TextBlock Margin="6,3,0,3" Text="{Binding KanName}" Foreground="White"/>
+										<TextBlock Text="{Binding KanHP}"
+											Foreground="{DynamicResource ActiveForegroundBrushKey}"
+											Margin="6,3,0,3" />
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
-							</GridViewColumn>
-							<GridViewColumn Width="Auto">
 								<GridViewColumnHeader>
 									<TextBlock Text="HP"/>
 								</GridViewColumnHeader>
+							</GridViewColumn>
+							<GridViewColumn Width="Auto" x:Name="Kanstatus">
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<TextBlock Margin="6,3,0,3" Text="{Binding KanHP}" Foreground="White"/>
+										<Border x:Name="KanBorder"
+											Margin="-2,0">
+											<TextBlock Text=""
+												x:Name="KanText"
+												Foreground="{DynamicResource ActiveForegroundBrushKey}"
+												Margin="5,3" />
+										</Border>
+										<DataTemplate.Triggers>
+											<DataTrigger Binding="{Binding KanStatus}"
+												Value="1">
+												<Setter TargetName="KanText"
+													Property="Text"
+													Value="소파" />
+												<Setter TargetName="KanBorder"
+													Property="Background"
+													Value="#FFF9CD08" />
+											</DataTrigger>
+											<DataTrigger Binding="{Binding KanStatus}"
+												Value="2">
+												<Setter TargetName="KanText"
+													Property="Text"
+													Value="중파" />
+												<Setter TargetName="KanBorder"
+													Property="Background"
+													Value="#FFE88B06" />
+											</DataTrigger>
+											<DataTrigger Binding="{Binding KanStatus}"
+												Value="3">
+												<Setter TargetName="KanText"
+													Property="Text"
+													Value="대파" />
+												<Setter TargetName="KanBorder"
+													Property="Background"
+													Value="#FFD60000" />
+											</DataTrigger>
+											<DataTrigger Binding="{Binding KanStatus}"
+												Value="4">
+												<Setter TargetName="KanText"
+													Property="Text"
+													Value="굉침" />
+												<Setter TargetName="KanBorder"
+													Property="Background"
+													Value="#FF4C44FF" />
+											</DataTrigger>
+											<DataTrigger Binding="{Binding KanStatus}"
+												Value="0">
+												<Setter TargetName="KanText"
+													Property="Text"
+													Value="" />
+												<Setter TargetName="KanBorder"
+													Property="Background"
+													Value="#004C44FF" />
+											</DataTrigger>
+										</DataTemplate.Triggers>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
-							</GridViewColumn>
-							<GridViewColumn Width="Auto">
 								<GridViewColumnHeader>
 									<TextBlock Text="상태"/>
 								</GridViewColumnHeader>
-								<GridViewColumn.CellTemplate>
-									<DataTemplate>
-										<TextBlock Margin="6,3,0,3" Text="{Binding KanStatus}" Foreground="White"/>
-									</DataTemplate>
-								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
 							<!--2함대(연합함대용)-->
-							<GridViewColumn Width="0">
-								<!--일단 지금은 숨겨놓지 않습니다. 연합함대로 테스트를 할수있을때 Hidden으로 지정할것..-->
+							<!--<GridViewColumn Width="0">
+								-->
+							<!--일단 지금은 숨겨놓지 않습니다. 연합함대로 테스트를 할수있을때 Hidden으로 지정할것..-->
+							<!--
 								<GridViewColumnHeader>
 									<TextBlock Text="2함대"/>
 								</GridViewColumnHeader>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<TextBlock Margin="6,3,0,3" Text="{Binding SecondKanName}" Foreground="White"/>
+										<TextBlock Margin="6,3,0,3" Text="{Binding SecondKanName}" 
+												   Foreground="{DynamicResource ActiveForegroundBrushKey}"/>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
@@ -180,7 +241,8 @@
 								</GridViewColumnHeader>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<TextBlock Margin="6,3,0,3" Text="{Binding SecondKanHP}" Foreground="White"/>
+										<TextBlock Margin="6,3,0,3" Text="{Binding SecondKanHP}"
+												   Foreground="{DynamicResource ActiveForegroundBrushKey}"/>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
@@ -190,52 +252,108 @@
 								</GridViewColumnHeader>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<TextBlock Margin="6,3,0,3" Text="{Binding SecondKanStatus}" Foreground="White"/>
+										<TextBlock Margin="6,3,0,3" Text="{Binding SecondKanStatus}" 
+												   Foreground="{DynamicResource ActiveForegroundBrushKey}"/>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
-							</GridViewColumn>
-							<!--빈공간. 가독성을 높이기 위해 존재. 크기조절방지-->
-							<GridViewColumn Width="50">
+							</GridViewColumn>-->
+							<!--빈공간. 가독성을 높이기 위해 존재-->
+							<!--<GridViewColumn Width="50">
 								<GridViewColumnHeader>
 									<TextBlock Text=""/>
 								</GridViewColumnHeader>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<TextBlock Margin="6,3,0,3" Text="" Foreground="White"/>
+										<TextBlock Margin="6,3,0,3" Text=""  
+												   Foreground="{DynamicResource ActiveForegroundBrushKey}"/>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
-							</GridViewColumn>
+							</GridViewColumn>-->
 
-							<!--적 함대 정보-->
-							<GridViewColumn Width="Auto">
+							<GridViewColumn Width="Auto" x:Name="enemyname">
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<TextBlock Margin="6,3,0,3" Text="{Binding EnemyName}" 
+											Foreground="{DynamicResource ActiveForegroundBrushKey}"/>
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
 								<GridViewColumnHeader>
 									<TextBlock Text="적이름"/>
 								</GridViewColumnHeader>
+							</GridViewColumn>
+							<GridViewColumn Width="Auto" x:Name="enemyhp">
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<TextBlock Margin="6,3,0,3" Text="{Binding EnemyName}"  Foreground="White"/>
+										<TextBlock Margin="6,3,0,3" Text="{Binding EnemyHP}" 
+											Foreground="{DynamicResource ActiveForegroundBrushKey}"/>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
-							</GridViewColumn>
-							<GridViewColumn Width="Auto">
 								<GridViewColumnHeader>
 									<TextBlock Text="HP"/>
 								</GridViewColumnHeader>
+							</GridViewColumn>
+							<GridViewColumn Width="Auto" x:Name="enemystatus">
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<TextBlock Margin="6,3,0,3" Text="{Binding EnemyHP}" Foreground="White"/>
+										<Border x:Name="EnemyBorder"
+											Margin="-2,0">
+											<TextBlock Text=""
+												x:Name="EnemyText"
+												Foreground="{DynamicResource ActiveForegroundBrushKey}"
+												Margin="5,3" />
+										</Border>
+										<DataTemplate.Triggers>
+											<DataTrigger Binding="{Binding EnemyStatus}"
+												Value="1">
+												<Setter TargetName="EnemyText"
+													Property="Text"
+													Value="소파" />
+												<Setter TargetName="EnemyBorder"
+													Property="Background"
+													Value="#FFF9CD08" />
+											</DataTrigger>
+											<DataTrigger Binding="{Binding EnemyStatus}"
+												Value="2">
+												<Setter TargetName="EnemyText"
+													Property="Text"
+													Value="중파" />
+												<Setter TargetName="EnemyBorder"
+													Property="Background"
+													Value="#FFE88B06" />
+											</DataTrigger>
+											<DataTrigger Binding="{Binding EnemyStatus}"
+												Value="3">
+												<Setter TargetName="EnemyText"
+													Property="Text"
+													Value="대파" />
+												<Setter TargetName="EnemyBorder"
+													Property="Background"
+													Value="#FFD60000" />
+											</DataTrigger>
+											<DataTrigger Binding="{Binding EnemyStatus}"
+												Value="4">
+												<Setter TargetName="EnemyText"
+													Property="Text"
+													Value="굉침" />
+												<Setter TargetName="EnemyBorder"
+													Property="Background"
+													Value="#FF4C44FF" />
+											</DataTrigger>
+											<DataTrigger Binding="{Binding EnemyStatus}"
+												Value="0">
+												<Setter TargetName="EnemyText"
+													Property="Text"
+													Value="" />
+												<Setter TargetName="EnemyBorder"
+													Property="Background"
+													Value="#00464646" />
+											</DataTrigger>
+										</DataTemplate.Triggers>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
-							</GridViewColumn>
-							<GridViewColumn Width="Auto">
 								<GridViewColumnHeader>
 									<TextBlock Text="상태"/>
 								</GridViewColumnHeader>
-								<GridViewColumn.CellTemplate>
-									<DataTemplate>
-										<TextBlock Margin="6,3,0,3" Text="{Binding EnemyStatus}" Foreground="White"/>
-									</DataTemplate>
-								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
 						</GridView>
 					</ListView.View>

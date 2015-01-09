@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace Grabacr07.KanColleViewer.Plugins.Views
 {
@@ -10,7 +11,25 @@ namespace Grabacr07.KanColleViewer.Plugins.Views
 		public BattlePreviews()
 		{
 			InitializeComponent();
-			
+		}
+		private void ResizeGridViewColumn(GridViewColumn column)
+		{
+			if (double.IsNaN(column.Width))
+			{
+				column.Width = column.ActualWidth;
+			}
+
+			column.Width = double.NaN;
+		}
+
+		private void CallMethodButton_Click(object sender, RoutedEventArgs e)
+		{
+			ResizeGridViewColumn(this.Kanname);
+			ResizeGridViewColumn(this.Kanhp);
+			ResizeGridViewColumn(this.Kanstatus);
+			ResizeGridViewColumn(this.enemyname);
+			ResizeGridViewColumn(this.enemystatus);
+			ResizeGridViewColumn(this.enemyhp);
 		}
 	}
 }
