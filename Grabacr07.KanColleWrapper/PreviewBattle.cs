@@ -79,17 +79,39 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 전투결과를 CriticalPreviewPopup으로 보냅니다.
 		/// </summary>
 		/// <returns></returns>
-		public List<PreviewBattleResults> TotalResult()
+		public List<PreviewBattleResults> KanResult()
 		{
 			if (!EnableBattlePreview) return null;
-			var ships = KanColleClient.Current.Master.Ships;
 			var Organization = KanColleClient.Current.Homeport.Organization;
 
 			this.Results.Clear();
 
 			for (int i = 0; i < 6; i++)
 			{
-				PreviewBattleResults e = new PreviewBattleResults();
+				PreviewBattleResults Kan = new PreviewBattleResults();
+				if (Organization.Fleets[DataLists.DockId].Ships.Length > i)
+				{
+					Kan.Name = Organization.Fleets[DataLists.DockId].Ships[i].Name;
+					Kan.Lv = Organization.Fleets[DataLists.DockId].Ships[i].Level;
+					Kan.CHP = this.DataLists.HpResults[i];
+					Kan.MHP = this.DataLists.MHpResults[i]; 
+					Kan.HP = new LimitedValue(this.DataLists.HpResults[i], this.DataLists.MHpResults[i], 0);
+					Kan.Status = this.DataLists.CalResults[i];
+				}
+				if(Kan.HP.Maximum!=0 || Kan.HP.Current!=0)	this.Results.Add(Kan);
+			}
+			return this.Results;
+		}
+		public List<PreviewBattleResults> EnemyResult()
+		{
+			if (!EnableBattlePreview) return null;
+			var ships = KanColleClient.Current.Master.Ships;
+
+			this.Results.Clear();
+
+			for (int i = 0; i < 6; i++)
+			{
+				PreviewBattleResults Enemy = new PreviewBattleResults();
 				if (this.DataLists.EnemyID.Length > i + 1)
 				{
 					int temp = this.DataLists.EnemyID[i + 1];
@@ -98,44 +120,31 @@ namespace Grabacr07.KanColleWrapper.Models
 					{
 						if (ships.Any(x => x.Value.Id == temp))
 						{
-							e.EnemyName = "[Lv." + DataLists.EnemyLv[i + 1] + "] " + item.Value.Name;
+							Enemy.Name = item.Value.Name;
+							Enemy.Lv = DataLists.EnemyLv[i + 1];
 							//e.EnemyId = item.Value.Id;
-							e.EnemyHP = this.DataLists.EnemyHpResults[i];
-							e.EnemyStatus = this.DataLists.EnemyCalResults[i];
+							Enemy.CHP = this.DataLists.EnemyHpResults[i];
+							Enemy.MHP = this.DataLists.EnemyMHpResults[i];
+							Enemy.HP = new LimitedValue(this.DataLists.EnemyHpResults[i], this.DataLists.EnemyMHpResults[i], 0);
+							Enemy.Status = this.DataLists.EnemyCalResults[i];
+
+
+							if (Enemy.HP.Maximum != 0 || Enemy.HP.Current != 0) this.Results.Add(Enemy);
 						}
 					}
 				}
-				if (this.Combined)
-				{
-					if (Organization.Fleets[1].Ships.Length > i)
-					{
-						e.KanName = Organization.Fleets[1].Ships[i].LvName;
-						e.KanHP = this.DataLists.HpResults[i];
-						e.KanStatus = this.DataLists.CalResults[i];
-					}
-					if (Organization.Fleets[2].Ships.Length > i)
-					{
-						e.SecondKanName = Organization.Fleets[2].Ships[i].LvName;
-						e.SecondKanHP = this.DataLists.ComHpResults[i];
-						e.SecondKanStatus = this.DataLists.ComCalResults[i];
-					}
-				}
-				else if (Organization.Fleets[DataLists.DockId].Ships.Length > i)
-				{
-					e.KanName = Organization.Fleets[DataLists.DockId].Ships[i].LvName;
-					e.KanHP = this.DataLists.HpResults[i];
-					e.KanStatus = this.DataLists.CalResults[i];
-				}
-				this.Results.Add(e);
 			}
-			PreviewBattleResults f = new PreviewBattleResults();
-
-			f.RankNum = this.DataLists.RankInt;//test
-
-			this.Results.Add(f);
 			return this.Results;
 		}
 
+		public RankResult RankOut()
+		{
+			RankResult Rank = new RankResult();
+
+			Rank.RankNum = this.DataLists.RankInt;//test
+
+			return Rank;
+		}
 		/// <summary>
 		/// 회항하였을때 테마와 악센트를 원래대로
 		/// </summary>
@@ -647,8 +656,9 @@ namespace Grabacr07.KanColleWrapper.Models
 						//연합함대 수정필요
 						if (i < 7)//아군정보
 						{
-							if (CurrentHPList[i] > 0) DataLists.HpResults.Add(CurrentHPList[i].ToString() + "/" + Maxhps[i].ToString());
-							else DataLists.HpResults.Add("0/" + Maxhps[i].ToString());
+							DataLists.MHpResults.Add(Maxhps[i]);
+							DataLists.HpResults.Add(CurrentHPList[i]);
+							
 
 							if (temp <= 0) DataLists.CalResults.Add(4);//굉침
 							else if (temp <= 0.25) DataLists.CalResults.Add(3);//대파
@@ -664,8 +674,8 @@ namespace Grabacr07.KanColleWrapper.Models
 						}
 						else//적군정보
 						{
-							if (CurrentHPList[i] > 0) DataLists.EnemyHpResults.Add(CurrentHPList[i].ToString() + "/" + Maxhps[i].ToString());
-							else DataLists.EnemyHpResults.Add("0/" + Maxhps[i].ToString());
+							DataLists.EnemyMHpResults.Add(Maxhps[i]);
+							DataLists.EnemyHpResults.Add(CurrentHPList[i]);
 
 							if (temp <= 0) DataLists.EnemyCalResults.Add(4);//굉침
 							else if (temp <= 0.25) DataLists.EnemyCalResults.Add(3);//대파
@@ -745,7 +755,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				}
 				catch (Exception e)
 				{
-					DataLists.RankInt = -1;
+					DataLists.RankInt = -1; 
 					System.Diagnostics.Debug.WriteLine(e);
 				}
 			}

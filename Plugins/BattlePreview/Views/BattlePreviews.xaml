@@ -4,361 +4,336 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:wrapper="clr-namespace:Grabacr07.KanColleWrapper;assembly=KanColleWrapper"
-			 xmlns:controls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls;assembly=KanColleViewer"
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.Plugins.ViewModels"
 			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 mc:Ignorable="d" 
 			 d:DesignWidth="700"
 			 d:DesignHeight="300"
 			 d:DataContext="{d:DesignInstance viewModels:BattlePreviewsViewModel}">
-
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<Style TargetType="{x:Type Border}">
+				<Setter Property="BorderBrush"
+						Value="{DynamicResource BorderBrushKey}" />
+				<Setter Property="BorderThickness"
+						Value="1" />
+				<Setter Property="Padding"
+						Value="6" />
+				<Setter Property="Margin"
+						Value="2,0,2,10" />
+			</Style>
+		</ResourceDictionary>
+	</UserControl.Resources>
 	<Grid>
-		<Border Width="Auto"
-				Height="Auto">
-			<StackPanel Margin="8">
-				<Grid>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="*"/>
-						<ColumnDefinition Width="Auto"/>
-					</Grid.ColumnDefinitions>
-					<StackPanel>
-						<TextBlock Text="테스트입니다. 테스트입니다." Foreground="Pink" FontWeight="Bold"/>
-						<TextBlock Text="중요하니까 두번 말했습니다." Foreground="red" FontWeight="Bold"/>
-					</StackPanel>
-					<Grid Grid.Column="1">
-						<metro2:CallMethodButton Content="크기 재설정"
-												 Margin="6,0" 
-												 Click="CallMethodButton_Click"
-												 ToolTip="내용에 맞춰서 표의 크기를 재설정합니다" />
-					</Grid>
-				</Grid>
-				<Grid HorizontalAlignment="Center"
-					  VerticalAlignment="Center">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="Auto"/>
-						<ColumnDefinition Width="Auto"/>
-					</Grid.ColumnDefinitions>
-					<TextBlock Text="예상 랭크: "
-							   VerticalAlignment="Center" Margin="0,7"/>
-					<TextBlock Grid.Column="1"
-							   FontWeight="ExtraBold"
-							   Text="완전승리 S"
-							   Foreground="#FFFFE558"
-							   FontSize="20"
-							   Visibility="{Binding PerfectRank, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-					<TextBlock Grid.Column="1"
-							   FontWeight="ExtraBold"
-							   Text="S승리"
-							   Foreground="Gold"
-							   FontSize="20"
-							   Visibility="{Binding RankS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-					<TextBlock Grid.Column="1"
-							   FontWeight="ExtraBold"
-							   Text="A승리"
-							   Foreground="#FFD10000"
-							   FontSize="20"
-							   Visibility="{Binding RankA, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-					<TextBlock Grid.Column="1"
-							   FontWeight="ExtraBold"
-							   Text="B승리"
-							   Foreground="#FFD43353"
-							   FontSize="20"
-							   Visibility="{Binding RankB, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-					<TextBlock Grid.Column="1"
-							   FontWeight="ExtraBold"
-							   Text="C패배"
-							   Foreground="#FF42428F"
-							   FontSize="20"
-							   Visibility="{Binding RankC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-					<TextBlock Grid.Column="1"
-							   FontWeight="ExtraBold"
-							   Text="D패배"
-							   Foreground="#FF02A43D"
-							   FontSize="20"
-							   Visibility="{Binding RankD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-					<TextBlock Grid.Column="1"
-							   FontWeight="ExtraBold"
-							   Text="완전승리S"
-							   Foreground="Gold"
-							   FontSize="20"
-							   Visibility="{Binding RankOut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-				</Grid>
-				<TextBlock/>
-				<ListView ItemsSource="{Binding ResultReport, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-										  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}"
-										  ScrollViewer.VerticalScrollBarVisibility="Disabled"
-										  x:Name="PreviewListView">
-					<ListView.Resources>
-						<Style TargetType="{x:Type TextBlock}">
-							<Setter Property="Margin"
-									Value="5,4" />
-						</Style>
-						<Style TargetType="{x:Type GridViewColumnHeader}">
-							<Setter Property="OverridesDefaultStyle"
-									Value="True"/>
-							<Setter Property="BorderThickness"
-									Value="0,0,0,1" />
-							<Setter Property="BorderBrush"
-									Value="{DynamicResource BorderBrushKey}" />
-							<Setter Property="Background"
-									Value="{DynamicResource BackgroundBrushKey}" />
-							<Setter Property="Template">
-								<Setter.Value>
-									<ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
-										<Grid>
-											<Border BorderThickness="{TemplateBinding BorderThickness}"
-													BorderBrush="{TemplateBinding BorderBrush}"
-													Background="{TemplateBinding Background}">
-												<ContentPresenter Margin="{TemplateBinding Padding}" />
-											</Border>
-											<Thumb x:Name="PART_HeaderGripper"
-												   HorizontalAlignment="Right"
-												   BorderBrush="{TemplateBinding BorderBrush}"
-												   Margin="0,0,-6,0">
-												<Thumb.Template>
-													<ControlTemplate TargetType="{x:Type Thumb}">
-														<Border Background="Transparent"
-																Width="13">
-															<Rectangle Width="1"
-																	   Stroke="{TemplateBinding BorderBrush}" />
-														</Border>
-													</ControlTemplate>
-												</Thumb.Template>
-											</Thumb>
-										</Grid>
-									</ControlTemplate>
-								</Setter.Value>
-							</Setter>
-						</Style>
-					</ListView.Resources>
-					<ListView.View>
-						<GridView>
-							<!--크기조절에 대한 완전한 대책이 마련되기 전까지는 크기조절 가능으로 설정.-->
-							<GridViewColumn Width="Auto" x:Name="Kanname">
-								<GridViewColumn.CellTemplate>
-									<DataTemplate>
-										<TextBlock Margin="6,3,0,3" Text="{Binding KanName}" 
-											Foreground="{DynamicResource ActiveForegroundBrushKey}"/>
-									</DataTemplate>
-								</GridViewColumn.CellTemplate>
-								<GridViewColumnHeader>
-									<TextBlock Text="칸무스 이름"/>
-								</GridViewColumnHeader>
-							</GridViewColumn>
-							<GridViewColumn Width="Auto" x:Name="Kanhp">
-								<GridViewColumn.CellTemplate>
-									<DataTemplate>
-										<TextBlock Text="{Binding KanHP}"
-											Foreground="{DynamicResource ActiveForegroundBrushKey}"
-											Margin="6,3,0,3" />
-									</DataTemplate>
-								</GridViewColumn.CellTemplate>
-								<GridViewColumnHeader>
-									<TextBlock Text="HP"/>
-								</GridViewColumnHeader>
-							</GridViewColumn>
-							<GridViewColumn Width="Auto" x:Name="Kanstatus">
-								<GridViewColumn.CellTemplate>
-									<DataTemplate>
-										<Border x:Name="KanBorder"
-											Margin="-2,0">
-											<TextBlock Text=""
-												x:Name="KanText"
-												Foreground="{DynamicResource ActiveForegroundBrushKey}"
-												Margin="5,3" />
-										</Border>
-										<DataTemplate.Triggers>
-											<DataTrigger Binding="{Binding KanStatus}"
-												Value="1">
-												<Setter TargetName="KanText"
-													Property="Text"
-													Value="소파" />
-												<Setter TargetName="KanBorder"
-													Property="Background"
-													Value="#FFF9CD08" />
-											</DataTrigger>
-											<DataTrigger Binding="{Binding KanStatus}"
-												Value="2">
-												<Setter TargetName="KanText"
-													Property="Text"
-													Value="중파" />
-												<Setter TargetName="KanBorder"
-													Property="Background"
-													Value="#FFE88B06" />
-											</DataTrigger>
-											<DataTrigger Binding="{Binding KanStatus}"
-												Value="3">
-												<Setter TargetName="KanText"
-													Property="Text"
-													Value="대파" />
-												<Setter TargetName="KanBorder"
-													Property="Background"
-													Value="#FFD60000" />
-											</DataTrigger>
-											<DataTrigger Binding="{Binding KanStatus}"
-												Value="4">
-												<Setter TargetName="KanText"
-													Property="Text"
-													Value="굉침" />
-												<Setter TargetName="KanBorder"
-													Property="Background"
-													Value="#FF4C44FF" />
-											</DataTrigger>
-											<DataTrigger Binding="{Binding KanStatus}"
-												Value="0">
-												<Setter TargetName="KanText"
-													Property="Text"
-													Value="" />
-												<Setter TargetName="KanBorder"
-													Property="Background"
-													Value="#004C44FF" />
-											</DataTrigger>
-										</DataTemplate.Triggers>
-									</DataTemplate>
-								</GridViewColumn.CellTemplate>
-								<GridViewColumnHeader>
-									<TextBlock Text="상태"/>
-								</GridViewColumnHeader>
-							</GridViewColumn>
-							<!--2함대(연합함대용)-->
-							<!--<GridViewColumn Width="0">
-								-->
-							<!--일단 지금은 숨겨놓지 않습니다. 연합함대로 테스트를 할수있을때 Hidden으로 지정할것..-->
-							<!--
-								<GridViewColumnHeader>
-									<TextBlock Text="2함대"/>
-								</GridViewColumnHeader>
-								<GridViewColumn.CellTemplate>
-									<DataTemplate>
-										<TextBlock Margin="6,3,0,3" Text="{Binding SecondKanName}" 
-												   Foreground="{DynamicResource ActiveForegroundBrushKey}"/>
-									</DataTemplate>
-								</GridViewColumn.CellTemplate>
-							</GridViewColumn>
-							<GridViewColumn Width="0">
-								<GridViewColumnHeader>
-									<TextBlock Text="HP"/>
-								</GridViewColumnHeader>
-								<GridViewColumn.CellTemplate>
-									<DataTemplate>
-										<TextBlock Margin="6,3,0,3" Text="{Binding SecondKanHP}"
-												   Foreground="{DynamicResource ActiveForegroundBrushKey}"/>
-									</DataTemplate>
-								</GridViewColumn.CellTemplate>
-							</GridViewColumn>
-							<GridViewColumn Width="0">
-								<GridViewColumnHeader>
-									<TextBlock Text="상태"/>
-								</GridViewColumnHeader>
-								<GridViewColumn.CellTemplate>
-									<DataTemplate>
-										<TextBlock Margin="6,3,0,3" Text="{Binding SecondKanStatus}" 
-												   Foreground="{DynamicResource ActiveForegroundBrushKey}"/>
-									</DataTemplate>
-								</GridViewColumn.CellTemplate>
-							</GridViewColumn>-->
-							<!--빈공간. 가독성을 높이기 위해 존재-->
-							<!--<GridViewColumn Width="50">
-								<GridViewColumnHeader>
-									<TextBlock Text=""/>
-								</GridViewColumnHeader>
-								<GridViewColumn.CellTemplate>
-									<DataTemplate>
-										<TextBlock Margin="6,3,0,3" Text=""  
-												   Foreground="{DynamicResource ActiveForegroundBrushKey}"/>
-									</DataTemplate>
-								</GridViewColumn.CellTemplate>
-							</GridViewColumn>-->
+		<StackPanel Width="Auto"
+					Height="Auto">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+				<StackPanel>
+					<TextBlock Text="테스트입니다. 테스트입니다." Foreground="Pink" FontWeight="Bold"/>
+					<TextBlock Text="중요하니까 두번 말했습니다." Foreground="red" FontWeight="Bold"/>
+				</StackPanel>
+			</Grid>
+			<Grid HorizontalAlignment="Center"
+				VerticalAlignment="Center">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+				<TextBlock Grid.Column="1"
+					FontWeight="ExtraBold"
+					Text="완전승리 S"
+					Foreground="#FFFFE558"
+					FontSize="20"
+					Visibility="{Binding PerfectRank, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+				<TextBlock Grid.Column="1"
+					FontWeight="ExtraBold"
+					Text="S승리"
+					Foreground="Gold"
+					FontSize="20"
+					Visibility="{Binding RankS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+				<TextBlock Grid.Column="1"
+					FontWeight="ExtraBold"
+					Text="A승리"
+					Foreground="#FFD10000"
+					FontSize="20"
+					Visibility="{Binding RankA, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+				<TextBlock Grid.Column="1"
+					FontWeight="ExtraBold"
+					Text="B승리"
+					Foreground="#FFD43353"
+					FontSize="20"
+					Visibility="{Binding RankB, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+				<TextBlock Grid.Column="1"
+					FontWeight="ExtraBold"
+					Text="C패배"
+					Foreground="#FF42428F"
+					FontSize="20"
+					Visibility="{Binding RankC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+				<TextBlock Grid.Column="1"
+					FontWeight="ExtraBold"
+					Text="D패배"
+					Foreground="#FF02A43D"
+					FontSize="20"
+					Visibility="{Binding RankD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+				<TextBlock Grid.Column="1"
+					FontWeight="ExtraBold"
+					Text="완전승리S"
+					Foreground="Gold"
+					FontSize="20"
+					Visibility="{Binding RankOut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+			</Grid>
+			<TextBlock/>
+			<Border HorizontalAlignment="Center" >
+				<StackPanel Orientation="Horizontal">
 
-							<GridViewColumn Width="Auto" x:Name="enemyname">
-								<GridViewColumn.CellTemplate>
-									<DataTemplate>
-										<TextBlock Margin="6,3,0,3" Text="{Binding EnemyName}" 
-											Foreground="{DynamicResource ActiveForegroundBrushKey}"/>
-									</DataTemplate>
-								</GridViewColumn.CellTemplate>
-								<GridViewColumnHeader>
-									<TextBlock Text="적이름"/>
-								</GridViewColumnHeader>
-							</GridViewColumn>
-							<GridViewColumn Width="Auto" x:Name="enemyhp">
-								<GridViewColumn.CellTemplate>
-									<DataTemplate>
-										<TextBlock Margin="6,3,0,3" Text="{Binding EnemyHP}" 
-											Foreground="{DynamicResource ActiveForegroundBrushKey}"/>
-									</DataTemplate>
-								</GridViewColumn.CellTemplate>
-								<GridViewColumnHeader>
-									<TextBlock Text="HP"/>
-								</GridViewColumnHeader>
-							</GridViewColumn>
-							<GridViewColumn Width="Auto" x:Name="enemystatus">
-								<GridViewColumn.CellTemplate>
-									<DataTemplate>
-										<Border x:Name="EnemyBorder"
-											Margin="-2,0">
-											<TextBlock Text=""
-												x:Name="EnemyText"
-												Foreground="{DynamicResource ActiveForegroundBrushKey}"
-												Margin="5,3" />
-										</Border>
-										<DataTemplate.Triggers>
-											<DataTrigger Binding="{Binding EnemyStatus}"
-												Value="1">
-												<Setter TargetName="EnemyText"
-													Property="Text"
-													Value="소파" />
-												<Setter TargetName="EnemyBorder"
-													Property="Background"
-													Value="#FFF9CD08" />
-											</DataTrigger>
-											<DataTrigger Binding="{Binding EnemyStatus}"
-												Value="2">
-												<Setter TargetName="EnemyText"
-													Property="Text"
-													Value="중파" />
-												<Setter TargetName="EnemyBorder"
-													Property="Background"
-													Value="#FFE88B06" />
-											</DataTrigger>
-											<DataTrigger Binding="{Binding EnemyStatus}"
-												Value="3">
-												<Setter TargetName="EnemyText"
-													Property="Text"
-													Value="대파" />
-												<Setter TargetName="EnemyBorder"
-													Property="Background"
-													Value="#FFD60000" />
-											</DataTrigger>
-											<DataTrigger Binding="{Binding EnemyStatus}"
-												Value="4">
-												<Setter TargetName="EnemyText"
-													Property="Text"
-													Value="굉침" />
-												<Setter TargetName="EnemyBorder"
-													Property="Background"
-													Value="#FF4C44FF" />
-											</DataTrigger>
-											<DataTrigger Binding="{Binding EnemyStatus}"
-												Value="0">
-												<Setter TargetName="EnemyText"
-													Property="Text"
-													Value="" />
-												<Setter TargetName="EnemyBorder"
-													Property="Background"
-													Value="#00464646" />
-											</DataTrigger>
-										</DataTemplate.Triggers>
-									</DataTemplate>
-								</GridViewColumn.CellTemplate>
-								<GridViewColumnHeader>
-									<TextBlock Text="상태"/>
-								</GridViewColumnHeader>
-							</GridViewColumn>
-						</GridView>
-					</ListView.View>
-				</ListView>
-			</StackPanel>
-		</Border>
+					<ItemsControl VerticalAlignment="Top"
+						Width="Auto" ItemsSource="{Binding KanResultReport}"
+						Background="Transparent"
+						Grid.IsSharedSizeScope="True"
+						Margin="3"
+						MinWidth="200">
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<StackPanel Margin="0,2,0,0">
+									<StackPanel.Resources>
+										<Style TargetType="{x:Type TextBlock}"
+											BasedOn="{StaticResource DefaultTextStyleKey}">
+											<Setter Property="TextWrapping"
+												Value="NoWrap" />
+										</Style>
+									</StackPanel.Resources>
+
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition />
+											<ColumnDefinition Width="Auto"
+												SharedSizeGroup="Level" />
+											<ColumnDefinition Width="Auto"
+												SharedSizeGroup="HP" />
+											<ColumnDefinition Width="Auto"
+												SharedSizeGroup="Condition" />
+										</Grid.ColumnDefinitions>
+										<StackPanel>
+											<TextBlock Width="Auto"><Run Text="{Binding Name, Mode=OneWay}"
+													Style="{DynamicResource EmphaticTextElementStyleKey}"
+													FontSize="14"/></TextBlock>
+											<Grid x:Name="StatusGrid"
+												Margin="-2,0">
+												<TextBlock Text=""
+													FontSize="12"
+													x:Name="StatusText"
+													Foreground="{DynamicResource ActiveForegroundBrushKey}"
+													Margin="5,3"
+													HorizontalAlignment="Center"/>
+											</Grid>
+										</StackPanel>
+										<TextBlock Grid.Column="1"
+											Margin="12,0,0,0"><Run Text="Lv." /><Run Text=" "/><Run Text=" "/><Run Text="{Binding Lv, Mode=OneWay}"
+												Style="{DynamicResource EmphaticTextElementStyleKey}" /></TextBlock>
+
+										<Grid x:Name="HPIndicator"
+											Grid.Column="2"
+											Margin="12,1,12,0">
+											<Grid.RowDefinitions>
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+											</Grid.RowDefinitions>
+											<TextBlock><Run Text="HP:" /><Run Text=" "/><Run Text="{Binding CHP, Mode=OneWay}"
+													Style="{DynamicResource EmphaticTextElementStyleKey}" /><Run Text=" "/><Run Text="{Binding MHP, Mode=OneWay, StringFormat=/\{0\}}" /></TextBlock>
+											<controls:ColorIndicator Grid.Row="1"
+												Height="6"
+												LimitedValue="{Binding HP, Mode=OneWay}"
+												Margin="0,2,0,0" />
+										</Grid>
+									</Grid>
+									<Rectangle Height="1"
+										Margin="0,4,0,0"
+										Style="{DynamicResource SeparatorRectangleStyleKey}" />
+								</StackPanel>
+								<DataTemplate.Triggers>
+									<DataTrigger Binding="{Binding Status}"
+										Value="1">
+										<Setter TargetName="StatusText"
+											Property="Text"
+											Value="소파"/>
+										<Setter TargetName="StatusText"
+											Property="Foreground"
+											Value="#FF5B522A"/>
+										<Setter TargetName="StatusGrid"
+											Property="Background"
+											Value="#FFF9CD08" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding Status}"
+										Value="2">
+										<Setter TargetName="StatusText"
+											Property="Text"
+											Value="중파" />
+										<Setter TargetName="StatusGrid"
+											Property="Background"
+											Value="#FFE88B06" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding Status}"
+										Value="3">
+										<Setter TargetName="StatusText"
+											Property="Text"
+											Value="대파" />
+										<Setter TargetName="StatusGrid"
+											Property="Background"
+											Value="#FFD60000" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding Status}"
+										Value="4">
+										<Setter TargetName="StatusText"
+											Property="Text"
+											Value="굉침" />
+										<Setter TargetName="StatusGrid"
+											Property="Background"
+											Value="#FF4C44FF" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding Status}"
+										Value="0">
+										<Setter TargetName="StatusText"
+											Property="Text"
+											Value="" />
+										<Setter TargetName="StatusGrid"
+											Property="Background"
+											Value="#004C44FF" />
+									</DataTrigger>
+								</DataTemplate.Triggers>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
+
+					<Rectangle Width="1"
+						Margin="7,0"
+						Style="{DynamicResource SeparatorRectangleStyleKey}" />
+					<ItemsControl VerticalAlignment="Top"
+						ItemsSource="{Binding EnemyResultReport}"
+						Background="Transparent"
+						Grid.IsSharedSizeScope="True"
+						Margin="3"
+						MinWidth="200">
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<StackPanel Margin="0,2,0,0">
+									<StackPanel.Resources>
+										<Style TargetType="{x:Type TextBlock}"
+											BasedOn="{StaticResource DefaultTextStyleKey}">
+											<Setter Property="TextWrapping"
+												Value="NoWrap" />
+										</Style>
+									</StackPanel.Resources>
+
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition />
+											<ColumnDefinition Width="Auto"
+												SharedSizeGroup="Level" />
+											<ColumnDefinition Width="Auto"
+												SharedSizeGroup="HP" />
+											<ColumnDefinition Width="Auto"
+												SharedSizeGroup="Condition" />
+										</Grid.ColumnDefinitions>
+
+
+										<StackPanel>
+											<TextBlock Width="Auto"><Run Text="{Binding Name, Mode=OneWay}"
+													Style="{DynamicResource EmphaticTextElementStyleKey}"
+													FontSize="14"/></TextBlock>
+											<Grid x:Name="StatusGrid"
+												Margin="-2,0">
+												<TextBlock Text=""
+													FontSize="12"
+													x:Name="StatusText"
+													Foreground="{DynamicResource ActiveForegroundBrushKey}"
+													Margin="5,3"
+													HorizontalAlignment="Center"/>
+											</Grid>
+										</StackPanel>
+										<TextBlock Grid.Column="1"
+											Margin="12,0,0,0"><Run Text="Lv." /><Run Text=" "/><Run Text="{Binding Lv, Mode=OneWay}"
+												Style="{DynamicResource EmphaticTextElementStyleKey}" /></TextBlock>
+
+										<Grid x:Name="HPIndicator"
+											Grid.Column="2"
+											Margin="12,1,12,0">
+											<Grid.RowDefinitions>
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+											</Grid.RowDefinitions>
+											<TextBlock><Run Text="HP:" /><Run Text=" "/><Run Text="{Binding CHP, Mode=OneWay}"
+													Style="{DynamicResource EmphaticTextElementStyleKey}" /><Run Text=" "/><Run Text="{Binding MHP, Mode=OneWay, StringFormat=/\{0\}}" /></TextBlock>
+											<controls:ColorIndicator Grid.Row="1"
+												Height="6"
+												LimitedValue="{Binding HP, Mode=OneWay}"
+												Margin="0,2,0,0" />
+										</Grid>
+									</Grid>
+									<Rectangle Height="1"
+										Margin="0,4,0,0"
+										Style="{DynamicResource SeparatorRectangleStyleKey}" />
+								</StackPanel>
+								<DataTemplate.Triggers>
+									<DataTrigger Binding="{Binding Status}"
+										Value="1">
+										<Setter TargetName="StatusText"
+											Property="Text"
+											Value="소파" />
+										<Setter TargetName="StatusText"
+											Property="Foreground"
+											Value="#FF5B522A"/>
+										<Setter TargetName="StatusGrid"
+											Property="Background"
+											Value="#FFF9CD08" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding Status}"
+										Value="2">
+										<Setter TargetName="StatusText"
+											Property="Text"
+											Value="중파" />
+										<Setter TargetName="StatusGrid"
+											Property="Background"
+											Value="#FFE88B06" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding Status}"
+										Value="3">
+										<Setter TargetName="StatusText"
+											Property="Text"
+											Value="대파" />
+										<Setter TargetName="StatusGrid"
+											Property="Background"
+											Value="#FFD60000" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding Status}"
+										Value="4">
+										<Setter TargetName="StatusText"
+											Property="Text"
+											Value="굉침" />
+										<Setter TargetName="StatusGrid"
+											Property="Background"
+											Value="#FF4C44FF" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding Status}"
+										Value="0">
+										<Setter TargetName="StatusText"
+											Property="Text"
+											Value="" />
+										<Setter TargetName="StatusGrid"
+											Property="Background"
+											Value="#004C44FF" />
+									</DataTrigger>
+								</DataTemplate.Triggers>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
+				</StackPanel>
+			</Border>
+		</StackPanel>
 	</Grid>
 </UserControl>
+	

@@ -6,29 +6,28 @@ using System.Threading.Tasks;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
+	public class RankResult
+	{
+		/// <summary>
+		/// Rank int
+		/// </summary>
+		public int RankNum { get; set; }
+	}
 	/// <summary>
 	/// 미리보기 데이터를 저장하는 클래스
 	/// </summary>
 	public class PreviewBattleResults
 	{
 		//이름
-		public string EnemyName { get; set; }
-		public string KanName { get; set; }
-		public string SecondKanName { get; set; }
-		//HP
-		public string EnemyHP { get; set; }
-		public string SecondKanHP { get; set; }
-		public string KanHP { get; set; }
+		public string Name { get; set; }
+		//LimitedValue
+		public LimitedValue HP { get; set; }
 		//상태
-		public int EnemyStatus { get; set; }
-		public int SecondKanStatus { get; set; }
-		public int KanStatus { get; set; }
-		/// <summary>
-		/// Rank int
-		/// </summary>
-		public int RankNum { get; set; }
-		//테스트용도
-		//public int EnemyId { get; set; }
+		public int Status { get; set; }
+		//레벨
+		public int Lv { get; set; }
+		public int CHP { get; set; }
+		public int MHP { get; set; }
 	}
 	/// <summary>
 	/// 예보 데이터를 저장하는 클래스입니다.
@@ -48,15 +47,27 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 함대의 HP정보를 저장
 		/// </summary>
-		public List<string> HpResults = new List<string>();
+		public List<int> HpResults = new List<int>();
 		/// <summary>
 		/// 연합함대의 HP정보를 저장
 		/// </summary>
-		public List<string> ComHpResults = new List<string>();
+		public List<int> ComHpResults = new List<int>();
 		/// <summary>
 		/// 적 함대의 HP정보를 저장
 		/// </summary>
-		public List<string> EnemyHpResults = new List<string>();
+		public List<int> EnemyHpResults = new List<int>();		
+		/// <summary>
+		/// 함대의 HP정보를 저장
+		/// </summary>
+		public List<int> MHpResults = new List<int>();
+		/// <summary>
+		/// 연합함대의 HP정보를 저장
+		/// </summary>
+		public List<int> ComMHpResults = new List<int>();
+		/// <summary>
+		/// 적 함대의 HP정보를 저장
+		/// </summary>
+		public List<int> EnemyMHpResults = new List<int>();
 		/// <summary>
 		/// 함대의 HP계산결과를 저장
 		/// </summary>

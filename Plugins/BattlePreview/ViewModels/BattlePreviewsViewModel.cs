@@ -9,18 +9,75 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 {
 	public class BattlePreviewsViewModel : ViewModel
 	{
-		#region ResultReport 変更通知プロパティ
+		#region KanResultReport 変更通知プロパティ
 
-		private List<PreviewBattleResults> _ResultReport;
+		private List<PreviewBattleResults> _KanResultReport;
 
-		public List<PreviewBattleResults> ResultReport
+		public List<PreviewBattleResults> KanResultReport
 		{
-			get { return this._ResultReport; }
+			get { return this._KanResultReport; }
 			set
 			{
-				if (this._ResultReport != value)
+				if (this._KanResultReport != value)
 				{
-					this._ResultReport = value;
+					this._KanResultReport = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region EnemyResultReport 変更通知プロパティ
+
+		private List<PreviewBattleResults> _EnemyResultReport;
+
+		public List<PreviewBattleResults> EnemyResultReport
+		{
+			get { return this._EnemyResultReport; }
+			set
+			{
+				if (this._EnemyResultReport != value)
+				{
+					this._EnemyResultReport = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region SecondResultReport 変更通知プロパティ
+
+		private List<PreviewBattleResults> _SecondResultReport;
+
+		public List<PreviewBattleResults> SecondResultReport
+		{
+			get { return this._SecondResultReport; }
+			set
+			{
+				if (this._SecondResultReport != value)
+				{
+					this._SecondResultReport = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region RankOuts 変更通知プロパティ
+
+		private RankResult _RankOuts;
+
+		public RankResult RankOuts
+		{
+			get { return this._RankOuts; }
+			set
+			{
+				if (this._RankOuts != value)
+				{
+					this._RankOuts = value;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -258,9 +315,12 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 				{
 					KanColleClient.Current.PreviewBattle.PreviewCriticalCondition += () =>
 					{
-						this.ResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.TotalResult());
-
-						this.RankIntToVisibility(this.ResultReport[6].RankNum);
+						this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.KanResult());
+						//this.SecondResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.SecondResult());
+						this.EnemyResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.EnemyResult());
+						
+						this.RankOuts = KanColleClient.Current.PreviewBattle.RankOut();
+						this.RankIntToVisibility(this.RankOuts.RankNum);
 					};
 				}
 			}

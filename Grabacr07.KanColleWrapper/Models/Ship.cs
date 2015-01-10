@@ -40,6 +40,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			get { return "[Lv." + this.Level + "]  " + this.Info.Name; }
 		}
+		public string Name
+		{
+			get { return this.Info.Name; }
+		}
 		/// <summary>
 		/// 艦娘がロックされているかどうかを示
 
