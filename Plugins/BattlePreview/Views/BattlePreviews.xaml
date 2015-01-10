@@ -95,7 +95,7 @@
 						Width="Auto" ItemsSource="{Binding KanResultReport}"
 						Background="Transparent"
 						Grid.IsSharedSizeScope="True"
-						Margin="3"
+						Margin="3,3,0,3"
 						MinWidth="200">
 						<ItemsControl.ItemTemplate>
 							<DataTemplate>
@@ -122,13 +122,12 @@
 											<TextBlock Width="Auto"><Run Text="{Binding Name, Mode=OneWay}"
 													Style="{DynamicResource EmphaticTextElementStyleKey}"
 													FontSize="14"/></TextBlock>
-											<Grid x:Name="StatusGrid"
-												Margin="-2,0">
+											<Grid x:Name="StatusGrid">
 												<TextBlock Text=""
 													FontSize="12"
 													x:Name="StatusText"
 													Foreground="{DynamicResource ActiveForegroundBrushKey}"
-													Margin="5,3"
+													Margin="1,1"
 													HorizontalAlignment="Center"/>
 											</Grid>
 										</StackPanel>
@@ -208,7 +207,121 @@
 							</DataTemplate>
 						</ItemsControl.ItemTemplate>
 					</ItemsControl>
+					<ItemsControl VerticalAlignment="Top"
+						Width="Auto" ItemsSource="{Binding SecondResultReport}"
+						Background="Transparent"
+						Grid.IsSharedSizeScope="True"
+						Margin="0,3,3,3">
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<StackPanel Margin="0,2,0,0">
+									<StackPanel.Resources>
+										<Style TargetType="{x:Type TextBlock}"
+											BasedOn="{StaticResource DefaultTextStyleKey}">
+											<Setter Property="TextWrapping"
+												Value="NoWrap" />
+										</Style>
+									</StackPanel.Resources>
 
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition />
+											<ColumnDefinition Width="Auto"
+												SharedSizeGroup="Level" />
+											<ColumnDefinition Width="Auto"
+												SharedSizeGroup="HP" />
+											<ColumnDefinition Width="Auto"
+												SharedSizeGroup="Condition" />
+										</Grid.ColumnDefinitions>
+										<StackPanel>
+											<TextBlock Width="Auto"><Run Text="{Binding Name, Mode=OneWay}"
+													Style="{DynamicResource EmphaticTextElementStyleKey}"
+													FontSize="14"/></TextBlock>
+											<Grid x:Name="StatusGrid">
+												<TextBlock Text=""
+													FontSize="12"
+													x:Name="StatusText"
+													Foreground="{DynamicResource ActiveForegroundBrushKey}"
+													Margin="1,1"
+													HorizontalAlignment="Center"/>
+											</Grid>
+										</StackPanel>
+										<TextBlock Grid.Column="1"
+											Margin="12,0,0,0"><Run Text="Lv." /><Run Text=" "/><Run Text=" "/><Run Text="{Binding Lv, Mode=OneWay}"
+												Style="{DynamicResource EmphaticTextElementStyleKey}" /></TextBlock>
+
+										<Grid x:Name="HPIndicator"
+											Grid.Column="2"
+											Margin="12,1,12,0">
+											<Grid.RowDefinitions>
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+											</Grid.RowDefinitions>
+											<TextBlock><Run Text="HP:" /><Run Text=" "/><Run Text="{Binding CHP, Mode=OneWay}"
+													Style="{DynamicResource EmphaticTextElementStyleKey}" /><Run Text=" "/><Run Text="{Binding MHP, Mode=OneWay, StringFormat=/\{0\}}" /></TextBlock>
+											<controls:ColorIndicator Grid.Row="1"
+												Height="6"
+												LimitedValue="{Binding HP, Mode=OneWay}"
+												Margin="0,2,0,0" />
+										</Grid>
+									</Grid>
+									<Rectangle Height="1"
+										Margin="0,4,0,0"
+										Style="{DynamicResource SeparatorRectangleStyleKey}" />
+								</StackPanel>
+								<DataTemplate.Triggers>
+									<DataTrigger Binding="{Binding Status}"
+										Value="1">
+										<Setter TargetName="StatusText"
+											Property="Text"
+											Value="소파"/>
+										<Setter TargetName="StatusText"
+											Property="Foreground"
+											Value="#FF5B522A"/>
+										<Setter TargetName="StatusGrid"
+											Property="Background"
+											Value="#FFF9CD08" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding Status}"
+										Value="2">
+										<Setter TargetName="StatusText"
+											Property="Text"
+											Value="중파" />
+										<Setter TargetName="StatusGrid"
+											Property="Background"
+											Value="#FFE88B06" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding Status}"
+										Value="3">
+										<Setter TargetName="StatusText"
+											Property="Text"
+											Value="대파" />
+										<Setter TargetName="StatusGrid"
+											Property="Background"
+											Value="#FFD60000" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding Status}"
+										Value="4">
+										<Setter TargetName="StatusText"
+											Property="Text"
+											Value="굉침" />
+										<Setter TargetName="StatusGrid"
+											Property="Background"
+											Value="#FF4C44FF" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding Status}"
+										Value="0">
+										<Setter TargetName="StatusText"
+											Property="Text"
+											Value="" />
+										<Setter TargetName="StatusGrid"
+											Property="Background"
+											Value="#004C44FF" />
+									</DataTrigger>
+								</DataTemplate.Triggers>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
 					<Rectangle Width="1"
 						Margin="7,0"
 						Style="{DynamicResource SeparatorRectangleStyleKey}" />
@@ -245,13 +358,12 @@
 											<TextBlock Width="Auto"><Run Text="{Binding Name, Mode=OneWay}"
 													Style="{DynamicResource EmphaticTextElementStyleKey}"
 													FontSize="14"/></TextBlock>
-											<Grid x:Name="StatusGrid"
-												Margin="-2,0">
+											<Grid x:Name="StatusGrid">
 												<TextBlock Text=""
 													FontSize="12"
 													x:Name="StatusText"
 													Foreground="{DynamicResource ActiveForegroundBrushKey}"
-													Margin="5,3"
+													Margin="1,1"
 													HorizontalAlignment="Center"/>
 											</Grid>
 										</StackPanel>

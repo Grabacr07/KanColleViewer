@@ -117,8 +117,8 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 아군굉침여부
 		/// </summary>
 		public bool IsKanDead { get; set; }
-
-
+		public int FirstKanDamaged { get; set; }
+		public int FirstKanMaxHP { get; set; }
 		//이외
 		/// <summary>
 		/// 전과게이지의 차이가 2.5배 이상

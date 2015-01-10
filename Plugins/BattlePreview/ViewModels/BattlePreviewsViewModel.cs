@@ -315,8 +315,12 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 				{
 					KanColleClient.Current.PreviewBattle.PreviewCriticalCondition += () =>
 					{
-						this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.KanResult());
-						//this.SecondResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.SecondResult());
+						if(!KanColleClient.Current.PreviewBattle.Combined)this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.KanResult());
+						else
+						{
+							this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.KanResult(1));
+							this.SecondResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.SecondResult());
+						}
 						this.EnemyResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.EnemyResult());
 						
 						this.RankOuts = KanColleClient.Current.PreviewBattle.RankOut();

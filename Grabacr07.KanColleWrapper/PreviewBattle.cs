@@ -33,7 +33,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 연합함대 여부를 저장(수뢰전대 API때문에 넣는 임시 코드)
 		/// </summary>
-		private bool Combined { get; set; }
+		public bool Combined { get; set; }
 		/// <summary>
 		/// 전투 이벤트 핸들러
 		/// </summary>
@@ -79,7 +79,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 전투결과를 CriticalPreviewPopup으로 보냅니다.
 		/// </summary>
 		/// <returns></returns>
-		public List<PreviewBattleResults> KanResult()
+		public List<PreviewBattleResults> KanResult(int combinded=-1)
 		{
 			if (!EnableBattlePreview) return null;
 			var Organization = KanColleClient.Current.Homeport.Organization;
@@ -89,19 +89,60 @@ namespace Grabacr07.KanColleWrapper.Models
 			for (int i = 0; i < 6; i++)
 			{
 				PreviewBattleResults Kan = new PreviewBattleResults();
-				if (Organization.Fleets[DataLists.DockId].Ships.Length > i)
+				if (combinded == -1)
 				{
-					Kan.Name = Organization.Fleets[DataLists.DockId].Ships[i].Name;
-					Kan.Lv = Organization.Fleets[DataLists.DockId].Ships[i].Level;
-					Kan.CHP = this.DataLists.HpResults[i];
-					Kan.MHP = this.DataLists.MHpResults[i]; 
-					Kan.HP = new LimitedValue(this.DataLists.HpResults[i], this.DataLists.MHpResults[i], 0);
-					Kan.Status = this.DataLists.CalResults[i];
+					if (Organization.Fleets[DataLists.DockId].Ships.Length > i)
+					{
+						Kan.Name = Organization.Fleets[DataLists.DockId].Ships[i].Name;
+						Kan.Lv = Organization.Fleets[DataLists.DockId].Ships[i].Level;
+						Kan.CHP = this.DataLists.HpResults[i];
+						Kan.MHP = this.DataLists.MHpResults[i];
+						Kan.HP = new LimitedValue(this.DataLists.HpResults[i], this.DataLists.MHpResults[i], 0);
+						Kan.Status = this.DataLists.CalResults[i];
+					}
+					if (Kan.HP.Maximum != 0 || Kan.HP.Current != 0) this.Results.Add(Kan);
 				}
-				if(Kan.HP.Maximum!=0 || Kan.HP.Current!=0)	this.Results.Add(Kan);
+				else if (combinded == 1)
+				{
+					if (Organization.Fleets[1].Ships.Length > i)
+					{
+						Kan.Name = Organization.Fleets[1].Ships[i].Name;
+						Kan.Lv = Organization.Fleets[1].Ships[i].Level;
+						Kan.CHP = this.DataLists.HpResults[i];
+						Kan.MHP = this.DataLists.MHpResults[i];
+						Kan.HP = new LimitedValue(this.DataLists.HpResults[i], this.DataLists.MHpResults[i], 0);
+						Kan.Status = this.DataLists.CalResults[i];
+					}
+					if (Kan.HP.Maximum != 0 || Kan.HP.Current != 0) this.Results.Add(Kan);
+				}
+				
 			}
 			return this.Results;
 		}
+		public List<PreviewBattleResults> SecondResult()
+		{
+			if (!EnableBattlePreview) return null;
+			var Organization = KanColleClient.Current.Homeport.Organization;
+
+			this.Results.Clear();
+
+			for (int i = 0; i < 6; i++)
+			{
+				PreviewBattleResults Kan = new PreviewBattleResults();
+				if (Organization.Fleets[2].Ships.Length > i)
+				{
+					Kan.Name = Organization.Fleets[2].Ships[i].Name;
+					Kan.Lv = Organization.Fleets[2].Ships[i].Level;
+					Kan.CHP = this.DataLists.ComHpResults[i];
+					Kan.MHP = this.DataLists.ComMHpResults[i];
+					Kan.HP = new LimitedValue(this.DataLists.ComHpResults[i], this.DataLists.ComMHpResults[i], 0);
+					Kan.Status = this.DataLists.ComCalResults[i];
+				}
+				if (Kan.HP.Maximum != 0 || Kan.HP.Current != 0) this.Results.Add(Kan);
+			}
+			return this.Results;
+		}
+
 		public List<PreviewBattleResults> EnemyResult()
 		{
 			if (!EnableBattlePreview) return null;
@@ -587,14 +628,16 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <param name="CurrentHPList">계산이 끝난 HP리스트를 적제한다.</param>
 		/// <param name="Maxhps">api_maxhps를 가져온다.</param>
 		/// <param name="NowHps">api_nowhps를 가져온다.</param>
-		/// <param name="IsCombined">연합함대인지 설정</param>
+		/// <param name="IsCombined">이 계산은 연합함대 대상으로 계산되는가?</param>
 		/// <param name="IsMidnight">주간전이 있었던 야전이면 True</param>
 		/// <param name="IsPractice">연습전이면 True</param>
 		private void BattleCalc(List<listup> lists, List<int> CurrentHPList, int[] Maxhps, int[] NowHps, bool IsCombined, bool IsMidnight, bool IsPractice)
 		{
 			if (EnableBattlePreview)
 			{
+				DataLists.ComCalResults.Clear();
 				DataLists.CalResults.Clear();
+				DataLists.ComHpResults.Clear();
 				DataLists.HpResults.Clear();
 				DataLists.EnemyHpResults.Clear();
 				DataLists.EnemyCalResults.Clear();
@@ -656,15 +699,29 @@ namespace Grabacr07.KanColleWrapper.Models
 						//연합함대 수정필요
 						if (i < 7)//아군정보
 						{
-							DataLists.MHpResults.Add(Maxhps[i]);
-							DataLists.HpResults.Add(CurrentHPList[i]);
-							
+							if (IsCombined)
+							{
+								DataLists.ComMHpResults.Add(Maxhps[i]);
+								DataLists.ComHpResults.Add(CurrentHPList[i]);
 
-							if (temp <= 0) DataLists.CalResults.Add(4);//굉침
-							else if (temp <= 0.25) DataLists.CalResults.Add(3);//대파
-							else if (temp <= 0.5) DataLists.CalResults.Add(2);//중파
-							else if (temp <= 0.75) DataLists.CalResults.Add(1);//소파
-							else DataLists.CalResults.Add(0);//통상
+								if (temp <= 0) DataLists.ComCalResults.Add(4);//굉침
+								else if (temp <= 0.25) DataLists.ComCalResults.Add(3);//대파
+								else if (temp <= 0.5) DataLists.ComCalResults.Add(2);//중파
+								else if (temp <= 0.75) DataLists.ComCalResults.Add(1);//소파
+								else DataLists.ComCalResults.Add(0);//통상
+							}
+							else
+							{
+								DataLists.MHpResults.Add(Maxhps[i]);
+								DataLists.HpResults.Add(CurrentHPList[i]);
+
+								if (temp <= 0) DataLists.CalResults.Add(4);//굉침
+								else if (temp <= 0.25) DataLists.CalResults.Add(3);//대파
+								else if (temp <= 0.5) DataLists.CalResults.Add(2);//중파
+								else if (temp <= 0.75) DataLists.CalResults.Add(1);//소파
+								else DataLists.CalResults.Add(0);//통상
+
+							}
 
 							KanEveryCHP = KanEveryCHP + (NowHps[i] - CurrentHPList[i]);
 							KanEveryMHP = KanEveryMHP + NowHps[i];
@@ -699,6 +756,16 @@ namespace Grabacr07.KanColleWrapper.Models
 			//이하 랭크 예측관련
 			if (EnableBattlePreview)
 			{
+				if (this.Combined && !IsCombined)
+				{
+					this.DataLists.FirstKanDamaged = KanEveryCHP;
+					this.DataLists.FirstKanMaxHP = KanEveryMHP;
+				}
+				else if (this.Combined && IsCombined && !IsMidnight)
+				{
+					KanEveryCHP = KanEveryCHP + this.DataLists.FirstKanDamaged;
+					KanEveryMHP = KanEveryMHP + this.DataLists.FirstKanMaxHP;
+				}
 				double EnemyDamage = (double)EnemyEveryCHP / (double)EnemyEveryMHP;
 				double KanDamage = (double)KanEveryCHP / (double)KanEveryMHP;
 				if (IsMidnight)
