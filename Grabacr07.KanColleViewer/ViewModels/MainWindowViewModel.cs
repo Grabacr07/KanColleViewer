@@ -1,13 +1,17 @@
-﻿using Grabacr07.KanColleViewer.Models;
+﻿using Grabacr07.KanColleViewer.Composition;
+using Grabacr07.KanColleViewer.Models;
+using Grabacr07.KanColleViewer.ViewModels.Composition;
 using Grabacr07.KanColleViewer.ViewModels.Messages;
 using Grabacr07.KanColleWrapper;
-using Grabacr07.KanColleWrapper.Models;
 using Livet;
 using Livet.EventListeners;
+using Livet.Messaging;
 using Livet.Messaging.Windows;
 using MetroRadiance;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Grabacr07.KanColleViewer.ViewModels
@@ -140,6 +144,64 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region CheckPreviewBattle 変更通知プロパティ
+
+		private bool _CheckPreviewBattle;
+
+		public bool CheckPreviewBattle
+		{
+			get { return this._CheckPreviewBattle; }
+			set
+			{
+				if (this._CheckPreviewBattle != value)
+				{
+					this._CheckPreviewBattle = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region PreviewBattleVisible 変更通知プロパティ
+
+		private Visibility _PreviewBattleVisible;
+
+		public Visibility PreviewBattleVisible
+		{
+			get { return this._PreviewBattleVisible; }
+			set
+			{
+				if (this._PreviewBattleVisible != value)
+				{
+					this._PreviewBattleVisible = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region Items 変更通知プロパティ
+
+		private List<ToolViewModel> _Tools;
+
+		public List<ToolViewModel> Tools
+		{
+			get { return this._Tools; }
+			set
+			{
+				if (this._Tools != value)
+				{
+					this._Tools = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+
 
 		public MainWindowViewModel()
 		{
@@ -158,7 +220,21 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			});
 
 			this.UpdateMode();
-			//this.Tester();
+
+			this.Tools = new List<ToolViewModel>(PluginHost.Instance.Tools.Select(x => new ToolViewModel(x)));
+			if (Tools.Any(x => x.ToolName == "전투예보"))
+			{
+				this.PreviewBattleVisible = Visibility.Collapsed;
+				this.CheckPreviewBattle = false;
+			}
+			else
+			{
+				this.CheckPreviewBattle = KanColleClient.Current.PreviewBattle.EnableBattlePreview;
+				if (this.CheckPreviewBattle) this.PreviewBattleVisible = Visibility.Visible;
+				else this.PreviewBattleVisible = Visibility.Collapsed;
+
+			}
+
 			_RefreshNavigator = new RelayCommand(Navigator.ReNavigate);
 		}
 
@@ -192,6 +268,13 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					? Mode.InSortie
 					: Mode.Started
 				: Mode.NotStarted;
+		}
+
+		public void ShowPreviewPopUp()
+		{
+			var window = new BattlePreviewsPopUpViewModel();
+			var message = new TransitionMessage(window, "Show/BattlePreviewsPopup");
+			this.Messenger.RaiseAsync(message);
 		}
 	}
 }

@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 
-namespace Grabacr07.KanColleViewer.Plugins.ViewModels
+namespace Grabacr07.KanColleViewer.ViewModels
 {
-	public class BattlePreviewsPopUpViewModel : ViewModel
+	public class BattlePreviewsPopUpViewModel : WindowViewModel
 	{
 		#region KanResultReport 変更通知プロパティ
 
@@ -298,6 +298,8 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 
 		public BattlePreviewsPopUpViewModel()
 		{
+			this.Title = "전투예측 윈도우";
+
 			PerfectRank = Visibility.Hidden;
 			RankS = Visibility.Hidden;
 			RankA = Visibility.Hidden;
@@ -305,6 +307,9 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 			RankC = Visibility.Hidden;
 			RankD = Visibility.Hidden;
 			RankOut = Visibility.Hidden;
+			
+			if (!KanColleClient.Current.PreviewBattle.IsDatalistClear) this.RewriteFleetStatus();
+
 			this.UpdateFleetStatus();
 		}
 		private void UpdateFleetStatus()
@@ -315,14 +320,14 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 				{
 					KanColleClient.Current.PreviewBattle.PreviewCriticalCondition += () =>
 					{
-						if(!KanColleClient.Current.PreviewBattle.Combined)this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.KanResult());
+						if (!KanColleClient.Current.PreviewBattle.Combined) this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.KanResult());
 						else
 						{
 							this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.KanResult(1));
 							this.SecondResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.SecondResult());
 						}
 						this.EnemyResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.EnemyResult());
-						
+
 						this.RankOuts = KanColleClient.Current.PreviewBattle.RankOut();
 						this.RankIntToVisibility(this.RankOuts.RankNum);
 					};
@@ -332,6 +337,31 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 			{
 				System.Diagnostics.Debug.WriteLine(e);
 			}
+
+		}
+		private void RewriteFleetStatus()
+		{
+			try
+			{
+				if (KanColleClient.Current.PreviewBattle.EnableBattlePreview)
+				{
+					if (!KanColleClient.Current.PreviewBattle.Combined) this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.KanResult());
+					else
+					{
+						this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.KanResult(1));
+						this.SecondResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.SecondResult());
+					}
+					this.EnemyResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.EnemyResult());
+
+					this.RankOuts = KanColleClient.Current.PreviewBattle.RankOut();
+					this.RankIntToVisibility(this.RankOuts.RankNum);
+				}
+			}
+			catch (Exception e)
+			{
+				System.Diagnostics.Debug.WriteLine(e);
+			}
+
 		}
 
 	}

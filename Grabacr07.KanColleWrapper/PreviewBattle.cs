@@ -22,6 +22,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 전투 미리보기가 켜져있는가. 켜져있는 경우는 true
 		/// </summary>
 		public bool EnableBattlePreview { get; set; }
+		public bool IsDatalistClear { get; set; }
 		/// <summary>
 		/// 내부에서 크리티컬이 맞는지 조회하는 부분
 		/// </summary>
@@ -635,6 +636,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			if (EnableBattlePreview)
 			{
+				this.IsDatalistClear = false;
 				DataLists.ComCalResults.Clear();
 				DataLists.CalResults.Clear();
 				DataLists.ComHpResults.Clear();
