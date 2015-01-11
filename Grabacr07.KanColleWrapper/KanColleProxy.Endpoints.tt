@@ -53,6 +53,7 @@
 		"/kcsapi/api_req_practice/battle",
 		"/kcsapi/api_req_practice/battle_result",
 		"/kcsapi/api_req_practice/midnight_battle",
+		"/kcsapi/api_req_map/next",
 	};
 #>
 // 

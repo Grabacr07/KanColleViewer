@@ -67,6 +67,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			proxy.api_req_combined_battle_battle_water.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(true, true, false, x.Data));
 
 			proxy.api_req_map_start.Subscribe(x => this.Cleared(false));
+			proxy.api_req_map_next.Subscribe(x => this.BattleClear());
 
 			proxy.api_req_sortie_battleresult.TryParse().Subscribe(x => this.Result());
 			proxy.api_req_combined_battle_battleresult.TryParse().Subscribe(x => this.Result());
@@ -193,6 +194,8 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <param name="IsEnd">전투가 끝난건지 안 끝난건지의 여부를 입력</param>
 		private void Cleared(bool IsEnd)
 		{
+			BattleClear();
+
 			if (this.IsCritical)
 			{
 				this.IsCritical = false;
@@ -200,6 +203,14 @@ namespace Grabacr07.KanColleWrapper.Models
 
 				if (IsEnd) this.BattleEnd = true;
 				else this.BattleEnd = false;
+			}
+		}
+		private void BattleClear()
+		{
+			if (EnableBattlePreview)
+			{
+				DataLists.EnemyDayBattleDamage = 0;
+				DataLists.KanDayBattleDamage = 0;
 			}
 		}
 		/// <summary>
@@ -644,11 +655,6 @@ namespace Grabacr07.KanColleWrapper.Models
 				DataLists.EnemyHpResults.Clear();
 				DataLists.EnemyCalResults.Clear();
 				DataLists.IsEnemyFlagDead = false;
-				if (!IsMidnight)
-				{
-					DataLists.EnemyDayBattleDamage = 0;
-					DataLists.KanDayBattleDamage = 0;
-				}
 				if (!IsCombined)
 				{
 					if (!IsMidnight) DataLists.IsKanDamaged = false;
