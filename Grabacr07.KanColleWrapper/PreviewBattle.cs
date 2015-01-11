@@ -648,12 +648,19 @@ namespace Grabacr07.KanColleWrapper.Models
 			if (EnableBattlePreview)
 			{
 				this.IsDatalistClear = false;
+				
 				DataLists.ComCalResults.Clear();
-				DataLists.CalResults.Clear();
 				DataLists.ComHpResults.Clear();
+				DataLists.ComMHpResults.Clear();
+
+				DataLists.CalResults.Clear();
 				DataLists.HpResults.Clear();
-				DataLists.EnemyHpResults.Clear();
+				DataLists.MHpResults.Clear();
+
 				DataLists.EnemyCalResults.Clear();
+				DataLists.EnemyHpResults.Clear();
+				DataLists.EnemyMHpResults.Clear();
+
 				DataLists.IsEnemyFlagDead = false;
 				if (!IsCombined)
 				{
