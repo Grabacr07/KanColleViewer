@@ -8,7 +8,9 @@ namespace Grabacr07.KanColleViewer.Views
 	{
 		public BattlePreviewsPopUp()
 		{
-			InitializeComponent();
+			this.InitializeComponent();
+
+			MainWindow.Current.Closed += (sender, args) => this.Close();
 		}
 	}
 }
