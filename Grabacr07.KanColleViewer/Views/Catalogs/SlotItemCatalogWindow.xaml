@@ -168,7 +168,11 @@
 
 							<GridViewColumn Width="550">
 								<GridViewColumn.Header>
-									<TextBlock Text="장비하고있는 칸무스(★: 강화장비장착)" />
+									<TextBlock>
+										<Run Text="장비하고있는 칸무스("/>
+										<Run Text="★" Foreground="#FFFFD82B"/>
+										<Run Text=": 강화장비장착)"/>
+									</TextBlock>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate DataType="{x:Type viewModels:SlotItemViewModel}">
@@ -183,7 +187,8 @@
 												<DataTemplate>
 													<TextBlock Margin="0,4,18,0">
 														<Run Text="{Binding EquipStar,Mode=OneWay}"
-															 FontSize="11"/>
+															 FontSize="11"
+															 Foreground="#FFFFD82B"/>
 														<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
 															 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 														<Run Text="{Binding Ship.Level, StringFormat=Lv.{0}, Mode=OneWay}"
