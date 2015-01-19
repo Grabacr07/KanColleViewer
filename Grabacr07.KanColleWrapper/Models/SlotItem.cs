@@ -11,6 +11,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public SlotItemInfo Info { get; private set; }
 		public int Level { get { return this.RawData.api_level; } }
+
 		public string ItemLv { get { return "+"+Level.ToString(); } }
 
 		internal SlotItem(kcsapi_slotitem rawData) : base(rawData)
@@ -18,6 +19,10 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.Info = KanColleClient.Current.Master.SlotItems[this.RawData.api_slotitem_id] ?? SlotItemInfo.Dummy;
 		}
 
+		//protected void LevelUp(int Uplevel)
+		//{
+		//	this.RawData.api_level = Uplevel;
+		//}
 		public override string ToString()
 		{
 			return string.Format("ID = {0}, Name = \"{1}\"", this.Id, this.Info.Name);
