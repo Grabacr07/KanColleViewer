@@ -246,14 +246,9 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.IsCritical = false;
 			List<listup> lists = new List<listup>();
 			List<int> CurrentHPList = new List<int>();
-			if (EnableBattlePreview)
-			{
-				DataLists.EnemyID = null;
-				DataLists.EnemyID = battle.api_ship_ke;
-				DataLists.EnemyLv = null;
-				DataLists.EnemyLv = battle.api_ship_lv;
-				DataLists.DockId = battle.api_dock_id;
-			}
+
+			this.ResetEnemyInfo(battle);
+
 			try
 			{
 				if (battle.api_support_flag != 0) Support(battle.api_support_flag, battle, lists);
@@ -413,14 +408,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			List<int> CurrentHPList = new List<int>();
 			List<listup> lists = new List<listup>();
 
-			if (EnableBattlePreview)
-			{
-				DataLists.EnemyID = null;
-				DataLists.EnemyID = battle.api_ship_ke;
-				DataLists.EnemyLv = null;
-				DataLists.EnemyLv = battle.api_ship_lv;
-				DataLists.DockId = battle.api_dock_id;
-			}
+			this.ResetEnemyInfo(battle);
 			try
 			{
 				if (battle.api_support_flag != 0) Support(battle.api_support_flag, battle, lists);
@@ -584,14 +572,8 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.Combined = IsCombined;
 			List<listup> lists = new List<listup>();
 			List<int> CurrentHPList = new List<int>();
-			if (EnableBattlePreview)
-			{
-				DataLists.EnemyID = null;
-				DataLists.EnemyID = battle.api_ship_ke;
-				DataLists.EnemyLv = null;
-				DataLists.EnemyLv = battle.api_ship_lv;
-				DataLists.DockId = battle.api_deck_id;
-			}
+
+			this.ResetEnemyInfo(battle);
 
 			//포격전 리스트를 작성. 주간과 달리 1차 포격전밖에 없음.
 			if (battle.api_hougeki != null)
@@ -1015,6 +997,34 @@ namespace Grabacr07.KanColleWrapper.Models
 				}
 
 				DecimalListmake(Numlist, Damage, lists, false);
+			}
+		}
+		private void ResetEnemyInfo(kcsapi_battle battle)
+		{
+			if (EnableBattlePreview)
+			{
+				int i=battle.api_ship_ke.Count();
+				DataLists.EnemyID = new int[i];
+				DataLists.EnemyID = battle.api_ship_ke;
+				i = battle.api_ship_lv.Count();
+				DataLists.EnemyLv = new int[i];
+				DataLists.EnemyLv = battle.api_ship_lv;
+
+				DataLists.DockId = battle.api_dock_id;
+			}
+		}
+		private void ResetEnemyInfo(kcsapi_midnight_battle battle)
+		{
+			if (EnableBattlePreview)
+			{
+				int i = battle.api_ship_ke.Count();
+				DataLists.EnemyID = new int[i];
+				DataLists.EnemyID = battle.api_ship_ke;
+				i = battle.api_ship_lv.Count();
+				DataLists.EnemyLv = new int[i];
+				DataLists.EnemyLv = battle.api_ship_lv;
+
+				DataLists.DockId = battle.api_deck_id;
 			}
 		}
 	}
