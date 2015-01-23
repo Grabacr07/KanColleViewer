@@ -81,7 +81,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 전투결과를 CriticalPreviewPopup으로 보냅니다.
 		/// </summary>
 		/// <returns></returns>
-		public List<PreviewBattleResults> KanResult(int combinded=-1)
+		public List<PreviewBattleResults> KanResult(int combinded = -1)
 		{
 			if (!EnableBattlePreview) return null;
 			var Organization = KanColleClient.Current.Homeport.Organization;
@@ -117,7 +117,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					}
 					if (Kan.HP.Maximum != 0 || Kan.HP.Current != 0) this.Results.Add(Kan);
 				}
-				
+
 			}
 			return this.Results;
 		}
@@ -253,11 +253,11 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				if (battle.api_support_flag != 0) Support(battle.api_support_flag, battle, lists);
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				System.Diagnostics.Debug.WriteLine(ex);
 			}
-			
+
 
 			List<listup> Combinelists = new List<listup>();
 
@@ -641,7 +641,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			if (EnableBattlePreview)
 			{
-				
+
 				DataLists.ComCalResults.Clear();
 				DataLists.ComHpResults.Clear();
 				DataLists.ComMHpResults.Clear();
@@ -774,24 +774,30 @@ namespace Grabacr07.KanColleWrapper.Models
 					KanEveryCHP = KanEveryCHP + this.DataLists.FirstKanDamaged;
 					KanEveryMHP = KanEveryMHP + this.DataLists.FirstKanMaxHP;
 				}
-				double EnemyDamage = (double)EnemyEveryCHP / (double)EnemyEveryMHP;
-				double KanDamage = (double)KanEveryCHP / (double)KanEveryMHP;
+				decimal EnemyDamage = (decimal)EnemyEveryCHP / (decimal)EnemyEveryMHP;
+				decimal KanDamage = (decimal)KanEveryCHP / (decimal)KanEveryMHP;
 				if (IsMidnight)
 				{
-					EnemyDamage = (double)(EnemyEveryCHP + DataLists.EnemyDayBattleDamage) / (double)(EnemyEveryMHP + DataLists.EnemyDayBattleDamage);
-					KanDamage = (double)(KanEveryCHP + DataLists.KanDayBattleDamage) / (double)(KanEveryMHP + DataLists.KanDayBattleDamage);
+					EnemyDamage = (decimal)(EnemyEveryCHP + DataLists.EnemyDayBattleDamage) / (decimal)(EnemyEveryMHP + DataLists.EnemyDayBattleDamage);
+					KanDamage = (decimal)(KanEveryCHP + DataLists.KanDayBattleDamage) / (decimal)(KanEveryMHP + DataLists.KanDayBattleDamage);
 				}
 				else
 				{
 					DataLists.EnemyDayBattleDamage = EnemyEveryCHP;
 					DataLists.KanDayBattleDamage = KanEveryCHP;
 				}
-				//스위치를 전부 조작
+				//flag조작 시작
+
+
+				EnemyDamage = Math.Truncate(EnemyDamage * 1000) / 1000;
+				KanDamage = Math.Truncate(KanDamage * 1000) / 1000;
+
 				if (KanDamage != 0)
 				{
-					if (EnemyDamage / KanDamage > 2.5)
+					decimal CalcPercent = Math.Round(EnemyDamage / KanDamage, 1);
+					if (CalcPercent > 2.5m)
 						DataLists.IsOverDamage = true;//2.5배 초과 데미지
-					else if (EnemyDamage / KanDamage > 1)
+					else if (CalcPercent >= 1)
 						DataLists.IsMidDamage = true;//1초과 2.5이하
 					else DataLists.IsScratch = true;//1미만
 				}
@@ -801,7 +807,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				if (KanDamage == 0) DataLists.IsKanDamaged = false;
 				else DataLists.IsKanDamaged = true;
 
-				if (DataLists.IsEnemyDamaged) if (EnemyDamage <= 0.001 && EnemyDamage > 0) DataLists.IsEnemyDamaged = false;
+				if (DataLists.IsEnemyDamaged) if (EnemyDamage <= 0.001m && EnemyDamage > 0) DataLists.IsEnemyDamaged = false;
 
 				if (EnemyEveryMHP - EnemyEveryCHP <= 0) DataLists.IsEnemyExterminated = true;//적 전멸
 				else DataLists.IsEnemyExterminated = false;
@@ -830,7 +836,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				}
 				catch (Exception e)
 				{
-					DataLists.RankInt = -1; 
+					DataLists.RankInt = -1;
 					System.Diagnostics.Debug.WriteLine(e);
 				}
 			}
@@ -959,6 +965,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					if (DataLists.IsEnemyDeadOverHalf) return 2;
 
 					if (DataLists.IsOverDamage) return 3;
+
 					else if (DataLists.IsMidDamage) return 4;
 					else if (DataLists.IsScratch) return 5;
 					else return -1;//예측불능
@@ -1014,7 +1021,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			if (EnableBattlePreview)
 			{
-				int i=battle.api_ship_ke.Count();
+				int i = battle.api_ship_ke.Count();
 				DataLists.EnemyID = new int[i];
 				DataLists.EnemyID = battle.api_ship_ke;
 				i = battle.api_ship_lv.Count();
