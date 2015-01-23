@@ -85,10 +85,27 @@
 					<ColumnDefinition Width="Auto"/>
 					<ColumnDefinition Width="*"/>
 				</Grid.ColumnDefinitions>
-				<TextBlock Text="※해당 결과는 예측된 결과입니다! 실제결과와는 다소 차이가 있을 수 있습니다." 
-						   Foreground="red" 
+				<TextBlock Foreground="red" 
 						   FontWeight="Bold"
-						   FontSize="13" Margin="0,0,0,20"/>
+						   FontSize="13"
+						   VerticalAlignment="Center">
+					<Run Text="※해당 결과는 예측된 결과입니다! 실제결과와는 다소 차이가 있을 수 있습니다."/>
+					<LineBreak/>
+					<Run Text="※전투결과가 뜨지 않는경우 우측 버튼을 눌러 전투결과를 로드합니다."
+						 Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+				</TextBlock>
+				<metro2:CallMethodButton Grid.Column="1"
+										 Content="결과 불러오기"
+										 ToolTip="가장 최근 전투결과를 불러옵니다"
+										 Width="Auto"
+										 Height="Auto"
+										 Padding="15,6"
+										 HorizontalAlignment="Right" 
+										 VerticalAlignment="Center"
+										 Margin="5"
+										 MethodName="Update"
+										 IsEnabled="{Binding IsCalculated,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+										 />
 			</Grid>
 			<Grid HorizontalAlignment="Center"
 				VerticalAlignment="Center">

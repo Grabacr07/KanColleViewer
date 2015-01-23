@@ -1,6 +1,5 @@
 ﻿using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
-using Livet;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -218,6 +217,26 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region IsCalculated 変更通知プロパティ
+
+		private bool _IsCalculated;
+
+		public bool IsCalculated
+		{
+			get { return this._IsCalculated; }
+			set
+			{
+				if (this._IsCalculated != value)
+				{
+					this._IsCalculated = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+
 		private void RankIntToVisibility(int value)
 		{
 			switch (value)
@@ -307,8 +326,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			RankC = Visibility.Hidden;
 			RankD = Visibility.Hidden;
 			RankOut = Visibility.Hidden;
-			
-			if (!KanColleClient.Current.PreviewBattle.IsDatalistClear) this.RewriteFleetStatus();
+
+			this.IsCalculated = KanColleClient.Current.PreviewBattle.IsCalculated;
 
 			this.UpdateFleetStatus();
 		}
@@ -338,6 +357,10 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				System.Diagnostics.Debug.WriteLine(e);
 			}
 
+		}
+		public void Update()
+		{
+			this.RewriteFleetStatus();
 		}
 		private void RewriteFleetStatus()
 		{

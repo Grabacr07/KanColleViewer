@@ -22,7 +22,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 전투 미리보기가 켜져있는가. 켜져있는 경우는 true
 		/// </summary>
 		public bool EnableBattlePreview { get; set; }
-		public bool IsDatalistClear { get; set; }
+		public bool IsCalculated { get; set; }
 		/// <summary>
 		/// 내부에서 크리티컬이 맞는지 조회하는 부분
 		/// </summary>
@@ -392,7 +392,11 @@ namespace Grabacr07.KanColleWrapper.Models
 			BattleCalc(Combinelists, CurrentHPList, CombinePlusEnemyMaxHPs, CombinePlusEnemyNowHPs, true, false, false);
 			//BattleCalc(HPList, MHPList, Combinelists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined,true);
 
-			if (EnableBattlePreview) this.PreviewCriticalCondition();
+			if (EnableBattlePreview)
+			{
+				this.PreviewCriticalCondition();
+				this.IsCalculated = true;
+			}
 		}
 		/// <summary>
 		/// 일반 포격전, 개막뇌격, 개막 항공전등을 계산.
@@ -557,7 +561,11 @@ namespace Grabacr07.KanColleWrapper.Models
 				//BattleCalc(HPList, MHPList, Combinelists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined,true);
 
 			}
-			if (EnableBattlePreview) this.PreviewCriticalCondition();
+			if (EnableBattlePreview)
+			{
+				this.PreviewCriticalCondition();
+				this.IsCalculated = true;
+			}
 		}
 		/// <summary>
 		/// battle의 야전버전. Battle과 구조는 동일. 다만 전투의 양상이 조금 다르기때문에 분리. 연합함대와 아닌경우의 구분을 한다.
@@ -612,7 +620,11 @@ namespace Grabacr07.KanColleWrapper.Models
 				else
 					BattleCalc(lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps, false, IsMidnight, IsPractice);
 			}
-			if (EnableBattlePreview) this.PreviewCriticalCondition();
+			if (EnableBattlePreview)
+			{
+				this.PreviewCriticalCondition();
+				this.IsCalculated = true;
+			}
 		}
 
 		/// <summary>
@@ -629,7 +641,6 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			if (EnableBattlePreview)
 			{
-				this.IsDatalistClear = false;
 				
 				DataLists.ComCalResults.Clear();
 				DataLists.ComHpResults.Clear();
