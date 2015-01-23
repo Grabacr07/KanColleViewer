@@ -16,20 +16,20 @@ namespace Grabacr07.KanColleViewer.ViewModels.Dev
 			PluginHost.Instance.GetNotifier()
 				.Show(NotifyType.Other, Properties.Resources.Debug_NotificationMessage_Title, Properties.Resources.Debug_NotificationMessage, () => App.ViewModelRoot.Activate());
 		}
-		public void CriticalDialog()
-		{
-			//var MsgBox = new CriticalDialogViewModel();
-			//var message = new TransitionMessage(MsgBox, "Show/CriticalDialog");
-			//this.Messenger.RaiseAsync(message);
-			App.Current.Dispatcher.Invoke(
-							System.Windows.Threading.DispatcherPriority.Normal,
-							new Action(
-								delegate()
-								{
-									App.CriticalPupup();
-								})
-							);
-		}
+		//public void CriticalDialog()
+		//{
+		//	//var MsgBox = new CriticalDialogViewModel();
+		//	//var message = new TransitionMessage(MsgBox, "Show/CriticalDialog");
+		//	//this.Messenger.RaiseAsync(message);
+		//	App.Current.Dispatcher.Invoke(
+		//					System.Windows.Threading.DispatcherPriority.Normal,
+		//					new Action(
+		//						delegate()
+		//						{
+		//							App.CriticalPupup();
+		//						})
+		//					);
+		//}
 
 	}
 }

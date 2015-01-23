@@ -49,7 +49,7 @@ namespace Grabacr07.KanColleViewer.Models
 				EnableAddUntranslated = true,
 				EnableCriticalNotify = true,
 				EnableCriticalAccent = true,
-				EnableCriticalPopup = true,
+				//EnableCriticalPopup = true,
 				EnableUpdateNotification = true,
 				EnableUpdateTransOnStart = true,
 				NotifyBuildingCompleted = true,
@@ -550,24 +550,24 @@ namespace Grabacr07.KanColleViewer.Models
 
 		#endregion
 
-		#region EnableCriticalPopup 変更通知プロパティ
+		//#region EnableCriticalPopup 変更通知プロパティ
 
-		private bool _EnableCriticalPopup;
+		//private bool _EnableCriticalPopup;
 
-		public bool EnableCriticalPopup
-		{
-			get { return this._EnableCriticalPopup; }
-			set
-			{
-				if (this._EnableCriticalPopup != value)
-				{
-					this._EnableCriticalPopup = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
+		//public bool EnableCriticalPopup
+		//{
+		//	get { return this._EnableCriticalPopup; }
+		//	set
+		//	{
+		//		if (this._EnableCriticalPopup != value)
+		//		{
+		//			this._EnableCriticalPopup = value;
+		//			this.RaisePropertyChanged();
+		//		}
+		//	}
+		//}
 
-		#endregion
+		//#endregion
 
 		#region EnableBattlePreview 変更通知プロパティ
 

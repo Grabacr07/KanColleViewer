@@ -296,22 +296,22 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-		#region EnableCriticalPopup 変更通知プロパティ
+		//#region EnableCriticalPopup 変更通知プロパティ
 
-		public bool EnableCriticalPopup
-		{
-			get { return Settings.Current.EnableCriticalPopup; }
-			set
-			{
-				if (Settings.Current.EnableCriticalPopup != value)
-				{
-					Settings.Current.EnableCriticalPopup = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
+		//public bool EnableCriticalPopup
+		//{
+		//	get { return Settings.Current.EnableCriticalPopup; }
+		//	set
+		//	{
+		//		if (Settings.Current.EnableCriticalPopup != value)
+		//		{
+		//			Settings.Current.EnableCriticalPopup = value;
+		//			this.RaisePropertyChanged();
+		//		}
+		//	}
+		//}
 
-		#endregion
+		//#endregion
 
 		#region EquipmentVersion 変更通知プロパティ
 

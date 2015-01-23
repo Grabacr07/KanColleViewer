@@ -283,9 +283,6 @@
     <Compile Include="Views\Dev\DebugTab.xaml.cs">
       <DependentUpon>DebugTab.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CriticalDialog.xaml.cs">
-      <DependentUpon>CriticalDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\ExitDialog.xaml.cs">
       <DependentUpon>ExitDialog.xaml</DependentUpon>
     </Compile>
@@ -463,10 +460,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Controls\PreviewPopUpButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\CriticalDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

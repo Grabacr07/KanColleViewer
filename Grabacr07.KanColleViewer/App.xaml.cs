@@ -84,13 +84,13 @@ namespace Grabacr07.KanColleViewer
 			this.MainWindow.Show();
 			//CriticalPupup();
 		}
-		public static void CriticalPupup()
-		{
-			CriticalDialog criticalDialog = new CriticalDialog();
-			criticalDialog.Left = App.Current.MainWindow.Left + 95.0;
-			criticalDialog.Top = App.Current.MainWindow.Top + 165.0;
-			criticalDialog.Show();
-		}
+		//public static void CriticalPupup()
+		//{
+		//	CriticalDialog criticalDialog = new CriticalDialog();
+		//	criticalDialog.Left = App.Current.MainWindow.Left + 95.0;
+		//	criticalDialog.Top = App.Current.MainWindow.Top + 165.0;
+		//	criticalDialog.Show();
+		//}
 		protected override void OnExit(ExitEventArgs e)
 		{
 			base.OnExit(e);

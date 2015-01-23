@@ -27,10 +27,10 @@
 								   HorizontalAlignment="Left"
 								   Padding="20,5"
 								   MethodName="Notify" />
-		<controls:CallMethodButton Content="Test Critical Message"
+		<!--<controls:CallMethodButton Content="Test Critical Message"
 								   HorizontalAlignment="Left"
 								   Margin="0,10,0,0"
 								   Padding="20,5"
-								   MethodName="CriticalDialog" />
+								   MethodName="CriticalDialog" />-->
 	</StackPanel>
 </UserControl>

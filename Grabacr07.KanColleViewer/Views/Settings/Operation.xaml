@@ -61,7 +61,7 @@
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
 				   Margin="0,10"/>
 		<CheckBox Content="{Binding Source={x:Static properties:Resources.Settings_Notify_CriticalCondition}, Mode=OneWay}" IsChecked="{Binding EnableCriticalNotify}" Height="17" Margin="15,0,0,10"/>
-		<CheckBox Content="해역돌파중 대파된 칸무스가 있을때 팝업을 띄움" IsChecked="{Binding EnableCriticalPopup}" Height="17" Margin="15,0,0,10"/>
+		<!--<CheckBox Content="해역돌파중 대파된 칸무스가 있을때 팝업을 띄움" IsChecked="{Binding EnableCriticalPopup}" Height="17" Margin="15,0,0,10"/>-->
 		<CheckBox Content="{Binding Source={x:Static properties:Resources.Settings_Accent_CriticalCondition}, Mode=OneWay}" IsChecked="{Binding EnableCriticalAccent}" Height="17" Margin="15,0,0,10"/>
 		<CheckBox Content="전투예보를 위한 추가계산 수행" IsChecked="{Binding EnableBattlePreview}" Height="17" Margin="15,0,0,10"/>
 
