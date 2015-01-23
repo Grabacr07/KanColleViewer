@@ -17,9 +17,9 @@
 	<i:Interaction.Triggers>
 		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
 										 MessageKey="Show/CriticalDialog">
-			<livet:TransitionInteractionMessageAction Mode="NewOrActive"
+			<!--<livet:TransitionInteractionMessageAction Mode="NewOrActive"
 													  WindowType="views:CriticalDialog"
-													  IsOwned="False" />
+													  IsOwned="False" />-->
 		</livet:InteractionMessageTrigger>
 	</i:Interaction.Triggers>
 	<StackPanel Margin="10,0,10,10">
