@@ -184,11 +184,17 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		{
 			if (this.Direction == SortDirection.Ascending)
 			{
-				return list.OrderBy(x => x.RepairTime);
+				return list.OrderBy(x => x.RepairTime)
+					.ThenBy(x => x.Info.ShipType.Id)
+					.ThenBy(x => x.Level)
+					.ThenBy(x => x.Info.SortId);
 			}
 			if (this.Direction == SortDirection.Descending)
 			{
-				return list.OrderByDescending(x => x.RepairTime);
+				return list.OrderByDescending(x => x.RepairTime)
+					.ThenBy(x => x.Info.ShipType.Id)
+					.ThenBy(x => x.Level)
+					.ThenBy(x => x.Info.SortId);
 			}
 			return list;
 		}
