@@ -10,5 +10,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		Level,
 		Cond,
 		ViewRange,
+		RepairTime,
 	}
 }
