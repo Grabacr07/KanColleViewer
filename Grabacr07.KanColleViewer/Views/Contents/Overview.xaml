@@ -88,19 +88,19 @@
 													  WindowType="catalogs:SlotItemCatalogWindow"
 													  IsOwned="False" />
 		</livet:InteractionMessageTrigger>
-        <livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
 										 MessageKey="Show/CalExp">
-            <livet:TransitionInteractionMessageAction Mode="NewOrActive"
+			<livet:TransitionInteractionMessageAction Mode="NewOrActive"
 													  WindowType="catalogs:CalExp"
 													  IsOwned="False" />
-        </livet:InteractionMessageTrigger>
-        <livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+		</livet:InteractionMessageTrigger>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
 										 MessageKey="Show/ExpeditionsCatalogWindow">
-            <livet:TransitionInteractionMessageAction Mode="NewOrActive"
+			<livet:TransitionInteractionMessageAction Mode="NewOrActive"
 													  WindowType="catalogs:ExpeditionsCatalogWindow"
 													  IsOwned="False" />
-        </livet:InteractionMessageTrigger>
-    </i:Interaction.Triggers>
+		</livet:InteractionMessageTrigger>
+	</i:Interaction.Triggers>
 
 
 	<ScrollViewer VerticalScrollBarVisibility="Auto"
@@ -110,7 +110,7 @@
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="205" />
 				<ColumnDefinition Width="140" />
-            </Grid.ColumnDefinitions>
+			</Grid.ColumnDefinitions>
 
 			<Border VerticalAlignment="Top">
 				<DockPanel DataContext="{Binding Content.Fleets}">
@@ -293,22 +293,22 @@
 								   Margin="0,7,0,3"
 								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-                        <metro2:CallMethodButton Content="함선목록"
+						<metro2:CallMethodButton Content="함선목록"
 											 Padding="12,5"
 											 Margin="0,5,0,5"
 											 MethodName="ShowShipCatalog" />
 
-                        <metro2:CallMethodButton Content="장비목록"
+						<metro2:CallMethodButton Content="장비목록"
 											 Padding="12,5"
 											 Margin="0,0,0,5"
 											 MethodName="ShowSlotItemCatalog" />
 
-                        <metro2:CallMethodButton Content="계산기"
+						<metro2:CallMethodButton Content="계산기"
 											 ToolTip="경험치 계산기입니다. 바로 다음 개조레벨조회도 가능"
 											 Padding="12,5"
 											 Margin="0,0,0,5"
 											 MethodName="CalExp" />
-                        <metro2:CallMethodButton Content="원정목록"
+						<metro2:CallMethodButton Content="원정목록"
 											 Padding="12,5"
 											 MethodName="ExpeditionsCatalogWindow" />
 					</StackPanel>
@@ -334,7 +334,7 @@
 											   Margin="0,4,0,0">
 										<Run Text="{Binding Id, Mode=OneWay, StringFormat=/{0}}"
 											 Style="{DynamicResource EmphaticTextElementStyleKey}"
-                                             FontSize="13"/>
+											 FontSize="13"/>
 										<Run x:Name="Remaining"
 											 Text="{Binding Expedition.Remaining, StringFormat=- {0}, Mode=OneWay}" />
 									</TextBlock>
