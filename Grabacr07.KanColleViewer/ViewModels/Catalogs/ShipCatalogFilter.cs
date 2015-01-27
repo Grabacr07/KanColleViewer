@@ -602,16 +602,4 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			return false;
 		}
 	}
-	public class ShipNdockTimeFilter:ShipCatalogFilter
-	{
-		public ShipNdockTimeFilter(Action updateAction) : base(updateAction) { }
-
-		public override bool Predicate(Ship ship)
-		{
-			if (ship.IsInRepairing) return false;
-			if (ship.RepairTime != 0) return true;
-			return false;
-		}
-
-	}
 }

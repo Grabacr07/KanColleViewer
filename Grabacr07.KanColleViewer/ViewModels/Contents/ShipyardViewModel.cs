@@ -1,7 +1,5 @@
-﻿using Grabacr07.KanColleViewer.ViewModels.Catalogs;
-using Grabacr07.KanColleWrapper;
+﻿using Grabacr07.KanColleWrapper;
 using Livet.EventListeners;
-using Livet.Messaging;
 using System;
 using System.Linq;
 
@@ -88,13 +86,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 		private void UpdateSlotItem()
 		{
 			this.CreatedSlotItem.Update(KanColleClient.Current.Homeport.Dockyard.CreatedSlotItem);
-		}
-
-		public void ShowNdockShipCatalog()
-		{
-			var catalog = new NeedNdockShipCatalogWindowViewModel();
-			var message = new TransitionMessage(catalog, "Show/NeedNdockShipCatalogWindow");
-			this.Messenger.RaiseAsync(message);
 		}
 	}
 }

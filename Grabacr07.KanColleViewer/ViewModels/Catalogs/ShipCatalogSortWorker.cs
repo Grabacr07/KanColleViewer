@@ -17,7 +17,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public LevelColumnViewModel LevelColumn { get; private set; }
 		public ConditionColumnViewModel ConditionColumn { get; private set; }
 		public ViewRangeColumnViewModel ViewRangeColumn { get; private set; }
-		public NdockTimeColumnViewModel NdockTimeColumn { get; private set; }
 
 		public ShipCatalogSortWorker()
 		{
@@ -27,7 +26,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			this.LevelColumn = new LevelColumnViewModel();
 			this.ConditionColumn = new ConditionColumnViewModel();
 			this.ViewRangeColumn = new ViewRangeColumnViewModel();
-			this.NdockTimeColumn = new NdockTimeColumnViewModel();
 
 			this.sortableColumns = new List<SortableColumnViewModel>
 			{
@@ -38,7 +36,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				this.LevelColumn,
 				this.ConditionColumn,
 				this.ViewRangeColumn,
-				this.NdockTimeColumn,
 			};
 
 			this.currentSortTarget = this.noneColumn;
