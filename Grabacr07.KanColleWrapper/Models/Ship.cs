@@ -1,6 +1,9 @@
 ﻿using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models.Raw;
+using System;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
@@ -9,6 +12,28 @@ namespace Grabacr07.KanColleWrapper.Models
 	/// </summary>
 	public class Ship : RawDataWrapper<kcsapi_ship2>, IIdentifiable
 	{
+		#region Remaining 変更通知プロパティ
+
+		private TimeSpan? _Remaining;
+
+		/// <summary>
+		/// 入渠が完了するまでの残り時間を取得します。1 秒ごとに更新されます。
+		/// </summary>
+		public TimeSpan? Remaining
+		{
+			get { return this._Remaining; }
+			private set
+			{
+				if (this._Remaining != value)
+				{
+					this._Remaining = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		private readonly Homeport homeport;
 
 		/// <summary>
@@ -17,6 +42,21 @@ namespace Grabacr07.KanColleWrapper.Models
 		public int Id
 		{
 			get { return this.RawData.api_id; }
+		}
+		public long RepairTime
+		{
+			get { return this.RawData.api_ndock_time; }
+		}
+		public string RepairTimeString
+		{
+			get
+			{
+				Remaining = new TimeSpan(0,0,0,0,(int)this.RepairTime);
+				if (Remaining.HasValue) return string.Format("{0:D2}:{1}",
+						(int)this.Remaining.Value.TotalHours,
+						this.Remaining.Value.ToString(@"mm\:ss"));
+				return string.Empty;
+			}
 		}
 
 		/// <summary>

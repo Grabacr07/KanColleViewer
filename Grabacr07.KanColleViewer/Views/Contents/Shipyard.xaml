@@ -5,14 +5,25 @@
 			 xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
+			 xmlns:catalogs="clr-namespace:Grabacr07.KanColleViewer.Views.Catalogs"
 			 mc:Ignorable="d"
 			 d:DesignWidth="650"
 			 d:DesignHeight="400"
 			 d:DataContext="{d:DesignInstance viewModels:ShipyardViewModel}">
+	<i:Interaction.Triggers>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+										 MessageKey="Show/NeedNdockShipCatalogWindow">
+			<livet:TransitionInteractionMessageAction Mode="NewOrActive"
+													  WindowType="catalogs:NeedNdockShipCatalogWindow"
+													  IsOwned="False" />
+		</livet:InteractionMessageTrigger>
+	</i:Interaction.Triggers>
 	<UserControl.Resources>
 		<Style TargetType="{x:Type GroupBox}">
 			<Setter Property="OverridesDefaultStyle"
@@ -84,7 +95,7 @@
 					<ColumnDefinition Width="*"/>
 				</Grid.ColumnDefinitions>
 				<GroupBox Header="입거"
-					  Margin="10,0">
+					  Margin="10,0,0,0">
 					<Grid>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition />
@@ -224,81 +235,26 @@
 						</StackPanel>
 					</Grid>
 				</GroupBox>
-
-				<ListView Grid.Column="1" 
-						  ScrollViewer.HorizontalScrollBarVisibility="Auto" 
-						  ScrollViewer.VerticalScrollBarVisibility="Auto">
-						<ListView.Resources>
-							<Style TargetType="{x:Type TextBlock}">
-								<Setter Property="Margin"
-									Value="5,4" />
-							</Style>
-							<Style TargetType="{x:Type GridViewColumnHeader}">
-								<Setter Property="OverridesDefaultStyle"
-									Value="True"/>
-								<Setter Property="BorderThickness"
-									Value="0,0,0,1" />
-								<Setter Property="BorderBrush"
-									Value="{DynamicResource BorderBrushKey}" />
-								<Setter Property="Background"
-									Value="{DynamicResource BackgroundBrushKey}" />
-								<Setter Property="Template">
-									<Setter.Value>
-										<ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
-											<Grid>
-												<Border BorderThickness="{TemplateBinding BorderThickness}"
-													BorderBrush="{TemplateBinding BorderBrush}"
-													Background="{TemplateBinding Background}">
-													<ContentPresenter Margin="{TemplateBinding Padding}" />
-												</Border>
-												<Thumb x:Name="PART_HeaderGripper"
-												   HorizontalAlignment="Right"
-												   BorderBrush="{TemplateBinding BorderBrush}"
-												   Margin="0,0,-6,0">
-													<Thumb.Template>
-														<ControlTemplate TargetType="{x:Type Thumb}">
-															<Border Background="Transparent"
-																Width="13">
-																<Rectangle Width="1"
-																	   Stroke="{TemplateBinding BorderBrush}" />
-															</Border>
-														</ControlTemplate>
-													</Thumb.Template>
-												</Thumb>
-											</Grid>
-										</ControlTemplate>
-									</Setter.Value>
-								</Setter>
-							</Style>
-						</ListView.Resources>
-						<ListView.View>
-							<GridView>
-								<GridViewColumn Width="Auto" x:Name="Kanname">
-									<GridViewColumn.CellTemplate>
-										<DataTemplate>
-											<TextBlock Margin="6,3,0,3" Text="{Binding KanName}" 
-											Foreground="{DynamicResource ActiveForegroundBrushKey}"/>
-										</DataTemplate>
-									</GridViewColumn.CellTemplate>
-									<GridViewColumnHeader>
-										<TextBlock Text="이름"/>
-									</GridViewColumnHeader>
-								</GridViewColumn>
-								<GridViewColumn Width="Auto" x:Name="ndockTime">
-									<GridViewColumn.CellTemplate>
-										<DataTemplate>
-											<TextBlock Text="{Binding FixTime}"
-											Foreground="{DynamicResource ActiveForegroundBrushKey}"
-											Margin="6,3,0,3" />
-										</DataTemplate>
-									</GridViewColumn.CellTemplate>
-									<GridViewColumnHeader>
-										<TextBlock Text="시간"/>
-									</GridViewColumnHeader>
-								</GridViewColumn>
-							</GridView>
-						</ListView.View>
-					</ListView>
+				<Border Grid.Column="1"
+						Margin="0,0,10,0"
+							BorderBrush="{DynamicResource BorderBrushKey}"
+							BorderThickness="0,1,1,1">
+					<DockPanel>
+						<StackPanel>
+							<Border Background="{DynamicResource BorderBrushKey}"
+										Padding="8,6">
+								<TextBlock Text="추가기능"
+											   Style="{DynamicResource HeaderTextStyleKey}" />
+							</Border>
+							<metro2:CallMethodButton Content="수리필요 칸무스목록" 
+													 HorizontalAlignment="Center"
+													 Margin="0,7,0,0"
+													 Padding ="10,5"
+													 MethodName="ShowNdockShipCatalog"													 
+													 />
+						</StackPanel>
+					</DockPanel>
+				</Border>
 			</Grid>
 
 			<GroupBox Header="건조"

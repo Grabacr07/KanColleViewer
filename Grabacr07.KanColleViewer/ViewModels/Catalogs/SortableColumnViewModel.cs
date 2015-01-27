@@ -176,4 +176,29 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			return list;
 		}
 	}
+	public class NdockTimeColumnViewModel : SortableColumnViewModel
+	{
+		public NdockTimeColumnViewModel() : base(ShipCatalogSortTarget.RepairTime) { }
+
+		public override IEnumerable<Ship> Sort(IEnumerable<Ship> list)
+		{
+			if (this.Direction == SortDirection.Ascending)
+			{
+				return list.OrderBy(x => x.RepairTime)
+					.ThenBy(x => x.Id)
+					.ThenBy(x => x.Info.ShipType.Id)
+					.ThenBy(x => x.Level)
+					.ThenBy(x => x.Info.SortId);
+			}
+			if (this.Direction == SortDirection.Descending)
+			{
+				return list.OrderByDescending(x => x.RepairTime)
+					.ThenBy(x => x.Id)
+					.ThenBy(x => x.Info.ShipType.Id)
+					.ThenBy(x => x.Level)
+					.ThenBy(x => x.Info.SortId);
+			}
+			return list;
+		}
+	}
 }
