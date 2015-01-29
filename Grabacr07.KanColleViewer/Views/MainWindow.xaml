@@ -75,6 +75,9 @@
 							HorizontalAlignment="Right"
 							VerticalAlignment="Top"
 							WindowChrome.IsHitTestVisibleInChrome="True">
+					<controls:RefreshButton ToolTip="새로고침을 합니다"
+											Margin="0,0,20,0"
+											Height="26"/>
 					<controls:PreviewPopUpButton 
 									 IsEnabled="{Binding CheckPreviewBattle,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
 									 Visibility="{Binding PreviewBattleVisible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>

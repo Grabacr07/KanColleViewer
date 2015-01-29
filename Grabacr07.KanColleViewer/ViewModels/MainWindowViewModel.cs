@@ -276,5 +276,11 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			var message = new TransitionMessage(window, "Show/BattlePreviewsPopup");
 			this.Messenger.RaiseAsync(message);
 		}
+		public void ShowRefreshPopup()
+		{
+			var window = new RefreshPopupViewModel();
+			var message = new TransitionMessage(window, "Show/RefreshPopup");
+			this.Messenger.RaiseAsync(message);
+		}
 	}
 }
