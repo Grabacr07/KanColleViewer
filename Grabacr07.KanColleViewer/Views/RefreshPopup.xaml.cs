@@ -27,10 +27,5 @@ namespace Grabacr07.KanColleViewer.Views
 
 			MainWindow.Current.Closed += (sender, args) => this.Close();
 		}
-
-		private void CallMethodButton_Click(object sender, RoutedEventArgs e)
-		{
-			this.Close();
-		}
 	}
 }
