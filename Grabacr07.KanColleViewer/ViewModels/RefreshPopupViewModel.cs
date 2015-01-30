@@ -11,7 +11,12 @@ namespace Grabacr07.KanColleViewer.ViewModels
 	{
 		public RefreshPopupViewModel()
 		{
-
+			
+		}
+		public void RefreshNav()
+		{
+			KanColleViewer.Views.MainWindow.Current.RefreshNavigator();
+			KanColleViewer.Views.RefreshPopup.Current.Close();
 		}
 	}
 }

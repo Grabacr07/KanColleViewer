@@ -19,9 +19,11 @@ namespace Grabacr07.KanColleViewer.Views
 	/// </summary>
 	public partial class RefreshPopup
 	{
+		public static RefreshPopup Current { get; private set; }
 		public RefreshPopup()
 		{
 			InitializeComponent();
+			Current = this;
 
 			MainWindow.Current.Closed += (sender, args) => this.Close();
 		}

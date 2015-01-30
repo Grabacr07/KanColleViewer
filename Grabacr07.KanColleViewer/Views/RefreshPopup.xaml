@@ -39,6 +39,7 @@
 			<metro2:CallMethodButton Content="OK"
 									 MinWidth="100"
 									 Padding="20,5"
+									 MethodName="RefreshNav"
 									 Margin="12,0,0,0" />
 			<metro2:CallMethodButton Content="Cancel"
 									 MinWidth="100"
