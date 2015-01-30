@@ -1,0 +1,51 @@
+﻿<metro:MetroWindow x:Class="Grabacr07.KanColleViewer.Views.RefreshPopup"
+				   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+				   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				   xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+				   xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+				   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+				   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+				   xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+				   xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+				   xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+				   xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
+				   xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
+				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+				   xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
+				   xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
+				   mc:Ignorable="d"
+				   d:DataContext="{d:DesignInstance viewModels:RefreshPopupViewModel}"
+				   Style="{DynamicResource MetroDialogStyleKey}"
+				   Title="새로고침"
+				   WindowStartupLocation="CenterScreen"
+				   SizeToContent="Height">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<TextBlock Text="게임 화면을 새로고침하시겠습니까?"
+				   FontSize="13"
+				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+				   Margin="10,0"
+				   HorizontalAlignment="Left" />
+
+		<StackPanel Grid.Row="1"
+					Orientation="Horizontal"
+					HorizontalAlignment="Right"
+					Margin="14,7,14,14">
+
+			<metro2:CallMethodButton Content="네"
+									 MinWidth="100"
+									 Padding="20,5"
+									 MethodName="RefreshNav"
+									 Margin="12,0,0,0" />
+			<metro2:CallMethodButton Content="아니오"
+									 MinWidth="100"
+									 Padding="20,5"
+									 MethodName="PopupClose"
+									 Margin="12,0,0,0" />
+		</StackPanel>
+	</Grid>
+</metro:MetroWindow>

@@ -208,6 +208,8 @@
     <Compile Include="ViewModels\NavigatorViewModel.cs" />
     <Compile Include="ViewModels\NullViewModel.cs" />
     <Compile Include="ViewModels\PreviewPopUpButtonViewModel.cs" />
+    <Compile Include="ViewModels\RefreshButtonViewModel.cs" />
+    <Compile Include="ViewModels\RefreshPopupViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\Contents\ShipsViewModel.cs" />
     <Compile Include="ViewModels\Contents\SlotItemsViewModel.cs" />
@@ -239,6 +241,9 @@
     <Compile Include="Views\Controls\KanColleHost.cs" />
     <Compile Include="Views\Controls\PreviewPopUpButton.xaml.cs">
       <DependentUpon>PreviewPopUpButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\RefreshButton.xaml.cs">
+      <DependentUpon>RefreshButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\WebBrowserHelper.cs" />
     <Compile Include="Views\Behaviors\ZoomAction.cs" />
@@ -288,6 +293,9 @@
     </Compile>
     <Compile Include="Views\ExitDialog.xaml.cs">
       <DependentUpon>ExitDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RefreshPopup.xaml.cs">
+      <DependentUpon>RefreshPopup.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings\Language.xaml.cs">
       <DependentUpon>Language.xaml</DependentUpon>
@@ -469,6 +477,14 @@
     <Page Include="Views\Controls\PreviewPopUpButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Controls\RefreshButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RefreshPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Settings\Updates.xaml">
       <SubType>Designer</SubType>
