@@ -615,10 +615,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Properties\Resources.en.resx">
-      <DependentUpon>Resources.resx</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ko-KR.resx">
       <DependentUpon>Resources.resx</DependentUpon>
       <SubType>Designer</SubType>
@@ -626,10 +622,6 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.zh-CN.resx">
-      <DependentUpon>Resources.resx</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -732,9 +724,7 @@ md "$(SolutionDir)KanColleViewer-Compiled\Sounds"</PreBuildEvent>
     <PostBuildEvent>xcopy /Y "$(TargetDir)KanColleViewer.exe" "$(SolutionDir)KanColleViewer-Compiled"
 xcopy /Y "$(TargetDir)KanColleViewer.exe.config" "$(SolutionDir)KanColleViewer-Compiled"
 xcopy /Y "$(TargetDir)*.dll" "$(SolutionDir)KanColleViewer-Compiled\lib"
-xcopy /Y /E /I "$(TargetDir)en" "$(SolutionDir)KanColleViewer-Compiled\lib\en"
 xcopy /Y /E /I "$(TargetDir)ko-KR" "$(SolutionDir)KanColleViewer-Compiled\lib\ko-KR"
-xcopy /Y /E /I "$(TargetDir)zh-CN" "$(SolutionDir)KanColleViewer-Compiled\lib\zh-CN"
 xcopy /Y "$(TargetDir)\Plugins\*.dll" "$(SolutionDir)KanColleViewer-Compiled\Plugins"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

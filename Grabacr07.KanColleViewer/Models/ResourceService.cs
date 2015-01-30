@@ -28,8 +28,6 @@ namespace Grabacr07.KanColleViewer.Models
 		private readonly string[] supportedCultureNames =
 		{
 			"ja", // Resources.resx
-			"en",
-			"zh-CN",
 			"ko-KR",
 		};
 
