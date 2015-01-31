@@ -12,7 +12,6 @@ namespace CsvLogReader
 	public class KanColleCsvReader : IToolPlugin
 	{
 		private readonly LogViewerViewModel viewmodel = new LogViewerViewModel();
-
 		public string ToolName
 		{
 			get { return "Logs"; }

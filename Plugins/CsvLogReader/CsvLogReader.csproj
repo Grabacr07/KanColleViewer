@@ -81,7 +81,9 @@
       <DependentUpon>DropLogViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="KanColleCsvReader.cs" />
-    <Compile Include="LogReader.cs" />
+    <Compile Include="LogDataList.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="LogViewer.xaml.cs">
       <DependentUpon>LogViewer.xaml</DependentUpon>
     </Compile>

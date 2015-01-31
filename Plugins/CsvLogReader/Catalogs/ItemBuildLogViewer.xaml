@@ -17,8 +17,8 @@
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:ItemBuildLogViewerViewModel}"
 				   Title="{Binding Title}"
-				   Width="950"
-				   Height="800"
+				   Width="460"
+				   Height="480"
 				   FontSize="12"
 				   Background="{DynamicResource ThemeBrushKey}"
 				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
@@ -79,7 +79,10 @@
 		<!-- #endregion -->
 		<StackPanel Grid.Row="1"
 					Margin="7">
-			<ListView ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}">
+			<ListView ItemsSource="{Binding Lists}"
+					  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}"
+					  MaxHeight="400"
+					  >
 				<ListView.Resources>
 					<Style TargetType="{x:Type TextBlock}">
 						<Setter Property="Margin"
@@ -131,7 +134,7 @@
 							</GridViewColumnHeader>
 							<GridViewColumn.CellTemplate>
 								<DataTemplate>
-									<TextBlock Margin="6,3,0,3" Text="{Binding XPath=Number}"/>
+									<TextBlock Margin="6,3,0,3" Text="{Binding Date}"/>
 								</DataTemplate>
 							</GridViewColumn.CellTemplate>
 						</GridViewColumn>
@@ -141,7 +144,7 @@
 							</GridViewColumnHeader>
 							<GridViewColumn.CellTemplate>
 								<DataTemplate>
-									<TextBlock Margin="6,3,0,3" Text="{Binding XPath=Title}"/>
+									<TextBlock Margin="6,3,0,3" Text="{Binding Results}"/>
 								</DataTemplate>
 							</GridViewColumn.CellTemplate>
 						</GridViewColumn>
@@ -151,7 +154,7 @@
 							</GridViewColumnHeader>
 							<GridViewColumn.CellTemplate>
 								<DataTemplate>
-									<TextBlock Margin="6,3,0,3" Text="{Binding XPath=FlagLv}"/>
+									<TextBlock Margin="6,3,0,3" Text="{Binding Assistant}"/>
 								</DataTemplate>
 							</GridViewColumn.CellTemplate>
 						</GridViewColumn>
@@ -161,7 +164,7 @@
 							</GridViewColumnHeader>
 							<GridViewColumn.CellTemplate>
 								<DataTemplate>
-									<TextBlock Margin="6,3,0,3" Text="{Binding XPath=Time}"/>
+									<TextBlock Margin="6,3,0,3" Text="{Binding Fuel}"/>
 								</DataTemplate>
 							</GridViewColumn.CellTemplate>
 						</GridViewColumn>
@@ -171,7 +174,7 @@
 							</GridViewColumnHeader>
 							<GridViewColumn.CellTemplate>
 								<DataTemplate>
-									<TextBlock Margin="6,3,0,3" Text="{Binding XPath=NeedShip}"/>
+									<TextBlock Margin="6,3,0,3" Text="{Binding Bullet}"/>
 								</DataTemplate>
 							</GridViewColumn.CellTemplate>
 						</GridViewColumn>
@@ -181,7 +184,7 @@
 							</GridViewColumnHeader>
 							<GridViewColumn.CellTemplate>
 								<DataTemplate>
-									<TextBlock Margin="6,3,0,3" Text="{Binding XPath=NeedShip}"/>
+									<TextBlock Margin="6,3,0,3" Text="{Binding Steel}"/>
 								</DataTemplate>
 							</GridViewColumn.CellTemplate>
 						</GridViewColumn>
@@ -191,7 +194,7 @@
 							</GridViewColumnHeader>
 							<GridViewColumn.CellTemplate>
 								<DataTemplate>
-									<TextBlock Margin="6,3,0,3" Text="{Binding XPath=NeedShip}"/>
+									<TextBlock Margin="6,3,0,3" Text="{Binding bauxite}"/>
 								</DataTemplate>
 							</GridViewColumn.CellTemplate>
 						</GridViewColumn>

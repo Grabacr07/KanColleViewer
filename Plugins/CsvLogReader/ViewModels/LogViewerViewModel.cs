@@ -5,9 +5,19 @@ namespace CsvLogReader.ViewModels
 {
 	public class LogViewerViewModel : ViewModel
 	{
+		#region static members
+		private static readonly LogViewerViewModel current = new LogViewerViewModel();
+
+		public static LogViewerViewModel Current
+		{
+			get { return current; }
+		}
+		#endregion
+		public LogDataList LogDataList { get; set; }
+
 		public LogViewerViewModel()
 		{
-
+			LogDataList = new LogDataList();
 		}
 		public void ShowDropLogViewer()
 		{
