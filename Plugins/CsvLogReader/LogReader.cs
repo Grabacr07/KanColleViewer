@@ -4,6 +4,9 @@ using System.IO;
 
 namespace CsvLogReader
 {
+	/// <summary>
+	/// http://www.codeproject.com/Articles/415732/Reading-and-Writing-CSV-Files-in-Csharp
+	/// </summary>
 	public class LogReader
 	{
 		public class CsvRow : List<string>
