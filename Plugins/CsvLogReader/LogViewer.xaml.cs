@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace CsvLogReader
+namespace LogReader
 {
 	/// <summary>
 	/// LogViewer.xaml에 대한 상호 작용 논리
