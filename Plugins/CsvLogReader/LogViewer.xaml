@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="LogReader.LogViewer"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:wrapper="clr-namespace:Grabacr07.KanColleWrapper;assembly=KanColleWrapper"
+			 xmlns:controls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+			 xmlns:viewmodels="clr-namespace:LogReader.ViewModels"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+			 mc:Ignorable="d" 
+			 d:DataContext="{d:DesignInstance viewmodels:LogViewerViewModel}"
+			 d:DesignHeight="300" d:DesignWidth="300">
+	<i:Interaction.Triggers>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+										 MessageKey="Show/LogViewer">
+		</livet:InteractionMessageTrigger>
+		<!--<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+										 MessageKey="Show/DropLogViewer">
+			<livet:TransitionInteractionMessageAction Mode="NewOrActive"
+													  WindowType="catalogs:DropLogViewer"
+													  IsOwned="False" />
+		</livet:InteractionMessageTrigger>-->
+		<!--<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+										 MessageKey="Show/ItemBuildLogViewer">
+			<livet:TransitionInteractionMessageAction Mode="NewOrActive"
+													  WindowType="catalogs:ItemBuildLogViewer"
+													  IsOwned="False" />
+		</livet:InteractionMessageTrigger>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+										 MessageKey="Show/ShipBuildLogViewer">
+			<livet:TransitionInteractionMessageAction Mode="NewOrActive"
+													  WindowType="catalogs:ShipBuildLogViewer"
+													  IsOwned="False" />
+		</livet:InteractionMessageTrigger>-->
+	</i:Interaction.Triggers>
+	<StackPanel>
+		<metro2:CallMethodButton Content="기록열람 프로그램 실행"
+								 Width="Auto"
+								 Height="Auto"
+								 HorizontalAlignment="Left"
+								 Margin="15"
+								 Padding="15,4"
+								 MethodName="ShowLogViewer"/>
+
+		<!--<metro2:CallMethodButton Content="드롭 기록 보기"
+								 Width="Auto"
+								 Height="Auto"
+								 HorizontalAlignment="Left"
+								 Margin="15"
+								 Padding="15,4"
+								 MethodName="ShowDropLogViewer"/>
+		<metro2:CallMethodButton Content="건조 기록 보기"
+								 Width="Auto"
+								 Height="Auto"
+								 HorizontalAlignment="Left"
+								 Margin="15,0,15,15"
+								 Padding="15,4"
+								 MethodName="ShowShipBuildLogViewer"/>
+		<metro2:CallMethodButton Content="장비개발 기록 보기"
+								 Width="Auto"
+								 Height="Auto"
+								 HorizontalAlignment="Left"
+								 Margin="15,0,15,15"
+								 Padding="15,4"
+								 MethodName="ShowItemBuildLogViewer"/>-->
+	</StackPanel>
+</UserControl>
