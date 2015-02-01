@@ -98,6 +98,7 @@
     <Compile Include="Counter.cs" />
     <Compile Include="Dockyard.cs" />
     <Compile Include="EventMapHPChecker.cs" />
+    <Compile Include="Models\LogDataList.cs" />
     <Compile Include="Models\Mission.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Itemyard.cs" />
