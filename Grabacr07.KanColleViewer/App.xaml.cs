@@ -57,11 +57,21 @@ namespace Grabacr07.KanColleViewer
 			{
 				if (Settings.Current.EnableUpdateNotification && KanColleClient.Current.Updater.IsOnlineVersionGreater(0, ProductInfo.Version.ToString()))
 				{
-					PluginHost.Instance.GetNotifier().Show(
+					string MainFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+
+					if (File.Exists(Path.Combine(MainFolder, "AutoUpdater.exe")))
+					{
+						Process.Start(Path.Combine(MainFolder, "AutoUpdater.exe"));
+						return;
+					}
+					else
+					{
+						PluginHost.Instance.GetNotifier().Show(
 						NotifyType.Update,
 						KanColleViewer.Properties.Resources.Updater_Notification_Title,
 						string.Format(KanColleViewer.Properties.Resources.Updater_Notification_NewAppVersion, KanColleClient.Current.Updater.GetOnlineVersion(0)),
 						() => App.ViewModelRoot.Activate());
+					}
 				}
 
 				if (Settings.Current.EnableUpdateTransOnStart)
