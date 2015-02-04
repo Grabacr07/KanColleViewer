@@ -156,7 +156,8 @@ namespace Grabacr07.KanColleWrapper
 		private void LogToBin(LogType Type, string format, params object[] args)
 		{
 			string MainFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
-
+			if (!Directory.Exists(Path.Combine(MainFolder, "Bin")))
+				Directory.CreateDirectory(Path.Combine(MainFolder, "Bin"));
 			#region BuildItem
 			if (Type == LogType.BuildItem)
 			{
