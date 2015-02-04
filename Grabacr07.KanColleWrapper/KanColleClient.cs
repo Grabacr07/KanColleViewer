@@ -50,7 +50,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public Homeport Homeport { get; private set; }
 
-		public PreviewBattle PreviewBattle { get; private set; }
+		public OracleOfCompass OracleOfCompass { get; private set; }
 
 		public EventMapHPChecker EventMapHPChecker { get; private set; }
 
@@ -170,7 +170,7 @@ namespace Grabacr07.KanColleWrapper
 			this.Updater = new Updater();
 			this.Logger = new Logger(proxy);
 			this.Translations = new Translations();
-			this.PreviewBattle = new PreviewBattle(proxy);
+			this.OracleOfCompass = new OracleOfCompass(proxy);
 			this.EventMapHPChecker = new EventMapHPChecker(proxy);
 		}
 	}

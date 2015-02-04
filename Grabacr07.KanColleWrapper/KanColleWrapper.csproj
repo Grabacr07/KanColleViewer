@@ -199,7 +199,7 @@
     <Compile Include="KanColleProxy.cs" />
     <Compile Include="Master.cs" />
     <Compile Include="MasterTable.cs" />
-    <Compile Include="PreviewBattle.cs" />
+    <Compile Include="OracleOfCompass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quests.cs" />
     <Compile Include="Repairyard.cs" />

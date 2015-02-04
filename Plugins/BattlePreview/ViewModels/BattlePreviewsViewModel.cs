@@ -311,19 +311,19 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 		{
 			try
 			{
-				if (KanColleClient.Current.PreviewBattle.EnableBattlePreview)
+				if (KanColleClient.Current.OracleOfCompass.EnableBattlePreview)
 				{
-					KanColleClient.Current.PreviewBattle.PreviewCriticalCondition += () =>
+					KanColleClient.Current.OracleOfCompass.PreviewCriticalCondition += () =>
 					{
-						if(!KanColleClient.Current.PreviewBattle.Combined)this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.KanResult());
+						if (!KanColleClient.Current.OracleOfCompass.Combined) this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.KanResult());
 						else
 						{
-							this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.KanResult(1));
-							this.SecondResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.SecondResult());
+							this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.KanResult(1));
+							this.SecondResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.SecondResult());
 						}
-						this.EnemyResultReport = new List<PreviewBattleResults>(KanColleClient.Current.PreviewBattle.EnemyResult());
-						
-						this.RankOuts = KanColleClient.Current.PreviewBattle.RankOut();
+						this.EnemyResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.EnemyResult());
+
+						this.RankOuts = KanColleClient.Current.OracleOfCompass.RankOut();
 						this.RankIntToVisibility(this.RankOuts.RankNum);
 					};
 				}

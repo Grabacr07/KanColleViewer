@@ -92,7 +92,7 @@ namespace Grabacr07.KanColleViewer.Models
 
 		private static void UpdateCritical()
 		{
-			KanColleClient.Current.PreviewBattle.CriticalCondition += () =>
+			KanColleClient.Current.OracleOfCompass.CriticalCondition += () =>
 			{
 
 					if (Models.Settings.Current.EnableCriticalNotify)
@@ -121,7 +121,7 @@ namespace Grabacr07.KanColleViewer.Models
 			};
 
 
-			KanColleClient.Current.PreviewBattle.CriticalCleared += () =>
+			KanColleClient.Current.OracleOfCompass.CriticalCleared += () =>
 			{
 				if (App.ViewModelRoot.Mode!=Mode.Started) App.ViewModelRoot.Mode = Mode.Started;
 			};

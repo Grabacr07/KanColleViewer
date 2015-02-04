@@ -229,7 +229,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			}
 			else
 			{
-				this.CheckPreviewBattle = KanColleClient.Current.PreviewBattle.EnableBattlePreview;
+				this.CheckPreviewBattle = KanColleClient.Current.OracleOfCompass.EnableBattlePreview;
 				if (this.CheckPreviewBattle) this.PreviewBattleVisible = Visibility.Visible;
 				else this.PreviewBattleVisible = Visibility.Collapsed;
 

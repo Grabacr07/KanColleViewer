@@ -80,12 +80,12 @@ namespace Grabacr07.KanColleWrapper.Models
 				this.RejuvenateTime = null;
 				return;
 			}
-			if (KanColleClient.Current.PreviewBattle.Combined)
+			if (KanColleClient.Current.OracleOfCompass.Combined)
 			{
-				if (this.fleet.Id < 3 && this.ships.Any(p => (p.HP.Current / (double)p.HP.Maximum) <= 0.25)) KanColleClient.Current.PreviewBattle.AfterResult();
+				if (this.fleet.Id < 3 && this.ships.Any(p => (p.HP.Current / (double)p.HP.Maximum) <= 0.25)) KanColleClient.Current.OracleOfCompass.AfterResult();
 
 			}
-			else if (this.fleet.Id < 2 && this.ships.Any(p => (p.HP.Current / (double)p.HP.Maximum) <= 0.25)) KanColleClient.Current.PreviewBattle.AfterResult();
+			else if (this.fleet.Id < 2 && this.ships.Any(p => (p.HP.Current / (double)p.HP.Maximum) <= 0.25)) KanColleClient.Current.OracleOfCompass.AfterResult();
 
 			var condition = this.ships.Min(x => x.Condition);
 

@@ -9,7 +9,7 @@ namespace Grabacr07.KanColleWrapper
 	/// <summary>
 	/// 전투결과를 미리 받아 그것을 연산합니다.
 	/// </summary>
-	public class PreviewBattle
+	public class OracleOfCompass
 	{
 		/// <summary>
 		/// 전투 미리보기 데이터를 저장
@@ -63,7 +63,7 @@ namespace Grabacr07.KanColleWrapper
 		/// 전투결과를 미리 계산합니다. 옵션 설정으로 미리 전투결과를 보거나 보지 않을 수 있습니다.
 		/// </summary>
 		/// <param name="proxy"></param>
-		public PreviewBattle(KanColleProxy proxy)
+		public OracleOfCompass(KanColleProxy proxy)
 		{
 			#region 일반 전투. 야전방과 야전->주간전도 여기에 포함
 			proxy.api_req_sortie_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false, false, false, x.Data));
