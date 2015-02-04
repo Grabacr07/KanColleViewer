@@ -26,7 +26,8 @@ namespace Grabacr07.KanColleWrapper
 		/// 전투 미리보기가 켜져있는가. 켜져있는 경우는 true
 		/// </summary>
 		public bool EnableBattlePreview { get; set; }
-		public bool IsCalculated { get; set; }
+		public bool IsBattleCalculated { get; set; }
+		public bool IsCompassCalculated { get; set; }
 		/// <summary>
 		/// 내부에서 크리티컬이 맞는지 조회하는 부분
 		/// </summary>
@@ -259,12 +260,14 @@ namespace Grabacr07.KanColleWrapper
 		{
 			this.BattleClear();
 			CellData = proxy.api_event_id;
+			this.IsCompassCalculated = true;
 			this.ReadyForNextCell();
 		}
 		private void NextCell(kcsapi_map_start proxy)
 		{
 			this.Cleared(false);
 			CellData =proxy.api_event_id;
+			this.IsCompassCalculated = true;
 			this.ReadyForNextCell();
 		}
 		#endregion
@@ -428,7 +431,7 @@ namespace Grabacr07.KanColleWrapper
 			if (EnableBattlePreview)
 			{
 				this.PreviewCriticalCondition();
-				this.IsCalculated = true;
+				this.IsBattleCalculated = true;
 			}
 		}
 		/// <summary>
@@ -597,7 +600,7 @@ namespace Grabacr07.KanColleWrapper
 			if (EnableBattlePreview)
 			{
 				this.PreviewCriticalCondition();
-				this.IsCalculated = true;
+				this.IsBattleCalculated = true;
 			}
 		}
 		/// <summary>
@@ -656,7 +659,7 @@ namespace Grabacr07.KanColleWrapper
 			if (EnableBattlePreview)
 			{
 				this.PreviewCriticalCondition();
-				this.IsCalculated = true;
+				this.IsBattleCalculated = true;
 			}
 		}
 

@@ -48,7 +48,8 @@ namespace Grabacr07.KanColleViewer
 			KanColleClient.Current.Logger.EnableLogging = Settings.Current.EnableLogging;
 			KanColleClient.Current.EventMapHPChecker.EnableEventMapInfo = Settings.Current.EnableEventMapInfo;
 			KanColleClient.Current.OracleOfCompass.EnableBattlePreview = Settings.Current.EnableBattlePreview;
-			KanColleClient.Current.OracleOfCompass.IsCalculated = false;
+			KanColleClient.Current.OracleOfCompass.IsBattleCalculated = false;
+			KanColleClient.Current.OracleOfCompass.IsCompassCalculated = false;
 			// Initialize translations
 			KanColleClient.Current.Translations.EnableTranslations = Settings.Current.EnableTranslations;
 			KanColleClient.Current.Translations.EnableAddUntranslated = Settings.Current.EnableAddUntranslated;

@@ -106,7 +106,6 @@
 										 VerticalAlignment="Center"
 										 Margin="5"
 										 MethodName="Update"
-										 IsEnabled="{Binding IsCalculated,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
 										 />
 			</Grid>
 			<Grid Margin="0,5,0,0">

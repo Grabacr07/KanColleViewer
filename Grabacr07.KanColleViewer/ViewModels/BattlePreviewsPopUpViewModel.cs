@@ -103,6 +103,42 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region IsBattleCalculated 変更通知プロパティ
+
+		private bool _IsBattleCalculated;
+
+		public bool IsBattleCalculated
+		{
+			get { return this._IsBattleCalculated; }
+			set
+			{
+				if (this._IsBattleCalculated != value)
+				{
+					this._IsBattleCalculated = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
+		
+		#region IsCompassCalculated 変更通知プロパティ
+
+		private bool _IsCompassCalculated;
+
+		public bool IsCompassCalculated
+		{
+			get { return this._IsCompassCalculated; }
+			set
+			{
+				if (this._IsCompassCalculated != value)
+				{
+					this._IsCompassCalculated = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
+
 		public BattlePreviewsPopUpViewModel()
 		{
 			this.Title = "전투예측 윈도우";
@@ -117,10 +153,12 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				{
 					KanColleClient.Current.OracleOfCompass.ReadyForNextCell += () =>
 					{
+						this.IsCompassCalculated = KanColleClient.Current.OracleOfCompass.IsCompassCalculated;
 						CellStatus = KanColleClient.Current.OracleOfCompass.CellData;
 					};
 					KanColleClient.Current.OracleOfCompass.PreviewCriticalCondition += () =>
 					{
+						this.IsBattleCalculated = KanColleClient.Current.OracleOfCompass.IsBattleCalculated;
 						if (!KanColleClient.Current.OracleOfCompass.Combined) this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.KanResult());
 						else
 						{
@@ -149,17 +187,21 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			{
 				if (KanColleClient.Current.OracleOfCompass.EnableBattlePreview)
 				{
-					CellStatus = KanColleClient.Current.OracleOfCompass.CellData;
+					if (KanColleClient.Current.OracleOfCompass.IsCompassCalculated)
+						CellStatus = KanColleClient.Current.OracleOfCompass.CellData;
 
-					if (!KanColleClient.Current.OracleOfCompass.Combined) this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.KanResult());
-					else
+					if (KanColleClient.Current.OracleOfCompass.IsBattleCalculated)
 					{
-						this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.KanResult(1));
-						this.SecondResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.SecondResult());
-					}
-					this.EnemyResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.EnemyResult());
+						if (!KanColleClient.Current.OracleOfCompass.Combined) this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.KanResult());
+						else
+						{
+							this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.KanResult(1));
+							this.SecondResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.SecondResult());
+						}
+						this.EnemyResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.EnemyResult());
 
-					this.RankOuts = KanColleClient.Current.OracleOfCompass.RankResult;
+						this.RankOuts = KanColleClient.Current.OracleOfCompass.RankResult;
+					}
 				}
 			}
 			catch (Exception e)
