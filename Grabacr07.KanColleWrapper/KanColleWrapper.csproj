@@ -118,6 +118,7 @@
     <Compile Include="Models\Raw\kcsapi_map_start.cs" />
     <Compile Include="Models\Raw\kcsapi_mission.cs" />
     <Compile Include="Models\Raw\kcsapi_mission_result.cs" />
+    <Compile Include="Models\Raw\kcsapi_map_next.cs" />
     <Compile Include="Models\Raw\kcsapi_powerup.cs" />
     <Compile Include="Models\Raw\kcsapi_remodel_slot.cs" />
     <Compile Include="Organization.cs" />

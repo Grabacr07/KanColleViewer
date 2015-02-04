@@ -65,11 +65,30 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region CellStatus 変更通知プロパティ
+
+		private int _CellStatus;
+
+		public int CellStatus
+		{
+			get { return this._CellStatus; }
+			set
+			{
+				if (this._CellStatus != value)
+				{
+					this._CellStatus = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		#region RankOuts 変更通知プロパティ
 
-		private RankResult _RankOuts;
+		private int _RankOuts;
 
-		public RankResult RankOuts
+		public int RankOuts
 		{
 			get { return this._RankOuts; }
 			set
@@ -84,251 +103,10 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-		#region PerfectRank 変更通知プロパティ
-
-		private Visibility _PerfectRank;
-
-		public Visibility PerfectRank
-		{
-			get { return this._PerfectRank; }
-			set
-			{
-				if (this._PerfectRank != value)
-				{
-					this._PerfectRank = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region RankS 変更通知プロパティ
-
-		private Visibility _RankS;
-
-		public Visibility RankS
-		{
-			get { return this._RankS; }
-			set
-			{
-				if (this._RankS != value)
-				{
-					this._RankS = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region RankA 変更通知プロパティ
-
-		private Visibility _RankA;
-
-		public Visibility RankA
-		{
-			get { return this._RankA; }
-			set
-			{
-				if (this._RankA != value)
-				{
-					this._RankA = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region RankB 変更通知プロパティ
-
-		private Visibility _RankB;
-
-		public Visibility RankB
-		{
-			get { return this._RankB; }
-			set
-			{
-				if (this._RankB != value)
-				{
-					this._RankB = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region RankC 変更通知プロパティ
-
-		private Visibility _RankC;
-
-		public Visibility RankC
-		{
-			get { return this._RankC; }
-			set
-			{
-				if (this._RankC != value)
-				{
-					this._RankC = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region RankD 変更通知プロパティ
-
-		private Visibility _RankD;
-
-		public Visibility RankD
-		{
-			get { return this._RankD; }
-			set
-			{
-				if (this._RankD != value)
-				{
-					this._RankD = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region RankOut 変更通知プロパティ
-
-		private Visibility _RankOut;
-
-		public Visibility RankOut
-		{
-			get { return this._RankOut; }
-			set
-			{
-				if (this._RankOut != value)
-				{
-					this._RankOut = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region IsCalculated 変更通知プロパティ
-
-		private bool _IsCalculated;
-
-		public bool IsCalculated
-		{
-			get { return this._IsCalculated; }
-			set
-			{
-				if (this._IsCalculated != value)
-				{
-					this._IsCalculated = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-
-		private void RankIntToVisibility(int value)
-		{
-			switch (value)
-			{
-				case 0:
-					PerfectRank = Visibility.Visible;
-					RankS = Visibility.Hidden;
-					RankA = Visibility.Hidden;
-					RankB = Visibility.Hidden;
-					RankC = Visibility.Hidden;
-					RankD = Visibility.Hidden;
-					RankOut = Visibility.Hidden;
-
-					break;
-				case 1:
-					PerfectRank = Visibility.Hidden;
-					RankS = Visibility.Visible;
-					RankA = Visibility.Hidden;
-					RankB = Visibility.Hidden;
-					RankC = Visibility.Hidden;
-					RankD = Visibility.Hidden;
-					RankOut = Visibility.Hidden;
-
-					break;
-				case 2:
-					PerfectRank = Visibility.Hidden;
-					RankS = Visibility.Hidden;
-					RankA = Visibility.Visible;
-					RankB = Visibility.Hidden;
-					RankC = Visibility.Hidden;
-					RankD = Visibility.Hidden;
-					RankOut = Visibility.Hidden;
-
-					break;
-				case 3:
-					PerfectRank = Visibility.Hidden;
-					RankS = Visibility.Hidden;
-					RankA = Visibility.Hidden;
-					RankB = Visibility.Visible;
-					RankC = Visibility.Hidden;
-					RankD = Visibility.Hidden;
-					RankOut = Visibility.Hidden;
-
-					break;
-				case 4:
-					PerfectRank = Visibility.Hidden;
-					RankS = Visibility.Hidden;
-					RankA = Visibility.Hidden;
-					RankB = Visibility.Hidden;
-					RankC = Visibility.Visible;
-					RankD = Visibility.Hidden;
-					RankOut = Visibility.Hidden;
-
-					break;
-				case 5:
-					PerfectRank = Visibility.Hidden;
-					RankS = Visibility.Hidden;
-					RankA = Visibility.Hidden;
-					RankB = Visibility.Hidden;
-					RankC = Visibility.Hidden;
-					RankD = Visibility.Visible;
-					RankOut = Visibility.Hidden;
-
-					break;
-				case -1:
-					PerfectRank = Visibility.Hidden;
-					RankS = Visibility.Hidden;
-					RankA = Visibility.Hidden;
-					RankB = Visibility.Hidden;
-					RankC = Visibility.Hidden;
-					RankD = Visibility.Hidden;
-					RankOut = Visibility.Visible;
-
-					break;
-			}
-		}
-
-
 		public BattlePreviewsPopUpViewModel()
 		{
 			this.Title = "전투예측 윈도우";
-
-			PerfectRank = Visibility.Hidden;
-			RankS = Visibility.Hidden;
-			RankA = Visibility.Hidden;
-			RankB = Visibility.Hidden;
-			RankC = Visibility.Hidden;
-			RankD = Visibility.Hidden;
-			RankOut = Visibility.Hidden;
-
-			this.IsCalculated = KanColleClient.Current.OracleOfCompass.IsCalculated;
-
+			RankOuts = 6;
 			this.UpdateFleetStatus();
 		}
 		private void UpdateFleetStatus()
@@ -337,6 +115,10 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			{
 				if (KanColleClient.Current.OracleOfCompass.EnableBattlePreview)
 				{
+					KanColleClient.Current.OracleOfCompass.ReadyForNextCell += () =>
+					{
+						CellStatus = KanColleClient.Current.OracleOfCompass.CellData;
+					};
 					KanColleClient.Current.OracleOfCompass.PreviewCriticalCondition += () =>
 					{
 						if (!KanColleClient.Current.OracleOfCompass.Combined) this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.KanResult());
@@ -347,8 +129,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 						}
 						this.EnemyResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.EnemyResult());
 
-						this.RankOuts = KanColleClient.Current.OracleOfCompass.RankOut();
-						this.RankIntToVisibility(this.RankOuts.RankNum);
+						this.RankOuts = KanColleClient.Current.OracleOfCompass.RankResult;
 					};
 				}
 			}
@@ -368,6 +149,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			{
 				if (KanColleClient.Current.OracleOfCompass.EnableBattlePreview)
 				{
+					CellStatus = KanColleClient.Current.OracleOfCompass.CellData;
+
 					if (!KanColleClient.Current.OracleOfCompass.Combined) this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.KanResult());
 					else
 					{
@@ -376,8 +159,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					}
 					this.EnemyResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.EnemyResult());
 
-					this.RankOuts = KanColleClient.Current.OracleOfCompass.RankOut();
-					this.RankIntToVisibility(this.RankOuts.RankNum);
+					this.RankOuts = KanColleClient.Current.OracleOfCompass.RankResult;
 				}
 			}
 			catch (Exception e)

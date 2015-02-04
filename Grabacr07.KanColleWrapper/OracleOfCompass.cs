@@ -19,6 +19,7 @@ namespace Grabacr07.KanColleWrapper
 		/// 전투 미리보기 리스트
 		/// </summary>
 		public List<PreviewBattleResults> Results = new List<PreviewBattleResults>();
+		public int CellData { get; set; }
 
 		#region bool
 		/// <summary>
@@ -42,21 +43,22 @@ namespace Grabacr07.KanColleWrapper
 
 		#region EventHandler
 		/// <summary>
-		/// 전투 이벤트 핸들러
+		/// 이벤트 핸들러
 		/// </summary>
-		public delegate void CriticalEventHandler();
+		public delegate void EventHandler();
 		/// <summary>
 		/// 크리티컬 컨디션 이벤트
 		/// </summary>
-		public event CriticalEventHandler CriticalCondition;
+		public event EventHandler CriticalCondition;
 		/// <summary>
 		/// 크리티컬 컨디션을 더이상 적용시키지 않기 위해 사용
 		/// </summary>
-		public event CriticalEventHandler CriticalCleared;
+		public event EventHandler CriticalCleared;
 		/// <summary>
 		/// 크리티컬 컨디션을 미리 알리기 위한 이벤트.
 		/// </summary>
-		public event CriticalEventHandler PreviewCriticalCondition;
+		public event EventHandler PreviewCriticalCondition;
+		public event EventHandler ReadyForNextCell;
 		#endregion
 
 		/// <summary>
@@ -90,8 +92,8 @@ namespace Grabacr07.KanColleWrapper
 			#endregion
 
 			#region 변수 초기화 관련
-			proxy.api_req_map_start.Subscribe(x => this.Cleared(false));
-			proxy.api_req_map_next.Subscribe(x => this.BattleClear());
+			proxy.api_req_map_start.TryParse<kcsapi_map_start>().Subscribe(x => NextCell(x.Data));
+			proxy.api_req_map_next.TryParse<kcsapi_map_next>().Subscribe(x => NextCell(x.Data));
 			proxy.api_port.TryParse().Subscribe(x => this.Cleared(true));
 			#endregion
 
@@ -199,14 +201,7 @@ namespace Grabacr07.KanColleWrapper
 			return this.Results;
 		}
 
-		public RankResult RankOut()
-		{
-			RankResult Rank = new RankResult();
-
-			Rank.RankNum = this.DataLists.RankInt;
-
-			return Rank;
-		}
+		public int RankResult { get; set; }
 		#endregion
 
 		#region 초기화 및 대파알림
@@ -259,6 +254,20 @@ namespace Grabacr07.KanColleWrapper
 		}
 		#endregion
 
+		#region 다음 맵 셀을 확인
+		private void NextCell(kcsapi_map_next proxy)
+		{
+			this.BattleClear();
+			CellData = proxy.api_event_id;
+			this.ReadyForNextCell();
+		}
+		private void NextCell(kcsapi_map_start proxy)
+		{
+			this.Cleared(false);
+			CellData =proxy.api_event_id;
+			this.ReadyForNextCell();
+		}
+		#endregion
 		/// <summary>
 		/// 연합함대를 사용한 전투에서 항공전을 처리하는데 사용.
 		/// </summary>
@@ -861,11 +870,11 @@ namespace Grabacr07.KanColleWrapper
 				//랭크 연산 적용
 				try
 				{
-					DataLists.RankInt = this.RankCalc();
+					RankResult = this.RankCalc();
 				}
 				catch (Exception e)
 				{
-					DataLists.RankInt = -1;
+					RankResult = -1;
 					System.Diagnostics.Debug.WriteLine(e);
 				}
 			}
