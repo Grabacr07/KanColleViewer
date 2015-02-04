@@ -1,9 +1,10 @@
-﻿using Grabacr07.KanColleWrapper.Models.Raw;
+﻿using Grabacr07.KanColleWrapper.Models;
+using Grabacr07.KanColleWrapper.Models.Raw;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Grabacr07.KanColleWrapper.Models
+namespace Grabacr07.KanColleWrapper
 {
 	/// <summary>
 	/// 전투결과를 미리 받아 그것을 연산합니다.
@@ -18,6 +19,8 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 전투 미리보기 리스트
 		/// </summary>
 		public List<PreviewBattleResults> Results = new List<PreviewBattleResults>();
+
+		#region bool
 		/// <summary>
 		/// 전투 미리보기가 켜져있는가. 켜져있는 경우는 true
 		/// </summary>
@@ -35,6 +38,9 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 연합함대 여부를 저장(수뢰전대 API때문에 넣는 임시 코드)
 		/// </summary>
 		public bool Combined { get; set; }
+		#endregion
+
+		#region EventHandler
 		/// <summary>
 		/// 전투 이벤트 핸들러
 		/// </summary>
@@ -51,32 +57,46 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 크리티컬 컨디션을 미리 알리기 위한 이벤트.
 		/// </summary>
 		public event CriticalEventHandler PreviewCriticalCondition;
+		#endregion
+
 		/// <summary>
 		/// 전투결과를 미리 계산합니다. 옵션 설정으로 미리 전투결과를 보거나 보지 않을 수 있습니다.
 		/// </summary>
 		/// <param name="proxy"></param>
 		public PreviewBattle(KanColleProxy proxy)
 		{
+			#region 일반 전투. 야전방과 야전->주간전도 여기에 포함
 			proxy.api_req_sortie_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false, false, false, x.Data));
 			proxy.api_req_sortie_night_to_day.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false, false, false, x.Data));
 			proxy.api_req_battle_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(false, true, false, x.Data));
 			proxy.api_req_battle_midnight_sp_midnight.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(false, false, false, x.Data));
+			#endregion
+
+			#region 연합함대 전투. airbattle과 일반 연합함대 전투, 수뢰전대 전투가 여기에 포함. 야전은 모두 동일
 			proxy.api_req_combined_battle_airbattle.TryParse<kcsapi_battle>().Subscribe(x => this.AirBattle(x.Data));
 			proxy.api_req_combined_battle_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(true, false, false, x.Data));
 			proxy.api_req_combined_battle_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(true, true, false, x.Data));
 			proxy.api_req_combined_battle_battle_water.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(true, true, false, x.Data));
+			#endregion
 
-			proxy.api_req_map_start.Subscribe(x => this.Cleared(false));
-			proxy.api_req_map_next.Subscribe(x => this.BattleClear());
-
+			#region BattleResult관련. 연합함대와 일반전투만 포함. 연습전 결과는 무시
 			proxy.api_req_sortie_battleresult.TryParse().Subscribe(x => this.Result());
 			proxy.api_req_combined_battle_battleresult.TryParse().Subscribe(x => this.Result());
-			proxy.api_port.TryParse().Subscribe(x => this.Cleared(true));
-			//연습전. Result는 사실상 필요없음.
+			#endregion
+
+			#region 연습전(주간,야간)
 			proxy.api_req_practice_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false, false, true, x.Data));
 			proxy.api_req_practice_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(false, true, true, x.Data));
-		}
+			#endregion
 
+			#region 변수 초기화 관련
+			proxy.api_req_map_start.Subscribe(x => this.Cleared(false));
+			proxy.api_req_map_next.Subscribe(x => this.BattleClear());
+			proxy.api_port.TryParse().Subscribe(x => this.Cleared(true));
+			#endregion
+
+		}
+		#region 전투미리보기 결과 출력
 		/// <summary>
 		/// 전투결과를 CriticalPreviewPopup으로 보냅니다.
 		/// </summary>
@@ -165,7 +185,6 @@ namespace Grabacr07.KanColleWrapper.Models
 						{
 							Enemy.Name = item.Value.Name;
 							Enemy.Lv = DataLists.EnemyLv[i + 1];
-							//e.EnemyId = item.Value.Id;
 							Enemy.CHP = this.DataLists.EnemyHpResults[i];
 							Enemy.MHP = this.DataLists.EnemyMHpResults[i];
 							Enemy.HP = new LimitedValue(this.DataLists.EnemyHpResults[i], this.DataLists.EnemyMHpResults[i], 0);
@@ -184,10 +203,13 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			RankResult Rank = new RankResult();
 
-			Rank.RankNum = this.DataLists.RankInt;//test
+			Rank.RankNum = this.DataLists.RankInt;
 
 			return Rank;
 		}
+		#endregion
+
+		#region 초기화 및 대파알림
 		/// <summary>
 		/// 회항하였을때 테마와 악센트를 원래대로
 		/// </summary>
@@ -235,6 +257,8 @@ namespace Grabacr07.KanColleWrapper.Models
 				}
 			}
 		}
+		#endregion
+
 		/// <summary>
 		/// 연합함대를 사용한 전투에서 항공전을 처리하는데 사용.
 		/// </summary>
@@ -639,6 +663,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <param name="IsPractice">연습전이면 True</param>
 		private void BattleCalc(List<listup> lists, List<int> CurrentHPList, int[] Maxhps, int[] NowHps, bool IsCombined, bool IsMidnight, bool IsPractice)
 		{
+			#region 전투 미리보기 관련값 초기화
 			if (EnableBattlePreview)
 			{
 
@@ -667,6 +692,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			int KanDeadCount = 0;
 			int EnemyCount = 0;
 			int EnemyDeadCount = 0;
+			#endregion
 
 			//데미지를 계산하여 현재 HP에 적용
 			for (int i = 0; i < NowHps.Length; i++)
@@ -699,6 +725,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					}
 
 					//이하부터 전투 미리보기 시작.
+					#region 전투 미리보기
 					if (EnableBattlePreview)
 					{
 						if (CurrentHPList[i] < 0) CurrentHPList[i] = 0;
@@ -758,10 +785,12 @@ namespace Grabacr07.KanColleWrapper.Models
 							if (CurrentHPList[7] <= 0) DataLists.IsEnemyFlagDead = true;
 						}
 					}
+					#endregion
 				}
 				else if (!IsPractice) result.Add(false);
 			}
 			//이하 랭크 예측관련
+			#region 랭크예측
 			if (EnableBattlePreview)
 			{
 				if (this.Combined && !IsCombined)
@@ -840,6 +869,8 @@ namespace Grabacr07.KanColleWrapper.Models
 					System.Diagnostics.Debug.WriteLine(e);
 				}
 			}
+			#endregion
+
 			if (!IsPractice)
 			{
 				for (int i = 0; i < result.Count; i++)
@@ -854,6 +885,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		}
 
 		//리스트 작성부분은 좀 더 매끄러운 방법이 있는 것 같기도 하지만 일단 능력이 여기까지이므로
+		#region 데미지 리스트 작성부분
 		/// <summary>
 		/// decimal 데미지 리스트를 생성. 포격전이나 기타 컷인전투와 달리 Decimal값으로 바로 나온다.
 		/// </summary>
@@ -922,6 +954,9 @@ namespace Grabacr07.KanColleWrapper.Models
 				else numlist[i] = 0;
 			}
 		}
+		#endregion
+
+		#region 전투 미리보기 관련
 		/// <summary>
 		/// 랭크를 계산합니다.
 		/// 0=완전승리	1=S승	2=A승	3=B승	4=C패배		5=D패배		-1=예측불능
@@ -1045,8 +1080,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				DataLists.DockId = battle.api_deck_id;
 			}
 		}
+		#endregion
+
 	}
 }
-//private void BattleCalc(List<int> HPList, List<int> MHPList, List<listup> lists, List<int> CurrentHPList, int[] Maxhps, int[] NowHps, bool IsCombined)
-/// <param name="HPList">api_nowhps에서 필요한 값만 입력받을 빈 리스트</param>
-/// <param name="MHPList">api_maxhps에서 필요한 값만 입력받을 빈 리스트</param>

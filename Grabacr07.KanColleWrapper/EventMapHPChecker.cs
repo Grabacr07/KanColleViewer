@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 
-namespace Grabacr07.KanColleWrapper.Models
+namespace Grabacr07.KanColleWrapper
 {
 	public class EventMapHPChecker
 	{
