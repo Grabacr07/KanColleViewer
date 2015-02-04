@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Grabacr07.KanColleWrapper.Models
 {	/// <summary>
 	/// 날짜,드랍,해역,적 함대,랭크

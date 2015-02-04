@@ -2,10 +2,8 @@
 using Grabacr07.KanColleWrapper.Models.Raw;
 using Livet;
 using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
-using System.Text;
 
 namespace Grabacr07.KanColleWrapper
 {

@@ -1,9 +1,7 @@
 ﻿using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models.Raw;
 using System;
-using System.Globalization;
 using System.Linq;
-using System.Threading;
 
 namespace Grabacr07.KanColleWrapper.Models
 {

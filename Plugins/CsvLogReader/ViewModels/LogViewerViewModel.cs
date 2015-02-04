@@ -1,8 +1,6 @@
 ﻿using Livet;
-using Livet.Messaging;
 using System.Diagnostics;
 using System.IO;
-using System.Windows;
 
 namespace LogReader.ViewModels
 {

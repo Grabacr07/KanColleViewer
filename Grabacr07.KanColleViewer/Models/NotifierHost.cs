@@ -2,7 +2,6 @@
 using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleWrapper;
 using Livet;
-using System;
 
 namespace Grabacr07.KanColleViewer.Models
 {

@@ -1,5 +1,5 @@
-﻿using LogReader.ViewModels;
-using Grabacr07.KanColleViewer.Composition;
+﻿using Grabacr07.KanColleViewer.Composition;
+using LogReader.ViewModels;
 using System.ComponentModel.Composition;
 
 namespace LogReader
