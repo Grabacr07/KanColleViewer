@@ -28,64 +28,111 @@
 	<Grid>
 		<StackPanel Width="Auto"
 					Height="Auto">
-			<Grid>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="*"/>
-					<ColumnDefinition Width="Auto"/>
-				</Grid.ColumnDefinitions>
-				<TextBlock Text="※해당 결과는 예측된 결과입니다! 실제결과와는 다소 차이가 있을 수 있습니다." 
-						   Foreground="red" 
+
+			<TextBlock Foreground="red" 
 						   FontWeight="Bold"
-						   FontSize="13" Margin="0,0,0,20"/>
-			</Grid>
-			<Grid HorizontalAlignment="Center"
-				VerticalAlignment="Center">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto"/>
-					<ColumnDefinition Width="Auto"/>
-				</Grid.ColumnDefinitions>
-				<TextBlock Grid.Column="1"
-					FontWeight="ExtraBold"
-					Text="완전승리 S"
-					Foreground="#FFFFE558"
-					FontSize="20"
-					Visibility="{Binding PerfectRank, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-				<TextBlock Grid.Column="1"
-					FontWeight="ExtraBold"
-					Text="S승리"
-					Foreground="Gold"
-					FontSize="20"
-					Visibility="{Binding RankS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-				<TextBlock Grid.Column="1"
-					FontWeight="ExtraBold"
-					Text="A승리"
-					Foreground="#FFD10000"
-					FontSize="20"
-					Visibility="{Binding RankA, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-				<TextBlock Grid.Column="1"
-					FontWeight="ExtraBold"
-					Text="B승리"
-					Foreground="#FFD43353"
-					FontSize="20"
-					Visibility="{Binding RankB, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-				<TextBlock Grid.Column="1"
-					FontWeight="ExtraBold"
-					Text="C패배"
-					Foreground="#FF42428F"
-					FontSize="20"
-					Visibility="{Binding RankC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-				<TextBlock Grid.Column="1"
-					FontWeight="ExtraBold"
-					Text="D패배"
-					Foreground="#FF02A43D"
-					FontSize="20"
-					Visibility="{Binding RankD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-				<TextBlock Grid.Column="1"
-					FontWeight="ExtraBold"
-					Text="완전승리S"
-					Foreground="Gold"
-					FontSize="20"
-					Visibility="{Binding RankOut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+						   FontSize="13" Margin="0,0,0,20">
+				<Run Text="※해당 결과는 예측된 결과입니다! 실제결과와는 다소 차이가 있을 수 있습니다."/>
+				<LineBreak/>
+				<Run Text="※C랭크와 D랭크의 경우 조건이 아직 완벽하게 밝혀지지 않았습니다."/>
+			</TextBlock>
+			<Grid>
+				<TextBlock HorizontalAlignment="Center"
+							   VerticalAlignment="Center"
+							   FontSize="20"
+							   FontWeight="ExtraBold">
+						<TextBlock.Style>
+							<Style TargetType="TextBlock">
+								<Style.Triggers>
+								<DataTrigger Binding="{Binding RankOuts}"
+												 Value="0">
+									<Setter Property="Foreground" Value="#FFFFE544"/>
+									<Setter Property="Text" Value="완전승리 S"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding RankOuts}"
+												 Value="1">
+									<Setter Property="Foreground" Value="Gold"/>
+									<Setter Property="Text" Value="S승리"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding RankOuts}"
+												 Value="2">
+									<Setter Property="Foreground" Value="#FFD10000"/>
+									<Setter Property="Text" Value="A승리"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding RankOuts}"
+												 Value="3">
+									<Setter Property="Foreground" Value="#FFD43353"/>
+									<Setter Property="Text" Value="B승리"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding RankOuts}"
+												 Value="4">
+									<Setter Property="Foreground" Value="#FF42428F"/>
+									<Setter Property="Text" Value="C패배"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding RankOuts}"
+												 Value="5">
+									<Setter Property="Foreground" Value="#FF02A43D"/>
+									<Setter Property="Text" Value="D패배"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding RankOuts}"
+												 Value="-1">
+									<Setter Property="Foreground" Value="#FF54536C"/>
+									<Setter Property="Text" Value="예측불가 &amp; E이하"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding RankOuts}"
+												 Value="6">
+									<Setter Property="Foreground" Value="Transparent"/>
+									<Setter Property="Text" Value=""/>
+								</DataTrigger>
+							</Style.Triggers>
+							</Style>
+						</TextBlock.Style>
+					</TextBlock>
+				<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+					<TextBlock VerticalAlignment="Center" 
+							   FontSize="13" 
+							   Foreground="{DynamicResource ForegroundBrushKey}" 
+							   Text="나침반결과 "/>
+					<TextBlock HorizontalAlignment="Right"
+							   VerticalAlignment="Center"
+							   Margin="0,0,15,0"
+							   FontSize="13"
+							   FontWeight="ExtraBold"
+							   Foreground="White"
+						   Padding="12,4">
+						<TextBlock.Style>
+							<Style TargetType="TextBlock">
+								<Style.Triggers>
+									<DataTrigger Binding="{Binding CellStatus}"
+												 Value="2">
+										<Setter Property="Background" Value="#FF3FBD2B"/>
+										<Setter Property="Text" Value="자원획득"/>
+									</DataTrigger>
+									<DataTrigger Binding="{Binding CellStatus}"
+												 Value="3">
+										<Setter Property="Background" Value="#FFA33CEA"/>
+										<Setter Property="Text" Value="소용돌이"/>
+									</DataTrigger>
+									<DataTrigger Binding="{Binding CellStatus}"
+												 Value="4">
+										<Setter Property="Background" Value="#FFF01717"/>
+										<Setter Property="Text" Value="적 조우"/>
+									</DataTrigger>
+									<DataTrigger Binding="{Binding CellStatus}"
+												 Value="5">
+										<Setter Property="Background" Value="#FFD40C0C"/>
+										<Setter Property="Text" Value="보스전!"/>
+									</DataTrigger>
+									<DataTrigger Binding="{Binding CellStatus}"
+												 Value="6">
+										<Setter Property="Background" Value="#FF0A8AB9"/>
+										<Setter Property="Text" Value="기분탓"/>
+									</DataTrigger>
+								</Style.Triggers>
+							</Style>
+						</TextBlock.Style>
+					</TextBlock>
+				</StackPanel>
 			</Grid>
 			<TextBlock/>
 			<Border HorizontalAlignment="Center" >
