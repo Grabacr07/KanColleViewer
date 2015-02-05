@@ -74,6 +74,20 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			get { return this.RawData.api_lv; }
 		}
+		public int RemodelLevel
+		{
+			get 
+			{
+				if (this.Info.NextRemodelingLevel.HasValue)
+				{
+					if (this.Info.NextRemodelingLevel.Value <= this.Level)
+						return -1;
+					else return this.Info.NextRemodelingLevel.Value;
+				}
+				else
+					return 0;
+			}
+		}
 		public string LvName
 		{
 			get { return "[Lv." + this.Level + "]  " + this.Info.Name; }

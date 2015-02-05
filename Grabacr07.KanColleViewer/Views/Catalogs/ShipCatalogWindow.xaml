@@ -581,6 +581,56 @@
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
 
+							<GridViewColumn Width="Auto">
+								<GridViewColumn.Header>
+									<TextBlock Text="개조레벨" />
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<Border x:Name="LvBorder"
+												Margin="-2,0">
+											<TextBlock FontSize="9"
+												   Margin="0,3"
+												  >
+											<Run Text="Lv."
+												 x:Name="Lvtext"/>
+											<Run Text="{Binding Ship.RemodelLevel, Mode=OneWay}"
+												 FontSize="12"
+												  x:Name="NextLv"
+												 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+											</TextBlock>
+										</Border>
+										<DataTemplate.Triggers>
+											<DataTrigger Binding="{Binding Ship.RemodelLevel}"
+															 Value="0">
+												<Setter TargetName="Lvtext"
+															Property="Text"
+															Value="" />
+												<Setter TargetName="NextLv"
+															Property="Text"
+															Value="" />
+											</DataTrigger>
+											<DataTrigger Binding="{Binding Ship.RemodelLevel}"
+															 Value="-1">
+												<Setter TargetName="Lvtext"
+															Property="Text"
+															Value="" />
+												<Setter TargetName="NextLv"
+															Property="Text"
+															Value="개조가능" />
+												<Setter TargetName="NextLv"
+															Property="Foreground"
+															Value="White" />
+												<Setter TargetName="LvBorder"
+														Property="Background"
+														Value="#FF384CD1" />
+											</DataTrigger>
+										</DataTemplate.Triggers>
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+
+
 							<GridViewColumn Width="50">
 								<GridViewColumn.Header>
 									<metro2:SortButton Direction="{Binding SortWorker.ConditionColumn.Direction}"
