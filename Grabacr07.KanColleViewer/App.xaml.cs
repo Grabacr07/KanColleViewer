@@ -33,20 +33,23 @@ namespace Grabacr07.KanColleViewer
 			//using System.IO.Compression; 참조도 제거해야함
 			#region temp code
 			string MainFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
-			FileVersionInfo NowVersion = FileVersionInfo.GetVersionInfo(Path.Combine(MainFolder, "AutoUpdater.exe"));
-			if (NowVersion.FileVersion == "1.0.0.0")
+			if (File.Exists(Path.Combine(MainFolder, "AutoUpdater.exe")))
 			{
-				using (WebClient Client = new WebClient())
+				FileVersionInfo NowVersion = FileVersionInfo.GetVersionInfo(Path.Combine(MainFolder, "AutoUpdater.exe"));
+				if (NowVersion.FileVersion == "1.0.0.0")
 				{
-					if(!Directory.Exists(Path.Combine(MainFolder, "tmp")))
-						Directory.CreateDirectory(Path.Combine(MainFolder, "tmp"));
-					Client.DownloadFile("https://github.com/FreyYa/KCVAutoUpdater/releases/download/1.0.1.0/AutoUpdater.zip", Path.Combine(MainFolder,"updater.zip"));
-					ZipFile.ExtractToDirectory(Path.Combine(MainFolder, "updater.zip"), Path.Combine(MainFolder, "tmp"));
-					File.Copy(Path.Combine(MainFolder, "tmp","AutoUpdater.exe"),Path.Combine(MainFolder, "AutoUpdater.exe"),true);
-					File.Copy(Path.Combine(MainFolder, "tmp","AutoUpdater.exe.config"),Path.Combine(MainFolder,"AutoUpdater.exe.config"),true);
-					File.Copy(Path.Combine(MainFolder, "tmp", "lib", "KCVKiller.dll"), Path.Combine(MainFolder,"lib", "KCVKiller.dll"), true);
-					File.Delete(Path.Combine(MainFolder, "updater.zip"));
-					Directory.Delete(Path.Combine(MainFolder, "tmp"), true);
+					using (WebClient Client = new WebClient())
+					{
+						if (!Directory.Exists(Path.Combine(MainFolder, "tmp")))
+							Directory.CreateDirectory(Path.Combine(MainFolder, "tmp"));
+						Client.DownloadFile("https://github.com/FreyYa/KCVAutoUpdater/releases/download/1.0.1.0/AutoUpdater.zip", Path.Combine(MainFolder, "updater.zip"));
+						ZipFile.ExtractToDirectory(Path.Combine(MainFolder, "updater.zip"), Path.Combine(MainFolder, "tmp"));
+						File.Copy(Path.Combine(MainFolder, "tmp", "AutoUpdater.exe"), Path.Combine(MainFolder, "AutoUpdater.exe"), true);
+						File.Copy(Path.Combine(MainFolder, "tmp", "AutoUpdater.exe.config"), Path.Combine(MainFolder, "AutoUpdater.exe.config"), true);
+						File.Copy(Path.Combine(MainFolder, "tmp", "lib", "KCVKiller.dll"), Path.Combine(MainFolder, "lib", "KCVKiller.dll"), true);
+						File.Delete(Path.Combine(MainFolder, "updater.zip"));
+						Directory.Delete(Path.Combine(MainFolder, "tmp"), true);
+					}
 				}
 			}
 			#endregion
