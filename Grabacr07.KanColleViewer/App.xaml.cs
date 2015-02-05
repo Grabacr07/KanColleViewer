@@ -62,7 +62,11 @@ namespace Grabacr07.KanColleViewer
 
 					if (File.Exists(Path.Combine(MainFolder, "AutoUpdater.exe")))
 					{
-						Process.Start(Path.Combine(MainFolder, "AutoUpdater.exe"));
+						Process MyProcess = new Process();
+						MyProcess.StartInfo.FileName = "AutoUpdater.exe";
+						MyProcess.StartInfo.WorkingDirectory = MainFolder;
+						MyProcess.Start();
+						MyProcess.Refresh();
 					}
 					else
 					{
