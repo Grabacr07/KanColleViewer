@@ -2,6 +2,7 @@
 using Grabacr07.KanColleWrapper.Models.Raw;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Grabacr07.KanColleWrapper
@@ -266,7 +267,7 @@ namespace Grabacr07.KanColleWrapper
 		private void NextCell(kcsapi_map_start proxy)
 		{
 			this.Cleared(false);
-			CellData =proxy.api_event_id;
+			CellData = proxy.api_event_id;
 			this.IsCompassCalculated = true;
 			this.ReadyForNextCell();
 		}
@@ -398,35 +399,42 @@ namespace Grabacr07.KanColleWrapper
 			//api_kouku끝
 			BattleCalc(lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps, false, false, false);
 
-
-			//적 HP계산을 위해 아군리스트와 적군 리스트를 병합.
-			int[] CombinePlusEnemyMaxHPs = new int[13];
-			int[] CombinePlusEnemyNowHPs = new int[13];
-			//최대 HP병합
-			for (int i = 0; i < battle.api_maxhps_combined.Length; i++)
+			try
 			{
-				CombinePlusEnemyMaxHPs[i] = battle.api_maxhps_combined[i];
+				//적 HP계산을 위해 아군리스트와 적군 리스트를 병합.
+				int[] CombinePlusEnemyMaxHPs = new int[13];
+				int[] CombinePlusEnemyNowHPs = new int[13];
+				//최대 HP병합
+				for (int i = 0; i < battle.api_maxhps_combined.Length; i++)
+				{
+					CombinePlusEnemyMaxHPs[i] = battle.api_maxhps_combined[i];
+				}
+				for (int i = 7; i < battle.api_maxhps.Length; i++)
+				{
+					CombinePlusEnemyMaxHPs[i] = battle.api_maxhps[i];
+				}
+
+				//현재 HP병합
+				for (int i = 0; i < battle.api_nowhps_combined.Length; i++)
+				{
+					CombinePlusEnemyNowHPs[i] = battle.api_nowhps_combined[i];
+				}
+				for (int i = 7; i < battle.api_nowhps.Length; i++)
+				{
+					CombinePlusEnemyNowHPs[i] = CurrentHPList[i];
+				}
+
+				//재활용 위해 초기화.
+				CurrentHPList = new List<int>();
+
+				BattleCalc(Combinelists, CurrentHPList, CombinePlusEnemyMaxHPs, CombinePlusEnemyNowHPs, true, false, false);
+				//BattleCalc(HPList, MHPList, Combinelists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined,true);
 			}
-			for (int i = 7; i < battle.api_maxhps.Length; i++)
+			catch (Exception e)
 			{
-				CombinePlusEnemyMaxHPs[i] = battle.api_maxhps[i];
+				Debug.WriteLine(e);
 			}
 
-			//현재 HP병합
-			for (int i = 0; i < battle.api_nowhps_combined.Length; i++)
-			{
-				CombinePlusEnemyNowHPs[i] = battle.api_nowhps_combined[i];
-			}
-			for (int i = 7; i < battle.api_nowhps.Length; i++)
-			{
-				CombinePlusEnemyNowHPs[i] = CurrentHPList[i];
-			}
-
-			//재활용 위해 초기화.
-			CurrentHPList = new List<int>();
-
-			BattleCalc(Combinelists, CurrentHPList, CombinePlusEnemyMaxHPs, CombinePlusEnemyNowHPs, true, false, false);
-			//BattleCalc(HPList, MHPList, Combinelists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined,true);
 
 			if (EnableBattlePreview)
 			{
@@ -566,35 +574,43 @@ namespace Grabacr07.KanColleWrapper
 
 			else if (IsCombined)//연합함대인경우 연산을 한번 더 시행
 			{
-				BattleCalc(lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps, false, false, IsPractice);
+				try
+				{
+					BattleCalc(lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps, false, false, IsPractice);
 
-				//적 HP계산을 위해 아군리스트와 적군 리스트를 병합.
-				int[] CombinePlusEnemyMaxHPs = new int[13];
-				int[] CombinePlusEnemyNowHPs = new int[13];
-				//최대 HP병합
-				for (int i = 0; i < battle.api_maxhps_combined.Length; i++)
-				{
-					CombinePlusEnemyMaxHPs[i] = battle.api_maxhps_combined[i];
+					//적 HP계산을 위해 아군리스트와 적군 리스트를 병합.
+					int[] CombinePlusEnemyMaxHPs = new int[13];
+					int[] CombinePlusEnemyNowHPs = new int[13];
+					//최대 HP병합
+					for (int i = 0; i < battle.api_maxhps_combined.Length; i++)
+					{
+						CombinePlusEnemyMaxHPs[i] = battle.api_maxhps_combined[i];
+					}
+					for (int i = 7; i < battle.api_maxhps.Length; i++)
+					{
+						CombinePlusEnemyMaxHPs[i] = battle.api_maxhps[i];
+					}
+
+					//현재 HP병합
+					for (int i = 0; i < battle.api_nowhps_combined.Length; i++)
+					{
+						CombinePlusEnemyNowHPs[i] = battle.api_nowhps_combined[i];
+					}
+					for (int i = 7; i < battle.api_nowhps.Length; i++)
+					{
+						CombinePlusEnemyNowHPs[i] = CurrentHPList[i];
+					}
+					//재활용 위해 초기화.
+					CurrentHPList = new List<int>();
+
+					BattleCalc(Combinelists, CurrentHPList, CombinePlusEnemyMaxHPs, CombinePlusEnemyNowHPs, true, false, IsPractice);
+					//BattleCalc(HPList, MHPList, Combinelists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined,true);
 				}
-				for (int i = 7; i < battle.api_maxhps.Length; i++)
+				catch (Exception e)
 				{
-					CombinePlusEnemyMaxHPs[i] = battle.api_maxhps[i];
+					Debug.WriteLine(e);
 				}
 
-				//현재 HP병합
-				for (int i = 0; i < battle.api_nowhps_combined.Length; i++)
-				{
-					CombinePlusEnemyNowHPs[i] = battle.api_nowhps_combined[i];
-				}
-				for (int i = 7; i < battle.api_nowhps.Length; i++)
-				{
-					CombinePlusEnemyNowHPs[i] = CurrentHPList[i];
-				}
-				//재활용 위해 초기화.
-				CurrentHPList = new List<int>();
-
-				BattleCalc(Combinelists, CurrentHPList, CombinePlusEnemyMaxHPs, CombinePlusEnemyNowHPs, true, false, IsPractice);
-				//BattleCalc(HPList, MHPList, Combinelists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined,true);
 
 			}
 			if (EnableBattlePreview)
@@ -626,32 +642,40 @@ namespace Grabacr07.KanColleWrapper
 
 				if (IsCombined && battle.api_maxhps_combined != null && battle.api_nowhps_combined != null)
 				{
-					//현재 이 부분은 API가 정확히 기억이 나지 않기때문에 일단은 이렇게 처리.
-					//적 HP계산을 위해 아군리스트와 적군 리스트를 병합.
-					int[] CombinePlusEnemyMaxHPs = new int[13];
-					int[] CombinePlusEnemyNowHPs = new int[13];
-					//최대 HP병합
-					for (int i = 0; i < battle.api_maxhps_combined.Length; i++)
+					try
 					{
-						CombinePlusEnemyMaxHPs[i] = battle.api_maxhps_combined[i];
+						//현재 이 부분은 API가 정확히 기억이 나지 않기때문에 일단은 이렇게 처리.
+						//적 HP계산을 위해 아군리스트와 적군 리스트를 병합.
+						int[] CombinePlusEnemyMaxHPs = new int[13];
+						int[] CombinePlusEnemyNowHPs = new int[13];
+						//최대 HP병합
+						for (int i = 0; i < battle.api_maxhps_combined.Length; i++)
+						{
+							CombinePlusEnemyMaxHPs[i] = battle.api_maxhps_combined[i];
+						}
+						for (int i = 7; i < battle.api_maxhps.Length; i++)
+						{
+							CombinePlusEnemyMaxHPs[i] = battle.api_maxhps[i];
+						}
+
+						//현재 HP병합
+						for (int i = 0; i < battle.api_nowhps_combined.Length; i++)
+						{
+							CombinePlusEnemyNowHPs[i] = battle.api_nowhps_combined[i];
+						}
+						for (int i = 7; i < battle.api_nowhps.Length; i++)
+						{
+							CombinePlusEnemyNowHPs[i] = battle.api_nowhps[i];
+						}
+
+						BattleCalc(lists, CurrentHPList, CombinePlusEnemyMaxHPs, CombinePlusEnemyNowHPs, true, IsMidnight, IsPractice);
+						//BattleCalc(HPList, MHPList, lists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined,true);
 					}
-					for (int i = 7; i < battle.api_maxhps.Length; i++)
+					catch (Exception e)
 					{
-						CombinePlusEnemyMaxHPs[i] = battle.api_maxhps[i];
+						Debug.WriteLine(e);
 					}
 
-					//현재 HP병합
-					for (int i = 0; i < battle.api_nowhps_combined.Length; i++)
-					{
-						CombinePlusEnemyNowHPs[i] = battle.api_nowhps_combined[i];
-					}
-					for (int i = 7; i < battle.api_nowhps.Length; i++)
-					{
-						CombinePlusEnemyNowHPs[i] = battle.api_nowhps[i];
-					}
-
-					BattleCalc(lists, CurrentHPList, CombinePlusEnemyMaxHPs, CombinePlusEnemyNowHPs, true, IsMidnight, IsPractice);
-					//BattleCalc(HPList, MHPList, lists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined,true);
 				}
 				else
 					BattleCalc(lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps, false, IsMidnight, IsPractice);
