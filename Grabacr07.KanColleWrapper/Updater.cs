@@ -218,7 +218,7 @@ namespace Grabacr07.KanColleWrapper
 					return -1;
 				}
 
-				if (Directory.Exists(MainFolder + "Translations\\tmp\\")) Directory.Delete(MainFolder + "Translations\\tmp\\");
+				if (Directory.Exists(MainFolder + "Translations\\tmp\\")) Directory.Delete(MainFolder + "Translations\\tmp\\",true);
 
 				return ReturnValue;
 			}
