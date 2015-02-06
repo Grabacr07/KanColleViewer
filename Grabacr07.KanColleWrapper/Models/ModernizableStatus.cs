@@ -29,29 +29,20 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 近代化改修によって上昇した分を含む現在のステータス値を取得します。
 		/// </summary>
-		public int Current
-		{
-			get { return this.Default + this.Upgraded; }
-		}
+		public int Current => this.Default + this.Upgraded;
 
-		/// <summary>
+	    /// <summary>
 		/// このステータスが上限に達するのに必要な値を取得します。
 		/// </summary>
-		public int Shortfall
-		{
-			get { return this.Max - this.Current; }
-		}
+		public int Shortfall => this.Max - this.Current;
 
-		/// <summary>
+	    /// <summary>
 		/// このステータスが上限に達しているかどうかを示す値を取得します。
 		/// </summary>
-		public bool IsMax
-		{
-			get { return this.Max <= this.Current; }
-		}
+		public bool IsMax => this.Max <= this.Current;
 
 
-		internal ModernizableStatus(int[] status, int upgraded)
+	    internal ModernizableStatus(int[] status, int upgraded)
 			: this()
 		{
 			if (status.Length == 2)
@@ -73,11 +64,8 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		private static readonly ModernizableStatus dummy = new ModernizableStatus(new[] { -1, -1 }, 0);
 
-		public static ModernizableStatus Dummy
-		{
-			get { return dummy; }
-		}
+		public static ModernizableStatus Dummy => dummy;
 
-		#endregion
+	    #endregion
 	}
 }

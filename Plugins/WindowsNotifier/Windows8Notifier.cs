@@ -14,15 +14,9 @@ namespace Grabacr07.KanColleViewer.Plugins
 	{
 		#region static members
 
-		public static bool IsSupported
-		{
-			get
-			{
-				return Toast.IsSupported;
-			}
-		}
+		public static bool IsSupported => Toast.IsSupported;
 
-		#endregion
+	    #endregion
 
 		public void Initialize()
 		{

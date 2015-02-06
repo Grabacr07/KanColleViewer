@@ -12,7 +12,7 @@ namespace Grabacr07.KanColleWrapper.Models
 	{
 		public int Level { get; private set; }
 		public int Next { get; private set; }
-		public int Total { get; private set; }
+		public int Total { get; }
 
 		private Experience(int level, int next, int total)
 		{

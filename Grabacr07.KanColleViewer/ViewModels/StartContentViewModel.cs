@@ -14,12 +14,9 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		private static readonly StartContentViewModel instance = new StartContentViewModel();
 
-		public static StartContentViewModel Instance
-		{
-			get { return instance; }
-		}
+		public static StartContentViewModel Instance => instance;
 
-		#endregion
+	    #endregion
 
 		#region CanDeleteInternetCache 変更通知プロパティ
 

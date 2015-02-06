@@ -48,12 +48,9 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#region CanOpenScreenshotFolder 変更通知プロパティ
 
-		public bool CanOpenScreenshotFolder
-		{
-			get { return Directory.Exists(this.ScreenshotFolder); }
-		}
+		public bool CanOpenScreenshotFolder => Directory.Exists(this.ScreenshotFolder);
 
-		#endregion
+	    #endregion
 
 		#region ScreenshotImageFormat 変更通知プロパティ
 

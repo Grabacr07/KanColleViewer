@@ -15,14 +15,9 @@ namespace Grabacr07.KanColleWrapper
 	{
 		#region singleton
 
-		private static readonly KanColleClient current = new KanColleClient();
+	    public static KanColleClient Current { get; } = new KanColleClient();
 
-		public static KanColleClient Current
-		{
-			get { return current; }
-		}
-
-		#endregion
+	    #endregion
 
 		/// <summary>
 		/// 艦これの通信をフックするプロキシを取得します。
