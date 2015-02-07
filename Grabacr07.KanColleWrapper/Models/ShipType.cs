@@ -1,4 +1,10 @@
-﻿using Grabacr07.KanColleWrapper.Models.Raw;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Grabacr07.KanColleWrapper.Models.Raw;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
@@ -7,25 +13,13 @@ namespace Grabacr07.KanColleWrapper.Models
 	/// </summary>
 	public class ShipType : RawDataWrapper<kcsapi_mst_stype>, IIdentifiable
 	{
-		public int Id
-		{
-			get { return this.RawData.api_id; }
-		}
+		public int Id => this.RawData.api_id;
 
-		public string Name
-		{
-			get
-			{
-				return KanColleClient.Current.Translations.GetTranslation(RawData.api_name, TranslationType.ShipTypes, this.RawData, this.Id);
-			}
-		}
+	    public string Name => KanColleClient.Current.Translations.GetTranslation(RawData.api_name, TranslationType.ShipTypes, this.RawData, this.Id);
 
-		public int SortNumber
-		{
-			get { return this.RawData.api_sortno; }
-		}
+		public int SortNumber => this.RawData.api_sortno;
 
-		public ShipType(kcsapi_mst_stype rawData) : base(rawData) { }
+	    public ShipType(kcsapi_mst_stype rawData) : base(rawData) { }
 
 		public override string ToString()
 		{
@@ -41,11 +35,8 @@ namespace Grabacr07.KanColleWrapper.Models
 			api_name = "不審船",
 		});
 
-		public static ShipType Dummy
-		{
-			get { return dummy; }
-		}
+		public static ShipType Dummy => dummy;
 
-		#endregion
+	    #endregion
 	}
 }

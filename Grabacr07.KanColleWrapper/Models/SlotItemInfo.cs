@@ -1,4 +1,10 @@
-﻿using Grabacr07.KanColleWrapper.Internal;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models.Raw;
 
 namespace Grabacr07.KanColleWrapper.Models
@@ -11,36 +17,18 @@ namespace Grabacr07.KanColleWrapper.Models
 		private SlotItemIconType? iconType;
 		private int? categoryId;
 
-		public int Id
-		{
-			get { return this.RawData.api_id; }
-		}
+		public int Id => this.RawData.api_id;
 
-		public string Name
-		{
-			get
-			{
-				return KanColleClient.Current.Translations.GetTranslation(this.RawData.api_name, TranslationType.Equipment, this.RawData);
-			}
-		}
+		public string Name => KanColleClient.Current.Translations.GetTranslation(this.RawData.api_name, TranslationType.Equipment, this.RawData);
 
-		public SlotItemIconType IconType
-		{
-			get { return this.iconType ?? (SlotItemIconType)(this.iconType = (SlotItemIconType)(this.RawData.api_type.Get(3) ?? 0)); }
-		}
+		public SlotItemIconType IconType => this.iconType ?? (SlotItemIconType)(this.iconType = (SlotItemIconType)(this.RawData.api_type.Get(3) ?? 0));
 
-		public int CategoryId
-		{
-			get { return this.categoryId ?? (int)(this.categoryId = this.RawData.api_type.Get(2) ?? int.MaxValue); }
-		}
+		public int CategoryId => this.categoryId ?? (int)(this.categoryId = this.RawData.api_type.Get(2) ?? int.MaxValue);
 
 		/// <summary>
 		/// 対空値を取得します。
 		/// </summary>
-		public int AA
-		{
-			get { return this.RawData.api_tyku; }
-		}
+		public int AA => this.RawData.api_tyku;
 
 		/// <summary>
 		/// 制空戦に参加できる戦闘機または水上機かどうかを示す値を取得します。
@@ -70,10 +58,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			api_name = "？？？",
 		});
 
-		public static SlotItemInfo Dummy
-		{
-			get { return dummy; }
-		}
+		public static SlotItemInfo Dummy => dummy;
 
 		#endregion
 	}

@@ -15,12 +15,9 @@ namespace Grabacr07.KanColleViewer.Models
 
 		private static readonly ResourceService current = new ResourceService();
 
-		public static ResourceService Current
-		{
-			get { return current; }
-		}
+		public static ResourceService Current => current;
 
-		#endregion
+	    #endregion
 
 		/// <summary>
 		/// サポートされているカルチャの名前。
@@ -37,20 +34,14 @@ namespace Grabacr07.KanColleViewer.Models
 		/// <summary>
 		/// 多言語化されたリソースを取得します。
 		/// </summary>
-		public Resources Resources
-		{
-			get { return this._Resources; }
-		}
+		public Resources Resources => this._Resources;
 
-		/// <summary>
+	    /// <summary>
 		/// サポートされているカルチャを取得します。
 		/// </summary>
-		public IReadOnlyCollection<CultureInfo> SupportedCultures
-		{
-			get { return this._SupportedCultures; }
-		}
+		public IReadOnlyCollection<CultureInfo> SupportedCultures => this._SupportedCultures;
 
-		private ResourceService()
+	    private ResourceService()
 		{
 			this._SupportedCultures = this.supportedCultureNames
 				.Select(x =>

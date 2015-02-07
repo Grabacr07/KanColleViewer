@@ -88,19 +88,19 @@
 													  WindowType="catalogs:SlotItemCatalogWindow"
 													  IsOwned="False" />
 		</livet:InteractionMessageTrigger>
-        <livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
 										 MessageKey="Show/CalExp">
-            <livet:TransitionInteractionMessageAction Mode="NewOrActive"
+			<livet:TransitionInteractionMessageAction Mode="NewOrActive"
 													  WindowType="catalogs:CalExp"
 													  IsOwned="False" />
-        </livet:InteractionMessageTrigger>
-        <livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+		</livet:InteractionMessageTrigger>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
 										 MessageKey="Show/ExpeditionsCatalogWindow">
-            <livet:TransitionInteractionMessageAction Mode="NewOrActive"
+			<livet:TransitionInteractionMessageAction Mode="NewOrActive"
 													  WindowType="catalogs:ExpeditionsCatalogWindow"
 													  IsOwned="False" />
-        </livet:InteractionMessageTrigger>
-    </i:Interaction.Triggers>
+		</livet:InteractionMessageTrigger>
+	</i:Interaction.Triggers>
 
 
 	<ScrollViewer VerticalScrollBarVisibility="Auto"
@@ -110,7 +110,7 @@
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="205" />
 				<ColumnDefinition Width="140" />
-            </Grid.ColumnDefinitions>
+			</Grid.ColumnDefinitions>
 
 			<Border VerticalAlignment="Top">
 				<DockPanel DataContext="{Binding Content.Fleets}">
@@ -148,100 +148,103 @@
 													DataContext="{Binding SelectedFleet}"
 													Margin="0,7,0,3" />
 
-					<ItemsControl ItemsSource="{Binding SelectedFleet.Ships}"
-								  Background="Transparent"
-								  Grid.IsSharedSizeScope="True">
-						<i:Interaction.Triggers>
-							<behaviors:FlickTrigger>
-								<behaviors:FlickFleetsAction TargetObject="{Binding}"
-															 IsCyclic="True"
-															 Orientation="Horizontal" />
-							</behaviors:FlickTrigger>
-						</i:Interaction.Triggers>
-						<ItemsControl.ItemTemplate>
-							<DataTemplate>
-								<StackPanel Margin="0,2,0,0">
-									<StackPanel.Resources>
-										<Style TargetType="{x:Type TextBlock}"
-											   BasedOn="{StaticResource DefaultTextStyleKey}">
-											<Setter Property="TextWrapping"
-													Value="NoWrap" />
-										</Style>
-									</StackPanel.Resources>
+					<ScrollViewer HorizontalScrollBarVisibility="Auto"
+								  VerticalScrollBarVisibility="Disabled">
+						<ItemsControl ItemsSource="{Binding SelectedFleet.Ships}"
+									  Background="Transparent"
+									  Grid.IsSharedSizeScope="True">
+							<i:Interaction.Triggers>
+								<behaviors:FlickTrigger>
+									<behaviors:FlickFleetsAction TargetObject="{Binding}"
+																 IsCyclic="True"
+																 Orientation="Horizontal" />
+								</behaviors:FlickTrigger>
+							</i:Interaction.Triggers>
+							<ItemsControl.ItemTemplate>
+								<DataTemplate>
+									<StackPanel Margin="0,2,0,0">
+										<StackPanel.Resources>
+											<Style TargetType="{x:Type TextBlock}"
+												   BasedOn="{StaticResource DefaultTextStyleKey}">
+												<Setter Property="TextWrapping"
+														Value="NoWrap" />
+											</Style>
+										</StackPanel.Resources>
 
-									<Grid>
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition />
-											<ColumnDefinition Width="Auto"
-															  SharedSizeGroup="Level" />
-											<ColumnDefinition Width="Auto"
-															  SharedSizeGroup="HP" />
-											<ColumnDefinition Width="Auto"
-															  SharedSizeGroup="Condition" />
-										</Grid.ColumnDefinitions>
+										<Grid HorizontalAlignment="Left">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="Auto"
+																  SharedSizeGroup="Name" />
+												<ColumnDefinition Width="Auto"
+																  SharedSizeGroup="Level" />
+												<ColumnDefinition Width="Auto"
+																  SharedSizeGroup="HP" />
+												<ColumnDefinition Width="Auto"
+																  SharedSizeGroup="Condition" />
+											</Grid.ColumnDefinitions>
 
-										<TextBlock ToolTipService.Placement="Relative"
-												   ToolTipService.HorizontalOffset="-9"
-												   ToolTipService.VerticalOffset="-3">
+											<TextBlock ToolTipService.Placement="Relative"
+													   ToolTipService.HorizontalOffset="-9"
+													   ToolTipService.VerticalOffset="-3">
 											<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
-												 Style="{DynamicResource EmphaticTextElementStyleKey}"
+												 Style="{DynamicResource EmphaticTextElementStyleKey}" 
 												 FontSize="14"/>
 											<LineBreak />
 											<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
 												 FontSize="11" />
-											<TextBlock.ToolTip>
-												<TextBlock Margin="0,-2,0,0">
+												<TextBlock.ToolTip>
+													<TextBlock Margin="0,-2,0,0">
 													<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
 														 Style="{DynamicResource EmphaticTextElementStyleKey}"
 														 FontSize="14"/>
 													<LineBreak />
 													<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
 														 FontSize="11" />
-												</TextBlock>
-											</TextBlock.ToolTip>
+													</TextBlock>
+												</TextBlock.ToolTip>
 										</TextBlock>
 
-										<TextBlock Grid.Column="1"
-												   Margin="12,0,0,0">
+											<TextBlock Grid.Column="1"
+													   Margin="12,0,0,0">
 											<Run Text="Lv." />
 											<Run Text="{Binding Ship.Level, Mode=OneWay}"
 												 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 											<LineBreak />
 											<Run Text="{Binding Ship.ExpForNextLevel, StringFormat=Next: {0}, Mode=OneWay}"
 												 FontSize="9" />
-										</TextBlock>
+											</TextBlock>
 
-										<Grid x:Name="HPIndicator"
-											  Grid.Column="2"
-											  Margin="12,1,12,0">
-											<Grid.RowDefinitions>
-												<RowDefinition Height="Auto" />
-												<RowDefinition Height="Auto" />
-											</Grid.RowDefinitions>
-											<TextBlock>
+											<Grid x:Name="HPIndicator"
+												  Grid.Column="2"
+												  Margin="12,1,12,0">
+												<Grid.RowDefinitions>
+													<RowDefinition Height="Auto" />
+													<RowDefinition Height="Auto" />
+												</Grid.RowDefinitions>
+												<TextBlock>
 												<Run Text="HP:" />
 												<Run Text="{Binding Ship.HP.Current, Mode=OneWay}"
 													 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 												<Run Text="{Binding Ship.HP.Maximum, StringFormat=/{0}, Mode=OneWay}" />
-											</TextBlock>
-											<controls:ColorIndicator Grid.Row="1"
-																	 Height="6"
-																	 LimitedValue="{Binding Ship.HP, Mode=OneWay}"
-																	 Margin="0,2,0,0" />
-										</Grid>
+												</TextBlock>
+												<controls:ColorIndicator Grid.Row="1"
+																		 Height="6"
+																		 LimitedValue="{Binding Ship.HP, Mode=OneWay}"
+																		 Margin="0,2,0,0" />
+											</Grid>
 
-										<Grid x:Name="RepairIndicator"
-											  Grid.Column="2"
-											  Visibility="Collapsed"
-											  Margin="8,2,8,0">
-											<Border Background="{DynamicResource FleetRepairingBrushKey}"
-													Opacity=".4" />
-											<TextBlock Text="입거중"
-													   Style="{DynamicResource EmphaticTextStyleKey}"
-													   HorizontalAlignment="Center" />
-										</Grid>
+											<Grid x:Name="RepairIndicator"
+												  Grid.Column="2"
+												  Visibility="Collapsed"
+												  Margin="8,2,8,0">
+												<Border Background="{DynamicResource FleetRepairingBrushKey}"
+														Opacity=".4" />
+												<TextBlock Text="입거중"
+														   Style="{DynamicResource EmphaticTextStyleKey}"
+														   HorizontalAlignment="Center" />
+											</Grid>
 
-										<TextBlock Grid.Column="3">
+											<TextBlock Grid.Column="3">
 											<InlineUIContainer>
 												<controls:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
 											</InlineUIContainer>
@@ -250,27 +253,28 @@
 											<LineBreak />
 											<Run Text="컨디션"
 												 FontSize="8" />
-										</TextBlock>
-									</Grid>
-									<Rectangle Height="1"
-											   Margin="0,4,0,0"
-											   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-								</StackPanel>
+											</TextBlock>
+										</Grid>
+										<Rectangle Height="1"
+												   Margin="0,4,0,0"
+												   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+									</StackPanel>
 
-								<DataTemplate.Triggers>
-									<DataTrigger Binding="{Binding Ship.IsInRepairing}"
-												 Value="True">
-										<Setter TargetName="HPIndicator"
-												Property="Opacity"
-												Value=".2" />
-										<Setter TargetName="RepairIndicator"
-												Property="Visibility"
-												Value="Visible" />
-									</DataTrigger>
-								</DataTemplate.Triggers>
-							</DataTemplate>
-						</ItemsControl.ItemTemplate>
-					</ItemsControl>
+									<DataTemplate.Triggers>
+										<DataTrigger Binding="{Binding Ship.IsInRepairing}"
+													 Value="True">
+											<Setter TargetName="HPIndicator"
+													Property="Opacity"
+													Value=".2" />
+											<Setter TargetName="RepairIndicator"
+													Property="Visibility"
+													Value="Visible" />
+										</DataTrigger>
+									</DataTemplate.Triggers>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+						</ItemsControl>
+					</ScrollViewer>
 				</DockPanel>
 			</Border>
 
@@ -293,24 +297,24 @@
 								   Margin="0,7,0,3"
 								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-                        <metro2:CallMethodButton Content="함선목록"
-											 Padding="12,5"
-											 Margin="0,5,0,5"
-											 MethodName="ShowShipCatalog" />
+						<metro2:CallMethodButton Content="함선목록"
+												 Padding="12,5"
+												 Margin="0,5,0,5"
+												 MethodName="ShowShipCatalog" />
 
-                        <metro2:CallMethodButton Content="장비목록"
-											 Padding="12,5"
-											 Margin="0,0,0,5"
-											 MethodName="ShowSlotItemCatalog" />
-
-                        <metro2:CallMethodButton Content="계산기"
-											 ToolTip="경험치 계산기입니다. 바로 다음 개조레벨조회도 가능"
-											 Padding="12,5"
-											 Margin="0,0,0,5"
-											 MethodName="CalExp" />
-                        <metro2:CallMethodButton Content="원정목록"
-											 Padding="12,5"
-											 MethodName="ExpeditionsCatalogWindow" />
+						<metro2:CallMethodButton Content="장비목록"
+												 Padding="12,5"
+												 Margin="0,0,0,5"
+												 MethodName="ShowSlotItemCatalog" />
+						
+						<metro2:CallMethodButton Content="계산기"
+												 ToolTip="경험치 계산기입니다. 바로 다음 개조레벨조회도 가능"
+												 Padding="12,5"
+												 Margin="0,0,0,5"
+												 MethodName="CalExp" />
+						<metro2:CallMethodButton Content="원정목록"
+												 Padding="12,5"
+												 MethodName="ExpeditionsCatalogWindow" />
 					</StackPanel>
 				</Border>
 
@@ -333,8 +337,8 @@
 											   Style="{DynamicResource DefaultTextStyleKey}"
 											   Margin="0,4,0,0">
 										<Run Text="{Binding Id, Mode=OneWay, StringFormat=/{0}}"
-											 Style="{DynamicResource EmphaticTextElementStyleKey}"
-                                             FontSize="13"/>
+											 Style="{DynamicResource EmphaticTextElementStyleKey}"  
+											 FontSize="13"/>
 										<Run x:Name="Remaining"
 											 Text="{Binding Expedition.Remaining, StringFormat=- {0}, Mode=OneWay}" />
 									</TextBlock>

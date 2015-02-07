@@ -1,12 +1,16 @@
-﻿using Grabacr07.KanColleWrapper.Models.Raw;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using Grabacr07.KanColleWrapper.Models.Raw;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
 	[DebuggerDisplay("[{Id}] {Title} - {Detail}")]
 	public class Mission : RawDataWrapper<kcsapi_mission>, IIdentifiable
 	{
-		public int Id { get; private set; }
+		public int Id { get; }
 
 		public string Title { get; private set; }
 
@@ -16,8 +20,6 @@ namespace Grabacr07.KanColleWrapper.Models
 			: base(mission)
 		{
 			this.Id = mission.api_id;
-			//this.Title = mission.api_name;
-			//this.Detail = mission.api_details;
 			this.Title = KanColleClient.Current.Translations.GetTranslation(mission.api_name, TranslationType.ExpeditionTitle, this.RawData, mission.api_id);
 			this.Detail = KanColleClient.Current.Translations.GetTranslation(mission.api_details, TranslationType.ExpeditionDetail, this.RawData, mission.api_id);
 		}

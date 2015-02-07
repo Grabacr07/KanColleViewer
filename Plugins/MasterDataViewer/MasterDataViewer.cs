@@ -1,7 +1,11 @@
-﻿using Grabacr07.KanColleViewer.Composition;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Linq;
+using System.Threading.Tasks;
+using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.Plugins.ViewModels;
 using Grabacr07.KanColleViewer.Plugins.Views;
-using System.ComponentModel.Composition;
 
 namespace Grabacr07.KanColleViewer.Plugins
 {
@@ -14,13 +18,10 @@ namespace Grabacr07.KanColleViewer.Plugins
 	{
 		private readonly PortalViewModel portalViewModel = new PortalViewModel();
 
-		public string ToolName
-		{
-			get { return "MasterView"; }
-		}
+		public string ToolName => "MasterView";
 
 
-		public object GetSettingsView()
+	    public object GetSettingsView()
 		{
 			return null;
 		}

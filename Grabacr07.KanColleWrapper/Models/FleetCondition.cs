@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Linq;
+using System.Threading.Tasks;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
@@ -35,12 +38,9 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 艦隊に編成されている艦娘の疲労を自然回復しているかどうかを示す値を取得します。
 		/// </summary>
-		public bool IsRejuvenating
-		{
-			get { return this.RejuvenateTime.HasValue; }
-		}
+		public bool IsRejuvenating => this.RejuvenateTime.HasValue;
 
-		#endregion
+	    #endregion
 
 		#region Remaining 変更通知プロパティ
 

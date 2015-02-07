@@ -1,5 +1,9 @@
-﻿using Grabacr07.KanColleViewer.Composition;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Grabacr07.KanColleViewer.Composition;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Composition
 {
@@ -7,17 +11,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Composition
 	{
 		public ToolViewModel(Lazy<IToolPlugin, IPluginMetadata> plugin) : base(plugin) { }
 
-		public string ToolName
-		{
-			get { return this.Plugin.ToolName; }
-		}
+		public string ToolName => this.Plugin.ToolName;
 
-		public object View
-		{
-			get { return this.Plugin.GetToolView(); }
-		}
+	    public object View => this.Plugin.GetToolView();
 
-		public override string ToString()
+	    public override string ToString()
 		{
 			return this.Title;
 		}

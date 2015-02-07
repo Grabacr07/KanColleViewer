@@ -1,4 +1,8 @@
-﻿using Grabacr07.KanColleWrapper.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Grabacr07.KanColleWrapper.Models;
 using Livet;
 using Livet.EventListeners;
 
@@ -8,40 +12,22 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 	{
 		private readonly RepairingDock source;
 
-		public int Id
-		{
-			get { return this.source.Id; }
-		}
+		public int Id => this.source.Id;
 
-		public string Ship
-		{
-			get { return this.source.Ship == null ? "----" : this.source.Ship.Info.Name; }
-		}
+		public string Ship => this.source.Ship == null ? "----" : this.source.Ship.Info.Name;
 
-		public string Level { get { if (this.source != null) { return "Lv." + this.source.Level.ToString(); } else return null; } }
+		public string Level => this.source != null ? "Lv." + this.source.Level.ToString() : "";
 
-		public string CompleteTime
-		{
-			get { return this.source.CompleteTime.HasValue ? this.source.CompleteTime.Value.LocalDateTime.ToString("MM/dd HH:mm") : "--/-- --:--:--"; }
-		}
+		public string CompleteTime => this.source.CompleteTime.HasValue ? this.source.CompleteTime.Value.LocalDateTime.ToString("MM/dd HH:mm") : "--/-- --:--:--";
 
-		public string Remaining
-		{
-			get
-			{
-				return this.source.Remaining.HasValue
-					? string.Format("{0:D2}:{1}",
-						(int)this.source.Remaining.Value.TotalHours,
-						this.source.Remaining.Value.ToString(@"mm\:ss"))
-					: "--:--:--";
-			}
-		}
+		public string Remaining => this.source.Remaining.HasValue
+			? string.Format("{0:D2}:{1}",
+				(int)this.source.Remaining.Value.TotalHours,
+				this.source.Remaining.Value.ToString(@"mm\:ss"))
+			: "--:--:--";
 
-		public RepairingDockState State
-		{
-			get { return this.source.State; }
-		}
-		
+		public RepairingDockState State => this.source.State;
+
 		public RepairingDockViewModel(RepairingDock source)
 		{
 			this.source = source;

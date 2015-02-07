@@ -1,24 +1,30 @@
-﻿using Grabacr07.KanColleWrapper.Models;
-using Livet;
+﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Grabacr07.KanColleWrapper.Models;
+using Livet;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 {
 	public class SlotItemViewModel : ViewModel
 	{
 		private int count;
-		public List<Counter> Ships { get; private set; }
+		public List<Counter> Ships { get; }
 
 		public class Counter
 		{
 			public Ship Ship { get; set; }
 			public int Count { get; set; }
 
-			public string CountString
-			{
-				get { return this.Count == 1 ? "" : " x " + this.Count + " "; }
-			}
+			public string ShipName => this.Ship.Info.Name;
+
+			public string ShipLevel => "Lv." + this.Ship.Level;
+
+			public string CountString => this.Count == 1 ? "" : " x " + this.Count + " ";
+
 			public string EquipStar { get; set; }
 		}
 
@@ -48,12 +54,13 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				if (InEnhanceEquipment)
 					this.Ships.Add(new Counter { Ship = ship, Count = 1 ,EquipStar="★"});
 				else
-					this.Ships.Add(new Counter { Ship = ship, Count = 1});;
+					this.Ships.Add(new Counter { Ship = ship, Count = 1 });
 			}
 			else
 			{
 				target.Count++;
 			}
+
 			this.Remainder--;
 		}
 	}
