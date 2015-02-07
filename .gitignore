@@ -214,3 +214,5 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 /KanColleViewer-Compiled
+KanColleViewer.sln.ide/edb.chk
+*.ide

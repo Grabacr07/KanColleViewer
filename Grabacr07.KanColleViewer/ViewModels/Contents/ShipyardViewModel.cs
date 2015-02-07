@@ -11,7 +11,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 	{
 		public override string Name
 		{
-			get { return Properties.Resources.Shipyard; }
+			get { return "工廠"; }
 			protected set { throw new NotImplementedException(); }
 		}
 
@@ -53,7 +53,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 		#endregion
 
-		public CreatedSlotItemViewModel CreatedSlotItem { get; private set; }
+		public CreatedSlotItemViewModel CreatedSlotItem { get; }
 
 
 		public ShipyardViewModel()
@@ -89,7 +89,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 		{
 			this.CreatedSlotItem.Update(KanColleClient.Current.Homeport.Dockyard.CreatedSlotItem);
 		}
-
 		public void ShowNdockShipCatalog()
 		{
 			var catalog = new NeedNdockShipCatalogWindowViewModel();

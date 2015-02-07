@@ -1,7 +1,11 @@
-﻿using Grabacr07.Desktop.Metro.Controls;
-using Grabacr07.KanColleWrapper.Models;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Grabacr07.Desktop.Metro.Controls;
+using Grabacr07.KanColleViewer.ViewModels.Contents;
+using Grabacr07.KanColleWrapper.Models;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 {
@@ -11,13 +15,13 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		private readonly NoneColumnViewModel noneColumn = new NoneColumnViewModel();
 		private SortableColumnViewModel currentSortTarget;
 
-		public IdColumnViewModel IdColumn { get; private set; }
-		public TypeColumnViewModel TypeColumn { get; private set; }
-		public NameColumnViewModel NameColumn { get; private set; }
-		public LevelColumnViewModel LevelColumn { get; private set; }
-		public ConditionColumnViewModel ConditionColumn { get; private set; }
-		public ViewRangeColumnViewModel ViewRangeColumn { get; private set; }
-		public NdockTimeColumnViewModel NdockTimeColumn { get; private set; }
+		public IdColumnViewModel IdColumn { get; }
+		public TypeColumnViewModel TypeColumn { get; }
+		public NameColumnViewModel NameColumn { get; }
+		public LevelColumnViewModel LevelColumn { get; }
+		public ConditionColumnViewModel ConditionColumn { get; }
+		public ViewRangeColumnViewModel ViewRangeColumn { get; }
+		public NdockTimeColumnViewModel NdockTimeColumn { get; }
 
 		public ShipCatalogSortWorker()
 		{

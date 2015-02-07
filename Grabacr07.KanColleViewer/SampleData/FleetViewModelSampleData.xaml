@@ -501,7 +501,6 @@
 
 	</fleets:FleetViewModel.Ships>
 	<fleets:FleetViewModel.State>
-		<Livet:ViewModel>
-		</Livet:ViewModel>
+		<Livet:ViewModel />
 	</fleets:FleetViewModel.State>
 </fleets:FleetViewModel>

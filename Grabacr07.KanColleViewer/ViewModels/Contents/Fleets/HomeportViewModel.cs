@@ -1,5 +1,10 @@
-﻿using Grabacr07.KanColleWrapper.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Grabacr07.KanColleWrapper.Models;
 using Livet;
+using Livet.EventListeners;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 {
@@ -10,7 +15,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 	{
 		public Fleet Fleet { get; private set; }
 
-		public ConditionViewModel Condition { get; private set; }
+		public ConditionViewModel Condition { get; }
 		
 		public HomeportViewModel(Fleet fleet)
 		{

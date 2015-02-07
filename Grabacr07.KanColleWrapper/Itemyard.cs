@@ -19,12 +19,9 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// <see cref="SlotItems"/> と、出撃中に入手したものを含んだ装備数を取得します。
 		/// </summary>
-		public int SlotItemsCount
-		{
-			get { return this.SlotItems.Count + droppedItemsCount; }
-		}
+		public int SlotItemsCount => this.SlotItems.Count + this.droppedItemsCount;
 
-		#region SlotItems 変更通知プロパティ
+	    #region SlotItems 変更通知プロパティ
 
 		private MemberTable<SlotItem> _SlotItems;
 

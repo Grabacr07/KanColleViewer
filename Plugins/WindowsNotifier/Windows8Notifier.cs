@@ -1,8 +1,12 @@
-﻿using Grabacr07.KanColleViewer.Composition;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Grabacr07.KanColleViewer.Composition;
 using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
 using MS.WindowsAPICodePack.Internal;
-using System;
-using System.Diagnostics;
 
 namespace Grabacr07.KanColleViewer.Plugins
 {
@@ -10,13 +14,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 	{
 		#region static members
 
-		public static bool IsSupported
-		{
-			get
-			{
-				return Toast.IsSupported;
-			}
-		}
+		public static bool IsSupported => Toast.IsSupported;
 
 		#endregion
 		CustomSound sound = new CustomSound();
