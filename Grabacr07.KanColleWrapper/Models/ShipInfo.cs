@@ -80,7 +80,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 速力を取得します。
 		/// </summary>
-		public Speed Speed => (Speed)this.RawData.api_sokuh;
+		public Speed Speed => (Speed)this.RawData.api_soku;
 
 	    /// <summary>
 		/// 次の改造が実施できるレベルを取得します。

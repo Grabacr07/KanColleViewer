@@ -153,14 +153,21 @@ namespace Grabacr07.KanColleWrapper
 
 		private void DropShip(kcsapi_battleresult source)
 		{
-			if (source.api_get_ship == null) return;
+			try
+			{
+				if (source.api_get_ship == null) return;
 
-			var target = KanColleClient.Current.Master.Ships[source.api_get_ship.api_ship_id];
-			if (target == null) return;
-			//api_defeq is missing! I don't know how to fix this problem.
-			//this.droppedItemsCount += target.RawData.api_defeq.Count(x => x != -1);
+				var target = KanColleClient.Current.Master.Ships[source.api_get_ship.api_ship_id];
+				if (target == null) return;
 
-			this.RaisePropertyChanged("SlotItemsCount");
+				this.droppedItemsCount += target.RawData.api_defeq.Count(x => x != -1);
+				this.RaisePropertyChanged("SlotItemsCount");
+			}
+			catch (Exception ex)
+			{
+				// defeq が消えてるっぽい暫定対応 (雑)
+				Debug.WriteLine(ex);
+			}
 		}
 
 
