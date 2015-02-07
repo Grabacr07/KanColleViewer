@@ -15,12 +15,9 @@ namespace Grabacr07.KanColleViewer.Models
 
 		private static readonly NotifierHost instance = new NotifierHost();
 
-		public static NotifierHost Instance
-		{
-			get { return instance; }
-		}
+		public static NotifierHost Instance => instance;
 
-		#endregion
+	    #endregion
 
 		private NotifierHost() { }
 

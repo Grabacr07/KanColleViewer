@@ -147,12 +147,9 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// バケツ！！！ ぶっかけ！！！！
 		/// </summary>
-		public int Bucket
-		{
-			get { return this.InstantRepairMaterials; }
-		}
+		public int Bucket => this.InstantRepairMaterials;
 
-		#endregion
+	    #endregion
 
 		#region InstantBuildMaterials 変更通知プロパティ
 
@@ -187,7 +184,7 @@ namespace Grabacr07.KanColleWrapper
 
 		internal void Update(kcsapi_material[] source)
 		{
-			if (source != null && source.Length == 7)
+			if (source != null && source.Length >= 7)
 			{
 				this.Fuel = source[0].api_value;
 				this.Ammunition = source[1].api_value;

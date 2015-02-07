@@ -53,7 +53,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 		#endregion
 
-		public CreatedSlotItemViewModel CreatedSlotItem { get; private set; }
+		public CreatedSlotItemViewModel CreatedSlotItem { get; }
 
 
 		public ShipyardViewModel()

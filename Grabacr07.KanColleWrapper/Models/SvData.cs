@@ -18,22 +18,13 @@ namespace Grabacr07.KanColleWrapper.Models
 	{
 		public NameValueCollection Request { get; private set; }
 
-		public bool IsSuccess
-		{
-			get { return this.RawData.api_result == 1; }
-		}
+		public bool IsSuccess => this.RawData.api_result == 1;
 
-		public T Data
-		{
-			get { return this.RawData.api_data; }
-		}
+	    public T Data => this.RawData.api_data;
 
-		public kcsapi_deck[] Fleets
-		{
-			get { return this.RawData.api_data_deck; }
-		}
+	    public kcsapi_deck[] Fleets => this.RawData.api_data_deck;
 
-		public SvData(svdata<T> rawData, string reqBody)
+	    public SvData(svdata<T> rawData, string reqBody)
 			: base(rawData)
 		{
 			this.Request = HttpUtility.ParseQueryString(reqBody);
@@ -44,12 +35,9 @@ namespace Grabacr07.KanColleWrapper.Models
 	{
 		public NameValueCollection Request { get; private set; }
 
-		public bool IsSuccess
-		{
-			get { return this.RawData.api_result == 1; }
-		}
+		public bool IsSuccess => this.RawData.api_result == 1;
 
-		public SvData(svdata rawData, string reqBody)
+	    public SvData(svdata rawData, string reqBody)
 			: base(rawData)
 		{
 			this.Request = HttpUtility.ParseQueryString(reqBody);

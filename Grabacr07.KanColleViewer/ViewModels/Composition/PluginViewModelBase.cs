@@ -12,31 +12,19 @@ namespace Grabacr07.KanColleViewer.ViewModels.Composition
 	{
 		protected TPlugin Plugin { get; private set; }
 
-		private IPluginMetadata Metadata { get; set; }
+		private IPluginMetadata Metadata { get; }
 
 
-		public string Title
-		{
-			get { return this.Metadata.Title; }
-		}
+		public string Title => this.Metadata.Title;
 
-		public string Description
-		{
-			get { return this.Metadata.Description; }
-		}
+	    public string Description => this.Metadata.Description;
 
-		public string Author
-		{
-			get { return this.Metadata.Author; }
-		}
+	    public string Author => this.Metadata.Author;
 
-		public string Version
-		{
-			get { return this.Metadata.Version; }
-		}
+	    public string Version => this.Metadata.Version;
 
 
-		protected PluginViewModelBase(Lazy<TPlugin, IPluginMetadata> plugin)
+	    protected PluginViewModelBase(Lazy<TPlugin, IPluginMetadata> plugin)
 		{
 			this.Plugin = plugin.Value;
 			this.Metadata = plugin.Metadata;

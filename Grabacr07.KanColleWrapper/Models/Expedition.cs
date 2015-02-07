@@ -79,13 +79,9 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 現在遠征を実行中かどうかを示す値を取得します。
 		/// </summary>
-		public bool IsInExecution
-		{
-			get { return this.ReturnTime.HasValue; }
-		}
+		public bool IsInExecution => this.ReturnTime.HasValue;
 
-
-		#endregion
+	    #endregion
 
 		#region Remaining 変更通知プロパティ
 

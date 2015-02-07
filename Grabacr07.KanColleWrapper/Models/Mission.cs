@@ -10,7 +10,7 @@ namespace Grabacr07.KanColleWrapper.Models
 	[DebuggerDisplay("[{Id}] {Title} - {Detail}")]
 	public class Mission : RawDataWrapper<kcsapi_mission>, IIdentifiable
 	{
-		public int Id { get; private set; }
+		public int Id { get; }
 
 		public string Title { get; private set; }
 

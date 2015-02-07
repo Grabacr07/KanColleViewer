@@ -12,35 +12,20 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 	{
 		private readonly FleetCondition source;
 
-		public string RejuvenateTime
-		{
-			get
-			{
-				return this.source.RejuvenateTime.HasValue
-					? this.source.RejuvenateTime.Value.LocalDateTime.ToString("MM/dd HH:mm")
-					: "--/-- --:--";
-			}
-		}
+		public string RejuvenateTime => this.source.RejuvenateTime.HasValue
+		    ? this.source.RejuvenateTime.Value.LocalDateTime.ToString("MM/dd HH:mm")
+		    : "--/-- --:--";
 
-		public string Remaining
-		{
-			get
-			{
-				return this.source.Remaining.HasValue
-					? string.Format("{0:D2}:{1}",
-						(int)this.source.Remaining.Value.TotalHours,
-						this.source.Remaining.Value.ToString(@"mm\:ss"))
-					: "--:--:--";
-			}
-		}
+	    public string Remaining => this.source.Remaining.HasValue
+	        ? string.Format("{0:D2}:{1}",
+	            (int)this.source.Remaining.Value.TotalHours,
+	            this.source.Remaining.Value.ToString(@"mm\:ss"))
+	        : "--:--:--";
 
-		public bool IsRejuvenating
-		{
-			get { return this.source.IsRejuvenating; }
-		}
+	    public bool IsRejuvenating => this.source.IsRejuvenating;
 
 
-		public ConditionViewModel(FleetCondition condition)
+	    public ConditionViewModel(FleetCondition condition)
 		{
 			this.source = condition;
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(condition, (sender, args) => this.RaisePropertyChanged(args.PropertyName)));
