@@ -26,9 +26,7 @@
 		</ResourceDictionary>
 	</UserControl.Resources>
 	<Grid>
-		<StackPanel Width="Auto"
-					Height="Auto">
-
+		<StackPanel>
 			<TextBlock Foreground="red" 
 						   FontWeight="Bold"
 						   FontSize="13" Margin="0,0,0,20">
@@ -135,7 +133,8 @@
 				</StackPanel>
 			</Grid>
 			<TextBlock/>
-			<Border HorizontalAlignment="Center" >
+			<ScrollViewer HorizontalAlignment="Center" 
+						  HorizontalScrollBarVisibility="Auto">
 				<StackPanel Orientation="Horizontal">
 
 					<ItemsControl VerticalAlignment="Top"
@@ -258,7 +257,7 @@
 						Width="Auto" ItemsSource="{Binding SecondResultReport}"
 						Background="Transparent"
 						Grid.IsSharedSizeScope="True"
-						Margin="0,3,3,3">
+						Margin="5,3,3,3">
 						<ItemsControl.ItemTemplate>
 							<DataTemplate>
 								<StackPanel Margin="0,2,0,0">
@@ -491,7 +490,7 @@
 						</ItemsControl.ItemTemplate>
 					</ItemsControl>
 				</StackPanel>
-			</Border>
+			</ScrollViewer>
 		</StackPanel>
 	</Grid>
 </UserControl>

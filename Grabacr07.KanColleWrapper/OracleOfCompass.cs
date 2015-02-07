@@ -110,7 +110,7 @@ namespace Grabacr07.KanColleWrapper
 			if (!EnableBattlePreview) return null;
 			var Organization = KanColleClient.Current.Homeport.Organization;
 
-			this.Results.Clear();
+			if (this.Results.Count > 0) this.Results.Clear();
 
 			for (int i = 0; i < 6; i++)
 			{
@@ -150,7 +150,7 @@ namespace Grabacr07.KanColleWrapper
 			if (!EnableBattlePreview) return null;
 			var Organization = KanColleClient.Current.Homeport.Organization;
 
-			this.Results.Clear();
+			if (this.Results.Count > 0) this.Results.Clear();
 
 			for (int i = 0; i < 6; i++)
 			{
@@ -174,7 +174,7 @@ namespace Grabacr07.KanColleWrapper
 			if (!EnableBattlePreview) return null;
 			var ships = KanColleClient.Current.Master.Ships;
 
-			this.Results.Clear();
+			if (this.Results.Count > 0) this.Results.Clear();
 
 			for (int i = 0; i < 6; i++)
 			{
@@ -546,12 +546,21 @@ namespace Grabacr07.KanColleWrapper
 
 						//적군피해
 						numlist = new int[7];
-
-						damlist = battle.api_kouku.api_stage3_combined.api_edam;
-						ChangeKoukuFlagToNumber(battle.api_kouku.api_stage3_combined.api_erai_flag,
-							battle.api_kouku.api_stage3_combined.api_ebak_flag,
-							numlist);
-						DecimalListmake(numlist, damlist, Combinelists, false);
+						if (battle.api_kouku.api_stage3_combined.api_edam != null)
+						{
+							try
+							{
+								damlist = battle.api_kouku.api_stage3_combined.api_edam;
+								ChangeKoukuFlagToNumber(battle.api_kouku.api_stage3_combined.api_erai_flag,
+									battle.api_kouku.api_stage3_combined.api_ebak_flag,
+									numlist);
+								DecimalListmake(numlist, damlist, Combinelists, false);
+							}
+							catch (Exception e)
+							{
+								Debug.WriteLine(e);
+							}
+						}
 					}//연합함대 리스트 작성 끝
 				}
 			}
@@ -604,7 +613,6 @@ namespace Grabacr07.KanColleWrapper
 					CurrentHPList = new List<int>();
 
 					BattleCalc(Combinelists, CurrentHPList, CombinePlusEnemyMaxHPs, CombinePlusEnemyNowHPs, true, false, IsPractice);
-					//BattleCalc(HPList, MHPList, Combinelists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined,true);
 				}
 				catch (Exception e)
 				{
@@ -669,7 +677,6 @@ namespace Grabacr07.KanColleWrapper
 						}
 
 						BattleCalc(lists, CurrentHPList, CombinePlusEnemyMaxHPs, CombinePlusEnemyNowHPs, true, IsMidnight, IsPractice);
-						//BattleCalc(HPList, MHPList, lists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined,true);
 					}
 					catch (Exception e)
 					{
@@ -707,9 +714,6 @@ namespace Grabacr07.KanColleWrapper
 				DataLists.ComHpResults.Clear();
 				DataLists.ComMHpResults.Clear();
 
-				DataLists.CalResults.Clear();
-				DataLists.HpResults.Clear();
-				DataLists.MHpResults.Clear();
 
 				DataLists.EnemyCalResults.Clear();
 				DataLists.EnemyHpResults.Clear();
@@ -718,6 +722,10 @@ namespace Grabacr07.KanColleWrapper
 				DataLists.IsEnemyFlagDead = false;
 				if (!IsCombined)
 				{
+					DataLists.CalResults.Clear();
+					DataLists.HpResults.Clear();
+					DataLists.MHpResults.Clear();
+
 					if (!IsMidnight) DataLists.IsKanDamaged = false;
 					DataLists.IsOverDamage = false;
 					DataLists.IsMidDamage = false;

@@ -76,10 +76,9 @@
 									 VerticalAlignment="Top" />
 			</Grid>
 		</Border>
-		<StackPanel Width="Auto"
-					Height="Auto"
-					Grid.Row="1"
-					Margin="10">
+		<StackPanel	Grid.Row="1"
+					Margin="10"
+					>
 			<Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="Auto"/>
@@ -207,11 +206,9 @@
 				</StackPanel>
 			</Grid>
 			<TextBlock/>
-			<Border HorizontalAlignment="Center"
-					BorderBrush="{DynamicResource BorderBrushKey}"
-					BorderThickness="1"
-					Padding="6"
-					Margin="2,0,2,10">
+			<ScrollViewer HorizontalAlignment="Center"
+					Margin="2,0,2,10"
+						  HorizontalScrollBarVisibility="Auto">
 				<StackPanel Orientation="Horizontal">
 
 					<ItemsControl VerticalAlignment="Top"
@@ -334,7 +331,7 @@
 						Width="Auto" ItemsSource="{Binding SecondResultReport}"
 						Background="Transparent"
 						Grid.IsSharedSizeScope="True"
-						Margin="0,3,3,3">
+						Margin="5,3,3,3">
 						<ItemsControl.ItemTemplate>
 							<DataTemplate>
 								<StackPanel Margin="0,2,0,0">
@@ -567,7 +564,7 @@
 						</ItemsControl.ItemTemplate>
 					</ItemsControl>
 				</StackPanel>
-			</Border>
+			</ScrollViewer>
 		</StackPanel>
 	</Grid>
 </metro:MetroWindow>
