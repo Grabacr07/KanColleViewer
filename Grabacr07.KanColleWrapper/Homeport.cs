@@ -41,7 +41,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public Quests Quests { get; private set; }
 
-		
+
 
 
 		#region Admiral 変更通知プロパティ
@@ -83,7 +83,7 @@ namespace Grabacr07.KanColleWrapper
 				this.Organization.Update(x.Data.api_ship);
 				this.Repairyard.Update(x.Data.api_ndock);
 				this.Organization.Update(x.Data.api_deck_port);
-				this.Organization.Combined = x.Data.api_combined_flag == 1;
+				this.Organization.Combined = x.Data.api_combined_flag == 1 || x.Data.api_combined_flag == 2;//1 combine 2 water
 				this.Materials.Update(x.Data.api_material);
 				this.UpdateAdmiral(x.Data.api_basic);
 			});
@@ -116,6 +116,6 @@ namespace Grabacr07.KanColleWrapper
 		{
 			//Observable.Timer(TimeSpan.FromSeconds(10), TimeSpan.FromMinutes(3))
 		}
-		
+
 	}
 }

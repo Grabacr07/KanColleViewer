@@ -80,7 +80,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				this.RejuvenateTime = null;
 				return;
 			}
-			if (KanColleClient.Current.OracleOfCompass.Combined)
+			if (KanColleClient.Current.Homeport.Organization.Combined)
 			{
 				if (this.fleet.Id < 3 && this.ships.Any(p => (p.HP.Current / (double)p.HP.Maximum) <= 0.25)) KanColleClient.Current.OracleOfCompass.AfterResult();
 
