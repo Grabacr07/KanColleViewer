@@ -602,7 +602,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			return false;
 		}
 	}
-	public class ShipNdockTimeFilter:ShipCatalogFilter
+	public class ShipNdockTimeFilter : ShipCatalogFilter
 	{
 		public ShipNdockTimeFilter(Action updateAction) : base(updateAction) { }
 
@@ -613,5 +613,185 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			return false;
 		}
 
+	}
+	public class ShipFleetFilter : ShipCatalogFilter
+	{
+		private bool Impotant { get; set; }
+		#region First 変更通知プロパティ
+
+		private bool _First;
+
+		public bool First
+		{
+			get { return this._First; }
+			set
+			{
+				if (this._First != value)
+				{
+					this._First = value;
+					this.valueCheck(value);
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+		#region Second 変更通知プロパティ
+
+		private bool _Second;
+
+		public bool Second
+		{
+			get { return this._Second; }
+			set
+			{
+				if (this._Second != value)
+				{
+					this._Second = value;
+					this.valueCheck(value);
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+		#region Third 変更通知プロパティ
+
+		private bool _Third;
+
+		public bool Third
+		{
+			get { return this._Third; }
+			set
+			{
+				if (this._Third != value)
+				{
+					this._Third = value;
+					this.valueCheck(value);
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+		#region Fourth 変更通知プロパティ
+
+		private bool _Fourth;
+
+		public bool Fourth
+		{
+			get { return this._Fourth; }
+			set
+			{
+				if (this._Fourth != value)
+				{
+					this._Fourth = value;
+					this.valueCheck(value);
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+		#region NotFleet 変更通知プロパティ
+
+		private bool _NotFleet;
+
+		public bool NotFleet
+		{
+			get { return this._NotFleet; }
+			set
+			{
+				if (this._NotFleet != value)
+				{
+					this._NotFleet = value;
+					this.valueCheck(value);
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+		#region AllCheck 変更通知プロパティ
+
+		private bool _AllCheck;
+
+		public bool AllCheck
+		{
+			get { return this._AllCheck; }
+			set
+			{
+				if (this._AllCheck != value)
+				{
+					this._AllCheck = value;
+					this.ForcedCheck(value);
+					this.RaisePropertyChanged();
+					this.Update();
+					this.Impotant = false;
+				}
+			}
+		}
+
+		#endregion
+
+		public ShipFleetFilter(Action updateAction) : base(updateAction)
+		{
+			this._First = true;
+			this._Second = true;
+			this._Third = true;
+			this._Fourth = true;
+			this._NotFleet = true;
+			this._AllCheck = true;
+		}
+		public override bool Predicate(Ship ship)
+		{
+			if (this.AllCheck) return true;
+			else
+			{
+				if (this.First && ship.FleetId == 1) return true;
+				if (this.Second && ship.FleetId == 2) return true;
+				if (this.Third && ship.FleetId == 3) return true;
+				if (this.Fourth && ship.FleetId == 4) return true;
+				if (this.NotFleet && ship.FleetId == -1) return true;
+			}
+			return false;
+		}
+		private void ForcedCheck(bool value)
+		{
+			if (value)
+			{
+				this.First = true;
+				this.Second = true;
+				this.Third = true;
+				this.Fourth = true;
+				this.NotFleet = true;
+			}
+			else if (!value && !Impotant)
+			{
+				this.First = false;
+				this.Second = false;
+				this.Third = false;
+				this.Fourth = false;
+				this.NotFleet = false;
+			}
+		}
+		private void valueCheck(bool value)
+		{
+			if (!value)
+			{
+				this.Impotant = true;
+				this.AllCheck = false;
+			}
+			else if (this.First && this.Second && this.Third && this.Fourth && this.NotFleet)
+			{
+				this.Impotant = true;
+				this.AllCheck = true;
+			}
+		}
 	}
 }

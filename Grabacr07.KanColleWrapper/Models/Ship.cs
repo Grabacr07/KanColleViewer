@@ -38,11 +38,32 @@ namespace Grabacr07.KanColleWrapper.Models
 		#endregion
 
 		private readonly Homeport homeport;
-
 		/// <summary>
 		/// この艦娘を識別する ID を取得します。
 		/// </summary>
 		public int Id => this.RawData.api_id;
+		public int FleetId
+		{
+			get
+			{
+				try
+				{
+					foreach (var fleet in homeport.Organization.Fleets)
+					{
+						foreach (var ship in fleet.Value.Ships)
+						{
+							if (ship.Name == this.Name) return fleet.Value.Id;
+						}
+					}
+				}
+				catch(Exception e)
+				{
+					Debug.WriteLine(e);
+					return -1;
+				}
+				return -1;
+			}
+		}
 		public long RepairTime => this.RawData.api_ndock_time;
 		public string RepairTimeString
 		{

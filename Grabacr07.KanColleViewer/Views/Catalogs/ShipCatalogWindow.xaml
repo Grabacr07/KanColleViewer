@@ -383,25 +383,56 @@
 							BorderBrush="{DynamicResource BorderBrushKey}"
 							Margin="0,8,0,0"
 							Padding="5">
-						<WrapPanel DataContext="{Binding ShipSallyAreaFilter}">
-							<TextBlock Margin="0,2">
-								<Run Text="출격한해역" />
-								<Run Text=":" />
-							</TextBlock>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <WrapPanel DataContext="{Binding ShipSallyAreaFilter}">
+							    <TextBlock Margin="0,2">
+								    <Run Text="출격한해역" />
+								    <Run Text=":" />
+							    </TextBlock>
 
-							<CheckBox Content="작전출격한적 없음"
-									  IsChecked="{Binding None}"
-									  Margin="10,0" />
-							<CheckBox Content="1분류"
-									  IsChecked="{Binding FirstMap}"
-									  Margin="10,0" />
-							<CheckBox Content="2분류"
-									  IsChecked="{Binding SecondMap}"
-									  Margin="10,0" />
-							<CheckBox Content="3분류"
-									  IsChecked="{Binding ThirdMap}"
-									  Margin="10,0" />
-						</WrapPanel>
+							    <CheckBox Content="작전출격한적 없음"
+									      IsChecked="{Binding None}"
+									      Margin="10,0" />
+							    <CheckBox Content="1분류"
+									      IsChecked="{Binding FirstMap}"
+									      Margin="10,0" />
+							    <CheckBox Content="2분류"
+									      IsChecked="{Binding SecondMap}"
+									      Margin="10,0" />
+							    <CheckBox Content="3분류"
+									      IsChecked="{Binding ThirdMap}"
+									      Margin="10,0" />
+						    </WrapPanel>
+                            <WrapPanel Grid.Column="1"  DataContext="{Binding ShipFleetFilter}">
+                                <TextBlock Margin="0,2">
+                                    <Run Text="함대"/>
+                                    <Run Text=":"/>
+                                </TextBlock>
+                                <CheckBox Content="전함대"
+									      IsChecked="{Binding AllCheck}"
+									      Margin="10,0" />
+							    <CheckBox Content="1함대"
+									      IsChecked="{Binding First}"
+									      Margin="10,0" />
+							    <CheckBox Content="2함대"
+									      IsChecked="{Binding Second}"
+									      Margin="10,0" />
+							    <CheckBox Content="3함대"
+									      IsChecked="{Binding Third}"
+									      Margin="10,0" />
+                                <CheckBox Content="4함대"
+                                          IsChecked="{Binding Fourth}"
+									      Margin="10,0" />
+                                <CheckBox Content="그외"
+                                          IsChecked="{Binding NotFleet}"
+									      Margin="10,0" />
+                            </WrapPanel>
+                        </Grid>
+						
 					</Border>
 					<Border BorderThickness="1"
 							BorderBrush="{DynamicResource BorderBrushKey}"

@@ -28,7 +28,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public ShipExpeditionFilter ShipExpeditionFilter { get; }
 		public ShipSallyAreaFilter ShipSallyAreaFilter { get; }
 		public ShipNameSearchFilter ShipNameSearchFilter { get; }
-
+		public ShipFleetFilter ShipFleetFilter { get; }
 		public bool CheckAllShipTypes
 		{
 			get { return this.ShipTypes.All(x => x.IsSelected); }
@@ -121,6 +121,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			this.ShipExpeditionFilter = new ShipExpeditionFilter(this.Update);
 			this.ShipSallyAreaFilter = new ShipSallyAreaFilter(this.Update);
 			this.ShipNameSearchFilter = new ShipNameSearchFilter(this.Update);
+			this.ShipFleetFilter = new ShipFleetFilter(this.Update);
 
 			this.updateSource
 				.Do(_ => this.IsReloading = true)
@@ -143,6 +144,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			this.ShipExpeditionFilter.SetFleets(this.homeport.Organization.Fleets);
 
 			this.RaisePropertyChanged("CheckAllShipTypes");
+			this.RaisePropertyChanged("CheckAllFleets");
 			this.updateSource.OnNext(Unit.Default);
 		}
 
@@ -169,7 +171,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				.Where(this.ShipRemodelingFilter.Predicate)
 				.Where(this.ShipExpeditionFilter.Predicate)
 				.Where(this.ShipSallyAreaFilter.Predicate)
-				.Where(this.ShipNameSearchFilter.Predicate);
+				.Where(this.ShipNameSearchFilter.Predicate)
+				.Where(this.ShipFleetFilter.Predicate);
 
 			this.Ships = this.SortWorker.Sort(list)
 				.Select((x, i) => new ShipViewModel(i + 1, x))

@@ -1,6 +1,7 @@
 ﻿using Grabacr07.KanColleViewer.Composition;
 using System;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 
 namespace Grabacr07.KanColleViewer.Plugins
 {
@@ -12,7 +13,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 
 	public class WindowsNotifier : INotifier
 	{
-		private readonly INotifier notifier;
+		private INotifier notifier;
 
 		public WindowsNotifier()
 		{
@@ -33,7 +34,24 @@ namespace Grabacr07.KanColleViewer.Plugins
 
 		public void Show(NotifyType type, string header, string body, Action activated, Action<Exception> failed = null)
 		{
-			this.notifier.Show(type, header, body, activated, failed);
+			try//임시적 조치
+			{
+				this.notifier.Show(type, header, body, activated, failed);
+			}
+			catch(Exception e)
+			{
+				Debug.WriteLine(e);
+				try
+				{
+					this.notifier = new Windows7Notifier();
+					this.notifier.Show(type, header, body, activated, failed);
+				}
+				catch(Exception ex)
+				{
+					Debug.WriteLine(ex);
+				}
+				
+			}
 		}
 
 		public object GetSettingsView()

@@ -134,7 +134,8 @@
 			</Grid>
 			<TextBlock/>
 			<ScrollViewer HorizontalAlignment="Center" 
-						  HorizontalScrollBarVisibility="Auto">
+						  HorizontalScrollBarVisibility="Auto"
+                          VerticalScrollBarVisibility="Disabled">
 				<StackPanel Orientation="Horizontal">
 
 					<ItemsControl VerticalAlignment="Top"

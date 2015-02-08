@@ -108,7 +108,6 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 		public BattlePreviewsViewModel()
 		{
 			RankOuts = 6;
-
 			this.UpdateFleetStatus();
 		}
 		private void UpdateFleetStatus()
@@ -123,7 +122,11 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 					};
 					KanColleClient.Current.OracleOfCompass.PreviewCriticalCondition += () =>
 					{
-						if (!KanColleClient.Current.OracleOfCompass.Combined) this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.KanResult());
+						if (!KanColleClient.Current.Homeport.Organization.Combined)
+						{
+							this.SecondResultReport = new List<PreviewBattleResults>();
+							this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.KanResult());
+						}
 						else
 						{
 							this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.KanResult(1));
