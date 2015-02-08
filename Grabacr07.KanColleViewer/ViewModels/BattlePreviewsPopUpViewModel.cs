@@ -159,7 +159,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					KanColleClient.Current.OracleOfCompass.PreviewCriticalCondition += () =>
 					{
 						this.IsBattleCalculated = KanColleClient.Current.OracleOfCompass.IsBattleCalculated;
-						if (!KanColleClient.Current.OracleOfCompass.Combined) this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.KanResult());
+						if (!KanColleClient.Current.Homeport.Organization.Combined) this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.KanResult());
 						else
 						{
 							this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.KanResult(1));
@@ -192,7 +192,11 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 					if (KanColleClient.Current.OracleOfCompass.IsBattleCalculated)
 					{
-						if (!KanColleClient.Current.OracleOfCompass.Combined) this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.KanResult());
+						if (!KanColleClient.Current.Homeport.Organization.Combined)
+						{
+							this.SecondResultReport = new List<PreviewBattleResults>();
+							this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.KanResult());
+						}
 						else
 						{
 							this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.KanResult(1));
