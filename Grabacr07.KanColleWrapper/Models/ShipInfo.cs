@@ -32,6 +32,8 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public ShipType ShipType => this.shipType ?? (this.shipType = KanColleClient.Current.Master.ShipTypes[this.RawData.api_stype]) ?? ShipType.Dummy;
 
+        public int[] Slots => this.RawData.api_maxeq;
+
 	    #region 用意したけど使わないっぽい？
 
 		/// <summary>

@@ -42,6 +42,14 @@ namespace Grabacr07.KanColleWrapper.Models
 			}
 		}
 
+	    public bool IsNumerable
+        {
+            get
+            {
+                var type = this.RawData.api_type.Get(2);
+                return type.HasValue && (type == 6 || type == 7 || type == 8 || type == 11);
+            }
+        }
 
 		internal SlotItemInfo(kcsapi_mst_slotitem rawData) : base(rawData) { }
 
