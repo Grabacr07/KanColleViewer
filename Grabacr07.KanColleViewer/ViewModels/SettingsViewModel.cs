@@ -706,23 +706,23 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-		#region EnableEventMapInfo 変更通知プロパティ
+		//#region EnableEventMapInfo 変更通知プロパティ
 
-		public bool EnableEventMapInfo
-		{
-			get { return Settings.Current.EnableEventMapInfo; }
-			set
-			{
-				if (Settings.Current.EnableEventMapInfo != value)
-				{
-					Settings.Current.EnableEventMapInfo = value;
-					KanColleClient.Current.EventMapHPChecker.EnableEventMapInfo = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
+		//public bool EnableEventMapInfo
+		//{
+		//	get { return Settings.Current.EnableEventMapInfo; }
+		//	set
+		//	{
+		//		if (Settings.Current.EnableEventMapInfo != value)
+		//		{
+		//			Settings.Current.EnableEventMapInfo = value;
+		//			KanColleClient.Current.EventMapHPChecker.EnableEventMapInfo = value;
+		//			this.RaisePropertyChanged();
+		//		}
+		//	}
+		//}
 
-		#endregion
+		//#endregion
 
 		
 		public SettingsViewModel()

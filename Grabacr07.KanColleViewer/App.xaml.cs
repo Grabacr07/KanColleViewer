@@ -72,7 +72,7 @@ namespace Grabacr07.KanColleViewer
 			//Custom Settings
 			KanColleHost.Current.EnableResizing = Settings.Current.EnableResizing;
 			KanColleClient.Current.Logger.EnableLogging = Settings.Current.EnableLogging;
-			KanColleClient.Current.EventMapHPChecker.EnableEventMapInfo = Settings.Current.EnableEventMapInfo;
+			//KanColleClient.Current.EventMapHPChecker.EnableEventMapInfo = Settings.Current.EnableEventMapInfo;
 			KanColleClient.Current.OracleOfCompass.EnableBattlePreview = Settings.Current.EnableBattlePreview;
 			KanColleClient.Current.OracleOfCompass.IsBattleCalculated = false;
 			KanColleClient.Current.OracleOfCompass.IsCompassCalculated = false;

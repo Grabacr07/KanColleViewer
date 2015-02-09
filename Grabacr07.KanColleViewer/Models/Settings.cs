@@ -57,7 +57,7 @@ namespace Grabacr07.KanColleViewer.Models
 				NotifyExpeditionReturned = true,
 				CustomSoundVolume = 99,
 				EnableResizing = true,
-				EnableEventMapInfo = true,
+				//EnableEventMapInfo = true,
 				EnableBattlePreview=true,
 				KanColleClientSettings = new KanColleClientSettings(),
 			};
@@ -457,24 +457,24 @@ namespace Grabacr07.KanColleViewer.Models
 
 		#endregion
 
-		#region EnableEventMapInfo 変更通知プロパティ
+		//#region EnableEventMapInfo 変更通知プロパティ
 
-		private bool _EnableEventMapInfo;
+		//private bool _EnableEventMapInfo;
 
-		public bool EnableEventMapInfo
-		{
-			get { return this._EnableEventMapInfo; }
-			set
-			{
-				if (this._EnableEventMapInfo != value)
-				{
-					this._EnableEventMapInfo = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
+		//public bool EnableEventMapInfo
+		//{
+		//	get { return this._EnableEventMapInfo; }
+		//	set
+		//	{
+		//		if (this._EnableEventMapInfo != value)
+		//		{
+		//			this._EnableEventMapInfo = value;
+		//			this.RaisePropertyChanged();
+		//		}
+		//	}
+		//}
 
-		#endregion
+		//#endregion
 
 		#region CustomSoundVolume 変更通知プロパティ
 

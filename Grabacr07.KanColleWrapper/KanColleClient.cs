@@ -47,7 +47,7 @@ namespace Grabacr07.KanColleWrapper
 
 		public OracleOfCompass OracleOfCompass { get; private set; }
 
-		public EventMapHPChecker EventMapHPChecker { get; private set; }
+		//public EventMapHPChecker EventMapHPChecker { get; private set; }
 
 		#region IsStarted 変更通知プロパティ
 
@@ -166,7 +166,7 @@ namespace Grabacr07.KanColleWrapper
 			this.Logger = new Logger(proxy);
 			this.Translations = new Translations();
 			this.OracleOfCompass = new OracleOfCompass(proxy);
-			this.EventMapHPChecker = new EventMapHPChecker(proxy);
+			//this.EventMapHPChecker = new EventMapHPChecker(proxy);
 		}
 	}
 }
