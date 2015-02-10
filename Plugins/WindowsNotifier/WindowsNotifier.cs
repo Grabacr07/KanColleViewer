@@ -13,12 +13,12 @@ namespace Grabacr07.KanColleViewer.Plugins
 
 	public class WindowsNotifier : INotifier
 	{
-		private INotifier notifier;
+		private readonly INotifier notifier;
 
 		public WindowsNotifier()
 		{
 			this.notifier = Windows8Notifier.IsSupported
-				? (INotifier) new Windows8Notifier()
+				? (INotifier)new Windows8Notifier()
 				: new Windows7Notifier();
 		}
 
@@ -38,19 +38,9 @@ namespace Grabacr07.KanColleViewer.Plugins
 			{
 				this.notifier.Show(type, header, body, activated, failed);
 			}
-			catch(Exception e)
+			catch (Exception e)
 			{
 				Debug.WriteLine(e);
-				try
-				{
-					this.notifier = new Windows7Notifier();
-					this.notifier.Show(type, header, body, activated, failed);
-				}
-				catch(Exception ex)
-				{
-					Debug.WriteLine(ex);
-				}
-				
 			}
 		}
 
