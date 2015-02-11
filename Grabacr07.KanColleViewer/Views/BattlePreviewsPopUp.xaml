@@ -108,57 +108,57 @@
 										 />
 			</Grid>
 			<Grid Margin="0,5,0,0">
-				<TextBlock HorizontalAlignment="Center"
-							   VerticalAlignment="Center"
-							   FontSize="20"
-							   FontWeight="ExtraBold">
-					<TextBlock.Style>
-						<Style TargetType="TextBlock">
-							<Style.Triggers>
-								<DataTrigger Binding="{Binding RankOuts}"
-												 Value="0">
-									<Setter Property="Foreground" Value="#FFFFE544"/>
-									<Setter Property="Text" Value="완전승리 S"/>
-								</DataTrigger>
-								<DataTrigger Binding="{Binding RankOuts}"
-												 Value="1">
-									<Setter Property="Foreground" Value="Gold"/>
-									<Setter Property="Text" Value="S승리"/>
-								</DataTrigger>
-								<DataTrigger Binding="{Binding RankOuts}"
-												 Value="2">
-									<Setter Property="Foreground" Value="#FFD10000"/>
-									<Setter Property="Text" Value="A승리"/>
-								</DataTrigger>
-								<DataTrigger Binding="{Binding RankOuts}"
-												 Value="3">
-									<Setter Property="Foreground" Value="#FFD43353"/>
-									<Setter Property="Text" Value="B승리"/>
-								</DataTrigger>
-								<DataTrigger Binding="{Binding RankOuts}"
-												 Value="4">
-									<Setter Property="Foreground" Value="#FF42428F"/>
-									<Setter Property="Text" Value="C패배"/>
-								</DataTrigger>
-								<DataTrigger Binding="{Binding RankOuts}"
-												 Value="5">
-									<Setter Property="Foreground" Value="#FF02A43D"/>
-									<Setter Property="Text" Value="D패배"/>
-								</DataTrigger>
-								<DataTrigger Binding="{Binding RankOuts}"
-												 Value="-1">
-									<Setter Property="Foreground" Value="#FF54536C"/>
-									<Setter Property="Text" Value="예측불가 &amp; E이하"/>
-								</DataTrigger>
-								<DataTrigger Binding="{Binding RankOuts}"
-												 Value="6">
-									<Setter Property="Foreground" Value="Transparent"/>
-									<Setter Property="Text" Value=""/>
-								</DataTrigger>
-							</Style.Triggers>
-						</Style>
-					</TextBlock.Style>
-				</TextBlock>
+				<Grid HorizontalAlignment="Center">
+					<TextBlock Grid.Column="1"
+								FontWeight="ExtraBold"
+								Text="완전승리 S"
+								Foreground="#FFFFE558"
+							   HorizontalAlignment="Center"
+								FontSize="20"
+								Visibility="{Binding PerfectRank, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" d:IsHidden="True"/>
+					<TextBlock Grid.Column="1"
+								FontWeight="ExtraBold"
+								Text="S승리"
+								Foreground="Gold"
+							   HorizontalAlignment="Center"
+								FontSize="20"
+								Visibility="{Binding RankS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" d:IsHidden="True"/>
+					<TextBlock Grid.Column="1"
+								FontWeight="ExtraBold"
+								Text="A승리"
+								Foreground="#FFD10000"
+							   HorizontalAlignment="Center"
+								FontSize="20"
+								Visibility="{Binding RankA, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" d:IsHidden="True"/>
+					<TextBlock Grid.Column="1"
+								FontWeight="ExtraBold"
+								Text="B승리"
+								Foreground="#FFD43353"
+							   HorizontalAlignment="Center"
+								FontSize="20"
+								Visibility="{Binding RankB, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" d:IsHidden="True"/>
+					<TextBlock Grid.Column="1"
+								FontWeight="ExtraBold"
+								Text="C패배"
+								Foreground="#FF42428F"
+							   HorizontalAlignment="Center"
+								FontSize="20"
+								Visibility="{Binding RankC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" d:IsHidden="True"/>
+					<TextBlock Grid.Column="1"
+								FontWeight="ExtraBold"
+								Text="D패배"
+								Foreground="#FF02A43D"
+							   HorizontalAlignment="Center"
+								FontSize="20"
+								Visibility="{Binding RankD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" d:IsHidden="True"/>
+					<TextBlock Grid.Column="1"
+								FontWeight="ExtraBold"
+								Text="알수없음 혹은 D랭크 미만"
+								Foreground="#FF443DCF"
+							   HorizontalAlignment="Center"
+								FontSize="20"
+								Visibility="{Binding RankOut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+				</Grid>
 				<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
 					<TextBlock VerticalAlignment="Center" 
 							   FontSize="13" 

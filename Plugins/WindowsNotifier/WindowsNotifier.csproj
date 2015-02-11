@@ -52,7 +52,7 @@
       <HintPath>..\..\packages\NAudio.1.7.2\lib\net35\NAudio.dll</HintPath>
     </Reference>
     <Reference Include="Windows">
-      <HintPath>C:\Program Files\Windows Kits\8.1\References\CommonConfiguration\Neutral\Windows.winmd</HintPath>
+      <HintPath>C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral\Windows.winmd</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Livet.Extensions">

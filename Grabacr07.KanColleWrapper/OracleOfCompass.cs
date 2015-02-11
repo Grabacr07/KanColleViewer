@@ -203,7 +203,14 @@ namespace Grabacr07.KanColleWrapper
 			return this.Results;
 		}
 
-		public int RankResult { get; set; }
+		public RankResult RankOut()
+		{
+			RankResult Rank = new RankResult();
+
+			Rank.RankNum = this.DataLists.RankInt;
+
+			return Rank;
+		}
 		#endregion
 
 		#region 초기화 및 대파알림
@@ -905,11 +912,11 @@ namespace Grabacr07.KanColleWrapper
 				//랭크 연산 적용
 				try
 				{
-					RankResult = this.RankCalc();
+					DataLists.RankInt = this.RankCalc();
 				}
 				catch (Exception e)
 				{
-					RankResult = -1;
+					DataLists.RankInt = -1;
 					System.Diagnostics.Debug.WriteLine(e);
 				}
 			}

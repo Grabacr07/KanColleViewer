@@ -2,6 +2,13 @@
 
 namespace Grabacr07.KanColleWrapper.Models
 {
+	public class RankResult
+	{
+		/// <summary>
+		/// Rank int
+		/// </summary>
+		public int RankNum { get; set; }
+	}
 	/// <summary>
 	/// 미리보기 데이터를 저장하는 클래스
 	/// </summary>
