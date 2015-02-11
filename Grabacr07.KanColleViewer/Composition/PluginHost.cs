@@ -22,13 +22,18 @@ namespace Grabacr07.KanColleViewer.Composition
 
 		#region singleton members
 
-	    /// <summary>
+		private static readonly PluginHost instance = new PluginHost();
+
+		/// <summary>
 		/// <see cref="PluginHost"/> のインスタンスを取得します。
 		/// </summary>
 		/// <value><see cref="PluginHost"/> のインスタンス。</value>
-		public static PluginHost Instance { get; } = new PluginHost();
+		public static PluginHost Instance
+		{
+			get { return instance; }
+		}
 
-	    #endregion
+		#endregion
 
 		private readonly CompositionContainer container;
 
@@ -67,6 +72,11 @@ namespace Grabacr07.KanColleViewer.Composition
 			}
 
 			this.container = new CompositionContainer(catalog);
+		}
+
+		static PluginHost()
+		{
+
 		}
 
 		public void Dispose()

@@ -17,12 +17,12 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// 艦隊の編成状況にアクセスできるようにします。
 		/// </summary>
-		public Organization Organization { get; }
+		public Organization Organization { get; private set; }
 
 		/// <summary>
 		/// 資源および資材の保有状況にアクセスできるようにします。
 		/// </summary>
-		public Materials Materials { get; }
+		public Materials Materials { get; private set; }
 
 		/// <summary>
 		/// 装備や消費アイテムの保有状況にアクセスできるようにします。
@@ -32,7 +32,7 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// 複数の建造ドックを持つ工廠を取得します。
 		/// </summary>
-		public Dockyard Dockyard { get; }
+		public Dockyard Dockyard { get; private set; }
 
 		/// <summary>
 		/// 複数の入渠ドックを持つ工廠を取得します。

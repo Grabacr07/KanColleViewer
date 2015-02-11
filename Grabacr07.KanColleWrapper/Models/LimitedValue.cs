@@ -19,12 +19,12 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 最大値を取得します。
 		/// </summary>
-		public int Maximum { get; }
+		public int Maximum { get; private set; }
 
 		/// <summary>
 		/// 最小値を取得します。
 		/// </summary>
-		public int Minimum { get; }
+		public int Minimum { get; private set; }
 
 		public LimitedValue(int current, int maximum, int minimum)
 			: this()

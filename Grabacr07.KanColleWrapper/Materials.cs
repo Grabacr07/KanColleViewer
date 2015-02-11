@@ -147,9 +147,12 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// バケツ！！！ ぶっかけ！！！！
 		/// </summary>
-		public int Bucket => this.InstantRepairMaterials;
+		public int Bucket
+		{
+			get { return this.InstantRepairMaterials; }
+		}
 
-	    #endregion
+		#endregion
 
 		#region InstantBuildMaterials 変更通知プロパティ
 

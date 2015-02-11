@@ -16,9 +16,14 @@ namespace Grabacr07.KanColleViewer.Models
 	{
 		#region static members
 
-	    public static StatusService Current { get; } = new StatusService();
+		private static readonly StatusService current = new StatusService();
 
-	    #endregion
+		public static StatusService Current
+		{
+			get { return current; }
+		}
+
+		#endregion
 
 		private readonly Subject<string> notifier;
 		private string persisitentMessage = "";

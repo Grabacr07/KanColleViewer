@@ -9,11 +9,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 {
     public class ShipSlotViewModel : ViewModel
     {
-        public SlotItemInfo Item { get; }
+        public SlotItemInfo Item { get; private set; }
 
-        public string Current { get; }
+        public string Current { get; private set; }
 
-        public string Maximum { get; }
+        public string Maximum { get; private set; }
 
         public ShipSlotViewModel(Ship ship, int num)
         {

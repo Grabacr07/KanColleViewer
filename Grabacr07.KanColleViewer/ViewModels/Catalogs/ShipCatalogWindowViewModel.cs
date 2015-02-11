@@ -17,16 +17,16 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		private readonly Subject<Unit> updateSource = new Subject<Unit>();
 		private readonly Homeport homeport = KanColleClient.Current.Homeport;
 
-		public ShipCatalogSortWorker SortWorker { get; }
-		public IReadOnlyCollection<ShipTypeViewModel> ShipTypes { get; }
+		public ShipCatalogSortWorker SortWorker { get; private set; }
+		public IReadOnlyCollection<ShipTypeViewModel> ShipTypes { get; private set; }
 
-		public ShipLevelFilter ShipLevelFilter { get; }
-		public ShipLockFilter ShipLockFilter { get; }
-		public ShipSpeedFilter ShipSpeedFilter { get; }
-		public ShipModernizeFilter ShipModernizeFilter { get; }
-		public ShipRemodelingFilter ShipRemodelingFilter { get; }
-		public ShipExpeditionFilter ShipExpeditionFilter { get; }
-		public ShipSallyAreaFilter ShipSallyAreaFilter { get; }
+		public ShipLevelFilter ShipLevelFilter { get; private set; }
+		public ShipLockFilter ShipLockFilter { get; private set; }
+		public ShipSpeedFilter ShipSpeedFilter { get; private set; }
+		public ShipModernizeFilter ShipModernizeFilter { get; private set; }
+		public ShipRemodelingFilter ShipRemodelingFilter { get; private set; }
+		public ShipExpeditionFilter ShipExpeditionFilter { get; private set; }
+		public ShipSallyAreaFilter ShipSallyAreaFilter { get; private set; }
 
 		public bool CheckAllShipTypes
 		{

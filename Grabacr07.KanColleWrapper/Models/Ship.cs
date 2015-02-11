@@ -30,7 +30,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public ShipInfo Info { get; private set; }
 
-		public int SortNumber => this.RawData.api_sortno;
+		public int SortNumber
+		{
+		    get { return this.RawData.api_sortno; }
+		}
 
 	    /// <summary>
 		/// 艦娘の現在のレベルを取得します。
@@ -59,7 +62,10 @@ namespace Grabacr07.KanColleWrapper.Models
 	    /// <summary>
 		/// この艦娘が次のレベルに上がるために必要な経験値を取得します。
 		/// </summary>
-		public int ExpForNextLevel => this.RawData.api_exp.Get(1) ?? 0;
+		public int ExpForNextLevel
+	    {
+	        get { return this.RawData.api_exp.Get(1) ?? 0; }
+	    }
 
 	    #region HP 変更通知プロパティ
 

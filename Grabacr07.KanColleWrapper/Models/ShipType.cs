@@ -15,20 +15,20 @@ namespace Grabacr07.KanColleWrapper.Models
 	{
 		public int Id
 		{
-		    get { return this.RawData.api_id; }
+			get { return this.RawData.api_id; }
 		}
 
-	    public string Name
-	    {
-	        get { return this.RawData.api_name; }
-	    }
+		public string Name
+		{
+			get { return this.RawData.api_name; }
+		}
 
-	    public int SortNumber
-	    {
-	        get { return this.RawData.api_sortno; }
-	    }
+		public int SortNumber
+		{
+			get { return this.RawData.api_sortno; }
+		}
 
-	    public ShipType(kcsapi_mst_stype rawData) : base(rawData) { }
+		public ShipType(kcsapi_mst_stype rawData) : base(rawData) { }
 
 		public override string ToString()
 		{
@@ -37,13 +37,18 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#region static members
 
-	    public static ShipType Dummy { get; } = new ShipType(new kcsapi_mst_stype
+		private static ShipType dummy = new ShipType(new kcsapi_mst_stype
 		{
-		    api_id = 999,
-		    api_sortno = 999,
-		    api_name = "不審船",
+			api_id = 999,
+			api_sortno = 999,
+			api_name = "不審船",
 		});
 
-	    #endregion
+		public static ShipType Dummy
+		{
+			get { return dummy; }
+		}
+
+		#endregion
 	}
 }

@@ -16,7 +16,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		    get { return this.RawData.api_create_flag == 1; }
 		}
 
-	    public SlotItemInfo SlotItemInfo { get; }
+	    public SlotItemInfo SlotItemInfo { get; private set; }
 
 		public CreatedSlotItem(kcsapi_createitem rawData)
 			: base(rawData)

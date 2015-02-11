@@ -15,7 +15,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		    get { return this.RawData.api_id; }
 		}
 
-	    public SlotItemInfo Info { get; }
+	    public SlotItemInfo Info { get; private set; }
 
 		internal SlotItem(kcsapi_slotitem rawData) : base(rawData)
 		{

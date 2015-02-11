@@ -60,10 +60,13 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 		#endregion
 
-		public bool IsSupportedNotification => Helper.IsWindows8OrGreater;
+		public bool IsSupportedNotification
+		{
+			get { return Helper.IsWindows8OrGreater; }
+		}
 
 
-	    public FleetsViewModel()
+		public FleetsViewModel()
 		{
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport.Organization)
 			{

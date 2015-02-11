@@ -160,4 +160,3 @@ namespace Grabacr07.KanColleWrapper
         }
     }
 }
------

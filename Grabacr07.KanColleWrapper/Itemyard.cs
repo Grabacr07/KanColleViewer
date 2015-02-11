@@ -22,9 +22,12 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// <see cref="SlotItems"/> と、出撃中に入手したものを含んだ装備数を取得します。
 		/// </summary>
-		public int SlotItemsCount => this.SlotItems.Count + this.droppedItemsCount;
+		public int SlotItemsCount
+		{
+			get { return this.SlotItems.Count + this.droppedItemsCount; }
+		}
 
-	    #region SlotItems 変更通知プロパティ
+		#region SlotItems 変更通知プロパティ
 
 		private MemberTable<SlotItem> _SlotItems;
 
@@ -144,21 +147,21 @@ namespace Grabacr07.KanColleWrapper
 
 		private void DropShip(kcsapi_battleresult source)
 		{
-		    try
-		    {
-		        if (source.api_get_ship == null) return;
+			try
+			{
+				if (source.api_get_ship == null) return;
 
-		        var target = KanColleClient.Current.Master.Ships[source.api_get_ship.api_ship_id];
-		        if (target == null) return;
+				var target = KanColleClient.Current.Master.Ships[source.api_get_ship.api_ship_id];
+				if (target == null) return;
 
-		        this.droppedItemsCount += target.RawData.api_defeq.Count(x => x != -1);
-		        this.RaisePropertyChanged("SlotItemsCount");
-		    }
-		    catch (Exception ex)
-		    {
-                // defeq が消えてるっぽい暫定対応 (雑)
-                Debug.WriteLine(ex);
-		    }
+				this.droppedItemsCount += target.RawData.api_defeq.Count(x => x != -1);
+				this.RaisePropertyChanged("SlotItemsCount");
+			}
+			catch (Exception ex)
+			{
+				// defeq が消えてるっぽい暫定対応 (雑)
+				Debug.WriteLine(ex);
+			}
 		}
 
 

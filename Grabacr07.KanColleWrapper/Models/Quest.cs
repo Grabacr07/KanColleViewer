@@ -9,58 +9,61 @@ namespace Grabacr07.KanColleWrapper.Models
 {
 	public class Quest : RawDataWrapper<kcsapi_quest>, IIdentifiable
 	{
-		public int Id => this.RawData.api_no;
+		public int Id
+		{
+			get { return this.RawData.api_no; }
+		}
 
-	    /// <summary>
+		/// <summary>
 		/// 任務のカテゴリ (編成、出撃、演習 など) を取得します。
 		/// </summary>
 		public QuestCategory Category
-	    {
-	        get { return (QuestCategory)this.RawData.api_category; }
-	    }
+		{
+			get { return (QuestCategory)this.RawData.api_category; }
+		}
 
-	    /// <summary>
+		/// <summary>
 		/// 任務の種類 (1 回のみ、デイリー、ウィークリー) を取得します。
 		/// </summary>
 		public QuestType Type
-	    {
-	        get { return (QuestType)this.RawData.api_type; }
-	    }
+		{
+			get { return (QuestType)this.RawData.api_type; }
+		}
 
-	    /// <summary>
+		/// <summary>
 		/// 任務の状態を取得します。
 		/// </summary>
 		public QuestState State
-	    {
-	        get { return (QuestState)this.RawData.api_state; }
-	    }
+		{
+			get { return (QuestState)this.RawData.api_state; }
+		}
 
-	    /// <summary>
+		/// <summary>
 		/// 任務の進捗状況を取得します。
 		/// </summary>
 		public QuestProgress Progress
-	    {
-	        get { return (QuestProgress)this.RawData.api_progress_flag; }
-	    }
+		{
+			get { return (QuestProgress)this.RawData.api_progress_flag; }
+		}
 
-	    /// <summary>
+		/// <summary>
 		/// 任務名を取得します。
 		/// </summary>
 		public string Title
-	    {
-	        get { return this.RawData.api_title; }
-	    }
+		{
+			get { return this.RawData.api_title; }
+		}
 
-	    /// <summary>
+		/// <summary>
 		/// 任務の詳細を取得します。
 		/// </summary>
 		public string Detail
-	    {
-	        get { return this.RawData.api_detail; }
-	    }
+		{
+			get { return this.RawData.api_detail; }
+		}
 
 
-	    public Quest(kcsapi_quest rawData) : base(rawData) { }
+		public Quest(kcsapi_quest rawData) : base(rawData) { }
 
 
 		public override string ToString()

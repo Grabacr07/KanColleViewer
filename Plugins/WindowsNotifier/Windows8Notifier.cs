@@ -14,9 +14,12 @@ namespace Grabacr07.KanColleViewer.Plugins
 	{
 		#region static members
 
-		public static bool IsSupported => Toast.IsSupported;
+		public static bool IsSupported
+		{
+			get { return Toast.IsSupported; }
+		}
 
-	    #endregion
+		#endregion
 
 		public void Initialize()
 		{
@@ -41,12 +44,12 @@ namespace Grabacr07.KanColleViewer.Plugins
 		private static void InstallShortcut(string shortcutPath)
 		{
 			var exePath = Process.GetCurrentProcess().MainModule.FileName;
-			var newShortcut = (IShellLinkW) new CShellLink();
+			var newShortcut = (IShellLinkW)new CShellLink();
 
 			ErrorHelper.VerifySucceeded(newShortcut.SetPath(exePath));
 			ErrorHelper.VerifySucceeded(newShortcut.SetArguments(""));
 
-			var newShortcutProperties = (IPropertyStore) newShortcut;
+			var newShortcutProperties = (IPropertyStore)newShortcut;
 
 			using (var appId = new PropVariant(Toast.AppId))
 			{
@@ -54,7 +57,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 				ErrorHelper.VerifySucceeded(newShortcutProperties.Commit());
 			}
 
-			var newShortcutSave = (IPersistFile) newShortcut;
+			var newShortcutSave = (IPersistFile)newShortcut;
 
 			ErrorHelper.VerifySucceeded(newShortcutSave.Save(shortcutPath, true));
 		}

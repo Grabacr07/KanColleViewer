@@ -210,12 +210,12 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 艦隊に編成されている艦娘のコンディションを取得します。
 		/// </summary>
-		public FleetCondition Condition { get; }
+		public FleetCondition Condition { get; private set; }
 
 		/// <summary>
 		/// 艦隊の遠征に関するステータスを取得します。
 		/// </summary>
-		public Expedition Expedition { get; }
+		public Expedition Expedition { get; private set; }
 
 		#region IsReady 変更通知プロパティ
 

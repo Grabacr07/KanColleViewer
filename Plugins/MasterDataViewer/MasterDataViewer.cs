@@ -18,10 +18,13 @@ namespace Grabacr07.KanColleViewer.Plugins
 	{
 		private readonly PortalViewModel portalViewModel = new PortalViewModel();
 
-		public string ToolName => "MasterView";
+		public string ToolName
+		{
+			get { return "MasterView"; }
+		}
 
 
-	    public object GetSettingsView()
+		public object GetSettingsView()
 		{
 			return null;
 		}

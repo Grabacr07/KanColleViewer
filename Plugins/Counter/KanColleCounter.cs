@@ -26,9 +26,12 @@ namespace Counter
 			}
 		};
 
-		public string ToolName => "Counter";
+		public string ToolName
+		{
+			get { return "Counter"; }
+		}
 
-	    public object GetSettingsView()
+		public object GetSettingsView()
 		{
 			return null;
 		}

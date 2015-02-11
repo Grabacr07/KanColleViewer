@@ -11,7 +11,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
     {
         public Ship Ship { get; private set; }
 
-        public ShipSlotViewModel[] Slots { get; }
+        public ShipSlotViewModel[] Slots { get; private set; }
 
         public ShipViewModel(Ship ship)
         {
