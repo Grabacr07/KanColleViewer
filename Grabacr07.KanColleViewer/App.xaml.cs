@@ -21,7 +21,7 @@ namespace Grabacr07.KanColleViewer
 	{
 		public static ProductInfo ProductInfo { get; private set; }
 		public static MainWindowViewModel ViewModelRoot { get; private set; }
-
+		private bool IsUpdate { get; set; }
 		static App()
 		{
 			AppDomain.CurrentDomain.UnhandledException += (sender, args) => ReportException(sender, args.ExceptionObject as Exception);
@@ -72,7 +72,6 @@ namespace Grabacr07.KanColleViewer
 			//Custom Settings
 			KanColleHost.Current.EnableResizing = Settings.Current.EnableResizing;
 			KanColleClient.Current.Logger.EnableLogging = Settings.Current.EnableLogging;
-			//KanColleClient.Current.EventMapHPChecker.EnableEventMapInfo = Settings.Current.EnableEventMapInfo;
 			KanColleClient.Current.OracleOfCompass.EnableBattlePreview = Settings.Current.EnableBattlePreview;
 			KanColleClient.Current.OracleOfCompass.IsBattleCalculated = false;
 			KanColleClient.Current.OracleOfCompass.IsCompassCalculated = false;
@@ -87,6 +86,7 @@ namespace Grabacr07.KanColleViewer
 
 					if (File.Exists(Path.Combine(MainFolder, "AutoUpdater.exe")))
 					{
+						this.IsUpdate = true;
 						Process MyProcess = new Process();
 						MyProcess.StartInfo.FileName = "AutoUpdater.exe";
 						MyProcess.StartInfo.WorkingDirectory = MainFolder;
@@ -121,15 +121,9 @@ namespace Grabacr07.KanColleViewer
 			ViewModelRoot = new MainWindowViewModel();
 			this.MainWindow = new MainWindow { DataContext = ViewModelRoot };
 			this.MainWindow.Show();
-			//CriticalPupup();
+
+			if (this.IsUpdate) this.MainWindow.Close();
 		}
-		//public static void CriticalPupup()
-		//{
-		//	CriticalDialog criticalDialog = new CriticalDialog();
-		//	criticalDialog.Left = App.Current.MainWindow.Left + 95.0;
-		//	criticalDialog.Top = App.Current.MainWindow.Top + 165.0;
-		//	criticalDialog.Show();
-		//}
 		protected override void OnExit(ExitEventArgs e)
 		{
 			base.OnExit(e);

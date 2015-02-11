@@ -1,10 +1,8 @@
 ﻿using Livet;
+using System;
 using System.Diagnostics;
 using System.IO;
-using Microsoft.Win32;
 using System.Runtime.InteropServices;
-using System.Diagnostics;
-using System;
 
 namespace LogReader.ViewModels
 {
@@ -24,19 +22,10 @@ namespace LogReader.ViewModels
 		[DllImport("user32.dll", CharSet = CharSet.Auto)]
 		public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 		private const int SW_SHOWNORMAL = 1;
-		//#region static members
-		//private static readonly LogViewerViewModel current = new LogViewerViewModel();
-
-		//public static LogViewerViewModel Current
-		//{
-		//	get { return current; }
-		//}
-		//#endregion
-		//public LogDataList LogDataList { get; set; }
 
 		public LogViewerViewModel()
 		{
-			//LogDataList = new LogDataList();
+
 		}
 		public void ShowLogViewer()
 		{
@@ -73,23 +62,5 @@ namespace LogReader.ViewModels
 			}
 
 		}
-		//public void ShowDropLogViewer()
-		//{
-		//	var catalog = new DropLogViewerViewModel();
-		//	var message = new TransitionMessage(catalog, "Show/DropLogViewer");
-		//	this.Messenger.RaiseAsync(message);
-		//}
-		//public void ShowShipBuildLogViewer()
-		//{
-		//	var catalog = new ShipBuildLogViewerViewModel();
-		//	var message = new TransitionMessage(catalog, "Show/ShipBuildLogViewer");
-		//	this.Messenger.RaiseAsync(message);
-		//}
-		//public void ShowItemBuildLogViewer()
-		//{
-		//	var catalog = new ItemBuildLogViewerViewModel();
-		//	var message = new TransitionMessage(catalog, "Show/ItemBuildLogViewer");
-		//	this.Messenger.RaiseAsync(message);
-		//}
 	}
 }
