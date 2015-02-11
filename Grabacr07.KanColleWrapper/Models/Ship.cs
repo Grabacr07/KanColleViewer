@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Fiddler;
 using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models.Raw;
+using Livet;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
@@ -22,52 +23,52 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public int Id
 		{
-		    get { return this.RawData.api_id; }
+			get { return this.RawData.api_id; }
 		}
 
-	    /// <summary>
+		/// <summary>
 		/// 艦娘の種類に基づく情報を取得します。
 		/// </summary>
 		public ShipInfo Info { get; private set; }
 
 		public int SortNumber
 		{
-		    get { return this.RawData.api_sortno; }
+			get { return this.RawData.api_sortno; }
 		}
 
-	    /// <summary>
+		/// <summary>
 		/// 艦娘の現在のレベルを取得します。
 		/// </summary>
 		public int Level
-	    {
-	        get { return this.RawData.api_lv; }
-	    }
+		{
+			get { return this.RawData.api_lv; }
+		}
 
-	    /// <summary>
+		/// <summary>
 		/// 艦娘がロックされているかどうかを示す値を取得します。
 		/// </summary>
 		public bool IsLocked
-	    {
-	        get { return this.RawData.api_locked == 1; }
-	    }
+		{
+			get { return this.RawData.api_locked == 1; }
+		}
 
-	    /// <summary>
+		/// <summary>
 		/// 艦娘の現在の累積経験値を取得します。
 		/// </summary>
 		public int Exp
-	    {
-	        get { return this.RawData.api_exp.Get(0) ?? 0; }
-	    }
+		{
+			get { return this.RawData.api_exp.Get(0) ?? 0; }
+		}
 
-	    /// <summary>
+		/// <summary>
 		/// この艦娘が次のレベルに上がるために必要な経験値を取得します。
 		/// </summary>
 		public int ExpForNextLevel
-	    {
-	        get { return this.RawData.api_exp.Get(1) ?? 0; }
-	    }
+		{
+			get { return this.RawData.api_exp.Get(1) ?? 0; }
+		}
 
-	    #region HP 変更通知プロパティ
+		#region HP 変更通知プロパティ
 
 		private LimitedValue _HP;
 
@@ -227,57 +228,34 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public int ViewRange
 		{
-		    get { return this.RawData.api_sakuteki.Get(0) ?? 0; }
+			get { return this.RawData.api_sakuteki.Get(0) ?? 0; }
 		}
 
-	    /// <summary>
+		/// <summary>
 		/// 火力・雷装・対空・装甲のすべてのステータス値が最大値に達しているかどうかを示す値を取得します。
 		/// </summary>
 		public bool IsMaxModernized
-	    {
-	        get { return this.Firepower.IsMax && this.Torpedo.IsMax && this.AA.IsMax && this.Armer.IsMax; }
-	    }
+		{
+			get { return this.Firepower.IsMax && this.Torpedo.IsMax && this.AA.IsMax && this.Armer.IsMax; }
+		}
 
-	    /// <summary>
+		/// <summary>
 		/// 現在のコンディション値を取得します。
 		/// </summary>
 		public int Condition
-	    {
-	        get { return this.RawData.api_cond; }
-	    }
+		{
+			get { return this.RawData.api_cond; }
+		}
 
-	    /// <summary>
+		/// <summary>
 		/// コンディションの種類を示す <see cref="ConditionType" /> 値を取得します。
 		/// </summary>
 		public ConditionType ConditionType
-	    {
-	        get { return ConditionTypeHelper.ToConditionType(this.RawData.api_cond); }
-	    }
-
-
-	    public SlotItem[] SlotItems { get; private set; }
-
-		#region OnSlot 変更通知プロパティ
-
-		private int[] _OnSlot;
-
-		/// <summary>
-		/// 各装備スロットの艦載機数を取得します。
-		/// </summary>
-		public int[] OnSlot
 		{
-			get { return this._OnSlot; }
-			private set
-			{
-				if (this._OnSlot != value)
-				{
-					this._OnSlot = value;
-					this.RaisePropertyChanged();
-				}
-			}
+			get { return ConditionTypeHelper.ToConditionType(this.RawData.api_cond); }
 		}
 
-		#endregion
+		public ShipSlot[] Slots { get; private set; }
 
 		#region IsInRepairing 変更通知プロパティ
 
@@ -306,11 +284,11 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public int SallyArea
 		{
-		    get { return this.RawData.api_sally_area; }
+			get { return this.RawData.api_sally_area; }
 		}
 
 
-	    internal Ship(Homeport parent, kcsapi_ship2 rawData)
+		internal Ship(Homeport parent, kcsapi_ship2 rawData)
 			: base(rawData)
 		{
 			this.homeport = parent;
@@ -335,8 +313,10 @@ namespace Grabacr07.KanColleWrapper.Models
 				this.Luck = new ModernizableStatus(this.Info.RawData.api_luck, this.RawData.api_kyouka[4]);
 			}
 
-			this.SlotItems = this.RawData.api_slot.Select(id => this.homeport.Itemyard.SlotItems[id]).Where(x => x != null).ToArray();
-			this.OnSlot = this.RawData.api_onslot;
+			this.Slots = this.RawData.api_slot
+				.Select(id => this.homeport.Itemyard.SlotItems[id])
+				.Select((t, i) => new ShipSlot(t, this.Info.RawData.api_maxeq.Get(i) ?? 0, this.RawData.api_onslot.Get(i) ?? 0))
+				.ToArray();
 		}
 
 
@@ -344,7 +324,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			this.Fuel = this.Fuel.Update(fuel);
 			this.Bull = this.Bull.Update(bull);
-			this.OnSlot = onslot;
+			for (var i = 0; i < this.Slots.Length; i++) this.Slots[i].Current = onslot.Get(i) ?? 0;
 		}
 
 		internal void Repair()
@@ -356,6 +336,45 @@ namespace Grabacr07.KanColleWrapper.Models
 		public override string ToString()
 		{
 			return string.Format("ID = {0}, Name = \"{1}\", ShipType = \"{2}\", Level = {3}", this.Id, this.Info.Name, this.Info.ShipType.Name, this.Level);
+		}
+	}
+
+
+	public class ShipSlot : NotificationObject
+	{
+		public SlotItem Item { get; private set; }
+
+		public int Maximum { get; private set; }
+
+		public bool Equipped
+		{
+			get { return this.Item != null; }
+		}
+
+		#region Current 変更通知プロパティ
+
+		private int _Current;
+
+		public int Current
+		{
+			get { return this._Current; }
+			set
+			{
+				if (this._Current != value)
+				{
+					this._Current = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		public ShipSlot(SlotItem item, int maximum, int current)
+		{
+			this.Item = item;
+			this.Maximum = maximum;
+			this.Current = current;
 		}
 	}
 }

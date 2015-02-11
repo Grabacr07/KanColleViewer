@@ -171,7 +171,6 @@
     <Compile Include="ViewModels\BindableTextViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipTypeViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogWindowViewModel.cs" />
-    <Compile Include="ViewModels\Contents\ShipSlotViewModel.cs" />
     <Compile Include="ViewModels\Contents\ShipyardViewModel.cs" />
     <Compile Include="ViewModels\Dev\DebugTabViewModel.cs" />
     <Compile Include="ViewModels\CultureViewModel.cs" />
