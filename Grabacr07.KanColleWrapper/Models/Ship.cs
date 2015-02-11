@@ -20,7 +20,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// この艦娘を識別する ID を取得します。
 		/// </summary>
-		public int Id => this.RawData.api_id;
+		public int Id
+		{
+		    get { return this.RawData.api_id; }
+		}
 
 	    /// <summary>
 		/// 艦娘の種類に基づく情報を取得します。
@@ -32,17 +35,26 @@ namespace Grabacr07.KanColleWrapper.Models
 	    /// <summary>
 		/// 艦娘の現在のレベルを取得します。
 		/// </summary>
-		public int Level => this.RawData.api_lv;
+		public int Level
+	    {
+	        get { return this.RawData.api_lv; }
+	    }
 
 	    /// <summary>
 		/// 艦娘がロックされているかどうかを示す値を取得します。
 		/// </summary>
-		public bool IsLocked => this.RawData.api_locked == 1;
+		public bool IsLocked
+	    {
+	        get { return this.RawData.api_locked == 1; }
+	    }
 
 	    /// <summary>
 		/// 艦娘の現在の累積経験値を取得します。
 		/// </summary>
-		public int Exp => this.RawData.api_exp.Get(0) ?? 0;
+		public int Exp
+	    {
+	        get { return this.RawData.api_exp.Get(0) ?? 0; }
+	    }
 
 	    /// <summary>
 		/// この艦娘が次のレベルに上がるために必要な経験値を取得します。
@@ -207,22 +219,34 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 装備によるボーナスを含めた索敵ステータス値を取得します。
 		/// </summary>
-		public int ViewRange => this.RawData.api_sakuteki.Get(0) ?? 0;
+		public int ViewRange
+		{
+		    get { return this.RawData.api_sakuteki.Get(0) ?? 0; }
+		}
 
 	    /// <summary>
 		/// 火力・雷装・対空・装甲のすべてのステータス値が最大値に達しているかどうかを示す値を取得します。
 		/// </summary>
-		public bool IsMaxModernized => this.Firepower.IsMax && this.Torpedo.IsMax && this.AA.IsMax && this.Armer.IsMax;
+		public bool IsMaxModernized
+	    {
+	        get { return this.Firepower.IsMax && this.Torpedo.IsMax && this.AA.IsMax && this.Armer.IsMax; }
+	    }
 
 	    /// <summary>
 		/// 現在のコンディション値を取得します。
 		/// </summary>
-		public int Condition => this.RawData.api_cond;
+		public int Condition
+	    {
+	        get { return this.RawData.api_cond; }
+	    }
 
 	    /// <summary>
 		/// コンディションの種類を示す <see cref="ConditionType" /> 値を取得します。
 		/// </summary>
-		public ConditionType ConditionType => ConditionTypeHelper.ToConditionType(this.RawData.api_cond);
+		public ConditionType ConditionType
+	    {
+	        get { return ConditionTypeHelper.ToConditionType(this.RawData.api_cond); }
+	    }
 
 
 	    public SlotItem[] SlotItems { get; private set; }
@@ -274,7 +298,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// この艦が出撃した海域を識別する整数値を取得します。
 		/// </summary>
-		public int SallyArea => this.RawData.api_sally_area;
+		public int SallyArea
+		{
+		    get { return this.RawData.api_sally_area; }
+		}
 
 
 	    internal Ship(Homeport parent, kcsapi_ship2 rawData)

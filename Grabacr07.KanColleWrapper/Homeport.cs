@@ -32,12 +32,12 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// 複数の建造ドックを持つ工廠を取得します。
 		/// </summary>
-		public Dockyard Dockyard { get; private set; }
+		public Dockyard Dockyard { get; }
 
 		/// <summary>
 		/// 複数の入渠ドックを持つ工廠を取得します。
 		/// </summary>
-		public Repairyard Repairyard { get; }
+		public Repairyard Repairyard { get; private set; }
 
 		/// <summary>
 		/// 任務情報を取得します。

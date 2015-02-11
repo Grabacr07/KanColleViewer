@@ -13,11 +13,20 @@ namespace Grabacr07.KanColleWrapper.Models
 	/// </summary>
 	public class UseItem : RawDataWrapper<kcsapi_useitem>, IIdentifiable
 	{
-		public int Id => this.RawData.api_id;
+		public int Id
+		{
+		    get { return this.RawData.api_id; }
+		}
 
-	    public string Name => this.RawData.api_name;
+	    public string Name
+	    {
+	        get { return this.RawData.api_name; }
+	    }
 
-	    public int Count => this.RawData.api_count;
+	    public int Count
+	    {
+	        get { return this.RawData.api_count; }
+	    }
 
 	    internal UseItem(kcsapi_useitem rawData) : base(rawData) { }
 
