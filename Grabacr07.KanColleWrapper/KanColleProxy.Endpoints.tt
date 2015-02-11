@@ -43,6 +43,7 @@
 		"/kcsapi/api_req_combined_battle/battle",
 		"/kcsapi/api_req_combined_battle/airbattle",
 		"/kcsapi/api_req_combined_battle/battleresult",
+		"/kcsapi/api_req_combined_battle/goback_port",
 	};
 #>
 // 
