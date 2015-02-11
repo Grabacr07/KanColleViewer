@@ -120,6 +120,7 @@
     <Compile Include="Models\Raw\kcsapi_mission.cs" />
     <Compile Include="Models\Raw\kcsapi_mission_result.cs" />
     <Compile Include="Models\Raw\kcsapi_powerup.cs" />
+    <Compile Include="Models\SlotItemType.cs" />
     <Compile Include="Organization.cs" />
     <Compile Include="KanColleProxy.Endpoints.cs">
       <AutoGen>True</AutoGen>
@@ -165,7 +166,7 @@
     <Compile Include="Models\RepairingDockState.cs" />
     <Compile Include="Models\ShipType.cs" />
     <Compile Include="Models\ShipTypeId.cs" />
-    <Compile Include="Models\SlotItemType.cs" />
+    <Compile Include="Models\SlotItemIconType.cs" />
     <Compile Include="Models\Speed.cs" />
     <Compile Include="Models\ModernizableStatus.cs" />
     <Compile Include="Models\UseItemInfo.cs" />

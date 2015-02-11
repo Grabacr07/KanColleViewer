@@ -14,12 +14,15 @@ namespace Grabacr07.KanColleWrapper.Models
 	/// </summary>
 	public class SlotItemInfo : RawDataWrapper<kcsapi_mst_slotitem>, IIdentifiable
 	{
+        private SlotItemType? type;
 		private SlotItemIconType? iconType;
 		private int? categoryId;
 
 		public int Id => this.RawData.api_id;
 
 	    public string Name => this.RawData.api_name;
+
+        public SlotItemType Type => this.type ?? (SlotItemType)(this.type = (SlotItemType)(this.RawData.api_type.Get(2) ?? 0));
 
 	    public SlotItemIconType IconType => this.iconType ?? (SlotItemIconType)(this.iconType = (SlotItemIconType)(this.RawData.api_type.Get(3) ?? 0));
 

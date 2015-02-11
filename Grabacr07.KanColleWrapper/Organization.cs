@@ -113,7 +113,7 @@ namespace Grabacr07.KanColleWrapper
 			proxy.api_req_member_updatedeckname.TryParse().Subscribe(this.UpdateFleetName);
 
 			proxy.api_req_hensei_combined.TryParse<kcsapi_hensei_combined>()
-				.Subscribe(x => this.Combined = x.Data.api_combined == 1);
+				.Subscribe(x => this.Combined = x.Data.api_combined != 0);
 
 			proxy.ApiSessionSource
 				.SkipUntil(proxy.api_req_map_start.TryParse().Do(this.Sortie))
