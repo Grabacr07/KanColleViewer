@@ -287,10 +287,8 @@
 												Value="8,0,16,0" />
 									</Style>
 								</Grid.Resources>
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="Auto"
-													  SharedSizeGroup="Number" />
-									<ColumnDefinition Width="Auto"
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"
 													  SharedSizeGroup="ShipName" />
 									<ColumnDefinition Width="Auto"
 													  SharedSizeGroup="CompleteTime" />
@@ -299,13 +297,13 @@
 								</Grid.ColumnDefinitions>
 
 								<TextBlock Grid.Row="0"
-										   Grid.Column="1"
+										   Grid.Column="0"
 										   Text="{Binding Resources.Dockyard_ShipName, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 								<TextBlock Grid.Row="0"
-										   Grid.Column="2"
+										   Grid.Column="1"
 										   Text="{Binding Resources.Dockyard_TimeComplete, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 								<TextBlock Grid.Row="0"
-										   Grid.Column="3"
+										   Grid.Column="2"
 										   Text="{Binding Resources.Dockyard_TimeRemaining, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 							</Grid>
 						</Border>
@@ -324,10 +322,8 @@
 											BorderBrush="{DynamicResource ActiveBorderBrushKey}"
 											Padding="8,6">
 										<Grid>
-											<Grid.ColumnDefinitions>
-												<ColumnDefinition Width="Auto"
-																  SharedSizeGroup="Number" />
-												<ColumnDefinition Width="Auto"
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"
 																  SharedSizeGroup="ShipName" />
 												<ColumnDefinition Width="Auto"
 																  SharedSizeGroup="CompleteTime" />
@@ -335,21 +331,20 @@
 																  SharedSizeGroup="RemainingTime" />
 											</Grid.ColumnDefinitions>
 
-											<TextBlock Text="{Binding Id, Mode=OneWay}" />
 											<TextBlock x:Name="ShipName"
-													   Grid.Column="1"
+													   Grid.Column="0"
 													   Text="{Binding Ship, Mode=OneWay}"
 													   Style="{DynamicResource EmphaticTextStyleKey}"
 													   Margin="8,0" />
 											<TextBlock x:Name="CompleteTime"
-													   Grid.Column="2"
+													   Grid.Column="1"
 													   Text="{Binding CompleteTime, Mode=OneWay}" />
 											<TextBlock x:Name="RemainingTime"
-													   Grid.Column="3"
+													   Grid.Column="2"
 													   Text="{Binding Remaining, Mode=OneWay}" />
 
 											<TextBlock x:Name="Message"
-													   Grid.Column="2"
+													   Grid.Column="1"
 													   Grid.ColumnSpan="2"
 													   Text="{Binding Resources.Dockyard_Unused, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 													   Style="{DynamicResource EmphaticTextStyleKey}"

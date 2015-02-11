@@ -116,7 +116,8 @@
 									   Text="{Binding Resources.Expedition_NoExpedition, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									   Style="{DynamicResource EmphaticTextStyleKey}"
                                        HorizontalAlignment="Center"
-									   Visibility="Collapsed" />
+									   Visibility="Collapsed"
+                                       FontSize="13"/>
 
                             <StackPanel x:Name="ExpeditionInfo">
                                 <TextBlock Text="{Binding Expedition.Mission.Title}"
