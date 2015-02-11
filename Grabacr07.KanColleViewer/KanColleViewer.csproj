@@ -714,19 +714,12 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <PropertyGroup>
-    <PreBuildEvent>rd /S /Q "$(SolutionDir)KanColleViewer-Compiled"
-md "$(SolutionDir)KanColleViewer-Compiled"
-md "$(SolutionDir)KanColleViewer-Compiled\lib"
-md "$(SolutionDir)KanColleViewer-Compiled\Translations"
-md "$(SolutionDir)KanColleViewer-Compiled\Plugins"
-md "$(SolutionDir)KanColleViewer-Compiled\Sounds"</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y "$(TargetDir)KanColleViewer.exe" "$(SolutionDir)KanColleViewer-Compiled"
-xcopy /Y "$(TargetDir)KanColleViewer.exe.config" "$(SolutionDir)KanColleViewer-Compiled"
-xcopy /Y "$(TargetDir)*.dll" "$(SolutionDir)KanColleViewer-Compiled\lib"
-xcopy /Y /E /I "$(TargetDir)ko-KR" "$(SolutionDir)KanColleViewer-Compiled\lib\ko-KR"
-xcopy /Y "$(TargetDir)\Plugins\*.dll" "$(SolutionDir)KanColleViewer-Compiled\Plugins"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
