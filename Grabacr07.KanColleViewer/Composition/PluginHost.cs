@@ -22,13 +22,11 @@ namespace Grabacr07.KanColleViewer.Composition
 
 		#region singleton members
 
-		private static readonly PluginHost instance = new PluginHost();
-
-		/// <summary>
+	    /// <summary>
 		/// <see cref="PluginHost"/> のインスタンスを取得します。
 		/// </summary>
 		/// <value><see cref="PluginHost"/> のインスタンス。</value>
-		public static PluginHost Instance => instance;
+		public static PluginHost Instance { get; } = new PluginHost();
 
 	    #endregion
 

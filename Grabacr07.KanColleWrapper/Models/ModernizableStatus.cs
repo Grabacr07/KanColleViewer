@@ -62,9 +62,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#region static members
 
-		private static readonly ModernizableStatus dummy = new ModernizableStatus(new[] { -1, -1 }, 0);
-
-		public static ModernizableStatus Dummy => dummy;
+	    public static ModernizableStatus Dummy { get; } = new ModernizableStatus(new[] { -1, -1 }, 0);
 
 	    #endregion
 	}

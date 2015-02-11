@@ -16,8 +16,7 @@ namespace Grabacr07.KanColleViewer.Models
 	{
 		#region static members
 
-		private static readonly StatusService current = new StatusService();
-		public static StatusService Current => current;
+	    public static StatusService Current { get; } = new StatusService();
 
 	    #endregion
 

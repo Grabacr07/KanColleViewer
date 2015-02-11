@@ -60,13 +60,11 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#region static members
 
-		private static readonly SlotItemInfo dummy = new SlotItemInfo(new kcsapi_mst_slotitem()
+	    public static SlotItemInfo Dummy { get; } = new SlotItemInfo(new kcsapi_mst_slotitem()
 		{
-			api_id = 0,
-			api_name = "？？？",
+		    api_id = 0,
+		    api_name = "？？？",
 		});
-
-		public static SlotItemInfo Dummy => dummy;
 
 	    #endregion
 	}

@@ -58,7 +58,8 @@
 
                 <ItemsControl ItemsSource="{Binding Ships}"
                               Grid.IsSharedSizeScope="True"
-                              VerticalAlignment="Top">
+                              VerticalAlignment="Top"
+                              Margin="0,0,10,0">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="2" />

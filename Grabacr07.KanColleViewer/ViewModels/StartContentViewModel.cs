@@ -12,9 +12,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 	{
 		#region singleton 
 
-		private static readonly StartContentViewModel instance = new StartContentViewModel();
-
-		public static StartContentViewModel Instance => instance;
+	    public static StartContentViewModel Instance { get; } = new StartContentViewModel();
 
 	    #endregion
 

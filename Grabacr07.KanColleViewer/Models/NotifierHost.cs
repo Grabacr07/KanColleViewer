@@ -13,9 +13,7 @@ namespace Grabacr07.KanColleViewer.Models
 	{
 		#region singleton members
 
-		private static readonly NotifierHost instance = new NotifierHost();
-
-		public static NotifierHost Instance => instance;
+	    public static NotifierHost Instance { get; } = new NotifierHost();
 
 	    #endregion
 

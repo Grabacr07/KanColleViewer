@@ -99,13 +99,11 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#region static members
 
-		private static readonly ShipInfo dummy = new ShipInfo(new kcsapi_mst_ship
+	    public static ShipInfo Dummy { get; } = new ShipInfo(new kcsapi_mst_ship
 		{
-			api_id = 0,
-			api_name = "？？？"
+		    api_id = 0,
+		    api_name = "？？？"
 		});
-
-		public static ShipInfo Dummy => dummy;
 
 	    #endregion
 	}

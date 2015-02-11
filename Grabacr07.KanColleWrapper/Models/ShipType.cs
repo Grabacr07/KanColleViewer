@@ -28,14 +28,12 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#region static members
 
-		private static readonly ShipType dummy = new ShipType(new kcsapi_mst_stype
+	    public static ShipType Dummy { get; } = new ShipType(new kcsapi_mst_stype
 		{
-			api_id = 999,
-			api_sortno = 999,
-			api_name = "不審船",
+		    api_id = 999,
+		    api_sortno = 999,
+		    api_name = "不審船",
 		});
-
-		public static ShipType Dummy => dummy;
 
 	    #endregion
 	}
