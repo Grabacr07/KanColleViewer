@@ -8,6 +8,9 @@ using System;
 
 namespace LogReader.ViewModels
 {
+	/// <summary>
+	/// http://xarfox.tistory.com/51
+	/// </summary>
 	public class LogViewerViewModel : ViewModel
 	{
 		bool isExecuting = false;
