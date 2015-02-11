@@ -25,68 +25,79 @@
 		</livet:InteractionMessageTrigger>
 	</i:Interaction.Triggers>
 	<UserControl.Resources>
-		<Style TargetType="{x:Type GroupBox}">
-			<Setter Property="OverridesDefaultStyle"
+        <ResourceDictionary>
+            <Style TargetType="{x:Type GroupBox}">
+                <Setter Property="OverridesDefaultStyle"
 					Value="True" />
-			<Setter Property="BorderThickness"
+                <Setter Property="BorderThickness"
 					Value="1" />
-			<Setter Property="BorderBrush"
+                <Setter Property="BorderBrush"
 					Value="{DynamicResource BorderBrushKey}" />
-			<Setter Property="Background"
+                <Setter Property="Background"
 					Value="{DynamicResource BorderBrushKey}" />
-			<Setter Property="TextOptions.TextFormattingMode"
+                <Setter Property="TextOptions.TextFormattingMode"
 					Value="Display" />
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="{x:Type GroupBox}">
-						<Border BorderThickness="{TemplateBinding BorderThickness}"
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type GroupBox}">
+                            <Border BorderThickness="{TemplateBinding BorderThickness}"
 								BorderBrush="{TemplateBinding BorderBrush}">
-							<Grid>
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="Auto" />
-									<ColumnDefinition />
-								</Grid.ColumnDefinitions>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
 
-								<Border Background="{TemplateBinding Background}">
-									<ContentPresenter Content="{TemplateBinding Header}"
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter Content="{TemplateBinding Header}"
 													  ContentTemplate="{TemplateBinding HeaderTemplate}"
 													  ContentStringFormat="{TemplateBinding HeaderStringFormat}"
 													  SnapsToDevicePixels="True">
-										<ContentPresenter.LayoutTransform>
-											<RotateTransform Angle="-90" />
-										</ContentPresenter.LayoutTransform>
-									</ContentPresenter>
-								</Border>
+                                            <ContentPresenter.LayoutTransform>
+                                                <RotateTransform Angle="-90" />
+                                            </ContentPresenter.LayoutTransform>
+                                        </ContentPresenter>
+                                    </Border>
 
-								<ContentPresenter Grid.Column="1"
+                                    <ContentPresenter Grid.Column="1"
 												  Content="{TemplateBinding Content}"
 												  ContentTemplate="{TemplateBinding ContentTemplate}"
 												  ContentStringFormat="{TemplateBinding ContentStringFormat}"
 												  Margin="{TemplateBinding Padding}" />
-							</Grid>
-						</Border>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
 
-			<Setter Property="HeaderTemplate">
-				<Setter.Value>
-					<DataTemplate>
-						<Border Margin="9,5">
-							<TextBlock Text="{Binding}"
+                <Setter Property="HeaderTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <Border Margin="9,5">
+                                <TextBlock Text="{Binding}"
 									   FontSize="{DynamicResource EmphaticFontSizeKey}"
 									   Foreground="{DynamicResource ForegroundBrushKey}"
 									   HorizontalAlignment="Center" />
-						</Border>
-					</DataTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
+                            </Border>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="../../Themes/Converters.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
 	</UserControl.Resources>
 
 	<ScrollViewer VerticalScrollBarVisibility="Auto"
 				  PanningMode="Both"
 				  Grid.IsSharedSizeScope="True">
+        <ScrollViewer.MaxWidth>
+			<MultiBinding Converter="{StaticResource MaxConverter}">
+				<Binding RelativeSource="{RelativeSource AncestorType={x:Type ScrollContentPresenter}}" Path="ActualWidth" Mode="OneWay"/>
+				<Binding Source="{x:Static properties:Settings.Default}" Path="UIContentWidth" Mode="OneWay"/>
+			</MultiBinding>
+		</ScrollViewer.MaxWidth>
 		<StackPanel VerticalAlignment="Top"
 					d:DataContext="{d:DesignData /SampleData/ShipyardViewModelSampleData.xaml}">
 			<Grid>

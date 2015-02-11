@@ -152,8 +152,10 @@
     <Compile Include="Composition\PluginHost.cs" />
     <Compile Include="Models\BrowserZoomFactor.cs" />
     <Compile Include="Composition\IPlugin.cs" />
+    <Compile Include="Models\IOrientationMode.cs" />
     <Compile Include="Models\IZoomFactor.cs" />
     <Compile Include="Models\NotifierHost.cs" />
+    <Compile Include="Models\OrientationType.cs" />
     <Compile Include="Models\ProductInfo.cs" />
     <Compile Include="Models\Data\Xml\XmlFileReader.cs" />
     <Compile Include="Models\Data\Xml\XmlFileWriter.cs" />
@@ -167,6 +169,7 @@
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Models\SupportedImageFormat.cs" />
     <Compile Include="Models\Volume.cs" />
+    <Compile Include="Models\WindowOrientaionMode.cs" />
     <Compile Include="ViewModels\BattlePreviewsPopUpViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\CalExpViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ExpeditionsCatalogWindowViewModel.cs" />
@@ -240,6 +243,9 @@
       <DependentUpon>Tools.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\KanColleHost.cs" />
+    <Compile Include="Views\Controls\OrientationModeSelector.xaml.cs">
+      <DependentUpon>OrientationModeSelector.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Controls\PreviewPopUpButton.xaml.cs">
       <DependentUpon>PreviewPopUpButton.xaml</DependentUpon>
     </Compile>
@@ -288,12 +294,18 @@
     <Compile Include="Views\Controls\ZoomFactorSelector.xaml.cs">
       <DependentUpon>ZoomFactorSelector.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Converters\AdjustConverter.cs" />
+    <Compile Include="Views\Converters\MaxConverter.cs" />
+    <Compile Include="Views\Converters\PreviewSizeConverter.cs" />
     <Compile Include="Views\Converters\QuestCategoryToColorConverter.cs" />
     <Compile Include="Views\Dev\DebugTab.xaml.cs">
       <DependentUpon>DebugTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ExitDialog.xaml.cs">
       <DependentUpon>ExitDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Info.xaml.cs">
+      <DependentUpon>Info.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RefreshPopup.xaml.cs">
       <DependentUpon>RefreshPopup.xaml</DependentUpon>
@@ -379,6 +391,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\Converters.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\Generic.AppIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -420,6 +436,14 @@
       <DependentUpon>Generic.xaml</DependentUpon>
     </Page>
     <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Orientation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\TabViewHorizontal.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -475,6 +499,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Controls\OrientationModeSelector.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Controls\PreviewPopUpButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -482,6 +510,10 @@
     <Page Include="Views\Controls\RefreshButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Info.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\RefreshPopup.xaml">
       <SubType>Designer</SubType>
@@ -629,6 +661,7 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>

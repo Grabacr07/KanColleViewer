@@ -3,6 +3,7 @@ using Grabacr07.KanColleWrapper;
 using Livet;
 using System;
 using System.IO;
+using System.Windows;
 using System.Xml.Serialization;
 
 namespace Grabacr07.KanColleViewer.Models
@@ -17,7 +18,7 @@ namespace Grabacr07.KanColleViewer.Models
 			"grabacr.net",
 			"KanColleViewer",
 			"Settings.xml");
-		private static readonly string CurrentSettingsVersion = "1.4";
+		private static readonly string CurrentSettingsVersion = "1.5";
 		public static Settings Current { get; set; }
 
 		public static void Load()
@@ -49,16 +50,16 @@ namespace Grabacr07.KanColleViewer.Models
 				EnableAddUntranslated = true,
 				EnableCriticalNotify = true,
 				EnableCriticalAccent = true,
-				//EnableCriticalPopup = true,
 				EnableUpdateNotification = true,
 				EnableUpdateTransOnStart = true,
 				NotifyBuildingCompleted = true,
 				NotifyRepairingCompleted = true,
 				NotifyExpeditionReturned = true,
 				CustomSoundVolume = 99,
-				EnableResizing = true,
-				//EnableEventMapInfo = true,
 				EnableBattlePreview=true,
+				OrientationMode = OrientationType.Auto,
+				HorizontalSize = new Point(1280, 0),
+				VerticalSize = new Point(0, 1000),
 				KanColleClientSettings = new KanColleClientSettings(),
 			};
 		}
@@ -438,43 +439,74 @@ namespace Grabacr07.KanColleViewer.Models
 		}
 		#endregion
 
-		#region EnableResizing 変更通知プロパティ
+		#region Orientation
+		[XmlIgnore]
+		private OrientationType _Orientation;
 
-		private bool _EnableResizing;
-
-		public bool EnableResizing
+		[XmlIgnore]
+		public OrientationType Orientation
 		{
-			get { return this._EnableResizing; }
+			get { return this._Orientation & OrientationType.Horizontal; }
 			set
 			{
-				if (this._EnableResizing != value)
+				if (this._Orientation != value)
 				{
-					this._EnableResizing = value;
+					this._Orientation = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+
+		private OrientationType _OrientationMode;
+
+		public OrientationType OrientationMode
+		{
+			get { return this._OrientationMode; }
+			set
+			{
+				if (this._OrientationMode != value)
+				{
+					this._OrientationMode = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
+
+		#region BackupSize
+
+		private Point _HorizontalSize;
+
+		public Point HorizontalSize
+		{
+			get { return this._HorizontalSize; }
+			set
+			{
+				if (this._HorizontalSize != value)
+				{
+					this._HorizontalSize = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		private Point _VerticalSize;
+
+		public Point VerticalSize
+		{
+			get { return this._VerticalSize; }
+			set
+			{
+				if (this._VerticalSize != value)
+				{
+					this._VerticalSize = value;
 					this.RaisePropertyChanged();
 				}
 			}
 		}
 
 		#endregion
-
-		//#region EnableEventMapInfo 変更通知プロパティ
-
-		//private bool _EnableEventMapInfo;
-
-		//public bool EnableEventMapInfo
-		//{
-		//	get { return this._EnableEventMapInfo; }
-		//	set
-		//	{
-		//		if (this._EnableEventMapInfo != value)
-		//		{
-		//			this._EnableEventMapInfo = value;
-		//			this.RaisePropertyChanged();
-		//		}
-		//	}
-		//}
-
-		//#endregion
 
 		#region CustomSoundVolume 変更通知プロパティ
 
@@ -549,25 +581,6 @@ namespace Grabacr07.KanColleViewer.Models
 		}
 
 		#endregion
-
-		//#region EnableCriticalPopup 変更通知プロパティ
-
-		//private bool _EnableCriticalPopup;
-
-		//public bool EnableCriticalPopup
-		//{
-		//	get { return this._EnableCriticalPopup; }
-		//	set
-		//	{
-		//		if (this._EnableCriticalPopup != value)
-		//		{
-		//			this._EnableCriticalPopup = value;
-		//			this.RaisePropertyChanged();
-		//		}
-		//	}
-		//}
-
-		//#endregion
 
 		#region EnableBattlePreview 変更通知プロパティ
 

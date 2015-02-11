@@ -1,13 +1,13 @@
-﻿using Grabacr07.KanColleViewer.Models;
-using MetroRadiance.Core;
-using mshtml;
-using SHDocVw;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Windows.Navigation;
+using Grabacr07.KanColleViewer.Models;
+using MetroRadiance.Core;
+using mshtml;
+using SHDocVw;
 using IServiceProvider = Grabacr07.KanColleViewer.Win32.IServiceProvider;
 using WebBrowser = System.Windows.Controls.WebBrowser;
 
@@ -21,7 +21,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 		private const string PART_ContentHost = "PART_ContentHost";
 		private static readonly Size kanColleSize = new Size(800.0, 480.0);
-		private static readonly Size browserSize = new Size(960.0, 572.0);
+		private static readonly Size browserSize = new Size(800.0, 480.0);
 		public static KanColleHost Current
 		{
 			get { return current; }
@@ -96,22 +96,6 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 		#endregion
 
-		#region EnableResizing 変更通知プロパティ
-
-		public bool EnableResizing
-		{
-			get { return Models.Settings.Current.EnableResizing; }
-			set
-			{
-				if (Models.Settings.Current.EnableResizing != value)
-				{
-					Models.Settings.Current.EnableResizing = value;
-				}
-			}
-		}
-
-		#endregion
-
 
 		public KanColleHost()
 		{
@@ -149,17 +133,8 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			else
 			{
 				this.WebBrowser.Width = double.NaN;
-				if (!EnableResizing)//리사이징이 꺼져있을때는 100%해상도인 800,480을 최소값으로
-				{
-					Size SmallbrowserSize = new Size(800.0, 480.0);
-					this.WebBrowser.Height = (SmallbrowserSize.Height * (zoomFactor / dpi.ScaleY)) / dpi.ScaleY;
-					this.MinWidth = (SmallbrowserSize.Width * (zoomFactor / dpi.ScaleX)) / dpi.ScaleX;
-				}
-				else
-				{
-					this.WebBrowser.Height = (browserSize.Height * (zoomFactor / dpi.ScaleY)) / dpi.ScaleY;
-					this.MinWidth = (browserSize.Width * (zoomFactor / dpi.ScaleX)) / dpi.ScaleX;
-				}
+				this.WebBrowser.Height = (browserSize.Height * (zoomFactor / dpi.ScaleY)) / dpi.ScaleY;
+				this.MinWidth = (browserSize.Width * (zoomFactor / dpi.ScaleX)) / dpi.ScaleX;
 			}
 		}
 
@@ -198,14 +173,11 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 			this.Update();
 
-			var window = Window.GetWindow(this.WebBrowser);
-			if (EnableResizing)
-			{
-				if (window != null)
-				{
-					window.Width = this.WebBrowser.Width;
-				}
-			}
+			//var window = Window.GetWindow(this.WebBrowser);
+			//if (window != null)
+			//{
+			//    window.Width = this.WebBrowser.Width;
+			//}
 		}
 
 		private void ApplyStyleSheet()
@@ -218,7 +190,11 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 				var gameFrame = document.getElementById("game_frame");
 				if (gameFrame == null)
 				{
-					if (document.url.Contains(".swf?"))
+					if (document.getElementById("flashWrap") != null)
+					{
+						gameFrame = document.documentElement;
+					}
+					else if (document.url.Contains(".swf?"))
 					{
 						gameFrame = document.body;
 					}

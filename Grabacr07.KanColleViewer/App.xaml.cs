@@ -70,7 +70,7 @@ namespace Grabacr07.KanColleViewer
 			ResourceService.Current.ChangeCulture(Settings.Current.Culture);
 			ThemeService.Current.Initialize(this, Theme.Dark, Accent.Purple);
 			//Custom Settings
-			KanColleHost.Current.EnableResizing = Settings.Current.EnableResizing;
+			//KanColleHost.Current.EnableResizing = Settings.Current.EnableResizing;
 			KanColleClient.Current.Logger.EnableLogging = Settings.Current.EnableLogging;
 			KanColleClient.Current.OracleOfCompass.EnableBattlePreview = Settings.Current.EnableBattlePreview;
 			KanColleClient.Current.OracleOfCompass.IsBattleCalculated = false;
@@ -122,6 +122,8 @@ namespace Grabacr07.KanColleViewer
 			this.MainWindow = new MainWindow { DataContext = ViewModelRoot };
 			this.MainWindow.Show();
 
+			RestoreWindowSize();
+
 			if (this.IsUpdate) this.MainWindow.Close();
 		}
 		protected override void OnExit(ExitEventArgs e)
@@ -158,5 +160,23 @@ ERROR, date = {0}, sender = {1},
 				Debug.WriteLine(ex);
 			}
 		}
+		private void RestoreWindowSize()
+		{
+			var window = System.Windows.Application.Current.MainWindow;
+			if (window != null)
+			{
+				if (Settings.Current.Orientation == OrientationType.Horizontal)
+				{
+					window.Width = Settings.Current.HorizontalSize.X;
+					window.Height = Settings.Current.HorizontalSize.Y;
+				}
+				else
+				{
+					window.Width = Settings.Current.VerticalSize.X;
+					window.Height = Settings.Current.VerticalSize.Y;
+				}
+			}
+		}
+
 	}
 }

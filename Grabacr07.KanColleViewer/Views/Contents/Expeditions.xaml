@@ -19,62 +19,73 @@
 			 d:DesignHeight="300"
 			 d:DataContext="{d:DesignInstance vmContents:ExpeditionsViewModel}">
 	<UserControl.Resources>
-		<Style TargetType="{x:Type GroupBox}">
-			<Setter Property="OverridesDefaultStyle"
+        <ResourceDictionary>
+            <Style TargetType="{x:Type GroupBox}">
+                <Setter Property="OverridesDefaultStyle"
 					Value="True" />
-			<Setter Property="BorderThickness"
+                <Setter Property="BorderThickness"
 					Value="1" />
-			<Setter Property="BorderBrush"
+                <Setter Property="BorderBrush"
 					Value="{DynamicResource BorderBrushKey}" />
-			<Setter Property="Background"
+                <Setter Property="Background"
 					Value="{DynamicResource BorderBrushKey}" />
-			<Setter Property="TextOptions.TextFormattingMode"
+                <Setter Property="TextOptions.TextFormattingMode"
 					Value="Display" />
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="{x:Type GroupBox}">
-						<Border BorderThickness="{TemplateBinding BorderThickness}"
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type GroupBox}">
+                            <Border BorderThickness="{TemplateBinding BorderThickness}"
 								BorderBrush="{TemplateBinding BorderBrush}">
-							<Grid>
-								<Grid.RowDefinitions>
-									<RowDefinition Height="Auto" />
-									<RowDefinition />
-								</Grid.RowDefinitions>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
 
-								<Border Background="{TemplateBinding Background}">
-									<ContentPresenter Content="{TemplateBinding Header}"
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter Content="{TemplateBinding Header}"
 													  ContentTemplate="{TemplateBinding HeaderTemplate}"
 													  ContentStringFormat="{TemplateBinding HeaderStringFormat}" />
-								</Border>
+                                    </Border>
 
-								<ContentPresenter Grid.Row="1"
+                                    <ContentPresenter Grid.Row="1"
 												  Content="{TemplateBinding Content}"
 												  ContentTemplate="{TemplateBinding ContentTemplate}"
 												  ContentStringFormat="{TemplateBinding ContentStringFormat}"
 												  Margin="{TemplateBinding Padding}" />
-							</Grid>
-						</Border>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
 
-			<Setter Property="HeaderTemplate">
-				<Setter.Value>
-					<DataTemplate>
-						<Border Margin="9,5">
-							<TextBlock Text="{Binding}"
+                <Setter Property="HeaderTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <Border Margin="9,5">
+                                <TextBlock Text="{Binding}"
 									   FontSize="{DynamicResource EmphaticFontSizeKey}"
 									   Foreground="{DynamicResource ForegroundBrushKey}" />
-						</Border>
-					</DataTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-	</UserControl.Resources>
-
-	<ScrollViewer DataContext="{Binding Fleets}"
-				  VerticalScrollBarVisibility="Auto"
-				  PanningMode="Both">
+                            </Border>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="../../Themes/Converters.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <ScrollViewer DataContext="{Binding Fleets}"
+                  VerticalScrollBarVisibility="Auto"
+                  PanningMode="Both">
+		<ScrollViewer.MaxWidth>
+			<MultiBinding Converter="{StaticResource MaxConverter}">
+				<Binding RelativeSource="{RelativeSource AncestorType={x:Type ScrollContentPresenter}}" Path="ActualWidth" Mode="OneWay"/>
+				<Binding Source="{x:Static properties:Settings.Default}" Path="UIContentWidth" Mode="OneWay"/>
+			</MultiBinding>
+		</ScrollViewer.MaxWidth>
 		<ItemsControl ItemsSource="{Binding Fleets}"
 					  Margin="5,0,5,5"
 					  d:DataContext="{d:DesignData /SampleData/FleetsViewModelSampleData.xaml}">
@@ -102,12 +113,13 @@
 							  Padding="8">
 						<Grid>
 							<TextBlock x:Name="NotExcution"
-									   Text="{Binding Resources.Expedition_NoExpedition}"
+									   Text="{Binding Resources.Expedition_NoExpedition, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									   Style="{DynamicResource EmphaticTextStyleKey}"
+                                       HorizontalAlignment="Center"
 									   Visibility="Collapsed" />
 
-							<StackPanel x:Name="ExpeditionInfo">
-								<TextBlock Text="{Binding Expedition.Mission.Title}"
+                            <StackPanel x:Name="ExpeditionInfo">
+                                <TextBlock Text="{Binding Expedition.Mission.Title}"
 										   Style="{DynamicResource EmphaticTextStyleKey}" />
 								<Border Height="4" />
 								<TextBlock Text="{Binding Expedition.Mission.Detail}"

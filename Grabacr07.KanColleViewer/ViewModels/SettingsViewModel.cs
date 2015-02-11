@@ -293,23 +293,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-		//#region EnableCriticalPopup 変更通知プロパティ
-
-		//public bool EnableCriticalPopup
-		//{
-		//	get { return Settings.Current.EnableCriticalPopup; }
-		//	set
-		//	{
-		//		if (Settings.Current.EnableCriticalPopup != value)
-		//		{
-		//			Settings.Current.EnableCriticalPopup = value;
-		//			this.RaisePropertyChanged();
-		//		}
-		//	}
-		//}
-
-		//#endregion
-
 		#region EquipmentVersion 変更通知プロパティ
 
 		public string EquipmentVersion
@@ -610,24 +593,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-		#region EnableResizing 変更通知プロパティ
-
-		public bool EnableResizing
-		{
-			get { return Settings.Current.EnableResizing; }
-			set
-			{
-				if (Settings.Current.EnableResizing != value)
-				{
-					Settings.Current.EnableResizing = value;
-					KanColleHost.Current.EnableResizing = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
 		#region NotifierPlugins 変更通知プロパティ
 
 		private List<NotifierViewModel> _NotifierPlugins;
@@ -706,25 +671,25 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-		//#region EnableEventMapInfo 変更通知プロパティ
+		#region Orientation
 
-		//public bool EnableEventMapInfo
-		//{
-		//	get { return Settings.Current.EnableEventMapInfo; }
-		//	set
-		//	{
-		//		if (Settings.Current.EnableEventMapInfo != value)
-		//		{
-		//			Settings.Current.EnableEventMapInfo = value;
-		//			KanColleClient.Current.EventMapHPChecker.EnableEventMapInfo = value;
-		//			this.RaisePropertyChanged();
-		//		}
-		//	}
-		//}
+		private WindowOrientaionMode _Orientation;
 
-		//#endregion
+		public WindowOrientaionMode Orientation
+		{
+			get { return this._Orientation; }
+			private set
+			{
+				if (this._Orientation != value)
+				{
+					this._Orientation = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
 
-		
+
 		public SettingsViewModel()
 		{
 			if (Helper.IsInDesignMode) return;
@@ -759,6 +724,16 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				{ "Current", (sender, args) => Settings.Current.BrowserZoomFactor = zoomFactor.Current },
 			});
 			this.BrowserZoomFactor = zoomFactor;
+
+			var orientationMode = new WindowOrientaionMode { CurrentMode = Settings.Current.OrientationMode };
+			this.CompositeDisposable.Add(orientationMode);
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(orientationMode)
+			{
+				{ "Current", (sender, args) => Settings.Current.Orientation = orientationMode.Current },
+				{ "CurrentMode", (sender, args) => Settings.Current.OrientationMode = orientationMode.CurrentMode },
+			});
+			Settings.Current.Orientation = orientationMode.Current;
+			this.Orientation = orientationMode;
 
 			this._ViewRangeType1 = Settings.Current.KanColleClientSettings.ViewRangeCalcLogic == ViewRangeCalcLogic.Type1;
 			this._ViewRangeType2 = Settings.Current.KanColleClientSettings.ViewRangeCalcLogic == ViewRangeCalcLogic.Type2;

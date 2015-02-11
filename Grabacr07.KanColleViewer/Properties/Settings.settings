@@ -22,8 +22,8 @@
     z-index:1
 }</Value>
     </Setting>
-    <Setting Name="UIContentHight" Type="System.Double" Scope="Application">
-      <Value Profile="(Default)">333</Value>
+    <Setting Name="UIContentWidth" Type="System.Double" Scope="Application">
+      <Value Profile="(Default)">480</Value>
     </Setting>
     <Setting Name="FeatureBrowserEmulation" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">8000</Value>

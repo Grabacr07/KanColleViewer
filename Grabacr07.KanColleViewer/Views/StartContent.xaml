@@ -7,6 +7,7 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+			 xmlns:metro2Converter="clr-namespace:Grabacr07.Desktop.Metro.Converters;assembly=Desktop.Metro"
 			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
 			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
@@ -14,6 +15,7 @@
 			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
 			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 xmlns:converters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters"
 			 mc:Ignorable="d"
 			 d:DesignWidth="800"
 			 d:DesignHeight="350"
@@ -22,8 +24,9 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Settings/Common.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="Settings/Common.xaml" />
+				<ResourceDictionary Source="../Themes/Converters.xaml" />
+			</ResourceDictionary.MergedDictionaries>
 
             <Style x:Key="TabLikeRadioButtonStyleKey"
 				   TargetType="{x:Type RadioButton}">
@@ -104,169 +107,171 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
+
+            <metro2Converter:UniversalBooleanToVisibilityConverter x:Key="BooleanToVsibilityConverterKey" />
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
 
-        <Border ClipToBounds="True">
-            <views:BrowserNavigator Margin="6,-5,6,10"
-									VerticalAlignment="Top" />
-        </Border>
+    <Border
+					BorderThickness="1,1,0,0"
+					BorderBrush="{DynamicResource BackgroundBrushKey}"
+					DataContext="{Binding Source={x:Static root:App.ViewModelRoot}, Path=Settings}">
+        <ScrollViewer VerticalScrollBarVisibility="Disabled"
+                      HorizontalScrollBarVisibility="Auto"
+                      PanningMode="Both">
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                          PanningMode="Both">
+				<ScrollViewer.MaxWidth>
+					<MultiBinding Converter="{StaticResource MaxConverter}">
+						<Binding RelativeSource="{RelativeSource AncestorType={x:Type ScrollContentPresenter}}" Path="ActualWidth" Mode="OneWay"/>
+						<Binding Source="{x:Static properties:Settings.Default}" Path="UIContentWidth" Mode="OneWay"/>
+					</MultiBinding>
+				</ScrollViewer.MaxWidth>
+				<TabControl 
+								HorizontalAlignment="Stretch"
+								Style="{StaticResource VerticalTabControlStyleKey}">
+                    <TabControl.Resources>
+                        <Style x:Key="TabHeaderTextStyleKey"
+								   TargetType="{x:Type TextBlock}"
+								   BasedOn="{StaticResource {x:Type TextBlock}}">
+                            <Setter Property="Foreground"
+										Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}" />
+                            <Setter Property="Margin"
+										Value="12,0" />
+                            <Setter Property="FontSize"
+										Value="14" />
+                        </Style>
+                    </TabControl.Resources>
+                    <TabItem DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type views:StartContent}}, Path=DataContext}">
+                        <TabItem.Header>
+							<TextBlock Text="정보"
+										   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
+										   Margin="12,0"
+										   FontSize="14" />
+                        </TabItem.Header>
 
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+                        <Grid Margin="10,9">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
 
-			<ScrollViewer VerticalScrollBarVisibility="Auto"
-						  PanningMode="Both"
-						  Margin="0,8,0,0">
-				<StackPanel Margin="0,0,10,8"
-							TextOptions.TextFormattingMode="Ideal">
-					<RadioButton x:Name="InformationTab"
-							 Style="{StaticResource TabLikeRadioButtonStyleKey}"
-							 IsChecked="True">
-						<TextBlock Text="Information"
-							   FontFamily="{DynamicResource EmphaticFontFamilyKey}"
-							   FontSize="16"
-							   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}" />
-					</RadioButton>
-					<RadioButton x:Name="SettingsTab"
-							 Style="{StaticResource TabLikeRadioButtonStyleKey}">
-						<TextBlock Text="Settings"
-							   FontFamily="{DynamicResource EmphaticFontFamilyKey}"
-							   FontSize="16"
-							   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}" />
-					</RadioButton>
-				</StackPanel>
-			</ScrollViewer>
-
-			<Grid Grid.Column="1"
-				  Margin="0,8,0,0"
-				  Visibility="{Binding ElementName=InformationTab, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <controls:AppIcon Grid.Column="1"
+                            <controls:AppIcon Grid.Column="1"
 								  Background="Transparent"
 								  Height="200"
 								  HorizontalAlignment="Right"
 								  VerticalAlignment="Bottom"
 								  Margin="0,0,30,-4"
 								  Opacity="0.25" />
-
-                <Border Grid.Column="0"
-						BorderBrush="{DynamicResource BorderBrushKey}"
-						BorderThickness="1,0,1,0">
-					<ScrollViewer VerticalScrollBarVisibility="Auto"
-								  PanningMode="Both"
-								  Padding="10,0,20,14">
-                        <StackPanel Margin="0,-9,0,0">
-                            <TextBlock>
-                                <Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=Product, Mode=OneWay}"
+                            <StackPanel>
+                                <TextBlock>
+								<Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=Title, Mode=OneWay}"
 									 FontFamily="Segoe UI Light"
 									 FontSize="30"
 									 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
-                                <LineBreak />
-                                <Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=Title, Mode=OneWay}"
+								<LineBreak />
+								<Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=Product, Mode=OneWay}"
 									 FontSize="16" />
-                            </TextBlock>
+                                </TextBlock>
 
-                            <TextBlock Margin="0,8,0,0">
-                                <Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=VersionString, StringFormat=Version {0}, Mode=OneWay}"
+                                <TextBlock Margin="0,8,0,0">
+								<Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=VersionString, StringFormat=Version {0}, Mode=OneWay}"
 									 FontFamily="Segoe UI Light"
 									 FontSize="20"
 									 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
-                            </TextBlock>
-
-                            <Rectangle Height="1"
+                                </TextBlock>
+                                <Rectangle Height="1"
 									   Margin="0,12"
 									   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-                            <TextBlock FontFamily="Segoe UI"
+                                <TextBlock FontFamily="Segoe UI"
 									   Margin="0,0,0,8">
-                                <Run Text="Author / Developer:" />
-                                <metro2:HyperlinkEx Uri="https://twitter.com/Grabacr07">
-                                    <Run Text="@Grabacr07" />
-                                </metro2:HyperlinkEx>
-                            </TextBlock>
+								<Run Text="Author / Developer:" />
+								<metro2:HyperlinkEx Uri="https://twitter.com/Grabacr07">
+									<Run Text="@Grabacr07" />
+								</metro2:HyperlinkEx>
+                                </TextBlock>
 
-                            <TextBlock FontFamily="Segoe UI">
-                                <Run Text="Icon design:" />
-                                <metro2:HyperlinkEx Uri="https://twitter.com/Nrtwd/">
-                                    <Run Text="@Nrtwd" />
-                                </metro2:HyperlinkEx>
-                            </TextBlock>
+                                <TextBlock FontFamily="Segoe UI">
+								<Run Text="Horizontal / Translation:" />
+								<metro2:HyperlinkEx Uri="https://twitter.com/Zharay">
+									<Run Text="@Zharay" />
+								</metro2:HyperlinkEx>
+                                </TextBlock>
+                                <TextBlock FontFamily="Segoe UI">
+								<Run Text="Horizontal ↔ Vertical:" />
+								<metro2:HyperlinkEx Uri="https://github.com/yuyuvn/KanColleViewer">
+									<Run Text="Clicia's fork" />
+								</metro2:HyperlinkEx>
+                                </TextBlock>
+                                <TextBlock FontFamily="Segoe UI">
+								<Run Text="Korean Translation:" />
+                                    <metro2:HyperlinkEx Uri="http://kaster.egloos.com">
+									<Run Text="Kaster" /> <LineBreak/>
+                                        
+								</metro2:HyperlinkEx>
+								<metro2:HyperlinkEx Uri="https://twitter.com/freyya312">
+									<Run Text="@FreyYa312" />
+                                    <TextBlock Text=","/>
+								</metro2:HyperlinkEx>
+                                    <metro2:HyperlinkEx Uri="https://github.com/DaeWha">
+									<Run Text="DaeWha" />
+								</metro2:HyperlinkEx>
+                                </TextBlock>
+                                <TextBlock FontFamily="Segoe UI"
+									   Margin="0,6,0,0">
+								<Run Text="Icon design:" />
+								<metro2:HyperlinkEx Uri="https://twitter.com/Nrtwd/">
+									<Run Text="@Nrtwd" />
+								</metro2:HyperlinkEx>
+                                </TextBlock>
 
-                            <TextBlock FontFamily="Segoe UI">
-                                <Run Text="Localization" />
-                                <Run Text="(English)"
+                                <TextBlock FontFamily="Segoe UI">
+								<Run Text="Localization" />
+								<Run Text="(English)"
 									 FontSize="10" />
-                                <Run Text=":" />
-                                <metro2:HyperlinkEx Uri="https://twitter.com/southrop113">
-                                    <Run Text="@southrop113" />
-                                </metro2:HyperlinkEx>
-                                <LineBreak/>
-                                <Run Text="Localication"/>
-                                <Run Text="(Korean)"
-									 FontSize="10"/>
-                                <Run Text=":"/>
-                                <metro2:HyperlinkEx Uri="https://twitter.com/FreyYa312">
-                                    <Run Text="@FreyYa312," />
-                                </metro2:HyperlinkEx>
-                                <LineBreak/>
-                                <metro2:HyperlinkEx Uri="http://kaster.egloos.com">
-                                    <Run Text="Kaster" />
-                                </metro2:HyperlinkEx>
+								<Run Text=":" />
+								<metro2:HyperlinkEx Uri="https://twitter.com/southrop113">
+									<Run Text="@southrop113" />
+								</metro2:HyperlinkEx>
+                                </TextBlock>
 
-                            </TextBlock>
-
-                            <Rectangle Height="1"
+                                <Rectangle Height="1"
 									   Margin="0,12"
 									   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-                            <TextBlock FontFamily="Segoe UI"
+                                <TextBlock FontFamily="Segoe UI"
 									   TextWrapping="Wrap">
-                                <Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=Copyright, Mode=OneWay}" />
-                            </TextBlock>
+								<Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=Copyright, Mode=OneWay}" />
+                                </TextBlock>
 
-                            <TextBlock FontFamily="Segoe UI"
+                                <TextBlock FontFamily="Segoe UI"
 									   Margin="0,10,0,0"
 									   TextWrapping="Wrap">
-                                <Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=Product, Mode=OneWay}" />
-                                <Run Text="is" />
-                                <Run Text="OSS"
+								<Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=Product, Mode=OneWay}" />
+								<Run Text="is" />
+								<Run Text="OSS"
 									 ToolTip="Open Source Software" />
-                                <Run Text="released" />
-                                <LineBreak />
-                                <Run Text="under" />
-                                <metro2:HyperlinkEx Uri="https://github.com/Grabacr07/KanColleViewer/blob/master/LICENSE.txt">
-                                    <Run Text="The MIT License." />
-                                </metro2:HyperlinkEx>
-                            </TextBlock>
-                        </StackPanel>
-                    </ScrollViewer>
-                </Border>
+								<Run Text="released" />
+								<LineBreak />
+								<Run Text="under" />
+								<metro2:HyperlinkEx Uri="https://github.com/Grabacr07/KanColleViewer/blob/master/LICENSE.txt">
+									<Run Text="The MIT License." />
+								</metro2:HyperlinkEx>
+                                </TextBlock>
+                            </StackPanel>
 
-                <Rectangle x:Name="Dummy"
-						   Grid.Column="1"
-						   Margin="16,0,31,0" />
+                            <Rectangle x:Name="Dummy"
+						   Grid.Column="1" />
 
-                <Border Grid.Column="1">
-                    <FlowDocumentScrollViewer Padding="0,-18,0,0">
-                        <FlowDocument FontSize="12"
+                            <Border Grid.Column="1">
+                                <FlowDocumentScrollViewer Padding="0,0,0,0" VerticalScrollBarVisibility="Auto">
+                                    <FlowDocument FontSize="12"
 									  Foreground="{DynamicResource ForegroundBrushKey}"
 									  FontFamily="Meiryo UI"
 									  TextAlignment="Left">
-                            <Paragraph>
+                                         <Paragraph>
                                 <Run Foreground="White"
 									 FontSize="20"
 									 Text="환영합니다" />
@@ -320,97 +325,95 @@
                                 </metro2:HyperlinkEx>
 
                                 <LineBreak />
-                                <Run Text="업데이트 링크:" />
-                                <metro2:HyperlinkEx Uri="https://www.dropbox.com/sh/hm0y0tld3gtzcrj/cfFfIg2VWb">
-                                    <Run Text="https://www.dropbox.com/sh/hm0y0tld3gtzcrj/cfFfIg2VWb" />
-                                </metro2:HyperlinkEx>
-                                <LineBreak />
-                                <Run Text="Source code:" />
+                               
+                                <Run Text="Original Source code:" />
                                 <metro2:HyperlinkEx Uri="https://github.com/Grabacr07/KanColleViewer">
                                     <Run Text="https://github.com/Grabacr07/KanColleViewer" />
+                                </metro2:HyperlinkEx><LineBreak />
+                                 <Run Text="업데이트 링크:" />
+                                <metro2:HyperlinkEx Uri="http://kancolleviewerkr.tk/category/Releases">
+                                    <Run Text="http://KanColleViewerKr.tk/category/Releases" />
                                 </metro2:HyperlinkEx>
+                                
                             </Paragraph>
-                        </FlowDocument>
-                    </FlowDocumentScrollViewer>
-                </Border>
-            </Grid>
+                                    </FlowDocument>
+                                </FlowDocumentScrollViewer>
+                            </Border>
+                        </Grid>
+                    </TabItem>
+                    <TabItem>
+                        <TabItem.Header>
+                            <TextBlock Text="{Binding Resources.Settings_BrowserControl, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+										   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
+										   Margin="12,0"
+										   FontSize="14" />
+                        </TabItem.Header>
 
-
-            <Border Grid.Column="1"
-					BorderThickness="1,1,0,0"
-					BorderBrush="{DynamicResource BackgroundBrushKey}"
-					Margin="0,8,0,0"
-					DataContext="{Binding Source={x:Static root:App.ViewModelRoot}, Path=Settings}"
-					Visibility="{Binding ElementName=SettingsTab, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
-				<ScrollViewer VerticalScrollBarVisibility="Auto"
-							  PanningMode="Both">
-					<TabControl Width="640"
-								HorizontalAlignment="Left"
-								Style="{StaticResource VerticalTabControlStyleKey}">
-                        <TabControl.Resources>
-                            <Style x:Key="TabHeaderTextStyleKey"
-								   TargetType="{x:Type TextBlock}"
-								   BasedOn="{StaticResource {x:Type TextBlock}}">
-                                <Setter Property="Foreground"
-										Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}" />
-                                <Setter Property="Margin"
-										Value="12,0" />
-                                <Setter Property="FontSize"
-										Value="14" />
-                            </Style>
-                        </TabControl.Resources>
-                        <TabItem>
-                            <TabItem.Header>
-                                <TextBlock Text="{Binding Resources.Settings_Window, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+                        <settings:Browser Margin="10,9" />
+                    </TabItem>
+                    <TabItem>
+                        <TabItem.Header>
+                            <TextBlock Text="{Binding Resources.Settings_Window, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 										   Style="{DynamicResource TabHeaderTextStyleKey}" />
-                            </TabItem.Header>
-                            <settings:Window Margin="10,9" />
-                        </TabItem>
+                        </TabItem.Header>
+                        <settings:Window Margin="10,9" />
+                    </TabItem>
 
-                        <TabItem>
-                            <TabItem.Header>
-                                <TextBlock Text="{Binding Resources.Settings_Operation, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+                    <TabItem>
+                        <TabItem.Header>
+                            <TextBlock Text="{Binding Resources.Settings_Operation, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 										   Style="{DynamicResource TabHeaderTextStyleKey}" />
-                            </TabItem.Header>
-                            <settings:Operation Margin="10,9" />
-                        </TabItem>
+                        </TabItem.Header>
+                        <settings:Operation Margin="10,9" />
+                    </TabItem>
 
-                        <TabItem>
-                            <TabItem.Header>
-                                <TextBlock Text="알림설정"
+                    <TabItem>
+                        <TabItem.Header>
+                            <TextBlock Text="알림설정"
 										   Style="{DynamicResource TabHeaderTextStyleKey}" />
-                            </TabItem.Header>
-                            <settings:Notification Margin="10,9" />
-                        </TabItem>
+                        </TabItem.Header>
+                        <settings:Notification Margin="10,9" />
+                    </TabItem>
 
-                        <TabItem>
-                            <TabItem.Header>
-                                <TextBlock Text="{Binding Resources.Settings_Network, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+                    <TabItem>
+                        <TabItem.Header>
+                            <TextBlock Text="{Binding Resources.Settings_Network, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 										   Style="{DynamicResource TabHeaderTextStyleKey}" />
-                            </TabItem.Header>
-                            <settings:Network Margin="10,9" />
-                        </TabItem>
+                        </TabItem.Header>
+                        <settings:Network Margin="10,9" />
+                    </TabItem>
 
-                        <TabItem>
-                            <TabItem.Header>
-                                <TextBlock Text="{Binding Resources.Settings_Other, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+                    <TabItem>
+                        <TabItem.Header>
+                            <TextBlock Text="{Binding Resources.Settings_Language, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+										   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
+										   Margin="12,0"
+										   FontSize="14" />
+                        </TabItem.Header>
+
+                        <settings:Language Margin="10,9" />
+                    </TabItem>
+
+                    <TabItem>
+                        <TabItem.Header>
+                            <TextBlock Text="{Binding Resources.Settings_Other, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 										   Style="{DynamicResource TabHeaderTextStyleKey}" />
-                            </TabItem.Header>
-                            <settings:Others Margin="10,9" />
-                        </TabItem>
-                        <TabItem>
-                            <TabItem.Header>
-                                <TextBlock Text="{Binding Resources.Settings_Updates, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-                                           Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
-                                           Margin="12,0"
-                                           FontSize="14" />
-                            </TabItem.Header>
-                            
-                            <settings:Updates Margin="10,9" />
-                        </TabItem>
-                    </TabControl>
-                </ScrollViewer>
-            </Border>
-        </Grid>
-    </Grid>
+                        </TabItem.Header>
+                        <settings:Others Margin="10,9" />
+                    </TabItem>
+
+                    <TabItem>
+                        <TabItem.Header>
+                            <TextBlock Text="{Binding Resources.Settings_Updates, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+										   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
+										   Margin="12,0"
+										   FontSize="14" />
+                        </TabItem.Header>
+
+                        <settings:Updates Margin="10,9" />
+                    </TabItem>
+                </TabControl>
+            </ScrollViewer>
+        </ScrollViewer>
+    </Border>
 </UserControl>
