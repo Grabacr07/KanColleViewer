@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using Settings2 = Grabacr07.KanColleViewer.Models.Settings;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {
@@ -201,10 +202,69 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region VerticalBar 変更通知プロパティ
+
+		private Visibility _VerticalBar;
+
+		public Visibility VerticalBar
+		{
+			get { return this._VerticalBar; }
+			set
+			{
+				if (this._VerticalBar != value)
+				{
+					this._VerticalBar = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region HorizontalBar 変更通知プロパティ
+
+		private Visibility _HorizontalBar;
+
+		public Visibility HorizontalBar
+		{
+			get { return this._HorizontalBar; }
+			set
+			{
+				if (this._HorizontalBar != value)
+				{
+					this._HorizontalBar = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
 
 
 		public MainWindowViewModel()
 		{
+			if (Settings2.Current.Orientation == OrientationType.Vertical)
+			{
+				this.VerticalBar = Visibility.Visible;
+				this.HorizontalBar = Visibility.Collapsed;
+			}
+			else
+			{
+				this.VerticalBar = Visibility.Collapsed;
+				this.HorizontalBar = Visibility.Visible;
+			}
+
+			Settings2.Current.VerticalWindow += () =>
+			{
+				this.VerticalBar = Visibility.Visible;
+				this.HorizontalBar = Visibility.Collapsed;
+			};
+			Settings2.Current.HorizontalWindow += () =>
+			{
+				this.VerticalBar = Visibility.Collapsed;
+				this.HorizontalBar = Visibility.Visible;
+			};
+
 			this.Title = App.ProductInfo.Title;
 			this.Navigator = new NavigatorViewModel();
 			this.Settings = new SettingsViewModel();

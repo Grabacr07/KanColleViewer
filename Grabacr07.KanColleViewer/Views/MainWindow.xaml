@@ -62,9 +62,9 @@
     <Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
-            <RowDefinition Height="54" />
-			<RowDefinition Height="*" />
-			<RowDefinition Height="23" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="23" />
 		</Grid.RowDefinitions>
 
 		<!-- #region CaptionBar -->
@@ -114,7 +114,9 @@
 		</Border>
 		<!-- #endregion -->
         
-        <ContentControl Grid.Row="1" Content="{Binding Content}">
+        <ContentControl Grid.Row="1" Content="{Binding Content}"
+                        Height="54"
+                        Visibility="{Binding HorizontalBar}">
             <ContentControl.Resources>
                 <DataTemplate DataType="{x:Type viewModels:StartContentViewModel}">
                     <Border ClipToBounds="True">
@@ -127,48 +129,58 @@
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>
-
-
-        <DockPanel Grid.Row="2">
-            <Grid Style="{DynamicResource DockOrientation}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid Name="ContentPosX" Grid.RowSpan="3" />
-                <Grid Name="ContentPosY" Grid.ColumnSpan="3" />
-                <controls:KanColleHost x:Name="KanColleHost"
+            <DockPanel Grid.Row="2">
+                <Grid Style="{DynamicResource DockOrientation}">
+                    <controls:KanColleHost x:Name="KanColleHost"
                                        ZoomFactor="{Binding Settings.BrowserZoomFactor.Current}"
                                        Grid.Column="1"
-                                       Grid.Row="1">
-                    <i:Interaction.Triggers>
-                        <livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
-													 MessageKey="WebBrowser/Zoom">
-                            <behaviors:ZoomAction />
-                        </livet:InteractionMessageTrigger>
-                    </i:Interaction.Triggers>
-                    <WebBrowser Navigated="WebBrowser_Navigated" LoadCompleted="WebBrowser_LoadCompleted" Navigating="WebBrowser_Navigating" Name="KancolleBrowser">
-                        <i:Interaction.Behaviors>
-                            <behaviors:NavigatorBehavior Navigator="{Binding Navigator}" />
-                            <livet:WebBrowserSetStateToControlBehavior Source="{Binding Source={x:Static properties:Settings.Default}, Path=KanColleUrl, Mode=OneTime}"
-																   Property="Source" />
-                        </i:Interaction.Behaviors>
+                                       Grid.Row="1" VerticalAlignment="Top">
                         <i:Interaction.Triggers>
                             <livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
-														 MessageKey="Screenshot/Save">
-                                <behaviors:ScreenshotAction />
+													 MessageKey="WebBrowser/Zoom">
+                                <behaviors:ZoomAction />
                             </livet:InteractionMessageTrigger>
                         </i:Interaction.Triggers>
-                    </WebBrowser>
-                </controls:KanColleHost>
-            </Grid>
-            <ContentControl Content="{Binding Content}">
+                        <WebBrowser Navigated="WebBrowser_Navigated" LoadCompleted="WebBrowser_LoadCompleted" Navigating="WebBrowser_Navigating" Name="KancolleBrowser">
+                            <i:Interaction.Behaviors>
+                                <behaviors:NavigatorBehavior Navigator="{Binding Navigator}" />
+                                <livet:WebBrowserSetStateToControlBehavior Source="{Binding Source={x:Static properties:Settings.Default}, Path=KanColleUrl, Mode=OneTime}"
+																   Property="Source" />
+                            </i:Interaction.Behaviors>
+                            <i:Interaction.Triggers>
+                                <livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+														 MessageKey="Screenshot/Save">
+                                    <behaviors:ScreenshotAction />
+                                </livet:InteractionMessageTrigger>
+                            </i:Interaction.Triggers>
+                        </WebBrowser>
+                    </controls:KanColleHost>
+                </Grid>
+                <Grid>
+                    
+                </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <ContentControl Height="54" Content="{Binding Content}"
+                                Visibility="{Binding VerticalBar}"
+                                VerticalAlignment="Bottom" 
+                                Margin="0,4,0,0">
+                   <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type viewModels:StartContentViewModel}">
+                    <Border ClipToBounds="True">
+                        <views:BrowserNavigator Margin="6,4,6,8"
+									VerticalAlignment="Top"/>
+                    </Border>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:MainContentViewModel}">
+					<views:Info Margin="4,-5,4,5"/>
+                </DataTemplate>
+            </ContentControl.Resources>
+                </ContentControl>
+                <ContentControl Content="{Binding Content}" Grid.Row="1">
                 <ContentControl.Resources>
                     <DataTemplate DataType="{x:Type viewModels:StartContentViewModel}">
                         <views:StartContent />
@@ -179,10 +191,12 @@
                     </DataTemplate>
                 </ContentControl.Resources>
             </ContentControl>
+            </Grid>
         </DockPanel>
 
-		<!-- region Status area -->
-		<Grid Grid.Row="3"
+
+            <!-- region Status area -->
+		<Grid Grid.Row="4"
 			  Background="{DynamicResource AccentBrushKey}"
 			  Panel.ZIndex="100">
 			<Grid.ColumnDefinitions>

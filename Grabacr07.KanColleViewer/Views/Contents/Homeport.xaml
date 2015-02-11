@@ -30,7 +30,7 @@
 		</Grid.Resources>
 
 		<StackPanel Orientation="Horizontal"
-					DataContext="{Binding Admiral}">
+					DataContext="{Binding Admiral}" VerticalAlignment="Center">
 			<TextBlock>
 				<Run Text="{Binding Model.Nickname, Mode=OneWay}"
 					 Style="{DynamicResource EmphaticTextElementStyleKey}"
@@ -58,7 +58,7 @@
 		</StackPanel>
 
 		<StackPanel Grid.Column="1"
-					Orientation="Horizontal">
+					Orientation="Horizontal" VerticalAlignment="Center">
 			<Grid>
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto" />
