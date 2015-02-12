@@ -20,19 +20,53 @@ namespace Grabacr07.KanColleWrapper.Models
 	}
 
 
-	public class ViewRangeType1 : ICalcViewRange
+	public abstract class ViewRangeCalcLogic : ICalcViewRange
 	{
-		public string Name
+		private static readonly Dictionary<string, ICalcViewRange> logics = new Dictionary<string, ICalcViewRange>();
+
+		public static IEnumerable<ICalcViewRange> Logics
+		{
+			get { return logics.Values; }
+		} 
+
+		public static ICalcViewRange Get(string key)
+		{
+			ICalcViewRange logic;
+			return logics.TryGetValue(key, out logic) ? logic : new ViewRangeType1();
+		}
+
+		public abstract string Key { get; }
+		public abstract string Name { get; }
+		public abstract string Description { get; }
+		public abstract double Calc(Fleet fleet);
+
+		protected ViewRangeCalcLogic()
+		{
+			// ReSharper disable once DoNotCallOverridableMethodsInConstructor
+			var key = this.Key;
+			if (key != null && !logics.ContainsKey(key)) logics.Add(key, this);
+		}
+	}
+
+
+	public class ViewRangeType1 : ViewRangeCalcLogic
+	{
+		public override sealed string Key
+		{
+			get { return "Type1"; }
+		}
+
+		public override string Name
 		{
 			get { return "単純計算"; }
 		}
 
-		public string Description
+		public override string Description
 		{
 			get { return "艦娘と装備の索敵値の単純な合計値"; }
 		}
 
-		public double Calc(Fleet fleet)
+		public override double Calc(Fleet fleet)
 		{
 			if (fleet == null || fleet.Ships.Length == 0) return 0;
 
@@ -41,19 +75,24 @@ namespace Grabacr07.KanColleWrapper.Models
 	}
 
 
-	public class ViewRangeType2 : ICalcViewRange
+	public class ViewRangeType2 : ViewRangeCalcLogic
 	{
-		public string Name
+		public override sealed string Key
+		{
+			get { return "Type2"; }
+		}
+
+		public override string Name
 		{
 			get { return "2-5 式 (旧)"; }
 		}
 
-		public string Description
+		public override string Description
 		{
 			get { return "(偵察機 × 2) + (電探) + √(装備込みの艦隊索敵値合計 - 偵察機 - 電探)"; }
 		}
 
-		public double Calc(Fleet fleet)
+		public override double Calc(Fleet fleet)
 		{
 			if (fleet == null || fleet.Ships.Length == 0) return 0;
 
@@ -79,14 +118,19 @@ namespace Grabacr07.KanColleWrapper.Models
 	}
 
 
-	public class ViewRangeType3 : ICalcViewRange
+	public class ViewRangeType3 : ViewRangeCalcLogic
 	{
-		public string Name
+		public override sealed string Key
+		{
+			get { return "Type3"; }
+		}
+
+		public override string Name
 		{
 			get { return "2-5 式 (秋)"; }
 		}
 
-		public string Description
+		public override string Description
 		{
 			get
 			{
@@ -97,7 +141,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			}
 		}
 
-		public double Calc(Fleet fleet)
+		public override double Calc(Fleet fleet)
 		{
 			if (fleet == null || fleet.Ships.Length == 0) return 0;
 

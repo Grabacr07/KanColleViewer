@@ -30,63 +30,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public static int CalcAirSuperiorityPotential(this Ship ship)
 		{
-			return ship.Slots.Select(x => x.Item.CalcAirSuperiorityPotential(x.Current)).Sum();
+			return ship.Slots.Where(x => x.Equipped).Select(x => x.Item.CalcAirSuperiorityPotential(x.Current)).Sum();
 		}
-
-
-		/// <summary>
-		/// 艦隊の索敵値を計算します。
-		/// </summary>
-		/// <returns></returns>
-		public static int CalcFleetViewRange(this Fleet fleet, ViewRangeCalcLogic logic)
-		{
-			if (fleet == null || fleet.Ships.Length == 0) return 0;
-
-			if (logic == ViewRangeCalcLogic.Type1)
-			{
-				return fleet.Ships.Sum(x => x.ViewRange);
-			}
-
-			if (logic == ViewRangeCalcLogic.Type2)
-			{
-				// http://wikiwiki.jp/kancolle/?%C6%EE%C0%BE%BD%F4%C5%E7%B3%A4%B0%E8#area5
-				// [索敵装備と装備例] によって示されている計算式
-				// stype=7 が偵察機 (2 倍する索敵値)、stype=8 が電探
-
-				var spotter = fleet.Ships.SelectMany(
-					x => x.Slots
-						.Where(s => s.Item.Info.RawData.api_type.Get(1) == 7)
-						.Where(s => s.Current > 0)
-						.Select(s => s.Item.Info.RawData.api_saku)
-					).Sum();
-
-				var radar = fleet.Ships.SelectMany(
-					x => x.Slots
-						.Where(s => s.Item.Info.RawData.api_type.Get(1) == 8)
-						.Select(s => s.Item.Info.RawData.api_saku)
-					).Sum();
-
-				return (spotter * 2) + radar + (int)Math.Sqrt(fleet.Ships.Sum(x => x.ViewRange) - spotter - radar);
-			}
-
-			return 0;
-		}
-	}
-
-
-	/// <summary>
-	/// 索敵値の計算に使用するロジックの種類を示す識別します。
-	/// </summary>
-	public enum ViewRangeCalcLogic
-	{
-		/// <summary>
-		/// 単純な索敵合計値。
-		/// </summary>
-		Type1,
-
-		/// <summary>
-		/// (偵察機 × 2) + (電探) + √(装備込みの艦隊索敵値合計 - 偵察機 - 電探)。
-		/// </summary>
-		Type2,
 	}
 }

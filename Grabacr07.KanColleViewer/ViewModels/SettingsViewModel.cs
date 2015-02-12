@@ -260,7 +260,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				{
 					this._ViewRangeType1 = value;
 					this.RaisePropertyChanged();
-					if (value) Settings.Current.KanColleClientSettings.ViewRangeCalcLogic = ViewRangeCalcLogic.Type1;
+					//if (value) Settings.Current.KanColleClientSettings.ViewRangeCalcLogic = ViewRangeCalcLogic.Type1;
 				}
 			}
 		}
@@ -280,7 +280,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				{
 					this._ViewRangeType2 = value;
 					this.RaisePropertyChanged();
-					if (value) Settings.Current.KanColleClientSettings.ViewRangeCalcLogic = ViewRangeCalcLogic.Type2;
+					//if (value) Settings.Current.KanColleClientSettings.ViewRangeCalcLogic = ViewRangeCalcLogic.Type2;
 				}
 			}
 		}
@@ -323,8 +323,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			});
 			this.BrowserZoomFactor = zoomFactor;
 
-			this._ViewRangeType1 = Settings.Current.KanColleClientSettings.ViewRangeCalcLogic == ViewRangeCalcLogic.Type1;
-			this._ViewRangeType2 = Settings.Current.KanColleClientSettings.ViewRangeCalcLogic == ViewRangeCalcLogic.Type2;
+			//this._ViewRangeType1 = Settings.Current.KanColleClientSettings.ViewRangeCalcLogic == ViewRangeCalcLogic.Type1;
+			//this._ViewRangeType2 = Settings.Current.KanColleClientSettings.ViewRangeCalcLogic == ViewRangeCalcLogic.Type2;
 
 			this.ReloadPlugins();
 		}
