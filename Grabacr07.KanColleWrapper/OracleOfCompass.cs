@@ -21,7 +21,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public List<PreviewBattleResults> Results = new List<PreviewBattleResults>();
 		public int CellData { get; set; }
-
+		public int DockId { get; set; }
 		#region bool
 		/// <summary>
 		/// 전투 미리보기가 켜져있는가. 켜져있는 경우는 true
@@ -117,10 +117,10 @@ namespace Grabacr07.KanColleWrapper
 				PreviewBattleResults Kan = new PreviewBattleResults();
 				if (combinded == -1)
 				{
-					if (Organization.Fleets[DataLists.DockId].Ships.Length > i)
+					if (Organization.Fleets[this.DockId].Ships.Length > i)
 					{
-						Kan.Name = Organization.Fleets[DataLists.DockId].Ships[i].Name;
-						Kan.Lv = Organization.Fleets[DataLists.DockId].Ships[i].Level;
+						Kan.Name = Organization.Fleets[this.DockId].Ships[i].Name;
+						Kan.Lv = Organization.Fleets[this.DockId].Ships[i].Level;
 						Kan.CHP = this.DataLists.HpResults[i];
 						Kan.MHP = this.DataLists.MHpResults[i];
 						Kan.HP = new LimitedValue(this.DataLists.HpResults[i], this.DataLists.MHpResults[i], 0);
@@ -130,16 +130,42 @@ namespace Grabacr07.KanColleWrapper
 				}
 				else if (combinded == 1)
 				{
-					if (Organization.Fleets[1].Ships.Length > i)
+					if (Organization.Fleets[1].State==FleetState.Sortie)
 					{
-						Kan.Name = Organization.Fleets[1].Ships[i].Name;
-						Kan.Lv = Organization.Fleets[1].Ships[i].Level;
-						Kan.CHP = this.DataLists.HpResults[i];
-						Kan.MHP = this.DataLists.MHpResults[i];
-						Kan.HP = new LimitedValue(this.DataLists.HpResults[i], this.DataLists.MHpResults[i], 0);
-						Kan.Status = this.DataLists.CalResults[i];
+						if (Organization.Fleets[1].Ships.Length > i)
+						{
+							Kan.Name = Organization.Fleets[1].Ships[i].Name;
+							Kan.Lv = Organization.Fleets[1].Ships[i].Level;
+							Kan.CHP = this.DataLists.HpResults[i];
+							Kan.MHP = this.DataLists.MHpResults[i];
+							Kan.HP = new LimitedValue(this.DataLists.HpResults[i], this.DataLists.MHpResults[i], 0);
+							Kan.Status = this.DataLists.CalResults[i];
+						}
+						if (Kan.HP.Maximum != 0 || Kan.HP.Current != 0) this.Results.Add(Kan);
 					}
-					if (Kan.HP.Maximum != 0 || Kan.HP.Current != 0) this.Results.Add(Kan);
+					else
+					{
+						for (int j = 0; j < Organization.Fleets.Count; j++)
+						{
+							if (Organization.Fleets[j].State == FleetState.Sortie)
+							{
+								if (Organization.Fleets[j].Ships.Length > i)
+								{
+									Kan.Name = Organization.Fleets[j].Ships[i].Name;
+									Kan.Lv = Organization.Fleets[j].Ships[i].Level;
+									Kan.CHP = this.DataLists.HpResults[i];
+									Kan.MHP = this.DataLists.MHpResults[i];
+									Kan.HP = new LimitedValue(this.DataLists.HpResults[i], this.DataLists.MHpResults[i], 0);
+									Kan.Status = this.DataLists.CalResults[i];
+								}
+								if (Kan.HP.Maximum != 0 || Kan.HP.Current != 0)
+								{
+									this.Results.Add(Kan);
+									break;
+								}
+							}
+						}
+					}
 				}
 
 			}
@@ -1114,7 +1140,7 @@ namespace Grabacr07.KanColleWrapper
 				DataLists.EnemyLv = new int[i];
 				DataLists.EnemyLv = battle.api_ship_lv;
 
-				DataLists.DockId = battle.api_dock_id;
+				this.DockId = battle.api_dock_id;
 			}
 		}
 		private void ResetEnemyInfo(kcsapi_midnight_battle battle)
@@ -1128,7 +1154,7 @@ namespace Grabacr07.KanColleWrapper
 				DataLists.EnemyLv = new int[i];
 				DataLists.EnemyLv = battle.api_ship_lv;
 
-				DataLists.DockId = battle.api_deck_id;
+				this.DockId = battle.api_deck_id;
 			}
 		}
 		#endregion

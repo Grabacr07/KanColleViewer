@@ -30,7 +30,6 @@ namespace Grabacr07.KanColleWrapper.Models
 	/// </summary>
 	public class ResultCalLists
 	{
-		public int DockId { get; set; }
 		public int RankInt { get; set; }
 		/// <summary>
 		/// 적의 ID를 저장. 적의 이름을 출력하는데 필요
