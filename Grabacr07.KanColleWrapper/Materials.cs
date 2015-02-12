@@ -1,6 +1,10 @@
-﻿using Grabacr07.KanColleWrapper.Models.Raw;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Grabacr07.KanColleWrapper.Internal;
+using Grabacr07.KanColleWrapper.Models.Raw;
 using Livet;
-using System;
 
 namespace Grabacr07.KanColleWrapper
 {
@@ -143,9 +147,12 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// バケツ！！！ ぶっかけ！！！！
 		/// </summary>
-		public int Bucket => this.InstantRepairMaterials;
+		public int Bucket
+		{
+			get { return this.InstantRepairMaterials; }
+		}
 
-	    #endregion
+		#endregion
 
 		#region InstantBuildMaterials 変更通知プロパティ
 

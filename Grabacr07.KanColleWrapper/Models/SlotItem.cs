@@ -10,10 +10,20 @@ namespace Grabacr07.KanColleWrapper.Models
 {
 	public class SlotItem : RawDataWrapper<kcsapi_slotitem>, IIdentifiable
 	{
-		public int Id => this.RawData.api_id;
-		public SlotItemInfo Info { get; }
-		public int Level => this.RawData.api_level;
-		public string ItemLv => "+" + Level.ToString();
+		public int Id
+		{
+		    get { return this.RawData.api_id; }
+		}
+
+	    public SlotItemInfo Info { get; private set; }
+		public int Level
+		{
+			get { return this.RawData.api_level; }
+		}
+		public string ItemLv
+		{
+			get { return "+" + Level.ToString(); }
+		}
 
 		internal SlotItem(kcsapi_slotitem rawData) : base(rawData)
 		{

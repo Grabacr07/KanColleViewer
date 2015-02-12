@@ -15,7 +15,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 	{
 		public Fleet Fleet { get; private set; }
 
-		public ConditionViewModel Condition { get; }
+		public ConditionViewModel Condition { get; private set; }
 		
 		public HomeportViewModel(Fleet fleet)
 		{

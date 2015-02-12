@@ -1,7 +1,10 @@
-﻿using Grabacr07.KanColleWrapper.Internal;
-using Grabacr07.KanColleWrapper.Models;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Grabacr07.KanColleWrapper.Internal;
+using Grabacr07.KanColleWrapper.Models;
+using System.Diagnostics;
 
 namespace Grabacr07.KanColleWrapper
 {
@@ -15,7 +18,7 @@ namespace Grabacr07.KanColleWrapper
 		/// <returns></returns>
 		public static int CalcAirSuperiorityPotential(this SlotItem slotItem, int onslot)
 		{
-			if (slotItem.Info.IsAirSuperiorityFighter)
+			if (slotItem != null && slotItem.Info.IsAirSuperiorityFighter)
 			{
 				return (int)(slotItem.Info.AA * Math.Sqrt(onslot));
 			}
@@ -28,7 +31,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public static int CalcAirSuperiorityPotential(this Ship ship)
 		{
-			return ship.SlotItems.Zip(ship.OnSlot, (item, i) => item.CalcAirSuperiorityPotential(i)).Sum();
+			return ship.Slots.Select(x => x.Item.CalcAirSuperiorityPotential(x.Current)).Sum();
 		}
 
 
@@ -44,26 +47,40 @@ namespace Grabacr07.KanColleWrapper
 			{
 				return fleet.Ships.Sum(x => x.ViewRange);
 			}
-
 			if (logic == ViewRangeCalcLogic.Type2)
 			{
 				// http://wikiwiki.jp/kancolle/?%C6%EE%C0%BE%BD%F4%C5%E7%B3%A4%B0%E8#area5
 				// [索敵装備と装備例] によって示されている計算式
 				// stype=7 が偵察機 (2 倍する索敵値)、stype=8 が電探
-
-				var spotter = fleet.Ships.SelectMany(
-					x => x.SlotItems
-						.Zip(x.OnSlot, (i, o) => new { Item = i.Info, Slot = o })
-						.Where(a => a.Item.RawData.api_type.Get(1) == 7)
-						.Where(a => a.Slot > 0)
-						.Select(a => a.Item.RawData.api_saku)
+				int spotter = 0;
+				try
+				{
+					spotter = fleet.Ships.SelectMany(
+					x => x.Slots
+						.Where(s => s.Equipped)
+						.Where(s => s.Item.Info.RawData.api_type.Get(1) == 7)
+						.Select(s => s.Item.Info.RawData.api_saku)
 					).Sum();
-
-				var radar = fleet.Ships.SelectMany(
-					x => x.SlotItems
-						.Where(i => i.Info.RawData.api_type.Get(1) == 8)
-						.Select(i => i.Info.RawData.api_saku)
+				}
+				catch (Exception e)
+				{
+					Debug.WriteLine(e);
+				}
+				int radar = 0;
+				try
+				{
+					radar = fleet.Ships.SelectMany(
+					x => x.Slots
+						.Where(s => s.Equipped)
+						.Where(s => s.Item.Info.RawData.api_type.Get(1) == 8)
+						.Select(s => s.Item.Info.RawData.api_saku)
 					).Sum();
+				}
+				catch (Exception e)
+				{
+					Debug.WriteLine(e);
+				}
+
 
 				return (spotter * 2) + radar + (int)Math.Sqrt(fleet.Ships.Sum(x => x.ViewRange) - spotter - radar);
 			}

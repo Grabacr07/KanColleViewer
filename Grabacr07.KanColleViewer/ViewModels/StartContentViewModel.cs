@@ -7,13 +7,16 @@ namespace Grabacr07.KanColleViewer.ViewModels
 {
 	public class StartContentViewModel : ViewModel
 	{
-		#region singleton 
+		#region singleton
 
 		private static readonly StartContentViewModel instance = new StartContentViewModel();
 
-		public static StartContentViewModel Instance => instance;
+		public static StartContentViewModel Instance
+		{
+			get { return instance; }
+		}
 
-	    #endregion
+		#endregion
 
 		#region CanDeleteInternetCache 変更通知プロパティ
 
@@ -53,40 +56,40 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-        #region CanSetRegionCookie 変更通知プロパティ
+		#region CanSetRegionCookie 変更通知プロパティ
 
-        private bool _CanSetRegionCookie = true;
+		private bool _CanSetRegionCookie = true;
 
-        public bool CanSetRegionCookie
-        {
-            get { return this._CanSetRegionCookie; }
-            set
-            {
-                if (this._CanSetRegionCookie != value)
-                {
-                    this._CanSetRegionCookie = value;
-                    this.RaisePropertyChanged();
-                }
-            }
-        }
+		public bool CanSetRegionCookie
+		{
+			get { return this._CanSetRegionCookie; }
+			set
+			{
+				if (this._CanSetRegionCookie != value)
+				{
+					this._CanSetRegionCookie = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
 
-        #endregion
-        #region SetRegionCookieButtonContent 変更通知プロパティ
-        private string _SetRegionCookieButtonContent = Properties.Resources.StartContent_SetRegionCookieButton;
+		#endregion
+		#region SetRegionCookieButtonContent 変更通知プロパティ
+		private string _SetRegionCookieButtonContent = Properties.Resources.StartContent_SetRegionCookieButton;
 
-        public string SetRegionCookieButtonContent
-        {
-            get { return this._SetRegionCookieButtonContent; }
-            set
-            {
-                if (this._SetRegionCookieButtonContent != value)
-                {
-                    this._SetRegionCookieButtonContent = value;
-                    this.RaisePropertyChanged();
-                }
-            }
-        }
-        #endregion
+		public string SetRegionCookieButtonContent
+		{
+			get { return this._SetRegionCookieButtonContent; }
+			set
+			{
+				if (this._SetRegionCookieButtonContent != value)
+				{
+					this._SetRegionCookieButtonContent = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
 
 
 		private StartContentViewModel() { }
@@ -115,11 +118,11 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				Debug.WriteLine(ex);
 			}
 		}
-        public void SetRegionCookie()
+		public void SetRegionCookie()
 		{
-            App.ViewModelRoot.Navigator.GoGame();
-            this.SetRegionCookieButtonContent = Properties.Resources.StartContent_SetRegionCookieMessage;
-            this.CanSetRegionCookie = false;
+			App.ViewModelRoot.Navigator.GoGame();
+			this.SetRegionCookieButtonContent = Properties.Resources.StartContent_SetRegionCookieMessage;
+			this.CanSetRegionCookie = false;
 		}
 	}
 }

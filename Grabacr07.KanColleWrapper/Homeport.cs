@@ -2,7 +2,7 @@
 using Grabacr07.KanColleWrapper.Models.Raw;
 using Livet;
 using System;
-using System.ComponentModel;
+using System.Reactive.Linq;
 
 namespace Grabacr07.KanColleWrapper
 {
@@ -14,12 +14,12 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// 艦隊の編成状況にアクセスできるようにします。
 		/// </summary>
-		public Organization Organization { get; }
+		public Organization Organization { get; private set; }
 
 		/// <summary>
 		/// 資源および資材の保有状況にアクセスできるようにします。
 		/// </summary>
-		public Materials Materials { get; }
+		public Materials Materials { get; private set; }
 
 		/// <summary>
 		/// 装備や消費アイテムの保有状況にアクセスできるようにします。
@@ -34,14 +34,12 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// 複数の入渠ドックを持つ工廠を取得します。
 		/// </summary>
-		public Repairyard Repairyard { get; }
+		public Repairyard Repairyard { get; private set; }
 
 		/// <summary>
 		/// 任務情報を取得します。
 		/// </summary>
 		public Quests Quests { get; private set; }
-
-
 
 
 		#region Admiral 変更通知プロパティ
@@ -77,13 +75,14 @@ namespace Grabacr07.KanColleWrapper
 			this.Repairyard = new Repairyard(this, proxy);
 			this.Dockyard = new Dockyard(proxy);
 			this.Quests = new Quests(proxy);
+			
 
 			proxy.api_port.TryParse<kcsapi_port>().Subscribe(x =>
 			{
 				this.Organization.Update(x.Data.api_ship);
 				this.Repairyard.Update(x.Data.api_ndock);
 				this.Organization.Update(x.Data.api_deck_port);
-				this.Organization.Combined = x.Data.api_combined_flag == 1 || x.Data.api_combined_flag == 2;//1 combine 2 water
+				this.Organization.Combined = x.Data.api_combined_flag != 0;
 				this.Materials.Update(x.Data.api_material);
 				this.UpdateAdmiral(x.Data.api_basic);
 			});
@@ -116,6 +115,6 @@ namespace Grabacr07.KanColleWrapper
 		{
 			//Observable.Timer(TimeSpan.FromSeconds(10), TimeSpan.FromMinutes(3))
 		}
-
+		
 	}
 }

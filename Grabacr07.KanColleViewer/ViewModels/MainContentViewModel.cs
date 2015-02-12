@@ -1,8 +1,11 @@
-﻿using Grabacr07.KanColleViewer.ViewModels.Contents;
-using Grabacr07.KanColleViewer.ViewModels.Contents.Fleets;
-using Livet;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Grabacr07.KanColleViewer.ViewModels.Contents;
+using Grabacr07.KanColleViewer.ViewModels.Contents.Fleets;
+using Grabacr07.KanColleViewer.ViewModels.Dev;
+using Livet;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {
@@ -13,10 +16,10 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		public ShipsViewModel Ships { get; private set; }
 		public SlotItemsViewModel SlotItems { get; private set; }
 
-		public FleetsViewModel Fleets { get; }
-		public ShipyardViewModel Shipyard { get; }
-		public QuestsViewModel Quests { get; }
-		public ExpeditionsViewModel Expeditions { get; }
+		public FleetsViewModel Fleets { get; private set; }
+		public ShipyardViewModel Shipyard { get; private set; }
+		public QuestsViewModel Quests { get; private set; }
+		public ExpeditionsViewModel Expeditions { get; private set; }
 
 		public IList<TabItemViewModel> TabItems { get; set; }
 		public IList<TabItemViewModel> SystemTabItems { get; set; }

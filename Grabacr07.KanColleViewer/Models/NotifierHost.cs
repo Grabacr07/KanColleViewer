@@ -1,4 +1,8 @@
-﻿using Grabacr07.KanColleViewer.Composition;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleWrapper;
 using Livet;
@@ -11,9 +15,12 @@ namespace Grabacr07.KanColleViewer.Models
 
 		private static readonly NotifierHost instance = new NotifierHost();
 
-		public static NotifierHost Instance => instance;
+		public static NotifierHost Instance
+		{
+			get { return instance; }
+		}
 
-	    #endregion
+		#endregion
 
 		private NotifierHost() { }
 
@@ -77,6 +84,7 @@ namespace Grabacr07.KanColleViewer.Models
 						var shipName = Settings.Current.CanDisplayBuildingShipName
 							? args.Ship.Name
 							: Resources.Common_ShipGirl;
+
 						PluginHost.Instance.GetNotifier().Show(
 							NotifyType.Build,
 							Resources.Dockyard_NotificationMessage_Title,
@@ -92,35 +100,35 @@ namespace Grabacr07.KanColleViewer.Models
 			KanColleClient.Current.OracleOfCompass.CriticalCondition += () =>
 			{
 
-					if (Models.Settings.Current.EnableCriticalNotify)
-					{
-						PluginHost.Instance.GetNotifier().Show(
-							NotifyType.Critical,
-							Resources.ReSortie_CriticalConditionMessage_Title, Resources.ReSortie_CriticalConditionMessage,
-						() => App.ViewModelRoot.Activate());
-					}
-					//if (Models.Settings.Current.EnableCriticalPopup)
-					//{
-					//	//Dispatcher시작. 사실 이렇게 쓰는건지 확실하게 모르겠음. App.CriticalPupup()이 혼자서 작동 못하니 이게 맞다곤 생각하지만...
-					//	App.Current.Dispatcher.Invoke(
-					//		System.Windows.Threading.DispatcherPriority.Normal,
-					//		new Action(
-					//			delegate()
-					//			{
-					//				App.CriticalPupup();
-					//			})
-					//		);
-					//	//Dispatcher종료
-					//}
+				if (Models.Settings.Current.EnableCriticalNotify)
+				{
+					PluginHost.Instance.GetNotifier().Show(
+						NotifyType.Critical,
+						Resources.ReSortie_CriticalConditionMessage_Title, Resources.ReSortie_CriticalConditionMessage,
+					() => App.ViewModelRoot.Activate());
+				}
+				//if (Models.Settings.Current.EnableCriticalPopup)
+				//{
+				//	//Dispatcher시작. 사실 이렇게 쓰는건지 확실하게 모르겠음. App.CriticalPupup()이 혼자서 작동 못하니 이게 맞다곤 생각하지만...
+				//	App.Current.Dispatcher.Invoke(
+				//		System.Windows.Threading.DispatcherPriority.Normal,
+				//		new Action(
+				//			delegate()
+				//			{
+				//				App.CriticalPupup();
+				//			})
+				//		);
+				//	//Dispatcher종료
+				//}
 
-					if (Models.Settings.Current.EnableCriticalAccent)
-						App.ViewModelRoot.Mode = Mode.CriticalCondition;
+				if (Models.Settings.Current.EnableCriticalAccent)
+					App.ViewModelRoot.Mode = Mode.CriticalCondition;
 			};
 
 
 			KanColleClient.Current.OracleOfCompass.CriticalCleared += () =>
 			{
-				if (App.ViewModelRoot.Mode!=Mode.Started) App.ViewModelRoot.Mode = Mode.Started;
+				if (App.ViewModelRoot.Mode != Mode.Started) App.ViewModelRoot.Mode = Mode.Started;
 			};
 
 		}

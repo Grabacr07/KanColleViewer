@@ -1,7 +1,10 @@
-﻿using Grabacr07.KanColleWrapper;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Grabacr07.KanColleWrapper;
+using Grabacr07.KanColleWrapper.Models;
+using Livet;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 {
@@ -76,9 +79,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 				foreach (var ship in ships.Values)
 				{
-					foreach (var target in ship.SlotItems.Where(x => x != null).Select(item => dic[item.Info.Id]))
+					foreach (var target in ship.Slots.Where(x => x.Equipped).Select(slot => dic[slot.Item.Info.Id]))
 					{
-						if (ship.SlotItems.Any(x => x.Level > 0&&x.Info.Id==target.SlotItem.Id)) target.AddShip(ship, true);
+						if (ship.Slots.Any(x => x.Item.Level > 0 && x.Item.Info.Id == target.SlotItem.Id)) target.AddShip(ship, true);
 						else target.AddShip(ship,false);
 					}
 				}

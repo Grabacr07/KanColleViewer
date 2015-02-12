@@ -64,23 +64,23 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Interactive, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="System.Interactive">
       <HintPath>..\packages\Ix-Main.1.2.3\lib\net45\System.Interactive.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reactive.Core">
-      <HintPath>..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
+    <Reference Include="System.Reactive.Core, Version=2.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Rx-Core.2.2.4\lib\net45\System.Reactive.Core.dll</HintPath>
     </Reference>
     <Reference Include="System.Reactive.Interfaces">
-      <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+      <HintPath>..\packages\Rx-Interfaces.2.2.4\lib\net45\System.Reactive.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reactive.Linq">
-      <HintPath>..\packages\Rx-Linq.2.2.5\lib\net45\System.Reactive.Linq.dll</HintPath>
+    <Reference Include="System.Reactive.Linq, Version=2.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Rx-Linq.2.2.4\lib\net45\System.Reactive.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System.Reactive.PlatformServices">
       <HintPath>..\packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -98,6 +98,7 @@
     <Compile Include="Calculator.cs" />
     <Compile Include="Counter.cs" />
     <Compile Include="Dockyard.cs" />
+    <Compile Include="DynamicJson.cs" />
     <Compile Include="Models\LogDataList.cs" />
     <Compile Include="Models\Mission.cs" />
     <Compile Include="Extensions.cs" />
@@ -109,17 +110,23 @@
     <Compile Include="Models\FleetCondition.cs" />
     <Compile Include="Models\PreviewBattleResults.cs" />
     <Compile Include="Models\Raw\kcsapi_hensei_combined.cs" />
+    <Compile Include="Models\Raw\kcsapi_combined_battle_battleresult.cs" />
+    <Compile Include="Models\Raw\kcsapi_combined_battle_airbattle.cs" />
+    <Compile Include="Models\Raw\kcsapi_combined_battle.cs" />
     <Compile Include="Models\Raw\kcsapi_battle.cs" />
     <Compile Include="Models\Raw\kcsapi_destroyitem2.cs" />
     <Compile Include="Models\Raw\kcsapi_destroyship.cs" />
     <Compile Include="Models\Raw\kcsapi_kdock_getship.cs" />
-    <Compile Include="Models\Raw\kcsapi_mapinfo.cs" />
+    <Compile Include="Models\Raw\kcsapi_map_next.cs" />
     <Compile Include="Models\Raw\kcsapi_map_start.cs" />
     <Compile Include="Models\Raw\kcsapi_mission.cs" />
     <Compile Include="Models\Raw\kcsapi_mission_result.cs" />
-    <Compile Include="Models\Raw\kcsapi_map_next.cs" />
     <Compile Include="Models\Raw\kcsapi_powerup.cs" />
     <Compile Include="Models\Raw\kcsapi_remodel_slot.cs" />
+    <Compile Include="Models\SlotItemType.cs" />
+    <Compile Include="Models\TranslationType.cs" />
+    <Compile Include="Models\ViewRange.cs" />
+    <Compile Include="OracleOfCompass.cs" />
     <Compile Include="Organization.cs" />
     <Compile Include="KanColleProxy.Endpoints.cs">
       <AutoGen>True</AutoGen>
@@ -165,10 +172,9 @@
     <Compile Include="Models\RepairingDockState.cs" />
     <Compile Include="Models\ShipType.cs" />
     <Compile Include="Models\ShipTypeId.cs" />
-    <Compile Include="Models\SlotItemType.cs" />
+    <Compile Include="Models\SlotItemIconType.cs" />
     <Compile Include="Models\Speed.cs" />
     <Compile Include="Models\ModernizableStatus.cs" />
-    <Compile Include="Models\TranslationType.cs" />
     <Compile Include="Models\UseItemInfo.cs" />
     <Compile Include="Models\Raw\kcsapi_ship2.cs" />
     <Compile Include="Models\Raw\svdata.cs" />
@@ -189,7 +195,6 @@
     <Compile Include="Models\SlotItem.cs" />
     <Compile Include="Models\SlotItemInfo.cs" />
     <Compile Include="Models\UseItem.cs" />
-    <Compile Include="DynamicJson.cs" />
     <Compile Include="Homeport.cs" />
     <Compile Include="Internal\RetryObservableExtensions.cs" />
     <Compile Include="KanColleError.cs" />
@@ -199,28 +204,23 @@
     <Compile Include="KanColleProxy.cs" />
     <Compile Include="Master.cs" />
     <Compile Include="MasterTable.cs" />
-    <Compile Include="OracleOfCompass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quests.cs" />
     <Compile Include="Repairyard.cs" />
-    <Compile Include="Translations.cs" />
-    <Compile Include="Updater.cs" />
     <Compile Include="KanColleClientSettings.cs" />
     <Compile Include="TimerNotifier.cs" />
+    <Compile Include="Translations.cs" />
+    <Compile Include="Updater.cs" />
     <Compile Include="Win32\INTERNET_PROXY_INFO.cs" />
     <Compile Include="Win32\NativeMethods.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="app.config" />
     <None Include="KanColleProxy.Endpoints.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>KanColleProxy.Endpoints.cs</LastGenOutput>
     </None>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -1,4 +1,8 @@
-﻿using Grabacr07.KanColleWrapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Livet;
 using Livet.EventListeners;
@@ -9,9 +13,12 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 	{
 		#region Model 変更通知プロパティ
 
-		public Admiral Model => KanColleClient.Current.Homeport.Admiral;
+		public Admiral Model
+		{
+			get { return KanColleClient.Current.Homeport.Admiral; }
+		}
 
-	    #endregion
+		#endregion
 
 		public AdmiralViewModel()
 		{

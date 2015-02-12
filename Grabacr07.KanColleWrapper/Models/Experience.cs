@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
@@ -9,7 +12,7 @@ namespace Grabacr07.KanColleWrapper.Models
 	{
 		public int Level { get; private set; }
 		public int Next { get; private set; }
-		public int Total { get; }
+		public int Total { get; private set; }
 
 		private Experience(int level, int next, int total)
 		{

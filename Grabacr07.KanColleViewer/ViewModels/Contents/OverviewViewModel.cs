@@ -1,9 +1,12 @@
-﻿using Grabacr07.KanColleViewer.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleViewer.ViewModels.Catalogs;
 using Livet.Messaging;
-using System;
 using System.Windows;
+using Grabacr07.KanColleViewer.Models;
 using Settings2 = Grabacr07.KanColleViewer.Models.Settings;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents
@@ -72,7 +75,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 		#endregion
 
-		public MainContentViewModel Content { get; }
+		public MainContentViewModel Content { get; private set; }
 
 
 		public OverviewViewModel(MainContentViewModel owner)

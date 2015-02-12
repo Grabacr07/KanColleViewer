@@ -11,11 +11,17 @@ namespace Grabacr07.KanColleViewer.ViewModels.Composition
 	{
 		public ToolViewModel(Lazy<IToolPlugin, IPluginMetadata> plugin) : base(plugin) { }
 
-		public string ToolName => this.Plugin.ToolName;
+		public string ToolName
+		{
+			get { return this.Plugin.ToolName; }
+		}
 
-	    public object View => this.Plugin.GetToolView();
+		public object View
+		{
+			get { return this.Plugin.GetToolView(); }
+		}
 
-	    public override string ToString()
+		public override string ToString()
 		{
 			return this.Title;
 		}

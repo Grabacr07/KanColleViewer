@@ -11,9 +11,12 @@ namespace Grabacr07.KanColleWrapper.Models
 	/// </summary>
 	public class CreatedSlotItem : RawDataWrapper<kcsapi_createitem>
 	{
-		public bool Succeed => this.RawData.api_create_flag == 1;
+		public bool Succeed
+		{
+		    get { return this.RawData.api_create_flag == 1; }
+		}
 
-	    public SlotItemInfo SlotItemInfo { get; }
+	    public SlotItemInfo SlotItemInfo { get; private set; }
 
 		public CreatedSlotItem(kcsapi_createitem rawData)
 			: base(rawData)

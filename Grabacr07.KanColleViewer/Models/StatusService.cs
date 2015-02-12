@@ -1,7 +1,11 @@
-﻿using Livet;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using System.Text;
+using System.Threading.Tasks;
+using Livet;
 
 namespace Grabacr07.KanColleViewer.Models
 {
@@ -13,9 +17,13 @@ namespace Grabacr07.KanColleViewer.Models
 		#region static members
 
 		private static readonly StatusService current = new StatusService();
-		public static StatusService Current => current;
 
-	    #endregion
+		public static StatusService Current
+		{
+			get { return current; }
+		}
+
+		#endregion
 
 		private readonly Subject<string> notifier;
 		private string persisitentMessage = "";

@@ -2,7 +2,6 @@
 using Grabacr07.KanColleWrapper.Models.Raw;
 using Livet;
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 
@@ -19,9 +18,12 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// <see cref="SlotItems"/> と、出撃中に入手したものを含んだ装備数を取得します。
 		/// </summary>
-		public int SlotItemsCount => this.SlotItems.Count + this.droppedItemsCount;
+		public int SlotItemsCount
+		{
+			get { return this.SlotItems.Count + this.droppedItemsCount; }
+		}
 
-	    #region SlotItems 変更通知プロパティ
+		#region SlotItems 変更通知プロパティ
 
 		private MemberTable<SlotItem> _SlotItems;
 
@@ -105,9 +107,9 @@ namespace Grabacr07.KanColleWrapper
 
 		internal void RemoveFromShip(Ship ship)
 		{
-			foreach (var x in ship.SlotItems.Where(x => x != null).ToArray())
+			foreach (var x in ship.Slots.Where(x => x.Equipped).ToArray())
 			{
-				this.SlotItems.Remove(x);
+				this.SlotItems.Remove(x.Item);
 			}
 			this.RaiseSlotItemsChanged();
 		}

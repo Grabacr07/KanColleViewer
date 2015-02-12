@@ -3,7 +3,6 @@ using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleViewer.ViewModels.Composition;
 using Grabacr07.KanColleViewer.ViewModels.Messages;
-using Grabacr07.KanColleViewer.Views.Controls;
 using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Livet.EventListeners;
@@ -47,9 +46,12 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#region CanOpenScreenshotFolder 変更通知プロパティ
 
-		public bool CanOpenScreenshotFolder => Directory.Exists(this.ScreenshotFolder);
+		public bool CanOpenScreenshotFolder
+		{
+			get { return Directory.Exists(this.ScreenshotFolder); }
+		}
 
-	    #endregion
+		#endregion
 
 		#region ScreenshotImageFormat 変更通知プロパティ
 
@@ -238,7 +240,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		}
 
 		#endregion
-		
+
 		#region EnableCriticalNotify 変更通知プロパティ
 
 		public bool EnableCriticalNotify

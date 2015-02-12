@@ -1,10 +1,11 @@
-﻿using Grabacr07.KanColleWrapper.Internal;
-using Grabacr07.KanColleWrapper.Models.Raw;
-using Livet;
-using Livet.EventListeners.WeakEvents;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Grabacr07.KanColleWrapper.Models.Raw;
+using Grabacr07.KanColleWrapper.Internal;
+using Livet;
+using Livet.EventListeners.WeakEvents;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
@@ -209,12 +210,12 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 艦隊に編成されている艦娘のコンディションを取得します。
 		/// </summary>
-		public FleetCondition Condition { get; }
+		public FleetCondition Condition { get; private set; }
 
 		/// <summary>
 		/// 艦隊の遠征に関するステータスを取得します。
 		/// </summary>
-		public Expedition Expedition { get; }
+		public Expedition Expedition { get; private set; }
 
 		#region IsReady 変更通知プロパティ
 
