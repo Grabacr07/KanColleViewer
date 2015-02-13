@@ -137,6 +137,7 @@ namespace Grabacr07.KanColleViewer.Plugins
             {
                 this.notifyIcon.Dispose();
                 this.mp.Close();
+                this.mp = null;
             }
         }
     }
