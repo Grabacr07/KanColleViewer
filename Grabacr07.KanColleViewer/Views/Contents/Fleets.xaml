@@ -164,23 +164,23 @@
 														<Grid.ColumnDefinitions>
 															<ColumnDefinition Width="Auto"
 																			  SharedSizeGroup="SlotItemIcon" />
-                                                            <!--<ColumnDefinition Width="Auto"
+															<!--<ColumnDefinition Width="Auto"
 																			  SharedSizeGroup="SlotItemName" />-->
-                                                            <ColumnDefinition Width="Auto"
+															<ColumnDefinition Width="Auto"
 																			  SharedSizeGroup="SlotItemCurrent" />
 															<ColumnDefinition Width="Auto" />
 															<ColumnDefinition Width="Auto"
 																			  SharedSizeGroup="SlotItemMaximum" />
 														</Grid.ColumnDefinitions>
 
-                                                        <controls:SlotItemIcon Grid.Column="0"
+														<controls:SlotItemIcon Grid.Column="0"
 																			   Type="{Binding Item.Info.IconType}"
 																			   Width="20"
 																			   Height="20">
-                                                            <ToolTipService.ToolTip>
-                                                                <TextBlock Text="{Binding Item.Info.Name}"/>
-                                                            </ToolTipService.ToolTip>
-                                                        </controls:SlotItemIcon>
+															<ToolTipService.ToolTip>
+																<TextBlock Text="{Binding Item.Info.Name}"/>
+															</ToolTipService.ToolTip>
+														</controls:SlotItemIcon>
 														<!--<TextBlock Grid.Column="1"
 																   Text="{Binding Item.Info.Name}"
 																   Margin="4,0,8,0"
