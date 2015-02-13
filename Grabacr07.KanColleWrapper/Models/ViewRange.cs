@@ -32,7 +32,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		public static ICalcViewRange Get(string key)
 		{
 			ICalcViewRange logic;
-			return logics.TryGetValue(key, out logic) ? logic : new ViewRangeType1();
+			return logics.TryGetValue("Type2", out logic) ? logic : new ViewRangeType1();
 		}
 
 		public abstract string Key { get; }
@@ -102,6 +102,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 			var spotter = fleet.Ships.SelectMany(
 				x => x.Slots
+					.Where(s=>s.Equipped)
 					.Where(s => s.Item.Info.RawData.api_type.Get(1) == 7)
 					.Where(s => s.Current > 0)
 					.Select(s => s.Item.Info.RawData.api_saku)
@@ -109,6 +110,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 			var radar = fleet.Ships.SelectMany(
 				x => x.Slots
+					.Where(s=>s.Equipped)
 					.Where(s => s.Item.Info.RawData.api_type.Get(1) == 8)
 					.Select(s => s.Item.Info.RawData.api_saku)
 				).Sum();
