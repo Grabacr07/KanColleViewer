@@ -633,6 +633,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+
 		#region ViewRangeType1 変更通知プロパティ
 
 		private bool _ViewRangeType1;
@@ -646,7 +647,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				{
 					this._ViewRangeType1 = value;
 					this.RaisePropertyChanged();
-					if (value) Settings.Current.KanColleClientSettings.ViewRangeCalcLogic = ViewRangeCalcLogic.Type1;
+					//if (value) Settings.Current.KanColleClientSettings.ViewRangeCalcLogic = ViewRangeCalcLogic.Type1;
 				}
 			}
 		}
@@ -666,7 +667,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				{
 					this._ViewRangeType2 = value;
 					this.RaisePropertyChanged();
-					if (value) Settings.Current.KanColleClientSettings.ViewRangeCalcLogic = ViewRangeCalcLogic.Type2;
+					//if (value) Settings.Current.KanColleClientSettings.ViewRangeCalcLogic = ViewRangeCalcLogic.Type2;
 				}
 			}
 		}
@@ -727,6 +728,9 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			});
 			this.BrowserZoomFactor = zoomFactor;
 
+			//this._ViewRangeType1 = Settings.Current.KanColleClientSettings.ViewRangeCalcLogic == ViewRangeCalcLogic.Type1;
+			//this._ViewRangeType2 = Settings.Current.KanColleClientSettings.ViewRangeCalcLogic == ViewRangeCalcLogic.Type2;
+
 			var orientationMode = new WindowOrientaionMode { CurrentMode = Settings.Current.OrientationMode };
 			this.CompositeDisposable.Add(orientationMode);
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(orientationMode)
@@ -736,9 +740,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			});
 			Settings.Current.Orientation = orientationMode.Current;
 			this.Orientation = orientationMode;
-
-			this._ViewRangeType1 = Settings.Current.KanColleClientSettings.ViewRangeCalcLogic == ViewRangeCalcLogic.Type1;
-			this._ViewRangeType2 = Settings.Current.KanColleClientSettings.ViewRangeCalcLogic == ViewRangeCalcLogic.Type2;
 
 			this.ReloadPlugins();
 		}

@@ -1,19 +1,21 @@
-﻿using Grabacr07.KanColleViewer.Composition;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
+using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.ViewModels;
 using Grabacr07.KanColleViewer.Views;
-using Grabacr07.KanColleViewer.Views.Controls;
 using Grabacr07.KanColleWrapper;
 using Livet;
 using MetroRadiance;
-using System;
-using System.Diagnostics;
-using System.IO;
-using System.IO.Compression;
-using System.Net;
-using System.Windows;
 using AppSettings = Grabacr07.KanColleViewer.Properties.Settings;
 using Settings = Grabacr07.KanColleViewer.Models.Settings;
+using System.IO.Compression;
+using System.Net;
 
 namespace Grabacr07.KanColleViewer
 {
@@ -26,6 +28,7 @@ namespace Grabacr07.KanColleViewer
 		{
 			AppDomain.CurrentDomain.UnhandledException += (sender, args) => ReportException(sender, args.ExceptionObject as Exception);
 		}
+
 		protected override void OnStartup(StartupEventArgs e)
 		{
 			base.OnStartup(e);
@@ -63,6 +66,7 @@ namespace Grabacr07.KanColleViewer
 			PluginHost.Instance.Initialize();
 			NotifierHost.Instance.Initialize(KanColleClient.Current);
 			Helper.SetRegistryFeatureBrowserEmulation();
+			Helper.SetMMCSSTask();
 
 			KanColleClient.Current.Proxy.Startup(AppSettings.Default.LocalProxyPort);
 			KanColleClient.Current.Proxy.UpstreamProxySettings = Settings.Current.ProxySettings;
