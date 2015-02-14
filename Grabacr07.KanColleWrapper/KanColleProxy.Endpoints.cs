@@ -208,6 +208,22 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
+		/// 엔드포인트 "/kcsapi/api_req_kousyou/remodel_slotlist" 에서 세션을 제공합니다.
+		/// </summary>
+		public IObservable<Session> api_req_kousyou_remodel_slotlist
+		{
+			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_kousyou/remodel_slotlist"); }
+		}
+
+		/// <summary>
+		/// 엔드포인트 "/kcsapi/api_req_kousyou/remodel_slotlist_detail" 에서 세션을 제공합니다.
+		/// </summary>
+		public IObservable<Session> api_req_kousyou_remodel_slotlist_detail
+		{
+			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_kousyou/remodel_slotlist_detail"); }
+		}
+
+		/// <summary>
 		/// 엔드포인트 "/kcsapi/api_req_nyukyo/start" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_nyukyo_start
