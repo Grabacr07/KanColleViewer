@@ -12,6 +12,7 @@
 			 xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
 			 xmlns:fleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 			 xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
+			 xmlns:converters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters"
 			 mc:Ignorable="d"
 			 d:DesignWidth="800"
 			 d:DesignHeight="400"
@@ -321,6 +322,19 @@
 												   HorizontalAlignment="Center" />
 									</Grid>
 
+									<Grid x:Name="EvacuationIndicator"
+										  Grid.Column="4"
+										  Grid.Row="0"
+										  Grid.RowSpan="2"
+										  Visibility="Collapsed">
+										<Border Background="{DynamicResource FleetRepairingBrushKey}"
+												Opacity=".4"
+												Margin="5,0" />
+										<TextBlock Text="退避済"
+												   Style="{DynamicResource EmphaticTextStyleKey}"
+												   HorizontalAlignment="Center" />
+									</Grid>
+
 									<TextBlock Grid.Column="5"
 											   Grid.Row="0"
 											   Margin="10,0,10,10"
@@ -379,8 +393,8 @@
 							</StackPanel>
 
 							<DataTemplate.Triggers>
-								<DataTrigger Binding="{Binding Ship.IsInRepairing}"
-											 Value="True">
+								<DataTrigger Binding="{Binding Ship.Status}"
+											 Value="Repair">
 									<Setter TargetName="HPText"
 											Property="Opacity"
 											Value=".2" />
@@ -388,6 +402,18 @@
 											Property="Opacity"
 											Value=".2" />
 									<Setter TargetName="RepairIndicator"
+											Property="Visibility"
+											Value="Visible" />
+								</DataTrigger>
+								<DataTrigger Binding="{Binding Ship.Status}"
+											 Value="Evacuation,Tow">
+									<Setter TargetName="HPText"
+											Property="Opacity"
+											Value=".2" />
+									<Setter TargetName="HPIndicator"
+											Property="Opacity"
+											Value=".2" />
+									<Setter TargetName="EvacuationIndicator"
 											Property="Visibility"
 											Value="Visible" />
 								</DataTrigger>
