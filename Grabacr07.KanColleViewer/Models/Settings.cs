@@ -21,7 +21,7 @@ namespace Grabacr07.KanColleViewer.Models
 			"grabacr.net",
 			"KanColleViewer",
 			"Settings.xml");
-		private static readonly string CurrentSettingsVersion = "1.5";
+		private static readonly string CurrentSettingsVersion = "1.6";
 		public static Settings Current { get; set; }
 
 		public delegate void EventHandler();
@@ -64,6 +64,7 @@ namespace Grabacr07.KanColleViewer.Models
 				NotifyExpeditionReturned = true,
 				CustomSoundVolume = 99,
 				EnableBattlePreview = true,
+				EnableMMCSS = true,
 				OrientationMode = OrientationType.Auto,
 				HorizontalSize = new Point(1280, 0),
 				VerticalSize = new Point(0, 1000),
@@ -303,7 +304,7 @@ namespace Grabacr07.KanColleViewer.Models
 			get { return this.ProxySettings.Host; }
 			set { this.ProxySettings.Host = value; }
 		}
-		
+
 		public ushort ProxyPort
 		{
 			get { return this.ProxySettings.Port; }
@@ -604,6 +605,25 @@ namespace Grabacr07.KanColleViewer.Models
 				if (this._EnableBattlePreview != value)
 				{
 					this._EnableBattlePreview = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region EnableMMCSS 変更通知プロパティ
+
+		private bool _EnableMMCSS;
+
+		public bool EnableMMCSS
+		{
+			get { return this._EnableMMCSS; }
+			set
+			{
+				if (this._EnableMMCSS != value)
+				{
+					this._EnableMMCSS = value;
 					this.RaisePropertyChanged();
 				}
 			}

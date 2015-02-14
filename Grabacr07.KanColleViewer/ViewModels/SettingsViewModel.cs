@@ -276,6 +276,23 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region EnableMMCSS 変更通知プロパティ
+
+		public bool EnableMMCSS
+		{
+			get { return Settings.Current.EnableMMCSS; }
+			set
+			{
+				if (Settings.Current.EnableMMCSS != value)
+				{
+					Settings.Current.EnableMMCSS = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		#region EnableCriticalAccent 変更通知プロパティ
 
 		public bool EnableCriticalAccent
