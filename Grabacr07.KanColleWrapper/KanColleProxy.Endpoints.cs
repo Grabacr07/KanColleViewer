@@ -8,13 +8,12 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Fiddler;
+// ReSharper disable InconsistentNaming
 
 namespace Grabacr07.KanColleWrapper
 {
 	partial class KanColleProxy
 	{
-		// ReSharper disable InconsistentNaming
-
 		/// <summary>
 		/// エンド ポイント "/kcsapi/api_start2" からのセッションを配信します。
 		/// </summary>
@@ -200,6 +199,30 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
+		/// エンド ポイント "/kcsapi/api_req_kousyou/remodel_slotlist" からのセッションを配信します。
+		/// </summary>
+		public IObservable<Session> api_req_kousyou_remodel_slotlist
+		{
+			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_kousyou/remodel_slotlist"); }
+		}
+
+		/// <summary>
+		/// エンド ポイント "/kcsapi/api_req_kousyou/remodel_slotlist_detail" からのセッションを配信します。
+		/// </summary>
+		public IObservable<Session> api_req_kousyou_remodel_slotlist_detail
+		{
+			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_kousyou/remodel_slotlist_detail"); }
+		}
+
+		/// <summary>
+		/// エンド ポイント "/kcsapi/api_req_kousyou/remodel_slot" からのセッションを配信します。
+		/// </summary>
+		public IObservable<Session> api_req_kousyou_remodel_slot
+		{
+			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_kousyou/remodel_slot"); }
+		}
+
+		/// <summary>
 		/// エンド ポイント "/kcsapi/api_req_nyukyo/start" からのセッションを配信します。
 		/// </summary>
 		public IObservable<Session> api_req_nyukyo_start
@@ -303,6 +326,5 @@ namespace Grabacr07.KanColleWrapper
 			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_combined_battle/goback_port"); }
 		}
 
-		// ReSharper restore InconsistentNaming
 	}
 }

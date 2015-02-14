@@ -31,6 +31,9 @@
 		"/kcsapi/api_req_kousyou/createship_speedchange",
 		"/kcsapi/api_req_kousyou/destroyship",
 		"/kcsapi/api_req_kousyou/destroyitem2",
+		"/kcsapi/api_req_kousyou/remodel_slotlist",
+		"/kcsapi/api_req_kousyou/remodel_slotlist_detail",
+		"/kcsapi/api_req_kousyou/remodel_slot",
 		"/kcsapi/api_req_nyukyo/start",
 		"/kcsapi/api_req_nyukyo/speedchange",
 		"/kcsapi/api_req_map/start",
@@ -56,13 +59,12 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Fiddler;
+// ReSharper disable InconsistentNaming
 
 namespace Grabacr07.KanColleWrapper
 {
 	partial class KanColleProxy
 	{
-		// ReSharper disable InconsistentNaming
-
 <#
 	foreach (var endpoint in endpoints)
 	{	
@@ -85,6 +87,5 @@ namespace Grabacr07.KanColleWrapper
 <#
 	}
 #>
-		// ReSharper restore InconsistentNaming
 	}
 }
