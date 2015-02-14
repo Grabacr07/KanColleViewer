@@ -55,6 +55,7 @@
 			<Grid Grid.Row="3"
 				  DataContext="{Binding SelectedFleet}"
 				  d:DataContext="{d:DesignData /SampleData/FleetViewModelSampleData.xaml}">
+
 				<ItemsControl ItemsSource="{Binding Ships}"
 							  Margin="0,0,0,10"
 							  Grid.IsSharedSizeScope="True">
@@ -93,6 +94,7 @@
 														  SharedSizeGroup="SlotItems" />
 									</Grid.ColumnDefinitions>
 
+
 									<TextBlock Grid.Column="1"
 											   Grid.Row="0"
 											   Grid.RowSpan="2"
@@ -116,17 +118,17 @@
 											   TextWrapping="NoWrap">
 										<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
 											 FontSize="22"
-											 Style="{DynamicResource EmphaticTextElementStyleKey}"/>
-										<TextBlock.ToolTip>
-											<TextBlock Margin="0,-2,0,0">
-												<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
-													 Style="{DynamicResource EmphaticTextElementStyleKey}"
-													 FontSize="14"/>
-												<LineBreak />
-												<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
-													 FontSize="11" />
+											 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+										<TextBlock.ToolTip> 
+ 											<TextBlock Margin="0,-2,0,0"> 
+ 												<Run Text="{Binding Ship.Info.Name, Mode=OneWay}" 
+													 Style="{DynamicResource EmphaticTextElementStyleKey}" 
+ 													 FontSize="14"/> 
+ 												<LineBreak /> 
+												<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}" 
+													 FontSize="11" /> 
 											</TextBlock>
-										</TextBlock.ToolTip>
+										</TextBlock.ToolTip> 
 									</TextBlock>
 
 									<TextBlock Grid.Column="3"
@@ -212,7 +214,7 @@
 									<ItemsControl Grid.Column="7"
 												  Grid.Row="0"
 												  Grid.RowSpan="2"
-												  ItemsSource="{Binding Ship.SlotItems}"
+												  ItemsSource="{Binding Ship.EquippedSlots}"
 												  Margin="7,0">
 										<ItemsControl.Template>
 											<ControlTemplate TargetType="{x:Type ItemsControl}">
@@ -222,17 +224,17 @@
 										</ItemsControl.Template>
 										<ItemsControl.ItemTemplate>
 											<DataTemplate>
-												<Grid ToolTip="{Binding Info.Name}"
+												<Grid ToolTip="{Binding Item.Info.Name}"
 														Background="Transparent">
 													<TextBlock 
 														Foreground="White" Background="#33000000" 
-														Text="{Binding ItemLv}" 
+														Text="{Binding Item.ItemLv}" 
 														VerticalAlignment="Bottom" 
 														HorizontalAlignment="Right" 
 														Panel.ZIndex="1" 
 														Width="Auto" 
 														Height="15"/>
-													<controls:SlotItemIcon Type="{Binding Info.IconType}"
+													<controls:SlotItemIcon Type="{Binding Item.Info.IconType}"
 																		   Margin="3,0" />
 												</Grid>
 											</DataTemplate>

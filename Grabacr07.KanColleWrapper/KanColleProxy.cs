@@ -1,10 +1,14 @@
-﻿using Fiddler;
-using Grabacr07.KanColleWrapper.Win32;
-using Livet;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
+using Fiddler;
+using Grabacr07.KanColleWrapper.Win32;
+using Livet;
 
 namespace Grabacr07.KanColleWrapper
 {
@@ -14,9 +18,15 @@ namespace Grabacr07.KanColleWrapper
 		private readonly IConnectableObservable<Session> apiSource;
 		private readonly LivetCompositeDisposable compositeDisposable;
 
-		public IObservable<Session> SessionSource => this.connectableSessionSource.AsObservable();
+		public IObservable<Session> SessionSource
+		{
+		    get { return this.connectableSessionSource.AsObservable(); }
+		}
 
-	    public IObservable<Session> ApiSessionSource => this.apiSource.AsObservable();
+	    public IObservable<Session> ApiSessionSource
+	    {
+	        get { return this.apiSource.AsObservable(); }
+	    }
 
 	    public IProxySettings UpstreamProxySettings { get; set; }
 

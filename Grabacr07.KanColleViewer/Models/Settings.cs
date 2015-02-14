@@ -1,11 +1,13 @@
-﻿using Grabacr07.KanColleViewer.Models.Data.Xml;
-using Grabacr07.KanColleViewer.Views;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Xml.Serialization;
+using Grabacr07.KanColleViewer.Models.Data.Xml;
 using Grabacr07.KanColleWrapper;
 using Livet;
-using System;
-using System.IO;
 using System.Windows;
-using System.Xml.Serialization;
 
 namespace Grabacr07.KanColleViewer.Models
 {
@@ -61,7 +63,7 @@ namespace Grabacr07.KanColleViewer.Models
 				NotifyRepairingCompleted = true,
 				NotifyExpeditionReturned = true,
 				CustomSoundVolume = 99,
-				EnableBattlePreview=true,
+				EnableBattlePreview = true,
 				OrientationMode = OrientationType.Auto,
 				HorizontalSize = new Point(1280, 0),
 				VerticalSize = new Point(0, 1000),

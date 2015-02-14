@@ -1,9 +1,11 @@
-﻿using Grabacr07.KanColleViewer.ViewModels.Catalogs;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper;
 using Livet.EventListeners;
+using Grabacr07.KanColleViewer.ViewModels.Catalogs;
 using Livet.Messaging;
-using System;
-using System.Linq;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents
 {
@@ -53,7 +55,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 		#endregion
 
-		public CreatedSlotItemViewModel CreatedSlotItem { get; }
+		public CreatedSlotItemViewModel CreatedSlotItem { get; private set; }
 
 
 		public ShipyardViewModel()

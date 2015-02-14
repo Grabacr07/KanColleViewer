@@ -1,5 +1,10 @@
-﻿using Livet;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Grabacr07.KanColleWrapper.Models;
+using Livet;
 
 namespace Grabacr07.KanColleWrapper
 {
@@ -50,18 +55,18 @@ namespace Grabacr07.KanColleWrapper
 
 		#endregion
 
-		#region ViewRangeCalcLogic 変更通知プロパティ
+		#region ViewRangeCalcType 変更通知プロパティ
 
-		private ViewRangeCalcLogic _ViewRangeCalcLogic;
+		private string _ViewRangeCalcType;
 
-		public ViewRangeCalcLogic ViewRangeCalcLogic
+		public string ViewRangeCalcType
 		{
-			get { return this._ViewRangeCalcLogic; }
+			get { return this._ViewRangeCalcType ?? (this._ViewRangeCalcType = new ViewRangeType1().Id); }
 			set
 			{
-				if (this._ViewRangeCalcLogic != value)
+				if (this._ViewRangeCalcType != value)
 				{
-					this._ViewRangeCalcLogic = value;
+					this._ViewRangeCalcType = value;
 					this.RaisePropertyChanged();
 				}
 			}
