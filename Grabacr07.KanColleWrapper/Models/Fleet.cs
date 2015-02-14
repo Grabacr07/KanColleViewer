@@ -435,7 +435,9 @@ namespace Grabacr07.KanColleWrapper.Models
 		internal void UpdateStatus()
 		{
 			this.Condition.Update(this.Ships);
-			this.IsWounded = this.Ships.Any(s => (s.HP.Current / (double)s.HP.Maximum) <= 0.25);
+			this.IsWounded = this.Ships
+				.Where(s => !s.Status.HasFlag(ShipStatus.Evacuation) && !s.Status.HasFlag(ShipStatus.Tow))
+				.Any(s => (s.HP.Current / (double)s.HP.Maximum) <= 0.25);
 			this.IsRepairling = this.homeport.Repairyard.CheckRepairing(this);
 			this.IsInShortSupply = this.Ships.Any(s => s.Fuel.Current < s.Fuel.Maximum || s.Bull.Current < s.Bull.Maximum);
 
