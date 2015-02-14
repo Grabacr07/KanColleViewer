@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Grabacr07.KanColleWrapper.Models;
 using Livet;
 
 namespace Grabacr07.KanColleWrapper
@@ -47,6 +48,25 @@ namespace Grabacr07.KanColleWrapper
 				if (this._ReSortieCondition != value)
 				{
 					this._ReSortieCondition = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region ViewRangeCalcType 変更通知プロパティ
+
+		private string _ViewRangeCalcType;
+
+		public string ViewRangeCalcType
+		{
+			get { return this._ViewRangeCalcType ?? (this._ViewRangeCalcType = new ViewRangeType1().Id); }
+			set
+			{
+				if (this._ViewRangeCalcType != value)
+				{
+					this._ViewRangeCalcType = value;
 					this.RaisePropertyChanged();
 				}
 			}

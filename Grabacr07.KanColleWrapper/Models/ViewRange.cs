@@ -12,6 +12,8 @@ namespace Grabacr07.KanColleWrapper.Models
 	/// </summary>
 	public interface ICalcViewRange
 	{
+		string Id { get; }
+
 		string Name { get; }
 
 		string Description { get; }
@@ -27,15 +29,25 @@ namespace Grabacr07.KanColleWrapper.Models
 		public static IEnumerable<ICalcViewRange> Logics
 		{
 			get { return logics.Values; }
-		} 
+		}
 
 		public static ICalcViewRange Get(string key)
 		{
 			ICalcViewRange logic;
-			return logics.TryGetValue("Type2", out logic) ? logic : new ViewRangeType1();
+			return logics.TryGetValue(key, out logic) ? logic : new ViewRangeType1();
 		}
 
-		public abstract string Key { get; }
+		static ViewRangeCalcLogic()
+		{
+			// ひどぅい設計を見た
+			// ReSharper disable ObjectCreationAsStatement
+			new ViewRangeType1();
+			new ViewRangeType2();
+			new ViewRangeType3();
+			// ReSharper restore ObjectCreationAsStatement
+		}
+
+		public abstract string Id { get; }
 		public abstract string Name { get; }
 		public abstract string Description { get; }
 		public abstract double Calc(Fleet fleet);
@@ -43,7 +55,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		protected ViewRangeCalcLogic()
 		{
 			// ReSharper disable once DoNotCallOverridableMethodsInConstructor
-			var key = this.Key;
+			var key = this.Id;
 			if (key != null && !logics.ContainsKey(key)) logics.Add(key, this);
 		}
 	}
@@ -51,19 +63,19 @@ namespace Grabacr07.KanColleWrapper.Models
 
 	public class ViewRangeType1 : ViewRangeCalcLogic
 	{
-		public override sealed string Key
+		public override sealed string Id
 		{
-			get { return "Type1"; }
+			get { return "KanColleViewer.Type1"; }
 		}
 
 		public override string Name
 		{
-			get { return "単純計算"; }
+			get { return "단순계산"; }
 		}
 
 		public override string Description
 		{
-			get { return "艦娘と装備の索敵値の単純な合計値"; }
+			get { return "칸무스와 장비의 색적값 단순합계"; }
 		}
 
 		public override double Calc(Fleet fleet)
@@ -77,19 +89,19 @@ namespace Grabacr07.KanColleWrapper.Models
 
 	public class ViewRangeType2 : ViewRangeCalcLogic
 	{
-		public override sealed string Key
+		public override sealed string Id
 		{
-			get { return "Type2"; }
+			get { return "KanColleViewer.Type2"; }
 		}
 
 		public override string Name
 		{
-			get { return "2-5 式 (旧)"; }
+			get { return "예전 2-5 식"; }
 		}
 
 		public override string Description
 		{
-			get { return "(偵察機 × 2) + (電探) + √(装備込みの艦隊索敵値合計 - 偵察機 - 電探)"; }
+			get { return "(정찰기 × 2) + (전탐) + √(장비를 포함한 함대색적치 합계 - 정찰기 - 전탐)"; }
 		}
 
 		public override double Calc(Fleet fleet)
@@ -101,16 +113,14 @@ namespace Grabacr07.KanColleWrapper.Models
 			// stype=7 が偵察機 (2 倍する索敵値)、stype=8 が電探
 
 			var spotter = fleet.Ships.SelectMany(
-				x => x.Slots
-					.Where(s=>s.Equipped)
+				x => x.EquippedSlots
 					.Where(s => s.Item.Info.RawData.api_type.Get(1) == 7)
 					.Where(s => s.Current > 0)
 					.Select(s => s.Item.Info.RawData.api_saku)
 				).Sum();
 
 			var radar = fleet.Ships.SelectMany(
-				x => x.Slots
-					.Where(s=>s.Equipped)
+				x => x.EquippedSlots
 					.Where(s => s.Item.Info.RawData.api_type.Get(1) == 8)
 					.Select(s => s.Item.Info.RawData.api_saku)
 				).Sum();
@@ -122,24 +132,24 @@ namespace Grabacr07.KanColleWrapper.Models
 
 	public class ViewRangeType3 : ViewRangeCalcLogic
 	{
-		public override sealed string Key
+		public override sealed string Id
 		{
-			get { return "Type3"; }
+			get { return "KanColleViewer.Type3"; }
 		}
 
 		public override string Name
 		{
-			get { return "2-5 式 (秋)"; }
+			get { return "2-5 식 (가을)"; }
 		}
 
 		public override string Description
 		{
 			get
 			{
-				return @"(艦上爆撃機 × 1.04) + (艦上攻撃機 × 1.37) + (艦上偵察機 × 1.66)
-+ (水上偵察機 × 2.00) + (水上爆撃機 × 1.78) + (探照灯 × 0.91)
-+ (小型電探 × 1.00) + (大型電探 × 0.99) + (√各艦毎の素索敵 × 1.69)
-+ (司令部レベルを 5 の倍数に切り上げ × -0.61)";
+				return @"(함상폭격기 × 1.04) + (함상공격기 × 1.37) + (함상정찰기 × 1.66)
++ (수상정찰기 × 2.00) + (수상폭격기 × 1.78) + (탐조등 × 0.91)
++ (소형전탐 × 1.00) + (대형전탐 × 0.99) + (√각함별 기본색적 × 1.69)
++ (진수부 레벨을 5의 배수로 올림 × -0.61)";
 			}
 		}
 
@@ -162,7 +172,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			// > + (司令部レベルを5の倍数に切り上げ) × (-0.61)
 
 			var itemScore = fleet.Ships
-				.SelectMany(x => x.Slots.Where(s => s.Equipped))
+				.SelectMany(x => x.EquippedSlots)
 				.Select(x => x.Item.Info)
 				.GroupBy(
 					x => x.Type,
@@ -171,9 +181,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				.Aggregate(.0, (score, item) => score + GetScore(item.type, item.score));
 
 			var shipScore = fleet.Ships
-				.Select(x => x.ViewRange - x.Slots
-					.Where(s => s.Equipped)
-					.Sum(s => s.Item.Info.RawData.api_saku))
+				.Select(x => x.ViewRange - x.EquippedSlots.Sum(s => s.Item.Info.RawData.api_saku))
 				.Select(x => Math.Sqrt(x))
 				.Sum() * 1.69;
 

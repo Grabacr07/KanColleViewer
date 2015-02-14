@@ -55,7 +55,7 @@
 
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-		
+
 
 		<TextBlock Text="{Binding Resources.Settings_FleetCondition, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
@@ -75,40 +75,24 @@
 		<StackPanel Margin="20,0,0,0">
 			<TextBlock Text="함대의 색적값 계산에 이하의 계산식을 사용" />
 
-			<StackPanel Margin="0,5">
-				<RadioButton IsChecked="{Binding ViewRangeType1}"
-							 Margin="0,5">
-					<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
-							   LineHeight="16">
-						<Run Text="칸무스와 장비의 색적값 단순합"
-							 Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}" />
-						<LineBreak />
-						<Run Text="KanColleViewer 종래의 계산법" />
-					</TextBlock>
-				</RadioButton>
-
-				<RadioButton IsChecked="{Binding ViewRangeType2}"
-							 Margin="0,5">
-					<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
-							   LineHeight="18">
-						<Run Text="(정찰기 × 2) + (전탐) + √(장비를 포함한 함대 색적총합 - 정찰기 - 전탐)"
-							 Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}" />
-						<LineBreak />
-						<Run Text="장비에 의한 색적값이 중요시되는 경우의 계산방법(추정)" />
-						<LineBreak />
-						<Run Text="정찰기" />
-						<Run Text="…" />
-						<Run Text="수상정찰기"
-							 ToolTip="영식수상정찰기、영식 수상관측기、98식 수상정찰기(야간정찰)" />
-						<Run Text="・" />
-						<Run Text="수상폭격기"
-							 ToolTip="즈이운、즈이운(634해군항공대)、시작형 세이란" />
-						<Run Text="・" />
-						<Run Text="함상정찰기"
-							 ToolTip="사이운、2식 함상정찰기" />
-					</TextBlock>
-				</RadioButton>
-			</StackPanel>
+			<ItemsControl ItemsSource="{Binding ViewRangeSettingsCollection}"
+						  Margin="0,5">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<RadioButton IsChecked="{Binding Selected}"
+									 Margin="0,5"
+									 GroupName="ViewRangeCalcLogicSelection">
+							<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+									   LineHeight="18">
+								<Run Text="{Binding Logic.Name, Mode=OneWay}"
+									 Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}" />
+								<LineBreak />
+								<Run Text="{Binding Logic.Description, Mode=OneWay}" />
+							</TextBlock>
+						</RadioButton>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
 		</StackPanel>
 
 		<Rectangle Height="1"

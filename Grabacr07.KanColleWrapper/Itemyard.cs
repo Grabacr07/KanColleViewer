@@ -1,9 +1,13 @@
-﻿using Grabacr07.KanColleWrapper.Models;
-using Grabacr07.KanColleWrapper.Models.Raw;
-using Livet;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
+using Grabacr07.KanColleWrapper.Internal;
+using Grabacr07.KanColleWrapper.Models;
+using Grabacr07.KanColleWrapper.Models.Raw;
+using Livet;
 
 namespace Grabacr07.KanColleWrapper
 {
@@ -107,7 +111,7 @@ namespace Grabacr07.KanColleWrapper
 
 		internal void RemoveFromShip(Ship ship)
 		{
-			foreach (var x in ship.Slots.Where(x => x.Equipped).ToArray())
+			foreach (var x in ship.EquippedSlots.ToArray())
 			{
 				this.SlotItems.Remove(x.Item);
 			}

@@ -59,7 +59,8 @@
 				<ItemsControl ItemsSource="{Binding Ships}"
 							  Grid.IsSharedSizeScope="True"
 							  VerticalAlignment="Top"
-							  Margin="0,0,10,0">
+							  Margin="0,0,10,0"
+							  Visibility="Collapsed">
 					<ItemsControl.ItemsPanel>
 						<ItemsPanelTemplate>
 							<UniformGrid Columns="2" />
@@ -156,7 +157,7 @@
 													  Grid.RowSpan="3"
 													  Grid.Column="2"
 													  Grid.IsSharedSizeScope="True"
-													  ItemsSource="{Binding Ship.Slots}"
+													  ItemsSource="{Binding Slots}"
 													  Margin="8,0">
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
@@ -164,8 +165,8 @@
 														<Grid.ColumnDefinitions>
 															<ColumnDefinition Width="Auto"
 																			  SharedSizeGroup="SlotItemIcon" />
-															<!--<ColumnDefinition Width="Auto"
-																			  SharedSizeGroup="SlotItemName" />-->
+															<ColumnDefinition Width="Auto"
+																			  SharedSizeGroup="SlotItemName" />
 															<ColumnDefinition Width="Auto"
 																			  SharedSizeGroup="SlotItemCurrent" />
 															<ColumnDefinition Width="Auto" />
@@ -174,28 +175,24 @@
 														</Grid.ColumnDefinitions>
 
 														<controls:SlotItemIcon Grid.Column="0"
-																			   Type="{Binding Item.Info.IconType}"
+																			   Type="{Binding Item.IconType}"
 																			   Width="20"
-																			   Height="20">
-															<ToolTipService.ToolTip>
-																<TextBlock Text="{Binding Item.Info.Name}"/>
-															</ToolTipService.ToolTip>
-														</controls:SlotItemIcon>
+																			   Height="20" />
 														<!--<TextBlock Grid.Column="1"
-																   Text="{Binding Item.Info.Name}"
+																   Text="{Binding Item.Name}"
 																   Margin="4,0,8,0"
 																   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 																   Style="{DynamicResource DefaultTextStyleKey}" />-->
-														<TextBlock Grid.Column="1"
+														<TextBlock Grid.Column="2"
 																   Text="{Binding Current}"
 																   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 																   HorizontalAlignment="Right"
 																   Visibility="{Binding Item.IsNumerable, Converter={StaticResource BooleanToVisibilityConverter}}"
 																   Style="{DynamicResource DefaultTextStyleKey}" />
-														<TextBlock Grid.Column="2"
+														<TextBlock Grid.Column="3"
 																   Text=" / "
 																   Style="{DynamicResource DefaultTextStyleKey}" />
-														<TextBlock Grid.Column="3"
+														<TextBlock Grid.Column="4"
 																   Text="{Binding Maximum}"
 																   HorizontalAlignment="Right"
 																   Style="{DynamicResource DefaultTextStyleKey}" />
@@ -216,8 +213,7 @@
 
 				<ItemsControl ItemsSource="{Binding Ships}"
 							  Margin="0,0,0,10"
-							  Grid.IsSharedSizeScope="True"
-							  Visibility="Hidden">
+							  Grid.IsSharedSizeScope="True">
 					<ItemsControl.ItemTemplate>
 						<DataTemplate>
 							<StackPanel>
@@ -269,25 +265,10 @@
 									<TextBlock Grid.Column="2"
 											   Grid.Row="0"
 											   Grid.RowSpan="2"
-											   Margin="4,0,10,0"
-											   MaxWidth="145"
-											   ToolTipService.Placement="Relative"
-											   ToolTipService.HorizontalOffset="-9"
-											   ToolTipService.VerticalOffset="-3"
-											   TextWrapping="NoWrap">
+											   Margin="4,0,10,0">
 										<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
 											 FontSize="22"
-											 Style="{DynamicResource EmphaticTextElementStyleKey}"/>
-										<TextBlock.ToolTip>
-											<TextBlock Margin="0,-2,0,0">
-												<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
-													 Style="{DynamicResource EmphaticTextElementStyleKey}"
-													 FontSize="14"/>
-												<LineBreak />
-												<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
-													 FontSize="11" />
-											</TextBlock>
-										</TextBlock.ToolTip>
+											 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 									</TextBlock>
 
 									<TextBlock Grid.Column="3"
@@ -335,7 +316,7 @@
 										<Border Background="{DynamicResource FleetRepairingBrushKey}"
 												Opacity=".4"
 												Margin="5,0" />
-										<TextBlock Text="입거중"
+										<TextBlock Text="入渠中"
 												   Style="{DynamicResource EmphaticTextStyleKey}"
 												   HorizontalAlignment="Center" />
 									</Grid>
@@ -353,8 +334,8 @@
 									<TextBlock Grid.Column="5"
 											   Grid.Row="1"
 											   Margin="10,0,10,-1">
-										<Run Text="컨디션"
-											 FontSize="8" />
+										<Run Text="condition"
+											 FontSize="9" />
 									</TextBlock>
 
 									<controls:ColorIndicator Grid.Column="6"
@@ -373,7 +354,7 @@
 									<ItemsControl Grid.Column="7"
 												  Grid.Row="0"
 												  Grid.RowSpan="2"
-												  ItemsSource="{Binding Ship.SlotItems}"
+												  ItemsSource="{Binding Ship.EquippedSlots}"
 												  Margin="7,0">
 										<ItemsControl.Template>
 											<ControlTemplate TargetType="{x:Type ItemsControl}">
@@ -383,19 +364,11 @@
 										</ItemsControl.Template>
 										<ItemsControl.ItemTemplate>
 											<DataTemplate>
-												<Grid ToolTip="{Binding Info.Name}"
+												<Border ToolTip="{Binding Item.Info.Name}"
 														Background="Transparent">
-													<TextBlock 
-														Foreground="White" Background="#33000000" 
-														Text="{Binding ItemLv}" 
-														VerticalAlignment="Bottom" 
-														HorizontalAlignment="Right" 
-														Panel.ZIndex="1" 
-														Width="Auto" 
-														Height="15"/>
-													<controls:SlotItemIcon Type="{Binding Info.IconType}"
+													<controls:SlotItemIcon Type="{Binding Item.Info.IconType}"
 																		   Margin="3,0" />
-												</Grid>
+												</Border>
 											</DataTemplate>
 										</ItemsControl.ItemTemplate>
 									</ItemsControl>

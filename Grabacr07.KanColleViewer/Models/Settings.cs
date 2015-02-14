@@ -409,25 +409,6 @@ namespace Grabacr07.KanColleViewer.Models
 
 		#endregion
 
-		#region ViewRangeCalcType 変更通知プロパティ
-
-		private string _ViewRangeCalcType;
-
-		public string ViewRangeCalcType
-		{
-			get { return this._ViewRangeCalcType; }
-			set
-			{
-				if (this._ViewRangeCalcType != value)
-				{
-					this._ViewRangeCalcType = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
 		#region EnableLogging 変更通知プロパティ
 
 		private bool _EnableLogging;
