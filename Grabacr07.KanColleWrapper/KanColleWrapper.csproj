@@ -123,6 +123,8 @@
     <Compile Include="Models\Raw\kcsapi_mission_result.cs" />
     <Compile Include="Models\Raw\kcsapi_powerup.cs" />
     <Compile Include="Models\Raw\kcsapi_remodel_slot.cs" />
+    <Compile Include="Models\Raw\kcsapi_remodel_slotlist.cs" />
+    <Compile Include="Models\Raw\kcsapi_remodel_slotlist_detail.cs" />
     <Compile Include="Models\SlotItemType.cs" />
     <Compile Include="Models\TranslationType.cs" />
     <Compile Include="Models\ViewRange.cs" />
