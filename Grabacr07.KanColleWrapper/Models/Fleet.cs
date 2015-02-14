@@ -318,7 +318,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				new PropertyChangedWeakEventListener(KanColleClient.Current.Settings)
 				{
-					{ "ViewRangeCalcLogic", (sender, args) => this.Calculate() }
+					{ "ViewRangeCalcType", (sender, args) => this.Calculate() }
 				}
 			};
 		}
@@ -400,7 +400,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 艦隊の平均レベルや制空戦力などの各種数値を再計算します。
 		/// </summary>
-		public void Calculate()
+		internal void Calculate()
 		{
 			this.TotalLevel = this.Ships.HasItems() ? this.Ships.Sum(x => x.Level) : 0;
 			this.AverageLevel = this.Ships.HasItems() ? (double)this.TotalLevel / this.Ships.Length : 0.0;
