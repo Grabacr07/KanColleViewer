@@ -12,6 +12,7 @@ using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleViewer.ViewModels.Composition;
 using Grabacr07.KanColleViewer.ViewModels.Messages;
 using Grabacr07.KanColleWrapper;
+using Grabacr07.KanColleWrapper.Models;
 using Livet.EventListeners;
 using Livet.Messaging;
 using Livet.Messaging.IO;
@@ -247,40 +248,19 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		#endregion
 
 
-		#region ViewRangeType1 変更通知プロパティ
+		#region ViewRangeSettingsCollection 変更通知プロパティ
 
-		private bool _ViewRangeType1;
+		private List<ViewRangeSettingsViewModel> _ViewRangeSettingsCollection;
 
-		public bool ViewRangeType1
+		public List<ViewRangeSettingsViewModel> ViewRangeSettingsCollection
 		{
-			get { return this._ViewRangeType1; }
+			get { return this._ViewRangeSettingsCollection; }
 			set
 			{
-				if (this._ViewRangeType1 != value)
+				if (this._ViewRangeSettingsCollection != value)
 				{
-					this._ViewRangeType1 = value;
+					this._ViewRangeSettingsCollection = value;
 					this.RaisePropertyChanged();
-					//if (value) Settings.Current.KanColleClientSettings.ViewRangeCalcLogic = ViewRangeCalcLogic.Type1;
-				}
-			}
-		}
-
-		#endregion
-
-		#region ViewRangeType2 変更通知プロパティ
-
-		private bool _ViewRangeType2;
-
-		public bool ViewRangeType2
-		{
-			get { return this._ViewRangeType2; }
-			set
-			{
-				if (this._ViewRangeType2 != value)
-				{
-					this._ViewRangeType2 = value;
-					this.RaisePropertyChanged();
-					//if (value) Settings.Current.KanColleClientSettings.ViewRangeCalcLogic = ViewRangeCalcLogic.Type2;
 				}
 			}
 		}
@@ -323,8 +303,9 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			});
 			this.BrowserZoomFactor = zoomFactor;
 
-			//this._ViewRangeType1 = Settings.Current.KanColleClientSettings.ViewRangeCalcLogic == ViewRangeCalcLogic.Type1;
-			//this._ViewRangeType2 = Settings.Current.KanColleClientSettings.ViewRangeCalcLogic == ViewRangeCalcLogic.Type2;
+			this.ViewRangeSettingsCollection = ViewRangeCalcLogic.Logics
+				.Select(x => new ViewRangeSettingsViewModel(x))
+				.ToList();
 
 			this.ReloadPlugins();
 		}
@@ -380,6 +361,34 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		{
 			this.NotifierPlugins = new List<NotifierViewModel>(PluginHost.Instance.Notifiers.Select(x => new NotifierViewModel(x)));
 			this.ToolPlugins = new List<ToolViewModel>(PluginHost.Instance.Tools.Select(x => new ToolViewModel(x)));
+		}
+
+
+		public class ViewRangeSettingsViewModel
+		{
+			private bool selected;
+
+			public ICalcViewRange Logic { get; set; }
+
+			public bool Selected
+			{
+				get { return this.selected; }
+				set
+				{
+					this.selected = value;
+					if (value)
+					{
+						Settings.Current.KanColleClientSettings.ViewRangeCalcType = this.Logic.Id;
+						foreach (var f in KanColleClient.Current.Homeport.Organization.Fleets) f.Value.Calculate();
+					}
+				}
+			}
+
+			public ViewRangeSettingsViewModel(ICalcViewRange logic)
+			{
+				this.Logic = logic;
+				this.selected = Settings.Current.KanColleClientSettings.ViewRangeCalcType == logic.Id;
+			}
 		}
 	}
 }

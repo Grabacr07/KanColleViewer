@@ -15,20 +15,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 	/// </summary>
 	public class FleetViewModel : ViewModel
 	{
-		#region static members
-
-		static FleetViewModel()
-		{
-			// ひどぅい設計を見た
-			// ReSharper disable ObjectCreationAsStatement
-			new ViewRangeType1();
-			new ViewRangeType2();
-			new ViewRangeType3();
-			// ReSharper restore ObjectCreationAsStatement
-		}
-
-		#endregion
-
 		private readonly Fleet source;
 
 		public SortieViewModel Sortie { get; private set; }
@@ -122,7 +108,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 		public string TotalViewRange
 		{
-			get { return ViewRangeCalcLogic.Get(Models.Settings.Current.ViewRangeCalcType).Calc(this.source).ToString("####"); }
+			get { return this.source.TotalViewRange.ToString("###.##"); }
 		}
 
 		#endregion

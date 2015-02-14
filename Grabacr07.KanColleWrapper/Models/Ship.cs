@@ -257,6 +257,8 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public ShipSlot[] Slots { get; private set; }
 
+		public ShipSlot[] EquippedSlots { get; private set; }
+
 		#region IsInRepairing 変更通知プロパティ
 
 		private bool _IsInRepairing;
@@ -317,6 +319,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				.Select(id => this.homeport.Itemyard.SlotItems[id])
 				.Select((t, i) => new ShipSlot(t, this.Info.RawData.api_maxeq.Get(i) ?? 0, this.RawData.api_onslot.Get(i) ?? 0))
 				.ToArray();
+			this.EquippedSlots = this.Slots.Where(x => x.Equipped).ToArray();
 		}
 
 

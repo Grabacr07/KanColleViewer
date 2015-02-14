@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Grabacr07.KanColleViewer.Models.Data.Xml;
 using Grabacr07.KanColleWrapper;
+using Grabacr07.KanColleWrapper.Models;
 using Livet;
 
 namespace Grabacr07.KanColleViewer.Models
@@ -362,25 +363,6 @@ namespace Grabacr07.KanColleViewer.Models
 				if (KanColleClient.Current.Settings != value)
 				{
 					KanColleClient.Current.Settings = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region ViewRangeCalcType 変更通知プロパティ
-
-		private string _ViewRangeCalcType;
-
-		public string ViewRangeCalcType
-		{
-			get { return this._ViewRangeCalcType; }
-			set
-			{
-				if (this._ViewRangeCalcType != value)
-				{
-					this._ViewRangeCalcType = value;
 					this.RaisePropertyChanged();
 				}
 			}

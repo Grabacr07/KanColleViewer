@@ -110,7 +110,7 @@ namespace Grabacr07.KanColleWrapper
 
 		internal void RemoveFromShip(Ship ship)
 		{
-			foreach (var x in ship.Slots.Where(x => x.Equipped).ToArray())
+			foreach (var x in ship.EquippedSlots.ToArray())
 			{
 				this.SlotItems.Remove(x.Item);
 			}
