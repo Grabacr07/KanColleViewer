@@ -356,16 +356,10 @@ namespace Grabacr07.KanColleWrapper
 
 			int[] evacuationOfferedShipIds = null;
 			int[] towOfferedShipIds = null;
-
 			proxy.api_req_combined_battle_battleresult
 				.TryParse<kcsapi_combined_battle_battleresult>()
 				.Where(x => x.Data.api_escape != null)
-				.Select(x => x.Data.api_escape)
-				.Subscribe(x =>
-				{
-					evacuationOfferedShipIds = x.api_escape_idx;
-					towOfferedShipIds = x.api_tow_idx;
-				});
+				.Subscribe(x => this.rebuildOfferedShipList(x.Data, ref evacuationOfferedShipIds, ref towOfferedShipIds));
 			proxy.api_req_combined_battle_goback_port
 				.Subscribe(_ =>
 				{
@@ -387,7 +381,24 @@ namespace Grabacr07.KanColleWrapper
 				});
 		}
 
-
+		private void rebuildOfferedShipList(kcsapi_combined_battle_battleresult result,ref int[] evacuation,ref int[] tow)
+		{
+			var Organization = KanColleClient.Current.Homeport.Organization;
+			for (int i = 0; i < result.api_escape.api_escape_idx.Length; i++)
+			{
+				int temp = 0;
+				if (result.api_escape.api_escape_idx[i] > 6)
+				{
+					temp = result.api_escape.api_escape_idx[i] - 6;
+					evacuation[i] = Organization.Fleets[2].Ships[temp].Id;
+				}
+				else
+				{
+					evacuation[i] = Organization.Fleets[1].Ships[result.api_escape.api_escape_idx[i]].Id;
+				}
+				tow[i] = Organization.Fleets[2].Ships[result.api_escape.api_tow_idx[i]].Id;
+			}
+		}
 		private void Sortie(SvData data)
 		{
 			if (data == null || !data.IsSuccess) return;
