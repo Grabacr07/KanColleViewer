@@ -15,22 +15,22 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 		public string AverageLevel
 		{
-			get { return this.Source.AverageLevel.ToString("##.##"); }
+			get { return this.Source.AverageLevel.ToString("#0.##"); }
 		}
 
 		public string TotalLevel
 		{
-			get { return this.Source.TotalLevel.ToString("####"); }
+			get { return this.Source.TotalLevel.ToString("###0"); }
 		}
 
 		public string AirSuperiorityPotential
 		{
-			get { return this.Source.AirSuperiorityPotential.ToString("###"); }
+			get { return this.Source.AirSuperiorityPotential.ToString("##0"); }
 		}
 
 		public string ViewRange
 		{
-			get { return this.Source.ViewRange.ToString("###.##"); }
+			get { return this.Source.ViewRange.ToString("##0.##"); }
 		}
 
 		public string Speed

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Models;
 using Livet;
+using Livet.EventListeners;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 {
@@ -31,6 +32,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		public CombinedFleetViewModel(CombinedFleet fleet)
 		{
 			this.Source = fleet;
+
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet.State)
+			{
+				{ "Situation", (sender, args) => this.RaisePropertyChanged("QuickStateView") },
+			});
 
 			this.State = new FleetStateViewModel(fleet.State);
 			this.CompositeDisposable.Add(this.State);

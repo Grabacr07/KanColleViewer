@@ -87,6 +87,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			{
 				(sender, args) => this.RaisePropertyChanged(args.PropertyName),
 			});
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet.State)
+			{
+				{ "Situation", (sender, args) => this.RaisePropertyChanged("QuickStateView") },
+			});
 
 			this.State = new FleetStateViewModel(fleet.State);
 			this.CompositeDisposable.Add(this.State);
