@@ -831,7 +831,7 @@
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate DataType="{x:Type contentsVm:ShipViewModel}">
-										<ItemsControl ItemsSource="{Binding Ship.SlotItems}">
+										<ItemsControl ItemsSource="{Binding Ship.EquippedSlots}">
 											<ItemsControl.Template>
 												<ControlTemplate TargetType="{x:Type ItemsControl}">
 													<StackPanel IsItemsHost="True"
@@ -840,12 +840,12 @@
 											</ItemsControl.Template>
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
-													<Border ToolTip="{Binding Info.Name}"
+													<Border ToolTip="{Binding Item.Info.Name}"
 															Background="Transparent"
 															Height="20"
 															Padding="0,1">
 														<Viewbox>
-															<controls:SlotItemIcon Type="{Binding Info.IconType}"
+															<controls:SlotItemIcon Type="{Binding Item.Info.IconType}"
 																				   Margin="0,0,4,0" />
 														</Viewbox>
 													</Border>

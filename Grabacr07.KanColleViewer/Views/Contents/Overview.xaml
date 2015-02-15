@@ -245,18 +245,18 @@
 														   HorizontalAlignment="Center" />
 											</Grid>
 
-											<Grid x:Name="EvacuationIndicator"
+												<Grid x:Name="EvacuationIndicator"
 												  Grid.Column="2"
 												  Visibility="Collapsed"
 												  Margin="8,2,8,0">
-												<Border Background="{DynamicResource FleetRepairingBrushKey}"
+													<Border Background="{DynamicResource FleetRepairingBrushKey}"
 														Opacity=".4" />
-												<TextBlock Text="退避済"
+													<TextBlock Text="退避済"
 														   Style="{DynamicResource EmphaticTextStyleKey}"
 														   HorizontalAlignment="Center" />
-											</Grid>
+												</Grid>
 
-											<TextBlock Grid.Column="3">
+												<TextBlock Grid.Column="3">
 											<InlineUIContainer>
 												<controls:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
 											</InlineUIContainer>
