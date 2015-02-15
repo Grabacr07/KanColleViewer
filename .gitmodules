@@ -1,6 +1,3 @@
 [submodule "MetroRadiance"]
 	path = MetroRadiance
 	url = git://github.com/FreyYa/MetroRadiance.git
-[submodule "Plugins/EventMapHpViewer"]
-	path = Plugins/EventMapHpViewer
-	url = git://github.com/FreyYa/EventMapHpViewer.git

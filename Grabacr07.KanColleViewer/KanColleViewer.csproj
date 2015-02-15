@@ -202,6 +202,7 @@
     <Compile Include="ViewModels\Contents\ShipyardViewModel.cs" />
     <Compile Include="ViewModels\Dev\DebugTabViewModel.cs" />
     <Compile Include="ViewModels\CultureViewModel.cs" />
+    <Compile Include="ViewModels\FleetWindowViewModel.cs" />
     <Compile Include="ViewModels\MainContentViewModel.cs" />
     <Compile Include="Models\INavigator.cs" />
     <Compile Include="ViewModels\Contents\MaterialsViewModel.cs" />
@@ -312,6 +313,9 @@
     </Compile>
     <Compile Include="Views\Settings\Language.xaml.cs">
       <DependentUpon>Language.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FleetWindow.xaml.cs">
+      <DependentUpon>FleetWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings\Browser.xaml.cs">
       <DependentUpon>Browser.xaml</DependentUpon>
@@ -536,6 +540,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ExitDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FleetWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
