@@ -97,7 +97,7 @@ namespace Grabacr07.KanColleWrapper
 					ship.Repair();
 
 					var fleet = this.homeport.Organization.GetFleet(ship.Id);
-					if (fleet != null) fleet.UpdateStatus();
+					if (fleet != null) fleet.State.Update();
 				}
 
 				// 高速修復でない場合、別途 ndock が来るので、ここで何かする必要はなさげ
@@ -119,7 +119,7 @@ namespace Grabacr07.KanColleWrapper
 				ship.Repair();
 
 				var fleet = this.homeport.Organization.GetFleet(ship.Id);
-				if (fleet != null) fleet.UpdateStatus();
+				if (fleet != null) fleet.State.Update();
 			}
 			catch (Exception ex)
 			{

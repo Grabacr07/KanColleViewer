@@ -152,6 +152,7 @@
     <Compile Include="ViewModels\Catalogs\SlotItemViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\SortableColumnViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogSortWorker.cs" />
+    <Compile Include="ViewModels\Contents\Fleets\CombinedFleetViewModel.cs" />
     <Compile Include="ViewModels\Composition\NotifierViewModel.cs" />
     <Compile Include="ViewModels\Composition\PluginViewModel.cs" />
     <Compile Include="ViewModels\Composition\PluginViewModelBase.cs" />
@@ -159,6 +160,8 @@
     <Compile Include="ViewModels\Contents\AdmiralViewModel.cs" />
     <Compile Include="ViewModels\Contents\BuildingDockViewModel.cs" />
     <Compile Include="ViewModels\Contents\CreatedSlotItemViewModel.cs" />
+    <Compile Include="ViewModels\Contents\Fleets\FleetStateViewModel.cs" />
+    <Compile Include="ViewModels\Contents\Fleets\QuickStateViewViewModel.cs" />
     <Compile Include="ViewModels\Contents\RepairingDockViewModel.cs" />
     <Compile Include="ViewModels\Contents\ExpeditionsViewModel.cs" />
     <Compile Include="ViewModels\Contents\Fleets\ConditionViewModel.cs" />

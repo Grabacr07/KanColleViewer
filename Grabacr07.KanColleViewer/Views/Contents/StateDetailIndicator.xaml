@@ -13,7 +13,7 @@
 			 d:DesignHeight="30"
 			 d:DataContext="{d:DesignInstance fleets:FleetViewModel}">
 
-	<ContentControl Content="{Binding State}">
+	<ContentControl Content="{Binding QuickStateView}">
 		<ContentControl.Resources>
 			<DataTemplate DataType="{x:Type fleets:HomeportViewModel}">
 				<Grid>
@@ -39,7 +39,7 @@
 								Property="Text"
 								Value="疲労回復済み" />
 					</DataTrigger>
-					<DataTrigger Binding="{Binding Fleet.IsReady}"
+					<DataTrigger Binding="{Binding State.IsReady}"
 								 Value="True">
 						<Setter TargetName="Border"
 								Property="Background"
@@ -92,8 +92,8 @@
 								   Style="{DynamicResource DefaultTextStyleKey}"
 								   Foreground="{DynamicResource ActiveForegroundBrushKey}">
 							<i:Interaction.Behaviors>
-								<ei:DataStateBehavior Binding="{Binding Fleet.IsWounded}"
-													  Value="True"
+								<ei:DataStateBehavior Binding="{Binding State.Situation}"
+													  Value="HeavilyDamaged"
 													  TrueState="Blinking"
 													  FalseState="Normal" />
 							</i:Interaction.Behaviors>
@@ -104,8 +104,8 @@
 									<i:Interaction.Behaviors>
 										<ei:ConditionBehavior>
 											<ei:ConditionalExpression>
-												<ei:ComparisonCondition LeftOperand="{Binding Fleet.IsWounded}"
-																		RightOperand="True"
+												<ei:ComparisonCondition LeftOperand="{Binding State.Situation}"
+																		RightOperand="HeavilyDamaged"
 																		Operator="Equal" />
 											</ei:ConditionalExpression>
 										</ei:ConditionBehavior>
@@ -116,8 +116,8 @@
 									<i:Interaction.Behaviors>
 										<ei:ConditionBehavior>
 											<ei:ConditionalExpression>
-												<ei:ComparisonCondition LeftOperand="{Binding Fleet.IsWounded}"
-																		RightOperand="False"
+												<ei:ComparisonCondition LeftOperand="{Binding State.Situation}"
+																		RightOperand="HeavilyDamaged"
 																		Operator="Equal" />
 											</ei:ConditionalExpression>
 										</ei:ConditionBehavior>

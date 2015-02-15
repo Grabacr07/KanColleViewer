@@ -121,9 +121,9 @@ namespace Grabacr07.KanColleWrapper.Models
         /// <summary>
         /// 速力を取得します。
         /// </summary>
-        public Speed Speed
+        public ShipSpeed Speed
         {
-            get { return (Speed)this.RawData.api_soku; }
+            get { return (ShipSpeed)this.RawData.api_soku; }
         }
 
         /// <summary>

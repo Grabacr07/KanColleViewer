@@ -7,13 +7,13 @@
 			 xmlns:fleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 			 mc:Ignorable="d"
 			 d:DataContext="{d:DesignInstance fleets:FleetViewModel}">
-	<ContentControl Content="{Binding State}">
+	<ContentControl Content="{Binding QuickStateView}">
 		<ContentControl.Resources>
 			<DataTemplate DataType="{x:Type fleets:HomeportViewModel}">
 				<Border x:Name="Border"
 						Background="#FFC88232" />
 				<DataTemplate.Triggers>
-					<DataTrigger Binding="{Binding Fleet.IsReady}"
+					<DataTrigger Binding="{Binding State.IsReady}"
 								 Value="True">
 						<Setter TargetName="Border"
 								Property="Background"
