@@ -13,7 +13,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 	/// <summary>
 	/// 単一の艦隊情報を提供します。
 	/// </summary>
-	public class FleetViewModel : ViewModel
+	public class FleetViewModel : FleetViewModelBase
 	{
 		private readonly Fleet source;
 
@@ -34,7 +34,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		/// <summary>
 		/// 艦隊の状態を取得します。
 		/// </summary>
-		public ViewModel State
+		public override ViewModel State
 		{
 			get
 			{
@@ -81,32 +81,32 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			get { return this.source.Id; }
 		}
 
-		public string Name
+		public override string Name
 		{
 			get { return string.IsNullOrEmpty(this.source.Name.Trim()) ? "(第 " + this.source.Id + " 艦隊)" : this.source.Name; }
 		}
 
-		public string TotalLevel
+		public override string TotalLevel
 		{
 			get { return this.source.TotalLevel.ToString("####"); }
 		}
 
-		public string AverageLevel
+		public override string AverageLevel
 		{
 			get { return this.source.AverageLevel.ToString("##.##"); }
 		}
 
-		public string Speed
+		public override string Speed
 		{
 			get { return this.source.Speed == KanColleWrapper.Models.Speed.Fast ? Resources.Fleets_Speed_Fast : Resources.Fleets_Speed_Slow; }
 		}
 
-		public int AirSuperiorityPotential
+		public override int AirSuperiorityPotential
 		{
 			get { return this.source.AirSuperiorityPotential; }
 		}
 
-		public string TotalViewRange
+		public override string TotalViewRange
 		{
 			get { return this.source.TotalViewRange.ToString("###.##"); }
 		}
