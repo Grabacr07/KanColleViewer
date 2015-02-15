@@ -245,6 +245,17 @@
 														   HorizontalAlignment="Center" />
 											</Grid>
 
+											<Grid x:Name="EvacuationIndicator"
+												  Grid.Column="2"
+												  Visibility="Collapsed"
+												  Margin="8,2,8,0">
+												<Border Background="{DynamicResource FleetRepairingBrushKey}"
+														Opacity=".4" />
+												<TextBlock Text="退避済"
+														   Style="{DynamicResource EmphaticTextStyleKey}"
+														   HorizontalAlignment="Center" />
+											</Grid>
+
 											<TextBlock Grid.Column="3">
 											<InlineUIContainer>
 												<controls:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
@@ -262,12 +273,21 @@
 									</StackPanel>
 
 									<DataTemplate.Triggers>
-										<DataTrigger Binding="{Binding Ship.IsInRepairing}"
-													 Value="True">
+										<DataTrigger Binding="{Binding Ship.Status}"
+													 Value="Repair">
 											<Setter TargetName="HPIndicator"
 													Property="Opacity"
 													Value=".2" />
 											<Setter TargetName="RepairIndicator"
+													Property="Visibility"
+													Value="Visible" />
+										</DataTrigger>
+										<DataTrigger Binding="{Binding Ship.Status}"
+													 Value="Evacuation,Tow">
+											<Setter TargetName="HPIndicator"
+													Property="Opacity"
+													Value=".2" />
+											<Setter TargetName="EvacuationIndicator"
 													Property="Visibility"
 													Value="Visible" />
 										</DataTrigger>
