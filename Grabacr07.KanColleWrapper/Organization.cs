@@ -386,6 +386,9 @@ namespace Grabacr07.KanColleWrapper
 			var Organization = KanColleClient.Current.Homeport.Organization;
 			for (int i = 0; i < result.api_escape.api_escape_idx.Length; i++)
 			{
+				evacuation = new int[result.api_escape.api_escape_idx.Length];
+				tow = new int[result.api_escape.api_tow_idx.Length];
+
 				int temp = 0;
 				if (result.api_escape.api_escape_idx[i] > 6)
 				{
@@ -396,7 +399,8 @@ namespace Grabacr07.KanColleWrapper
 				{
 					evacuation[i] = Organization.Fleets[1].Ships[result.api_escape.api_escape_idx[i]].Id;
 				}
-				tow[i] = Organization.Fleets[2].Ships[result.api_escape.api_tow_idx[i]].Id;
+				temp = result.api_escape.api_tow_idx[i] - 6;
+                tow[i] = Organization.Fleets[2].Ships[temp].Id;
 			}
 		}
 		private void Sortie(SvData data)
