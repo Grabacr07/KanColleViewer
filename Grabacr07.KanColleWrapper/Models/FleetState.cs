@@ -205,64 +205,65 @@ namespace Grabacr07.KanColleWrapper.Models
 			var ships = this.source.SelectMany(x => x.Ships).ToArray();
 			if (ships.Length == 0)
 			{
-				this.IsReady = false;
-				return;
-			}
-
-			var heavilyDamaged = ships
-				.Where(s => !s.Situation.HasFlag(ShipSituation.Evacuation) && !s.Situation.HasFlag(ShipSituation.Tow))
-				.Any(s => (s.HP.Current / (double)s.HP.Maximum) <= 0.25);
-			if (heavilyDamaged)
-			{
-				state |= FleetSituation.HeavilyDamaged;
 				ready = false;
-			}
-
-			var repairing = ships.Any(x => this.homeport.Repairyard.CheckRepairing(x.Id));
-			if (repairing)
-			{
-				state |= FleetSituation.Repairing;
-				ready = false;
-			}
-
-			var inShortSupply = ships.Any(s => s.Fuel.Current < s.Fuel.Maximum || s.Bull.Current < s.Bull.Maximum);
-			if (inShortSupply)
-			{
-				state |= FleetSituation.InShortSupply;
-				ready = false;
-			}
-
-			var first = this.source[0];
-
-			if (this.source.Length == 1)
-			{
-				if (first.IsInSortie)
-				{
-					state |= FleetSituation.Sortie;
-					ready = false;
-				}
-				else if (first.Expedition.IsInExecution)
-				{
-					state |= FleetSituation.Expedition;
-					ready = false;
-				}
-				else
-				{
-					state |= FleetSituation.Homeport;
-				}
 			}
 			else
 			{
-				state |= FleetSituation.Combined;
-
-				if (first.IsInSortie)
+				var heavilyDamaged = ships
+					.Where(s => !s.Situation.HasFlag(ShipSituation.Evacuation) && !s.Situation.HasFlag(ShipSituation.Tow))
+					.Any(s => (s.HP.Current / (double)s.HP.Maximum) <= 0.25);
+				if (heavilyDamaged)
 				{
-					state |= FleetSituation.Sortie;
+					state |= FleetSituation.HeavilyDamaged;
 					ready = false;
+				}
+
+				var repairing = ships.Any(x => this.homeport.Repairyard.CheckRepairing(x.Id));
+				if (repairing)
+				{
+					state |= FleetSituation.Repairing;
+					ready = false;
+				}
+
+				var inShortSupply = ships.Any(s => s.Fuel.Current < s.Fuel.Maximum || s.Bull.Current < s.Bull.Maximum);
+				if (inShortSupply)
+				{
+					state |= FleetSituation.InShortSupply;
+					ready = false;
+				}
+
+				var first = this.source[0];
+
+				if (this.source.Length == 1)
+				{
+					if (first.IsInSortie)
+					{
+						state |= FleetSituation.Sortie;
+						ready = false;
+					}
+					else if (first.Expedition.IsInExecution)
+					{
+						state |= FleetSituation.Expedition;
+						ready = false;
+					}
+					else
+					{
+						state |= FleetSituation.Homeport;
+					}
 				}
 				else
 				{
-					state |= FleetSituation.Homeport;
+					state |= FleetSituation.Combined;
+
+					if (first.IsInSortie)
+					{
+						state |= FleetSituation.Sortie;
+						ready = false;
+					}
+					else
+					{
+						state |= FleetSituation.Homeport;
+					}
 				}
 			}
 
