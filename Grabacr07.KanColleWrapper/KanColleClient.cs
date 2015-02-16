@@ -122,16 +122,16 @@ namespace Grabacr07.KanColleWrapper
         {
             this.Initialieze();
 
-            //var start = this.Proxy.api_req_map_start;
-            //var end = this.Proxy.api_port;
+			var start = this.Proxy.api_req_map_start;
+			var end = this.Proxy.api_port;
 
-            //this.Proxy.ApiSessionSource
-            //    .SkipUntil(start.Do(_ => this.IsInSortie = true))
-            //    .TakeUntil(end)
-            //    .Finally(() => this.IsInSortie = false)
-            //    .Repeat()
-            //    .Subscribe();
-        }
+			this.Proxy.ApiSessionSource
+				.SkipUntil(start.Do(_ => this.IsInSortie = true))
+				.TakeUntil(end)
+				.Finally(() => this.IsInSortie = false)
+				.Repeat()
+				.Subscribe();
+		}
 
 
         public void Initialieze()

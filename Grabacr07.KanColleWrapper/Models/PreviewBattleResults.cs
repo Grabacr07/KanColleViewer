@@ -2,13 +2,6 @@
 
 namespace Grabacr07.KanColleWrapper.Models
 {
-	public class RankResult
-	{
-		/// <summary>
-		/// Rank int
-		/// </summary>
-		public int RankNum { get; set; }
-	}
 	/// <summary>
 	/// 미리보기 데이터를 저장하는 클래스
 	/// </summary>
@@ -25,12 +18,17 @@ namespace Grabacr07.KanColleWrapper.Models
 		public int CHP { get; set; }
 		public int MHP { get; set; }
 	}
+	public class EscapeResults
+	{
+		public int escape { get; set; }
+		public int tow { get; set; }
+		public bool IsSecond { get; set; }
+	}
 	/// <summary>
 	/// 예보 데이터를 저장하는 클래스입니다.
 	/// </summary>
 	public class ResultCalLists
 	{
-		public int RankInt { get; set; }
 		/// <summary>
 		/// 적의 ID를 저장. 적의 이름을 출력하는데 필요
 		/// </summary>

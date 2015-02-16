@@ -277,6 +277,15 @@
 								</StackPanel>
 								<DataTemplate.Triggers>
 									<DataTrigger Binding="{Binding Status}"
+										Value="0">
+										<Setter TargetName="StatusText"
+											Property="Text"
+											Value="" />
+										<Setter TargetName="StatusGrid"
+											Property="Background"
+											Value="#004C44FF" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding Status}"
 										Value="1">
 										<Setter TargetName="StatusText"
 											Property="Text"
@@ -316,13 +325,16 @@
 											Value="#FF4C44FF" />
 									</DataTrigger>
 									<DataTrigger Binding="{Binding Status}"
-										Value="0">
+										Value="5">
 										<Setter TargetName="StatusText"
 											Property="Text"
-											Value="" />
+											Value="회항"/>
+										<Setter TargetName="StatusText"
+											Property="Foreground"
+											Value="White"/>
 										<Setter TargetName="StatusGrid"
 											Property="Background"
-											Value="#004C44FF" />
+											Value="#FF9E9E9E" />
 									</DataTrigger>
 								</DataTemplate.Triggers>
 							</DataTemplate>
@@ -392,6 +404,15 @@
 								</StackPanel>
 								<DataTemplate.Triggers>
 									<DataTrigger Binding="{Binding Status}"
+										Value="0">
+										<Setter TargetName="StatusText"
+											Property="Text"
+											Value="" />
+										<Setter TargetName="StatusGrid"
+											Property="Background"
+											Value="#004C44FF" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding Status}"
 										Value="1">
 										<Setter TargetName="StatusText"
 											Property="Text"
@@ -431,13 +452,16 @@
 											Value="#FF4C44FF" />
 									</DataTrigger>
 									<DataTrigger Binding="{Binding Status}"
-										Value="0">
+										Value="5">
 										<Setter TargetName="StatusText"
 											Property="Text"
-											Value="" />
+											Value="회항"/>
+										<Setter TargetName="StatusText"
+											Property="Foreground"
+											Value="White"/>
 										<Setter TargetName="StatusGrid"
 											Property="Background"
-											Value="#004C44FF" />
+											Value="#FF9E9E9E" />
 									</DataTrigger>
 								</DataTemplate.Triggers>
 							</DataTemplate>

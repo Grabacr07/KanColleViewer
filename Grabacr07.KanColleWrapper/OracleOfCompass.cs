@@ -12,6 +12,9 @@ namespace Grabacr07.KanColleWrapper
 	/// </summary>
 	public class OracleOfCompass
 	{
+		public int CellData { get; private set; }
+
+		#region private int,List,etc
 		/// <summary>
 		/// 전투 미리보기 데이터를 저장
 		/// </summary>
@@ -19,9 +22,12 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// 전투 미리보기 리스트
 		/// </summary>
-		public List<PreviewBattleResults> Results = new List<PreviewBattleResults>();
-		public int CellData { get; set; }
-		public int DockId { get; set; }
+		//private List<PreviewBattleResults> Results { get; set; }
+		private int RankNum { get; set; }
+		private int DockId { get; set; }
+		private List<EscapeResults> GoBackPortList { get; set; }
+		#endregion
+
 		#region bool
 		/// <summary>
 		/// 전투 미리보기가 켜져있는가. 켜져있는 경우는 true
@@ -85,7 +91,7 @@ namespace Grabacr07.KanColleWrapper
 
 			#region BattleResult관련. 연합함대와 일반전투만 포함. 연습전 결과는 무시
 			proxy.api_req_sortie_battleresult.TryParse().Subscribe(x => this.Result());
-			proxy.api_req_combined_battle_battleresult.TryParse().Subscribe(x => this.Result());
+			proxy.api_req_combined_battle_battleresult.TryParse<kcsapi_combined_battle_battleresult>().Subscribe(x => this.Result(x.Data));
 			#endregion
 
 			#region 연습전(주간,야간)
@@ -94,7 +100,7 @@ namespace Grabacr07.KanColleWrapper
 			#endregion
 
 			#region 변수 초기화 관련
-			proxy.api_req_map_start.TryParse<kcsapi_map_start>().Subscribe(x => NextCell(x.Data));
+			proxy.api_req_map_start.TryParse<kcsapi_map_start>().Subscribe(x => StartCell(x.Data));
 			proxy.api_req_map_next.TryParse<kcsapi_map_next>().Subscribe(x => NextCell(x.Data));
 			proxy.api_port.TryParse().Subscribe(x => this.Cleared(true));
 			#endregion
@@ -108,9 +114,8 @@ namespace Grabacr07.KanColleWrapper
 		public List<PreviewBattleResults> KanResult(int combinded = -1)
 		{
 			if (!EnableBattlePreview) return null;
+			List<PreviewBattleResults> Results = new List<PreviewBattleResults>();
 			var Organization = KanColleClient.Current.Homeport.Organization;
-
-			if (this.Results.Count > 0) this.Results.Clear();
 
 			for (int i = 0; i < 6; i++)
 			{
@@ -126,11 +131,11 @@ namespace Grabacr07.KanColleWrapper
 						Kan.HP = new LimitedValue(this.DataLists.HpResults[i], this.DataLists.MHpResults[i], 0);
 						Kan.Status = this.DataLists.CalResults[i];
 					}
-					if (Kan.HP.Maximum != 0 || Kan.HP.Current != 0) this.Results.Add(Kan);
+					if (Kan.HP.Maximum != 0 || Kan.HP.Current != 0) Results.Add(Kan);
 				}
 				else if (combinded == 1)
 				{
-					if (Organization.Fleets[1].State==FleetState.Sortie)
+					if (Organization.Fleets[1].State == FleetState.Sortie)
 					{
 						if (Organization.Fleets[1].Ships.Length > i)
 						{
@@ -141,7 +146,7 @@ namespace Grabacr07.KanColleWrapper
 							Kan.HP = new LimitedValue(this.DataLists.HpResults[i], this.DataLists.MHpResults[i], 0);
 							Kan.Status = this.DataLists.CalResults[i];
 						}
-						if (Kan.HP.Maximum != 0 || Kan.HP.Current != 0) this.Results.Add(Kan);
+						if (Kan.HP.Maximum != 0 || Kan.HP.Current != 0) Results.Add(Kan);
 					}
 					else
 					{
@@ -160,7 +165,7 @@ namespace Grabacr07.KanColleWrapper
 								}
 								if (Kan.HP.Maximum != 0 || Kan.HP.Current != 0)
 								{
-									this.Results.Add(Kan);
+									Results.Add(Kan);
 									break;
 								}
 							}
@@ -169,14 +174,13 @@ namespace Grabacr07.KanColleWrapper
 				}
 
 			}
-			return this.Results;
+			return Results;
 		}
 		public List<PreviewBattleResults> SecondResult()
 		{
 			if (!EnableBattlePreview) return null;
+			List<PreviewBattleResults> Results = new List<PreviewBattleResults>();
 			var Organization = KanColleClient.Current.Homeport.Organization;
-
-			if (this.Results.Count > 0) this.Results.Clear();
 
 			for (int i = 0; i < 6; i++)
 			{
@@ -190,17 +194,16 @@ namespace Grabacr07.KanColleWrapper
 					Kan.HP = new LimitedValue(this.DataLists.ComHpResults[i], this.DataLists.ComMHpResults[i], 0);
 					Kan.Status = this.DataLists.ComCalResults[i];
 				}
-				if (Kan.HP.Maximum != 0 || Kan.HP.Current != 0) this.Results.Add(Kan);
+				if (Kan.HP.Maximum != 0 || Kan.HP.Current != 0) Results.Add(Kan);
 			}
-			return this.Results;
+			return Results;
 		}
 
 		public List<PreviewBattleResults> EnemyResult()
 		{
 			if (!EnableBattlePreview) return null;
+			List<PreviewBattleResults> Results = new List<PreviewBattleResults>();
 			var ships = KanColleClient.Current.Master.Ships;
-
-			if (this.Results.Count > 0) this.Results.Clear();
 
 			for (int i = 0; i < 6; i++)
 			{
@@ -221,21 +224,17 @@ namespace Grabacr07.KanColleWrapper
 							Enemy.Status = this.DataLists.EnemyCalResults[i];
 
 
-							if (Enemy.HP.Maximum != 0 || Enemy.HP.Current != 0) this.Results.Add(Enemy);
+							if (Enemy.HP.Maximum != 0 || Enemy.HP.Current != 0) Results.Add(Enemy);
 						}
 					}
 				}
 			}
-			return this.Results;
+			return Results;
 		}
 
-		public RankResult RankOut()
+		public int RankOut()
 		{
-			RankResult Rank = new RankResult();
-
-			Rank.RankNum = this.DataLists.RankInt;
-
-			return Rank;
+			return this.RankNum;
 		}
 		#endregion
 
@@ -267,10 +266,39 @@ namespace Grabacr07.KanColleWrapper
 		}
 		/// <summary>
 		/// battleresult창이 떴을때 IsCritical이 True이면 CriticalCondition이벤트를 발생
+		/// 비효율적이지만 매번마다 GoBackPortList를 재작성한다.
 		/// </summary>
-		/// <param name="results"></param>
-		private void Result()
+		/// <param name="result">기본값은 null. 연합함대인경우에만 값을 받아 호위 회항한 부분을 채크</param>
+		private void Result(kcsapi_combined_battle_battleresult result = null)
 		{
+			if (result != null)
+			{
+				if (result.api_escape_flag == 1)
+				{
+					GoBackPortList = new List<EscapeResults>();
+
+					var escape = result.api_escape.api_escape_idx;
+					var tow = result.api_escape.api_tow_idx;
+
+					for (int i = 0; i < escape.Length; i++)
+					{
+						EscapeResults temp = new EscapeResults
+						{
+							IsSecond = false,
+							escape = escape[i],
+						};
+
+						if (temp.escape > 6)//2함대에서 대파가 나는 경우 IsSecond를 true로 하고 escape에서 6을 빼서 저장
+						{
+							temp.escape = temp.escape - 6;
+							temp.IsSecond = true;
+						}
+						if (tow.Length > i) temp.tow = tow[i] - 6;
+						else temp.tow = 20;
+						GoBackPortList.Add(temp);
+					}
+				}
+			}
 			if (this.IsCritical) this.CriticalCondition();
 		}
 		/// <summary>
@@ -290,20 +318,23 @@ namespace Grabacr07.KanColleWrapper
 		#endregion
 
 		#region 다음 맵 셀을 확인
-		private void NextCell(kcsapi_map_next proxy)
+		private void StartCell(kcsapi_map_start proxy)
 		{
-			this.BattleClear();
+			GoBackPortList = new List<EscapeResults>();
+
+			this.Cleared(false);
 			CellData = proxy.api_event_id;
 			this.IsCompassCalculated = true;
 			this.ReadyForNextCell();
 		}
-		private void NextCell(kcsapi_map_start proxy)
+		private void NextCell(kcsapi_map_next proxy)
 		{
 			this.Cleared(false);
 			CellData = proxy.api_event_id;
 			this.IsCompassCalculated = true;
 			this.ReadyForNextCell();
 		}
+
 		#endregion
 		/// <summary>
 		/// 연합함대를 사용한 전투에서 항공전을 처리하는데 사용.
@@ -744,13 +775,19 @@ namespace Grabacr07.KanColleWrapper
 			{
 
 				DataLists.ComCalResults.Clear();
+				DataLists.ComCalResults.TrimExcess();
 				DataLists.ComHpResults.Clear();
+				DataLists.ComHpResults.TrimExcess();
 				DataLists.ComMHpResults.Clear();
+				DataLists.ComMHpResults.TrimExcess();
 
 
 				DataLists.EnemyCalResults.Clear();
 				DataLists.EnemyHpResults.Clear();
 				DataLists.EnemyMHpResults.Clear();
+				DataLists.EnemyCalResults.TrimExcess();
+				DataLists.EnemyHpResults.TrimExcess();
+				DataLists.EnemyMHpResults.TrimExcess();
 
 				DataLists.IsEnemyFlagDead = false;
 				if (!IsCombined)
@@ -758,6 +795,9 @@ namespace Grabacr07.KanColleWrapper
 					DataLists.CalResults.Clear();
 					DataLists.HpResults.Clear();
 					DataLists.MHpResults.Clear();
+					DataLists.CalResults.TrimExcess();
+					DataLists.HpResults.TrimExcess();
+					DataLists.MHpResults.TrimExcess();
 
 					if (!IsMidnight) DataLists.IsKanDamaged = false;
 					DataLists.IsOverDamage = false;
@@ -796,9 +836,28 @@ namespace Grabacr07.KanColleWrapper
 					double temp = (double)CurrentHPList[i] / (double)Maxhps[i];
 					if (!IsPractice)
 					{
-						if (temp <= 0.25) result.Add(true);
-						else result.Add(false);
+						bool escape = false;
+						bool tow = false;
 
+						if (GoBackPortList != null && GoBackPortList.Count > 0)
+						{
+							if (!IsCombined)
+							{
+								var firstlist = GoBackPortList.Where(x => !x.IsSecond);
+								if (firstlist.Count() > 0)
+									escape = firstlist.Any(x => x.escape == i + 1);
+							}
+							else
+							{
+								var secondlist = GoBackPortList.Where(x => x.IsSecond);
+								if (secondlist.Count() > 0)
+									escape = secondlist.Any(x => x.escape == i + 1);
+								tow = GoBackPortList.Any(x => x.tow == i + 1);
+							}
+						}
+
+						if (temp <= 0.25 && !escape && !tow) result.Add(true);
+						else result.Add(false);
 					}
 
 					//이하부터 전투 미리보기 시작.
@@ -811,12 +870,22 @@ namespace Grabacr07.KanColleWrapper
 						//연합함대 수정필요
 						if (i < 7)//아군정보
 						{
+							bool escape = false;
+							bool tow = false;
 							if (IsCombined)
 							{
 								DataLists.ComMHpResults.Add(Maxhps[i]);
 								DataLists.ComHpResults.Add(CurrentHPList[i]);
+								if (GoBackPortList != null && GoBackPortList.Count > 0)
+								{
 
-								if (temp <= 0) DataLists.ComCalResults.Add(4);//굉침
+									var secondlist = GoBackPortList.Where(x => x.IsSecond);
+									if (secondlist.Count() > 0)
+										escape = secondlist.Any(x => x.escape == i);
+									tow = GoBackPortList.Any(x => x.tow == i);
+								}
+								if (escape || tow) DataLists.ComCalResults.Add(5);//회항
+								else if (temp <= 0) DataLists.ComCalResults.Add(4);//굉침
 								else if (temp <= 0.25) DataLists.ComCalResults.Add(3);//대파
 								else if (temp <= 0.5) DataLists.ComCalResults.Add(2);//중파
 								else if (temp <= 0.75) DataLists.ComCalResults.Add(1);//소파
@@ -826,12 +895,19 @@ namespace Grabacr07.KanColleWrapper
 							{
 								DataLists.MHpResults.Add(Maxhps[i]);
 								DataLists.HpResults.Add(CurrentHPList[i]);
-
-								if (temp <= 0) DataLists.CalResults.Add(4);//굉침
+								if (GoBackPortList != null && GoBackPortList.Count > 0)
+								{
+									var firstlist = GoBackPortList.Where(x => !x.IsSecond);
+									if (firstlist.Count() > 0)
+										escape = firstlist.Any(x => x.escape == i);
+								}
+								if (escape || tow) DataLists.CalResults.Add(5);//회항
+								else if (temp <= 0) DataLists.CalResults.Add(4);//굉침
 								else if (temp <= 0.25) DataLists.CalResults.Add(3);//대파
 								else if (temp <= 0.5) DataLists.CalResults.Add(2);//중파
 								else if (temp <= 0.75) DataLists.CalResults.Add(1);//소파
 								else DataLists.CalResults.Add(0);//통상
+
 
 							}
 
@@ -938,11 +1014,11 @@ namespace Grabacr07.KanColleWrapper
 				//랭크 연산 적용
 				try
 				{
-					DataLists.RankInt = this.RankCalc();
+					this.RankNum = this.RankCalc();
 				}
 				catch (Exception e)
 				{
-					DataLists.RankInt = -1;
+					this.RankNum = -1;
 					System.Diagnostics.Debug.WriteLine(e);
 				}
 			}

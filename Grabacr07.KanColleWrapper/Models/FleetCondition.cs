@@ -40,10 +40,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public bool IsRejuvenating
 		{
-		    get { return this.RejuvenateTime.HasValue; }
+			get { return this.RejuvenateTime.HasValue; }
 		}
 
-	    #endregion
+		#endregion
 
 		#region Remaining 変更通知プロパティ
 
@@ -85,10 +85,10 @@ namespace Grabacr07.KanColleWrapper.Models
 			}
 			if (KanColleClient.Current.Homeport.Organization.Combined)
 			{
-				if (this.fleet.Id < 3 && this.ships.Any(p => (p.HP.Current / (double)p.HP.Maximum) <= 0.25)) KanColleClient.Current.OracleOfCompass.AfterResult();
+				if (this.fleet.Id < 3 && this.ships.Where(u => u.Status != ShipStatus.Tow).Where(z=>z.Status!=ShipStatus.Evacuation).Any(p => (p.HP.Current / (double)p.HP.Maximum) <= 0.25)) KanColleClient.Current.OracleOfCompass.AfterResult();
 
 			}
-			else if (this.fleet.Id < 2 && this.ships.Any(p => (p.HP.Current / (double)p.HP.Maximum) <= 0.25)) KanColleClient.Current.OracleOfCompass.AfterResult();
+			else if (this.fleet.Id < 2 && this.ships.Where(u => u.Status != ShipStatus.Tow).Where(z => z.Status != ShipStatus.Evacuation).Any(p => (p.HP.Current / (double)p.HP.Maximum) <= 0.25)) KanColleClient.Current.OracleOfCompass.AfterResult();
 
 			var condition = this.ships.Min(x => x.Condition);
 
@@ -96,7 +96,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				this.minCondition = condition;
 
-				var rejuvnate = DateTimeOffset.Now; // 回復完了予測時刻
+				var rejuvnate = DateTimeOffset.Now;	// 回復完了予測時刻
 
 				while (condition < KanColleClient.Current.Settings.ReSortieCondition)
 				{

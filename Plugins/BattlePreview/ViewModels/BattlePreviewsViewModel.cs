@@ -85,25 +85,6 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 
 		#endregion
 
-		#region RankOuts 変更通知プロパティ
-
-		private RankResult _RankOuts;
-
-		public RankResult RankOuts
-		{
-			get { return this._RankOuts; }
-			set
-			{
-				if (this._RankOuts != value)
-				{
-					this._RankOuts = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
 		#region PerfectRank 変更通知プロパティ
 
 		private Visibility _PerfectRank;
@@ -261,20 +242,49 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 					};
 					KanColleClient.Current.OracleOfCompass.PreviewCriticalCondition += () =>
 					{
+						//연합함대가 아닌경우 second를 비우고 작업개시
 						if (!KanColleClient.Current.Homeport.Organization.Combined)
 						{
 							this.SecondResultReport = new List<PreviewBattleResults>();
-							this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.KanResult());
+							if (this.KanResultReport != null && this.KanResultReport.Count > 0)
+							{
+								this.KanResultReport.Clear();
+								this.KanResultReport = KanColleClient.Current.OracleOfCompass.KanResult();
+								this.KanResultReport.TrimExcess();
+							}
+							else
+								this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.KanResult());
+						}
+						else//연합함대인경우
+						{
+							if (this.KanResultReport != null && this.KanResultReport.Count > 0)
+							{
+								this.KanResultReport.Clear();
+								this.KanResultReport = KanColleClient.Current.OracleOfCompass.KanResult(1);
+								this.KanResultReport.TrimExcess();
+							}
+							else
+								this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.KanResult(1));
+
+							if (this.SecondResultReport != null && this.SecondResultReport.Count > 0)
+							{
+								this.SecondResultReport.Clear();
+								this.SecondResultReport = KanColleClient.Current.OracleOfCompass.SecondResult();
+								this.SecondResultReport.TrimExcess();
+							}
+							else
+								this.SecondResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.SecondResult());
+						}
+						if (this.EnemyResultReport != null && this.EnemyResultReport.Count > 0)
+						{
+							this.EnemyResultReport.Clear();
+							this.EnemyResultReport = KanColleClient.Current.OracleOfCompass.EnemyResult();
+							this.EnemyResultReport.TrimExcess();
 						}
 						else
-						{
-							this.KanResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.KanResult(1));
-							this.SecondResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.SecondResult());
-						}
-						this.EnemyResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.EnemyResult());
+							this.EnemyResultReport = new List<PreviewBattleResults>(KanColleClient.Current.OracleOfCompass.EnemyResult());
 
-						this.RankOuts = KanColleClient.Current.OracleOfCompass.RankOut();
-						this.RankIntToVisibility(this.RankOuts.RankNum);
+						this.RankIntToVisibility(KanColleClient.Current.OracleOfCompass.RankOut());
 					};
 				}
 			}

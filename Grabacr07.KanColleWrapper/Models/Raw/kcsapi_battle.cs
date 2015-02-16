@@ -1,6 +1,9 @@
 ﻿
 namespace Grabacr07.KanColleWrapper.Models.Raw
 {
+	/// <summary>
+	/// 전투 미리보기 및 대파알림을 위해 사용
+	/// </summary>
 	public class kcsapi_battle
 	{
 		public int api_dock_id { get; set; }
@@ -16,6 +19,8 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		//combined전용
 		public int[] api_nowhps_combined;
 		public int[] api_maxhps_combined;
+		public int[] api_escape_idx;
+		public int[] api_escape_idx_combined;
 		//적 ID
 		public int[] api_ship_ke;
 		//적 Lv

@@ -356,23 +356,31 @@ namespace Grabacr07.KanColleWrapper
 
 			int[] evacuationOfferedShipIds = null;
 			int[] towOfferedShipIds = null;
-			proxy.api_req_combined_battle_battleresult
+			try
+			{
+				proxy.api_req_combined_battle_battleresult
 				.TryParse<kcsapi_combined_battle_battleresult>()
 				.Where(x => x.Data.api_escape != null)
 				.Subscribe(x => this.rebuildOfferedShipList(x.Data, ref evacuationOfferedShipIds, ref towOfferedShipIds));
-			proxy.api_req_combined_battle_goback_port
-				.Subscribe(_ =>
-				{
-					if (KanColleClient.Current.IsInSortie
-						&& evacuationOfferedShipIds != null
-						&& evacuationOfferedShipIds.Length >= 1
-						&& towOfferedShipIds != null
-						&& towOfferedShipIds.Length >= 1)
+				proxy.api_req_combined_battle_goback_port
+					.Subscribe(_ =>
 					{
-						this.evacuatedShipsIds.Add(evacuationOfferedShipIds[0]);
-						this.towShipIds.Add(towOfferedShipIds[0]);
-					}
-				});
+						if (KanColleClient.Current.IsInSortie
+							&& evacuationOfferedShipIds != null
+							&& evacuationOfferedShipIds.Length >= 1
+							&& towOfferedShipIds != null
+							&& towOfferedShipIds.Length >= 1)
+						{
+							this.evacuatedShipsIds.Add(evacuationOfferedShipIds[0]);
+							this.towShipIds.Add(towOfferedShipIds[0]);
+						}
+					});
+			}
+			catch (Exception e)
+			{
+				System.Diagnostics.Debug.WriteLine(e);
+			}
+
 			proxy.api_get_member_ship2
 				.Subscribe(_ =>
 				{
@@ -381,26 +389,29 @@ namespace Grabacr07.KanColleWrapper
 				});
 		}
 
-		private void rebuildOfferedShipList(kcsapi_combined_battle_battleresult result,ref int[] evacuation,ref int[] tow)
+		private void rebuildOfferedShipList(kcsapi_combined_battle_battleresult result, ref int[] evacuation, ref int[] tow)
 		{
 			var Organization = KanColleClient.Current.Homeport.Organization;
+			int temp = 0;
+			evacuation = new int[result.api_escape.api_escape_idx.Length];
+			tow = new int[result.api_escape.api_tow_idx.Length];
+
 			for (int i = 0; i < result.api_escape.api_escape_idx.Length; i++)
 			{
-				evacuation = new int[result.api_escape.api_escape_idx.Length];
-				tow = new int[result.api_escape.api_tow_idx.Length];
-
-				int temp = 0;
 				if (result.api_escape.api_escape_idx[i] > 6)
 				{
 					temp = result.api_escape.api_escape_idx[i] - 6;
-					evacuation[i] = Organization.Fleets[2].Ships[temp].Id;
+					evacuation[i] = Organization.Fleets[2].Ships[temp - 1].Id;
 				}
 				else
 				{
-					evacuation[i] = Organization.Fleets[1].Ships[result.api_escape.api_escape_idx[i]].Id;
+					evacuation[i] = Organization.Fleets[1].Ships[result.api_escape.api_escape_idx[i] - 1].Id;
 				}
+			}
+			for (int i = 0; i < result.api_escape.api_tow_idx.Length; i++)
+			{
 				temp = result.api_escape.api_tow_idx[i] - 6;
-                tow[i] = Organization.Fleets[2].Ships[temp].Id;
+				tow[i] = Organization.Fleets[2].Ships[temp].Id;
 			}
 		}
 		private void Sortie(SvData data)
