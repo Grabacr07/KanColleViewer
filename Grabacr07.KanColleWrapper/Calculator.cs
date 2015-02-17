@@ -32,5 +32,10 @@ namespace Grabacr07.KanColleWrapper
 		{
 			return ship.EquippedSlots.Select(x => x.Item.CalcAirSuperiorityPotential(x.Current)).Sum();
 		}
+
+		public static double CalcViewRange(this Fleet fleet)
+		{
+			return ViewRangeCalcLogic.Get(KanColleClient.Current.Settings.ViewRangeCalcType).Calc(fleet.Ships);
+		}
 	}
 }

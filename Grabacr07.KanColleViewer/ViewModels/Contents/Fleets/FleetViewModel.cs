@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Grabacr07.KanColleViewer.Properties;
-using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Livet;
 using Livet.EventListeners;
@@ -13,15 +11,19 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 	/// <summary>
 	/// 単一の艦隊情報を提供します。
 	/// </summary>
-	public class FleetViewModel : FleetViewModelBase
+	public class FleetViewModel : ViewModel
 	{
 		private readonly Fleet source;
 
-		public SortieViewModel Sortie { get; private set; }
+		public int Id
+		{
+			get { return this.source.Id; }
+		}
 
-		public ExpeditionViewModel Expedition { get; private set; }
-
-		public HomeportViewModel Homeport { get; private set; }
+		public string Name
+		{
+			get { return string.IsNullOrEmpty(this.source.Name.Trim()) ? "(第 " + this.source.Id + " 艦隊)" : this.source.Name; }
+		}
 
 		/// <summary>
 		/// 艦隊に所属している艦娘のコレクションを取得します。
@@ -31,27 +33,29 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			get { return this.source.Ships.Select(x => new ShipViewModel(x)).ToArray(); }
 		}
 
-		/// <summary>
-		/// 艦隊の状態を取得します。
-		/// </summary>
-		public override ViewModel State
+		public FleetStateViewModel State { get; private set; }
+
+		public ExpeditionViewModel Expedition { get; private set; }
+
+		public ViewModel QuickStateView
 		{
 			get
 			{
-				switch (this.source.State)
+				var situation = this.source.State.Situation;
+				if (situation == FleetSituation.Empty)
 				{
-					case FleetState.Empty:
-						return NullViewModel.Instance;
-
-					case FleetState.Sortie:
-						return this.Sortie;
-
-					case FleetState.Expedition:
-						return this.Expedition;
-
-					default:
-						return this.Homeport;
+					return NullViewModel.Instance;
 				}
+				if (situation.HasFlag(FleetSituation.Sortie))
+				{
+					return this.State.Sortie;
+				}
+				if (situation.HasFlag(FleetSituation.Expedition))
+				{
+					return this.Expedition;
+				}
+
+				return this.State.Homeport;
 			}
 		}
 
@@ -74,45 +78,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 		#endregion
 
-		#region wrapper properties
-
-		public int Id
-		{
-			get { return this.source.Id; }
-		}
-
-		public override string Name
-		{
-			get { return string.IsNullOrEmpty(this.source.Name.Trim()) ? "(第 " + this.source.Id + " 艦隊)" : this.source.Name; }
-		}
-
-		public override string TotalLevel
-		{
-			get { return this.source.TotalLevel.ToString("####"); }
-		}
-
-		public override string AverageLevel
-		{
-			get { return this.source.AverageLevel.ToString("##.##"); }
-		}
-
-		public override string Speed
-		{
-			get { return this.source.Speed == KanColleWrapper.Models.Speed.Fast ? Resources.Fleets_Speed_Fast : Resources.Fleets_Speed_Slow; }
-		}
-
-		public override int AirSuperiorityPotential
-		{
-			get { return this.source.AirSuperiorityPotential; }
-		}
-
-		public override string TotalViewRange
-		{
-			get { return this.source.TotalViewRange.ToString("###.##"); }
-		}
-
-		#endregion
-
 
 		public FleetViewModel(Fleet fleet)
 		{
@@ -121,17 +86,17 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet)
 			{
 				(sender, args) => this.RaisePropertyChanged(args.PropertyName),
-				{ () => fleet.Ships, (sender, args) => this.RaisePropertyChanged("Planes") },
+			});
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet.State)
+			{
+				{ "Situation", (sender, args) => this.RaisePropertyChanged("QuickStateView") },
 			});
 
-			this.Sortie = new SortieViewModel(fleet);
-			this.CompositeDisposable.Add(this.Sortie);
+			this.State = new FleetStateViewModel(fleet.State);
+			this.CompositeDisposable.Add(this.State);
 
 			this.Expedition = new ExpeditionViewModel(fleet.Expedition);
 			this.CompositeDisposable.Add(this.Expedition);
-
-			this.Homeport = new HomeportViewModel(fleet);
-			this.CompositeDisposable.Add(this.Homeport);
 		}
 	}
 }

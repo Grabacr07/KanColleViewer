@@ -1,15 +1,16 @@
-﻿using Grabacr07.KanColleWrapper.Models;
-using Livet;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Grabacr07.KanColleWrapper.Models;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 {
-	public class SortieViewModel : ViewModel
+	public class SortieViewModel : QuickStateViewViewModel
 	{
-		public Fleet Fleet { get; private set; }
+		// QuickStateView は ContentControl に対し型ごとの DataTemplate を適用する形で実現するので
+		// 状況に応じた型がそれぞれ必要。これはその 1 つ。
 
-		public SortieViewModel(Fleet fleet)
-		{
-			this.Fleet = fleet;
-		}
+		public SortieViewModel(FleetState state) : base(state) { }
 	}
 }

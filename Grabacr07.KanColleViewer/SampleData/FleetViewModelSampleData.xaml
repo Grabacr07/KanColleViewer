@@ -500,7 +500,7 @@
 		</contents:ShipViewModel>
 
 	</fleets:FleetViewModel.Ships>
-	<fleets:FleetViewModel.State>
+	<fleets:FleetViewModel.QuickStateView>
 		<Livet:ViewModel />
-	</fleets:FleetViewModel.State>
+	</fleets:FleetViewModel.QuickStateView>
 </fleets:FleetViewModel>

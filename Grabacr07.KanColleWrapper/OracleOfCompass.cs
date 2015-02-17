@@ -135,7 +135,7 @@ namespace Grabacr07.KanColleWrapper
 				}
 				else if (combinded == 1)
 				{
-					if (Organization.Fleets[1].State == FleetState.Sortie)
+					if (Organization.Fleets[1].IsInSortie)
 					{
 						if (Organization.Fleets[1].Ships.Length > i)
 						{
@@ -152,7 +152,7 @@ namespace Grabacr07.KanColleWrapper
 					{
 						for (int j = 0; j < Organization.Fleets.Count; j++)
 						{
-							if (Organization.Fleets[j].State == FleetState.Sortie)
+							if (Organization.Fleets[j].IsInSortie)
 							{
 								if (Organization.Fleets[j].Ships.Length > i)
 								{
