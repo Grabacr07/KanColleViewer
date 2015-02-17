@@ -85,10 +85,6 @@ namespace Grabacr07.KanColleWrapper.Models
 				return;
 			}
 
-			if (this.ships.Any(p => (p.HP.Current / (double)p.HP.Maximum) <= 0.25)) KanColleClient.Current.OracleOfCompass.AfterResult();
-
-			//else if (this.fleet.Id < 2 && this.ships.Any(p => (p.HP.Current / (double)p.HP.Maximum) <= 0.25)) KanColleClient.Current.OracleOfCompass.AfterResult();
-
 			var condition = this.ships.Min(x => x.Condition);
 
 			if (condition != this.minCondition)

@@ -270,8 +270,10 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.Situation = state;
 			this.IsReady = ready;
 
+			if (this.Situation == FleetSituation.Sortie && ships.Any(p => (p.HP.Current / (double)p.HP.Maximum) <= 0.25)) KanColleClient.Current.OracleOfCompass.AfterResult();
+
 			this.Condition.Update(ships);
-			this.Condition.IsEnabled = state.HasFlag(FleetSituation.Homeport); // 疲労回復通知は母港待機中の艦隊でのみ行う
+			this.Condition.IsEnabled = state.HasFlag(FleetSituation.Homeport);   // 疲労回復通知は母港待機中の艦隊でのみ行う
 		}
 
 
