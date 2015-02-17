@@ -252,8 +252,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public override bool Predicate(Ship ship)
 		{
 			if (this.Both) return true;
-			if (this.Fast && ship.Info.Speed == Speed.Fast) return true;
-			if (this.Low && ship.Info.Speed == Speed.Low) return true;
+			if (this.Fast && ship.Info.Speed == ShipSpeed.Fast) return true;
+			if (this.Low && ship.Info.Speed == ShipSpeed.Low) return true;
 
 			return false;
 		}
@@ -608,7 +608,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		public override bool Predicate(Ship ship)
 		{
-			if (ship.Status == ShipStatus.Repair) return false;
+			if (ship.Situation == ShipSituation.Repair) return false;
 			if (ship.RepairTime != 0) return true;
 			return false;
 		}

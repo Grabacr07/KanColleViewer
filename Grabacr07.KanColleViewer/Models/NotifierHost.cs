@@ -49,9 +49,9 @@ namespace Grabacr07.KanColleViewer.Models
 
 			client.Homeport.Organization.PropertyChanged += (sender, args) =>
 			{
-				if (args.PropertyName == "Fleets") UpdateExpedition(client.Homeport.Organization);
+				if (args.PropertyName == "Fleets") UpdateFleets(client.Homeport.Organization);
 			};
-			UpdateExpedition(client.Homeport.Organization);
+			UpdateFleets(client.Homeport.Organization);
 			UpdateCritical();
 		}
 
@@ -107,20 +107,6 @@ namespace Grabacr07.KanColleViewer.Models
 						Resources.ReSortie_CriticalConditionMessage_Title, Resources.ReSortie_CriticalConditionMessage,
 					() => App.ViewModelRoot.Activate());
 				}
-				//if (Models.Settings.Current.EnableCriticalPopup)
-				//{
-				//	//Dispatcher시작. 사실 이렇게 쓰는건지 확실하게 모르겠음. App.CriticalPupup()이 혼자서 작동 못하니 이게 맞다곤 생각하지만...
-				//	App.Current.Dispatcher.Invoke(
-				//		System.Windows.Threading.DispatcherPriority.Normal,
-				//		new Action(
-				//			delegate()
-				//			{
-				//				App.CriticalPupup();
-				//			})
-				//		);
-				//	//Dispatcher종료
-				//}
-
 				if (Models.Settings.Current.EnableCriticalAccent)
 					App.ViewModelRoot.Mode = Mode.CriticalCondition;
 			};
@@ -132,8 +118,7 @@ namespace Grabacr07.KanColleViewer.Models
 			};
 
 		}
-
-		private static void UpdateExpedition(Organization organization)
+		private static void UpdateFleets(Organization organization)
 		{
 			foreach (var fleet in organization.Fleets.Values)
 			{
@@ -149,7 +134,7 @@ namespace Grabacr07.KanColleViewer.Models
 					}
 				};
 
-				fleet.Condition.Rejuvenated += (sender, args) =>
+				fleet.State.Condition.Rejuvenated += (sender, args) =>
 				{
 					if (Settings.Current.NotifyFleetRejuvenated)
 					{

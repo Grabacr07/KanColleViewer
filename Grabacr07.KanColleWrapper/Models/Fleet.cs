@@ -3,21 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Models.Raw;
-using Grabacr07.KanColleWrapper.Internal;
-using Livet;
-using Livet.EventListeners.WeakEvents;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
 	/// <summary>
-	/// 複数の艦娘によって編成される艦隊を表します。
+	/// 複数の艦娘によって編成される、単一の常設艦隊を表します。
 	/// </summary>
-	public class Fleet : NotificationObject, IDisposable, IIdentifiable
+	public class Fleet : DisposableNotifier, IIdentifiable
 	{
 		private readonly Homeport homeport;
 		private Ship[] originalShips; // null も含んだやつ
-		private bool isInSortie;
-		private LivetCompositeDisposable compositeDisposable;
 
 		#region Id 変更通知プロパティ
 
@@ -50,6 +45,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				if (this._Name != value)
 				{
 					this._Name = value;
+					this.State.Condition.Name = value;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -79,248 +75,26 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
+		public bool IsInSortie { get; private set; }
 
-		#region AverageLevel 変更通知プロパティ
-
-		private double _AverageLevel;
-
-		/// <summary>
-		/// 艦隊の平均レベルを取得します。
-		/// </summary>
-		public double AverageLevel
-		{
-			get { return this._AverageLevel; }
-			private set
-			{
-				if (!this._AverageLevel.Equals(value))
-				{
-					this._AverageLevel = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region TotalLevel 変更通知プロパティ
-
-		private int _TotalLevel;
-
-		public int TotalLevel
-		{
-			get { return this._TotalLevel; }
-			private set
-			{
-				if (this._TotalLevel != value)
-				{
-					this._TotalLevel = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region AirSuperiorityPotential 変更通知プロパティ
-
-		private int _AirSuperiorityPotential;
-
-		/// <summary>
-		/// 艦隊の制空能力を取得します。
-		/// </summary>
-		public int AirSuperiorityPotential
-		{
-			get { return this._AirSuperiorityPotential; }
-			private set
-			{
-				if (this._AirSuperiorityPotential != value)
-				{
-					this._AirSuperiorityPotential = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region TotalViewRange 変更通知プロパティ
-
-		private double _TotalViewRange;
-
-		/// <summary>
-		/// 各艦娘の装備によるボーナスを含めた、艦隊の索敵合計値を取得します。
-		/// </summary>
-		public double TotalViewRange
-		{
-			get { return this._TotalViewRange; }
-			private set
-			{
-				if (this._TotalViewRange != value)
-				{
-					this._TotalViewRange = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region Speed 変更通知プロパティ
-
-		private Speed _Speed;
-
-		/// <summary>
-		/// 艦隊の速力を取得します。
-		/// </summary>
-		public Speed Speed
-		{
-			get { return this._Speed; }
-			private set
-			{
-				if (this._Speed != value)
-				{
-					this._Speed = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-
-		#region State 変更通知プロパティ
-
-		private FleetState _State;
-
-		public FleetState State
-		{
-			get { return this._State; }
-			private set
-			{
-				if (this._State != value)
-				{
-					this._State = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		/// <summary>
-		/// 艦隊に編成されている艦娘のコンディションを取得します。
-		/// </summary>
-		public FleetCondition Condition { get; private set; }
+		public FleetState State { get; private set; }
 
 		/// <summary>
 		/// 艦隊の遠征に関するステータスを取得します。
 		/// </summary>
 		public Expedition Expedition { get; private set; }
 
-		#region IsReady 変更通知プロパティ
-
-		private bool _IsReady;
-
-		/// <summary>
-		/// 艦隊の出撃準備ができているかどうかを示す値を取得します。
-		/// </summary>
-		public bool IsReady
-		{
-			get { return this._IsReady; }
-			private set
-			{
-				if (this._IsReady != value)
-				{
-					this._IsReady = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region IsWounded 変更通知プロパティ
-
-		private bool _IsWounded;
-
-		/// <summary>
-		/// 艦隊に大破した艦娘がいるかどうかを示す値を取得します。
-		/// </summary>
-		public bool IsWounded
-		{
-			get { return this._IsWounded; }
-			private set
-			{
-				if (this._IsWounded != value)
-				{
-					this._IsWounded = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region IsInShortSupply 変更通知プロパティ
-
-		private bool _IsInShortSupply;
-
-		/// <summary>
-		/// 艦隊に完全に補給されていない艦娘がいるかどうかを示す値を取得します。
-		/// </summary>
-		public bool IsInShortSupply
-		{
-			get { return this._IsInShortSupply; }
-			private set
-			{
-				if (this._IsInShortSupply != value)
-				{
-					this._IsInShortSupply = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region IsRepairling 変更通知プロパティ
-
-		private bool _IsRepairling;
-
-		/// <summary>
-		/// 艦隊に入渠中の艦娘がいるかどうかを示す値を取得します。
-		/// </summary>
-		public bool IsRepairling
-		{
-			get { return this._IsRepairling; }
-			private set
-			{
-				if (this._IsRepairling != value)
-				{
-					this._IsRepairling = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
 
 		internal Fleet(Homeport parent, kcsapi_deck rawData)
 		{
 			this.homeport = parent;
 
-			this.Condition = new FleetCondition(this);
+			this.State = new FleetState(parent, this);
 			this.Expedition = new Expedition(this);
-			this.Update(rawData);
+			this.CompositeDisposable.Add(this.State);
+			this.CompositeDisposable.Add(this.Expedition);
 
-			this.compositeDisposable = new LivetCompositeDisposable
-			{
-				new PropertyChangedWeakEventListener(KanColleClient.Current.Settings)
-				{
-					{ "ViewRangeCalcType", (sender, args) => this.Calculate() }
-				}
-			};
+			this.Update(rawData);
 		}
 
 
@@ -336,6 +110,8 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.Expedition.Update(rawData.api_mission);
 			this.UpdateShips(rawData.api_ship.Select(id => this.homeport.Organization.Ships[id]).ToArray());
 		}
+
+		#region 艦の編成 (Change, Unset)
 
 		/// <summary>
 		/// 艦隊の編成を変更します。
@@ -367,7 +143,6 @@ namespace Grabacr07.KanColleWrapper.Models
 			return current;
 		}
 
-
 		/// <summary>
 		/// 指定したインデックスの艦を艦隊から外します。
 		/// </summary>
@@ -396,98 +171,42 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.UpdateShips(ships);
 		}
 
+		#endregion
 
-		/// <summary>
-		/// 艦隊の平均レベルや制空戦力などの各種数値を再計算します。
-		/// </summary>
-		internal void Calculate()
-		{
-			this.TotalLevel = this.Ships.HasItems() ? this.Ships.Sum(x => x.Level) : 0;
-			this.AverageLevel = this.Ships.HasItems() ? (double)this.TotalLevel / this.Ships.Length : 0.0;
-			this.AirSuperiorityPotential = this.Ships.Sum(s => s.CalcAirSuperiorityPotential());
-			this.TotalViewRange = ViewRangeCalcLogic.Get(KanColleClient.Current.Settings.ViewRangeCalcType).Calc(this);
-			this.Speed = this.Ships.All(s => s.Info.Speed == Speed.Fast) ? Speed.Fast : Speed.Low;
-		}
-
+		#region 出撃 (Sortie, Homing)
 
 		internal void Sortie()
 		{
-			if (!this.isInSortie)
+			if (!this.IsInSortie)
 			{
-				this.isInSortie = true;
-				this.UpdateStatus();
+				this.IsInSortie = true;
+				this.State.Update();
 			}
 		}
 
 		internal void Homing()
 		{
-			if (this.isInSortie)
+			if (this.IsInSortie)
 			{
-				this.isInSortie = false;
-				this.UpdateStatus();
+				this.IsInSortie = false;
+				this.State.Update();
 			}
 		}
 
-
-		/// <summary>
-		/// 現在の艦隊情報を使用して、<see cref="State"/> プロパティを更新します。
-		/// </summary>
-		internal void UpdateStatus()
-		{
-			this.Condition.Update(this.Ships);
-			this.IsWounded = this.Ships
-				.Where(s => !s.Status.HasFlag(ShipStatus.Evacuation) && !s.Status.HasFlag(ShipStatus.Tow))
-				.Any(s => (s.HP.Current / (double)s.HP.Maximum) <= 0.25);
-			this.IsRepairling = this.homeport.Repairyard.CheckRepairing(this);
-			this.IsInShortSupply = this.Ships.Any(s => s.Fuel.Current < s.Fuel.Maximum || s.Bull.Current < s.Bull.Maximum);
-
-			if (this.Ships.Length == 0)
-			{
-				this.State = FleetState.Empty;
-			}
-			else if (this.isInSortie)
-			{
-				this.State = FleetState.Sortie;
-			}
-
-			else if (this.Expedition.IsInExecution)
-			{
-				this.State = FleetState.Expedition;
-			}
-			else
-			{
-
-				this.State = FleetState.Homeport;
-			}
-
-			this.IsReady = this.State == FleetState.Homeport
-						   && !this.Condition.IsRejuvenating
-						   && !this.IsWounded
-						   && !this.IsRepairling
-						   && !this.IsInShortSupply;
-		}
-
+		#endregion
 
 		private void UpdateShips(Ship[] ships)
 		{
 			this.originalShips = ships;
 			this.Ships = ships.Where(x => x != null).ToArray();
 
-			this.Calculate();
-			this.UpdateStatus();
+			this.State.Calculate();
+			this.State.Update();
 		}
-
 
 		public override string ToString()
 		{
 			return string.Format("ID = {0}, Name = \"{1}\", Ships = {2}", this.Id, this.Name, this.Ships.Select(s => "\"" + s.Info.Name + "\"").ToString(","));
-		}
-
-		public virtual void Dispose()
-		{
-			this.compositeDisposable.Dispose();
-			this.Expedition.SafeDispose();
-			this.Condition.SafeDispose();
 		}
 	}
 }

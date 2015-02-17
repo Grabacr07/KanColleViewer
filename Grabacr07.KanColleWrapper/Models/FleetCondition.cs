@@ -8,10 +8,16 @@ namespace Grabacr07.KanColleWrapper.Models
 {
 	public class FleetCondition : TimerNotifier
 	{
-		private readonly Fleet fleet;
 		private Ship[] ships;
 		private bool notificated;
 		private int minCondition;
+
+		/// <summary>
+		/// 通知機能が有効かどうかを示す値を取得または設定します。
+		/// </summary>
+		public bool IsEnabled { get; set; }
+
+		public string Name { get; set; }
 
 		#region RejuvenateTime / IsRejuvenating 変更通知プロパティ
 
@@ -40,10 +46,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public bool IsRejuvenating
 		{
-		    get { return this.RejuvenateTime.HasValue; }
+			get { return this.RejuvenateTime.HasValue; }
 		}
 
-	    #endregion
+		#endregion
 
 		#region Remaining 変更通知プロパティ
 
@@ -69,11 +75,6 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public event EventHandler<ConditionRejuvenatedEventArgs> Rejuvenated;
 
-		internal FleetCondition(Fleet fleet)
-		{
-			this.fleet = fleet;
-		}
-
 		internal void Update(Ship[] s)
 		{
 			this.ships = s;
@@ -83,12 +84,10 @@ namespace Grabacr07.KanColleWrapper.Models
 				this.RejuvenateTime = null;
 				return;
 			}
-			if (KanColleClient.Current.Homeport.Organization.Combined)
-			{
-				if (this.fleet.Id < 3 && this.ships.Any(p => (p.HP.Current / (double)p.HP.Maximum) <= 0.25)) KanColleClient.Current.OracleOfCompass.AfterResult();
 
-			}
-			else if (this.fleet.Id < 2 && this.ships.Any(p => (p.HP.Current / (double)p.HP.Maximum) <= 0.25)) KanColleClient.Current.OracleOfCompass.AfterResult();
+			if (this.ships.Any(p => (p.HP.Current / (double)p.HP.Maximum) <= 0.25)) KanColleClient.Current.OracleOfCompass.AfterResult();
+
+			//else if (this.fleet.Id < 2 && this.ships.Any(p => (p.HP.Current / (double)p.HP.Maximum) <= 0.25)) KanColleClient.Current.OracleOfCompass.AfterResult();
 
 			var condition = this.ships.Min(x => x.Condition);
 
@@ -116,7 +115,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			base.Tick();
 
-			if (this.RejuvenateTime.HasValue && this.fleet.State == FleetState.Homeport)
+			if (this.RejuvenateTime.HasValue && this.IsEnabled)
 			{
 				var remaining = this.RejuvenateTime.Value.Subtract(DateTimeOffset.Now);
 				if (remaining.Ticks < 0) remaining = TimeSpan.Zero;
@@ -125,7 +124,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 				if (!this.notificated && this.Rejuvenated != null && remaining.Ticks <= 0)
 				{
-					this.Rejuvenated(this, new ConditionRejuvenatedEventArgs(this.fleet.Name, 0));
+					this.Rejuvenated(this, new ConditionRejuvenatedEventArgs(this.Name, 0));
 					this.notificated = true;
 				}
 			}

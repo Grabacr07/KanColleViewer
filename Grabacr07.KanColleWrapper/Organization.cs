@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
+using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
 using Livet;
@@ -78,6 +79,26 @@ namespace Grabacr07.KanColleWrapper
 				if (this._Combined != value)
 				{
 					this._Combined = value;
+					this.Combine(value);
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region CombinedFleet 変更通知プロパティ
+
+		private CombinedFleet _CombinedFleet;
+
+		public CombinedFleet CombinedFleet
+		{
+			get { return this._CombinedFleet; }
+			set
+			{
+				if (this._CombinedFleet != value)
+				{
+					this._CombinedFleet = value;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -153,7 +174,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 
-		#region 母港 / 艦隊編成 (Update / Chaneg)
+		#region 母港 / 艦隊編成 (Update / Change)
 
 		/// <summary>
 		/// 指定した <see cref="kcsapi_ship2"/> 型の配列を使用して、<see cref="Ships"/> プロパティ値を更新します。
@@ -170,17 +191,23 @@ namespace Grabacr07.KanColleWrapper
 					target.Update(ship);
 
 					var fleet = this.GetFleet(target.Id);
-					if (fleet != null) fleet.Calculate();
+					if (fleet != null) fleet.State.Calculate();
 				}
 			}
 			else
 			{
 				this.Ships = new MemberTable<Ship>(source.Select(x => new Ship(this.homeport, x)));
-
-				if (KanColleClient.Current.IsInSortie)
+				try
 				{
-					foreach (var id in this.evacuatedShipsIds) this.Ships[id].Status |= ShipStatus.Evacuation;
-					foreach (var id in this.towShipIds) this.Ships[id].Status |= ShipStatus.Tow;
+					if (KanColleClient.Current.IsInSortie)
+					{
+						foreach (var id in this.evacuatedShipsIds) this.Ships[id].Situation |= ShipSituation.Evacuation;
+						foreach (var id in this.towShipIds) this.Ships[id].Situation |= ShipSituation.Tow;
+					}
+				}
+				catch(Exception e)
+				{
+					System.Diagnostics.Debug.WriteLine(e);
 				}
 			}
 		}
@@ -201,7 +228,7 @@ namespace Grabacr07.KanColleWrapper
 			}
 			else
 			{
-				this.Fleets.ForEach(x => x.Value.Dispose());
+				this.Fleets.ForEach(x => x.Value.SafeDispose());
 				this.Fleets = new MemberTable<Fleet>(source.Select(x => new Fleet(this.homeport, x)));
 			}
 		}
@@ -252,6 +279,15 @@ namespace Grabacr07.KanColleWrapper
 			}
 		}
 
+
+		private void Combine(bool combine)
+		{
+			this.CombinedFleet.SafeDispose();
+			this.CombinedFleet = combine
+				? new CombinedFleet(this.homeport, this.Fleets.OrderBy(x => x.Key).Select(x => x.Value).Take(2).ToArray())
+				: null;
+		}
+
 		#endregion
 
 		#region 補給 / 近代化改修 (Charge / Powerup)
@@ -273,7 +309,7 @@ namespace Grabacr07.KanColleWrapper
 				}
 			}
 
-			if (fleet != null) fleet.UpdateStatus();
+			if (fleet != null) fleet.State.Update();
 		}
 
 		private void Powerup(SvData<kcsapi_powerup> svd)
@@ -420,3 +456,4 @@ namespace Grabacr07.KanColleWrapper
 		#endregion
 	}
 }
+

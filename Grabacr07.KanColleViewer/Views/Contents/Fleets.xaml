@@ -238,7 +238,7 @@
 							</StackPanel>
 
 							<DataTemplate.Triggers>
-								<DataTrigger Binding="{Binding Ship.Status}"
+								<DataTrigger Binding="{Binding Ship.Situation}"
 											 Value="Repair">
 									<Setter TargetName="HPText"
 											Property="Opacity"
@@ -250,7 +250,7 @@
 											Property="Visibility"
 											Value="Visible" />
 								</DataTrigger>
-								<DataTrigger Binding="{Binding Ship.Status}"
+								<DataTrigger Binding="{Binding Ship.Situation}"
 											 Value="Evacuation,Tow">
 									<Setter TargetName="HPText"
 											Property="Opacity"

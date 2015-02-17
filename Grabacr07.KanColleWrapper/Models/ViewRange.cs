@@ -18,7 +18,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		string Description { get; }
 
-		double Calc(Fleet fleet);
+		double Calc(Ship[] ships);
 	}
 
 
@@ -50,7 +50,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		public abstract string Id { get; }
 		public abstract string Name { get; }
 		public abstract string Description { get; }
-		public abstract double Calc(Fleet fleet);
+		public abstract double Calc(Ship[] ships);
 
 		protected ViewRangeCalcLogic()
 		{
@@ -78,11 +78,11 @@ namespace Grabacr07.KanColleWrapper.Models
 			get { return "칸무스와 장비의 색적값 단순합계"; }
 		}
 
-		public override double Calc(Fleet fleet)
+		public override double Calc(Ship[] ships)
 		{
-			if (fleet == null || fleet.Ships.Length == 0) return 0;
+			if (ships == null || ships.Length == 0) return 0;
 
-			return fleet.Ships.Sum(x => x.ViewRange);
+			return ships.Sum(x => x.ViewRange);
 		}
 	}
 
@@ -104,28 +104,28 @@ namespace Grabacr07.KanColleWrapper.Models
 			get { return "(정찰기 × 2) + (전탐) + √(장비를 포함한 함대색적치 합계 - 정찰기 - 전탐)"; }
 		}
 
-		public override double Calc(Fleet fleet)
+		public override double Calc(Ship[] ships)
 		{
-			if (fleet == null || fleet.Ships.Length == 0) return 0;
+			if (ships == null || ships.Length == 0) return 0;
 
 			// http://wikiwiki.jp/kancolle/?%C6%EE%C0%BE%BD%F4%C5%E7%B3%A4%B0%E8#area5
 			// [索敵装備と装備例] によって示されている計算式
 			// stype=7 が偵察機 (2 倍する索敵値)、stype=8 が電探
 
-			var spotter = fleet.Ships.SelectMany(
+			var spotter = ships.SelectMany(
 				x => x.EquippedSlots
 					.Where(s => s.Item.Info.RawData.api_type.Get(1) == 7)
 					.Where(s => s.Current > 0)
 					.Select(s => s.Item.Info.RawData.api_saku)
 				).Sum();
 
-			var radar = fleet.Ships.SelectMany(
+			var radar = ships.SelectMany(
 				x => x.EquippedSlots
 					.Where(s => s.Item.Info.RawData.api_type.Get(1) == 8)
 					.Select(s => s.Item.Info.RawData.api_saku)
 				).Sum();
 
-			return (spotter * 2) + radar + (int)Math.Sqrt(fleet.Ships.Sum(x => x.ViewRange) - spotter - radar);
+			return (spotter * 2) + radar + (int)Math.Sqrt(ships.Sum(x => x.ViewRange) - spotter - radar);
 		}
 	}
 
@@ -139,7 +139,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public override string Name
 		{
-			get { return "2-5 식 (가을)"; }
+			get { return "2-5식 (가을)"; }
 		}
 
 		public override string Description
@@ -153,9 +153,9 @@ namespace Grabacr07.KanColleWrapper.Models
 			}
 		}
 
-		public override double Calc(Fleet fleet)
+		public override double Calc(Ship[] ships)
 		{
-			if (fleet == null || fleet.Ships.Length == 0) return 0;
+			if (ships == null || ships.Length == 0) return 0;
 
 			// http://wikiwiki.jp/kancolle/?%C6%EE%C0%BE%BD%F4%C5%E7%B3%A4%B0%E8#search-calc
 			// > 2-5式では説明出来ない事象を解決するため膨大な検証報告数より導き出した新式。2014年11月に改良され精度があがった。
@@ -171,7 +171,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			// > + √(各艦毎の素索敵) × (1.69)
 			// > + (司令部レベルを5の倍数に切り上げ) × (-0.61)
 
-			var itemScore = fleet.Ships
+			var itemScore = ships
 				.SelectMany(x => x.EquippedSlots)
 				.Select(x => x.Item.Info)
 				.GroupBy(
@@ -180,7 +180,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					(type, scores) => new { type, score = scores.Sum() })
 				.Aggregate(.0, (score, item) => score + GetScore(item.type, item.score));
 
-			var shipScore = fleet.Ships
+			var shipScore = ships
 				.Select(x => x.ViewRange - x.EquippedSlots.Sum(s => s.Item.Info.RawData.api_saku))
 				.Select(x => Math.Sqrt(x))
 				.Sum() * 1.69;

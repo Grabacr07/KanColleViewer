@@ -376,16 +376,16 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#region Status 変更通知プロパティ
 
-		private ShipStatus _Status;
+		private ShipSituation situation;
 
-		public ShipStatus Status
+		public ShipSituation Situation
 		{
-			get { return this._Status; }
+			get { return this.situation; }
 			set
 			{
-				if (this._Status != value)
+				if (this.situation != value)
 				{
-					this._Status = value;
+					this.situation = value;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -483,17 +483,5 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.Maximum = maximum;
 			this.Current = current;
 		}
-	}
-
-	[Flags]
-	public enum ShipStatus
-	{
-		None = 0,
-		Sortie = 1,
-		Repair = 1 << 1,
-		Evacuation = 1 << 2,
-		Tow = 1 << 3,
-		ModerateDamaged = 1 << 4,
-		HeavilyDamaged = 1 << 5,
 	}
 }
