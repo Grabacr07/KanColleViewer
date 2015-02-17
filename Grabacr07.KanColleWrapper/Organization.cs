@@ -390,11 +390,11 @@ namespace Grabacr07.KanColleWrapper
 			proxy.api_req_combined_battle_battleresult
 				.TryParse<kcsapi_combined_battle_battleresult>()
 				.Where(x => x.Data.api_escape != null)
-				.Select(x => x.Data.api_escape)
+				.Select(x => x.Data)
 				.Subscribe(x =>
 				{
-					evacuationOfferedShipIds = x.api_escape_idx;
-					towOfferedShipIds = x.api_tow_idx;
+					evacuationOfferedShipIds = x.api_escape.api_escape_idx.Select(idx => x.api_ship_id[idx - 1]).ToArray();
+					towOfferedShipIds = x.api_escape.api_tow_idx.Select(idx => x.api_ship_id[idx - 1]).ToArray();
 				});
 			proxy.api_req_combined_battle_goback_port
 				.Subscribe(_ =>
