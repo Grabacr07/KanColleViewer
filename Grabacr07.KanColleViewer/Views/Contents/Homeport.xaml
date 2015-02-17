@@ -59,18 +59,7 @@
 
 		<StackPanel Grid.Column="1"
 					Orientation="Horizontal" VerticalAlignment="Center">
-			<Grid>
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto" />
-					<RowDefinition Height="*" />
-				</Grid.RowDefinitions>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="Auto" />
-				</Grid.ColumnDefinitions>
-
-				<TextBlock Grid.Row="0"
-						   Grid.Column="1">
+			<TextBlock>
 					<Run Text="{Binding Resources.Homeport_RemodelKit, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 					<Run Text="{Binding Materials.Model.RemodelKitMaterials, Mode=OneWay}"
 						 Style="{DynamicResource EmphaticTextElementStyleKey}" />
@@ -78,21 +67,10 @@
 					<Run Text="{Binding Resources.Homeport_InstantBuild, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 					<Run Text="{Binding Materials.Model.InstantBuildMaterials, Mode=OneWay}"
 						 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-				</TextBlock>
-			</Grid>
+			</TextBlock>
 
-			<Grid>
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto" />
-					<RowDefinition Height="*" />
-				</Grid.RowDefinitions>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="Auto" />
-				</Grid.ColumnDefinitions>
 
-				<TextBlock Grid.Row="0"
-						   Grid.Column="1">
+			<TextBlock>
 					<Run Text="{Binding Resources.Homeport_NoOfShips, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 					<Run Text="{Binding Ships.Count, Mode=OneWay}"
 						 Style="{DynamicResource EmphaticTextElementStyleKey}" />
@@ -104,8 +82,7 @@
 						 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 					<Run Text="/" />
 					<Run Text="{Binding Admiral.Model.MaxSlotItemCount, Mode=OneWay}" />
-				</TextBlock>
-			</Grid>
+			</TextBlock>
 		</StackPanel>
 	</Grid>
 </UserControl>

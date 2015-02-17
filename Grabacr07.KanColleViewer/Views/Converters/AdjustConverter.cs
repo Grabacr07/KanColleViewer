@@ -17,7 +17,7 @@ namespace Grabacr07.KanColleViewer.Views.Converters
 		{
 			var number = Double.Parse(value.ToString());
 			var plus = Double.Parse(parameter.ToString());
-			if (Settings2.Current.OrientationMode == Models.OrientationType.Vertical) plus = plus - 54.00;
+			if (Settings2.Current.OrientationMode == Models.OrientationType.Vertical) plus = plus - 55.00;
 			return number + plus;
 		}
 
@@ -25,7 +25,7 @@ namespace Grabacr07.KanColleViewer.Views.Converters
 		{
 			var number = Double.Parse(value.ToString());
 			var plus = Double.Parse(parameter.ToString());
-			if (Settings2.Current.OrientationMode == Models.OrientationType.Vertical) plus = plus - 54.00;
+			if (Settings2.Current.OrientationMode == Models.OrientationType.Vertical) plus = plus - 55.00;
 			return number - plus;
 		}
 	}

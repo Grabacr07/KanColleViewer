@@ -44,7 +44,7 @@
         <Binding ElementName="KancolleBrowser"
                 Path="ActualHeight"
                 Converter="{StaticResource AdjustConverter}"
-                ConverterParameter="113"
+                ConverterParameter="114"
                 Mode="OneWay" />
     </metro:MetroWindow.MinHeight>
     
@@ -115,7 +115,7 @@
 		<!-- #endregion -->
         
         <ContentControl Grid.Row="1" Content="{Binding Content}"
-                        Height="54"
+                        Height="55"
                         Visibility="{Binding HorizontalBar}">
             <ContentControl.Resources>
                 <DataTemplate DataType="{x:Type viewModels:StartContentViewModel}">
@@ -164,7 +164,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <ContentControl Height="54" Content="{Binding Content}"
+                <ContentControl Height="55" Content="{Binding Content}"
                                 Visibility="{Binding VerticalBar}"
                                 VerticalAlignment="Bottom" 
                                 Margin="0,4,0,0">
