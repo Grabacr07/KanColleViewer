@@ -77,7 +77,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		private void UpdateName()
 		{
-			this.Name = "連合艦隊 (" + this.Fleets.Select(x => x.Name).Join(", ") + ")";
+			this.Name = this.Fleets.Select(x => x.Name).Join(", ");
 		}
 	}
 }

@@ -8,7 +8,7 @@ using Livet.EventListeners;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 {
-	public class CombinedFleetViewModel : ViewModel
+	public class CombinedFleetViewModel : ItemViewModel
 	{
 		public CombinedFleet Source { get; private set; }
 
@@ -35,6 +35,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet.State)
 			{
+				{ "Name", (sender, args) => this.RaisePropertyChanged("Name") },
 				{ "Situation", (sender, args) => this.RaisePropertyChanged("QuickStateView") },
 			});
 

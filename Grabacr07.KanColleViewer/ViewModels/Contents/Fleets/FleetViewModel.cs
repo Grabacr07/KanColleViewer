@@ -11,18 +11,18 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 	/// <summary>
 	/// 単一の艦隊情報を提供します。
 	/// </summary>
-	public class FleetViewModel : ViewModel
+	public class FleetViewModel : ItemViewModel
 	{
-		private readonly Fleet source;
+		public Fleet Source { get; private set; }
 
 		public int Id
 		{
-			get { return this.source.Id; }
+			get { return this.Source.Id; }
 		}
 
 		public string Name
 		{
-			get { return string.IsNullOrEmpty(this.source.Name.Trim()) ? "(第 " + this.source.Id + " 艦隊)" : this.source.Name; }
+			get { return string.IsNullOrEmpty(this.Source.Name.Trim()) ? "(第 " + this.Source.Id + " 艦隊)" : this.Source.Name; }
 		}
 
 		/// <summary>
@@ -30,7 +30,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		/// </summary>
 		public ShipViewModel[] Ships
 		{
-			get { return this.source.Ships.Select(x => new ShipViewModel(x)).ToArray(); }
+			get { return this.Source.Ships.Select(x => new ShipViewModel(x)).ToArray(); }
 		}
 
 		public FleetStateViewModel State { get; private set; }
@@ -41,7 +41,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		{
 			get
 			{
-				var situation = this.source.State.Situation;
+				var situation = this.Source.State.Situation;
 				if (situation == FleetSituation.Empty)
 				{
 					return NullViewModel.Instance;
@@ -59,29 +59,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			}
 		}
 
-		#region IsSelected 変更通知プロパティ
-
-		private bool _IsSelected;
-
-		public bool IsSelected
-		{
-			get { return this._IsSelected; }
-			set
-			{
-				if (this._IsSelected != value)
-				{
-					this._IsSelected = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
 
 		public FleetViewModel(Fleet fleet)
 		{
-			this.source = fleet;
+			this.Source = fleet;
 
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet)
 			{
