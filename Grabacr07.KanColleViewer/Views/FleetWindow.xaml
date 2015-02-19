@@ -17,7 +17,7 @@
 				   xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 				   xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
 				   xmlns:catalogs="clr-namespace:Grabacr07.KanColleViewer.Views.Catalogs"
-				   xmlns:contentsVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
+				   xmlns:fleetsVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:FleetWindowViewModel}"
 				   Title="{Binding Title}"
@@ -90,99 +90,82 @@
 				<RowDefinition />
 			</Grid.RowDefinitions>
 
-			<StackPanel Orientation="Horizontal"
-						Margin="8,8,8,0">
-				<StackPanel.Resources>
-					<Style TargetType="{x:Type ListBox}">
-						<Setter Property="SelectionMode"
-								Value="Single" />
-						<Setter Property="Background"
-								Value="Transparent" />
-
+			<ListBox ItemsSource="{Binding Fleets}"
+					 SelectedValue="{Binding SelectedFleet}"
+					 SelectionMode="Single"
+					 Background="Transparent"
+					 Margin="8,8,8,0">
+				<ListBox.Template>
+					<ControlTemplate TargetType="{x:Type ListBox}">
+						<StackPanel Background="{TemplateBinding Background}">
+							<Border BorderThickness="0,1,1,0"
+									BorderBrush="{DynamicResource ActiveBorderBrushKey}">
+								<UniformGrid IsItemsHost="True"
+											 Rows="1" />
+							</Border>
+						</StackPanel>
+					</ControlTemplate>
+				</ListBox.Template>
+				<ListBox.ItemContainerStyle>
+					<Style TargetType="{x:Type ListBoxItem}">
+						<Setter Property="Foreground"
+								Value="{DynamicResource ActiveForegroundBrushKey}" />
+						<Setter Property="IsSelected"
+								Value="{Binding IsSelected}" />
 						<Setter Property="Template">
 							<Setter.Value>
-								<ControlTemplate TargetType="{x:Type ListBox}">
-									<StackPanel Background="{TemplateBinding Background}">
-										<UniformGrid IsItemsHost="True"
-													 Rows="1" />
-									</StackPanel>
+								<ControlTemplate TargetType="{x:Type ListBoxItem}">
+									<Border Background="{TemplateBinding Background}"
+											BorderBrush="{DynamicResource ActiveBorderBrushKey}"
+											BorderThickness="1,0,0,0">
+										<ContentPresenter />
+									</Border>
 								</ControlTemplate>
 							</Setter.Value>
 						</Setter>
-						<Setter Property="ItemContainerStyle">
-							<Setter.Value>
-								<Style TargetType="{x:Type ListBoxItem}">
-									<Setter Property="Foreground"
-											Value="{DynamicResource ActiveForegroundBrushKey}" />
-									<Setter Property="IsSelected"
-											Value="{Binding IsSelected}" />
-									<Setter Property="Template">
-										<Setter.Value>
-											<ControlTemplate TargetType="{x:Type ListBoxItem}">
-												<Border Background="{TemplateBinding Background}"
-														BorderBrush="{DynamicResource ActiveBorderBrushKey}"
-														Padding="8"
-														Margin="16,0">
-													<ContentPresenter />
-												</Border>
-											</ControlTemplate>
-										</Setter.Value>
-									</Setter>
-									<Setter Property="FocusVisualStyle"
-											Value="{DynamicResource {x:Static SystemParameters.FocusVisualStyleKey}}" />
-									<Style.Triggers>
-										<Trigger Property="IsMouseOver"
-												 Value="True">
-											<Setter Property="Background"
-													Value="{DynamicResource AccentHighlightBrushKey}" />
-											<Setter Property="Foreground"
-													Value="{DynamicResource AccentForegroundBrushKey}" />
-										</Trigger>
-										<Trigger Property="IsSelected"
-												 Value="True">
-											<Setter Property="Background"
-													Value="{DynamicResource AccentBrushKey}" />
-											<Setter Property="Foreground"
-													Value="{DynamicResource AccentForegroundBrushKey}" />
-										</Trigger>
-									</Style.Triggers>
-								</Style>
-							</Setter.Value>
-						</Setter>
+						<Setter Property="FocusVisualStyle"
+								Value="{DynamicResource {x:Static SystemParameters.FocusVisualStyleKey}}" />
+						<Style.Triggers>
+							<Trigger Property="IsMouseOver"
+									 Value="True">
+								<Setter Property="Background"
+										Value="{DynamicResource AccentHighlightBrushKey}" />
+								<Setter Property="Foreground"
+										Value="{DynamicResource AccentForegroundBrushKey}" />
+							</Trigger>
+							<Trigger Property="IsSelected"
+									 Value="True">
+								<Setter Property="Background"
+										Value="{DynamicResource AccentBrushKey}" />
+								<Setter Property="Foreground"
+										Value="{DynamicResource AccentForegroundBrushKey}" />
+							</Trigger>
+						</Style.Triggers>
 					</Style>
-				</StackPanel.Resources>
-
-				<ListBox ItemsSource="{Binding CombinedFleets}"
-						 SelectedValue="{Binding SelectedFleet}">
-					<ListBox.ItemTemplate>
-						<DataTemplate>
-							<Border Padding="16,8">
-								<StackPanel VerticalAlignment="Center"
-											HorizontalAlignment="Center">
-									<TextBlock Text="連合艦隊"
-											   HorizontalAlignment="Center"
-											   Margin="0,0,0,4"
-											   Style="{DynamicResource EmphaticTextStyleKey}" />
-									<TextBlock Text="{Binding Name}"
-											   Style="{DynamicResource DefaultTextStyleKey}" />
-								</StackPanel>
-							</Border>
-						</DataTemplate>
-					</ListBox.ItemTemplate>
-				</ListBox>
-				<ListBox ItemsSource="{Binding Fleets}"
-						 SelectedValue="{Binding SelectedFleet}">
-					<ListBox.ItemTemplate>
-						<DataTemplate>
-							<Border Padding="16,8">
+				</ListBox.ItemContainerStyle>
+				<ListBox.Resources>
+					<DataTemplate DataType="{x:Type fleetsVm:FleetViewModel}">
+						<Border Padding="16,8">
+							<TextBlock Text="{Binding Name}"
+									   HorizontalAlignment="Center"
+									   Style="{DynamicResource EmphaticTextStyleKey}" />
+						</Border>
+					</DataTemplate>
+					<DataTemplate DataType="{x:Type fleetsVm:CombinedFleetViewModel}">
+						<Border Padding="16,6">
+							<StackPanel>
+								<TextBlock Text="連合艦隊"
+										   Margin="0,0,0,2"
+										   Style="{DynamicResource EmphaticTextStyleKey}"
+										   HorizontalAlignment="Center" />
 								<TextBlock Text="{Binding Name}"
-										   HorizontalAlignment="Center"
-										   Style="{DynamicResource EmphaticTextStyleKey}" />
-							</Border>
-						</DataTemplate>
-					</ListBox.ItemTemplate>
-				</ListBox>
-			</StackPanel>
+										   Style="{DynamicResource DefaultTextStyleKey}"
+										   HorizontalAlignment="Center" />
+							</StackPanel>
+						</Border>
+					</DataTemplate>
+				</ListBox.Resources>
+			</ListBox>
 
 			<Border Grid.Row="1"
 					BorderThickness="1"
@@ -190,7 +173,16 @@
 					Margin="8,0,8,8"
 					Padding="8">
 				<ContentControl Content="{Binding SelectedFleet}">
+					<ContentControl.Resources>
+						<DataTemplate DataType="{x:Type fleetsVm:FleetViewModel}">
+							<Grid>
 
+							</Grid>
+						</DataTemplate>
+						<DataTemplate DataType="{x:Type fleetsVm:CombinedFleetViewModel}">
+
+						</DataTemplate>
+					</ContentControl.Resources>
 				</ContentControl>
 			</Border>
 		</Grid>

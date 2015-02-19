@@ -25,9 +25,9 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#region Fleets 変更通知プロパティ
 
-		private FleetViewModel[] _Fleets;
+		private ItemViewModel[] _Fleets;
 
-		public FleetViewModel[] Fleets
+		public ItemViewModel[] Fleets
 		{
 			get { return this._Fleets; }
 			set
@@ -35,25 +35,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				if (this._Fleets != value)
 				{
 					this._Fleets = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region CombinedFleets 変更通知プロパティ
-
-		private CombinedFleetViewModel[] _CombinedFleets;
-
-		public CombinedFleetViewModel[] CombinedFleets
-		{
-			get { return this._CombinedFleets; }
-			set
-			{
-				if (this._CombinedFleets != value)
-				{
-					this._CombinedFleets = value;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -87,9 +68,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		public FleetWindowViewModel()
 		{
 			this.Title = "艦隊詳細";
-
-			this.Fleets = new FleetViewModel[0];
-			this.CombinedFleets = new CombinedFleetViewModel[0];
+			this.Fleets = new ItemViewModel[0];
 
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport.Organization)
 			{
@@ -111,28 +90,28 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		private void UpdateFleets()
 		{
-			foreach (var f in this.CombinedFleets.Where(x => x != null)) f.Dispose();
+			// ややこしいけど、CombinedFleetViewModel は連合艦隊が編成・解除される度に使い捨て
+			// FleetViewModel は InitializeFleets() で作ったインスタンスをずっと使う
+
+			foreach (var f in this.Fleets.OfType<CombinedFleetViewModel>()) f.Dispose();
 
 			if (KanColleClient.Current.Homeport.Organization.Combined)
 			{
 				var cfvm = new CombinedFleetViewModel(KanColleClient.Current.Homeport.Organization.CombinedFleet);
+				var fleets = this.allFleets.Where(x => cfvm.Source.Fleets.All(f => f != x.Source));
 
-				this.CombinedFleets = new[] { cfvm, };
-				this.Fleets = this.allFleets
-					.Where(x => this.CombinedFleets.SelectMany(cf => cf.Source.Fleets).All(f => f != x.Source))
-					.ToArray();
+				this.Fleets = EnumerableEx.Return<ItemViewModel>(cfvm).Concat(fleets).ToArray();
 				this.SelectedFleet = cfvm;
 			}
 			else
 			{
-				this.CombinedFleets = new CombinedFleetViewModel[0];
-				this.Fleets = this.allFleets;
+				this.Fleets = this.allFleets.OfType<ItemViewModel>().ToArray();
 
 				if (this.allFleets.All(x => x != this.SelectedFleet))
 				{
 					// SelectedFleet が allFleets の中のどれでもないとき
 					// -> SelectedFleet は連合艦隊だったので、改めて第一艦隊を選択
-					this.SelectedFleet = this.allFleets.FirstOrDefault();
+					this.SelectedFleet = this.Fleets.FirstOrDefault();
 				}
 			}
 		}
