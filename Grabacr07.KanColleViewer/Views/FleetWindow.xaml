@@ -94,11 +94,12 @@
 					 SelectedValue="{Binding SelectedFleet}"
 					 SelectionMode="Single"
 					 Background="Transparent"
+					 MinHeight="70"
 					 Margin="8,8,8,0">
 				<ListBox.Template>
 					<ControlTemplate TargetType="{x:Type ListBox}">
 						<StackPanel Background="{TemplateBinding Background}">
-							<Border BorderThickness="0,1,1,0"
+							<Border BorderThickness="0,1,1,1"
 									BorderBrush="{DynamicResource ActiveBorderBrushKey}">
 								<UniformGrid IsItemsHost="True"
 											 Rows="1" />
@@ -168,22 +169,285 @@
 			</ListBox>
 
 			<Border Grid.Row="1"
-					BorderThickness="1"
-					BorderBrush="{DynamicResource BorderBrushKey}"
-					Margin="8,0,8,8"
-					Padding="8">
-				<ContentControl Content="{Binding SelectedFleet}">
-					<ContentControl.Resources>
-						<DataTemplate DataType="{x:Type fleetsVm:FleetViewModel}">
-							<Grid>
+					DataContext="{Binding SelectedFleet}"
+					d:DataContext="{d:DesignInstance fleetsVm:FleetViewModel}"
+					Margin="7">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition />
+					</Grid.RowDefinitions>
 
-							</Grid>
-						</DataTemplate>
-						<DataTemplate DataType="{x:Type fleetsVm:CombinedFleetViewModel}">
+					<Border Grid.Row="0">
+						<Border.Resources>
+							<Style x:Key="IndicatorTextBlockStyleKey"
+								   TargetType="{x:Type TextBlock}">
+								<Setter Property="FontFamily"
+										Value="{DynamicResource DefaultFontFamilyKey}" />
+								<Setter Property="FontSize"
+										Value="{DynamicResource DefaultFontSizeKey}" />
+								<Setter Property="Foreground"
+										Value="{DynamicResource SemiActiveForegroundBrushKey}" />
+								<Setter Property="Background"
+										Value="{DynamicResource SemiactiveBackgroundBrushKey}" />
+								<Setter Property="Padding"
+										Value="12,6" />
+								<Setter Property="Margin"
+										Value="1" />
+							</Style>
+						</Border.Resources>
+						<StackPanel>
+							<TextBlock>
+								<TextBlock.Style>
+									<Style TargetType="{x:Type TextBlock}"
+										   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
+										<Setter Property="Text"
+												Value="艦隊は出撃していません" />
+										<Setter Property="FontFamily"
+												Value="{DynamicResource EmphaticFontFamilyKey}" />
+										<Setter Property="FontSize"
+												Value="{DynamicResource EmphaticFontSizeKey}" />
+										<Setter Property="Padding"
+												Value="16,8" />
+										<Setter Property="TextAlignment"
+												Value="Center" />
+										<Style.Triggers>
+											<DataTrigger Binding="{Binding Source.State.Situation}"
+														 Value="Sortie">
+												<Setter Property="Text"
+														Value="艦隊は出撃中です！" />
+												<Setter Property="Foreground"
+														Value="{DynamicResource ActiveForegroundBrushKey}" />
+												<Setter Property="Background"
+														Value="#FF5A2020" />
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</TextBlock.Style>
+							</TextBlock>
 
-						</DataTemplate>
-					</ContentControl.Resources>
-				</ContentControl>
+							<UniformGrid Columns="2">
+								<TextBlock>
+									<TextBlock.Style>
+										<Style TargetType="{x:Type TextBlock}"
+											   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
+											<Setter Property="Text"
+													Value="艦隊の出撃準備は完了していません" />
+											<Style.Triggers>
+												<DataTrigger Binding="{Binding Source.State.IsReady}"
+															 Value="True">
+													<Setter Property="Text"
+															Value="出撃準備完了！" />
+													<Setter Property="Foreground"
+															Value="{DynamicResource ActiveForegroundBrushKey}" />
+													<Setter Property="Background"
+															Value="{DynamicResource FleetReSortieBrushKey}" />
+												</DataTrigger>
+												<DataTrigger Binding="{Binding Source.State.Situation}"
+															 Value="Sortie">
+													<Setter Property="Text"
+															Value="出撃準備完了！" />
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
+
+								<TextBlock>
+									<TextBlock.Style>
+										<Style TargetType="{x:Type TextBlock}"
+											   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
+											<Setter Property="Text"
+													Value="艦隊は遠征中ではありません" />
+											<Style.Triggers>
+												<MultiDataTrigger>
+													<MultiDataTrigger.Conditions>
+														<Condition Binding="{Binding Source.State.Situation}"
+																   Value="Expedition" />
+													</MultiDataTrigger.Conditions>
+													<Setter Property="Text">
+														<Setter.Value>
+															<MultiBinding StringFormat="艦隊は遠征中です: {0} - {1}">
+																<Binding Path="Expedition.Mission.Title" />
+																<Binding Path="Expedition.Remaining" />
+															</MultiBinding>
+														</Setter.Value>
+													</Setter>
+													<Setter Property="Foreground"
+															Value="{DynamicResource ActiveForegroundBrushKey}" />
+													<Setter Property="Background"
+															Value="{DynamicResource FleetExpeditionBrushKey}" />
+												</MultiDataTrigger>
+											</Style.Triggers>
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
+
+								<TextBlock x:Name="DamageIndicator">
+									<VisualStateManager.VisualStateGroups>
+										<VisualStateGroup x:Name="VisualStateGroup">
+											<VisualState x:Name="Normal">
+												<!--<Storyboard>
+													<ColorAnimationUsingKeyFrames Storyboard.TargetName="DamageIndicator"
+																				  Storyboard.TargetProperty="Background.(SolidColorBrush.Color)">
+														<EasingColorKeyFrame KeyTime="0"
+																			 Value="#FF5A2020" />
+													</ColorAnimationUsingKeyFrames>
+												</Storyboard>-->
+											</VisualState>
+											<VisualState x:Name="Blinking">
+												<Storyboard AutoReverse="True"
+															RepeatBehavior="Forever">
+													<ColorAnimationUsingKeyFrames Storyboard.TargetName="DamageIndicator"
+																				  Storyboard.TargetProperty="Background.(SolidColorBrush.Color)">
+														<EasingColorKeyFrame KeyTime="0"
+																			 Value="{DynamicResource ThemeColorKey}" />
+														<EasingColorKeyFrame KeyTime="0:0:0.3"
+																			 Value="#FFB40000" />
+													</ColorAnimationUsingKeyFrames>
+													<!--<ObjectAnimationUsingKeyFrames Storyboard.TargetName="Text"
+																				   Storyboard.TargetProperty="Text">
+														<DiscreteObjectKeyFrame KeyTime="0"
+																				Value="大破した艦娘がいます！！！" />
+													</ObjectAnimationUsingKeyFrames>-->
+												</Storyboard>
+											</VisualState>
+										</VisualStateGroup>
+									</VisualStateManager.VisualStateGroups>
+
+									<i:Interaction.Behaviors>
+										<ei:DataStateBehavior Binding="{Binding Source.State.Situation}"
+															  Value="Sortie,HeavilyDamaged"
+															  TrueState="Blinking"
+															  FalseState="Normal" />
+									</i:Interaction.Behaviors>
+
+									<TextBlock.Style>
+										<Style TargetType="{x:Type TextBlock}"
+											   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
+											<Setter Property="Text"
+													Value="艦隊の艦娘に大きなダメージはありません" />
+											<Style.Triggers>
+												<MultiDataTrigger>
+													<MultiDataTrigger.Conditions>
+														<Condition Binding="{Binding Source.State.Situation}"
+																   Value="Homeport,HeavilyDamaged" />
+													</MultiDataTrigger.Conditions>
+													<Setter Property="Text"
+															Value="艦隊に大破した艦娘がいます" />
+													<Setter Property="Foreground"
+															Value="{DynamicResource ActiveForegroundBrushKey}" />
+													<Setter Property="Background"
+															Value="{DynamicResource FleetRepairingBrushKey}" />
+												</MultiDataTrigger>
+												<MultiDataTrigger>
+													<MultiDataTrigger.Conditions>
+														<Condition Binding="{Binding Source.State.Situation}"
+																   Value="Sortie,HeavilyDamaged" />
+													</MultiDataTrigger.Conditions>
+													<Setter Property="Text"
+															Value="艦隊に大破した艦娘がいます！" />
+													<Setter Property="Foreground"
+															Value="{DynamicResource ActiveForegroundBrushKey}" />
+												</MultiDataTrigger>
+											</Style.Triggers>
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
+
+								<TextBlock>
+									<TextBlock.Style>
+										<Style TargetType="{x:Type TextBlock}"
+											   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
+											<Setter Property="Text"
+													Value="艦隊の艦娘は入渠していません" />
+											<Style.Triggers>
+												<MultiDataTrigger>
+													<MultiDataTrigger.Conditions>
+														<Condition Binding="{Binding Source.State.Situation}"
+																   Value="Repairing" />
+													</MultiDataTrigger.Conditions>
+													<Setter Property="Text"
+															Value="艦隊に入渠中の艦娘がいます" />
+													<Setter Property="Foreground"
+															Value="{DynamicResource ActiveForegroundBrushKey}" />
+													<Setter Property="Background"
+															Value="{DynamicResource FleetRepairingBrushKey}" />
+												</MultiDataTrigger>
+											</Style.Triggers>
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
+
+								<TextBlock>
+									<TextBlock.Style>
+										<Style TargetType="{x:Type TextBlock}"
+											   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
+											<Setter Property="Text"
+													Value="艦隊は補給済みです" />
+											<Style.Triggers>
+												<MultiDataTrigger>
+													<MultiDataTrigger.Conditions>
+														<Condition Binding="{Binding Source.State.Situation}"
+																   Value="Homeport,InShortSupply" />
+													</MultiDataTrigger.Conditions>
+													<Setter Property="Text"
+															Value="艦隊に未補給の艦娘がいます" />
+													<Setter Property="Foreground"
+															Value="{DynamicResource ActiveForegroundBrushKey}" />
+													<Setter Property="Background"
+															Value="{DynamicResource FleetRepairingBrushKey}" />
+												</MultiDataTrigger>
+											</Style.Triggers>
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
+
+								<TextBlock>
+									<TextBlock.Style>
+										<Style TargetType="{x:Type TextBlock}"
+											   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
+											<Setter Property="Text"
+													Value="艦隊の艦娘は疲労していません" />
+											<Style.Triggers>
+												<MultiDataTrigger>
+													<MultiDataTrigger.Conditions>
+														<Condition Binding="{Binding Source.State.Situation}"
+																   Value="Homeport" />
+														<Condition Binding="{Binding State.Homeport.Condition.IsRejuvenating}"
+																   Value="True" />
+													</MultiDataTrigger.Conditions>
+													<Setter Property="Text">
+														<Setter.Value>
+															<MultiBinding StringFormat="疲労回復まで: {0}">
+																<Binding Path="State.Homeport.Condition.Remaining" />
+															</MultiBinding>
+														</Setter.Value>
+													</Setter>
+													<Setter Property="Foreground"
+															Value="{DynamicResource ActiveForegroundBrushKey}" />
+													<Setter Property="Background"
+															Value="{DynamicResource FleetRepairingBrushKey}" />
+												</MultiDataTrigger>
+											</Style.Triggers>
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
+
+
+							</UniformGrid>
+						</StackPanel>
+					</Border>
+
+
+					<ContentControl Grid.Row="2">
+						<ContentControl.Resources>
+							<DataTemplate DataType="{x:Type fleetsVm:FleetViewModel}" />
+							<DataTemplate DataType="{x:Type fleetsVm:CombinedFleetViewModel}" />
+						</ContentControl.Resources>
+					</ContentControl>
+				</Grid>
 			</Border>
 		</Grid>
 	</Grid>

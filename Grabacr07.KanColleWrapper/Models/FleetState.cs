@@ -210,6 +210,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			else
 			{
 				var heavilyDamaged = ships
+					.Where(s => !this.homeport.Repairyard.CheckRepairing(s.Id))
 					.Where(s => !s.Situation.HasFlag(ShipSituation.Evacuation) && !s.Situation.HasFlag(ShipSituation.Tow))
 					.Any(s => (s.HP.Current / (double)s.HP.Maximum) <= 0.25);
 				if (heavilyDamaged)
