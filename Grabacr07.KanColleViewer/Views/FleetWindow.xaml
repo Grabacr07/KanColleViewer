@@ -18,6 +18,8 @@
 				   xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
 				   xmlns:catalogs="clr-namespace:Grabacr07.KanColleViewer.Views.Catalogs"
 				   xmlns:fleetsVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
+				   xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
+				   xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:FleetWindowViewModel}"
 				   Title="{Binding Title}"
@@ -94,7 +96,6 @@
 					 SelectedValue="{Binding SelectedFleet}"
 					 SelectionMode="Single"
 					 Background="Transparent"
-					 MinHeight="70"
 					 Margin="8,8,8,0">
 				<ListBox.Template>
 					<ControlTemplate TargetType="{x:Type ListBox}">
@@ -109,6 +110,8 @@
 				</ListBox.Template>
 				<ListBox.ItemContainerStyle>
 					<Style TargetType="{x:Type ListBoxItem}">
+						<Setter Property="MinHeight"
+								Value="50" />
 						<Setter Property="Foreground"
 								Value="{DynamicResource ActiveForegroundBrushKey}" />
 						<Setter Property="IsSelected"
@@ -154,7 +157,7 @@
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type fleetsVm:CombinedFleetViewModel}">
 						<Border Padding="16,6">
-							<StackPanel>
+							<StackPanel VerticalAlignment="Center">
 								<TextBlock Text="連合艦隊"
 										   Margin="0,0,0,2"
 										   Style="{DynamicResource EmphaticTextStyleKey}"
@@ -170,8 +173,7 @@
 
 			<Border Grid.Row="1"
 					DataContext="{Binding SelectedFleet}"
-					d:DataContext="{d:DesignInstance fleetsVm:FleetViewModel}"
-					Margin="7">
+					d:DataContext="{d:DesignInstance fleetsVm:FleetViewModel}">
 				<Grid>
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto" />
@@ -179,7 +181,8 @@
 						<RowDefinition />
 					</Grid.RowDefinitions>
 
-					<Border Grid.Row="0">
+					<Border Grid.Row="0"
+							Margin="6">
 						<Border.Resources>
 							<Style x:Key="IndicatorTextBlockStyleKey"
 								   TargetType="{x:Type TextBlock}">
@@ -194,10 +197,41 @@
 								<Setter Property="Padding"
 										Value="12,6" />
 								<Setter Property="Margin"
-										Value="1" />
+										Value="2" />
 							</Style>
 						</Border.Resources>
 						<StackPanel>
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="VisualStateGroup">
+									<VisualState x:Name="Normal">
+										<!--<Storyboard>
+													<ColorAnimationUsingKeyFrames Storyboard.TargetName="DamageIndicator"
+																				  Storyboard.TargetProperty="Background.(SolidColorBrush.Color)">
+														<EasingColorKeyFrame KeyTime="0"
+																			 Value="#FF5A2020" />
+													</ColorAnimationUsingKeyFrames>
+												</Storyboard>-->
+									</VisualState>
+									<VisualState x:Name="Blinking">
+										<Storyboard AutoReverse="True"
+													RepeatBehavior="Forever">
+											<ColorAnimationUsingKeyFrames Storyboard.TargetName="DamageIndicator"
+																		  Storyboard.TargetProperty="Background.(SolidColorBrush.Color)">
+												<EasingColorKeyFrame KeyTime="0"
+																	 Value="{DynamicResource ThemeColorKey}" />
+												<EasingColorKeyFrame KeyTime="0:0:0.3"
+																	 Value="#FFB40000" />
+											</ColorAnimationUsingKeyFrames>
+											<!--<ObjectAnimationUsingKeyFrames Storyboard.TargetName="Text"
+																				   Storyboard.TargetProperty="Text">
+														<DiscreteObjectKeyFrame KeyTime="0"
+																				Value="大破した艦娘がいます！！！" />
+													</ObjectAnimationUsingKeyFrames>-->
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+
 							<TextBlock>
 								<TextBlock.Style>
 									<Style TargetType="{x:Type TextBlock}"
@@ -254,68 +288,55 @@
 									</TextBlock.Style>
 								</TextBlock>
 
-								<TextBlock>
-									<TextBlock.Style>
-										<Style TargetType="{x:Type TextBlock}"
-											   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
-											<Setter Property="Text"
-													Value="艦隊は遠征中ではありません" />
-											<Style.Triggers>
-												<MultiDataTrigger>
-													<MultiDataTrigger.Conditions>
-														<Condition Binding="{Binding Source.State.Situation}"
-																   Value="Expedition" />
-													</MultiDataTrigger.Conditions>
-													<Setter Property="Text">
-														<Setter.Value>
-															<MultiBinding StringFormat="艦隊は遠征中です: {0} - {1}">
-																<Binding Path="Expedition.Mission.Title" />
-																<Binding Path="Expedition.Remaining" />
-															</MultiBinding>
-														</Setter.Value>
-													</Setter>
-													<Setter Property="Foreground"
-															Value="{DynamicResource ActiveForegroundBrushKey}" />
-													<Setter Property="Background"
-															Value="{DynamicResource FleetExpeditionBrushKey}" />
-												</MultiDataTrigger>
-											</Style.Triggers>
-										</Style>
-									</TextBlock.Style>
-								</TextBlock>
+								<ContentControl Content="{Binding}">
+									<ContentControl.Resources>
+										<DataTemplate DataType="{x:Type fleetsVm:FleetViewModel}">
+											<TextBlock>
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}"
+														   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
+														<Setter Property="Text"
+																Value="艦隊は遠征中ではありません" />
+														<Style.Triggers>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding Source.State.Situation}"
+																			   Value="Expedition" />
+																</MultiDataTrigger.Conditions>
+																<Setter Property="Text">
+																	<Setter.Value>
+																		<MultiBinding StringFormat="艦隊は遠征中です: {0} - {1}">
+																			<Binding Path="Expedition.Mission.Title" />
+																			<Binding Path="Expedition.Remaining" />
+																		</MultiBinding>
+																	</Setter.Value>
+																</Setter>
+																<Setter Property="Foreground"
+																		Value="{DynamicResource ActiveForegroundBrushKey}" />
+																<Setter Property="Background"
+																		Value="{DynamicResource FleetExpeditionBrushKey}" />
+															</MultiDataTrigger>
+														</Style.Triggers>
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
+										</DataTemplate>
+										<DataTemplate DataType="{x:Type fleetsVm:CombinedFleetViewModel}">
+
+											<TextBlock>
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}"
+														   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
+														<Setter Property="Text"
+																Value="連合艦隊は遠征に参加できません" />
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
+										</DataTemplate>
+									</ContentControl.Resources>
+								</ContentControl>
 
 								<TextBlock x:Name="DamageIndicator">
-									<VisualStateManager.VisualStateGroups>
-										<VisualStateGroup x:Name="VisualStateGroup">
-											<VisualState x:Name="Normal">
-												<!--<Storyboard>
-													<ColorAnimationUsingKeyFrames Storyboard.TargetName="DamageIndicator"
-																				  Storyboard.TargetProperty="Background.(SolidColorBrush.Color)">
-														<EasingColorKeyFrame KeyTime="0"
-																			 Value="#FF5A2020" />
-													</ColorAnimationUsingKeyFrames>
-												</Storyboard>-->
-											</VisualState>
-											<VisualState x:Name="Blinking">
-												<Storyboard AutoReverse="True"
-															RepeatBehavior="Forever">
-													<ColorAnimationUsingKeyFrames Storyboard.TargetName="DamageIndicator"
-																				  Storyboard.TargetProperty="Background.(SolidColorBrush.Color)">
-														<EasingColorKeyFrame KeyTime="0"
-																			 Value="{DynamicResource ThemeColorKey}" />
-														<EasingColorKeyFrame KeyTime="0:0:0.3"
-																			 Value="#FFB40000" />
-													</ColorAnimationUsingKeyFrames>
-													<!--<ObjectAnimationUsingKeyFrames Storyboard.TargetName="Text"
-																				   Storyboard.TargetProperty="Text">
-														<DiscreteObjectKeyFrame KeyTime="0"
-																				Value="大破した艦娘がいます！！！" />
-													</ObjectAnimationUsingKeyFrames>-->
-												</Storyboard>
-											</VisualState>
-										</VisualStateGroup>
-									</VisualStateManager.VisualStateGroups>
-
 									<i:Interaction.Behaviors>
 										<ei:DataStateBehavior Binding="{Binding Source.State.Situation}"
 															  Value="Sortie,HeavilyDamaged"
@@ -434,19 +455,181 @@
 										</Style>
 									</TextBlock.Style>
 								</TextBlock>
-
-
 							</UniformGrid>
 						</StackPanel>
 					</Border>
 
+					<Border Grid.Row="1"
+							BorderThickness="1"
+							BorderBrush="{DynamicResource BorderBrushKey}"
+							Margin="8,0"
+							Padding="4">
+						<UniformGrid Rows="1">
+							<!-- ToDo: あとで小数点揃えまでサポートした表組みのナニかに作り直す (たい)  -->
 
-					<ContentControl Grid.Row="2">
-						<ContentControl.Resources>
-							<DataTemplate DataType="{x:Type fleetsVm:FleetViewModel}" />
-							<DataTemplate DataType="{x:Type fleetsVm:CombinedFleetViewModel}" />
-						</ContentControl.Resources>
-					</ContentControl>
+							<Grid HorizontalAlignment="Center">
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+								</Grid.RowDefinitions>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="Auto" />
+								</Grid.ColumnDefinitions>
+
+								<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+										   HorizontalAlignment="Right"
+										   VerticalAlignment="Bottom"
+										   Margin="1,2">
+									<Run Text="合計レベル" />
+									<Run Text=":" />
+								</TextBlock>
+								<TextBlock Grid.Row="0"
+										   Grid.Column="1"
+										   Text="{Binding State.TotalLevel}"
+										   Style="{DynamicResource EmphaticTextStyleKey}"
+										   VerticalAlignment="Bottom"
+										   Margin="4,2" />
+								<TextBlock Grid.Row="1"
+										   Grid.Column="0"
+										   Style="{DynamicResource DefaultTextStyleKey}"
+										   HorizontalAlignment="Right"
+										   VerticalAlignment="Bottom"
+										   Margin="1,2">
+									<Run Text="平均レベル" />
+									<Run Text=":" />
+								</TextBlock>
+								<TextBlock Grid.Row="1"
+										   Grid.Column="1"
+										   Text="{Binding State.AverageLevel}"
+										   Style="{DynamicResource EmphaticTextStyleKey}"
+										   VerticalAlignment="Bottom"
+										   Margin="4,2" />
+							</Grid>
+
+							<Grid HorizontalAlignment="Center">
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+								</Grid.RowDefinitions>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="Auto" />
+								</Grid.ColumnDefinitions>
+
+								<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+										   HorizontalAlignment="Right"
+										   VerticalAlignment="Bottom"
+										   Margin="1,2">
+									<Run Text="索敵値" />
+									<Run Text=":" />
+								</TextBlock>
+								<TextBlock Grid.Row="0"
+										   Grid.Column="1"
+										   Text="{Binding State.ViewRange}"
+										   Style="{DynamicResource EmphaticTextStyleKey}"
+										   VerticalAlignment="Bottom"
+										   Margin="4,2" />
+								<TextBlock Grid.Row="1"
+										   Grid.Column="0"
+										   Style="{DynamicResource DefaultTextStyleKey}"
+										   HorizontalAlignment="Right"
+										   VerticalAlignment="Bottom"
+										   Margin="1,2">
+									<Run Text="制空戦力" />
+									<Run Text=":" />
+								</TextBlock>
+								<TextBlock Grid.Row="1"
+										   Grid.Column="1"
+										   Text="{Binding State.AirSuperiorityPotential}"
+										   Style="{DynamicResource EmphaticTextStyleKey}"
+										   VerticalAlignment="Bottom"
+										   Margin="4,2" />
+							</Grid>
+
+							<Grid HorizontalAlignment="Center">
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+								</Grid.RowDefinitions>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="Auto" />
+								</Grid.ColumnDefinitions>
+
+								<TextBlock Grid.Row="0"
+										   Grid.Column="0"
+										   Grid.ColumnSpan="2"
+										   Text="{Binding State.Speed}"
+										   Style="{DynamicResource EmphaticTextStyleKey}"
+										   VerticalAlignment="Bottom"
+										   Margin="4,2" />
+								<TextBlock Grid.Row="1"
+										   Grid.Column="0"
+										   Style="{DynamicResource DefaultTextStyleKey}"
+										   HorizontalAlignment="Right"
+										   VerticalAlignment="Bottom"
+										   Margin="1,2"
+										   Visibility="Hidden">
+									<Run Text="ステータス" />
+									<Run Text=":" />
+								</TextBlock>
+								<TextBlock Grid.Row="1"
+										   Grid.Column="1"
+										   Text="9999"
+										   Style="{DynamicResource EmphaticTextStyleKey}"
+										   VerticalAlignment="Bottom"
+										   Margin="4,2"
+										   Visibility="Hidden" />
+							</Grid>
+						</UniformGrid>
+					</Border>
+
+					<Border Grid.Row="2"
+							BorderThickness="1"
+							BorderBrush="{DynamicResource BorderBrushKey}"
+							Margin="8">
+						<ScrollViewer VerticalScrollBarVisibility="Auto">
+							<ContentControl Content="{Binding}">
+								<ContentControl.Resources>
+									<DataTemplate DataType="{x:Type fleetsVm:FleetViewModel}">
+									</DataTemplate>
+
+									<DataTemplate DataType="{x:Type fleetsVm:CombinedFleetViewModel}">
+										<ItemsControl ItemsSource="{Binding Source.Fleets}"
+													  Margin="0,-1">
+											<ItemsControl.ItemTemplate>
+												<DataTemplate>
+													<Border BorderThickness="0,1"
+															BorderBrush="{DynamicResource BorderBrushKey}">
+														<DockPanel LastChildFill="True">
+															<TextBlock Text="{Binding Name}"
+																	   TextAlignment="Center"
+																	   Foreground="{DynamicResource SemiActiveForegroundBrushKey}"
+																	   Background="{DynamicResource SemiactiveBackgroundBrushKey}"
+																	   Padding="16,8"
+																	   Style="{DynamicResource EmphaticTextStyleKey}">
+																<TextBlock.LayoutTransform>
+																	<RotateTransform Angle="-90"
+																					 CenterX="0.5"
+																					 CenterY="0.5" />
+																</TextBlock.LayoutTransform>
+															</TextBlock>
+
+															<ItemsControl ItemsSource="{Binding Ships}">
+
+															</ItemsControl>
+														</DockPanel>
+													</Border>
+												</DataTemplate>
+											</ItemsControl.ItemTemplate>
+										</ItemsControl>
+									</DataTemplate>
+								</ContentControl.Resources>
+							</ContentControl>
+						</ScrollViewer>
+					</Border>
+
 				</Grid>
 			</Border>
 		</Grid>
