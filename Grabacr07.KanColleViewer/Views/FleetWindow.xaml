@@ -590,7 +590,8 @@
 							BorderBrush="{DynamicResource BorderBrushKey}"
 							Margin="8">
 						<ScrollViewer VerticalScrollBarVisibility="Auto">
-							<ContentControl Content="{Binding}">
+							<ContentControl Content="{Binding}"
+											d:IsHidden="True">
 								<ContentControl.Resources>
 									<DataTemplate DataType="{x:Type fleetsVm:FleetViewModel}">
 									</DataTemplate>
@@ -617,7 +618,16 @@
 															</TextBlock>
 
 															<ItemsControl ItemsSource="{Binding Ships}">
-
+																<ItemsControl.ItemTemplate>
+																	<DataTemplate>
+																		<Grid>
+																			<Grid.ColumnDefinitions>
+																				<ColumnDefinition />
+																				<ColumnDefinition />
+																			</Grid.ColumnDefinitions>
+																		</Grid>
+																	</DataTemplate>
+																</ItemsControl.ItemTemplate>
 															</ItemsControl>
 														</DockPanel>
 													</Border>
@@ -630,6 +640,122 @@
 						</ScrollViewer>
 					</Border>
 
+					<Border Grid.Row="2"
+							BorderThickness="1"
+							BorderBrush="{DynamicResource BorderBrushKey}"
+							Margin="8">
+						<Grid VerticalAlignment="Top">
+							<Grid.Resources>
+								<Style x:Key="NormalText"
+									   TargetType="{x:Type TextBlock}"
+									   BasedOn="{StaticResource DefaultTextStyleKey}">
+									<Setter Property="Margin"
+											Value="4" />
+								</Style>
+								<Style x:Key="EmphaticText"
+									   TargetType="{x:Type TextBlock}"
+									   BasedOn="{StaticResource EmphaticTextStyleKey}">
+									<Setter Property="Margin"
+											Value="4" />
+								</Style>
+							</Grid.Resources>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+
+							<TextBlock Text="重雷装巡洋艦"
+									   Style="{DynamicResource NormalText}"
+									   HorizontalAlignment="Right" />
+							<TextBlock Grid.Column="1"
+									   Text="Bismarck Drei"
+									   Style="{DynamicResource EmphaticText}" />
+
+							<StackPanel Grid.Column="6">
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="SlotItemIcon" />
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="SlotItemName" />
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="SlotItemNum" />
+										<ColumnDefinition />
+									</Grid.ColumnDefinitions>
+									<controls:SlotItemIcon Type="MainCanonHeavy"
+														   Width="14"
+														   Height="14" />
+									<TextBlock Grid.Column="1"
+											   Text="試製51cm連装砲"
+											   Style="{DynamicResource NormalText}"
+											   Margin="4,2" />
+									<TextBlock Grid.Column="1"
+											   Text="試製51cm連装砲"
+											   Style="{DynamicResource NormalText}"
+											   Margin="4,2" />
+								</Grid>
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="SlotItemIcon" />
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="SlotItemName" />
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="SlotItemNum" />
+										<ColumnDefinition />
+									</Grid.ColumnDefinitions>
+									<controls:SlotItemIcon Type="DrumCanister"
+														   Width="14"
+														   Height="14" />
+									<TextBlock Grid.Column="1"
+											   Text="ドラム缶"
+											   Style="{DynamicResource NormalText}"
+											   Margin="4,2" />
+								</Grid>
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="SlotItemIcon" />
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="SlotItemName" />
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="SlotItemNum" />
+										<ColumnDefinition />
+									</Grid.ColumnDefinitions>
+									<controls:SlotItemIcon Type="DrumCanister"
+														   Width="14"
+														   Height="14" />
+									<TextBlock Grid.Column="1"
+											   Text="ドラム缶"
+											   Style="{DynamicResource NormalText}"
+											   Margin="4,2" />
+								</Grid>
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="SlotItemIcon" />
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="SlotItemName" />
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="SlotItemNum" />
+										<ColumnDefinition />
+									</Grid.ColumnDefinitions>
+									<controls:SlotItemIcon Type="DrumCanister"
+														   Width="14"
+														   Height="14" />
+									<TextBlock Grid.Column="1"
+											   Text="ドラム缶"
+											   Style="{DynamicResource NormalText}"
+											   Margin="4,2" />
+								</Grid>
+							</StackPanel>
+						</Grid>
+					</Border>
 				</Grid>
 			</Border>
 		</Grid>
