@@ -91,7 +91,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				{
 					var oldShip = this.target;
 					var newShip = value;
-					if (oldShip != null) oldShip.Situation ^= ShipSituation.Repair;
+					if (oldShip != null) oldShip.Situation &= ~ShipSituation.Repair;
 					if (newShip != null) newShip.Situation |= ShipSituation.Repair;
 
 					this.target = value;

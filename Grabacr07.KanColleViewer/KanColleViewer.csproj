@@ -604,11 +604,10 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <DesignData Include="SampleData\ShipyardViewModelSampleData.xaml">
-      <SubType>Designer</SubType>
-    </DesignData>
+    <DesignData Include="SampleData\ShipyardViewModelSampleData.xaml" />
     <DesignData Include="SampleData\FleetsViewModelSampleData.xaml" />
     <DesignData Include="SampleData\FleetViewModelSampleData.xaml" />
+    <DesignData Include="SampleData\ShipViewModelSampleData.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\app.ico" />

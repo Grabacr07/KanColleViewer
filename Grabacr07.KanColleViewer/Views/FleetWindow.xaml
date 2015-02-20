@@ -15,11 +15,10 @@
 				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 				   xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
 				   xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
-				   xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
-				   xmlns:catalogs="clr-namespace:Grabacr07.KanColleViewer.Views.Catalogs"
+				   xmlns:contentsVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 				   xmlns:fleetsVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 				   xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
-				   xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+				   xmlns:models="clr-namespace:Grabacr07.KanColleWrapper.Models;assembly=KanColleWrapper"
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:FleetWindowViewModel}"
 				   Title="{Binding Title}"
@@ -51,6 +50,337 @@
 			<livet:WindowInteractionMessageAction />
 		</livet:InteractionMessageTrigger>
 	</i:Interaction.Triggers>
+
+	<Window.Resources>
+		<ResourceDictionary>
+			<DataTemplate x:Key="ShipLineViewKey"
+						  DataType="{x:Type models:Ship}">
+				<Border BorderThickness="0,0,0,1"
+						BorderBrush="{DynamicResource BorderBrushKey}"
+						VerticalAlignment="Top"
+						Padding="4">
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto"
+											  SharedSizeGroup="ShipType" />
+							<ColumnDefinition Width="Auto"
+											  SharedSizeGroup="ShipName" />
+							<ColumnDefinition Width="Auto"
+											  SharedSizeGroup="ShipLevel" />
+							<ColumnDefinition Width="Auto"
+											  SharedSizeGroup="ShipCondigion" />
+							<ColumnDefinition Width="Auto"
+											  MinWidth="125"
+											  SharedSizeGroup="ShipHp" />
+							<ColumnDefinition Width="Auto"
+											  MinWidth="100"
+											  SharedSizeGroup="ShipFuel" />
+							<ColumnDefinition Width="Auto"
+											  SharedSizeGroup="ShipSlots" />
+							<ColumnDefinition Width="Auto"
+											  SharedSizeGroup="ShipAbilities" />
+							<ColumnDefinition />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition />
+						</Grid.RowDefinitions>
+
+						<StackPanel Grid.RowSpan="2"
+									VerticalAlignment="Center"
+									Margin="10,0,10,0">
+							<TextBlock Style="{DynamicResource DefaultTextStyleKey}">
+								<Run Text="{Binding Info.ShipType.Name, Mode=OneWay}"
+									 FontSize="14" />
+								<LineBreak />
+								<Run Text="{Binding Info.Name, Mode=OneWay}"
+									 Style="{DynamicResource EmphaticTextElementStyleKey }"
+									 FontSize="18" />
+							</TextBlock>
+						</StackPanel>
+
+						<StackPanel Grid.Column="2"
+									Grid.Row="0"
+									Grid.RowSpan="2"
+									VerticalAlignment="Center"
+									Margin="20,0">
+							<TextBlock FontSize="13"
+									   Style="{DynamicResource DefaultTextStyleKey}"
+									   VerticalAlignment="Bottom">
+								<Run Text="Lv." />
+								<Run Text="{Binding Level, Mode=OneWay}"
+									 FontSize="16"
+									 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+							</TextBlock>
+							<TextBlock FontSize="10"
+									   Style="{DynamicResource DefaultTextStyleKey}">
+								<Run Text="Next:" />
+								<Run Text="{Binding ExpForNextLevel, Mode=OneWay}" />
+							</TextBlock>
+						</StackPanel>
+
+						<TextBlock Grid.Column="3"
+								   Grid.Row="0"
+								   Grid.RowSpan="2"
+								   Margin="10,0"
+								   Style="{DynamicResource DefaultTextStyleKey}">
+							<InlineUIContainer>
+								<controls:ConditionIcon ConditionType="{Binding ConditionType, Mode=OneWay}"
+														Width="11"
+														Height="11" />
+							</InlineUIContainer>
+							<Run Text="{Binding Condition, Mode=OneWay, StringFormat={} {0}}"
+								 FontSize="16"
+								 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+							<LineBreak />
+							<Run Text="Condition"
+								 FontSize="10" />
+						</TextBlock>
+
+
+						<StackPanel Grid.Column="4"
+									Grid.Row="0"
+									Margin="20,1,20,0">
+							<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+									   VerticalAlignment="Bottom">
+								<Run Text="HP:" />
+								<Run Text="{Binding HP.Current, Mode=OneWay}"
+									 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+								<Run Text="/" />
+								<Run Text="{Binding HP.Maximum, Mode=OneWay}" />
+							</TextBlock>
+							<controls:ColorIndicator Height="7"
+													 VerticalAlignment="Bottom"
+													 Margin="1,4,0,2"
+													 LimitedValue="{Binding HP, Mode=OneWay}" />
+						</StackPanel>
+
+						<TextBlock Grid.Column="4"
+								   Grid.Row="1"
+								   TextAlignment="Center"
+								   Margin="21,2,20,0"
+								   Padding="4">
+							<TextBlock.Style>
+								<Style TargetType="{x:Type TextBlock}"
+									   BasedOn="{StaticResource DefaultTextStyleKey}">
+									<Setter Property="Text"
+											Value="健在" />
+									<Setter Property="Background"
+											Value="{DynamicResource BackgroundBrushKey}" />
+									<Style.Triggers>
+										<MultiDataTrigger>
+											<MultiDataTrigger.Conditions>
+												<Condition Binding="{Binding Situation}"
+														   Value="Repair" />
+											</MultiDataTrigger.Conditions>
+											<Setter Property="Text"
+													Value="入渠中" />
+											<Setter Property="Background"
+													Value="{DynamicResource FleetRepairingBrushKey}" />
+										</MultiDataTrigger>
+										<MultiDataTrigger>
+											<MultiDataTrigger.Conditions>
+												<Condition Binding="{Binding Situation}"
+														   Value="Evacuation" />
+											</MultiDataTrigger.Conditions>
+											<Setter Property="Text"
+													Value="大破撤退済み" />
+											<Setter Property="Background"
+													Value="{DynamicResource FleetRepairingBrushKey}" />
+										</MultiDataTrigger>
+										<MultiDataTrigger>
+											<MultiDataTrigger.Conditions>
+												<Condition Binding="{Binding Situation}"
+														   Value="Tow" />
+											</MultiDataTrigger.Conditions>
+											<Setter Property="Text"
+													Value="護衛撤退済み" />
+											<Setter Property="Background"
+													Value="{DynamicResource FleetRepairingBrushKey}" />
+										</MultiDataTrigger>
+										<MultiDataTrigger>
+											<MultiDataTrigger.Conditions>
+												<Condition Binding="{Binding Situation}"
+														   Value="HeavilyDamaged" />
+											</MultiDataTrigger.Conditions>
+											<Setter Property="Text"
+													Value="大破" />
+											<Setter Property="Foreground"
+													Value="White" />
+											<Setter Property="Background"
+													Value="#FFA00000" />
+										</MultiDataTrigger>
+										<MultiDataTrigger>
+											<MultiDataTrigger.Conditions>
+												<Condition Binding="{Binding Situation}"
+														   Value="HeavilyDamaged,DamageControlled" />
+											</MultiDataTrigger.Conditions>
+											<Setter Property="Text"
+													Value="ダメコン" />
+											<Setter Property="Background"
+													Value="{DynamicResource FleetRepairingBrushKey}" />
+										</MultiDataTrigger>
+									</Style.Triggers>
+								</Style>
+							</TextBlock.Style>
+						</TextBlock>
+
+
+						<DockPanel Grid.Column="5"
+								   Grid.Row="0"
+								   VerticalAlignment="Center"
+								   Margin="10,3,10,0">
+							<Path DockPanel.Dock="Left"
+								  Stretch="Uniform"
+								  Data="M240.92001,203.53499 L240.84519,311.51552 C207.23415,355.48491 28.906629,351.52681 0.016112625,311.74075 L0,203.92882 C28.922132,243.36013 212.90791,244.3249 240.92001,203.53499 z M240.92001,122.442 L240.84519,199.19441 C207.23416,243.16386 28.906601,239.20575 0.016122847,199.41972 L0,122.83582 C28.922142,162.26714 212.90788,163.23189 240.92001,122.442 z M240.92001,42.348999 L240.84519,119.10141 C207.23416,163.07087 28.906601,159.11275 0.016117736,119.32672 L0,42.742828 C28.922142,82.174133 212.90788,83.138885 240.92001,42.348999 z M120.501,0 C187.05187,0 241.002,15.670044 241.002,35 241.002,54.329971 187.05187,70 120.501,70 53.950136,70 1.5640981E-06,54.329971 0,35 1.5640981E-06,15.670044 53.950136,0 120.501,0 z"
+								  Fill="#FF359328"
+								  Width="18"
+								  Height="20"
+								  Margin="0,5,3,5" />
+							<TextBlock DockPanel.Dock="Top"
+									   Style="{DynamicResource DefaultTextStyleKey}">
+								<Run Text="{Binding Fuel.Current, Mode=OneWay}"
+									 FontSize="14" />
+								<Run Text="/"
+									 FontSize="10" />
+								<Run Text="{Binding Fuel.Maximum, Mode=OneWay}"
+									 FontSize="10" />
+							</TextBlock>
+							<controls:ColorIndicator DockPanel.Dock="Top"
+													 LimitedValue="{Binding Fuel, Mode=OneWay}"
+													 Height="5"
+													 Margin="1,2,0,0" />
+							<Border />
+						</DockPanel>
+
+						<DockPanel Grid.Column="5"
+								   Grid.Row="1"
+								   VerticalAlignment="Center"
+								   Margin="10,1,10,0">
+							<Path DockPanel.Dock="Left"
+								  Stretch="Uniform"
+								  Data="M7.886714,15.222354 C8.5989526,15.230164 9.4166626,15.368184 10.375001,15.72236 14.828867,18.77195 19.207969,21.388797 22.9571,25.722396 23.832847,28.055671 21.666581,31.597454 19.123991,31.347451 14.192122,29.703086 8.2916765,27.471985 4.0415956,25.055702 1.624975,22.472364 2.4583051,20.930663 1.4582969,18.680641 L0,16.972311 1.2499337,15.347294 3.3750041,16.347304 C4.5625184,16.347396 5.7499974,15.198925 7.886714,15.222354 z M5.7806165,1.2207033E-07 L7.5687866,1.5226279 C9.0966073,1.9383048 11.160323,0.38363563 14.487531,2.7567365 17.984965,6.8682347 21.523857,10.542609 24.00433,15.708234 24.237032,18.18954 21.21712,21.038649 18.829236,20.130123 14.501739,17.249104 9.3935558,13.547684 5.9265239,10.100721 4.2725648,6.9737104 5.481291,5.7047679 5.1068591,3.27119 L4.148,1.2400139 z"
+								  Fill="#FF887B50"
+								  Width="18"
+								  Height="20"
+								  Margin="0,5,3,5" />
+							<TextBlock DockPanel.Dock="Top"
+									   Style="{DynamicResource DefaultTextStyleKey}">
+								<Run Text="{Binding Bull.Current, Mode=OneWay}"
+									 FontSize="14" />
+								<Run Text="/"
+									 FontSize="10" />
+								<Run Text="{Binding Bull.Maximum, Mode=OneWay}"
+									 FontSize="10" />
+							</TextBlock>
+							<controls:ColorIndicator DockPanel.Dock="Top"
+													 LimitedValue="{Binding Bull, Mode=OneWay}"
+													 Height="5"
+													 Margin="1,2,0,0" />
+							<Border />
+						</DockPanel>
+
+						<ItemsControl Grid.Column="6"
+									  Grid.Row="0"
+									  Grid.RowSpan="3"
+									  ItemsSource="{Binding EquippedSlots}"
+									  Margin="20,0">
+							<ItemsControl.ItemTemplate>
+								<DataTemplate>
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto"
+															  SharedSizeGroup="SlotItemNum" />
+											<ColumnDefinition Width="Auto"
+															  SharedSizeGroup="SlotItemIcon" />
+											<ColumnDefinition Width="Auto"
+															  SharedSizeGroup="SlotItemName" />
+											<ColumnDefinition />
+										</Grid.ColumnDefinitions>
+										<TextBlock Grid.Column="0"
+												   HorizontalAlignment="Center"
+												   Margin="5,1">
+											<TextBlock.Style>
+												<Style TargetType="{x:Type TextBlock}"
+													   BasedOn="{StaticResource DefaultTextStyleKey}">
+													<Setter Property="Text"
+															Value="" />
+													<Style.Triggers>
+														<MultiDataTrigger>
+															<MultiDataTrigger.Conditions>
+																<Condition Binding="{Binding Item.Info.IsNumerable}"
+																		   Value="True" />
+															</MultiDataTrigger.Conditions>
+															<Setter Property="Text">
+																<Setter.Value>
+																	<MultiBinding StringFormat="[{0:00} / {1:00}]">
+																		<Binding Path="Current" />
+																		<Binding Path="Maximum" />
+																	</MultiBinding>
+																</Setter.Value>
+															</Setter>
+														</MultiDataTrigger>
+													</Style.Triggers>
+												</Style>
+											</TextBlock.Style>
+										</TextBlock>
+										<controls:SlotItemIcon Grid.Column="1"
+															   Type="{Binding Item.Info.IconType, Mode=OneWay}"
+															   Width="14"
+															   Height="14" />
+										<TextBlock Grid.Column="2"
+												   Text="{Binding Item.Info.Name}"
+												   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+												   Style="{DynamicResource DefaultTextStyleKey}"
+												   Margin="5,1" />
+									</Grid>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+						</ItemsControl>
+
+						<UniformGrid Grid.Column="7"
+									 Grid.Row="0"
+									 Grid.RowSpan="3"
+									 Columns="1"
+									 Visibility="Collapsed">
+							<TextBlock TextAlignment="Center"
+									   Margin="8,0"
+									   Padding="10,6">
+								<TextBlock.Style>
+									<Style TargetType="{x:Type TextBlock}"
+										   BasedOn="{StaticResource DefaultTextStyleKey}">
+										<Setter Property="Text"
+												Value="弾着観測射撃" />
+										<Setter Property="Foreground"
+												Value="{DynamicResource ActiveForegroundBrushKey}" />
+										<Setter Property="Background"
+												Value="#FF084008" />
+									</Style>
+								</TextBlock.Style>
+							</TextBlock>
+
+							<TextBlock TextAlignment="Center"
+									   Margin="8,0"
+									   Padding="10,6">
+								<TextBlock.Style>
+									<Style TargetType="{x:Type TextBlock}"
+										   BasedOn="{StaticResource DefaultTextStyleKey}">
+										<Setter Property="Text"
+												Value="夜戦カットイン: 30 %" />
+										<Setter Property="Foreground"
+												Value="{DynamicResource ActiveForegroundBrushKey}" />
+										<Setter Property="Background"
+												Value="#FF101060" />
+									</Style>
+								</TextBlock.Style>
+							</TextBlock>
+						</UniformGrid>
+					</Grid>
+				</Border>
+			</DataTemplate>
+		</ResourceDictionary>
+	</Window.Resources>
 
 	<Grid>
 		<Grid.RowDefinitions>
@@ -589,46 +919,40 @@
 							BorderThickness="1"
 							BorderBrush="{DynamicResource BorderBrushKey}"
 							Margin="8">
-						<ScrollViewer VerticalScrollBarVisibility="Auto">
+						<ScrollViewer HorizontalScrollBarVisibility="Auto"
+									  VerticalScrollBarVisibility="Auto">
 							<ContentControl Content="{Binding}"
+											Grid.IsSharedSizeScope="True"
 											d:IsHidden="True">
 								<ContentControl.Resources>
 									<DataTemplate DataType="{x:Type fleetsVm:FleetViewModel}">
+										<ItemsControl ItemsSource="{Binding Source.Ships}"
+													  ItemTemplate="{DynamicResource ShipLineViewKey}" />
 									</DataTemplate>
 
 									<DataTemplate DataType="{x:Type fleetsVm:CombinedFleetViewModel}">
 										<ItemsControl ItemsSource="{Binding Source.Fleets}"
-													  Margin="0,-1">
+													  Margin="0,0,0,-1">
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
-													<Border BorderThickness="0,1"
+													<Border BorderThickness="0,0,0,1"
 															BorderBrush="{DynamicResource BorderBrushKey}">
 														<DockPanel LastChildFill="True">
-															<TextBlock Text="{Binding Name}"
-																	   TextAlignment="Center"
-																	   Foreground="{DynamicResource SemiActiveForegroundBrushKey}"
-																	   Background="{DynamicResource SemiactiveBackgroundBrushKey}"
-																	   Padding="16,8"
-																	   Style="{DynamicResource EmphaticTextStyleKey}">
-																<TextBlock.LayoutTransform>
+															<Border Background="{DynamicResource SemiactiveBackgroundBrushKey}"
+																	Padding="16,8">
+																<Border.LayoutTransform>
 																	<RotateTransform Angle="-90"
 																					 CenterX="0.5"
 																					 CenterY="0.5" />
-																</TextBlock.LayoutTransform>
-															</TextBlock>
-
-															<ItemsControl ItemsSource="{Binding Ships}">
-																<ItemsControl.ItemTemplate>
-																	<DataTemplate>
-																		<Grid>
-																			<Grid.ColumnDefinitions>
-																				<ColumnDefinition />
-																				<ColumnDefinition />
-																			</Grid.ColumnDefinitions>
-																		</Grid>
-																	</DataTemplate>
-																</ItemsControl.ItemTemplate>
-															</ItemsControl>
+																</Border.LayoutTransform>
+																<TextBlock Text="{Binding Name}"
+																		   TextAlignment="Center"
+																		   Foreground="{DynamicResource SemiActiveForegroundBrushKey}"
+																		   Style="{DynamicResource EmphaticTextStyleKey}" />
+															</Border>
+															<ItemsControl ItemsSource="{Binding Ships}"
+																		  ItemTemplate="{DynamicResource ShipLineViewKey}"
+																		  Margin="0,0,0,-1" />
 														</DockPanel>
 													</Border>
 												</DataTemplate>
@@ -640,122 +964,18 @@
 						</ScrollViewer>
 					</Border>
 
+					<!-- ☟☟☟ デザイン時に使うやつ ☟☟☟ -->
 					<Border Grid.Row="2"
 							BorderThickness="1"
 							BorderBrush="{DynamicResource BorderBrushKey}"
 							Margin="8">
-						<Grid VerticalAlignment="Top">
-							<Grid.Resources>
-								<Style x:Key="NormalText"
-									   TargetType="{x:Type TextBlock}"
-									   BasedOn="{StaticResource DefaultTextStyleKey}">
-									<Setter Property="Margin"
-											Value="4" />
-								</Style>
-								<Style x:Key="EmphaticText"
-									   TargetType="{x:Type TextBlock}"
-									   BasedOn="{StaticResource EmphaticTextStyleKey}">
-									<Setter Property="Margin"
-											Value="4" />
-								</Style>
-							</Grid.Resources>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto" />
-								<ColumnDefinition Width="Auto" />
-								<ColumnDefinition Width="Auto" />
-								<ColumnDefinition Width="Auto" />
-								<ColumnDefinition Width="Auto" />
-								<ColumnDefinition Width="Auto" />
-								<ColumnDefinition />
-							</Grid.ColumnDefinitions>
-
-							<TextBlock Text="重雷装巡洋艦"
-									   Style="{DynamicResource NormalText}"
-									   HorizontalAlignment="Right" />
-							<TextBlock Grid.Column="1"
-									   Text="Bismarck Drei"
-									   Style="{DynamicResource EmphaticText}" />
-
-							<StackPanel Grid.Column="6">
-								<Grid>
-									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="Auto"
-														  SharedSizeGroup="SlotItemIcon" />
-										<ColumnDefinition Width="Auto"
-														  SharedSizeGroup="SlotItemName" />
-										<ColumnDefinition Width="Auto"
-														  SharedSizeGroup="SlotItemNum" />
-										<ColumnDefinition />
-									</Grid.ColumnDefinitions>
-									<controls:SlotItemIcon Type="MainCanonHeavy"
-														   Width="14"
-														   Height="14" />
-									<TextBlock Grid.Column="1"
-											   Text="試製51cm連装砲"
-											   Style="{DynamicResource NormalText}"
-											   Margin="4,2" />
-									<TextBlock Grid.Column="1"
-											   Text="試製51cm連装砲"
-											   Style="{DynamicResource NormalText}"
-											   Margin="4,2" />
-								</Grid>
-								<Grid>
-									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="Auto"
-														  SharedSizeGroup="SlotItemIcon" />
-										<ColumnDefinition Width="Auto"
-														  SharedSizeGroup="SlotItemName" />
-										<ColumnDefinition Width="Auto"
-														  SharedSizeGroup="SlotItemNum" />
-										<ColumnDefinition />
-									</Grid.ColumnDefinitions>
-									<controls:SlotItemIcon Type="DrumCanister"
-														   Width="14"
-														   Height="14" />
-									<TextBlock Grid.Column="1"
-											   Text="ドラム缶"
-											   Style="{DynamicResource NormalText}"
-											   Margin="4,2" />
-								</Grid>
-								<Grid>
-									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="Auto"
-														  SharedSizeGroup="SlotItemIcon" />
-										<ColumnDefinition Width="Auto"
-														  SharedSizeGroup="SlotItemName" />
-										<ColumnDefinition Width="Auto"
-														  SharedSizeGroup="SlotItemNum" />
-										<ColumnDefinition />
-									</Grid.ColumnDefinitions>
-									<controls:SlotItemIcon Type="DrumCanister"
-														   Width="14"
-														   Height="14" />
-									<TextBlock Grid.Column="1"
-											   Text="ドラム缶"
-											   Style="{DynamicResource NormalText}"
-											   Margin="4,2" />
-								</Grid>
-								<Grid>
-									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="Auto"
-														  SharedSizeGroup="SlotItemIcon" />
-										<ColumnDefinition Width="Auto"
-														  SharedSizeGroup="SlotItemName" />
-										<ColumnDefinition Width="Auto"
-														  SharedSizeGroup="SlotItemNum" />
-										<ColumnDefinition />
-									</Grid.ColumnDefinitions>
-									<controls:SlotItemIcon Type="DrumCanister"
-														   Width="14"
-														   Height="14" />
-									<TextBlock Grid.Column="1"
-											   Text="ドラム缶"
-											   Style="{DynamicResource NormalText}"
-											   Margin="4,2" />
-								</Grid>
-							</StackPanel>
-						</Grid>
+						<ContentControl d:DataContext="{d:DesignData /SampleData/ShipViewModelSampleData.xaml}"
+										Content="{Binding Ship}"
+										ContentTemplate="{DynamicResource ShipLineViewKey}"
+										Grid.IsSharedSizeScope="True" />
 					</Border>
+					<!-- ☝☝☝ デザイン時に使うやつ ☝☝☝ -->
+					
 				</Grid>
 			</Border>
 		</Grid>
