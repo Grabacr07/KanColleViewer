@@ -5,7 +5,7 @@ namespace Grabacr07.KanColleWrapper.Models
 	/// <summary>
 	/// 미리보기 데이터를 저장하는 클래스
 	/// </summary>
-	public class PreviewBattleResults
+	public struct PreviewBattleResults
 	{
 		//이름
 		public string Name { get; set; }
@@ -18,7 +18,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		public int CHP { get; set; }
 		public int MHP { get; set; }
 	}
-	public class EscapeResults
+	public struct EscapeResults
 	{
 		public int escape { get; set; }
 		public int tow { get; set; }

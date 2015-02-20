@@ -18,7 +18,7 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// 전투 미리보기 데이터를 저장
 		/// </summary>
-		private ResultCalLists DataLists = new ResultCalLists();
+		private ResultCalLists DataLists { get; set; }
 		/// <summary>
 		/// 전투 미리보기 리스트
 		/// </summary>
@@ -75,18 +75,20 @@ namespace Grabacr07.KanColleWrapper
 		/// <param name="proxy"></param>
 		public OracleOfCompass(KanColleProxy proxy)
 		{
+			this.DataLists = new ResultCalLists();
+
 			#region 일반 전투. 야전방과 야전->주간전도 여기에 포함
-			proxy.api_req_sortie_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false, false, x.Data));
-			proxy.api_req_sortie_night_to_day.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false, false, x.Data));
-			proxy.api_req_battle_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(true, false, x.Data));
-			proxy.api_req_battle_midnight_sp_midnight.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(false, false, x.Data));
+			proxy.api_req_sortie_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false, false, x.Data, false));
+			proxy.api_req_sortie_night_to_day.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false, false, x.Data, false));
+			proxy.api_req_battle_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(true, false, x.Data, false));
+			proxy.api_req_battle_midnight_sp_midnight.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(false, false, x.Data, false));
 			#endregion
 
 			#region 연합함대 전투. airbattle과 일반 연합함대 전투, 수뢰전대 전투가 여기에 포함. 야전은 모두 동일
 			proxy.api_req_combined_battle_airbattle.TryParse<kcsapi_battle>().Subscribe(x => this.AirBattle(x.Data));
-			proxy.api_req_combined_battle_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false, false, x.Data));
-			proxy.api_req_combined_battle_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(true, false, x.Data));
-			proxy.api_req_combined_battle_battle_water.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(true, false, x.Data));
+			proxy.api_req_combined_battle_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false, false, x.Data, true));
+			proxy.api_req_combined_battle_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(true, false, x.Data, true));
+			proxy.api_req_combined_battle_battle_water.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(true, false, x.Data, true));
 			#endregion
 
 			#region BattleResult관련. 연합함대와 일반전투만 포함. 연습전 결과는 무시
@@ -95,8 +97,8 @@ namespace Grabacr07.KanColleWrapper
 			#endregion
 
 			#region 연습전(주간,야간)
-			proxy.api_req_practice_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false, true, x.Data));
-			proxy.api_req_practice_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(true, true, x.Data));
+			proxy.api_req_practice_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false, true, x.Data, false));
+			proxy.api_req_practice_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(true, true, x.Data, false));
 			#endregion
 
 			#region 변수 초기화 관련
@@ -275,8 +277,11 @@ namespace Grabacr07.KanColleWrapper
 			{
 				if (result.api_escape_flag == 1)
 				{
-					GoBackPortList = new List<EscapeResults>();
-
+					if (GoBackPortList == null) GoBackPortList = new List<EscapeResults>();
+					else
+					{
+						GoBackPortList.Clear();
+					}
 					var escape = result.api_escape.api_escape_idx;
 					var tow = result.api_escape.api_tow_idx;
 
@@ -297,6 +302,7 @@ namespace Grabacr07.KanColleWrapper
 						else temp.tow = 20;
 						GoBackPortList.Add(temp);
 					}
+					GoBackPortList.TrimExcess();
 				}
 			}
 			if (this.IsCritical) this.CriticalCondition();
@@ -461,7 +467,7 @@ namespace Grabacr07.KanColleWrapper
 				}//연합함대 리스트 작성 끝
 			}
 			//api_kouku끝
-			BattleCalc(lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps, false, false, false);
+			BattleCalc(lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps, false, false, false, true);
 
 			try
 			{
@@ -491,7 +497,7 @@ namespace Grabacr07.KanColleWrapper
 				//재활용 위해 초기화.
 				CurrentHPList = new List<int>();
 
-				BattleCalc(Combinelists, CurrentHPList, CombinePlusEnemyMaxHPs, CombinePlusEnemyNowHPs, true, false, false);
+				BattleCalc(Combinelists, CurrentHPList, CombinePlusEnemyMaxHPs, CombinePlusEnemyNowHPs, true, false, false, true);
 				//BattleCalc(HPList, MHPList, Combinelists, CurrentHPList, battle.api_maxhps_combined, battle.api_nowhps_combined,true);
 			}
 			catch (Exception e)
@@ -510,10 +516,10 @@ namespace Grabacr07.KanColleWrapper
 		/// 일반 포격전, 개막뇌격, 개막 항공전등을 계산.
 		/// </summary>
 		/// <param name="battle"></param>
-		/// <param name="IsCombined">연합함대인경우 True로 설정합니다.</param>
+		/// <param name="Combined">연합함대인경우 True로 설정합니다.</param>
 		/// <param name="IsWater">수뢰전대인지 채크합니다</param>
 		/// <param name="IsPractice">연습전인지 채크합니다. 연습전인경우 True</param>
-		private void Battle(bool IsWater, bool IsPractice, kcsapi_battle battle)
+		private void Battle(bool IsWater, bool IsPractice, kcsapi_battle battle, bool Combined)
 		{
 			//this.Combined = IsCombined;
 			this.IsCritical = false;
@@ -534,18 +540,18 @@ namespace Grabacr07.KanColleWrapper
 			//포격전 시작
 			if (IsWater)
 			{
-				if (!KanColleClient.Current.Homeport.Organization.Combined && battle.api_hougeki3 != null)
+				if (!Combined && battle.api_hougeki3 != null)
 					ObjectListmake(battle.api_hougeki3.api_df_list, battle.api_hougeki3.api_damage, lists);
-				else if (KanColleClient.Current.Homeport.Organization.Combined && battle.api_hougeki3 != null)//1차 포격전은 2함대만 맞을지도...?
+				else if (Combined && battle.api_hougeki3 != null)//1차 포격전은 2함대만 맞을지도...?
 					ObjectListmake(battle.api_hougeki3.api_df_list, battle.api_hougeki3.api_damage, Combinelists);
 				if (battle.api_hougeki1 != null)
 					ObjectListmake(battle.api_hougeki1.api_df_list, battle.api_hougeki1.api_damage, lists);
 			}
 			else
 			{
-				if (!KanColleClient.Current.Homeport.Organization.Combined && battle.api_hougeki1 != null)
+				if (!Combined && battle.api_hougeki1 != null)
 					ObjectListmake(battle.api_hougeki1.api_df_list, battle.api_hougeki1.api_damage, lists);
-				else if (KanColleClient.Current.Homeport.Organization.Combined && battle.api_hougeki1 != null)//1차 포격전은 2함대만 맞을지도...?
+				else if (Combined && battle.api_hougeki1 != null)//1차 포격전은 2함대만 맞을지도...?
 					ObjectListmake(battle.api_hougeki1.api_df_list, battle.api_hougeki1.api_damage, Combinelists);
 				if (battle.api_hougeki3 != null)
 					ObjectListmake(battle.api_hougeki3.api_df_list, battle.api_hougeki3.api_damage, lists);
@@ -560,7 +566,7 @@ namespace Grabacr07.KanColleWrapper
 			{
 				int[] numlist = battle.api_raigeki.api_erai;
 				decimal[] damlist = battle.api_raigeki.api_eydam;
-				if (!KanColleClient.Current.Homeport.Organization.Combined)
+				if (!Combined)
 					DecimalListmake(numlist, damlist, lists, true);
 				else
 					DecimalListmake(numlist, damlist, Combinelists, true);
@@ -568,7 +574,7 @@ namespace Grabacr07.KanColleWrapper
 				//적 뇌격 데미지
 				numlist = battle.api_raigeki.api_frai;
 				damlist = battle.api_raigeki.api_fydam;
-				if (!KanColleClient.Current.Homeport.Organization.Combined)
+				if (!Combined)
 					DecimalListmake(numlist, damlist, lists, false);
 				else
 					DecimalListmake(numlist, damlist, Combinelists, false);
@@ -595,7 +601,7 @@ namespace Grabacr07.KanColleWrapper
 					numlist);
 				DecimalListmake(numlist, damlist, lists, false);
 
-				if (KanColleClient.Current.Homeport.Organization.Combined)
+				if (Combined)
 				{
 					if (battle.api_kouku.api_stage3_combined != null)
 					{
@@ -643,13 +649,13 @@ namespace Grabacr07.KanColleWrapper
 				DecimalListmake(numlist, damlist, lists, false);
 			}
 			//개막전 끝
-			if (!KanColleClient.Current.Homeport.Organization.Combined) BattleCalc(lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps, false, false, IsPractice);
+			if (!Combined) BattleCalc(lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps, false, false, IsPractice, Combined);
 
-			else if (KanColleClient.Current.Homeport.Organization.Combined)//연합함대인경우 연산을 한번 더 시행
+			else if (Combined)//연합함대인경우 연산을 한번 더 시행
 			{
 				try
 				{
-					BattleCalc(lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps, false, false, IsPractice);
+					BattleCalc(lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps, false, false, IsPractice, Combined);
 
 					//적 HP계산을 위해 아군리스트와 적군 리스트를 병합.
 					int[] CombinePlusEnemyMaxHPs = new int[13];
@@ -676,7 +682,7 @@ namespace Grabacr07.KanColleWrapper
 					//재활용 위해 초기화.
 					CurrentHPList = new List<int>();
 
-					BattleCalc(Combinelists, CurrentHPList, CombinePlusEnemyMaxHPs, CombinePlusEnemyNowHPs, true, false, IsPractice);
+					BattleCalc(Combinelists, CurrentHPList, CombinePlusEnemyMaxHPs, CombinePlusEnemyNowHPs, true, false, IsPractice, Combined);
 				}
 				catch (Exception e)
 				{
@@ -698,9 +704,9 @@ namespace Grabacr07.KanColleWrapper
 		/// <param name="IsMidnight">주간전이 있었던 야전인경우 true</param>
 		/// <param name="IsCombined">연합함대인지 아닌지 입력합니다.연합함대인경우 True입니다.</param>
 		/// <param name="IsPractice">연습전인경우 채크합니다. 연습전이면 True</param>
-		private void MidBattle(bool IsMidnight, bool IsPractice, kcsapi_midnight_battle battle)
+		private void MidBattle(bool IsMidnight, bool IsPractice, kcsapi_midnight_battle battle, bool Combined)
 		{
-			if (!KanColleClient.Current.Homeport.Organization.Combined) this.IsCritical = false;
+			if (!Combined) this.IsCritical = false;
 			//this.Combined = IsCombined;
 			List<listup> lists = new List<listup>();
 			List<int> CurrentHPList = new List<int>();
@@ -712,7 +718,7 @@ namespace Grabacr07.KanColleWrapper
 			{
 				ObjectListmake(battle.api_hougeki.api_df_list, battle.api_hougeki.api_damage, lists);
 
-				if (KanColleClient.Current.Homeport.Organization.Combined && battle.api_maxhps_combined != null && battle.api_nowhps_combined != null)
+				if (Combined && battle.api_maxhps_combined != null && battle.api_nowhps_combined != null)
 				{
 					try
 					{
@@ -740,7 +746,7 @@ namespace Grabacr07.KanColleWrapper
 							CombinePlusEnemyNowHPs[i] = battle.api_nowhps[i];
 						}
 
-						BattleCalc(lists, CurrentHPList, CombinePlusEnemyMaxHPs, CombinePlusEnemyNowHPs, true, IsMidnight, IsPractice);
+						BattleCalc(lists, CurrentHPList, CombinePlusEnemyMaxHPs, CombinePlusEnemyNowHPs, true, IsMidnight, IsPractice, Combined);
 					}
 					catch (Exception e)
 					{
@@ -749,7 +755,7 @@ namespace Grabacr07.KanColleWrapper
 
 				}
 				else
-					BattleCalc(lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps, false, IsMidnight, IsPractice);
+					BattleCalc(lists, CurrentHPList, battle.api_maxhps, battle.api_nowhps, false, IsMidnight, IsPractice, Combined);
 			}
 			if (EnableBattlePreview)
 			{
@@ -768,7 +774,8 @@ namespace Grabacr07.KanColleWrapper
 		/// <param name="IsCombined">이 계산은 연합함대 대상으로 계산되는가?</param>
 		/// <param name="IsMidnight">주간전이 있었던 야전이면 True</param>
 		/// <param name="IsPractice">연습전이면 True</param>
-		private void BattleCalc(List<listup> lists, List<int> CurrentHPList, int[] Maxhps, int[] NowHps, bool IsCombined, bool IsMidnight, bool IsPractice)
+		/// <param name="Combined">현재 연합함대가 결성되어있는가</param>
+		private void BattleCalc(List<listup> lists, List<int> CurrentHPList, int[] Maxhps, int[] NowHps, bool IsCombined, bool IsMidnight, bool IsPractice, bool Combined)
 		{
 			#region 전투 미리보기 관련값 초기화
 			if (EnableBattlePreview)
@@ -946,12 +953,12 @@ namespace Grabacr07.KanColleWrapper
 			#region 랭크예측
 			if (EnableBattlePreview)
 			{
-				if (KanColleClient.Current.Homeport.Organization.Combined && !IsCombined)
+				if (Combined && !IsCombined)
 				{
 					this.DataLists.FirstKanDamaged = KanEveryCHP;
 					this.DataLists.FirstKanMaxHP = KanEveryMHP;
 				}
-				else if (KanColleClient.Current.Homeport.Organization.Combined && IsCombined && !IsMidnight)
+				else if (Combined && IsCombined && !IsMidnight)
 				{
 					KanEveryCHP = KanEveryCHP + this.DataLists.FirstKanDamaged;
 					KanEveryMHP = KanEveryMHP + this.DataLists.FirstKanMaxHP;

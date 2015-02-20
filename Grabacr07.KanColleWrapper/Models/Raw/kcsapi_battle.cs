@@ -137,7 +137,7 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 	/// <summary>
 	/// 데미지와 타겟을 저장
 	/// </summary>
-	public class listup
+	public struct listup
 	{
 		public decimal Damage;
 		public int Num;
