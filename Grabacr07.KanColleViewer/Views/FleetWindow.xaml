@@ -12,13 +12,14 @@
 				   xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 				   xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 				   xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
+				   xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 				   xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
 				   xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 				   xmlns:contentsVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 				   xmlns:fleetsVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 				   xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
-				   xmlns:models="clr-namespace:Grabacr07.KanColleWrapper.Models;assembly=KanColleWrapper"
+				   xmlns:wrapper="clr-namespace:Grabacr07.KanColleWrapper.Models;assembly=KanColleWrapper"
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:FleetWindowViewModel}"
 				   Title="{Binding Title}"
@@ -54,7 +55,7 @@
 	<Window.Resources>
 		<ResourceDictionary>
 			<DataTemplate x:Key="ShipLineViewKey"
-						  DataType="{x:Type models:Ship}">
+						  DataType="{x:Type wrapper:Ship}">
 				<Border BorderThickness="0,0,0,1"
 						BorderBrush="{DynamicResource BorderBrushKey}"
 						VerticalAlignment="Top"
@@ -968,14 +969,29 @@
 					<Border Grid.Row="2"
 							BorderThickness="1"
 							BorderBrush="{DynamicResource BorderBrushKey}"
-							Margin="8">
-						<ContentControl d:DataContext="{d:DesignData /SampleData/ShipViewModelSampleData.xaml}"
-										Content="{Binding Ship}"
-										ContentTemplate="{DynamicResource ShipLineViewKey}"
-										Grid.IsSharedSizeScope="True" />
+							Margin="8"
+							IsEnabled="{Binding Source={x:Static models:Helper.IsInDesignMode}, Mode=OneWay}"
+							Visibility="{Binding Source={x:Static models:Helper.IsInDesignMode}, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+						<ContentControl d:DataContext="{d:DesignData /SampleData/ShipViewModelSampleData.xaml}">
+							<ContentControl.Style>
+								<Style TargetType="{x:Type ContentControl}">
+									<Style.Triggers>
+										<DataTrigger Binding="{Binding Source={x:Static models:Helper.IsInDesignMode}, Mode=OneWay}"
+													 Value="True">
+											<Setter Property="Content"
+													Value="{Binding Ship}" />
+											<Setter Property="ContentTemplate"
+													Value="{DynamicResource ShipLineViewKey}" />
+											<Setter Property="Grid.IsSharedSizeScope"
+													Value="True" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</ContentControl.Style>
+						</ContentControl>
 					</Border>
 					<!-- ☝☝☝ デザイン時に使うやつ ☝☝☝ -->
-					
+
 				</Grid>
 			</Border>
 		</Grid>
