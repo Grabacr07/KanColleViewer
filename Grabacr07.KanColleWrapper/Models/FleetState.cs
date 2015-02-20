@@ -104,6 +104,25 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
+		#region ViewRangeCalcType 変更通知プロパティ
+
+		private string _ViewRangeCalcType;
+
+		public string ViewRangeCalcType
+		{
+			get { return this._ViewRangeCalcType; }
+			set
+			{
+				if (this._ViewRangeCalcType != value)
+				{
+					this._ViewRangeCalcType = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		#region Speed 変更通知プロパティ
 
 		private FleetSpeed _Speed;
@@ -164,6 +183,9 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
+		public event EventHandler Updated;
+		public event EventHandler Calculated;
+
 
 		public FleetState(Homeport homeport, params Fleet[] fleets)
 		{
@@ -189,12 +211,21 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.TotalLevel = ships.HasItems() ? ships.Sum(x => x.Level) : 0;
 			this.AverageLevel = ships.HasItems() ? (double)this.TotalLevel / ships.Length : 0.0;
 			this.AirSuperiorityPotential = ships.Sum(s => s.CalcAirSuperiorityPotential());
-			this.ViewRange = this.source.Select(x => x.CalcViewRange()).Sum();
+
 			this.Speed = ships.All(x => x.Info.Speed == ShipSpeed.Fast)
 				? FleetSpeed.Fast
 				: ships.All(x => x.Info.Speed == ShipSpeed.Low)
 					? FleetSpeed.Low
 					: FleetSpeed.Hybrid;
+
+			var logic = ViewRangeCalcLogic.Get(KanColleClient.Current.Settings.ViewRangeCalcType);
+			this.ViewRange = logic.Calc(ships);
+			this.ViewRangeCalcType = logic.Name;
+
+			if (this.Calculated != null)
+			{
+				this.Calculated(this, new EventArgs());
+			}
 		}
 
 		internal void Update()
@@ -210,6 +241,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			else
 			{
 				var heavilyDamaged = ships
+					.Where(s => !this.homeport.Repairyard.CheckRepairing(s.Id))
 					.Where(s => !s.Situation.HasFlag(ShipSituation.Evacuation) && !s.Situation.HasFlag(ShipSituation.Tow))
 					.Any(s => (s.HP.Current / (double)s.HP.Maximum) <= 0.25);
 				if (heavilyDamaged)
@@ -270,16 +302,13 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.Situation = state;
 			this.IsReady = ready;
 
-			if (this.Situation == FleetSituation.Sortie && ships.Any(p => (p.HP.Current / (double)p.HP.Maximum) <= 0.25)) KanColleClient.Current.OracleOfCompass.AfterResult();
-
 			this.Condition.Update(ships);
-			this.Condition.IsEnabled = state.HasFlag(FleetSituation.Homeport);   // 疲労回復通知は母港待機中の艦隊でのみ行う
-		}
+			this.Condition.IsEnabled = state.HasFlag(FleetSituation.Homeport); // 疲労回復通知は母港待機中の艦隊でのみ行う
 
-
-		public new void RaisePropertyChanged(string propertyName)
-		{
-			base.RaisePropertyChanged(propertyName);
+			if (this.Updated != null)
+			{
+				this.Updated(this, new EventArgs());
+			}
 		}
 	}
 }

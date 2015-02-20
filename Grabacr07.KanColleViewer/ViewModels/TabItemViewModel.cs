@@ -5,7 +5,7 @@ using MetroRadiance.Controls;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {
-	public abstract class TabItemViewModel : ViewModel, ITabItem
+	public abstract class TabItemViewModel : ItemViewModel, ITabItem
 	{
 		#region Name 変更通知プロパティ
 
@@ -31,25 +31,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				if (this._Badge != value)
 				{
 					this._Badge = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region IsSelected 変更通知プロパティ
-
-		private bool _IsSelected;
-
-		public virtual bool IsSelected
-		{
-			get { return this._IsSelected; }
-			set
-			{
-				if (this._IsSelected != value)
-				{
-					this._IsSelected = value;
 					this.RaisePropertyChanged();
 				}
 			}

@@ -6,6 +6,7 @@ using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleWrapper;
 using Livet;
 using Livet.EventListeners;
+using Livet.Messaging;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 {
@@ -68,6 +69,14 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			});
 			this.UpdateFleets();
 		}
+
+		public void ShowFleetWindow()
+		{
+			var fleetwd = new FleetWindowViewModel();
+			var message = new TransitionMessage(fleetwd, "Show/FleetWindow");
+			this.Messenger.RaiseAsync(message);
+		}
+
 
 		private void UpdateFleets()
 		{

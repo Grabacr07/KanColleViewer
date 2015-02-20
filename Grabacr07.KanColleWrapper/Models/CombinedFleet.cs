@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Internal;
 using Livet.EventListeners;
+using Livet.EventListeners.WeakEvents;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
@@ -66,18 +67,29 @@ namespace Grabacr07.KanColleWrapper.Models
 				{
 					{ "Name", (sender, args) => this.UpdateName() },
 				});
-				this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet.State)
-				{
-					(sender, args) => this.State.RaisePropertyChanged(args.PropertyName),
-				});
+
+				var source = fleet;
+				this.CompositeDisposable.Add(new LivetWeakEventListener<EventHandler, EventArgs>(
+					h => new EventHandler(h),
+					h => source.State.Updated += h,
+					h => source.State.Updated -= h,
+					(sender, args) => this.State.Update()));
+				this.CompositeDisposable.Add(new LivetWeakEventListener<EventHandler, EventArgs>(
+					h => new EventHandler(h),
+					h => source.State.Calculated += h,
+					h => source.State.Calculated -= h,
+					(sender, args) => this.State.Calculate()));
 			}
 
 			this.UpdateName();
+
+			this.State.Calculate();
+			this.State.Update();
 		}
 
 		private void UpdateName()
 		{
-			this.Name = "連合艦隊 (" + this.Fleets.Select(x => x.Name).Join(", ") + ")";
+			this.Name = this.Fleets.Select(x => x.Name).Join(", ");
 		}
 	}
 }
