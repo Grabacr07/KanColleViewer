@@ -71,7 +71,9 @@
 			<metro2:CallMethodButton Grid.Row="0"
 									 Grid.RowSpan="2"
 									 Grid.Column="1"
-									 Content="艦隊詳細"
+									 IsEnabled="False"
+									 ToolTip="구현중인 기능입니다"
+									 Content="상세정보"
 									 Margin="0,0,10,3"
 									 Padding="12,8"
 									 MethodName="ShowFleetWindow" />

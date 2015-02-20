@@ -22,6 +22,8 @@ namespace Grabacr07.KanColleViewer.Views
 		public FleetWindow()
 		{
 			this.InitializeComponent();
+
+			MainWindow.Current.Closed += (sender, args) => this.Close();
 		}
 	}
 }

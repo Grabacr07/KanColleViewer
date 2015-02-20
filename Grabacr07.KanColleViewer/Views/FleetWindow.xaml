@@ -158,7 +158,7 @@
 					<DataTemplate DataType="{x:Type fleetsVm:CombinedFleetViewModel}">
 						<Border Padding="16,6">
 							<StackPanel VerticalAlignment="Center">
-								<TextBlock Text="連合艦隊"
+								<TextBlock Text="연합함대"
 										   Margin="0,0,0,2"
 										   Style="{DynamicResource EmphaticTextStyleKey}"
 										   HorizontalAlignment="Center" />
@@ -237,7 +237,7 @@
 									<Style TargetType="{x:Type TextBlock}"
 										   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
 										<Setter Property="Text"
-												Value="艦隊は出撃していません" />
+												Value="함대는 아직 출격하지 않았습니다" />
 										<Setter Property="FontFamily"
 												Value="{DynamicResource EmphaticFontFamilyKey}" />
 										<Setter Property="FontSize"
@@ -250,7 +250,7 @@
 											<DataTrigger Binding="{Binding Source.State.Situation}"
 														 Value="Sortie">
 												<Setter Property="Text"
-														Value="艦隊は出撃中です！" />
+														Value="현재 출격중입니다" />
 												<Setter Property="Foreground"
 														Value="{DynamicResource ActiveForegroundBrushKey}" />
 												<Setter Property="Background"
@@ -267,12 +267,12 @@
 										<Style TargetType="{x:Type TextBlock}"
 											   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
 											<Setter Property="Text"
-													Value="艦隊の出撃準備は完了していません" />
+													Value="함대출격준비가 아직 완료되지않았습니다" />
 											<Style.Triggers>
 												<DataTrigger Binding="{Binding Source.State.IsReady}"
 															 Value="True">
 													<Setter Property="Text"
-															Value="出撃準備完了！" />
+															Value="출격준비완료!" />
 													<Setter Property="Foreground"
 															Value="{DynamicResource ActiveForegroundBrushKey}" />
 													<Setter Property="Background"
@@ -281,7 +281,7 @@
 												<DataTrigger Binding="{Binding Source.State.Situation}"
 															 Value="Sortie">
 													<Setter Property="Text"
-															Value="出撃準備完了！" />
+															Value="출격준비완료!" />
 												</DataTrigger>
 											</Style.Triggers>
 										</Style>
@@ -296,7 +296,7 @@
 													<Style TargetType="{x:Type TextBlock}"
 														   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
 														<Setter Property="Text"
-																Value="艦隊は遠征中ではありません" />
+																Value="함대는 원정나가있지않습니다." />
 														<Style.Triggers>
 															<MultiDataTrigger>
 																<MultiDataTrigger.Conditions>
@@ -305,7 +305,7 @@
 																</MultiDataTrigger.Conditions>
 																<Setter Property="Text">
 																	<Setter.Value>
-																		<MultiBinding StringFormat="艦隊は遠征中です: {0} - {1}">
+																		<MultiBinding StringFormat="함대는 원정중입니다: {0} - {1}">
 																			<Binding Path="Expedition.Mission.Title" />
 																			<Binding Path="Expedition.Remaining" />
 																		</MultiBinding>
@@ -328,7 +328,7 @@
 													<Style TargetType="{x:Type TextBlock}"
 														   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
 														<Setter Property="Text"
-																Value="連合艦隊は遠征に参加できません" />
+																Value="연합함대는 원정에 참가할수 없습니다." />
 													</Style>
 												</TextBlock.Style>
 											</TextBlock>
@@ -348,7 +348,7 @@
 										<Style TargetType="{x:Type TextBlock}"
 											   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
 											<Setter Property="Text"
-													Value="艦隊の艦娘に大きなダメージはありません" />
+													Value="함대에 큰 피해를 입은 칸무스가 없습니다" />
 											<Style.Triggers>
 												<MultiDataTrigger>
 													<MultiDataTrigger.Conditions>
@@ -356,7 +356,7 @@
 																   Value="Homeport,HeavilyDamaged" />
 													</MultiDataTrigger.Conditions>
 													<Setter Property="Text"
-															Value="艦隊に大破した艦娘がいます" />
+															Value="함대에 대파당한 칸무스가 있습니다" />
 													<Setter Property="Foreground"
 															Value="{DynamicResource ActiveForegroundBrushKey}" />
 													<Setter Property="Background"
@@ -368,7 +368,7 @@
 																   Value="Sortie,HeavilyDamaged" />
 													</MultiDataTrigger.Conditions>
 													<Setter Property="Text"
-															Value="艦隊に大破した艦娘がいます！" />
+															Value="함대에 대파당한 칸무스가 있습니다!" />
 													<Setter Property="Foreground"
 															Value="{DynamicResource ActiveForegroundBrushKey}" />
 												</MultiDataTrigger>
@@ -382,7 +382,7 @@
 										<Style TargetType="{x:Type TextBlock}"
 											   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
 											<Setter Property="Text"
-													Value="艦隊の艦娘は入渠していません" />
+													Value="함대에 입거해있는 칸무스가 없습니다" />
 											<Style.Triggers>
 												<MultiDataTrigger>
 													<MultiDataTrigger.Conditions>
@@ -390,7 +390,7 @@
 																   Value="Repairing" />
 													</MultiDataTrigger.Conditions>
 													<Setter Property="Text"
-															Value="艦隊に入渠中の艦娘がいます" />
+															Value="함대에 입거중인 칸무스가 있습니다" />
 													<Setter Property="Foreground"
 															Value="{DynamicResource ActiveForegroundBrushKey}" />
 													<Setter Property="Background"
@@ -406,7 +406,7 @@
 										<Style TargetType="{x:Type TextBlock}"
 											   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
 											<Setter Property="Text"
-													Value="艦隊は補給済みです" />
+													Value="함대 보급 완료" />
 											<Style.Triggers>
 												<MultiDataTrigger>
 													<MultiDataTrigger.Conditions>
@@ -414,7 +414,7 @@
 																   Value="Homeport,InShortSupply" />
 													</MultiDataTrigger.Conditions>
 													<Setter Property="Text"
-															Value="艦隊に未補給の艦娘がいます" />
+															Value="함대에 보급받지 못한 칸무스가 있습니다" />
 													<Setter Property="Foreground"
 															Value="{DynamicResource ActiveForegroundBrushKey}" />
 													<Setter Property="Background"
@@ -430,7 +430,7 @@
 										<Style TargetType="{x:Type TextBlock}"
 											   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
 											<Setter Property="Text"
-													Value="艦隊の艦娘は疲労していません" />
+													Value="함대에 피로한 칸무스가 없습니다." />
 											<Style.Triggers>
 												<MultiDataTrigger>
 													<MultiDataTrigger.Conditions>
@@ -441,7 +441,7 @@
 													</MultiDataTrigger.Conditions>
 													<Setter Property="Text">
 														<Setter.Value>
-															<MultiBinding StringFormat="疲労回復まで: {0}">
+															<MultiBinding StringFormat="피로회복까지: {0}">
 																<Binding Path="State.Homeport.Condition.Remaining" />
 															</MultiBinding>
 														</Setter.Value>
@@ -481,7 +481,7 @@
 										   HorizontalAlignment="Right"
 										   VerticalAlignment="Bottom"
 										   Margin="1,2">
-									<Run Text="合計レベル" />
+									<Run Text="합계레벨"/>
 									<Run Text=":" />
 								</TextBlock>
 								<TextBlock Grid.Row="0"
@@ -496,7 +496,7 @@
 										   HorizontalAlignment="Right"
 										   VerticalAlignment="Bottom"
 										   Margin="1,2">
-									<Run Text="平均レベル" />
+									<Run Text="평균레벨"/>
 									<Run Text=":" />
 								</TextBlock>
 								<TextBlock Grid.Row="1"
@@ -521,7 +521,7 @@
 										   HorizontalAlignment="Right"
 										   VerticalAlignment="Bottom"
 										   Margin="1,2">
-									<Run Text="索敵値" />
+									<Run Text="색적능력" />
 									<Run Text=":" />
 								</TextBlock>
 								<TextBlock Grid.Row="0"
@@ -536,7 +536,7 @@
 										   HorizontalAlignment="Right"
 										   VerticalAlignment="Bottom"
 										   Margin="1,2">
-									<Run Text="制空戦力" />
+									<Run Text="제공전력" />
 									<Run Text=":" />
 								</TextBlock>
 								<TextBlock Grid.Row="1"

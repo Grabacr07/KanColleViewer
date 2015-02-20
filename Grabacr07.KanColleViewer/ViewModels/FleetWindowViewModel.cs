@@ -70,7 +70,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		public FleetWindowViewModel()
 		{
-			this.Title = "艦隊詳細";
+			this.Title = "함대 상세정보";
 			this.Fleets = new ItemViewModel[0];
 
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport.Organization)

@@ -383,44 +383,51 @@ namespace Grabacr07.KanColleWrapper
 
 		private void SubscribeSortieSessions(KanColleProxy proxy)
 		{
-			proxy.ApiSessionSource
+			try
+			{
+				proxy.ApiSessionSource
 				.SkipUntil(proxy.api_req_map_start.TryParse().Do(this.Sortie))
 				.TakeUntil(proxy.api_port)
 				.Finally(this.Homing)
 				.Repeat()
 				.Subscribe();
 
-			int[] evacuationOfferedShipIds = null;
-			int[] towOfferedShipIds = null;
+				int[] evacuationOfferedShipIds = null;
+				int[] towOfferedShipIds = null;
 
-			proxy.api_req_combined_battle_battleresult
-				.TryParse<kcsapi_combined_battle_battleresult>()
-				.Where(x => x.Data.api_escape != null)
-				.Select(x => x.Data)
-				.Subscribe(x =>
-				{
-					evacuationOfferedShipIds = x.api_escape.api_escape_idx.Select(idx => x.api_ship_id[idx - 1]).ToArray();
-					towOfferedShipIds = x.api_escape.api_tow_idx.Select(idx => x.api_ship_id[idx - 1]).ToArray();
-				});
-			proxy.api_req_combined_battle_goback_port
-				.Subscribe(_ =>
-				{
-					if (KanColleClient.Current.IsInSortie
-						&& evacuationOfferedShipIds != null
-						&& evacuationOfferedShipIds.Length >= 1
-						&& towOfferedShipIds != null
-						&& towOfferedShipIds.Length >= 1)
+				proxy.api_req_combined_battle_battleresult
+					.TryParse<kcsapi_combined_battle_battleresult>()
+					.Where(x => x.Data.api_escape != null)
+					.Select(x => x.Data)
+					.Subscribe(x =>
 					{
-						this.evacuatedShipsIds.Add(evacuationOfferedShipIds[0]);
-						this.towShipIds.Add(towOfferedShipIds[0]);
-					}
-				});
-			proxy.api_get_member_ship2
-				.Subscribe(_ =>
-				{
-					evacuationOfferedShipIds = null;
-					towOfferedShipIds = null;
-				});
+						evacuationOfferedShipIds = x.api_escape.api_escape_idx.Select(idx => x.api_ship_id[idx - 1]).ToArray();
+						towOfferedShipIds = x.api_escape.api_tow_idx.Select(idx => x.api_ship_id[idx - 1]).ToArray();
+					});
+				proxy.api_req_combined_battle_goback_port
+					.Subscribe(_ =>
+					{
+						if (KanColleClient.Current.IsInSortie
+							&& evacuationOfferedShipIds != null
+							&& evacuationOfferedShipIds.Length >= 1
+							&& towOfferedShipIds != null
+							&& towOfferedShipIds.Length >= 1)
+						{
+							this.evacuatedShipsIds.Add(evacuationOfferedShipIds[0]);
+							this.towShipIds.Add(towOfferedShipIds[0]);
+						}
+					});
+				proxy.api_get_member_ship2
+					.Subscribe(_ =>
+					{
+						evacuationOfferedShipIds = null;
+						towOfferedShipIds = null;
+					});
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine("출격 세션 에러: {0}", ex);
+			}
 		}
 
 
