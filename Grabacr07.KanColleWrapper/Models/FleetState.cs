@@ -240,20 +240,6 @@ namespace Grabacr07.KanColleWrapper.Models
 			}
 			else
 			{
-				var repairing = ships.Any(x => this.homeport.Repairyard.CheckRepairing(x.Id));
-				if (repairing)
-				{
-					state |= FleetSituation.Repairing;
-					ready = false;
-				}
-
-				var inShortSupply = ships.Any(s => s.Fuel.Current < s.Fuel.Maximum || s.Bull.Current < s.Bull.Maximum);
-				if (inShortSupply)
-				{
-					state |= FleetSituation.InShortSupply;
-					ready = false;
-				}
-
 				var first = this.source[0];
 
 				if (this.source.Length == 1)
@@ -286,6 +272,23 @@ namespace Grabacr07.KanColleWrapper.Models
 					{
 						state |= FleetSituation.Homeport;
 					}
+				}
+			}
+
+			if (state.HasFlag(FleetSituation.Homeport))
+			{
+				var repairing = ships.Any(x => this.homeport.Repairyard.CheckRepairing(x.Id));
+				if (repairing)
+				{
+					state |= FleetSituation.Repairing;
+					ready = false;
+				}
+
+				var inShortSupply = ships.Any(s => s.Fuel.Current < s.Fuel.Maximum || s.Bull.Current < s.Bull.Maximum);
+				if (inShortSupply)
+				{
+					state |= FleetSituation.InShortSupply;
+					ready = false;
 				}
 			}
 

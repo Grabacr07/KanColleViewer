@@ -8,7 +8,7 @@
 					 ExpForNextLevel="129800"
 					 Condition="80"
 					 ConditionType="Brilliant"
-					 Situation="None">
+					 Situation="HeavilyDamaged">
 			<models:Ship.Info>
 				<models:ShipInfo Id="987"
 								 Name="Bismarck sechs"

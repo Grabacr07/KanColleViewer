@@ -393,8 +393,10 @@ namespace Grabacr07.KanColleWrapper
 				.Select(x => x.Data)
 				.Subscribe(x =>
 				{
-					evacuationOfferedShipIds = x.api_escape.api_escape_idx.Select(idx => x.api_ship_id[idx - 1]).ToArray();
-					towOfferedShipIds = x.api_escape.api_tow_idx.Select(idx => x.api_ship_id[idx - 1]).ToArray();
+					if (this.CombinedFleet == null) return;
+					var ships = this.CombinedFleet.Fleets.SelectMany(f => f.Ships).ToArray();
+					evacuationOfferedShipIds = x.api_escape.api_escape_idx.Select(idx => ships[idx - 1].Id).ToArray();
+					towOfferedShipIds = x.api_escape.api_tow_idx.Select(idx => ships[idx - 1].Id).ToArray();
 				});
 			proxy.api_req_combined_battle_goback_port
 				.Subscribe(_ =>

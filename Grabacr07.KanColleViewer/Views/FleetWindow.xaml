@@ -20,6 +20,7 @@
 				   xmlns:fleetsVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 				   xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
 				   xmlns:wrapper="clr-namespace:Grabacr07.KanColleWrapper.Models;assembly=KanColleWrapper"
+				   xmlns:converters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters"
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:FleetWindowViewModel}"
 				   Title="{Binding Title}"
@@ -54,6 +55,8 @@
 
 	<Window.Resources>
 		<ResourceDictionary>
+			<converters:HasFlagConverter x:Key="HasFlagConverter" />
+
 			<DataTemplate x:Key="ShipLineViewKey"
 						  DataType="{x:Type wrapper:Ship}">
 				<Border BorderThickness="0,0,0,1"
@@ -63,23 +66,23 @@
 						<Border.Style>
 							<Style TargetType="{x:Type Border}">
 								<Style.Triggers>
-									<DataTrigger Binding="{Binding Situation}"
-												 Value="Evacuation">
+									<DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Evacuation}"
+												 Value="True">
 										<Setter Property="Opacity"
 												Value="0.3" />
 									</DataTrigger>
-									<DataTrigger Binding="{Binding Situation}"
-												 Value="Tow">
+									<DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow}"
+												 Value="True">
 										<Setter Property="Opacity"
 												Value="0.3" />
 									</DataTrigger>
-									<DataTrigger Binding="{Binding Situation}"
-												 Value="HeavilyDamaged">
+									<DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged}"
+												 Value="True">
 										<Setter Property="Background"
 												Value="#14FF0000" />
 									</DataTrigger>
-									<DataTrigger Binding="{Binding Situation}"
-												 Value="HeavilyDamaged,DamageControlled">
+									<DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged|DamageControlled}"
+												 Value="True">
 										<Setter Property="Background"
 												Value="Transparent" />
 									</DataTrigger>
@@ -198,8 +201,16 @@
 										<Style.Triggers>
 											<MultiDataTrigger>
 												<MultiDataTrigger.Conditions>
-													<Condition Binding="{Binding Situation}"
-															   Value="Repair" />
+													<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=DamageControlled}"
+															   Value="True" />
+												</MultiDataTrigger.Conditions>
+												<Setter Property="Text"
+														Value="健在・ダメコン搭載" />
+											</MultiDataTrigger>
+											<MultiDataTrigger>
+												<MultiDataTrigger.Conditions>
+													<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
+															   Value="True" />
 												</MultiDataTrigger.Conditions>
 												<Setter Property="Text"
 														Value="入渠中" />
@@ -208,8 +219,8 @@
 											</MultiDataTrigger>
 											<MultiDataTrigger>
 												<MultiDataTrigger.Conditions>
-													<Condition Binding="{Binding Situation}"
-															   Value="Evacuation" />
+													<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Evacuation}"
+															   Value="True" />
 												</MultiDataTrigger.Conditions>
 												<Setter Property="Text"
 														Value="大破 (退避済み)" />
@@ -218,8 +229,8 @@
 											</MultiDataTrigger>
 											<MultiDataTrigger>
 												<MultiDataTrigger.Conditions>
-													<Condition Binding="{Binding Situation}"
-															   Value="Tow" />
+													<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow}"
+															   Value="True" />
 												</MultiDataTrigger.Conditions>
 												<Setter Property="Text"
 														Value="撤退 (護衛退避)" />
@@ -228,8 +239,8 @@
 											</MultiDataTrigger>
 											<MultiDataTrigger>
 												<MultiDataTrigger.Conditions>
-													<Condition Binding="{Binding Situation}"
-															   Value="HeavilyDamaged" />
+													<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged}"
+															   Value="True" />
 												</MultiDataTrigger.Conditions>
 												<Setter Property="Text"
 														Value="大破 (轟沈の可能性あり)" />
@@ -240,8 +251,8 @@
 											</MultiDataTrigger>
 											<MultiDataTrigger>
 												<MultiDataTrigger.Conditions>
-													<Condition Binding="{Binding Situation}"
-															   Value="HeavilyDamaged,DamageControlled" />
+													<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged|DamageControlled}"
+															   Value="True" />
 												</MultiDataTrigger.Conditions>
 												<Setter Property="Text"
 														Value="大破 (ダメコン使用可能)" />
@@ -605,8 +616,8 @@
 										<Setter Property="TextAlignment"
 												Value="Center" />
 										<Style.Triggers>
-											<DataTrigger Binding="{Binding Source.State.Situation}"
-														 Value="Sortie">
+											<DataTrigger Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Sortie}"
+														 Value="True">
 												<Setter Property="Text"
 														Value="艦隊は出撃中です！" />
 												<Setter Property="Foreground"
@@ -636,8 +647,8 @@
 													<Setter Property="Background"
 															Value="{DynamicResource FleetReSortieBrushKey}" />
 												</DataTrigger>
-												<DataTrigger Binding="{Binding Source.State.Situation}"
-															 Value="Sortie">
+												<DataTrigger Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Sortie}"
+															 Value="True">
 													<Setter Property="Text"
 															Value="出撃準備完了！" />
 												</DataTrigger>
@@ -658,8 +669,8 @@
 														<Style.Triggers>
 															<MultiDataTrigger>
 																<MultiDataTrigger.Conditions>
-																	<Condition Binding="{Binding Source.State.Situation}"
-																			   Value="Expedition" />
+																	<Condition Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Expedition}"
+																			   Value="True" />
 																</MultiDataTrigger.Conditions>
 																<Setter Property="Text">
 																	<Setter.Value>
@@ -680,7 +691,6 @@
 											</TextBlock>
 										</DataTemplate>
 										<DataTemplate DataType="{x:Type fleetsVm:CombinedFleetViewModel}">
-
 											<TextBlock>
 												<TextBlock.Style>
 													<Style TargetType="{x:Type TextBlock}"
@@ -696,8 +706,8 @@
 
 								<TextBlock x:Name="DamageIndicator">
 									<i:Interaction.Behaviors>
-										<ei:DataStateBehavior Binding="{Binding Source.State.Situation}"
-															  Value="Sortie,HeavilyDamaged"
+										<ei:DataStateBehavior Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Sortie|HeavilyDamaged}"
+															  Value="True"
 															  TrueState="Blinking"
 															  FalseState="Normal" />
 									</i:Interaction.Behaviors>
@@ -710,8 +720,8 @@
 											<Style.Triggers>
 												<MultiDataTrigger>
 													<MultiDataTrigger.Conditions>
-														<Condition Binding="{Binding Source.State.Situation}"
-																   Value="Homeport,HeavilyDamaged" />
+														<Condition Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Homeport|HeavilyDamaged}"
+																   Value="True" />
 													</MultiDataTrigger.Conditions>
 													<Setter Property="Text"
 															Value="艦隊に大破した艦娘がいます" />
@@ -722,8 +732,8 @@
 												</MultiDataTrigger>
 												<MultiDataTrigger>
 													<MultiDataTrigger.Conditions>
-														<Condition Binding="{Binding Source.State.Situation}"
-																   Value="Sortie,HeavilyDamaged" />
+														<Condition Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Sortie|HeavilyDamaged}"
+																   Value="True" />
 													</MultiDataTrigger.Conditions>
 													<Setter Property="Text"
 															Value="艦隊に大破した艦娘がいます！" />
@@ -744,8 +754,8 @@
 											<Style.Triggers>
 												<MultiDataTrigger>
 													<MultiDataTrigger.Conditions>
-														<Condition Binding="{Binding Source.State.Situation}"
-																   Value="Repairing" />
+														<Condition Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repairing}"
+																   Value="True" />
 													</MultiDataTrigger.Conditions>
 													<Setter Property="Text"
 															Value="艦隊に入渠中の艦娘がいます" />
@@ -768,8 +778,8 @@
 											<Style.Triggers>
 												<MultiDataTrigger>
 													<MultiDataTrigger.Conditions>
-														<Condition Binding="{Binding Source.State.Situation}"
-																   Value="Homeport,InShortSupply" />
+														<Condition Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=InShortSupply}"
+																   Value="True" />
 													</MultiDataTrigger.Conditions>
 													<Setter Property="Text"
 															Value="艦隊に未補給の艦娘がいます" />
@@ -792,8 +802,8 @@
 											<Style.Triggers>
 												<MultiDataTrigger>
 													<MultiDataTrigger.Conditions>
-														<Condition Binding="{Binding Source.State.Situation}"
-																   Value="Homeport" />
+														<Condition Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Homeport}"
+																   Value="True" />
 														<Condition Binding="{Binding State.Homeport.Condition.IsRejuvenating}"
 																   Value="True" />
 													</MultiDataTrigger.Conditions>
