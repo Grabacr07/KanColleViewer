@@ -21,7 +21,14 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 		{
 			get { return this.source.Ship == null ? "----" : this.source.Ship.Info.Name; }
 		}
-
+		public string Level
+		{
+			get
+			{
+				if (this.source != null) return "Lv." + this.source.Level.ToString();
+				else return null;
+			}
+		}
 		public string CompleteTime
 		{
 			get { return this.source.CompleteTime.HasValue ? this.source.CompleteTime.Value.LocalDateTime.ToString("MM/dd HH:mm") : "--/-- --:--:--"; }
