@@ -958,7 +958,8 @@
 							BorderBrush="{DynamicResource BorderBrushKey}"
 							Margin="8">
 						<ScrollViewer HorizontalScrollBarVisibility="Auto"
-									  VerticalScrollBarVisibility="Auto">
+									  VerticalScrollBarVisibility="Auto"
+									  PanningMode="Both">
 							<ContentControl Content="{Binding}"
 											Grid.IsSharedSizeScope="True"
 											d:IsHidden="True">
