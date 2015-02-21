@@ -23,7 +23,7 @@
 				   mc:Ignorable="d"
 				   Title="{Binding Title}" 
 				   Height="300" 
-				   Width="428"
+				   Width="490"
 				   FontSize="12"
 				   Background="{DynamicResource ThemeBrushKey}"
 				   Foreground="{DynamicResource ActiveForegroundBrushKey}"

@@ -37,5 +37,10 @@ namespace Grabacr07.KanColleWrapper
 		{
 			return ViewRangeCalcLogic.Get(KanColleClient.Current.Settings.ViewRangeCalcType).Calc(fleet.Ships);
 		}
+
+		public static bool IsHeavilyDamage(this LimitedValue hp)
+		{
+			return (hp.Current / (double)hp.Maximum) <= 0.25;
+		}
 	}
 }

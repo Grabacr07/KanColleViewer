@@ -240,30 +240,6 @@ namespace Grabacr07.KanColleWrapper.Models
 			}
 			else
 			{
-				var heavilyDamaged = ships
-					.Where(s => !this.homeport.Repairyard.CheckRepairing(s.Id))
-					.Where(s => !s.Situation.HasFlag(ShipSituation.Evacuation) && !s.Situation.HasFlag(ShipSituation.Tow))
-					.Any(s => (s.HP.Current / (double)s.HP.Maximum) <= 0.25);
-				if (heavilyDamaged)
-				{
-					state |= FleetSituation.HeavilyDamaged;
-					ready = false;
-				}
-
-				var repairing = ships.Any(x => this.homeport.Repairyard.CheckRepairing(x.Id));
-				if (repairing)
-				{
-					state |= FleetSituation.Repairing;
-					ready = false;
-				}
-
-				var inShortSupply = ships.Any(s => s.Fuel.Current < s.Fuel.Maximum || s.Bull.Current < s.Bull.Maximum);
-				if (inShortSupply)
-				{
-					state |= FleetSituation.InShortSupply;
-					ready = false;
-				}
-
 				var first = this.source[0];
 
 				if (this.source.Length == 1)
@@ -297,6 +273,34 @@ namespace Grabacr07.KanColleWrapper.Models
 						state |= FleetSituation.Homeport;
 					}
 				}
+			}
+
+			if (state.HasFlag(FleetSituation.Homeport))
+			{
+				var repairing = ships.Any(x => this.homeport.Repairyard.CheckRepairing(x.Id));
+				if (repairing)
+				{
+					state |= FleetSituation.Repairing;
+					ready = false;
+				}
+
+				var inShortSupply = ships.Any(s => s.Fuel.Current < s.Fuel.Maximum || s.Bull.Current < s.Bull.Maximum);
+				if (inShortSupply)
+				{
+					state |= FleetSituation.InShortSupply;
+					ready = false;
+				}
+			}
+
+			var heavilyDamaged = ships
+				.Where(s => !this.homeport.Repairyard.CheckRepairing(s.Id))
+				.Where(s => !s.Situation.HasFlag(ShipSituation.Evacuation) && !s.Situation.HasFlag(ShipSituation.Tow))
+				.Where(s => !(state.HasFlag(FleetSituation.Sortie) && s.Situation.HasFlag(ShipSituation.DamageControlled)))
+				.Any(s => s.HP.IsHeavilyDamage());
+			if (heavilyDamaged)
+			{
+				state |= FleetSituation.HeavilyDamaged;
+				ready = false;
 			}
 
 			this.Situation = state;
