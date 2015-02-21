@@ -307,8 +307,8 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.IsReady = ready;
 
 			this.Condition.Update(ships);
-			this.Condition.IsEnabled = state.HasFlag(FleetSituation.Homeport); // 疲労回復通知は母港待機中の艦隊でのみ行う
-
+			this.Condition.IsEnabled = state.HasFlag(FleetSituation.Homeport);	 // 疲労回復通知は母港待機中の艦隊でのみ行う
+			if (this.Condition.IsRejuvenating) this.IsReady = false;
 			if (this.Updated != null)
 			{
 				this.Updated(this, new EventArgs());
