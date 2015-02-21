@@ -398,8 +398,8 @@ namespace Grabacr07.KanColleWrapper.Models
 				}
 			}
 		}
-
 		#endregion
+
 		#region IntStatus 変更通知プロパティ
 
 		private int _IntStatus;
@@ -434,7 +434,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.HP = new LimitedValue(this.RawData.api_nowhp, this.RawData.api_maxhp, 0);
 			this.Fuel = new LimitedValue(this.RawData.api_fuel, this.Info.RawData.api_fuel_max, 0);
 			this.Bull = new LimitedValue(this.RawData.api_bull, this.Info.RawData.api_bull_max, 0);
-			double temp = (double)(this.HP.Current / this.HP.Maximum);
+			double temp = (double)this.HP.Current / (double)this.HP.Maximum;
 
 			if (temp <= 0.25) IntStatus = 3;
 			else if (temp <= 0.5) IntStatus = 2;
