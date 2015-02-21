@@ -392,7 +392,24 @@ namespace Grabacr07.KanColleWrapper.Models
 		}
 
 		#endregion
+		#region IntStatus 変更通知プロパティ
 
+		private int _IntStatus;
+
+		public int IntStatus
+		{
+			get { return this._IntStatus; }
+			set
+			{
+				if (this._IntStatus != value)
+				{
+					this._IntStatus = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
 
 		internal Ship(Homeport parent, kcsapi_ship2 rawData)
 			: base(rawData)
@@ -409,15 +426,21 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.HP = new LimitedValue(this.RawData.api_nowhp, this.RawData.api_maxhp, 0);
 			this.Fuel = new LimitedValue(this.RawData.api_fuel, this.Info.RawData.api_fuel_max, 0);
 			this.Bull = new LimitedValue(this.RawData.api_bull, this.Info.RawData.api_bull_max, 0);
+			double temp = (double)(this.HP.Current / this.HP.Maximum);
 
-			if (this.RawData.api_kyouka.Length >= 5)
-			{
-				this.Firepower = new ModernizableStatus(this.Info.RawData.api_houg, this.RawData.api_kyouka[0]);
-				this.Torpedo = new ModernizableStatus(this.Info.RawData.api_raig, this.RawData.api_kyouka[1]);
-				this.AA = new ModernizableStatus(this.Info.RawData.api_tyku, this.RawData.api_kyouka[2]);
-				this.Armer = new ModernizableStatus(this.Info.RawData.api_souk, this.RawData.api_kyouka[3]);
-				this.Luck = new ModernizableStatus(this.Info.RawData.api_luck, this.RawData.api_kyouka[4]);
-			}
+			if (temp <= 0.25) IntStatus = 3;
+			else if (temp <= 0.5) IntStatus = 2;
+			else if (temp <= 0.75) IntStatus = 1;
+			else IntStatus = 0;
+
+				if (this.RawData.api_kyouka.Length >= 5)
+				{
+					this.Firepower = new ModernizableStatus(this.Info.RawData.api_houg, this.RawData.api_kyouka[0]);
+					this.Torpedo = new ModernizableStatus(this.Info.RawData.api_raig, this.RawData.api_kyouka[1]);
+					this.AA = new ModernizableStatus(this.Info.RawData.api_tyku, this.RawData.api_kyouka[2]);
+					this.Armer = new ModernizableStatus(this.Info.RawData.api_souk, this.RawData.api_kyouka[3]);
+					this.Luck = new ModernizableStatus(this.Info.RawData.api_luck, this.RawData.api_kyouka[4]);
+				}
 
 			this.Slots = this.RawData.api_slot
 				.Select(id => this.homeport.Itemyard.SlotItems[id])

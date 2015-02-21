@@ -141,7 +141,7 @@
 						<GridView>
 							<GridViewColumn Width="50">
 								<GridViewColumn.Header>
-										<TextBlock Text="ID" />
+									<TextBlock Text="ID" />
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -179,6 +179,70 @@
 											<Run Text="" />
 											<Run Text="{Binding Ship.ExpForNextLevel, StringFormat=Next:{0}, Mode=OneWay}" />
 										</TextBlock>
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+							<GridViewColumn Width="Auto">
+								<GridViewColumn.Header>
+									<TextBlock Text="피해상태" />
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<Border x:Name="StatusBorder"
+												Margin="-2,0"
+												Width="60">
+											<TextBlock FontSize="9"
+												   Margin="0,3" HorizontalAlignment="Center">
+											<Run Text="{Binding Ship.IntStatus, Mode=OneWay}"
+												 FontSize="12"
+												  x:Name="Status"
+												 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+											</TextBlock>
+										</Border>
+										<DataTemplate.Triggers>
+											<DataTrigger Binding="{Binding Ship.IntStatus}"
+															 Value="1">
+												<Setter TargetName="Status"
+															Property="Text"
+															Value="소파" />
+												<Setter TargetName="Status"
+															Property="Foreground"
+															Value="#FF5B522A" />
+												<Setter TargetName="StatusBorder"
+														Property="Background"
+														Value="#FFF9CD08" />
+											</DataTrigger>
+											<DataTrigger Binding="{Binding Ship.IntStatus}"
+															 Value="2">
+												<Setter TargetName="Status"
+															Property="Text"
+															Value="중파" />
+												<Setter TargetName="Status"
+															Property="Foreground"
+															Value="#FFFFFF" />
+												<Setter TargetName="StatusBorder"
+														Property="Background"
+														Value="#FFDE6F00" />
+											</DataTrigger>
+											<DataTrigger Binding="{Binding Ship.IntStatus}"
+															 Value="3">
+												<Setter TargetName="Status"
+															Property="Text"
+															Value="대파" />
+												<Setter TargetName="Status"
+															Property="Foreground"
+															Value="#FFFFFF" />
+												<Setter TargetName="StatusBorder"
+														Property="Background"
+														Value="#FFE00000" />
+											</DataTrigger>
+											<DataTrigger Binding="{Binding Ship.IntStatus}"
+															 Value="0">
+												<Setter TargetName="Status"
+															Property="Text"
+															Value="" />
+											</DataTrigger>
+										</DataTemplate.Triggers>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
