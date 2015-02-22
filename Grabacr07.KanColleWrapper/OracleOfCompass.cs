@@ -38,7 +38,7 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// 내부에서 크리티컬이 맞는지 조회하는 부분
 		/// </summary>
-		private bool IsCritical { get; set; }
+		public bool IsCritical { get; private set; }
 		/// <summary>
 		/// 전투가 끝나고 모항에 돌아왔는지를 채크
 		/// </summary>
@@ -251,10 +251,13 @@ namespace Grabacr07.KanColleWrapper
 
 			if (this.IsCritical)
 			{
-				this.IsCritical = false;
-				this.CriticalCleared();
-
-				if (IsEnd) this.BattleEnd = true;
+				if (IsEnd)
+				{
+					this.IsCritical = false;
+					this.CriticalCleared();
+					this.BattleEnd = true;
+					GoBackPortList = new List<EscapeResults>();
+				}
 				else this.BattleEnd = false;
 			}
 		}
@@ -862,8 +865,9 @@ namespace Grabacr07.KanColleWrapper
 								tow = GoBackPortList.Any(x => x.tow == i + 1);
 							}
 						}
-
-						if (temp <= 0.25 && !escape && !tow) result.Add(true);
+						if (escape) result.Add(false);
+						else if (tow) result.Add(false);
+						else if (temp <= 0.25) result.Add(true);
 						else result.Add(false);
 					}
 
