@@ -200,7 +200,12 @@ namespace Grabacr07.KanColleWrapper
 
 				if (KanColleClient.Current.IsInSortie)
 				{
-					foreach (var id in this.evacuatedShipsIds) this.Ships[id].Situation |= ShipSituation.Evacuation;
+					foreach (var id in this.evacuatedShipsIds)
+					{
+						this.Ships[id].Situation |= ShipSituation.Evacuation;
+						if (this.Ships[id].Situation.HasFlag(ShipSituation.HeavilyDamaged))
+							this.Ships[id].Situation &= ~ShipSituation.HeavilyDamaged;
+					}
 					foreach (var id in this.towShipIds) this.Ships[id].Situation |= ShipSituation.Tow;
 				}
 			}
@@ -451,7 +456,18 @@ namespace Grabacr07.KanColleWrapper
 			{
 				target.Homing();
 			}
-
+			foreach (var id in this.evacuatedShipsIds)
+			{
+				if (this.Ships[id].Situation.HasFlag(ShipSituation.Evacuation))
+					this.Ships[id].Situation &= ~ShipSituation.Evacuation;
+				if (this.Ships[id].HP.IsHeavilyDamage())
+					this.Ships[id].Situation |= ShipSituation.HeavilyDamaged;
+            }
+			foreach (var id in this.towShipIds)
+			{
+				if (this.Ships[id].Situation.HasFlag(ShipSituation.Tow))
+					this.Ships[id].Situation &= ~ShipSituation.Tow;
+			}
 			this.evacuatedShipsIds.Clear();
 			this.towShipIds.Clear();
 		}
