@@ -160,9 +160,7 @@ namespace Grabacr07.KanColleWrapper.Models
 						this.Situation |= ShipSituation.HeavilyDamaged;
 				}
 				else
-				{
 					this.Situation &= ~ShipSituation.HeavilyDamaged;
-				}
 			}
 		}
 

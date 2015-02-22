@@ -111,9 +111,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					if (newShip != null)
 					{
 						if(newShip.Situation.HasFlag(ShipSituation.HeavilyDamaged))
-						{
 							newShip.Situation &= ~ShipSituation.HeavilyDamaged;
-						}
 						newShip.Situation |= ShipSituation.Repair;
 					}
 
