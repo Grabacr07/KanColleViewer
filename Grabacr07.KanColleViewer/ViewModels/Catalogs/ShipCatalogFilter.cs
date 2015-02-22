@@ -608,7 +608,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		public override bool Predicate(Ship ship)
 		{
-			if (ship.Situation == ShipSituation.Repair) return false;
+			if (ship.Situation.HasFlag(ShipSituation.Repair)) return false;
 			if (ship.RepairTime != 0) return true;
 			return false;
 		}
