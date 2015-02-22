@@ -21,6 +21,7 @@
 			 d:DesignHeight="333">
 	<UserControl.Resources>
 		<ResourceDictionary>
+			<converters:HasFlagConverter x:Key="HasFlagConverter" />
 			<Style TargetType="{x:Type Border}">
 				<Setter Property="BorderBrush"
 						Value="{DynamicResource BorderBrushKey}" />
@@ -234,17 +235,16 @@
 																		 Margin="0,2,0,0" />
 											</Grid>
 
-											<Grid x:Name="RepairIndicator"
+												<Grid x:Name="RepairIndicator"
 												  Grid.Column="2"
 												  Visibility="Collapsed"
 												  Margin="8,2,8,0">
-												<Border Background="{DynamicResource FleetRepairingBrushKey}"
+													<Border Background="{DynamicResource FleetRepairingBrushKey}"
 														Opacity=".4" />
-												<TextBlock Text="입거중"
+													<TextBlock Text="입거중"
 														   Style="{DynamicResource EmphaticTextStyleKey}"
 														   HorizontalAlignment="Center" />
-											</Grid>
-
+												</Grid>
 												<Grid x:Name="EvacuationIndicator"
 												  Grid.Column="2"
 												  Visibility="Collapsed"
@@ -272,9 +272,9 @@
 												   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 									</StackPanel>
 
-									<DataTemplate.Triggers>
-										<DataTrigger Binding="{Binding Ship.Situation}"
-													 Value="Repair">
+										<DataTemplate.Triggers>
+											<DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
+													 Value="True">
 											<Setter TargetName="HPIndicator"
 													Property="Opacity"
 													Value=".2" />

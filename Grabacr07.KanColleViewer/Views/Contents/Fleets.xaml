@@ -18,7 +18,11 @@
 			 d:DesignWidth="800"
 			 d:DesignHeight="400"
 			 d:DataContext="{d:DesignInstance fleets:FleetsViewModel}">
-
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<converters:HasFlagConverter x:Key="HasFlagConverter" />
+		</ResourceDictionary>
+	</UserControl.Resources>
 	<i:Interaction.Triggers>
 		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
 										 MessageKey="Show/FleetWindow">
@@ -287,8 +291,8 @@
 							</StackPanel>
 
 							<DataTemplate.Triggers>
-								<DataTrigger Binding="{Binding Ship.Situation}"
-											 Value="Repair">
+								<DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
+											 Value="True">
 									<Setter TargetName="HPText"
 											Property="Opacity"
 											Value=".2" />
