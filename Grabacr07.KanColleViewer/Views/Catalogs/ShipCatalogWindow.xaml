@@ -88,11 +88,13 @@
 		<Grid Grid.Row="1">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
-				<RowDefinition Height="*" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition />
 			</Grid.RowDefinitions>
 
-			<Expander Margin="8"
-					  IsExpanded="{Binding IsOpenSettings, Mode=TwoWay}">
+			<Expander Grid.Row="0"
+					  Margin="8"
+					  IsExpanded="{Binding IsOpenFilterSettings, Mode=TwoWay}">
 				<Expander.Header>
 					<TextBlock Text="フィルター設定"
 							   Style="{DynamicResource HeaderTextStyleKey}"
@@ -403,10 +405,101 @@
 				</StackPanel>
 			</Expander>
 
-			<Border Grid.Row="1"
+			<Expander Grid.Row="1"
+					  DockPanel.Dock="Top"
+					  Margin="8,0"
+					  IsExpanded="{Binding IsOpenSortSettings, Mode=TwoWay}">
+				<Expander.Header>
+					<TextBlock Text="並べ替え設定"
+							   Style="{DynamicResource HeaderTextStyleKey}"
+							   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+				</Expander.Header>
+
+				<Border BorderThickness="1"
+						BorderBrush="{DynamicResource BorderBrushKey}"
+						Padding="5"
+						Margin="0,8,0,0">
+					<DockPanel LastChildFill="False">
+						<metro2:CallMethodButton DockPanel.Dock="Right"
+												 MethodName="Update"
+												 Content="更新"
+												 Margin="8,3,3,3"
+												 Padding="12,4" />
+
+						<metro2:CallMethodButton DockPanel.Dock="Right"
+												 MethodTarget="{Binding SortWorker}"
+												 MethodName="Clear"
+												 Content="クリア"
+												 Margin="8,3,0,3"
+												 Padding="12,4" />
+
+						<TextBlock DockPanel.Dock="Top"
+								   Text="艦娘を以下の順序で並べ替えます。"
+								   Style="{DynamicResource DefaultTextStyleKey}"
+								   Margin="3,2,0,8" />
+
+						<ItemsControl DockPanel.Dock="Left"
+									  ItemsSource="{Binding Selectors}"
+									  DataContext="{Binding SortWorker}"
+									  d:DataContext="{d:DesignData /SampleData/ShipCatalogSortWorkerSampleData.xaml}">
+							<ItemsControl.Template>
+								<ControlTemplate TargetType="{x:Type ItemsControl}">
+									<Border ClipToBounds="True">
+										<WrapPanel IsItemsHost="True"
+												   Margin="3,0,-40,0" />
+									</Border>
+								</ControlTemplate>
+							</ItemsControl.Template>
+							<ItemsControl.ItemTemplate>
+								<DataTemplate>
+									<DockPanel Margin="0,4">
+										<ed:RegularPolygon DockPanel.Dock="Right"
+														   PointCount="3"
+														   Fill="{DynamicResource BorderBrushKey}"
+														   Width="40"
+														   Height="20"
+														   RenderTransformOrigin="0.5,0.5">
+											<ed:RegularPolygon.RenderTransform>
+												<RotateTransform Angle="90" />
+											</ed:RegularPolygon.RenderTransform>
+										</ed:RegularPolygon>
+										<metro:PromptComboBox DockPanel.Dock="Bottom"
+															  ItemsSource="{Binding SelectableColumns}"
+															  SelectedItem="{Binding Current, Mode=TwoWay}"
+															  Prompt="並べ替え方法"
+															  Width="120"
+															  Margin="1,4,0,0">
+											<metro:PromptComboBox.ItemsPanel>
+												<ItemsPanelTemplate>
+													<StackPanel Margin="02" />
+												</ItemsPanelTemplate>
+											</metro:PromptComboBox.ItemsPanel>
+											<metro:PromptComboBox.ItemTemplate>
+												<DataTemplate>
+													<TextBlock Text="{Binding Name}"
+															   Margin="2" />
+												</DataTemplate>
+											</metro:PromptComboBox.ItemTemplate>
+										</metro:PromptComboBox>
+										<RadioButton DockPanel.Dock="Left"
+													 Content="昇順"
+													 IsChecked="{Binding IsAscending, Mode=TwoWay}" />
+										<RadioButton DockPanel.Dock="Left"
+													 Content="降順"
+													 IsChecked="{Binding IsDescending, Mode=OneWay}"
+													 Margin="12,0,0,0" />
+									</DockPanel>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+						</ItemsControl>
+					</DockPanel>
+				</Border>
+			</Expander>
+
+			<Border Grid.Row="2"
 					BorderBrush="{DynamicResource BorderBrushKey}"
 					BorderThickness="1"
-					Margin="8,0,8,8">
+					Margin="8">
 
 				<ListView ItemsSource="{Binding Ships}"
 						  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}"
@@ -473,11 +566,8 @@
 
 							<GridViewColumn Width="50">
 								<GridViewColumn.Header>
-									<metro2:SortButton Direction="{Binding SortWorker.IdColumn.Direction}"
-													   MethodName="Update">
-										<metro2:SortButton.MethodParameter>
-											<viewModels:ShipCatalogSortTarget>Id</viewModels:ShipCatalogSortTarget>
-										</metro2:SortButton.MethodParameter>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.IdColumn}">
 										<TextBlock Text="ID" />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
@@ -491,11 +581,8 @@
 
 							<GridViewColumn Width="90">
 								<GridViewColumn.Header>
-									<metro2:SortButton Direction="{Binding SortWorker.TypeColumn.Direction}"
-													   MethodName="Update">
-										<metro2:SortButton.MethodParameter>
-											<viewModels:ShipCatalogSortTarget>Type</viewModels:ShipCatalogSortTarget>
-										</metro2:SortButton.MethodParameter>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.StypeColumn}">
 										<TextBlock Text="艦種" />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
@@ -509,11 +596,8 @@
 
 							<GridViewColumn Width="100">
 								<GridViewColumn.Header>
-									<metro2:SortButton Direction="{Binding SortWorker.NameColumn.Direction}"
-													   MethodName="Update">
-										<metro2:SortButton.MethodParameter>
-											<viewModels:ShipCatalogSortTarget>Name</viewModels:ShipCatalogSortTarget>
-										</metro2:SortButton.MethodParameter>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.NameColumn}">
 										<TextBlock Text="艦名" />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
@@ -528,11 +612,8 @@
 
 							<GridViewColumn Width="110">
 								<GridViewColumn.Header>
-									<metro2:SortButton Direction="{Binding SortWorker.LevelColumn.Direction}"
-													   MethodName="UpdateReverse">
-										<metro2:SortButton.MethodParameter>
-											<viewModels:ShipCatalogSortTarget>Level</viewModels:ShipCatalogSortTarget>
-										</metro2:SortButton.MethodParameter>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.LevelColumn}">
 										<TextBlock Text="レベル" />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
@@ -553,11 +634,8 @@
 
 							<GridViewColumn Width="50">
 								<GridViewColumn.Header>
-									<metro2:SortButton Direction="{Binding SortWorker.ConditionColumn.Direction}"
-													   MethodName="UpdateReverse">
-										<metro2:SortButton.MethodParameter>
-											<viewModels:ShipCatalogSortTarget>Cond</viewModels:ShipCatalogSortTarget>
-										</metro2:SortButton.MethodParameter>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.CondColumn}">
 										<TextBlock Text="cond." />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
@@ -580,7 +658,10 @@
 
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
-									<TextBlock Text="火力" />
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.FirepowerColumn}">
+										<TextBlock Text="火力" />
+									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -594,7 +675,10 @@
 
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
-									<TextBlock Text="雷装" />
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.TorpedoColumn}">
+										<TextBlock Text="雷装" />
+									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -608,7 +692,10 @@
 
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
-									<TextBlock Text="対空" />
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.AAColumn}">
+										<TextBlock Text="対空" />
+									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -622,7 +709,10 @@
 
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
-									<TextBlock Text="装甲" />
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.ArmerColumn}">
+										<TextBlock Text="装甲" />
+									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -636,7 +726,10 @@
 
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
-									<TextBlock Text="運" />
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.LuckColumn}">
+										<TextBlock Text="運" />
+									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -650,13 +743,10 @@
 
 							<GridViewColumn Width="45">
 								<GridViewColumn.Header>
-									<metro2:SortButton Direction="{Binding SortWorker.ViewRangeColumn.Direction}"
-													   MethodName="UpdateReverse"
-													   ToolTip="索敵のみ装備によるステータス上昇を含んだ値です">
-										<metro2:SortButton.MethodParameter>
-											<viewModels:ShipCatalogSortTarget>ViewRange</viewModels:ShipCatalogSortTarget>
-										</metro2:SortButton.MethodParameter>
-										<TextBlock Text="索敵" />
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.ViewRangeColumn}">
+										<TextBlock Text="索敵"
+												   ToolTip="装備によるステータス上昇を含んだ値です" />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
@@ -740,15 +830,14 @@
 				</ListView>
 			</Border>
 
-			<Border Grid.Row="1"
+			<Border Grid.Row="2"
 					Background="{DynamicResource ThemeBrushKey}"
 					BorderBrush="{DynamicResource BorderBrushKey}"
 					BorderThickness="1"
 					Opacity="0.75"
-					Margin="8,0,8,8"
+					Margin="8"
 					Padding="20"
-					Visibility="{Binding IsReloading, Converter={StaticResource BooleanToVisibilityConverter}}"
-					d:IsHidden="True">
+					Visibility="{Binding IsReloading, Converter={StaticResource BooleanToVisibilityConverter}}">
 				<TextBlock Text="一覧を生成しています..."
 						   Style="{DynamicResource EmphaticTextStyleKey}"
 						   FontSize="16"
