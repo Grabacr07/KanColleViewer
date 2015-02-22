@@ -8,11 +8,16 @@
 			 xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+			 xmlns:converters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters"
 			 mc:Ignorable="d"
 			 d:DesignWidth="300"
 			 d:DesignHeight="30"
 			 d:DataContext="{d:DesignInstance fleets:FleetViewModel}">
-
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<converters:HasFlagConverter x:Key="HasFlagConverter" />
+		</ResourceDictionary>
+	</UserControl.Resources>
 	<ContentControl Content="{Binding QuickStateView}">
 		<ContentControl.Resources>
 			<DataTemplate DataType="{x:Type fleets:HomeportViewModel}">
@@ -92,8 +97,8 @@
 								   Style="{DynamicResource DefaultTextStyleKey}"
 								   Foreground="{DynamicResource ActiveForegroundBrushKey}">
 							<i:Interaction.Behaviors>
-								<ei:DataStateBehavior Binding="{Binding State.Situation}"
-													  Value="HeavilyDamaged"
+								<ei:DataStateBehavior Binding="{Binding State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged}"
+													  Value="True"
 													  TrueState="Blinking"
 													  FalseState="Normal" />
 							</i:Interaction.Behaviors>
@@ -104,8 +109,8 @@
 									<i:Interaction.Behaviors>
 										<ei:ConditionBehavior>
 											<ei:ConditionalExpression>
-												<ei:ComparisonCondition LeftOperand="{Binding State.Situation}"
-																		RightOperand="HeavilyDamaged"
+												<ei:ComparisonCondition LeftOperand="{Binding State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged}"
+																		RightOperand="True"
 																		Operator="Equal" />
 											</ei:ConditionalExpression>
 										</ei:ConditionBehavior>
@@ -116,8 +121,8 @@
 									<i:Interaction.Behaviors>
 										<ei:ConditionBehavior>
 											<ei:ConditionalExpression>
-												<ei:ComparisonCondition LeftOperand="{Binding State.Situation}"
-																		RightOperand="HeavilyDamaged"
+												<ei:ComparisonCondition LeftOperand="{Binding State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged}"
+																		RightOperand="True"
 																		Operator="Equal" />
 											</ei:ConditionalExpression>
 										</ei:ConditionBehavior>
