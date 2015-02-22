@@ -206,12 +206,11 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		internal void Calculate()
 		{
-			var ships = this.source.SelectMany(x => x.Ships).ToArray();
+			var ships = this.source.SelectMany(x => x.Ships).WithoutEvacuated().ToArray();
 
 			this.TotalLevel = ships.HasItems() ? ships.Sum(x => x.Level) : 0;
 			this.AverageLevel = ships.HasItems() ? (double)this.TotalLevel / ships.Length : 0.0;
 			this.AirSuperiorityPotential = ships.Sum(s => s.CalcAirSuperiorityPotential());
-
 			this.Speed = ships.All(x => x.Info.Speed == ShipSpeed.Fast)
 				? FleetSpeed.Fast
 				: ships.All(x => x.Info.Speed == ShipSpeed.Low)
@@ -219,7 +218,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					: FleetSpeed.Hybrid;
 
 			var logic = ViewRangeCalcLogic.Get(KanColleClient.Current.Settings.ViewRangeCalcType);
-			this.ViewRange = logic.Calc(ships);
+			this.ViewRange = logic.Calc(ships.ToArray());
 			this.ViewRangeCalcType = logic.Name;
 
 			if (this.Calculated != null)

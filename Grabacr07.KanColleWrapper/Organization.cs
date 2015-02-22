@@ -303,7 +303,11 @@ namespace Grabacr07.KanColleWrapper
 				}
 			}
 
-			if (fleet != null) fleet.State.Update();
+			if (fleet != null)
+			{
+				fleet.State.Update();
+				fleet.State.Calculate();
+			}
 		}
 
 		private void Powerup(SvData<kcsapi_powerup> svd)
@@ -440,13 +444,19 @@ namespace Grabacr07.KanColleWrapper
 
 		private void Homing()
 		{
+			this.evacuatedShipsIds.Clear();
+			this.towShipIds.Clear();
+
+			foreach (var ship in this.Ships.Values)
+			{
+				if (ship.Situation.HasFlag(ShipSituation.Evacuation)) ship.Situation &= ~ShipSituation.Evacuation;
+				if (ship.Situation.HasFlag(ShipSituation.Tow)) ship.Situation &= ~ShipSituation.Tow;
+			}
+
 			foreach (var target in this.Fleets.Values)
 			{
 				target.Homing();
 			}
-
-			this.evacuatedShipsIds.Clear();
-			this.towShipIds.Clear();
 		}
 
 		#endregion

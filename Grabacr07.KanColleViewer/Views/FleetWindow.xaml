@@ -66,16 +66,6 @@
 						<Border.Style>
 							<Style TargetType="{x:Type Border}">
 								<Style.Triggers>
-									<DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Evacuation}"
-												 Value="True">
-										<Setter Property="Opacity"
-												Value="0.3" />
-									</DataTrigger>
-									<DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow}"
-												 Value="True">
-										<Setter Property="Opacity"
-												Value="0.3" />
-									</DataTrigger>
 									<DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged}"
 												 Value="True">
 										<Setter Property="Background"
@@ -85,6 +75,16 @@
 												 Value="True">
 										<Setter Property="Background"
 												Value="Transparent" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Evacuation}"
+												 Value="True">
+										<Setter Property="Opacity"
+												Value="0.3" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow}"
+												 Value="True">
+										<Setter Property="Opacity"
+												Value="0.3" />
 									</DataTrigger>
 								</Style.Triggers>
 							</Style>
@@ -101,7 +101,7 @@
 								<ColumnDefinition Width="Auto"
 												  SharedSizeGroup="ShipCondigion" />
 								<ColumnDefinition Width="Auto"
-												  MinWidth="125"
+												  MinWidth="120"
 												  SharedSizeGroup="ShipHp" />
 								<ColumnDefinition Width="Auto"
 												  MinWidth="100"
@@ -135,7 +135,7 @@
 										Grid.Row="0"
 										Grid.RowSpan="2"
 										VerticalAlignment="Center"
-										Margin="20,0">
+										Margin="10,0,20,0">
 								<TextBlock FontSize="13"
 										   Style="{DynamicResource DefaultTextStyleKey}"
 										   VerticalAlignment="Bottom">
@@ -170,7 +170,7 @@
 
 							<StackPanel Grid.Column="4"
 										Grid.Row="0"
-										Margin="20,1,20,0">
+										Margin="10,1,20,0">
 								<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
 										   VerticalAlignment="Bottom">
 									<Run Text="HP:" />
@@ -560,9 +560,9 @@
 								<Setter Property="FontSize"
 										Value="{DynamicResource DefaultFontSizeKey}" />
 								<Setter Property="Foreground"
-										Value="{DynamicResource SemiActiveForegroundBrushKey}" />
+										Value="{DynamicResource ForegroundBrushKey}" />
 								<Setter Property="Background"
-										Value="{DynamicResource SemiactiveBackgroundBrushKey}" />
+										Value="{DynamicResource BorderBrushKey}" />
 								<Setter Property="Padding"
 										Value="12,6" />
 								<Setter Property="Margin"
@@ -573,13 +573,6 @@
 							<VisualStateManager.VisualStateGroups>
 								<VisualStateGroup x:Name="VisualStateGroup">
 									<VisualState x:Name="Normal">
-										<!--<Storyboard>
-													<ColorAnimationUsingKeyFrames Storyboard.TargetName="DamageIndicator"
-																				  Storyboard.TargetProperty="Background.(SolidColorBrush.Color)">
-														<EasingColorKeyFrame KeyTime="0"
-																			 Value="#FF5A2020" />
-													</ColorAnimationUsingKeyFrames>
-												</Storyboard>-->
 									</VisualState>
 									<VisualState x:Name="Blinking">
 										<Storyboard AutoReverse="True"
@@ -591,11 +584,6 @@
 												<EasingColorKeyFrame KeyTime="0:0:0.3"
 																	 Value="#FFB40000" />
 											</ColorAnimationUsingKeyFrames>
-											<!--<ObjectAnimationUsingKeyFrames Storyboard.TargetName="Text"
-																				   Storyboard.TargetProperty="Text">
-														<DiscreteObjectKeyFrame KeyTime="0"
-																				Value="大破した艦娘がいます！！！" />
-													</ObjectAnimationUsingKeyFrames>-->
 										</Storyboard>
 									</VisualState>
 								</VisualStateGroup>
@@ -977,7 +965,7 @@
 													<Border BorderThickness="0,0,0,1"
 															BorderBrush="{DynamicResource BorderBrushKey}">
 														<DockPanel LastChildFill="True">
-															<Border Background="{DynamicResource SemiactiveBackgroundBrushKey}"
+															<Border Background="{DynamicResource BorderBrushKey}"
 																	Padding="16,8">
 																<Border.LayoutTransform>
 																	<RotateTransform Angle="-90"
