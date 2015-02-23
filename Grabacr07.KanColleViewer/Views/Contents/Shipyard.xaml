@@ -258,7 +258,7 @@
 								<TextBlock Text="추가기능"
 											   Style="{DynamicResource HeaderTextStyleKey}" />
 							</Border>
-							<metro2:CallMethodButton Content="수리필요 칸무스목록" 
+							<metro2:CallMethodButton Content="수리필요목록" 
 													 HorizontalAlignment="Center"
 													 Margin="0,7,0,0"
 													 Padding ="10,5"
