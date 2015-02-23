@@ -44,6 +44,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			set { this.count = this.Remainder = value; }
 		}
 
+		// 余り
 		public int Remainder { get; set; }
 
 
