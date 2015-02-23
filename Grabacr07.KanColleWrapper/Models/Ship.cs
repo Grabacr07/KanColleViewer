@@ -156,8 +156,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 				if (value.IsHeavilyDamage())
 				{
-					if(!this.situation.HasFlag(ShipSituation.Evacuation))
-						this.Situation |= ShipSituation.HeavilyDamaged;
+					this.Situation |= ShipSituation.HeavilyDamaged;
 				}
 				else
 					this.Situation &= ~ShipSituation.HeavilyDamaged;

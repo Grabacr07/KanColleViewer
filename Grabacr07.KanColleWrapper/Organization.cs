@@ -200,12 +200,7 @@ namespace Grabacr07.KanColleWrapper
 
 				if (KanColleClient.Current.IsInSortie)
 				{
-					foreach (var id in this.evacuatedShipsIds)
-					{
-						this.Ships[id].Situation |= ShipSituation.Evacuation;
-						if (this.Ships[id].Situation.HasFlag(ShipSituation.HeavilyDamaged))
-							this.Ships[id].Situation &= ~ShipSituation.HeavilyDamaged;
-					}
+					foreach (var id in this.evacuatedShipsIds) this.Ships[id].Situation |= ShipSituation.Evacuation;
 					foreach (var id in this.towShipIds) this.Ships[id].Situation |= ShipSituation.Tow;
 				}
 			}
@@ -308,7 +303,11 @@ namespace Grabacr07.KanColleWrapper
 				}
 			}
 
-			if (fleet != null) fleet.State.Update();
+			if (fleet != null)
+			{
+				fleet.State.Update();
+				fleet.State.Calculate();
+			}
 		}
 
 		private void Powerup(SvData<kcsapi_powerup> svd)
@@ -382,53 +381,46 @@ namespace Grabacr07.KanColleWrapper
 
 		private void SubscribeSortieSessions(KanColleProxy proxy)
 		{
-			try
-			{
-				proxy.ApiSessionSource
+			proxy.ApiSessionSource
 				.SkipUntil(proxy.api_req_map_start.TryParse().Do(this.Sortie))
 				.TakeUntil(proxy.api_port)
 				.Finally(this.Homing)
 				.Repeat()
 				.Subscribe();
 
-				int[] evacuationOfferedShipIds = null;
-				int[] towOfferedShipIds = null;
+			int[] evacuationOfferedShipIds = null;
+			int[] towOfferedShipIds = null;
 
-				proxy.api_req_combined_battle_battleresult
-					.TryParse<kcsapi_combined_battle_battleresult>()
-					.Where(x => x.Data.api_escape != null)
-					.Select(x => x.Data)
-					.Subscribe(x =>
+			proxy.api_req_combined_battle_battleresult
+				.TryParse<kcsapi_combined_battle_battleresult>()
+				.Where(x => x.Data.api_escape != null)
+				.Select(x => x.Data)
+				.Subscribe(x =>
+				{
+					if (this.CombinedFleet == null) return;
+					var ships = this.CombinedFleet.Fleets.SelectMany(f => f.Ships).ToArray();
+					evacuationOfferedShipIds = x.api_escape.api_escape_idx.Select(idx => ships[idx - 1].Id).ToArray();
+					towOfferedShipIds = x.api_escape.api_tow_idx.Select(idx => ships[idx - 1].Id).ToArray();
+				});
+			proxy.api_req_combined_battle_goback_port
+				.Subscribe(_ =>
+				{
+					if (KanColleClient.Current.IsInSortie
+						&& evacuationOfferedShipIds != null
+						&& evacuationOfferedShipIds.Length >= 1
+						&& towOfferedShipIds != null
+						&& towOfferedShipIds.Length >= 1)
 					{
-						if (this.CombinedFleet == null) return;
-						var ships = this.CombinedFleet.Fleets.SelectMany(f => f.Ships).ToArray();
-						evacuationOfferedShipIds = x.api_escape.api_escape_idx.Select(idx => ships[idx - 1].Id).ToArray();
-						towOfferedShipIds = x.api_escape.api_tow_idx.Select(idx => ships[idx - 1].Id).ToArray();
-					});
-				proxy.api_req_combined_battle_goback_port
-					.Subscribe(_ =>
-					{
-						if (KanColleClient.Current.IsInSortie
-							&& evacuationOfferedShipIds != null
-							&& evacuationOfferedShipIds.Length >= 1
-							&& towOfferedShipIds != null
-							&& towOfferedShipIds.Length >= 1)
-						{
-							this.evacuatedShipsIds.Add(evacuationOfferedShipIds[0]);
-							this.towShipIds.Add(towOfferedShipIds[0]);
-						}
-					});
-				proxy.api_get_member_ship2
-					.Subscribe(_ =>
-					{
-						evacuationOfferedShipIds = null;
-						towOfferedShipIds = null;
-					});
-			}
-			catch (Exception ex)
-			{
-				System.Diagnostics.Debug.WriteLine("연합함대 출격관련 예외발생: {0}", ex);
-			}
+						this.evacuatedShipsIds.Add(evacuationOfferedShipIds[0]);
+						this.towShipIds.Add(towOfferedShipIds[0]);
+					}
+				});
+			proxy.api_get_member_ship2
+				.Subscribe(_ =>
+				{
+					evacuationOfferedShipIds = null;
+					towOfferedShipIds = null;
+				});
 		}
 
 
@@ -452,24 +444,19 @@ namespace Grabacr07.KanColleWrapper
 
 		private void Homing()
 		{
+			this.evacuatedShipsIds.Clear();
+			this.towShipIds.Clear();
+
+			foreach (var ship in this.Ships.Values)
+			{
+				if (ship.Situation.HasFlag(ShipSituation.Evacuation)) ship.Situation &= ~ShipSituation.Evacuation;
+				if (ship.Situation.HasFlag(ShipSituation.Tow)) ship.Situation &= ~ShipSituation.Tow;
+			}
+
 			foreach (var target in this.Fleets.Values)
 			{
 				target.Homing();
 			}
-			foreach (var id in this.evacuatedShipsIds)
-			{
-				if (this.Ships[id].Situation.HasFlag(ShipSituation.Evacuation))
-					this.Ships[id].Situation &= ~ShipSituation.Evacuation;
-				if (this.Ships[id].HP.IsHeavilyDamage())
-					this.Ships[id].Situation |= ShipSituation.HeavilyDamaged;
-            }
-			foreach (var id in this.towShipIds)
-			{
-				if (this.Ships[id].Situation.HasFlag(ShipSituation.Tow))
-					this.Ships[id].Situation &= ~ShipSituation.Tow;
-			}
-			this.evacuatedShipsIds.Clear();
-			this.towShipIds.Clear();
 		}
 
 		#endregion
