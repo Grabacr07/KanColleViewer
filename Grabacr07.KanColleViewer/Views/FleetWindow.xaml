@@ -243,7 +243,7 @@
 															   Value="True" />
 												</MultiDataTrigger.Conditions>
 												<Setter Property="Text"
-														Value="대파(굉침 가능성 있음)" />
+														Value="대파(격침 가능성 있음)" />
 												<Setter Property="Foreground"
 														Value="White" />
 												<Setter Property="Background"

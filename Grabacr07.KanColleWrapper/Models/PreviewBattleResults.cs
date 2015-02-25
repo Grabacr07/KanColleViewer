@@ -84,7 +84,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		
 		//적
 		/// <summary>
-		/// 적군 굉침수 과반수 초과여부(2,4척인 경우는 0.5이상이면 true)
+		/// 적군 격침수 과반수 초과여부(2,4척인 경우는 0.5이상이면 true)
 		/// </summary>
 		public bool IsEnemyDeadOverHalf { get; set; }
 		/// <summary>
@@ -96,7 +96,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public bool IsEnemyExterminated { get; set; }
 		/// <summary>
-		/// 적 기함 굉침
+		/// 적 기함 격침
 		/// </summary>
 		public bool IsEnemyFlagDead { get; set; }
 
@@ -107,7 +107,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public bool IsKanDamaged { get; set; }
 		/// <summary>
-		/// 아군굉침여부
+		/// 아군격침여부
 		/// </summary>
 		public bool IsKanDead { get; set; }
 		public int FirstKanDamaged { get; set; }
@@ -126,7 +126,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public bool IsScratch { get; set; }
 		/// <summary>
-		/// 적군굉침>아군굉침
+		/// 적군격침>아군격침
 		/// </summary>
 		public bool IsEnemyDeadOver { get; set; }
 	}

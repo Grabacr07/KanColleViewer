@@ -319,7 +319,7 @@
 										Value="4">
 										<Setter TargetName="StatusText"
 											Property="Text"
-											Value="굉침" />
+											Value="격침" />
 										<Setter TargetName="StatusGrid"
 											Property="Background"
 											Value="#FF4C44FF" />
@@ -446,7 +446,7 @@
 										Value="4">
 										<Setter TargetName="StatusText"
 											Property="Text"
-											Value="굉침" />
+											Value="격침" />
 										<Setter TargetName="StatusGrid"
 											Property="Background"
 											Value="#FF4C44FF" />
@@ -570,7 +570,7 @@
 										Value="4">
 										<Setter TargetName="StatusText"
 											Property="Text"
-											Value="굉침" />
+											Value="격침" />
 										<Setter TargetName="StatusGrid"
 											Property="Background"
 											Value="#FF4C44FF" />

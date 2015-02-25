@@ -896,7 +896,7 @@ namespace Grabacr07.KanColleWrapper
 									tow = GoBackPortList.Any(x => x.tow == i);
 								}
 								if (escape || tow) DataLists.ComCalResults.Add(5);//회항
-								else if (temp <= 0) DataLists.ComCalResults.Add(4);//굉침
+								else if (temp <= 0) DataLists.ComCalResults.Add(4);//격침
 								else if (temp <= 0.25) DataLists.ComCalResults.Add(3);//대파
 								else if (temp <= 0.5) DataLists.ComCalResults.Add(2);//중파
 								else if (temp <= 0.75) DataLists.ComCalResults.Add(1);//소파
@@ -913,7 +913,7 @@ namespace Grabacr07.KanColleWrapper
 										escape = firstlist.Any(x => x.escape == i);
 								}
 								if (escape || tow) DataLists.CalResults.Add(5);//회항
-								else if (temp <= 0) DataLists.CalResults.Add(4);//굉침
+								else if (temp <= 0) DataLists.CalResults.Add(4);//격침
 								else if (temp <= 0.25) DataLists.CalResults.Add(3);//대파
 								else if (temp <= 0.5) DataLists.CalResults.Add(2);//중파
 								else if (temp <= 0.75) DataLists.CalResults.Add(1);//소파
@@ -933,7 +933,7 @@ namespace Grabacr07.KanColleWrapper
 							DataLists.EnemyMHpResults.Add(Maxhps[i]);
 							DataLists.EnemyHpResults.Add(CurrentHPList[i]);
 
-							if (temp <= 0) DataLists.EnemyCalResults.Add(4);//굉침
+							if (temp <= 0) DataLists.EnemyCalResults.Add(4);//격침
 							else if (temp <= 0.25) DataLists.EnemyCalResults.Add(3);//대파
 							else if (temp <= 0.5) DataLists.EnemyCalResults.Add(2);//중파
 							else if (temp <= 0.75) DataLists.EnemyCalResults.Add(1);//소파
@@ -1005,11 +1005,11 @@ namespace Grabacr07.KanColleWrapper
 				if (EnemyEveryMHP - EnemyEveryCHP <= 0) DataLists.IsEnemyExterminated = true;//적 전멸
 				else DataLists.IsEnemyExterminated = false;
 
-				if (KanDeadCount > 0) DataLists.IsKanDead = true;//아군굉침여부
+				if (KanDeadCount > 0) DataLists.IsKanDead = true;//아군격침여부
 				else DataLists.IsKanDead = false;
 
 				if (KanDeadCount > 0 && KanDeadCount < EnemyDeadCount)
-					DataLists.IsEnemyDeadOver = true;//적굉침이 아군굉침보다 많음
+					DataLists.IsEnemyDeadOver = true;//적격침이 아군격침보다 많음
 				else DataLists.IsEnemyDeadOver = false;
 
 				if (EnemyCount == 4 || EnemyCount == 2)//적의 수가 2나 4일 경우엔 0.5이상 이외에는 0.5초과 1인경우는 예외
