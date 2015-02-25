@@ -570,25 +570,6 @@
 							</Style>
 						</Border.Resources>
 						<StackPanel>
-							<VisualStateManager.VisualStateGroups>
-								<VisualStateGroup x:Name="VisualStateGroup">
-									<VisualState x:Name="Normal">
-									</VisualState>
-									<VisualState x:Name="Blinking">
-										<Storyboard AutoReverse="True"
-													RepeatBehavior="Forever">
-											<ColorAnimationUsingKeyFrames Storyboard.TargetName="DamageIndicator"
-																		  Storyboard.TargetProperty="Background.(SolidColorBrush.Color)">
-												<EasingColorKeyFrame KeyTime="0"
-																	 Value="{DynamicResource ThemeColorKey}" />
-												<EasingColorKeyFrame KeyTime="0:0:0.3"
-																	 Value="#FFB40000" />
-											</ColorAnimationUsingKeyFrames>
-										</Storyboard>
-									</VisualState>
-								</VisualStateGroup>
-							</VisualStateManager.VisualStateGroups>
-
 							<TextBlock>
 								<TextBlock.Style>
 									<Style TargetType="{x:Type TextBlock}"
@@ -693,13 +674,6 @@
 								</ContentControl>
 
 								<TextBlock x:Name="DamageIndicator">
-									<i:Interaction.Behaviors>
-										<ei:DataStateBehavior Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Sortie|HeavilyDamaged}"
-															  Value="True"
-															  TrueState="Blinking"
-															  FalseState="Normal" />
-									</i:Interaction.Behaviors>
-
 									<TextBlock.Style>
 										<Style TargetType="{x:Type TextBlock}"
 											   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
@@ -727,6 +701,8 @@
 															Value="함대에 대파당한 칸무스가 있습니다!" />
 													<Setter Property="Foreground"
 															Value="{DynamicResource ActiveForegroundBrushKey}" />
+													<Setter Property="Background"
+															Value="#FFB40000" />
 												</MultiDataTrigger>
 											</Style.Triggers>
 										</Style>
