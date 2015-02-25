@@ -300,6 +300,9 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				state |= FleetSituation.HeavilyDamaged;
 				ready = false;
+
+				if (state.HasFlag(FleetSituation.Sortie))
+					KanColleClient.Current.OracleOfCompass.AfterResult();
 			}
 
 			this.Situation = state;
