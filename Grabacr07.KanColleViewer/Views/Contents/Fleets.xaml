@@ -403,7 +403,7 @@
 										</ItemsControl.Template>
 										<ItemsControl.ItemTemplate>
 											<DataTemplate>
-												<Border ToolTip="{Binding Item.Info.Name}"
+												<Border ToolTip="{Binding Item.NameWithLevel}"
 														Background="Transparent">
 													<controls:SlotItemIcon Type="{Binding Item.Info.IconType}"
 																		   Margin="3,0" />

@@ -368,10 +368,13 @@
 																   Width="14"
 																   Height="14" />
 											<TextBlock Grid.Column="2"
-													   Text="{Binding Item.Info.Name}"
 													   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 													   Style="{DynamicResource DefaultTextStyleKey}"
-													   Margin="5,1" />
+													   Margin="5,1">
+												<Run Text="{Binding Item.Info.Name, Mode=OneWay}" />
+												<Run Text="{Binding Item.LevelText, Mode=OneWay}"
+													 Foreground="#FF45A9A5" />
+											</TextBlock>
 										</Grid>
 									</DataTemplate>
 								</ItemsControl.ItemTemplate>

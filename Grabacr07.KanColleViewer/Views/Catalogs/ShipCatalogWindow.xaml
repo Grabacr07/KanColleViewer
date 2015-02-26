@@ -810,7 +810,7 @@
 											</ItemsControl.Template>
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
-													<Border ToolTip="{Binding Item.Info.Name}"
+													<Border ToolTip="{Binding Item.NameWithLevel}"
 															Background="Transparent"
 															Height="20"
 															Padding="0,1">
