@@ -73,5 +73,15 @@
 
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+		<Grid Margin="0,10,0,10">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="※우측 버튼을 누르면 DMM에서 로그아웃하고 DMM메인페이지로 돌아갑니다."/>
+			<metro2:CallMethodButton Grid.Column="1" Content="로그아웃" Padding="20,10,20,10" MethodName="LogoutDMM"/>
+		</Grid>
+		<Rectangle Height="1"
+				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 	</StackPanel>
 </UserControl>

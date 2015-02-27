@@ -881,5 +881,9 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			}
 
 		}
+		public void LogoutDMM()
+		{
+			App.ViewModelRoot.Navigator.Logout();
+		}
 	}
 }

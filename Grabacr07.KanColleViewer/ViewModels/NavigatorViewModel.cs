@@ -172,5 +172,15 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				this.UriRequested(this, uri);
 			}
 		}
+		public void Logout()
+		{
+			Uri uri;
+			string LogoutUrl;
+			LogoutUrl = "http://www.dmm.com/my/-/login/logout/=/path=Sg__/";
+			if(this.UriRequested!=null&&Uri.TryCreate(LogoutUrl,UriKind.Absolute,out uri))
+			{
+				this.UriRequested(this, uri);
+			}
+		}
 	}
 }
