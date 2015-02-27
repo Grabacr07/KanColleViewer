@@ -465,4 +465,145 @@
   <data name="Settings_Logging_Enable" xml:space="preserve">
     <value>Log drops and crafting results to file</value>
   </data>
+  <data name="AllShips_AA" xml:space="preserve">
+    <value>AA</value>
+  </data>
+  <data name="AllShips_Armer" xml:space="preserve">
+    <value>Armer</value>
+  </data>
+  <data name="AllShips_Condition" xml:space="preserve">
+    <value>cond.</value>
+  </data>
+  <data name="AllShips_EquippedSlots" xml:space="preserve">
+    <value>Equipped</value>
+  </data>
+  <data name="AllShips_Firepower" xml:space="preserve">
+    <value>Fire Power</value>
+  </data>
+  <data name="AllShips_Generating" xml:space="preserve">
+    <value>Generating list of ships...</value>
+  </data>
+  <data name="AllShips_ID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="AllShips_Level" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="AllShips_Luck" xml:space="preserve">
+    <value>Luck</value>
+  </data>
+  <data name="AllShips_ShipName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="AllShips_ShipType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="AllShips_Torpedo" xml:space="preserve">
+    <value>Torpedo</value>
+  </data>
+  <data name="AllShips_ViewRange" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="AllShips_ViewRange_Tips" xml:space="preserve">
+    <value>View provided by equipments included ONLY</value>
+  </data>
+  <data name="Filter_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Filter_BB" xml:space="preserve">
+    <value>BB</value>
+  </data>
+  <data name="Filter_BBVCAV" xml:space="preserve">
+    <value>BBV/CAV</value>
+  </data>
+  <data name="Filter_CACAV" xml:space="preserve">
+    <value>CA/CAV</value>
+  </data>
+  <data name="Filter_Choose_All" xml:space="preserve">
+    <value>Choose All</value>
+  </data>
+  <data name="Filter_CLCLT" xml:space="preserve">
+    <value>CL/CLT</value>
+  </data>
+  <data name="Filter_CV" xml:space="preserve">
+    <value>CV</value>
+  </data>
+  <data name="Filter_DD" xml:space="preserve">
+    <value>DD</value>
+  </data>
+  <data name="Filter_Exclude_Expedition" xml:space="preserve">
+    <value>Exclude expedition ships</value>
+  </data>
+  <data name="Filter_Expedition" xml:space="preserve">
+    <value>Expedition</value>
+  </data>
+  <data name="Filter_Level" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="Filter_Level_1" xml:space="preserve">
+    <value>Lv.1</value>
+  </data>
+  <data name="Filter_Level_2" xml:space="preserve">
+    <value>Lv.2 or higher</value>
+  </data>
+  <data name="Filter_Lock" xml:space="preserve">
+    <value>Lock</value>
+  </data>
+  <data name="Filter_Lock_No" xml:space="preserve">
+    <value>Not locked</value>
+  </data>
+  <data name="Filter_Lock_Yes" xml:space="preserve">
+    <value>Locked</value>
+  </data>
+  <data name="Filter_Modernized" xml:space="preserve">
+    <value>Modernizing</value>
+  </data>
+  <data name="Filter_Modernized_Complete" xml:space="preserve">
+    <value>Modernize completed</value>
+  </data>
+  <data name="Filter_Modernized_Not_Complete" xml:space="preserve">
+    <value>Modernize not completed</value>
+  </data>
+  <data name="Filter_Remodeling" xml:space="preserve">
+    <value>Remodeling</value>
+  </data>
+  <data name="Filter_Remodeling_Complete" xml:space="preserve">
+    <value>Remodeling completed</value>
+  </data>
+  <data name="Filter_Remodeling_Not_Complete" xml:space="preserve">
+    <value>Remodeling not completed</value>
+  </data>
+  <data name="Filter_Speed" xml:space="preserve">
+    <value>Speed</value>
+  </data>
+  <data name="Filter_Speed_Fast" xml:space="preserve">
+    <value>High-speed</value>
+  </data>
+  <data name="Filter_Speed_Slow" xml:space="preserve">
+    <value>Low-speed</value>
+  </data>
+  <data name="Filter_SS" xml:space="preserve">
+    <value>SS</value>
+  </data>
+  <data name="Settings_Filter" xml:space="preserve">
+    <value>Filter Settings</value>
+  </data>
+  <data name="Settings_Notification" xml:space="preserve">
+    <value>Notification</value>
+  </data>
+  <data name="Ship_Type" xml:space="preserve">
+    <value>Ship Type</value>
+  </data>
+  <data name="AllItems" xml:space="preserve">
+    <value>All Items</value>
+  </data>
+  <data name="AllShips" xml:space="preserve">
+    <value>All Ships</value>
+  </data>
+  <data name="AllShips_Title" xml:space="preserve">
+    <value>Ship girls</value>
+  </data>
+  <data name="Data" xml:space="preserve">
+    <value>Data</value>
+  </data>
 </root>

@@ -278,18 +278,18 @@
 				<Border Grid.Row="0"
 						Grid.Column="0">
 					<StackPanel>
-						<TextBlock Text="データ" />
+                        <TextBlock Text="{Binding Resources.Data, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 
 						<Rectangle Height="1"
 								   Margin="0,7,0,3"
 								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-						<metro2:CallMethodButton Content="艦娘一覧"
+                        <metro2:CallMethodButton Content="{Binding Resources.AllShips, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 												 Padding="12,8"
 												 Margin="0,5,0,8"
 												 MethodName="ShowShipCatalog" />
 
-						<metro2:CallMethodButton Content="装備一覧"
+                        <metro2:CallMethodButton Content="{Binding Resources.AllItems, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 												 Padding="12,8"
 												 MethodName="ShowSlotItemCatalog" />
 					</StackPanel>
