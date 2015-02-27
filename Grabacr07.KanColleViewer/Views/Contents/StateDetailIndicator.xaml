@@ -58,7 +58,7 @@
 
 			<DataTemplate DataType="{x:Type fleets:SortieViewModel}">
 				<Border x:Name="Border"
-							Background="#FFB40000"
+							Background="#FF8F0000"
 							Padding="8,4">
 					<TextBlock x:Name="Text"
 							   Text="현재 출격중입니다"
