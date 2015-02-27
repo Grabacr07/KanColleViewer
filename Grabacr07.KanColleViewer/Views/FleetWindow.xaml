@@ -76,6 +76,11 @@
 										<Setter Property="Background"
 												Value="Transparent" />
 									</DataTrigger>
+									<DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
+												 Value="True">
+										<Setter Property="Background"
+												Value="Transparent" />
+									</DataTrigger>
 									<DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Evacuation}"
 												 Value="True">
 										<Setter Property="Opacity"
@@ -209,11 +214,23 @@
 											</MultiDataTrigger>
 											<MultiDataTrigger>
 												<MultiDataTrigger.Conditions>
-													<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
+													<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged}"
 															   Value="True" />
 												</MultiDataTrigger.Conditions>
 												<Setter Property="Text"
-														Value="入渠中" />
+														Value="大破 (轟沈の可能性あり)" />
+												<Setter Property="Foreground"
+														Value="White" />
+												<Setter Property="Background"
+														Value="#FFA00000" />
+											</MultiDataTrigger>
+											<MultiDataTrigger>
+												<MultiDataTrigger.Conditions>
+													<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged|DamageControlled}"
+															   Value="True" />
+												</MultiDataTrigger.Conditions>
+												<Setter Property="Text"
+														Value="大破 (ダメコン使用可能)" />
 												<Setter Property="Background"
 														Value="{DynamicResource FleetRepairingBrushKey}" />
 											</MultiDataTrigger>
@@ -239,23 +256,11 @@
 											</MultiDataTrigger>
 											<MultiDataTrigger>
 												<MultiDataTrigger.Conditions>
-													<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged}"
+													<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
 															   Value="True" />
 												</MultiDataTrigger.Conditions>
 												<Setter Property="Text"
-														Value="大破 (轟沈の可能性あり)" />
-												<Setter Property="Foreground"
-														Value="White" />
-												<Setter Property="Background"
-														Value="#FFA00000" />
-											</MultiDataTrigger>
-											<MultiDataTrigger>
-												<MultiDataTrigger.Conditions>
-													<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged|DamageControlled}"
-															   Value="True" />
-												</MultiDataTrigger.Conditions>
-												<Setter Property="Text"
-														Value="大破 (ダメコン使用可能)" />
+														Value="入渠中" />
 												<Setter Property="Background"
 														Value="{DynamicResource FleetRepairingBrushKey}" />
 											</MultiDataTrigger>

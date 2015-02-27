@@ -21,6 +21,8 @@
 			 d:DesignHeight="333">
 	<UserControl.Resources>
 		<ResourceDictionary>
+			<converters:HasFlagConverter x:Key="HasFlagConverter" />
+			
 			<Style TargetType="{x:Type Border}">
 				<Setter Property="BorderBrush"
 						Value="{DynamicResource BorderBrushKey}" />
@@ -259,8 +261,8 @@
 									</StackPanel>
 
 									<DataTemplate.Triggers>
-										<DataTrigger Binding="{Binding Ship.Situation}"
-													 Value="Repair">
+										<DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
+													 Value="True">
 											<Setter TargetName="HPIndicator"
 													Property="Opacity"
 													Value=".2" />
@@ -268,8 +270,8 @@
 													Property="Visibility"
 													Value="Visible" />
 										</DataTrigger>
-										<DataTrigger Binding="{Binding Ship.Situation}"
-													 Value="Evacuation,Tow">
+										<DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow|Evacuation}"
+													 Value="True">
 											<Setter TargetName="HPIndicator"
 													Property="Opacity"
 													Value=".2" />
