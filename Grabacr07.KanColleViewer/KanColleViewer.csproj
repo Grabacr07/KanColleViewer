@@ -149,7 +149,7 @@
     <Compile Include="ViewModels\Catalogs\ShipCatalogFilter.cs" />
     <Compile Include="ViewModels\Catalogs\ShipViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\SlotItemCatalogViewModel.cs" />
-    <Compile Include="ViewModels\Catalogs\SlotItemViewModel.cs" />
+    <Compile Include="ViewModels\Catalogs\SlotItemCounter.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogSortWorker.cs" />
     <Compile Include="ViewModels\Contents\Fleets\CombinedFleetViewModel.cs" />
     <Compile Include="ViewModels\Composition\NotifierViewModel.cs" />
