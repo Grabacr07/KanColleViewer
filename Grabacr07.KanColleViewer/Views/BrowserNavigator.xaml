@@ -74,15 +74,10 @@
 		<metro2:CallMethodButton Grid.Column="4"
 								 MethodName="OldGoGame"
 								 Height="30"
-								 Padding="4,4,4,5"
+								 Padding="4,0,4,0"
+								 Content="게임시작!"
 								 Margin="2,0"
-								 Style="{DynamicResource CircleButtonStyleKey}"
-								 ToolTip="게임페이지로 이동">
-			<Viewbox>
-				<Path Data="M17.358398,14.795208 L22.22168,14.795208 L17.109375,20.0247 L28.227539,20.0247 L28.227539,23.657513 L17.109375,23.657513 L22.22168,28.887005 L17.358398,28.887005 L10.649414,21.870403 L10.649414,21.81181 z"
-					  Stretch="Uniform"
-					  Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}, Path=Foreground}" />
-			</Viewbox>
+								 ToolTip="칸코레 페이지로 이동. 쿠키수정도 동시에 수행합니다">
 		</metro2:CallMethodButton>
 	</Grid>
 </UserControl>
