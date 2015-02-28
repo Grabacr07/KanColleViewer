@@ -30,7 +30,9 @@
 			<models:Ship.EquippedSlots>
 				<models:ShipSlot>
 					<models:ShipSlot.Item>
-						<models:SlotItem>
+						<models:SlotItem Level="5"
+										 LevelText="★+5"
+										 NameWithLevel="試製51cm連装砲 ★5">
 							<models:SlotItem.Info>
 								<models:SlotItemInfo Name="試製51cm連装砲"
 													 IsNumerable="False">
@@ -44,7 +46,9 @@
 				</models:ShipSlot>
 				<models:ShipSlot>
 					<models:ShipSlot.Item>
-						<models:SlotItem>
+						<models:SlotItem Level="10"
+										 LevelText="★max"
+										 NameWithLevel="試製FaT仕様九五式酸素魚雷改 ★max">
 							<models:SlotItem.Info>
 								<models:SlotItemInfo Name="試製FaT仕様九五式酸素魚雷改"
 													 IsNumerable="False">

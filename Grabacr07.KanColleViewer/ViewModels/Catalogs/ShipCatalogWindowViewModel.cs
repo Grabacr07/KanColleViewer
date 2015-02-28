@@ -59,18 +59,37 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#endregion
 
-		#region IsOpenSettings 変更通知プロパティ
+		#region IsOpenFilterSettings 変更通知プロパティ
 
-		private bool _IsOpenSettings;
+		private bool _IsOpenFilterSettings;
 
-		public bool IsOpenSettings
+		public bool IsOpenFilterSettings
 		{
-			get { return this._IsOpenSettings; }
+			get { return this._IsOpenFilterSettings; }
 			set
 			{
-				if (this._IsOpenSettings != value)
+				if (this._IsOpenFilterSettings != value)
 				{
-					this._IsOpenSettings = value;
+					this._IsOpenFilterSettings = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region IsOpenSortSettings 変更通知プロパティ
+
+		private bool _IsOpenSortSettings;
+
+		public bool IsOpenSortSettings
+		{
+			get { return this._IsOpenSortSettings; }
+			set
+			{
+				if (this._IsOpenSortSettings != value)
+				{
+					this._IsOpenSortSettings = value;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -101,10 +120,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public ShipCatalogWindowViewModel()
 		{
 			this.Title = "소유 칸무스 목록";
-			this.IsOpenSettings = true;
+			this.IsOpenFilterSettings = true;
 
 			this.SortWorker = new ShipCatalogSortWorker();
-			this.SortWorker.SetTarget(ShipCatalogSortTarget.Level, true);
 
 			this.ShipTypes = KanColleClient.Current.Master.ShipTypes
 				.Select(kvp => new ShipTypeViewModel(kvp.Value)
@@ -126,6 +144,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 			this.updateSource
 				.Do(_ => this.IsReloading = true)
+				// ☟ 連続で艦種選択できるように猶予を設けるつもりだったけど、
+				// 　 ソートだけしたいケースとかだと遅くてイラ壁なので迷う
 				.Throttle(TimeSpan.FromMilliseconds(7.0))
 				.Do(_ => this.UpdateCore())
 				.Subscribe(_ => this.IsReloading = false);
@@ -146,17 +166,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 			this.RaisePropertyChanged("CheckAllShipTypes");
 			this.updateSource.OnNext(Unit.Default);
-		}
-
-		public void Update(ShipCatalogSortTarget sortTarget)
-		{
-			this.SortWorker.SetTarget(sortTarget, false);
-			this.Update();
-		}
-		public void UpdateReverse(ShipCatalogSortTarget sortTarget)
-		{
-			this.SortWorker.SetTarget(sortTarget, true);
-			this.Update();
 		}
 
 		private void UpdateCore()
@@ -184,6 +193,12 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public void SetShipType(int[] ids)
 		{
 			this.ShipTypes.ForEach(x => x.Set(ids.Any(id => x.Id == id)));
+			this.Update();
+		}
+
+		public void Sort(SortableColumn column)
+		{
+			this.SortWorker.SetFirst(column);
 			this.Update();
 		}
 	}

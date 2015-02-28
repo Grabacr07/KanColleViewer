@@ -176,8 +176,7 @@
     <Compile Include="ViewModels\Catalogs\ShipCatalogFilter.cs" />
     <Compile Include="ViewModels\Catalogs\ShipViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\SlotItemCatalogViewModel.cs" />
-    <Compile Include="ViewModels\Catalogs\SlotItemViewModel.cs" />
-    <Compile Include="ViewModels\Catalogs\SortableColumnViewModel.cs" />
+    <Compile Include="ViewModels\Catalogs\SlotItemCounter.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogSortWorker.cs" />
     <Compile Include="ViewModels\Contents\Fleets\CombinedFleetViewModel.cs" />
     <Compile Include="ViewModels\Composition\NotifierViewModel.cs" />
@@ -271,7 +270,6 @@
     <Compile Include="Views\Catalogs\ShipCatalogWindow.xaml.cs">
       <DependentUpon>ShipCatalogWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Catalogs\ShipCatalogSortTarget.cs" />
     <Compile Include="Views\Catalogs\SlotItemCatalogWindow.xaml.cs">
       <DependentUpon>SlotItemCatalogWindow.xaml</DependentUpon>
     </Compile>
@@ -725,6 +723,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <DesignData Include="SampleData\ShipCatalogSortWorkerSampleData.xaml" />
     <DesignData Include="SampleData\ShipyardViewModelSampleData.xaml" />
     <DesignData Include="SampleData\FleetsViewModelSampleData.xaml" />
     <DesignData Include="SampleData\FleetViewModelSampleData.xaml" />

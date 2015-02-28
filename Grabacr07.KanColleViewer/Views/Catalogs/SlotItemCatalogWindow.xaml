@@ -20,13 +20,13 @@
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:SlotItemCatalogViewModel}"
 				   Title="{Binding Title}"
-				   Width="900"
+				   Width="950"
 				   Height="800"
 				   FontSize="12"
 				   Background="{DynamicResource ThemeBrushKey}"
 				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 				   IsRestoringWindowPlacement="True"
-				   SnapsToDevicePixels="True"
+				   UseLayoutRounding="True"
 				   TextOptions.TextFormattingMode="Display">
 
 	<Grid>
@@ -66,8 +66,8 @@
 
 		<DockPanel Grid.Row="1">
 			<Border DockPanel.Dock="Top"
-					Margin="8,0">
-				<metro2:CallMethodButton Content="업데이트"
+					Margin="8,8,8,0">
+				<metro2:CallMethodButton Content="새로고침"
 										 Padding="40,6"
 										 MethodName="Update"
 										 HorizontalAlignment="Left" />
@@ -80,11 +80,10 @@
 						  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}"
 						  ScrollViewer.PanningMode="Both">
 					<ListView.Resources>
-						<Style TargetType="{x:Type TextBlock}">
+						<Style TargetType="{x:Type TextBlock}"
+							   BasedOn="{StaticResource DefaultTextStyleKey}">
 							<Setter Property="Margin"
 									Value="5,4" />
-							<Setter Property="Foreground"
-									Value="{DynamicResource ForegroundBrushKey}" />
 						</Style>
 						<Style TargetType="{x:Type GridViewColumnHeader}">
 							<Setter Property="OverridesDefaultStyle"
@@ -126,19 +125,19 @@
 					</ListView.Resources>
 					<ListView.View>
 						<GridView>
-							<GridViewColumn Width="180">
+							<GridViewColumn Width="190">
 								<GridViewColumn.Header>
 									<TextBlock Text="장비명" />
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
-									<DataTemplate DataType="{x:Type viewModels:SlotItemViewModel}">
+									<DataTemplate DataType="{x:Type viewModels:SlotItemCounter}">
 										<StackPanel Orientation="Horizontal">
 											<Border Padding="0,1,5,1">
 												<Viewbox Width="20">
-													<controls:SlotItemIcon Type="{Binding SlotItem.IconType}" />
+													<controls:SlotItemIcon Type="{Binding Target.IconType}" />
 												</Viewbox>
 											</Border>
-											<TextBlock Text="{Binding SlotItem.Name}"
+											<TextBlock Text="{Binding Target.Name}"
 													   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 													   Margin="0,4" />
 										</StackPanel>
@@ -146,57 +145,107 @@
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
 
-							<GridViewColumn Width="82">
+							<GridViewColumn Width="52">
 								<GridViewColumn.Header>
-									<TextBlock>
-										<Run Text="보유수" />
-										<Run Text="(여분)"
-											 FontSize="11" />
-									</TextBlock>
+									<TextBlock Text="총계" />
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
-									<DataTemplate DataType="{x:Type viewModels:SlotItemViewModel}">
-										<TextBlock Margin="0,4">
-											<Run Text="{Binding Count, Mode=OneWay}"
-												 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
-											<Run Text="{Binding Remainder, StringFormat=({0}), Mode=OneWay}"
-												 FontSize="11" />
-										</TextBlock>
+									<DataTemplate DataType="{x:Type viewModels:SlotItemCounter}">
+										<TextBlock Text="{Binding Count, Mode=OneWay}"
+												   Margin="0,4"
+												   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
 
-							<GridViewColumn Width="550">
+							<GridViewColumn Width="650">
 								<GridViewColumn.Header>
-									<TextBlock>
-										<Run Text="장비하고있는 칸무스("/>
-										<Run Text="★" Foreground="#FFFFD82B"/>
-										<Run Text=": 강화장비장착)"/>
-									</TextBlock>
+									<DockPanel>
+										<Border Width="52"
+												BorderThickness="0,0,1,0"
+												BorderBrush="{DynamicResource BorderBrushKey}">
+											<TextBlock Text="강화도" />
+										</Border>
+										<Border Width="84"
+												BorderThickness="0,0,1,0"
+												BorderBrush="{DynamicResource BorderBrushKey}">
+											<TextBlock>
+												<Run Text="보유수" />
+												<Run Text="(여분)"
+													 FontSize="11" />
+											</TextBlock>
+										</Border>
+										<Border>
+											<TextBlock Text="장비하고있는 칸무스" />
+										</Border>
+									</DockPanel>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
-									<DataTemplate DataType="{x:Type viewModels:SlotItemViewModel}">
-										<ItemsControl ItemsSource="{Binding Ships}">
-											<ItemsControl.Template>
-												<ControlTemplate TargetType="{x:Type ItemsControl}">
-													<WrapPanel IsItemsHost="True"
-															   Margin="0,0,0,4" />
-												</ControlTemplate>
-											</ItemsControl.Template>
+									<DataTemplate DataType="{x:Type viewModels:SlotItemCounter}">
+										<ItemsControl ItemsSource="{Binding Levels}"
+													  Margin="0,0,0,-1">
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
-													<TextBlock Margin="0,4,18,0">
-														<Run Text="{Binding EquipStar,Mode=OneWay}"
-															 FontSize="11"
-															 Foreground="#FFFFD82B"/>
-														<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
-															 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
-														<Run Text="{Binding Ship.Level, StringFormat=Lv.{0}, Mode=OneWay}"
-															 FontSize="11" />
-														<Run Text="{Binding CountString, Mode=OneWay}"
-															 Background="{DynamicResource BackgroundBrushKey}"
-															 FontSize="11" />
-													</TextBlock>
+													<Border BorderThickness="0,0,0,1"
+															BorderBrush="{DynamicResource BorderBrushKey}">
+														<DockPanel>
+															<TextBlock Width="53"
+																	   Margin="0,4">
+																<TextBlock.Style>
+																	<Style TargetType="{x:Type TextBlock}">
+																		<Setter Property="Text"
+																				Value="{Binding Level, StringFormat=★+{0}}" />
+																		<Setter Property="Foreground"
+																				Value="#FF45A9A5" />
+																		<Setter Property="Opacity"
+																				Value="1.0" />
+																		<Style.Triggers>
+																			<DataTrigger Binding="{Binding Level}"
+																						 Value="0">
+																				<Setter Property="Foreground"
+																						Value="{DynamicResource InactiveForegroundBrushKey}" />
+																				<Setter Property="Opacity"
+																						Value=".5" />
+																			</DataTrigger>
+																			<DataTrigger Binding="{Binding Level}"
+																						 Value="10">
+																				<Setter Property="Text"
+																						Value="★max" />
+																			</DataTrigger>
+																		</Style.Triggers>
+																	</Style>
+																</TextBlock.Style>
+															</TextBlock>
+															<TextBlock Width="83"
+																	   Margin="0,4">
+																<Run Text="{Binding Count, Mode=OneWay}"
+																	 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+																<Run Text="{Binding Remainder, StringFormat=({0}), Mode=OneWay}"
+																	 FontSize="11" />
+															</TextBlock>
+															<ItemsControl ItemsSource="{Binding Ships}">
+																<ItemsControl.Template>
+																	<ControlTemplate TargetType="{x:Type ItemsControl}">
+																		<WrapPanel IsItemsHost="True"
+																				   Margin="0,0,0,4" />
+																	</ControlTemplate>
+																</ItemsControl.Template>
+																<ItemsControl.ItemTemplate>
+																	<DataTemplate>
+																		<TextBlock Margin="0,4,18,0">
+																			<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
+																				 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+																			<Run Text="{Binding Ship.Level, StringFormat=Lv.{0}, Mode=OneWay}"
+																				 FontSize="11" />
+																			<Run Text="{Binding CountString, Mode=OneWay}"
+																				 Background="{DynamicResource BackgroundBrushKey}"
+																				 FontSize="11" />
+																		</TextBlock>
+																	</DataTemplate>
+																</ItemsControl.ItemTemplate>
+															</ItemsControl>
+														</DockPanel>
+													</Border>
 												</DataTemplate>
 											</ItemsControl.ItemTemplate>
 										</ItemsControl>
@@ -218,7 +267,7 @@
 				Padding="20"
 				Visibility="{Binding IsReloading, Converter={StaticResource BooleanToVisibilityConverter}}"
 				d:IsHidden="True">
-			<TextBlock Text="목록을 생성중입니다..."
+			<TextBlock Text="一覧を生成しています..."
 					   Style="{DynamicResource EmphaticTextStyleKey}"
 					   FontSize="16"
 					   Background="{DynamicResource ThemeBrushKey}"

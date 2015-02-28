@@ -57,7 +57,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public NeedNdockShipCatalogWindowViewModel()
 		{
 			this.SortWorker = new ShipCatalogSortWorker();
-			this.SortWorker.SetTarget(ShipCatalogSortTarget.RepairTime, true);
 
 			this.Title = "입거 필요 칸무스 목록";
 			this.ShipNdockTimeFilter = new ShipNdockTimeFilter(this.Update);
@@ -82,16 +81,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			this.RaisePropertyChanged("CheckAllShipTypes");
 			this.updateSource.OnNext(Unit.Default);
 		}
-		public void Update(ShipCatalogSortTarget sortTarget)
-		{
-			this.SortWorker.SetTarget(sortTarget, false);
-			this.Update();
-		}
-		public void UpdateReverse(ShipCatalogSortTarget sortTarget)
-		{
-			this.SortWorker.SetTarget(sortTarget, true);
-			this.Update();
-		}
 		private void UpdateCore()
 		{
 			var list = this.homeport.Organization.Ships
@@ -101,6 +90,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			this.Ships = this.SortWorker.Sort(list)
 				.Select((x, i) => new ShipViewModel(i + 1, x))
 				.ToList();
+		}
+		public void Sort(SortableColumn column)
+		{
+			this.SortWorker.SetFirst(column);
+			this.Update();
 		}
 	}
 }

@@ -14,9 +14,7 @@
 			 d:DesignHeight="30"
 			 d:DataContext="{d:DesignInstance fleets:FleetViewModel}">
 	<UserControl.Resources>
-		<ResourceDictionary>
-			<converters:HasFlagConverter x:Key="HasFlagConverter" />
-		</ResourceDictionary>
+		<converters:HasFlagConverter x:Key="HasFlagConverter" />
 	</UserControl.Resources>
 	<ContentControl Content="{Binding QuickStateView}">
 		<ContentControl.Resources>

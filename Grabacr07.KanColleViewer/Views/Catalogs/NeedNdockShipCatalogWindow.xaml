@@ -182,7 +182,7 @@
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
-							<GridViewColumn Width="Auto">
+							<GridViewColumn>
 								<GridViewColumn.Header>
 									<TextBlock Text="피해상태" />
 								</GridViewColumn.Header>
@@ -249,12 +249,9 @@
 
 							<GridViewColumn Width="120">
 								<GridViewColumn.Header>
-									<metro2:SortButton Direction="{Binding SortWorker.NdockTimeColumn.Direction}"
-													   MethodName="UpdateReverse">
-										<metro2:SortButton.MethodParameter>
-											<viewModels:ShipCatalogSortTarget>RepairTime</viewModels:ShipCatalogSortTarget>
-										</metro2:SortButton.MethodParameter>
-										<TextBlock Text="수리시간" />
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.NdockTimeColumn}">
+										<TextBlock Text="입거시간" />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>

@@ -88,11 +88,13 @@
 		<Grid Grid.Row="1">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
-				<RowDefinition Height="*" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition />
 			</Grid.RowDefinitions>
 
-			<Expander Margin="8"
-					  IsExpanded="{Binding IsOpenSettings, Mode=TwoWay}">
+			<Expander Grid.Row="0"
+					  Margin="8"
+					  IsExpanded="{Binding IsOpenFilterSettings, Mode=TwoWay}">
 				<Expander.Header>
 					<TextBlock Text="필터 설정"
 							   Style="{DynamicResource HeaderTextStyleKey}"
@@ -378,61 +380,60 @@
 							</StackPanel>
 						</WrapPanel>
 					</Border>
-
 					<Border BorderThickness="1"
 							BorderBrush="{DynamicResource BorderBrushKey}"
 							Margin="0,8,0,0"
 							Padding="5">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <WrapPanel DataContext="{Binding ShipSallyAreaFilter}">
-							    <TextBlock Margin="0,2">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="Auto"/>
+							</Grid.ColumnDefinitions>
+							<WrapPanel DataContext="{Binding ShipSallyAreaFilter}">
+								<TextBlock Margin="0,2">
 								    <Run Text="출격한해역" />
 								    <Run Text=":" />
-							    </TextBlock>
+								</TextBlock>
 
-							    <CheckBox Content="작전출격한적 없음"
+								<CheckBox Content="작전출격한적 없음"
 									      IsChecked="{Binding None}"
 									      Margin="10,0" />
-							    <CheckBox Content="1분류"
+								<CheckBox Content="1분류"
 									      IsChecked="{Binding FirstMap}"
 									      Margin="10,0" />
-							    <CheckBox Content="2분류"
+								<CheckBox Content="2분류"
 									      IsChecked="{Binding SecondMap}"
 									      Margin="10,0" />
-							    <CheckBox Content="3분류"
+								<CheckBox Content="3분류"
 									      IsChecked="{Binding ThirdMap}"
 									      Margin="10,0" />
-						    </WrapPanel>
-                            <WrapPanel Grid.Column="1"  DataContext="{Binding ShipFleetFilter}">
-                                <TextBlock Margin="0,2">
+							</WrapPanel>
+							<WrapPanel Grid.Column="1"  DataContext="{Binding ShipFleetFilter}">
+								<TextBlock Margin="0,2">
                                     <Run Text="함대"/>
                                     <Run Text=":"/>
-                                </TextBlock>
-                                <CheckBox Content="전함대"
+								</TextBlock>
+								<CheckBox Content="전함대"
 									      IsChecked="{Binding AllCheck}"
 									      Margin="10,0" />
-							    <CheckBox Content="1함대"
+								<CheckBox Content="1함대"
 									      IsChecked="{Binding First}"
 									      Margin="10,0" />
-							    <CheckBox Content="2함대"
+								<CheckBox Content="2함대"
 									      IsChecked="{Binding Second}"
 									      Margin="10,0" />
-							    <CheckBox Content="3함대"
+								<CheckBox Content="3함대"
 									      IsChecked="{Binding Third}"
 									      Margin="10,0" />
-                                <CheckBox Content="4함대"
+								<CheckBox Content="4함대"
                                           IsChecked="{Binding Fourth}"
 									      Margin="10,0" />
-                                <CheckBox Content="그외"
+								<CheckBox Content="그외"
                                           IsChecked="{Binding NotFleet}"
 									      Margin="10,0" />
-                            </WrapPanel>
-                        </Grid>
-						
+							</WrapPanel>
+						</Grid>
+
 					</Border>
 					<Border BorderThickness="1"
 							BorderBrush="{DynamicResource BorderBrushKey}"
@@ -460,14 +461,104 @@
 							</metro:PromptTextBox>
 						</Grid>
 					</Border>
-
 				</StackPanel>
 			</Expander>
 
-			<Border Grid.Row="1"
+			<Expander Grid.Row="1"
+					  DockPanel.Dock="Top"
+					  Margin="8,0"
+					  IsExpanded="{Binding IsOpenSortSettings, Mode=TwoWay}">
+				<Expander.Header>
+					<TextBlock Text="정렬 설정"
+							   Style="{DynamicResource HeaderTextStyleKey}"
+							   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+				</Expander.Header>
+
+				<Border BorderThickness="1"
+						BorderBrush="{DynamicResource BorderBrushKey}"
+						Padding="5"
+						Margin="0,8,0,0">
+					<DockPanel LastChildFill="False">
+						<metro2:CallMethodButton DockPanel.Dock="Right"
+												 MethodName="Update"
+												 Content="갱신"
+												 Margin="8,3,3,3"
+												 Padding="12,4" />
+
+						<metro2:CallMethodButton DockPanel.Dock="Right"
+												 MethodTarget="{Binding SortWorker}"
+												 MethodName="Clear"
+												 Content="클리어"
+												 Margin="8,3,0,3"
+												 Padding="12,4" />
+
+						<TextBlock DockPanel.Dock="Top"
+								   Text="칸무스를 해당 순서로 정렬합니다"
+								   Style="{DynamicResource DefaultTextStyleKey}"
+								   Margin="3,2,0,8" />
+
+						<ItemsControl DockPanel.Dock="Left"
+									  ItemsSource="{Binding Selectors}"
+									  DataContext="{Binding SortWorker}"
+									  d:DataContext="{d:DesignData /SampleData/ShipCatalogSortWorkerSampleData.xaml}">
+							<ItemsControl.Template>
+								<ControlTemplate TargetType="{x:Type ItemsControl}">
+									<Border ClipToBounds="True">
+										<WrapPanel IsItemsHost="True"
+												   Margin="3,0,-40,0" />
+									</Border>
+								</ControlTemplate>
+							</ItemsControl.Template>
+							<ItemsControl.ItemTemplate>
+								<DataTemplate>
+									<DockPanel Margin="0,4">
+										<ed:RegularPolygon DockPanel.Dock="Right"
+														   PointCount="3"
+														   Fill="{DynamicResource BorderBrushKey}"
+														   Width="40"
+														   Height="20"
+														   RenderTransformOrigin="0.5,0.5">
+											<ed:RegularPolygon.RenderTransform>
+												<RotateTransform Angle="90" />
+											</ed:RegularPolygon.RenderTransform>
+										</ed:RegularPolygon>
+										<metro:PromptComboBox DockPanel.Dock="Bottom"
+															  ItemsSource="{Binding SelectableColumns}"
+															  SelectedItem="{Binding Current, Mode=TwoWay}"
+															  Prompt="정렬 방법"
+															  Width="120"
+															  Margin="1,4,0,0">
+											<metro:PromptComboBox.ItemsPanel>
+												<ItemsPanelTemplate>
+													<StackPanel Margin="02" />
+												</ItemsPanelTemplate>
+											</metro:PromptComboBox.ItemsPanel>
+											<metro:PromptComboBox.ItemTemplate>
+												<DataTemplate>
+													<TextBlock Text="{Binding Name}"
+															   Margin="2" />
+												</DataTemplate>
+											</metro:PromptComboBox.ItemTemplate>
+										</metro:PromptComboBox>
+										<RadioButton DockPanel.Dock="Left"
+													 Content="오름차순"
+													 IsChecked="{Binding IsAscending, Mode=TwoWay}" />
+										<RadioButton DockPanel.Dock="Left"
+													 Content="내림차순"
+													 IsChecked="{Binding IsDescending, Mode=OneWay}"
+													 Margin="12,0,0,0" />
+									</DockPanel>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+						</ItemsControl>
+					</DockPanel>
+				</Border>
+			</Expander>
+
+			<Border Grid.Row="2"
 					BorderBrush="{DynamicResource BorderBrushKey}"
 					BorderThickness="1"
-					Margin="8,0,8,8">
+					Margin="8">
 
 				<ListView ItemsSource="{Binding Ships}"
 						  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}"
@@ -534,11 +625,8 @@
 
 							<GridViewColumn Width="50">
 								<GridViewColumn.Header>
-									<metro2:SortButton Direction="{Binding SortWorker.IdColumn.Direction}"
-													   MethodName="Update">
-										<metro2:SortButton.MethodParameter>
-											<viewModels:ShipCatalogSortTarget>Id</viewModels:ShipCatalogSortTarget>
-										</metro2:SortButton.MethodParameter>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.IdColumn}">
 										<TextBlock Text="ID" />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
@@ -552,11 +640,8 @@
 
 							<GridViewColumn Width="90">
 								<GridViewColumn.Header>
-									<metro2:SortButton Direction="{Binding SortWorker.TypeColumn.Direction}"
-													   MethodName="Update">
-										<metro2:SortButton.MethodParameter>
-											<viewModels:ShipCatalogSortTarget>Type</viewModels:ShipCatalogSortTarget>
-										</metro2:SortButton.MethodParameter>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.StypeColumn}">
 										<TextBlock Text="함종" />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
@@ -570,11 +655,8 @@
 
 							<GridViewColumn Width="100">
 								<GridViewColumn.Header>
-									<metro2:SortButton Direction="{Binding SortWorker.NameColumn.Direction}"
-													   MethodName="Update">
-										<metro2:SortButton.MethodParameter>
-											<viewModels:ShipCatalogSortTarget>Name</viewModels:ShipCatalogSortTarget>
-										</metro2:SortButton.MethodParameter>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.NameColumn}">
 										<TextBlock Text="함명" />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
@@ -589,11 +671,8 @@
 
 							<GridViewColumn Width="110">
 								<GridViewColumn.Header>
-									<metro2:SortButton Direction="{Binding SortWorker.LevelColumn.Direction}"
-													   MethodName="UpdateReverse">
-										<metro2:SortButton.MethodParameter>
-											<viewModels:ShipCatalogSortTarget>Level</viewModels:ShipCatalogSortTarget>
-										</metro2:SortButton.MethodParameter>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.LevelColumn}">
 										<TextBlock Text="레벨" />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
@@ -612,7 +691,7 @@
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
 
-							<GridViewColumn Width="Auto">
+							<GridViewColumn>
 								<GridViewColumn.Header>
 									<TextBlock Text="개조레벨" />
 								</GridViewColumn.Header>
@@ -661,14 +740,10 @@
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
 
-
 							<GridViewColumn Width="50">
 								<GridViewColumn.Header>
-									<metro2:SortButton Direction="{Binding SortWorker.ConditionColumn.Direction}"
-													   MethodName="UpdateReverse">
-										<metro2:SortButton.MethodParameter>
-											<viewModels:ShipCatalogSortTarget>Cond</viewModels:ShipCatalogSortTarget>
-										</metro2:SortButton.MethodParameter>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.CondColumn}">
 										<TextBlock Text="cond." />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
@@ -691,7 +766,10 @@
 
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
-									<TextBlock Text="화력" />
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.FirepowerColumn}">
+										<TextBlock Text="화력" />
+									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -705,7 +783,10 @@
 
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
-									<TextBlock Text="뇌장" />
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.TorpedoColumn}">
+										<TextBlock Text="뇌장" />
+									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -719,7 +800,10 @@
 
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
-									<TextBlock Text="대공" />
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.AAColumn}">
+										<TextBlock Text="대공" />
+									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -733,7 +817,10 @@
 
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
-									<TextBlock Text="장갑" />
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.ArmerColumn}">
+										<TextBlock Text="장갑" />
+									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -747,7 +834,10 @@
 
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
-									<TextBlock Text="운" />
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.LuckColumn}">
+										<TextBlock Text="운" />
+									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -761,13 +851,10 @@
 
 							<GridViewColumn Width="45">
 								<GridViewColumn.Header>
-									<metro2:SortButton Direction="{Binding SortWorker.ViewRangeColumn.Direction}"
-													   MethodName="UpdateReverse"
-													   ToolTip="장비+칸무스 스텟">
-										<metro2:SortButton.MethodParameter>
-											<viewModels:ShipCatalogSortTarget>ViewRange</viewModels:ShipCatalogSortTarget>
-										</metro2:SortButton.MethodParameter>
-										<TextBlock Text="색적" />
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.ViewRangeColumn}">
+										<TextBlock Text="색적"
+												   ToolTip="장비+칸무스 스텟" />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
@@ -840,7 +927,7 @@
 											</ItemsControl.Template>
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
-													<Border ToolTip="{Binding Item.Info.Name}"
+													<Border ToolTip="{Binding Item.NameWithLevel}"
 															Background="Transparent"
 															Height="20"
 															Padding="0,1">
@@ -860,15 +947,14 @@
 				</ListView>
 			</Border>
 
-			<Border Grid.Row="1"
+			<Border Grid.Row="2"
 					Background="{DynamicResource ThemeBrushKey}"
 					BorderBrush="{DynamicResource BorderBrushKey}"
 					BorderThickness="1"
 					Opacity="0.75"
-					Margin="8,0,8,8"
+					Margin="8"
 					Padding="20"
-					Visibility="{Binding IsReloading, Converter={StaticResource BooleanToVisibilityConverter}}"
-					d:IsHidden="True">
+					Visibility="{Binding IsReloading, Converter={StaticResource BooleanToVisibilityConverter}}">
 				<TextBlock Text="화면을 갱신중입니다..."
 						   Style="{DynamicResource EmphaticTextStyleKey}"
 						   FontSize="16"

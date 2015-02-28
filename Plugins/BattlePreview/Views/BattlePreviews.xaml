@@ -135,7 +135,8 @@
 			<TextBlock/>
 			<ScrollViewer HorizontalAlignment="Center" 
 						  HorizontalScrollBarVisibility="Auto"
-                          VerticalScrollBarVisibility="Disabled">
+                          VerticalScrollBarVisibility="Disabled"
+						  d:IsHidden="True">
 				<StackPanel Orientation="Horizontal">
 
 					<ItemsControl VerticalAlignment="Top"

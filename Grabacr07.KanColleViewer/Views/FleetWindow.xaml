@@ -76,6 +76,11 @@
 										<Setter Property="Background"
 												Value="Transparent" />
 									</DataTrigger>
+									<DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
+												 Value="True">
+										<Setter Property="Background"
+												Value="Transparent" />
+									</DataTrigger>
 									<DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Evacuation}"
 												 Value="True">
 										<Setter Property="Opacity"
@@ -209,41 +214,11 @@
 											</MultiDataTrigger>
 											<MultiDataTrigger>
 												<MultiDataTrigger.Conditions>
-													<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
-															   Value="True" />
-												</MultiDataTrigger.Conditions>
-												<Setter Property="Text"
-														Value="입거중" />
-												<Setter Property="Background"
-														Value="{DynamicResource FleetRepairingBrushKey}" />
-											</MultiDataTrigger>
-											<MultiDataTrigger>
-												<MultiDataTrigger.Conditions>
-													<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Evacuation}"
-															   Value="True" />
-												</MultiDataTrigger.Conditions>
-												<Setter Property="Text"
-														Value="대파(퇴피완료)" />
-												<Setter Property="Background"
-														Value="{DynamicResource FleetRepairingBrushKey}" />
-											</MultiDataTrigger>
-											<MultiDataTrigger>
-												<MultiDataTrigger.Conditions>
-													<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow}"
-															   Value="True" />
-												</MultiDataTrigger.Conditions>
-												<Setter Property="Text"
-														Value="철퇴(호위퇴피)" />
-												<Setter Property="Background"
-														Value="{DynamicResource FleetRepairingBrushKey}" />
-											</MultiDataTrigger>
-											<MultiDataTrigger>
-												<MultiDataTrigger.Conditions>
 													<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged}"
 															   Value="True" />
 												</MultiDataTrigger.Conditions>
 												<Setter Property="Text"
-														Value="대파(격침 가능성 있음)" />
+														Value="대파 (격침 가능성 있음)" />
 												<Setter Property="Foreground"
 														Value="White" />
 												<Setter Property="Background"
@@ -255,7 +230,37 @@
 															   Value="True" />
 												</MultiDataTrigger.Conditions>
 												<Setter Property="Text"
-														Value="대파(다메콘 사용가능)" />
+														Value="대파 (다메콘 사용가능)" />
+												<Setter Property="Background"
+														Value="{DynamicResource FleetRepairingBrushKey}" />
+											</MultiDataTrigger>
+											<MultiDataTrigger>
+												<MultiDataTrigger.Conditions>
+													<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Evacuation}"
+															   Value="True" />
+												</MultiDataTrigger.Conditions>
+												<Setter Property="Text"
+														Value="대파 (퇴피완료)" />
+												<Setter Property="Background"
+														Value="{DynamicResource FleetRepairingBrushKey}" />
+											</MultiDataTrigger>
+											<MultiDataTrigger>
+												<MultiDataTrigger.Conditions>
+													<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow}"
+															   Value="True" />
+												</MultiDataTrigger.Conditions>
+												<Setter Property="Text"
+														Value="퇴피 (호위퇴피)" />
+												<Setter Property="Background"
+														Value="{DynamicResource FleetRepairingBrushKey}" />
+											</MultiDataTrigger>
+											<MultiDataTrigger>
+												<MultiDataTrigger.Conditions>
+													<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
+															   Value="True" />
+												</MultiDataTrigger.Conditions>
+												<Setter Property="Text"
+														Value="입거중" />
 												<Setter Property="Background"
 														Value="{DynamicResource FleetRepairingBrushKey}" />
 											</MultiDataTrigger>
@@ -368,10 +373,13 @@
 																   Width="14"
 																   Height="14" />
 											<TextBlock Grid.Column="2"
-													   Text="{Binding Item.Info.Name}"
 													   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 													   Style="{DynamicResource DefaultTextStyleKey}"
-													   Margin="5,1" />
+													   Margin="5,1">
+												<Run Text="{Binding Item.Info.Name, Mode=OneWay}" />
+												<Run Text="{Binding Item.LevelText, Mode=OneWay}"
+													 Foreground="#FF45A9A5" />
+											</TextBlock>
 										</Grid>
 									</DataTemplate>
 								</ItemsControl.ItemTemplate>
@@ -570,6 +578,7 @@
 							</Style>
 						</Border.Resources>
 						<StackPanel>
+
 							<TextBlock>
 								<TextBlock.Style>
 									<Style TargetType="{x:Type TextBlock}"
@@ -665,7 +674,7 @@
 													<Style TargetType="{x:Type TextBlock}"
 														   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
 														<Setter Property="Text"
-																Value="연합함대는 원정에 참가할수 없습니다." />
+																Value="연합함대는 원정에 참가할수 없습니다" />
 													</Style>
 												</TextBlock.Style>
 											</TextBlock>
@@ -762,7 +771,7 @@
 										<Style TargetType="{x:Type TextBlock}"
 											   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
 											<Setter Property="Text"
-													Value="함대에 피로한 칸무스가 없습니다." />
+													Value="함대에 피로한 칸무스가 없습니다" />
 											<Style.Triggers>
 												<MultiDataTrigger>
 													<MultiDataTrigger.Conditions>
@@ -813,7 +822,7 @@
 										   HorizontalAlignment="Right"
 										   VerticalAlignment="Bottom"
 										   Margin="1,2">
-									<Run Text="합계레벨" />
+									<Run Text="합계 레벨" />
 									<Run Text=":" />
 								</TextBlock>
 								<TextBlock Grid.Row="0"
@@ -828,7 +837,7 @@
 										   HorizontalAlignment="Right"
 										   VerticalAlignment="Bottom"
 										   Margin="1,2">
-									<Run Text="평균레벨" />
+									<Run Text="평균 레벨" />
 									<Run Text=":" />
 								</TextBlock>
 								<TextBlock Grid.Row="1"
