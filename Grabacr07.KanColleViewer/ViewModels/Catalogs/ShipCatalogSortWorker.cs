@@ -75,6 +75,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public ShipCatalogSortWorker()
 		{
 			this.UpdateSelectors();
+
+			this.SetFirst(LevelColumn);
 		}
 
 		public IEnumerable<Ship> Sort(IEnumerable<Ship> ships)
@@ -96,12 +98,28 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		public void SetFirst(SortableColumn column)
 		{
-			if (this.Selectors.HasItems())
+			if (!this.Selectors.HasItems()) return;
+
+			if (column == StypeColumn)
+			{
+				// 列ヘッダーから艦種が選択されたときは、艦種 (降順) -> 艦名 (昇順) に設定
+				// (ゲーム内の艦種ソートと同じ動作)
+
+				this.Selectors[0].SafeUpdate(StypeColumn);
+				this.Selectors[0].SafeUpdate(false);
+				if (this.Selectors.Length >= 2)
+				{
+					this.Selectors[1].SafeUpdate(NameColumn);
+					this.Selectors[1].SafeUpdate(true);
+				}
+			}
+			else
 			{
 				this.Selectors[0].SafeUpdate(column);
 				this.Selectors[0].SafeUpdate(!column.DefaultIsDescending);
-				this.UpdateSelectors();
 			}
+
+			this.UpdateSelectors();
 		}
 
 		public void Clear()
