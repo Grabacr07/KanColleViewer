@@ -75,6 +75,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public ShipCatalogSortWorker()
 		{
 			this.UpdateSelectors();
+
+			this.SetFirst(LevelColumn);
 		}
 
 		public IEnumerable<Ship> Sort(IEnumerable<Ship> ships)
