@@ -48,7 +48,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				LuckColumn,
 				HPColumn,
 				ViewRangeColumn,
-				//NdockTimeColumn,
+				NdockTimeColumn,
 			};
 		}
 

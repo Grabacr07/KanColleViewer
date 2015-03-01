@@ -655,10 +655,11 @@
 
 							<GridViewColumn Width="100">
 								<GridViewColumn.Header>
-									<metro2:SortButton MethodName="Sort"
+									<TextBlock Text="함명" />
+									<!--<metro2:SortButton MethodName="Sort"
 													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.NameColumn}">
-										<TextBlock Text="함명" />
-									</metro2:SortButton>
+										
+									</metro2:SortButton>-->
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -954,7 +955,7 @@
 					Opacity="0.75"
 					Margin="8"
 					Padding="20"
-					Visibility="{Binding IsReloading, Converter={StaticResource BooleanToVisibilityConverter}}">
+					Visibility="{Binding IsReloading, Converter={StaticResource BooleanToVisibilityConverter}}" d:IsHidden="True">
 				<TextBlock Text="화면을 갱신중입니다..."
 						   Style="{DynamicResource EmphaticTextStyleKey}"
 						   FontSize="16"
