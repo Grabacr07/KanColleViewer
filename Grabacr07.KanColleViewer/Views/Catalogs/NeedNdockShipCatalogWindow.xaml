@@ -249,10 +249,11 @@
 
 							<GridViewColumn Width="120">
 								<GridViewColumn.Header>
-									<metro2:SortButton MethodName="Sort"
+									<TextBlock Text="입거시간" />
+									<!--<metro2:SortButton MethodName="Sort"
 													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.NdockTimeColumn}">
-										<TextBlock Text="입거시간" />
-									</metro2:SortButton>
+										
+									</metro2:SortButton>-->
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>

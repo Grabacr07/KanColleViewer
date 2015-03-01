@@ -55,7 +55,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{
 						foreach (var ship in fleet.Value.Ships)
 						{
-							if (ship.Name == this.Name) return fleet.Value.Id;
+							if (ship.Id == this.Id) return fleet.Value.Id;
 						}
 					}
 				}
