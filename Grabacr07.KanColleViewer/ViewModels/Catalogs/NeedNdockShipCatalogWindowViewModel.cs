@@ -56,7 +56,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		public NeedNdockShipCatalogWindowViewModel()
 		{
-			this.SortWorker = new ShipCatalogSortWorker();
+			this.SortWorker = new ShipCatalogSortWorker(false);
 
 			this.Title = "입거 필요 칸무스 목록";
 			this.ShipNdockTimeFilter = new ShipNdockTimeFilter(this.Update);

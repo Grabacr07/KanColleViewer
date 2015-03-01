@@ -430,7 +430,7 @@
 														x:Name="ItemLevelBlock"
 														Foreground="White" Background="#33000000" 
 														Text="{Binding Item.LevelText}" 
-														FontSize="9"
+														FontSize="10"
 														VerticalAlignment="Bottom" 
 														HorizontalAlignment="Right" 
 														Panel.ZIndex="1" 

@@ -274,6 +274,9 @@ namespace Grabacr07.KanColleWrapper.Models
 				}
 			}
 
+			this.Condition.Update(ships);
+			this.Condition.IsEnabled = state.HasFlag(FleetSituation.Homeport); // 疲労回復通知は母港待機中の艦隊でのみ行う
+
 			if (state.HasFlag(FleetSituation.Homeport))
 			{
 				var repairing = ships.Any(x => this.homeport.Repairyard.CheckRepairing(x.Id));
@@ -287,6 +290,11 @@ namespace Grabacr07.KanColleWrapper.Models
 				if (inShortSupply)
 				{
 					state |= FleetSituation.InShortSupply;
+					ready = false;
+				}
+
+				if (this.Condition.IsRejuvenating)
+				{
 					ready = false;
 				}
 			}
@@ -303,14 +311,12 @@ namespace Grabacr07.KanColleWrapper.Models
 
 				if (state.HasFlag(FleetSituation.Sortie))
 					KanColleClient.Current.OracleOfCompass.AfterResult();
+
 			}
 
 			this.Situation = state;
 			this.IsReady = ready;
 
-			this.Condition.Update(ships);
-			this.Condition.IsEnabled = state.HasFlag(FleetSituation.Homeport);	 // 疲労回復通知は母港待機中の艦隊でのみ行う
-			if (this.Condition.IsRejuvenating) this.IsReady = false;
 			if (this.Updated != null)
 			{
 				this.Updated(this, new EventArgs());
