@@ -103,6 +103,8 @@
     <Compile Include="Models\CombinedFleet.cs" />
     <Compile Include="Models\FleetSpeed.cs" />
     <Compile Include="Models\FleetState.cs" />
+    <Compile Include="Models\MapArea.cs" />
+    <Compile Include="Models\MapInfo.cs" />
     <Compile Include="Models\Mission.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Itemyard.cs" />
@@ -111,6 +113,8 @@
     <Compile Include="Models\ConditionRejuvenatedEventArgs.cs" />
     <Compile Include="Models\CreatedSlotItem.cs" />
     <Compile Include="Models\FleetCondition.cs" />
+    <Compile Include="Models\Raw\kcsapi_mst_maparea.cs" />
+    <Compile Include="Models\Raw\kcsapi_mst_mapinfo.cs" />
     <Compile Include="Models\Raw\kcsapi_remodel_slot.cs" />
     <Compile Include="Models\Raw\kcsapi_hensei_combined.cs" />
     <Compile Include="Models\Raw\kcsapi_combined_battle_battleresult.cs" />
