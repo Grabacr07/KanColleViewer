@@ -41,6 +41,16 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public MasterTable<Mission> Missions { get; private set; }
 
+		/// <summary>
+		/// すべての海域の定義を取得します。
+		/// </summary>
+		public MasterTable<MapArea> MapAreas { get; private set; }
+
+		/// <summary>
+		/// すべてのマップの定義を取得します。
+		/// </summary>
+		public MasterTable<MapInfo> MapInfos { get; private set; } 
+
 
 		internal Master(kcsapi_start2 start2)
 		{
@@ -49,6 +59,8 @@ namespace Grabacr07.KanColleWrapper
 			this.SlotItems = new MasterTable<SlotItemInfo>(start2.api_mst_slotitem.Select(x => new SlotItemInfo(x)));
 			this.UseItems = new MasterTable<UseItemInfo>(start2.api_mst_useitem.Select(x => new UseItemInfo(x)));
 			this.Missions = new MasterTable<Mission>(start2.api_mst_mission.Select(x => new Mission(x)));
+			this.MapAreas = new MasterTable<MapArea>(start2.api_mst_maparea.Select(x => new MapArea(x)));
+			this.MapInfos = new MasterTable<MapInfo>(start2.api_mst_mapinfo.Select(x => new MapInfo(x, this.MapAreas)));
 		}
 	}
 }
