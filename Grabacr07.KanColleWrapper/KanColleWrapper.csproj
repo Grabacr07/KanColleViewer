@@ -117,7 +117,6 @@
     <Compile Include="Models\PreviewBattleResults.cs" />
     <Compile Include="Models\Raw\kcsapi_mst_maparea.cs" />
     <Compile Include="Models\Raw\kcsapi_mst_mapinfo.cs" />
-    <Compile Include="Models\Raw\kcsapi_remodel_slot.cs" />
     <Compile Include="Models\Raw\kcsapi_hensei_combined.cs" />
     <Compile Include="Models\Raw\kcsapi_combined_battle_battleresult.cs" />
     <Compile Include="Models\Raw\kcsapi_combined_battle_airbattle.cs" />
