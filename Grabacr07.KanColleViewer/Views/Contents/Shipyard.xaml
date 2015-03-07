@@ -9,6 +9,7 @@
 			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
+			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 xmlns:catalogs="clr-namespace:Grabacr07.KanColleViewer.Views.Catalogs"
@@ -21,6 +22,12 @@
 										 MessageKey="Show/NeedNdockShipCatalogWindow">
 			<livet:TransitionInteractionMessageAction Mode="NewOrActive"
 													  WindowType="catalogs:NeedNdockShipCatalogWindow"
+													  IsOwned="False" />
+		</livet:InteractionMessageTrigger>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+										 MessageKey="Show/RemodelListWindow">
+			<livet:TransitionInteractionMessageAction Mode="NewOrActive"
+													  WindowType="views:RemodelListWindow"
 													  IsOwned="False" />
 		</livet:InteractionMessageTrigger>
 	</i:Interaction.Triggers>
@@ -263,6 +270,12 @@
 													 Margin="0,7,0,0"
 													 Padding ="10,5"
 													 MethodName="ShowNdockShipCatalog"													 
+													 />
+							<metro2:CallMethodButton Content="개수공창목록" 
+													 HorizontalAlignment="Center"
+													 Margin="0,7,0,0"
+													 Padding ="10,5"
+													 MethodName="ShowRemodelWindow"													 
 													 />
 						</StackPanel>
 					</DockPanel>

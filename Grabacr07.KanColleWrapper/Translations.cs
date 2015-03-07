@@ -17,7 +17,7 @@ namespace Grabacr07.KanColleWrapper
 		private XDocument OperationsXML;
 		private XDocument QuestsXML;
 		private XDocument ExpeditionXML;
-		string MainFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\";
+		string MainFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
 
 		public bool EnableTranslations { get; set; }
 		public bool EnableAddUntranslated { get; set; }
@@ -136,17 +136,36 @@ namespace Grabacr07.KanColleWrapper
 
 		#endregion
 
+		#region RemodelVersion 変更通知プロパティ
+
+		private string _RemodelVersion;
+
+		public string RemodelVersion
+		{
+			get { return _RemodelVersion; }
+			set
+			{
+				if (_RemodelVersion != value)
+				{
+					_RemodelVersion = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		internal Translations()
 		{
 			try
 			{
-				if (File.Exists(MainFolder + "Translations\\Ships.xml")) ShipsXML = XDocument.Load(MainFolder + "Translations\\Ships.xml");
-				if (File.Exists(MainFolder + "Translations\\ShipTypes.xml")) ShipTypesXML = XDocument.Load(MainFolder + "Translations\\ShipTypes.xml");
-				if (File.Exists(MainFolder + "Translations\\Equipment.xml")) EquipmentXML = XDocument.Load(MainFolder + "Translations\\Equipment.xml");
-				if (File.Exists(MainFolder + "Translations\\Operations.xml")) OperationsXML = XDocument.Load(MainFolder + "Translations\\Operations.xml");
-				if (File.Exists(MainFolder + "Translations\\Quests.xml")) QuestsXML = XDocument.Load(MainFolder + "Translations\\Quests.xml");
-				if (File.Exists(MainFolder + "Translations\\Expeditions.xml")) ExpeditionXML = XDocument.Load(MainFolder + "Translations\\Expeditions.xml");
-					
+				if (File.Exists(Path.Combine(MainFolder, "Translations", "Ships.xml"))) ShipsXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "Ships.xml"));
+				if (File.Exists(Path.Combine(MainFolder, "Translations", "ShipTypes.xml"))) ShipTypesXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "ShipTypes.xml"));
+				if (File.Exists(Path.Combine(MainFolder, "Translations", "Equipment.xml"))) EquipmentXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "Equipment.xml"));
+				if (File.Exists(Path.Combine(MainFolder, "Translations", "Operations.xml"))) OperationsXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "Operations.xml"));
+				if (File.Exists(Path.Combine(MainFolder, "Translations", "Quests.xml"))) QuestsXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "Quests.xml"));
+				if (File.Exists(Path.Combine(MainFolder, "Translations", "Expeditions.xml"))) ExpeditionXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "Expeditions.xml"));
+
 
 				GetVersions();
 			}
@@ -165,8 +184,8 @@ namespace Grabacr07.KanColleWrapper
 			else
 				ShipTypesVersion = "없음";
 			if (EquipmentXML != null)
-				if (EquipmentXML.Root.Attribute("Version")!=null) EquipmentVersion = EquipmentXML.Root.Attribute("Version").Value;
-					else EquipmentVersion="알 수 없음";
+				if (EquipmentXML.Root.Attribute("Version") != null) EquipmentVersion = EquipmentXML.Root.Attribute("Version").Value;
+				else EquipmentVersion = "알 수 없음";
 			else
 				EquipmentVersion = "없음";
 			if (OperationsXML != null)
@@ -193,7 +212,7 @@ namespace Grabacr07.KanColleWrapper
 					{
 						if (KanColleClient.Current.Updater.ShipsUpdate)
 						{
-							this.ShipsXML = XDocument.Load(MainFolder + "Translations\\Ships.xml");
+							this.ShipsXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "Ships.xml"));
 							KanColleClient.Current.Updater.ShipsUpdate = false;
 						}
 						return ShipsXML.Descendants("Ship");
@@ -204,7 +223,7 @@ namespace Grabacr07.KanColleWrapper
 					{
 						if (KanColleClient.Current.Updater.ShipTypesUpdate)
 						{
-							this.ShipTypesXML = XDocument.Load(MainFolder + "Translations\\ShipTypes.xml");
+							this.ShipTypesXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "ShipTypes.xml"));
 							KanColleClient.Current.Updater.ShipTypesUpdate = false;
 						}
 						return ShipTypesXML.Descendants("Type");
@@ -215,7 +234,7 @@ namespace Grabacr07.KanColleWrapper
 					{
 						if (KanColleClient.Current.Updater.EquipUpdate)
 						{
-							this.EquipmentXML = XDocument.Load(MainFolder + "Translations\\Equipment.xml");
+							this.EquipmentXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "Equipment.xml"));
 							KanColleClient.Current.Updater.EquipUpdate = false;
 						}
 						return EquipmentXML.Descendants("Item");
@@ -226,7 +245,7 @@ namespace Grabacr07.KanColleWrapper
 					{
 						if (KanColleClient.Current.Updater.OperationsUpdate)
 						{
-							this.OperationsXML = XDocument.Load(MainFolder + "Translations\\Operations.xml");
+							this.OperationsXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "Operations.xml"));
 							KanColleClient.Current.Updater.OperationsUpdate = false;
 						}
 						return OperationsXML.Descendants("Map");
@@ -237,7 +256,7 @@ namespace Grabacr07.KanColleWrapper
 					{
 						if (KanColleClient.Current.Updater.OperationsUpdate)
 						{
-							this.OperationsXML = XDocument.Load(MainFolder + "Translations\\Operations.xml");
+							this.OperationsXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "Operations.xml"));
 							KanColleClient.Current.Updater.OperationsUpdate = false;
 						}
 						return OperationsXML.Descendants("Sortie");
@@ -250,7 +269,7 @@ namespace Grabacr07.KanColleWrapper
 					{
 						if (KanColleClient.Current.Updater.QuestUpdate)
 						{
-							this.QuestsXML = XDocument.Load(MainFolder + "Translations\\Quests.xml");
+							this.QuestsXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "Quests.xml"));
 							KanColleClient.Current.Updater.QuestUpdate = false;
 						}
 						return QuestsXML.Descendants("Quest");
@@ -263,7 +282,7 @@ namespace Grabacr07.KanColleWrapper
 					{
 						if (KanColleClient.Current.Updater.ExpeditionUpdate)
 						{
-							this.ExpeditionXML = XDocument.Load(MainFolder + "Translations\\Expeditions.xml");
+							this.ExpeditionXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "Expeditions.xml"));
 							KanColleClient.Current.Updater.ExpeditionUpdate = false;
 						}
 						return ExpeditionXML.Descendants("Expedition");
@@ -272,7 +291,7 @@ namespace Grabacr07.KanColleWrapper
 			}
 			return null;
 		}
-		public string GetTranslation(string JPString, TranslationType Type, Object RawData, int ID=-1)
+		public string GetTranslation(string JPString, TranslationType Type, Object RawData = null, int ID = -1)
 		{
 			if (!EnableTranslations)
 				return JPString;
@@ -281,7 +300,7 @@ namespace Grabacr07.KanColleWrapper
 			{
 				IEnumerable<XElement> TranslationList = GetTranslationList(Type);
 
-				if (TranslationList == null)
+				if (TranslationList == null && RawData != null)
 				{
 					AddTranslation(RawData, Type);
 					if (ID < 0) return "[" + ID.ToString() + "] " + JPString;
@@ -299,7 +318,7 @@ namespace Grabacr07.KanColleWrapper
 				}
 
 				IEnumerable<XElement> OldFoundTranslation = TranslationList.Where(b => b.Element(JPChildElement).Value.Equals(JPString));//string 비교검색
-				if(ID<0)//일반적 번역
+				if (ID < 0)//일반적 번역
 				{
 					foreach (XElement el in OldFoundTranslation)
 					{
@@ -332,9 +351,9 @@ namespace Grabacr07.KanColleWrapper
 			}
 			catch { }
 
-			AddTranslation(RawData, Type);
+			if (RawData != null) AddTranslation(RawData, Type);
 			if (ID < 0) return JPString;
-			else return "["+ID.ToString()+"] "+ JPString;
+			else return "[" + ID.ToString() + "] " + JPString;
 		}
 
 		public void AddTranslation(Object RawData, TranslationType Type)
@@ -363,7 +382,7 @@ namespace Grabacr07.KanColleWrapper
 							new XElement("TR-Name", ShipData.api_name)
 						));
 
-						ShipsXML.Save(MainFolder + "Translations\\Ships.xml");
+						ShipsXML.Save(Path.Combine(MainFolder, "Translations", "Ships.xml"));
 						break;
 
 					case TranslationType.ShipTypes:
@@ -384,7 +403,7 @@ namespace Grabacr07.KanColleWrapper
 							new XElement("TR-Name", TypeData.api_name)
 							));
 
-						ShipTypesXML.Save(MainFolder + "Translations\\ShipTypes.xml");
+						ShipTypesXML.Save(Path.Combine(MainFolder, "Translations", "ShipTypes.xml"));
 						break;
 
 					case TranslationType.Equipment:
@@ -404,7 +423,7 @@ namespace Grabacr07.KanColleWrapper
 							new XElement("TR-Name", EqiupData.api_name)
 							));
 
-						EquipmentXML.Save(MainFolder + "Translations\\Equipment.xml");
+						EquipmentXML.Save(Path.Combine(MainFolder, "Translations", "Equipment.xml"));
 						break;
 
 					case TranslationType.OperationMaps:
@@ -435,7 +454,7 @@ namespace Grabacr07.KanColleWrapper
 								));
 						}
 
-						OperationsXML.Save(MainFolder + "Translations\\Operations.xml");
+						OperationsXML.Save(Path.Combine(MainFolder, "Translations", "Operations.xml"));
 						break;
 
 					case TranslationType.Quests:
@@ -466,13 +485,13 @@ namespace Grabacr07.KanColleWrapper
 							QuestsXML.Root.Add(new XElement("Quest",
 								new XElement("ID", QuestData.api_no),
 								new XElement("JP-Name", QuestData.api_title),
-								new XElement("TR-Name", "["+QuestData.api_no.ToString()+"]"+ QuestData.api_title),
+								new XElement("TR-Name", "[" + QuestData.api_no.ToString() + "]" + QuestData.api_title),
 								new XElement("JP-Detail", QuestData.api_detail),
 								new XElement("TR-Detail", "[" + QuestData.api_no.ToString() + "]" + QuestData.api_detail)
 								));
 						}
 
-						QuestsXML.Save(MainFolder + "Translations\\Quests.xml");
+						QuestsXML.Save(Path.Combine(MainFolder, "Translations", "Quests.xml"));
 						break;
 					case TranslationType.Expeditions:
 					case TranslationType.ExpeditionTitle:
@@ -498,16 +517,16 @@ namespace Grabacr07.KanColleWrapper
 						else
 						{
 							// The quest doesn't exist at all. Add it.
-						 		ExpeditionXML.Root.Add(new XElement("Expedition",
-								new XElement("ID", MissionData.api_id),
-								new XElement("JP-Name", MissionData.api_name),
-								new XElement("TR-Name", "[" + MissionData.api_id.ToString() + "]" + MissionData.api_name),
-								new XElement("JP-Detail", MissionData.api_details),
-								new XElement("TR-Detail", "[" + MissionData.api_id.ToString() + "]" + MissionData.api_details)
-								));
+							ExpeditionXML.Root.Add(new XElement("Expedition",
+							new XElement("ID", MissionData.api_id),
+							new XElement("JP-Name", MissionData.api_name),
+							new XElement("TR-Name", "[" + MissionData.api_id.ToString() + "]" + MissionData.api_name),
+							new XElement("JP-Detail", MissionData.api_details),
+							new XElement("TR-Detail", "[" + MissionData.api_id.ToString() + "]" + MissionData.api_details)
+							));
 						}
 
-						ExpeditionXML.Save(MainFolder + "Translations\\Expeditions.xml");
+						ExpeditionXML.Save(Path.Combine(MainFolder, "Translations", "Expeditions.xml"));
 						break;
 				}
 			}
