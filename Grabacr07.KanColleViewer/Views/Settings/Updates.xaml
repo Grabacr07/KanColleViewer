@@ -216,7 +216,7 @@
                        Grid.Row="8"
                        Margin="0,2"
                        HorizontalAlignment="Center"
-                       Text="{Binding RemodelSlotsVersion, Mode=OneWay}"/>
+                       Text="{Binding RemodelSlotsOnlineVersion, Mode=OneWay}"/>
 			<TextBlock Grid.Column="4"
                        Grid.Row="8"
                        Margin="0,2"
