@@ -65,6 +65,6 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		ExpeditionDetail = 12,
 
-		Remodel=13,
+		RemodelSlots = 13,
 	}
 }

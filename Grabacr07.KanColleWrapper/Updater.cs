@@ -50,7 +50,7 @@ namespace Grabacr07.KanColleWrapper
 					case TranslationType.Expeditions:
 						this.ExpeditionUpdate = true;
 						break;
-					case TranslationType.Remodel:
+					case TranslationType.RemodelSlots:
 						this.RemodelUpdate = true;
 						break;
 				}
@@ -225,7 +225,7 @@ namespace Grabacr07.KanColleWrapper
 								File.Delete(MainFolder + "Translations\\RemodelSlots.xml");
 							File.Move(MainFolder + "Translations\\tmp\\RemodelSlots.xml", MainFolder + "Translations\\RemodelSlots.xml");
 							ReturnValue = 1;
-							UpdateState(ReturnValue, TranslationType.Remodel);
+							UpdateState(ReturnValue, TranslationType.RemodelSlots);
 						}
 						catch
 						{
@@ -282,7 +282,7 @@ namespace Grabacr07.KanColleWrapper
 					return Versions.Where(x => x.Element("Name").Value.Equals("Ships")).FirstOrDefault().Element(ElementName).Value;
 				case TranslationType.ShipTypes:
 					return Versions.Where(x => x.Element("Name").Value.Equals("ShipTypes")).FirstOrDefault().Element(ElementName).Value;
-				case TranslationType.Remodel:
+				case TranslationType.RemodelSlots:
 					return Versions.Where(x => x.Element("Name").Value.Equals("RemodelSlots")).FirstOrDefault().Element(ElementName).Value;
 			}
 			return "";
@@ -328,7 +328,7 @@ namespace Grabacr07.KanColleWrapper
 					return LocalVersion.CompareTo(new Version(Versions.Where(x => x.Element("Name").Value.Equals("Ships")).FirstOrDefault().Element(ElementName).Value)) < 0;
 				case TranslationType.ShipTypes:
 					return LocalVersion.CompareTo(new Version(Versions.Where(x => x.Element("Name").Value.Equals("ShipTypes")).FirstOrDefault().Element(ElementName).Value)) < 0;
-				case TranslationType.Remodel:
+				case TranslationType.RemodelSlots:
 					return LocalVersion.CompareTo(new Version(Versions.Where(x => x.Element("Name").Value.Equals("RemodelSlots")).FirstOrDefault().Element(ElementName).Value)) < 0;
 			}
 

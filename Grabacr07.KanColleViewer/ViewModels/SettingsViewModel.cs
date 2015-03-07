@@ -539,7 +539,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		}
 
 		#endregion
-
+		
 		#region ExpeditionsOnlineVersion 変更通知プロパティ
 
 		private string _ExpeditionsOnlineVersion;
@@ -555,6 +555,26 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					_ExpeditionsOnlineVersion = value;
 					this.RaisePropertyChanged();
 					this.RaisePropertyChanged("ExpeditionsOnlineVersionURL");
+				}
+			}
+		}
+
+		#endregion
+		#region RemodelSlotsOnlineVersion 変更通知プロパティ
+
+		private string _RemodelSlotsOnlineVersion;
+		public string RemodelSlotsOnlineVersionURL { get; set; }
+
+		public string RemodelSlotsOnlineVersion
+		{
+			get { return _RemodelSlotsOnlineVersion; }
+			set
+			{
+				if (_RemodelSlotsOnlineVersion != value)
+				{
+					_RemodelSlotsOnlineVersion = value;
+					this.RaisePropertyChanged();
+					this.RaisePropertyChanged("RemodelSlotsOnlineVersionURL");
 				}
 			}
 		}
@@ -832,6 +852,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				ShipsOnlineVersionURL = KanColleClient.Current.Updater.GetOnlineVersion(TranslationType.Ships, true);
 				ShipTypesOnlineVersionURL = KanColleClient.Current.Updater.GetOnlineVersion(TranslationType.ShipTypes, true);
 				ExpeditionsOnlineVersionURL = KanColleClient.Current.Updater.GetOnlineVersion(TranslationType.Expeditions, true);
+				RemodelSlotsOnlineVersionURL = KanColleClient.Current.Updater.GetOnlineVersion(TranslationType.RemodelSlots, true);
 
 				AppOnlineVersion = KanColleClient.Current.Updater.GetOnlineVersion(TranslationType.App);
 				EquipmentOnlineVersion = KanColleClient.Current.Updater.GetOnlineVersion(TranslationType.Equipment);
@@ -840,6 +861,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				ShipsOnlineVersion = KanColleClient.Current.Updater.GetOnlineVersion(TranslationType.Ships);
 				ShipTypesOnlineVersion = KanColleClient.Current.Updater.GetOnlineVersion(TranslationType.ShipTypes);
 				ExpeditionsOnlineVersion = KanColleClient.Current.Updater.GetOnlineVersion(TranslationType.Expeditions);
+				RemodelSlotsOnlineVersion = KanColleClient.Current.Updater.GetOnlineVersion(TranslationType.RemodelSlots);
 			}
 			else
 			{
