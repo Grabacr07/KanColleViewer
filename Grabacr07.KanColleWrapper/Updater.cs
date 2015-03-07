@@ -16,6 +16,7 @@ namespace Grabacr07.KanColleWrapper
 		public bool ShipsUpdate { get; set; }
 		public bool ShipTypesUpdate { get; set; }
 		public bool ExpeditionUpdate { get; set; }
+		public bool RemodelUpdate { get; set; }
 		string MainFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\";
 		/// <summary>
 		/// 업데이트 상태를 구별한다.
@@ -48,6 +49,9 @@ namespace Grabacr07.KanColleWrapper
 						break;
 					case TranslationType.Expeditions:
 						this.ExpeditionUpdate = true;
+						break;
+					case TranslationType.Remodel:
+						this.RemodelUpdate = true;
 						break;
 				}
 			}
@@ -210,6 +214,24 @@ namespace Grabacr07.KanColleWrapper
 							ReturnValue = -1;
 						}
 					}
+					if (IsOnlineVersionGreater(TranslationType.ShipTypes, TranslationsRef.RemodelVersion))
+					{
+						Client.DownloadFile(BaseTranslationURL + "RemodelSlots.xml", MainFolder + "Translations\\tmp\\RemodelSlots.xml");
+
+						try
+						{
+							TestXML = XDocument.Load(MainFolder + "Translations\\tmp\\RemodelSlots.xml");
+							if (File.Exists(MainFolder + "Translations\\RemodelSlots.xml"))
+								File.Delete(MainFolder + "Translations\\RemodelSlots.xml");
+							File.Move(MainFolder + "Translations\\tmp\\RemodelSlots.xml", MainFolder + "Translations\\RemodelSlots.xml");
+							ReturnValue = 1;
+							UpdateState(ReturnValue, TranslationType.Remodel);
+						}
+						catch
+						{
+							ReturnValue = -1;
+						}
+					}
 
 				}
 				catch
@@ -260,7 +282,8 @@ namespace Grabacr07.KanColleWrapper
 					return Versions.Where(x => x.Element("Name").Value.Equals("Ships")).FirstOrDefault().Element(ElementName).Value;
 				case TranslationType.ShipTypes:
 					return Versions.Where(x => x.Element("Name").Value.Equals("ShipTypes")).FirstOrDefault().Element(ElementName).Value;
-
+				case TranslationType.Remodel:
+					return Versions.Where(x => x.Element("Name").Value.Equals("RemodelSlots")).FirstOrDefault().Element(ElementName).Value;
 			}
 			return "";
 		}
@@ -305,7 +328,8 @@ namespace Grabacr07.KanColleWrapper
 					return LocalVersion.CompareTo(new Version(Versions.Where(x => x.Element("Name").Value.Equals("Ships")).FirstOrDefault().Element(ElementName).Value)) < 0;
 				case TranslationType.ShipTypes:
 					return LocalVersion.CompareTo(new Version(Versions.Where(x => x.Element("Name").Value.Equals("ShipTypes")).FirstOrDefault().Element(ElementName).Value)) < 0;
-
+				case TranslationType.Remodel:
+					return LocalVersion.CompareTo(new Version(Versions.Where(x => x.Element("Name").Value.Equals("RemodelSlots")).FirstOrDefault().Element(ElementName).Value)) < 0;
 			}
 
 			return false;

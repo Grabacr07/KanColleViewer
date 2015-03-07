@@ -217,6 +217,7 @@
     <Compile Include="ViewModels\PreviewPopUpButtonViewModel.cs" />
     <Compile Include="ViewModels\RefreshButtonViewModel.cs" />
     <Compile Include="ViewModels\RefreshPopupViewModel.cs" />
+    <Compile Include="ViewModels\RemodelListWindowViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\Contents\ShipsViewModel.cs" />
     <Compile Include="ViewModels\Contents\SlotItemsViewModel.cs" />
@@ -312,6 +313,9 @@
     </Compile>
     <Compile Include="Views\RefreshPopup.xaml.cs">
       <DependentUpon>RefreshPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RemodelListWindow.xaml.cs">
+      <DependentUpon>RemodelListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings\Language.xaml.cs">
       <DependentUpon>Language.xaml</DependentUpon>
@@ -522,6 +526,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\RefreshPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RemodelListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

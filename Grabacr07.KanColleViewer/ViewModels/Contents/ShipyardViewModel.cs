@@ -97,5 +97,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			var message = new TransitionMessage(catalog, "Show/NeedNdockShipCatalogWindow");
 			this.Messenger.RaiseAsync(message);
 		}
+		public void ShowRemodelWindow()
+		{
+			var catalog = new RemodelListWindowViewModel();
+			var message = new TransitionMessage(catalog, "Show/RemodelListWindow");
+			this.Messenger.RaiseAsync(message);
+		}
 	}
 }

@@ -63,6 +63,8 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// Expedition detail translations only
 		/// </summary>
-		ExpeditionDetail = 12
+		ExpeditionDetail = 12,
+
+		Remodel=13,
 	}
 }
