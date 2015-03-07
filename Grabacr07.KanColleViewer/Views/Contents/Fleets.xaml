@@ -314,7 +314,7 @@
 											Value="Visible" />
 								</DataTrigger>
 								<DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow|Evacuation}"
-											 Value="Evacuation,Tow">
+											 Value="True">
 									<Setter TargetName="HPText"
 											Property="Opacity"
 											Value=".2" />
