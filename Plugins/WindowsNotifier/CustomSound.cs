@@ -18,34 +18,41 @@ namespace Grabacr07.KanColleViewer.Plugins
 
 		public void SoundOutput(string header, bool IsWin8)
 		{
-			/**
+			try
+			{
+				/**
 			 * 
 			 * 출력할 소리가 wav인지 mp3인지 비프음인지 채크합니다.
 			 * windows8 이상의 경우에는 비프음보다 윈도우8 기본 알림음이 더 알맞다고 생각하기에 IsWin8이 True면 아무 소리도 내보내지 않습니다.
 			 * 
 			**/
-			DisposeWave();//알림이 동시에 여러개가 울릴 경우 소리가 겹치는 문제를 방지
-			string Audiofile = FileCheck(header);
-			if (string.IsNullOrEmpty(Audiofile) && !IsWin8)
-			{
-				System.Media.SystemSounds.Beep.Play();
+				DisposeWave();//알림이 동시에 여러개가 울릴 경우 소리가 겹치는 문제를 방지
+				string Audiofile = FileCheck(header);
+				if (string.IsNullOrEmpty(Audiofile) && !IsWin8)
+				{
+					System.Media.SystemSounds.Beep.Play();
+				}
+				else if (!string.IsNullOrEmpty(Audiofile))
+				{
+					float Volume = Settings.Current.CustomSoundVolume > 0 ? (float)Settings.Current.CustomSoundVolume / 100 : 0;
+					if (Path.GetExtension(Audiofile).ToLower() == ".wav")//wav인지 채크
+					{
+						WaveStream pcm = new WaveChannel32(new WaveFileReader(Audiofile), Volume, 0);
+						BlockStream = new BlockAlignReductionStream(pcm);
+					}
+					else if (Path.GetExtension(Audiofile).ToLower() == ".mp3")//mp3인 경우
+					{
+						WaveStream pcm = new WaveChannel32(new Mp3FileReader(Audiofile), Volume, 0);
+						BlockStream = new BlockAlignReductionStream(pcm);
+					}
+					SoundOut = new DirectSoundOut();
+					SoundOut.Init(BlockStream);
+					SoundOut.Play();
+				}
 			}
-			else if(!string.IsNullOrEmpty(Audiofile))
+			catch(Exception ex)
 			{
-				float Volume = Settings.Current.CustomSoundVolume > 0 ? (float)Settings.Current.CustomSoundVolume / 100 : 0;
-				if (Path.GetExtension(Audiofile).ToLower() == ".wav")//wav인지 채크
-				{
-					WaveStream pcm = new WaveChannel32(new WaveFileReader(Audiofile), Volume, 0);
-					BlockStream = new BlockAlignReductionStream(pcm);
-				}
-				else if (Path.GetExtension(Audiofile).ToLower() == ".mp3")//mp3인 경우
-				{
-					WaveStream pcm = new WaveChannel32(new Mp3FileReader(Audiofile), Volume, 0);
-					BlockStream = new BlockAlignReductionStream(pcm);
-				}
-				SoundOut = new DirectSoundOut();
-				SoundOut.Init(BlockStream);
-				SoundOut.Play();
+				System.Diagnostics.Debug.WriteLine(ex);
 			}
 		}
 		public string FileCheck(string header)

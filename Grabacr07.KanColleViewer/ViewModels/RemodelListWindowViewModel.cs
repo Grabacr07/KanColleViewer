@@ -22,12 +22,14 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		private XDocument RemodelXML;
 		string MainFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+		List<RemodelItemList> tempimp = new List<RemodelItemList>();
+		List<RemodelItemList> tempUse = new List<RemodelItemList>();
 
 		#region FirstList 変更通知プロパティ
 
-		private List<RemodelShipList> _FirstList;
+		private List<RemodelItemList> _FirstList;
 
-		public List<RemodelShipList> FirstList
+		public List<RemodelItemList> FirstList
 		{
 			get { return _FirstList; }
 			set
@@ -44,9 +46,9 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#region SecondList 変更通知プロパティ
 
-		private List<RemodelShipList> _SecondList;
+		private List<RemodelItemList> _SecondList;
 
-		public List<RemodelShipList> SecondList
+		public List<RemodelItemList> SecondList
 		{
 			get { return _SecondList; }
 			set
@@ -63,9 +65,9 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#region ThirdList 変更通知プロパティ
 
-		private List<RemodelShipList> _ThirdList;
+		private List<RemodelItemList> _ThirdList;
 
-		public List<RemodelShipList> ThirdList
+		public List<RemodelItemList> ThirdList
 		{
 			get { return _ThirdList; }
 			set
@@ -73,6 +75,44 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				if (_ThirdList != value)
 				{
 					_ThirdList = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region Improvement 変更通知プロパティ
+
+		private List<RemodelItemList> _Improvement;
+
+		public List<RemodelItemList> Improvement
+		{
+			get { return _Improvement; }
+			set
+			{
+				if (_Improvement != value)
+				{
+					_Improvement = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region UseItemList 変更通知プロパティ
+
+		private List<RemodelItemList> _UseItemList;
+
+		public List<RemodelItemList> UseItemList
+		{
+			get { return _UseItemList; }
+			set
+			{
+				if (_UseItemList != value)
+				{
+					_UseItemList = value;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -171,49 +211,90 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				IEnumerable<XElement> Second = RemodelList.Where(f => f.Element(Position).Value.Equals("2")).ToList();
 				IEnumerable<XElement> Third = RemodelList.Where(f => f.Element(Position).Value.Equals("3")).ToList();
 
-				this.FirstList = new List<RemodelShipList>(MakeUpList(First, today));
-				this.SecondList = new List<RemodelShipList>(MakeUpList(Second, today));
-				this.ThirdList = new List<RemodelShipList>(MakeUpList(Third, today));
+				this.tempimp = new List<RemodelItemList>();
+				this.tempUse = new List<RemodelItemList>();
+				this.FirstList = new List<RemodelItemList>(MakeUpList(First, today));
+				this.SecondList = new List<RemodelItemList>(MakeUpList(Second, today));
+				this.ThirdList = new List<RemodelItemList>(MakeUpList(Third, today));
+				this.Improvement = new List<RemodelItemList>(tempimp);
+				this.UseItemList = new List<RemodelItemList>(tempUse);
 			}
 		}
-		private List<RemodelShipList> MakeUpList(IEnumerable<XElement> remodellist, WeekDayFlag today)
+		private List<RemodelItemList> MakeUpList(IEnumerable<XElement> remodellist, WeekDayFlag today)
 		{
-			List<RemodelShipList> templist = new List<RemodelShipList>();
-
+			List<RemodelItemList> templist = new List<RemodelItemList>();
 			foreach (var item in remodellist)
 			{
-				var temp = new RemodelShipList();
-				if (item.Element("SlotItemName") != null)
+				var temp = new RemodelItemList();
+				if (WeekDaySetter(Convert.ToInt32(item.Element("AllWeekdays").Value)).HasFlag(today))
 				{
-					temp.ItemName = KanColleClient.Current.Translations.GetTranslation(item.Element("SlotItemName").Value, TranslationType.Equipment);
-					foreach (var slotitem in KanColleClient.Current.Master.SlotItems)
+					if (item.Element("SlotItemName") != null)
 					{
-						if (slotitem.Value.Name == temp.ItemName)
-							temp.IconType = slotitem.Value.IconType;
+						temp.ItemName = KanColleClient.Current.Translations.GetTranslation(item.Element("SlotItemName").Value, TranslationType.Equipment);
+						foreach (var slotitem in KanColleClient.Current.Master.SlotItems)
+						{
+							if (slotitem.Value.Name == temp.ItemName)
+								temp.IconType = slotitem.Value.IconType;
+						}
 					}
-				}
-				if (item.Element("ShipName1") != null)
-				{
-					if (WeekDaySetter(Convert.ToInt32(item.Element("WeekDays1").Value)).HasFlag(today))
+					if (item.Element("ShipName1") != null)
 					{
-						temp.ShipName1 = KanColleClient.Current.Translations.GetTranslation(item.Element("ShipName1").Value, TranslationType.Ships);
+						if (WeekDaySetter(Convert.ToInt32(item.Element("WeekDays1").Value)).HasFlag(today))
+						{
+							temp.ShipName1 = KanColleClient.Current.Translations.GetTranslation(item.Element("ShipName1").Value, TranslationType.Ships);
+						}
 					}
-				}
-				if (item.Element("ShipName2") != null)
-				{
-					if (WeekDaySetter(Convert.ToInt32(item.Element("WeekDays2").Value)).HasFlag(today))
+					if (item.Element("ShipName2") != null)
 					{
-						temp.ShipName2 = KanColleClient.Current.Translations.GetTranslation(item.Element("ShipName2").Value, TranslationType.Ships);
+						if (WeekDaySetter(Convert.ToInt32(item.Element("WeekDays2").Value)).HasFlag(today))
+						{
+							temp.ShipName2 = KanColleClient.Current.Translations.GetTranslation(item.Element("ShipName2").Value, TranslationType.Ships);
+						}
 					}
-				}
-				if (item.Element("AllWeekdays") != null) temp.TotalWeekday = WeekDaySetter(Convert.ToInt32(item.Element("AllWeekdays").Value));
-				if (item.Element("ToolTip") != null)
-					temp.ToolTipString = item.Element("ToolTip").Value;
-				else temp.ToolTipString = "특이사항 없음";
-                if (temp.TotalWeekday.HasFlag(today))
-					templist.Add(temp);
-			}
+					if (item.Element("AllWeekdays") != null) temp.TotalWeekday = WeekDaySetter(Convert.ToInt32(item.Element("AllWeekdays").Value));
+					if (item.Element("ToolTip") != null)
+					{
+						temp.ToolTipString = item.Element("ToolTip").Value;
+					}
+					else
+					{
+						temp.ToolTipString = "특이사항 없음";
+					}
+					if (item.Element("Upgrade") != null)
+					{
+						temp.Upgrade = KanColleClient.Current.Translations.GetTranslation(item.Element("Upgrade").Value, TranslationType.Equipment);
+						foreach (var slotitem in KanColleClient.Current.Master.SlotItems)
+						{
+							if (slotitem.Value.Name == temp.Upgrade)
+								temp.UpgradeIconType = slotitem.Value.IconType;
+						}
+					}
+					StringBuilder equipCombine = new StringBuilder();
+					if (item.Element("StartEquip") != null)
+					{
+						equipCombine.Append(item.Element("StartEquip").Value);
+					}
+					if (item.Element("MidEquip") != null)
+					{
+						equipCombine.Append("/");
+						equipCombine.Append(item.Element("MidEquip").Value);
+					}
+					if (item.Element("LastEquip") != null)
+					{
+						equipCombine.Append("/");
+						equipCombine.Append(item.Element("LastEquip").Value);
+					}
+					if (equipCombine != null)
+						temp.UseEquip = equipCombine.ToString();
 
+					if (temp.TotalWeekday.HasFlag(today))
+					{
+						templist.Add(temp);
+						if (temp.Upgrade != null) tempimp.Add(temp);
+						if (temp.UseEquip != null) tempUse.Add(temp);
+					}
+				}
+			}
 			return templist;
 		}
 		private WeekDayFlag WeekDaySetter(int weekint)
@@ -281,14 +362,17 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		}
 	}
 	#region 목록
-	public class RemodelShipList
+	public struct RemodelItemList
 	{
 		public string ItemName { get; set; }
 		public string ShipName1 { get; set; }
 		public string ShipName2 { get; set; }
 		public WeekDayFlag TotalWeekday { get; set; }
 		public SlotItemIconType? IconType { get; set; }
+		public SlotItemIconType? UpgradeIconType { get; set; }
 		public string ToolTipString { get; set; }
+		public string Upgrade { get; set; }
+		public string UseEquip { get; set; }
 	}
 
 	[Flags]
