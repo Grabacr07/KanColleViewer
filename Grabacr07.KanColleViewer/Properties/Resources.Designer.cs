@@ -1062,6 +1062,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         /// <summary>
         ///   Looks up a localized string similar to 入渠ドック.
         /// </summary>
+        public static string Repairing_Docks {
+            get {
+                return ResourceManager.GetString("Repairing_Docks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 入渠ドック.
+        /// </summary>
         public static string Repairyard {
             get {
                 return ResourceManager.GetString("Repairyard", resourceCulture);
@@ -1474,11 +1483,29 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 入渠中.
+        /// </summary>
+        public static string Ship_Repairing {
+            get {
+                return ResourceManager.GetString("Ship_Repairing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 艦種.
         /// </summary>
         public static string Ship_Type {
             get {
                 return ResourceManager.GetString("Ship_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 建造ドック.
+        /// </summary>
+        public static string Shipyard_Docks {
+            get {
+                return ResourceManager.GetString("Shipyard_Docks", resourceCulture);
             }
         }
         

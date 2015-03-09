@@ -606,4 +606,13 @@
   <data name="Data" xml:space="preserve">
     <value>Data</value>
   </data>
+  <data name="Repairing_Docks" xml:space="preserve">
+    <value>Repairing</value>
+  </data>
+  <data name="Shipyard_Docks" xml:space="preserve">
+    <value>Building</value>
+  </data>
+  <data name="Ship_Repairing" xml:space="preserve">
+    <value>Repairing</value>
+  </data>
 </root>

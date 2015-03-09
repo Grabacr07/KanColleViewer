@@ -226,7 +226,12 @@
 												  Margin="8,2,8,0">
 												<Border Background="{DynamicResource FleetRepairingBrushKey}"
 														Opacity=".4" />
-												<TextBlock Text="入渠中"
+                                                <!--
+                                                <TextBlock Text="{Binding Resources.Status_Repairing, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+														   Style="{DynamicResource EmphaticTextStyleKey}"
+														   HorizontalAlignment="Center" />
+                                                -->
+                                                <TextBlock Text="{Binding Resources.Ship_Repairing, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 														   Style="{DynamicResource EmphaticTextStyleKey}"
 														   HorizontalAlignment="Center" />
 											</Grid>
@@ -401,7 +406,7 @@
 										 MethodName="Jump"
 										 MethodParameter="Repairyard">
 					<StackPanel DataContext="{Binding Content.Shipyard}">
-						<TextBlock Text="入渠ドック" />
+                        <TextBlock Text="{Binding Resources.Repairing_Docks, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 
 						<Rectangle Height="1"
 								   Margin="0,7,0,3"
@@ -445,7 +450,7 @@
 										 MethodName="Jump"
 										 MethodParameter="Dockyard">
 					<StackPanel DataContext="{Binding Content.Shipyard}">
-						<TextBlock Text="建造ドック" />
+                        <TextBlock Text="{Binding Resources.Shipyard_Docks, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 
 						<Rectangle Height="1"
 								   Margin="0,7,0,3"

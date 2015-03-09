@@ -600,4 +600,13 @@
   <data name="Data" xml:space="preserve">
     <value>数据</value>
   </data>
+  <data name="Repairing_Docks" xml:space="preserve">
+    <value>入渠槽</value>
+  </data>
+  <data name="Shipyard_Docks" xml:space="preserve">
+    <value>建造槽</value>
+  </data>
+  <data name="Ship_Repairing" xml:space="preserve">
+    <value>入渠中</value>
+  </data>
 </root>
