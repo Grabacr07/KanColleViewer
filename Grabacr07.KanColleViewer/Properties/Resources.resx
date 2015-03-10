@@ -480,4 +480,154 @@
   <data name="Fleets_ViewRange" xml:space="preserve">
     <value>索敵能力</value>
   </data>
+  <data name="AllShips_AA" xml:space="preserve">
+    <value>対空</value>
+  </data>
+  <data name="AllShips_Armer" xml:space="preserve">
+    <value>装甲</value>
+  </data>
+  <data name="AllShips_Condition" xml:space="preserve">
+    <value>cond.</value>
+  </data>
+  <data name="AllShips_EquippedSlots" xml:space="preserve">
+    <value>装備</value>
+  </data>
+  <data name="AllShips_Firepower" xml:space="preserve">
+    <value>火力</value>
+  </data>
+  <data name="AllShips_Generating" xml:space="preserve">
+    <value>一覧を生成しています...</value>
+  </data>
+  <data name="AllShips_ID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="AllShips_Level" xml:space="preserve">
+    <value>レベル</value>
+  </data>
+  <data name="AllShips_Luck" xml:space="preserve">
+    <value>運</value>
+  </data>
+  <data name="AllShips_ShipName" xml:space="preserve">
+    <value>艦名</value>
+  </data>
+  <data name="AllShips_ShipType" xml:space="preserve">
+    <value>艦種</value>
+  </data>
+  <data name="AllShips_Torpedo" xml:space="preserve">
+    <value>雷装</value>
+  </data>
+  <data name="AllShips_ViewRange" xml:space="preserve">
+    <value>索敵</value>
+  </data>
+  <data name="AllShips_ViewRange_Tips" xml:space="preserve">
+    <value>索敵のみ装備によるステータス上昇を含んだ値です</value>
+  </data>
+  <data name="Filter_All" xml:space="preserve">
+    <value>すべて</value>
+  </data>
+  <data name="Filter_BB" xml:space="preserve">
+    <value>戦艦</value>
+  </data>
+  <data name="Filter_BBVCAV" xml:space="preserve">
+    <value>航戦・航巡</value>
+  </data>
+  <data name="Filter_CACAV" xml:space="preserve">
+    <value>重巡・航巡</value>
+  </data>
+  <data name="Filter_Choose_All" xml:space="preserve">
+    <value>すべて選択</value>
+  </data>
+  <data name="Filter_CLCLT" xml:space="preserve">
+    <value>軽巡・雷巡</value>
+  </data>
+  <data name="Filter_CV" xml:space="preserve">
+    <value>航空母艦</value>
+  </data>
+  <data name="Filter_DD" xml:space="preserve">
+    <value>駆逐艦</value>
+  </data>
+  <data name="Filter_Exclude_Expedition" xml:space="preserve">
+    <value>遠征中の艦を除外する</value>
+  </data>
+  <data name="Filter_Expedition" xml:space="preserve">
+    <value>遠征</value>
+  </data>
+  <data name="Filter_Level" xml:space="preserve">
+    <value>レベル</value>
+  </data>
+  <data name="Filter_Level_1" xml:space="preserve">
+    <value>Lv.1</value>
+  </data>
+  <data name="Filter_Level_2" xml:space="preserve">
+    <value>Lv.2 以上</value>
+  </data>
+  <data name="Filter_Lock" xml:space="preserve">
+    <value>ロック</value>
+  </data>
+  <data name="Filter_Lock_No" xml:space="preserve">
+    <value>ロックしていない</value>
+  </data>
+  <data name="Filter_Lock_Yes" xml:space="preserve">
+    <value>ロックしている</value>
+  </data>
+  <data name="Filter_Modernized" xml:space="preserve">
+    <value>近代化改修</value>
+  </data>
+  <data name="Filter_Modernized_Complete" xml:space="preserve">
+    <value>改修完了</value>
+  </data>
+  <data name="Filter_Modernized_Not_Complete" xml:space="preserve">
+    <value>改修未完</value>
+  </data>
+  <data name="Filter_Remodeling" xml:space="preserve">
+    <value>改造</value>
+  </data>
+  <data name="Filter_Remodeling_Complete" xml:space="preserve">
+    <value>改造完了</value>
+  </data>
+  <data name="Filter_Remodeling_Not_Complete" xml:space="preserve">
+    <value>改造未完</value>
+  </data>
+  <data name="Filter_Speed" xml:space="preserve">
+    <value>速力</value>
+  </data>
+  <data name="Filter_Speed_Fast" xml:space="preserve">
+    <value>高速</value>
+  </data>
+  <data name="Filter_Speed_Slow" xml:space="preserve">
+    <value>低速</value>
+  </data>
+  <data name="Filter_SS" xml:space="preserve">
+    <value>潜水艦</value>
+  </data>
+  <data name="Settings_Filter" xml:space="preserve">
+    <value>フィルター設定</value>
+  </data>
+  <data name="Settings_Notification" xml:space="preserve">
+    <value>通知設定</value>
+  </data>
+  <data name="Ship_Type" xml:space="preserve">
+    <value>艦種</value>
+  </data>
+  <data name="AllItems" xml:space="preserve">
+    <value>装備一覧</value>
+  </data>
+  <data name="AllShips" xml:space="preserve">
+    <value>艦娘一覧</value>
+  </data>
+  <data name="AllShips_Title" xml:space="preserve">
+    <value>所属艦娘一覧</value>
+  </data>
+  <data name="Data" xml:space="preserve">
+    <value>データ</value>
+  </data>
+  <data name="Repairing_Docks" xml:space="preserve">
+    <value>入渠ドック</value>
+  </data>
+  <data name="Shipyard_Docks" xml:space="preserve">
+    <value>建造ドック</value>
+  </data>
+  <data name="Ship_Repairing" xml:space="preserve">
+    <value>入渠中</value>
+  </data>
 </root>
