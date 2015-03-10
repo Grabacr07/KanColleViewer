@@ -62,12 +62,20 @@ namespace Grabacr07.KanColleViewer.Models
 		public bool IsBetaRelease
 		{
 #if BETA
-			get { return true;}
+			get { return true; }
 #else
 			get { return false; }
 #endif
 		}
 
+		public bool IsDebug
+		{
+#if DEBUG
+			get { return true; }
+#else
+			get { return false; }
+#endif
+		}
 
 		public IReadOnlyCollection<Library> Libraries
 		{
