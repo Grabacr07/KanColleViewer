@@ -17,11 +17,9 @@ namespace Grabacr07.KanColleWrapper
 		public bool ShipTypesUpdate { get; set; }
 		public bool ExpeditionUpdate { get; set; }
 		public bool RemodelUpdate { get; set; }
-		string MainFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
 		/// <summary>
 		/// 업데이트 상태를 구별한다.
 		/// bool값을 조정하며 이는 업데이트 후 바로 퀘스트 로드가 적용되지 않는 문제점을 자체 해결하기 위해 도입한것임.
-		/// 
 		/// </summary>
 		/// <param name="ReturnVal">-1,0,1을 받는다. 사실상 별 의미 없는거같기도</param>
 		/// <param name="type">업데이트 된 항목이 정확히 무엇인지 구별한다</param>
@@ -82,6 +80,28 @@ namespace Grabacr07.KanColleWrapper
 			return true;
 		}
 
+		private int TranslationFileWizard(string MainFolder, string Xmlname, TranslationType type)
+		{
+			int ReturnValue;
+			try
+			{
+				if (File.Exists(Path.Combine(MainFolder, "Translations", Xmlname)))
+				{
+					if (File.Exists(Path.Combine(MainFolder, "Translations", "Old", Xmlname + ".old")))
+						File.Delete(Path.Combine(MainFolder, "Translations", "Old", Xmlname + ".old"));
+					File.Move(Path.Combine(MainFolder, "Translations", Xmlname), Path.Combine(MainFolder, "Translations", "Old", Xmlname + ".old"));
+				}
+				File.Move(Path.Combine(MainFolder, "Translations", "tmp", Xmlname), Path.Combine(MainFolder, "Translations", Xmlname));
+				ReturnValue = 1;
+				UpdateState(ReturnValue, type);
+			}
+			catch
+			{
+				ReturnValue = -1;
+			}
+			return ReturnValue;
+		}
+
 		/// <summary>
 		/// Updates any translation files that differ from that found online.
 		/// </summary>
@@ -93,8 +113,8 @@ namespace Grabacr07.KanColleWrapper
 		{
 			using (WebClient Client = new WebClient())
 			{
-				XDocument TestXML;
 				int ReturnValue = 0;
+				string MainFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
 
 				try
 				{
@@ -107,166 +127,41 @@ namespace Grabacr07.KanColleWrapper
 					if (IsOnlineVersionGreater(TranslationType.Equipment, TranslationsRef.EquipmentVersion))
 					{
 						Client.DownloadFile(BaseTranslationURL + "Equipment.xml", Path.Combine(MainFolder, "Translations", "tmp", "Equipment.xml"));
-
-						try
-						{
-							TestXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "tmp", "Equipment.xml"));
-							if (File.Exists(Path.Combine(MainFolder, "Translations", "Equipment.xml")))
-							{
-								if (File.Exists(Path.Combine(MainFolder, "Translations", "Old", "Equipment.xml.old")))
-									File.Delete(Path.Combine(MainFolder, "Translations", "Old", "Equipment.xml.old"));
-								File.Move(Path.Combine(MainFolder, "Translations", "Equipment.xml"), Path.Combine(MainFolder, "Translations", "Old", "Equipment.xml.old"));
-							}
-							File.Move(Path.Combine(MainFolder, "Translations", "tmp", "Equipment.xml"), Path.Combine(MainFolder, "Translations", "Equipment.xml"));
-							ReturnValue = 1;
-							UpdateState(ReturnValue, TranslationType.Equipment);
-						}
-						catch
-						{
-							ReturnValue = -1;
-						}
+						ReturnValue = TranslationFileWizard(MainFolder, "Equipment.xml", TranslationType.Equipment);
 					}
 
 					if (IsOnlineVersionGreater(TranslationType.Operations, TranslationsRef.OperationsVersion))
 					{
 						Client.DownloadFile(BaseTranslationURL + "Operations.xml", Path.Combine(MainFolder, "Translations", "tmp", "Operations.xml"));
-
-						try
-						{
-							TestXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "tmp", "Operations.xml"));
-							if (File.Exists(Path.Combine(MainFolder, "Translations", "Operations.xml")))
-							{
-								if (File.Exists(Path.Combine(MainFolder, "Translations", "Old", "Operations.xml.old")))
-									File.Delete(Path.Combine(MainFolder, "Translations", "Old", "Operations.xml.old"));
-								File.Move(Path.Combine(MainFolder, "Translations", "Operations.xml"), Path.Combine(MainFolder, "Translations", "Old", "Operations.xml.old"));
-
-							}
-							File.Move(Path.Combine(MainFolder, "Translations", "tmp", "Operations.xml"), Path.Combine(MainFolder, "Translations", "Operations.xml"));
-							ReturnValue = 1;
-							UpdateState(ReturnValue, TranslationType.Operations);
-						}
-						catch
-						{
-							ReturnValue = -1;
-						}
+						ReturnValue = TranslationFileWizard(MainFolder, "Operations.xml", TranslationType.Operations);
 					}
 
 					if (IsOnlineVersionGreater(TranslationType.Quests, TranslationsRef.QuestsVersion))
 					{
-						Client.DownloadFile(BaseTranslationURL + "Operations.xml", Path.Combine(MainFolder, "Translations", "tmp", "Quests.xml"));
-
-						try
-						{
-							TestXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "tmp", "Quests.xml"));
-							if (File.Exists(Path.Combine(MainFolder, "Translations", "Quests.xml")))
-							{
-								if (File.Exists(Path.Combine(MainFolder, "Translations", "Old", "Quests.xml.old")))
-									File.Delete(Path.Combine(MainFolder, "Translations", "Old", "Quests.xml.old"));
-								File.Move(Path.Combine(MainFolder, "Translations", "Quests.xml"), Path.Combine(MainFolder, "Translations", "Old", "Quests.xml.old"));
-
-							}
-							File.Move(Path.Combine(MainFolder, "Translations", "tmp", "Quests.xml"), Path.Combine(MainFolder, "Translations", "Quests.xml"));
-							ReturnValue = 1;
-							UpdateState(ReturnValue, TranslationType.Quests);
-						}
-						catch
-						{
-							ReturnValue = -1;
-						}
+						Client.DownloadFile(BaseTranslationURL + "Quests.xml", Path.Combine(MainFolder, "Translations", "tmp", "Quests.xml"));
+						ReturnValue = TranslationFileWizard(MainFolder, "Quests.xml", TranslationType.Quests);
 					}
 					if (IsOnlineVersionGreater(TranslationType.Expeditions, TranslationsRef.ExpeditionsVersion))
 					{
 						Client.DownloadFile(BaseTranslationURL + "Expeditions.xml", Path.Combine(MainFolder, "Translations", "tmp", "Expeditions.xml"));
-
-						try
-						{
-							TestXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "tmp", "Expeditions.xml"));
-							if (File.Exists(Path.Combine(MainFolder, "Translations", "Expeditions.xml")))
-							{
-								if (File.Exists(Path.Combine(MainFolder, "Translations", "Old", "Expeditions.xml.old")))
-									File.Delete(Path.Combine(MainFolder, "Translations", "Old", "Expeditions.xml.old"));
-								File.Move(Path.Combine(MainFolder, "Translations", "Expeditions.xml"), Path.Combine(MainFolder, "Translations", "Old", "Expeditions.xml.old"));
-
-							}
-							File.Move(Path.Combine(MainFolder, "Translations", "tmp", "Expeditions.xml"), Path.Combine(MainFolder, "Translations", "Expeditions.xml"));
-							ReturnValue = 1;
-							UpdateState(ReturnValue, TranslationType.Expeditions);
-						}
-						catch
-						{
-							ReturnValue = -1;
-						}
+						ReturnValue = TranslationFileWizard(MainFolder, "Expeditions.xml", TranslationType.Expeditions);
 					}
 
 					if (IsOnlineVersionGreater(TranslationType.Ships, TranslationsRef.ShipsVersion))
 					{
 						Client.DownloadFile(BaseTranslationURL + "Ships.xml", Path.Combine(MainFolder, "Translations", "tmp", "Ships.xml"));
-
-						try
-						{
-							TestXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "tmp", "Ships.xml"));
-							if (File.Exists(Path.Combine(MainFolder, "Translations", "Ships.xml")))
-							{
-								if (File.Exists(Path.Combine(MainFolder, "Translations", "Old", "Ships.xml.old")))
-									File.Delete(Path.Combine(MainFolder, "Translations", "Old", "Ships.xml.old"));
-								File.Move(Path.Combine(MainFolder, "Translations", "Ships.xml"), Path.Combine(MainFolder, "Translations", "Old", "Ships.xml.old"));
-
-							}
-							File.Move(Path.Combine(MainFolder, "Translations", "tmp", "Ships.xml"), Path.Combine(MainFolder, "Translations", "Ships.xml"));
-							ReturnValue = 1;
-							UpdateState(ReturnValue, TranslationType.Ships);
-						}
-						catch
-						{
-							ReturnValue = -1;
-						}
+						ReturnValue = TranslationFileWizard(MainFolder, "Ships.xml", TranslationType.Ships);
 					}
 
 					if (IsOnlineVersionGreater(TranslationType.ShipTypes, TranslationsRef.ShipTypesVersion))
 					{
 						Client.DownloadFile(BaseTranslationURL + "ShipTypes.xml", Path.Combine(MainFolder, "Translations", "tmp", "ShipTypes.xml"));
-
-						try
-						{
-							TestXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "tmp", "ShipTypes.xml"));
-							if (File.Exists(Path.Combine(MainFolder, "Translations", "ShipTypes.xml")))
-							{
-								if (File.Exists(Path.Combine(MainFolder, "Translations", "Old", "ShipTypes.xml.old")))
-									File.Delete(Path.Combine(MainFolder, "Translations", "Old", "ShipTypes.xml.old"));
-								File.Move(Path.Combine(MainFolder, "Translations", "ShipTypes.xml"), Path.Combine(MainFolder, "Translations", "Old", "ShipTypes.xml.old"));
-
-							}
-							File.Move(Path.Combine(MainFolder, "Translations", "tmp", "ShipTypes.xml"), Path.Combine(MainFolder, "Translations", "ShipTypes.xml"));
-							ReturnValue = 1;
-							UpdateState(ReturnValue, TranslationType.ShipTypes);
-						}
-						catch
-						{
-							ReturnValue = -1;
-						}
+						ReturnValue = TranslationFileWizard(MainFolder, "ShipTypes.xml", TranslationType.ShipTypes);
 					}
 					if (IsOnlineVersionGreater(TranslationType.RemodelSlots, TranslationsRef.RemodelSlotsVersion))
 					{
 						Client.DownloadFile(BaseTranslationURL + "RemodelSlots.xml", Path.Combine(MainFolder, "Translations", "tmp", "RemodelSlots.xml"));
-
-						try
-						{
-							TestXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "tmp", "RemodelSlots.xml"));
-							if (File.Exists(Path.Combine(MainFolder, "Translations", "RemodelSlots.xml")))
-							{
-								if (File.Exists(Path.Combine(MainFolder, "Translations", "Old", "RemodelSlots.xml.old")))
-									File.Delete(Path.Combine(MainFolder, "Translations", "Old", "RemodelSlots.xml.old"));
-								File.Move(Path.Combine(MainFolder, "Translations", "RemodelSlots.xml"), Path.Combine(MainFolder, "Translations", "Old", "RemodelSlots.xml.old"));
-
-							}
-							File.Move(Path.Combine(MainFolder, "Translations", "tmp", "RemodelSlots.xml"), Path.Combine(MainFolder, "Translations", "RemodelSlots.xml"));
-							ReturnValue = 1;
-							UpdateState(ReturnValue, TranslationType.RemodelSlots);
-						}
-						catch
-						{
-							ReturnValue = -1;
-						}
+						ReturnValue = TranslationFileWizard(MainFolder, "RemodelSlots.xml", TranslationType.RemodelSlots);
 					}
 
 				}
