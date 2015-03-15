@@ -106,7 +106,7 @@ namespace Grabacr07.KanColleWrapper
 					// In every one of these we download it to a temp folder, check if the file works, then move it over.
 					if (IsOnlineVersionGreater(TranslationType.Equipment, TranslationsRef.EquipmentVersion))
 					{
-						Client.DownloadFile(BaseTranslationURL + "Equipment.xml", Path.Combine(MainFolder, "Translations", "tmp","Equipment.xml"));
+						Client.DownloadFile(BaseTranslationURL + "Equipment.xml", Path.Combine(MainFolder, "Translations", "tmp", "Equipment.xml"));
 
 						try
 						{
@@ -115,7 +115,7 @@ namespace Grabacr07.KanColleWrapper
 							{
 								if (File.Exists(Path.Combine(MainFolder, "Translations", "Old", "Equipment.xml.old")))
 									File.Delete(Path.Combine(MainFolder, "Translations", "Old", "Equipment.xml.old"));
-								File.Move(Path.Combine(MainFolder, "Translations", "tmp", "Equipment.xml"), Path.Combine(MainFolder, "Translations", "tmp", "Equipment.xml.old"));
+								File.Move(Path.Combine(MainFolder, "Translations", "Equipment.xml"), Path.Combine(MainFolder, "Translations", "Old", "Equipment.xml.old"));
 							}
 							File.Move(Path.Combine(MainFolder, "Translations", "tmp", "Equipment.xml"), Path.Combine(MainFolder, "Translations", "Equipment.xml"));
 							ReturnValue = 1;
@@ -138,7 +138,7 @@ namespace Grabacr07.KanColleWrapper
 							{
 								if (File.Exists(Path.Combine(MainFolder, "Translations", "Old", "Operations.xml.old")))
 									File.Delete(Path.Combine(MainFolder, "Translations", "Old", "Operations.xml.old"));
-								File.Move(Path.Combine(MainFolder, "Translations", "tmp", "Operations.xml"), Path.Combine(MainFolder, "Translations", "tmp", "Operations.xml.old"));
+								File.Move(Path.Combine(MainFolder, "Translations", "Operations.xml"), Path.Combine(MainFolder, "Translations", "Old", "Operations.xml.old"));
 
 							}
 							File.Move(Path.Combine(MainFolder, "Translations", "tmp", "Operations.xml"), Path.Combine(MainFolder, "Translations", "Operations.xml"));
@@ -162,7 +162,7 @@ namespace Grabacr07.KanColleWrapper
 							{
 								if (File.Exists(Path.Combine(MainFolder, "Translations", "Old", "Quests.xml.old")))
 									File.Delete(Path.Combine(MainFolder, "Translations", "Old", "Quests.xml.old"));
-								File.Move(Path.Combine(MainFolder, "Translations", "tmp", "Quests.xml"), Path.Combine(MainFolder, "Translations", "tmp", "Quests.xml.old"));
+								File.Move(Path.Combine(MainFolder, "Translations", "Quests.xml"), Path.Combine(MainFolder, "Translations", "Old", "Quests.xml.old"));
 
 							}
 							File.Move(Path.Combine(MainFolder, "Translations", "tmp", "Quests.xml"), Path.Combine(MainFolder, "Translations", "Quests.xml"));
@@ -185,7 +185,7 @@ namespace Grabacr07.KanColleWrapper
 							{
 								if (File.Exists(Path.Combine(MainFolder, "Translations", "Old", "Expeditions.xml.old")))
 									File.Delete(Path.Combine(MainFolder, "Translations", "Old", "Expeditions.xml.old"));
-								File.Move(Path.Combine(MainFolder, "Translations", "tmp", "Expeditions.xml"), Path.Combine(MainFolder, "Translations", "tmp", "Expeditions.xml.old"));
+								File.Move(Path.Combine(MainFolder, "Translations", "Expeditions.xml"), Path.Combine(MainFolder, "Translations", "Old", "Expeditions.xml.old"));
 
 							}
 							File.Move(Path.Combine(MainFolder, "Translations", "tmp", "Expeditions.xml"), Path.Combine(MainFolder, "Translations", "Expeditions.xml"));
@@ -209,7 +209,7 @@ namespace Grabacr07.KanColleWrapper
 							{
 								if (File.Exists(Path.Combine(MainFolder, "Translations", "Old", "Ships.xml.old")))
 									File.Delete(Path.Combine(MainFolder, "Translations", "Old", "Ships.xml.old"));
-								File.Move(Path.Combine(MainFolder, "Translations", "tmp", "Ships.xml"), Path.Combine(MainFolder, "Translations", "tmp", "Ships.xml.old"));
+								File.Move(Path.Combine(MainFolder, "Translations", "Ships.xml"), Path.Combine(MainFolder, "Translations", "Old", "Ships.xml.old"));
 
 							}
 							File.Move(Path.Combine(MainFolder, "Translations", "tmp", "Ships.xml"), Path.Combine(MainFolder, "Translations", "Ships.xml"));
@@ -233,7 +233,7 @@ namespace Grabacr07.KanColleWrapper
 							{
 								if (File.Exists(Path.Combine(MainFolder, "Translations", "Old", "ShipTypes.xml.old")))
 									File.Delete(Path.Combine(MainFolder, "Translations", "Old", "ShipTypes.xml.old"));
-								File.Move(Path.Combine(MainFolder, "Translations", "tmp", "ShipTypes.xml"), Path.Combine(MainFolder, "Translations", "tmp", "ShipTypes.xml.old"));
+								File.Move(Path.Combine(MainFolder, "Translations", "ShipTypes.xml"), Path.Combine(MainFolder, "Translations", "Old", "ShipTypes.xml.old"));
 
 							}
 							File.Move(Path.Combine(MainFolder, "Translations", "tmp", "ShipTypes.xml"), Path.Combine(MainFolder, "Translations", "ShipTypes.xml"));
@@ -256,7 +256,7 @@ namespace Grabacr07.KanColleWrapper
 							{
 								if (File.Exists(Path.Combine(MainFolder, "Translations", "Old", "RemodelSlots.xml.old")))
 									File.Delete(Path.Combine(MainFolder, "Translations", "Old", "RemodelSlots.xml.old"));
-								File.Move(Path.Combine(MainFolder, "Translations", "tmp", "RemodelSlots.xml"), Path.Combine(MainFolder, "Translations", "tmp", "RemodelSlots.xml.old"));
+								File.Move(Path.Combine(MainFolder, "Translations", "RemodelSlots.xml"), Path.Combine(MainFolder, "Translations", "Old", "RemodelSlots.xml.old"));
 
 							}
 							File.Move(Path.Combine(MainFolder, "Translations", "tmp", "RemodelSlots.xml"), Path.Combine(MainFolder, "Translations", "RemodelSlots.xml"));
