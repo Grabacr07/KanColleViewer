@@ -414,6 +414,24 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region RemodelSlotsVersion 変更通知プロパティ
+
+		public string RemodelSlotsVersion
+		{
+			get { return KanColleClient.Current.Translations.RemodelSlotsVersion; }
+			set
+			{
+				if (KanColleClient.Current.Translations.RemodelSlotsVersion != value)
+				{
+					KanColleClient.Current.Translations.RemodelSlotsVersion = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+
 		#region AppOnlineVersion 変更通知プロパティ
 
 		private string _AppOnlineVersion;

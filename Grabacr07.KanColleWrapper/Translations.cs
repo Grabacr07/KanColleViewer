@@ -136,18 +136,18 @@ namespace Grabacr07.KanColleWrapper
 
 		#endregion
 
-		#region RemodelVersion 変更通知プロパティ
+		#region RemodelSlotsVersion 変更通知プロパティ
 
-		private string _RemodelVersion;
+		private string _RemodelSlotsVersion;
 
-		public string RemodelVersion
+		public string RemodelSlotsVersion
 		{
-			get { return _RemodelVersion; }
+			get { return _RemodelSlotsVersion; }
 			set
 			{
-				if (_RemodelVersion != value)
+				if (_RemodelSlotsVersion != value)
 				{
-					_RemodelVersion = value;
+					_RemodelSlotsVersion = value;
 					this.RaisePropertyChanged();
 				}
 			}

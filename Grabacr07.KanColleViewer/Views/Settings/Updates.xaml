@@ -216,7 +216,7 @@
                        Grid.Row="8"
                        Margin="0,2"
                        HorizontalAlignment="Center"
-                       Text="{Binding RemodelSlotsOnlineVersion, Mode=OneWay}"/>
+                       Text="{Binding RemodelSlotsVersion, Mode=OneWay}"/>
 			<TextBlock Grid.Column="4"
                        Grid.Row="8"
                        Margin="0,2"
@@ -248,7 +248,5 @@
                   IsChecked="{Binding EnableUpdateTransOnStart}" 
                   Height="17" 
                   Margin="15,0,0,10"/>
-
-
 	</StackPanel>
 </UserControl>

@@ -214,7 +214,7 @@ namespace Grabacr07.KanColleWrapper
 							ReturnValue = -1;
 						}
 					}
-					if (IsOnlineVersionGreater(TranslationType.ShipTypes, TranslationsRef.RemodelVersion))
+					if (IsOnlineVersionGreater(TranslationType.ShipTypes, TranslationsRef.RemodelSlotsVersion))
 					{
 						Client.DownloadFile(BaseTranslationURL + "RemodelSlots.xml", MainFolder + "Translations\\tmp\\RemodelSlots.xml");
 
