@@ -982,12 +982,9 @@ namespace Grabacr07.KanColleWrapper
 				//flag조작 시작
 
 
-				EnemyDamage = Math.Truncate(EnemyDamage * 1000) / 1000;
-				KanDamage = Math.Truncate(KanDamage * 1000) / 1000;
-
 				if (KanDamage != 0)
 				{
-					decimal CalcPercent = Math.Round(EnemyDamage / KanDamage, 1);
+					decimal CalcPercent = EnemyDamage / KanDamage;
 					if (CalcPercent > 2.5m)
 						DataLists.IsOverDamage = true;//2.5배 초과 데미지
 					else if (CalcPercent >= 1)
