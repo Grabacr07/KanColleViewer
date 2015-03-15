@@ -17,6 +17,7 @@ namespace Grabacr07.KanColleWrapper
 		private XDocument OperationsXML;
 		private XDocument QuestsXML;
 		private XDocument ExpeditionXML;
+		private XDocument RemodelXml;
 		string MainFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
 
 		public bool EnableTranslations { get; set; }
@@ -165,6 +166,7 @@ namespace Grabacr07.KanColleWrapper
 				if (File.Exists(Path.Combine(MainFolder, "Translations", "Operations.xml"))) OperationsXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "Operations.xml"));
 				if (File.Exists(Path.Combine(MainFolder, "Translations", "Quests.xml"))) QuestsXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "Quests.xml"));
 				if (File.Exists(Path.Combine(MainFolder, "Translations", "Expeditions.xml"))) ExpeditionXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "Expeditions.xml"));
+				if (File.Exists(Path.Combine(MainFolder, "Translations", "RemodelSlots.xml"))) RemodelXml = XDocument.Load(Path.Combine(MainFolder, "Translations", "RemodelSlots.xml"));
 
 
 				GetVersions();
@@ -199,6 +201,11 @@ namespace Grabacr07.KanColleWrapper
 			if (ExpeditionXML != null)
 				if (ExpeditionXML.Root.Attribute("Version") != null) ExpeditionsVersion = ExpeditionXML.Root.Attribute("Version").Value;
 				else ExpeditionsVersion = "알 수 없음";
+			else
+				QuestsVersion = "없음";
+			if (ExpeditionXML != null)
+				if (RemodelXml.Root.Attribute("Version") != null) RemodelSlotsVersion = RemodelXml.Root.Attribute("Version").Value;
+				else RemodelSlotsVersion = "알 수 없음";
 			else
 				QuestsVersion = "없음";
 		}

@@ -17,7 +17,7 @@ namespace Grabacr07.KanColleWrapper
 		public bool ShipTypesUpdate { get; set; }
 		public bool ExpeditionUpdate { get; set; }
 		public bool RemodelUpdate { get; set; }
-		string MainFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\";
+		string MainFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
 		/// <summary>
 		/// 업데이트 상태를 구별한다.
 		/// bool값을 조정하며 이는 업데이트 후 바로 퀘스트 로드가 적용되지 않는 문제점을 자체 해결하기 위해 도입한것임.
@@ -98,20 +98,26 @@ namespace Grabacr07.KanColleWrapper
 
 				try
 				{
-					if (!Directory.Exists(MainFolder + "Translations")) Directory.CreateDirectory(MainFolder + "Translations");
-					if (!Directory.Exists(MainFolder + "Translations\\tmp\\")) Directory.CreateDirectory(MainFolder + "Translations\\tmp\\");
+					if (!Directory.Exists(Path.Combine(MainFolder, "Translations"))) Directory.CreateDirectory(Path.Combine(MainFolder, "Translations"));
+					if (!Directory.Exists(Path.Combine(MainFolder, "Translations", "tmp"))) Directory.CreateDirectory(Path.Combine(MainFolder, "Translations", "tmp"));
+					if (!Directory.Exists(Path.Combine(MainFolder, "Translations", "Old")))
+						Directory.CreateDirectory(Path.Combine(MainFolder, "Translations", "Old"));
 
 					// In every one of these we download it to a temp folder, check if the file works, then move it over.
 					if (IsOnlineVersionGreater(TranslationType.Equipment, TranslationsRef.EquipmentVersion))
 					{
-						Client.DownloadFile(BaseTranslationURL+ "Equipment.xml", MainFolder + "Translations\\tmp\\Equipment.xml");
+						Client.DownloadFile(BaseTranslationURL + "Equipment.xml", Path.Combine(MainFolder, "Translations", "tmp","Equipment.xml"));
 
 						try
 						{
-							TestXML = XDocument.Load(MainFolder + "Translations\\tmp\\Equipment.xml");
-							if (File.Exists(MainFolder + "Translations\\Equipment.xml"))
-								File.Delete(MainFolder + "Translations\\Equipment.xml");
-							File.Move(MainFolder + "Translations\\tmp\\Equipment.xml", MainFolder + "Translations\\Equipment.xml");
+							TestXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "tmp", "Equipment.xml"));
+							if (File.Exists(Path.Combine(MainFolder, "Translations", "Equipment.xml")))
+							{
+								if (File.Exists(Path.Combine(MainFolder, "Translations", "Old", "Equipment.xml.old")))
+									File.Delete(Path.Combine(MainFolder, "Translations", "Old", "Equipment.xml.old"));
+								File.Move(Path.Combine(MainFolder, "Translations", "tmp", "Equipment.xml"), Path.Combine(MainFolder, "Translations", "tmp", "Equipment.xml.old"));
+							}
+							File.Move(Path.Combine(MainFolder, "Translations", "tmp", "Equipment.xml"), Path.Combine(MainFolder, "Translations", "Equipment.xml"));
 							ReturnValue = 1;
 							UpdateState(ReturnValue, TranslationType.Equipment);
 						}
@@ -123,14 +129,19 @@ namespace Grabacr07.KanColleWrapper
 
 					if (IsOnlineVersionGreater(TranslationType.Operations, TranslationsRef.OperationsVersion))
 					{
-						Client.DownloadFile(BaseTranslationURL+ "Operations.xml", MainFolder + "Translations\\tmp\\Operations.xml");
+						Client.DownloadFile(BaseTranslationURL + "Operations.xml", Path.Combine(MainFolder, "Translations", "tmp", "Operations.xml"));
 
 						try
 						{
-							TestXML = XDocument.Load(MainFolder + "Translations\\tmp\\Operations.xml");
-							if (File.Exists(MainFolder + "Translations\\Operations.xml"))
-								File.Delete(MainFolder + "Translations\\Operations.xml");
-							File.Move(MainFolder + "Translations\\tmp\\Operations.xml", MainFolder + "Translations\\Operations.xml");
+							TestXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "tmp", "Operations.xml"));
+							if (File.Exists(Path.Combine(MainFolder, "Translations", "Operations.xml")))
+							{
+								if (File.Exists(Path.Combine(MainFolder, "Translations", "Old", "Operations.xml.old")))
+									File.Delete(Path.Combine(MainFolder, "Translations", "Old", "Operations.xml.old"));
+								File.Move(Path.Combine(MainFolder, "Translations", "tmp", "Operations.xml"), Path.Combine(MainFolder, "Translations", "tmp", "Operations.xml.old"));
+
+							}
+							File.Move(Path.Combine(MainFolder, "Translations", "tmp", "Operations.xml"), Path.Combine(MainFolder, "Translations", "Operations.xml"));
 							ReturnValue = 1;
 							UpdateState(ReturnValue, TranslationType.Operations);
 						}
@@ -142,16 +153,21 @@ namespace Grabacr07.KanColleWrapper
 
 					if (IsOnlineVersionGreater(TranslationType.Quests, TranslationsRef.QuestsVersion))
 					{
-						Client.DownloadFile(BaseTranslationURL+ "Quests.xml", MainFolder + "Translations\\tmp\\Quests.xml");
+						Client.DownloadFile(BaseTranslationURL + "Operations.xml", Path.Combine(MainFolder, "Translations", "tmp", "Quests.xml"));
 
 						try
 						{
-							TestXML = XDocument.Load(MainFolder + "Translations\\tmp\\Quests.xml");
-							if (File.Exists(MainFolder + "Translations\\Quests.xml"))
-								File.Delete(MainFolder + "Translations\\Quests.xml");
-							File.Move(MainFolder + "Translations\\tmp\\Quests.xml", MainFolder + "Translations\\Quests.xml");
+							TestXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "tmp", "Quests.xml"));
+							if (File.Exists(Path.Combine(MainFolder, "Translations", "Quests.xml")))
+							{
+								if (File.Exists(Path.Combine(MainFolder, "Translations", "Old", "Quests.xml.old")))
+									File.Delete(Path.Combine(MainFolder, "Translations", "Old", "Quests.xml.old"));
+								File.Move(Path.Combine(MainFolder, "Translations", "tmp", "Quests.xml"), Path.Combine(MainFolder, "Translations", "tmp", "Quests.xml.old"));
+
+							}
+							File.Move(Path.Combine(MainFolder, "Translations", "tmp", "Quests.xml"), Path.Combine(MainFolder, "Translations", "Quests.xml"));
 							ReturnValue = 1;
-							UpdateState(ReturnValue,TranslationType.Quests);
+							UpdateState(ReturnValue, TranslationType.Quests);
 						}
 						catch
 						{
@@ -160,14 +176,19 @@ namespace Grabacr07.KanColleWrapper
 					}
 					if (IsOnlineVersionGreater(TranslationType.Expeditions, TranslationsRef.ExpeditionsVersion))
 					{
-						Client.DownloadFile(BaseTranslationURL + "Expeditions.xml", MainFolder + "Translations\\tmp\\Expeditions.xml");
+						Client.DownloadFile(BaseTranslationURL + "Expeditions.xml", Path.Combine(MainFolder, "Translations", "tmp", "Expeditions.xml"));
 
 						try
 						{
-							TestXML = XDocument.Load(MainFolder + "Translations\\tmp\\Expeditions.xml");
-							if (File.Exists(MainFolder + "Translations\\Expeditions.xml"))
-								File.Delete(MainFolder + "Translations\\Expeditions.xml");
-							File.Move(MainFolder + "Translations\\tmp\\Expeditions.xml", MainFolder + "Translations\\Expeditions.xml");
+							TestXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "tmp", "Expeditions.xml"));
+							if (File.Exists(Path.Combine(MainFolder, "Translations", "Expeditions.xml")))
+							{
+								if (File.Exists(Path.Combine(MainFolder, "Translations", "Old", "Expeditions.xml.old")))
+									File.Delete(Path.Combine(MainFolder, "Translations", "Old", "Expeditions.xml.old"));
+								File.Move(Path.Combine(MainFolder, "Translations", "tmp", "Expeditions.xml"), Path.Combine(MainFolder, "Translations", "tmp", "Expeditions.xml.old"));
+
+							}
+							File.Move(Path.Combine(MainFolder, "Translations", "tmp", "Expeditions.xml"), Path.Combine(MainFolder, "Translations", "Expeditions.xml"));
 							ReturnValue = 1;
 							UpdateState(ReturnValue, TranslationType.Expeditions);
 						}
@@ -179,16 +200,21 @@ namespace Grabacr07.KanColleWrapper
 
 					if (IsOnlineVersionGreater(TranslationType.Ships, TranslationsRef.ShipsVersion))
 					{
-						Client.DownloadFile(BaseTranslationURL+ "Ships.xml", MainFolder + "Translations\\tmp\\Ships.xml");
+						Client.DownloadFile(BaseTranslationURL + "Ships.xml", Path.Combine(MainFolder, "Translations", "tmp", "Ships.xml"));
 
 						try
 						{
-							TestXML = XDocument.Load(MainFolder + "Translations\\tmp\\Ships.xml");
-							if (File.Exists(MainFolder + "Translations\\Ships.xml"))
-								File.Delete(MainFolder + "Translations\\Ships.xml");
-							File.Move(MainFolder + "Translations\\tmp\\Ships.xml", MainFolder + "Translations\\Ships.xml");
+							TestXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "tmp", "Ships.xml"));
+							if (File.Exists(Path.Combine(MainFolder, "Translations", "Ships.xml")))
+							{
+								if (File.Exists(Path.Combine(MainFolder, "Translations", "Old", "Ships.xml.old")))
+									File.Delete(Path.Combine(MainFolder, "Translations", "Old", "Ships.xml.old"));
+								File.Move(Path.Combine(MainFolder, "Translations", "tmp", "Ships.xml"), Path.Combine(MainFolder, "Translations", "tmp", "Ships.xml.old"));
+
+							}
+							File.Move(Path.Combine(MainFolder, "Translations", "tmp", "Ships.xml"), Path.Combine(MainFolder, "Translations", "Ships.xml"));
 							ReturnValue = 1;
-							UpdateState(ReturnValue,TranslationType.Ships);
+							UpdateState(ReturnValue, TranslationType.Ships);
 						}
 						catch
 						{
@@ -198,32 +224,42 @@ namespace Grabacr07.KanColleWrapper
 
 					if (IsOnlineVersionGreater(TranslationType.ShipTypes, TranslationsRef.ShipTypesVersion))
 					{
-						Client.DownloadFile(BaseTranslationURL+ "ShipTypes.xml", MainFolder + "Translations\\tmp\\ShipTypes.xml");
+						Client.DownloadFile(BaseTranslationURL + "ShipTypes.xml", Path.Combine(MainFolder, "Translations", "tmp", "ShipTypes.xml"));
 
 						try
 						{
-							TestXML = XDocument.Load(MainFolder + "Translations\\tmp\\ShipTypes.xml");
-							if (File.Exists(MainFolder + "Translations\\ShipTypes.xml"))
-								File.Delete(MainFolder + "Translations\\ShipTypes.xml");
-							File.Move(MainFolder + "Translations\\tmp\\ShipTypes.xml", MainFolder + "Translations\\ShipTypes.xml");
+							TestXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "tmp", "ShipTypes.xml"));
+							if (File.Exists(Path.Combine(MainFolder, "Translations", "ShipTypes.xml")))
+							{
+								if (File.Exists(Path.Combine(MainFolder, "Translations", "Old", "ShipTypes.xml.old")))
+									File.Delete(Path.Combine(MainFolder, "Translations", "Old", "ShipTypes.xml.old"));
+								File.Move(Path.Combine(MainFolder, "Translations", "tmp", "ShipTypes.xml"), Path.Combine(MainFolder, "Translations", "tmp", "ShipTypes.xml.old"));
+
+							}
+							File.Move(Path.Combine(MainFolder, "Translations", "tmp", "ShipTypes.xml"), Path.Combine(MainFolder, "Translations", "ShipTypes.xml"));
 							ReturnValue = 1;
-							UpdateState(ReturnValue,TranslationType.ShipTypes);
+							UpdateState(ReturnValue, TranslationType.ShipTypes);
 						}
 						catch
 						{
 							ReturnValue = -1;
 						}
 					}
-					if (IsOnlineVersionGreater(TranslationType.ShipTypes, TranslationsRef.RemodelSlotsVersion))
+					if (IsOnlineVersionGreater(TranslationType.RemodelSlots, TranslationsRef.RemodelSlotsVersion))
 					{
-						Client.DownloadFile(BaseTranslationURL + "RemodelSlots.xml", MainFolder + "Translations\\tmp\\RemodelSlots.xml");
+						Client.DownloadFile(BaseTranslationURL + "RemodelSlots.xml", Path.Combine(MainFolder, "Translations", "tmp", "RemodelSlots.xml"));
 
 						try
 						{
-							TestXML = XDocument.Load(MainFolder + "Translations\\tmp\\RemodelSlots.xml");
-							if (File.Exists(MainFolder + "Translations\\RemodelSlots.xml"))
-								File.Delete(MainFolder + "Translations\\RemodelSlots.xml");
-							File.Move(MainFolder + "Translations\\tmp\\RemodelSlots.xml", MainFolder + "Translations\\RemodelSlots.xml");
+							TestXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "tmp", "RemodelSlots.xml"));
+							if (File.Exists(Path.Combine(MainFolder, "Translations", "RemodelSlots.xml")))
+							{
+								if (File.Exists(Path.Combine(MainFolder, "Translations", "Old", "RemodelSlots.xml.old")))
+									File.Delete(Path.Combine(MainFolder, "Translations", "Old", "RemodelSlots.xml.old"));
+								File.Move(Path.Combine(MainFolder, "Translations", "tmp", "RemodelSlots.xml"), Path.Combine(MainFolder, "Translations", "tmp", "RemodelSlots.xml.old"));
+
+							}
+							File.Move(Path.Combine(MainFolder, "Translations", "tmp", "RemodelSlots.xml"), Path.Combine(MainFolder, "Translations", "RemodelSlots.xml"));
 							ReturnValue = 1;
 							UpdateState(ReturnValue, TranslationType.RemodelSlots);
 						}
@@ -239,8 +275,8 @@ namespace Grabacr07.KanColleWrapper
 					// Failed to download files.
 					return -1;
 				}
-
-				if (Directory.Exists(MainFolder + "Translations\\tmp\\")) Directory.Delete(MainFolder + "Translations\\tmp\\",true);
+				if (Directory.Exists(Path.Combine(MainFolder, "Translations", "tmp")))
+					Directory.Delete(Path.Combine(MainFolder, "Translations", "tmp"), true);
 
 				return ReturnValue;
 			}
@@ -304,7 +340,7 @@ namespace Grabacr07.KanColleWrapper
 			if (LocalVersionString == "알 수 없음") return false;
 			else if (LocalVersionString == "없음") return false;
 			Version LocalVersion = new Version(LocalVersionString);
-			
+
 
 			switch (Type)
 			{
