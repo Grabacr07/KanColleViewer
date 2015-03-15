@@ -80,7 +80,7 @@ namespace Grabacr07.KanColleWrapper
 			return true;
 		}
 
-		private int TranslationFileWizard(string MainFolder, string Xmlname, TranslationType type)
+		private int XmlFileWizard(string MainFolder, string Xmlname, TranslationType type)
 		{
 			int ReturnValue;
 			try
@@ -127,41 +127,41 @@ namespace Grabacr07.KanColleWrapper
 					if (IsOnlineVersionGreater(TranslationType.Equipment, TranslationsRef.EquipmentVersion))
 					{
 						Client.DownloadFile(BaseTranslationURL + "Equipment.xml", Path.Combine(MainFolder, "Translations", "tmp", "Equipment.xml"));
-						ReturnValue = TranslationFileWizard(MainFolder, "Equipment.xml", TranslationType.Equipment);
+						ReturnValue = XmlFileWizard(MainFolder, "Equipment.xml", TranslationType.Equipment);
 					}
 
 					if (IsOnlineVersionGreater(TranslationType.Operations, TranslationsRef.OperationsVersion))
 					{
 						Client.DownloadFile(BaseTranslationURL + "Operations.xml", Path.Combine(MainFolder, "Translations", "tmp", "Operations.xml"));
-						ReturnValue = TranslationFileWizard(MainFolder, "Operations.xml", TranslationType.Operations);
+						ReturnValue = XmlFileWizard(MainFolder, "Operations.xml", TranslationType.Operations);
 					}
 
 					if (IsOnlineVersionGreater(TranslationType.Quests, TranslationsRef.QuestsVersion))
 					{
 						Client.DownloadFile(BaseTranslationURL + "Quests.xml", Path.Combine(MainFolder, "Translations", "tmp", "Quests.xml"));
-						ReturnValue = TranslationFileWizard(MainFolder, "Quests.xml", TranslationType.Quests);
+						ReturnValue = XmlFileWizard(MainFolder, "Quests.xml", TranslationType.Quests);
 					}
 					if (IsOnlineVersionGreater(TranslationType.Expeditions, TranslationsRef.ExpeditionsVersion))
 					{
 						Client.DownloadFile(BaseTranslationURL + "Expeditions.xml", Path.Combine(MainFolder, "Translations", "tmp", "Expeditions.xml"));
-						ReturnValue = TranslationFileWizard(MainFolder, "Expeditions.xml", TranslationType.Expeditions);
+						ReturnValue = XmlFileWizard(MainFolder, "Expeditions.xml", TranslationType.Expeditions);
 					}
 
 					if (IsOnlineVersionGreater(TranslationType.Ships, TranslationsRef.ShipsVersion))
 					{
 						Client.DownloadFile(BaseTranslationURL + "Ships.xml", Path.Combine(MainFolder, "Translations", "tmp", "Ships.xml"));
-						ReturnValue = TranslationFileWizard(MainFolder, "Ships.xml", TranslationType.Ships);
+						ReturnValue = XmlFileWizard(MainFolder, "Ships.xml", TranslationType.Ships);
 					}
 
 					if (IsOnlineVersionGreater(TranslationType.ShipTypes, TranslationsRef.ShipTypesVersion))
 					{
 						Client.DownloadFile(BaseTranslationURL + "ShipTypes.xml", Path.Combine(MainFolder, "Translations", "tmp", "ShipTypes.xml"));
-						ReturnValue = TranslationFileWizard(MainFolder, "ShipTypes.xml", TranslationType.ShipTypes);
+						ReturnValue = XmlFileWizard(MainFolder, "ShipTypes.xml", TranslationType.ShipTypes);
 					}
 					if (IsOnlineVersionGreater(TranslationType.RemodelSlots, TranslationsRef.RemodelSlotsVersion))
 					{
 						Client.DownloadFile(BaseTranslationURL + "RemodelSlots.xml", Path.Combine(MainFolder, "Translations", "tmp", "RemodelSlots.xml"));
-						ReturnValue = TranslationFileWizard(MainFolder, "RemodelSlots.xml", TranslationType.RemodelSlots);
+						ReturnValue = XmlFileWizard(MainFolder, "RemodelSlots.xml", TranslationType.RemodelSlots);
 					}
 
 				}
