@@ -155,14 +155,19 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		MaintenancePersonnel = 29,
 
-		/// <summary>
-		/// 高射砲。
-		/// </summary>
-		AntiAircraftFireDirector = 30,
+        /// <summary>
+        /// 高射砲。
+        /// </summary>
+        AntiAircraftFireDirector = 30,
+
+        /// <summary>
+        /// ロケットランチャー。
+        /// </summary>
+        RocketLauncher = 31,
 
 		/// <summary>
-		/// ロケットランチャー。
+		/// 水上艦要員。
 		/// </summary>
-		RocketLauncher = 31,
+		SurfaceShipPersonnel = 32,
 	}
 }

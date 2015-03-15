@@ -631,6 +631,34 @@
 					</Setter.Value>
 				</Setter>
 			</Trigger>
+			<Trigger Property="Type"
+					 Value="SurfaceShipPersonnel">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Width="33" 
+									      Height="25.972"
+									      HorizontalAlignment="Left" 
+									      VerticalAlignment="Top" 
+									      Margin="4.99996, 17.0089, 0, 0"
+									      Stretch="Uniform" 
+									      Fill="#FFBFDD9A"
+									      Data="M 30.5467,19.8049L 21.5,40.8689L 12.4533,19.8049C 11.8853,18.4823 12.856,17.0089 14.296,17.0089L 28.704,17.0089C 30.144,17.0089 31.1146,18.4823 30.5467,19.8049 Z M 37.9999,42.981L 4.99996,42.981L 4.99996,40.8703L 37.9999,40.8703L 37.9999,42.981 Z "/>
+									<Ellipse Width="15.4584" 
+									         Height="15.4584" 
+									         HorizontalAlignment="Left"
+									         VerticalAlignment="Top" 
+									         Margin="13.7707, 0.0191078, 0, 0" 
+									         Stretch="Uniform" 
+									         Fill="#FFBFDD9A"/>
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
 		</Style.Triggers>
 	</Style>
 
