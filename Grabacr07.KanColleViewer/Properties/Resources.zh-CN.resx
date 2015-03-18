@@ -139,7 +139,7 @@
     <value>Debug</value>
   </data>
   <data name="Debug_NotificationMessage" xml:space="preserve">
-    <value>これはテスト通知です。</value>
+    <value>这是一条测试通知。</value>
   </data>
   <data name="Debug_NotificationMessage_Title" xml:space="preserve">
     <value>テスト</value>
@@ -226,43 +226,43 @@
     <value>所持有的舰娘:</value>
   </data>
   <data name="IntegratedView" xml:space="preserve">
-    <value>総合</value>
+    <value>综合</value>
   </data>
   <data name="MessageBar_Expedition" xml:space="preserve">
-    <value>この艦隊は遠征中です。</value>
+    <value>该舰队正在远征中。</value>
   </data>
   <data name="MessageBar_Expedition_TimeCompletion" xml:space="preserve">
-    <value> 完了時刻:</value>
+    <value> 完成时间:</value>
   </data>
   <data name="MessageBar_Expedition_TimeRemaining" xml:space="preserve">
-    <value> 帰投まで:</value>
+    <value> 剩余时间:</value>
   </data>
   <data name="MessageBar_Repairing" xml:space="preserve">
-    <value>艦隊に入渠中の艦娘がいます。 完了時刻: {0:MM/dd HH\:mm} 完了まで: {1}:{2:mm\:ss}</value>
+    <value>你的舰队里有舰娘正在维修。 完成时间: {0:MM/dd HH\:mm} 剩余时间: {1}:{2:mm\:ss}</value>
   </data>
   <data name="MessageBar_Repairing_Null" xml:space="preserve">
-    <value>艦隊に入渠中の艦娘がいます。</value>
+    <value>你的舰队里有舰娘正在维修。</value>
   </data>
   <data name="MessageBar_ReSortie_BadCondition" xml:space="preserve">
-    <value>疲労中の艦娘</value>
+    <value>疲劳中的舰娘</value>
   </data>
   <data name="MessageBar_ReSortie_CanNotReSortie" xml:space="preserve">
-    <value>艦隊に{0}がいます。</value>
+    <value>你舰队里的舰娘{0}。</value>
   </data>
   <data name="MessageBar_ReSortie_CanReSortie" xml:space="preserve">
-    <value>出撃可能！</value>
+    <value>已准备好出击！</value>
   </data>
   <data name="MessageBar_ReSortie_LackForResources" xml:space="preserve">
-    <value>未補給の艦娘</value>
+    <value>未补给的舰娘</value>
   </data>
   <data name="MessageBar_ReSortie_Remaining" xml:space="preserve">
-    <value>再出撃までの目安: </value>
+    <value>预计再次出击时间: </value>
   </data>
   <data name="MessageBar_ReSortie_Separator" xml:space="preserve">
     <value>・</value>
   </data>
   <data name="MessageBar_ReSortie_Wounded" xml:space="preserve">
-    <value>中破以上の艦娘</value>
+    <value>中破以上的舰娘</value>
   </data>
   <data name="Quests" xml:space="preserve">
     <value>任务</value>
@@ -424,16 +424,16 @@
     <value>永远保持在最前端</value>
   </data>
   <data name="StartContent_ClearCacheButton" xml:space="preserve">
-    <value>キャッシュの削除</value>
+    <value>删除缓存</value>
   </data>
   <data name="StartContent_ClearCacheButtonMessage" xml:space="preserve">
-    <value>キャッシュを削除しました</value>
+    <value>已删除浏览器缓存</value>
   </data>
   <data name="StartContent_Introduction1" xml:space="preserve">
-    <value>「提督業も忙しい！」は、艦これを遊びやすくするためのツールです。</value>
+    <value>「提督業も忙しい！」是一个更方便地进行舰娘游戏的工具。</value>
   </data>
   <data name="StartContent_Welcom" xml:space="preserve">
-    <value>ようこそ</value>
+    <value>欢迎</value>
   </data>
   <data name="StatusBar_AirSuperiorityPotential" xml:space="preserve">
     <value>对空战斗力:</value>
@@ -442,7 +442,7 @@
     <value>平均等级:</value>
   </data>
   <data name="StatusBar_NotStarted" xml:space="preserve">
-    <value>等待舰これ载入</value>
+    <value>等待舰娘游戏载入</value>
   </data>
   <data name="StatusBar_Ready" xml:space="preserve">
     <value>准备完毕</value>
