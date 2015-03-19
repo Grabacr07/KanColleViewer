@@ -67,7 +67,10 @@ namespace Grabacr07.KanColleWrapper.Models
 				return -1;
 			}
 		}
-		public long RepairTime => this.RawData.api_ndock_time;
+		public long RepairTime
+		{
+			get{return this.RawData.api_ndock_time;}
+		}
 		public string RepairTimeString
 		{
 			get
@@ -111,8 +114,14 @@ namespace Grabacr07.KanColleWrapper.Models
 					return 0;
 			}
 		}
-		public string LvName => "[Lv." + this.Level + "]  " + this.Info.Name;
-		public string Name => this.Info.Name;
+		public string LvName
+		{
+			get{return "[Lv." + this.Level + "]  " + this.Info.Name;}
+		}
+		public string Name
+		{
+			get{return this.Info.Name;}
+		}
 
 		/// <summary>
 		/// 艦娘がロックされているかどうかを示す値を取得します。
