@@ -60,6 +60,8 @@ namespace Grabacr07.KanColleWrapper
 
 		internal Logger(KanColleProxy proxy)
 		{
+			this.EnableLogging = KanColleClient.Current.Settings.EnableLogging;
+
 			this.shipmats = new int[5];
 
 			proxy.api_req_kousyou_createitem.TryParse<kcsapi_createitem>().Subscribe(x => this.CreateItem(x.Data, x.Request));
