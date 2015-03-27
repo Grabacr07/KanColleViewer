@@ -149,7 +149,7 @@ namespace Grabacr07.KanColleWrapper
 
 		private void Log(LogType type, params object[] args)
 		{
-			//if (!this.EnableLogging) return;
+			if (!this.EnableLogging) return;
 
 			string logPath = this.CreateLogFile(type);
 
