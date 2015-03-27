@@ -64,5 +64,12 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			var message = new TransitionMessage(catalog, "Show/SlotItemCatalogWindow");
 			this.Messenger.RaiseAsync(message);
 		}
+
+		public void ShowDropLogCatalog()
+		{
+			var catalog = new DropLogCatalogViewModel();
+			var message = new TransitionMessage(catalog, "Show/DropLogCatalogWindow");
+			this.Messenger.RaiseAsync(message);
+		}
 	}
 }

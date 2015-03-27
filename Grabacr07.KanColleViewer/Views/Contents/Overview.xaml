@@ -90,6 +90,12 @@
 													  WindowType="catalogs:SlotItemCatalogWindow"
 													  IsOwned="False" />
 		</livet:InteractionMessageTrigger>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+										 MessageKey="Show/DropLogCatalogWindow">
+			<livet:TransitionInteractionMessageAction Mode="NewOrActive"
+													  WindowType="catalogs:DropLogCatalogWindow"
+													  IsOwned="False" />
+		</livet:InteractionMessageTrigger>
 	</i:Interaction.Triggers>
 
 
@@ -313,7 +319,12 @@
 
 						<metro2:CallMethodButton Content="装備一覧"
 												 Padding="12,8"
+												 Margin="0,0,0,8"
 												 MethodName="ShowSlotItemCatalog" />
+
+						<metro2:CallMethodButton Content="ログ一覧"
+												 Padding="12,8"
+												 MethodName="ShowDropLogCatalog" />
 					</StackPanel>
 				</Border>
 
