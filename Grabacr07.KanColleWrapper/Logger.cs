@@ -46,11 +46,11 @@ namespace Grabacr07.KanColleWrapper
 			new Dictionary<LogType, LogTypeInfo>
 			{
 				{
-					LogType.BuildItem, new LogTypeInfo("日付,結果,秘書艦,秘書艦 Lv,秘書艦艦種,燃料,弾薬,鋼材,ボーキサイト",
+					LogType.BuildItem, new LogTypeInfo("日付,結果,秘書艦,Lv,燃,弾,鋼,ボーキ",
 													   "BuildItemLog.csv")
 				},
 				{
-					LogType.BuildShip, new LogTypeInfo("日付,結果,秘書艦,秘書艦 Lv,秘書艦艦種,燃料,弾薬,鋼材,ボーキサイト,開発資材",
+					LogType.BuildShip, new LogTypeInfo("日付,結果,秘書艦,Lv,燃,弾,鋼,ボーキ,資材",
 													   "BuildShipLog.csv")
 				},
 				{ LogType.ShipDrop, new LogTypeInfo("日付,結果,海域,敵艦隊,ランク", "ShipDropLog.csv") }
@@ -74,7 +74,6 @@ namespace Grabacr07.KanColleWrapper
 						 item.api_create_flag == 1 ? KanColleClient.Current.Master.SlotItems[item.api_slot_item.api_slotitem_id].Name : "NA", //Result
 						 KanColleClient.Current.Homeport.Organization.Fleets[1].Ships[0].Info.Name, //Secretary
 						 KanColleClient.Current.Homeport.Organization.Fleets[1].Ships[0].Level, //Secretary Level
-						 KanColleClient.Current.Homeport.Organization.Fleets[1].Ships[0].Info.ShipType.Name, //Secretary Type
 						 req["api_item1"], //Fuel
 						 req["api_item2"], //Ammo
 						 req["api_item3"], //Steel
@@ -108,7 +107,6 @@ namespace Grabacr07.KanColleWrapper
 							 KanColleClient.Current.Master.Ships[dock.api_created_ship_id].Name, //Result
 							 KanColleClient.Current.Homeport.Organization.Fleets[1].Ships[0].Info.Name, //Secretary
 							 KanColleClient.Current.Homeport.Organization.Fleets[1].Ships[0].Level, //Secretary Level
-							 KanColleClient.Current.Homeport.Organization.Fleets[1].Ships[0].Info.ShipType.Name, //Secretary Type
 							 this.shipmats[0], //Fuel
 							 this.shipmats[1], //Ammo
 							 this.shipmats[2], //Steel
@@ -147,7 +145,7 @@ namespace Grabacr07.KanColleWrapper
 
 		private void Log(LogType type, params object[] args)
 		{
-			//if (!this.EnableLogging) return;
+			if (!this.EnableLogging) return;
 
 			string logPath = this.CreateLogFile(type);
 
