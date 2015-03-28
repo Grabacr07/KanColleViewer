@@ -5,9 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
-using Grabacr07.KanColleWrapper.Internal;
-using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
 using Livet;
 
