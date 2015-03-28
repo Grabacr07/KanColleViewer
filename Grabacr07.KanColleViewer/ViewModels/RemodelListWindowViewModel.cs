@@ -2,6 +2,7 @@
 using Grabacr07.KanColleWrapper.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -226,6 +227,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			foreach (var item in remodellist)
 			{
 				var temp = new RemodelItemList();
+				temp.Ships = new List<Ships>();
+
 				if (WeekDaySetter(Convert.ToInt32(item.Element("AllWeekdays").Value)).HasFlag(today))
 				{
 					if (item.Element("SlotItemName") != null)
@@ -237,19 +240,51 @@ namespace Grabacr07.KanColleViewer.ViewModels
 								temp.IconType = slotitem.Value.IconType;
 						}
 					}
-					if (item.Element("ShipName1") != null)
+					int shipCount = 1;
+					bool Checker = true;
+					try
 					{
-						if (WeekDaySetter(Convert.ToInt32(item.Element("WeekDays1").Value)).HasFlag(today))
+						List<Ships> ShipList = new List<Ships>();
+						while (Checker)
 						{
-							temp.ShipName1 = KanColleClient.Current.Translations.GetTranslation(item.Element("ShipName1").Value, TranslationType.Ships);
+							string shipname = "ShipName" + shipCount.ToString();
+							string weekdays = "WeekDays" + shipCount.ToString();
+							string upgrade = "Upgrade" + shipCount.ToString();
+
+							Ships ship = new Ships();
+
+							if (item.Element(shipname) != null)
+							{
+								ship.ShipName = KanColleClient.Current.Translations.GetTranslation(item.Element(shipname).Value, TranslationType.Ships);
+								ship.Weekday = WeekDaySetter(Convert.ToInt32(item.Element(weekdays).Value));
+							}
+							if (item.Element(upgrade) != null)
+							{
+								ship.Upgrade = KanColleClient.Current.Translations.GetTranslation(item.Element(upgrade).Value, TranslationType.Equipment);
+
+								foreach (var slotitem in KanColleClient.Current.Master.SlotItems)
+								{
+									if (slotitem.Value.Name == ship.Upgrade)
+										ship.UpgradeIconType = slotitem.Value.IconType;
+								}
+							}
+							shipCount++;
+
+							if (ship != null && ship.Weekday.HasFlag(today))
+								ShipList.Add(ship);
+							else Checker = false;
+						}
+						if (ShipList != null)
+						{
+							foreach (var shipinfo in ShipList)
+							{
+								temp.Ships.Add(shipinfo);
+							}
 						}
 					}
-					if (item.Element("ShipName2") != null)
+					catch (Exception ex)
 					{
-						if (WeekDaySetter(Convert.ToInt32(item.Element("WeekDays2").Value)).HasFlag(today))
-						{
-							temp.ShipName2 = KanColleClient.Current.Translations.GetTranslation(item.Element("ShipName2").Value, TranslationType.Ships);
-						}
+						Debug.WriteLine(ex);
 					}
 					if (item.Element("AllWeekdays") != null) temp.TotalWeekday = WeekDaySetter(Convert.ToInt32(item.Element("AllWeekdays").Value));
 					if (item.Element("ToolTip") != null)
@@ -259,15 +294,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					else
 					{
 						temp.ToolTipString = "특이사항 없음";
-					}
-					if (item.Element("Upgrade") != null)
-					{
-						temp.Upgrade = KanColleClient.Current.Translations.GetTranslation(item.Element("Upgrade").Value, TranslationType.Equipment);
-						foreach (var slotitem in KanColleClient.Current.Master.SlotItems)
-						{
-							if (slotitem.Value.Name == temp.Upgrade)
-								temp.UpgradeIconType = slotitem.Value.IconType;
-						}
 					}
 					StringBuilder equipCombine = new StringBuilder();
 					if (item.Element("StartEquip") != null)
@@ -290,7 +316,17 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					if (temp.TotalWeekday.HasFlag(today))
 					{
 						templist.Add(temp);
-						if (temp.Upgrade != null) tempimp.Add(temp);
+						if (temp.Ships!=null)
+						{
+							foreach (var context in temp.Ships)
+							{
+								if (context.Upgrade!=null)
+								{
+									tempimp.Add(temp);
+									break;
+								}
+							}
+						}
 						if (temp.UseEquip != null) tempUse.Add(temp);
 					}
 				}
@@ -362,17 +398,24 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		}
 	}
 	#region 목록
-	public struct RemodelItemList
+	public class RemodelItemList
 	{
 		public string ItemName { get; set; }
-		public string ShipName1 { get; set; }
-		public string ShipName2 { get; set; }
 		public WeekDayFlag TotalWeekday { get; set; }
 		public SlotItemIconType? IconType { get; set; }
-		public SlotItemIconType? UpgradeIconType { get; set; }
 		public string ToolTipString { get; set; }
-		public string Upgrade { get; set; }
 		public string UseEquip { get; set; }
+		public string ShipName { get; set; }
+		//public string Upgrade { get; set; }
+		public SlotItemIconType? UpgradeIconType { get; set; }
+		public List<Ships> Ships { get; set; }
+	}
+	public class Ships
+	{
+		public WeekDayFlag Weekday { get; set; }
+		public string Upgrade { get; set; }
+		public string ShipName { get; set; }
+		public SlotItemIconType? UpgradeIconType { get; set; }
 	}
 
 	[Flags]

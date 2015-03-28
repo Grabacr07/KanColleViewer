@@ -45,6 +45,10 @@
 	</i:Interaction.Triggers>
 	<Window.Resources>
 		<ResourceDictionary>
+			<!--http://stackoverflow.com/questions/1052342/itemscontrol-with-horizontal-orientation-->
+			<ItemsPanelTemplate x:Key="ItemsPanelTemplate">
+				<StackPanel Orientation="Horizontal" Margin="0,0,0,0"/>
+			</ItemsPanelTemplate>
 			<Style TargetType="{x:Type GroupBox}">
 				<Setter Property="OverridesDefaultStyle"
 					Value="True" />
@@ -107,7 +111,8 @@
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
-			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 		<Border metro:MetroWindow.IsCaptionBar="True"
 				Panel.ZIndex="100">
@@ -135,62 +140,64 @@
 									 VerticalAlignment="Top" />
 			</Grid>
 		</Border>
-		<ScrollViewer Grid.Row="1">
-			<StackPanel Margin="10" Grid.Row="1">
-				<TextBlock Foreground="#FFF50000" Text="※갱신시간은 0:00이지만 실제로는 약간 늦게 갱신됩니다."/>
-				<TextBlock Foreground="#FFF50000" Text="※특이사항이 있는 장비의 경우 툴팁으로 특이사항을 확인할 수 있습니다."/>
-				<TextBlock/>
-				<Grid>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="Auto"/>
-						<ColumnDefinition Width="Auto"/>
-						<ColumnDefinition Width="*"/>
-					</Grid.ColumnDefinitions>
-					<TextBlock FontSize="20" FontWeight="Bold">
-						<TextBlock.Style>
-							<Style TargetType="TextBlock">
-								<Style.Triggers>
-									<DataTrigger Binding="{Binding WeekDayView}"
+		<StackPanel Margin="10,0" Grid.Row="1">
+			<TextBlock Foreground="#FFF50000" Text="※갱신시간은 0:00이지만 실제로는 약간 늦게 갱신됩니다."/>
+			<TextBlock Foreground="#FFF50000" Text="※특이사항이 있는 장비의 경우 툴팁으로 특이사항을 확인할 수 있습니다."/>
+			<TextBlock/>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<TextBlock FontSize="20" FontWeight="Bold">
+					<TextBlock.Style>
+						<Style TargetType="TextBlock">
+							<Style.Triggers>
+								<DataTrigger Binding="{Binding WeekDayView}"
 												 Value="1">
-										<Setter Property="Text" Value="일요일"/>
-									</DataTrigger>
-									<DataTrigger Binding="{Binding WeekDayView}"
+									<Setter Property="Text" Value="일요일"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding WeekDayView}"
 												 Value="2">
-										<Setter Property="Text" Value="월요일"/>
-									</DataTrigger>
-									<DataTrigger Binding="{Binding WeekDayView}"
+									<Setter Property="Text" Value="월요일"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding WeekDayView}"
 												 Value="3">
-										<Setter Property="Text" Value="화요일"/>
-									</DataTrigger>
-									<DataTrigger Binding="{Binding WeekDayView}"
+									<Setter Property="Text" Value="화요일"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding WeekDayView}"
 												 Value="4">
-										<Setter Property="Text" Value="수요일"/>
-									</DataTrigger>
-									<DataTrigger Binding="{Binding WeekDayView}"
+									<Setter Property="Text" Value="수요일"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding WeekDayView}"
 												 Value="5">
-										<Setter Property="Text" Value="목요일"/>
-									</DataTrigger>
-									<DataTrigger Binding="{Binding WeekDayView}"
+									<Setter Property="Text" Value="목요일"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding WeekDayView}"
 												 Value="6">
-										<Setter Property="Text" Value="금요일"/>
-									</DataTrigger>
-									<DataTrigger Binding="{Binding WeekDayView}"
+									<Setter Property="Text" Value="금요일"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding WeekDayView}"
 												 Value="7">
-										<Setter Property="Text" Value="토요일"/>
-									</DataTrigger>
-								</Style.Triggers>
-							</Style>
-						</TextBlock.Style>
-					</TextBlock>
-					<TextBlock Text="의 개수공창목록" FontSize="20" Grid.Column="1"/>
-					<metro:PromptComboBox Margin="8"
+									<Setter Property="Text" Value="토요일"/>
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</TextBlock.Style>
+				</TextBlock>
+				<TextBlock Text="의 개수공창목록" FontSize="20" Grid.Column="1"/>
+				<metro:PromptComboBox Margin="8"
 											ItemsSource="{Binding WeekDayList}"
 										  Grid.Column="2"
 											Prompt=""
 											SelectedValue="{Binding SelectedDay, Mode=TwoWay}"
 											IsReadOnly="True"
 											MinWidth="50" HorizontalAlignment="Right" />
-				</Grid>
+			</Grid>
+		</StackPanel>
+		<ScrollViewer Grid.Row="2">
+			<StackPanel Margin="10" Grid.Row="1">
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="*"/>
@@ -215,26 +222,34 @@
 									<ItemsControl.ItemTemplate>
 										<DataTemplate>
 											<TextBlock Margin="0,6,20,0">
-									<Viewbox Width="20">
-										<controls:SlotItemIcon Type="{Binding IconType}" />
-									</Viewbox>
-									<Run Text="{Binding ItemName}"
-										 Foreground="{DynamicResource ActiveForegroundBrushKey}"
-										 BaselineAlignment="Center"/>
-									<Run Text="{Binding ShipName1}"
-										 Background="{DynamicResource BackgroundBrushKey}"
-										 BaselineAlignment="Center"/>
-									<Run Text="{Binding ShipName2}"
-										 Background="{DynamicResource BackgroundBrushKey}"
-										 BaselineAlignment="Center"/>
-												<TextBlock.ToolTip>
-													<TextBlock>
-													<Run Text="{Binding ToolTipString, Mode=OneWay}"
-														 Style="{DynamicResource EmphaticTextElementStyleKey}"
-														 FontSize="11"/>
-													</TextBlock>
-												</TextBlock.ToolTip>
-								</TextBlock>
+												<Viewbox Width="20">
+													<controls:SlotItemIcon Type="{Binding IconType}" />
+												</Viewbox>
+												
+												<Run Text="{Binding ItemName}"
+													 Foreground="{DynamicResource ActiveForegroundBrushKey}"
+													 BaselineAlignment="Center"/>
+												<StackPanel Orientation="Horizontal" Background="{DynamicResource BackgroundBrushKey}">
+													<ItemsControl ItemsSource="{Binding Ships}"
+																  ItemsPanel="{StaticResource ItemsPanelTemplate}">
+														<ItemsControl.ItemTemplate>
+															<DataTemplate>
+																<TextBlock Margin="2">
+																	<Run Text=" "/>
+																	<Run Text="{Binding ShipName}"/>
+																</TextBlock>
+															</DataTemplate>
+														</ItemsControl.ItemTemplate>
+													</ItemsControl>
+												</StackPanel>
+													<TextBlock.ToolTip>
+														<TextBlock>
+																<Run Text="{Binding ToolTipString, Mode=OneWay}"
+																	 Style="{DynamicResource EmphaticTextElementStyleKey}"
+																	 FontSize="11"/>
+														</TextBlock>
+													</TextBlock.ToolTip>
+											</TextBlock>
 										</DataTemplate>
 									</ItemsControl.ItemTemplate>
 								</ItemsControl>
@@ -252,18 +267,25 @@
 									<ItemsControl.ItemTemplate>
 										<DataTemplate>
 											<TextBlock Margin="0,6,20,0">
-									<Viewbox Width="20">
-										<controls:SlotItemIcon Type="{Binding IconType}" />
-									</Viewbox>
-									<Run Text="{Binding ItemName}"
-										 Foreground="{DynamicResource ActiveForegroundBrushKey}"
-										 BaselineAlignment="Center"/>
-									<Run Text="{Binding ShipName1}"
-										 Background="{DynamicResource BackgroundBrushKey}"
-										 BaselineAlignment="Center"/>
-									<Run Text="{Binding ShipName2}"
-										 Background="{DynamicResource BackgroundBrushKey}"
-										 BaselineAlignment="Center"/>
+												<Viewbox Width="20">
+													<controls:SlotItemIcon Type="{Binding IconType}" />
+												</Viewbox>
+												<Run Text="{Binding ItemName}"
+													 Foreground="{DynamicResource ActiveForegroundBrushKey}"
+													 BaselineAlignment="Center"/>
+												<StackPanel Background="{DynamicResource BackgroundBrushKey}">
+													<ItemsControl ItemsSource="{Binding Ships}"
+																  ItemsPanel="{StaticResource ItemsPanelTemplate}">
+														<ItemsControl.ItemTemplate>
+															<DataTemplate>
+																<TextBlock Margin="2">
+																	<Run Text=" "/>
+																	<Run Text="{Binding ShipName}"/>
+																</TextBlock>
+															</DataTemplate>
+														</ItemsControl.ItemTemplate>
+													</ItemsControl>
+												</StackPanel>
 												<TextBlock.ToolTip>
 													<TextBlock>
 													<Run Text="{Binding ToolTipString, Mode=OneWay}"
@@ -271,7 +293,7 @@
 														 FontSize="11"/>
 													</TextBlock>
 												</TextBlock.ToolTip>
-								</TextBlock>
+											</TextBlock>
 										</DataTemplate>
 									</ItemsControl.ItemTemplate>
 								</ItemsControl>
@@ -289,18 +311,25 @@
 									<ItemsControl.ItemTemplate>
 										<DataTemplate>
 											<TextBlock Margin="0,6,20,0">
-									<Viewbox Width="20">
-										<controls:SlotItemIcon Type="{Binding IconType}" />
-									</Viewbox>
-									<Run Text="{Binding ItemName}"
-										 Foreground="{DynamicResource ActiveForegroundBrushKey}"
-										 BaselineAlignment="Center"/>
-									<Run Text="{Binding ShipName1}"
-										 Background="{DynamicResource BackgroundBrushKey}"
-										 BaselineAlignment="Center"/>
-									<Run Text="{Binding ShipName2}"
-										 Background="{DynamicResource BackgroundBrushKey}"
-										 BaselineAlignment="Center"/>
+												<Viewbox Width="20">
+													<controls:SlotItemIcon Type="{Binding IconType}" />
+												</Viewbox>
+												<Run Text="{Binding ItemName}"
+													 Foreground="{DynamicResource ActiveForegroundBrushKey}"
+													 BaselineAlignment="Center"/>
+												<StackPanel Background="{DynamicResource BackgroundBrushKey}">
+													<ItemsControl ItemsSource="{Binding Ships}"
+																  ItemsPanel="{StaticResource ItemsPanelTemplate}">
+														<ItemsControl.ItemTemplate>
+															<DataTemplate>
+																<TextBlock Margin="2">
+																	<Run Text=" "/>
+																	<Run Text="{Binding ShipName}"/>
+																</TextBlock>
+															</DataTemplate>
+														</ItemsControl.ItemTemplate>
+													</ItemsControl>
+												</StackPanel>
 												<TextBlock.ToolTip>
 													<TextBlock>
 													<Run Text="{Binding ToolTipString, Mode=OneWay}"
@@ -308,7 +337,7 @@
 														 FontSize="11"/>
 													</TextBlock>
 												</TextBlock.ToolTip>
-								</TextBlock>
+											</TextBlock>
 										</DataTemplate>
 									</ItemsControl.ItemTemplate>
 								</ItemsControl>
@@ -317,7 +346,7 @@
 						<GroupBox>
 							<Border Background="{DynamicResource BorderBrushKey}"
 								Padding="8,6">
-								<TextBlock Text="업그레이드 가능장비" HorizontalAlignment="Center"/>
+								<TextBlock Text="업그레이드 가능장비(툴팁으로 필요한 칸무스 이름을 표시)" HorizontalAlignment="Center"/>
 							</Border>
 						</GroupBox>
 						<Border MinHeight="80" BorderBrush="{DynamicResource BorderBrushKey}" BorderThickness="1">
@@ -331,24 +360,65 @@
 									</ItemsControl.Template>
 									<ItemsControl.ItemTemplate>
 										<DataTemplate>
-											<TextBlock Margin="0,6,20,0" Padding="1"
-										   Background="{DynamicResource BackgroundBrushKey}">
-									<Viewbox Width="20">
-										<controls:SlotItemIcon Type="{Binding IconType}" />
-									</Viewbox>
-									<Run Text="{Binding ItemName}"
-										 Foreground="{DynamicResource ActiveForegroundBrushKey}"
-										 BaselineAlignment="Center"/>
-									<Run Text="⇒"
-										 Foreground="#FF45A9A5"
-										 BaselineAlignment="Center"/>
-									<Viewbox Width="20">
-										<controls:SlotItemIcon Type="{Binding UpgradeIconType}" />
-									</Viewbox>
-									<Run Text="{Binding Upgrade}"
-										 Foreground="{DynamicResource ActiveForegroundBrushKey}"
-										 BaselineAlignment="Center"/>
-											</TextBlock>
+											<Grid Margin="0,6,20,0" Background="{DynamicResource BackgroundBrushKey}" VerticalAlignment="Center">
+												<Grid.ColumnDefinitions>
+													<ColumnDefinition/>
+													<ColumnDefinition/>
+													<ColumnDefinition/>
+												</Grid.ColumnDefinitions>
+												<TextBlock VerticalAlignment="Center">
+													<Viewbox Width="20" VerticalAlignment="Center">
+														<controls:SlotItemIcon Type="{Binding IconType}" />
+													</Viewbox>
+													<Run Text="{Binding ItemName}"
+													 Foreground="{DynamicResource ActiveForegroundBrushKey}" BaselineAlignment="Center"/>
+												</TextBlock>
+												<TextBlock VerticalAlignment="Center" Grid.Column="1" Text="⇒" Foreground="#FF45A9A5"/>
+												<StackPanel Grid.Column="2" VerticalAlignment="Center" >
+													<ItemsControl ItemsSource="{Binding Ships}">
+														<ItemsControl.ItemTemplate>
+															<DataTemplate>
+																<TextBlock Padding="1">
+																	<Viewbox Width="20" VerticalAlignment="Center">
+																		<controls:SlotItemIcon Type="{Binding UpgradeIconType}" />
+																	</Viewbox>
+																	<Run Text="{Binding Upgrade}" BaselineAlignment="Center"/>
+																	<TextBlock.ToolTip>
+																		<TextBlock>
+																			<Run Text="필요 칸무스: "/>
+																			<Run Text="{Binding ShipName}"/>
+																		</TextBlock>
+																	</TextBlock.ToolTip>
+																</TextBlock>
+															</DataTemplate>
+														</ItemsControl.ItemTemplate>
+													</ItemsControl>
+												</StackPanel>
+											</Grid>
+											<!--<TextBlock Margin="0,6,20,0" Padding="1"
+													   Background="{DynamicResource BackgroundBrushKey}">
+												<Viewbox Width="20">
+													<controls:SlotItemIcon Type="{Binding IconType}" />
+												</Viewbox>
+												<Run Text="{Binding ItemName}"
+													 Foreground="{DynamicResource ActiveForegroundBrushKey}"/>
+												<Run Text="⇒"
+													 Foreground="#FF45A9A5"/>
+												<StackPanel Background="{DynamicResource BackgroundBrushKey}">
+													<ItemsControl ItemsSource="{Binding Ships}">
+														<ItemsControl.ItemTemplate>
+															<DataTemplate>
+																<TextBlock Padding="1">
+																	<Viewbox Width="20">
+																		<controls:SlotItemIcon Type="{Binding UpgradeIconType}" />
+																	</Viewbox>
+																	<Run Text="{Binding Upgrade}"/>
+																</TextBlock>
+															</DataTemplate>
+														</ItemsControl.ItemTemplate>
+													</ItemsControl>
+												</StackPanel>
+											</TextBlock>-->
 										</DataTemplate>
 									</ItemsControl.ItemTemplate>
 								</ItemsControl>
