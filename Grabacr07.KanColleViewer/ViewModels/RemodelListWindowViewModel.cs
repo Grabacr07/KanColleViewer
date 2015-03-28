@@ -227,7 +227,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			foreach (var item in remodellist)
 			{
 				var temp = new RemodelItemList();
-				temp.Ships = new List<Ships>();
+				temp.Ships = new List<ShipInfo>();
 
 				if (WeekDaySetter(Convert.ToInt32(item.Element("AllWeekdays").Value)).HasFlag(today))
 				{
@@ -244,14 +244,14 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					bool Checker = true;
 					try
 					{
-						List<Ships> ShipList = new List<Ships>();
+						List<ShipInfo> ShipList = new List<ShipInfo>();
 						while (Checker)
 						{
 							string shipname = "ShipName" + shipCount.ToString();
 							string weekdays = "WeekDays" + shipCount.ToString();
 							string upgrade = "Upgrade" + shipCount.ToString();
 
-							Ships ship = new Ships();
+							ShipInfo ship = new ShipInfo();
 
 							if (item.Element(shipname) != null)
 							{
@@ -269,9 +269,13 @@ namespace Grabacr07.KanColleViewer.ViewModels
 								}
 							}
 							shipCount++;
-
-							if (ship != null && ship.Weekday.HasFlag(today))
-								ShipList.Add(ship);
+							if (ship.ShipName == null && ship.Upgrade != null) ship.Weekday |= WeekDayFlag.NotNeedShip;
+							if (ship != null)
+							{
+								if (ship.Weekday.HasFlag(today) || ship.Weekday.HasFlag(WeekDayFlag.NotNeedShip))
+									ShipList.Add(ship);
+								if (ship.ShipName == null && ship.Upgrade == null && ship.UpgradeIconType == null && ship.Weekday.HasFlag(WeekDayFlag.None)) Checker = false;
+							}
 							else Checker = false;
 						}
 						if (ShipList != null)
@@ -316,11 +320,11 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					if (temp.TotalWeekday.HasFlag(today))
 					{
 						templist.Add(temp);
-						if (temp.Ships!=null)
+						if (temp.Ships != null)
 						{
 							foreach (var context in temp.Ships)
 							{
-								if (context.Upgrade!=null)
+								if (context.Upgrade != null)
 								{
 									tempimp.Add(temp);
 									break;
@@ -408,9 +412,9 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		public string ShipName { get; set; }
 		//public string Upgrade { get; set; }
 		public SlotItemIconType? UpgradeIconType { get; set; }
-		public List<Ships> Ships { get; set; }
+		public List<ShipInfo> Ships { get; set; }
 	}
-	public class Ships
+	public class ShipInfo
 	{
 		public WeekDayFlag Weekday { get; set; }
 		public string Upgrade { get; set; }
@@ -429,6 +433,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		Thursday = 1 << 4,
 		Friday = 1 << 5,
 		Saturday = 1 << 6,
+		NotNeedShip = 1 << 7,
 		All = Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday,
 	}
 	#endregion

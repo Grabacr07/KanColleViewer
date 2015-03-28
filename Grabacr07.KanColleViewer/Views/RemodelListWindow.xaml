@@ -229,15 +229,14 @@
 												<Run Text="{Binding ItemName}"
 													 Foreground="{DynamicResource ActiveForegroundBrushKey}"
 													 BaselineAlignment="Center"/>
-												<StackPanel Orientation="Horizontal" Background="{DynamicResource BackgroundBrushKey}">
+												<StackPanel Orientation="Horizontal">
 													<ItemsControl ItemsSource="{Binding Ships}"
 																  ItemsPanel="{StaticResource ItemsPanelTemplate}">
 														<ItemsControl.ItemTemplate>
 															<DataTemplate>
-																<TextBlock Margin="2">
-																	<Run Text=" "/>
-																	<Run Text="{Binding ShipName}"/>
-																</TextBlock>
+																<TextBlock Background="{DynamicResource BackgroundBrushKey}" Margin="5,0"
+																		   Text="{Binding ShipName}"
+																		   Visibility="{Binding ShipName, Converter={StaticResource StringToVisiblityConverter}}" />
 															</DataTemplate>
 														</ItemsControl.ItemTemplate>
 													</ItemsControl>
@@ -273,15 +272,14 @@
 												<Run Text="{Binding ItemName}"
 													 Foreground="{DynamicResource ActiveForegroundBrushKey}"
 													 BaselineAlignment="Center"/>
-												<StackPanel Background="{DynamicResource BackgroundBrushKey}">
+												<StackPanel>
 													<ItemsControl ItemsSource="{Binding Ships}"
 																  ItemsPanel="{StaticResource ItemsPanelTemplate}">
 														<ItemsControl.ItemTemplate>
 															<DataTemplate>
-																<TextBlock Margin="2">
-																	<Run Text=" "/>
-																	<Run Text="{Binding ShipName}"/>
-																</TextBlock>
+																<TextBlock Background="{DynamicResource BackgroundBrushKey}" Margin="5,0"
+																		   Text="{Binding ShipName}"
+																		   Visibility="{Binding ShipName, Converter={StaticResource StringToVisiblityConverter}}" />
 															</DataTemplate>
 														</ItemsControl.ItemTemplate>
 													</ItemsControl>
@@ -317,15 +315,14 @@
 												<Run Text="{Binding ItemName}"
 													 Foreground="{DynamicResource ActiveForegroundBrushKey}"
 													 BaselineAlignment="Center"/>
-												<StackPanel Background="{DynamicResource BackgroundBrushKey}">
+												<StackPanel>
 													<ItemsControl ItemsSource="{Binding Ships}"
 																  ItemsPanel="{StaticResource ItemsPanelTemplate}">
 														<ItemsControl.ItemTemplate>
 															<DataTemplate>
-																<TextBlock Margin="2">
-																	<Run Text=" "/>
-																	<Run Text="{Binding ShipName}"/>
-																</TextBlock>
+																<TextBlock Background="{DynamicResource BackgroundBrushKey}" Margin="5,0"
+																		   Text="{Binding ShipName}"
+																		   Visibility="{Binding ShipName, Converter={StaticResource StringToVisiblityConverter}}" />
 															</DataTemplate>
 														</ItemsControl.ItemTemplate>
 													</ItemsControl>
@@ -384,10 +381,7 @@
 																	</Viewbox>
 																	<Run Text="{Binding Upgrade}" BaselineAlignment="Center"/>
 																	<TextBlock.ToolTip>
-																		<TextBlock>
-																			<Run Text="필요 칸무스: "/>
-																			<Run Text="{Binding ShipName}"/>
-																		</TextBlock>
+																		<TextBlock Text="{Binding ShipName, StringFormat='필요 칸무스: {0}', TargetNullValue='필요 칸무스: 없음'}"/>
 																	</TextBlock.ToolTip>
 																</TextBlock>
 															</DataTemplate>
@@ -395,30 +389,6 @@
 													</ItemsControl>
 												</StackPanel>
 											</Grid>
-											<!--<TextBlock Margin="0,6,20,0" Padding="1"
-													   Background="{DynamicResource BackgroundBrushKey}">
-												<Viewbox Width="20">
-													<controls:SlotItemIcon Type="{Binding IconType}" />
-												</Viewbox>
-												<Run Text="{Binding ItemName}"
-													 Foreground="{DynamicResource ActiveForegroundBrushKey}"/>
-												<Run Text="⇒"
-													 Foreground="#FF45A9A5"/>
-												<StackPanel Background="{DynamicResource BackgroundBrushKey}">
-													<ItemsControl ItemsSource="{Binding Ships}">
-														<ItemsControl.ItemTemplate>
-															<DataTemplate>
-																<TextBlock Padding="1">
-																	<Viewbox Width="20">
-																		<controls:SlotItemIcon Type="{Binding UpgradeIconType}" />
-																	</Viewbox>
-																	<Run Text="{Binding Upgrade}"/>
-																</TextBlock>
-															</DataTemplate>
-														</ItemsControl.ItemTemplate>
-													</ItemsControl>
-												</StackPanel>
-											</TextBlock>-->
 										</DataTemplate>
 									</ItemsControl.ItemTemplate>
 								</ItemsControl>
