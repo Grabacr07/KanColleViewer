@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="Behaviors\IgnoreMouseWheelBehavior.cs" />
     <Compile Include="Controls\LogListView.cs" />
-    <Compile Include="MasterDataViewer.cs" />
+    <Compile Include="LogViewer.cs" />
     <Compile Include="ViewModels\LogItemCollection.cs" />
     <Compile Include="ViewModels\PortalViewModel.cs" />
     <Compile Include="Views\Portal.xaml.cs">

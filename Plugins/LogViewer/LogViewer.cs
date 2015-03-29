@@ -14,7 +14,7 @@ namespace Grabacr07.KanColleViewer.Plugins
     [ExportMetadata("Description", "ドロップ・建造・開発ログを表示する。")]
 	[ExportMetadata("Version", "1.0")]
 	[ExportMetadata("Author", "+PaddyXu")]
-	public class MasterDataViewer : IToolPlugin
+	public class LogViewer : IToolPlugin
 	{
 		private readonly PortalViewModel logViewerViewModel = new PortalViewModel();
 
