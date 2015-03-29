@@ -150,8 +150,7 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
                 {
                     IncludeSubdirectories = true,
                     NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.CreationTime | NotifyFilters.FileName,
-                    Filter = Path.Combine(Path.GetFileName(Logger.LogFolder.TrimEnd(Path.DirectorySeparatorChar)),
-                                          Logger.LogParameters[Logger.LogType.ShipDrop].FileName),
+                    Filter = Logger.LogParameters[this.currentLogType].FileName,
                     EnableRaisingEvents = true
                 };
 
