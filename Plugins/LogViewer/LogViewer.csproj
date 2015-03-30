@@ -41,6 +41,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Behaviors\ListViewColumnResizeBehaviour.cs" />
     <Compile Include="Behaviors\IgnoreMouseWheelBehavior.cs" />
     <Compile Include="Controls\LogListView.cs" />
     <Compile Include="LogViewer.cs" />
