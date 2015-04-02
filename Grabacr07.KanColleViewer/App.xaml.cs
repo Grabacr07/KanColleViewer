@@ -10,6 +10,7 @@ using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.ViewModels;
 using Grabacr07.KanColleViewer.Views;
 using Grabacr07.KanColleWrapper;
+using Microsoft.Win32;
 using Livet;
 using MetroRadiance;
 using AppSettings = Grabacr07.KanColleViewer.Properties.Settings;
@@ -102,6 +103,18 @@ namespace Grabacr07.KanColleViewer
 			this.MainWindow.Show();
 
 			RestoreWindowSize();
+			// Check if Adobe Flash is installed in Microsoft Explorer
+			//https://github.com/Yuubari/KanColleViewer/commit/d94a2c215122e4d03bf458f2a060b3a06f3c6599
+			if (GetFlashVersion() == "")
+			{
+				MessageBoxResult MB = MessageBox.Show("Internet Explorer용 Flash Player ActiveX가 설치되어있지않습니다. 지금 설치하시겠습니까?", "Adobe Flash ActiveX를 찾을 수 없습니다" , MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.Yes);
+				if (MB == MessageBoxResult.Yes)
+				{
+					Process.Start("IExplore.exe", @"http://get.adobe.com/flashplayer/");
+					this.MainWindow.Close();
+				}
+			}
+
 
 			if (this.IsUpdate) this.MainWindow.Close();
 		}
@@ -139,6 +152,24 @@ ERROR, date = {0}, sender = {1},
 				Debug.WriteLine(ex);
 			}
 		}
+		/// <summary>
+		/// Obtains Adobe Flash Player's ActiveX element version.
+		/// https://github.com/Yuubari/KanColleViewer/commit/d94a2c215122e4d03bf458f2a060b3a06f3c6599
+		/// </summary>
+		/// <returns>Empty string if Flash is not installed, otherwise the currently installed version.</returns>
+		private static string GetFlashVersion()
+		{
+			string sVersion = "";
+
+			RegistryKey FlashRK = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Macromedia\FlashPlayerActiveX");
+			if (FlashRK != null)
+			{
+				sVersion = FlashRK.GetValue("Version", "").ToString();
+			}
+
+			return sVersion;
+		}
+
 		private void RestoreWindowSize()
 		{
 			var window = System.Windows.Application.Current.MainWindow;
