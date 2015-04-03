@@ -3,6 +3,7 @@ using Grabacr07.KanColleWrapper.Models.Raw;
 using Livet;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;

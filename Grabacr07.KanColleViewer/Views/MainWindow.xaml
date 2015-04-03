@@ -30,43 +30,38 @@
 	<Window.InputBindings>
 		<KeyBinding Key="F5" Command="{Binding RefreshNavigator}" />
 	</Window.InputBindings>
-
-     <metro:MetroWindow.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Themes/Orientation.xaml" />
-                <ResourceDictionary Source="../Themes/Converters.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </metro:MetroWindow.Resources>
-
-    <metro:MetroWindow.MinHeight>
-        <Binding ElementName="KancolleBrowser"
-                Path="ActualHeight"
-                Converter="{StaticResource AdjustConverter}"
-                ConverterParameter="114"
-                Mode="OneWay" />
-    </metro:MetroWindow.MinHeight>
-    
-    <i:Interaction.Triggers>
-        <livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+	<metro:MetroWindow.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="../Themes/Orientation.xaml" />
+				<ResourceDictionary Source="../Themes/Converters.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</metro:MetroWindow.Resources>
+	<!--<metro:MetroWindow.MinHeight>
+		<Binding ElementName="KancolleBrowser"
+				 Path="ActualHeight"
+				 Converter="{StaticResource AdjustConverter}"
+				 ConverterParameter="114"
+				 Mode="OneWay" />
+	</metro:MetroWindow.MinHeight>-->
+	<i:Interaction.Triggers>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
 										 MessageKey="Window/Location">
-            <behaviors:SetWindowLocationAction />
-        </livet:InteractionMessageTrigger>
-        <livet:InteractionMessageTrigger Messenger="{Binding Messenger, Mode=OneWay}"
+			<behaviors:SetWindowLocationAction />
+		</livet:InteractionMessageTrigger>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger, Mode=OneWay}"
 										 MessageKey="Window/Activate">
-            <livet:WindowInteractionMessageAction />
-        </livet:InteractionMessageTrigger>
-    </i:Interaction.Triggers>
-
-    <Grid>
+			<livet:WindowInteractionMessageAction />
+		</livet:InteractionMessageTrigger>
+	</i:Interaction.Triggers>
+	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="23" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="23" />
 		</Grid.RowDefinitions>
-
 		<!-- #region CaptionBar -->
 		<Border metro:MetroWindow.IsCaptionBar="True"
 				Panel.ZIndex="100">
@@ -76,13 +71,11 @@
 					<ColumnDefinition />
 					<ColumnDefinition Width="Auto" />
 				</Grid.ColumnDefinitions>
-
 				<controls:AppIcon Width="36"
 								  Height="36"
 								  Background="Transparent"
 								  AnchorVisibility="Collapsed"
 								  BandVisibility="Collapsed" />
-
 				<TextBlock Grid.Column="1"
 						   Text="{Binding Title}"
 						   Style="{DynamicResource CaptionTextStyleKey}"
@@ -96,7 +89,7 @@
 					<controls:RefreshButton ToolTip="새로고침을 합니다"
 											Margin="0,0,20,0"
 											Height="26"/>
-                     <controls:OrientationModeSelector OrientationMode="{Binding Settings.Orientation, Mode=OneWay}"
+					<controls:OrientationModeSelector OrientationMode="{Binding Settings.Orientation, Mode=OneWay}"
 												 ToolTip="가로/세로를 변경합니다"
 												 Margin="4,0" />
 					<controls:PreviewPopUpButton 
@@ -113,89 +106,82 @@
 			</Grid>
 		</Border>
 		<!-- #endregion -->
-        
-        <ContentControl Grid.Row="1" Content="{Binding Content}"
+		<ContentControl Grid.Row="1" Content="{Binding Content}"
                         Height="55"
                         Visibility="{Binding HorizontalBar}">
-            <ContentControl.Resources>
-                <DataTemplate DataType="{x:Type viewModels:StartContentViewModel}">
-                    <Border ClipToBounds="True">
-                        <views:BrowserNavigator Margin="6,4,6,8"
-									VerticalAlignment="Top"/>
-                    </Border>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type viewModels:MainContentViewModel}">
+			<ContentControl.Resources>
+				<DataTemplate DataType="{x:Type viewModels:StartContentViewModel}">
+					<Border ClipToBounds="True">
+						<views:BrowserNavigator Margin="6,4,6,8"
+												VerticalAlignment="Top"/>
+					</Border>
+				</DataTemplate>
+				<DataTemplate DataType="{x:Type viewModels:MainContentViewModel}">
 					<views:Info Margin="4,-5,4,5"/>
-                </DataTemplate>
-            </ContentControl.Resources>
-        </ContentControl>
-            <DockPanel Grid.Row="2">
-                <Grid Style="{DynamicResource DockOrientation}">
-                    <controls:KanColleHost x:Name="KanColleHost"
+				</DataTemplate>
+			</ContentControl.Resources>
+		</ContentControl>
+		<DockPanel Grid.Row="2">
+			<Grid Style="{DynamicResource DockOrientation}">
+				<controls:KanColleHost x:Name="KanColleHost"
                                        ZoomFactor="{Binding Settings.BrowserZoomFactor.Current}"
                                        Grid.Column="1"
                                        Grid.Row="1" VerticalAlignment="Top">
-                        <i:Interaction.Triggers>
-                            <livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
-													 MessageKey="WebBrowser/Zoom">
-                                <behaviors:ZoomAction />
-                            </livet:InteractionMessageTrigger>
-                        </i:Interaction.Triggers>
-                        <WebBrowser Navigated="WebBrowser_Navigated" LoadCompleted="WebBrowser_LoadCompleted" Navigating="WebBrowser_Navigating" Name="KancolleBrowser">
-                            <i:Interaction.Behaviors>
-                                <behaviors:NavigatorBehavior Navigator="{Binding Navigator}" />
-                                <livet:WebBrowserSetStateToControlBehavior Source="{Binding Source={x:Static properties:Settings.Default}, Path=KanColleUrl, Mode=OneTime}"
-																   Property="Source" />
-                            </i:Interaction.Behaviors>
-                            <i:Interaction.Triggers>
-                                <livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
-														 MessageKey="Screenshot/Save">
-                                    <behaviors:ScreenshotAction />
-                                </livet:InteractionMessageTrigger>
-                            </i:Interaction.Triggers>
-                        </WebBrowser>
-                    </controls:KanColleHost>
-                </Grid>
-                <Grid>
-                    
-                </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <ContentControl Height="55" Content="{Binding Content}"
+					<i:Interaction.Triggers>
+						<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+														 MessageKey="WebBrowser/Zoom">
+							<behaviors:ZoomAction />
+						</livet:InteractionMessageTrigger>
+					</i:Interaction.Triggers>
+					<WebBrowser Navigated="WebBrowser_Navigated" LoadCompleted="WebBrowser_LoadCompleted" Navigating="WebBrowser_Navigating" Name="KancolleBrowser">
+						<i:Interaction.Behaviors>
+							<behaviors:NavigatorBehavior Navigator="{Binding Navigator}" />
+							<livet:WebBrowserSetStateToControlBehavior Source="{Binding Source={x:Static properties:Settings.Default}, Path=KanColleUrl, Mode=OneTime}"
+																	   Property="Source" />
+						</i:Interaction.Behaviors>
+						<i:Interaction.Triggers>
+							<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+															 MessageKey="Screenshot/Save">
+								<behaviors:ScreenshotAction />
+							</livet:InteractionMessageTrigger>
+						</i:Interaction.Triggers>
+					</WebBrowser>
+				</controls:KanColleHost>
+			</Grid>
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+				<ContentControl Height="55" Content="{Binding Content}"
                                 Visibility="{Binding VerticalBar}"
                                 VerticalAlignment="Bottom" 
                                 Margin="0,4,0,0">
-                   <ContentControl.Resources>
-                <DataTemplate DataType="{x:Type viewModels:StartContentViewModel}">
-                    <Border ClipToBounds="True">
-                        <views:BrowserNavigator Margin="6,4,6,8"
-									VerticalAlignment="Top"/>
-                    </Border>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type viewModels:MainContentViewModel}">
-					<views:Info Margin="4,-5,4,5"/>
-                </DataTemplate>
-            </ContentControl.Resources>
-                </ContentControl>
-                <ContentControl Content="{Binding Content}" Grid.Row="1">
-                <ContentControl.Resources>
-                    <DataTemplate DataType="{x:Type viewModels:StartContentViewModel}">
-                        <views:StartContent />
-                    </DataTemplate>
-
-                    <DataTemplate DataType="{x:Type viewModels:MainContentViewModel}">
-                        <views:MainContent />
-                    </DataTemplate>
-                </ContentControl.Resources>
-            </ContentControl>
-            </Grid>
-        </DockPanel>
-
-
-            <!-- region Status area -->
+					<ContentControl.Resources>
+						<DataTemplate DataType="{x:Type viewModels:StartContentViewModel}">
+							<Border ClipToBounds="True">
+								<views:BrowserNavigator Margin="6,4,6,8"
+														VerticalAlignment="Top"/>
+							</Border>
+						</DataTemplate>
+						<DataTemplate DataType="{x:Type viewModels:MainContentViewModel}">
+							<views:Info Margin="4,-5,4,5"/>
+						</DataTemplate>
+					</ContentControl.Resources>
+				</ContentControl>
+				<ContentControl Content="{Binding Content}" Grid.Row="1">
+					<ContentControl.Resources>
+						<DataTemplate DataType="{x:Type viewModels:StartContentViewModel}">
+							<views:StartContent />
+						</DataTemplate>
+						<DataTemplate DataType="{x:Type viewModels:MainContentViewModel}">
+							<views:MainContent />
+						</DataTemplate>
+					</ContentControl.Resources>
+				</ContentControl>
+			</Grid>
+		</DockPanel>
+		<!-- region Status area -->
 		<Grid Grid.Row="4"
 			  Background="{DynamicResource AccentBrushKey}"
 			  Panel.ZIndex="100">
@@ -207,6 +193,5 @@
 			<views:StatusBar />
 			<metro:ResizeGrip Grid.Column="1" />
 		</Grid>
-		<!-- endregion -->
 	</Grid>
 </metro:MetroWindow>
