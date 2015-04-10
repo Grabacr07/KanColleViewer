@@ -331,8 +331,8 @@
                                     <Run Text="https://github.com/Grabacr07/KanColleViewer" />
                                 </metro2:HyperlinkEx><LineBreak />
                                  <Run Text="업데이트 링크:" />
-                                <metro2:HyperlinkEx Uri="http://kancolleviewerkr.tk/category/Releases">
-                                    <Run Text="http://KanColleViewerKr.tk/category/Releases" />
+                                <metro2:HyperlinkEx Uri="http://KCVkr.tistory.com/category/Releases">
+                                    <Run Text="http://KCVkr.tistory.com/category/Releases" />
                                 </metro2:HyperlinkEx>
                                 
                             </Paragraph>

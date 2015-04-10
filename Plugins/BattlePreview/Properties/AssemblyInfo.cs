@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("제독업무도 바빠! 전투예보 출력 플러그인")]
 [assembly: AssemblyDescription("전투계산결과를 출력하는 플러그인입니다. 현 버전은 한글버전에서만 작동합니다.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("KancolleViewerKr.tk")]
+[assembly: AssemblyCompany("KCVkr.tistory.com")]
 [assembly: AssemblyProduct("KanColleViewer")]
 [assembly: AssemblyCopyright("Copyright © 2015 FreyYa")]
 [assembly: AssemblyTrademark("")]

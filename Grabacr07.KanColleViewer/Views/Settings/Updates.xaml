@@ -229,8 +229,8 @@
 		</Grid>
 		<TextBlock Margin="6,10,0,0">
 			<Run Text="다운로드/패치로그 링크:" />
-			<metro2:HyperlinkEx Uri="http://KancolleViewerKr.tk">
-				<Run Text="http://KancolleViewerKr.tk" />
+			<metro2:HyperlinkEx Uri="http://KCVkr.tistory.com">
+				<Run Text="http://KCVkr.tistory.com" />
 			</metro2:HyperlinkEx>
 		</TextBlock>
 

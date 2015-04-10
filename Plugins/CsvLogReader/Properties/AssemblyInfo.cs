@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("KCV Log Reader Plugin")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("KancolleVIewerKr.tk")]
+[assembly: AssemblyCompany("KCVkr.tistory.com")]
 [assembly: AssemblyProduct("KanColleViewer")]
 [assembly: AssemblyCopyright("Copyright © 2015 FreyYa")]
 [assembly: AssemblyTrademark("")]
