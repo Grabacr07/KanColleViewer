@@ -1,4 +1,5 @@
 ﻿using Grabacr07.KanColleViewer.Models;
+using Grabacr07.KanColleViewer.Win32;
 using System;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -12,13 +13,24 @@ namespace Grabacr07.KanColleViewer.Views
 	partial class MainWindow
 	{
 		public static MainWindow Current { get; private set; }
+		public LeftTop rect { get; set; }
+		public class LeftTop
+		{
+			public int left { get; set; }
+			public int top { get; set; }
+		}
 
 		public MainWindow()
 		{
 			InitializeComponent();
 			Current = this;
 		}
-
+		public void SetPos()
+		{
+			rect = new LeftTop();
+			rect.left = Convert.ToInt32(this.Left);
+			rect.top = Convert.ToInt32(this.Top);
+		}
 		protected override void OnClosing(CancelEventArgs e)
 		{
 			// ToDo: 確認ダイアログを実装したかった…

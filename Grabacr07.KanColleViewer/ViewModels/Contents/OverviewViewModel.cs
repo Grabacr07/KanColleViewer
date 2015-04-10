@@ -160,5 +160,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			var message = new TransitionMessage(catalog, "Show/ExpeditionsCatalogWindow");
 			this.Messenger.RaiseAsync(message);
 		}
+		public void ShowNotePad()
+		{
+			var window = new NotePadViewModel();
+			var message = new TransitionMessage(window, "Show/NotePad");
+			this.Messenger.RaiseAsync(message);
+		}
 	}
 }

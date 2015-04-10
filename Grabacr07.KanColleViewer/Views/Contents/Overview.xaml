@@ -78,6 +78,12 @@
 
 	<i:Interaction.Triggers>
 		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+										 MessageKey="Show/NotePad">
+			<livet:TransitionInteractionMessageAction Mode="NewOrActive"
+													  WindowType="catalogs:NotePad"
+													  IsOwned="False" />
+		</livet:InteractionMessageTrigger>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
 										 MessageKey="Show/ShipCatalogWindow">
 			<livet:TransitionInteractionMessageAction Mode="NewOrActive"
 													  WindowType="catalogs:ShipCatalogWindow"
@@ -447,8 +453,14 @@
 												 MethodName="CalExp" />
                         <metro2:CallMethodButton Content="원정목록"
 												 Padding="12,5"
+												 Margin="0,0,0,5"
 												 MethodName="ExpeditionsCatalogWindow" />
-                    </StackPanel>
+						<metro2:CallMethodButton Content="메모장"
+												 ToolTip="간단한 메모장입니다"
+												 Padding="12,5"
+												 MethodName="ShowNotePad">
+						</metro2:CallMethodButton>
+					</StackPanel>
                 </Border>
 
                 <metro2:CallMethodButton Grid.Row="0"

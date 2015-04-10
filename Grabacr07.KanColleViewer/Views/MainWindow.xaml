@@ -6,7 +6,7 @@
 				   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 				   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 				   xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
-                   xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
+				   xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 				   xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
 				   xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
@@ -38,13 +38,13 @@
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</metro:MetroWindow.Resources>
-	<!--<metro:MetroWindow.MinHeight>
+	<metro:MetroWindow.MinHeight>
 		<Binding ElementName="KancolleBrowser"
 				 Path="ActualHeight"
 				 Converter="{StaticResource AdjustConverter}"
 				 ConverterParameter="114"
 				 Mode="OneWay" />
-	</metro:MetroWindow.MinHeight>-->
+	</metro:MetroWindow.MinHeight>
 	<i:Interaction.Triggers>
 		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
 										 MessageKey="Window/Location">
@@ -76,6 +76,7 @@
 								  Background="Transparent"
 								  AnchorVisibility="Collapsed"
 								  BandVisibility="Collapsed" />
+				
 				<TextBlock Grid.Column="1"
 						   Text="{Binding Title}"
 						   Style="{DynamicResource CaptionTextStyleKey}"

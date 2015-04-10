@@ -173,6 +173,7 @@
     <Compile Include="ViewModels\Catalogs\CalExpViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ExpeditionsCatalogWindowViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\NeedNdockShipCatalogWindowViewModel.cs" />
+    <Compile Include="ViewModels\Catalogs\NotePadViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogFilter.cs" />
     <Compile Include="ViewModels\Catalogs\ShipViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\SlotItemCatalogViewModel.cs" />
@@ -234,6 +235,9 @@
     <Compile Include="Views\Behaviors\ScreenshotAction.cs" />
     <Compile Include="Views\Behaviors\SetStyleSheetBehavior.cs" />
     <Compile Include="Views\Behaviors\SetWindowLocationAction.cs" />
+    <Compile Include="Views\Catalogs\NotePad.xaml.cs">
+      <DependentUpon>NotePad.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Catalogs\NeedNdockShipCatalogWindow.xaml.cs">
       <DependentUpon>NeedNdockShipCatalogWindow.xaml</DependentUpon>
     </Compile>
@@ -464,6 +468,10 @@
     <Page Include="Views\BrowserNavigator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Catalogs\NotePad.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Catalogs\CalExp.xaml">
       <Generator>MSBuild:Compile</Generator>

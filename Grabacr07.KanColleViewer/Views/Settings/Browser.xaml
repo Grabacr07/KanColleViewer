@@ -67,7 +67,7 @@
 
 			<TextBlock Margin="8,0,10,0"
 					   Style="{DynamicResource DefaultTextStyleKey}"
-					   Text="창 상단의 버튼으로 게임화면 (Internet Explorer)의 크기를 변경할 수 있습니다. 스크린샷은 화면크기의 영향을 받지 않고 100%로 촬영됩니다."
+					   Text="창 상단의 버튼으로 게임화면 (Internet Explorer)의 크기를 변경할 수 있습니다. 스크린샷은 특정 상황을 제외하면 화면크기의 영향을 받지 않고 100%로 촬영됩니다."
 					   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 		</DockPanel>
 
