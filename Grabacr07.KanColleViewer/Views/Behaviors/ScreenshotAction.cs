@@ -10,6 +10,10 @@ using System.Drawing.Imaging;
 using System.IO;
 using IServiceProvider = Grabacr07.KanColleViewer.Win32.IServiceProvider;
 using WebBrowser = System.Windows.Controls.WebBrowser;
+using Setting = Grabacr07.KanColleViewer.Models.Settings;
+using Grabacr07.KanColleViewer.Models;
+using Grabacr07.KanColleViewer.Views.Controls;
+using System.Diagnostics;
 
 namespace Grabacr07.KanColleViewer.Views.Behaviors
 {
@@ -33,7 +37,16 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 			}
 			catch (Exception ex)
 			{
-				screenshotMessage.Response = new Processing(ex);
+				Debug.WriteLine(ex);
+				try
+				{
+					screenshotMessage.Response = new Processing(ex);
+					TakeScreenshot(800, 480, null, screenshotMessage.Path);
+				}
+				catch (Exception e)
+				{
+					screenshotMessage.Response = new Processing(e);
+				}
 			}
 		}
 
@@ -48,11 +61,12 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 		/// <param name="path"></param>
 		private void SaveCore(string path)
 		{
-			const string notFoundMessage = "艦これの Flash 要素が見つかりません。";
+			const string notFoundMessage = "칸코레 Flash를 찾을수 없습니다. 강제캡처모드로 캡처합니다.";
 
 			var document = this.AssociatedObject.Document as HTMLDocument;
 			if (document == null)
 			{
+				TakeScreenshot(800, 480, null, path);
 				throw new Exception(notFoundMessage);
 			}
 
@@ -61,18 +75,21 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 				var viewObject = document.getElementsByTagName("embed").item(0, 0) as IViewObject;
 				if (viewObject == null)
 				{
+					TakeScreenshot(800, 480, null, path);
 					throw new Exception(notFoundMessage);
 				}
 
 				var width = ((HTMLEmbed)viewObject).clientWidth;
 				var height = ((HTMLEmbed)viewObject).clientHeight;
 				TakeScreenshot(width, height, viewObject, path);
+				//TakeScreenshot(width, height, null, path);
 			}
 			else
 			{
 				var gameFrame = document.getElementById("game_frame").document as HTMLDocument;
 				if (gameFrame == null)
 				{
+					TakeScreenshot(800, 480, null, path);
 					throw new Exception(notFoundMessage);
 				}
 
@@ -110,12 +127,14 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 
 					find = true;
 					TakeScreenshot(width, height, viewObject, path);
+					//TakeScreenshot(width, height, null, path);
 
 					break;
 				}
 
 				if (!find)
 				{
+					TakeScreenshot(800, 480, null, path);
 					throw new Exception(notFoundMessage);
 				}
 			}
@@ -129,18 +148,60 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 			var rect = new RECT { left = 0, top = 0, width = width, height = height, };
 			var tdevice = new DVTARGETDEVICE { tdSize = 0, };
 
-			using (var graphics = Graphics.FromImage(image))
+			if (viewObject != null)
 			{
-				var hdc = graphics.GetHdc();
-				viewObject.Draw(1, 0, IntPtr.Zero, tdevice, IntPtr.Zero, hdc, rect, null, IntPtr.Zero, IntPtr.Zero);
-				graphics.ReleaseHdc(hdc);
+				using (var graphics = Graphics.FromImage(image))
+				{
+					var hdc = graphics.GetHdc();
+					viewObject.Draw(1, 0, IntPtr.Zero, tdevice, IntPtr.Zero, hdc, rect, null, IntPtr.Zero, IntPtr.Zero);
+					graphics.ReleaseHdc(hdc);
+				}
+			}
+			else
+			{
+				//From GrandcypherGear TakeScreenShot
+				rect.height = Convert.ToInt32(rect.height * Setting.Current.BrowserZoomFactorPercentage / 100);
+				rect.width = Convert.ToInt32(rect.width * Setting.Current.BrowserZoomFactorPercentage / 100);
+				image = new Bitmap(rect.width, rect.height, PixelFormat.Format24bppRgb);
+
+				KanColleViewer.Views.MainWindow.Current.SetPos();
+				int left = KanColleViewer.Views.MainWindow.Current.rect.left;
+				int top = KanColleViewer.Views.MainWindow.Current.rect.top + 91;
+
+
+				if (Setting.Current.OrientationMode == OrientationType.Vertical)
+				{
+					top = top - 55;
+				}
+
+				using (Graphics graphics = Graphics.FromHwnd(IntPtr.Zero))
+				{
+					float dpiX = graphics.DpiX;
+					float dpiY = graphics.DpiY;
+
+					if (dpiX != 96f)
+					{
+						left = Convert.ToInt32(left * dpiX / 96f);
+					}
+					if (dpiY != 96f)
+					{
+						top = Convert.ToInt32(top * dpiY / 96f);
+					}
+				}
+				if (left < 0) left = 0;
+				using (var graphics = Graphics.FromImage(image))
+				{
+					graphics.CopyFromScreen(new System.Drawing.Point(left, top), new System.Drawing.Point(0, 0), new System.Drawing.Size(rect.width, rect.height));
+				}
 			}
 
 			var format = Path.GetExtension(path) == ".jpg"
-				? ImageFormat.Jpeg 
+				? ImageFormat.Jpeg
 				: ImageFormat.Png;
 
 			image.Save(path, format);
+			if (viewObject == null)
+				throw new Exception("강제캡처모드로 스크린샷을 작성합니다.");
 		}
 	}
 }
