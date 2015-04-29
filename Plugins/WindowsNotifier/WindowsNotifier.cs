@@ -34,7 +34,14 @@ namespace Grabacr07.KanColleViewer.Plugins
 
 		public void Show(NotifyType type, string header, string body, Action activated, Action<Exception> failed = null)
 		{
-			this.notifier.Show(type, header, body, activated, failed);
+			try
+			{
+				this.notifier.Show(type, header, body, activated, failed);
+			}
+			catch(Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(ex);
+			}
 		}
 
 		public object GetSettingsView()
