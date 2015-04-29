@@ -82,7 +82,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Rx-PlatformServices.2.2.4\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -100,6 +99,8 @@
     <Compile Include="Calculator.cs" />
     <Compile Include="Counter.cs" />
     <Compile Include="Dockyard.cs" />
+    <Compile Include="Models\MapArea.cs" />
+    <Compile Include="Models\MapInfo.cs" />
     <Compile Include="Models\Mission.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Itemyard.cs" />
@@ -108,6 +109,9 @@
     <Compile Include="Models\ConditionRejuvenatedEventArgs.cs" />
     <Compile Include="Models\CreatedSlotItem.cs" />
     <Compile Include="Models\FleetCondition.cs" />
+    <Compile Include="Models\Raw\kcsapi_mst_maparea.cs" />
+    <Compile Include="Models\Raw\kcsapi_mst_mapinfo.cs" />
+    <Compile Include="Models\Raw\kcsapi_remodel_slot.cs" />
     <Compile Include="Models\Raw\kcsapi_hensei_combined.cs" />
     <Compile Include="Models\Raw\kcsapi_combined_battle_battleresult.cs" />
     <Compile Include="Models\Raw\kcsapi_combined_battle_airbattle.cs" />
@@ -120,6 +124,10 @@
     <Compile Include="Models\Raw\kcsapi_mission.cs" />
     <Compile Include="Models\Raw\kcsapi_mission_result.cs" />
     <Compile Include="Models\Raw\kcsapi_powerup.cs" />
+    <Compile Include="Models\Raw\kcsapi_remodel_slotlist.cs" />
+    <Compile Include="Models\Raw\kcsapi_remodel_slotlist_detail.cs" />
+    <Compile Include="Models\SlotItemType.cs" />
+    <Compile Include="Models\ViewRange.cs" />
     <Compile Include="Organization.cs" />
     <Compile Include="KanColleProxy.Endpoints.cs">
       <AutoGen>True</AutoGen>
@@ -164,7 +172,7 @@
     <Compile Include="Models\RepairingDockState.cs" />
     <Compile Include="Models\ShipType.cs" />
     <Compile Include="Models\ShipTypeId.cs" />
-    <Compile Include="Models\SlotItemType.cs" />
+    <Compile Include="Models\SlotItemIconType.cs" />
     <Compile Include="Models\Speed.cs" />
     <Compile Include="Models\ModernizableStatus.cs" />
     <Compile Include="Models\UseItemInfo.cs" />

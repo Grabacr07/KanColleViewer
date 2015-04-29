@@ -31,10 +31,13 @@ namespace Grabacr07.KanColleViewer.Models
 		/// <summary>
 		/// デザイナーのコンテキストで実行されているかどうかを取得します。
 		/// </summary>
-		public static bool IsInDesignMode => DesignerProperties.GetIsInDesignMode(new DependencyObject());
+		public static bool IsInDesignMode
+		{
+			get { return DesignerProperties.GetIsInDesignMode(new DependencyObject()); }
+		}
 
 
-	    public static string CreateScreenshotFilePath()
+		public static string CreateScreenshotFilePath()
 		{
 			var filePath = Path.Combine(
 				Settings.Current.ScreenshotFolder,
@@ -70,6 +73,12 @@ namespace Grabacr07.KanColleViewer.Models
 			{
 				Debug.WriteLine(ex);
 			}
+		}
+
+		public static void SetMMCSSTask()
+		{
+			var index = 0u;
+			NativeMethods.AvSetMmThreadCharacteristics("Games", ref index);
 		}
 
 

@@ -15,9 +15,12 @@ namespace Grabacr07.KanColleViewer.Models
 
 		private static readonly NotifierHost instance = new NotifierHost();
 
-		public static NotifierHost Instance => instance;
+		public static NotifierHost Instance
+		{
+			get { return instance; }
+		}
 
-	    #endregion
+		#endregion
 
 		private NotifierHost() { }
 
@@ -77,8 +80,8 @@ namespace Grabacr07.KanColleViewer.Models
 				{
 					if (Settings.Current.NotifyBuildingCompleted)
 					{
-						var shipName = Settings.Current.CanDisplayBuildingShipName 
-							? args.Ship.Name 
+						var shipName = Settings.Current.CanDisplayBuildingShipName
+							? args.Ship.Name
 							: Resources.Common_ShipGirl;
 
 						PluginHost.Instance.GetNotifier().Show(

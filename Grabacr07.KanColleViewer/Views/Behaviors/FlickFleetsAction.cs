@@ -15,15 +15,14 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 
 	public class FlickFleetsAction : TargetedTriggerAction<FleetsViewModel>
 	{
-		private FlickOrientation orientation = FlickOrientation.Horizontal;
+		public FlickOrientation Orientation { get; set; }
 
-		public FlickOrientation Orientation
+	    public bool IsCyclic { get; set; }
+
+		public FlickFleetsAction()
 		{
-			get { return orientation; }
-			set { orientation = value; }
+			this.Orientation = FlickOrientation.Horizontal;
 		}
-
-		public bool IsCyclic { get; set; }
 
 		protected override void Invoke(object parameter)
 		{

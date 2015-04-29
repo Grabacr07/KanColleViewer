@@ -17,11 +17,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 	{
 		private readonly Fleet source;
 
-		public SortieViewModel Sortie { get; }
+		public SortieViewModel Sortie { get; private set; }
 
-		public ExpeditionViewModel Expedition { get; }
+		public ExpeditionViewModel Expedition { get; private set; }
 
-		public HomeportViewModel Homeport { get; }
+		public HomeportViewModel Homeport { get; private set; }
 
 		/// <summary>
 		/// 艦隊に所属している艦娘のコレクションを取得します。
@@ -76,21 +76,42 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 		#region wrapper properties
 
-		public int Id => this.source.Id;
+		public int Id
+		{
+			get { return this.source.Id; }
+		}
 
-	    public string Name => string.IsNullOrEmpty(this.source.Name.Trim()) ? "(第 " + this.source.Id + " 艦隊)" : this.source.Name;
+		public string Name
+		{
+			get { return string.IsNullOrEmpty(this.source.Name.Trim()) ? "(第 " + this.source.Id + " 艦隊)" : this.source.Name; }
+		}
 
-	    public string TotalLevel => this.source.TotalLevel.ToString("####");
+		public string TotalLevel
+		{
+			get { return this.source.TotalLevel.ToString("####"); }
+		}
 
-	    public string AverageLevel => this.source.AverageLevel.ToString("##.##");
+		public string AverageLevel
+		{
+			get { return this.source.AverageLevel.ToString("##.##"); }
+		}
 
-	    public string Speed => this.source.Speed == KanColleWrapper.Models.Speed.Fast ? Resources.Fleets_Speed_Fast : Resources.Fleets_Speed_Slow;
+		public string Speed
+		{
+			get { return this.source.Speed == KanColleWrapper.Models.Speed.Fast ? Resources.Fleets_Speed_Fast : Resources.Fleets_Speed_Slow; }
+		}
 
-	    public int AirSuperiorityPotential => this.source.AirSuperiorityPotential;
+		public int AirSuperiorityPotential
+		{
+			get { return this.source.AirSuperiorityPotential; }
+		}
 
-	    public string TotalViewRange => this.source.TotalViewRange.ToString("####");
+		public string TotalViewRange
+		{
+			get { return this.source.TotalViewRange.ToString("###.##"); }
+		}
 
-	    #endregion
+		#endregion
 
 
 		public FleetViewModel(Fleet fleet)

@@ -22,9 +22,12 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// <see cref="SlotItems"/> と、出撃中に入手したものを含んだ装備数を取得します。
 		/// </summary>
-		public int SlotItemsCount => this.SlotItems.Count + this.droppedItemsCount;
+		public int SlotItemsCount
+		{
+			get { return this.SlotItems.Count + this.droppedItemsCount; }
+		}
 
-	    #region SlotItems 変更通知プロパティ
+		#region SlotItems 変更通知プロパティ
 
 		private MemberTable<SlotItem> _SlotItems;
 
@@ -82,6 +85,8 @@ namespace Grabacr07.KanColleWrapper
 			proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => this.DropShip(x.Data));
 
 			proxy.api_get_member_useitem.TryParse<kcsapi_useitem[]>().Subscribe(x => this.Update(x.Data));
+
+			proxy.api_req_kousyou_remodel_slot.TryParse<kcsapi_remodel_slot>().Subscribe(x => this.RemoveFromRemodel(x.Data));
 		}
 
 
@@ -107,13 +112,24 @@ namespace Grabacr07.KanColleWrapper
 
 		internal void RemoveFromShip(Ship ship)
 		{
-			foreach (var x in ship.SlotItems.Where(x => x != null).ToArray())
+			foreach (var x in ship.EquippedSlots.ToArray())
 			{
-				this.SlotItems.Remove(x);
+				this.SlotItems.Remove(x.Item);
 			}
 			this.RaiseSlotItemsChanged();
 		}
 
+		internal void RemoveFromRemodel(kcsapi_remodel_slot source)
+		{
+			if (source.api_use_slot_id != null)
+			{
+				foreach (var id in source.api_use_slot_id)
+				{
+					this.SlotItems.Remove(id);
+				}
+				this.RaiseSlotItemsChanged();
+			}
+		}
 
 		private void CreateItem(kcsapi_createitem source)
 		{
@@ -130,7 +146,7 @@ namespace Grabacr07.KanColleWrapper
 
 			try
 			{
-				foreach (var x in data.Request["api_slotitem_ids"].Split(new[] { ',' }).Select(int.Parse))
+				foreach (var x in data.Request["api_slotitem_ids"].Split(',').Select(int.Parse))
 				{
 					this.SlotItems.Remove(x);
 				}
@@ -144,13 +160,21 @@ namespace Grabacr07.KanColleWrapper
 
 		private void DropShip(kcsapi_battleresult source)
 		{
-			if (source.api_get_ship == null) return;
+			try
+			{
+				if (source.api_get_ship == null) return;
 
-			var target = KanColleClient.Current.Master.Ships[source.api_get_ship.api_ship_id];
-			if (target == null) return;
+				var target = KanColleClient.Current.Master.Ships[source.api_get_ship.api_ship_id];
+				if (target == null) return;
 
-			this.droppedItemsCount += target.RawData.api_defeq.Count(x => x != -1);
-			this.RaisePropertyChanged("SlotItemsCount");
+				this.droppedItemsCount += target.RawData.api_defeq.Count(x => x != -1);
+				this.RaisePropertyChanged("SlotItemsCount");
+			}
+			catch (Exception ex)
+			{
+				// defeq が消えてるっぽい暫定対応 (雑)
+				Debug.WriteLine(ex);
+			}
 		}
 
 

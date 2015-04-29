@@ -20,10 +20,13 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// テーブルから指定した ID の要素を取得します。ID が存在しない場合は null を返します。
 		/// </summary>
-		public TValue this[int key] => this.dictionary.ContainsKey(key) ? this.dictionary[key] : null;
+		public TValue this[int key]
+		{
+			get { return this.dictionary.ContainsKey(key) ? this.dictionary[key] : null; }
+		}
 
 
-	    public MemberTable() : this(new List<TValue>()) { }
+		public MemberTable() : this(new List<TValue>()) { }
 
 		public MemberTable(IEnumerable<TValue> source)
 		{
@@ -59,9 +62,12 @@ namespace Grabacr07.KanColleWrapper
 			return this.GetEnumerator();
 		}
 
-		public int Count => this.dictionary.Count;
+		public int Count
+		{
+			get { return this.dictionary.Count; }
+		}
 
-	    public bool ContainsKey(int key)
+		public bool ContainsKey(int key)
 		{
 			return this.dictionary.ContainsKey(key);
 		}
@@ -71,10 +77,16 @@ namespace Grabacr07.KanColleWrapper
 			return this.dictionary.TryGetValue(key, out value);
 		}
 
-		public IEnumerable<int> Keys => this.dictionary.Keys;
+		public IEnumerable<int> Keys
+		{
+			get { return this.dictionary.Keys; }
+		}
 
-	    public IEnumerable<TValue> Values => this.dictionary.Values;
+		public IEnumerable<TValue> Values
+		{
+			get { return this.dictionary.Values; }
+		}
 
-	    #endregion
+		#endregion
 	}
 }

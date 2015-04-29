@@ -10,9 +10,12 @@ namespace Grabacr07.KanColleWrapper.Models
 {
 	public class SlotItem : RawDataWrapper<kcsapi_slotitem>, IIdentifiable
 	{
-		public int Id => this.RawData.api_id;
+		public int Id
+		{
+		    get { return this.RawData.api_id; }
+		}
 
-	    public SlotItemInfo Info { get; }
+	    public SlotItemInfo Info { get; private set; }
 
 		internal SlotItem(kcsapi_slotitem rawData) : base(rawData)
 		{

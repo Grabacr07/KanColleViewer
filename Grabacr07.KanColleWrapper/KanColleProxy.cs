@@ -18,9 +18,15 @@ namespace Grabacr07.KanColleWrapper
 		private readonly IConnectableObservable<Session> apiSource;
 		private readonly LivetCompositeDisposable compositeDisposable;
 
-		public IObservable<Session> SessionSource => this.connectableSessionSource.AsObservable();
+		public IObservable<Session> SessionSource
+		{
+		    get { return this.connectableSessionSource.AsObservable(); }
+		}
 
-	    public IObservable<Session> ApiSessionSource => this.apiSource.AsObservable();
+	    public IObservable<Session> ApiSessionSource
+	    {
+	        get { return this.apiSource.AsObservable(); }
+	    }
 
 	    public IProxySettings UpstreamProxySettings { get; set; }
 

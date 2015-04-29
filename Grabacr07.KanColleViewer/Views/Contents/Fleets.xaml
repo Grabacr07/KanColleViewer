@@ -55,6 +55,162 @@
 			<Grid Grid.Row="3"
 				  DataContext="{Binding SelectedFleet}"
 				  d:DataContext="{d:DesignData /SampleData/FleetViewModelSampleData.xaml}">
+
+				<ItemsControl ItemsSource="{Binding Ships}"
+							  Grid.IsSharedSizeScope="True"
+							  VerticalAlignment="Top"
+							  Margin="0,0,10,0"
+							  Visibility="Collapsed">
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<UniformGrid Columns="2" />
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<StackPanel>
+								<StackPanel.Resources>
+									<Style TargetType="{x:Type TextBlock}"
+										   BasedOn="{StaticResource DefaultTextStyleKey}">
+									</Style>
+								</StackPanel.Resources>
+
+								<Border BorderBrush="{DynamicResource InactiveForegroundBrushKey}"
+										BorderThickness="0,0,1,1"
+										Margin="10,10,0,0">
+									<Grid HorizontalAlignment="Left"
+										  Margin="0,0,0,10">
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto" />
+											<RowDefinition Height="Auto" />
+											<RowDefinition Height="Auto" />
+										</Grid.RowDefinitions>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto"
+															  SharedSizeGroup="ShipInfo" />
+											<ColumnDefinition Width="8" />
+											<ColumnDefinition Width="Auto"
+															  SharedSizeGroup="SlotInfo" />
+										</Grid.ColumnDefinitions>
+
+										<Grid Grid.Row="0"
+											  Grid.Column="0"
+											  Margin="0,0,0,5">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="Auto"
+																  SharedSizeGroup="ShipName" />
+												<ColumnDefinition Width="8" />
+												<ColumnDefinition Width="Auto"
+																  SharedSizeGroup="ShipLevel" />
+											</Grid.ColumnDefinitions>
+
+											<TextBlock Style="{DynamicResource DefaultTextStyleKey}">
+												<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
+													 FontSize="18"
+													 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+												<LineBreak />
+												<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
+													 FontSize="14" />
+											</TextBlock>
+
+											<TextBlock Grid.Column="2"
+													   VerticalAlignment="Top"
+													   Style="{DynamicResource DefaultTextStyleKey}">
+												<Run Text="Lv." />
+												<Run Text="{Binding Ship.Level, Mode=OneWay}"
+													 FontSize="18"
+													 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+												<LineBreak />
+												<Run Text="Next:"
+													 FontSize="9" />
+												<Run Text="{Binding Ship.ExpForNextLevel, Mode=OneWay}"
+													 FontSize="9" />
+											</TextBlock>
+										</Grid>
+
+										<Grid Grid.Row="1"
+											  Grid.Column="0">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="Auto"
+																  SharedSizeGroup="ShipHP" />
+												<ColumnDefinition Width="8" />
+												<ColumnDefinition Width="Auto"
+																  SharedSizeGroup="ShipHoge" />
+											</Grid.ColumnDefinitions>
+
+											<StackPanel>
+												<TextBlock x:Name="HPText">
+														<Run Text="HP:" />
+														<Run Text="{Binding Ship.HP.Current, Mode=OneWay}"
+															 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+														<Run Text="/" />
+														<Run Text="{Binding Ship.HP.Maximum, Mode=OneWay}" />
+												</TextBlock>
+												<controls:ColorIndicator x:Name="HPIndicator"
+																		 Height="7"
+																		 Margin="1,3,0,0"
+																		 LimitedValue="{Binding Ship.HP, Mode=OneWay}" />
+											</StackPanel>
+										</Grid>
+
+										<ItemsControl Grid.Row="0"
+													  Grid.RowSpan="3"
+													  Grid.Column="2"
+													  Grid.IsSharedSizeScope="True"
+													  ItemsSource="{Binding Slots}"
+													  Margin="8,0">
+											<ItemsControl.ItemTemplate>
+												<DataTemplate>
+													<Grid>
+														<Grid.ColumnDefinitions>
+															<ColumnDefinition Width="Auto"
+																			  SharedSizeGroup="SlotItemIcon" />
+															<ColumnDefinition Width="Auto"
+																			  SharedSizeGroup="SlotItemName" />
+															<ColumnDefinition Width="Auto"
+																			  SharedSizeGroup="SlotItemCurrent" />
+															<ColumnDefinition Width="Auto" />
+															<ColumnDefinition Width="Auto"
+																			  SharedSizeGroup="SlotItemMaximum" />
+														</Grid.ColumnDefinitions>
+
+														<controls:SlotItemIcon Grid.Column="0"
+																			   Type="{Binding Item.IconType}"
+																			   Width="20"
+																			   Height="20" />
+														<!--<TextBlock Grid.Column="1"
+																   Text="{Binding Item.Name}"
+																   Margin="4,0,8,0"
+																   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+																   Style="{DynamicResource DefaultTextStyleKey}" />-->
+														<TextBlock Grid.Column="2"
+																   Text="{Binding Current}"
+																   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+																   HorizontalAlignment="Right"
+																   Visibility="{Binding Item.IsNumerable, Converter={StaticResource BooleanToVisibilityConverter}}"
+																   Style="{DynamicResource DefaultTextStyleKey}" />
+														<TextBlock Grid.Column="3"
+																   Text=" / "
+																   Style="{DynamicResource DefaultTextStyleKey}" />
+														<TextBlock Grid.Column="4"
+																   Text="{Binding Maximum}"
+																   HorizontalAlignment="Right"
+																   Style="{DynamicResource DefaultTextStyleKey}" />
+
+													</Grid>
+												</DataTemplate>
+											</ItemsControl.ItemTemplate>
+										</ItemsControl>
+									</Grid>
+								</Border>
+							</StackPanel>
+
+							<DataTemplate.Triggers>
+							</DataTemplate.Triggers>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+
 				<ItemsControl ItemsSource="{Binding Ships}"
 							  Margin="0,0,0,10"
 							  Grid.IsSharedSizeScope="True">
@@ -92,6 +248,7 @@
 										<ColumnDefinition Width="Auto"
 														  SharedSizeGroup="SlotItems" />
 									</Grid.ColumnDefinitions>
+
 
 									<TextBlock Grid.Column="1"
 											   Grid.Row="0"
@@ -197,7 +354,7 @@
 									<ItemsControl Grid.Column="7"
 												  Grid.Row="0"
 												  Grid.RowSpan="2"
-												  ItemsSource="{Binding Ship.SlotItems}"
+												  ItemsSource="{Binding Ship.EquippedSlots}"
 												  Margin="7,0">
 										<ItemsControl.Template>
 											<ControlTemplate TargetType="{x:Type ItemsControl}">
@@ -207,9 +364,9 @@
 										</ItemsControl.Template>
 										<ItemsControl.ItemTemplate>
 											<DataTemplate>
-												<Border ToolTip="{Binding Info.Name}"
+												<Border ToolTip="{Binding Item.Info.Name}"
 														Background="Transparent">
-													<controls:SlotItemIcon Type="{Binding Info.IconType}"
+													<controls:SlotItemIcon Type="{Binding Item.Info.IconType}"
 																		   Margin="3,0" />
 												</Border>
 											</DataTemplate>

@@ -13,21 +13,39 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 	{
 		private readonly Expedition source;
 
-		public Mission Mission => this.source.Mission;
+		public Mission Mission
+		{
+			get { return this.source.Mission; }
+		}
 
-	    public bool IsInExecution => this.source.IsInExecution;
+		public bool IsInExecution
+		{
+			get { return this.source.IsInExecution; }
+		}
 
-	    public string ReturnTime => this.source.ReturnTime.HasValue
-	        ? this.source.ReturnTime.Value.LocalDateTime.ToString("MM/dd HH:mm")
-	        : "--/-- --:--";
+		public string ReturnTime
+		{
+			get
+			{
+				return this.source.ReturnTime.HasValue
+					? this.source.ReturnTime.Value.LocalDateTime.ToString("MM/dd HH:mm")
+					: "--/-- --:--";
+			}
+		}
 
-	    public string Remaining => this.source.Remaining.HasValue
-	        ? string.Format("{0:D2}:{1}",
-	            (int)this.source.Remaining.Value.TotalHours,
-	            this.source.Remaining.Value.ToString(@"mm\:ss"))
-	        : "--:--:--";
+		public string Remaining
+		{
+			get
+			{
+				return this.source.Remaining.HasValue
+					? string.Format("{0:D2}:{1}",
+						(int)this.source.Remaining.Value.TotalHours,
+						this.source.Remaining.Value.ToString(@"mm\:ss"))
+					: "--:--:--";
+			}
+		}
 
-	    public ExpeditionViewModel(Expedition expedition)
+		public ExpeditionViewModel(Expedition expedition)
 		{
 			this.source = expedition;
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(expedition, (sender, args) => this.RaisePropertyChanged(args.PropertyName)));

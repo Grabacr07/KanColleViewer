@@ -28,9 +28,12 @@ namespace Grabacr07.KanColleViewer.Composition
 		/// <see cref="PluginHost"/> のインスタンスを取得します。
 		/// </summary>
 		/// <value><see cref="PluginHost"/> のインスタンス。</value>
-		public static PluginHost Instance => instance;
+		public static PluginHost Instance
+		{
+			get { return instance; }
+		}
 
-	    #endregion
+		#endregion
 
 		private readonly CompositionContainer container;
 
@@ -69,6 +72,11 @@ namespace Grabacr07.KanColleViewer.Composition
 			}
 
 			this.container = new CompositionContainer(catalog);
+		}
+
+		static PluginHost()
+		{
+
 		}
 
 		public void Dispose()

@@ -17,12 +17,12 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// 艦隊の編成状況にアクセスできるようにします。
 		/// </summary>
-		public Organization Organization { get; }
+		public Organization Organization { get; private set; }
 
 		/// <summary>
 		/// 資源および資材の保有状況にアクセスできるようにします。
 		/// </summary>
-		public Materials Materials { get; }
+		public Materials Materials { get; private set; }
 
 		/// <summary>
 		/// 装備や消費アイテムの保有状況にアクセスできるようにします。
@@ -37,7 +37,7 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// 複数の入渠ドックを持つ工廠を取得します。
 		/// </summary>
-		public Repairyard Repairyard { get; }
+		public Repairyard Repairyard { get; private set; }
 
 		/// <summary>
 		/// 任務情報を取得します。
@@ -89,8 +89,9 @@ namespace Grabacr07.KanColleWrapper
 				this.Organization.Update(x.Data.api_ship);
 				this.Repairyard.Update(x.Data.api_ndock);
 				this.Organization.Update(x.Data.api_deck_port);
-				this.Organization.Combined = x.Data.api_combined_flag == 1;
+				this.Organization.Combined = x.Data.api_combined_flag != 0;
 				this.Materials.Update(x.Data.api_material);
+				this.UpdateAdmiral(x.Data.api_basic);
 			});
 			proxy.api_get_member_basic.TryParse<kcsapi_basic>().Subscribe(x => this.UpdateAdmiral(x.Data));
 			proxy.api_req_member_updatecomment.TryParse().Subscribe(this.UpdateComment);

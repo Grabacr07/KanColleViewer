@@ -15,12 +15,12 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		private readonly NoneColumnViewModel noneColumn = new NoneColumnViewModel();
 		private SortableColumnViewModel currentSortTarget;
 
-		public IdColumnViewModel IdColumn { get; }
-		public TypeColumnViewModel TypeColumn { get; }
-		public NameColumnViewModel NameColumn { get; }
-		public LevelColumnViewModel LevelColumn { get; }
-		public ConditionColumnViewModel ConditionColumn { get; }
-		public ViewRangeColumnViewModel ViewRangeColumn { get; }
+		public IdColumnViewModel IdColumn { get; private set; }
+		public TypeColumnViewModel TypeColumn { get; private set; }
+		public NameColumnViewModel NameColumn { get; private set; }
+		public LevelColumnViewModel LevelColumn { get; private set; }
+		public ConditionColumnViewModel ConditionColumn { get; private set; }
+		public ViewRangeColumnViewModel ViewRangeColumn { get; private set; }
 
 		public ShipCatalogSortWorker()
 		{
