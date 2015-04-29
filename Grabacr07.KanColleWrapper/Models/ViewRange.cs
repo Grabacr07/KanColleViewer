@@ -44,6 +44,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			new ViewRangeType1();
 			new ViewRangeType2();
 			new ViewRangeType3();
+			new ViewRangeType4();
 			// ReSharper restore ObjectCreationAsStatement
 		}
 
@@ -219,4 +220,83 @@ namespace Grabacr07.KanColleWrapper.Models
 			return .0;
 		}
 	}
+	public class ViewRangeType4 : ViewRangeCalcLogic
+	{
+		public override sealed string Id
+		{
+			get { return "KanColleViewer.Type4"; }
+		}
+
+		public override string Name
+		{
+			get { return "2-5식 (가을) 수정"; }
+		}
+
+		public override string Description
+		{
+			get
+			{
+				return @"(함상폭격기 × 0.62) + (함상공격기 × 0.81) + (함상정찰기 × 0.99)
++ (수상정찰기 × 1.19) + (수상폭격기 × 1.06) + (탐조등 × 0.54)
++ (소형전탐 × 0.60) + (대형전탐 × 0.59) + (√각함별 기본색적 × 1.69)
++ (진수부 레벨을 5의 배수로 올림 × -0.36)";
+			}
+		}
+
+		public override double Calc(Ship[] ships)
+		{
+			if (ships == null || ships.Length == 0) return 0;
+
+			// http://wikiwiki.jp/kancolle/?%C6%EE%C0%BE%BD%F4%C5%E7%B3%A4%B0%E8#area5
+			// 2-5 詳細2
+
+			var itemScore = ships
+				.SelectMany(x => x.EquippedSlots)
+				.Select(x => x.Item.Info)
+				.GroupBy(
+					x => x.Type,
+					x => x.RawData.api_saku,
+					(type, scores) => new { type, score = scores.Sum() })
+				.Aggregate(.0, (score, item) => score + GetScore(item.type, item.score));
+
+			var shipScore = ships
+				.Select(x => x.ViewRange - x.EquippedSlots.Sum(s => s.Item.Info.RawData.api_saku))
+				.Select(x => Math.Sqrt(x))
+				.Sum();
+
+			//var level = (((KanColleClient.Current.Homeport.Admiral.Level + 4) / 5) * 5);
+			var admiralScore = KanColleClient.Current.Homeport.Admiral.Level * -0.36;
+
+			return itemScore + shipScore + admiralScore;
+		}
+
+		private static double GetScore(SlotItemType type, int score)
+		{
+			switch (type)
+			{
+				case SlotItemType.艦上爆撃機:
+					return score * 0.62;
+				case SlotItemType.艦上攻撃機:
+					return score * 0.81;
+				case SlotItemType.艦上偵察機:
+					return score * 0.99;
+
+				case SlotItemType.水上偵察機:
+					return score * 1.19;
+				case SlotItemType.水上爆撃機:
+					return score * 1.06;
+
+				case SlotItemType.小型電探:
+					return score * 0.6;
+				case SlotItemType.大型電探:
+					return score * 0.59;
+
+				case SlotItemType.探照灯:
+					return score * 0.54;
+			}
+
+			return .0;
+		}
+	}
+
 }
