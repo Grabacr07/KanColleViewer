@@ -64,8 +64,10 @@ namespace Grabacr07.KanColleWrapper
 
 			proxy.api_req_kousyou_createitem.TryParse<kcsapi_createitem>().Subscribe(x => this.CreateItem(x.Data, x.Request));
 			proxy.api_req_kousyou_createship.TryParse<kcsapi_createship>().Subscribe(x => this.CreateShip(x.Request));
-			proxy.api_get_member_kdock.TryParse<kcsapi_kdock[]>().Subscribe(x => this.KDock(x.Data));
-			proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => this.BattleResult(x.Data));
+            proxy.api_get_member_kdock.TryParse<kcsapi_kdock[]>().Subscribe(x => this.KDock(x.Data));
+            proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => this.BattleResult(x.Data));
+		    proxy.api_req_combined_battle_battleresult.TryParse<kcsapi_combined_battle_battleresult>().Subscribe(
+                x => this.CombinedBattleResult(x.Data));
 		}
 
 		private void CreateItem(kcsapi_createitem item, NameValueCollection req)
@@ -124,6 +126,26 @@ namespace Grabacr07.KanColleWrapper
 				this.waitingForShip = false;
 			}
 		}
+
+        private void CombinedBattleResult(kcsapi_combined_battle_battleresult br)
+        {
+            try
+            {
+                if (br.api_get_ship == null)
+                    return;
+
+                this.Log(LogType.ShipDrop,
+                         br.api_get_ship.api_ship_name, //Result
+                         br.api_quest_name, //Operation
+                         br.api_enemy_info.api_deck_name, //Enemy Fleet
+                         br.api_win_rank //Rank
+                    );
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
+        }
 
 		private void BattleResult(kcsapi_battleresult br)
 		{
