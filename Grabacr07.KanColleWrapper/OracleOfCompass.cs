@@ -76,29 +76,34 @@ namespace Grabacr07.KanColleWrapper
 		public OracleOfCompass(KanColleProxy proxy)
 		{
 			this.DataLists = new ResultCalLists();
+			try
+			{
+				#region 연합함대 전투. airbattle과 일반 연합함대 전투, 수뢰전대 전투가 여기에 포함. 야전은 모두 동일
+				proxy.api_req_combined_battle_airbattle.TryParse<kcsapi_battle>().Subscribe(x => this.AirBattle(x.Data));
+				proxy.api_req_combined_battle_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false, false, x.Data, true));
+				proxy.api_req_combined_battle_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(true, false, x.Data, true));
+				proxy.api_req_combined_battle_battle_water.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(true, false, x.Data, true));
+				#endregion
 
+				#region BattleResult관련. 연합함대와 일반전투만 포함. 연습전 결과는 무시
+				proxy.api_req_sortie_battleresult.TryParse().Subscribe(x => this.Result());
+				proxy.api_req_combined_battle_battleresult.TryParse<kcsapi_combined_battle_battleresult>().Subscribe(x => this.Result(x.Data));
+				#endregion
+
+				#region 연습전(주간,야간)
+				proxy.api_req_practice_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false, true, x.Data, false));
+				proxy.api_req_practice_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(true, true, x.Data, false));
+				#endregion
+			}
+			catch(Exception ex)
+			{
+				Debug.WriteLine(ex);
+			}
 			#region 일반 전투. 야전방과 야전->주간전도 여기에 포함
 			proxy.api_req_sortie_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false, false, x.Data, false));
 			proxy.api_req_sortie_night_to_day.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false, false, x.Data, false));
 			proxy.api_req_battle_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(true, false, x.Data, false));
 			proxy.api_req_battle_midnight_sp_midnight.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(false, false, x.Data, false));
-			#endregion
-
-			#region 연합함대 전투. airbattle과 일반 연합함대 전투, 수뢰전대 전투가 여기에 포함. 야전은 모두 동일
-			proxy.api_req_combined_battle_airbattle.TryParse<kcsapi_battle>().Subscribe(x => this.AirBattle(x.Data));
-			proxy.api_req_combined_battle_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false, false, x.Data, true));
-			proxy.api_req_combined_battle_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(true, false, x.Data, true));
-			proxy.api_req_combined_battle_battle_water.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(true, false, x.Data, true));
-			#endregion
-
-			#region BattleResult관련. 연합함대와 일반전투만 포함. 연습전 결과는 무시
-			proxy.api_req_sortie_battleresult.TryParse().Subscribe(x => this.Result());
-			proxy.api_req_combined_battle_battleresult.TryParse<kcsapi_combined_battle_battleresult>().Subscribe(x => this.Result(x.Data));
-			#endregion
-
-			#region 연습전(주간,야간)
-			proxy.api_req_practice_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false, true, x.Data, false));
-			proxy.api_req_practice_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(true, true, x.Data, false));
 			#endregion
 
 			#region 변수 초기화 관련

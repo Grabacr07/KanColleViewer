@@ -20,13 +20,20 @@ namespace Grabacr07.KanColleWrapper
 		internal Logger(KanColleProxy proxy)
 		{
 			this.shipmats = new int[5];
+			try
+			{
+				proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => this.BattleResult(x.Data));
+				proxy.api_req_combined_battle_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => this.BattleResult(x.Data));
 
+			}
+			catch(Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(ex);
+			}
 			// ちょっと考えなおす
 			proxy.api_req_kousyou_createitem.TryParse<kcsapi_createitem>().Subscribe(x => this.CreateItem(x.Data, x.Request));
 			proxy.api_req_kousyou_createship.TryParse<kcsapi_createship>().Subscribe(x => this.CreateShip(x.Request));
 			proxy.api_get_member_kdock.TryParse<kcsapi_kdock[]>().Subscribe(x => this.KDock(x.Data));
-			proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => this.BattleResult(x.Data));
-			proxy.api_req_combined_battle_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => this.BattleResult(x.Data));
 		}
 
 		private void CreateItem(kcsapi_createitem source, NameValueCollection req)
