@@ -479,22 +479,21 @@
 						 SelectedValue="{Binding SelectedFleet}"
 						 SelectionMode="Single"
 						 Background="Transparent"
-						 Margin="8,8,8,0">
+						 Margin="8,8,0,0">
 					<ListBox.Template>
 						<ControlTemplate TargetType="{x:Type ListBox}">
-							<StackPanel Background="{TemplateBinding Background}">
-								<Border BorderThickness="0,1,1,1"
-										BorderBrush="{DynamicResource ActiveBorderBrushKey}">
-									<UniformGrid IsItemsHost="True"
-												 Columns="1" />
-								</Border>
-							</StackPanel>
+							<Border BorderThickness="0,1,1,1"
+									BorderBrush="{DynamicResource ActiveBorderBrushKey}"
+									Background="{TemplateBinding Background}">
+								<UniformGrid IsItemsHost="True"
+											 Columns="1" />
+							</Border>
 						</ControlTemplate>
 					</ListBox.Template>
 					<ListBox.ItemContainerStyle>
 						<Style TargetType="{x:Type ListBoxItem}">
 							<Setter Property="MinHeight"
-									Value="50" />
+									Value="45" />
 							<Setter Property="Foreground"
 									Value="{DynamicResource ActiveForegroundBrushKey}" />
 							<Setter Property="IsSelected"
@@ -554,9 +553,13 @@
 					</ListBox.Resources>
 				</ListBox>
 
-				<StackPanel Grid.Column="1"
-							DataContext="{Binding SelectedFleet}"
-							d:DataContext="{d:DesignInstance fleetsVm:FleetViewModel}">
+				<Grid Grid.Column="1"
+					  DataContext="{Binding SelectedFleet}"
+					  d:DataContext="{d:DesignInstance fleetsVm:FleetViewModel}">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition />
+					</Grid.RowDefinitions>
 					<Border Margin="6">
 						<Border.Resources>
 							<Style x:Key="IndicatorTextBlockStyleKey"
@@ -821,7 +824,8 @@
 						</StackPanel>
 					</Border>
 
-					<Border BorderThickness="1"
+					<Border Grid.Row="1"
+							BorderThickness="1"
 							BorderBrush="{DynamicResource BorderBrushKey}"
 							Margin="8,0"
 							Padding="4">
@@ -945,7 +949,7 @@
 							</Grid>
 						</UniformGrid>
 					</Border>
-				</StackPanel>
+				</Grid>
 			</Grid>
 
 			<Border Grid.Row="1"
