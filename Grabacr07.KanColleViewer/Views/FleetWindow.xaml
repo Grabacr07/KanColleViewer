@@ -472,7 +472,7 @@
 			<Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition />
-					<ColumnDefinition Width="2*" />
+					<ColumnDefinition Width="2.4*" />
 				</Grid.ColumnDefinitions>
 
 				<ListBox ItemsSource="{Binding Fleets}"
@@ -493,7 +493,7 @@
 					<ListBox.ItemContainerStyle>
 						<Style TargetType="{x:Type ListBoxItem}">
 							<Setter Property="MinHeight"
-									Value="45" />
+									Value="38" />
 							<Setter Property="Foreground"
 									Value="{DynamicResource ActiveForegroundBrushKey}" />
 							<Setter Property="IsSelected"
@@ -556,11 +556,126 @@
 				<Grid Grid.Column="1"
 					  DataContext="{Binding SelectedFleet}"
 					  d:DataContext="{d:DesignInstance fleetsVm:FleetViewModel}">
-					<Grid.RowDefinitions>
-						<RowDefinition Height="Auto" />
-						<RowDefinition />
-					</Grid.RowDefinitions>
-					<Border Margin="6">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition />
+					</Grid.ColumnDefinitions>
+
+
+					<Border BorderThickness="1"
+							BorderBrush="{DynamicResource BorderBrushKey}"
+							Margin="8,8,0,0"
+							Padding="8,4">
+						<Grid HorizontalAlignment="Center">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="4" />
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="4" />
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
+							</Grid.ColumnDefinitions>
+
+							<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Bottom"
+									   Margin="1,2">
+									<Run Text="合計レベル" />
+									<Run Text=":" />
+							</TextBlock>
+							<TextBlock Grid.Row="0"
+									   Grid.Column="1"
+									   Text="{Binding State.TotalLevel}"
+									   Style="{DynamicResource EmphaticTextStyleKey}"
+									   VerticalAlignment="Bottom"
+									   Margin="4,2" />
+
+							<TextBlock Grid.Row="1"
+									   Grid.Column="0"
+									   Style="{DynamicResource DefaultTextStyleKey}"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Bottom"
+									   Margin="1,2">
+									<Run Text="平均レベル" />
+									<Run Text=":" />
+							</TextBlock>
+							<TextBlock Grid.Row="1"
+									   Grid.Column="1"
+									   Text="{Binding State.AverageLevel}"
+									   Style="{DynamicResource EmphaticTextStyleKey}"
+									   VerticalAlignment="Bottom"
+									   Margin="4,2" />
+
+							<TextBlock Grid.Row="3"
+									   Grid.Column="0"
+									   Style="{DynamicResource DefaultTextStyleKey}"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Bottom"
+									   Margin="1,2">
+									<Run Text="索敵値" />
+									<Run Text=":" />
+							</TextBlock>
+							<TextBlock Grid.Row="3"
+									   Grid.Column="1"
+									   Text="{Binding State.ViewRange}"
+									   Style="{DynamicResource EmphaticTextStyleKey}"
+									   VerticalAlignment="Bottom"
+									   Margin="4,2" />
+
+							<TextBlock Grid.Row="4"
+									   Grid.Column="0"
+									   Style="{DynamicResource DefaultTextStyleKey}"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Bottom"
+									   Margin="1,2">
+									<Run Text="制空戦力" />
+									<Run Text=":" />
+							</TextBlock>
+							<TextBlock Grid.Row="4"
+									   Grid.Column="1"
+									   Text="{Binding State.AirSuperiorityPotential}"
+									   Style="{DynamicResource EmphaticTextStyleKey}"
+									   VerticalAlignment="Bottom"
+									   Margin="4,2" />
+
+
+							<TextBlock Grid.Row="6"
+									   Grid.Column="0"
+									   Grid.ColumnSpan="2"
+									   Text="{Binding State.Speed}"
+									   Style="{DynamicResource EmphaticTextStyleKey}"
+									   HorizontalAlignment="Center"
+									   VerticalAlignment="Bottom"
+									   Margin="4,2" />
+
+							<TextBlock Grid.Row="7"
+									   Grid.Column="0"
+									   Style="{DynamicResource DefaultTextStyleKey}"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Bottom"
+									   Margin="1,2"
+									   Visibility="Collapsed">
+									<Run Text="ステータス" />
+									<Run Text=":" />
+							</TextBlock>
+							<TextBlock Grid.Row="7"
+									   Grid.Column="1"
+									   Text="9999"
+									   Style="{DynamicResource EmphaticTextStyleKey}"
+									   VerticalAlignment="Bottom"
+									   Margin="4,2"
+									   Visibility="Collapsed" />
+						</Grid>
+					</Border>
+
+					<Border Grid.Column="1"
+							Margin="6">
 						<Border.Resources>
 							<Style x:Key="IndicatorTextBlockStyleKey"
 								   TargetType="{x:Type TextBlock}">
@@ -822,132 +937,6 @@
 								</TextBlock>
 							</UniformGrid>
 						</StackPanel>
-					</Border>
-
-					<Border Grid.Row="1"
-							BorderThickness="1"
-							BorderBrush="{DynamicResource BorderBrushKey}"
-							Margin="8,0"
-							Padding="4">
-						<UniformGrid Rows="1">
-							<!-- ToDo: あとで小数点揃えまでサポートした表組みのナニかに作り直す (たい)  -->
-
-							<Grid HorizontalAlignment="Center">
-								<Grid.RowDefinitions>
-									<RowDefinition Height="Auto" />
-									<RowDefinition Height="Auto" />
-								</Grid.RowDefinitions>
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="Auto" />
-									<ColumnDefinition Width="Auto" />
-								</Grid.ColumnDefinitions>
-
-								<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
-										   HorizontalAlignment="Right"
-										   VerticalAlignment="Bottom"
-										   Margin="1,2">
-									<Run Text="合計レベル" />
-									<Run Text=":" />
-								</TextBlock>
-								<TextBlock Grid.Row="0"
-										   Grid.Column="1"
-										   Text="{Binding State.TotalLevel}"
-										   Style="{DynamicResource EmphaticTextStyleKey}"
-										   VerticalAlignment="Bottom"
-										   Margin="4,2" />
-								<TextBlock Grid.Row="1"
-										   Grid.Column="0"
-										   Style="{DynamicResource DefaultTextStyleKey}"
-										   HorizontalAlignment="Right"
-										   VerticalAlignment="Bottom"
-										   Margin="1,2">
-									<Run Text="平均レベル" />
-									<Run Text=":" />
-								</TextBlock>
-								<TextBlock Grid.Row="1"
-										   Grid.Column="1"
-										   Text="{Binding State.AverageLevel}"
-										   Style="{DynamicResource EmphaticTextStyleKey}"
-										   VerticalAlignment="Bottom"
-										   Margin="4,2" />
-							</Grid>
-
-							<Grid HorizontalAlignment="Center">
-								<Grid.RowDefinitions>
-									<RowDefinition Height="Auto" />
-									<RowDefinition Height="Auto" />
-								</Grid.RowDefinitions>
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="Auto" />
-									<ColumnDefinition Width="Auto" />
-								</Grid.ColumnDefinitions>
-
-								<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
-										   HorizontalAlignment="Right"
-										   VerticalAlignment="Bottom"
-										   Margin="1,2">
-									<Run Text="索敵値" />
-									<Run Text=":" />
-								</TextBlock>
-								<TextBlock Grid.Row="0"
-										   Grid.Column="1"
-										   Text="{Binding State.ViewRange}"
-										   Style="{DynamicResource EmphaticTextStyleKey}"
-										   VerticalAlignment="Bottom"
-										   Margin="4,2" />
-								<TextBlock Grid.Row="1"
-										   Grid.Column="0"
-										   Style="{DynamicResource DefaultTextStyleKey}"
-										   HorizontalAlignment="Right"
-										   VerticalAlignment="Bottom"
-										   Margin="1,2">
-									<Run Text="制空戦力" />
-									<Run Text=":" />
-								</TextBlock>
-								<TextBlock Grid.Row="1"
-										   Grid.Column="1"
-										   Text="{Binding State.AirSuperiorityPotential}"
-										   Style="{DynamicResource EmphaticTextStyleKey}"
-										   VerticalAlignment="Bottom"
-										   Margin="4,2" />
-							</Grid>
-
-							<Grid HorizontalAlignment="Center">
-								<Grid.RowDefinitions>
-									<RowDefinition Height="Auto" />
-									<RowDefinition Height="Auto" />
-								</Grid.RowDefinitions>
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="Auto" />
-									<ColumnDefinition Width="Auto" />
-								</Grid.ColumnDefinitions>
-
-								<TextBlock Grid.Row="0"
-										   Grid.Column="0"
-										   Grid.ColumnSpan="2"
-										   Text="{Binding State.Speed}"
-										   Style="{DynamicResource EmphaticTextStyleKey}"
-										   VerticalAlignment="Bottom"
-										   Margin="4,2" />
-								<TextBlock Grid.Row="1"
-										   Grid.Column="0"
-										   Style="{DynamicResource DefaultTextStyleKey}"
-										   HorizontalAlignment="Right"
-										   VerticalAlignment="Bottom"
-										   Margin="1,2"
-										   Visibility="Hidden">
-									<Run Text="ステータス" />
-									<Run Text=":" />
-								</TextBlock>
-								<TextBlock Grid.Row="1"
-										   Grid.Column="1"
-										   Text="9999"
-										   Style="{DynamicResource EmphaticTextStyleKey}"
-										   VerticalAlignment="Bottom"
-										   Margin="4,2"
-										   Visibility="Hidden" />
-							</Grid>
-						</UniformGrid>
 					</Border>
 				</Grid>
 			</Grid>
