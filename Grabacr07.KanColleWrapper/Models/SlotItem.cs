@@ -36,6 +36,16 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.Info = KanColleClient.Current.Master.SlotItems[this.RawData.api_slotitem_id] ?? SlotItemInfo.Dummy;
 		}
 
+
+		public void Remodel(int level, int masterId)
+		{
+			this.RawData.api_level = level;
+			this.Info = KanColleClient.Current.Master.SlotItems[masterId] ?? SlotItemInfo.Dummy;
+
+			this.RaisePropertyChanged("Info");
+			this.RaisePropertyChanged("Level");
+		}
+
 		public override string ToString()
 		{
 			return string.Format("ID = {0}, Name = \"{1}\", Level = {2}", this.Id, this.Info.Name, this.Level);

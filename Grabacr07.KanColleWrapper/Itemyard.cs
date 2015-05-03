@@ -86,7 +86,11 @@ namespace Grabacr07.KanColleWrapper
 
 			proxy.api_get_member_useitem.TryParse<kcsapi_useitem[]>().Subscribe(x => this.Update(x.Data));
 
-			proxy.api_req_kousyou_remodel_slot.TryParse<kcsapi_remodel_slot>().Subscribe(x => this.RemoveFromRemodel(x.Data));
+			proxy.api_req_kousyou_remodel_slot.TryParse<kcsapi_remodel_slot>().Subscribe(x =>
+			{
+				this.RemoveFromRemodel(x.Data);
+				this.RemodelSlotItem(x.Data);
+			});
 		}
 
 
@@ -174,6 +178,17 @@ namespace Grabacr07.KanColleWrapper
 			{
 				// defeq が消えてるっぽい暫定対応 (雑)
 				Debug.WriteLine(ex);
+			}
+		}
+
+		private void RemodelSlotItem(kcsapi_remodel_slot source)
+		{
+			if (source.api_after_slot == null) return;
+
+			var target = this.SlotItems[source.api_after_slot.api_id];
+			if (target != null)
+			{
+				target.Remodel(source.api_after_slot.api_level, source.api_after_slot.api_slotitem_id);
 			}
 		}
 
