@@ -169,5 +169,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 水上艦要員。
 		/// </summary>
 		SurfaceShipPersonnel = 32,
-    }
+
+		/// <summary>
+		/// 大型飛行艇。
+		/// </summary>
+		FlyingBoat = 33,
+	}
 }
