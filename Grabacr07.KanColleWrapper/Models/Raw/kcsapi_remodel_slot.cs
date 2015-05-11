@@ -12,11 +12,11 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public int[] api_remodel_id { get; set; }
 		public int[] api_after_material { get; set; }
 		public string api_voice_id { get; set; }
-		public Api_After_Slot api_after_slot { get; set; }
+		public kcsapi_remodel_after_slot api_after_slot { get; set; }
 		public int[] api_use_slot_id { get; set; }
 	}
 
-	public class Api_After_Slot
+	public class kcsapi_remodel_after_slot
 	{
 		public int api_id { get; set; }
 		public int api_slotitem_id { get; set; }

@@ -28,6 +28,11 @@ namespace Grabacr07.KanColleWrapper.Internal
 			return array.Length > index ? (int?)array[index] : null;
 		}
 
+		public static string Join(this IEnumerable<string> values, string separator)
+		{
+			return string.Join(separator, values);
+		}
+
 		public static Task WhenAll(this IEnumerable<Task> tasks)
 		{
 			return Task.WhenAll(tasks);

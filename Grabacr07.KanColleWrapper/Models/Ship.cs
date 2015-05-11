@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Fiddler;
 using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models.Raw;
-using Livet;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
@@ -68,6 +67,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			get { return this.RawData.api_exp.Get(1) ?? 0; }
 		}
 
+
 		#region HP 変更通知プロパティ
 
 		private LimitedValue _HP;
@@ -82,6 +82,15 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				this._HP = value;
 				this.RaisePropertyChanged();
+
+				if (value.IsHeavilyDamage())
+				{
+					this.Situation |= ShipSituation.HeavilyDamaged;
+				}
+				else
+				{
+					this.Situation &= ~ShipSituation.HeavilyDamaged;
+				}
 			}
 		}
 
@@ -223,6 +232,45 @@ namespace Grabacr07.KanColleWrapper.Models
 		#endregion
 
 
+		#region Slots 変更通知プロパティ
+
+		private ShipSlot[] _Slots;
+
+		public ShipSlot[] Slots
+		{
+			get { return this._Slots; }
+			set
+			{
+				if (this._Slots != value)
+				{
+					this._Slots = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region EquippedSlots 変更通知プロパティ
+
+		private ShipSlot[] _EquippedSlots;
+
+		public ShipSlot[] EquippedSlots
+		{
+			get { return this._EquippedSlots; }
+			set
+			{
+				if (this._EquippedSlots != value)
+				{
+					this._EquippedSlots = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+
 		/// <summary>
 		/// 装備によるボーナスを含めた索敵ステータス値を取得します。
 		/// </summary>
@@ -255,32 +303,6 @@ namespace Grabacr07.KanColleWrapper.Models
 			get { return ConditionTypeHelper.ToConditionType(this.RawData.api_cond); }
 		}
 
-		public ShipSlot[] Slots { get; private set; }
-
-		public ShipSlot[] EquippedSlots { get; private set; }
-
-		#region IsInRepairing 変更通知プロパティ
-
-		private bool _IsInRepairing;
-
-		/// <summary>
-		/// この艦が入渠中かどうかを示す値を取得します。
-		/// </summary>
-		public bool IsInRepairing
-		{
-			get { return this._IsInRepairing; }
-			internal set
-			{
-				if (this._IsInRepairing != value)
-				{
-					this._IsInRepairing = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
 		/// <summary>
 		/// この艦が出撃した海域を識別する整数値を取得します。
 		/// </summary>
@@ -289,6 +311,24 @@ namespace Grabacr07.KanColleWrapper.Models
 			get { return this.RawData.api_sally_area; }
 		}
 
+		#region Status 変更通知プロパティ
+
+		private ShipSituation situation;
+
+		public ShipSituation Situation
+		{
+			get { return this.situation; }
+			set
+			{
+				if (this.situation != value)
+				{
+					this.situation = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
 
 		internal Ship(Homeport parent, kcsapi_ship2 rawData)
 			: base(rawData)
@@ -320,6 +360,15 @@ namespace Grabacr07.KanColleWrapper.Models
 				.Select((t, i) => new ShipSlot(t, this.Info.RawData.api_maxeq.Get(i) ?? 0, this.RawData.api_onslot.Get(i) ?? 0))
 				.ToArray();
 			this.EquippedSlots = this.Slots.Where(x => x.Equipped).ToArray();
+
+			if (this.EquippedSlots.Any(x => x.Item.Info.Type == SlotItemType.応急修理要員))
+			{
+				this.Situation |= ShipSituation.DamageControlled;
+			}
+			else
+			{
+				this.Situation &= ~ShipSituation.DamageControlled;
+			}
 		}
 
 
@@ -339,45 +388,6 @@ namespace Grabacr07.KanColleWrapper.Models
 		public override string ToString()
 		{
 			return string.Format("ID = {0}, Name = \"{1}\", ShipType = \"{2}\", Level = {3}", this.Id, this.Info.Name, this.Info.ShipType.Name, this.Level);
-		}
-	}
-
-
-	public class ShipSlot : NotificationObject
-	{
-		public SlotItem Item { get; private set; }
-
-		public int Maximum { get; private set; }
-
-		public bool Equipped
-		{
-			get { return this.Item != null; }
-		}
-
-		#region Current 変更通知プロパティ
-
-		private int _Current;
-
-		public int Current
-		{
-			get { return this._Current; }
-			set
-			{
-				if (this._Current != value)
-				{
-					this._Current = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		public ShipSlot(SlotItem item, int maximum, int current)
-		{
-			this.Item = item;
-			this.Maximum = maximum;
-			this.Current = current;
 		}
 	}
 }

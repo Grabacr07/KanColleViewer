@@ -6,16 +6,31 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
 			 xmlns:fleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 			 xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
+			 xmlns:converters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters"
 			 mc:Ignorable="d"
 			 d:DesignWidth="800"
 			 d:DesignHeight="400"
 			 d:DataContext="{d:DesignInstance fleets:FleetsViewModel}">
+
+	<UserControl.Resources>
+		<converters:HasFlagConverter x:Key="HasFlagConverter" />
+	</UserControl.Resources>
+
+	<i:Interaction.Triggers>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+										 MessageKey="Show/FleetWindow">
+			<livet:TransitionInteractionMessageAction Mode="NewOrActive"
+													  WindowType="views:FleetWindow"
+													  IsOwned="False" />
+		</livet:InteractionMessageTrigger>
+	</i:Interaction.Triggers>
 
 	<ScrollViewer VerticalScrollBarVisibility="Auto"
 				  PanningMode="Both">
@@ -27,6 +42,10 @@
 				<RowDefinition Height="*" />
 				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
 
 			<ListBox ItemsSource="{Binding Fleets}"
 					 SelectedValue="{Binding SelectedFleet, Mode=TwoWay}"
@@ -49,10 +68,21 @@
 			</ListBox>
 
 			<contents:StateDetailIndicator Grid.Row="1"
+										   Grid.Column="0"
 										   DataContext="{Binding SelectedFleet}"
 										   Margin="10,3" />
 
+			<metro2:CallMethodButton Grid.Row="0"
+									 Grid.RowSpan="2"
+									 Grid.Column="1"
+									 Content="艦隊詳細"
+									 Margin="0,0,10,3"
+									 Padding="12,8"
+									 MethodName="ShowFleetWindow" />
+
 			<Grid Grid.Row="3"
+				  Grid.Column="0"
+				  Grid.ColumnSpan="2"
 				  DataContext="{Binding SelectedFleet}"
 				  d:DataContext="{d:DesignData /SampleData/FleetViewModelSampleData.xaml}">
 
@@ -321,6 +351,19 @@
 												   HorizontalAlignment="Center" />
 									</Grid>
 
+									<Grid x:Name="EvacuationIndicator"
+										  Grid.Column="4"
+										  Grid.Row="0"
+										  Grid.RowSpan="2"
+										  Visibility="Collapsed">
+										<Border Background="{DynamicResource FleetRepairingBrushKey}"
+												Opacity=".4"
+												Margin="5,0" />
+										<TextBlock Text="退避済"
+												   Style="{DynamicResource EmphaticTextStyleKey}"
+												   HorizontalAlignment="Center" />
+									</Grid>
+
 									<TextBlock Grid.Column="5"
 											   Grid.Row="0"
 											   Margin="10,0,10,10"
@@ -364,7 +407,7 @@
 										</ItemsControl.Template>
 										<ItemsControl.ItemTemplate>
 											<DataTemplate>
-												<Border ToolTip="{Binding Item.Info.Name}"
+												<Border ToolTip="{Binding Item.NameWithLevel}"
 														Background="Transparent">
 													<controls:SlotItemIcon Type="{Binding Item.Info.IconType}"
 																		   Margin="3,0" />
@@ -379,8 +422,8 @@
 							</StackPanel>
 
 							<DataTemplate.Triggers>
-								<DataTrigger Binding="{Binding Ship.IsInRepairing}"
-											 Value="True">
+								<DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
+											 Value="Repair">
 									<Setter TargetName="HPText"
 											Property="Opacity"
 											Value=".2" />
@@ -388,6 +431,18 @@
 											Property="Opacity"
 											Value=".2" />
 									<Setter TargetName="RepairIndicator"
+											Property="Visibility"
+											Value="Visible" />
+								</DataTrigger>
+								<DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow|Evacuation}"
+											 Value="Evacuation,Tow">
+									<Setter TargetName="HPText"
+											Property="Opacity"
+											Value=".2" />
+									<Setter TargetName="HPIndicator"
+											Property="Opacity"
+											Value=".2" />
+									<Setter TargetName="EvacuationIndicator"
 											Property="Visibility"
 											Value="Visible" />
 								</DataTrigger>
