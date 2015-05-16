@@ -25,7 +25,6 @@ namespace Grabacr07.KanColleWrapper
 		//private List<PreviewBattleResults> Results { get; set; }
 		private int RankNum { get; set; }
 		private int DockId { get; set; }
-		private List<EscapeResults> GoBackPortList { get; set; }
 		#endregion
 
 		#region bool
@@ -262,7 +261,6 @@ namespace Grabacr07.KanColleWrapper
 					this.IsCritical = false;
 					this.CriticalCleared();
 					this.BattleEnd = true;
-					GoBackPortList = new List<EscapeResults>();
 				}
 				else this.BattleEnd = false;
 			}
@@ -282,38 +280,6 @@ namespace Grabacr07.KanColleWrapper
 		/// <param name="result">기본값은 null. 연합함대인경우에만 값을 받아 호위 회항한 부분을 채크</param>
 		private void Result(kcsapi_combined_battle_battleresult result = null)
 		{
-			if (result != null)
-			{
-				if (result.api_escape_flag == 1)
-				{
-					if (GoBackPortList == null) GoBackPortList = new List<EscapeResults>();
-					else
-					{
-						GoBackPortList.Clear();
-					}
-					var escape = result.api_escape.api_escape_idx;
-					var tow = result.api_escape.api_tow_idx;
-
-					for (int i = 0; i < escape.Length; i++)
-					{
-						EscapeResults temp = new EscapeResults
-						{
-							IsSecond = false,
-							escape = escape[i],
-						};
-
-						if (temp.escape > 6)//2함대에서 대파가 나는 경우 IsSecond를 true로 하고 escape에서 6을 빼서 저장
-						{
-							temp.escape = temp.escape - 6;
-							temp.IsSecond = true;
-						}
-						if (tow.Length > i) temp.tow = tow[i] - 6;
-						else temp.tow = 20;
-						GoBackPortList.Add(temp);
-					}
-					GoBackPortList.TrimExcess();
-				}
-			}
 			if (this.IsCritical) this.CriticalCondition();
 		}
 		/// <summary>
@@ -329,8 +295,6 @@ namespace Grabacr07.KanColleWrapper
 		#region 다음 맵 셀을 확인
 		private void StartCell(kcsapi_map_start proxy)
 		{
-			GoBackPortList = new List<EscapeResults>();
-
 			this.Cleared(false);
 			CellData = proxy.api_event_id;
 			this.IsCompassCalculated = true;
@@ -852,28 +816,7 @@ namespace Grabacr07.KanColleWrapper
 					double temp = (double)CurrentHPList[i] / (double)Maxhps[i];
 					if (!IsPractice)
 					{
-						bool escape = false;
-						bool tow = false;
-
-						if (GoBackPortList != null && GoBackPortList.Count > 0)
-						{
-							if (!IsCombined)
-							{
-								var firstlist = GoBackPortList.Where(x => !x.IsSecond);
-								if (firstlist.Count() > 0)
-									escape = firstlist.Any(x => x.escape == i + 1);
-							}
-							else
-							{
-								var secondlist = GoBackPortList.Where(x => x.IsSecond);
-								if (secondlist.Count() > 0)
-									escape = secondlist.Any(x => x.escape == i + 1);
-								tow = GoBackPortList.Any(x => x.tow == i + 1);
-							}
-						}
-						if (escape) result.Add(false);
-						else if (tow) result.Add(false);
-						else if (temp <= 0.25) result.Add(true);
+						if (temp <= 0.25) result.Add(true);
 						else result.Add(false);
 					}
 
@@ -887,22 +830,12 @@ namespace Grabacr07.KanColleWrapper
 						//연합함대 수정필요
 						if (i < 7)//아군정보
 						{
-							bool escape = false;
-							bool tow = false;
 							if (IsCombined)
 							{
 								DataLists.ComMHpResults.Add(Maxhps[i]);
 								DataLists.ComHpResults.Add(CurrentHPList[i]);
-								if (GoBackPortList != null && GoBackPortList.Count > 0)
-								{
-
-									var secondlist = GoBackPortList.Where(x => x.IsSecond);
-									if (secondlist.Count() > 0)
-										escape = secondlist.Any(x => x.escape == i);
-									tow = GoBackPortList.Any(x => x.tow == i);
-								}
-								if (escape || tow) DataLists.ComCalResults.Add(5);//회항
-								else if (temp <= 0) DataLists.ComCalResults.Add(4);//격침
+								
+								if (temp <= 0) DataLists.ComCalResults.Add(4);//격침
 								else if (temp <= 0.25) DataLists.ComCalResults.Add(3);//대파
 								else if (temp <= 0.5) DataLists.ComCalResults.Add(2);//중파
 								else if (temp <= 0.75) DataLists.ComCalResults.Add(1);//소파
@@ -912,14 +845,8 @@ namespace Grabacr07.KanColleWrapper
 							{
 								DataLists.MHpResults.Add(Maxhps[i]);
 								DataLists.HpResults.Add(CurrentHPList[i]);
-								if (GoBackPortList != null && GoBackPortList.Count > 0)
-								{
-									var firstlist = GoBackPortList.Where(x => !x.IsSecond);
-									if (firstlist.Count() > 0)
-										escape = firstlist.Any(x => x.escape == i);
-								}
-								if (escape || tow) DataLists.CalResults.Add(5);//회항
-								else if (temp <= 0) DataLists.CalResults.Add(4);//격침
+
+								if (temp <= 0) DataLists.CalResults.Add(4);//격침
 								else if (temp <= 0.25) DataLists.CalResults.Add(3);//대파
 								else if (temp <= 0.5) DataLists.CalResults.Add(2);//중파
 								else if (temp <= 0.75) DataLists.CalResults.Add(1);//소파

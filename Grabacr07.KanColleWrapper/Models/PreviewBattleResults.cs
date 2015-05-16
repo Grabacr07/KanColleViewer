@@ -18,12 +18,6 @@ namespace Grabacr07.KanColleWrapper.Models
 		public int CHP { get; set; }
 		public int MHP { get; set; }
 	}
-	public struct EscapeResults
-	{
-		public int escape { get; set; }
-		public int tow { get; set; }
-		public bool IsSecond { get; set; }
-	}
 	/// <summary>
 	/// 예보 데이터를 저장하는 클래스입니다.
 	/// </summary>
