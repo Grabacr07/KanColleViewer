@@ -314,6 +314,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			catch (Exception e)
 			{
 				System.Diagnostics.Debug.WriteLine(e);
+				KanColleClient.Current.CatchedErrorLogWriter.ReportException(e.Source, e);
 			}
 
 		}
@@ -365,6 +366,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			catch (Exception e)
 			{
 				System.Diagnostics.Debug.WriteLine(e);
+				KanColleClient.Current.CatchedErrorLogWriter.ReportException(e.Source, e);
 			}
 
 		}

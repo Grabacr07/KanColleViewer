@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Grabacr07.KanColleViewer.Win32;
 using Microsoft.Win32;
+using Grabacr07.KanColleWrapper;
 
 namespace Grabacr07.KanColleViewer.Models
 {
@@ -72,6 +73,7 @@ namespace Grabacr07.KanColleViewer.Models
 			catch (Exception ex)
 			{
 				Debug.WriteLine(ex);
+				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 			}
 		}
 

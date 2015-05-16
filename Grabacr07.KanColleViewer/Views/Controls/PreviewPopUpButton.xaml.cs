@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using Grabacr07.KanColleWrapper;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -39,6 +40,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 				catch (ResourceReferenceKeyNotFoundException ex)
 				{
 					Debug.WriteLine(ex);
+					KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 				}
 			}
 			else

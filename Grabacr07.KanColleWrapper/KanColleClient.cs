@@ -52,6 +52,8 @@ namespace Grabacr07.KanColleWrapper
         /// </summary>
         public Homeport Homeport { get; private set; }
 
+		public CatchedErrorLogWriter CatchedErrorLogWriter { get; private set; }
+
 		public OracleOfCompass OracleOfCompass { get; private set; }
 
 		#region IsStarted 変更通知プロパティ
@@ -120,6 +122,8 @@ namespace Grabacr07.KanColleWrapper
 
         private KanColleClient()
         {
+			this.CatchedErrorLogWriter = new CatchedErrorLogWriter();
+
             this.Initialieze();
 
 			var start = this.Proxy.api_req_map_start;

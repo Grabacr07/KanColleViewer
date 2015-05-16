@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Composition;
 using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
 using MS.WindowsAPICodePack.Internal;
+using Grabacr07.KanColleWrapper;
 
 namespace Grabacr07.KanColleViewer.Plugins
 {
@@ -39,6 +40,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 			catch (Exception ex)
 			{
 				Debug.WriteLine(ex);
+				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 			}
 		}
 

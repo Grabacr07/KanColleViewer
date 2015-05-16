@@ -140,6 +140,7 @@ namespace Grabacr07.KanColleWrapper
 						{
 							// 最後のページで任務数が 5 に満たないとき、api_list が -1 で埋められるというクソ API のせい
 							Debug.WriteLine(ex.Message);
+							KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 						}
 					}
 
@@ -151,6 +152,7 @@ namespace Grabacr07.KanColleWrapper
 			catch (Exception ex)
 			{
 				Debug.WriteLine(ex);
+				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 				return null;
 			}
 		}

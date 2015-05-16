@@ -10,6 +10,7 @@ using mshtml;
 using SHDocVw;
 using IServiceProvider = Grabacr07.KanColleViewer.Win32.IServiceProvider;
 using WebBrowser = System.Windows.Controls.WebBrowser;
+using Grabacr07.KanColleWrapper;
 
 namespace Grabacr07.KanColleViewer.Views.Controls
 {
@@ -162,6 +163,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			catch (Exception ex)
 			{
 				Debug.WriteLine(ex);
+				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 				StatusService.Current.Notify(string.Format(Properties.Resources.ZoomAction_ZoomFailed, ex.Message));
 			}
 		}

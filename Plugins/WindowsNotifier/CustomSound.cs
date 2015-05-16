@@ -1,5 +1,6 @@
 ﻿using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleViewer.ViewModels;
+using Grabacr07.KanColleWrapper;
 using NAudio.Wave;
 using System;
 using System.Collections.Generic;
@@ -53,6 +54,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 			catch(Exception ex)
 			{
 				System.Diagnostics.Debug.WriteLine(ex);
+				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 			}
 		}
 		public string FileCheck(string header)

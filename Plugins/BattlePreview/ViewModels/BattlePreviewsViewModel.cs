@@ -275,6 +275,7 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 			catch (Exception e)
 			{
 				System.Diagnostics.Debug.WriteLine(e);
+				KanColleClient.Current.CatchedErrorLogWriter.ReportException(e.Source, e);
 			}
 		}
 		private void RankIntToVisibility(int value)

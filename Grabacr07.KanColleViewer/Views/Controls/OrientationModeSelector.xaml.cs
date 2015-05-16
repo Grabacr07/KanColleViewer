@@ -20,6 +20,7 @@ using Grabacr07.KanColleViewer.ViewModels;
 using Livet;
 using Livet.EventListeners;
 using MetroRadiance.Core;
+using Grabacr07.KanColleWrapper;
 
 namespace Grabacr07.KanColleViewer.Views.Controls
 {
@@ -75,7 +76,8 @@ namespace Grabacr07.KanColleViewer.Views.Controls
                 }
                 catch (ResourceReferenceKeyNotFoundException ex)
                 {
-                    Debug.WriteLine(ex);
+					Debug.WriteLine(ex);
+					KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
                 }
             }
             else if (this.IsMouseOver)
@@ -86,7 +88,8 @@ namespace Grabacr07.KanColleViewer.Views.Controls
                 }
                 catch (ResourceReferenceKeyNotFoundException ex)
                 {
-                    Debug.WriteLine(ex);
+					Debug.WriteLine(ex);
+					KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
                 }
             }
             else

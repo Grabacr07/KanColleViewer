@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calculator.cs" />
+    <Compile Include="CatchedErrorLogWriter.cs" />
     <Compile Include="Counter.cs" />
     <Compile Include="DisposableNotifier.cs" />
     <Compile Include="Dockyard.cs" />

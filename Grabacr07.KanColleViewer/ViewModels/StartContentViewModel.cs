@@ -1,4 +1,5 @@
 ﻿using Grabacr07.KanColleViewer.Models;
+using Grabacr07.KanColleWrapper;
 using Livet;
 using System;
 using System.Diagnostics;
@@ -116,6 +117,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			catch (Exception ex)
 			{
 				Debug.WriteLine(ex);
+				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 			}
 		}
 		public void SetRegionCookie()

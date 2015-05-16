@@ -98,6 +98,7 @@ namespace Grabacr07.KanColleWrapper
 			catch (Exception ex)
 			{
 				Debug.WriteLine(ex);
+				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 			}
 			#region 일반 전투. 야전방과 야전->주간전도 여기에 포함
 			proxy.api_req_sortie_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false, false, x.Data, false));
@@ -365,6 +366,7 @@ namespace Grabacr07.KanColleWrapper
 			catch (Exception ex)
 			{
 				System.Diagnostics.Debug.WriteLine(ex);
+				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 			}
 
 
@@ -505,6 +507,7 @@ namespace Grabacr07.KanColleWrapper
 			catch (Exception e)
 			{
 				Debug.WriteLine(e);
+				KanColleClient.Current.CatchedErrorLogWriter.ReportException(e.Source, e);
 			}
 
 
@@ -536,6 +539,7 @@ namespace Grabacr07.KanColleWrapper
 			catch (Exception ex)
 			{
 				System.Diagnostics.Debug.WriteLine(ex);
+				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 			}
 			List<listup> Combinelists = new List<listup>();
 			//모든 형태의 전투에서 타게팅이 되는 함선의 번호와 데미지를 순서대로 입력한다.
@@ -631,6 +635,7 @@ namespace Grabacr07.KanColleWrapper
 							catch (Exception e)
 							{
 								Debug.WriteLine(e);
+								KanColleClient.Current.CatchedErrorLogWriter.ReportException(e.Source, e);
 							}
 						}
 					}//연합함대 리스트 작성 끝
@@ -689,6 +694,7 @@ namespace Grabacr07.KanColleWrapper
 				catch (Exception e)
 				{
 					Debug.WriteLine(e);
+					KanColleClient.Current.CatchedErrorLogWriter.ReportException(e.Source, e);
 				}
 
 
@@ -753,6 +759,7 @@ namespace Grabacr07.KanColleWrapper
 					catch (Exception e)
 					{
 						Debug.WriteLine(e);
+						KanColleClient.Current.CatchedErrorLogWriter.ReportException(e.Source, e);
 					}
 
 				}
@@ -1027,6 +1034,7 @@ namespace Grabacr07.KanColleWrapper
 				{
 					this.RankNum = -1;
 					System.Diagnostics.Debug.WriteLine(e);
+					KanColleClient.Current.CatchedErrorLogWriter.ReportException(e.Source, e);
 				}
 			}
 			#endregion

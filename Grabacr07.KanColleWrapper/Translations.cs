@@ -357,7 +357,10 @@ namespace Grabacr07.KanColleWrapper
 				Debug.WriteLine(string.Format("Can't find Translation: {0,-20} {1}", JPString, ID));
 #endif
 			}
-			catch { }
+			catch (Exception ex)
+			{
+				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
+			}
 
 			if (RawData != null) AddTranslation(RawData, Type);
 			if (ID < 0) return JPString;

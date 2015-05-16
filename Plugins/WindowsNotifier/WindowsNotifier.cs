@@ -1,4 +1,5 @@
 ﻿using Grabacr07.KanColleViewer.Composition;
+using Grabacr07.KanColleWrapper;
 using System;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
@@ -41,6 +42,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 			catch(Exception ex)
 			{
 				System.Diagnostics.Debug.WriteLine(ex);
+				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 			}
 		}
 

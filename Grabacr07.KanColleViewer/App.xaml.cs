@@ -73,7 +73,7 @@ namespace Grabacr07.KanColleViewer
 						MyProcess.Start();
 						MyProcess.Refresh();
 					}
-					else
+					else//AutoUpdater.exe가 없는 경우 알림만 띄운다.
 					{
 						PluginHost.Instance.GetNotifier().Show(
 						NotifyType.Update,
@@ -150,6 +150,7 @@ ERROR, date = {0}, sender = {1},
 			catch (Exception ex)
 			{
 				Debug.WriteLine(ex);
+				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 			}
 		}
 		/// <summary>

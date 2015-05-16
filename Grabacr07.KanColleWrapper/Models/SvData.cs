@@ -76,6 +76,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			catch (Exception ex)
 			{
 				Debug.WriteLine(ex);
+				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 				result = null;
 				return false;
 			}
@@ -108,6 +109,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			catch (Exception ex)
 			{
 				Debug.WriteLine(ex);
+				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 				result = null;
 				return false;
 			}

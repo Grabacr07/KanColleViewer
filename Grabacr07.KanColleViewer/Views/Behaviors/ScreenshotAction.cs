@@ -14,6 +14,7 @@ using Setting = Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Views.Controls;
 using System.Diagnostics;
+using Grabacr07.KanColleWrapper;
 
 namespace Grabacr07.KanColleViewer.Views.Behaviors
 {
@@ -38,6 +39,7 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 			catch (Exception ex)
 			{
 				Debug.WriteLine(ex);
+				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 				try
 				{
 					screenshotMessage.Response = new Processing(ex);

@@ -159,6 +159,7 @@ namespace Grabacr07.KanColleWrapper
 			catch (Exception ex)
 			{
 				Debug.WriteLine("装備の破棄に失敗しました: {0}", ex);
+				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 			}
 		}
 
@@ -178,6 +179,7 @@ namespace Grabacr07.KanColleWrapper
 			{
 				// defeq が消えてるっぽい暫定対応 (雑)
 				Debug.WriteLine(ex);
+				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 			}
 		}
 

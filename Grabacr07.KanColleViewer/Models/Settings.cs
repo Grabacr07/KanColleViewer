@@ -677,6 +677,7 @@ namespace Grabacr07.KanColleViewer.Models
 			catch (Exception ex)
 			{
 				System.Diagnostics.Debug.WriteLine(ex);
+				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 			}
 		}
 	}

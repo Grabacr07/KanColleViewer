@@ -97,6 +97,10 @@
       <Project>{c5f0111f-3f68-4a74-bb20-bb762564d080}</Project>
       <Name>KanColleViewer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Grabacr07.KanColleWrapper\KanColleWrapper.csproj">
+      <Project>{0bc8cf79-76d9-46ad-867f-fec6c6ad4594}</Project>
+      <Name>KanColleWrapper</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

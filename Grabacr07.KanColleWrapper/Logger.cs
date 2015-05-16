@@ -25,15 +25,17 @@ namespace Grabacr07.KanColleWrapper
 				proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => this.BattleResult(x.Data));
 				proxy.api_req_combined_battle_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => this.BattleResult(x.Data));
 
+				// ちょっと考えなおす
+				proxy.api_req_kousyou_createitem.TryParse<kcsapi_createitem>().Subscribe(x => this.CreateItem(x.Data, x.Request));
+				proxy.api_req_kousyou_createship.TryParse<kcsapi_createship>().Subscribe(x => this.CreateShip(x.Request));
+				proxy.api_get_member_kdock.TryParse<kcsapi_kdock[]>().Subscribe(x => this.KDock(x.Data));
+
 			}
 			catch(Exception ex)
 			{
 				System.Diagnostics.Debug.WriteLine(ex);
+				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 			}
-			// ちょっと考えなおす
-			proxy.api_req_kousyou_createitem.TryParse<kcsapi_createitem>().Subscribe(x => this.CreateItem(x.Data, x.Request));
-			proxy.api_req_kousyou_createship.TryParse<kcsapi_createship>().Subscribe(x => this.CreateShip(x.Request));
-			proxy.api_get_member_kdock.TryParse<kcsapi_kdock[]>().Subscribe(x => this.KDock(x.Data));
 		}
 
 		private void CreateItem(kcsapi_createitem source, NameValueCollection req)
@@ -85,79 +87,85 @@ namespace Grabacr07.KanColleWrapper
 
 		private void Log(LogType Type, string format, params object[] args)
 		{
-			if (!EnableLogging)
-				return;
-			byte[] utf8Bom = { 0xEF, 0xBB, 0xBF };
-			string MainFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
-
-			if (Type == LogType.BuildItem)
+			try
 			{
+				if (!EnableLogging)
+					return;
+				byte[] utf8Bom = { 0xEF, 0xBB, 0xBF };
+				string MainFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
 
-
-				if (!System.IO.File.Exists(MainFolder + "\\ItemBuildLog.csv"))
+				if (Type == LogType.BuildItem)
 				{
-					var csvPath = Path.Combine(MainFolder, "ItemBuildLog.csv");
-					using (var fileStream = new FileStream(csvPath, FileMode.CreateNew, FileAccess.Write, FileShare.None))
-					using (var writer = new BinaryWriter(fileStream))
+
+
+					if (!System.IO.File.Exists(MainFolder + "\\ItemBuildLog.csv"))
 					{
-						writer.Write(utf8Bom);
+						var csvPath = Path.Combine(MainFolder, "ItemBuildLog.csv");
+						using (var fileStream = new FileStream(csvPath, FileMode.CreateNew, FileAccess.Write, FileShare.None))
+						using (var writer = new BinaryWriter(fileStream))
+						{
+							writer.Write(utf8Bom);
+						}
+						using (StreamWriter w = File.AppendText(MainFolder + "\\ItemBuildLog.csv"))
+						{
+							w.WriteLine("날짜,결과,비서함,연료,탄,강재,보크사이트", args);
+						}
 					}
 					using (StreamWriter w = File.AppendText(MainFolder + "\\ItemBuildLog.csv"))
 					{
-						w.WriteLine("날짜,결과,비서함,연료,탄,강재,보크사이트", args);
+						w.WriteLine(format, args);
 					}
-				}
+					//bin 작성 시작
 
-				using (StreamWriter w = File.AppendText(MainFolder + "\\ItemBuildLog.csv"))
-				{
-					w.WriteLine(format, args);
 				}
-				//bin 작성 시작
-
-			}
-			else if (Type == LogType.BuildShip)
-			{
-				if (!System.IO.File.Exists(MainFolder + "\\ShipBuildLog.csv"))
+				else if (Type == LogType.BuildShip)
 				{
-					var csvPath = Path.Combine(MainFolder, "ShipBuildLog.csv");
-					using (var fileStream = new FileStream(csvPath, FileMode.CreateNew, FileAccess.Write, FileShare.None))
-					using (var writer = new BinaryWriter(fileStream))
+					if (!System.IO.File.Exists(MainFolder + "\\ShipBuildLog.csv"))
 					{
-						writer.Write(utf8Bom);
+						var csvPath = Path.Combine(MainFolder, "ShipBuildLog.csv");
+						using (var fileStream = new FileStream(csvPath, FileMode.CreateNew, FileAccess.Write, FileShare.None))
+						using (var writer = new BinaryWriter(fileStream))
+						{
+							writer.Write(utf8Bom);
+						}
+						using (StreamWriter w = File.AppendText(MainFolder + "\\ShipBuildLog.csv"))
+						{
+							w.WriteLine("날짜,결과,연료,탄,강재,보크사이트,개발자재", args);
+						}
 					}
+
 					using (StreamWriter w = File.AppendText(MainFolder + "\\ShipBuildLog.csv"))
 					{
-						w.WriteLine("날짜,결과,연료,탄,강재,보크사이트,개발자재", args);
+						w.WriteLine(format, args);
 					}
 				}
-
-				using (StreamWriter w = File.AppendText(MainFolder + "\\ShipBuildLog.csv"))
+				else if (Type == LogType.ShipDrop)
 				{
-					w.WriteLine(format, args);
-				}
-			}
-			else if (Type == LogType.ShipDrop)
-			{
-				if (!System.IO.File.Exists(MainFolder + "\\DropLog.csv"))
-				{
-					var csvPath = Path.Combine(MainFolder, "DropLog.csv");
-					using (var fileStream = new FileStream(csvPath, FileMode.CreateNew, FileAccess.Write, FileShare.None))
-					using (var writer = new BinaryWriter(fileStream))
+					if (!System.IO.File.Exists(MainFolder + "\\DropLog.csv"))
 					{
-						writer.Write(utf8Bom);
+						var csvPath = Path.Combine(MainFolder, "DropLog.csv");
+						using (var fileStream = new FileStream(csvPath, FileMode.CreateNew, FileAccess.Write, FileShare.None))
+						using (var writer = new BinaryWriter(fileStream))
+						{
+							writer.Write(utf8Bom);
+						}
+						using (StreamWriter w = File.AppendText(MainFolder + "\\DropLog.csv"))
+						{
+							w.WriteLine("날짜,드랍,해역,적 함대,랭크", args);
+						}
 					}
+
 					using (StreamWriter w = File.AppendText(MainFolder + "\\DropLog.csv"))
 					{
-						w.WriteLine("날짜,드랍,해역,적 함대,랭크", args);
+						w.WriteLine(format, args);
 					}
 				}
-
-				using (StreamWriter w = File.AppendText(MainFolder + "\\DropLog.csv"))
-				{
-					w.WriteLine(format, args);
-				}
+				LogToBin(Type, format, args);
 			}
-			LogToBin(Type, format, args);
+			catch (Exception ex)
+			{
+				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
+			}
 		}
 
 		private void LogToBin(LogType Type, string format, params object[] args)
