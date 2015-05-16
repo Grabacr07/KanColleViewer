@@ -153,10 +153,7 @@
 											<TextBlock Margin="0,-2,0,0"> 
  												<Run Text="{Binding Ship.Info.Name, Mode=OneWay}" 
 													 Style="{DynamicResource EmphaticTextElementStyleKey}" 
- 													 FontSize="14"/> 
- 												<LineBreak /> 
-												<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}" 
-													 FontSize="11" />
+ 													 FontSize="22"/>
 											</TextBlock>
 										</TextBlock.ToolTip> 
 									</TextBlock>
