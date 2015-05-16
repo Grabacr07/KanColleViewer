@@ -328,7 +328,7 @@
 										Value="5">
 										<Setter TargetName="StatusText"
 											Property="Text"
-											Value="회항"/>
+											Value="회항가능"/>
 										<Setter TargetName="StatusText"
 											Property="Foreground"
 											Value="White"/>
@@ -455,7 +455,7 @@
 										Value="5">
 										<Setter TargetName="StatusText"
 											Property="Text"
-											Value="회항"/>
+											Value="회항가능"/>
 										<Setter TargetName="StatusText"
 											Property="Foreground"
 											Value="White"/>

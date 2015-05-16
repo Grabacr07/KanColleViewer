@@ -13,7 +13,7 @@ namespace Grabacr07.KanColleViewer.Views
 	partial class MainWindow
 	{
 		public static MainWindow Current { get; private set; }
-		public LeftTop rect { get; set; }
+		public LeftTop rect { get; private set; }
 		public class LeftTop
 		{
 			public int left { get; set; }

@@ -95,7 +95,7 @@ namespace Grabacr07.KanColleWrapper
 				proxy.api_req_practice_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(true, true, x.Data, false));
 				#endregion
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				Debug.WriteLine(ex);
 			}
@@ -320,14 +320,8 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public void AfterResult()
 		{
-			if (!this.IsCritical)
-			{
-				if (!this.BattleEnd)
-				{
-					this.CriticalCondition();
-					this.IsCritical = true;
-				}
-			}
+			this.CriticalCondition();
+			this.IsCritical = true;
 		}
 		#endregion
 

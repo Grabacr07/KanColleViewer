@@ -81,8 +81,8 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 
 				var width = ((HTMLEmbed)viewObject).clientWidth;
 				var height = ((HTMLEmbed)viewObject).clientHeight;
-				TakeScreenshot(width, height, viewObject, path);
-				//TakeScreenshot(width, height, null, path);
+				//TakeScreenshot(width, height, viewObject, path);
+				TakeScreenshot(width, height, null, path);
 			}
 			else
 			{
@@ -126,8 +126,8 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 					if (!function(swf as HTMLEmbed) && !function(swf as HTMLObjectElement)) continue;
 
 					find = true;
-					TakeScreenshot(width, height, viewObject, path);
-					//TakeScreenshot(width, height, null, path);
+					//TakeScreenshot(width, height, viewObject, path);
+					TakeScreenshot(width, height, null, path);
 
 					break;
 				}
