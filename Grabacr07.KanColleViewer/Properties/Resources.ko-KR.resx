@@ -198,9 +198,6 @@
 	<data name="Expedition_Notifications_Enable" xml:space="preserve">
     <value>원정 귀환시 알림을 표시</value>
   </data>
-	<data name="Expedition_Notifications_Individual" xml:space="preserve">
-    <value>함대마다 개별 설정</value>
-  </data>
 	<data name="Expedition_TimeComplete" xml:space="preserve">
     <value>종료시간</value>
   </data>

@@ -304,16 +304,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Individual Fleet Settings과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        public static string Expedition_Notifications_Individual {
-            get {
-                return ResourceManager.GetString("Expedition_Notifications_Individual", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Completion과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   完了과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Expedition_TimeComplete {
             get {
@@ -322,7 +313,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Remaining과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   残る時間과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Expedition_TimeRemaining {
             get {
@@ -673,7 +664,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Locked과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   ロック과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Repairyard_Locked {
             get {
@@ -727,7 +718,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Completion과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   完了과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Repairyard_TimeComplete {
             get {
@@ -736,7 +727,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Remaining과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   残る時間과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Repairyard_TimeRemaining {
             get {
@@ -754,7 +745,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   First Fleet is in critical condition!과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   大破した艦娘がいます。과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ReSortie_CriticalConditionMessage {
             get {
@@ -763,7 +754,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Critical Ship Warning과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   大破警告과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ReSortie_CriticalConditionMessage_Title {
             get {
@@ -817,7 +808,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Change window color when a ship is in critical condition과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   大破した艦娘がいる場合Windowの色をチェンジ과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Accent_CriticalCondition {
             get {
@@ -862,7 +853,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Custom Sound Notifications과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   カスタムサウンド設定과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_CustomSound {
             get {
@@ -871,7 +862,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Volume과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   音量과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_CustomSound_Volume {
             get {
@@ -889,69 +880,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Flash과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        public static string Settings_Flash {
-            get {
-                return ResourceManager.GetString("Settings_Flash", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   You must use the default method of playing Kancolle through DMM.com&apos;s website or through a OSAPI link. SWF/API links do not work!
-        ///[You must reload the game for the changes to take affect.]과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        public static string Settings_Flash_Message {
-            get {
-                return ResourceManager.GetString("Settings_Flash_Message", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Set Flash Quality:과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        public static string Settings_Flash_Quality {
-            get {
-                return ResourceManager.GetString("Settings_Flash_Quality", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Best: Anti-Aliasing enabled on all images (Slowest)
-        ///High: Default.
-        ///Auto-High: Automatically lowers quality when needed.
-        ///Medium: Average Performance
-        ///AutoLow: Will emphasize speed when needed
-        ///Low: Performance over quality. Ugliest setting.과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        public static string Settings_Flash_Quality_ToolTip {
-            get {
-                return ResourceManager.GetString("Settings_Flash_Quality_ToolTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Set Flash Window:과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        public static string Settings_Flash_Window {
-            get {
-                return ResourceManager.GetString("Settings_Flash_Window", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Opaque: Default (Old IE has no HW accel)
-        ///Direct: Fastest rendering speed (HW accel)
-        ///GPU: Slow! GPU optimization for tablets.과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        public static string Settings_Flash_Window_ToolTip {
-            get {
-                return ResourceManager.GetString("Settings_Flash_Window_ToolTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Fleet Condition과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   艦隊Condition과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_FleetCondition {
             get {
@@ -996,7 +925,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Give a notification for ships in critical condition과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   海域を進行中に大破した艦娘がいる場合通知。과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Notify_CriticalCondition {
             get {
@@ -1077,24 +1006,6 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Resize과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        public static string Settings_Resizing {
-            get {
-                return ResourceManager.GetString("Settings_Resizing", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Resize the Window&apos;s Width when Game starts과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        public static string Settings_Resizing_Enable {
-            get {
-                return ResourceManager.GetString("Settings_Resizing_Enable", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   スクリーンショット과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Screenshot {
@@ -1158,7 +1069,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Translations과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   翻訳과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Translations {
             get {
@@ -1167,7 +1078,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Append untranslated items to the translation files?과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   翻訳が必要な部分をファイルへ記録。과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Translations_Add_Enable {
             get {
@@ -1176,7 +1087,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Translate game items, ships, and quests to selected language?과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   装備、艦娘名、任務（クエスト）を翻訳します。과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Translations_Enable {
             get {
@@ -1185,7 +1096,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Updates과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   アップデート과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Updates {
             get {
@@ -1194,7 +1105,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Automatically update translations on startup과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   翻訳テキストのオートアップデートを行います。과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Updates_AutoUpdateTrans {
             get {
@@ -1203,7 +1114,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Check for the latest program and translation versions과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   アプリケーションのバージョンをチェックします。과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Updates_CheckUpdateButn_ToolTip {
             get {
@@ -1212,7 +1123,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Check for Updates과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   アップデートチェック과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Updates_CheckUpdatesBtn {
             get {
@@ -1221,7 +1132,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Currently과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   現在バージョン과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Updates_CurrentVersion {
             get {
@@ -1230,25 +1141,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Get Latest KCV과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        public static string Settings_Updates_GetKCVBtn {
-            get {
-                return ResourceManager.GetString("Settings_Updates_GetKCVBtn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Opens a link to the latest version of KCV found here.과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        public static string Settings_Updates_GetKCVBtn_ToolTip {
-            get {
-                return ResourceManager.GetString("Settings_Updates_GetKCVBtn_ToolTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Online과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   最新バージョン과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Updates_OnlineVersion {
             get {
@@ -1257,7 +1150,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Check for updates on startup과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   アップデートをアプリ起動時に確認します。과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Updates_UpdateOnStartup {
             get {
@@ -1266,7 +1159,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Download Translations과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   翻訳ダウンロード과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Updates_UpdateTransBtn {
             get {
@@ -1275,7 +1168,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Downloads translations only for selected UI language!과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   選択したUI言語の翻訳ファイルをダウンロードします。과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Settings_Updates_UpdateTransBtn_ToolTip {
             get {
@@ -1334,15 +1227,6 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Settings_WindowControl_LocationLeftButton_Sub {
             get {
                 return ResourceManager.GetString("Settings_WindowControl_LocationLeftButton_Sub", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Set window size to fit content.과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        public static string Settings_WindowControl_SizeFitContent {
-            get {
-                return ResourceManager.GetString("Settings_WindowControl_SizeFitContent", resourceCulture);
             }
         }
         
@@ -1437,7 +1321,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   KCV was unable to check for updates!과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   アップデート確認失敗과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Updater_Notification_CheckFailed {
             get {
@@ -1446,7 +1330,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   New Version of KCV is available! 「v{0}」과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   提督仕事も忙しいの新しいバージョンを確認！「v{0}」과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Updater_Notification_NewAppVersion {
             get {
@@ -1455,7 +1339,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Updater과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   アップデート과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Updater_Notification_Title {
             get {
@@ -1464,7 +1348,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   KCV was unable to download the translations!과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   翻訳ファイルのダウンロードを失敗しました。과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Updater_Notification_TransUpdate_Fail {
             get {
@@ -1473,7 +1357,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Translations are already up-to-date과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   翻訳ファイルのアップデートはすでに完了しました。과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Updater_Notification_TransUpdate_Same {
             get {
@@ -1482,7 +1366,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Translation files have been updated!과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   翻訳ファイルのアップデートが完了しました。과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Updater_Notification_TransUpdate_Success {
             get {

@@ -180,9 +180,6 @@
   <data name="Dockyard_TimeRemaining" xml:space="preserve">
     <value>建造完了まで</value>
   </data>
-  <data name="Settings_WindowControl_SizeFitContent" xml:space="preserve">
-    <value>Set window size to fit content.</value>
-  </data>
   <data name="Dockyard_Unused" xml:space="preserve">
     <value>未使用</value>
   </data>
@@ -201,14 +198,11 @@
   <data name="Expedition_Notifications_Enable" xml:space="preserve">
     <value>遠征帰投時に通知を表示する</value>
   </data>
-  <data name="Expedition_Notifications_Individual" xml:space="preserve">
-    <value>Individual Fleet Settings</value>
-  </data>
   <data name="Expedition_TimeComplete" xml:space="preserve">
-    <value>Completion</value>
+    <value>完了</value>
   </data>
   <data name="Expedition_TimeRemaining" xml:space="preserve">
-    <value>Remaining</value>
+    <value>残る時間</value>
   </data>
   <data name="Fleets" xml:space="preserve">
     <value>艦隊</value>
@@ -304,7 +298,7 @@
     <value>工廠</value>
   </data>
   <data name="Repairyard_Locked" xml:space="preserve">
-    <value>Locked</value>
+    <value>ロック</value>
   </data>
   <data name="Repairyard_NotificationMessage" xml:space="preserve">
     <value>入渠第 {0} ドックでの「{1}」の整備が完了しました。</value>
@@ -322,10 +316,10 @@
     <value>入渠中の艦</value>
   </data>
   <data name="Repairyard_TimeComplete" xml:space="preserve">
-    <value>Completion</value>
+    <value>完了</value>
   </data>
   <data name="Repairyard_TimeRemaining" xml:space="preserve">
-    <value>Remaining</value>
+    <value>残る時間</value>
   </data>
   <data name="Reparyard_Unused" xml:space="preserve">
     <value>未使用</value>
@@ -490,123 +484,85 @@
     <value>Cookie has been set</value>
   </data>
   <data name="Settings_Translations" xml:space="preserve">
-    <value>Translations</value>
+    <value>翻訳</value>
   </data>
   <data name="Settings_Translations_Add_Enable" xml:space="preserve">
-    <value>Append untranslated items to the translation files?</value>
+    <value>翻訳が必要な部分をファイルへ記録。</value>
   </data>
   <data name="Settings_Translations_Enable" xml:space="preserve">
-    <value>Translate game items, ships, and quests to selected language?</value>
+    <value>装備、艦娘名、任務（クエスト）を翻訳します。</value>
   </data>
   <data name="StartContent_SetRegionCookieToolTip" xml:space="preserve">
     <value>Make sure DMM.com is set to Japanese (日本語)</value>
   </data>
   <data name="ReSortie_CriticalConditionMessage" xml:space="preserve">
-    <value>First Fleet is in critical condition!</value>
+    <value>大破した艦娘がいます。</value>
   </data>
   <data name="ReSortie_CriticalConditionMessage_Title" xml:space="preserve">
-    <value>Critical Ship Warning</value>
+    <value>大破警告</value>
   </data>
   <data name="Settings_FleetCondition" xml:space="preserve">
-    <value>Fleet Condition</value>
+    <value>艦隊Condition</value>
   </data>
   <data name="Settings_Notify_CriticalCondition" xml:space="preserve">
-    <value>Give a notification for ships in critical condition</value>
+    <value>海域を進行中に大破した艦娘がいる場合通知。</value>
   </data>
   <data name="Settings_Accent_CriticalCondition" xml:space="preserve">
-    <value>Change window color when a ship is in critical condition</value>
+    <value>大破した艦娘がいる場合Windowの色をチェンジ</value>
   </data>
   <data name="Settings_Updates" xml:space="preserve">
-    <value>Updates</value>
+    <value>アップデート</value>
   </data>
   <data name="Settings_Updates_AutoUpdateTrans" xml:space="preserve">
-    <value>Automatically update translations on startup</value>
+    <value>翻訳テキストのオートアップデートを行います。</value>
   </data>
   <data name="Settings_Updates_CheckUpdateButn_ToolTip" xml:space="preserve">
-    <value>Check for the latest program and translation versions</value>
+    <value>アプリケーションのバージョンをチェックします。</value>
   </data>
   <data name="Settings_Updates_CheckUpdatesBtn" xml:space="preserve">
-    <value>Check for Updates</value>
+    <value>アップデートチェック</value>
   </data>
   <data name="Settings_Updates_CurrentVersion" xml:space="preserve">
-    <value>Currently</value>
+    <value>現在バージョン</value>
   </data>
   <data name="Settings_Updates_OnlineVersion" xml:space="preserve">
-    <value>Online</value>
+    <value>最新バージョン</value>
   </data>
   <data name="Settings_Updates_UpdateOnStartup" xml:space="preserve">
-    <value>Check for updates on startup</value>
+    <value>アップデートをアプリ起動時に確認します。</value>
   </data>
   <data name="Settings_Updates_UpdateTransBtn" xml:space="preserve">
-    <value>Download Translations</value>
+    <value>翻訳ダウンロード</value>
   </data>
   <data name="Settings_Updates_UpdateTransBtn_ToolTip" xml:space="preserve">
-    <value>Downloads translations only for selected UI language!</value>
+    <value>選択したUI言語の翻訳ファイルをダウンロードします。</value>
   </data>
   <data name="Updater_Notification_CheckFailed" xml:space="preserve">
-    <value>KCV was unable to check for updates!</value>
+    <value>アップデート確認失敗</value>
   </data>
   <data name="Updater_Notification_TransUpdate_Success" xml:space="preserve">
-    <value>Translation files have been updated!</value>
+    <value>翻訳ファイルのアップデートが完了しました。</value>
   </data>
   <data name="Updater_Notification_NewAppVersion" xml:space="preserve">
-    <value>New Version of KCV is available! 「v{0}」</value>
+    <value>提督仕事も忙しいの新しいバージョンを確認！「v{0}」</value>
   </data>
   <data name="Updater_Notification_Title" xml:space="preserve">
-    <value>Updater</value>
+    <value>アップデート</value>
   </data>
   <data name="Updater_Notification_TransUpdate_Fail" xml:space="preserve">
-    <value>KCV was unable to download the translations!</value>
+    <value>翻訳ファイルのダウンロードを失敗しました。</value>
   </data>
   <data name="Updater_Notification_TransUpdate_Same" xml:space="preserve">
-    <value>Translations are already up-to-date</value>
-  </data>
-  <data name="Settings_Flash" xml:space="preserve">
-    <value>Flash</value>
-  </data>
-  <data name="Settings_Flash_Quality" xml:space="preserve">
-    <value>Set Flash Quality:</value>
-  </data>
-  <data name="Settings_Flash_Window_ToolTip" xml:space="preserve">
-    <value>Opaque: Default (Old IE has no HW accel)
-Direct: Fastest rendering speed (HW accel)
-GPU: Slow! GPU optimization for tablets.</value>
-  </data>
-  <data name="Settings_Flash_Window" xml:space="preserve">
-    <value>Set Flash Window:</value>
-  </data>
-  <data name="Settings_Flash_Quality_ToolTip" xml:space="preserve">
-    <value>Best: Anti-Aliasing enabled on all images (Slowest)
-High: Default.
-Auto-High: Automatically lowers quality when needed.
-Medium: Average Performance
-AutoLow: Will emphasize speed when needed
-Low: Performance over quality. Ugliest setting.</value>
-  </data>
-  <data name="Settings_Flash_Message" xml:space="preserve">
-    <value>You must use the default method of playing Kancolle through DMM.com's website or through a OSAPI link. SWF/API links do not work!
-[You must reload the game for the changes to take affect.]</value>
-  </data>
-  <data name="Settings_Updates_GetKCVBtn" xml:space="preserve">
-    <value>Get Latest KCV</value>
-  </data>
-  <data name="Settings_Updates_GetKCVBtn_ToolTip" xml:space="preserve">
-    <value>Opens a link to the latest version of KCV found here.</value>
+    <value>翻訳ファイルのアップデートはすでに完了しました。</value>
   </data>
   <data name="Settings_CustomSound" xml:space="preserve">
-    <value>Custom Sound Notifications</value>
+    <value>カスタムサウンド設定</value>
   </data>
   <data name="Settings_CustomSound_Volume" xml:space="preserve">
-    <value>Volume</value>
+    <value>音量</value>
   </data>
   <data name="Settings_Notify_Fatigue" xml:space="preserve">
     <value>Give a notification when a fleet's fatigue as reset. (Not 100% accurate!)</value>
-  </data>
-  <data name="Settings_Resizing" xml:space="preserve">
-    <value>Resize</value>
-  </data>
-  <data name="Settings_Resizing_Enable" xml:space="preserve">
-    <value>Resize the Window's Width when Game starts</value>
   </data>
   <data name="Homeport_RemodelKit" xml:space="preserve">
     <value>改修資材:</value>
