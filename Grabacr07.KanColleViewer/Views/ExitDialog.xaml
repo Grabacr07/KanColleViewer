@@ -13,37 +13,69 @@
 				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 				   xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
 				   xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
+				   xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 				   mc:Ignorable="d"
+				   Topmost="True"
 				   d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
 				   Style="{DynamicResource MetroDialogStyleKey}"
-				   Title="EXIT KanColleViewer"
+				   Background="{DynamicResource ThemeBrushKey}"
+				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+				   Title="종료 확인"
 				   WindowStartupLocation="CenterScreen"
-				   SizeToContent="Height">
+				   SizeToContent="Height"
+				   Name="WindowNameTobeClose">
 	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition />
-			<RowDefinition Height="Auto" />
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
-
-		<TextBlock Text="「提督業も忙しい！」 を終了します。 よろしいですか？"
-				   FontSize="13"
+		<TextBlock FontSize="13"
 				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 				   Margin="10,0"
-				   HorizontalAlignment="Left" />
-
-		<StackPanel Grid.Row="1"
+				   HorizontalAlignment="Left"
+				   VerticalAlignment="Center">
+			<Run Text="제독업무도 바빠!를 종료하시겠습니까?"/>
+			<LineBreak/>
+		</TextBlock>
+		<CheckBox Content="다음부터 이 창을 보지않기 (출격중에는 나타나도록 설정됩니다)" 
+				  Grid.Row="1"
+				  IsChecked="{Binding CloseConfirmOnlyInSortie, Source={x:Static models:Settings.Current}, Mode=TwoWay}"
+				  IsEnabled="{Binding CloseConfirm, Source={x:Static models:Settings.Current}, Mode=OneWay}"
+				  Height="17" Margin="10,0,10,8"/>
+		<TextBlock Grid.Row="2" 
+				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+				   Margin="10,0"
+				   HorizontalAlignment="Left"
+				   VerticalAlignment="Center">
+			<Run Text="(※해당 설정은 설정->창 에서 변경 가능합니다.)"/>
+		</TextBlock>
+		<StackPanel Grid.Row="3"
 					Orientation="Horizontal"
 					HorizontalAlignment="Right"
-					Margin="14,7,14,14">
-			
+					Margin="14,14,14,14">
+
 			<metro2:CallMethodButton Content="OK"
 									 MinWidth="100"
 									 Padding="20,5"
-									 Margin="12,0,0,0" />
+									 Margin="12,0,0,0" 
+									 MethodName="Close" />
 			<metro2:CallMethodButton Content="Cancel"
 									 MinWidth="100"
 									 Padding="20,5"
-									 Margin="12,0,0,0" />
+									 Margin="12,0,0,0">
+				<i:Interaction.Triggers>
+					<i:EventTrigger EventName="Click">
+						<livet:WindowInteractionMessageAction>
+							<livet:DirectInteractionMessage>
+								<livet:WindowActionMessage />
+							</livet:DirectInteractionMessage>
+						</livet:WindowInteractionMessageAction>
+					</i:EventTrigger>
+				</i:Interaction.Triggers>
+			</metro2:CallMethodButton>
 		</StackPanel>
 	</Grid>
 </metro:MetroWindow>
+

@@ -21,7 +21,7 @@ namespace Grabacr07.KanColleViewer.Models
 			"grabacr.net",
 			"KanColleViewer",
 			"Settings.xml");
-		private static readonly string CurrentSettingsVersion = "1.6";
+		private static readonly string CurrentSettingsVersion = "1.7";
 		public static Settings Current { get; set; }
 
 		public delegate void EventHandler();
@@ -69,6 +69,8 @@ namespace Grabacr07.KanColleViewer.Models
 				HorizontalSize = new Point(1280, 0),
 				VerticalSize = new Point(0, 1000),
 				KanColleClientSettings = new KanColleClientSettings(),
+				CloseConfirm = true,
+				CloseConfirmOnlyInSortie = true,
 			};
 		}
 
@@ -668,6 +670,43 @@ namespace Grabacr07.KanColleViewer.Models
 		}
 
 		#endregion
+
+		#region CloseConfirm 変更通知プロパティ
+
+		private bool _CloseConfirm;
+
+		public bool CloseConfirm
+		{
+			get { return this._CloseConfirm; }
+			set
+			{
+				if (this._CloseConfirm != value)
+				{
+					this._CloseConfirm = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
+
+		#region CloseConfirmOnlyInSortie 変更通知プロパティ
+
+		private bool _CloseConfirmOnlyInSortie;
+
+		public bool CloseConfirmOnlyInSortie
+		{
+			get { return this._CloseConfirmOnlyInSortie; }
+			set
+			{
+				if (this._CloseConfirmOnlyInSortie != value)
+				{
+					this._CloseConfirmOnlyInSortie = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
+
 		public void Save()
 		{
 			try

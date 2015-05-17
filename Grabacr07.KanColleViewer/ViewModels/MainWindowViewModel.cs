@@ -15,6 +15,7 @@ using System.Windows;
 using System.Windows.Input;
 using Settings2 = Grabacr07.KanColleViewer.Models.Settings;
 
+//Exit Box Add https://github.com/yuyuvn/KanColleViewer/commit/331a1ca5c87032bdafdbd20d9eed6005082d6520
 namespace Grabacr07.KanColleViewer.ViewModels
 {
 	public class MainWindowViewModel : WindowViewModel
@@ -138,6 +139,25 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				if (Models.Settings.Current.TopMost != value)
 				{
 					Models.Settings.Current.TopMost = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region CanClose 変更通知プロパティ
+
+		private bool _CanClose;
+
+		public bool CanClose
+		{
+			get { return this._CanClose; }
+			set
+			{
+				if (this._CanClose != value)
+				{
+					this._CanClose = value;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -279,6 +299,13 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				{ () => KanColleClient.Current.IsInSortie, (sender, args) => this.UpdateMode() },
 			});
 
+			UpdateCloseConfirm(); 
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(Settings2.Current) 
+			{
+				{ "CloseConfirm", (sender, args) => UpdateCloseConfirm() }, 
+				{ "CloseConfirmOnlyInSortie", (sender, args) => UpdateCloseConfirm() }, 
+			});
+
 			this.UpdateMode();
 
 			this.Tools = new List<ToolViewModel>(PluginHost.Instance.Tools.Select(x => new ToolViewModel(x)));
@@ -328,8 +355,31 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					? Mode.InSortie
 					: Mode.Started
 				: Mode.NotStarted;
+			UpdateCloseConfirm(); 
 		}
 
+		private void UpdateCloseConfirm()
+		{
+			this.CanClose = !Settings2.Current.CloseConfirm;
+			if (Settings2.Current.CloseConfirmOnlyInSortie)
+			{
+				if (this.Mode != Mode.InSortie) this.CanClose = true; 
+			}
+		}
+		public void Closing()
+		{
+			if (!this.CanClose)
+			{
+				var message = new TransitionMessage(this, "Show/ExitDialog");
+				this.Messenger.Raise(message); 
+			}
+		}
+		public void Close()
+		{
+			this.CanClose = true;
+			var message = new TransitionMessage(this, "Close");
+			this.Messenger.Raise(message); 
+		}
 		public void ShowPreviewPopUp()
 		{
 			var window = new BattlePreviewsPopUpViewModel();

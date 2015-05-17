@@ -53,6 +53,19 @@
 
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+		<TextBlock Text="프로그램 종료 확인창 설정"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+
+		<CheckBox Content="프로그램을 닫을때 종료확인창을 띄웁니다"
+				  IsChecked="{Binding CloseConfirm, Source={x:Static models:Settings.Current}, Mode=TwoWay}"
+				  Margin="20,0,0,10" />
+
+		<CheckBox Content="전투중에만 종료확인창을 띄웁니다"
+				  IsChecked="{Binding CloseConfirmOnlyInSortie, Source={x:Static models:Settings.Current}, Mode=TwoWay}"
+				  IsEnabled="{Binding CloseConfirm, Source={x:Static models:Settings.Current}, Mode=OneWay}"
+				  Margin="20,0,0,10" />
+		<Rectangle Height="1"
+				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
 	</StackPanel>
 </UserControl>
