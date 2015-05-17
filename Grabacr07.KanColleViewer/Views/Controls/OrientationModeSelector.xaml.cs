@@ -77,7 +77,6 @@ namespace Grabacr07.KanColleViewer.Views.Controls
                 catch (ResourceReferenceKeyNotFoundException ex)
                 {
 					Debug.WriteLine(ex);
-					KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
                 }
             }
             else if (this.IsMouseOver)
@@ -89,7 +88,6 @@ namespace Grabacr07.KanColleViewer.Views.Controls
                 catch (ResourceReferenceKeyNotFoundException ex)
                 {
 					Debug.WriteLine(ex);
-					KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
                 }
             }
             else

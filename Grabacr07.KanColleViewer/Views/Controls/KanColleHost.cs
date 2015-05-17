@@ -163,7 +163,6 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			catch (Exception ex)
 			{
 				Debug.WriteLine(ex);
-				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 				StatusService.Current.Notify(string.Format(Properties.Resources.ZoomAction_ZoomFailed, ex.Message));
 			}
 		}

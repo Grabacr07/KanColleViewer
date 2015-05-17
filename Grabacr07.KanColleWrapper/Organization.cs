@@ -165,7 +165,6 @@ namespace Grabacr07.KanColleWrapper
 			catch (Exception ex)
 			{
 				System.Diagnostics.Debug.WriteLine("艦隊名の変更に失敗しました: {0}", ex);
-				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 			}
 		}
 
@@ -271,7 +270,6 @@ namespace Grabacr07.KanColleWrapper
 			catch (Exception ex)
 			{
 				System.Diagnostics.Debug.WriteLine("編成の変更に失敗しました: {0}", ex);
-				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 			}
 		}
 
@@ -343,7 +341,6 @@ namespace Grabacr07.KanColleWrapper
 			catch (Exception ex)
 			{
 				System.Diagnostics.Debug.WriteLine("近代化改修による更新に失敗しました: {0}", ex);
-				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 			}
 		}
 
@@ -375,7 +372,6 @@ namespace Grabacr07.KanColleWrapper
 			catch (Exception ex)
 			{
 				System.Diagnostics.Debug.WriteLine("解体による更新に失敗しました: {0}", ex);
-				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 			}
 		}
 
@@ -443,7 +439,6 @@ namespace Grabacr07.KanColleWrapper
 			catch (Exception ex)
 			{
 				System.Diagnostics.Debug.WriteLine("艦隊の出撃を検知できませんでした: {0}", ex);
-				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 			}
 		}
 

@@ -101,7 +101,6 @@ namespace Grabacr07.KanColleWrapper
 			catch (Exception ex)
 			{
 				System.Diagnostics.Debug.WriteLine("入渠開始の解析に失敗しました: {0}", ex);
-				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 			}
 		}
 
@@ -121,7 +120,6 @@ namespace Grabacr07.KanColleWrapper
 			catch (Exception ex)
 			{
 				System.Diagnostics.Debug.WriteLine("高速修復材の解析に失敗しました: {0}", ex);
-				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 			}
 		}
 	}

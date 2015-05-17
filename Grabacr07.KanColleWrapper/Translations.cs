@@ -359,7 +359,7 @@ namespace Grabacr07.KanColleWrapper
 			}
 			catch (Exception ex)
 			{
-				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
+				Debug.WriteLine(ex);
 			}
 
 			if (RawData != null) AddTranslation(RawData, Type);

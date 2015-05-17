@@ -32,7 +32,6 @@ namespace Grabacr07.KanColleWrapper.Models
 			catch (Exception ex)
 			{
 				System.Diagnostics.Debug.WriteLine(ex);
-				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 			}
 		}
 	}

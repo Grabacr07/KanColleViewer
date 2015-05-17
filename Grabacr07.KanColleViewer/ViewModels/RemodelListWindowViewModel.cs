@@ -289,7 +289,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					catch (Exception ex)
 					{
 						Debug.WriteLine(ex);
-						KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 					}
 					if (item.Element("AllWeekdays") != null) temp.TotalWeekday = WeekDaySetter(Convert.ToInt32(item.Element("AllWeekdays").Value));
 					if (item.Element("ToolTip") != null)

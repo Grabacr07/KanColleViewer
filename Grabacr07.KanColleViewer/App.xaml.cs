@@ -150,7 +150,6 @@ ERROR, date = {0}, sender = {1},
 			catch (Exception ex)
 			{
 				Debug.WriteLine(ex);
-				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 			}
 		}
 		/// <summary>
