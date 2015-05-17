@@ -16,6 +16,7 @@ using MetroRadiance;
 using AppSettings = Grabacr07.KanColleViewer.Properties.Settings;
 using Settings = Grabacr07.KanColleViewer.Models.Settings;
 using System.Net;
+using System.Text;
 
 namespace Grabacr07.KanColleViewer
 {
@@ -24,6 +25,9 @@ namespace Grabacr07.KanColleViewer
 		public static ProductInfo ProductInfo { get; private set; }
 		public static MainWindowViewModel ViewModelRoot { get; private set; }
 		private bool IsUpdate { get; set; }
+
+		string MainFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+
 		static App()
 		{
 			AppDomain.CurrentDomain.UnhandledException += (sender, args) => ReportException(sender, args.ExceptionObject as Exception);
@@ -44,7 +48,56 @@ namespace Grabacr07.KanColleViewer
 			Helper.SetRegistryFeatureBrowserEmulation();
 			if (Settings.Current.EnableMMCSS) Helper.SetMMCSSTask();
 
-			KanColleClient.Current.Proxy.Startup(AppSettings.Default.LocalProxyPort);
+			//기본값을 설정.
+			string portNumStr = string.Empty;
+			int portNum = AppSettings.Default.LocalProxyPort;
+
+
+			//port.txt이 존재하는 경우 파일에서 port번호를 읽는다
+			if (File.Exists(Path.Combine(MainFolder, "Port.txt")))
+			{
+				var stream = new StreamReader(Path.Combine(MainFolder, "Port.txt"), Encoding.UTF8);
+
+				portNumStr = stream.ReadToEnd();
+				stream.Close();
+
+				try
+				{
+					portNum = Convert.ToInt32(portNumStr);
+
+					if (portNum != AppSettings.Default.LocalProxyPort)
+					{
+						try
+						{
+							KanColleClient.Current.Proxy.Startup(portNum);
+						}
+						catch(Exception ex)
+						{
+							KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
+							KanColleClient.Current.Proxy.Startup(AppSettings.Default.LocalProxyPort);
+						}
+					}
+					else
+					{
+						KanColleClient.Current.Proxy.Startup(AppSettings.Default.LocalProxyPort);
+					}
+				}
+				catch (Exception ex)
+				{
+					Debug.WriteLine("txt파일의 내용을 Int로 변경하는데 실패했습니다. Port번호는 기존 설정값을 유지합니다", ex);
+					KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
+
+					WritePortFile(AppSettings.Default.LocalProxyPort);
+				}
+
+			}
+			else//해당 파일이 없는 경우 파일을 기본값으로 작성한다.
+			{
+				WritePortFile(AppSettings.Default.LocalProxyPort);
+				KanColleClient.Current.Proxy.Startup(AppSettings.Default.LocalProxyPort);
+			}
+
+
 			KanColleClient.Current.Proxy.UpstreamProxySettings = Settings.Current.ProxySettings;
 
 			ResourceService.Current.ChangeCulture(Settings.Current.Culture);
@@ -63,7 +116,6 @@ namespace Grabacr07.KanColleViewer
 			{
 				if (Settings.Current.EnableUpdateNotification && KanColleClient.Current.Updater.IsOnlineVersionGreater(0, ProductInfo.Version.ToString()))
 				{
-					string MainFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
 					if (File.Exists(Path.Combine(MainFolder, "AutoUpdater.exe")))
 					{
 						this.IsUpdate = true;
@@ -107,7 +159,7 @@ namespace Grabacr07.KanColleViewer
 			//https://github.com/Yuubari/KanColleViewer/commit/d94a2c215122e4d03bf458f2a060b3a06f3c6599
 			if (GetFlashVersion() == "")
 			{
-				MessageBoxResult MB = MessageBox.Show("Internet Explorer용 Flash Player ActiveX가 설치되어있지않습니다. 지금 설치하시겠습니까?", "Adobe Flash ActiveX를 찾을 수 없습니다" , MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.Yes);
+				MessageBoxResult MB = MessageBox.Show("Internet Explorer용 Flash Player ActiveX가 설치되어있지않습니다. 지금 설치하시겠습니까?", "Adobe Flash ActiveX를 찾을 수 없습니다", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.Yes);
 				if (MB == MessageBoxResult.Yes)
 				{
 					Process.Start("IExplore.exe", @"http://get.adobe.com/flashplayer/");
@@ -169,7 +221,13 @@ ERROR, date = {0}, sender = {1},
 
 			return sVersion;
 		}
-
+		private void WritePortFile(int portNum)
+		{
+			var stream = new StreamWriter(Path.Combine(MainFolder, "Port.txt"), false, Encoding.UTF8);
+			stream.Write(Convert.ToString(portNum));
+			stream.Flush();
+			stream.Close();
+		}
 		private void RestoreWindowSize()
 		{
 			var window = System.Windows.Application.Current.MainWindow;

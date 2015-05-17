@@ -70,7 +70,7 @@ namespace Grabacr07.KanColleViewer.Models
 				VerticalSize = new Point(0, 1000),
 				KanColleClientSettings = new KanColleClientSettings(),
 				CloseConfirm = true,
-				CloseConfirmOnlyInSortie = true,
+				CloseConfirmOnlyInSortie = false,
 			};
 		}
 
