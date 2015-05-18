@@ -128,6 +128,14 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
+		/// 엔드포인트 "/kcsapi/api_get_member/ship_deck" 에서 세션을 제공합니다.
+		/// </summary>
+		public IObservable<Session> api_get_member_ship_deck
+		{
+			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/ship_deck"); }
+		}
+
+		/// <summary>
 		/// 엔드포인트 "/kcsapi/api_req_hensei/change" 에서 세션을 제공합니다.
 		/// </summary>
 		public IObservable<Session> api_req_hensei_change

@@ -116,6 +116,7 @@
     <Compile Include="Models\CreatedSlotItem.cs" />
     <Compile Include="Models\FleetCondition.cs" />
     <Compile Include="Models\PreviewBattleResults.cs" />
+    <Compile Include="Models\Raw\kcsapi_ship_deck.cs" />
     <Compile Include="Models\Raw\kcsapi_mst_maparea.cs" />
     <Compile Include="Models\Raw\kcsapi_mst_mapinfo.cs" />
     <Compile Include="Models\Raw\kcsapi_hensei_combined.cs" />
