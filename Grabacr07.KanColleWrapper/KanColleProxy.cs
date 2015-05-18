@@ -20,15 +20,15 @@ namespace Grabacr07.KanColleWrapper
 
 		public IObservable<Session> SessionSource
 		{
-		    get { return this.connectableSessionSource.AsObservable(); }
+			get { return this.connectableSessionSource.AsObservable(); }
 		}
 
-	    public IObservable<Session> ApiSessionSource
-	    {
-	        get { return this.apiSource.AsObservable(); }
-	    }
+		public IObservable<Session> ApiSessionSource
+		{
+			get { return this.apiSource.AsObservable(); }
+		}
 
-	    public IProxySettings UpstreamProxySettings { get; set; }
+		public IProxySettings UpstreamProxySettings { get; set; }
 
 
 		public KanColleProxy()
@@ -45,7 +45,7 @@ namespace Grabacr07.KanColleWrapper
 			this.apiSource = this.connectableSessionSource
 				.Where(s => s.PathAndQuery.StartsWith("/kcsapi"))
 				.Where(s => s.oResponse.MIMEType.Equals("text/plain"))
-				#region .Do(debug)
+			#region .Do(debug)
 #if DEBUG
 .Do(session =>
 				{
@@ -56,13 +56,13 @@ namespace Grabacr07.KanColleWrapper
 				})
 #endif
 			#endregion
-				.Publish();
+.Publish();
 		}
 
 
 		public void Startup(int proxy = 37564)
 		{
-			FiddlerApplication.Startup(proxy, false, true);
+			FiddlerApplication.Startup(proxy, false, true, false); 
 			FiddlerApplication.BeforeRequest += this.SetUpstreamProxyHandler;
 
 			SetIESettings("localhost:" + proxy);
