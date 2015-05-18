@@ -907,6 +907,9 @@
 												<Setter TargetName="Border"
 														Property="Background"
 														Value="#FF68CFF5" />
+												<Setter TargetName="Text"
+														Property="Foreground"
+														Value="#FF8B8B8B" />
 											</DataTrigger>
 										</DataTemplate.Triggers>
 									</DataTemplate>
