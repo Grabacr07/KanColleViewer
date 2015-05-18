@@ -22,6 +22,7 @@
 		"/kcsapi/api_get_member/kdock",
 		"/kcsapi/api_get_member/material",
 		"/kcsapi/api_get_member/questlist",
+		"/kcsapi/api_get_member/ship_deck",
 		"/kcsapi/api_req_hensei/change",
 		"/kcsapi/api_req_hokyu/charge",
 		"/kcsapi/api_req_kaisou/powerup",
