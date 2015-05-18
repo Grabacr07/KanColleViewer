@@ -289,8 +289,11 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public void AfterResult()
 		{
-			this.CriticalCondition();
-			this.IsCritical = true;
+			if (!this.BattleEnd)
+			{
+				this.CriticalCondition();
+				this.IsCritical = true;
+			}
 		}
 		#endregion
 
