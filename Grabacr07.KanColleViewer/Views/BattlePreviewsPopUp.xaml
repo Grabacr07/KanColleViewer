@@ -107,104 +107,102 @@
 										 MethodName="Update"
 										 />
 			</Grid>
-			<Grid Margin="0,5,0,0">
-				<Grid HorizontalAlignment="Center">
-					<TextBlock Grid.Column="1"
+			<Grid HorizontalAlignment="Center">
+				<TextBlock Grid.Column="1"
 								FontWeight="ExtraBold"
 								Text="완전승리 S"
 								Foreground="#FFFFE558"
 							   HorizontalAlignment="Center"
 								FontSize="20"
 								Visibility="{Binding PerfectRank, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" d:IsHidden="True"/>
-					<TextBlock Grid.Column="1"
+				<TextBlock Grid.Column="1"
 								FontWeight="ExtraBold"
 								Text="S승리"
 								Foreground="Gold"
 							   HorizontalAlignment="Center"
 								FontSize="20"
 								Visibility="{Binding RankS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" d:IsHidden="True"/>
-					<TextBlock Grid.Column="1"
+				<TextBlock Grid.Column="1"
 								FontWeight="ExtraBold"
 								Text="A승리"
 								Foreground="#FFD10000"
 							   HorizontalAlignment="Center"
 								FontSize="20"
 								Visibility="{Binding RankA, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" d:IsHidden="True"/>
-					<TextBlock Grid.Column="1"
+				<TextBlock Grid.Column="1"
 								FontWeight="ExtraBold"
 								Text="B승리"
 								Foreground="#FFD43353"
 							   HorizontalAlignment="Center"
 								FontSize="20"
 								Visibility="{Binding RankB, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" d:IsHidden="True"/>
-					<TextBlock Grid.Column="1"
+				<TextBlock Grid.Column="1"
 								FontWeight="ExtraBold"
 								Text="C패배"
 								Foreground="#FF42428F"
 							   HorizontalAlignment="Center"
 								FontSize="20"
 								Visibility="{Binding RankC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" d:IsHidden="True"/>
-					<TextBlock Grid.Column="1"
+				<TextBlock Grid.Column="1"
 								FontWeight="ExtraBold"
 								Text="D패배"
 								Foreground="#FF02A43D"
 							   HorizontalAlignment="Center"
 								FontSize="20"
 								Visibility="{Binding RankD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" d:IsHidden="True"/>
-					<TextBlock Grid.Column="1"
+				<TextBlock Grid.Column="1"
 								FontWeight="ExtraBold"
 								Text="알수없음 혹은 D랭크 미만"
 								Foreground="#FF443DCF"
 							   HorizontalAlignment="Center"
 								FontSize="20"
 								Visibility="{Binding RankOut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-				</Grid>
-				<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-					<TextBlock VerticalAlignment="Center" 
+			</Grid>
+			<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+				<TextBlock VerticalAlignment="Center" 
 							   FontSize="13" 
 							   Foreground="{DynamicResource ForegroundBrushKey}" 
 							   Text="나침반결과 "/>
-					<TextBlock HorizontalAlignment="Right"
+				<TextBlock HorizontalAlignment="Right"
 							   VerticalAlignment="Center"
 							   Margin="0,0,15,0"
 							   FontSize="13"
 							   FontWeight="ExtraBold"
 							   Foreground="White"
 						   Padding="12,4">
-						<TextBlock.Style>
-							<Style TargetType="TextBlock">
-								<Style.Triggers>
-									<DataTrigger Binding="{Binding CellStatus}"
+					<TextBlock.Style>
+						<Style TargetType="TextBlock">
+							<Style.Triggers>
+								<DataTrigger Binding="{Binding CellStatus}"
 												 Value="2">
-										<Setter Property="Background" Value="#FF3FBD2B"/>
-										<Setter Property="Text" Value="자원획득"/>
-									</DataTrigger>
-									<DataTrigger Binding="{Binding CellStatus}"
+									<Setter Property="Background" Value="#FF3FBD2B"/>
+									<Setter Property="Text" Value="자원획득"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding CellStatus}"
 												 Value="3">
-										<Setter Property="Background" Value="#FFA33CEA"/>
-										<Setter Property="Text" Value="소용돌이"/>
-									</DataTrigger>
-									<DataTrigger Binding="{Binding CellStatus}"
+									<Setter Property="Background" Value="#FFA33CEA"/>
+									<Setter Property="Text" Value="소용돌이"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding CellStatus}"
 												 Value="4">
-										<Setter Property="Background" Value="#FFF01717"/>
-										<Setter Property="Text" Value="적 조우"/>
-									</DataTrigger>
-									<DataTrigger Binding="{Binding CellStatus}"
+									<Setter Property="Background" Value="#FFF01717"/>
+									<Setter Property="Text" Value="적 조우"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding CellStatus}"
 												 Value="5">
-										<Setter Property="Background" Value="#FFD40C0C"/>
-										<Setter Property="Text" Value="보스전!"/>
-									</DataTrigger>
-									<DataTrigger Binding="{Binding CellStatus}"
+									<Setter Property="Background" Value="#FFD40C0C"/>
+									<Setter Property="Text" Value="보스전!"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding CellStatus}"
 												 Value="6">
-										<Setter Property="Background" Value="#FF0A8AB9"/>
-										<Setter Property="Text" Value="기분탓"/>
-									</DataTrigger>
-								</Style.Triggers>
-							</Style>
-						</TextBlock.Style>
-					</TextBlock>
-				</StackPanel>
-			</Grid>
+									<Setter Property="Background" Value="#FF0A8AB9"/>
+									<Setter Property="Text" Value="기분탓"/>
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</TextBlock.Style>
+				</TextBlock>
+			</StackPanel>
 			<TextBlock/>
 			<ScrollViewer HorizontalAlignment="Center"
                           Margin="2,0,2,10"

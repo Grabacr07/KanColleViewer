@@ -34,8 +34,7 @@
 				<LineBreak/>
 				<Run Text="※C랭크와 D랭크의 경우 조건이 아직 완벽하게 밝혀지지 않았습니다."/>
 			</TextBlock>
-			<Grid>
-				<Grid HorizontalAlignment="Center">
+			<Grid HorizontalAlignment="Center">
 					<TextBlock Grid.Column="1"
 								FontWeight="ExtraBold"
 								Text="완전승리 S"
@@ -86,52 +85,51 @@
 								FontSize="20"
 								Visibility="{Binding RankOut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 				</Grid>
-				<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-					<TextBlock VerticalAlignment="Center" 
+			<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+				<TextBlock VerticalAlignment="Center" 
 							   FontSize="13" 
 							   Foreground="{DynamicResource ForegroundBrushKey}" 
 							   Text="나침반결과 "/>
-					<TextBlock HorizontalAlignment="Right"
+				<TextBlock HorizontalAlignment="Right"
 							   VerticalAlignment="Center"
 							   Margin="0,0,15,0"
 							   FontSize="13"
 							   FontWeight="ExtraBold"
 							   Foreground="White"
 						   Padding="12,4">
-						<TextBlock.Style>
-							<Style TargetType="TextBlock">
-								<Style.Triggers>
-									<DataTrigger Binding="{Binding CellStatus}"
+					<TextBlock.Style>
+						<Style TargetType="TextBlock">
+							<Style.Triggers>
+								<DataTrigger Binding="{Binding CellStatus}"
 												 Value="2">
-										<Setter Property="Background" Value="#FF3FBD2B"/>
-										<Setter Property="Text" Value="자원획득"/>
-									</DataTrigger>
-									<DataTrigger Binding="{Binding CellStatus}"
+									<Setter Property="Background" Value="#FF3FBD2B"/>
+									<Setter Property="Text" Value="자원획득"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding CellStatus}"
 												 Value="3">
-										<Setter Property="Background" Value="#FFA33CEA"/>
-										<Setter Property="Text" Value="소용돌이"/>
-									</DataTrigger>
-									<DataTrigger Binding="{Binding CellStatus}"
+									<Setter Property="Background" Value="#FFA33CEA"/>
+									<Setter Property="Text" Value="소용돌이"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding CellStatus}"
 												 Value="4">
-										<Setter Property="Background" Value="#FFF01717"/>
-										<Setter Property="Text" Value="적 조우"/>
-									</DataTrigger>
-									<DataTrigger Binding="{Binding CellStatus}"
+									<Setter Property="Background" Value="#FFF01717"/>
+									<Setter Property="Text" Value="적 조우"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding CellStatus}"
 												 Value="5">
-										<Setter Property="Background" Value="#FFD40C0C"/>
-										<Setter Property="Text" Value="보스전!"/>
-									</DataTrigger>
-									<DataTrigger Binding="{Binding CellStatus}"
+									<Setter Property="Background" Value="#FFD40C0C"/>
+									<Setter Property="Text" Value="보스전!"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding CellStatus}"
 												 Value="6">
-										<Setter Property="Background" Value="#FF0A8AB9"/>
-										<Setter Property="Text" Value="기분탓"/>
-									</DataTrigger>
-								</Style.Triggers>
-							</Style>
-						</TextBlock.Style>
-					</TextBlock>
-				</StackPanel>
-			</Grid>
+									<Setter Property="Background" Value="#FF0A8AB9"/>
+									<Setter Property="Text" Value="기분탓"/>
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</TextBlock.Style>
+				</TextBlock>
+			</StackPanel>
 			<TextBlock/>
 			<ScrollViewer HorizontalAlignment="Center" 
 						  HorizontalScrollBarVisibility="Auto"
