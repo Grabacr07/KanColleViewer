@@ -48,8 +48,9 @@
     <Reference Include="Livet">
       <HintPath>..\..\packages\LivetCask.1.1.0.0\lib\net45\Livet.dll</HintPath>
     </Reference>
-    <Reference Include="NAudio">
-      <HintPath>..\..\packages\NAudio.1.7.2\lib\net35\NAudio.dll</HintPath>
+    <Reference Include="NAudio, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NAudio.1.7.3\lib\net35\NAudio.dll</HintPath>
     </Reference>
     <Reference Include="Windows">
       <HintPath>C:\Program Files\Windows Kits\8.1\References\CommonConfiguration\Neutral\Windows.winmd</HintPath>
