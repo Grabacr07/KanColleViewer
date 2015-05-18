@@ -407,6 +407,14 @@ namespace Grabacr07.KanColleWrapper
 			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_map/next"); }
 		}
 
+		/// <summary>
+		/// 엔드포인트 "/kcsapi/api_req_combined_battle/sp_midnight" 에서 세션을 제공합니다.
+		/// </summary>
+		public IObservable<Session> api_req_combined_battle_sp_midnight
+		{
+			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_combined_battle/sp_midnight"); }
+		}
+
 		// ReSharper restore InconsistentNaming
 	}
 }

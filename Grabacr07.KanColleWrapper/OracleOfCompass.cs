@@ -82,6 +82,8 @@ namespace Grabacr07.KanColleWrapper
 				proxy.api_req_combined_battle_battle.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(false, false, x.Data, true));
 				proxy.api_req_combined_battle_midnight_battle.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(true, false, x.Data, true));
 				proxy.api_req_combined_battle_battle_water.TryParse<kcsapi_battle>().Subscribe(x => this.Battle(true, false, x.Data, true));
+				proxy.api_req_combined_battle_sp_midnight.TryParse<kcsapi_midnight_battle>().Subscribe(x => this.MidBattle(false, false, x.Data, true));
+
 				#endregion
 
 				#region BattleResult관련. 연합함대와 일반전투만 포함. 연습전 결과는 무시
@@ -834,7 +836,7 @@ namespace Grabacr07.KanColleWrapper
 							{
 								DataLists.ComMHpResults.Add(Maxhps[i]);
 								DataLists.ComHpResults.Add(CurrentHPList[i]);
-								
+
 								if (temp <= 0) DataLists.ComCalResults.Add(4);//격침
 								else if (temp <= 0.25) DataLists.ComCalResults.Add(3);//대파
 								else if (temp <= 0.5) DataLists.ComCalResults.Add(2);//중파
