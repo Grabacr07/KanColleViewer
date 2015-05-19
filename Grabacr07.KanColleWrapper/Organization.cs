@@ -461,22 +461,22 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		private void Update(kcsapi_ship_deck source)
-		{
-			if (source.api_deck_data != null)
+        {
+            if (source.api_ship_data != null)
+            {
+                foreach (var ship in source.api_ship_data)
+                {
+                    var target = this.Ships[ship.api_id];
+                    target.Update(ship);
+                }
+            }
+
+            if (source.api_deck_data != null)
 			{
 				foreach (var deck in source.api_deck_data)
 				{
 					var target = this.Fleets[deck.api_id];
 					target.Update(deck);
-				}
-			}
-
-			if (source.api_ship_data != null)
-			{
-				foreach (var ship in source.api_ship_data)
-				{
-					var target = this.Ships[ship.api_id];
-					target.Update(ship);
 				}
 			}
 		}
