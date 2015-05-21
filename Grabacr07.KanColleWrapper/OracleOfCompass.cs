@@ -28,7 +28,7 @@ namespace Grabacr07.KanColleWrapper
 		//private List<PreviewBattleResults> Results { get; set; }
 		private int RankNum { get; set; }
 		private int DockId { get; set; }
-
+		private bool PracticeStatus { get; set; }
 		#endregion
 
 		#region bool
@@ -216,7 +216,7 @@ namespace Grabacr07.KanColleWrapper
 			List<PreviewBattleResults> Results = new List<PreviewBattleResults>();
 			var ships = KanColleClient.Current.Master.Ships;
 
-			EnemyFleet.EnemyShips = new List<string>();
+			if (!PracticeStatus) EnemyFleet.EnemyShips = new List<string>();
 
 			for (int i = 0; i < 6; i++)
 			{
@@ -240,13 +240,13 @@ namespace Grabacr07.KanColleWrapper
 							if (Enemy.HP.Maximum != 0 || Enemy.HP.Current != 0)
 							{
 								Results.Add(Enemy);
-								EnemyFleet.EnemyShips.Add(item.Value.RawData.api_name);
+								if (!PracticeStatus) EnemyFleet.EnemyShips.Add(item.Value.RawData.api_name);
 							}
 						}
 					}
 				}
 			}
-			EnemyFleet.FleetCount = EnemyFleet.EnemyShips.Count;
+			if (!PracticeStatus) EnemyFleet.FleetCount = EnemyFleet.EnemyShips.Count;
 			return Results;
 		}
 
@@ -340,7 +340,7 @@ namespace Grabacr07.KanColleWrapper
 					}
 					EnemyFleet.FleetName = KanColleClient.Current.Translations
 						.GetEnemyFleetInfo(EnemyFleet.FleetID, TranslationType.EnemyFleetName);//함대명
-					EnemyFleet.FleetName = KanColleClient.Current.Translations.GetTranslation(EnemyFleet.FleetName,TranslationType.OperationSortie);
+					EnemyFleet.FleetName = KanColleClient.Current.Translations.GetTranslation(EnemyFleet.FleetName, TranslationType.OperationSortie);
 
 					this.PreviewNextEnemy();
 				}
@@ -537,6 +537,8 @@ namespace Grabacr07.KanColleWrapper
 		private void Battle(bool IsWater, bool IsPractice, kcsapi_battle battle, bool Combined)
 		{
 			//this.Combined = IsCombined;
+			this.PracticeStatus = IsPractice;
+
 			this.IsCritical = false;
 			List<int> CurrentHPList = new List<int>();
 			List<listup> lists = new List<listup>();
@@ -724,6 +726,7 @@ namespace Grabacr07.KanColleWrapper
 		/// <param name="IsPractice">연습전인경우 채크합니다. 연습전이면 True</param>
 		private void MidBattle(bool IsMidnight, bool IsPractice, kcsapi_midnight_battle battle, bool Combined)
 		{
+			this.PracticeStatus = IsPractice;
 			if (!Combined) this.IsCritical = false;
 			//this.Combined = IsCombined;
 			List<listup> lists = new List<listup>();
@@ -796,6 +799,7 @@ namespace Grabacr07.KanColleWrapper
 		/// <param name="Combined">현재 연합함대가 결성되어있는가</param>
 		private void BattleCalc(List<listup> lists, List<int> CurrentHPList, int[] Maxhps, int[] NowHps, bool IsCombined, bool IsMidnight, bool IsPractice, bool Combined)
 		{
+			this.PracticeStatus = IsPractice;
 			#region 전투 미리보기 관련값 초기화
 			if (EnableBattlePreview)
 			{

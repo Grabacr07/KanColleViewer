@@ -226,7 +226,7 @@
 				</Grid>
 				<Grid Visibility="{Binding EnemyPreview}" HorizontalAlignment="Center" MinWidth="200">
 					<StackPanel>
-						<TextBlock TextAlignment="Center" Text="{Binding FleetName, Mode=OneWay}"/>
+						<TextBlock FontSize="20" FontWeight="Bold" TextAlignment="Center" Text="{Binding FleetName, Mode=OneWay}"/>
 						<ItemsControl VerticalAlignment="Top"
 						Width="Auto" ItemsSource="{Binding EnemyShips, Mode=OneWay}"
 						Background="Transparent"
