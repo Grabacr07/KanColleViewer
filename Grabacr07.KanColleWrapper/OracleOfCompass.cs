@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Windows;
 
 namespace Grabacr07.KanColleWrapper
 {
@@ -13,6 +14,8 @@ namespace Grabacr07.KanColleWrapper
 	public class OracleOfCompass
 	{
 		public int CellData { get; private set; }
+		public EnemyFleetInfo EnemyFleet { get; private set; }
+		public bool IsNewEnemy { get; set; }
 
 		#region private int,List,etc
 		/// <summary>
@@ -25,6 +28,7 @@ namespace Grabacr07.KanColleWrapper
 		//private List<PreviewBattleResults> Results { get; set; }
 		private int RankNum { get; set; }
 		private int DockId { get; set; }
+
 		#endregion
 
 		#region bool
@@ -42,10 +46,6 @@ namespace Grabacr07.KanColleWrapper
 		/// 전투가 끝나고 모항에 돌아왔는지를 채크
 		/// </summary>
 		private bool BattleEnd { get; set; }
-		/// <summary>
-		/// 연합함대 여부를 저장(수뢰전대 API때문에 넣는 임시 코드)
-		/// </summary>
-		//public bool Combined { get; set; }
 		#endregion
 
 		#region EventHandler
@@ -66,6 +66,8 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public event EventHandler PreviewCriticalCondition;
 		public event EventHandler ReadyForNextCell;
+		public event EventHandler PreviewNextEnemy;
+		public event EventHandler UnknownEnemy;
 		#endregion
 
 		/// <summary>
@@ -87,7 +89,7 @@ namespace Grabacr07.KanColleWrapper
 				#endregion
 
 				#region BattleResult관련. 연합함대와 일반전투만 포함. 연습전 결과는 무시
-				proxy.api_req_sortie_battleresult.TryParse().Subscribe(x => this.Result());
+				proxy.api_req_sortie_battleresult.TryParse<kcsapi_combined_battle_battleresult>().Subscribe(x => this.Result(x.Data));
 				proxy.api_req_combined_battle_battleresult.TryParse<kcsapi_combined_battle_battleresult>().Subscribe(x => this.Result(x.Data));
 				#endregion
 
@@ -109,8 +111,8 @@ namespace Grabacr07.KanColleWrapper
 			#endregion
 
 			#region 변수 초기화 관련
-			proxy.api_req_map_start.TryParse<kcsapi_map_start>().Subscribe(x => StartCell(x.Data));
-			proxy.api_req_map_next.TryParse<kcsapi_map_next>().Subscribe(x => NextCell(x.Data));
+			proxy.api_req_map_start.TryParse<kcsapi_map_next>().Subscribe(x => CellInfo(x.Data));
+			proxy.api_req_map_next.TryParse<kcsapi_map_next>().Subscribe(x => CellInfo(x.Data));
 			proxy.api_port.TryParse().Subscribe(x => this.Cleared(true));
 			#endregion
 
@@ -214,6 +216,8 @@ namespace Grabacr07.KanColleWrapper
 			List<PreviewBattleResults> Results = new List<PreviewBattleResults>();
 			var ships = KanColleClient.Current.Master.Ships;
 
+			EnemyFleet.EnemyShips = new List<string>();
+
 			for (int i = 0; i < 6; i++)
 			{
 				PreviewBattleResults Enemy = new PreviewBattleResults();
@@ -233,11 +237,16 @@ namespace Grabacr07.KanColleWrapper
 							Enemy.Status = this.DataLists.EnemyCalResults[i];
 
 
-							if (Enemy.HP.Maximum != 0 || Enemy.HP.Current != 0) Results.Add(Enemy);
+							if (Enemy.HP.Maximum != 0 || Enemy.HP.Current != 0)
+							{
+								Results.Add(Enemy);
+								EnemyFleet.EnemyShips.Add(item.Value.RawData.api_name);
+							}
 						}
 					}
 				}
 			}
+			EnemyFleet.FleetCount = EnemyFleet.EnemyShips.Count;
 			return Results;
 		}
 
@@ -277,11 +286,16 @@ namespace Grabacr07.KanColleWrapper
 		}
 		/// <summary>
 		/// battleresult창이 떴을때 IsCritical이 True이면 CriticalCondition이벤트를 발생
-		/// 비효율적이지만 매번마다 GoBackPortList를 재작성한다.
+		/// 
 		/// </summary>
 		/// <param name="result">기본값은 null. 연합함대인경우에만 값을 받아 호위 회항한 부분을 채크</param>
 		private void Result(kcsapi_combined_battle_battleresult result = null)
 		{
+			if (this.IsNewEnemy)
+			{
+				EnemyFleet.FleetName = result.api_enemy_info.api_deck_name;
+				KanColleClient.Current.Translations.WriteFile(EnemyFleet);
+			}
 			if (this.IsCritical) this.CriticalCondition();
 		}
 		/// <summary>
@@ -298,18 +312,45 @@ namespace Grabacr07.KanColleWrapper
 		#endregion
 
 		#region 다음 맵 셀을 확인
-		private void StartCell(kcsapi_map_start proxy)
+		private void CellInfo(kcsapi_map_next proxy)
 		{
 			this.Cleared(false);
+
 			CellData = proxy.api_event_id;
 			this.IsCompassCalculated = true;
-			this.ReadyForNextCell();
-		}
-		private void NextCell(kcsapi_map_next proxy)
-		{
-			this.Cleared(false);
-			CellData = proxy.api_event_id;
-			this.IsCompassCalculated = true;
+
+			if (proxy.api_enemy != null)
+			{
+				EnemyFleet = new EnemyFleetInfo();
+				EnemyFleet.FleetID = proxy.api_enemy.api_enemy_id;
+				if (KanColleClient.Current.Translations.GetEnemyFleetInfo(EnemyFleet.FleetID, TranslationType.EnemyFleetName) != null)
+				{
+					this.IsNewEnemy = false;
+					int shipCount = Convert
+						.ToInt32(KanColleClient.Current.Translations
+						.GetEnemyFleetInfo(EnemyFleet.FleetID, TranslationType.EnemyFleetCount));
+
+					var tempList = new List<string>(KanColleClient.Current.Translations
+						.GetEnemyFleetInfo(EnemyFleet.FleetID, TranslationType.EnemyFleetShips, shipCount)
+						.Split(',').ToList());//배 목록
+					EnemyFleet.EnemyShips = new List<string>();
+					foreach (var item in tempList)
+					{
+						EnemyFleet.EnemyShips.Add(KanColleClient.Current.Translations.GetTranslation(item, TranslationType.Ships));
+					}
+					EnemyFleet.FleetName = KanColleClient.Current.Translations
+						.GetEnemyFleetInfo(EnemyFleet.FleetID, TranslationType.EnemyFleetName);//함대명
+					EnemyFleet.FleetName = KanColleClient.Current.Translations.GetTranslation(EnemyFleet.FleetName,TranslationType.OperationSortie);
+
+					this.PreviewNextEnemy();
+				}
+				else
+				{
+					this.UnknownEnemy();
+					this.IsNewEnemy = true;
+				}
+			}
+
 			this.ReadyForNextCell();
 		}
 

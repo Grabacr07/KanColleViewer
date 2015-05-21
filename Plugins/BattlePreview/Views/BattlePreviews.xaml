@@ -26,15 +26,111 @@
 		</ResourceDictionary>
 	</UserControl.Resources>
 	<Grid>
-		<StackPanel>
-			<TextBlock Foreground="red" 
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<TextBlock Foreground="red" 
 						   FontWeight="Bold"
 						   FontSize="13" Margin="0,0,0,20">
 				<Run Text="※해당 결과는 예측된 결과입니다! 실제결과와는 다소 차이가 있을 수 있습니다."/>
 				<LineBreak/>
 				<Run Text="※C랭크와 D랭크의 경우 조건이 아직 완벽하게 밝혀지지 않았습니다."/>
+		</TextBlock>
+		<StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="1">
+			<TextBlock VerticalAlignment="Center" 
+							   FontSize="13" 
+							   Foreground="{DynamicResource ForegroundBrushKey}" 
+							   Text="나침반결과 "/>
+			<TextBlock HorizontalAlignment="Right"
+							   VerticalAlignment="Center"
+							   Margin="0,0,15,0"
+							   FontSize="13"
+							   FontWeight="ExtraBold"
+							   Foreground="White"
+						   Padding="12,4">
+				<TextBlock.Style>
+					<Style TargetType="TextBlock">
+						<Style.Triggers>
+							<DataTrigger Binding="{Binding CellStatus}"
+												 Value="2">
+								<Setter Property="Background" Value="#FF3FBD2B"/>
+								<Setter Property="Text" Value="자원획득"/>
+							</DataTrigger>
+							<DataTrigger Binding="{Binding CellStatus}"
+												 Value="3">
+								<Setter Property="Background" Value="#FFA33CEA"/>
+								<Setter Property="Text" Value="소용돌이"/>
+							</DataTrigger>
+							<DataTrigger Binding="{Binding CellStatus}"
+												 Value="4">
+								<Setter Property="Background" Value="#FFF01717"/>
+								<Setter Property="Text" Value="적 조우"/>
+							</DataTrigger>
+							<DataTrigger Binding="{Binding CellStatus}"
+												 Value="5">
+								<Setter Property="Background" Value="#FFD40C0C"/>
+								<Setter Property="Text" Value="보스전!"/>
+							</DataTrigger>
+							<DataTrigger Binding="{Binding CellStatus}"
+												 Value="6">
+								<Setter Property="Background" Value="#FF0A8AB9"/>
+								<Setter Property="Text" Value="기분탓"/>
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</TextBlock.Style>
 			</TextBlock>
-			<Grid HorizontalAlignment="Center">
+		</StackPanel>
+		<Grid Grid.Row="2">
+			<Grid Visibility="{Binding UnknownEnemy}">
+				<TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18">
+						<Run Text="정체불명의 적이 등장했습니다!"/>
+						<LineBreak/>
+						<LineBreak/>
+						<Run Text="전투가 정상적으로 종료되면 해당 적의 정보를 기록합니다"/>
+				</TextBlock>
+
+			</Grid>
+			<Grid Visibility="{Binding EnemyPreview}" HorizontalAlignment="Center" MinWidth="200">
+				<StackPanel>
+					<TextBlock TextAlignment="Center" Text="{Binding FleetName, Mode=OneWay}"/>
+					<ItemsControl VerticalAlignment="Top"
+						Width="Auto" ItemsSource="{Binding EnemyShips, Mode=OneWay}"
+						Background="Transparent"
+						Grid.IsSharedSizeScope="True"
+						Margin="3,3,0,3"
+						MinWidth="200">
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<StackPanel Margin="0,2,0,0">
+									<StackPanel.Resources>
+										<Style TargetType="{x:Type TextBlock}"
+											BasedOn="{StaticResource DefaultTextStyleKey}">
+											<Setter Property="TextWrapping"
+												Value="NoWrap" />
+										</Style>
+									</StackPanel.Resources>
+
+									<Grid>
+										<TextBlock TextAlignment="Center" Width="Auto">
+											<Run Text="{Binding Mode=OneWay}"
+												 Style="{DynamicResource EmphaticTextElementStyleKey}"
+												 FontSize="14"/>
+										</TextBlock>
+									</Grid>
+									<Rectangle Height="1"
+										Margin="0,4,0,0"
+										Style="{DynamicResource SeparatorRectangleStyleKey}" />
+								</StackPanel>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
+				</StackPanel>
+			</Grid>
+			<StackPanel Visibility="{Binding BattlePreview}">
+				<Grid HorizontalAlignment="Center">
 					<TextBlock Grid.Column="1"
 								FontWeight="ExtraBold"
 								Text="완전승리 S"
@@ -85,437 +181,393 @@
 								FontSize="20"
 								Visibility="{Binding RankOut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 				</Grid>
-			<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-				<TextBlock VerticalAlignment="Center" 
-							   FontSize="13" 
-							   Foreground="{DynamicResource ForegroundBrushKey}" 
-							   Text="나침반결과 "/>
-				<TextBlock HorizontalAlignment="Right"
-							   VerticalAlignment="Center"
-							   Margin="0,0,15,0"
-							   FontSize="13"
-							   FontWeight="ExtraBold"
-							   Foreground="White"
-						   Padding="12,4">
-					<TextBlock.Style>
-						<Style TargetType="TextBlock">
-							<Style.Triggers>
-								<DataTrigger Binding="{Binding CellStatus}"
-												 Value="2">
-									<Setter Property="Background" Value="#FF3FBD2B"/>
-									<Setter Property="Text" Value="자원획득"/>
-								</DataTrigger>
-								<DataTrigger Binding="{Binding CellStatus}"
-												 Value="3">
-									<Setter Property="Background" Value="#FFA33CEA"/>
-									<Setter Property="Text" Value="소용돌이"/>
-								</DataTrigger>
-								<DataTrigger Binding="{Binding CellStatus}"
-												 Value="4">
-									<Setter Property="Background" Value="#FFF01717"/>
-									<Setter Property="Text" Value="적 조우"/>
-								</DataTrigger>
-								<DataTrigger Binding="{Binding CellStatus}"
-												 Value="5">
-									<Setter Property="Background" Value="#FFD40C0C"/>
-									<Setter Property="Text" Value="보스전!"/>
-								</DataTrigger>
-								<DataTrigger Binding="{Binding CellStatus}"
-												 Value="6">
-									<Setter Property="Background" Value="#FF0A8AB9"/>
-									<Setter Property="Text" Value="기분탓"/>
-								</DataTrigger>
-							</Style.Triggers>
-						</Style>
-					</TextBlock.Style>
-				</TextBlock>
-			</StackPanel>
-			<TextBlock/>
-			<ScrollViewer HorizontalAlignment="Center" 
+				<TextBlock/>
+				<ScrollViewer HorizontalAlignment="Center" 
 						  HorizontalScrollBarVisibility="Auto"
                           VerticalScrollBarVisibility="Disabled"
 						  d:IsHidden="True">
-				<StackPanel Orientation="Horizontal">
+					<StackPanel Orientation="Horizontal">
 
-					<ItemsControl VerticalAlignment="Top"
+						<ItemsControl VerticalAlignment="Top"
 						Width="Auto" ItemsSource="{Binding KanResultReport}"
 						Background="Transparent"
 						Grid.IsSharedSizeScope="True"
 						Margin="3,3,0,3"
 						MinWidth="200">
-						<ItemsControl.ItemTemplate>
-							<DataTemplate>
-								<StackPanel Margin="0,2,0,0">
-									<StackPanel.Resources>
-										<Style TargetType="{x:Type TextBlock}"
+							<ItemsControl.ItemTemplate>
+								<DataTemplate>
+									<StackPanel Margin="0,2,0,0">
+										<StackPanel.Resources>
+											<Style TargetType="{x:Type TextBlock}"
 											BasedOn="{StaticResource DefaultTextStyleKey}">
-											<Setter Property="TextWrapping"
+												<Setter Property="TextWrapping"
 												Value="NoWrap" />
-										</Style>
-									</StackPanel.Resources>
+											</Style>
+										</StackPanel.Resources>
 
-									<Grid>
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition />
-											<ColumnDefinition Width="Auto"
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition />
+												<ColumnDefinition Width="Auto"
 												SharedSizeGroup="Level" />
-											<ColumnDefinition Width="Auto"
+												<ColumnDefinition Width="Auto"
 												SharedSizeGroup="HP" />
-											<ColumnDefinition Width="Auto"
+												<ColumnDefinition Width="Auto"
 												SharedSizeGroup="Condition" />
-										</Grid.ColumnDefinitions>
-										<StackPanel>
-											<TextBlock Width="Auto"><Run Text="{Binding Name, Mode=OneWay}"
+											</Grid.ColumnDefinitions>
+											<StackPanel>
+												<TextBlock Width="Auto"><Run Text="{Binding Name, Mode=OneWay}"
 													Style="{DynamicResource EmphaticTextElementStyleKey}"
 													FontSize="14"/></TextBlock>
-											<Grid x:Name="StatusGrid">
-												<TextBlock Text=""
+												<Grid x:Name="StatusGrid">
+													<TextBlock Text=""
 													FontSize="12"
 													x:Name="StatusText"
 													Foreground="{DynamicResource ActiveForegroundBrushKey}"
 													Margin="1,1"
 													HorizontalAlignment="Center"/>
-											</Grid>
-										</StackPanel>
-										<TextBlock Grid.Column="1"
+												</Grid>
+											</StackPanel>
+											<TextBlock Grid.Column="1"
 											Margin="12,0,0,0"><Run Text="Lv." /><Run Text=" "/><Run Text=" "/><Run Text="{Binding Lv, Mode=OneWay}"
 												Style="{DynamicResource EmphaticTextElementStyleKey}" /></TextBlock>
 
-										<Grid x:Name="HPIndicator"
+											<Grid x:Name="HPIndicator"
 											Grid.Column="2"
 											Margin="12,1,12,0">
-											<Grid.RowDefinitions>
-												<RowDefinition Height="Auto" />
-												<RowDefinition Height="Auto" />
-											</Grid.RowDefinitions>
-											<TextBlock><Run Text="HP:" /><Run Text=" "/><Run Text="{Binding CHP, Mode=OneWay}"
+												<Grid.RowDefinitions>
+													<RowDefinition Height="Auto" />
+													<RowDefinition Height="Auto" />
+												</Grid.RowDefinitions>
+												<TextBlock><Run Text="HP:" /><Run Text=" "/><Run Text="{Binding CHP, Mode=OneWay}"
 													Style="{DynamicResource EmphaticTextElementStyleKey}" /><Run Text=" "/><Run Text="{Binding MHP, Mode=OneWay, StringFormat=/\{0\}}" /></TextBlock>
-											<controls:ColorIndicator Grid.Row="1"
+												<controls:ColorIndicator Grid.Row="1"
 												Height="6"
 												LimitedValue="{Binding HP, Mode=OneWay}"
 												Margin="0,2,0,0" />
+											</Grid>
 										</Grid>
-									</Grid>
-									<Rectangle Height="1"
+										<Rectangle Height="1"
 										Margin="0,4,0,0"
 										Style="{DynamicResource SeparatorRectangleStyleKey}" />
-								</StackPanel>
-								<DataTemplate.Triggers>
-									<DataTrigger Binding="{Binding Status}"
+									</StackPanel>
+									<DataTemplate.Triggers>
+										<DataTrigger Binding="{Binding Status}"
 										Value="0">
-										<Setter TargetName="StatusText"
+											<Setter TargetName="StatusText"
 											Property="Text"
 											Value="" />
-										<Setter TargetName="StatusGrid"
+											<Setter TargetName="StatusGrid"
 											Property="Background"
 											Value="#004C44FF" />
-									</DataTrigger>
-									<DataTrigger Binding="{Binding Status}"
+										</DataTrigger>
+										<DataTrigger Binding="{Binding Status}"
 										Value="1">
-										<Setter TargetName="StatusText"
+											<Setter TargetName="StatusText"
 											Property="Text"
 											Value="소파"/>
-										<Setter TargetName="StatusText"
+											<Setter TargetName="StatusText"
 											Property="Foreground"
 											Value="#FF5B522A"/>
-										<Setter TargetName="StatusGrid"
+											<Setter TargetName="StatusGrid"
 											Property="Background"
 											Value="#FFF9CD08" />
-									</DataTrigger>
-									<DataTrigger Binding="{Binding Status}"
+										</DataTrigger>
+										<DataTrigger Binding="{Binding Status}"
 										Value="2">
-										<Setter TargetName="StatusText"
+											<Setter TargetName="StatusText"
 											Property="Text"
 											Value="중파" />
-										<Setter TargetName="StatusGrid"
+											<Setter TargetName="StatusGrid"
 											Property="Background"
 											Value="#FFE88B06" />
-									</DataTrigger>
-									<DataTrigger Binding="{Binding Status}"
+										</DataTrigger>
+										<DataTrigger Binding="{Binding Status}"
 										Value="3">
-										<Setter TargetName="StatusText"
+											<Setter TargetName="StatusText"
 											Property="Text"
 											Value="대파" />
-										<Setter TargetName="StatusGrid"
+											<Setter TargetName="StatusGrid"
 											Property="Background"
 											Value="#FFD60000" />
-									</DataTrigger>
-									<DataTrigger Binding="{Binding Status}"
+										</DataTrigger>
+										<DataTrigger Binding="{Binding Status}"
 										Value="4">
-										<Setter TargetName="StatusText"
+											<Setter TargetName="StatusText"
 											Property="Text"
 											Value="격침" />
-										<Setter TargetName="StatusGrid"
+											<Setter TargetName="StatusGrid"
 											Property="Background"
 											Value="#FF4C44FF" />
-									</DataTrigger>
-									<DataTrigger Binding="{Binding Status}"
+										</DataTrigger>
+										<DataTrigger Binding="{Binding Status}"
 										Value="5">
-										<Setter TargetName="StatusText"
+											<Setter TargetName="StatusText"
 											Property="Text"
 											Value="회항가능"/>
-										<Setter TargetName="StatusText"
+											<Setter TargetName="StatusText"
 											Property="Foreground"
 											Value="White"/>
-										<Setter TargetName="StatusGrid"
+											<Setter TargetName="StatusGrid"
 											Property="Background"
 											Value="#FF9E9E9E" />
-									</DataTrigger>
-								</DataTemplate.Triggers>
-							</DataTemplate>
-						</ItemsControl.ItemTemplate>
-					</ItemsControl>
-					<ItemsControl VerticalAlignment="Top"
+										</DataTrigger>
+									</DataTemplate.Triggers>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+						</ItemsControl>
+						<ItemsControl VerticalAlignment="Top"
 						Width="Auto" ItemsSource="{Binding SecondResultReport}"
 						Background="Transparent"
 						Grid.IsSharedSizeScope="True"
 						Margin="5,3,3,3">
-						<ItemsControl.ItemTemplate>
-							<DataTemplate>
-								<StackPanel Margin="0,2,0,0">
-									<StackPanel.Resources>
-										<Style TargetType="{x:Type TextBlock}"
+							<ItemsControl.ItemTemplate>
+								<DataTemplate>
+									<StackPanel Margin="0,2,0,0">
+										<StackPanel.Resources>
+											<Style TargetType="{x:Type TextBlock}"
 											BasedOn="{StaticResource DefaultTextStyleKey}">
-											<Setter Property="TextWrapping"
+												<Setter Property="TextWrapping"
 												Value="NoWrap" />
-										</Style>
-									</StackPanel.Resources>
+											</Style>
+										</StackPanel.Resources>
 
-									<Grid>
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition />
-											<ColumnDefinition Width="Auto"
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition />
+												<ColumnDefinition Width="Auto"
 												SharedSizeGroup="Level" />
-											<ColumnDefinition Width="Auto"
+												<ColumnDefinition Width="Auto"
 												SharedSizeGroup="HP" />
-											<ColumnDefinition Width="Auto"
+												<ColumnDefinition Width="Auto"
 												SharedSizeGroup="Condition" />
-										</Grid.ColumnDefinitions>
-										<StackPanel>
-											<TextBlock Width="Auto"><Run Text="{Binding Name, Mode=OneWay}"
+											</Grid.ColumnDefinitions>
+											<StackPanel>
+												<TextBlock Width="Auto"><Run Text="{Binding Name, Mode=OneWay}"
 													Style="{DynamicResource EmphaticTextElementStyleKey}"
 													FontSize="14"/></TextBlock>
-											<Grid x:Name="StatusGrid">
-												<TextBlock Text=""
+												<Grid x:Name="StatusGrid">
+													<TextBlock Text=""
 													FontSize="12"
 													x:Name="StatusText"
 													Foreground="{DynamicResource ActiveForegroundBrushKey}"
 													Margin="1,1"
 													HorizontalAlignment="Center"/>
-											</Grid>
-										</StackPanel>
-										<TextBlock Grid.Column="1"
+												</Grid>
+											</StackPanel>
+											<TextBlock Grid.Column="1"
 											Margin="12,0,0,0"><Run Text="Lv." /><Run Text=" "/><Run Text=" "/><Run Text="{Binding Lv, Mode=OneWay}"
 												Style="{DynamicResource EmphaticTextElementStyleKey}" /></TextBlock>
 
-										<Grid x:Name="HPIndicator"
+											<Grid x:Name="HPIndicator"
 											Grid.Column="2"
 											Margin="12,1,12,0">
-											<Grid.RowDefinitions>
-												<RowDefinition Height="Auto" />
-												<RowDefinition Height="Auto" />
-											</Grid.RowDefinitions>
-											<TextBlock><Run Text="HP:" /><Run Text=" "/><Run Text="{Binding CHP, Mode=OneWay}"
+												<Grid.RowDefinitions>
+													<RowDefinition Height="Auto" />
+													<RowDefinition Height="Auto" />
+												</Grid.RowDefinitions>
+												<TextBlock><Run Text="HP:" /><Run Text=" "/><Run Text="{Binding CHP, Mode=OneWay}"
 													Style="{DynamicResource EmphaticTextElementStyleKey}" /><Run Text=" "/><Run Text="{Binding MHP, Mode=OneWay, StringFormat=/\{0\}}" /></TextBlock>
-											<controls:ColorIndicator Grid.Row="1"
+												<controls:ColorIndicator Grid.Row="1"
 												Height="6"
 												LimitedValue="{Binding HP, Mode=OneWay}"
 												Margin="0,2,0,0" />
+											</Grid>
 										</Grid>
-									</Grid>
-									<Rectangle Height="1"
+										<Rectangle Height="1"
 										Margin="0,4,0,0"
 										Style="{DynamicResource SeparatorRectangleStyleKey}" />
-								</StackPanel>
-								<DataTemplate.Triggers>
-									<DataTrigger Binding="{Binding Status}"
+									</StackPanel>
+									<DataTemplate.Triggers>
+										<DataTrigger Binding="{Binding Status}"
 										Value="0">
-										<Setter TargetName="StatusText"
+											<Setter TargetName="StatusText"
 											Property="Text"
 											Value="" />
-										<Setter TargetName="StatusGrid"
+											<Setter TargetName="StatusGrid"
 											Property="Background"
 											Value="#004C44FF" />
-									</DataTrigger>
-									<DataTrigger Binding="{Binding Status}"
+										</DataTrigger>
+										<DataTrigger Binding="{Binding Status}"
 										Value="1">
-										<Setter TargetName="StatusText"
+											<Setter TargetName="StatusText"
 											Property="Text"
 											Value="소파"/>
-										<Setter TargetName="StatusText"
+											<Setter TargetName="StatusText"
 											Property="Foreground"
 											Value="#FF5B522A"/>
-										<Setter TargetName="StatusGrid"
+											<Setter TargetName="StatusGrid"
 											Property="Background"
 											Value="#FFF9CD08" />
-									</DataTrigger>
-									<DataTrigger Binding="{Binding Status}"
+										</DataTrigger>
+										<DataTrigger Binding="{Binding Status}"
 										Value="2">
-										<Setter TargetName="StatusText"
+											<Setter TargetName="StatusText"
 											Property="Text"
 											Value="중파" />
-										<Setter TargetName="StatusGrid"
+											<Setter TargetName="StatusGrid"
 											Property="Background"
 											Value="#FFE88B06" />
-									</DataTrigger>
-									<DataTrigger Binding="{Binding Status}"
+										</DataTrigger>
+										<DataTrigger Binding="{Binding Status}"
 										Value="3">
-										<Setter TargetName="StatusText"
+											<Setter TargetName="StatusText"
 											Property="Text"
 											Value="대파" />
-										<Setter TargetName="StatusGrid"
+											<Setter TargetName="StatusGrid"
 											Property="Background"
 											Value="#FFD60000" />
-									</DataTrigger>
-									<DataTrigger Binding="{Binding Status}"
+										</DataTrigger>
+										<DataTrigger Binding="{Binding Status}"
 										Value="4">
-										<Setter TargetName="StatusText"
+											<Setter TargetName="StatusText"
 											Property="Text"
 											Value="격침" />
-										<Setter TargetName="StatusGrid"
+											<Setter TargetName="StatusGrid"
 											Property="Background"
 											Value="#FF4C44FF" />
-									</DataTrigger>
-									<DataTrigger Binding="{Binding Status}"
+										</DataTrigger>
+										<DataTrigger Binding="{Binding Status}"
 										Value="5">
-										<Setter TargetName="StatusText"
+											<Setter TargetName="StatusText"
 											Property="Text"
 											Value="회항가능"/>
-										<Setter TargetName="StatusText"
+											<Setter TargetName="StatusText"
 											Property="Foreground"
 											Value="White"/>
-										<Setter TargetName="StatusGrid"
+											<Setter TargetName="StatusGrid"
 											Property="Background"
 											Value="#FF9E9E9E" />
-									</DataTrigger>
-								</DataTemplate.Triggers>
-							</DataTemplate>
-						</ItemsControl.ItemTemplate>
-					</ItemsControl>
-					<Rectangle Width="1"
+										</DataTrigger>
+									</DataTemplate.Triggers>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+						</ItemsControl>
+						<Rectangle Width="1"
 						Margin="7,0"
 						Style="{DynamicResource SeparatorRectangleStyleKey}" />
-					<ItemsControl VerticalAlignment="Top"
+						<ItemsControl VerticalAlignment="Top"
 						ItemsSource="{Binding EnemyResultReport}"
 						Background="Transparent"
 						Grid.IsSharedSizeScope="True"
 						Margin="3"
 						MinWidth="200">
-						<ItemsControl.ItemTemplate>
-							<DataTemplate>
-								<StackPanel Margin="0,2,0,0">
-									<StackPanel.Resources>
-										<Style TargetType="{x:Type TextBlock}"
+							<ItemsControl.ItemTemplate>
+								<DataTemplate>
+									<StackPanel Margin="0,2,0,0">
+										<StackPanel.Resources>
+											<Style TargetType="{x:Type TextBlock}"
 											BasedOn="{StaticResource DefaultTextStyleKey}">
-											<Setter Property="TextWrapping"
+												<Setter Property="TextWrapping"
 												Value="NoWrap" />
-										</Style>
-									</StackPanel.Resources>
+											</Style>
+										</StackPanel.Resources>
 
-									<Grid>
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition />
-											<ColumnDefinition Width="Auto"
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition />
+												<ColumnDefinition Width="Auto"
 												SharedSizeGroup="Level" />
-											<ColumnDefinition Width="Auto"
+												<ColumnDefinition Width="Auto"
 												SharedSizeGroup="HP" />
-											<ColumnDefinition Width="Auto"
+												<ColumnDefinition Width="Auto"
 												SharedSizeGroup="Condition" />
-										</Grid.ColumnDefinitions>
+											</Grid.ColumnDefinitions>
 
 
-										<StackPanel>
-											<TextBlock Width="Auto"><Run Text="{Binding Name, Mode=OneWay}"
+											<StackPanel>
+												<TextBlock Width="Auto"><Run Text="{Binding Name, Mode=OneWay}"
 													Style="{DynamicResource EmphaticTextElementStyleKey}"
 													FontSize="14"/></TextBlock>
-											<Grid x:Name="StatusGrid">
-												<TextBlock Text=""
+												<Grid x:Name="StatusGrid">
+													<TextBlock Text=""
 													FontSize="12"
 													x:Name="StatusText"
 													Foreground="{DynamicResource ActiveForegroundBrushKey}"
 													Margin="1,1"
 													HorizontalAlignment="Center"/>
-											</Grid>
-										</StackPanel>
-										<TextBlock Grid.Column="1"
+												</Grid>
+											</StackPanel>
+											<TextBlock Grid.Column="1"
 											Margin="12,0,0,0"><Run Text="Lv." /><Run Text=" "/><Run Text="{Binding Lv, Mode=OneWay}"
 												Style="{DynamicResource EmphaticTextElementStyleKey}" /></TextBlock>
 
-										<Grid x:Name="HPIndicator"
+											<Grid x:Name="HPIndicator"
 											Grid.Column="2"
 											Margin="12,1,12,0">
-											<Grid.RowDefinitions>
-												<RowDefinition Height="Auto" />
-												<RowDefinition Height="Auto" />
-											</Grid.RowDefinitions>
-											<TextBlock><Run Text="HP:" /><Run Text=" "/><Run Text="{Binding CHP, Mode=OneWay}"
+												<Grid.RowDefinitions>
+													<RowDefinition Height="Auto" />
+													<RowDefinition Height="Auto" />
+												</Grid.RowDefinitions>
+												<TextBlock><Run Text="HP:" /><Run Text=" "/><Run Text="{Binding CHP, Mode=OneWay}"
 													Style="{DynamicResource EmphaticTextElementStyleKey}" /><Run Text=" "/><Run Text="{Binding MHP, Mode=OneWay, StringFormat=/\{0\}}" /></TextBlock>
-											<controls:ColorIndicator Grid.Row="1"
+												<controls:ColorIndicator Grid.Row="1"
 												Height="6"
 												LimitedValue="{Binding HP, Mode=OneWay}"
 												Margin="0,2,0,0" />
+											</Grid>
 										</Grid>
-									</Grid>
-									<Rectangle Height="1"
+										<Rectangle Height="1"
 										Margin="0,4,0,0"
 										Style="{DynamicResource SeparatorRectangleStyleKey}" />
-								</StackPanel>
-								<DataTemplate.Triggers>
-									<DataTrigger Binding="{Binding Status}"
+									</StackPanel>
+									<DataTemplate.Triggers>
+										<DataTrigger Binding="{Binding Status}"
 										Value="1">
-										<Setter TargetName="StatusText"
+											<Setter TargetName="StatusText"
 											Property="Text"
 											Value="소파" />
-										<Setter TargetName="StatusText"
+											<Setter TargetName="StatusText"
 											Property="Foreground"
 											Value="#FF5B522A"/>
-										<Setter TargetName="StatusGrid"
+											<Setter TargetName="StatusGrid"
 											Property="Background"
 											Value="#FFF9CD08" />
-									</DataTrigger>
-									<DataTrigger Binding="{Binding Status}"
+										</DataTrigger>
+										<DataTrigger Binding="{Binding Status}"
 										Value="2">
-										<Setter TargetName="StatusText"
+											<Setter TargetName="StatusText"
 											Property="Text"
 											Value="중파" />
-										<Setter TargetName="StatusGrid"
+											<Setter TargetName="StatusGrid"
 											Property="Background"
 											Value="#FFE88B06" />
-									</DataTrigger>
-									<DataTrigger Binding="{Binding Status}"
+										</DataTrigger>
+										<DataTrigger Binding="{Binding Status}"
 										Value="3">
-										<Setter TargetName="StatusText"
+											<Setter TargetName="StatusText"
 											Property="Text"
 											Value="대파" />
-										<Setter TargetName="StatusGrid"
+											<Setter TargetName="StatusGrid"
 											Property="Background"
 											Value="#FFD60000" />
-									</DataTrigger>
-									<DataTrigger Binding="{Binding Status}"
+										</DataTrigger>
+										<DataTrigger Binding="{Binding Status}"
 										Value="4">
-										<Setter TargetName="StatusText"
+											<Setter TargetName="StatusText"
 											Property="Text"
 											Value="격침" />
-										<Setter TargetName="StatusGrid"
+											<Setter TargetName="StatusGrid"
 											Property="Background"
 											Value="#FF4C44FF" />
-									</DataTrigger>
-									<DataTrigger Binding="{Binding Status}"
+										</DataTrigger>
+										<DataTrigger Binding="{Binding Status}"
 										Value="0">
-										<Setter TargetName="StatusText"
+											<Setter TargetName="StatusText"
 											Property="Text"
 											Value="" />
-										<Setter TargetName="StatusGrid"
+											<Setter TargetName="StatusGrid"
 											Property="Background"
 											Value="#004C44FF" />
-									</DataTrigger>
-								</DataTemplate.Triggers>
-							</DataTemplate>
-						</ItemsControl.ItemTemplate>
-					</ItemsControl>
-				</StackPanel>
-			</ScrollViewer>
-		</StackPanel>
+										</DataTrigger>
+									</DataTemplate.Triggers>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+						</ItemsControl>
+					</StackPanel>
+				</ScrollViewer>
+			</StackPanel>
+		</Grid>
 	</Grid>
 </UserControl>
 	

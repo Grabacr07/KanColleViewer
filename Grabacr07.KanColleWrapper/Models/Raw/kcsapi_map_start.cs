@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 namespace Grabacr07.KanColleWrapper.Models.Raw
 {
 	// ReSharper disable InconsistentNaming
@@ -20,4 +21,11 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public api_happening api_happening { get; set; }
 	}
 	// ReSharper restore InconsistentNaming
+	public class EnemyFleetInfo
+	{
+		public string FleetName { get; set; }
+		public int FleetID { get; set; }
+		public int FleetCount { get; set; }
+		public List<string> EnemyShips { get; set; }
+	}
 }

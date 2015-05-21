@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace Grabacr07.KanColleWrapper
@@ -19,6 +20,7 @@ namespace Grabacr07.KanColleWrapper
 		private XDocument QuestsXML;
 		private XDocument ExpeditionXML;
 		private XDocument RemodelXml;
+		private XDocument EnemyFleetsXml;
 		string MainFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
 
 		public bool EnableTranslations { get; set; }
@@ -215,6 +217,15 @@ namespace Grabacr07.KanColleWrapper
 		{
 			switch (Type)
 			{
+				case TranslationType.EnemyFleetName:
+					if (File.Exists(Path.Combine(MainFolder, "Translations", "EnemyFleets.xml")))
+					{
+						EnemyFleetsXml = XDocument.Load(Path.Combine(MainFolder, "Translations", "EnemyFleets.xml"));
+						return EnemyFleetsXml.Descendants("Fleet");
+					}
+
+					//업데이트 기능은 현재로서는 동결
+					break;
 				case TranslationType.Ships:
 					if (ShipsXML != null)
 					{
@@ -299,6 +310,105 @@ namespace Grabacr07.KanColleWrapper
 			}
 			return null;
 		}
+		public string GetEnemyFleetInfo(int ID, TranslationType type, int ShipCount = 0)
+		{
+			IEnumerable<XElement> TranslationList = GetTranslationList(TranslationType.EnemyFleetName);
+
+			if (!Directory.Exists(Path.Combine(MainFolder, "Translations")))
+				Directory.CreateDirectory(Path.Combine(MainFolder, "Translations"));
+
+			if (File.Exists(Path.Combine(MainFolder, "Translations", "EnemyFleets.xml")))
+			{
+				string IDElement = "ID";
+				string TargetElement = "FleetName";
+
+				IEnumerable<XElement> OldFoundTranslation = TranslationList.Where(b => b.Attribute(IDElement).Value.Equals(ID.ToString()));
+
+				switch (type)
+				{
+					case TranslationType.EnemyFleetName:
+
+						foreach (XElement el in OldFoundTranslation)
+						{
+							return el.Attribute(TargetElement).Value;
+						}
+
+						break;
+					case TranslationType.EnemyFleetCount:
+
+						TargetElement = "ShipCount";
+						OldFoundTranslation = TranslationList.Where(b => b.Attribute(IDElement).Value.Equals(ID.ToString()));
+						foreach (XElement el in OldFoundTranslation)
+						{
+							return el.Attribute(TargetElement).Value;
+						}
+
+						break;
+					case TranslationType.EnemyFleetShips:
+
+						string EntireShipList = string.Empty;
+						string temp = string.Empty;
+
+						for (int i = 0; i < ShipCount; i++)
+						{
+							TargetElement = "Ship" + i;
+							OldFoundTranslation = TranslationList.Where(b => b.Attribute(IDElement).Value.Equals(ID.ToString()));
+
+							foreach (XElement el in OldFoundTranslation)
+							{
+								temp = el.Attribute(TargetElement).Value;
+							}
+
+							if (i == 0) EntireShipList = temp;
+							else EntireShipList = EntireShipList + "," + temp;
+						}
+
+						return EntireShipList;
+				}
+
+			}
+			else return null;
+
+			return null;
+		}
+		public void WriteFile(EnemyFleetInfo context)
+		{
+			if (!Directory.Exists(Path.Combine(MainFolder, "Translations")))
+				Directory.CreateDirectory(Path.Combine(MainFolder, "Translations"));
+
+			XmlDocument NewXmlDoc = new XmlDocument();
+			if (!File.Exists(Path.Combine(MainFolder, "Translations", "EnemyFleets.xml")))
+			{
+				NewXmlDoc.AppendChild(NewXmlDoc.CreateXmlDeclaration("1.0", "utf-8", "yes"));
+				XmlNode Source = NewXmlDoc.CreateElement("", "Fleets", "");
+				NewXmlDoc.AppendChild(Source);
+
+				NewXmlDoc.Save(Path.Combine(MainFolder, "Translations", "EnemyFleets.xml"));
+			}
+
+			XmlDocument XmlDoc = new XmlDocument();
+			XmlDoc.Load(Path.Combine(MainFolder, "Translations", "EnemyFleets.xml"));
+			XmlNode FristNode = XmlDoc.DocumentElement;
+
+			XmlElement root = XmlDoc.CreateElement("Fleet");
+			root.SetAttribute("ID", context.FleetID.ToString());
+			root.SetAttribute("FleetName", context.FleetName);
+			if (context.EnemyShips != null)
+			{
+				for (int i = 0; i < context.EnemyShips.Count; i++)
+				{
+					string AttributeName = "Ship" + i.ToString();
+					root.SetAttribute(AttributeName, context.EnemyShips[i]);
+				}
+				root.SetAttribute("ShipCount",context.FleetCount.ToString());
+			}
+
+			FristNode.AppendChild(root);
+
+
+			XmlDoc.Save(Path.Combine(MainFolder, "Translations", "EnemyFleets.xml"));
+		}
+
 		public string GetTranslation(string JPString, TranslationType Type, Object RawData = null, int ID = -1)
 		{
 			if (!EnableTranslations)

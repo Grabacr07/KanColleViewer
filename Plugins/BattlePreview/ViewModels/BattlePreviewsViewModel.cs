@@ -1,5 +1,6 @@
 ﻿using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
+using Grabacr07.KanColleWrapper.Models.Raw;
 using Livet;
 using System;
 using System.Collections.Generic;
@@ -218,6 +219,101 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 
 		#endregion
 
+		#region BattlePreview 変更通知プロパティ
+
+		private Visibility _BattlePreview;
+
+		public Visibility BattlePreview
+		{
+			get { return this._BattlePreview; }
+			set
+			{
+				if (this._BattlePreview != value)
+				{
+					this._BattlePreview = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region EnemyPreview 変更通知プロパティ
+
+		private Visibility _EnemyPreview;
+
+		public Visibility EnemyPreview
+		{
+			get { return this._EnemyPreview; }
+			set
+			{
+				if (this._EnemyPreview != value)
+				{
+					this._EnemyPreview = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region UnknownEnemy 変更通知プロパティ
+
+		private Visibility _UnknownEnemy;
+
+		public Visibility UnknownEnemy
+		{
+			get { return this._UnknownEnemy; }
+			set
+			{
+				if (this._UnknownEnemy != value)
+				{
+					this._UnknownEnemy = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region EnemyShips 変更通知プロパティ
+
+		private List<string> _EnemyShips;
+
+		public List<string> EnemyShips
+		{
+			get { return this._EnemyShips; }
+			set
+			{
+				if (this._EnemyShips != value)
+				{
+					this._EnemyShips = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region FleetName 変更通知プロパティ
+
+		private string _FleetName;
+
+		public string FleetName
+		{
+			get { return this._FleetName; }
+			set
+			{
+				if (this._FleetName != value)
+				{
+					this._FleetName = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		public BattlePreviewsViewModel()
 		{
 			PerfectRank = Visibility.Hidden;
@@ -227,6 +323,9 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 			RankC = Visibility.Hidden;
 			RankD = Visibility.Hidden;
 			RankOut = Visibility.Hidden;
+			this.BattlePreview = Visibility.Collapsed;
+			this.EnemyPreview = Visibility.Collapsed;
+			this.UnknownEnemy = Visibility.Collapsed;
 
 			this.UpdateFleetStatus();
 		}
@@ -236,12 +335,28 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 			{
 				if (KanColleClient.Current.OracleOfCompass.EnableBattlePreview)
 				{
+					KanColleClient.Current.OracleOfCompass.UnknownEnemy += () =>
+					{
+						this.UnknownEnemy = Visibility.Visible;
+						this.BattlePreview = Visibility.Collapsed;
+						this.EnemyPreview = Visibility.Collapsed;
+					};
+					KanColleClient.Current.OracleOfCompass.PreviewNextEnemy += () =>
+					{
+						this.EnemyShips = new List<string>(KanColleClient.Current.OracleOfCompass.EnemyFleet.EnemyShips);
+						this.FleetName = KanColleClient.Current.OracleOfCompass.EnemyFleet.FleetName;
+
+						this.BattlePreview = Visibility.Collapsed;
+						this.EnemyPreview = Visibility.Visible;
+						this.UnknownEnemy = Visibility.Collapsed;
+					};
 					KanColleClient.Current.OracleOfCompass.ReadyForNextCell += () =>
 					{
 						CellStatus = KanColleClient.Current.OracleOfCompass.CellData;
 					};
 					KanColleClient.Current.OracleOfCompass.PreviewCriticalCondition += () =>
 					{
+						VIsibleBattleResult();
 						//연합함대가 아닌경우 second를 비우고 작업개시
 						if (!KanColleClient.Current.Homeport.Organization.Combined)
 						{
@@ -277,6 +392,12 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 				System.Diagnostics.Debug.WriteLine(e);
 				KanColleClient.Current.CatchedErrorLogWriter.ReportException(e.Source, e);
 			}
+		}
+		private void VIsibleBattleResult()
+		{
+			this.BattlePreview = Visibility.Visible;
+			this.EnemyPreview = Visibility.Collapsed;
+			this.UnknownEnemy = Visibility.Collapsed;
 		}
 		private void RankIntToVisibility(int value)
 		{

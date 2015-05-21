@@ -66,5 +66,8 @@ namespace Grabacr07.KanColleWrapper.Models
 		ExpeditionDetail = 12,
 
 		RemodelSlots = 13,
+		EnemyFleetName = 14,
+		EnemyFleetShips = 15,
+		EnemyFleetCount=16,
 	}
 }
