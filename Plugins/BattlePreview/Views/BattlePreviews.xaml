@@ -129,7 +129,21 @@
 					</ItemsControl>
 				</StackPanel>
 			</Grid>
-			<StackPanel Visibility="{Binding BattlePreview}">
+			<Grid Visibility="{Binding BattlePreview}">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+				<Grid Background="{DynamicResource ThemeBrushKey}" Panel.ZIndex="100"
+						  Opacity="0.65"
+					  Grid.RowSpan="3"
+						  Visibility="{Binding BattleEndText}">
+					<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"
+								   FontSize="15">
+							<Run Text="해당 전투는 종료되었습니다"/>
+					</TextBlock>
+				</Grid>
 				<Grid HorizontalAlignment="Center">
 					<TextBlock Grid.Column="1"
 								FontWeight="ExtraBold"
@@ -181,11 +195,12 @@
 								FontSize="20"
 								Visibility="{Binding RankOut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 				</Grid>
-				<TextBlock/>
+				<TextBlock Grid.Row="1"/>
 				<ScrollViewer HorizontalAlignment="Center" 
 						  HorizontalScrollBarVisibility="Auto"
                           VerticalScrollBarVisibility="Disabled"
-						  d:IsHidden="True">
+						  d:IsHidden="True"
+							  Grid.Row="2">
 					<StackPanel Orientation="Horizontal">
 
 						<ItemsControl VerticalAlignment="Top"
@@ -566,7 +581,7 @@
 						</ItemsControl>
 					</StackPanel>
 				</ScrollViewer>
-			</StackPanel>
+			</Grid>
 		</Grid>
 	</Grid>
 </UserControl>

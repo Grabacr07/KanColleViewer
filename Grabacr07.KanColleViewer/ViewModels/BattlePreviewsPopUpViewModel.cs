@@ -290,7 +290,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		}
 
 		#endregion
-
+		
 		#region UnknownEnemy 変更通知プロパティ
 
 		private Visibility _UnknownEnemy;
@@ -303,6 +303,25 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				if (this._UnknownEnemy != value)
 				{
 					this._UnknownEnemy = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region BattleEndText 変更通知プロパティ
+
+		private Visibility _BattleEndText;
+
+		public Visibility BattleEndText
+		{
+			get { return this._BattleEndText; }
+			set
+			{
+				if (this._BattleEndText != value)
+				{
+					this._BattleEndText = value;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -359,9 +378,10 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			RankC = Visibility.Hidden;
 			RankD = Visibility.Hidden;
 			RankOut = Visibility.Hidden;
-			this.BattlePreview = Visibility.Collapsed;
 			this.EnemyPreview = Visibility.Collapsed;
-			this.UnknownEnemy = Visibility.Collapsed;
+			this.UnknownEnemy = Visibility.Hidden;
+			this.BattlePreview = Visibility.Collapsed;
+			this.BattleEndText = Visibility.Collapsed;
 
 			this.UpdateFleetStatus();
 		}
@@ -371,20 +391,22 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			{
 				if (KanColleClient.Current.OracleOfCompass.EnableBattlePreview)
 				{
+					KanColleClient.Current.OracleOfCompass.ResultEnd += () =>
+					{
+						this.BattleEndText = Visibility.Visible;
+					};
 					KanColleClient.Current.OracleOfCompass.UnknownEnemy += () =>
 					{
 						this.UnknownEnemy = Visibility.Visible;
-						this.BattlePreview = Visibility.Collapsed;
 						this.EnemyPreview = Visibility.Collapsed;
 					};
 					KanColleClient.Current.OracleOfCompass.PreviewNextEnemy += () =>
 					{
-						this.EnemyShips = new List<string>(KanColleClient.Current.OracleOfCompass.EnemyFleet.EnemyShips);
+						this.EnemyShips = KanColleClient.Current.OracleOfCompass.EnemyFleet.EnemyShips;
 						this.FleetName = KanColleClient.Current.OracleOfCompass.EnemyFleet.FleetName;
 
-						this.BattlePreview = Visibility.Collapsed;
+						this.UnknownEnemy = Visibility.Hidden;
 						this.EnemyPreview = Visibility.Visible;
-						this.UnknownEnemy = Visibility.Collapsed;
 					};
 					KanColleClient.Current.OracleOfCompass.ReadyForNextCell += () =>
 					{
@@ -393,8 +415,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					};
 					KanColleClient.Current.OracleOfCompass.PreviewCriticalCondition += () =>
 					{
-						VIsibleBattleResult();
-
+						this.BattlePreview = Visibility.Visible;
+						this.BattleEndText = Visibility.Collapsed;
 						this.IsBattleCalculated = KanColleClient.Current.OracleOfCompass.IsBattleCalculated;
 						//연합함대가 아닌경우 second를 비우고 작업개시
 						if (!KanColleClient.Current.Homeport.Organization.Combined)
@@ -433,49 +455,42 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			}
 
 		}
-		private void VIsibleBattleResult()
-		{
-			this.BattlePreview = Visibility.Visible;
-			this.EnemyPreview = Visibility.Collapsed;
-			this.UnknownEnemy = Visibility.Collapsed;
-		}
 		public void Update()
 		{
+			this.RewriteFleetPreview();
 			this.RewriteFleetStatus();
 		}
-		public void EnemyFleetPreview()
+		public void RewriteFleetPreview()
 		{
-			try
+			if (KanColleClient.Current.OracleOfCompass.EnableBattlePreview)
 			{
-				if (KanColleClient.Current.OracleOfCompass.IsCompassCalculated)
-					CellStatus = KanColleClient.Current.OracleOfCompass.CellData;
-
-				if (KanColleClient.Current.OracleOfCompass.IsNewEnemy)
+				try
 				{
-					this.UnknownEnemy = Visibility.Visible;
-					this.BattlePreview = Visibility.Collapsed;
-					this.EnemyPreview = Visibility.Collapsed;
+					if (KanColleClient.Current.OracleOfCompass.IsFleetCalculated)
+					{
+						if (KanColleClient.Current.OracleOfCompass.IsNewEnemy)
+						{
+							this.EnemyPreview = Visibility.Collapsed;
+							this.UnknownEnemy = Visibility.Visible;
+						}
+						else
+						{
+							this.EnemyShips = KanColleClient.Current.OracleOfCompass.EnemyFleet.EnemyShips;
+							this.FleetName = KanColleClient.Current.OracleOfCompass.EnemyFleet.FleetName;
+
+							this.UnknownEnemy = Visibility.Hidden;
+							this.EnemyPreview = Visibility.Visible;
+						}
+					}
 				}
-				else
+				catch
 				{
-					this.EnemyShips = new List<string>(KanColleClient.Current.OracleOfCompass.EnemyFleet.EnemyShips);
-					this.FleetName = KanColleClient.Current.OracleOfCompass.EnemyFleet.FleetName;
 
-					this.BattlePreview = Visibility.Collapsed;
-					this.EnemyPreview = Visibility.Visible;
-					this.UnknownEnemy = Visibility.Collapsed;
 				}
-			}
-			catch
-			{
-
 			}
 		}
 		private void RewriteFleetStatus()
 		{
-			this.UnknownEnemy = Visibility.Collapsed;
-			this.BattlePreview = Visibility.Visible;
-			this.EnemyPreview = Visibility.Collapsed;
 			try
 			{
 				if (KanColleClient.Current.OracleOfCompass.EnableBattlePreview)
@@ -485,6 +500,10 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 					if (KanColleClient.Current.OracleOfCompass.IsBattleCalculated)
 					{
+						this.BattlePreview = Visibility.Visible;
+						if (!KanColleClient.Current.OracleOfCompass.BattleEnd) this.BattleEndText = Visibility.Collapsed;
+						else this.BattleEndText = Visibility.Visible;
+
 						//연합함대가 아닌경우 second를 비우고 작업개시
 						if (!KanColleClient.Current.Homeport.Organization.Combined)
 						{

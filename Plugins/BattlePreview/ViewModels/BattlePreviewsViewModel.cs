@@ -257,6 +257,25 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 
 		#endregion
 
+		#region BattleEndText 変更通知プロパティ
+
+		private Visibility _BattleEndText;
+
+		public Visibility BattleEndText
+		{
+			get { return this._BattleEndText; }
+			set
+			{
+				if (this._BattleEndText != value)
+				{
+					this._BattleEndText = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		#region UnknownEnemy 変更通知プロパティ
 
 		private Visibility _UnknownEnemy;
@@ -326,6 +345,7 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 			this.BattlePreview = Visibility.Collapsed;
 			this.EnemyPreview = Visibility.Collapsed;
 			this.UnknownEnemy = Visibility.Collapsed;
+			this.BattleEndText = Visibility.Collapsed;
 
 			this.UpdateFleetStatus();
 		}
@@ -335,11 +355,15 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 			{
 				if (KanColleClient.Current.OracleOfCompass.EnableBattlePreview)
 				{
+					KanColleClient.Current.OracleOfCompass.ResultEnd += () =>
+					{
+						this.BattleEndText = Visibility.Visible;
+					};
 					KanColleClient.Current.OracleOfCompass.UnknownEnemy += () =>
 					{
-						this.UnknownEnemy = Visibility.Visible;
 						this.BattlePreview = Visibility.Collapsed;
 						this.EnemyPreview = Visibility.Collapsed;
+						this.UnknownEnemy = Visibility.Visible;
 					};
 					KanColleClient.Current.OracleOfCompass.PreviewNextEnemy += () =>
 					{
@@ -347,8 +371,8 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 						this.FleetName = KanColleClient.Current.OracleOfCompass.EnemyFleet.FleetName;
 
 						this.BattlePreview = Visibility.Collapsed;
-						this.EnemyPreview = Visibility.Visible;
 						this.UnknownEnemy = Visibility.Collapsed;
+						this.EnemyPreview = Visibility.Visible;
 					};
 					KanColleClient.Current.OracleOfCompass.ReadyForNextCell += () =>
 					{
@@ -395,9 +419,10 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 		}
 		private void VIsibleBattleResult()
 		{
-			this.BattlePreview = Visibility.Visible;
 			this.EnemyPreview = Visibility.Collapsed;
 			this.UnknownEnemy = Visibility.Collapsed;
+			this.BattleEndText = Visibility.Collapsed;
+			this.BattlePreview = Visibility.Visible;
 		}
 		private void RankIntToVisibility(int value)
 		{

@@ -15,29 +15,26 @@ namespace Grabacr07.KanColleWrapper
 	{
 		public int CellData { get; private set; }
 		public EnemyFleetInfo EnemyFleet { get; private set; }
-		public bool IsNewEnemy { get; set; }
-
-		#region private int,List,etc
 		/// <summary>
 		/// 전투 미리보기 데이터를 저장
 		/// </summary>
 		private ResultCalLists DataLists { get; set; }
-		/// <summary>
-		/// 전투 미리보기 리스트
-		/// </summary>
-		//private List<PreviewBattleResults> Results { get; set; }
 		private int RankNum { get; set; }
 		private int DockId { get; set; }
-		private bool PracticeStatus { get; set; }
-		#endregion
 
-		#region bool
+		#region bool value
+		public bool IsNewEnemy { get; set; }
+		/// <summary>
+		/// 현재 계산하는 전투가 연습전인지 아닌지를 설정합니다. 현재 적 함대 미리보기 기능에만 사용됩니다.
+		/// </summary>
+		private bool PracticeStatus { get; set; }
 		/// <summary>
 		/// 전투 미리보기가 켜져있는가. 켜져있는 경우는 true
 		/// </summary>
 		public bool EnableBattlePreview { get; set; }
 		public bool IsBattleCalculated { get; set; }
 		public bool IsCompassCalculated { get; set; }
+		public bool IsFleetCalculated { get; set; }
 		/// <summary>
 		/// 내부에서 크리티컬이 맞는지 조회하는 부분
 		/// </summary>
@@ -45,7 +42,8 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// 전투가 끝나고 모항에 돌아왔는지를 채크
 		/// </summary>
-		private bool BattleEnd { get; set; }
+		private bool IsInHomeport { get; set; }
+		public bool BattleEnd { get; set; }
 		#endregion
 
 		#region EventHandler
@@ -68,6 +66,7 @@ namespace Grabacr07.KanColleWrapper
 		public event EventHandler ReadyForNextCell;
 		public event EventHandler PreviewNextEnemy;
 		public event EventHandler UnknownEnemy;
+		public event EventHandler ResultEnd;
 		#endregion
 
 		/// <summary>
@@ -111,7 +110,7 @@ namespace Grabacr07.KanColleWrapper
 			#endregion
 
 			#region 변수 초기화 관련
-			proxy.api_req_map_start.TryParse<kcsapi_map_next>().Subscribe(x => CellInfo(x.Data));
+			proxy.api_req_map_start.TryParse<kcsapi_map_next>().Subscribe(x => CellInfo(x.Data, true));
 			proxy.api_req_map_next.TryParse<kcsapi_map_next>().Subscribe(x => CellInfo(x.Data));
 			proxy.api_port.TryParse().Subscribe(x => this.Cleared(true));
 			#endregion
@@ -216,7 +215,7 @@ namespace Grabacr07.KanColleWrapper
 			List<PreviewBattleResults> Results = new List<PreviewBattleResults>();
 			var ships = KanColleClient.Current.Master.Ships;
 
-			if (!PracticeStatus) EnemyFleet.EnemyShips = new List<string>();
+			if (!PracticeStatus && IsNewEnemy) EnemyFleet.EnemyShips = new List<string>();
 
 			for (int i = 0; i < 6; i++)
 			{
@@ -240,13 +239,13 @@ namespace Grabacr07.KanColleWrapper
 							if (Enemy.HP.Maximum != 0 || Enemy.HP.Current != 0)
 							{
 								Results.Add(Enemy);
-								if (!PracticeStatus) EnemyFleet.EnemyShips.Add(item.Value.RawData.api_name);
+								if (!PracticeStatus && IsNewEnemy) EnemyFleet.EnemyShips.Add(item.Value.RawData.api_name);
 							}
 						}
 					}
 				}
 			}
-			if (!PracticeStatus) EnemyFleet.FleetCount = EnemyFleet.EnemyShips.Count;
+			if (!PracticeStatus && IsNewEnemy) EnemyFleet.FleetCount = EnemyFleet.EnemyShips.Count;
 			return Results;
 		}
 
@@ -271,9 +270,9 @@ namespace Grabacr07.KanColleWrapper
 				{
 					this.IsCritical = false;
 					this.CriticalCleared();
-					this.BattleEnd = true;
+					this.IsInHomeport = true;
 				}
-				else this.BattleEnd = false;
+				else this.IsInHomeport = false;
 			}
 		}
 		private void BattleClear()
@@ -286,24 +285,26 @@ namespace Grabacr07.KanColleWrapper
 		}
 		/// <summary>
 		/// battleresult창이 떴을때 IsCritical이 True이면 CriticalCondition이벤트를 발생
-		/// 
+		/// 추가로 조우하지않았던 함대와 조우한 경우 해당 함대의 정보를 기록
 		/// </summary>
 		/// <param name="result">기본값은 null. 연합함대인경우에만 값을 받아 호위 회항한 부분을 채크</param>
 		private void Result(kcsapi_combined_battle_battleresult result = null)
 		{
-			if (this.IsNewEnemy)
+			if (this.IsNewEnemy && this.EnableBattlePreview)//새로운 적이고 전투 미리보기가 켜져있는 경우에만 기록
 			{
 				EnemyFleet.FleetName = result.api_enemy_info.api_deck_name;
 				KanColleClient.Current.Translations.WriteFile(EnemyFleet);
 			}
 			if (this.IsCritical) this.CriticalCondition();
+			this.ResultEnd();
+			this.BattleEnd = true;
 		}
 		/// <summary>
 		/// 대파알림 계산이 잘못되었거나 문제가 생겼을때를 대비한 코드.
 		/// </summary>
 		public void AfterResult()
 		{
-			if (!this.BattleEnd)
+			if (!this.IsInHomeport && !this.IsCritical)
 			{
 				this.CriticalCondition();
 				this.IsCritical = true;
@@ -312,14 +313,16 @@ namespace Grabacr07.KanColleWrapper
 		#endregion
 
 		#region 다음 맵 셀을 확인
-		private void CellInfo(kcsapi_map_next proxy)
+		private void CellInfo(kcsapi_map_next proxy, bool IsStart = false)
 		{
 			this.Cleared(false);
+			if (!this.EnableBattlePreview) return;//전투 미리보기가 꺼져있는경우 아무 행동도 하지않는다.
 
+			if (IsStart) this.IsInHomeport = false;
 			CellData = proxy.api_event_id;
 			this.IsCompassCalculated = true;
 
-			if (proxy.api_enemy != null)
+			if (proxy.api_enemy != null && this.EnableBattlePreview)
 			{
 				EnemyFleet = new EnemyFleetInfo();
 				EnemyFleet.FleetID = proxy.api_enemy.api_enemy_id;
@@ -349,8 +352,8 @@ namespace Grabacr07.KanColleWrapper
 					this.UnknownEnemy();
 					this.IsNewEnemy = true;
 				}
+				this.IsFleetCalculated = true;
 			}
-
 			this.ReadyForNextCell();
 		}
 
@@ -800,6 +803,7 @@ namespace Grabacr07.KanColleWrapper
 		private void BattleCalc(List<listup> lists, List<int> CurrentHPList, int[] Maxhps, int[] NowHps, bool IsCombined, bool IsMidnight, bool IsPractice, bool Combined)
 		{
 			this.PracticeStatus = IsPractice;
+			this.BattleEnd = false;
 			#region 전투 미리보기 관련값 초기화
 			if (EnableBattlePreview)
 			{
@@ -1224,6 +1228,15 @@ namespace Grabacr07.KanColleWrapper
 
 				this.DockId = battle.api_deck_id;
 			}
+		}
+		#endregion
+
+		#region 초기변수관련
+		public void initialialize()
+		{
+			IsBattleCalculated = false; 
+			IsCompassCalculated = false;
+			IsFleetCalculated = false;
 		}
 		#endregion
 
