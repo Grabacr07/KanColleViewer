@@ -23,7 +23,6 @@ namespace Grabacr07.KanColleViewer.Models
 		#endregion
 
 		private NotifierHost() { }
-
 		public void Initialize(KanColleClient client)
 		{
 			client.PropertyChanged += (sender, args) =>
@@ -52,7 +51,6 @@ namespace Grabacr07.KanColleViewer.Models
 				if (args.PropertyName == "Fleets") UpdateFleets(client.Homeport.Organization);
 			};
 			UpdateFleets(client.Homeport.Organization);
-			UpdateCritical();
 		}
 
 		private static void UpdateRepairyard(Repairyard repairyard)
@@ -94,12 +92,8 @@ namespace Grabacr07.KanColleViewer.Models
 				};
 			}
 		}
-
-		private static void UpdateCritical()
+		public static void CriticalNotify()
 		{
-			KanColleClient.Current.OracleOfCompass.CriticalCondition += () =>
-			{
-
 				if (Models.Settings.Current.EnableCriticalNotify)
 				{
 					PluginHost.Instance.GetNotifier().Show(
@@ -109,14 +103,10 @@ namespace Grabacr07.KanColleViewer.Models
 				}
 				if (Models.Settings.Current.EnableCriticalAccent)
 					App.ViewModelRoot.Mode = Mode.CriticalCondition;
-			};
-
-
-			KanColleClient.Current.OracleOfCompass.CriticalCleared += () =>
-			{
-				if (App.ViewModelRoot.Mode != Mode.Started) App.ViewModelRoot.Mode = Mode.Started;
-			};
-
+		}
+		public static void ClearCriticalStatus()
+		{
+			if (App.ViewModelRoot.Mode != Mode.Started) App.ViewModelRoot.Mode = Mode.Started;
 		}
 		private static void UpdateFleets(Organization organization)
 		{

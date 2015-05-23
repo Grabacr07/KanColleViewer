@@ -105,8 +105,6 @@ namespace Grabacr07.KanColleViewer
 			//Custom Settings
 			//KanColleHost.Current.EnableResizing = Settings.Current.EnableResizing;
 			KanColleClient.Current.Logger.EnableLogging = Settings.Current.EnableLogging;
-			KanColleClient.Current.OracleOfCompass.EnableBattlePreview = Settings.Current.EnableBattlePreview;
-			KanColleClient.Current.OracleOfCompass.initialialize();
 			// Initialize translations
 			KanColleClient.Current.Translations.EnableTranslations = Settings.Current.EnableTranslations;
 			KanColleClient.Current.Translations.EnableAddUntranslated = Settings.Current.EnableAddUntranslated;

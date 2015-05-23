@@ -169,7 +169,6 @@
     <Compile Include="Models\SupportedImageFormat.cs" />
     <Compile Include="Models\Volume.cs" />
     <Compile Include="Models\WindowOrientaionMode.cs" />
-    <Compile Include="ViewModels\BattlePreviewsPopUpViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\CalExpViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ExpeditionsCatalogWindowViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\NeedNdockShipCatalogWindowViewModel.cs" />
@@ -215,7 +214,6 @@
     <Compile Include="ViewModels\Messages\ZoomMessage.cs" />
     <Compile Include="ViewModels\NavigatorViewModel.cs" />
     <Compile Include="ViewModels\NullViewModel.cs" />
-    <Compile Include="ViewModels\PreviewPopUpButtonViewModel.cs" />
     <Compile Include="ViewModels\RefreshButtonViewModel.cs" />
     <Compile Include="ViewModels\RefreshPopupViewModel.cs" />
     <Compile Include="ViewModels\RemodelListWindowViewModel.cs" />
@@ -226,9 +224,6 @@
     <Compile Include="ViewModels\TabItemViewModel.cs" />
     <Compile Include="ViewModels\Contents\ToolsViewModel.cs" />
     <Compile Include="ViewModels\VolumeViewModel.cs" />
-    <Compile Include="Views\BattlePreviewsPopUp.xaml.cs">
-      <DependentUpon>BattlePreviewsPopUp.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Behaviors\FlickFleetsAction.cs" />
     <Compile Include="Views\Behaviors\FlickTrigger.cs" />
     <Compile Include="Views\Behaviors\NavigatorBehavior.cs" />
@@ -253,9 +248,6 @@
     <Compile Include="Views\Controls\KanColleHost.cs" />
     <Compile Include="Views\Controls\OrientationModeSelector.xaml.cs">
       <DependentUpon>OrientationModeSelector.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Controls\PreviewPopUpButton.xaml.cs">
-      <DependentUpon>PreviewPopUpButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\RefreshButton.xaml.cs">
       <DependentUpon>RefreshButton.xaml</DependentUpon>
@@ -461,10 +453,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\BattlePreviewsPopUp.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\BrowserNavigator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -518,10 +506,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Controls\OrientationModeSelector.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Controls\PreviewPopUpButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

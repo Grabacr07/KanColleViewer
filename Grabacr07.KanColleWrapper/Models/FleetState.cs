@@ -317,7 +317,6 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				this.Updated(this, new EventArgs());
 			}
-			if (!this.Situation.HasFlag(FleetSituation.Homeport) && heavilyDamaged) KanColleClient.Current.OracleOfCompass.AfterResult();
 		}
 	}
 }

@@ -258,24 +258,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-		#region EnableBattlePreview 変更通知プロパティ
-
-		public bool EnableBattlePreview
-		{
-			get { return Settings.Current.EnableBattlePreview; }
-			set
-			{
-				if (Settings.Current.EnableBattlePreview != value)
-				{
-					Settings.Current.EnableBattlePreview = value;
-					KanColleClient.Current.OracleOfCompass.EnableBattlePreview = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
 		#region EnableMMCSS 変更通知プロパティ
 
 		public bool EnableMMCSS

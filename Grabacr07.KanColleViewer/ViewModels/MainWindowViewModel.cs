@@ -165,44 +165,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-		#region CheckPreviewBattle 変更通知プロパティ
-
-		private bool _CheckPreviewBattle;
-
-		public bool CheckPreviewBattle
-		{
-			get { return this._CheckPreviewBattle; }
-			set
-			{
-				if (this._CheckPreviewBattle != value)
-				{
-					this._CheckPreviewBattle = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region PreviewBattleVisible 変更通知プロパティ
-
-		private Visibility _PreviewBattleVisible;
-
-		public Visibility PreviewBattleVisible
-		{
-			get { return this._PreviewBattleVisible; }
-			set
-			{
-				if (this._PreviewBattleVisible != value)
-				{
-					this._PreviewBattleVisible = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
 		#region Items 変更通知プロパティ
 
 		private List<ToolViewModel> _Tools;
@@ -299,7 +261,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				{ () => KanColleClient.Current.IsInSortie, (sender, args) => this.UpdateMode() },
 			});
 
-			UpdateCloseConfirm(); 
+			UpdateCloseConfirm();
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(Settings2.Current) 
 			{
 				{ "CloseConfirm", (sender, args) => UpdateCloseConfirm() }, 
@@ -309,18 +271,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			this.UpdateMode();
 
 			this.Tools = new List<ToolViewModel>(PluginHost.Instance.Tools.Select(x => new ToolViewModel(x)));
-			if (Tools.Any(x => x.ToolName == "전투예보"))
-			{
-				this.PreviewBattleVisible = Visibility.Collapsed;
-				this.CheckPreviewBattle = false;
-			}
-			else
-			{
-				this.CheckPreviewBattle = KanColleClient.Current.OracleOfCompass.EnableBattlePreview;
-				if (this.CheckPreviewBattle) this.PreviewBattleVisible = Visibility.Visible;
-				else this.PreviewBattleVisible = Visibility.Collapsed;
 
-			}
 
 			_RefreshNavigator = new RelayCommand(Navigator.ReNavigate);
 		}
@@ -355,7 +306,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					? Mode.InSortie
 					: Mode.Started
 				: Mode.NotStarted;
-			UpdateCloseConfirm(); 
+			UpdateCloseConfirm();
 		}
 
 		private void UpdateCloseConfirm()
@@ -363,7 +314,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			this.CanClose = !Settings2.Current.CloseConfirm;
 			if (Settings2.Current.CloseConfirmOnlyInSortie)
 			{
-				if (this.Mode != Mode.InSortie) this.CanClose = true; 
+				if (this.Mode != Mode.InSortie) this.CanClose = true;
 			}
 		}
 		public void Closing()
@@ -371,20 +322,14 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			if (!this.CanClose)
 			{
 				var message = new TransitionMessage(this, "Show/ExitDialog");
-				this.Messenger.Raise(message); 
+				this.Messenger.Raise(message);
 			}
 		}
 		public void Close()
 		{
 			this.CanClose = true;
 			var message = new TransitionMessage(this, "Close");
-			this.Messenger.Raise(message); 
-		}
-		public void ShowPreviewPopUp()
-		{
-			var window = new BattlePreviewsPopUpViewModel();
-			var message = new TransitionMessage(window, "Show/BattlePreviewsPopup");
-			this.Messenger.RaiseAsync(message);
+			this.Messenger.Raise(message);
 		}
 		public void ShowRefreshPopup()
 		{

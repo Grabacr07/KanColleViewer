@@ -140,7 +140,6 @@
     <Compile Include="Models\SlotItemType.cs" />
     <Compile Include="Models\TranslationType.cs" />
     <Compile Include="Models\ViewRange.cs" />
-    <Compile Include="OracleOfCompass.cs" />
     <Compile Include="Organization.cs" />
     <Compile Include="KanColleProxy.Endpoints.cs">
       <AutoGen>True</AutoGen>

@@ -113,9 +113,6 @@
 					<controls:OrientationModeSelector OrientationMode="{Binding Settings.Orientation, Mode=OneWay}"
 												 ToolTip="가로/세로를 변경합니다"
 												 Margin="4,0" />
-					<controls:PreviewPopUpButton 
-									 IsEnabled="{Binding CheckPreviewBattle,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
-									 Visibility="{Binding PreviewBattleVisible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
 					<controls:ZoomFactorSelector ZoomFactor="{Binding Settings.BrowserZoomFactor, Mode=OneWay}"
 												 ToolTip="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.ZoomFactorSelector_Tooltip}"
 												 Margin="4,0" />

@@ -54,8 +54,6 @@ namespace Grabacr07.KanColleWrapper
 
 		public CatchedErrorLogWriter CatchedErrorLogWriter { get; private set; }
 
-		public OracleOfCompass OracleOfCompass { get; private set; }
-
 		#region IsStarted 変更通知プロパティ
 
 		private bool _IsStarted;
@@ -174,7 +172,6 @@ namespace Grabacr07.KanColleWrapper
 			this.Updater = new Updater();
 			this.Translations = new Translations();
 			this.Logger = new Logger(proxy);
-			this.OracleOfCompass = new OracleOfCompass(proxy);
 		}
 	}
 }
