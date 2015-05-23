@@ -273,7 +273,9 @@ namespace Grabacr07.KanColleViewer.ViewModels
 							if (ship != null)
 							{
 								if (ship.Weekday.HasFlag(today) || ship.Weekday.HasFlag(WeekDayFlag.NotNeedShip))
+								{
 									ShipList.Add(ship);
+								}
 								if (ship.ShipName == null && ship.Upgrade == null && ship.UpgradeIconType == null && ship.Weekday.HasFlag(WeekDayFlag.None)) Checker = false;
 							}
 							else Checker = false;
@@ -322,6 +324,30 @@ namespace Grabacr07.KanColleViewer.ViewModels
 						templist.Add(temp);
 						if (temp.Ships != null)
 						{
+							string tempShipName;
+							if (temp.Ships.Count > 0)//upgrade항목이 같고 칸무스 이름이 다른경우 칸무스 이름병합 작업 준비
+							{
+								tempShipName = temp.Ships[0].ShipName;
+								
+								for (int i = 1; i < temp.Ships.Count; i++)
+								{
+									if (temp.Ships[0].Upgrade == temp.Ships[i].Upgrade)
+									{
+										tempShipName = tempShipName + ", " + temp.Ships[i].ShipName;
+										temp.Ships[i].ShipName = null;
+										temp.Ships[i].Upgrade = null;
+									}
+								}
+								temp.Ships[0].ShipName = tempShipName;
+							}
+							for (int i = 0; i < temp.Ships.Count; i++)//upgrade항목이 null인 값을 삭제
+							{
+								if (temp.Ships[i].Upgrade == null)
+								{
+									temp.Ships.RemoveAt(i);
+									temp.Ships.TrimExcess();
+								}
+							}
 							foreach (var context in temp.Ships)
 							{
 								if (context.Upgrade != null)
@@ -434,6 +460,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		Friday = 1 << 5,
 		Saturday = 1 << 6,
 		NotNeedShip = 1 << 7,
+		NoHaveUpgradeItem = 1 << 8,
 		All = Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday,
 	}
 	#endregion
