@@ -1,0 +1,115 @@
+﻿<viewModels:ToolViewModel xmlns:BattleInfoPlugin="clr-namespace:BattleInfoPlugin"
+                          xmlns:Livet="clr-namespace:Livet;assembly=Livet"
+                          xmlns:wrapper="clr-namespace:Grabacr07.KanColleWrapper.Models;assembly=KanColleWrapper" 
+                          xmlns:System="clr-namespace:System;assembly=mscorlib" 
+                          xmlns:Messaging="clr-namespace:Livet.Messaging;assembly=Livet"
+                          xmlns:models="clr-namespace:BattleInfoPlugin.Models"
+                          xmlns:viewModels="clr-namespace:BattleInfoPlugin.ViewModels"
+                          UpdatedTime="2015/03/08 15:15:15"
+                          BattleSituation="T字有利"
+                          FriendAirSupremacy="制空権確保">
+    
+    <viewModels:ToolViewModel.Data>
+        <models:BattleData>
+            <models:BattleData.Name>連合艦隊 - 水上部隊 - 昼戦</models:BattleData.Name>
+        </models:BattleData>
+    </viewModels:ToolViewModel.Data>
+    
+    <viewModels:ToolViewModel.Enemies>
+        <viewModels:FleetViewModel Name="敵艦隊" FleetFormation="輪形陣" IsVisible="True">
+            <viewModels:FleetViewModel.Fleet>
+                <models:FleetData>
+                    <models:FleetData.Ships>
+                        <models:MembersShipData MaxHP="15" NowHP="83" Name="戦艦水鬼" Situation="Tow" TypeName="つよい">
+                            <models:MembersShipData.HP>
+                                <wrapper:LimitedValue Current="36" Maximum="43" Minimum="0"/>
+                            </models:MembersShipData.HP>
+                        </models:MembersShipData>
+                        <models:MembersShipData MaxHP="20" NowHP="96" Name="ほっぽ" Situation="Repair" TypeName="ろり" AdditionalName="elite">
+                            <models:MembersShipData.HP>
+                                <wrapper:LimitedValue Current="71" Maximum="85" Minimum="0"/>
+                            </models:MembersShipData.HP>
+                        </models:MembersShipData>
+                        <models:MembersShipData MaxHP="40" NowHP="62" Name="駆逐ロ級後期型" Situation="HeavilyDamaged" TypeName="きもい" AdditionalName="flagship">
+                            <models:MembersShipData.HP>
+                                <wrapper:LimitedValue Current="-999" Maximum="999" Minimum="0"/>
+                            </models:MembersShipData.HP>
+                        </models:MembersShipData>
+                    </models:FleetData.Ships>
+                </models:FleetData>
+            </viewModels:FleetViewModel.Fleet>
+        </viewModels:FleetViewModel>
+    </viewModels:ToolViewModel.Enemies>
+
+    <viewModels:ToolViewModel.FirstFleet>
+        <viewModels:FleetViewModel Name="自艦隊" FleetFormation="戦闘陣形" IsVisible="True">
+            <viewModels:FleetViewModel.Fleet>
+                <models:FleetData>
+                    <models:FleetData.Ships>
+                        <models:MembersShipData MaxHP="56" NowHP="54" Name="Bismarck drei" Situation="None" TypeName="戦艦">
+                            <models:MembersShipData.HP>
+                                <wrapper:LimitedValue Current="64" Maximum="57" Minimum="0"/>
+                            </models:MembersShipData.HP>
+                        </models:MembersShipData>
+                        <models:MembersShipData MaxHP="71" NowHP="60" Name="U-511改" Situation="Repair" TypeName="潜水艦">
+                            <models:MembersShipData.HP>
+                                <wrapper:LimitedValue Current="1" Maximum="8" Minimum="0"/>
+                            </models:MembersShipData.HP>
+                        </models:MembersShipData>
+                        <models:MembersShipData MaxHP="50" NowHP="83" Name="北上改二" Situation="Evacuation" TypeName="重雷装巡洋艦">
+                            <models:MembersShipData.HP>
+                                <wrapper:LimitedValue Current="25" Maximum="34" Minimum="0"/>
+                            </models:MembersShipData.HP>
+                        </models:MembersShipData>
+                        <models:MembersShipData MaxHP="71" NowHP="82" Name="まるゆ" Situation="Repair" TypeName="超弩級戦艦">
+                            <models:MembersShipData.HP>
+                                <wrapper:LimitedValue Current="61" Maximum="19" Minimum="0"/>
+                            </models:MembersShipData.HP>
+                        </models:MembersShipData>
+                        <models:MembersShipData MaxHP="82" NowHP="51" Name="伊8" Situation="None" TypeName="潜水艦">
+                            <models:MembersShipData.HP>
+                                <wrapper:LimitedValue Current="60" Maximum="44" Minimum="0"/>
+                            </models:MembersShipData.HP>
+                        </models:MembersShipData>
+                        <models:MembersShipData MaxHP="77" NowHP="60" Name="伊168" Situation="Tow" TypeName="潜水艦">
+                            <models:MembersShipData.HP>
+                                <wrapper:LimitedValue Current="17" Maximum="39" Minimum="0"/>
+                            </models:MembersShipData.HP>
+                        </models:MembersShipData>
+                    </models:FleetData.Ships>
+                </models:FleetData>
+            </viewModels:FleetViewModel.Fleet>
+        </viewModels:FleetViewModel>
+    </viewModels:ToolViewModel.FirstFleet>
+
+    <viewModels:ToolViewModel.SecondFleet>
+        <viewModels:FleetViewModel Name="護衛艦隊" IsVisible="True">
+            <viewModels:FleetViewModel.Fleet>
+                <models:FleetData>
+                    <models:FleetData.Ships>
+                        <models:MembersShipData MaxHP="76" NowHP="63" Name="夕立改二" Situation="HeavilyDamaged" TypeName="ぽいぬ">
+                            <models:MembersShipData.HP>
+                                <wrapper:LimitedValue Current="28" Maximum="99" Minimum="0"/>
+                            </models:MembersShipData.HP>
+                        </models:MembersShipData>
+                        <models:MembersShipData MaxHP="15" NowHP="93" Name="Верный" Situation="Tow" TypeName="駆逐艦">
+                            <models:MembersShipData.HP>
+                                <wrapper:LimitedValue Current="29" Maximum="85" Minimum="0"/>
+                            </models:MembersShipData.HP>
+                        </models:MembersShipData>
+                        <models:MembersShipData MaxHP="20" NowHP="52" Name="香取改" Situation="Repair" TypeName="練習巡洋艦">
+                            <models:MembersShipData.HP>
+                                <wrapper:LimitedValue Current="44" Maximum="12" Minimum="0"/>
+                            </models:MembersShipData.HP>
+                        </models:MembersShipData>
+                        <models:MembersShipData MaxHP="18" NowHP="94" Name="Prinz Eugen改" Situation="None" TypeName="重巡洋艦">
+                            <models:MembersShipData.HP>
+                                <wrapper:LimitedValue Current="70" Maximum="41" Minimum="0"/>
+                            </models:MembersShipData.HP>
+                        </models:MembersShipData>
+                    </models:FleetData.Ships>
+                </models:FleetData>
+            </viewModels:FleetViewModel.Fleet>
+        </viewModels:FleetViewModel>
+    </viewModels:ToolViewModel.SecondFleet>
+</viewModels:ToolViewModel>

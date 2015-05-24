@@ -1,0 +1,33 @@
+﻿<viewModels:FleetViewModel xmlns:BattleInfoPlugin="clr-namespace:BattleInfoPlugin"
+                           xmlns:Livet="clr-namespace:Livet;assembly=Livet"
+                           xmlns:wrapper="clr-namespace:Grabacr07.KanColleWrapper.Models;assembly=KanColleWrapper"
+                           xmlns:Messaging="clr-namespace:Livet.Messaging;assembly=Livet"
+                           xmlns:models="clr-namespace:BattleInfoPlugin.Models"
+                           xmlns:viewModels="clr-namespace:BattleInfoPlugin.ViewModels"
+                           Name="敵艦隊"
+                           FleetFormation="戦闘陣形"
+                           IsVisible="True">
+
+    <viewModels:FleetViewModel.Fleet>
+        <models:FleetData Formation="戦闘陣形">
+            <models:FleetData.Ships>
+                <models:MembersShipData MaxHP="15" NowHP="83" Name="戦艦水鬼" Situation="Tow" TypeName="つよい">
+                    <models:MembersShipData.HP>
+                        <wrapper:LimitedValue Current="6" Maximum="9" Minimum="0"/>
+                    </models:MembersShipData.HP>
+                </models:MembersShipData>
+                <models:MembersShipData MaxHP="20" NowHP="96" Name="ほっぽ" Situation="Evacuation" TypeName="ろり" AdditionalName="elite">
+                    <models:MembersShipData.HP>
+                        <wrapper:LimitedValue Current="71" Maximum="85" Minimum="0"/>
+                    </models:MembersShipData.HP>
+                </models:MembersShipData>
+                <models:MembersShipData MaxHP="40" NowHP="62" Name="駆逐ロ級後期型" Situation="HeavilyDamaged" TypeName="きもい" AdditionalName="flagship">
+                    <models:MembersShipData.HP>
+                        <wrapper:LimitedValue Current="77" Maximum="25" Minimum="0"/>
+                    </models:MembersShipData.HP>
+                </models:MembersShipData>
+            </models:FleetData.Ships>
+        </models:FleetData>
+    </viewModels:FleetViewModel.Fleet>
+
+</viewModels:FleetViewModel>

@@ -1,0 +1,173 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:BattleInfoPlugin.Views.Controls">
+
+    <SolidColorBrush x:Key="No1FillBrushKey" Color="#79E7FF"/>
+    <SolidColorBrush x:Key="No1StrokeBrushKey" Color="#1ABAEF"/>
+    
+    <SolidColorBrush x:Key="No2FillBrushKey" Color="#B1FF5E"/>
+    <SolidColorBrush x:Key="No2StrokeBrushKey" Color="#70D800"/>
+
+    <SolidColorBrush x:Key="No3FillBrushKey" Color="#D2C6FF"/>
+    <SolidColorBrush x:Key="No3StrokeBrushKey" Color="#AE87E9"/>
+
+    <SolidColorBrush x:Key="No4FillBrushKey" Color="#FF7979"/>
+    <SolidColorBrush x:Key="No4StrokeBrushKey" Color="#EF1A1A"/>
+    
+    <ControlTemplate x:Key="CellNoDisplayText"
+                     TargetType="{x:Type ContentControl}">
+        <Border Background="Black"
+                Opacity="0.7"
+                CornerRadius="3"
+                Padding="5,0">
+            <TextBlock VerticalAlignment="Top"
+                       FontSize="16"
+                       Foreground="White"
+                       FontWeight="ExtraBold">
+                <ContentPresenter/>
+            </TextBlock>
+        </Border>
+    </ControlTemplate>
+
+    <Style TargetType="{x:Type controls:Cell}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <!-- アイコンなし。デフォルト。 -->
+                <ControlTemplate TargetType="{x:Type controls:Cell}">
+                    <StackPanel Margin="-11"
+                                Orientation="Horizontal">
+                        <Control Width="22"
+                                 Height="22"
+                                 Visibility="Hidden"/>
+                        <ContentControl Template="{StaticResource CellNoDisplayText}"
+                                        Margin="15,0">
+                            <TemplateBinding Property="Text"/>
+                        </ContentControl>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <!-- イベント無し -->
+            <Trigger Property="CellIconNumber" Value="1">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type controls:Cell}">
+                            <StackPanel Margin="-11"
+                                        Orientation="Horizontal">
+                                <Ellipse Fill="{StaticResource No1FillBrushKey}"
+                                         Stroke="{StaticResource No1StrokeBrushKey}"
+                                         StrokeThickness="3"
+                                         Width="22"
+                                         Height="22"
+                                         VerticalAlignment="Top"/>
+                                <ContentControl Template="{StaticResource CellNoDisplayText}"
+                                                Margin="15,0">
+                                    <TemplateBinding Property="Text"/>
+                                </ContentControl>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+
+            <!-- 補給 -->
+            <Trigger Property="CellIconNumber" Value="2">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type controls:Cell}">
+                            <StackPanel Margin="-11"
+                                        Orientation="Horizontal">
+                                <Ellipse Fill="{StaticResource No2FillBrushKey}"
+                                         Stroke="{StaticResource No2StrokeBrushKey}"
+                                         StrokeThickness="3"
+                                         Width="22"
+                                         Height="22"
+                                         VerticalAlignment="Top"/>
+                                <ContentControl Template="{StaticResource CellNoDisplayText}"
+                                                Margin="15,0">
+                                    <TemplateBinding Property="Text"/>
+                                </ContentControl>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+
+            <!-- 渦潮 -->
+            <Trigger Property="CellIconNumber" Value="3">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type controls:Cell}">
+                            <StackPanel Margin="-11"
+                                        Orientation="Horizontal">
+                                <Ellipse Fill="{StaticResource No3FillBrushKey}"
+                                         Stroke="{StaticResource No3StrokeBrushKey}"
+                                         StrokeThickness="3"
+                                         Width="22"
+                                         Height="22"
+                                         VerticalAlignment="Top"/>
+                                <ContentControl Template="{StaticResource CellNoDisplayText}"
+                                                Margin="15,0">
+                                    <TemplateBinding Property="Text"/>
+                                </ContentControl>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+
+            <!-- 戦闘 -->
+            <Trigger Property="CellIconNumber" Value="4">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type controls:Cell}">
+                            <StackPanel Margin="-11"
+                                        Orientation="Horizontal">
+                                <Ellipse Fill="{StaticResource No4FillBrushKey}"
+                                         Stroke="{StaticResource No4StrokeBrushKey}"
+                                         StrokeThickness="3"
+                                         Width="22"
+                                         Height="22"
+                                         VerticalAlignment="Top"/>
+                                <ContentControl Template="{StaticResource CellNoDisplayText}"
+                                                Margin="15,0">
+                                    <TemplateBinding Property="Text"/>
+                                </ContentControl>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            
+            <!-- ボス -->
+            
+            <!-- 気のせい(変化前) -->
+            <Trigger Property="CellIconNumber" Value="6">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type controls:Cell}">
+                            <StackPanel Margin="-11"
+                                        Orientation="Horizontal">
+                                <Ellipse Fill="{StaticResource No1FillBrushKey}"
+                                         Stroke="{StaticResource No1StrokeBrushKey}"
+                                         StrokeThickness="3"
+                                         Width="22"
+                                         Height="22"
+                                         VerticalAlignment="Top"/>
+                                <ContentControl Template="{StaticResource CellNoDisplayText}"
+                                                Margin="15,0">
+                                    <TemplateBinding Property="Text"/>
+                                </ContentControl>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            
+            <!-- 航空戦 -->
+            
+            <!-- 母港 -->
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

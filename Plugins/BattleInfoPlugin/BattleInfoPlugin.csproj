@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F8664ABC-AA36-421E-B3D7-287091224B1B}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BattleInfoPlugin</RootNamespace>
+    <AssemblyName>BattleInfoPlugin</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <ExpressionBlendVersion>12.0.51020.0</ExpressionBlendVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BCMakeCert">
+      <HintPath>..\packages\FiddlerCore.4.4.8.4\lib\net40\BCMakeCert.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="CertMaker">
+      <HintPath>..\packages\FiddlerCore.4.4.8.4\lib\net40\CertMaker.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FiddlerCore4">
+      <HintPath>..\packages\FiddlerCore.4.4.8.4\lib\net40\FiddlerCore4.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.4.369, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\ICSharpCode.SharpZipLib.dll.0.85.4.369\lib\net20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Livet">
+      <HintPath>..\..\packages\LivetCask.1.1.0.0\lib\net45\Livet.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\LivetCask.1.1.0.0\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="SwfFormat, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DependentAssemblies\SwfFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Reactive.Core, Version=2.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Rx-Core.2.2.4\lib\net45\System.Reactive.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=2.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Rx-Interfaces.2.2.4\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Linq, Version=2.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Rx-Linq.2.2.4\lib\net45\System.Reactive.Linq.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\LivetCask.1.1.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\AirSupremacy.cs" />
+    <Compile Include="Models\AttackType.cs" />
+    <Compile Include="Models\BattleData.cs" />
+    <Compile Include="Models\BattleSituation.cs" />
+    <Compile Include="Models\CellEvent.cs" />
+    <Compile Include="Models\CellType.cs" />
+    <Compile Include="Models\FleetDamages.cs" />
+    <Compile Include="Models\FleetData.cs" />
+    <Compile Include="Models\Formation.cs" />
+    <Compile Include="Models\MapArea.cs" />
+    <Compile Include="Models\MapCell.cs" />
+    <Compile Include="Models\MapInfo.cs" />
+    <Compile Include="Models\Notifiers\BattleEndNotifier.cs" />
+    <Compile Include="Models\Raw\battle_midnight_battle.cs" />
+    <Compile Include="Models\Raw\battle_midnight_sp_midnight.cs" />
+    <Compile Include="Models\Raw\battle_result.cs" />
+    <Compile Include="Models\Raw\combined_battle_airbattle.cs" />
+    <Compile Include="Models\Raw\combined_battle_battle.cs" />
+    <Compile Include="Models\Raw\combined_battle_battle_water.cs" />
+    <Compile Include="Models\Raw\combined_battle_midnight_battle.cs" />
+    <Compile Include="Models\Raw\combined_battle_sp_midnight.cs" />
+    <Compile Include="Models\Raw\CommonTypeExtensions.cs" />
+    <Compile Include="Models\Raw\CommonTypes.cs" />
+    <Compile Include="Models\Raw\map_start_next.cs" />
+    <Compile Include="Models\Raw\practice_battle.cs" />
+    <Compile Include="Models\Raw\practice_midnight_battle.cs" />
+    <Compile Include="Models\Raw\sortie_airbattle.cs" />
+    <Compile Include="Models\Raw\sortie_battle.cs" />
+    <Compile Include="Models\Repositories\EnemyDataProvider.cs" />
+    <Compile Include="Models\Repositories\KcsResourceWriter.cs" />
+    <Compile Include="Models\Repositories\MapResource.cs" />
+    <Compile Include="Models\Repositories\Master.cs" />
+    <Compile Include="Models\ShipData.cs" />
+    <Compile Include="Models\ShipSlotData.cs" />
+    <Compile Include="Models\Type2.cs" />
+    <Compile Include="ViewModels\Enemies\EnemyFleetViewModel.cs" />
+    <Compile Include="ViewModels\Enemies\EnemyMapViewModel.cs" />
+    <Compile Include="ViewModels\Enemies\EnemyCellViewModel.cs" />
+    <Compile Include="ViewModels\Enemies\EnemyShipViewModel.cs" />
+    <Compile Include="ViewModels\EnemyWindowViewModel.cs" />
+    <Compile Include="ViewModels\FleetViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModel.cs" />
+    <Compile Include="Views\Controls\Cell.cs" />
+    <Compile Include="Views\Converters\AddDoubleValueConverter.cs" />
+    <Compile Include="Views\Converters\AdditionalNameColorConverter.cs" />
+    <Compile Include="Views\Converters\AttackTypeToDisplayTextConverter.cs" />
+    <Compile Include="Views\Converters\BrTagToNewLineConverter.cs" />
+    <Compile Include="Views\EnemyWindow.xaml.cs">
+      <DependentUpon>EnemyWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Fleet.xaml.cs">
+      <DependentUpon>Fleet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ToolView.xaml.cs">
+      <DependentUpon>ToolView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Styles\Cell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\PluginStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="BattleInfoPlugin.cs" />
+    <Page Include="Views\EnemyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Fleet.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ToolView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DependentAssemblies\SwfFormat.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <DesignData Include="SampleData\FleetViewModelSampleData.xaml" />
+    <DesignData Include="SampleData\ToolViewModelSampleData.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Grabacr07.Desktop.Metro\Desktop.Metro.csproj">
+      <Project>{f00fc570-2a80-4f61-8364-798cd44514b2}</Project>
+      <Name>Desktop.Metro</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Grabacr07.KanColleViewer\KanColleViewer.csproj">
+      <Project>{c5f0111f-3f68-4a74-bb20-bb762564d080}</Project>
+      <Name>KanColleViewer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Grabacr07.KanColleWrapper\KanColleWrapper.csproj">
+      <Project>{0bc8cf79-76d9-46ad-867f-fec6c6ad4594}</Project>
+      <Name>KanColleWrapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MetroRadiance\MetroRadiance.Chrome\MetroRadiance.Chrome.csproj">
+      <Project>{21b4ad15-d9fa-4873-bfad-1eeefbc6c264}</Project>
+      <Name>MetroRadiance.Chrome</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MetroRadiance\MetroRadiance.Core\MetroRadiance.Core.csproj">
+      <Project>{a6b0a741-5be0-479d-b813-e65672350057}</Project>
+      <Name>MetroRadiance.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MetroRadiance\MetroRadiance\MetroRadiance.csproj">
+      <Project>{0af0b9ff-d981-4d0f-a41f-c3ab6fe2f16d}</Project>
+      <Name>MetroRadiance</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>このプロジェクトは、このコンピューターにはない NuGet パッケージを参照しています。これらをダウンロードするには、NuGet パッケージの復元を有効にしてください。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。不足しているファイルは {0} です。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <PropertyGroup>
+    <PostBuildEvent>mkdir $(SolutionDir)Grabacr07.KanColleViewer\bin\$(ConfigurationName)\Plugins
+xcopy /Y $(TargetDir)*.* $(SolutionDir)Grabacr07.KanColleViewer\bin\$(ConfigurationName)
+move $(SolutionDir)Grabacr07.KanColleViewer\bin\$(ConfigurationName)\$(TargetName).* $(SolutionDir)Grabacr07.KanColleViewer\bin\$(ConfigurationName)\Plugins</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
