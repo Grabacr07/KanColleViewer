@@ -63,7 +63,6 @@ namespace Grabacr07.KanColleViewer.Models
 				NotifyRepairingCompleted = true,
 				NotifyExpeditionReturned = true,
 				CustomSoundVolume = 99,
-				EnableBattlePreview = true,
 				EnableMMCSS = true,
 				OrientationMode = OrientationType.Auto,
 				HorizontalSize = new Point(1280, 0),
@@ -588,25 +587,6 @@ namespace Grabacr07.KanColleViewer.Models
 				if (this._EnableCriticalAccent != value)
 				{
 					this._EnableCriticalAccent = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region EnableBattlePreview 変更通知プロパティ
-
-		private bool _EnableBattlePreview;
-
-		public bool EnableBattlePreview
-		{
-			get { return this._EnableBattlePreview; }
-			set
-			{
-				if (this._EnableBattlePreview != value)
-				{
-					this._EnableBattlePreview = value;
 					this.RaisePropertyChanged();
 				}
 			}
