@@ -8,8 +8,8 @@
         public int api_dock_id { get; set; }
         public int[] api_ship_ke { get; set; }
         public int[] api_ship_lv { get; set; }
-		public decimal[] api_nowhps { get; set; }
-		public decimal[] api_maxhps { get; set; }
+		public int[] api_nowhps { get; set; }
+		public int[] api_maxhps { get; set; }
         public int api_midnight_flag { get; set; }
         public int[][] api_eSlot { get; set; }
         public int[][] api_eKyouka { get; set; }

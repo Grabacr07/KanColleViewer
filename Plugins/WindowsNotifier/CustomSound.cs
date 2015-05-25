@@ -55,6 +55,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 			{
 				System.Diagnostics.Debug.WriteLine(ex);
 				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
+				System.Media.SystemSounds.Beep.Play();
 			}
 		}
 		public string FileCheck(string header)

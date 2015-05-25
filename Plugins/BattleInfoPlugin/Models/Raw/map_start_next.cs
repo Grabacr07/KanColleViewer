@@ -22,8 +22,8 @@
 
     public class Api_Eventmap
     {
-		public decimal api_max_maphp { get; set; }
-		public decimal api_now_maphp { get; set; }
+		public int api_max_maphp { get; set; }
+		public int api_now_maphp { get; set; }
         public int api_dmg { get; set; }
     }
 

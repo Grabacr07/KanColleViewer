@@ -569,22 +569,22 @@ namespace BattleInfoPlugin.Models
 				organization.Fleets[2].Name);
 		}
 
-		private void UpdateMaxHP(decimal[] api_maxhps, decimal[] api_maxhps_combined = null)
+		private void UpdateMaxHP(int[] api_maxhps, int[] api_maxhps_combined = null)
 		{
-			this.FirstFleet.Ships.SetValues(api_maxhps.GetFriendData(), (s, v) => s.MaxHP = (int)decimal.Round(v));
-			this.Enemies.Ships.SetValues(api_maxhps.GetEnemyData(), (s, v) => s.MaxHP = (int)decimal.Round(v));
+			this.FirstFleet.Ships.SetValues(api_maxhps.GetFriendData(), (s, v) => s.MaxHP =v);
+			this.Enemies.Ships.SetValues(api_maxhps.GetEnemyData(), (s, v) => s.MaxHP = v);
 
 			if (api_maxhps_combined == null) return;
-			this.SecondFleet.Ships.SetValues(api_maxhps_combined.GetFriendData(), (s, v) => s.MaxHP = (int)decimal.Round(v));
+			this.SecondFleet.Ships.SetValues(api_maxhps_combined.GetFriendData(), (s, v) => s.MaxHP = v);
 		}
 
-		private void UpdateNowHP(decimal[] api_nowhps, decimal[] api_nowhps_combined = null)
+		private void UpdateNowHP(int[] api_nowhps, int[] api_nowhps_combined = null)
 		{
-			this.FirstFleet.Ships.SetValues(api_nowhps.GetFriendData(), (s, v) => s.NowHP = (int)decimal.Round(v));
-			this.Enemies.Ships.SetValues(api_nowhps.GetEnemyData(), (s, v) => s.NowHP = (int)decimal.Round(v));
+			this.FirstFleet.Ships.SetValues(api_nowhps.GetFriendData(), (s, v) => s.NowHP = v);
+			this.Enemies.Ships.SetValues(api_nowhps.GetEnemyData(), (s, v) => s.NowHP = v);
 
 			if (api_nowhps_combined == null) return;
-			this.SecondFleet.Ships.SetValues(api_nowhps_combined.GetFriendData(), (s, v) => s.NowHP = (int)decimal.Round(v));
+			this.SecondFleet.Ships.SetValues(api_nowhps_combined.GetFriendData(), (s, v) => s.NowHP =v);
 		}
 	}
 }
