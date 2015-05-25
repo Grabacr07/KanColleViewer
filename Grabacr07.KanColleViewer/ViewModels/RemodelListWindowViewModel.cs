@@ -207,135 +207,19 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				this.RemodelXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "RemodelSlots.xml"));
 				IEnumerable<XElement> RemodelList = GetRemodelList();
 				var Position = "Position";
-
+				var Weekday = "AllWeekdays";
+				//RemodelList에서 오늘 개수공창 목록에 들어갈것들을 선별한다.
+				RemodelList = RemodelList.Where(f => WeekDaySetter(Convert.ToInt32(f.Element(Weekday).Value)).HasFlag(today));
+				//선별된 목록을 Position값을 이용해 상/중/하 그룹으로 나눈다
 				IEnumerable<XElement> First = RemodelList.Where(f => f.Element(Position).Value.Equals("1")).ToList();
 				IEnumerable<XElement> Second = RemodelList.Where(f => f.Element(Position).Value.Equals("2")).ToList();
 				IEnumerable<XElement> Third = RemodelList.Where(f => f.Element(Position).Value.Equals("3")).ToList();
 
-				this.tempimp = new List<RemodelItemList>();
-				this.tempUse = new List<RemodelItemList>();
-				this.FirstList = new List<RemodelItemList>(MakeUpList(First, today));
-				this.SecondList = new List<RemodelItemList>(MakeUpList(Second, today));
-				this.ThirdList = new List<RemodelItemList>(MakeUpList(Third, today));
-				this.Improvement = new List<RemodelItemList>(tempimp);
-				this.UseItemList = new List<RemodelItemList>(tempUse);
 			}
 		}
-		private List<RemodelItemList> MakeUpList(IEnumerable<XElement> remodellist, WeekDayFlag today)
+		private void MakeDefaultList()
 		{
-			List<RemodelItemList> templist = new List<RemodelItemList>();
-			foreach (var item in remodellist)
-			{
-				var temp = new RemodelItemList();
-				temp.Ships = new List<ShipInfo>();
 
-				if (WeekDaySetter(Convert.ToInt32(item.Element("AllWeekdays").Value)).HasFlag(today))
-				{
-					if (item.Element("SlotItemName") != null)
-					{
-						temp.ItemName = KanColleClient.Current.Translations.GetTranslation(item.Element("SlotItemName").Value, TranslationType.Equipment);
-						foreach (var slotitem in KanColleClient.Current.Master.SlotItems)
-						{
-							if (slotitem.Value.Name == temp.ItemName)
-								temp.IconType = slotitem.Value.IconType;
-						}
-					}
-					int shipCount = 1;
-					bool Checker = true;
-					try
-					{
-						List<ShipInfo> ShipList = new List<ShipInfo>();
-						while (Checker)
-						{
-							string shipname = "ShipName" + shipCount.ToString();
-							string weekdays = "WeekDays" + shipCount.ToString();
-							string upgrade = "Upgrade" + shipCount.ToString();
-
-							ShipInfo ship = new ShipInfo();
-
-							if (item.Element(shipname) != null)
-							{
-								ship.ShipName = KanColleClient.Current.Translations.GetTranslation(item.Element(shipname).Value, TranslationType.Ships);
-								ship.Weekday = WeekDaySetter(Convert.ToInt32(item.Element(weekdays).Value));
-							}
-							if (item.Element(upgrade) != null)
-							{
-								ship.Upgrade = KanColleClient.Current.Translations.GetTranslation(item.Element(upgrade).Value, TranslationType.Equipment);
-
-								foreach (var slotitem in KanColleClient.Current.Master.SlotItems)
-								{
-									if (slotitem.Value.Name == ship.Upgrade)
-										ship.UpgradeIconType = slotitem.Value.IconType;
-								}
-							}
-							shipCount++;
-							if (ship.ShipName == null && ship.Upgrade != null) ship.Weekday |= WeekDayFlag.NotNeedShip;
-							if (ship != null)
-							{
-								if (ship.Weekday.HasFlag(today) || ship.Weekday.HasFlag(WeekDayFlag.NotNeedShip))
-									ShipList.Add(ship);
-								if (ship.ShipName == null && ship.Upgrade == null && ship.UpgradeIconType == null && ship.Weekday.HasFlag(WeekDayFlag.None)) Checker = false;
-							}
-							else Checker = false;
-						}
-						if (ShipList != null)
-						{
-							foreach (var shipinfo in ShipList)
-							{
-								temp.Ships.Add(shipinfo);
-							}
-						}
-					}
-					catch (Exception ex)
-					{
-						Debug.WriteLine(ex);
-					}
-					if (item.Element("AllWeekdays") != null) temp.TotalWeekday = WeekDaySetter(Convert.ToInt32(item.Element("AllWeekdays").Value));
-					if (item.Element("ToolTip") != null)
-					{
-						temp.ToolTipString = item.Element("ToolTip").Value;
-					}
-					else
-					{
-						temp.ToolTipString = "특이사항 없음";
-					}
-					StringBuilder equipCombine = new StringBuilder();
-					if (item.Element("StartEquip") != null)
-					{
-						equipCombine.Append(item.Element("StartEquip").Value);
-					}
-					if (item.Element("MidEquip") != null)
-					{
-						equipCombine.Append("/");
-						equipCombine.Append(item.Element("MidEquip").Value);
-					}
-					if (item.Element("LastEquip") != null)
-					{
-						equipCombine.Append("/");
-						equipCombine.Append(item.Element("LastEquip").Value);
-					}
-					if (equipCombine != null)
-						temp.UseEquip = equipCombine.ToString();
-
-					if (temp.TotalWeekday.HasFlag(today))
-					{
-						templist.Add(temp);
-						if (temp.Ships != null)
-						{
-							foreach (var context in temp.Ships)
-							{
-								if (context.Upgrade != null)
-								{
-									tempimp.Add(temp);
-									break;
-								}
-							}
-						}
-						if (temp.UseEquip != null) tempUse.Add(temp);
-					}
-				}
-			}
-			return templist;
 		}
 		private WeekDayFlag WeekDaySetter(int weekint)
 		{
