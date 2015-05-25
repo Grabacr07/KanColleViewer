@@ -62,7 +62,16 @@ namespace Grabacr07.KanColleWrapper
 
 		public void Startup(int proxy = 37564)
 		{
-			FiddlerApplication.Startup(proxy, false, true);
+			var StartupFlags = Fiddler.FiddlerCoreStartupFlags.Default;
+
+			// Disallow remote clients.
+			StartupFlags &= ~Fiddler.FiddlerCoreStartupFlags.AllowRemoteClients;
+
+			// In the case default options don't match our expectation before.
+			StartupFlags &= ~Fiddler.FiddlerCoreStartupFlags.RegisterAsSystemProxy;
+			StartupFlags |= Fiddler.FiddlerCoreStartupFlags.DecryptSSL;
+
+			FiddlerApplication.Startup(proxy, StartupFlags);
 			FiddlerApplication.BeforeRequest += this.SetUpstreamProxyHandler;
 
 			SetIESettings("localhost:" + proxy);
