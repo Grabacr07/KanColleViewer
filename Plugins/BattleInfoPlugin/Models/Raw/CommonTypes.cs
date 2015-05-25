@@ -46,8 +46,8 @@
         public int[] api_ebak_flag { get; set; }
         public int[] api_fcl_flag { get; set; }
         public int[] api_ecl_flag { get; set; }
-        public double[] api_fdam { get; set; }
-        public double[] api_edam { get; set; }
+		public decimal[] api_fdam { get; set; }
+		public decimal[] api_edam { get; set; }
     }
 
     public class Api_Stage3_Combined
@@ -55,7 +55,7 @@
         public int[] api_frai_flag { get; set; }
         public int[] api_fbak_flag { get; set; }
         public int[] api_fcl_flag { get; set; }
-        public double[] api_fdam { get; set; }
+		public decimal[] api_fdam { get; set; }
     }
 
     #endregion
@@ -87,7 +87,7 @@
         public int[] api_ship_id { get; set; }
         public int[] api_undressing_flag { get; set; }
         public int[] api_cl_list { get; set; }
-        public double[] api_damage { get; set; }
+        public decimal[] api_damage { get; set; }
     }
 
     #endregion
@@ -98,10 +98,10 @@
     {
         public int[] api_frai { get; set; }
         public int[] api_erai { get; set; }
-        public double[] api_fdam { get; set; }
-        public double[] api_edam { get; set; }
-        public double[] api_fydam { get; set; }
-        public double[] api_eydam { get; set; }
+        public decimal[] api_fdam { get; set; }
+		public decimal[] api_edam { get; set; }
+		public decimal[] api_fydam { get; set; }
+		public decimal[] api_eydam { get; set; }
         public int[] api_fcl { get; set; }
         public int[] api_ecl { get; set; }
     }

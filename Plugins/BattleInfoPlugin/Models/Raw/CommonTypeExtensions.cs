@@ -153,7 +153,7 @@ namespace BattleInfoPlugin.Models.Raw
         /// </summary>
         /// <param name="damages">api_fdam/api_edam</param>
         /// <returns></returns>
-        public static FleetDamages GetDamages(this double[] damages)
+        public static FleetDamages GetDamages(this decimal[] damages)
         {
             return damages
                 .GetFriendData()    //敵味方共通
