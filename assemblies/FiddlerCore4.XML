@@ -308,7 +308,7 @@
         </member>
         <member name="F:Fiddler.CONFIG._cb_STREAM_LARGE_FILES">
             <summary>
-            Response files larger than this (2^28 = ~262mb) will NOT be loaded into memory when using LoadResponseFromFile
+            Response files larger than this will NOT be loaded into memory when using LoadResponseFromFile
             </summary>
         </member>
         <member name="F:Fiddler.CONFIG.bQuietMode">
@@ -1632,12 +1632,12 @@
         </member>
         <member name="F:Fiddler.CertificateValidity.ForceInvalid">
             <summary>
-            Force the certificate to be considered Invalid, regardless of the value of CertificatePolicyErrors.
+            Force the certificate to be considered Valid, regardless of the value of CertificatePolicyErrors.
             </summary>
         </member>
         <member name="F:Fiddler.CertificateValidity.ForceValid">
             <summary>
-            Force the certificate to be considered Valid, regardless of the value of CertificatePolicyErrors.
+            Force the certificate to be considered Invalid, regardless of the value of CertificatePolicyErrors.
             </summary>
         </member>
         <member name="T:Fiddler.ValidateServerCertificateEventArgs">
@@ -1884,7 +1884,7 @@
         </member>
         <member name="T:Fiddler.HostList">
             <summary>
-            The HostList allows fast determination of whether a given host is in the list. It supports leading wildcards (e.g. *.foo.com), and the special tokens  &lt;local&gt; &lt;nonlocal&gt; and &lt;loopback&gt;.
+            The HostList allows fast determination of whether a given host is in the list. It supports leading wildcards (e.g. *.foo.com), and the special tokens  &lt;local&gt; and &lt;loopback&gt;.
             Note: List is *not* threadsafe; instead of updating it, construct a new one.
             </summary>
         </member>
@@ -2462,7 +2462,7 @@
         </member>
         <member name="T:Fiddler.Logger">
             <summary>
-            The Logger object is a simple event log message dispatcher
+            The Logger object is a simple event log
             </summary>
         </member>
         <member name="F:Fiddler.Logger.queueStartupMessages">
@@ -3198,10 +3198,10 @@
             Gets and sets the pooling key for this server pipe.
             </summary>
             <example>
-              direct->{http|https}/{serverhostname}:{serverport}
-              gw:{gatewayaddr:port}->*
-              gw:{gatewayaddr:port}->{http|https}/{serverhostname}:{serverport}
-              socks:{gatewayaddr:port}->{http|https}/{serverhostname}:{serverport}
+              DIRECT->{http|https}/{serverhostname}:{serverport}
+              GW:{gatewayaddr:port}->*
+              GW:{gatewayaddr:port}->{http|https}/{serverhostname}:{serverport}
+              SOCKS:{gatewayaddr:port}->{http|https}/{serverhostname}:{serverport}
             </example>
         </member>
         <member name="P:Fiddler.ServerPipe.RemoteEndPoint">
@@ -3663,7 +3663,7 @@
         </member>
         <member name="M:Fiddler.Proxy.VerifyAttached">
             <summary>
-            If we are supposed to be "attached", we re-verify the registry keys, and if they are corrupt, notify
+            If we are suppsoed to be "attached", we re-verify the registry keys, and if they are corrupt, notify
             our host of the discrepency.
             </summary>
         </member>
@@ -4196,11 +4196,6 @@
             </summary>
             <returns>Returns TRUE if response bytes were leaked, false otherwise (e.g. write error). THROWS if "fiddler.network.streaming.abortifclientaborts" is TRUE</returns>
         </member>
-        <member name="M:Fiddler.ServerChatter._PoisonPipe">
-            <summary>
-            Mark this connection as non-reusable
-            </summary>
-        </member>
         <member name="P:Fiddler.ServerChatter._PeekDownloadProgress">
             <summary>
             Peek at number of bytes downloaded thus far.
@@ -4428,7 +4423,7 @@
         <member name="M:Fiddler.Session.Ignore">
             <summary>
             Set the SessionFlags.Ignore bit for this Session, also configuring it to stream, drop read data, and bypass event handlers.
-            For a CONNECT Tunnel, traffic will be blindly shuffled back and forth. Session will be hidden.
+            For a CONNECT Tunnel, traffic will be blindly shuffled back and forth
             </summary>
         </member>
         <member name="M:Fiddler.Session.CreateAndExecute(System.Object)">
@@ -5060,7 +5055,7 @@
             <summary>
             Gets or Sets the HTTP Request body bytes. 
             Setter adjusts Content-Length header, and removes Transfer-Encoding and Content-Encoding headers.
-            Setter DOES NOT CLONE the passed array.
+            Setter DOES NOT CLONE the passsed array.
             Setter will throw if the Request object does not exist for some reason.
             Use utilSetRequestBody(sStr) to ensure proper character encoding if you need to use a string.
             </summary>
@@ -5069,7 +5064,7 @@
             <summary>
             Gets or Sets the HTTP Response body bytes.
             Setter adjusts Content-Length header, and removes Transfer-Encoding and Content-Encoding headers.
-            Setter DOES NOT CLONE the passed array.
+            Setter DOES NOT CLONE the passsed array.
             Setter will throw if the Response object has not yet been created. (See utilCreateResponseAndBypassServer)
             Use utilSetResponseBody(sStr) to ensure proper character encoding if you need to use a string.
             </summary>
@@ -5087,11 +5082,6 @@
         <member name="P:Fiddler.Session.LocalProcessID">
             <summary>
             Get the process ID of the application which made this request, or 0 if it cannot be determined.
-            </summary>
-        </member>
-        <member name="P:Fiddler.Session.LocalProcess">
-            <summary>
-            Get the Process Info of the application which made this request, or String.Empty if it is not known
             </summary>
         </member>
         <member name="P:Fiddler.Session.SuggestedFilename">
@@ -5569,19 +5559,6 @@
             NB: Exiting Fiddler reverts this to the default value.
             </summary>
         </member>
-        <member name="M:Fiddler.SessionTimers.NetTimestamps.AddRead(System.Int64,System.Int32)">
-            <summary>
-            Log a Read's size and timestamp
-            </summary>
-            <param name="tsRead">Number of milliseconds since first calling .Read()</param>
-            <param name="bytesRead">Number of bytes returned in this read</param>
-        </member>
-        <member name="M:Fiddler.SessionTimers.NetTimestamps.ToFoldedArray(System.Int32)">
-            <summary>
-            Return the ReadTimings as an array. Only one read is counted per millisecond
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:Fiddler.SessionTimers.NetTimestamps.FromCopy(Fiddler.SessionTimers.NetTimestamps)">
             <summary>
             Create a new List and append to it
@@ -5650,14 +5627,6 @@
             <param name="bVerboseDialogs">TRUE to show verbose error dialog information</param>
         </member>
         <member name="M:Fiddler.Utilities.ReadSessionArchive(System.String,System.Boolean,System.String)">
-            <summary>
-            Reads a Session Archive Zip file into an array of Session objects
-            </summary>
-            <param name="sFilename">Filename to load</param>
-            <param name="bVerboseDialogs"></param>
-            <returns>Loaded array of sessions or null, in case of failure</returns>
-        </member>
-        <member name="M:Fiddler.Utilities.ReadSessionArchive(System.String,System.Boolean,System.String,Fiddler.GetPasswordDelegate)">
             <summary>
             Reads a Session Archive Zip file into an array of Session objects
             </summary>
@@ -6134,16 +6103,7 @@
             Removes HTTP chunked encoding from the data in writeData and returns the resulting array.
             </summary>
             <param name="writeData">Some chunked data</param>
-            <returns>Unchunked data. Throws InvalidDataException on data format errors.</returns>
-        </member>
-        <member name="M:Fiddler.Utilities.doUnchunk(System.Byte[],Fiddler.Session,System.Boolean)">
-            <summary>
-            Removes HTTP chunked encoding from the data in writeData and returns the resulting array.
-            </summary>
-            <param name="writeData">Array to unchunk</param>
-            <param name="oS">Optional Session (for UI error messages)</param>
-            <param name="bNoUI">TRUE to suppress error messages, FALSE to show alert boxes</param>
-            <returns>Unchunked data. Throws InvalidDataException on data format errors.</returns>
+            <returns>Unchunked data. Warning: Throws on data format errors</returns>
         </member>
         <member name="M:Fiddler.Utilities.arrayContainsNonText(System.Byte[])">
             <summary>
@@ -6160,7 +6120,7 @@
             <param name="sCE">Content-Encoding</param>
             <returns>TRUE if any encoding is known to be unsupported</returns>
         </member>
-        <member name="M:Fiddler.Utilities._DecodeInOrder(System.String,System.Boolean,System.Byte[]@,System.Boolean)">
+        <member name="M:Fiddler.Utilities._DecodeInOrder(System.String,System.Boolean,System.Byte[]@)">
             <summary>
             Removes one or more encodings in the proper order to reconstruct the unencoded body.
             If removing Transfer-Encoding and Content-Encoding, ALWAYS remove Transfer-Encoding first.
@@ -6172,7 +6132,7 @@
         </member>
         <member name="M:Fiddler.Utilities.utilDecodeHTTPBody(Fiddler.HTTPHeaders,System.Byte[]@)">
             <summary>
-            Remove all encodings from arrBody, based on those specified in the supplied HTTP headers; DOES NOT MODIFY HEADERS.
+            Remove all encodings from arrBody, based on those specified in the supplied HTTP headers; does NOT modify headers. 
             Throws on errors.
             </summary>
             <param name="oHeaders">*Readonly* headers specifying what encodings are applied</param>
@@ -6428,8 +6388,8 @@
         </member>
         <member name="M:Fiddler.Utilities.isHTTP407Array(System.Byte[])">
             <summary>
-            Determine if a given byte array has the start of a HTTP/1.* 407 response.
-            Useful primarily to determine if a CONNECT request to a proxy returned an auth challenge
+            Determine if a given byte array has the start of a HTTP/1.* 200 response.
+            Useful primarily to determine if a CONNECT request to a proxy returned success.
             </summary>
             <param name="arrData"></param>
             <returns></returns>
@@ -6485,12 +6445,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Fiddler.Utilities.IsWin8OrLater">
-            <summary>
-            Returns TRUE on *Windows* (not Mono) when OS Version is Win8+ (NT6.2+)
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:Fiddler.Utilities.Dupe(System.Byte[])">
             <summary>
             Duplicate a byte array, replacing null with byte[0].
@@ -6499,26 +6453,11 @@
             <param name="bIn">The array to copy</param>
             <returns>The new array.</returns>
         </member>
-        <member name="M:Fiddler.Utilities.GetMD5Hash(System.Byte[])">
-            <summary>
-            Warning: This will throw if FIPS mode is enabled
-            </summary>
-            <param name="bIn"></param>
-            <returns></returns>
-        </member>
         <member name="M:Fiddler.Utilities.IsNullOrEmpty(System.Byte[])">
             <summary>
             Returns TRUE if the array is null or contains 0 bytes
             </summary>
             <param name="bIn">byte[] to test</param>
-            <returns></returns>
-        </member>
-        <member name="M:Fiddler.Utilities.IsCommentUserSupplied(System.String)">
-            <summary>
-            Returns TRUE if the string is non-empty and not of the pattern "[#123]"
-            Necessary because SAZ-saving logic autogenerates comments of that form
-            </summary>
-            <param name="strComment"></param>
             <returns></returns>
         </member>
         <member name="M:Fiddler.Utilities.HasHeaders(Fiddler.ServerChatter)">
@@ -6549,17 +6488,10 @@
             <param name="sFilename">DLL filename</param>
             <returns>TRUE if we should skip this assembly during enumeration</returns>
         </member>
-        <member name="M:Fiddler.Utilities.RecoverMemory">
-            <summary>
-            Garbage collect and, if possible, compact the Large Object heap
-            </summary>
-        </member>
         <member name="T:Fiddler.StringExtensions">
             <summary>
             Common functions we'll want to use on Strings. Fiddler makes extensive use of strings which 
             should be interpreted in a case-insensitive manner.
-            
-            Note that these methods assume that the calling object is not null.
             </summary>
         </member>
         <member name="T:Fiddler.WebSocket">
@@ -6807,12 +6739,6 @@
             Serialize this message to a stream
             </summary>
             <param name="oFS"></param>
-        </member>
-        <member name="M:Fiddler.WebSocketMessage.Assemble(Fiddler.WebSocketMessage)">
-            <summary>
-            Add the content of the subequent continuation to me.
-            </summary>
-            <param name="oWSM"></param>
         </member>
         <member name="T:Fiddler.WebSocketTimers">
             <summary>
