@@ -214,8 +214,6 @@
     <Compile Include="ViewModels\Messages\ZoomMessage.cs" />
     <Compile Include="ViewModels\NavigatorViewModel.cs" />
     <Compile Include="ViewModels\NullViewModel.cs" />
-    <Compile Include="ViewModels\RefreshButtonViewModel.cs" />
-    <Compile Include="ViewModels\RefreshPopupViewModel.cs" />
     <Compile Include="ViewModels\RemodelListWindowViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\Contents\ShipsViewModel.cs" />
