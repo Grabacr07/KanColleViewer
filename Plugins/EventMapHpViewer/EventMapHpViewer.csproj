@@ -4,15 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F8664ABC-AA36-421E-B3D7-287091224B1B}</ProjectGuid>
-    <OutputType>library</OutputType>
+    <ProjectGuid>{912029C5-C147-459B-A735-3D559B2F193D}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BattleInfoPlugin</RootNamespace>
-    <AssemblyName>BattleInfoPlugin</AssemblyName>
+    <RootNamespace>EventMapHpViewer</RootNamespace>
+    <AssemblyName>EventMapHpViewer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <ExpressionBlendVersion>12.0.51020.0</ExpressionBlendVersion>
@@ -36,6 +34,14 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCMakeCert, Version=2.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\FiddlerCore.4.5.1.0\lib\net40\BCMakeCert.dll</HintPath>
+    </Reference>
+    <Reference Include="CertMaker, Version=4.5.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\FiddlerCore.4.5.1.0\lib\net40\CertMaker.dll</HintPath>
+    </Reference>
     <Reference Include="FiddlerCore4, Version=4.5.1.0, Culture=neutral, PublicKeyToken=67cb91587178ac5a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\FiddlerCore.4.5.1.0\lib\net40\FiddlerCore4.dll</HintPath>
@@ -46,151 +52,63 @@
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\LivetCask.1.1.0.0\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
-    <Reference Include="SwfFormat, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>DependentAssemblies\SwfFormat.dll</HintPath>
-    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Reactive.Core">
-      <HintPath>..\..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
+      <HintPath>..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
     </Reference>
     <Reference Include="System.Reactive.Interfaces">
-      <HintPath>..\..\packages\Rx-Interfaces.2.2.5\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+      <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\net45\System.Reactive.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="System.Reactive.Linq">
-      <HintPath>..\..\packages\Rx-Linq.2.2.5\lib\net45\System.Reactive.Linq.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reactive.PlatformServices">
-      <HintPath>..\..\packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+      <HintPath>..\packages\Rx-Linq.2.2.5\lib\net45\System.Reactive.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\LivetCask.1.1.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\AirSupremacy.cs" />
-    <Compile Include="Models\AttackType.cs" />
-    <Compile Include="Models\BattleData.cs" />
-    <Compile Include="Models\BattleSituation.cs" />
-    <Compile Include="Models\CellEvent.cs" />
-    <Compile Include="Models\CellType.cs" />
-    <Compile Include="Models\FleetDamages.cs" />
-    <Compile Include="Models\FleetData.cs" />
-    <Compile Include="Models\Formation.cs" />
+    <Compile Include="MapHpViewer.cs" />
     <Compile Include="Models\MapArea.cs" />
-    <Compile Include="Models\MapCell.cs" />
     <Compile Include="Models\MapInfo.cs" />
-    <Compile Include="Models\Notifiers\BattleEndNotifier.cs" />
-    <Compile Include="Models\Raw\battle_midnight_battle.cs" />
-    <Compile Include="Models\Raw\battle_midnight_sp_midnight.cs" />
-    <Compile Include="Models\Raw\battle_result.cs" />
-    <Compile Include="Models\Raw\combined_battle_airbattle.cs" />
-    <Compile Include="Models\Raw\combined_battle_battle.cs" />
-    <Compile Include="Models\Raw\combined_battle_battle_water.cs" />
-    <Compile Include="Models\Raw\combined_battle_midnight_battle.cs" />
-    <Compile Include="Models\Raw\combined_battle_sp_midnight.cs" />
-    <Compile Include="Models\Raw\CommonTypeExtensions.cs" />
-    <Compile Include="Models\Raw\CommonTypes.cs" />
+    <Compile Include="Models\Maps.cs" />
+    <Compile Include="Models\MapInfoProxy.cs" />
+    <Compile Include="Models\Raw\Api_Eventmap.cs" />
+    <Compile Include="Models\Raw\kcsapi_mst_maparea.cs" />
+    <Compile Include="Models\Raw\kcsapi_mst_mapinfo.cs" />
+    <Compile Include="Models\Raw\kcsapi_start2.cs" />
+    <Compile Include="Models\Raw\member_mapinfo.cs" />
     <Compile Include="Models\Raw\map_start_next.cs" />
-    <Compile Include="Models\Raw\practice_battle.cs" />
-    <Compile Include="Models\Raw\practice_midnight_battle.cs" />
-    <Compile Include="Models\Raw\sortie_airbattle.cs" />
-    <Compile Include="Models\Raw\sortie_battle.cs" />
-    <Compile Include="Models\Repositories\EnemyDataProvider.cs" />
-    <Compile Include="Models\Repositories\KcsResourceWriter.cs" />
-    <Compile Include="Models\Repositories\MapResource.cs" />
-    <Compile Include="Models\Repositories\Master.cs" />
-    <Compile Include="Models\ShipData.cs" />
-    <Compile Include="Models\ShipSlotData.cs" />
-    <Compile Include="Models\Type2.cs" />
-    <Compile Include="ViewModels\Enemies\EnemyFleetViewModel.cs" />
-    <Compile Include="ViewModels\Enemies\EnemyMapViewModel.cs" />
-    <Compile Include="ViewModels\Enemies\EnemyCellViewModel.cs" />
-    <Compile Include="ViewModels\Enemies\EnemyShipViewModel.cs" />
-    <Compile Include="ViewModels\EnemyWindowViewModel.cs" />
-    <Compile Include="ViewModels\FleetViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModel.cs" />
-    <Compile Include="Views\Controls\Cell.cs" />
-    <Compile Include="Views\Converters\AddDoubleValueConverter.cs" />
-    <Compile Include="Views\Converters\AdditionalNameColorConverter.cs" />
-    <Compile Include="Views\Converters\AttackTypeToDisplayTextConverter.cs" />
-    <Compile Include="Views\Converters\BrTagToNewLineConverter.cs" />
-    <Compile Include="Views\EnemyWindow.xaml.cs">
-      <DependentUpon>EnemyWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Fleet.xaml.cs">
-      <DependentUpon>Fleet.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ToolView.xaml.cs">
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ToolView.xaml.cs">
       <DependentUpon>ToolView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Styles\Cell.xaml">
+    <Compile Include="ViewModels\MapViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="ToolView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Styles\PluginStyle.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="BattleInfoPlugin.cs" />
-    <Page Include="Views\EnemyWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Fleet.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\ToolView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DependentAssemblies\SwfFormat.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <DesignData Include="SampleData\FleetViewModelSampleData.xaml" />
     <DesignData Include="SampleData\ToolViewModelSampleData.xaml" />
   </ItemGroup>
   <ItemGroup>

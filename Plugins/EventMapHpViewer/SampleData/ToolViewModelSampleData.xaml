@@ -1,0 +1,59 @@
+﻿<viewModels:ToolViewModel xmlns:local="clr-namespace:EventMapHpViewer"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:viewModels="clr-namespace:EventMapHpViewer.ViewModels"
+                     IsNoMap="False">
+    <viewModels:ToolViewModel.Maps>
+        <viewModels:MapViewModel Current="1000"
+                                 Max="9999"
+                                 RemainingCount="10"
+                                 MapNumber="30-5"
+                                 AreaName="イベント海域"
+                                 Name="サーモン海域北方"
+                                 IsCleared="False"
+                                 IsRankSelected="False"
+                                 IsSupported="True">
+            <viewModels:MapViewModel.GaugeColor>
+                <SolidColorBrush Color="#40C820"/>
+            </viewModels:MapViewModel.GaugeColor>
+        </viewModels:MapViewModel>
+        <viewModels:MapViewModel Current="1"
+                                 Max="1"
+                                 RemainingCount="1"
+                                 MapNumber="xx-x"
+                                 AreaName="ふつう海域"
+                                 Name="ふつうマップ"
+                                 IsCleared="False"
+                                 IsRankSelected="True"
+                                 IsSupported="True">
+            <viewModels:MapViewModel.GaugeColor>
+                <SolidColorBrush Color="#FF2020"/>
+            </viewModels:MapViewModel.GaugeColor>
+        </viewModels:MapViewModel>
+        <viewModels:MapViewModel Current="1"
+                                 Max="5"
+                                 RemainingCount="1"
+                                 MapNumber="2-5"
+                                 AreaName="アルフォンしーの方面"
+                                 Name="あるフォンシーの方面進出"
+                                 IsCleared="False"
+                                 IsRankSelected="True"
+                                 IsSupported="True">
+            <viewModels:MapViewModel.GaugeColor>
+                <SolidColorBrush Color="#FF2020"/>
+            </viewModels:MapViewModel.GaugeColor>
+        </viewModels:MapViewModel>
+        <viewModels:MapViewModel Current="333"
+                                 Max="444"
+                                 RemainingCount="10"
+                                 MapNumber="30-5"
+                                 AreaName="イベント海域"
+                                 Name="未対応海域"
+                                 IsCleared="False"
+                                 IsRankSelected="True"
+                                 IsSupported="False">
+            <viewModels:MapViewModel.GaugeColor>
+                <SolidColorBrush Color="#40C820"/>
+            </viewModels:MapViewModel.GaugeColor>
+        </viewModels:MapViewModel>
+    </viewModels:ToolViewModel.Maps>
+</viewModels:ToolViewModel>
