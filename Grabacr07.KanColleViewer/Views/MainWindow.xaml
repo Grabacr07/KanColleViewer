@@ -37,7 +37,22 @@
 										 MessageKey="Window/Activate">
 			<livet:WindowInteractionMessageAction />
 		</livet:InteractionMessageTrigger>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger, Mode=OneWay}"
+										 MessageKey="Window/Close">
+			<livet:WindowInteractionMessageAction />
+		</livet:InteractionMessageTrigger>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger, Mode=OneWay}"
+										 MessageKey="Show/ExitDialog">
+			<livet:TransitionInteractionMessageAction Mode="NewOrActive"
+													  WindowType="views:ExitDialog"
+													  IsOwned="True" />
+		</livet:InteractionMessageTrigger>
 	</i:Interaction.Triggers>
+	<i:Interaction.Behaviors>
+		<livet:WindowCloseCancelBehavior CanClose="{Binding CanClose, Mode=OneWay}"
+										 CloseCanceledCallbackMethodTarget="{Binding}"
+										 CloseCanceledCallbackMethodName="Close" />
+	</i:Interaction.Behaviors>
 
 	<Grid>
 		<Grid.RowDefinitions>

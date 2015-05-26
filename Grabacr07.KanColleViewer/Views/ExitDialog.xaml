@@ -39,11 +39,22 @@
 			<metro2:CallMethodButton Content="OK"
 									 MinWidth="100"
 									 Padding="20,5"
-									 Margin="12,0,0,0" />
+									 Margin="12,0,0,0"
+									 MethodName="ForceClose" />
 			<metro2:CallMethodButton Content="Cancel"
 									 MinWidth="100"
 									 Padding="20,5"
-									 Margin="12,0,0,0" />
+									 Margin="12,0,0,0">
+				<i:Interaction.Triggers>
+					<i:EventTrigger EventName="Click">
+						<livet:WindowInteractionMessageAction>
+							<livet:DirectInteractionMessage>
+								<livet:WindowActionMessage />
+							</livet:DirectInteractionMessage>
+						</livet:WindowInteractionMessageAction>
+					</i:EventTrigger>
+				</i:Interaction.Triggers>
+			</metro2:CallMethodButton>
 		</StackPanel>
 	</Grid>
 </metro:MetroWindow>

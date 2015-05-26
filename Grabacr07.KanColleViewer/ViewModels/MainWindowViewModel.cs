@@ -8,6 +8,7 @@ using Grabacr07.KanColleViewer.ViewModels.Messages;
 using Grabacr07.KanColleWrapper;
 using Livet;
 using Livet.EventListeners;
+using Livet.Messaging;
 using Livet.Messaging.Windows;
 using MetroRadiance;
 
@@ -127,12 +128,32 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region CanClose 変更通知プロパティ
+
+		private bool _CanClose;
+
+		public bool CanClose
+		{
+			get { return this._CanClose; }
+			set
+			{
+				if (this._CanClose != value)
+				{
+					this._CanClose = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 
 		public MainWindowViewModel()
 		{
 			this.Title = App.ProductInfo.Title;
 			this.Navigator = new NavigatorViewModel();
 			this.Settings = new SettingsViewModel();
+			this.CanClose = false;
 
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(StatusService.Current)
 			{
@@ -177,6 +198,17 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					? Mode.InSortie
 					: Mode.Started
 				: Mode.NotStarted;
+		}
+
+		public void Close()
+		{
+			this.Messenger.Raise(new TransitionMessage(this, "Show/ExitDialog"));
+		}
+
+		public void ForceClose()
+		{
+			this.CanClose = true;
+			this.Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Window/Close"));
 		}
 	}
 }
