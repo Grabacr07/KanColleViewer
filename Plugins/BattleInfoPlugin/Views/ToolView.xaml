@@ -160,7 +160,7 @@
 						HorizontalAlignment="Right">
 				<CheckBox HorizontalAlignment="Right"
 						  VerticalAlignment="Center"
-						  Content="전투가 끝나고 알림"
+						  Content="화면이 비활성화되어있을때 전투가 끝나면 알림"
 						  IsChecked="{Binding IsNotifierEnabled}"
 						  Margin="10, 0"/>
 			</StackPanel>
