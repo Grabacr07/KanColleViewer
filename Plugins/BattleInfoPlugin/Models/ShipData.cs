@@ -101,13 +101,27 @@ namespace BattleInfoPlugin.Models
             set
             {
                 if (this._NowHP == value)
-                    return;
+					return;
                 this._NowHP = value;
                 this.RaisePropertyChanged();
                 this.RaisePropertyChanged(() => this.HP);
             }
         }
         #endregion
+
+		#region OldNowHP変更通知プロパティ
+		private int _BeforeNowHP;
+		public int BeforeNowHP
+		{
+			get { return this._BeforeNowHP; }
+			set
+			{
+				if (this._BeforeNowHP == value)
+					return;
+				this._BeforeNowHP = value;
+			}
+		}
+		#endregion
 
         #region Firepower 変更通知プロパティ
 

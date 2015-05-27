@@ -13,7 +13,7 @@ namespace BattleInfoPlugin.Models.Repositories
 {
     public class MapResource
     {
-        public static BitmapSource GetMapImage(MapInfo map)
+		public static BitmapSource GetMapImage(MapInfo map)
         {
             return ExistsAssembly ? MapResourcePrivate.GetMapImage(map) : null;
         }
@@ -37,9 +37,11 @@ namespace BattleInfoPlugin.Models.Repositories
                 if (_ExistsAssembly.HasValue) return _ExistsAssembly.Value;
 
                 try
-                {
-                    System.Reflection.Assembly.UnsafeLoadFrom("lib\\SwfFormat.dll");
-					System.Reflection.Assembly.UnsafeLoadFrom("lib\\ICSharpCode.SharpZipLib.dll");
+				{
+					string MainFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+					
+                    System.Reflection.Assembly.UnsafeLoadFrom(Path.Combine(MainFolder,"lib","SwfFormat.dll"));
+					System.Reflection.Assembly.UnsafeLoadFrom(Path.Combine(MainFolder, "lib", "ICSharpCode.SharpZipLib.dll"));
                     _ExistsAssembly = true;
                 }
                 catch (FileNotFoundException)

@@ -31,10 +31,20 @@ namespace BattleInfoPlugin.ViewModels
 				{
 					return this.Data.Cell.ToString();
 				}
-				else return CellEvent.없음.ToString();
+				else return "";
 			}
 		}
-
+		public string RankResult
+		{
+			get
+			{
+				if (this.Data != null)
+				{
+					return this.Data.RankResult.ToString();
+				}
+				else return "없음";
+			}
+		}
         public string BattleSituation
         {
             get
@@ -145,6 +155,10 @@ namespace BattleInfoPlugin.ViewModels
 				{
 					()=>this.Data.Cell,
 					(_,__)=>this.RaisePropertyChanged(()=>this.Cell)
+				},
+				{
+					()=>this.Data.RankResult,
+					(_,__)=>this.RaisePropertyChanged(()=>this.RankResult)
 				},
                 {
                     () => this.Data.BattleSituation,

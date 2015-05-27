@@ -44,8 +44,9 @@
                                    Path=ViewportHeight, Converter={StaticResource HeightConverter}}">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -65,44 +66,10 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
+					<Grid.RowDefinitions>
+						<RowDefinition/>
 						<RowDefinition/>
 					</Grid.RowDefinitions>
-					<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-						   Text="{Binding Data.Cell}"
-						   Margin="0,0,5,0"
-						   Padding="10,2"
-							   Grid.Row="1"
-						   Foreground="White">
-						<TextBlock.Style>
-							<Style TargetType="TextBlock">
-								<Style.Triggers>
-									<DataTrigger Binding="{Binding Data.Cell}"
-												 Value="자원획득">
-										<Setter Property="Background" Value="#FF3FBD2B"/>
-									</DataTrigger>
-									<DataTrigger Binding="{Binding Data.Cell}"
-												 Value="소용돌이">
-										<Setter Property="Background" Value="#FFA33CEA"/>
-									</DataTrigger>
-									<DataTrigger Binding="{Binding Data.Cell}"
-												 Value="적군조우">
-										<Setter Property="Background" Value="#FFF01717"/>
-									</DataTrigger>
-									<DataTrigger Binding="{Binding Data.Cell}"
-												 Value="보스전">
-										<Setter Property="Background" Value="#FFD40C0C"/>
-									</DataTrigger>
-									<DataTrigger Binding="{Binding Data.Cell}"
-												 Value="기분탓">
-										<Setter Property="Background" Value="#FF0A8AB9"/>
-									</DataTrigger>
-								</Style.Triggers>
-							</Style>
-						</TextBlock.Style>
-					</TextBlock>
-
 					<TextBlock Text="전투정보"
                                Style="{DynamicResource HeaderTextStyleKey}"
                                Margin="0,0,20,0"
@@ -143,19 +110,105 @@
                     </Button>
                 </Grid>
             </Border>
-
-            <views:Fleet Grid.Column="0" Grid.Row="1"
+			<Grid Grid.ColumnSpan="4" Grid.Row="1">
+				<TextBlock Padding="10,5"
+						   FontWeight="ExtraBold"
+						   FontSize="18"
+						   TextAlignment="Center"
+						   Text="{Binding Data.RankResult}">
+					<TextBlock.Style>
+						<Style TargetType="TextBlock">
+							<Style.Triggers>
+								<DataTrigger Binding="{Binding Data.RankResult}"
+												 Value="에러">
+									<Setter Property="Foreground" Value="Red"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding Data.RankResult}"
+												 Value="없음">
+									<Setter Property="Foreground" Value="Transparent"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding Data.RankResult}"
+												 Value="완전승리S">
+									<Setter Property="Foreground" Value="#FFFFE558"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding Data.RankResult}"
+												 Value="S승리">
+									<Setter Property="Foreground" Value="Gold"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding Data.RankResult}"
+												 Value="A승리">
+									<Setter Property="Foreground" Value="#FFD10000"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding Data.RankResult}"
+												 Value="B승리">
+									<Setter Property="Foreground" Value="#FFD43353"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding Data.RankResult}"
+												 Value="C패배">
+									<Setter Property="Foreground" Value="#FF42428F"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding Data.RankResult}"
+												 Value="D패배">
+									<Setter Property="Foreground" Value="#FF02A43D"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding Data.RankResult}"
+												 Value="E패배">
+									<Setter Property="Foreground" Value="#FF443DCF"/>
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</TextBlock.Style>
+				</TextBlock>
+				<TextBlock HorizontalAlignment="Right" VerticalAlignment="Center"
+						   Text="{Binding Data.Cell}"
+						   Margin="10,4"
+						   Padding="10,2"
+						   Foreground="White">
+					<TextBlock.Style>
+						<Style TargetType="TextBlock">
+							<Style.Triggers>
+								<DataTrigger Binding="{Binding Data.Cell}"
+												 Value="없음">
+									<Setter Property="Text" Value=""/>
+									<Setter Property="Background" Value="Transparent"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding Data.Cell}"
+												 Value="자원획득">
+									<Setter Property="Background" Value="#FF3FBD2B"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding Data.Cell}"
+												 Value="소용돌이">
+									<Setter Property="Background" Value="#FFA33CEA"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding Data.Cell}"
+												 Value="적군조우">
+									<Setter Property="Background" Value="#FFF01717"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding Data.Cell}"
+												 Value="보스전">
+									<Setter Property="Background" Value="#FFD40C0C"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding Data.Cell}"
+												 Value="기분탓">
+									<Setter Property="Background" Value="#FF0A8AB9"/>
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</TextBlock.Style>
+				</TextBlock>
+			</Grid>
+            <views:Fleet Grid.Column="0" Grid.Row="2"
                          Margin="0,6,0,0"
                          DataContext="{Binding FirstFleet}"/>
 
-            <views:Fleet Grid.Column="1" Grid.Row="1"
+            <views:Fleet Grid.Column="1" Grid.Row="2"
                          Margin="0,6,0,0"
                          DataContext="{Binding SecondFleet}"/>
 
-            <views:Fleet Grid.Column="2" Grid.Row="1"
+            <views:Fleet Grid.Column="2" Grid.Row="2"
                          Margin="0,6,0,0"
                          DataContext="{Binding Enemies}"/>
-			<StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="4"
+			<StackPanel Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="4"
 						Orientation="Horizontal"
 						HorizontalAlignment="Right">
 				<CheckBox HorizontalAlignment="Right"
