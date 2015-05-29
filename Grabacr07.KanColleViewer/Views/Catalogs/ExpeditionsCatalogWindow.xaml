@@ -29,13 +29,7 @@
 				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 				   IsRestoringWindowPlacement="True"
 				   SnapsToDevicePixels="True"
-				   TextOptions.TextFormattingMode="Display"
-				   
-				   >
-
-	<Window.Resources>
-		<XmlDataProvider x:Key="ExpeditionInfo" Source="https://raw.githubusercontent.com/FreyYa/KCVKrTranslation/master/resources/Expeditions.xml"/>
-	</Window.Resources>
+				   TextOptions.TextFormattingMode="Display">
 	
 	<i:Interaction.Triggers>
 		<i:EventTrigger EventName="ContentRendered">
@@ -148,7 +142,7 @@
 					BorderBrush="{DynamicResource BorderBrushKey}"
 					BorderThickness="1"
 					Margin="8,0,8,8">
-				<ListView ItemsSource="{Binding Source={StaticResource ExpeditionInfo},XPath=/Expeditions/Area}"
+				<ListView ItemsSource="{Binding ExpeditionList}"
 						  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}">
 					<ListView.Resources>
 						<Style TargetType="{x:Type TextBlock}">
@@ -201,7 +195,7 @@
 								</GridViewColumnHeader>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<TextBlock FontFamily="Segoe UI" Margin="6,3,0,3" Text="{Binding XPath=Number}"/>
+										<TextBlock FontFamily="Segoe UI" Margin="6,3,0,3" Text="{Binding ID}"/>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
@@ -211,7 +205,7 @@
 								</GridViewColumnHeader>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<TextBlock FontFamily="Segoe UI" Margin="6,3,0,3" Text="{Binding XPath=Title}"/>
+										<TextBlock FontFamily="Segoe UI" Margin="6,3,0,3" Text="{Binding TRName}"/>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
@@ -221,7 +215,7 @@
 								</GridViewColumnHeader>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<TextBlock FontFamily="Segoe UI" Margin="6,3,0,3" Text="{Binding XPath=FlagLv}"/>
+										<TextBlock FontFamily="Segoe UI" Margin="6,3,0,3" Text="{Binding FlagLv}"/>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
@@ -231,7 +225,7 @@
 								</GridViewColumnHeader>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<TextBlock FontFamily="Segoe UI" Margin="6,3,0,3" Text="{Binding XPath=Time}"/>
+										<TextBlock FontFamily="Segoe UI" Margin="6,3,0,3" Text="{Binding Time}"/>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
@@ -241,7 +235,7 @@
 								</GridViewColumnHeader>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<TextBlock FontFamily="Segoe UI" Margin="6,3,0,3" Text="{Binding XPath=NeedShip}"/>
+										<TextBlock FontFamily="Segoe UI" Margin="6,3,0,3" Text="{Binding NeedShip}"/>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
@@ -251,7 +245,7 @@
 								</GridViewColumnHeader>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<TextBlock FontFamily="Segoe UI" Margin="6,3,0,3" Text="{Binding XPath=Fuel}"/>
+										<TextBlock FontFamily="Segoe UI" Margin="6,3,0,3" Text="{Binding Fuel}"/>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
@@ -261,7 +255,7 @@
 								</GridViewColumnHeader>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<TextBlock FontFamily="Segoe UI" Margin="6,3,0,3" Text="{Binding XPath=Armo}"/>
+										<TextBlock FontFamily="Segoe UI" Margin="6,3,0,3" Text="{Binding Armo}"/>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
@@ -271,7 +265,7 @@
 								</GridViewColumnHeader>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<TextBlock FontFamily="Segoe UI" Margin="6,3,0,3" Text="{Binding XPath=Metal}"/>
+										<TextBlock FontFamily="Segoe UI" Margin="6,3,0,3" Text="{Binding Metal}"/>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
@@ -281,7 +275,7 @@
 								</GridViewColumnHeader>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<TextBlock FontFamily="Segoe UI" Margin="6,3,0,3" Text="{Binding XPath=Bo}"/>
+										<TextBlock FontFamily="Segoe UI" Margin="6,3,0,3" Text="{Binding Bo}"/>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
@@ -291,7 +285,7 @@
 								</GridViewColumnHeader>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<TextBlock FontFamily="Segoe UI" Margin="6,3,0,3" Text="{Binding XPath=Detail}"/>
+										<TextBlock FontFamily="Segoe UI" Margin="6,3,0,3" Text="{Binding Detail}"/>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>

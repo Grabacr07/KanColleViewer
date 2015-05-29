@@ -400,7 +400,7 @@ namespace Grabacr07.KanColleWrapper
 					string AttributeName = "Ship" + i.ToString();
 					root.SetAttribute(AttributeName, context.EnemyShips[i]);
 				}
-				root.SetAttribute("ShipCount",context.FleetCount.ToString());
+				root.SetAttribute("ShipCount", context.FleetCount.ToString());
 			}
 
 			FristNode.AppendChild(root);
@@ -408,7 +408,36 @@ namespace Grabacr07.KanColleWrapper
 
 			XmlDoc.Save(Path.Combine(MainFolder, "Translations", "EnemyFleets.xml"));
 		}
+		public string GetExpeditionData(string ElementName, int ID)
+		{
+			IEnumerable<XElement> TranslationList = GetTranslationList(TranslationType.ExpeditionDetail);
 
+			if (TranslationList == null) return string.Empty;
+			string IDElement = "ID";
+
+
+			IEnumerable<XElement> FoundTranslation = TranslationList.Where(b => b.Element(IDElement).Value.Equals(ID.ToString()));//퀘스트 ID검색
+
+			foreach (XElement el in FoundTranslation)
+			{
+#if DEBUG
+					if (ID >= 0 && el.Element("ID") != null && Convert.ToInt32(el.Element("ID").Value) == ID)
+						Debug.WriteLine(string.Format("Translation: {0,-20} {1,-20} {2}", JPString, el.Element(TRChildElement).Value, ID));
+#endif
+				if (el.Element(ElementName) == null) return string.Empty;
+				if (ID >= 0 && el.Element("ID") != null && Convert.ToInt32(el.Element("ID").Value) == ID)
+					return el.Element(ElementName).Value;
+
+			}
+
+			return string.Empty;
+		}
+		public int GetExpeditionListCount()
+		{
+			IEnumerable<XElement> TranslationList = GetTranslationList(TranslationType.ExpeditionDetail);
+
+			return TranslationList.Where(x => x.Element("TR-Name") != null).Where(x => x.Element("FlagLv") != null).Count();
+		}
 		public string GetTranslation(string JPString, TranslationType Type, Object RawData = null, int ID = -1)
 		{
 			if (!EnableTranslations)
