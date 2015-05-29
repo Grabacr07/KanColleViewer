@@ -54,6 +54,7 @@ namespace BattleInfoPlugin.Models
 			{ return this._TotalDamaged; }
 			set
 			{
+				if (value == 0) this.SinkCount = 0;
 				if (this._TotalDamaged == value)
 					return;
 				this._TotalDamaged = value;

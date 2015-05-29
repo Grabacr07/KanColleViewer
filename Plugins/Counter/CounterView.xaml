@@ -7,6 +7,7 @@
 			 xmlns:controls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:counter="clr-namespace:Counter"
 			 mc:Ignorable="d"
+			 MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}, Mode=OneWay}" 
 			 d:DataContext="{d:DesignInstance counter:CounterViewModel}"
 			 d:DesignHeight="300"
 			 d:DesignWidth="300">

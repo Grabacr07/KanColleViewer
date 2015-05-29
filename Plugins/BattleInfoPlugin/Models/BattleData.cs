@@ -444,6 +444,10 @@ namespace BattleInfoPlugin.Models
 		{
 			this.Name = "연습 - 주간전";
 
+			if (this.FirstFleet != null) this.FirstFleet.TotalDamaged = 0;
+			if (this.SecondFleet != null) this.SecondFleet.TotalDamaged = 0;
+			if (this.Enemies != null) this.Enemies.TotalDamaged = 0;
+
 			this.UpdateFleets(data.api_dock_id, data.api_ship_ke, data.api_formation, null, false);
 			this.UpdateMaxHP(data.api_maxhps);
 			this.UpdateNowHP(data.api_nowhps);
@@ -660,9 +664,12 @@ namespace BattleInfoPlugin.Models
 		}
 		private bool CalcOverKill(int MaxCount, int SinkCount)
 		{
-			if (MaxCount != 6 && (double)SinkCount / (double)MaxCount >= 0.5)
-				return true;
-			else if ((double)SinkCount / (double)MaxCount > 0.5)
+			if (MaxCount == 1)
+			{
+				if (MaxCount == SinkCount) return true;
+				else return false;
+			}
+			if (Convert.ToInt32(Math.Floor((double)(MaxCount / 3) * (double)2)) <= SinkCount)
 				return true;
 			else return false;
 		}
@@ -679,9 +686,24 @@ namespace BattleInfoPlugin.Models
 				var IsShipSink = this.FirstFleet.SinkCount > 0 ? true : false;
 				ShipData EnemyFlag = this.Enemies.Ships.First();
 
-				double EnemyGauge = (double)EnemyTotal / (double)EnemyMax;
-				double Gauge = (double)TotalDamage / (double)MaxHPs;
-				double GaugeCalc = EnemyGauge / Gauge;
+				double GreenGauge = (double)EnemyTotal / (double)EnemyMax;//적이 받은 총 데미지
+				double RedGauge = (double)TotalDamage / (double)MaxHPs;//아군이 받은 총 데미지
+
+				bool IsOverDamage = false;
+				bool IsMidDamage = false;
+				bool IsScratch = false;
+
+				if (TotalDamage != 0)
+				{
+					double CalcPercent = Math.Round(GreenGauge / RedGauge, 2);
+					if (CalcPercent > 2.5)
+						IsOverDamage = true;//2.5배 초과 데미지
+					else if (CalcPercent >= 1)
+						IsMidDamage = true;//1초과 2.5이하
+					else IsScratch = true;//1미만
+				}
+				else if (TotalDamage == 0 && EnemyTotal == 0) IsScratch = true;
+				else if (TotalDamage == 0) IsOverDamage = true;//아군피해 0인 경우
 
 				int MaxCount = this.FirstFleet.Ships
 					.Where(x => !x.Situation.HasFlag(ShipSituation.Tow) && !x.Situation.HasFlag(ShipSituation.Evacuation))
@@ -691,8 +713,6 @@ namespace BattleInfoPlugin.Models
 				int SinkCount = this.FirstFleet.SinkCount;
 				bool IsOverKill = CalcOverKill(EnemyMaxCount, this.Enemies.SinkCount);
 				bool IsOverKilled = CalcOverKill(MaxCount, SinkCount);
-
-
 
 				if (IsCombined)
 				{
@@ -705,65 +725,44 @@ namespace BattleInfoPlugin.Models
 					SinkCount += this.SecondFleet.SinkCount;
 				}
 
-				if (!IsShipSink)
+				if (TotalDamage == 0 && EnemyTotal == 0) return Rank.D패배;
+				else if (IsShipSink)
 				{
-					if (this.Enemies.SinkCount == EnemyMaxCount)
+					if (EnemyFlag.NowHP <= 0)
 					{
-						if (TotalDamage == 0) return Rank.완전승리S;
-						else return Rank.S승리;
+						if (IsOverKill) return Rank.B승리;
+						else return Rank.D패배;
+					}
+					else if (IsMidDamage) return Rank.C패배;
+					else return Rank.E패배;
+				}
+				else
+				{
+					if (EnemyFlag.NowHP <= 0)
+					{
+						if (EnemyMaxCount == this.Enemies.SinkCount)
+						{
+							if (TotalDamage > 0) return Rank.S승리;
+							else return Rank.완전승리S;
+						}
+						else
+						{
+							if (IsOverKill) return Rank.A승리;
+							else return Rank.B승리;
+						}
 					}
 					else
 					{
 						if (IsOverKill) return Rank.A승리;
-						else
-						{
-							if (EnemyFlag.NowHP <= 0) return Rank.B승리;
-							else
-							{
-								if (GaugeCalc >= 1)
-								{
-									if (GaugeCalc < 2.5) return Rank.C패배;
-									else return Rank.B승리;
-								}
-								else return Rank.D패배;
-							}
-						}
-					}
-				}
-				else//굉침이 있는경우
-				{
-					if (IsOverKilled) return Rank.E패배;
-					else
-					{
-						if (EnemyFlag.NowHP >= 0)
-						{
-							if (TotalDamage == 0 && EnemyTotal == 00) return Rank.D패배;
-							{
-								if (EnemyGauge < 0.0005) return Rank.D패배;
-								else
-								{
-									if (GaugeCalc < 1.0) return Rank.D패배;
-									else
-									{
-										if (IsOverKill)
-										{
-											if (GaugeCalc < 2.5) return Rank.C패배;
-											else return Rank.B승리;
-										}
-										else
-										{
-											if (GaugeCalc >= 3) return Rank.B승리;
-											else return Rank.C패배;
-										}
-									}
-								}
-							}
-						}
-						else return Rank.B승리;
+
+						if (IsOverDamage) return Rank.B승리;
+						else if (IsMidDamage) return Rank.C패배;
+						else if (IsScratch) return Rank.D패배;
+						else return Rank.D패배;
 					}
 				}
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
 				return Rank.에러;
