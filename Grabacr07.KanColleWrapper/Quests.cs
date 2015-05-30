@@ -108,7 +108,7 @@ namespace Grabacr07.KanColleWrapper
 			this.IsUntaken = true;
 			this.All = this.Current = new List<Quest>();
 
-			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/questlist")
+			proxy.api_get_member_questlist
 				.Select(Serialize)
 				.Where(x => x != null)
 				.Subscribe(this.Update);
@@ -173,11 +173,6 @@ namespace Grabacr07.KanColleWrapper
 				while (this.questPages.Count < questlist.api_page_count) this.questPages.Add(null);
 			}
 
-			var page = questlist.api_disp_page - 1;
-			if (page >= this.questPages.Count) page = this.questPages.Count - 1;
-
-			this.questPages[page] = new ConcurrentDictionary<int, Quest>();
-
 			if (questlist.api_list == null)
 			{
 				this.IsEmpty = true;
@@ -185,6 +180,11 @@ namespace Grabacr07.KanColleWrapper
 			}
 			else
 			{
+				var page = questlist.api_disp_page - 1;
+				if (page >= this.questPages.Count) page = this.questPages.Count - 1;
+
+				this.questPages[page] = new ConcurrentDictionary<int, Quest>();
+
 				this.IsEmpty = false;
 
 				questlist.api_list.Select(x => new Quest(x))

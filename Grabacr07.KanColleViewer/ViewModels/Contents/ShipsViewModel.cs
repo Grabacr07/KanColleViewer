@@ -31,7 +31,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 		public ShipsViewModel()
 		{
-			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport)
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport.Organization)
 			{
 				{ "Ships", (sender, args) => this.Update() }
 			});
@@ -40,7 +40,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 		private void Update()
 		{
-			this.Count = KanColleClient.Current.Homeport.Ships.Count;
+			this.Count = KanColleClient.Current.Homeport.Organization.Ships.Count;
 		}
 	}
 }

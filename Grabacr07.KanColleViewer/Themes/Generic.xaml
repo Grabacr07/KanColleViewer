@@ -4,11 +4,10 @@
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="/KanColleViewer;component/Themes/Generic.AppIcon.xaml" />
 		<ResourceDictionary Source="/KanColleViewer;component/Themes/Generic.BuildingDock.xaml" />
+		<ResourceDictionary Source="/KanColleViewer;component/Themes/Generic.KanColleHost.xaml" />
 		<ResourceDictionary Source="/KanColleViewer;component/Themes/Generic.ColorIndicator.xaml" />
 		<ResourceDictionary Source="/KanColleViewer;component/Themes/Generic.ConditionIcon.xaml" />
 		<ResourceDictionary Source="/KanColleViewer;component/Themes/Generic.Modernizable.xaml" />
-		<ResourceDictionary Source="/KanColleViewer;component/Themes/Generic.MuteButton.xaml" />
-		<ResourceDictionary Source="/KanColleViewer;component/Themes/Generic.NavigationButton.xaml" />
 		<ResourceDictionary Source="/KanColleViewer;component/Themes/Generic.Quest.xaml" />
 		<ResourceDictionary Source="/KanColleViewer;component/Themes/Generic.SlotItemIcon.xaml" />
 	</ResourceDictionary.MergedDictionaries>

@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Models.Raw;
-using Grabacr07.KanColleWrapper.Internal;
-using Livet;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
-	public class Fleet : NotificationObject, IDisposable, IIdentifiable
+	/// <summary>
+	/// 複数の艦娘によって編成される、単一の常設艦隊を表します。
+	/// </summary>
+	public class Fleet : DisposableNotifier, IIdentifiable
 	{
 		private readonly Homeport homeport;
+		private Ship[] originalShips; // null も含んだやつ
 
 		#region Id 変更通知プロパティ
 
@@ -21,7 +21,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		public int Id
 		{
 			get { return this._Id; }
-			set
+			private set
 			{
 				if (this._Id != value)
 				{
@@ -40,11 +40,12 @@ namespace Grabacr07.KanColleWrapper.Models
 		public string Name
 		{
 			get { return this._Name; }
-			set
+			internal set
 			{
 				if (this._Name != value)
 				{
 					this._Name = value;
+					this.State.Condition.Name = value;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -57,12 +58,12 @@ namespace Grabacr07.KanColleWrapper.Models
 		private Ship[] _Ships = new Ship[0];
 
 		/// <summary>
-		/// 艦隊に所属している艦娘 (空いている枠は null) の配列を取得します。
+		/// 艦隊に所属している艦娘の配列を取得します。
 		/// </summary>
 		public Ship[] Ships
 		{
 			get { return this._Ships; }
-			set
+			private set
 			{
 				if (this._Ships != value)
 				{
@@ -74,135 +75,138 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
-		#region AverageLevel 変更通知プロパティ
+		public bool IsInSortie { get; private set; }
 
-		private double _AverageLevel;
-
-		/// <summary>
-		/// 艦隊の平均レベルを取得します。
-		/// </summary>
-		public double AverageLevel
-		{
-			get { return this._AverageLevel; }
-			private set
-			{
-				if (this._AverageLevel != value)
-				{
-					this._AverageLevel = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region AirSuperiorityPotential 変更通知プロパティ
-
-		private int _AirSuperiorityPotential;
+		public FleetState State { get; private set; }
 
 		/// <summary>
-		/// 艦隊の制空能力を取得します。
+		/// 艦隊の遠征に関するステータスを取得します。
 		/// </summary>
-		public int AirSuperiorityPotential
-		{
-			get { return this._AirSuperiorityPotential; }
-			private set
-			{
-				if (this._AirSuperiorityPotential != value)
-				{
-					this._AirSuperiorityPotential = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region Speed 変更通知プロパティ
-
-		private Speed _Speed;
-
-		/// <summary>
-		/// 艦隊の速力を取得します。
-		/// </summary>
-		public Speed Speed
-		{
-			get { return this._Speed; }
-			private set
-			{
-				if (this._Speed != value)
-				{
-					this._Speed = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region State 変更通知プロパティ
-
-		private FleetState _State;
-
-		public FleetState State
-		{
-			get { return this._State; }
-			set
-			{
-				if (this._State != value)
-				{
-					this._State = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		public FleetReSortie ReSortie { get; private set; }
 		public Expedition Expedition { get; private set; }
+
 
 		internal Fleet(Homeport parent, kcsapi_deck rawData)
 		{
 			this.homeport = parent;
 
-			this.ReSortie = new FleetReSortie();
+			this.State = new FleetState(parent, this);
 			this.Expedition = new Expedition(this);
+			this.CompositeDisposable.Add(this.State);
+			this.CompositeDisposable.Add(this.Expedition);
+
 			this.Update(rawData);
 		}
 
 
+		/// <summary>
+		/// 指定した <see cref="kcsapi_deck"/> を使用して艦隊の情報をすべて更新します。
+		/// </summary>
+		/// <param name="rawData">エンド ポイントから取得したデータ。</param>
 		internal void Update(kcsapi_deck rawData)
 		{
 			this.Id = rawData.api_id;
 			this.Name = rawData.api_name;
-			this.Ships = rawData.api_ship.Select(id => this.homeport.Ships[id]).Where(x => x != null).ToArray();
-			this.AverageLevel = this.Ships.HasValue() ? this.Ships.Average(s => s.Level) : 0.0;
-			this.AirSuperiorityPotential = this.Ships.Sum(s => s.CalcAirSuperiorityPotential());
-			this.Speed = this.Ships.All(s => s.Info.Speed == Speed.Fast) ? Speed.Fast : Speed.Low;
-			this.ReSortie.Update(this.Ships);
-			this.Expedition.Update(rawData.api_mission);
 
-			this.UpdateStatus();
+			this.Expedition.Update(rawData.api_mission);
+			this.UpdateShips(rawData.api_ship.Select(id => this.homeport.Organization.Ships[id]).ToArray());
 		}
 
-		internal void UpdateStatus()
+		#region 艦の編成 (Change, Unset)
+
+		/// <summary>
+		/// 艦隊の編成を変更します。
+		/// </summary>
+		/// <param name="index">編成を変更する艦のインデックス。通常は 0 ～ 5、旗艦以外をすべて外す場合は -1。</param>
+		/// <param name="ship">艦隊の <paramref name="index"/> 番目に新たに編成する艦。<paramref name="index"/> 番目から艦を外す場合は null。</param>
+		/// <returns>このメソッドを呼び出した時点で <paramref name="index"/> に配置されていた艦。</returns>
+		internal Ship Change(int index, Ship ship)
 		{
-			if (this.Ships.Length == 0) this.State = FleetState.Empty;
-			else if (this.Expedition.IsInExecution) this.State = FleetState.Expedition;
-			else if (this.homeport.Repairyard.CheckRepairing(this)) this.State = FleetState.Repairing;
-			else this.State = FleetState.Ready;
+			var current = this.originalShips[index];
+
+			List<Ship> list;
+			if (index == -1)
+			{
+				list = this.originalShips.Take(1).ToList();
+			}
+			else
+			{
+				list = this.originalShips.ToList();
+				list[index] = ship;
+				list.RemoveAll(x => x == null);
+			}
+
+			var ships = new Ship[this.originalShips.Length];
+			Array.Copy(list.ToArray(), ships, list.Count);
+
+			this.UpdateShips(ships);
+
+			return current;
+		}
+
+		/// <summary>
+		/// 指定したインデックスの艦を艦隊から外します。
+		/// </summary>
+		/// <param name="index">艦隊から外す艦のインデックス。</param>
+		internal void Unset(int index)
+		{
+			var list = this.originalShips.ToList();
+			list[index] = null;
+			list.RemoveAll(x => x == null);
+
+			var ships = new Ship[this.originalShips.Length];
+			Array.Copy(list.ToArray(), ships, list.Count);
+
+			this.UpdateShips(ships);
+		}
+
+		/// <summary>
+		/// 旗艦以外のすべての艦を艦隊から外します。
+		/// </summary>
+		internal void UnsetAll()
+		{
+			var list = this.originalShips.Take(1).ToList();
+			var ships = new Ship[this.originalShips.Length];
+			Array.Copy(list.ToArray(), ships, list.Count);
+
+			this.UpdateShips(ships);
+		}
+
+		#endregion
+
+		#region 出撃 (Sortie, Homing)
+
+		internal void Sortie()
+		{
+			if (!this.IsInSortie)
+			{
+				this.IsInSortie = true;
+				this.State.Update();
+			}
+		}
+
+		internal void Homing()
+		{
+			if (this.IsInSortie)
+			{
+				this.IsInSortie = false;
+				this.State.Update();
+			}
+		}
+
+		#endregion
+
+		private void UpdateShips(Ship[] ships)
+		{
+			this.originalShips = ships;
+			this.Ships = ships.Where(x => x != null).ToArray();
+
+			this.State.Calculate();
+			this.State.Update();
 		}
 
 		public override string ToString()
 		{
-			return string.Format("ID = {0}, Name = \"{1}\", Ships = {2}", this.Id, this.Name, this.GetShips().Select(s => "\"" + s.Info.Name + "\"").ToString(","));
-		}
-
-		public virtual void Dispose()
-		{
-			this.ReSortie.SafeDispose();
-			this.Expedition.SafeDispose();
+			return string.Format("ID = {0}, Name = \"{1}\", Ships = {2}", this.Id, this.Name, this.Ships.Select(s => "\"" + s.Info.Name + "\"").ToString(","));
 		}
 	}
 }

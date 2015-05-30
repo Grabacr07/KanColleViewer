@@ -2,6 +2,7 @@
 				   x:Name="GlowMetroWindow"
 				   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 				   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				   xmlns:s="clr-namespace:System;assembly=mscorlib"
 				   xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 				   xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
 				   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -21,7 +22,7 @@
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:ShipCatalogWindowViewModel}"
 				   Title="{Binding Title}"
-				   Width="900"
+				   Width="950"
 				   Height="800"
 				   FontSize="12"
 				   Background="{DynamicResource ThemeBrushKey}"
@@ -74,10 +75,8 @@
 
 				<TextBlock Grid.Column="1"
 						   Text="{Binding Title}"
-						   FontFamily="Segoe UI"
-						   FontSize="16"
-						   Margin="2,2,8,2"
-						   Opacity="0.85" />
+						   Style="{DynamicResource CaptionTextStyleKey}"
+						   Margin="2,0,8,0" />
 
 				<metro:SystemButtons Grid.Column="2"
 									 HorizontalAlignment="Right"
@@ -89,14 +88,17 @@
 		<Grid Grid.Row="1">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
-				<RowDefinition Height="*" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition />
 			</Grid.RowDefinitions>
 
-			<Expander Margin="8"
-					  IsExpanded="{Binding IsOpenSettings, Mode=TwoWay}">
+			<Expander Grid.Row="0"
+					  Margin="8"
+					  IsExpanded="{Binding IsOpenFilterSettings, Mode=TwoWay}">
 				<Expander.Header>
 					<TextBlock Text="フィルター設定"
-							   FontSize="14" />
+							   Style="{DynamicResource HeaderTextStyleKey}"
+							   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 				</Expander.Header>
 				<StackPanel Grid.IsSharedSizeScope="True">
 					<Border BorderThickness="1"
@@ -113,6 +115,7 @@
 							<Grid.RowDefinitions>
 								<RowDefinition Height="Auto" />
 								<RowDefinition Height="*" />
+								<RowDefinition Height="Auto" />
 							</Grid.RowDefinitions>
 
 							<TextBlock Margin="0,2">
@@ -122,10 +125,9 @@
 
 							<CheckBox Grid.Row="0"
 									  Grid.Column="2"
+									  Content="すべて選択"
 									  IsChecked="{Binding CheckAllShipTypes, Mode=TwoWay}"
-									  Margin="0,2">
-								<TextBlock Text="すべて選択" />
-							</CheckBox>
+									  Margin="0,2" />
 
 							<ItemsControl Grid.Row="1"
 										  Grid.Column="2"
@@ -144,6 +146,80 @@
 									</DataTemplate>
 								</ItemsControl.ItemTemplate>
 							</ItemsControl>
+
+							<WrapPanel Grid.Row="2"
+									   Grid.Column="2">
+								<WrapPanel.Resources>
+									<Style TargetType="{x:Type metro2:CallMethodButton}"
+										   BasedOn="{StaticResource {x:Type metro2:CallMethodButton}}">
+										<Setter Property="Padding"
+												Value="12,4" />
+										<Setter Property="Margin"
+												Value="0,5,5,0" />
+										<Setter Property="MethodName"
+												Value="SetShipType" />
+									</Style>
+								</WrapPanel.Resources>
+								<!-- これっきりボタン -->
+								<metro2:CallMethodButton Content="駆逐艦">
+									<metro2:CallMethodButton.MethodParameter>
+										<x:Array Type="s:Int32">
+											<s:Int32>2</s:Int32>
+										</x:Array>
+									</metro2:CallMethodButton.MethodParameter>
+								</metro2:CallMethodButton>
+								<metro2:CallMethodButton Content="軽巡・雷巡">
+									<metro2:CallMethodButton.MethodParameter>
+										<x:Array Type="s:Int32">
+											<s:Int32>3</s:Int32>
+											<s:Int32>4</s:Int32>
+										</x:Array>
+									</metro2:CallMethodButton.MethodParameter>
+								</metro2:CallMethodButton>
+								<metro2:CallMethodButton Content="重巡・航巡">
+									<metro2:CallMethodButton.MethodParameter>
+										<x:Array Type="s:Int32">
+											<s:Int32>5</s:Int32>
+											<s:Int32>6</s:Int32>
+										</x:Array>
+									</metro2:CallMethodButton.MethodParameter>
+								</metro2:CallMethodButton>
+								<metro2:CallMethodButton Content="戦艦">
+									<metro2:CallMethodButton.MethodParameter>
+										<x:Array Type="s:Int32">
+											<s:Int32>8</s:Int32>
+											<s:Int32>9</s:Int32>
+											<s:Int32>10</s:Int32>
+											<s:Int32>12</s:Int32>
+										</x:Array>
+									</metro2:CallMethodButton.MethodParameter>
+								</metro2:CallMethodButton>
+								<metro2:CallMethodButton Content="航空母艦">
+									<metro2:CallMethodButton.MethodParameter>
+										<x:Array Type="s:Int32">
+											<s:Int32>7</s:Int32>
+											<s:Int32>11</s:Int32>
+											<s:Int32>18</s:Int32>
+										</x:Array>
+									</metro2:CallMethodButton.MethodParameter>
+								</metro2:CallMethodButton>
+								<metro2:CallMethodButton Content="潜水艦">
+									<metro2:CallMethodButton.MethodParameter>
+										<x:Array Type="s:Int32">
+											<s:Int32>13</s:Int32>
+											<s:Int32>14</s:Int32>
+										</x:Array>
+									</metro2:CallMethodButton.MethodParameter>
+								</metro2:CallMethodButton>
+								<metro2:CallMethodButton Content="航戦・航巡">
+									<metro2:CallMethodButton.MethodParameter>
+										<x:Array Type="s:Int32">
+											<s:Int32>6</s:Int32>
+											<s:Int32>10</s:Int32>
+										</x:Array>
+									</metro2:CallMethodButton.MethodParameter>
+								</metro2:CallMethodButton>
+							</WrapPanel>
 						</Grid>
 					</Border>
 
@@ -151,57 +227,283 @@
 							BorderBrush="{DynamicResource BorderBrushKey}"
 							Margin="0,8,0,0"
 							Padding="5">
-						<StackPanel>
-							<Grid>
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="Auto"
-													  SharedSizeGroup="FilterName" />
-									<ColumnDefinition Width="10" />
-									<ColumnDefinition Width="*" />
-								</Grid.ColumnDefinitions>
-								<TextBlock Margin="0,2">
-									<Run Text="レベル" />
-									<Run Text=":" />
-								</TextBlock>
-								<WrapPanel Grid.Column="2">
-									<CheckBox IsChecked="{Binding WithoutLv1Ship, Mode=TwoWay}"
-											  Margin="0,2,20,2">
-										<TextBlock Text="Lv.1 の艦娘を表示しない" />
-									</CheckBox>
-								</WrapPanel>
-							</Grid>
+						<WrapPanel>
+							<WrapPanel.Resources>
+								<Style TargetType="{x:Type RadioButton}"
+									   BasedOn="{StaticResource {x:Type RadioButton}}">
+									<Setter Property="Margin"
+											Value="0,2,12,2" />
+								</Style>
+								<Style TargetType="{x:Type CheckBox}"
+									   BasedOn="{StaticResource {x:Type CheckBox}}">
+									<Setter Property="Margin"
+											Value="0,2,12,2" />
+								</Style>
+								<Style TargetType="{x:Type StackPanel}">
+									<Setter Property="Margin"
+											Value="0,0,40,0" />
+									<Setter Property="Grid.IsSharedSizeScope"
+											Value="True" />
+								</Style>
+							</WrapPanel.Resources>
 
-							<Grid>
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="Auto"
-													  SharedSizeGroup="FilterName" />
-									<ColumnDefinition Width="10" />
-									<ColumnDefinition Width="*" />
-								</Grid.ColumnDefinitions>
-								<TextBlock Margin="0,2">
-									<Run Text="ステータス" />
-									<Run Text=":" />
-								</TextBlock>
-								<WrapPanel Grid.Column="2">
-									<CheckBox IsChecked="{Binding WithoutMaxModernizedShip, Mode=TwoWay}"
-											  Margin="0,2">
-										<TextBlock Text="近代化改修 MAX の艦娘を表示しない" />
-									</CheckBox>
-								</WrapPanel>
-							</Grid>
+							<StackPanel>
+								<Grid DataContext="{Binding ShipLevelFilter}">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="FilterName" />
+										<ColumnDefinition Width="10" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<TextBlock Margin="0,2"
+											   HorizontalAlignment="Right">
+										<Run Text="レベル" />
+										<Run Text=":" />
+									</TextBlock>
+									<WrapPanel Grid.Column="2">
+										<RadioButton Content="すべて"
+													 IsChecked="{Binding Both, Mode=TwoWay}" />
+										<RadioButton Content="Lv.2 以上"
+													 IsChecked="{Binding Level2OrMore, Mode=TwoWay}" />
+										<RadioButton Content="Lv.1"
+													 IsChecked="{Binding Level1, Mode=TwoWay}" />
+									</WrapPanel>
+								</Grid>
 
-						</StackPanel>
+								<Grid DataContext="{Binding ShipLockFilter}">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="FilterName" />
+										<ColumnDefinition Width="10" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<TextBlock Margin="0,2"
+											   HorizontalAlignment="Right">
+										<Run Text="ロック" />
+										<Run Text=":" />
+									</TextBlock>
+									<WrapPanel Grid.Column="2">
+										<RadioButton Content="すべて"
+													 IsChecked="{Binding Both, Mode=TwoWay}" />
+										<RadioButton Content="ロックしている"
+													 IsChecked="{Binding Locked, Mode=TwoWay}" />
+										<RadioButton Content="ロックしていない"
+													 IsChecked="{Binding Unlocked, Mode=TwoWay}" />
+									</WrapPanel>
+								</Grid>
+
+								<Grid DataContext="{Binding ShipExpeditionFilter}">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="FilterName" />
+										<ColumnDefinition Width="10" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<TextBlock Margin="0,2"
+											   HorizontalAlignment="Right">
+										<Run Text="遠征" />
+										<Run Text=":" />
+									</TextBlock>
+									<WrapPanel Grid.Column="2">
+										<CheckBox Content="遠征中の艦を除外する"
+												  IsChecked="{Binding WithoutExpedition, Mode=TwoWay}" />
+									</WrapPanel>
+								</Grid>
+							</StackPanel>
+
+							<StackPanel>
+								<Grid DataContext="{Binding ShipSpeedFilter}">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="FilterName" />
+										<ColumnDefinition Width="10" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<TextBlock Margin="0,2"
+											   HorizontalAlignment="Right">
+										<Run Text="速力" />
+										<Run Text=":" />
+									</TextBlock>
+									<WrapPanel Grid.Column="2">
+										<RadioButton Content="すべて"
+													 IsChecked="{Binding Both, Mode=TwoWay}" />
+										<RadioButton Content="高速"
+													 IsChecked="{Binding Fast, Mode=TwoWay}" />
+										<RadioButton Content="低速"
+													 IsChecked="{Binding Low, Mode=TwoWay}" />
+									</WrapPanel>
+								</Grid>
+
+								<Grid DataContext="{Binding ShipRemodelingFilter}">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="FilterName" />
+										<ColumnDefinition Width="10" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<TextBlock Margin="0,2"
+											   HorizontalAlignment="Right">
+										<Run Text="改造" />
+										<Run Text=":" />
+									</TextBlock>
+									<WrapPanel Grid.Column="2">
+										<RadioButton Content="すべて"
+													 IsChecked="{Binding Both, Mode=TwoWay}" />
+										<RadioButton Content="改造完了"
+													 IsChecked="{Binding AlreadyRemodeling, Mode=TwoWay}" />
+										<RadioButton Content="改造未完"
+													 IsChecked="{Binding NotAlreadyRemodeling, Mode=TwoWay}" />
+									</WrapPanel>
+								</Grid>
+
+								<Grid DataContext="{Binding ShipModernizeFilter}">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="FilterName" />
+										<ColumnDefinition Width="10" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<TextBlock Margin="0,2"
+											   HorizontalAlignment="Right">
+										<Run Text="近代化改修" />
+										<Run Text=":" />
+									</TextBlock>
+									<WrapPanel Grid.Column="2">
+										<RadioButton Content="すべて"
+													 IsChecked="{Binding Both, Mode=TwoWay}" />
+										<RadioButton Content="改修完了"
+													 IsChecked="{Binding MaxModernized, Mode=TwoWay}" />
+										<RadioButton Content="改修未完"
+													 IsChecked="{Binding NotMaxModernized, Mode=TwoWay}" />
+									</WrapPanel>
+								</Grid>
+							</StackPanel>
+						</WrapPanel>
 					</Border>
+
+					<!--<Border BorderThickness="1"
+							BorderBrush="{DynamicResource BorderBrushKey}"
+							Margin="0,8,0,0"
+							Padding="5">
+						<WrapPanel DataContext="{Binding ShipSallyAreaFilter}">
+							<TextBlock Margin="0,2">
+								<Run Text="出撃海域" />
+								<Run Text=":" />
+							</TextBlock>
+
+							<CheckBox Content="作戦出撃なし"
+									  IsChecked="{Binding None}"
+									  Margin="10,0" />
+							<CheckBox Content="AL 作戦参加済み"
+									  IsChecked="{Binding Aleutian}"
+									  Margin="10,0" />
+							<CheckBox Content="MI 作戦参加済み"
+									  IsChecked="{Binding Midway}"
+									  Margin="10,0" />
+						</WrapPanel>
+					</Border>-->
 				</StackPanel>
 			</Expander>
 
-			<Border Grid.Row="1"
+			<Expander Grid.Row="1"
+					  DockPanel.Dock="Top"
+					  Margin="8,0"
+					  IsExpanded="{Binding IsOpenSortSettings, Mode=TwoWay}">
+				<Expander.Header>
+					<TextBlock Text="並べ替え設定"
+							   Style="{DynamicResource HeaderTextStyleKey}"
+							   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+				</Expander.Header>
+
+				<Border BorderThickness="1"
+						BorderBrush="{DynamicResource BorderBrushKey}"
+						Padding="5"
+						Margin="0,8,0,0">
+					<DockPanel LastChildFill="False">
+						<metro2:CallMethodButton DockPanel.Dock="Right"
+												 MethodName="Update"
+												 Content="更新"
+												 Margin="8,3,3,3"
+												 Padding="12,4" />
+
+						<metro2:CallMethodButton DockPanel.Dock="Right"
+												 MethodTarget="{Binding SortWorker}"
+												 MethodName="Clear"
+												 Content="クリア"
+												 Margin="8,3,0,3"
+												 Padding="12,4" />
+
+						<TextBlock DockPanel.Dock="Top"
+								   Text="艦娘を以下の順序で並べ替えます。"
+								   Style="{DynamicResource DefaultTextStyleKey}"
+								   Margin="3,2,0,8" />
+
+						<ItemsControl DockPanel.Dock="Left"
+									  ItemsSource="{Binding Selectors}"
+									  DataContext="{Binding SortWorker}"
+									  d:DataContext="{d:DesignData /SampleData/ShipCatalogSortWorkerSampleData.xaml}">
+							<ItemsControl.Template>
+								<ControlTemplate TargetType="{x:Type ItemsControl}">
+									<Border ClipToBounds="True">
+										<WrapPanel IsItemsHost="True"
+												   Margin="3,0,-40,0" />
+									</Border>
+								</ControlTemplate>
+							</ItemsControl.Template>
+							<ItemsControl.ItemTemplate>
+								<DataTemplate>
+									<DockPanel Margin="0,4">
+										<ed:RegularPolygon DockPanel.Dock="Right"
+														   PointCount="3"
+														   Fill="{DynamicResource BorderBrushKey}"
+														   Width="40"
+														   Height="20"
+														   RenderTransformOrigin="0.5,0.5">
+											<ed:RegularPolygon.RenderTransform>
+												<RotateTransform Angle="90" />
+											</ed:RegularPolygon.RenderTransform>
+										</ed:RegularPolygon>
+										<metro:PromptComboBox DockPanel.Dock="Bottom"
+															  ItemsSource="{Binding SelectableColumns}"
+															  SelectedItem="{Binding Current, Mode=TwoWay}"
+															  Prompt="並べ替え方法"
+															  Width="120"
+															  Margin="1,4,0,0">
+											<metro:PromptComboBox.ItemsPanel>
+												<ItemsPanelTemplate>
+													<StackPanel Margin="02" />
+												</ItemsPanelTemplate>
+											</metro:PromptComboBox.ItemsPanel>
+											<metro:PromptComboBox.ItemTemplate>
+												<DataTemplate>
+													<TextBlock Text="{Binding Name}"
+															   Margin="2" />
+												</DataTemplate>
+											</metro:PromptComboBox.ItemTemplate>
+										</metro:PromptComboBox>
+										<RadioButton DockPanel.Dock="Left"
+													 Content="昇順"
+													 IsChecked="{Binding IsAscending, Mode=TwoWay}" />
+										<RadioButton DockPanel.Dock="Left"
+													 Content="降順"
+													 IsChecked="{Binding IsDescending, Mode=OneWay}"
+													 Margin="12,0,0,0" />
+									</DockPanel>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+						</ItemsControl>
+					</DockPanel>
+				</Border>
+			</Expander>
+
+			<Border Grid.Row="2"
 					BorderBrush="{DynamicResource BorderBrushKey}"
 					BorderThickness="1"
-					Margin="8,0,8,8">
+					Margin="8">
 
 				<ListView ItemsSource="{Binding Ships}"
-						  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}">
+						  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}"
+						  ScrollViewer.PanningMode="Both">
 					<ListView.Resources>
 						<Style TargetType="{x:Type TextBlock}">
 							<Setter Property="Margin"
@@ -247,13 +549,25 @@
 					</ListView.Resources>
 					<ListView.View>
 						<GridView>
+							<GridViewColumn Width="35">
+								<GridViewColumn.Header>
+									<TextBlock Text="" />
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding Index}"
+												   Margin="0,3"
+												   Opacity="0.5"
+												   TextTrimming="None"
+												   TextWrapping="NoWrap" />
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+
 							<GridViewColumn Width="50">
 								<GridViewColumn.Header>
-									<metro2:SortButton Direction="{Binding SortWorker.IdColumn.Direction}"
-													   MethodName="Update">
-										<metro2:SortButton.MethodParameter>
-											<viewModels:ShipCatalogSortTarget>Id</viewModels:ShipCatalogSortTarget>
-										</metro2:SortButton.MethodParameter>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.IdColumn}">
 										<TextBlock Text="ID" />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
@@ -267,11 +581,8 @@
 
 							<GridViewColumn Width="90">
 								<GridViewColumn.Header>
-									<metro2:SortButton Direction="{Binding SortWorker.TypeColumn.Direction}"
-													   MethodName="Update">
-										<metro2:SortButton.MethodParameter>
-											<viewModels:ShipCatalogSortTarget>Type</viewModels:ShipCatalogSortTarget>
-										</metro2:SortButton.MethodParameter>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.StypeColumn}">
 										<TextBlock Text="艦種" />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
@@ -285,11 +596,8 @@
 
 							<GridViewColumn Width="100">
 								<GridViewColumn.Header>
-									<metro2:SortButton Direction="{Binding SortWorker.NameColumn.Direction}"
-													   MethodName="Update">
-										<metro2:SortButton.MethodParameter>
-											<viewModels:ShipCatalogSortTarget>Name</viewModels:ShipCatalogSortTarget>
-										</metro2:SortButton.MethodParameter>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.NameColumn}">
 										<TextBlock Text="艦名" />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
@@ -304,11 +612,8 @@
 
 							<GridViewColumn Width="110">
 								<GridViewColumn.Header>
-									<metro2:SortButton Direction="{Binding SortWorker.LevelColumn.Direction}"
-													   MethodName="Update">
-										<metro2:SortButton.MethodParameter>
-											<viewModels:ShipCatalogSortTarget>Level</viewModels:ShipCatalogSortTarget>
-										</metro2:SortButton.MethodParameter>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.LevelColumn}">
 										<TextBlock Text="レベル" />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
@@ -329,11 +634,8 @@
 
 							<GridViewColumn Width="50">
 								<GridViewColumn.Header>
-									<metro2:SortButton Direction="{Binding SortWorker.ConditionColumn.Direction}"
-													   MethodName="Update">
-										<metro2:SortButton.MethodParameter>
-											<viewModels:ShipCatalogSortTarget>Cond</viewModels:ShipCatalogSortTarget>
-										</metro2:SortButton.MethodParameter>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.CondColumn}">
 										<TextBlock Text="cond." />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
@@ -356,7 +658,10 @@
 
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
-									<TextBlock Text="火力" />
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.FirepowerColumn}">
+										<TextBlock Text="火力" />
+									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -370,7 +675,10 @@
 
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
-									<TextBlock Text="雷装" />
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.TorpedoColumn}">
+										<TextBlock Text="雷装" />
+									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -384,7 +692,10 @@
 
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
-									<TextBlock Text="対空" />
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.AAColumn}">
+										<TextBlock Text="対空" />
+									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -398,7 +709,10 @@
 
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
-									<TextBlock Text="装甲" />
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.ArmerColumn}">
+										<TextBlock Text="装甲" />
+									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -412,7 +726,10 @@
 
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
-									<TextBlock Text="運" />
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.LuckColumn}">
+										<TextBlock Text="運" />
+									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
@@ -424,13 +741,67 @@
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
 
+							<GridViewColumn Width="45">
+								<GridViewColumn.Header>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.ViewRangeColumn}">
+										<TextBlock Text="索敵"
+												   ToolTip="装備によるステータス上昇を含んだ値です" />
+									</metro2:SortButton>
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding Ship.ViewRange, Mode=OneWay}"
+												   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+												   Margin="0,3" />
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+
+							<!--<GridViewColumn Width="65">
+								<GridViewColumn.Header>
+									<TextBlock Text="出撃海域" />
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<Border x:Name="Border"
+												Margin="-2,0">
+											<TextBlock x:Name="Text"
+													   Text=""
+													   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+													   Margin="5,3" />
+										</Border>
+										<DataTemplate.Triggers>
+											<DataTrigger Binding="{Binding Ship.SallyArea}"
+														 Value="1">
+												<Setter TargetName="Text"
+														Property="Text"
+														Value="AL 作戦" />
+												<Setter TargetName="Border"
+														Property="Background"
+														Value="#FF204080" />
+											</DataTrigger>
+											<DataTrigger Binding="{Binding Ship.SallyArea}"
+														 Value="2">
+												<Setter TargetName="Text"
+														Property="Text"
+														Value="MI 作戦" />
+												<Setter TargetName="Border"
+														Property="Background"
+														Value="#FF804020" />
+											</DataTrigger>
+										</DataTemplate.Triggers>
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>-->
+
 							<GridViewColumn Width="110">
 								<GridViewColumn.Header>
 									<TextBlock Text="装備" />
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate DataType="{x:Type contentsVm:ShipViewModel}">
-										<ItemsControl ItemsSource="{Binding Ship.SlotItems}">
+										<ItemsControl ItemsSource="{Binding Ship.EquippedSlots}">
 											<ItemsControl.Template>
 												<ControlTemplate TargetType="{x:Type ItemsControl}">
 													<StackPanel IsItemsHost="True"
@@ -439,12 +810,12 @@
 											</ItemsControl.Template>
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
-													<Border ToolTip="{Binding Info.Name}"
+													<Border ToolTip="{Binding Item.NameWithLevel}"
 															Background="Transparent"
 															Height="20"
 															Padding="0,1">
 														<Viewbox>
-															<controls:SlotItemIcon Type="{Binding Info.IconType}"
+															<controls:SlotItemIcon Type="{Binding Item.Info.IconType}"
 																				   Margin="0,0,4,0" />
 														</Viewbox>
 													</Border>
@@ -459,20 +830,18 @@
 				</ListView>
 			</Border>
 
-			<Border Grid.Row="1"
+			<Border Grid.Row="2"
 					Background="{DynamicResource ThemeBrushKey}"
 					BorderBrush="{DynamicResource BorderBrushKey}"
 					BorderThickness="1"
 					Opacity="0.75"
-					Margin="8,0,8,8"
+					Margin="8"
 					Padding="20"
-					Visibility="{Binding IsReloading, Converter={StaticResource BooleanToVisibilityConverter}}"
-					d:IsHidden="True">
-				<TextBlock Text="表示を更新しています..."
+					Visibility="{Binding IsReloading, Converter={StaticResource BooleanToVisibilityConverter}}">
+				<TextBlock Text="一覧を生成しています..."
+						   Style="{DynamicResource EmphaticTextStyleKey}"
 						   FontSize="16"
-						   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 						   Background="{DynamicResource ThemeBrushKey}"
-						   TextWrapping="Wrap"
 						   HorizontalAlignment="Center" />
 			</Border>
 		</Grid>

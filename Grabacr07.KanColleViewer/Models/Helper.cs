@@ -5,6 +5,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Grabacr07.KanColleViewer.Win32;
@@ -20,6 +22,21 @@ namespace Grabacr07.KanColleViewer.Models
 			IsWindows8OrGreater = (version.Major == 6 && version.Minor >= 2) || version.Major > 6;
 		}
 
+
+		/// <summary>
+		/// Windows 8 またはそれ以降のバージョンで動作しているかどうかを確認します。
+		/// </summary>
+		public static bool IsWindows8OrGreater { get; private set; }
+
+		/// <summary>
+		/// デザイナーのコンテキストで実行されているかどうかを取得します。
+		/// </summary>
+		public static bool IsInDesignMode
+		{
+			get { return DesignerProperties.GetIsInDesignMode(new DependencyObject()); }
+		}
+
+
 		public static string CreateScreenshotFilePath()
 		{
 			var filePath = Path.Combine(
@@ -33,20 +50,6 @@ namespace Grabacr07.KanColleViewer.Models
 					: ".png");
 
 			return filePath;
-		}
-
-
-		/// <summary>
-		/// Windows 8 またはそれ以降のバージョンで動作しているかどうかを確認します。
-		/// </summary>
-		public static bool IsWindows8OrGreater { get; private set; }
-
-		/// <summary>
-		/// デザイナーのコンテキストで実行されているかどうかを取得します。
-		/// </summary>
-		public static bool IsInDesignMode
-		{
-			get { return DesignerProperties.GetIsInDesignMode(new DependencyObject()); }
 		}
 
 
@@ -70,6 +73,12 @@ namespace Grabacr07.KanColleViewer.Models
 			{
 				Debug.WriteLine(ex);
 			}
+		}
+
+		public static void SetMMCSSTask()
+		{
+			var index = 0u;
+			NativeMethods.AvSetMmThreadCharacteristics("Games", ref index);
 		}
 
 
@@ -137,6 +146,73 @@ namespace Grabacr07.KanColleViewer.Models
 			Marshal.FreeHGlobal(cacheEntryInfoBuffer);
 
 			return true;
+		}
+
+
+		/// <summary>
+		/// 指定した文字列を暗号化します。
+		/// </summary>
+		/// <param name="source">暗号化する文字列。</param>
+		/// <param name="password">暗号化に使用するパスワード。</param>
+		/// <returns>暗号化された文字列。</returns>
+		public static string EncryptString(string source, string password)
+		{
+			using (var rijndael = new RijndaelManaged())
+			{
+				byte[] key, iv;
+				GenerateKeyFromPassword(password, rijndael.KeySize, out key, rijndael.BlockSize, out iv);
+				rijndael.Key = key;
+				rijndael.IV = iv;
+
+				using (var encryptor = rijndael.CreateEncryptor())
+				{
+					var strBytes = Encoding.UTF8.GetBytes(source);
+					var encBytes = encryptor.TransformFinalBlock(strBytes, 0, strBytes.Length);
+					return Convert.ToBase64String(encBytes);
+				}
+			}
+		}
+
+		/// <summary>
+		/// 指定された文字列を複合化します。
+		/// </summary>
+		/// <param name="source">暗号化された文字列。</param>
+		/// <param name="password">暗号化に使用したパスワード。</param>
+		/// <returns>復号化された文字列。</returns>
+		public static string DecryptString(string source, string password)
+		{
+			try
+			{
+				using (var rijndael = new RijndaelManaged())
+				{
+					byte[] key, iv;
+					GenerateKeyFromPassword(password, rijndael.KeySize, out key, rijndael.BlockSize, out iv);
+					rijndael.Key = key;
+					rijndael.IV = iv;
+
+					using (var decryptor = rijndael.CreateDecryptor())
+					{
+						var strBytes = Convert.FromBase64String(source);
+						var decBytes = decryptor.TransformFinalBlock(strBytes, 0, strBytes.Length);
+						return Encoding.UTF8.GetString(decBytes);
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex);
+				return null;
+			}
+		}
+
+		private static void GenerateKeyFromPassword(string password, int keySize, out byte[] key, int blockSize, out byte[] iv)
+		{
+			var salt = Encoding.UTF8.GetBytes("C98534F6-7286-4BED-83A6-10FD5052ABA6");
+			using (var deriveBytes = new Rfc2898DeriveBytes(password, salt) { IterationCount = 1000 })
+			{
+				key = deriveBytes.GetBytes(keySize / 8);
+				iv = deriveBytes.GetBytes(blockSize / 8);
+			}
 		}
 	}
 }

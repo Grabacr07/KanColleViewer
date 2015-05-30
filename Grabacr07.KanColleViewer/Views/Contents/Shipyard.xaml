@@ -1,0 +1,454 @@
+﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Contents.Shipyard"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
+			 mc:Ignorable="d"
+			 d:DesignWidth="650"
+			 d:DesignHeight="400"
+			 d:DataContext="{d:DesignInstance viewModels:ShipyardViewModel}">
+	<UserControl.Resources>
+		<Style TargetType="{x:Type GroupBox}">
+			<Setter Property="OverridesDefaultStyle"
+					Value="True" />
+			<Setter Property="BorderThickness"
+					Value="1" />
+			<Setter Property="BorderBrush"
+					Value="{DynamicResource BorderBrushKey}" />
+			<Setter Property="Background"
+					Value="{DynamicResource BorderBrushKey}" />
+			<Setter Property="TextOptions.TextFormattingMode"
+					Value="Display" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type GroupBox}">
+						<Border BorderThickness="{TemplateBinding BorderThickness}"
+								BorderBrush="{TemplateBinding BorderBrush}">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition />
+								</Grid.ColumnDefinitions>
+
+								<Border Background="{TemplateBinding Background}">
+									<ContentPresenter Content="{TemplateBinding Header}"
+													  ContentTemplate="{TemplateBinding HeaderTemplate}"
+													  ContentStringFormat="{TemplateBinding HeaderStringFormat}"
+													  SnapsToDevicePixels="True">
+										<ContentPresenter.LayoutTransform>
+											<RotateTransform Angle="-90" />
+										</ContentPresenter.LayoutTransform>
+									</ContentPresenter>
+								</Border>
+
+								<ContentPresenter Grid.Column="1"
+												  Content="{TemplateBinding Content}"
+												  ContentTemplate="{TemplateBinding ContentTemplate}"
+												  ContentStringFormat="{TemplateBinding ContentStringFormat}"
+												  Margin="{TemplateBinding Padding}" />
+							</Grid>
+						</Border>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+
+			<Setter Property="HeaderTemplate">
+				<Setter.Value>
+					<DataTemplate>
+						<Border Margin="9,5">
+							<TextBlock Text="{Binding}"
+									   FontSize="{DynamicResource EmphaticFontSizeKey}"
+									   Foreground="{DynamicResource ForegroundBrushKey}"
+									   HorizontalAlignment="Center" />
+						</Border>
+					</DataTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</UserControl.Resources>
+
+	<ScrollViewer VerticalScrollBarVisibility="Auto"
+				  PanningMode="Both"
+				  Grid.IsSharedSizeScope="True">
+		<StackPanel VerticalAlignment="Top"
+					d:DataContext="{d:DesignData /SampleData/ShipyardViewModelSampleData.xaml}">
+			<GroupBox Header="入渠"
+					  Margin="10,0">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+
+					<StackPanel>
+						<Border Background="{DynamicResource BorderBrushKey}"
+								Padding="8,6">
+							<Grid>
+								<Grid.Resources>
+									<Style TargetType="{x:Type TextBlock}"
+										   BasedOn="{StaticResource HeaderTextStyleKey}">
+										<Setter Property="Margin"
+												Value="8,0,16,0" />
+									</Style>
+								</Grid.Resources>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto"
+													  SharedSizeGroup="Number" />
+									<ColumnDefinition Width="Auto"
+													  SharedSizeGroup="ShipName" />
+									<ColumnDefinition Width="Auto"
+													  SharedSizeGroup="CompleteTime" />
+									<ColumnDefinition Width="Auto"
+													  SharedSizeGroup="RemainingTime" />
+								</Grid.ColumnDefinitions>
+
+								<TextBlock Grid.Row="0"
+										   Grid.Column="1"
+										   Text="{Binding Resources.Repairyard_ShipName, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+								<TextBlock Grid.Row="0"
+										   Grid.Column="2"
+										   Text="{Binding Resources.Repairyard_TimeComplete, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+								<TextBlock Grid.Row="0"
+										   Grid.Column="3"
+										   Text="{Binding Resources.Repairyard_TimeRemaining, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+							</Grid>
+						</Border>
+
+						<ItemsControl ItemsSource="{Binding RepairingDocks}">
+							<ItemsControl.ItemTemplate>
+								<DataTemplate>
+									<DataTemplate.Resources>
+										<Style TargetType="{x:Type TextBlock}"
+											   BasedOn="{StaticResource DefaultTextStyleKey}">
+											<Setter Property="Margin"
+													Value="8,2,16,0" />
+										</Style>
+									</DataTemplate.Resources>
+									<Border BorderThickness="0,1,0,0"
+											BorderBrush="{DynamicResource ActiveBorderBrushKey}"
+											Padding="8,6">
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="Auto"
+																  SharedSizeGroup="Number" />
+												<ColumnDefinition Width="Auto"
+																  SharedSizeGroup="ShipName" />
+												<ColumnDefinition Width="Auto"
+																  SharedSizeGroup="CompleteTime" />
+												<ColumnDefinition Width="Auto"
+																  SharedSizeGroup="RemainingTime" />
+											</Grid.ColumnDefinitions>
+
+											<TextBlock Text="{Binding Id, Mode=OneWay}" />
+											<TextBlock x:Name="ShipName"
+													   Grid.Column="1"
+													   Text="{Binding Ship, Mode=OneWay}"
+													   Style="{DynamicResource EmphaticTextStyleKey}"
+													   Margin="8,0" />
+											<TextBlock x:Name="CompleteTime"
+													   Grid.Column="2"
+													   Text="{Binding CompleteTime, Mode=OneWay}" />
+											<TextBlock x:Name="RemainingTime"
+													   Grid.Column="3"
+													   Text="{Binding Remaining, Mode=OneWay}" />
+
+											<TextBlock x:Name="Message"
+													   Grid.Column="1"
+													   Grid.ColumnSpan="3"
+													   Text="{Binding Resources.Reparyard_Unused, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+													   Style="{DynamicResource EmphaticTextStyleKey}"
+													   Foreground="{DynamicResource ForegroundBrushKey}"
+													   HorizontalAlignment="Center"
+													   Visibility="Collapsed" />
+										</Grid>
+									</Border>
+									<DataTemplate.Triggers>
+										<DataTrigger Binding="{Binding State, Mode=OneWay}"
+													 Value="Locked">
+											<Setter TargetName="Message"
+													Property="Visibility"
+													Value="Visible" />
+											<Setter TargetName="Message"
+													Property="Text"
+													Value="{Binding Resources.Repairyard_Locked, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+											<Setter TargetName="Message"
+													Property="Foreground"
+													Value="{DynamicResource InactiveForegroundBrushKey}" />
+											<Setter TargetName="ShipName"
+													Property="Visibility"
+													Value="Hidden" />
+											<Setter TargetName="CompleteTime"
+													Property="Visibility"
+													Value="Hidden" />
+											<Setter TargetName="RemainingTime"
+													Property="Visibility"
+													Value="Hidden" />
+										</DataTrigger>
+										<DataTrigger Binding="{Binding State, Mode=OneWay}"
+													 Value="Unlocked">
+											<Setter TargetName="Message"
+													Property="Visibility"
+													Value="Visible" />
+											<Setter TargetName="ShipName"
+													Property="Visibility"
+													Value="Hidden" />
+											<Setter TargetName="CompleteTime"
+													Property="Visibility"
+													Value="Hidden" />
+											<Setter TargetName="RemainingTime"
+													Property="Visibility"
+													Value="Hidden" />
+										</DataTrigger>
+									</DataTemplate.Triggers>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+						</ItemsControl>
+					</StackPanel>
+				</Grid>
+			</GroupBox>
+
+			<GroupBox Header="建造"
+					  Margin="10">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+
+					<StackPanel>
+						<Border Background="{DynamicResource BorderBrushKey}"
+								Padding="8,6">
+							<Grid>
+								<Grid.Resources>
+									<Style TargetType="{x:Type TextBlock}"
+										   BasedOn="{StaticResource HeaderTextStyleKey}">
+										<Setter Property="Margin"
+												Value="8,0,16,0" />
+									</Style>
+								</Grid.Resources>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto"
+													  SharedSizeGroup="Number" />
+									<ColumnDefinition Width="Auto"
+													  SharedSizeGroup="ShipName" />
+									<ColumnDefinition Width="Auto"
+													  SharedSizeGroup="CompleteTime" />
+									<ColumnDefinition Width="Auto"
+													  SharedSizeGroup="RemainingTime" />
+								</Grid.ColumnDefinitions>
+
+								<TextBlock Grid.Row="0"
+										   Grid.Column="1"
+										   Text="{Binding Resources.Dockyard_ShipName, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+								<TextBlock Grid.Row="0"
+										   Grid.Column="2"
+										   Text="{Binding Resources.Dockyard_TimeComplete, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+								<TextBlock Grid.Row="0"
+										   Grid.Column="3"
+										   Text="{Binding Resources.Dockyard_TimeRemaining, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+							</Grid>
+						</Border>
+
+						<ItemsControl ItemsSource="{Binding BuildingDocks}">
+							<ItemsControl.ItemTemplate>
+								<DataTemplate>
+									<DataTemplate.Resources>
+										<Style TargetType="{x:Type TextBlock}"
+											   BasedOn="{StaticResource DefaultTextStyleKey}">
+											<Setter Property="Margin"
+													Value="8,2,16,0" />
+										</Style>
+									</DataTemplate.Resources>
+									<Border BorderThickness="0,1,0,0"
+											BorderBrush="{DynamicResource ActiveBorderBrushKey}"
+											Padding="8,6">
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="Auto"
+																  SharedSizeGroup="Number" />
+												<ColumnDefinition Width="Auto"
+																  SharedSizeGroup="ShipName" />
+												<ColumnDefinition Width="Auto"
+																  SharedSizeGroup="CompleteTime" />
+												<ColumnDefinition Width="Auto"
+																  SharedSizeGroup="RemainingTime" />
+											</Grid.ColumnDefinitions>
+
+											<TextBlock Text="{Binding Id, Mode=OneWay}" />
+											<TextBlock x:Name="ShipName"
+													   Grid.Column="1"
+													   Text="{Binding Ship, Mode=OneWay}"
+													   Style="{DynamicResource EmphaticTextStyleKey}"
+													   Margin="8,0" />
+											<TextBlock x:Name="CompleteTime"
+													   Grid.Column="2"
+													   Text="{Binding CompleteTime, Mode=OneWay}" />
+											<TextBlock x:Name="RemainingTime"
+													   Grid.Column="3"
+													   Text="{Binding Remaining, Mode=OneWay}" />
+
+											<TextBlock x:Name="Message"
+													   Grid.Column="2"
+													   Grid.ColumnSpan="2"
+													   Text="{Binding Resources.Dockyard_Unused, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+													   Style="{DynamicResource EmphaticTextStyleKey}"
+													   Foreground="{DynamicResource ForegroundBrushKey}"
+													   HorizontalAlignment="Center"
+													   Visibility="Hidden" />
+										</Grid>
+									</Border>
+									<DataTemplate.Triggers>
+										<DataTrigger Binding="{Binding Source={x:Static models:Settings.Current}, Path=CanDisplayBuildingShipName}"
+													 Value="False">
+											<Setter TargetName="ShipName"
+													Property="Text"
+													Value="?????" />
+										</DataTrigger>
+										<DataTrigger Binding="{Binding State, Mode=OneWay}"
+													 Value="Locked">
+											<Setter TargetName="Message"
+													Property="Visibility"
+													Value="Visible" />
+											<Setter TargetName="Message"
+													Property="Text"
+													Value="{Binding Resources.Dockyard_Locked, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+											<Setter TargetName="Message"
+													Property="Foreground"
+													Value="{DynamicResource InactiveForegroundBrushKey}" />
+											<Setter TargetName="ShipName"
+													Property="Visibility"
+													Value="Hidden" />
+											<Setter TargetName="CompleteTime"
+													Property="Visibility"
+													Value="Hidden" />
+											<Setter TargetName="RemainingTime"
+													Property="Visibility"
+													Value="Hidden" />
+										</DataTrigger>
+										<DataTrigger Binding="{Binding State, Mode=OneWay}"
+													 Value="Unlocked">
+											<Setter TargetName="Message"
+													Property="Visibility"
+													Value="Visible" />
+											<Setter TargetName="ShipName"
+													Property="Visibility"
+													Value="Hidden" />
+											<Setter TargetName="CompleteTime"
+													Property="Visibility"
+													Value="Hidden" />
+											<Setter TargetName="RemainingTime"
+													Property="Visibility"
+													Value="Hidden" />
+										</DataTrigger>
+										<DataTrigger Binding="{Binding State, Mode=OneWay}"
+													 Value="Completed">
+											<Setter TargetName="Message"
+													Property="Visibility"
+													Value="Visible" />
+											<Setter TargetName="Message"
+													Property="Text"
+													Value="{Binding Resources.Dockyard_Complete, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+											<Setter TargetName="CompleteTime"
+													Property="Visibility"
+													Value="Hidden" />
+											<Setter TargetName="RemainingTime"
+													Property="Visibility"
+													Value="Hidden" />
+										</DataTrigger>
+									</DataTemplate.Triggers>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+						</ItemsControl>
+					</StackPanel>
+
+					<Border Grid.Column="1"
+							BorderBrush="{DynamicResource BorderBrushKey}"
+							BorderThickness="1,1,0,0">
+						<DockPanel>
+							<StackPanel DockPanel.Dock="Bottom"
+										Margin="10,6">
+								<TextBlock Text="{Binding Resources.Dockyard_Display_Title, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+										   Style="{DynamicResource HeaderTextStyleKey}" />
+								<CheckBox Margin="8,6"
+										  Content="{Binding Resources.Dockyard_Display_Reveal, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+										  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=CanDisplayBuildingShipName, Mode=TwoWay}" />
+							</StackPanel>
+
+							<StackPanel>
+								<Border Background="{DynamicResource BorderBrushKey}"
+										Padding="8,6">
+									<TextBlock Text="装備開発"
+											   Style="{DynamicResource HeaderTextStyleKey}" />
+								</Border>
+								<DockPanel HorizontalAlignment="Left"
+										   Margin="8,0">
+									<TextBlock Padding="4,2"
+											   Margin="0,2,0,0">
+										<TextBlock.Style>
+											<Style TargetType="{x:Type TextBlock}"
+												   BasedOn="{StaticResource DefaultTextStyleKey}">
+												<Setter Property="Text"
+														Value="成功" />
+												<Setter Property="Foreground"
+														Value="{DynamicResource AccentForegroundBrushKey}" />
+												<Setter Property="Background"
+														Value="{DynamicResource AccentBrushKey}" />
+												<Style.Triggers>
+													<DataTrigger Binding="{Binding CreatedSlotItem.Succeed}"
+																 Value="False">
+														<Setter Property="Text"
+																Value="失敗" />
+														<Setter Property="Foreground"
+																Value="{DynamicResource ForegroundBrushKey}" />
+														<Setter Property="Background"
+																Value="{DynamicResource BackgroundBrushKey}" />
+													</DataTrigger>
+													<DataTrigger Binding="{Binding CreatedSlotItem.Succeed}"
+																 Value="{x:Null}">
+														<Setter Property="Text"
+																Value="結果なし" />
+														<Setter Property="Foreground"
+																Value="{DynamicResource ForegroundBrushKey}" />
+														<Setter Property="Background"
+																Value="{DynamicResource BackgroundBrushKey}" />
+													</DataTrigger>
+												</Style.Triggers>
+											</Style>
+										</TextBlock.Style>
+									</TextBlock>
+									<Border Width="4" />
+									<TextBlock Margin="0,6"
+											   Text="{Binding CreatedSlotItem.Name}">
+										<TextBlock.Style>
+											<Style TargetType="{x:Type TextBlock}"
+												   BasedOn="{StaticResource EmphaticTextStyleKey}">
+												<Style.Triggers>
+													<DataTrigger Binding="{Binding CreatedSlotItem.Succeed}"
+																 Value="False">
+														<Setter Property="Opacity"
+																Value="0.5" />
+													</DataTrigger>
+													<DataTrigger Binding="{Binding CreatedSlotItem.Succeed}"
+																 Value="{x:Null}">
+														<Setter Property="Opacity"
+																Value="0.5" />
+													</DataTrigger>
+												</Style.Triggers>
+											</Style>
+										</TextBlock.Style>
+									</TextBlock>
+								</DockPanel>
+							</StackPanel>
+						</DockPanel>
+					</Border>
+				</Grid>
+			</GroupBox>
+		</StackPanel>
+	</ScrollViewer>
+</UserControl>

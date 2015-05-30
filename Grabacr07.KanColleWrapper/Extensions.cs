@@ -1,24 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
-using Grabacr07.KanColleWrapper.Models;
 
 namespace Grabacr07.KanColleWrapper
 {
 	public static class Extensions
 	{
-		/// <summary>
-		/// 現在の艦隊に所属している艦娘を取得します。
-		/// </summary>
-		/// <param name="fleet"></param>
-		/// <returns></returns>
-		public static IEnumerable<Ship> GetShips(this Fleet fleet)
-		{
-			return fleet.Ships.Where(x => x != null);
-		}
-
 		/// <summary>
 		/// コレクションを展開し、メンバーの文字列表現を指定した区切り文字で連結した文字列を返します。
 		/// </summary>
@@ -34,7 +23,7 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// シーケンスが null でなく、1 つ以上の要素を含んでいるかどうかを確認します。
 		/// </summary>
-		public static bool HasValue<T>(this IEnumerable<T> source)
+		public static bool HasItems<T>(this IEnumerable<T> source)
 		{
 			return source != null && source.Any();
 		}

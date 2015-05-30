@@ -1,0 +1,144 @@
+﻿<UserControl x:Name="ZoomController"
+			 x:FieldModifier="private"
+			 x:Class="Grabacr07.KanColleViewer.Views.Controls.ZoomFactorSelector"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
+			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
+			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
+			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 mc:Ignorable="d"
+			 d:DesignHeight="26"
+			 UseLayoutRounding="True">
+	<DockPanel>
+		<ToggleButton x:Name="PopupButton"
+					  x:FieldModifier="private"
+					  Width="Auto">
+			<DockPanel Height="26">
+				<Path Data="M7.3925781,4.0149746 C6.4876299,4.0149746 5.6363926,4.1875019 4.8388672,4.5325527 C4.0413408,4.8776054 3.3447266,5.3463554 2.7490234,5.9388027 C2.1533203,6.531251 1.6845703,7.2262383 1.3427734,8.0237637 C1.0009766,8.821291 0.83007813,9.6725273 0.83007795,10.577475 C0.83007813,11.475912 1.0009766,12.323895 1.3427734,13.12142 C1.6845703,13.918946 2.1533203,14.617188 2.7490234,15.216146 C3.3447266,15.815105 4.0413408,16.285482 4.8388672,16.627279 C5.6363926,16.969076 6.4876299,17.139975 7.3925781,17.139975 C8.2910156,17.139975 9.1389971,16.969076 9.9365234,16.627279 C10.734049,16.285482 11.429036,15.815105 12.021484,15.216146 C12.613932,14.617188 13.08431,13.918946 13.432617,13.12142 C13.780924,12.323895 13.955078,11.475912 13.955078,10.577475 C13.955078,9.6725273 13.780924,8.821291 13.432617,8.0237637 C13.08431,7.2262383 12.613932,6.531251 12.021484,5.9388027 C11.429036,5.3463554 10.734049,4.8776054 9.9365234,4.5325527 C9.1389971,4.1875019 8.2910156,4.0149746 7.3925781,4.0149746 z M7.3925781,1.8274744 C8.5644531,1.8274746 9.6826172,2.0472012 10.74707,2.4866545 C11.811523,2.9261074 12.757161,3.5625019 13.583984,4.395834 C14.410807,5.2226582 15.043944,6.16504 15.483398,7.2229824 C15.922851,8.2809258 16.142578,9.3990898 16.142578,10.577475 C16.142578,11.423829 16.025391,12.240887 15.791016,13.028646 C15.55664,13.816407 15.221354,14.56185 14.785156,15.264975 L15.908203,16.114584 C15.953775,16.101563 15.992838,16.09017 16.025391,16.080404 C16.057941,16.070639 16.090494,16.065756 16.123047,16.065756 C16.168619,16.059246 16.214191,16.05599 16.259766,16.05599 C16.305338,16.05599 16.35091,16.05599 16.396484,16.05599 C16.624348,16.05599 16.848957,16.09017 17.070313,16.158529 C17.291666,16.226889 17.486979,16.326172 17.65625,16.456381 L23.505859,20.909506 C23.681641,21.039715 23.836262,21.207357 23.969727,21.412436 C24.103188,21.617514 24.199217,21.827475 24.257813,22.042318 C24.296873,22.179037 24.316404,22.325521 24.316406,22.481771 C24.316404,22.865887 24.205727,23.197918 23.984375,23.477865 C23.723957,23.822918 23.365885,24.034506 22.910156,24.112631 C22.871094,24.119141 22.833658,24.122396 22.797852,24.122396 C22.762043,24.122396 22.724609,24.122396 22.685547,24.122396 C22.451172,24.122396 22.22168,24.08659 21.99707,24.014975 C21.772461,23.943359 21.56901,23.839193 21.386719,23.702475 L15.537109,19.239584 C15.354816,19.102865 15.198566,18.931967 15.068359,18.726889 C14.93815,18.521811 14.84375,18.302084 14.785156,18.067709 C14.765625,17.996094 14.752604,17.927734 14.746094,17.862631 C14.739582,17.797527 14.736327,17.729168 14.736328,17.657553 L13.574219,16.768881 C12.740885,17.595703 11.795247,18.230469 10.737305,18.673178 C9.6793613,19.115887 8.5644531,19.33724 7.3925781,19.33724 C6.2141924,19.33724 5.0944009,19.115887 4.0332031,18.673178 C2.9720054,18.230469 2.0279946,17.595703 1.201172,16.768881 C0.36783853,15.935548 -0.27018231,14.988282 -0.71289051,13.927084 C-1.1555989,12.865887 -1.3769531,11.74935 -1.3769531,10.577475 C-1.3769531,9.3990898 -1.1555989,8.2809258 -0.71289051,7.2229824 C-0.27018231,6.16504 0.36783853,5.2226582 1.201172,4.395834 C2.0279946,3.5625019 2.9720054,2.9261074 4.0332031,2.4866545 C5.0944009,2.0472012 6.2141924,1.8274746 7.3925781,1.8274744 z"
+					  Fill="{DynamicResource ForegroundBrushKey}"
+					  Stretch="Fill"
+					  Width="20"
+					  Height="18" />
+				<TextBlock FontSize="8"
+						   FontFamily="Segoe UI"
+						   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+						   VerticalAlignment="Top"
+						   Margin="-2,0,0,0">
+					<Run Text="{Binding ElementName=ZoomController, Path=ZoomFactor.CurrentParcentage}"
+						 FontSize="15" />
+					<Run Text="%"
+						 FontSize="12" />
+				</TextBlock>
+			</DockPanel>
+			<ToggleButton.Template>
+				<ControlTemplate TargetType="{x:Type ToggleButton}">
+					<Border Background="Transparent">
+						<ContentPresenter Margin="8,0,10,0" />
+					</Border>
+				</ControlTemplate>
+			</ToggleButton.Template>
+		</ToggleButton>
+
+		<Popup x:Name="Popup"
+			   x:FieldModifier="private"
+			   Placement="Custom"
+			   PlacementTarget="{Binding ElementName=PopupButton}"
+			   PlacementRectangle="-9,20,0,0"
+			   IsOpen="{Binding ElementName=PopupButton, Path=IsChecked}"
+			   StaysOpen="False"
+			   PopupAnimation="Fade"
+			   AllowsTransparency="True">
+			<Border Background="Transparent">
+				<Grid Margin="9">
+					<Rectangle Stroke="{DynamicResource AccentBrushKey}"
+							   StrokeThickness="3">
+						<Rectangle.Effect>
+							<BlurEffect Radius="8" />
+						</Rectangle.Effect>
+					</Rectangle>
+					<Border Background="{DynamicResource ThemeBrushKey}"
+							BorderBrush="{DynamicResource AccentBrushKey}"
+							BorderThickness="1">
+						<StackPanel Margin="8">
+							<TextBlock Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.ZoomFactorSelector}" />
+							<Rectangle Height="1"
+									   Fill="{DynamicResource InactiveForegroundBrushKey}"
+									   Margin="0,8" />
+							<ListBox x:Name="SupportedList"
+									 x:FieldModifier="private">
+								<ListBox.Template>
+									<ControlTemplate TargetType="{x:Type ListBox}">
+										<StackPanel IsItemsHost="True" />
+									</ControlTemplate>
+								</ListBox.Template>
+								<ListBox.ItemContainerStyle>
+									<Style TargetType="{x:Type ListBoxItem}">
+										<Setter Property="IsSelected"
+												Value="{Binding IsSelected, Mode=TwoWay}" />
+										<Setter Property="Template">
+											<Setter.Value>
+												<ControlTemplate TargetType="{x:Type ListBoxItem}">
+													<StackPanel>
+														<metro2:CallMethodButton x:Name="Button"
+																				 MethodName="Select"
+																				 Margin="0,2"
+																				 Background="Transparent">
+															<Button.Template>
+																<ControlTemplate TargetType="{x:Type metro2:CallMethodButton}">
+																	<Border Background="{TemplateBinding Background}">
+																		<ContentPresenter />
+																	</Border>
+																</ControlTemplate>
+															</Button.Template>
+															<TextBlock FontSize="14"
+																	   FontFamily="Segoe UI"
+																	   Margin="5">
+																<Run Text="{Binding Value, StringFormat={}{0} %, Mode=OneWay}"
+																	 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+																<Run FontSize="12">
+																	<Run.Text>
+																		<MultiBinding StringFormat="  ({0} x {1})">
+																			<Binding Path="ScreenSize.Width" />
+																			<Binding Path="ScreenSize.Height" />
+																		</MultiBinding>
+																	</Run.Text>
+																</Run>
+															</TextBlock>
+														</metro2:CallMethodButton>
+													</StackPanel>
+													<ControlTemplate.Triggers>
+														<Trigger Property="IsMouseOver"
+																 Value="True">
+															<Setter TargetName="Button"
+																	Property="Background"
+																	Value="{DynamicResource ActiveBackgroundBrushKey}" />
+														</Trigger>
+														<Trigger Property="IsSelected"
+																 Value="True">
+															<Setter TargetName="Button"
+																	Property="Background"
+																	Value="{DynamicResource AccentBrushKey}" />
+														</Trigger>
+													</ControlTemplate.Triggers>
+												</ControlTemplate>
+											</Setter.Value>
+										</Setter>
+									</Style>
+								</ListBox.ItemContainerStyle>
+							</ListBox>
+						</StackPanel>
+					</Border>
+				</Grid>
+			</Border>
+		</Popup>
+	</DockPanel>
+</UserControl>

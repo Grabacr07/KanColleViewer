@@ -1,0 +1,145 @@
+﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Settings.Notification"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
+			 xmlns:controls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
+			 mc:Ignorable="d"
+			 d:DesignWidth="550"
+			 d:DataContext="{d:DesignInstance viewModels:SettingsViewModel}">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="Common.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+
+	<StackPanel>
+		<TextBlock Text="通知設定"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+
+		<StackPanel Margin="20,-5,0,10">
+			<CheckBox Content="建造完了時に通知する"
+					  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=NotifyBuildingCompleted}"
+					  Margin="0,5" />
+
+			<Border Height="1"
+					Background="{DynamicResource ActiveBorderBrushKey}"
+					Margin="0,5" />
+
+			<DockPanel>
+				<StackPanel VerticalAlignment="Center">
+					<CheckBox Content="遠征帰投時に通知する"
+							  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=NotifyExpeditionReturned}"
+							  Margin="0,5" />
+
+					<CheckBox Content="入渠完了時に通知する"
+							  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=NotifyRepairingCompleted}"
+							  Margin="0,5" />
+				</StackPanel>
+
+				<Border Width="1"
+						Background="{DynamicResource ActiveBorderBrushKey}"
+						Margin="12,5,12,4" />
+
+				<StackPanel Orientation="Horizontal"
+							VerticalAlignment="Center">
+					<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}">
+						<Run Text="通知を早める" />
+						<Run Text=":" />
+					</TextBlock>
+					<metro:PromptTextBox Margin="4,0"
+										 Prompt=""
+										 Width="35">
+						<metro:PromptTextBox.Text>
+							<Binding Source="{x:Static models:Settings.Current}"
+									 Path="KanColleClientSettings.NotificationShorteningTime"
+									 UpdateSourceTrigger="PropertyChanged">
+								<Binding.ValidationRules>
+									<metro:Int32Rule Min="0" />
+								</Binding.ValidationRules>
+							</Binding>
+						</metro:PromptTextBox.Text>
+					</metro:PromptTextBox>
+					<TextBlock Text="秒"
+							   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+				</StackPanel>
+
+				<Border Margin="8" />
+
+				<TextBlock Text="艦これ本体の仕様により、最大 1 分間短縮できます。サーバー時刻とのずれを加味し、40 ～ 50 秒に設定することを推奨します。"
+						   Style="{DynamicResource DetailTextStyleKey}" />
+			</DockPanel>
+
+			<Border Height="1"
+					Background="{DynamicResource ActiveBorderBrushKey}"
+					Margin="0,5" />
+
+			<CheckBox Content="艦隊に編成されている艦娘の疲労が回復したら通知する"
+					  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=NotifyFleetRejuvenated}"
+					  Margin="0,5" />
+
+			<StackPanel Margin="20,0,0,0">
+				<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}"
+						   Margin="0,3,0,1">
+					<Run Text="再出撃可能とするコンディション値" />
+					<Run Text=":" />
+					<Run Text="{Binding Source={x:Static models:Settings.Current}, Path=KanColleClientSettings.ReSortieCondition}" />
+				</TextBlock>
+				<TextBlock Text="※[動作設定] > [出撃コンディション] から設定できます。"
+						   Style="{DynamicResource DetailTextStyleKey}"
+						   FontSize="10.5"
+						   Margin="0,0,0,8" />
+				<TextBlock Text="艦隊に編成されているすべて艦娘のコンディション値が上記の値以上になったときに通知されます。コンディション値は 3 分間で 3 ずつ回復しますが、KanColleViewer 実装の仕様により、通知タイミングは数秒 ～ 最大 3 分程度遅れる可能性があること予めご了承ください。"
+						   Style="{DynamicResource DetailTextStyleKey}" />
+			</StackPanel>
+		</StackPanel>
+
+		<Rectangle Height="1"
+				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+		<TextBlock Text="通知プラグイン"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
+				   Margin="0,10,0,8" />
+
+		<StackPanel Margin="20,0,0,0">
+			<TextBlock Text="以下のプラグインを使用して通知されます。"
+					   Style="{DynamicResource DetailTextStyleKey}"
+					   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+
+			<ItemsControl ItemsSource="{Binding NotifierPlugins}"
+						  Margin="0,5">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<Border BorderThickness="1"
+								BorderBrush="{DynamicResource BorderBrushKey}"
+								Margin="0,5"
+								Padding="5">
+							<DockPanel>
+								<TextBlock DockPanel.Dock="Bottom"
+										   Text="{Binding ErrorMessage}"
+										   HorizontalAlignment="Right"
+										   Visibility="{Binding ErrorMessage, Converter={StaticResource StringToVisiblityConverter}}" />
+								<controls:CallMethodButton DockPanel.Dock="Right"
+														   Content="テスト"
+														   MethodName="Test"
+														   Padding="8,6"
+														   Margin="5,0,0,0"
+														   VerticalAlignment="Center" />
+								<settings:PluginInfo />
+							</DockPanel>
+						</Border>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</StackPanel>
+	</StackPanel>
+</UserControl>

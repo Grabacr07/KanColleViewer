@@ -10,7 +10,7 @@ namespace Grabacr07.KanColleWrapper.Models
 	/// <summary>
 	/// 入渠ドックを表します。
 	/// </summary>
-	public class RepairingDock : TimerNotificator, IIdentifiable
+	public class RepairingDock : TimerNotifier, IIdentifiable
 	{
 		private readonly Homeport homeport;
 		private bool notificated;
@@ -77,19 +77,24 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#region Ship 変更通知プロパティ
 
-		private Ship _Ship;
+		private Ship target;
 
 		/// <summary>
 		/// 入渠中の艦娘の情報を取得します。
 		/// </summary>
 		public Ship Ship
 		{
-			get { return this._Ship; }
+			get { return this.target; }
 			private set
 			{
-				if (this._Ship != value)
+				if (this.target != value)
 				{
-					this._Ship = value;
+					var oldShip = this.target;
+					var newShip = value;
+					if (oldShip != null) oldShip.Situation &= ~ShipSituation.Repair;
+					if (newShip != null) newShip.Situation |= ShipSituation.Repair;
+
+					this.target = value;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -147,22 +152,33 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public event EventHandler<RepairingCompletedEventArgs> Completed;
 
+
 		internal RepairingDock(Homeport parent, kcsapi_ndock rawData)
 		{
 			this.homeport = parent;
 			this.Update(rawData);
 		}
 
+
 		internal void Update(kcsapi_ndock rawData)
 		{
 			this.Id = rawData.api_id;
 			this.State = (RepairingDockState)rawData.api_state;
 			this.ShipId = rawData.api_ship_id;
-			this.Ship = this.State == RepairingDockState.Repairing ? this.homeport.Ships[this.ShipId] : null;
+			this.Ship = this.State == RepairingDockState.Repairing ? this.homeport.Organization.Ships[this.ShipId] : null;
 			this.CompleteTime = this.State == RepairingDockState.Repairing
 				? (DateTimeOffset?)Definitions.UnixEpoch.AddMilliseconds(rawData.api_complete_time)
 				: null;
 		}
+
+		internal void Finish()
+		{
+			this.State = RepairingDockState.Unlocked;
+			this.ShipId = -1;
+			this.Ship = null;
+			this.CompleteTime = null;
+		}
+
 
 		protected override void Tick()
 		{
@@ -170,14 +186,16 @@ namespace Grabacr07.KanColleWrapper.Models
 
 			if (this.CompleteTime.HasValue)
 			{
-				var remaining = this.CompleteTime.Value - TimeSpan.FromMinutes(1.0) - DateTimeOffset.Now;
+				var remaining = this.CompleteTime.Value - DateTimeOffset.Now;
 				if (remaining.Ticks < 0) remaining = TimeSpan.Zero;
 
 				this.Remaining = remaining;
 
-				if (!this.notificated && this.Completed != null && remaining.Ticks <= 0)
+				if (!this.notificated
+					&& this.Completed != null
+					&& remaining <= TimeSpan.FromSeconds(KanColleClient.Current.Settings.NotificationShorteningTime))
 				{
-					this.Completed(this, new RepairingCompletedEventArgs(this.Id));
+					this.Completed(this, new RepairingCompletedEventArgs(this.Id, this.Ship));
 					this.notificated = true;
 				}
 			}

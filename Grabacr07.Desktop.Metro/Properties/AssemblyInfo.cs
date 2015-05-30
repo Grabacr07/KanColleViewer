@@ -12,7 +12,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("grabacr.net")]
 [assembly: AssemblyProduct("Grabacr07.Desktop.Metro")]
-[assembly: AssemblyCopyright("Copyright © 2013 Grabacr07")]
+[assembly: AssemblyCopyright("Copyright c 2013 Grabacr07")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

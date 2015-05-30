@@ -6,6 +6,7 @@ using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleWrapper;
 using Livet;
 using Livet.EventListeners;
+using Livet.Messaging;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 {
@@ -50,6 +51,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			{
 				if (this._SelectedFleet != value)
 				{
+					if (this._SelectedFleet != null) this.SelectedFleet.IsSelected = false;
+					if (value != null) value.IsSelected = true;
 					this._SelectedFleet = value;
 					this.RaisePropertyChanged();
 				}
@@ -58,47 +61,27 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 		#endregion
 
-		#region IsNotifyReturned 変更通知プロパティ
-
-		/// <summary>
-		/// 遠征帰投時にトースト通知を表示するかどうかを示す値を取得します。
-		/// </summary>
-		public bool IsNotifyReturned
-		{
-			get { return Settings.Current.NotifyExpeditionReturned; }
-			set
-			{
-				if (Settings.Current.NotifyExpeditionReturned != value)
-				{
-					Settings.Current.NotifyExpeditionReturned = value;
-					this.Fleets.ForEach(x => x.Expedition.IsNotifyReturned = value);
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		public bool IsSupportedNotification
-		{
-			get { return Helper.IsWindows8OrGreater; }
-		}
-
-
 		public FleetsViewModel()
 		{
-			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport)
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport.Organization)
 			{
 				{ "Fleets", (sender, args) => this.UpdateFleets() },
 			});
 			this.UpdateFleets();
 		}
 
+		public void ShowFleetWindow()
+		{
+			var fleetwd = new FleetWindowViewModel();
+			var message = new TransitionMessage(fleetwd, "Show/FleetWindow");
+			this.Messenger.RaiseAsync(message);
+		}
+
+
 		private void UpdateFleets()
 		{
-			this.Fleets = KanColleClient.Current.Homeport.Fleets.Select(kvp => new FleetViewModel(kvp.Value)).ToArray();
+			this.Fleets = KanColleClient.Current.Homeport.Organization.Fleets.Select(kvp => new FleetViewModel(kvp.Value)).ToArray();
 			this.SelectedFleet = this.Fleets.FirstOrDefault();
-			this.Fleets.ForEach(x => x.Expedition.IsNotifyReturned = this.IsNotifyReturned);
 		}
 	}
 }

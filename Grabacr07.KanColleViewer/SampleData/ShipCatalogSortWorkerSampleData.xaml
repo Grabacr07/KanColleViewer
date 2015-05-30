@@ -1,0 +1,202 @@
+﻿<Catalogs:ShipCatalogSortWorker xmlns:Catalogs="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Catalogs" xmlns:Livet="clr-namespace:Livet;assembly=Livet" xmlns:Messaging="clr-namespace:Livet.Messaging;assembly=Livet">
+	<Catalogs:ShipCatalogSortWorker.CompositeDisposable>
+		<Livet:LivetCompositeDisposable Count="87" IsReadOnly="True"/>
+	</Catalogs:ShipCatalogSortWorker.CompositeDisposable>
+	<Catalogs:ShipCatalogSortWorker.Columns>
+		<Catalogs:SortableColumn Name="Aliquam maecenas integer"/>
+		<Catalogs:SortableColumn Name="Praesent accumsan curabitur nam vestibulum"/>
+		<Catalogs:SortableColumn Name="Aenean adipiscing class parturient"/>
+		<Catalogs:SortableColumn Name="Mauris cras sed vestibulum nullam"/>
+		<Catalogs:SortableColumn Name="Aptent auctor dis bibendum dictumst"/>
+		<Catalogs:SortableColumn Name="Duis eleifend phasellus quisque"/>
+		<Catalogs:SortableColumn Name="Facilisi faucibus nunc amet consequat"/>
+		<Catalogs:SortableColumn Name="Convallis dignissim ante"/>
+		<Catalogs:SortableColumn Name="Vestibulum elementum arcu congue"/>
+		<Catalogs:SortableColumn Name="Diam est habitant eget hac"/>
+	</Catalogs:ShipCatalogSortWorker.Columns>
+	<Catalogs:ShipCatalogSortWorker.Messenger>
+		<Messaging:InteractionMessenger/>
+	</Catalogs:ShipCatalogSortWorker.Messenger>
+	<Catalogs:ShipCatalogSortWorker.Selectors>
+		<Catalogs:SortableColumnSelector IsAscending="True">
+			<Catalogs:SortableColumnSelector.Current>
+				<Catalogs:SortableColumn Name="Adipiscing facilisis elit enim vivamus"/>
+			</Catalogs:SortableColumnSelector.Current>
+			<Catalogs:SortableColumnSelector.CompositeDisposable>
+				<Livet:LivetCompositeDisposable Count="48" IsReadOnly="False"/>
+			</Catalogs:SortableColumnSelector.CompositeDisposable>
+			<Catalogs:SortableColumnSelector.Messenger>
+				<Messaging:InteractionMessenger/>
+			</Catalogs:SortableColumnSelector.Messenger>
+			<Catalogs:SortableColumnSelector.SelectableColumns>
+				<Catalogs:SortableColumn Name="Curae inceptos"/>
+				<Catalogs:SortableColumn Name="Cursus aliquam erat"/>
+				<Catalogs:SortableColumn Name="Aliquet interdum"/>
+				<Catalogs:SortableColumn Name="Fermentum dictum fringilla"/>
+				<Catalogs:SortableColumn Name="Habitasse leo"/>
+			</Catalogs:SortableColumnSelector.SelectableColumns>
+		</Catalogs:SortableColumnSelector>
+		<Catalogs:SortableColumnSelector IsAscending="True">
+			<Catalogs:SortableColumnSelector.Current>
+				<Catalogs:SortableColumn Name="Eros lectus hendrerit"/>
+			</Catalogs:SortableColumnSelector.Current>
+			<Catalogs:SortableColumnSelector.CompositeDisposable>
+				<Livet:LivetCompositeDisposable Count="98" IsReadOnly="False"/>
+			</Catalogs:SortableColumnSelector.CompositeDisposable>
+			<Catalogs:SortableColumnSelector.Messenger>
+				<Messaging:InteractionMessenger/>
+			</Catalogs:SortableColumnSelector.Messenger>
+			<Catalogs:SortableColumnSelector.SelectableColumns>
+				<Catalogs:SortableColumn Name="Donec nibh blandit nisi"/>
+				<Catalogs:SortableColumn Name="Nisl nunc etiam himenaeos mus"/>
+				<Catalogs:SortableColumn Name="Odio fusce lorem"/>
+				<Catalogs:SortableColumn Name="Commodo lobortis"/>
+				<Catalogs:SortableColumn Name="Orci parturient nascetur libero nec"/>
+			</Catalogs:SortableColumnSelector.SelectableColumns>
+		</Catalogs:SortableColumnSelector>
+		<Catalogs:SortableColumnSelector IsAscending="True">
+			<Catalogs:SortableColumnSelector.Current>
+				<Catalogs:SortableColumn Name="Morbi ligula"/>
+			</Catalogs:SortableColumnSelector.Current>
+			<Catalogs:SortableColumnSelector.CompositeDisposable>
+				<Livet:LivetCompositeDisposable Count="67" IsReadOnly="False"/>
+			</Catalogs:SortableColumnSelector.CompositeDisposable>
+			<Catalogs:SortableColumnSelector.Messenger>
+				<Messaging:InteractionMessenger/>
+			</Catalogs:SortableColumnSelector.Messenger>
+			<Catalogs:SortableColumnSelector.SelectableColumns>
+				<Catalogs:SortableColumn Name="Pharetra pede placerat"/>
+				<Catalogs:SortableColumn Name="Nulla litora non proin augue"/>
+				<Catalogs:SortableColumn Name="Conubia per vestibulum"/>
+				<Catalogs:SortableColumn Name="Dolor fames imperdiet malesuada"/>
+				<Catalogs:SortableColumn Name="Quam sed"/>
+			</Catalogs:SortableColumnSelector.SelectableColumns>
+		</Catalogs:SortableColumnSelector>
+		<Catalogs:SortableColumnSelector IsAscending="True">
+			<Catalogs:SortableColumnSelector.Current>
+				<Catalogs:SortableColumn Name="Vestibulum felis sem adipiscing"/>
+			</Catalogs:SortableColumnSelector.Current>
+			<Catalogs:SortableColumnSelector.CompositeDisposable>
+				<Livet:LivetCompositeDisposable Count="97" IsReadOnly="False"/>
+			</Catalogs:SortableColumnSelector.CompositeDisposable>
+			<Catalogs:SortableColumnSelector.Messenger>
+				<Messaging:InteractionMessenger/>
+			</Catalogs:SortableColumnSelector.Messenger>
+			<Catalogs:SortableColumnSelector.SelectableColumns>
+				<Catalogs:SortableColumn Name="Luctus magnis penatibus"/>
+				<Catalogs:SortableColumn Name="Quis urna cras duis parturient"/>
+				<Catalogs:SortableColumn Name="Nunc pulvinar sit vel ipsum"/>
+				<Catalogs:SortableColumn Name="Cubilia vestibulum"/>
+				<Catalogs:SortableColumn Name="Vestibulum porttitor"/>
+			</Catalogs:SortableColumnSelector.SelectableColumns>
+		</Catalogs:SortableColumnSelector>
+		<Catalogs:SortableColumnSelector IsAscending="True">
+			<Catalogs:SortableColumnSelector.Current>
+				<Catalogs:SortableColumn Name="Sagittis nam adipiscing mattis mauris"/>
+			</Catalogs:SortableColumnSelector.Current>
+			<Catalogs:SortableColumnSelector.CompositeDisposable>
+				<Livet:LivetCompositeDisposable Count="89" IsReadOnly="False"/>
+			</Catalogs:SortableColumnSelector.CompositeDisposable>
+			<Catalogs:SortableColumnSelector.Messenger>
+				<Messaging:InteractionMessenger/>
+			</Catalogs:SortableColumnSelector.Messenger>
+			<Catalogs:SortableColumnSelector.SelectableColumns>
+				<Catalogs:SortableColumn Name="Amet mollis sed"/>
+				<Catalogs:SortableColumn Name="Justo parturient montes"/>
+				<Catalogs:SortableColumn Name="Senectus sociosqu"/>
+				<Catalogs:SortableColumn Name="Nostra suscipit lacus dapibus"/>
+				<Catalogs:SortableColumn Name="Lorem tincidunt tristique"/>
+			</Catalogs:SortableColumnSelector.SelectableColumns>
+		</Catalogs:SortableColumnSelector>
+		<Catalogs:SortableColumnSelector IsAscending="True">
+			<Catalogs:SortableColumnSelector.Current>
+				<Catalogs:SortableColumn Name="Ante magna"/>
+			</Catalogs:SortableColumnSelector.Current>
+			<Catalogs:SortableColumnSelector.CompositeDisposable>
+				<Livet:LivetCompositeDisposable Count="76" IsReadOnly="False"/>
+			</Catalogs:SortableColumnSelector.CompositeDisposable>
+			<Catalogs:SortableColumnSelector.Messenger>
+				<Messaging:InteractionMessenger/>
+			</Catalogs:SortableColumnSelector.Messenger>
+			<Catalogs:SortableColumnSelector.SelectableColumns>
+				<Catalogs:SortableColumn Name="Vestibulum dis massa ornare"/>
+				<Catalogs:SortableColumn Name="Platea vestibulum arcu adipiscing diam"/>
+				<Catalogs:SortableColumn Name="Ultricies metus eget"/>
+				<Catalogs:SortableColumn Name="Morbi neque"/>
+				<Catalogs:SortableColumn Name="Est primis parturient"/>
+			</Catalogs:SortableColumnSelector.SelectableColumns>
+		</Catalogs:SortableColumnSelector>
+		<Catalogs:SortableColumnSelector IsAscending="True">
+			<Catalogs:SortableColumnSelector.Current>
+				<Catalogs:SortableColumn Name="Elit rutrum hac vestibulum enim"/>
+			</Catalogs:SortableColumnSelector.Current>
+			<Catalogs:SortableColumnSelector.CompositeDisposable>
+				<Livet:LivetCompositeDisposable Count="81" IsReadOnly="False"/>
+			</Catalogs:SortableColumnSelector.CompositeDisposable>
+			<Catalogs:SortableColumnSelector.Messenger>
+				<Messaging:InteractionMessenger/>
+			</Catalogs:SortableColumnSelector.Messenger>
+			<Catalogs:SortableColumnSelector.SelectableColumns>
+				<Catalogs:SortableColumn Name="Torquent netus sapien erat"/>
+				<Catalogs:SortableColumn Name="Nulla venenatis"/>
+				<Catalogs:SortableColumn Name="Ultrices eros"/>
+				<Catalogs:SortableColumn Name="Nibh leo"/>
+				<Catalogs:SortableColumn Name="Egestas porta nisi vulputate nisl"/>
+			</Catalogs:SortableColumnSelector.SelectableColumns>
+		</Catalogs:SortableColumnSelector>
+		<Catalogs:SortableColumnSelector IsAscending="True">
+			<Catalogs:SortableColumnSelector.Current>
+				<Catalogs:SortableColumn Name="Mus curabitur euismod phasellus purus"/>
+			</Catalogs:SortableColumnSelector.Current>
+			<Catalogs:SortableColumnSelector.CompositeDisposable>
+				<Livet:LivetCompositeDisposable Count="38" IsReadOnly="False"/>
+			</Catalogs:SortableColumnSelector.CompositeDisposable>
+			<Catalogs:SortableColumnSelector.Messenger>
+				<Messaging:InteractionMessenger/>
+			</Catalogs:SortableColumnSelector.Messenger>
+			<Catalogs:SortableColumnSelector.SelectableColumns>
+				<Catalogs:SortableColumn Name="Vehicula volutpat risus semper nunc"/>
+				<Catalogs:SortableColumn Name="Sociis odio orci taciti"/>
+				<Catalogs:SortableColumn Name="Feugiat tellus nec tempor"/>
+				<Catalogs:SortableColumn Name="Maecenas velit vestibulum adipiscing pede"/>
+				<Catalogs:SortableColumn Name="Gravida tempus"/>
+			</Catalogs:SortableColumnSelector.SelectableColumns>
+		</Catalogs:SortableColumnSelector>
+		<Catalogs:SortableColumnSelector IsAscending="True">
+			<Catalogs:SortableColumnSelector.Current>
+				<Catalogs:SortableColumn Name="Quam non"/>
+			</Catalogs:SortableColumnSelector.Current>
+			<Catalogs:SortableColumnSelector.CompositeDisposable>
+				<Livet:LivetCompositeDisposable Count="60" IsReadOnly="False"/>
+			</Catalogs:SortableColumnSelector.CompositeDisposable>
+			<Catalogs:SortableColumnSelector.Messenger>
+				<Messaging:InteractionMessenger/>
+			</Catalogs:SortableColumnSelector.Messenger>
+			<Catalogs:SortableColumnSelector.SelectableColumns>
+				<Catalogs:SortableColumn Name="Iaculis quis praesent parturient"/>
+				<Catalogs:SortableColumn Name="Urna vitae"/>
+				<Catalogs:SortableColumn Name="Cras consequat tortor convallis"/>
+				<Catalogs:SortableColumn Name="Class accumsan lacinia per"/>
+				<Catalogs:SortableColumn Name="Vestibulum sed"/>
+			</Catalogs:SortableColumnSelector.SelectableColumns>
+		</Catalogs:SortableColumnSelector>
+		<Catalogs:SortableColumnSelector IsAscending="True">
+			<Catalogs:SortableColumnSelector.Current>
+				<Catalogs:SortableColumn Name="Vestibulum adipiscing bibendum laoreet dictumst"/>
+			</Catalogs:SortableColumnSelector.Current>
+			<Catalogs:SortableColumnSelector.CompositeDisposable>
+				<Livet:LivetCompositeDisposable Count="78" IsReadOnly="False"/>
+			</Catalogs:SortableColumnSelector.CompositeDisposable>
+			<Catalogs:SortableColumnSelector.Messenger>
+				<Messaging:InteractionMessenger/>
+			</Catalogs:SortableColumnSelector.Messenger>
+			<Catalogs:SortableColumnSelector.SelectableColumns>
+				<Catalogs:SortableColumn Name="Eleifend facilisi turpis parturient varius"/>
+				<Catalogs:SortableColumn Name="Aenean duis sem natoque vestibulum"/>
+				<Catalogs:SortableColumn Name="Mauris sit faucibus"/>
+				<Catalogs:SortableColumn Name="Vel nunc"/>
+				<Catalogs:SortableColumn Name="Dignissim curae donec vestibulum adipiscing"/>
+			</Catalogs:SortableColumnSelector.SelectableColumns>
+		</Catalogs:SortableColumnSelector>
+	</Catalogs:ShipCatalogSortWorker.Selectors>
+</Catalogs:ShipCatalogSortWorker>

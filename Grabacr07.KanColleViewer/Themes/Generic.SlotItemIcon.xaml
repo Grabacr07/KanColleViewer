@@ -398,7 +398,281 @@
 					</Setter.Value>
 				</Setter>
 			</Trigger>
+			<Trigger Property="Type"
+					 Value="AntiTorpedoBulge">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Data="M104.42984,-2.0858351 L0.052009951,120.35882 73.77914,191.14556 178.88225,60.239018 z"
+										  Fill="#FF9B80B0"
+										  Margin="8.068,-2.086,8.103,10"
+										  Stretch="Fill"
+										  HorizontalAlignment="Left"
+										  VerticalAlignment="Top" />
+									<Path Data="M10,121.02083 L11,134 81,195 181,83 181,66 80.362843,180.27867 z"
+										  Fill="#FF5E497C"
+										  Margin="8.068,60,0,0"
+										  Stretch="Fill"
+										  HorizontalAlignment="Left"
+										  VerticalAlignment="Top"
+										  Width="178.83"
+										  Height="141.145" />
+									<Ellipse Fill="#FF806F98"
+											 HorizontalAlignment="Left"
+											 Height="20"
+											 Margin="29.241,105.094,0,0"
+											 VerticalAlignment="Top"
+											 Width="20" />
+									<Ellipse Fill="#FF806F98"
+											 HorizontalAlignment="Left"
+											 Height="20"
+											 Margin="69.47,141.52,0,0"
+											 VerticalAlignment="Top"
+											 Width="20" />
+									<Ellipse Fill="#FF806F98"
+											 HorizontalAlignment="Left"
+											 Height="20"
+											 Margin="65.301,63.001,0,0"
+											 VerticalAlignment="Top"
+											 Width="20" />
+									<Ellipse Fill="#FF806F98"
+											 HorizontalAlignment="Left"
+											 Height="20"
+											 Margin="105.442,97.921,0,0"
+											 VerticalAlignment="Top"
+											 Width="20" />
+									<Ellipse Fill="#FF806F98"
+											 HorizontalAlignment="Left"
+											 Height="20"
+											 Margin="99.439,20.84,0,0"
+											 VerticalAlignment="Top"
+											 Width="20" />
+									<Ellipse Fill="#FF806F98"
+											 HorizontalAlignment="Left"
+											 Height="20"
+											 Margin="141.488,53.91,0,0"
+											 VerticalAlignment="Top"
+											 Width="20" />
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="Searchlight">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Data="M262,1125 L423,1125 399.33333,1101.3332 397.33333,1049.9996 391.18515,1077.2217 379.78187,1090.3435 303.66667,1090.0311 291.52357,1076.9093 286.66667,1050.9996 283.33333,1101.6667 z"
+										  Fill="#FFE66915"
+										  HorizontalAlignment="Left"
+										  Height="54.164"
+										  Stretch="Fill"
+										  VerticalAlignment="Top"
+										  Width="116.273"
+										  Margin="0,68.284,0,0" />
+									<Path Data="M341.99974,944.49997 C310.99937,944.08311 290.10749,963.87054 284.5,986.5 273.08307,988.39547 264.33296,995.99988 265.5,1007.5 265.99963,1016.9999 271.34626,1023.8371 284,1027.5 L286.5,1073 296.49958,1054.4999 314,1071 372.56573,1070.8997 387.03145,1053.7427 397.66659,1069.3333 401.6666,1024.9999 C414.10395,1022.2355 418.99999,1014.7499 420.74999,1006.4999 418.97769,995.82497 414.58082,990.43434 400.5,989 392.13335,962.68449 373.34676,944.9215 341.99974,944.49997 z"
+										  Fill="#FFE66915"
+										  HorizontalAlignment="Left"
+										  Height="92.806"
+										  Margin="1.927,-0.425,0,0"
+										  Stretch="Fill"
+										  VerticalAlignment="Top"
+										  Width="112.195" />
+									<Ellipse Fill="#FFF28D4A"
+											 HorizontalAlignment="Left"
+											 Height="72.22"
+											 Margin="21.573,9.27,0,0"
+											 VerticalAlignment="Top"
+											 Width="72.219" />
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="DrumCanister">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Ellipse Fill="#FFA2A2A2"
+											 HorizontalAlignment="Left"
+											 Height="70"
+											 VerticalAlignment="Top"
+											 Width="241.002" />
+									<Path Data="M686,1031 L686.01612,1107.5798 C714.90659,1147.3637 893.2341,1151.3216 926.84511,1107.3545 L926.91994,1030.6062 C898.90781,1071.3939 714.92213,1070.4292 686,1031 z"
+										  Fill="#FFA2A2A2"
+										  HorizontalAlignment="Left"
+										  Height="108.289"
+										  Margin="0,42.349,0,0"
+										  Stretch="Fill"
+										  VerticalAlignment="Top"
+										  Width="240.92" />
+									<Path Data="M686,1031 L686.01612,1107.5798 C714.90659,1147.3637 893.2341,1151.3216 926.84511,1107.3545 L926.91994,1030.6062 C898.90781,1071.3939 714.92213,1070.4292 686,1031 z"
+										  Fill="#FFA2A2A2"
+										  HorizontalAlignment="Left"
+										  Height="108.289"
+										  Margin="0,122.442,0,0"
+										  Stretch="Fill"
+										  VerticalAlignment="Top"
+										  Width="240.92" />
+									<Path Data="M686,1031 L686.01612,1138.8062 C714.90659,1178.5901 893.2341,1182.548 926.84511,1138.5809 L926.91994,1030.6062 C898.90781,1071.3939 714.92213,1070.4292 686,1031 z"
+										  Fill="#FFA2A2A2"
+										  HorizontalAlignment="Left"
+										  Height="139.517"
+										  Margin="0,203.535,0,0"
+										  Stretch="Fill"
+										  VerticalAlignment="Top"
+										  Width="240.92" />
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="Facility">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Path Stretch="Uniform"
+								  Data="M5.0829997,20.833 L2.3750007,24.708 7.7500005,24.708 z M8.5830002,20.376997 L6.0830002,20.417994 8.5413322,23.042999 z M1.5830001,20.376997 L1.5830001,23.292999 4.124999,20.376997 z M13.499248,17.375 L12.416,19.958 13.873999,18.541357 z M5.0829992,15.291 L2.3749993,19.165999 7.750001,19.165999 z M8.5830002,13.916998 L6.0830002,13.957995 8.5413322,16.583 z M1.5830001,13.916998 L1.5830001,16.833 4.1250014,13.916998 z M16.625063,8.9169999 L14.291999,15.208999 17.166998,12.792204 z M5.0829992,8.875001 L2.3749998,12.750001 7.7499986,12.750001 z M1.5830001,8.3779984 L1.5830001,11.294 4.124999,8.3779984 z M21.249998,6.0830012 L17.791002,7.2497478 18.290817,10.917002 z M1.5830005,4.5939995 L1.5830005,7.2189999 4.2389998,7.2189999 z M33.437164,2.5000008 L31.291,2.5629969 31.291,6.6879998 33.458,6.4585033 z M19.415787,1.7500009 L18.040998,5.9580007 21.790998,4.6667691 z M18.165998,1.2080001 L2.4999988,2.8333584 C5.7371287,5.6184545 8.2983799,8.9362393 10.124982,12.833032 L10.082999,22.542 11.124969,18.66688 z M27.250143,0.83300013 L24.75,3.5829998 29.166,0.87499536 z M20.874998,0.83300013 C20.916656,0.95801241 23.040838,4.1670013 23.040838,4.1670013 L25.291,0.83333362 z M19.166573,0 L33.083172,0.082999691 33.749832,1.5826823 33.749832,7.3328043 32.999836,7.8328148 32.999344,10.083333 C30.872313,11.76645 31.406874,12.028976 34.166,11.104166 34.124664,12.062499 33.411018,12.385218 32.603516,12.354166 31.681761,12.388634 30.999365,12.312499 30.811867,11.291666 30.832699,10.458334 31.220079,10.001381 32.166164,10.082862 L32.166164,8.9161711 30.999851,9.0828419 30.999851,2.6663724 23.166224,5.6667357 12.166433,23.583025 12.083102,25.999777 10.08314,28.082853 23.082893,28.082853 23.082893,32.166992 0.00033397818,32.25 0,1.833333 z"
+								  Fill="#FFB09D7F" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="Flare">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Data="F1 M 72.2026,167.702L 139.417,115.677L 135.434,113.378L 157.419,126.071M 66.8756,163.139L 83.6495,83.4816L 127.455,108.771M 53.7013,66.1893L 71.689,76.5751L 60.182,160.761M 179.297,129.645C 183.582,122.223 188.225,114.179 188.225,114.179C 195.325,101.885 221.402,56.7185 151.59,16.4122C 81.7758,-23.8941 55.6985,21.2728 48.6002,33.5663L 39.6705,49.032C 37.6083,52.6055 39.1912,57.809 39.1912,57.809L 53.2186,166.772C 53.9759,166.561 57.5348,167.401 62.6943,170.382C 67.6735,173.256 70.1095,175.83 70.3077,176.57L 171.915,134.44C 171.915,134.44 177.235,133.218 179.297,129.645 Z "
+										  VerticalAlignment="Top"
+										  HorizontalAlignment="Left"
+										  Margin="66.6108,0.0173542,0,0"
+										  Width="160.28"
+										  Height="176.552"
+										  Stretch="Uniform"
+										  Fill="#FFEE9103" />
+									<Ellipse Width="77.2229"
+											 Height="77.2229"
+											 VerticalAlignment="Top"
+											 HorizontalAlignment="Left"
+											 Margin="28.1272,172.698,0,0"
+											 Stretch="Uniform"
+											 Fill="#FFFABF61" />
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="FleetCommandFacility">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Path Stretch="Uniform"
+								  Data="M4096 5484l208 619 208 619 -416 0 -416 0 208 -619 208 -619zm161 1824l853 0 358 1236 -1212 -1236 1 0zm442 1184l602 619 -1204 0 -1204 0 602 -619 601 -619 602 619 -1 0zm-200 -3212l0 -985 2776 -913 0 -492 -2776 913 -240 0 0 -1182 -321 0 0 1182 -240 0 0 -1970 -413 0 -4 1833 -2358 -776 0 492 2776 913 0 985 -2283 6009 803 0 678 -1785 803 0 803 0 803 0 678 1785 803 0 -2283 -6009 -1 0zm-1415 2028l853 0 -1214 1239 361 -1239z
+										M3998,2498 5141,918 5571,1541 6652,-11 5490,2217 5044,1597 z"
+								  Margin="0,1"
+								  Fill="#FCCDADFD" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="MaintenancePersonnel">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Path Stretch="Uniform"
+								  Data="M1251.3259,705.00208 L1316,705.5 1341.8731,742.84374 1340.3806,805.58124 1412,889.5 1416.5,928.5 1406,940 1363.2662,940.01875 1304.5597,833.96249 1261.2761,828.48541 1244,808 1218.5,780.5 1216.5,744 1229.4353,742.84374 1264.2612,777.69791 1291.4585,774.37846 1287.4784,743.17569 1251.8234,721.43332 z"
+								  Margin="0,1"
+								  Fill="#FCCDA269" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="AntiAircraftFireDirector">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Path Stretch="Uniform"
+								  Data="M18.890488,5.4152549 C18.2614,5.4213253 17.936997,5.5811629 17.795093,5.8331037 L22.628472,7.9172845 22.545424,13.750334 C23.21209,15.073514 25.962092,14.838996 26.629073,13.416802 L26.712092,7.6672926 20.378298,5.5837178 C19.75508,5.4633275 19.267941,5.4116131 18.890488,5.4152549 z M28.984969,4.575242 C28.369148,4.5827351 27.974057,4.7531309 27.794973,5.0832955 L33.253632,6.5419576 33.295195,12.166824 C33.915099,13.072857 35.024482,12.760347 35.211973,12.000132 L35.19116,6.1044446 29.961982,4.6662903 C29.590411,4.6020872 29.264887,4.5718357 28.984969,4.575242 z M17.282517,0 L24.208774,0 24.208774,1.7469451 C32.367283,2.3409238 36.96226,3.870837 37.128924,5.9170108 L40.712224,5.8513823 C42.045317,8.2503235 41.961733,12.000331 40.545556,13.583654 L36.96226,13.750346 36.94971,21.221896 C31.878887,24.58351 13.295603,24.333726 7.1061115,21.833594 L7.0453682,17.833676 1.5478363,17.903846 C-0.28770638,16.666956 -0.70136452,11.598119 1.4652557,10.240911 L7.0800686,10.232404 7.1623363,4.6199932 C10.012257,3.1008912 13.604653,2.1359165 17.282517,1.9216337 z"
+								  Margin="0,1"
+								  Fill="#FF8A994E" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="RocketLauncher">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Path Stretch="Uniform"
+								  Data="M7.8867046,18.61471 C8.5989424,18.62252 9.4166514,18.76054 10.374989,19.114715 14.828849,22.164298 19.207946,24.781139 22.957073,29.114729 23.832819,31.447998 21.666555,34.989773 19.123968,34.739771 14.192105,33.09541 8.2916666,30.864314 4.0415908,28.448036 1.6249731,25.864704 2.4583022,24.323006 1.4582952,22.072989 L0,20.364663 1.2499322,18.73965 3.3750001,19.739658 C4.562513,19.73975 5.7499906,18.591281 7.8867046,18.61471 z M5.7807313,3.3917217 L7.5688726,4.9143534 C9.0966688,5.3300314 11.160351,3.7753582 14.487506,6.1484652 17.984884,10.259974 21.523719,13.934358 24.004152,19.099996 24.23685,21.581309 21.216987,24.430425 18.829141,23.521897 14.501714,20.64087 9.3936125,16.939441 5.9266363,13.492469 4.2727038,10.36545 5.4814106,9.0965042 5.1069847,6.66292 L4.148141,4.6317387 z M21.809534,0 L23.190763,1.8994904 C24.578483,2.6618414 26.94919,1.6344452 29.627084,4.7215919 32.062809,9.5385847 34.641334,13.940362 35.841278,19.543622 35.485626,22.010315 31.881855,24.071838 29.773637,22.628698 26.242466,18.813234 22.144771,14.017175 19.582771,9.8533192 18.708233,6.4256487 20.180803,5.4755239 20.387485,3.0219936 L19.931684,0.82260323 z"
+								  Margin="0,1"
+								  Fill="#FFFE3131" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="SurfaceShipPersonnel">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Width="33" 
+									      Height="25.972"
+									      HorizontalAlignment="Left" 
+									      VerticalAlignment="Top" 
+									      Margin="4.99996, 17.0089, 0, 0"
+									      Stretch="Uniform" 
+									      Fill="#FFBFDD9A"
+									      Data="M 30.5467,19.8049L 21.5,40.8689L 12.4533,19.8049C 11.8853,18.4823 12.856,17.0089 14.296,17.0089L 28.704,17.0089C 30.144,17.0089 31.1146,18.4823 30.5467,19.8049 Z M 37.9999,42.981L 4.99996,42.981L 4.99996,40.8703L 37.9999,40.8703L 37.9999,42.981 Z "/>
+									<Ellipse Width="15.4584" 
+									         Height="15.4584" 
+									         HorizontalAlignment="Left"
+									         VerticalAlignment="Top" 
+									         Margin="13.7707, 0.0191078, 0, 0" 
+									         Stretch="Uniform" 
+									         Fill="#FFBFDD9A"/>
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="FlyingBoat">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Path Stretch="Uniform"
+								  Data="M0,24.1c4.6,5.4,18.2-3.3,18.2-3.3l3.1,2.5c0,0-3.3,2.9-2.3,4s4.8-2,4.8-2l4.1,3.3c0,0-2.9,2.8-1.8,3.7c1.1,0.9,4.5-1.8,4.5-1.8s6.2,4.8,7.8,3.4c2.2-2.1-2.6-6.7-2.6-6.7L25.4,16l7.7-6.6c0,0,4.2,1.2,5.5,0.5C39.2,9.6,35,7,35,7S35,0.2,34.7,0c-1.5-0.6-3.1,4.3-3.1,4.3s-2.9-2.1-3.1-1.5c-0.5,1.9,1.2,4,1.2,4l-8.6,4.8c0,0-16.9-11.2-18.6-9.5S4.9,8,4.9,8s-1.9,1.3-1.5,2.4c0.4,1.1,3-0.9,3-0.9L9,12.1c0,0-2.8,2-2.1,3.1s3.8-1.3,3.8-1.3l2,1.6c0,0,0.4,0.2-0.5,0c-1.3-0.2-5.9,0.6-5.1,3.8C7.1,19.3,0.4,22.6,0,24.1z"
+								  Margin="0,1"
+								  Fill="#8CCD9B" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
 		</Style.Triggers>
 	</Style>
-	
+
 </ResourceDictionary>

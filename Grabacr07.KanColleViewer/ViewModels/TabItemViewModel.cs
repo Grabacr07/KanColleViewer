@@ -10,7 +10,7 @@ using Livet.EventListeners;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {
-	public abstract class TabItemViewModel : ViewModel, ITabItem
+	public abstract class TabItemViewModel : ItemViewModel, ITabItem
 	{
 		#region Name 変更通知プロパティ
 
@@ -43,25 +43,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-		#region IsSelected 変更通知プロパティ
-
-		private bool _IsSelected;
-
-		public virtual bool IsSelected
-		{
-			get { return this._IsSelected; }
-			set
-			{
-				if (this._IsSelected != value)
-				{
-					this._IsSelected = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
 		#region Status 変更通知プロパティ
 
 		private ViewModel _Status;
@@ -84,7 +65,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-		public TabItemViewModel()
+		protected TabItemViewModel()
 		{
 			if (Helper.IsInDesignMode) return;
 

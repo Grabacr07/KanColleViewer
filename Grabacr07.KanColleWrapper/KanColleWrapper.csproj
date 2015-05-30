@@ -40,10 +40,19 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release %28beta%29|AnyCPU'">
+    <OutputPath>bin\Release %28beta%29\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="FiddlerCore4, Version=4.4.5.3, Culture=neutral, PublicKeyToken=67cb91587178ac5a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>assemblies\FiddlerCore4.dll</HintPath>
+      <HintPath>..\assemblies\FiddlerCore4.dll</HintPath>
     </Reference>
     <Reference Include="Livet">
       <HintPath>..\packages\LivetCask.1.1.0.0\lib\net45\Livet.dll</HintPath>
@@ -58,20 +67,23 @@
     <Reference Include="System.Interactive">
       <HintPath>..\packages\Ix-Main.1.2.2\lib\net45\System.Interactive.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reactive.Core">
-      <HintPath>..\packages\Rx-Core.2.2.2\lib\net45\System.Reactive.Core.dll</HintPath>
+    <Reference Include="System.Reactive.Core, Version=2.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Rx-Core.2.2.4\lib\net45\System.Reactive.Core.dll</HintPath>
     </Reference>
     <Reference Include="System.Reactive.Interfaces">
-      <HintPath>..\packages\Rx-Interfaces.2.2.2\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+      <HintPath>..\packages\Rx-Interfaces.2.2.4\lib\net45\System.Reactive.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reactive.Linq">
-      <HintPath>..\packages\Rx-Linq.2.2.2\lib\net45\System.Reactive.Linq.dll</HintPath>
+    <Reference Include="System.Reactive.Linq, Version=2.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Rx-Linq.2.2.4\lib\net45\System.Reactive.Linq.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reactive.PlatformServices">
-      <HintPath>..\packages\Rx-PlatformServices.2.2.2\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+    <Reference Include="System.Reactive.PlatformServices, Version=2.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Rx-PlatformServices.2.2.4\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\LivetCask.1.1.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -85,22 +97,70 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calculator.cs" />
+    <Compile Include="Counter.cs" />
+    <Compile Include="DisposableNotifier.cs" />
     <Compile Include="Dockyard.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="MemberTable.cs" />
-    <Compile Include="Models\CanReSortieReason.cs" />
-    <Compile Include="Models\ExpeditionReturnedEventArgs.cs" />
-    <Compile Include="Models\FleetReSortie.cs" />
+    <Compile Include="Models\CombinedFleet.cs" />
+    <Compile Include="Models\FleetSpeed.cs" />
     <Compile Include="Models\FleetState.cs" />
+    <Compile Include="Models\MapArea.cs" />
+    <Compile Include="Models\MapInfo.cs" />
+    <Compile Include="Models\Mission.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Itemyard.cs" />
+    <Compile Include="IProxySettings.cs" />
+    <Compile Include="KanColleProxyExtensions.cs" />
+    <Compile Include="Models\ConditionRejuvenatedEventArgs.cs" />
+    <Compile Include="Models\CreatedSlotItem.cs" />
+    <Compile Include="Models\FleetCondition.cs" />
+    <Compile Include="Models\Raw\kcsapi_ship_deck.cs" />
+    <Compile Include="Models\Raw\kcsapi_mst_maparea.cs" />
+    <Compile Include="Models\Raw\kcsapi_mst_mapinfo.cs" />
+    <Compile Include="Models\Raw\kcsapi_remodel_slot.cs" />
+    <Compile Include="Models\Raw\kcsapi_hensei_combined.cs" />
+    <Compile Include="Models\Raw\kcsapi_combined_battle_battleresult.cs" />
+    <Compile Include="Models\Raw\kcsapi_combined_battle_airbattle.cs" />
+    <Compile Include="Models\Raw\kcsapi_combined_battle.cs" />
+    <Compile Include="Models\Raw\kcsapi_battle.cs" />
+    <Compile Include="Models\Raw\kcsapi_destroyitem2.cs" />
+    <Compile Include="Models\Raw\kcsapi_destroyship.cs" />
+    <Compile Include="Models\Raw\kcsapi_kdock_getship.cs" />
+    <Compile Include="Models\Raw\kcsapi_map_start.cs" />
+    <Compile Include="Models\Raw\kcsapi_mission.cs" />
+    <Compile Include="Models\Raw\kcsapi_mission_result.cs" />
+    <Compile Include="Models\Raw\kcsapi_powerup.cs" />
+    <Compile Include="Models\Raw\kcsapi_remodel_slotlist.cs" />
+    <Compile Include="Models\Raw\kcsapi_remodel_slotlist_detail.cs" />
+    <Compile Include="Models\ShipSituation.cs" />
+    <Compile Include="Models\ShipSlot.cs" />
+    <Compile Include="Models\SlotItemType.cs" />
+    <Compile Include="Models\ViewRange.cs" />
+    <Compile Include="Organization.cs" />
+    <Compile Include="KanColleProxy.Endpoints.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KanColleProxy.Endpoints.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Logger.cs" />
+    <Compile Include="MemberTable.cs" />
+    <Compile Include="Models\ExpeditionReturnedEventArgs.cs" />
+    <Compile Include="Models\FleetSituation.cs" />
     <Compile Include="Models\Quest.cs" />
     <Compile Include="Models\QuestCategory.cs" />
     <Compile Include="Models\QuestProgress.cs" />
     <Compile Include="Models\QuestState.cs" />
     <Compile Include="Models\QuestType.cs" />
+    <Compile Include="Models\Raw\kcsapi_charge.cs" />
+    <Compile Include="Models\Raw\kcsapi_battleresult.cs" />
+    <Compile Include="Models\Raw\kcsapi_createitem.cs" />
+    <Compile Include="Models\Raw\kcsapi_createship.cs" />
+    <Compile Include="Models\Raw\kcsapi_mst_slotitem_equiptype.cs" />
+    <Compile Include="Models\Raw\kcsapi_port.cs" />
     <Compile Include="Models\Raw\kcsapi_quest.cs" />
     <Compile Include="Models\Raw\kcsapi_questlist.cs" />
     <Compile Include="Models\Raw\kcsapi_ship3.cs" />
     <Compile Include="Models\Raw\kcsapi_slot_data.cs" />
+    <Compile Include="Models\Raw\kcsapi_start2.cs" />
     <Compile Include="Models\RepairingCompletedEventArgs.cs" />
     <Compile Include="Models\BuildingCompletedEventArgs.cs" />
     <Compile Include="Models\ConditionType.cs" />
@@ -110,20 +170,18 @@
     <Compile Include="Models\Experience.cs" />
     <Compile Include="Models\Fleet.cs" />
     <Compile Include="Models\IIdentifiable.cs" />
-    <Compile Include="Models\Material.cs" />
     <Compile Include="Materials.cs" />
     <Compile Include="Models\LimitedValue.cs" />
     <Compile Include="Models\Raw\kcsapi_kdock.cs" />
     <Compile Include="Models\Raw\kcsapi_material.cs" />
     <Compile Include="Models\Raw\kcsapi_ndock.cs" />
-    <Compile Include="Models\Raw\kcsapi_start.cs" />
-    <Compile Include="Models\Raw\kcsapi_stype.cs" />
+    <Compile Include="Models\Raw\kcsapi_mst_stype.cs" />
     <Compile Include="Models\RepairingDock.cs" />
     <Compile Include="Models\RepairingDockState.cs" />
     <Compile Include="Models\ShipType.cs" />
     <Compile Include="Models\ShipTypeId.cs" />
-    <Compile Include="Models\SlotItemType.cs" />
-    <Compile Include="Models\Speed.cs" />
+    <Compile Include="Models\SlotItemIconType.cs" />
+    <Compile Include="Models\ShipSpeed.cs" />
     <Compile Include="Models\ModernizableStatus.cs" />
     <Compile Include="Models\UseItemInfo.cs" />
     <Compile Include="Models\Raw\kcsapi_ship2.cs" />
@@ -135,11 +193,11 @@
     <Compile Include="Models\Rank.cs" />
     <Compile Include="Models\Raw\kcsapi_deck.cs" />
     <Compile Include="Models\Raw\kcsapi_ship.cs" />
-    <Compile Include="Models\Raw\kcsapi_master_ship.cs" />
+    <Compile Include="Models\Raw\kcsapi_mst_ship.cs" />
     <Compile Include="Models\Raw\kcsapi_slotitem.cs" />
-    <Compile Include="Models\Raw\kcsapi_master_slotitem.cs" />
+    <Compile Include="Models\Raw\kcsapi_mst_slotitem.cs" />
     <Compile Include="Models\Raw\kcsapi_useitem.cs" />
-    <Compile Include="Models\Raw\kcsapi_master_useitem.cs" />
+    <Compile Include="Models\Raw\kcsapi_mst_useitem.cs" />
     <Compile Include="Models\Ship.cs" />
     <Compile Include="Models\ShipInfo.cs" />
     <Compile Include="Models\SlotItem.cs" />
@@ -158,18 +216,22 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quests.cs" />
     <Compile Include="Repairyard.cs" />
-    <Compile Include="TimerNotificator.cs" />
+    <Compile Include="KanColleClientSettings.cs" />
+    <Compile Include="TimerNotifier.cs" />
     <Compile Include="Win32\INTERNET_PROXY_INFO.cs" />
     <Compile Include="Win32\NativeMethods.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+    <None Include="KanColleProxy.Endpoints.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>KanColleProxy.Endpoints.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="assemblies\FiddlerCore4.dll" />
-    <None Include="assemblies\FiddlerCore4.XML" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -3,8 +3,10 @@
 					xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro">
 
 	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="pack://application:,,,/KanColleViewer;component/Styles/Controls.HorizontalFlatListBox.xaml" />
 		<ResourceDictionary Source="pack://application:,,,/KanColleViewer;component/Styles/Controls.ListView.xaml" />
 		<ResourceDictionary Source="pack://application:,,,/KanColleViewer;component/Styles/Controls.PinButton.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/KanColleViewer;component/Styles/Controls.TabControl.xaml" />
 		<ResourceDictionary Source="pack://application:,,,/KanColleViewer;component/Styles/Controls.Text.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 

@@ -31,16 +31,16 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 		public SlotItemsViewModel()
 		{
-			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport)
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport.Itemyard)
 			{
-				{ "SlotItems", (sender, args) => this.Update() }
+				{ "SlotItemsCount", (sender, args) => this.Update() }
 			});
 			this.Update();
 		}
 
 		private void Update()
 		{
-			this.Count = KanColleClient.Current.Homeport.SlotItems.Count;
+			this.Count = KanColleClient.Current.Homeport.Itemyard.SlotItemsCount;
 		}
 	}
 }

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.ViewModels;
 using Grabacr07.KanColleViewer.Views;
@@ -36,17 +37,15 @@ namespace Grabacr07.KanColleViewer
 			ProductInfo = new ProductInfo();
 
 			Settings.Load();
-			WindowsNotification.Notifier.Initialize();
+			PluginHost.Instance.Initialize();
+			NotifierHost.Instance.Initialize(KanColleClient.Current);
 			Helper.SetRegistryFeatureBrowserEmulation();
+			Helper.SetMMCSSTask();
 
 			KanColleClient.Current.Proxy.Startup(AppSettings.Default.LocalProxyPort);
-			KanColleClient.Current.Proxy.UseProxyOnConnect = Settings.Current.EnableProxy;
-			KanColleClient.Current.Proxy.UseProxyOnSSLConnect = Settings.Current.EnableSSLProxy;
-			KanColleClient.Current.Proxy.UpstreamProxyHost = Settings.Current.ProxyHost;
-			KanColleClient.Current.Proxy.UpstreamProxyPort = Settings.Current.ProxyPort;
+			KanColleClient.Current.Proxy.UpstreamProxySettings = Settings.Current.ProxySettings;
 
 			ResourceService.Current.ChangeCulture(Settings.Current.Culture);
-
 			ThemeService.Current.Initialize(this, Theme.Dark, Accent.Purple);
 
 			ViewModelRoot = new MainWindowViewModel();
@@ -60,7 +59,7 @@ namespace Grabacr07.KanColleViewer
 
 			KanColleClient.Current.Proxy.Shutdown();
 
-			WindowsNotification.Notifier.Dispose();
+			PluginHost.Instance.Dispose();
 			Settings.Current.Save();
 		}
 

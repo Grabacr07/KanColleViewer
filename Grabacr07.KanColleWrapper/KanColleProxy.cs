@@ -12,7 +12,7 @@ using Livet;
 
 namespace Grabacr07.KanColleWrapper
 {
-	public class KanColleProxy
+	public partial class KanColleProxy
 	{
 		private readonly IConnectableObservable<Session> connectableSessionSource;
 		private readonly IConnectableObservable<Session> apiSource;
@@ -20,33 +20,15 @@ namespace Grabacr07.KanColleWrapper
 
 		public IObservable<Session> SessionSource
 		{
-			get { return this.connectableSessionSource.AsObservable(); }
+		    get { return this.connectableSessionSource.AsObservable(); }
 		}
 
-		public IObservable<Session> ApiSessionSource
-		{
-			get { return this.apiSource.AsObservable(); }
-		}
+	    public IObservable<Session> ApiSessionSource
+	    {
+	        get { return this.apiSource.AsObservable(); }
+	    }
 
-		/// <summary>
-		/// Fiddler からリクエストが送られる際に使用されるプロキシサーバーのホスト名を取得または設定します。
-		/// </summary>
-		public string UpstreamProxyHost { get; set; }
-
-		/// <summary>
-		/// Fiddler からリクエストが送られる際に使用されるプロキシサーバーのポート番号を取得または設定します。
-		/// </summary>
-		public ushort UpstreamProxyPort { get; set; }
-
-		/// <summary>
-		/// リクエスト時にプロキシサーバーを経由するかどうかを取得または設定します。
-		/// </summary>
-		public bool UseProxyOnConnect { get; set; }
-
-		/// <summary>
-		/// SSL リクエスト時のみプロキシサーバーを経由するかどうかを取得または設定します。
-		/// </summary>
-		public bool UseProxyOnSSLConnect { get; set; }
+	    public IProxySettings UpstreamProxySettings { get; set; }
 
 
 		public KanColleProxy()
@@ -80,7 +62,7 @@ namespace Grabacr07.KanColleWrapper
 
 		public void Startup(int proxy = 37564)
 		{
-			FiddlerApplication.Startup(proxy, false, true);
+			FiddlerApplication.Startup(proxy, FiddlerCoreStartupFlags.ChainToUpstreamGateway);
 			FiddlerApplication.BeforeRequest += this.SetUpstreamProxyHandler;
 
 			SetIESettings("localhost:" + proxy);
@@ -123,13 +105,16 @@ namespace Grabacr07.KanColleWrapper
 		/// <param name="requestingSession">通信を行おうとしているセッション。</param>
 		private void SetUpstreamProxyHandler(Session requestingSession)
 		{
-			var useGateway = !string.IsNullOrEmpty(this.UpstreamProxyHost) && this.UseProxyOnConnect;
-			if (!useGateway || (IsSessionSSL(requestingSession) && !this.UseProxyOnSSLConnect)) return;
+			var settings = this.UpstreamProxySettings;
+			if (settings == null) return;
 
-			var gateway = this.UpstreamProxyHost.Contains(":")
+			var useGateway = !string.IsNullOrEmpty(settings.Host) && settings.IsEnabled;
+			if (!useGateway || (IsSessionSSL(requestingSession) && !settings.IsEnabledOnSSL)) return;
+
+			var gateway = settings.Host.Contains(":")
 				// IPv6 アドレスをプロキシホストにした場合はホストアドレス部分を [] で囲う形式にする。
-				? string.Format("[{0}]:{1}", this.UpstreamProxyHost, this.UpstreamProxyPort)
-				: string.Format("{0}:{1}", this.UpstreamProxyHost, this.UpstreamProxyPort);
+				? string.Format("[{0}]:{1}", settings.Host, settings.Port)
+				: string.Format("{0}:{1}", settings.Host, settings.Port);
 
 			requestingSession["X-OverrideGateway"] = gateway;
 		}

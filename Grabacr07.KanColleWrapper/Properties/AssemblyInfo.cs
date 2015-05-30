@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("grabacr.net")]
 [assembly: AssemblyProduct("KanColleWrapper")]
-[assembly: AssemblyCopyright("Copyright © 2013 Grabacr07")]
+[assembly: AssemblyCopyright("Copyright c 2013 Grabacr07")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
