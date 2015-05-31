@@ -12,7 +12,7 @@ using Livet;
 namespace Grabacr07.KanColleViewer.Models
 {
 	[Serializable]
-	public class Settings : NotificationObject
+	public class Settings : Notifier
 	{
 		#region static members
 

@@ -9,7 +9,7 @@ using Livet;
 namespace Grabacr07.KanColleViewer.Models
 {
 	[Serializable]
-	public class ProxySettings : NotificationObject, IProxySettings
+	public class ProxySettings : Notifier, IProxySettings
 	{
 		#region IsEnabled 変更通知プロパティ
 
