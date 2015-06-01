@@ -22,7 +22,7 @@ namespace Grabacr07.KanColleViewer.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         ///   このクラスで使用されているキャッシュされた ResourceManager インスタンスを返します。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Grabacr07.KanColleViewer.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         ///   現在のスレッドの CurrentUICulture プロパティをオーバーライドします。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         /// <summary>
         ///   任務画面の全ページにアクセスしてください。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string Quest_Detail_Untaken {
+        public static string Quest_Detail_Untaken {
             get {
                 return ResourceManager.GetString("Quest_Detail_Untaken", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         /// <summary>
         ///    50 %  に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string Quest_Progress_50 {
+        public static string Quest_Progress_50 {
             get {
                 return ResourceManager.GetString("Quest_Progress_50", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         /// <summary>
         ///    80 %  に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string Quest_Progress_80 {
+        public static string Quest_Progress_80 {
             get {
                 return ResourceManager.GetString("Quest_Progress_80", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         /// <summary>
         ///    完了  に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string Quest_State_Accomplished {
+        public static string Quest_State_Accomplished {
             get {
                 return ResourceManager.GetString("Quest_State_Accomplished", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         /// <summary>
         ///   (未取得の任務) に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string Quest_Title_Untaken {
+        public static string Quest_Title_Untaken {
             get {
                 return ResourceManager.GetString("Quest_Title_Untaken", resourceCulture);
             }

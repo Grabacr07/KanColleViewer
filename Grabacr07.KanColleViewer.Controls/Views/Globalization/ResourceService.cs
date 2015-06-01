@@ -39,7 +39,7 @@ namespace Grabacr07.KanColleViewer.Views.Globalization
 		/// <summary>
 		/// 多言語化されたリソースを取得します。
 		/// </summary>
-		internal Resources Resources { get; private set; }
+		public Resources Resources { get; private set; }
 
 		/// <summary>
 		/// サポートされているカルチャを取得します。
