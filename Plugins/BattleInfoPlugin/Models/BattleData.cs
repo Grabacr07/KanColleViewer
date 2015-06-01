@@ -263,6 +263,12 @@ namespace BattleInfoPlugin.Models
 		{
 			this.Name = "통상 - 야전";
 
+			int BeforedayBattleHP = this.FirstFleet.Ships
+				.Where(x => !x.Situation.HasFlag(ShipSituation.Tow) && !x.Situation.HasFlag(ShipSituation.Evacuation))
+				.Sum(x => x.BeforeNowHP);//리스트 갱신하기전에 아군 HP최대값을 저장
+			int EnemyBeforedayBattle = this.Enemies.Ships.Sum(x => x.BeforeNowHP);
+
+
 			this.UpdateFleets(data.api_deck_id, data.api_ship_ke);
 			this.UpdateMaxHP(data.api_maxhps);
 			this.UpdateNowHP(data.api_nowhps);
@@ -272,7 +278,7 @@ namespace BattleInfoPlugin.Models
 			Settings.Default.FirstIsCritical = this.FirstFleet.IsCritical;
 
 			this.Enemies.CalcDamages(data.api_hougeki.GetEnemyDamages());
-			this.RankResult = this.CalcRank();
+			this.RankResult = this.CalcRank(false, true, BeforedayBattleHP, EnemyBeforedayBattle);
 		}
 
 		public void Update(battle_midnight_sp_midnight data)
@@ -411,6 +417,15 @@ namespace BattleInfoPlugin.Models
 		{
 			this.Name = "연합함대 - 야전";
 
+			int BeforedayBattleHP = this.FirstFleet.Ships
+				.Where(x => !x.Situation.HasFlag(ShipSituation.Tow) && !x.Situation.HasFlag(ShipSituation.Evacuation))
+				.Sum(x => x.BeforeNowHP);//리스트 갱신하기전에 아군 HP최대값을 저장
+			int EnemyBeforedayBattle = this.Enemies.Ships.Sum(x => x.BeforeNowHP);
+			BeforedayBattleHP += this.SecondFleet.Ships
+				.Where(x => !x.Situation.HasFlag(ShipSituation.Tow) && !x.Situation.HasFlag(ShipSituation.Evacuation))
+				.Sum(x => x.BeforeNowHP);//리스트 갱신하기전에 아군 HP최대값을 저장
+
+
 			this.UpdateFleets(data.api_deck_id, data.api_ship_ke);
 			this.UpdateMaxHP(data.api_maxhps, data.api_maxhps_combined);
 			this.UpdateNowHP(data.api_nowhps, data.api_nowhps_combined);
@@ -420,7 +435,7 @@ namespace BattleInfoPlugin.Models
 			Settings.Default.SecondIsCritical = this.SecondFleet.IsCritical;
 
 			this.Enemies.CalcDamages(data.api_hougeki.GetEnemyDamages());
-			this.RankResult = this.CalcRank(true);
+			this.RankResult = this.CalcRank(true, true, BeforedayBattleHP, EnemyBeforedayBattle);
 		}
 
 		public void Update(combined_battle_sp_midnight data)
@@ -481,6 +496,11 @@ namespace BattleInfoPlugin.Models
 		{
 			this.Name = "연습 - 야전";
 
+			int BeforedayBattleHP = this.FirstFleet.Ships
+				.Where(x => !x.Situation.HasFlag(ShipSituation.Tow) && !x.Situation.HasFlag(ShipSituation.Evacuation))
+				.Sum(x => x.BeforeNowHP);//리스트 갱신하기전에 아군 HP최대값을 저장
+			int EnemyBeforedayBattle = this.Enemies.Ships.Sum(x => x.BeforeNowHP);
+
 			this.UpdateFleets(data.api_deck_id, data.api_ship_ke, null, null, false);
 			this.UpdateMaxHP(data.api_maxhps);
 			this.UpdateNowHP(data.api_nowhps);
@@ -490,7 +510,7 @@ namespace BattleInfoPlugin.Models
 			Settings.Default.FirstIsCritical = this.FirstFleet.IsCritical;
 
 			this.Enemies.CalcDamages(data.api_hougeki.GetEnemyDamages());
-			this.RankResult = this.CalcRank();
+			this.RankResult = this.CalcRank(false, true, BeforedayBattleHP, EnemyBeforedayBattle);
 		}
 
 		private void Update(sortie_airbattle data)
@@ -688,7 +708,7 @@ namespace BattleInfoPlugin.Models
 			this.Enemies = new FleetData();
 			this.RankResult = Rank.없음;
 		}
-		private Rank CalcRank(bool IsCombined = false)
+		private Rank CalcRank(bool IsCombined = false, bool IsMidnight = false, int BeforeHP = 0, int EnemyBefore = 0)
 		{
 			try
 			{
@@ -726,8 +746,17 @@ namespace BattleInfoPlugin.Models
 					.Count();
 					SinkCount += this.SecondFleet.SinkCount;
 				}
+				if (IsMidnight)
+				{
+					MaxHPs = BeforeHP;
+					EnemyMax = EnemyBefore;
 
-				this.FirstFleet.AttackGauge = this.MakeGaugeText(EnemyTotal,EnemyMax,GreenGauge);
+					GreenGauge = (double)EnemyTotal / (double)EnemyMax;//적이 받은 총 데미지
+					RedGauge = (double)TotalDamage / (double)MaxHPs;//아군이 받은 총 데미지
+				}
+
+
+				this.FirstFleet.AttackGauge = this.MakeGaugeText(EnemyTotal, EnemyMax, GreenGauge);
 				this.Enemies.AttackGauge = this.MakeGaugeText(TotalDamage, MaxHPs, RedGauge);
 
 
@@ -799,12 +828,12 @@ namespace BattleInfoPlugin.Models
 				return Rank.에러;
 			}
 		}
-		private string MakeGaugeText(int current,int max,double percent)
+		private string MakeGaugeText(int current, int max, double percent)
 		{
-			StringBuilder temp= new StringBuilder();
+			StringBuilder temp = new StringBuilder();
 
-			temp.Append("(" + current + "/"+max+") ");
-			temp.Append(Math.Round(percent*100,2)+"%");
+			temp.Append("(" + current + "/" + max + ") ");
+			temp.Append(Math.Round(percent * 100, 2) + "%");
 			return temp.ToString();
 		}
 	}
