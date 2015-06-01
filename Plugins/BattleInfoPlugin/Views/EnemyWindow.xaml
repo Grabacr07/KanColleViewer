@@ -15,7 +15,7 @@
                    mc:Ignorable="d" 
                    Title="해역정보"
                    Width="950"
-                   Height="800"
+                   Height="650"
                    FontSize="11"
                    Background="{DynamicResource ThemeBrushKey}"
                    Foreground="{DynamicResource ActiveForegroundBrushKey}"
@@ -174,15 +174,19 @@
                 </Grid.RowDefinitions>
 
 				<Expander Grid.Row="0"
-                      Header="해역정보"
+						  BorderBrush="Gray"
+						  BorderThickness="1"
+						  Margin="5,2"
+                      Header="선택해역 지도정보"
                       Background="{DynamicResource ThemeBrushKey}"
-                      IsExpanded="True">
+                      IsExpanded="False">
 					<Expander.Style>
 						<Style/>
 					</Expander.Style>
 					<Expander.HeaderTemplate>
 						<DataTemplate>
 							<TextBlock Text="{Binding}"
+									   FontSize="18"
                                    Style="{DynamicResource DefaultTextStyleKey}"
                                    Margin="5">
 							</TextBlock>
@@ -570,18 +574,19 @@
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" SharedSizeGroup="Name" />
-                                        <ColumnDefinition Width="Auto" SharedSizeGroup="HP" />
-                                        <ColumnDefinition Width="Auto" SharedSizeGroup="Attack" />
-                                        <ColumnDefinition Width="Auto" SharedSizeGroup="Tropedo" />
-                                        <ColumnDefinition Width="Auto" SharedSizeGroup="AA" />
-										<ColumnDefinition Width="Auto" SharedSizeGroup="Armer" />
-										<ColumnDefinition Width="Auto" SharedSizeGroup="ASW" />
-										<ColumnDefinition Width="Auto" SharedSizeGroup="Hit" />
-										<ColumnDefinition Width="Auto" SharedSizeGroup="Evade" />
-										<ColumnDefinition Width="Auto" SharedSizeGroup="Luck" />
-										<ColumnDefinition Width="Auto" SharedSizeGroup="AttackType" />
+                                        <ColumnDefinition Width="Auto" MinWidth="130" SharedSizeGroup="Name" />
+                                        <ColumnDefinition Width="Auto" MinWidth="37" SharedSizeGroup="HP" />
+                                        <ColumnDefinition Width="Auto" MinWidth="96" SharedSizeGroup="Attack" />
+                                        <ColumnDefinition Width="Auto" MinWidth="96" SharedSizeGroup="Tropedo" />
+                                        <ColumnDefinition Width="Auto" MinWidth="96" SharedSizeGroup="AA" />
+                                        <ColumnDefinition Width="Auto" MinWidth="96" SharedSizeGroup="Armer" />
+                                        <ColumnDefinition Width="Auto" MinWidth="44" SharedSizeGroup="ASW" />
+                                        <ColumnDefinition Width="Auto" MinWidth="44" SharedSizeGroup="Hit" />
+                                        <ColumnDefinition Width="Auto" MinWidth="44" SharedSizeGroup="Evade" />
+                                        <ColumnDefinition Width="Auto" MinWidth="28" SharedSizeGroup="Luck" />
+                                        <ColumnDefinition Width="Auto" MinWidth="130" SharedSizeGroup="AttackType" />
                                         <ColumnDefinition/>
+
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Grid.Column="0"

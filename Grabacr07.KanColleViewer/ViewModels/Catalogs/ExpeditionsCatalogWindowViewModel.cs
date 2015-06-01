@@ -1,5 +1,8 @@
 ﻿using Grabacr07.KanColleWrapper;
+using System;
 using System.Collections.Generic;
+using System.Text;
+using System.Windows;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 {
@@ -48,6 +51,31 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 					Bo = KanColleClient.Current.Translations.GetExpeditionData("Bo", i),
 					Detail = KanColleClient.Current.Translations.GetExpeditionData("Detail", i),
 				};
+				if (temp.FlagLv != string.Empty && temp.FlagLv != "-")
+				{
+					temp.IntLv = Convert.ToInt32(temp.FlagLv);
+					temp.FlagLv = "Lv. " + temp.FlagLv;
+				}
+				if (temp.Time != string.Empty)
+				{
+					var splitTime = temp.Time.Split(';');
+					DateTime Time = new DateTime();
+
+					if (splitTime[0] != string.Empty)
+					{
+						Time = Time.AddHours(Convert.ToDouble(splitTime[0]));
+					}
+					if (splitTime[1] != string.Empty)
+					{
+						Time = Time.AddMinutes(Convert.ToDouble(splitTime[1]));
+					}
+					temp.RealTime = Time;
+					StringBuilder timeString = new StringBuilder();
+					if (Time.Day != 1) timeString.Append(Time.Day - 1 + "일");
+					if (Time.Hour != 0) timeString.Append(Time.Hour + "시간");
+					if (Time.Minute != 0) timeString.Append(Time.Minute + "분");
+					temp.Time = timeString.ToString();
+				}
 				i++;
 				if (temp.TRName != string.Empty && temp.FlagLv != string.Empty) this.ExpeditionList.Add(temp);
 				if (this.ExpeditionList.Count == this.ListCount) IsEnd = false;
@@ -91,6 +119,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#region FlagLv変更通知プロパティ
 		private string _FlagLv;
+		public int IntLv { get; set; }
 
 		public string FlagLv
 		{
@@ -123,7 +152,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#region Time変更通知プロパティ
 		private string _Time;
-
+		public DateTime RealTime { get; set; }
 		public string Time
 		{
 			get

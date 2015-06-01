@@ -14,6 +14,7 @@ using Livet.Messaging.Windows;
 using BattleInfoPlugin.Models;
 using BattleInfoPlugin.ViewModels.Enemies;
 using BattleInfoPlugin.Models.Repositories;
+using Grabacr07.KanColleWrapper;
 
 namespace BattleInfoPlugin.ViewModels
 {
@@ -48,45 +49,52 @@ namespace BattleInfoPlugin.ViewModels
             Dictionary<MapInfo, Dictionary<MapCell, Dictionary<int, FleetData>>> mapEnemies,
             Dictionary<MapCell, CellType> cellTypes)
         {
-            this.EnemyMaps = Master.Current.MapInfos
-                .Select(mi => new EnemyMapViewModel
-                {
-                    Info = mi.Value,
-                    //セルポイントデータに既知の敵データを外部結合して座標でマージ
-                    EnemyCells = MapResource.HasMapSwf(mi.Value)
-                        ? MapResource.GetMapCellPoints(mi.Value) //マップSWFがあったらそれを元に作る
-                            //外部結合
-                            .GroupJoin(
-                                CreateMapCellViewModelsFromEnemiesData(mi, mapEnemies, cellTypes),
-                                outer => outer.Key,
-                                inner => inner.Key,
-                                (o, ie) => new { point = o, cells = ie })
-                            .SelectMany(
-                                x => x.cells.DefaultIfEmpty(),
-                                (x, y) => new { x.point, cells = y })
-                            //座標マージ
-                            .GroupBy(x => x.point.Value)
-                            .Select(x => new EnemyCellViewModel
-                            {
-                                Key = x.Min(y => y.point.Key), //若い番号を採用
-                                EnemyFleets = x.Where(y => y.cells != null) //敵データをEnemyIdでマージ
-                                    .SelectMany(y => y.cells.EnemyFleets)
-                                    .GroupBy(y => y.Key)
-                                    .Select(y => y.First())
-                                    .ToArray(),
-                                ColorNo = x.Where(y => y.cells != null).Select(y => y.cells.ColorNo).FirstOrDefault(),
-                                CellType = x.Where(y => y.cells != null).Select(y => y.cells.CellType).FirstOrDefault(),
-                            })
-                            //敵データのないセルは除外
-                            .Where(x => x.EnemyFleets.Any())
-                            .ToArray()
-                        : CreateMapCellViewModelsFromEnemiesData(mi, mapEnemies, cellTypes) //なかったら敵データだけ(重複るが仕方ない)
-                            .OrderBy(cell => cell.Key)
-                            .ToArray(),
-                })
-                .OrderBy(info => info.Info.Id)
-                .ToArray();
-
+			try
+			{
+				this.EnemyMaps = Models.Repositories.Master.Current.MapInfos
+								.Select(mi => new EnemyMapViewModel
+								{
+									Info = mi.Value,
+									//セルポイントデータに既知の敵データを外部結合して座標でマージ
+									EnemyCells = MapResource.HasMapSwf(mi.Value)
+										? MapResource.GetMapCellPoints(mi.Value) //マップSWFがあったらそれを元に作る
+										//外部結合
+											.GroupJoin(
+												CreateMapCellViewModelsFromEnemiesData(mi, mapEnemies, cellTypes),
+												outer => outer.Key,
+												inner => inner.Key,
+												(o, ie) => new { point = o, cells = ie })
+											.SelectMany(
+												x => x.cells.DefaultIfEmpty(),
+												(x, y) => new { x.point, cells = y })
+										//座標マージ
+											.GroupBy(x => x.point.Value)
+											.Select(x => new EnemyCellViewModel
+											{
+												Key = x.Min(y => y.point.Key), //若い番号を採用
+												EnemyFleets = x.Where(y => y.cells != null) //敵データをEnemyIdでマージ
+													.SelectMany(y => y.cells.EnemyFleets)
+													.GroupBy(y => y.Key)
+													.Select(y => y.First())
+													.ToArray(),
+												ColorNo = x.Where(y => y.cells != null).Select(y => y.cells.ColorNo).FirstOrDefault(),
+												CellType = x.Where(y => y.cells != null).Select(y => y.cells.CellType).FirstOrDefault(),
+											})
+										//敵データのないセルは除外
+											.Where(x => x.EnemyFleets.Any())
+											.ToArray()
+										: CreateMapCellViewModelsFromEnemiesData(mi, mapEnemies, cellTypes) //なかったら敵データだけ(重複るが仕方ない)
+											.OrderBy(cell => cell.Key)
+											.ToArray(),
+								})
+								.OrderBy(info => info.Info.Id)
+								.ToArray();
+			}
+			catch(Exception ex)
+			{
+				this.EnemyMaps = null;
+				KanColleClient.Current.CatchedErrorLogWriter.ReportException(ex.Source, ex);
+			}
         }
 
         private static IEnumerable<EnemyCellViewModel> CreateMapCellViewModelsFromEnemiesData(

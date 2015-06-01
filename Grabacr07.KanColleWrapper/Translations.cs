@@ -420,10 +420,6 @@ namespace Grabacr07.KanColleWrapper
 
 			foreach (XElement el in FoundTranslation)
 			{
-#if DEBUG
-					if (ID >= 0 && el.Element("ID") != null && Convert.ToInt32(el.Element("ID").Value) == ID)
-						Debug.WriteLine(string.Format("Translation: {0,-20} {1,-20} {2}", JPString, el.Element(TRChildElement).Value, ID));
-#endif
 				if (el.Element(ElementName) == null) return string.Empty;
 				if (ID >= 0 && el.Element("ID") != null && Convert.ToInt32(el.Element("ID").Value) == ID)
 					return el.Element(ElementName).Value;

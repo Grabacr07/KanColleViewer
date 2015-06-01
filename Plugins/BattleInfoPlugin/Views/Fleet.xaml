@@ -14,86 +14,89 @@
              d:DesignWidth="300"
              d:DataContext="{d:DesignData /SampleData/FleetViewModelSampleData.xaml}">
 
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Styles/PluginStyle.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="../Styles/PluginStyle.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
 
-            <localConv:AdditionalNameColorConverter x:Key="AdditionalNameColorConverter"/>
-            <converters:HasFlagConverter x:Key="HasFlagConverter" />
-            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+			<localConv:AdditionalNameColorConverter x:Key="AdditionalNameColorConverter"/>
+			<converters:HasFlagConverter x:Key="HasFlagConverter" />
+			<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 
-            <Style TargetType="{x:Type Border}">
-                <Setter Property="BorderBrush"
+			<Style TargetType="{x:Type Border}">
+				<Setter Property="BorderBrush"
                     Value="{DynamicResource BorderBrushKey}" />
-                <Setter Property="BorderThickness"
+				<Setter Property="BorderThickness"
                     Value="1" />
-            </Style>
+			</Style>
 
-            <Style TargetType="{x:Type ToolTip}">
-                <Setter Property="OverridesDefaultStyle"
+			<Style TargetType="{x:Type ToolTip}">
+				<Setter Property="OverridesDefaultStyle"
                     Value="True" />
-                <Setter Property="HasDropShadow"
+				<Setter Property="HasDropShadow"
                     Value="True" />
-                <Setter Property="Foreground"
+				<Setter Property="Foreground"
                     Value="{DynamicResource AccentForegroundBrushKey}" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="ToolTip">
-                            <Border Name="Border"
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="ToolTip">
+							<Border Name="Border"
                                 BorderThickness="1"
                                 BorderBrush="{DynamicResource BorderBrushKey}"
                                 Background="{DynamicResource BackgroundBrushKey}"
                                 Padding="8,4"
                                 SnapsToDevicePixels="True">
-                                <ContentPresenter />
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
+								<ContentPresenter />
+							</Border>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
 
-            <Style TargetType="{x:Type TextBlock}"
+			<Style TargetType="{x:Type TextBlock}"
                    BasedOn="{StaticResource DefaultTextStyleKey}">
-                <Setter Property="TextWrapping"
+				<Setter Property="TextWrapping"
                         Value="NoWrap" />
-            </Style>
-        </ResourceDictionary>
-    </UserControl.Resources>
+			</Style>
+		</ResourceDictionary>
+	</UserControl.Resources>
 
-    <StackPanel Visibility="{Binding IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-        <TextBlock Margin="3, 4">
+	<StackPanel Visibility="{Binding IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+		<TextBlock Margin="3, 4">
                 <Run Text="{Binding Name, Mode=OneWay}"/>
                 <Run Text="  "/>
                 <Run Text="{Binding FleetFormation, Mode=OneWay}"
                      FontSize="12"
                      Style="{DynamicResource EmphaticTextElementStyleKey}"/>
-        </TextBlock>
-        <Rectangle Height="1"
+		</TextBlock>
+		<TextBlock Margin="3, 4">
+			<Run Text="{Binding FleetGauge,Mode=OneWay}"/>
+		</TextBlock>
+		<Rectangle Height="1"
                    Margin="3, 4"
                    Style="{DynamicResource SeparatorRectangleStyleKey}" />
-        <ItemsControl ItemsSource="{Binding Fleet.Ships}"
+		<ItemsControl ItemsSource="{Binding Fleet.Ships}"
                       Background="Transparent"
                       Grid.IsSharedSizeScope="True" DataContext="{Binding}"
                       Margin="3,0">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="{x:Type models:MembersShipData}">
-                    <DataTemplate.Resources>
-                        <Style TargetType="{x:Type Run}">
-                            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrushKey}"/>
-                        </Style>
-                    </DataTemplate.Resources>
-                    <StackPanel Margin="0,2,0,0">
-                        <Grid HorizontalAlignment="Left">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"
+			<ItemsControl.ItemTemplate>
+				<DataTemplate DataType="{x:Type models:MembersShipData}">
+					<DataTemplate.Resources>
+						<Style TargetType="{x:Type Run}">
+							<Setter Property="Foreground" Value="{DynamicResource ForegroundBrushKey}"/>
+						</Style>
+					</DataTemplate.Resources>
+					<StackPanel Margin="0,2,0,0">
+						<Grid HorizontalAlignment="Left">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto"
                                                   SharedSizeGroup="Name" />
-                                <ColumnDefinition Width="Auto"
+								<ColumnDefinition Width="Auto"
                                                   SharedSizeGroup="HP" />
-                            </Grid.ColumnDefinitions>
+							</Grid.ColumnDefinitions>
 
-                            <TextBlock>
+							<TextBlock>
                                      <Run Text="{Binding Name, Mode=OneWay}"
                                           Style="{DynamicResource EmphaticTextElementStyleKey}" />
                                      <Run Text="{Binding AdditionalName, Mode=OneWay}"
@@ -101,100 +104,100 @@
                                      <LineBreak />
                                      <Run Text="{Binding TypeName, Mode=OneWay}"
                                           FontSize="11" />
-                            </TextBlock>
+							</TextBlock>
 
-                            <Grid x:Name="HPIndicator"
+							<Grid x:Name="HPIndicator"
                                       Grid.Column="1"
                                       Margin="5,1,5,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto"/>
+									<RowDefinition Height="*"/>
+								</Grid.RowDefinitions>
 
-                                <Grid Grid.Row="0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition SharedSizeGroup="Curent"/>
-                                        <ColumnDefinition />
-                                        <ColumnDefinition SharedSizeGroup="Maximum"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Text="HP:"
+								<Grid Grid.Row="0">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition/>
+										<ColumnDefinition SharedSizeGroup="Curent"/>
+										<ColumnDefinition />
+										<ColumnDefinition SharedSizeGroup="Maximum"/>
+									</Grid.ColumnDefinitions>
+									<TextBlock Text="HP:"
                                                Style="{DynamicResource DefaultTextStyleKey}"
                                                Margin="0,2,0,0"
                                                Grid.Column="0"/>
 
-                                    <TextBlock Text="{Binding HP.Current, Mode=OneWay}"
+									<TextBlock Text="{Binding HP.Current, Mode=OneWay}"
                                                HorizontalAlignment="Right"
                                                Style="{DynamicResource EmphaticTextStyleKey}"
                                                Grid.Column="1"/>
 
-                                    <TextBlock Text="/"
+									<TextBlock Text="/"
                                                Style="{DynamicResource DefaultTextStyleKey}"
                                                Margin="0,1,0,0"
                                                Grid.Column="2"/>
 
-                                    <TextBlock Text="{Binding HP.Maximum, Mode=OneWay}"
+									<TextBlock Text="{Binding HP.Maximum, Mode=OneWay}"
                                                HorizontalAlignment="Right"
                                                Margin="0,3,0,0"
                                                Style="{DynamicResource DefaultTextStyleKey}"
                                                Grid.Column="3"/>
-                                </Grid>
+								</Grid>
 
-                                <controls:ColorIndicator Grid.Row="1"
+								<controls:ColorIndicator Grid.Row="1"
                                                          Height="6"
                                                          LimitedValue="{Binding HP, Mode=OneWay}"
                                                          Margin="0,2,0,0" />
-                            </Grid>
+							</Grid>
 
-                            <Grid x:Name="EvacuationIndicator"
+							<Grid x:Name="EvacuationIndicator"
                                   Grid.Column="1"
                                   Visibility="Collapsed"
                                   Margin="3,2,3,0">
-                                <Border Background="{DynamicResource FleetRepairingBrushKey}"
+								<Border Background="{DynamicResource FleetRepairingBrushKey}"
                                         Opacity=".4" />
-                                <TextBlock Text="퇴피완료"
+								<TextBlock Text="퇴피완료"
                                            Style="{DynamicResource EmphaticTextStyleKey}"
                                            HorizontalAlignment="Center" />
-                            </Grid>
+							</Grid>
 
-                            <Grid x:Name="TowIndicator"
+							<Grid x:Name="TowIndicator"
                                   Grid.Column="1"
                                   Visibility="Collapsed"
                                   Margin="3,2,3,0">
-                                <Border Background="{DynamicResource FleetRepairingBrushKey}"
+								<Border Background="{DynamicResource FleetRepairingBrushKey}"
                                         Opacity=".4" />
-                                <TextBlock Text="퇴피완료"
+								<TextBlock Text="퇴피완료"
                                            Style="{DynamicResource EmphaticTextStyleKey}"
                                            HorizontalAlignment="Center" />
-                            </Grid>
-                        </Grid>
-                        <Rectangle Height="1"
+							</Grid>
+						</Grid>
+						<Rectangle Height="1"
                                    Margin="0,4,0,0"
                                    Style="{DynamicResource SeparatorRectangleStyleKey}" />
-                    </StackPanel>
+					</StackPanel>
 
-                    <DataTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Evacuation}"
+					<DataTemplate.Triggers>
+						<DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Evacuation}"
                                      Value="True">
-                            <Setter TargetName="HPIndicator"
+							<Setter TargetName="HPIndicator"
                                     Property="Opacity"
                                     Value=".2" />
-                            <Setter TargetName="EvacuationIndicator"
+							<Setter TargetName="EvacuationIndicator"
                                     Property="Visibility"
                                     Value="Visible" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow}"
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow}"
                                      Value="True">
-                            <Setter TargetName="HPIndicator"
+							<Setter TargetName="HPIndicator"
                                     Property="Opacity"
                                     Value=".2" />
-                            <Setter TargetName="TowIndicator"
+							<Setter TargetName="TowIndicator"
                                     Property="Visibility"
                                     Value="Visible" />
-                        </DataTrigger>
-                    </DataTemplate.Triggers>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </StackPanel>
+						</DataTrigger>
+					</DataTemplate.Triggers>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
+	</StackPanel>
 </UserControl>

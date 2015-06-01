@@ -29,6 +29,23 @@ namespace BattleInfoPlugin.Models
 		}
 		#endregion
 
+		#region AttackGauge変更通知プロパティ
+		private string _AttackGauge;
+
+		public string AttackGauge
+		{
+			get
+			{ return this._AttackGauge; }
+			set
+			{
+				if (this._AttackGauge == value)
+					return;
+				this._AttackGauge = value;
+				this.RaisePropertyChanged();
+			}
+		}
+		#endregion
+
 		#region IsCritical変更通知プロパティ
 		private bool _IsCritical;
 
@@ -189,7 +206,7 @@ namespace BattleInfoPlugin.Models
 				if (!item.Situation.HasFlag(ShipSituation.Evacuation) && !item.Situation.HasFlag(ShipSituation.Tow))
 				{
 					int tempHP = item.NowHP;
-					if (tempHP < 0) tempHP = 0;
+					if (item.NowHP < 0) tempHP = 0;
 					fleet.TotalDamaged += (item.BeforeNowHP - tempHP);
 				}
 				if (item.NowHP <= 0) fleet.SinkCount++;
