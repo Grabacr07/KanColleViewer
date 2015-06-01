@@ -59,5 +59,50 @@ namespace Grabacr07.KanColleViewer.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   任務画面の全ページにアクセスしてください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Quest_Detail_Untaken {
+            get {
+                return ResourceManager.GetString("Quest_Detail_Untaken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    50 %  に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Quest_Progress_50 {
+            get {
+                return ResourceManager.GetString("Quest_Progress_50", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    80 %  に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Quest_Progress_80 {
+            get {
+                return ResourceManager.GetString("Quest_Progress_80", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    完了  に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Quest_State_Accomplished {
+            get {
+                return ResourceManager.GetString("Quest_State_Accomplished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   (未取得の任務) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Quest_Title_Untaken {
+            get {
+                return ResourceManager.GetString("Quest_Title_Untaken", resourceCulture);
+            }
+        }
     }
 }

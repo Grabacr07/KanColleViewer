@@ -5,6 +5,7 @@
 	<s:Boolean x:Key="/Default/CodeEditing/Intellisense/LookupWindow/ShowSummary/@EntryValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeEditing/Intellisense/ParameterInfo/DelegatesAsLambdas/@EntryValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeEditing/TypingAssist/Xaml/AutoInsertTagFooter/@EntryValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/CodeInspection/CodeAnnotations/NamespacesWithAnnotations/=Grabacr07_002EKanColleViewer_002EAnnotations/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/CodeInspection/Highlighting/InspectionSeverities/=AccessToModifiedClosure/@EntryIndexedValue">SUGGESTION</s:String>
 	<s:String x:Key="/Default/CodeInspection/Highlighting/InspectionSeverities/=CompareOfFloatsByEqualityOperator/@EntryIndexedValue">SUGGESTION</s:String>
 	<s:String x:Key="/Default/CodeInspection/Highlighting/InspectionSeverities/=DoNotCallOverridableMethodsInConstructor/@EntryIndexedValue">SUGGESTION</s:String>

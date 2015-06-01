@@ -86,6 +86,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Views\Globalization\ResourceService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -2,7 +2,7 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 					xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
-					xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models">
+					xmlns:globalization="clr-namespace:Grabacr07.KanColleViewer.Views.Globalization">
 
 	<Style TargetType="{x:Type controls:Quest}">
 		<Setter Property="Background"
@@ -62,7 +62,7 @@
 								 Value="Progress50">
 							<Setter TargetName="State"
 									Property="Text"
-									Value="{Binding Resources.Quest_Progress_50, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+									Value="{Binding Resources.Quest_Progress_50, Source={x:Static globalization:ResourceService.Current}, Mode=OneWay}" />
 							<Setter TargetName="State"
 									Property="Background"
 									Value="#FF208040" />
@@ -71,7 +71,7 @@
 								 Value="Progress80">
 							<Setter TargetName="State"
 									Property="Text"
-									Value="{Binding Resources.Quest_Progress_80, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+									Value="{Binding Resources.Quest_Progress_80, Source={x:Static globalization:ResourceService.Current}, Mode=OneWay}" />
 							<Setter TargetName="State"
 									Property="Background"
 									Value="#FF206040" />
@@ -80,7 +80,7 @@
 								 Value="Accomplished">
 							<Setter TargetName="State"
 									Property="Text"
-									Value="{Binding Resources.Quest_State_Accomplished, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+									Value="{Binding Resources.Quest_State_Accomplished, Source={x:Static globalization:ResourceService.Current}, Mode=OneWay}" />
 							<Setter TargetName="State"
 									Property="Background"
 									Value="#FF326480" />
@@ -137,10 +137,10 @@
 								 Value="True">
 							<Setter TargetName="Title"
 									Property="Text"
-									Value="{Binding Resources.Quest_Title_Untaken, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+									Value="{Binding Resources.Quest_Title_Untaken, Source={x:Static globalization:ResourceService.Current}, Mode=OneWay}" />
 							<Setter TargetName="Detail"
 									Property="Text"
-									Value="{Binding Resources.Quest_Detail_Untaken, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+									Value="{Binding Resources.Quest_Detail_Untaken, Source={x:Static globalization:ResourceService.Current}, Mode=OneWay}" />
 							<Setter TargetName="Icon"
 									Property="Fill"
 									Value="Gray" />
