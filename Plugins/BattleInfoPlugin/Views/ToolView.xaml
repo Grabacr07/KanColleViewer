@@ -144,16 +144,8 @@
 									<Setter Property="Foreground" Value="#FFD43353"/>
 								</DataTrigger>
 								<DataTrigger Binding="{Binding Data.RankResult}"
-												 Value="C패배">
+												 Value="패배">
 									<Setter Property="Foreground" Value="#FF42428F"/>
-								</DataTrigger>
-								<DataTrigger Binding="{Binding Data.RankResult}"
-												 Value="D패배">
-									<Setter Property="Foreground" Value="#FF02A43D"/>
-								</DataTrigger>
-								<DataTrigger Binding="{Binding Data.RankResult}"
-												 Value="E패배">
-									<Setter Property="Foreground" Value="#FF443DCF"/>
 								</DataTrigger>
 							</Style.Triggers>
 						</Style>

@@ -781,20 +781,20 @@ namespace BattleInfoPlugin.Models
 
 
 
-				if (TotalDamage == 0 && EnemyTotal == 0) return Rank.D패배;
-				if (GreenGauge < 0.0005) return Rank.D패배;
+				if (TotalDamage == 0 && EnemyTotal == 0) return Rank.패배;//d
+				if (GreenGauge < 0.0005) return Rank.패배;//d
 				else if (IsShipSink)
 				{
 					if (EnemyFlag.NowHP <= 0)
 					{
 						if (IsOverKill) return Rank.B승리;
-						else return Rank.D패배;
+						else return Rank.패배;//d
 					}
-					else if (IsMidDamage) return Rank.C패배;
+					else if (IsMidDamage) return Rank.패배;//c
 					else
 					{
-						if (IsOverKilled) return Rank.E패배;
-						else return Rank.C패배;
+						if (IsOverKilled) return Rank.패배;//e
+						else return Rank.패배;//c
 					}
 				}
 				else
@@ -817,9 +817,9 @@ namespace BattleInfoPlugin.Models
 						if (IsOverKill) return Rank.A승리;
 
 						if (IsOverDamage) return Rank.B승리;
-						else if (IsMidDamage) return Rank.C패배;
-						else if (IsScratch) return Rank.D패배;
-						else return Rank.D패배;
+						else if (IsMidDamage) return Rank.패배;//c
+						else if (IsScratch) return Rank.패배;//d
+						else return Rank.패배;//d
 					}
 				}
 			}
