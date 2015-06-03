@@ -767,7 +767,7 @@ namespace BattleInfoPlugin.Models
 				if (TotalDamage > 0)
 				{
 					double CalcPercent = Math.Round(GreenGauge / RedGauge, 1);
-					if (CalcPercent > 2.5)
+					if (CalcPercent >= 2.5)
 						IsOverDamage = true;//2.5배 초과 데미지
 					else if (CalcPercent > 1)
 						IsMidDamage = true;//1초과 2.5이하
@@ -782,6 +782,7 @@ namespace BattleInfoPlugin.Models
 
 
 				if (TotalDamage == 0 && EnemyTotal == 0) return Rank.D패배;
+				if (GreenGauge < 0.0005) return Rank.D패배;
 				else if (IsShipSink)
 				{
 					if (EnemyFlag.NowHP <= 0)
