@@ -15,6 +15,7 @@ using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Views.Controls;
 using System.Diagnostics;
 using Grabacr07.KanColleWrapper;
+using System.Threading;
 
 namespace Grabacr07.KanColleViewer.Views.Behaviors
 {
@@ -169,12 +170,18 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 				KanColleViewer.Views.MainWindow.Current.SetPos();
 				int left = KanColleViewer.Views.MainWindow.Current.rect.left;
 				int top = KanColleViewer.Views.MainWindow.Current.rect.top + 91;
+				int WindowSizeChange = KanColleViewer.Views.MainWindow.Current.rect.width - rect.width;
+
 
 
 				if (Setting.Current.OrientationMode == OrientationType.Vertical)
 				{
 					top = top - 55;
+					left += Convert.ToInt32((double)WindowSizeChange / (double)2);
 				}
+				KanColleViewer.Views.MainWindow.Current.Activate();
+
+				Thread.Sleep(300);
 
 				using (Graphics graphics = Graphics.FromHwnd(IntPtr.Zero))
 				{

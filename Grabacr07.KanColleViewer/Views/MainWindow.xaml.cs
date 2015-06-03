@@ -18,6 +18,7 @@ namespace Grabacr07.KanColleViewer.Views
 		{
 			public int left { get; set; }
 			public int top { get; set; }
+			public int width { get; set; }
 		}
 
 		public MainWindow()
@@ -30,6 +31,7 @@ namespace Grabacr07.KanColleViewer.Views
 			rect = new LeftTop();
 			rect.left = Convert.ToInt32(this.Left);
 			rect.top = Convert.ToInt32(this.Top);
+			rect.width = Convert.ToInt32(this.ActualWidth);
 		}
 		protected override void OnClosing(CancelEventArgs e)
 		{
