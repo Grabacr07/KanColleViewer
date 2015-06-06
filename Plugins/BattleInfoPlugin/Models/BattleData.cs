@@ -724,6 +724,7 @@ namespace BattleInfoPlugin.Models
 				decimal GreenGauge = (decimal)EnemyTotal / (decimal)EnemyMax;//적이 받은 총 데미지
 				decimal RedGauge = (decimal)TotalDamage / (decimal)MaxHPs;//아군이 받은 총 데미지
 
+				bool IsThreeTime = false;
 				bool IsOverDamage = false;
 				bool IsMidDamage = false;
 				bool IsScratch = false;
@@ -775,6 +776,16 @@ namespace BattleInfoPlugin.Models
 					else if (CalcPercent > 1m)
 						IsMidDamage = true;//1초과 2.5이하
 					else IsScratch = true;//1미만
+					if (IsShipSink)
+					{
+						if (CalcPercent > 3m)
+						{
+							IsThreeTime = true;
+							IsOverDamage = true;
+							IsMidDamage = false;
+							IsScratch = false;
+						}
+					}
 				}
 				else if (TotalDamage == 0)
 				{
@@ -797,7 +808,12 @@ namespace BattleInfoPlugin.Models
 					else
 					{
 						if (IsOverKilled) return Rank.패배;//e
-						else return Rank.패배;//c
+						else
+						{
+							if (!IsOverKill && IsThreeTime) return Rank.B승리;
+							if (IsOverKill && IsOverDamage) return Rank.B승리;
+							else return Rank.패배;//c
+						}
 					}
 				}
 				else
