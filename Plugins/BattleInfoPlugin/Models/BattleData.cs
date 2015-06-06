@@ -697,7 +697,7 @@ namespace BattleInfoPlugin.Models
 				if (SinkCount >= 1) return true;
 				else return false;
 			}
-			if (Convert.ToInt32(Math.Floor((double)((double)MaxCount / (double)3) * (double)2)) <= SinkCount)
+			if (Convert.ToInt32(Math.Floor((decimal)((decimal)MaxCount / 3m) * 2m)) <= SinkCount)
 				return true;
 			else return false;
 		}
@@ -721,8 +721,8 @@ namespace BattleInfoPlugin.Models
 				var IsShipSink = this.FirstFleet.SinkCount > 0 ? true : false;
 				ShipData EnemyFlag = this.Enemies.Ships.First();
 
-				double GreenGauge = (double)EnemyTotal / (double)EnemyMax;//적이 받은 총 데미지
-				double RedGauge = (double)TotalDamage / (double)MaxHPs;//아군이 받은 총 데미지
+				decimal GreenGauge = (decimal)EnemyTotal / (decimal)EnemyMax;//적이 받은 총 데미지
+				decimal RedGauge = (decimal)TotalDamage / (decimal)MaxHPs;//아군이 받은 총 데미지
 
 				bool IsOverDamage = false;
 				bool IsMidDamage = false;
@@ -738,7 +738,7 @@ namespace BattleInfoPlugin.Models
 				{
 					TotalDamage += this.SecondFleet.TotalDamaged;
 					MaxHPs += this.SecondFleet.Ships.Sum(x => x.BeforeNowHP);
-					RedGauge = (double)TotalDamage / (double)MaxHPs;//아군이 받은 총 데미지
+					RedGauge = (decimal)TotalDamage / (decimal)MaxHPs;//아군이 받은 총 데미지
 
 					if (!IsShipSink) IsShipSink = this.SecondFleet.SinkCount > 0 ? true : false;
 					MaxCount += this.SecondFleet.Ships
@@ -751,8 +751,8 @@ namespace BattleInfoPlugin.Models
 					MaxHPs = BeforeHP;
 					EnemyMax = EnemyBefore;
 
-					GreenGauge = (double)EnemyTotal / (double)EnemyMax;//적이 받은 총 데미지
-					RedGauge = (double)TotalDamage / (double)MaxHPs;//아군이 받은 총 데미지
+					GreenGauge = (decimal)EnemyTotal / (decimal)EnemyMax;//적이 받은 총 데미지
+					RedGauge = (decimal)TotalDamage / (decimal)MaxHPs;//아군이 받은 총 데미지
 				}
 
 
@@ -766,10 +766,13 @@ namespace BattleInfoPlugin.Models
 
 				if (TotalDamage > 0)
 				{
-					double CalcPercent = Math.Round(GreenGauge / RedGauge, 1);
-					if (CalcPercent >= 2.5)
+					decimal gG = Convert.ToDecimal(GreenGauge);
+					decimal rG = Convert.ToDecimal(RedGauge);
+
+					var CalcPercent = Math.Round(gG / rG, 2);
+					if (CalcPercent >= 2.5m)
 						IsOverDamage = true;//2.5배 초과 데미지
-					else if (CalcPercent > 1)
+					else if (CalcPercent > 1m)
 						IsMidDamage = true;//1초과 2.5이하
 					else IsScratch = true;//1미만
 				}
@@ -782,7 +785,7 @@ namespace BattleInfoPlugin.Models
 
 
 				if (TotalDamage == 0 && EnemyTotal == 0) return Rank.패배;//d
-				if (GreenGauge < 0.0005) return Rank.패배;//d
+				if (GreenGauge < 0.0005m) return Rank.패배;//d
 				else if (IsShipSink)
 				{
 					if (EnemyFlag.NowHP <= 0)
@@ -829,7 +832,7 @@ namespace BattleInfoPlugin.Models
 				return Rank.에러;
 			}
 		}
-		private string MakeGaugeText(int current, int max, double percent)
+		private string MakeGaugeText(int current, int max, decimal percent)
 		{
 			StringBuilder temp = new StringBuilder();
 
