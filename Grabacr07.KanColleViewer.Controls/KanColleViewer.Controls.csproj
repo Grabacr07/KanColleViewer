@@ -52,6 +52,39 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Styles\Colors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.HorizontalFlatListBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <DependentUpon>Controls.xaml</DependentUpon>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.ListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <DependentUpon>Controls.xaml</DependentUpon>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.PinButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <DependentUpon>Controls.xaml</DependentUpon>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.TabControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <DependentUpon>Controls.xaml</DependentUpon>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.Text.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <DependentUpon>Controls.xaml</DependentUpon>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\Generic.BuildingDock.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

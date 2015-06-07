@@ -283,35 +283,6 @@
     <Compile Include="Win32\DVTARGETDEVICE.cs" />
     <Compile Include="Win32\IServiceProvider.cs" />
     <Compile Include="Win32\RECT.cs" />
-    <Page Include="Styles\Colors.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Styles\Controls.HorizontalFlatListBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <DependentUpon>Controls.xaml</DependentUpon>
-    </Page>
-    <Page Include="Styles\Controls.ListView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <DependentUpon>Controls.xaml</DependentUpon>
-    </Page>
-    <Page Include="Styles\Controls.PinButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <DependentUpon>Controls.xaml</DependentUpon>
-    </Page>
-    <Page Include="Styles\Controls.TabControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <DependentUpon>Controls.xaml</DependentUpon>
-    </Page>
-    <Page Include="Styles\Controls.Text.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <DependentUpon>Controls.xaml</DependentUpon>
-    </Page>
     <Page Include="Styles\Controls.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

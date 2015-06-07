@@ -12,8 +12,9 @@
         <description>$description$</description>
         <language>ja-JP</language>
         <tags>KanColle</tags>
-        <dependencies>
-        </dependencies>
+        <frameworkAssemblies>
+            <frameworkAssembly assemblyName="System.ComponentModel.Composition"  />
+        </frameworkAssemblies>
     </metadata>
     <files>
         <file src="bin\Release\KanColleViewer.Composition.dll" target="lib\net45\KanColleViewer.Composition.dll" />
