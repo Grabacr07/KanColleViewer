@@ -7,14 +7,15 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
-			 xmlns:vContents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
-			 xmlns:vmContents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
+			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
+			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
+			 xmlns:control2="clr-namespace:Grabacr07.KanColleViewer.Views.Controls;assembly=KanColleViewer.Controls"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 mc:Ignorable="d"
 			 d:DesignWidth="700"
 			 d:DesignHeight="300"
-			 d:DataContext="{d:DesignInstance vmContents:QuestsViewModel}"
+			 d:DataContext="{d:DesignInstance viewModels:QuestsViewModel}"
 			 Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}, Path=ActualWidth}">
 	<ScrollViewer VerticalScrollBarVisibility="Auto"
 				  PanningMode="Both">
@@ -46,7 +47,7 @@
 								  Margin="10,0">
 						<ItemsControl.ItemTemplate>
 							<DataTemplate>
-								<controls:Quest IsUntaken="{Binding IsUntaken}"
+								<control2:Quest IsUntaken="{Binding IsUntaken}"
 												Title="{Binding Title}"
 												Detail="{Binding Detail}"
 												Category="{Binding Category}"
@@ -124,11 +125,11 @@
 									Value="10,0,10,5" />
 							<Setter Property="ItemTemplate">
 								<Setter.Value>
-									<DataTemplate DataType="{x:Type vmContents:QuestViewModel}">
+									<DataTemplate DataType="{x:Type viewModels:QuestViewModel}">
 										<ToggleButton>
 											<ToggleButton.Template>
 												<ControlTemplate TargetType="{x:Type ToggleButton}">
-													<controls:Quest IsUntaken="{Binding IsUntaken}"
+													<control2:Quest IsUntaken="{Binding IsUntaken}"
 																	Title="{Binding Title}"
 																	Detail="{Binding Detail}"
 																	Category="{Binding Category}"
@@ -144,12 +145,12 @@
 							</Setter>
 						</Style>
 
-						<vContents:QuestViewSource x:Key="DailyQuestSourceKey"
-												   Source="{Binding Quests}"
-												   Type="Daily" />
-						<vContents:QuestViewSource x:Key="WeeklyQuestSourceKey"
-												   Source="{Binding Quests}"
-												   Type="Weekly" />
+						<views:QuestViewSource x:Key="DailyQuestSourceKey"
+											   Source="{Binding Quests}"
+											   Type="Daily" />
+						<views:QuestViewSource x:Key="WeeklyQuestSourceKey"
+											   Source="{Binding Quests}"
+											   Type="Weekly" />
 					</TabControl.Resources>
 
 					<TabItem>

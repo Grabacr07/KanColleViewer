@@ -8,7 +8,7 @@
 			 xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
-			 xmlns:converters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters"
+			 xmlns:converters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters;assembly=KanColleViewer.Controls"
 			 mc:Ignorable="d"
 			 d:DesignWidth="300"
 			 d:DesignHeight="30"

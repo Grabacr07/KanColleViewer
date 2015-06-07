@@ -9,7 +9,7 @@ using Livet;
 
 namespace Grabacr07.KanColleViewer.Models
 {
-	public class NotifierHost : Notifier
+	public class NotifierHost : NotificationObject
 	{
 		#region singleton members
 

@@ -12,7 +12,7 @@ using Livet;
 namespace Grabacr07.KanColleViewer.Models
 {
 	[Serializable]
-	public class Settings : Notifier
+	public class Settings : NotificationObject
 	{
 		#region static members
 
@@ -264,7 +264,7 @@ namespace Grabacr07.KanColleViewer.Models
 			get { return this.ProxySettings.Host; }
 			set { this.ProxySettings.Host = value; }
 		}
-		
+
 		public ushort ProxyPort
 		{
 			get { return this.ProxySettings.Port; }

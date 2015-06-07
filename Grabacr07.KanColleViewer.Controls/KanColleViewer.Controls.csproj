@@ -101,9 +101,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Views\Behaviors\CountdownBehavior.cs" />
-    <Compile Include="Views\Behaviors\FlickTrigger.cs" />
     <Compile Include="Views\Behaviors\TimerBehavior.cs" />
-    <Compile Include="Views\Controls\AppIcon.cs" />
     <Compile Include="Views\Controls\BuildingDock.cs" />
     <Compile Include="Views\Controls\ColorIndicator.cs" />
     <Compile Include="Views\Controls\ConditionIcon.cs" />
