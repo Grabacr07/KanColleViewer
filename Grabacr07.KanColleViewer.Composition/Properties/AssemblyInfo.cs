@@ -1,26 +1,19 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("Grabacr07.KanColleViewer.Composition")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Grabacr07.KanColleViewer.Composition")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
+[assembly: AssemblyTitle("KanColleViewer.Composition")]
+[assembly: AssemblyCompany("grabacr.net")]
+[assembly: AssemblyProduct("KanColleViewer.Composition")]
+[assembly: AssemblyDescription("Interfaces for KanColleViewer plugins.")]
+[assembly: AssemblyCopyright("Copyright © 2015 Grabacr07")]
 
 // ComVisible を false に設定すると、その型はこのアセンブリ内で COM コンポーネントから 
 // 参照不可能になります。COM からこのアセンブリ内の型にアクセスする場合は、
 // その型の ComVisible 属性を true に設定してください。
 [assembly: ComVisible(false)]
-
-// 次の GUID は、このプロジェクトが COM に公開される場合の、typelib の ID です
-[assembly: Guid("9b4e38df-8032-4e42-a5ff-7d624d2e09fc")]
 
 // アセンブリのバージョン情報は、以下の 4 つの値で構成されています:
 //
