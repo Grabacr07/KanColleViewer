@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>$id$</id>
+        <title>$title$</title>
+        <version>$version$</version>
+        <authors>$author$</authors>
+        <owners>$author$</owners>
+        <licenseUrl>https://github.com/Grabacr07/KanColleViewer/blob/master/LICENSE.txt</licenseUrl>
+        <projectUrl>https://github.com/Grabacr07/KanColleViewer</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>$description$</description>
+        <language>ja-JP</language>
+        <tags>KanColle</tags>
+        <dependencies>
+            <dependency id="MetroRadiance.Core" version="1.0.0" />
+            <dependency id="MetroRadiance.Chrome" version="1.0.0" />
+            <dependency id="MetroRadiance" version="1.0.0" />
+            <dependency id="KanColleWrapper" version="1.0.0" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\Release\KanColleViewer.Controls.dll" target="lib\net45\KanColleViewer.Controls.dll" />
+        <file src="bin\Release\KanColleViewer.Controls.xml" target="lib\net45\KanColleViewer.Controls.xml" />
+        <file src="bin\Release\System.Windows.Interactivity.dll" target="lib\net45\System.Windows.Interactivity.dll" />
+        <file src="bin\Release\Microsoft.Expression.Drawing.dll" target="lib\net45\Microsoft.Expression.Drawing.dll" />
+        <file src="bin\Release\Microsoft.Expression.Interactions.dll" target="lib\net45\Microsoft.Expression.Interactions.dll" />
+    </files>
+</package>
