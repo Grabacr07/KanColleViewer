@@ -101,7 +101,6 @@
     <Compile Include="Models\MapArea.cs" />
     <Compile Include="Models\MapInfo.cs" />
     <Compile Include="Models\Mission.cs" />
-    <Compile Include="Extensions.cs" />
     <Compile Include="Itemyard.cs" />
     <Compile Include="IProxySettings.cs" />
     <Compile Include="KanColleProxyExtensions.cs" />
