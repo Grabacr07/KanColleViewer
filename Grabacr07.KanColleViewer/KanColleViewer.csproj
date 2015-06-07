@@ -81,9 +81,6 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Interactive">
-      <HintPath>..\packages\Ix-Main.1.2.2\lib\net45\System.Interactive.dll</HintPath>
-    </Reference>
     <Reference Include="System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
       <Private>True</Private>
@@ -210,7 +207,6 @@
     <Compile Include="Views\BrowserNavigator.xaml.cs">
       <DependentUpon>BrowserNavigator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Catalogs\Modernizable.cs" />
     <Compile Include="Views\Catalogs\ShipCatalogWindow.xaml.cs">
       <DependentUpon>ShipCatalogWindow.xaml</DependentUpon>
     </Compile>

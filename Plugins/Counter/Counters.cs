@@ -9,7 +9,7 @@ using Livet;
 
 namespace Counter
 {
-	public abstract class CounterBase : Notifier
+	public abstract class CounterBase : NotificationObject
 	{
 		#region Text 変更通知プロパティ
 
