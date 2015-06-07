@@ -1,8 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
-					xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
-					xmlns:globalization="clr-namespace:Grabacr07.KanColleViewer.Views.Globalization">
+					xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Controls"
+					xmlns:globalization="clr-namespace:Grabacr07.KanColleViewer.Controls.Globalization">
 
 	<Style TargetType="{x:Type controls:Quest}">
 		<Setter Property="Background"

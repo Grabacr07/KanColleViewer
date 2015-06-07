@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Grabacr07.KanColleViewer.Views.Behaviors
+namespace Grabacr07.KanColleViewer.Interactivity
 {
 	/// <summary>
 	/// 指定した時間までのカウントダウン機能を有する <see cref="TimerBehavior"/> です。

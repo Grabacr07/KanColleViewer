@@ -5,9 +5,8 @@ using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Grabacr07.KanColleViewer.Properties;
 
-namespace Grabacr07.KanColleViewer.Views.Globalization
+namespace Grabacr07.KanColleViewer.Controls.Globalization
 {
 	/// <summary>
 	/// 多言語化されたリソースへのアクセスを提供します。

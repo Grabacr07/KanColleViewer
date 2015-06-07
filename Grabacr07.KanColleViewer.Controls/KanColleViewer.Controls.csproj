@@ -88,27 +88,27 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Views\Globalization\ResourceService.cs" />
+    <Compile Include="Controls.Globalization\ResourceService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Compile Include="Controls.Globalization\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Behaviors\CountdownBehavior.cs" />
-    <Compile Include="Views\Behaviors\TimerBehavior.cs" />
-    <Compile Include="Views\Controls\BuildingDock.cs" />
-    <Compile Include="Views\Controls\ColorIndicator.cs" />
-    <Compile Include="Views\Controls\ConditionIcon.cs" />
-    <Compile Include="Views\Controls\Modernizable.cs" />
-    <Compile Include="Views\Controls\Quest.cs" />
-    <Compile Include="Views\Controls\SlotItemIcon.cs" />
-    <Compile Include="Views\Converters\HasFlagConverter.cs" />
-    <Compile Include="Views\Converters\QuestCategoryToColorConverter.cs" />
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+    <Compile Include="Interactivity\CountdownBehavior.cs" />
+    <Compile Include="Interactivity\TimerBehavior.cs" />
+    <Compile Include="Controls\BuildingDock.cs" />
+    <Compile Include="Controls\ColorIndicator.cs" />
+    <Compile Include="Controls\ConditionIcon.cs" />
+    <Compile Include="Controls\Modernizable.cs" />
+    <Compile Include="Controls\Quest.cs" />
+    <Compile Include="Controls\SlotItemIcon.cs" />
+    <Compile Include="Converters\HasFlagConverter.cs" />
+    <Compile Include="Converters\QuestCategoryToColorConverter.cs" />
+    <EmbeddedResource Include="Controls.Globalization\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <AppDesigner Include="Properties\" />

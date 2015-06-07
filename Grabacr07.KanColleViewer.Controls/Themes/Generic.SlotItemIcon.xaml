@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
-					xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls">
+					xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Controls">
 
 	<Style TargetType="{x:Type controls:SlotItemIcon}">
 		<Setter Property="Width"

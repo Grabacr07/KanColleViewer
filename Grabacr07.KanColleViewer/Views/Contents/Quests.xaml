@@ -6,11 +6,13 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
+			 xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
+			 xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
-			 xmlns:control2="clr-namespace:Grabacr07.KanColleViewer.Views.Controls;assembly=KanColleViewer.Controls"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 mc:Ignorable="d"
 			 d:DesignWidth="700"
@@ -47,14 +49,14 @@
 								  Margin="10,0">
 						<ItemsControl.ItemTemplate>
 							<DataTemplate>
-								<control2:Quest IsUntaken="{Binding IsUntaken}"
-												Title="{Binding Title}"
-												Detail="{Binding Detail}"
-												Category="{Binding Category}"
-												Progress="{Binding Progress}"
-												State="{Binding State}"
-												IsDetailView="True"
-												Margin="0,0,0,12" />
+								<kcvc:Quest IsUntaken="{Binding IsUntaken}"
+											Title="{Binding Title}"
+											Detail="{Binding Detail}"
+											Category="{Binding Category}"
+											Progress="{Binding Progress}"
+											State="{Binding State}"
+											IsDetailView="True"
+											Margin="0,0,0,12" />
 							</DataTemplate>
 						</ItemsControl.ItemTemplate>
 					</ItemsControl>
@@ -129,14 +131,14 @@
 										<ToggleButton>
 											<ToggleButton.Template>
 												<ControlTemplate TargetType="{x:Type ToggleButton}">
-													<control2:Quest IsUntaken="{Binding IsUntaken}"
-																	Title="{Binding Title}"
-																	Detail="{Binding Detail}"
-																	Category="{Binding Category}"
-																	Progress="{Binding Progress}"
-																	State="{Binding State}"
-																	IsDetailView="{TemplateBinding IsChecked}"
-																	Margin="0,0,0,10" />
+													<kcvc:Quest IsUntaken="{Binding IsUntaken}"
+																Title="{Binding Title}"
+																Detail="{Binding Detail}"
+																Category="{Binding Category}"
+																Progress="{Binding Progress}"
+																State="{Binding State}"
+																IsDetailView="{TemplateBinding IsChecked}"
+																Margin="0,0,0,10" />
 												</ControlTemplate>
 											</ToggleButton.Template>
 										</ToggleButton>

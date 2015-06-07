@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
 using Grabacr07.KanColleWrapper.Models;
 
-namespace Grabacr07.KanColleViewer.Views.Converters
+namespace Grabacr07.KanColleViewer.Converters
 {
 	public class QuestCategoryToColorConverter : IValueConverter
 	{

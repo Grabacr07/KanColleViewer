@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace Grabacr07.KanColleViewer.Views.Converters
+namespace Grabacr07.KanColleViewer.Converters
 {
 	public class HasFlagConverter : IValueConverter
 	{

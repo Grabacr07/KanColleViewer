@@ -6,13 +6,14 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
+			 xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
+			 xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
 			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:vContents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
 			 xmlns:vmContents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
-			 xmlns:control2="clr-namespace:Grabacr07.KanColleViewer.Views.Controls;assembly=KanColleViewer.Controls"
-			 xmlns:converters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters;assembly=KanColleViewer.Controls"
 			 xmlns:catalogs="clr-namespace:Grabacr07.KanColleViewer.Views.Catalogs"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
@@ -22,7 +23,7 @@
 			 d:DesignHeight="333">
 	<UserControl.Resources>
 		<ResourceDictionary>
-			<converters:HasFlagConverter x:Key="HasFlagConverter" />
+			<kcvv:HasFlagConverter x:Key="HasFlagConverter" />
 
 			<Style TargetType="{x:Type Border}">
 				<Setter Property="BorderBrush"
@@ -217,10 +218,10 @@
 													 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 												<Run Text="{Binding Ship.HP.Maximum, StringFormat=/{0}, Mode=OneWay}" />
 												</TextBlock>
-												<control2:ColorIndicator Grid.Row="1"
-																		 Height="6"
-																		 LimitedValue="{Binding Ship.HP, Mode=OneWay}"
-																		 Margin="0,2,0,0" />
+												<kcvc:ColorIndicator Grid.Row="1"
+																	 Height="6"
+																	 LimitedValue="{Binding Ship.HP, Mode=OneWay}"
+																	 Margin="0,2,0,0" />
 											</Grid>
 
 											<Grid x:Name="RepairIndicator"
@@ -247,7 +248,7 @@
 
 											<TextBlock Grid.Column="3">
 											<InlineUIContainer>
-												<control2:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
+												<kcvc:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
 											</InlineUIContainer>
 											<Run Text="{Binding Ship.Condition, Mode=OneWay}"
 												 Style="{DynamicResource EmphaticTextElementStyleKey}" />
@@ -385,7 +386,7 @@
 								<DataTemplate>
 									<Grid Margin="0,4,0,0">
 										<Grid.Resources>
-											<converters:QuestCategoryToColorConverter x:Key="QuestCategoryToColorConverterKey" />
+											<kcvv:QuestCategoryToColorConverter x:Key="QuestCategoryToColorConverterKey" />
 										</Grid.Resources>
 										<Grid.ColumnDefinitions>
 											<ColumnDefinition Width="Auto" />
