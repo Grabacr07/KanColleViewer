@@ -179,12 +179,13 @@
 											<TextBlock ToolTipService.Placement="Relative"
 													   ToolTipService.HorizontalOffset="-9"
 													   ToolTipService.VerticalOffset="-3">
-											<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
-												 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-											<LineBreak />
-											<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
-												 FontSize="11" />
-												<TextBlock.ToolTip>
+												<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
+													 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+												<LineBreak />
+												<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
+													 FontSize="11" />
+												<!-- せっかくピッタリ合わせる Tooltip つけたけど、トリミングされなくなったから不要になったんじゃモン… -->
+												<!--<TextBlock.ToolTip>
 													<TextBlock Margin="0,-2,0,0">
 													<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
 														 Style="{DynamicResource EmphaticTextElementStyleKey}" />
@@ -192,17 +193,17 @@
 													<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
 														 FontSize="11" />
 													</TextBlock>
-												</TextBlock.ToolTip>
-										</TextBlock>
+												</TextBlock.ToolTip>-->
+											</TextBlock>
 
 											<TextBlock Grid.Column="1"
 													   Margin="12,0,0,0">
-											<Run Text="Lv." />
-											<Run Text="{Binding Ship.Level, Mode=OneWay}"
-												 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-											<LineBreak />
-											<Run Text="{Binding Ship.ExpForNextLevel, StringFormat=Next: {0}, Mode=OneWay}"
-												 FontSize="9" />
+												<Run Text="Lv." />
+												<Run Text="{Binding Ship.Level, Mode=OneWay}"
+													 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+												<LineBreak />
+												<Run Text="{Binding Ship.ExpForNextLevel, StringFormat=Next: {0}, Mode=OneWay}"
+													 FontSize="9" />
 											</TextBlock>
 
 											<Grid x:Name="HPIndicator"
@@ -213,10 +214,10 @@
 													<RowDefinition Height="Auto" />
 												</Grid.RowDefinitions>
 												<TextBlock>
-												<Run Text="HP:" />
-												<Run Text="{Binding Ship.HP.Current, Mode=OneWay}"
-													 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-												<Run Text="{Binding Ship.HP.Maximum, StringFormat=/{0}, Mode=OneWay}" />
+													<Run Text="HP:" />
+													<Run Text="{Binding Ship.HP.Current, Mode=OneWay}"
+														 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+													<Run Text="{Binding Ship.HP.Maximum, StringFormat=/{0}, Mode=OneWay}" />
 												</TextBlock>
 												<kcvc:ColorIndicator Grid.Row="1"
 																	 Height="6"
@@ -247,14 +248,14 @@
 											</Grid>
 
 											<TextBlock Grid.Column="3">
-											<InlineUIContainer>
-												<kcvc:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
-											</InlineUIContainer>
-											<Run Text="{Binding Ship.Condition, Mode=OneWay}"
-												 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-											<LineBreak />
-											<Run Text="condition"
-												 FontSize="9" />
+												<InlineUIContainer>
+													<kcvc:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
+												</InlineUIContainer>
+												<Run Text="{Binding Ship.Condition, Mode=OneWay}"
+													 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+												<LineBreak />
+												<Run Text="condition"
+													 FontSize="9" />
 											</TextBlock>
 										</Grid>
 										<Rectangle Height="1"
