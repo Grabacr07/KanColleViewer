@@ -28,9 +28,11 @@
 				 ScrollViewer.PanningMode="Both">
 			<ListBox.Template>
 				<ControlTemplate TargetType="{x:Type ListBox}">
-					<StackPanel Background="{TemplateBinding Background}">
-						<StackPanel IsItemsHost="True" />
-					</StackPanel>
+					<ScrollViewer VerticalScrollBarVisibility="Auto"
+								  PanningMode="Both">
+						<StackPanel Background="{TemplateBinding Background}"
+									IsItemsHost="True" />
+					</ScrollViewer>
 				</ControlTemplate>
 			</ListBox.Template>
 
@@ -88,11 +90,7 @@
 			</ListBox.ItemTemplate>
 		</ListBox>
 
-		<ScrollViewer Grid.Column="1"
-					  VerticalScrollBarVisibility="Auto"
-					  PanningMode="Both">
-			<ContentControl Content="{Binding SelectedTool.View}"
-							Margin="8,0,8,8" />
-		</ScrollViewer>
+		<ContentControl Grid.Column="1"
+						Content="{Binding SelectedTool.View}" />
 	</Grid>
 </UserControl>
