@@ -7,7 +7,7 @@ using Grabacr07.KanColleViewer.Composition;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Composition
 {
-	public class NotifierViewModel : PluginViewModelBase<INotifier>
+	public class NotifierViewModel : DerivedPluginViewModelBase<INotifier>
 	{
 		#region ErrorMessage 変更通知プロパティ
 

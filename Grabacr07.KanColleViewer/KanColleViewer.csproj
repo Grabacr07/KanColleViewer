@@ -146,7 +146,7 @@
     <Compile Include="ViewModels\Contents\Fleets\CombinedFleetViewModel.cs" />
     <Compile Include="ViewModels\Composition\NotifierViewModel.cs" />
     <Compile Include="ViewModels\Composition\PluginViewModel.cs" />
-    <Compile Include="ViewModels\Composition\PluginViewModelBase.cs" />
+    <Compile Include="ViewModels\Composition\DerivedPluginViewModelBase.cs" />
     <Compile Include="ViewModels\Composition\ToolViewModel.cs" />
     <Compile Include="ViewModels\Contents\AdmiralViewModel.cs" />
     <Compile Include="ViewModels\Contents\BuildingDockViewModel.cs" />
