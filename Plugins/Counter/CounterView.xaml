@@ -10,52 +10,56 @@
 			 d:DataContext="{d:DesignInstance counter:CounterViewModel}"
 			 d:DesignHeight="300"
 			 d:DesignWidth="300">
-	<DockPanel>
-		<TextBlock DockPanel.Dock="Bottom"
-				   Text="※アプリケーションが起動している間に発生した回数のみをカウントしています。"
-				   Style="{DynamicResource DefaultTextStyleKey}"
-				   Margin="4"
-				   Padding="0,8,0,0" />
+	<ScrollViewer HorizontalScrollBarVisibility="Disabled"
+				  VerticalScrollBarVisibility="Auto"
+				  PanningMode="Both">
+		<DockPanel Margin="8,0,8,8">
+			<TextBlock DockPanel.Dock="Bottom"
+					   Text="※アプリケーションが起動している間に発生した回数のみをカウントしています。"
+					   Style="{DynamicResource DefaultTextStyleKey}"
+					   Margin="4"
+					   Padding="0,8,0,0" />
 
-		<ItemsControl ItemsSource="{Binding Counters}"
-					  Grid.IsSharedSizeScope="True">
-			<ItemsControl.Template>
-				<ControlTemplate TargetType="{x:Type ItemsControl}">
-					<ScrollViewer HorizontalScrollBarVisibility="Disabled"
-								  VerticalScrollBarVisibility="Auto">
-						<StackPanel IsItemsHost="True"
-									Margin="4" />
-					</ScrollViewer>
-				</ControlTemplate>
-			</ItemsControl.Template>
+			<ItemsControl ItemsSource="{Binding Counters}"
+						  Grid.IsSharedSizeScope="True">
+				<ItemsControl.Template>
+					<ControlTemplate TargetType="{x:Type ItemsControl}">
+						<ScrollViewer HorizontalScrollBarVisibility="Disabled"
+									  VerticalScrollBarVisibility="Auto">
+							<StackPanel IsItemsHost="True"
+										Margin="4" />
+						</ScrollViewer>
+					</ControlTemplate>
+				</ItemsControl.Template>
 
-			<ItemsControl.ItemTemplate>
-				<DataTemplate>
-					<Border Margin="4"
-							Padding="0,0,0,8"
-							BorderThickness="0,0,0,1"
-							BorderBrush="{DynamicResource BorderBrushKey}">
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto"
-												  SharedSizeGroup="Text" />
-								<ColumnDefinition Width="32" />
-								<ColumnDefinition Width="Auto" />
-							</Grid.ColumnDefinitions>
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<Border Margin="4"
+								Padding="0,0,0,8"
+								BorderThickness="0,0,0,1"
+								BorderBrush="{DynamicResource BorderBrushKey}">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto"
+													  SharedSizeGroup="Text" />
+									<ColumnDefinition Width="32" />
+									<ColumnDefinition Width="Auto" />
+								</Grid.ColumnDefinitions>
 
-							<TextBlock>
+								<TextBlock>
 								<Run Text="{Binding Text, Mode=OneWay}" />
 								<Run Text=":" />
 								<Run Text="{Binding Count}"
 									 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-							</TextBlock>
-							<controls:CallMethodButton Grid.Column="2"
-													   Content="リセット"
-													   MethodName="Reset" />
-						</Grid>
-					</Border>
-				</DataTemplate>
-			</ItemsControl.ItemTemplate>
-		</ItemsControl>
-	</DockPanel>
+								</TextBlock>
+								<controls:CallMethodButton Grid.Column="2"
+														   Content="リセット"
+														   MethodName="Reset" />
+							</Grid>
+						</Border>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</DockPanel>
+	</ScrollViewer>
 </UserControl>
