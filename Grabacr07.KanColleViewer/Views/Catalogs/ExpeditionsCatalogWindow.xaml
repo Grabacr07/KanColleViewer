@@ -89,6 +89,7 @@
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
 			<Expander IsExpanded="False" Margin="8,10">
@@ -97,7 +98,7 @@
 							   FontSize="14" />
 				</Expander.Header>
 				
-				<Grid Grid.Row="1" HorizontalAlignment="Left" Margin="20,10,10,10">
+				<Grid Grid.Row="1" HorizontalAlignment="Left" Margin="20,10,10,0">
 					<Grid>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="Auto" />
@@ -137,12 +138,14 @@
 
 				</Grid>
 			</Expander>
-			
-			<Border Grid.Row="2"
+			<Grid Grid.Row="2" HorizontalAlignment="Right" Margin="8,10">
+				<CheckBox Content="자원획득량을 시간당 획득량으로 표시" IsChecked="{Binding IsPerHour}"/>
+			</Grid>
+			<Border Grid.Row="3"
 					BorderBrush="{DynamicResource BorderBrushKey}"
 					BorderThickness="1"
 					Margin="8,0,8,8">
-				<ListView ItemsSource="{Binding ExpeditionList}"
+				<ListView ItemsSource="{Binding ExpeditionList,Mode=OneWay}"
 						  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}">
 					<ListView.Resources>
 						<Style TargetType="{x:Type TextBlock}">
@@ -239,7 +242,7 @@
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
-							<GridViewColumn Width="Auto">
+							<GridViewColumn Width="50">
 								<GridViewColumnHeader>
 									<TextBlock Text="연료" FontFamily="Segoe UI"/>
 								</GridViewColumnHeader>
@@ -249,7 +252,7 @@
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
-							<GridViewColumn Width="Auto">
+							<GridViewColumn Width="50">
 								<GridViewColumnHeader>
 									<TextBlock Text="탄" FontFamily="Segoe UI"/>
 								</GridViewColumnHeader>
@@ -259,7 +262,7 @@
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
-							<GridViewColumn Width="Auto">
+							<GridViewColumn Width="50">
 								<GridViewColumnHeader>
 									<TextBlock Text="강재" FontFamily="Segoe UI"/>
 								</GridViewColumnHeader>
@@ -269,7 +272,7 @@
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
-							<GridViewColumn Width="Auto">
+							<GridViewColumn Width="50">
 								<GridViewColumnHeader>
 									<TextBlock Text="보크" FontFamily="Segoe UI"/>
 								</GridViewColumnHeader>
