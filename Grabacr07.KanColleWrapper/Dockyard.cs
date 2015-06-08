@@ -1,8 +1,12 @@
-﻿using Grabacr07.KanColleWrapper.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reactive.Linq;
+using System.Threading.Tasks;
+using Grabacr07.KanColleWrapper.Internal;
+using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
 using Livet;
-using System;
-using System.Linq;
 
 namespace Grabacr07.KanColleWrapper
 {
@@ -33,7 +37,7 @@ namespace Grabacr07.KanColleWrapper
 		#region CreatedSlotItem 変更通知プロパティ
 
 		private CreatedSlotItem _CreatedSlotItem;
-		
+
 		/// <summary>
 		/// 最後に開発された装備アイテムの情報を取得します。
 		/// </summary>
@@ -76,7 +80,7 @@ namespace Grabacr07.KanColleWrapper
 			}
 			else
 			{
-				this.Docks.ForEach(x => x.Value.Dispose());
+				foreach (var dock in this.Docks) dock.Value.SafeDispose();
 				this.Docks = new MemberTable<BuildingDock>(source.Select(x => new BuildingDock(x)));
 			}
 		}

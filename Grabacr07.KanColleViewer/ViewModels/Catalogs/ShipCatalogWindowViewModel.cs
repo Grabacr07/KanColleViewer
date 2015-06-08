@@ -35,7 +35,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			get { return this.ShipTypes.All(x => x.IsSelected); }
 			set
 			{
-				this.ShipTypes.ForEach(x => x.Set(value));
+				foreach (var type in this.ShipTypes) type.Set(value);
 				this.Update();
 			}
 		}
@@ -192,7 +192,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		public void SetShipType(int[] ids)
 		{
-			this.ShipTypes.ForEach(x => x.Set(ids.Any(id => x.Id == id)));
+			foreach (var type in this.ShipTypes) type.Set(ids.Any(id => type.Id == id));
 			this.Update();
 		}
 

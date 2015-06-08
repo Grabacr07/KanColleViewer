@@ -304,7 +304,16 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   完了과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   艦隊ごとに個別に設定する과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Expedition_Notifications_Individual {
+            get {
+                return ResourceManager.GetString("Expedition_Notifications_Individual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   終了時刻과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Expedition_TimeComplete {
             get {
@@ -313,7 +322,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   残る時間과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   艦隊帰投まで과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Expedition_TimeRemaining {
             get {
@@ -565,51 +574,6 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   任務画面の全ページにアクセスしてください。과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        public static string Quest_Detail_Untaken {
-            get {
-                return ResourceManager.GetString("Quest_Detail_Untaken", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///    50 % 과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        public static string Quest_Progress_50 {
-            get {
-                return ResourceManager.GetString("Quest_Progress_50", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///    80 % 과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        public static string Quest_Progress_80 {
-            get {
-                return ResourceManager.GetString("Quest_Progress_80", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///    完了 과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        public static string Quest_State_Accomplished {
-            get {
-                return ResourceManager.GetString("Quest_State_Accomplished", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   (未取得の任務)과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        public static string Quest_Title_Untaken {
-            get {
-                return ResourceManager.GetString("Quest_Title_Untaken", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   任務과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Quests {
@@ -664,7 +628,16 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   ロック과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   入渠ドック과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Repairyard {
+            get {
+                return ResourceManager.GetString("Repairyard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ロックされています과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Repairyard_Locked {
             get {
@@ -718,7 +691,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   完了과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   完了時刻과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Repairyard_TimeComplete {
             get {
@@ -727,7 +700,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   残る時間과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   整備完了まで과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Repairyard_TimeRemaining {
             get {

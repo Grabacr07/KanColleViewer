@@ -1,8 +1,12 @@
-﻿using Grabacr07.KanColleWrapper.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reactive.Linq;
+using System.Threading.Tasks;
+using Grabacr07.KanColleWrapper.Internal;
+using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
 using Livet;
-using System;
-using System.Linq;
 
 namespace Grabacr07.KanColleWrapper
 {
@@ -75,8 +79,8 @@ namespace Grabacr07.KanColleWrapper
 			}
 			else
 			{
-				this.Docks.ForEach(x => x.Value.Dispose());
-				this.Docks = new MemberTable<RepairingDock>(source.Select(x => new RepairingDock(homeport, x)));
+				foreach (var dock in this.Docks) dock.Value.SafeDispose();
+				this.Docks = new MemberTable<RepairingDock>(source.Select(x => new RepairingDock(this.homeport, x)));
 			}
 		}
 

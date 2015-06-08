@@ -8,7 +8,6 @@
 			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
 			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
-			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 mc:Ignorable="d"
 			 d:DesignWidth="700"
 			 d:DesignHeight="400"
@@ -18,7 +17,6 @@
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="Common.xaml" />
-				<ResourceDictionary Source="../../Themes/Converters.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 
 			<Style x:Key="TabHeaderTextStyleKey"
@@ -34,15 +32,15 @@
 		</ResourceDictionary>
 	</UserControl.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto"
+	<ScrollViewer VerticalScrollBarVisibility="Auto"
 				  PanningMode="Both">
-		<ScrollViewer.MaxWidth>
+		<!--<ScrollViewer.MaxWidth>
 			<MultiBinding Converter="{StaticResource MaxConverter}">
 				<Binding RelativeSource="{RelativeSource AncestorType={x:Type ScrollContentPresenter}}" Path="ActualWidth" Mode="OneWay"/>
 				<Binding Source="{x:Static properties:Settings.Default}" Path="UIContentWidth" Mode="OneWay"/>
 			</MultiBinding>
-		</ScrollViewer.MaxWidth>
-		
+		</ScrollViewer.MaxWidth>-->
+
 		<TabControl Style="{DynamicResource VerticalTabControlStyleKey}">
 			<TabItem>
 				<TabItem.Header>
@@ -86,12 +84,19 @@
 
 			<TabItem>
 				<TabItem.Header>
+					<TextBlock Text="플러그인"
+							   Style="{StaticResource TabHeaderTextStyleKey}" />
+				</TabItem.Header>
+				<settings:Plugins Margin="10,0" />
+			</TabItem>
+			
+			<TabItem>
+				<TabItem.Header>
 					<TextBlock Text="{Binding Resources.Settings_Language, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 							   Style="{StaticResource TabHeaderTextStyleKey}" />
 				</TabItem.Header>
 				<settings:Language Margin="10,0" />
 			</TabItem>
-
 			<TabItem>
 				<TabItem.Header>
 					<TextBlock Text="{Binding Resources.Settings_Other, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
@@ -107,7 +112,7 @@
 				</TabItem.Header>
 				<settings:Updates Margin="10,0" />
 			</TabItem>
-
+			
 			<TabItem>
 				<TabItem.Header>
 					<TextBlock Text="{Binding Resources.Settings_VersionInfo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"

@@ -198,7 +198,10 @@
 	<data name="Expedition_Notifications_Enable" xml:space="preserve">
     <value>원정 귀환시 알림을 표시</value>
   </data>
-	<data name="Expedition_TimeComplete" xml:space="preserve">
+  <data name="Expedition_Notifications_Individual" xml:space="preserve">
+    <value>함대당 개별적으로 설정</value>
+  </data>
+  <data name="Expedition_TimeComplete" xml:space="preserve">
     <value>종료시간</value>
   </data>
 	<data name="Expedition_TimeRemaining" xml:space="preserve">
@@ -258,7 +261,10 @@
 	<data name="MessageBar_ReSortie_Separator" xml:space="preserve">
     <value>, </value>
   </data>
-	<data name="MessageBar_ReSortie_Wounded" xml:space="preserve">
+  <data name="Repairyard" xml:space="preserve">
+    <value>입거도크</value>
+  </data>
+  <data name="MessageBar_ReSortie_Wounded" xml:space="preserve">
     <value>대파이상인 칸무스</value>
   </data>
 	<data name="Quests" xml:space="preserve">
@@ -278,21 +284,6 @@
   </data>
 	<data name="Quests_Weekly" xml:space="preserve">
     <value>주간 임무</value>
-  </data>
-	<data name="Quest_Detail_Untaken" xml:space="preserve">
-    <value>임무화면의 모든 페이지에 접속해 주십시오.</value>
-  </data>
-	<data name="Quest_Progress_50" xml:space="preserve">
-    <value> 50 % </value>
-  </data>
-	<data name="Quest_Progress_80" xml:space="preserve">
-    <value> 80 % </value>
-  </data>
-	<data name="Quest_State_Accomplished" xml:space="preserve">
-    <value> 완료 </value>
-  </data>
-	<data name="Quest_Title_Untaken" xml:space="preserve">
-    <value>(미습득임무)</value>
   </data>
 	<data name="Shipyard" xml:space="preserve">
     <value>공창</value>

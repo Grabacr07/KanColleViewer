@@ -10,15 +10,19 @@
 				   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 				   xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 				   xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+				   xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
+				   xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
+				   xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
 				   xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 				   xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 				   xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
-				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Catalogs"
 				   xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
 				   xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 				   xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
 				   xmlns:catalogs="clr-namespace:Grabacr07.KanColleViewer.Views.Catalogs"
+				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Catalogs"
 				   xmlns:contentsVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
+				   xmlns:kcvcn="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:ShipCatalogWindowViewModel}"
 				   Title="{Binding Title}"
@@ -753,9 +757,9 @@
 										<TextBlock FontSize="9"
 												   Margin="0,3">
 											<InlineUIContainer>
-												<controls:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}"
-																		Width="9"
-																		Height="9" />
+												<kcvc:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}"
+																	Width="9"
+																	Height="9" />
 											</InlineUIContainer>
 											<Run Text="{Binding Ship.Condition, Mode=OneWay}"
 												 FontSize="12"
@@ -774,10 +778,10 @@
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<catalogs:Modernizable Status="{Binding Ship.Firepower, Mode=OneWay}"
-															   Background="#7FB13B2A"
-															   MinWidth="64"
-															   Margin="-5,0" />
+										<kcvc:Modernizable Status="{Binding Ship.Firepower, Mode=OneWay}"
+														   Background="#7FB13B2A"
+														   MinWidth="64"
+														   Margin="-5,0" />
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
@@ -791,10 +795,10 @@
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<catalogs:Modernizable Status="{Binding Ship.Torpedo, Mode=OneWay}"
-															   Background="#7F2970AB"
-															   MinWidth="64"
-															   Margin="-5,0" />
+										<kcvc:Modernizable Status="{Binding Ship.Torpedo, Mode=OneWay}"
+														   Background="#7F2970AB"
+														   MinWidth="64"
+														   Margin="-5,0" />
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
@@ -808,10 +812,10 @@
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<catalogs:Modernizable Status="{Binding Ship.AA, Mode=OneWay}"
-															   Background="#7FDF6A0C"
-															   MinWidth="64"
-															   Margin="-5,0" />
+										<kcvc:Modernizable Status="{Binding Ship.AA, Mode=OneWay}"
+														   Background="#7FDF6A0C"
+														   MinWidth="64"
+														   Margin="-5,0" />
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
@@ -825,10 +829,10 @@
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<catalogs:Modernizable Status="{Binding Ship.Armer, Mode=OneWay}"
-															   Background="#7FD8981A"
-															   MinWidth="64"
-															   Margin="-5,0" />
+										<kcvc:Modernizable Status="{Binding Ship.Armer, Mode=OneWay}"
+														   Background="#7FD8981A"
+														   MinWidth="64"
+														   Margin="-5,0" />
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
@@ -842,10 +846,10 @@
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<catalogs:Modernizable Status="{Binding Ship.Luck, Mode=OneWay}"
-															   Background="#7F808080"
-															   MinWidth="64"
-															   Margin="-5,0" />
+										<kcvc:Modernizable Status="{Binding Ship.Luck, Mode=OneWay}"
+														   Background="#7F808080"
+														   MinWidth="64"
+														   Margin="-5,0" />
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
@@ -936,8 +940,8 @@
 															Height="20"
 															Padding="0,1">
 														<Viewbox>
-															<controls:SlotItemIcon Type="{Binding Item.Info.IconType}"
-																				   Margin="0,0,4,0" />
+															<kcvc:SlotItemIcon Type="{Binding Item.Info.IconType}"
+																			   Margin="0,0,4,0" />
 														</Viewbox>
 													</Border>
 												</DataTemplate>

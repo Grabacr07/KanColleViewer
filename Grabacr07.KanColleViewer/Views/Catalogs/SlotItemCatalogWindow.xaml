@@ -8,14 +8,17 @@
 				   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 				   xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 				   xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+				   xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
+				   xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
+				   xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
 				   xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 				   xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 				   xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
-				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Catalogs"
 				   xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
 				   xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 				   xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
 				   xmlns:catalogs="clr-namespace:Grabacr07.KanColleViewer.Views.Catalogs"
+				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Catalogs"
 				   x:Name="GlowMetroWindow"
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:SlotItemCatalogViewModel}"
@@ -134,7 +137,7 @@
 										<StackPanel Orientation="Horizontal">
 											<Border Padding="0,1,5,1">
 												<Viewbox Width="20">
-													<controls:SlotItemIcon Type="{Binding Target.IconType}" />
+													<kcvc:SlotItemIcon Type="{Binding Target.IconType}" />
 												</Viewbox>
 											</Border>
 											<TextBlock Text="{Binding Target.Name}"

@@ -103,7 +103,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				var cfvm = new CombinedFleetViewModel(KanColleClient.Current.Homeport.Organization.CombinedFleet);
 				var fleets = this.allFleets.Where(x => cfvm.Source.Fleets.All(f => f != x.Source));
 
-				this.Fleets = EnumerableEx.Return<ItemViewModel>(cfvm).Concat(fleets).ToArray();
+				this.Fleets = Grabacr07.KanColleWrapper.EnumerableEx.Return<ItemViewModel>(cfvm).Concat(fleets).ToArray();
 				this.SelectedFleet = cfvm;
 			}
 			else
