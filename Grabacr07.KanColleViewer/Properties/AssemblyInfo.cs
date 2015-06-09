@@ -3,6 +3,7 @@ using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
+using Grabacr07.KanColleViewer.Composition;
 
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
@@ -52,3 +53,9 @@ using System.Windows;
 // 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("3.8.2.1")]
+
+[assembly: TypeForwardedTo(typeof(IPlugin))]
+[assembly: TypeForwardedTo(typeof(IPluginMetadata))]
+[assembly: TypeForwardedTo(typeof(INotifier))]
+[assembly: TypeForwardedTo(typeof(NotifyType))]
+[assembly: TypeForwardedTo(typeof(IToolPlugin))]

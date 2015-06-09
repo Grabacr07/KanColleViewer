@@ -122,6 +122,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Composition\AggregateNotifier.cs" />
+    <Compile Include="Composition\LoadFailurePluginData.cs" />
     <Compile Include="Composition\PluginHost.cs" />
     <Compile Include="Models\BrowserZoomFactor.cs" />
     <Compile Include="Models\IZoomFactor.cs" />

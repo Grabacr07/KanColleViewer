@@ -40,7 +40,6 @@ namespace Grabacr07.KanColleViewer.Composition
 		/// <summary>
 		/// プラグインによって提供される通知機能を表すオブジェクトのシーケンスを取得します。
 		/// </summary>
-		/// <value>プラグインによって提供される通知機能を表すオブジェクトのシーケンス。</value>
 		[ImportMany]
 		public IEnumerable<Lazy<INotifier, IPluginMetadata>> Notifiers { get; set; }
 
@@ -51,32 +50,70 @@ namespace Grabacr07.KanColleViewer.Composition
 		public IEnumerable<Lazy<IToolPlugin, IPluginMetadata>> Tools { get; set; }
 
 		/// <summary>
-		/// インポートされたプラグインのシーケンスを取得します。
+		/// プラグインによって提供される拡張機能を表すオブジェクトのシーケンスを取得します。
 		/// </summary>
 		[ImportMany]
 		public IEnumerable<Lazy<IPlugin, IPluginMetadata>> Plugins { get; set; }
 
+		/// <summary>
+		/// ロートされているすべてのプラグインのシーケンスを取得します。
+		/// </summary>
+		public IEnumerable<IPlugin> All
+		{
+			get
+			{
+				return this.Plugins.Select(x => x.Value)
+					.Concat(this.Tools.Select(x => x.Value))
+					.Concat(this.Notifiers.Select(x => x.Value));
+			}
+		}
+
+		/// <summary>
+		/// ロードに失敗したプラグインのリストを取得します。
+		/// </summary>
+		public List<LoadFailurePluginData> LoadFailurePlugins { get; private set; }
+
 
 		private PluginHost()
 		{
+			this.LoadFailurePlugins = new List<LoadFailurePluginData>();
+
+			var currentDir = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
+			if (currentDir == null) return;
+
+			var pluginsDir = Path.Combine(currentDir, PluginsDirectory);
+			var plugins = Directory.EnumerateFileSystemEntries(pluginsDir, "*.dll", SearchOption.AllDirectories);
 			var catalog = new AggregateCatalog(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
 
-			var current = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
-			if (current != null)
+			foreach (var plugin in plugins)
 			{
-				var pluginsPath = Path.Combine(current, PluginsDirectory);
-				if (Directory.Exists(pluginsPath))
+				try
 				{
-					catalog.Catalogs.Add(new DirectoryCatalog(pluginsPath));
+					var asmCatalog = new AssemblyCatalog(plugin);
+					if (asmCatalog.Parts.ToList().Count > 0)
+					{
+						catalog.Catalogs.Add(asmCatalog);
+					}
+				}
+				catch (ReflectionTypeLoadException ex)
+				{
+					this.LoadFailurePlugins.Add(new LoadFailurePluginData
+					{
+						Filename = Path.GetFileNameWithoutExtension(plugin),
+						Exception = ex,
+					});
+				}
+				catch (BadImageFormatException ex)
+				{
+					this.LoadFailurePlugins.Add(new LoadFailurePluginData
+					{
+						Filename = Path.GetFileNameWithoutExtension(plugin),
+						Exception = ex,
+					});
 				}
 			}
 
 			this.container = new CompositionContainer(catalog);
-		}
-
-		static PluginHost()
-		{
-
 		}
 
 		public void Dispose()
@@ -92,6 +129,11 @@ namespace Grabacr07.KanColleViewer.Composition
 		{
 			this.container.ComposeParts(this);
 			this.GetNotifier().Initialize();
+
+			// この時点で失敗したら、
+			// this.container = new CompositionContainer(catalog); をやり直せばいいのでは？
+
+			this.CheckPlugins();
 		}
 
 		/// <summary>
@@ -101,6 +143,26 @@ namespace Grabacr07.KanColleViewer.Composition
 		public INotifier GetNotifier()
 		{
 			return new AggregateNotifier(this.Notifiers.Select(x => x.Value));
+		}
+
+		private void CheckPlugins()
+		{
+			//foreach (var plugin in this.All)
+			//{
+			//	plugin.GetSettingsView();
+			//}
+
+			foreach (var plugin in this.Tools)
+			{
+				try
+				{
+					var p = plugin.Value;
+				}
+				catch (Exception ex)
+				{
+					
+				}
+			}
 		}
 	}
 }
