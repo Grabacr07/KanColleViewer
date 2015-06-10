@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -43,6 +42,9 @@ namespace Grabacr07.KanColleViewer.Composition
 		private InitializationResult initializationResult;
 		private readonly List<Exception> unknownExceptions = new List<Exception>();
 
+		/// <summary>
+		/// プラグインの初期化処理 (<see cref="PluginHost.Initialize"/> メソッド) の結果を示す識別子を定義します。
+		/// </summary>
 		public enum InitializationResult
 		{
 			/// <summary>
@@ -92,11 +94,6 @@ namespace Grabacr07.KanColleViewer.Composition
 			}
 		}
 
-		/// <summary>
-		/// ロードに失敗したプラグインのリストを取得します。
-		/// </summary>
-		//public List<LoadFailurePluginData> LoadFailurePlugins { get; private set; }
-
 		public IReadOnlyCollection<Exception> UnknownExceptions
 		{
 			get { return this.unknownExceptions; }
@@ -104,6 +101,7 @@ namespace Grabacr07.KanColleViewer.Composition
 
 
 		private PluginHost() { }
+
 
 		/// <summary>
 		/// プラグインをロードし、初期化を行います。
