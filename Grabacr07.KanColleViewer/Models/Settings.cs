@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.Models.Data.Xml;
 using Grabacr07.KanColleWrapper;
-using Grabacr07.KanColleWrapper.Models;
 using Livet;
 
 namespace Grabacr07.KanColleViewer.Models
@@ -346,6 +346,47 @@ namespace Grabacr07.KanColleViewer.Models
 				{
 					this._BrowserZoomFactor = value;
 					this._BrowserZoomFactorPercentage = (int)(value * 100);
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region LoadFailurePlugins 変更通知プロパティ
+
+		private List<LoadFailurePluginData> _LoadFailurePlugins = new List<LoadFailurePluginData>();
+
+		/// <summary>
+		/// ロードに失敗したプラグインのリストを取得または設定します。
+		/// </summary>
+		public List<LoadFailurePluginData> LoadFailurePlugins
+		{
+			get { return this._LoadFailurePlugins; }
+			set
+			{
+				if (this._LoadFailurePlugins != value)
+				{
+					this._LoadFailurePlugins = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region FailReboot 変更通知プロパティ
+
+		private bool _FailReboot;
+
+		public bool FailReboot
+		{
+			get { return this._FailReboot; }
+			set
+			{
+				if (this._FailReboot != value)
+				{
+					this._FailReboot = value;
 					this.RaisePropertyChanged();
 				}
 			}

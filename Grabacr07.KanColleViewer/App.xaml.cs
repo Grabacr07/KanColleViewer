@@ -37,7 +37,25 @@ namespace Grabacr07.KanColleViewer
 			ProductInfo = new ProductInfo();
 
 			Settings.Load();
-			PluginHost.Instance.Initialize();
+			ResourceService.Current.ChangeCulture(Settings.Current.Culture);
+
+			var initResult = PluginHost.Instance.Initialize();
+			if (initResult == PluginHost.InitializationResult.RequiresRestart)
+			{
+				if (ProductInfo.IsDebug) Process.Start("KanColleViewer.exe", e.Args.ToString(" "));
+				else Process.Start(Process.GetCurrentProcess().StartInfo);
+
+				this.Shutdown(0);
+				return;
+			}
+			if (initResult == PluginHost.InitializationResult.Failed)
+			{
+				MessageBox.Show("プラグインが原因で、アプリケーションの起動に失敗しました。", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+				this.Shutdown(0);
+				return;
+			}
+
 			NotifierHost.Instance.Initialize(KanColleClient.Current);
 			Helper.SetRegistryFeatureBrowserEmulation();
 			Helper.SetMMCSSTask();
@@ -45,7 +63,6 @@ namespace Grabacr07.KanColleViewer
 			KanColleClient.Current.Proxy.Startup(AppSettings.Default.LocalProxyPort);
 			KanColleClient.Current.Proxy.UpstreamProxySettings = Settings.Current.ProxySettings;
 
-			ResourceService.Current.ChangeCulture(Settings.Current.Culture);
 			ThemeService.Current.Initialize(this, Theme.Dark, Accent.Purple);
 
 			ViewModelRoot = new MainWindowViewModel();
