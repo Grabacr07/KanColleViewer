@@ -355,19 +355,19 @@ namespace Grabacr07.KanColleViewer.Models
 
 		#region LoadFailurePlugins 変更通知プロパティ
 
-		private List<LoadFailurePluginData> _LoadFailurePlugins = new List<LoadFailurePluginData>();
+		private List<BlacklistedPluginData> _BlacklistedPlugins = new List<BlacklistedPluginData>();
 
 		/// <summary>
 		/// ロードに失敗したプラグインのリストを取得または設定します。
 		/// </summary>
-		public List<LoadFailurePluginData> LoadFailurePlugins
+		public List<BlacklistedPluginData> BlacklistedPlugins
 		{
-			get { return this._LoadFailurePlugins; }
+			get { return this._BlacklistedPlugins; }
 			set
 			{
-				if (this._LoadFailurePlugins != value)
+				if (this._BlacklistedPlugins != value)
 				{
-					this._LoadFailurePlugins = value;
+					this._BlacklistedPlugins = value;
 					this.RaisePropertyChanged();
 				}
 			}

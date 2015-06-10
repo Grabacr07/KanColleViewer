@@ -114,11 +114,11 @@ namespace Grabacr07.KanColleViewer.Composition
 			if (currentDir == null) return InitializationResult.Failed;
 
 			var pluginsDir = Path.Combine(currentDir, PluginsDirectory);
-			var ignores = Settings.Current.LoadFailurePlugins.ToArray();
+			var ignores = Settings.Current.BlacklistedPlugins.ToArray();
 			var catalog = new AggregateCatalog(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
 			var plugins = Directory.EnumerateFiles(pluginsDir, "*.dll", SearchOption.AllDirectories);
 
-			Settings.Current.LoadFailurePlugins.Clear();
+			Settings.Current.BlacklistedPlugins.Clear();
 
 			foreach (var plugin in plugins)
 			{
@@ -129,7 +129,7 @@ namespace Grabacr07.KanColleViewer.Composition
 				var filepath = plugin;
 				foreach (var data in ignores.Where(x => string.Compare(x.FilePath, filepath, StringComparison.OrdinalIgnoreCase) == 0))
 				{
-					Settings.Current.LoadFailurePlugins.Add(data);
+					Settings.Current.BlacklistedPlugins.Add(data);
 					isIgnore = true;
 				}
 				if (isIgnore) continue;
@@ -144,7 +144,7 @@ namespace Grabacr07.KanColleViewer.Composition
 				}
 				catch (ReflectionTypeLoadException ex)
 				{
-					Settings.Current.LoadFailurePlugins.Add(new LoadFailurePluginData
+					Settings.Current.BlacklistedPlugins.Add(new BlacklistedPluginData
 					{
 						FilePath = filepath,
 						Exception = ex.LoaderExceptions.Select(x => x.Message).ToString(Environment.NewLine),
@@ -152,7 +152,7 @@ namespace Grabacr07.KanColleViewer.Composition
 				}
 				catch (BadImageFormatException ex)
 				{
-					Settings.Current.LoadFailurePlugins.Add(new LoadFailurePluginData
+					Settings.Current.BlacklistedPlugins.Add(new BlacklistedPluginData
 					{
 						FilePath = filepath,
 						Exception = ex.Message,
@@ -179,6 +179,7 @@ namespace Grabacr07.KanColleViewer.Composition
 			if (Settings.Current.FailReboot)
 			{
 				// 前回起動に失敗して、今回も失敗した状態
+				// おそらく、Check メソッド内で未知の例外が発生し BlacklistedPlugins に追加できないプラグインがある
 				// 遺憾の意 (起動を諦める)
 
 				Settings.Current.Save();
@@ -238,34 +239,17 @@ namespace Grabacr07.KanColleViewer.Composition
 							{
 								// AggregateCatalog に AssemblyCatalog しか Add してないんだから全部ここに来るはず…？
 
-								Settings.Current.LoadFailurePlugins.Add(new LoadFailurePluginData
+								Settings.Current.BlacklistedPlugins.Add(new BlacklistedPluginData
 								{
 									Exception = ex.Message,
 									FilePath = asmCatalog.Assembly.Location,
 								});
-
-								//foreach (var part in asmCatalog.Parts)
-								//{
-								//	var data = new LoadFailurePluginData
-								//	{
-								//		Exception = ex.Message,
-								//		FilePath = asmCatalog.Assembly.Location,
-								//	};
-
-								//	foreach (var import in part.ImportDefinitions)
-								//	{
-								//	}
-
-
-								//	object value;
-								//	if (part.Metadata.TryGetValue("Title", out value)) data.Title = value.ToString();
-								//	if (part.Metadata.TryGetValue("Description", out value)) data.Description = value.ToString();
-								//	if (part.Metadata.TryGetValue("Version", out value)) data.Version = value.ToString();
-								//	if (part.Metadata.TryGetValue("Author", out value)) data.Author = value.ToString();
-
-								//	Settings.Current.LoadFailurePlugins.Add(data);
-								//}
 							}
+						}
+						else
+						{
+							// 他にプラグインのロード失敗時の例外パターンが判れば追加していきたく
+							this.unknownExceptions.Add(cause);
 						}
 					}
 
@@ -273,6 +257,7 @@ namespace Grabacr07.KanColleViewer.Composition
 				}
 				catch (Exception ex)
 				{
+					this.unknownExceptions.Add(ex);
 					success = false;
 				}
 			}

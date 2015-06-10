@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Grabacr07.KanColleViewer.Composition
 {
 	[Serializable]
-	public class LoadFailurePluginData
+	public class BlacklistedPluginData
 	{
 		public string FilePath { get; set; }
 
