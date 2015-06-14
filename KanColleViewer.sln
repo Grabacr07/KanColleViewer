@@ -62,12 +62,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsvLogReader", "Plugins\Csv
 		{0AF0B9FF-D981-4D0F-A41F-C3AB6FE2F16D} = {0AF0B9FF-D981-4D0F-A41F-C3AB6FE2F16D}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleInfoPlugin", "Plugins\BattleInfoPlugin\BattleInfoPlugin.csproj", "{F8664ABC-AA36-421E-B3D7-287091224B1B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventMapHpViewer", "Plugins\EventMapHpViewer\EventMapHpViewer.csproj", "{912029C5-C147-459B-A735-3D559B2F193D}"
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanColleViewer.Controls", "Grabacr07.KanColleViewer.Controls\KanColleViewer.Controls.csproj", "{978239D0-3129-4C54-AAC6-493F0DE48BF5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanColleViewer.Composition", "Grabacr07.KanColleViewer.Composition\KanColleViewer.Composition.csproj", "{CC139E98-D847-41DA-B20F-8ACA4564F375}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleInfoPlugin", "..\BattleInfoPlugin\BattleInfoPlugin\BattleInfoPlugin.csproj", "{F8664ABC-AA36-421E-B3D7-287091224B1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventMapHpViewer", "..\EventMapHpViewer\EventMapHpViewer\EventMapHpViewer.csproj", "{912029C5-C147-459B-A735-3D559B2F193D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -115,6 +116,14 @@ Global
 		{228BEB46-17DF-4AE8-AFB9-7C5D74F40FE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{228BEB46-17DF-4AE8-AFB9-7C5D74F40FE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{228BEB46-17DF-4AE8-AFB9-7C5D74F40FE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{978239D0-3129-4C54-AAC6-493F0DE48BF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{978239D0-3129-4C54-AAC6-493F0DE48BF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{978239D0-3129-4C54-AAC6-493F0DE48BF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{978239D0-3129-4C54-AAC6-493F0DE48BF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC139E98-D847-41DA-B20F-8ACA4564F375}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC139E98-D847-41DA-B20F-8ACA4564F375}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC139E98-D847-41DA-B20F-8ACA4564F375}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC139E98-D847-41DA-B20F-8ACA4564F375}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F8664ABC-AA36-421E-B3D7-287091224B1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F8664ABC-AA36-421E-B3D7-287091224B1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8664ABC-AA36-421E-B3D7-287091224B1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -123,25 +132,6 @@ Global
 		{912029C5-C147-459B-A735-3D559B2F193D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{912029C5-C147-459B-A735-3D559B2F193D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{912029C5-C147-459B-A735-3D559B2F193D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{08226BB3-A7A0-49E3-84DE-ED5B7A7D293E}.Release|x86.ActiveCfg = Release|Any CPU
-		{978239D0-3129-4C54-AAC6-493F0DE48BF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{978239D0-3129-4C54-AAC6-493F0DE48BF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{978239D0-3129-4C54-AAC6-493F0DE48BF5}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{978239D0-3129-4C54-AAC6-493F0DE48BF5}.Release (beta)|Any CPU.ActiveCfg = Release|Any CPU
-		{978239D0-3129-4C54-AAC6-493F0DE48BF5}.Release (beta)|Any CPU.Build.0 = Release|Any CPU
-		{978239D0-3129-4C54-AAC6-493F0DE48BF5}.Release (beta)|x86.ActiveCfg = Release|Any CPU
-		{978239D0-3129-4C54-AAC6-493F0DE48BF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{978239D0-3129-4C54-AAC6-493F0DE48BF5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{978239D0-3129-4C54-AAC6-493F0DE48BF5}.Release|x86.ActiveCfg = Release|Any CPU
-		{CC139E98-D847-41DA-B20F-8ACA4564F375}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CC139E98-D847-41DA-B20F-8ACA4564F375}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CC139E98-D847-41DA-B20F-8ACA4564F375}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{CC139E98-D847-41DA-B20F-8ACA4564F375}.Release (beta)|Any CPU.ActiveCfg = Release|Any CPU
-		{CC139E98-D847-41DA-B20F-8ACA4564F375}.Release (beta)|Any CPU.Build.0 = Release|Any CPU
-		{CC139E98-D847-41DA-B20F-8ACA4564F375}.Release (beta)|x86.ActiveCfg = Release|Any CPU
-		{CC139E98-D847-41DA-B20F-8ACA4564F375}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CC139E98-D847-41DA-B20F-8ACA4564F375}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CC139E98-D847-41DA-B20F-8ACA4564F375}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

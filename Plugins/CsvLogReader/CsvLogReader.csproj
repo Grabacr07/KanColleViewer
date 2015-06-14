@@ -42,11 +42,6 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
-	<Reference Include="System.Runtime.WindowsRuntime, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETCore\v4.5.1\System.Runtime.WindowsRuntime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Reactive.Core">
@@ -87,6 +82,14 @@
     <ProjectReference Include="..\..\Grabacr07.Desktop.Metro\Desktop.Metro.csproj">
       <Project>{f00fc570-2a80-4f61-8364-798cd44514b2}</Project>
       <Name>Desktop.Metro</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Grabacr07.KanColleViewer.Composition\KanColleViewer.Composition.csproj">
+      <Project>{cc139e98-d847-41da-b20f-8aca4564f375}</Project>
+      <Name>KanColleViewer.Composition</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Grabacr07.KanColleViewer.Controls\KanColleViewer.Controls.csproj">
+      <Project>{978239d0-3129-4c54-aac6-493f0de48bf5}</Project>
+      <Name>KanColleViewer.Controls</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Grabacr07.KanColleViewer\KanColleViewer.csproj">
       <Project>{c5f0111f-3f68-4a74-bb20-bb762564d080}</Project>

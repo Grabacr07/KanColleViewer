@@ -52,12 +52,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BCMakeCert">
-      <HintPath>..\packages\FiddlerCore.4.5.1.0\lib\net40\BCMakeCert.dll</HintPath>
-    </Reference>
-    <Reference Include="CertMaker">
-      <HintPath>..\packages\FiddlerCore.4.5.1.0\lib\net40\CertMaker.dll</HintPath>
-    </Reference>
     <Reference Include="FiddlerCore4, Version=4.5.1.0, Culture=neutral, PublicKeyToken=67cb91587178ac5a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\FiddlerCore.4.5.1.0\lib\net40\FiddlerCore4.dll</HintPath>
@@ -71,8 +65,8 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Interactive">
+    <Reference Include="System.Core" /> 
+	<Reference Include="System.Interactive">
       <HintPath>..\packages\Ix-Main.1.2.3\lib\net45\System.Interactive.dll</HintPath>
     </Reference>
     <Reference Include="System.Reactive.Core, Version=2.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
