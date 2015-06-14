@@ -1,6 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
   <!-- 
+    zhCN localization file update by Diablohu (http://dreamgen.cn | http://acgdb.com)
+    last update: 2014/08/06
+   
     Microsoft ResX Schema 
     
     Version 2.0
@@ -139,10 +142,10 @@
     <value>Debug</value>
   </data>
   <data name="Debug_NotificationMessage" xml:space="preserve">
-    <value>これはテスト通知です。</value>
+    <value>这是一条测试通知</value>
   </data>
   <data name="Debug_NotificationMessage_Title" xml:space="preserve">
-    <value>テスト</value>
+    <value>测试</value>
   </data>
   <data name="Dockyard" xml:space="preserve">
     <value>建造</value>
@@ -202,10 +205,10 @@
     <value>仅通知指定的舰队</value>
   </data>
   <data name="Expedition_TimeComplete" xml:space="preserve">
-    <value>舰队返回时间</value>
+    <value>返航时间</value>
   </data>
   <data name="Expedition_TimeRemaining" xml:space="preserve">
-    <value>距离舰队返回还有</value>
+    <value>距离返航还有</value>
   </data>
   <data name="Fleets" xml:space="preserve">
     <value>舰队</value>
@@ -220,49 +223,49 @@
     <value>高速修复材料:</value>
   </data>
   <data name="Homeport_NoOfEquipment" xml:space="preserve">
-    <value>所持有的装备:</value>
+    <value>拥有装备:</value>
   </data>
   <data name="Homeport_NoOfShips" xml:space="preserve">
-    <value>所持有的舰娘:</value>
+    <value>拥有舰娘:</value>
   </data>
   <data name="IntegratedView" xml:space="preserve">
-    <value>総合</value>
+    <value>综合</value>
   </data>
   <data name="MessageBar_Expedition" xml:space="preserve">
-    <value>この艦隊は遠征中です。</value>
+    <value>该舰队正在远征中</value>
   </data>
   <data name="MessageBar_Expedition_TimeCompletion" xml:space="preserve">
-    <value> 完了時刻:</value>
+    <value> 结束时刻:</value>
   </data>
   <data name="MessageBar_Expedition_TimeRemaining" xml:space="preserve">
-    <value> 帰投まで:</value>
+    <value> 剩余时间:</value>
   </data>
   <data name="MessageBar_Repairing" xml:space="preserve">
-    <value>艦隊に入渠中の艦娘がいます。 完了時刻: {0:MM/dd HH\:mm} 完了まで: {1}:{2:mm\:ss}</value>
+    <value>舰队中有正在修理的舰娘。 结束时刻: {0:MM/dd HH\:mm} 剩余时间: {1}:{2:mm\:ss}</value>
   </data>
   <data name="MessageBar_Repairing_Null" xml:space="preserve">
-    <value>艦隊に入渠中の艦娘がいます。</value>
+    <value>舰队中有正在修理的舰娘。</value>
   </data>
   <data name="MessageBar_ReSortie_BadCondition" xml:space="preserve">
-    <value>疲労中の艦娘</value>
+    <value>疲劳度较高的舰娘</value>
   </data>
   <data name="MessageBar_ReSortie_CanNotReSortie" xml:space="preserve">
-    <value>艦隊に{0}がいます。</value>
+    <value>舰队中存在{0}。</value>
   </data>
   <data name="MessageBar_ReSortie_CanReSortie" xml:space="preserve">
-    <value>出撃可能！</value>
+    <value>可以出击！</value>
   </data>
   <data name="MessageBar_ReSortie_LackForResources" xml:space="preserve">
-    <value>未補給の艦娘</value>
+    <value>未补给的舰娘</value>
   </data>
   <data name="MessageBar_ReSortie_Remaining" xml:space="preserve">
-    <value>再出撃までの目安: </value>
+    <value>再出击剩余时间: </value>
   </data>
   <data name="MessageBar_ReSortie_Separator" xml:space="preserve">
-    <value>・</value>
+    <value>、</value>
   </data>
   <data name="MessageBar_ReSortie_Wounded" xml:space="preserve">
-    <value>中破以上の艦娘</value>
+    <value>中破及以上的舰娘</value>
   </data>
   <data name="Quests" xml:space="preserve">
     <value>任务</value>
@@ -424,19 +427,19 @@
     <value>永远保持在最前端</value>
   </data>
   <data name="StartContent_ClearCacheButton" xml:space="preserve">
-    <value>キャッシュの削除</value>
+    <value>清除缓存</value>
   </data>
   <data name="StartContent_ClearCacheButtonMessage" xml:space="preserve">
-    <value>キャッシュを削除しました</value>
+    <value>缓存已被清除</value>
   </data>
   <data name="StartContent_Introduction1" xml:space="preserve">
     <value>「提督業も忙しい！」は、艦これを遊びやすくするためのツールです。</value>
   </data>
   <data name="StartContent_Welcom" xml:space="preserve">
-    <value>ようこそ</value>
+    <value>欢迎提督</value>
   </data>
   <data name="StatusBar_AirSuperiorityPotential" xml:space="preserve">
-    <value>对空战斗力:</value>
+    <value>制空战斗力:</value>
   </data>
   <data name="StatusBar_AverageLevel" xml:space="preserve">
     <value>平均等级:</value>
@@ -458,5 +461,26 @@
   </data>
   <data name="ZoomAction_ZoomFailed" xml:space="preserve">
     <value>缩放失败: {0}</value>
+  </data>
+  <data name="Fleets_Level" xml:space="preserve">
+    <value>等级</value>
+  </data>
+  <data name="Fleets_Total" xml:space="preserve">
+    <value>总计</value>
+  </data>
+  <data name="ZoomFactorSelector" xml:space="preserve">
+    <value>游戏画面尺寸</value>
+  </data>
+  <data name="ZoomFactorSelector_Tooltip" xml:space="preserve">
+    <value>游戏画面尺寸调整</value>
+  </data>
+  <data name="Settings_Logging" xml:space="preserve">
+    <value>记录</value>
+  </data>
+  <data name="Settings_Logging_Enable" xml:space="preserve">
+    <value>对掉落、建造、开发进行记录</value>
+  </data>
+  <data name="Fleets_ViewRange" xml:space="preserve">
+    <value>索敌能力</value>
   </data>
 </root>
