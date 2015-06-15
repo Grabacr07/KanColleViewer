@@ -410,9 +410,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			// Lawl at that this inline conditional.
 			double Multiplier = (this.IsFlagship ? 1.5 : 1) * (this.IsMVP ? 2 : 1) * (this.SelectedResult == "S" ? 1.2 : (this.SelectedResult == "C" ? 0.8 : (this.SelectedResult == "D" ? 0.7 : (this.SelectedResult == "E" ? 0.5 : 1))));
 
-			this.SortieExp = (int)Math.Round(SeaExpTable[this.SelectedSea] * Multiplier);
+			this.SortieExp = (int)Math.Round(SeaExpTable[this.SelectedSea] * Multiplier, 0, MidpointRounding.AwayFromZero);
 			this.RemainingExp = this.TargetExp - this.CurrentExp;
-			this.RunCount = (int)Math.Round(this.RemainingExp / (double)this.SortieExp);
+			this.RunCount = (int)Math.Round(this.RemainingExp / (double)this.SortieExp, 0, MidpointRounding.AwayFromZero);
 		}
 
 	}

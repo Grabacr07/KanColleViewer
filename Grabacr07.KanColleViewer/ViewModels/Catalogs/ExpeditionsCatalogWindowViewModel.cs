@@ -94,13 +94,13 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 					{
 						decimal PerHour = Convert.ToDecimal((temp.RealTime.Day - 1) * 24 * 60 + temp.RealTime.Hour * 60 + temp.RealTime.Minute) / 60m;
 						if (temp.Fuel > 0)
-							temp.Fuel = Math.Round(temp.Fuel / PerHour, 1);
+							temp.Fuel = Math.Round(temp.Fuel / PerHour, 1,MidpointRounding.AwayFromZero);
 						if (temp.Armo > 0)
-							temp.Armo = Math.Round(temp.Armo / PerHour, 1);
+							temp.Armo = Math.Round(temp.Armo / PerHour, 1,MidpointRounding.AwayFromZero);
 						if (temp.Metal > 0)
-							temp.Metal = Math.Round(temp.Metal / PerHour, 1);
+							temp.Metal = Math.Round(temp.Metal / PerHour, 1,MidpointRounding.AwayFromZero);
 						if (temp.Bo > 0)
-							temp.Bo = Math.Round(temp.Bo / PerHour, 1);
+							temp.Bo = Math.Round(temp.Bo / PerHour, 1,MidpointRounding.AwayFromZero);
 					}
 
 				}
