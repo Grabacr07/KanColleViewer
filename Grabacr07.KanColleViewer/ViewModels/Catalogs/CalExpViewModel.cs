@@ -412,7 +412,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 			this.SortieExp = (int)Math.Round(SeaExpTable[this.SelectedSea] * Multiplier, 0, MidpointRounding.AwayFromZero);
 			this.RemainingExp = this.TargetExp - this.CurrentExp;
-			this.RunCount = (int)Math.Round(this.RemainingExp / (double)this.SortieExp, 0, MidpointRounding.AwayFromZero);
+			this.RunCount = Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(this.RemainingExp) / Convert.ToDecimal(this.SortieExp)));
 		}
 
 	}
