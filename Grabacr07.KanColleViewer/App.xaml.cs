@@ -42,19 +42,7 @@ namespace Grabacr07.KanColleViewer
 			var initResult = PluginHost.Instance.Initialize();
 			if (initResult == PluginHost.InitializationResult.RequiresRestart)
 			{
-				if (ProductInfo.IsDebug) Process.Start("KanColleViewer.exe", e.Args.ToString(" "));
-				else
-				{
-					try
-					{
-						var args = Environment.GetCommandLineArgs();
-						Process.Start(args[0], args.Skip(1).ToString(" "));
-					}
-					catch (Exception)
-					{
-						MessageBox.Show("プラグインの読み込みに失敗しました。再度アプリケーションを起動してみてください。", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-					}
-				}
+				Restart(e.Args.ToString(" "));
 
 				this.Shutdown(0);
 				return;
@@ -92,6 +80,24 @@ namespace Grabacr07.KanColleViewer
 			Settings.Current.Save();
 		}
 
+		private static void Restart(string args)
+		{
+			if (ProductInfo.IsDebug)
+			{
+				Process.Start("KanColleViewer.exe", args);
+			}
+			else
+			{
+				try
+				{
+					Process.Start(Environment.GetCommandLineArgs()[0], args);
+				}
+				catch (Exception)
+				{
+					MessageBox.Show("プラグインの読み込みに失敗しました。再度アプリケーションを起動してみてください。", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+				}
+			}
+		}
 
 		private static void ReportException(object sender, Exception exception)
 		{
