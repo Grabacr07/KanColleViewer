@@ -353,14 +353,14 @@ namespace Grabacr07.KanColleViewer.Models
 
 		#endregion
 
-		#region LoadFailurePlugins 変更通知プロパティ
+		#region BlacklistedPlugins 変更通知プロパティ
 
-		private List<BlacklistedPluginData> _BlacklistedPlugins = new List<BlacklistedPluginData>();
+		private ObservableSynchronizedCollection<BlacklistedPluginData> _BlacklistedPlugins = new ObservableSynchronizedCollection<BlacklistedPluginData>();
 
 		/// <summary>
 		/// ロードに失敗したプラグインのリストを取得または設定します。
 		/// </summary>
-		public List<BlacklistedPluginData> BlacklistedPlugins
+		public ObservableSynchronizedCollection<BlacklistedPluginData> BlacklistedPlugins
 		{
 			get { return this._BlacklistedPlugins; }
 			set

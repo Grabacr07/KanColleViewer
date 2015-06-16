@@ -153,7 +153,7 @@ namespace Grabacr07.KanColleViewer.Composition
 					Settings.Current.BlacklistedPlugins.Add(new BlacklistedPluginData
 					{
 						FilePath = filepath,
-						Exception = ex.Message,
+						Exception = ex.ToString(),
 					});
 				}
 			}
@@ -239,8 +239,8 @@ namespace Grabacr07.KanColleViewer.Composition
 
 								Settings.Current.BlacklistedPlugins.Add(new BlacklistedPluginData
 								{
-									Exception = ex.Message,
 									FilePath = asmCatalog.Assembly.Location,
+									Exception = ex.Message,
 								});
 							}
 						}

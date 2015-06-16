@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -13,6 +14,7 @@ using Grabacr07.KanColleViewer.ViewModels.Composition;
 using Grabacr07.KanColleViewer.ViewModels.Messages;
 using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
+using Livet;
 using Livet.EventListeners;
 using Livet.Messaging;
 using Livet.Messaging.IO;
@@ -228,7 +230,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-		#region ToolPlugins 変更通知プロパティ
+		#region AllPlugins 変更通知プロパティ
 
 		private List<PluginViewModel> _AllPlugins;
 
@@ -240,6 +242,25 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				if (this._AllPlugins != value)
 				{
 					this._AllPlugins = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region BlacklistedPlugins 変更通知プロパティ
+
+		private ReadOnlyDispatcherCollection<BlackListedPluginViewModel> _BlacklistedPlugins;
+
+		public ReadOnlyDispatcherCollection<BlackListedPluginViewModel> BlacklistedPlugins
+		{
+			get { return this._BlacklistedPlugins; }
+			set
+			{
+				if (this._BlacklistedPlugins != value)
+				{
+					this._BlacklistedPlugins = value;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -365,6 +386,13 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				.Concat(PluginHost.Instance.Notifiers.Select(x => new NotifierViewModel(x)))
 				.Concat(PluginHost.Instance.Tools.Select(x => new ToolViewModel(x)));
 			this.AllPlugins = new List<PluginViewModel>(plugins);
+
+			var collection = ViewModelHelper.CreateReadOnlyDispatcherCollection(
+				Settings.Current.BlacklistedPlugins,
+				x => new BlackListedPluginViewModel(x),
+				DispatcherHelper.UIDispatcher);
+			this.CompositeDisposable.Add(collection);
+			this.BlacklistedPlugins = collection;
 		}
 
 

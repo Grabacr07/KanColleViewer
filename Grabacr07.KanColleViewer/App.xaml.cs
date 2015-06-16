@@ -50,6 +50,7 @@ namespace Grabacr07.KanColleViewer
 			}
 			if (initResult == PluginHost.InitializationResult.Failed)
 			{
+				// メッセージはリソース化するのと、「プラグイン取り除いてみろ」的なヒントを出したい感じ
 				MessageBox.Show("プラグインが原因で、アプリケーションの起動に失敗しました。", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
 				this.Shutdown(0);
