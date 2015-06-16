@@ -37,6 +37,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 		public ExpeditionViewModel Expedition { get; private set; }
 
+		
 		public ViewModel QuickStateView
 		{
 			get
