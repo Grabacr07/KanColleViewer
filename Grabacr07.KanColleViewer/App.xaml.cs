@@ -43,7 +43,18 @@ namespace Grabacr07.KanColleViewer
 			if (initResult == PluginHost.InitializationResult.RequiresRestart)
 			{
 				if (ProductInfo.IsDebug) Process.Start("KanColleViewer.exe", e.Args.ToString(" "));
-				else Process.Start(Process.GetCurrentProcess().StartInfo);
+				else
+				{
+					try
+					{
+						var args = Environment.GetCommandLineArgs();
+						Process.Start(args[0], args.Skip(1).ToString(" "));
+					}
+					catch (Exception)
+					{
+						MessageBox.Show("プラグインの読み込みに失敗しました。再度アプリケーションを起動してみてください。", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+					}
+				}
 
 				this.Shutdown(0);
 				return;
