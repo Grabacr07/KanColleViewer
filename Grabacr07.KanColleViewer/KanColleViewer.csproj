@@ -124,6 +124,7 @@
     <Compile Include="Composition\AggregateNotifier.cs" />
     <Compile Include="Composition\BlacklistedPluginData.cs" />
     <Compile Include="Composition\PluginHost.cs" />
+    <Compile Include="Composition\PluginMetadata.cs" />
     <Compile Include="Models\BrowserZoomFactor.cs" />
     <Compile Include="Models\IZoomFactor.cs" />
     <Compile Include="Models\NotifierHost.cs" />
@@ -144,7 +145,7 @@
     <Compile Include="ViewModels\Catalogs\SlotItemCatalogViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\SlotItemCounter.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogSortWorker.cs" />
-    <Compile Include="ViewModels\Composition\BlackListedPluginViewModel.cs" />
+    <Compile Include="ViewModels\Composition\BlacklistedPluginViewModel.cs" />
     <Compile Include="ViewModels\Contents\Fleets\CombinedFleetViewModel.cs" />
     <Compile Include="ViewModels\Composition\NotifierViewModel.cs" />
     <Compile Include="ViewModels\Composition\PluginViewModel.cs" />

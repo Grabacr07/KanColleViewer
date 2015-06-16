@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Settings.Plugins"
 			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
@@ -8,9 +9,9 @@
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:controls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
-			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
-			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
+			 xmlns:composition="clr-namespace:Grabacr07.KanColleViewer.Composition"
+			 xmlns:compositionVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Composition"
 			 mc:Ignorable="d"
 			 d:DesignWidth="500"
 			 d:DesignHeight="300"
@@ -58,8 +59,25 @@
 														  Direction="Down"
 														  Margin="5">
 										<StackPanel>
-											<TextBlock Text="{Binding Name}"
-													   Style="{DynamicResource EmphaticTextStyleKey}" />
+											<ContentControl Content="{Binding Metadata}">
+												<ContentControl.Resources>
+													<DataTemplate DataType="{x:Type composition:PluginMetadata}">
+														<TextBlock Style="{DynamicResource DefaultTextStyleKey}">
+															<Run Text="{Binding Title, Mode=OneWay}"
+																 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+															<Run Text=" " />
+															<Run Text="version" />
+															<Run Text="{Binding Version, Mode=OneWay}" />
+															<Run Text=" / " />
+															<Run Text="{Binding Author, Mode=OneWay}" />
+														</TextBlock>
+													</DataTemplate>
+													<DataTemplate DataType="{x:Type compositionVm:BlacklistedAssembly}">
+														<TextBlock Text="{Binding Name}"
+																   Style="{DynamicResource EmphaticTextStyleKey}" />
+													</DataTemplate>
+												</ContentControl.Resources>
+											</ContentControl>
 											<Border Height="4" />
 											<TextBlock Text="{Binding Message}"
 													   Style="{DynamicResource DetailTextStyleKey}" />

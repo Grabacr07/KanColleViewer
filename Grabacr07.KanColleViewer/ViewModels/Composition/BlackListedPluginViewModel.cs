@@ -9,27 +9,8 @@ using Livet;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Composition
 {
-	public class BlackListedPluginViewModel : ViewModel
+	public class BlacklistedPluginViewModel : ViewModel
 	{
-		#region Name 変更通知プロパティ
-
-		private string _Name;
-
-		public string Name
-		{
-			get { return this._Name; }
-			set
-			{
-				if (this._Name != value)
-				{
-					this._Name = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
 		#region Message 変更通知プロパティ
 
 		private string _Message;
@@ -68,10 +49,28 @@ namespace Grabacr07.KanColleViewer.ViewModels.Composition
 
 		#endregion
 
+		#region Metadata 変更通知プロパティ
 
-		public BlackListedPluginViewModel(BlacklistedPluginData data)
+		private object _Metadata;
+
+		public object Metadata
 		{
-			this.Name = Path.GetFileName(data.FilePath);
+			get { return this._Metadata; }
+			set
+			{
+				if (this._Metadata != value)
+				{
+					this._Metadata = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		public BlacklistedPluginViewModel(BlacklistedPluginData data)
+		{
+			this.Metadata = data.Metadata ?? new BlacklistedAssembly { Name = Path.GetFileName(data.FilePath) } as object;
 
 			using (var reader = new StringReader(data.Exception))
 			{
@@ -79,5 +78,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Composition
 				this.Exception = reader.ReadToEnd();
 			}
 		}
+	}
+
+	public class BlacklistedAssembly
+	{
+		public string Name { get; set; }
 	}
 }

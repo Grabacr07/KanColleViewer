@@ -251,9 +251,9 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#region BlacklistedPlugins 変更通知プロパティ
 
-		private ReadOnlyDispatcherCollection<BlackListedPluginViewModel> _BlacklistedPlugins;
+		private ReadOnlyDispatcherCollection<BlacklistedPluginViewModel> _BlacklistedPlugins;
 
-		public ReadOnlyDispatcherCollection<BlackListedPluginViewModel> BlacklistedPlugins
+		public ReadOnlyDispatcherCollection<BlacklistedPluginViewModel> BlacklistedPlugins
 		{
 			get { return this._BlacklistedPlugins; }
 			set
@@ -389,7 +389,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 			var collection = ViewModelHelper.CreateReadOnlyDispatcherCollection(
 				Settings.Current.BlacklistedPlugins,
-				x => new BlackListedPluginViewModel(x),
+				x => new BlacklistedPluginViewModel(x),
 				DispatcherHelper.UIDispatcher);
 			this.CompositeDisposable.Add(collection);
 			this.BlacklistedPlugins = collection;

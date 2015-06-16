@@ -217,12 +217,14 @@ namespace Grabacr07.KanColleViewer.Composition
 		private bool Check<TPlugin>(IEnumerable<Lazy<TPlugin, IPluginMetadata>> plugins) where TPlugin : IPlugin
 		{
 			var success = true;
+			IPluginMetadata metadata = null;
 
 			foreach (var plugin in plugins)
 			{
 				try
 				{
-					// メソッド呼び出してみるみるテスト
+					// メソッドとか適当に呼び出してみるみるテスト
+					metadata = plugin.Metadata;
 					plugin.Value.GetSettingsView();
 				}
 				catch (CompositionException ex)
@@ -237,11 +239,24 @@ namespace Grabacr07.KanColleViewer.Composition
 							{
 								// AggregateCatalog に AssemblyCatalog しか Add してないんだから全部ここに来るはず…？
 
-								Settings.Current.BlacklistedPlugins.Add(new BlacklistedPluginData
+								var data = new BlacklistedPluginData
 								{
 									FilePath = asmCatalog.Assembly.Location,
 									Exception = ex.Message,
-								});
+								};
+
+								if (metadata != null)
+								{
+									data.Metadata = new PluginMetadata
+									{
+										Author = metadata.Author,
+										Description = metadata.Description,
+										Title = metadata.Title,
+										Version = metadata.Version,
+									};
+								}
+
+								Settings.Current.BlacklistedPlugins.Add(data);
 							}
 						}
 						else
