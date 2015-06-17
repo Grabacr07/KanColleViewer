@@ -59,7 +59,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using Fiddler;
+using Nekoxy;
 // ReSharper disable InconsistentNaming
 
 namespace Grabacr07.KanColleWrapper
@@ -82,7 +82,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> <#= name #>
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "<#= endpoint #>"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "<#= endpoint #>"); }
 		}
 
 <#

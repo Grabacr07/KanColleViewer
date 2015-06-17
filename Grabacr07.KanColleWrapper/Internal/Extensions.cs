@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using Fiddler;
+using Nekoxy;
 
 namespace Grabacr07.KanColleWrapper.Internal
 {
@@ -11,7 +11,7 @@ namespace Grabacr07.KanColleWrapper.Internal
 	{
 		public static string GetResponseAsJson(this Session session)
 		{
-			return session.GetResponseBodyAsString().Replace("svdata=", "");
+			return session.Response.BodyAsString.Replace("svdata=", "");
 		}
 
 		public static void SafeDispose(this IDisposable resource)

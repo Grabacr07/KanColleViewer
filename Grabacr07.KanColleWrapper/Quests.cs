@@ -10,7 +10,7 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 using Codeplex.Data;
-using Fiddler;
+using Nekoxy;
 using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;

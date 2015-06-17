@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Collections.Specialized;
-using Fiddler;
+using Nekoxy;
 using Grabacr07.KanColleWrapper.Models.Raw;
 using Grabacr07.KanColleWrapper.Internal;
 
@@ -20,20 +20,20 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public bool IsSuccess
 		{
-		    get { return this.RawData.api_result == 1; }
+			get { return this.RawData.api_result == 1; }
 		}
 
-	    public T Data
-	    {
-	        get { return this.RawData.api_data; }
-	    }
+		public T Data
+		{
+			get { return this.RawData.api_data; }
+		}
 
-	    public kcsapi_deck[] Fleets
-	    {
-	        get { return this.RawData.api_data_deck; }
-	    }
+		public kcsapi_deck[] Fleets
+		{
+			get { return this.RawData.api_data_deck; }
+		}
 
-	    public SvData(svdata<T> rawData, string reqBody)
+		public SvData(svdata<T> rawData, string reqBody)
 			: base(rawData)
 		{
 			this.Request = HttpUtility.ParseQueryString(reqBody);
@@ -65,7 +65,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			using (var stream = new MemoryStream(bytes))
 			{
 				var rawResult = serializer.ReadObject(stream) as svdata<T>;
-				var result = new SvData<T>(rawResult, session.GetRequestBodyAsString());
+				var result = new SvData<T>(rawResult, session.Request.BodyAsString);
 				return result;
 			}
 		}
@@ -97,7 +97,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			using (var stream = new MemoryStream(bytes))
 			{
 				var rawResult = serializer.ReadObject(stream) as svdata;
-				var result = new SvData(rawResult, session.GetRequestBodyAsString());
+				var result = new SvData(rawResult, session.Request.BodyAsString);
 				return result;
 			}
 		}

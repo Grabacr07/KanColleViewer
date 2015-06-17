@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using Fiddler;
+using Nekoxy;
 // ReSharper disable InconsistentNaming
 
 namespace Grabacr07.KanColleWrapper
@@ -19,7 +19,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_start2
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_start2"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_start2"); }
 		}
 
 		/// <summary>
@@ -27,7 +27,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_port
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_port/port"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_port/port"); }
 		}
 
 		/// <summary>
@@ -35,7 +35,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_get_member_basic
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/basic"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_get_member/basic"); }
 		}
 
 		/// <summary>
@@ -43,7 +43,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_get_member_ship
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/ship"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_get_member/ship"); }
 		}
 
 		/// <summary>
@@ -51,7 +51,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_get_member_ship2
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/ship2"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_get_member/ship2"); }
 		}
 
 		/// <summary>
@@ -59,7 +59,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_get_member_ship3
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/ship3"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_get_member/ship3"); }
 		}
 
 		/// <summary>
@@ -67,7 +67,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_get_member_slot_item
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/slot_item"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_get_member/slot_item"); }
 		}
 
 		/// <summary>
@@ -75,7 +75,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_get_member_useitem
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/useitem"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_get_member/useitem"); }
 		}
 
 		/// <summary>
@@ -83,7 +83,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_get_member_deck
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/deck"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_get_member/deck"); }
 		}
 
 		/// <summary>
@@ -91,7 +91,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_get_member_deck_port
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/deck_port"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_get_member/deck_port"); }
 		}
 
 		/// <summary>
@@ -99,7 +99,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_get_member_ndock
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/ndock"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_get_member/ndock"); }
 		}
 
 		/// <summary>
@@ -107,7 +107,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_get_member_kdock
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/kdock"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_get_member/kdock"); }
 		}
 
 		/// <summary>
@@ -115,7 +115,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_get_member_material
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/material"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_get_member/material"); }
 		}
 
 		/// <summary>
@@ -123,7 +123,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_get_member_questlist
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/questlist"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_get_member/questlist"); }
 		}
 
 		/// <summary>
@@ -131,7 +131,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_get_member_ship_deck
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/ship_deck"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_get_member/ship_deck"); }
 		}
 
 		/// <summary>
@@ -139,7 +139,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_req_hensei_change
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_hensei/change"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_hensei/change"); }
 		}
 
 		/// <summary>
@@ -147,7 +147,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_req_hokyu_charge
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_hokyu/charge"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_hokyu/charge"); }
 		}
 
 		/// <summary>
@@ -155,7 +155,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_req_kaisou_powerup
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_kaisou/powerup"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_kaisou/powerup"); }
 		}
 
 		/// <summary>
@@ -163,7 +163,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_req_kousyou_getship
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_kousyou/getship"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_kousyou/getship"); }
 		}
 
 		/// <summary>
@@ -171,7 +171,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_req_kousyou_createitem
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_kousyou/createitem"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_kousyou/createitem"); }
 		}
 
 		/// <summary>
@@ -179,7 +179,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_req_kousyou_createship
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_kousyou/createship"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_kousyou/createship"); }
 		}
 
 		/// <summary>
@@ -187,7 +187,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_req_kousyou_createship_speedchange
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_kousyou/createship_speedchange"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_kousyou/createship_speedchange"); }
 		}
 
 		/// <summary>
@@ -195,7 +195,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_req_kousyou_destroyship
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_kousyou/destroyship"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_kousyou/destroyship"); }
 		}
 
 		/// <summary>
@@ -203,7 +203,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_req_kousyou_destroyitem2
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_kousyou/destroyitem2"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_kousyou/destroyitem2"); }
 		}
 
 		/// <summary>
@@ -211,7 +211,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_req_kousyou_remodel_slotlist
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_kousyou/remodel_slotlist"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_kousyou/remodel_slotlist"); }
 		}
 
 		/// <summary>
@@ -219,7 +219,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_req_kousyou_remodel_slotlist_detail
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_kousyou/remodel_slotlist_detail"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_kousyou/remodel_slotlist_detail"); }
 		}
 
 		/// <summary>
@@ -227,7 +227,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_req_kousyou_remodel_slot
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_kousyou/remodel_slot"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_kousyou/remodel_slot"); }
 		}
 
 		/// <summary>
@@ -235,7 +235,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_req_nyukyo_start
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_nyukyo/start"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_nyukyo/start"); }
 		}
 
 		/// <summary>
@@ -243,7 +243,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_req_nyukyo_speedchange
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_nyukyo/speedchange"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_nyukyo/speedchange"); }
 		}
 
 		/// <summary>
@@ -251,7 +251,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_req_map_start
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_map/start"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_map/start"); }
 		}
 
 		/// <summary>
@@ -259,7 +259,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_req_member_updatedeckname
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_member/updatedeckname"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_member/updatedeckname"); }
 		}
 
 		/// <summary>
@@ -267,7 +267,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_req_member_updatecomment
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_member/updatecomment"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_member/updatecomment"); }
 		}
 
 		/// <summary>
@@ -275,7 +275,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_req_mission_result
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_mission/result"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_mission/result"); }
 		}
 
 		/// <summary>
@@ -283,7 +283,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_req_sortie_battle
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_sortie/battle"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_sortie/battle"); }
 		}
 
 		/// <summary>
@@ -291,7 +291,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_req_sortie_battleresult
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_sortie/battleresult"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_sortie/battleresult"); }
 		}
 
 		/// <summary>
@@ -299,7 +299,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_req_hensei_combined
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_hensei/combined"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_hensei/combined"); }
 		}
 
 		/// <summary>
@@ -307,7 +307,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_req_combined_battle_battle
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_combined_battle/battle"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_combined_battle/battle"); }
 		}
 
 		/// <summary>
@@ -315,7 +315,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_req_combined_battle_airbattle
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_combined_battle/airbattle"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_combined_battle/airbattle"); }
 		}
 
 		/// <summary>
@@ -323,7 +323,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_req_combined_battle_battleresult
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_combined_battle/battleresult"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_combined_battle/battleresult"); }
 		}
 
 		/// <summary>
@@ -331,7 +331,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public IObservable<Session> api_req_combined_battle_goback_port
 		{
-			get { return this.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_req_combined_battle/goback_port"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_combined_battle/goback_port"); }
 		}
 
 	}

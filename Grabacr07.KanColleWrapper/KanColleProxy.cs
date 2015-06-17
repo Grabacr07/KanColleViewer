@@ -4,10 +4,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using Fiddler;
-using Grabacr07.KanColleWrapper.Win32;
+using Nekoxy;
 using Livet;
 
 namespace Grabacr07.KanColleWrapper
@@ -20,15 +18,35 @@ namespace Grabacr07.KanColleWrapper
 
 		public IObservable<Session> SessionSource
 		{
-		    get { return this.connectableSessionSource.AsObservable(); }
+			get { return this.connectableSessionSource.AsObservable(); }
 		}
 
-	    public IObservable<Session> ApiSessionSource
-	    {
-	        get { return this.apiSource.AsObservable(); }
-	    }
+		public IObservable<Session> ApiSessionSource
+		{
+			get { return this.apiSource.AsObservable(); }
+		}
 
-	    public IProxySettings UpstreamProxySettings { get; set; }
+		#region UpstreamProxySettingsプロパティ
+
+		private IProxySettings _UpstreamProxySettings;
+
+		public IProxySettings UpstreamProxySettings
+		{
+			get { return this._UpstreamProxySettings; }
+			set
+			{
+				this._UpstreamProxySettings = value;
+				if (value == null)
+				{
+					HttpProxy.UpstreamProxyHost = null;
+					return;
+				}
+				HttpProxy.UpstreamProxyHost = value.IsEnabled ? value.Host : null;
+				HttpProxy.UpstreamProxyPort = value.Port;
+			}
+		}
+
+		#endregion
 
 
 		public KanColleProxy()
@@ -36,15 +54,15 @@ namespace Grabacr07.KanColleWrapper
 			this.compositeDisposable = new LivetCompositeDisposable();
 
 			this.connectableSessionSource = Observable
-				.FromEvent<SessionStateHandler, Session>(
-					action => new SessionStateHandler(action),
-					h => FiddlerApplication.AfterSessionComplete += h,
-					h => FiddlerApplication.AfterSessionComplete -= h)
+				.FromEvent<Action<Session>, Session>(
+					action => action,
+					h => HttpProxy.AfterSessionComplete += h,
+					h => HttpProxy.AfterSessionComplete -= h)
 				.Publish();
 
 			this.apiSource = this.connectableSessionSource
-				.Where(s => s.PathAndQuery.StartsWith("/kcsapi"))
-				.Where(s => s.oResponse.MIMEType.Equals("text/plain"))
+				.Where(s => s.Request.PathAndQuery.StartsWith("/kcsapi"))
+				.Where(s => s.Response.MimeType.Equals("text/plain"))
 				#region .Do(debug)
 #if DEBUG
 .Do(session =>
@@ -62,11 +80,7 @@ namespace Grabacr07.KanColleWrapper
 
 		public void Startup(int proxy = 37564)
 		{
-			FiddlerApplication.Startup(proxy, FiddlerCoreStartupFlags.ChainToUpstreamGateway);
-			FiddlerApplication.BeforeRequest += this.SetUpstreamProxyHandler;
-
-			SetIESettings("localhost:" + proxy);
-
+			HttpProxy.Startup(proxy);
 			this.compositeDisposable.Add(this.connectableSessionSource.Connect());
 			this.compositeDisposable.Add(this.apiSource.Connect());
 		}
@@ -74,60 +88,7 @@ namespace Grabacr07.KanColleWrapper
 		public void Shutdown()
 		{
 			this.compositeDisposable.Dispose();
-
-			FiddlerApplication.BeforeRequest -= this.SetUpstreamProxyHandler;
-			FiddlerApplication.Shutdown();
-		}
-
-
-		private static void SetIESettings(string proxyUri)
-		{
-			// ReSharper disable InconsistentNaming
-			const int INTERNET_OPTION_PROXY = 38;
-			const int INTERNET_OPEN_TYPE_PROXY = 3;
-			// ReSharper restore InconsistentNaming
-
-			INTERNET_PROXY_INFO proxyInfo;
-			proxyInfo.dwAccessType = INTERNET_OPEN_TYPE_PROXY;
-			proxyInfo.proxy = Marshal.StringToHGlobalAnsi(proxyUri);
-			proxyInfo.proxyBypass = Marshal.StringToHGlobalAnsi("local");
-
-			var proxyInfoSize = Marshal.SizeOf(proxyInfo);
-			var proxyInfoPtr = Marshal.AllocCoTaskMem(proxyInfoSize);
-			Marshal.StructureToPtr(proxyInfo, proxyInfoPtr, true);
-
-			NativeMethods.InternetSetOption(IntPtr.Zero, INTERNET_OPTION_PROXY, proxyInfoPtr, proxyInfoSize);
-		}
-
-		/// <summary>
-		/// Fiddler からのリクエスト発行時にプロキシを挟む設定を行います。
-		/// </summary>
-		/// <param name="requestingSession">通信を行おうとしているセッション。</param>
-		private void SetUpstreamProxyHandler(Session requestingSession)
-		{
-			var settings = this.UpstreamProxySettings;
-			if (settings == null) return;
-
-			var useGateway = !string.IsNullOrEmpty(settings.Host) && settings.IsEnabled;
-			if (!useGateway || (IsSessionSSL(requestingSession) && !settings.IsEnabledOnSSL)) return;
-
-			var gateway = settings.Host.Contains(":")
-				// IPv6 アドレスをプロキシホストにした場合はホストアドレス部分を [] で囲う形式にする。
-				? string.Format("[{0}]:{1}", settings.Host, settings.Port)
-				: string.Format("{0}:{1}", settings.Host, settings.Port);
-
-			requestingSession["X-OverrideGateway"] = gateway;
-		}
-
-		/// <summary>
-		/// セッションが SSL 接続を使用しているかどうかを返します。
-		/// </summary>
-		/// <param name="session">セッション。</param>
-		/// <returns>セッションが SSL 接続を使用する場合は true、そうでない場合は false。</returns>
-		internal static bool IsSessionSSL(Session session)
-		{
-			// 「http://www.dmm.com:433/」の場合もあり、これは Session.isHTTPS では判定できない
-			return session.isHTTPS || session.fullUrl.StartsWith("https:") || session.fullUrl.Contains(":443");
+			HttpProxy.Shutdown();
 		}
 	}
 }
