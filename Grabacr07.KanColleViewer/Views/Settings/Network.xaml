@@ -65,6 +65,13 @@
 					</metro:PromptTextBox.Text>
 				</metro:PromptTextBox>
 			</Grid>
+
+			<TextBlock Text="※反映にはアプリケーションの再起動が必要です。"
+					   Style="{DynamicResource DetailTextStyleKey}"
+					   Margin="0,4"/>
+			<TextBlock Text="※サーバーをホスト名で指定した場合、動作が遅くなることがあるため、IPアドレスでの指定を推奨します。"
+					   Style="{DynamicResource DetailTextStyleKey}"
+					   Margin="0,4"/>
 		</StackPanel>
 
 		<Rectangle Height="1"
