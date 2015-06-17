@@ -65,47 +65,6 @@
 					</metro:PromptTextBox.Text>
 				</metro:PromptTextBox>
 			</Grid>
-
-			<CheckBox Content="{Binding Resources.Settings_Proxy_Enable_4_SSL, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-					  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=ProxySettings.IsEnabledOnSSL}"
-					  Margin="0,4" />
-
-			<CheckBox x:Name="CheckBoxAuthRequired"
-					  Content="プロキシ サーバーにユーザー名とパスワードが必要"
-					  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=ProxySettings.IsAuthRequired}"
-					  Margin="0,4" />
-
-			<Grid IsEnabled="{Binding ElementName=CheckBoxAuthRequired, Path=IsChecked}"
-				  Margin="0,4">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="20" />
-					<ColumnDefinition Width="Auto" />
-					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="15" />
-					<ColumnDefinition Width="Auto" />
-					<ColumnDefinition Width="*" />
-				</Grid.ColumnDefinitions>
-
-				<TextBlock Grid.Column="1">
-					<Run Text="ユーザー名" />
-					<Run Text=": " />
-				</TextBlock>
-				<metro:PromptTextBox Grid.Column="2"
-									 Text="{Binding Source={x:Static models:Settings.Current}, Path=ProxySettings.Username, Mode=TwoWay}"
-									 Prompt="ユーザー名" />
-				<TextBlock Grid.Column="4">
-					<Run Text="パスワード" />
-					<Run Text=": " />
-				</TextBlock>
-				<PasswordBox Grid.Column="5">
-					<i:Interaction.Triggers>
-						<i:EventTrigger EventName="LostFocus">
-							<livet:PasswordBoxSetStateToSourceAction Property="Password"
-																	 Source="{Binding Source={x:Static models:Settings.Current}, Path=ProxySettings.Password, Mode=TwoWay}" />
-						</i:EventTrigger>
-					</i:Interaction.Triggers>
-				</PasswordBox>
-			</Grid>
 		</StackPanel>
 
 		<Rectangle Height="1"
