@@ -111,6 +111,8 @@ namespace Grabacr07.KanColleWrapper.Models
 		private bool CompareExpeditionData(int MissionNum)
 		{
 			var temp = KanColleClient.Current.Translations.GetExpeditionData("FormedNeedShip", MissionNum).Split(';');
+            if (temp[0] == string.Empty) return false;
+
 			int TotalCount = Convert.ToInt32(temp[0]);
 			Dictionary<int, int> ExpeditionTable = new Dictionary<int, int>();
 			bool Checker = false;
@@ -138,7 +140,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			if (this.Ships.Count() >= TotalCount)
 				Checker = true;
 			else Checker = false;
-			MessageBox.Show(Checker.ToString());
+			//MessageBox.Show(Checker.ToString());
 			return Checker;
 		}
 
