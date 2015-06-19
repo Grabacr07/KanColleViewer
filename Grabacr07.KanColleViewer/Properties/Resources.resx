@@ -352,10 +352,10 @@
     <value>その他</value>
   </data>
   <data name="Settings_Proxy" xml:space="preserve">
-    <value>プロキシ設定</value>
+    <value>HTTP プロキシ設定</value>
   </data>
   <data name="Settings_Proxy_Enable" xml:space="preserve">
-    <value>通信にプロキシ サーバーを使用する</value>
+    <value>HTTP 通信に指定のプロキシ サーバーを使用する</value>
   </data>
   <data name="Settings_Proxy_Enable_4_SSL" xml:space="preserve">
     <value>SSL 接続時もプロキシサーバーを使用する</value>
