@@ -21,6 +21,8 @@ namespace Grabacr07.KanColleViewer.Plugins
 
 		#endregion
 
+		public event EventHandler<NotifyEventArgs> NotifyRequested;
+
 		public void Initialize()
 		{
 			try

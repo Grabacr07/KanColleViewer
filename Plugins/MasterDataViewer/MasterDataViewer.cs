@@ -23,6 +23,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 			get { return "MasterView"; }
 		}
 
+		public event EventHandler<NotifyEventArgs> NotifyRequested;
 
 		public object GetSettingsView()
 		{

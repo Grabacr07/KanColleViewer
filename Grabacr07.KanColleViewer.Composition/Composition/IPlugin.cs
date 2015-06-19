@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,6 +10,9 @@ namespace Grabacr07.KanColleViewer.Composition
 	/// </summary>
 	public interface IPlugin
 	{
+		/// <summary>
+		/// このプラグインが、本体に通知を要求したときに発生します。
+		/// </summary>
 		event EventHandler<NotifyEventArgs> NotifyRequested;
 
 		/// <summary>

@@ -17,6 +17,8 @@ namespace Grabacr07.KanColleViewer.Plugins
 	{
 		private readonly INotifier notifier;
 
+		public event EventHandler<NotifyEventArgs> NotifyRequested;
+
 		public WindowsNotifier()
 		{
 			this.notifier = Windows8Notifier.IsSupported

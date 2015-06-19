@@ -14,6 +14,8 @@ namespace Grabacr07.KanColleViewer.Plugins
 		private NotifyIcon notifyIcon;
 		private EventHandler activatedAction;
 
+		public event EventHandler<NotifyEventArgs> NotifyRequested;
+
 		public void Initialize()
 		{
 			const string iconUri = "pack://application:,,,/KanColleViewer;Component/Assets/app.ico";

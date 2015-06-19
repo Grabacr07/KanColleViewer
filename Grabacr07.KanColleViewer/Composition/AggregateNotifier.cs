@@ -12,6 +12,8 @@ namespace Grabacr07.KanColleViewer.Composition
 	{
 		private readonly INotifier[] notifiers;
 
+		public event EventHandler<NotifyEventArgs> NotifyRequested;
+
 		public AggregateNotifier(IEnumerable<INotifier> notifiers)
 		{
 			this.notifiers = notifiers.ToArray();

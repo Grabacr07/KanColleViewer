@@ -31,6 +31,8 @@ namespace Counter
 			get { return "Counter"; }
 		}
 
+		public event EventHandler<NotifyEventArgs> NotifyRequested;
+
 		public object GetSettingsView()
 		{
 			return null;
