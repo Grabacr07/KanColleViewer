@@ -11,6 +11,8 @@ namespace Grabacr07.KanColleViewer.Composition
 	/// </summary>
 	public interface IPlugin
 	{
+		event EventHandler<NotifyEventArgs> NotifyRequested;
+
 		/// <summary>
 		/// プラグインの設定画面を取得します。
 		/// </summary>

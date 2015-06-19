@@ -45,6 +45,7 @@
     <Compile Include="Composition\IPlugin.cs" />
     <Compile Include="Composition\IPluginMetadata.cs" />
     <Compile Include="Composition\IToolPlugin.cs" />
+    <Compile Include="Composition\NotifyEventArgs.cs" />
     <Compile Include="Composition\NotifyType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
