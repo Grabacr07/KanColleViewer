@@ -19,8 +19,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B8B366
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanColleWrapper", "Grabacr07.KanColleWrapper\KanColleWrapper.csproj", "{0BC8CF79-76D9-46AD-867F-FEC6C6AD4594}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".resharper", ".resharper", "{4CB2D693-E4DB-447F-816E-C4F3EF36FD70}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".settings", ".settings", "{4CB2D693-E4DB-447F-816E-C4F3EF36FD70}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		KanColleViewer.sln.DotSettings = KanColleViewer.sln.DotSettings
 	EndProjectSection
 EndProject
