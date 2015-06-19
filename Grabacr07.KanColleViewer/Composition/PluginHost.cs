@@ -9,6 +9,10 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleWrapper;
+using Livet;
+using Livet.Behaviors;
+using Livet.EventListeners;
+using Livet.EventListeners.WeakEvents;
 
 namespace Grabacr07.KanColleViewer.Composition
 {
@@ -41,6 +45,7 @@ namespace Grabacr07.KanColleViewer.Composition
 		private CompositionContainer container;
 		private InitializationResult initializationResult;
 		private readonly List<Exception> unknownExceptions = new List<Exception>();
+		private readonly LivetCompositeDisposable compositeDisposable = new LivetCompositeDisposable();
 
 		/// <summary>
 		/// プラグインの初期化処理 (<see cref="PluginHost.Initialize"/> メソッド) の結果を示す識別子を定義します。
@@ -224,8 +229,20 @@ namespace Grabacr07.KanColleViewer.Composition
 				try
 				{
 					// メソッドとか適当に呼び出してみるみるテスト
+					// だいたい、.Value にアクセスしたときに死ぬ
+
 					metadata = plugin.Metadata;
-					plugin.Value.GetSettingsView();
+
+					var notifier = plugin.Value as INotifier;
+					if (notifier != null)
+					{
+						this.compositeDisposable.Add(new LivetWeakEventListener<EventHandler<NotifyEventArgs>, NotifyEventArgs>(
+							x => x,
+							x => notifier.NotifyRequested += x,
+							x => notifier.NotifyRequested -= x,
+							(sender, e) => NotifierHost.Instance.Notify(e.Title, e.Message, e.Activated, e.Failed)));
+					}
+
 				}
 				catch (CompositionException ex)
 				{

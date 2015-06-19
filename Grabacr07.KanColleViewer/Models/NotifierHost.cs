@@ -30,7 +30,11 @@ namespace Grabacr07.KanColleViewer.Models
 			{
 				if (args.PropertyName == "IsStarted") this.InitializeCore(client);
 			};
+		}
 
+		public void Notify(string header, string body, Action activated, Action<Exception> failed = null)
+		{
+			PluginHost.Instance.GetNotifier().Show(NotifyType.Other, header, body, activated, failed);
 		}
 
 		private void InitializeCore(KanColleClient client)
