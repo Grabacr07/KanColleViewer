@@ -9,6 +9,7 @@
 			 xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
 			 xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
 			 xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
 			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
@@ -23,7 +24,6 @@
 	<UserControl.Resources>
 		<kcvv:HasFlagConverter x:Key="HasFlagConverter" />
 	</UserControl.Resources>
-
 	<i:Interaction.Triggers>
 		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
 										 MessageKey="Show/FleetWindow">
@@ -86,8 +86,59 @@
 				  Grid.ColumnSpan="2"
 				  DataContext="{Binding SelectedFleet}"
 				  d:DataContext="{d:DesignData /SampleData/FleetViewModelSampleData.xaml}">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+				<Grid Visibility="{Binding IsFirstFleet}" Margin="10,3">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
+					</Grid.ColumnDefinitions>
+					<TextBlock Text="※주의: 데이터입력 실수등의 이유로 정확한 판정이 나오지 않을 수 있습니다."
+							   VerticalAlignment="Center"/>
+					<TextBlock Text="원정번호: "
+							   HorizontalAlignment="Right"
+							   VerticalAlignment="Center"
+							   Grid.Column="1" Margin="0,0,3,0"/>
+					<metro:PromptComboBox ItemsSource="{Binding ResultList}"
+										  HorizontalAlignment="Right"
+										  VerticalAlignment="Center"
+										  Prompt=""
+										  SelectedValue="{Binding ExpeditionId, Mode=TwoWay}"
+										  IsReadOnly="True"
+										  MinWidth="50"
+										  Grid.Column="2" Margin="0,0,3,0" />
+					<TextBlock Grid.Column="3"
+							   Margin="3"
+							   Foreground="White"
+							   Padding="8,3"
+							   HorizontalAlignment="Right"
+							   VerticalAlignment="Center">
+						<TextBlock.Style>
+							<Style TargetType="TextBlock">
+								<Style.Triggers>
+									<DataTrigger Binding="{Binding IsPassed}"
+												 Value="False">
+										<Setter Property="Background" Value="Red"/>
+										<Setter Property="Text" Value="부족"/>
+									</DataTrigger>
+									<DataTrigger Binding="{Binding IsPassed}"
+												 Value="True">
+										<Setter Property="Background" Value="#FF3A68E2"/>
+										<Setter Property="Text" Value="편성완료"/>
+									</DataTrigger>
+								</Style.Triggers>
+							</Style>
+						</TextBlock.Style>
+					</TextBlock>
+				</Grid>
+				
 
 				<ItemsControl ItemsSource="{Binding Ships}"
+							  Grid.Row="1"
 							  Margin="0,0,0,10"
 							  Grid.IsSharedSizeScope="True">
 					<ItemsControl.ItemTemplate>

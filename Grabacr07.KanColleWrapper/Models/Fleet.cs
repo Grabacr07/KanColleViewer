@@ -85,65 +85,6 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public Expedition Expedition { get; private set; }
 
-		private Dictionary<int, int> ShipTypeTable { get; set; }
-		private Dictionary<int, int> MakeShipTypeTable(Ship[] source)
-		{
-			Dictionary<int, int> temp = new Dictionary<int, int>();
-			List<int> rawList = new List<int>();
-			List<int> DistinctList = new List<int>();
-
-			foreach (var ship in source)
-			{
-				rawList.Add(ship.Info.ShipType.Id);
-			}
-			for (int i = 0; i < rawList.Count; i++)
-			{
-				if (DistinctList.Contains(rawList[i]))
-					continue;
-				DistinctList.Add(rawList[i]);
-			}
-			for (int i = 0; i < DistinctList.Count; i++)
-			{
-				temp.Add(DistinctList[i], rawList.Where(x => x == DistinctList[i]).Count());
-			}
-			return temp;
-		}
-		private bool CompareExpeditionData(int MissionNum)
-		{
-			var temp = KanColleClient.Current.Translations.GetExpeditionData("FormedNeedShip", MissionNum).Split(';');
-            if (temp[0] == string.Empty) return false;
-
-			int TotalCount = Convert.ToInt32(temp[0]);
-			Dictionary<int, int> ExpeditionTable = new Dictionary<int, int>();
-			bool Checker = false;
-
-			if (temp.Count() > 1)
-			{
-				var Ships = temp[1].Split(',');
-				for (int i = 0; i < Ships.Count(); i++)
-				{
-					var shipInfo = Ships[i].Split('*');
-					ExpeditionTable.Add(Convert.ToInt32(shipInfo[0]), Convert.ToInt32(shipInfo[1]));
-				}
-				for (int i = 0; i < ExpeditionTable.Count; i++)
-				{
-					var test = ExpeditionTable.ToList();
-					if (this.ShipTypeTable.ContainsKey(test[i].Key))
-					{
-						var Count = this.ShipTypeTable[test[i].Key];
-						if (ExpeditionTable[test[i].Key] <= this.ShipTypeTable[test[i].Key])
-							Checker = true;
-						else Checker = false;
-					}
-				}
-			}
-			if (this.Ships.Count() >= TotalCount)
-				Checker = true;
-			else Checker = false;
-			//MessageBox.Show(Checker.ToString());
-			return Checker;
-		}
-
 		internal Fleet(Homeport parent, kcsapi_deck rawData)
 		{
 			this.homeport = parent;
@@ -258,8 +199,6 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			this.originalShips = ships;
 			this.Ships = ships.Where(x => x != null).ToArray();
-			this.ShipTypeTable = MakeShipTypeTable(this.Ships);
-			bool test = CompareExpeditionData(19);
 
 			this.State.Calculate();
 			this.State.Update();
