@@ -32,9 +32,37 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Desktop.Metro, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\KanColleViewerAssemblies\Desktop.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="KanColleViewer, Version=3.8.2.181, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\KanColleViewerAssemblies\KanColleViewer.exe</HintPath>
+    </Reference>
+    <Reference Include="KanColleViewer.Composition, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\KanColleViewerAssemblies\KanColleViewer.Composition.dll</HintPath>
+    </Reference>
+    <Reference Include="KanColleViewer.Controls, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\KanColleViewerAssemblies\KanColleViewer.Controls.dll</HintPath>
+    </Reference>
     <Reference Include="Livet, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b0b1d3f711ef38cb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\LivetCask.1.1.0.0\lib\net45\Livet.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroRadiance, Version=0.1.0.19733, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\KanColleViewerAssemblies\MetroRadiance.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroRadiance.Chrome, Version=0.1.0.19732, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\KanColleViewerAssemblies\MetroRadiance.Chrome.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroRadiance.Core, Version=0.1.0.19731, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\KanColleViewerAssemblies\MetroRadiance.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\LivetCask.1.1.0.0\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
@@ -77,40 +105,6 @@
     </Compile>
     <Compile Include="ViewModels\LogViewerViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Grabacr07.Desktop.Metro\Desktop.Metro.csproj">
-      <Project>{f00fc570-2a80-4f61-8364-798cd44514b2}</Project>
-      <Name>Desktop.Metro</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Grabacr07.KanColleViewer.Composition\KanColleViewer.Composition.csproj">
-      <Project>{cc139e98-d847-41da-b20f-8aca4564f375}</Project>
-      <Name>KanColleViewer.Composition</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Grabacr07.KanColleViewer.Controls\KanColleViewer.Controls.csproj">
-      <Project>{978239d0-3129-4c54-aac6-493f0de48bf5}</Project>
-      <Name>KanColleViewer.Controls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Grabacr07.KanColleViewer\KanColleViewer.csproj">
-      <Project>{c5f0111f-3f68-4a74-bb20-bb762564d080}</Project>
-      <Name>KanColleViewer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Grabacr07.KanColleWrapper\KanColleWrapper.csproj">
-      <Project>{0bc8cf79-76d9-46ad-867f-fec6c6ad4594}</Project>
-      <Name>KanColleWrapper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MetroRadiance\MetroRadiance.Chrome\MetroRadiance.Chrome.csproj">
-      <Project>{21b4ad15-d9fa-4873-bfad-1eeefbc6c264}</Project>
-      <Name>MetroRadiance.Chrome</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MetroRadiance\MetroRadiance.Core\MetroRadiance.Core.csproj">
-      <Project>{a6b0a741-5be0-479d-b813-e65672350057}</Project>
-      <Name>MetroRadiance.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MetroRadiance\MetroRadiance\MetroRadiance.csproj">
-      <Project>{0af0b9ff-d981-4d0f-a41f-c3ab6fe2f16d}</Project>
-      <Name>MetroRadiance</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

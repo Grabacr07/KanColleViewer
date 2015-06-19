@@ -45,6 +45,22 @@
     <Reference Include="CoreAudioApi">
       <HintPath>..\..\assemblies\CoreAudioApi.dll</HintPath>
     </Reference>
+    <Reference Include="KanColleViewer, Version=3.8.2.181, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\KanColleViewerAssemblies\KanColleViewer.exe</HintPath>
+    </Reference>
+    <Reference Include="KanColleViewer.Composition, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\KanColleViewerAssemblies\KanColleViewer.Composition.dll</HintPath>
+    </Reference>
+    <Reference Include="KanColleViewer.Controls, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\KanColleViewerAssemblies\KanColleViewer.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="KanColleWrapper, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\KanColleViewerAssemblies\KanColleWrapper.dll</HintPath>
+    </Reference>
     <Reference Include="Livet">
       <HintPath>..\..\packages\LivetCask.1.1.0.0\lib\net45\Livet.dll</HintPath>
     </Reference>
@@ -92,24 +108,6 @@
     <Compile Include="Windows7Notifier.cs" />
     <Compile Include="Windows8Notifier.cs" />
     <Compile Include="WindowsNotifier.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Grabacr07.KanColleViewer.Composition\KanColleViewer.Composition.csproj">
-      <Project>{cc139e98-d847-41da-b20f-8aca4564f375}</Project>
-      <Name>KanColleViewer.Composition</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Grabacr07.KanColleViewer.Controls\KanColleViewer.Controls.csproj">
-      <Project>{978239d0-3129-4c54-aac6-493f0de48bf5}</Project>
-      <Name>KanColleViewer.Controls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Grabacr07.KanColleViewer\KanColleViewer.csproj">
-      <Project>{c5f0111f-3f68-4a74-bb20-bb762564d080}</Project>
-      <Name>KanColleViewer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Grabacr07.KanColleWrapper\KanColleWrapper.csproj">
-      <Project>{0bc8cf79-76d9-46ad-867f-fec6c6ad4594}</Project>
-      <Name>KanColleWrapper</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
