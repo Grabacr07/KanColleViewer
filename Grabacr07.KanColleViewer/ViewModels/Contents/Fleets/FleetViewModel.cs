@@ -75,6 +75,39 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				this.RaisePropertyChanged();
 			}
 		}
+		private string _nDrum;
+		public string nDrum
+		{
+			get { return this._nDrum; }
+			set
+			{
+				if (this._nDrum == value) return;
+				this._nDrum = value;
+				this.RaisePropertyChanged();
+			}
+		}
+		private int _nFuelLoss;
+		public int nFuelLoss
+		{
+			get { return this._nFuelLoss; }
+			set
+			{
+				if (this._nFuelLoss == value) return;
+				this._nFuelLoss = value;
+				this.RaisePropertyChanged();
+			}
+		}
+		private int _nArmoLoss;
+		public int nArmoLoss
+		{
+			get { return this._nArmoLoss; }
+			set
+			{
+				if (this._nArmoLoss == value) return;
+				this._nArmoLoss = value;
+				this.RaisePropertyChanged();
+			}
+		}
 		#endregion
 
 		#region 원정 구성 확인
@@ -163,6 +196,50 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				this.RaisePropertyChanged();
 			}
 		}
+		private Visibility _vDrum;
+		public Visibility vDrum
+		{
+			get { return this._vDrum; }
+			set
+			{
+				if (this._vDrum == value) return;
+				this._vDrum = value;
+				this.RaisePropertyChanged();
+			}
+		}
+		private Visibility _vResource;
+		public Visibility vResource
+		{
+			get { return this._vResource; }
+			set
+			{
+				if (this._vResource == value) return;
+				this._vResource = value;
+				this.RaisePropertyChanged();
+			}
+		}
+		private Visibility _vArmo;
+		public Visibility vArmo
+		{
+			get { return this._vArmo; }
+			set
+			{
+				if (this._vArmo == value) return;
+				this._vArmo = value;
+				this.RaisePropertyChanged();
+			}
+		}
+		private Visibility _vFuel;
+		public Visibility vFuel
+		{
+			get { return this._vFuel; }
+			set
+			{
+				if (this._vFuel == value) return;
+				this._vFuel = value;
+				this.RaisePropertyChanged();
+			}
+		}
 		#endregion
 
 		/// <summary>
@@ -208,28 +285,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				return this.State.Homeport;
 			}
 		}
-		private List<int> MakeResultList()
-		{
-			List<int> temp = new List<int>();
-
-			bool IsEnd = true;
-			int i = 1;
-			int ListCount = KanColleClient.Current.Translations.GetExpeditionListCount();
-
-
-			while (IsEnd)
-			{
-				var TRName = KanColleClient.Current.Translations.GetExpeditionData("TR-Name", i);
-				var FlagLv = KanColleClient.Current.Translations.GetExpeditionData("FlagLv", i);
-
-				i++;
-				if (TRName != string.Empty && FlagLv != string.Empty) temp.Add(i - 1);
-				if (temp.Count == ListCount) IsEnd = false;
-			}
-
-			return temp;
-		}
-
 		public FleetViewModel(Fleet fleet)
 		{
 			this.Source = fleet;
@@ -259,35 +314,69 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			this.Expedition = new ExpeditionViewModel(fleet.Expedition);
 			this.CompositeDisposable.Add(this.Expedition);
 		}
-		private Dictionary<int, int> ChangeSpecialType(Dictionary<int, int> list, int MissionNum)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="total"></param>
+		/// <param name="MissonNum"></param>
+		/// <param name="ResourceType">0=연료 1=탄</param>
+		/// <returns></returns>
+		private int LossResource(ShipViewModel[] fleet, int MissionNum, int ResourceType = 0)
 		{
-			Dictionary<int, int> templist = new Dictionary<int, int>(list);
-			bool Checker = true;
-			int SpecialCount = 1;
-			while (Checker)
+			double temp = 0;
+			int total = 0;
+
+			string losstype = "FuelLoss";
+			if (ResourceType == 1) losstype = "ArmoLoss";
+			var NeedDrumRaw = KanColleClient.Current.Translations.GetExpeditionData(losstype, MissionNum);
+			if (NeedDrumRaw == string.Empty) return -1;
+
+			for (int i = 0; i < fleet.Count(); i++)
 			{
-				string SepcialElement = "Special";
-				var temp = SepcialElement + SpecialCount.ToString();
-				var specialData = KanColleClient.Current.Translations.GetExpeditionData(temp, MissionNum);
-
-				if (specialData != string.Empty)
-				{
-					var splitData = specialData.Split(';');
-					if (templist.ContainsKey(Convert.ToInt32(splitData[0])))
-					{
-						int tempCount = templist[Convert.ToInt32(splitData[0])];
-
-						if (templist.ContainsKey(Convert.ToInt32(splitData[1]))) templist[Convert.ToInt32(splitData[1])] += tempCount;
-						else templist.Add(Convert.ToInt32(splitData[1]), tempCount);
-
-						templist.Remove(Convert.ToInt32(splitData[0]));
-					}
-				}
-				else Checker = false;
-				SpecialCount++;
+				if (ResourceType == 1) total += fleet[i].Ship.Bull.Maximum;
+				else total += fleet[i].Ship.Fuel.Maximum;
 			}
 
-			return templist;
+			double LossPercent = (double)Convert.ToInt32(NeedDrumRaw) / 100d;
+			temp = (double)total * LossPercent;
+			if (ResourceType == 1) this.vArmo = Visibility.Visible;
+			else this.vFuel = Visibility.Visible;
+			this.vResource = Visibility.Visible;
+			return Convert.ToInt32(temp);
+		}
+		private bool DrumCount(int Mission, ShipViewModel[] fleet)
+		{
+			bool result = false;
+			var NeedDrumRaw = KanColleClient.Current.Translations.GetExpeditionData("DrumCount", Mission);
+
+			var sNeedDrumRaw = NeedDrumRaw.Split(';');
+			int nTotalDrum = Convert.ToInt32(sNeedDrumRaw[0]);
+			int nHasDrumShip = Convert.ToInt32(sNeedDrumRaw[1]);
+			this.nDrum = "총" + sNeedDrumRaw[0] + "개, " + "장착칸무스 최소 " + sNeedDrumRaw[1] + "척";
+			this.vDrum = Visibility.Visible;
+			int rTotalDrum = 0;
+			int rHasDrumShip = 0;
+			bool shipCheck = false;
+
+			for (int i = 0; i < fleet.Count(); i++)
+			{
+				for (int j = 0; j < fleet[i].Ship.Slots.Count(); j++)
+				{
+					if (fleet[i].Ship.Slots[j].Equipped && fleet[i].Ship.Slots[j].Item.Info.CategoryId == 30)
+					{
+						rTotalDrum++;
+						if (!shipCheck)
+						{
+							rHasDrumShip++;
+							shipCheck = true;
+						}
+					}
+				}
+				shipCheck = false;
+			}
+			if (rTotalDrum >= nTotalDrum && rHasDrumShip >= nHasDrumShip) result = true;
+
+			return result;
 		}
 		private bool CompareExpeditionData(string Mission, ShipViewModel[] fleet)
 		{
@@ -295,6 +384,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			this.vFlagType = Visibility.Collapsed;
 			this.vNeed = Visibility.Collapsed;
 			this.vTotal = Visibility.Collapsed;
+			this.vDrum = Visibility.Collapsed;
+			this.vFuel = Visibility.Collapsed;
+			this.vArmo = Visibility.Collapsed;
+			this.vResource = Visibility.Collapsed;
 
 			if (fleet.Count() <= 0) return false;
 			if (Mission == null) return false;
@@ -312,14 +405,23 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			if (MissionNum < 1) return false;
 			this.ShipTypeTable = this.ChangeSpecialType(this.ShipTypeTable, MissionNum);
 
+
+			this.nArmoLoss = LossResource(fleet, MissionNum, 1);
+			this.nFuelLoss = LossResource(fleet, MissionNum);
+
 			var NeedShipRaw = KanColleClient.Current.Translations.GetExpeditionData("FormedNeedShip", MissionNum).Split(';');
 			var FLv = KanColleClient.Current.Translations.GetExpeditionData("FlagLv", MissionNum);
 			var TotalLevel = KanColleClient.Current.Translations.GetExpeditionData("TotalLv", MissionNum);
 			var FlagShipType = KanColleClient.Current.Translations.GetExpeditionData("FlagShipType", MissionNum);
+			StringBuilder strb = new StringBuilder();
 
+			if (KanColleClient.Current.Translations.GetExpeditionData("DrumCount", MissionNum) != string.Empty) Chk = this.DrumCount(MissionNum, fleet);
 
-			if (NeedShipRaw[0] == string.Empty) Chk = false;
+			if (NeedShipRaw[0] == string.Empty) return false;
+			else strb.Append("총" + Convert.ToInt32(NeedShipRaw[0]) + "(");
+
 			if (fleet.Count() < Convert.ToInt32(NeedShipRaw[0])) Chk = false;
+
 			if (FLv != string.Empty && FLv != "-")
 			{
 				int lv = Convert.ToInt32(FLv);
@@ -354,7 +456,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 						ExpeditionTable.Add(Convert.ToInt32(shipInfo[0]), Convert.ToInt32(shipInfo[1]));
 				}
 				var list = ExpeditionTable.ToList();
-				StringBuilder strb = new StringBuilder();
 				for (int i = 0; i < ExpeditionTable.Count; i++)
 				{
 					if (i == 0)
@@ -363,7 +464,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 					}
 					else strb.Append("・" + KanColleClient.Current.Translations.GetTranslation("", TranslationType.ShipTypes, null, list[i].Key) + "×" + list[i].Value);
 				}
-
+				strb.Append(")");
+				strb = strb.Replace("()", "");
 				this.ShipTypeString = strb.ToString();
 				if (this.ShipTypeString.Count() > 0) this.vNeed = Visibility.Visible;
 
@@ -381,6 +483,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			}
 			return Chk;
 		}
+
+		#region Make & Replace List
 		private Dictionary<int, int> MakeShipTypeTable(ShipViewModel[] source)
 		{
 			if (source.Count() <= 0) return new Dictionary<int, int>();
@@ -405,5 +509,57 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			}
 			return temp;
 		}
+		private Dictionary<int, int> ChangeSpecialType(Dictionary<int, int> list, int MissionNum)
+		{
+			Dictionary<int, int> templist = new Dictionary<int, int>(list);
+			bool Checker = true;
+			int SpecialCount = 1;
+			while (Checker)
+			{
+				string SepcialElement = "Special";
+				var temp = SepcialElement + SpecialCount.ToString();
+				var specialData = KanColleClient.Current.Translations.GetExpeditionData(temp, MissionNum);
+
+				if (specialData != string.Empty)
+				{
+					var splitData = specialData.Split(';');
+					if (templist.ContainsKey(Convert.ToInt32(splitData[0])))
+					{
+						int tempCount = templist[Convert.ToInt32(splitData[0])];
+
+						if (templist.ContainsKey(Convert.ToInt32(splitData[1]))) templist[Convert.ToInt32(splitData[1])] += tempCount;
+						else templist.Add(Convert.ToInt32(splitData[1]), tempCount);
+
+						templist.Remove(Convert.ToInt32(splitData[0]));
+					}
+				}
+				else Checker = false;
+				SpecialCount++;
+			}
+
+			return templist;
+		}
+		private List<int> MakeResultList()
+		{
+			List<int> temp = new List<int>();
+
+			bool IsEnd = true;
+			int i = 1;
+			int ListCount = KanColleClient.Current.Translations.GetExpeditionListCount();
+
+
+			while (IsEnd)
+			{
+				var TRName = KanColleClient.Current.Translations.GetExpeditionData("TR-Name", i);
+				var FlagLv = KanColleClient.Current.Translations.GetExpeditionData("FlagLv", i);
+
+				i++;
+				if (TRName != string.Empty && FlagLv != string.Empty) temp.Add(i - 1);
+				if (temp.Count == ListCount) IsEnd = false;
+			}
+
+			return temp;
+		}
+		#endregion
 	}
 }

@@ -104,22 +104,53 @@
 								   FontWeight="Bold"
 							   VerticalAlignment="Center"/>
 						<StackPanel Orientation="Horizontal">
-							<TextBlock Visibility="{Binding vFlag}" Margin="3,0">
-								<Run Text="기함Lv: " FontWeight="Bold" Foreground="Gray" FontSize="11"/>
-								<Run Text="{Binding FlagLv,Mode=OneWay}"/>
-							</TextBlock>
 							<TextBlock Visibility="{Binding vTotal}" Margin="0,0,3,0">
 								<Run Text="총Lv: " FontWeight="Bold" Foreground="Gray" FontSize="11"/>
 								<Run Text="{Binding TotalLv,Mode=OneWay}"/>
+							</TextBlock>
+							<TextBlock Visibility="{Binding vFlag}" Margin="3,0">
+								<Run Text="기함Lv: " FontWeight="Bold" Foreground="Gray" FontSize="11"/>
+								<Run Text="{Binding FlagLv,Mode=OneWay}"/>
 							</TextBlock>
 							<TextBlock Visibility="{Binding vFlagType}" Margin="0,0,3,0">
 								<Run Text="기함종류: " FontWeight="Bold" Foreground="Gray" FontSize="11"/>
 								<Run Text="{Binding FlagType,Mode=OneWay}"/>
 							</TextBlock>
-							<TextBlock Visibility="{Binding vNeed}">
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Visibility="{Binding vNeed}" Margin="0,0,3,0">
 								<Run Text="필요구성원: " FontWeight="Bold" Foreground="Gray" FontSize="11"/>
 								<Run Text="{Binding ShipTypeString,Mode=OneWay}"/>
 							</TextBlock>
+							<Grid Height="20">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto"/>
+									<ColumnDefinition Width="Auto"/>
+								</Grid.ColumnDefinitions>
+								<TextBlock Visibility="{Binding vDrum}" Margin="0,0,3,0">
+									<Run Text="최소 필요드럼수: " FontWeight="Bold" Foreground="Gray" FontSize="11"/>
+									<Run Text="{Binding nDrum,Mode=OneWay}" BaselineAlignment="Center"/>
+								</TextBlock>
+								<Grid Visibility="{Binding vResource}" Grid.Column="1">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"/>
+										<ColumnDefinition Width="Auto"/>
+										<ColumnDefinition Width="Auto"/>
+									</Grid.ColumnDefinitions>
+									<TextBlock>
+										<Run Text="예상 소모자원: " FontWeight="Bold" Foreground="Gray" FontSize="11"/>
+										<Run Text=""/>
+									</TextBlock>
+									<TextBlock Grid.Column="1" Visibility="{Binding vFuel}" Margin="0,0,3,0" >
+										<Run Text="연료" FontWeight="Bold" Foreground="Gray" FontSize="11"/>
+										<Run Text="{Binding nFuelLoss,Mode=OneWay}"/>
+									</TextBlock>
+									<TextBlock Grid.Column="2" Visibility="{Binding vArmo}" Margin="0,0,3,0" >
+										<Run Text="탄" FontWeight="Bold" Foreground="Gray" FontSize="11"/>
+										<Run Text="{Binding nArmoLoss,Mode=OneWay}"/>
+									</TextBlock>
+								</Grid>
+							</Grid>
 						</StackPanel>
 					</StackPanel>
 					<TextBlock Text="원정번호: "
