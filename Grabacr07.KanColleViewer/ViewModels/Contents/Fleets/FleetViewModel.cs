@@ -7,6 +7,7 @@ using Livet;
 using Livet.EventListeners;
 using System.Windows;
 using Grabacr07.KanColleWrapper;
+using System.Text;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 {
@@ -16,7 +17,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 	public class FleetViewModel : ItemViewModel
 	{
 		public Fleet Source { get; private set; }
-		public Visibility IsFirstFleet { get; set; }
 		public int Id
 		{
 			get
@@ -30,6 +30,54 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			get { return string.IsNullOrEmpty(this.Source.Name.Trim()) ? "(第 " + this.Source.Id + " 艦隊)" : this.Source.Name; }
 		}
 
+		#region string
+		private string _ShipTypeString;
+		public string ShipTypeString
+		{
+			get { return this._ShipTypeString; }
+			set
+			{
+				if (this._ShipTypeString == value) return;
+				this._ShipTypeString = value;
+				this.RaisePropertyChanged();
+			}
+		}
+		private string _FlagLv;
+		public string FlagLv
+		{
+			get { return this._FlagLv; }
+			set
+			{
+				if (this._FlagLv == value) return;
+				this._FlagLv = value;
+				this.RaisePropertyChanged();
+			}
+		}
+		private string _FlagType;
+		public string FlagType
+		{
+			get { return this._FlagType; }
+			set
+			{
+				if (this._FlagType == value) return;
+				this._FlagType = value;
+				this.RaisePropertyChanged();
+			}
+		}
+		private string _TotalLv;
+		public string TotalLv
+		{
+			get { return this._TotalLv; }
+			set
+			{
+				if (this._TotalLv == value) return;
+				this._TotalLv = value;
+				this.RaisePropertyChanged();
+			}
+		}
+		#endregion
+
+		#region 원정 구성 확인
 		private bool _IsPassed;
 		public bool IsPassed
 		{
@@ -41,6 +89,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				this.RaisePropertyChanged();
 			}
 		}
+		#endregion
+
+		#region 선택된 원정번호
 		private string _ExpeditionId;
 		public string ExpeditionId
 		{
@@ -52,6 +103,68 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				this.IsPassed = this.CompareExpeditionData(value, this.Ships);
 			}
 		}
+		#endregion
+
+		#region Visibility
+
+		private Visibility _IsFirstFleet;
+		public Visibility IsFirstFleet
+		{
+			get { return this._IsFirstFleet; }
+			set
+			{
+				if (this._IsFirstFleet == value) return;
+				this._IsFirstFleet = value;
+				this.RaisePropertyChanged();
+			}
+		}
+
+		private Visibility _vFlag;
+		public Visibility vFlag
+		{
+			get { return this._vFlag; }
+			set
+			{
+				if (this._vFlag == value) return;
+				this._vFlag = value;
+				this.RaisePropertyChanged();
+			}
+		}
+		private Visibility _vTotal;
+		public Visibility vTotal
+		{
+			get { return this._vTotal; }
+			set
+			{
+				if (this._vTotal == value) return;
+				this._vTotal = value;
+				this.RaisePropertyChanged();
+			}
+		}
+		private Visibility _vFlagType;
+		public Visibility vFlagType
+		{
+			get { return this._vFlagType; }
+			set
+			{
+				if (this._vFlagType == value) return;
+				this._vFlagType = value;
+				this.RaisePropertyChanged();
+			}
+		}
+		private Visibility _vNeed;
+		public Visibility vNeed
+		{
+			get { return this._vNeed; }
+			set
+			{
+				if (this._vNeed == value) return;
+				this._vNeed = value;
+				this.RaisePropertyChanged();
+			}
+		}
+		#endregion
+
 		/// <summary>
 		/// 艦隊に所属している艦娘のコレクションを取得します。
 		/// </summary>
@@ -67,11 +180,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				return temps;
 			}
 		}
-		public List<int> ResultList
-		{
-			get;
-			set;
-		}
+		public List<int> ResultList { get; set; }
 
 		public FleetStateViewModel State { get; private set; }
 
@@ -124,9 +233,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		public FleetViewModel(Fleet fleet)
 		{
 			this.Source = fleet;
+			this.IsFirstFleet = Visibility.Collapsed;
 
-
-			if (this.Source.Id != 1)
+			if (this.Source.Id > 1)
 			{
 				IsFirstFleet = Visibility.Visible;
 
@@ -134,6 +243,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				this.ExpeditionId = this.ResultList.First().ToString();
 			}
 			else IsFirstFleet = Visibility.Collapsed;
+
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet)
 			{
 				(sender, args) => this.RaisePropertyChanged(args.PropertyName),
@@ -149,9 +259,46 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			this.Expedition = new ExpeditionViewModel(fleet.Expedition);
 			this.CompositeDisposable.Add(this.Expedition);
 		}
+		private Dictionary<int, int> ChangeSpecialType(Dictionary<int, int> list, int MissionNum)
+		{
+			Dictionary<int, int> templist = new Dictionary<int, int>(list);
+			bool Checker = true;
+			int SpecialCount = 1;
+			while (Checker)
+			{
+				string SepcialElement = "Special";
+				var temp = SepcialElement + SpecialCount.ToString();
+				var specialData = KanColleClient.Current.Translations.GetExpeditionData(temp, MissionNum);
+
+				if (specialData != string.Empty)
+				{
+					var splitData = specialData.Split(';');
+					if (templist.ContainsKey(Convert.ToInt32(splitData[0])))
+					{
+						int tempCount = templist[Convert.ToInt32(splitData[0])];
+
+						if (templist.ContainsKey(Convert.ToInt32(splitData[1]))) templist[Convert.ToInt32(splitData[1])] += tempCount;
+						else templist.Add(Convert.ToInt32(splitData[1]), tempCount);
+
+						templist.Remove(Convert.ToInt32(splitData[0]));
+					}
+				}
+				else Checker = false;
+				SpecialCount++;
+			}
+
+			return templist;
+		}
 		private bool CompareExpeditionData(string Mission, ShipViewModel[] fleet)
 		{
+			this.vFlag = Visibility.Collapsed;
+			this.vFlagType = Visibility.Collapsed;
+			this.vNeed = Visibility.Collapsed;
+			this.vTotal = Visibility.Collapsed;
+
 			if (fleet.Count() <= 0) return false;
+			if (Mission == null) return false;
+			bool Chk = true;
 			int MissionNum = 0;
 			try
 			{
@@ -161,23 +308,65 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			{
 				return false;
 			}
-			if (this.ShipTypeTable.Count <= 0) return false;
-			var temp = KanColleClient.Current.Translations.GetExpeditionData("FormedNeedShip", MissionNum).Split(';');
-			if (temp[0] == string.Empty) return false;
+			if (this.ShipTypeTable.Count <= 0) Chk = false;
+			if (MissionNum < 1) return false;
+			this.ShipTypeTable = this.ChangeSpecialType(this.ShipTypeTable, MissionNum);
 
-			int TotalCount = Convert.ToInt32(temp[0]);
+			var NeedShipRaw = KanColleClient.Current.Translations.GetExpeditionData("FormedNeedShip", MissionNum).Split(';');
+			var FLv = KanColleClient.Current.Translations.GetExpeditionData("FlagLv", MissionNum);
+			var TotalLevel = KanColleClient.Current.Translations.GetExpeditionData("TotalLv", MissionNum);
+			var FlagShipType = KanColleClient.Current.Translations.GetExpeditionData("FlagShipType", MissionNum);
+
+
+			if (NeedShipRaw[0] == string.Empty) Chk = false;
+			if (fleet.Count() < Convert.ToInt32(NeedShipRaw[0])) Chk = false;
+			if (FLv != string.Empty && FLv != "-")
+			{
+				int lv = Convert.ToInt32(FLv);
+				if (fleet[0] != null && fleet[0].Ship.Level < lv) Chk = false;
+				this.FlagLv = ("Lv" + lv);
+				this.vFlag = Visibility.Visible;
+			}
+			if (TotalLevel != string.Empty)
+			{
+				int totallv = Convert.ToInt32(TotalLevel);
+				if (fleet.Sum(x => x.Ship.Level) < totallv) Chk = false;
+				this.TotalLv = ("Lv" + totallv);
+				this.vTotal = Visibility.Visible;
+			}
+			if (FlagShipType != string.Empty)
+			{
+				int flagship = Convert.ToInt32(FlagShipType);
+				if (fleet[0].Ship.Info.ShipType.Id != flagship) Chk = false;
+				this.FlagType = (KanColleClient.Current.Translations.GetTranslation("", TranslationType.ShipTypes, null, flagship));
+				this.vFlagType = Visibility.Visible;
+			}
+
 			Dictionary<int, int> ExpeditionTable = new Dictionary<int, int>();
 
-			if (temp.Count() > 1)
+			if (NeedShipRaw.Count() > 1)
 			{
-				var Ships = temp[1].Split(',');
+				var Ships = NeedShipRaw[1].Split(',');
 				for (int i = 0; i < Ships.Count(); i++)
 				{
 					var shipInfo = Ships[i].Split('*');
 					if (shipInfo.Count() > 1)
 						ExpeditionTable.Add(Convert.ToInt32(shipInfo[0]), Convert.ToInt32(shipInfo[1]));
-					else return false;
 				}
+				var list = ExpeditionTable.ToList();
+				StringBuilder strb = new StringBuilder();
+				for (int i = 0; i < ExpeditionTable.Count; i++)
+				{
+					if (i == 0)
+					{
+						strb.Append(KanColleClient.Current.Translations.GetTranslation("", TranslationType.ShipTypes, null, list[i].Key) + "×" + list[i].Value);
+					}
+					else strb.Append("・" + KanColleClient.Current.Translations.GetTranslation("", TranslationType.ShipTypes, null, list[i].Key) + "×" + list[i].Value);
+				}
+
+				this.ShipTypeString = strb.ToString();
+				if (this.ShipTypeString.Count() > 0) this.vNeed = Visibility.Visible;
+
 				for (int i = 0; i < ExpeditionTable.Count; i++)
 				{
 					var test = ExpeditionTable.ToList();
@@ -185,33 +374,12 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 					{
 						var Count = this.ShipTypeTable[test[i].Key];
 						if (ExpeditionTable[test[i].Key] > this.ShipTypeTable[test[i].Key])
-							return false;
+							Chk = false;
 					}
-					else return false;
+					else Chk = false;
 				}
 			}
-			if (fleet.Count() < TotalCount)
-				return false;
-
-			var FlagLv = KanColleClient.Current.Translations.GetExpeditionData("FlagLv", MissionNum);
-			if (FlagLv != string.Empty && FlagLv != "-")
-			{
-				int lv = Convert.ToInt32(FlagLv);
-				if (fleet[0] != null && fleet[0].Ship.Level < lv) return false;
-			}
-			var TotalLevel = KanColleClient.Current.Translations.GetExpeditionData("TotalLv", MissionNum);
-			if (TotalLevel != string.Empty)
-			{
-				int totallv = Convert.ToInt32(TotalLevel);
-				if (fleet.Sum(x => x.Ship.Level) < totallv) return false;
-			}
-			var FlagShipType = KanColleClient.Current.Translations.GetExpeditionData("FlagShipType", MissionNum);
-			if (FlagShipType != string.Empty)
-			{
-				int flagship = Convert.ToInt32(FlagShipType);
-				if (fleet[0].Ship.Info.ShipType.Id != flagship) return false;
-			}
-			return true;
+			return Chk;
 		}
 		private Dictionary<int, int> MakeShipTypeTable(ShipViewModel[] source)
 		{
@@ -222,7 +390,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 			foreach (var ship in source)
 			{
-				rawList.Add(ship.Ship.Info.ShipType.Id);
+				int ID = ship.Ship.Info.ShipType.Id;
+				rawList.Add(ID);
 			}
 			for (int i = 0; i < rawList.Count; i++)
 			{
