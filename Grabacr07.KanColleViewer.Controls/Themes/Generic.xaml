@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="/KanColleViewer.Controls;component/Themes/Generic.BuildingDock.xaml" />
+		<ResourceDictionary Source="/KanColleViewer.Controls;component/Themes/Generic.ColorIndicator.xaml" />
+		<ResourceDictionary Source="/KanColleViewer.Controls;component/Themes/Generic.ConditionIcon.xaml" />
+		<ResourceDictionary Source="/KanColleViewer.Controls;component/Themes/Generic.Modernizable.xaml" />
+		<ResourceDictionary Source="/KanColleViewer.Controls;component/Themes/Generic.Quest.xaml" />
+		<ResourceDictionary Source="/KanColleViewer.Controls;component/Themes/Generic.SlotItemIcon.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

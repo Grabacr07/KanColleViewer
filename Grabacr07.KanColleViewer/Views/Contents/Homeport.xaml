@@ -23,7 +23,7 @@
 		</Grid.ColumnDefinitions>
 		<Grid.Resources>
 			<Style TargetType="{x:Type TextBlock}"
-				   BasedOn="{StaticResource {x:Type TextBlock}}">
+				   BasedOn="{StaticResource DefaultTextStyleKey}">
 				<Setter Property="Margin"
 						Value="12,0" />
 			</Style>
@@ -33,10 +33,10 @@
 					DataContext="{Binding Admiral}">
 			<TextBlock>
 				<Run Text="{Binding Model.Nickname, Mode=OneWay}"
-					 Style="{DynamicResource PickupTextElementStyleKey}"
+					 Style="{DynamicResource EmphaticTextElementStyleKey}"
 					 FontSize="18" />
 				<Run Text="{Binding Model.Rank, Mode=OneWay}"
-					 Style="{DynamicResource PickupTextElementStyleKey}"
+					 Style="{DynamicResource EmphaticTextElementStyleKey}"
 					 FontSize="14" />
 				<LineBreak />
 				<Run Text="{Binding Model.Comment, Mode=OneWay}" />
@@ -45,10 +45,10 @@
 			<TextBlock>
 				<Run Text="{Binding Resources.Homeport_FleetHQ, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 				<Run Text="Lv."
-					 Style="{DynamicResource PickupTextElementStyleKey}"
+					 Style="{DynamicResource EmphaticTextElementStyleKey}"
 					 FontSize="14" />
 				<Run Text="{Binding Model.Level, Mode=OneWay}"
-					 Style="{DynamicResource PickupTextElementStyleKey}"
+					 Style="{DynamicResource EmphaticTextElementStyleKey}"
 					 FontSize="18" />
 				<LineBreak />
 				<Run Text="Next:" />
@@ -73,11 +73,11 @@
 						   Grid.Column="1">
 					<Run Text="{Binding Resources.Homeport_InstantRepair, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 					<Run Text="{Binding Materials.Model.InstantRepairMaterials, Mode=OneWay}"
-						 Style="{DynamicResource PickupTextElementStyleKey}" />
+						 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 					<LineBreak />
 					<Run Text="{Binding Resources.Homeport_InstantBuild, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 					<Run Text="{Binding Materials.Model.InstantBuildMaterials, Mode=OneWay}"
-						 Style="{DynamicResource PickupTextElementStyleKey}" />
+						 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 				</TextBlock>
 			</Grid>
 
@@ -95,13 +95,13 @@
 						   Grid.Column="1">
 					<Run Text="{Binding Resources.Homeport_NoOfShips, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 					<Run Text="{Binding Ships.Count, Mode=OneWay}"
-						 Style="{DynamicResource PickupTextElementStyleKey}" />
+						 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 					<Run Text="/" />
 					<Run Text="{Binding Admiral.Model.MaxShipCount, Mode=OneWay}" />
 					<LineBreak />
 					<Run Text="{Binding Resources.Homeport_NoOfEquipment, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 					<Run Text="{Binding SlotItems.Count, Mode=OneWay}"
-						 Style="{DynamicResource PickupTextElementStyleKey}" />
+						 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 					<Run Text="/" />
 					<Run Text="{Binding Admiral.Model.MaxSlotItemCount, Mode=OneWay}" />
 				</TextBlock>

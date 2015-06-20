@@ -10,7 +10,6 @@
     <RootNamespace>Grabacr07.KanColleViewer</RootNamespace>
     <AssemblyName>KanColleViewer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -26,7 +25,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile />
-    <ExpressionBlendVersion>12.0.41002.1</ExpressionBlendVersion>
+    <ExpressionBlendVersion>12.0.50716.0</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,6 +49,16 @@
   <PropertyGroup>
     <ApplicationIcon>Assets\app.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release %28beta%29|AnyCPU'">
+    <OutputPath>bin\Release %28beta%29\</OutputPath>
+    <DefineConstants>TRACE;BETA</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CoreAudioApi, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -61,49 +70,37 @@
     <Reference Include="Livet.Extensions">
       <HintPath>..\packages\LivetExtensions.1.1.0.0\lib\net45\Livet.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="MetroRadiance">
-      <HintPath>..\assemblies\MetroRadiance.dll</HintPath>
+    <Reference Include="Microsoft.Expression.Drawing, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\assemblies\Microsoft.Expression.Drawing.dll</HintPath>
     </Reference>
-    <Reference Include="MetroRadiance.Chrome">
-      <HintPath>..\assemblies\MetroRadiance.Chrome.dll</HintPath>
-    </Reference>
-    <Reference Include="MetroRadiance.Core">
-      <HintPath>..\assemblies\MetroRadiance.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Expression.Drawing" />
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\LivetCask.1.1.0.0\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\LivetExtensions.1.1.0.0\lib\net45\Microsoft.WindowsAPICodePack.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\LivetExtensions.1.1.0.0\lib\net45\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Interactive">
-      <HintPath>..\packages\Ix-Main.1.2.2\lib\net45\System.Interactive.dll</HintPath>
+    <Reference Include="System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Reactive.Core">
-      <HintPath>..\packages\Rx-Core.2.2.2\lib\net45\System.Reactive.Core.dll</HintPath>
+    <Reference Include="System.Reactive.Interfaces, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Reactive.Interfaces">
-      <HintPath>..\packages\Rx-Interfaces.2.2.2\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+    <Reference Include="System.Reactive.Linq, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-Linq.2.2.5\lib\net45\System.Reactive.Linq.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Reactive.Linq">
-      <HintPath>..\packages\Rx-Linq.2.2.2\lib\net45\System.Reactive.Linq.dll</HintPath>
+    <Reference Include="System.Reactive.PlatformServices, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Reactive.PlatformServices">
-      <HintPath>..\packages\Rx-PlatformServices.2.2.2\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+    <Reference Include="System.Reactive.Windows.Threading, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-XAML.2.2.5\lib\net45\System.Reactive.Windows.Threading.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Reactive.Windows.Threading">
-      <HintPath>..\packages\Rx-XAML.2.2.2\lib\net45\System.Reactive.Windows.Threading.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\LivetCask.1.1.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -115,9 +112,6 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="Windows">
-      <HintPath>C:\Program Files (x86)\Windows Kits\8.0\References\CommonConfiguration\Neutral\Windows.winmd</HintPath>
-    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -127,72 +121,95 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\IWindowsNotifier.cs" />
+    <Compile Include="Composition\AggregateNotifier.cs" />
+    <Compile Include="Composition\PluginHost.cs" />
+    <Compile Include="Models\BrowserZoomFactor.cs" />
+    <Compile Include="Models\IZoomFactor.cs" />
+    <Compile Include="Models\NotifierHost.cs" />
     <Compile Include="Models\ProductInfo.cs" />
     <Compile Include="Models\Data\Xml\XmlFileReader.cs" />
     <Compile Include="Models\Data\Xml\XmlFileWriter.cs" />
     <Compile Include="Models\Data\Xml\XmlSerializableDictionary.cs" />
     <Compile Include="Models\Helper.cs" />
-    <Compile Include="Models\Internal\Windows7Notifier.cs" />
     <Compile Include="Models\Mode.cs" />
+    <Compile Include="Models\ProxySettings.cs" />
     <Compile Include="Models\ResourceService.cs" />
     <Compile Include="Models\StatusService.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Models\SupportedImageFormat.cs" />
-    <Compile Include="Models\Toast.cs" />
-    <Compile Include="Models\Internal\Windows8Notifier.cs" />
     <Compile Include="Models\Volume.cs" />
+    <Compile Include="ViewModels\Catalogs\ShipCatalogFilter.cs" />
+    <Compile Include="ViewModels\Catalogs\ShipViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\SlotItemCatalogViewModel.cs" />
-    <Compile Include="ViewModels\Catalogs\SortableColumnViewModel.cs" />
+    <Compile Include="ViewModels\Catalogs\SlotItemCounter.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogSortWorker.cs" />
-    <Compile Include="Models\WindowsNotification.cs" />
+    <Compile Include="ViewModels\Contents\Fleets\CombinedFleetViewModel.cs" />
+    <Compile Include="ViewModels\Composition\NotifierViewModel.cs" />
+    <Compile Include="ViewModels\Composition\PluginViewModel.cs" />
+    <Compile Include="ViewModels\Composition\PluginViewModelBase.cs" />
+    <Compile Include="ViewModels\Composition\ToolViewModel.cs" />
     <Compile Include="ViewModels\Contents\AdmiralViewModel.cs" />
-    <Compile Include="ViewModels\Contents\Docks\BuildingDockViewModel.cs" />
-    <Compile Include="ViewModels\Contents\Docks\RepairingDockViewModel.cs" />
-    <Compile Include="ViewModels\Contents\Docks\RepairyardViewModel.cs" />
+    <Compile Include="ViewModels\Contents\BuildingDockViewModel.cs" />
+    <Compile Include="ViewModels\Contents\CreatedSlotItemViewModel.cs" />
+    <Compile Include="ViewModels\Contents\Fleets\FleetStateViewModel.cs" />
+    <Compile Include="ViewModels\Contents\Fleets\QuickStateViewViewModel.cs" />
+    <Compile Include="ViewModels\Contents\RepairingDockViewModel.cs" />
     <Compile Include="ViewModels\Contents\ExpeditionsViewModel.cs" />
+    <Compile Include="ViewModels\Contents\Fleets\ConditionViewModel.cs" />
     <Compile Include="ViewModels\Contents\Fleets\ExpeditionViewModel.cs" />
-    <Compile Include="ViewModels\Contents\Fleets\PlaneViewModel.cs" />
-    <Compile Include="ViewModels\Contents\Fleets\RepairingBarViewModel.cs" />
-    <Compile Include="ViewModels\Contents\Fleets\TimerViewModel.cs" />
+    <Compile Include="ViewModels\Contents\Fleets\HomeportViewModel.cs" />
+    <Compile Include="ViewModels\Contents\Fleets\SortieViewModel.cs" />
     <Compile Include="ViewModels\Contents\OverviewViewModel.cs" />
     <Compile Include="ViewModels\Contents\QuestsViewModel.cs" />
     <Compile Include="ViewModels\Contents\QuestViewModel.cs" />
     <Compile Include="ViewModels\BindableTextViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipTypeViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogWindowViewModel.cs" />
+    <Compile Include="ViewModels\Contents\ShipyardViewModel.cs" />
     <Compile Include="ViewModels\Dev\DebugTabViewModel.cs" />
     <Compile Include="ViewModels\CultureViewModel.cs" />
+    <Compile Include="ViewModels\FleetWindowViewModel.cs" />
+    <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\MainContentViewModel.cs" />
     <Compile Include="Models\INavigator.cs" />
     <Compile Include="ViewModels\Contents\MaterialsViewModel.cs" />
-    <Compile Include="ViewModels\Contents\Docks\DockyardViewModel.cs" />
     <Compile Include="ViewModels\Messages\ScreenshotMessage.cs" />
     <Compile Include="ViewModels\Messages\Response.cs" />
     <Compile Include="ViewModels\Messages\SetWindowLocationMessage.cs" />
     <Compile Include="ViewModels\Messages\ZoomMessage.cs" />
     <Compile Include="ViewModels\NavigatorViewModel.cs" />
+    <Compile Include="ViewModels\NullViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\Contents\ShipsViewModel.cs" />
     <Compile Include="ViewModels\Contents\SlotItemsViewModel.cs" />
-    <Compile Include="ViewModels\StatusBarItemViewModel.cs" />
     <Compile Include="ViewModels\StatusBarViewModel.cs" />
     <Compile Include="ViewModels\TabItemViewModel.cs" />
+    <Compile Include="ViewModels\Contents\ToolsViewModel.cs" />
     <Compile Include="ViewModels\VolumeViewModel.cs" />
+    <Compile Include="Views\Behaviors\FlickFleetsAction.cs" />
+    <Compile Include="Views\Behaviors\FlickTrigger.cs" />
     <Compile Include="Views\Behaviors\NavigatorBehavior.cs" />
     <Compile Include="Views\Behaviors\ScreenshotAction.cs" />
     <Compile Include="Views\Behaviors\SetStyleSheetBehavior.cs" />
     <Compile Include="Views\Behaviors\SetWindowLocationAction.cs" />
+    <Compile Include="Views\Contents\StateDetailIndicator.xaml.cs">
+      <DependentUpon>StateDetailIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contents\StateIconIndicator.xaml.cs">
+      <DependentUpon>StateIconIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contents\Tools.xaml.cs">
+      <DependentUpon>Tools.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\KanColleHost.cs" />
     <Compile Include="Views\Controls\WebBrowserHelper.cs" />
     <Compile Include="Views\Behaviors\ZoomAction.cs" />
     <Compile Include="Views\BrowserNavigator.xaml.cs">
       <DependentUpon>BrowserNavigator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Catalogs\Modernizable.cs" />
     <Compile Include="Views\Catalogs\ShipCatalogWindow.xaml.cs">
       <DependentUpon>ShipCatalogWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Catalogs\ShipCatalogSortTarget.cs" />
     <Compile Include="Views\Catalogs\SlotItemCatalogWindow.xaml.cs">
       <DependentUpon>SlotItemCatalogWindow.xaml</DependentUpon>
     </Compile>
@@ -207,23 +224,29 @@
     </Compile>
     <Compile Include="Views\Contents\QuestViewSource.cs" />
     <Compile Include="Views\Controls\AppIcon.cs" />
-    <Compile Include="Views\Controls\BuildingDock.cs" />
-    <Compile Include="Views\Controls\MuteButton.cs" />
-    <Compile Include="Views\Controls\NavigationButton.cs" />
-    <Compile Include="Views\Controls\Quest.cs" />
-    <Compile Include="Views\Controls\SlotItemIcon.cs" />
-    <Compile Include="Views\Contents\Dockyard.xaml.cs">
-      <DependentUpon>Dockyard.xaml</DependentUpon>
+    <Compile Include="Views\Contents\Shipyard.xaml.cs">
+      <DependentUpon>Shipyard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Contents\Expeditions.xaml.cs">
       <DependentUpon>Expeditions.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Converters\QuestCategoryToColorConverter.cs" />
+    <Compile Include="Views\Controls\ZoomFactorSelector.xaml.cs">
+      <DependentUpon>ZoomFactorSelector.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Dev\DebugTab.xaml.cs">
       <DependentUpon>DebugTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ExitDialog.xaml.cs">
       <DependentUpon>ExitDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FleetWindow.xaml.cs">
+      <DependentUpon>FleetWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\Browser.xaml.cs">
+      <DependentUpon>Browser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\Notification.xaml.cs">
+      <DependentUpon>Notification.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings\Operation.xaml.cs">
       <DependentUpon>Operation.xaml</DependentUpon>
@@ -231,14 +254,20 @@
     <Compile Include="Views\Settings\Others.xaml.cs">
       <DependentUpon>Others.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Settings\PluginInfo.xaml.cs">
+      <DependentUpon>PluginInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\Plugins.xaml.cs">
+      <DependentUpon>Plugins.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\VersionInfo.xaml.cs">
+      <DependentUpon>VersionInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Settings\Window.xaml.cs">
       <DependentUpon>Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StartContent.xaml.cs">
       <DependentUpon>StartContent.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Contents\Repairyard.xaml.cs">
-      <DependentUpon>Repairyard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
@@ -254,26 +283,6 @@
     <Compile Include="Win32\DVTARGETDEVICE.cs" />
     <Compile Include="Win32\IServiceProvider.cs" />
     <Compile Include="Win32\RECT.cs" />
-    <Compile Include="Win32\ShellHelpers.cs" />
-    <Page Include="Styles\Colors.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Styles\Controls.ListView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <DependentUpon>Controls.xaml</DependentUpon>
-    </Page>
-    <Page Include="Styles\Controls.PinButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <DependentUpon>Controls.xaml</DependentUpon>
-    </Page>
-    <Page Include="Styles\Controls.Text.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <DependentUpon>Controls.xaml</DependentUpon>
-    </Page>
     <Page Include="Styles\Controls.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -283,48 +292,13 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Generic.AppIcon.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
       <DependentUpon>Generic.xaml</DependentUpon>
     </Page>
-    <Page Include="Themes\Generic.BuildingDock.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Themes\Generic.KanColleHost.xaml">
       <Generator>MSBuild:Compile</Generator>
-      <DependentUpon>Generic.xaml</DependentUpon>
-    </Page>
-    <Page Include="Themes\Generic.ColorIndicator.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <DependentUpon>Generic.xaml</DependentUpon>
-    </Page>
-    <Page Include="Themes\Generic.ConditionIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <DependentUpon>Generic.xaml</DependentUpon>
-    </Page>
-    <Page Include="Themes\Generic.Modernizable.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <DependentUpon>Generic.xaml</DependentUpon>
-    </Page>
-    <Page Include="Themes\Generic.MuteButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <DependentUpon>Generic.xaml</DependentUpon>
-    </Page>
-    <Page Include="Themes\Generic.NavigationButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <DependentUpon>Generic.xaml</DependentUpon>
-    </Page>
-    <Page Include="Themes\Generic.Quest.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <DependentUpon>Generic.xaml</DependentUpon>
-    </Page>
-    <Page Include="Themes\Generic.SlotItemIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
       <DependentUpon>Generic.xaml</DependentUpon>
     </Page>
     <Page Include="Themes\Generic.xaml">
@@ -340,6 +314,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Catalogs\SlotItemCatalogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Contents\StateDetailIndicator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Contents\StateIconIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -359,6 +341,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Contents\Tools.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\ZoomFactorSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Dev\DebugTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -367,7 +357,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\FleetWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\Browser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Settings\Common.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\Notification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -379,15 +381,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Settings\PluginInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\Plugins.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\VersionInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Settings\Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\StartContent.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Contents\Repairyard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -403,11 +413,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Contents\Dockyard.xaml">
+    <Page Include="Views\Contents\Shipyard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Fleets.xaml">
+    <Page Include="Views\Contents\Fleets.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -425,18 +435,13 @@
     </Compile>
     <Compile Include="Win32\IViewObject.cs" />
     <Compile Include="Win32\NativeMethods.cs" />
-    <Compile Include="ViewModels\Contents\Fleets\ReSortieBarViewModel.cs" />
     <Compile Include="ViewModels\Contents\Fleets\FleetsViewModel.cs" />
     <Compile Include="ViewModels\Contents\Fleets\FleetViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\StartContentViewModel.cs" />
     <Compile Include="ViewModels\Contents\ShipViewModel.cs" />
     <Compile Include="ViewModels\WindowViewModel.cs" />
-    <Compile Include="Views\Behaviors\CountdownBehavior.cs" />
-    <Compile Include="Views\Behaviors\TimerBehavior.cs" />
-    <Compile Include="Views\Controls\ColorIndicator.cs" />
-    <Compile Include="Views\Controls\ConditionIcon.cs" />
-    <Compile Include="Views\Fleets.xaml.cs">
+    <Compile Include="Views\Contents\Fleets.xaml.cs">
       <DependentUpon>Fleets.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainContent.xaml.cs">
@@ -461,13 +466,19 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Resources.en.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ko-KR.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.ja-JP.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-CN.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -484,9 +495,29 @@
       <Project>{f00fc570-2a80-4f61-8364-798cd44514b2}</Project>
       <Name>Desktop.Metro</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Grabacr07.KanColleViewer.Composition\KanColleViewer.Composition.csproj">
+      <Project>{cc139e98-d847-41da-b20f-8aca4564f375}</Project>
+      <Name>KanColleViewer.Composition</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grabacr07.KanColleViewer.Controls\KanColleViewer.Controls.csproj">
+      <Project>{978239d0-3129-4c54-aac6-493f0de48bf5}</Project>
+      <Name>KanColleViewer.Controls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Grabacr07.KanColleWrapper\KanColleWrapper.csproj">
       <Project>{0bc8cf79-76d9-46ad-867f-fec6c6ad4594}</Project>
       <Name>KanColleWrapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MetroRadiance\MetroRadiance.Chrome\MetroRadiance.Chrome.csproj">
+      <Project>{21b4ad15-d9fa-4873-bfad-1eeefbc6c264}</Project>
+      <Name>MetroRadiance.Chrome</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MetroRadiance\MetroRadiance.Core\MetroRadiance.Core.csproj">
+      <Project>{a6b0a741-5be0-479d-b813-e65672350057}</Project>
+      <Name>MetroRadiance.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MetroRadiance\MetroRadiance\MetroRadiance.csproj">
+      <Project>{0af0b9ff-d981-4d0f-a41f-c3ab6fe2f16d}</Project>
+      <Name>MetroRadiance</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -510,10 +541,11 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <DesignData Include="SampleData\DockyardViewModelSampleData.xaml" />
+    <DesignData Include="SampleData\ShipCatalogSortWorkerSampleData.xaml" />
+    <DesignData Include="SampleData\ShipyardViewModelSampleData.xaml" />
     <DesignData Include="SampleData\FleetsViewModelSampleData.xaml" />
     <DesignData Include="SampleData\FleetViewModelSampleData.xaml" />
-    <DesignData Include="SampleData\RepairyardViewModelSampleData.xaml" />
+    <DesignData Include="SampleData\ShipViewModelSampleData.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\app.ico" />
@@ -523,7 +555,17 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="license.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="readme.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Converters\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

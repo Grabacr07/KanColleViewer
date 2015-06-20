@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models;
@@ -37,36 +36,17 @@ namespace Grabacr07.KanColleWrapper
 
 		#endregion
 
+
 		internal Repairyard(Homeport parent, KanColleProxy proxy)
 		{
 			this.homeport = parent;
 			this.Docks = new MemberTable<RepairingDock>();
 
-			proxy.ApiSessionSource.Where(x => x.PathAndQuery == "/kcsapi/api_get_member/ndock")
-				.TryParse<kcsapi_ndock[]>()
-				.Subscribe(this.Update);
+			proxy.api_get_member_ndock.TryParse<kcsapi_ndock[]>().Subscribe(x => this.Update(x.Data));
+			proxy.api_req_nyukyo_start.TryParse().Subscribe(this.Start);
+			proxy.api_req_nyukyo_speedchange.TryParse().Subscribe(this.ChangeSpeed);
 		}
 
-		private void Update(kcsapi_ndock[] source)
-		{
-			if (this.Docks.Count == source.Length)
-			{
-				foreach (var raw in source)
-				{
-					var target = this.Docks[raw.api_id];
-					if (target != null) target.Update(raw);
-				}
-			}
-			else
-			{
-				this.Docks.ForEach(x => x.Value.Dispose());
-				this.Docks = new MemberTable<RepairingDock>(source.Select(x => new RepairingDock(homeport, x)));
-			}
-
-			// 艦娘を入渠させたとき、ship2 -> ndock の順でデータが来るため、
-			// ndock の後で改めて各艦隊のステータスを更新してやらないと入渠ステータスに変更できない
-			this.homeport.Fleets.ForEach(x => x.Value.UpdateStatus());
-		}
 
 		/// <summary>
 		/// 指定した ID の艦娘が現在入渠中かどうかを確認します。
@@ -83,7 +63,68 @@ namespace Grabacr07.KanColleWrapper
 		public bool CheckRepairing(Fleet fleet)
 		{
 			var repairingShipIds = this.Docks.Values.Where(x => x.Ship != null).Select(x => x.Ship.Id).ToArray();
-			return fleet.GetShips().Any(x => repairingShipIds.Any(id => id == x.Id));
+			return fleet.Ships.Any(x => repairingShipIds.Any(id => id == x.Id));
+		}
+
+
+		internal void Update(kcsapi_ndock[] source)
+		{
+			if (this.Docks.Count == source.Length)
+			{
+				foreach (var raw in source)
+				{
+					var target = this.Docks[raw.api_id];
+					if (target != null) target.Update(raw);
+				}
+			}
+			else
+			{
+				foreach (var dock in this.Docks) dock.Value.SafeDispose();
+				this.Docks = new MemberTable<RepairingDock>(source.Select(x => new RepairingDock(this.homeport, x)));
+			}
+		}
+
+		private void Start(SvData data)
+		{
+			try
+			{
+				//var dock = this.Docks[int.Parse(data.Request["api_ndock_id"])];
+				var ship = this.homeport.Organization.Ships[int.Parse(data.Request["api_ship_id"])];
+				var highspeed = data.Request["api_highspeed"] == "1";
+
+				if (highspeed)
+				{
+					ship.Repair();
+
+					var fleet = this.homeport.Organization.GetFleet(ship.Id);
+					if (fleet != null) fleet.State.Update();
+				}
+
+				// 高速修復でない場合、別途 ndock が来るので、ここで何かする必要はなさげ
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine("入渠開始の解析に失敗しました: {0}", ex);
+			}
+		}
+
+		private void ChangeSpeed(SvData data)
+		{
+			try
+			{
+				var dock = this.Docks[int.Parse(data.Request["api_ndock_id"])];
+				var ship = dock.Ship;
+
+				dock.Finish();
+				ship.Repair();
+
+				var fleet = this.homeport.Organization.GetFleet(ship.Id);
+				if (fleet != null) fleet.State.Update();
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine("高速修復材の解析に失敗しました: {0}", ex);
+			}
 		}
 	}
 }

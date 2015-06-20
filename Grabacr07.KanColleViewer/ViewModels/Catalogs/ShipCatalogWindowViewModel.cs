@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
@@ -19,12 +20,20 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public ShipCatalogSortWorker SortWorker { get; private set; }
 		public IReadOnlyCollection<ShipTypeViewModel> ShipTypes { get; private set; }
 
+		public ShipLevelFilter ShipLevelFilter { get; private set; }
+		public ShipLockFilter ShipLockFilter { get; private set; }
+		public ShipSpeedFilter ShipSpeedFilter { get; private set; }
+		public ShipModernizeFilter ShipModernizeFilter { get; private set; }
+		public ShipRemodelingFilter ShipRemodelingFilter { get; private set; }
+		public ShipExpeditionFilter ShipExpeditionFilter { get; private set; }
+		public ShipSallyAreaFilter ShipSallyAreaFilter { get; private set; }
+
 		public bool CheckAllShipTypes
 		{
 			get { return this.ShipTypes.All(x => x.IsSelected); }
 			set
 			{
-				this.ShipTypes.ForEach(x => x.Set(value));
+				foreach (var type in this.ShipTypes) type.Set(value);
 				this.Update();
 			}
 		}
@@ -48,18 +57,18 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#endregion
 
-		#region IsOpenSettings 変更通知プロパティ
+		#region IsOpenFilterSettings 変更通知プロパティ
 
-		private bool _IsOpenSettings;
+		private bool _IsOpenFilterSettings;
 
-		public bool IsOpenSettings
+		public bool IsOpenFilterSettings
 		{
-			get { return this._IsOpenSettings; }
+			get { return this._IsOpenFilterSettings; }
 			set
 			{
-				if (this._IsOpenSettings != value)
+				if (this._IsOpenFilterSettings != value)
 				{
-					this._IsOpenSettings = value;
+					this._IsOpenFilterSettings = value;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -67,46 +76,19 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#endregion
 
-		#region WithoutLv1Ship 変更通知プロパティ
+		#region IsOpenSortSettings 変更通知プロパティ
 
-		private bool _WithoutLv1Ship = true;
+		private bool _IsOpenSortSettings;
 
-		/// <summary>
-		/// Lv.1 の艦を除くかどうかを示す値を取得または設定します。
-		/// </summary>
-		public bool WithoutLv1Ship
+		public bool IsOpenSortSettings
 		{
-			get { return this._WithoutLv1Ship; }
+			get { return this._IsOpenSortSettings; }
 			set
 			{
-				if (this._WithoutLv1Ship != value)
+				if (this._IsOpenSortSettings != value)
 				{
-					this._WithoutLv1Ship = value;
+					this._IsOpenSortSettings = value;
 					this.RaisePropertyChanged();
-					this.Update();
-				}
-			}
-		}
-
-		#endregion
-
-		#region WithoutMaxModernizedShip 変更通知プロパティ
-
-		private bool _WithoutMaxModernizedShip;
-
-		/// <summary>
-		/// 全ステータスの近代化改修が完了している艦を除くかどうかを示す値を取得または設定します。
-		/// </summary>
-		public bool WithoutMaxModernizedShip
-		{
-			get { return this._WithoutMaxModernizedShip; }
-			set
-			{
-				if (this._WithoutMaxModernizedShip != value)
-				{
-					this._WithoutMaxModernizedShip = value;
-					this.RaisePropertyChanged();
-					this.Update();
 				}
 			}
 		}
@@ -136,7 +118,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public ShipCatalogWindowViewModel()
 		{
 			this.Title = "所属艦娘一覧";
-			this.IsOpenSettings = true;
+			this.IsOpenFilterSettings = true;
 
 			this.SortWorker = new ShipCatalogSortWorker();
 
@@ -148,16 +130,26 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				})
 				.ToList();
 
+			this.ShipLevelFilter = new ShipLevelFilter(this.Update);
+			this.ShipLockFilter = new ShipLockFilter(this.Update);
+			this.ShipSpeedFilter = new ShipSpeedFilter(this.Update);
+			this.ShipModernizeFilter = new ShipModernizeFilter(this.Update);
+			this.ShipRemodelingFilter = new ShipRemodelingFilter(this.Update);
+			this.ShipExpeditionFilter = new ShipExpeditionFilter(this.Update);
+			this.ShipSallyAreaFilter = new ShipSallyAreaFilter(this.Update);
+
 			this.updateSource
 				.Do(_ => this.IsReloading = true)
+				// ☟ 連続で艦種選択できるように猶予を設けるつもりだったけど、
+				// 　 ソートだけしたいケースとかだと遅くてイラ壁なので迷う
 				.Throttle(TimeSpan.FromMilliseconds(7.0))
 				.Do(_ => this.UpdateCore())
 				.Subscribe(_ => this.IsReloading = false);
 			this.CompositeDisposable.Add(this.updateSource);
 
-			this.CompositeDisposable.Add(new PropertyChangedEventListener(this.homeport)
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(this.homeport.Organization)
 			{
-				{ () => this.homeport.Ships, (sender, args) => this.Update() },
+				{ "Ships", (sender, args) => this.Update() },
 			});
 
 			this.Update();
@@ -166,25 +158,41 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		public void Update()
 		{
-			this.RaisePropertyChanged("AllShipTypes");
-			this.updateSource.OnNext(Unit.Default);
-		}
+			this.ShipExpeditionFilter.SetFleets(this.homeport.Organization.Fleets);
 
-		public void Update(ShipCatalogSortTarget sortTarget)
-		{
-			this.SortWorker.SetTarget(sortTarget);
-			this.Update();
+			this.RaisePropertyChanged("CheckAllShipTypes");
+			this.updateSource.OnNext(Unit.Default);
 		}
 
 		private void UpdateCore()
 		{
-			var list = this.homeport.Ships
-				.Where(x => this.ShipTypes.Where(t => t.IsSelected).Any(t => x.Value.Info.ShipType.Id == t.Id))
-				.Where(x => !this.WithoutLv1Ship || x.Value.Level != 1)
-				.Where(x => !this.WithoutMaxModernizedShip || !x.Value.IsMaxModernized)
-				.Select(x => new ShipViewModel(x.Value));
+			var list = this.homeport.Organization.Ships
+				.Select(kvp => kvp.Value)
+				.Where(x => this.ShipTypes.Where(t => t.IsSelected).Any(t => x.Info.ShipType.Id == t.Id))
+				.Where(this.ShipLevelFilter.Predicate)
+				.Where(this.ShipLockFilter.Predicate)
+				.Where(this.ShipSpeedFilter.Predicate)
+				.Where(this.ShipModernizeFilter.Predicate)
+				.Where(this.ShipRemodelingFilter.Predicate)
+				.Where(this.ShipExpeditionFilter.Predicate)
+				.Where(this.ShipSallyAreaFilter.Predicate);
 
-			this.Ships = this.SortWorker.Sort(list).ToList();
+			this.Ships = this.SortWorker.Sort(list)
+				.Select((x, i) => new ShipViewModel(i + 1, x))
+				.ToList();
+		}
+
+
+		public void SetShipType(int[] ids)
+		{
+			foreach (var type in this.ShipTypes) type.Set(ids.Any(id => type.Id == id));
+			this.Update();
+		}
+
+		public void Sort(SortableColumn column)
+		{
+			this.SortWorker.SetFirst(column);
+			this.Update();
 		}
 	}
 }

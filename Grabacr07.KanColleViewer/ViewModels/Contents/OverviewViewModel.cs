@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleViewer.ViewModels.Catalogs;
-using Livet;
 using Livet.Messaging;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents
@@ -17,7 +15,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			get { return Resources.IntegratedView; }
 			protected set { throw new NotImplementedException(); }
 		}
-	
+
 		public MainContentViewModel Content { get; private set; }
 
 
@@ -43,10 +41,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 					target = this.Content.Quests;
 					break;
 				case "Repairyard":
-					target = this.Content.Repairyard;
+					target = this.Content.Shipyard;
 					break;
 				case "Dockyard":
-					target = this.Content.Dockyard;
+					target = this.Content.Shipyard;
 					break;
 			}
 

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models;
 
 namespace Grabacr07.KanColleWrapper
 {
-	static class Calculator
+	internal static class Calculator
 	{
 		/// <summary>
 		/// 装備と搭載数を指定して、スロット単位の制空能力を計算します。
@@ -17,7 +17,7 @@ namespace Grabacr07.KanColleWrapper
 		/// <returns></returns>
 		public static int CalcAirSuperiorityPotential(this SlotItem slotItem, int onslot)
 		{
-			if (slotItem.Info.IsAircraft || slotItem.Info.IsSeaplane)
+			if (slotItem.Info.IsAirSuperiorityFighter)
 			{
 				return (int)(slotItem.Info.AA * Math.Sqrt(onslot));
 			}
@@ -30,7 +30,25 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public static int CalcAirSuperiorityPotential(this Ship ship)
 		{
-			return ship.SlotItems.Zip(ship.OnSlot, (item, i) => item.CalcAirSuperiorityPotential(i)).Sum();
+			return ship.EquippedSlots.Select(x => x.Item.CalcAirSuperiorityPotential(x.Current)).Sum();
+		}
+
+		public static double CalcViewRange(this Fleet fleet)
+		{
+			return ViewRangeCalcLogic.Get(KanColleClient.Current.Settings.ViewRangeCalcType).Calc(fleet.Ships);
+		}
+
+		public static bool IsHeavilyDamage(this LimitedValue hp)
+		{
+			return (hp.Current / (double)hp.Maximum) <= 0.25;
+		}
+
+		/// <summary>
+		/// 現在のシーケンスから護衛退避した艦娘を除きます。
+		/// </summary>
+		public static IEnumerable<Ship> WithoutEvacuated(this IEnumerable<Ship> ships)
+		{
+			return ships.Where(ship => !ship.Situation.HasFlag(ShipSituation.Evacuation) && !ship.Situation.HasFlag(ShipSituation.Tow));
 		}
 	}
 }

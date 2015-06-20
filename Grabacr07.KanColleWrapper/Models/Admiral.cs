@@ -16,68 +16,83 @@ namespace Grabacr07.KanColleWrapper.Models
 	{
 		public string MemberId
 		{
-			get { return this.RawData.api_member_id; }
+		    get { return this.RawData.api_member_id; }
 		}
 
-		public string Nickname
-		{
-			get { return this.RawData.api_nickname; }
-		}
+	    public string Nickname
+	    {
+	        get { return this.RawData.api_nickname; }
+	    }
+
+	    #region Comment 変更通知プロパティ
+
+		private string _Comment;
 
 		public string Comment
 		{
-			get { return this.RawData.api_comment; }
+			get { return this._Comment; }
+			set
+			{
+				if (this._Comment != value)
+				{
+					this._Comment = value;
+					this.RaisePropertyChanged();
+				}
+			}
 		}
+
+		#endregion
+
 
 		/// <summary>
 		/// 提督経験値を取得します。
 		/// </summary>
 		public int Experience
 		{
-			get { return this.RawData.api_experience; }
+		    get { return this.RawData.api_experience; }
 		}
 
-		/// <summary>
+	    /// <summary>
 		/// 次のレベルに上がるために必要な提督経験値を取得します。
 		/// </summary>
 		public int ExperienceForNexeLevel
-		{
-			get { return Models.Experience.GetAdmiralExpForNextLevel(this.RawData.api_level, this.RawData.api_experience); }
-		}
+	    {
+	        get { return Models.Experience.GetAdmiralExpForNextLevel(this.RawData.api_level, this.RawData.api_experience); }
+	    }
 
-		/// <summary>
+	    /// <summary>
 		/// 艦隊司令部レベルを取得します。
 		/// </summary>
 		public int Level
-		{
-			get { return this.RawData.api_level; }
-		}
+	    {
+	        get { return this.RawData.api_level; }
+	    }
 
-		/// <summary>
+	    /// <summary>
 		/// 提督のランク名 (元帥, 大将, 中将, ...) を取得します。
 		/// </summary>
 		public string Rank
-		{
-			get { return Models.Rank.GetName(this.RawData.api_rank); }
-		}
+	    {
+	        get { return Models.Rank.GetName(this.RawData.api_rank); }
+	    }
 
-		/// <summary>
+	    /// <summary>
 		/// 出撃時の勝利数を取得します。
 		/// </summary>
 		public int SortieWins
-		{
-			get { return this.RawData.api_st_win; }
-		}
+	    {
+	        get { return this.RawData.api_st_win; }
+	    }
 
-		/// <summary>
+	    /// <summary>
 		/// 出撃時の敗北数を取得します。
 		/// </summary>
 		public int SortieLoses
-		{
-			get { return this.RawData.api_st_lose; }
-		}
+	    {
+	        get { return this.RawData.api_st_lose; }
+	    }
 
-		/// <summary>
+	    /// <summary>
 		/// 出撃時の勝率を取得します。
 		/// </summary>
 		public double SortieWinningRate
@@ -95,19 +110,23 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public int MaxShipCount
 		{
-			get { return this.RawData.api_max_chara; }
+		    get { return this.RawData.api_max_chara; }
 		}
 
-		/// <summary>
+	    /// <summary>
 		/// 司令部が保有できる装備アイテムの最大値を取得します。
 		/// </summary>
 		public int MaxSlotItemCount
+	    {
+	        get { return this.RawData.api_max_slotitem; }
+	    }
+
+
+	    internal Admiral(kcsapi_basic rawData)
+			: base(rawData)
 		{
-			get { return this.RawData.api_max_slotitem; }
+			this.Comment = this.RawData.api_comment;
 		}
-
-
-		internal Admiral(kcsapi_basic rawData) : base(rawData) { }
 
 		public override string ToString()
 		{

@@ -23,25 +23,21 @@
 
 	<StackPanel>
 		<TextBlock Text="{Binding Resources.Settings_Display, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-				   Style="{DynamicResource HeaderTextBlockStyleKey}" />
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
-		<CheckBox IsChecked="{Binding Source={x:Static kanColleViewer:App.ViewModelRoot}, Path=TopMost, Mode=TwoWay}"
-				  Margin="15,0,0,10">
-			<TextBlock Text="{Binding Resources.Settings_Window_TopMost, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-					   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type CheckBox}}, Path=Foreground}"
-					   FontSize="13"
-					   Background="Transparent" />
-		</CheckBox>
+		<CheckBox Content="{Binding Resources.Settings_Window_TopMost, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+				  IsChecked="{Binding Source={x:Static kanColleViewer:App.ViewModelRoot}, Path=TopMost, Mode=TwoWay}"
+				  Margin="20,0,0,10" />
 
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
 		<TextBlock Text="{Binding Resources.Settings_WindowControl, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-				   Style="{DynamicResource HeaderTextBlockStyleKey}"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
 				   Margin="0,10" />
 		<metro2:CallMethodButton MethodName="SetLocationLeft"
 								 Padding="20,4"
-								 Margin="15,0,0,10"
+								 Margin="20,0,0,10"
 								 HorizontalAlignment="Left">
 			<StackPanel>
 				<TextBlock Text="{Binding Resources.Settings_WindowControl_LocationLeftButton, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
@@ -49,8 +45,9 @@
 						   FontSize="13"
 						   HorizontalAlignment="Center" />
 				<TextBlock Text="{Binding Resources.Settings_WindowControl_LocationLeftButton_Sub, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-						   HorizontalAlignment="Center"
-						   FontSize="11" />
+						   Style="{DynamicResource DefaultTextStyleKey}"
+						   FontSize="11"
+						   HorizontalAlignment="Center" />
 			</StackPanel>
 		</metro2:CallMethodButton>
 

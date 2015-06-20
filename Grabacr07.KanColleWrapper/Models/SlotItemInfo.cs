@@ -12,9 +12,11 @@ namespace Grabacr07.KanColleWrapper.Models
 	/// <summary>
 	/// 装備アイテムの種類に基づく情報を表します。
 	/// </summary>
-	public class SlotItemInfo : RawDataWrapper<kcsapi_master_slotitem>, IIdentifiable
+	public class SlotItemInfo : RawDataWrapper<kcsapi_mst_slotitem>, IIdentifiable
 	{
+		private SlotItemType? type;
 		private SlotItemIconType? iconType;
+		private int? categoryId;
 
 		public int Id
 		{
@@ -26,9 +28,19 @@ namespace Grabacr07.KanColleWrapper.Models
 			get { return this.RawData.api_name; }
 		}
 
+		public SlotItemType Type
+		{
+			get { return this.type ?? (SlotItemType)(this.type = (SlotItemType)(this.RawData.api_type.Get(2) ?? 0)); }
+		}
+
 		public SlotItemIconType IconType
 		{
-			get { return this.iconType ?? (this.iconType = this.RawData.api_type.Length == 4 ? (SlotItemIconType)this.RawData.api_type[3] : SlotItemIconType.Unknown).Value; }
+			get { return this.iconType ?? (SlotItemIconType)(this.iconType = (SlotItemIconType)(this.RawData.api_type.Get(3) ?? 0)); }
+		}
+
+		public int CategoryId
+		{
+			get { return this.categoryId ?? (int)(this.categoryId = this.RawData.api_type.Get(2) ?? int.MaxValue); }
 		}
 
 		/// <summary>
@@ -40,28 +52,33 @@ namespace Grabacr07.KanColleWrapper.Models
 		}
 
 		/// <summary>
-		/// この装備アイテムが艦載機かどうかを示す値を取得します。
+		/// 制空戦に参加できる戦闘機または水上機かどうかを示す値を取得します。
 		/// </summary>
-		public bool IsAircraft
+		public bool IsAirSuperiorityFighter
 		{
 			get
 			{
-				return this.IconType == SlotItemIconType.Fighter ||
-					   this.IconType == SlotItemIconType.TorpedoBomber ||
-					   this.IconType == SlotItemIconType.DiveBomber ||
-					   this.IconType == SlotItemIconType.ReconPlane;
+				return this.Type == SlotItemType.艦上戦闘機
+					|| this.Type == SlotItemType.艦上攻撃機
+					|| this.Type == SlotItemType.艦上爆撃機
+					|| this.Type == SlotItemType.水上爆撃機;
 			}
 		}
 
-		/// <summary>
-		/// この装備アイテムが水上機かどうかを示す値を取得します。
-		/// </summary>
-		public bool IsSeaplane
+		public bool IsNumerable
 		{
-			get { return this.IconType == SlotItemIconType.ReconSeaplane; }
+			get
+			{
+				return this.Type == SlotItemType.艦上偵察機
+					|| this.Type == SlotItemType.艦上戦闘機
+					|| this.Type == SlotItemType.艦上攻撃機
+					|| this.Type == SlotItemType.艦上爆撃機
+					|| this.Type == SlotItemType.水上偵察機
+					|| this.Type == SlotItemType.水上爆撃機;
+			}
 		}
 
-		internal SlotItemInfo(kcsapi_master_slotitem rawData) : base(rawData) { }
+		internal SlotItemInfo(kcsapi_mst_slotitem rawData) : base(rawData) { }
 
 		public override string ToString()
 		{
@@ -70,7 +87,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#region static members
 
-		private static readonly SlotItemInfo dummy = new SlotItemInfo(new kcsapi_master_slotitem()
+		private static SlotItemInfo dummy = new SlotItemInfo(new kcsapi_mst_slotitem()
 		{
 			api_id = 0,
 			api_name = "？？？",

@@ -1,26 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
+using System.Reactive;
+using System.Reactive.Linq;
+using System.Reactive.Subjects;
 using System.Threading.Tasks;
-using Grabacr07.KanColleViewer.ViewModels.Contents;
 using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Livet;
-using Livet.EventListeners;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 {
 	public class SlotItemCatalogViewModel : WindowViewModel
 	{
+		private readonly Subject<Unit> updateSource = new Subject<Unit>();
+
 		#region SlotItems 変更通知プロパティ
 
-		private IReadOnlyCollection<SlotItemViewModel> _SlotItems;
+		private IReadOnlyCollection<SlotItemCounter> _SlotItems;
 
-		public IReadOnlyCollection<SlotItemViewModel> SlotItems
+		public IReadOnlyCollection<SlotItemCounter> SlotItems
 		{
 			get { return this._SlotItems; }
 			set
@@ -35,56 +34,75 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#endregion
 
+		#region IsReloading 変更通知プロパティ
+
+		private bool _IsReloading;
+
+		public bool IsReloading
+		{
+			get { return this._IsReloading; }
+			set
+			{
+				if (this._IsReloading != value)
+				{
+					this._IsReloading = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 
 		public SlotItemCatalogViewModel()
 		{
 			this.Title = "所有装備一覧";
-			this.UpdateCore();
+
+			var listener = this.updateSource
+				.Do(_ => this.IsReloading = true)
+				.Throttle(TimeSpan.FromMilliseconds(100))
+				.Select(_ => UpdateCore())
+				.Do(_ => this.IsReloading = false)
+				.ObserveOnDispatcher()
+				.Subscribe(x => this.SlotItems = x);
+
+			this.CompositeDisposable.Add(listener);
+			this.CompositeDisposable.Add(this.updateSource);
+
+			this.Update();
 		}
 
 
-		private void UpdateCore()
+		public void Update()
 		{
-			// これはひどい
-			// あとでちゃんと書き直す
+			this.updateSource.OnNext(Unit.Default);
+		}
 
-			var ships = KanColleClient.Current.Homeport.Ships;
-			var items = KanColleClient.Current.Homeport.SlotItems;
-			var dic = KanColleClient.Current.Master.SlotItems.ToDictionary(kvp => kvp.Key, kvp => new SlotItemViewModel(kvp.Value));
+		private static List<SlotItemCounter> UpdateCore()
+		{
+			var ships = KanColleClient.Current.Homeport.Organization.Ships.Values.ToList();
+			var items = KanColleClient.Current.Homeport.Itemyard.SlotItems.Values.ToList();
+			var master = KanColleClient.Current.Master.SlotItems;
 
-			items.ForEach(x => dic[x.Value.Info.Id].Count++);
+			// dic (Dictionary<TK,TV>)
+			//  Key:   装備のマスター ID
+			//  Value: Key が示す ID に該当する所有装備カウンター
+			var dic = items
+				.GroupBy(x => x.Info.Id)
+				.ToDictionary(g => g.Key, g => new SlotItemCounter(master[g.Key], g));
 
-			foreach (var ship in ships.Values)
+			foreach (var ship in ships)
 			{
-				foreach (var target in ship.SlotItems.Where(x => x != null).Select(item => dic[item.Info.Id]))
+				foreach (var target in ship.EquippedSlots.Select(slot => new { slot, counter = dic[slot.Item.Info.Id] }))
 				{
-					target.Ships.Add(ship);
+					target.counter.AddShip(ship, target.slot.Item.Level);
 				}
 			}
 
-			this.SlotItems = dic.Values.Where(x => x.Count > 0).ToList();
-		}
-	}
-
-
-	public class SlotItemViewModel : ViewModel
-	{
-		public SlotItemInfo SlotItem { get; set; }
-		public int Count { get; set; }
-		public List<Ship> Ships { get; set; }
-
-		public SlotItemViewModel(SlotItemInfo info)
-		{
-			this.SlotItem = info;
-			this.Ships = new List<Ship>();
-		}
-
-		public override string ToString()
-		{
-			return string.Format(
-				"{0} - Count: {1} / Ships: {2}", 
-				this.SlotItem.Name, this.Count, 
-				string.Join(",", this.Ships.Select(x => x.Info.Name + " (Lv." + x.Level + ")")));
+			return dic.Values
+				.OrderBy(x => x.Target.CategoryId)
+				.ThenBy(x => x.Target.Id)
+				.ToList();
 		}
 	}
 }

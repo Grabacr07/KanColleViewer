@@ -3,26 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Documents;
+using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Properties;
+using Grabacr07.KanColleViewer.ViewModels.Composition;
 using Grabacr07.KanColleViewer.ViewModels.Messages;
 using Grabacr07.KanColleWrapper;
-using Livet;
+using Grabacr07.KanColleWrapper.Models;
 using Livet.EventListeners;
+using Livet.Messaging;
 using Livet.Messaging.IO;
 using MetroRadiance;
 using Settings = Grabacr07.KanColleViewer.Models.Settings;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {
-	public class SettingsViewModel : TabItemViewModel, INotifyDataErrorInfo
+	public class SettingsViewModel : TabItemViewModel
 	{
 		public override string Name
 		{
@@ -67,111 +66,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				if (Settings.Current.ScreenshotImageFormat != value)
 				{
 					Settings.Current.ScreenshotImageFormat = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region UseProxy 変更通知プロパティ
-
-		public string UseProxy
-		{
-			get { return Settings.Current.EnableProxy.ToString(); }
-			set
-			{
-				bool booleanValue;
-				if (Boolean.TryParse(value, out booleanValue))
-				{
-					Settings.Current.EnableProxy = booleanValue;
-					KanColleClient.Current.Proxy.UseProxyOnConnect = booleanValue;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region UseProxyForSSL 変更通知プロパティ
-
-		public bool UseProxyForSSL
-		{
-			get { return Settings.Current.EnableSSLProxy; }
-			set
-			{
-				if (Settings.Current.EnableSSLProxy != value)
-				{
-					Settings.Current.EnableSSLProxy = value;
-					KanColleClient.Current.Proxy.UseProxyOnSSLConnect = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region ProxyHost 変更通知プロパティ
-
-		public string ProxyHost
-		{
-			get { return Settings.Current.ProxyHost; }
-			set
-			{
-				if (Settings.Current.ProxyHost != value)
-				{
-					Settings.Current.ProxyHost = value;
-					KanColleClient.Current.Proxy.UpstreamProxyHost = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region ProxyPort 変更通知プロパティ
-
-		public string ProxyPort
-		{
-			get { return Settings.Current.ProxyPort.ToString(); }
-			set
-			{
-				UInt16 numberPort;
-				if (UInt16.TryParse(value, out numberPort))
-				{
-					Settings.Current.ProxyPort = numberPort;
-					KanColleClient.Current.Proxy.UpstreamProxyPort = numberPort;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region ReSortieCondition 変更通知プロパティ
-
-		private string _ReSortieCondition = Settings.Current.ReSortieCondition.ToString(CultureInfo.InvariantCulture);
-		private string reSortieConditionError;
-
-		public string ReSortieCondition
-		{
-			get { return this._ReSortieCondition; }
-			set
-			{
-				if (this._ReSortieCondition != value)
-				{
-					ushort cond;
-					if (ushort.TryParse(value, out cond) && cond <= 49)
-					{
-						Settings.Current.ReSortieCondition = cond;
-						this.reSortieConditionError = null;
-					}
-					else
-					{
-						this.reSortieConditionError = "コンディション値は 0 ～ 49 の数値で入力してください。";
-					}
-
-					this._ReSortieCondition = value;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -277,12 +171,101 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-		public bool HasErrors
+		#region BrowserZoomFactor 変更通知プロパティ
+
+		private BrowserZoomFactor _BrowserZoomFactor;
+
+		public BrowserZoomFactor BrowserZoomFactor
 		{
-			get { return this.reSortieConditionError != null; }
+			get { return this._BrowserZoomFactor; }
+			private set
+			{
+				if (this._BrowserZoomFactor != value)
+				{
+					this._BrowserZoomFactor = value;
+					this.RaisePropertyChanged();
+				}
+			}
 		}
 
-		public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+		#endregion
+
+		#region EnableLogging 変更通知プロパティ
+
+		public bool EnableLogging
+		{
+			get { return Settings.Current.KanColleClientSettings.EnableLogging; }
+			set
+			{
+				if (Settings.Current.KanColleClientSettings.EnableLogging != value)
+				{
+					Settings.Current.KanColleClientSettings.EnableLogging = value;
+					KanColleClient.Current.Homeport.Logger.EnableLogging = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+
+		#region NotifierPlugins 変更通知プロパティ
+
+		private List<NotifierViewModel> _NotifierPlugins;
+
+		public List<NotifierViewModel> NotifierPlugins
+		{
+			get { return this._NotifierPlugins; }
+			set
+			{
+				if (this._NotifierPlugins != value)
+				{
+					this._NotifierPlugins = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region ToolPlugins 変更通知プロパティ
+
+		private List<ToolViewModel> _ToolPlugins;
+
+		public List<ToolViewModel> ToolPlugins
+		{
+			get { return this._ToolPlugins; }
+			set
+			{
+				if (this._ToolPlugins != value)
+				{
+					this._ToolPlugins = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+
+		#region ViewRangeSettingsCollection 変更通知プロパティ
+
+		private List<ViewRangeSettingsViewModel> _ViewRangeSettingsCollection;
+
+		public List<ViewRangeSettingsViewModel> ViewRangeSettingsCollection
+		{
+			get { return this._ViewRangeSettingsCollection; }
+			set
+			{
+				if (this._ViewRangeSettingsCollection != value)
+				{
+					this._ViewRangeSettingsCollection = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
 
 
 		public SettingsViewModel()
@@ -312,7 +295,21 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 			this._IsDarkTheme = ThemeService.Current.Theme == Theme.Dark;
 			this._IsLightTheme = ThemeService.Current.Theme == Theme.Light;
+
+			var zoomFactor = new BrowserZoomFactor { Current = Settings.Current.BrowserZoomFactor };
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(zoomFactor)
+			{
+				{ "Current", (sender, args) => Settings.Current.BrowserZoomFactor = zoomFactor.Current },
+			});
+			this.BrowserZoomFactor = zoomFactor;
+
+			this.ViewRangeSettingsCollection = ViewRangeCalcLogic.Logics
+				.Select(x => new ViewRangeSettingsViewModel(x))
+				.ToList();
+
+			this.ReloadPlugins();
 		}
+
 
 		public void OpenScreenshotFolderSelectionDialog()
 		{
@@ -351,7 +348,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		public void ClearZoomFactor()
 		{
-			App.ViewModelRoot.Messenger.Raise(new ZoomMessage { MessageKey = "WebBrowser/Zoom", ZoomFactor = 100 });
+			App.ViewModelRoot.Messenger.Raise(new InteractionMessage { MessageKey = "WebBrowser/Zoom" });
 		}
 
 		public void SetLocationLeft()
@@ -360,28 +357,36 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		}
 
 
-		public IEnumerable GetErrors(string propertyName)
+		public void ReloadPlugins()
 		{
-			var errors = new List<string>();
-
-			switch (propertyName)
-			{
-				case "ReSortieCondition":
-					if (this.reSortieConditionError != null)
-					{
-						errors.Add(this.reSortieConditionError);
-					}
-					break;
-			}
-
-			return errors.HasValue() ? errors : null;
+			this.NotifierPlugins = new List<NotifierViewModel>(PluginHost.Instance.Notifiers.Select(x => new NotifierViewModel(x)));
+			this.ToolPlugins = new List<ToolViewModel>(PluginHost.Instance.Tools.Select(x => new ToolViewModel(x)));
 		}
 
-		protected void RaiseErrorsChanged([CallerMemberName]string propertyName = "")
+
+		public class ViewRangeSettingsViewModel
 		{
-			if (this.ErrorsChanged != null)
+			private bool selected;
+
+			public ICalcViewRange Logic { get; set; }
+
+			public bool Selected
 			{
-				this.ErrorsChanged(this, new DataErrorsChangedEventArgs(propertyName));
+				get { return this.selected; }
+				set
+				{
+					this.selected = value;
+					if (value)
+					{
+						Settings.Current.KanColleClientSettings.ViewRangeCalcType = this.Logic.Id;
+					}
+				}
+			}
+
+			public ViewRangeSettingsViewModel(ICalcViewRange logic)
+			{
+				this.Logic = logic;
+				this.selected = Settings.Current.KanColleClientSettings.ViewRangeCalcType == logic.Id;
 			}
 		}
 	}

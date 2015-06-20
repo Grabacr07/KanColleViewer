@@ -20,11 +20,11 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public TValue this[int key]
 		{
-			get { return this.dictionary.ContainsKey(key) ? this.dictionary[key] : null; }
+		    get { return this.dictionary.ContainsKey(key) ? this.dictionary[key] : null; }
 		}
 
 
-		public MasterTable() : this(new List<TValue>()) { }
+	    public MasterTable() : this(new List<TValue>()) { }
 
 		public MasterTable(IEnumerable<TValue> source)
 		{
@@ -40,15 +40,15 @@ namespace Grabacr07.KanColleWrapper
 
 		IEnumerator IEnumerable.GetEnumerator()
 		{
-			return GetEnumerator();
+			return this.GetEnumerator();
 		}
 
 		public int Count
 		{
-			get { return this.dictionary.Count; }
+		    get { return this.dictionary.Count; }
 		}
 
-		public bool ContainsKey(int key)
+	    public bool ContainsKey(int key)
 		{
 			return this.dictionary.ContainsKey(key);
 		}
@@ -60,14 +60,14 @@ namespace Grabacr07.KanColleWrapper
 
 		public IEnumerable<int> Keys
 		{
-			get { return this.dictionary.Keys; }
+		    get { return this.dictionary.Keys; }
 		}
 
-		public IEnumerable<TValue> Values
-		{
-			get { return this.dictionary.Values; }
-		}
+	    public IEnumerable<TValue> Values
+	    {
+	        get { return this.dictionary.Values; }
+	    }
 
-		#endregion
+	    #endregion
 	}
 }

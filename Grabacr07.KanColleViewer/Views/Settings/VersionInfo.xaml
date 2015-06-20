@@ -1,0 +1,149 @@
+﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Settings.VersionInfo"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
+			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
+			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
+			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
+			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 mc:Ignorable="d"
+			 d:DesignWidth="550"
+			 d:DesignHeight="300"
+			 d:DataContext="{d:DesignInstance viewModels:SettingsViewModel}">
+	<Grid Margin="8,0">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="Auto" />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<StackPanel Grid.ColumnSpan="2"
+					TextOptions.TextFormattingMode="Ideal">
+			<TextBlock Text="{Binding Source={x:Static root:App.ProductInfo}, Path=Product, Mode=OneWay}"
+					   FontFamily="Segoe UI Light"
+					   FontSize="44"
+					   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+					   Margin="-3,-14,0,0" />
+			<TextBlock Text="tool of the admiral, by the admiral, for the admiral"
+					   FontFamily="Segoe UI Light"
+					   FontSize="16"
+					   Margin="0,-9,0,0" />
+			<TextBlock Margin="-1,0,0,-4">
+				<Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=Title, Mode=OneWay}"
+					 FontFamily="Yu Gothic Light"
+					 FontSize="20"
+					 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+				<Run Text="  " />
+				<Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=VersionString, StringFormat=Version {0}, Mode=OneWay}"
+					 FontFamily="Segoe UI Light"
+					 FontSize="20"
+					 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+			</TextBlock>
+
+			<Rectangle Height="1"
+					   Margin="0,10"
+					   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+		</StackPanel>
+
+		<StackPanel Grid.Row="1"
+					Grid.Column="0">
+			<TextBlock FontFamily="Segoe UI">
+				<Run Text="Project home:" />
+				<metro2:HyperlinkEx Uri="http://grabacr.net/kancolleviewer">
+					<Run Text="http://grabacr.net/kancolleviewer" />
+				</metro2:HyperlinkEx>
+
+				<LineBreak />
+
+				<Run Text="Source code:" />
+				<metro2:HyperlinkEx Uri="https://github.com/Grabacr07/KanColleViewer">
+					<Run Text="https://github.com/Grabacr07/KanColleViewer" />
+				</metro2:HyperlinkEx>
+
+				<LineBreak />
+
+				<Run Text="Author / Developer:" />
+				<metro2:HyperlinkEx Uri="https://twitter.com/Grabacr07">
+					<Run Text="@Grabacr07" />
+				</metro2:HyperlinkEx>
+
+				<LineBreak />
+				<LineBreak />
+
+				<Run Text="Icon design:" />
+				<metro2:HyperlinkEx Uri="https://twitter.com/Nrtwd/">
+					<Run Text="@Nrtwd" />
+				</metro2:HyperlinkEx>
+
+				<LineBreak />
+
+				<Run Text="Localization (English):" />
+				<metro2:HyperlinkEx Uri="https://twitter.com/southrop113">
+					<Run Text="@southrop113" />
+				</metro2:HyperlinkEx>
+			</TextBlock>
+
+			<Rectangle Height="1"
+					   Margin="0,10"
+					   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+			<metro:BindableTextBlock TextSource="{Binding Libraries}"
+									 TextWrapping="Wrap"
+									 FontFamily="Segoe UI"
+									 FontSize="11">
+				<metro:BindableTextBlock.TextTemplates>
+					<DataTemplate DataType="{x:Type viewModels:HyperlinkViewModel}">
+						<metro:InlineHolder>
+							<metro2:HyperlinkEx Uri="{Binding Uri}">
+								<Run Text="{Binding Text, Mode=OneWay}" />
+							</metro2:HyperlinkEx>
+						</metro:InlineHolder>
+					</DataTemplate>
+					<DataTemplate DataType="{x:Type viewModels:BindableTextViewModel}">
+						<metro:InlineHolder>
+							<Run Text="{Binding Text, Mode=OneWay}"
+								 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+						</metro:InlineHolder>
+					</DataTemplate>
+				</metro:BindableTextBlock.TextTemplates>
+			</metro:BindableTextBlock>
+		</StackPanel>
+
+		<TextBlock Grid.Row="1"
+				   Grid.Column="0"
+				   FontFamily="Segoe UI"
+				   VerticalAlignment="Bottom"
+				   Margin="0,0,0,16"
+				   TextWrapping="Wrap">
+			<Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=Copyright, Mode=OneWay}" />
+			<LineBreak />
+			<Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=Product, Mode=OneWay}" />
+			<Run Text="is" />
+			<Run Text="OSS"
+				 ToolTip="Open Source Software" />
+			<Run Text="released under" />
+			<metro2:HyperlinkEx Uri="https://github.com/Grabacr07/KanColleViewer/blob/master/LICENSE.txt">
+				<Run Text="The MIT License." />
+			</metro2:HyperlinkEx>
+		</TextBlock>
+
+		<controls:AppIcon Grid.Row="1"
+						  Grid.Column="1"
+						  Width="210"
+						  HorizontalAlignment="Right"
+						  Background="{DynamicResource ThemeBrushKey}"
+						  VerticalAlignment="Bottom" />
+	</Grid>
+</UserControl>

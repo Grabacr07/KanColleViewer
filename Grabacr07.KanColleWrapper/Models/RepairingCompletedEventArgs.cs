@@ -13,9 +13,15 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public int DockId { get; private set; }
 
-		public RepairingCompletedEventArgs(int id)
+		/// <summary>
+		/// 入渠が完了した艦娘を取得します。
+		/// </summary>
+		public Ship Ship { get; private set; }
+
+		public RepairingCompletedEventArgs(int id, Ship ship)
 		{
 			this.DockId = id;
+			this.Ship = ship;
 		}
 	}
 }

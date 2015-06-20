@@ -1,0 +1,135 @@
+﻿<contents:ShipViewModel xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+						xmlns:models="clr-namespace:Grabacr07.KanColleWrapper.Models;assembly=KanColleWrapper"
+						xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents">
+	<contents:ShipViewModel.Ship>
+		<models:Ship Id="1"
+					 Level="140"
+					 Exp="99887766"
+					 ExpForNextLevel="129800"
+					 Condition="80"
+					 ConditionType="Brilliant"
+					 Situation="HeavilyDamaged">
+			<models:Ship.Info>
+				<models:ShipInfo Id="987"
+								 Name="Bismarck sechs"
+								 HP="130"
+								 MaxFirepower="99"
+								 MaxTorpedo="95"
+								 MaxASW="78"
+								 MaxLOS="76"
+								 MaxArmer="58"
+								 MaxAA="97"
+								 MaxEvasion="10"
+								 Speed="Fast">
+					<models:ShipInfo.ShipType>
+						<models:ShipType Name="重雷装巡洋戦艦" />
+					</models:ShipInfo.ShipType>
+				</models:ShipInfo>
+			</models:Ship.Info>
+
+			<models:Ship.EquippedSlots>
+				<models:ShipSlot>
+					<models:ShipSlot.Item>
+						<models:SlotItem Level="5"
+										 LevelText="★+5"
+										 NameWithLevel="試製51cm連装砲 ★5">
+							<models:SlotItem.Info>
+								<models:SlotItemInfo Name="試製51cm連装砲"
+													 IsNumerable="False">
+									<models:SlotItemInfo.IconType>
+										<models:SlotItemIconType>MainCanonHeavy</models:SlotItemIconType>
+									</models:SlotItemInfo.IconType>
+								</models:SlotItemInfo>
+							</models:SlotItem.Info>
+						</models:SlotItem>
+					</models:ShipSlot.Item>
+				</models:ShipSlot>
+				<models:ShipSlot>
+					<models:ShipSlot.Item>
+						<models:SlotItem Level="10"
+										 LevelText="★max"
+										 NameWithLevel="試製FaT仕様九五式酸素魚雷改 ★max">
+							<models:SlotItem.Info>
+								<models:SlotItemInfo Name="試製FaT仕様九五式酸素魚雷改"
+													 IsNumerable="False">
+									<models:SlotItemInfo.IconType>
+										<models:SlotItemIconType>Torpedo</models:SlotItemIconType>
+									</models:SlotItemInfo.IconType>
+								</models:SlotItemInfo>
+							</models:SlotItem.Info>
+						</models:SlotItem>
+					</models:ShipSlot.Item>
+				</models:ShipSlot>
+				<models:ShipSlot Maximum="52"
+								 Current="38">
+					<models:ShipSlot.Item>
+						<models:SlotItem>
+							<models:SlotItem.Info>
+								<models:SlotItemInfo Name="ATD-X 心神 (友永隊)"
+													 IconType="TorpedoBomber"
+													 IsNumerable="True" />
+							</models:SlotItem.Info>
+						</models:SlotItem>
+					</models:ShipSlot.Item>
+				</models:ShipSlot>
+				<models:ShipSlot Maximum="7"
+								 Current="7">
+					<models:ShipSlot.Item>
+						<models:SlotItem>
+							<models:SlotItem.Info>
+								<models:SlotItemInfo Name="B-2 Spirit (江草隊)"
+													 IconType="DiveBomber"
+													 IsNumerable="True" />
+							</models:SlotItem.Info>
+						</models:SlotItem>
+					</models:ShipSlot.Item>
+				</models:ShipSlot>
+			</models:Ship.EquippedSlots>
+
+			<models:Ship.HP>
+				<models:LimitedValue Minimum="0"
+									 Maximum="130"
+									 Current="82" />
+			</models:Ship.HP>
+			<models:Ship.Fuel>
+				<models:LimitedValue Minimum="0"
+									 Maximum="120"
+									 Current="100" />
+			</models:Ship.Fuel>
+			<models:Ship.Bull>
+				<models:LimitedValue Minimum="0"
+									 Maximum="110"
+									 Current="100" />
+			</models:Ship.Bull>
+
+			<models:Ship.AA>
+				<models:ModernizableStatus Current="96"
+										   Default="70"
+										   IsMax="True"
+										   Max="68"
+										   Upgraded="96" />
+			</models:Ship.AA>
+			<models:Ship.Armer>
+				<models:ModernizableStatus Current="95"
+										   Default="70"
+										   IsMax="False"
+										   Max="53"
+										   Upgraded="13" />
+			</models:Ship.Armer>
+			<models:Ship.Firepower>
+				<models:ModernizableStatus Current="66"
+										   Default="60"
+										   IsMax="True"
+										   Max="17"
+										   Upgraded="14" />
+			</models:Ship.Firepower>
+			<models:Ship.Torpedo>
+				<models:ModernizableStatus Current="13"
+										   Default="91"
+										   IsMax="False"
+										   Max="12"
+										   Upgraded="55" />
+			</models:Ship.Torpedo>
+		</models:Ship>
+	</contents:ShipViewModel.Ship>
+</contents:ShipViewModel>

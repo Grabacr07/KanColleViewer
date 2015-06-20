@@ -7,8 +7,8 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
-			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 mc:Ignorable="d"
 			 d:DesignWidth="800"
 			 DataContext="{Binding Source={x:Static root:App.ViewModelRoot}, Path=Navigator}">
@@ -20,58 +20,55 @@
 			<ColumnDefinition Width="Auto" />
 		</Grid.ColumnDefinitions>
 
-		<controls:NavigationButton Width="40"
-								   Height="40"
-								   IsEnabled="{Binding CanGoBack}"
-								   ToolTip="前のページに戻る">
-			<i:Interaction.Triggers>
-				<i:EventTrigger EventName="Click">
-					<livet:LivetCallMethodAction MethodTarget="{Binding}"
-												 MethodName="GoBack" />
-				</i:EventTrigger>
-			</i:Interaction.Triggers>
-		</controls:NavigationButton>
+		<metro2:CallMethodButton MethodName="GoBack"
+								 IsEnabled="{Binding CanGoBack}"
+								 Height="42"
+								 Style="{DynamicResource CircleButtonStyleKey}"
+								 ToolTip="前のページに戻る">
+			<Viewbox Margin="8">
+				<Path Data="M17.358398,14.795208 L22.22168,14.795208 L17.109375,20.0247 L28.227539,20.0247 L28.227539,23.657513 L17.109375,23.657513 L22.22168,28.887005 L17.358398,28.887005 L10.649414,21.870403 L10.649414,21.81181 z"
+					  Stretch="Uniform"
+					  Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}, Path=Foreground}" />
+			</Viewbox>
+		</metro2:CallMethodButton>
 
-		<controls:NavigationButton Grid.Column="1"
-								   Direction="GoForward"
-								   ToolTip="次のページに進む"
-								   IsEnabled="{Binding CanGoForward}"
-								   Width="{Binding ElementName=UrlBox, Path=ActualHeight}"
-								   Height="{Binding ElementName=UrlBox, Path=ActualHeight}"
-								   Margin="4,0">
-			<i:Interaction.Triggers>
-				<i:EventTrigger EventName="Click">
-					<livet:LivetCallMethodAction MethodTarget="{Binding}"
-												 MethodName="GoForward" />
-				</i:EventTrigger>
-			</i:Interaction.Triggers>
-		</controls:NavigationButton>
+		<metro2:CallMethodButton Grid.Column="1"
+								 MethodName="GoForward"
+								 IsEnabled="{Binding CanGoForward}"
+								 Height="30"
+								 Margin="2,0"
+								 Style="{DynamicResource CircleButtonStyleKey}"
+								 ToolTip="次のページに進む">
+			<Viewbox Margin="5">
+				<Path Data="M17.387695,14.795208 L22.250977,14.795208 L28.959961,21.81181 L28.959961,21.870403 L22.250977,28.887005 L17.387695,28.887005 L22.5,23.657513 L11.381836,23.657513 L11.381836,20.0247 L22.5,20.0247 z"
+					  Stretch="Uniform"
+					  Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}, Path=Foreground}" />
+			</Viewbox>
+		</metro2:CallMethodButton>
 
-		<metro:PromptTextBox x:Name="UrlBox"
-							 Grid.Column="2"
+		<metro:PromptTextBox Grid.Column="2"
 							 Text="{Binding SourceString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 							 Prompt="URL を入力し、Enter キーで移動します。"
 							 VerticalAlignment="Center"
 							 VerticalContentAlignment="Center"
-							 Padding="2,2">
+							 Padding="2">
 			<metro:PromptTextBox.InputBindings>
 				<KeyBinding Key="Enter"
 							Command="{Binding NavigateCommand}" />
 			</metro:PromptTextBox.InputBindings>
 		</metro:PromptTextBox>
 
-		<controls:NavigationButton Grid.Column="3"
-								   Direction="Reload"
-								   ToolTip="ページのリロード"
-								   Width="{Binding ElementName=UrlBox, Path=ActualHeight}"
-								   Height="{Binding ElementName=UrlBox, Path=ActualHeight}"
-								   Margin="4,0,0,0">
-			<i:Interaction.Triggers>
-				<i:EventTrigger EventName="Click">
-					<livet:LivetCallMethodAction MethodTarget="{Binding}"
-												 MethodName="ReNavigate" />
-				</i:EventTrigger>
-			</i:Interaction.Triggers>
-		</controls:NavigationButton>
+		<metro2:CallMethodButton Grid.Column="3"
+								 MethodName="ReNavigate"
+								 Height="30"
+								 Margin="2,0"
+								 Style="{DynamicResource CircleButtonStyleKey}"
+								 ToolTip="次のページに進む">
+			<Viewbox Margin="5,5,5,6">
+				<Path Data="M18.369141,1.6116142 L26.235352,9.4778252 L18.383789,17.344036 L18.383789,11.660442 C17.104492,11.660442 15.859374,11.894817 14.648438,12.363567 C13.437499,12.832317 12.343749,13.550091 11.367188,14.516888 C10.371094,15.503216 9.6240234,16.616497 9.1259766,17.856731 C8.6279297,19.096966 8.3789063,20.366497 8.3789063,21.665325 C8.3789063,22.944622 8.6157227,24.192181 9.0893555,25.408001 C9.5629883,26.623821 10.283203,27.720013 11.25,28.696575 C11.738281,29.194622 12.263184,29.631634 12.824707,30.00761 C13.38623,30.383587 13.972167,30.696087 14.58252,30.94511 C15.19287,31.194134 15.81787,31.379681 16.45752,31.501751 C17.097168,31.623821 17.739258,31.684856 18.383789,31.684856 C19.663086,31.684856 20.905762,31.44804 22.111816,30.974407 C23.317871,30.500774 24.414063,29.78056 25.400391,28.813763 C25.898436,28.325481 26.333006,27.798138 26.704102,27.231731 C27.075193,26.665325 27.385252,26.079388 27.634277,25.473919 C27.883299,24.86845 28.071287,24.24345 28.198242,23.598919 C28.325193,22.954388 28.38867,22.309856 28.388672,21.665325 C28.38867,21.011028 28.320311,20.342083 28.183594,19.658489 L32.53418,19.658489 C32.62207,20.322552 32.666016,20.986614 32.666016,21.650677 C32.666016,22.578411 32.578125,23.501263 32.402344,24.419231 C32.226563,25.3372 31.960447,26.233196 31.604004,27.10722 C31.247557,27.981243 30.803221,28.818645 30.270996,29.619427 C29.738768,30.420208 29.116209,31.172161 28.40332,31.875286 C27.709959,32.55888 26.967772,33.157024 26.176758,33.66972 C25.38574,34.182415 24.562986,34.609661 23.708496,34.951458 C22.854004,35.293255 21.97998,35.549603 21.086426,35.720501 C20.192871,35.891399 19.291992,35.976849 18.383789,35.976849 C17.456055,35.976849 16.535645,35.888958 15.622559,35.713177 C14.709472,35.537395 13.8208,35.271282 12.956543,34.914837 C12.092285,34.558392 11.259766,34.114056 10.458984,33.581829 C9.6582031,33.049603 8.90625,32.427044 8.203125,31.714153 C7.5195308,31.020794 6.9213862,30.276165 6.4086914,29.480267 C5.8959961,28.684368 5.4663086,27.859173 5.1196289,27.004681 C4.7729492,26.150188 4.5141602,25.271282 4.3432617,24.367962 C4.1723633,23.464642 4.0869141,22.55888 4.0869141,21.650677 C4.0869141,20.722942 4.1748047,19.802532 4.3505859,18.889446 C4.5263672,17.97636 4.7924805,17.085247 5.1489258,16.216106 C5.5053711,15.346966 5.949707,14.512005 6.4819336,13.711224 C7.0141597,12.910442 7.6367183,12.158489 8.3496094,11.455364 C9.0429688,10.77177 9.7875977,10.176067 10.583496,9.6682549 C11.379395,9.1604424 12.202148,8.7380791 13.051758,8.401165 C13.901366,8.0642529 14.77539,7.8103466 15.673828,7.6394463 C16.572266,7.4685497 17.470703,7.3831005 18.369141,7.3830986 z"
+					  Stretch="Uniform"
+					  Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}, Path=Foreground}" />
+			</Viewbox>
+		</metro2:CallMethodButton>
 	</Grid>
 </UserControl>
