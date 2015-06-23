@@ -9,14 +9,17 @@ using Application = System.Windows.Application;
 
 namespace Grabacr07.KanColleViewer.Plugins
 {
-	internal class Windows7Notifier : INotifier
+	internal class BalloonNotifier : NotifierBase
 	{
 		private NotifyIcon notifyIcon;
 		private EventHandler activatedAction;
 
-		public event EventHandler<NotifyEventArgs> NotifyRequested;
+		public override bool IsSupported
+		{
+			get { return !Toast.IsSupported; }
+		}
 
-		public void Initialize()
+		protected override void InitializeCore()
 		{
 			const string iconUri = "pack://application:,,,/KanColleViewer;Component/Assets/app.ico";
 
@@ -39,10 +42,9 @@ namespace Grabacr07.KanColleViewer.Plugins
 			}
 		}
 
-		public void Show(NotifyType type, string header, string body, Action activated, Action<Exception> failed = null)
+		protected override void ShowCore(NotifyType type, string header, string body, Action activated, Action<Exception> failed)
 		{
-			if (this.notifyIcon == null)
-				return;
+			if (this.notifyIcon == null) return;
 
 			if (activated != null)
 			{
@@ -52,15 +54,10 @@ namespace Grabacr07.KanColleViewer.Plugins
 				this.notifyIcon.BalloonTipClicked += this.activatedAction;
 			}
 
-			notifyIcon.ShowBalloonTip(1000, header, body, ToolTipIcon.None);
+			this.notifyIcon.ShowBalloonTip(1000, header, body, ToolTipIcon.None);
 		}
 
-		public object GetSettingsView()
-		{
-			return null;
-		}
-
-		public void Dispose()
+		public override void Dispose()
 		{
 			if (this.notifyIcon != null)
 			{

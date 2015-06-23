@@ -9,30 +9,29 @@ using Grabacr07.KanColleViewer.Plugins.Views;
 
 namespace Grabacr07.KanColleViewer.Plugins
 {
-	[Export(typeof(IToolPlugin))]
+	[Export(typeof(IPlugin))]
+	[Export(typeof(ITool))]
+	[ExportMetadata("Guid", "45BF5FE6-7D81-4978-8B8A-84FD80BBEC10")]
 	[ExportMetadata("Title", "MastarData")]
 	[ExportMetadata("Description", "start2 で取得される、艦これのマスター データを閲覧するためのビュー機能を提供します。")]
 	[ExportMetadata("Version", "1.0")]
 	[ExportMetadata("Author", "@Grabacr07")]
-	public class MasterDataViewer : IToolPlugin
+	public class MasterDataViewer : IPlugin, ITool
 	{
 		private readonly PortalViewModel portalViewModel = new PortalViewModel();
 
-		public string ToolName
+		public void Initialize()
+		{
+		}
+
+		string ITool.Name
 		{
 			get { return "MasterView"; }
 		}
 
-		public event EventHandler<NotifyEventArgs> NotifyRequested;
-
-		public object GetSettingsView()
+		object ITool.View
 		{
-			return null;
-		}
-
-		public object GetToolView()
-		{
-			return new Portal { DataContext = this.portalViewModel };
+			get { return new Portal { DataContext = this.portalViewModel }; }
 		}
 	}
 }

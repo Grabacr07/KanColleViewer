@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
@@ -10,7 +9,6 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleWrapper;
-using Livet;
 
 namespace Grabacr07.KanColleViewer.Composition
 {
@@ -40,11 +38,10 @@ namespace Grabacr07.KanColleViewer.Composition
 
 		#endregion
 
-		private CompositionContainer container;
-		private readonly List<Exception> unknownExceptions = new List<Exception>();
-		private readonly LivetCompositeDisposable compositeDisposable = new LivetCompositeDisposable();
 
+		private CompositionContainer container;
 		private Dictionary<Guid, Plugin> loadedPlugins;
+		private readonly List<Exception> unknownExceptions = new List<Exception>();
 
 #pragma warning disable 649
 
@@ -65,27 +62,20 @@ namespace Grabacr07.KanColleViewer.Composition
 
 #pragma warning restore 649
 
-		/// <summary>
-		/// プラグインの初期化処理 (<see cref="PluginHost.Initialize"/> メソッド) の結果を示す識別子を定義します。
-		/// </summary>
-		public enum InitializationResult
+		private static class Cache<TContract>
 		{
-			/// <summary>
-			/// プラグインの初期化に成功しました。
-			/// </summary>
-			Succeeded,
+			private static List<TContract> plugins;
 
-			/// <summary>
-			/// プラグインの初期化に失敗したため、アプリケーションを起動できません。
-			/// </summary>
-			Failed,
-
-			/// <summary>
-			/// プラグインの初期化に失敗したため、アプリケーションの再起動が必要です。
-			/// </summary>
-			RequiresRestart,
+			public static List<TContract> Plugins
+			{
+				get { return plugins ?? (plugins = new List<TContract>()); }
+			}
 		}
 
+		public Plugin[] Plugins
+		{
+			get { return this.loadedPlugins.Values.ToArray(); }
+		}
 
 		public IReadOnlyCollection<Exception> UnknownExceptions
 		{
@@ -99,13 +89,12 @@ namespace Grabacr07.KanColleViewer.Composition
 		/// <summary>
 		/// プラグインをロードし、初期化を行います。
 		/// </summary>
-		public InitializationResult Initialize()
+		public void Initialize()
 		{
 			var currentDir = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
-			if (currentDir == null) return InitializationResult.Failed;
+			if (currentDir == null) return;
 
 			var pluginsDir = Path.Combine(currentDir, PluginsDirectory);
-			var ignores = Settings.Current.BlacklistedPlugins.ToArray();
 			var catalog = new AggregateCatalog(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
 			var plugins = Directory.EnumerateFiles(pluginsDir, "*.dll", SearchOption.AllDirectories);
 
@@ -113,18 +102,7 @@ namespace Grabacr07.KanColleViewer.Composition
 
 			foreach (var plugin in plugins)
 			{
-				// プラグインのパスのコレクションから、前回起動に失敗したプラグインを除外して
-				// アセンブリ カタログとして結合していく
-
-				var isIgnore = false;
 				var filepath = plugin;
-				foreach (var data in ignores.Where(x => string.Compare(x.FilePath, filepath, StringComparison.OrdinalIgnoreCase) == 0))
-				{
-					Settings.Current.BlacklistedPlugins.Add(data);
-					isIgnore = true;
-				}
-				if (isIgnore) continue;
-
 				try
 				{
 					var asmCatalog = new AssemblyCatalog(filepath);
@@ -160,18 +138,6 @@ namespace Grabacr07.KanColleViewer.Composition
 			this.Load(this.importedNotifiers);
 			this.Load(this.importedNotifyRequesters);
 			this.Load(this.importedTools);
-
-			return InitializationResult.Succeeded;
-		}
-
-		public void Dispose()
-		{
-			this.container.Dispose();
-
-			//if (this.initializationResult == InitializationResult.Succeeded)
-			//{
-			//	this.GetNotifier().Dispose();
-			//}
 		}
 
 		/// <summary>
@@ -183,16 +149,15 @@ namespace Grabacr07.KanColleViewer.Composition
 			return new AggregateNotifier(Cache<INotifier>.Plugins);
 		}
 
-		private static class Cache<TContract>
+		/// <summary>
+		/// 指定したコントラクト型に一致するプラグイン機能のインポートがある場合、それらを含む配列を返します。
+		/// </summary>
+		/// <typeparam name="TContract">取得するプラグイン機能のコントラクト型。</typeparam>
+		/// <returns><typeparamref name="TContract"/> コントラクト型に一致するプラグイン機能の配列。</returns>
+		public TContract[] Get<TContract>()
 		{
-			private static List<TContract> plugins;
-
-			public static List<TContract> Plugins
-			{
-				get { return plugins ?? (plugins = new List<TContract>()); }
-			}
+			return Cache<TContract>.Plugins.ToArray();
 		}
-
 
 
 		private IEnumerable<Plugin> Load(IEnumerable<Lazy<IPlugin, IPluginMetadata>> imported)
@@ -259,41 +224,26 @@ namespace Grabacr07.KanColleViewer.Composition
 				Plugin plugin;
 				if (!this.loadedPlugins.TryGetValue(guid, out plugin)) continue;
 
-				plugin.AddFunction(lazy.Value);
-				Cache<TContract>.Plugins.Add(lazy.Value);
+				try
+				{
+					var function = lazy.Value;
+
+					plugin.Add(function);
+					Cache<TContract>.Plugins.Add(function);
+				}
+				catch (Exception ex)
+				{
+
+				}
 			}
 		}
-	}
 
-	internal class Plugin
-	{
-		private readonly Dictionary<Type, object> functions = new Dictionary<Type, object>();
-
-		public Guid Id { get; private set; }
-
-		public PluginMetadata Metadata { get; private set; }
-
-		public Plugin(IPluginMetadata metadata)
+		public void Dispose()
 		{
-			this.Id = new Guid(metadata.Guid);
-			this.Metadata = new PluginMetadata
+			if (this.container != null)
 			{
-				Title = metadata.Title,
-				Description = metadata.Description,
-				Version = metadata.Version,
-				Author = metadata.Author,
-			};
-		}
-
-		public void AddFunction<TContract>(TContract function) where TContract : class
-		{
-			this.functions.Add(typeof(TContract), function);
-		}
-
-		public TContract GetFunction<TContract>() where TContract : class
-		{
-			object function;
-			return this.functions.TryGetValue(typeof(TContract), out function) ? (TContract)function : null;
+				this.container.Dispose();
+			}
 		}
 	}
 }

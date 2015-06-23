@@ -53,9 +53,3 @@ using Grabacr07.KanColleViewer.Composition;
 // 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("3.8.2.1")]
-
-[assembly: TypeForwardedTo(typeof(IPlugin))]
-[assembly: TypeForwardedTo(typeof(IPluginMetadata))]
-[assembly: TypeForwardedTo(typeof(INotifier))]
-[assembly: TypeForwardedTo(typeof(NotifyType))]
-[assembly: TypeForwardedTo(typeof(IToolPlugin))]
