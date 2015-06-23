@@ -697,11 +697,31 @@ namespace Grabacr07.KanColleViewer.Models
 				if (this._RefreshConfirm != value)
 				{
 					this._RefreshConfirm = value;
+					if (!value) this.RefreshConfirmOnlyInSortie = value;
 					this.RaisePropertyChanged();
 				}
 			}
 		}
 		#endregion
+
+		#region RefreshConfirmOnlyInSortie 変更通知プロパティ
+
+		private bool _RefreshConfirmOnlyInSortie;
+
+		public bool RefreshConfirmOnlyInSortie
+		{
+			get { return this._RefreshConfirmOnlyInSortie; }
+			set
+			{
+				if (this._RefreshConfirmOnlyInSortie != value)
+				{
+					this._RefreshConfirmOnlyInSortie = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
+
 		public void Save()
 		{
 			try

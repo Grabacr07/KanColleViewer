@@ -333,17 +333,15 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		}
 		public void ShowRefreshPopup()
 		{
-			if (!Settings2.Current.RefreshConfirm)
-			{
-				var window = new RefreshPopupViewModel();
-				var message = new TransitionMessage(window, "Show/RefreshPopup");
-				this.Messenger.RaiseAsync(message);
-			}
-			else
+			if (Settings2.Current.RefreshConfirm && (!Settings2.Current.RefreshConfirmOnlyInSortie || !KanColleClient.Current.IsInSortie))
 			{
 				KanColleViewer.Views.MainWindow.Current.RefreshNavigator();
+				return;
 			}
-			
+			var window = new RefreshPopupViewModel();
+			var message = new TransitionMessage(window, "Show/RefreshPopup");
+			this.Messenger.RaiseAsync(message);
+
 		}
 	}
 }

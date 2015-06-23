@@ -69,8 +69,12 @@
 		<TextBlock Text="새로고침 확인창 설정"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
-		<CheckBox Content="새로고침을 할때 확인창을 띄우지 않습니다"
+		<CheckBox Content="새로고침 버튼을 눌렀을때 새로고침 확인창을 띄우지 않습니다"
 				  IsChecked="{Binding RefreshConfirm, Source={x:Static models:Settings.Current}, Mode=TwoWay}"
+				  Margin="20,0,0,10" />
+		<CheckBox Content="전투중 새로고침 버튼을 눌렀을때 새로고침 확인창을 띄웁니다"
+				  IsChecked="{Binding RefreshConfirmOnlyInSortie, Source={x:Static models:Settings.Current}, Mode=TwoWay}"
+				  IsEnabled="{Binding RefreshConfirm, Source={x:Static models:Settings.Current}, Mode=OneWay}"
 				  Margin="20,0,0,10" />
 
 	</StackPanel>
