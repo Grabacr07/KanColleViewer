@@ -288,6 +288,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		public FleetViewModel(Fleet fleet)
 		{
 			this.Source = fleet;
+
 			this.IsFirstFleet = Visibility.Collapsed;
 
 			if (this.Source.Id > 1)
@@ -323,26 +324,30 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		/// <returns></returns>
 		private int LossResource(ShipViewModel[] fleet, int MissionNum, int ResourceType = 0)
 		{
-			double temp = 0;
-			int total = 0;
+			double total = 0;
 
 			string losstype = "FuelLoss";
 			if (ResourceType == 1) losstype = "ArmoLoss";
-			var NeedDrumRaw = KanColleClient.Current.Translations.GetExpeditionData(losstype, MissionNum);
-			if (NeedDrumRaw == string.Empty) return -1;
+
+			var percent = KanColleClient.Current.Translations.GetExpeditionData(losstype, MissionNum);
+			if (percent == string.Empty) return -1;
+
+			double LossPercent = (double)Convert.ToInt32(percent) / 100d;
 
 			for (int i = 0; i < fleet.Count(); i++)
 			{
-				if (ResourceType == 1) total += fleet[i].Ship.Bull.Maximum;
-				else total += fleet[i].Ship.Fuel.Maximum;
+				double temp = 0;
+				if (ResourceType == 1) temp = Convert.ToInt32(Math.Truncate((double)fleet[i].Ship.Bull.Maximum * LossPercent));
+				else temp = Convert.ToInt32(Math.Truncate((double)fleet[i].Ship.Fuel.Maximum * LossPercent));
+
+				total += temp;
 			}
 
-			double LossPercent = (double)Convert.ToInt32(NeedDrumRaw) / 100d;
-			temp = (double)total * LossPercent;
 			if (ResourceType == 1) this.vArmo = Visibility.Visible;
 			else this.vFuel = Visibility.Visible;
+
 			this.vResource = Visibility.Visible;
-			return Convert.ToInt32(temp);
+			return Convert.ToInt32(total);
 		}
 		private bool DrumCount(int Mission, ShipViewModel[] fleet)
 		{
