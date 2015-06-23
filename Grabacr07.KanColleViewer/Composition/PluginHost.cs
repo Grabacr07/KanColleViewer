@@ -233,7 +233,7 @@ namespace Grabacr07.KanColleViewer.Composition
 
 					metadata = plugin.Metadata;
 
-					var notifier = plugin.Value as INotifier;
+					var notifier = plugin.Value as IPlugin;
 					if (notifier != null)
 					{
 						this.compositeDisposable.Add(new LivetWeakEventListener<EventHandler<NotifyEventArgs>, NotifyEventArgs>(
