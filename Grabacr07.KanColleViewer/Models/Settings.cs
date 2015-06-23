@@ -51,7 +51,6 @@ namespace Grabacr07.KanColleViewer.Models
 				ScreenshotFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures),
 				ScreenshotFilename = "KanColle-{0:d04}.png",
 				ScreenshotImageFormat = SupportedImageFormat.Png,
-				CanDisplayBuildingShipName = false,
 				EnableLogging = true,
 				EnableTranslations = true,
 				EnableAddUntranslated = true,
@@ -69,7 +68,6 @@ namespace Grabacr07.KanColleViewer.Models
 				VerticalSize = new Point(0, 1000),
 				KanColleClientSettings = new KanColleClientSettings(),
 				CloseConfirm = true,
-				CloseConfirmOnlyInSortie = false,
 			};
 		}
 
@@ -687,6 +685,23 @@ namespace Grabacr07.KanColleViewer.Models
 		}
 		#endregion
 
+		#region RefreshConfirm 変更通知プロパティ
+
+		private bool _RefreshConfirm;
+
+		public bool RefreshConfirm
+		{
+			get { return this._RefreshConfirm; }
+			set
+			{
+				if (this._RefreshConfirm != value)
+				{
+					this._RefreshConfirm = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
 		public void Save()
 		{
 			try

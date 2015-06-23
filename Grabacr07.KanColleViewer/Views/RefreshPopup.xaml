@@ -13,6 +13,7 @@
 				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 				   xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
 				   xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
+				   xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:RefreshPopupViewModel}"
 				   Style="{DynamicResource MetroDialogStyleKey}"
@@ -23,15 +24,20 @@
 		<Grid.RowDefinitions>
 			<RowDefinition />
 			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 
 		<TextBlock Text="게임 화면을 새로고침하시겠습니까?"
 				   FontSize="13"
 				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
-				   Margin="10,0"
+				   Margin="10,0,10,10"
 				   HorizontalAlignment="Left" />
+		<CheckBox Content="다음부터 이 창을 보지않기 (※해당 설정은 설정->창 에서 변경 가능합니다.)" 
+				  Grid.Row="1"
+				  IsChecked="{Binding RefreshConfirm, Source={x:Static models:Settings.Current}, Mode=TwoWay}"
+				  Height="17" Margin="10,0,10,8"/>
 
-		<StackPanel Grid.Row="1"
+		<StackPanel Grid.Row="2"
 					Orientation="Horizontal"
 					HorizontalAlignment="Right"
 					Margin="14,7,14,14">
