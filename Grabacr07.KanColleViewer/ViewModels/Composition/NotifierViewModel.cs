@@ -8,7 +8,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Composition
 {
 	public class NotifierViewModel : PluginViewModel
 	{
-		private readonly AggregateNotifier notifier;
+		private readonly INotifier notifier;
 
 		#region ErrorMessage 変更通知プロパティ
 

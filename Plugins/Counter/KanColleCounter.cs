@@ -17,7 +17,7 @@ namespace Counter
 	[ExportMetadata("Description", "シンプルな回数カウント機能を提供します。")]
 	[ExportMetadata("Version", "1.0")]
 	[ExportMetadata("Author", "@Grabacr07")]
-	public class KanColleCounter : IPlugin, ITool, IRequestNotify, IDisposable
+	public class KanColleCounter : IPlugin, ITool, IRequestNotify
 	{
 		private CounterViewModel viewModel;
 
@@ -44,11 +44,6 @@ namespace Counter
 					new MissionCounter(KanColleClient.Current.Proxy),
 				}
 			};
-		}
-
-		public void Dispose()
-		{
-
 		}
 	}
 }

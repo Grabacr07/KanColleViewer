@@ -6,7 +6,6 @@ using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleWrapper;
 using Livet;
-using Livet.EventListeners.WeakEvents;
 
 namespace Grabacr07.KanColleViewer.Models
 {

@@ -380,11 +380,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		public void ReloadPlugins()
 		{
-			this.NotifierPlugins = new List<NotifierViewModel>(
-				PluginHost.Instance.Plugins
-					.Select(plugin => new { plugin, notifiers = plugin.OfType<INotifier>().ToArray(), })
-					.Where(a => a.notifiers.Length != 0)
-					.Select(a => new NotifierViewModel(a.plugin, a.notifiers)));
+			this.NotifierPlugins = new List<NotifierViewModel>();
 
 			this.AllPlugins = new List<PluginViewModel>(
 				PluginHost.Instance.Plugins.Select(x => new PluginViewModel(x)));

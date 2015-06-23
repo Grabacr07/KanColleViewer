@@ -233,7 +233,7 @@ namespace Grabacr07.KanColleViewer.Composition
 				}
 				catch (Exception ex)
 				{
-
+					// ToDo: PluginHost に読み込み失敗プラグイン一覧を作って、この ex もそこに放り込む
 				}
 			}
 		}
