@@ -45,6 +45,7 @@ namespace Grabacr07.KanColleViewer.Models
 				ScreenshotFilename = "KanColle-{0:d04}.png",
 				ScreenshotImageFormat = SupportedImageFormat.Png,
 				CanDisplayBuildingShipName = false,
+				LocalProxyPort = Properties.Settings.Default.DefaultLocalProxyPort,
 				KanColleClientSettings = new KanColleClientSettings(),
 			};
 		}
@@ -273,6 +274,39 @@ namespace Grabacr07.KanColleViewer.Models
 
 		#endregion
 
+		#endregion
+
+		#region IsEnableChangeLocalProxyPort変更通知プロパティ
+		private bool _IsEnableChangeLocalProxyPort;
+
+		public bool IsEnableChangeLocalProxyPort
+		{
+			get { return this._IsEnableChangeLocalProxyPort; }
+			set
+			{
+				if (this._IsEnableChangeLocalProxyPort != value)
+				{
+					this._IsEnableChangeLocalProxyPort = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
+
+		#region LocalProxyPort変更通知プロパティ
+		private int _LocalProxyPort;
+
+		public int LocalProxyPort
+		{
+			get { return this._LocalProxyPort; }
+			set
+			{ 
+				if (this._LocalProxyPort != value){
+					this._LocalProxyPort = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
 		#endregion
 
 		#region TopMost 変更通知プロパティ

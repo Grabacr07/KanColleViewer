@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 using System.Windows;
 using Grabacr07.KanColleViewer.Composition;
@@ -49,8 +50,7 @@ namespace Grabacr07.KanColleViewer
 				Helper.SetRegistryFeatureBrowserEmulation();
 				Helper.SetMMCSSTask();
 
-				KanColleClient.Current.Proxy.Startup(AppSettings.Default.LocalProxyPort);
-				KanColleClient.Current.Proxy.UpstreamProxySettings = Settings.Current.ProxySettings;
+				StartProxy();
 
 				ThemeService.Current.Initialize(this, Theme.Dark, Accent.Purple);
 
@@ -81,6 +81,32 @@ namespace Grabacr07.KanColleViewer
 			PluginHost.Instance.Dispose();
 
 			Settings.Current.Save();
+		}
+
+		private static void StartProxy()
+		{
+			//既存設定がある場合、初回は0になってしまう。範囲外の場合デフォルトを設定。
+			if (Settings.Current.LocalProxyPort < 1 || 65535 < Settings.Current.LocalProxyPort)
+				Settings.Current.LocalProxyPort = AppSettings.Default.DefaultLocalProxyPort;
+			var listeningPort = Settings.Current.IsEnableChangeLocalProxyPort
+				? Settings.Current.LocalProxyPort
+				: AppSettings.Default.DefaultLocalProxyPort;
+			try
+			{
+				KanColleClient.Current.Proxy.Startup(listeningPort);
+			}
+			catch (SocketException ex)
+			{
+				if (ex.ErrorCode != 10048) throw;
+				// 参照: Windows ソケットのエラー コード、値、および意味 https://support.microsoft.com/en-us/kb/819124/ja
+				MessageBox.Show("既にポート " + listeningPort + " で通信を待ち受けているアプリケーションが存在するため、" +
+								"待ち受けの開始に失敗しました。" + Environment.NewLine +
+								"当該アプリケーションを終了するか、Settings＞通信設定 画面から待ち受けポートの変更を行って下さい。",
+					ProductInfo.Title,
+					MessageBoxButton.OK,
+					MessageBoxImage.Error);
+			}
+			KanColleClient.Current.Proxy.UpstreamProxySettings = Settings.Current.ProxySettings;
 		}
 
 		private void ProcessCommandLineParameter(string[] args)
