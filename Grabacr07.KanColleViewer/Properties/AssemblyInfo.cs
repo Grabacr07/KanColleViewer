@@ -16,6 +16,7 @@ using Grabacr07.KanColleViewer.Composition;
 [assembly: AssemblyCopyright("Copyright © 2013 Grabacr07")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+[assembly: GuidAttribute("101B49A6-7E7B-422D-95FF-500F9EF483A8")]
 
 // ComVisible を false に設定すると、その型はこのアセンブリ内で COM コンポーネントから
 // 参照不可能になります。COM からこのアセンブリ内の型にアクセスする場合は、
@@ -53,9 +54,3 @@ using Grabacr07.KanColleViewer.Composition;
 // 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("3.8.2.1")]
-
-[assembly: TypeForwardedTo(typeof(IPlugin))]
-[assembly: TypeForwardedTo(typeof(IPluginMetadata))]
-[assembly: TypeForwardedTo(typeof(INotifier))]
-[assembly: TypeForwardedTo(typeof(NotifyType))]
-[assembly: TypeForwardedTo(typeof(IToolPlugin))]

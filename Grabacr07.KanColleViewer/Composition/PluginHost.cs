@@ -15,7 +15,7 @@ namespace Grabacr07.KanColleViewer.Composition
 	/// <summary>
 	/// プラグインを読み込み、機能へのアクセスを提供します。
 	/// </summary>
-	public class PluginHost : IDisposable
+	internal class PluginHost : IDisposable
 	{
 		/// <summary>
 		/// プラグインを検索するディレクトリへの相対パスを表す文字列を取得します。
@@ -38,60 +38,43 @@ namespace Grabacr07.KanColleViewer.Composition
 
 		#endregion
 
+
 		private CompositionContainer container;
-		private InitializationResult initializationResult;
+		private Dictionary<Guid, Plugin> loadedPlugins;
 		private readonly List<Exception> unknownExceptions = new List<Exception>();
 
-		/// <summary>
-		/// プラグインの初期化処理 (<see cref="PluginHost.Initialize"/> メソッド) の結果を示す識別子を定義します。
-		/// </summary>
-		public enum InitializationResult
+#pragma warning disable 649
+
+		[ImportMany(RequiredCreationPolicy = CreationPolicy.Shared)]
+		private IEnumerable<Lazy<IPlugin, IPluginMetadata>> importedAll;
+
+		[ImportMany(RequiredCreationPolicy = CreationPolicy.Shared)]
+		private IEnumerable<Lazy<ISettings, IPluginGuid>> importedSettings;
+
+		[ImportMany(RequiredCreationPolicy = CreationPolicy.Shared)]
+		private IEnumerable<Lazy<INotifier, IPluginGuid>> importedNotifiers;
+
+		[ImportMany(RequiredCreationPolicy = CreationPolicy.Shared)]
+		private IEnumerable<Lazy<IRequestNotify, IPluginGuid>> importedNotifyRequesters;
+
+		[ImportMany(RequiredCreationPolicy = CreationPolicy.Shared)]
+		private IEnumerable<Lazy<ITool, IPluginGuid>> importedTools;
+
+#pragma warning restore 649
+
+		private static class Cache<TContract>
 		{
-			/// <summary>
-			/// プラグインの初期化に成功しました。
-			/// </summary>
-			Succeeded,
+			private static List<TContract> plugins;
 
-			/// <summary>
-			/// プラグインの初期化に失敗したため、アプリケーションを起動できません。
-			/// </summary>
-			Failed,
-
-			/// <summary>
-			/// プラグインの初期化に失敗したため、アプリケーションの再起動が必要です。
-			/// </summary>
-			RequiresRestart,
+			public static List<TContract> Plugins
+			{
+				get { return plugins ?? (plugins = new List<TContract>()); }
+			}
 		}
 
-		/// <summary>
-		/// プラグインによって提供される通知機能を表すオブジェクトのシーケンスを取得します。
-		/// </summary>
-		[ImportMany]
-		public IEnumerable<Lazy<INotifier, IPluginMetadata>> Notifiers { get; set; }
-
-		/// <summary>
-		/// プラグインによって提供されるツール機能を表すオブジェクトのシーケンスを取得します。
-		/// </summary>
-		[ImportMany]
-		public IEnumerable<Lazy<IToolPlugin, IPluginMetadata>> Tools { get; set; }
-
-		/// <summary>
-		/// プラグインによって提供される拡張機能を表すオブジェクトのシーケンスを取得します。
-		/// </summary>
-		[ImportMany]
-		public IEnumerable<Lazy<IPlugin, IPluginMetadata>> Plugins { get; set; }
-
-		/// <summary>
-		/// ロートされているすべてのプラグインのシーケンスを取得します。
-		/// </summary>
-		public IEnumerable<IPlugin> All
+		public Plugin[] Plugins
 		{
-			get
-			{
-				return this.Plugins.Select(x => x.Value)
-					.Concat(this.Tools.Select(x => x.Value))
-					.Concat(this.Notifiers.Select(x => x.Value));
-			}
+			get { return this.loadedPlugins.Values.ToArray(); }
 		}
 
 		public IReadOnlyCollection<Exception> UnknownExceptions
@@ -106,13 +89,12 @@ namespace Grabacr07.KanColleViewer.Composition
 		/// <summary>
 		/// プラグインをロードし、初期化を行います。
 		/// </summary>
-		public InitializationResult Initialize()
+		public void Initialize()
 		{
 			var currentDir = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
-			if (currentDir == null) return InitializationResult.Failed;
+			if (currentDir == null) return;
 
 			var pluginsDir = Path.Combine(currentDir, PluginsDirectory);
-			var ignores = Settings.Current.BlacklistedPlugins.ToArray();
 			var catalog = new AggregateCatalog(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
 			var plugins = Directory.EnumerateFiles(pluginsDir, "*.dll", SearchOption.AllDirectories);
 
@@ -120,18 +102,7 @@ namespace Grabacr07.KanColleViewer.Composition
 
 			foreach (var plugin in plugins)
 			{
-				// プラグインのパスのコレクションから、前回起動に失敗したプラグインを除外して
-				// アセンブリ カタログとして結合していく
-
-				var isIgnore = false;
 				var filepath = plugin;
-				foreach (var data in ignores.Where(x => string.Compare(x.FilePath, filepath, StringComparison.OrdinalIgnoreCase) == 0))
-				{
-					Settings.Current.BlacklistedPlugins.Add(data);
-					isIgnore = true;
-				}
-				if (isIgnore) continue;
-
 				try
 				{
 					var asmCatalog = new AssemblyCatalog(filepath);
@@ -161,47 +132,12 @@ namespace Grabacr07.KanColleViewer.Composition
 			this.container = new CompositionContainer(catalog);
 			this.container.ComposeParts(this);
 
-			if (this.Check(this.Plugins) && this.Check(this.Tools) && this.Check(this.Notifiers))
-			{
-				// 起動成功 (全プラグイン、もしくはブラックリストのプラグインを除外してロードに成功) した状態
-				// 普通に起動シークエンス続行
+			this.loadedPlugins = this.Load(this.importedAll).ToDictionary(x => x.Id);
 
-				Settings.Current.FailReboot = false;
-				Settings.Current.Save();
-
-				this.GetNotifier().Initialize();
-
-				return this.initializationResult = InitializationResult.Succeeded;
-			}
-
-			if (Settings.Current.FailReboot)
-			{
-				// 前回起動に失敗して、今回も失敗した状態
-				// おそらく、Check メソッド内で未知の例外が発生し BlacklistedPlugins に追加できないプラグインがある
-				// 遺憾の意 (起動を諦める)
-
-				Settings.Current.Save();
-
-				return this.initializationResult = InitializationResult.Failed;
-			}
-
-			// 前回は起動に成功したと思われるが、今回は起動に失敗した状態
-			// 起動に失敗したことをマークし、再起動を試みる
-
-			Settings.Current.FailReboot = true;
-			Settings.Current.Save();
-
-			return this.initializationResult = InitializationResult.RequiresRestart;
-		}
-
-		public void Dispose()
-		{
-			this.container.Dispose();
-
-			if (this.initializationResult == InitializationResult.Succeeded)
-			{
-				this.GetNotifier().Dispose();
-			}
+			this.Load(this.importedSettings);
+			this.Load(this.importedNotifiers);
+			this.Load(this.importedNotifyRequesters);
+			this.Load(this.importedTools);
 		}
 
 		/// <summary>
@@ -210,22 +146,34 @@ namespace Grabacr07.KanColleViewer.Composition
 		/// <returns>ロードされている全ての通知機能を集約して操作するオブジェクト。</returns>
 		public INotifier GetNotifier()
 		{
-			return new AggregateNotifier(this.Notifiers.Select(x => x.Value));
+			return new AggregateNotifier(Cache<INotifier>.Plugins);
+		}
+
+		/// <summary>
+		/// 指定したコントラクト型に一致するプラグイン機能のインポートがある場合、それらを含む配列を返します。
+		/// </summary>
+		/// <typeparam name="TContract">取得するプラグイン機能のコントラクト型。</typeparam>
+		/// <returns><typeparamref name="TContract"/> コントラクト型に一致するプラグイン機能の配列。</returns>
+		public TContract[] Get<TContract>()
+		{
+			return Cache<TContract>.Plugins.ToArray();
 		}
 
 
-		private bool Check<TPlugin>(IEnumerable<Lazy<TPlugin, IPluginMetadata>> plugins) where TPlugin : IPlugin
+		private IEnumerable<Plugin> Load(IEnumerable<Lazy<IPlugin, IPluginMetadata>> imported)
 		{
-			var success = true;
-			IPluginMetadata metadata = null;
-
-			foreach (var plugin in plugins)
+			foreach (var lazy in imported)
 			{
+				Guid guid;
+				if (!Guid.TryParse(lazy.Metadata.Guid, out guid)) continue;
+
+				var plugin = new Plugin(lazy.Metadata);
+				var success = false;
+
 				try
 				{
-					// メソッドとか適当に呼び出してみるみるテスト
-					metadata = plugin.Metadata;
-					plugin.Value.GetSettingsView();
+					lazy.Value.Initialize();
+					success = true;
 				}
 				catch (CompositionException ex)
 				{
@@ -239,24 +187,12 @@ namespace Grabacr07.KanColleViewer.Composition
 							{
 								// AggregateCatalog に AssemblyCatalog しか Add してないんだから全部ここに来るはず…？
 
-								var data = new BlacklistedPluginData
+								Settings.Current.BlacklistedPlugins.Add(new BlacklistedPluginData
 								{
 									FilePath = asmCatalog.Assembly.Location,
+									Metadata = plugin.Metadata,
 									Exception = ex.Message,
-								};
-
-								if (metadata != null)
-								{
-									data.Metadata = new PluginMetadata
-									{
-										Author = metadata.Author,
-										Description = metadata.Description,
-										Title = metadata.Title,
-										Version = metadata.Version,
-									};
-								}
-
-								Settings.Current.BlacklistedPlugins.Add(data);
+								});
 							}
 						}
 						else
@@ -265,17 +201,49 @@ namespace Grabacr07.KanColleViewer.Composition
 							this.unknownExceptions.Add(cause);
 						}
 					}
-
-					success = false;
 				}
 				catch (Exception ex)
 				{
 					this.unknownExceptions.Add(ex);
-					success = false;
+				}
+
+				if (success)
+				{
+					yield return plugin;
 				}
 			}
+		}
 
-			return success;
+		private void Load<TContract>(IEnumerable<Lazy<TContract, IPluginGuid>> imported) where TContract : class
+		{
+			foreach (var lazy in imported)
+			{
+				Guid guid;
+				if (!Guid.TryParse(lazy.Metadata.Guid, out guid)) continue;
+
+				Plugin plugin;
+				if (!this.loadedPlugins.TryGetValue(guid, out plugin)) continue;
+
+				try
+				{
+					var function = lazy.Value;
+
+					plugin.Add(function);
+					Cache<TContract>.Plugins.Add(function);
+				}
+				catch (Exception ex)
+				{
+					// ToDo: PluginHost に読み込み失敗プラグイン一覧を作って、この ex もそこに放り込む
+				}
+			}
+		}
+
+		public void Dispose()
+		{
+			if (this.container != null)
+			{
+				this.container.Dispose();
+			}
 		}
 	}
 }

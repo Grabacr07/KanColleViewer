@@ -2,46 +2,19 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Composition;
 
 namespace Grabacr07.KanColleViewer.Plugins
 {
-	[Export(typeof(INotifier))]
+	[Export(typeof(IPlugin))]
+	[ExportMetadata("Guid", "6EDE38C8-412D-4A73-8FE3-A9D20EB9F0D2")]
 	[ExportMetadata("Title", "WindowsNotifier")]
 	[ExportMetadata("Description", "Windows OS の機能 (トースト通知・バルーン通知) を使用して通知します。")]
-	[ExportMetadata("Version", "1.0")]
+	[ExportMetadata("Version", "1.1")]
 	[ExportMetadata("Author", "@Grabacr07")]
-	public class WindowsNotifier : INotifier
+	public class WindowsNotifier : IPlugin
 	{
-		private readonly INotifier notifier;
-
-		public WindowsNotifier()
-		{
-			this.notifier = Windows8Notifier.IsSupported
-				? (INotifier) new Windows8Notifier()
-				: new Windows7Notifier();
-		}
-
-		public void Dispose()
-		{
-			this.notifier.Dispose();
-		}
-
-		public void Initialize()
-		{
-			this.notifier.Initialize();
-		}
-
-		public void Show(NotifyType type, string header, string body, Action activated, Action<Exception> failed = null)
-		{
-			this.notifier.Show(type, header, body, activated, failed);
-		}
-
-		public object GetSettingsView()
-		{
-			return this.notifier.GetSettingsView();
-		}
+		public void Initialize() { }
 	}
 }

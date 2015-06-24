@@ -8,7 +8,7 @@ namespace Grabacr07.KanColleViewer.Composition
 	/// <summary>
 	/// KanColleViewer プラグインのメタデータを公開します。
 	/// </summary>
-	public interface IPluginMetadata
+	public interface IPluginMetadata : IPluginGuid
 	{
 		/// <summary>
 		/// プラグインのタイトルを取得します。

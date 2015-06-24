@@ -101,6 +101,7 @@
       <HintPath>..\packages\Rx-XAML.2.2.5\lib\net45\System.Reactive.Windows.Threading.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\LivetCask.1.1.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -123,8 +124,10 @@
     </ApplicationDefinition>
     <Compile Include="Composition\AggregateNotifier.cs" />
     <Compile Include="Composition\BlacklistedPluginData.cs" />
+    <Compile Include="Composition\Plugin.cs" />
     <Compile Include="Composition\PluginHost.cs" />
     <Compile Include="Composition\PluginMetadata.cs" />
+    <Compile Include="Models\ApplicationInstance.cs" />
     <Compile Include="Models\BrowserZoomFactor.cs" />
     <Compile Include="Models\IZoomFactor.cs" />
     <Compile Include="Models\NotifierHost.cs" />
@@ -149,7 +152,6 @@
     <Compile Include="ViewModels\Contents\Fleets\CombinedFleetViewModel.cs" />
     <Compile Include="ViewModels\Composition\NotifierViewModel.cs" />
     <Compile Include="ViewModels\Composition\PluginViewModel.cs" />
-    <Compile Include="ViewModels\Composition\DerivedPluginViewModelBase.cs" />
     <Compile Include="ViewModels\Composition\ToolViewModel.cs" />
     <Compile Include="ViewModels\Contents\AdmiralViewModel.cs" />
     <Compile Include="ViewModels\Contents\BuildingDockViewModel.cs" />

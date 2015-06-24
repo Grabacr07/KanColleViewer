@@ -9,7 +9,7 @@ using Livet;
 
 namespace Grabacr07.KanColleViewer.Models
 {
-	public class NotifierHost : NotificationObject
+	public class NotifierHost : NotificationObject, IDisposable
 	{
 		#region singleton members
 
@@ -24,17 +24,23 @@ namespace Grabacr07.KanColleViewer.Models
 
 		private NotifierHost() { }
 
-		public void Initialize(KanColleClient client)
+		public void Initialize()
 		{
-			client.PropertyChanged += (sender, args) =>
+			foreach (var source in PluginHost.Instance.Get<IRequestNotify>())
 			{
-				if (args.PropertyName == "IsStarted") this.InitializeCore(client);
-			};
+				source.NotifyRequested += HandleNotifyRequested;
+			}
 
+			KanColleClient.Current.PropertyChanged += (sender, args) =>
+			{
+				if (args.PropertyName == "IsStarted") InitializeCore();
+			};
 		}
 
-		private void InitializeCore(KanColleClient client)
+		private static void InitializeCore()
 		{
+			var client = KanColleClient.Current;
+
 			client.Homeport.Repairyard.PropertyChanged += (sender, args) =>
 			{
 				if (args.PropertyName == "Docks") UpdateRepairyard(client.Homeport.Repairyard);
@@ -121,6 +127,19 @@ namespace Grabacr07.KanColleViewer.Models
 							() => App.ViewModelRoot.Activate());
 					}
 				};
+			}
+		}
+
+		private static void HandleNotifyRequested(object sender, NotifyEventArgs e)
+		{
+			PluginHost.Instance.GetNotifier().Show(NotifyType.Other, e.Title, e.Message, e.Activated, e.Failed);
+		}
+
+		public void Dispose()
+		{
+			foreach (var source in PluginHost.Instance.Get<IRequestNotify>())
+			{
+				source.NotifyRequested -= HandleNotifyRequested;
 			}
 		}
 	}

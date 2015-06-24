@@ -9,52 +9,102 @@ namespace Grabacr07.KanColleViewer.ViewModels.Composition
 {
 	public class PluginViewModel : ViewModel
 	{
-		protected IPlugin Plugin { get; private set; }
+		private readonly INotifier notifier;
 
-		private IPluginMetadata Metadata { get; set; }
+		protected Plugin Plugin { get; private set; }
 
+		#region metadata
 
 		public string Title
 		{
-			get { return this.Metadata.Title; }
+			get { return this.Plugin.Metadata.Title; }
 		}
 
 		public string Description
 		{
-			get { return this.Metadata.Description; }
+			get { return this.Plugin.Metadata.Description; }
 		}
 
 		public string Author
 		{
-			get { return this.Metadata.Author; }
+			get { return this.Plugin.Metadata.Author; }
 		}
 
 		public string Version
 		{
-			get { return this.Metadata.Version; }
+			get { return this.Plugin.Metadata.Version; }
 		}
 
-		public object Settings
+		#endregion
+
+		#region ErrorMessage 変更通知プロパティ
+
+		private string _ErrorMessage;
+
+		public string ErrorMessage
 		{
-			get { return this.Plugin.GetSettingsView(); }
+			get { return this._ErrorMessage; }
+			set
+			{
+				if (this._ErrorMessage != value)
+				{
+					this._ErrorMessage = value;
+					this.RaisePropertyChanged();
+				}
+			}
 		}
 
+		#endregion
 
-		public PluginViewModel(Lazy<IPlugin, IPluginMetadata> plugin)
+		/// <summary>
+		/// プラグインが設定画面を持っているかどうかを示す値を取得します。
+		/// </summary>
+		public bool HasSettingsView { get; private set; }
+
+		/// <summary>
+		/// プラグイン側からの通知があるかどうかを示す値を取得します。
+		/// </summary>
+		public bool HasNotifySource { get; private set; }
+
+		/// <summary>
+		/// プラグインが通知機能を持っているかどうかを示す値を取得します。
+		/// </summary>
+		public bool HasNotifier
 		{
-			this.Plugin = plugin.Value;
-			this.Metadata = plugin.Metadata;
+			get { return this.notifier != null; }
 		}
 
-		public PluginViewModel(IPlugin plugin, IPluginMetadata metadata)
+		/// <summary>
+		/// プラグインの設定画面を取得します。
+		/// </summary>
+		public object SettingsView
+		{
+			get { return this.Plugin.OfType<ISettings>().Select(x => x.View).FirstOrDefault(); }
+		}
+
+
+		public PluginViewModel(Plugin plugin)
 		{
 			this.Plugin = plugin;
-			this.Metadata = metadata;
+
+			var notifiers = plugin.OfType<INotifier>().ToArray();
+			if (notifiers.Length >= 1) this.notifier = new AggregateNotifier(notifiers);
+
+			this.HasSettingsView = plugin.OfType<ISettings>().Any();
+			this.HasNotifySource = plugin.OfType<IRequestNotify>().Any();
 		}
 
 		public void OpenSettings()
 		{
 
+		}
+
+		public void TestNotifier()
+		{
+			if (this.HasNotifier)
+			{
+				this.notifier.Show(NotifyType.Other, "テスト", "これはテスト通知です。", App.ViewModelRoot.Activate, ex => this.ErrorMessage = ex.Message);
+			}
 		}
 	}
 }

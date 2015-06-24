@@ -136,10 +136,6 @@
       <Project>{978239d0-3129-4c54-aac6-493f0de48bf5}</Project>
       <Name>KanColleViewer.Controls</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Grabacr07.KanColleViewer\KanColleViewer.csproj">
-      <Project>{c5f0111f-3f68-4a74-bb20-bb762564d080}</Project>
-      <Name>KanColleViewer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Grabacr07.KanColleWrapper\KanColleWrapper.csproj">
       <Project>{0bc8cf79-76d9-46ad-867f-fec6c6ad4594}</Project>
       <Name>KanColleWrapper</Name>

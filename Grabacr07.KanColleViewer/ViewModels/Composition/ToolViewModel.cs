@@ -1,29 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Composition;
+using Livet;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Composition
 {
-	public class ToolViewModel : DerivedPluginViewModelBase<IToolPlugin>
+	public class ToolViewModel : ViewModel
 	{
-		public ToolViewModel(Lazy<IToolPlugin, IPluginMetadata> plugin) : base(plugin) { }
+		private readonly ITool tool;
 
-		public string ToolName
+		public ToolViewModel(ITool tool)
 		{
-			get { return this.Plugin.ToolName; }
+			this.tool = tool;
+		}
+
+		public string Name
+		{
+			get { return this.tool.Name; }
 		}
 
 		public object View
 		{
-			get { return this.Plugin.GetToolView(); }
-		}
-
-		public override string ToString()
-		{
-			return this.Title;
+			get { return this.tool.View; }
 		}
 	}
 }

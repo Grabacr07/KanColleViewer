@@ -20,6 +20,7 @@ namespace Grabacr07.KanColleViewer
 	public partial class App
 	{
 		public static ProductInfo ProductInfo { get; private set; }
+
 		public static MainWindowViewModel ViewModelRoot { get; private set; }
 
 		static App()
@@ -27,47 +28,47 @@ namespace Grabacr07.KanColleViewer
 			AppDomain.CurrentDomain.UnhandledException += (sender, args) => ReportException(sender, args.ExceptionObject as Exception);
 		}
 
+
 		protected override void OnStartup(StartupEventArgs e)
 		{
 			base.OnStartup(e);
 
-			this.DispatcherUnhandledException += (sender, args) => ReportException(sender, args.Exception);
-
-			DispatcherHelper.UIDispatcher = this.Dispatcher;
-			ProductInfo = new ProductInfo();
-
-			Settings.Load();
-			ResourceService.Current.ChangeCulture(Settings.Current.Culture);
-
-			var initResult = PluginHost.Instance.Initialize();
-			if (initResult == PluginHost.InitializationResult.RequiresRestart)
+			var appInstance = new ApplicationInstance();
+			if (appInstance.IsFirst)
 			{
-				Restart(e.Args.ToString(" "));
+				this.DispatcherUnhandledException += (sender, args) => ReportException(sender, args.Exception);
 
-				this.Shutdown(0);
-				return;
+				DispatcherHelper.UIDispatcher = this.Dispatcher;
+				ProductInfo = new ProductInfo();
+
+				Settings.Load();
+				ResourceService.Current.ChangeCulture(Settings.Current.Culture);
+
+				PluginHost.Instance.Initialize();
+				NotifierHost.Instance.Initialize();
+				Helper.SetRegistryFeatureBrowserEmulation();
+				Helper.SetMMCSSTask();
+
+				KanColleClient.Current.Proxy.Startup(AppSettings.Default.LocalProxyPort);
+				KanColleClient.Current.Proxy.UpstreamProxySettings = Settings.Current.ProxySettings;
+
+				ThemeService.Current.Initialize(this, Theme.Dark, Accent.Purple);
+
+				ViewModelRoot = new MainWindowViewModel();
+				this.MainWindow = new MainWindow { DataContext = ViewModelRoot };
+				this.MainWindow.Show();
+
+				appInstance.CommandLineArgsReceived += (sender, args) =>
+				{
+					this.Dispatcher.Invoke(() => ViewModelRoot.Activate());
+					this.ProcessCommandLineParameter(args.CommandLineArgs);
+				};
 			}
-			if (initResult == PluginHost.InitializationResult.Failed)
+			else
 			{
-				// メッセージはリソース化するのと、「プラグイン取り除いてみろ」的なヒントを出したい感じ
-				MessageBox.Show("プラグインが原因で、アプリケーションの起動に失敗しました。", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-
-				this.Shutdown(0);
-				return;
+				appInstance.SendCommandLineArgs(e.Args);
+				this.Shutdown();
 			}
-
-			NotifierHost.Instance.Initialize(KanColleClient.Current);
-			Helper.SetRegistryFeatureBrowserEmulation();
-			Helper.SetMMCSSTask();
-
-			KanColleClient.Current.Proxy.Startup(AppSettings.Default.LocalProxyPort);
-			KanColleClient.Current.Proxy.UpstreamProxySettings = Settings.Current.ProxySettings;
-
-			ThemeService.Current.Initialize(this, Theme.Dark, Accent.Purple);
-
-			ViewModelRoot = new MainWindowViewModel();
-			this.MainWindow = new MainWindow { DataContext = ViewModelRoot };
-			this.MainWindow.Show();
 		}
 
 		protected override void OnExit(ExitEventArgs e)
@@ -76,27 +77,18 @@ namespace Grabacr07.KanColleViewer
 
 			KanColleClient.Current.Proxy.Shutdown();
 
+			NotifierHost.Instance.Dispose();
 			PluginHost.Instance.Dispose();
+
 			Settings.Current.Save();
 		}
 
-		private static void Restart(string args)
+		private void ProcessCommandLineParameter(string[] args)
 		{
-			if (ProductInfo.IsDebug)
-			{
-				Process.Start("KanColleViewer.exe", args);
-			}
-			else
-			{
-				try
-				{
-					Process.Start(Environment.GetCommandLineArgs()[0], args);
-				}
-				catch (Exception)
-				{
-					MessageBox.Show("プラグインの読み込みに失敗しました。再度アプリケーションを起動してみてください。", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-				}
-			}
+			Debug.WriteLine("多重起動検知: " + args.ToString(" "));
+
+			// コマンド ライン引数付きで多重起動されたときに何かできる
+			// けど今やることがない
 		}
 
 		private static void ReportException(object sender, Exception exception)

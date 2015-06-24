@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Composition;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Composition
 {
-	public class NotifierViewModel : DerivedPluginViewModelBase<INotifier>
+	public class NotifierViewModel : PluginViewModel
 	{
+		private readonly INotifier notifier;
+
 		#region ErrorMessage 変更通知プロパティ
 
 		private string _ErrorMessage;
@@ -28,14 +29,15 @@ namespace Grabacr07.KanColleViewer.ViewModels.Composition
 
 		#endregion
 
-		public NotifierViewModel(Lazy<INotifier, IPluginMetadata> plugin) : base(plugin)
+		public NotifierViewModel(Plugin plugin, IEnumerable<INotifier> notifiers = null)
+			: base(plugin)
 		{
-			this.ErrorMessage = null;
+			this.notifier = new AggregateNotifier(notifiers ?? plugin.OfType<INotifier>());
 		}
 
 		public void Test()
 		{
-			this.Plugin.Show(NotifyType.Other, "テスト", "これはテスト通知です。", App.ViewModelRoot.Activate, ex => this.ErrorMessage = ex.Message);
+			this.notifier.Show(NotifyType.Other, "テスト", "これはテスト通知です。", App.ViewModelRoot.Activate, ex => this.ErrorMessage = ex.Message);
 		}
 	}
 }
