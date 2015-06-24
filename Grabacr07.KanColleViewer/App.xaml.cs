@@ -50,7 +50,11 @@ namespace Grabacr07.KanColleViewer
 				Helper.SetRegistryFeatureBrowserEmulation();
 				Helper.SetMMCSSTask();
 
-				StartProxy();
+				if (!BootstrapProxy())
+				{
+					this.Shutdown();
+					return;
+				}
 
 				ThemeService.Current.Initialize(this, Theme.Dark, Accent.Purple);
 
@@ -83,38 +87,29 @@ namespace Grabacr07.KanColleViewer
 			Settings.Current.Save();
 		}
 
-		private static void StartProxy()
-		{
-			//既存設定がある場合、初回は0になってしまう。範囲外の場合デフォルトを設定。
-			if (Settings.Current.LocalProxyPort < 1 || 65535 < Settings.Current.LocalProxyPort)
-				Settings.Current.LocalProxyPort = AppSettings.Default.DefaultLocalProxyPort;
-			var listeningPort = Settings.Current.IsEnableChangeLocalProxyPort
-				? Settings.Current.LocalProxyPort
-				: AppSettings.Default.DefaultLocalProxyPort;
-			try
-			{
-				KanColleClient.Current.Proxy.Startup(listeningPort);
-			}
-			catch (SocketException ex)
-			{
-				if (ex.ErrorCode != 10048) throw;
-				// 参照: Windows ソケットのエラー コード、値、および意味 https://support.microsoft.com/en-us/kb/819124/ja
-				MessageBox.Show("既にポート " + listeningPort + " で通信を待ち受けているアプリケーションが存在するため、" +
-								"待ち受けの開始に失敗しました。" + Environment.NewLine +
-								"当該アプリケーションを終了するか、Settings＞通信設定 画面から待ち受けポートの変更を行って下さい。",
-					ProductInfo.Title,
-					MessageBoxButton.OK,
-					MessageBoxImage.Error);
-			}
-			KanColleClient.Current.Proxy.UpstreamProxySettings = Settings.Current.ProxySettings;
-		}
-
 		private void ProcessCommandLineParameter(string[] args)
 		{
 			Debug.WriteLine("多重起動検知: " + args.ToString(" "));
 
 			// コマンド ライン引数付きで多重起動されたときに何かできる
 			// けど今やることがない
+		}
+
+		private static bool BootstrapProxy()
+		{
+			var bootstrapper = new ProxyBootstrapper();
+			bootstrapper.Try();
+
+			if (bootstrapper.Result == ProxyBootstrapResult.Success)
+			{
+				return true;
+			}
+
+			var vmodel = new ProxyBootstrapperViewModel(bootstrapper);
+			var window = new Views.Settings.ProxyBootstrapper { DataContext = vmodel, };
+			window.ShowDialog();
+
+			return vmodel.DialogResult;
 		}
 
 		private static void ReportException(object sender, Exception exception)
