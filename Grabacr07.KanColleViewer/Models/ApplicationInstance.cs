@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace Grabacr07.KanColleViewer.Models
 {
 	/// <summary>
-	/// アプリケーションの 2 重起動の防止と、既に起動しているインスタンスをアクティブ化する機能を提供します。
+	/// アプリケーションの多重起動の検知と、起動しているインスタンス間でのメッセージの送受信をサポートします。
 	/// </summary>
 	public sealed class ApplicationInstance : IDisposable
 	{
