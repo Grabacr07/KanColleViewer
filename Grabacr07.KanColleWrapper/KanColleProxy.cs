@@ -68,7 +68,7 @@ namespace Grabacr07.KanColleWrapper
 .Do(session =>
 				{
 					Debug.WriteLine("==================================================");
-					Debug.WriteLine("Fiddler session: ");
+					Debug.WriteLine("Nekoxy session: ");
 					Debug.WriteLine(session);
 					Debug.WriteLine("");
 				})

@@ -68,7 +68,7 @@ C# + WPF で開発しています。
 ・Windows API Code Pack
 ・Livet (http://ugaya40.net/livet)
 ・DynamicJson (http://dynamicjson.codeplex.com/)
-・FiddlerCore (http://fiddler2.com/fiddlercore)
+・Nekoxy (https://github.com/veigr/Nekoxy)
 
 
 ■免責事項
