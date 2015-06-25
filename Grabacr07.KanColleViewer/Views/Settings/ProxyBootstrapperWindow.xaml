@@ -15,7 +15,6 @@
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:ProxyBootstrapperViewModel}"
 				   Title="{Binding Title}"
-				   Width="480"
 				   FontSize="12"
 				   Background="{DynamicResource ThemeBrushKey}"
 				   Style="{DynamicResource MetroDialogStyleKey}"
@@ -95,7 +94,6 @@
 		</StackPanel>
 
 		<WrapPanel Grid.Row="1"
-				   Orientation="Horizontal"
 				   HorizontalAlignment="Right"
 				   Margin="6,-6,6,6">
 			<controls:CallMethodButton Content="再試行"

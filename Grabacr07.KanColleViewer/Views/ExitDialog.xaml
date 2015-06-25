@@ -17,7 +17,7 @@
 				   d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
 				   Style="{DynamicResource MetroDialogStyleKey}"
 				   Title="EXIT KanColleViewer"
-				   WindowStartupLocation="CenterScreen"
+				   WindowStartupLocation="CenterOwner"
 				   SizeToContent="Height">
 	<Grid>
 		<Grid.RowDefinitions>
@@ -25,25 +25,38 @@
 			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 
-		<TextBlock Text="「提督業も忙しい！」 を終了します。 よろしいですか？"
-				   FontSize="13"
-				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
-				   Margin="10,0"
-				   HorizontalAlignment="Left" />
+		<StackPanel Margin="12">
+			<DockPanel>
+				<controls:AppIcon Width="40"
+								  Background="Transparent" />
 
-		<StackPanel Grid.Row="1"
-					Orientation="Horizontal"
-					HorizontalAlignment="Right"
-					Margin="14,7,14,14">
-			
-			<metro2:CallMethodButton Content="OK"
-									 MinWidth="100"
-									 Padding="20,5"
-									 Margin="12,0,0,0" />
-			<metro2:CallMethodButton Content="Cancel"
-									 MinWidth="100"
-									 Padding="20,5"
-									 Margin="12,0,0,0" />
+				<TextBlock Text="「提督業も忙しい！」 を終了します。よろしいですか？"
+						   FontSize="14"
+						   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+						   Margin="12,0,0,0"
+						   HorizontalAlignment="Left"
+						   VerticalAlignment="Center" />
+			</DockPanel>
+
+			<Border Height="12" />
+
+			<Rectangle Height="1"
+					   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 		</StackPanel>
+
+		<WrapPanel Grid.Row="1"
+				   HorizontalAlignment="Right"
+				   Margin="6,-6,6,6">
+			<metro2:CallMethodButton Content="OK"
+									 MethodName="OK"
+									 MinWidth="110"
+									 Padding="30,6"
+									 Margin="6" />
+			<metro2:CallMethodButton Content="キャンセル"
+									 MethodName="Cancel"
+									 MinWidth="110"
+									 Padding="30,6"
+									 Margin="6" />
+		</WrapPanel>
 	</Grid>
 </metro:MetroWindow>
