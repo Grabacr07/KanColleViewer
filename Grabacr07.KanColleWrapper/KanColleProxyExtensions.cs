@@ -11,7 +11,7 @@ namespace Grabacr07.KanColleWrapper
 	public static class KanColleProxyExtensions
 	{
 		/// <summary>
-		/// FiddlerCore でフックした <see cref="Session"/> オブジェクトの <see cref="Session.ResponseBody"/> データを
+		/// Nekoxy でフックした <see cref="Session"/> オブジェクトの <see cref="Session.ResponseBody"/> データを
 		/// <typeparamref name="TResult"/> 型にパースします。
 		/// </summary>
 		public static IObservable<SvData<TResult>> TryParse<TResult>(this IObservable<Session> source)
@@ -26,7 +26,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
-		/// FiddlerCore でフックした <see cref="Session" /> オブジェクトの <see cref="Session.ResponseBody" /> データを
+		/// Nekoxy でフックした <see cref="Session" /> オブジェクトの <see cref="Session.ResponseBody" /> データを
 		/// <see cref="SvData" /> 型にパースします。
 		/// </summary>
 		public static IObservable<SvData> TryParse(this IObservable<Session> source)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 using System.Windows;
 using Grabacr07.KanColleViewer.Composition;
@@ -49,13 +50,18 @@ namespace Grabacr07.KanColleViewer
 				Helper.SetRegistryFeatureBrowserEmulation();
 				Helper.SetMMCSSTask();
 
-				KanColleClient.Current.Proxy.Startup(AppSettings.Default.LocalProxyPort);
-				KanColleClient.Current.Proxy.UpstreamProxySettings = Settings.Current.ProxySettings;
+				// Views.Settings.ProxyBootstrapper.Show() より先に MainWindow 設定しておく、これ大事
+				this.MainWindow = new MainWindow();
+
+				if (!BootstrapProxy())
+				{
+					this.Shutdown();
+					return;
+				}
 
 				ThemeService.Current.Initialize(this, Theme.Dark, Accent.Purple);
 
-				ViewModelRoot = new MainWindowViewModel();
-				this.MainWindow = new MainWindow { DataContext = ViewModelRoot };
+				this.MainWindow.DataContext = (ViewModelRoot = new MainWindowViewModel());
 				this.MainWindow.Show();
 
 				appInstance.CommandLineArgsReceived += (sender, args) =>
@@ -89,6 +95,23 @@ namespace Grabacr07.KanColleViewer
 
 			// コマンド ライン引数付きで多重起動されたときに何かできる
 			// けど今やることがない
+		}
+
+		private static bool BootstrapProxy()
+		{
+			var bootstrapper = new ProxyBootstrapper();
+			bootstrapper.Try();
+
+			if (bootstrapper.Result == ProxyBootstrapResult.Success)
+			{
+				return true;
+			}
+
+			var vmodel = new ProxyBootstrapperViewModel(bootstrapper) { Title = ProductInfo.Title, };
+			var window = new Views.Settings.ProxyBootstrapper { DataContext = vmodel, };
+			window.ShowDialog();
+
+			return vmodel.DialogResult;
 		}
 
 		private static void ReportException(object sender, Exception exception)

@@ -137,6 +137,7 @@
     <Compile Include="Models\Data\Xml\XmlSerializableDictionary.cs" />
     <Compile Include="Models\Helper.cs" />
     <Compile Include="Models\Mode.cs" />
+    <Compile Include="Models\ProxyBootstrapper.cs" />
     <Compile Include="Models\ProxySettings.cs" />
     <Compile Include="Models\ResourceService.cs" />
     <Compile Include="Models\StatusService.cs" />
@@ -175,6 +176,7 @@
     <Compile Include="ViewModels\CultureViewModel.cs" />
     <Compile Include="ViewModels\FleetWindowViewModel.cs" />
     <Compile Include="ViewModels\ItemViewModel.cs" />
+    <Compile Include="ViewModels\ProxyBootstrapperViewModel.cs" />
     <Compile Include="ViewModels\MainContentViewModel.cs" />
     <Compile Include="Models\INavigator.cs" />
     <Compile Include="ViewModels\Contents\MaterialsViewModel.cs" />
@@ -249,6 +251,9 @@
     </Compile>
     <Compile Include="Views\Settings\Browser.xaml.cs">
       <DependentUpon>Browser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\ProxyBootstrapperWindow.xaml.cs">
+      <DependentUpon>ProxyBootstrapperWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings\Notification.xaml.cs">
       <DependentUpon>Notification.xaml</DependentUpon>
@@ -371,6 +376,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Settings\Common.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\ProxyBootstrapperWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -2,7 +2,7 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Grabacr07.KanColleViewer.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="LocalProxyPort" Type="System.Int32" Scope="Application">
+    <Setting Name="DefaultLocalProxyPort" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">37564</Value>
     </Setting>
     <Setting Name="KanColleUrl" Type="System.Uri" Scope="Application">
