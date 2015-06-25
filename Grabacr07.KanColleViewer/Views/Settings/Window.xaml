@@ -26,7 +26,11 @@
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 		<CheckBox Content="{Binding Resources.Settings_Window_TopMost, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-				  IsChecked="{Binding Source={x:Static kanColleViewer:App.ViewModelRoot}, Path=TopMost, Mode=TwoWay}"
+				  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=TopMost, Mode=TwoWay}"
+				  Margin="20,0,0,10" />
+
+		<CheckBox Content="確認ダイアログを表示せずに終了する"
+				  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=CanCloseWithoutConfirmation, Mode=TwoWay}"
 				  Margin="20,0,0,10" />
 
 		<Rectangle Height="1"

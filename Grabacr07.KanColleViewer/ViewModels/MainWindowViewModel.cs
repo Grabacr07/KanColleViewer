@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.ViewModels.Messages;
+using Grabacr07.KanColleViewer.Views;
 using Grabacr07.KanColleWrapper;
 using Livet;
 using Livet.EventListeners;
-using Livet.Messaging.Windows;
+using Livet.Messaging;
 using MetroRadiance;
 
 namespace Grabacr07.KanColleViewer.ViewModels
@@ -20,6 +20,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		private MainContentViewModel mainContent;
 
 		public NavigatorViewModel Navigator { get; private set; }
+
 		public SettingsViewModel Settings { get; private set; }
 
 		#region Mode 変更通知プロパティ
@@ -111,27 +112,16 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-		#region TopMost 変更通知プロパティ
-
-		public bool TopMost
+		public override sealed bool CanClose
 		{
-			get { return Models.Settings.Current.TopMost; }
-			set
-			{
-				if (Models.Settings.Current.TopMost != value)
-				{
-					Models.Settings.Current.TopMost = value;
-					this.RaisePropertyChanged();
-				}
-			}
+			get { return Models.Settings.Current.CanCloseWithoutConfirmation || base.CanClose; }
 		}
-
-		#endregion
-
 
 		public MainWindowViewModel()
 		{
 			this.Title = App.ProductInfo.Title;
+			this.CanClose = false;
+
 			this.Navigator = new NavigatorViewModel();
 			this.Settings = new SettingsViewModel();
 
@@ -144,6 +134,10 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				{ () => KanColleClient.Current.IsStarted, (sender, args) => this.UpdateMode() },
 				{ () => KanColleClient.Current.IsInSortie, (sender, args) => this.UpdateMode() },
 			});
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(Models.Settings.Current)
+			{
+				{ "CanCloseWithoutConfirmation", (sender, args) => this.RaisePropertyChanged("CanClose") },
+			});
 
 			this.UpdateMode();
 		}
@@ -151,7 +145,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		public void TakeScreenshot()
 		{
 			var path = Helper.CreateScreenshotFilePath();
-			var message = new ScreenshotMessage("Screenshot/Save") { Path = path, };
+			var message = new ScreenshotMessage("Screenshot.Save") { Path = path, };
 
 			this.Messenger.Raise(message);
 
@@ -161,19 +155,18 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			StatusService.Current.Notify(notify);
 		}
 
-
-		/// <summary>
-		/// メイン ウィンドウをアクティブ化することを試みます。
-		/// </summary>
-		public void Activate()
+		public override void CloseCanceledCallback()
 		{
-			if (this.WindowState == WindowState.Minimized)
-			{
-				this.Messenger.Raise(new WindowActionMessage(WindowAction.Normal, "Window/Action"));
-			}
-			this.Messenger.Raise(new WindowActionMessage(WindowAction.Active, "Window/Action"));
-		}
+			var dialog = new DialogViewModel { Title = "終了確認", };
 
+			this.Transition(dialog, typeof(ExitDialog), TransitionMode.Modal);
+
+			if (dialog.DialogResult)
+			{
+				this.CanClose = true;
+				this.InvokeOnUIDispatcher(this.Close);
+			}
+		}
 
 		private void UpdateMode()
 		{

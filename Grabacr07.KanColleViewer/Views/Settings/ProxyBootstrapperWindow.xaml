@@ -30,7 +30,7 @@
 
 	<i:Interaction.Triggers>
 		<livet:InteractionMessageTrigger Messenger="{Binding Messenger, Mode=OneWay}"
-										 MessageKey="Window/Close">
+										 MessageKey="Window.WindowAction">
 			<livet:WindowInteractionMessageAction />
 		</livet:InteractionMessageTrigger>
 	</i:Interaction.Triggers>

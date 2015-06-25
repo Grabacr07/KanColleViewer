@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -369,12 +366,12 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		public void ClearZoomFactor()
 		{
-			App.ViewModelRoot.Messenger.Raise(new InteractionMessage { MessageKey = "WebBrowser/Zoom" });
+			App.ViewModelRoot.Messenger.Raise(new InteractionMessage { MessageKey = "WebBrowser.Zoom" });
 		}
 
 		public void SetLocationLeft()
 		{
-			App.ViewModelRoot.Messenger.Raise(new SetWindowLocationMessage { MessageKey = "Window/Location", Left = 0.0 });
+			App.ViewModelRoot.Messenger.Raise(new SetWindowLocationMessage { MessageKey = "Window.Location", Left = 0.0 });
 		}
 
 

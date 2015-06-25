@@ -19,8 +19,8 @@
 				   Width="960"
 				   Height="945"
 				   MinWidth="{Binding ElementName=KanColleHost, Path=MinWidth}"
+				   Topmost="{Binding Source={x:Static models:Settings.Current}, Path=TopMost}"
 				   WindowState="{Binding WindowState, Mode=OneWayToSource}"
-				   Topmost="{Binding TopMost}"
 				   FontSize="12"
 				   Background="{DynamicResource ThemeBrushKey}"
 				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
@@ -29,14 +29,24 @@
 				   TextOptions.TextFormattingMode="Display"
 				   UseLayoutRounding="True">
 
+	<i:Interaction.Behaviors>
+		<livet:WindowCloseCancelBehavior CloseCanceledCallbackMethodTarget="{Binding}"
+										 CloseCanceledCallbackMethodName="CloseCanceledCallback"
+										 CanClose="{Binding CanClose}" />
+	</i:Interaction.Behaviors>
+
 	<i:Interaction.Triggers>
 		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
-										 MessageKey="Window/Location">
+										 MessageKey="Window.Location">
 			<behaviors:SetWindowLocationAction />
 		</livet:InteractionMessageTrigger>
-		<livet:InteractionMessageTrigger Messenger="{Binding Messenger, Mode=OneWay}"
-										 MessageKey="Window/Action">
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+										 MessageKey="Window.WindowAction">
 			<livet:WindowInteractionMessageAction />
+		</livet:InteractionMessageTrigger>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+										 MessageKey="Window.Transition">
+			<livet:TransitionInteractionMessageAction />
 		</livet:InteractionMessageTrigger>
 	</i:Interaction.Triggers>
 
@@ -76,7 +86,7 @@
 					<controls:ZoomFactorSelector ZoomFactor="{Binding Settings.BrowserZoomFactor, Mode=OneWay}"
 												 ToolTip="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.ZoomFactorSelector_Tooltip}"
 												 Margin="4,0" />
-					<metro:CaptionButton IsChecked="{Binding TopMost, Mode=TwoWay}"
+					<metro:CaptionButton IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=TopMost, Mode=TwoWay}"
 										 ToolTip="{Binding Resources.Settings_Window_TopMost, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 										 Style="{DynamicResource PinButtonStyleKey}" />
 					<metro:SystemButtons />
@@ -95,7 +105,7 @@
 								   ZoomFactor="{Binding Settings.BrowserZoomFactor.Current}">
 				<i:Interaction.Triggers>
 					<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
-													 MessageKey="WebBrowser/Zoom">
+													 MessageKey="WebBrowser.Zoom">
 						<behaviors:ZoomAction />
 					</livet:InteractionMessageTrigger>
 				</i:Interaction.Triggers>
@@ -107,7 +117,7 @@
 					</i:Interaction.Behaviors>
 					<i:Interaction.Triggers>
 						<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
-														 MessageKey="Screenshot/Save">
+														 MessageKey="Screenshot.Save">
 							<behaviors:ScreenshotAction />
 						</livet:InteractionMessageTrigger>
 					</i:Interaction.Triggers>

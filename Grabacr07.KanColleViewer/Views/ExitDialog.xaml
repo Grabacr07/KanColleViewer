@@ -14,11 +14,23 @@
 				   xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
 				   xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 				   mc:Ignorable="d"
-				   d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
+				   d:DataContext="{d:DesignInstance viewModels:DialogViewModel}"
 				   Style="{DynamicResource MetroDialogStyleKey}"
-				   Title="EXIT KanColleViewer"
+				   Title="{Binding Title}"
 				   WindowStartupLocation="CenterOwner"
 				   SizeToContent="Height">
+
+	<i:Interaction.Triggers>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+										 MessageKey="Window.WindowAction">
+			<livet:WindowInteractionMessageAction />
+		</livet:InteractionMessageTrigger>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+										 MessageKey="Window.Transition">
+			<livet:TransitionInteractionMessageAction />
+		</livet:InteractionMessageTrigger>
+	</i:Interaction.Triggers>
+
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition />

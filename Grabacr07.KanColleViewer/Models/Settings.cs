@@ -53,6 +53,28 @@ namespace Grabacr07.KanColleViewer.Models
 		#endregion
 
 
+		#region CanCloseWithoutConfirmation 変更通知プロパティ
+
+		private bool _CanCloseWithoutConfirmation;
+
+		/// <summary>
+		/// メイン ウィンドウが確認なしで終了できるかどうかを示す値を取得または設定します。
+		/// </summary>
+		public bool CanCloseWithoutConfirmation
+		{
+			get { return this._CanCloseWithoutConfirmation; }
+			set
+			{
+				if (this._CanCloseWithoutConfirmation != value)
+				{
+					this._CanCloseWithoutConfirmation = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		#region ScreenshotFolder 変更通知プロパティ
 
 		private string _ScreenshotFolder;
