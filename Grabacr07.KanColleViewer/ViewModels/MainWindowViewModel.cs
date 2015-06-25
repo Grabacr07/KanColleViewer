@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.ViewModels.Messages;
 using Grabacr07.KanColleWrapper;
@@ -166,7 +167,11 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		/// </summary>
 		public void Activate()
 		{
-			this.Messenger.Raise(new WindowActionMessage(WindowAction.Active, "Window/Activate"));
+			if (this.WindowState == WindowState.Minimized)
+			{
+				this.Messenger.Raise(new WindowActionMessage(WindowAction.Normal, "Window/Action"));
+			}
+			this.Messenger.Raise(new WindowActionMessage(WindowAction.Active, "Window/Action"));
 		}
 
 
