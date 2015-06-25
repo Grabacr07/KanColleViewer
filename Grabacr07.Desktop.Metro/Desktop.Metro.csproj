@@ -83,6 +83,9 @@
   <ItemGroup>
     <Compile Include="Controls\CallMethodButton.cs" />
     <Compile Include="Controls\HyperlinkEx.cs" />
+    <Compile Include="Controls\RichTextInlinePresenter.cs" />
+    <Compile Include="Controls\RichTexts.cs" />
+    <Compile Include="Controls\RichTextView.cs" />
     <Compile Include="Controls\SortButton.cs" />
     <Compile Include="Controls\SortDirection.cs" />
     <Compile Include="Controls\TabHeader.cs" />
@@ -146,6 +149,10 @@
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.RichTextView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,7 @@
 
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="/Desktop.Metro;component/Themes/Generic.CallMethodButton.xaml" />
+		<ResourceDictionary Source="/Desktop.Metro;component/Themes/Generic.RichTextView.xaml" />
 		<ResourceDictionary Source="/Desktop.Metro;component/Themes/Generic.SortButton.xaml" />
 		<ResourceDictionary Source="/Desktop.Metro;component/Themes/Generic.TabHeader.xaml" />
 	</ResourceDictionary.MergedDictionaries>

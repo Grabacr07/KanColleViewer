@@ -129,15 +129,7 @@
 								BorderBrush="{DynamicResource BorderBrushKey}"
 								Margin="0,5"
 								Padding="5">
-							<DockPanel>
-								<controls:CallMethodButton DockPanel.Dock="Right"
-														   Content="設定"
-														   MethodName="OpenSettings"
-														   Padding="8,6"
-														   Margin="5,0,0,0"
-														   VerticalAlignment="Center" />
-								<settings:PluginInfo />
-							</DockPanel>
+							<settings:PluginInfo />
 						</Border>
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>

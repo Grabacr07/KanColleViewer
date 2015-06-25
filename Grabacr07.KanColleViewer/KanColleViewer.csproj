@@ -271,6 +271,7 @@
     <Compile Include="Views\Settings\Plugins.xaml.cs">
       <DependentUpon>Plugins.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Settings\RichText.cs" />
     <Compile Include="Views\Settings\VersionInfo.xaml.cs">
       <DependentUpon>VersionInfo.xaml</DependentUpon>
     </Compile>
