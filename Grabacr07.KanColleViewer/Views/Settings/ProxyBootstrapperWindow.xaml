@@ -14,7 +14,7 @@
 				   xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:ProxyBootstrapperViewModel}"
-				   Title="待ち受けポートの設定"
+				   Title="{Binding Title}"
 				   Width="480"
 				   FontSize="12"
 				   Background="{DynamicResource ThemeBrushKey}"

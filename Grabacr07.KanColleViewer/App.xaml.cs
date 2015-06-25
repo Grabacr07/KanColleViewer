@@ -50,6 +50,9 @@ namespace Grabacr07.KanColleViewer
 				Helper.SetRegistryFeatureBrowserEmulation();
 				Helper.SetMMCSSTask();
 
+				// Views.Settings.ProxyBootstrapper.Show() より先に MainWindow 設定しておく、これ大事
+				this.MainWindow = new MainWindow();
+
 				if (!BootstrapProxy())
 				{
 					this.Shutdown();
@@ -58,8 +61,7 @@ namespace Grabacr07.KanColleViewer
 
 				ThemeService.Current.Initialize(this, Theme.Dark, Accent.Purple);
 
-				ViewModelRoot = new MainWindowViewModel();
-				this.MainWindow = new MainWindow { DataContext = ViewModelRoot };
+				this.MainWindow.DataContext = (ViewModelRoot = new MainWindowViewModel());
 				this.MainWindow.Show();
 
 				appInstance.CommandLineArgsReceived += (sender, args) =>
@@ -105,7 +107,7 @@ namespace Grabacr07.KanColleViewer
 				return true;
 			}
 
-			var vmodel = new ProxyBootstrapperViewModel(bootstrapper);
+			var vmodel = new ProxyBootstrapperViewModel(bootstrapper) { Title = ProductInfo.Title, };
 			var window = new Views.Settings.ProxyBootstrapper { DataContext = vmodel, };
 			window.ShowDialog();
 
