@@ -101,7 +101,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Composition
 		{
 			if (this.notifier != null)
 			{
-				this.notifier.Show(NotifyType.Other, "テスト", "これはテスト通知です。", App.ViewModelRoot.Activate, ex => this.ErrorMessage = ex.Message);
+				this.notifier.Show("テスト", "これはテスト通知です。", App.ViewModelRoot.Activate, ex => this.ErrorMessage = ex.Message);
 			}
 		}
 	}

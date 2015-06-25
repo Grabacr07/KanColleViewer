@@ -6,18 +6,18 @@ namespace Grabacr07.KanColleViewer.Composition
 {
 	public class NotifyEventArgs : EventArgs
 	{
-		public string Title { get; private set; }
+		public string Header { get; private set; }
 
-		public string Message { get; private set; }
+		public string Body { get; private set; }
 
 		public Action Activated { get; set; }
 
 		public Action<Exception> Failed { get; set; }
 
-		public NotifyEventArgs(string title, string message)
+		public NotifyEventArgs(string header, string body)
 		{
-			this.Title = title;
-			this.Message = message;
+			this.Header = header;
+			this.Body = body;
 		}
 	}
 }

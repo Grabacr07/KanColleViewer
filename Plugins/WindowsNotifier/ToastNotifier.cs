@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Grabacr07.KanColleViewer.Composition;
 using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
 using MS.WindowsAPICodePack.Internal;
 
@@ -58,7 +57,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 			ErrorHelper.VerifySucceeded(newShortcutSave.Save(shortcutPath, true));
 		}
 
-		protected override void ShowCore(NotifyType type, string header, string body, Action activated, Action<Exception> failed)
+		protected override void ShowCore(string header, string body, Action activated, Action<Exception> failed)
 		{
 			var toast = new Toast(header, body);
 			toast.Activated += (sender, args) => activated();

@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Grabacr07.KanColleViewer.Composition;
 using Application = System.Windows.Application;
 
 namespace Grabacr07.KanColleViewer.Plugins
@@ -42,7 +41,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 			}
 		}
 
-		protected override void ShowCore(NotifyType type, string header, string body, Action activated, Action<Exception> failed)
+		protected override void ShowCore(string header, string body, Action activated, Action<Exception> failed)
 		{
 			if (this.notifyIcon == null) return;
 

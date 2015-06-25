@@ -69,7 +69,6 @@ namespace Grabacr07.KanColleViewer.Models
 					if (Settings.Current.NotifyRepairingCompleted)
 					{
 						PluginHost.Instance.GetNotifier().Show(
-							NotifyType.Repair,
 							Resources.Repairyard_NotificationMessage_Title,
 							string.Format(Resources.Repairyard_NotificationMessage, args.DockId, args.Ship.Info.Name),
 							() => App.ViewModelRoot.Activate());
@@ -91,7 +90,6 @@ namespace Grabacr07.KanColleViewer.Models
 							: Resources.Common_ShipGirl;
 
 						PluginHost.Instance.GetNotifier().Show(
-							NotifyType.Build,
 							Resources.Dockyard_NotificationMessage_Title,
 							string.Format(Resources.Dockyard_NotificationMessage, args.DockId, shipName),
 							() => App.ViewModelRoot.Activate());
@@ -109,7 +107,6 @@ namespace Grabacr07.KanColleViewer.Models
 					if (Settings.Current.NotifyExpeditionReturned)
 					{
 						PluginHost.Instance.GetNotifier().Show(
-							NotifyType.Expedition,
 							Resources.Expedition_NotificationMessage_Title,
 							string.Format(Resources.Expedition_NotificationMessage, args.FleetName),
 							() => App.ViewModelRoot.Activate());
@@ -121,7 +118,6 @@ namespace Grabacr07.KanColleViewer.Models
 					if (Settings.Current.NotifyFleetRejuvenated)
 					{
 						PluginHost.Instance.GetNotifier().Show(
-							NotifyType.Rejuvenated,
 							"疲労回復完了",
 							string.Format("「{0}」に編成されている艦娘の疲労が回復しました。", args.FleetName),
 							() => App.ViewModelRoot.Activate());
@@ -132,7 +128,7 @@ namespace Grabacr07.KanColleViewer.Models
 
 		private static void HandleNotifyRequested(object sender, NotifyEventArgs e)
 		{
-			PluginHost.Instance.GetNotifier().Show(NotifyType.Other, e.Title, e.Message, e.Activated, e.Failed);
+			PluginHost.Instance.GetNotifier().Show(e.Header, e.Body, e.Activated, e.Failed);
 		}
 
 		public void Dispose()

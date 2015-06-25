@@ -10,6 +10,6 @@ namespace Grabacr07.KanColleViewer.Composition
 	/// </summary>
 	public interface INotifier
 	{
-		void Show(NotifyType type, string header, string body, Action activated, Action<Exception> failed = null);
+		void Show(string header, string body, Action activated, Action<Exception> failed = null);
 	}
 }
