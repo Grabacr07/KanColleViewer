@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net.Sockets;
 using System.Threading.Tasks;
 using System.Windows;
 using Grabacr07.KanColleViewer.Composition;
@@ -29,6 +28,7 @@ namespace Grabacr07.KanColleViewer
 			AppDomain.CurrentDomain.UnhandledException += (sender, args) => ReportException(sender, args.ExceptionObject as Exception);
 		}
 
+		private readonly LivetCompositeDisposable compositeDisposable = new LivetCompositeDisposable();
 
 		protected override void OnStartup(StartupEventArgs e)
 		{
@@ -44,31 +44,38 @@ namespace Grabacr07.KanColleViewer
 
 				Settings.Load();
 				ResourceService.Current.ChangeCulture(Settings.Current.Culture);
+				ThemeService.Current.Initialize(this, Theme.Dark, Accent.Purple);
 
 				PluginHost.Instance.Initialize();
 				NotifierHost.Instance.Initialize();
 				Helper.SetRegistryFeatureBrowserEmulation();
 				Helper.SetMMCSSTask();
 
+				this.compositeDisposable.Add(PluginHost.Instance);
+				this.compositeDisposable.Add(NotifierHost.Instance);
+				this.compositeDisposable.Add(Settings.Current.Save);
+
 				// Views.Settings.ProxyBootstrapper.Show() より先に MainWindow 設定しておく、これ大事
 				this.MainWindow = new MainWindow();
 
-				if (!BootstrapProxy())
+				if (BootstrapProxy())
+				{
+					this.compositeDisposable.Add(ProxyBootstrapper.Shutdown);
+
+					this.MainWindow.DataContext = (ViewModelRoot = new MainWindowViewModel());
+					this.MainWindow.Show();
+
+					appInstance.CommandLineArgsReceived += (sender, args) =>
+					{
+						// 多重起動を検知したら、メイン ウィンドウを最前面に出す
+						this.Dispatcher.Invoke(() => ViewModelRoot.Activate());
+						this.ProcessCommandLineParameter(args.CommandLineArgs);
+					};
+				}
+				else
 				{
 					this.Shutdown();
-					return;
 				}
-
-				ThemeService.Current.Initialize(this, Theme.Dark, Accent.Purple);
-
-				this.MainWindow.DataContext = (ViewModelRoot = new MainWindowViewModel());
-				this.MainWindow.Show();
-
-				appInstance.CommandLineArgsReceived += (sender, args) =>
-				{
-					this.Dispatcher.Invoke(() => ViewModelRoot.Activate());
-					this.ProcessCommandLineParameter(args.CommandLineArgs);
-				};
 			}
 			else
 			{
@@ -80,13 +87,7 @@ namespace Grabacr07.KanColleViewer
 		protected override void OnExit(ExitEventArgs e)
 		{
 			base.OnExit(e);
-
-			KanColleClient.Current.Proxy.Shutdown();
-
-			NotifierHost.Instance.Dispose();
-			PluginHost.Instance.Dispose();
-
-			Settings.Current.Save();
+			this.compositeDisposable.Dispose();
 		}
 
 		private void ProcessCommandLineParameter(string[] args)

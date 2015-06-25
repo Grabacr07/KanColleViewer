@@ -31,14 +31,14 @@ namespace Grabacr07.KanColleViewer.Models
 
 		public ProxyBootstrapper()
 		{
+			this.Result = ProxyBootstrapResult.None;
+
 			if (Settings.Current.LocalProxyPort < 1 || 65535 < Settings.Current.LocalProxyPort)
 			{
 				Settings.Current.LocalProxyPort = Properties.Settings.Default.DefaultLocalProxyPort;
 			}
 
 			KanColleClient.Current.Proxy.UpstreamProxySettings = Settings.Current.ProxySettings;
-
-			this.Result = ProxyBootstrapResult.None;
 		}
 
 		public void Try()
@@ -66,6 +66,11 @@ namespace Grabacr07.KanColleViewer.Models
 				this.Result = ProxyBootstrapResult.UnexpectedException;
 				this.Exception = ex;
 			}
+		}
+
+		public static void Shutdown()
+		{
+			KanColleClient.Current.Proxy.Shutdown();
 		}
 	}
 }
