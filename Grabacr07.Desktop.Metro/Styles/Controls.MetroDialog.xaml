@@ -40,25 +40,27 @@
 				<ControlTemplate TargetType="{x:Type metro:MetroWindow}">
 					<Border Background="{DynamicResource ThemeBrushKey}"
 							SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-						<Grid>
-							<Grid.RowDefinitions>
-								<RowDefinition Height="Auto" />
-								<RowDefinition />
-							</Grid.RowDefinitions>
+						<AdornerDecorator>
+							<Grid>
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto" />
+									<RowDefinition />
+								</Grid.RowDefinitions>
 
-							<Border Background="{DynamicResource SemiactiveBackgroundBrushKey}"
-									metro:MetroWindow.IsCaptionBar="True">
-								<TextBlock Text="{TemplateBinding Title}"
-										   FontFamily="{TemplateBinding FontFamily}"
-										   Foreground="{TemplateBinding Foreground}"
-										   FontSize="15"
-										   Margin="10,7" />
-							</Border>
-							<ContentPresenter Grid.Row="1"
-											  Margin="{TemplateBinding Padding}"
-											  LayoutTransform="{TemplateBinding DpiScaleTransform}"
-											  TextOptions.TextFormattingMode="{TemplateBinding TextOptions.TextFormattingMode}" />
-						</Grid>
+								<Border Background="{DynamicResource SemiactiveBackgroundBrushKey}"
+										metro:MetroWindow.IsCaptionBar="True">
+									<TextBlock Text="{TemplateBinding Title}"
+											   FontFamily="{TemplateBinding FontFamily}"
+											   Foreground="{TemplateBinding Foreground}"
+											   FontSize="15"
+											   Margin="10,7" />
+								</Border>
+								<ContentPresenter Grid.Row="1"
+												  Margin="{TemplateBinding Padding}"
+												  LayoutTransform="{TemplateBinding DpiScaleTransform}"
+												  TextOptions.TextFormattingMode="{TemplateBinding TextOptions.TextFormattingMode}" />
+							</Grid>
+						</AdornerDecorator>
 					</Border>
 				</ControlTemplate>
 			</Setter.Value>

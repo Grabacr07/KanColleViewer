@@ -61,11 +61,13 @@
 				   Margin="6,-6,6,6">
 			<metro2:CallMethodButton Content="OK"
 									 MethodName="OK"
+									 IsDefault="True"
 									 MinWidth="110"
 									 Padding="30,6"
 									 Margin="6" />
 			<metro2:CallMethodButton Content="キャンセル"
 									 MethodName="Cancel"
+									 IsCancel="True"
 									 MinWidth="110"
 									 Padding="30,6"
 									 Margin="6" />
