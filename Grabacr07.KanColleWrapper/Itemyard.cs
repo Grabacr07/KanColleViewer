@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
 using Livet;
@@ -22,10 +21,7 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// <see cref="SlotItems"/> と、出撃中に入手したものを含んだ装備数を取得します。
 		/// </summary>
-		public int SlotItemsCount
-		{
-			get { return this.SlotItems.Count + this.droppedItemsCount; }
-		}
+		public int SlotItemsCount => this.SlotItems.Count + this.droppedItemsCount;
 
 		#region SlotItems 変更通知プロパティ
 
@@ -185,11 +181,8 @@ namespace Grabacr07.KanColleWrapper
 		{
 			if (source.api_after_slot == null) return;
 
-			var target = this.SlotItems[source.api_after_slot.api_id];
-			if (target != null)
-			{
-				target.Remodel(source.api_after_slot.api_level, source.api_after_slot.api_slotitem_id);
-			}
+			this.SlotItems[source.api_after_slot.api_id]
+				?.Remodel(source.api_after_slot.api_level, source.api_after_slot.api_slotitem_id);
 		}
 
 

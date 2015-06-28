@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Grabacr07.KanColleWrapper.Models
@@ -14,17 +13,17 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 現在値を取得します。
 		/// </summary>
-		public int Current { get; private set; }
+		public int Current { get; }
 
 		/// <summary>
 		/// 最大値を取得します。
 		/// </summary>
-		public int Maximum { get; private set; }
+		public int Maximum { get; }
 
 		/// <summary>
 		/// 最小値を取得します。
 		/// </summary>
-		public int Minimum { get; private set; }
+		public int Minimum { get; }
 
 		public LimitedValue(int current, int maximum, int minimum)
 			: this()

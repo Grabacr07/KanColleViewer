@@ -15,12 +15,7 @@ namespace Grabacr07.KanColleWrapper
     {
         #region singleton
 
-        private static KanColleClient current = new KanColleClient();
-
-        public static KanColleClient Current
-        {
-            get { return current; }
-        }
+        public static KanColleClient Current { get; } = new KanColleClient();
 
         #endregion
 

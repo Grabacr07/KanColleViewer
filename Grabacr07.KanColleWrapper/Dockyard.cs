@@ -72,11 +72,7 @@ namespace Grabacr07.KanColleWrapper
 		{
 			if (this.Docks.Count == source.Length)
 			{
-				foreach (var raw in source)
-				{
-					var target = this.Docks[raw.api_id];
-					if (target != null) target.Update(raw);
-				}
+				foreach (var raw in source) this.Docks[raw.api_id]?.Update(raw);
 			}
 			else
 			{

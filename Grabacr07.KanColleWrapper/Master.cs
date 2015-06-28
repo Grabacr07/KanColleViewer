@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
-using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
@@ -44,7 +41,7 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// すべての海域の定義を取得します。
 		/// </summary>
-		public MasterTable<MapArea> MapAreas { get; private set; }
+		public MasterTable<MapArea> MapAreas { get; }
 
 		/// <summary>
 		/// すべてのマップの定義を取得します。

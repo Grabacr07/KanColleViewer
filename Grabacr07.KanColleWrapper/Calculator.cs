@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models;
 
 namespace Grabacr07.KanColleWrapper

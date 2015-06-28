@@ -17,38 +17,34 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// 艦隊の編成状況にアクセスできるようにします。
 		/// </summary>
-		public Organization Organization { get; private set; }
+		public Organization Organization { get; }
 
 		/// <summary>
 		/// 資源および資材の保有状況にアクセスできるようにします。
 		/// </summary>
-		public Materials Materials { get; private set; }
+		public Materials Materials { get; }
 
 		/// <summary>
 		/// 装備や消費アイテムの保有状況にアクセスできるようにします。
 		/// </summary>
-		public Itemyard Itemyard { get; private set; }
+		public Itemyard Itemyard { get; }
 
 		/// <summary>
 		/// 複数の建造ドックを持つ工廠を取得します。
 		/// </summary>
-		public Dockyard Dockyard { get; private set; }
+		public Dockyard Dockyard { get; }
 
 		/// <summary>
 		/// 複数の入渠ドックを持つ工廠を取得します。
 		/// </summary>
-		public Repairyard Repairyard { get; private set; }
+		public Repairyard Repairyard { get; }
 
 		/// <summary>
 		/// 任務情報を取得します。
 		/// </summary>
-		public Quests Quests { get; private set; }
+		public Quests Quests { get; }
 
-		/// <summary>
-		/// Logs events such as ship drops, crafts, and item developments.
-		/// </summary>
-		public Logger Logger { get; private set; }
-
+	
 		#region Admiral 変更通知プロパティ
 
 		private Admiral _Admiral;
@@ -72,8 +68,6 @@ namespace Grabacr07.KanColleWrapper
 
 		#endregion
 
-
-
 		internal Homeport(KanColleProxy proxy)
 		{
 			this.Materials = new Materials(proxy);
@@ -82,7 +76,6 @@ namespace Grabacr07.KanColleWrapper
 			this.Repairyard = new Repairyard(this, proxy);
 			this.Dockyard = new Dockyard(proxy);
 			this.Quests = new Quests(proxy);
-			this.Logger = new Logger(proxy);
 
 			proxy.api_port.TryParse<kcsapi_port>().Subscribe(x =>
 			{
@@ -117,11 +110,10 @@ namespace Grabacr07.KanColleWrapper
 			}
 		}
 
-
 		internal void StartConditionCount()
 		{
 			//Observable.Timer(TimeSpan.FromSeconds(10), TimeSpan.FromMinutes(3))
 		}
-		
+
 	}
 }

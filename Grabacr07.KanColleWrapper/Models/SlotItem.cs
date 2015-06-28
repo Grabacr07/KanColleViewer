@@ -8,27 +8,15 @@ namespace Grabacr07.KanColleWrapper.Models
 {
 	public class SlotItem : RawDataWrapper<kcsapi_slotitem>, IIdentifiable
 	{
-		public int Id
-		{
-			get { return this.RawData.api_id; }
-		}
+		public int Id => this.RawData.api_id;
 
 		public SlotItemInfo Info { get; private set; }
 
-		public int Level
-		{
-			get { return this.RawData.api_level; }
-		}
+		public int Level => this.RawData.api_level;
 
-		public string LevelText
-		{
-			get { return this.Level >= 10 ? "★max" : this.Level >= 1 ? ("★+" + this.Level) : ""; }
-		}
+		public string LevelText => this.Level >= 10 ? "★max" : this.Level >= 1 ? ("★+" + this.Level) : "";
 
-		public string NameWithLevel
-		{
-			get { return string.Format("{0}{1}", this.Info.Name, this.Level >= 1 ? (" " + this.LevelText) : ""); }
-		}
+		public string NameWithLevel => string.Format("{0}{1}", this.Info.Name, this.Level >= 1 ? (" " + this.LevelText) : "");
 
 		internal SlotItem(kcsapi_slotitem rawData)
 			: base(rawData)

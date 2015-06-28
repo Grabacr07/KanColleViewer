@@ -31,7 +31,7 @@ namespace Grabacr07.KanColleWrapper
 			get { return this._All; }
 			set
 			{
-				if (this._All != value)
+				if (!Equals(this._All, value))
 				{
 					this._All = value;
 					this.RaisePropertyChanged();

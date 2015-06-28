@@ -71,11 +71,7 @@ namespace Grabacr07.KanColleWrapper
 		{
 			if (this.Docks.Count == source.Length)
 			{
-				foreach (var raw in source)
-				{
-					var target = this.Docks[raw.api_id];
-					if (target != null) target.Update(raw);
-				}
+				foreach (var raw in source) this.Docks[raw.api_id]?.Update(raw);
 			}
 			else
 			{
@@ -95,9 +91,7 @@ namespace Grabacr07.KanColleWrapper
 				if (highspeed)
 				{
 					ship.Repair();
-
-					var fleet = this.homeport.Organization.GetFleet(ship.Id);
-					if (fleet != null) fleet.State.Update();
+					this.homeport.Organization.GetFleet(ship.Id)?.State.Update();
 				}
 
 				// 高速修復でない場合、別途 ndock が来るので、ここで何かする必要はなさげ
@@ -118,8 +112,7 @@ namespace Grabacr07.KanColleWrapper
 				dock.Finish();
 				ship.Repair();
 
-				var fleet = this.homeport.Organization.GetFleet(ship.Id);
-				if (fleet != null) fleet.State.Update();
+				this.homeport.Organization.GetFleet(ship.Id)?.State.Update();
 			}
 			catch (Exception ex)
 			{

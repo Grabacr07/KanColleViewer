@@ -26,10 +26,7 @@ namespace Grabacr07.KanColleWrapper.Models
 	{
 		private static readonly Dictionary<string, ICalcViewRange> logics = new Dictionary<string, ICalcViewRange>();
 
-		public static IEnumerable<ICalcViewRange> Logics
-		{
-			get { return logics.Values; }
-		}
+		public static IEnumerable<ICalcViewRange> Logics => logics.Values;
 
 		public static ICalcViewRange Get(string key)
 		{
@@ -63,20 +60,11 @@ namespace Grabacr07.KanColleWrapper.Models
 
 	public class ViewRangeType1 : ViewRangeCalcLogic
 	{
-		public override sealed string Id
-		{
-			get { return "KanColleViewer.Type1"; }
-		}
+		public override sealed string Id => "KanColleViewer.Type1";
 
-		public override string Name
-		{
-			get { return "単純計算"; }
-		}
+		public override string Name => "単純計算";
 
-		public override string Description
-		{
-			get { return "艦娘と装備の索敵値の単純な合計値"; }
-		}
+		public override string Description => "艦娘と装備の索敵値の単純な合計値";
 
 		public override double Calc(Ship[] ships)
 		{
@@ -89,20 +77,11 @@ namespace Grabacr07.KanColleWrapper.Models
 
 	public class ViewRangeType2 : ViewRangeCalcLogic
 	{
-		public override sealed string Id
-		{
-			get { return "KanColleViewer.Type2"; }
-		}
+		public override sealed string Id => "KanColleViewer.Type2";
 
-		public override string Name
-		{
-			get { return "2-5 式 (旧)"; }
-		}
+		public override string Name => "2-5 式 (旧)";
 
-		public override string Description
-		{
-			get { return "(偵察機 × 2) + (電探) + √(装備込みの艦隊索敵値合計 - 偵察機 - 電探)"; }
-		}
+		public override string Description => "(偵察機 × 2) + (電探) + √(装備込みの艦隊索敵値合計 - 偵察機 - 電探)";
 
 		public override double Calc(Ship[] ships)
 		{
@@ -132,26 +111,14 @@ namespace Grabacr07.KanColleWrapper.Models
 
 	public class ViewRangeType3 : ViewRangeCalcLogic
 	{
-		public override sealed string Id
-		{
-			get { return "KanColleViewer.Type3"; }
-		}
+		public override sealed string Id => "KanColleViewer.Type3";
 
-		public override string Name
-		{
-			get { return "2-5 式 (秋)"; }
-		}
+		public override string Name => "2-5 式 (秋)";
 
-		public override string Description
-		{
-			get
-			{
-				return @"(艦上爆撃機 × 1.04) + (艦上攻撃機 × 1.37) + (艦上偵察機 × 1.66)
+		public override string Description => @"(艦上爆撃機 × 1.04) + (艦上攻撃機 × 1.37) + (艦上偵察機 × 1.66)
 + (水上偵察機 × 2.00) + (水上爆撃機 × 1.78) + (探照灯 × 0.91)
 + (小型電探 × 1.00) + (大型電探 × 0.99) + (√各艦毎の素索敵 × 1.69)
 + (司令部レベルを 5 の倍数に切り上げ × -0.61)";
-			}
-		}
 
 		public override double Calc(Ship[] ships)
 		{

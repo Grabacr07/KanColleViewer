@@ -190,9 +190,7 @@ namespace Grabacr07.KanColleWrapper
 					if (target == null) continue;
 
 					target.Update(ship);
-
-					var fleet = this.GetFleet(target.Id);
-					if (fleet != null) fleet.State.Calculate();
+					this.GetFleet(target.Id)?.State.Calculate();
 				}
 			}
 			else
@@ -215,11 +213,7 @@ namespace Grabacr07.KanColleWrapper
 		{
 			if (this.Fleets.Count == source.Length)
 			{
-				foreach (var raw in source)
-				{
-					var target = this.Fleets[raw.api_id];
-					if (target != null) target.Update(raw);
-				}
+				foreach (var raw in source) this.Fleets[raw.api_id]?.Update(raw);
 			}
 			else
 			{
@@ -289,7 +283,7 @@ namespace Grabacr07.KanColleWrapper
 
 		private void Charge(kcsapi_charge source)
 		{
-			Fleet fleet = null;	// 補給した艦が所属している艦隊。艦隊をまたいで補給はできないので、必ず 1 つに絞れる
+			Fleet fleet = null; // 補給した艦が所属している艦隊。艦隊をまたいで補給はできないので、必ず 1 つに絞れる
 
 			foreach (var ship in source.api_ship)
 			{
@@ -315,11 +309,7 @@ namespace Grabacr07.KanColleWrapper
 		{
 			try
 			{
-				var target = this.Ships[svd.Data.api_ship.api_id];
-				if (target != null)
-				{
-					target.Update(svd.Data.api_ship);
-				}
+				this.Ships[svd.Data.api_ship.api_id]?.Update(svd.Data.api_ship);
 
 				var items = svd.Request["api_id_items"]
 					.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)

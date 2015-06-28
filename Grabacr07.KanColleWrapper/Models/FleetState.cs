@@ -17,7 +17,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 艦隊に編成されている艦娘のコンディションを取得します。
 		/// </summary>
-		public FleetCondition Condition { get; private set; }
+		public FleetCondition Condition { get; }
 
 		#region AverageLevel 変更通知プロパティ
 
@@ -221,10 +221,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.ViewRange = logic.Calc(ships.ToArray());
 			this.ViewRangeCalcType = logic.Name;
 
-			if (this.Calculated != null)
-			{
-				this.Calculated(this, new EventArgs());
-			}
+			this.Calculated?.Invoke(this, new EventArgs());
 		}
 
 		internal void Update()
@@ -313,10 +310,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.Situation = state;
 			this.IsReady = ready;
 
-			if (this.Updated != null)
-			{
-				this.Updated(this, new EventArgs());
-			}
+			this.Updated?.Invoke(this, new EventArgs());
 		}
 	}
 }

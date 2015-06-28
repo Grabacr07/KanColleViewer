@@ -146,7 +146,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>KanColleProxy.Endpoints.tt</DependentUpon>
     </Compile>
-    <Compile Include="Logger.cs" />
     <Compile Include="MemberTable.cs" />
     <Compile Include="Models\ExpeditionReturnedEventArgs.cs" />
     <Compile Include="Models\FleetSituation.cs" />

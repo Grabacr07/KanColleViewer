@@ -8,9 +8,9 @@ namespace Grabacr07.KanColleWrapper.Models
 {
 	public class MapArea : RawDataWrapper<kcsapi_mst_maparea>, IIdentifiable
 	{
-		public int Id { get; private set; }
+		public int Id { get; }
 
-		public string Name { get; private set; }
+		public string Name { get; }
 
 		public MapArea(kcsapi_mst_maparea maparea)
 			: base(maparea)
@@ -21,17 +21,12 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#region static members
 
-		private static MapArea dummy = new MapArea(new kcsapi_mst_maparea()
+	    public static MapArea Dummy { get; } = new MapArea(new kcsapi_mst_maparea()
 		{
-			api_id = 0,
-			api_name = "？？？",
+		    api_id = 0,
+		    api_name = "？？？",
 		});
 
-		public static MapArea Dummy
-		{
-			get { return dummy; }
-		}
-
-		#endregion
+	    #endregion
 	}
 }

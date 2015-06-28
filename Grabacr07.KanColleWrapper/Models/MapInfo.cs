@@ -8,23 +8,23 @@ namespace Grabacr07.KanColleWrapper.Models
 {
 	public class MapInfo : RawDataWrapper<kcsapi_mst_mapinfo>, IIdentifiable
 	{
-		public int Id { get; private set; }
+		public int Id { get; }
 
-		public string Name { get; private set; }
+		public string Name { get; }
 
-		public int MapAreaId { get; private set; }
+		public int MapAreaId { get;}
 
-		public MapArea MapArea { get; private set; }
+		public MapArea MapArea { get;}
 
-		public int IdInEachMapArea { get; private set; }
+		public int IdInEachMapArea { get;}
 
-		public int Level { get; private set; }
+		public int Level { get; }
 
-		public string OperationName { get; private set; }
+		public string OperationName { get; }
 
-		public string OperationSummary { get; private set; }
+		public string OperationSummary { get; }
 
-		public int RequiredDefeatCount { get; private set; }
+		public int RequiredDefeatCount { get; }
 
 		public MapInfo(kcsapi_mst_mapinfo mapinfo, MasterTable<MapArea> mapAreas)
 			: base(mapinfo)
@@ -42,20 +42,15 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#region static members
 
-		private static MapInfo dummy = new MapInfo(new kcsapi_mst_mapinfo()
+	    public static MapInfo Dummy { get; } = new MapInfo(new kcsapi_mst_mapinfo()
 		{
-			api_id = 0,
-			api_name = "？？？",
-			api_maparea_id = 0,
-			api_no = 0,
-			api_level = 0,
+		    api_id = 0,
+		    api_name = "？？？",
+		    api_maparea_id = 0,
+		    api_no = 0,
+		    api_level = 0,
 		}, new MasterTable<MapArea>());
 
-		public static MapInfo Dummy
-		{
-			get { return dummy; }
-		}
-
-		#endregion
+	    #endregion
 	}
 }

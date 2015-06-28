@@ -8,14 +8,11 @@ namespace Grabacr07.KanColleWrapper.Models
 {
 	public class ShipSlot : NotificationObject
 	{
-		public SlotItem Item { get; private set; }
+		public SlotItem Item { get; }
 
 		public int Maximum { get; private set; }
 
-		public bool Equipped
-		{
-			get { return this.Item != null; }
-		}
+		public bool Equipped => this.Item != null;
 
 		#region Current 変更通知プロパティ
 

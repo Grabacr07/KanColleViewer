@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Models.Raw;
 using Grabacr07.KanColleWrapper.Internal;
-using Livet;
 
 namespace Grabacr07.KanColleWrapper.Models
 {

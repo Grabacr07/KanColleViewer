@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Grabacr07.KanColleWrapper.Models
@@ -11,12 +10,12 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 建造が完了したドックを一意に識別する ID を取得します。
 		/// </summary>
-		public int DockId { get; private set; }
+		public int DockId { get; }
 
 		/// <summary>
 		/// 建造された艦娘の種類を取得します。
 		/// </summary>
-		public ShipInfo Ship { get; private set; }
+		public ShipInfo Ship { get; }
 
 		public BuildingCompletedEventArgs(int id, ShipInfo ship)
 		{

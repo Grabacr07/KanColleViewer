@@ -18,124 +18,79 @@ namespace Grabacr07.KanColleWrapper.Models
         /// <summary>
         /// 艦を一意に識別する ID を取得します。
         /// </summary>
-        public int Id
-        {
-            get { return this.RawData.api_id; }
-        }
+        public int Id => this.RawData.api_id;
 
-        public int SortId
-        {
-            get { return this.RawData.api_sortno; }
-        }
+	    public int SortId => this.RawData.api_sortno;
 
-        /// <summary>
+	    /// <summary>
         /// 艦の名称を取得します。
         /// </summary>
-        public string Name
-        {
-            get { return this.RawData.api_name; }
-        }
+        public string Name => this.RawData.api_name;
 
-        /// <summary>
+	    /// <summary>
         /// 艦種を取得します。
         /// </summary>
-        public ShipType ShipType
-        {
-            get { return this.shipType ?? (this.shipType = KanColleClient.Current.Master.ShipTypes[this.RawData.api_stype]) ?? ShipType.Dummy; }
-        }
+        public ShipType ShipType => this.shipType ?? (this.shipType = KanColleClient.Current.Master.ShipTypes[this.RawData.api_stype]) ?? ShipType.Dummy;
 
-        public int[] Slots
-        {
-            get { return this.RawData.api_maxeq; }
-        }
+	    public int[] Slots => this.RawData.api_maxeq;
 
-        #region 用意したけど使わないっぽい？
+	    #region 用意したけど使わないっぽい？
 
         /// <summary>
         /// 火力の最大値を取得します。
         /// </summary>
-        public int MaxFirepower
-        {
-            get { return this.RawData.api_houg.Get(1) ?? 0; }
-        }
+        public int MaxFirepower => this.RawData.api_houg.Get(1) ?? 0;
 
-        /// <summary>
+	    /// <summary>
         /// 装甲の最大値を取得します。
         /// </summary>
-        public int MaxArmer
-        {
-            get { return this.RawData.api_souk.Get(1) ?? 0; }
-        }
+        public int MaxArmer => this.RawData.api_souk.Get(1) ?? 0;
 
-        /// <summary>
+	    /// <summary>
         /// 雷装の最大値を取得します。
         /// </summary>
-        public int MaxTorpedo
-        {
-            get { return this.RawData.api_raig.Get(1) ?? 0; }
-        }
+        public int MaxTorpedo => this.RawData.api_raig.Get(1) ?? 0;
 
-        /// <summary>
+	    /// <summary>
         /// 対空の最大値を取得します。
         /// </summary>
-        public int MaxAA
-        {
-            get { return this.RawData.api_tyku.Get(1) ?? 0; }
-        }
+        public int MaxAA => this.RawData.api_tyku.Get(1) ?? 0;
 
 
-        /// <summary>
+	    /// <summary>
         /// 耐久値を取得します。
         /// </summary>
-        public int HP
-        {
-            get { return this.RawData.api_taik.Get(0) ?? 0; }
-        }
+        public int HP => this.RawData.api_taik.Get(0) ?? 0;
 
-        /// <summary>
+	    /// <summary>
         /// 回避の最大値を取得します。
         /// </summary>
-        public int MaxEvasion
-        {
-            get { return this.RawData.api_kaih.Get(1) ?? 0; }
-        }
+        public int MaxEvasion => this.RawData.api_kaih.Get(1) ?? 0;
 
-        /// <summary>
+	    /// <summary>
         /// 対潜の最大値を取得します (ASW: Anti-submarine warfare)。
         /// </summary>
-        public int MaxASW
-        {
-            get { return this.RawData.api_tais.Get(1) ?? 0; }
-        }
+        public int MaxASW => this.RawData.api_tais.Get(1) ?? 0;
 
-        /// <summary>
+	    /// <summary>
         /// 索敵の最大値を取得します。
         /// </summary>
-        public int MaxLOS
-        {
-            get { return this.RawData.api_saku.Get(1) ?? 0; }
-        }
+        public int MaxLOS => this.RawData.api_saku.Get(1) ?? 0;
 
-        #endregion
+	    #endregion
 
         /// <summary>
         /// 速力を取得します。
         /// </summary>
-        public ShipSpeed Speed
-        {
-            get { return (ShipSpeed)this.RawData.api_soku; }
-        }
+        public ShipSpeed Speed => (ShipSpeed)this.RawData.api_soku;
 
-        /// <summary>
+	    /// <summary>
         /// 次の改造が実施できるレベルを取得します。
         /// </summary>
-        public int? NextRemodelingLevel
-        {
-            get { return this.RawData.api_afterlv == 0 ? null : (int?)this.RawData.api_afterlv; }
-        }
+        public int? NextRemodelingLevel => this.RawData.api_afterlv == 0 ? null : (int?)this.RawData.api_afterlv;
 
 
-        internal ShipInfo(kcsapi_mst_ship rawData) : base(rawData) { }
+	    internal ShipInfo(kcsapi_mst_ship rawData) : base(rawData) { }
 
         public override string ToString()
         {
@@ -144,16 +99,11 @@ namespace Grabacr07.KanColleWrapper.Models
 
         #region static members
 
-        private static ShipInfo dummy = new ShipInfo(new kcsapi_mst_ship
+        public static ShipInfo Dummy { get; } = new ShipInfo(new kcsapi_mst_ship
         {
             api_id = 0,
             api_name = "？？？"
         });
-
-        public static ShipInfo Dummy
-        {
-            get { return dummy; }
-        }
 
         #endregion
     }

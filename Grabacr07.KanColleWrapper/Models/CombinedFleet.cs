@@ -51,7 +51,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
-		public FleetState State { get; private set; }
+		public FleetState State { get; }
 
 		public CombinedFleet(Homeport parent, params Fleet[] fleets)
 		{

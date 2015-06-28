@@ -16,7 +16,7 @@ namespace Grabacr07.KanColleWrapper.Internal
 
 		public static void SafeDispose(this IDisposable resource)
 		{
-			if (resource != null) resource.Dispose();
+			resource?.Dispose();
 		}
 
 

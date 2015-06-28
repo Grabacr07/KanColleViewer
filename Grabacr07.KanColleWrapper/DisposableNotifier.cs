@@ -8,7 +8,7 @@ namespace Grabacr07.KanColleWrapper
 {
 	public class DisposableNotifier : NotificationObject, IDisposable
 	{
-		protected LivetCompositeDisposable CompositeDisposable { get; private set; }
+		protected LivetCompositeDisposable CompositeDisposable { get; }
 
 		public DisposableNotifier()
 		{
