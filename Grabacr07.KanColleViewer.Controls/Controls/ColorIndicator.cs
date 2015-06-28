@@ -16,7 +16,9 @@ namespace Grabacr07.KanColleViewer.Controls
 	{
 		static ColorIndicator()
 		{
-			DefaultStyleKeyProperty.OverrideMetadata(typeof(ColorIndicator), new FrameworkPropertyMetadata(typeof(ColorIndicator)));
+			DefaultStyleKeyProperty.OverrideMetadata(
+				typeof(ColorIndicator),
+				new FrameworkPropertyMetadata(typeof(ColorIndicator)));
 		}
 
 		#region LimitedValue 依存関係プロパティ
@@ -27,7 +29,7 @@ namespace Grabacr07.KanColleViewer.Controls
 			set { this.SetValue(LimitedValueProperty, value); }
 		}
 		public static readonly DependencyProperty LimitedValueProperty =
-			DependencyProperty.Register("LimitedValue", typeof(LimitedValue), typeof(ColorIndicator), new UIPropertyMetadata(new LimitedValue(), LimitedValuePropertyChangedCallback));
+			DependencyProperty.Register(nameof(LimitedValue), typeof(LimitedValue), typeof(ColorIndicator), new UIPropertyMetadata(new LimitedValue(), LimitedValuePropertyChangedCallback));
 
 		private static void LimitedValuePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{

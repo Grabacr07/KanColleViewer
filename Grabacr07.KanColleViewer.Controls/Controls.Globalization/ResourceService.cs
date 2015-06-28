@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 
 namespace Grabacr07.KanColleViewer.Controls.Globalization
 {
@@ -13,16 +12,8 @@ namespace Grabacr07.KanColleViewer.Controls.Globalization
 	/// </summary>
 	public class ResourceService : INotifyPropertyChanged
 	{
-		#region static members
-
-		private static readonly ResourceService current = new ResourceService();
-
-		public static ResourceService Current
-		{
-			get { return current; }
-		}
-
-		#endregion
+		// singleton
+		public static ResourceService Current { get; } = new ResourceService();
 
 		/// <summary>
 		/// サポートされているカルチャの名前。
@@ -38,12 +29,12 @@ namespace Grabacr07.KanColleViewer.Controls.Globalization
 		/// <summary>
 		/// 多言語化されたリソースを取得します。
 		/// </summary>
-		public Resources Resources { get; private set; }
+		public Resources Resources { get; }
 
 		/// <summary>
 		/// サポートされているカルチャを取得します。
 		/// </summary>
-		public IReadOnlyCollection<CultureInfo> SupportedCultures { get; private set; }
+		public IReadOnlyCollection<CultureInfo> SupportedCultures { get; }
 
 		private ResourceService()
 		{
@@ -71,7 +62,7 @@ namespace Grabacr07.KanColleViewer.Controls.Globalization
 		public void ChangeCulture(string name)
 		{
 			Resources.Culture = this.SupportedCultures.SingleOrDefault(x => x.Name == name);
-			this.OnPropertyChanged("Resources");
+			this.OnPropertyChanged(nameof(this.Resources));
 		}
 
 
@@ -81,8 +72,7 @@ namespace Grabacr07.KanColleViewer.Controls.Globalization
 
 		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
 		{
-			var handler = this.PropertyChanged;
-			if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+			this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 
 		#endregion

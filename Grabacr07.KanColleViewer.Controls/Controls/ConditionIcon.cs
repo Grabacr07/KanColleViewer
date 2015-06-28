@@ -15,9 +15,11 @@ namespace Grabacr07.KanColleViewer.Controls
 	{
 		static ConditionIcon()
 		{
-			DefaultStyleKeyProperty.OverrideMetadata(typeof(ConditionIcon), new FrameworkPropertyMetadata(typeof(ConditionIcon)));
+			DefaultStyleKeyProperty.OverrideMetadata(
+				typeof(ConditionIcon),
+				new FrameworkPropertyMetadata(typeof(ConditionIcon)));
 		}
-		
+
 		#region Condition 依存関係プロパティ
 
 		/// <summary>
@@ -32,7 +34,7 @@ namespace Grabacr07.KanColleViewer.Controls
 		/// <see cref="ConditionType"/> 依存関係プロパティを識別します。
 		/// </summary>
 		public static readonly DependencyProperty ConditionTypeProperty =
-			DependencyProperty.Register("ConditionType", typeof(ConditionType), typeof(ConditionIcon), new UIPropertyMetadata(ConditionType.Normal));
+			DependencyProperty.Register(nameof(ConditionType), typeof(ConditionType), typeof(ConditionIcon), new UIPropertyMetadata(ConditionType.Normal));
 
 		#endregion
 	}

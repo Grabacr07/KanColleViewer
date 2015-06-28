@@ -15,9 +15,11 @@ namespace Grabacr07.KanColleViewer.Controls
 	{
 		static SlotItemIcon()
 		{
-			DefaultStyleKeyProperty.OverrideMetadata(typeof(SlotItemIcon), new FrameworkPropertyMetadata(typeof(SlotItemIcon)));
+			DefaultStyleKeyProperty.OverrideMetadata(
+				typeof(SlotItemIcon),
+				new FrameworkPropertyMetadata(typeof(SlotItemIcon)));
 		}
-		
+
 		#region Type 依存関係プロパティ
 
 		public SlotItemIconType Type
@@ -26,7 +28,7 @@ namespace Grabacr07.KanColleViewer.Controls
 			set { this.SetValue(TypeProperty, value); }
 		}
 		public static readonly DependencyProperty TypeProperty =
-			DependencyProperty.Register("Type", typeof(SlotItemIconType), typeof(SlotItemIcon), new UIPropertyMetadata(SlotItemIconType.Unknown));
+			DependencyProperty.Register(nameof(Type), typeof(SlotItemIconType), typeof(SlotItemIcon), new UIPropertyMetadata(SlotItemIconType.Unknown));
 
 		#endregion
 	}

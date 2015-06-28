@@ -26,7 +26,7 @@ namespace Grabacr07.KanColleViewer.Interactivity
 		/// <see cref="Period"/> 依存関係プロパティを識別します。
 		/// </summary>
 		public static readonly DependencyProperty PeriodProperty =
-			DependencyProperty.Register("Period", typeof(DateTimeOffset?), typeof(CountdownBehavior), new UIPropertyMetadata(null, PeriodChangedCallback));
+			DependencyProperty.Register(nameof(Period), typeof(DateTimeOffset?), typeof(CountdownBehavior), new UIPropertyMetadata(null, PeriodChangedCallback));
 
 		private static void PeriodChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{

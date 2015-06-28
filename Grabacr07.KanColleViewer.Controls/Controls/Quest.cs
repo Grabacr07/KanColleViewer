@@ -12,7 +12,9 @@ namespace Grabacr07.KanColleViewer.Controls
 	{
 		static Quest()
 		{
-			DefaultStyleKeyProperty.OverrideMetadata(typeof(Quest), new FrameworkPropertyMetadata(typeof(Quest)));
+			DefaultStyleKeyProperty.OverrideMetadata(
+				typeof(Quest),
+				new FrameworkPropertyMetadata(typeof(Quest)));
 		}
 
 		#region IsDetailView 依存関係プロパティ
@@ -23,7 +25,7 @@ namespace Grabacr07.KanColleViewer.Controls
 			set { this.SetValue(IsDetailViewProperty, value); }
 		}
 		public static readonly DependencyProperty IsDetailViewProperty =
-			DependencyProperty.Register("IsDetailView", typeof(bool), typeof(Quest), new UIPropertyMetadata(false));
+			DependencyProperty.Register(nameof(IsDetailView), typeof(bool), typeof(Quest), new UIPropertyMetadata(false));
 
 		#endregion
 
@@ -35,7 +37,7 @@ namespace Grabacr07.KanColleViewer.Controls
 			set { this.SetValue(CategoryProperty, value); }
 		}
 		public static readonly DependencyProperty CategoryProperty =
-			DependencyProperty.Register("Category", typeof(QuestCategory), typeof(Quest), new UIPropertyMetadata(QuestCategory.Sortie));
+			DependencyProperty.Register(nameof(Category), typeof(QuestCategory), typeof(Quest), new UIPropertyMetadata(QuestCategory.Sortie));
 
 		#endregion
 
@@ -47,10 +49,10 @@ namespace Grabacr07.KanColleViewer.Controls
 			set { this.SetValue(StateProperty, value); }
 		}
 		public static readonly DependencyProperty StateProperty =
-			DependencyProperty.Register("State", typeof(QuestState), typeof(Quest), new UIPropertyMetadata(QuestState.None));
+			DependencyProperty.Register(nameof(State), typeof(QuestState), typeof(Quest), new UIPropertyMetadata(QuestState.None));
 
 		#endregion
-		
+
 		#region Progress 依存関係プロパティ
 
 		public QuestProgress Progress
@@ -59,7 +61,7 @@ namespace Grabacr07.KanColleViewer.Controls
 			set { this.SetValue(ProgressProperty, value); }
 		}
 		public static readonly DependencyProperty ProgressProperty =
-			DependencyProperty.Register("Progress", typeof(QuestProgress), typeof(Quest), new UIPropertyMetadata(QuestProgress.None));
+			DependencyProperty.Register(nameof(Progress), typeof(QuestProgress), typeof(Quest), new UIPropertyMetadata(QuestProgress.None));
 
 		#endregion
 
@@ -71,7 +73,7 @@ namespace Grabacr07.KanColleViewer.Controls
 			set { this.SetValue(TitleProperty, value); }
 		}
 		public static readonly DependencyProperty TitleProperty =
-			DependencyProperty.Register("Title", typeof(string), typeof(Quest), new UIPropertyMetadata(""));
+			DependencyProperty.Register(nameof(Title), typeof(string), typeof(Quest), new UIPropertyMetadata(""));
 
 		#endregion
 
@@ -83,7 +85,7 @@ namespace Grabacr07.KanColleViewer.Controls
 			set { this.SetValue(DetailProperty, value); }
 		}
 		public static readonly DependencyProperty DetailProperty =
-			DependencyProperty.Register("Detail", typeof(string), typeof(Quest), new UIPropertyMetadata(""));
+			DependencyProperty.Register(nameof(Detail), typeof(string), typeof(Quest), new UIPropertyMetadata(""));
 
 		#endregion
 
@@ -95,7 +97,7 @@ namespace Grabacr07.KanColleViewer.Controls
 			set { this.SetValue(IsUntakenProperty, value); }
 		}
 		public static readonly DependencyProperty IsUntakenProperty =
-			DependencyProperty.Register("IsUntaken", typeof(bool), typeof(Quest), new UIPropertyMetadata(false));
+			DependencyProperty.Register(nameof(IsUntaken), typeof(bool), typeof(Quest), new UIPropertyMetadata(false));
 
 		#endregion
 
@@ -107,7 +109,7 @@ namespace Grabacr07.KanColleViewer.Controls
 			set { this.SetValue(TextWrappingProperty, value); }
 		}
 		public static readonly DependencyProperty TextWrappingProperty =
-			DependencyProperty.Register("TextWrapping", typeof(TextWrapping), typeof(Quest), new UIPropertyMetadata(TextWrapping.Wrap));
+			DependencyProperty.Register(nameof(TextWrapping), typeof(TextWrapping), typeof(Quest), new UIPropertyMetadata(TextWrapping.Wrap));
 
 		#endregion
 	}

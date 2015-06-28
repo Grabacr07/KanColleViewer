@@ -38,7 +38,5 @@ namespace Grabacr07.KanColleViewer.Converters
 		{
 			throw new NotImplementedException();
 		}
-
-
 	}
 }

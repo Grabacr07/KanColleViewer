@@ -31,7 +31,7 @@ namespace Grabacr07.KanColleViewer.Interactivity
 		/// <see cref="Interval"/> 依存関係プロパティを識別します。
 		/// </summary>
 		public static readonly DependencyProperty IntervalProperty =
-			DependencyProperty.Register("Interval", typeof(TimeSpan), typeof(TimerBehavior), new UIPropertyMetadata(TimeSpan.FromSeconds(1), IntervalChangedCallback));
+			DependencyProperty.Register(nameof(Interval), typeof(TimeSpan), typeof(TimerBehavior), new UIPropertyMetadata(TimeSpan.FromSeconds(1), IntervalChangedCallback));
 
 		private static void IntervalChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
@@ -58,7 +58,7 @@ namespace Grabacr07.KanColleViewer.Interactivity
 		/// <see cref="Proc"/> 依存関係プロパティを識別します。
 		/// </summary>
 		public static readonly DependencyProperty ProcProperty =
-			DependencyProperty.Register("Proc", typeof(Func<string>), typeof(TimerBehavior), new UIPropertyMetadata(null));
+			DependencyProperty.Register(nameof(Proc), typeof(Func<string>), typeof(TimerBehavior), new UIPropertyMetadata(null));
 
 		#endregion
 

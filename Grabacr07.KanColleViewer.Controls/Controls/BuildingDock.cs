@@ -26,7 +26,7 @@ namespace Grabacr07.KanColleViewer.Controls
 			set { this.SetValue(NumberProperty, value); }
 		}
 		public static readonly DependencyProperty NumberProperty =
-			DependencyProperty.Register("Number", typeof(int), typeof(BuildingDock), new UIPropertyMetadata(0));
+			DependencyProperty.Register(nameof(Number), typeof(int), typeof(BuildingDock), new UIPropertyMetadata(0));
 
 		#endregion
 

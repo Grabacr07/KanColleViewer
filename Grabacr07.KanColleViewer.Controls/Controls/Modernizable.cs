@@ -15,7 +15,9 @@ namespace Grabacr07.KanColleViewer.Controls
 	{
 		static Modernizable()
 		{
-			DefaultStyleKeyProperty.OverrideMetadata(typeof(Modernizable), new FrameworkPropertyMetadata(typeof(Modernizable)));
+			DefaultStyleKeyProperty.OverrideMetadata(
+				typeof(Modernizable),
+				new FrameworkPropertyMetadata(typeof(Modernizable)));
 		}
 
 
@@ -27,7 +29,7 @@ namespace Grabacr07.KanColleViewer.Controls
 			set { this.SetValue(StatusProperty, value); }
 		}
 		public static readonly DependencyProperty StatusProperty =
-			DependencyProperty.Register("Status", typeof(ModernizableStatus), typeof(Modernizable), new UIPropertyMetadata(ModernizableStatus.Dummy, StatusPropertyChangedCallback));
+			DependencyProperty.Register(nameof(Status), typeof(ModernizableStatus), typeof(Modernizable), new UIPropertyMetadata(ModernizableStatus.Dummy, StatusPropertyChangedCallback));
 
 		private static void StatusPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
@@ -47,7 +49,7 @@ namespace Grabacr07.KanColleViewer.Controls
 			private set { this.SetValue(IsMaxProperty, value); }
 		}
 		public static readonly DependencyProperty IsMaxProperty =
-			DependencyProperty.Register("IsMax", typeof(bool), typeof(Modernizable), new UIPropertyMetadata(false));
+			DependencyProperty.Register(nameof(IsMax), typeof(bool), typeof(Modernizable), new UIPropertyMetadata(false));
 
 		#endregion
 
