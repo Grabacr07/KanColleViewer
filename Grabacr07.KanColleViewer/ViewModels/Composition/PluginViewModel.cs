@@ -13,29 +13,17 @@ namespace Grabacr07.KanColleViewer.ViewModels.Composition
 	{
 		private readonly INotifier notifier;
 
-		protected Plugin Plugin { get; private set; }
+		protected Plugin Plugin { get; }
 
 		#region metadata
 
-		public string Title
-		{
-			get { return this.Plugin.Metadata.Title; }
-		}
+		public string Title => this.Plugin.Metadata.Title;
 
-		public string Description
-		{
-			get { return this.Plugin.Metadata.Description; }
-		}
+		public string Description => this.Plugin.Metadata.Description;
 
-		public string Author
-		{
-			get { return this.Plugin.Metadata.Author; }
-		}
+		public string Author => this.Plugin.Metadata.Author;
 
-		public string Version
-		{
-			get { return this.Plugin.Metadata.Version; }
-		}
+		public string Version => this.Plugin.Metadata.Version;
 
 		#endregion
 
@@ -99,10 +87,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Composition
 
 		public void TestNotifier()
 		{
-			if (this.notifier != null)
-			{
-				this.notifier.Show("テスト", "これはテスト通知です。", App.ViewModelRoot.Activate, ex => this.ErrorMessage = ex.Message);
-			}
+			this.notifier?.Show("テスト", "これはテスト通知です。", App.ViewModelRoot.Activate, ex => this.ErrorMessage = ex.Message);
 		}
 	}
 }

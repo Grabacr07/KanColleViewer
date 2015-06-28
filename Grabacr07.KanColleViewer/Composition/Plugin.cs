@@ -13,9 +13,9 @@ namespace Grabacr07.KanColleViewer.Composition
 	{
 		private readonly List<object> functions = new List<object>();
 
-		public Guid Id { get; private set; }
+		public Guid Id { get; }
 
-		public PluginMetadata Metadata { get; private set; }
+		public PluginMetadata Metadata { get; }
 
 		internal Plugin(IPluginMetadata metadata)
 		{

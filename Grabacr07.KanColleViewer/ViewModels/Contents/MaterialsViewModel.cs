@@ -9,7 +9,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 {
 	public class MaterialsViewModel : ViewModel
 	{
-		public Materials Model { get; private set; }
+		public Materials Model { get; }
 
 		public MaterialsViewModel()
 		{

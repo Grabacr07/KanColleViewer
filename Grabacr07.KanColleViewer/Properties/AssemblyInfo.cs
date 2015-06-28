@@ -1,9 +1,7 @@
-﻿using System.Reflection;
-using System.Resources;
-using System.Runtime.CompilerServices;
+﻿using System;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
-using Grabacr07.KanColleViewer.Composition;
 
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
@@ -34,12 +32,13 @@ using Grabacr07.KanColleViewer.Composition;
 
 
 [assembly: ThemeInfo(
-	ResourceDictionaryLocation.None, //テーマ固有のリソース ディクショナリが置かれている場所
-	//(リソースがページ、
-	//またはアプリケーション リソース ディクショナリに見つからない場合に使用されます)
-	ResourceDictionaryLocation.SourceAssembly //汎用リソース ディクショナリが置かれている場所
-	//(リソースがページ、
-	//アプリケーション、またはいずれのテーマ固有のリソース ディクショナリにも見つからない場合に使用されます)
+	// テーマ固有のリソース ディクショナリが置かれている場所
+	// (リソースがページ、またはアプリケーション リソース ディクショナリに見つからない場合に使用されます)
+	ResourceDictionaryLocation.None,
+
+	// 汎用リソース ディクショナリが置かれている場所
+	// (リソースがページ、アプリケーション、またはいずれのテーマ固有のリソース ディクショナリにも見つからない場合に使用されます)
+	ResourceDictionaryLocation.SourceAssembly
 )]
 
 

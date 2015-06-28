@@ -14,7 +14,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		// QuickStateView は ContentControl に対し型ごとの DataTemplate を適用する形で実現するので
 		// 状況に応じた型がそれぞれ必要。これはその 1 つ。
 
-		public ConditionViewModel Condition { get; private set; }
+		public ConditionViewModel Condition { get; }
 
 		public HomeportViewModel(FleetState state)
 			: base(state)

@@ -9,7 +9,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 {
 	public abstract class QuickStateViewViewModel : ViewModel
 	{
-		public FleetState State { get; private set; }
+		public FleetState State { get; }
 
 		protected QuickStateViewViewModel(FleetState state)
 		{

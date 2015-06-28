@@ -11,10 +11,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 {
 	internal class ToastNotifier : NotifierBase
 	{
-		public override bool IsSupported
-		{
-			get { return Toast.IsSupported; }
-		}
+		public override bool IsSupported => Toast.IsSupported;
 
 		protected override void InitializeCore()
 		{

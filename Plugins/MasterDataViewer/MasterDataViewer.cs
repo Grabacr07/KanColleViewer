@@ -24,14 +24,8 @@ namespace Grabacr07.KanColleViewer.Plugins
 		{
 		}
 
-		string ITool.Name
-		{
-			get { return "MasterView"; }
-		}
+		string ITool.Name => "MasterView";
 
-		object ITool.View
-		{
-			get { return new Portal { DataContext = this.portalViewModel }; }
-		}
+		object ITool.View => new Portal { DataContext = this.portalViewModel };
 	}
 }

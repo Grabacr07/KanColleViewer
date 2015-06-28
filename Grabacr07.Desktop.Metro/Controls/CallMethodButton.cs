@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -31,7 +30,7 @@ namespace Grabacr07.Desktop.Metro.Controls
 			set { this.SetValue(MethodTargetProperty, value); }
 		}
 		public static readonly DependencyProperty MethodTargetProperty =
-			DependencyProperty.Register("MethodTarget", typeof(object), typeof(CallMethodButton), new UIPropertyMetadata(null));
+			DependencyProperty.Register(nameof(MethodTarget), typeof(object), typeof(CallMethodButton), new UIPropertyMetadata(null));
 
 		#endregion
 
@@ -43,7 +42,7 @@ namespace Grabacr07.Desktop.Metro.Controls
 			set { this.SetValue(MethodNameProperty, value); }
 		}
 		public static readonly DependencyProperty MethodNameProperty =
-			DependencyProperty.Register("MethodName", typeof(string), typeof(CallMethodButton), new UIPropertyMetadata(null));
+			DependencyProperty.Register(nameof(MethodName), typeof(string), typeof(CallMethodButton), new UIPropertyMetadata(null));
 
 		#endregion
 
@@ -55,7 +54,7 @@ namespace Grabacr07.Desktop.Metro.Controls
 			set { this.SetValue(MethodParameterProperty, value); }
 		}
 		public static readonly DependencyProperty MethodParameterProperty =
-			DependencyProperty.Register("MethodParameter", typeof(object), typeof(CallMethodButton), new UIPropertyMetadata(null, MethodParameterPropertyChangedCallback));
+			DependencyProperty.Register(nameof(MethodParameter), typeof(object), typeof(CallMethodButton), new UIPropertyMetadata(null, MethodParameterPropertyChangedCallback));
 
 		private static void MethodParameterPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{

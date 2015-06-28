@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
@@ -22,7 +21,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		protected void Update()
 		{
-			if (this.action != null) this.action();
+			this.action?.Invoke();
 		}
 	}
 

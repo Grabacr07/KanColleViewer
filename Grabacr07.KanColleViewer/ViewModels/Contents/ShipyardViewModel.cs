@@ -53,7 +53,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 		#endregion
 
-		public CreatedSlotItemViewModel CreatedSlotItem { get; private set; }
+		public CreatedSlotItemViewModel CreatedSlotItem { get; }
 
 
 		public ShipyardViewModel()
@@ -62,14 +62,14 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport.Repairyard)
 			{
-				{ "Docks", (sender, args) => this.UpdateRepairingDocks() },
+				{ nameof(Repairyard.Docks), (sender, args) => this.UpdateRepairingDocks() },
 			});
 			this.UpdateRepairingDocks();
 
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport.Dockyard)
 			{
-				{ "Docks", (sender, args) => this.UpdateBuildingDocks() },
-				{ "CreatedSlotItem", (sender, args) => this.UpdateSlotItem() },
+				{ nameof(Dockyard.Docks), (sender, args) => this.UpdateBuildingDocks() },
+				{ nameof(Dockyard.CreatedSlotItem), (sender, args) => this.UpdateSlotItem() },
 			});
 			this.UpdateBuildingDocks();
 		}

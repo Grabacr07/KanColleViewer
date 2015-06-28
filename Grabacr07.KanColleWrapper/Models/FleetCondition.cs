@@ -36,7 +36,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					this._RejuvenateTime = value;
 					this.notificated = false;
 					this.RaisePropertyChanged();
-					this.RaisePropertyChanged("IsRejuvenating");
+					this.RaisePropertyChanged(nameof(this.IsRejuvenating));
 				}
 			}
 		}

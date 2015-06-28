@@ -11,7 +11,7 @@ using System.Windows.Markup;
 
 namespace Grabacr07.Desktop.Metro.Controls
 {
-	[ContentProperty("RichTextTemplates")]
+	[ContentProperty(nameof(RichTextTemplates))]
 	public class RichTextView : RichTextBox
 	{
 		static RichTextView()
@@ -30,7 +30,7 @@ namespace Grabacr07.Desktop.Metro.Controls
 			set { this.SetValue(SourceProperty, value); }
 		}
 		public static readonly DependencyProperty SourceProperty =
-			DependencyProperty.Register("Source", typeof(IEnumerable<RichText>), typeof(RichTextView), new UIPropertyMetadata(null, SourcePropertyChangedCallback));
+			DependencyProperty.Register(nameof(Source), typeof(IEnumerable<RichText>), typeof(RichTextView), new UIPropertyMetadata(null, SourcePropertyChangedCallback));
 
 		private static void SourcePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
@@ -52,7 +52,7 @@ namespace Grabacr07.Desktop.Metro.Controls
 			set { this.SetValue(RichTextTemplatesProperty, value); }
 		}
 		public static readonly DependencyProperty RichTextTemplatesProperty =
-			DependencyProperty.Register("RichTextTemplates", typeof(Collection<DataTemplate>), typeof(RichTextView), new UIPropertyMetadata(new Collection<DataTemplate>(), RichTextTemplatesPropertyChangedCallback));
+			DependencyProperty.Register(nameof(RichTextTemplates), typeof(Collection<DataTemplate>), typeof(RichTextView), new UIPropertyMetadata(new Collection<DataTemplate>(), RichTextTemplatesPropertyChangedCallback));
 
 		private static void RichTextTemplatesPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
@@ -76,18 +76,12 @@ namespace Grabacr07.Desktop.Metro.Controls
 				foreach (var rt in this.Source)
 				{
 					var template = this.RichTextTemplates.FirstOrDefault(dt => (dt.DataType as Type) == rt.GetType());
-					if (template != null)
+					var presenter = template?.LoadContent() as RichTextInlinePresenter;
+					var inline = presenter?.Content as Inline;
+					if (inline != null)
 					{
-						var presenter = template.LoadContent() as RichTextInlinePresenter;
-						if (presenter != null)
-						{
-							var inline = presenter.Content as Inline;
-							if (inline != null)
-							{
-								inline.DataContext = rt;
-								paragraph.Inlines.Add(inline);
-							}
-						}
+						inline.DataContext = rt;
+						paragraph.Inlines.Add(inline);
 					}
 				}
 

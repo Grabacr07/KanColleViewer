@@ -9,7 +9,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 {
 	public class ShipViewModel : ViewModel
 	{
-		public Ship Ship { get; private set; }
+		public Ship Ship { get; }
 
 		public ShipViewModel(Ship ship)
 		{

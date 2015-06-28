@@ -13,12 +13,7 @@ namespace Grabacr07.KanColleViewer.Models
 	{
 		#region singleton members
 
-		private static readonly NotifierHost instance = new NotifierHost();
-
-		public static NotifierHost Instance
-		{
-			get { return instance; }
-		}
+		public static NotifierHost Instance { get; } = new NotifierHost();
 
 		#endregion
 
@@ -33,7 +28,7 @@ namespace Grabacr07.KanColleViewer.Models
 
 			KanColleClient.Current.PropertyChanged += (sender, args) =>
 			{
-				if (args.PropertyName == "IsStarted") InitializeCore();
+				if (args.PropertyName == nameof(KanColleClient.IsStarted)) InitializeCore();
 			};
 		}
 
@@ -43,19 +38,19 @@ namespace Grabacr07.KanColleViewer.Models
 
 			client.Homeport.Repairyard.PropertyChanged += (sender, args) =>
 			{
-				if (args.PropertyName == "Docks") UpdateRepairyard(client.Homeport.Repairyard);
+				if (args.PropertyName == nameof(Repairyard.Docks)) UpdateRepairyard(client.Homeport.Repairyard);
 			};
 			UpdateRepairyard(client.Homeport.Repairyard);
 
 			client.Homeport.Dockyard.PropertyChanged += (sender, args) =>
 			{
-				if (args.PropertyName == "Docks") UpdateDockyard(client.Homeport.Dockyard);
+				if (args.PropertyName == nameof(Dockyard.Docks)) UpdateDockyard(client.Homeport.Dockyard);
 			};
 			UpdateDockyard(client.Homeport.Dockyard);
 
 			client.Homeport.Organization.PropertyChanged += (sender, args) =>
 			{
-				if (args.PropertyName == "Fleets") UpdateFleets(client.Homeport.Organization);
+				if (args.PropertyName == nameof(Organization.Fleets)) UpdateFleets(client.Homeport.Organization);
 			};
 			UpdateFleets(client.Homeport.Organization);
 		}
@@ -119,7 +114,7 @@ namespace Grabacr07.KanColleViewer.Models
 					{
 						PluginHost.Instance.GetNotifier().Show(
 							"疲労回復完了",
-							string.Format("「{0}」に編成されている艦娘の疲労が回復しました。", args.FleetName),
+							$"「{args.FleetName}」に編成されている艦娘の疲労が回復しました。",
 							() => App.ViewModelRoot.Activate());
 					}
 				};

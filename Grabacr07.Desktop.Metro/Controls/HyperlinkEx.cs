@@ -19,7 +19,7 @@ namespace Grabacr07.Desktop.Metro.Controls
 			set { this.SetValue(UriProperty, value); }
 		}
 		public static readonly DependencyProperty UriProperty =
-			DependencyProperty.Register("Uri", typeof(Uri), typeof(HyperlinkEx), new UIPropertyMetadata(null));
+			DependencyProperty.Register(nameof(Uri), typeof(Uri), typeof(HyperlinkEx), new UIPropertyMetadata(null));
 
 		#endregion
 

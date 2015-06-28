@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,7 +20,7 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 			set { this.SetValue(NavigatorProperty, value); }
 		}
 		public static readonly DependencyProperty NavigatorProperty =
-			DependencyProperty.Register("Navigator", typeof(INavigator), typeof(NavigatorBehavior), new UIPropertyMetadata(null, NavigatorPropertyChangedCallback));
+			DependencyProperty.Register(nameof(Navigator), typeof(INavigator), typeof(NavigatorBehavior), new UIPropertyMetadata(null, NavigatorPropertyChangedCallback));
 
 		private static void NavigatorPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Livet.Messaging;
@@ -18,7 +17,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Messages
 			set { this.SetValue(TopProperty, value); }
 		}
 		public static readonly DependencyProperty TopProperty =
-			DependencyProperty.Register("Top", typeof(double?), typeof(SetWindowLocationMessage), new UIPropertyMetadata(null));
+			DependencyProperty.Register(nameof(Top), typeof(double?), typeof(SetWindowLocationMessage), new UIPropertyMetadata(null));
 
 		#endregion
 
@@ -30,7 +29,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Messages
 			set { this.SetValue(LeftProperty, value); }
 		}
 		public static readonly DependencyProperty LeftProperty =
-			DependencyProperty.Register("Left", typeof(double?), typeof(SetWindowLocationMessage), new UIPropertyMetadata(null));
+			DependencyProperty.Register(nameof(Left), typeof(double?), typeof(SetWindowLocationMessage), new UIPropertyMetadata(null));
 
 		#endregion
 

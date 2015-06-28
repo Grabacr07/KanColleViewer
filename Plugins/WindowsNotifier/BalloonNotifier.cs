@@ -13,10 +13,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 		private NotifyIcon notifyIcon;
 		private EventHandler activatedAction;
 
-		public override bool IsSupported
-		{
-			get { return !Toast.IsSupported; }
-		}
+		public override bool IsSupported => !Toast.IsSupported;
 
 		protected override void InitializeCore()
 		{

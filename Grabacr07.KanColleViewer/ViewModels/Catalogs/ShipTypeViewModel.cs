@@ -82,7 +82,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public void Set(bool selected)
 		{
 			this._IsSelected = selected;
-			this.RaisePropertyChanged("IsSelected");
+			this.RaisePropertyChanged(nameof(this.IsSelected));
 		}
 	}
 }

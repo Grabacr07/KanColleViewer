@@ -21,15 +21,9 @@ namespace Counter
 	{
 		private CounterViewModel viewModel;
 
-		string ITool.Name
-		{
-			get { return "Counter"; }
-		}
+		string ITool.Name => "Counter";
 
-		object ITool.View
-		{
-			get { return new CounterView { DataContext = this.viewModel, }; }
-		}
+		object ITool.View => new CounterView { DataContext = this.viewModel, };
 
 		public event EventHandler<NotifyEventArgs> NotifyRequested;
 

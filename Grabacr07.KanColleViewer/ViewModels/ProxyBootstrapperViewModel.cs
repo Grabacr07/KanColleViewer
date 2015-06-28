@@ -8,7 +8,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 {
 	public class ProxyBootstrapperViewModel : WindowViewModel
 	{
-		public ProxyBootstrapper Bootstrapper { get; private set; }
+		public ProxyBootstrapper Bootstrapper { get; }
 
 		#region Message 変更通知プロパティ
 

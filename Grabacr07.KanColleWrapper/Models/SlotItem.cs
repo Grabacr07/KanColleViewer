@@ -16,7 +16,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public string LevelText => this.Level >= 10 ? "★max" : this.Level >= 1 ? ("★+" + this.Level) : "";
 
-		public string NameWithLevel => string.Format("{0}{1}", this.Info.Name, this.Level >= 1 ? (" " + this.LevelText) : "");
+		public string NameWithLevel => $"{this.Info.Name}{(this.Level >= 1 ? (" " + this.LevelText) : "")}";
 
 		internal SlotItem(kcsapi_slotitem rawData)
 			: base(rawData)
@@ -36,7 +36,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public override string ToString()
 		{
-			return string.Format("ID = {0}, Name = \"{1}\", Level = {2}", this.Id, this.Info.Name, this.Level);
+			return $"ID = {this.Id}, Name = \"{this.Info.Name}\", Level = {this.Level}";
 		}
 	}
 }

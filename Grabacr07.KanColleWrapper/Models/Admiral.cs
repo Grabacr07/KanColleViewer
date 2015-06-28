@@ -97,7 +97,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public override string ToString()
 		{
-			return string.Format("ID = {0}, Nickname = \"{1}\", Level = {2}, Rank = \"{3}\"", this.MemberId, this.Nickname, this.Level, this.Rank);
+			return $"ID = {this.MemberId}, Nickname = \"{this.Nickname}\", Level = {this.Level}, Rank = \"{this.Rank}\"";
 		}
 	}
 }

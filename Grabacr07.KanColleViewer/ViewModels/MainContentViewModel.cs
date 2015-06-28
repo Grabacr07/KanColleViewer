@@ -11,20 +11,21 @@ namespace Grabacr07.KanColleViewer.ViewModels
 {
 	public class MainContentViewModel : ViewModel
 	{
-		public AdmiralViewModel Admiral { get; private set; }
-		public MaterialsViewModel Materials { get; private set; }
-		public ShipsViewModel Ships { get; private set; }
-		public SlotItemsViewModel SlotItems { get; private set; }
+		public AdmiralViewModel Admiral { get; }
 
-		public FleetsViewModel Fleets { get; private set; }
-		public ShipyardViewModel Shipyard { get; private set; }
-		public QuestsViewModel Quests { get; private set; }
-		public ExpeditionsViewModel Expeditions { get; private set; }
+		public MaterialsViewModel Materials { get; }
+
+		public ShipsViewModel Ships { get; }
+
+		public SlotItemsViewModel SlotItems { get; }
+
+		public FleetsViewModel Fleets { get; }
+		public ShipyardViewModel Shipyard { get; }
+		public QuestsViewModel Quests { get; }
+		public ExpeditionsViewModel Expeditions { get; }
 
 		public IList<TabItemViewModel> TabItems { get; set; }
 		public IList<TabItemViewModel> SystemTabItems { get; set; }
-
-		public VolumeViewModel Volume { get; private set; }
 
 		#region SelectedItem 変更通知プロパティ
 
@@ -46,6 +47,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		}
 
 		#endregion
+
+		public VolumeViewModel Volume { get; }
 
 
 		public MainContentViewModel()

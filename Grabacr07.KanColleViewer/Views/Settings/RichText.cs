@@ -25,7 +25,7 @@ namespace Grabacr07.KanColleViewer.Views.Settings
 
 		public override void Click()
 		{
-			if (this.TestMethod != null) this.TestMethod();
+			this.TestMethod?.Invoke();
 		}
 	}
 

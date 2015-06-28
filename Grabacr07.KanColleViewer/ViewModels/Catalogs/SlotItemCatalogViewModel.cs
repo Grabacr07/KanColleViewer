@@ -6,8 +6,6 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper;
-using Grabacr07.KanColleWrapper.Models;
-using Livet;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 {

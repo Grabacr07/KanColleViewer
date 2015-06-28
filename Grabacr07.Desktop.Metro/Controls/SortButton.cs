@@ -21,7 +21,7 @@ namespace Grabacr07.Desktop.Metro.Controls
 			set { this.SetValue(DirectionProperty, value); }
 		}
 		public static readonly DependencyProperty DirectionProperty =
-			DependencyProperty.Register("Direction", typeof(SortDirection), typeof(SortButton), new UIPropertyMetadata(SortDirection.None));
+			DependencyProperty.Register(nameof(Direction), typeof(SortDirection), typeof(SortButton), new UIPropertyMetadata(SortDirection.None));
 
 		#endregion
 	}

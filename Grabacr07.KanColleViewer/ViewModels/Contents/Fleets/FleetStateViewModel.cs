@@ -11,27 +11,15 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 {
 	public class FleetStateViewModel : ViewModel
 	{
-		public FleetState Source { get; private set; }
+		public FleetState Source { get; }
 
-		public string AverageLevel
-		{
-			get { return this.Source.AverageLevel.ToString("#0.##"); }
-		}
+		public string AverageLevel => this.Source.AverageLevel.ToString("#0.##");
 
-		public string TotalLevel
-		{
-			get { return this.Source.TotalLevel.ToString("###0"); }
-		}
+		public string TotalLevel => this.Source.TotalLevel.ToString("###0");
 
-		public string AirSuperiorityPotential
-		{
-			get { return this.Source.AirSuperiorityPotential.ToString("##0"); }
-		}
+		public string AirSuperiorityPotential => this.Source.AirSuperiorityPotential.ToString("##0");
 
-		public string ViewRange
-		{
-			get { return this.Source.ViewRange.ToString("##0.##"); }
-		}
+		public string ViewRange => this.Source.ViewRange.ToString("##0.##");
 
 		public string Speed
 		{
@@ -49,9 +37,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			}
 		}
 
-		public HomeportViewModel Homeport { get; private set; }
+		public HomeportViewModel Homeport { get; }
 
-		public SortieViewModel Sortie { get; private set; }
+		public SortieViewModel Sortie { get; }
 
 
 		public FleetStateViewModel(FleetState source)

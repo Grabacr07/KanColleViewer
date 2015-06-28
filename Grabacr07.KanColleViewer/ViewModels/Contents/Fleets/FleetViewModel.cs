@@ -13,17 +13,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 	/// </summary>
 	public class FleetViewModel : ItemViewModel
 	{
-		public Fleet Source { get; private set; }
+		public Fleet Source { get; }
 
-		public int Id
-		{
-			get { return this.Source.Id; }
-		}
+		public int Id => this.Source.Id;
 
-		public string Name
-		{
-			get { return string.IsNullOrEmpty(this.Source.Name.Trim()) ? "(第 " + this.Source.Id + " 艦隊)" : this.Source.Name; }
-		}
+		public string Name => string.IsNullOrEmpty(this.Source.Name.Trim()) ? "(第 " + this.Source.Id + " 艦隊)" : this.Source.Name;
 
 		/// <summary>
 		/// 艦隊に所属している艦娘のコレクションを取得します。
@@ -33,9 +27,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			get { return this.Source.Ships.Select(x => new ShipViewModel(x)).ToArray(); }
 		}
 
-		public FleetStateViewModel State { get; private set; }
+		public FleetStateViewModel State { get; }
 
-		public ExpeditionViewModel Expedition { get; private set; }
+		public ExpeditionViewModel Expedition { get; }
 
 		public ViewModel QuickStateView
 		{
@@ -70,7 +64,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			});
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet.State)
 			{
-				{ "Situation", (sender, args) => this.RaisePropertyChanged("QuickStateView") },
+				{ nameof(fleet.State.Situation), (sender, args) => this.RaisePropertyChanged(nameof(this.QuickStateView)) },
 			});
 
 			this.State = new FleetStateViewModel(fleet.State);

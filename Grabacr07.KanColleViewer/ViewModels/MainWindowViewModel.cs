@@ -112,10 +112,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-		public override sealed bool CanClose
-		{
-			get { return Models.Settings.Current.CanCloseWithoutConfirmation || base.CanClose; }
-		}
+		public override sealed bool CanClose => Models.Settings.Current.CanCloseWithoutConfirmation || base.CanClose;
 
 		public MainWindowViewModel()
 		{
@@ -136,7 +133,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			});
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(Models.Settings.Current)
 			{
-				{ "CanCloseWithoutConfirmation", (sender, args) => this.RaisePropertyChanged("CanClose") },
+				{ nameof(Models.Settings.CanCloseWithoutConfirmation), (sender, args) => this.RaisePropertyChanged(nameof(this.CanClose)) },
 			});
 
 			this.UpdateMode();

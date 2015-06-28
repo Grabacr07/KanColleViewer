@@ -23,7 +23,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			set { this.SetValue(AnchorVisibilityProperty, value); }
 		}
 		public static readonly DependencyProperty AnchorVisibilityProperty =
-			DependencyProperty.Register("AnchorVisibility", typeof(Visibility), typeof(AppIcon), new UIPropertyMetadata(Visibility.Visible));
+			DependencyProperty.Register(nameof(AnchorVisibility), typeof(Visibility), typeof(AppIcon), new UIPropertyMetadata(Visibility.Visible));
 
 		#endregion
 
@@ -35,7 +35,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			set { this.SetValue(BandVisibilityProperty, value); }
 		}
 		public static readonly DependencyProperty BandVisibilityProperty =
-			DependencyProperty.Register("BandVisibility", typeof(Visibility), typeof(AppIcon), new UIPropertyMetadata(Visibility.Visible));
+			DependencyProperty.Register(nameof(BandVisibility), typeof(Visibility), typeof(AppIcon), new UIPropertyMetadata(Visibility.Visible));
 
 		#endregion
 	}

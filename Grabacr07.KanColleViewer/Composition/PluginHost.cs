@@ -25,18 +25,13 @@ namespace Grabacr07.KanColleViewer.Composition
 
 		#region singleton members
 
-		private static readonly PluginHost instance = new PluginHost();
-
-		/// <summary>
+	    /// <summary>
 		/// <see cref="PluginHost"/> のインスタンスを取得します。
 		/// </summary>
 		/// <value><see cref="PluginHost"/> のインスタンス。</value>
-		public static PluginHost Instance
-		{
-			get { return instance; }
-		}
+		public static PluginHost Instance { get; } = new PluginHost();
 
-		#endregion
+	    #endregion
 
 
 		private CompositionContainer container;
@@ -66,21 +61,12 @@ namespace Grabacr07.KanColleViewer.Composition
 		{
 			private static List<TContract> plugins;
 
-			public static List<TContract> Plugins
-			{
-				get { return plugins ?? (plugins = new List<TContract>()); }
-			}
+			public static List<TContract> Plugins => plugins ?? (plugins = new List<TContract>());
 		}
 
-		public Plugin[] Plugins
-		{
-			get { return this.loadedPlugins.Values.ToArray(); }
-		}
+		public Plugin[] Plugins => this.loadedPlugins.Values.ToArray();
 
-		public IReadOnlyCollection<Exception> UnknownExceptions
-		{
-			get { return this.unknownExceptions; }
-		}
+		public IReadOnlyCollection<Exception> UnknownExceptions => this.unknownExceptions;
 
 
 		private PluginHost() { }
@@ -240,10 +226,7 @@ namespace Grabacr07.KanColleViewer.Composition
 
 		public void Dispose()
 		{
-			if (this.container != null)
-			{
-				this.container.Dispose();
-			}
+			this.container?.Dispose();
 		}
 	}
 }

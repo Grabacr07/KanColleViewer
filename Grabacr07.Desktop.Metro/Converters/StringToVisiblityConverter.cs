@@ -15,7 +15,7 @@ namespace Grabacr07.Desktop.Metro.Converters
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			return (value is string) && !string.IsNullOrEmpty((string)value)
+			return !string.IsNullOrEmpty(value as string)
 				? Visibility.Visible
 				: Visibility.Collapsed;
 		}

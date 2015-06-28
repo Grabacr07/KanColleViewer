@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleWrapper;
-using Livet;
 using Livet.EventListeners;
 using Livet.Messaging;
 
@@ -65,7 +63,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		{
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport.Organization)
 			{
-				{ "Fleets", (sender, args) => this.UpdateFleets() },
+				{ nameof(Organization.Fleets), (sender, args) => this.UpdateFleets() },
 			});
 			this.UpdateFleets();
 		}
@@ -73,8 +71,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		public void ShowFleetWindow()
 		{
 			var fleetwd = new FleetWindowViewModel();
-			var message = new TransitionMessage(fleetwd, "Show/FleetWindow");
-			this.Messenger.RaiseAsync(message);
+			var message = new TransitionMessage(fleetwd, TransitionMode.Normal, "Show/FleetWindow");
+			this.Messenger.Raise(message);
 		}
 
 

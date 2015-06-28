@@ -102,8 +102,7 @@
 							<StackPanel>
 								<StackPanel.Resources>
 									<Style TargetType="{x:Type TextBlock}"
-										   BasedOn="{StaticResource DefaultTextStyleKey}">
-									</Style>
+										   BasedOn="{StaticResource DefaultTextStyleKey}" />
 								</StackPanel.Resources>
 
 								<Border BorderBrush="{DynamicResource InactiveForegroundBrushKey}"

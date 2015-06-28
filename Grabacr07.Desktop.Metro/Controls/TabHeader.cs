@@ -11,7 +11,9 @@ namespace Grabacr07.Desktop.Metro.Controls
 	{
 		static TabHeader()
 		{
-			DefaultStyleKeyProperty.OverrideMetadata(typeof(TabHeader), new FrameworkPropertyMetadata(typeof(TabHeader)));
+			DefaultStyleKeyProperty.OverrideMetadata(
+				typeof(TabHeader),
+				new FrameworkPropertyMetadata(typeof(TabHeader)));
 		}
 	}
 }

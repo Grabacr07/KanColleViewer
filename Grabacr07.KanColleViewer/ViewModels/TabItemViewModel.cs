@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Livet;
 using MetroRadiance.Controls;
@@ -71,7 +70,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(ResourceService.Current)
 			{
-				(sender, args) => this.RaisePropertyChanged("Name"),
+				(sender, args) => this.RaisePropertyChanged(nameof(this.Name)),
 			});
 		}
 	}

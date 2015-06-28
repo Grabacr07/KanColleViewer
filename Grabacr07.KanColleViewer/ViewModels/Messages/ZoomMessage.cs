@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Livet.Messaging;
@@ -18,7 +17,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Messages
 			set { this.SetValue(ZoomFactorProperty, value); }
 		}
 		public static readonly DependencyProperty ZoomFactorProperty =
-			DependencyProperty.Register("ZoomFactor", typeof(int), typeof(ZoomMessage), new UIPropertyMetadata(100));
+			DependencyProperty.Register(nameof(ZoomFactor), typeof(int), typeof(ZoomMessage), new UIPropertyMetadata(100));
 
 		#endregion
 

@@ -3,25 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Text;
 using System.Threading.Tasks;
 using Livet;
 
 namespace Grabacr07.KanColleViewer.Models
 {
 	/// <summary>
-	/// 主にメイン ウィンドウのステータス バーに表示する
+	/// メイン ウィンドウ下部に表示されるステータス バーへのアクセスを提供します。
 	/// </summary>
 	public class StatusService : NotificationObject
 	{
 		#region static members
 
-		private static readonly StatusService current = new StatusService();
-
-		public static StatusService Current
-		{
-			get { return current; }
-		}
+		public static StatusService Current { get; } = new StatusService();
 
 		#endregion
 
@@ -78,7 +72,7 @@ namespace Grabacr07.KanColleViewer.Models
 
 		private void RaiseMessagePropertyChanged()
 		{
-			this.RaisePropertyChanged("Message");
+			this.RaisePropertyChanged(nameof(this.Message));
 		}
 	}
 }

@@ -15,7 +15,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			protected set { throw new NotImplementedException(); }
 		}
 
-		public FleetsViewModel Fleets { get; private set; }
+		public FleetsViewModel Fleets { get; }
 
 		public ExpeditionsViewModel(FleetsViewModel fleets)
 		{

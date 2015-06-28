@@ -33,7 +33,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 		{
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport.Organization)
 			{
-				{ "Ships", (sender, args) => this.Update() }
+				{ nameof(Organization.Ships), (sender, args) => this.Update() }
 			});
 			this.Update();
 		}

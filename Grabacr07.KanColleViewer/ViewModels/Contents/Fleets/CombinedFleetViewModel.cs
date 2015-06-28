@@ -10,24 +10,15 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 {
 	public class CombinedFleetViewModel : ItemViewModel
 	{
-		public CombinedFleet Source { get; private set; }
+		public CombinedFleet Source { get; }
 
-		public string Name
-		{
-			get { return this.Source.Name; }
-		}
+		public string Name => this.Source.Name;
 
-		public FleetStateViewModel State { get; private set; }
+		public FleetStateViewModel State { get; }
 
-		public ViewModel QuickStateView
-		{
-			get
-			{
-				return this.Source.State.Situation.HasFlag(FleetSituation.Sortie)
-					? this.State.Sortie
-					: this.State.Homeport as QuickStateViewViewModel;
-			}
-		}
+		public ViewModel QuickStateView => this.Source.State.Situation.HasFlag(FleetSituation.Sortie)
+			? this.State.Sortie
+			: this.State.Homeport as QuickStateViewViewModel;
 
 		public CombinedFleetViewModel(CombinedFleet fleet)
 		{
@@ -35,11 +26,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet)
 			{
-				{ "Name", (sender, args) => this.RaisePropertyChanged("Name") },
+				{ nameof(fleet.Name), (sender, args) => this.RaisePropertyChanged(nameof(this.Name)) },
 			});
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet.State)
 			{
-				{ "Situation", (sender, args) => this.RaisePropertyChanged("QuickStateView") },
+				{ nameof(fleet.State.Situation), (sender, args) => this.RaisePropertyChanged(nameof(this.QuickStateView)) },
 			});
 
 			this.State = new FleetStateViewModel(fleet.State);

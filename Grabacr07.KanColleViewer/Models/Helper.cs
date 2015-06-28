@@ -31,17 +31,14 @@ namespace Grabacr07.KanColleViewer.Models
 		/// <summary>
 		/// デザイナーのコンテキストで実行されているかどうかを取得します。
 		/// </summary>
-		public static bool IsInDesignMode
-		{
-			get { return DesignerProperties.GetIsInDesignMode(new DependencyObject()); }
-		}
+		public static bool IsInDesignMode => DesignerProperties.GetIsInDesignMode(new DependencyObject());
 
 
 		public static string CreateScreenshotFilePath()
 		{
 			var filePath = Path.Combine(
 				Settings.Current.ScreenshotFolder,
-				string.Format("KanColle-{0}", DateTimeOffset.Now.LocalDateTime.ToString("yyMMdd-HHmmssff")));
+				$"KanColle-{DateTimeOffset.Now.LocalDateTime.ToString("yyMMdd-HHmmssff")}");
 
 			filePath = Path.ChangeExtension(
 				filePath,

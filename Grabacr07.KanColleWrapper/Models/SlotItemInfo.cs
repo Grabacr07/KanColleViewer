@@ -52,7 +52,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public override string ToString()
 		{
-			return string.Format("ID = {0}, Name = \"{1}\", Type = {{{2}}}", this.Id, this.Name, this.RawData.api_type.ToString(", "));
+			return $"ID = {this.Id}, Name = \"{this.Name}\", Type = {{{this.RawData.api_type.ToString(", ")}}}";
 		}
 
 		#region static members

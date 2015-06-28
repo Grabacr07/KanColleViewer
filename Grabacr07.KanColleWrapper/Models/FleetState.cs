@@ -196,7 +196,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.CompositeDisposable.Add(this.Condition);
 			this.CompositeDisposable.Add(new PropertyChangedWeakEventListener(KanColleClient.Current.Settings)
 			{
-				{ "ViewRangeCalcType", (sender, args) => this.Calculate() },
+				{ nameof(KanColleClientSettings.ViewRangeCalcType), (sender, args) => this.Calculate() },
 			});
 		}
 

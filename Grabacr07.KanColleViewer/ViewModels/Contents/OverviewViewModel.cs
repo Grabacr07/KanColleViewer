@@ -16,7 +16,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			protected set { throw new NotImplementedException(); }
 		}
 
-		public MainContentViewModel Content { get; private set; }
+		public MainContentViewModel Content { get; }
 
 
 		public OverviewViewModel(MainContentViewModel owner)
@@ -54,15 +54,15 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 		public void ShowShipCatalog()
 		{
 			var catalog = new ShipCatalogWindowViewModel();
-			var message = new TransitionMessage(catalog, "Show/ShipCatalogWindow");
-			this.Messenger.RaiseAsync(message);
+			var message = new TransitionMessage(catalog, TransitionMode.Normal, "Show/ShipCatalogWindow");
+			this.Messenger.Raise(message);
 		}
 
 		public void ShowSlotItemCatalog()
 		{
 			var catalog = new SlotItemCatalogViewModel();
-			var message = new TransitionMessage(catalog, "Show/SlotItemCatalogWindow");
-			this.Messenger.RaiseAsync(message);
+			var message = new TransitionMessage(catalog, TransitionMode.Normal, "Show/SlotItemCatalogWindow");
+			this.Messenger.Raise(message);
 		}
 	}
 }

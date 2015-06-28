@@ -23,30 +23,24 @@ namespace Grabacr07.Desktop.Metro.Converters
 			{
 				result = Visibility.Visible; // true に対応する Visibility
 				var pValue = parameter as string;
-				if (pValue != null)
+				var p = pValue?.Split(':');
+				if (p?.Length >= 1)
 				{
-					var p = pValue.Split(':');
-					if (p.Length >= 1)
-					{
-						// 最初のパラメーターに Visible 以外が設定されていたら、true に対応する Visibility を上書き
-						if (CompareString(p[0], "Hidden")) result = Visibility.Hidden;
-						else if (CompareString(p[0], "Collapsed")) result = Visibility.Collapsed;
-					}
+					// 最初のパラメーターに Visible 以外が設定されていたら、true に対応する Visibility を上書き
+					if (CompareString(p[0], "Hidden")) result = Visibility.Hidden;
+					else if (CompareString(p[0], "Collapsed")) result = Visibility.Collapsed;
 				}
 			}
 			else
 			{
 				result = Visibility.Collapsed; // false に対応する Visibility
 				var pValue = parameter as string;
-				if (pValue != null)
+				var p = pValue?.Split(':');
+				if (p?.Length >= 2)
 				{
-					var p = pValue.Split(':');
-					if (p.Length >= 2)
-					{
-						// 2 番目のパラメーターに Collapsed 以外が設定されていたら、false に対応する Visibility を上書き
-						if (CompareString(p[1], "Visible")) result = Visibility.Visible;
-						else if (CompareString(p[1], "Hidden")) result = Visibility.Hidden;
-					}
+					// 2 番目のパラメーターに Collapsed 以外が設定されていたら、false に対応する Visibility を上書き
+					if (CompareString(p[1], "Visible")) result = Visibility.Visible;
+					else if (CompareString(p[1], "Hidden")) result = Visibility.Hidden;
 				}
 			}
 

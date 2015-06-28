@@ -694,8 +694,7 @@
 						<StackPanel>
 							<VisualStateManager.VisualStateGroups>
 								<VisualStateGroup x:Name="VisualStateGroup">
-									<VisualState x:Name="Normal">
-									</VisualState>
+									<VisualState x:Name="Normal" />
 									<VisualState x:Name="Blinking">
 										<Storyboard AutoReverse="True"
 													RepeatBehavior="Forever">

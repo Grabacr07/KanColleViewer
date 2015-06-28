@@ -13,7 +13,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 		#region ScriptErrorsSuppressed 添付プロパティ
 
 		public static readonly DependencyProperty ScriptErrorsSuppressedProperty =
-			DependencyProperty.RegisterAttached("ScriptErrorsSuppressed", typeof(bool), typeof(WebBrowserHelper), new PropertyMetadata(default(bool), ScriptErrorsSuppressedChangedCallback));
+			DependencyProperty.RegisterAttached(nameof(ScriptErrorsSuppressedProperty).Replace("Property", ""), typeof(bool), typeof(WebBrowserHelper), new PropertyMetadata(default(bool), ScriptErrorsSuppressedChangedCallback));
 
 		public static void SetScriptErrorsSuppressed(WebBrowser browser, bool value)
 		{
@@ -47,7 +47,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 		#region AllowWebBrowserDrop
 
 		public static readonly DependencyProperty AllowWebBrowserDropProperty =
-			DependencyProperty.RegisterAttached("AllowWebBrowserDrop", typeof(bool), typeof(WebBrowserHelper), new PropertyMetadata(true, AllowWebBrowserDropChangedCallback));
+			DependencyProperty.RegisterAttached(nameof(AllowWebBrowserDropProperty).Replace("Property", ""), typeof(bool), typeof(WebBrowserHelper), new PropertyMetadata(true, AllowWebBrowserDropChangedCallback));
 
 		public static void SetAllowWebBrowserDrop(DependencyObject element, bool value)
 		{

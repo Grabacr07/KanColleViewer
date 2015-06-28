@@ -25,35 +25,30 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 		protected override void OnAttached()
 		{
 			base.OnAttached();
-			this.AssociatedObject.StylusDown += OnStylusDown;
-			this.AssociatedObject.StylusSystemGesture += OnStylusSystemGesture;
+			this.AssociatedObject.StylusDown += this.OnStylusDown;
+			this.AssociatedObject.StylusSystemGesture += this.OnStylusSystemGesture;
 		}
 
 		protected override void OnDetaching()
 		{
-			this.AssociatedObject.StylusDown -= OnStylusDown;
-			this.AssociatedObject.StylusSystemGesture -= OnStylusSystemGesture;
+			this.AssociatedObject.StylusDown -= this.OnStylusDown;
+			this.AssociatedObject.StylusSystemGesture -= this.OnStylusSystemGesture;
 			base.OnDetaching();
 		}
 
 		private void OnStylusSystemGesture(object sender, StylusSystemGestureEventArgs e)
 		{
-			if (e.SystemGesture != SystemGesture.Drag)
-				return;
+			if (e.SystemGesture != SystemGesture.Drag) return;
 
-			if (this.downPoints == null)
-				return;
+			if (this.downPoints == null) return;
 
-			var hitTestResult = VisualTreeHelper.HitTest(this.AssociatedObject, downPoints[0].ToPoint());
-			if (hitTestResult == null)
-				return;
+			var hitTestResult = VisualTreeHelper.HitTest(this.AssociatedObject, this.downPoints[0].ToPoint());
+			if (hitTestResult == null) return;
 
 			var newPoints = e.GetStylusPoints(this.AssociatedObject);
-			if (newPoints.Count <= 0 || this.downPoints.Count <= 0)
-				return;
+			if (newPoints.Count <= 0 || this.downPoints.Count <= 0) return;
 
-			if (this.AssociatedObject is Button)
-				this.AssociatedObject.ReleaseStylusCapture();
+			if (this.AssociatedObject is Button) this.AssociatedObject.ReleaseStylusCapture();
 
 			var distanceX = newPoints[0].X - this.downPoints[0].X;
 			var distanceY = newPoints[0].Y - this.downPoints[0].Y;
@@ -74,7 +69,7 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 
 		private void OnStylusDown(object sender, StylusDownEventArgs e)
 		{
-			this.downPoints = e.GetStylusPoints(AssociatedObject);
+			this.downPoints = e.GetStylusPoints(this.AssociatedObject);
 		}
 	}
 }

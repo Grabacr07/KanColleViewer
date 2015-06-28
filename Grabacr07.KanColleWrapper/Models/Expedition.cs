@@ -69,7 +69,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					this._ReturnTime = value;
 					this.notificated = false;
 					this.RaisePropertyChanged();
-					this.RaisePropertyChanged("IsInExecution");
+					this.RaisePropertyChanged(nameof(this.IsInExecution));
 				}
 			}
 		}

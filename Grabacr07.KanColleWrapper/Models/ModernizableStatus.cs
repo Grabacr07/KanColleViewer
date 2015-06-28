@@ -56,7 +56,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
         public override string ToString()
         {
-            return string.Format("Status = {0}->{1}, Current = {2}{3}", this.Default, this.Max, this.Current, this.IsMax ? "(max)" : "");
+            return $"Status = {this.Default}->{this.Max}, Current = {this.Current}{(this.IsMax ? "(max)" : "")}";
         }
 
 

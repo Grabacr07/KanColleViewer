@@ -206,7 +206,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public override string ToString()
 		{
-			return string.Format("ID = {0}, Name = \"{1}\", Ships = {2}", this.Id, this.Name, this.Ships.Select(s => "\"" + s.Info.Name + "\"").ToString(","));
+			return $"ID = {this.Id}, Name = \"{this.Name}\", Ships = {this.Ships.Select(s => "\"" + s.Info.Name + "\"").ToString(",")}";
 		}
 	}
 }

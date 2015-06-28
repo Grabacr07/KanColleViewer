@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Models;
 using Livet;
@@ -56,7 +55,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					this.volume = Volume.GetInstance();
 					this.CompositeDisposable.Add(new PropertyChangedEventListener(this.volume)
 					{
-						{ "IsMute", (sender, args) => this.IsMute = this.volume.IsMute },
+						{ nameof(this.volume.IsMute), (sender, args) => this.IsMute = this.volume.IsMute },
 					});
 					this.IsMute = this.volume.IsMute;
 				}

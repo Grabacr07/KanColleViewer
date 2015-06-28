@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Models;
-using Grabacr07.KanColleViewer.Views.Controls;
 using Livet;
 using Livet.Commands;
 
@@ -109,17 +107,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		private ViewModelCommand _NavigateCommand;
 
-		public ViewModelCommand NavigateCommand
-		{
-			get
-			{
-				if (this._NavigateCommand == null)
-				{
-					this._NavigateCommand = new ViewModelCommand(this.Navigate);
-				}
-				return this._NavigateCommand;
-			}
-		}
+		public ViewModelCommand NavigateCommand => this._NavigateCommand ?? (this._NavigateCommand = new ViewModelCommand(this.Navigate));
 
 		#endregion
 
@@ -130,22 +118,22 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		public void GoBack()
 		{
-			if (this.GoBackRequested != null) this.GoBackRequested(this, new EventArgs());
+			this.GoBackRequested?.Invoke(this, new EventArgs());
 		}
 
 		public void GoForward()
 		{
-			if (this.GoForwardRequested != null) this.GoForwardRequested(this, new EventArgs());
+			this.GoForwardRequested?.Invoke(this, new EventArgs());
 		}
 
 		public void Refresh()
 		{
-			if (this.UriRequested != null) this.RefreshRequested(this, new EventArgs());
+			this.RefreshRequested?.Invoke(this, new EventArgs());
 		}
 
 		public void ReNavigate()
 		{
-			if (this.UriRequested != null) this.UriRequested(this, this.Source);
+			this.UriRequested?.Invoke(this, this.Source);
 		}
 
 		public void Navigate()

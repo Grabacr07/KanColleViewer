@@ -90,9 +90,8 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 					object ppvObject;
 					provider.QueryService(typeof(IWebBrowserApp).GUID, typeof(IWebBrowser2).GUID, out ppvObject);
 					var webBrowser = ppvObject as IWebBrowser2;
-					if (webBrowser == null) continue;
 
-					var iframeDocument = webBrowser.Document as HTMLDocument;
+					var iframeDocument = webBrowser?.Document as HTMLDocument;
 					if (iframeDocument == null) continue;
 
 					//flash要素が<embed>である場合と<object>である場合を判別して抽出

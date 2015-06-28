@@ -237,29 +237,26 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 					this._IsAscending = value;
 					this.Updated(this);
 					this.RaisePropertyChanged();
-					this.RaisePropertyChanged("IsDescending");
+					this.RaisePropertyChanged(nameof(this.IsDescending));
 				}
 			}
 		}
 
-		public bool IsDescending
-		{
-			get { return !this.IsAscending; }
-		}
+		public bool IsDescending => !this.IsAscending;
 
 		#endregion
 
 		internal void SafeUpdate(SortableColumn column)
 		{
 			this._Current = column;
-			this.RaisePropertyChanged("Current");
+			this.RaisePropertyChanged(nameof(this.Current));
 		}
 
 		internal void SafeUpdate(bool isAscending)
 		{
 			this._IsAscending = isAscending;
-			this.RaisePropertyChanged("IsAscending");
-			this.RaisePropertyChanged("IsDescending");
+			this.RaisePropertyChanged(nameof(this.IsAscending));
+			this.RaisePropertyChanged(nameof(this.IsDescending));
 		}
 	}
 

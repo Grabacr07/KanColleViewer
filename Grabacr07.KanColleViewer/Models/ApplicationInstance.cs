@@ -26,7 +26,7 @@ namespace Grabacr07.KanColleViewer.Models
 		/// <summary>
 		/// このインスタンスが、初回起動のインスタンスかどうかを示す値を取得します。
 		/// </summary>
-		public bool IsFirst { get; private set; }
+		public bool IsFirst { get; }
 
 		/// <summary>
 		/// 新たに起動されたインスタンスのコマンドラインを受信した時に発生します。
@@ -70,7 +70,7 @@ namespace Grabacr07.KanColleViewer.Models
 					this.channel = new IpcClientChannel();
 					ChannelServices.RegisterChannel(this.channel, true);
 
-					RemotingConfiguration.RegisterWellKnownClientType(typeof(ApplicationInstanceMessage), string.Format("ipc://{0}/{1}", portName, uri));
+					RemotingConfiguration.RegisterWellKnownClientType(typeof(ApplicationInstanceMessage), $"ipc://{portName}/{uri}");
 
 					this.appInstanceMessage = new ApplicationInstanceMessage();
 
@@ -85,10 +85,7 @@ namespace Grabacr07.KanColleViewer.Models
 		/// <param name="commandLineArgs">現在のプロセスのコマンドライン引数。</param>
 		private void OnMessageReceived(string[] commandLineArgs)
 		{
-			if (this.CommandLineArgsReceived != null)
-			{
-				this.CommandLineArgsReceived(this, new MessageEventArgs(commandLineArgs));
-			}
+			this.CommandLineArgsReceived?.Invoke(this, new MessageEventArgs(commandLineArgs));
 		}
 
 		/// <summary>
@@ -121,8 +118,7 @@ namespace Grabacr07.KanColleViewer.Models
 			/// </summary>
 			public void OnMessageReceived(string[] commandLineArgs)
 			{
-				if (this.MessageReceived != null)
-					this.MessageReceived(commandLineArgs);
+				this.MessageReceived?.Invoke(commandLineArgs);
 			}
 
 			public override object InitializeLifetimeService()
@@ -149,7 +145,7 @@ namespace Grabacr07.KanColleViewer.Models
 		/// <summary>
 		/// メッセージを取得します。
 		/// </summary>
-		public string[] CommandLineArgs { get; private set; }
+		public string[] CommandLineArgs { get; }
 
 		public MessageEventArgs(string[] commandLineArgs)
 		{

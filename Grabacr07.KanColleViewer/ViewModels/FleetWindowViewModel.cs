@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reactive;
 using System.Reactive.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Grabacr07.KanColleViewer.Properties;
-using Grabacr07.KanColleViewer.ViewModels.Contents;
 using Grabacr07.KanColleViewer.ViewModels.Contents.Fleets;
 using Grabacr07.KanColleWrapper;
-using Livet;
 using Livet.EventListeners;
 
 namespace Grabacr07.KanColleViewer.ViewModels
@@ -17,11 +12,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 	public class FleetWindowViewModel : WindowViewModel
 	{
 		private FleetViewModel[] allFleets;
-
-		public Organization Organization
-		{
-			get { return KanColleClient.Current.Homeport.Organization; }
-		}
 
 		#region Fleets 変更通知プロパティ
 
@@ -76,9 +66,9 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport.Organization)
 			{
 				// Fleets の PropertyChanged が来るのは、最初と艦隊数が増えたときくらい っぽい
-				{ "Fleets", (sender, args) => this.InitializeFleets() },
-				{ "Combined", (sender, args) => this.UpdateFleets() },
-				{ "CombinedFleet", (sender, args) => this.UpdateFleets() },
+				{ nameof(Organization.Fleets), (sender, args) => this.InitializeFleets() },
+				{ nameof(Organization.Combined), (sender, args) => this.UpdateFleets() },
+				{ nameof(Organization.CombinedFleet), (sender, args) => this.UpdateFleets() },
 			});
 
 			this.InitializeFleets();

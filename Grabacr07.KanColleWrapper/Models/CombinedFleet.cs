@@ -65,7 +65,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet)
 				{
-					{ "Name", (sender, args) => this.UpdateName() },
+					{ nameof(Fleet.Name), (sender, args) => this.UpdateName() },
 				});
 
 				var source = fleet;

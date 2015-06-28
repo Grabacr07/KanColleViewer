@@ -6,8 +6,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interactivity;
 using System.Windows.Navigation;
-using Grabacr07.Desktop.Metro;
-using Grabacr07.KanColleViewer.Properties;
 using MetroRadiance.Core;
 using mshtml;
 
@@ -41,10 +39,8 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 			var gameFrame = document.getElementById("game_frame");
 			if (gameFrame == null)
 			{
-				if (document.url.Contains(".swf?"))
-					gameFrame = document.body;
-				else
-					return;
+				if (document.url.Contains(".swf?")) gameFrame = document.body;
+				else return;
 			}
 
 			var target = gameFrame.document as HTMLDocument;
