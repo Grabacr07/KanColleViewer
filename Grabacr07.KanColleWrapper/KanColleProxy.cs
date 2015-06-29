@@ -35,7 +35,8 @@ namespace Grabacr07.KanColleWrapper
 					HttpProxy.UpstreamProxyHost = null;
 					return;
 				}
-				HttpProxy.UpstreamProxyHost = value.IsEnabled ? value.Host : null;
+				HttpProxy.IsEnableUpstreamProxy = value.IsEnabled;
+				HttpProxy.UpstreamProxyHost = string.IsNullOrWhiteSpace(value.Host) ? null : value.Host;
 				HttpProxy.UpstreamProxyPort = value.Port;
 			}
 		}

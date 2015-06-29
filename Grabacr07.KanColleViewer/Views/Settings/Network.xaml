@@ -74,7 +74,7 @@
 			<TextBlock Text="※サーバーをホスト名で指定した場合、動作が遅くなることがあるため、IPアドレスでの指定を推奨します。"
 					   Style="{DynamicResource DetailTextStyleKey}"
 					   Margin="0,4" />
-			<TextBlock Text="※設定しなかった場合や HTTP プロトコル以外は、アプリケーション起動時の Internet Explorer の設定が使用されます。"
+			<TextBlock Text="※本設定を無効にした場合や HTTP プロトコル以外の通信は、アプリケーション起動時の Internet Explorer の設定が使用されます。"
 					   Style="{DynamicResource DetailTextStyleKey}"
 					   Margin="0,4" />
 		</StackPanel>
