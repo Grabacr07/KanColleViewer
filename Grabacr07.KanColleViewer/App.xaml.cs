@@ -56,13 +56,12 @@ namespace Grabacr07.KanColleViewer
 				this.compositeDisposable.Add(Settings.Current.Save);
 
 				// Views.Settings.ProxyBootstrapper.Show() より先に MainWindow 設定しておく、これ大事
-				this.MainWindow = new MainWindow();
+				ViewModelRoot = new MainWindowViewModel();
+				this.MainWindow = new MainWindow { DataContext = ViewModelRoot, };
 
 				if (BootstrapProxy())
 				{
 					this.compositeDisposable.Add(ProxyBootstrapper.Shutdown);
-
-					this.MainWindow.DataContext = (ViewModelRoot = new MainWindowViewModel());
 					this.MainWindow.Show();
 
 					appInstance.CommandLineArgsReceived += (sender, args) =>
