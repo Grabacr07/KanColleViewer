@@ -12,13 +12,9 @@ namespace Grabacr07.KanColleViewer.ViewModels
 	public class MainContentViewModel : ViewModel
 	{
 		public AdmiralViewModel Admiral { get; }
-
 		public MaterialsViewModel Materials { get; }
-
 		public ShipsViewModel Ships { get; }
-
 		public SlotItemsViewModel SlotItems { get; }
-
 		public FleetsViewModel Fleets { get; }
 		public ShipyardViewModel Shipyard { get; }
 		public QuestsViewModel Quests { get; }

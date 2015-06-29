@@ -124,16 +124,12 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(StatusService.Current)
 			{
-				{ () => StatusService.Current.Message, (sender, args) => this.StatusMessage = StatusService.Current.Message },
+				{ nameof(StatusService.Message), (sender, args) => this.StatusMessage = StatusService.Current.Message },
 			});
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current)
 			{
-				{ () => KanColleClient.Current.IsStarted, (sender, args) => this.UpdateMode() },
-				{ () => KanColleClient.Current.IsInSortie, (sender, args) => this.UpdateMode() },
-			});
-			this.CompositeDisposable.Add(new PropertyChangedEventListener(Models.Settings.Current)
-			{
-				{ nameof(Models.Settings.CanCloseWithoutConfirmation), (sender, args) => this.RaisePropertyChanged(nameof(this.CanClose)) },
+				{ nameof(KanColleClient.IsStarted), (sender, args) => this.UpdateMode() },
+				{ nameof(KanColleClient.IsInSortie), (sender, args) => this.UpdateMode() },
 			});
 
 			this.UpdateMode();
