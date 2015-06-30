@@ -36,6 +36,7 @@ namespace Grabacr07.KanColleViewer.Models
 
 		public ApplicationInstance()
 		{
+#if !DEBUG
 			// アプリケーションの GUID を取得
 			var portName = ((GuidAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(GuidAttribute))).Value;
 
@@ -77,6 +78,7 @@ namespace Grabacr07.KanColleViewer.Models
 					this.IsFirst = false;
 				}
 			}
+#endif
 		}
 
 		/// <summary>
