@@ -37,7 +37,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					this._SelectedItem = value;
 					this.RaisePropertyChanged();
 
-					App.ViewModelRoot.StatusBar = value;
+					Application.Current.MainWindowViewModel.StatusBar = value;
 				}
 			}
 		}

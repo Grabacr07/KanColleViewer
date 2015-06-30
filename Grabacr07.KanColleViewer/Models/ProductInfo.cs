@@ -6,37 +6,49 @@ using System.Threading.Tasks;
 
 namespace Grabacr07.KanColleViewer.Models
 {
-	public class ProductInfo
+	public static class ProductInfo
 	{
-		private readonly Assembly assembly = Assembly.GetExecutingAssembly();
-		private string _Title;
-		private string _Description;
-		private string _Company;
-		private string _Product;
-		private string _Copyright;
-		private string _Trademark;
-		private Version _Version;
-		private string _VersionString;
-		private IReadOnlyCollection<Library> _Libraries;
+		private static readonly Assembly assembly = Assembly.GetExecutingAssembly();
+		private static readonly Lazy<string> titleLazy = new Lazy<string>(() => ((AssemblyTitleAttribute)Attribute.GetCustomAttribute(assembly, typeof(AssemblyTitleAttribute))).Title);
+		private static readonly Lazy<string> descriptionLazy = new Lazy<string>(() => ((AssemblyDescriptionAttribute)Attribute.GetCustomAttribute(assembly, typeof(AssemblyDescriptionAttribute))).Description);
+		private static readonly Lazy<string> companyLazy = new Lazy<string>(() => ((AssemblyCompanyAttribute)Attribute.GetCustomAttribute(assembly, typeof(AssemblyCompanyAttribute))).Company);
+		private static readonly Lazy<string> productLazy = new Lazy<string>(() => ((AssemblyProductAttribute)Attribute.GetCustomAttribute(assembly, typeof(AssemblyProductAttribute))).Product);
+		private static readonly Lazy<string> copyrightLazy = new Lazy<string>(() => ((AssemblyCopyrightAttribute)Attribute.GetCustomAttribute(assembly, typeof(AssemblyCopyrightAttribute))).Copyright);
+		private static readonly Lazy<string> trademarkLazy = new Lazy<string>(() => ((AssemblyTrademarkAttribute)Attribute.GetCustomAttribute(assembly, typeof(AssemblyTrademarkAttribute))).Trademark);
+		private static readonly Lazy<string> versionLazy = new Lazy<string>(() => $"{Version.ToString(3)}{(IsBetaRelease ? " β" : "")}{(Version.Revision == 0 ? "" : " rev." + Version.Revision)}");
+		private static readonly Lazy<IReadOnlyCollection<Library>> librariesLazy = new Lazy<IReadOnlyCollection<Library>>(() => new List<Library>
+		{
+			// ToDo: ライセンス乗っけた方がいいかな、という気がしなくもない
+			new Library("Reactive Extensions", new Uri("http://rx.codeplex.com/")),
+			new Library("Interactive Extensions", new Uri("http://rx.codeplex.com/")),
+			new Library("Windows API Code Pack", new Uri("http://archive.msdn.microsoft.com/WindowsAPICodePack")),
+			new Library("Livet", new Uri("http://ugaya40.net/livet")),
+			new Library("DynamicJson", new Uri("http://dynamicjson.codeplex.com/")),
+			new Library("Nekoxy", new Uri("https://github.com/veigr/Nekoxy")),
+		});
 
-		public string Title => this._Title ?? (this._Title = ((AssemblyTitleAttribute)Attribute.GetCustomAttribute(this.assembly, typeof(AssemblyTitleAttribute))).Title);
 
-		public string Description => this._Description ?? (this._Description = ((AssemblyDescriptionAttribute)Attribute.GetCustomAttribute(this.assembly, typeof(AssemblyDescriptionAttribute))).Description);
+		public static string Title => titleLazy.Value;
 
-		public string Company => this._Company ?? (this._Company = ((AssemblyCompanyAttribute)Attribute.GetCustomAttribute(this.assembly, typeof(AssemblyCompanyAttribute))).Company);
+		public static string Description => descriptionLazy.Value;
 
-		public string Product => this._Product ?? (this._Product = ((AssemblyProductAttribute)Attribute.GetCustomAttribute(this.assembly, typeof(AssemblyProductAttribute))).Product);
+		public static string Company => companyLazy.Value;
 
-		public string Copyright => this._Copyright ?? (this._Copyright = ((AssemblyCopyrightAttribute)Attribute.GetCustomAttribute(this.assembly, typeof(AssemblyCopyrightAttribute))).Copyright);
+		public static string Product => productLazy.Value;
 
-		public string Trademark => this._Trademark ?? (this._Trademark = ((AssemblyTrademarkAttribute)Attribute.GetCustomAttribute(this.assembly, typeof(AssemblyTrademarkAttribute))).Trademark);
+		public static string Copyright => copyrightLazy.Value;
 
-		public Version Version => this._Version ?? (this._Version = this.assembly.GetName().Version);
+		public static string Trademark => trademarkLazy.Value;
 
-		public string VersionString => this._VersionString ?? (this._VersionString = $"{this.Version.ToString(3)}{(this.IsBetaRelease ? " β" : "")}{(this.Version.Revision == 0 ? "" : " rev." + this.Version.Revision)}");
+		public static Version Version => assembly.GetName().Version;
+
+		public static string VersionString => versionLazy.Value;
+
+		public static IReadOnlyCollection<Library> Libraries => librariesLazy.Value;
+
 
 		// ReSharper disable ConvertPropertyToExpressionBody
-		public bool IsBetaRelease
+		public static bool IsBetaRelease
 		{
 			get
 			{
@@ -48,7 +60,7 @@ namespace Grabacr07.KanColleViewer.Models
 			}
 		}
 
-		public bool IsDebug
+		public static bool IsDebug
 		{
 			get
 			{
@@ -61,26 +73,16 @@ namespace Grabacr07.KanColleViewer.Models
 		}
 		// ReSharper restore ConvertPropertyToExpressionBody
 
-		public IReadOnlyCollection<Library> Libraries => this._Libraries ?? (this._Libraries = new List<Library>
+		public class Library
 		{
-			new Library("Reactive Extensions", new Uri("http://rx.codeplex.com/")),
-			new Library("Interactive Extensions", new Uri("http://rx.codeplex.com/")),
-			new Library("Windows API Code Pack", new Uri("http://archive.msdn.microsoft.com/WindowsAPICodePack")),
-			new Library("Livet", new Uri("http://ugaya40.net/livet")),
-			new Library("DynamicJson", new Uri("http://dynamicjson.codeplex.com/")),
-			new Library("Nekoxy", new Uri("https://github.com/veigr/Nekoxy")),
-		});
-	}
+			public string Name { get; private set; }
+			public Uri Url { get; private set; }
 
-	public class Library
-	{
-		public string Name { get; private set; }
-		public Uri Url { get; private set; }
-
-		public Library(string name, Uri url)
-		{
-			this.Name = name;
-			this.Url = url;
+			public Library(string name, Uri url)
+			{
+				this.Name = name;
+				this.Url = url;
+			}
 		}
 	}
 }

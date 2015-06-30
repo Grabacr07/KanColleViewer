@@ -67,7 +67,7 @@
 					</Viewbox>
 				</metro2:CallMethodButton>
 
-				<metro2:CallMethodButton MethodTarget="{Binding Source={x:Static root:App.ViewModelRoot}}"
+				<metro2:CallMethodButton MethodTarget="{Binding Source={x:Static root:Application.Current}, Path=MainWindowViewModel}"
 										 MethodName="TakeScreenshot"
 										 Style="{DynamicResource CircleButtonStyleKey}"
 										 Padding="6">

@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Application = System.Windows.Application;
+using Grabacr07.KanColleViewer.Models;
 
 namespace Grabacr07.KanColleViewer.Plugins
 {
@@ -23,7 +23,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 			if (!Uri.TryCreate(iconUri, UriKind.Absolute, out uri))
 				return;
 
-			var streamResourceInfo = Application.GetResourceStream(uri);
+			var streamResourceInfo = System.Windows.Application.GetResourceStream(uri);
 			if (streamResourceInfo == null)
 				return;
 
@@ -31,7 +31,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 			{
 				this.notifyIcon = new NotifyIcon
 				{
-					Text = App.ProductInfo.Title,
+					Text = ProductInfo.Title,
 					Icon = new Icon(stream),
 					Visible = true,
 				};
@@ -55,10 +55,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 
 		public override void Dispose()
 		{
-			if (this.notifyIcon != null)
-			{
-				this.notifyIcon.Dispose();
-			}
+			this.notifyIcon?.Dispose();
 		}
 	}
 }

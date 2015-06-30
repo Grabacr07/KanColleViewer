@@ -11,7 +11,7 @@
 			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
 			 mc:Ignorable="d"
 			 d:DesignWidth="800"
-			 DataContext="{Binding Source={x:Static root:App.ViewModelRoot}, Path=Navigator}">
+			 DataContext="{Binding Source={x:Static root:Application.Current}, Path=MainWindowViewModel.Navigator}">
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="Auto" />

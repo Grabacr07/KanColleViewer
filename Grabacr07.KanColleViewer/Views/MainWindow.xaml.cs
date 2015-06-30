@@ -23,16 +23,5 @@ namespace Grabacr07.KanColleViewer.Views
 			InitializeComponent();
 			Current = this;
 		}
-
-		protected override void OnClosing(CancelEventArgs e)
-		{
-			// ToDo: 確認ダイアログを実装したかった…
-			//e.Cancel = true;
-
-			//var dialog = new ExitDialog { Owner = this, };
-			//dialog.Show();
-
-			base.OnClosing(e);
-		}
 	}
 }

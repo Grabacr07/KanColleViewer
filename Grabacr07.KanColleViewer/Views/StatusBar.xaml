@@ -25,7 +25,7 @@
 		<Rectangle x:Name="Col0"
 				   Margin="5,0" />
 		<TextBlock Grid.Column="0"
-				   Text="{Binding Source={x:Static root:App.ViewModelRoot}, Path=StatusMessage}"
+				   Text="{Binding Source={x:Static root:Application.Current}, Path=MainWindowViewModel.StatusMessage}"
 				   Style="{DynamicResource DefaultTextStyleKey}"
 				   Foreground="{DynamicResource AccentForegroundBrushKey}"
 				   TextWrapping="NoWrap"
@@ -33,7 +33,7 @@
 				   Margin="5,0" />
 
 		<ContentControl Grid.Column="1"
-						Content="{Binding Source={x:Static root:App.ViewModelRoot}, Path=StatusBar}">
+						Content="{Binding Source={x:Static root:Application.Current}, Path=MainWindowViewModel.StatusBar}">
 			<ContentControl.Resources>
 				<DataTemplate DataType="{x:Type vm:StartContentViewModel}" />
 				<DataTemplate DataType="{x:Type vmContents:OverviewViewModel}" />

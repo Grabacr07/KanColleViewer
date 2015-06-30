@@ -35,6 +35,9 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		private bool _CanClose = true;
 
+		/// <summary>
+		/// ウィンドウを閉じることができるかどうかを示す値を取得または設定します。
+		/// </summary>
 		public virtual bool CanClose
 		{
 			get { return this._CanClose; }

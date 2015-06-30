@@ -31,7 +31,7 @@
 
 		<StackPanel Grid.ColumnSpan="2"
 					TextOptions.TextFormattingMode="Ideal">
-			<TextBlock Text="{Binding Source={x:Static root:App.ProductInfo}, Path=Product, Mode=OneWay}"
+			<TextBlock Text="{Binding Source={x:Static models:ProductInfo.Product}, Mode=OneWay}"
 					   FontFamily="Segoe UI Light"
 					   FontSize="44"
 					   Foreground="{DynamicResource ActiveForegroundBrushKey}"
@@ -41,12 +41,12 @@
 					   FontSize="16"
 					   Margin="0,-9,0,0" />
 			<TextBlock Margin="-1,0,0,-4">
-				<Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=Title, Mode=OneWay}"
+				<Run Text="{Binding Source={x:Static models:ProductInfo.Title}, Mode=OneWay}"
 					 FontFamily="Yu Gothic Light"
 					 FontSize="20"
 					 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 				<Run Text="  " />
-				<Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=VersionString, StringFormat=Version {0}, Mode=OneWay}"
+				<Run Text="{Binding Source={x:Static models:ProductInfo.VersionString}, StringFormat=Version {0}, Mode=OneWay}"
 					 FontFamily="Segoe UI Light"
 					 FontSize="20"
 					 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
@@ -127,9 +127,9 @@
 				   VerticalAlignment="Bottom"
 				   Margin="0,0,0,16"
 				   TextWrapping="Wrap">
-			<Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=Copyright, Mode=OneWay}" />
+			<Run Text="{Binding Source={x:Static models:ProductInfo.Copyright}, Mode=OneWay}" />
 			<LineBreak />
-			<Run Text="{Binding Source={x:Static root:App.ProductInfo}, Path=Product, Mode=OneWay}" />
+			<Run Text="{Binding Source={x:Static models:ProductInfo.Product}, Mode=OneWay}" />
 			<Run Text="is" />
 			<Run Text="OSS"
 				 ToolTip="Open Source Software" />

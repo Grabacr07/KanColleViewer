@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Models;
+using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleViewer.ViewModels.Messages;
 using Grabacr07.KanColleViewer.Views;
 using Grabacr07.KanColleWrapper;
@@ -36,12 +37,12 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					case Mode.NotStarted:
 						this.Content = StartContentViewModel.Instance;
 						this.StatusBar = StartContentViewModel.Instance;
-						StatusService.Current.Set(Properties.Resources.StatusBar_NotStarted);
+						StatusService.Current.Set(Resources.StatusBar_NotStarted);
 						ThemeService.Current.ChangeAccent(Accent.Purple);
 						break;
 					case Mode.Started:
 						this.Content = this.mainContent ?? (this.mainContent = new MainContentViewModel());
-						StatusService.Current.Set(Properties.Resources.StatusBar_Ready);
+						StatusService.Current.Set(Resources.StatusBar_Ready);
 						ThemeService.Current.ChangeAccent(Accent.Blue);
 						break;
 					case Mode.InSortie:
@@ -112,11 +113,13 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-		public override sealed bool CanClose => Models.Settings.Current.CanCloseWithoutConfirmation || base.CanClose;
+		public override sealed bool CanClose => base.CanClose
+												|| Models.Settings.Current.CanCloseWithoutConfirmation      // 設定で「確認なしで終了」が有効なら終了できる
+												|| Application.Current.State != ApplicationState.Running; // アプリケーションが起動中か終了処理中なら終了できる
 
 		public MainWindowViewModel()
 		{
-			this.Title = App.ProductInfo.Title;
+			this.Title = ProductInfo.Title;
 			this.CanClose = false;
 
 			this.Navigator = new NavigatorViewModel();
@@ -133,7 +136,11 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			});
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(Models.Settings.Current)
 			{
-				{ nameof(Models.Settings.CanCloseWithoutConfirmation), (sender, args) => this.RaisePropertyChanged(nameof(this.CanClose)) },
+				{ nameof(Models.Settings.CanCloseWithoutConfirmation), (sender, args) => this.RaiseCanCloseChanged() },
+			});
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(Application.Current)
+			{
+				{ nameof(Application.State), (sender, args) => this.RaiseCanCloseChanged() },
 			});
 
 			this.UpdateMode();
@@ -147,8 +154,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			this.Messenger.Raise(message);
 
 			var notify = message.Response.IsSuccess
-				? Properties.Resources.Screenshot_Saved + Path.GetFileName(path)
-				: Properties.Resources.Screenshot_Failed + message.Response.Exception.Message;
+				? Resources.Screenshot_Saved + Path.GetFileName(path)
+				: Resources.Screenshot_Failed + message.Response.Exception.Message;
 			StatusService.Current.Notify(notify);
 		}
 
@@ -163,6 +170,11 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				this.CanClose = true;
 				this.InvokeOnUIDispatcher(this.Close);
 			}
+		}
+
+		private void RaiseCanCloseChanged()
+		{
+			this.RaisePropertyChanged(nameof(this.CanClose));
 		}
 
 		private void UpdateMode()
