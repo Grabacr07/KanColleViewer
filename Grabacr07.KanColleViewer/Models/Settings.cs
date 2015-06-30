@@ -268,34 +268,6 @@ namespace Grabacr07.KanColleViewer.Models
 			}
 		}
 
-		#region old properties
-
-		public bool EnableProxy
-		{
-			get { return this.ProxySettings.IsEnabled; }
-			set { this.ProxySettings.IsEnabled = value; }
-		}
-
-		public bool EnableSSLProxy
-		{
-			get { return this.ProxySettings.IsEnabledOnSSL; }
-			set { this.ProxySettings.IsEnabledOnSSL = value; }
-		}
-
-		public string ProxyHost
-		{
-			get { return this.ProxySettings.Host; }
-			set { this.ProxySettings.Host = value; }
-		}
-
-		public ushort ProxyPort
-		{
-			get { return this.ProxySettings.Port; }
-			set { this.ProxySettings.Port = value; }
-		}
-
-		#endregion
-
 		#endregion
 
 		#region IsEnableChangeLocalProxyPort 変更通知プロパティ
