@@ -70,7 +70,9 @@ namespace Grabacr07.KanColleViewer
 			this.ChangeState(ApplicationState.Startup);
 
 			var appInstance = new ApplicationInstance();
+#if !DEBUG
 			if (appInstance.IsFirst)
+#endif
 			{
 				this.DispatcherUnhandledException += (sender, args) =>
 				{
@@ -123,12 +125,14 @@ namespace Grabacr07.KanColleViewer
 					this.Shutdown();
 				}
 			}
+#if !DEBUG
 			else
 			{
 				appInstance.SendCommandLineArgs(e.Args);
 				this.ChangeState(ApplicationState.Terminate);
 				this.Shutdown();
 			}
+#endif
 		}
 
 
