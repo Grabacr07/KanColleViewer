@@ -7,18 +7,10 @@ namespace Grabacr07.KanColleWrapper
 {
 	public interface IProxySettings
 	{
-		bool IsEnabled { get; set; }
-
-		bool IsEnabledOnSSL { get; set; }
+		ProxySettingType SettingType { get; set; }
 
 		string Host { get; set; }
 
 		ushort Port { get; set; }
-
-		bool IsAuthRequired { get; set; }
-
-		string Username { get; set; }
-
-		string Password { get; set; }
 	}
 }
