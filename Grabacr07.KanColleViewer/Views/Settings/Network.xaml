@@ -10,9 +10,10 @@
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 xmlns:converters="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
 			 mc:Ignorable="d"
 			 d:DesignWidth="500"
-			 d:DesignHeight="300"
+			 d:DesignHeight="400"
 			 d:DataContext="{d:DesignInstance viewModels:SettingsViewModel}">
 	<UserControl.Resources>
 		<ResourceDictionary>
@@ -26,11 +27,27 @@
 		<TextBlock Text="{Binding Resources.Settings_Proxy, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
-		<CheckBox x:Name="CheckBoxUseProxy"
-				  Content="{Binding Resources.Settings_Proxy_Enable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-				  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=ProxySettings.IsEnabled}"
-				  Margin="20,0,0,0" />
-		<StackPanel IsEnabled="{Binding IsChecked, ElementName=CheckBoxUseProxy}"
+		<TextBlock Text="※反映にはアプリケーションの再起動が必要です。"
+					   Style="{DynamicResource DetailTextStyleKey}"
+					   Margin="20,0,0,0" />
+		<RadioButton x:Name="CheckDirectAccess"
+					 GroupName="ProxySettings"
+					 Content="プロキシ サーバーを使用しない"
+					 IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=ProxySettings.SettingType, Mode=TwoWay, ConverterParameter=DirectAccess, Converter={StaticResource EnumToBooleanConverter}}"
+					 Margin="20,10,0,0"/>
+		
+		<RadioButton x:Name="CheckUseSystemProxy"
+					 GroupName="ProxySettings"
+					 Content="Internet Explorer のプロキシ設定を使用する"
+					 IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=ProxySettings.SettingType, Mode=TwoWay, ConverterParameter=SystemProxy, Converter={StaticResource EnumToBooleanConverter}}"
+					 Margin="20,10,0,0"/>
+		
+		<RadioButton x:Name="CheckUseSpecificProxy"
+					 GroupName="ProxySettings"
+					 Content="{Binding Resources.Settings_Proxy_Enable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+					 IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=ProxySettings.SettingType, Mode=TwoWay, ConverterParameter=SpecificProxy, Converter={StaticResource EnumToBooleanConverter}}"
+					 Margin="20,10,0,0" />
+		<StackPanel IsEnabled="{Binding IsChecked, ElementName=CheckUseSpecificProxy}"
 					Margin="40,6,0,6">
 			<Grid Margin="0,4">
 				<Grid.ColumnDefinitions>
@@ -68,13 +85,10 @@
 				</metro:PromptTextBox>
 			</Grid>
 
-			<TextBlock Text="※反映にはアプリケーションの再起動が必要です。"
-					   Style="{DynamicResource DetailTextStyleKey}"
-					   Margin="0,4" />
 			<TextBlock Text="※サーバーをホスト名で指定した場合、動作が遅くなることがあるため、IPアドレスでの指定を推奨します。"
 					   Style="{DynamicResource DetailTextStyleKey}"
 					   Margin="0,4" />
-			<TextBlock Text="※設定しなかった場合や HTTP プロトコル以外は、アプリケーション起動時の Internet Explorer の設定が使用されます。"
+			<TextBlock Text="※HTTP プロトコル以外の通信は、アプリケーション起動時の Internet Explorer の設定が使用されます。"
 					   Style="{DynamicResource DetailTextStyleKey}"
 					   Margin="0,4" />
 		</StackPanel>
@@ -87,10 +101,13 @@
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
 				   Margin="0,10,0,8" />
 
+		<TextBlock Text="※反映にはアプリケーションの再起動が必要です。"
+					   Style="{DynamicResource DetailTextStyleKey}"
+					   Margin="20,0,0,0" />
 		<CheckBox x:Name="CheckBoxChangeLocalProxyPort"
 				  Content="待ち受けポートの変更を行う"
 				  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=IsEnableChangeLocalProxyPort}"
-				  Margin="20,0,0,0" />
+				  Margin="20,10,0,0" />
 		<StackPanel IsEnabled="{Binding IsChecked, ElementName=CheckBoxChangeLocalProxyPort}"
 					Margin="40,6,0,6">
 			<Grid Margin="0,4">
@@ -127,9 +144,6 @@
 					<Run Text=")" />
 				</TextBlock>
 			</Grid>
-			<TextBlock Text="※反映にはアプリケーションの再起動が必要です。"
-					   Style="{DynamicResource DetailTextStyleKey}"
-					   Margin="0,4" />
 		</StackPanel>
 
 
