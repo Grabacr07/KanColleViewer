@@ -9,9 +9,10 @@
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
 			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
+			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 mc:Ignorable="d"
 			 d:DesignWidth="800"
-			 DataContext="{Binding Source={x:Static root:Application.Instance}, Path=MainWindowViewModel.Navigator}">
+			 d:DataContext="{d:DesignInstance viewModels:NavigatorViewModel}">
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="Auto" />

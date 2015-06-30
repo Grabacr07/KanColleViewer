@@ -28,7 +28,7 @@
 	</UserControl.Resources>
 
 	<StackPanel>
-		<views:BrowserNavigator />
+		<views:BrowserNavigator DataContext="{Binding Source={x:Static root:Application.Instance}, Path=MainWindowViewModel.Navigator}" />
 		<TextBlock Text="{Binding Resources.Settings_BrowserControl_Notice, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource DefaultTextStyleKey}"
 				   Margin="43,-2,0,10" />

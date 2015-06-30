@@ -11,17 +11,14 @@ using System.Windows.Media;
 
 namespace Grabacr07.KanColleViewer.Views
 {
-	/// <summary>
-	/// KanColleViewer のメイン ウィンドウを表します。
-	/// </summary>
-	partial class MainWindow
-	{
-		public static MainWindow Current { get; private set; }
-
-		public MainWindow()
-		{
-			InitializeComponent();
-			Current = this;
-		}
-	}
+    /// <summary>
+    /// KanColleViewer のメイン ウィンドウを表します。
+    /// </summary>
+    partial class MainWindow
+    {
+        public MainWindow()
+        {
+            this.InitializeComponent();
+        }
+    }
 }

@@ -14,16 +14,16 @@ using System.Windows.Shapes;
 
 namespace Grabacr07.KanColleViewer.Views
 {
-	/// <summary>
-	/// FleetWindow.xaml の相互作用ロジック
-	/// </summary>
-	partial class FleetWindow
-	{
-		public FleetWindow()
-		{
-			this.InitializeComponent();
+    /// <summary>
+    /// FleetWindow.xaml の相互作用ロジック
+    /// </summary>
+    partial class FleetWindow
+    {
+        public FleetWindow()
+        {
+            this.InitializeComponent();
 
-			MainWindow.Current.Closed += (sender, args) => this.Close();
-		}
-	}
+            Application.Instance.MainWindow.Closed += (sender, args) => this.Close();
+        }
+    }
 }

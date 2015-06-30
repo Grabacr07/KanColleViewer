@@ -201,6 +201,9 @@
     <Compile Include="Views\Behaviors\ScreenshotAction.cs" />
     <Compile Include="Views\Behaviors\SetStyleSheetBehavior.cs" />
     <Compile Include="Views\Behaviors\SetWindowLocationAction.cs" />
+    <Compile Include="Views\BrowserWindow.xaml.cs">
+      <DependentUpon>BrowserWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Contents\StateDetailIndicator.xaml.cs">
       <DependentUpon>StateDetailIndicator.xaml</DependentUpon>
     </Compile>
@@ -319,6 +322,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\BrowserNavigator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BrowserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
