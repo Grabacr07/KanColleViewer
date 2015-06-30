@@ -54,6 +54,7 @@ namespace Grabacr07.KanColleViewer
 				this.compositeDisposable.Add(PluginHost.Instance);
 				this.compositeDisposable.Add(NotifierHost.Instance);
 				this.compositeDisposable.Add(Settings.Current.Save);
+				this.compositeDisposable.Add(appInstance);
 
 				// Views.Settings.ProxyBootstrapper.Show() より先に MainWindow 設定しておく、これ大事
 				ViewModelRoot = new MainWindowViewModel();
