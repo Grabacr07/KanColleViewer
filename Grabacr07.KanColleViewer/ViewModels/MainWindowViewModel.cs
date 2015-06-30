@@ -115,7 +115,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		public override sealed bool CanClose => base.CanClose
 												|| Models.Settings.Current.CanCloseWithoutConfirmation      // 設定で「確認なしで終了」が有効なら終了できる
-												|| Application.Current.State != ApplicationState.Running; // アプリケーションが起動中か終了処理中なら終了できる
+												|| Application.Instance.State != ApplicationState.Running; // アプリケーションが起動中か終了処理中なら終了できる
 
 		public MainWindowViewModel()
 		{
@@ -138,7 +138,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			{
 				{ nameof(Models.Settings.CanCloseWithoutConfirmation), (sender, args) => this.RaiseCanCloseChanged() },
 			});
-			this.CompositeDisposable.Add(new PropertyChangedEventListener(Application.Current)
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(Application.Instance)
 			{
 				{ nameof(Application.State), (sender, args) => this.RaiseCanCloseChanged() },
 			});

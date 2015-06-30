@@ -19,7 +19,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Dev
 			PluginHost.Instance.GetNotifier().Show(
 				Properties.Resources.Debug_NotificationMessage_Title,
 				Properties.Resources.Debug_NotificationMessage,
-				() => Application.Current.MainWindowViewModel.Activate());
+				() => Application.Instance.MainWindowViewModel.Activate());
 		}
 
 	}

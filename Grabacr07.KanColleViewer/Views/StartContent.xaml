@@ -308,7 +308,7 @@
 					BorderThickness="1,1,0,0"
 					BorderBrush="{DynamicResource BackgroundBrushKey}"
 					Margin="0,8,0,0"
-					DataContext="{Binding Source={x:Static root:Application.Current}, Path=MainWindowViewModel.Settings}"
+					DataContext="{Binding Source={x:Static root:Application.Instance}, Path=MainWindowViewModel.Settings}"
 					Visibility="{Binding ElementName=SettingsTab, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
 				<ScrollViewer VerticalScrollBarVisibility="Auto"
 							  PanningMode="Both">

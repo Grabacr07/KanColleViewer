@@ -67,7 +67,7 @@ namespace Grabacr07.KanColleViewer.Models
 						PluginHost.Instance.GetNotifier().Show(
 							Resources.Repairyard_NotificationMessage_Title,
 							string.Format(Resources.Repairyard_NotificationMessage, args.DockId, args.Ship.Info.Name),
-							() => Application.Current.MainWindowViewModel.Activate());
+							() => Application.Instance.MainWindowViewModel.Activate());
 					}
 				};
 			}
@@ -88,7 +88,7 @@ namespace Grabacr07.KanColleViewer.Models
 						PluginHost.Instance.GetNotifier().Show(
 							Resources.Dockyard_NotificationMessage_Title,
 							string.Format(Resources.Dockyard_NotificationMessage, args.DockId, shipName),
-							() => Application.Current.MainWindowViewModel.Activate());
+							() => Application.Instance.MainWindowViewModel.Activate());
 					}
 				};
 			}
@@ -105,7 +105,7 @@ namespace Grabacr07.KanColleViewer.Models
 						PluginHost.Instance.GetNotifier().Show(
 							Resources.Expedition_NotificationMessage_Title,
 							string.Format(Resources.Expedition_NotificationMessage, args.FleetName),
-							() => Application.Current.MainWindowViewModel.Activate());
+							() => Application.Instance.MainWindowViewModel.Activate());
 					}
 				};
 
@@ -116,7 +116,7 @@ namespace Grabacr07.KanColleViewer.Models
 						PluginHost.Instance.GetNotifier().Show(
 							"疲労回復完了",
 							$"「{args.FleetName}」に編成されている艦娘の疲労が回復しました。",
-							() => Application.Current.MainWindowViewModel.Activate());
+							() => Application.Instance.MainWindowViewModel.Activate());
 					}
 				};
 			}

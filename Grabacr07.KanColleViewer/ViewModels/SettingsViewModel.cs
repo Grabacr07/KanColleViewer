@@ -344,12 +344,12 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		public void ClearZoomFactor()
 		{
-			Application.Current.MainWindowViewModel.Messenger.Raise(new InteractionMessage { MessageKey = "WebBrowser.Zoom" });
+			Application.Instance.MainWindowViewModel.Messenger.Raise(new InteractionMessage { MessageKey = "WebBrowser.Zoom" });
 		}
 
 		public void SetLocationLeft()
 		{
-			Application.Current.MainWindowViewModel.Messenger.Raise(new SetWindowLocationMessage { MessageKey = "Window.Location", Left = 0.0 });
+			Application.Instance.MainWindowViewModel.Messenger.Raise(new SetWindowLocationMessage { MessageKey = "Window.Location", Left = 0.0 });
 		}
 
 

@@ -52,7 +52,7 @@ namespace Grabacr07.KanColleViewer
 		/// <summary>
 		/// 現在の <see cref="AppDomain"/> の <see cref="Application"/> オブジェクトを取得します。
 		/// </summary>
-		public static new Application Current => (Application)System.Windows.Application.Current;
+		public static Application Instance => (Application)Current;
 
 		/// <summary>
 		/// アプリケーションのメイン ウィンドウを制御する <see cref="MainWindowViewModel"/> オブジェクトを取得します。
@@ -70,7 +70,7 @@ namespace Grabacr07.KanColleViewer
 			this.ChangeState(ApplicationState.Startup);
 
 			var appInstance = new ApplicationInstance();
-			if (appInstance.IsFirst || true)
+			if (appInstance.IsFirst)
 			{
 				this.DispatcherUnhandledException += (sender, args) =>
 				{
