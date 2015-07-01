@@ -230,6 +230,9 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>KanColleProxy.Endpoints.cs</LastGenOutput>
     </None>
+    <None Include="DynamicJson.license.txt">
+      <DependentUpon>DynamicJson.cs</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -237,7 +240,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
