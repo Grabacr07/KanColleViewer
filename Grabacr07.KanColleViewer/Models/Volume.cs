@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using Vannatech.CoreAudio;
-using Vannatech.CoreAudio.Interfaces;
+using Grabacr07.KanColleViewer.Models.CoreAudio;
 using Livet;
 using Vannatech.CoreAudio.Constants;
 using Vannatech.CoreAudio.Enumerations;
 using Vannatech.CoreAudio.Externals;
+using Vannatech.CoreAudio.Interfaces;
 
 namespace Grabacr07.KanColleViewer.Models
 {
@@ -35,7 +36,7 @@ namespace Grabacr07.KanColleViewer.Models
 		}
 
 		#endregion
-		
+
 		public static Volume GetInstance()
 		{
 			var volume = new Volume();
@@ -44,27 +45,26 @@ namespace Grabacr07.KanColleViewer.Models
 			var devenum = (IMMDeviceEnumerator)Activator.CreateInstance(deviceEnumeratorType);
 
 			IMMDevice device;
-			IsHResultOk(devenum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia, out device));
+			devenum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia, out device).ThrowIfError();
 
 			object objSessionManager;
-			IsHResultOk(device.Activate(new Guid(ComIIDs.IAudioSessionManager2IID), (uint)CLSCTX.CLSCTX_INPROC_SERVER, IntPtr.Zero, out objSessionManager));
+			device.Activate(new Guid(ComIIDs.IAudioSessionManager2IID), (uint)CLSCTX.CLSCTX_INPROC_SERVER, IntPtr.Zero, out objSessionManager).ThrowIfError();
 			var sessionManager = objSessionManager as IAudioSessionManager2;
-			if (sessionManager == null)
-				throw new Exception("Session is not found.");
+			if (sessionManager == null) throw new Exception("Session is not found.");
 
 			IAudioSessionEnumerator sessions;
-			IsHResultOk(sessionManager.GetSessionEnumerator(out sessions));
+			sessionManager.GetSessionEnumerator(out sessions).ThrowIfError();
 
-			//sessionIDは空にするとデフォルトセッションが取れるらしい
+			// sessionID は空にするとデフォルトセッションが取れるらしい
 			ISimpleAudioVolume simpleAudioVolume;
-			IsHResultOk(sessionManager.GetSimpleAudioVolume(Guid.Empty, 0, out simpleAudioVolume));
+			sessionManager.GetSimpleAudioVolume(Guid.Empty, 0, out simpleAudioVolume).ThrowIfError();
 			volume.simpleAudioVolume = simpleAudioVolume;
 
-			IsHResultOk(simpleAudioVolume.GetMute(out volume._IsMute));
+			simpleAudioVolume.GetMute(out volume._IsMute).ThrowIfError();
 
-			//sessionControlのインスタンスは取っておかないと通知来なくなる
-			IsHResultOk(sessionManager.GetAudioSessionControl(Guid.Empty, 0, out volume.sessionControl));
-			IsHResultOk(volume.sessionControl.RegisterAudioSessionNotification(volume));
+			// sessionControl のインスタンスは取っておかないと通知来なくなる
+			sessionManager.GetAudioSessionControl(Guid.Empty, 0, out volume.sessionControl).ThrowIfError();
+			volume.sessionControl.RegisterAudioSessionNotification(volume).ThrowIfError();
 
 			return volume;
 		}
@@ -72,18 +72,15 @@ namespace Grabacr07.KanColleViewer.Models
 		public void ToggleMute()
 		{
 			var newValue = !this.IsMute;
-			IsHResultOk(this.simpleAudioVolume.SetMute(newValue, Guid.NewGuid()));
+			this.simpleAudioVolume.SetMute(newValue, Guid.NewGuid()).ThrowIfError();
+
 			bool resultValue;
-			IsHResultOk(this.simpleAudioVolume.GetMute(out resultValue));
+			this.simpleAudioVolume.GetMute(out resultValue).ThrowIfError();
+
 			this.IsMute = resultValue;
 		}
-		
-		private static void IsHResultOk(int hResult)
-		{
-			if (hResult != 0) throw new Exception("Session is not found.");
-		}
 
-		#region IAudioSessionEvents
+		#region IAudioSessionEvents members
 
 		int IAudioSessionEvents.OnDisplayNameChanged(string displayName, ref Guid eventContext)
 		{
@@ -129,5 +126,19 @@ namespace Grabacr07.KanColleViewer.Models
 		}
 
 		#endregion
+	}
+}
+
+namespace Grabacr07.KanColleViewer.Models.CoreAudio
+{
+	internal static class HResultExtensions
+	{
+		/// <summary>
+		/// HRESULT 値が S_OK (0) 以外の場合、<see cref="COMException"/> をスローします。
+		/// </summary>
+		public static void ThrowIfError(this int hResult, string message = "Session is not found.")
+		{
+			if (hResult != 0) throw new COMException(message, hResult);
+		}
 	}
 }
