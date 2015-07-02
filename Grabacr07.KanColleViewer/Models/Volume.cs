@@ -55,12 +55,14 @@ namespace Grabacr07.KanColleViewer.Models
 			IAudioSessionEnumerator sessions;
 			IsHResultOk(sessionManager.GetSessionEnumerator(out sessions));
 
+			//sessionIDは空にするとデフォルトセッションが取れるらしい
 			ISimpleAudioVolume simpleAudioVolume;
 			IsHResultOk(sessionManager.GetSimpleAudioVolume(Guid.Empty, 0, out simpleAudioVolume));
 			volume.simpleAudioVolume = simpleAudioVolume;
 
 			IsHResultOk(simpleAudioVolume.GetMute(out volume._IsMute));
-			
+
+			//sessionControlのインスタンスは取っておかないと通知来なくなる
 			IsHResultOk(sessionManager.GetAudioSessionControl(Guid.Empty, 0, out volume.sessionControl));
 			IsHResultOk(volume.sessionControl.RegisterAudioSessionNotification(volume));
 
@@ -83,46 +85,46 @@ namespace Grabacr07.KanColleViewer.Models
 
 		#region IAudioSessionEvents
 
-		public int OnDisplayNameChanged(string displayName, ref Guid eventContext)
+		int IAudioSessionEvents.OnDisplayNameChanged(string displayName, ref Guid eventContext)
 		{
-			Debug.WriteLine(nameof(this.OnDisplayNameChanged));
+			Debug.WriteLine(nameof(IAudioSessionEvents.OnDisplayNameChanged));
 			return 0;
 		}
 
-		public int OnIconPathChanged(string iconPath, ref Guid eventContext)
+		int IAudioSessionEvents.OnIconPathChanged(string iconPath, ref Guid eventContext)
 		{
-			Debug.WriteLine(nameof(this.OnIconPathChanged));
+			Debug.WriteLine(nameof(IAudioSessionEvents.OnIconPathChanged));
 			return 0;
 		}
 
-		public int OnSimpleVolumeChanged(float volume, bool isMuted, ref Guid eventContext)
+		int IAudioSessionEvents.OnSimpleVolumeChanged(float volume, bool isMuted, ref Guid eventContext)
 		{
-			Debug.WriteLine(nameof(this.OnSimpleVolumeChanged));
+			Debug.WriteLine(nameof(IAudioSessionEvents.OnSimpleVolumeChanged));
 			this.IsMute = isMuted;
 			return 0;
 		}
 
-		public int OnChannelVolumeChanged(uint channelCount, IntPtr newVolumes, uint channelIndex, ref Guid eventContext)
+		int IAudioSessionEvents.OnChannelVolumeChanged(uint channelCount, IntPtr newVolumes, uint channelIndex, ref Guid eventContext)
 		{
-			Debug.WriteLine(nameof(this.OnChannelVolumeChanged));
+			Debug.WriteLine(nameof(IAudioSessionEvents.OnChannelVolumeChanged));
 			return 0;
 		}
 
-		public int OnGroupingParamChanged(ref Guid groupingId, ref Guid eventContext)
+		int IAudioSessionEvents.OnGroupingParamChanged(ref Guid groupingId, ref Guid eventContext)
 		{
-			Debug.WriteLine(nameof(this.OnGroupingParamChanged));
+			Debug.WriteLine(nameof(IAudioSessionEvents.OnGroupingParamChanged));
 			return 0;
 		}
 
-		public int OnStateChanged(AudioSessionState state)
+		int IAudioSessionEvents.OnStateChanged(AudioSessionState state)
 		{
-			Debug.WriteLine(nameof(this.OnStateChanged));
+			Debug.WriteLine(nameof(IAudioSessionEvents.OnStateChanged));
 			return 0;
 		}
 
-		public int OnSessionDisconnected(AudioSessionDisconnectReason disconnectReason)
+		int IAudioSessionEvents.OnSessionDisconnected(AudioSessionDisconnectReason disconnectReason)
 		{
-			Debug.WriteLine(nameof(this.OnSessionDisconnected));
+			Debug.WriteLine(nameof(IAudioSessionEvents.OnSessionDisconnected));
 			return 0;
 		}
 
