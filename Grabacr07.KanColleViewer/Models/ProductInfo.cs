@@ -20,11 +20,11 @@ namespace Grabacr07.KanColleViewer.Models
 		{
 			// ToDo: ライセンス乗っけた方がいいかな、という気がしなくもない
 			new Library("Reactive Extensions", new Uri("http://rx.codeplex.com/")),
-			new Library("Interactive Extensions", new Uri("http://rx.codeplex.com/")),
 			new Library("Windows API Code Pack", new Uri("http://archive.msdn.microsoft.com/WindowsAPICodePack")),
 			new Library("Livet", new Uri("http://ugaya40.net/livet")),
 			new Library("DynamicJson", new Uri("http://dynamicjson.codeplex.com/")),
 			new Library("Nekoxy", new Uri("https://github.com/veigr/Nekoxy")),
+			new Library(".NET Core Audio APIs", new Uri("https://netcoreaudio.codeplex.com/")),
 		});
 
 
