@@ -17,8 +17,7 @@
 			 mc:Ignorable="d"
 			 d:DesignWidth="700"
 			 d:DesignHeight="300"
-			 d:DataContext="{d:DesignInstance viewModels:QuestsViewModel}"
-			 MaxWidth="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}, Path=ActualWidth,Mode=OneWay}">
+			 d:DataContext="{d:DesignInstance viewModels:QuestsViewModel}">
 	<ScrollViewer VerticalScrollBarVisibility="Auto"
 				  PanningMode="Both">
 		<Grid>
