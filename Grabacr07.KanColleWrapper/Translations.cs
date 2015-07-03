@@ -326,7 +326,7 @@ namespace Grabacr07.KanColleWrapper
 
 			return TranslationList.Where(x => x.Element("TR-Name") != null).Where(x => x.Element("FlagLv") != null).Count();
 		}
-		public string GetTranslation(string JPString, TranslationType Type, Object RawData = null, int ID = -1)
+		public string GetTranslation(string JPString, TranslationType Type, bool IsLogReader, Object RawData = null, int ID = -1)
 		{
 			if (!EnableTranslations)
 				return JPString;
@@ -337,8 +337,8 @@ namespace Grabacr07.KanColleWrapper
 
 				if (TranslationList == null && RawData != null)
 				{
-					AddTranslation(RawData, Type);
-					if (ID < 0) return "[" + ID.ToString() + "] " + JPString;
+					if (!IsLogReader) AddTranslation(RawData, Type);
+					if (ID < 0 && !IsLogReader) return "[" + ID.ToString() + "] " + JPString;
 					else return JPString;
 				}
 
@@ -389,8 +389,8 @@ namespace Grabacr07.KanColleWrapper
 				Debug.WriteLine(ex);
 			}
 
-			if (RawData != null) AddTranslation(RawData, Type);
-			if (ID < 0) return JPString;
+			if (RawData != null && !IsLogReader) AddTranslation(RawData, Type);
+			if (ID < 0 && IsLogReader) return JPString;
 			else return "[" + ID.ToString() + "] " + JPString;
 		}
 

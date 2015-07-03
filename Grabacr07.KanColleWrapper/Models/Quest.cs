@@ -55,7 +55,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public string Title
 		{
-			get { return KanColleClient.Current.Translations.GetTranslation(RawData.api_title, TranslationType.QuestTitle, this.RawData, RawData.api_no); }
+			get { return KanColleClient.Current.Translations.GetTranslation(RawData.api_title, TranslationType.QuestTitle, false, this.RawData, RawData.api_no); }
 		}
 
 		/// <summary>
@@ -63,7 +63,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public string Detail
 		{
-			get { return KanColleClient.Current.Translations.GetTranslation(RawData.api_detail, TranslationType.QuestDetail, this.RawData, RawData.api_no); }
+			get { return KanColleClient.Current.Translations.GetTranslation(RawData.api_detail, TranslationType.QuestDetail, false, this.RawData, RawData.api_no); }
 		}
 
 

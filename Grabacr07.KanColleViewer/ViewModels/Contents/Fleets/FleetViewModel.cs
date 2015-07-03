@@ -445,7 +445,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			{
 				int flagship = Convert.ToInt32(FlagShipType);
 				if (fleet[0].Ship.Info.ShipType.Id != flagship) Chk = false;
-				this.FlagType = (KanColleClient.Current.Translations.GetTranslation("", TranslationType.ShipTypes, null, flagship));
+				this.FlagType = (KanColleClient.Current.Translations.GetTranslation("", TranslationType.ShipTypes, false, null, flagship));
 				this.vFlagType = Visibility.Visible;
 			}
 
@@ -465,9 +465,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				{
 					if (i == 0)
 					{
-						strb.Append(KanColleClient.Current.Translations.GetTranslation("", TranslationType.ShipTypes, null, list[i].Key) + "×" + list[i].Value);
+						strb.Append(KanColleClient.Current.Translations.GetTranslation("", TranslationType.ShipTypes, false, null, list[i].Key) + "×" + list[i].Value);
 					}
-					else strb.Append("・" + KanColleClient.Current.Translations.GetTranslation("", TranslationType.ShipTypes, null, list[i].Key) + "×" + list[i].Value);
+					else strb.Append("・" + KanColleClient.Current.Translations.GetTranslation("", TranslationType.ShipTypes, false, null, list[i].Key) + "×" + list[i].Value);
 				}
 				strb.Append(")");
 				strb = strb.Replace("()", "");

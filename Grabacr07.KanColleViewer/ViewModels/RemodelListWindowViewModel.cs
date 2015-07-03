@@ -271,7 +271,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				if (Context.Element(temp) != null)
 				{
 					Ship.ShipName = Context.Element(temp).Value;
-					Ship.ShipName = KanColleClient.Current.Translations.GetTranslation(Ship.ShipName, TranslationType.Ships);
+					Ship.ShipName = KanColleClient.Current.Translations.GetTranslation(Ship.ShipName, TranslationType.Ships, false);
 				}
 				else Ship.ShipName = string.Empty;
 				//업그레이드 부분
@@ -281,7 +281,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				if (Context.Element(temp) != null)
 				{
 					Ship.Upgrade = Context.Element(temp).Value;
-					Ship.Upgrade = KanColleClient.Current.Translations.GetTranslation(Ship.Upgrade, TranslationType.Equipment);
+					Ship.Upgrade = KanColleClient.Current.Translations.GetTranslation(Ship.Upgrade, TranslationType.Equipment, false);
 
 					//슬롯 아이템 Master목록에서 해당되는 아이콘을 찾아 삽입
 					foreach (var slotitem in KanColleClient.Current.Master.SlotItems)
@@ -371,7 +371,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					ItemName = item.Element("SlotItemName").Value
 				};
 				//우선 장비명을 번역
-				ItemContent.ItemName = KanColleClient.Current.Translations.GetTranslation(ItemContent.ItemName, TranslationType.Equipment);
+				ItemContent.ItemName = KanColleClient.Current.Translations.GetTranslation(ItemContent.ItemName, TranslationType.Equipment, false);
 				//슬롯 아이템 Master목록에서 해당되는 아이콘을 찾아 삽입
 				foreach (var slotitem in KanColleClient.Current.Master.SlotItems)
 				{
@@ -404,7 +404,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					ItemName = item.Element("SlotItemName").Value
 				};
 				//우선 장비명을 번역
-				ItemContent.ItemName = KanColleClient.Current.Translations.GetTranslation(ItemContent.ItemName, TranslationType.Equipment);
+				ItemContent.ItemName = KanColleClient.Current.Translations.GetTranslation(ItemContent.ItemName, TranslationType.Equipment, false);
 				//슬롯 아이템 Master목록에서 해당되는 아이콘을 찾아 삽입
 				foreach (var slotitem in KanColleClient.Current.Master.SlotItems)
 				{
@@ -433,7 +433,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					ItemName = item.Element("SlotItemName").Value
 				};
 				//우선 장비명을 번역
-				ItemContent.ItemName = KanColleClient.Current.Translations.GetTranslation(ItemContent.ItemName, TranslationType.Equipment);
+				ItemContent.ItemName = KanColleClient.Current.Translations.GetTranslation(ItemContent.ItemName, TranslationType.Equipment, false);
 				//슬롯 아이템 Master목록에서 해당되는 아이콘을 찾아 삽입
 				foreach (var slotitem in KanColleClient.Current.Master.SlotItems)
 				{

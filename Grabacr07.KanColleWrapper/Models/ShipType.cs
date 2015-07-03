@@ -20,7 +20,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public string Name
 		{
-			get { return KanColleClient.Current.Translations.GetTranslation(RawData.api_name, TranslationType.ShipTypes, this.RawData, this.Id); }
+			get { return KanColleClient.Current.Translations.GetTranslation(RawData.api_name, TranslationType.ShipTypes, false, this.RawData, this.Id); }
 		}
 
 		public int SortNumber
