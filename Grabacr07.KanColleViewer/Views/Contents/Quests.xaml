@@ -192,6 +192,7 @@
 				<TextBlock Grid.Row="1"
 						   Grid.Column="0"
 						   Grid.ColumnSpan="3"
+						   TextWrapping="Wrap"
 						   Text="{Binding Resources.Quests_Notice, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 						   Style="{DynamicResource DetailTextStyleKey}"
 						   Margin="10" />
