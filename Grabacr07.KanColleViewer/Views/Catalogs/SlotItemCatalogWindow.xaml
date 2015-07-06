@@ -134,7 +134,9 @@
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate DataType="{x:Type viewModels:SlotItemCounter}">
-										<StackPanel Orientation="Horizontal">
+										<StackPanel Orientation="Horizontal"
+													ToolTip="{Binding Target.ToolTipData}"
+													ToolTipService.ShowDuration="600000">
 											<Border Padding="0,1,5,1">
 												<Viewbox Width="20">
 													<kcvc:SlotItemIcon Type="{Binding Target.IconType}" />
