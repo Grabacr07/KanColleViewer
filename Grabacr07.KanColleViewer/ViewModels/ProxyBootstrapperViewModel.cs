@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Models;
 
@@ -29,7 +30,25 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region IsEditable 変更通知プロパティ
 
+		private bool _IsEditable = true;
+
+		public bool IsEditable
+		{
+			get { return this._IsEditable; }
+			set
+			{
+				if (this._IsEditable != value)
+				{
+					this._IsEditable = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+		
 		public ProxyBootstrapperViewModel(ProxyBootstrapper bootstrapper)
 		{
 			this.DialogResult = false;
@@ -39,17 +58,25 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		public void Retry()
 		{
-			this.Bootstrapper.Try();
+			this.IsEditable = false;
+			this.Message = "再施行中...";
 
-			if (this.Bootstrapper.Result == ProxyBootstrapResult.Success)
-			{
-				this.DialogResult = true;
-				this.Close();
-			}
-			else
-			{
-				this.UpdateMessage();
-			}
+			Observable
+				.Start(() => this.Bootstrapper.Try())
+				.Delay(TimeSpan.FromSeconds(0.5))
+				.Subscribe((_) =>
+				{
+					if (this.Bootstrapper.Result == ProxyBootstrapResult.Success)
+					{
+						this.DialogResult = true;
+						this.Close();
+					}
+					else
+					{
+						this.UpdateMessage();
+					}
+					this.IsEditable = true;
+				});
 		}
 
 		public void Cancel()
