@@ -14,6 +14,7 @@
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"	 
+			 MaxWidth="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}, Path=ActualWidth,Mode=OneWay}"
 			 mc:Ignorable="d"
 			 d:DesignWidth="700"
 			 d:DesignHeight="300"
@@ -61,7 +62,7 @@
 					</ItemsControl>
 
 					<TextBlock Grid.Row="1"
-							   Text="発生中の任務はありません"
+							   Text="임무가 없습니다"
 							   HorizontalAlignment="Center"
 							   Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}"
 							   Margin="10" />
