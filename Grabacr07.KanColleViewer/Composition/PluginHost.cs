@@ -25,13 +25,13 @@ namespace Grabacr07.KanColleViewer.Composition
 
 		#region singleton members
 
-	    /// <summary>
+		/// <summary>
 		/// <see cref="PluginHost"/> のインスタンスを取得します。
 		/// </summary>
 		/// <value><see cref="PluginHost"/> のインスタンス。</value>
 		public static PluginHost Instance { get; } = new PluginHost();
 
-	    #endregion
+		#endregion
 
 
 		private CompositionContainer container;
@@ -81,6 +81,12 @@ namespace Grabacr07.KanColleViewer.Composition
 			if (currentDir == null) return;
 
 			var pluginsDir = Path.Combine(currentDir, PluginsDirectory);
+			if (!Directory.Exists(pluginsDir))
+			{
+				this.loadedPlugins = new Dictionary<Guid, Plugin>();
+				return;
+			}
+
 			var catalog = new AggregateCatalog(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
 			var plugins = Directory.EnumerateFiles(pluginsDir, "*.dll", SearchOption.AllDirectories);
 
