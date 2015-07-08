@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Models;
 
@@ -48,7 +48,29 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		}
 
 		#endregion
-		
+
+		#region Status 変更通知プロパティ
+
+		private string _Status;
+
+		public string Status
+		{
+			get { return this._Status; }
+			set
+			{
+				if (this._Status != value)
+				{
+					this._Status = value;
+					this.RaisePropertyChanged();
+					this.RaisePropertyChanged(nameof(this.HasStatus));
+				}
+			}
+		}
+
+		public bool HasStatus => !string.IsNullOrEmpty(this.Status);
+
+		#endregion
+
 		public ProxyBootstrapperViewModel(ProxyBootstrapper bootstrapper)
 		{
 			this.DialogResult = false;
@@ -56,27 +78,26 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			this.UpdateMessage();
 		}
 
-		public void Retry()
+		public async void Retry()
 		{
 			this.IsEditable = false;
-			this.Message = "再施行中...";
+			this.Status = "再試行中...";
 
-			Observable
-				.Start(() => this.Bootstrapper.Try())
-				.Delay(TimeSpan.FromSeconds(0.5))
-				.Subscribe((_) =>
-				{
-					if (this.Bootstrapper.Result == ProxyBootstrapResult.Success)
-					{
-						this.DialogResult = true;
-						this.Close();
-					}
-					else
-					{
-						this.UpdateMessage();
-					}
-					this.IsEditable = true;
-				});
+			// ToDo: async void なので刺されそう
+			await Task.WhenAll(Task.Run(() => this.Bootstrapper.Try()), Task.Delay(TimeSpan.FromMilliseconds(1500)));
+
+			this.IsEditable = true;
+			this.Status = "";
+
+			if (this.Bootstrapper.Result == ProxyBootstrapResult.Success)
+			{
+				this.DialogResult = true;
+				this.Close();
+			}
+			else
+			{
+				this.UpdateMessage();
+			}
 		}
 
 		public void Cancel()
