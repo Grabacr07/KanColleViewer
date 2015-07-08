@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Models;
@@ -29,6 +30,46 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region IsEditable 変更通知プロパティ
+
+		private bool _IsEditable = true;
+
+		public bool IsEditable
+		{
+			get { return this._IsEditable; }
+			set
+			{
+				if (this._IsEditable != value)
+				{
+					this._IsEditable = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region Status 変更通知プロパティ
+
+		private string _Status;
+
+		public string Status
+		{
+			get { return this._Status; }
+			set
+			{
+				if (this._Status != value)
+				{
+					this._Status = value;
+					this.RaisePropertyChanged();
+					this.RaisePropertyChanged(nameof(this.HasStatus));
+				}
+			}
+		}
+
+		public bool HasStatus => !string.IsNullOrEmpty(this.Status);
+
+		#endregion
 
 		public ProxyBootstrapperViewModel(ProxyBootstrapper bootstrapper)
 		{
@@ -37,9 +78,16 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			this.UpdateMessage();
 		}
 
-		public void Retry()
+		public async void Retry()
 		{
-			this.Bootstrapper.Try();
+			this.IsEditable = false;
+			this.Status = "再試行中...";
+
+			// ToDo: async void なので刺されそう
+			await Task.WhenAll(Task.Run(() => this.Bootstrapper.Try()), Task.Delay(TimeSpan.FromMilliseconds(1500)));
+
+			this.IsEditable = true;
+			this.Status = "";
 
 			if (this.Bootstrapper.Result == ProxyBootstrapResult.Success)
 			{

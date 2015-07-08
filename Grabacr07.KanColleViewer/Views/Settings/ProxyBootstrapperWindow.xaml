@@ -9,9 +9,9 @@
 				   xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
 				   xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 				   xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
-				   xmlns:controls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+				   xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
-				   xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
+				   xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:ProxyBootstrapperViewModel}"
 				   Title="{Binding Title}"
@@ -37,16 +37,28 @@
 
 	<Grid>
 		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
 			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 
-		<StackPanel Margin="12">
-			<TextBlock Text="{Binding Message}" />
+		<DockPanel Grid.Row="0"
+				   Margin="12">
+			<controls:AppIcon Width="40"
+							  Background="Transparent"
+							  VerticalAlignment="Center" />
+			<TextBlock Text="{Binding Message}"
+					   Margin="12,0,0,0"
+					   HorizontalAlignment="Left"
+					   VerticalAlignment="Center" />
+		</DockPanel>
 
+		<StackPanel Grid.Row="1"
+					IsEnabled="{Binding IsEditable}"
+					Margin="12,0">
 			<Rectangle Height="1"
 					   Style="{DynamicResource SeparatorRectangleStyleKey}"
-					   Margin="0,12" />
+					   Margin="0,0,0,12" />
 
 			<CheckBox x:Name="CheckBoxChangeLocalProxyPort"
 					  Content="待ち受けポートを変更する"
@@ -93,19 +105,27 @@
 			</StackPanel>
 		</StackPanel>
 
-		<WrapPanel Grid.Row="1"
-				   HorizontalAlignment="Right"
-				   Margin="6,-6,6,6">
-			<controls:CallMethodButton Content="再試行"
-									   MethodName="Retry"
-									   MinWidth="110"
-									   Padding="30,6"
-									   Margin="6" />
-			<controls:CallMethodButton Content="キャンセル"
-									   MethodName="Cancel"
-									   MinWidth="110"
-									   Padding="30,6"
-									   Margin="6" />
-		</WrapPanel>
+		<DockPanel Grid.Row="2"
+				   IsEnabled="{Binding IsEditable}"
+				   Margin="6,0,6,6">
+			<metro2:CallMethodButton DockPanel.Dock="Right"
+									 Content="キャンセル"
+									 MethodName="Cancel"
+									 MinWidth="110"
+									 Padding="30,6"
+									 Margin="6" />
+			<metro2:CallMethodButton DockPanel.Dock="Right"
+									 Content="再試行"
+									 MethodName="Retry"
+									 MinWidth="110"
+									 Padding="30,6"
+									 Margin="6" />
+			<DockPanel Margin="3">
+				<metro:ProgressRing IsActive="{Binding HasStatus}"
+									Margin="3,0" />
+				<TextBlock Text="{Binding Status}"
+						   Margin="6,6,3,3" />
+			</DockPanel>
+		</DockPanel>
 	</Grid>
 </metro:MetroWindow>
