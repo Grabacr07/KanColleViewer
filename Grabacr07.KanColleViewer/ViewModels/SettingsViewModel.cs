@@ -186,25 +186,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-		#region NotifierPlugins 変更通知プロパティ
-
-		private List<NotifierViewModel> _NotifierPlugins;
-
-		public List<NotifierViewModel> NotifierPlugins
-		{
-			get { return this._NotifierPlugins; }
-			set
-			{
-				if (this._NotifierPlugins != value)
-				{
-					this._NotifierPlugins = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
 		#region AllPlugins 変更通知プロパティ
 
 		private List<PluginViewModel> _AllPlugins;
@@ -355,8 +336,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		public void ReloadPlugins()
 		{
-			this.NotifierPlugins = new List<NotifierViewModel>();
-
 			this.AllPlugins = new List<PluginViewModel>(
 				PluginHost.Instance.Plugins.Select(x => new PluginViewModel(x)));
 
