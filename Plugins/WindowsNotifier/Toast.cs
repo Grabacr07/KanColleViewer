@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using DesktopToast;
+using System.Threading.Tasks;
+using Windows.Foundation;
+using Windows.UI.Notifications;
 
 namespace Grabacr07.KanColleViewer.Plugins
 {
@@ -32,35 +33,44 @@ namespace Grabacr07.KanColleViewer.Plugins
 		#endregion
 
 		public const string AppId = "Grabacr07.KanColleViewer";
-		
-		public event Action Activated;
 
-		public event Action ToastFailed;
+		private readonly ToastNotification toast;
 
-		private readonly ToastRequest request;
+		public event TypedEventHandler<ToastNotification, object> Activated
+		{
+			add { this.toast.Activated += value; }
+			remove { this.toast.Activated -= value; }
+		}
+
+		public event TypedEventHandler<ToastNotification, ToastDismissedEventArgs> Dismissed
+		{
+			add { this.toast.Dismissed += value; }
+			remove { this.toast.Dismissed -= value; }
+		}
+
+		public event TypedEventHandler<ToastNotification, ToastFailedEventArgs> ToastFailed
+		{
+			add { this.toast.Failed += value; }
+			remove { this.toast.Failed -= value; }
+		}
 
 		public Toast(string header, string body)
 		{
-			this.request = new ToastRequest
+			var toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
+
+			var stringElements = toastXml.GetElementsByTagName("text");
+			if (stringElements.Length == 2)
 			{
-				ToastHeadline = header,
-				ToastBody = body,
-				ShortcutFileName = "提督業も忙しい！.lnk",
-				ShortcutTargetFilePath = Assembly.GetEntryAssembly().Location,
-				AppId = AppId,
-			};
+				stringElements[0].AppendChild(toastXml.CreateTextNode(header));
+				stringElements[1].AppendChild(toastXml.CreateTextNode(body));
+			}
+
+			this.toast = new ToastNotification(toastXml);
 		}
 
 		public void Show()
 		{
-			ToastManager.ShowAsync(this.request)
-				.ContinueWith(t =>
-				{
-					if (t.Result == ToastResult.Activated)
-						this.Activated?.Invoke();
-					if (t.Result == ToastResult.Failed)
-						this.ToastFailed?.Invoke();
-				});
+			ToastNotificationManager.CreateToastNotifier(AppId).Show(this.toast);
 		}
 	}
 }
