@@ -234,7 +234,6 @@
       <DependentUpon>Quests.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Contents\QuestViewSource.cs" />
-    <Compile Include="Views\Controls\AppIcon.cs" />
     <Compile Include="Views\Contents\Shipyard.xaml.cs">
       <DependentUpon>Shipyard.xaml</DependentUpon>
     </Compile>
@@ -305,11 +304,6 @@
     <Page Include="Themes\Accents\Red.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Generic.AppIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <DependentUpon>Generic.xaml</DependentUpon>
     </Page>
     <Page Include="Themes\Generic.KanColleHost.xaml">
       <Generator>MSBuild:Compile</Generator>

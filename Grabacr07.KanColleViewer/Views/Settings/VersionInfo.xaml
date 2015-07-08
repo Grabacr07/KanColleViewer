@@ -8,6 +8,9 @@
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
 			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+			 xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
+			 xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
+			 xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
 			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
 			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
@@ -139,11 +142,11 @@
 			</metro2:HyperlinkEx>
 		</TextBlock>
 
-		<controls:AppIcon Grid.Row="1"
-						  Grid.Column="1"
-						  Width="210"
-						  HorizontalAlignment="Right"
-						  Background="{DynamicResource ThemeBrushKey}"
-						  VerticalAlignment="Bottom" />
+		<kcvc:AppIcon Grid.Row="1"
+					  Grid.Column="1"
+					  Width="210"
+					  HorizontalAlignment="Right"
+					  Background="{DynamicResource ThemeBrushKey}"
+					  VerticalAlignment="Bottom" />
 	</Grid>
 </UserControl>

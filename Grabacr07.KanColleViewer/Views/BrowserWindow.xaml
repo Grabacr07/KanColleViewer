@@ -9,6 +9,9 @@
 				   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 				   xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 				   xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+				   xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
+				   xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
+				   xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
 				   xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 				   xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 				   xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
@@ -35,11 +38,11 @@
 					<ColumnDefinition Width="Auto" />
 				</Grid.ColumnDefinitions>
 
-				<controls:AppIcon Width="36"
-								  Height="36"
-								  Background="Transparent"
-								  AnchorVisibility="Collapsed"
-								  BandVisibility="Collapsed" />
+				<kcvc:AppIcon Width="36"
+							  Height="36"
+							  Background="Transparent"
+							  AnchorVisibility="Collapsed"
+							  BandVisibility="Collapsed" />
 
 				<TextBlock Grid.Column="1"
 						   Text="{Binding ElementName=MetroWindow, Path=Title, Mode=OneWay}"

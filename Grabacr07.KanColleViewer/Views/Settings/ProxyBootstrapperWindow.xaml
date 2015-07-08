@@ -7,6 +7,9 @@
 				   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 				   xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 				   xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+				   xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
+				   xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
+				   xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
 				   xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 				   xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 				   xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
@@ -44,9 +47,9 @@
 
 		<DockPanel Grid.Row="0"
 				   Margin="12">
-			<controls:AppIcon Width="40"
-							  Background="Transparent"
-							  VerticalAlignment="Center" />
+			<kcvc:AppIcon Width="40"
+						  Background="Transparent"
+						  VerticalAlignment="Center" />
 			<TextBlock Text="{Binding Message}"
 					   Margin="12,0,0,0"
 					   HorizontalAlignment="Left"

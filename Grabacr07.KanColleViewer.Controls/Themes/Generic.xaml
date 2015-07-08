@@ -2,6 +2,7 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="/KanColleViewer.Controls;component/Themes/Generic.AppIcon.xaml" />
 		<ResourceDictionary Source="/KanColleViewer.Controls;component/Themes/Generic.BuildingDock.xaml" />
 		<ResourceDictionary Source="/KanColleViewer.Controls;component/Themes/Generic.ColorIndicator.xaml" />
 		<ResourceDictionary Source="/KanColleViewer.Controls;component/Themes/Generic.ConditionIcon.xaml" />

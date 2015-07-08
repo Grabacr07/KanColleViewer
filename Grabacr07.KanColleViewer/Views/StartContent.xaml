@@ -6,6 +6,9 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
+			 xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
+			 xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
 			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
 			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
@@ -156,13 +159,13 @@
 					<ColumnDefinition Width="*" />
 				</Grid.ColumnDefinitions>
 
-				<controls:AppIcon Grid.Column="1"
-								  Background="Transparent"
-								  Height="200"
-								  HorizontalAlignment="Right"
-								  VerticalAlignment="Bottom"
-								  Margin="0,0,30,-4"
-								  Opacity="0.25" />
+				<kcvc:AppIcon Grid.Column="1"
+							  Background="Transparent"
+							  Height="200"
+							  HorizontalAlignment="Right"
+							  VerticalAlignment="Bottom"
+							  Margin="0,0,30,-4"
+							  Opacity="0.25" />
 
 				<Border Grid.Column="0"
 						BorderBrush="{DynamicResource BorderBrushKey}"

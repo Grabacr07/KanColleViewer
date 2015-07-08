@@ -443,11 +443,11 @@
 					<ColumnDefinition Width="Auto" />
 				</Grid.ColumnDefinitions>
 
-				<controls:AppIcon Width="36"
-								  Height="36"
-								  Background="Transparent"
-								  AnchorVisibility="Collapsed"
-								  BandVisibility="Collapsed" />
+				<kcvc:AppIcon Width="36"
+							  Height="36"
+							  Background="Transparent"
+							  AnchorVisibility="Collapsed"
+							  BandVisibility="Collapsed" />
 
 				<TextBlock Grid.Column="1"
 						   Text="{Binding Title}"

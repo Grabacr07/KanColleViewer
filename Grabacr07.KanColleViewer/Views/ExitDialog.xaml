@@ -8,6 +8,9 @@
 				   xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 				   xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
 				   xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+				   xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
+				   xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
+				   xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
 				   xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 				   xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
@@ -39,8 +42,8 @@
 
 		<StackPanel Margin="12">
 			<DockPanel>
-				<controls:AppIcon Width="40"
-								  Background="Transparent" />
+				<kcvc:AppIcon Width="40"
+							  Background="Transparent" />
 
 				<TextBlock Text="「提督業も忙しい！」 を終了します。よろしいですか？"
 						   FontSize="14"
