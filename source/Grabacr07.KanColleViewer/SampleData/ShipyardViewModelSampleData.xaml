@@ -1,0 +1,113 @@
+﻿<contents:ShipyardViewModel xmlns:Livet="clr-namespace:Livet;assembly=Livet"
+							xmlns:Messaging="clr-namespace:Livet.Messaging;assembly=Livet"
+							xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents">
+	<contents:ShipyardViewModel.BuildingDocks>
+		<contents:BuildingDockViewModel CompleteTime="8:20:14 AM"
+										Id="27"
+										Remaining="8:20:14 AM"
+										Ship="Aaberg, Jesper"
+										State="Unlocked">
+			<contents:BuildingDockViewModel.CompositeDisposable>
+				<Livet:LivetCompositeDisposable Count="24"
+												IsReadOnly="False" />
+			</contents:BuildingDockViewModel.CompositeDisposable>
+			<contents:BuildingDockViewModel.Messenger>
+				<Messaging:InteractionMessenger />
+			</contents:BuildingDockViewModel.Messenger>
+		</contents:BuildingDockViewModel>
+		<contents:BuildingDockViewModel CompleteTime="7:06:05 AM"
+										Id="38"
+										Remaining="7:06:05 AM"
+										Ship="Adams, Ellen"
+										State="Building">
+			<contents:BuildingDockViewModel.CompositeDisposable>
+				<Livet:LivetCompositeDisposable Count="21"
+												IsReadOnly="False" />
+			</contents:BuildingDockViewModel.CompositeDisposable>
+			<contents:BuildingDockViewModel.Messenger>
+				<Messaging:InteractionMessenger />
+			</contents:BuildingDockViewModel.Messenger>
+		</contents:BuildingDockViewModel>
+		<contents:BuildingDockViewModel CompleteTime="4:26:00 PM"
+										Id="41"
+										Remaining="4:26:00 PM"
+										Ship="Adams, Terry"
+										State="Completed">
+			<contents:BuildingDockViewModel.CompositeDisposable>
+				<Livet:LivetCompositeDisposable Count="68"
+												IsReadOnly="False" />
+			</contents:BuildingDockViewModel.CompositeDisposable>
+			<contents:BuildingDockViewModel.Messenger>
+				<Messaging:InteractionMessenger />
+			</contents:BuildingDockViewModel.Messenger>
+		</contents:BuildingDockViewModel>
+		<contents:BuildingDockViewModel CompleteTime="7:13:04 AM"
+										Id="85"
+										Remaining="7:13:04 AM"
+										Ship="Adams, Terry"
+										State="Locked">
+			<contents:BuildingDockViewModel.CompositeDisposable>
+				<Livet:LivetCompositeDisposable Count="56"
+												IsReadOnly="False" />
+			</contents:BuildingDockViewModel.CompositeDisposable>
+			<contents:BuildingDockViewModel.Messenger>
+				<Messaging:InteractionMessenger />
+			</contents:BuildingDockViewModel.Messenger>
+		</contents:BuildingDockViewModel>
+	</contents:ShipyardViewModel.BuildingDocks>
+
+	<contents:ShipyardViewModel.RepairingDocks>
+		<contents:RepairingDockViewModel CompleteTime="November 5, 2003"
+										 Id="41"
+										 Remaining="8:20:14 AM"
+										 Ship="Aaberg, Jesper"
+										 State="Unlocked">
+			<contents:RepairingDockViewModel.CompositeDisposable>
+				<Livet:LivetCompositeDisposable Count="19"
+												IsReadOnly="False" />
+			</contents:RepairingDockViewModel.CompositeDisposable>
+			<contents:RepairingDockViewModel.Messenger>
+				<Messaging:InteractionMessenger />
+			</contents:RepairingDockViewModel.Messenger>
+		</contents:RepairingDockViewModel>
+		<contents:RepairingDockViewModel CompleteTime="December 29, 2006"
+										 Id="10"
+										 Remaining="7:06:05 AM"
+										 Ship="Adams, Ellen"
+										 State="Repairing">
+			<contents:RepairingDockViewModel.CompositeDisposable>
+				<Livet:LivetCompositeDisposable Count="66"
+												IsReadOnly="False" />
+			</contents:RepairingDockViewModel.CompositeDisposable>
+			<contents:RepairingDockViewModel.Messenger>
+				<Messaging:InteractionMessenger />
+			</contents:RepairingDockViewModel.Messenger>
+		</contents:RepairingDockViewModel>
+		<contents:RepairingDockViewModel CompleteTime="January 19, 2004"
+										 Id="39"
+										 Remaining="4:26:00 PM"
+										 Ship="Adams, Terry"
+										 State="Unlocked">
+			<contents:RepairingDockViewModel.CompositeDisposable>
+				<Livet:LivetCompositeDisposable Count="99"
+												IsReadOnly="False" />
+			</contents:RepairingDockViewModel.CompositeDisposable>
+			<contents:RepairingDockViewModel.Messenger>
+				<Messaging:InteractionMessenger />
+			</contents:RepairingDockViewModel.Messenger>
+		</contents:RepairingDockViewModel>
+		<contents:RepairingDockViewModel CompleteTime="December 22, 2007"
+										 Id="18"
+										 Remaining="7:13:04 AM"
+										 Ship="Adams, Terry"
+										 State="Locked">
+			<contents:RepairingDockViewModel.CompositeDisposable>
+				<Livet:LivetCompositeDisposable Count="44"
+												IsReadOnly="False" />
+			</contents:RepairingDockViewModel.CompositeDisposable>
+			<contents:RepairingDockViewModel.Messenger>
+				<Messaging:InteractionMessenger />
+			</contents:RepairingDockViewModel.Messenger>
+		</contents:RepairingDockViewModel>
+	</contents:ShipyardViewModel.RepairingDocks>
+</contents:ShipyardViewModel>

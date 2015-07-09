@@ -1,0 +1,137 @@
+﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Settings.Others"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
+			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 mc:Ignorable="d"
+			 d:DesignWidth="500"
+			 d:DesignHeight="300"
+			 d:DataContext="{d:DesignInstance viewModels:SettingsViewModel}">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="Common.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+
+	<i:Interaction.Triggers>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+										 MessageKey="OpenFolderDialog/Screenshot">
+			<livet:FolderBrowserDialogInteractionMessageAction />
+		</livet:InteractionMessageTrigger>
+	</i:Interaction.Triggers>
+
+	<StackPanel>
+		<TextBlock Text="{Binding Resources.Settings_Screenshot, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+		<Grid Margin="20,0,0,10">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+			<TextBlock Margin="0,6">
+				<Run Text="{Binding Resources.Settings_Screenshot_FolderTextBox_Label, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+				<Run Text=":  " />
+			</TextBlock>
+			<metro:PromptTextBox Grid.Row="0"
+								 Grid.Column="1"
+								 Text="{Binding ScreenshotFolder, UpdateSourceTrigger=PropertyChanged}"
+								 Prompt="{Binding Resources.Settings_Screenshot_FolderTextBox_Prompt, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+			<metro2:CallMethodButton Grid.Row="0"
+									 Grid.Column="2"
+									 Content="{Binding Resources.Settings_Screenshot_FolderSelectionDialog_OpenButton, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+									 MethodName="OpenScreenshotFolderSelectionDialog"
+									 Margin="6,0" />
+			<metro2:CallMethodButton Grid.Row="0"
+									 Grid.Column="3"
+									 Content="{Binding Resources.Settings_Screenshot_OpenFolderButton, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+									 IsEnabled="{Binding CanOpenScreenshotFolder}"
+									 MethodName="OpenScreenshotFolder"
+									 Margin="0" />
+
+			<TextBlock Grid.Row="1"
+					   Grid.Column="0"
+					   Margin="0,6">
+				<Run Text="{Binding Resources.Settings_Screenshot_ImageFormat_Label, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+				<Run Text=":  " />
+			</TextBlock>
+			<StackPanel Grid.Row="1"
+						Grid.Column="1"
+						Grid.ColumnSpan="3"
+						Orientation="Horizontal">
+				<RadioButton Content="PNG"
+							 IsChecked="{Binding ScreenshotImageFormat, Mode=TwoWay, ConverterParameter=Png, Converter={StaticResource EnumToBooleanConverter}}" />
+				<RadioButton Content="JPG"
+							 Margin="16,0,0,0"
+							 IsChecked="{Binding ScreenshotImageFormat, Mode=TwoWay, ConverterParameter=Jpeg, Converter={StaticResource EnumToBooleanConverter}}" />
+			</StackPanel>
+		</Grid>
+
+		<Rectangle Height="1"
+				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+		<!--<TextBlock Text="テーマ"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
+				   Margin="0,10" />
+
+		<WrapPanel Margin="20,0,0,10">
+			<RadioButton IsChecked="{Binding IsDarkTheme, Mode=TwoWay}"
+						 Margin="0,0,24,0">
+				<TextBlock Text="Dark"
+						   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}"
+						   FontSize="13"
+						   Background="Transparent" />
+			</RadioButton>
+			<RadioButton IsChecked="{Binding IsLightTheme, Mode=TwoWay}">
+				<TextBlock Text="Light"
+						   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}"
+						   FontSize="13"
+						   Background="Transparent" />
+			</RadioButton>
+		</WrapPanel>
+
+		<Rectangle Height="1"
+				   Style="{DynamicResource SeparatorRectangleStyleKey}" />-->
+
+		<TextBlock Text="{Binding Resources.Settings_Language, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
+				   Margin="0,10" />
+
+		<metro:PromptComboBox Margin="20,0,0,10"
+							  HorizontalAlignment="Left"
+							  Prompt=""
+							  ItemsSource="{Binding Cultures}"
+							  DisplayMemberPath="DisplayName"
+							  SelectedValuePath="Name"
+							  SelectedValue="{Binding Culture, Mode=TwoWay}"
+							  IsReadOnly="True"
+							  MinWidth="250" />
+
+		<Rectangle Height="1"
+				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+		<!--<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Logging}, Mode=OneWay}"
+				   Style="{DynamicResource HeaderTextBlockStyleKey}"
+				   Margin="0,10" />
+		<CheckBox Content="{Binding Source={x:Static properties:Resources.Settings_Logging_Enable}, Mode=OneWay}"
+				  IsChecked="{Binding EnableLogging}"
+				  IsEnabled="False"
+				  Height="17"
+				  Margin="15,0,0,10" />-->
+
+	</StackPanel>
+</UserControl>

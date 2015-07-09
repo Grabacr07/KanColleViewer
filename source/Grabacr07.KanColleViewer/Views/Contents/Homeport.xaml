@@ -1,0 +1,111 @@
+﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Contents.Homeport"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
+			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
+			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
+			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
+			 xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 mc:Ignorable="d"
+			 d:DesignWidth="600"
+			 d:DataContext="{d:DesignInstance viewModels:MainContentViewModel}">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="Auto" />
+		</Grid.ColumnDefinitions>
+		<Grid.Resources>
+			<Style TargetType="{x:Type TextBlock}"
+				   BasedOn="{StaticResource DefaultTextStyleKey}">
+				<Setter Property="Margin"
+						Value="12,0" />
+			</Style>
+		</Grid.Resources>
+
+		<StackPanel Orientation="Horizontal"
+					DataContext="{Binding Admiral}">
+			<TextBlock>
+				<Run Text="{Binding Model.Nickname, Mode=OneWay}"
+					 Style="{DynamicResource EmphaticTextElementStyleKey}"
+					 FontSize="18" />
+				<Run Text="{Binding Model.Rank, Mode=OneWay}"
+					 Style="{DynamicResource EmphaticTextElementStyleKey}"
+					 FontSize="14" />
+				<LineBreak />
+				<Run Text="{Binding Model.Comment, Mode=OneWay}" />
+			</TextBlock>
+
+			<TextBlock>
+				<Run Text="{Binding Resources.Homeport_FleetHQ, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+				<Run Text="Lv."
+					 Style="{DynamicResource EmphaticTextElementStyleKey}"
+					 FontSize="14" />
+				<Run Text="{Binding Model.Level, Mode=OneWay}"
+					 Style="{DynamicResource EmphaticTextElementStyleKey}"
+					 FontSize="18" />
+				<LineBreak />
+				<Run Text="Next:" />
+				<Run Text="{Binding Model.ExperienceForNexeLevel, Mode=OneWay}" />
+				<Run Text="exp." />
+			</TextBlock>
+		</StackPanel>
+
+		<StackPanel Grid.Column="1"
+					Orientation="Horizontal">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+
+				<TextBlock Grid.Row="0"
+						   Grid.Column="1">
+					<Run Text="{Binding Resources.Homeport_InstantRepair, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+					<Run Text="{Binding Materials.Model.InstantRepairMaterials, Mode=OneWay}"
+						 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+					<LineBreak />
+					<Run Text="{Binding Resources.Homeport_InstantBuild, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+					<Run Text="{Binding Materials.Model.InstantBuildMaterials, Mode=OneWay}"
+						 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+				</TextBlock>
+			</Grid>
+
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+
+				<TextBlock Grid.Row="0"
+						   Grid.Column="1">
+					<Run Text="{Binding Resources.Homeport_NoOfShips, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+					<Run Text="{Binding Ships.Count, Mode=OneWay}"
+						 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+					<Run Text="/" />
+					<Run Text="{Binding Admiral.Model.MaxShipCount, Mode=OneWay}" />
+					<LineBreak />
+					<Run Text="{Binding Resources.Homeport_NoOfEquipment, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+					<Run Text="{Binding SlotItems.Count, Mode=OneWay}"
+						 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+					<Run Text="/" />
+					<Run Text="{Binding Admiral.Model.MaxSlotItemCount, Mode=OneWay}" />
+				</TextBlock>
+			</Grid>
+		</StackPanel>
+	</Grid>
+</UserControl>

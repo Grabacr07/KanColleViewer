@@ -1,0 +1,162 @@
+﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Contents.Expeditions"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:v="clr-namespace:Grabacr07.KanColleViewer.Views"
+			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
+			 xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
+			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
+			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+			 xmlns:vmContents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
+			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 mc:Ignorable="d"
+			 d:DesignWidth="700"
+			 d:DesignHeight="300"
+			 d:DataContext="{d:DesignInstance vmContents:ExpeditionsViewModel}">
+	<UserControl.Resources>
+		<Style TargetType="{x:Type GroupBox}">
+			<Setter Property="OverridesDefaultStyle"
+					Value="True" />
+			<Setter Property="BorderThickness"
+					Value="1" />
+			<Setter Property="BorderBrush"
+					Value="{DynamicResource BorderBrushKey}" />
+			<Setter Property="Background"
+					Value="{DynamicResource BorderBrushKey}" />
+			<Setter Property="TextOptions.TextFormattingMode"
+					Value="Display" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type GroupBox}">
+						<Border BorderThickness="{TemplateBinding BorderThickness}"
+								BorderBrush="{TemplateBinding BorderBrush}">
+							<Grid>
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto" />
+									<RowDefinition />
+								</Grid.RowDefinitions>
+
+								<Border Background="{TemplateBinding Background}">
+									<ContentPresenter Content="{TemplateBinding Header}"
+													  ContentTemplate="{TemplateBinding HeaderTemplate}"
+													  ContentStringFormat="{TemplateBinding HeaderStringFormat}" />
+								</Border>
+
+								<ContentPresenter Grid.Row="1"
+												  Content="{TemplateBinding Content}"
+												  ContentTemplate="{TemplateBinding ContentTemplate}"
+												  ContentStringFormat="{TemplateBinding ContentStringFormat}"
+												  Margin="{TemplateBinding Padding}" />
+							</Grid>
+						</Border>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+
+			<Setter Property="HeaderTemplate">
+				<Setter.Value>
+					<DataTemplate>
+						<Border Margin="9,5">
+							<TextBlock Text="{Binding}"
+									   FontSize="{DynamicResource EmphaticFontSizeKey}"
+									   Foreground="{DynamicResource ForegroundBrushKey}" />
+						</Border>
+					</DataTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</UserControl.Resources>
+
+	<ScrollViewer DataContext="{Binding Fleets}"
+				  VerticalScrollBarVisibility="Auto"
+				  PanningMode="Both">
+		<ItemsControl ItemsSource="{Binding Fleets}"
+					  Margin="5,0,5,5"
+					  d:DataContext="{d:DesignData /SampleData/FleetsViewModelSampleData.xaml}">
+			<ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<UniformGrid Rows="1" />
+				</ItemsPanelTemplate>
+			</ItemsControl.ItemsPanel>
+			<ItemsControl.ItemContainerStyle>
+				<Style TargetType="{x:Type ContentPresenter}">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Id, Mode=OneWay}"
+									 Value="1">
+							<Setter Property="Visibility"
+									Value="Collapsed" />
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</ItemsControl.ItemContainerStyle>
+
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<GroupBox Header="{Binding Name}"
+							  Margin="5,0,5,5"
+							  Padding="8">
+						<Grid>
+							<TextBlock x:Name="NotExcution"
+									   Text="遠征に出ていません。"
+									   Style="{DynamicResource EmphaticTextStyleKey}"
+									   Visibility="Collapsed" />
+
+							<StackPanel x:Name="ExpeditionInfo">
+								<TextBlock Text="{Binding Expedition.Mission.Title}"
+										   Style="{DynamicResource EmphaticTextStyleKey}" />
+								<Border Height="4" />
+								<TextBlock Text="{Binding Expedition.Mission.Detail}"
+										   Style="{DynamicResource DefaultTextStyleKey}" />
+
+								<Border Height="1"
+										BorderThickness="1"
+										BorderBrush="{DynamicResource BorderBrushKey}"
+										Margin="0,8" />
+
+								<TextBlock Text="{Binding Resources.Expedition_TimeComplete, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+										   Style="{DynamicResource HeaderTextStyleKey}" />
+								<Border Height="4" />
+								<TextBlock Text="{Binding Expedition.ReturnTime, Mode=OneWay}"
+										   Style="{DynamicResource EmphaticTextStyleKey}"
+										   Margin="8,0" />
+
+								<Border Height="1"
+										BorderThickness="1"
+										BorderBrush="{DynamicResource BorderBrushKey}"
+										Margin="0,8" />
+
+								<TextBlock Text="{Binding Resources.Expedition_TimeRemaining, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+										   Style="{DynamicResource HeaderTextStyleKey}" />
+								<Border Height="4" />
+								<TextBlock Text="{Binding Expedition.Remaining, Mode=OneWay}"
+										   Style="{DynamicResource EmphaticTextStyleKey}"
+										   Margin="8,0" />
+
+								<Border Height="1"
+										BorderThickness="1"
+										BorderBrush="{DynamicResource BorderBrushKey}"
+										Margin="0,8" />
+							</StackPanel>
+						</Grid>
+					</GroupBox>
+					<DataTemplate.Triggers>
+						<DataTrigger Binding="{Binding Expedition.IsInExecution}"
+									 Value="False">
+							<Setter TargetName="NotExcution"
+									Property="Visibility"
+									Value="Visible" />
+							<Setter TargetName="ExpeditionInfo"
+									Property="Visibility"
+									Value="Collapsed" />
+						</DataTrigger>
+					</DataTemplate.Triggers>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
+	</ScrollViewer>
+</UserControl>

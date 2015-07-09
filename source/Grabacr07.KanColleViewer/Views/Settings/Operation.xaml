@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Settings.Operation"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
+			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 mc:Ignorable="d"
+			 d:DesignWidth="500"
+			 d:DesignHeight="300"
+			 d:DataContext="{d:DesignInstance viewModels:SettingsViewModel}">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="Common.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+
+	<StackPanel>
+		<TextBlock Text="出撃コンディション"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+
+		<StackPanel Margin="20,0,0,0">
+			<TextBlock Text="艦隊内の全艦のコンディションが次の数値以上になったとき、出撃可能と判断する" />
+
+			<Grid Margin="0,10">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="10" />
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+
+				<metro:PromptTextBox Prompt="例: 40"
+									 Width="60">
+					<metro:PromptTextBox.Text>
+						<Binding Source="{x:Static models:Settings.Current}"
+								 Path="KanColleClientSettings.ReSortieCondition"
+								 UpdateSourceTrigger="PropertyChanged">
+							<Binding.ValidationRules>
+								<metro:Int32Rule Min="0"
+												 Max="49" />
+							</Binding.ValidationRules>
+						</Binding>
+					</metro:PromptTextBox.Text>
+				</metro:PromptTextBox>
+				<TextBlock Grid.Column="2"
+						   Style="{DynamicResource DetailTextStyleKey}">
+					<Run Text="※通常は、間宮アイコンが消灯する 40 か、自然回復上限の 49 に設定します。" />
+				</TextBlock>
+			</Grid>
+		</StackPanel>
+
+		<Rectangle Height="1"
+				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+		<TextBlock Text="索敵値計算"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
+				   Margin="0,10" />
+
+		<StackPanel Margin="20,0,0,0">
+			<TextBlock Text="艦隊の索敵値の算出に使用する計算式は、以下を使用する" />
+
+			<ItemsControl ItemsSource="{Binding ViewRangeSettingsCollection}"
+						  Margin="0,5">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<RadioButton IsChecked="{Binding Selected}"
+									 Margin="0,5"
+									 GroupName="ViewRangeCalcLogicSelection">
+							<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+									   LineHeight="18">
+								<Run Text="{Binding Logic.Name, Mode=OneWay}"
+									 Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}" />
+								<LineBreak />
+								<Run Text="{Binding Logic.Description, Mode=OneWay}" />
+							</TextBlock>
+						</RadioButton>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</StackPanel>
+
+		<Rectangle Height="1"
+				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+	</StackPanel>
+</UserControl>

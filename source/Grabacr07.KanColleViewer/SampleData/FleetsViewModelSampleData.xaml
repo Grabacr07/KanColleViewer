@@ -1,0 +1,1777 @@
+﻿<fleets:FleetsViewModel xmlns:Livet="clr-namespace:Livet;assembly=Livet"
+						xmlns:Messaging="clr-namespace:Livet.Messaging;assembly=Livet"
+						xmlns:ViewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+						xmlns:Models="clr-namespace:Grabacr07.KanColleWrapper.Models;assembly=KanColleWrapper"
+						xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
+						xmlns:fleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets">
+	<fleets:FleetsViewModel.Fleets>
+		<fleets:FleetViewModel Id="1"
+							   Name="サンプル第一艦隊">
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
+					<Models:Ship ConditionType="Brilliant"
+								 Condition="80"
+								 ExpForNextLevel="15000"
+								 Exp="0"
+								 Id="1"
+								 Level="99">
+						<Models:Ship.HP>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="82"
+												 Current="82" />
+						</Models:Ship.HP>
+						<Models:Ship.Fuel>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="120"
+												 Current="100" />
+						</Models:Ship.Fuel>
+						<Models:Ship.Bull>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="110"
+												 Current="100" />
+						</Models:Ship.Bull>
+
+						<Models:Ship.AA>
+							<Models:ModernizableStatus Current="96"
+													   Default="70"
+													   IsMax="True"
+													   Max="68"
+													   Upgraded="96" />
+						</Models:Ship.AA>
+						<Models:Ship.Armer>
+							<Models:ModernizableStatus Current="95"
+													   Default="70"
+													   IsMax="False"
+													   Max="53"
+													   Upgraded="13" />
+						</Models:Ship.Armer>
+						<Models:Ship.Firepower>
+							<Models:ModernizableStatus Current="66"
+													   Default="60"
+													   IsMax="True"
+													   Max="17"
+													   Upgraded="14" />
+						</Models:Ship.Firepower>
+						<Models:Ship.Info>
+							<Models:ShipInfo HP="15"
+											 Id="27"
+											 MaxASW="78"
+											 MaxTorpedo="95"
+											 MaxFirepower="16"
+											 MaxLOS="76"
+											 MaxArmer="58"
+											 MaxAA="97"
+											 MaxEvasion="10"
+											 Name="金剛改二"
+											 Speed="Low">
+								<Models:ShipInfo.ShipType>
+									<Models:ShipType Name="戦艦" />
+								</Models:ShipInfo.ShipType>
+							</Models:ShipInfo>
+						</Models:Ship.Info>
+						<Models:Ship.Torpedo>
+							<Models:ModernizableStatus Current="13"
+													   Default="91"
+													   IsMax="False"
+													   Max="12"
+													   Upgraded="55" />
+						</Models:Ship.Torpedo>
+					</Models:Ship>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
+					<Models:Ship ConditionType="Tired"
+								 Condition="35"
+								 ExpForNextLevel="15000"
+								 Exp="0"
+								 Id="1"
+								 Level="99">
+						<Models:Ship.HP>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="75"
+												 Current="60" />
+						</Models:Ship.HP>
+						<Models:Ship.Fuel>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="95"
+												 Current="50" />
+						</Models:Ship.Fuel>
+						<Models:Ship.Bull>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="90"
+												 Current="90" />
+						</Models:Ship.Bull>
+
+						<Models:Ship.AA>
+							<Models:ModernizableStatus Current="96"
+													   Default="70"
+													   IsMax="True"
+													   Max="68"
+													   Upgraded="96" />
+						</Models:Ship.AA>
+						<Models:Ship.Armer>
+							<Models:ModernizableStatus Current="95"
+													   Default="70"
+													   IsMax="False"
+													   Max="53"
+													   Upgraded="13" />
+						</Models:Ship.Armer>
+						<Models:Ship.Firepower>
+							<Models:ModernizableStatus Current="66"
+													   Default="60"
+													   IsMax="True"
+													   Max="17"
+													   Upgraded="14" />
+						</Models:Ship.Firepower>
+						<Models:Ship.Info>
+							<Models:ShipInfo HP="15"
+											 Id="27"
+											 MaxASW="78"
+											 MaxTorpedo="95"
+											 MaxFirepower="16"
+											 MaxLOS="76"
+											 MaxArmer="58"
+											 MaxAA="97"
+											 MaxEvasion="10"
+											 Name="榛名"
+											 Speed="Low">
+								<Models:ShipInfo.ShipType>
+									<Models:ShipType Name="戦艦" />
+								</Models:ShipInfo.ShipType>
+							</Models:ShipInfo>
+						</Models:Ship.Info>
+						<Models:Ship.Torpedo>
+							<Models:ModernizableStatus Current="13"
+													   Default="91"
+													   IsMax="False"
+													   Max="12"
+													   Upgraded="55" />
+						</Models:Ship.Torpedo>
+					</Models:Ship>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
+					<Models:Ship ConditionType="OrangeTired"
+								 Condition="25"
+								 ExpForNextLevel="15000"
+								 Exp="0"
+								 Id="1"
+								 Level="99">
+						<Models:Ship.HP>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="10"
+												 Current="50" />
+						</Models:Ship.HP>
+						<Models:Ship.Fuel>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="50"
+												 Current="0" />
+						</Models:Ship.Fuel>
+						<Models:Ship.Bull>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="50"
+												 Current="5" />
+						</Models:Ship.Bull>
+
+						<Models:Ship.AA>
+							<Models:ModernizableStatus Current="96"
+													   Default="70"
+													   IsMax="True"
+													   Max="68"
+													   Upgraded="96" />
+						</Models:Ship.AA>
+						<Models:Ship.Armer>
+							<Models:ModernizableStatus Current="95"
+													   Default="70"
+													   IsMax="False"
+													   Max="53"
+													   Upgraded="13" />
+						</Models:Ship.Armer>
+						<Models:Ship.Firepower>
+							<Models:ModernizableStatus Current="66"
+													   Default="60"
+													   IsMax="True"
+													   Max="17"
+													   Upgraded="14" />
+						</Models:Ship.Firepower>
+						<Models:Ship.Info>
+							<Models:ShipInfo HP="15"
+											 Id="27"
+											 MaxASW="78"
+											 MaxTorpedo="95"
+											 MaxFirepower="16"
+											 MaxLOS="76"
+											 MaxArmer="58"
+											 MaxAA="97"
+											 MaxEvasion="10"
+											 Name="北上改二"
+											 Speed="Low">
+								<Models:ShipInfo.ShipType>
+									<Models:ShipType Name="重雷装巡洋艦" />
+								</Models:ShipInfo.ShipType>
+							</Models:ShipInfo>
+						</Models:Ship.Info>
+						<Models:Ship.Torpedo>
+							<Models:ModernizableStatus Current="13"
+													   Default="91"
+													   IsMax="False"
+													   Max="12"
+													   Upgraded="55" />
+						</Models:Ship.Torpedo>
+					</Models:Ship>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
+					<Models:Ship ConditionType="RedTired"
+								 Condition="8"
+								 ExpForNextLevel="15000"
+								 Exp="0"
+								 Id="1"
+								 Level="99">
+						<Models:Ship.HP>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="15"
+												 Current="1" />
+						</Models:Ship.HP>
+						<Models:Ship.Fuel>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="30"
+												 Current="15" />
+						</Models:Ship.Fuel>
+						<Models:Ship.Bull>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="30"
+												 Current="20" />
+						</Models:Ship.Bull>
+
+						<Models:Ship.AA>
+							<Models:ModernizableStatus Current="96"
+													   Default="70"
+													   IsMax="True"
+													   Max="68"
+													   Upgraded="96" />
+						</Models:Ship.AA>
+						<Models:Ship.Armer>
+							<Models:ModernizableStatus Current="95"
+													   Default="70"
+													   IsMax="False"
+													   Max="53"
+													   Upgraded="13" />
+						</Models:Ship.Armer>
+						<Models:Ship.Firepower>
+							<Models:ModernizableStatus Current="66"
+													   Default="60"
+													   IsMax="True"
+													   Max="17"
+													   Upgraded="14" />
+						</Models:Ship.Firepower>
+						<Models:Ship.Info>
+							<Models:ShipInfo HP="15"
+											 Id="27"
+											 MaxASW="78"
+											 MaxTorpedo="95"
+											 MaxFirepower="16"
+											 MaxLOS="76"
+											 MaxArmer="58"
+											 MaxAA="97"
+											 MaxEvasion="10"
+											 Name="伊19"
+											 Speed="Low">
+								<Models:ShipInfo.ShipType>
+									<Models:ShipType Name="潜水艦" />
+								</Models:ShipInfo.ShipType>
+							</Models:ShipInfo>
+						</Models:Ship.Info>
+						<Models:Ship.Torpedo>
+							<Models:ModernizableStatus Current="13"
+													   Default="91"
+													   IsMax="False"
+													   Max="12"
+													   Upgraded="55" />
+						</Models:Ship.Torpedo>
+					</Models:Ship>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
+					<Models:Ship ConditionType="Normal"
+								 Condition="45"
+								 ExpForNextLevel="15000"
+								 Exp="0"
+								 Id="1"
+								 Level="99">
+						<Models:Ship.HP>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="69"
+												 Current="60" />
+						</Models:Ship.HP>
+						<Models:Ship.Fuel>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="120"
+												 Current="100" />
+						</Models:Ship.Fuel>
+						<Models:Ship.Bull>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="110"
+												 Current="100" />
+						</Models:Ship.Bull>
+
+						<Models:Ship.AA>
+							<Models:ModernizableStatus Current="96"
+													   Default="70"
+													   IsMax="True"
+													   Max="68"
+													   Upgraded="96" />
+						</Models:Ship.AA>
+						<Models:Ship.Armer>
+							<Models:ModernizableStatus Current="95"
+													   Default="70"
+													   IsMax="False"
+													   Max="53"
+													   Upgraded="13" />
+						</Models:Ship.Armer>
+						<Models:Ship.Firepower>
+							<Models:ModernizableStatus Current="66"
+													   Default="60"
+													   IsMax="True"
+													   Max="17"
+													   Upgraded="14" />
+						</Models:Ship.Firepower>
+						<Models:Ship.Info>
+							<Models:ShipInfo HP="15"
+											 Id="27"
+											 MaxASW="78"
+											 MaxTorpedo="95"
+											 MaxFirepower="16"
+											 MaxLOS="76"
+											 MaxArmer="58"
+											 MaxAA="97"
+											 MaxEvasion="10"
+											 Name="蒼龍改"
+											 Speed="Low">
+								<Models:ShipInfo.ShipType>
+									<Models:ShipType Name="正規空母" />
+								</Models:ShipInfo.ShipType>
+							</Models:ShipInfo>
+						</Models:Ship.Info>
+						<Models:Ship.Torpedo>
+							<Models:ModernizableStatus Current="13"
+													   Default="91"
+													   IsMax="False"
+													   Max="12"
+													   Upgraded="55" />
+						</Models:Ship.Torpedo>
+					</Models:Ship>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
+					<Models:Ship ConditionType="Brilliant"
+								 Condition="80"
+								 ExpForNextLevel="15000"
+								 Exp="0"
+								 Id="1"
+								 Level="99">
+						<Models:Ship.HP>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="500"
+												 Current="200" />
+						</Models:Ship.HP>
+						<Models:Ship.Fuel>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="120"
+												 Current="100" />
+						</Models:Ship.Fuel>
+						<Models:Ship.Bull>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="110"
+												 Current="100" />
+						</Models:Ship.Bull>
+
+						<Models:Ship.AA>
+							<Models:ModernizableStatus Current="96"
+													   Default="70"
+													   IsMax="True"
+													   Max="68"
+													   Upgraded="96" />
+						</Models:Ship.AA>
+						<Models:Ship.Armer>
+							<Models:ModernizableStatus Current="95"
+													   Default="70"
+													   IsMax="False"
+													   Max="53"
+													   Upgraded="13" />
+						</Models:Ship.Armer>
+						<Models:Ship.Firepower>
+							<Models:ModernizableStatus Current="66"
+													   Default="60"
+													   IsMax="True"
+													   Max="17"
+													   Upgraded="14" />
+						</Models:Ship.Firepower>
+						<Models:Ship.Info>
+							<Models:ShipInfo HP="15"
+											 Id="27"
+											 MaxASW="78"
+											 MaxTorpedo="95"
+											 MaxFirepower="16"
+											 MaxLOS="76"
+											 MaxArmer="58"
+											 MaxAA="97"
+											 MaxEvasion="10"
+											 Name="飛行場姫"
+											 Speed="Low">
+								<Models:ShipInfo.ShipType>
+									<Models:ShipType Name="航空戦艦" />
+								</Models:ShipInfo.ShipType>
+							</Models:ShipInfo>
+						</Models:Ship.Info>
+						<Models:Ship.Torpedo>
+							<Models:ModernizableStatus Current="13"
+													   Default="91"
+													   IsMax="False"
+													   Max="12"
+													   Upgraded="55" />
+						</Models:Ship.Torpedo>
+					</Models:Ship>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+		</fleets:FleetViewModel>
+
+		<fleets:FleetViewModel Id="2"
+							   Name="サンプル第二艦隊">
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
+					<Models:Ship ConditionType="Brilliant"
+								 Condition="80"
+								 ExpForNextLevel="15000"
+								 Exp="0"
+								 Id="1"
+								 Level="99">
+						<Models:Ship.HP>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="82"
+												 Current="82" />
+						</Models:Ship.HP>
+						<Models:Ship.Fuel>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="120"
+												 Current="100" />
+						</Models:Ship.Fuel>
+						<Models:Ship.Bull>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="110"
+												 Current="100" />
+						</Models:Ship.Bull>
+
+						<Models:Ship.AA>
+							<Models:ModernizableStatus Current="96"
+													   Default="70"
+													   IsMax="True"
+													   Max="68"
+													   Upgraded="96" />
+						</Models:Ship.AA>
+						<Models:Ship.Armer>
+							<Models:ModernizableStatus Current="95"
+													   Default="70"
+													   IsMax="False"
+													   Max="53"
+													   Upgraded="13" />
+						</Models:Ship.Armer>
+						<Models:Ship.Firepower>
+							<Models:ModernizableStatus Current="66"
+													   Default="60"
+													   IsMax="True"
+													   Max="17"
+													   Upgraded="14" />
+						</Models:Ship.Firepower>
+						<Models:Ship.Info>
+							<Models:ShipInfo HP="15"
+											 Id="27"
+											 MaxASW="78"
+											 MaxTorpedo="95"
+											 MaxFirepower="16"
+											 MaxLOS="76"
+											 MaxArmer="58"
+											 MaxAA="97"
+											 MaxEvasion="10"
+											 Name="金剛改二"
+											 Speed="Low">
+								<Models:ShipInfo.ShipType>
+									<Models:ShipType Name="戦艦" />
+								</Models:ShipInfo.ShipType>
+							</Models:ShipInfo>
+						</Models:Ship.Info>
+						<Models:Ship.Torpedo>
+							<Models:ModernizableStatus Current="13"
+													   Default="91"
+													   IsMax="False"
+													   Max="12"
+													   Upgraded="55" />
+						</Models:Ship.Torpedo>
+					</Models:Ship>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
+					<Models:Ship ConditionType="Tired"
+								 Condition="35"
+								 ExpForNextLevel="15000"
+								 Exp="0"
+								 Id="1"
+								 Level="99">
+						<Models:Ship.HP>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="75"
+												 Current="60" />
+						</Models:Ship.HP>
+						<Models:Ship.Fuel>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="95"
+												 Current="50" />
+						</Models:Ship.Fuel>
+						<Models:Ship.Bull>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="90"
+												 Current="90" />
+						</Models:Ship.Bull>
+
+						<Models:Ship.AA>
+							<Models:ModernizableStatus Current="96"
+													   Default="70"
+													   IsMax="True"
+													   Max="68"
+													   Upgraded="96" />
+						</Models:Ship.AA>
+						<Models:Ship.Armer>
+							<Models:ModernizableStatus Current="95"
+													   Default="70"
+													   IsMax="False"
+													   Max="53"
+													   Upgraded="13" />
+						</Models:Ship.Armer>
+						<Models:Ship.Firepower>
+							<Models:ModernizableStatus Current="66"
+													   Default="60"
+													   IsMax="True"
+													   Max="17"
+													   Upgraded="14" />
+						</Models:Ship.Firepower>
+						<Models:Ship.Info>
+							<Models:ShipInfo HP="15"
+											 Id="27"
+											 MaxASW="78"
+											 MaxTorpedo="95"
+											 MaxFirepower="16"
+											 MaxLOS="76"
+											 MaxArmer="58"
+											 MaxAA="97"
+											 MaxEvasion="10"
+											 Name="榛名"
+											 Speed="Low">
+								<Models:ShipInfo.ShipType>
+									<Models:ShipType Name="戦艦" />
+								</Models:ShipInfo.ShipType>
+							</Models:ShipInfo>
+						</Models:Ship.Info>
+						<Models:Ship.Torpedo>
+							<Models:ModernizableStatus Current="13"
+													   Default="91"
+													   IsMax="False"
+													   Max="12"
+													   Upgraded="55" />
+						</Models:Ship.Torpedo>
+					</Models:Ship>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
+					<Models:Ship ConditionType="OrangeTired"
+								 Condition="25"
+								 ExpForNextLevel="15000"
+								 Exp="0"
+								 Id="1"
+								 Level="99">
+						<Models:Ship.HP>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="10"
+												 Current="50" />
+						</Models:Ship.HP>
+						<Models:Ship.Fuel>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="50"
+												 Current="0" />
+						</Models:Ship.Fuel>
+						<Models:Ship.Bull>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="50"
+												 Current="5" />
+						</Models:Ship.Bull>
+
+						<Models:Ship.AA>
+							<Models:ModernizableStatus Current="96"
+													   Default="70"
+													   IsMax="True"
+													   Max="68"
+													   Upgraded="96" />
+						</Models:Ship.AA>
+						<Models:Ship.Armer>
+							<Models:ModernizableStatus Current="95"
+													   Default="70"
+													   IsMax="False"
+													   Max="53"
+													   Upgraded="13" />
+						</Models:Ship.Armer>
+						<Models:Ship.Firepower>
+							<Models:ModernizableStatus Current="66"
+													   Default="60"
+													   IsMax="True"
+													   Max="17"
+													   Upgraded="14" />
+						</Models:Ship.Firepower>
+						<Models:Ship.Info>
+							<Models:ShipInfo HP="15"
+											 Id="27"
+											 MaxASW="78"
+											 MaxTorpedo="95"
+											 MaxFirepower="16"
+											 MaxLOS="76"
+											 MaxArmer="58"
+											 MaxAA="97"
+											 MaxEvasion="10"
+											 Name="北上改二"
+											 Speed="Low">
+								<Models:ShipInfo.ShipType>
+									<Models:ShipType Name="重雷装巡洋艦" />
+								</Models:ShipInfo.ShipType>
+							</Models:ShipInfo>
+						</Models:Ship.Info>
+						<Models:Ship.Torpedo>
+							<Models:ModernizableStatus Current="13"
+													   Default="91"
+													   IsMax="False"
+													   Max="12"
+													   Upgraded="55" />
+						</Models:Ship.Torpedo>
+					</Models:Ship>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
+					<Models:Ship ConditionType="RedTired"
+								 Condition="8"
+								 ExpForNextLevel="15000"
+								 Exp="0"
+								 Id="1"
+								 Level="99">
+						<Models:Ship.HP>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="15"
+												 Current="1" />
+						</Models:Ship.HP>
+						<Models:Ship.Fuel>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="30"
+												 Current="15" />
+						</Models:Ship.Fuel>
+						<Models:Ship.Bull>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="30"
+												 Current="20" />
+						</Models:Ship.Bull>
+
+						<Models:Ship.AA>
+							<Models:ModernizableStatus Current="96"
+													   Default="70"
+													   IsMax="True"
+													   Max="68"
+													   Upgraded="96" />
+						</Models:Ship.AA>
+						<Models:Ship.Armer>
+							<Models:ModernizableStatus Current="95"
+													   Default="70"
+													   IsMax="False"
+													   Max="53"
+													   Upgraded="13" />
+						</Models:Ship.Armer>
+						<Models:Ship.Firepower>
+							<Models:ModernizableStatus Current="66"
+													   Default="60"
+													   IsMax="True"
+													   Max="17"
+													   Upgraded="14" />
+						</Models:Ship.Firepower>
+						<Models:Ship.Info>
+							<Models:ShipInfo HP="15"
+											 Id="27"
+											 MaxASW="78"
+											 MaxTorpedo="95"
+											 MaxFirepower="16"
+											 MaxLOS="76"
+											 MaxArmer="58"
+											 MaxAA="97"
+											 MaxEvasion="10"
+											 Name="伊19"
+											 Speed="Low">
+								<Models:ShipInfo.ShipType>
+									<Models:ShipType Name="潜水艦" />
+								</Models:ShipInfo.ShipType>
+							</Models:ShipInfo>
+						</Models:Ship.Info>
+						<Models:Ship.Torpedo>
+							<Models:ModernizableStatus Current="13"
+													   Default="91"
+													   IsMax="False"
+													   Max="12"
+													   Upgraded="55" />
+						</Models:Ship.Torpedo>
+					</Models:Ship>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+		</fleets:FleetViewModel>
+
+		<fleets:FleetViewModel Id="3"
+							   Name="ほむ">
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
+					<Models:Ship ConditionType="Brilliant"
+								 Condition="80"
+								 ExpForNextLevel="15000"
+								 Exp="0"
+								 Id="1"
+								 Level="99">
+						<Models:Ship.HP>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="82"
+												 Current="82" />
+						</Models:Ship.HP>
+						<Models:Ship.Fuel>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="120"
+												 Current="100" />
+						</Models:Ship.Fuel>
+						<Models:Ship.Bull>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="110"
+												 Current="100" />
+						</Models:Ship.Bull>
+
+						<Models:Ship.AA>
+							<Models:ModernizableStatus Current="96"
+													   Default="70"
+													   IsMax="True"
+													   Max="68"
+													   Upgraded="96" />
+						</Models:Ship.AA>
+						<Models:Ship.Armer>
+							<Models:ModernizableStatus Current="95"
+													   Default="70"
+													   IsMax="False"
+													   Max="53"
+													   Upgraded="13" />
+						</Models:Ship.Armer>
+						<Models:Ship.Firepower>
+							<Models:ModernizableStatus Current="66"
+													   Default="60"
+													   IsMax="True"
+													   Max="17"
+													   Upgraded="14" />
+						</Models:Ship.Firepower>
+						<Models:Ship.Info>
+							<Models:ShipInfo HP="15"
+											 Id="27"
+											 MaxASW="78"
+											 MaxTorpedo="95"
+											 MaxFirepower="16"
+											 MaxLOS="76"
+											 MaxArmer="58"
+											 MaxAA="97"
+											 MaxEvasion="10"
+											 Name="金剛改二"
+											 Speed="Low">
+								<Models:ShipInfo.ShipType>
+									<Models:ShipType Name="戦艦" />
+								</Models:ShipInfo.ShipType>
+							</Models:ShipInfo>
+						</Models:Ship.Info>
+						<Models:Ship.Torpedo>
+							<Models:ModernizableStatus Current="13"
+													   Default="91"
+													   IsMax="False"
+													   Max="12"
+													   Upgraded="55" />
+						</Models:Ship.Torpedo>
+					</Models:Ship>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
+					<Models:Ship ConditionType="Tired"
+								 Condition="35"
+								 ExpForNextLevel="15000"
+								 Exp="0"
+								 Id="1"
+								 Level="99">
+						<Models:Ship.HP>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="75"
+												 Current="60" />
+						</Models:Ship.HP>
+						<Models:Ship.Fuel>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="95"
+												 Current="50" />
+						</Models:Ship.Fuel>
+						<Models:Ship.Bull>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="90"
+												 Current="90" />
+						</Models:Ship.Bull>
+
+						<Models:Ship.AA>
+							<Models:ModernizableStatus Current="96"
+													   Default="70"
+													   IsMax="True"
+													   Max="68"
+													   Upgraded="96" />
+						</Models:Ship.AA>
+						<Models:Ship.Armer>
+							<Models:ModernizableStatus Current="95"
+													   Default="70"
+													   IsMax="False"
+													   Max="53"
+													   Upgraded="13" />
+						</Models:Ship.Armer>
+						<Models:Ship.Firepower>
+							<Models:ModernizableStatus Current="66"
+													   Default="60"
+													   IsMax="True"
+													   Max="17"
+													   Upgraded="14" />
+						</Models:Ship.Firepower>
+						<Models:Ship.Info>
+							<Models:ShipInfo HP="15"
+											 Id="27"
+											 MaxASW="78"
+											 MaxTorpedo="95"
+											 MaxFirepower="16"
+											 MaxLOS="76"
+											 MaxArmer="58"
+											 MaxAA="97"
+											 MaxEvasion="10"
+											 Name="榛名"
+											 Speed="Low">
+								<Models:ShipInfo.ShipType>
+									<Models:ShipType Name="戦艦" />
+								</Models:ShipInfo.ShipType>
+							</Models:ShipInfo>
+						</Models:Ship.Info>
+						<Models:Ship.Torpedo>
+							<Models:ModernizableStatus Current="13"
+													   Default="91"
+													   IsMax="False"
+													   Max="12"
+													   Upgraded="55" />
+						</Models:Ship.Torpedo>
+					</Models:Ship>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
+					<Models:Ship ConditionType="OrangeTired"
+								 Condition="25"
+								 ExpForNextLevel="15000"
+								 Exp="0"
+								 Id="1"
+								 Level="99">
+						<Models:Ship.HP>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="10"
+												 Current="50" />
+						</Models:Ship.HP>
+						<Models:Ship.Fuel>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="50"
+												 Current="0" />
+						</Models:Ship.Fuel>
+						<Models:Ship.Bull>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="50"
+												 Current="5" />
+						</Models:Ship.Bull>
+
+						<Models:Ship.AA>
+							<Models:ModernizableStatus Current="96"
+													   Default="70"
+													   IsMax="True"
+													   Max="68"
+													   Upgraded="96" />
+						</Models:Ship.AA>
+						<Models:Ship.Armer>
+							<Models:ModernizableStatus Current="95"
+													   Default="70"
+													   IsMax="False"
+													   Max="53"
+													   Upgraded="13" />
+						</Models:Ship.Armer>
+						<Models:Ship.Firepower>
+							<Models:ModernizableStatus Current="66"
+													   Default="60"
+													   IsMax="True"
+													   Max="17"
+													   Upgraded="14" />
+						</Models:Ship.Firepower>
+						<Models:Ship.Info>
+							<Models:ShipInfo HP="15"
+											 Id="27"
+											 MaxASW="78"
+											 MaxTorpedo="95"
+											 MaxFirepower="16"
+											 MaxLOS="76"
+											 MaxArmer="58"
+											 MaxAA="97"
+											 MaxEvasion="10"
+											 Name="北上改二"
+											 Speed="Low">
+								<Models:ShipInfo.ShipType>
+									<Models:ShipType Name="重雷装巡洋艦" />
+								</Models:ShipInfo.ShipType>
+							</Models:ShipInfo>
+						</Models:Ship.Info>
+						<Models:Ship.Torpedo>
+							<Models:ModernizableStatus Current="13"
+													   Default="91"
+													   IsMax="False"
+													   Max="12"
+													   Upgraded="55" />
+						</Models:Ship.Torpedo>
+					</Models:Ship>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
+					<Models:Ship ConditionType="RedTired"
+								 Condition="8"
+								 ExpForNextLevel="15000"
+								 Exp="0"
+								 Id="1"
+								 Level="99">
+						<Models:Ship.HP>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="15"
+												 Current="1" />
+						</Models:Ship.HP>
+						<Models:Ship.Fuel>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="30"
+												 Current="15" />
+						</Models:Ship.Fuel>
+						<Models:Ship.Bull>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="30"
+												 Current="20" />
+						</Models:Ship.Bull>
+
+						<Models:Ship.AA>
+							<Models:ModernizableStatus Current="96"
+													   Default="70"
+													   IsMax="True"
+													   Max="68"
+													   Upgraded="96" />
+						</Models:Ship.AA>
+						<Models:Ship.Armer>
+							<Models:ModernizableStatus Current="95"
+													   Default="70"
+													   IsMax="False"
+													   Max="53"
+													   Upgraded="13" />
+						</Models:Ship.Armer>
+						<Models:Ship.Firepower>
+							<Models:ModernizableStatus Current="66"
+													   Default="60"
+													   IsMax="True"
+													   Max="17"
+													   Upgraded="14" />
+						</Models:Ship.Firepower>
+						<Models:Ship.Info>
+							<Models:ShipInfo HP="15"
+											 Id="27"
+											 MaxASW="78"
+											 MaxTorpedo="95"
+											 MaxFirepower="16"
+											 MaxLOS="76"
+											 MaxArmer="58"
+											 MaxAA="97"
+											 MaxEvasion="10"
+											 Name="伊19"
+											 Speed="Low">
+								<Models:ShipInfo.ShipType>
+									<Models:ShipType Name="潜水艦" />
+								</Models:ShipInfo.ShipType>
+							</Models:ShipInfo>
+						</Models:Ship.Info>
+						<Models:Ship.Torpedo>
+							<Models:ModernizableStatus Current="13"
+													   Default="91"
+													   IsMax="False"
+													   Max="12"
+													   Upgraded="55" />
+						</Models:Ship.Torpedo>
+					</Models:Ship>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+		</fleets:FleetViewModel>
+
+		<fleets:FleetViewModel Id="4"
+							   Name="サンプル第四艦隊のようなもの">
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
+					<Models:Ship ConditionType="Brilliant"
+								 Condition="80"
+								 ExpForNextLevel="15000"
+								 Exp="0"
+								 Id="1"
+								 Level="99">
+						<Models:Ship.HP>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="82"
+												 Current="82" />
+						</Models:Ship.HP>
+						<Models:Ship.Fuel>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="120"
+												 Current="100" />
+						</Models:Ship.Fuel>
+						<Models:Ship.Bull>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="110"
+												 Current="100" />
+						</Models:Ship.Bull>
+
+						<Models:Ship.AA>
+							<Models:ModernizableStatus Current="96"
+													   Default="70"
+													   IsMax="True"
+													   Max="68"
+													   Upgraded="96" />
+						</Models:Ship.AA>
+						<Models:Ship.Armer>
+							<Models:ModernizableStatus Current="95"
+													   Default="70"
+													   IsMax="False"
+													   Max="53"
+													   Upgraded="13" />
+						</Models:Ship.Armer>
+						<Models:Ship.Firepower>
+							<Models:ModernizableStatus Current="66"
+													   Default="60"
+													   IsMax="True"
+													   Max="17"
+													   Upgraded="14" />
+						</Models:Ship.Firepower>
+						<Models:Ship.Info>
+							<Models:ShipInfo HP="15"
+											 Id="27"
+											 MaxASW="78"
+											 MaxTorpedo="95"
+											 MaxFirepower="16"
+											 MaxLOS="76"
+											 MaxArmer="58"
+											 MaxAA="97"
+											 MaxEvasion="10"
+											 Name="金剛改二"
+											 Speed="Low">
+								<Models:ShipInfo.ShipType>
+									<Models:ShipType Name="戦艦" />
+								</Models:ShipInfo.ShipType>
+							</Models:ShipInfo>
+						</Models:Ship.Info>
+						<Models:Ship.Torpedo>
+							<Models:ModernizableStatus Current="13"
+													   Default="91"
+													   IsMax="False"
+													   Max="12"
+													   Upgraded="55" />
+						</Models:Ship.Torpedo>
+					</Models:Ship>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
+					<Models:Ship ConditionType="Tired"
+								 Condition="35"
+								 ExpForNextLevel="15000"
+								 Exp="0"
+								 Id="1"
+								 Level="99">
+						<Models:Ship.HP>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="75"
+												 Current="60" />
+						</Models:Ship.HP>
+						<Models:Ship.Fuel>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="95"
+												 Current="50" />
+						</Models:Ship.Fuel>
+						<Models:Ship.Bull>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="90"
+												 Current="90" />
+						</Models:Ship.Bull>
+
+						<Models:Ship.AA>
+							<Models:ModernizableStatus Current="96"
+													   Default="70"
+													   IsMax="True"
+													   Max="68"
+													   Upgraded="96" />
+						</Models:Ship.AA>
+						<Models:Ship.Armer>
+							<Models:ModernizableStatus Current="95"
+													   Default="70"
+													   IsMax="False"
+													   Max="53"
+													   Upgraded="13" />
+						</Models:Ship.Armer>
+						<Models:Ship.Firepower>
+							<Models:ModernizableStatus Current="66"
+													   Default="60"
+													   IsMax="True"
+													   Max="17"
+													   Upgraded="14" />
+						</Models:Ship.Firepower>
+						<Models:Ship.Info>
+							<Models:ShipInfo HP="15"
+											 Id="27"
+											 MaxASW="78"
+											 MaxTorpedo="95"
+											 MaxFirepower="16"
+											 MaxLOS="76"
+											 MaxArmer="58"
+											 MaxAA="97"
+											 MaxEvasion="10"
+											 Name="榛名"
+											 Speed="Low">
+								<Models:ShipInfo.ShipType>
+									<Models:ShipType Name="戦艦" />
+								</Models:ShipInfo.ShipType>
+							</Models:ShipInfo>
+						</Models:Ship.Info>
+						<Models:Ship.Torpedo>
+							<Models:ModernizableStatus Current="13"
+													   Default="91"
+													   IsMax="False"
+													   Max="12"
+													   Upgraded="55" />
+						</Models:Ship.Torpedo>
+					</Models:Ship>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
+					<Models:Ship ConditionType="OrangeTired"
+								 Condition="25"
+								 ExpForNextLevel="15000"
+								 Exp="0"
+								 Id="1"
+								 Level="99">
+						<Models:Ship.HP>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="10"
+												 Current="50" />
+						</Models:Ship.HP>
+						<Models:Ship.Fuel>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="50"
+												 Current="0" />
+						</Models:Ship.Fuel>
+						<Models:Ship.Bull>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="50"
+												 Current="5" />
+						</Models:Ship.Bull>
+
+						<Models:Ship.AA>
+							<Models:ModernizableStatus Current="96"
+													   Default="70"
+													   IsMax="True"
+													   Max="68"
+													   Upgraded="96" />
+						</Models:Ship.AA>
+						<Models:Ship.Armer>
+							<Models:ModernizableStatus Current="95"
+													   Default="70"
+													   IsMax="False"
+													   Max="53"
+													   Upgraded="13" />
+						</Models:Ship.Armer>
+						<Models:Ship.Firepower>
+							<Models:ModernizableStatus Current="66"
+													   Default="60"
+													   IsMax="True"
+													   Max="17"
+													   Upgraded="14" />
+						</Models:Ship.Firepower>
+						<Models:Ship.Info>
+							<Models:ShipInfo HP="15"
+											 Id="27"
+											 MaxASW="78"
+											 MaxTorpedo="95"
+											 MaxFirepower="16"
+											 MaxLOS="76"
+											 MaxArmer="58"
+											 MaxAA="97"
+											 MaxEvasion="10"
+											 Name="北上改二"
+											 Speed="Low">
+								<Models:ShipInfo.ShipType>
+									<Models:ShipType Name="重雷装巡洋艦" />
+								</Models:ShipInfo.ShipType>
+							</Models:ShipInfo>
+						</Models:Ship.Info>
+						<Models:Ship.Torpedo>
+							<Models:ModernizableStatus Current="13"
+													   Default="91"
+													   IsMax="False"
+													   Max="12"
+													   Upgraded="55" />
+						</Models:Ship.Torpedo>
+					</Models:Ship>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
+					<Models:Ship ConditionType="RedTired"
+								 Condition="8"
+								 ExpForNextLevel="15000"
+								 Exp="0"
+								 Id="1"
+								 Level="99">
+						<Models:Ship.HP>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="15"
+												 Current="1" />
+						</Models:Ship.HP>
+						<Models:Ship.Fuel>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="30"
+												 Current="15" />
+						</Models:Ship.Fuel>
+						<Models:Ship.Bull>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="30"
+												 Current="20" />
+						</Models:Ship.Bull>
+
+						<Models:Ship.AA>
+							<Models:ModernizableStatus Current="96"
+													   Default="70"
+													   IsMax="True"
+													   Max="68"
+													   Upgraded="96" />
+						</Models:Ship.AA>
+						<Models:Ship.Armer>
+							<Models:ModernizableStatus Current="95"
+													   Default="70"
+													   IsMax="False"
+													   Max="53"
+													   Upgraded="13" />
+						</Models:Ship.Armer>
+						<Models:Ship.Firepower>
+							<Models:ModernizableStatus Current="66"
+													   Default="60"
+													   IsMax="True"
+													   Max="17"
+													   Upgraded="14" />
+						</Models:Ship.Firepower>
+						<Models:Ship.Info>
+							<Models:ShipInfo HP="15"
+											 Id="27"
+											 MaxASW="78"
+											 MaxTorpedo="95"
+											 MaxFirepower="16"
+											 MaxLOS="76"
+											 MaxArmer="58"
+											 MaxAA="97"
+											 MaxEvasion="10"
+											 Name="伊19"
+											 Speed="Low">
+								<Models:ShipInfo.ShipType>
+									<Models:ShipType Name="潜水艦" />
+								</Models:ShipInfo.ShipType>
+							</Models:ShipInfo>
+						</Models:Ship.Info>
+						<Models:Ship.Torpedo>
+							<Models:ModernizableStatus Current="13"
+													   Default="91"
+													   IsMax="False"
+													   Max="12"
+													   Upgraded="55" />
+						</Models:Ship.Torpedo>
+					</Models:Ship>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+		</fleets:FleetViewModel>
+	</fleets:FleetsViewModel.Fleets>
+
+	<fleets:FleetsViewModel.SelectedFleet>
+		<fleets:FleetViewModel Id="1"
+							   Name="サンプル第一艦隊">
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
+					<Models:Ship ConditionType="Brilliant"
+								 Condition="80"
+								 ExpForNextLevel="15000"
+								 Exp="0"
+								 Id="1"
+								 Level="99">
+						<Models:Ship.HP>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="82"
+												 Current="82" />
+						</Models:Ship.HP>
+						<Models:Ship.Fuel>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="120"
+												 Current="100" />
+						</Models:Ship.Fuel>
+						<Models:Ship.Bull>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="110"
+												 Current="100" />
+						</Models:Ship.Bull>
+
+						<Models:Ship.AA>
+							<Models:ModernizableStatus Current="96"
+													   Default="70"
+													   IsMax="True"
+													   Max="68"
+													   Upgraded="96" />
+						</Models:Ship.AA>
+						<Models:Ship.Armer>
+							<Models:ModernizableStatus Current="95"
+													   Default="70"
+													   IsMax="False"
+													   Max="53"
+													   Upgraded="13" />
+						</Models:Ship.Armer>
+						<Models:Ship.Firepower>
+							<Models:ModernizableStatus Current="66"
+													   Default="60"
+													   IsMax="True"
+													   Max="17"
+													   Upgraded="14" />
+						</Models:Ship.Firepower>
+						<Models:Ship.Info>
+							<Models:ShipInfo HP="15"
+											 Id="27"
+											 MaxASW="78"
+											 MaxTorpedo="95"
+											 MaxFirepower="16"
+											 MaxLOS="76"
+											 MaxArmer="58"
+											 MaxAA="97"
+											 MaxEvasion="10"
+											 Name="金剛改二"
+											 Speed="Low">
+								<Models:ShipInfo.ShipType>
+									<Models:ShipType Name="戦艦" />
+								</Models:ShipInfo.ShipType>
+							</Models:ShipInfo>
+						</Models:Ship.Info>
+						<Models:Ship.Torpedo>
+							<Models:ModernizableStatus Current="13"
+													   Default="91"
+													   IsMax="False"
+													   Max="12"
+													   Upgraded="55" />
+						</Models:Ship.Torpedo>
+					</Models:Ship>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
+					<Models:Ship ConditionType="Tired"
+								 Condition="35"
+								 ExpForNextLevel="15000"
+								 Exp="0"
+								 Id="1"
+								 Level="99">
+						<Models:Ship.HP>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="75"
+												 Current="60" />
+						</Models:Ship.HP>
+						<Models:Ship.Fuel>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="95"
+												 Current="50" />
+						</Models:Ship.Fuel>
+						<Models:Ship.Bull>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="90"
+												 Current="90" />
+						</Models:Ship.Bull>
+
+						<Models:Ship.AA>
+							<Models:ModernizableStatus Current="96"
+													   Default="70"
+													   IsMax="True"
+													   Max="68"
+													   Upgraded="96" />
+						</Models:Ship.AA>
+						<Models:Ship.Armer>
+							<Models:ModernizableStatus Current="95"
+													   Default="70"
+													   IsMax="False"
+													   Max="53"
+													   Upgraded="13" />
+						</Models:Ship.Armer>
+						<Models:Ship.Firepower>
+							<Models:ModernizableStatus Current="66"
+													   Default="60"
+													   IsMax="True"
+													   Max="17"
+													   Upgraded="14" />
+						</Models:Ship.Firepower>
+						<Models:Ship.Info>
+							<Models:ShipInfo HP="15"
+											 Id="27"
+											 MaxASW="78"
+											 MaxTorpedo="95"
+											 MaxFirepower="16"
+											 MaxLOS="76"
+											 MaxArmer="58"
+											 MaxAA="97"
+											 MaxEvasion="10"
+											 Name="榛名"
+											 Speed="Low">
+								<Models:ShipInfo.ShipType>
+									<Models:ShipType Name="戦艦" />
+								</Models:ShipInfo.ShipType>
+							</Models:ShipInfo>
+						</Models:Ship.Info>
+						<Models:Ship.Torpedo>
+							<Models:ModernizableStatus Current="13"
+													   Default="91"
+													   IsMax="False"
+													   Max="12"
+													   Upgraded="55" />
+						</Models:Ship.Torpedo>
+					</Models:Ship>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
+					<Models:Ship ConditionType="OrangeTired"
+								 Condition="25"
+								 ExpForNextLevel="15000"
+								 Exp="0"
+								 Id="1"
+								 Level="99">
+						<Models:Ship.HP>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="10"
+												 Current="50" />
+						</Models:Ship.HP>
+						<Models:Ship.Fuel>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="50"
+												 Current="0" />
+						</Models:Ship.Fuel>
+						<Models:Ship.Bull>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="50"
+												 Current="5" />
+						</Models:Ship.Bull>
+
+						<Models:Ship.AA>
+							<Models:ModernizableStatus Current="96"
+													   Default="70"
+													   IsMax="True"
+													   Max="68"
+													   Upgraded="96" />
+						</Models:Ship.AA>
+						<Models:Ship.Armer>
+							<Models:ModernizableStatus Current="95"
+													   Default="70"
+													   IsMax="False"
+													   Max="53"
+													   Upgraded="13" />
+						</Models:Ship.Armer>
+						<Models:Ship.Firepower>
+							<Models:ModernizableStatus Current="66"
+													   Default="60"
+													   IsMax="True"
+													   Max="17"
+													   Upgraded="14" />
+						</Models:Ship.Firepower>
+						<Models:Ship.Info>
+							<Models:ShipInfo HP="15"
+											 Id="27"
+											 MaxASW="78"
+											 MaxTorpedo="95"
+											 MaxFirepower="16"
+											 MaxLOS="76"
+											 MaxArmer="58"
+											 MaxAA="97"
+											 MaxEvasion="10"
+											 Name="北上改二"
+											 Speed="Low">
+								<Models:ShipInfo.ShipType>
+									<Models:ShipType Name="重雷装巡洋艦" />
+								</Models:ShipInfo.ShipType>
+							</Models:ShipInfo>
+						</Models:Ship.Info>
+						<Models:Ship.Torpedo>
+							<Models:ModernizableStatus Current="13"
+													   Default="91"
+													   IsMax="False"
+													   Max="12"
+													   Upgraded="55" />
+						</Models:Ship.Torpedo>
+					</Models:Ship>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
+					<Models:Ship ConditionType="RedTired"
+								 Condition="8"
+								 ExpForNextLevel="15000"
+								 Exp="0"
+								 Id="1"
+								 Level="99">
+						<Models:Ship.HP>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="15"
+												 Current="1" />
+						</Models:Ship.HP>
+						<Models:Ship.Fuel>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="30"
+												 Current="15" />
+						</Models:Ship.Fuel>
+						<Models:Ship.Bull>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="30"
+												 Current="20" />
+						</Models:Ship.Bull>
+
+						<Models:Ship.AA>
+							<Models:ModernizableStatus Current="96"
+													   Default="70"
+													   IsMax="True"
+													   Max="68"
+													   Upgraded="96" />
+						</Models:Ship.AA>
+						<Models:Ship.Armer>
+							<Models:ModernizableStatus Current="95"
+													   Default="70"
+													   IsMax="False"
+													   Max="53"
+													   Upgraded="13" />
+						</Models:Ship.Armer>
+						<Models:Ship.Firepower>
+							<Models:ModernizableStatus Current="66"
+													   Default="60"
+													   IsMax="True"
+													   Max="17"
+													   Upgraded="14" />
+						</Models:Ship.Firepower>
+						<Models:Ship.Info>
+							<Models:ShipInfo HP="15"
+											 Id="27"
+											 MaxASW="78"
+											 MaxTorpedo="95"
+											 MaxFirepower="16"
+											 MaxLOS="76"
+											 MaxArmer="58"
+											 MaxAA="97"
+											 MaxEvasion="10"
+											 Name="伊19"
+											 Speed="Low">
+								<Models:ShipInfo.ShipType>
+									<Models:ShipType Name="潜水艦" />
+								</Models:ShipInfo.ShipType>
+							</Models:ShipInfo>
+						</Models:Ship.Info>
+						<Models:Ship.Torpedo>
+							<Models:ModernizableStatus Current="13"
+													   Default="91"
+													   IsMax="False"
+													   Max="12"
+													   Upgraded="55" />
+						</Models:Ship.Torpedo>
+					</Models:Ship>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
+					<Models:Ship ConditionType="Normal"
+								 Condition="45"
+								 ExpForNextLevel="15000"
+								 Exp="0"
+								 Id="1"
+								 Level="99">
+						<Models:Ship.HP>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="69"
+												 Current="60" />
+						</Models:Ship.HP>
+						<Models:Ship.Fuel>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="120"
+												 Current="100" />
+						</Models:Ship.Fuel>
+						<Models:Ship.Bull>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="110"
+												 Current="100" />
+						</Models:Ship.Bull>
+
+						<Models:Ship.AA>
+							<Models:ModernizableStatus Current="96"
+													   Default="70"
+													   IsMax="True"
+													   Max="68"
+													   Upgraded="96" />
+						</Models:Ship.AA>
+						<Models:Ship.Armer>
+							<Models:ModernizableStatus Current="95"
+													   Default="70"
+													   IsMax="False"
+													   Max="53"
+													   Upgraded="13" />
+						</Models:Ship.Armer>
+						<Models:Ship.Firepower>
+							<Models:ModernizableStatus Current="66"
+													   Default="60"
+													   IsMax="True"
+													   Max="17"
+													   Upgraded="14" />
+						</Models:Ship.Firepower>
+						<Models:Ship.Info>
+							<Models:ShipInfo HP="15"
+											 Id="27"
+											 MaxASW="78"
+											 MaxTorpedo="95"
+											 MaxFirepower="16"
+											 MaxLOS="76"
+											 MaxArmer="58"
+											 MaxAA="97"
+											 MaxEvasion="10"
+											 Name="蒼龍改"
+											 Speed="Low">
+								<Models:ShipInfo.ShipType>
+									<Models:ShipType Name="正規空母" />
+								</Models:ShipInfo.ShipType>
+							</Models:ShipInfo>
+						</Models:Ship.Info>
+						<Models:Ship.Torpedo>
+							<Models:ModernizableStatus Current="13"
+													   Default="91"
+													   IsMax="False"
+													   Max="12"
+													   Upgraded="55" />
+						</Models:Ship.Torpedo>
+					</Models:Ship>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+
+			<contents:ShipViewModel>
+				<contents:ShipViewModel.Ship>
+					<Models:Ship ConditionType="Brilliant"
+								 Condition="80"
+								 ExpForNextLevel="15000"
+								 Exp="0"
+								 Id="1"
+								 Level="99">
+						<Models:Ship.HP>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="500"
+												 Current="200" />
+						</Models:Ship.HP>
+						<Models:Ship.Fuel>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="120"
+												 Current="100" />
+						</Models:Ship.Fuel>
+						<Models:Ship.Bull>
+							<Models:LimitedValue Minimum="0"
+												 Maximum="110"
+												 Current="100" />
+						</Models:Ship.Bull>
+
+						<Models:Ship.AA>
+							<Models:ModernizableStatus Current="96"
+													   Default="70"
+													   IsMax="True"
+													   Max="68"
+													   Upgraded="96" />
+						</Models:Ship.AA>
+						<Models:Ship.Armer>
+							<Models:ModernizableStatus Current="95"
+													   Default="70"
+													   IsMax="False"
+													   Max="53"
+													   Upgraded="13" />
+						</Models:Ship.Armer>
+						<Models:Ship.Firepower>
+							<Models:ModernizableStatus Current="66"
+													   Default="60"
+													   IsMax="True"
+													   Max="17"
+													   Upgraded="14" />
+						</Models:Ship.Firepower>
+						<Models:Ship.Info>
+							<Models:ShipInfo HP="15"
+											 Id="27"
+											 MaxASW="78"
+											 MaxTorpedo="95"
+											 MaxFirepower="16"
+											 MaxLOS="76"
+											 MaxArmer="58"
+											 MaxAA="97"
+											 MaxEvasion="10"
+											 Name="飛行場姫"
+											 Speed="Low">
+								<Models:ShipInfo.ShipType>
+									<Models:ShipType Name="航空戦艦" />
+								</Models:ShipInfo.ShipType>
+							</Models:ShipInfo>
+						</Models:Ship.Info>
+						<Models:Ship.Torpedo>
+							<Models:ModernizableStatus Current="13"
+													   Default="91"
+													   IsMax="False"
+													   Max="12"
+													   Upgraded="55" />
+						</Models:Ship.Torpedo>
+					</Models:Ship>
+				</contents:ShipViewModel.Ship>
+			</contents:ShipViewModel>
+		</fleets:FleetViewModel>
+	</fleets:FleetsViewModel.SelectedFleet>
+</fleets:FleetsViewModel>
