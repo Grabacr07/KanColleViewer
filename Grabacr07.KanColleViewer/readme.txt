@@ -58,17 +58,97 @@ IE コンポーネントを使用しており、ブラウザー部分は Internet Explorer の設定に依存
 
 
 
-■開発環境・言語・ライブラリ
+■開発環境・言語
 
 C# + WPF で開発しています。
-開発環境は Windows 8.1 Pro + Visual Studio Premium 2013 です。
+開発環境は Windows 8.1 Pro + Visual Studio Enterprise 2015 です。
+
+
+■使用ライブラリ
+
 以下のライブラリを使用しています。
 
-・Reactive Extensions / Interactive Extensions
-・Windows API Code Pack
-・Livet (http://ugaya40.net/livet)
-・DynamicJson (http://dynamicjson.codeplex.com/)
-・Nekoxy (https://github.com/veigr/Nekoxy)
+DynamicJson
+(http://dynamicjson.codeplex.com/)
+
+	DynamicJson
+	ver 1.2.0.0 (May. 21th, 2010)
+
+	created and maintained by neuecc ils@neue.cc
+	licensed under Microsoft Public License(Ms-PL)
+	http://neue.cc/
+	http://dynamicjson.codeplex.com/
+
+	・用途 : JSON デシリアライズ
+	・ライセンス : Ms-PL
+	・ライセンス全文 : Licenses/Ms-PL.txt
+
+Livet
+(http://ugaya40.hateblo.jp/entry/Livet)
+
+	・用途 : MVVM(Model/View/ViewModel)パターン用インフラストラクチャ
+	・ライセンス : zlib/libpng
+
+Nekoxy
+(https://github.com/veigr/Nekoxy)
+
+	The MIT License (MIT)
+
+	Copyright (c) 2015 veigr
+
+	・用途 : HTTP通信キャプチャ
+	・ライセンス : The MIT License (MIT)
+	・ライセンス全文 : Licenses/Nekoxy.txt
+
+TrotiNet
+(https://github.com/krys-g/TrotiNet)
+
+	TrotiNet is a proxy library implemented in C#. It aims at delivering a simple,
+	reusable framework for developing any sort of C# proxies.
+
+	TrotiNet is distributed under the GNU Lesser General Public License v3.0
+	(LGPL). See: http://www.gnu.org/licenses/lgpl.html
+
+	・用途 : ローカル HTTP Proxy
+	・ライセンス : GNU LESSER GENERAL PUBLIC LICENSE Version 3
+	・ライセンス全文 : Licenses/LGPL.txt , Licenses/GPL.txt
+	・ソースコード : https://github.com/Grabacr07/KanColleViewer/blob/master/LibrariesSources/TrotiNet-master.zip
+
+Apache log4net
+(https://logging.apache.org/log4net/)
+
+	・用途 : TrotiNet の依存ライブラリ (ログ出力用/未使用)
+	・ライセンス : Apache License Version 2.0
+	・ライセンス全文 : Licenses/Apache.txt
+
+Rx (Reactive Extensions)
+(https://rx.codeplex.com/)
+
+	・用途 : 非同期処理
+	・ライセンス : Apache License Version 2.0
+	・ライセンス全文 : Licenses/Apache.txt
+
+Desktop Toast
+(https://github.com/emoacht/DesktopToast)
+
+	The MIT License (MIT)
+
+	Copyright (c) 2014-2015 EMO
+
+	・用途 : トースト通知
+	・ライセンス : The MIT License (MIT)
+	・ライセンス全文 : Licenses/DesktopToast.txt
+
+.NET Core Audio APIs
+(https://netcoreaudio.codeplex.com/)
+
+	The MIT License (MIT)
+
+	Copyright (c) 2011 Vannatech
+
+	・用途 : 音量操作
+	・ライセンス : The MIT License (MIT)
+	・ライセンス全文 : Licenses/NETCoreAudioAPIs.txt
 
 
 ■免責事項
