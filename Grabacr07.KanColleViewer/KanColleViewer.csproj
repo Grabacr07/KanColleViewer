@@ -584,36 +584,36 @@
     <Folder Include="Views\Converters\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Licenses\Apache.txt">
+    <None Include="..\Licenses\Apache.txt">
       <Link>Licenses\Apache.txt</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Licenses\GPL.txt">
+    </None>
+    <None Include="..\Licenses\GPL.txt">
       <Link>Licenses\GPL.txt</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Licenses\LGPL.txt">
+    </None>
+    <None Include="..\Licenses\LGPL.txt">
       <Link>Licenses\LGPL.txt</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Licenses\DesktopToast.txt">
+    <None Include="..\Licenses\DesktopToast.txt">
       <Link>Licenses\DesktopToast.txt</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Licenses\Ms-PL.txt">
+    </None>
+    <None Include="..\Licenses\Ms-PL.txt">
       <Link>Licenses\Ms-PL.txt</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Licenses\Nekoxy.txt">
+    </None>
+    <None Include="..\Licenses\Nekoxy.txt">
       <Link>Licenses\Nekoxy.txt</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Licenses\NETCoreAudioAPIs.txt">
+    </None>
+    <None Include="..\Licenses\NETCoreAudioAPIs.txt">
       <Link>Licenses\NETCoreAudioAPIs.txt</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
