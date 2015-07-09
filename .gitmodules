@@ -1,4 +1,3 @@
 ﻿[submodule "source/MetroRadiance"]
 	path = source/MetroRadiance
 	url = https://github.com/Grabacr07/MetroRadiance
-	branch = develop
