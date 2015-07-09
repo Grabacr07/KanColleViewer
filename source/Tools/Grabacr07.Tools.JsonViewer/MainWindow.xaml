@@ -1,0 +1,52 @@
+﻿<metro:MetroWindow x:Class="Grabacr07.Tools.JsonViewer.MainWindow"
+				   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+				   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				   xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+				   Title="JsonViewer"
+				   Width="640"
+				   Height="480"
+				   Background="{DynamicResource ThemeBrushKey}"
+				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+				   IsRestoringWindowPlacement="True"
+				   UseLayoutRounding="True">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition />
+		</Grid.RowDefinitions>
+
+		<Grid metro:MetroWindow.IsCaptionBar="True">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+
+			<TextBlock Text="JsonViewer"
+					   FontFamily="Segoe UI Light"
+					   FontSize="18"
+					   Margin="10,4"
+					   Opacity="0.85" />
+			<metro:SystemButtons Grid.Column="1"
+								 VerticalAlignment="Top" />
+		</Grid>
+
+		<DockPanel Grid.Row="1"
+				   Margin="8"
+				   TextOptions.TextFormattingMode="Display">
+			<TextBlock DockPanel.Dock="Top"
+					   Text="といっても、デバッグ実行中にブレークポイントで止めてデバッガー上で dynamic object を見るだけ。Viewer 作るのめんどい。" />
+			<Button DockPanel.Dock="Bottom"
+					Content="Parse"
+					Padding="20,6"
+					HorizontalAlignment="Right"
+					Click="Parse" />
+			<metro:PromptTextBox x:Name="TextBox"
+								 Prompt="ここに json をコピペして Parse ボタンを押してブレークポイントで止めるのじゃ"
+								 AcceptsReturn="True"
+								 TextWrapping="Wrap"
+								 VerticalScrollBarVisibility="Visible"
+								 VerticalContentAlignment="Top"
+								 Margin="0,8" />
+		</DockPanel>
+	</Grid>
+</metro:MetroWindow>
