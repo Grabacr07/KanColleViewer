@@ -112,7 +112,7 @@ TrotiNet
 	・用途 : ローカル HTTP Proxy
 	・ライセンス : GNU LESSER GENERAL PUBLIC LICENSE Version 3
 	・ライセンス全文 : Licenses/LGPL.txt , Licenses/GPL.txt
-	・ソースコード : https://github.com/Grabacr07/KanColleViewer/blob/master/LibrariesSources/TrotiNet-master.zip
+	・ソースコード : https://github.com/Grabacr07/KanColleViewer/blob/master/externals/TrotiNet-master.zip
 
 Apache log4net
 (https://logging.apache.org/log4net/)

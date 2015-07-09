@@ -573,47 +573,22 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="_docs\license.txt">
+    <None Include="readme.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="_docs\readme.txt">
+    <None Include="..\..\LICENSE.txt">
+      <Visible>False</Visible>
+      <Link>license.txt</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\licenses\*.*">
+      <Visible>False</Visible>
+      <Link>Licenses\%(FileName)%(Extension)</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Converters\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\licenses\Apache.txt">
-      <Link>_licenses\Apache.txt</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\licenses\GPL.txt">
-      <Link>_licenses\GPL.txt</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\licenses\LGPL.txt">
-      <Link>_licenses\LGPL.txt</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\licenses\DesktopToast.txt">
-      <Link>_licenses\DesktopToast.txt</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\licenses\Ms-PL.txt">
-      <Link>_licenses\Ms-PL.txt</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\licenses\Nekoxy.txt">
-      <Link>_licenses\Nekoxy.txt</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\licenses\NETCoreAudioAPIs.txt">
-      <Link>_licenses\NETCoreAudioAPIs.txt</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
