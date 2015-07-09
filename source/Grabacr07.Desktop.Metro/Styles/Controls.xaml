@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="pack://application:,,,/Desktop.Metro;component/Styles/Controls.FlatSlider.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/Desktop.Metro;component/Styles/Controls.MetroDialog.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>
