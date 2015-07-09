@@ -68,7 +68,7 @@
     </Reference>
     <Reference Include="Microsoft.Expression.Drawing, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\assemblies\Microsoft.Expression.Drawing.dll</HintPath>
+      <HintPath>..\..\assemblies\Microsoft.Expression.Drawing.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\LivetCask.1.1.0.0\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
@@ -110,7 +110,7 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="Vannatech.CoreAudio">
-      <HintPath>..\assemblies\Vannatech.CoreAudio.dll</HintPath>
+      <HintPath>..\..\assemblies\Vannatech.CoreAudio.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -573,10 +573,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="license.txt">
+    <None Include="_docs\license.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="readme.txt">
+    <None Include="_docs\readme.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -584,40 +584,40 @@
     <Folder Include="Views\Converters\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Licenses\Apache.txt">
-      <Link>Licenses\Apache.txt</Link>
+    <None Include="..\..\licenses\Apache.txt">
+      <Link>_licenses\Apache.txt</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\Licenses\GPL.txt">
-      <Link>Licenses\GPL.txt</Link>
+    <None Include="..\..\licenses\GPL.txt">
+      <Link>_licenses\GPL.txt</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\Licenses\LGPL.txt">
-      <Link>Licenses\LGPL.txt</Link>
+    <None Include="..\..\licenses\LGPL.txt">
+      <Link>_licenses\LGPL.txt</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Licenses\DesktopToast.txt">
-      <Link>Licenses\DesktopToast.txt</Link>
+    <None Include="..\..\licenses\DesktopToast.txt">
+      <Link>_licenses\DesktopToast.txt</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\Licenses\Ms-PL.txt">
-      <Link>Licenses\Ms-PL.txt</Link>
+    <None Include="..\..\licenses\Ms-PL.txt">
+      <Link>_licenses\Ms-PL.txt</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\Licenses\Nekoxy.txt">
-      <Link>Licenses\Nekoxy.txt</Link>
+    <None Include="..\..\licenses\Nekoxy.txt">
+      <Link>_licenses\Nekoxy.txt</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\Licenses\NETCoreAudioAPIs.txt">
-      <Link>Licenses\NETCoreAudioAPIs.txt</Link>
+    <None Include="..\..\licenses\NETCoreAudioAPIs.txt">
+      <Link>_licenses\NETCoreAudioAPIs.txt</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
