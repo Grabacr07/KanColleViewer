@@ -1,72 +1,72 @@
-„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª
-’ñ“Â‹Æ‚à–Z‚µ‚¢I (KanColleViewer)
+ï»¿â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”
+æç£æ¥­ã‚‚å¿™ã—ã„ï¼ (KanColleViewer)
                                              version 3.8.2  2015/05/26
-„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª
+â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”
 
 
-¡‚±‚Ìƒ\ƒtƒgƒEƒFƒA‚É‚Â‚¢‚Ä
+â– ã“ã®ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã«ã¤ã„ã¦
 
-u’ñ“Â‹Æ‚à–Z‚µ‚¢Iv‚ÍADMM.com ‚ª”zM‚µ‚Ä‚¢‚éƒuƒ‰ƒEƒUƒQ[ƒ€
-uŠÍ‘à‚±‚ê‚­‚µ‚å‚ñ `ŠÍ‚±‚ê`v‚ð‚æ‚è—V‚Ñ‚â‚·‚­‚·‚é‚½‚ß‚Ìƒc[ƒ‹‚Å‚·B
-
-
-¡Žå‚È‹@”\
-
-E‚‘¬C•œÞ‚â‚‘¬Œš‘¢Þ (ƒQ[ƒ€“à‚ÅŠm”F‚µ‚É‚­‚¢‚â‚Â) ‚ÌƒŠƒAƒ‹ƒ^ƒCƒ€•\Ž¦
-EŠ‘®‚µ‚Ä‚¢‚éŠÍ–º‚Ì”A•Û—L‚µ‚Ä‚¢‚é‘•”õ‚Ì”‚ÌƒŠƒAƒ‹ƒ^ƒCƒ€•\Ž¦
-EŠÍ‘à‚ÆAŠÍ‘à‚É‘®‚·‚éŠÍ–º‚Ìˆê——•\Ž¦
-E‘•”õ‚ÆA‚»‚ê‚¼‚ê‚ð‘•”õ‚µ‚Ä‚¢‚éŠÍ–º‚Ìˆê——•\Ž¦
-EƒRƒ“ƒfƒBƒVƒ‡ƒ“‚ª‰ñ•œ‚µŠÍ‘à‚ªoŒ‚‰Â”\‚É‚È‚Á‚½ƒ^ƒCƒ~ƒ“ƒO‚Å‚Ìƒg[ƒXƒg’Ê’m
-E“ü‹”ƒhƒbƒNEŒš‘¢ƒhƒbƒN‚ÌŽg—pó‹µ‚ÆA®”õEŒš‘¢I—¹Žž‚Ìƒg[ƒXƒg’Ê’m
-EŒ»Ý‹s’†‚Ì”C–±‚Ìˆê——•\Ž¦‚ÆAŽc‚Á‚Ä‚¢‚éƒfƒCƒŠ[/ƒEƒB[ƒNƒŠ[”C–±‚Ìˆê——•\Ž¦
-E‰“ª‚Ìó‹µ‚ÆAI—¹Žž‚Ìƒg[ƒXƒg’Ê’m
-EƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒg•Û‘¶
-Eƒ~ƒ…[ƒg
+ã€Œæç£æ¥­ã‚‚å¿™ã—ã„ï¼ã€ã¯ã€DMM.com ãŒé…ä¿¡ã—ã¦ã„ã‚‹ãƒ–ãƒ©ã‚¦ã‚¶ã‚²ãƒ¼ãƒ 
+ã€Œè‰¦éšŠã“ã‚Œãã—ã‚‡ã‚“ ï½žè‰¦ã“ã‚Œï½žã€ã‚’ã‚ˆã‚ŠéŠã³ã‚„ã™ãã™ã‚‹ãŸã‚ã®ãƒ„ãƒ¼ãƒ«ã§ã™ã€‚
 
 
-¡“®ìŠÂ‹«
+â– ä¸»ãªæ©Ÿèƒ½
 
-EWindows 8 ˆÈ~
-EWindows 7
-
-ŠJ”­ŽÒ‚Í Windows 8.1 Pro ‚Å‚Ì‚Ý“®ìŠm”F‚ðs‚Á‚Ä‚¨‚è‚Ü‚·B 
-Windows 7 ‚Å‚ÍA‰“ª‚âŒš‘¢‚ÌI—¹Žž‚Ìƒg[ƒXƒg’Ê’m‚ª“®ì‚µ‚Ü‚¹‚ñ (‘ã‚í‚è‚ÉAƒ^ƒXƒNƒgƒŒƒC‚©‚ç‚Ìƒoƒ‹[ƒ“’Ê’m‚É‚È‚è‚Ü‚·)B
-Windows 8 ˆÈ~‚Å‚ÌŽg—p‚ð„§‚µ‚Ü‚·B
-
-E.NET Framework 4.5
-
-Windows 7 ‚ÅŽg—p‚·‚éê‡A.NET Framework 4.5 ‚ÌƒCƒ“ƒXƒg[ƒ‹‚ª•K—v‚Å‚·B
-Windows 8 ˆÈ~‚Ìê‡‚Í•W€‚ÅƒCƒ“ƒXƒg[ƒ‹‚³‚ê‚Ä‚¢‚Ü‚·B
-
-IE ƒRƒ“ƒ|[ƒlƒ“ƒg‚ðŽg—p‚µ‚Ä‚¨‚èAƒuƒ‰ƒEƒU[•”•ª‚Í Internet Explorer ‚ÌÝ’è‚ÉˆË‘¶‚µ‚Ü‚·B 
-ŠÍ‚±‚ê–{‘Ì‚ÌƒAƒbƒvƒf[ƒgŒã‚È‚Ç‚ÉƒXƒNƒŠƒvƒgƒGƒ‰[‚ª•p”­‚·‚éê‡‚ÍAIE ‚ÌƒLƒƒƒbƒVƒ…‚ðíœ‚µ‚Ä‚­‚¾‚³‚¢B 
-‚Ü‚½AƒQ[ƒ€‚ª³‚µ‚­•\Ž¦‚³‚ê‚È‚¢“™‚ÌŒ»Û‚ª”­¶‚µ‚½ê‡‚ÍAIE ‚ÌÝ’è‚âAIE ã‚Å Flash ‚ª•\Ž¦‚Å‚«‚é‚©‚Ç‚¤‚©‚ð‚²Šm”F‚­‚¾‚³‚¢B
-
-‚È‚¨AŠÍ‚±‚êƒQ[ƒ€•”•ª‚ÌƒTƒCƒY (800 x 480) ‚Æ Internet Explorer (WebBrowser control) ‚ÌƒTƒCƒY‚ð‚Ò‚Á‚½‚è‡‚í‚¹‚Ä•\Ž¦‚µ‚Ä‚¢‚é‚¾‚¯‚ÅAFlash ’Šo“™‚às‚Á‚Ä‚¢‚Ü‚¹‚ñB
+ãƒ»é«˜é€Ÿä¿®å¾©æã‚„é«˜é€Ÿå»ºé€ æ (ã‚²ãƒ¼ãƒ å†…ã§ç¢ºèªã—ã«ãã„ã‚„ã¤) ã®ãƒªã‚¢ãƒ«ã‚¿ã‚¤ãƒ è¡¨ç¤º
+ãƒ»æ‰€å±žã—ã¦ã„ã‚‹è‰¦å¨˜ã®æ•°ã€ä¿æœ‰ã—ã¦ã„ã‚‹è£…å‚™ã®æ•°ã®ãƒªã‚¢ãƒ«ã‚¿ã‚¤ãƒ è¡¨ç¤º
+ãƒ»è‰¦éšŠã¨ã€è‰¦éšŠã«å±žã™ã‚‹è‰¦å¨˜ã®ä¸€è¦§è¡¨ç¤º
+ãƒ»è£…å‚™ã¨ã€ãã‚Œãžã‚Œã‚’è£…å‚™ã—ã¦ã„ã‚‹è‰¦å¨˜ã®ä¸€è¦§è¡¨ç¤º
+ãƒ»ã‚³ãƒ³ãƒ‡ã‚£ã‚·ãƒ§ãƒ³ãŒå›žå¾©ã—è‰¦éšŠãŒå‡ºæ’ƒå¯èƒ½ã«ãªã£ãŸã‚¿ã‚¤ãƒŸãƒ³ã‚°ã§ã®ãƒˆãƒ¼ã‚¹ãƒˆé€šçŸ¥
+ãƒ»å…¥æ¸ ãƒ‰ãƒƒã‚¯ãƒ»å»ºé€ ãƒ‰ãƒƒã‚¯ã®ä½¿ç”¨çŠ¶æ³ã¨ã€æ•´å‚™ãƒ»å»ºé€ çµ‚äº†æ™‚ã®ãƒˆãƒ¼ã‚¹ãƒˆé€šçŸ¥
+ãƒ»ç¾åœ¨é‚è¡Œä¸­ã®ä»»å‹™ã®ä¸€è¦§è¡¨ç¤ºã¨ã€æ®‹ã£ã¦ã„ã‚‹ãƒ‡ã‚¤ãƒªãƒ¼/ã‚¦ã‚£ãƒ¼ã‚¯ãƒªãƒ¼ä»»å‹™ã®ä¸€è¦§è¡¨ç¤º
+ãƒ»é å¾ã®çŠ¶æ³ã¨ã€çµ‚äº†æ™‚ã®ãƒˆãƒ¼ã‚¹ãƒˆé€šçŸ¥
+ãƒ»ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆä¿å­˜
+ãƒ»ãƒŸãƒ¥ãƒ¼ãƒˆ
 
 
-¡Žg—pðŒ
+â– å‹•ä½œç’°å¢ƒ
 
-ƒI[ƒvƒ“ƒ\[ƒX / ƒtƒŠ[ƒ\ƒtƒgƒEƒFƒA‚Å‚·B–³—¿‚Å‚²—˜—p’¸‚¯‚Ü‚·B  
-ƒ\[ƒXƒR[ƒh‚ÍAMIT ƒ‰ƒCƒZƒ“ƒX‚Ì‰º‚Å GitHub ‚É‚ÄŒöŠJ‚µ‚Ä‚¢‚Ü‚·B
+ãƒ»Windows 8 ä»¥é™
+ãƒ»Windows 7
+
+é–‹ç™ºè€…ã¯ Windows 8.1 Pro ã§ã®ã¿å‹•ä½œç¢ºèªã‚’è¡Œã£ã¦ãŠã‚Šã¾ã™ã€‚ 
+Windows 7 ã§ã¯ã€é å¾ã‚„å»ºé€ ã®çµ‚äº†æ™‚ã®ãƒˆãƒ¼ã‚¹ãƒˆé€šçŸ¥ãŒå‹•ä½œã—ã¾ã›ã‚“ (ä»£ã‚ã‚Šã«ã€ã‚¿ã‚¹ã‚¯ãƒˆãƒ¬ã‚¤ã‹ã‚‰ã®ãƒãƒ«ãƒ¼ãƒ³é€šçŸ¥ã«ãªã‚Šã¾ã™)ã€‚
+Windows 8 ä»¥é™ã§ã®ä½¿ç”¨ã‚’æŽ¨å¥¨ã—ã¾ã™ã€‚
+
+ãƒ».NET Framework 4.5
+
+Windows 7 ã§ä½¿ç”¨ã™ã‚‹å ´åˆã€.NET Framework 4.5 ã®ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ãŒå¿…è¦ã§ã™ã€‚
+Windows 8 ä»¥é™ã®å ´åˆã¯æ¨™æº–ã§ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã•ã‚Œã¦ã„ã¾ã™ã€‚
+
+IE ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’ä½¿ç”¨ã—ã¦ãŠã‚Šã€ãƒ–ãƒ©ã‚¦ã‚¶ãƒ¼éƒ¨åˆ†ã¯ Internet Explorer ã®è¨­å®šã«ä¾å­˜ã—ã¾ã™ã€‚ 
+è‰¦ã“ã‚Œæœ¬ä½“ã®ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆå¾Œãªã©ã«ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚¨ãƒ©ãƒ¼ãŒé »ç™ºã™ã‚‹å ´åˆã¯ã€IE ã®ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚’å‰Šé™¤ã—ã¦ãã ã•ã„ã€‚ 
+ã¾ãŸã€ã‚²ãƒ¼ãƒ ãŒæ­£ã—ãè¡¨ç¤ºã•ã‚Œãªã„ç­‰ã®ç¾è±¡ãŒç™ºç”Ÿã—ãŸå ´åˆã¯ã€IE ã®è¨­å®šã‚„ã€IE ä¸Šã§ Flash ãŒè¡¨ç¤ºã§ãã‚‹ã‹ã©ã†ã‹ã‚’ã”ç¢ºèªãã ã•ã„ã€‚
+
+ãªãŠã€è‰¦ã“ã‚Œã‚²ãƒ¼ãƒ éƒ¨åˆ†ã®ã‚µã‚¤ã‚º (800 x 480) ã¨ Internet Explorer (WebBrowser control) ã®ã‚µã‚¤ã‚ºã‚’ã´ã£ãŸã‚Šåˆã‚ã›ã¦è¡¨ç¤ºã—ã¦ã„ã‚‹ã ã‘ã§ã€Flash æŠ½å‡ºç­‰ã‚‚è¡Œã£ã¦ã„ã¾ã›ã‚“ã€‚
 
 
-¡Žg—p•û–@
+â– ä½¿ç”¨æ¡ä»¶
 
-“¯«‚Ì KanColleViewer.exe ‚ð‹N“®‚µ‚Ä‚­‚¾‚³‚¢B
-Še‰æ–Ê‚Ì‰ðà“™‚Í http://grabacr.net/kancolleviewer ‚ðŽQÆ‚µ‚Ä‚­‚¾‚³‚¢B
-
-
-
-¡ŠJ”­ŠÂ‹«EŒ¾Œê
-
-C# + WPF ‚ÅŠJ”­‚µ‚Ä‚¢‚Ü‚·B
-ŠJ”­ŠÂ‹«‚Í Windows 8.1 Pro + Visual Studio Enterprise 2015 ‚Å‚·B
+ã‚ªãƒ¼ãƒ—ãƒ³ã‚½ãƒ¼ã‚¹ / ãƒ•ãƒªãƒ¼ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã§ã™ã€‚ç„¡æ–™ã§ã”åˆ©ç”¨é ‚ã‘ã¾ã™ã€‚  
+ã‚½ãƒ¼ã‚¹ã‚³ãƒ¼ãƒ‰ã¯ã€MIT ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ã®ä¸‹ã§ GitHub ã«ã¦å…¬é–‹ã—ã¦ã„ã¾ã™ã€‚
 
 
-¡Žg—pƒ‰ƒCƒuƒ‰ƒŠ
+â– ä½¿ç”¨æ–¹æ³•
 
-ˆÈ‰º‚Ìƒ‰ƒCƒuƒ‰ƒŠ‚ðŽg—p‚µ‚Ä‚¢‚Ü‚·B
+åŒæ¢±ã® KanColleViewer.exe ã‚’èµ·å‹•ã—ã¦ãã ã•ã„ã€‚
+å„ç”»é¢ã®è§£èª¬ç­‰ã¯ http://grabacr.net/kancolleviewer ã‚’å‚ç…§ã—ã¦ãã ã•ã„ã€‚
+
+
+
+â– é–‹ç™ºç’°å¢ƒãƒ»è¨€èªž
+
+C# + WPF ã§é–‹ç™ºã—ã¦ã„ã¾ã™ã€‚
+é–‹ç™ºç’°å¢ƒã¯ Windows 8.1 Pro + Visual Studio Enterprise 2015 ã§ã™ã€‚
+
+
+â– ä½¿ç”¨ãƒ©ã‚¤ãƒ–ãƒ©ãƒª
+
+ä»¥ä¸‹ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã‚’ä½¿ç”¨ã—ã¦ã„ã¾ã™ã€‚
 
 DynamicJson
 (http://dynamicjson.codeplex.com/)
@@ -79,15 +79,15 @@ DynamicJson
 	http://neue.cc/
 	http://dynamicjson.codeplex.com/
 
-	E—p“r : JSON ƒfƒVƒŠƒAƒ‰ƒCƒY
-	Eƒ‰ƒCƒZƒ“ƒX : Ms-PL
-	Eƒ‰ƒCƒZƒ“ƒX‘S•¶ : Licenses/Ms-PL.txt
+	ãƒ»ç”¨é€” : JSON ãƒ‡ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚º
+	ãƒ»ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ : Ms-PL
+	ãƒ»ãƒ©ã‚¤ã‚»ãƒ³ã‚¹å…¨æ–‡ : Licenses/Ms-PL.txt
 
 Livet
 (http://ugaya40.hateblo.jp/entry/Livet)
 
-	E—p“r : MVVM(Model/View/ViewModel)ƒpƒ^[ƒ“—pƒCƒ“ƒtƒ‰ƒXƒgƒ‰ƒNƒ`ƒƒ
-	Eƒ‰ƒCƒZƒ“ƒX : zlib/libpng
+	ãƒ»ç”¨é€” : MVVM(Model/View/ViewModel)ãƒ‘ã‚¿ãƒ¼ãƒ³ç”¨ã‚¤ãƒ³ãƒ•ãƒ©ã‚¹ãƒˆãƒ©ã‚¯ãƒãƒ£
+	ãƒ»ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ : zlib/libpng
 
 Nekoxy
 (https://github.com/veigr/Nekoxy)
@@ -96,9 +96,9 @@ Nekoxy
 
 	Copyright (c) 2015 veigr
 
-	E—p“r : HTTP’ÊMƒLƒƒƒvƒ`ƒƒ
-	Eƒ‰ƒCƒZƒ“ƒX : The MIT License (MIT)
-	Eƒ‰ƒCƒZƒ“ƒX‘S•¶ : Licenses/Nekoxy.txt
+	ãƒ»ç”¨é€” : HTTPé€šä¿¡ã‚­ãƒ£ãƒ—ãƒãƒ£
+	ãƒ»ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ : The MIT License (MIT)
+	ãƒ»ãƒ©ã‚¤ã‚»ãƒ³ã‚¹å…¨æ–‡ : Licenses/Nekoxy.txt
 
 TrotiNet
 (https://github.com/krys-g/TrotiNet)
@@ -109,24 +109,24 @@ TrotiNet
 	TrotiNet is distributed under the GNU Lesser General Public License v3.0
 	(LGPL). See: http://www.gnu.org/licenses/lgpl.html
 
-	E—p“r : ƒ[ƒJƒ‹ HTTP Proxy
-	Eƒ‰ƒCƒZƒ“ƒX : GNU LESSER GENERAL PUBLIC LICENSE Version 3
-	Eƒ‰ƒCƒZƒ“ƒX‘S•¶ : Licenses/LGPL.txt , Licenses/GPL.txt
-	Eƒ\[ƒXƒR[ƒh : https://github.com/Grabacr07/KanColleViewer/blob/master/externals/TrotiNet-master.zip
+	ãƒ»ç”¨é€” : ãƒ­ãƒ¼ã‚«ãƒ« HTTP Proxy
+	ãƒ»ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ : GNU LESSER GENERAL PUBLIC LICENSE Version 3
+	ãƒ»ãƒ©ã‚¤ã‚»ãƒ³ã‚¹å…¨æ–‡ : Licenses/LGPL.txt , Licenses/GPL.txt
+	ãƒ»ã‚½ãƒ¼ã‚¹ã‚³ãƒ¼ãƒ‰ : https://github.com/Grabacr07/KanColleViewer/blob/master/externals/TrotiNet-master.zip
 
 Apache log4net
 (https://logging.apache.org/log4net/)
 
-	E—p“r : TrotiNet ‚ÌˆË‘¶ƒ‰ƒCƒuƒ‰ƒŠ (ƒƒOo—Í—p/–¢Žg—p)
-	Eƒ‰ƒCƒZƒ“ƒX : Apache License Version 2.0
-	Eƒ‰ƒCƒZƒ“ƒX‘S•¶ : Licenses/Apache.txt
+	ãƒ»ç”¨é€” : TrotiNet ã®ä¾å­˜ãƒ©ã‚¤ãƒ–ãƒ©ãƒª (ãƒ­ã‚°å‡ºåŠ›ç”¨/æœªä½¿ç”¨)
+	ãƒ»ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ : Apache License Version 2.0
+	ãƒ»ãƒ©ã‚¤ã‚»ãƒ³ã‚¹å…¨æ–‡ : Licenses/Apache.txt
 
 Rx (Reactive Extensions)
 (https://rx.codeplex.com/)
 
-	E—p“r : ”ñ“¯Šúˆ—
-	Eƒ‰ƒCƒZƒ“ƒX : Apache License Version 2.0
-	Eƒ‰ƒCƒZƒ“ƒX‘S•¶ : Licenses/Apache.txt
+	ãƒ»ç”¨é€” : éžåŒæœŸå‡¦ç†
+	ãƒ»ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ : Apache License Version 2.0
+	ãƒ»ãƒ©ã‚¤ã‚»ãƒ³ã‚¹å…¨æ–‡ : Licenses/Apache.txt
 
 Desktop Toast
 (https://github.com/emoacht/DesktopToast)
@@ -135,9 +135,9 @@ Desktop Toast
 
 	Copyright (c) 2014-2015 EMO
 
-	E—p“r : ƒg[ƒXƒg’Ê’m
-	Eƒ‰ƒCƒZƒ“ƒX : The MIT License (MIT)
-	Eƒ‰ƒCƒZƒ“ƒX‘S•¶ : Licenses/DesktopToast.txt
+	ãƒ»ç”¨é€” : ãƒˆãƒ¼ã‚¹ãƒˆé€šçŸ¥
+	ãƒ»ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ : The MIT License (MIT)
+	ãƒ»ãƒ©ã‚¤ã‚»ãƒ³ã‚¹å…¨æ–‡ : Licenses/DesktopToast.txt
 
 .NET Core Audio APIs
 (https://netcoreaudio.codeplex.com/)
@@ -146,47 +146,47 @@ Desktop Toast
 
 	Copyright (c) 2011 Vannatech
 
-	E—p“r : ‰¹—Ê‘€ì
-	Eƒ‰ƒCƒZƒ“ƒX : The MIT License (MIT)
-	Eƒ‰ƒCƒZƒ“ƒX‘S•¶ : Licenses/NETCoreAudioAPIs.txt
+	ãƒ»ç”¨é€” : éŸ³é‡æ“ä½œ
+	ãƒ»ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ : The MIT License (MIT)
+	ãƒ»ãƒ©ã‚¤ã‚»ãƒ³ã‚¹å…¨æ–‡ : Licenses/NETCoreAudioAPIs.txt
 
 
-¡–ÆÓŽ–€
+â– å…è²¬äº‹é …
 
-–{ƒ\ƒtƒgƒEƒFƒA‚ÌŽg—p‚ÍA‚·‚×‚ÄŽ©ŒÈÓ”C‚Ås‚Á‚Ä‚­‚¾‚³‚¢B
-‚±‚Ìƒ\ƒtƒgƒEƒFƒA‚ðŽg—p‚µ‚½Œ‹‰Ê¶‚¶‚½‘¹ŠQ‚É‚Â‚¢‚ÄAŠJ”­ŽÒ‚Í
-ˆêØÓ”C‚ð•‰‚¢‚Ü‚¹‚ñB
+æœ¬ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã®ä½¿ç”¨ã¯ã€ã™ã¹ã¦è‡ªå·±è²¬ä»»ã§è¡Œã£ã¦ãã ã•ã„ã€‚
+ã“ã®ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã‚’ä½¿ç”¨ã—ãŸçµæžœç”Ÿã˜ãŸæå®³ã«ã¤ã„ã¦ã€é–‹ç™ºè€…ã¯
+ä¸€åˆ‡è²¬ä»»ã‚’è² ã„ã¾ã›ã‚“ã€‚
 
 
-¡XV—š—ð
+â– æ›´æ–°å±¥æ­´
 
-2015/05/26 - version 3.8.2 ƒŠƒŠ[ƒX
-2015/05/18 - version 3.8 ƒŠƒŠ[ƒX
-2015/05/03 - version 3.7 ƒŠƒŠ[ƒX
-2015/02/07 - version 3.5 ƒŠƒŠ[ƒX
-2014/09/26 - version 3.4 ƒŠƒŠ[ƒX
-2014/08/12 - version 3.3 ƒŠƒŠ[ƒX
-2014/08/10 - version 3.2 ƒŠƒŠ[ƒX
-2014/08/09 - version 3.1 ƒŠƒŠ[ƒX
-2014/08/07 - version 3.0 ƒŠƒŠ[ƒX
-2014/05/16 - version 2.6 ƒŠƒŠ[ƒX
-2014/04/29 - version 2.6 beta rev.2 ƒŠƒŠ[ƒX
-2014/04/23 - version 2.6 beta ƒŠƒŠ[ƒX
-2014/03/21 - version 2.4 ƒŠƒŠ[ƒX
-2014/03/04 - version 2.3 ƒŠƒŠ[ƒX
-2014/03/02 - version 2.2 ƒŠƒŠ[ƒX
-2014/02/19 - version 2.1 ƒŠƒŠ[ƒX
-2014/02/06 - version 2.0.1 ƒŠƒŠ[ƒX
-2014/02/01 - version 2.0 ƒŠƒŠ[ƒX
-2014/01/20 - version 1.2.1 ƒŠƒŠ[ƒX
-2013/12/29 - version 1.2 ƒŠƒŠ[ƒX
-2013/12/27 - version 1.1 ƒŠƒŠ[ƒX
-2013/12/22 - version 1.0 ƒŠƒŠ[ƒX
+2015/05/26 - version 3.8.2 ãƒªãƒªãƒ¼ã‚¹
+2015/05/18 - version 3.8 ãƒªãƒªãƒ¼ã‚¹
+2015/05/03 - version 3.7 ãƒªãƒªãƒ¼ã‚¹
+2015/02/07 - version 3.5 ãƒªãƒªãƒ¼ã‚¹
+2014/09/26 - version 3.4 ãƒªãƒªãƒ¼ã‚¹
+2014/08/12 - version 3.3 ãƒªãƒªãƒ¼ã‚¹
+2014/08/10 - version 3.2 ãƒªãƒªãƒ¼ã‚¹
+2014/08/09 - version 3.1 ãƒªãƒªãƒ¼ã‚¹
+2014/08/07 - version 3.0 ãƒªãƒªãƒ¼ã‚¹
+2014/05/16 - version 2.6 ãƒªãƒªãƒ¼ã‚¹
+2014/04/29 - version 2.6 beta rev.2 ãƒªãƒªãƒ¼ã‚¹
+2014/04/23 - version 2.6 beta ãƒªãƒªãƒ¼ã‚¹
+2014/03/21 - version 2.4 ãƒªãƒªãƒ¼ã‚¹
+2014/03/04 - version 2.3 ãƒªãƒªãƒ¼ã‚¹
+2014/03/02 - version 2.2 ãƒªãƒªãƒ¼ã‚¹
+2014/02/19 - version 2.1 ãƒªãƒªãƒ¼ã‚¹
+2014/02/06 - version 2.0.1 ãƒªãƒªãƒ¼ã‚¹
+2014/02/01 - version 2.0 ãƒªãƒªãƒ¼ã‚¹
+2014/01/20 - version 1.2.1 ãƒªãƒªãƒ¼ã‚¹
+2013/12/29 - version 1.2 ãƒªãƒªãƒ¼ã‚¹
+2013/12/27 - version 1.1 ãƒªãƒªãƒ¼ã‚¹
+2013/12/22 - version 1.0 ãƒªãƒªãƒ¼ã‚¹
 
-„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª
- Product name: ’ñ“Â‹Æ‚à–Z‚µ‚¢I    
+â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”
+ Product name: æç£æ¥­ã‚‚å¿™ã—ã„ï¼    
  Product URL:  http://grabacr.net/kancolleviewer
  Source code:  https://github.com/Grabacr07/KanColleViewer
  License:      MIT License
  Author:       @Grabacr07
-„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª
+â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”

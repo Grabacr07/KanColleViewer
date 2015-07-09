@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Grabacr07.KanColleViewer.Composition
 {
 	/// <summary>
-	/// ƒ[ƒh‚µ‚½ƒvƒ‰ƒOƒCƒ“‚Ìƒƒ^ƒf[ƒ^‚ÆAƒCƒ“ƒ|[ƒg‚³‚ê‚½ƒvƒ‰ƒOƒCƒ“‹@”\‚Ö‚ÌƒAƒNƒZƒX‚ğ’ñ‹Ÿ‚µ‚Ü‚·B
+	/// ãƒ­ãƒ¼ãƒ‰ã—ãŸãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã®ãƒ¡ã‚¿ãƒ‡ãƒ¼ã‚¿ã¨ã€ã‚¤ãƒ³ãƒãƒ¼ãƒˆã•ã‚ŒãŸãƒ—ãƒ©ã‚°ã‚¤ãƒ³æ©Ÿèƒ½ã¸ã®ã‚¢ã‚¯ã‚»ã‚¹ã‚’æä¾›ã—ã¾ã™ã€‚
 	/// </summary>
 	public class Plugin : IEnumerable
 	{

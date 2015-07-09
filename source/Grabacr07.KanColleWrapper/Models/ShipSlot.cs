@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,7 +14,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public bool Equipped => this.Item != null;
 
-		#region Current •ÏX’Ê’mƒvƒƒpƒeƒB
+		#region Current å¤‰æ›´é€šçŸ¥ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£
 
 		private int _Current;
 
