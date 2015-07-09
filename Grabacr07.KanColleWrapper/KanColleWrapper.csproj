@@ -230,9 +230,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>KanColleProxy.Endpoints.cs</LastGenOutput>
     </None>
-    <None Include="DynamicJson.license.txt">
-      <DependentUpon>DynamicJson.cs</DependentUpon>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

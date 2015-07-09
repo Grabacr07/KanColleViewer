@@ -583,6 +583,38 @@
   <ItemGroup>
     <Folder Include="Views\Converters\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Licenses\Apache.txt">
+      <Link>Licenses\Apache.txt</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Licenses\GPL.txt">
+      <Link>Licenses\GPL.txt</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Licenses\LGPL.txt">
+      <Link>Licenses\LGPL.txt</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Licenses\DesktopToast.txt">
+      <Link>Licenses\DesktopToast.txt</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Licenses\Ms-PL.txt">
+      <Link>Licenses\Ms-PL.txt</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Licenses\Nekoxy.txt">
+      <Link>Licenses\Nekoxy.txt</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Licenses\NETCoreAudioAPIs.txt">
+      <Link>Licenses\NETCoreAudioAPIs.txt</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
