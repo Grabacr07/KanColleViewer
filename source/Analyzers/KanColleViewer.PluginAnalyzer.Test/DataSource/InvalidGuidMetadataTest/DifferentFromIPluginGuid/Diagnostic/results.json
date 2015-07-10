@@ -1,0 +1,10 @@
+[
+    {
+        "id": "KanColleViewer.PluginAnalyzer.InvalidGuidMetadata",
+        "sevirity": "Warning",
+        "line": 7,
+        "column": 2,
+        "path": "Tool.cs",
+        "message-args": [ "GUID の ExportMetadata 属性には、GUID と解釈できる形式で IPlugin で指定したものと同じ値を指定する必要があります。" ]
+    }
+]

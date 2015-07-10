@@ -53,6 +53,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroTrilithon", "MetroTrilithon\source\MetroTrilithon\MetroTrilithon.csproj", "{DF381709-9F44-44ED-A7D6-ECDF157E620D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroTrilithon.Desktop", "MetroTrilithon\source\MetroTrilithon.Desktop\MetroTrilithon.Desktop.csproj", "{4E2EB2E0-E5FE-4FEB-A3E5-5F2F05CD1A67}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Analyzers", "Analyzers", "{0F9AEBCF-F2ED-4D4D-8E58-CAFED5D965C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanColleViewer.PluginAnalyzer", "Analyzers\KanColleViewer.PluginAnalyzer\KanColleViewer.PluginAnalyzer.csproj", "{B84F1251-4042-4ADC-955E-415469947538}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanColleViewer.PluginAnalyzer.Test", "Analyzers\KanColleViewer.PluginAnalyzer.Test\KanColleViewer.PluginAnalyzer.Test.csproj", "{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -178,6 +183,30 @@ Global
 		{4E2EB2E0-E5FE-4FEB-A3E5-5F2F05CD1A67}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4E2EB2E0-E5FE-4FEB-A3E5-5F2F05CD1A67}.Release|x86.ActiveCfg = Release|Any CPU
 		{4E2EB2E0-E5FE-4FEB-A3E5-5F2F05CD1A67}.Release|x86.Build.0 = Release|Any CPU
+		{B84F1251-4042-4ADC-955E-415469947538}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B84F1251-4042-4ADC-955E-415469947538}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B84F1251-4042-4ADC-955E-415469947538}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B84F1251-4042-4ADC-955E-415469947538}.Debug|x86.Build.0 = Debug|Any CPU
+		{B84F1251-4042-4ADC-955E-415469947538}.Release (beta)|Any CPU.ActiveCfg = Release|Any CPU
+		{B84F1251-4042-4ADC-955E-415469947538}.Release (beta)|Any CPU.Build.0 = Release|Any CPU
+		{B84F1251-4042-4ADC-955E-415469947538}.Release (beta)|x86.ActiveCfg = Release|Any CPU
+		{B84F1251-4042-4ADC-955E-415469947538}.Release (beta)|x86.Build.0 = Release|Any CPU
+		{B84F1251-4042-4ADC-955E-415469947538}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B84F1251-4042-4ADC-955E-415469947538}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B84F1251-4042-4ADC-955E-415469947538}.Release|x86.ActiveCfg = Release|Any CPU
+		{B84F1251-4042-4ADC-955E-415469947538}.Release|x86.Build.0 = Release|Any CPU
+		{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A}.Debug|x86.Build.0 = Debug|Any CPU
+		{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A}.Release (beta)|Any CPU.ActiveCfg = Release|Any CPU
+		{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A}.Release (beta)|Any CPU.Build.0 = Release|Any CPU
+		{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A}.Release (beta)|x86.ActiveCfg = Release|Any CPU
+		{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A}.Release (beta)|x86.Build.0 = Release|Any CPU
+		{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A}.Release|x86.ActiveCfg = Release|Any CPU
+		{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -191,5 +220,7 @@ Global
 		{08226BB3-A7A0-49E3-84DE-ED5B7A7D293E} = {D844E42C-9406-43BF-9681-4F06F6CB3AD9}
 		{DF381709-9F44-44ED-A7D6-ECDF157E620D} = {5E122478-836E-4B7D-B0A4-F5EAA40BBE2A}
 		{4E2EB2E0-E5FE-4FEB-A3E5-5F2F05CD1A67} = {5E122478-836E-4B7D-B0A4-F5EAA40BBE2A}
+		{B84F1251-4042-4ADC-955E-415469947538} = {0F9AEBCF-F2ED-4D4D-8E58-CAFED5D965C2}
+		{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A} = {0F9AEBCF-F2ED-4D4D-8E58-CAFED5D965C2}
 	EndGlobalSection
 EndGlobal

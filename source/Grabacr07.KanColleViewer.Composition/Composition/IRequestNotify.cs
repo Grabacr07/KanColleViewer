@@ -9,6 +9,7 @@ namespace Grabacr07.KanColleViewer.Composition
 	/// プラグイン側から本体に通知を要求するためのメンバーを公開します。
 	/// このインターフェイスは、KanColleViewer プラグインのコントラクト型です。
 	/// </summary>
+	[PluginFeature]
 	public interface IRequestNotify
 	{
 		/// <summary>

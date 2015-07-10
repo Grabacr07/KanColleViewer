@@ -9,6 +9,7 @@ namespace Grabacr07.KanColleViewer.Composition
 	/// 通知機能を公開します。
 	/// このインターフェイスは、KanColleViewer プラグインのコントラクト型です。
 	/// </summary>
+	[PluginFeature]
 	public interface INotifier
 	{
 		void Show(string header, string body, Action activated, Action<Exception> failed = null);

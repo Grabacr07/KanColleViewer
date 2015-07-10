@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+
+    "title": "Json schema for Diagnostic Results",
+
+    "type": "array",
+
+    "items": {
+        "type": "object",
+
+        "properties": {
+            "id": { "type": "string", "description": "A unique identifier for the diagnostic." },
+            "sevirity": { "enum": [ "Hidden", "Info", "Warning", "Error" ], "description": "Describes how severe a diagnostic is." },
+            "line": { "type": "integer", "description": "The line number of location where the diagnostic appears." },
+            "column": { "type": "integer", "description": "The column number of location where the diagnostic appears." },
+            "path": { "type": "string", "description": "The path of the source document file." },
+            "message-args": { "type": "array", "items": { "type": "string" }, "description": "Arguments to a format message string." }
+        }
+    }
+}

@@ -50,6 +50,7 @@
     <Compile Include="Composition\ISettings.cs" />
     <Compile Include="Composition\ITool.cs" />
     <Compile Include="Composition\NotifyEventArgs.cs" />
+    <Compile Include="Composition\PluginFeatureAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
