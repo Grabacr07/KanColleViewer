@@ -74,7 +74,7 @@ MIT ライセンスの下で公開する、オープンソース / フリーソ�
 
 * **用途 :** JSON デシリアライズ
 * **ライセンス :** Ms-PL
-* **ライセンス全文 :** [Licenses/Ms-PL.txt](Licenses/Ms-PL.txt)
+* **ライセンス全文 :** [licenses/Ms-PL.txt](licenses/Ms-PL.txt)
 
 #### [Livet](http://ugaya40.hateblo.jp/entry/Livet)
 
@@ -89,7 +89,7 @@ MIT ライセンスの下で公開する、オープンソース / フリーソ�
 
 * **用途 :** HTTP通信キャプチャ
 * **ライセンス :** The MIT License (MIT)
-* **ライセンス全文 :** [Licenses/Nekoxy.txt](Licenses/Nekoxy.txt)
+* **ライセンス全文 :** [licenses/Nekoxy.txt](licenses/Nekoxy.txt)
 
 #### [TrotiNet](https://github.com/krys-g/TrotiNet)
 
@@ -101,20 +101,20 @@ MIT ライセンスの下で公開する、オープンソース / フリーソ�
 
 * **用途 :** ローカル HTTP Proxy
 * **ライセンス :** GNU LESSER GENERAL PUBLIC LICENSE Version 3
-* **ライセンス全文 :** [Licenses/LGPL.txt](Licenses/LGPL.txt) , [Licenses/GPL.txt](Licenses/GPL.txt)
-* **ソースコード :** [LibrariesSources/TrotiNet-master.zip](LibrariesSources/TrotiNet-master.zip)
+* **ライセンス全文 :** [licenses/LGPL.txt](licenses/LGPL.txt) , [licenses/GPL.txt](licenses/GPL.txt)
+* **ソースコード :** [externals/TrotiNet-master.zip](externals/TrotiNet-master.zip)
 
 #### [Apache log4net](https://logging.apache.org/log4net/)
 
 * **用途 :** TrotiNet の依存ライブラリ (ログ出力用/未使用)
 * **ライセンス :** Apache License Version 2.0
-* **ライセンス全文 :** [Licenses/Apache.txt](Licenses/Apache.txt)
+* **ライセンス全文 :** [licenses/Apache.txt](licenses/Apache.txt)
 
 #### [Rx (Reactive Extensions)](https://rx.codeplex.com/)
 
 * **用途 :** 非同期処理
 * **ライセンス :** Apache License Version 2.0
-* **ライセンス全文 :** [Licenses/Apache.txt](Licenses/Apache.txt)
+* **ライセンス全文 :** [licenses/Apache.txt](licenses/Apache.txt)
 
 #### [Desktop Toast](https://github.com/emoacht/DesktopToast)
 
@@ -124,7 +124,7 @@ MIT ライセンスの下で公開する、オープンソース / フリーソ�
 
 * **用途 :** トースト通知
 * **ライセンス :** The MIT License (MIT)
-* **ライセンス全文 :** [Licenses/DesktopToast.txt](Licenses/DesktopToast.txt)
+* **ライセンス全文 :** [licenses/DesktopToast.txt](licenses/DesktopToast.txt)
 
 #### [.NET Core Audio APIs](https://netcoreaudio.codeplex.com/)
 
@@ -134,4 +134,4 @@ MIT ライセンスの下で公開する、オープンソース / フリーソ�
 
 * **用途 :** 音量操作
 * **ライセンス :** The MIT License (MIT)
-* **ライセンス全文 :** [Licenses/NETCoreAudioAPIs.txt](Licenses/NETCoreAudioAPIs.txt)
+* **ライセンス全文 :** [licenses/NETCoreAudioAPIs.txt](licenses/NETCoreAudioAPIs.txt)
