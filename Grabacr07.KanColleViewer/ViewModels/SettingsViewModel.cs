@@ -26,6 +26,18 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			protected set { throw new NotImplementedException(); }
 		}
 
+		public IEnumerable<string> VersionList { get; private set; }
+		public static Dictionary<string, int> VersionTable = new Dictionary<string, int> 
+		{
+			{"IE8", 8000}, {"강제IE8", 8888}, {"IE9", 9000}, {"강제IE9", 9999}, {"IE10", 10000},
+			{"강제IE10", 10001}, {"IE11", 11000}, {"강제IE11", 11001},
+		};
+		private static Dictionary<int, string> VersionTableInt = new Dictionary<int, string> 
+		{
+			{8000,"IE8"}, {8888,"강제IE8"}, {9000,"IE9"}, {9999,"강제IE9"}, {10000,"IE10"},
+			{10001,"강제IE10"}, {11000,"IE11"}, {11001,"강제IE11"},
+		};
+
 		#region ScreenshotFolder 変更通知プロパティ
 
 		public string ScreenshotFolder
@@ -413,7 +425,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-
 		#region AppOnlineVersion 変更通知プロパティ
 
 		private string _AppOnlineVersion;
@@ -539,7 +550,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		}
 
 		#endregion
-		
+
 		#region ExpeditionsOnlineVersion 変更通知プロパティ
 
 		private string _ExpeditionsOnlineVersion;
@@ -560,6 +571,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		}
 
 		#endregion
+
 		#region RemodelSlotsOnlineVersion 変更通知プロパティ
 
 		private string _RemodelSlotsOnlineVersion;
@@ -670,6 +682,39 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region GPU Render Enable
+
+		public bool GPURenderEnable
+		{
+			get { return Settings.Current.GPURenderEnable; }
+			set
+			{
+				if (Settings.Current.GPURenderEnable == value) return;
+				Settings.Current.GPURenderEnable = value;
+				this.RaisePropertyChanged();
+			}
+		}
+		#endregion
+
+		#region SelectedVersion 変更通知プロパティ
+
+		private string _SelectedVersion;
+
+		public string SelectedVersion
+		{
+			get { return this._SelectedVersion; }
+			set
+			{
+				if (_SelectedVersion != value)
+				{
+					this._SelectedVersion = value;
+					this.RaisePropertyChanged();
+					this.ChangeIEVersion();
+				}
+			}
+		}
+
+		#endregion
 
 		#region ViewRangeSettingsCollection 変更通知プロパティ
 
@@ -709,10 +754,37 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		}
 		#endregion
 
-
+		private void ChangeIEVersion()
+		{
+			if (this.SelectedVersion == "IE8")
+				Settings.Current.FeatureBrowserEmulation = 8000;
+			else if (this.SelectedVersion == "강제IE8")
+				Settings.Current.FeatureBrowserEmulation = 8888;
+			else if (this.SelectedVersion == "IE9")
+				Settings.Current.FeatureBrowserEmulation = 9000;
+			else if (this.SelectedVersion == "강제IE9")
+				Settings.Current.FeatureBrowserEmulation = 9999;
+			else if (this.SelectedVersion == "IE10")
+				Settings.Current.FeatureBrowserEmulation = 10000;
+			else if (this.SelectedVersion == "강제IE10")
+				Settings.Current.FeatureBrowserEmulation = 10001;
+			else if (this.SelectedVersion == "IE11")
+				Settings.Current.FeatureBrowserEmulation = 11000;
+			else Settings.Current.FeatureBrowserEmulation = 11001;
+		}
+		private string CheckVer(int version)
+		{
+			return VersionTableInt[version];
+		}
 		public SettingsViewModel()
 		{
 			if (Helper.IsInDesignMode) return;
+			this.VersionList = VersionTable.Keys.ToList();
+
+			if (Settings.Current.FeatureBrowserEmulation < 8000) Settings.Current.FeatureBrowserEmulation = 8000;
+
+			this.SelectedVersion = CheckVer(Settings.Current.FeatureBrowserEmulation);
+
 
 			this.Libraries = App.ProductInfo.Libraries.Aggregate(
 				new List<BindableTextViewModel>(),

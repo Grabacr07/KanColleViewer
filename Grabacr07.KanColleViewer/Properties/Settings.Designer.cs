@@ -62,15 +62,6 @@ namespace Grabacr07.KanColleViewer.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("8000")]
-        public int FeatureBrowserEmulation {
-            get {
-                return ((int)(this["FeatureBrowserEmulation"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("https://raw.github.com/FreyYa/KCVKrTranslation/master/resources/Translations/")]
         public global::System.Uri XMLTransUrl {
             get {

@@ -21,7 +21,7 @@ namespace Grabacr07.KanColleViewer.Models
 			"grabacr.net",
 			"KanColleViewer",
 			"Settings.xml");
-		private static readonly string CurrentSettingsVersion = "1.7";
+		private static readonly string CurrentSettingsVersion = "1.8";
 		public static Settings Current { get; set; }
 
 		public delegate void EventHandler();
@@ -68,6 +68,7 @@ namespace Grabacr07.KanColleViewer.Models
 				VerticalSize = new Point(0, 1000),
 				KanColleClientSettings = new KanColleClientSettings(),
 				CloseConfirm = true,
+				FeatureBrowserEmulation = 8000,
 			};
 		}
 
@@ -718,6 +719,36 @@ namespace Grabacr07.KanColleViewer.Models
 					this._RefreshConfirmOnlyInSortie = value;
 					this.RaisePropertyChanged();
 				}
+			}
+		}
+		#endregion
+
+		#region GPU Render Enable
+
+		private bool _GPURenderEnable;
+		public bool GPURenderEnable
+		{
+			get { return this._GPURenderEnable; }
+			set
+			{
+				if (this._GPURenderEnable == value) return;
+				this._GPURenderEnable = value;
+				this.RaisePropertyChanged();
+			}
+		}
+		#endregion
+
+		#region Browser Version
+
+		private int _FeatureBrowserEmulation;
+		public int FeatureBrowserEmulation
+		{
+			get { return this._FeatureBrowserEmulation; }
+			set
+			{
+				if (this._FeatureBrowserEmulation == value) return;
+				this._FeatureBrowserEmulation = value;
+				this.RaisePropertyChanged();
 			}
 		}
 		#endregion

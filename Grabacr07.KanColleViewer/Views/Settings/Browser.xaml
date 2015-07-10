@@ -83,5 +83,19 @@
 		</Grid>
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+		<TextBlock Text="GPU 렌더링 활성화" Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+		<CheckBox Content="GPU렌더링을 활성화합니다. 활성화한 경우 퍼포먼스가 올라갈수도 있습니다." IsChecked="{Binding GPURenderEnable}" Height="17" Margin="15,0,0,10"/>
+		<TextBlock Text="※프로그램 재시작후 적용됩니다." Height="17" Margin="15,0,0,10"/>
+		<Rectangle Height="1"
+				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+		<TextBlock Text="브라우저 버전 설정" Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+		<TextBlock Text="브라우저의 버전을 변경합니다. 프로그램 재시작후 적용됩니다." Height="17" Margin="15,0,0,10"/>
+		<metro:PromptComboBox ItemsSource="{Binding VersionList}"
+							  HorizontalAlignment="Left"
+							  Prompt=""
+							  SelectedValue="{Binding SelectedVersion, Mode=TwoWay}"
+							  IsReadOnly="True"
+							  MinWidth="50"
+							  Margin="15,0,0,10"/>
 	</StackPanel>
 </UserControl>
