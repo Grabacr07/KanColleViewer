@@ -5,9 +5,6 @@
     <Setting Name="LocalProxyPort" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">37564</Value>
     </Setting>
-    <Setting Name="KanColleUrl" Type="System.Uri" Scope="Application">
-      <Value Profile="(Default)">http://www.dmm.com/netgame/social/application/-/detail/=/app_id=854854/</Value>
-    </Setting>
     <Setting Name="OverrideStyleSheet" Type="System.String" Scope="Application">
       <Value Profile="(Default)">body {
     margin:0;
@@ -30,6 +27,9 @@
     </Setting>
     <Setting Name="KCVUpdateUrl" Type="System.Uri" Scope="Application">
       <Value Profile="(Default)">https://raw.github.com/FreyYa/KCVKrTranslation/master/resources/Version.xml</Value>
+    </Setting>
+    <Setting Name="KanColleUrl" Type="System.Uri" Scope="Application">
+      <Value Profile="(Default)">http://www.dmm.com/netgame_s/kancolle/</Value>
     </Setting>
   </Settings>
 </SettingsFile>

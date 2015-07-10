@@ -34,15 +34,6 @@ namespace Grabacr07.KanColleViewer.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://www.dmm.com/netgame/social/application/-/detail/=/app_id=854854/")]
-        public global::System.Uri KanColleUrl {
-            get {
-                return ((global::System.Uri)(this["KanColleUrl"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("body {\r\n    margin:0;\r\n    overflow:hidden\r\n}\r\n\r\n#game_frame {\r\n    position:fixe" +
             "d;\r\n    left:50%;\r\n    top:-16px;\r\n    margin-left:-450px;\r\n    z-index:1\r\n}")]
         public string OverrideStyleSheet {
@@ -75,6 +66,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         public global::System.Uri KCVUpdateUrl {
             get {
                 return ((global::System.Uri)(this["KCVUpdateUrl"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.dmm.com/netgame_s/kancolle/")]
+        public global::System.Uri KanColleUrl {
+            get {
+                return ((global::System.Uri)(this["KanColleUrl"]));
             }
         }
     }
