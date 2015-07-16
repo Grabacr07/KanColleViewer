@@ -15,7 +15,7 @@
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 mc:Ignorable="d"
 			 d:DesignWidth="600"
-			 d:DataContext="{d:DesignInstance viewModels:MainContentViewModel}">
+			 d:DataContext="{d:DesignInstance viewModels:InformationViewModel}">
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" />
@@ -58,7 +58,8 @@
 		</StackPanel>
 
 		<StackPanel Grid.Column="1"
-					Orientation="Horizontal">
+					Orientation="Horizontal"
+					VerticalAlignment="Center">
 			<Grid>
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto" />

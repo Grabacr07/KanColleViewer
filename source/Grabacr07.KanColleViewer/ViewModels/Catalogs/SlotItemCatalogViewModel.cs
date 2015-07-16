@@ -6,6 +6,7 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper;
+using MetroTrilithon.Mvvm;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 {

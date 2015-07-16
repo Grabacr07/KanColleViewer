@@ -7,18 +7,15 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
-			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+			 xmlns:metro2="clr-namespace:MetroTrilithon.Controls;assembly=MetroTrilithon.Desktop"
 			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
 			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
-			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
-			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
-			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
-			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 xmlns:vms="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Settings"
 			 mc:Ignorable="d"
 			 d:DesignWidth="700"
 			 d:DesignHeight="400"
-			 d:DataContext="{d:DesignInstance viewModels:SettingsViewModel}">
+			 d:DataContext="{d:DesignInstance vms:SettingsViewModel}">
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
@@ -28,7 +25,7 @@
 	</UserControl.Resources>
 
 	<StackPanel>
-		<views:BrowserNavigator DataContext="{Binding Source={x:Static root:Application.Instance}, Path=MainWindowViewModel.Navigator}" />
+		<views:BrowserNavigator DataContext="{Binding Navigator}" />
 		<TextBlock Text="{Binding Resources.Settings_BrowserControl_Notice, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource DefaultTextStyleKey}"
 				   Margin="43,-2,0,10" />
@@ -38,6 +35,7 @@
 
 		<DockPanel Margin="0,10">
 			<metro2:CallMethodButton DockPanel.Dock="Right"
+									 MethodTarget="{Binding Source={x:Static root:WindowService.Current}}"
 									 MethodName="ClearZoomFactor"
 									 Padding="20,4"
 									 HorizontalAlignment="Left">

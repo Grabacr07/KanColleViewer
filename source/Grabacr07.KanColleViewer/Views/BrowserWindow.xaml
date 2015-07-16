@@ -9,11 +9,11 @@
 				   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 				   xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 				   xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+				   xmlns:metro2="http://schemes.grabacr.net/winfx/2015/personal/controls"
 				   xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
 				   xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
 				   xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
 				   xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
-				   xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 				   xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 				   xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
 				   xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
@@ -66,7 +66,7 @@
 		<WebBrowser x:Name="webBrowser"
 					x:FieldModifier="private"
 					Grid.Row="2"
-					controls:WebBrowserHelper.AllowWebBrowserDrop="False">
+					metro2:WebBrowserHelper.AllowWebBrowserDrop="False">
 			<i:Interaction.Behaviors>
 				<behaviors:NavigatorBehavior Navigator="{Binding}" />
 			</i:Interaction.Behaviors>

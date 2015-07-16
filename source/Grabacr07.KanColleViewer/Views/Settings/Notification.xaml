@@ -6,14 +6,11 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
-			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
-			 xmlns:controls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
-			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
-			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
-			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
+			 xmlns:ms="clr-namespace:Grabacr07.KanColleViewer.Models.Settings"
+			 xmlns:vms="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Settings"
 			 mc:Ignorable="d"
 			 d:DesignWidth="550"
-			 d:DataContext="{d:DesignInstance viewModels:SettingsViewModel}">
+			 d:DataContext="{d:DesignInstance vms:SettingsViewModel}">
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
@@ -28,7 +25,7 @@
 
 		<StackPanel Margin="20,-5,0,10">
 			<CheckBox Content="建造完了時に通知する"
-					  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=NotifyBuildingCompleted}"
+					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.NotifyBuildingCompleted}, Path=Value}"
 					  Margin="0,5" />
 
 			<Border Height="1"
@@ -38,11 +35,11 @@
 			<DockPanel>
 				<StackPanel VerticalAlignment="Center">
 					<CheckBox Content="遠征帰投時に通知する"
-							  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=NotifyExpeditionReturned}"
+							  IsChecked="{Binding Source={x:Static ms:KanColleSettings.NotifyExpeditionReturned}, Path=Value}"
 							  Margin="0,5" />
 
 					<CheckBox Content="入渠完了時に通知する"
-							  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=NotifyRepairingCompleted}"
+							  IsChecked="{Binding Source={x:Static ms:KanColleSettings.NotifyRepairingCompleted}, Path=Value}"
 							  Margin="0,5" />
 				</StackPanel>
 
@@ -60,8 +57,8 @@
 										 Prompt=""
 										 Width="35">
 						<metro:PromptTextBox.Text>
-							<Binding Source="{x:Static models:Settings.Current}"
-									 Path="KanColleClientSettings.NotificationShorteningTime"
+							<Binding Source="{x:Static ms:KanColleSettings.NotificationShorteningTime}"
+									 Path="Value"
 									 UpdateSourceTrigger="PropertyChanged">
 								<Binding.ValidationRules>
 									<metro:Int32Rule Min="0" />
@@ -84,7 +81,7 @@
 					Margin="0,5" />
 
 			<CheckBox Content="艦隊に編成されている艦娘の疲労が回復したら通知する"
-					  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=NotifyFleetRejuvenated}"
+					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.NotifyFleetRejuvenated}, Path=Value}"
 					  Margin="0,5" />
 
 			<StackPanel Margin="20,0,0,0">
@@ -92,7 +89,7 @@
 						   Margin="0,3,0,1">
 					<Run Text="再出撃可能とするコンディション値" />
 					<Run Text=":" />
-					<Run Text="{Binding Source={x:Static models:Settings.Current}, Path=KanColleClientSettings.ReSortieCondition}" />
+					<Run Text="{Binding Source={x:Static ms:KanColleSettings.ReSortieCondition}, Path=Value}" />
 				</TextBlock>
 				<TextBlock Text="※[動作設定] > [出撃コンディション] から設定できます。"
 						   Style="{DynamicResource DetailTextStyleKey}"

@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows;
 using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.Models;
+using Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleViewer.ViewModels;
 using Grabacr07.KanColleViewer.Views;
 using Grabacr07.KanColleWrapper;
 using Livet;
 using MetroRadiance;
-using Settings = Grabacr07.KanColleViewer.Models.Settings;
+using MetroTrilithon.Desktop;
+using MetroTrilithon.Mvvm;
 
 namespace Grabacr07.KanColleViewer
 {
@@ -39,7 +41,7 @@ namespace Grabacr07.KanColleViewer
 		Terminate,
 	}
 
-	sealed partial class Application : INotifyPropertyChanged
+	sealed partial class Application : INotifyPropertyChanged, ICompositeDisposable
 	{
 		static Application()
 		{
@@ -52,12 +54,7 @@ namespace Grabacr07.KanColleViewer
 		/// <summary>
 		/// 現在の <see cref="AppDomain"/> の <see cref="Application"/> オブジェクトを取得します。
 		/// </summary>
-		public static Application Instance => (Application)Current;
-
-		/// <summary>
-		/// アプリケーションのメイン ウィンドウを制御する <see cref="MainWindowViewModel"/> オブジェクトを取得します。
-		/// </summary>
-		public MainWindowViewModel MainWindowViewModel { get; private set; }
+		public static Application Instance => Current as Application;
 
 		/// <summary>
 		/// アプリケーションの現在の状態を示す識別子を取得します。
@@ -69,8 +66,8 @@ namespace Grabacr07.KanColleViewer
 		{
 			this.ChangeState(ApplicationState.Startup);
 
-			var appInstance = new ApplicationInstance();
 #if !DEBUG
+			var appInstance = new ApplicationInstance().AddTo(this);
 			if (appInstance.IsFirst)
 #endif
 			{
@@ -82,40 +79,36 @@ namespace Grabacr07.KanColleViewer
 
 				DispatcherHelper.UIDispatcher = this.Dispatcher;
 
-				Settings.Load();
-				ResourceService.Current.ChangeCulture(Settings.Current.Culture);
-				ThemeService.Current.Initialize(this, Theme.Dark, Accent.Purple);
+				SettingsHost.Load();
+				this.compositeDisposable.Add(SettingsHost.Save);
 
-				PluginHost.Instance.Initialize();
-				NotifierHost.Instance.Initialize();
+				GeneralSettings.Culture.Subscribe(x => ResourceService.Current.ChangeCulture(x)).AddTo(this);
+				KanColleClient.Current.Settings = new KanColleSettings();
+
+				ThemeService.Current.Initialize(this, Theme.Dark, Accent.Purple);
+				WindowService.Current.AddTo(this).Initialize();
+				PluginService.Current.AddTo(this).Initialize();
+				NotifyService.Current.AddTo(this).Initialize();
+
 				Helper.SetRegistryFeatureBrowserEmulation();
 				Helper.SetMMCSSTask();
 
-				this.MainWindowViewModel = new MainWindowViewModel();
-
-				// Application.OnExit で破棄 (or 処理) するものたち
-				this.compositeDisposable.Add(this.MainWindowViewModel);
-				this.compositeDisposable.Add(PluginHost.Instance);
-				this.compositeDisposable.Add(NotifierHost.Instance);
-				this.compositeDisposable.Add(Settings.Current.Save);
-				this.compositeDisposable.Add(appInstance);
-
 				// BootstrapProxy() で Views.Settings.ProxyBootstrapper.Show() が呼ばれるより前に
 				// Application.MainWindow を設定しておく。これ大事
-				this.MainWindow = new MainWindow { DataContext = this.MainWindowViewModel, };
+				this.MainWindow = WindowService.Current.GetMainWindow();
 
 				if (BootstrapProxy())
 				{
 					this.compositeDisposable.Add(ProxyBootstrapper.Shutdown);
 					this.MainWindow.Show();
-
+#if !DEBUG
 					appInstance.CommandLineArgsReceived += (sender, args) =>
 					{
 						// 多重起動を検知したら、メイン ウィンドウを最前面に出す
-						this.Dispatcher.Invoke(() => this.MainWindowViewModel.Activate());
+						this.Dispatcher.Invoke(() => WindowService.Current.MainWindow.Activate());
 						this.ProcessCommandLineParameter(args.CommandLineArgs);
 					};
-
+#endif
 					base.OnStartup(e);
 					this.ChangeState(ApplicationState.Running);
 				}
@@ -242,6 +235,17 @@ ERROR, date = {0}, sender = {1},
 		private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
 		{
 			this.PropertyChangedInternal?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+		}
+
+		#endregion
+
+		#region ICompositDisposable members
+
+		ICollection<IDisposable> ICompositeDisposable.CompositeDisposable => this.compositeDisposable;
+
+		void IDisposable.Dispose()
+		{
+			this.compositeDisposable.Dispose();
 		}
 
 		#endregion

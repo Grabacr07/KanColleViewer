@@ -9,6 +9,7 @@
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
+			 xmlns:migration="clr-namespace:Grabacr07.KanColleViewer.Models.Migration"
 			 mc:Ignorable="d"
 			 d:DesignWidth="650"
 			 d:DesignHeight="400"
@@ -304,7 +305,7 @@
 										</Grid>
 									</Border>
 									<DataTemplate.Triggers>
-										<DataTrigger Binding="{Binding Source={x:Static models:Settings.Current}, Path=CanDisplayBuildingShipName}"
+										<DataTrigger Binding="{Binding Source={x:Static migration:_Settings.Current}, Path=CanDisplayBuildingShipName}"
 													 Value="False">
 											<Setter TargetName="ShipName"
 													Property="Text"
@@ -377,7 +378,7 @@
 										   Style="{DynamicResource HeaderTextStyleKey}" />
 								<CheckBox Margin="8,6"
 										  Content="{Binding Resources.Dockyard_Display_Reveal, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-										  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=CanDisplayBuildingShipName, Mode=TwoWay}" />
+										  IsChecked="{Binding Source={x:Static migration:_Settings.Current}, Path=CanDisplayBuildingShipName, Mode=TwoWay}" />
 							</StackPanel>
 
 							<StackPanel>

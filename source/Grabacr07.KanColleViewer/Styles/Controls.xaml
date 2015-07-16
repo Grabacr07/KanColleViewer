@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro">
+					xmlns:metro2="clr-namespace:MetroTrilithon.Controls;assembly=MetroTrilithon.Desktop">
 
 	<ResourceDictionary.MergedDictionaries>
 	</ResourceDictionary.MergedDictionaries>

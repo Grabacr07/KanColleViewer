@@ -56,7 +56,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 		public ToolsViewModel()
 		{
-			this.Tools = new List<ToolViewModel>(PluginHost.Instance.Get<ITool>().Select(x => new ToolViewModel(x)));
+			this.Tools = new List<ToolViewModel>(PluginService.Current.Get<ITool>().Select(x => new ToolViewModel(x)));
 			this.SelectedTool = this.Tools.FirstOrDefault();
 		}
 	}

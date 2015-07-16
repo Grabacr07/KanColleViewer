@@ -9,7 +9,7 @@
 			 xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
 			 xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
 			 xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
-			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+			 xmlns:metro2="clr-namespace:MetroTrilithon.Controls;assembly=MetroTrilithon.Desktop"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:vContents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
 			 xmlns:vmContents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
@@ -17,6 +17,7 @@
 			 xmlns:catalogs="clr-namespace:Grabacr07.KanColleViewer.Views.Catalogs"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
+			 xmlns:migration="clr-namespace:Grabacr07.KanColleViewer.Models.Migration"
 			 mc:Ignorable="d"
 			 d:DataContext="{d:DesignInstance vmContents:OverviewViewModel}"
 			 d:DesignWidth="680"
@@ -488,7 +489,7 @@
 											 Text="{Binding Remaining, StringFormat=- {0}, Mode=OneWay}" />
 									</TextBlock>
 									<DataTemplate.Triggers>
-										<DataTrigger Binding="{Binding Source={x:Static models:Settings.Current}, Path=CanDisplayBuildingShipName}"
+										<DataTrigger Binding="{Binding Source={x:Static migration:_Settings.Current}, Path=CanDisplayBuildingShipName}"
 													 Value="False">
 											<Setter TargetName="ShipName"
 													Property="Text"

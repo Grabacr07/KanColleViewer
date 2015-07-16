@@ -35,6 +35,8 @@ namespace Grabacr07.KanColleViewer.Models
 			get { return this._Current; }
 			set
 			{
+				if (this._Current.Equals(value)) return;
+
 				this._Current = value;
 				this.CurrentParcentage = (int)(value * 100);
 				this.CanZoomDown = (zoomTable.FirstOrDefault() ?? neutral) < value;

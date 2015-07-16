@@ -4,18 +4,21 @@ using System.Linq;
 
 namespace Grabacr07.KanColleViewer.Composition
 {
-	public class NotifyEventArgs : EventArgs
+	public class NotifyEventArgs : EventArgs, INotify
 	{
-		public string Header { get; private set; }
+		public string Type { get; }
 
-		public string Body { get; private set; }
+		public string Header { get; }
+
+		public string Body { get; }
 
 		public Action Activated { get; set; }
 
 		public Action<Exception> Failed { get; set; }
 
-		public NotifyEventArgs(string header, string body)
+		public NotifyEventArgs(string type, string header, string body)
 		{
+			this.Type = type;
 			this.Header = header;
 			this.Body = body;
 		}

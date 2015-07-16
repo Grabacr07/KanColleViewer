@@ -37,7 +37,7 @@ namespace Grabacr07.KanColleWrapper
 					HttpProxy.UpstreamProxyHost = null;
 					return;
 				}
-				HttpProxy.IsEnableUpstreamProxy = value.SettingType == ProxySettingType.SpecificProxy;
+				HttpProxy.IsEnableUpstreamProxy = value.Type == ProxyType.SpecificProxy;
 				//Host指定がない場合、HTTPはDirectAccessとなる
 				HttpProxy.UpstreamProxyHost = string.IsNullOrWhiteSpace(value.Host) ? null : value.Host;
 				HttpProxy.UpstreamProxyPort = value.Port;
@@ -79,7 +79,7 @@ namespace Grabacr07.KanColleWrapper
 		public void Startup(int proxy = 37564)
 		{
 			//UpstreamProxySettings == null は SystemProxy使用とみなす
-			var isSetIEProxySettings = this.UpstreamProxySettings == null || this.UpstreamProxySettings.SettingType != ProxySettingType.DirectAccess;
+			var isSetIEProxySettings = this.UpstreamProxySettings == null || this.UpstreamProxySettings.Type != ProxyType.DirectAccess;
 			HttpProxy.Startup(proxy, false, isSetIEProxySettings);
 
 			//プロキシを使用しない場合、HTTPだけNekoxyを通し、後は直アクセス

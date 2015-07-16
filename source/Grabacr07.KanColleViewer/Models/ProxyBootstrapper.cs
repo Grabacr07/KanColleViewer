@@ -33,19 +33,17 @@ namespace Grabacr07.KanColleViewer.Models
 		{
 			this.Result = ProxyBootstrapResult.None;
 
-			if (Settings.Current.LocalProxyPort < 1 || 65535 < Settings.Current.LocalProxyPort)
+			if (Settings.NetworkSettings.LocalProxy.Port < 1 || 65535 < Settings.NetworkSettings.LocalProxy.Port)
 			{
-				Settings.Current.LocalProxyPort = Properties.Settings.Default.DefaultLocalProxyPort;
+				Settings.NetworkSettings.LocalProxy.Port.Value = Settings.NetworkSettings.LocalProxy.Port.Default;
 			}
 
-			KanColleClient.Current.Proxy.UpstreamProxySettings = Settings.Current.ProxySettings;
+			KanColleClient.Current.Proxy.UpstreamProxySettings = new Settings.NetworkSettings.Proxy();
 		}
 
 		public void Try()
 		{
-			this.ListeningPort = Settings.Current.IsEnableChangeLocalProxyPort
-				? Settings.Current.LocalProxyPort
-				: Properties.Settings.Default.DefaultLocalProxyPort;
+			this.ListeningPort = Settings.NetworkSettings.LocalProxy.Port;
 
 			try
 			{

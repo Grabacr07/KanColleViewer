@@ -37,14 +37,12 @@ namespace Grabacr07.KanColleViewer.Models
 		public static string CreateScreenshotFilePath()
 		{
 			var filePath = Path.Combine(
-				Settings.Current.ScreenshotFolder,
+				Settings.ScreenshotSettings.Destination,
 				$"KanColle-{DateTimeOffset.Now.LocalDateTime.ToString("yyMMdd-HHmmssff")}");
 
 			filePath = Path.ChangeExtension(
 				filePath,
-				Settings.Current.ScreenshotImageFormat == SupportedImageFormat.Jpeg
-					? ".jpg"
-					: ".png");
+				Settings.ScreenshotSettings.Format == SupportedImageFormat.Png ? ".png" : ".jpg");
 
 			return filePath;
 		}
@@ -85,7 +83,7 @@ namespace Grabacr07.KanColleViewer.Models
 		/// <seealso cref="http://support.microsoft.com/kb/326201/ja"/>
 		public static Task<bool> DeleteInternetCache()
 		{
-			return Task.Factory.StartNew(() => DeleteInternetCacheCore());
+			return Task.Run(() => DeleteInternetCacheCore());
 		}
 
 		private static bool DeleteInternetCacheCore()

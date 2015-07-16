@@ -7,7 +7,7 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
-			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+			 xmlns:metro2="clr-namespace:MetroTrilithon.Controls;assembly=MetroTrilithon.Desktop"
 			 xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
 			 xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
 			 xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
@@ -15,13 +15,13 @@
 			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
-			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Settings"
 			 mc:Ignorable="d"
 			 d:DesignWidth="550"
 			 d:DesignHeight="300"
-			 d:DataContext="{d:DesignInstance viewModels:SettingsViewModel}">
+			 d:DataContext="{d:DesignInstance settings:SettingsViewModel}">
 	<Grid Margin="8,0">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" />
@@ -77,7 +77,14 @@
 
 				<LineBreak />
 
-				<Run Text="Author / Developer:" />
+				<Run Text="Author:" />
+				<metro2:HyperlinkEx Uri="https://twitter.com/Grabacr07">
+					<Run Text="@Grabacr07" />
+				</metro2:HyperlinkEx>
+
+				<LineBreak />
+
+				<Run Text="Developer:" />
 				<metro2:HyperlinkEx Uri="https://twitter.com/Grabacr07">
 					<Run Text="@Grabacr07" />
 				</metro2:HyperlinkEx>
@@ -88,13 +95,6 @@
 				<Run Text="Icon design:" />
 				<metro2:HyperlinkEx Uri="https://twitter.com/Nrtwd/">
 					<Run Text="@Nrtwd" />
-				</metro2:HyperlinkEx>
-
-				<LineBreak />
-
-				<Run Text="Localization (English):" />
-				<metro2:HyperlinkEx Uri="https://twitter.com/southrop113">
-					<Run Text="@southrop113" />
 				</metro2:HyperlinkEx>
 			</TextBlock>
 
@@ -107,14 +107,14 @@
 									 FontFamily="Segoe UI"
 									 FontSize="11">
 				<metro:BindableTextBlock.TextTemplates>
-					<DataTemplate DataType="{x:Type viewModels:HyperlinkViewModel}">
+					<DataTemplate DataType="{x:Type settings:HyperlinkViewModel}">
 						<metro:InlineHolder>
 							<metro2:HyperlinkEx Uri="{Binding Uri}">
 								<Run Text="{Binding Text, Mode=OneWay}" />
 							</metro2:HyperlinkEx>
 						</metro:InlineHolder>
 					</DataTemplate>
-					<DataTemplate DataType="{x:Type viewModels:BindableTextViewModel}">
+					<DataTemplate DataType="{x:Type settings:BindableTextViewModel}">
 						<metro:InlineHolder>
 							<Run Text="{Binding Text, Mode=OneWay}"
 								 Foreground="{DynamicResource ActiveForegroundBrushKey}" />

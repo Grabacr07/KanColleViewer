@@ -18,7 +18,6 @@ namespace Grabacr07.KanColleViewer.Models
 		private static readonly Lazy<string> versionLazy = new Lazy<string>(() => $"{Version.ToString(3)}{(IsBetaRelease ? " β" : "")}{(Version.Revision == 0 ? "" : " rev." + Version.Revision)}");
 		private static readonly Lazy<IReadOnlyCollection<Library>> librariesLazy = new Lazy<IReadOnlyCollection<Library>>(() => new List<Library>
 		{
-			// ToDo: ライセンス乗っけた方がいいかな、という気がしなくもない
 			new Library("Reactive Extensions", new Uri("http://rx.codeplex.com/")),
 			new Library("Windows API Code Pack", new Uri("http://archive.msdn.microsoft.com/WindowsAPICodePack")),
 			new Library("Livet", new Uri("http://ugaya40.net/livet")),

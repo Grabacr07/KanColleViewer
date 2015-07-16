@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.ViewModels.Contents.Fleets;
 using Grabacr07.KanColleWrapper;
 using Livet.EventListeners;
+using MetroTrilithon.Mvvm;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {

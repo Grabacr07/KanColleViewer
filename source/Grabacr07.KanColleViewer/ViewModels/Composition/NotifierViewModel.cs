@@ -9,7 +9,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Composition
 	public class NotifierViewModel : PluginViewModel
 	{
 		private readonly INotifier notifier;
-		
+
 		public NotifierViewModel(Plugin plugin, IEnumerable<INotifier> notifiers = null)
 			: base(plugin)
 		{
@@ -18,7 +18,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Composition
 
 		public void Test()
 		{
-			this.notifier.Show("テスト", "これはテスト通知です。", Application.Instance.MainWindowViewModel.Activate, ex => this.ErrorMessage = ex.Message);
+			this.notifier.Show("テスト", "これはテスト通知です。", WindowService.Current.MainWindow.Activate, ex => this.ErrorMessage = ex.Message);
 		}
 	}
 }

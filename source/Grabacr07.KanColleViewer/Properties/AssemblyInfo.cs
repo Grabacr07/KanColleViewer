@@ -14,7 +14,7 @@ using System.Windows;
 [assembly: AssemblyCopyright("Copyright © 2013 Grabacr07")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: GuidAttribute("101B49A6-7E7B-422D-95FF-500F9EF483A8")]
+[assembly: Guid("101B49A6-7E7B-422D-95FF-500F9EF483A8")]
 
 // ComVisible を false に設定すると、その型はこのアセンブリ内で COM コンポーネントから
 // 参照不可能になります。COM からこのアセンブリ内の型にアクセスする場合は、
@@ -52,4 +52,4 @@ using System.Windows;
 // すべての値を指定するか、下のように '*' を使ってビルドおよびリビジョン番号を 
 // 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("3.8.2.1")]
+[assembly: AssemblyVersion("4.0.0.0")]

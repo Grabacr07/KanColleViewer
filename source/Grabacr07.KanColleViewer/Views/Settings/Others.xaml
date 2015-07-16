@@ -6,14 +6,14 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
-			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
-			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
-			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+			 xmlns:metro2="http://schemes.grabacr.net/winfx/2015/personal/controls"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 xmlns:ms="clr-namespace:Grabacr07.KanColleViewer.Models.Settings"
+			 xmlns:vms="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Settings"
 			 mc:Ignorable="d"
 			 d:DesignWidth="500"
 			 d:DesignHeight="300"
-			 d:DataContext="{d:DesignInstance viewModels:SettingsViewModel}">
+			 d:DataContext="{d:DesignInstance vms:SettingsViewModel}">
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
@@ -24,7 +24,7 @@
 
 	<i:Interaction.Triggers>
 		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
-										 MessageKey="OpenFolderDialog/Screenshot">
+										 MessageKey="FolderDialog.Screenshot.Open">
 			<livet:FolderBrowserDialogInteractionMessageAction />
 		</livet:InteractionMessageTrigger>
 	</i:Interaction.Triggers>
@@ -32,7 +32,8 @@
 	<StackPanel>
 		<TextBlock Text="{Binding Resources.Settings_Screenshot, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
-		<Grid Margin="20,0,0,10">
+		<Grid DataContext="{Binding ScreenshotSettings}"
+			  Margin="20,0,0,10">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
@@ -49,17 +50,17 @@
 			</TextBlock>
 			<metro:PromptTextBox Grid.Row="0"
 								 Grid.Column="1"
-								 Text="{Binding ScreenshotFolder, UpdateSourceTrigger=PropertyChanged}"
+								 Text="{Binding Source={x:Static ms:ScreenshotSettings.Destination}, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 								 Prompt="{Binding Resources.Settings_Screenshot_FolderTextBox_Prompt, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 			<metro2:CallMethodButton Grid.Row="0"
 									 Grid.Column="2"
 									 Content="{Binding Resources.Settings_Screenshot_FolderSelectionDialog_OpenButton, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-									 MethodName="OpenScreenshotFolderSelectionDialog"
+									 MethodName="OpenDestinationSelectionDialog"
 									 Margin="6,0" />
 			<metro2:CallMethodButton Grid.Row="0"
 									 Grid.Column="3"
 									 Content="{Binding Resources.Settings_Screenshot_OpenFolderButton, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-									 IsEnabled="{Binding CanOpenScreenshotFolder}"
+									 IsEnabled="{Binding CanOpenDestination}"
 									 MethodName="OpenScreenshotFolder"
 									 Margin="0" />
 
@@ -74,10 +75,10 @@
 						Grid.ColumnSpan="3"
 						Orientation="Horizontal">
 				<RadioButton Content="PNG"
-							 IsChecked="{Binding ScreenshotImageFormat, Mode=TwoWay, ConverterParameter=Png, Converter={StaticResource EnumToBooleanConverter}}" />
+							 IsChecked="{Binding Source={x:Static ms:ScreenshotSettings.Format}, Path=Value, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Png}" />
 				<RadioButton Content="JPG"
 							 Margin="16,0,0,0"
-							 IsChecked="{Binding ScreenshotImageFormat, Mode=TwoWay, ConverterParameter=Jpeg, Converter={StaticResource EnumToBooleanConverter}}" />
+							 IsChecked="{Binding Source={x:Static ms:ScreenshotSettings.Format}, Path=Value, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Jpeg}" />
 			</StackPanel>
 		</Grid>
 
@@ -117,21 +118,11 @@
 							  ItemsSource="{Binding Cultures}"
 							  DisplayMemberPath="DisplayName"
 							  SelectedValuePath="Name"
-							  SelectedValue="{Binding Culture, Mode=TwoWay}"
+							  SelectedValue="{Binding Source={x:Static ms:GeneralSettings.Culture}, Path=Value, Mode=TwoWay}"
 							  IsReadOnly="True"
 							  MinWidth="250" />
 
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-
-		<!--<TextBlock Text="{Binding Source={x:Static properties:Resources.Settings_Logging}, Mode=OneWay}"
-				   Style="{DynamicResource HeaderTextBlockStyleKey}"
-				   Margin="0,10" />
-		<CheckBox Content="{Binding Source={x:Static properties:Resources.Settings_Logging_Enable}, Mode=OneWay}"
-				  IsChecked="{Binding EnableLogging}"
-				  IsEnabled="False"
-				  Height="17"
-				  Margin="15,0,0,10" />-->
-
 	</StackPanel>
 </UserControl>

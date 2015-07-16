@@ -84,44 +84,37 @@ namespace Grabacr07.KanColleViewer.Models
 
 		int IAudioSessionEvents.OnDisplayNameChanged(string displayName, ref Guid eventContext)
 		{
-			Debug.WriteLine(nameof(IAudioSessionEvents.OnDisplayNameChanged));
 			return 0;
 		}
 
 		int IAudioSessionEvents.OnIconPathChanged(string iconPath, ref Guid eventContext)
 		{
-			Debug.WriteLine(nameof(IAudioSessionEvents.OnIconPathChanged));
 			return 0;
 		}
 
 		int IAudioSessionEvents.OnSimpleVolumeChanged(float volume, bool isMuted, ref Guid eventContext)
 		{
-			Debug.WriteLine(nameof(IAudioSessionEvents.OnSimpleVolumeChanged));
 			this.IsMute = isMuted;
 			return 0;
 		}
 
 		int IAudioSessionEvents.OnChannelVolumeChanged(uint channelCount, IntPtr newVolumes, uint channelIndex, ref Guid eventContext)
 		{
-			Debug.WriteLine(nameof(IAudioSessionEvents.OnChannelVolumeChanged));
 			return 0;
 		}
 
 		int IAudioSessionEvents.OnGroupingParamChanged(ref Guid groupingId, ref Guid eventContext)
 		{
-			Debug.WriteLine(nameof(IAudioSessionEvents.OnGroupingParamChanged));
 			return 0;
 		}
 
 		int IAudioSessionEvents.OnStateChanged(AudioSessionState state)
 		{
-			Debug.WriteLine(nameof(IAudioSessionEvents.OnStateChanged));
 			return 0;
 		}
 
 		int IAudioSessionEvents.OnSessionDisconnected(AudioSessionDisconnectReason disconnectReason)
 		{
-			Debug.WriteLine(nameof(IAudioSessionEvents.OnSessionDisconnected));
 			return 0;
 		}
 

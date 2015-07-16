@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Models;
+using MetroTrilithon.Mvvm;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {

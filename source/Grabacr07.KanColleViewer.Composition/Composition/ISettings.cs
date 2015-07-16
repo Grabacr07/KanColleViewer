@@ -7,8 +7,11 @@ namespace Grabacr07.KanColleViewer.Composition
 {
 	/// <summary>
 	/// プラグインの設定画面を呼び出すためのメンバーを公開します。
-	/// この型をコントラクトとしてエクスポートするとき、1 つの GUID につき 1 つまでしか使用されないことに注意してください。
+	/// このインターフェイスは、KanColleViewer プラグインのコントラクト型です。
 	/// </summary>
+	/// <remarks>
+	/// この型をコントラクトとしてエクスポートするとき、1 つの GUID につき 1 つまでしか使用されないことに注意してください。
+	/// </remarks>
 	public interface ISettings
 	{
 		/// <summary>

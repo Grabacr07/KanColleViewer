@@ -1,28 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Grabacr07.KanColleViewer.Views.Settings
 {
-	/// <summary>
-	/// Window.xaml の相互作用ロジック
-	/// </summary>
-	public partial class Window : UserControl
+	partial class Window
 	{
 		public Window()
 		{
-			InitializeComponent();
+			this.InitializeComponent();
 		}
+
+		#region IsDockMatched 添付プロパティ
+
+		public static readonly DependencyProperty IsDockMatchedProperty = DependencyProperty.RegisterAttached(
+			"IsDockMatched", typeof(bool), typeof(Window), new PropertyMetadata(default(bool)));
+
+		public static void SetIsDockMatched(DependencyObject element, bool value)
+		{
+			element.SetValue(IsDockMatchedProperty, value);
+		}
+
+		public static bool GetIsDockMatched(DependencyObject element)
+		{
+			return (bool)element.GetValue(IsDockMatchedProperty);
+		}
+
+		#endregion
 	}
 }

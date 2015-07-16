@@ -11,7 +11,7 @@ using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.ViewModels;
 using MetroRadiance.Core;
 using mshtml;
-using MetroRadiance.Controls;
+using MetroTrilithon.Controls;
 using SHDocVw;
 using IServiceProvider = Grabacr07.KanColleViewer.Win32.IServiceProvider;
 using WebBrowser = System.Windows.Controls.WebBrowser;
@@ -98,6 +98,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 		#endregion
 
+		public event EventHandler<Size> OwnerSizeChangeRequested;
 
 		public KanColleHost()
 		{
@@ -115,7 +116,6 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			}
 		}
 
-
 		public void Update()
 		{
 			if (this.WebBrowser == null) return;
@@ -126,18 +126,14 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 			ApplyZoomFactor(this.WebBrowser, percentage);
 
-			if (this.styleSheetApplied)
-			{
-				this.WebBrowser.Width = (kanColleSize.Width * (zoomFactor / dpi.ScaleX)) / dpi.ScaleX;
-				this.WebBrowser.Height = (kanColleSize.Height * (zoomFactor / dpi.ScaleY)) / dpi.ScaleY;
-				this.MinWidth = this.WebBrowser.Width;
-			}
-			else
-			{
-				this.WebBrowser.Width = double.NaN;
-				this.WebBrowser.Height = (browserSize.Height * (zoomFactor / dpi.ScaleY)) / dpi.ScaleY;
-				this.MinWidth = (browserSize.Width * (zoomFactor / dpi.ScaleX)) / dpi.ScaleX;
-			}
+			var size = this.styleSheetApplied ? kanColleSize : browserSize;
+			size = new Size(
+				(size.Width * (zoomFactor / dpi.ScaleX)) / dpi.ScaleX,
+				(size.Height * (zoomFactor / dpi.ScaleY)) / dpi.ScaleY);
+			this.WebBrowser.Width = size.Width;
+			this.WebBrowser.Height = size.Height;
+
+			this.OwnerSizeChangeRequested?.Invoke(this, size);
 		}
 
 		private static void ApplyZoomFactor(WebBrowser target, int zoomFactor)
@@ -174,12 +170,6 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			WebBrowserHelper.SetScriptErrorsSuppressed(this.WebBrowser, true);
 
 			this.Update();
-
-			var window = Window.GetWindow(this.WebBrowser);
-			if (window != null)
-			{
-				window.Width = this.WebBrowser.Width;
-			}
 		}
 
 		private void HandleWebBrowserNewWindow(string url, int flags, string targetFrameName, ref object postData, string headers, ref bool processed)
@@ -193,8 +183,6 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 		private void ApplyStyleSheet()
 		{
-			//return;
-
 			try
 			{
 				var document = this.WebBrowser.Document as HTMLDocument;

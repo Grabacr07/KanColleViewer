@@ -16,10 +16,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			protected set { throw new NotImplementedException(); }
 		}
 
-		public MainContentViewModel Content { get; }
+		public InformationViewModel Content { get; }
 
 
-		public OverviewViewModel(MainContentViewModel owner)
+		public OverviewViewModel(InformationViewModel owner)
 		{
 			this.Content = owner;
 		}

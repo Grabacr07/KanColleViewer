@@ -7,6 +7,7 @@ namespace Grabacr07.KanColleViewer.Composition
 {
 	/// <summary>
 	/// [ツール] タブに表示されるツールに必要なメンバーを公開します。
+	/// このインターフェイスは、KanColleViewer プラグインのコントラクト型です。
 	/// </summary>
 	public interface ITool
 	{

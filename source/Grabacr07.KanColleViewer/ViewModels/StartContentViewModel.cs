@@ -10,11 +10,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 {
 	public class StartContentViewModel : ViewModel
 	{
-		#region singleton
-
-	    public static StartContentViewModel Instance { get; } = new StartContentViewModel();
-
-	    #endregion
+		public NavigatorViewModel Navigator { get; }
 
 		#region CanDeleteInternetCache 変更通知プロパティ
 
@@ -54,7 +50,10 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-		private StartContentViewModel() { }
+		public StartContentViewModel(NavigatorViewModel navigator)
+		{
+			this.Navigator = navigator;
+		}
 
 		public async void DeleteInternetCache()
 		{

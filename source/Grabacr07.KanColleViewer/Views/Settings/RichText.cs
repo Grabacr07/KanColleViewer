@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Grabacr07.Desktop.Metro.Controls;
+using MetroTrilithon.Controls;
 using Grabacr07.KanColleViewer.Composition;
 
 namespace Grabacr07.KanColleViewer.Views.Settings

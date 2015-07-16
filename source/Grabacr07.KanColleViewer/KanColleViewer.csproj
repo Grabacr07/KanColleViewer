@@ -33,7 +33,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;BETA</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -122,33 +122,41 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Composition\AggregateNotifier.cs" />
-    <Compile Include="Composition\BlacklistedPluginData.cs" />
+    <Compile Include="Composition\LoadFailedPluginData.cs" />
     <Compile Include="Composition\Plugin.cs" />
     <Compile Include="Composition\PluginHost.cs" />
     <Compile Include="Composition\PluginMetadata.cs" />
-    <Compile Include="Models\ApplicationInstance.cs" />
     <Compile Include="Models\BrowserZoomFactor.cs" />
+    <Compile Include="Models\ExitConfirmationType.cs" />
     <Compile Include="Models\IZoomFactor.cs" />
     <Compile Include="Models\NotifierHost.cs" />
     <Compile Include="Models\ProductInfo.cs" />
-    <Compile Include="Models\Data\Xml\XmlFileReader.cs" />
-    <Compile Include="Models\Data\Xml\XmlFileWriter.cs" />
-    <Compile Include="Models\Data\Xml\XmlSerializableDictionary.cs" />
+    <Compile Include="Models\Migration\_XmlFileReader.cs" />
     <Compile Include="Models\Helper.cs" />
-    <Compile Include="Models\Mode.cs" />
     <Compile Include="Models\ProxyBootstrapper.cs" />
-    <Compile Include="Models\ProxySettings.cs" />
+    <Compile Include="Models\Migration\_ProxySettings.cs" />
     <Compile Include="Models\ResourceService.cs" />
+    <Compile Include="Models\Settings\GeneralSettings.cs" />
+    <Compile Include="Models\Settings\KanColleSettings.cs" />
+    <Compile Include="Models\Settings\KanColleWindowSettings.cs" />
+    <Compile Include="Models\Settings\Providers.cs" />
+    <Compile Include="Models\Settings\ScreenshotSettings.cs" />
+    <Compile Include="Models\Settings\NetworkSettings.cs" />
+    <Compile Include="Models\Settings\SettingsHost.cs" />
+    <Compile Include="Models\Settings\WindowSettings.cs" />
     <Compile Include="Models\StatusService.cs" />
-    <Compile Include="Models\Settings.cs" />
+    <Compile Include="Models\Migration\_Settings.cs" />
     <Compile Include="Models\SupportedImageFormat.cs" />
     <Compile Include="Models\Volume.cs" />
+    <Compile Include="Models\Migration\_KanColleClientSettings.cs" />
+    <Compile Include="ViewModels\Composition\LoadFailedPluginViewModel.cs" />
+    <Compile Include="ViewModels\InformationWindowViewModel.cs" />
+    <Compile Include="ViewModels\KanColleWindowViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogFilter.cs" />
     <Compile Include="ViewModels\Catalogs\ShipViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\SlotItemCatalogViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\SlotItemCounter.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogSortWorker.cs" />
-    <Compile Include="ViewModels\Composition\BlacklistedPluginViewModel.cs" />
     <Compile Include="ViewModels\Contents\Fleets\CombinedFleetViewModel.cs" />
     <Compile Include="ViewModels\Composition\NotifierViewModel.cs" />
     <Compile Include="ViewModels\Composition\PluginViewModel.cs" />
@@ -167,17 +175,18 @@
     <Compile Include="ViewModels\Contents\OverviewViewModel.cs" />
     <Compile Include="ViewModels\Contents\QuestsViewModel.cs" />
     <Compile Include="ViewModels\Contents\QuestViewModel.cs" />
-    <Compile Include="ViewModels\BindableTextViewModel.cs" />
+    <Compile Include="ViewModels\Settings\BindableTextViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipTypeViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogWindowViewModel.cs" />
     <Compile Include="ViewModels\Contents\ShipyardViewModel.cs" />
     <Compile Include="ViewModels\Dev\DebugTabViewModel.cs" />
-    <Compile Include="ViewModels\CultureViewModel.cs" />
+    <Compile Include="ViewModels\Settings\CultureViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModel.cs" />
     <Compile Include="ViewModels\FleetWindowViewModel.cs" />
     <Compile Include="ViewModels\ItemViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModelBase.cs" />
     <Compile Include="ViewModels\ProxyBootstrapperViewModel.cs" />
-    <Compile Include="ViewModels\MainContentViewModel.cs" />
+    <Compile Include="ViewModels\InformationViewModel.cs" />
     <Compile Include="Models\INavigator.cs" />
     <Compile Include="ViewModels\Contents\MaterialsViewModel.cs" />
     <Compile Include="ViewModels\Messages\ScreenshotMessage.cs" />
@@ -186,9 +195,11 @@
     <Compile Include="ViewModels\Messages\ZoomMessage.cs" />
     <Compile Include="ViewModels\NavigatorViewModel.cs" />
     <Compile Include="ViewModels\NullViewModel.cs" />
-    <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\Settings\ScreenshotSettingsViewModel.cs" />
+    <Compile Include="ViewModels\Settings\SettingsViewModel.cs" />
     <Compile Include="ViewModels\Contents\ShipsViewModel.cs" />
     <Compile Include="ViewModels\Contents\SlotItemsViewModel.cs" />
+    <Compile Include="ViewModels\Settings\WindowSettingsViewModel.cs" />
     <Compile Include="ViewModels\StatusBarViewModel.cs" />
     <Compile Include="ViewModels\TabItemViewModel.cs" />
     <Compile Include="ViewModels\Contents\ToolsViewModel.cs" />
@@ -198,7 +209,6 @@
     <Compile Include="Views\Behaviors\FocusAction.cs" />
     <Compile Include="Views\Behaviors\NavigatorBehavior.cs" />
     <Compile Include="Views\Behaviors\ScreenshotAction.cs" />
-    <Compile Include="Views\Behaviors\SetStyleSheetBehavior.cs" />
     <Compile Include="Views\Behaviors\SetWindowLocationAction.cs" />
     <Compile Include="Views\BrowserWindow.xaml.cs">
       <DependentUpon>BrowserWindow.xaml</DependentUpon>
@@ -212,8 +222,10 @@
     <Compile Include="Views\Contents\Tools.xaml.cs">
       <DependentUpon>Tools.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\InformationWindow.xaml.cs">
+      <DependentUpon>InformationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Controls\KanColleHost.cs" />
-    <Compile Include="Views\Controls\WebBrowserHelper.cs" />
     <Compile Include="Views\Behaviors\ZoomAction.cs" />
     <Compile Include="Views\BrowserNavigator.xaml.cs">
       <DependentUpon>BrowserNavigator.xaml</DependentUpon>
@@ -251,6 +263,12 @@
     </Compile>
     <Compile Include="Views\FleetWindow.xaml.cs">
       <DependentUpon>FleetWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\KanColleWindow.xaml.cs">
+      <DependentUpon>KanColleWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\KanColleWindowButtons.xaml.cs">
+      <DependentUpon>KanColleWindowButtons.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings\Browser.xaml.cs">
       <DependentUpon>Browser.xaml</DependentUpon>
@@ -297,6 +315,7 @@
     <Compile Include="Win32\DVTARGETDEVICE.cs" />
     <Compile Include="Win32\IServiceProvider.cs" />
     <Compile Include="Win32\RECT.cs" />
+    <Compile Include="WindowService.cs" />
     <Page Include="Styles\Controls.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -358,6 +377,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\InformationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Controls\ZoomFactorSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -371,6 +394,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FleetWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\KanColleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\KanColleWindowButtons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -438,13 +469,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MainContent.xaml">
+    <Page Include="Views\Information.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Compile Include="Application.xaml.cs">
       <DependentUpon>Application.xaml</DependentUpon>
@@ -454,19 +481,13 @@
     <Compile Include="Win32\NativeMethods.cs" />
     <Compile Include="ViewModels\Contents\Fleets\FleetsViewModel.cs" />
     <Compile Include="ViewModels\Contents\Fleets\FleetViewModel.cs" />
-    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\StartContentViewModel.cs" />
     <Compile Include="ViewModels\Contents\ShipViewModel.cs" />
-    <Compile Include="ViewModels\WindowViewModel.cs" />
     <Compile Include="Views\Contents\Fleets.xaml.cs">
       <DependentUpon>Fleets.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainContent.xaml.cs">
-      <DependentUpon>MainContent.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    <Compile Include="Views\Information.xaml.cs">
+      <DependentUpon>Information.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -508,10 +529,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Grabacr07.Desktop.Metro\Desktop.Metro.csproj">
-      <Project>{f00fc570-2a80-4f61-8364-798cd44514b2}</Project>
-      <Name>Desktop.Metro</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Grabacr07.KanColleViewer.Composition\KanColleViewer.Composition.csproj">
       <Project>{cc139e98-d847-41da-b20f-8aca4564f375}</Project>
       <Name>KanColleViewer.Composition</Name>
@@ -536,6 +553,29 @@
       <Project>{0af0b9ff-d981-4d0f-a41f-c3ab6fe2f16d}</Project>
       <Name>MetroRadiance</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MetroTrilithon\source\MetroTrilithon.Desktop\MetroTrilithon.Desktop.csproj">
+      <Project>{4e2eb2e0-e5fe-4feb-a3e5-5f2f05cd1a67}</Project>
+      <Name>MetroTrilithon.Desktop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MetroTrilithon\source\MetroTrilithon\MetroTrilithon.csproj">
+      <Project>{df381709-9f44-44ed-a7d6-ecdf157e620d}</Project>
+      <Name>MetroTrilithon</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <DesignData Include="SampleData\ShipCatalogSortWorkerSampleData.xaml" />
+    <DesignData Include="SampleData\ShipyardViewModelSampleData.xaml" />
+    <DesignData Include="SampleData\FleetsViewModelSampleData.xaml" />
+    <DesignData Include="SampleData\FleetViewModelSampleData.xaml" />
+    <DesignData Include="SampleData\ShipViewModelSampleData.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\app.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="KanColleViewer.VisualElementsManifest.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="MSHTML">
@@ -556,21 +596,6 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
-  </ItemGroup>
-  <ItemGroup>
-    <DesignData Include="SampleData\ShipCatalogSortWorkerSampleData.xaml" />
-    <DesignData Include="SampleData\ShipyardViewModelSampleData.xaml" />
-    <DesignData Include="SampleData\FleetsViewModelSampleData.xaml" />
-    <DesignData Include="SampleData\FleetViewModelSampleData.xaml" />
-    <DesignData Include="SampleData\ShipViewModelSampleData.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\app.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="KanColleViewer.VisualElementsManifest.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="readme.txt">

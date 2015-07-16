@@ -91,10 +91,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Grabacr07.Desktop.Metro\Desktop.Metro.csproj">
-      <Project>{f00fc570-2a80-4f61-8364-798cd44514b2}</Project>
-      <Name>Desktop.Metro</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Grabacr07.KanColleViewer.Composition\KanColleViewer.Composition.csproj">
       <Project>{cc139e98-d847-41da-b20f-8aca4564f375}</Project>
       <Name>KanColleViewer.Composition</Name>
@@ -118,6 +114,14 @@
     <ProjectReference Include="..\..\MetroRadiance\MetroRadiance\MetroRadiance.csproj">
       <Project>{0af0b9ff-d981-4d0f-a41f-c3ab6fe2f16d}</Project>
       <Name>MetroRadiance</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MetroTrilithon\source\MetroTrilithon.Desktop\MetroTrilithon.Desktop.csproj">
+      <Project>{4e2eb2e0-e5fe-4feb-a3e5-5f2f05cd1a67}</Project>
+      <Name>MetroTrilithon.Desktop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MetroTrilithon\source\MetroTrilithon\MetroTrilithon.csproj">
+      <Project>{df381709-9f44-44ed-a7d6-ecdf157e620d}</Project>
+      <Name>MetroTrilithon</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

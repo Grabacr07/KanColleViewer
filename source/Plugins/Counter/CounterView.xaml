@@ -4,7 +4,7 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:wrapper="clr-namespace:Grabacr07.KanColleWrapper;assembly=KanColleWrapper"
-			 xmlns:controls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+			 xmlns:controls="clr-namespace:MetroTrilithon.Controls;assembly=MetroTrilithon.Desktop"
 			 xmlns:counter="clr-namespace:Counter"
 			 mc:Ignorable="d"
 			 d:DataContext="{d:DesignInstance counter:CounterViewModel}"

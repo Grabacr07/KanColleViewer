@@ -15,9 +15,9 @@ namespace Grabacr07.KanColleViewer.Models
 	{
 		#region static members
 
-	    public static ResourceService Current { get; } = new ResourceService();
+		public static ResourceService Current { get; } = new ResourceService();
 
-	    #endregion
+		#endregion
 
 		/// <summary>
 		/// サポートされているカルチャの名前。
@@ -68,7 +68,7 @@ namespace Grabacr07.KanColleViewer.Models
 			Resources.Culture = this.SupportedCultures.SingleOrDefault(x => x.Name == name);
 
 			// リソースの変更を受けて設定に適切な値を適用します。
-			Settings.Current.Culture = Resources.Culture != null
+			Settings.GeneralSettings.Culture.Value = Resources.Culture != null
 				? Resources.Culture.Name
 				: null;
 

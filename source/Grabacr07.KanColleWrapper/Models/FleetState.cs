@@ -87,7 +87,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		private double _ViewRange;
 
 		/// <summary>
-		/// 艦隊の索敵値を取得します。索敵の計算は <see cref="KanColleClientSettings.ViewRangeCalcType"/> で指定された方法を使用します。
+		/// 艦隊の索敵値を取得します。索敵の計算は <see cref="IKanColleClientSettings.ViewRangeCalcType"/> で指定された方法を使用します。
 		/// </summary>
 		public double ViewRange
 		{
@@ -196,7 +196,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.CompositeDisposable.Add(this.Condition);
 			this.CompositeDisposable.Add(new PropertyChangedWeakEventListener(KanColleClient.Current.Settings)
 			{
-				{ nameof(KanColleClientSettings.ViewRangeCalcType), (sender, args) => this.Calculate() },
+				{ nameof(IKanColleClientSettings.ViewRangeCalcType), (sender, args) => this.Calculate() },
 			});
 		}
 

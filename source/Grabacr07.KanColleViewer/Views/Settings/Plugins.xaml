@@ -6,16 +6,14 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
-			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
-			 xmlns:controls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
-			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
 			 xmlns:composition="clr-namespace:Grabacr07.KanColleViewer.Composition"
 			 xmlns:compositionVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Composition"
+			 xmlns:vms="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Settings"
 			 mc:Ignorable="d"
 			 d:DesignWidth="500"
 			 d:DesignHeight="300"
-			 d:DataContext="{d:DesignInstance viewModels:SettingsViewModel}">
+			 d:DataContext="{d:DesignInstance vms:SettingsViewModel}">
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
@@ -25,94 +23,6 @@
 	</UserControl.Resources>
 
 	<StackPanel>
-		<StackPanel>
-			<StackPanel.Style>
-				<Style TargetType="{x:Type StackPanel}">
-					<Setter Property="Visibility"
-							Value="Visible" />
-					<Style.Triggers>
-						<DataTrigger Binding="{Binding BlacklistedPlugins.Count}"
-									 Value="0">
-							<Setter Property="Visibility"
-									Value="Collapsed" />
-						</DataTrigger>
-					</Style.Triggers>
-				</Style>
-			</StackPanel.Style>
-			<TextBlock Text="読み込みに失敗したプラグイン"
-					   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
-
-			<StackPanel Margin="20,0,0,0">
-				<TextBlock Text="以下のプラグインは、読み込みに失敗し動作していません。発生したエラーの詳細を確認できます。"
-						   Style="{DynamicResource DetailTextStyleKey}"
-						   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
-
-				<ItemsControl ItemsSource="{Binding BlacklistedPlugins}"
-							  Margin="0,5">
-					<ItemsControl.ItemTemplate>
-						<DataTemplate>
-							<Border BorderThickness="1"
-									BorderBrush="{DynamicResource ValidationErrorBrushKey}"
-									Margin="0,5">
-								<StackPanel>
-									<metro:ExpanderButton x:Name="DetailExpander"
-														  Direction="Down"
-														  Margin="5">
-										<StackPanel>
-											<ContentControl Content="{Binding Metadata}">
-												<ContentControl.Resources>
-													<DataTemplate DataType="{x:Type composition:PluginMetadata}">
-														<TextBlock Style="{DynamicResource DefaultTextStyleKey}">
-															<Run Text="{Binding Title, Mode=OneWay}"
-																 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-															<Run Text=" " />
-															<Run Text="version" />
-															<Run Text="{Binding Version, Mode=OneWay}" />
-															<Run Text=" / " />
-															<Run Text="{Binding Author, Mode=OneWay}" />
-														</TextBlock>
-													</DataTemplate>
-													<DataTemplate DataType="{x:Type compositionVm:BlacklistedAssembly}">
-														<TextBlock Text="{Binding Name}"
-																   Style="{DynamicResource EmphaticTextStyleKey}" />
-													</DataTemplate>
-												</ContentControl.Resources>
-											</ContentControl>
-											<Border Height="4" />
-											<TextBlock Text="{Binding Message}"
-													   Style="{DynamicResource DetailTextStyleKey}" />
-										</StackPanel>
-									</metro:ExpanderButton>
-
-									<StackPanel Visibility="{Binding ElementName=DetailExpander, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"
-												Margin="5,0,5,5">
-										<Rectangle Height="1"
-												   Style="{DynamicResource SeparatorRectangleStyleKey}"
-												   Margin="0,0,0,5" />
-										<TextBox Text="{Binding Exception}"
-												 FontSize="{DynamicResource DetailFontSizeKey}"
-												 FontFamily="{DynamicResource DetailFontFamilyKey}"
-												 Foreground="{DynamicResource ForegroundBrushKey}"
-												 Background="Transparent"
-												 BorderThickness="0"
-												 Padding="0"
-												 IsReadOnly="True"
-												 AcceptsReturn="True"
-												 AcceptsTab="True"
-												 TextWrapping="Wrap" />
-									</StackPanel>
-								</StackPanel>
-							</Border>
-						</DataTemplate>
-					</ItemsControl.ItemTemplate>
-				</ItemsControl>
-			</StackPanel>
-
-			<Rectangle Height="1"
-					   Style="{DynamicResource SeparatorRectangleStyleKey}"
-					   Margin="0,0,0,10" />
-		</StackPanel>
-
 		<TextBlock Text="読み込み済みのプラグイン"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 

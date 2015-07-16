@@ -4,13 +4,12 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
-			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
-			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
-			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 xmlns:ms="clr-namespace:Grabacr07.KanColleViewer.Models.Settings"
+			 xmlns:vms="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Settings"
 			 mc:Ignorable="d"
 			 d:DesignWidth="500"
 			 d:DesignHeight="300"
-			 d:DataContext="{d:DesignInstance viewModels:SettingsViewModel}">
+			 d:DataContext="{d:DesignInstance vms:SettingsViewModel}">
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
@@ -36,8 +35,8 @@
 				<metro:PromptTextBox Prompt="例: 40"
 									 Width="60">
 					<metro:PromptTextBox.Text>
-						<Binding Source="{x:Static models:Settings.Current}"
-								 Path="KanColleClientSettings.ReSortieCondition"
+						<Binding Source="{x:Static ms:KanColleSettings.ReSortieCondition}"
+								 Path="Value"
 								 UpdateSourceTrigger="PropertyChanged">
 							<Binding.ValidationRules>
 								<metro:Int32Rule Min="0"

@@ -6,7 +6,7 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 			 xmlns:composition="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Composition"
-			 xmlns:controls="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+			 xmlns:controls="clr-namespace:MetroTrilithon.Controls;assembly=MetroTrilithon.Desktop"
 			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
 			 mc:Ignorable="d"
 			 d:DesignWidth="400"

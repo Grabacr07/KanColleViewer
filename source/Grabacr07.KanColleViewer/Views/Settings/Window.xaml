@@ -1,18 +1,21 @@
 ﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Settings.Window"
 			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
-			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
-			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
-			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
-			 xmlns:kanColleViewer="clr-namespace:Grabacr07.KanColleViewer"
+			 xmlns:metro2="http://schemes.grabacr.net/winfx/2015/personal/controls"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 xmlns:ms="clr-namespace:Grabacr07.KanColleViewer.Models.Settings"
+			 xmlns:vs="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
+			 xmlns:vms="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Settings"
+			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
 			 mc:Ignorable="d"
-			 d:DesignWidth="500"
-			 d:DesignHeight="300"
-			 d:DataContext="{d:DesignInstance viewModels:SettingsViewModel}">
+			 d:DesignWidth="540"
+			 d:DesignHeight="600"
+			 d:DataContext="{d:DesignInstance vms:WindowSettingsViewModel}"
+			 Background="{DynamicResource ThemeBrushKey}">
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
@@ -25,13 +28,17 @@
 		<TextBlock Text="{Binding Resources.Settings_Display, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
-		<CheckBox Content="{Binding Resources.Settings_Window_TopMost, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-				  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=TopMost, Mode=TwoWay}"
-				  Margin="20,0,0,10" />
-
-		<CheckBox Content="確認ダイアログを表示せずに終了する"
-				  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=CanCloseWithoutConfirmation, Mode=TwoWay}"
-				  Margin="20,0,0,10" />
+		<StackPanel Orientation="Horizontal"
+					Margin="20,0,0,10">
+			<TextBlock Text="アプリケーション終了時の確認動作"
+					   Margin="0,0,10,0" />
+			<metro:PromptComboBox ItemsSource="{Binding ExitConfirmationTypes}"
+								  DisplayMemberPath="Display"
+								  SelectedValuePath="Value"
+								  SelectedValue="{Binding Source={x:Static ms:GeneralSettings.ExitConfirmationType}, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+								  Prompt=""
+								  MinWidth="140" />
+		</StackPanel>
 
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
@@ -39,7 +46,8 @@
 		<TextBlock Text="{Binding Resources.Settings_WindowControl, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
 				   Margin="0,10" />
-		<metro2:CallMethodButton MethodName="SetLocationLeft"
+		<metro2:CallMethodButton MethodTarget="{Binding Source={x:Static root:WindowService.Current}}"
+								 MethodName="SetLocationLeft"
 								 Padding="20,4"
 								 Margin="20,0,0,10"
 								 HorizontalAlignment="Left">
@@ -55,8 +63,298 @@
 			</StackPanel>
 		</metro2:CallMethodButton>
 
-		<Rectangle Height="1"
-				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+		<StackPanel Visibility="{Binding Source={x:Static ms:GeneralSettings.IsProxyMode}, Path=Value, Converter={StaticResource UniversalBooleanToVisibilityConverter}, ConverterParameter=Colappsed:Visible}">
+			<Rectangle Height="1"
+					   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
+			<TextBlock Text="ウィンドウ レイアウト"
+					   Style="{DynamicResource SettingsHeaderTextStyleKey}"
+					   Margin="0,10" />
+
+			<StackPanel HorizontalAlignment="Left">
+				<UniformGrid Rows="1"
+							 Margin="16,0,0,5">
+					<UniformGrid.Resources>
+						<Style x:Key="LayoutButtonStyleKey"
+							   TargetType="{x:Type metro2:CallMethodButton}">
+							<Setter Property="Content"
+									Value="情報" />
+							<Setter Property="BorderThickness"
+									Value="1" />
+							<Setter Property="Background"
+									Value="{DynamicResource SemiactiveBackgroundBrushKey}" />
+							<Setter Property="BorderBrush"
+									Value="{DynamicResource SemiactiveBorderBrushKey}" />
+							<Setter Property="Foreground"
+									Value="{DynamicResource SemiActiveForegroundBrushKey}" />
+							<Setter Property="HorizontalContentAlignment"
+									Value="Center" />
+							<Setter Property="VerticalContentAlignment"
+									Value="Center" />
+							<Setter Property="Margin"
+									Value="1" />
+							<Setter Property="Template">
+								<Setter.Value>
+									<ControlTemplate TargetType="{x:Type metro2:CallMethodButton}">
+										<Border BorderThickness="{TemplateBinding BorderThickness}"
+												BorderBrush="{TemplateBinding BorderBrush}"
+												Background="{TemplateBinding Background}">
+											<ContentPresenter ContentSource="Content"
+															  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+															  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+										</Border>
+									</ControlTemplate>
+								</Setter.Value>
+							</Setter>
+							<Style.Triggers>
+								<Trigger Property="IsEnabled"
+										 Value="False">
+									<Setter Property="Background"
+											Value="{DynamicResource InactiveBackgroundBrushKey}" />
+									<Setter Property="BorderBrush"
+											Value="{DynamicResource InactiveBorderBrushKey}" />
+									<Setter Property="Foreground"
+											Value="{DynamicResource InactiveForegroundBrushKey}" />
+								</Trigger>
+							</Style.Triggers>
+						</Style>
+
+						<Style x:Key="KanColleMarkStyleKey"
+							   TargetType="{x:Type metro2:CallMethodButton}"
+							   BasedOn="{StaticResource LayoutButtonStyleKey}">
+							<Setter Property="Content"
+									Value="艦これ" />
+							<Setter Property="Background"
+									Value="{DynamicResource AccentBrushKey}" />
+							<Setter Property="BorderBrush"
+									Value="{DynamicResource AccentHighlightBrushKey}" />
+							<Setter Property="Foreground"
+									Value="{DynamicResource AccentForegroundBrushKey}" />
+						</Style>
+
+						<Style TargetType="{x:Type metro2:CallMethodButton}"
+							   BasedOn="{StaticResource LayoutButtonStyleKey}">
+							<Style.Triggers>
+								<Trigger Property="IsMouseOver"
+										 Value="True">
+									<Setter Property="Background"
+											Value="{DynamicResource HighlightBackgroundBrushKey}" />
+									<Setter Property="Foreground"
+											Value="{DynamicResource HighlightForegroundBrushKey}" />
+									<Setter Property="BorderBrush"
+											Value="{DynamicResource HighlightBorderBrushKey}" />
+								</Trigger>
+								<Trigger Property="IsPressed"
+										 Value="True">
+									<Setter Property="Background"
+											Value="{DynamicResource AccentBrushKey}" />
+									<Setter Property="BorderBrush"
+											Value="{DynamicResource ActiveBorderBrushKey}" />
+									<Setter Property="Foreground"
+											Value="{DynamicResource AccentForegroundBrushKey}" />
+								</Trigger>
+								<DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=(vs:Window.IsDockMatched)}"
+											 Value="True">
+									<Setter Property="Background"
+											Value="{DynamicResource BackgroundBrushKey}" />
+									<Setter Property="BorderBrush"
+											Value="{DynamicResource BorderBrushKey}" />
+									<Setter Property="Foreground"
+											Value="{DynamicResource ForegroundBrushKey}" />
+								</DataTrigger>
+								<Trigger Property="IsEnabled"
+										 Value="False">
+									<Setter Property="Background"
+											Value="{DynamicResource InactiveBackgroundBrushKey}" />
+									<Setter Property="BorderBrush"
+											Value="{DynamicResource InactiveBorderBrushKey}" />
+									<Setter Property="Foreground"
+											Value="{DynamicResource InactiveForegroundBrushKey}" />
+								</Trigger>
+							</Style.Triggers>
+						</Style>
+
+						<Style TargetType="{x:Type RadioButton}">
+							<Setter Property="Background"
+									Value="{DynamicResource ActiveBackgroundBrushKey}" />
+							<Setter Property="Foreground"
+									Value="{DynamicResource ActiveForegroundBrushKey}" />
+							<Setter Property="Padding"
+									Value="16,8" />
+							<Setter Property="HorizontalContentAlignment"
+									Value="Center" />
+							<Setter Property="Template">
+								<Setter.Value>
+									<ControlTemplate TargetType="{x:Type RadioButton}">
+										<Border Background="{TemplateBinding Background}">
+											<ContentPresenter ContentSource="Content"
+															  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+															  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+															  Margin="{TemplateBinding Padding}" />
+										</Border>
+									</ControlTemplate>
+								</Setter.Value>
+							</Setter>
+							<Style.Triggers>
+								<Trigger Property="IsChecked"
+										 Value="True">
+									<Setter Property="Background"
+											Value="{DynamicResource AccentBrushKey}" />
+									<Setter Property="Foreground"
+											Value="{DynamicResource AccentForegroundBrushKey}" />
+								</Trigger>
+								<Trigger Property="IsMouseOver"
+										 Value="True">
+									<Setter Property="Background"
+											Value="{DynamicResource HighlightBackgroundBrushKey}" />
+									<Setter Property="Foreground"
+											Value="{DynamicResource HighlightForegroundBrushKey}" />
+								</Trigger>
+							</Style.Triggers>
+						</Style>
+					</UniformGrid.Resources>
+
+					<Border Margin="4,0">
+						<Border.Style>
+							<Style TargetType="{x:Type Border}">
+								<Setter Property="BorderThickness"
+										Value="1" />
+								<Setter Property="BorderBrush"
+										Value="{DynamicResource ActiveBackgroundBrushKey}" />
+								<Style.Triggers>
+									<DataTrigger Binding="{Binding ElementName=MergedCheckBox, Path=IsChecked}"
+												 Value="True">
+										<Setter Property="BorderBrush"
+												Value="{DynamicResource AccentBrushKey}" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding ElementName=MergedCheckBox, Path=IsMouseOver}"
+												 Value="True">
+										<Setter Property="BorderBrush"
+												Value="{DynamicResource HighlightBackgroundBrushKey}" />
+									</DataTrigger>
+								</Style.Triggers>
+							</Style>
+						</Border.Style>
+						<DockPanel>
+							<RadioButton x:Name="MergedCheckBox"
+										 DockPanel.Dock="Top"
+										 IsChecked="{Binding IsSplit, Mode=TwoWay, Converter={StaticResource ReverseBooleanConverter}}"
+										 Content="シングル ウィンドウ" />
+							<UniformGrid Margin="4"
+										 IsEnabled="{Binding ElementName=MergedCheckBox, Path=IsChecked}">
+								<Border Width="80"
+										Height="48" />
+								<metro2:CallMethodButton MethodTarget="{Binding}"
+														 MethodName="SetDockSettings"
+														 MethodParameter="{x:Static Dock.Top}"
+														 vs:Window.IsDockMatched="{Binding DockTop}" />
+								<Border />
+								<metro2:CallMethodButton MethodTarget="{Binding}"
+														 MethodName="SetDockSettings"
+														 MethodParameter="{x:Static Dock.Left}"
+														 vs:Window.IsDockMatched="{Binding DockLeft}" />
+
+								<metro2:CallMethodButton Style="{DynamicResource KanColleMarkStyleKey}" />
+
+								<metro2:CallMethodButton MethodTarget="{Binding}"
+														 MethodName="SetDockSettings"
+														 MethodParameter="{x:Static Dock.Right}"
+														 vs:Window.IsDockMatched="{Binding DockRight}" />
+								<Border />
+								<metro2:CallMethodButton MethodTarget="{Binding}"
+														 MethodName="SetDockSettings"
+														 MethodParameter="{x:Static Dock.Bottom}"
+														 vs:Window.IsDockMatched="{Binding DockBottom}" />
+								<Border />
+							</UniformGrid>
+						</DockPanel>
+					</Border>
+
+					<Border Margin="4,0">
+						<Border.Style>
+							<Style TargetType="{x:Type Border}">
+								<Setter Property="BorderThickness"
+										Value="1" />
+								<Setter Property="BorderBrush"
+										Value="{DynamicResource ActiveBackgroundBrushKey}" />
+								<Style.Triggers>
+									<DataTrigger Binding="{Binding ElementName=SplitCheckBox, Path=IsChecked}"
+												 Value="True">
+										<Setter Property="BorderBrush"
+												Value="{DynamicResource AccentBrushKey}" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding ElementName=SplitCheckBox, Path=IsMouseOver}"
+												 Value="True">
+										<Setter Property="BorderBrush"
+												Value="{DynamicResource HighlightBackgroundBrushKey}" />
+									</DataTrigger>
+								</Style.Triggers>
+							</Style>
+						</Border.Style>
+						<DockPanel>
+							<RadioButton x:Name="SplitCheckBox"
+										 DockPanel.Dock="Top"
+										 IsChecked="{Binding IsSplit, Mode=TwoWay}"
+										 Content="マルチ ウィンドウ" />
+							<Grid Margin="4"
+								  IsEnabled="{Binding ElementName=SplitCheckBox, Path=IsChecked}">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="*" />
+								</Grid.ColumnDefinitions>
+								<Grid.RowDefinitions>
+									<RowDefinition Height="*" />
+									<RowDefinition Height="*" />
+									<RowDefinition Height="*" />
+								</Grid.RowDefinitions>
+
+								<metro2:CallMethodButton Grid.Column="1"
+														 Grid.ColumnSpan="2"
+														 Grid.Row="1"
+														 Grid.RowSpan="2"
+														 Margin="12">
+									<metro2:CallMethodButton.Style>
+										<Style TargetType="{x:Type metro2:CallMethodButton}"
+											   BasedOn="{StaticResource LayoutButtonStyleKey}">
+											<Setter Property="Foreground"
+													Value="{DynamicResource ActiveForegroundBrushKey}" />
+										</Style>
+									</metro2:CallMethodButton.Style>
+								</metro2:CallMethodButton>
+								<metro2:CallMethodButton Grid.Column="0"
+														 Grid.ColumnSpan="2"
+														 Grid.Row="0"
+														 Grid.RowSpan="2"
+														 Margin="12"
+														 Style="{DynamicResource KanColleMarkStyleKey}" />
+							</Grid>
+						</DockPanel>
+					</Border>
+				</UniformGrid>
+
+				<StackPanel Orientation="Horizontal"
+							HorizontalAlignment="Center"
+							Margin="16,0,0,8">
+					<metro2:CallMethodButton MethodTarget="{Binding}"
+											 MethodName="Apply"
+											 Content="適用"
+											 MinWidth="110"
+											 Padding="16,6"
+											 Margin="4,2" />
+					<metro2:CallMethodButton MethodTarget="{Binding}"
+											 MethodName="Cancel"
+											 Content="キャンセル"
+											 MinWidth="110"
+											 Padding="16,6"
+											 Margin="4,2" />
+				</StackPanel>
+			</StackPanel>
+
+			<Rectangle Height="1"
+					   Margin="0,0"
+					   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+		</StackPanel>
 	</StackPanel>
 </UserControl>

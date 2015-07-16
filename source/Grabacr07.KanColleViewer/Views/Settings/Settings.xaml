@@ -6,12 +6,15 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
-			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
+			 xmlns:ms="clr-namespace:Grabacr07.KanColleViewer.Models.Settings"
+			 xmlns:mvs="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Settings"
+			 xmlns:behaviors="http://schemes.grabacr.net/winfx/2015/personal/behaviors"
 			 mc:Ignorable="d"
 			 d:DesignWidth="700"
 			 d:DesignHeight="400"
-			 DataContext="{Binding Source={x:Static root:Application.Instance}, Path=MainWindowViewModel.Settings}"
+			 DataContext="{Binding Source={x:Static mvs:SettingsViewModel.Instance}}"
 			 Background="{DynamicResource ThemeBrushKey}">
 	<UserControl.Resources>
 		<ResourceDictionary>
@@ -34,8 +37,11 @@
 
 	<ScrollViewer VerticalScrollBarVisibility="Auto"
 				  PanningMode="Both">
+		<i:Interaction.Behaviors>
+			<behaviors:ScrollBarThresholdBehavior Horizontal="600.0" />
+		</i:Interaction.Behaviors>
 		<TabControl Style="{DynamicResource VerticalTabControlStyleKey}">
-			<TabItem>
+			<TabItem Visibility="{Binding Source={x:Static ms:GeneralSettings.IsProxyMode}, Path=Value, Converter={StaticResource UniversalBooleanToVisibilityConverter}, ConverterParameter=Colappsed:Visible}">
 				<TabItem.Header>
 					<TextBlock Text="{Binding Resources.Settings_BrowserControl, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 							   Style="{StaticResource TabHeaderTextStyleKey}" />
@@ -48,7 +54,8 @@
 					<TextBlock Text="{Binding Resources.Settings_Window, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 							   Style="{StaticResource TabHeaderTextStyleKey}" />
 				</TabItem.Header>
-				<settings:Window Margin="10,0" />
+				<settings:Window Margin="10,0"
+								 DataContext="{Binding WindowSettings}" />
 			</TabItem>
 
 			<TabItem>

@@ -4,15 +4,12 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
-			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
-			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
-			 xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
-			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:vmFleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 			 xmlns:vmContents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 xmlns:dev="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Dev"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Settings"
 			 mc:Ignorable="d"
 			 d:DesignHeight="25"
 			 d:DesignWidth="780">
@@ -25,7 +22,7 @@
 		<Rectangle x:Name="Col0"
 				   Margin="5,0" />
 		<TextBlock Grid.Column="0"
-				   Text="{Binding Source={x:Static root:Application.Instance}, Path=MainWindowViewModel.StatusMessage}"
+				   Text="{Binding Source={x:Static models:StatusService.Current}, Path=Message}"
 				   Style="{DynamicResource DefaultTextStyleKey}"
 				   Foreground="{DynamicResource AccentForegroundBrushKey}"
 				   TextWrapping="NoWrap"
@@ -33,7 +30,7 @@
 				   Margin="5,0" />
 
 		<ContentControl Grid.Column="1"
-						Content="{Binding Source={x:Static root:Application.Instance}, Path=MainWindowViewModel.StatusBar}">
+						Content="{Binding}">
 			<ContentControl.Resources>
 				<DataTemplate DataType="{x:Type vm:StartContentViewModel}" />
 				<DataTemplate DataType="{x:Type vmContents:OverviewViewModel}" />
@@ -74,7 +71,7 @@
 				<DataTemplate DataType="{x:Type vmContents:QuestsViewModel}" />
 				<DataTemplate DataType="{x:Type vmContents:ExpeditionsViewModel}" />
 				<DataTemplate DataType="{x:Type vmContents:ToolsViewModel}" />
-				<DataTemplate DataType="{x:Type vm:SettingsViewModel}" />
+				<DataTemplate DataType="{x:Type settings:SettingsViewModel}" />
 				<DataTemplate DataType="{x:Type dev:DebugTabViewModel}" />
 			</ContentControl.Resources>
 		</ContentControl>

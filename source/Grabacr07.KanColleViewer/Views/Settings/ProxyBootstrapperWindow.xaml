@@ -7,14 +7,15 @@
 				   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 				   xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 				   xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+				   xmlns:metro2="http://schemes.grabacr.net/winfx/2015/personal/controls"
 				   xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
 				   xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
 				   xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
 				   xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 				   xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
-				   xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 				   xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
+				   xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Models.Settings"
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:ProxyBootstrapperViewModel}"
 				   Title="{Binding Title}"
@@ -63,10 +64,9 @@
 					   Style="{DynamicResource SeparatorRectangleStyleKey}"
 					   Margin="0,0,0,12" />
 
-			<CheckBox x:Name="CheckBoxChangeLocalProxyPort"
-					  Content="待ち受けポートを変更する"
-					  IsChecked="{Binding Source={x:Static models:Settings.Current}, Path=IsEnableChangeLocalProxyPort}" />
-			<StackPanel IsEnabled="{Binding IsChecked, ElementName=CheckBoxChangeLocalProxyPort}"
+			<CheckBox Content="待ち受けポートを変更する"
+					  IsChecked="{Binding Source={x:Static settings:NetworkSettings+LocalProxy.IsEnabled}, Path=Value}" />
+			<StackPanel IsEnabled="{Binding Source={x:Static settings:NetworkSettings+LocalProxy.IsEnabled}, Path=Value}"
 						Margin="20,6,0,6">
 				<Grid Margin="0,4">
 					<Grid.ColumnDefinitions>
@@ -83,8 +83,8 @@
 										 Prompt="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 										 Width="100">
 						<metro:PromptTextBox.Text>
-							<Binding Source="{x:Static models:Settings.Current}"
-									 Path="LocalProxyPort"
+							<Binding Source="{x:Static settings:NetworkSettings+LocalProxy.Port}"
+									 Path="Value"
 									 UpdateSourceTrigger="PropertyChanged">
 								<Binding.ValidationRules>
 									<metro:Int32Rule Min="1"
@@ -98,7 +98,7 @@
 							   Style="{DynamicResource DetailTextStyleKey}"
 							   Margin="5">
 						<Run Text="(既定値:" />
-						<Run Text="{Binding DefaultLocalProxyPort, Source={x:Static properties:Settings.Default}, Mode=OneWay}" />
+						<Run Text="{Binding Source={x:Static settings:NetworkSettings+LocalProxy.Port}, Path=Default, Mode=OneWay}" />
 						<Run Text=")" />
 					</TextBlock>
 				</Grid>
