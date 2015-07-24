@@ -9,6 +9,9 @@
 				   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 				   xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 				   xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+				   xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
+				   xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
+				   xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
 				   xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
 				   xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 				   xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
@@ -20,7 +23,6 @@
 				   xmlns:fleetsVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 				   xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
 				   xmlns:wrapper="clr-namespace:Grabacr07.KanColleWrapper.Models;assembly=KanColleWrapper"
-				   xmlns:converters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters"
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:FleetWindowViewModel}"
 				   Title="{Binding Title}"
@@ -55,7 +57,7 @@
 
 	<Window.Resources>
 		<ResourceDictionary>
-			<converters:HasFlagConverter x:Key="HasFlagConverter" />
+			<kcvv:HasFlagConverter x:Key="HasFlagConverter" />
 
 			<DataTemplate x:Key="ShipLineViewKey"
 						  DataType="{x:Type wrapper:Ship}">
@@ -161,9 +163,9 @@
 									   Margin="10,1,10,0"
 									   Style="{DynamicResource DefaultTextStyleKey}">
 								<InlineUIContainer>
-									<controls:ConditionIcon ConditionType="{Binding ConditionType, Mode=OneWay}"
-															Width="11"
-															Height="11" />
+									<kcvc:ConditionIcon ConditionType="{Binding ConditionType, Mode=OneWay}"
+														Width="11"
+														Height="11" />
 								</InlineUIContainer>
 								<Run Text="{Binding Condition, Mode=OneWay, StringFormat={} {0}}"
 									 Style="{DynamicResource EmphaticTextElementStyleKey}" />
@@ -184,10 +186,10 @@
 									<Run Text="/" />
 									<Run Text="{Binding HP.Maximum, Mode=OneWay}" />
 								</TextBlock>
-								<controls:ColorIndicator Height="7"
-														 VerticalAlignment="Bottom"
-														 Margin="1,4,0,2"
-														 LimitedValue="{Binding HP, Mode=OneWay}" />
+								<kcvc:ColorIndicator Height="7"
+													 VerticalAlignment="Bottom"
+													 Margin="1,4,0,2"
+													 LimitedValue="{Binding HP, Mode=OneWay}" />
 							</StackPanel>
 
 							<TextBlock Grid.Column="3"
@@ -290,10 +292,10 @@
 									<Run Text="{Binding Fuel.Maximum, Mode=OneWay}"
 										 FontSize="10" />
 								</TextBlock>
-								<controls:ColorIndicator DockPanel.Dock="Top"
-														 LimitedValue="{Binding Fuel, Mode=OneWay}"
-														 Height="5"
-														 Margin="1,2,0,0" />
+								<kcvc:ColorIndicator DockPanel.Dock="Top"
+													 LimitedValue="{Binding Fuel, Mode=OneWay}"
+													 Height="5"
+													 Margin="1,2,0,0" />
 								<Border />
 							</DockPanel>
 
@@ -317,10 +319,10 @@
 									<Run Text="{Binding Bull.Maximum, Mode=OneWay}"
 										 FontSize="10" />
 								</TextBlock>
-								<controls:ColorIndicator DockPanel.Dock="Top"
-														 LimitedValue="{Binding Bull, Mode=OneWay}"
-														 Height="5"
-														 Margin="1,2,0,0" />
+								<kcvc:ColorIndicator DockPanel.Dock="Top"
+													 LimitedValue="{Binding Bull, Mode=OneWay}"
+													 Height="5"
+													 Margin="1,2,0,0" />
 								<Border />
 							</DockPanel>
 
@@ -368,10 +370,10 @@
 													</Style>
 												</TextBlock.Style>
 											</TextBlock>
-											<controls:SlotItemIcon Grid.Column="1"
-																   Type="{Binding Item.Info.IconType, Mode=OneWay}"
-																   Width="14"
-																   Height="14" />
+											<kcvc:SlotItemIcon Grid.Column="1"
+															   Type="{Binding Item.Info.IconType, Mode=OneWay}"
+															   Width="14"
+															   Height="14" />
 											<TextBlock Grid.Column="2"
 													   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 													   Style="{DynamicResource DefaultTextStyleKey}"

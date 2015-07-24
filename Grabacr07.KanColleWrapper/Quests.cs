@@ -187,8 +187,10 @@ namespace Grabacr07.KanColleWrapper
 
 				this.IsEmpty = false;
 
-				questlist.api_list.Select(x => new Quest(x))
-					.ForEach(x => this.questPages[page].AddOrUpdate(x.Id, x, (_, __) => x));
+				foreach (var quest in questlist.api_list.Select(x => new Quest(x)))
+				{
+					this.questPages[page].AddOrUpdate(quest.Id, quest, (_, __) => quest);
+				}
 
 				this.All = this.questPages.Where(x => x != null)
 					.SelectMany(x => x.Select(kvp => kvp.Value))

@@ -3,19 +3,21 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-			 xmlns:fleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 			 xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+			 xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
+			 xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
+			 xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
-			 xmlns:converters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters"
+			 xmlns:fleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 			 mc:Ignorable="d"
 			 d:DesignWidth="300"
 			 d:DesignHeight="30"
 			 d:DataContext="{d:DesignInstance fleets:FleetViewModel}">
 
 	<UserControl.Resources>
-		<converters:HasFlagConverter x:Key="HasFlagConverter" />
+		<kcvv:HasFlagConverter x:Key="HasFlagConverter" />
 	</UserControl.Resources>
 
 	<ContentControl Content="{Binding QuickStateView}">

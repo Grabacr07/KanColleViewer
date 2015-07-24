@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>$id$</id>
+        <title>$title$</title>
+        <version>$version$</version>
+        <authors>$author$</authors>
+        <owners>$author$</owners>
+        <licenseUrl>https://github.com/Grabacr07/KanColleViewer/blob/master/LICENSE.txt</licenseUrl>
+        <projectUrl>https://github.com/Grabacr07/KanColleViewer</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>$description$</description>
+        <language>ja-JP</language>
+        <tags>KanColle</tags>
+        <dependencies>
+            <dependency id="LivetCask" version="1.1.0" />
+            <dependency id="Rx-Main" version="2.2.5" />
+            <dependency id="FiddlerCore" version="4.5.1" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\Release\KanColleWrapper.dll" target="lib\net45\KanColleWrapper.dll" />
+        <file src="bin\Release\KanColleWrapper.xml" target="lib\net45\KanColleWrapper.xml" />
+    </files>
+</package>

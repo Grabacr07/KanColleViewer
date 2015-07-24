@@ -223,7 +223,7 @@ namespace Grabacr07.KanColleWrapper
 			}
 			else
 			{
-				this.Fleets.ForEach(x => x.Value.SafeDispose());
+				foreach (var fleet in this.Fleets) fleet.Value.SafeDispose();
 				this.Fleets = new MemberTable<Fleet>(source.Select(x => new Fleet(this.homeport, x)));
 			}
 		}
@@ -461,17 +461,17 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		private void Update(kcsapi_ship_deck source)
-        {
-            if (source.api_ship_data != null)
-            {
-                foreach (var ship in source.api_ship_data)
-                {
-                    var target = this.Ships[ship.api_id];
-                    target.Update(ship);
-                }
-            }
+		{
+			if (source.api_ship_data != null)
+			{
+				foreach (var ship in source.api_ship_data)
+				{
+					var target = this.Ships[ship.api_id];
+					target.Update(ship);
+				}
+			}
 
-            if (source.api_deck_data != null)
+			if (source.api_deck_data != null)
 			{
 				foreach (var deck in source.api_deck_data)
 				{

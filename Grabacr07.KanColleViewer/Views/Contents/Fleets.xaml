@@ -6,21 +6,22 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
+			 xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
+			 xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
 			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
-			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
-			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
-			 xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
-			 xmlns:fleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
+			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
-			 xmlns:converters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters"
+			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+			 xmlns:fleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 			 mc:Ignorable="d"
 			 d:DesignWidth="800"
 			 d:DesignHeight="400"
 			 d:DataContext="{d:DesignInstance fleets:FleetsViewModel}">
 
 	<UserControl.Resources>
-		<converters:HasFlagConverter x:Key="HasFlagConverter" />
+		<kcvv:HasFlagConverter x:Key="HasFlagConverter" />
 	</UserControl.Resources>
 
 	<i:Interaction.Triggers>
@@ -176,10 +177,10 @@
 														<Run Text="/" />
 														<Run Text="{Binding Ship.HP.Maximum, Mode=OneWay}" />
 												</TextBlock>
-												<controls:ColorIndicator x:Name="HPIndicator"
-																		 Height="7"
-																		 Margin="1,3,0,0"
-																		 LimitedValue="{Binding Ship.HP, Mode=OneWay}" />
+												<kcvc:ColorIndicator x:Name="HPIndicator"
+																	 Height="7"
+																	 Margin="1,3,0,0"
+																	 LimitedValue="{Binding Ship.HP, Mode=OneWay}" />
 											</StackPanel>
 										</Grid>
 
@@ -204,10 +205,10 @@
 																			  SharedSizeGroup="SlotItemMaximum" />
 														</Grid.ColumnDefinitions>
 
-														<controls:SlotItemIcon Grid.Column="0"
-																			   Type="{Binding Item.IconType}"
-																			   Width="20"
-																			   Height="20" />
+														<kcvc:SlotItemIcon Grid.Column="0"
+																		   Type="{Binding Item.IconType}"
+																		   Width="20"
+																		   Height="20" />
 														<!--<TextBlock Grid.Column="1"
 																   Text="{Binding Item.Name}"
 																   Margin="4,0,8,0"
@@ -330,13 +331,13 @@
 										<Run Text="/" />
 										<Run Text="{Binding Ship.HP.Maximum, Mode=OneWay}" />
 									</TextBlock>
-									<controls:ColorIndicator x:Name="HPIndicator"
-															 Grid.Row="1"
-															 Grid.Column="4"
-															 Height="6"
-															 VerticalAlignment="Bottom"
-															 Margin="10,0,10,2"
-															 LimitedValue="{Binding Ship.HP, Mode=OneWay}" />
+									<kcvc:ColorIndicator x:Name="HPIndicator"
+														 Grid.Row="1"
+														 Grid.Column="4"
+														 Height="6"
+														 VerticalAlignment="Bottom"
+														 Margin="10,0,10,2"
+														 LimitedValue="{Binding Ship.HP, Mode=OneWay}" />
 
 									<Grid x:Name="RepairIndicator"
 										  Grid.Column="4"
@@ -369,7 +370,7 @@
 											   Margin="10,0,10,10"
 											   Grid.RowSpan="2">
 										<InlineUIContainer>
-											<controls:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
+											<kcvc:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
 										</InlineUIContainer>
 										<Run Text="{Binding Ship.Condition, Mode=OneWay}"
 											 Style="{DynamicResource EmphaticTextElementStyleKey}" />
@@ -381,18 +382,18 @@
 											 FontSize="9" />
 									</TextBlock>
 
-									<controls:ColorIndicator Grid.Column="6"
-															 Grid.Row="0"
-															 Width="55"
-															 LimitedValue="{Binding Ship.Fuel, Mode=OneWay}"
-															 Height="6"
-															 Margin="0,6,0,7" />
-									<controls:ColorIndicator Grid.Column="6"
-															 Grid.Row="1"
-															 Width="55"
-															 LimitedValue="{Binding Ship.Bull, Mode=OneWay}"
-															 Height="6"
-															 VerticalAlignment="Top" />
+									<kcvc:ColorIndicator Grid.Column="6"
+														 Grid.Row="0"
+														 Width="55"
+														 LimitedValue="{Binding Ship.Fuel, Mode=OneWay}"
+														 Height="6"
+														 Margin="0,6,0,7" />
+									<kcvc:ColorIndicator Grid.Column="6"
+														 Grid.Row="1"
+														 Width="55"
+														 LimitedValue="{Binding Ship.Bull, Mode=OneWay}"
+														 Height="6"
+														 VerticalAlignment="Top" />
 
 									<ItemsControl Grid.Column="7"
 												  Grid.Row="0"
@@ -409,8 +410,8 @@
 											<DataTemplate>
 												<Border ToolTip="{Binding Item.NameWithLevel}"
 														Background="Transparent">
-													<controls:SlotItemIcon Type="{Binding Item.Info.IconType}"
-																		   Margin="3,0" />
+													<kcvc:SlotItemIcon Type="{Binding Item.Info.IconType}"
+																	   Margin="3,0" />
 												</Border>
 											</DataTemplate>
 										</ItemsControl.ItemTemplate>

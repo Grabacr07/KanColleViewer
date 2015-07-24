@@ -19,17 +19,26 @@ namespace Grabacr07.KanColleViewer.Composition
 
 		public void Dispose()
 		{
-			this.notifiers.ForEach(x => x.Dispose());
+			foreach (var x in this.notifiers)
+			{
+				x.Dispose();
+			}
 		}
 
 		public void Initialize()
 		{
-			this.notifiers.ForEach(x => x.Initialize());
+			foreach (var x in this.notifiers)
+			{
+				x.Initialize();
+			}
 		}
 
 		public void Show(NotifyType type, string header, string body, Action activated, Action<Exception> failed = null)
 		{
-			this.notifiers.ForEach(x => x.Show(type, header, body, activated, failed));
+			foreach (var x in this.notifiers)
+			{
+				x.Show(type, header, body, activated, failed);
+			}
 		}
 
 		public object GetSettingsView()
