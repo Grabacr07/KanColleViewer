@@ -161,7 +161,6 @@
     <Compile Include="Models\Raw\kcsapi_quest.cs" />
     <Compile Include="Models\Raw\kcsapi_questlist.cs" />
     <Compile Include="Models\Raw\kcsapi_ship3.cs" />
-    <Compile Include="Models\Raw\kcsapi_slot_data.cs" />
     <Compile Include="Models\Raw\kcsapi_start2.cs" />
     <Compile Include="Models\RepairingCompletedEventArgs.cs" />
     <Compile Include="Models\BuildingCompletedEventArgs.cs" />

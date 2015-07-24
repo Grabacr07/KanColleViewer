@@ -61,7 +61,8 @@ namespace Grabacr07.KanColleWrapper.Models
 		public static SvData<T> Parse<T>(Session session)
 		{
 			var bytes = Encoding.UTF8.GetBytes(session.GetResponseAsJson());
-			var serializer = new DataContractJsonSerializer(typeof(svdata<T>));
+			var settings = new DataContractJsonSerializerSettings { UseSimpleDictionaryFormat = true };
+			var serializer = new DataContractJsonSerializer(typeof(svdata<T>), settings);
 			using (var stream = new MemoryStream(bytes))
 			{
 				var rawResult = serializer.ReadObject(stream) as svdata<T>;
@@ -93,7 +94,8 @@ namespace Grabacr07.KanColleWrapper.Models
 		public static SvData Parse(Session session)
 		{
 			var bytes = Encoding.UTF8.GetBytes(session.GetResponseAsJson());
-			var serializer = new DataContractJsonSerializer(typeof(svdata));
+			var settings = new DataContractJsonSerializerSettings { UseSimpleDictionaryFormat = true };
+			var serializer = new DataContractJsonSerializer(typeof(svdata), settings);
 			using (var stream = new MemoryStream(bytes))
 			{
 				var rawResult = serializer.ReadObject(stream) as svdata;
