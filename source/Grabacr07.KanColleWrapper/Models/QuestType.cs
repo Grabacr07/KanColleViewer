@@ -24,5 +24,20 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// ウィークリー任務。
 		/// </summary>
 		Weekly = 3,
+
+		/// <summary>
+		/// 日付の一の位が3,7,0の日のみ出現する任務。
+		/// </summary>
+		X3X7X0 = 4,
+
+		/// <summary>
+		/// 日付の一の位が2,8の日のみ出現する任務。
+		/// </summary>
+		X2X8 = 5,
+
+		/// <summary>
+		/// マンスリー任務。
+		/// </summary>
+		Monthly = 6,
 	}
 }

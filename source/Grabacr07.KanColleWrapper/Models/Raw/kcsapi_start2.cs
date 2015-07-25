@@ -7,31 +7,28 @@ using System.Threading.Tasks;
 namespace Grabacr07.KanColleWrapper.Models.Raw
 {
 	// ReSharper disable InconsistentNaming
+
 	public class kcsapi_start2
 	{
 		public kcsapi_mst_ship[] api_mst_ship { get; set; }
-		public kcsapi_mst_slotitem[] api_mst_slotitem { get; set; }
-		public kcsapi_mst_useitem[] api_mst_useitem { get; set; }
-		public kcsapi_mst_stype[] api_mst_stype { get; set; }
-		public kcsapi_mst_slotitem_equiptype[] api_mst_slotitem_equiptype { get; set; }
-		public kcsapi_mst_maparea[] api_mst_maparea { get; set; }
-		public kcsapi_mst_mapinfo[] api_mst_mapinfo { get; set; }
-
-		// ↓ とりあえずそのまま。
-
 		public Api_Mst_Shipgraph[] api_mst_shipgraph { get; set; }
-		public Api_Mst_Slotitemgraph[] api_mst_slotitemgraph { get; set; }
+		public kcsapi_mst_slotitem_equiptype[] api_mst_slotitem_equiptype { get; set; }
+		public kcsapi_mst_stype[] api_mst_stype { get; set; }
+		public kcsapi_mst_slotitem[] api_mst_slotitem { get; set; }
 		public Api_Mst_Furniture[] api_mst_furniture { get; set; }
 		public Api_Mst_Furnituregraph[] api_mst_furnituregraph { get; set; }
+		public kcsapi_mst_useitem[] api_mst_useitem { get; set; }
 		public Api_Mst_Payitem[] api_mst_payitem { get; set; }
 		public Api_Mst_Item_Shop api_mst_item_shop { get; set; }
+		public kcsapi_mst_maparea[] api_mst_maparea { get; set; }
+		public kcsapi_mst_mapinfo[] api_mst_mapinfo { get; set; }
 		public Api_Mst_Mapbgm[] api_mst_mapbgm { get; set; }
-		public Api_Mst_Mapcell[] api_mst_mapcell { get; set; }
+		public kcsapi_mst_mapcell[] api_mst_mapcell { get; set; }
 		public kcsapi_mission[] api_mst_mission { get; set; }
 		public Api_Mst_Const api_mst_const { get; set; }
 		public Api_Mst_Shipupgrade[] api_mst_shipupgrade { get; set; }
+		public Api_Mst_Bgm[] api_mst_bgm { get; set; }
 	}
-
 
 	public class Api_Mst_Item_Shop
 	{
@@ -42,9 +39,23 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 	public class Api_Mst_Const
 	{
 		public Api_Boko_Max_Ships api_boko_max_ships { get; set; }
+		public Api_Dpflag_Quest api_dpflag_quest { get; set; }
+		public Api_Parallel_Quest_Max api_parallel_quest_max { get; set; }
 	}
 
 	public class Api_Boko_Max_Ships
+	{
+		public string api_string_value { get; set; }
+		public int api_int_value { get; set; }
+	}
+
+	public class Api_Dpflag_Quest
+	{
+		public string api_string_value { get; set; }
+		public int api_int_value { get; set; }
+	}
+
+	public class Api_Parallel_Quest_Max
 	{
 		public string api_string_value { get; set; }
 		public int api_int_value { get; set; }
@@ -57,51 +68,25 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public string api_name { get; set; }
 		public string api_yomi { get; set; }
 		public int api_stype { get; set; }
-		public int api_ctype { get; set; }
-		public int api_cnum { get; set; }
-		public string api_enqflg { get; set; }
 		public int api_afterlv { get; set; }
 		public string api_aftershipid { get; set; }
 		public int[] api_taik { get; set; }
 		public int[] api_souk { get; set; }
-		public int[] api_tous { get; set; }
 		public int[] api_houg { get; set; }
 		public int[] api_raig { get; set; }
-		public int[] api_baku { get; set; }
 		public int[] api_tyku { get; set; }
-		public int[] api_atap { get; set; }
-		public int[] api_tais { get; set; }
-		public int[] api_houm { get; set; }
-		public int[] api_raim { get; set; }
-		public int[] api_kaih { get; set; }
-		public int[] api_houk { get; set; }
-		public int[] api_raik { get; set; }
-		public int[] api_bakk { get; set; }
-		public int[] api_saku { get; set; }
-		public int[] api_sakb { get; set; }
 		public int[] api_luck { get; set; }
-		public int api_sokuh { get; set; }
 		public int api_soku { get; set; }
 		public int api_leng { get; set; }
-		public int[] api_grow { get; set; }
 		public int api_slot_num { get; set; }
 		public int[] api_maxeq { get; set; }
-		public int[] api_defeq { get; set; }
 		public int api_buildtime { get; set; }
 		public int[] api_broken { get; set; }
 		public int[] api_powup { get; set; }
-		public int[] api_gumax { get; set; }
 		public int api_backs { get; set; }
 		public string api_getmes { get; set; }
-		public object api_homemes { get; set; }
-		public object api_gomes { get; set; }
-		public object api_gomes2 { get; set; }
-		public string api_sinfo { get; set; }
 		public int api_afterfuel { get; set; }
 		public int api_afterbull { get; set; }
-		public object[] api_touchs { get; set; }
-		public object api_missions { get; set; }
-		public object api_systems { get; set; }
 		public int api_fuel_max { get; set; }
 		public int api_bull_max { get; set; }
 		public int api_voicef { get; set; }
@@ -128,6 +113,13 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public int[] api_battle_d { get; set; }
 		public int[] api_weda { get; set; }
 		public int[] api_wedb { get; set; }
+	}
+
+	public class Api_Mst_Slotitem_Equiptype
+	{
+		public int api_id { get; set; }
+		public string api_name { get; set; }
+		public int api_show_flg { get; set; }
 	}
 
 	public class Api_Mst_Stype
@@ -173,6 +165,18 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public int _29 { get; set; }
 		public int _30 { get; set; }
 		public int _31 { get; set; }
+		public int _32 { get; set; }
+		public int _33 { get; set; }
+		public int _34 { get; set; }
+		public int _35 { get; set; }
+		public int _36 { get; set; }
+		public int _37 { get; set; }
+		public int _38 { get; set; }
+		public int _39 { get; set; }
+		public int _40 { get; set; }
+		public int _41 { get; set; }
+		public int _42 { get; set; }
+		public int _43 { get; set; }
 	}
 
 	public class Api_Mst_Slotitem
@@ -205,14 +209,6 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public string api_usebull { get; set; }
 	}
 
-	public class Api_Mst_Slotitemgraph
-	{
-		public int api_id { get; set; }
-		public int api_sortno { get; set; }
-		public string api_filename { get; set; }
-		public string api_version { get; set; }
-	}
-
 	public class Api_Mst_Furniture
 	{
 		public int api_id { get; set; }
@@ -223,6 +219,7 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public int api_rarity { get; set; }
 		public int api_price { get; set; }
 		public int api_saleflg { get; set; }
+		public int api_season { get; set; }
 	}
 
 	public class Api_Mst_Furnituregraph
@@ -271,8 +268,9 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public string api_opetext { get; set; }
 		public string api_infotext { get; set; }
 		public int[] api_item { get; set; }
-		public int? api_max_maphp { get; set; }
+		public object api_max_maphp { get; set; }
 		public int? api_required_defeat_count { get; set; }
+		public int[] api_sally_flag { get; set; }
 	}
 
 	public class Api_Mst_Mapbgm
@@ -294,6 +292,21 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public int api_color_no { get; set; }
 	}
 
+	public class Api_Mst_Mission
+	{
+		public int api_id { get; set; }
+		public int api_maparea_id { get; set; }
+		public string api_name { get; set; }
+		public string api_details { get; set; }
+		public int api_time { get; set; }
+		public int api_difficulty { get; set; }
+		public float api_use_fuel { get; set; }
+		public float api_use_bull { get; set; }
+		public int[] api_win_item1 { get; set; }
+		public int[] api_win_item2 { get; set; }
+		public int api_return_flag { get; set; }
+	}
+
 	public class Api_Mst_Shipupgrade
 	{
 		public int api_id { get; set; }
@@ -302,6 +315,12 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public int api_upgrade_level { get; set; }
 		public int api_drawing_count { get; set; }
 		public int api_sortno { get; set; }
+	}
+
+	public class Api_Mst_Bgm
+	{
+		public int api_id { get; set; }
+		public string api_name { get; set; }
 	}
 
 	// ReSharper restore InconsistentNaming

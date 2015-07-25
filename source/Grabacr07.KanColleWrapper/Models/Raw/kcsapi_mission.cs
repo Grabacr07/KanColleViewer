@@ -18,6 +18,7 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public float api_use_bull { get; set; }
 		public int[] api_win_item1 { get; set; }
 		public int[] api_win_item2 { get; set; }
+		public int api_return_flag { get; set; }
 	}
 	// ReSharper restore InconsistentNaming
 }

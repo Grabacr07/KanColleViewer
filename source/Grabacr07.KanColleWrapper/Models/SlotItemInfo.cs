@@ -29,9 +29,49 @@ namespace Grabacr07.KanColleWrapper.Models
 		public int CategoryId => this.categoryId ?? (int)(this.categoryId = this.RawData.api_type.Get(2) ?? int.MaxValue);
 
 		/// <summary>
+		/// 火力値を取得します。
+		/// </summary>
+		public int Firepower => this.RawData.api_houg;
+
+		/// <summary>
+		/// 装甲値を取得します。
+		/// </summary>
+		public int Armer => this.RawData.api_souk;
+
+		/// <summary>
+		/// 雷装値を取得します。
+		/// </summary>
+		public int Torpedo => this.RawData.api_raig;
+
+		/// <summary>
 		/// 対空値を取得します。
 		/// </summary>
 		public int AA => this.RawData.api_tyku;
+
+		/// <summary>
+		/// 爆装値を取得します。
+		/// </summary>
+		public int Bomb => this.RawData.api_baku;
+
+		/// <summary>
+		/// 対潜値を取得します。
+		/// </summary>
+		public int ASW => this.RawData.api_tais;
+
+		/// <summary>
+		/// 命中値を取得します。
+		/// </summary>
+		public int Hit => this.RawData.api_houm;
+
+		/// <summary>
+		/// 回避値を取得します。
+		/// </summary>
+		public int Evade => this.RawData.api_houk;
+
+		/// <summary>
+		/// 索敵値を取得します。
+		/// </summary>
+		public int ViewRange => this.RawData.api_saku;
 
 		/// <summary>
 		/// 制空戦に参加できる戦闘機または水上機かどうかを示す値を取得します。
@@ -48,7 +88,12 @@ namespace Grabacr07.KanColleWrapper.Models
 								   || this.Type == SlotItemType.水上偵察機
 								   || this.Type == SlotItemType.水上爆撃機;
 
-		internal SlotItemInfo(kcsapi_mst_slotitem rawData) : base(rawData) { }
+		public SlotItemEquipType EquipType { get; }
+
+		internal SlotItemInfo(kcsapi_mst_slotitem rawData, MasterTable<SlotItemEquipType> types) : base(rawData)
+		{
+			this.EquipType = types[rawData.api_type?[2] ?? 0] ?? SlotItemEquipType.Dummy;
+		}
 
 		public override string ToString()
 		{
@@ -61,7 +106,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 		    api_id = 0,
 		    api_name = "？？？",
-		});
+		}, new MasterTable<SlotItemEquipType>());
 
 	    #endregion
 	}
