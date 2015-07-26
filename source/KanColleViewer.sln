@@ -53,6 +53,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroTrilithon", "MetroTrilithon\source\MetroTrilithon\MetroTrilithon.csproj", "{DF381709-9F44-44ED-A7D6-ECDF157E620D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroTrilithon.Desktop", "MetroTrilithon\source\MetroTrilithon.Desktop\MetroTrilithon.Desktop.csproj", "{4E2EB2E0-E5FE-4FEB-A3E5-5F2F05CD1A67}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Analyzers", "Analyzers", "{0F9AEBCF-F2ED-4D4D-8E58-CAFED5D965C2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanColleViewer.PluginAnalyzer", "Analyzers\KanColleViewer.PluginAnalyzer\KanColleViewer.PluginAnalyzer.csproj", "{B84F1251-4042-4ADC-955E-415469947538}"
