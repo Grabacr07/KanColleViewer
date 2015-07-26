@@ -6,7 +6,7 @@
 
 ### ライセンス
 
-* [The MIT License (MIT)](LICENSE.txt)
+* [The MIT License (MIT)](../../../LICENSE.txt)
 
 MIT ライセンスの下で公開する、オープンソース / フリーソフトウェアです。
 
