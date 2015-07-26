@@ -121,6 +121,7 @@
 						  x:Name="resizeGrip"
 						  x:FieldModifier="private"
 						  HorizontalAlignment="Right"
-						  VerticalAlignment="Bottom" />
+						  VerticalAlignment="Bottom"
+						  WindowChrome.ResizeGripDirection="BottomRight" />
 	</Grid>
 </metro:MetroWindow>

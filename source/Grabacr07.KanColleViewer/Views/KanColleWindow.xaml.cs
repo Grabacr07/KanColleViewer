@@ -42,6 +42,8 @@ namespace Grabacr07.KanColleViewer.Views
 			this.MinWidth = .0;
 			this.MinHeight = .0;
 
+			this.toolbarArea.MaxWidth = browserSize.Width;
+
 			if (this.previousBrowserSize != null)
 			{
 				if (this.previousDock == Dock.Top || this.previousDock == Dock.Bottom)

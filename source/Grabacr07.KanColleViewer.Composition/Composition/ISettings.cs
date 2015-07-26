@@ -11,7 +11,7 @@ namespace Grabacr07.KanColleViewer.Composition
 	/// </summary>
 	/// <remarks>
 	/// この型をコントラクトとしてエクスポートするとき、1 つの GUID につき 1 つまでしか使用されないことに注意してください。
-	/// </summary>
+	/// </remarks>
 	[PluginFeature]
 	public interface ISettings
 	{

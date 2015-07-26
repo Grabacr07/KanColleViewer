@@ -73,7 +73,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#region BrowserDock2 変更通知プロパティ
 
-		private Dock _BrowserDock2;
+		private Dock _BrowserDock2 = Dock.Top;
 
 		public Dock BrowserDock2
 		{

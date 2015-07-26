@@ -106,7 +106,9 @@
 
 		<DockPanel Grid.Row="1">
 			<DockPanel DockPanel.Dock="{Binding BrowserDock}">
-				<controls:KanColleHost DockPanel.Dock="{Binding BrowserDock2}"
+				<controls:KanColleHost x:Name="kanColleHost"
+									   x:FieldModifier="private"
+									   DockPanel.Dock="{Binding BrowserDock2}"
 									   ZoomFactor="{Binding ZoomFactor.Current}"
 									   OwnerSizeChangeRequested="HandleKanColleHostSizeChangeRequested">
 					<i:Interaction.Triggers>
@@ -132,7 +134,8 @@
 
 				<DockPanel x:Name="toolbarArea"
 						   x:FieldModifier="private"
-						   DockPanel.Dock="Top">
+						   DockPanel.Dock="Top"
+						   Width="{Binding ElementName=kanColleHost, Path=ActualWidth}">
 					<views:KanColleWindowButtons DockPanel.Dock="Right"
 												 Margin="8,4,4,4" />
 					<ContentControl Content="{Binding Content}">
@@ -187,6 +190,7 @@
 						  x:Name="resizeGrip"
 						  x:FieldModifier="private"
 						  HorizontalAlignment="Right"
-						  VerticalAlignment="Bottom" />
+						  VerticalAlignment="Bottom"
+						  WindowChrome.ResizeGripDirection="BottomRight" />
 	</Grid>
 </metro:MetroWindow>
