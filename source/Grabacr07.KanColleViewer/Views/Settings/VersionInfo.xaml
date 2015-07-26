@@ -88,6 +88,9 @@
 				<metro2:HyperlinkEx Uri="https://twitter.com/Grabacr07">
 					<Run Text="@Grabacr07" />
 				</metro2:HyperlinkEx>
+				<metro2:HyperlinkEx Uri="https://twitter.com/veigr">
+					<Run Text="@veigr" />
+				</metro2:HyperlinkEx>
 
 				<LineBreak />
 				<LineBreak />
