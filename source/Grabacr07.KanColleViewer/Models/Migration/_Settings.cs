@@ -57,7 +57,7 @@ namespace Grabacr07.KanColleViewer.Models.Migration
 			KanColleSettings.NotifyRepairingCompleted.Value = Current.NotifyRepairingCompleted;
 			KanColleSettings.NotificationShorteningTime.Value = Current.KanColleClientSettings.NotificationShorteningTime;
 			KanColleSettings.NotifyFleetRejuvenated.Value = Current.NotifyFleetRejuvenated;
-			KanColleSettings.ReSortieCondition.Value = Current.KanColleClientSettings.NotificationShorteningTime;
+			KanColleSettings.ReSortieCondition.Value = Current.KanColleClientSettings.ReSortieCondition;
 
 			NetworkSettings.Proxy.Type.Value = Current.ProxySettings.Type;
 			NetworkSettings.Proxy.Host.Value = Current.ProxySettings.Host;

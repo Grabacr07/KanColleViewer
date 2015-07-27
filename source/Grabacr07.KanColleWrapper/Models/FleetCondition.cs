@@ -89,7 +89,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 				var rejuvnate = DateTimeOffset.Now; // 回復完了予測時刻
 
-				while (condition < KanColleClient.Current.Settings.ReSortieCondition)
+				while (condition < Math.Min(49, KanColleClient.Current.Settings.ReSortieCondition))
 				{
 					rejuvnate = rejuvnate.AddMinutes(3);
 					condition += 3;
