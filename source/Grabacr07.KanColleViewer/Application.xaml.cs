@@ -15,8 +15,7 @@ using Grabacr07.KanColleViewer.Views;
 using Grabacr07.KanColleWrapper;
 using Livet;
 using MetroRadiance;
-using MetroTrilithon.Desktop;
-using MetroTrilithon.Mvvm;
+using MetroTrilithon.Lifetime;
 
 namespace Grabacr07.KanColleViewer
 {
@@ -41,7 +40,7 @@ namespace Grabacr07.KanColleViewer
 		Terminate,
 	}
 
-	sealed partial class Application : INotifyPropertyChanged, ICompositeDisposable
+	sealed partial class Application : INotifyPropertyChanged, IDisposableHolder
 	{
 		static Application()
 		{
@@ -66,8 +65,10 @@ namespace Grabacr07.KanColleViewer
 		{
 			this.ChangeState(ApplicationState.Startup);
 
+			// 開発中に多重起動検知ついてると起動できなくて鬱陶しいので
+			// デバッグ時は外すんじゃもん
 #if !DEBUG
-			var appInstance = new ApplicationInstance().AddTo(this);
+			var appInstance = new MetroTrilithon.Desktop.ApplicationInstance().AddTo(this);
 			if (appInstance.IsFirst)
 #endif
 			{
@@ -196,12 +197,14 @@ namespace Grabacr07.KanColleViewer
 		private static void ReportException(object sender, Exception exception)
 		{
 			#region const
+
 			const string messageFormat = @"
 ===========================================================
 ERROR, date = {0}, sender = {1},
 {2}
 ";
 			const string path = "error.log";
+
 			#endregion
 
 			// ToDo: 例外ダイアログ
@@ -223,7 +226,6 @@ ERROR, date = {0}, sender = {1},
 			Current.Shutdown();
 		}
 
-
 		#region INotifyPropertyChanged members
 
 		event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
@@ -239,9 +241,9 @@ ERROR, date = {0}, sender = {1},
 
 		#endregion
 
-		#region ICompositDisposable members
+		#region IDisposable members
 
-		ICollection<IDisposable> ICompositeDisposable.CompositeDisposable => this.compositeDisposable;
+		ICollection<IDisposable> IDisposableHolder.CompositeDisposable => this.compositeDisposable;
 
 		void IDisposable.Dispose()
 		{

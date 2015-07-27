@@ -13,6 +13,7 @@ using Grabacr07.KanColleWrapper;
 using Livet;
 using Livet.Messaging;
 using MetroRadiance;
+using MetroTrilithon.Lifetime;
 using MetroTrilithon.Mvvm;
 
 namespace Grabacr07.KanColleViewer
@@ -35,7 +36,7 @@ namespace Grabacr07.KanColleViewer
 		InSortie,
 	}
 
-	public class WindowService : NotificationObject, ICompositeDisposable
+	public class WindowService : NotificationObject, IDisposableHolder
 	{
 		public static WindowService Current { get; } = new WindowService();
 
@@ -156,7 +157,7 @@ namespace Grabacr07.KanColleViewer
 
 		#region disposable members
 
-		ICollection<IDisposable> ICompositeDisposable.CompositeDisposable => this.compositeDisposable;
+		ICollection<IDisposable> IDisposableHolder.CompositeDisposable => this.compositeDisposable;
 
 		public void Dispose()
 		{

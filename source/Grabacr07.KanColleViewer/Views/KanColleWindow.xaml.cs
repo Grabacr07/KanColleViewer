@@ -7,11 +7,11 @@ using System.Windows.Controls;
 using Grabacr07.KanColleViewer.Models.Settings;
 using Livet;
 using MetroTrilithon.Controls;
-using MetroTrilithon.Mvvm;
+using MetroTrilithon.Lifetime;
 
 namespace Grabacr07.KanColleViewer.Views
 {
-	partial class KanColleWindow : ICompositeDisposable
+	partial class KanColleWindow : IDisposableHolder
 	{
 		private static readonly Size informationDefaultSize = new Size(566, 358);
 		private readonly KanColleWindowSettings settings;
@@ -104,7 +104,7 @@ namespace Grabacr07.KanColleViewer.Views
 			this.previousDock = dock;
 		}
 
-		ICollection<IDisposable> ICompositeDisposable.CompositeDisposable => this.compositeDisposable;
+		ICollection<IDisposable> IDisposableHolder.CompositeDisposable => this.compositeDisposable;
 
 		void IDisposable.Dispose()
 		{

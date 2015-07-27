@@ -5,7 +5,6 @@ using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.ViewModels.Contents.Fleets;
 using Grabacr07.KanColleWrapper;
-using Livet.EventListeners;
 using MetroTrilithon.Mvvm;
 
 namespace Grabacr07.KanColleViewer.ViewModels
@@ -64,13 +63,11 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			this.Title = "艦隊詳細";
 			this.Fleets = new ItemViewModel[0];
 
-			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport.Organization)
-			{
-				// Fleets の PropertyChanged が来るのは、最初と艦隊数が増えたときくらい っぽい
-				{ nameof(Organization.Fleets), (sender, args) => this.InitializeFleets() },
-				{ nameof(Organization.Combined), (sender, args) => this.UpdateFleets() },
-				{ nameof(Organization.CombinedFleet), (sender, args) => this.UpdateFleets() },
-			});
+			KanColleClient.Current.Homeport.Organization
+				.Subscribe(nameof(Organization.Fleets), this.InitializeFleets)
+				.Subscribe(nameof(Organization.Combined), this.UpdateFleets)
+				.Subscribe(nameof(Organization.CombinedFleet), this.UpdateFleets)
+				.AddTo(this);
 
 			this.InitializeFleets();
 		}

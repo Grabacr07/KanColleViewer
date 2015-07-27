@@ -7,6 +7,8 @@ using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Livet;
+using MetroTrilithon;
+using MetroTrilithon.Lifetime;
 using MetroTrilithon.Mvvm;
 
 namespace Grabacr07.KanColleViewer.Models
@@ -15,7 +17,7 @@ namespace Grabacr07.KanColleViewer.Models
 	/// <see cref="KanColleClient"/> や関連するオブジェクトからのイベント、プラグインからのイベントを受信し、<see cref="INotifier"/>
 	/// を実装する各通知機能へイベントを配信します。
 	/// </summary>
-	public class NotifyService : NotificationObject, ICompositeDisposable
+	public class NotifyService : NotificationObject, IDisposableHolder
 	{
 		#region singleton members
 
@@ -28,7 +30,7 @@ namespace Grabacr07.KanColleViewer.Models
 		private LivetCompositeDisposable repairyardDisposables;
 		private LivetCompositeDisposable organizationDisposables;
 
-		ICollection<IDisposable> ICompositeDisposable.CompositeDisposable => this.compositeDisposable;
+		ICollection<IDisposable> IDisposableHolder.CompositeDisposable => this.compositeDisposable;
 
 
 		private NotifyService() { }
