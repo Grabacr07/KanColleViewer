@@ -110,6 +110,7 @@
     <Compile Include="Models\FleetSpeed.cs" />
     <Compile Include="Models\FleetState.cs" />
     <Compile Include="Models\MapArea.cs" />
+    <Compile Include="Models\MapCell.cs" />
     <Compile Include="Models\MapInfo.cs" />
     <Compile Include="Models\Mission.cs" />
     <Compile Include="Itemyard.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="Models\ConditionRejuvenatedEventArgs.cs" />
     <Compile Include="Models\CreatedSlotItem.cs" />
     <Compile Include="Models\FleetCondition.cs" />
+    <Compile Include="Models\Raw\kcsapi_mst_mapcell.cs" />
     <Compile Include="Models\Raw\kcsapi_ship_deck.cs" />
     <Compile Include="Models\Raw\kcsapi_mst_maparea.cs" />
     <Compile Include="Models\Raw\kcsapi_mst_mapinfo.cs" />
@@ -138,6 +140,7 @@
     <Compile Include="Models\Raw\kcsapi_remodel_slotlist_detail.cs" />
     <Compile Include="Models\ShipSituation.cs" />
     <Compile Include="Models\ShipSlot.cs" />
+    <Compile Include="Models\SlotItemEquipType.cs" />
     <Compile Include="Models\SlotItemType.cs" />
     <Compile Include="Models\ViewRange.cs" />
     <Compile Include="Organization.cs" />
@@ -183,7 +186,6 @@
     <Compile Include="Models\RepairingDock.cs" />
     <Compile Include="Models\RepairingDockState.cs" />
     <Compile Include="Models\ShipType.cs" />
-    <Compile Include="Models\ShipTypeId.cs" />
     <Compile Include="Models\SlotItemIconType.cs" />
     <Compile Include="Models\ShipSpeed.cs" />
     <Compile Include="Models\ModernizableStatus.cs" />

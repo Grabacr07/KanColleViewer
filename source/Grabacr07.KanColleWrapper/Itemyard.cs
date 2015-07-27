@@ -12,16 +12,11 @@ namespace Grabacr07.KanColleWrapper
 {
 	public class Itemyard : NotificationObject
 	{
-		/// <summary>
-		/// 出撃中にドロップで入手した装備の数。
-		/// 帰投して slot_item を取得するまでは新しい装備の ID が判らないので、数だけ控えておき、SlotItemsCount で使用する。
-		/// </summary>
-		private int droppedItemsCount;
 
 		/// <summary>
-		/// <see cref="SlotItems"/> と、出撃中に入手したものを含んだ装備数を取得します。
+		/// <see cref="SlotItems"/> の装備数を取得します。
 		/// </summary>
-		public int SlotItemsCount => this.SlotItems.Count + this.droppedItemsCount;
+		public int SlotItemsCount => this.SlotItems.Count;
 
 		#region SlotItems 変更通知プロパティ
 
@@ -78,7 +73,7 @@ namespace Grabacr07.KanColleWrapper
 			proxy.api_get_member_slot_item.TryParse<kcsapi_slotitem[]>().Subscribe(x => this.Update(x.Data));
 			proxy.api_req_kousyou_createitem.TryParse<kcsapi_createitem>().Subscribe(x => this.CreateItem(x.Data));
 			proxy.api_req_kousyou_destroyitem2.TryParse<kcsapi_destroyitem2>().Subscribe(this.DestroyItem);
-			proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => this.DropShip(x.Data));
+			// 出撃中の装備数調整は諦め！
 
 			proxy.api_get_member_useitem.TryParse<kcsapi_useitem[]>().Subscribe(x => this.Update(x.Data));
 
@@ -92,7 +87,6 @@ namespace Grabacr07.KanColleWrapper
 
 		internal void Update(kcsapi_slotitem[] source)
 		{
-			this.droppedItemsCount = 0;
 			this.SlotItems = new MemberTable<SlotItem>(source.Select(x => new SlotItem(x)));
 		}
 
@@ -158,25 +152,6 @@ namespace Grabacr07.KanColleWrapper
 			}
 		}
 
-		private void DropShip(kcsapi_battleresult source)
-		{
-			try
-			{
-				if (source.api_get_ship == null) return;
-
-				var target = KanColleClient.Current.Master.Ships[source.api_get_ship.api_ship_id];
-				if (target == null) return;
-
-				this.droppedItemsCount += target.RawData.api_defeq.Count(x => x != -1);
-				this.RaisePropertyChanged("SlotItemsCount");
-			}
-			catch (Exception ex)
-			{
-				// defeq が消えてるっぽい暫定対応 (雑)
-				Debug.WriteLine(ex);
-			}
-		}
-
 		private void RemodelSlotItem(kcsapi_remodel_slot source)
 		{
 			if (source.api_after_slot == null) return;
@@ -188,8 +163,8 @@ namespace Grabacr07.KanColleWrapper
 
 		private void RaiseSlotItemsChanged()
 		{
-			this.RaisePropertyChanged("SlotItems");
-			this.RaisePropertyChanged("SlotItemsCount");
+			this.RaisePropertyChanged(nameof(this.SlotItems));
+			this.RaisePropertyChanged(nameof(this.SlotItemsCount));
 		}
 	}
 }

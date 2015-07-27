@@ -30,8 +30,8 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.RawData.api_level = level;
 			this.Info = KanColleClient.Current.Master.SlotItems[masterId] ?? SlotItemInfo.Dummy;
 
-			this.RaisePropertyChanged("Info");
-			this.RaisePropertyChanged("Level");
+			this.RaisePropertyChanged(nameof(this.Info));
+			this.RaisePropertyChanged(nameof(this.Level));
 		}
 
 		public override string ToString()
