@@ -6,11 +6,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
-using Livet;
 
 namespace Grabacr07.KanColleWrapper
 {
-	public class Itemyard : NotificationObject
+	public class Itemyard : Notifier
 	{
 
 		/// <summary>

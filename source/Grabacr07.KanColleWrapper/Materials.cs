@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Models.Raw;
-using Livet;
 
 namespace Grabacr07.KanColleWrapper
 {
 	/// <summary>
 	/// 資源および資材の保有状況を表します。
 	/// </summary>
-	public class Materials : NotificationObject
+	public class Materials : Notifier
 	{
 		#region Fuel 変更通知プロパティ
 

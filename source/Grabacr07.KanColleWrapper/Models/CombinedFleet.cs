@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Internal;
-using Livet.EventListeners;
-using Livet.EventListeners.WeakEvents;
+using StatefulModel.EventListeners;
+using StatefulModel.EventListeners.WeakEvents;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
@@ -69,12 +69,12 @@ namespace Grabacr07.KanColleWrapper.Models
 				});
 
 				var source = fleet;
-				this.CompositeDisposable.Add(new LivetWeakEventListener<EventHandler, EventArgs>(
+				this.CompositeDisposable.Add(new WeakEventListener<EventHandler, EventArgs>(
 					h => new EventHandler(h),
 					h => source.State.Updated += h,
 					h => source.State.Updated -= h,
 					(sender, args) => this.State.Update()));
-				this.CompositeDisposable.Add(new LivetWeakEventListener<EventHandler, EventArgs>(
+				this.CompositeDisposable.Add(new WeakEventListener<EventHandler, EventArgs>(
 					h => new EventHandler(h),
 					h => source.State.Calculated += h,
 					h => source.State.Calculated -= h,

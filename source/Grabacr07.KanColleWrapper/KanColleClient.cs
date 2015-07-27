@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
-using Livet;
 
 namespace Grabacr07.KanColleWrapper
 {
-	public class KanColleClient : NotificationObject
+	public class KanColleClient : Notifier
 	{
 		#region singleton
 

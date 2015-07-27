@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
-using Livet;
 
 namespace Grabacr07.KanColleWrapper
 {
 	/// <summary>
 	/// 複数の入渠ドックを持つ工廠を表します。
 	/// </summary>
-	public class Repairyard : NotificationObject
+	public class Repairyard : Notifier
 	{
 		private readonly Homeport homeport;
 

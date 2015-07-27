@@ -5,14 +5,13 @@ using System.Linq;
 using System.Reactive.Linq;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
-using Livet;
 
 namespace Grabacr07.KanColleWrapper
 {
 	/// <summary>
 	/// 母港を表します。
 	/// </summary>
-	public class Homeport : NotificationObject
+	public class Homeport : Notifier
 	{
 		/// <summary>
 		/// 艦隊の編成状況にアクセスできるようにします。

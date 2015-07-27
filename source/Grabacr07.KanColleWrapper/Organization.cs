@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
-using Livet;
 
 namespace Grabacr07.KanColleWrapper
 {
 	/// <summary>
 	/// 艦娘と艦隊の編成を表します。
 	/// </summary>
-	public class Organization : NotificationObject
+	public class Organization : Notifier
 	{
 		private readonly Homeport homeport;
 

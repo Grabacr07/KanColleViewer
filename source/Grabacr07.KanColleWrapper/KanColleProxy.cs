@@ -6,7 +6,7 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using Nekoxy;
-using Livet;
+using StatefulModel;
 
 namespace Grabacr07.KanColleWrapper
 {
@@ -14,7 +14,7 @@ namespace Grabacr07.KanColleWrapper
 	{
 		private readonly IConnectableObservable<Session> connectableSessionSource;
 		private readonly IConnectableObservable<Session> apiSource;
-		private readonly LivetCompositeDisposable compositeDisposable;
+		private readonly CompositeDisposable compositeDisposable;
 
 		public IObservable<Session> SessionSource => this.connectableSessionSource.AsObservable();
 
@@ -49,7 +49,7 @@ namespace Grabacr07.KanColleWrapper
 
 		public KanColleProxy()
 		{
-			this.compositeDisposable = new LivetCompositeDisposable();
+			this.compositeDisposable = new CompositeDisposable();
 
 			this.connectableSessionSource = Observable
 				.FromEvent<Action<Session>, Session>(
