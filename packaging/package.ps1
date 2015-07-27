@@ -6,7 +6,7 @@
  
         $target = 'Release'
         $result = 'KanColleViewer'
-        $bin = '..\Grabacr07.KanColleViewer\bin\'
+        $bin = '..\source\Grabacr07.KanColleViewer\bin\'
  
         $targetKeywords = '*.exe','*.dll','*.exe.config','*.txt','*.VisualElementsManifest.xml'
         $ignoreKeywords = '*.vshost.*','Microsoft.*.resources.dll','ExPlugin.*.dll'
