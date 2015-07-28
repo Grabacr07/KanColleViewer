@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Composition;
+using Grabacr07.KanColleViewer.Models;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Composition
 {
@@ -18,7 +19,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Composition
 
 		public void Test()
 		{
-			this.notifier.Show("テスト", "これはテスト通知です。", WindowService.Current.MainWindow.Activate, ex => this.ErrorMessage = ex.Message);
+			this.notifier.Notify(NotifyService.Current.CreateTest(failed: ex => this.ErrorMessage = ex.Message));
 		}
 	}
 }

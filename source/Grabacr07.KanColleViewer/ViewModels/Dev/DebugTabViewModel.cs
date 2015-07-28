@@ -13,14 +13,5 @@ namespace Grabacr07.KanColleViewer.ViewModels.Dev
 			get { return Properties.Resources.Debug; }
 			protected set { throw new NotImplementedException(); }
 		}
-
-		public void Notify()
-		{
-			PluginService.Current.GetNotifier().Show(
-				Properties.Resources.Debug_NotificationMessage_Title,
-				Properties.Resources.Debug_NotificationMessage,
-				() => WindowService.Current.MainWindow.Activate());
-		}
-
 	}
 }

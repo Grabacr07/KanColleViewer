@@ -14,9 +14,5 @@
 			 d:DesignHeight="300"
 			 d:DataContext="{d:DesignInstance vm:DebugTabViewModel}">
 	<StackPanel Margin="10,0,10,10">
-		<controls:CallMethodButton Content="Test notify"
-								   HorizontalAlignment="Left"
-								   Padding="20,5"
-								   MethodName="Notify" />
 	</StackPanel>
 </UserControl>

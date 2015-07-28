@@ -12,6 +12,6 @@ namespace Grabacr07.KanColleViewer.Composition
 	[PluginFeature]
 	public interface INotifier
 	{
-		void Show(string header, string body, Action activated, Action<Exception> failed = null);
+		void Notify(INotification notification);
 	}
 }

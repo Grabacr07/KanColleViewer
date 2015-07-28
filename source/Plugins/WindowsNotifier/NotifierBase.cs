@@ -17,7 +17,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 
 		protected abstract void InitializeCore();
 
-		protected abstract void ShowCore(string header, string body, Action activated, Action<Exception> failed);
+		protected abstract void NotifyCore(string header, string body, Action activated, Action<Exception> failed);
 
 		public void Initialize()
 		{
@@ -27,12 +27,12 @@ namespace Grabacr07.KanColleViewer.Plugins
 			this.Initialized = true;
 		}
 
-		public void Show(string header, string body, Action activated, Action<Exception> failed = null)
+		public void Notify(INotification notification)
 		{
 			if (!this.IsSupported) return;
 
 			this.Initialize();
-			this.ShowCore(header, body, activated, failed);
+			this.NotifyCore(notification.Header, notification.Body, notification.Activated, notification.Failed);
 		}
 
 		public virtual void Dispose() { }

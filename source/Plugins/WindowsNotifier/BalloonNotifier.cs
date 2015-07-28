@@ -38,7 +38,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 			}
 		}
 
-		protected override void ShowCore(string header, string body, Action activated, Action<Exception> failed)
+		protected override void NotifyCore(string header, string body, Action activated, Action<Exception> failed)
 		{
 			if (this.notifyIcon == null) return;
 
