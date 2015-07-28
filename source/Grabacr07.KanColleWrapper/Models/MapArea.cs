@@ -23,10 +23,15 @@ namespace Grabacr07.KanColleWrapper.Models
 			foreach (var cell in this.MapInfos.Values)
 				cell.MapArea = this;
 		}
+		
+		public override string ToString()
+		{
+			return $"ID = {this.Id}, Name = {this.Name}";
+		}
 
 		#region static members
 
-	    public static MapArea Dummy { get; } = new MapArea(new kcsapi_mst_maparea
+		public static MapArea Dummy { get; } = new MapArea(new kcsapi_mst_maparea
 		{
 		    api_id = 0,
 		    api_name = "？？？",

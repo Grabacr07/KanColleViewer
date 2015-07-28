@@ -44,9 +44,14 @@ namespace Grabacr07.KanColleWrapper.Models
 				cell.MapInfo = this;
 		}
 
+		public override string ToString()
+		{
+			return $"ID = {this.Id}, Name = {this.Name}";
+		}
+
 		#region static members
 
-	    public static MapInfo Dummy { get; } = new MapInfo(new kcsapi_mst_mapinfo
+		public static MapInfo Dummy { get; } = new MapInfo(new kcsapi_mst_mapinfo
 		{
 		    api_id = 0,
 		    api_name = "？？？",
