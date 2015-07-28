@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string"/>
-              <xsd:attribute name="type" type="xsd:string"/>
-              <xsd:attribute name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"/>
-              <xsd:attribute name="name" type="xsd:string"/>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -139,10 +139,10 @@
     <value>Debug</value>
   </data>
   <data name="Debug_NotificationMessage" xml:space="preserve">
-    <value>これはテスト通知です。</value>
+    <value>这是测试通知。</value>
   </data>
   <data name="Debug_NotificationMessage_Title" xml:space="preserve">
-    <value>テスト</value>
+    <value>测试</value>
   </data>
   <data name="Dockyard" xml:space="preserve">
     <value>建造</value>
@@ -226,43 +226,43 @@
     <value>所持有的舰娘:</value>
   </data>
   <data name="IntegratedView" xml:space="preserve">
-    <value>総合</value>
+    <value>综合</value>
   </data>
   <data name="MessageBar_Expedition" xml:space="preserve">
-    <value>この艦隊は遠征中です。</value>
+    <value>该舰队正在远征中</value>
   </data>
   <data name="MessageBar_Expedition_TimeCompletion" xml:space="preserve">
-    <value> 完了時刻:</value>
+    <value>结束时间：</value>
   </data>
   <data name="MessageBar_Expedition_TimeRemaining" xml:space="preserve">
-    <value> 帰投まで:</value>
+    <value>离归来还有：</value>
   </data>
   <data name="MessageBar_Repairing" xml:space="preserve">
-    <value>艦隊に入渠中の艦娘がいます。 完了時刻: {0:MM/dd HH\:mm} 完了まで: {1}:{2:mm\:ss}</value>
+    <value>舰队中有入渠的舰娘。 结束时间: {0:MM/dd HH\:mm} 剩余: {1}:{2:mm\:ss}</value>
   </data>
   <data name="MessageBar_Repairing_Null" xml:space="preserve">
-    <value>艦隊に入渠中の艦娘がいます。</value>
+    <value>舰队中有入渠的舰娘。</value>
   </data>
   <data name="MessageBar_ReSortie_BadCondition" xml:space="preserve">
-    <value>疲労中の艦娘</value>
+    <value>疲劳中的舰娘</value>
   </data>
   <data name="MessageBar_ReSortie_CanNotReSortie" xml:space="preserve">
-    <value>艦隊に{0}がいます。</value>
+    <value>舰队中有{0}。</value>
   </data>
   <data name="MessageBar_ReSortie_CanReSortie" xml:space="preserve">
-    <value>出撃可能！</value>
+    <value>可以出击！</value>
   </data>
   <data name="MessageBar_ReSortie_LackForResources" xml:space="preserve">
-    <value>未補給の艦娘</value>
+    <value>未补给的舰娘</value>
   </data>
   <data name="MessageBar_ReSortie_Remaining" xml:space="preserve">
-    <value>再出撃までの目安: </value>
+    <value>再次出击还要：</value>
   </data>
   <data name="MessageBar_ReSortie_Separator" xml:space="preserve">
-    <value>・</value>
+    <value>、</value>
   </data>
   <data name="MessageBar_ReSortie_Wounded" xml:space="preserve">
-    <value>中破以上の艦娘</value>
+    <value>中破以上的舰娘</value>
   </data>
   <data name="Quests" xml:space="preserve">
     <value>任务</value>
@@ -295,7 +295,7 @@
     <value>完成</value>
   </data>
   <data name="Quest_Title_Untaken" xml:space="preserve">
-    <value>(未接受的任务)</value>
+    <value>(未知的任务)</value>
   </data>
   <data name="Repairyard" xml:space="preserve">
     <value>入渠</value>
@@ -424,22 +424,16 @@
     <value>永远保持在最前端</value>
   </data>
   <data name="StartContent_ClearCacheButton" xml:space="preserve">
-    <value>キャッシュの削除</value>
+    <value>清理缓存</value>
   </data>
   <data name="StartContent_ClearCacheButtonMessage" xml:space="preserve">
-    <value>キャッシュを削除しました</value>
+    <value>缓存清理完毕</value>
   </data>
   <data name="StartContent_Introduction1" xml:space="preserve">
-    <value>「提督業も忙しい！」は、艦これを遊びやすくするためのツールです。</value>
+    <value>「提督業も忙しい！」（提督很忙）是艦これ游戏专用的浏览器。</value>
   </data>
   <data name="StartContent_Welcom" xml:space="preserve">
-    <value>ようこそ</value>
-  </data>
-  <data name="StatusBar_AirSuperiorityPotential" xml:space="preserve">
-    <value>对空战斗力:</value>
-  </data>
-  <data name="StatusBar_AverageLevel" xml:space="preserve">
-    <value>平均等级:</value>
+    <value>欢迎！</value>
   </data>
   <data name="StatusBar_NotStarted" xml:space="preserve">
     <value>等待舰これ载入</value>
@@ -447,16 +441,37 @@
   <data name="StatusBar_Ready" xml:space="preserve">
     <value>准备完毕</value>
   </data>
-  <data name="StatusBar_Speed_Fast" xml:space="preserve">
-    <value>高速舰队</value>
-  </data>
-  <data name="StatusBar_Speed_Slow" xml:space="preserve">
-    <value>低速舰队</value>
-  </data>
   <data name="ZoomAction_OutOfRange" xml:space="preserve">
     <value>无法在 {0} %范围内缩放</value>
   </data>
   <data name="ZoomAction_ZoomFailed" xml:space="preserve">
     <value>缩放失败: {0}</value>
+  </data>
+  <data name="Fleets_AirSuperiorityPotential" xml:space="preserve">
+    <value>制空值</value>
+  </data>
+  <data name="Fleets_Average" xml:space="preserve">
+    <value>平均</value>
+  </data>
+  <data name="Fleets_Level" xml:space="preserve">
+    <value>等级</value>
+  </data>
+  <data name="Fleets_Speed_Fast" xml:space="preserve">
+    <value>高速舰队</value>
+  </data>
+  <data name="Fleets_Speed_Slow" xml:space="preserve">
+    <value>低速舰队</value>
+  </data>
+  <data name="Fleets_Total" xml:space="preserve">
+    <value>合计</value>
+  </data>
+  <data name="Fleets_ViewRange" xml:space="preserve">
+    <value>索敌值</value>
+  </data>
+  <data name="ZoomFactorSelector" xml:space="preserve">
+    <value>游戏画面缩放比例</value>
+  </data>
+  <data name="ZoomFactorSelector_Tooltip" xml:space="preserve">
+    <value>调整游戏画面缩放比例</value>
   </data>
 </root>
