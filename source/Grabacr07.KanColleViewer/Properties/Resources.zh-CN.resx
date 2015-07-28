@@ -282,18 +282,6 @@
   <data name="Quests_Weekly" xml:space="preserve">
     <value>每周任务</value>
   </data>
-  <data name="Quest_Detail_Untaken" xml:space="preserve">
-    <value>请浏览所有的任务画面</value>
-  </data>
-  <data name="Quest_Progress_50" xml:space="preserve">
-    <value> 50 % </value>
-  </data>
-  <data name="Quest_Progress_80" xml:space="preserve">
-    <value> 80 % </value>
-  </data>
-  <data name="Quest_State_Accomplished" xml:space="preserve">
-    <value>完成</value>
-  </data>
   <data name="Quest_Title_Untaken" xml:space="preserve">
     <value>(未知的任务)</value>
   </data>
@@ -473,5 +461,11 @@
   </data>
   <data name="ZoomFactorSelector_Tooltip" xml:space="preserve">
     <value>调整游戏画面缩放比例</value>
+  </data>
+  <data name="Settings_Logging" xml:space="preserve">
+    <value>记录</value>
+  </data>
+  <data name="Settings_Logging_Enable" xml:space="preserve">
+    <value>记录掉落、建造、开发数据</value>
   </data>
 </root>
