@@ -23,6 +23,11 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.Name = rawData.api_name;
 		}
 
+		public override string ToString()
+		{
+			return $"ID = {this.Id}, Name = \"{this.Name}\"";
+		}
+
 		#region static members
 
 		public static SlotItemEquipType Dummy { get; } = new SlotItemEquipType(new kcsapi_mst_slotitem_equiptype

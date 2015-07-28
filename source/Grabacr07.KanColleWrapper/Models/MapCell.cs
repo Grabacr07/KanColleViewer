@@ -29,6 +29,11 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.IdInEachMapInfo = cell.api_no;
 		}
 
+		public override string ToString()
+		{
+			return $"ID = {this.Id}, Map = {this.MapAreaId}-{this.MapInfoIdInEachMapArea}, CellNo = {this.IdInEachMapInfo}, ColorNo = {this.ColorNo}";
+		}
+
 		#region static members
 
 		public static MapCell Dummy { get; } = new MapCell(new kcsapi_mst_mapcell
