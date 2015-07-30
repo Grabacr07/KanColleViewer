@@ -23,7 +23,7 @@
 	</UserControl.Resources>
 
 	<i:Interaction.Triggers>
-		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+		<livet:InteractionMessageTrigger Messenger="{Binding ScreenshotSettings.Messenger}"
 										 MessageKey="FolderDialog.Screenshot.Open">
 			<livet:FolderBrowserDialogInteractionMessageAction />
 		</livet:InteractionMessageTrigger>

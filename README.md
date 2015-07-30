@@ -1,7 +1,7 @@
 ﻿提督業も忙しい！ (KanColleViewer)
 --
 
-[![Build status (master)](https://img.shields.io/appveyor/ci/Grabacr07/KanColleViewer/master.svg?style=flat-square)](https://ci.appveyor.com/project/Grabacr07/kancolleviewer)
+[![Build status (master)](https://img.shields.io/appveyor/ci/Grabacr07/KanColleViewer.svg?style=flat-square)](https://ci.appveyor.com/project/Grabacr07/kancolleviewer)
 [![Release](https://img.shields.io/github/release/Grabacr07/KanColleViewer.svg?style=flat-square)](https://github.com/Grabacr07/KanColleViewer/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/Grabacr07/KanColleViewer/latest/total.svg?style=flat-square)](https://github.com/Grabacr07/KanColleViewer/releases/latest)
 [![NuGet (KanColleWrapper)](https://img.shields.io/nuget/v/KanColleWrapper.svg?style=flat-square)](https://www.nuget.org/packages/KanColleWrapper/)
@@ -73,7 +73,7 @@ MIT ライセンスの下で公開する、オープンソース / フリーソ�
 
 > DynamicJson  
 > ver 1.2.0.0 (May. 21th, 2010)
-> 
+>
 > created and maintained by neuecc <ils@neue.cc>  
 > licensed under Microsoft Public License(Ms-PL)  
 > http://neue.cc/  
@@ -91,7 +91,7 @@ MIT ライセンスの下で公開する、オープンソース / フリーソ�
 #### [StatefulModel](http://ugaya40.hateblo.jp/entry/StatefulModel)
 
 > The MIT License (MIT)
-> 
+>
 > Copyright (c) 2015 Masanori Onoue
 
 * **用途 :** M-V-Whatever の Model 向けインフラストラクチャ
@@ -101,7 +101,7 @@ MIT ライセンスの下で公開する、オープンソース / フリーソ�
 #### [Nekoxy](https://github.com/veigr/Nekoxy)
 
 > The MIT License (MIT)
-> 
+>
 > Copyright (c) 2015 veigr
 
 * **用途 :** HTTP通信キャプチャ
@@ -112,7 +112,7 @@ MIT ライセンスの下で公開する、オープンソース / フリーソ�
 
 > TrotiNet is a proxy library implemented in C#. It aims at delivering a simple,  
 > reusable framework for developing any sort of C# proxies.
-> 
+>
 > TrotiNet is distributed under the GNU Lesser General Public License v3.0  
 > (LGPL). See: http://www.gnu.org/licenses/lgpl.html
 
@@ -136,7 +136,7 @@ MIT ライセンスの下で公開する、オープンソース / フリーソ�
 #### [Desktop Toast](https://github.com/emoacht/DesktopToast)
 
 > The MIT License (MIT)
-> 
+>
 > Copyright (c) 2014-2015 EMO
 
 * **用途 :** トースト通知
@@ -146,7 +146,7 @@ MIT ライセンスの下で公開する、オープンソース / フリーソ�
 #### [.NET Core Audio APIs](https://netcoreaudio.codeplex.com/)
 
 > The MIT License (MIT)
-> 
+>
 > Copyright (c) 2011 Vannatech
 
 * **用途 :** 音量操作
