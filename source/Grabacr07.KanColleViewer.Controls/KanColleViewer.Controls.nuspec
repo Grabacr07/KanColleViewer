@@ -13,15 +13,13 @@
         <language>ja-JP</language>
         <tags>KanColle</tags>
         <dependencies>
-            <dependency id="MetroRadiance.Core" version="1.0.0" />
-            <dependency id="MetroRadiance.Chrome" version="1.0.0" />
-            <dependency id="MetroRadiance" version="1.0.0" />
-            <dependency id="KanColleWrapper" version="1.0.0" />
+            <dependency id="MetroRadiance.Core" version="1.1.0" />
+            <dependency id="MetroRadiance.Chrome" version="1.1.0" />
+            <dependency id="MetroRadiance" version="1.1.0" />
+            <dependency id="KanColleWrapper" version="1.1.0" />
         </dependencies>
     </metadata>
     <files>
-        <file src="bin\Release\KanColleViewer.Controls.dll" target="lib\net45\KanColleViewer.Controls.dll" />
-        <file src="bin\Release\KanColleViewer.Controls.xml" target="lib\net45\KanColleViewer.Controls.xml" />
         <file src="bin\Release\System.Windows.Interactivity.dll" target="lib\net45\System.Windows.Interactivity.dll" />
         <file src="bin\Release\Microsoft.Expression.Drawing.dll" target="lib\net45\Microsoft.Expression.Drawing.dll" />
         <file src="bin\Release\Microsoft.Expression.Interactions.dll" target="lib\net45\Microsoft.Expression.Interactions.dll" />

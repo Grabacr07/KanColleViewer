@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleViewer.Properties;
 using Livet;
 
@@ -66,13 +67,11 @@ namespace Grabacr07.KanColleViewer.Models
 		public void ChangeCulture(string name)
 		{
 			Resources.Culture = this.SupportedCultures.SingleOrDefault(x => x.Name == name);
-
-			// リソースの変更を受けて設定に適切な値を適用します。
-			Settings.GeneralSettings.Culture.Value = Resources.Culture != null
-				? Resources.Culture.Name
-				: null;
+			
+			GeneralSettings.Culture.Value = Resources.Culture?.Name;
 
 			this.RaisePropertyChanged(nameof(this.Resources));
+			Controls.Globalization.ResourceService.Current.ChangeCulture(name);
 		}
 	}
 }

@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
-using Livet;
 
 namespace Grabacr07.KanColleWrapper
 {
 	/// <summary>
 	/// 複数の建造ドックを持つ工廠を表します。
 	/// </summary>
-	public class Dockyard : NotificationObject
+	public class Dockyard : Notifier
 	{
 		#region Dock 変更通知プロパティ
 

@@ -12,6 +12,11 @@ namespace Grabacr07.KanColleWrapper.Models
 	public enum ShipSpeed
 	{
 		/// <summary>
+		/// 不動。(基地等)
+		/// </summary>
+		Immovable = 0,
+
+		/// <summary>
 		/// 低速。
 		/// </summary>
 		Low = 5,

@@ -13,13 +13,9 @@
         <language>ja-JP</language>
         <tags>KanColle</tags>
         <dependencies>
-            <dependency id="LivetCask" version="1.1.0" />
+            <dependency id="Nekoxy" version="1.2.0.13" />
             <dependency id="Rx-Main" version="2.2.5" />
-            <dependency id="FiddlerCore" version="4.5.1" />
+            <dependency id="StatefulModel" version="0.1.2" />
         </dependencies>
     </metadata>
-    <files>
-        <file src="bin\Release\KanColleWrapper.dll" target="lib\net45\KanColleWrapper.dll" />
-        <file src="bin\Release\KanColleWrapper.xml" target="lib\net45\KanColleWrapper.xml" />
-    </files>
 </package>

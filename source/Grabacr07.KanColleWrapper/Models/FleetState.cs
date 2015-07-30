@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Livet.EventListeners.WeakEvents;
+using StatefulModel.EventListeners.WeakEvents;
 
 namespace Grabacr07.KanColleWrapper.Models
 {

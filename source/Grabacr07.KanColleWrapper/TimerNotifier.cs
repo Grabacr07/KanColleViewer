@@ -5,14 +5,13 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Internal;
-using Livet;
 
 namespace Grabacr07.KanColleWrapper
 {
 	/// <summary>
 	/// 1 秒刻みのタイマー機能をサポートする変更通知オブジェクトを表します。
 	/// </summary>
-	public class TimerNotifier : NotificationObject, IDisposable
+	public class TimerNotifier : Notifier, IDisposable
 	{
 		#region static members
 
@@ -34,7 +33,7 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		protected virtual void Tick() { }
-		
+
 		public virtual void Dispose()
 		{
 			this.subscriber.SafeDispose();

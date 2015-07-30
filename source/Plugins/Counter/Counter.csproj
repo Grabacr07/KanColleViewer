@@ -33,6 +33,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release %28beta%29|AnyCPU'">
+    <OutputPath>bin\Release %28beta%29\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Livet, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b0b1d3f711ef38cb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -45,8 +54,8 @@
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\LivetCask.1.1.0.0\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
-    <Reference Include="Nekoxy, Version=1.0.1.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Nekoxy.1.0.1.2\lib\net45\Nekoxy.dll</HintPath>
+    <Reference Include="Nekoxy, Version=1.2.0.13, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Nekoxy.1.2.0.13\lib\net45\Nekoxy.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -84,7 +93,7 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="TrotiNet, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Nekoxy.1.0.1.2\lib\net45\TrotiNet.dll</HintPath>
+      <HintPath>..\..\packages\Nekoxy.1.2.0.13\lib\net45\TrotiNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="WindowsBase" />
@@ -136,15 +145,15 @@
       <Project>{0bc8cf79-76d9-46ad-867f-fec6c6ad4594}</Project>
       <Name>KanColleWrapper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\MetroRadiance\MetroRadiance.Chrome\MetroRadiance.Chrome.csproj">
+    <ProjectReference Include="..\..\MetroRadiance\source\MetroRadiance.Chrome\MetroRadiance.Chrome.csproj">
       <Project>{21b4ad15-d9fa-4873-bfad-1eeefbc6c264}</Project>
       <Name>MetroRadiance.Chrome</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\MetroRadiance\MetroRadiance.Core\MetroRadiance.Core.csproj">
+    <ProjectReference Include="..\..\MetroRadiance\source\MetroRadiance.Core\MetroRadiance.Core.csproj">
       <Project>{a6b0a741-5be0-479d-b813-e65672350057}</Project>
       <Name>MetroRadiance.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\MetroRadiance\MetroRadiance\MetroRadiance.csproj">
+    <ProjectReference Include="..\..\MetroRadiance\source\MetroRadiance\MetroRadiance.csproj">
       <Project>{0af0b9ff-d981-4d0f-a41f-c3ab6fe2f16d}</Project>
       <Name>MetroRadiance</Name>
     </ProjectReference>
@@ -172,9 +181,9 @@
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>mkdir $(SolutionDir)Grabacr07.KanColleViewer\bin\$(ConfigurationName)\Plugins
-xcopy /Y $(TargetDir)*.* $(SolutionDir)Grabacr07.KanColleViewer\bin\$(ConfigurationName)
-move $(SolutionDir)Grabacr07.KanColleViewer\bin\$(ConfigurationName)\$(TargetName).* $(SolutionDir)Grabacr07.KanColleViewer\bin\$(ConfigurationName)\Plugins</PostBuildEvent>
+    <PostBuildEvent>mkdir "$(SolutionDir)Grabacr07.KanColleViewer\bin\$(ConfigurationName)\Plugins"
+xcopy /Y "$(TargetDir)*.*" "$(SolutionDir)Grabacr07.KanColleViewer\bin\$(ConfigurationName)"
+move "$(SolutionDir)Grabacr07.KanColleViewer\bin\$(ConfigurationName)\$(TargetName).*" "$(SolutionDir)Grabacr07.KanColleViewer\bin\$(ConfigurationName)\Plugins"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

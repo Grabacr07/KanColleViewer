@@ -4,11 +4,10 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Models.Raw;
-using Livet;
 
 namespace Grabacr07.KanColleWrapper
 {
-	public abstract class CounterBase : NotificationObject
+	public abstract class CounterBase : Notifier
 	{
 		#region Count 変更通知プロパティ
 

@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Livet;
+using StatefulModel;
 
 namespace Grabacr07.KanColleWrapper
 {
-	public class DisposableNotifier : NotificationObject, IDisposable
+	public class DisposableNotifier : Notifier, IDisposable
 	{
-		protected LivetCompositeDisposable CompositeDisposable { get; }
+		protected CompositeDisposable CompositeDisposable { get; }
 
 		public DisposableNotifier()
 		{
-			this.CompositeDisposable = new LivetCompositeDisposable();
+			this.CompositeDisposable = new CompositeDisposable();
 		}
 
 		public void Dispose()

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Grabacr07.KanColleViewer.Composition
 {
-	public class NotifyEventArgs : EventArgs, INotify
+	public class NotifyEventArgs : EventArgs, INotification
 	{
 		public string Type { get; }
 

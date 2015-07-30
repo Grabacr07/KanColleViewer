@@ -17,11 +17,11 @@ namespace Grabacr07.KanColleViewer.Composition
 			this.notifiers = notifiers.ToArray();
 		}
 
-		public void Show(string header, string body, Action activated, Action<Exception> failed = null)
+		public void Notify(INotification notify)
 		{
 			foreach (var x in this.notifiers)
 			{
-				x.Show(header, body, activated, failed);
+				x.Notify(notify);
 			}
 		}
 	}

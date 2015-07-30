@@ -150,6 +150,15 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls.Globalization\Resources.en.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls.Globalization\Resources.ko-KR.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls.Globalization\Resources.zh-CN.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
@@ -157,18 +166,21 @@
       <Project>{0bc8cf79-76d9-46ad-867f-fec6c6ad4594}</Project>
       <Name>KanColleWrapper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MetroRadiance\MetroRadiance.Chrome\MetroRadiance.Chrome.csproj">
+    <ProjectReference Include="..\MetroRadiance\source\MetroRadiance.Chrome\MetroRadiance.Chrome.csproj">
       <Project>{21b4ad15-d9fa-4873-bfad-1eeefbc6c264}</Project>
       <Name>MetroRadiance.Chrome</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MetroRadiance\MetroRadiance.Core\MetroRadiance.Core.csproj">
+    <ProjectReference Include="..\MetroRadiance\source\MetroRadiance.Core\MetroRadiance.Core.csproj">
       <Project>{a6b0a741-5be0-479d-b813-e65672350057}</Project>
       <Name>MetroRadiance.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MetroRadiance\MetroRadiance\MetroRadiance.csproj">
+    <ProjectReference Include="..\MetroRadiance\source\MetroRadiance\MetroRadiance.csproj">
       <Project>{0af0b9ff-d981-4d0f-a41f-c3ab6fe2f16d}</Project>
       <Name>MetroRadiance</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="KanColleViewer.Controls.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

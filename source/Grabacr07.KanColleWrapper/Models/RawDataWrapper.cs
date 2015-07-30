@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Livet;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
@@ -10,7 +9,7 @@ namespace Grabacr07.KanColleWrapper.Models
 	/// 艦これ API からの応答に含まれる api_data (生のデータ) をラップします。
 	/// </summary>
 	/// <typeparam name="T">ラップする api_data (生のデータ) の型。</typeparam>
-	public abstract class RawDataWrapper<T> : NotificationObject
+	public abstract class RawDataWrapper<T> : Notifier
 	{
 		/// <summary>
 		/// 艦これ API からの応答に含まれる api_data をパースした生のデータを取得します。

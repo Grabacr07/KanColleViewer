@@ -282,21 +282,6 @@
   <data name="Quests_Weekly" xml:space="preserve">
     <value>Weekly Quests</value>
   </data>
-  <data name="Quest_Detail_Untaken" xml:space="preserve">
-    <value>Please visit all of the quest pages.</value>
-  </data>
-  <data name="Quest_Progress_50" xml:space="preserve">
-    <value> 50% </value>
-  </data>
-  <data name="Quest_Progress_80" xml:space="preserve">
-    <value> 80% </value>
-  </data>
-  <data name="Quest_State_Accomplished" xml:space="preserve">
-    <value> Complete </value>
-  </data>
-  <data name="Quest_Title_Untaken" xml:space="preserve">
-    <value>(Unknown quest)</value>
-  </data>
   <data name="Repairyard" xml:space="preserve">
     <value>Repair</value>
   </data>

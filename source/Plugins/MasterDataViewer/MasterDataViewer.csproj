@@ -34,6 +34,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release %28beta%29|AnyCPU'">
+    <OutputPath>bin\Release %28beta%29\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Livet">
       <HintPath>..\..\packages\LivetCask.1.1.0.0\lib\net45\Livet.dll</HintPath>
@@ -103,15 +112,15 @@
       <Project>{0bc8cf79-76d9-46ad-867f-fec6c6ad4594}</Project>
       <Name>KanColleWrapper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\MetroRadiance\MetroRadiance.Chrome\MetroRadiance.Chrome.csproj">
+    <ProjectReference Include="..\..\MetroRadiance\source\MetroRadiance.Chrome\MetroRadiance.Chrome.csproj">
       <Project>{21b4ad15-d9fa-4873-bfad-1eeefbc6c264}</Project>
       <Name>MetroRadiance.Chrome</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\MetroRadiance\MetroRadiance.Core\MetroRadiance.Core.csproj">
+    <ProjectReference Include="..\..\MetroRadiance\source\MetroRadiance.Core\MetroRadiance.Core.csproj">
       <Project>{a6b0a741-5be0-479d-b813-e65672350057}</Project>
       <Name>MetroRadiance.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\MetroRadiance\MetroRadiance\MetroRadiance.csproj">
+    <ProjectReference Include="..\..\MetroRadiance\source\MetroRadiance\MetroRadiance.csproj">
       <Project>{0af0b9ff-d981-4d0f-a41f-c3ab6fe2f16d}</Project>
       <Name>MetroRadiance</Name>
     </ProjectReference>
@@ -132,9 +141,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>mkdir $(SolutionDir)Grabacr07.KanColleViewer\bin\$(ConfigurationName)\Plugins
-xcopy /Y $(TargetDir)*.* $(SolutionDir)Grabacr07.KanColleViewer\bin\$(ConfigurationName)
-move $(SolutionDir)Grabacr07.KanColleViewer\bin\$(ConfigurationName)\$(TargetName).* $(SolutionDir)Grabacr07.KanColleViewer\bin\$(ConfigurationName)\Plugins</PostBuildEvent>
+    <PostBuildEvent>mkdir "$(SolutionDir)Grabacr07.KanColleViewer\bin\$(ConfigurationName)\Plugins"
+xcopy /Y "$(TargetDir)*.*" "$(SolutionDir)Grabacr07.KanColleViewer\bin\$(ConfigurationName)"
+move "$(SolutionDir)Grabacr07.KanColleViewer\bin\$(ConfigurationName)\$(TargetName).*" "$(SolutionDir)Grabacr07.KanColleViewer\bin\$(ConfigurationName)\Plugins"</PostBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

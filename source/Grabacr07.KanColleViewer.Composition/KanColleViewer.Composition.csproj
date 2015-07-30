@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Composition\INotifier.cs" />
-    <Compile Include="Composition\INotify.cs" />
+    <Compile Include="Composition\INotification.cs" />
     <Compile Include="Composition\IPlugin.cs" />
     <Compile Include="Composition\IPluginGuid.cs" />
     <Compile Include="Composition\IPluginMetadata.cs" />
@@ -52,6 +52,9 @@
     <Compile Include="Composition\NotifyEventArgs.cs" />
     <Compile Include="Composition\PluginFeatureAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="KanColleViewer.Composition.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

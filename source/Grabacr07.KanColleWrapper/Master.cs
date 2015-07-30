@@ -16,27 +16,32 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// すべての艦娘の定義を取得します。
 		/// </summary>
-		public MasterTable<ShipInfo> Ships { get; private set; }
+		public MasterTable<ShipInfo> Ships { get; }
+
+		/// <summary>
+		/// すべての装備タイプの定義を取得します。
+		/// </summary>
+		public MasterTable<SlotItemEquipType> SlotItemEquipTypes { get; }
 
 		/// <summary>
 		/// すべての装備アイテムの定義を取得します。
 		/// </summary>
-		public MasterTable<SlotItemInfo> SlotItems { get; private set; }
-
+		public MasterTable<SlotItemInfo> SlotItems { get; }
+		
 		/// <summary>
 		/// すべての消費アイテムの定義を取得します。
 		/// </summary>
-		public MasterTable<UseItemInfo> UseItems { get; private set; }
+		public MasterTable<UseItemInfo> UseItems { get; }
 
 		/// <summary>
 		/// 艦種を取得します。
 		/// </summary>
-		public MasterTable<ShipType> ShipTypes { get; private set; }
+		public MasterTable<ShipType> ShipTypes { get; }
 
 		/// <summary>
 		/// すべての任務を取得します。
 		/// </summary>
-		public MasterTable<Mission> Missions { get; private set; }
+		public MasterTable<Mission> Missions { get; }
 
 		/// <summary>
 		/// すべての海域の定義を取得します。
@@ -46,18 +51,25 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// すべてのマップの定義を取得します。
 		/// </summary>
-		public MasterTable<MapInfo> MapInfos { get; private set; } 
+		public MasterTable<MapInfo> MapInfos { get; }
+
+		/// <summary>
+		/// すべてのセルの定義を取得します。
+		/// </summary>
+		public MasterTable<MapCell> MapCells { get; }
 
 
 		internal Master(kcsapi_start2 start2)
 		{
 			this.ShipTypes = new MasterTable<ShipType>(start2.api_mst_stype.Select(x => new ShipType(x)));
 			this.Ships = new MasterTable<ShipInfo>(start2.api_mst_ship.Select(x => new ShipInfo(x)));
-			this.SlotItems = new MasterTable<SlotItemInfo>(start2.api_mst_slotitem.Select(x => new SlotItemInfo(x)));
+			this.SlotItemEquipTypes = new MasterTable<SlotItemEquipType>(start2.api_mst_slotitem_equiptype.Select(x => new SlotItemEquipType(x)));
+			this.SlotItems = new MasterTable<SlotItemInfo>(start2.api_mst_slotitem.Select(x => new SlotItemInfo(x, this.SlotItemEquipTypes)));
 			this.UseItems = new MasterTable<UseItemInfo>(start2.api_mst_useitem.Select(x => new UseItemInfo(x)));
 			this.Missions = new MasterTable<Mission>(start2.api_mst_mission.Select(x => new Mission(x)));
-			this.MapAreas = new MasterTable<MapArea>(start2.api_mst_maparea.Select(x => new MapArea(x)));
-			this.MapInfos = new MasterTable<MapInfo>(start2.api_mst_mapinfo.Select(x => new MapInfo(x, this.MapAreas)));
+			this.MapCells = new MasterTable<MapCell>(start2.api_mst_mapcell.Select(x => new MapCell(x)));
+			this.MapInfos = new MasterTable<MapInfo>(start2.api_mst_mapinfo.Select(x => new MapInfo(x, this.MapCells)));
+			this.MapAreas = new MasterTable<MapArea>(start2.api_mst_maparea.Select(x => new MapArea(x, this.MapInfos)));
 		}
 	}
 }

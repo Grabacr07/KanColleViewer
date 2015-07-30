@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MetroTrilithon.Controls;
 using Grabacr07.KanColleViewer.Composition;
+using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Views.Settings;
 using Livet;
 
@@ -87,7 +88,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Composition
 
 		public void TestNotifier()
 		{
-			this.notifier?.Show("テスト", "これはテスト通知です。", WindowService.Current.MainWindow.Activate, ex => this.ErrorMessage = ex.Message);
+			this.notifier?.Notify(NotifyService.Current.CreateTest(failed: ex => this.ErrorMessage = ex.Message));
 		}
 	}
 }

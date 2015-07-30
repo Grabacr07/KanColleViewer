@@ -14,11 +14,10 @@ using Nekoxy;
 using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
-using Livet;
 
 namespace Grabacr07.KanColleWrapper
 {
-	public class Quests : NotificationObject
+	public class Quests : Notifier
 	{
 		private readonly List<ConcurrentDictionary<int, Quest>> questPages;
 

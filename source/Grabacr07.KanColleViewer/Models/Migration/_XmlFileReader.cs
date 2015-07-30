@@ -88,8 +88,12 @@ namespace Grabacr07.KanColleViewer.Models.Migration
 		/// <returns>読み込んだデータ。</returns>
 		private static T ReadData<T>(Stream stream) where T : new()
 		{
+			var type = typeof(T);
+			var attr = Attribute.GetCustomAttribute(type, typeof(XmlRootAttribute));
 			// シリアライズ用オブジェクト生成
-			var serializer = new XmlSerializer(typeof(T));
+			var serializer = attr == null 
+				? new XmlSerializer(type)
+				: new XmlSerializer(type, (XmlRootAttribute)attr);
 
 			// 与えられたストリームから XML 逆シリアル化
 			var result = (T)serializer.Deserialize(stream);
