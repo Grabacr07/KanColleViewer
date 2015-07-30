@@ -465,19 +465,4 @@
   <data name="MessageBar_ReSortie_Wounded" xml:space="preserve">
     <value>中破以上の艦娘</value>
   </data>
-  <data name="Quest_Detail_Untaken" xml:space="preserve">
-    <value>任務画面の全ページにアクセスしてください。</value>
-  </data>
-  <data name="Quest_Progress_50" xml:space="preserve">
-    <value> 50 % </value>
-  </data>
-  <data name="Quest_Progress_80" xml:space="preserve">
-    <value> 80 % </value>
-  </data>
-  <data name="Quest_State_Accomplished" xml:space="preserve">
-    <value> 完了 </value>
-  </data>
-  <data name="Quest_Title_Untaken" xml:space="preserve">
-    <value>(未取得の任務)</value>
-  </data>
 </root>
