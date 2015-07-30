@@ -18,8 +18,4 @@
             <dependency id="StatefulModel" version="0.1.2" />
         </dependencies>
     </metadata>
-    <files>
-        <file src="bin\Release\KanColleWrapper.dll" target="lib\net45\KanColleWrapper.dll" />
-        <file src="bin\Release\KanColleWrapper.xml" target="lib\net45\KanColleWrapper.xml" />
-    </files>
 </package>

@@ -16,8 +16,4 @@
             <frameworkAssembly assemblyName="System.ComponentModel.Composition"  />
         </frameworkAssemblies>
     </metadata>
-    <files>
-        <file src="bin\Release\KanColleViewer.Composition.dll" target="lib\net45\KanColleViewer.Composition.dll" />
-        <file src="bin\Release\KanColleViewer.Composition.xml" target="lib\net45\KanColleViewer.Composition.xml" />
-    </files>
 </package>
