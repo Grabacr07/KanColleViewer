@@ -135,7 +135,7 @@
 				<DockPanel x:Name="toolbarArea"
 						   x:FieldModifier="private"
 						   DockPanel.Dock="Top"
-						   Width="{Binding ElementName=kanColleHost, Path=ActualWidth}">
+						   MaxWidth="{Binding ToolAreaMaxWidth}">
 					<views:KanColleWindowButtons DockPanel.Dock="Right"
 												 Margin="8,4,4,4" />
 					<ContentControl Content="{Binding Content}">

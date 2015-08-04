@@ -23,8 +23,9 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 	public class KanColleHost : Control
 	{
 		private const string PART_ContentHost = "PART_ContentHost";
-		private static readonly Size kanColleSize = new Size(800.0, 480.0);
-		private static readonly Size browserSize = new Size(960.0, 572.0);
+
+		public static Size KanColleSize { get; } = new Size(800.0, 480.0);
+		public static Size InitialSize { get; } = new Size(960.0, 572.0);
 
 		static KanColleHost()
 		{
@@ -126,7 +127,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 			ApplyZoomFactor(this.WebBrowser, percentage);
 
-			var size = this.styleSheetApplied ? kanColleSize : browserSize;
+			var size = this.styleSheetApplied ? KanColleSize : InitialSize;
 			size = new Size(
 				(size.Width * (zoomFactor / dpi.ScaleX)) / dpi.ScaleX,
 				(size.Height * (zoomFactor / dpi.ScaleY)) / dpi.ScaleY);

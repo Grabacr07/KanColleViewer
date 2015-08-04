@@ -10,6 +10,7 @@ using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleViewer.ViewModels.Messages;
 using Grabacr07.KanColleViewer.ViewModels.Settings;
 using Grabacr07.KanColleViewer.Views;
+using Grabacr07.KanColleViewer.Views.Controls;
 using Livet.Messaging;
 using MetroTrilithon.Controls;
 using MetroTrilithon.Mvvm;
@@ -90,11 +91,31 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region ToolAreaMaxWidth 変更通知プロパティ
+
+		private double _ToolAreaMaxWidth;
+
+		public double ToolAreaMaxWidth
+		{
+			get { return this._ToolAreaMaxWidth; }
+			set
+			{
+				if (!this._ToolAreaMaxWidth.Equals(value))
+				{
+					this._ToolAreaMaxWidth = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 
 		public KanColleWindowViewModel(bool isMainWindow) : base(isMainWindow)
 		{
 			this.Settings = SettingsHost.Instance<KanColleWindowSettings>();
 			this.Settings.Dock.Subscribe(x => this.BrowserDock = x.Reverse()).AddTo(this);
+			this.Settings.Dock.Subscribe(x => this.ToolAreaMaxWidth = this.GetToolAreaWidth(x)).AddTo(this);
 			this.Settings.IsSplit.Subscribe(this.SplitWindow).AddTo(this);
 
 			this.Navigator = new NavigatorViewModel().AddTo(this);
@@ -189,6 +210,19 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		private void HandleSplitWindowClosed(object sender, EventArgs eventArgs)
 		{
 			this.MergeWindow();
+		}
+
+
+		private double GetToolAreaWidth(Dock d)
+		{
+			switch (d)
+			{
+				case Dock.Left:
+				case Dock.Right:
+					return KanColleHost.KanColleSize.Width;
+				default:
+					return double.PositiveInfinity;
+			}
 		}
 	}
 }
