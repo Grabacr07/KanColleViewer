@@ -132,15 +132,21 @@ namespace Grabacr07.KanColleViewer
 
 		protected override void OnSessionEnding(SessionEndingCancelEventArgs e)
 		{
-			var vmodel = new DialogViewModel();
-			var window = new ExitDialog
+			var confirmation = GeneralSettings.ExitConfirmationType == ExitConfirmationType.Always
+							   || (GeneralSettings.ExitConfirmationType == ExitConfirmationType.InSortieOnly && KanColleClient.Current.IsInSortie);
+			if (confirmation)
 			{
-				DataContext = vmodel,
-				Owner = this.MainWindow,
-			};
-			window.ShowDialog();
+				var vmodel = new DialogViewModel();
+				var window = new ExitDialog
+				{
+					DataContext = vmodel,
+					Owner = this.MainWindow,
+				};
+				window.ShowDialog();
 
-			e.Cancel = !vmodel.DialogResult;
+				e.Cancel = !vmodel.DialogResult;
+			}
+
 			base.OnSessionEnding(e);
 		}
 
