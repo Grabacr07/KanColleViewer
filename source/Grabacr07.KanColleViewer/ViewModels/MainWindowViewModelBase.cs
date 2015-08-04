@@ -89,11 +89,28 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			GeneralSettings.ExitConfirmationType.Subscribe(_ => this.RaiseCanCloseChanged());
 		}
 
+
+		/// <summary>
+		/// 現在のウィンドウから、指定したウィンドウに <see cref="TransitionMode.NewOrActive"/> で遷移します。
+		/// </summary>
+		public void Transition(ViewModel viewModel, Type windowType)
+		{
+			this.Transition(viewModel, windowType, TransitionMode.NewOrActive, false);
+		}
+
+		/// <summary>
+		/// 現在のウィンドウでダイアログを表示します。
+		/// </summary>
+		public void Dialog(ViewModel viewModel, Type windowType)
+		{
+			this.Transition(viewModel, windowType, TransitionMode.Modal, true);
+		}
+
 		protected override void CloseCanceledCallbackCore()
 		{
 			var dialog = new DialogViewModel { Title = "終了確認", };
 
-			this.Transition(dialog, typeof(ExitDialog), TransitionMode.Modal, true);
+			this.Dialog(dialog, typeof(ExitDialog));
 
 			if (dialog.DialogResult)
 			{
