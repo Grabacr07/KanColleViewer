@@ -60,14 +60,17 @@ namespace Grabacr07.KanColleViewer.Models.Migration
 
 			if (Current.KanColleClientSettings != null)
 			{
-				KanColleSettings.ViewRangeCalcType.Value = Current.KanColleClientSettings.ViewRangeCalcType;
+				KanColleSettings.ViewRangeCalcType.Value = Current.KanColleClientSettings.ViewRangeCalcType ?? KanColleSettings.ViewRangeCalcType.Default;
 				KanColleSettings.NotificationShorteningTime.Value = Current.KanColleClientSettings.NotificationShorteningTime;
 				KanColleSettings.ReSortieCondition.Value = Current.KanColleClientSettings.ReSortieCondition;
 			}
 
-			NetworkSettings.Proxy.Type.Value = Current.ProxySettings.Type;
-			NetworkSettings.Proxy.Host.Value = Current.ProxySettings.Host;
-			NetworkSettings.Proxy.Port.Value = Current.ProxySettings.Port;
+			if (Current.ProxySettings != null)
+			{
+				NetworkSettings.Proxy.Type.Value = Current.ProxySettings.Type;
+				NetworkSettings.Proxy.Host.Value = Current.ProxySettings.Host;
+				NetworkSettings.Proxy.Port.Value = Current.ProxySettings.Port;
+			}
 
 			try
 			{
