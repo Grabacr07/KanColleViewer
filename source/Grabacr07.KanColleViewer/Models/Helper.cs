@@ -59,10 +59,7 @@ namespace Grabacr07.KanColleViewer.Models
 			try
 			{
 				var valueName = Process.GetCurrentProcess().ProcessName + ".exe";
-				if (Registry.GetValue(key, valueName, null) == null)
-				{
-					Registry.SetValue(key, valueName, Properties.Settings.Default.FeatureBrowserEmulation, RegistryValueKind.DWord);
-				}
+				Registry.SetValue(key, valueName, Properties.Settings.Default.FeatureBrowserEmulation, RegistryValueKind.DWord);
 			}
 			catch (Exception ex)
 			{
