@@ -53,13 +53,17 @@ namespace Grabacr07.KanColleViewer.Models.Migration
 			ScreenshotSettings.Format.Value = Current.ScreenshotImageFormat;
 
 			KanColleSettings.CanDisplayBuildingShipName.Value = Current.CanDisplayBuildingShipName;
-			KanColleSettings.ViewRangeCalcType.Value = Current.KanColleClientSettings.ViewRangeCalcType;
 			KanColleSettings.NotifyBuildingCompleted.Value = Current.NotifyBuildingCompleted;
 			KanColleSettings.NotifyExpeditionReturned.Value = Current.NotifyExpeditionReturned;
 			KanColleSettings.NotifyRepairingCompleted.Value = Current.NotifyRepairingCompleted;
-			KanColleSettings.NotificationShorteningTime.Value = Current.KanColleClientSettings.NotificationShorteningTime;
 			KanColleSettings.NotifyFleetRejuvenated.Value = Current.NotifyFleetRejuvenated;
-			KanColleSettings.ReSortieCondition.Value = Current.KanColleClientSettings.ReSortieCondition;
+
+			if (Current.KanColleClientSettings != null)
+			{
+				KanColleSettings.ViewRangeCalcType.Value = Current.KanColleClientSettings.ViewRangeCalcType;
+				KanColleSettings.NotificationShorteningTime.Value = Current.KanColleClientSettings.NotificationShorteningTime;
+				KanColleSettings.ReSortieCondition.Value = Current.KanColleClientSettings.ReSortieCondition;
+			}
 
 			NetworkSettings.Proxy.Type.Value = Current.ProxySettings.Type;
 			NetworkSettings.Proxy.Host.Value = Current.ProxySettings.Host;
