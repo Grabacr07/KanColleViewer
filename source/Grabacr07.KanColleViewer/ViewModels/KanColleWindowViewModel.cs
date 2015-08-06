@@ -189,8 +189,13 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				this.splitWindow.Close();
 				this.splitWindow = null;
 
-				this.ContentVisibility = Visibility.Visible;
-				this.Settings.IsSplit.Value = false;
+				if (!this.IsClosed)
+				{
+					// このウィンドウが既に閉じられた後だったとき (= アプリ終了するとき) は
+					// Split 設定を上書きしないようにする
+					this.ContentVisibility = Visibility.Visible;
+					this.Settings.IsSplit.Value = false;
+				}
 			}
 		}
 
@@ -211,7 +216,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		{
 			this.MergeWindow();
 		}
-
 
 		private double GetToolAreaWidth(Dock d)
 		{
