@@ -25,4 +25,8 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		public SerializableProperty<bool> AutomaticallyResize => this.Cache(key => new SerializableProperty<bool>(key, Providers.Roaming, true));
 
 	}
+
+	public class ShipCatalogWindowSettings : WindowSettings { }
+
+	public class SlotItemCatalogWindowSettings : WindowSettings { }
 }

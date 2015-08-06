@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Threading.Tasks;
+using Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleWrapper;
 using MetroTrilithon.Mvvm;
 
@@ -13,6 +13,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 	public class SlotItemCatalogViewModel : WindowViewModel
 	{
 		private readonly Subject<Unit> updateSource = new Subject<Unit>();
+
+		public SlotItemCatalogWindowSettings Settings { get; }
 
 		#region SlotItems 変更通知プロパティ
 
@@ -52,25 +54,22 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#endregion
 
-
 		public SlotItemCatalogViewModel()
 		{
 			this.Title = "所有装備一覧";
+			this.Settings = new SlotItemCatalogWindowSettings();
 
-			var listener = this.updateSource
+			this.updateSource
 				.Do(_ => this.IsReloading = true)
 				.Throttle(TimeSpan.FromMilliseconds(100))
 				.Select(_ => UpdateCore())
 				.Do(_ => this.IsReloading = false)
 				.ObserveOnDispatcher()
-				.Subscribe(x => this.SlotItems = x);
-
-			this.CompositeDisposable.Add(listener);
-			this.CompositeDisposable.Add(this.updateSource);
+				.Subscribe(x => this.SlotItems = x)
+				.AddTo(this);
 
 			this.Update();
 		}
-
 
 		public void Update()
 		{

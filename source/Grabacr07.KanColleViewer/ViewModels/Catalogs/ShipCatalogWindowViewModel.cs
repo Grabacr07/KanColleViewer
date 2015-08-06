@@ -4,9 +4,8 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Threading.Tasks;
+using Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleWrapper;
-using Livet.EventListeners;
 using MetroTrilithon.Mvvm;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
@@ -15,6 +14,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 	{
 		private readonly Subject<Unit> updateSource = new Subject<Unit>();
 		private readonly Homeport homeport = KanColleClient.Current.Homeport;
+
+		public ShipCatalogWindowSettings Settings { get; }
 
 		public ShipCatalogSortWorker SortWorker { get; }
 		public IReadOnlyCollection<ShipTypeViewModel> ShipTypes { get; }
@@ -113,11 +114,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#endregion
 
-
 		public ShipCatalogWindowViewModel()
 		{
 			this.Title = "所属艦娘一覧";
 			this.IsOpenFilterSettings = true;
+			this.Settings = new ShipCatalogWindowSettings();
 
 			this.SortWorker = new ShipCatalogSortWorker();
 
@@ -143,15 +144,12 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				// 　 ソートだけしたいケースとかだと遅くてイラ壁なので迷う
 				.Throttle(TimeSpan.FromMilliseconds(7.0))
 				.Do(_ => this.UpdateCore())
-				.Subscribe(_ => this.IsReloading = false);
-			this.CompositeDisposable.Add(this.updateSource);
+				.Subscribe(_ => this.IsReloading = false)
+				.AddTo(this);
 
-			this.CompositeDisposable.Add(new PropertyChangedEventListener(this.homeport.Organization)
-			{
-				{ nameof(Organization.Ships), (sender, args) => this.Update() },
-			});
-
-			this.Update();
+			this.homeport.Organization
+				.Subscribe(nameof(Organization.Ships), this.Update)
+				.AddTo(this);
 		}
 
 

@@ -23,12 +23,14 @@
 				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Catalogs"
 				   xmlns:contentsVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 				   xmlns:kcvcn="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
+				   xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:ShipCatalogWindowViewModel}"
 				   Title="{Binding Title}"
 				   Width="950"
 				   Height="800"
 				   FontSize="12"
+				   Topmost="{Binding Settings.TopMost.Value}"
 				   Background="{DynamicResource ThemeBrushKey}"
 				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 				   IsRestoringWindowPlacement="True"
@@ -61,32 +63,31 @@
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
-		<!-- #region CaptionBar -->
-		<Border metro:MetroWindow.IsCaptionBar="True"
-				Panel.ZIndex="100">
-			<Grid>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto" />
-					<ColumnDefinition />
-					<ColumnDefinition Width="Auto" />
-				</Grid.ColumnDefinitions>
+		<!-- #region Caption area -->
+		<DockPanel metro:MetroWindow.IsCaptionBar="True">
+			<Border DockPanel.Dock="Bottom"
+					Height="4" />
+			<kcvc:AppIcon Width="36"
+						  Height="36"
+						  Background="Transparent"
+						  AnchorVisibility="Collapsed"
+						  BandVisibility="Collapsed" />
 
-				<kcvc:AppIcon Width="36"
-							  Height="36"
-							  Background="Transparent"
-							  AnchorVisibility="Collapsed"
-							  BandVisibility="Collapsed" />
+			<StackPanel DockPanel.Dock="Right"
+						Orientation="Horizontal"
+						HorizontalAlignment="Right"
+						VerticalAlignment="Top"
+						WindowChrome.IsHitTestVisibleInChrome="True">
+				<metro:CaptionButton IsChecked="{Binding Settings.TopMost.Value, Mode=TwoWay}"
+									 ToolTip="{Binding Resources.Settings_Window_TopMost, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+									 Style="{DynamicResource PinButtonStyleKey}" />
+				<metro:SystemButtons />
+			</StackPanel>
 
-				<TextBlock Grid.Column="1"
-						   Text="{Binding Title}"
-						   Style="{DynamicResource CaptionTextStyleKey}"
-						   Margin="2,0,8,0" />
-
-				<metro:SystemButtons Grid.Column="2"
-									 HorizontalAlignment="Right"
-									 VerticalAlignment="Top" />
-			</Grid>
-		</Border>
+			<TextBlock Text="{Binding Title}"
+					   Style="{DynamicResource CaptionTextStyleKey}"
+					   Margin="2,0,8,0" />
+		</DockPanel>
 		<!-- #endregion -->
 
 		<Grid Grid.Row="1">

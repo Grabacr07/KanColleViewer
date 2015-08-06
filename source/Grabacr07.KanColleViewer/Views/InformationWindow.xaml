@@ -77,7 +77,6 @@
 
 			<StackPanel DockPanel.Dock="Right"
 						Orientation="Horizontal"
-						HorizontalAlignment="Right"
 						VerticalAlignment="Top"
 						WindowChrome.IsHitTestVisibleInChrome="True">
 				<metro:CaptionButton IsChecked="{Binding Settings.TopMost.Value}"
