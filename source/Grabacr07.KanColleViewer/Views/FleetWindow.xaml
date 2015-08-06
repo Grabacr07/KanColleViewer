@@ -47,7 +47,7 @@
 
 		<livet:InteractionMessageTrigger Messenger="{Binding Messenger, Mode=OneWay}"
 										 MessageKey="Window.Action">
-			<livet:WindowInteractionMessageAction />
+			<livet:WindowInteractionMessageAction InvokeActionOnlyWhenWindowIsActive="False" />
 		</livet:InteractionMessageTrigger>
 	</i:Interaction.Triggers>
 

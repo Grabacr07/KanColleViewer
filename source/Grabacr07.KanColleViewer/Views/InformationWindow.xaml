@@ -50,7 +50,7 @@
 		</livet:InteractionMessageTrigger>
 		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
 										 MessageKey="Window.WindowAction">
-			<livet:WindowInteractionMessageAction />
+			<livet:WindowInteractionMessageAction InvokeActionOnlyWhenWindowIsActive="False" />
 		</livet:InteractionMessageTrigger>
 		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
 										 MessageKey="Window.Transition">
