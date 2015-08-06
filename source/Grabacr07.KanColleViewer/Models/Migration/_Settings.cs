@@ -30,6 +30,8 @@ namespace Grabacr07.KanColleViewer.Models.Migration
 
 		public static void Load()
 		{
+			if (!File.Exists(filePath)) return;
+
 			try
 			{
 				Current = filePath.ReadXml<_Settings>();
@@ -62,6 +64,15 @@ namespace Grabacr07.KanColleViewer.Models.Migration
 			NetworkSettings.Proxy.Type.Value = Current.ProxySettings.Type;
 			NetworkSettings.Proxy.Host.Value = Current.ProxySettings.Host;
 			NetworkSettings.Proxy.Port.Value = Current.ProxySettings.Port;
+
+			try
+			{
+				File.Delete(filePath);
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(ex);
+			}
 		}
 
 		#endregion
