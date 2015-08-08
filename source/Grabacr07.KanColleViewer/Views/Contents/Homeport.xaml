@@ -12,6 +12,7 @@
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
+			 xmlns:contentsVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 mc:Ignorable="d"
 			 d:DesignWidth="600"
@@ -60,27 +61,27 @@
 		<StackPanel Grid.Column="1"
 					Orientation="Horizontal"
 					VerticalAlignment="Center">
-			<Grid>
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto" />
-					<RowDefinition Height="*" />
-				</Grid.RowDefinitions>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="Auto" />
-				</Grid.ColumnDefinitions>
+			<UniformGrid Columns="1"
+						 MinWidth="150">
+				<Panel.Resources>
+					<DataTemplate DataType="{x:Type contentsVm:MaterialsViewModel+MaterialViewModel}">
+						<TextBlock>
+							<Run Text="{Binding Resources.Homeport_InstantRepair, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+							<Run Text="{Binding Display, Mode=OneWay}"
+								 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+							<LineBreak />
+							<Run Text="{Binding Resources.Homeport_InstantBuild, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+							<Run Text="{Binding Value, Mode=OneWay}"
+								 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+						</TextBlock>
+					</DataTemplate>
+				</Panel.Resources>
 
-				<TextBlock Grid.Row="0"
-						   Grid.Column="1">
-					<Run Text="{Binding Resources.Homeport_InstantRepair, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-					<Run Text="{Binding Materials.Model.InstantRepairMaterials, Mode=OneWay}"
-						 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-					<LineBreak />
-					<Run Text="{Binding Resources.Homeport_InstantBuild, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-					<Run Text="{Binding Materials.Model.InstantBuildMaterials, Mode=OneWay}"
-						 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-				</TextBlock>
-			</Grid>
+				<controls:MetroComboBox ItemsSource="{Binding Materials.Values}"
+										SelectedItem="{Binding Materials.SelectedItem1, Mode=TwoWay}" />
+				<controls:MetroComboBox ItemsSource="{Binding Materials.Values}"
+										SelectedItem="{Binding Materials.SelectedItem2, Mode=TwoWay}" />
+			</UniformGrid>
 
 			<Grid>
 				<Grid.RowDefinitions>

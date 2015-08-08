@@ -63,6 +63,18 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		public static SerializableProperty<int> ReSortieCondition { get; }
 			= new SerializableProperty<int>(GetKey(), Providers.Roaming, 49);
 
+		/// <summary>
+		/// 画面に表示する資材 (1 つめ) を表す設定値を取得します。
+		/// </summary>
+		public static SerializableProperty<string> DisplayMaterial1 { get; }
+			= new SerializableProperty<string>(GetKey(), Providers.Roaming, nameof(Materials.InstantRepairMaterials));
+
+		/// <summary>
+		/// 画面に表示する資材 (2 つめ) を表す設定値を取得します。
+		/// </summary>
+		public static SerializableProperty<string> DisplayMaterial2 { get; }
+			= new SerializableProperty<string>(GetKey(), Providers.Roaming, nameof(Materials.InstantBuildMaterials));
+
 
 		#region instance members
 

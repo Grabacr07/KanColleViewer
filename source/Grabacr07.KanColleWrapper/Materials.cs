@@ -171,6 +171,25 @@ namespace Grabacr07.KanColleWrapper
 
 		#endregion
 
+		#region ImprovementMaterials 変更通知プロパティ
+
+		private int _ImprovementMaterials;
+
+		public int ImprovementMaterials
+		{
+			get { return this._ImprovementMaterials; }
+			set
+			{
+				if (this._ImprovementMaterials != value)
+				{
+					this._ImprovementMaterials = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 
 		internal Materials(KanColleProxy proxy)
 		{
@@ -182,7 +201,7 @@ namespace Grabacr07.KanColleWrapper
 
 		internal void Update(kcsapi_material[] source)
 		{
-			if (source != null && source.Length >= 7)
+			if (source != null && 8 <= source.Length)
 			{
 				this.Fuel = source[0].api_value;
 				this.Ammunition = source[1].api_value;
@@ -191,6 +210,7 @@ namespace Grabacr07.KanColleWrapper
 				this.DevelopmentMaterials = source[6].api_value;
 				this.InstantRepairMaterials = source[5].api_value;
 				this.InstantBuildMaterials = source[4].api_value;
+				this.ImprovementMaterials = source[7].api_value;
 			}
 		}
 
