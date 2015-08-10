@@ -36,43 +36,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 
 		public IReadOnlyCollection<BindableTextViewModel> Libraries { get; }
 
-		#region AllPlugins 変更通知プロパティ
+		public List<PluginViewModel> LoadedPlugins { get; }
 
-		private List<PluginViewModel> _AllPlugins;
-
-		public List<PluginViewModel> AllPlugins
-		{
-			get { return this._AllPlugins; }
-			set
-			{
-				if (this._AllPlugins != value)
-				{
-					this._AllPlugins = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region LoadFailedPlugins 変更通知プロパティ
-
-		private List<LoadFailedPluginViewModel> _BlacklistedPlugins;
-
-		public List<LoadFailedPluginViewModel> BlacklistedPlugins
-		{
-			get { return this._BlacklistedPlugins; }
-			set
-			{
-				if (this._BlacklistedPlugins != value)
-				{
-					this._BlacklistedPlugins = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
+		public List<LoadFailedPluginViewModel> FailedPlugins { get; }
 
 		#region ViewRangeSettingsCollection 変更通知プロパティ
 
@@ -123,23 +89,18 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 			this.ViewRangeSettingsCollection = ViewRangeCalcLogic.Logics
 				.Select(x => new ViewRangeSettingsViewModel(x))
 				.ToList();
+
+			this.LoadedPlugins = new List<PluginViewModel>(
+				PluginService.Current.Plugins.Select(x => new PluginViewModel(x)));
+
+			this.FailedPlugins = new List<LoadFailedPluginViewModel>(
+				PluginService.Current.FailedPlugins.Select(x => new LoadFailedPluginViewModel(x)));
 		}
 
 
 		public void Initialize()
 		{
 			this.WindowSettings.Initialize();
-			this.ReloadPlugins();
-		}
-
-
-		public void ReloadPlugins()
-		{
-			this.AllPlugins = new List<PluginViewModel>(
-				PluginService.Current.Plugins.Select(x => new PluginViewModel(x)));
-
-			this.BlacklistedPlugins = new List<LoadFailedPluginViewModel>(
-				PluginService.Current.FailedPlugins.Select(x => new LoadFailedPluginViewModel(x)));
 		}
 
 

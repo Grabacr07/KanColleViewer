@@ -52,7 +52,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Composition
 			get
 			{
 				var settings = this.Plugin.OfType<ISettings>().FirstOrDefault();
-				if (settings != null) yield return new SettingsText { Function = settings, };
+				if (settings != null) yield return new SettingsText { Function = settings, Title = this.Plugin.Metadata.Title, };
 
 				if (this.notifier != null) yield return new NotifierText { Function = this.notifier, TestMethod = this.TestNotifier, };
 

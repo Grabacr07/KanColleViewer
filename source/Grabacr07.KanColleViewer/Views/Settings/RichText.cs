@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MetroTrilithon.Controls;
 using Grabacr07.KanColleViewer.Composition;
+using Grabacr07.KanColleViewer.ViewModels.Settings;
 
 namespace Grabacr07.KanColleViewer.Views.Settings
 {
@@ -14,8 +15,12 @@ namespace Grabacr07.KanColleViewer.Views.Settings
 
 	public class SettingsText : FunctionLink<ISettings>
 	{
+		public string Title { get; set; }
+
 		public override void Click()
 		{
+			var vm = new PluginSettingsWindowViewModel(this.Function, this.Title);
+			WindowService.Current.MainWindow.Transition(vm, typeof(PluginSettingsWindow));
 		}
 	}
 

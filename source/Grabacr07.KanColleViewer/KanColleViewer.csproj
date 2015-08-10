@@ -195,6 +195,7 @@
     <Compile Include="ViewModels\Messages\ZoomMessage.cs" />
     <Compile Include="ViewModels\NavigatorViewModel.cs" />
     <Compile Include="ViewModels\NullViewModel.cs" />
+    <Compile Include="ViewModels\Settings\PluginSettingsWindowViewModel.cs" />
     <Compile Include="ViewModels\Settings\ScreenshotSettingsViewModel.cs" />
     <Compile Include="ViewModels\Settings\SettingsViewModel.cs" />
     <Compile Include="ViewModels\Contents\ShipsViewModel.cs" />
@@ -273,6 +274,9 @@
     </Compile>
     <Compile Include="Views\Settings\Browser.xaml.cs">
       <DependentUpon>Browser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\PluginSettingsWindow.xaml.cs">
+      <DependentUpon>PluginSettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings\ProxyBootstrapperWindow.xaml.cs">
       <DependentUpon>ProxyBootstrapperWindow.xaml</DependentUpon>
@@ -415,6 +419,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Settings\Common.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\PluginSettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
