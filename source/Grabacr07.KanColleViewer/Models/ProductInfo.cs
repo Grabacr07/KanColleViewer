@@ -19,10 +19,11 @@ namespace Grabacr07.KanColleViewer.Models
 		private static readonly Lazy<IReadOnlyCollection<Library>> librariesLazy = new Lazy<IReadOnlyCollection<Library>>(() => new List<Library>
 		{
 			new Library("Reactive Extensions", new Uri("http://rx.codeplex.com/")),
-			new Library("Windows API Code Pack", new Uri("http://archive.msdn.microsoft.com/WindowsAPICodePack")),
-			new Library("Livet", new Uri("http://ugaya40.net/livet")),
+			new Library("Livet", new Uri("http://ugaya40.hateblo.jp/entry/Livet")),
+			new Library("StatefulModel", new Uri("http://ugaya40.hateblo.jp/entry/StatefulModel")),
 			new Library("DynamicJson", new Uri("http://dynamicjson.codeplex.com/")),
 			new Library("Nekoxy", new Uri("https://github.com/veigr/Nekoxy")),
+			new Library("Desktop Toast", new Uri("https://github.com/emoacht/DesktopToast")),
 			new Library(".NET Core Audio APIs", new Uri("https://netcoreaudio.codeplex.com/")),
 		});
 
