@@ -107,8 +107,7 @@
 												  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
 												  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 												  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-												  IsHitTestVisible="False"
-												  Margin="2" />
+												  IsHitTestVisible="False" />
 
 								<TextBox x:Name="PART_EditableTextBox"
 										 Grid.Column="0"

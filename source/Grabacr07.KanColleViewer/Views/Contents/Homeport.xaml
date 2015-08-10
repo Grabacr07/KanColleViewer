@@ -65,12 +65,9 @@
 						 MinWidth="150">
 				<Panel.Resources>
 					<DataTemplate DataType="{x:Type contentsVm:MaterialsViewModel+MaterialViewModel}">
-						<TextBlock>
-							<Run Text="{Binding Resources.Homeport_InstantRepair, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-							<Run Text="{Binding Display, Mode=OneWay}"
-								 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-							<LineBreak />
-							<Run Text="{Binding Resources.Homeport_InstantBuild, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+						<TextBlock Style="{DynamicResource DefaultTextStyleKey}">
+							<Run Text="{Binding Display, Mode=OneWay}" />
+							<Run Text=":" />
 							<Run Text="{Binding Value, Mode=OneWay}"
 								 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 						</TextBlock>
