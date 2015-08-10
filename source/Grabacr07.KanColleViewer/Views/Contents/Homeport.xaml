@@ -62,15 +62,28 @@
 					Orientation="Horizontal"
 					VerticalAlignment="Center">
 			<UniformGrid Columns="1"
-						 MinWidth="150">
+						 MinWidth="150"
+						 Grid.IsSharedSizeScope="True">
 				<Panel.Resources>
 					<DataTemplate DataType="{x:Type contentsVm:MaterialsViewModel+MaterialViewModel}">
-						<TextBlock Style="{DynamicResource DefaultTextStyleKey}">
-							<Run Text="{Binding Display, Mode=OneWay}" />
-							<Run Text=":" />
-							<Run Text="{Binding Value, Mode=OneWay}"
-								 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-						</TextBlock>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto"
+												  SharedSizeGroup="MaterialName" />
+								<ColumnDefinition Width="Auto"
+												  SharedSizeGroup="MaterialValue" />
+							</Grid.ColumnDefinitions>
+							<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+									   VerticalAlignment="Bottom">
+								<Run Text="{Binding Display, Mode=OneWay}" />
+								<Run Text=":" />
+							</TextBlock>
+							<TextBlock Grid.Column="1"
+									   Text="{Binding Value, Mode=OneWay}"
+									   Style="{DynamicResource EmphaticTextStyleKey}"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Bottom" />
+						</Grid>
 					</DataTemplate>
 				</Panel.Resources>
 

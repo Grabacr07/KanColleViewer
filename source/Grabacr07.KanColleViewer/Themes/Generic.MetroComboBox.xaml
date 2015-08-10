@@ -13,6 +13,8 @@
 				Value="0" />
 		<Setter Property="Padding"
 				Value="1" />
+		<Setter Property="HorizontalContentAlignment"
+				Value="Stretch" />
 		<Setter Property="VerticalContentAlignment"
 				Value="Center" />
 		<Setter Property="FocusVisualStyle"
@@ -32,10 +34,10 @@
 						<Setter.Value>
 							<ControlTemplate TargetType="{x:Type ComboBoxItem}">
 								<Border CornerRadius="0"
-										Padding="2"
 										Background="{TemplateBinding Background}"
 										SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-									<ContentPresenter />
+									<ContentPresenter HorizontalAlignment="Stretch"
+													  VerticalAlignment="Stretch" />
 								</Border>
 								<ControlTemplate.Triggers>
 									<Trigger Property="IsHighlighted"
@@ -79,7 +81,7 @@
 											  OverridesDefaultStyle="True"
 											  IsTabStop="False"
 											  Focusable="False"
-											  ClickMode="Press">
+											  ClickMode="Release">
 									<ToggleButton.Template>
 										<ControlTemplate TargetType="{x:Type ToggleButton}">
 											<Border Background="Transparent">

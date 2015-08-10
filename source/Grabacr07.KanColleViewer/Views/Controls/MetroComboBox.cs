@@ -26,20 +26,23 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 		{
 			base.OnApplyTemplate();
 
+			if (this.popup != null)
+			{
+				this.popup.Opened -= this.PopupOnOpened;
+			}
+
 			this.popup = this.GetTemplateChild(PART_Popup) as Popup;
 			if (this.popup != null)
 			{
 				this.popup.Placement = PlacementMode.Relative;
 				this.prevOffsetH = .0;
+
+				this.popup.Opened += this.PopupOnOpened;
 			}
 		}
 
-		protected override void OnSelectionChanged(SelectionChangedEventArgs e)
+		private void SetOffset()
 		{
-			base.OnSelectionChanged(e);
-
-			if (this.popup == null || this.SelectedIndex < 0) return;
-
 			var height = .0;
 			for (var i = 0; i < this.SelectedIndex; i++)
 			{
@@ -53,6 +56,11 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			this.popup.VerticalOffset += -height;
 
 			this.prevOffsetH = -height;
+		}
+
+		private void PopupOnOpened(object sender, EventArgs eventArgs)
+		{
+			this.SetOffset();
 		}
 	}
 }

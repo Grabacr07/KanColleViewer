@@ -15,11 +15,8 @@
 								 HP="130"
 								 MaxFirepower="99"
 								 MaxTorpedo="95"
-								 MaxASW="78"
-								 MaxLOS="76"
 								 MaxArmer="58"
 								 MaxAA="97"
-								 MaxEvasion="10"
 								 Speed="Fast">
 					<models:ShipInfo.ShipType>
 						<models:ShipType Name="重雷装巡洋戦艦" />
