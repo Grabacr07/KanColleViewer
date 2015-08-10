@@ -194,7 +194,8 @@
 									   Margin="10,2,20,0">
 								<Viewbox Height="21"
 										 Margin="0,0,4,0"
-										 Visibility="{Binding ExSlot.Equipped, Converter={StaticResource BooleanToVisibilityConverter}}">
+										 Visibility="{Binding ExSlot.Equipped, Converter={StaticResource BooleanToVisibilityConverter}}"
+										 ToolTip="{Binding ExSlot.Item.NameWithLevel}">
 									<kcvc:SlotItemIcon Type="{Binding ExSlot.Item.Info.IconType}" />
 								</Viewbox>
 								<TextBlock TextAlignment="Center"
@@ -383,6 +384,8 @@
 												<Run Text="{Binding Item.Info.Name, Mode=OneWay}" />
 												<Run Text="{Binding Item.LevelText, Mode=OneWay}"
 													 Foreground="#FF45A9A5" />
+												<Run Text="{Binding Item.AdeptText, Mode=OneWay}"
+													 Foreground="{DynamicResource ForegroundBrushKey}" />
 											</TextBlock>
 										</Grid>
 										<DataTemplate.Triggers>
