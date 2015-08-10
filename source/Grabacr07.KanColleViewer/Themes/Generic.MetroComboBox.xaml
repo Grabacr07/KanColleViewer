@@ -137,15 +137,16 @@
 							   IsOpen="{TemplateBinding IsDropDownOpen}"
 							   AllowsTransparency="True"
 							   Focusable="False"
-							   HorizontalOffset="-1"
-							   VerticalOffset="-1"
+							   HorizontalOffset="-4"
+							   VerticalOffset="-4"
 							   FocusVisualStyle="{x:Null}">
 							<Grid SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
 								  MaxHeight="{TemplateBinding MaxDropDownHeight}">
 								<Border x:Name="dropdown"
 										Background="{DynamicResource BackgroundBrushKey}"
 										BorderBrush="{TemplateBinding BorderBrush}"
-										BorderThickness="1">
+										BorderThickness="1"
+										Padding="3">
 									<ScrollViewer VerticalScrollBarVisibility="Auto">
 										<ItemsPresenter />
 									</ScrollViewer>
