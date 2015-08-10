@@ -170,11 +170,11 @@
 
 											<StackPanel>
 												<TextBlock x:Name="HPText">
-														<Run Text="HP:" />
-														<Run Text="{Binding Ship.HP.Current, Mode=OneWay}"
-															 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-														<Run Text="/" />
-														<Run Text="{Binding Ship.HP.Maximum, Mode=OneWay}" />
+													<Run Text="HP:" />
+													<Run Text="{Binding Ship.HP.Current, Mode=OneWay}"
+														 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+													<Run Text="/" />
+													<Run Text="{Binding Ship.HP.Maximum, Mode=OneWay}" />
 												</TextBlock>
 												<kcvc:ColorIndicator x:Name="HPIndicator"
 																	 Height="7"
@@ -277,6 +277,8 @@
 														  SharedSizeGroup="Resources" />
 										<ColumnDefinition Width="Auto"
 														  SharedSizeGroup="SlotItems" />
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="ExSlotItem" />
 									</Grid.ColumnDefinitions>
 
 
@@ -397,7 +399,7 @@
 									<ItemsControl Grid.Column="7"
 												  Grid.Row="0"
 												  Grid.RowSpan="2"
-												  ItemsSource="{Binding Ship.EquippedSlots}"
+												  ItemsSource="{Binding Ship.Slots}"
 												  Margin="7,0">
 										<ItemsControl.Template>
 											<ControlTemplate TargetType="{x:Type ItemsControl}">
@@ -407,14 +409,35 @@
 										</ItemsControl.Template>
 										<ItemsControl.ItemTemplate>
 											<DataTemplate>
-												<Border ToolTip="{Binding Item.NameWithLevel}"
+												<Border x:Name="Elements"
+														ToolTip="{Binding Item.NameWithLevel}"
 														Background="Transparent">
 													<kcvc:SlotItemIcon Type="{Binding Item.Info.IconType}"
 																	   Margin="3,0" />
 												</Border>
+												<DataTemplate.Triggers>
+													<DataTrigger Binding="{Binding Equipped}"
+																 Value="False">
+														<Setter TargetName="Elements"
+																Property="Visibility"
+																Value="Collapsed" />
+													</DataTrigger>
+												</DataTemplate.Triggers>
 											</DataTemplate>
 										</ItemsControl.ItemTemplate>
 									</ItemsControl>
+
+									<DockPanel Grid.Column="8"
+											   Grid.Row="0"
+											   Grid.RowSpan="2"
+											   Visibility="{Binding Ship.ExSlot.Equipped, Converter={StaticResource BooleanToVisibilityConverter}}">
+										<Rectangle Width="1"
+												   Style="{DynamicResource SeparatorRectangleStyleKey}"
+												   Margin="12,4,0,3" />
+										<kcvc:SlotItemIcon Type="{Binding Ship.ExSlot.Item.Info.IconType}"
+														   ToolTip="{Binding Ship.ExSlot.Item.NameWithLevel}"
+														   Margin="3,0" />
+									</DockPanel>
 								</Grid>
 								<Rectangle Height="1"
 										   Style="{DynamicResource SeparatorRectangleStyleKey}"

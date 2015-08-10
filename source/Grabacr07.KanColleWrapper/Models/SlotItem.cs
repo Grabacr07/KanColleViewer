@@ -38,5 +38,8 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			return $"ID = {this.Id}, Name = \"{this.Info.Name}\", Level = {this.Level}";
 		}
+
+
+		public static SlotItem Dummy { get; } = new SlotItem(new kcsapi_slotitem { api_slotitem_id = -1, });
 	}
 }

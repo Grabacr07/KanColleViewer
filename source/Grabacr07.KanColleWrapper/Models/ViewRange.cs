@@ -92,14 +92,14 @@ namespace Grabacr07.KanColleWrapper.Models
 			// stype=7 が偵察機 (2 倍する索敵値)、stype=8 が電探
 
 			var spotter = ships.SelectMany(
-				x => x.EquippedSlots
+				x => x.EquippedItems
 					.Where(s => s.Item.Info.RawData.api_type.Get(1) == 7)
 					.Where(s => s.Current > 0)
 					.Select(s => s.Item.Info.RawData.api_saku)
 				).Sum();
 
 			var radar = ships.SelectMany(
-				x => x.EquippedSlots
+				x => x.EquippedItems
 					.Where(s => s.Item.Info.RawData.api_type.Get(1) == 8)
 					.Select(s => s.Item.Info.RawData.api_saku)
 				).Sum();
@@ -139,7 +139,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			// > + (司令部レベルを5の倍数に切り上げ) × (-0.61)
 
 			var itemScore = ships
-				.SelectMany(x => x.EquippedSlots)
+				.SelectMany(x => x.EquippedItems)
 				.Select(x => x.Item.Info)
 				.GroupBy(
 					x => x.Type,
@@ -148,7 +148,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				.Aggregate(.0, (score, item) => score + GetScore(item.type, item.score));
 
 			var shipScore = ships
-				.Select(x => x.ViewRange - x.EquippedSlots.Sum(s => s.Item.Info.RawData.api_saku))
+				.Select(x => x.ViewRange - x.EquippedItems.Sum(s => s.Item.Info.RawData.api_saku))
 				.Select(x => Math.Sqrt(x))
 				.Sum() * 1.69;
 

@@ -27,7 +27,7 @@
 				</models:ShipInfo>
 			</models:Ship.Info>
 
-			<models:Ship.EquippedSlots>
+			<models:Ship.EquippedItems>
 				<models:ShipSlot>
 					<models:ShipSlot.Item>
 						<models:SlotItem Level="5"
@@ -84,7 +84,7 @@
 						</models:SlotItem>
 					</models:ShipSlot.Item>
 				</models:ShipSlot>
-			</models:Ship.EquippedSlots>
+			</models:Ship.EquippedItems>
 
 			<models:Ship.HP>
 				<models:LimitedValue Minimum="0"

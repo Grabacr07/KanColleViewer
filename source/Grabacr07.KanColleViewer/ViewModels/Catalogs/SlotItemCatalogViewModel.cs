@@ -91,7 +91,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 			foreach (var ship in ships)
 			{
-				foreach (var target in ship.EquippedSlots.Select(slot => new { slot, counter = dic[slot.Item.Info.Id] }))
+				foreach (var target in ship.EquippedItems.Select(slot => new { slot, counter = dic[slot.Item.Info.Id] }))
 				{
 					target.counter.AddShip(ship, target.slot.Item.Level);
 				}

@@ -29,7 +29,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public static int CalcAirSuperiorityPotential(this Ship ship)
 		{
-			return ship.EquippedSlots.Select(x => x.Item.CalcAirSuperiorityPotential(x.Current)).Sum();
+			return ship.EquippedItems.Select(x => x.Item.CalcAirSuperiorityPotential(x.Current)).Sum();
 		}
 
 		public static double CalcViewRange(this Fleet fleet)

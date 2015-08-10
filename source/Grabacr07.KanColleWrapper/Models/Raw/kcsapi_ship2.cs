@@ -37,6 +37,7 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public int api_locked { get; set; }
 		public int api_locked_equip { get; set; }
 		public int api_sally_area { get; set; }
+		public int api_slot_ex { get; set; }
 	}
 	// ReSharper restore InconsistentNaming
 }

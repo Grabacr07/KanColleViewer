@@ -124,7 +124,6 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
-
 		#region Firepower 変更通知プロパティ
 
 		private ModernizableStatus _Firepower;
@@ -139,7 +138,6 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				this._Firepower = value;
 				this.RaisePropertyChanged();
-
 			}
 		}
 
@@ -159,7 +157,6 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				this._Torpedo = value;
 				this.RaisePropertyChanged();
-
 			}
 		}
 
@@ -180,7 +177,6 @@ namespace Grabacr07.KanColleWrapper.Models
 				this._AA = value;
 				this.RaisePropertyChanged();
 			}
-
 		}
 
 		#endregion
@@ -199,7 +195,6 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				this._Armer = value;
 				this.RaisePropertyChanged();
-
 			}
 		}
 
@@ -224,11 +219,13 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
-
 		#region Slots 変更通知プロパティ
 
 		private ShipSlot[] _Slots;
 
+		/// <summary>
+		/// この艦娘の装備スロットを取得します。装備していないスロットには <see cref="ShipSlot.Equipped"/> が false のオブジェクトが割り当てられます (null を返しません)。
+		/// </summary>
 		public ShipSlot[] Slots
 		{
 			get { return this._Slots; }
@@ -248,7 +245,10 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		private ShipSlot[] _EquippedSlots;
 
-		public ShipSlot[] EquippedSlots
+		/// <summary>
+		/// <see cref="Slots"/> と <see cref="ExSlot"/> のなかで <see cref="ShipSlot.Equipped"/> が true (空でないスロット) を列挙します。
+		/// </summary>
+		public ShipSlot[] EquippedItems
 		{
 			get { return this._EquippedSlots; }
 			set
@@ -263,6 +263,24 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
+		#region ExSlot 変更通知プロパティ
+
+		private ShipSlot _ExSlot;
+
+		public ShipSlot ExSlot
+		{
+			get { return this._ExSlot; }
+			set
+			{
+				if (this._ExSlot != value)
+				{
+					this._ExSlot = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
 
 		/// <summary>
 		/// 装備によるボーナスを含めた索敵ステータス値を取得します。
@@ -337,9 +355,10 @@ namespace Grabacr07.KanColleWrapper.Models
 				.Select(id => this.homeport.Itemyard.SlotItems[id])
 				.Select((t, i) => new ShipSlot(t, this.Info.RawData.api_maxeq.Get(i) ?? 0, this.RawData.api_onslot.Get(i) ?? 0))
 				.ToArray();
-			this.EquippedSlots = this.Slots.Where(x => x.Equipped).ToArray();
+			this.ExSlot = new ShipSlot(this.homeport.Itemyard.SlotItems[this.RawData.api_slot_ex], 0, 0);
+			this.EquippedItems = this.EnumerateAllEquippedItems().ToArray();
 
-			if (this.EquippedSlots.Any(x => x.Item.Info.Type == SlotItemType.応急修理要員))
+			if (this.EquippedItems.Any(x => x.Item.Info.Type == SlotItemType.応急修理要員))
 			{
 				this.Situation |= ShipSituation.DamageControlled;
 			}
@@ -366,6 +385,13 @@ namespace Grabacr07.KanColleWrapper.Models
 		public override string ToString()
 		{
 			return $"ID = {this.Id}, Name = \"{this.Info.Name}\", ShipType = \"{this.Info.ShipType.Name}\", Level = {this.Level}";
+		}
+
+
+		private IEnumerable<ShipSlot> EnumerateAllEquippedItems()
+		{
+			foreach (var slot in this.Slots.Where(x => x.Equipped)) yield return slot;
+			if (this.ExSlot.Equipped) yield return this.ExSlot;
 		}
 	}
 }
