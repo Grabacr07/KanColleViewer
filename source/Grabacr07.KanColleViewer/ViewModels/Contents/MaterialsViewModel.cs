@@ -28,6 +28,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 				{
 					this._SelectedItem1 = value;
 					this.RaisePropertyChanged();
+					KanColleSettings.DisplayMaterial1.Value = value?.Key;
 				}
 			}
 		}
@@ -47,6 +48,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 				{
 					this._SelectedItem2 = value;
 					this.RaisePropertyChanged();
+					KanColleSettings.DisplayMaterial2.Value = value?.Key;
 				}
 			}
 		}
