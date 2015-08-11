@@ -126,6 +126,14 @@ namespace Grabacr07.KanColleViewer.Composition
 						Exception = ex.ToString(),
 					});
 				}
+				catch (FileLoadException ex)
+				{
+					this.failedPlugins.Add(new LoadFailedPluginData
+					{
+						FilePath = filepath,
+						Exception = ex.ToString(),
+					});
+				}
 			}
 
 			this.container = new CompositionContainer(catalog);
