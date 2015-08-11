@@ -6,23 +6,38 @@ using Grabacr07.KanColleWrapper.Models;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 {
+	public struct SlotItemCounterKey
+	{
+		public int Level { get; set; }
+		public int Adept { get; set; }
+		public SlotItemCounterKey(int level, int adept) : this()
+		{
+			this.Level = level;
+			this.Adept = adept;
+		}
+	}
+
 	public class SlotItemCounter
 	{
-		// Key:   装備レベル (★)
+		// Key:   装備レベル (★), 艦載機熟練度
 		// Value: レベル別の装備数カウンター
-		private readonly Dictionary<int, SlotItemCounterByLevel> itemsByLevel;
+		private readonly Dictionary<SlotItemCounterKey, SlotItemCounterByLevel> itemsByLevel;
 
 		public SlotItemInfo Target { get; private set; }
 
 		public IReadOnlyCollection<SlotItemCounterByLevel> Levels
 		{
-			get { return this.itemsByLevel.OrderBy(x => x.Key).Select(x => x.Value).ToList(); }
+			get
+			{
+				return this.itemsByLevel
+					.OrderBy(x => x.Key.Level)
+					.ThenBy(x => x.Key.Adept)
+					.Select(x => x.Value)
+					.ToList();
+			}
 		}
 
-		public int Count
-		{
-			get { return this.itemsByLevel.Sum(x => x.Value.Count); }
-		}
+		public int Count => this.itemsByLevel.Sum(x => x.Value.Count);
 
 
 		public SlotItemCounter(SlotItemInfo target, IEnumerable<SlotItem> items)
@@ -30,13 +45,16 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			this.Target = target;
 
 			this.itemsByLevel = items
-				.GroupBy(x => x.Level)
-				.ToDictionary(x => x.Key, x => new SlotItemCounterByLevel { Level = x.Key, Count = x.Count(), });
+				.GroupBy(x => new SlotItemCounterKey(x.Level, x.Adept))
+				.ToDictionary(
+					x => x.Key,
+					x => new SlotItemCounterByLevel { CounterKey = x.Key, Count = x.Count(), }
+				);
 		}
 
-		public void AddShip(Ship ship, int itemLevel)
+		public void AddShip(Ship ship, int itemLevel, int adept)
 		{
-			this.itemsByLevel[itemLevel].AddShip(ship);
+			this.itemsByLevel[new SlotItemCounterKey(itemLevel, adept)].AddShip(ship);
 		}
 	}
 
@@ -48,11 +66,17 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		private readonly Dictionary<int, SlotItemCounterByShip> itemsByShip;
 		private int count;
 
-		public int Level { get; set; }
+		public SlotItemCounterKey CounterKey { get; set; }
 
 		public IReadOnlyCollection<SlotItemCounterByShip> Ships
 		{
-			get { return this.itemsByShip.Values.OrderByDescending(x => x.Ship.Level).ThenBy(x => x.Ship.SortNumber).ToList(); }
+			get
+			{
+				return this.itemsByShip
+					.Values
+					.OrderByDescending(x => x.Ship.Level)
+					.ThenBy(x => x.Ship.SortNumber).ToList();
+			}
 		}
 
 		public int Count
