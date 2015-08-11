@@ -457,7 +457,19 @@
 											Property="Visibility"
 											Value="Visible" />
 								</DataTrigger>
-								<DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow|Evacuation}"
+								<DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow}"
+											 Value="True">
+									<Setter TargetName="HPText"
+											Property="Opacity"
+											Value=".2" />
+									<Setter TargetName="HPIndicator"
+											Property="Opacity"
+											Value=".2" />
+									<Setter TargetName="EvacuationIndicator"
+											Property="Visibility"
+											Value="Visible" />
+								</DataTrigger>
+								<DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Evacuation}"
 											 Value="True">
 									<Setter TargetName="HPText"
 											Property="Opacity"

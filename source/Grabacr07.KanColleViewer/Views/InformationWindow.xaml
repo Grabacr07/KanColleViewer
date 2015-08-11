@@ -19,7 +19,7 @@
 				   Title="{Binding Title}"
 				   Width="960"
 				   Height="659"
-				   Topmost="{Binding Settings.TopMost.Value}"
+				   Topmost="{Binding Settings.TopMost.Value, Mode=TwoWay}"
 				   WindowState="{Binding WindowState, Mode=OneWayToSource}"
 				   FontSize="12"
 				   Background="{DynamicResource ThemeBrushKey}"
@@ -54,7 +54,7 @@
 		</livet:InteractionMessageTrigger>
 		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
 										 MessageKey="Window.Transition">
-			<livet:TransitionInteractionMessageAction />
+			<livet:TransitionInteractionMessageAction InvokeActionOnlyWhenWindowIsActive="False" />
 		</livet:InteractionMessageTrigger>
 	</i:Interaction.Triggers>
 

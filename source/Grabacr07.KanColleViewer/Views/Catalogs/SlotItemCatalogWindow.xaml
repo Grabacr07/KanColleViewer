@@ -20,6 +20,7 @@
 				   xmlns:catalogs="clr-namespace:Grabacr07.KanColleViewer.Views.Catalogs"
 				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Catalogs"
 				   xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+				   xmlns:converters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters"
 				   x:Name="GlowMetroWindow"
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:SlotItemCatalogViewModel}"
@@ -168,6 +169,11 @@
 												BorderBrush="{DynamicResource BorderBrushKey}">
 											<TextBlock Text="改修" />
 										</Border>
+										<Border Width="52"
+												BorderThickness="0,0,1,0"
+												BorderBrush="{DynamicResource BorderBrushKey}">
+											<TextBlock Text="熟練度" />
+										</Border>
 										<Border Width="82"
 												BorderThickness="0,0,1,0"
 												BorderBrush="{DynamicResource BorderBrushKey}">
@@ -188,6 +194,9 @@
 													  Margin="0,0,0,-1">
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
+													<DataTemplate.Resources>
+														<converters:RangeToBooleanConverter x:Key="RangeToBooleanConverter"/>
+													</DataTemplate.Resources>
 													<Border BorderThickness="0,0,0,1"
 															BorderBrush="{DynamicResource BorderBrushKey}">
 														<DockPanel>
@@ -196,23 +205,50 @@
 																<TextBlock.Style>
 																	<Style TargetType="{x:Type TextBlock}">
 																		<Setter Property="Text"
-																				Value="{Binding Level, StringFormat=★+{0}}" />
+																				Value="{Binding CounterKey.Level, StringFormat=★+{0}}" />
 																		<Setter Property="Foreground"
 																				Value="#FF45A9A5" />
 																		<Setter Property="Opacity"
 																				Value="1.0" />
 																		<Style.Triggers>
-																			<DataTrigger Binding="{Binding Level}"
+																			<DataTrigger Binding="{Binding CounterKey.Level}"
 																						 Value="0">
 																				<Setter Property="Foreground"
 																						Value="{DynamicResource InactiveForegroundBrushKey}" />
 																				<Setter Property="Opacity"
 																						Value=".5" />
 																			</DataTrigger>
-																			<DataTrigger Binding="{Binding Level}"
+																			<DataTrigger Binding="{Binding CounterKey.Level}"
 																						 Value="10">
 																				<Setter Property="Text"
 																						Value="★max" />
+																			</DataTrigger>
+																		</Style.Triggers>
+																	</Style>
+																</TextBlock.Style>
+															</TextBlock>
+															<TextBlock Width="53"
+																	   Margin="0,4">
+																<TextBlock.Style>
+																	<Style TargetType="{x:Type TextBlock}">
+																		<Setter Property="Text"
+																				Value="{Binding CounterKey.Adept, StringFormat=+{0}}" />
+																		<Setter Property="Foreground"
+																				Value="#FFD49C0F" />
+																		<Setter Property="Opacity"
+																				Value="1.0" />
+																		<Style.Triggers>
+																			<DataTrigger Binding="{Binding CounterKey.Adept}"
+																						 Value="0">
+																				<Setter Property="Foreground"
+																						Value="{DynamicResource InactiveForegroundBrushKey}" />
+																				<Setter Property="Opacity"
+																						Value=".5" />
+																			</DataTrigger>
+																			<DataTrigger Binding="{Binding CounterKey.Adept, Converter={StaticResource RangeToBooleanConverter}, ConverterParameter=1-3}"
+																						 Value="True">
+																				<Setter Property="Foreground"
+																						Value="#FF98B3CE" />
 																			</DataTrigger>
 																		</Style.Triggers>
 																	</Style>

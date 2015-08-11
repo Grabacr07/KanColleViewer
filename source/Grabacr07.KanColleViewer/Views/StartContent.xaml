@@ -186,6 +186,7 @@
 								<Run Text="@Grabacr07" />
 							</metro2:HyperlinkEx>
 							<LineBreak />
+							<LineBreak />
 							<Run Text="Developer:" />
 							<metro2:HyperlinkEx Uri="https://twitter.com/Grabacr07">
 								<Run Text="@Grabacr07" />
@@ -193,7 +194,6 @@
 							<metro2:HyperlinkEx Uri="https://twitter.com/veigr">
 								<Run Text="@veigr" />
 							</metro2:HyperlinkEx>
-							<LineBreak />
 							<LineBreak />
 							<Run Text="Icon design:" />
 							<metro2:HyperlinkEx Uri="https://twitter.com/Nrtwd/">

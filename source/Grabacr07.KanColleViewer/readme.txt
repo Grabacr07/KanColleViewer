@@ -1,6 +1,6 @@
 ﻿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 提督業も忙しい！ (KanColleViewer)
-                                             version 3.8.2  2015/05/26
+                                             version 4.1  2015/08/12
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
@@ -89,6 +89,12 @@ Livet
 	・用途 : MVVM(Model/View/ViewModel)パターン用インフラストラクチャ
 	・ライセンス : zlib/libpng
 
+StatefulModel
+(http://ugaya40.hateblo.jp/entry/StatefulModel)
+
+	・用途 : M-V-Whatever の Model 向けインフラストラクチャ
+	・ライセンス : The MIT License (MIT)
+
 Nekoxy
 (https://github.com/veigr/Nekoxy)
 
@@ -160,6 +166,9 @@ Desktop Toast
 
 ■更新履歴
 
+2015/08/12 - version 4.1.0 リリース
+2015/08/11 - version 4.0.1 リリース
+2015/08/11 - version 4.0 リリース
 2015/05/26 - version 3.8.2 リリース
 2015/05/18 - version 3.8 リリース
 2015/05/03 - version 3.7 リリース
