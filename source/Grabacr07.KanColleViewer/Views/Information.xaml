@@ -19,8 +19,9 @@
 			 mc:Ignorable="d"
 			 d:DesignWidth="800"
 			 d:DesignHeight="400"
-			 d:DataContext="{d:DesignInstance vm:InformationViewModel}"
-			 Background="{DynamicResource ThemeBrushKey}">
+             d:DataContext="{d:DesignInstance vm:InformationViewModel}"
+             Topmost="{Binding Settings.TopMost.Value, Mode=TwoWay}"
+             Background="{DynamicResource ThemeBrushKey}">
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="Auto" />

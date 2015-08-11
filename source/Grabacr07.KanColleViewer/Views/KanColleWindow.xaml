@@ -49,7 +49,7 @@
 
 		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
 										 MessageKey="Window.Location">
-			<behaviors:SetWindowLocationAction />
+			<behaviors:SetWindowLocationAction InvokeActionOnlyWhenWindowIsActive="False" />
 		</livet:InteractionMessageTrigger>
 		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
 										 MessageKey="Window.WindowAction">
@@ -57,11 +57,13 @@
 		</livet:InteractionMessageTrigger>
 		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
 										 MessageKey="Window.Transition">
-			<livet:TransitionInteractionMessageAction IsOwned="False" />
+			<livet:TransitionInteractionMessageAction InvokeActionOnlyWhenWindowIsActive="False"
+													  IsOwned="False" />
 		</livet:InteractionMessageTrigger>
 		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
 										 MessageKey="Window.Transition.Child">
-			<livet:TransitionInteractionMessageAction IsOwned="True" />
+			<livet:TransitionInteractionMessageAction InvokeActionOnlyWhenWindowIsActive="False"
+													  IsOwned="True" />
 		</livet:InteractionMessageTrigger>
 	</i:Interaction.Triggers>
 

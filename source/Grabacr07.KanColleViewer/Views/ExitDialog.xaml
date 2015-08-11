@@ -30,7 +30,7 @@
 		</livet:InteractionMessageTrigger>
 		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
 										 MessageKey="Window.Transition">
-			<livet:TransitionInteractionMessageAction />
+			<livet:TransitionInteractionMessageAction InvokeActionOnlyWhenWindowIsActive="False" />
 		</livet:InteractionMessageTrigger>
 	</i:Interaction.Triggers>
 
