@@ -478,18 +478,18 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#endregion
 
-		#region E1_2 変更通知プロパティ
+		#region E1And2 変更通知プロパティ
 
-		private bool _E1_2 = true;
+		private bool _E1And2 = true;
 
-		public bool E1_2
+		public bool E1And2
 		{
-			get { return this._E1_2; }
+			get { return this._E1And2; }
 			set
 			{
-				if (this._E1_2 != value)
+				if (this._E1And2 != value)
 				{
-					this._E1_2 = value;
+					this._E1And2 = value;
 					this.RaisePropertyChanged();
 					this.Update();
 				}
@@ -498,18 +498,18 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#endregion
 
-		#region E3_6 変更通知プロパティ
+		#region E3And6 変更通知プロパティ
 
-		private bool _E3_6 = true;
+		private bool _E3And6 = true;
 
-		public bool E3_6
+		public bool E3And6
 		{
-			get { return this._E3_6; }
+			get { return this._E3And6; }
 			set
 			{
-				if (this._E3_6 != value)
+				if (this._E3And6 != value)
 				{
-					this._E3_6 = value;
+					this._E3And6 = value;
 					this.RaisePropertyChanged();
 					this.Update();
 				}
@@ -564,8 +564,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public override bool Predicate(Ship ship)
 		{
 			if (this.None && ship.SallyArea == 0) return true;
-			if (this.E1_2 && ship.SallyArea == 1) return true;
-			if (this.E3_6 && ship.SallyArea == 2) return true;
+			if (this.E1And2 && ship.SallyArea == 1) return true;
+			if (this.E3And6 && ship.SallyArea == 2) return true;
 			if (this.E4 && ship.SallyArea == 3) return true;
 			if (this.E5 && ship.SallyArea == 4) return true;
 

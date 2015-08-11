@@ -400,10 +400,10 @@
 									  IsChecked="{Binding None}"
 									  Margin="10,0" />
 							<CheckBox Content="初動作戦参加済み"
-									  IsChecked="{Binding E1_2}"
+									  IsChecked="{Binding E1And2}"
 									  Margin="10,0" />
 							<CheckBox Content="機動部隊参加済み"
-									  IsChecked="{Binding E3_6}"
+									  IsChecked="{Binding E3And6}"
 									  Margin="10,0" />
 							<CheckBox Content="挺身部隊参加済み"
 									  IsChecked="{Binding E4}"
