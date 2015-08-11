@@ -386,7 +386,7 @@
 						</WrapPanel>
 					</Border>
 
-					<!--<Border BorderThickness="1"
+					<Border BorderThickness="1"
 							BorderBrush="{DynamicResource BorderBrushKey}"
 							Margin="0,8,0,0"
 							Padding="5">
@@ -399,14 +399,20 @@
 							<CheckBox Content="作戦出撃なし"
 									  IsChecked="{Binding None}"
 									  Margin="10,0" />
-							<CheckBox Content="AL 作戦参加済み"
-									  IsChecked="{Binding Aleutian}"
+							<CheckBox Content="初動作戦参加済み"
+									  IsChecked="{Binding E1And2}"
 									  Margin="10,0" />
-							<CheckBox Content="MI 作戦参加済み"
-									  IsChecked="{Binding Midway}"
+							<CheckBox Content="機動部隊参加済み"
+									  IsChecked="{Binding E3And6}"
+									  Margin="10,0" />
+							<CheckBox Content="挺身部隊参加済み"
+									  IsChecked="{Binding E4}"
+									  Margin="10,0" />
+							<CheckBox Content="西部方面参加済み"
+									  IsChecked="{Binding E5}"
 									  Margin="10,0" />
 						</WrapPanel>
-					</Border>-->
+					</Border>
 				</StackPanel>
 			</Expander>
 
@@ -763,7 +769,7 @@
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
 
-							<!--<GridViewColumn Width="65">
+							<GridViewColumn Width="65">
 								<GridViewColumn.Header>
 									<TextBlock Text="出撃海域" />
 								</GridViewColumn.Header>
@@ -781,24 +787,42 @@
 														 Value="1">
 												<Setter TargetName="Text"
 														Property="Text"
-														Value="AL 作戦" />
+														Value="初動作戦" />
 												<Setter TargetName="Border"
 														Property="Background"
-														Value="#FF204080" />
+														Value="#FF3C677F" />
 											</DataTrigger>
 											<DataTrigger Binding="{Binding Ship.SallyArea}"
 														 Value="2">
 												<Setter TargetName="Text"
 														Property="Text"
-														Value="MI 作戦" />
+														Value="機動部隊" />
 												<Setter TargetName="Border"
 														Property="Background"
-														Value="#FF804020" />
+														Value="#FF3B662A" />
+											</DataTrigger>
+											<DataTrigger Binding="{Binding Ship.SallyArea}"
+														 Value="3">
+												<Setter TargetName="Text"
+														Property="Text"
+														Value="挺身部隊" />
+												<Setter TargetName="Border"
+														Property="Background"
+														Value="#FF839842" />
+											</DataTrigger>
+											<DataTrigger Binding="{Binding Ship.SallyArea}"
+														 Value="4">
+												<Setter TargetName="Text"
+														Property="Text"
+														Value="西部方面" />
+												<Setter TargetName="Border"
+														Property="Background"
+														Value="#FF906736" />
 											</DataTrigger>
 										</DataTemplate.Triggers>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
-							</GridViewColumn>-->
+							</GridViewColumn>
 
 							<GridViewColumn Width="140">
 								<GridViewColumn.Header>

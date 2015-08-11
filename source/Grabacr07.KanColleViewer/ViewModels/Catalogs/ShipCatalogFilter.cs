@@ -478,18 +478,18 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#endregion
 
-		#region Aleutian 変更通知プロパティ
+		#region E1And2 変更通知プロパティ
 
-		private bool _Aleutian = true;
+		private bool _E1And2 = true;
 
-		public bool Aleutian
+		public bool E1And2
 		{
-			get { return this._Aleutian; }
+			get { return this._E1And2; }
 			set
 			{
-				if (this._Aleutian != value)
+				if (this._E1And2 != value)
 				{
-					this._Aleutian = value;
+					this._E1And2 = value;
 					this.RaisePropertyChanged();
 					this.Update();
 				}
@@ -498,18 +498,58 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#endregion
 
-		#region Midway 変更通知プロパティ
+		#region E3And6 変更通知プロパティ
 
-		private bool _Midway = true;
+		private bool _E3And6 = true;
 
-		public bool Midway
+		public bool E3And6
 		{
-			get { return this._Midway; }
+			get { return this._E3And6; }
 			set
 			{
-				if (this._Midway != value)
+				if (this._E3And6 != value)
 				{
-					this._Midway = value;
+					this._E3And6 = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+
+		#region E4 変更通知プロパティ
+
+		private bool _E4 = true;
+
+		public bool E4
+		{
+			get { return this._E4; }
+			set
+			{
+				if (this._E4 != value)
+				{
+					this._E4 = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+
+		#region E5 変更通知プロパティ
+
+		private bool _E5 = true;
+
+		public bool E5
+		{
+			get { return this._E5; }
+			set
+			{
+				if (this._E5 != value)
+				{
+					this._E5 = value;
 					this.RaisePropertyChanged();
 					this.Update();
 				}
@@ -523,13 +563,13 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		public override bool Predicate(Ship ship)
 		{
-			//if (this.None && ship.SallyArea == 0) return true;
-			//if (this.Aleutian && ship.SallyArea == 1) return true;
-			//if (this.Midway && ship.SallyArea == 2) return true;
+			if (this.None && ship.SallyArea == 0) return true;
+			if (this.E1And2 && ship.SallyArea == 1) return true;
+			if (this.E3And6 && ship.SallyArea == 2) return true;
+			if (this.E4 && ship.SallyArea == 3) return true;
+			if (this.E5 && ship.SallyArea == 4) return true;
 
-			//return false;
-
-			return true;
+			return false;
 		}
 	}
 }
