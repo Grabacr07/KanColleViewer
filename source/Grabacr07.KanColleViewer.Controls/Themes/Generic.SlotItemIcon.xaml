@@ -672,6 +672,63 @@
 					</Setter.Value>
 				</Setter>
 			</Trigger>
+			<Trigger Property="Type"
+					 Value="CombatRations">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Width="50.4377" Height="41.3333" HorizontalAlignment="Center" VerticalAlignment="Bottom" Stretch="Fill" StrokeThickness="1.33333" StrokeLineJoin="Round" Stroke="#606060" Fill="#FFFFFFFF" Data="M 8.07964,41C 1.97201,41 -0.340562,36.7825 2.93952,31.6443L 20.0353,4.85508C 23.3154,-0.283161 28.6832,-0.285927 31.9647,4.85231L 49.0605,31.6457C 52.3405,36.7853 50.028,41 43.9203,41L 8.07964,41 Z "/>
+									<Rectangle Width="21.3333" Height="15.3333" HorizontalAlignment="Center" VerticalAlignment="Bottom" Stretch="Fill" StrokeThickness="1.33333" StrokeLineJoin="Round" Stroke="#606060" Fill="#606060"/>
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="OffshoreResupply">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Ellipse Fill="#FF63C7A0"
+											 HorizontalAlignment="Left"
+											 Height="70"
+											 VerticalAlignment="Top"
+											 Width="241.002" />
+									<Path Data="M686,1031 L686.01612,1107.5798 C714.90659,1147.3637 893.2341,1151.3216 926.84511,1107.3545 L926.91994,1030.6062 C898.90781,1071.3939 714.92213,1070.4292 686,1031 z"
+										  Fill="#FF63C7A0"
+										  HorizontalAlignment="Left"
+										  Height="108.289"
+										  Margin="0,42.349,0,0"
+										  Stretch="Fill"
+										  VerticalAlignment="Top"
+										  Width="240.92" />
+									<Path Data="M686,1031 L686.01612,1107.5798 C714.90659,1147.3637 893.2341,1151.3216 926.84511,1107.3545 L926.91994,1030.6062 C898.90781,1071.3939 714.92213,1070.4292 686,1031 z"
+										  Fill="#FF63C7A0"
+										  HorizontalAlignment="Left"
+										  Height="108.289"
+										  Margin="0,122.442,0,0"
+										  Stretch="Fill"
+										  VerticalAlignment="Top"
+										  Width="240.92" />
+									<Path Data="M686,1031 L686.01612,1138.8062 C714.90659,1178.5901 893.2341,1182.548 926.84511,1138.5809 L926.91994,1030.6062 C898.90781,1071.3939 714.92213,1070.4292 686,1031 z"
+										  Fill="#FF63C7A0"
+										  HorizontalAlignment="Left"
+										  Height="139.517"
+										  Margin="0,203.535,0,0"
+										  Stretch="Fill"
+										  VerticalAlignment="Top"
+										  Width="240.92" />
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
 		</Style.Triggers>
 	</Style>
 

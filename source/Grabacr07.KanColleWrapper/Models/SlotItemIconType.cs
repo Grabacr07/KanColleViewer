@@ -174,5 +174,15 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 大型飛行艇。
 		/// </summary>
 		FlyingBoat = 33,
+
+		/// <summary>
+		/// 戦闘糧食。
+		/// </summary>
+		CombatRations = 34,
+
+		/// <summary>
+		/// 洋上補給。
+		/// </summary>
+		OffshoreResupply = 35,
 	}
 }
