@@ -58,20 +58,19 @@
 			</TextBlock>
 		</StackPanel>
 
+
 		<StackPanel Grid.Column="1"
 					Orientation="Horizontal"
 					VerticalAlignment="Center">
 			<UniformGrid Columns="1"
-						 MinWidth="150"
 						 Grid.IsSharedSizeScope="True">
 				<Panel.Resources>
 					<DataTemplate DataType="{x:Type contentsVm:MaterialsViewModel+MaterialViewModel}">
-						<Grid>
+						<Grid MinWidth="125"
+							  Margin="0,0,4,0">
 							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto"
-												  SharedSizeGroup="MaterialName" />
-								<ColumnDefinition Width="Auto"
-												  SharedSizeGroup="MaterialValue" />
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="*"/>
 							</Grid.ColumnDefinitions>
 							<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
 									   VerticalAlignment="Bottom">
@@ -82,7 +81,7 @@
 									   Text="{Binding Value, Mode=OneWay}"
 									   Style="{DynamicResource EmphaticTextStyleKey}"
 									   HorizontalAlignment="Right"
-									   VerticalAlignment="Bottom" />
+									   VerticalAlignment="Bottom"/>
 						</Grid>
 					</DataTemplate>
 				</Panel.Resources>
