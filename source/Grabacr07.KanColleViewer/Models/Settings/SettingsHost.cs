@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using System.Windows;
 using MetroTrilithon.Serialization;
 
 namespace Grabacr07.KanColleViewer.Models.Settings
@@ -38,6 +39,8 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		}
 
 
+		#region Load / Save
+
 		public static void Load()
 		{
 #pragma warning disable 612
@@ -46,15 +49,67 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 			Migration._Settings.Load();
 #pragma warning restore 612
 
-			Providers.Local.Load();
-			Providers.Roaming.Load();
+			#region const message
+
+			const string message = @"設定ファイル ({0}) の読み込みに失敗しました。このファイルを削除することで解決する可能性があります。
+
+エラーの詳細: {1}";
+
+			#endregion
+
+			try
+			{
+				Providers.Local.Load();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(string.Format(message, Providers.LocalFilePath, ex.Message), "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+				throw;
+			}
+
+			try
+			{
+				Providers.Roaming.Load();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(string.Format(message, Providers.RoamingFilePath, ex.Message), "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+				throw;
+			}
 		}
 
 		public static void Save()
 		{
-			Providers.Local.Save();
-			Providers.Roaming.Save();
+			#region const message
+
+			const string message = @"設定ファイル ({0}) の保存に失敗しました。
+
+エラーの詳細: {1}";
+
+			#endregion
+
+			try
+			{
+				Providers.Local.Save();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(string.Format(message, Providers.LocalFilePath, ex.Message), "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+				throw;
+			}
+
+			try
+			{
+				Providers.Roaming.Save();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(string.Format(message, Providers.RoamingFilePath, ex.Message), "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+				throw;
+			}
 		}
+
+		#endregion
 
 		/// <summary>
 		/// <typeparamref name="T"/> 型の設定オブジェクトの唯一のインスタンスを取得します。
