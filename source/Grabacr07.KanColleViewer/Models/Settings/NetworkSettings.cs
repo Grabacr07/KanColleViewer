@@ -21,13 +21,23 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 			public static SerializableProperty<ushort> Port { get; }
 				= new SerializableProperty<ushort>(GetKey(), Providers.Local, 80);
 
-			#region IProxySettings members
+            public static SerializableProperty<bool> SendDb { get; }
+                = new SerializableProperty<bool>(GetKey(), Providers.Local, false);
 
-			ProxyType IProxySettings.Type => Type.Value;
+            public static SerializableProperty<string> DbAccessKey { get; }
+                = new SerializableProperty<string>(GetKey(), Providers.Local, null);
+
+            #region IProxySettings members
+
+            ProxyType IProxySettings.Type => Type.Value;
 
 			string IProxySettings.Host => Host.Value;
 
 			ushort IProxySettings.Port => Port.Value;
+
+            bool IProxySettings.SendDb => SendDb.Value;
+
+            string IProxySettings.DbAccessKey => DbAccessKey.Value;
 
 			#endregion
 
@@ -52,5 +62,6 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 				return nameof(NetworkSettings) + "." + nameof(LocalProxy) + "." + propertyName;
 			}
 		}
-	}
+
+    }
 }

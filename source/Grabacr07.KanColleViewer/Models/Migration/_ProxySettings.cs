@@ -80,6 +80,10 @@ namespace Grabacr07.KanColleViewer.Models.Migration
 			}
 		}
 
-		#endregion
+        #endregion
+
+        public bool SendDb { get; set; }
+
+        public string DbAccessKey { get; set; }
 	}
 }

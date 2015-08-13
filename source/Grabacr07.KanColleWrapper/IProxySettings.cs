@@ -12,5 +12,9 @@ namespace Grabacr07.KanColleWrapper
 		string Host { get; }
 
 		ushort Port { get; }
+
+        bool SendDb { get; }
+
+        string DbAccessKey { get; }
 	}
 }

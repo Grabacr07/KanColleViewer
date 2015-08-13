@@ -72,6 +72,9 @@ namespace Grabacr07.KanColleViewer.Models.Migration
 				NetworkSettings.Proxy.Port.Value = Current.ProxySettings.Port;
 			}
 
+            NetworkSettings.Proxy.SendDb.Value = Current.SendDb;
+            NetworkSettings.Proxy.DbAccessKey.Value = Current.DbAccessKey;
+
 			try
 			{
 				File.Delete(filePath);
@@ -113,8 +116,12 @@ namespace Grabacr07.KanColleViewer.Models.Migration
 
 		public bool IsProxyMode { get; set; }
 
+        public bool SendDb { get; set; }
+
+        public string DbAccessKey { get; set; }
+
 #pragma warning disable 612
-		public _KanColleClientSettings KanColleClientSettings { get; set; }
+        public _KanColleClientSettings KanColleClientSettings { get; set; }
 #pragma warning restore 612
 
 	}

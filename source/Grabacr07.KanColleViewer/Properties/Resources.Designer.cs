@@ -754,6 +754,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   アクセスキー に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Settings_AccessKey {
+            get {
+                return ResourceManager.GetString("Settings_AccessKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   ブラウザー操作 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Settings_BrowserControl {

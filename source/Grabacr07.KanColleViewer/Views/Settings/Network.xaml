@@ -11,7 +11,7 @@
 			 xmlns:vms="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Settings"
 			 mc:Ignorable="d"
 			 d:DesignWidth="500"
-			 d:DesignHeight="400"
+			 d:DesignHeight="600"
 			 d:DataContext="{d:DesignInstance vms:SettingsViewModel}">
 	<UserControl.Resources>
 		<ResourceDictionary>
@@ -144,9 +144,38 @@
 		</StackPanel>
 
 
-		<Rectangle Height="1"
+        <Rectangle Height="1"
+				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+
+        <TextBlock Text="艦これ統計データベースへの送信設定"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
+				   Margin="0,10,0,8" />
+
+        <CheckBox Content="艦これ統計データベースへデータを送信する"
+				  IsChecked="{Binding Source={x:Static ms:NetworkSettings+Proxy.SendDb}, Path=Value}"
+				  Margin="20,10,0,0" />
+        <StackPanel IsEnabled="{Binding Source={x:Static ms:NetworkSettings+Proxy.SendDb}, Path=Value}"
+					Margin="40,6,0,6">
+            <Grid Margin="0,4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="300" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0">
+					<Run Text="{Binding Resources.Settings_AccessKey, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+                </TextBlock>
+                <metro:PromptTextBox Grid.Column="1"
+									 Text="{Binding Source={x:Static ms:NetworkSettings+Proxy.DbAccessKey}, Path=Value, Mode=TwoWay}"
+									 Prompt="{Binding Resources.Settings_AccessKey, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+
+            </Grid>
+        </StackPanel>
+
+        <Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}"
 				   Margin="0,0,0,10" />
 
-	</StackPanel>
+    </StackPanel>
 </UserControl>
