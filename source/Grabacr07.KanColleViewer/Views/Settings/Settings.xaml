@@ -5,12 +5,12 @@
 			 xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mti="http://schemes.grabacr.net/winfx/2015/personal/interactivity"
 			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
 			 xmlns:ms="clr-namespace:Grabacr07.KanColleViewer.Models.Settings"
 			 xmlns:mvs="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Settings"
-			 xmlns:behaviors="http://schemes.grabacr.net/winfx/2015/personal/behaviors"
 			 mc:Ignorable="d"
 			 d:DesignWidth="700"
 			 d:DesignHeight="400"
@@ -38,7 +38,7 @@
 	<ScrollViewer VerticalScrollBarVisibility="Auto"
 				  PanningMode="Both">
 		<i:Interaction.Behaviors>
-			<behaviors:ScrollBarThresholdBehavior Horizontal="600.0" />
+			<mti:ScrollBarThresholdBehavior Horizontal="600.0" />
 		</i:Interaction.Behaviors>
 		<TabControl Style="{DynamicResource VerticalTabControlStyleKey}">
 			<TabItem Visibility="{Binding Source={x:Static ms:GeneralSettings.IsProxyMode}, Path=Value, Converter={StaticResource UniversalBooleanToVisibilityConverter}, ConverterParameter=Colappsed:Visible}">
