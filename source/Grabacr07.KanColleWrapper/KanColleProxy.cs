@@ -101,6 +101,9 @@ namespace Grabacr07.KanColleWrapper
                         "api_req_combined_battle/airbattle",
                         "api_req_combined_battle/midnight_battle",
                         "api_req_combined_battle/battleresult",
+                        "api_req_sortie/airbattle",
+                        "api_req_combined_battle/battle_water",
+                        "api_req_combined_battle/sp_midnight",
                     };
                     foreach (var url in urls)
                     {
