@@ -63,8 +63,11 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(string.Format(message, Providers.LocalFilePath, ex.Message), "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
-				throw;
+				// 発生頻度が多いっぽいので、いったん例外スローするのやめる
+				System.Diagnostics.Debug.WriteLine(ex);
+
+				//MessageBox.Show(string.Format(message, Providers.LocalFilePath, ex.Message), "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+				//throw;
 			}
 
 			try
@@ -73,8 +76,11 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(string.Format(message, Providers.RoamingFilePath, ex.Message), "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
-				throw;
+				// 発生頻度が多いっぽいので、いったん例外スローするのやめる
+				System.Diagnostics.Debug.WriteLine(ex);
+
+				//MessageBox.Show(string.Format(message, Providers.RoamingFilePath, ex.Message), "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+				//throw;
 			}
 		}
 
