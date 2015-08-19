@@ -538,18 +538,18 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#endregion
 
-		#region ForuthMap 変更通知プロパティ
+		#region FourthMap 変更通知プロパティ
 
-		private bool _ForuthMap = true;
+		private bool _FourthMap = true;
 
-		public bool ForuthMap
+		public bool FourthMap
 		{
-			get { return this._ForuthMap; }
+			get { return this._FourthMap; }
 			set
 			{
-				if (this._ForuthMap != value)
+				if (this._FourthMap != value)
 				{
-					this._ForuthMap = value;
+					this._FourthMap = value;
 					this.RaisePropertyChanged();
 					this.Update();
 				}
@@ -587,7 +587,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			if (this.FirstMap && ship.SallyArea == 1) return true;
 			if (this.SecondMap && ship.SallyArea == 2) return true;
 			if (this.ThirdMap && ship.SallyArea == 3) return true;
-			if (this.ForuthMap && ship.SallyArea == 4) return true;
+			if (this.FourthMap && ship.SallyArea == 4) return true;
 			if (this.FifthMap && ship.SallyArea == 5) return true;
 
 			return false;
