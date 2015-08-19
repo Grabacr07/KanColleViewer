@@ -11,6 +11,7 @@ namespace Grabacr07.KanColleWrapper
 {
 	public class Itemyard : Notifier
 	{
+		private readonly Homeport homeport;
 
 		/// <summary>
 		/// <see cref="SlotItems"/> の装備数を取得します。
@@ -64,8 +65,10 @@ namespace Grabacr07.KanColleWrapper
 		#endregion
 
 
-		internal Itemyard(KanColleProxy proxy)
+		internal Itemyard(Homeport parent, KanColleProxy proxy)
 		{
+			this.homeport = parent;
+
 			this.SlotItems = new MemberTable<SlotItem>();
 			this.UseItems = new MemberTable<UseItem>();
 
@@ -87,6 +90,7 @@ namespace Grabacr07.KanColleWrapper
 		internal void Update(kcsapi_slotitem[] source)
 		{
 			this.SlotItems = new MemberTable<SlotItem>(source.Select(x => new SlotItem(x)));
+			foreach(var ship in this.homeport.Organization.Ships.Values) ship.UpdateSlots();
 		}
 
 		internal void Update(kcsapi_useitem[] source)
