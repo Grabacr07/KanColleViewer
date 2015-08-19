@@ -411,6 +411,12 @@
 								<CheckBox Content="3분류"
 									      IsChecked="{Binding ThirdMap}"
 									      Margin="10,0" />
+								<CheckBox Content="4분류"
+									      IsChecked="{Binding FourthMap}"
+									      Margin="10,0" />
+								<CheckBox Content="5분류"
+									      IsChecked="{Binding FifthMap}"
+									      Margin="10,0" />
 							</WrapPanel>
 							<WrapPanel Grid.Column="1"  DataContext="{Binding ShipFleetFilter}">
 								<TextBlock Margin="0,2">
@@ -914,6 +920,24 @@
 												<Setter TargetName="Text"
 														Property="Foreground"
 														Value="#FF8B8B8B" />
+											</DataTrigger>
+											<DataTrigger Binding="{Binding Ship.SallyArea}"
+														 Value="3">
+												<Setter TargetName="Text"
+														Property="Text"
+														Value="4분류" />
+												<Setter TargetName="Border"
+														Property="Background"
+														Value="#FF40A013" />
+											</DataTrigger>
+											<DataTrigger Binding="{Binding Ship.SallyArea}"
+														 Value="3">
+												<Setter TargetName="Text"
+														Property="Text"
+														Value="5분류" />
+												<Setter TargetName="Border"
+														Property="Background"
+														Value="#FF7818D8" />
 											</DataTrigger>
 										</DataTemplate.Triggers>
 									</DataTemplate>

@@ -538,6 +538,46 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#endregion
 
+		#region ForuthMap 変更通知プロパティ
+
+		private bool _ForuthMap = true;
+
+		public bool ForuthMap
+		{
+			get { return this._ForuthMap; }
+			set
+			{
+				if (this._ForuthMap != value)
+				{
+					this._ForuthMap = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+
+		#region FifthMap 変更通知プロパティ
+
+		private bool _FifthMap = true;
+
+		public bool FifthMap
+		{
+			get { return this._FifthMap; }
+			set
+			{
+				if (this._FifthMap != value)
+				{
+					this._FifthMap = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+
 
 		public ShipSallyAreaFilter(Action updateAction) : base(updateAction) { }
 
@@ -547,6 +587,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			if (this.FirstMap && ship.SallyArea == 1) return true;
 			if (this.SecondMap && ship.SallyArea == 2) return true;
 			if (this.ThirdMap && ship.SallyArea == 3) return true;
+			if (this.ForuthMap && ship.SallyArea == 4) return true;
+			if (this.FifthMap && ship.SallyArea == 5) return true;
 
 			return false;
 
