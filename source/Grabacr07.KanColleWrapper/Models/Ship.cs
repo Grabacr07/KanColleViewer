@@ -352,15 +352,6 @@ namespace Grabacr07.KanColleWrapper.Models
 			}
 
 			this.UpdateSlots();
-
-			if (this.EquippedItems.Any(x => x.Item.Info.Type == SlotItemType.応急修理要員))
-			{
-				this.Situation |= ShipSituation.DamageControlled;
-			}
-			else
-			{
-				this.Situation &= ~ShipSituation.DamageControlled;
-			}
 		}
 
 		public void UpdateSlots()
@@ -371,6 +362,15 @@ namespace Grabacr07.KanColleWrapper.Models
 				.ToArray();
 			this.ExSlot = new ShipSlot(this.homeport.Itemyard.SlotItems[this.RawData.api_slot_ex], 0, 0);
 			this.EquippedItems = this.EnumerateAllEquippedItems().ToArray();
+
+			if (this.EquippedItems.Any(x => x.Item.Info.Type == SlotItemType.応急修理要員))
+			{
+				this.Situation |= ShipSituation.DamageControlled;
+			}
+			else
+			{
+				this.Situation &= ~ShipSituation.DamageControlled;
+			}
 		}
 
 
