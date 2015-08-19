@@ -204,7 +204,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 艦隊の平均レベルや制空戦力などの各種数値を再計算します。
 		/// </summary>
-		internal void Calculate()
+		public void Calculate()
 		{
 			var ships = this.source.SelectMany(x => x.Ships).WithoutEvacuated().ToArray();
 
@@ -224,7 +224,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.Calculated?.Invoke(this, new EventArgs());
 		}
 
-		internal void Update()
+		public void Update()
 		{
 			var state = FleetSituation.Empty;
 			var ready = true;

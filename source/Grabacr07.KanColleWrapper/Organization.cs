@@ -201,6 +201,12 @@ namespace Grabacr07.KanColleWrapper
 					foreach (var id in this.evacuatedShipsIds) this.Ships[id].Situation |= ShipSituation.Evacuation;
 					foreach (var id in this.towShipIds) this.Ships[id].Situation |= ShipSituation.Tow;
 				}
+
+				foreach (var fleet in this.Fleets.Values)
+				{
+					fleet.State.Update();
+					fleet.State.Calculate();
+				}
 			}
 		}
 
