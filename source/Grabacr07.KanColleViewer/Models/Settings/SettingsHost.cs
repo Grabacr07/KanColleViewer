@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -38,7 +39,6 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 			return property;
 		}
 
-
 		#region Load / Save
 
 		public static void Load()
@@ -48,39 +48,25 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 			// (ただし、1 度読んだら新しい方に移行するので保存はしない
 			Migration._Settings.Load();
 #pragma warning restore 612
-
-			#region const message
-
-			const string message = @"設定ファイル ({0}) の読み込みに失敗しました。このファイルを削除することで解決する可能性があります。
-
-エラーの詳細: {1}";
-
-			#endregion
-
+			
 			try
 			{
 				Providers.Local.Load();
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
-				// 発生頻度が多いっぽいので、いったん例外スローするのやめる
-				System.Diagnostics.Debug.WriteLine(ex);
-
-				//MessageBox.Show(string.Format(message, Providers.LocalFilePath, ex.Message), "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
-				//throw;
+				File.Delete(Providers.LocalFilePath);
+				Providers.Local.Load();
 			}
 
 			try
 			{
 				Providers.Roaming.Load();
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
-				// 発生頻度が多いっぽいので、いったん例外スローするのやめる
-				System.Diagnostics.Debug.WriteLine(ex);
-
-				//MessageBox.Show(string.Format(message, Providers.RoamingFilePath, ex.Message), "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
-				//throw;
+				File.Delete(Providers.RoamingFilePath);
+				Providers.Roaming.Load();
 			}
 		}
 
