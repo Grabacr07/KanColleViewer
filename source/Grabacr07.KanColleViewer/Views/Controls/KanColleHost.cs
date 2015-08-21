@@ -161,7 +161,8 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			catch (Exception ex)
 			{
 				Debug.WriteLine(ex);
-				StatusService.Current.Notify(string.Format(Properties.Resources.ZoomAction_ZoomFailed, ex.Message));
+				if(Application.Instance.State != ApplicationState.Startup)
+					StatusService.Current.Notify(string.Format(Properties.Resources.ZoomAction_ZoomFailed, ex.Message));
 			}
 		}
 
