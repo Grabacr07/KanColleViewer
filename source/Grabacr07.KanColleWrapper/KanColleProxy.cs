@@ -84,7 +84,7 @@ namespace Grabacr07.KanColleWrapper
 
 			//プロキシを使用しない場合、HTTPだけNekoxyを通し、後は直アクセス
 			if (!isSetIEProxySettings)
-				WinInetUtil.SetProxyInProcess("http=localhost:" + proxy, "local");
+				WinInetUtil.SetProxyInProcess("http=127.0.0.1:" + proxy, "local");
 
 			this.compositeDisposable.Add(this.connectableSessionSource.Connect());
 			this.compositeDisposable.Add(this.apiSource.Connect());
