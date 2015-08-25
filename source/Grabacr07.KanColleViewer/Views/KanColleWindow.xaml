@@ -27,6 +27,7 @@
 				   WindowState="{Binding WindowState, Mode=OneWayToSource}"
 				   Background="{DynamicResource ThemeBrushKey}"
 				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+				   FontFamily="{DynamicResource DefaultFontFamilyKey}"
 				   IsRestoringWindowPlacement="True"
 				   SnapsToDevicePixels="True"
 				   TextOptions.TextFormattingMode="Display"

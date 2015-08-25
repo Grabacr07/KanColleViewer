@@ -31,6 +31,7 @@
 				   Topmost="{Binding Settings.TopMost.Value}"
 				   Background="{DynamicResource ThemeBrushKey}"
 				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+				   FontFamily="{DynamicResource DefaultFontFamilyKey}"
 				   IsRestoringWindowPlacement="True"
 				   UseLayoutRounding="True"
 				   TextOptions.TextFormattingMode="Display">
@@ -195,7 +196,7 @@
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
 													<DataTemplate.Resources>
-														<converters:RangeToBooleanConverter x:Key="RangeToBooleanConverter"/>
+														<converters:RangeToBooleanConverter x:Key="RangeToBooleanConverter" />
 													</DataTemplate.Resources>
 													<Border BorderThickness="0,0,0,1"
 															BorderBrush="{DynamicResource BorderBrushKey}">
