@@ -465,4 +465,25 @@
   <data name="MessageBar_ReSortie_Wounded" xml:space="preserve">
     <value>中破以上の艦娘</value>
   </data>
+  <data name="BrowserNavigator_Back" xml:space="preserve">
+    <value>前のページに戻る</value>
+  </data>
+  <data name="BrowserNavigator_Forward" xml:space="preserve">
+    <value>次のページに進む</value>
+  </data>
+  <data name="BrowserNavigator_Reload" xml:space="preserve">
+    <value>次のページに進む</value>
+  </data>
+  <data name="BrowserNavigator_URLPrompt" xml:space="preserve">
+    <value>URL を入力し、Enter キーで移動します。</value>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="Common_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="ExitDialog_ConfirmationText" xml:space="preserve">
+    <value>「提督業も忙しい！」 を終了します。よろしいですか？</value>
+  </data>
 </root>

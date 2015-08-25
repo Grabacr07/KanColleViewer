@@ -12,6 +12,7 @@
 				   xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
 				   xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
 				   xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
+				   xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 				   xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 				   xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
@@ -45,7 +46,7 @@
 				<kcvc:AppIcon Width="40"
 							  Background="Transparent" />
 
-				<TextBlock Text="「提督業も忙しい！」 を終了します。よろしいですか？"
+                <TextBlock Text="{Binding Resources.ExitDialog_ConfirmationText, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 						   FontSize="14"
 						   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 						   Margin="12,0,0,0"
@@ -62,13 +63,13 @@
 		<WrapPanel Grid.Row="1"
 				   HorizontalAlignment="Right"
 				   Margin="6,-6,6,6">
-			<metro2:CallMethodButton Content="OK"
+            <metro2:CallMethodButton Content="{Binding Resources.Common_OK, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 MethodName="OK"
 									 IsDefault="True"
 									 MinWidth="110"
 									 Padding="30,6"
 									 Margin="6" />
-			<metro2:CallMethodButton Content="キャンセル"
+            <metro2:CallMethodButton Content="{Binding Resources.Common_Cancel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 MethodName="Cancel"
 									 IsCancel="True"
 									 MinWidth="110"
