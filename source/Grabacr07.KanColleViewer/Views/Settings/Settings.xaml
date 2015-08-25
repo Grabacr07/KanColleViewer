@@ -79,7 +79,8 @@
 					<TextBlock Text="{Binding Resources.Settings_Network, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 							   Style="{StaticResource TabHeaderTextStyleKey}" />
 				</TabItem.Header>
-				<settings:Network Margin="10,0" />
+				<settings:Network Margin="10,0"
+								  DataContext="{Binding NetworkSettings}"/>
 			</TabItem>
 
 			<TabItem>
