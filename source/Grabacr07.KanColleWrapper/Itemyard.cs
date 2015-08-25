@@ -102,7 +102,7 @@ namespace Grabacr07.KanColleWrapper
 		{
 			if (source.api_slotitem == null) return; // まるゆ
 
-			foreach (var x in source.api_slotitem.DefaultIfEmpty().Select(x => new SlotItem(x)))
+			foreach (var x in source.api_slotitem.Select(x => new SlotItem(x)))
 			{
 				this.SlotItems.Add(x);
 			}
