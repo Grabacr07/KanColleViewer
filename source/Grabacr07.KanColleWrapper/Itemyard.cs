@@ -100,7 +100,9 @@ namespace Grabacr07.KanColleWrapper
 
 		internal void AddFromDock(kcsapi_kdock_getship source)
 		{
-			foreach (var x in source.api_slotitem.Select(x => new SlotItem(x)))
+			if (source.api_slotitem == null) return; // まるゆ
+
+			foreach (var x in source.api_slotitem.DefaultIfEmpty().Select(x => new SlotItem(x)))
 			{
 				this.SlotItems.Add(x);
 			}
