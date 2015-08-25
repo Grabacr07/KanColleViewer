@@ -501,8 +501,7 @@
 							<Border BorderThickness="0,1,1,1"
 									BorderBrush="{DynamicResource ActiveBorderBrushKey}"
 									Background="{TemplateBinding Background}">
-								<UniformGrid IsItemsHost="True"
-											 Columns="1" />
+								<StackPanel IsItemsHost="True" />
 							</Border>
 						</ControlTemplate>
 					</ListBox.Template>

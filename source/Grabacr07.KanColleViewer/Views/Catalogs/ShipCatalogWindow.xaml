@@ -867,9 +867,12 @@
 												<Rectangle Width="1"
 														   Style="{DynamicResource SeparatorRectangleStyleKey}"
 														   Margin="12,1,0,1" />
-												<Viewbox Margin="4,1">
-													<kcvc:SlotItemIcon Type="{Binding Ship.ExSlot.Item.Info.IconType}" />
-												</Viewbox>
+												<Border ToolTip="{Binding Ship.ExSlot.Item.NameWithLevel}"
+														Padding="4,1">
+													<Viewbox>
+														<kcvc:SlotItemIcon Type="{Binding Ship.ExSlot.Item.Info.IconType}" />
+													</Viewbox>
+												</Border>
 											</DockPanel>
 										</DockPanel>
 									</DataTemplate>
