@@ -11,35 +11,39 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// 熟練度による制空能力ボーナス最小値を計算します。
 		/// </summary>
-		/// <param name="slotItem"></param>
+		/// <param name="slotItem">対空能力を持つ装備。</param>
+		/// <param name="onslot">搭載数。</param>
 		/// <returns></returns>
-		public static int CalcMinAdeptBonusAirSuperiorityPotential(this SlotItem slotItem)
-			=> slotItem.Info.Type == SlotItemType.艦上戦闘機
-			? slotItem.Adept == 1 ? 1
-			: slotItem.Adept == 2 ? 4
-			: slotItem.Adept == 3 ? 6
-			: slotItem.Adept == 4 ? 11
-			: slotItem.Adept == 5 ? 16
-			: slotItem.Adept == 6 ? 17
-			: slotItem.Adept == 7 ? 25
-			: 0 // Adept == 0
-			: 0;// 艦戦以外は簡単に吹き飛ぶので最小値としては計算に入れない
+		public static int CalcMinAdeptBonusAirSuperiorityPotential(this SlotItem slotItem, int onslot)
+			=> onslot < 1 ? 0
+			: slotItem.Info.Type == SlotItemType.艦上戦闘機
+				? slotItem.Adept == 1 ? 1
+				: slotItem.Adept == 2 ? 4
+				: slotItem.Adept == 3 ? 6
+				: slotItem.Adept == 4 ? 11
+				: slotItem.Adept == 5 ? 16
+				: slotItem.Adept == 6 ? 17
+				: slotItem.Adept == 7 ? 25
+				: 0 // Adept == 0
+			: 0;	// 艦戦以外は簡単に吹き飛ぶので最小値としては計算に入れない
 
 		/// <summary>
 		/// 熟練度による制空能力ボーナス最大値を計算します。
 		/// </summary>
-		/// <param name="slotItem"></param>
+		/// <param name="slotItem">対空能力を持つ装備。</param>
+		/// <param name="onslot">搭載数。</param>
 		/// <returns></returns>
-		public static int CalcMaxAdeptBonusAirSuperiorityPotential(this SlotItem slotItem)
-			=> slotItem.Info.Type == SlotItemType.艦上戦闘機
-			? slotItem.Adept == 1 ? 2
-			: slotItem.Adept == 2 ? 5
-			: slotItem.Adept == 3 ? 8
-			: slotItem.Adept == 4 ? 12
-			: slotItem.Adept == 5 ? 18
-			: slotItem.Adept == 6 ? 18
-			: slotItem.Adept == 7 ? 26
-			: 1 // Adept == 0
+		public static int CalcMaxAdeptBonusAirSuperiorityPotential(this SlotItem slotItem, int onslot)
+			=> onslot < 1 ? 0
+			: slotItem.Info.Type == SlotItemType.艦上戦闘機
+				? slotItem.Adept == 1 ? 2
+				: slotItem.Adept == 2 ? 5
+				: slotItem.Adept == 3 ? 8
+				: slotItem.Adept == 4 ? 12
+				: slotItem.Adept == 5 ? 18
+				: slotItem.Adept == 6 ? 18
+				: slotItem.Adept == 7 ? 26
+				: 1 // Adept == 0
 			// 艦戦以外はよくわからないので暫定的に1次関数＆切り上げ
 			: slotItem.Info.Type == SlotItemType.艦上攻撃機 ? (int)Math.Ceiling(3 * slotItem.Adept / 7d)
 			: slotItem.Info.Type == SlotItemType.艦上爆撃機 ? (int)Math.Ceiling(3 * slotItem.Adept / 7d)
@@ -78,7 +82,7 @@ namespace Grabacr07.KanColleWrapper
 		{
 			return ship.EquippedItems
 				.Select(x => x.Item.CalcAirSuperiorityPotential(x.Current)
-							+ x.Item.CalcMinAdeptBonusAirSuperiorityPotential())
+							+ x.Item.CalcMinAdeptBonusAirSuperiorityPotential(x.Current))
 				.Sum();
 		}
 
@@ -89,7 +93,7 @@ namespace Grabacr07.KanColleWrapper
 		{
 			return ship.EquippedItems
 				.Select(x => x.Item.CalcAirSuperiorityPotential(x.Current)
-							+ x.Item.CalcMaxAdeptBonusAirSuperiorityPotential())
+							+ x.Item.CalcMaxAdeptBonusAirSuperiorityPotential(x.Current))
 				.Sum();
 		}
 
