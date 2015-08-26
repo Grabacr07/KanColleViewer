@@ -56,13 +56,14 @@
 								   MinWidth="35" />
 						<TextBlock Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Fleets_Average, StringFormat='{}{0}: '}" />
 						<TextBlock Text="{Binding State.AverageLevel}"
-								   MinWidth="75" />
+								   MinWidth="35" />
 						<TextBlock Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Fleets_ViewRange, StringFormat='{}{0}: '}" />
 						<TextBlock Text="{Binding State.ViewRange}"
-								   MinWidth="60" />
+								   MinWidth="50" />
 						<TextBlock Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Fleets_AirSuperiorityPotential, StringFormat='{}{0}: '}" />
-						<TextBlock Text="{Binding State.AirSuperiorityPotential}"
-								   MinWidth="60" />
+						<TextBlock MinWidth="110">
+							<Run Text="{Binding State.MinAirSuperiorityPotential, Mode=OneWay}"/><Run Text="-"/><Run Text="{Binding State.MaxAirSuperiorityPotential, Mode=OneWay}"/>
+						</TextBlock>
 						<TextBlock Text="{Binding State.Speed}"
 								   MinWidth="60" />
 					</StackPanel>
