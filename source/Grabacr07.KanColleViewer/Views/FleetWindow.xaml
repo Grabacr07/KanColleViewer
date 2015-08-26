@@ -654,10 +654,11 @@
 							</TextBlock>
 							<TextBlock Grid.Row="4"
 									   Grid.Column="1"
-									   Text="{Binding State.AirSuperiorityPotential}"
 									   Style="{DynamicResource EmphaticTextStyleKey}"
 									   VerticalAlignment="Bottom"
-									   Margin="4,2" />
+									   Margin="4,2">
+								<Run Text="{Binding State.MinAirSuperiorityPotential, Mode=OneWay}"/><Run Text="-"/><Run Text="{Binding State.MaxAirSuperiorityPotential, Mode=OneWay}"/>
+							</TextBlock>
 
 
 							<TextBlock Grid.Row="6"
