@@ -104,7 +104,7 @@ namespace Grabacr07.KanColleViewer
 					this.compositeDisposable.Add(ProxyBootstrapper.Shutdown);
 					this.MainWindow.Show();
 
-					var navigator = ((this.MainWindow as KanColleWindow)?.DataContext as KanColleWindowViewModel)?.Navigator;
+					var navigator = (WindowService.Current.MainWindow as KanColleWindowViewModel)?.Navigator;
 					if (navigator != null)
 					{
 						navigator.Source = KanColleViewer.Properties.Settings.Default.KanColleUrl;
