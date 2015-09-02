@@ -99,6 +99,33 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 		#endregion
 
+
+		#region UserStyleSheet 依存関係プロパティ
+
+		/// <summary>
+		/// ユーザー スタイル シートを取得または設定します。
+		/// </summary>
+		public string UserStyleSheet
+		{
+			get { return (string)this.GetValue(UserStyleSheetProperty); }
+			set { this.SetValue(UserStyleSheetProperty, value); }
+		}
+
+		/// <summary>
+		/// <see cref="UserStyleSheet"/> 依存関係プロパティを識別します。
+		/// </summary>
+		public static readonly DependencyProperty UserStyleSheetProperty =
+			DependencyProperty.Register("UserStyleSheet", typeof(string), typeof(KanColleHost), new UIPropertyMetadata(string.Empty, UserStyleSheetChangedCallback));
+
+		private static void UserStyleSheetChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			var instance = (KanColleHost)d;
+
+			instance.ApplyStyleSheet();
+		}
+
+		#endregion
+
 		public event EventHandler<Size> OwnerSizeChangeRequested;
 
 		public KanColleHost()
@@ -202,7 +229,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 				var target = gameFrame?.document as HTMLDocument;
 				if (target != null)
 				{
-					target.createStyleSheet().cssText = Properties.Settings.Default.OverrideStyleSheet;
+					target.createStyleSheet().cssText = this.UserStyleSheet;
 					this.styleSheetApplied = true;
 				}
 			}
