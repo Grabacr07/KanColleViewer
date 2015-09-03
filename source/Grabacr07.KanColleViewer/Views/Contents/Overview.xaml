@@ -299,18 +299,18 @@
 				<Border Grid.Row="0"
 						Grid.Column="0">
 					<StackPanel>
-						<TextBlock Text="データ" />
+						<TextBlock Text="{Binding Resources.Overview_Data, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 
 						<Rectangle Height="1"
 								   Margin="0,7,0,3"
 								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-						<metro2:CallMethodButton Content="艦娘一覧"
+						<metro2:CallMethodButton Content="{Binding Resources.Overview_ShipList, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 												 Padding="12,8"
 												 Margin="0,5,0,8"
 												 MethodName="ShowShipCatalog" />
 
-						<metro2:CallMethodButton Content="装備一覧"
+						<metro2:CallMethodButton Content="{Binding Resources.Overview_EquipmentList, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 												 Padding="12,8"
 												 MethodName="ShowSlotItemCatalog" />
 					</StackPanel>
@@ -422,7 +422,7 @@
 										 MethodName="Jump"
 										 MethodParameter="Repairyard">
 					<StackPanel DataContext="{Binding Content.Shipyard}">
-						<TextBlock Text="入渠ドック" />
+						<TextBlock Text="{Binding Resources.Shipyard_RepairDock, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 
 						<Rectangle Height="1"
 								   Margin="0,7,0,3"
@@ -466,7 +466,7 @@
 										 MethodName="Jump"
 										 MethodParameter="Dockyard">
 					<StackPanel DataContext="{Binding Content.Shipyard}">
-						<TextBlock Text="建造ドック" />
+						<TextBlock Text="{Binding Resources.Shipyard_ConstructionDock, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 
 						<Rectangle Height="1"
 								   Margin="0,7,0,3"
