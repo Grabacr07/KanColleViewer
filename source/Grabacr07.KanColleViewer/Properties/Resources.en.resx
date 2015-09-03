@@ -701,7 +701,7 @@ GPU: Slow! GPU optimization for tablets.</value>
     <value>Notifies when the morale of every ship girl in a fleet reaches this threshold. Morale increases by 3 every 3 minutes, but due to the way the API works the notification might appear earlier than needed.</value>
   </data>
   <data name="Settings_Notifications_FleetsMorale_Reference" xml:space="preserve">
-    <value>※ Can be set in Operation Settings, Sortie morale threshold.</value>
+    <value>※ Can be set in Settings → Sortie, Sortie condition.</value>
   </data>
   <data name="Settings_Notifications_FleetsMorale_Threshold" xml:space="preserve">
     <value>Morale threshold</value>
