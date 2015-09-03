@@ -23,6 +23,11 @@
     top:-16px;
     margin-left:-450px;
     z-index:1
+}
+
+.area-pickupgame
+{
+    display:none!important;
 }</Value>
     </Setting>
   </Settings>

@@ -33,6 +33,12 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		public static SerializableProperty<double> BrowserZoomFactor { get; }
 			= new SerializableProperty<double>(GetKey(), Providers.Local, 1.0);
 
+		/// <summary>
+		/// ユーザー スタイル シート設定を取得します。
+		/// </summary>
+		public static SerializableProperty<string> UserStyleSheet { get; }
+			= new SerializableProperty<string>(GetKey(), Providers.Roaming, Properties.Settings.Default.OverrideStyleSheet) { AutoSave = true };
+
 
 		private static string GetKey([CallerMemberName] string propertyName = "")
 		{

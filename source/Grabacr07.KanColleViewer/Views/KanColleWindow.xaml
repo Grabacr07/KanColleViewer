@@ -17,6 +17,7 @@
 				   xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 				   xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 				   xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
+				   xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Models.Settings"
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:KanColleWindowViewModel}"
 				   Title="{Binding Title}"
@@ -113,6 +114,7 @@
 									   x:FieldModifier="private"
 									   DockPanel.Dock="{Binding BrowserDock2}"
 									   ZoomFactor="{Binding ZoomFactor.Current}"
+									   UserStyleSheet="{Binding Source={x:Static settings:GeneralSettings.UserStyleSheet}, Path=Value}"
 									   OwnerSizeChangeRequested="HandleKanColleHostSizeChangeRequested">
 					<i:Interaction.Triggers>
 						<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"

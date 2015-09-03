@@ -195,6 +195,7 @@
     <Compile Include="ViewModels\Messages\ZoomMessage.cs" />
     <Compile Include="ViewModels\NavigatorViewModel.cs" />
     <Compile Include="ViewModels\NullViewModel.cs" />
+    <Compile Include="ViewModels\Settings\UserStyleSheetSettingsViewModel.cs" />
     <Compile Include="ViewModels\Settings\NetworkSettingsViewModel.cs" />
     <Compile Include="ViewModels\Settings\PluginSettingsWindowViewModel.cs" />
     <Compile Include="ViewModels\Settings\ScreenshotSettingsViewModel.cs" />
