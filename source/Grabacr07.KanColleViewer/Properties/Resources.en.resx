@@ -1173,10 +1173,10 @@ Click here to get it.</value>
     <value>Screws</value>
   </data>
   <data name="Common_Resources_InstantBuild" xml:space="preserve">
-    <value>Instant Build</value>
+    <value>Torches</value>
   </data>
   <data name="Common_Resources_InstantRepair" xml:space="preserve">
-    <value>Instant Repair</value>
+    <value>Buckets</value>
   </data>
   <data name="Common_Resources_Steel" xml:space="preserve">
     <value>Steel</value>
@@ -1295,13 +1295,13 @@ HTTP proxy settings are applied immediately. Settings for all other protocols ar
     <value>Name</value>
   </data>
   <data name="SlotItemCatalog_Owned" xml:space="preserve">
-    <value>Skill</value>
+    <value>Owned</value>
   </data>
   <data name="SlotItemCatalog_Refreshing" xml:space="preserve">
     <value>Refreshing the list…</value>
   </data>
   <data name="SlotItemCatalog_SkillLevel" xml:space="preserve">
-    <value>Owned</value>
+    <value>Skill</value>
   </data>
   <data name="SlotItemCatalog_Stats" xml:space="preserve">
     <value>Stats</value>

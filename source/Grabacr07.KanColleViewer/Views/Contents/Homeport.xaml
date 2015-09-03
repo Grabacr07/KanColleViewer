@@ -75,8 +75,7 @@
 							</Grid.ColumnDefinitions>
 							<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
 									   VerticalAlignment="Bottom">
-								<Run Text="{Binding Display, Mode=OneWay}" />
-								<Run Text=":" />
+								<Run Text="{Binding Display, Mode=OneWay}" /><Run Text=":" />
 							</TextBlock>
 							<TextBlock Grid.Column="1"
 									   Text="{Binding Value, Mode=OneWay}"
