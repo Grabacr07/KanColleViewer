@@ -99,7 +99,6 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 		#endregion
 
-
 		#region UserStyleSheet 依存関係プロパティ
 
 		/// <summary>
@@ -115,7 +114,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 		/// <see cref="UserStyleSheet"/> 依存関係プロパティを識別します。
 		/// </summary>
 		public static readonly DependencyProperty UserStyleSheetProperty =
-			DependencyProperty.Register("UserStyleSheet", typeof(string), typeof(KanColleHost), new UIPropertyMetadata(string.Empty, UserStyleSheetChangedCallback));
+			DependencyProperty.Register(nameof(UserStyleSheet), typeof(string), typeof(KanColleHost), new UIPropertyMetadata(string.Empty, UserStyleSheetChangedCallback));
 
 		private static void UserStyleSheetChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
@@ -185,11 +184,14 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 				object pvaIn = zoomFactor;
 				webBrowser.ExecWB(OLECMDID.OLECMDID_OPTICAL_ZOOM, OLECMDEXECOPT.OLECMDEXECOPT_DODEFAULT, ref pvaIn);
 			}
+			catch (Exception) when (Application.Instance.State == ApplicationState.Startup)
+			{
+				// about:blank だから仕方ない
+			}
 			catch (Exception ex)
 			{
 				Debug.WriteLine(ex);
-				if(Application.Instance.State != ApplicationState.Startup)
-					StatusService.Current.Notify(string.Format(Properties.Resources.ZoomAction_ZoomFailed, ex.Message));
+				StatusService.Current.Notify(string.Format(Properties.Resources.ZoomAction_ZoomFailed, ex.Message));
 			}
 		}
 
