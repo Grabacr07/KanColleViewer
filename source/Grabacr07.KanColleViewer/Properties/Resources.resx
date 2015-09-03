@@ -1176,6 +1176,24 @@ Click here to get it.</value>
   <data name="Common_Resources_Steel" xml:space="preserve">
     <value>鋼鉄</value>
   </data>
+  <data name="Settings_BrowserControl_ResetZoom1" xml:space="preserve">
+    <value>ゲーム画面を </value>
+  </data>
+  <data name="Settings_BrowserControl_ResetZoom2" xml:space="preserve">
+    <value>% に戻す</value>
+  </data>
+  <data name="Settings_BrowserControl_ResetZoomSubtitle" xml:space="preserve">
+    <value>(誤ってズームしたとき用)</value>
+  </data>
+  <data name="Settings_BrowserControl_ZoomInformation" xml:space="preserve">
+    <value>ウィンドウ上部のボタンでゲーム画面 (Internet Explorer) の表示サイズを変更できます。スクリーンショットは常に 100 % のサイズで撮影され、表示サイズ設定の影響を受けません。</value>
+  </data>
+  <data name="Settings_Plugins" xml:space="preserve">
+    <value>プラグイン</value>
+  </data>
+  <data name="Settings_Plugins_PluginSettingsTitle" xml:space="preserve">
+    <value>{0} プラグイン設定</value>
+  </data>
   <data name="ShipCatalog_Column_ViewRange_Tooltip" xml:space="preserve">
     <value>装備によるステータス上昇を含んだ値です</value>
   </data>

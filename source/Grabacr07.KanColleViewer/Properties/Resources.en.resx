@@ -391,7 +391,7 @@
     <value>Open Folder</value>
   </data>
   <data name="Settings_VersionInfo" xml:space="preserve">
-    <value>Version Info</value>
+    <value>Version</value>
   </data>
   <data name="Settings_Window" xml:space="preserve">
     <value>Window</value>
@@ -1174,6 +1174,21 @@ Click here to get it.</value>
   </data>
   <data name="Common_Resources_Steel" xml:space="preserve">
     <value>Steel</value>
+  </data>
+  <data name="Settings_BrowserControl_ResetZoom1" xml:space="preserve">
+    <value>Return game to </value>
+  </data>
+  <data name="Settings_BrowserControl_ResetZoom2" xml:space="preserve">
+    <value>% scale</value>
+  </data>
+  <data name="Settings_BrowserControl_ResetZoomSubtitle" xml:space="preserve">
+    <value>(when zoomed incorrectly)</value>
+  </data>
+  <data name="Settings_BrowserControl_ZoomInformation" xml:space="preserve">
+    <value>You can change the display size of the game (IE) with the zoom button at the top of the window. Screenshots are not affected by this setting and will always be taken at 100% scale.</value>
+  </data>
+  <data name="Settings_Plugins" xml:space="preserve">
+    <value>Plugins</value>
   </data>
   <data name="ShipCatalog_Column_ViewRange_Tooltip" xml:space="preserve">
     <value>Including bonuses from the equipment</value>

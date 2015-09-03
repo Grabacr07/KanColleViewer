@@ -1348,6 +1348,42 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ゲーム画面を .
+        /// </summary>
+        public static string Settings_BrowserControl_ResetZoom1 {
+            get {
+                return ResourceManager.GetString("Settings_BrowserControl_ResetZoom1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to % に戻す.
+        /// </summary>
+        public static string Settings_BrowserControl_ResetZoom2 {
+            get {
+                return ResourceManager.GetString("Settings_BrowserControl_ResetZoom2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (誤ってズームしたとき用).
+        /// </summary>
+        public static string Settings_BrowserControl_ResetZoomSubtitle {
+            get {
+                return ResourceManager.GetString("Settings_BrowserControl_ResetZoomSubtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ウィンドウ上部のボタンでゲーム画面 (Internet Explorer) の表示サイズを変更できます。スクリーンショットは常に 100 % のサイズで撮影され、表示サイズ設定の影響を受けません。.
+        /// </summary>
+        public static string Settings_BrowserControl_ZoomInformation {
+            get {
+                return ResourceManager.GetString("Settings_BrowserControl_ZoomInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom Sound Notifications.
         /// </summary>
         public static string Settings_CustomSound {
@@ -1793,6 +1829,24 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Settings_Other {
             get {
                 return ResourceManager.GetString("Settings_Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to プラグイン.
+        /// </summary>
+        public static string Settings_Plugins {
+            get {
+                return ResourceManager.GetString("Settings_Plugins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} プラグイン設定.
+        /// </summary>
+        public static string Settings_Plugins_PluginSettingsTitle {
+            get {
+                return ResourceManager.GetString("Settings_Plugins_PluginSettingsTitle", resourceCulture);
             }
         }
         

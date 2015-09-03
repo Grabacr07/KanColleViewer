@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleWrapper;
 using Livet.EventListeners;
 
@@ -11,7 +12,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 	{
 		public override string Name
 		{
-			get { return "工廠"; }
+			get { return Resources.Shipyard; }
 			protected set { throw new NotImplementedException(); }
 		}
 

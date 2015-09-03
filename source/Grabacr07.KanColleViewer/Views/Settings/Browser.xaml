@@ -43,13 +43,11 @@
 					<TextBlock Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type metro2:CallMethodButton}}, Path=Foreground}"
 							   FontSize="13"
 							   HorizontalAlignment="Center">
-						<TextBlock.Text>
-							<Binding Path="BrowserZoomFactor.CurrentParcentage"
-									 StringFormat="ゲーム画面を {0} % に戻す"
-									 Mode="OneWay" />
-						</TextBlock.Text>
+						<TextBlock>
+							<Run Text="{Binding Resources.Settings_BrowserControl_ResetZoom1, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" /><Run Text="{Binding Path=BrowserZoomFactor.CurrentParcentage, Mode=OneWay}" /><Run Text="{Binding Resources.Settings_BrowserControl_ResetZoom2, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"/>
+						</TextBlock>
 					</TextBlock>
-					<TextBlock Text="(誤ってズームしたとき用)"
+                    <TextBlock Text="{Binding Resources.Settings_BrowserControl_ResetZoomSubtitle, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 							   Style="{DynamicResource DefaultTextStyleKey}"
 							   FontSize="11"
 							   HorizontalAlignment="Center" />
@@ -65,7 +63,7 @@
 
 			<TextBlock Margin="8,0,10,0"
 					   Style="{DynamicResource DefaultTextStyleKey}"
-					   Text="ウィンドウ上部のボタンでゲーム画面 (Internet Explorer) の表示サイズを変更できます。スクリーンショットは常に 100 % のサイズで撮影され、表示サイズ設定の影響を受けません。"
+					   Text="{Binding Resources.Settings_BrowserControl_ZoomInformation, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 		</DockPanel>
 
