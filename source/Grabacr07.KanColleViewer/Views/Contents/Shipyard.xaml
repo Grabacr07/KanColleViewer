@@ -79,7 +79,7 @@
                   Grid.IsSharedSizeScope="True">
         <StackPanel VerticalAlignment="Top"
                     d:DataContext="{d:DesignData /SampleData/ShipyardViewModelSampleData.xaml}">
-            <GroupBox Header="入渠"
+            <GroupBox Header="{Binding Resources.Shipyard_RepairDock, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
                       Margin="10,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -214,7 +214,7 @@
                 </Grid>
             </GroupBox>
 
-            <GroupBox Header="建造"
+            <GroupBox Header="{Binding Resources.Shipyard_ConstructionDock, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
                       Margin="10">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -384,7 +384,7 @@
                             <StackPanel>
                                 <Border Background="{DynamicResource BorderBrushKey}"
                                         Padding="8,6">
-                                    <TextBlock Text="装備開発"
+                                    <TextBlock Text="{Binding Resources.Shipyard_Development, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
                                                Style="{DynamicResource HeaderTextStyleKey}" />
                                 </Border>
                                 <DockPanel HorizontalAlignment="Left"
@@ -395,7 +395,7 @@
                                             <Style TargetType="{x:Type TextBlock}"
                                                    BasedOn="{StaticResource DefaultTextStyleKey}">
                                                 <Setter Property="Text"
-                                                        Value="成功" />
+                                                        Value="{Binding Resources.Shipyard_Development_Result_Success, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
                                                 <Setter Property="Foreground"
                                                         Value="{DynamicResource AccentForegroundBrushKey}" />
                                                 <Setter Property="Background"
@@ -404,7 +404,7 @@
                                                     <DataTrigger Binding="{Binding CreatedSlotItem.Succeed}"
                                                                  Value="False">
                                                         <Setter Property="Text"
-                                                                Value="失敗" />
+                                                                Value="{Binding Resources.Shipyard_Development_Result_Failure, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
                                                         <Setter Property="Foreground"
                                                                 Value="{DynamicResource ForegroundBrushKey}" />
                                                         <Setter Property="Background"
@@ -413,7 +413,7 @@
                                                     <DataTrigger Binding="{Binding CreatedSlotItem.Succeed}"
                                                                  Value="{x:Null}">
                                                         <Setter Property="Text"
-                                                                Value="結果なし" />
+                                                                Value="{Binding Resources.Shipyard_Development_Result_None, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
                                                         <Setter Property="Foreground"
                                                                 Value="{DynamicResource ForegroundBrushKey}" />
                                                         <Setter Property="Background"
