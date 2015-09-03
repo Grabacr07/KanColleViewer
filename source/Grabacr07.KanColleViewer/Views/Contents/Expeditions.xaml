@@ -102,7 +102,7 @@
 							  Padding="8">
 						<Grid>
 							<TextBlock x:Name="NotExcution"
-									   Text="遠征に出ていません。"
+									   Text="{Binding Resources.Expedition_NoExpedition, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									   Style="{DynamicResource EmphaticTextStyleKey}"
 									   Visibility="Collapsed" />
 
