@@ -1312,7 +1312,19 @@ HTTP proxy settings are applied immediately. Settings for all other protocols ar
   <data name="StateDetail_MoraleRecovered" xml:space="preserve">
     <value>Morale recovered</value>
   </data>
-  <data name="StateDetail_MoraleTimerTemplate" xml:space="preserve">
-    <value>Morale recovers in: {0}</value>
+  <data name="Settings_Plugins_PluginInfo_Configuration" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Settings_Plugins_PluginInfo_NotificationFrom" xml:space="preserve">
+    <value>Notifies</value>
+  </data>
+  <data name="Settings_Plugins_PluginInfo_Notifications" xml:space="preserve">
+    <value>Notifier</value>
+  </data>
+  <data name="Settings_Plugins_PluginInfo_Test" xml:space="preserve">
+    <value>(Test)</value>
+  </data>
+  <data name="Settings_Plugins_PluginInfo_ToolWindow" xml:space="preserve">
+    <value>Tool</value>
   </data>
 </root>

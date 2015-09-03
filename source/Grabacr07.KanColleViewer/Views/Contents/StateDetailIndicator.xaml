@@ -31,7 +31,8 @@
 								   Style="{DynamicResource DefaultTextStyleKey}"
 								   Foreground="{DynamicResource ActiveForegroundBrushKey}">
 							<TextBlock.Text>
-								<MultiBinding StringFormat="{Binding Resources.StateDetail_MoraleTimerTemplate, Source={x:Static models:ResourceService.Current}, Mode=OneWay}">
+                                <MultiBinding StringFormat="{}{0}: {1}">
+									<Binding Source="{x:Static models:ResourceService.Current}" Path="Resources.StateDetail_MoraleRecoveryTimer" />
 									<Binding Path="Condition.Remaining" />
 								</MultiBinding>
 							</TextBlock.Text>

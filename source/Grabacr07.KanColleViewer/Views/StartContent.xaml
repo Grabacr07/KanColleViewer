@@ -331,7 +331,7 @@
 
 					<TabItem>
 						<TabItem.Header>
-							<TextBlock Text="通知設定"
+							<TextBlock Text="{Binding Resources.Settings_Notifications, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									   Style="{DynamicResource TabHeaderTextStyleKey}" />
 						</TabItem.Header>
 						<settings:Notification Margin="10,9" />
@@ -348,7 +348,7 @@
 
 					<TabItem>
 						<TabItem.Header>
-							<TextBlock Text="プラグイン"
+							<TextBlock Text="{Binding Resources.Settings_Plugins, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									   Style="{StaticResource TabHeaderTextStyleKey}" />
 						</TabItem.Header>
 						<settings:Plugins Margin="10,9" />

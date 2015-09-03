@@ -1316,7 +1316,19 @@ HTTP プロトコルの通信は自動構成も含め「インターネット �
   <data name="StateDetail_MoraleRecovered" xml:space="preserve">
     <value>疲労回復済み</value>
   </data>
-  <data name="StateDetail_MoraleTimerTemplate" xml:space="preserve">
-    <value>疲労回復まで: {0}</value>
+  <data name="Settings_Plugins_PluginInfo_Configuration" xml:space="preserve">
+    <value>設定</value>
+  </data>
+  <data name="Settings_Plugins_PluginInfo_NotificationFrom" xml:space="preserve">
+    <value>プラグインからの通知</value>
+  </data>
+  <data name="Settings_Plugins_PluginInfo_Notifications" xml:space="preserve">
+    <value>通知機能</value>
+  </data>
+  <data name="Settings_Plugins_PluginInfo_Test" xml:space="preserve">
+    <value>(テスト)</value>
+  </data>
+  <data name="Settings_Plugins_PluginInfo_ToolWindow" xml:space="preserve">
+    <value>ツール表示</value>
   </data>
 </root>

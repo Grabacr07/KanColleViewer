@@ -2006,11 +2006,56 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 設定.
+        /// </summary>
+        public static string Settings_Plugins_PluginInfo_Configuration {
+            get {
+                return ResourceManager.GetString("Settings_Plugins_PluginInfo_Configuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 機能:.
         /// </summary>
         public static string Settings_Plugins_PluginInfo_Features {
             get {
                 return ResourceManager.GetString("Settings_Plugins_PluginInfo_Features", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to プラグインからの通知.
+        /// </summary>
+        public static string Settings_Plugins_PluginInfo_NotificationFrom {
+            get {
+                return ResourceManager.GetString("Settings_Plugins_PluginInfo_NotificationFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 通知機能.
+        /// </summary>
+        public static string Settings_Plugins_PluginInfo_Notifications {
+            get {
+                return ResourceManager.GetString("Settings_Plugins_PluginInfo_Notifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (テスト).
+        /// </summary>
+        public static string Settings_Plugins_PluginInfo_Test {
+            get {
+                return ResourceManager.GetString("Settings_Plugins_PluginInfo_Test", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ツール表示.
+        /// </summary>
+        public static string Settings_Plugins_PluginInfo_ToolWindow {
+            get {
+                return ResourceManager.GetString("Settings_Plugins_PluginInfo_ToolWindow", resourceCulture);
             }
         }
         
@@ -3352,15 +3397,6 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string StateDetail_MoraleRecoveryTimer {
             get {
                 return ResourceManager.GetString("StateDetail_MoraleRecoveryTimer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 疲労回復まで: {0}.
-        /// </summary>
-        public static string StateDetail_MoraleTimerTemplate {
-            get {
-                return ResourceManager.GetString("StateDetail_MoraleTimerTemplate", resourceCulture);
             }
         }
         
