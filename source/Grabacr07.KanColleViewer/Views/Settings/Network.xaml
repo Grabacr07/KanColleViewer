@@ -6,13 +6,14 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+			 xmlns:metro2="http://schemes.grabacr.net/winfx/2015/personal/controls"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 xmlns:ms="clr-namespace:Grabacr07.KanColleViewer.Models.Settings"
 			 xmlns:vms="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Settings"
 			 mc:Ignorable="d"
 			 d:DesignWidth="500"
 			 d:DesignHeight="400"
-			 d:DataContext="{d:DesignInstance vms:SettingsViewModel}">
+			 d:DataContext="{d:DesignInstance vms:NetworkSettingsViewModel}">
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
@@ -24,29 +25,47 @@
 	<StackPanel>
 		<TextBlock Text="{Binding Resources.Settings_Proxy, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
-
-		<TextBlock Text="※反映にはアプリケーションの再起動が必要です。"
-				   Style="{DynamicResource DetailTextStyleKey}"
-				   Margin="20,0,0,0" />
+		
 		<RadioButton x:Name="CheckDirectAccess"
 					 GroupName="ProxySettings"
 					 Content="プロキシ サーバーを使用しない"
-					 IsChecked="{Binding Source={x:Static ms:NetworkSettings+Proxy.Type}, Path=Value, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=DirectAccess}"
+					 IsChecked="{Binding ProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=DirectAccess}"
 					 Margin="20,10,0,0" />
+
+		<TextBlock Style="{DynamicResource DetailTextStyleKey}"
+				   IsEnabled="{Binding ProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=DirectAccess}"
+				   Margin="40,4,0,0">
+			<Run Text="全てのプロトコルでプロキシ サーバーを中継せずに直接サーバーと通信を行います。" />
+		</TextBlock>
 
 		<RadioButton x:Name="CheckUseSystemProxy"
 					 GroupName="ProxySettings"
 					 Content="Internet Explorer のプロキシ設定を使用する"
-					 IsChecked="{Binding Source={x:Static ms:NetworkSettings+Proxy.Type}, Path=Value, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SystemProxy}"
+					 IsChecked="{Binding ProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SystemProxy}"
 					 Margin="20,10,0,0" />
+
+		<TextBlock Style="{DynamicResource DetailTextStyleKey}"
+				   IsEnabled="{Binding ProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SystemProxy}"
+				   Margin="40,4,0,0">
+			<Run Text="「インターネット オプション」の設定を用いて通信を行います。" />
+			<LineBreak/>
+			<Run Text="HTTP プロトコルの通信は自動構成も含め「インターネット オプション」の設定がリアルタイムに反映されますが、HTTP プロトコル以外の通信はアプリケーション起動時および「適用」時の設定が使用されます。" />
+		</TextBlock>
 
 		<RadioButton x:Name="CheckUseSpecificProxy"
 					 GroupName="ProxySettings"
 					 Content="プロキシ サーバーを指定する"
-					 IsChecked="{Binding Source={x:Static ms:NetworkSettings+Proxy.Type}, Path=Value, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SpecificProxy}"
+					 IsChecked="{Binding ProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SpecificProxy}"
 					 Margin="20,10,0,0" />
-		<StackPanel IsEnabled="{Binding IsChecked, ElementName=CheckUseSpecificProxy}"
-					Margin="40,6,0,6">
+		<StackPanel IsEnabled="{Binding ProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SpecificProxy}"
+					Margin="40,0,0,6">
+
+			<TextBlock Style="{DynamicResource DetailTextStyleKey}"
+					   Margin="0,4">
+				<Run Text="全てのプロトコルで指定したプロキシ サーバーを中継して通信を行います。" />
+				<LineBreak/>
+				<Run Text="サーバーをホスト名で指定した場合、動作が遅くなることがあるため、IP アドレスでの指定を推奨します。" />
+			</TextBlock>
 			<Grid Margin="0,4">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="Auto" />
@@ -61,7 +80,7 @@
 					<Run Text=": " />
 				</TextBlock>
 				<metro:PromptTextBox Grid.Column="1"
-									 Text="{Binding Source={x:Static ms:NetworkSettings+Proxy.Host}, Path=Value, Mode=TwoWay}"
+									 Text="{Binding SpecificProxyHost, Mode=TwoWay}"
 									 Prompt="{Binding Resources.Settings_Proxy_Host, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 				<TextBlock Grid.Column="3">
 					<Run Text="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
@@ -71,8 +90,7 @@
 									 Prompt="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 Width="80">
 					<metro:PromptTextBox.Text>
-						<Binding Source="{x:Static ms:NetworkSettings+Proxy.Port}"
-								 Path="Value"
+						<Binding Path="SpecificProxyPort"
 								 UpdateSourceTrigger="PropertyChanged">
 							<Binding.ValidationRules>
 								<metro:Int32Rule Min="1"
@@ -82,13 +100,23 @@
 					</metro:PromptTextBox.Text>
 				</metro:PromptTextBox>
 			</Grid>
+		</StackPanel>
 
-			<TextBlock Style="{DynamicResource DetailTextStyleKey}"
-					   Margin="0,4">
-				<Run Text="※ サーバーをホスト名で指定した場合、動作が遅くなることがあるため、IP アドレスでの指定を推奨します。" />
-				<LineBreak />
-				<Run Text="※ HTTP プロトコル以外の通信は、アプリケーション起動時の Internet Explorer の設定が使用されます。" />
-			</TextBlock>
+		<StackPanel Orientation="Horizontal"
+					HorizontalAlignment="Right"
+					Margin="0,4">
+			<metro2:CallMethodButton MethodTarget="{Binding}"
+									 MethodName="Apply"
+									 Content="適用"
+									 MinWidth="110"
+									 Padding="16,6"
+									 Margin="4,2" />
+			<metro2:CallMethodButton MethodTarget="{Binding}"
+									 MethodName="Cancel"
+									 Content="キャンセル"
+									 MinWidth="110"
+									 Padding="16,6"
+									 Margin="4,2,0,4" />
 		</StackPanel>
 
 		<Rectangle Height="1"

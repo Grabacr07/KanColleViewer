@@ -47,7 +47,10 @@ namespace Grabacr07.KanColleViewer.Models
 
 			try
 			{
-				KanColleClient.Current.Proxy.Startup(this.ListeningPort);
+				if(Settings.NetworkSettings.LocalProxy.IsEnabled)
+					KanColleClient.Current.Proxy.Startup(this.ListeningPort);
+				else
+					KanColleClient.Current.Proxy.Startup();
 
 				this.Result = ProxyBootstrapResult.Success;
 			}

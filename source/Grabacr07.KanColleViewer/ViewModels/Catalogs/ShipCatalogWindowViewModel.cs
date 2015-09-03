@@ -123,6 +123,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			this.SortWorker = new ShipCatalogSortWorker();
 
 			this.ShipTypes = KanColleClient.Current.Master.ShipTypes
+				.Where(kvp => !(kvp.Value.Id == 15 && kvp.Value.Name == "補給艦")) // おそらく敵艦用と思われる補給艦を除外
 				.Select(kvp => new ShipTypeViewModel(kvp.Value)
 				{
 					IsSelected = true,

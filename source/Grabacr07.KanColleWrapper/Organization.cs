@@ -463,6 +463,9 @@ namespace Grabacr07.KanColleWrapper
 				{
 					var target = this.Ships[ship.api_id];
 					target.Update(ship);
+
+					if (this.evacuatedShipsIds.Any(x => target.Id == x)) target.Situation |= ShipSituation.Evacuation;
+					if (this.towShipIds.Any(x => target.Id == x)) target.Situation |= ShipSituation.Tow;
 				}
 			}
 

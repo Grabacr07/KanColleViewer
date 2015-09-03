@@ -43,12 +43,6 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 
 		public static void Load()
 		{
-#pragma warning disable 612
-			// 古い設定が存在する可能性があるので、読んでおく
-			// (ただし、1 度読んだら新しい方に移行するので保存はしない
-			Migration._Settings.Load();
-#pragma warning restore 612
-			
 			try
 			{
 				Providers.Local.Load();
@@ -68,6 +62,13 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 				File.Delete(Providers.RoamingFilePath);
 				Providers.Roaming.Load();
 			}
+
+#pragma warning disable 612
+			// 古い設定が存在する可能性があるので、読んでおく
+			// (ただし、1 度読んだら新しい方に移行するので保存はしない
+			Migration._Settings.Load();
+#pragma warning restore 612
+
 		}
 
 		public static void Save()

@@ -27,6 +27,7 @@
 				   WindowState="{Binding WindowState, Mode=OneWayToSource}"
 				   Background="{DynamicResource ThemeBrushKey}"
 				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+				   FontFamily="{DynamicResource DefaultFontFamilyKey}"
 				   IsRestoringWindowPlacement="True"
 				   SnapsToDevicePixels="True"
 				   TextOptions.TextFormattingMode="Display"
@@ -119,11 +120,9 @@
 							<behaviors:ZoomAction />
 						</livet:InteractionMessageTrigger>
 					</i:Interaction.Triggers>
-					<WebBrowser>
+					<WebBrowser Source="about:blank">
 						<i:Interaction.Behaviors>
 							<behaviors:NavigatorBehavior Navigator="{Binding Navigator}" />
-							<livet:WebBrowserSetStateToControlBehavior Source="{Binding Source={x:Static properties:Settings.Default}, Path=KanColleUrl, Mode=OneTime}"
-																	   Property="Source" />
 						</i:Interaction.Behaviors>
 						<i:Interaction.Triggers>
 							<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"

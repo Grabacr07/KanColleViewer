@@ -96,12 +96,20 @@ namespace Grabacr07.KanColleViewer
 
 				// BootstrapProxy() で Views.Settings.ProxyBootstrapper.Show() が呼ばれるより前に
 				// Application.MainWindow を設定しておく。これ大事
+				// 後に設定した場合、Views.Settings.ProxyBootstrapper が閉じると共にアプリも終了してしまう。
 				this.MainWindow = WindowService.Current.GetMainWindow();
 
 				if (BootstrapProxy())
 				{
 					this.compositeDisposable.Add(ProxyBootstrapper.Shutdown);
 					this.MainWindow.Show();
+
+					var navigator = (WindowService.Current.MainWindow as KanColleWindowViewModel)?.Navigator;
+					if (navigator != null)
+					{
+						navigator.Source = KanColleViewer.Properties.Settings.Default.KanColleUrl;
+						navigator.Navigate();
+					}
 #if !DEBUG
 					appInstance.CommandLineArgsReceived += (sender, args) =>
 					{
