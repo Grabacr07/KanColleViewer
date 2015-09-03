@@ -758,13 +758,13 @@ GPU: Slow! GPU optimization for tablets.</value>
     <value>Use the following formula to calculate fleet LoS:</value>
   </data>
   <data name="Settings_Operation_SortieCondition" xml:space="preserve">
-    <value>出撃コンディション</value>
+    <value>Sortie Condition</value>
   </data>
   <data name="Settings_Operation_SortieCondition_Description" xml:space="preserve">
-    <value>※通常は、間宮アイコンが消灯する 40 か、自然回復上限の 49 に設定します。</value>
+    <value>※Value must be within the range of 40 and 49. (Default: 40)</value>
   </data>
   <data name="Settings_Operation_SortieCondition_Title" xml:space="preserve">
-    <value>艦隊内の全艦のコンディションが次の数値以上になったとき、出撃可能と判断する</value>
+    <value>Minimum fleet condition to be considered ready for sorties.</value>
   </data>
   <data name="Settings_Translations" xml:space="preserve">
     <value>Translations</value>

@@ -6,6 +6,8 @@
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
 			 xmlns:ms="clr-namespace:Grabacr07.KanColleViewer.Models.Settings"
 			 xmlns:vms="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Settings"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 mc:Ignorable="d"
 			 d:DesignWidth="500"
 			 d:DesignHeight="300"
@@ -19,11 +21,11 @@
 	</UserControl.Resources>
 
 	<StackPanel>
-		<TextBlock Text="出撃コンディション"
+		<TextBlock Text="{Binding Resources.Settings_Operation_SortieCondition, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 		<StackPanel Margin="20,0,0,0">
-			<TextBlock Text="艦隊内の全艦のコンディションが次の数値以上になったとき、出撃可能と判断する" />
+			<TextBlock Text="{Binding Resources.Settings_Operation_SortieCondition_Title, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 
 			<Grid Margin="0,10">
 				<Grid.ColumnDefinitions>
@@ -47,7 +49,7 @@
 				</metro:PromptTextBox>
 				<TextBlock Grid.Column="2"
 						   Style="{DynamicResource DetailTextStyleKey}">
-					<Run Text="※通常は、間宮アイコンが消灯する 40 か、自然回復上限の 49 に設定します。" />
+					<Run Text="{Binding Resources.Settings_Operation_SortieCondition_Description, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 				</TextBlock>
 			</Grid>
 		</StackPanel>
@@ -55,12 +57,12 @@
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-		<TextBlock Text="索敵値計算"
+		<TextBlock Text="{Binding Resources.Settings_Operation_LoSCalculation, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
 				   Margin="0,10" />
 
 		<StackPanel Margin="20,0,0,0">
-			<TextBlock Text="艦隊の索敵値の算出に使用する計算式は、以下を使用する" />
+			<TextBlock Text="{Binding Resources.Settings_Operation_LoS_Title, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 
 			<ItemsControl ItemsSource="{Binding ViewRangeSettingsCollection}"
 						  Margin="0,5">
