@@ -10,6 +10,7 @@
 			 xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
 			 xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
 			 xmlns:metro2="clr-namespace:MetroTrilithon.Controls;assembly=MetroTrilithon.Desktop"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
@@ -76,7 +77,7 @@
 			<metro2:CallMethodButton Grid.Row="0"
 									 Grid.RowSpan="2"
 									 Grid.Column="1"
-									 Content="艦隊詳細"
+									 Content="{Binding Resources.Fleets_Button_Details, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 Margin="0,0,10,3"
 									 Padding="12,8"
 									 MethodName="ShowFleetWindow" />
