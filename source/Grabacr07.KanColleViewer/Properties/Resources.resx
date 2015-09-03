@@ -1152,6 +1152,9 @@ Click here to get it.</value>
   <data name="Updater_Notification_TransUpdate_Success" xml:space="preserve">
     <value>Translation files have been updated!</value>
   </data>
+  <data name="Common_Apply" xml:space="preserve">
+    <value>適用</value>
+  </data>
   <data name="Common_Resources_Ammo" xml:space="preserve">
     <value>弾薬</value>
   </data>
@@ -1187,6 +1190,38 @@ Click here to get it.</value>
   </data>
   <data name="Settings_BrowserControl_ZoomInformation" xml:space="preserve">
     <value>ウィンドウ上部のボタンでゲーム画面 (Internet Explorer) の表示サイズを変更できます。スクリーンショットは常に 100 % のサイズで撮影され、表示サイズ設定の影響を受けません。</value>
+  </data>
+  <data name="Settings_Network_ListenLocally" xml:space="preserve">
+    <value>ローカル待ち受けポート設定</value>
+  </data>
+  <data name="Settings_Network_ListenLocallySubtitle" xml:space="preserve">
+    <value>※反映にはアプリケーションの再起動が必要です。</value>
+  </data>
+  <data name="Settings_Network_ListenPortDefault" xml:space="preserve">
+    <value>既定値</value>
+  </data>
+  <data name="Settings_Network_ListenPortTitle" xml:space="preserve">
+    <value>待ち受けポートを変更する</value>
+  </data>
+  <data name="Settings_Network_ProxyCustom" xml:space="preserve">
+    <value>プロキシ サーバーを指定する</value>
+  </data>
+  <data name="Settings_Network_ProxyCustomDesc" xml:space="preserve">
+    <value>全てのプロトコルで指定したプロキシ サーバーを中継して通信を行います。
+サーバーをホスト名で指定した場合、動作が遅くなることがあるため、IP アドレスでの指定を推奨します。</value>
+  </data>
+  <data name="Settings_Network_ProxyDirect" xml:space="preserve">
+    <value>プロキシ サーバーを使用しない</value>
+  </data>
+  <data name="Settings_Network_ProxyDirectDesc" xml:space="preserve">
+    <value>全てのプロトコルでプロキシ サーバーを中継せずに直接サーバーと通信を行います。</value>
+  </data>
+  <data name="Settings_Network_ProxyIE" xml:space="preserve">
+    <value>Internet Explorer のプロキシ設定を使用する</value>
+  </data>
+  <data name="Settings_Network_ProxyIEDesc" xml:space="preserve">
+    <value>「インターネット オプション」の設定を用いて通信を行います。
+HTTP プロトコルの通信は自動構成も含め「インターネット オプション」の設定がリアルタイムに反映されますが、HTTP プロトコル以外の通信はアプリケーション起動時および「適用」時の設定が使用されます。</value>
   </data>
   <data name="Settings_Plugins" xml:space="preserve">
     <value>プラグイン</value>

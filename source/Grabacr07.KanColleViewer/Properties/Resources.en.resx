@@ -1151,6 +1151,9 @@ Click here to get it.</value>
   <data name="ZoomFactorSelector_Tooltip" xml:space="preserve">
     <value>Adjust the display size of the game screen.</value>
   </data>
+  <data name="Common_Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
   <data name="Common_Resources_Ammo" xml:space="preserve">
     <value>Ammo</value>
   </data>
@@ -1186,6 +1189,38 @@ Click here to get it.</value>
   </data>
   <data name="Settings_BrowserControl_ZoomInformation" xml:space="preserve">
     <value>You can change the display size of the game (IE) with the zoom button at the top of the window. Screenshots are not affected by this setting and will always be taken at 100% scale.</value>
+  </data>
+  <data name="Settings_Network_ListenLocally" xml:space="preserve">
+    <value>Local Listening Port</value>
+  </data>
+  <data name="Settings_Network_ListenLocallySubtitle" xml:space="preserve">
+    <value>※ Requires restart to take effect.</value>
+  </data>
+  <data name="Settings_Network_ListenPortDefault" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="Settings_Network_ListenPortTitle" xml:space="preserve">
+    <value>Specify custom local port to listen on</value>
+  </data>
+  <data name="Settings_Network_ProxyCustom" xml:space="preserve">
+    <value>Specify a proxy server</value>
+  </data>
+  <data name="Settings_Network_ProxyCustomDesc" xml:space="preserve">
+    <value>Specify a custom proxy server for all protocols.
+Specifying an IP address instead of a hostname is recommended to avoid server name resolution issues.</value>
+  </data>
+  <data name="Settings_Network_ProxyDirect" xml:space="preserve">
+    <value>No proxy</value>
+  </data>
+  <data name="Settings_Network_ProxyDirectDesc" xml:space="preserve">
+    <value>Do not use a proxy server for all protocols.</value>
+  </data>
+  <data name="Settings_Network_ProxyIE" xml:space="preserve">
+    <value>Internet Explorer proxy settings</value>
+  </data>
+  <data name="Settings_Network_ProxyIEDesc" xml:space="preserve">
+    <value>Use the proxy server specified in Internet Options Control Panel applet.
+HTTP proxy settings are applied immediately. Settings for all other protocols are applied on application start-up or upon pressing the Apply button below.</value>
   </data>
   <data name="Settings_Plugins" xml:space="preserve">
     <value>Plugins</value>

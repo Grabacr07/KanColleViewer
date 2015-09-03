@@ -97,6 +97,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 適用.
+        /// </summary>
+        public static string Common_Apply {
+            get {
+                return ResourceManager.GetString("Common_Apply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to キャンセル.
         /// </summary>
         public static string Common_Cancel {
@@ -1518,6 +1527,42 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ローカル待ち受けポート設定.
+        /// </summary>
+        public static string Settings_Network_ListenLocally {
+            get {
+                return ResourceManager.GetString("Settings_Network_ListenLocally", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ※反映にはアプリケーションの再起動が必要です。.
+        /// </summary>
+        public static string Settings_Network_ListenLocallySubtitle {
+            get {
+                return ResourceManager.GetString("Settings_Network_ListenLocallySubtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 既定値.
+        /// </summary>
+        public static string Settings_Network_ListenPortDefault {
+            get {
+                return ResourceManager.GetString("Settings_Network_ListenPortDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 待ち受けポートを変更する.
+        /// </summary>
+        public static string Settings_Network_ListenPortTitle {
+            get {
+                return ResourceManager.GetString("Settings_Network_ListenPortTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to パスワード.
         /// </summary>
         public static string Settings_Network_Proxy_Auth_Password {
@@ -1541,6 +1586,62 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Settings_Network_Proxy_Auth_Username {
             get {
                 return ResourceManager.GetString("Settings_Network_Proxy_Auth_Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to プロキシ サーバーを指定する.
+        /// </summary>
+        public static string Settings_Network_ProxyCustom {
+            get {
+                return ResourceManager.GetString("Settings_Network_ProxyCustom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 全てのプロトコルで指定したプロキシ サーバーを中継して通信を行います。
+        ///サーバーをホスト名で指定した場合、動作が遅くなることがあるため、IP アドレスでの指定を推奨します。.
+        /// </summary>
+        public static string Settings_Network_ProxyCustomDesc {
+            get {
+                return ResourceManager.GetString("Settings_Network_ProxyCustomDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to プロキシ サーバーを使用しない.
+        /// </summary>
+        public static string Settings_Network_ProxyDirect {
+            get {
+                return ResourceManager.GetString("Settings_Network_ProxyDirect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 全てのプロトコルでプロキシ サーバーを中継せずに直接サーバーと通信を行います。.
+        /// </summary>
+        public static string Settings_Network_ProxyDirectDesc {
+            get {
+                return ResourceManager.GetString("Settings_Network_ProxyDirectDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Internet Explorer のプロキシ設定を使用する.
+        /// </summary>
+        public static string Settings_Network_ProxyIE {
+            get {
+                return ResourceManager.GetString("Settings_Network_ProxyIE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 「インターネット オプション」の設定を用いて通信を行います。
+        ///HTTP プロトコルの通信は自動構成も含め「インターネット オプション」の設定がリアルタイムに反映されますが、HTTP プロトコル以外の通信はアプリケーション起動時および「適用」時の設定が使用されます。.
+        /// </summary>
+        public static string Settings_Network_ProxyIEDesc {
+            get {
+                return ResourceManager.GetString("Settings_Network_ProxyIEDesc", resourceCulture);
             }
         }
         
