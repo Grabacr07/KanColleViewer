@@ -1249,6 +1249,33 @@ HTTP proxy settings are applied immediately. Settings for all other protocols ar
   <data name="Settings_Plugins_PluginInfo_Features" xml:space="preserve">
     <value>Features:</value>
   </data>
+  <data name="Settings_Window_ConfirmExit" xml:space="preserve">
+    <value>Request confirmation when closing the application</value>
+  </data>
+  <data name="Settings_Window_ConfirmExit_Always" xml:space="preserve">
+    <value>Always</value>
+  </data>
+  <data name="Settings_Window_ConfirmExit_InSortieOnly" xml:space="preserve">
+    <value>Only during sortie</value>
+  </data>
+  <data name="Settings_Window_ConfirmExit_Never" xml:space="preserve">
+    <value>Never</value>
+  </data>
+  <data name="Settings_Window_Layout" xml:space="preserve">
+    <value>Window Layout</value>
+  </data>
+  <data name="Settings_Window_Layout_InfoPane" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="Settings_Window_Layout_KanColle" xml:space="preserve">
+    <value>KanColle</value>
+  </data>
+  <data name="Settings_Window_Layout_MultiWindow" xml:space="preserve">
+    <value>Multiple Windows</value>
+  </data>
+  <data name="Settings_Window_Layout_SingleWindow" xml:space="preserve">
+    <value>Single Window</value>
+  </data>
   <data name="ShipCatalog_Column_ViewRange_Tooltip" xml:space="preserve">
     <value>Including bonuses from the equipment</value>
   </data>

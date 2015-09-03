@@ -30,7 +30,7 @@
 
 		<StackPanel Orientation="Horizontal"
 					Margin="20,0,0,10">
-			<TextBlock Text="アプリケーション終了時の確認動作"
+            <TextBlock Text="{Binding Resources.Settings_Window_ConfirmExit, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					   Margin="0,0,10,0" />
 			<metro:PromptComboBox ItemsSource="{Binding ExitConfirmationTypes}"
 								  DisplayMemberPath="Display"
@@ -67,7 +67,7 @@
 			<Rectangle Height="1"
 					   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-			<TextBlock Text="ウィンドウ レイアウト"
+            <TextBlock Text="{Binding Resources.Settings_Window_Layout, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					   Style="{DynamicResource SettingsHeaderTextStyleKey}"
 					   Margin="0,10" />
 
@@ -78,7 +78,7 @@
 						<Style x:Key="LayoutButtonStyleKey"
 							   TargetType="{x:Type metro2:CallMethodButton}">
 							<Setter Property="Content"
-									Value="情報" />
+									Value="{Binding Resources.Settings_Window_Layout_InfoPane, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 							<Setter Property="BorderThickness"
 									Value="1" />
 							<Setter Property="Background"
@@ -123,7 +123,7 @@
 							   TargetType="{x:Type metro2:CallMethodButton}"
 							   BasedOn="{StaticResource LayoutButtonStyleKey}">
 							<Setter Property="Content"
-									Value="艦これ" />
+									Value="{Binding Resources.Settings_Window_Layout_KanColle, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 							<Setter Property="Background"
 									Value="{DynamicResource AccentBrushKey}" />
 							<Setter Property="BorderBrush"
@@ -239,7 +239,7 @@
 							<RadioButton x:Name="MergedCheckBox"
 										 DockPanel.Dock="Top"
 										 IsChecked="{Binding IsSplit, Mode=TwoWay, Converter={StaticResource ReverseBooleanConverter}}"
-										 Content="シングル ウィンドウ" />
+										 Content="{Binding Resources.Settings_Window_Layout_SingleWindow, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 							<UniformGrid Margin="4"
 										 IsEnabled="{Binding ElementName=MergedCheckBox, Path=IsChecked}">
 								<Border Width="80"
@@ -295,7 +295,7 @@
 							<RadioButton x:Name="SplitCheckBox"
 										 DockPanel.Dock="Top"
 										 IsChecked="{Binding IsSplit, Mode=TwoWay}"
-										 Content="マルチ ウィンドウ" />
+										 Content="{Binding Resources.Settings_Window_Layout_MultiWindow, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 							<Grid Margin="4"
 								  IsEnabled="{Binding ElementName=SplitCheckBox, Path=IsChecked}">
 								<Grid.ColumnDefinitions>
@@ -338,13 +338,13 @@
 							Margin="16,0,0,8">
 					<metro2:CallMethodButton MethodTarget="{Binding}"
 											 MethodName="Apply"
-											 Content="適用"
+											 Content="{Binding Resources.Common_Apply, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 											 MinWidth="110"
 											 Padding="16,6"
 											 Margin="4,2" />
 					<metro2:CallMethodButton MethodTarget="{Binding}"
 											 MethodName="Cancel"
-											 Content="キャンセル"
+											 Content="{Binding Resources.Common_Cancel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 											 MinWidth="110"
 											 Padding="16,6"
 											 Margin="4,2" />

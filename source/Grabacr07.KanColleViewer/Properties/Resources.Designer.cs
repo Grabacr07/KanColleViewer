@@ -2285,6 +2285,87 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to アプリケーション終了時の確認動作.
+        /// </summary>
+        public static string Settings_Window_ConfirmExit {
+            get {
+                return ResourceManager.GetString("Settings_Window_ConfirmExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 常に確認する.
+        /// </summary>
+        public static string Settings_Window_ConfirmExit_Always {
+            get {
+                return ResourceManager.GetString("Settings_Window_ConfirmExit_Always", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 出撃中のみ確認する.
+        /// </summary>
+        public static string Settings_Window_ConfirmExit_InSortieOnly {
+            get {
+                return ResourceManager.GetString("Settings_Window_ConfirmExit_InSortieOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 確認しない.
+        /// </summary>
+        public static string Settings_Window_ConfirmExit_Never {
+            get {
+                return ResourceManager.GetString("Settings_Window_ConfirmExit_Never", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ウィンドウ レイアウト.
+        /// </summary>
+        public static string Settings_Window_Layout {
+            get {
+                return ResourceManager.GetString("Settings_Window_Layout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 情報.
+        /// </summary>
+        public static string Settings_Window_Layout_InfoPane {
+            get {
+                return ResourceManager.GetString("Settings_Window_Layout_InfoPane", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦これ.
+        /// </summary>
+        public static string Settings_Window_Layout_KanColle {
+            get {
+                return ResourceManager.GetString("Settings_Window_Layout_KanColle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to マルチ ウィンドウ.
+        /// </summary>
+        public static string Settings_Window_Layout_MultiWindow {
+            get {
+                return ResourceManager.GetString("Settings_Window_Layout_MultiWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to シングル ウィンドウ.
+        /// </summary>
+        public static string Settings_Window_Layout_SingleWindow {
+            get {
+                return ResourceManager.GetString("Settings_Window_Layout_SingleWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ウィンドウを常に最前面に表示する.
         /// </summary>
         public static string Settings_Window_TopMost {

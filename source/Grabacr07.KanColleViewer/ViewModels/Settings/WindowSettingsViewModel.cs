@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using Grabacr07.KanColleViewer.Models;
+using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleViewer.Models.Settings;
 using Livet;
 using MetroTrilithon.Mvvm;
@@ -69,9 +70,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 		{
 			this.ExitConfirmationTypes = new List<DisplayViewModel<ExitConfirmationType>>
 			{
-				DisplayViewModel.Create(ExitConfirmationType.None,"確認しない"),
-				DisplayViewModel.Create(ExitConfirmationType.InSortieOnly, "出撃中のみ確認する"),
-				DisplayViewModel.Create(ExitConfirmationType.Always, "常に確認する"),
+				DisplayViewModel.Create(ExitConfirmationType.None, Resources.Settings_Window_ConfirmExit_Never),
+				DisplayViewModel.Create(ExitConfirmationType.InSortieOnly, Resources.Settings_Window_ConfirmExit_InSortieOnly),
+				DisplayViewModel.Create(ExitConfirmationType.Always, Resources.Settings_Window_ConfirmExit_Always),
 			};
 		}
 

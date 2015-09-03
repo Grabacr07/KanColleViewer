@@ -1253,6 +1253,33 @@ HTTP プロトコルの通信は自動構成も含め「インターネット �
   <data name="Settings_Plugins_PluginSettingsTitle" xml:space="preserve">
     <value>{0} プラグイン設定</value>
   </data>
+  <data name="Settings_Window_ConfirmExit" xml:space="preserve">
+    <value>アプリケーション終了時の確認動作</value>
+  </data>
+  <data name="Settings_Window_ConfirmExit_Always" xml:space="preserve">
+    <value>常に確認する</value>
+  </data>
+  <data name="Settings_Window_ConfirmExit_InSortieOnly" xml:space="preserve">
+    <value>出撃中のみ確認する</value>
+  </data>
+  <data name="Settings_Window_ConfirmExit_Never" xml:space="preserve">
+    <value>確認しない</value>
+  </data>
+  <data name="Settings_Window_Layout" xml:space="preserve">
+    <value>ウィンドウ レイアウト</value>
+  </data>
+  <data name="Settings_Window_Layout_InfoPane" xml:space="preserve">
+    <value>情報</value>
+  </data>
+  <data name="Settings_Window_Layout_KanColle" xml:space="preserve">
+    <value>艦これ</value>
+  </data>
+  <data name="Settings_Window_Layout_MultiWindow" xml:space="preserve">
+    <value>マルチ ウィンドウ</value>
+  </data>
+  <data name="Settings_Window_Layout_SingleWindow" xml:space="preserve">
+    <value>シングル ウィンドウ</value>
+  </data>
   <data name="ShipCatalog_Column_ViewRange_Tooltip" xml:space="preserve">
     <value>装備によるステータス上昇を含んだ値です</value>
   </data>
