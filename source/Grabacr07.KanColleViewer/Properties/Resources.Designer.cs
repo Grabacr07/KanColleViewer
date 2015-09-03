@@ -160,7 +160,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to 弾薬.
         /// </summary>
         public static string Common_Resources_Ammo {
             get {
@@ -169,7 +169,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to ボーキサイト.
         /// </summary>
         public static string Common_Resources_Bauxite {
             get {
@@ -178,7 +178,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to 開発資材.
         /// </summary>
         public static string Common_Resources_DevKits {
             get {
@@ -187,7 +187,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to 燃料.
         /// </summary>
         public static string Common_Resources_Fuel {
             get {
@@ -196,7 +196,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to 改修資材.
         /// </summary>
         public static string Common_Resources_Improvement {
             get {
@@ -205,7 +205,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to 高速建造材.
         /// </summary>
         public static string Common_Resources_InstantBuild {
             get {
@@ -214,7 +214,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to 高速修復材.
         /// </summary>
         public static string Common_Resources_InstantRepair {
             get {
@@ -223,7 +223,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to 鋼鉄.
         /// </summary>
         public static string Common_Resources_Steel {
             get {
@@ -3023,6 +3023,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         /// <summary>
         ///   Looks up a localized string similar to 疲労回復済み.
         /// </summary>
+        public static string StateDetail_MoraleRecovered {
+            get {
+                return ResourceManager.GetString("StateDetail_MoraleRecovered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 疲労回復済み.
+        /// </summary>
         public static string StateDetail_MoraleRecovering {
             get {
                 return ResourceManager.GetString("StateDetail_MoraleRecovering", resourceCulture);
@@ -3035,6 +3044,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string StateDetail_MoraleRecoveryTimer {
             get {
                 return ResourceManager.GetString("StateDetail_MoraleRecoveryTimer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 疲労回復まで: {0}.
+        /// </summary>
+        public static string StateDetail_MoraleTimerTemplate {
+            get {
+                return ResourceManager.GetString("StateDetail_MoraleTimerTemplate", resourceCulture);
             }
         }
         

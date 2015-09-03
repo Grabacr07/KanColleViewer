@@ -31,7 +31,7 @@
 								   Style="{DynamicResource DefaultTextStyleKey}"
 								   Foreground="{DynamicResource ActiveForegroundBrushKey}">
 							<TextBlock.Text>
-								<MultiBinding StringFormat="疲労回復まで: {0}">
+								<MultiBinding StringFormat="{Binding Resources.StateDetail_MoraleTimerTemplate, Source={x:Static models:ResourceService.Current}, Mode=OneWay}">
 									<Binding Path="Condition.Remaining" />
 								</MultiBinding>
 							</TextBlock.Text>
@@ -44,7 +44,7 @@
 								 Value="False">
 						<Setter TargetName="Text"
 								Property="Text"
-								Value="疲労回復済み" />
+								Value="{Binding Resources.StateDetail_MoraleRecovered, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 					</DataTrigger>
 					<DataTrigger Binding="{Binding State.IsReady}"
 								 Value="True">
@@ -53,7 +53,7 @@
 								Value="#FF286414" />
 						<Setter TargetName="Text"
 								Property="Text"
-								Value="出撃可能！" />
+								Value="{Binding Resources.StateDetail_IsReady, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 					</DataTrigger>
 				</DataTemplate.Triggers>
 			</DataTemplate>
@@ -84,7 +84,7 @@
 									<ObjectAnimationUsingKeyFrames Storyboard.TargetName="Text"
 																   Storyboard.TargetProperty="Text">
 										<DiscreteObjectKeyFrame KeyTime="0"
-																Value="大破した艦娘がいます！！！" />
+																Value="{Binding Resources.StateDetail_CriticalDamage, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 									</ObjectAnimationUsingKeyFrames>
 								</Storyboard>
 							</VisualState>
@@ -95,7 +95,7 @@
 							Background="Transparent"
 							Padding="8,4">
 						<TextBlock x:Name="Text"
-								   Text="艦隊は出撃中です！"
+								   Text="{Binding Resources.StateDetail_OnSortie, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 								   Style="{DynamicResource DefaultTextStyleKey}"
 								   Foreground="{DynamicResource ActiveForegroundBrushKey}">
 							<i:Interaction.Behaviors>
@@ -142,7 +142,7 @@
 						Background="#FF204080">
 					<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
 							   Foreground="{DynamicResource ActiveForegroundBrushKey}">
-						<Run Text="遠征中" />
+						<Run Text="{Binding Resources.StateDetail_OnExpedition, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 						<Run Text=":" />
 						<Run Text="{Binding Mission.Title, Mode=OneWay}" />
 						<Run Text="-" />
@@ -154,7 +154,7 @@
 			<DataTemplate DataType="{x:Type vm:NullViewModel}">
 				<Border Padding="8,4"
 						Background="#FF3E3E42">
-					<TextBlock Text="艦隊に艦娘が編成されていません。"
+					<TextBlock Text="{Binding Resources.StateDetail_EmptyFleet, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 							   Style="{DynamicResource DefaultTextStyleKey}"
 							   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 				</Border>

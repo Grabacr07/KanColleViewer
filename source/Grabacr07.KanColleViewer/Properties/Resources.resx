@@ -1153,28 +1153,28 @@ Click here to get it.</value>
     <value>Translation files have been updated!</value>
   </data>
   <data name="Common_Resources_Ammo" xml:space="preserve">
-    <value />
+    <value>弾薬</value>
   </data>
   <data name="Common_Resources_Bauxite" xml:space="preserve">
-    <value />
+    <value>ボーキサイト</value>
   </data>
   <data name="Common_Resources_DevKits" xml:space="preserve">
-    <value />
+    <value>開発資材</value>
   </data>
   <data name="Common_Resources_Fuel" xml:space="preserve">
-    <value />
+    <value>燃料</value>
   </data>
   <data name="Common_Resources_Improvement" xml:space="preserve">
-    <value />
+    <value>改修資材</value>
   </data>
   <data name="Common_Resources_InstantBuild" xml:space="preserve">
-    <value />
+    <value>高速建造材</value>
   </data>
   <data name="Common_Resources_InstantRepair" xml:space="preserve">
-    <value />
+    <value>高速修復材</value>
   </data>
   <data name="Common_Resources_Steel" xml:space="preserve">
-    <value />
+    <value>鋼鉄</value>
   </data>
   <data name="ShipCatalog_Column_ViewRange_Tooltip" xml:space="preserve">
     <value>装備によるステータス上昇を含んだ値です</value>
@@ -1208,5 +1208,11 @@ Click here to get it.</value>
   </data>
   <data name="SlotItemCatalog_Total" xml:space="preserve">
     <value>合計</value>
+  </data>
+  <data name="StateDetail_MoraleRecovered" xml:space="preserve">
+    <value>疲労回復済み</value>
+  </data>
+  <data name="StateDetail_MoraleTimerTemplate" xml:space="preserve">
+    <value>疲労回復まで: {0}</value>
   </data>
 </root>

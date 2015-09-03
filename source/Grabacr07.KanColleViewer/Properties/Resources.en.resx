@@ -1208,4 +1208,10 @@ Click here to get it.</value>
   <data name="SlotItemCatalog_Total" xml:space="preserve">
     <value>Total</value>
   </data>
+  <data name="StateDetail_MoraleRecovered" xml:space="preserve">
+    <value>Morale recovered</value>
+  </data>
+  <data name="StateDetail_MoraleTimerTemplate" xml:space="preserve">
+    <value>Morale recovers in: {0}</value>
+  </data>
 </root>
