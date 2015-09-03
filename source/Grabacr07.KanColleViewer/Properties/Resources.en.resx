@@ -719,7 +719,7 @@ GPU: Slow! GPU optimization for tablets.</value>
     <value>Give a notification for ships in critical condition</value>
   </data>
   <data name="Settings_Operation_LoSCalculation" xml:space="preserve">
-    <value>LoS Calculation</value>
+    <value>Settings_Plugins_PluginInfo_Features</value>
   </data>
   <data name="Settings_Operation_LoS_CarrierBasedRecon" xml:space="preserve">
     <value>Carrier-based Recon Aircraft</value>
@@ -1224,6 +1224,9 @@ HTTP proxy settings are applied immediately. Settings for all other protocols ar
   </data>
   <data name="Settings_Plugins" xml:space="preserve">
     <value>Plugins</value>
+  </data>
+  <data name="Settings_Plugins_PluginInfo_Features" xml:space="preserve">
+    <value>Features:</value>
   </data>
   <data name="ShipCatalog_Column_ViewRange_Tooltip" xml:space="preserve">
     <value>Including bonuses from the equipment</value>

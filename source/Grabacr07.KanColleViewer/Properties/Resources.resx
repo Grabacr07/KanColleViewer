@@ -1226,6 +1226,9 @@ HTTP プロトコルの通信は自動構成も含め「インターネット �
   <data name="Settings_Plugins" xml:space="preserve">
     <value>プラグイン</value>
   </data>
+  <data name="Settings_Plugins_PluginInfo_Features" xml:space="preserve">
+    <value>機能:</value>
+  </data>
   <data name="Settings_Plugins_PluginSettingsTitle" xml:space="preserve">
     <value>{0} プラグイン設定</value>
   </data>

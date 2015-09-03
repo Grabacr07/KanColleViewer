@@ -8,6 +8,7 @@
 			 xmlns:composition="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Composition"
 			 xmlns:controls="clr-namespace:MetroTrilithon.Controls;assembly=MetroTrilithon.Desktop"
 			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 mc:Ignorable="d"
 			 d:DesignWidth="400"
 			 d:DataContext="{d:DesignInstance composition:PluginViewModel}">
@@ -30,7 +31,7 @@
 		<Border Height="4" />
 
 		<DockPanel>
-			<TextBlock Text="機能:　"
+			<TextBlock Text="{Binding Resources.Settings_Plugins_PluginInfo_Features, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					   Style="{DynamicResource DefaultTextStyleKey}" />
 
 			<controls:RichTextView Source="{Binding Functions}">

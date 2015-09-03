@@ -1943,6 +1943,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 機能:.
+        /// </summary>
+        public static string Settings_Plugins_PluginInfo_Features {
+            get {
+                return ResourceManager.GetString("Settings_Plugins_PluginInfo_Features", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} プラグイン設定.
         /// </summary>
         public static string Settings_Plugins_PluginSettingsTitle {
