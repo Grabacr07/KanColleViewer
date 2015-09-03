@@ -1155,6 +1155,9 @@ Click here to get it.</value>
   <data name="Common_Apply" xml:space="preserve">
     <value>適用</value>
   </data>
+  <data name="Common_Close" xml:space="preserve">
+    <value>閉じる</value>
+  </data>
   <data name="Common_Resources_Ammo" xml:space="preserve">
     <value>弾薬</value>
   </data>
@@ -1225,6 +1228,18 @@ HTTP プロトコルの通信は自動構成も含め「インターネット �
   </data>
   <data name="Settings_Plugins" xml:space="preserve">
     <value>プラグイン</value>
+  </data>
+  <data name="Settings_Plugins_FailedToLoad" xml:space="preserve">
+    <value>読み込みに失敗したプラグイン</value>
+  </data>
+  <data name="Settings_Plugins_FailedToLoadDesc" xml:space="preserve">
+    <value>以下のプラグインは、読み込みに失敗し動作していません。発生したエラーの詳細を確認できます。</value>
+  </data>
+  <data name="Settings_Plugins_Loaded" xml:space="preserve">
+    <value>読み込み済みのプラグイン</value>
+  </data>
+  <data name="Settings_Plugins_LoadedDesc" xml:space="preserve">
+    <value>以下のプラグインが読み込まれています。各プラグインの設定を変更できます。</value>
   </data>
   <data name="Settings_Plugins_PluginInfo_Features" xml:space="preserve">
     <value>機能:</value>

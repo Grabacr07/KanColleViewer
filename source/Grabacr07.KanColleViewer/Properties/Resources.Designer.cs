@@ -115,6 +115,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 閉じる.
+        /// </summary>
+        public static string Common_Close {
+            get {
+                return ResourceManager.GetString("Common_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ※近日実装予定.
         /// </summary>
         public static string Common_Implement_Oncoming {
@@ -1939,6 +1948,42 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Settings_Plugins {
             get {
                 return ResourceManager.GetString("Settings_Plugins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 読み込みに失敗したプラグイン.
+        /// </summary>
+        public static string Settings_Plugins_FailedToLoad {
+            get {
+                return ResourceManager.GetString("Settings_Plugins_FailedToLoad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 以下のプラグインは、読み込みに失敗し動作していません。発生したエラーの詳細を確認できます。.
+        /// </summary>
+        public static string Settings_Plugins_FailedToLoadDesc {
+            get {
+                return ResourceManager.GetString("Settings_Plugins_FailedToLoadDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 読み込み済みのプラグイン.
+        /// </summary>
+        public static string Settings_Plugins_Loaded {
+            get {
+                return ResourceManager.GetString("Settings_Plugins_Loaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 以下のプラグインが読み込まれています。各プラグインの設定を変更できます。.
+        /// </summary>
+        public static string Settings_Plugins_LoadedDesc {
+            get {
+                return ResourceManager.GetString("Settings_Plugins_LoadedDesc", resourceCulture);
             }
         }
         

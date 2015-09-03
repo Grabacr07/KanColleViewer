@@ -10,6 +10,7 @@
 			 xmlns:composition="clr-namespace:Grabacr07.KanColleViewer.Composition"
 			 xmlns:compositionVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Composition"
 			 xmlns:vms="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Settings"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 mc:Ignorable="d"
 			 d:DesignWidth="500"
 			 d:DesignHeight="300"
@@ -38,10 +39,10 @@
 				</Style>
 			</StackPanel.Style>
 
-			<TextBlock Text="読み込みに失敗したプラグイン"
+			<TextBlock Text="{Binding Resources.Settings_Plugins_FailedToLoad, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
-			<TextBlock Text="以下のプラグインは、読み込みに失敗し動作していません。発生したエラーの詳細を確認できます。"
+			<TextBlock Text="{Binding Resources.Settings_Plugins_FailedToLoadDesc, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					   Style="{DynamicResource DetailTextStyleKey}"
 					   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 					   Margin="20,0,0,0" />
@@ -111,11 +112,11 @@
 					   Margin="0,0,0,12" />
 		</StackPanel>
 
-		<TextBlock Text="読み込み済みのプラグイン"
+		<TextBlock Text="{Binding Resources.Settings_Plugins_Loaded, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 		<StackPanel Margin="20,0,0,0">
-			<TextBlock Text="以下のプラグインが読み込まれています。各プラグインの設定を変更できます。"
+			<TextBlock Text="{Binding Resources.Settings_Plugins_LoadedDesc, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					   Style="{DynamicResource DetailTextStyleKey}"
 					   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 

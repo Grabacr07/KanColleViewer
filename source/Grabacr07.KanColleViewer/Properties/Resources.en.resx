@@ -1154,6 +1154,9 @@ Click here to get it.</value>
   <data name="Common_Apply" xml:space="preserve">
     <value>Apply</value>
   </data>
+  <data name="Common_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
   <data name="Common_Resources_Ammo" xml:space="preserve">
     <value>Ammo</value>
   </data>
@@ -1224,6 +1227,18 @@ HTTP proxy settings are applied immediately. Settings for all other protocols ar
   </data>
   <data name="Settings_Plugins" xml:space="preserve">
     <value>Plugins</value>
+  </data>
+  <data name="Settings_Plugins_FailedToLoad" xml:space="preserve">
+    <value>Unloadable Plugins </value>
+  </data>
+  <data name="Settings_Plugins_FailedToLoadDesc" xml:space="preserve">
+    <value>Below you can examine the error log for each plugin that failed to load.</value>
+  </data>
+  <data name="Settings_Plugins_Loaded" xml:space="preserve">
+    <value>Loaded Plugins</value>
+  </data>
+  <data name="Settings_Plugins_LoadedDesc" xml:space="preserve">
+    <value>These plugins were successfully loaded and can be configured:</value>
   </data>
   <data name="Settings_Plugins_PluginInfo_Features" xml:space="preserve">
     <value>Features:</value>

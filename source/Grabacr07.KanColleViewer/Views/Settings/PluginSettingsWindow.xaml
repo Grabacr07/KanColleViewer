@@ -14,6 +14,7 @@
 				   xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 				   xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 				   xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Settings"
+				   xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance settings:PluginSettingsWindowViewModel}"
 				   Title="{Binding Title}"
@@ -41,7 +42,7 @@
 			<Rectangle Height="1"
 					   Style="{DynamicResource SeparatorRectangleStyleKey}"
 					   Margin="0,0,0,12" />
-			<metro2:CallMethodButton Content="閉じる"
+			<metro2:CallMethodButton Content="{Binding Resources.Common_Close, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 MethodName="Close"
 									 IsCancel="True"
 									 MinWidth="110"
