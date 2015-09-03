@@ -250,6 +250,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 再試行.
+        /// </summary>
+        public static string Common_Retry {
+            get {
+                return ResourceManager.GetString("Common_Retry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 艦娘.
         /// </summary>
         public static string Common_ShipGirl {
@@ -975,6 +984,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Overview_ShipList {
             get {
                 return ResourceManager.GetString("Overview_ShipList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ※設定を変更したら [再試行] ボタンを押してください。.
+        /// </summary>
+        public static string ProxyBootstrapper_PortChangeNote {
+            get {
+                return ResourceManager.GetString("ProxyBootstrapper_PortChangeNote", resourceCulture);
             }
         }
         

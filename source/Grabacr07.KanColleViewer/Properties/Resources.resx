@@ -1182,6 +1182,12 @@ Click here to get it.</value>
   <data name="Common_Resources_Steel" xml:space="preserve">
     <value>鋼鉄</value>
   </data>
+  <data name="Common_Retry" xml:space="preserve">
+    <value>再試行</value>
+  </data>
+  <data name="ProxyBootstrapper_PortChangeNote" xml:space="preserve">
+    <value>※設定を変更したら [再試行] ボタンを押してください。</value>
+  </data>
   <data name="Settings_BrowserControl_ResetZoom1" xml:space="preserve">
     <value>ゲーム画面を </value>
   </data>

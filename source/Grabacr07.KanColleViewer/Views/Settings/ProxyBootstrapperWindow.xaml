@@ -64,7 +64,7 @@
 					   Style="{DynamicResource SeparatorRectangleStyleKey}"
 					   Margin="0,0,0,12" />
 
-			<CheckBox Content="待ち受けポートを変更する"
+			<CheckBox Content="{Binding Resources.Settings_Network_ListenPortTitle, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					  IsChecked="{Binding Source={x:Static settings:NetworkSettings+LocalProxy.IsEnabled}, Path=Value}" />
 			<StackPanel IsEnabled="{Binding Source={x:Static settings:NetworkSettings+LocalProxy.IsEnabled}, Path=Value}"
 						Margin="20,6,0,6">
@@ -97,12 +97,11 @@
 					<TextBlock Grid.Column="2"
 							   Style="{DynamicResource DetailTextStyleKey}"
 							   Margin="5">
-						<Run Text="(既定値:" />
-						<Run Text="{Binding Source={x:Static settings:NetworkSettings+LocalProxy.Port}, Path=Default, Mode=OneWay}" />
-						<Run Text=")" />
+						<Run Text="(" /><Run Text="{Binding Resources.Settings_Network_ListenPortDefault, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" /><Run Text=":" />
+						<Run Text="{Binding Source={x:Static settings:NetworkSettings+LocalProxy.Port}, Path=Default, Mode=OneWay}" /><Run Text=")" />
 					</TextBlock>
 				</Grid>
-				<TextBlock Text="※設定を変更したら [再試行] ボタンを押してください。"
+				<TextBlock Text="{Binding Resources.ProxyBootstrapper_PortChangeNote, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 						   Style="{DynamicResource DetailTextStyleKey}"
 						   Margin="0,4" />
 			</StackPanel>
@@ -112,13 +111,13 @@
 				   IsEnabled="{Binding IsEditable}"
 				   Margin="6,0,6,6">
 			<metro2:CallMethodButton DockPanel.Dock="Right"
-									 Content="キャンセル"
+									 Content="{Binding Resources.Common_Cancel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 MethodName="Cancel"
 									 MinWidth="110"
 									 Padding="30,6"
 									 Margin="6" />
 			<metro2:CallMethodButton DockPanel.Dock="Right"
-									 Content="再試行"
+									 Content="{Binding Resources.Common_Retry, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 MethodName="Retry"
 									 MinWidth="110"
 									 Padding="30,6"
