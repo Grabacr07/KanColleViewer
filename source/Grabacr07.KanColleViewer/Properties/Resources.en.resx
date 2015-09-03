@@ -857,7 +857,7 @@ GPU: Slow! GPU optimization for tablets.</value>
     <value>LoS</value>
   </data>
   <data name="ShipCatalog_Filter_Hulls" xml:space="preserve">
-    <value>Hull Classification</value>
+    <value>Type</value>
   </data>
   <data name="ShipCatalog_Filter_Hulls_BB" xml:space="preserve">
     <value>Battleships</value>
@@ -952,13 +952,7 @@ GPU: Slow! GPU optimization for tablets.</value>
   <data name="ShipCatalog_Filter_Title" xml:space="preserve">
     <value>Filter and Settings</value>
   </data>
-  <data name="ShipCatalog_Operation_AL" xml:space="preserve">
-    <value>Participated in AL</value>
-  </data>
-  <data name="ShipCatalog_Operation_MI" xml:space="preserve">
-    <value>Participated in MI</value>
-  </data>
-  <data name="ShipCatalog_Operation_NeitherALnorMI" xml:space="preserve">
+  <data name="ShipCatalog_Operation_Neither" xml:space="preserve">
     <value>Did not participate</value>
   </data>
   <data name="ShipCatalog_SortBy_CatalogID" xml:space="preserve">
@@ -975,12 +969,6 @@ GPU: Slow! GPU optimization for tablets.</value>
   </data>
   <data name="ShipCatalog_SortieWaters" xml:space="preserve">
     <value>Operation</value>
-  </data>
-  <data name="ShipCatalog_SortieWaters_AL" xml:space="preserve">
-    <value>AL</value>
-  </data>
-  <data name="ShipCatalog_SortieWaters_MI" xml:space="preserve">
-    <value>MI</value>
   </data>
   <data name="ShipCatalog_Sort_Apply" xml:space="preserve">
     <value>Apply</value>
@@ -1162,6 +1150,9 @@ Click here to get it.</value>
   </data>
   <data name="ZoomFactorSelector_Tooltip" xml:space="preserve">
     <value>Adjust the display size of the game screen.</value>
+  </data>
+  <data name="ShipCatalog_Column_ViewRange_Tooltip" xml:space="preserve">
+    <value>Including bonuses from the equipment</value>
   </data>
   <data name="SlotItemCatalog_Equipped" xml:space="preserve">
     <value>Equipped Ship Girls</value>

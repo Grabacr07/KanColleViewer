@@ -2247,6 +2247,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 装備によるステータス上昇を含んだ値です.
+        /// </summary>
+        public static string ShipCatalog_Column_ViewRange_Tooltip {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Column_ViewRange_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 艦種.
         /// </summary>
         public static string ShipCatalog_Filter_Hulls {
@@ -2535,29 +2544,20 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AL 作戦参加済み.
-        /// </summary>
-        public static string ShipCatalog_Operation_AL {
-            get {
-                return ResourceManager.GetString("ShipCatalog_Operation_AL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to MI 作戦参加済み.
-        /// </summary>
-        public static string ShipCatalog_Operation_MI {
-            get {
-                return ResourceManager.GetString("ShipCatalog_Operation_MI", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to 作戦出撃なし.
         /// </summary>
-        public static string ShipCatalog_Operation_NeitherALnorMI {
+        public static string ShipCatalog_Operation_Neither {
             get {
-                return ResourceManager.GetString("ShipCatalog_Operation_NeitherALnorMI", resourceCulture);
+                return ResourceManager.GetString("ShipCatalog_Operation_Neither", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 一覧を生成しています....
+        /// </summary>
+        public static string ShipCatalog_Refreshing {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Refreshing", resourceCulture);
             }
         }
         
@@ -2675,24 +2675,6 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string ShipCatalog_SortieWaters {
             get {
                 return ResourceManager.GetString("ShipCatalog_SortieWaters", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to AL 作戦.
-        /// </summary>
-        public static string ShipCatalog_SortieWaters_AL {
-            get {
-                return ResourceManager.GetString("ShipCatalog_SortieWaters_AL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to MI 作戦.
-        /// </summary>
-        public static string ShipCatalog_SortieWaters_MI {
-            get {
-                return ResourceManager.GetString("ShipCatalog_SortieWaters_MI", resourceCulture);
             }
         }
         

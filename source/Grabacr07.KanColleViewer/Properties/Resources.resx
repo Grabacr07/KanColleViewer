@@ -947,13 +947,7 @@ GPU: Slow! GPU optimization for tablets.</value>
   <data name="ShipCatalog_Filter_Title" xml:space="preserve">
     <value>フィルター設定</value>
   </data>
-  <data name="ShipCatalog_Operation_AL" xml:space="preserve">
-    <value>AL 作戦参加済み</value>
-  </data>
-  <data name="ShipCatalog_Operation_MI" xml:space="preserve">
-    <value>MI 作戦参加済み</value>
-  </data>
-  <data name="ShipCatalog_Operation_NeitherALnorMI" xml:space="preserve">
+  <data name="ShipCatalog_Operation_Neither" xml:space="preserve">
     <value>作戦出撃なし</value>
   </data>
   <data name="ShipCatalog_SortBy_CatalogID" xml:space="preserve">
@@ -970,12 +964,6 @@ GPU: Slow! GPU optimization for tablets.</value>
   </data>
   <data name="ShipCatalog_SortieWaters" xml:space="preserve">
     <value>出撃海域</value>
-  </data>
-  <data name="ShipCatalog_SortieWaters_AL" xml:space="preserve">
-    <value>AL 作戦</value>
-  </data>
-  <data name="ShipCatalog_SortieWaters_MI" xml:space="preserve">
-    <value>MI 作戦</value>
   </data>
   <data name="ShipCatalog_Sort_Apply" xml:space="preserve">
     <value>更新</value>
@@ -1163,6 +1151,12 @@ Click here to get it.</value>
   </data>
   <data name="Updater_Notification_TransUpdate_Success" xml:space="preserve">
     <value>Translation files have been updated!</value>
+  </data>
+  <data name="ShipCatalog_Column_ViewRange_Tooltip" xml:space="preserve">
+    <value>装備によるステータス上昇を含んだ値です</value>
+  </data>
+  <data name="ShipCatalog_Refreshing" xml:space="preserve">
+    <value>一覧を生成しています...</value>
   </data>
   <data name="SlotItemCatalog_Equipped" xml:space="preserve">
     <value>装備している艦娘</value>
