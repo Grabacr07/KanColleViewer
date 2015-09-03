@@ -132,7 +132,7 @@
 
 		<metro:PromptTextBox Text="{Binding UserStyleSheetSettings.UserStyleSheet, Mode=TwoWay}"
 							 Margin="20,0,0,10"
-							 Height="270"
+							 Height="100"
 							 AcceptsReturn="True"
 							 TextWrapping="NoWrap"
 							 VerticalContentAlignment="Top"
