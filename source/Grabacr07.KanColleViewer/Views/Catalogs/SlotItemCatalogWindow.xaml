@@ -71,7 +71,7 @@
 		<DockPanel Grid.Row="1">
 			<Border DockPanel.Dock="Top"
 					Margin="8,8,8,0">
-				<metro2:CallMethodButton Content="表示の更新"
+                <metro2:CallMethodButton Content="{Binding Resources.SlotItemCatalog_Refresh, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 										 Padding="40,6"
 										 MethodName="Update"
 										 HorizontalAlignment="Left" />
@@ -131,7 +131,7 @@
 						<GridView>
 							<GridViewColumn Width="190">
 								<GridViewColumn.Header>
-									<TextBlock Text="装備名" />
+                                    <TextBlock Text="{Binding Resources.SlotItemCatalog_ItemName, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate DataType="{x:Type viewModels:SlotItemCounter}">
@@ -151,7 +151,7 @@
 
 							<GridViewColumn Width="52">
 								<GridViewColumn.Header>
-									<TextBlock Text="合計" />
+                                    <TextBlock Text="{Binding Resources.SlotItemCatalog_Total, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate DataType="{x:Type viewModels:SlotItemCounter}">
@@ -168,24 +168,24 @@
 										<Border Width="52"
 												BorderThickness="0,0,1,0"
 												BorderBrush="{DynamicResource BorderBrushKey}">
-											<TextBlock Text="改修" />
+                                            <TextBlock Text="{Binding Resources.SlotItemCatalog_ImprovementLevel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 										</Border>
 										<Border Width="52"
 												BorderThickness="0,0,1,0"
 												BorderBrush="{DynamicResource BorderBrushKey}">
-											<TextBlock Text="熟練度" />
+                                            <TextBlock Text="{Binding Resources.SlotItemCatalog_SkillLevel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 										</Border>
 										<Border Width="82"
 												BorderThickness="0,0,1,0"
 												BorderBrush="{DynamicResource BorderBrushKey}">
 											<TextBlock>
-												<Run Text="所持数" />
-												<Run Text="(余り)"
+												<Run Text="{Binding Resources.SlotItemCatalog_Owned, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+												<Run Text="{Binding Resources.SlotItemCatalog_Extra, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 													 FontSize="11" />
 											</TextBlock>
 										</Border>
 										<Border>
-											<TextBlock Text="装備している艦娘" />
+                                            <TextBlock Text="{Binding Resources.SlotItemCatalog_Equipped, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 										</Border>
 									</DockPanel>
 								</GridViewColumn.Header>
@@ -306,7 +306,7 @@
 				Padding="20"
 				Visibility="{Binding IsReloading, Converter={StaticResource BooleanToVisibilityConverter}}"
 				d:IsHidden="True">
-			<TextBlock Text="一覧を生成しています..."
+            <TextBlock Text="{Binding Resources.SlotItemCatalog_Refreshing, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					   Style="{DynamicResource EmphaticTextStyleKey}"
 					   FontSize="16"
 					   Background="{DynamicResource ThemeBrushKey}"

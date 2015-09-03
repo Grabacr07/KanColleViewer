@@ -421,6 +421,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 艦隊詳細.
+        /// </summary>
+        public static string Fleets_Button_Details {
+            get {
+                return ResourceManager.GetString("Fleets_Button_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to レベル.
         /// </summary>
         public static string Fleets_Level {
@@ -435,6 +444,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Fleets_Speed_Fast {
             get {
                 return ResourceManager.GetString("Fleets_Speed_Fast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 速度混成艦隊.
+        /// </summary>
+        public static string Fleets_Speed_Hybrid {
+            get {
+                return ResourceManager.GetString("Fleets_Speed_Hybrid", resourceCulture);
             }
         }
         
@@ -462,6 +480,204 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Fleets_ViewRange {
             get {
                 return ResourceManager.GetString("Fleets_ViewRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 索敵能力.
+        /// </summary>
+        public static string Fleets_ViewRange_Equipment {
+            get {
+                return ResourceManager.GetString("Fleets_ViewRange_Equipment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 制空戦力.
+        /// </summary>
+        public static string FleetWindow_AirSuperiority {
+            get {
+                return ResourceManager.GetString("FleetWindow_AirSuperiority", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 平均レベル.
+        /// </summary>
+        public static string FleetWindow_LevelAverage {
+            get {
+                return ResourceManager.GetString("FleetWindow_LevelAverage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 合計レベル.
+        /// </summary>
+        public static string FleetWindow_LevelTotal {
+            get {
+                return ResourceManager.GetString("FleetWindow_LevelTotal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 索敵値.
+        /// </summary>
+        public static string FleetWindow_LoS {
+            get {
+                return ResourceManager.GetString("FleetWindow_LoS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 連合艦隊は遠征に参加できません.
+        /// </summary>
+        public static string FleetWindow_Status_CombinedNoExpedition {
+            get {
+                return ResourceManager.GetString("FleetWindow_Status_CombinedNoExpedition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦隊の艦娘に大きなダメージはありません.
+        /// </summary>
+        public static string FleetWindow_Status_DamageInsignificant {
+            get {
+                return ResourceManager.GetString("FleetWindow_Status_DamageInsignificant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦隊に大破した艦娘がいます.
+        /// </summary>
+        public static string FleetWindow_Status_DamageTaiha {
+            get {
+                return ResourceManager.GetString("FleetWindow_Status_DamageTaiha", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦隊に大破した艦娘がいます！.
+        /// </summary>
+        public static string FleetWindow_Status_DamageTaihaSortie {
+            get {
+                return ResourceManager.GetString("FleetWindow_Status_DamageTaihaSortie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦隊に入渠中の艦娘がいます.
+        /// </summary>
+        public static string FleetWindow_Status_Docked {
+            get {
+                return ResourceManager.GetString("FleetWindow_Status_Docked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦隊は遠征中です.
+        /// </summary>
+        public static string FleetWindow_Status_Expedition {
+            get {
+                return ResourceManager.GetString("FleetWindow_Status_Expedition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 疲労回復まで.
+        /// </summary>
+        public static string FleetWindow_Status_FatigueTimer {
+            get {
+                return ResourceManager.GetString("FleetWindow_Status_FatigueTimer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦隊の艦娘は入渠していません.
+        /// </summary>
+        public static string FleetWindow_Status_NoDocked {
+            get {
+                return ResourceManager.GetString("FleetWindow_Status_NoDocked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦隊は遠征中ではありません.
+        /// </summary>
+        public static string FleetWindow_Status_NoExpedition {
+            get {
+                return ResourceManager.GetString("FleetWindow_Status_NoExpedition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦隊の艦娘は疲労していません.
+        /// </summary>
+        public static string FleetWindow_Status_NoFatigued {
+            get {
+                return ResourceManager.GetString("FleetWindow_Status_NoFatigued", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦隊は出撃していません.
+        /// </summary>
+        public static string FleetWindow_Status_NotSortied {
+            get {
+                return ResourceManager.GetString("FleetWindow_Status_NotSortied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦隊は補給済みです.
+        /// </summary>
+        public static string FleetWindow_Status_Resupplied {
+            get {
+                return ResourceManager.GetString("FleetWindow_Status_Resupplied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦隊に未補給の艦娘がいます.
+        /// </summary>
+        public static string FleetWindow_Status_ResupplyNeeded {
+            get {
+                return ResourceManager.GetString("FleetWindow_Status_ResupplyNeeded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦隊は出撃中です！.
+        /// </summary>
+        public static string FleetWindow_Status_Sortied {
+            get {
+                return ResourceManager.GetString("FleetWindow_Status_Sortied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦隊の出撃準備は完了していません.
+        /// </summary>
+        public static string FleetWindow_Status_SortieNotReady {
+            get {
+                return ResourceManager.GetString("FleetWindow_Status_SortieNotReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 出撃準備完了！.
+        /// </summary>
+        public static string FleetWindow_Status_SortieReady {
+            get {
+                return ResourceManager.GetString("FleetWindow_Status_SortieReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦隊詳細.
+        /// </summary>
+        public static string FleetWindow_Title {
+            get {
+                return ResourceManager.GetString("FleetWindow_Title", resourceCulture);
             }
         }
         
@@ -628,6 +844,96 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 疲労回復完了.
+        /// </summary>
+        public static string Notifications_MoraleRestored {
+            get {
+                return ResourceManager.GetString("Notifications_MoraleRestored", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 「{0}」に編成されている艦娘の疲労が回復しました。.
+        /// </summary>
+        public static string Notifications_MoraleRestored_Details {
+            get {
+                return ResourceManager.GetString("Notifications_MoraleRestored_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to データ.
+        /// </summary>
+        public static string Overview_Data {
+            get {
+                return ResourceManager.GetString("Overview_Data", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 装備一覧.
+        /// </summary>
+        public static string Overview_EquipmentList {
+            get {
+                return ResourceManager.GetString("Overview_EquipmentList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦娘一覧.
+        /// </summary>
+        public static string Overview_ShipList {
+            get {
+                return ResourceManager.GetString("Overview_ShipList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 任務画面の全ページにアクセスしてください。.
+        /// </summary>
+        public static string Quest_Detail_Untaken {
+            get {
+                return ResourceManager.GetString("Quest_Detail_Untaken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  50 % .
+        /// </summary>
+        public static string Quest_Progress_50 {
+            get {
+                return ResourceManager.GetString("Quest_Progress_50", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  80 % .
+        /// </summary>
+        public static string Quest_Progress_80 {
+            get {
+                return ResourceManager.GetString("Quest_Progress_80", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  完了 .
+        /// </summary>
+        public static string Quest_State_Accomplished {
+            get {
+                return ResourceManager.GetString("Quest_State_Accomplished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (未取得の任務).
+        /// </summary>
+        public static string Quest_Title_Untaken {
+            get {
+                return ResourceManager.GetString("Quest_Title_Untaken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 任務.
         /// </summary>
         public static string Quests {
@@ -678,6 +984,96 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Quests_Weekly {
             get {
                 return ResourceManager.GetString("Quests_Weekly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 大将.
+        /// </summary>
+        public static string Rank_Admiral {
+            get {
+                return ResourceManager.GetString("Rank_Admiral", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 大佐.
+        /// </summary>
+        public static string Rank_Captain {
+            get {
+                return ResourceManager.GetString("Rank_Captain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 中佐.
+        /// </summary>
+        public static string Rank_Commander {
+            get {
+                return ResourceManager.GetString("Rank_Commander", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 中堅少佐.
+        /// </summary>
+        public static string Rank_Lieutenant {
+            get {
+                return ResourceManager.GetString("Rank_Lieutenant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 少佐.
+        /// </summary>
+        public static string Rank_Lieutenant_Commander {
+            get {
+                return ResourceManager.GetString("Rank_Lieutenant_Commander", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 元帥.
+        /// </summary>
+        public static string Rank_Marshal_Admiral {
+            get {
+                return ResourceManager.GetString("Rank_Marshal_Admiral", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 新米中佐.
+        /// </summary>
+        public static string Rank_Novice_Commander {
+            get {
+                return ResourceManager.GetString("Rank_Novice_Commander", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 新米少佐.
+        /// </summary>
+        public static string Rank_Novice_Lieutenant {
+            get {
+                return ResourceManager.GetString("Rank_Novice_Lieutenant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 少将.
+        /// </summary>
+        public static string Rank_Rear_Admiral {
+            get {
+                return ResourceManager.GetString("Rank_Rear_Admiral", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 中将.
+        /// </summary>
+        public static string Rank_Vice_Admiral {
+            get {
+                return ResourceManager.GetString("Rank_Vice_Admiral", resourceCulture);
             }
         }
         
@@ -772,6 +1168,24 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 「{0}」 in {1} is in critical condition!.
+        /// </summary>
+        public static string ReSortie_CriticalConditionMessage {
+            get {
+                return ResourceManager.GetString("ReSortie_CriticalConditionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Critical Ship Warning.
+        /// </summary>
+        public static string ReSortie_CriticalConditionMessage_Title {
+            get {
+                return ResourceManager.GetString("ReSortie_CriticalConditionMessage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 「{0}」の全艦娘の疲労が回復しました。.
         /// </summary>
         public static string ReSortie_NotificationMessage {
@@ -817,6 +1231,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change window color when a ship is in critical condition.
+        /// </summary>
+        public static string Settings_Accent_CriticalCondition {
+            get {
+                return ResourceManager.GetString("Settings_Accent_CriticalCondition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ブラウザー操作.
         /// </summary>
         public static string Settings_BrowserControl {
@@ -853,11 +1276,100 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Custom Sound Notifications.
+        /// </summary>
+        public static string Settings_CustomSound {
+            get {
+                return ResourceManager.GetString("Settings_CustomSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Volume.
+        /// </summary>
+        public static string Settings_CustomSound_Volume {
+            get {
+                return ResourceManager.GetString("Settings_CustomSound_Volume", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 表示設定.
         /// </summary>
         public static string Settings_Display {
             get {
                 return ResourceManager.GetString("Settings_Display", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flash.
+        /// </summary>
+        public static string Settings_Flash {
+            get {
+                return ResourceManager.GetString("Settings_Flash", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This works with DMM.com. OSAPI, and API links now!
+        ///[You must reload the game for the changes to take affect.].
+        /// </summary>
+        public static string Settings_Flash_Message {
+            get {
+                return ResourceManager.GetString("Settings_Flash_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set Flash Quality:.
+        /// </summary>
+        public static string Settings_Flash_Quality {
+            get {
+                return ResourceManager.GetString("Settings_Flash_Quality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Best: Anti-Aliasing enabled on all images (Slowest)
+        ///High: Default.
+        ///Auto-High: Automatically lowers quality when needed.
+        ///Medium: Average Performance
+        ///AutoLow: Will emphasize speed when needed
+        ///Low: Performance over quality. Ugliest setting..
+        /// </summary>
+        public static string Settings_Flash_Quality_ToolTip {
+            get {
+                return ResourceManager.GetString("Settings_Flash_Quality_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set Flash Window:.
+        /// </summary>
+        public static string Settings_Flash_Window {
+            get {
+                return ResourceManager.GetString("Settings_Flash_Window", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opaque: Default (Old IE has no HW accel)
+        ///Direct: Fastest rendering speed (HW accel)
+        ///GPU: Slow! GPU optimization for tablets..
+        /// </summary>
+        public static string Settings_Flash_Window_ToolTip {
+            get {
+                return ResourceManager.GetString("Settings_Flash_Window_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fleet Condition.
+        /// </summary>
+        public static string Settings_FleetCondition {
+            get {
+                return ResourceManager.GetString("Settings_FleetCondition", resourceCulture);
             }
         }
         
@@ -898,11 +1410,308 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to パスワード.
+        /// </summary>
+        public static string Settings_Network_Proxy_Auth_Password {
+            get {
+                return ResourceManager.GetString("Settings_Network_Proxy_Auth_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to プロキシ サーバーにユーザー名とパスワードが必要.
+        /// </summary>
+        public static string Settings_Network_Proxy_Auth_Required {
+            get {
+                return ResourceManager.GetString("Settings_Network_Proxy_Auth_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ユーザー名.
+        /// </summary>
+        public static string Settings_Network_Proxy_Auth_Username {
+            get {
+                return ResourceManager.GetString("Settings_Network_Proxy_Auth_Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 通信設定.
+        /// </summary>
+        public static string Settings_Notifications {
+            get {
+                return ResourceManager.GetString("Settings_Notifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 通知を早める：.
+        /// </summary>
+        public static string Settings_Notifications_AheadOfTime {
+            get {
+                return ResourceManager.GetString("Settings_Notifications_AheadOfTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦これ本体の仕様により、最大 1 分間短縮できます。サーバー時刻とのずれを加味し、40 ～ 50 秒に設定することを推奨します。.
+        /// </summary>
+        public static string Settings_Notifications_AheadOfTime_Description {
+            get {
+                return ResourceManager.GetString("Settings_Notifications_AheadOfTime_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 秒.
+        /// </summary>
+        public static string Settings_Notifications_AheadOfTime_Seconds {
+            get {
+                return ResourceManager.GetString("Settings_Notifications_AheadOfTime_Seconds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 建造完了時に通知する.
+        /// </summary>
+        public static string Settings_Notifications_Construction_Enabled {
+            get {
+                return ResourceManager.GetString("Settings_Notifications_Construction_Enabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 遠征帰投時に通知する.
+        /// </summary>
+        public static string Settings_Notifications_Expeditions_Enabled {
+            get {
+                return ResourceManager.GetString("Settings_Notifications_Expeditions_Enabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦隊に編成されている艦娘の疲労が回復したら通知する.
+        /// </summary>
+        public static string Settings_Notifications_FleetsMorale {
+            get {
+                return ResourceManager.GetString("Settings_Notifications_FleetsMorale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦隊に編成されているすべて艦娘のコンディション値が上記の値以上になったときに通知されます。コンディション値は 3 分間で 3 ずつ回復しますが、KanColleViewer 実装の仕様により、通知タイミングは数秒 ～ 最大 3 分程度遅れる可能性があること予めご了承ください。.
+        /// </summary>
+        public static string Settings_Notifications_FleetsMorale_Description {
+            get {
+                return ResourceManager.GetString("Settings_Notifications_FleetsMorale_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ※[動作設定] &gt; [出撃コンディション] から設定できます。.
+        /// </summary>
+        public static string Settings_Notifications_FleetsMorale_Reference {
+            get {
+                return ResourceManager.GetString("Settings_Notifications_FleetsMorale_Reference", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 再出撃可能とするコンディション値.
+        /// </summary>
+        public static string Settings_Notifications_FleetsMorale_Threshold {
+            get {
+                return ResourceManager.GetString("Settings_Notifications_FleetsMorale_Threshold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 通知プラグイン.
+        /// </summary>
+        public static string Settings_Notifications_NotificationPlugins {
+            get {
+                return ResourceManager.GetString("Settings_Notifications_NotificationPlugins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 以下のプラグインを使用して通知されます。.
+        /// </summary>
+        public static string Settings_Notifications_NotificationPlugins_InUse {
+            get {
+                return ResourceManager.GetString("Settings_Notifications_NotificationPlugins_InUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 入渠完了時に通知する.
+        /// </summary>
+        public static string Settings_Notifications_Repair_Enabled {
+            get {
+                return ResourceManager.GetString("Settings_Notifications_Repair_Enabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Give a notification for ships in critical condition.
+        /// </summary>
+        public static string Settings_Notify_CriticalCondition {
+            get {
+                return ResourceManager.GetString("Settings_Notify_CriticalCondition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 動作設定.
         /// </summary>
         public static string Settings_Operation {
             get {
                 return ResourceManager.GetString("Settings_Operation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦上偵察機.
+        /// </summary>
+        public static string Settings_Operation_LoS_CarrierBasedRecon {
+            get {
+                return ResourceManager.GetString("Settings_Operation_LoS_CarrierBasedRecon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 彩雲、二式艦上偵察機.
+        /// </summary>
+        public static string Settings_Operation_LoS_CarrierBasedRecon_Tooltip {
+            get {
+                return ResourceManager.GetString("Settings_Operation_LoS_CarrierBasedRecon_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (偵察機 × 2) + (電探) + √(装備込みの艦隊索敵値合計 - 偵察機 - 電探).
+        /// </summary>
+        public static string Settings_Operation_LoS_New {
+            get {
+                return ResourceManager.GetString("Settings_Operation_LoS_New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 装備による索敵値が重要とされる場合の計算方法 (推定).
+        /// </summary>
+        public static string Settings_Operation_LoS_New_Desc {
+            get {
+                return ResourceManager.GetString("Settings_Operation_LoS_New_Desc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 偵察機.
+        /// </summary>
+        public static string Settings_Operation_LoS_Recon {
+            get {
+                return ResourceManager.GetString("Settings_Operation_LoS_Recon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 水上爆撃機.
+        /// </summary>
+        public static string Settings_Operation_LoS_SeaplaneBomber {
+            get {
+                return ResourceManager.GetString("Settings_Operation_LoS_SeaplaneBomber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 瑞雲、瑞雲(六三四空)、試製晴嵐.
+        /// </summary>
+        public static string Settings_Operation_LoS_SeaplaneBomber_Tooltip {
+            get {
+                return ResourceManager.GetString("Settings_Operation_LoS_SeaplaneBomber_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 水上偵察機.
+        /// </summary>
+        public static string Settings_Operation_LoS_SeaplaneRecon {
+            get {
+                return ResourceManager.GetString("Settings_Operation_LoS_SeaplaneRecon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 零式水上偵察機、零式水上観測機、九八式水上偵察機(夜偵).
+        /// </summary>
+        public static string Settings_Operation_LoS_SeaplaneRecon_Tooltip {
+            get {
+                return ResourceManager.GetString("Settings_Operation_LoS_SeaplaneRecon_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦娘と装備の索敵値の単純な合計.
+        /// </summary>
+        public static string Settings_Operation_LoS_Simple {
+            get {
+                return ResourceManager.GetString("Settings_Operation_LoS_Simple", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to KanColleViewer での従来の計算方法.
+        /// </summary>
+        public static string Settings_Operation_LoS_Simple_Description {
+            get {
+                return ResourceManager.GetString("Settings_Operation_LoS_Simple_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦隊の索敵値の算出に使用する計算式は、以下を使用する.
+        /// </summary>
+        public static string Settings_Operation_LoS_Title {
+            get {
+                return ResourceManager.GetString("Settings_Operation_LoS_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 索敵値計算.
+        /// </summary>
+        public static string Settings_Operation_LoSCalculation {
+            get {
+                return ResourceManager.GetString("Settings_Operation_LoSCalculation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 出撃コンディション.
+        /// </summary>
+        public static string Settings_Operation_SortieCondition {
+            get {
+                return ResourceManager.GetString("Settings_Operation_SortieCondition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ※通常は、間宮アイコンが消灯する 40 か、自然回復上限の 49 に設定します。.
+        /// </summary>
+        public static string Settings_Operation_SortieCondition_Description {
+            get {
+                return ResourceManager.GetString("Settings_Operation_SortieCondition_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦隊内の全艦のコンディションが次の数値以上になったとき、出撃可能と判断する.
+        /// </summary>
+        public static string Settings_Operation_SortieCondition_Title {
+            get {
+                return ResourceManager.GetString("Settings_Operation_SortieCondition_Title", resourceCulture);
             }
         }
         
@@ -1024,6 +1833,141 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Translations.
+        /// </summary>
+        public static string Settings_Translations {
+            get {
+                return ResourceManager.GetString("Settings_Translations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Append untranslated items to the translation files?.
+        /// </summary>
+        public static string Settings_Translations_Add_Enable {
+            get {
+                return ResourceManager.GetString("Settings_Translations_Add_Enable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Translate game items, ships, and quests to selected language?.
+        /// </summary>
+        public static string Settings_Translations_Enable {
+            get {
+                return ResourceManager.GetString("Settings_Translations_Enable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automatically submit untranslated data.
+        /// </summary>
+        public static string Settings_Translations_Submit_Enable {
+            get {
+                return ResourceManager.GetString("Settings_Translations_Submit_Enable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updates.
+        /// </summary>
+        public static string Settings_Updates {
+            get {
+                return ResourceManager.GetString("Settings_Updates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automatically update translations on startup.
+        /// </summary>
+        public static string Settings_Updates_AutoUpdateTrans {
+            get {
+                return ResourceManager.GetString("Settings_Updates_AutoUpdateTrans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check for the latest program and translation versions.
+        /// </summary>
+        public static string Settings_Updates_CheckUpdateButn_ToolTip {
+            get {
+                return ResourceManager.GetString("Settings_Updates_CheckUpdateButn_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check for Updates.
+        /// </summary>
+        public static string Settings_Updates_CheckUpdatesBtn {
+            get {
+                return ResourceManager.GetString("Settings_Updates_CheckUpdatesBtn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currently.
+        /// </summary>
+        public static string Settings_Updates_CurrentVersion {
+            get {
+                return ResourceManager.GetString("Settings_Updates_CurrentVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get Latest KCV.
+        /// </summary>
+        public static string Settings_Updates_GetKCVBtn {
+            get {
+                return ResourceManager.GetString("Settings_Updates_GetKCVBtn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opens a link to the latest version of KCV found here..
+        /// </summary>
+        public static string Settings_Updates_GetKCVBtn_ToolTip {
+            get {
+                return ResourceManager.GetString("Settings_Updates_GetKCVBtn_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Online.
+        /// </summary>
+        public static string Settings_Updates_OnlineVersion {
+            get {
+                return ResourceManager.GetString("Settings_Updates_OnlineVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check for updates on startup.
+        /// </summary>
+        public static string Settings_Updates_UpdateOnStartup {
+            get {
+                return ResourceManager.GetString("Settings_Updates_UpdateOnStartup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download Translations.
+        /// </summary>
+        public static string Settings_Updates_UpdateTransBtn {
+            get {
+                return ResourceManager.GetString("Settings_Updates_UpdateTransBtn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloads translations only for selected UI language!.
+        /// </summary>
+        public static string Settings_Updates_UpdateTransBtn_ToolTip {
+            get {
+                return ResourceManager.GetString("Settings_Updates_UpdateTransBtn_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to バージョン情報.
         /// </summary>
         public static string Settings_VersionInfo {
@@ -1078,6 +2022,861 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 入渠中.
+        /// </summary>
+        public static string Ship_Condition_Docked {
+            get {
+                return ResourceManager.GetString("Ship_Condition_Docked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 健在.
+        /// </summary>
+        public static string Ship_Condition_Healthy {
+            get {
+                return ResourceManager.GetString("Ship_Condition_Healthy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 健在・ダメコン搭載.
+        /// </summary>
+        public static string Ship_Condition_HealthyDamecon {
+            get {
+                return ResourceManager.GetString("Ship_Condition_HealthyDamecon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 大破 (轟沈の可能性あり).
+        /// </summary>
+        public static string Ship_Condition_Taiha {
+            get {
+                return ResourceManager.GetString("Ship_Condition_Taiha", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 大破 (ダメコン使用可能).
+        /// </summary>
+        public static string Ship_Condition_TaihaDamecon {
+            get {
+                return ResourceManager.GetString("Ship_Condition_TaihaDamecon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 大破 (退避済み).
+        /// </summary>
+        public static string Ship_Condition_Towed {
+            get {
+                return ResourceManager.GetString("Ship_Condition_Towed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 撤退 (護衛退避).
+        /// </summary>
+        public static string Ship_Condition_Towing {
+            get {
+                return ResourceManager.GetString("Ship_Condition_Towing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dock: {0}.
+        /// </summary>
+        public static string Ship_RepairDockToolTip {
+            get {
+                return ResourceManager.GetString("Ship_RepairDockToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Facility: {0}.
+        /// </summary>
+        public static string Ship_RepairFacilityToolTip {
+            get {
+                return ResourceManager.GetString("Ship_RepairFacilityToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 入渠中.
+        /// </summary>
+        public static string Ship_Repairing {
+            get {
+                return ResourceManager.GetString("Ship_Repairing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show additional stats.
+        /// </summary>
+        public static string ShipCatalog_AdditionalStats {
+            get {
+                return ResourceManager.GetString("ShipCatalog_AdditionalStats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 対空.
+        /// </summary>
+        public static string ShipCatalog_Column_AntiAir {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Column_AntiAir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 装甲.
+        /// </summary>
+        public static string ShipCatalog_Column_Armour {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Column_Armour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 対潜.
+        /// </summary>
+        public static string ShipCatalog_Column_ASW {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Column_ASW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cond..
+        /// </summary>
+        public static string ShipCatalog_Column_Condition {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Column_Condition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 装備.
+        /// </summary>
+        public static string ShipCatalog_Column_Equipped {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Column_Equipped", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 回避.
+        /// </summary>
+        public static string ShipCatalog_Column_Evasion {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Column_Evasion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 火力.
+        /// </summary>
+        public static string ShipCatalog_Column_Firepower {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Column_Firepower", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦種.
+        /// </summary>
+        public static string ShipCatalog_Column_HullCode {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Column_HullCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to レベル.
+        /// </summary>
+        public static string ShipCatalog_Column_Level {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Column_Level", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 運.
+        /// </summary>
+        public static string ShipCatalog_Column_Luck {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Column_Luck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦名.
+        /// </summary>
+        public static string ShipCatalog_Column_Name {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Column_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ID.
+        /// </summary>
+        public static string ShipCatalog_Column_ObtainedID {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Column_ObtainedID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 雷装.
+        /// </summary>
+        public static string ShipCatalog_Column_Torpedo {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Column_Torpedo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 索敵.
+        /// </summary>
+        public static string ShipCatalog_Column_ViewRange {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Column_ViewRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦種.
+        /// </summary>
+        public static string ShipCatalog_Filter_Hulls {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Hulls", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 戦艦.
+        /// </summary>
+        public static string ShipCatalog_Filter_Hulls_BB {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Hulls_BB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 重巡・航巡.
+        /// </summary>
+        public static string ShipCatalog_Filter_Hulls_CA {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Hulls_CA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 軽巡・雷巡.
+        /// </summary>
+        public static string ShipCatalog_Filter_Hulls_CL {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Hulls_CL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 航空母艦.
+        /// </summary>
+        public static string ShipCatalog_Filter_Hulls_CV {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Hulls_CV", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 駆逐艦.
+        /// </summary>
+        public static string ShipCatalog_Filter_Hulls_DD {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Hulls_DD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 他の.
+        /// </summary>
+        public static string ShipCatalog_Filter_Hulls_Misc {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Hulls_Misc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 航戦・航巡.
+        /// </summary>
+        public static string ShipCatalog_Filter_Hulls_SeaplaneBomberCapable {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Hulls_SeaplaneBomberCapable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to すべて選択.
+        /// </summary>
+        public static string ShipCatalog_Filter_Hulls_SelectAll {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Hulls_SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 潜水艦.
+        /// </summary>
+        public static string ShipCatalog_Filter_Hulls_SS {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Hulls_SS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to すべて.
+        /// </summary>
+        public static string ShipCatalog_Filter_Misc_All {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Misc_All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 遠征中の艦を除外する.
+        /// </summary>
+        public static string ShipCatalog_Filter_Misc_ExcludeOnExpedition {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Misc_ExcludeOnExpedition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 遠征.
+        /// </summary>
+        public static string ShipCatalog_Filter_Misc_Expedition {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Misc_Expedition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to レベル.
+        /// </summary>
+        public static string ShipCatalog_Filter_Misc_Level {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Misc_Level", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lv.1.
+        /// </summary>
+        public static string ShipCatalog_Filter_Misc_Level1 {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Misc_Level1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lv.2 以上.
+        /// </summary>
+        public static string ShipCatalog_Filter_Misc_Level2Up {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Misc_Level2Up", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ロック.
+        /// </summary>
+        public static string ShipCatalog_Filter_Misc_Lock {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Misc_Lock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ロックしていない.
+        /// </summary>
+        public static string ShipCatalog_Filter_Misc_LockedNo {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Misc_LockedNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ロックしている.
+        /// </summary>
+        public static string ShipCatalog_Filter_Misc_LockedYes {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Misc_LockedYes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 近代化改修.
+        /// </summary>
+        public static string ShipCatalog_Filter_Misc_Modernised {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Misc_Modernised", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 改修未完.
+        /// </summary>
+        public static string ShipCatalog_Filter_Misc_ModernisedNo {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Misc_ModernisedNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 改修完了.
+        /// </summary>
+        public static string ShipCatalog_Filter_Misc_ModernisedYes {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Misc_ModernisedYes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 改造.
+        /// </summary>
+        public static string ShipCatalog_Filter_Misc_Remodelled {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Misc_Remodelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 改造未完.
+        /// </summary>
+        public static string ShipCatalog_Filter_Misc_RemodelledNo {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Misc_RemodelledNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 改造完了.
+        /// </summary>
+        public static string ShipCatalog_Filter_Misc_RemodelledYes {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Misc_RemodelledYes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 速力.
+        /// </summary>
+        public static string ShipCatalog_Filter_Misc_Speed {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Misc_Speed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 高速.
+        /// </summary>
+        public static string ShipCatalog_Filter_Misc_SpeedFast {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Misc_SpeedFast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 低速.
+        /// </summary>
+        public static string ShipCatalog_Filter_Misc_SpeedSlow {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Misc_SpeedSlow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset Filter Settings.
+        /// </summary>
+        public static string ShipCatalog_Filter_Reset {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save Filter Settings.
+        /// </summary>
+        public static string ShipCatalog_Filter_SaveSettings {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_SaveSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Does not include ship types!.
+        /// </summary>
+        public static string ShipCatalog_Filter_SaveSettings_ToolTip {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_SaveSettings_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to フィルター設定.
+        /// </summary>
+        public static string ShipCatalog_Filter_Title {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AL 作戦参加済み.
+        /// </summary>
+        public static string ShipCatalog_Operation_AL {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Operation_AL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MI 作戦参加済み.
+        /// </summary>
+        public static string ShipCatalog_Operation_MI {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Operation_MI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 作戦出撃なし.
+        /// </summary>
+        public static string ShipCatalog_Operation_NeitherALnorMI {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Operation_NeitherALnorMI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 更新.
+        /// </summary>
+        public static string ShipCatalog_Sort_Apply {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Sort_Apply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 昇順.
+        /// </summary>
+        public static string ShipCatalog_Sort_Ascending {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Sort_Ascending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to クリア.
+        /// </summary>
+        public static string ShipCatalog_Sort_Clear {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Sort_Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 降順.
+        /// </summary>
+        public static string ShipCatalog_Sort_Descending {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Sort_Descending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to なし.
+        /// </summary>
+        public static string ShipCatalog_Sort_None {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Sort_None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 方法.
+        /// </summary>
+        public static string ShipCatalog_Sort_Prompt {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Sort_Prompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦娘を以下の順序で並べ替えます。.
+        /// </summary>
+        public static string ShipCatalog_Sort_Subtitle {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Sort_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 並べ替え設定.
+        /// </summary>
+        public static string ShipCatalog_Sort_Title {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Sort_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CatalogID.
+        /// </summary>
+        public static string ShipCatalog_SortBy_CatalogID {
+            get {
+                return ResourceManager.GetString("ShipCatalog_SortBy_CatalogID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Condition 値.
+        /// </summary>
+        public static string ShipCatalog_SortBy_Condition {
+            get {
+                return ResourceManager.GetString("ShipCatalog_SortBy_Condition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 次のレベルまでの経験値.
+        /// </summary>
+        public static string ShipCatalog_SortBy_Experience {
+            get {
+                return ResourceManager.GetString("ShipCatalog_SortBy_Experience", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 耐久.
+        /// </summary>
+        public static string ShipCatalog_SortBy_MaxHP {
+            get {
+                return ResourceManager.GetString("ShipCatalog_SortBy_MaxHP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 出撃海域.
+        /// </summary>
+        public static string ShipCatalog_SortieWaters {
+            get {
+                return ResourceManager.GetString("ShipCatalog_SortieWaters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AL 作戦.
+        /// </summary>
+        public static string ShipCatalog_SortieWaters_AL {
+            get {
+                return ResourceManager.GetString("ShipCatalog_SortieWaters_AL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MI 作戦.
+        /// </summary>
+        public static string ShipCatalog_SortieWaters_MI {
+            get {
+                return ResourceManager.GetString("ShipCatalog_SortieWaters_MI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 所属艦娘一覧.
+        /// </summary>
+        public static string ShipCatalog_WindowTitle {
+            get {
+                return ResourceManager.GetString("ShipCatalog_WindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 工廠.
+        /// </summary>
+        public static string Shipyard {
+            get {
+                return ResourceManager.GetString("Shipyard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 建造.
+        /// </summary>
+        public static string Shipyard_ConstructionDock {
+            get {
+                return ResourceManager.GetString("Shipyard_ConstructionDock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 装備開発.
+        /// </summary>
+        public static string Shipyard_Development {
+            get {
+                return ResourceManager.GetString("Shipyard_Development", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 失敗.
+        /// </summary>
+        public static string Shipyard_Development_Result_Failure {
+            get {
+                return ResourceManager.GetString("Shipyard_Development_Result_Failure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 結果なし.
+        /// </summary>
+        public static string Shipyard_Development_Result_None {
+            get {
+                return ResourceManager.GetString("Shipyard_Development_Result_None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 成功.
+        /// </summary>
+        public static string Shipyard_Development_Result_Success {
+            get {
+                return ResourceManager.GetString("Shipyard_Development_Result_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 入渠.
+        /// </summary>
+        public static string Shipyard_RepairDock {
+            get {
+                return ResourceManager.GetString("Shipyard_RepairDock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 装備している艦娘.
+        /// </summary>
+        public static string SlotItemCatalog_Equipped {
+            get {
+                return ResourceManager.GetString("SlotItemCatalog_Equipped", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (余り).
+        /// </summary>
+        public static string SlotItemCatalog_Extra {
+            get {
+                return ResourceManager.GetString("SlotItemCatalog_Extra", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 改修.
+        /// </summary>
+        public static string SlotItemCatalog_ImprovementLevel {
+            get {
+                return ResourceManager.GetString("SlotItemCatalog_ImprovementLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 装備名.
+        /// </summary>
+        public static string SlotItemCatalog_ItemName {
+            get {
+                return ResourceManager.GetString("SlotItemCatalog_ItemName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 所持数.
+        /// </summary>
+        public static string SlotItemCatalog_Owned {
+            get {
+                return ResourceManager.GetString("SlotItemCatalog_Owned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 表示の更新.
+        /// </summary>
+        public static string SlotItemCatalog_Refresh {
+            get {
+                return ResourceManager.GetString("SlotItemCatalog_Refresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 一覧を生成しています....
+        /// </summary>
+        public static string SlotItemCatalog_Refreshing {
+            get {
+                return ResourceManager.GetString("SlotItemCatalog_Refreshing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show item stats.
+        /// </summary>
+        public static string SlotItemCatalog_ShowStats {
+            get {
+                return ResourceManager.GetString("SlotItemCatalog_ShowStats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 熟練度.
+        /// </summary>
+        public static string SlotItemCatalog_SkillLevel {
+            get {
+                return ResourceManager.GetString("SlotItemCatalog_SkillLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stats.
+        /// </summary>
+        public static string SlotItemCatalog_Stats {
+            get {
+                return ResourceManager.GetString("SlotItemCatalog_Stats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 合計.
+        /// </summary>
+        public static string SlotItemCatalog_Total {
+            get {
+                return ResourceManager.GetString("SlotItemCatalog_Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 所有装備一覧.
+        /// </summary>
+        public static string SlotItemCatalog_WindowTitle {
+            get {
+                return ResourceManager.GetString("SlotItemCatalog_WindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to キャッシュの削除.
         /// </summary>
         public static string StartContent_ClearCacheButton {
@@ -1105,11 +2904,227 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Set Cookie Region.
+        /// </summary>
+        public static string StartContent_SetRegionCookieButton {
+            get {
+                return ResourceManager.GetString("StartContent_SetRegionCookieButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cookie has been set.
+        /// </summary>
+        public static string StartContent_SetRegionCookieMessage {
+            get {
+                return ResourceManager.GetString("StartContent_SetRegionCookieMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Make sure DMM.com is set to Japanese (日本語).
+        /// </summary>
+        public static string StartContent_SetRegionCookieToolTip {
+            get {
+                return ResourceManager.GetString("StartContent_SetRegionCookieToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ようこそ.
         /// </summary>
         public static string StartContent_Welcom {
             get {
                 return ResourceManager.GetString("StartContent_Welcom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 大破した艦娘がいます！！！.
+        /// </summary>
+        public static string StateDetail_CriticalDamage {
+            get {
+                return ResourceManager.GetString("StateDetail_CriticalDamage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦隊に艦娘が編成されていません。.
+        /// </summary>
+        public static string StateDetail_EmptyFleet {
+            get {
+                return ResourceManager.GetString("StateDetail_EmptyFleet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 出撃可能！.
+        /// </summary>
+        public static string StateDetail_IsReady {
+            get {
+                return ResourceManager.GetString("StateDetail_IsReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 疲労回復済み.
+        /// </summary>
+        public static string StateDetail_MoraleRecovering {
+            get {
+                return ResourceManager.GetString("StateDetail_MoraleRecovering", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 疲労回復まで.
+        /// </summary>
+        public static string StateDetail_MoraleRecoveryTimer {
+            get {
+                return ResourceManager.GetString("StateDetail_MoraleRecoveryTimer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 遠征中.
+        /// </summary>
+        public static string StateDetail_OnExpedition {
+            get {
+                return ResourceManager.GetString("StateDetail_OnExpedition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦隊は出撃中です！.
+        /// </summary>
+        public static string StateDetail_OnSortie {
+            get {
+                return ResourceManager.GetString("StateDetail_OnSortie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accuracy.
+        /// </summary>
+        public static string Stats_Accuracy {
+            get {
+                return ResourceManager.GetString("Stats_Accuracy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anti-Air.
+        /// </summary>
+        public static string Stats_AntiAir {
+            get {
+                return ResourceManager.GetString("Stats_AntiAir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anti-Sub.
+        /// </summary>
+        public static string Stats_AntiSub {
+            get {
+                return ResourceManager.GetString("Stats_AntiSub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Armor.
+        /// </summary>
+        public static string Stats_Armor {
+            get {
+                return ResourceManager.GetString("Stats_Armor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attack Rng.
+        /// </summary>
+        public static string Stats_AttackRange {
+            get {
+                return ResourceManager.GetString("Stats_AttackRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bombing.
+        /// </summary>
+        public static string Stats_DiveBomb {
+            get {
+                return ResourceManager.GetString("Stats_DiveBomb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Evasion.
+        /// </summary>
+        public static string Stats_Evasion {
+            get {
+                return ResourceManager.GetString("Stats_Evasion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Firepower.
+        /// </summary>
+        public static string Stats_Firepower {
+            get {
+                return ResourceManager.GetString("Stats_Firepower", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Health.
+        /// </summary>
+        public static string Stats_Health {
+            get {
+                return ResourceManager.GetString("Stats_Health", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Luck.
+        /// </summary>
+        public static string Stats_Luck {
+            get {
+                return ResourceManager.GetString("Stats_Luck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Next Remodel.
+        /// </summary>
+        public static string Stats_RemodelLevel {
+            get {
+                return ResourceManager.GetString("Stats_RemodelLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sight Rng.
+        /// </summary>
+        public static string Stats_SightRange {
+            get {
+                return ResourceManager.GetString("Stats_SightRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Speed.
+        /// </summary>
+        public static string Stats_Speed {
+            get {
+                return ResourceManager.GetString("Stats_Speed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Torpedo.
+        /// </summary>
+        public static string Stats_Torpedo {
+            get {
+                return ResourceManager.GetString("Stats_Torpedo", resourceCulture);
             }
         }
         
@@ -1128,6 +3143,88 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string StatusBar_Ready {
             get {
                 return ResourceManager.GetString("StatusBar_Ready", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adobe Flash ActiveX Not Found.
+        /// </summary>
+        public static string System_Flash_Not_Installed_Caption {
+            get {
+                return ResourceManager.GetString("System_Flash_Not_Installed_Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adobe Flash for Microsoft Internet Explorer is required by KCV! but is not installed. Would you like to download and install it now?.
+        /// </summary>
+        public static string System_Flash_Not_Installed_Text {
+            get {
+                return ResourceManager.GetString("System_Flash_Not_Installed_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ツール.
+        /// </summary>
+        public static string Tools {
+            get {
+                return ResourceManager.GetString("Tools", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to KCV was unable to check for updates!.
+        /// </summary>
+        public static string Updater_Notification_CheckFailed {
+            get {
+                return ResourceManager.GetString("Updater_Notification_CheckFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Version of KCV is available! 「v{0}」
+        ///Click here to get it..
+        /// </summary>
+        public static string Updater_Notification_NewAppVersion {
+            get {
+                return ResourceManager.GetString("Updater_Notification_NewAppVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updater.
+        /// </summary>
+        public static string Updater_Notification_Title {
+            get {
+                return ResourceManager.GetString("Updater_Notification_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to KCV was unable to download the translations!.
+        /// </summary>
+        public static string Updater_Notification_TransUpdate_Fail {
+            get {
+                return ResourceManager.GetString("Updater_Notification_TransUpdate_Fail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Translations are already up-to-date.
+        /// </summary>
+        public static string Updater_Notification_TransUpdate_Same {
+            get {
+                return ResourceManager.GetString("Updater_Notification_TransUpdate_Same", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Translation files have been updated!.
+        /// </summary>
+        public static string Updater_Notification_TransUpdate_Success {
+            get {
+                return ResourceManager.GetString("Updater_Notification_TransUpdate_Success", resourceCulture);
             }
         }
         

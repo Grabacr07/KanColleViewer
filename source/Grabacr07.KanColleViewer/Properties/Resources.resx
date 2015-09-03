@@ -486,4 +486,709 @@
   <data name="ExitDialog_ConfirmationText" xml:space="preserve">
     <value>「提督業も忙しい！」 を終了します。よろしいですか？</value>
   </data>
+  <data name="Fleets_Button_Details" xml:space="preserve">
+    <value>艦隊詳細</value>
+  </data>
+  <data name="Fleets_Speed_Hybrid" xml:space="preserve">
+    <value>速度混成艦隊</value>
+  </data>
+  <data name="Fleets_ViewRange_Equipment" xml:space="preserve">
+    <value>索敵能力</value>
+  </data>
+  <data name="FleetWindow_AirSuperiority" xml:space="preserve">
+    <value>制空戦力</value>
+  </data>
+  <data name="FleetWindow_LevelAverage" xml:space="preserve">
+    <value>平均レベル</value>
+  </data>
+  <data name="FleetWindow_LevelTotal" xml:space="preserve">
+    <value>合計レベル</value>
+  </data>
+  <data name="FleetWindow_LoS" xml:space="preserve">
+    <value>索敵値</value>
+  </data>
+  <data name="FleetWindow_Status_CombinedNoExpedition" xml:space="preserve">
+    <value>連合艦隊は遠征に参加できません</value>
+  </data>
+  <data name="FleetWindow_Status_DamageInsignificant" xml:space="preserve">
+    <value>艦隊の艦娘に大きなダメージはありません</value>
+  </data>
+  <data name="FleetWindow_Status_DamageTaiha" xml:space="preserve">
+    <value>艦隊に大破した艦娘がいます</value>
+  </data>
+  <data name="FleetWindow_Status_DamageTaihaSortie" xml:space="preserve">
+    <value>艦隊に大破した艦娘がいます！</value>
+  </data>
+  <data name="FleetWindow_Status_Docked" xml:space="preserve">
+    <value>艦隊に入渠中の艦娘がいます</value>
+  </data>
+  <data name="FleetWindow_Status_Expedition" xml:space="preserve">
+    <value>艦隊は遠征中です</value>
+  </data>
+  <data name="FleetWindow_Status_FatigueTimer" xml:space="preserve">
+    <value>疲労回復まで</value>
+  </data>
+  <data name="FleetWindow_Status_NoDocked" xml:space="preserve">
+    <value>艦隊の艦娘は入渠していません</value>
+  </data>
+  <data name="FleetWindow_Status_NoExpedition" xml:space="preserve">
+    <value>艦隊は遠征中ではありません</value>
+  </data>
+  <data name="FleetWindow_Status_NoFatigued" xml:space="preserve">
+    <value>艦隊の艦娘は疲労していません</value>
+  </data>
+  <data name="FleetWindow_Status_NotSortied" xml:space="preserve">
+    <value>艦隊は出撃していません</value>
+  </data>
+  <data name="FleetWindow_Status_Resupplied" xml:space="preserve">
+    <value>艦隊は補給済みです</value>
+  </data>
+  <data name="FleetWindow_Status_ResupplyNeeded" xml:space="preserve">
+    <value>艦隊に未補給の艦娘がいます</value>
+  </data>
+  <data name="FleetWindow_Status_Sortied" xml:space="preserve">
+    <value>艦隊は出撃中です！</value>
+  </data>
+  <data name="FleetWindow_Status_SortieNotReady" xml:space="preserve">
+    <value>艦隊の出撃準備は完了していません</value>
+  </data>
+  <data name="FleetWindow_Status_SortieReady" xml:space="preserve">
+    <value>出撃準備完了！</value>
+  </data>
+  <data name="FleetWindow_Title" xml:space="preserve">
+    <value>艦隊詳細</value>
+  </data>
+  <data name="Notifications_MoraleRestored" xml:space="preserve">
+    <value>疲労回復完了</value>
+  </data>
+  <data name="Notifications_MoraleRestored_Details" xml:space="preserve">
+    <value>「{0}」に編成されている艦娘の疲労が回復しました。</value>
+  </data>
+  <data name="Overview_Data" xml:space="preserve">
+    <value>データ</value>
+  </data>
+  <data name="Overview_EquipmentList" xml:space="preserve">
+    <value>装備一覧</value>
+  </data>
+  <data name="Overview_ShipList" xml:space="preserve">
+    <value>艦娘一覧</value>
+  </data>
+  <data name="Quest_Detail_Untaken" xml:space="preserve">
+    <value>任務画面の全ページにアクセスしてください。</value>
+  </data>
+  <data name="Quest_Progress_50" xml:space="preserve">
+    <value> 50 % </value>
+  </data>
+  <data name="Quest_Progress_80" xml:space="preserve">
+    <value> 80 % </value>
+  </data>
+  <data name="Quest_State_Accomplished" xml:space="preserve">
+    <value> 完了 </value>
+  </data>
+  <data name="Quest_Title_Untaken" xml:space="preserve">
+    <value>(未取得の任務)</value>
+  </data>
+  <data name="Rank_Admiral" xml:space="preserve">
+    <value>大将</value>
+  </data>
+  <data name="Rank_Captain" xml:space="preserve">
+    <value>大佐</value>
+  </data>
+  <data name="Rank_Commander" xml:space="preserve">
+    <value>中佐</value>
+  </data>
+  <data name="Rank_Lieutenant" xml:space="preserve">
+    <value>中堅少佐</value>
+  </data>
+  <data name="Rank_Lieutenant_Commander" xml:space="preserve">
+    <value>少佐</value>
+  </data>
+  <data name="Rank_Marshal_Admiral" xml:space="preserve">
+    <value>元帥</value>
+  </data>
+  <data name="Rank_Novice_Commander" xml:space="preserve">
+    <value>新米中佐</value>
+  </data>
+  <data name="Rank_Novice_Lieutenant" xml:space="preserve">
+    <value>新米少佐</value>
+  </data>
+  <data name="Rank_Rear_Admiral" xml:space="preserve">
+    <value>少将</value>
+  </data>
+  <data name="Rank_Vice_Admiral" xml:space="preserve">
+    <value>中将</value>
+  </data>
+  <data name="ReSortie_CriticalConditionMessage" xml:space="preserve">
+    <value>「{0}」 in {1} is in critical condition!</value>
+  </data>
+  <data name="ReSortie_CriticalConditionMessage_Title" xml:space="preserve">
+    <value>Critical Ship Warning</value>
+  </data>
+  <data name="Settings_Accent_CriticalCondition" xml:space="preserve">
+    <value>Change window color when a ship is in critical condition</value>
+  </data>
+  <data name="Settings_CustomSound" xml:space="preserve">
+    <value>Custom Sound Notifications</value>
+  </data>
+  <data name="Settings_CustomSound_Volume" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="Settings_Flash" xml:space="preserve">
+    <value>Flash</value>
+  </data>
+  <data name="Settings_Flash_Message" xml:space="preserve">
+    <value>This works with DMM.com. OSAPI, and API links now!
+[You must reload the game for the changes to take affect.]</value>
+  </data>
+  <data name="Settings_Flash_Quality" xml:space="preserve">
+    <value>Set Flash Quality:</value>
+  </data>
+  <data name="Settings_Flash_Quality_ToolTip" xml:space="preserve">
+    <value>Best: Anti-Aliasing enabled on all images (Slowest)
+High: Default.
+Auto-High: Automatically lowers quality when needed.
+Medium: Average Performance
+AutoLow: Will emphasize speed when needed
+Low: Performance over quality. Ugliest setting.</value>
+  </data>
+  <data name="Settings_Flash_Window" xml:space="preserve">
+    <value>Set Flash Window:</value>
+  </data>
+  <data name="Settings_Flash_Window_ToolTip" xml:space="preserve">
+    <value>Opaque: Default (Old IE has no HW accel)
+Direct: Fastest rendering speed (HW accel)
+GPU: Slow! GPU optimization for tablets.</value>
+  </data>
+  <data name="Settings_FleetCondition" xml:space="preserve">
+    <value>Fleet Condition</value>
+  </data>
+  <data name="Settings_Network_Proxy_Auth_Password" xml:space="preserve">
+    <value>パスワード</value>
+  </data>
+  <data name="Settings_Network_Proxy_Auth_Required" xml:space="preserve">
+    <value>プロキシ サーバーにユーザー名とパスワードが必要</value>
+  </data>
+  <data name="Settings_Network_Proxy_Auth_Username" xml:space="preserve">
+    <value>ユーザー名</value>
+  </data>
+  <data name="Settings_Notifications" xml:space="preserve">
+    <value>通信設定</value>
+  </data>
+  <data name="Settings_Notifications_AheadOfTime" xml:space="preserve">
+    <value>通知を早める：</value>
+  </data>
+  <data name="Settings_Notifications_AheadOfTime_Description" xml:space="preserve">
+    <value>艦これ本体の仕様により、最大 1 分間短縮できます。サーバー時刻とのずれを加味し、40 ～ 50 秒に設定することを推奨します。</value>
+  </data>
+  <data name="Settings_Notifications_AheadOfTime_Seconds" xml:space="preserve">
+    <value>秒</value>
+  </data>
+  <data name="Settings_Notifications_Construction_Enabled" xml:space="preserve">
+    <value>建造完了時に通知する</value>
+  </data>
+  <data name="Settings_Notifications_Expeditions_Enabled" xml:space="preserve">
+    <value>遠征帰投時に通知する</value>
+  </data>
+  <data name="Settings_Notifications_FleetsMorale" xml:space="preserve">
+    <value>艦隊に編成されている艦娘の疲労が回復したら通知する</value>
+  </data>
+  <data name="Settings_Notifications_FleetsMorale_Description" xml:space="preserve">
+    <value>艦隊に編成されているすべて艦娘のコンディション値が上記の値以上になったときに通知されます。コンディション値は 3 分間で 3 ずつ回復しますが、KanColleViewer 実装の仕様により、通知タイミングは数秒 ～ 最大 3 分程度遅れる可能性があること予めご了承ください。</value>
+  </data>
+  <data name="Settings_Notifications_FleetsMorale_Reference" xml:space="preserve">
+    <value>※[動作設定] &gt; [出撃コンディション] から設定できます。</value>
+  </data>
+  <data name="Settings_Notifications_FleetsMorale_Threshold" xml:space="preserve">
+    <value>再出撃可能とするコンディション値</value>
+  </data>
+  <data name="Settings_Notifications_NotificationPlugins" xml:space="preserve">
+    <value>通知プラグイン</value>
+  </data>
+  <data name="Settings_Notifications_NotificationPlugins_InUse" xml:space="preserve">
+    <value>以下のプラグインを使用して通知されます。</value>
+  </data>
+  <data name="Settings_Notifications_Repair_Enabled" xml:space="preserve">
+    <value>入渠完了時に通知する</value>
+  </data>
+  <data name="Settings_Notify_CriticalCondition" xml:space="preserve">
+    <value>Give a notification for ships in critical condition</value>
+  </data>
+  <data name="Settings_Operation_LoSCalculation" xml:space="preserve">
+    <value>索敵値計算</value>
+  </data>
+  <data name="Settings_Operation_LoS_CarrierBasedRecon" xml:space="preserve">
+    <value>艦上偵察機</value>
+  </data>
+  <data name="Settings_Operation_LoS_CarrierBasedRecon_Tooltip" xml:space="preserve">
+    <value>彩雲、二式艦上偵察機</value>
+  </data>
+  <data name="Settings_Operation_LoS_New" xml:space="preserve">
+    <value>(偵察機 × 2) + (電探) + √(装備込みの艦隊索敵値合計 - 偵察機 - 電探)</value>
+  </data>
+  <data name="Settings_Operation_LoS_New_Desc" xml:space="preserve">
+    <value>装備による索敵値が重要とされる場合の計算方法 (推定)</value>
+  </data>
+  <data name="Settings_Operation_LoS_Recon" xml:space="preserve">
+    <value>偵察機</value>
+  </data>
+  <data name="Settings_Operation_LoS_SeaplaneBomber" xml:space="preserve">
+    <value>水上爆撃機</value>
+  </data>
+  <data name="Settings_Operation_LoS_SeaplaneBomber_Tooltip" xml:space="preserve">
+    <value>瑞雲、瑞雲(六三四空)、試製晴嵐</value>
+  </data>
+  <data name="Settings_Operation_LoS_SeaplaneRecon" xml:space="preserve">
+    <value>水上偵察機</value>
+  </data>
+  <data name="Settings_Operation_LoS_SeaplaneRecon_Tooltip" xml:space="preserve">
+    <value>零式水上偵察機、零式水上観測機、九八式水上偵察機(夜偵)</value>
+  </data>
+  <data name="Settings_Operation_LoS_Simple" xml:space="preserve">
+    <value>艦娘と装備の索敵値の単純な合計</value>
+  </data>
+  <data name="Settings_Operation_LoS_Simple_Description" xml:space="preserve">
+    <value>KanColleViewer での従来の計算方法</value>
+  </data>
+  <data name="Settings_Operation_LoS_Title" xml:space="preserve">
+    <value>艦隊の索敵値の算出に使用する計算式は、以下を使用する</value>
+  </data>
+  <data name="Settings_Operation_SortieCondition" xml:space="preserve">
+    <value>出撃コンディション</value>
+  </data>
+  <data name="Settings_Operation_SortieCondition_Description" xml:space="preserve">
+    <value>※通常は、間宮アイコンが消灯する 40 か、自然回復上限の 49 に設定します。</value>
+  </data>
+  <data name="Settings_Operation_SortieCondition_Title" xml:space="preserve">
+    <value>艦隊内の全艦のコンディションが次の数値以上になったとき、出撃可能と判断する</value>
+  </data>
+  <data name="Settings_Translations" xml:space="preserve">
+    <value>Translations</value>
+  </data>
+  <data name="Settings_Translations_Add_Enable" xml:space="preserve">
+    <value>Append untranslated items to the translation files?</value>
+  </data>
+  <data name="Settings_Translations_Enable" xml:space="preserve">
+    <value>Translate game items, ships, and quests to selected language?</value>
+  </data>
+  <data name="Settings_Translations_Submit_Enable" xml:space="preserve">
+    <value>Automatically submit untranslated data</value>
+  </data>
+  <data name="Settings_Updates" xml:space="preserve">
+    <value>Updates</value>
+  </data>
+  <data name="Settings_Updates_AutoUpdateTrans" xml:space="preserve">
+    <value>Automatically update translations on startup</value>
+  </data>
+  <data name="Settings_Updates_CheckUpdateButn_ToolTip" xml:space="preserve">
+    <value>Check for the latest program and translation versions</value>
+  </data>
+  <data name="Settings_Updates_CheckUpdatesBtn" xml:space="preserve">
+    <value>Check for Updates</value>
+  </data>
+  <data name="Settings_Updates_CurrentVersion" xml:space="preserve">
+    <value>Currently</value>
+  </data>
+  <data name="Settings_Updates_GetKCVBtn" xml:space="preserve">
+    <value>Get Latest KCV</value>
+  </data>
+  <data name="Settings_Updates_GetKCVBtn_ToolTip" xml:space="preserve">
+    <value>Opens a link to the latest version of KCV found here.</value>
+  </data>
+  <data name="Settings_Updates_OnlineVersion" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="Settings_Updates_UpdateOnStartup" xml:space="preserve">
+    <value>Check for updates on startup</value>
+  </data>
+  <data name="Settings_Updates_UpdateTransBtn" xml:space="preserve">
+    <value>Download Translations</value>
+  </data>
+  <data name="Settings_Updates_UpdateTransBtn_ToolTip" xml:space="preserve">
+    <value>Downloads translations only for selected UI language!</value>
+  </data>
+  <data name="ShipCatalog_AdditionalStats" xml:space="preserve">
+    <value>Show additional stats</value>
+  </data>
+  <data name="ShipCatalog_Column_AntiAir" xml:space="preserve">
+    <value>対空</value>
+  </data>
+  <data name="ShipCatalog_Column_Armour" xml:space="preserve">
+    <value>装甲</value>
+  </data>
+  <data name="ShipCatalog_Column_ASW" xml:space="preserve">
+    <value>対潜</value>
+  </data>
+  <data name="ShipCatalog_Column_Condition" xml:space="preserve">
+    <value>Cond.</value>
+  </data>
+  <data name="ShipCatalog_Column_Equipped" xml:space="preserve">
+    <value>装備</value>
+  </data>
+  <data name="ShipCatalog_Column_Evasion" xml:space="preserve">
+    <value>回避</value>
+  </data>
+  <data name="ShipCatalog_Column_Firepower" xml:space="preserve">
+    <value>火力</value>
+  </data>
+  <data name="ShipCatalog_Column_HullCode" xml:space="preserve">
+    <value>艦種</value>
+  </data>
+  <data name="ShipCatalog_Column_Level" xml:space="preserve">
+    <value>レベル</value>
+  </data>
+  <data name="ShipCatalog_Column_Luck" xml:space="preserve">
+    <value>運</value>
+  </data>
+  <data name="ShipCatalog_Column_Name" xml:space="preserve">
+    <value>艦名</value>
+  </data>
+  <data name="ShipCatalog_Column_ObtainedID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="ShipCatalog_Column_Torpedo" xml:space="preserve">
+    <value>雷装</value>
+  </data>
+  <data name="ShipCatalog_Column_ViewRange" xml:space="preserve">
+    <value>索敵</value>
+  </data>
+  <data name="ShipCatalog_Filter_Hulls" xml:space="preserve">
+    <value>艦種</value>
+  </data>
+  <data name="ShipCatalog_Filter_Hulls_BB" xml:space="preserve">
+    <value>戦艦</value>
+  </data>
+  <data name="ShipCatalog_Filter_Hulls_CA" xml:space="preserve">
+    <value>重巡・航巡</value>
+  </data>
+  <data name="ShipCatalog_Filter_Hulls_CL" xml:space="preserve">
+    <value>軽巡・雷巡</value>
+  </data>
+  <data name="ShipCatalog_Filter_Hulls_CV" xml:space="preserve">
+    <value>航空母艦</value>
+  </data>
+  <data name="ShipCatalog_Filter_Hulls_DD" xml:space="preserve">
+    <value>駆逐艦</value>
+  </data>
+  <data name="ShipCatalog_Filter_Hulls_Misc" xml:space="preserve">
+    <value>他の</value>
+  </data>
+  <data name="ShipCatalog_Filter_Hulls_SeaplaneBomberCapable" xml:space="preserve">
+    <value>航戦・航巡</value>
+  </data>
+  <data name="ShipCatalog_Filter_Hulls_SelectAll" xml:space="preserve">
+    <value>すべて選択</value>
+  </data>
+  <data name="ShipCatalog_Filter_Hulls_SS" xml:space="preserve">
+    <value>潜水艦</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_All" xml:space="preserve">
+    <value>すべて</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_ExcludeOnExpedition" xml:space="preserve">
+    <value>遠征中の艦を除外する</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_Expedition" xml:space="preserve">
+    <value>遠征</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_Level" xml:space="preserve">
+    <value>レベル</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_Level1" xml:space="preserve">
+    <value>Lv.1</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_Level2Up" xml:space="preserve">
+    <value>Lv.2 以上</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_Lock" xml:space="preserve">
+    <value>ロック</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_LockedNo" xml:space="preserve">
+    <value>ロックしていない</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_LockedYes" xml:space="preserve">
+    <value>ロックしている</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_Modernised" xml:space="preserve">
+    <value>近代化改修</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_ModernisedNo" xml:space="preserve">
+    <value>改修未完</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_ModernisedYes" xml:space="preserve">
+    <value>改修完了</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_Remodelled" xml:space="preserve">
+    <value>改造</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_RemodelledNo" xml:space="preserve">
+    <value>改造未完</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_RemodelledYes" xml:space="preserve">
+    <value>改造完了</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_Speed" xml:space="preserve">
+    <value>速力</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_SpeedFast" xml:space="preserve">
+    <value>高速</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_SpeedSlow" xml:space="preserve">
+    <value>低速</value>
+  </data>
+  <data name="ShipCatalog_Filter_Reset" xml:space="preserve">
+    <value>Reset Filter Settings</value>
+  </data>
+  <data name="ShipCatalog_Filter_SaveSettings" xml:space="preserve">
+    <value>Save Filter Settings</value>
+  </data>
+  <data name="ShipCatalog_Filter_SaveSettings_ToolTip" xml:space="preserve">
+    <value>Does not include ship types!</value>
+  </data>
+  <data name="ShipCatalog_Filter_Title" xml:space="preserve">
+    <value>フィルター設定</value>
+  </data>
+  <data name="ShipCatalog_Operation_AL" xml:space="preserve">
+    <value>AL 作戦参加済み</value>
+  </data>
+  <data name="ShipCatalog_Operation_MI" xml:space="preserve">
+    <value>MI 作戦参加済み</value>
+  </data>
+  <data name="ShipCatalog_Operation_NeitherALnorMI" xml:space="preserve">
+    <value>作戦出撃なし</value>
+  </data>
+  <data name="ShipCatalog_SortBy_CatalogID" xml:space="preserve">
+    <value>CatalogID</value>
+  </data>
+  <data name="ShipCatalog_SortBy_Condition" xml:space="preserve">
+    <value>Condition 値</value>
+  </data>
+  <data name="ShipCatalog_SortBy_Experience" xml:space="preserve">
+    <value>次のレベルまでの経験値</value>
+  </data>
+  <data name="ShipCatalog_SortBy_MaxHP" xml:space="preserve">
+    <value>耐久</value>
+  </data>
+  <data name="ShipCatalog_SortieWaters" xml:space="preserve">
+    <value>出撃海域</value>
+  </data>
+  <data name="ShipCatalog_SortieWaters_AL" xml:space="preserve">
+    <value>AL 作戦</value>
+  </data>
+  <data name="ShipCatalog_SortieWaters_MI" xml:space="preserve">
+    <value>MI 作戦</value>
+  </data>
+  <data name="ShipCatalog_Sort_Apply" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="ShipCatalog_Sort_Ascending" xml:space="preserve">
+    <value>昇順</value>
+  </data>
+  <data name="ShipCatalog_Sort_Clear" xml:space="preserve">
+    <value>クリア</value>
+  </data>
+  <data name="ShipCatalog_Sort_Descending" xml:space="preserve">
+    <value>降順</value>
+  </data>
+  <data name="ShipCatalog_Sort_None" xml:space="preserve">
+    <value>なし</value>
+  </data>
+  <data name="ShipCatalog_Sort_Prompt" xml:space="preserve">
+    <value>方法</value>
+  </data>
+  <data name="ShipCatalog_Sort_Subtitle" xml:space="preserve">
+    <value>艦娘を以下の順序で並べ替えます。</value>
+  </data>
+  <data name="ShipCatalog_Sort_Title" xml:space="preserve">
+    <value>並べ替え設定</value>
+  </data>
+  <data name="ShipCatalog_WindowTitle" xml:space="preserve">
+    <value>所属艦娘一覧</value>
+  </data>
+  <data name="Shipyard" xml:space="preserve">
+    <value>工廠</value>
+  </data>
+  <data name="Shipyard_ConstructionDock" xml:space="preserve">
+    <value>建造</value>
+  </data>
+  <data name="Shipyard_Development" xml:space="preserve">
+    <value>装備開発</value>
+  </data>
+  <data name="Shipyard_Development_Result_Failure" xml:space="preserve">
+    <value>失敗</value>
+  </data>
+  <data name="Shipyard_Development_Result_None" xml:space="preserve">
+    <value>結果なし</value>
+  </data>
+  <data name="Shipyard_Development_Result_Success" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="Shipyard_RepairDock" xml:space="preserve">
+    <value>入渠</value>
+  </data>
+  <data name="Ship_Condition_Docked" xml:space="preserve">
+    <value>入渠中</value>
+  </data>
+  <data name="Ship_Condition_Healthy" xml:space="preserve">
+    <value>健在</value>
+  </data>
+  <data name="Ship_Condition_HealthyDamecon" xml:space="preserve">
+    <value>健在・ダメコン搭載</value>
+  </data>
+  <data name="Ship_Condition_Taiha" xml:space="preserve">
+    <value>大破 (轟沈の可能性あり)</value>
+  </data>
+  <data name="Ship_Condition_TaihaDamecon" xml:space="preserve">
+    <value>大破 (ダメコン使用可能)</value>
+  </data>
+  <data name="Ship_Condition_Towed" xml:space="preserve">
+    <value>大破 (退避済み)</value>
+  </data>
+  <data name="Ship_Condition_Towing" xml:space="preserve">
+    <value>撤退 (護衛退避)</value>
+  </data>
+  <data name="Ship_RepairDockToolTip" xml:space="preserve">
+    <value>Dock: {0}</value>
+  </data>
+  <data name="Ship_RepairFacilityToolTip" xml:space="preserve">
+    <value>Facility: {0}</value>
+  </data>
+  <data name="Ship_Repairing" xml:space="preserve">
+    <value>入渠中</value>
+  </data>
+  <data name="SlotItemCatalog_Refresh" xml:space="preserve">
+    <value>表示の更新</value>
+  </data>
+  <data name="SlotItemCatalog_ShowStats" xml:space="preserve">
+    <value>Show item stats</value>
+  </data>
+  <data name="SlotItemCatalog_WindowTitle" xml:space="preserve">
+    <value>所有装備一覧</value>
+  </data>
+  <data name="StartContent_SetRegionCookieButton" xml:space="preserve">
+    <value>Set Cookie Region</value>
+  </data>
+  <data name="StartContent_SetRegionCookieMessage" xml:space="preserve">
+    <value>Cookie has been set</value>
+  </data>
+  <data name="StartContent_SetRegionCookieToolTip" xml:space="preserve">
+    <value>Make sure DMM.com is set to Japanese (日本語)</value>
+  </data>
+  <data name="StateDetail_CriticalDamage" xml:space="preserve">
+    <value>大破した艦娘がいます！！！</value>
+  </data>
+  <data name="StateDetail_EmptyFleet" xml:space="preserve">
+    <value>艦隊に艦娘が編成されていません。</value>
+  </data>
+  <data name="StateDetail_IsReady" xml:space="preserve">
+    <value>出撃可能！</value>
+  </data>
+  <data name="StateDetail_MoraleRecovering" xml:space="preserve">
+    <value>疲労回復済み</value>
+  </data>
+  <data name="StateDetail_MoraleRecoveryTimer" xml:space="preserve">
+    <value>疲労回復まで</value>
+  </data>
+  <data name="StateDetail_OnExpedition" xml:space="preserve">
+    <value>遠征中</value>
+  </data>
+  <data name="StateDetail_OnSortie" xml:space="preserve">
+    <value>艦隊は出撃中です！</value>
+  </data>
+  <data name="Stats_Accuracy" xml:space="preserve">
+    <value>Accuracy</value>
+  </data>
+  <data name="Stats_AntiAir" xml:space="preserve">
+    <value>Anti-Air</value>
+  </data>
+  <data name="Stats_AntiSub" xml:space="preserve">
+    <value>Anti-Sub</value>
+  </data>
+  <data name="Stats_Armor" xml:space="preserve">
+    <value>Armor</value>
+  </data>
+  <data name="Stats_AttackRange" xml:space="preserve">
+    <value>Attack Rng</value>
+  </data>
+  <data name="Stats_DiveBomb" xml:space="preserve">
+    <value>Bombing</value>
+  </data>
+  <data name="Stats_Evasion" xml:space="preserve">
+    <value>Evasion</value>
+  </data>
+  <data name="Stats_Firepower" xml:space="preserve">
+    <value>Firepower</value>
+  </data>
+  <data name="Stats_Health" xml:space="preserve">
+    <value>Health</value>
+  </data>
+  <data name="Stats_Luck" xml:space="preserve">
+    <value>Luck</value>
+  </data>
+  <data name="Stats_RemodelLevel" xml:space="preserve">
+    <value>Next Remodel</value>
+  </data>
+  <data name="Stats_SightRange" xml:space="preserve">
+    <value>Sight Rng</value>
+  </data>
+  <data name="Stats_Speed" xml:space="preserve">
+    <value>Speed</value>
+  </data>
+  <data name="Stats_Torpedo" xml:space="preserve">
+    <value>Torpedo</value>
+  </data>
+  <data name="System_Flash_Not_Installed_Caption" xml:space="preserve">
+    <value>Adobe Flash ActiveX Not Found</value>
+  </data>
+  <data name="System_Flash_Not_Installed_Text" xml:space="preserve">
+    <value>Adobe Flash for Microsoft Internet Explorer is required by KCV! but is not installed. Would you like to download and install it now?</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>ツール</value>
+  </data>
+  <data name="Updater_Notification_CheckFailed" xml:space="preserve">
+    <value>KCV was unable to check for updates!</value>
+  </data>
+  <data name="Updater_Notification_NewAppVersion" xml:space="preserve">
+    <value>New Version of KCV is available! 「v{0}」
+Click here to get it.</value>
+  </data>
+  <data name="Updater_Notification_Title" xml:space="preserve">
+    <value>Updater</value>
+  </data>
+  <data name="Updater_Notification_TransUpdate_Fail" xml:space="preserve">
+    <value>KCV was unable to download the translations!</value>
+  </data>
+  <data name="Updater_Notification_TransUpdate_Same" xml:space="preserve">
+    <value>Translations are already up-to-date</value>
+  </data>
+  <data name="Updater_Notification_TransUpdate_Success" xml:space="preserve">
+    <value>Translation files have been updated!</value>
+  </data>
+  <data name="SlotItemCatalog_Equipped" xml:space="preserve">
+    <value>装備している艦娘</value>
+  </data>
+  <data name="SlotItemCatalog_Extra" xml:space="preserve">
+    <value>(余り)</value>
+  </data>
+  <data name="SlotItemCatalog_ImprovementLevel" xml:space="preserve">
+    <value>改修</value>
+  </data>
+  <data name="SlotItemCatalog_ItemName" xml:space="preserve">
+    <value>装備名</value>
+  </data>
+  <data name="SlotItemCatalog_Owned" xml:space="preserve">
+    <value>所持数</value>
+  </data>
+  <data name="SlotItemCatalog_Refreshing" xml:space="preserve">
+    <value>一覧を生成しています...</value>
+  </data>
+  <data name="SlotItemCatalog_SkillLevel" xml:space="preserve">
+    <value>熟練度</value>
+  </data>
+  <data name="SlotItemCatalog_Stats" xml:space="preserve">
+    <value>Stats</value>
+  </data>
+  <data name="SlotItemCatalog_Total" xml:space="preserve">
+    <value>合計</value>
+  </data>
 </root>
