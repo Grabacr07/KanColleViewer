@@ -160,6 +160,78 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Common_Resources_Ammo {
+            get {
+                return ResourceManager.GetString("Common_Resources_Ammo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Common_Resources_Bauxite {
+            get {
+                return ResourceManager.GetString("Common_Resources_Bauxite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Common_Resources_DevKits {
+            get {
+                return ResourceManager.GetString("Common_Resources_DevKits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Common_Resources_Fuel {
+            get {
+                return ResourceManager.GetString("Common_Resources_Fuel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Common_Resources_Improvement {
+            get {
+                return ResourceManager.GetString("Common_Resources_Improvement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Common_Resources_InstantBuild {
+            get {
+                return ResourceManager.GetString("Common_Resources_InstantBuild", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Common_Resources_InstantRepair {
+            get {
+                return ResourceManager.GetString("Common_Resources_InstantRepair", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Common_Resources_Steel {
+            get {
+                return ResourceManager.GetString("Common_Resources_Steel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 艦娘.
         /// </summary>
         public static string Common_ShipGirl {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleWrapper;
 using Livet;
@@ -59,28 +60,28 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 		{
 			this.Model = KanColleClient.Current.Homeport.Materials;
 
-			var fuel = new MaterialViewModel(nameof(Materials.Fuel), "燃料").AddTo(this);
+			var fuel = new MaterialViewModel(nameof(Materials.Fuel), Resources.Common_Resources_Fuel).AddTo(this);
 			this.Model.Subscribe(fuel.Key, () => fuel.Value = this.Model.Fuel).AddTo(this);
 
-			var ammunition = new MaterialViewModel(nameof(Materials.Ammunition), "弾薬").AddTo(this);
+			var ammunition = new MaterialViewModel(nameof(Materials.Ammunition), Resources.Common_Resources_Ammo).AddTo(this);
 			this.Model.Subscribe(ammunition.Key, () => ammunition.Value = this.Model.Ammunition).AddTo(this);
 
-			var steel = new MaterialViewModel(nameof(Materials.Steel), "鋼鉄").AddTo(this);
+			var steel = new MaterialViewModel(nameof(Materials.Steel), Resources.Common_Resources_Steel).AddTo(this);
 			this.Model.Subscribe(steel.Key, () => steel.Value = this.Model.Steel).AddTo(this);
 
-			var bauxite = new MaterialViewModel(nameof(Materials.Bauxite), "ボーキサイト").AddTo(this);
+			var bauxite = new MaterialViewModel(nameof(Materials.Bauxite), Resources.Common_Resources_Bauxite).AddTo(this);
 			this.Model.Subscribe(bauxite.Key, () => bauxite.Value = this.Model.Bauxite).AddTo(this);
 
-			var develop = new MaterialViewModel(nameof(Materials.DevelopmentMaterials), "開発資材").AddTo(this);
+			var develop = new MaterialViewModel(nameof(Materials.DevelopmentMaterials), Resources.Common_Resources_DevKits).AddTo(this);
 			this.Model.Subscribe(develop.Key, () => develop.Value = this.Model.DevelopmentMaterials).AddTo(this);
 
-			var repair = new MaterialViewModel(nameof(Materials.InstantRepairMaterials), "高速修復材").AddTo(this);
+			var repair = new MaterialViewModel(nameof(Materials.InstantRepairMaterials), Resources.Common_Resources_InstantRepair).AddTo(this);
 			this.Model.Subscribe(repair.Key, () => repair.Value = this.Model.InstantRepairMaterials).AddTo(this);
 
-			var build = new MaterialViewModel(nameof(Materials.InstantBuildMaterials), "高速建造材").AddTo(this);
+			var build = new MaterialViewModel(nameof(Materials.InstantBuildMaterials), Resources.Common_Resources_InstantBuild).AddTo(this);
 			this.Model.Subscribe(build.Key, () => build.Value = this.Model.InstantBuildMaterials).AddTo(this);
 
-			var improvement = new MaterialViewModel(nameof(Materials.ImprovementMaterials), "改修資材").AddTo(this);
+			var improvement = new MaterialViewModel(nameof(Materials.ImprovementMaterials), Resources.Common_Resources_Improvement).AddTo(this);
 			this.Model.Subscribe(improvement.Key, () => improvement.Value = this.Model.ImprovementMaterials).AddTo(this);
 
 			this.Values = new List<MaterialViewModel>

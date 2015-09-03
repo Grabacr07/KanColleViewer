@@ -1151,8 +1151,35 @@ Click here to get it.</value>
   <data name="ZoomFactorSelector_Tooltip" xml:space="preserve">
     <value>Adjust the display size of the game screen.</value>
   </data>
+  <data name="Common_Resources_Ammo" xml:space="preserve">
+    <value>Ammo</value>
+  </data>
+  <data name="Common_Resources_Bauxite" xml:space="preserve">
+    <value>Bauxite</value>
+  </data>
+  <data name="Common_Resources_DevKits" xml:space="preserve">
+    <value>DevMats</value>
+  </data>
+  <data name="Common_Resources_Fuel" xml:space="preserve">
+    <value>Fuel</value>
+  </data>
+  <data name="Common_Resources_Improvement" xml:space="preserve">
+    <value>Screws</value>
+  </data>
+  <data name="Common_Resources_InstantBuild" xml:space="preserve">
+    <value>Instant Build</value>
+  </data>
+  <data name="Common_Resources_InstantRepair" xml:space="preserve">
+    <value>Instant Repair</value>
+  </data>
+  <data name="Common_Resources_Steel" xml:space="preserve">
+    <value>Steel</value>
+  </data>
   <data name="ShipCatalog_Column_ViewRange_Tooltip" xml:space="preserve">
     <value>Including bonuses from the equipment</value>
+  </data>
+  <data name="ShipCatalog_Refreshing" xml:space="preserve">
+    <value>Refreshing the list…</value>
   </data>
   <data name="SlotItemCatalog_Equipped" xml:space="preserve">
     <value>Equipped Ship Girls</value>

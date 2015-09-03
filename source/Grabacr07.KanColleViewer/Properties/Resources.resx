@@ -1152,6 +1152,30 @@ Click here to get it.</value>
   <data name="Updater_Notification_TransUpdate_Success" xml:space="preserve">
     <value>Translation files have been updated!</value>
   </data>
+  <data name="Common_Resources_Ammo" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Common_Resources_Bauxite" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Common_Resources_DevKits" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Common_Resources_Fuel" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Common_Resources_Improvement" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Common_Resources_InstantBuild" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Common_Resources_InstantRepair" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Common_Resources_Steel" xml:space="preserve">
+    <value />
+  </data>
   <data name="ShipCatalog_Column_ViewRange_Tooltip" xml:space="preserve">
     <value>装備によるステータス上昇を含んだ値です</value>
   </data>
