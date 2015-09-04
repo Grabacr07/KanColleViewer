@@ -201,6 +201,12 @@ namespace Grabacr07.KanColleWrapper
 					foreach (var id in this.evacuatedShipsIds) this.Ships[id].Situation |= ShipSituation.Evacuation;
 					foreach (var id in this.towShipIds) this.Ships[id].Situation |= ShipSituation.Tow;
 				}
+
+				foreach (var fleet in this.Fleets.Values)
+				{
+					fleet.State.Update();
+					fleet.State.Calculate();
+				}
 			}
 		}
 
@@ -216,7 +222,7 @@ namespace Grabacr07.KanColleWrapper
 			}
 			else
 			{
-				foreach (var fleet in this.Fleets) fleet.Value.SafeDispose();
+				foreach (var fleet in this.Fleets) fleet.Value?.Dispose();
 				this.Fleets = new MemberTable<Fleet>(source.Select(x => new Fleet(this.homeport, x)));
 			}
 		}
@@ -270,7 +276,7 @@ namespace Grabacr07.KanColleWrapper
 
 		private void Combine(bool combine)
 		{
-			this.CombinedFleet.SafeDispose();
+			this.CombinedFleet?.Dispose();
 			this.CombinedFleet = combine
 				? new CombinedFleet(this.homeport, this.Fleets.OrderBy(x => x.Key).Select(x => x.Value).Take(2).ToArray())
 				: null;
@@ -457,6 +463,9 @@ namespace Grabacr07.KanColleWrapper
 				{
 					var target = this.Ships[ship.api_id];
 					target.Update(ship);
+
+					if (this.evacuatedShipsIds.Any(x => target.Id == x)) target.Situation |= ShipSituation.Evacuation;
+					if (this.towShipIds.Any(x => target.Id == x)) target.Situation |= ShipSituation.Tow;
 				}
 			}
 

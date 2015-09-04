@@ -70,7 +70,7 @@ namespace Grabacr07.KanColleWrapper
 		internal Homeport(KanColleProxy proxy)
 		{
 			this.Materials = new Materials(proxy);
-			this.Itemyard = new Itemyard(proxy);
+			this.Itemyard = new Itemyard(this, proxy);
 			this.Organization = new Organization(this, proxy);
 			this.Repairyard = new Repairyard(this, proxy);
 			this.Dockyard = new Dockyard(proxy);

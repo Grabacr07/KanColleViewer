@@ -63,7 +63,8 @@
 					Orientation="Horizontal"
 					VerticalAlignment="Center">
 			<UniformGrid Columns="1"
-						 Grid.IsSharedSizeScope="True">
+						 Grid.IsSharedSizeScope="True"
+						 Margin="16,0,0,0">
 				<Panel.Resources>
 					<DataTemplate DataType="{x:Type contentsVm:MaterialsViewModel+MaterialViewModel}">
 						<Grid MinWidth="125"

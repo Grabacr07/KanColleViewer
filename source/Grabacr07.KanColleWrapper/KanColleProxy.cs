@@ -24,32 +24,23 @@ namespace Grabacr07.KanColleWrapper
 
         private IProxySettings _UpstreamProxySettings;
 
-        public IProxySettings UpstreamProxySettings
-        {
-            get { return this._UpstreamProxySettings; }
-            set
-            {
-                this._UpstreamProxySettings = value;
-                if (value == null)
-                {
-                    //UpstreamProxySettings == null は SystemProxy使用とみなす
-                    HttpProxy.IsEnableUpstreamProxy = false;
-                    HttpProxy.UpstreamProxyHost = null;
-                    return;
-                }
-                HttpProxy.IsEnableUpstreamProxy = value.Type == ProxyType.SpecificProxy;
-                //Host指定がない場合、HTTPはDirectAccessとなる
-                HttpProxy.UpstreamProxyHost = string.IsNullOrWhiteSpace(value.Host) ? null : value.Host;
-                HttpProxy.UpstreamProxyPort = value.Port;
-            }
-        }
+		public IProxySettings UpstreamProxySettings
+		{
+			get { return this._UpstreamProxySettings; }
+			set
+			{
+				this._UpstreamProxySettings = value;
+				this.ApplyProxySettings();
+			}
+		}
 
         #endregion
+
+		public int ListeningPort { get; private set; } = 37564;
 
         public KanColleProxy()
         {
             this.compositeDisposable = new CompositeDisposable();
-
             this.connectableSessionSource = Observable
                 .FromEvent<Action<Session>, Session>(
                     action => action,
@@ -136,7 +127,6 @@ namespace Grabacr07.KanColleWrapper
             .Publish();
         }
 
-
         public void Startup(int proxy = 37564)
         {
             //UpstreamProxySettings == null は SystemProxy使用とみなす
@@ -152,9 +142,77 @@ namespace Grabacr07.KanColleWrapper
         }
 
         public void Shutdown()
-        {
-            this.compositeDisposable.Dispose();
-            HttpProxy.Shutdown();
-        }
-    }
+		{
+			this.compositeDisposable.Dispose();
+			HttpProxy.Shutdown();
+		}
+
+		/// <summary>
+		/// プロキシ設定を反映
+		/// </summary>
+		private void ApplyProxySettings()
+		{
+			this.ApplyUpstreamProxySettings();
+			this.ApplyDownstreamProxySettings();
+		}
+
+		/// <summary>
+		/// 上流プロキシを設定
+		/// </summary>
+		private void ApplyUpstreamProxySettings()
+		{
+			switch (this.UpstreamProxySettings?.Type)
+			{
+				case ProxyType.DirectAccess:
+					HttpProxy.UpstreamProxyConfig = new ProxyConfig(ProxyConfigType.DirectAccess);
+					break;
+				case ProxyType.SystemProxy:
+					HttpProxy.UpstreamProxyConfig = new ProxyConfig(ProxyConfigType.SystemProxy);
+					break;
+				case ProxyType.SpecificProxy:
+					HttpProxy.UpstreamProxyConfig = new ProxyConfig(ProxyConfigType.SpecificProxy, this.UpstreamProxySettings.Host, this.UpstreamProxySettings.Port);
+					break;
+				default:
+					//UpstreamProxySettings == null は SystemProxy使用とみなす
+					HttpProxy.UpstreamProxyConfig = new ProxyConfig(ProxyConfigType.SystemProxy);
+					break;
+			}
+		}
+
+		/// <summary>
+		/// HttpProxy.UpstreamProxyConfig を元に、下流からの通信がNekoxyを通るよう設定
+		/// </summary>
+		private void ApplyDownstreamProxySettings()
+		{
+			var config = HttpProxy.UpstreamProxyConfig;
+			switch (config.Type)
+			{
+				case ProxyConfigType.SystemProxy:
+					WinInetUtil.SetProxyInProcessForNekoxy(this.ListeningPort);
+					break;
+				case ProxyConfigType.SpecificProxy:
+					//プロキシを使用しない場合、HTTPだけNekoxyを通し、後は直アクセス
+					if (!string.IsNullOrWhiteSpace(config.SpecificProxyHost))
+					{
+						WinInetUtil.SetProxyInProcess(
+							$"http=127.0.0.1:{this.ListeningPort};"
+							+ $"https={config.SpecificProxyHost}:{config.SpecificProxyPort};"
+							+ $"ftp={config.SpecificProxyHost}:{config.SpecificProxyPort};",
+							"local");
+					}
+					else
+					{
+						//UpstreamProxyHost が空の場合は直アクセスとみなす
+						WinInetUtil.SetProxyInProcess($"http=127.0.0.1:{this.ListeningPort}", "local");
+					}
+					break;
+				case ProxyConfigType.DirectAccess:
+					//指定プロキシの場合、HTTPだけNekoxyを通し、後は指定プロキシに流す
+					WinInetUtil.SetProxyInProcess($"http=127.0.0.1:{this.ListeningPort}", "local");
+					break;
+				default:
+					break;
+			}
+		}
+	}
 }

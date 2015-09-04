@@ -82,6 +82,50 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
+		#region MinAirSuperiorityPotential 変更通知プロパティ
+
+		private int _MinAirSuperiorityPotential;
+
+		/// <summary>
+		/// 艦隊の制空能力を取得します。
+		/// </summary>
+		public int MinAirSuperiorityPotential
+		{
+			get { return this._MinAirSuperiorityPotential; }
+			private set
+			{
+				if (this._MinAirSuperiorityPotential != value)
+				{
+					this._MinAirSuperiorityPotential = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region MaxAirSuperiorityPotential 変更通知プロパティ
+
+		private int _MaxAirSuperiorityPotential;
+
+		/// <summary>
+		/// 艦隊の制空能力を取得します。
+		/// </summary>
+		public int MaxAirSuperiorityPotential
+		{
+			get { return this._MaxAirSuperiorityPotential; }
+			private set
+			{
+				if (this._MaxAirSuperiorityPotential != value)
+				{
+					this._MaxAirSuperiorityPotential = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		#region ViewRange 変更通知プロパティ
 
 		private double _ViewRange;
@@ -204,13 +248,15 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 艦隊の平均レベルや制空戦力などの各種数値を再計算します。
 		/// </summary>
-		internal void Calculate()
+		public void Calculate()
 		{
 			var ships = this.source.SelectMany(x => x.Ships).WithoutEvacuated().ToArray();
 
 			this.TotalLevel = ships.HasItems() ? ships.Sum(x => x.Level) : 0;
 			this.AverageLevel = ships.HasItems() ? (double)this.TotalLevel / ships.Length : 0.0;
 			this.AirSuperiorityPotential = ships.Sum(s => s.CalcAirSuperiorityPotential());
+			this.MinAirSuperiorityPotential = ships.Sum(s => s.CalcMinAirSuperiorityPotential());
+			this.MaxAirSuperiorityPotential = ships.Sum(s => s.CalcMaxAirSuperiorityPotential());
 			this.Speed = ships.All(x => x.Info.Speed == ShipSpeed.Fast)
 				? FleetSpeed.Fast
 				: ships.All(x => x.Info.Speed == ShipSpeed.Low)
@@ -224,7 +270,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.Calculated?.Invoke(this, new EventArgs());
 		}
 
-		internal void Update()
+		public void Update()
 		{
 			var state = FleetSituation.Empty;
 			var ready = true;

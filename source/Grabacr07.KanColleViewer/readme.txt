@@ -1,6 +1,6 @@
 ﻿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 提督業も忙しい！ (KanColleViewer)
-                                             version 4.1  2015/08/12
+                                             version 4.1.3  2015/08/28
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
@@ -26,10 +26,11 @@
 
 ■動作環境
 
-・Windows 8 以降
+・Windows 10
+・Windows 8
 ・Windows 7
 
-開発者は Windows 8.1 Pro でのみ動作確認を行っております。 
+開発者は Windows 10 Pro でのみ動作確認を行っております。 
 Windows 7 では、遠征や建造の終了時のトースト通知が動作しません (代わりに、タスクトレイからのバルーン通知になります)。
 Windows 8 以降での使用を推奨します。
 
@@ -61,7 +62,7 @@ IE コンポーネントを使用しており、ブラウザー部分は Interne
 ■開発環境・言語
 
 C# + WPF で開発しています。
-開発環境は Windows 8.1 Pro + Visual Studio Enterprise 2015 です。
+開発環境は Windows 10 Pro + Visual Studio Enterprise 2015 です。
 
 
 ■使用ライブラリ
@@ -166,6 +167,9 @@ Desktop Toast
 
 ■更新履歴
 
+2015/08/28 - version 4.1.3 リリース
+2015/08/20 - version 4.1.2 リリース
+2015/08/19 - version 4.1.1 リリース
 2015/08/12 - version 4.1.0 リリース
 2015/08/11 - version 4.0.1 リリース
 2015/08/11 - version 4.0 リリース
