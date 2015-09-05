@@ -235,8 +235,13 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 					this.styleSheetApplied = true;
 				}
 			}
+			catch (Exception) when (Application.Instance.State == ApplicationState.Startup)
+			{
+				// about:blank だから仕方ない
+			}
 			catch (Exception ex)
 			{
+				Debug.WriteLine(ex);
 				StatusService.Current.Notify("failed to apply css: " + ex.Message);
 			}
 		}
