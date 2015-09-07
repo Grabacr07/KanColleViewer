@@ -1331,4 +1331,7 @@ HTTP プロトコルの通信は自動構成も含め「インターネット �
   <data name="Settings_Plugins_PluginInfo_ToolWindow" xml:space="preserve">
     <value>ツール表示</value>
   </data>
+  <data name="FleetWindow_Status" xml:space="preserve">
+    <value>ステータス</value>
+  </data>
 </root>

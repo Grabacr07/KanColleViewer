@@ -628,6 +628,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ステータス.
+        /// </summary>
+        public static string FleetWindow_Status {
+            get {
+                return ResourceManager.GetString("FleetWindow_Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 連合艦隊は遠征に参加できません.
         /// </summary>
         public static string FleetWindow_Status_CombinedNoExpedition {

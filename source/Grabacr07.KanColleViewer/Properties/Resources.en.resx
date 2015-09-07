@@ -1327,4 +1327,7 @@ HTTP proxy settings are applied immediately. Settings for all other protocols ar
   <data name="Settings_Plugins_PluginInfo_ToolWindow" xml:space="preserve">
     <value>Tool</value>
   </data>
+  <data name="FleetWindow_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
 </root>
