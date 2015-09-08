@@ -32,18 +32,18 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 
 		#endregion
 
-		#region SpecificProxyHost 変更通知プロパティ
+		#region SpecificHttpProxyHost 変更通知プロパティ
 
-		private string _SpecificProxyHost;
+		private string _SpecificHttpProxyHost;
 
-		public string SpecificProxyHost
+		public string SpecificHttpProxyHost
 		{
-			get { return this._SpecificProxyHost; }
+			get { return this._SpecificHttpProxyHost; }
 			set
 			{
-				if (this._SpecificProxyHost != value)
+				if (this._SpecificHttpProxyHost != value)
 				{
-					this._SpecificProxyHost = value;
+					this._SpecificHttpProxyHost = value;
 					this.RaisePropertyChanged();
 
 				}
@@ -52,18 +52,18 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 
 		#endregion
 
-		#region SpecificProxyPort 変更通知プロパティ
+		#region SpecificHttpProxyPort 変更通知プロパティ
 
-		private ushort _SpecificProxyPort;
+		private string _SpecificHttpProxyPort;
 
-		public ushort SpecificProxyPort
+		public string SpecificHttpProxyPort
 		{
-			get { return this._SpecificProxyPort; }
+			get { return this._SpecificHttpProxyPort; }
 			set
 			{
-				if (this._SpecificProxyPort != value)
+				if (this._SpecificHttpProxyPort != value)
 				{
-					this._SpecificProxyPort = value;
+					this._SpecificHttpProxyPort = value;
 					this.RaisePropertyChanged();
 
 				}
@@ -71,29 +71,219 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 		}
 
 		#endregion
-		
+
+		#region IsUseHttpProxyForAllProtocols 変更通知プロパティ
+
+		private bool _IsUseHttpProxyForAllProtocols;
+
+		public bool IsUseHttpProxyForAllProtocols
+		{
+			get { return this._IsUseHttpProxyForAllProtocols; }
+			set
+			{
+				if (this._IsUseHttpProxyForAllProtocols != value)
+				{
+					this._IsUseHttpProxyForAllProtocols = value;
+					this.RaisePropertyChanged();
+				}
+				this.IsUseHttpProxyForAllProtocolsChanged();
+			}
+		}
+
+		#endregion
+
+		#region SpecificHttpsProxyHost 変更通知プロパティ
+
+		private string _SpecificHttpsProxyHost;
+
+		public string SpecificHttpsProxyHost
+		{
+			get { return this._SpecificHttpsProxyHost; }
+			set
+			{
+				if (this._SpecificHttpsProxyHost != value)
+				{
+					this._SpecificHttpsProxyHost = value;
+					this.RaisePropertyChanged();
+
+				}
+			}
+		}
+
+		#endregion
+
+		#region SpecificHttpsProxyPort 変更通知プロパティ
+
+		private string _SpecificHttpsProxyPort;
+
+		public string SpecificHttpsProxyPort
+		{
+			get { return this._SpecificHttpsProxyPort; }
+			set
+			{
+				if (this._SpecificHttpsProxyPort != value)
+				{
+					this._SpecificHttpsProxyPort = value;
+					this.RaisePropertyChanged();
+
+				}
+			}
+		}
+
+		#endregion
+
+		#region SpecificFtpProxyHost 変更通知プロパティ
+
+		private string _SpecificFtpProxyHost;
+
+		public string SpecificFtpProxyHost
+		{
+			get { return this._SpecificFtpProxyHost; }
+			set
+			{
+				if (this._SpecificFtpProxyHost != value)
+				{
+					this._SpecificFtpProxyHost = value;
+					this.RaisePropertyChanged();
+
+				}
+			}
+		}
+
+		#endregion
+
+		#region SpecificFtpProxyPort 変更通知プロパティ
+
+		private string _SpecificFtpProxyPort;
+
+		public string SpecificFtpProxyPort
+		{
+			get { return this._SpecificFtpProxyPort; }
+			set
+			{
+				if (this._SpecificFtpProxyPort != value)
+				{
+					this._SpecificFtpProxyPort = value;
+					this.RaisePropertyChanged();
+
+				}
+			}
+		}
+
+		#endregion
+
+		#region SpecificSocksProxyHost 変更通知プロパティ
+
+		private string _SpecificSocksProxyHost;
+
+		public string SpecificSocksProxyHost
+		{
+			get { return this._SpecificSocksProxyHost; }
+			set
+			{
+				if (this._SpecificSocksProxyHost != value)
+				{
+					this._SpecificSocksProxyHost = value;
+					this.RaisePropertyChanged();
+
+				}
+			}
+		}
+
+		#endregion
+
+		#region SpecificSocksProxyPort 変更通知プロパティ
+
+		private string _SpecificSocksProxyPort;
+
+		public string SpecificSocksProxyPort
+		{
+			get { return this._SpecificSocksProxyPort; }
+			set
+			{
+				if (this._SpecificSocksProxyPort != value)
+				{
+					this._SpecificSocksProxyPort = value;
+					this.RaisePropertyChanged();
+
+				}
+			}
+		}
+
+		#endregion
+
 		public void Initialize()
 		{
-			this.Cancel();
+			this.RevertToSavedSettings();
 			NetworkSettings.Proxy.Type.Subscribe(x => this.ProxyType = x).AddTo(this);
-			NetworkSettings.Proxy.Host.Subscribe(x => this.SpecificProxyHost = x).AddTo(this);
-			NetworkSettings.Proxy.Port.Subscribe(x => this.SpecificProxyPort = x).AddTo(this);
+			NetworkSettings.Proxy.Host.Subscribe(x => this.SpecificHttpProxyHost = x).AddTo(this);
+			NetworkSettings.Proxy.Port.Subscribe(x => this.SpecificHttpProxyPort = x).AddTo(this);
+			NetworkSettings.Proxy.HttpsHost.Subscribe(x => this.SpecificHttpsProxyHost = x).AddTo(this);
+			NetworkSettings.Proxy.HttpsPort.Subscribe(x => this.SpecificHttpsProxyPort = x).AddTo(this);
+			NetworkSettings.Proxy.FtpHost.Subscribe(x => this.SpecificFtpProxyHost = x).AddTo(this);
+			NetworkSettings.Proxy.FtpPort.Subscribe(x => this.SpecificFtpProxyPort = x).AddTo(this);
+			NetworkSettings.Proxy.SocksHost.Subscribe(x => this.SpecificSocksProxyHost = x).AddTo(this);
+			NetworkSettings.Proxy.SocksPort.Subscribe(x => this.SpecificSocksProxyPort = x).AddTo(this);
+			NetworkSettings.Proxy.IsUseHttpProxyForAllProtocols.Subscribe(x => this.IsUseHttpProxyForAllProtocols = x).AddTo(this);
 		}
 
 		public void Apply()
 		{
+			ushort port;
 			NetworkSettings.Proxy.Type.Value = this.ProxyType;
-			NetworkSettings.Proxy.Host.Value = this.SpecificProxyHost;
-			NetworkSettings.Proxy.Port.Value = this.SpecificProxyPort;
+			NetworkSettings.Proxy.Host.Value = this.SpecificHttpProxyHost;
+			NetworkSettings.Proxy.Port.Value = ushort.TryParse(this.SpecificHttpProxyPort, out port) ? port : NetworkSettings.Proxy.Port.Default;
+			NetworkSettings.Proxy.HttpsHost.Value = this.SpecificHttpsProxyHost;
+			NetworkSettings.Proxy.HttpsPort.Value = ushort.TryParse(this.SpecificHttpsProxyPort, out port) ? port : NetworkSettings.Proxy.HttpsPort.Default;
+			NetworkSettings.Proxy.FtpHost.Value = this.SpecificFtpProxyHost;
+			NetworkSettings.Proxy.FtpPort.Value = ushort.TryParse(this.SpecificFtpProxyPort, out port) ? port : NetworkSettings.Proxy.FtpPort.Default;
+			NetworkSettings.Proxy.SocksHost.Value = this.SpecificSocksProxyHost;
+			NetworkSettings.Proxy.SocksPort.Value = ushort.TryParse(this.SpecificSocksProxyPort, out port) ? port : NetworkSettings.Proxy.SocksPort.Default;
+			NetworkSettings.Proxy.IsUseHttpProxyForAllProtocols.Value = this.IsUseHttpProxyForAllProtocols;
+			this.RevertToSavedSettings();    // Parse 結果書き戻し
 
 			KanColleClient.Current.Proxy.UpstreamProxySettings = new NetworkSettings.Proxy();
 		}
 
 		public void Cancel()
 		{
+			this.RevertToSavedSettings();
+		}
+
+		private void RevertToSavedSettings()
+		{
 			this.ProxyType = NetworkSettings.Proxy.Type;
-			this.SpecificProxyHost = NetworkSettings.Proxy.Host;
-			this.SpecificProxyPort = NetworkSettings.Proxy.Port;
+			this.SpecificHttpProxyHost = NetworkSettings.Proxy.Host;
+			this.SpecificHttpProxyPort = NetworkSettings.Proxy.Port.Value.ToString();
+			this.SpecificHttpsProxyHost = NetworkSettings.Proxy.HttpsHost;
+			this.SpecificHttpsProxyPort = NetworkSettings.Proxy.HttpsPort.Value.ToString();
+			this.SpecificFtpProxyHost = NetworkSettings.Proxy.FtpHost;
+			this.SpecificFtpProxyPort = NetworkSettings.Proxy.FtpPort.Value.ToString();
+			this.SpecificSocksProxyHost = NetworkSettings.Proxy.SocksHost;
+			this.SpecificSocksProxyPort = NetworkSettings.Proxy.SocksPort.Value.ToString();
+			this.IsUseHttpProxyForAllProtocols = NetworkSettings.Proxy.IsUseHttpProxyForAllProtocols;
+		}
+
+		private void IsUseHttpProxyForAllProtocolsChanged()
+		{
+			if (this.IsUseHttpProxyForAllProtocols)
+			{
+				this.SpecificHttpsProxyHost = this.SpecificHttpProxyHost;
+				this.SpecificHttpsProxyPort = this.SpecificHttpProxyPort;
+				this.SpecificFtpProxyHost = this.SpecificHttpProxyHost;
+				this.SpecificFtpProxyPort = this.SpecificHttpProxyPort;
+				this.SpecificSocksProxyHost = NetworkSettings.Proxy.SocksHost.Default;
+				this.SpecificSocksProxyPort = NetworkSettings.Proxy.SocksPort.Default.ToString();
+			}
+			else
+			{
+				this.SpecificHttpsProxyHost = NetworkSettings.Proxy.HttpsHost;
+				this.SpecificHttpsProxyPort = NetworkSettings.Proxy.HttpsPort.Value.ToString();
+				this.SpecificFtpProxyHost = NetworkSettings.Proxy.FtpHost;
+				this.SpecificFtpProxyPort = NetworkSettings.Proxy.FtpPort.Value.ToString();
+				this.SpecificSocksProxyHost = NetworkSettings.Proxy.SocksHost;
+				this.SpecificSocksProxyPort = NetworkSettings.Proxy.SocksPort.Value.ToString();
+			}
 		}
 	}
 }
