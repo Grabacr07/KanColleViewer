@@ -20,7 +20,12 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public int Id => this.RawData.api_id;
 
-		public string Name => this.RawData.api_name;
+		public string Name => KanColleClient.Current.Translations.Lookup(TranslationType.Equipment, this.RawData) ?? this.RawData.api_name;
+
+		/// <summary>
+		///元の名称を取得します。
+		/// </summary>
+		public string NameRaw => this.Name != RawData.api_name ? RawData.api_name : "";
 
 		public SlotItemType Type => this.type ?? (SlotItemType)(this.type = (SlotItemType)(this.RawData.api_type.Get(2) ?? 0));
 

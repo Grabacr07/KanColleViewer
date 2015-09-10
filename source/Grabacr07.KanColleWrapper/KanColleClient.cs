@@ -35,6 +35,8 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public Homeport Homeport { get; private set; }
 
+		public Translations Translations { get; private set; }
+
 		#region IsStarted 変更通知プロパティ
 
 		private bool _IsStarted;
@@ -102,6 +104,8 @@ namespace Grabacr07.KanColleWrapper
 			var basic = proxy.api_get_member_basic.TryParse<kcsapi_basic>().FirstAsync().ToTask();
 			var kdock = proxy.api_get_member_kdock.TryParse<kcsapi_kdock[]>().FirstAsync().ToTask();
 			var sitem = proxy.api_get_member_slot_item.TryParse<kcsapi_slotitem[]>().FirstAsync().ToTask();
+
+			this.Translations = new Translations();
 
 			proxy.api_start2.FirstAsync().Subscribe(async session =>
 			{

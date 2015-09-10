@@ -33,12 +33,12 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 任務名を取得します。
 		/// </summary>
-		public string Title => this.RawData.api_title;
+		public string Title => KanColleClient.Current.Translations.Lookup(TranslationType.QuestTitle, this.RawData) ?? this.RawData.api_title;
 
 		/// <summary>
 		/// 任務の詳細を取得します。
 		/// </summary>
-		public string Detail => this.RawData.api_detail;
+		public string Detail => KanColleClient.Current.Translations.Lookup(TranslationType.QuestDetail, this.RawData) ?? this.RawData.api_detail;
 
 
 		public Quest(kcsapi_quest rawData) : base(rawData) { }

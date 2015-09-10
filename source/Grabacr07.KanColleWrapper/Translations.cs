@@ -44,12 +44,12 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		private Dictionary<TranslationType, TranslationModel> TranslationData = new Dictionary<TranslationType, TranslationModel>()
 		{
-			{ TranslationType.Ships, new TranslationModel{Document = null, Filename = "Ships.xml", ArrayName = "ships"} },
-			{ TranslationType.ShipTypes, new TranslationModel{Document = null, Filename = "ShipTypes.xml", ArrayName = "shiptypes"} },
-			{ TranslationType.Equipment, new TranslationModel{Document = null, Filename = "Equipment.xml", ArrayName = "equipment"} },
-			{ TranslationType.Quests, new TranslationModel{Document = null, Filename = "Quests.xml", ArrayName = "quests"} },
-			// { TranslationType.Operations, new TranslationModel{Document = null, Filename = "Operations.xml", ArrayName = "operations"} },
-			// { TranslationType.Expeditions, new TranslationModel{Document = null, Filename = "Expeditions.xml", ArrayName = "expeditions"} },
+			{ TranslationType.Ships, new TranslationModel{Document = null, Filename = "Ships.xml", ArrayName = "ship"} },
+			{ TranslationType.ShipTypes, new TranslationModel{Document = null, Filename = "ShipTypes.xml", ArrayName = "shiptype"} },
+			{ TranslationType.Equipment, new TranslationModel{Document = null, Filename = "Equipment.xml", ArrayName = "item"} },
+			{ TranslationType.Quests, new TranslationModel{Document = null, Filename = "Quests.xml", ArrayName = "quest"} },
+			// { TranslationType.Operations, new TranslationModel{Document = null, Filename = "Operations.xml", ArrayName = "operation"} },
+			// { TranslationType.Expeditions, new TranslationModel{Document = null, Filename = "Expeditions.xml", ArrayName = "expedition"} },
 		};
 
 		/// <summary>
@@ -168,7 +168,8 @@ namespace Grabacr07.KanColleWrapper
 					lookupData = (rawData as kcsapi_mst_ship).api_name;
 					break;
 				case TranslationType.ShipTypes:
-					lookupData = (rawData as kcsapi_mst_stype).api_name;
+					lookupField = "id";
+					lookupData = (rawData as kcsapi_mst_stype).api_id.ToString();
 					break;
 				case TranslationType.Equipment:
 					lookupField = "id";
@@ -195,6 +196,7 @@ namespace Grabacr07.KanColleWrapper
 					return null;
 			}
 
+			Debug.WriteLine("Translation look-up of type {0} in {1} for {2} results in {3}.", type, lookupField, lookupData, this.GetTranslationSet(type)?.FirstOrDefault(b => b.Element(lookupField).Value.Equals(lookupData))?.Element(resultField)?.Value ?? "NO MATCH");
 			return this.GetTranslationSet(type)?.FirstOrDefault(b => b.Element(lookupField).Value.Equals(lookupData))?.Element(resultField)?.Value;
 		}
 
