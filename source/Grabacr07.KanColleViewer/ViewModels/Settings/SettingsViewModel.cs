@@ -7,7 +7,9 @@ using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleViewer.ViewModels.Composition;
+using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
+using Livet.EventListeners;
 using MetroTrilithon.Mvvm;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Settings
@@ -88,6 +90,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 					// ☝プロダクト名の途中で改行されないように、space を non-break space に置き換えてあげてるんだからねっっ
 					return list;
 				});
+
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Translations)
+			{
+				(sender, args) => this.RaisePropertyChanged(args.PropertyName),
+			});
 
 			this.ViewRangeSettingsCollection = ViewRangeCalcLogic.Logics
 				.Select(x => new ViewRangeSettingsViewModel(x))

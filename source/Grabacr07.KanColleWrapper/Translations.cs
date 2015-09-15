@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -25,14 +26,11 @@ namespace Grabacr07.KanColleWrapper
 			/// The complete XML document for the resource.
 			/// </summary>
 			public XDocument Document { get; set; }
+			public ITranslationContainer Table { get; set; }
 			/// <summary>
 			/// Local storage: file name.
 			/// </summary>
 			public string Filename { get; set; }
-			/// <summary>
-			/// API: array name.
-			/// </summary>
-			public string ArrayName { get; set; }
 			/// <summary>
 			/// Returns the full path to the resource file.
 			/// </summary>
@@ -44,10 +42,11 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		private Dictionary<TranslationType, TranslationModel> TranslationData = new Dictionary<TranslationType, TranslationModel>()
 		{
-			{ TranslationType.Ships, new TranslationModel{Document = null, Filename = "Ships.xml", ArrayName = "ship"} },
-			{ TranslationType.ShipTypes, new TranslationModel{Document = null, Filename = "ShipTypes.xml", ArrayName = "shiptype"} },
-			{ TranslationType.Equipment, new TranslationModel{Document = null, Filename = "Equipment.xml", ArrayName = "item"} },
-			{ TranslationType.Quests, new TranslationModel{Document = null, Filename = "Quests.xml", ArrayName = "quest"} },
+			{ TranslationType.Ships, new TranslationModel{Document = null, Filename = "Ships.xml", Table = new TranslationContainer(TranslationType.Ships, "ship", "name_ja", "name")} },
+			{ TranslationType.ShipTypes, new TranslationModel{Document = null, Filename = "ShipTypes.xml", Table = new TranslationContainer(TranslationType.ShipTypes, "shiptype", "id", "name")} },
+			{ TranslationType.Equipment, new TranslationModel{Document = null, Filename = "Equipment.xml", Table = new TranslationContainer(TranslationType.Equipment, "item", "name_ja", "name")} },
+			{ TranslationType.QuestTitle, new TranslationModel{Document = null, Filename = "Quests.xml", Table = new TranslationContainer(TranslationType.QuestTitle, "quest", "id", "title")} },
+			{ TranslationType.QuestDetail, new TranslationModel{Document = null, Filename = "Quests.xml", Table = new TranslationContainer(TranslationType.QuestDetail, "quest", "id", "description")} },
 			// { TranslationType.Operations, new TranslationModel{Document = null, Filename = "Operations.xml", ArrayName = "operation"} },
 			// { TranslationType.Expeditions, new TranslationModel{Document = null, Filename = "Expeditions.xml", ArrayName = "expedition"} },
 		};
@@ -68,13 +67,14 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public bool EnableTranslations { get; private set; }
 
-		internal Translations() : this("en-US") { }
+		internal Translations() : this("en") { }
 		/// <summary>
 		/// The constructor performs initial loading of translation files.
 		/// </summary>
 		/// <param name="culture">The culture to use for translations. Defaults to "en-US".</param>
 		internal Translations(string culture)
 		{
+			Debug.WriteLine(this.GetType().Name + ": Constructor initialising with <" + culture + ">.");
 			this.EnableTranslations = true;
 			this.ChangeCulture(culture);
 		}
@@ -94,6 +94,8 @@ namespace Grabacr07.KanColleWrapper
 			{
 				TranslationData[type].Document = null;
 				if (File.Exists(TranslationData[type].FilePath)) TranslationData[type].Document = XDocument.Load(TranslationData[type].FilePath);
+				if ((TranslationData[type].Table != null) && (TranslationData[type].Document != null))
+					TranslationData[type].Table.Load(TranslationData[type].Document);
 			}
 			catch (Exception ex)
 			{
@@ -116,38 +118,22 @@ namespace Grabacr07.KanColleWrapper
 		/// <param name="culture">The culture to use for translations.</param>
 		public void ChangeCulture(string culture)
 		{
+			Debug.WriteLine("Got <" + culture + "> in a culture change request.");
+
+			if ((culture == null) || (culture == CurrentCulture))
+				return;
+
 			CurrentCulture = culture;
 
-			if (!EnableTranslations || CurrentCulture == "ja-JP")
+			if (!EnableTranslations || CurrentCulture == "ja")
 			{
 				foreach (var translationData in TranslationData) translationData.Value.Document = null;
 				return;
 			}
 
-			this.ReloadTranslations(TranslationType.Equipment, TranslationType.Quests, TranslationType.Ships, TranslationType.ShipTypes /*, TranslationType.Operations, TranslationType.Expeditions*/);
+			this.ReloadTranslations(TranslationType.Equipment, TranslationType.QuestTitle, TranslationType.QuestDetail, TranslationType.Ships, TranslationType.ShipTypes /*, TranslationType.Operations, TranslationType.Expeditions*/);
+			this.RaisePropertyChanged();
 		}
-
-		/// <summary>
-		/// Obtains an XML set of translations for the requested resource type.
-		/// </summary>
-		/// <param name="type">Resource type.</param>
-		/// <returns></returns>
-		private IEnumerable<XElement> GetTranslationSet(TranslationType type)
-		{
-			var localType = type;
-			switch (type)
-			{
-				case TranslationType.QuestTitle:
-				case TranslationType.QuestDetail:
-					localType = TranslationType.Quests;
-					break;
-				case TranslationType.OperationMaps:
-				case TranslationType.OperationSortie:
-					localType = TranslationType.Operations;
-					break;
-			}
-			return (!TranslationData.ContainsKey(localType) || (TranslationData[localType].Document == null)) ? null : TranslationData[localType].Document.Descendants(TranslationData[localType].ArrayName);
-		} 
 
 		/// <summary>
 		/// Looks up a translated string for a resource.
@@ -157,8 +143,6 @@ namespace Grabacr07.KanColleWrapper
 		/// <returns></returns>
 		public string Lookup(TranslationType type, object rawData)
 		{
-			string lookupField = "name_ja";
-			string resultField = "name";
 			string lookupData;
 
 			// Determine look-up fields and queries
@@ -168,23 +152,16 @@ namespace Grabacr07.KanColleWrapper
 					lookupData = (rawData as kcsapi_mst_ship).api_name;
 					break;
 				case TranslationType.ShipTypes:
-					lookupField = "id";
 					lookupData = (rawData as kcsapi_mst_stype).api_id.ToString();
 					break;
 				case TranslationType.Equipment:
-					lookupField = "id";
-					lookupData = (rawData as kcsapi_mst_slotitem).api_sortno.ToString();
+					lookupData = (rawData as kcsapi_mst_slotitem).api_name;
 					break;
 				case TranslationType.QuestTitle:
-					lookupField = "id";
-					resultField = "title";
-					lookupData = (rawData as kcsapi_quest).api_no.ToString();
-					break;
 				case TranslationType.QuestDetail:
-					lookupField = "id";
-					resultField = "description";
 					lookupData = (rawData as kcsapi_quest).api_no.ToString();
 					break;
+
 				//case TranslationType.OperationMaps:
 				//	lookupData = (rawData as kcsapi_battleresult).api_quest_name;
 				//	break;
@@ -196,8 +173,7 @@ namespace Grabacr07.KanColleWrapper
 					return null;
 			}
 
-			Debug.WriteLine("Translation look-up of type {0} in {1} for {2} results in {3}.", type, lookupField, lookupData, this.GetTranslationSet(type)?.FirstOrDefault(b => b.Element(lookupField).Value.Equals(lookupData))?.Element(resultField)?.Value ?? "NO MATCH");
-			return this.GetTranslationSet(type)?.FirstOrDefault(b => b.Element(lookupField).Value.Equals(lookupData))?.Element(resultField)?.Value;
+			return TranslationData[type].Table.Lookup(lookupData);
 		}
 
 		/// <summary>
@@ -209,6 +185,53 @@ namespace Grabacr07.KanColleWrapper
 		{
 			if (TranslationData.ContainsKey(type)) return TranslationData[type]?.Document?.Root?.Attribute("Version")?.Value ?? "0";
 			throw new System.NotImplementedException("Versioning for this resource type is not supported.");
+		}
+
+		interface ITranslationContainer
+		{
+			TranslationType Type { get; }
+			string Lookup(object key);
+			void Load(XDocument document);
+		}
+
+		class TranslationContainer : ITranslationContainer
+		{
+			public TranslationType Type { get; private set; }
+			public string Key { get; private set; }
+			public string Field { get; private set; }
+			public string Element { get; private set; }
+
+			private Dictionary<string, string> tableDictionary;
+
+			public TranslationContainer(TranslationType type, string element, string key, string field)
+			{
+				Type = type;
+				Key = key;
+				Field = field;
+				Element = element;
+			}
+
+			public void Load(XDocument document)
+			{
+				tableDictionary = null;
+				tableDictionary = new Dictionary<string, string>();
+
+				foreach (var el in document.Descendants(Element))
+				{
+					if ((el.Element(Key) != null) && (el.Element(Field) != null))
+						tableDictionary.Add(el.Element(Key).Value, el.Element(Field).Value);
+				}
+
+				Debug.WriteLine("Loaded translations for {0}: {1} element(s).", Type, tableDictionary.Count);
+			}
+
+			public string Lookup(object key)
+			{
+				var lookup = key as string;
+				Debug.WriteLine("Matching {0}: {1}.", lookup, tableDictionary.ContainsKey(lookup) ? tableDictionary[lookup] : "no match");
+				if ((lookup !=null) && (tableDictionary?.ContainsKey(lookup) ?? false)) return tableDictionary[lookup];
+				return null;
+			}
 		}
 	}
 

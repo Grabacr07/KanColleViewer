@@ -84,6 +84,7 @@ namespace Grabacr07.KanColleViewer
 				this.compositeDisposable.Add(SettingsHost.Save);
 
 				GeneralSettings.Culture.Subscribe(x => ResourceService.Current.ChangeCulture(x)).AddTo(this);
+				GeneralSettings.Culture.Subscribe(x => KanColleClient.Current.Translations.ChangeCulture(x)).AddTo(this);
 				KanColleClient.Current.Settings = new KanColleSettings();
 
 				ThemeService.Current.Initialize(this, Theme.Dark, Accent.Purple);
