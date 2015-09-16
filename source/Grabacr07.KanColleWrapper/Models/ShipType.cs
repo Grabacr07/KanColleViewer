@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Models.Raw;
+using MetroTrilithon.Mvvm;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
@@ -19,7 +20,13 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public int SortNumber => this.RawData.api_sortno;
 
-		public ShipType(kcsapi_mst_stype rawData) : base(rawData) { }
+		public ShipType(kcsapi_mst_stype rawData) : base(rawData)
+		{
+			KanColleClient.Current.Translations.Subscribe(x =>
+			{
+				this.RaisePropertyChanged("Name");
+			});
+		}
 
 		public override string ToString()
 		{
@@ -28,13 +35,13 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#region static members
 
-	    public static ShipType Dummy { get; } = new ShipType(new kcsapi_mst_stype
+		public static ShipType Dummy { get; } = new ShipType(new kcsapi_mst_stype
 		{
-		    api_id = 999,
-		    api_sortno = 999,
-		    api_name = "不審船",
+			api_id = 999,
+			api_sortno = 999,
+			api_name = "不審船",
 		});
 
-	    #endregion
+		#endregion
 	}
 }

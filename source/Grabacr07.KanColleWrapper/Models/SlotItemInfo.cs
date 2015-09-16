@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models.Raw;
+using MetroTrilithon.Mvvm;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
@@ -98,6 +99,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		internal SlotItemInfo(kcsapi_mst_slotitem rawData, MasterTable<SlotItemEquipType> types) : base(rawData)
 		{
 			this.EquipType = types[rawData.api_type?[2] ?? 0] ?? SlotItemEquipType.Dummy;
+			KanColleClient.Current.Translations.Subscribe(x =>
+			{
+				this.RaisePropertyChanged("Name");
+			});
 		}
 
 		public override string ToString()

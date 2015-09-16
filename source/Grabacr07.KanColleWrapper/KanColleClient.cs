@@ -37,6 +37,8 @@ namespace Grabacr07.KanColleWrapper
 
 		public Translations Translations { get; private set; }
 
+		public Updater Updater { get; private set; }
+
 		#region IsStarted 変更通知プロパティ
 
 		private bool _IsStarted;
@@ -106,6 +108,7 @@ namespace Grabacr07.KanColleWrapper
 			var sitem = proxy.api_get_member_slot_item.TryParse<kcsapi_slotitem[]>().FirstAsync().ToTask();
 
 			this.Translations = new Translations();
+			this.Updater = new Updater();
 
 			proxy.api_start2.FirstAsync().Subscribe(async session =>
 			{

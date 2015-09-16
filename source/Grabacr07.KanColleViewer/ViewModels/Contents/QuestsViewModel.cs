@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Properties;
@@ -108,6 +109,19 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 				{ nameof(quests.All), (sender, args) => this.Quests = quests.All.Select(x => new QuestViewModel(x)).ToArray() },
 				{ nameof(quests.Current), (sender, args) => this.Current = quests.Current.Select(x => new QuestViewModel(x)).ToArray() },
 				{ nameof(quests.IsEmpty), (sender, args) => this.IsEmpty = quests.IsEmpty }
+			});
+
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Translations)
+			{
+				(sender, args) =>
+				{
+					this.RaisePropertyChanged(nameof(this.Quests));
+					Debug.WriteLine("QVM: Translations were changed.");
+					this.IsUntaken = quests.IsUntaken;
+					this.Quests = quests.All.Select(x => new QuestViewModel(x)).ToArray();
+					this.Current = quests.Current.Select(x => new QuestViewModel(x)).ToArray();
+					this.IsEmpty = quests.IsEmpty;
+				},
 			});
 		}
 	}

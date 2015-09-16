@@ -93,6 +93,7 @@ namespace Grabacr07.KanColleWrapper
 			try
 			{
 				TranslationData[type].Document = null;
+				TranslationData[type].Table.Clear();
 				if (File.Exists(TranslationData[type].FilePath)) TranslationData[type].Document = XDocument.Load(TranslationData[type].FilePath);
 				if ((TranslationData[type].Table != null) && (TranslationData[type].Document != null))
 					TranslationData[type].Table.Load(TranslationData[type].Document);
@@ -125,9 +126,10 @@ namespace Grabacr07.KanColleWrapper
 
 			CurrentCulture = culture;
 
-			if (!EnableTranslations || CurrentCulture == "ja")
+			if (!EnableTranslations || CurrentCulture.StartsWith("ja"))
 			{
 				foreach (var translationData in TranslationData) translationData.Value.Document = null;
+				this.RaisePropertyChanged();
 				return;
 			}
 
@@ -143,6 +145,12 @@ namespace Grabacr07.KanColleWrapper
 		/// <returns></returns>
 		public string Lookup(TranslationType type, object rawData)
 		{
+			if (!EnableTranslations || CurrentCulture.StartsWith("ja"))
+			{
+				Debug.WriteLine("Lookup called for {0} but translations are disabled or culture is Japanese.", type);
+				return null;
+			}
+
 			string lookupData;
 
 			// Determine look-up fields and queries
@@ -192,6 +200,7 @@ namespace Grabacr07.KanColleWrapper
 			TranslationType Type { get; }
 			string Lookup(object key);
 			void Load(XDocument document);
+			void Clear();
 		}
 
 		class TranslationContainer : ITranslationContainer
@@ -231,6 +240,11 @@ namespace Grabacr07.KanColleWrapper
 				Debug.WriteLine("Matching {0}: {1}.", lookup, tableDictionary.ContainsKey(lookup) ? tableDictionary[lookup] : "no match");
 				if ((lookup !=null) && (tableDictionary?.ContainsKey(lookup) ?? false)) return tableDictionary[lookup];
 				return null;
+			}
+
+			public void Clear()
+			{
+				tableDictionary?.Clear();
 			}
 		}
 	}

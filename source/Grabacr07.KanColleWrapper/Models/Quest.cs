@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Models.Raw;
+using MetroTrilithon.Mvvm;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
@@ -41,7 +43,15 @@ namespace Grabacr07.KanColleWrapper.Models
 		public string Detail => KanColleClient.Current.Translations.Lookup(TranslationType.QuestDetail, this.RawData) ?? this.RawData.api_detail;
 
 
-		public Quest(kcsapi_quest rawData) : base(rawData) { }
+		public Quest(kcsapi_quest rawData) : base(rawData)
+		{
+			KanColleClient.Current.Translations.Subscribe(x =>
+			{
+				Debug.WriteLine("Raising property changed event in Quest.");
+				this.RaisePropertyChanged("Title");
+				this.RaisePropertyChanged("Detail");
+			});
+		}
 
 
 		public override string ToString()

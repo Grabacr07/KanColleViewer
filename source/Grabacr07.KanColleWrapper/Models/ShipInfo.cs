@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Models.Raw;
 using Grabacr07.KanColleWrapper.Internal;
+using MetroTrilithon.Mvvm;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
@@ -112,7 +113,13 @@ namespace Grabacr07.KanColleWrapper.Models
 		public int? NextRemodelingLevel => this.RawData.api_afterlv == 0 ? null : (int?)this.RawData.api_afterlv;
 
 
-		internal ShipInfo(kcsapi_mst_ship rawData) : base(rawData) { }
+		internal ShipInfo(kcsapi_mst_ship rawData) : base(rawData)
+		{
+			KanColleClient.Current.Translations.Subscribe(x =>
+			{
+				this.RaisePropertyChanged("Name");
+			});
+		}
 
 		public override string ToString()
 		{
