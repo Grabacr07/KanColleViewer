@@ -6,3 +6,6 @@
 	path = source/MetroTrilithon
 	
 	url = https://github.com/Grabacr07/MetroTrilithon
+[submodule "FreyYa"]
+	path = source/MetroRadiance
+	url = https://github.com/FreyYa/MetroRadiance.git
