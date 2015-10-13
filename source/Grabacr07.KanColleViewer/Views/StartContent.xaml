@@ -1,0 +1,405 @@
+﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.StartContent"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
+			 xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
+			 xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
+			 xmlns:metro2="clr-namespace:MetroTrilithon.Controls;assembly=MetroTrilithon.Desktop"
+			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+			 xmlns:svm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Settings"
+			 mc:Ignorable="d"
+			 d:DesignWidth="800"
+			 d:DesignHeight="500"
+			 d:DataContext="{d:DesignInstance vm:StartContentViewModel}"
+			 Background="{DynamicResource ThemeBrushKey}">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="Settings/Common.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+
+			<Style x:Key="TabLikeRadioButtonStyleKey"
+				   TargetType="{x:Type RadioButton}">
+				<Setter Property="OverridesDefaultStyle"
+						Value="True" />
+				<Setter Property="Background"
+						Value="{DynamicResource SemiactiveBackgroundBrushKey}" />
+				<Setter Property="Foreground"
+						Value="{DynamicResource ForegroundBrushKey}" />
+				<Setter Property="FontFamily"
+						Value="Segoe UI Light" />
+				<Setter Property="Margin"
+						Value="0,0,0,15" />
+				<Setter Property="FocusVisualStyle"
+						Value="{DynamicResource {x:Static SystemParameters.FocusVisualStyleKey}}" />
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type RadioButton}">
+							<Grid Background="Transparent"
+								  SnapsToDevicePixels="True">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition />
+									<ColumnDefinition Width="Auto" />
+								</Grid.ColumnDefinitions>
+								<Rectangle Grid.Row="0"
+										   Fill="{TemplateBinding Background}" />
+								<Path x:Name="Arrow"
+									  Grid.Column="1"
+									  Data="M 0,0 0,10 30,5 z"
+									  Width="20"
+									  Fill="{TemplateBinding Background}"
+									  Stretch="Fill" />
+								<ContentPresenter Grid.Column="0"
+												  Margin="15,8,10,8"
+												  Focusable="False"
+												  RecognizesAccessKey="True"
+												  TextElement.FontFamily="{TemplateBinding FontFamily}" />
+							</Grid>
+							<ControlTemplate.Triggers>
+								<MultiTrigger>
+									<MultiTrigger.Conditions>
+										<Condition Property="IsChecked"
+												   Value="False" />
+										<Condition Property="IsMouseOver"
+												   Value="False" />
+										<Condition Property="IsPressed"
+												   Value="False" />
+									</MultiTrigger.Conditions>
+									<Setter TargetName="Arrow"
+											Property="Visibility"
+											Value="Hidden" />
+								</MultiTrigger>
+							</ControlTemplate.Triggers>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+				<Style.Triggers>
+					<Trigger Property="IsMouseOver"
+							 Value="True">
+						<Setter Property="Background"
+								Value="{DynamicResource ActiveBackgroundBrushKey}" />
+						<Setter Property="TextElement.Foreground"
+								Value="{DynamicResource ActiveForegroundBrushKey}" />
+					</Trigger>
+					<Trigger Property="IsPressed"
+							 Value="True">
+						<Setter Property="Background"
+								Value="{DynamicResource AccentHighlightBrushKey}" />
+						<Setter Property="TextElement.Foreground"
+								Value="{DynamicResource AccentForegroundBrushKey}" />
+					</Trigger>
+					<Trigger Property="IsChecked"
+							 Value="True">
+						<Setter Property="Background"
+								Value="{DynamicResource AccentBrushKey}" />
+						<Setter Property="TextElement.Foreground"
+								Value="{DynamicResource AccentForegroundBrushKey}" />
+					</Trigger>
+				</Style.Triggers>
+			</Style>
+		</ResourceDictionary>
+	</UserControl.Resources>
+
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+		<ScrollViewer VerticalScrollBarVisibility="Auto"
+					  PanningMode="Both"
+					  Margin="0,8,0,0">
+			<StackPanel Margin="0,0,10,8"
+						TextOptions.TextFormattingMode="Ideal">
+				<RadioButton x:Name="InformationTab"
+							 Style="{StaticResource TabLikeRadioButtonStyleKey}"
+							 IsChecked="True">
+					<TextBlock Text="Information"
+							   FontFamily="{DynamicResource EmphaticFontFamilyKey}"
+							   FontSize="16"
+							   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}" />
+				</RadioButton>
+				<RadioButton x:Name="SettingsTab"
+							 Style="{StaticResource TabLikeRadioButtonStyleKey}">
+					<TextBlock Text="Settings"
+							   FontFamily="{DynamicResource EmphaticFontFamilyKey}"
+							   FontSize="16"
+							   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}" />
+				</RadioButton>
+			</StackPanel>
+		</ScrollViewer>
+
+		<Grid Grid.Column="1"
+			  Margin="0,8,0,0"
+			  Visibility="{Binding ElementName=InformationTab, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+
+			<kcvc:AppIcon Grid.Column="1"
+						  Background="Transparent"
+						  Height="200"
+						  HorizontalAlignment="Right"
+						  VerticalAlignment="Bottom"
+						  Margin="0,0,30,-4"
+						  Opacity="0.25" />
+
+			<Border Grid.Column="0"
+					BorderBrush="{DynamicResource BorderBrushKey}"
+					BorderThickness="1,0,1,0">
+				<ScrollViewer VerticalScrollBarVisibility="Auto"
+							  PanningMode="Both"
+							  Padding="10,0,20,14">
+					<StackPanel Margin="0,-9,0,0">
+						<TextBlock>
+							<Run Text="{Binding Source={x:Static models:ProductInfo.Product}, Mode=OneWay}"
+								 FontFamily="Segoe UI Light"
+								 FontSize="30"
+								 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+							<LineBreak />
+							<Run Text="{Binding Source={x:Static models:ProductInfo.Title}, Mode=OneWay}"
+								 FontSize="16" />
+						</TextBlock>
+
+						<TextBlock Margin="0,8,0,0">
+							<Run Text="{Binding Source={x:Static models:ProductInfo.VersionString}, StringFormat=Version {0}, Mode=OneWay}"
+								 FontFamily="Segoe UI Light"
+								 FontSize="20"
+								 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+						</TextBlock>
+
+						<Rectangle Height="1"
+								   Margin="0,12"
+								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+						<TextBlock FontFamily="Segoe UI">
+							<Run Text="Author:" />
+							<metro2:HyperlinkEx Uri="https://twitter.com/Grabacr07">
+								<Run Text="@Grabacr07" />
+							</metro2:HyperlinkEx>
+							<LineBreak />
+							<LineBreak />
+							<Run Text="Developer:" />
+							<metro2:HyperlinkEx Uri="https://twitter.com/Grabacr07">
+								<Run Text="@Grabacr07" />
+							</metro2:HyperlinkEx>
+							<metro2:HyperlinkEx Uri="https://twitter.com/veigr">
+								<Run Text="@veigr" />
+							</metro2:HyperlinkEx>
+							<LineBreak />
+							<Run Text="Icon design:" />
+							<metro2:HyperlinkEx Uri="https://twitter.com/Nrtwd/">
+								<Run Text="@Nrtwd" />
+							</metro2:HyperlinkEx>
+						</TextBlock>
+                        <TextBlock FontFamily="Segoe UI">
+								<Run Text="Localization" />
+								<Run Text="(Korean)"
+									 FontSize="10" />
+								<Run Text=":" />
+                                    <metro2:HyperlinkEx Uri="http://kaster.egloos.com">
+									<Run Text="Kaster" /> <LineBreak/>
+                                        
+								</metro2:HyperlinkEx>
+								<metro2:HyperlinkEx Uri="http://kcvkr.tistory.com">
+									<Run Text="FreyYa" />
+                                    <TextBlock Text=","/>
+								</metro2:HyperlinkEx>
+                                    <metro2:HyperlinkEx Uri="https://github.com/DaeWha">
+									<Run Text="DaeWha" />
+								</metro2:HyperlinkEx>
+                                </TextBlock>
+                        <TextBlock FontFamily="Segoe UI">
+								<Run Text="Localization" />
+								<Run Text="(English)"
+									 FontSize="10" />
+								<Run Text=":" />
+								<metro2:HyperlinkEx Uri="https://twitter.com/southrop113">
+									<Run Text="@southrop113" />
+								</metro2:HyperlinkEx>
+                        </TextBlock>
+                        <Rectangle Height="1"
+								   Margin="0,12"
+								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+						<TextBlock FontFamily="Segoe UI"
+								   TextWrapping="Wrap">
+							<Run Text="{Binding Source={x:Static models:ProductInfo.Copyright}, Mode=OneWay}" />
+						</TextBlock>
+
+						<TextBlock FontFamily="Segoe UI"
+								   Margin="0,10,0,0"
+								   TextWrapping="Wrap">
+							<Run Text="{Binding Source={x:Static models:ProductInfo.Product}, Mode=OneWay}" />
+							<Run Text="is" />
+							<Run Text="OSS"
+								 ToolTip="Open Source Software" />
+							<Run Text="released" />
+							<LineBreak />
+							<Run Text="under" />
+							<metro2:HyperlinkEx Uri="https://github.com/Grabacr07/KanColleViewer/blob/master/LICENSE.txt">
+								<Run Text="The MIT License." />
+							</metro2:HyperlinkEx>
+						</TextBlock>
+					</StackPanel>
+				</ScrollViewer>
+			</Border>
+
+			<Rectangle x:Name="Dummy"
+					   Grid.Column="1"
+					   Margin="16,0,31,0" />
+
+			<Border Grid.Column="1">
+				<FlowDocumentScrollViewer Padding="0,-18,0,0"
+										  HorizontalScrollBarVisibility="Hidden">
+					<FlowDocument FontSize="12"
+								  Foreground="{DynamicResource ForegroundBrushKey}"
+								  FontFamily="Meiryo UI"
+								  TextAlignment="Left"
+								  MaxPageWidth="390">
+						<Paragraph>
+							<Run Foreground="White"
+								 FontSize="20"
+								 Text="환영합니다" />
+                        </Paragraph>
+                        <Paragraph Language="ko-KR">
+                            <Run Text="「제독업무도 바빠！」는 칸코레를 편하게 즐기기 위한 툴입니다." />
+                            <LineBreak />
+                            <Run Text="칸코레는 내장되어있는 Internet Explorer (IE)로 작동합니다. 칸코레서버에 어떠한 부담도 주지않도록 설계,개발하고, 통신내용의 변경 및 서버정보의 전송, Flash추출, 매크로,치트등의 기능은 일절 포함되어 있지 않습니다." />
+                        </Paragraph>
+                        <Paragraph Language="ko-KR">
+                            <Run Text="게임이 제대로 표시되지 않거나 스크립트 오류가 반복되면 IE의 캐시를 삭제해보세요. 개선되지않으면 IE의 설정이나 'IE에서 Flash사용이 가능한가' 등의 것들을 확인하주시기 바랍니다." />
+                        </Paragraph>
+						<Paragraph>
+							<InlineUIContainer>
+								<metro2:CallMethodButton Content="{Binding DeleteInternetCacheButtonContent}"
+														 MethodName="DeleteInternetCache"
+														 IsEnabled="{Binding CanDeleteInternetCache}"
+														 HorizontalAlignment="Left"
+														 Padding="30,5"
+														 SnapsToDevicePixels="True" />
+							</InlineUIContainer>
+							<LineBreak />
+							<InlineUIContainer>
+								<Rectangle Width="{Binding ElementName=Dummy, Path=ActualWidth}"
+										   Height="1"
+										   Style="{DynamicResource SeparatorRectangleStyleKey}"
+										   Margin="0,16,0,0"
+										   SnapsToDevicePixels="True" />
+							</InlineUIContainer>
+						</Paragraph>
+						<Paragraph Language="ja-jp">
+                            <Run Text="이 툴은 비정기적으로 업데이트 되고있습니다. 자동업데이트를 제공하지만 업데이트 도중 문제가 발생하면 직접 업데이트를 수행해주시기 바랍니다." />
+                            <LineBreak />
+							<LineBreak />
+							<Run Text="Project home:" />
+							<metro2:HyperlinkEx Uri="http://grabacr.net/kancolleviewer">
+								<Run Text="http://grabacr.net/kancolleviewer" />
+							</metro2:HyperlinkEx>
+							<LineBreak />
+							<Run Text="Source code:" />
+							<metro2:HyperlinkEx Uri="https://github.com/Grabacr07/KanColleViewer">
+								<Run Text="https://github.com/Grabacr07/KanColleViewer" />
+                            </metro2:HyperlinkEx>
+                            <LineBreak />
+                            <LineBreak />
+                            <Run Text="Korean Source code:" />
+                            <metro2:HyperlinkEx Uri="https://github.com/FreyYa/KanColleViewer">
+                                <Run Text="/FreyYa/KanColleViewer" />
+                            </metro2:HyperlinkEx>
+                            <LineBreak />
+                            <Run Text="Korean Version Release Page:" />
+                            <metro2:HyperlinkEx Uri="http://KCVkr.tistory.com/category/Releases">
+                                <Run Text="http://KCVkr.tistory.com" />
+                            </metro2:HyperlinkEx>
+                            <LineBreak />
+                        </Paragraph>
+					</FlowDocument>
+				</FlowDocumentScrollViewer>
+			</Border>
+		</Grid>
+
+
+		<Border Grid.Column="1"
+				BorderThickness="1,1,0,0"
+				BorderBrush="{DynamicResource BackgroundBrushKey}"
+				Margin="0,8,0,0"
+				DataContext="{Binding Source={x:Static svm:SettingsViewModel.Instance}}"
+				Visibility="{Binding ElementName=SettingsTab, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
+			<ScrollViewer VerticalScrollBarVisibility="Auto"
+						  PanningMode="Both">
+				<TabControl Style="{StaticResource VerticalTabControlStyleKey}">
+					<TabControl.Resources>
+						<Style x:Key="TabHeaderTextStyleKey"
+							   TargetType="{x:Type TextBlock}"
+							   BasedOn="{StaticResource {x:Type TextBlock}}">
+							<Setter Property="Foreground"
+									Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}" />
+							<Setter Property="Margin"
+									Value="12,0" />
+							<Setter Property="FontSize"
+									Value="14" />
+						</Style>
+					</TabControl.Resources>
+					<TabItem>
+						<TabItem.Header>
+							<TextBlock Text="{Binding Resources.Settings_Window, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+									   Style="{DynamicResource TabHeaderTextStyleKey}" />
+						</TabItem.Header>
+						<settings:Window Margin="10,9"
+										 DataContext="{Binding WindowSettings}" />
+					</TabItem>
+
+					<TabItem>
+						<TabItem.Header>
+							<TextBlock Text="{Binding Resources.Settings_Operation, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+									   Style="{DynamicResource TabHeaderTextStyleKey}" />
+						</TabItem.Header>
+						<settings:Operation Margin="10,9" />
+					</TabItem>
+
+					<TabItem>
+						<TabItem.Header>
+							<TextBlock Text="알림설정"
+									   Style="{DynamicResource TabHeaderTextStyleKey}" />
+						</TabItem.Header>
+						<settings:Notification Margin="10,9" />
+					</TabItem>
+
+					<TabItem>
+						<TabItem.Header>
+							<TextBlock Text="{Binding Resources.Settings_Network, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+									   Style="{DynamicResource TabHeaderTextStyleKey}" />
+						</TabItem.Header>
+						<settings:Network Margin="10,9"
+										  DataContext="{Binding NetworkSettings}"/>
+					</TabItem>
+
+					<TabItem>
+						<TabItem.Header>
+							<TextBlock Text="플러그인"
+									   Style="{StaticResource TabHeaderTextStyleKey}" />
+						</TabItem.Header>
+						<settings:Plugins Margin="10,9" />
+					</TabItem>
+
+					<TabItem>
+						<TabItem.Header>
+							<TextBlock Text="{Binding Resources.Settings_Other, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+									   Style="{DynamicResource TabHeaderTextStyleKey}" />
+						</TabItem.Header>
+						<settings:Others Margin="10,9" />
+					</TabItem>
+				</TabControl>
+			</ScrollViewer>
+		</Border>
+	</Grid>
+</UserControl>

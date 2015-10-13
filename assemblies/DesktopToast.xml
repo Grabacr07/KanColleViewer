@@ -1,0 +1,693 @@
+﻿<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DesktopToast</name>
+    </assembly>
+    <members>
+        <member name="T:DesktopToast.Helper.OsVersion">
+            <summary>
+            OS version information
+            </summary>
+        </member>
+        <member name="P:DesktopToast.Helper.OsVersion.IsEightOrNewer">
+            <summary>
+            Whether OS is Windows 8 or newer
+            </summary>
+            <remarks>Windows 8 = version 6.2</remarks>
+        </member>
+        <member name="T:DesktopToast.Helper.ShellLink">
+            <summary>
+            A wrapper class for IShellLink Interface added with AppUserModelID
+            </summary>
+            <remarks>
+            Modified from http://smdn.jp/programming/tips/createlnk/
+            Originally from http://www.vbaccelerator.com/home/NET/Code/Libraries/Shell_Projects/Creating_and_Modifying_Shortcuts/article.asp
+            </remarks>
+        </member>
+        <member name="F:DesktopToast.Helper.ShellLink.MAX_PATH">
+            <summary>
+            Maximum path length limitation
+            </summary>
+        </member>
+        <member name="F:DesktopToast.Helper.ShellLink.ArgumentsKey">
+            <summary>
+            Property key of Arguments
+            </summary>
+            <remarks>
+            Name = System.Link.Arguments
+            ShellPKey = PKEY_Link_Arguments
+            FormatID = 436F2667-14E2-4FEB-B30A-146C53B5B674
+            PropID = 100
+            Type = String (VT_LPWSTR)
+            </remarks>
+        </member>
+        <member name="F:DesktopToast.Helper.ShellLink.AppUserModelIDKey">
+            <summary>
+            Property key of AppUserModelID
+            </summary>
+            <remarks>
+            Name = System.AppUserModel.ID
+            ShellPKey = PKEY_AppUserModel_ID
+            FormatID = 9F4C2855-9F79-4B39-A8D0-E1D42DE1D5F3
+            PropID = 5
+            Type = String (VT_LPWSTR)
+            </remarks>
+        </member>
+        <member name="F:DesktopToast.Helper.ShellLink.shellLink">
+            <summary>
+            Shell link object
+            </summary>
+        </member>
+        <member name="M:DesktopToast.Helper.ShellLink.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:DesktopToast.Helper.ShellLink.#ctor(System.String)">
+            <summary>
+            Constructor with creating shell link object and loading shortcut file
+            </summary>
+            <param name="shortcutPath">Shortcut file path</param>
+        </member>
+        <member name="M:DesktopToast.Helper.ShellLink.Load(System.String)">
+            <summary>
+            Load shortcut file.
+            </summary>
+            <param name="shortcutPath">Shortcut file path</param>
+        </member>
+        <member name="M:DesktopToast.Helper.ShellLink.Save">
+            <summary>
+            Save shortcut file.
+            </summary>
+        </member>
+        <member name="M:DesktopToast.Helper.ShellLink.Save(System.String)">
+            <summary>
+            Save shortcut file.
+            </summary>
+            <param name="shortcutPath">Shortcut file path</param>
+        </member>
+        <member name="M:DesktopToast.Helper.ShellLink.VerifySucceeded(System.UInt32)">
+            <summary>
+            Verify if operation succeeded.
+            </summary>
+            <param name="hresult">HRESULT</param>
+            <remarks>This method is from Sending toast notifications from desktop apps sample.</remarks>
+        </member>
+        <member name="P:DesktopToast.Helper.ShellLink.ShortcutPath">
+            <summary>
+            Shortcut file path
+            </summary>
+        </member>
+        <member name="P:DesktopToast.Helper.ShellLink.TargetPath">
+            <summary>
+            Target file path
+            </summary>
+            <remarks>This length is limited to maximum path length limitation (260) - last null (1).</remarks>
+        </member>
+        <member name="P:DesktopToast.Helper.ShellLink.Arguments">
+            <summary>
+            Arguments
+            </summary>
+            <remarks>
+            <para>According to MSDN, this length should not have a limitation as long as it in Unicode.
+            In addition, it is recommended to retrieve argument strings though IPropertyStore rather than
+            GetArguments method.</para>
+            <para>The setter accepts Null while the getter never returns Null. This behavior is the same
+            as other properties by IShellLink.</para>
+            </remarks>
+        </member>
+        <member name="P:DesktopToast.Helper.ShellLink.Description">
+            <summary>
+            Description
+            </summary>
+            <remarks>According to MSDN, this length is limited to INFOTIPSIZE. However, in practice,
+            there seems to be the same limitation as the maximum path length limitation. Moreover,
+            Description longer than the limitation will screw up arguments.</remarks>
+        </member>
+        <member name="P:DesktopToast.Helper.ShellLink.WorkingDirectory">
+            <summary>
+            Working directory
+            </summary>
+            <remarks>This length is limited to maximum path length limitation (260) - last null (1).</remarks>
+        </member>
+        <member name="P:DesktopToast.Helper.ShellLink.WindowStyle">
+            <summary>
+            Window style
+            </summary>
+        </member>
+        <member name="P:DesktopToast.Helper.ShellLink.IconPath">
+            <summary>
+            Shortcut icon file path (Path element of icon location)
+            </summary>
+            <remarks>This length is limited to the maximum path length limitation (260) - last null (1).</remarks>
+        </member>
+        <member name="P:DesktopToast.Helper.ShellLink.IconIndex">
+            <summary>
+            Shortcut icon index (Index element of icon location)
+            </summary>
+        </member>
+        <member name="P:DesktopToast.Helper.ShellLink.AppUserModelID">
+            <summary>
+            AppUserModelID (to be used for Windows 7 or newer).
+            </summary>
+            <remarks>
+            <para>According to MSDN, an AppUserModelID must be in the following form:
+            CompanyName.ProductName.SubProduct.VersionInformation
+            It can have no more than 128 characters and cannot contain spaces. Each section should be
+            camel-cased. CompanyName and ProductName should always be used, while SubProduct and
+            VersionInformation are optional.</para>
+            <para>The setter accepts Null while the getter never returns Null. This behavior is the same
+            as other properties by IShellLink.</para>
+            </remarks>
+        </member>
+        <member name="T:DesktopToast.Helper.ShellLink.IShellLinkW">
+            <summary>
+            IShellLink Interface
+            </summary>
+        </member>
+        <member name="T:DesktopToast.Helper.ShellLink.CShellLink">
+            <summary>
+            ShellLink CoClass (Shell link object)
+            </summary>
+        </member>
+        <member name="T:DesktopToast.Helper.ShellLink.WIN32_FIND_DATAW">
+            <summary>
+            WIN32_FIND_DATAW Structure
+            </summary>
+        </member>
+        <member name="T:DesktopToast.Helper.ShellLink.IPropertyStore">
+            <summary>
+            IPropertyStore Interface
+            </summary>
+        </member>
+        <member name="T:DesktopToast.Helper.ShellLink.PropertyKey">
+            <summary>
+            PropertyKey Structure
+            </summary>
+            <remarks>
+            Narrowed down from PropertyKey.cs of Windows API Code Pack 1.1
+            </remarks>
+        </member>
+        <member name="M:DesktopToast.Helper.ShellLink.PropertyKey.#ctor(System.Guid,System.Int32)">
+            <summary>
+            Constructor with Format ID as Guid value
+            </summary>
+            <param name="formatId">Format ID</param>
+            <param name="propertyId">Property ID</param>
+        </member>
+        <member name="M:DesktopToast.Helper.ShellLink.PropertyKey.#ctor(System.String,System.Int32)">
+            <summary>
+            Constructor with Format ID as string value
+            </summary>
+            <param name="formatId">Format ID</param>
+            <param name="propertyId">Property ID</param>
+        </member>
+        <member name="T:DesktopToast.Helper.ShellLink.PropVariant">
+            <summary>
+            PropVariant Class (only for string value)
+            </summary>
+            <remarks>
+            Narrowed down from PropVariant.cs of Windows API Code Pack 1.1
+            Originally from http://blogs.msdn.com/b/adamroot/archive/2008/04/11/interop-with-propvariants-in-net.aspx
+            </remarks>
+        </member>
+        <member name="M:DesktopToast.Helper.ShellLink.PropVariant.#ctor(System.String)">
+            <summary>
+            Constructor with string value
+            </summary>
+            <param name="value">String value</param>
+        </member>
+        <member name="P:DesktopToast.Helper.ShellLink.PropVariant.VarType">
+            <summary>
+            Value type (System.Runtime.InteropServices.VarEnum)
+            </summary>
+        </member>
+        <member name="P:DesktopToast.Helper.ShellLink.PropVariant.IsNullOrEmpty">
+            <summary>
+            Whether value is empty or null
+            </summary>
+        </member>
+        <member name="P:DesktopToast.Helper.ShellLink.PropVariant.Value">
+            <summary>
+            Value (only for string value)
+            </summary>
+        </member>
+        <member name="T:DesktopToast.Helper.ShellLink.STGM">
+            <summary>
+            STGM Constants
+            </summary>
+        </member>
+        <member name="T:DesktopToast.Helper.ShellLink.SLGP">
+            <summary>
+            SLGP Flags
+            </summary>
+        </member>
+        <member name="T:DesktopToast.Helper.ShellLink.SW">
+            <summary>
+            SW (ShowWindow command)
+            </summary>
+        </member>
+        <member name="T:DesktopToast.Helper.Shortcut">
+            <summary>
+            Shortcut management
+            </summary>
+        </member>
+        <member name="M:DesktopToast.Helper.Shortcut.CheckShortcut(System.String,System.String,System.String,System.String,System.String,DesktopToast.ShortcutWindowState,System.String,System.String)">
+            <summary>
+            Check if a specified shortcut file exists.
+            </summary>
+            <param name="shortcutPath">Shortcut file path</param>
+            <param name="targetPath">Target file path of shortcut</param>
+            <param name="arguments">Arguments of shortcut</param>
+            <param name="comment">Comment of shortcut</param>
+            <param name="workingFolder">Working folder of shortcut</param>
+            <param name="windowState">Window state of shortcut</param>
+            <param name="iconPath">Icon file path of shortcut</param>
+            <param name="appId">AppUserModelID of shortcut</param>
+            <returns>True if exists</returns>
+        </member>
+        <member name="M:DesktopToast.Helper.Shortcut.InstallShortcut(System.String,System.String,System.String,System.String,System.String,DesktopToast.ShortcutWindowState,System.String,System.String)">
+            <summary>
+            Install a specified shortcut file.
+            </summary>
+            <param name="shortcutPath">Shortcut file path</param>
+            <param name="targetPath">Target file path of shortcut</param>
+            <param name="arguments">Arguments of shortcut</param>
+            <param name="comment">Comment of shortcut</param>
+            <param name="workingFolder">Working folder of shortcut</param>
+            <param name="windowState">Window state of shortcut</param>
+            <param name="iconPath">Icon file path of shortcut</param>
+            <param name="appId">AppUserModelID of shortcut</param>
+        </member>
+        <member name="M:DesktopToast.Helper.Shortcut.DeleteShortcut(System.String,System.String,System.String,System.String,System.String,DesktopToast.ShortcutWindowState,System.String,System.String)">
+            <summary>
+            Delete a specified shortcut file.
+            </summary>
+            <param name="shortcutPath">Shortcut file path</param>
+            <param name="targetPath">Target file path of shortcut</param>
+            <param name="arguments">Arguments of shortcut</param>
+            <param name="comment">Comment of shortcut</param>
+            <param name="workingFolder">Working folder of shortcut</param>
+            <param name="windowState">Window state of shortcut</param>
+            <param name="iconPath">Icon file path of shortcut</param>
+            <param name="appId">AppUserModelID of shortcut</param>
+            <remarks>If contents of shortcut do not match, the shortcut file will not be deleted.</remarks>
+        </member>
+        <member name="T:DesktopToast.Helper.StringExtension">
+            <summary>
+            Extension method for <see cref="T:System.String"/>
+            </summary>
+        </member>
+        <member name="M:DesktopToast.Helper.StringExtension.ToCamelWithSeparator(System.String,System.Char)">
+            <summary>
+            Convert camel-cased string to camel-cased string with separator.
+            </summary>
+            <param name="source">Source string</param>
+            <param name="separator">Separator char</param>
+            <returns>String with separator</returns>
+        </member>
+        <member name="M:DesktopToast.Helper.StringExtension.IsNullOrEmptyOrEquals(System.String,System.String,System.StringComparison)">
+            <summary>
+            Determine if specified strings are null or empty or the strings are equal.
+            </summary>
+            <param name="a">String to compare</param>
+            <param name="b">String to compare</param>
+            <param name="comparisonType">StringComparison</param>
+            <returns>True if the strings are null or empty or the strings are equal</returns>
+        </member>
+        <member name="T:DesktopToast.ShortcutWindowState">
+            <summary>
+            Window states of shortcut
+            </summary>
+            <remarks>
+            These states are equivalent to:
+            System.Windows.WindowState enumeration in WPF
+            System.Windows.Forms.FormWindowState enumeration in WinForms
+            WindowStyle values in WshShortcut
+            ShowWindow commands in IShellLink
+            </remarks>
+        </member>
+        <member name="F:DesktopToast.ShortcutWindowState.Normal">
+            <summary>
+            Activates and displays a window. If the window is minimized or maximized, the system restores
+            it to its original size and position. 
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ShortcutWindowState.Maximized">
+            <summary>
+            Activates the window and displays it as a maximized window.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ShortcutWindowState.Minimized">
+            <summary>
+            Displays the window in its minimized state, leaving the currently active window as active.
+            </summary>
+        </member>
+        <member name="T:DesktopToast.ToastAudio">
+            <summary>
+            Audio types of toast notifications
+            </summary>
+            <remarks>These types correspond to options in the toast audio options catalog except Silent.</remarks>
+        </member>
+        <member name="F:DesktopToast.ToastAudio.Default">
+            <summary>
+            Default
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastAudio.IM">
+            <summary>
+            Scenario: A new instant messenger notification has arrived.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastAudio.Mail">
+            <summary>
+            Scenario: A new e-mail has arrived.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastAudio.Reminder">
+            <summary>
+            Scenario: An calendar item is due.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastAudio.SMS">
+            <summary>
+            Scenario: A new text message has arrived.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastAudio.LoopingAlarm">
+            <summary>
+            Scenario: A countdown stopwatch has reached 0.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastAudio.LoopingAlarm2">
+            <summary>
+            Scenario: A countdown stopwatch has reached 0.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastAudio.LoopingAlarm3">
+            <summary>
+            Scenario: A countdown stopwatch has reached 0.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastAudio.LoopingAlarm4">
+            <summary>
+            Scenario: A countdown stopwatch has reached 0.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastAudio.LoopingAlarm5">
+            <summary>
+            Scenario: A countdown stopwatch has reached 0.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastAudio.LoopingAlarm6">
+            <summary>
+            Scenario: A countdown stopwatch has reached 0.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastAudio.LoopingAlarm7">
+            <summary>
+            Scenario: A countdown stopwatch has reached 0.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastAudio.LoopingAlarm8">
+            <summary>
+            Scenario: A countdown stopwatch has reached 0.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastAudio.LoopingAlarm9">
+            <summary>
+            Scenario: A countdown stopwatch has reached 0.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastAudio.LoopingAlarm10">
+            <summary>
+            Scenario: A countdown stopwatch has reached 0.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastAudio.LoopingCall">
+            <summary>
+            Scenario: An incoming phone call.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastAudio.LoopingCall2">
+            <summary>
+            Scenario: An incoming phone call.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastAudio.LoopingCall3">
+            <summary>
+            Scenario: An incoming phone call.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastAudio.LoopingCall4">
+            <summary>
+            Scenario: An incoming phone call.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastAudio.LoopingCall5">
+            <summary>
+            Scenario: An incoming phone call.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastAudio.LoopingCall6">
+            <summary>
+            Scenario: An incoming phone call.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastAudio.LoopingCall7">
+            <summary>
+            Scenario: An incoming phone call.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastAudio.LoopingCall8">
+            <summary>
+            Scenario: An incoming phone call.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastAudio.LoopingCall9">
+            <summary>
+            Scenario: An incoming phone call.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastAudio.LoopingCall10">
+            <summary>
+            Scenario: An incoming phone call.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastAudio.Silent">
+            <summary>
+            No sound
+            </summary>
+        </member>
+        <member name="T:DesktopToast.ToastManager">
+            <summary>
+            Show toast notifications.
+            </summary>
+        </member>
+        <member name="M:DesktopToast.ToastManager.ShowAsync(DesktopToast.ToastRequest)">
+            <summary>
+            Show a toast.
+            </summary>
+            <param name="request">Toast request</param>
+            <returns>Result of showing a toast</returns>
+        </member>
+        <member name="M:DesktopToast.ToastManager.ShowAsync(System.String)">
+            <summary>
+            Show a toast using JSON format.
+            </summary>
+            <param name="requestJson">Toast request in JSON format</param>
+            <returns>Result of showing a toast</returns>
+        </member>
+        <member name="M:DesktopToast.ToastManager.ShowAsync(Windows.Data.Xml.Dom.XmlDocument,System.String)">
+            <summary>
+            Show a toast without toast request.
+            </summary>
+            <param name="document">Toast document</param>
+            <param name="appId">AppUserModelID</param>
+            <returns>Result of showing a toast</returns>
+        </member>
+        <member name="M:DesktopToast.ToastManager.PrepareToastDocument(DesktopToast.ToastRequest)">
+            <summary>
+            Prepare a toast document.
+            </summary>
+            <param name="request">Toast request</param>
+            <returns>Toast document</returns>
+        </member>
+        <member name="F:DesktopToast.ToastManager._waitingTime">
+            <summary>
+            Waiting time length before showing a toast after the shortcut file is installed
+            </summary>
+            <remarks>It seems that roughly 3 seconds are required.</remarks>
+        </member>
+        <member name="M:DesktopToast.ToastManager.CheckInstallShortcut(DesktopToast.ToastRequest)">
+            <summary>
+            Check and install a shortcut file in Start menu.
+            </summary>
+            <param name="request">Toast request</param>
+        </member>
+        <member name="M:DesktopToast.ToastManager.ShowBaseAsync(Windows.Data.Xml.Dom.XmlDocument,System.String)">
+            <summary>
+            Show a toast.
+            </summary>
+            <param name="document">Toast document</param>
+            <param name="appId">AppUserModelID</param>
+            <returns>Result of showing a toast</returns>
+        </member>
+        <member name="T:DesktopToast.ToastRequest">
+            <summary>
+            Toast request container
+            </summary>
+        </member>
+        <member name="M:DesktopToast.ToastRequest.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:DesktopToast.ToastRequest.Import(System.String)">
+            <summary>
+            Import from a request in JSON format.
+            </summary>
+            <param name="requestJson">Request in JSON format</param>
+        </member>
+        <member name="M:DesktopToast.ToastRequest.Export">
+            <summary>
+            Export a request in JSON format.
+            </summary>
+            <returns>Request in JSON format</returns>
+        </member>
+        <member name="P:DesktopToast.ToastRequest.ToastHeadline">
+            <summary>
+            Toast headline (optional)
+            </summary>
+        </member>
+        <member name="P:DesktopToast.ToastRequest.ToastHeadlineWrapsTwoLines">
+            <summary>
+            Whether toast headline wraps across two lines (optional)
+            </summary>
+        </member>
+        <member name="P:DesktopToast.ToastRequest.ToastBody">
+            <summary>
+            Toast body (required for toast)
+            </summary>
+        </member>
+        <member name="P:DesktopToast.ToastRequest.ToastBodyExtra">
+            <summary>
+            Toast body extra section (optional)
+            </summary>
+            <remarks>This section will be reflected only when toast headline is specified and it does not
+            wraps across two lines.</remarks>
+        </member>
+        <member name="P:DesktopToast.ToastRequest.ToastImageFilePath">
+            <summary>
+            Toast image file path (optional)
+            </summary>
+            <remarks>
+            The image file path must be in the following form:
+            "file:///" + full file path
+            </remarks>
+        </member>
+        <member name="P:DesktopToast.ToastRequest.ToastAudio">
+            <summary>
+            Toast audio type (optional)
+            </summary>
+        </member>
+        <member name="P:DesktopToast.ToastRequest.ShortcutFileName">
+            <summary>
+            Shortcut file name to be installed in Start menu (required for shortcut)
+            </summary>
+        </member>
+        <member name="P:DesktopToast.ToastRequest.ShortcutTargetFilePath">
+            <summary>
+            Target file path of shortcut (required for shortcut)
+            </summary>
+        </member>
+        <member name="P:DesktopToast.ToastRequest.ShortcutArguments">
+            <summary>
+            Arguments of shortcut (optional)
+            </summary>
+        </member>
+        <member name="P:DesktopToast.ToastRequest.ShortcutComment">
+            <summary>
+            Comment of shortcut (optional)
+            </summary>
+        </member>
+        <member name="P:DesktopToast.ToastRequest.ShortcutWorkingFolder">
+            <summary>
+            Working folder of shortcut (optional)
+            </summary>
+        </member>
+        <member name="P:DesktopToast.ToastRequest.ShortcutWindowState">
+            <summary>
+            Window state of shortcut (optional)
+            </summary>
+        </member>
+        <member name="P:DesktopToast.ToastRequest.ShortcutIconFilePath">
+            <summary>
+            Icon file path of shortcut (optional)
+            </summary>
+            <remarks>If not specified, target file path will be used.</remarks>
+        </member>
+        <member name="P:DesktopToast.ToastRequest.AppId">
+            <summary>
+            AppUserModelID of application (required)
+            </summary>
+            <remarks>
+            An AppUserModelID must be in the following form:
+            CompanyName.ProductName.SubProduct.VersionInformation
+            It can have no more than 128 characters and cannot contain spaces. Each section should be
+            camel-cased. CompanyName and ProductName should always be used, while SubProduct and
+            VersionInformation are optional.
+            </remarks>
+        </member>
+        <member name="P:DesktopToast.ToastRequest.WaitingTime">
+            <summary>
+            Waiting time length before showing a toast after the shortcut file is installed (optional)
+            </summary>
+        </member>
+        <member name="T:DesktopToast.ToastResult">
+            <summary>
+            Result types of toast notifications
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastResult.Unavailable">
+            <summary>
+            Toast notification is unavailable on current OS.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastResult.Invalid">
+            <summary>
+            Toast request is invalid.
+            </summary>
+        </member>
+        <member name="F:DesktopToast.ToastResult.Activated">
+            <summary>
+            The user activated the toast.
+            </summary>
+            <remarks>This corresponds to ToastNotification.Activated event.</remarks>
+        </member>
+        <member name="F:DesktopToast.ToastResult.ApplicationHidden">
+            <summary>
+            The application hid the toast using ToastNotifier.hide method.
+            </summary>
+            <remarks>This corresponds to ToastNotification.Dismissed event with ToastDismissalReason.ApplicationHidden.</remarks>
+        </member>
+        <member name="F:DesktopToast.ToastResult.UserCanceled">
+            <summary>
+            The user dismissed the toast.
+            </summary>
+            <remarks>This corresponds to ToastNotification.Dismissed event with ToastDismissalReason.UserCanceled.</remarks>
+        </member>
+        <member name="F:DesktopToast.ToastResult.TimedOut">
+            <summary>
+            The toast has timed out.
+            </summary>
+            <remarks>This corresponds to ToastNotification.Dismissed event with ToastDismissalReason.TimedOut.</remarks>
+        </member>
+        <member name="F:DesktopToast.ToastResult.Failed">
+            <summary>
+            The toast encountered an error.
+            </summary>
+            <remarks>This corresponds to ToastNotification.Failed event.</remarks>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,993 @@
+﻿<metro:MetroWindow x:Class="Grabacr07.KanColleViewer.Views.Catalogs.ShipCatalogWindow"
+				   x:Name="GlowMetroWindow"
+				   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+				   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				   xmlns:s="clr-namespace:System;assembly=mscorlib"
+				   xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+				   xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+				   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+				   xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+				   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+				   xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+				   xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+				   xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
+				   xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
+				   xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
+				   xmlns:metro2="clr-namespace:MetroTrilithon.Controls;assembly=MetroTrilithon.Desktop"
+				   xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
+				   xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
+				   xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
+				   xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
+				   xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
+				   xmlns:catalogs="clr-namespace:Grabacr07.KanColleViewer.Views.Catalogs"
+				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Catalogs"
+				   xmlns:contentsVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
+				   xmlns:kcvcn="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
+				   xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+				   mc:Ignorable="d"
+				   d:DataContext="{d:DesignInstance viewModels:ShipCatalogWindowViewModel}"
+				   Title="{Binding Title}"
+				   Width="950"
+				   Height="800"
+				   FontSize="12"
+				   Topmost="{Binding Settings.TopMost.Value}"
+				   Background="{DynamicResource ThemeBrushKey}"
+				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+				   FontFamily="{DynamicResource DefaultFontFamilyKey}"
+				   IsRestoringWindowPlacement="True"
+				   SnapsToDevicePixels="True"
+				   TextOptions.TextFormattingMode="Display">
+
+	<i:Interaction.Triggers>
+		<i:EventTrigger EventName="ContentRendered">
+			<livet:LivetCallMethodAction MethodTarget="{Binding}"
+										 MethodName="Initialize" />
+		</i:EventTrigger>
+
+		<i:EventTrigger EventName="Closed">
+			<livet:DataContextDisposeAction />
+		</i:EventTrigger>
+
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+										 MessageKey="Window.Location">
+			<behaviors:SetWindowLocationAction />
+		</livet:InteractionMessageTrigger>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger, Mode=OneWay}"
+										 MessageKey="Window.Activate">
+			<livet:WindowInteractionMessageAction InvokeActionOnlyWhenWindowIsActive="False" />
+		</livet:InteractionMessageTrigger>
+	</i:Interaction.Triggers>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<!-- #region Caption area -->
+		<DockPanel metro:MetroWindow.IsCaptionBar="True">
+			<Border DockPanel.Dock="Bottom"
+					Height="4" />
+			<kcvc:AppIcon Width="36"
+						  Height="36"
+						  Background="Transparent"
+						  AnchorVisibility="Collapsed"
+						  BandVisibility="Collapsed" />
+
+			<StackPanel DockPanel.Dock="Right"
+						Orientation="Horizontal"
+						HorizontalAlignment="Right"
+						VerticalAlignment="Top"
+						WindowChrome.IsHitTestVisibleInChrome="True">
+				<metro:CaptionButton IsChecked="{Binding Settings.TopMost.Value, Mode=TwoWay}"
+									 ToolTip="{Binding Resources.Settings_Window_TopMost, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+									 Style="{DynamicResource PinButtonStyleKey}" />
+				<metro:SystemButtons />
+			</StackPanel>
+
+			<TextBlock Text="{Binding Title}"
+					   Style="{DynamicResource CaptionTextStyleKey}"
+					   Margin="2,0,8,0" />
+		</DockPanel>
+		<!-- #endregion -->
+
+		<Grid Grid.Row="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+
+			<Expander Grid.Row="0"
+					  Margin="8"
+					  IsExpanded="{Binding IsOpenFilterSettings, Mode=TwoWay}">
+				<Expander.Header>
+                    <TextBlock Text="필터 설정"
+							   Style="{DynamicResource HeaderTextStyleKey}"
+							   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+				</Expander.Header>
+				<StackPanel Grid.IsSharedSizeScope="True">
+					<Border BorderThickness="1"
+							BorderBrush="{DynamicResource BorderBrushKey}"
+							Padding="5"
+							Margin="0,8,0,0">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto"
+												  SharedSizeGroup="FilterName" />
+								<ColumnDefinition Width="10" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="*" />
+								<RowDefinition Height="Auto" />
+							</Grid.RowDefinitions>
+
+							<TextBlock Margin="0,2">
+								<Run Text="함종" />
+								<Run Text=":" />
+                            </TextBlock>
+
+                            <CheckBox Grid.Row="0"
+									  Grid.Column="2"
+									  Content="모두선택"
+									  IsChecked="{Binding CheckAllShipTypes, Mode=TwoWay}"
+									  Margin="0,2" />
+
+							<ItemsControl Grid.Row="1"
+										  Grid.Column="2"
+										  ItemsSource="{Binding ShipTypes}">
+								<ItemsControl.ItemsPanel>
+									<ItemsPanelTemplate>
+										<WrapPanel />
+									</ItemsPanelTemplate>
+								</ItemsControl.ItemsPanel>
+								<ItemsControl.ItemTemplate>
+									<DataTemplate>
+										<CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}"
+												  Margin="0,2,15,2">
+											<TextBlock Text="{Binding DisplayName, Mode=OneWay}" />
+										</CheckBox>
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
+
+							<WrapPanel Grid.Row="2"
+									   Grid.Column="2">
+								<WrapPanel.Resources>
+									<Style TargetType="{x:Type metro2:CallMethodButton}"
+										   BasedOn="{StaticResource {x:Type metro2:CallMethodButton}}">
+										<Setter Property="Padding"
+												Value="12,4" />
+										<Setter Property="Margin"
+												Value="0,5,5,0" />
+										<Setter Property="MethodName"
+												Value="SetShipType" />
+									</Style>
+								</WrapPanel.Resources>
+								<!-- これっきりボタン -->
+                                <metro2:CallMethodButton Content="구축함">
+                                    <metro2:CallMethodButton.MethodParameter>
+                                        <x:Array Type="s:Int32">
+                                            <s:Int32>2</s:Int32>
+                                        </x:Array>
+                                    </metro2:CallMethodButton.MethodParameter>
+                                </metro2:CallMethodButton>
+                                <metro2:CallMethodButton Content="경순・뇌순">
+                                    <metro2:CallMethodButton.MethodParameter>
+                                        <x:Array Type="s:Int32">
+                                            <s:Int32>3</s:Int32>
+                                            <s:Int32>4</s:Int32>
+                                        </x:Array>
+                                    </metro2:CallMethodButton.MethodParameter>
+                                </metro2:CallMethodButton>
+                                <metro2:CallMethodButton Content="중순・항순">
+                                    <metro2:CallMethodButton.MethodParameter>
+                                        <x:Array Type="s:Int32">
+                                            <s:Int32>5</s:Int32>
+                                            <s:Int32>6</s:Int32>
+                                        </x:Array>
+                                    </metro2:CallMethodButton.MethodParameter>
+                                </metro2:CallMethodButton>
+                                <metro2:CallMethodButton Content="전함">
+                                    <metro2:CallMethodButton.MethodParameter>
+                                        <x:Array Type="s:Int32">
+                                            <s:Int32>8</s:Int32>
+                                            <s:Int32>9</s:Int32>
+                                            <s:Int32>10</s:Int32>
+                                            <s:Int32>12</s:Int32>
+                                        </x:Array>
+                                    </metro2:CallMethodButton.MethodParameter>
+                                </metro2:CallMethodButton>
+                                <metro2:CallMethodButton Content="항공모함">
+                                    <metro2:CallMethodButton.MethodParameter>
+                                        <x:Array Type="s:Int32">
+                                            <s:Int32>7</s:Int32>
+                                            <s:Int32>11</s:Int32>
+                                            <s:Int32>18</s:Int32>
+                                        </x:Array>
+                                    </metro2:CallMethodButton.MethodParameter>
+                                </metro2:CallMethodButton>
+                                <metro2:CallMethodButton Content="잠수함">
+                                    <metro2:CallMethodButton.MethodParameter>
+                                        <x:Array Type="s:Int32">
+                                            <s:Int32>13</s:Int32>
+                                            <s:Int32>14</s:Int32>
+                                        </x:Array>
+                                    </metro2:CallMethodButton.MethodParameter>
+                                </metro2:CallMethodButton>
+                                <metro2:CallMethodButton Content="항전・항순">
+                                    <metro2:CallMethodButton.MethodParameter>
+										<x:Array Type="s:Int32">
+											<s:Int32>6</s:Int32>
+											<s:Int32>10</s:Int32>
+										</x:Array>
+									</metro2:CallMethodButton.MethodParameter>
+								</metro2:CallMethodButton>
+							</WrapPanel>
+						</Grid>
+					</Border>
+
+					<Border BorderThickness="1"
+							BorderBrush="{DynamicResource BorderBrushKey}"
+							Margin="0,8,0,0"
+							Padding="5">
+						<WrapPanel>
+							<WrapPanel.Resources>
+								<Style TargetType="{x:Type RadioButton}"
+									   BasedOn="{StaticResource {x:Type RadioButton}}">
+									<Setter Property="Margin"
+											Value="0,2,12,2" />
+								</Style>
+								<Style TargetType="{x:Type CheckBox}"
+									   BasedOn="{StaticResource {x:Type CheckBox}}">
+									<Setter Property="Margin"
+											Value="0,2,12,2" />
+								</Style>
+								<Style TargetType="{x:Type StackPanel}">
+									<Setter Property="Margin"
+											Value="0,0,40,0" />
+									<Setter Property="Grid.IsSharedSizeScope"
+											Value="True" />
+								</Style>
+							</WrapPanel.Resources>
+
+							<StackPanel>
+								<Grid DataContext="{Binding ShipLevelFilter}">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="FilterName" />
+										<ColumnDefinition Width="10" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<TextBlock Margin="0,2"
+											   HorizontalAlignment="Right">
+										<Run Text="레벨" />
+										<Run Text=":" />
+                                    </TextBlock>
+                                    <WrapPanel Grid.Column="2">
+                                        <RadioButton Content="모두"
+													 IsChecked="{Binding Both, Mode=TwoWay}" />
+                                        <RadioButton Content="Lv.2 이상"
+													 IsChecked="{Binding Level2OrMore, Mode=TwoWay}" />
+                                        <RadioButton Content="Lv.1"
+													 IsChecked="{Binding Level1, Mode=TwoWay}" />
+                                    </WrapPanel>
+                                </Grid>
+
+                                <Grid DataContext="{Binding ShipLockFilter}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"
+														  SharedSizeGroup="FilterName" />
+                                        <ColumnDefinition Width="10" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Margin="0,2"
+											   HorizontalAlignment="Right">
+										<Run Text="자물쇠" />
+										<Run Text=":" />
+                                    </TextBlock>
+                                    <WrapPanel Grid.Column="2">
+                                        <RadioButton Content="모두"
+													 IsChecked="{Binding Both, Mode=TwoWay}" />
+                                        <RadioButton Content="채워져있음"
+													 IsChecked="{Binding Locked, Mode=TwoWay}" />
+                                        <RadioButton Content="안채워져있음"
+													 IsChecked="{Binding Unlocked, Mode=TwoWay}" />
+									</WrapPanel>
+								</Grid>
+
+								<Grid DataContext="{Binding ShipExpeditionFilter}">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="FilterName" />
+										<ColumnDefinition Width="10" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<TextBlock Margin="0,2"
+											   HorizontalAlignment="Right">
+										<Run Text="원정" />
+										<Run Text=":" />
+                                    </TextBlock>
+                                    <WrapPanel Grid.Column="2">
+                                        <CheckBox Content="원정중인 칸무스를 제외"
+												  IsChecked="{Binding WithoutExpedition, Mode=TwoWay}" />
+									</WrapPanel>
+								</Grid>
+							</StackPanel>
+
+							<StackPanel>
+								<Grid DataContext="{Binding ShipSpeedFilter}">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="FilterName" />
+										<ColumnDefinition Width="10" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<TextBlock Margin="0,2"
+											   HorizontalAlignment="Right">
+										<Run Text="속력" />
+										<Run Text=":" />
+                                    </TextBlock>
+                                    <WrapPanel Grid.Column="2">
+                                        <RadioButton Content="모두"
+													 IsChecked="{Binding Both, Mode=TwoWay}" />
+                                        <RadioButton Content="고속"
+													 IsChecked="{Binding Fast, Mode=TwoWay}" />
+                                        <RadioButton Content="저속"
+													 IsChecked="{Binding Low, Mode=TwoWay}" />
+									</WrapPanel>
+								</Grid>
+
+								<Grid DataContext="{Binding ShipRemodelingFilter}">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="FilterName" />
+										<ColumnDefinition Width="10" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<TextBlock Margin="0,2"
+											   HorizontalAlignment="Right">
+										<Run Text="개조" />
+										<Run Text=":" />
+                                    </TextBlock>
+                                    <WrapPanel Grid.Column="2">
+                                        <RadioButton Content="모두"
+													 IsChecked="{Binding Both, Mode=TwoWay}" />
+                                        <RadioButton Content="개조완료"
+													 IsChecked="{Binding AlreadyRemodeling, Mode=TwoWay}" />
+                                        <RadioButton Content="개조미완"
+													 IsChecked="{Binding NotAlreadyRemodeling, Mode=TwoWay}" />
+									</WrapPanel>
+								</Grid>
+
+								<Grid DataContext="{Binding ShipModernizeFilter}">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="FilterName" />
+										<ColumnDefinition Width="10" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<TextBlock Margin="0,2"
+											   HorizontalAlignment="Right">
+										<Run Text="근대화개수" />
+										<Run Text=":" />
+                                    </TextBlock>
+                                    <WrapPanel Grid.Column="2">
+                                        <RadioButton Content="모두"
+													 IsChecked="{Binding Both, Mode=TwoWay}" />
+                                        <RadioButton Content="개수완료"
+													 IsChecked="{Binding MaxModernized, Mode=TwoWay}" />
+                                        <RadioButton Content="개수미완"
+													 IsChecked="{Binding NotMaxModernized, Mode=TwoWay}" />
+									</WrapPanel>
+								</Grid>
+							</StackPanel>
+						</WrapPanel>
+					</Border>
+
+					<Border BorderThickness="1"
+							BorderBrush="{DynamicResource BorderBrushKey}"
+							Margin="0,8,0,0"
+							Padding="5">
+						<WrapPanel DataContext="{Binding ShipSallyAreaFilter}">
+							<TextBlock Margin="0,2">
+								<Run Text="출격해역" />
+								<Run Text=":" />
+                            </TextBlock>
+
+                            <CheckBox Content="작전출격한적 없음"
+									  IsChecked="{Binding None}"
+									  Margin="10,0" />
+                            <CheckBox Content="1분류"
+									  IsChecked="{Binding FirstMap}"
+									  Margin="10,0" />
+                            <CheckBox Content="2분류"
+									  IsChecked="{Binding SecondMap}"
+									  Margin="10,0" />
+                            <CheckBox Content="3분류"
+									  IsChecked="{Binding ThirdMap}"
+									  Margin="10,0" />
+                            <CheckBox Content="4분류"
+									  IsChecked="{Binding FourthMap}"
+									  Margin="10,0" />
+                            <CheckBox Content="5분류"
+									  IsChecked="{Binding FifthMap}"
+									  Margin="10,0" />
+						</WrapPanel>
+                    </Border>
+                    <Border BorderThickness="1"
+							BorderBrush="{DynamicResource BorderBrushKey}"
+							Margin="0,8,0,0"
+							Padding="5">
+                        <Grid DataContext="{Binding ShipNameSearchFilter}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="300"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Margin="0,3">
+								<Run Text="칸무스 검색" />
+                            </TextBlock>
+
+                            <metro:PromptTextBox Grid.Column="1"
+												 Text="{Binding NameString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+												 Prompt="칸무스 이름을 입력하고 Enter를 눌러 검색"
+												 VerticalAlignment="Center"
+												 VerticalContentAlignment="Center"
+												 Margin="10,0,0,0">
+                                <metro:PromptTextBox.InputBindings>
+                                    <KeyBinding Key="Enter"
+												Command="{Binding SearchCommand}" />
+                                </metro:PromptTextBox.InputBindings>
+                            </metro:PromptTextBox>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+			</Expander>
+
+			<Expander Grid.Row="1"
+					  DockPanel.Dock="Top"
+					  Margin="8,0"
+					  IsExpanded="{Binding IsOpenSortSettings, Mode=TwoWay}">
+				<Expander.Header>
+                    <TextBlock Text="정렬 설정"
+							   Style="{DynamicResource HeaderTextStyleKey}"
+							   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+				</Expander.Header>
+
+				<Border BorderThickness="1"
+						BorderBrush="{DynamicResource BorderBrushKey}"
+						Padding="5"
+						Margin="0,8,0,0">
+					<DockPanel LastChildFill="False">
+						<metro2:CallMethodButton DockPanel.Dock="Right"
+												 MethodName="Update"
+												 Content="갱신"
+												 Margin="8,3,3,3"
+												 Padding="12,4" />
+
+						<metro2:CallMethodButton DockPanel.Dock="Right"
+												 MethodTarget="{Binding SortWorker}"
+												 MethodName="Clear"
+												 Content="클리어"
+												 Margin="8,3,0,3"
+												 Padding="12,4" />
+
+						<TextBlock DockPanel.Dock="Top"
+								   Text="칸무스를 해당 순서로 정렬합니다"
+								   Style="{DynamicResource DefaultTextStyleKey}"
+								   Margin="3,2,0,8" />
+
+						<ItemsControl DockPanel.Dock="Left"
+									  ItemsSource="{Binding Selectors}"
+									  DataContext="{Binding SortWorker}"
+									  d:DataContext="{d:DesignData /SampleData/ShipCatalogSortWorkerSampleData.xaml}">
+							<ItemsControl.Template>
+								<ControlTemplate TargetType="{x:Type ItemsControl}">
+									<Border ClipToBounds="True">
+										<WrapPanel IsItemsHost="True"
+												   Margin="3,0,-40,0" />
+									</Border>
+								</ControlTemplate>
+							</ItemsControl.Template>
+							<ItemsControl.ItemTemplate>
+								<DataTemplate>
+									<DockPanel Margin="0,4">
+										<ed:RegularPolygon DockPanel.Dock="Right"
+														   PointCount="3"
+														   Fill="{DynamicResource BorderBrushKey}"
+														   Width="40"
+														   Height="20"
+														   RenderTransformOrigin="0.5,0.5">
+											<ed:RegularPolygon.RenderTransform>
+												<RotateTransform Angle="90" />
+											</ed:RegularPolygon.RenderTransform>
+										</ed:RegularPolygon>
+										<metro:PromptComboBox DockPanel.Dock="Bottom"
+															  ItemsSource="{Binding SelectableColumns}"
+															  SelectedItem="{Binding Current, Mode=TwoWay}"
+															  Prompt="정렬 방법"
+															  Width="120"
+															  Margin="1,4,0,0">
+											<metro:PromptComboBox.ItemsPanel>
+												<ItemsPanelTemplate>
+													<StackPanel Margin="02" />
+												</ItemsPanelTemplate>
+											</metro:PromptComboBox.ItemsPanel>
+											<metro:PromptComboBox.ItemTemplate>
+												<DataTemplate>
+													<TextBlock Text="{Binding Name}"
+															   Margin="2" />
+												</DataTemplate>
+											</metro:PromptComboBox.ItemTemplate>
+										</metro:PromptComboBox>
+										<RadioButton DockPanel.Dock="Left"
+													 Content="오름차순"
+													 IsChecked="{Binding IsAscending, Mode=TwoWay}" />
+                                        <RadioButton DockPanel.Dock="Left"
+													 Content="내림차순"
+													 IsChecked="{Binding IsDescending, Mode=OneWay}"
+													 Margin="12,0,0,0" />
+									</DockPanel>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+						</ItemsControl>
+					</DockPanel>
+				</Border>
+			</Expander>
+
+			<Border Grid.Row="2"
+					BorderBrush="{DynamicResource BorderBrushKey}"
+					BorderThickness="1"
+					Margin="8">
+
+				<ListView ItemsSource="{Binding Ships}"
+						  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}"
+						  ScrollViewer.PanningMode="Both">
+					<ListView.Resources>
+						<Style TargetType="{x:Type TextBlock}">
+							<Setter Property="Margin"
+									Value="5,4" />
+						</Style>
+						<Style TargetType="{x:Type GridViewColumnHeader}">
+							<Setter Property="OverridesDefaultStyle"
+									Value="True" />
+							<Setter Property="BorderThickness"
+									Value="0,0,0,1" />
+							<Setter Property="BorderBrush"
+									Value="{DynamicResource BorderBrushKey}" />
+							<Setter Property="Background"
+									Value="{DynamicResource BackgroundBrushKey}" />
+							<Setter Property="Template">
+								<Setter.Value>
+									<ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+										<Grid>
+											<Border BorderThickness="{TemplateBinding BorderThickness}"
+													BorderBrush="{TemplateBinding BorderBrush}"
+													Background="{TemplateBinding Background}">
+												<ContentPresenter Margin="{TemplateBinding Padding}" />
+											</Border>
+											<Thumb x:Name="PART_HeaderGripper"
+												   HorizontalAlignment="Right"
+												   BorderBrush="{TemplateBinding BorderBrush}"
+												   Margin="0,0,-6,0">
+												<Thumb.Template>
+													<ControlTemplate TargetType="{x:Type Thumb}">
+														<Border Background="Transparent"
+																Width="13">
+															<Rectangle Width="1"
+																	   Stroke="{TemplateBinding BorderBrush}" />
+														</Border>
+													</ControlTemplate>
+												</Thumb.Template>
+											</Thumb>
+										</Grid>
+									</ControlTemplate>
+								</Setter.Value>
+							</Setter>
+						</Style>
+					</ListView.Resources>
+					<ListView.View>
+						<GridView>
+							<GridViewColumn Width="35">
+								<GridViewColumn.Header>
+									<TextBlock Text="" />
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding Index}"
+												   Margin="0,3"
+												   Opacity="0.5"
+												   TextTrimming="None"
+												   TextWrapping="NoWrap" />
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+
+							<GridViewColumn Width="50">
+								<GridViewColumn.Header>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.IdColumn}">
+										<TextBlock Text="ID" />
+									</metro2:SortButton>
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding Ship.Id, Mode=OneWay}"
+												   Margin="0,3" />
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+
+							<GridViewColumn Width="90">
+								<GridViewColumn.Header>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.StypeColumn}">
+										<TextBlock Text="함종" />
+									</metro2:SortButton>
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
+												   Margin="0,3" />
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+
+							<GridViewColumn Width="100">
+								<GridViewColumn.Header>
+                                    <TextBlock Text="함명" />
+                                    <!--<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.NameColumn}">
+										
+									</metro2:SortButton>-->
+                                </GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding Ship.Info.Name, Mode=OneWay}"
+												   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+												   Margin="0,3" />
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+
+							<GridViewColumn Width="110">
+								<GridViewColumn.Header>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.LevelColumn}">
+										<TextBlock Text="레벨" />
+									</metro2:SortButton>
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<TextBlock FontSize="9"
+												   Margin="0,3">
+											<Run Text="Lv." />
+											<Run Text="{Binding Ship.Level, Mode=OneWay}"
+												 FontSize="12"
+												 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+											<Run Text="" />
+											<Run Text="{Binding Ship.ExpForNextLevel, StringFormat=Next:{0}, Mode=OneWay}" />
+										</TextBlock>
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+                            
+                            <GridViewColumn>
+                                <GridViewColumn.Header>
+                                    <TextBlock Text="개조레벨" />
+                                </GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border x:Name="LvBorder"
+												Margin="-2,0">
+                                            <TextBlock FontSize="9"
+												   Margin="0,3"
+												  >
+											<Run Text="Lv."
+												 x:Name="Lvtext"/>
+											<Run Text="{Binding Ship.RemodelLevel, Mode=OneWay}"
+												 FontSize="12"
+												  x:Name="NextLv"
+												 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+                                            </TextBlock>
+                                        </Border>
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding Ship.RemodelLevel}"
+															 Value="0">
+                                                <Setter TargetName="Lvtext"
+															Property="Text"
+															Value="" />
+                                                <Setter TargetName="NextLv"
+															Property="Text"
+															Value="" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Ship.RemodelLevel}"
+															 Value="-1">
+                                                <Setter TargetName="Lvtext"
+															Property="Text"
+															Value="" />
+                                                <Setter TargetName="NextLv"
+															Property="Text"
+															Value="개조가능" />
+                                                <Setter TargetName="NextLv"
+															Property="Foreground"
+															Value="White" />
+                                                <Setter TargetName="LvBorder"
+														Property="Background"
+														Value="#FF384CD1" />
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Width="50">
+								<GridViewColumn.Header>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.CondColumn}">
+										<TextBlock Text="cond." />
+									</metro2:SortButton>
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<TextBlock FontSize="9"
+												   Margin="0,3">
+											<InlineUIContainer>
+												<kcvc:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}"
+																	Width="9"
+																	Height="9" />
+											</InlineUIContainer>
+											<Run Text="{Binding Ship.Condition, Mode=OneWay}"
+												 FontSize="12"
+												 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+										</TextBlock>
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+
+							<GridViewColumn Width="64">
+								<GridViewColumn.Header>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.FirepowerColumn}">
+										<TextBlock Text="화력" />
+									</metro2:SortButton>
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<kcvc:Modernizable Status="{Binding Ship.Firepower, Mode=OneWay}"
+														   Background="#7FB13B2A"
+														   MinWidth="64"
+														   Margin="-5,0" />
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+
+							<GridViewColumn Width="64">
+								<GridViewColumn.Header>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.TorpedoColumn}">
+										<TextBlock Text="뇌장" />
+									</metro2:SortButton>
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<kcvc:Modernizable Status="{Binding Ship.Torpedo, Mode=OneWay}"
+														   Background="#7F2970AB"
+														   MinWidth="64"
+														   Margin="-5,0" />
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+
+							<GridViewColumn Width="64">
+								<GridViewColumn.Header>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.AAColumn}">
+										<TextBlock Text="대공" />
+									</metro2:SortButton>
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<kcvc:Modernizable Status="{Binding Ship.AA, Mode=OneWay}"
+														   Background="#7FDF6A0C"
+														   MinWidth="64"
+														   Margin="-5,0" />
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+
+							<GridViewColumn Width="64">
+								<GridViewColumn.Header>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.ArmerColumn}">
+										<TextBlock Text="장갑" />
+									</metro2:SortButton>
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<kcvc:Modernizable Status="{Binding Ship.Armer, Mode=OneWay}"
+														   Background="#7FD8981A"
+														   MinWidth="64"
+														   Margin="-5,0" />
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+
+							<GridViewColumn Width="64">
+								<GridViewColumn.Header>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.LuckColumn}">
+										<TextBlock Text="운" />
+									</metro2:SortButton>
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<kcvc:Modernizable Status="{Binding Ship.Luck, Mode=OneWay}"
+														   Background="#7F808080"
+														   MinWidth="64"
+														   Margin="-5,0" />
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+
+							<GridViewColumn Width="45">
+								<GridViewColumn.Header>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.ViewRangeColumn}">
+                                        <TextBlock Text="색적"
+												   ToolTip="장비+칸무스 스텟" />
+                                    </metro2:SortButton>
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding Ship.ViewRange, Mode=OneWay}"
+												   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+												   Margin="0,3" />
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+
+							<GridViewColumn Width="65">
+								<GridViewColumn.Header>
+									<TextBlock Text="출격해역" />
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<Border x:Name="Border"
+												Margin="-2,0">
+											<TextBlock x:Name="Text"
+													   Text=""
+													   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+													   Margin="5,3" />
+										</Border>
+										<DataTemplate.Triggers>
+											<DataTrigger Binding="{Binding Ship.SallyArea}"
+														 Value="1">
+												<Setter TargetName="Text"
+														Property="Text"
+														Value="1분류" />
+                                                <Setter TargetName="Border"
+														Property="Background"
+														Value="#FF204080" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Ship.SallyArea}"
+														 Value="2">
+                                                <Setter TargetName="Text"
+														Property="Text"
+														Value="2분류" />
+                                                <Setter TargetName="Border"
+														Property="Background"
+														Value="#FF804020" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Ship.SallyArea}"
+														 Value="3">
+                                                <Setter TargetName="Text"
+														Property="Text"
+														Value="3분류" />
+                                                <Setter TargetName="Border"
+														Property="Background"
+														Value="#FF68CFF5" />
+                                                <Setter TargetName="Text"
+														Property="Foreground"
+														Value="#FF8B8B8B" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Ship.SallyArea}"
+														 Value="3">
+                                                <Setter TargetName="Text"
+														Property="Text"
+														Value="4분류" />
+                                                <Setter TargetName="Border"
+														Property="Background"
+														Value="#FF40A013" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Ship.SallyArea}"
+														 Value="3">
+                                                <Setter TargetName="Text"
+														Property="Text"
+														Value="5분류" />
+                                                <Setter TargetName="Border"
+														Property="Background"
+														Value="#FF7818D8" />
+                                            </DataTrigger>
+										</DataTemplate.Triggers>
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+
+							<GridViewColumn Width="140">
+								<GridViewColumn.Header>
+                                    <TextBlock Text="장비" />
+                                </GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate DataType="{x:Type contentsVm:ShipViewModel}">
+										<DockPanel>
+											<ItemsControl ItemsSource="{Binding Ship.Slots}">
+												<ItemsControl.Template>
+													<ControlTemplate TargetType="{x:Type ItemsControl}">
+														<StackPanel IsItemsHost="True"
+																	Orientation="Horizontal" />
+													</ControlTemplate>
+												</ItemsControl.Template>
+												<ItemsControl.ItemTemplate>
+													<DataTemplate>
+														<Border x:Name="Elements"
+																ToolTip="{Binding Item.NameWithLevel}"
+																Background="Transparent"
+																Height="20"
+																Padding="0,1">
+															<Viewbox>
+																<kcvc:SlotItemIcon Type="{Binding Item.Info.IconType}"
+																				   Margin="0,0,4,0" />
+															</Viewbox>
+														</Border>
+														<DataTemplate.Triggers>
+															<DataTrigger Binding="{Binding Equipped}"
+																		 Value="False">
+																<Setter TargetName="Elements"
+																		Property="Visibility"
+																		Value="Collapsed" />
+															</DataTrigger>
+														</DataTemplate.Triggers>
+													</DataTemplate>
+												</ItemsControl.ItemTemplate>
+											</ItemsControl>
+											<DockPanel Visibility="{Binding Ship.ExSlot.Equipped, Converter={StaticResource BooleanToVisibilityConverter}}"
+													   Height="20">
+												<Rectangle Width="1"
+														   Style="{DynamicResource SeparatorRectangleStyleKey}"
+														   Margin="12,1,0,1" />
+												<Border ToolTip="{Binding Ship.ExSlot.Item.NameWithLevel}"
+														Padding="4,1">
+													<Viewbox>
+														<kcvc:SlotItemIcon Type="{Binding Ship.ExSlot.Item.Info.IconType}" />
+													</Viewbox>
+												</Border>
+											</DockPanel>
+										</DockPanel>
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+						</GridView>
+					</ListView.View>
+				</ListView>
+			</Border>
+
+			<Border Grid.Row="2"
+					Background="{DynamicResource ThemeBrushKey}"
+					BorderBrush="{DynamicResource BorderBrushKey}"
+					BorderThickness="1"
+					Opacity="0.75"
+					Margin="8"
+					Padding="20"
+					Visibility="{Binding IsReloading, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <TextBlock Text="화면을 갱신중입니다..."
+						   Style="{DynamicResource EmphaticTextStyleKey}"
+						   FontSize="16"
+						   Background="{DynamicResource ThemeBrushKey}"
+						   HorizontalAlignment="Center" />
+			</Border>
+		</Grid>
+	</Grid>
+</metro:MetroWindow>

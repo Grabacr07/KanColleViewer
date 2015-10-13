@@ -1,0 +1,1028 @@
+﻿<metro:MetroWindow x:Class="Grabacr07.KanColleViewer.Views.FleetWindow"
+				   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+				   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				   xmlns:s="clr-namespace:System;assembly=mscorlib"
+				   xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+				   xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+				   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+				   xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+				   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+				   xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+				   xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+				   xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
+				   xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
+				   xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
+				   xmlns:metro2="clr-namespace:MetroTrilithon.Controls;assembly=MetroTrilithon.Desktop"
+				   xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
+				   xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
+				   xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+				   xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
+				   xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
+				   xmlns:contentsVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
+				   xmlns:fleetsVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
+				   xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
+				   xmlns:wrapper="clr-namespace:Grabacr07.KanColleWrapper.Models;assembly=KanColleWrapper"
+				   mc:Ignorable="d"
+				   d:DataContext="{d:DesignInstance viewModels:FleetWindowViewModel}"
+				   Title="{Binding Title}"
+				   Width="950"
+				   Height="800"
+				   FontSize="12"
+				   Background="{DynamicResource ThemeBrushKey}"
+				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+				   FontFamily="{DynamicResource DefaultFontFamilyKey}"
+				   IsRestoringWindowPlacement="True"
+				   SnapsToDevicePixels="True"
+				   TextOptions.TextFormattingMode="Display">
+
+	<i:Interaction.Triggers>
+		<i:EventTrigger EventName="ContentRendered">
+			<livet:LivetCallMethodAction MethodTarget="{Binding}"
+										 MethodName="Initialize" />
+		</i:EventTrigger>
+
+		<i:EventTrigger EventName="Closed">
+			<livet:DataContextDisposeAction />
+		</i:EventTrigger>
+
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger, Mode=OneWay}"
+										 MessageKey="Window.Action">
+			<livet:WindowInteractionMessageAction InvokeActionOnlyWhenWindowIsActive="False" />
+		</livet:InteractionMessageTrigger>
+	</i:Interaction.Triggers>
+
+	<Window.Resources>
+		<ResourceDictionary>
+			<kcvv:HasFlagConverter x:Key="HasFlagConverter" />
+
+			<DataTemplate x:Key="ShipLineViewKey"
+						  DataType="{x:Type wrapper:Ship}">
+				<Border BorderThickness="0,0,0,1"
+						BorderBrush="{DynamicResource BorderBrushKey}"
+						VerticalAlignment="Top">
+					<Border Padding="4">
+						<Border.Style>
+							<Style TargetType="{x:Type Border}">
+								<Style.Triggers>
+									<DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged}"
+												 Value="True">
+										<Setter Property="Background"
+												Value="#14FF0000" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged|DamageControlled}"
+												 Value="True">
+										<Setter Property="Background"
+												Value="Transparent" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
+												 Value="True">
+										<Setter Property="Background"
+												Value="Transparent" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Evacuation}"
+												 Value="True">
+										<Setter Property="Opacity"
+												Value="0.3" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow}"
+												 Value="True">
+										<Setter Property="Opacity"
+												Value="0.3" />
+									</DataTrigger>
+								</Style.Triggers>
+							</Style>
+						</Border.Style>
+
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto"
+												  SharedSizeGroup="ShipType" />
+								<ColumnDefinition Width="Auto"
+												  SharedSizeGroup="ShipName" />
+								<ColumnDefinition Width="Auto"
+												  SharedSizeGroup="ShipLevel" />
+								<ColumnDefinition Width="Auto"
+												  SharedSizeGroup="ShipCondigion" />
+								<ColumnDefinition Width="Auto"
+												  MinWidth="120"
+												  SharedSizeGroup="ShipHp" />
+								<ColumnDefinition Width="Auto"
+												  MinWidth="100"
+												  SharedSizeGroup="ShipFuel" />
+								<ColumnDefinition Width="Auto"
+												  SharedSizeGroup="ShipSlots" />
+								<ColumnDefinition Width="Auto"
+												  SharedSizeGroup="ShipAbilities" />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+								<RowDefinition />
+							</Grid.RowDefinitions>
+
+							<StackPanel Grid.RowSpan="2"
+										VerticalAlignment="Center"
+										Margin="10,0,10,0">
+								<TextBlock Style="{DynamicResource DefaultTextStyleKey}">
+									<Run Text="{Binding Info.ShipType.Name, Mode=OneWay}"
+										 FontSize="14" />
+									<LineBreak />
+									<Run Text="{Binding Info.Name, Mode=OneWay}"
+										 Style="{DynamicResource EmphaticTextElementStyleKey }"
+										 FontSize="18" />
+								</TextBlock>
+							</StackPanel>
+
+							<StackPanel Grid.Column="2"
+										Grid.Row="0"
+										Grid.RowSpan="2"
+										VerticalAlignment="Center"
+										Margin="10,0,20,0">
+								<TextBlock FontSize="13"
+										   Style="{DynamicResource DefaultTextStyleKey}"
+										   VerticalAlignment="Bottom">
+									<Run Text="Lv." />
+									<Run Text="{Binding Level, Mode=OneWay}"
+										 FontSize="16"
+										 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+								</TextBlock>
+								<TextBlock FontSize="10"
+										   Style="{DynamicResource DefaultTextStyleKey}">
+									<Run Text="Next:" />
+									<Run Text="{Binding ExpForNextLevel, Mode=OneWay}" />
+								</TextBlock>
+							</StackPanel>
+
+							<TextBlock Grid.Column="3"
+									   Grid.Row="0"
+									   Margin="10,1,10,0"
+									   Style="{DynamicResource DefaultTextStyleKey}">
+								<InlineUIContainer>
+									<kcvc:ConditionIcon ConditionType="{Binding ConditionType, Mode=OneWay}"
+														Width="11"
+														Height="11" />
+								</InlineUIContainer>
+								<Run Text="{Binding Condition, Mode=OneWay, StringFormat={} {0}}"
+									 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+								<LineBreak />
+								<Run Text="Condition"
+									 FontSize="10" />
+							</TextBlock>
+
+
+							<StackPanel Grid.Column="4"
+										Grid.Row="0"
+										Margin="10,1,20,0">
+								<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+										   VerticalAlignment="Bottom">
+									<Run Text="HP:" />
+									<Run Text="{Binding HP.Current, Mode=OneWay}"
+										 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+									<Run Text="/" />
+									<Run Text="{Binding HP.Maximum, Mode=OneWay}" />
+								</TextBlock>
+								<kcvc:ColorIndicator Height="7"
+													 VerticalAlignment="Bottom"
+													 Margin="1,4,0,2"
+													 LimitedValue="{Binding HP, Mode=OneWay}" />
+							</StackPanel>
+
+							<DockPanel Grid.Column="3"
+									   Grid.Row="1"
+									   Grid.ColumnSpan="2"
+									   Margin="10,2,20,0">
+								<Viewbox Height="21"
+										 Margin="0,0,4,0"
+										 Visibility="{Binding ExSlot.Equipped, Converter={StaticResource BooleanToVisibilityConverter}}"
+										 ToolTip="{Binding ExSlot.Item.NameWithLevel}">
+									<kcvc:SlotItemIcon Type="{Binding ExSlot.Item.Info.IconType}" />
+								</Viewbox>
+								<TextBlock TextAlignment="Center"
+										   Padding="4">
+									<TextBlock.Style>
+										<Style TargetType="{x:Type TextBlock}"
+											   BasedOn="{StaticResource DefaultTextStyleKey}">
+											<Setter Property="Text"
+												Value="건재" />
+                                            <Setter Property="Background"
+												Value="{DynamicResource BackgroundBrushKey}" />
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=DamageControlled}"
+															   Value="True" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Text"
+														Value="건재・다메콘 탑재" />
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged}"
+															   Value="True" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Text"
+														Value="대파 (격침 가능성 있음)" />
+                                                    <Setter Property="Foreground"
+														Value="White" />
+                                                    <Setter Property="Background"
+														Value="#FFA00000" />
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged|DamageControlled}"
+															   Value="True" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Text"
+														Value="대파 (다메콘 사용가능)" />
+                                                    <Setter Property="Background"
+														Value="{DynamicResource FleetRepairingBrushKey}" />
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Evacuation}"
+															   Value="True" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Text"
+														Value="대파 (퇴피완료)" />
+                                                    <Setter Property="Background"
+														Value="{DynamicResource FleetRepairingBrushKey}" />
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow}"
+															   Value="True" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Text"
+														Value="퇴피 (호위퇴피)" />
+                                                    <Setter Property="Background"
+														Value="{DynamicResource FleetRepairingBrushKey}" />
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
+															   Value="True" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Text"
+														Value="입거중" />
+                                                    <Setter Property="Background"
+															Value="{DynamicResource FleetRepairingBrushKey}" />
+												</MultiDataTrigger>
+											</Style.Triggers>
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
+							</DockPanel>
+
+
+							<DockPanel Grid.Column="5"
+									   Grid.Row="0"
+									   VerticalAlignment="Center"
+									   Margin="10,3,10,0">
+								<Path DockPanel.Dock="Left"
+									  Stretch="Uniform"
+									  Data="M240.92001,203.53499 L240.84519,311.51552 C207.23415,355.48491 28.906629,351.52681 0.016112625,311.74075 L0,203.92882 C28.922132,243.36013 212.90791,244.3249 240.92001,203.53499 z M240.92001,122.442 L240.84519,199.19441 C207.23416,243.16386 28.906601,239.20575 0.016122847,199.41972 L0,122.83582 C28.922142,162.26714 212.90788,163.23189 240.92001,122.442 z M240.92001,42.348999 L240.84519,119.10141 C207.23416,163.07087 28.906601,159.11275 0.016117736,119.32672 L0,42.742828 C28.922142,82.174133 212.90788,83.138885 240.92001,42.348999 z M120.501,0 C187.05187,0 241.002,15.670044 241.002,35 241.002,54.329971 187.05187,70 120.501,70 53.950136,70 1.5640981E-06,54.329971 0,35 1.5640981E-06,15.670044 53.950136,0 120.501,0 z"
+									  Fill="#FF359328"
+									  Width="18"
+									  Height="20"
+									  Margin="0,5,3,5" />
+								<TextBlock DockPanel.Dock="Top"
+										   Style="{DynamicResource DefaultTextStyleKey}">
+									<Run Text="{Binding Fuel.Current, Mode=OneWay}"
+										 FontSize="14" />
+									<Run Text="/"
+										 FontSize="10" />
+									<Run Text="{Binding Fuel.Maximum, Mode=OneWay}"
+										 FontSize="10" />
+								</TextBlock>
+								<kcvc:ColorIndicator DockPanel.Dock="Top"
+													 LimitedValue="{Binding Fuel, Mode=OneWay}"
+													 Height="5"
+													 Margin="1,2,0,0" />
+								<Border />
+							</DockPanel>
+
+							<DockPanel Grid.Column="5"
+									   Grid.Row="1"
+									   VerticalAlignment="Center"
+									   Margin="10,1,10,0">
+								<Path DockPanel.Dock="Left"
+									  Stretch="Uniform"
+									  Data="M7.886714,15.222354 C8.5989526,15.230164 9.4166626,15.368184 10.375001,15.72236 14.828867,18.77195 19.207969,21.388797 22.9571,25.722396 23.832847,28.055671 21.666581,31.597454 19.123991,31.347451 14.192122,29.703086 8.2916765,27.471985 4.0415956,25.055702 1.624975,22.472364 2.4583051,20.930663 1.4582969,18.680641 L0,16.972311 1.2499337,15.347294 3.3750041,16.347304 C4.5625184,16.347396 5.7499974,15.198925 7.886714,15.222354 z M5.7806165,1.2207033E-07 L7.5687866,1.5226279 C9.0966073,1.9383048 11.160323,0.38363563 14.487531,2.7567365 17.984965,6.8682347 21.523857,10.542609 24.00433,15.708234 24.237032,18.18954 21.21712,21.038649 18.829236,20.130123 14.501739,17.249104 9.3935558,13.547684 5.9265239,10.100721 4.2725648,6.9737104 5.481291,5.7047679 5.1068591,3.27119 L4.148,1.2400139 z"
+									  Fill="#FF887B50"
+									  Width="18"
+									  Height="20"
+									  Margin="0,5,3,5" />
+								<TextBlock DockPanel.Dock="Top"
+										   Style="{DynamicResource DefaultTextStyleKey}">
+									<Run Text="{Binding Bull.Current, Mode=OneWay}"
+										 FontSize="14" />
+									<Run Text="/"
+										 FontSize="10" />
+									<Run Text="{Binding Bull.Maximum, Mode=OneWay}"
+										 FontSize="10" />
+								</TextBlock>
+								<kcvc:ColorIndicator DockPanel.Dock="Top"
+													 LimitedValue="{Binding Bull, Mode=OneWay}"
+													 Height="5"
+													 Margin="1,2,0,0" />
+								<Border />
+							</DockPanel>
+
+							<ItemsControl Grid.Column="6"
+										  Grid.Row="0"
+										  Grid.RowSpan="3"
+										  ItemsSource="{Binding Slots}"
+										  Margin="20,0">
+								<ItemsControl.ItemTemplate>
+									<DataTemplate>
+										<Grid x:Name="SlotItem">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="Auto"
+																  SharedSizeGroup="SlotItemNum" />
+												<ColumnDefinition Width="Auto"
+																  SharedSizeGroup="SlotItemIcon" />
+												<ColumnDefinition Width="Auto"
+																  SharedSizeGroup="SlotItemName" />
+												<ColumnDefinition />
+											</Grid.ColumnDefinitions>
+											<TextBlock Grid.Column="0"
+													   HorizontalAlignment="Center"
+													   Margin="5,1">
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}"
+														   BasedOn="{StaticResource DefaultTextStyleKey}">
+														<Setter Property="Text"
+																Value="" />
+														<Style.Triggers>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding Item.Info.IsNumerable}"
+																			   Value="True" />
+																</MultiDataTrigger.Conditions>
+																<Setter Property="Text">
+																	<Setter.Value>
+																		<MultiBinding StringFormat="[{0:00} / {1:00}]">
+																			<Binding Path="Current" />
+																			<Binding Path="Maximum" />
+																		</MultiBinding>
+																	</Setter.Value>
+																</Setter>
+															</MultiDataTrigger>
+														</Style.Triggers>
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
+											<kcvc:SlotItemIcon Grid.Column="1"
+															   Type="{Binding Item.Info.IconType, Mode=OneWay}"
+															   Width="14"
+															   Height="14" />
+											<TextBlock Grid.Column="2"
+													   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+													   Style="{DynamicResource DefaultTextStyleKey}"
+													   Margin="5,1">
+												<Run Text="{Binding Item.Info.Name, Mode=OneWay}" />
+												<Run Text="{Binding Item.LevelText, Mode=OneWay}"
+													 Foreground="#FF45A9A5" />
+												<Run Text="{Binding Item.AdeptText, Mode=OneWay}"
+													 Foreground="{DynamicResource ForegroundBrushKey}" />
+											</TextBlock>
+										</Grid>
+										<DataTemplate.Triggers>
+											<DataTrigger Binding="{Binding Equipped}"
+														 Value="False">
+												<Setter TargetName="SlotItem"
+														Property="Visibility"
+														Value="Collapsed" />
+											</DataTrigger>
+										</DataTemplate.Triggers>
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
+
+							<UniformGrid Grid.Column="7"
+										 Grid.Row="0"
+										 Grid.RowSpan="3"
+										 Columns="1"
+										 Visibility="Collapsed">
+								<TextBlock TextAlignment="Center"
+										   Margin="8,0"
+										   Padding="10,6">
+									<TextBlock.Style>
+										<Style TargetType="{x:Type TextBlock}"
+											   BasedOn="{StaticResource DefaultTextStyleKey}">
+											<Setter Property="Text"
+													Value="탄착관측사격" />
+                                            <Setter Property="Foreground"
+													Value="{DynamicResource ActiveForegroundBrushKey}" />
+                                            <Setter Property="Background"
+													Value="#FF084008" />
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+
+                                <TextBlock TextAlignment="Center"
+										   Margin="8,0"
+										   Padding="10,6">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}"
+											   BasedOn="{StaticResource DefaultTextStyleKey}">
+                                            <Setter Property="Text"
+													Value="야전컷인: 30 %" />
+                                            <Setter Property="Foreground"
+													Value="{DynamicResource ActiveForegroundBrushKey}" />
+											<Setter Property="Background"
+													Value="#FF101060" />
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
+							</UniformGrid>
+						</Grid>
+					</Border>
+				</Border>
+			</DataTemplate>
+		</ResourceDictionary>
+	</Window.Resources>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<!-- #region CaptionBar -->
+		<Border metro:MetroWindow.IsCaptionBar="True"
+				Panel.ZIndex="100">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+
+				<kcvc:AppIcon Width="36"
+							  Height="36"
+							  Background="Transparent"
+							  AnchorVisibility="Collapsed"
+							  BandVisibility="Collapsed" />
+
+				<TextBlock Grid.Column="1"
+						   Text="{Binding Title}"
+						   Style="{DynamicResource CaptionTextStyleKey}"
+						   Margin="2,0,8,0" />
+
+				<metro:SystemButtons Grid.Column="2"
+									 HorizontalAlignment="Right"
+									 VerticalAlignment="Top" />
+			</Grid>
+		</Border>
+		<!-- #endregion -->
+
+		<Grid Grid.Row="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition />
+					<ColumnDefinition Width="2.4*" />
+				</Grid.ColumnDefinitions>
+
+				<ListBox ItemsSource="{Binding Fleets}"
+						 SelectedValue="{Binding SelectedFleet}"
+						 SelectionMode="Single"
+						 Background="Transparent"
+						 Margin="8,8,0,0">
+					<ListBox.Template>
+						<ControlTemplate TargetType="{x:Type ListBox}">
+							<Border BorderThickness="0,1,1,1"
+									BorderBrush="{DynamicResource ActiveBorderBrushKey}"
+									Background="{TemplateBinding Background}">
+								<StackPanel IsItemsHost="True" />
+							</Border>
+						</ControlTemplate>
+					</ListBox.Template>
+					<ListBox.ItemContainerStyle>
+						<Style TargetType="{x:Type ListBoxItem}">
+							<Setter Property="MinHeight"
+									Value="38" />
+							<Setter Property="Foreground"
+									Value="{DynamicResource ActiveForegroundBrushKey}" />
+							<Setter Property="IsSelected"
+									Value="{Binding IsSelected}" />
+							<Setter Property="Template">
+								<Setter.Value>
+									<ControlTemplate TargetType="{x:Type ListBoxItem}">
+										<Border Background="{TemplateBinding Background}"
+												BorderBrush="{DynamicResource ActiveBorderBrushKey}"
+												BorderThickness="1,0,0,0">
+											<ContentPresenter />
+										</Border>
+									</ControlTemplate>
+								</Setter.Value>
+							</Setter>
+							<Setter Property="FocusVisualStyle"
+									Value="{DynamicResource {x:Static SystemParameters.FocusVisualStyleKey}}" />
+							<Style.Triggers>
+								<Trigger Property="IsMouseOver"
+										 Value="True">
+									<Setter Property="Background"
+											Value="{DynamicResource AccentHighlightBrushKey}" />
+									<Setter Property="Foreground"
+											Value="{DynamicResource AccentForegroundBrushKey}" />
+								</Trigger>
+								<Trigger Property="IsSelected"
+										 Value="True">
+									<Setter Property="Background"
+											Value="{DynamicResource AccentBrushKey}" />
+									<Setter Property="Foreground"
+											Value="{DynamicResource AccentForegroundBrushKey}" />
+								</Trigger>
+							</Style.Triggers>
+						</Style>
+					</ListBox.ItemContainerStyle>
+					<ListBox.Resources>
+						<DataTemplate DataType="{x:Type fleetsVm:FleetViewModel}">
+							<Border Padding="16,8">
+								<TextBlock Text="{Binding Name}"
+										   HorizontalAlignment="Center"
+										   Style="{DynamicResource EmphaticTextStyleKey}" />
+							</Border>
+						</DataTemplate>
+						<DataTemplate DataType="{x:Type fleetsVm:CombinedFleetViewModel}">
+							<Border Padding="16,6">
+								<StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="연합함대"
+											   Margin="0,0,0,2"
+											   Style="{DynamicResource EmphaticTextStyleKey}"
+											   HorizontalAlignment="Center" />
+									<TextBlock Text="{Binding Name}"
+											   Style="{DynamicResource DefaultTextStyleKey}"
+											   HorizontalAlignment="Center" />
+								</StackPanel>
+							</Border>
+						</DataTemplate>
+					</ListBox.Resources>
+				</ListBox>
+
+				<Grid Grid.Column="1"
+					  DataContext="{Binding SelectedFleet}"
+					  d:DataContext="{d:DesignInstance fleetsVm:FleetViewModel}">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition />
+					</Grid.ColumnDefinitions>
+
+
+					<Border BorderThickness="1"
+							BorderBrush="{DynamicResource BorderBrushKey}"
+							Margin="8,8,0,0"
+							Padding="8,4">
+						<Grid HorizontalAlignment="Center">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="4" />
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="4" />
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
+							</Grid.ColumnDefinitions>
+
+							<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Bottom"
+									   Margin="1,2">
+									<Run Text="합계레벨" />
+									<Run Text=":" />
+                            </TextBlock>
+                            <TextBlock Grid.Row="0"
+									   Grid.Column="1"
+									   Text="{Binding State.TotalLevel}"
+									   Style="{DynamicResource EmphaticTextStyleKey}"
+									   VerticalAlignment="Bottom"
+									   Margin="4,2" />
+
+                            <TextBlock Grid.Row="1"
+									   Grid.Column="0"
+									   Style="{DynamicResource DefaultTextStyleKey}"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Bottom"
+									   Margin="1,2">
+									<Run Text="평균레벨" />
+									<Run Text=":" />
+                            </TextBlock>
+                            <TextBlock Grid.Row="1"
+									   Grid.Column="1"
+									   Text="{Binding State.AverageLevel}"
+									   Style="{DynamicResource EmphaticTextStyleKey}"
+									   VerticalAlignment="Bottom"
+									   Margin="4,2" />
+
+                            <TextBlock Grid.Row="3"
+									   Grid.Column="0"
+									   Style="{DynamicResource DefaultTextStyleKey}"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Bottom"
+									   Margin="1,2">
+									<Run Text="색적능력" />
+									<Run Text=":" />
+                            </TextBlock>
+                            <TextBlock Grid.Row="3"
+									   Grid.Column="1"
+									   Text="{Binding State.ViewRange}"
+									   Style="{DynamicResource EmphaticTextStyleKey}"
+									   VerticalAlignment="Bottom"
+									   Margin="4,2" />
+
+                            <TextBlock Grid.Row="4"
+									   Grid.Column="0"
+									   Style="{DynamicResource DefaultTextStyleKey}"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Bottom"
+									   Margin="1,2">
+									<Run Text="제공전력" />
+								<Run Text=":" />
+							</TextBlock>
+							<TextBlock Grid.Row="4"
+									   Grid.Column="1"
+									   Style="{DynamicResource EmphaticTextStyleKey}"
+									   VerticalAlignment="Bottom"
+									   Margin="4,2">
+								<Run Text="{Binding State.MinAirSuperiorityPotential, Mode=OneWay}"/><Run Text="-"/><Run Text="{Binding State.MaxAirSuperiorityPotential, Mode=OneWay}"/>
+							</TextBlock>
+
+
+							<TextBlock Grid.Row="6"
+									   Grid.Column="0"
+									   Grid.ColumnSpan="2"
+									   Text="{Binding State.Speed}"
+									   Style="{DynamicResource EmphaticTextStyleKey}"
+									   HorizontalAlignment="Center"
+									   VerticalAlignment="Bottom"
+									   Margin="4,2" />
+
+							<TextBlock Grid.Row="7"
+									   Grid.Column="0"
+									   Style="{DynamicResource DefaultTextStyleKey}"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Bottom"
+									   Margin="1,2"
+									   Visibility="Collapsed">
+									<Run Text="스테이터스" />
+								<Run Text=":" />
+							</TextBlock>
+							<TextBlock Grid.Row="7"
+									   Grid.Column="1"
+									   Text="9999"
+									   Style="{DynamicResource EmphaticTextStyleKey}"
+									   VerticalAlignment="Bottom"
+									   Margin="4,2"
+									   Visibility="Collapsed" />
+						</Grid>
+					</Border>
+
+					<Border Grid.Column="1"
+							Margin="6">
+						<Border.Resources>
+							<Style x:Key="IndicatorTextBlockStyleKey"
+								   TargetType="{x:Type TextBlock}">
+								<Setter Property="FontFamily"
+										Value="{DynamicResource DefaultFontFamilyKey}" />
+								<Setter Property="FontSize"
+										Value="{DynamicResource DefaultFontSizeKey}" />
+								<Setter Property="Foreground"
+										Value="{DynamicResource ForegroundBrushKey}" />
+								<Setter Property="Background"
+										Value="{DynamicResource BorderBrushKey}" />
+								<Setter Property="Padding"
+										Value="12,6" />
+								<Setter Property="Margin"
+										Value="2" />
+							</Style>
+						</Border.Resources>
+                        <StackPanel>
+                            <TextBlock>
+								<TextBlock.Style>
+									<Style TargetType="{x:Type TextBlock}"
+										   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
+										<Setter Property="Text"
+												Value="함대 대기중..." />
+                                        <Setter Property="FontFamily"
+												Value="{DynamicResource EmphaticFontFamilyKey}" />
+                                        <Setter Property="FontSize"
+												Value="{DynamicResource EmphaticFontSizeKey}" />
+                                        <Setter Property="Padding"
+												Value="16,8" />
+                                        <Setter Property="TextAlignment"
+												Value="Center" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Sortie}"
+														 Value="True">
+                                                <Setter Property="Text"
+														Value="함대 출격중입니다!" />
+                                                <Setter Property="Foreground"
+														Value="{DynamicResource ActiveForegroundBrushKey}" />
+												<Setter Property="Background"
+														Value="#FF5A2020" />
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</TextBlock.Style>
+							</TextBlock>
+
+							<UniformGrid Columns="2">
+								<TextBlock>
+									<TextBlock.Style>
+										<Style TargetType="{x:Type TextBlock}"
+											   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
+											<Setter Property="Text"
+													Value="함대출격준비가 아직 완료되지않았습니다" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Source.State.IsReady}"
+															 Value="True">
+                                                    <Setter Property="Text"
+															Value="출격준비완료!" />
+                                                    <Setter Property="Foreground"
+															Value="{DynamicResource ActiveForegroundBrushKey}" />
+                                                    <Setter Property="Background"
+															Value="{DynamicResource FleetReSortieBrushKey}" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Sortie}"
+															 Value="True">
+                                                    <Setter Property="Text"
+															Value="출격준비완료!" />
+                                                </DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
+
+								<ContentControl Content="{Binding}">
+									<ContentControl.Resources>
+										<DataTemplate DataType="{x:Type fleetsVm:FleetViewModel}">
+											<TextBlock>
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}"
+														   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
+														<Setter Property="Text"
+																Value="함대는 원정나가있지않습니다." />
+                                                        <Style.Triggers>
+                                                            <MultiDataTrigger>
+                                                                <MultiDataTrigger.Conditions>
+                                                                    <Condition Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Expedition}"
+																			   Value="True" />
+                                                                </MultiDataTrigger.Conditions>
+                                                                <Setter Property="Text">
+                                                                    <Setter.Value>
+                                                                        <MultiBinding StringFormat="함대는 원정중입니다: {0} - {1}">
+                                                                            <Binding Path="Expedition.Mission.Title" />
+																			<Binding Path="Expedition.Remaining" />
+																		</MultiBinding>
+																	</Setter.Value>
+																</Setter>
+																<Setter Property="Foreground"
+																		Value="{DynamicResource ActiveForegroundBrushKey}" />
+																<Setter Property="Background"
+																		Value="{DynamicResource FleetExpeditionBrushKey}" />
+															</MultiDataTrigger>
+														</Style.Triggers>
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
+										</DataTemplate>
+										<DataTemplate DataType="{x:Type fleetsVm:CombinedFleetViewModel}">
+											<TextBlock>
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}"
+														   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
+														<Setter Property="Text"
+																Value="연합함대는 원정에 참가할수 없습니다" />
+                                                    </Style>
+												</TextBlock.Style>
+											</TextBlock>
+										</DataTemplate>
+									</ContentControl.Resources>
+								</ContentControl>
+
+								<TextBlock x:Name="DamageIndicator">
+                                    
+									<TextBlock.Style>
+										<Style TargetType="{x:Type TextBlock}"
+											   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
+											<Setter Property="Text"
+													Value="칸무스 체력상태 양호" />
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Homeport|HeavilyDamaged}"
+																   Value="True" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Text"
+															Value="함대에 대파당한 칸무스가 있습니다!" />
+                                                    <Setter Property="Foreground"
+															Value="{DynamicResource ActiveForegroundBrushKey}" />
+													<Setter Property="Background"
+															Value="{DynamicResource FleetRepairingBrushKey}" />
+												</MultiDataTrigger>
+												<MultiDataTrigger>
+													<MultiDataTrigger.Conditions>
+														<Condition Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Sortie|HeavilyDamaged}"
+																   Value="True" />
+													</MultiDataTrigger.Conditions>
+													<Setter Property="Text"
+															Value="함대에 대파당한 칸무스가 있습니다!" />
+                                                    <Setter Property="Foreground"
+															Value="{DynamicResource ActiveForegroundBrushKey}" />
+                                                    <Setter Property="Background"
+															Value="#FFB40000" />
+                                                </MultiDataTrigger>
+											</Style.Triggers>
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
+
+								<TextBlock>
+									<TextBlock.Style>
+										<Style TargetType="{x:Type TextBlock}"
+											   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
+											<Setter Property="Text"
+													Value="함대에 입거해있는 칸무스가 없습니다" />
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repairing}"
+																   Value="True" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Text"
+															Value="함대에 입거중인 칸무스가 있습니다" />
+                                                    <Setter Property="Foreground"
+															Value="{DynamicResource ActiveForegroundBrushKey}" />
+													<Setter Property="Background"
+															Value="{DynamicResource FleetRepairingBrushKey}" />
+												</MultiDataTrigger>
+											</Style.Triggers>
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
+
+								<TextBlock>
+									<TextBlock.Style>
+										<Style TargetType="{x:Type TextBlock}"
+											   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
+											<Setter Property="Text"
+													Value="함대 보급 완료" />
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=InShortSupply}"
+																   Value="True" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Text"
+															Value="함대에 보급받지 못한 칸무스가 있습니다" />
+                                                    <Setter Property="Foreground"
+															Value="{DynamicResource ActiveForegroundBrushKey}" />
+                                                    <Setter Property="Background"
+															Value="{DynamicResource FleetRepairingBrushKey}" />
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+
+                                <TextBlock>
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}"
+											   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
+                                            <Setter Property="Text"
+													Value="함대에 피로한 칸무스가 없습니다" />
+                                            <Style.Triggers>
+												<MultiDataTrigger>
+													<MultiDataTrigger.Conditions>
+														<Condition Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Homeport}"
+																   Value="True" />
+														<Condition Binding="{Binding State.Homeport.Condition.IsRejuvenating}"
+																   Value="True" />
+													</MultiDataTrigger.Conditions>
+													<Setter Property="Text">
+														<Setter.Value>
+                                                            <MultiBinding StringFormat="피로회복까지: {0}">
+                                                                <Binding Path="State.Homeport.Condition.Remaining" />
+															</MultiBinding>
+														</Setter.Value>
+													</Setter>
+													<Setter Property="Foreground"
+															Value="{DynamicResource ActiveForegroundBrushKey}" />
+													<Setter Property="Background"
+															Value="{DynamicResource FleetRepairingBrushKey}" />
+												</MultiDataTrigger>
+											</Style.Triggers>
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
+							</UniformGrid>
+						</StackPanel>
+					</Border>
+				</Grid>
+			</Grid>
+
+			<Border Grid.Row="1"
+					DataContext="{Binding SelectedFleet}"
+					d:DataContext="{d:DesignInstance fleetsVm:FleetViewModel}">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition />
+					</Grid.RowDefinitions>
+
+					<Border Grid.Row="2"
+							BorderThickness="1"
+							BorderBrush="{DynamicResource BorderBrushKey}"
+							Margin="8">
+						<ScrollViewer HorizontalScrollBarVisibility="Auto"
+									  VerticalScrollBarVisibility="Auto"
+									  PanningMode="Both">
+							<ContentControl Content="{Binding}"
+											Grid.IsSharedSizeScope="True"
+											d:IsHidden="True">
+								<ContentControl.Resources>
+									<DataTemplate DataType="{x:Type fleetsVm:FleetViewModel}">
+										<ItemsControl ItemsSource="{Binding Source.Ships}"
+													  ItemTemplate="{DynamicResource ShipLineViewKey}" />
+									</DataTemplate>
+
+									<DataTemplate DataType="{x:Type fleetsVm:CombinedFleetViewModel}">
+										<ItemsControl ItemsSource="{Binding Source.Fleets}"
+													  Margin="0,0,0,-1">
+											<ItemsControl.ItemTemplate>
+												<DataTemplate>
+													<Border BorderThickness="0,0,0,1"
+															BorderBrush="{DynamicResource BorderBrushKey}">
+														<DockPanel LastChildFill="True">
+															<Border Background="{DynamicResource BorderBrushKey}"
+																	Padding="16,8">
+																<Border.LayoutTransform>
+																	<RotateTransform Angle="-90"
+																					 CenterX="0.5"
+																					 CenterY="0.5" />
+																</Border.LayoutTransform>
+																<TextBlock Text="{Binding Name}"
+																		   TextAlignment="Center"
+																		   Foreground="{DynamicResource SemiActiveForegroundBrushKey}"
+																		   Style="{DynamicResource EmphaticTextStyleKey}" />
+															</Border>
+															<ItemsControl ItemsSource="{Binding Ships}"
+																		  ItemTemplate="{DynamicResource ShipLineViewKey}"
+																		  Margin="0,0,0,-1" />
+														</DockPanel>
+													</Border>
+												</DataTemplate>
+											</ItemsControl.ItemTemplate>
+										</ItemsControl>
+									</DataTemplate>
+								</ContentControl.Resources>
+							</ContentControl>
+						</ScrollViewer>
+					</Border>
+
+					<!-- ☟☟☟ デザイン時に使うやつ ☟☟☟ -->
+					<Border Grid.Row="2"
+							BorderThickness="1"
+							BorderBrush="{DynamicResource BorderBrushKey}"
+							Margin="8"
+							IsEnabled="{Binding Source={x:Static models:Helper.IsInDesignMode}, Mode=OneWay}"
+							Visibility="{Binding Source={x:Static models:Helper.IsInDesignMode}, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+						<ContentControl d:DataContext="{d:DesignData /SampleData/ShipViewModelSampleData.xaml}">
+							<ContentControl.Style>
+								<Style TargetType="{x:Type ContentControl}">
+									<Style.Triggers>
+										<DataTrigger Binding="{Binding Source={x:Static models:Helper.IsInDesignMode}, Mode=OneWay}"
+													 Value="True">
+											<Setter Property="Content"
+													Value="{Binding Ship}" />
+											<Setter Property="ContentTemplate"
+													Value="{DynamicResource ShipLineViewKey}" />
+											<Setter Property="Grid.IsSharedSizeScope"
+													Value="True" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</ContentControl.Style>
+						</ContentControl>
+					</Border>
+					<!-- ☝☝☝ デザイン時に使うやつ ☝☝☝ -->
+
+				</Grid>
+			</Border>
+		</Grid>
+	</Grid>
+</metro:MetroWindow>

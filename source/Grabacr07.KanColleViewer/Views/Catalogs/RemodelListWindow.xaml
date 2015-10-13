@@ -1,0 +1,492 @@
+﻿<metro:MetroWindow x:Class="Grabacr07.KanColleViewer.Views.Catalogs.RemodelListWindow"
+				   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+				   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				   xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+				   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+				   xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+				   xmlns:metro2="clr-namespace:MetroTrilithon.Controls;assembly=MetroTrilithon.Desktop"
+				   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+				   xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
+				   xmlns:wrapper="clr-namespace:Grabacr07.KanColleWrapper;assembly=KanColleWrapper"
+				   xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
+				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Catalogs"
+				   xmlns:CviewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Catalogs"
+				   xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+				   xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
+				   mc:Ignorable="d" 
+				   Width="800"
+				   Height="700"
+				   Title="{Binding Title}"
+				   FontSize="12"
+				   Background="{DynamicResource ThemeBrushKey}"
+				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+				   IsRestoringWindowPlacement="True"
+				   SnapsToDevicePixels="True"
+				   TextOptions.TextFormattingMode="Display"
+				   d:DataContext = "{d:DesignInstance viewModels:RemodelListWindowViewModel}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="ContentRendered">
+            <livet:LivetCallMethodAction MethodTarget="{Binding}"
+										 MethodName="Initialize" />
+        </i:EventTrigger>
+
+        <i:EventTrigger EventName="Closed">
+            <livet:DataContextDisposeAction />
+        </i:EventTrigger>
+
+        <livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+										 MessageKey="Window/Location">
+            <behaviors:SetWindowLocationAction />
+        </livet:InteractionMessageTrigger>
+        <livet:InteractionMessageTrigger Messenger="{Binding Messenger, Mode=OneWay}"
+										 MessageKey="Window/Activate">
+            <livet:WindowInteractionMessageAction />
+        </livet:InteractionMessageTrigger>
+    </i:Interaction.Triggers>
+    <Window.Resources>
+        <!--http://stackoverflow.com/questions/1052342/itemscontrol-with-horizontal-orientation-->
+        <ItemsPanelTemplate x:Key="ItemsPanelTemplate">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,0"/>
+        </ItemsPanelTemplate>
+        <Style TargetType="{x:Type GroupBox}">
+            <Setter Property="OverridesDefaultStyle"
+					Value="True" />
+            <Setter Property="BorderThickness"
+					Value="1" />
+            <Setter Property="BorderBrush"
+					Value="{DynamicResource BorderBrushKey}" />
+            <Setter Property="Background"
+					Value="{DynamicResource BorderBrushKey}" />
+            <Setter Property="TextOptions.TextFormattingMode"
+					Value="Display" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GroupBox}">
+                        <Border BorderThickness="{TemplateBinding BorderThickness}"
+								BorderBrush="{TemplateBinding BorderBrush}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter Content="{TemplateBinding Header}"
+													  ContentTemplate="{TemplateBinding HeaderTemplate}"
+													  ContentStringFormat="{TemplateBinding HeaderStringFormat}"
+													  SnapsToDevicePixels="True">
+                                    </ContentPresenter>
+                                </Border>
+
+                                <ContentPresenter Grid.Column="1"
+												  Content="{TemplateBinding Content}"
+												  ContentTemplate="{TemplateBinding ContentTemplate}"
+												  ContentStringFormat="{TemplateBinding ContentStringFormat}"
+												  Margin="{TemplateBinding Padding}" />
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Border Margin="9,5">
+                            <TextBlock Text="{Binding}"
+									   FontSize="{DynamicResource EmphaticFontSizeKey}"
+									   Foreground="{DynamicResource ForegroundBrushKey}"
+									   HorizontalAlignment="Center" />
+                        </Border>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border metro:MetroWindow.IsCaptionBar="True"
+				Panel.ZIndex="100">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <kcvc:AppIcon Width="36"
+								  Height="36"
+								  Background="Transparent"
+								  AnchorVisibility="Collapsed"
+								  BandVisibility="Collapsed" />
+
+
+                <TextBlock Grid.Column="1"
+						   Text="{Binding Title}"
+						   Style="{DynamicResource CaptionTextStyleKey}"
+						   Margin="2,0,8,0" />
+
+                <metro:SystemButtons Grid.Column="2"
+									 HorizontalAlignment="Right"
+									 VerticalAlignment="Top" />
+            </Grid>
+        </Border>
+        <StackPanel Margin="10,0" Grid.Row="1">
+            <TextBlock Foreground="#FFF50000" Text="※갱신시간은 0:00이지만 실제로는 약간 늦게 갱신됩니다."/>
+            <TextBlock Foreground="#FFF50000" Text="※특이사항이 있는 장비의 경우 툴팁으로 특이사항을 확인할 수 있습니다."/>
+            <TextBlock/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock FontSize="20" FontWeight="Bold">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding WeekDayView}"
+												 Value="1">
+                                    <Setter Property="Text" Value="일요일"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding WeekDayView}"
+												 Value="2">
+                                    <Setter Property="Text" Value="월요일"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding WeekDayView}"
+												 Value="3">
+                                    <Setter Property="Text" Value="화요일"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding WeekDayView}"
+												 Value="4">
+                                    <Setter Property="Text" Value="수요일"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding WeekDayView}"
+												 Value="5">
+                                    <Setter Property="Text" Value="목요일"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding WeekDayView}"
+												 Value="6">
+                                    <Setter Property="Text" Value="금요일"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding WeekDayView}"
+												 Value="7">
+                                    <Setter Property="Text" Value="토요일"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+                <TextBlock Text="의 개수공창목록" FontSize="20" Grid.Column="1"/>
+                <metro:PromptComboBox Margin="8"
+											ItemsSource="{Binding WeekDayList}"
+										  Grid.Column="2"
+											Prompt=""
+											SelectedValue="{Binding SelectedDay, Mode=TwoWay}"
+											IsReadOnly="True"
+											MinWidth="50" HorizontalAlignment="Right" />
+            </Grid>
+        </StackPanel>
+        <ScrollViewer Grid.Row="2">
+            <StackPanel Margin="10" Grid.Row="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <GroupBox Header="    ">
+                            <Border Background="{DynamicResource BorderBrushKey}"
+								Padding="8,6">
+                                <TextBlock Text="장비명+필요 칸무스" HorizontalAlignment="Center"/>
+                            </Border>
+                        </GroupBox>
+                        <GroupBox Header="상단" MinHeight="80">
+                            <DockPanel>
+                                <ItemsControl  ItemsSource="{Binding FirstList}">
+                                    <ItemsControl.Template>
+                                        <ControlTemplate TargetType="{x:Type ItemsControl}">
+                                            <WrapPanel IsItemsHost="True"
+										   Margin="4,0,0,4" />
+                                        </ControlTemplate>
+                                    </ItemsControl.Template>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Margin="0,6,20,0">
+												<Viewbox Width="20">
+													<kcvc:SlotItemIcon Type="{Binding IconType}" />
+												</Viewbox>
+												
+												<Run Text="{Binding ItemName}"
+													 Foreground="{DynamicResource ActiveForegroundBrushKey}"
+													 BaselineAlignment="Center"/>
+												<StackPanel Orientation="Horizontal">
+													<ItemsControl ItemsSource="{Binding Ships}"
+																  ItemsPanel="{StaticResource ItemsPanelTemplate}">
+														<ItemsControl.ItemTemplate>
+															<DataTemplate>
+																<TextBlock Background="{DynamicResource BackgroundBrushKey}" Margin="5,0"
+																		   Text="{Binding ShipName}"
+																		   Visibility="{Binding ShipName, Converter={StaticResource StringToVisiblityConverter}}" />
+															</DataTemplate>
+														</ItemsControl.ItemTemplate>
+													</ItemsControl>
+												</StackPanel>
+													<TextBlock.ToolTip>
+														<TextBlock>
+																<Run Text="{Binding ToolTipString, Mode=OneWay}"
+																	 Style="{DynamicResource EmphaticTextElementStyleKey}"
+																	 FontSize="11"/>
+														</TextBlock>
+													</TextBlock.ToolTip>
+											</TextBlock>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DockPanel>
+                        </GroupBox>
+                        <GroupBox Header="중단" MinHeight="80">
+                            <DockPanel>
+                                <ItemsControl  ItemsSource="{Binding SecondList}">
+                                    <ItemsControl.Template>
+                                        <ControlTemplate TargetType="{x:Type ItemsControl}">
+                                            <WrapPanel IsItemsHost="True"
+										   Margin="4,0,0,4" />
+                                        </ControlTemplate>
+                                    </ItemsControl.Template>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Margin="0,6,20,0">
+												<Viewbox Width="20">
+													<kcvc:SlotItemIcon Type="{Binding IconType}" />
+												</Viewbox>
+												<Run Text="{Binding ItemName}"
+													 Foreground="{DynamicResource ActiveForegroundBrushKey}"
+													 BaselineAlignment="Center"/>
+												<StackPanel>
+													<ItemsControl ItemsSource="{Binding Ships}"
+																  ItemsPanel="{StaticResource ItemsPanelTemplate}">
+														<ItemsControl.ItemTemplate>
+															<DataTemplate>
+																<TextBlock Background="{DynamicResource BackgroundBrushKey}" Margin="5,0"
+																		   Text="{Binding ShipName}"
+																		   Visibility="{Binding ShipName, Converter={StaticResource StringToVisiblityConverter}}" />
+															</DataTemplate>
+														</ItemsControl.ItemTemplate>
+													</ItemsControl>
+												</StackPanel>
+												<TextBlock.ToolTip>
+													<TextBlock>
+													<Run Text="{Binding ToolTipString, Mode=OneWay}"
+														 Style="{DynamicResource EmphaticTextElementStyleKey}"
+														 FontSize="11"/>
+													</TextBlock>
+												</TextBlock.ToolTip>
+											</TextBlock>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DockPanel>
+                        </GroupBox>
+                        <GroupBox Header="하단" MinHeight="80">
+                            <DockPanel>
+                                <ItemsControl  ItemsSource="{Binding ThirdList}">
+                                    <ItemsControl.Template>
+                                        <ControlTemplate TargetType="{x:Type ItemsControl}">
+                                            <WrapPanel IsItemsHost="True"
+										   Margin="4,0,0,4" />
+                                        </ControlTemplate>
+                                    </ItemsControl.Template>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Margin="0,6,20,0">
+												<Viewbox Width="20">
+													<kcvc:SlotItemIcon Type="{Binding IconType}" />
+												</Viewbox>
+												<Run Text="{Binding ItemName}"
+													 Foreground="{DynamicResource ActiveForegroundBrushKey}"
+													 BaselineAlignment="Center"/>
+												<StackPanel>
+													<ItemsControl ItemsSource="{Binding Ships}"
+																  ItemsPanel="{StaticResource ItemsPanelTemplate}">
+														<ItemsControl.ItemTemplate>
+															<DataTemplate>
+																<TextBlock Background="{DynamicResource BackgroundBrushKey}" Margin="5,0"
+																		   Text="{Binding ShipName}"
+																		   Visibility="{Binding ShipName, Converter={StaticResource StringToVisiblityConverter}}" />
+															</DataTemplate>
+														</ItemsControl.ItemTemplate>
+													</ItemsControl>
+												</StackPanel>
+												<TextBlock.ToolTip>
+													<TextBlock>
+													<Run Text="{Binding ToolTipString, Mode=OneWay}"
+														 Style="{DynamicResource EmphaticTextElementStyleKey}"
+														 FontSize="11"/>
+													</TextBlock>
+												</TextBlock.ToolTip>
+											</TextBlock>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DockPanel>
+                        </GroupBox>
+                        <GroupBox>
+                            <Border Background="{DynamicResource BorderBrushKey}"
+								Padding="8,6">
+                                <TextBlock Text="업그레이드 가능장비(툴팁으로 필요한 칸무스 이름을 표시)" HorizontalAlignment="Center"/>
+                            </Border>
+                        </GroupBox>
+                        <Border MinHeight="80" BorderBrush="{DynamicResource BorderBrushKey}" BorderThickness="1">
+                            <DockPanel Margin="4">
+                                <ItemsControl  ItemsSource="{Binding Improvement}">
+                                    <ItemsControl.Template>
+                                        <ControlTemplate TargetType="{x:Type ItemsControl}">
+                                            <WrapPanel IsItemsHost="True"
+										   Margin="4,0,0,4" />
+                                        </ControlTemplate>
+                                    </ItemsControl.Template>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Margin="0,6,20,0" Background="{DynamicResource BackgroundBrushKey}" VerticalAlignment="Center">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock VerticalAlignment="Center">
+													<Viewbox Width="20" VerticalAlignment="Center">
+														<kcvc:SlotItemIcon Type="{Binding IconType}" />
+													</Viewbox>
+													<Run Text="{Binding ItemName}"
+													 Foreground="{DynamicResource ActiveForegroundBrushKey}" BaselineAlignment="Center"/>
+                                                </TextBlock>
+                                                <TextBlock VerticalAlignment="Center" Grid.Column="1" Text="⇒" Foreground="#FF45A9A5"/>
+                                                <StackPanel Grid.Column="2" VerticalAlignment="Center" >
+                                                    <ItemsControl ItemsSource="{Binding Ships}">
+                                                        <ItemsControl.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Padding="1">
+																	<Viewbox Width="20" VerticalAlignment="Center">
+																		<kcvc:SlotItemIcon Type="{Binding UpgradeIconType}" />
+																	</Viewbox>
+																	<Run Text="{Binding Upgrade}" BaselineAlignment="Center"/>
+                                                                    <TextBlock.ToolTip>
+                                                                        <TextBlock Text="{Binding ShipName, StringFormat='필요 칸무스: {0}', TargetNullValue='필요 칸무스: 없음'}"/>
+                                                                    </TextBlock.ToolTip>
+																</TextBlock>
+                                                            </DataTemplate>
+                                                        </ItemsControl.ItemTemplate>
+                                                    </ItemsControl>
+                                                </StackPanel>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DockPanel>
+                        </Border>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <GroupBox>
+                            <Border Background="{DynamicResource BorderBrushKey}"
+								Padding="8,6">
+                                <TextBlock Text="장비소모수" HorizontalAlignment="Center"/>
+                            </Border>
+                        </GroupBox>
+                        <Border BorderBrush="{DynamicResource BorderBrushKey}" BorderThickness="1">
+                            <ListView ItemsSource="{Binding UseItemList}"
+									  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}"
+									  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+									  ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                <ListView.Resources>
+                                    <Style TargetType="{x:Type TextBlock}"
+							   BasedOn="{StaticResource DefaultTextStyleKey}">
+                                        <Setter Property="Margin"
+									Value="5,4" />
+                                    </Style>
+                                    <Style TargetType="{x:Type GridViewColumnHeader}">
+                                        <Setter Property="OverridesDefaultStyle"
+									Value="True" />
+                                        <Setter Property="BorderThickness"
+									Value="0,0,0,1" />
+                                        <Setter Property="BorderBrush"
+									Value="{DynamicResource BorderBrushKey}" />
+                                        <Setter Property="Background"
+									Value="{DynamicResource BackgroundBrushKey}" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                                                    <Grid>
+                                                        <Border BorderThickness="{TemplateBinding BorderThickness}"
+													BorderBrush="{TemplateBinding BorderBrush}"
+													Background="{TemplateBinding Background}">
+                                                            <ContentPresenter Margin="{TemplateBinding Padding}" />
+                                                        </Border>
+                                                        <Thumb x:Name="PART_HeaderGripper"
+												   HorizontalAlignment="Right"
+												   BorderBrush="{TemplateBinding BorderBrush}"
+												   Margin="0,0,-6,0">
+                                                            <Thumb.Template>
+                                                                <ControlTemplate TargetType="{x:Type Thumb}">
+                                                                    <Border Background="Transparent"
+																Width="13">
+                                                                        <Rectangle Width="1"
+																	   Stroke="{TemplateBinding BorderBrush}" />
+                                                                    </Border>
+                                                                </ControlTemplate>
+                                                            </Thumb.Template>
+                                                        </Thumb>
+                                                    </Grid>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ListView.Resources>
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn>
+                                            <GridViewColumn.Header>
+                                                <TextBlock Text="장비명" />
+                                            </GridViewColumn.Header>
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate DataType="{x:Type CviewModels:SlotItemCounter}">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Border Padding="0,1,5,1">
+                                                            <Viewbox Width="20">
+                                                                <kcvc:SlotItemIcon Type="{Binding IconType}" />
+                                                            </Viewbox>
+                                                        </Border>
+                                                        <TextBlock Text="{Binding ItemName}"
+													   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+													   Margin="0,4" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn>
+                                            <GridViewColumn.Header>
+                                                <TextBlock Text="초기/★6/★10" />
+                                            </GridViewColumn.Header>
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate DataType="{x:Type CviewModels:SlotItemCounter}">
+                                                    <TextBlock Text="{Binding UseEquip}"
+															   HorizontalAlignment="Center"
+													   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+													   Margin="0,4" />
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</metro:MetroWindow>

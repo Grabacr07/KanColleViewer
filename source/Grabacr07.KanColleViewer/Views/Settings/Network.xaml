@@ -1,0 +1,180 @@
+﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Settings.Network"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+			 xmlns:metro2="http://schemes.grabacr.net/winfx/2015/personal/controls"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 xmlns:ms="clr-namespace:Grabacr07.KanColleViewer.Models.Settings"
+			 xmlns:vms="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Settings"
+			 mc:Ignorable="d"
+			 d:DesignWidth="500"
+			 d:DesignHeight="400"
+			 d:DataContext="{d:DesignInstance vms:NetworkSettingsViewModel}">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="Common.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+
+	<StackPanel>
+		<TextBlock Text="{Binding Resources.Settings_Proxy, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+		
+		<RadioButton x:Name="CheckDirectAccess"
+					 GroupName="ProxySettings"
+					 Content="프록시 서버를 사용하지않음"
+					 IsChecked="{Binding ProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=DirectAccess}"
+					 Margin="20,10,0,0" />
+
+		<TextBlock Style="{DynamicResource DetailTextStyleKey}"
+				   IsEnabled="{Binding ProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=DirectAccess}"
+				   Margin="40,4,0,0">
+			<Run Text="모든 프로토콜에서 프록시 서버를 중계하지않고 직접 서버와 통신합니다." />
+		</TextBlock>
+
+		<RadioButton x:Name="CheckUseSystemProxy"
+					 GroupName="ProxySettings"
+					 Content="Internet Explorer의 프록시 설정을 사용"
+					 IsChecked="{Binding ProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SystemProxy}"
+					 Margin="20,10,0,0" />
+
+		<TextBlock Style="{DynamicResource DetailTextStyleKey}"
+				   IsEnabled="{Binding ProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SystemProxy}"
+				   Margin="40,4,0,0">
+			<Run Text="「인터넷 옵션」의 설정을 사용하여 통신을 실시합니다." />
+			<LineBreak/>
+			<Run Text="HTTP프로토콜의 통신은 [인터넷 옵션]의 설정이 실시간으로 반영됩니다. 단 HTTP프로토콜 이외의 통신은 어플리케이션 기동시 혹은 [적용]했을때의 설정이 사용됩니다." />
+		</TextBlock>
+
+		<RadioButton x:Name="CheckUseSpecificProxy"
+					 GroupName="ProxySettings"
+					 Content="프록시 서버를 지정"
+					 IsChecked="{Binding ProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SpecificProxy}"
+					 Margin="20,10,0,0" />
+		<StackPanel IsEnabled="{Binding ProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SpecificProxy}"
+					Margin="40,0,0,6">
+
+			<TextBlock Style="{DynamicResource DetailTextStyleKey}"
+					   Margin="0,4">
+				<Run Text="모든 프로토콜을 지정한 프록시 서버를 중계하여 통신합니다." />
+				<LineBreak/>
+				<Run Text="서버를 호스트 이름으로 지정한 경우 동작이 느려질 수 있으니 IP주소로 지정을 권장합니다." />
+			</TextBlock>
+			<Grid Margin="0,4">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="15" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+
+				<TextBlock Grid.Column="0">
+					<Run Text="{Binding Resources.Settings_Proxy_Host, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+					<Run Text=": " />
+				</TextBlock>
+				<metro:PromptTextBox Grid.Column="1"
+									 Text="{Binding SpecificProxyHost, Mode=TwoWay}"
+									 Prompt="{Binding Resources.Settings_Proxy_Host, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+				<TextBlock Grid.Column="3">
+					<Run Text="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+					<Run Text=": " />
+				</TextBlock>
+				<metro:PromptTextBox Grid.Column="4"
+									 Prompt="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+									 Width="80">
+					<metro:PromptTextBox.Text>
+						<Binding Path="SpecificProxyPort"
+								 UpdateSourceTrigger="PropertyChanged">
+							<Binding.ValidationRules>
+								<metro:Int32Rule Min="1"
+												 Max="65535" />
+							</Binding.ValidationRules>
+						</Binding>
+					</metro:PromptTextBox.Text>
+				</metro:PromptTextBox>
+			</Grid>
+		</StackPanel>
+
+		<StackPanel Orientation="Horizontal"
+					HorizontalAlignment="Right"
+					Margin="0,4">
+			<metro2:CallMethodButton MethodTarget="{Binding}"
+									 MethodName="Apply"
+									 Content="적용"
+									 MinWidth="110"
+									 Padding="16,6"
+									 Margin="4,2" />
+			<metro2:CallMethodButton MethodTarget="{Binding}"
+									 MethodName="Cancel"
+									 Content="취소"
+									 MinWidth="110"
+									 Padding="16,6"
+									 Margin="4,2,0,4" />
+		</StackPanel>
+
+		<Rectangle Height="1"
+				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+
+		<TextBlock Text="로컬 대기 포트 설정"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
+				   Margin="0,10,0,8" />
+
+		<TextBlock Text="※반영하려면 어플리케이션의 재기동이 필요합니다."
+				   Style="{DynamicResource DetailTextStyleKey}"
+				   Margin="20,0,0,0" />
+		<CheckBox Content="대기 포트를 변경"
+				  IsChecked="{Binding Source={x:Static ms:NetworkSettings+LocalProxy.IsEnabled}, Path=Value}"
+				  Margin="20,10,0,0" />
+		<StackPanel IsEnabled="{Binding Source={x:Static ms:NetworkSettings+LocalProxy.IsEnabled}, Path=Value}"
+					Margin="40,6,0,6">
+			<Grid Margin="0,4">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+
+				<TextBlock Grid.Column="0">
+					<Run Text="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+					<Run Text=": " />
+				</TextBlock>
+				<metro:PromptTextBox Grid.Column="1"
+									 Prompt="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+									 Width="80">
+					<metro:PromptTextBox.Text>
+						<Binding Source="{x:Static ms:NetworkSettings+LocalProxy.Port}"
+								 Path="Value"
+								 UpdateSourceTrigger="PropertyChanged">
+							<Binding.ValidationRules>
+								<metro:Int32Rule Min="1"
+												 Max="65535" />
+							</Binding.ValidationRules>
+						</Binding>
+					</metro:PromptTextBox.Text>
+				</metro:PromptTextBox>
+
+				<TextBlock Grid.Column="2"
+						   Style="{DynamicResource DetailTextStyleKey}"
+						   Margin="5">
+					<Run Text="(기본값:" />
+					<Run Text="{Binding Source={x:Static ms:NetworkSettings+LocalProxy.Port}, Path=Default, Mode=OneWay}" />
+					<Run Text=")" />
+				</TextBlock>
+			</Grid>
+		</StackPanel>
+
+
+		<Rectangle Height="1"
+				   Style="{DynamicResource SeparatorRectangleStyleKey}"
+				   Margin="0,0,0,10" />
+
+	</StackPanel>
+</UserControl>
