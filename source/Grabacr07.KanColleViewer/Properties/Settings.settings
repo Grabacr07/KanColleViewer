@@ -25,5 +25,8 @@
     z-index:1
 }</Value>
     </Setting>
+    <Setting Name="KcvApiUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://kcvapi.koumakan.jp/version/</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

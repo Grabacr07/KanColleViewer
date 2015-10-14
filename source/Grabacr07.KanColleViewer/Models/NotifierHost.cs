@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
+using Grabacr07.KanColleWrapper.Models.Updater;
 using Livet;
 using MetroTrilithon.Lifetime;
 using MetroTrilithon.Mvvm;
@@ -88,9 +91,33 @@ namespace Grabacr07.KanColleViewer.Models
 				.Subscribe(nameof(Organization.Fleets), () => this.UpdateFleets(client.Homeport.Organization))
 				.AddTo(this);
 
+			client.Updater.UpdateAvailable += this.HandleUpdateAvailable;
+			client.Updater.SendUpdateNotificationIfNeeded();
+
 			this.isRegistered = true;
 		}
 
+		#endregion
+
+		#region Updater
+
+		private void HandleUpdateAvailable(object sender, UpdateAvailableEventArgs args)
+		{
+			if (System.Windows.Application.Current.Dispatcher.CheckAccess())
+			{
+				var notification = Notification.Create(
+					Notification.Types.UpdateAvailable,
+					Resources.Updater_Notification_Title,
+					string.Format(Resources.Updater_Notification_NewAppVersion, args.Version),
+					() => Process.Start(KanColleClient.Current.Updater.GetDownloadUrl()));
+
+				this.Notify(notification);
+			}
+			else
+			{
+				System.Windows.Application.Current.Dispatcher.BeginInvoke(new System.Action(() => this.HandleUpdateAvailable(sender, args)), DispatcherPriority.Normal);
+			}
+		}
 		#endregion
 
 		#region Dockyard

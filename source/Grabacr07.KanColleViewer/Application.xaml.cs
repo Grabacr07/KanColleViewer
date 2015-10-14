@@ -83,9 +83,14 @@ namespace Grabacr07.KanColleViewer
 				SettingsHost.Load();
 				this.compositeDisposable.Add(SettingsHost.Save);
 
-				GeneralSettings.Culture.Subscribe(x => ResourceService.Current.ChangeCulture(x)).AddTo(this);
-				GeneralSettings.Culture.Subscribe(x => KanColleClient.Current.Translations.ChangeCulture(x)).AddTo(this);
+				KanColleClient.Current.ApiUrl = KanColleViewer.Properties.Settings.Default.KcvApiUrl;
 				KanColleClient.Current.Settings = new KanColleSettings();
+				GeneralSettings.Culture.Subscribe(x => ResourceService.Current.ChangeCulture(x)).AddTo(this);
+
+				GeneralSettings.Culture.Subscribe(x => KanColleClient.Current.Translations.ChangeCulture(x)).AddTo(this);
+				GeneralSettings.Culture.Subscribe(x => KanColleClient.Current.Updater.ChangeCulture(x)).AddTo(this);
+				KanColleSettings.EnableUpdates.Subscribe(x => KanColleClient.Current.Updater.ToggleUpdates(x)).AddTo(this);
+				KanColleSettings.EnableTranslations.Subscribe(x => { KanColleClient.Current.Translations.EnableTranslations = x; });
 
 				ThemeService.Current.Initialize(this, Theme.Dark, Accent.Purple);
 				WindowService.Current.AddTo(this).Initialize();

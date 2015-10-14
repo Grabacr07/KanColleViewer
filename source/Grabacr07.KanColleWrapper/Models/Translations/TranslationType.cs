@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Grabacr07.KanColleWrapper.Models
+namespace Grabacr07.KanColleWrapper.Models.Translations
 {
 	/// <summary>
 	/// Supported resource types. Also included: a pseudo-type for application versioning.

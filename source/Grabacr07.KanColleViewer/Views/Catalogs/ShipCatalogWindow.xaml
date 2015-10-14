@@ -399,7 +399,8 @@
 							</StackPanel>
 						</WrapPanel>
 					</Border>
-
+					
+					<!--
 					<Border BorderThickness="1"
 							BorderBrush="{DynamicResource BorderBrushKey}"
 							Margin="0,8,0,0"
@@ -427,6 +428,8 @@
 									  Margin="10,0" />
 						</WrapPanel>
 					</Border>
+					-->
+					
 				</StackPanel>
 			</Expander>
 
@@ -782,7 +785,8 @@
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
-
+							
+							<!--
 							<GridViewColumn Width="65">
 								<GridViewColumn.Header>
 									<TextBlock Text="{Binding Resources.ShipCatalog_SortieWaters, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
@@ -837,6 +841,7 @@
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
+							-->
 
 							<GridViewColumn Width="140">
 								<GridViewColumn.Header>

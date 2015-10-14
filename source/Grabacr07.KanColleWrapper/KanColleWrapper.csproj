@@ -68,6 +68,10 @@
       <HintPath>..\packages\Nekoxy.1.5.0.18\lib\net45\Nekoxy.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="StatefulModel, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -148,7 +152,19 @@
     <Compile Include="Models\ShipSlot.cs" />
     <Compile Include="Models\SlotItemEquipType.cs" />
     <Compile Include="Models\SlotItemType.cs" />
-    <Compile Include="Models\TranslationType.cs" />
+    <Compile Include="Models\Translations\BaseTranslationSet.cs" />
+    <Compile Include="Models\Translations\EquipmentTranslationSet.cs" />
+    <Compile Include="Models\Translations\ProcessUnknownEventArgs.cs" />
+    <Compile Include="Models\Translations\QuestTranslationSet.cs" />
+    <Compile Include="Models\Translations\ShipTranslationSet.cs" />
+    <Compile Include="Models\Translations\ShipTypeTranslationSet.cs" />
+    <Compile Include="Models\Translations\SimpleIdTranslationItem.cs" />
+    <Compile Include="Models\Translations\SimpleStringTranslationItem.cs" />
+    <Compile Include="Models\Translations\TranslationProviderType.cs" />
+    <Compile Include="Models\Translations\TranslationType.cs" />
+    <Compile Include="Models\Updater\kcvapi_ships.cs" />
+    <Compile Include="Models\Updater\kcvapi_version.cs" />
+    <Compile Include="Models\Updater\UpdateAvailableEventArgs.cs" />
     <Compile Include="Models\ViewRange.cs" />
     <Compile Include="Notifier.cs" />
     <Compile Include="Organization.cs" />
@@ -233,8 +249,12 @@
     <Compile Include="Repairyard.cs" />
     <Compile Include="IKanColleClientSettings.cs" />
     <Compile Include="TimerNotifier.cs" />
+    <Compile Include="TranslationDataProvider.cs" />
     <Compile Include="Translations.cs" />
     <Compile Include="Updater.cs" />
+    <Compile Include="ViewerWebClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

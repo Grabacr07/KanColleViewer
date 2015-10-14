@@ -75,6 +75,14 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		public static SerializableProperty<string> DisplayMaterial2 { get; }
 			= new SerializableProperty<string>(GetKey(), Providers.Roaming, nameof(Materials.InstantBuildMaterials));
 
+		public static SerializableProperty<bool> EnableTranslations { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
+
+		public static SerializableProperty<bool> EnableUpdates { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
+
+		public static SerializableProperty<bool> EnableAutosubmission { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
 
 		#region instance members
 
@@ -85,6 +93,7 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 			NotificationShorteningTime.Subscribe(_ => this.RaisePropertyChanged(nameof(NotificationShorteningTime)));
 			ReSortieCondition.Subscribe(_ => this.RaisePropertyChanged(nameof(ReSortieCondition)));
 			ViewRangeCalcType.Subscribe(_ => this.RaisePropertyChanged(nameof(ViewRangeCalcType)));
+			GeneralSettings.Culture.Subscribe(_ => this.RaisePropertyChanged(GeneralSettings.Culture));
 		}
 
 		protected void RaisePropertyChanged([CallerMemberName] string propertyName = null)
@@ -101,6 +110,14 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		int IKanColleClientSettings.ReSortieCondition => ReSortieCondition.Value;
 
 		string IKanColleClientSettings.ViewRangeCalcType => ViewRangeCalcType.Value;
+
+		string IKanColleClientSettings.Culture => GeneralSettings.Culture.Value;
+
+		bool IKanColleClientSettings.EnableTranslations => EnableTranslations.Value;
+
+		bool IKanColleClientSettings.EnableUpdates => EnableUpdates.Value;
+
+		bool IKanColleClientSettings.EnableAutosubmission => EnableAutosubmission.Value;
 
 		#endregion
 

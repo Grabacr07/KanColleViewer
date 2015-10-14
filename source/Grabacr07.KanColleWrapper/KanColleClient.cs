@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
+using System.Threading;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models;
@@ -18,7 +20,20 @@ namespace Grabacr07.KanColleWrapper
 
 		#endregion
 
-		public IKanColleClientSettings Settings { get; set; }
+		private IKanColleClientSettings settings;
+
+		public IKanColleClientSettings Settings
+		{
+			get
+			{
+				return settings;
+			}
+			set
+			{
+				settings = value;
+				if (value != null) this.OnSettingsChanged?.Invoke(this, value);
+			}
+		}
 
 		/// <summary>
 		/// 艦これの通信をフックするプロキシを取得します。
@@ -38,6 +53,8 @@ namespace Grabacr07.KanColleWrapper
 		public Translations Translations { get; private set; }
 
 		public Updater Updater { get; private set; }
+
+		public string ApiUrl { get; set; }
 
 		#region IsStarted 変更通知プロパティ
 
@@ -83,9 +100,11 @@ namespace Grabacr07.KanColleWrapper
 
 		#endregion
 
+		public event EventHandler<IKanColleClientSettings> OnSettingsChanged;
 
 		private KanColleClient()
 		{
+			this.OnSettingsChanged += this.DeferredInit;
 			this.Initialieze();
 
 			var start = this.Proxy.api_req_map_start;
@@ -106,9 +125,6 @@ namespace Grabacr07.KanColleWrapper
 			var basic = proxy.api_get_member_basic.TryParse<kcsapi_basic>().FirstAsync().ToTask();
 			var kdock = proxy.api_get_member_kdock.TryParse<kcsapi_kdock[]>().FirstAsync().ToTask();
 			var sitem = proxy.api_get_member_slot_item.TryParse<kcsapi_slotitem[]>().FirstAsync().ToTask();
-
-			this.Translations = new Translations();
-			this.Updater = new Updater();
 
 			proxy.api_start2.FirstAsync().Subscribe(async session =>
 			{
@@ -135,6 +151,12 @@ namespace Grabacr07.KanColleWrapper
 
 				this.IsStarted = true;
 			});
+		}
+
+		public void DeferredInit(object sender, IKanColleClientSettings value)
+		{
+			this.Translations = new Translations(value.Culture);
+			this.Updater = new Updater(ApiUrl, value.Culture);
 		}
 	}
 }

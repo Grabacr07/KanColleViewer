@@ -19,6 +19,10 @@ namespace Grabacr07.KanColleViewer.Models.Migration
 		public int NotificationShorteningTime { get; set; }
 		public int ReSortieCondition { get; set; }
 		public string ViewRangeCalcType { get; set; }
+		public string Culture { get; set; }
+		public bool EnableTranslations { get; set; }
+		public bool EnableUpdates { get; set; }
+		public bool EnableAutosubmission { get; set; }
 
 		event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
 		{

@@ -1,9 +1,11 @@
-﻿using System;
+﻿// #define KCV_TRANSLATIONS_LEGACY // Define to use old-style XML files. Warning: the XML format used in 4.x is incompatible with 3.x.
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI;
@@ -11,12 +13,14 @@ using System.Xml;
 using System.Xml.Linq;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
+using Grabacr07.KanColleWrapper.Models.Translations;
 using Livet;
 
 namespace Grabacr07.KanColleWrapper
 {
 	public class Translations : NotificationObject
 	{
+#if KCV_TRANSLATIONS_LEGACY
 		/// <summary>
 		/// Provides documents and storage information for different resource sets.
 		/// </summary>
@@ -52,20 +56,41 @@ namespace Grabacr07.KanColleWrapper
 		};
 
 		/// <summary>
-		/// Culture selected for translations.
-		/// </summary>
-		private static string CurrentCulture;
-
-		/// <summary>
 		/// Path to translation files.
 		/// Default is Translations in the current directory.
 		/// </summary>
 		private static string TranslationsPath = "Translations";
+#endif
+		/// <summary>
+		/// Culture selected for translations.
+		/// </summary>
+		private static string CurrentCulture;
+
+		private bool enableTranslations;
 
 		/// <summary>
 		/// Settings, Enable translations: allows the display of translated resources.
 		/// </summary>
-		public bool EnableTranslations { get; private set; }
+		public bool EnableTranslations
+		{
+			get
+			{
+				if (this.enableTranslations != (KanColleClient.Current?.Settings?.EnableTranslations ?? false))
+				{
+					this.enableTranslations = KanColleClient.Current?.Settings?.EnableTranslations ?? false;
+					this.RaisePropertyChanged();
+				}
+				return this.enableTranslations;
+			}
+			set
+			{
+				if (this.enableTranslations != value)
+				{
+					this.enableTranslations = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
 
 		internal Translations() : this("en") { }
 		/// <summary>
@@ -74,11 +99,11 @@ namespace Grabacr07.KanColleWrapper
 		/// <param name="culture">The culture to use for translations. Defaults to "en-US".</param>
 		internal Translations(string culture)
 		{
-			Debug.WriteLine(this.GetType().Name + ": Constructor initialising with <" + culture + ">.");
-			this.EnableTranslations = true;
+			Debug.WriteLine(this.GetType().Name + ": constructor initialising with <" + culture + ">.");
 			this.ChangeCulture(culture);
 		}
 
+#if KCV_TRANSLATIONS_LEGACY
 		/// <summary>
 		/// Reloads translations for a given resource type.
 		/// </summary>
@@ -95,8 +120,11 @@ namespace Grabacr07.KanColleWrapper
 				TranslationData[type].Document = null;
 				TranslationData[type].Table.Clear();
 				if (File.Exists(TranslationData[type].FilePath)) TranslationData[type].Document = XDocument.Load(TranslationData[type].FilePath);
+
 				if ((TranslationData[type].Table != null) && (TranslationData[type].Document != null))
+				{
 					TranslationData[type].Table.Load(TranslationData[type].Document);
+				}
 			}
 			catch (Exception ex)
 			{
@@ -112,6 +140,7 @@ namespace Grabacr07.KanColleWrapper
 		{
 			foreach (var type in types) this.ReloadTranslations(type);
 		}
+#endif
 
 		/// <summary>
 		/// Changes culture and loads or re-loads translation files.
@@ -119,13 +148,15 @@ namespace Grabacr07.KanColleWrapper
 		/// <param name="culture">The culture to use for translations.</param>
 		public void ChangeCulture(string culture)
 		{
-			Debug.WriteLine("Got <" + culture + "> in a culture change request.");
-
 			if ((culture == null) || (culture == CurrentCulture))
 				return;
 
-			CurrentCulture = culture;
+			Debug.WriteLine(this.GetType().Name + ": got <" + culture + "> in a culture change request.");
 
+			CurrentCulture = culture;
+			TranslationDataProvider.LoadLocalTranslations(culture);
+
+#if KCV_TRANSLATIONS_LEGACY
 			if (!EnableTranslations || CurrentCulture.StartsWith("ja"))
 			{
 				foreach (var translationData in TranslationData) translationData.Value.Document = null;
@@ -134,6 +165,7 @@ namespace Grabacr07.KanColleWrapper
 			}
 
 			this.ReloadTranslations(TranslationType.Equipment, TranslationType.QuestTitle, TranslationType.QuestDetail, TranslationType.Ships, TranslationType.ShipTypes /*, TranslationType.Operations, TranslationType.Expeditions*/);
+#endif
 			this.RaisePropertyChanged();
 		}
 
@@ -147,10 +179,13 @@ namespace Grabacr07.KanColleWrapper
 		{
 			if (!EnableTranslations || CurrentCulture.StartsWith("ja"))
 			{
-				Debug.WriteLine("Lookup called for {0} but translations are disabled or culture is Japanese.", type);
+				Debug.WriteLine(this.GetType().Name + ": lookup called for {0} but translations are disabled or culture is Japanese.", type);
 				return null;
 			}
 
+#if !KCV_TRANSLATIONS_LEGACY
+			return TranslationDataProvider.Lookup(type, CurrentCulture, rawData);
+#else
 			string lookupData;
 
 			// Determine look-up fields and queries
@@ -182,8 +217,10 @@ namespace Grabacr07.KanColleWrapper
 			}
 
 			return TranslationData[type].Table.Lookup(lookupData);
+#endif
 		}
 
+#if KCV_TRANSLATIONS_LEGACY
 		/// <summary>
 		/// Provides support for resource versioning.
 		/// </summary>
@@ -247,13 +284,6 @@ namespace Grabacr07.KanColleWrapper
 				tableDictionary?.Clear();
 			}
 		}
-	}
-
-	static class TranslationsExtensions
-	{
-		public static bool In<T>(this T item, params T[] list)
-		{
-			return list.Contains(item);
-		}
+#endif
 	}
 }

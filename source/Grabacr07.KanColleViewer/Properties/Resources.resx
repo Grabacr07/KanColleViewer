@@ -1334,4 +1334,7 @@ HTTP プロトコルの通信は自動構成も含め「インターネット �
   <data name="FleetWindow_Status" xml:space="preserve">
     <value>ステータス</value>
   </data>
+  <data name="Settings_Updates_Check_Enable" xml:space="preserve">
+    <value>Check for updates automatically</value>
+  </data>
 </root>

@@ -770,10 +770,10 @@ GPU: Slow! GPU optimization for tablets.</value>
     <value>Translations</value>
   </data>
   <data name="Settings_Translations_Add_Enable" xml:space="preserve">
-    <value>Append untranslated items to the translation files?</value>
+    <value>Append untranslated items to the translation files</value>
   </data>
   <data name="Settings_Translations_Enable" xml:space="preserve">
-    <value>Translate game items, ships, and quests to selected language?</value>
+    <value>Translate game items, ships, and quests to selected language</value>
   </data>
   <data name="Settings_Translations_Submit_Enable" xml:space="preserve">
     <value>Automatically submit untranslated data</value>
@@ -1329,5 +1329,8 @@ HTTP proxy settings are applied immediately. Settings for all other protocols ar
   </data>
   <data name="FleetWindow_Status" xml:space="preserve">
     <value>Status</value>
+  </data>
+  <data name="Settings_Updates_Check_Enable" xml:space="preserve">
+    <value>Check for updates automatically</value>
   </data>
 </root>

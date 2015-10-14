@@ -22,5 +22,13 @@ namespace Grabacr07.KanColleWrapper
 		/// 索敵計算に使用するロジックを識別する文字列を取得します。
 		/// </summary>
 		string ViewRangeCalcType { get; }
+
+		string Culture { get; }
+
+		bool EnableTranslations { get; }
+
+		bool EnableUpdates { get; }
+
+		bool EnableAutosubmission { get; }
 	}
 }

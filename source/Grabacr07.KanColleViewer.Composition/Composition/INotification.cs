@@ -67,6 +67,11 @@ namespace Grabacr07.KanColleViewer.Composition
 			/// 艦隊の疲労が回復したことを示す通知を識別するための文字列を取得します。
 			/// </summary>
 			public static string FleetRejuvenated { get; } = nameof(FleetRejuvenated);
+
+			/// <summary>
+			/// An update is available.
+			/// </summary>
+			public static string UpdateAvailable { get; } = nameof(UpdateAvailable);
 		}
 
 		public static INotification Create(string type, string header, string body, Action activated = null, Action<Exception> failed = null)

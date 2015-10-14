@@ -2240,6 +2240,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Check for updates automatically.
+        /// </summary>
+        public static string Settings_Updates_Check_Enable {
+            get {
+                return ResourceManager.GetString("Settings_Updates_Check_Enable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check for the latest program and translation versions.
         /// </summary>
         public static string Settings_Updates_CheckUpdateButn_ToolTip {
