@@ -16,8 +16,7 @@ using Grabacr07.KanColleWrapper;
 using Livet;
 using MetroRadiance;
 using MetroTrilithon.Lifetime;
-using TrSettings = Grabacr07.KanColleViewer.Models.Settings.TranslatorSettings;
-using UpSettings = Grabacr07.KanColleViewer.Models.Settings.UpdaterSettings;
+using KanColleSettings = Grabacr07.KanColleViewer.Models.Settings.KanColleSettings;
 using AppSettings = Grabacr07.KanColleViewer.Properties.Settings;
 
 namespace Grabacr07.KanColleViewer
@@ -99,12 +98,12 @@ namespace Grabacr07.KanColleViewer
 				Helper.SetRegistryFeatureBrowserEmulation();
 				Helper.SetMMCSSTask();
 
-				KanColleClient.Current.Translations.EnableTranslations = TrSettings.EnableTranslations;
-				KanColleClient.Current.Translations.EnableAddUntranslated = TrSettings.EnableAddUntranslated;
+				KanColleClient.Current.Translations.EnableTranslations = KanColleSettings.EnableTranslations;
+				KanColleClient.Current.Translations.EnableAddUntranslated = KanColleSettings.EnableAddUntranslated;
 				// Update notification and download new translations (if enabled)
 				if (KanColleClient.Current.Updater.LoadVersion(AppSettings.Default.KCVUpdateUrl.AbsoluteUri))
 				{
-					if (UpSettings.EnableUpdateNotification && KanColleClient.Current.Updater.IsOnlineVersionGreater(0, ProductInfo.Version.ToString()))
+					if (KanColleSettings.EnableUpdateNotification && KanColleClient.Current.Updater.IsOnlineVersionGreater(0, ProductInfo.Version.ToString()))
 					{
 						if (File.Exists(Path.Combine(MainFolder, "AutoUpdater.exe")))
 						{
@@ -127,7 +126,7 @@ namespace Grabacr07.KanColleViewer
 						}
 					}
 
-					if (UpSettings.EnableUpdateTransOnStart)
+					if (KanColleSettings.EnableUpdateTransOnStart)
 					{
 						if (KanColleClient.Current.Updater.UpdateTranslations(AppSettings.Default.XMLTransUrl.AbsoluteUri, KanColleClient.Current.Translations) > 0)
 						{

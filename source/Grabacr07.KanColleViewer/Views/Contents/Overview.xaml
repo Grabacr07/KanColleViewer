@@ -310,6 +310,9 @@
 													<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
 														 Style="{DynamicResource EmphaticTextElementStyleKey}"
 														 FontSize="14"/>
+															<Run Text="{Binding Ship.Info.JPName, Mode=OneWay}"
+																 Style="{DynamicResource EmphaticTextElementStyleKey}"
+																 FontSize="13"/>
 													<LineBreak />
 													<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
 														 FontSize="11" />

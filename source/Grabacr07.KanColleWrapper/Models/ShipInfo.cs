@@ -28,6 +28,11 @@ namespace Grabacr07.KanColleWrapper.Models
 		public string Name => KanColleClient.Current.Translations.GetTranslation(RawData.api_name, TranslationType.Ships, false, this.RawData);
 
 		/// <summary>
+		/// 艦の名称を取得します。
+		/// </summary>
+		public string JPName => RawData.api_name;
+
+		/// <summary>
 		/// 艦種を取得します。
 		/// </summary>
 		public ShipType ShipType => this.shipType ?? (this.shipType = KanColleClient.Current.Master.ShipTypes[this.RawData.api_stype]) ?? ShipType.Dummy;

@@ -33,13 +33,15 @@
 				   TextOptions.TextFormattingMode="Display"
 				   UseLayoutRounding="True">
 
-	<i:Interaction.Behaviors>
-		<livet:WindowCloseCancelBehavior CloseCanceledCallbackMethodTarget="{Binding}"
+    <i:Interaction.Behaviors>
+        <livet:WindowCloseCancelBehavior CloseCanceledCallbackMethodTarget="{Binding}"
 										 CloseCanceledCallbackMethodName="CloseCanceledCallback"
 										 CanClose="{Binding CanClose}" />
-	</i:Interaction.Behaviors>
-
-	<i:Interaction.Triggers>
+    </i:Interaction.Behaviors>
+    <Window.InputBindings>
+        <KeyBinding Key="F5" Command="{Binding RefreshNavigator}" />
+    </Window.InputBindings>
+    <i:Interaction.Triggers>
 		<i:EventTrigger EventName="ContentRendered">
 			<livet:LivetCallMethodAction MethodTarget="{Binding}"
 										 MethodName="Initialize" />

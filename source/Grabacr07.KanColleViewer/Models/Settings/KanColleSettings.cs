@@ -28,6 +28,30 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
 
 		/// <summary>
+		/// 업데이트 알림을 활성화합니다
+		/// </summary>
+		public static SerializableProperty<bool> EnableUpdateNotification { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static SerializableProperty<bool> EnableUpdateTransOnStart { get; }
+			= new SerializableProperty<bool>(GetKey(), true);
+
+		/// <summary>
+		/// 번역을 활성화합니다
+		/// </summary>
+		public static SerializableProperty<bool> EnableTranslations { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
+
+		/// <summary>
+		/// 번역이 되지 않은 텍스트가 있는 경우 해당 데이터를 xml에 추가 입력합니다
+		/// </summary>
+		public static SerializableProperty<bool> EnableAddUntranslated { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
+
+		/// <summary>
 		/// 索敵計算に使用するロジックを識別する文字列の設定値を取得します。
 		/// </summary>
 		public static SerializableProperty<string> ViewRangeCalcType { get; }

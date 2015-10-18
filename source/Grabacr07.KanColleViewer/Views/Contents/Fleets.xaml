@@ -263,6 +263,8 @@
  												<Run Text="{Binding Ship.Info.Name, Mode=OneWay}" 
 													 Style="{DynamicResource EmphaticTextElementStyleKey}" 
  													 FontSize="22"/>
+												<Run Text="{Binding Ship.Info.JPName,Mode=OneWay}"
+													 FontSize="15"/>
                                             </TextBlock>
                                         </TextBlock.ToolTip> 
 									</TextBlock>

@@ -14,6 +14,7 @@ using Grabacr07.KanColleViewer.Views.Controls;
 using Livet.Messaging;
 using MetroTrilithon.Controls;
 using MetroTrilithon.Mvvm;
+using System.Windows.Input;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {
@@ -110,6 +111,15 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region RefreshNavigator
+
+		private ICommand _RefreshNavigator;
+		public ICommand RefreshNavigator
+		{
+			get { return _RefreshNavigator; }
+		}
+
+		#endregion
 
 		public KanColleWindowViewModel(bool isMainWindow) : base(isMainWindow)
 		{
@@ -127,6 +137,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				.AddTo(this);
 
 			GeneralSettings.BrowserZoomFactor.Subscribe(x => this.ZoomFactor.Current = x).AddTo(this);
+
+			_RefreshNavigator = new RelayCommand(Navigator.ReNavigate);
 		}
 
 

@@ -7,6 +7,7 @@ using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using Nekoxy;
 using StatefulModel;
+using System.Reactive.Disposables;
 
 namespace Grabacr07.KanColleWrapper
 {

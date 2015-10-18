@@ -645,9 +645,17 @@
                                 </GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<TextBlock Text="{Binding Ship.Info.Name, Mode=OneWay}"
+                                        <TextBlock Text="{Binding Ship.Info.Name, Mode=OneWay}"
 												   Foreground="{DynamicResource ActiveForegroundBrushKey}"
-												   Margin="0,3" />
+												   Margin="0,3">
+                                            <TextBlock.ToolTip>
+                                                <TextBlock>
+																<Run Text="{Binding Ship.Info.JPName, Mode=OneWay}"
+																	 Style="{DynamicResource EmphaticTextElementStyleKey}"
+																	 FontSize="15"/>
+                                                </TextBlock>
+                                            </TextBlock.ToolTip>
+										</TextBlock>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
