@@ -133,6 +133,7 @@ namespace Grabacr07.KanColleWrapper
 			proxy.api_req_hensei_change.TryParse().Subscribe(this.Change);
 			proxy.api_req_hokyu_charge.TryParse<kcsapi_charge>().Subscribe(x => this.Charge(x.Data));
 			proxy.api_req_kaisou_powerup.TryParse<kcsapi_powerup>().Subscribe(this.Powerup);
+			proxy.api_req_kaisou_slot_exchange_index.TryParse<kcsapi_slot_exchange_index>().Subscribe(this.ExchangeSlot);
 			proxy.api_req_kousyou_getship.TryParse<kcsapi_kdock_getship>().Subscribe(x => this.GetShip(x.Data));
 			proxy.api_req_kousyou_destroyship.TryParse<kcsapi_destroyship>().Subscribe(this.DestoryShip);
 			proxy.api_req_member_updatedeckname.TryParse().Subscribe(this.UpdateFleetName);
@@ -281,6 +282,27 @@ namespace Grabacr07.KanColleWrapper
 			this.CombinedFleet = combine
 				? new CombinedFleet(this.homeport, this.Fleets.OrderBy(x => x.Key).Select(x => x.Value).Take(2).ToArray())
 				: null;
+		}
+
+		private void ExchangeSlot(SvData<kcsapi_slot_exchange_index> data)
+		{
+			try
+			{
+				var ship = this.Ships[int.Parse(data.Request["api_id"])];
+				if (ship == null) return;
+
+				ship.RawData.api_slot = data.Data.api_slot;
+				ship.UpdateSlots();
+
+				var fleet = this.Fleets.Values.FirstOrDefault(x => x.Ships.Any(y => y.Id == ship.Id));
+				if (fleet == null) return;
+				
+				fleet.State.Calculate();
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine("装備の入れ替えに失敗しました: {0}", ex);
+			}
 		}
 
 		#endregion
