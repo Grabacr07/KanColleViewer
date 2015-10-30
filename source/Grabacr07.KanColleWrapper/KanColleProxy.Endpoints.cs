@@ -143,6 +143,14 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
+		/// エンド ポイント "/kcsapi/api_req_hensei/preset_select" からのセッションを配信します。
+		/// </summary>
+		public IObservable<Session> api_req_hensei_preset_select
+		{
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_hensei/preset_select"); }
+		}
+
+		/// <summary>
 		/// エンド ポイント "/kcsapi/api_req_hokyu/charge" からのセッションを配信します。
 		/// </summary>
 		public IObservable<Session> api_req_hokyu_charge

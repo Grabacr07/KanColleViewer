@@ -128,6 +128,7 @@ namespace Grabacr07.KanColleWrapper
 			proxy.api_get_member_deck.TryParse<kcsapi_deck[]>().Subscribe(x => this.Update(x.Data));
 			proxy.api_get_member_deck_port.TryParse<kcsapi_deck[]>().Subscribe(x => this.Update(x.Data));
 			proxy.api_get_member_ship_deck.TryParse<kcsapi_ship_deck>().Subscribe(x => this.Update(x.Data));
+			proxy.api_req_hensei_preset_select.TryParse<kcsapi_deck>().Subscribe(x => this.Update(x.Data));
 
 			proxy.api_req_hensei_change.TryParse().Subscribe(this.Change);
 			proxy.api_req_hokyu_charge.TryParse<kcsapi_charge>().Subscribe(x => this.Charge(x.Data));
@@ -225,6 +226,12 @@ namespace Grabacr07.KanColleWrapper
 				foreach (var fleet in this.Fleets) fleet.Value?.Dispose();
 				this.Fleets = new MemberTable<Fleet>(source.Select(x => new Fleet(this.homeport, x)));
 			}
+		}
+
+
+		internal void Update(kcsapi_deck source)
+		{
+			this.Fleets[source.api_id]?.Update(source);
 		}
 
 
