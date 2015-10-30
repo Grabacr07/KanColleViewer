@@ -60,6 +60,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanColleViewer.PluginAnalyz
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanColleViewer.PluginAnalyzer.Test", "Analyzers\KanColleViewer.PluginAnalyzer.Test\KanColleViewer.PluginAnalyzer.Test.csproj", "{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleInfoPlugin", "..\..\BattleInfoPlugin\BattleInfoPlugin\BattleInfoPlugin.csproj", "{F8664ABC-AA36-421E-B3D7-287091224B1B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -208,6 +210,18 @@ Global
 		{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A}.Release|x86.ActiveCfg = Release|Any CPU
 		{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A}.Release|x86.Build.0 = Release|Any CPU
+		{F8664ABC-AA36-421E-B3D7-287091224B1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8664ABC-AA36-421E-B3D7-287091224B1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8664ABC-AA36-421E-B3D7-287091224B1B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F8664ABC-AA36-421E-B3D7-287091224B1B}.Debug|x86.Build.0 = Debug|Any CPU
+		{F8664ABC-AA36-421E-B3D7-287091224B1B}.Release (beta)|Any CPU.ActiveCfg = Release|Any CPU
+		{F8664ABC-AA36-421E-B3D7-287091224B1B}.Release (beta)|Any CPU.Build.0 = Release|Any CPU
+		{F8664ABC-AA36-421E-B3D7-287091224B1B}.Release (beta)|x86.ActiveCfg = Release|Any CPU
+		{F8664ABC-AA36-421E-B3D7-287091224B1B}.Release (beta)|x86.Build.0 = Release|Any CPU
+		{F8664ABC-AA36-421E-B3D7-287091224B1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8664ABC-AA36-421E-B3D7-287091224B1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8664ABC-AA36-421E-B3D7-287091224B1B}.Release|x86.ActiveCfg = Release|Any CPU
+		{F8664ABC-AA36-421E-B3D7-287091224B1B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -223,5 +237,6 @@ Global
 		{4E2EB2E0-E5FE-4FEB-A3E5-5F2F05CD1A67} = {5E122478-836E-4B7D-B0A4-F5EAA40BBE2A}
 		{B84F1251-4042-4ADC-955E-415469947538} = {0F9AEBCF-F2ED-4D4D-8E58-CAFED5D965C2}
 		{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A} = {0F9AEBCF-F2ED-4D4D-8E58-CAFED5D965C2}
+		{F8664ABC-AA36-421E-B3D7-287091224B1B} = {D844E42C-9406-43BF-9681-4F06F6CB3AD9}
 	EndGlobalSection
 EndGlobal

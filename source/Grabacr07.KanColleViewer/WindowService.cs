@@ -67,11 +67,12 @@ namespace Grabacr07.KanColleViewer
 							this.MainWindow.Content = this.Information;
 							this.MainWindow.StatusBar = this.Information.SelectedItem;
 							StatusService.Current.Set(Resources.StatusBar_Ready);
+							ThemeService.Current.ChangeTheme(Theme.Dark);
 							ThemeService.Current.ChangeAccent(Accent.Blue);
 							break;
-						case WindowServiceMode.InSortie:
-							ThemeService.Current.ChangeAccent(Accent.Orange);
-							break;
+						//case WindowServiceMode.InSortie:
+						//	ThemeService.Current.ChangeAccent(Accent.Orange);
+						//	break;
 					}
 
 					this.RaisePropertyChanged();
