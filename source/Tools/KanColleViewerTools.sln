@@ -17,11 +17,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MetroRadiance", "MetroRadia
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroRadiance.Core", "..\MetroRadiance\MetroRadiance.Core\MetroRadiance.Core.csproj", "{A6B0A741-5BE0-479D-B813-E65672350057}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroRadiance.Core", "..\MetroRadiance\source\MetroRadiance.Core\MetroRadiance.Core.csproj", "{A6B0A741-5BE0-479D-B813-E65672350057}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroRadiance.Chrome", "..\MetroRadiance\MetroRadiance.Chrome\MetroRadiance.Chrome.csproj", "{21B4AD15-D9FA-4873-BFAD-1EEEFBC6C264}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroRadiance.Chrome", "..\MetroRadiance\source\MetroRadiance.Chrome\MetroRadiance.Chrome.csproj", "{21B4AD15-D9FA-4873-BFAD-1EEEFBC6C264}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroRadiance", "..\MetroRadiance\MetroRadiance\MetroRadiance.csproj", "{0AF0B9FF-D981-4D0F-A41F-C3AB6FE2F16D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroRadiance", "..\MetroRadiance\source\MetroRadiance\MetroRadiance.csproj", "{0AF0B9FF-D981-4D0F-A41F-C3AB6FE2F16D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

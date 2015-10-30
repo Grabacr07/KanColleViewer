@@ -657,9 +657,11 @@
 									   Style="{DynamicResource EmphaticTextStyleKey}"
 									   VerticalAlignment="Bottom"
 									   Margin="4,2">
-								<Run Text="{Binding State.MinAirSuperiorityPotential, Mode=OneWay}"/><Run Text="-"/><Run Text="{Binding State.MaxAirSuperiorityPotential, Mode=OneWay}"/>
+								<Run Text="{Binding State.MinAirSuperiorityPotential, Mode=OneWay}" />
+								<Run Text="-" />
+								<Run Text="{Binding State.MaxAirSuperiorityPotential, Mode=OneWay}" />
+								<Run Text="" />
 							</TextBlock>
-
 
 							<TextBlock Grid.Row="6"
 									   Grid.Column="0"

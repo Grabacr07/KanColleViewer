@@ -12,7 +12,7 @@
 			 xmlns:vms="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Settings"
 			 mc:Ignorable="d"
 			 d:DesignWidth="500"
-			 d:DesignHeight="300"
+			 d:DesignHeight="600"
 			 d:DataContext="{d:DesignInstance vms:SettingsViewModel}">
 	<UserControl.Resources>
 		<ResourceDictionary>
@@ -121,30 +121,76 @@
 							  SelectedValue="{Binding Source={x:Static ms:GeneralSettings.Culture}, Path=Value, Mode=TwoWay}"
 							  IsReadOnly="True"
 							  MinWidth="250" />
-
-        <CheckBox Content="번역기능을 활성화합니다" 
+		
+		<CheckBox Content="번역기능을 활성화합니다" 
 				  IsChecked="{Binding Source={x:Static ms:KanColleSettings.EnableTranslations}, Path=Value}"
 				  Height="17" Margin="15,0,0,10"/>
-        <CheckBox Content="번역되지않은 데이터를 Translations 폴더에 저장합니다" 
+		<CheckBox Content="번역되지않은 데이터를 Translations 폴더에 저장합니다" 
 				  IsChecked="{Binding Source={x:Static ms:KanColleSettings.EnableAddUntranslated}, Path=Value}"
 				  Height="17" Margin="15,0,0,10"/>
 
-        <Rectangle Height="1"
+		<Rectangle Height="1"
 				   Margin="0,10"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-        <TextBlock Text="업데이트 설정" Style="{DynamicResource SettingsHeaderTextStyleKey}" />
-
-        <CheckBox Content="어플리케이션의 업데이트를 자동으로 수행하거나 알립니다" 
+		<TextBlock Text="업데이트 설정" Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+		
+		<CheckBox Content="어플리케이션의 업데이트를 자동으로 수행하거나 알립니다" 
                   IsChecked="{Binding Source={x:Static ms:KanColleSettings.EnableUpdateNotification}, Path=Value}"
                   Height="17" 
                   Margin="15,0,0,10"/>
-        <CheckBox Content="번역파일을 자동으로 업데이트합니다" 
+		<CheckBox Content="번역파일을 자동으로 업데이트합니다" 
                   IsChecked="{Binding Source={x:Static ms:KanColleSettings.EnableUpdateTransOnStart}, Path=Value}"
                   Height="17" 
                   Margin="15,0,0,10"/>
-        <Rectangle Height="1"
-				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-    </StackPanel>
+
+		<TextBlock Text="유저 스타일 시트"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
+				   Margin="0,10" />
+
+		<metro:PromptTextBox Text="{Binding UserStyleSheetSettings.UserStyleSheet, Mode=TwoWay}"
+							 Margin="20,0,0,10"
+							 Height="100"
+							 AcceptsReturn="True"
+							 TextWrapping="NoWrap"
+							 VerticalContentAlignment="Top"
+							 VerticalScrollBarVisibility="Auto"
+							 Prompt="CSS"/>
+
+		<Grid Margin="20,0,0,10"
+			  DataContext="{Binding UserStyleSheetSettings}">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+			<metro2:CallMethodButton MethodTarget="{Binding}"
+									 MethodName="BackToDefaultValue"
+									 Content="기본값으로 설정"
+									 MinWidth="110"
+									 Padding="16,6"
+									 Margin="0,2"
+									 Grid.Column="0"/>
+			<metro2:CallMethodButton MethodTarget="{Binding}"
+									 MethodName="Apply"
+									 Content="적용"
+									 MinWidth="110"
+									 Padding="16,6"
+									 Margin="4,2"
+									 Grid.Column="2"/>
+			<metro2:CallMethodButton MethodTarget="{Binding}"
+									 MethodName="Cancel"
+									 Content="취소"
+									 MinWidth="110"
+									 Padding="16,6"
+									 Margin="4,2,0,4"
+									 Grid.Column="3"/>
+		</Grid>
+
+		<Rectangle Height="1"
+				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+		
+	</StackPanel>
 </UserControl>

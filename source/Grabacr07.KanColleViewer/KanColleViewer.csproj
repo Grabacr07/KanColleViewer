@@ -36,6 +36,7 @@
     <DefineConstants>TRACE;DEBUG;BETA</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -45,6 +46,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Assets\app.ico</ApplicationIcon>
@@ -57,7 +59,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Livet, Version=1.3.0.0, Culture=neutral, PublicKeyToken=b0b1d3f711ef38cb, processorArchitecture=MSIL">
@@ -204,6 +206,7 @@
     <Compile Include="ViewModels\Messages\ZoomMessage.cs" />
     <Compile Include="ViewModels\NavigatorViewModel.cs" />
     <Compile Include="ViewModels\NullViewModel.cs" />
+    <Compile Include="ViewModels\Settings\UserStyleSheetSettingsViewModel.cs" />
     <Compile Include="ViewModels\Settings\NetworkSettingsViewModel.cs" />
     <Compile Include="ViewModels\Settings\PluginSettingsWindowViewModel.cs" />
     <Compile Include="ViewModels\Settings\ScreenshotSettingsViewModel.cs" />
