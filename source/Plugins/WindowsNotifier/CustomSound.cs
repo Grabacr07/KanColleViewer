@@ -37,12 +37,12 @@ namespace Grabacr07.KanColleViewer.Plugins
 					//float Volume = Settings.Current.CustomSoundVolume > 0 ? (float)Settings.Current.CustomSoundVolume / 100 : 0;
 					if (Path.GetExtension(Audiofile).ToLower() == ".wav")//wav인지 채크
 					{
-						WaveStream pcm = new WaveChannel32(new WaveFileReader(Audiofile), 100, 0);
+						WaveStream pcm = new WaveChannel32(new WaveFileReader(Audiofile));
 						BlockStream = new BlockAlignReductionStream(pcm);
 					}
 					else if (Path.GetExtension(Audiofile).ToLower() == ".mp3")//mp3인 경우
 					{
-						WaveStream pcm = new WaveChannel32(new Mp3FileReader(Audiofile), 100, 0);
+						WaveStream pcm = new WaveChannel32(new Mp3FileReader(Audiofile));
 						BlockStream = new BlockAlignReductionStream(pcm);
 					}
 					SoundOut = new DirectSoundOut();
