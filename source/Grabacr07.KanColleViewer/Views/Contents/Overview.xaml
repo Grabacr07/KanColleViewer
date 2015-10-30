@@ -172,6 +172,13 @@
 												 MinWidth="74"
 												 Margin="0,3,7,0"
 												 MethodName="ShowNotePad"/>
+						<metro2:CallMethodButton Content="기록열람"
+												 MinWidth="74"
+												 Grid.Row="1"
+												 Grid.Column="5"
+												 Padding="12,5"
+												 Margin="0,3,7,0"
+												 MethodName="ShowLogViewer"/>
                     </Grid>
                 </Border>
                 <metro2:CallMethodButton Grid.Row="1" 
