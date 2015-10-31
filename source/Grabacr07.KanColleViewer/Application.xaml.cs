@@ -113,6 +113,7 @@ namespace Grabacr07.KanColleViewer
 							MyProcess.StartInfo.WorkingDirectory = MainFolder;
 							MyProcess.Start();
 							MyProcess.Refresh();
+							this.Shutdown();
 						}
 						else//AutoUpdater.exe가 없는 경우 알림만 띄운다.
 						{
