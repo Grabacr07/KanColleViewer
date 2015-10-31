@@ -1330,4 +1330,10 @@ HTTP proxy settings are applied immediately. Settings for all other protocols ar
   <data name="FleetWindow_Status" xml:space="preserve">
     <value>Status</value>
   </data>
+  <data name="Ship_Text_Adept_Template" xml:space="preserve">
+    <value>(Rank {0})</value>
+  </data>
+  <data name="Ship_Text_Adept" xml:space="preserve">
+    <value>Rank</value>
+  </data>
 </root>

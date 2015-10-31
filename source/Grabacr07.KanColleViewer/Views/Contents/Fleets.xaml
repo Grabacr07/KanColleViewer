@@ -14,6 +14,7 @@
 			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
+			 xmlns:converters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters"
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:fleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 			 mc:Ignorable="d"
@@ -249,6 +250,7 @@
 						<DataTemplate>
 							<StackPanel>
 								<StackPanel.Resources>
+									<converters:NameLevelAdeptToStringConverter x:Key="NameWithLevelConverter" />
 									<Style TargetType="{x:Type TextBlock}"
 										   BasedOn="{StaticResource DefaultTextStyleKey}">
 										<Setter Property="Margin"
@@ -411,8 +413,14 @@
 										<ItemsControl.ItemTemplate>
 											<DataTemplate>
 												<Border x:Name="Elements"
-														ToolTip="{Binding Item.NameWithLevel}"
-														Background="Transparent">
+													Background="Transparent">
+														<Border.ToolTip>
+															<MultiBinding Converter="{StaticResource NameWithLevelConverter}">
+																<Binding Path="Item.Info.Name" Mode="OneWay" />
+																<Binding Path="Item.Level" Mode="OneWay" />
+																<Binding Path="Item.Adept" Mode="OneWay" />
+															</MultiBinding>
+														</Border.ToolTip>
 													<kcvc:SlotItemIcon Type="{Binding Item.Info.IconType}"
 																	   Margin="3,0" />
 												</Border>
@@ -436,8 +444,15 @@
 												   Style="{DynamicResource SeparatorRectangleStyleKey}"
 												   Margin="12,4,0,3" />
 										<kcvc:SlotItemIcon Type="{Binding Ship.ExSlot.Item.Info.IconType}"
-														   ToolTip="{Binding Ship.ExSlot.Item.NameWithLevel}"
-														   Margin="3,0" />
+														   Margin="3,0">
+											<kcvc:SlotItemIcon.ToolTip>
+												<MultiBinding Converter="{StaticResource NameWithLevelConverter}">
+													<Binding Path="Ship.ExSlot.Item.Info.Name" Mode="OneWay" />
+													<Binding Path="Ship.ExSlot.Item.Level" Mode="OneWay" />
+													<Binding Path="Ship.ExSlot.Item.Adept" Mode="OneWay" />
+												</MultiBinding>
+											</kcvc:SlotItemIcon.ToolTip>
+										</kcvc:SlotItemIcon>
 									</DockPanel>
 								</Grid>
 								<Rectangle Height="1"

@@ -1334,4 +1334,10 @@ HTTP プロトコルの通信は自動構成も含め「インターネット �
   <data name="FleetWindow_Status" xml:space="preserve">
     <value>ステータス</value>
   </data>
+  <data name="Ship_Text_Adept" xml:space="preserve">
+    <value>熟練度</value>
+  </data>
+  <data name="Ship_Text_Adept_Template" xml:space="preserve">
+    <value>(熟練度 {0})</value>
+  </data>
 </root>
