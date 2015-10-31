@@ -351,6 +351,11 @@ namespace Grabacr07.KanColleWrapper.Models
 				this.Luck = new ModernizableStatus(this.Info.RawData.api_luck, this.RawData.api_kyouka[4]);
 			}
 
+			this.UpdateSlots();
+		}
+
+		public void UpdateSlots()
+		{
 			this.Slots = this.RawData.api_slot
 				.Select(id => this.homeport.Itemyard.SlotItems[id])
 				.Select((t, i) => new ShipSlot(t, this.Info.RawData.api_maxeq.Get(i) ?? 0, this.RawData.api_onslot.Get(i) ?? 0))

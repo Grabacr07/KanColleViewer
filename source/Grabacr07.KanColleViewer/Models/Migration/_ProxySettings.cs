@@ -15,7 +15,7 @@ namespace Grabacr07.KanColleViewer.Models.Migration
 	[XmlRoot("ProxySettings")]
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	// ReSharper disable once InconsistentNaming
-	public class _ProxySettings : NotificationObject, IProxySettings
+	public class _ProxySettings : NotificationObject
 	{
 		public _ProxySettings()
 		{

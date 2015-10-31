@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Internal;
+using MetroTrilithon.Linq;
 using StatefulModel.EventListeners;
 using StatefulModel.EventListeners.WeakEvents;
 
@@ -89,7 +90,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		private void UpdateName()
 		{
-			this.Name = this.Fleets.Select(x => x.Name).Join(", ");
+			this.Name = this.Fleets.Select(x => x.Name).JoinString(", ");
 		}
 	}
 }

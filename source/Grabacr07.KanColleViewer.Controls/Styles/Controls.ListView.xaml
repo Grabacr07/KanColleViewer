@@ -10,6 +10,10 @@
 				Value="{DynamicResource ForegroundBrushKey}" />
 		<Setter Property="AlternationCount"
 				Value="2" />
+		<Setter Property="VirtualizingPanel.VirtualizationMode"
+				Value="Recycling"/>
+		<Setter Property="VirtualizingPanel.ScrollUnit"
+				Value="Pixel"/>
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type ListView}">
@@ -18,7 +22,8 @@
 							Background="{TemplateBinding Background}"
 							Padding="{TemplateBinding Padding}">
 						<ScrollViewer Style="{DynamicResource {x:Static GridView.GridViewScrollViewerStyleKey}}"
-									  HorizontalScrollBarVisibility="Auto">
+									  HorizontalScrollBarVisibility="Auto"
+									  CanContentScroll="True">
 							<ItemsPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 											VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
 						</ScrollViewer>

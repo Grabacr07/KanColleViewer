@@ -31,6 +31,7 @@
 				   FontSize="12"
 				   Background="{DynamicResource ThemeBrushKey}"
 				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+				   FontFamily="{DynamicResource DefaultFontFamilyKey}"
 				   IsRestoringWindowPlacement="True"
 				   SnapsToDevicePixels="True"
 				   TextOptions.TextFormattingMode="Display">
@@ -500,8 +501,7 @@
 							<Border BorderThickness="0,1,1,1"
 									BorderBrush="{DynamicResource ActiveBorderBrushKey}"
 									Background="{TemplateBinding Background}">
-								<UniformGrid IsItemsHost="True"
-											 Columns="1" />
+								<StackPanel IsItemsHost="True" />
 							</Border>
 						</ControlTemplate>
 					</ListBox.Template>
@@ -654,11 +654,14 @@
 							</TextBlock>
 							<TextBlock Grid.Row="4"
 									   Grid.Column="1"
-									   Text="{Binding State.AirSuperiorityPotential}"
 									   Style="{DynamicResource EmphaticTextStyleKey}"
 									   VerticalAlignment="Bottom"
-									   Margin="4,2" />
-
+									   Margin="4,2">
+								<Run Text="{Binding State.MinAirSuperiorityPotential, Mode=OneWay}" />
+								<Run Text="-" />
+								<Run Text="{Binding State.MaxAirSuperiorityPotential, Mode=OneWay}" />
+								<Run Text="" />
+							</TextBlock>
 
 							<TextBlock Grid.Row="6"
 									   Grid.Column="0"

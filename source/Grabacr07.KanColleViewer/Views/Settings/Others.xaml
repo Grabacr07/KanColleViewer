@@ -12,7 +12,7 @@
 			 xmlns:vms="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Settings"
 			 mc:Ignorable="d"
 			 d:DesignWidth="500"
-			 d:DesignHeight="300"
+			 d:DesignHeight="600"
 			 d:DataContext="{d:DesignInstance vms:SettingsViewModel}">
 	<UserControl.Resources>
 		<ResourceDictionary>
@@ -121,6 +121,54 @@
 							  SelectedValue="{Binding Source={x:Static ms:GeneralSettings.Culture}, Path=Value, Mode=TwoWay}"
 							  IsReadOnly="True"
 							  MinWidth="250" />
+
+		<Rectangle Height="1"
+				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+
+		<TextBlock Text="ユーザー スタイル シート"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
+				   Margin="0,10" />
+
+		<metro:PromptTextBox Text="{Binding UserStyleSheetSettings.UserStyleSheet, Mode=TwoWay}"
+							 Margin="20,0,0,10"
+							 Height="100"
+							 AcceptsReturn="True"
+							 TextWrapping="NoWrap"
+							 VerticalContentAlignment="Top"
+							 VerticalScrollBarVisibility="Auto"
+							 Prompt="CSS"/>
+
+		<Grid Margin="20,0,0,10"
+			  DataContext="{Binding UserStyleSheetSettings}">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+			<metro2:CallMethodButton MethodTarget="{Binding}"
+									 MethodName="BackToDefaultValue"
+									 Content="既定値に戻す"
+									 MinWidth="110"
+									 Padding="16,6"
+									 Margin="0,2"
+									 Grid.Column="0"/>
+			<metro2:CallMethodButton MethodTarget="{Binding}"
+									 MethodName="Apply"
+									 Content="適用"
+									 MinWidth="110"
+									 Padding="16,6"
+									 Margin="4,2"
+									 Grid.Column="2"/>
+			<metro2:CallMethodButton MethodTarget="{Binding}"
+									 MethodName="Cancel"
+									 Content="キャンセル"
+									 MinWidth="110"
+									 Padding="16,6"
+									 Margin="4,2,0,4"
+									 Grid.Column="3"/>
+		</Grid>
 
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
