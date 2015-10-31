@@ -45,6 +45,11 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public Updater Updater { get; private set; }
 
+		/// <summary>
+		/// 기록
+		/// </summary>
+		public Logger Logger { get; private set; }
+
 		#region IsStarted 変更通知プロパティ
 
 		private bool _IsStarted;
@@ -141,6 +146,7 @@ namespace Grabacr07.KanColleWrapper
 
 				this.IsStarted = true;
 			});
+			this.Logger = new Logger(proxy);
 		}
 	}
 }

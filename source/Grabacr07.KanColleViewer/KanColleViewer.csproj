@@ -186,6 +186,7 @@
     <Compile Include="ViewModels\Contents\OverviewViewModel.cs" />
     <Compile Include="ViewModels\Contents\QuestsViewModel.cs" />
     <Compile Include="ViewModels\Contents\QuestViewModel.cs" />
+    <Compile Include="ViewModels\RefreshPopupViewModel.cs" />
     <Compile Include="ViewModels\Settings\BindableTextViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipTypeViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogWindowViewModel.cs" />
@@ -252,6 +253,9 @@
       <DependentUpon>Tools.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\MetroComboBox.cs" />
+    <Compile Include="Views\Controls\RefreshButton.xaml.cs">
+      <DependentUpon>RefreshButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Converters\RangeToBooleanConverter.cs" />
     <Compile Include="Views\InformationWindow.xaml.cs">
       <DependentUpon>InformationWindow.xaml</DependentUpon>
@@ -300,6 +304,9 @@
     </Compile>
     <Compile Include="Views\KanColleWindowButtons.xaml.cs">
       <DependentUpon>KanColleWindowButtons.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RefreshPopup.xaml.cs">
+      <DependentUpon>RefreshPopup.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings\Browser.xaml.cs">
       <DependentUpon>Browser.xaml</DependentUpon>
@@ -435,6 +442,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Controls\RefreshButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\InformationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -462,6 +473,10 @@
     <Page Include="Views\KanColleWindowButtons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RefreshPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Settings\Browser.xaml">
       <SubType>Designer</SubType>

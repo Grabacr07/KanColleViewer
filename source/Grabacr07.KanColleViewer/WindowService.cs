@@ -15,6 +15,7 @@ using Livet.Messaging;
 using MetroRadiance;
 using MetroTrilithon.Lifetime;
 using MetroTrilithon.Mvvm;
+using System.Windows.Input;
 
 namespace Grabacr07.KanColleViewer
 {
@@ -70,9 +71,9 @@ namespace Grabacr07.KanColleViewer
 							ThemeService.Current.ChangeTheme(Theme.Dark);
 							ThemeService.Current.ChangeAccent(Accent.Blue);
 							break;
-						//case WindowServiceMode.InSortie:
-						//	ThemeService.Current.ChangeAccent(Accent.Orange);
-						//	break;
+							//case WindowServiceMode.InSortie:
+							//	ThemeService.Current.ChangeAccent(Accent.Orange);
+							//	break;
 					}
 
 					this.RaisePropertyChanged();
@@ -127,7 +128,11 @@ namespace Grabacr07.KanColleViewer
 		{
 			this.kanColleWindow?.Messenger.Raise(new InteractionMessage { MessageKey = "WebBrowser.Zoom" });
 		}
-
+		public void RefreshWindow()
+		{
+			this.kanColleWindow?.RefreshNavigator.Execute(null);
+		}
+		public ICommand RefreshRemote() => this.kanColleWindow?.RefreshNavigator;
 		public void SetLocationLeft()
 		{
 			this.kanColleWindow?.Messenger.Raise(new SetWindowLocationMessage { MessageKey = "Window.Location", Left = 0.0 });

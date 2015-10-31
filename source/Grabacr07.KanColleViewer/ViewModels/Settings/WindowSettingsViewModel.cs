@@ -15,6 +15,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 		private KanColleWindowSettings settings;
 
 		public IReadOnlyCollection<DisplayViewModel<ExitConfirmationType>> ExitConfirmationTypes { get; }
+		public IReadOnlyCollection<DisplayViewModel<ExitConfirmationType>> RefreshConfirmationTypes { get; }
 
 		#region IsSplit 変更通知プロパティ
 
@@ -68,6 +69,12 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 		public WindowSettingsViewModel()
 		{
 			this.ExitConfirmationTypes = new List<DisplayViewModel<ExitConfirmationType>>
+			{
+				DisplayViewModel.Create(ExitConfirmationType.None,"확인하지않음"),
+				DisplayViewModel.Create(ExitConfirmationType.InSortieOnly, "출격중에만 확인"),
+				DisplayViewModel.Create(ExitConfirmationType.Always, "언제나 확인"),
+			};
+			this.RefreshConfirmationTypes = new List<DisplayViewModel<ExitConfirmationType>>
 			{
 				DisplayViewModel.Create(ExitConfirmationType.None,"확인하지않음"),
 				DisplayViewModel.Create(ExitConfirmationType.InSortieOnly, "출격중에만 확인"),

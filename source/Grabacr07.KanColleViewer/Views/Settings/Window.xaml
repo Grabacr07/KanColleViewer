@@ -39,6 +39,17 @@
 								  Prompt=""
 								  MinWidth="140" />
 		</StackPanel>
+		<StackPanel Orientation="Horizontal"
+					Margin="20,0,0,10">
+			<TextBlock Text="팝업으로 새로고침시 확인"
+					   Margin="0,0,10,0" />
+			<metro:PromptComboBox ItemsSource="{Binding RefreshConfirmationTypes}"
+								  DisplayMemberPath="Display"
+								  SelectedValuePath="Value"
+								  SelectedValue="{Binding Source={x:Static ms:GeneralSettings.RefreshConfirmationType}, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+								  Prompt=""
+								  MinWidth="140" />
+		</StackPanel>
 
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />

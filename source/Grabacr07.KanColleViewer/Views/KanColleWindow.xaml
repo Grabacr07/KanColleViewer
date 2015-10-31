@@ -95,6 +95,9 @@
 						HorizontalAlignment="Right"
 						VerticalAlignment="Top"
 						WindowChrome.IsHitTestVisibleInChrome="True">
+				<controls:RefreshButton ToolTip="새로고침을 합니다"
+											Margin="0,0,20,0"
+											Height="26"/>
 				<controls:ZoomFactorSelector ZoomFactor="{Binding ZoomFactor}"
 											 ToolTip="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.ZoomFactorSelector_Tooltip}"
 											 Margin="4,0" />

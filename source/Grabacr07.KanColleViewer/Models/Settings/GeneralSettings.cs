@@ -25,7 +25,14 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		/// アプリケーション終了時の確認動作を示す設定値を取得します。
 		/// </summary>
 		public static SerializableProperty<ExitConfirmationType> ExitConfirmationType { get; }
+
 			= new SerializableProperty<ExitConfirmationType>(GetKey(), Providers.Roaming, Models.ExitConfirmationType.None) { AutoSave = true };
+		/// <summary>
+		/// 새로고침 설정 저장
+		/// </summary>
+		public static SerializableProperty<ExitConfirmationType> RefreshConfirmationType { get; }
+			= new SerializableProperty<ExitConfirmationType>(GetKey(), Providers.Roaming, Models.ExitConfirmationType.InSortieOnly) { AutoSave = true };
+
 
 		/// <summary>
 		/// ブラウザーの拡大鏡を示す設定値を取得します。

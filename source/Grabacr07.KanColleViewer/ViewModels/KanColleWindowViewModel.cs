@@ -15,6 +15,8 @@ using Livet.Messaging;
 using MetroTrilithon.Controls;
 using MetroTrilithon.Mvvm;
 using System.Windows.Input;
+using Settings2 = Grabacr07.KanColleViewer.Models.Settings;
+using Grabacr07.KanColleWrapper;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {
@@ -228,7 +230,28 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		{
 			this.MergeWindow();
 		}
+		public void ShowRefreshPopup()
+		{
 
+			if (GeneralSettings.RefreshConfirmationType == ExitConfirmationType.None)
+			{
+				//바로 새로고침
+				RefreshNavigator.Execute(null);
+				return;
+			}
+			else if (GeneralSettings.RefreshConfirmationType == ExitConfirmationType.InSortieOnly)
+			{
+				if (!KanColleClient.Current.IsInSortie)
+				{
+					//바로 새로고침
+					RefreshNavigator.Execute(null);
+					return;
+				}
+			}
+			var window = new RefreshPopupViewModel();
+			var message = new TransitionMessage(window, "Show/RefreshPopup");
+			this.Messenger.RaiseAsync(message);
+		}
 		private double GetToolAreaWidth(Dock d)
 		{
 			switch (d)
