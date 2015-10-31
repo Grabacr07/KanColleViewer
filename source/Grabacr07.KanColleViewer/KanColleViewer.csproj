@@ -231,6 +231,7 @@
       <DependentUpon>Tools.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\MetroComboBox.cs" />
+    <Compile Include="Views\Converters\AdmiralRankToStringConverter.cs" />
     <Compile Include="Views\Converters\NameLevelAdeptToStringConverter.cs" />
     <Compile Include="Views\Converters\RangeToBooleanConverter.cs" />
     <Compile Include="Views\InformationWindow.xaml.cs">

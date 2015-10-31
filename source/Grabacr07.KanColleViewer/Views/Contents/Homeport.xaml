@@ -11,6 +11,7 @@
 			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
+			 xmlns:converters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters"
 			 xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
 			 xmlns:contentsVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
@@ -32,11 +33,14 @@
 
 		<StackPanel Orientation="Horizontal"
 					DataContext="{Binding Admiral}">
+			<StackPanel.Resources>
+				<converters:AdmiralRankToStringConverter x:Key="AdmiralRankToStringConverter"/>
+			</StackPanel.Resources>
 			<TextBlock>
 				<Run Text="{Binding Model.Nickname, Mode=OneWay}"
 					 Style="{DynamicResource EmphaticTextElementStyleKey}"
 					 FontSize="18" />
-				<Run Text="{Binding Model.Rank, Mode=OneWay}"
+				<Run Text="{Binding Model.RankId, Mode=OneWay, Converter={StaticResource AdmiralRankToStringConverter}}"
 					 Style="{DynamicResource EmphaticTextElementStyleKey}"
 					 FontSize="14" />
 				<LineBreak />

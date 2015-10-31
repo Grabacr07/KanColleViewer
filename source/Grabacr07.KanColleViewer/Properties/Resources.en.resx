@@ -619,10 +619,10 @@
     <value>Marshal Admiral</value>
   </data>
   <data name="Rank_Novice_Commander" xml:space="preserve">
-    <value>Novice Commander</value>
+    <value>Novice Cmdr.</value>
   </data>
   <data name="Rank_Novice_Lieutenant" xml:space="preserve">
-    <value>Novice Lieutenant</value>
+    <value>Novice Lt.</value>
   </data>
   <data name="Rank_Rear_Admiral" xml:space="preserve">
     <value>Rear-Admiral</value>
