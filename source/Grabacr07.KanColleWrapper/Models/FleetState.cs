@@ -62,12 +62,12 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#region AirSuperiorityPotential 変更通知プロパティ
 
-		private int _AirSuperiorityPotential;
+		private double _AirSuperiorityPotential;
 
 		/// <summary>
 		/// 艦隊の制空能力を取得します。
 		/// </summary>
-		public int AirSuperiorityPotential
+		public double AirSuperiorityPotential
 		{
 			get { return this._AirSuperiorityPotential; }
 			private set
@@ -84,12 +84,12 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#region MinAirSuperiorityPotential 変更通知プロパティ
 
-		private int _MinAirSuperiorityPotential;
+		private double _MinAirSuperiorityPotential;
 
 		/// <summary>
 		/// 艦隊の制空能力を取得します。
 		/// </summary>
-		public int MinAirSuperiorityPotential
+		public double MinAirSuperiorityPotential
 		{
 			get { return this._MinAirSuperiorityPotential; }
 			private set
@@ -106,12 +106,12 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#region MaxAirSuperiorityPotential 変更通知プロパティ
 
-		private int _MaxAirSuperiorityPotential;
+		private double _MaxAirSuperiorityPotential;
 
 		/// <summary>
 		/// 艦隊の制空能力を取得します。
 		/// </summary>
-		public int MaxAirSuperiorityPotential
+		public double MaxAirSuperiorityPotential
 		{
 			get { return this._MaxAirSuperiorityPotential; }
 			private set

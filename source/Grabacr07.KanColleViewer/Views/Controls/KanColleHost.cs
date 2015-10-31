@@ -99,6 +99,32 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 		#endregion
 
+		#region UserStyleSheet 依存関係プロパティ
+
+		/// <summary>
+		/// ユーザー スタイル シートを取得または設定します。
+		/// </summary>
+		public string UserStyleSheet
+		{
+			get { return (string)this.GetValue(UserStyleSheetProperty); }
+			set { this.SetValue(UserStyleSheetProperty, value); }
+		}
+
+		/// <summary>
+		/// <see cref="UserStyleSheet"/> 依存関係プロパティを識別します。
+		/// </summary>
+		public static readonly DependencyProperty UserStyleSheetProperty =
+			DependencyProperty.Register(nameof(UserStyleSheet), typeof(string), typeof(KanColleHost), new UIPropertyMetadata(string.Empty, UserStyleSheetChangedCallback));
+
+		private static void UserStyleSheetChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			var instance = (KanColleHost)d;
+
+			instance.ApplyStyleSheet();
+		}
+
+		#endregion
+
 		public event EventHandler<Size> OwnerSizeChangeRequested;
 
 		public KanColleHost()
@@ -158,11 +184,14 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 				object pvaIn = zoomFactor;
 				webBrowser.ExecWB(OLECMDID.OLECMDID_OPTICAL_ZOOM, OLECMDEXECOPT.OLECMDEXECOPT_DODEFAULT, ref pvaIn);
 			}
+			catch (Exception) when (Application.Instance.State == ApplicationState.Startup)
+			{
+				// about:blank だから仕方ない
+			}
 			catch (Exception ex)
 			{
 				Debug.WriteLine(ex);
-				if(Application.Instance.State != ApplicationState.Startup)
-					StatusService.Current.Notify(string.Format(Properties.Resources.ZoomAction_ZoomFailed, ex.Message));
+				StatusService.Current.Notify(string.Format(Properties.Resources.ZoomAction_ZoomFailed, ex.Message));
 			}
 		}
 
@@ -202,12 +231,17 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 				var target = gameFrame?.document as HTMLDocument;
 				if (target != null)
 				{
-					target.createStyleSheet().cssText = Properties.Settings.Default.OverrideStyleSheet;
+					target.createStyleSheet().cssText = this.UserStyleSheet;
 					this.styleSheetApplied = true;
 				}
 			}
+			catch (Exception) when (Application.Instance.State == ApplicationState.Startup)
+			{
+				// about:blank だから仕方ない
+			}
 			catch (Exception ex)
 			{
+				Debug.WriteLine(ex);
 				StatusService.Current.Notify("failed to apply css: " + ex.Message);
 			}
 		}
