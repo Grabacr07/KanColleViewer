@@ -1970,6 +1970,24 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ユーザー スタイル シート.
+        /// </summary>
+        public static string Settings_Other_UserStyleSheet {
+            get {
+                return ResourceManager.GetString("Settings_Other_UserStyleSheet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 既定値に戻す.
+        /// </summary>
+        public static string Settings_Other_UserStyleSheet_Revert {
+            get {
+                return ResourceManager.GetString("Settings_Other_UserStyleSheet_Revert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to プラグイン.
         /// </summary>
         public static string Settings_Plugins {
