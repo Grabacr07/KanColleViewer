@@ -16,6 +16,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 		public string Ship => this.source.Ship == null ? "----" : this.source.Ship.Info.Name;
 
+		public string Level => this.source.Level != 0 ? "Lv." + this.source.Level.ToString() : null;
+
 		public string CompleteTime => this.source.CompleteTime?.LocalDateTime.ToString("MM/dd HH:mm") ?? "--/-- --:--:--";
 
 		public string Remaining => this.source.Remaining.HasValue
