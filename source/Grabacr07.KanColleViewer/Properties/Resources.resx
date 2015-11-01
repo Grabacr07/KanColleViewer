@@ -1346,4 +1346,7 @@ HTTP プロトコルの通信は自動構成も含め「インターネット �
   <data name="Settings_Other_UserStyleSheet_Revert" xml:space="preserve">
     <value>既定値に戻す</value>
   </data>
+  <data name="Settings_Network_Proxy_UseForAllProtos" xml:space="preserve">
+    <value>全てのプロトコルでこのプロキシ サーバーを使用する</value>
+  </data>
 </root>

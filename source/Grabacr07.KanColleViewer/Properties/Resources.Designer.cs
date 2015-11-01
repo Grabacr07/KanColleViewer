@@ -1626,6 +1626,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 全てのプロトコルでこのプロキシ サーバーを使用する.
+        /// </summary>
+        public static string Settings_Network_Proxy_UseForAllProtos {
+            get {
+                return ResourceManager.GetString("Settings_Network_Proxy_UseForAllProtos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to プロキシ サーバーを指定する.
         /// </summary>
         public static string Settings_Network_ProxyCustom {

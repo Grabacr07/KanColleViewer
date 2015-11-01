@@ -1342,4 +1342,7 @@ HTTP proxy settings are applied immediately. Settings for all other protocols ar
   <data name="Settings_Other_UserStyleSheet_Revert" xml:space="preserve">
     <value>Revert to Default</value>
   </data>
+  <data name="Settings_Network_Proxy_UseForAllProtos" xml:space="preserve">
+    <value>Use this proxy server for all protocols (except SOCKS)</value>
+  </data>
 </root>
