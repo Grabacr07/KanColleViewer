@@ -19,6 +19,7 @@
 				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 				   xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
 				   xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
+				   xmlns:converters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters"
 				   xmlns:contentsVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 				   xmlns:fleetsVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 				   xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
@@ -193,10 +194,19 @@
 									   Grid.Row="1"
 									   Grid.ColumnSpan="2"
 									   Margin="10,2,20,0">
+								<DockPanel.Resources>
+									<converters:NameLevelAdeptToStringConverter x:Key="NameWithLevelConverter" />
+								</DockPanel.Resources>
 								<Viewbox Height="21"
 										 Margin="0,0,4,0"
-										 Visibility="{Binding ExSlot.Equipped, Converter={StaticResource BooleanToVisibilityConverter}}"
-										 ToolTip="{Binding ExSlot.Item.NameWithLevel}">
+										 Visibility="{Binding ExSlot.Equipped, Converter={StaticResource BooleanToVisibilityConverter}}">
+									<Viewbox.ToolTip>
+										<MultiBinding Converter="{StaticResource NameWithLevelConverter}">
+											<Binding Path="ExSlot.Item.Info.Name" Mode="OneWay" />
+											<Binding Path="ExSlot.Item.Level" Mode="OneWay" />
+											<Binding Path="ExSlot.Item.Adept" Mode="OneWay" />
+										</MultiBinding>
+									</Viewbox.ToolTip>
 									<kcvc:SlotItemIcon Type="{Binding ExSlot.Item.Info.IconType}" />
 								</Viewbox>
 								<TextBlock TextAlignment="Center"
@@ -205,7 +215,7 @@
 										<Style TargetType="{x:Type TextBlock}"
 											   BasedOn="{StaticResource DefaultTextStyleKey}">
 											<Setter Property="Text"
-													Value="健在" />
+													Value="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Ship_Condition_Healthy, Mode=OneWay}" />
 											<Setter Property="Background"
 													Value="{DynamicResource BackgroundBrushKey}" />
 											<Style.Triggers>
@@ -215,7 +225,7 @@
 																   Value="True" />
 													</MultiDataTrigger.Conditions>
 													<Setter Property="Text"
-															Value="健在・ダメコン搭載" />
+															Value="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Ship_Condition_HealthyDamecon, Mode=OneWay}" />
 												</MultiDataTrigger>
 												<MultiDataTrigger>
 													<MultiDataTrigger.Conditions>
@@ -223,7 +233,7 @@
 																   Value="True" />
 													</MultiDataTrigger.Conditions>
 													<Setter Property="Text"
-															Value="大破 (轟沈の可能性あり)" />
+															Value="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Ship_Condition_Taiha, Mode=OneWay}" />
 													<Setter Property="Foreground"
 															Value="White" />
 													<Setter Property="Background"
@@ -235,7 +245,7 @@
 																   Value="True" />
 													</MultiDataTrigger.Conditions>
 													<Setter Property="Text"
-															Value="大破 (ダメコン使用可能)" />
+															Value="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Ship_Condition_TaihaDamecon, Mode=OneWay}" />
 													<Setter Property="Background"
 															Value="{DynamicResource FleetRepairingBrushKey}" />
 												</MultiDataTrigger>
@@ -245,7 +255,7 @@
 																   Value="True" />
 													</MultiDataTrigger.Conditions>
 													<Setter Property="Text"
-															Value="大破 (退避済み)" />
+															Value="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Ship_Condition_Towed, Mode=OneWay}" />
 													<Setter Property="Background"
 															Value="{DynamicResource FleetRepairingBrushKey}" />
 												</MultiDataTrigger>
@@ -255,7 +265,7 @@
 																   Value="True" />
 													</MultiDataTrigger.Conditions>
 													<Setter Property="Text"
-															Value="撤退 (護衛退避)" />
+															Value="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Ship_Condition_Towing, Mode=OneWay}" />
 													<Setter Property="Background"
 															Value="{DynamicResource FleetRepairingBrushKey}" />
 												</MultiDataTrigger>
@@ -265,7 +275,7 @@
 																   Value="True" />
 													</MultiDataTrigger.Conditions>
 													<Setter Property="Text"
-															Value="入渠中" />
+															Value="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Ship_Condition_Docked, Mode=OneWay}" />
 													<Setter Property="Background"
 															Value="{DynamicResource FleetRepairingBrushKey}" />
 												</MultiDataTrigger>
@@ -385,8 +395,12 @@
 												<Run Text="{Binding Item.Info.Name, Mode=OneWay}" />
 												<Run Text="{Binding Item.LevelText, Mode=OneWay}"
 													 Foreground="#FF45A9A5" />
-												<Run Text="{Binding Item.AdeptText, Mode=OneWay}"
-													 Foreground="{DynamicResource ForegroundBrushKey}" />
+												<Run Foreground="{DynamicResource ForegroundBrushKey}">
+													<MultiBinding StringFormat="{}({0} {1})">
+														<Binding Source="{x:Static models:ResourceService.Current}" Path="Resources.Ship_Text_Adept" Mode="OneWay" />
+														<Binding Path="Item.Adept" Mode="OneWay" />
+													</MultiBinding>
+												</Run>
 											</TextBlock>
 										</Grid>
 										<DataTemplate.Triggers>

@@ -255,12 +255,24 @@
 						</Paragraph>
 						<Paragraph>
 							<InlineUIContainer>
-								<metro2:CallMethodButton Content="{Binding DeleteInternetCacheButtonContent}"
-														 MethodName="DeleteInternetCache"
-														 IsEnabled="{Binding CanDeleteInternetCache}"
-														 HorizontalAlignment="Left"
-														 Padding="30,5"
-														 SnapsToDevicePixels="True" />
+								<StackPanel Orientation="Horizontal">
+									<metro2:CallMethodButton Content="{Binding DeleteInternetCacheButtonContent}"
+															 MethodName="DeleteInternetCache"
+															 IsEnabled="{Binding CanDeleteInternetCache}"
+															 HorizontalAlignment="Left"
+															 Padding="30,5"
+															 Margin="0,0,5,0"
+															 SnapsToDevicePixels="True" />
+									<metro2:CallMethodButton Content="{Binding SetRegionCookieButtonContent}"
+															 MethodName="SetRegionCookie"
+															 IsEnabled="{Binding CanSetRegionCookie}"
+															 HorizontalAlignment="Center"
+															 Padding="30,5"
+															 Margin="5,0,0,0"
+															 SnapsToDevicePixels="True"
+															 ToolTip="{Binding Resources.StartContent_SetRegionCookieToolTip, Source={x:Static models:ResourceService.Current}}"
+															 ToolTipService.ShowOnDisabled="True"/>
+								</StackPanel>
 							</InlineUIContainer>
 							<LineBreak />
 							<InlineUIContainer>

@@ -144,5 +144,16 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				this.UriRequested(this, uri);
 			}
 		}
+
+		public void CookieNavigate()
+		{
+			Uri uri;
+			string cookieInject = "javascript:void(eval(\"document.cookie = 'ckcy=1;expires=Sun, 09 Feb " + DateTime.Now.AddYears(4).ToString("yyyy") + " 09:00:09 GMT;domain=osapi.dmm.com;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb " + DateTime.Now.AddYears(4).ToString("yyyy") + " 09:00:09 GMT;domain=203.104.209.7;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb " + DateTime.Now.AddYears(4).ToString("yyyy") + " 09:00:09 GMT;domain=www.dmm.com;path=/netgame/';\"));location.href=\"";
+			cookieInject += this.SourceString + "\";";
+			if (this.UriRequested != null && Uri.TryCreate(cookieInject, UriKind.Absolute, out uri))
+			{
+				this.UriRequested(this, uri);
+			}
+		}
 	}
 }

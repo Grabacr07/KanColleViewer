@@ -619,10 +619,10 @@
     <value>Marshal Admiral</value>
   </data>
   <data name="Rank_Novice_Commander" xml:space="preserve">
-    <value>Novice Commander</value>
+    <value>Novice Cmdr.</value>
   </data>
   <data name="Rank_Novice_Lieutenant" xml:space="preserve">
-    <value>Novice Lieutenant</value>
+    <value>Novice Lt.</value>
   </data>
   <data name="Rank_Rear_Admiral" xml:space="preserve">
     <value>Rear-Admiral</value>
@@ -1332,5 +1332,11 @@ HTTP proxy settings are applied immediately. Settings for all other protocols ar
   </data>
   <data name="Settings_Updates_Check_Enable" xml:space="preserve">
     <value>Check for updates automatically</value>
+  </data>
+  <data name="Ship_Text_Adept_Template" xml:space="preserve">
+    <value>(Rank {0})</value>
+  </data>
+  <data name="Ship_Text_Adept" xml:space="preserve">
+    <value>Rank</value>
   </data>
 </root>

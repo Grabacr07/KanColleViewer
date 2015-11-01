@@ -2555,6 +2555,24 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 熟練度.
+        /// </summary>
+        public static string Ship_Text_Adept {
+            get {
+                return ResourceManager.GetString("Ship_Text_Adept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (熟練度 {0}).
+        /// </summary>
+        public static string Ship_Text_Adept_Template {
+            get {
+                return ResourceManager.GetString("Ship_Text_Adept_Template", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show additional stats.
         /// </summary>
         public static string ShipCatalog_AdditionalStats {

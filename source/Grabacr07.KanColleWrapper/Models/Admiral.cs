@@ -55,6 +55,8 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public string Rank => Models.Rank.GetName(this.RawData.api_rank);
 
+		public int RankId => this.RawData.api_rank;
+
 		/// <summary>
 		/// 出撃時の勝利数を取得します。
 		/// </summary>
