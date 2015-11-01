@@ -79,15 +79,13 @@
 				</Grid.ColumnDefinitions>
 				<TextBlock Grid.Column="0"
 						   TextAlignment="Right">
-					<Run Text="HTTP" />
-					<Run Text=": " />
+					<Run Text="HTTP" /><Run Text=": " />
 				</TextBlock>
 				<metro:PromptTextBox Grid.Column="1"
 									 Text="{Binding SpecificHttpProxyHost, Mode=TwoWay}"
 									 Prompt="{Binding Resources.Settings_Proxy_Host, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 				<TextBlock Grid.Column="3">
-					<Run Text="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-					<Run Text=": " />
+					<Run Text="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" /><Run Text=": " />
 				</TextBlock>
 				<metro:PromptTextBox Grid.Column="4"
 									 Prompt="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
@@ -106,7 +104,7 @@
 				</metro:PromptTextBox>
 			</Grid>
 
-			<CheckBox Content="全てのプロトコルでこのプロキシ サーバーを使用する"
+			<CheckBox Content="{Binding Resources.Settings_Network_Proxy_UseForAllProtos, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					  Margin="57,3,3,3"
 					  IsChecked="{Binding IsUseHttpProxyForAllProtocols, Mode=TwoWay}"/>
 
@@ -120,15 +118,13 @@
 				</Grid.ColumnDefinitions>
 				<TextBlock Grid.Column="0"
 						   TextAlignment="Right">
-					<Run Text="HTTPS" />
-					<Run Text=": " />
+					<Run Text="HTTPS" /><Run Text=": " />
 				</TextBlock>
 				<metro:PromptTextBox Grid.Column="1"
 									 Text="{Binding SpecificHttpsProxyHost, Mode=TwoWay}"
 									 Prompt="{Binding Resources.Settings_Proxy_Host, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 				<TextBlock Grid.Column="3">
-					<Run Text="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-					<Run Text=": " />
+					<Run Text="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" /><Run Text=": " />
 				</TextBlock>
 				<metro:PromptTextBox Grid.Column="4"
 									 Prompt="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
@@ -157,15 +153,13 @@
 				</Grid.ColumnDefinitions>
 				<TextBlock Grid.Column="0"
 						   TextAlignment="Right">
-					<Run Text="FTP" />
-					<Run Text=": " />
+					<Run Text="FTP" /><Run Text=": " />
 				</TextBlock>
 				<metro:PromptTextBox Grid.Column="1"
 									 Text="{Binding SpecificFtpProxyHost, Mode=TwoWay}"
 									 Prompt="{Binding Resources.Settings_Proxy_Host, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 				<TextBlock Grid.Column="3">
-					<Run Text="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-					<Run Text=": " />
+					<Run Text="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" /><Run Text=": " />
 				</TextBlock>
 				<metro:PromptTextBox Grid.Column="4"
 									 Prompt="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
@@ -194,15 +188,13 @@
 				</Grid.ColumnDefinitions>
 				<TextBlock Grid.Column="0"
 						   TextAlignment="Right">
-					<Run Text="SOCKS" />
-					<Run Text=": " />
+					<Run Text="SOCKS" /><Run Text=": " />
 				</TextBlock>
 				<metro:PromptTextBox Grid.Column="1"
 									 Text="{Binding SpecificSocksProxyHost, Mode=TwoWay}"
 									 Prompt="{Binding Resources.Settings_Proxy_Host, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 				<TextBlock Grid.Column="3">
-					<Run Text="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-					<Run Text=": " />
+					<Run Text="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" /><Run Text=": " />
 				</TextBlock>
 				<metro:PromptTextBox Grid.Column="4"
 									 Prompt="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"

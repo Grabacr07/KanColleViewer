@@ -112,7 +112,7 @@
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
 
-		<TextBlock Text="ユーザー スタイル シート"
+		<TextBlock Text="{Binding Resources.Settings_Other_UserStyleSheet, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
 				   Margin="0,10" />
 
@@ -135,21 +135,21 @@
 			</Grid.ColumnDefinitions>
 			<metro2:CallMethodButton MethodTarget="{Binding}"
 									 MethodName="BackToDefaultValue"
-									 Content="既定値に戻す"
+									 Content="{Binding Resources.Settings_Other_UserStyleSheet_Revert, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 MinWidth="110"
 									 Padding="16,6"
 									 Margin="0,2"
 									 Grid.Column="0"/>
 			<metro2:CallMethodButton MethodTarget="{Binding}"
 									 MethodName="Apply"
-									 Content="適用"
+									 Content="{Binding Resources.Common_Apply, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 MinWidth="110"
 									 Padding="16,6"
 									 Margin="4,2"
 									 Grid.Column="2"/>
 			<metro2:CallMethodButton MethodTarget="{Binding}"
 									 MethodName="Cancel"
-									 Content="キャンセル"
+									 Content="{Binding Resources.Common_Cancel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 MinWidth="110"
 									 Padding="16,6"
 									 Margin="4,2,0,4"

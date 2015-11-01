@@ -1626,6 +1626,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 全てのプロトコルでこのプロキシ サーバーを使用する.
+        /// </summary>
+        public static string Settings_Network_Proxy_UseForAllProtos {
+            get {
+                return ResourceManager.GetString("Settings_Network_Proxy_UseForAllProtos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to プロキシ サーバーを指定する.
         /// </summary>
         public static string Settings_Network_ProxyCustom {
@@ -1966,6 +1975,24 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Settings_Other {
             get {
                 return ResourceManager.GetString("Settings_Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ユーザー スタイル シート.
+        /// </summary>
+        public static string Settings_Other_UserStyleSheet {
+            get {
+                return ResourceManager.GetString("Settings_Other_UserStyleSheet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 既定値に戻す.
+        /// </summary>
+        public static string Settings_Other_UserStyleSheet_Revert {
+            get {
+                return ResourceManager.GetString("Settings_Other_UserStyleSheet_Revert", resourceCulture);
             }
         }
         
