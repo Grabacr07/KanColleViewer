@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
@@ -23,6 +24,8 @@ namespace Grabacr07.KanColleWrapper
 		/// Whether automatic updates are enabled.
 		/// </summary>
 		private static bool EnableUpdates => KanColleClient.Current?.Settings?.EnableUpdates ?? false;
+
+		private static bool EnableSubmissions => KanColleClient.Current?.Settings?.EnableAutosubmission ?? false;
 
 		/// <summary>
 		/// Currently selected culture.
@@ -64,7 +67,9 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// Automatic update timer.
 		/// </summary>
-		private DispatcherTimer timer = new DispatcherTimer();
+		private DispatcherTimer updateCheckTimer = new DispatcherTimer();
+
+		private DispatcherTimer autosubmitTimer = new DispatcherTimer();
 
 		/// <summary>
 		/// This event is fired when there is a new version of the application available.
@@ -80,8 +85,13 @@ namespace Grabacr07.KanColleWrapper
 		{
 			Debug.WriteLine("{0}: initialising with culture {1} and version check url {2}.", nameof(Updater), culture, apiurl);
 			TranslationDataProvider.ProcessUnknown += ProcessUnknown;
-			this.timer.Tick += this.dispatcherTimerHandler;
-			this.timer.Interval = new TimeSpan(0, 120, 0);
+
+			this.updateCheckTimer.Tick += this.dispatcherTimerHandler;
+			this.updateCheckTimer.Interval = new TimeSpan(0, 120, 0);
+
+			this.autosubmitTimer.Tick += this.autosubmitTimerHandler;
+			this.autosubmitTimer.Interval = new TimeSpan(0, 15, 0);
+
 			this.apiVersionCheckUrl = apiurl;
 			this.ChangeCulture(culture);
 		}
@@ -111,13 +121,32 @@ namespace Grabacr07.KanColleWrapper
 		{
 			if (enable)
 			{
-				if (!this.timer.IsEnabled) this.timer.Start();
+				if (!this.updateCheckTimer.IsEnabled)
+				{
+					this.updateCheckTimer.Start();
+					if (EnableSubmissions) ToggleSubmission(true);
+				}
 				Debug.WriteLine("Updater: update checks enabled; timer has been started.");
 			}
 			else
 			{
-				if (this.timer.IsEnabled) this.timer.Stop();
+				if (this.updateCheckTimer.IsEnabled) this.updateCheckTimer.Stop();
 				Debug.WriteLine("Updater: update checks disabled; timer has been stopped.");
+				ToggleSubmission(false);
+			}
+		}
+
+		public void ToggleSubmission(bool enable)
+		{
+			if (enable)
+			{
+				if (!this.autosubmitTimer.IsEnabled) this.autosubmitTimer.Start();
+				Debug.WriteLine("Updater: submission enabled; timer has been started.");
+			}
+			else
+			{
+				if (this.autosubmitTimer.IsEnabled) this.autosubmitTimer.Stop();
+				Debug.WriteLine("Updater: submission disabled; timer has been stopped.");
 			}
 		}
 
@@ -285,7 +314,7 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public void SubmitUnknown()
 		{
-			if (!apiAvailable) return;
+			if (!apiAvailable || !EnableSubmissions) return;
 
 			var sortedstrings = from submitstring in unknownStrings where !submitstring.AlreadySubmitted group submitstring by new { submitstring.Culture, submitstring.ProviderType };
 			foreach (var submitstringgroup in sortedstrings)
@@ -351,6 +380,11 @@ namespace Grabacr07.KanColleWrapper
 		{
 			this.CheckForUpdates();
 			this.UpdateAsNeeded();
+		}
+
+		private void autosubmitTimerHandler(object sender, EventArgs e)
+		{
+			this.SubmitUnknown();
 		}
 
 		private class UnknownStringItem

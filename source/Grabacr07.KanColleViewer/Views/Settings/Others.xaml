@@ -108,32 +108,6 @@
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />-->
 
-		<TextBlock Text="{Binding Resources.Settings_Language, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
-				   Margin="0,10" />
-
-		<metro:PromptComboBox Margin="20,0,0,10"
-							  HorizontalAlignment="Left"
-							  Prompt=""
-							  ItemsSource="{Binding Cultures}"
-							  DisplayMemberPath="DisplayName"
-							  SelectedValuePath="Name"
-							  SelectedValue="{Binding Source={x:Static ms:GeneralSettings.Culture}, Path=Value, Mode=TwoWay}"
-							  IsReadOnly="True"
-							  MinWidth="250" />
-
-		<CheckBox Margin="20,0,0,10"
-				  Content="{Binding Resources.Settings_Translations_Enable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-				  IsChecked="{Binding Source={x:Static ms:KanColleSettings.EnableTranslations}, Path=Value}"/>
-
-		<CheckBox Margin="20,0,0,10"
-				  Content="{Binding Resources.Settings_Updates_Check_Enable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-				  IsChecked="{Binding Source={x:Static ms:KanColleSettings.EnableUpdates}, Path=Value}"/>
-
-		<!--<CheckBox Margin="20,0,0,10"
-				  Content="{Binding Resources.Settings_Translations_Submit_Enable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-				  IsChecked="{Binding Source={x:Static ms:KanColleSettings.EnableAutosubmission}, Path=Value}"/>-->
-
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 

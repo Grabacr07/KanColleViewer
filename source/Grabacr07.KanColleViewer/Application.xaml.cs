@@ -90,6 +90,7 @@ namespace Grabacr07.KanColleViewer
 				GeneralSettings.Culture.Subscribe(x => KanColleClient.Current.Translations.ChangeCulture(x)).AddTo(this);
 				GeneralSettings.Culture.Subscribe(x => KanColleClient.Current.Updater.ChangeCulture(x)).AddTo(this);
 				KanColleSettings.EnableUpdates.Subscribe(x => KanColleClient.Current.Updater.ToggleUpdates(x)).AddTo(this);
+				KanColleSettings.EnableAutosubmission.Subscribe(x => KanColleClient.Current.Updater.ToggleSubmission(x)).AddTo(this);
 				KanColleSettings.EnableTranslations.Subscribe(x => { KanColleClient.Current.Translations.EnableTranslations = x; });
 
 				ThemeService.Current.Initialize(this, Theme.Dark, Accent.Purple);

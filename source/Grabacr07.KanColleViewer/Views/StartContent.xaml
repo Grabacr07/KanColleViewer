@@ -373,6 +373,14 @@
 						</TabItem.Header>
 						<settings:Others Margin="10,9" />
 					</TabItem>
+
+					<TabItem>
+						<TabItem.Header>
+							<TextBlock Text="{Binding Resources.Settings_Language, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+									   Style="{DynamicResource TabHeaderTextStyleKey}" />
+						</TabItem.Header>
+						<settings:Language Margin="10,9" />
+					</TabItem>
 				</TabControl>
 			</ScrollViewer>
 		</Border>
