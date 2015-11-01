@@ -21,6 +21,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			{
 				this._Source = value;
 				this.SourceString = value.ToString();
+				
 				this.RaisePropertyChanged();
 			}
 		}
@@ -116,6 +117,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		public event EventHandler RefreshRequested;
 		public event EventHandler<Uri> UriRequested;
 
+		private bool IsCookieEdit;
+
 		public void GoBack()
 		{
 			this.GoBackRequested?.Invoke(this, new EventArgs());
@@ -135,21 +138,24 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		{
 			this.UriRequested?.Invoke(this, this.Source);
 		}
+		public void CookieNavigate()
+		{
+			if (this.IsCookieEdit) return;
+			Uri customuri;
+
+			string cookieInject = "javascript:void(eval(\"document.cookie = 'cklg=ja;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=dmm.com;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=osapi.dmm.com;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=203.104.209.7;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=www.dmm.com;path=/netgame/';\"));location.href=\"";
+			cookieInject += this.SourceString + "\";";
+			if (this.UriRequested != null && this.SourceString.Contains("dmm.") && Uri.TryCreate(cookieInject, UriKind.Absolute, out customuri))
+			{
+				this.UriRequested(this, customuri);
+				this.IsCookieEdit = true;
+			}
+		}
 
 		public void Navigate()
 		{
-			Uri customuri;
 			Uri uri;
-			string SauceCookie;
-
-			SauceCookie = "javascript:void(eval(\"document.cookie = 'cklg=ja;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=dmm.com;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=osapi.dmm.com;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=203.104.209.7;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=www.dmm.com;path=/netgame/';\"));location.href=\"";
-			SauceCookie += this.SourceString + "\";";
-
-			if (this.UriRequested != null && this.SourceString.Contains("dmm.") && Uri.TryCreate(SauceCookie, UriKind.Absolute, out customuri))
-			{
-				this.UriRequested(this, customuri);
-			}
-			else if (this.UriRequested != null && Uri.TryCreate(this.SourceString, UriKind.Absolute, out uri))
+			if (this.UriRequested != null && Uri.TryCreate(this.SourceString, UriKind.Absolute, out uri))
 			{
 				this.UriRequested(this, uri);
 			}
