@@ -1358,4 +1358,7 @@ HTTP プロトコルの通信は自動構成も含め「インターネット �
   <data name="Notifications_Test_Details" xml:space="preserve">
     <value>これは「提督業も忙しい！」のテスト通知です。</value>
   </data>
+  <data name="Ship_Evacuating" xml:space="preserve">
+    <value>退避済</value>
+  </data>
 </root>

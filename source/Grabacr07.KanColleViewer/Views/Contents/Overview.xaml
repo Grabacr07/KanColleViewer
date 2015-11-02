@@ -218,7 +218,7 @@
 												  Margin="8,2,8,0">
 												<Border Background="{DynamicResource FleetRepairingBrushKey}"
 														Opacity=".4" />
-												<TextBlock Text="入渠中"
+												<TextBlock Text="{Binding Resources.Ship_Repairing, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 														   Style="{DynamicResource EmphaticTextStyleKey}"
 														   HorizontalAlignment="Center" />
 											</Grid>
@@ -229,7 +229,7 @@
 												  Margin="8,2,8,0">
 												<Border Background="{DynamicResource FleetRepairingBrushKey}"
 														Opacity=".4" />
-												<TextBlock Text="退避済"
+												<TextBlock Text="{Binding Resources.Ship_Evacuating, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 														   Style="{DynamicResource EmphaticTextStyleKey}"
 														   HorizontalAlignment="Center" />
 											</Grid>

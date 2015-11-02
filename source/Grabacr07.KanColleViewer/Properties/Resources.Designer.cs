@@ -2573,6 +2573,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 退避済.
+        /// </summary>
+        public static string Ship_Evacuating {
+            get {
+                return ResourceManager.GetString("Ship_Evacuating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dock: {0}.
         /// </summary>
         public static string Ship_RepairDockToolTip {
