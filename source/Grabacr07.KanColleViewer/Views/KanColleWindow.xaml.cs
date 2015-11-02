@@ -68,7 +68,7 @@ namespace Grabacr07.KanColleViewer.Views
 			}
 
 			this.MinWidth = browserSize.Width;
-			this.MinHeight = browserSize.Height + this.toolbarArea.ActualHeight + this.captionBar.ActualHeight + this.statusBar.ActualHeight;
+			this.MinHeight = browserSize.Height + this.TopToolbarArea.ActualHeight + this.captionBar.ActualHeight + this.statusBar.ActualHeight;
 
 			this.previousBrowserSize = browserSize;
 		}
@@ -85,7 +85,7 @@ namespace Grabacr07.KanColleViewer.Views
 			var browserSize = this.previousBrowserSize ?? new Size();
 
 			var width = browserSize.Width;
-			var height = browserSize.Height + this.toolbarArea.ActualHeight + this.captionBar.ActualHeight + this.statusBar.ActualHeight;
+			var height = browserSize.Height + this.TopToolbarArea.ActualHeight + this.captionBar.ActualHeight + this.statusBar.ActualHeight;
 
 			if (dock == Dock.Top || dock == Dock.Bottom)
 			{

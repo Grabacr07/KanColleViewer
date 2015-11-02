@@ -84,7 +84,8 @@
 			</Grid>
 		</ScrollViewer>
 		<Grid Grid.Row="1"
-			  Grid.Column="1">
+			  Grid.Column="1"
+			  Margin="5">
 			<ItemsControl ItemsSource="{Binding TabItems}">
 				<ItemsControl.ItemsPanel>
 					<ItemsPanelTemplate>

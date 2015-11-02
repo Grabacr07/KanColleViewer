@@ -74,6 +74,7 @@
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
 			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
@@ -113,7 +114,29 @@
 		<!-- #endregion -->
 
 
-		<DockPanel Grid.Row="1">
+
+		<DockPanel Grid.Row="1"
+				   x:Name="TopToolbarArea"
+				   x:FieldModifier="private">
+
+			<views:KanColleWindowButtons DockPanel.Dock="Right"
+												 Margin="8,4,4,4" />
+			<ContentControl Content="{Binding Content}">
+				<ContentControl.Resources>
+					<DataTemplate DataType="{x:Type viewModels:StartContentViewModel}">
+						<views:BrowserNavigator DataContext="{Binding Navigator}"
+														Margin="6,-5,6,10"
+														VerticalAlignment="Top" />
+					</DataTemplate>
+					<DataTemplate DataType="{x:Type viewModels:InformationViewModel}">
+						<DockPanel>
+							<contents:Homeport Margin="0,8" />
+						</DockPanel>
+					</DataTemplate>
+				</ContentControl.Resources>
+			</ContentControl>
+		</DockPanel>
+		<DockPanel Grid.Row="2">
 			<DockPanel DockPanel.Dock="{Binding BrowserDock}">
 				<controls:KanColleHost x:Name="kanColleHost"
 									   x:FieldModifier="private"
@@ -140,7 +163,8 @@
 					</WebBrowser>
 				</controls:KanColleHost>
 
-				<DockPanel x:Name="toolbarArea"
+				<!--<DockPanel x:Name="BottomToolbarArea"
+						   Visibility="{Binding BottomArea}"
 						   x:FieldModifier="private"
 						   DockPanel.Dock="Top"
 						   MaxWidth="{Binding ToolAreaMaxWidth}">
@@ -160,7 +184,7 @@
 							</DataTemplate>
 						</ContentControl.Resources>
 					</ContentControl>
-				</DockPanel>
+				</DockPanel>-->
 
 				<Border />
 			</DockPanel>
@@ -183,7 +207,7 @@
 		<!-- region Status area -->
 		<DockPanel x:Name="statusBar"
 				   x:FieldModifier="private"
-				   Grid.Row="2"
+				   Grid.Row="3"
 				   Height="{DynamicResource StatusbarHeight}"
 				   Background="{DynamicResource AccentBrushKey}"
 				   Visibility="{Binding IsMainWindow, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -194,7 +218,7 @@
 		<!-- endregion -->
 
 		<metro:ResizeGrip Grid.Row="1"
-						  Grid.RowSpan="2"
+						  Grid.RowSpan="3"
 						  x:Name="resizeGrip"
 						  x:FieldModifier="private"
 						  HorizontalAlignment="Right"
