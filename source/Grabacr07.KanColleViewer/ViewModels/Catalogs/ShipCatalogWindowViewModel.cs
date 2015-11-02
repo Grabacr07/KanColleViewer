@@ -5,6 +5,7 @@ using System.Reactive;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using Grabacr07.KanColleViewer.Models.Settings;
+using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleWrapper;
 using MetroTrilithon.Mvvm;
 
@@ -116,14 +117,14 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		public ShipCatalogWindowViewModel()
 		{
-			this.Title = "所属艦娘一覧";
+			this.Title = Resources.ShipCatalog_WindowTitle;
 			this.IsOpenFilterSettings = true;
 			this.Settings = new ShipCatalogWindowSettings();
 
 			this.SortWorker = new ShipCatalogSortWorker();
 
 			this.ShipTypes = KanColleClient.Current.Master.ShipTypes
-				.Where(kvp => !(kvp.Value.Id == 15 && kvp.Value.Name == "補給艦")) // おそらく敵艦用と思われる補給艦を除外
+				// .Where(kvp => !(kvp.Value.Id == 15 && kvp.Value.Name == "補給艦")) // おそらく敵艦用と思われる補給艦を除外
 				.Select(kvp => new ShipTypeViewModel(kvp.Value)
 				{
 					IsSelected = true,

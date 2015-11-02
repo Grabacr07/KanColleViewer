@@ -36,7 +36,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 					case FleetSpeed.Low:
 						return Resources.Fleets_Speed_Slow;
 					default:
-						return "速度混成艦隊";
+						return Resources.Fleets_Speed_Hybrid;
 				}
 			}
 		}

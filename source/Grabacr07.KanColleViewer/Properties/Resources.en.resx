@@ -432,12 +432,6 @@
   <data name="StatusBar_Ready" xml:space="preserve">
     <value>Ready</value>
   </data>
-  <data name="StatusBar_Speed_Fast" xml:space="preserve">
-    <value>Fast Fleet</value>
-  </data>
-  <data name="StatusBar_Speed_Slow" xml:space="preserve">
-    <value>Slow Fleet</value>
-  </data>
   <data name="ZoomAction_OutOfRange" xml:space="preserve">
     <value>{0}% zoom is not supported.</value>
   </data>
@@ -761,7 +755,7 @@ GPU: Slow! GPU optimization for tablets.</value>
     <value>Sortie Condition</value>
   </data>
   <data name="Settings_Operation_SortieCondition_Description" xml:space="preserve">
-    <value>※Value must be within the range of 40 and 49. (Default: 40)</value>
+    <value>※Value must be within the range of 40 and 49. (Default: 49)</value>
   </data>
   <data name="Settings_Operation_SortieCondition_Title" xml:space="preserve">
     <value>Minimum fleet condition to be considered ready for sorties.</value>
@@ -1344,5 +1338,11 @@ HTTP proxy settings are applied immediately. Settings for all other protocols ar
   </data>
   <data name="Settings_Network_Proxy_UseForAllProtos" xml:space="preserve">
     <value>Use this proxy server for all protocols (except SOCKS)</value>
+  </data>
+  <data name="Notifications_Test" xml:space="preserve">
+    <value>Test Notification</value>
+  </data>
+  <data name="Notifications_Test_Details" xml:space="preserve">
+    <value>This is a test notification from KanColleViewer.</value>
   </data>
 </root>

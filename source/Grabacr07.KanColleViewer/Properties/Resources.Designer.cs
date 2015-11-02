@@ -970,6 +970,24 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to テスト通知.
+        /// </summary>
+        public static string Notifications_Test {
+            get {
+                return ResourceManager.GetString("Notifications_Test", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to これは「提督業も忙しい！」のテスト通知です。.
+        /// </summary>
+        public static string Notifications_Test_Details {
+            get {
+                return ResourceManager.GetString("Notifications_Test_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to データ.
         /// </summary>
         public static string Overview_Data {
@@ -1952,7 +1970,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ※通常は、間宮アイコンが消灯する 40 か、自然回復上限の 49 に設定します。.
+        ///   Looks up a localized string similar to ※通常は、間宮アイコンが消灯する 49 か、自然回復上限の 49 に設定します。.
         /// </summary>
         public static string Settings_Operation_SortieCondition_Description {
             get {

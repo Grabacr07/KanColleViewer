@@ -756,7 +756,7 @@ GPU: Slow! GPU optimization for tablets.</value>
     <value>出撃コンディション</value>
   </data>
   <data name="Settings_Operation_SortieCondition_Description" xml:space="preserve">
-    <value>※通常は、間宮アイコンが消灯する 40 か、自然回復上限の 49 に設定します。</value>
+    <value>※通常は、間宮アイコンが消灯する 49 か、自然回復上限の 49 に設定します。</value>
   </data>
   <data name="Settings_Operation_SortieCondition_Title" xml:space="preserve">
     <value>艦隊内の全艦のコンディションが次の数値以上になったとき、出撃可能と判断する</value>
@@ -1348,5 +1348,11 @@ HTTP プロトコルの通信は自動構成も含め「インターネット �
   </data>
   <data name="Settings_Network_Proxy_UseForAllProtos" xml:space="preserve">
     <value>全てのプロトコルでこのプロキシ サーバーを使用する</value>
+  </data>
+  <data name="Notifications_Test" xml:space="preserve">
+    <value>テスト通知</value>
+  </data>
+  <data name="Notifications_Test_Details" xml:space="preserve">
+    <value>これは「提督業も忙しい！」のテスト通知です。</value>
   </data>
 </root>
