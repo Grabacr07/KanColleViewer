@@ -5,6 +5,7 @@ using System.Reactive;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using Grabacr07.KanColleViewer.Models.Settings;
+using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleWrapper;
 using MetroTrilithon.Mvvm;
 
@@ -56,7 +57,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		public SlotItemCatalogViewModel()
 		{
-			this.Title = "所有装備一覧";
+			this.Title = Resources.SlotItemCatalog_WindowTitle;
 			this.Settings = new SlotItemCatalogWindowSettings();
 
 			this.updateSource

@@ -68,9 +68,9 @@ namespace Grabacr07.KanColleViewer.Models
 			}
 		}
 
-		public INotification CreateTest(string header = "テスト通知", string body = "これは「提督業も忙しい！」のテスト通知です。", Action activated = null, Action<Exception> failed = null)
+		public INotification CreateTest(string header = null, string body = null, Action activated = null, Action<Exception> failed = null)
 		{
-			return Notification.Create(Notification.Types.Test, header, body, activated ?? WindowService.Current.MainWindow.Activate, failed);
+			return Notification.Create(Notification.Types.Test, header ?? Resources.Notifications_Test, body ?? Resources.Notifications_Test_Details, activated ?? WindowService.Current.MainWindow.Activate, failed);
 		}
 
 		#region Initialize() method parts
@@ -225,8 +225,8 @@ namespace Grabacr07.KanColleViewer.Models
 
 			var notification = Notification.Create(
 				Notification.Types.FleetRejuvenated,
-				"疲労回復完了",
-				$"「{args.FleetName}」に編成されている艦娘の疲労が回復しました。",
+				Resources.Notifications_MoraleRestored,
+				string.Format(Resources.Notifications_MoraleRestored_Details, args.FleetName),
 				() => WindowService.Current.MainWindow.Activate());
 
 			this.Notify(notification);
