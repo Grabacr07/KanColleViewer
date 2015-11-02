@@ -8,13 +8,16 @@ using Grabacr07.KanColleViewer.ViewModels.Dev;
 using Grabacr07.KanColleViewer.ViewModels.Settings;
 using Livet;
 using MetroTrilithon.Mvvm;
+using Grabacr07.KanColleViewer.Models;
+using System.Windows;
+using Grabacr07.KanColleViewer.Models.Settings;
+using System.Windows.Controls;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {
 	public class InformationViewModel : ViewModel
 	{
 		// ----- Tab items
-
 		public OverviewViewModel Overview { get; }
 		public FleetsViewModel Fleets { get; }
 		public ShipyardViewModel Shipyard { get; }
@@ -51,10 +54,49 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		public MaterialsViewModel Materials { get; }
 		public ShipsViewModel Ships { get; }
 		public SlotItemsViewModel SlotItems { get; }
+		public KanColleWindowSettings Settings { get; }
 
+		#region Vertical Visibility
+		private Visibility _Vertical;
+		public Visibility Vertical
+		{
+			get { return this._Vertical; }
+			set
+			{
+				if (value == this._Vertical) return;
+				this._Vertical = value;
+				RaisePropertyChanged();
+			}
+		}
+		#endregion
+
+		#region Horizontal VIsibility
+		private Visibility _Horizontal;
+		public Visibility Horizontal
+		{
+			get { return this._Horizontal; }
+			set
+			{
+				if (value == this._Horizontal) return;
+				this._Horizontal = value;
+				RaisePropertyChanged();
+			}
+		}
+		#endregion
 
 		public InformationViewModel()
 		{
+			this.Settings = SettingsHost.Instance<KanColleWindowSettings>();
+			if (this.Settings?.Dock == Dock.Right || this.Settings?.Dock == Dock.Left || this.Settings?.IsSplit)
+			{
+				this.Vertical = Visibility.Collapsed;
+				this.Horizontal = Visibility.Visible;
+			}
+			else
+			{
+				this.Vertical = Visibility.Visible;
+				this.Horizontal = Visibility.Collapsed;
+			}
 			this.TabItems = new List<TabItemViewModel>
 			{
 				(this.Overview = new OverviewViewModel(this).AddTo(this)),

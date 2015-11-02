@@ -7,6 +7,7 @@ using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Models.Settings;
 using Livet;
 using MetroTrilithon.Mvvm;
+using System.Windows;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Settings
 {
@@ -100,6 +101,16 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 			{
 				this.settings.IsSplit.Value = this.IsSplit;
 				this.settings.Dock.Value = this.Dock;
+				if (this.settings?.Dock == Dock.Right || this.settings?.Dock == Dock.Left || this.settings?.IsSplit)
+				{
+					WindowService.Current.Information.Vertical = Visibility.Collapsed;
+					WindowService.Current.Information.Horizontal = Visibility.Visible;
+				}
+				else
+				{
+					WindowService.Current.Information.Vertical = Visibility.Visible;
+					WindowService.Current.Information.Horizontal = Visibility.Collapsed;
+				}
 			}
 		}
 
