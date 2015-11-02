@@ -1034,7 +1034,7 @@ GPU: Slow! GPU optimization for tablets.</value>
     <value>Withdrew (Towing)</value>
   </data>
   <data name="Ship_Repairing" xml:space="preserve">
-    <value>Repairing</value>
+    <value>Docked</value>
   </data>
   <data name="SlotItemCatalog_Refresh" xml:space="preserve">
     <value>Refresh</value>
@@ -1344,5 +1344,8 @@ HTTP proxy settings are applied immediately. Settings for all other protocols ar
   </data>
   <data name="Notifications_Test_Details" xml:space="preserve">
     <value>This is a test notification from KanColleViewer.</value>
+  </data>
+  <data name="Ship_Evacuating" xml:space="preserve">
+    <value>Evac</value>
   </data>
 </root>
