@@ -28,7 +28,7 @@
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:ShipCatalogWindowViewModel}"
 				   Title="{Binding Title}"
-				   Width="950"
+				   Width="970"
 				   Height="800"
 				   FontSize="12"
 				   Topmost="{Binding Settings.TopMost.Value}"
@@ -844,7 +844,7 @@
 							</GridViewColumn>
 							-->
 
-							<GridViewColumn Width="140">
+							<GridViewColumn Width="120">
 								<GridViewColumn.Header>
 									<TextBlock Text="{Binding Resources.ShipCatalog_Column_Equipped, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 								</GridViewColumn.Header>
