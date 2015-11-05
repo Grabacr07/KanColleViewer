@@ -25,9 +25,9 @@
     z-index:1
 }
 
-.area-pickupgame
+.area-pickupgame, #dmm-ntgnavi-renew, .ntgnavi-l, .area-menu, .menu-icon {
 {
-    display:none!important;
+ display:none!important;
 }</Value>
     </Setting>
     <Setting Name="KCVUpdateUrl" Type="System.Uri" Scope="Application">
