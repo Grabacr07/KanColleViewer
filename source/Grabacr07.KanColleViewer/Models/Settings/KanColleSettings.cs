@@ -28,6 +28,12 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
 
 		/// <summary>
+		/// 제공 계산식에서 소수점을 버립니다
+		/// </summary>
+		public static SerializableProperty<bool> SqrtDoubleToInt { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
+
+		/// <summary>
 		/// 업데이트 알림을 활성화합니다
 		/// </summary>
 		public static SerializableProperty<bool> EnableUpdateNotification { get; }
@@ -115,7 +121,8 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 			NotificationShorteningTime.Subscribe(_ => this.RaisePropertyChanged(nameof(NotificationShorteningTime)));
 			ReSortieCondition.Subscribe(_ => this.RaisePropertyChanged(nameof(ReSortieCondition)));
 			ViewRangeCalcType.Subscribe(_ => this.RaisePropertyChanged(nameof(ViewRangeCalcType)));
-		}
+			SqrtDoubleToInt.Subscribe(_ => this.RaisePropertyChanged(nameof(SqrtDoubleToInt)));
+        }
 
 		protected void RaisePropertyChanged([CallerMemberName] string propertyName = null)
 		{
@@ -131,6 +138,8 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		int IKanColleClientSettings.ReSortieCondition => ReSortieCondition.Value;
 
 		string IKanColleClientSettings.ViewRangeCalcType => ViewRangeCalcType.Value;
+
+		bool IKanColleClientSettings.SqrtDoubleToInt => SqrtDoubleToInt.Value;
 
 		#endregion
 

@@ -20,7 +20,11 @@ namespace Grabacr07.KanColleWrapper
 		{
 			if (slotItem.Info.IsAirSuperiorityFighter)
 			{
-				return slotItem.Info.AA * Math.Sqrt(onslot);
+				if (KanColleClient.Current.Settings.SqrtDoubleToInt)
+				{
+					return Math.Truncate(slotItem.Info.AA * Math.Sqrt(onslot));
+				}
+				else return slotItem.Info.AA * Math.Sqrt(onslot);
 			}
 
 			return 0;
@@ -110,7 +114,13 @@ namespace Grabacr07.KanColleWrapper
 		/// <param name="slotItem"></param>
 		/// <returns></returns>
 		private static double CalcMinInternalAirecraftAdeptBonus(this SlotItem slotItem)
-			=> Math.Sqrt((slotItem.Adept != 0 ? (slotItem.Adept - 1) * 15 + 10 : 0) / 10);
+		{
+			if (KanColleClient.Current.Settings.SqrtDoubleToInt)
+			{
+				return Math.Truncate(Math.Sqrt((slotItem.Adept != 0 ? (slotItem.Adept - 1) * 15 + 10 : 0) / 10));
+			}
+			else return Math.Sqrt((slotItem.Adept != 0 ? (slotItem.Adept - 1) * 15 + 10 : 0) / 10);
+		}
 
 		/// <summary>
 		/// 各表記熟練度に対応した艦載機内部熟練度ボーナスの最大値を計算します。
@@ -118,7 +128,13 @@ namespace Grabacr07.KanColleWrapper
 		/// <param name="slotItem"></param>
 		/// <returns></returns>
 		private static double CalcMaxInternalAirecraftAdeptBonus(this SlotItem slotItem)
-			=> Math.Sqrt((slotItem.Adept != 0 ? (slotItem.Adept - 1) * 15 + 24 : 9) / 10);
+		{
+			if (KanColleClient.Current.Settings.SqrtDoubleToInt)
+			{
+				return Math.Truncate(Math.Sqrt((slotItem.Adept != 0 ? (slotItem.Adept - 1) * 15 + 24 : 9) / 10));
+			}
+			else return Math.Sqrt((slotItem.Adept != 0 ? (slotItem.Adept - 1) * 15 + 24 : 9) / 10);
+		}
 
 		#endregion
 
