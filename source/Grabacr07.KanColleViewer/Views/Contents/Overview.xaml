@@ -172,15 +172,18 @@
 												<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
 													 FontSize="11" />
 												<!-- せっかくピッタリ合わせる Tooltip つけたけど、トリミングされなくなったから不要になったんじゃモン… -->
-												<!--<TextBlock.ToolTip>
+												<TextBlock.ToolTip>
 													<TextBlock Margin="0,-2,0,0">
 													<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
 														 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 													<LineBreak />
 													<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
 														 FontSize="11" />
+													<LineBreak />
+													<Run Text="{Binding StatsToolTip, Mode=OneWay}"
+														 FontSize="11" />
 													</TextBlock>
-												</TextBlock.ToolTip>-->
+												</TextBlock.ToolTip>
 											</TextBlock>
 
 											<TextBlock Grid.Column="1"
