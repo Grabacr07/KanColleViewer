@@ -16,11 +16,11 @@ namespace Grabacr07.KanColleWrapper
 		/// <param name="slotItem">対空能力を持つ装備。</param>
 		/// <param name="onslot">搭載数。</param>
 		/// <returns></returns>
-		public static double CalcAirSuperiorityPotential(this SlotItem slotItem, int onslot)
+		public static int CalcAirSuperiorityPotential(this SlotItem slotItem, int onslot)
 		{
 			if (slotItem.Info.IsAirSuperiorityFighter)
 			{
-				return slotItem.Info.AA * Math.Sqrt(onslot);
+				return (int)(slotItem.Info.AA * Math.Sqrt(onslot));
 			}
 
 			return 0;
@@ -28,7 +28,7 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// 指定した艦の制空能力を計算します。
 		/// </summary>
-		public static double CalcAirSuperiorityPotential(this Ship ship)
+		public static int CalcAirSuperiorityPotential(this Ship ship)
 		{
 			return ship.EquippedItems
 				.Select(x => x.Item.CalcAirSuperiorityPotential(x.Current))
@@ -38,24 +38,29 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// 指定した艦の制空能力の最小値を計算します。
 		/// </summary>
-		public static double CalcMinAirSuperiorityPotential(this Ship ship)
+		public static int CalcMinAirSuperiorityPotential(this Ship ship)
 		{
 			return ship.EquippedItems
-				.Select(x => x.Item.CalcAirSuperiorityPotential(x.Current)
-							+ x.Item.CalcMinAirecraftAdeptBonus(x.Current))
+				.Select(x => (x.Item.Info.Type == SlotItemType.艦上戦闘機
+								? x.Item.CalcAirSuperiorityPotential(x.Current)
+								: 0)
+							 + x.Item.CalcMinAirecraftAdeptBonus(x.Current))
+				.Select(x => (int)x)
 				.Sum();
 		}
 
 		/// <summary>
 		/// 指定した艦の制空能力の最大値を計算します。
 		/// </summary>
-		public static double CalcMaxAirSuperiorityPotential(this Ship ship)
+		public static int CalcMaxAirSuperiorityPotential(this Ship ship)
 		{
 			return ship.EquippedItems
 				.Select(x => x.Item.CalcAirSuperiorityPotential(x.Current)
 							+ x.Item.CalcMaxAirecraftAdeptBonus(x.Current))
+				.Select(x => (int)x)
 				.Sum();
 		}
+
 		/// <summary>
 		/// 熟練度による制空能力ボーナス最小値を計算します。
 		/// </summary>
@@ -63,10 +68,12 @@ namespace Grabacr07.KanColleWrapper
 		/// <param name="onslot">搭載数。</param>
 		/// <returns></returns>
 		private static double CalcMinAirecraftAdeptBonus(this SlotItem slotItem, int onslot)
-			=> onslot < 1 ? 0
-			: slotItem.Info.Type == SlotItemType.艦上戦闘機
+		{
+			if(onslot < 1) return 0;
+			return slotItem.Info.Type == SlotItemType.艦上戦闘機
 				? slotItem.CalcAirecraftAdeptBonusOfType() + slotItem.CalcMinInternalAirecraftAdeptBonus()
-				: 0;    // 艦戦以外は簡単に吹き飛ぶので最小値としては計算に入れない
+				: 0; // 艦戦以外は簡単に吹き飛ぶので最小値としては計算に入れない
+		}
 
 		/// <summary>
 		/// 熟練度による制空能力ボーナス最大値を計算します。
@@ -110,7 +117,11 @@ namespace Grabacr07.KanColleWrapper
 		/// <param name="slotItem"></param>
 		/// <returns></returns>
 		private static double CalcMinInternalAirecraftAdeptBonus(this SlotItem slotItem)
-			=> Math.Sqrt((slotItem.Adept != 0 ? (slotItem.Adept - 1) * 15 + 10 : 0) / 10);
+		{
+			return slotItem.Info.IsAirSuperiorityFighter
+				? Math.Sqrt((slotItem.Adept != 0 ? (slotItem.Adept - 1) * 15 + 10 : 0) / 10d)
+				: 0;
+		}
 
 		/// <summary>
 		/// 各表記熟練度に対応した艦載機内部熟練度ボーナスの最大値を計算します。
@@ -118,7 +129,19 @@ namespace Grabacr07.KanColleWrapper
 		/// <param name="slotItem"></param>
 		/// <returns></returns>
 		private static double CalcMaxInternalAirecraftAdeptBonus(this SlotItem slotItem)
-			=> Math.Sqrt((slotItem.Adept != 0 ? (slotItem.Adept - 1) * 15 + 24 : 9) / 10);
+		{
+			if (!slotItem.Info.IsAirSuperiorityFighter)
+				return 0;
+			switch (slotItem.Adept)
+			{
+				case 0:
+					return Math.Sqrt(9d / 10);
+				case 7:
+					return Math.Sqrt(120d / 10);
+				default:
+					return Math.Sqrt((slotItem.Adept * 15 + 9) / 10d);
+			}
+		}
 
 		#endregion
 
