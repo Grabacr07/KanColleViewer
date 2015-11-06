@@ -71,7 +71,7 @@
 		<DockPanel Grid.Row="1">
 			<Border DockPanel.Dock="Top"
 					Margin="8,8,8,0">
-                <metro2:CallMethodButton Content="{Binding Resources.SlotItemCatalog_Refresh, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+				<metro2:CallMethodButton Content="{Binding Resources.SlotItemCatalog_Refresh, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 										 Padding="40,6"
 										 MethodName="Update"
 										 HorizontalAlignment="Left" />
@@ -131,7 +131,7 @@
 						<GridView>
 							<GridViewColumn Width="190">
 								<GridViewColumn.Header>
-                                    <TextBlock Text="{Binding Resources.SlotItemCatalog_ItemName, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+									<TextBlock Text="{Binding Resources.SlotItemCatalog_ItemName, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate DataType="{x:Type viewModels:SlotItemCounter}">
@@ -151,7 +151,7 @@
 
 							<GridViewColumn Width="52">
 								<GridViewColumn.Header>
-                                    <TextBlock Text="{Binding Resources.SlotItemCatalog_Total, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+									<TextBlock Text="{Binding Resources.SlotItemCatalog_Total, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate DataType="{x:Type viewModels:SlotItemCounter}">
@@ -168,12 +168,12 @@
 										<Border Width="52"
 												BorderThickness="0,0,1,0"
 												BorderBrush="{DynamicResource BorderBrushKey}">
-                                            <TextBlock Text="{Binding Resources.SlotItemCatalog_ImprovementLevel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+											<TextBlock Text="{Binding Resources.SlotItemCatalog_ImprovementLevel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 										</Border>
 										<Border Width="52"
 												BorderThickness="0,0,1,0"
 												BorderBrush="{DynamicResource BorderBrushKey}">
-                                            <TextBlock Text="{Binding Resources.SlotItemCatalog_SkillLevel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+											<TextBlock Text="{Binding Resources.SlotItemCatalog_SkillLevel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 										</Border>
 										<Border Width="82"
 												BorderThickness="0,0,1,0"
@@ -185,7 +185,7 @@
 											</TextBlock>
 										</Border>
 										<Border>
-                                            <TextBlock Text="{Binding Resources.SlotItemCatalog_Equipped, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+											<TextBlock Text="{Binding Resources.SlotItemCatalog_Equipped, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 										</Border>
 									</DockPanel>
 								</GridViewColumn.Header>
@@ -228,7 +228,7 @@
 																	</Style>
 																</TextBlock.Style>
 															</TextBlock>
-															<TextBlock Width="53"
+															<!--<TextBlock Width="53"
 																	   Margin="0,4">
 																<TextBlock.Style>
 																	<Style TargetType="{x:Type TextBlock}">
@@ -254,7 +254,38 @@
 																		</Style.Triggers>
 																	</Style>
 																</TextBlock.Style>
-															</TextBlock>
+															</TextBlock>-->
+															<Viewbox Width="53" Height="12pt" >
+																<kcvc:AircraftProficiencyIcon Level="{Binding CounterKey.Adept}"/>
+																<Viewbox.ToolTip>
+																	<TextBlock>
+																		<TextBlock.Style>
+																			<Style TargetType="{x:Type TextBlock}">
+																				<Setter Property="Text"
+																						Value="{Binding CounterKey.Adept, StringFormat=+{0}}" />
+																				<Setter Property="Foreground"
+																						Value="#FFD49C0F" />
+																				<Setter Property="Opacity"
+																						Value="1.0" />
+																				<Style.Triggers>
+																					<DataTrigger Binding="{Binding CounterKey.Adept}"
+																								 Value="0">
+																						<Setter Property="Foreground"
+																								Value="{DynamicResource InactiveForegroundBrushKey}" />
+																						<Setter Property="Opacity"
+																								Value=".5" />
+																					</DataTrigger>
+																					<DataTrigger Binding="{Binding CounterKey.Adept, Converter={StaticResource RangeToBooleanConverter}, ConverterParameter=1-3}"
+																								 Value="True">
+																						<Setter Property="Foreground"
+																								Value="#FF98B3CE" />
+																					</DataTrigger>
+																				</Style.Triggers>
+																			</Style>
+																		</TextBlock.Style>
+																	</TextBlock>
+																</Viewbox.ToolTip>
+															</Viewbox>
 															<TextBlock Width="83"
 																	   Margin="0,4">
 																<Run Text="{Binding Count, Mode=OneWay}"
@@ -306,7 +337,7 @@
 				Padding="20"
 				Visibility="{Binding IsReloading, Converter={StaticResource BooleanToVisibilityConverter}}"
 				d:IsHidden="True">
-            <TextBlock Text="{Binding Resources.SlotItemCatalog_Refreshing, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+			<TextBlock Text="{Binding Resources.SlotItemCatalog_Refreshing, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					   Style="{DynamicResource EmphaticTextStyleKey}"
 					   FontSize="16"
 					   Background="{DynamicResource ThemeBrushKey}"

@@ -1,0 +1,147 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+					xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Controls">
+	<Style x:Key="PilotBeginnerProficiency" TargetType="{x:Type Rectangle}">
+		<Setter Property="Stroke" Value="#D1D3D5" />
+		<Setter Property="Fill" Value="#9AB5D0" />
+		<Setter Property="StrokeThickness" Value="0.5" />
+		<Setter Property="RadiusX" Value="0.5" />
+		<Setter Property="RadiusY" Value="0.5" />
+		<Setter Property="Height" Value="25" />
+		<Setter Property="Width" Value="4" />
+		<Setter Property="Canvas.Top" Value="0" />
+		<Setter Property="Canvas.Left" Value="0" />
+	</Style>
+	<Style x:Key="PilotIntermediateProficiency" TargetType="{x:Type Path}">
+		<Setter Property="Data" Value="F1 M 0.666666,3.8147e-006L 4.66666,3.8147e-006C 5.03485,3.8147e-006 5.33333,0.298477 5.33333,0.666668L 13.5893,32.6667C 13.5893,33.0349 13.2909,33.3333 12.9227,33.3333L 8.92268,33.3333C 8.55449,33.3333 8.25602,33.0349 8.25602,32.6667L -2.95851e-007,0.666668C -2.95851e-007,0.298477 0.298476,3.8147e-006 0.666666,3.8147e-006 Z " />
+		<Setter Property="StrokeThickness" Value="0.5" />
+		<Setter Property="Stroke" Value="#C2B789" />
+		<Setter Property="Fill" Value="#D59C08" />
+		<Setter Property="Height" Value="25" />
+		<Setter Property="Width" Value="10" />
+		<Setter Property="Canvas.Top" Value="0" />
+		<Setter Property="Canvas.Left" Value="0" />
+		<Setter Property="StrokeLineJoin" Value="Round" />
+		<Setter Property="Stretch" Value="Uniform" />
+	</Style>
+	<Style x:Key="PilotMasterProficiency" TargetType="{x:Type Path}">
+		<Setter Property="Data" Value="M 11.8449,17.0962L 17.1782,17.0962L 26.7456,33.7612L 17.1782,50.4296L 11.8449,50.4296L 21.4123,33.7612L 11.8449,17.0962 Z " />
+		<Setter Property="StrokeThickness" Value="0.5" />
+		<Setter Property="Stroke" Value="#C1B996" />
+		<Setter Property="Fill" Value="#D49B0E" />
+		<Setter Property="Height" Value="25" />
+		<Setter Property="Width" Value="12" />
+		<Setter Property="Canvas.Top" Value="0" />
+		<Setter Property="Canvas.Left" Value="0" />
+		<Setter Property="StrokeLineJoin" Value="Round" />
+		<Setter Property="Stretch" Value="Uniform" />
+	</Style>
+	<Style TargetType="{x:Type controls:AircraftProficiencyIcon}">
+		<Setter Property="Width"
+				Value="26" />
+		<Setter Property="Height"
+				Value="26" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type controls:AircraftProficiencyIcon}">
+					<Canvas>
+					</Canvas>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Style.Triggers>
+			<Trigger Property="Level"
+					 Value="1">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:AircraftProficiencyIcon}">
+							<Canvas>
+								<Rectangle Style="{StaticResource PilotBeginnerProficiency}" />
+							</Canvas>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Level"
+					 Value="2">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:AircraftProficiencyIcon}">
+							<Canvas>
+								<Rectangle Style="{StaticResource PilotBeginnerProficiency}" />
+								<Rectangle Style="{StaticResource PilotBeginnerProficiency}" Canvas.Left="6" />
+							</Canvas>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Level"
+					 Value="3">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:AircraftProficiencyIcon}">
+							<Canvas>
+								<Rectangle Style="{StaticResource PilotBeginnerProficiency}" />
+								<Rectangle Style="{StaticResource PilotBeginnerProficiency}" Canvas.Left="6" />
+								<Rectangle Style="{StaticResource PilotBeginnerProficiency}" Canvas.Left="11.5" />
+							</Canvas>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Level"
+					 Value="4">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:AircraftProficiencyIcon}">
+							<Canvas>
+								<Path Style="{StaticResource PilotIntermediateProficiency}" />
+							</Canvas>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Level"
+					 Value="5">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:AircraftProficiencyIcon}">
+							<Canvas>
+								<Path Style="{StaticResource PilotIntermediateProficiency}" />
+								<Path Style="{StaticResource PilotIntermediateProficiency}" Canvas.Left="6" />
+							</Canvas>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Level"
+					 Value="6">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:AircraftProficiencyIcon}">
+							<Canvas>
+								<Path Style="{StaticResource PilotIntermediateProficiency}" />
+								<Path Style="{StaticResource PilotIntermediateProficiency}" Canvas.Left="6" />
+								<Path Style="{StaticResource PilotIntermediateProficiency}" Canvas.Left="11.5" />
+							</Canvas>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Level"
+					 Value="7">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:AircraftProficiencyIcon}">
+							<Canvas>
+								<Path Style="{StaticResource PilotMasterProficiency}" />
+								<Path Style="{StaticResource PilotMasterProficiency}" Canvas.Left="6" />
+							</Canvas>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+		</Style.Triggers>
+	</Style>
+</ResourceDictionary>
