@@ -89,120 +89,34 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="220" />
-            </Grid.ColumnDefinitions>
-            <Grid Grid.ColumnSpan="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Border Grid.Row="0"
-						Grid.Column="0">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="도구" Grid.RowSpan="2"/>
-
-                        <Rectangle Width="1"
-								   Grid.Column="1"
-								   Grid.RowSpan="2"
-								   Margin="7,0,3,0"
-								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-
-                        <metro2:CallMethodButton Content="함선목록"
-												 Grid.Column="2"
-												 Padding="12,5"
-												 MinWidth="74"
-												 Margin="7,0"
-												 MethodName="ShowShipCatalog" />
-
-                        <metro2:CallMethodButton Content="개수공창"
-												 Grid.Column="3"
-												 Padding="12,5"
-												 MinWidth="74"
-												 Margin="0,0,7,0"
-												 MethodName="ShowRemodelWindow" />
-
-                        <metro2:CallMethodButton Content="계산기"
-												 Grid.Column="4"
-												 ToolTip="경험치 계산기입니다. 바로 다음 개조레벨조회도 가능"
-												 Padding="12,5"
-												 MinWidth="74"
-												 Margin="0,0,7,0"
-												 MethodName="CalExp" />
-
-                        <metro2:CallMethodButton Content="원정목록"
-												 Grid.Column="5"
-												 Padding="12,5"
-												 MinWidth="74"
-												 Margin="0,0,7,0"
-												 MethodName="ExpeditionsCatalogWindow" />
-
-                        <metro2:CallMethodButton Content="장비목록"
-												 Grid.Column="2"
-												 Grid.Row="1"
-												 Padding="12,5"
-												 MinWidth="74"
-												 Margin="7,3,7,0"
-												 MethodName="ShowSlotItemCatalog">
-                        </metro2:CallMethodButton>
-                        <metro2:CallMethodButton Content="수리목록" 
-												 Grid.Column="3"
-												 Grid.Row="1"
-												 Padding="12,5"
-												 MinWidth="74"
-												 Margin="0,3,7,0"
-												 MethodName="ShowNdockShipCatalog"/>
-                        <metro2:CallMethodButton Content="메모장" 
-												 Grid.Column="4"
-												 Grid.Row="1"
-												 Padding="12,5"
-												 MinWidth="74"
-												 Margin="0,3,7,0"
-												 MethodName="ShowNotePad"/>
-						<metro2:CallMethodButton Content="기록열람"
-												 MinWidth="74"
-												 Grid.Row="1"
-												 Grid.Column="5"
-												 Padding="12,5"
-												 Margin="0,3,7,0"
-												 MethodName="ShowLogViewer"/>
-                    </Grid>
-                </Border>
-                <metro2:CallMethodButton Grid.Row="1" 
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="220" />
+			</Grid.ColumnDefinitions>
+			<metro2:CallMethodButton Grid.Row="0"
+									 Grid.ColumnSpan="3"
 										 Style="{StaticResource JumbButtonStyleKey}"
 										 MethodName="Jump"
 										 MethodParameter="Expeditions">
-                    <StackPanel DataContext="{Binding Content.Expeditions}"
+				<StackPanel DataContext="{Binding Content.Expeditions}"
 								Orientation="Horizontal">
-                        <TextBlock Text="{Binding Name}" Margin="2" 
+					<TextBlock Text="{Binding Name}" Margin="2" 
 								   VerticalAlignment="Center"/>
 
-                        <Rectangle Width="1"
+					<Rectangle Width="1"
 								   Margin="7,4"
 								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-                        <ItemsControl ItemsSource="{Binding Fleets.Fleets}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal"/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock x:Name="Expedition"
+					<ItemsControl ItemsSource="{Binding Fleets.Fleets}">
+						<ItemsControl.ItemsPanel>
+							<ItemsPanelTemplate>
+								<StackPanel Orientation="Horizontal"/>
+							</ItemsPanelTemplate>
+						</ItemsControl.ItemsPanel>
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<TextBlock x:Name="Expedition"
 											   Style="{DynamicResource DefaultTextStyleKey}"
 											   Margin="0,0,4,0"
 											   VerticalAlignment="Center">
@@ -210,29 +124,106 @@
 											 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 										<Run x:Name="Remaining"
 											 Text="{Binding Expedition.Remaining, StringFormat=- {0}, Mode=OneWay}" />
-                                    </TextBlock>
-                                    <DataTemplate.Triggers>
-                                        <DataTrigger Binding="{Binding Id, Mode=OneWay}"
+								</TextBlock>
+								<DataTemplate.Triggers>
+									<DataTrigger Binding="{Binding Id, Mode=OneWay}"
 													 Value="1">
-                                            <Setter TargetName="Expedition"
+										<Setter TargetName="Expedition"
 													Property="Visibility"
 													Value="Collapsed" />
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding Expedition.IsInExecution}"
+									</DataTrigger>
+									<DataTrigger Binding="{Binding Expedition.IsInExecution}"
 													 Value="False">
-                                            <Setter TargetName="Remaining"
+										<Setter TargetName="Remaining"
 													Property="Text"
 													Value="" />
-                                        </DataTrigger>
-                                    </DataTemplate.Triggers>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </StackPanel>
-                </metro2:CallMethodButton>
-            </Grid>
-            <StackPanel Grid.Row="1">
-                <Border VerticalAlignment="Top">
+									</DataTrigger>
+								</DataTemplate.Triggers>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
+				</StackPanel>
+			</metro2:CallMethodButton>
+			<StackPanel Grid.Row="1">
+				<Border Visibility="{Binding Horizontal}">
+					<ScrollViewer VerticalScrollBarVisibility="Disabled"
+								  HorizontalScrollBarVisibility="Auto">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="Auto"/>
+							</Grid.ColumnDefinitions>
+
+							<metro2:CallMethodButton Content="함선목록"
+												 Grid.Column="2"
+												 Padding="10,4"
+												 MinWidth="70"
+												 Margin="7,0"
+												 MethodName="ShowShipCatalog" />
+
+							<metro2:CallMethodButton Content="개수공창"
+												 Grid.Column="3"
+												 Padding="10,4"
+												 MinWidth="70"
+												 Margin="0,0,7,0"
+												 MethodName="ShowRemodelWindow" />
+
+							<metro2:CallMethodButton Content="계산기"
+												 Grid.Column="4"
+												 ToolTip="경험치 계산기입니다. 바로 다음 개조레벨조회도 가능"
+												 Padding="10,4"
+												 MinWidth="70"
+												 Margin="0,0,7,0"
+												 MethodName="CalExp" />
+
+							<metro2:CallMethodButton Content="원정목록"
+												 Grid.Column="5"
+												 Padding="10,4"
+												 MinWidth="70"
+												 Margin="0,0,7,0"
+												 MethodName="ExpeditionsCatalogWindow" />
+
+							<metro2:CallMethodButton Content="장비목록"
+												 Grid.Column="2"
+												 Grid.Row="1"
+												 Padding="10,4"
+												 MinWidth="70"
+												 Margin="7,3,7,0"
+												 MethodName="ShowSlotItemCatalog">
+							</metro2:CallMethodButton>
+							<metro2:CallMethodButton Content="수리목록" 
+												 Grid.Column="3"
+												 Grid.Row="1"
+												 Padding="10,4"
+												 MinWidth="70"
+												 Margin="0,3,7,0"
+												 MethodName="ShowNdockShipCatalog"/>
+							<metro2:CallMethodButton Content="메모장" 
+												 Grid.Column="4"
+												 Grid.Row="1"
+												 Padding="10,4"
+												 MinWidth="70"
+												 Margin="0,3,7,0"
+												 MethodName="ShowNotePad"/>
+							<metro2:CallMethodButton Content="기록열람"
+												 Padding="10,4"
+												 MinWidth="70"
+												 Grid.Row="1"
+												 Grid.Column="5"
+												 Margin="0,3,7,0"
+												 MethodName="ShowLogViewer"/>
+						</Grid>
+					</ScrollViewer>
+				</Border>
+				<Border VerticalAlignment="Top">
                     <DockPanel DataContext="{Binding Content.Fleets}">
                         <ListBox DockPanel.Dock="Top"
 							 ItemsSource="{Binding Fleets}"
@@ -429,9 +420,79 @@
                         </ScrollViewer>
                     </DockPanel>
                 </Border>
-            </StackPanel>
-            <Grid Grid.Column="1"
-				  Grid.Row="1">
+			</StackPanel>
+			<Border Visibility="{Binding Vertical}"
+					Grid.Column="1"
+					Grid.Row="1"
+					Grid.RowSpan="3">
+				<ScrollViewer VerticalScrollBarVisibility="Disabled"
+								  HorizontalScrollBarVisibility="Auto">
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="Auto"/>
+						</Grid.RowDefinitions>
+
+						<metro2:CallMethodButton Content="함선목록"
+												 Padding="10,4"
+												 MinWidth="70"
+												 Margin="2,4"
+												 MethodName="ShowShipCatalog" />
+						<metro2:CallMethodButton Content="장비목록"
+												 Grid.Row="1"
+												 Padding="10,4"
+												 MinWidth="70"
+												 Margin="2,0,2,4"
+												 MethodName="ShowSlotItemCatalog"/>
+						<metro2:CallMethodButton Content="원정목록"
+												 Padding="10,4"
+												 MinWidth="70"
+												 Grid.Row="2"
+												 Margin="2,0,2,4"
+												 MethodName="ExpeditionsCatalogWindow" />
+						<metro2:CallMethodButton Content="계산기"
+												 ToolTip="경험치 계산기입니다. 바로 다음 개조레벨조회도 가능"
+												 Padding="10,4"
+												 Grid.Row="3"
+												 MinWidth="70"
+												 Margin="2,0,2,4"
+												 MethodName="CalExp" />
+						<metro2:CallMethodButton Content="개수공창"
+												 Padding="10,4"
+												 MinWidth="70"
+												 Margin="2,0,2,4"
+												 Grid.Row="4"
+												 MethodName="ShowRemodelWindow" />
+						<metro2:CallMethodButton Content="수리목록" 
+												 Grid.Row="5"
+												 Padding="10,4"
+												 Margin="2,0,2,4"
+												 MinWidth="70"
+												 MethodName="ShowNdockShipCatalog"/>
+						<metro2:CallMethodButton Content="메모장" 
+												 Grid.Row="6"
+												 Padding="10,4"
+												 Margin="2,0,2,4"
+												 MinWidth="70"
+												 MethodName="ShowNotePad"/>
+						<metro2:CallMethodButton Content="기록열람"
+												 Padding="10,4"
+												 MinWidth="70"
+												 Margin="2,0,2,4"
+												 Grid.Row="7"
+												 MethodName="ShowLogViewer"/>
+					</Grid>
+				</ScrollViewer>
+			</Border>
+			<Grid Grid.Column="2"
+				  Grid.Row="1"
+				  >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />

@@ -8,6 +8,9 @@ using Grabacr07.KanColleViewer.Views.Catalogs;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.IO;
+using System.Windows;
+using System.Windows.Controls;
+using Grabacr07.KanColleViewer.Models.Settings;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents
 {
@@ -33,10 +36,53 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 		public InformationViewModel Content { get; }
 
+		#region Vertical Visibility
+		private Visibility _Vertical;
+		public Visibility Vertical
+		{
+			get { return this._Vertical; }
+			set
+			{
+				if (value == this._Vertical) return;
+				this._Vertical = value;
+				RaisePropertyChanged();
+			}
+		}
+		#endregion
+
+		#region Horizontal VIsibility
+		private Visibility _Horizontal;
+		public Visibility Horizontal
+		{
+			get { return this._Horizontal; }
+			set
+			{
+				if (value == this._Horizontal) return;
+				this._Horizontal = value;
+				RaisePropertyChanged();
+			}
+		}
+		#endregion
+		public KanColleWindowSettings Settings { get; }
 
 		public OverviewViewModel(InformationViewModel owner)
 		{
 			this.Content = owner;
+
+			this.Settings = SettingsHost.Instance<KanColleWindowSettings>();
+
+			if (this.Settings?.Dock == Dock.Right 
+				|| this.Settings?.Dock == Dock.Left 
+				|| this.Settings?.IsSplit)
+			{
+				this.Vertical = Visibility.Collapsed;
+				this.Horizontal = Visibility.Visible;
+			}
+			else
+			{
+				this.Vertical = Visibility.Visible;
+				this.Horizontal = Visibility.Collapsed;
+			}
 		}
 
 

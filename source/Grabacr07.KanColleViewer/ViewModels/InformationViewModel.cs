@@ -47,7 +47,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-
 		// ----- Other elements
 
 		public AdmiralViewModel Admiral { get; }

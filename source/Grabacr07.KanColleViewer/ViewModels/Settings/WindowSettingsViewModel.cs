@@ -105,11 +105,15 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 				{
 					WindowService.Current.Information.Vertical = Visibility.Collapsed;
 					WindowService.Current.Information.Horizontal = Visibility.Visible;
+					WindowService.Current.Information.Overview.Vertical = Visibility.Collapsed;
+					WindowService.Current.Information.Overview.Horizontal = Visibility.Visible;
 				}
 				else
 				{
 					WindowService.Current.Information.Vertical = Visibility.Visible;
 					WindowService.Current.Information.Horizontal = Visibility.Collapsed;
+					WindowService.Current.Information.Overview.Vertical = Visibility.Visible;
+					WindowService.Current.Information.Overview.Horizontal = Visibility.Collapsed;
 				}
 			}
 		}
