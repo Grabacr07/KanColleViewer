@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Grabacr07.KanColleViewer.Plugins.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="CustomVolume" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">99</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

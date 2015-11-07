@@ -1,11 +1,11 @@
-﻿using Grabacr07.KanColleViewer.Properties;
+﻿using Grabacr07.KanColleViewer.Plugins.Properties;
+using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleViewer.ViewModels;
 using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Settings = Grabacr07.KanColleViewer.Models.Settings;
 
 namespace Grabacr07.KanColleViewer.Plugins
 {
@@ -14,6 +14,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 
 		private BlockAlignReductionStream BlockStream = null;
 		private DirectSoundOut SoundOut = null;
+		private static readonly Settings settings = Settings.Default;
 		string Main_folder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\Sounds";
 
 		public void SoundOutput(string header, bool IsWin8)
@@ -34,15 +35,20 @@ namespace Grabacr07.KanColleViewer.Plugins
 				}
 				else if (!string.IsNullOrEmpty(Audiofile))
 				{
-					//float Volume = Settings.Current.CustomSoundVolume > 0 ? (float)Settings.Current.CustomSoundVolume / 100 : 0;
+					if (settings.CustomVolume < 1 || settings.CustomVolume > 99)
+					{
+						settings.CustomVolume = 99;
+						settings.Save();
+					}
+					float volume = settings.CustomVolume / 100;
 					if (Path.GetExtension(Audiofile).ToLower() == ".wav")//wav인지 채크
 					{
-						WaveStream pcm = new WaveChannel32(new WaveFileReader(Audiofile));
+						WaveStream pcm = new WaveChannel32(new WaveFileReader(Audiofile), volume, 0);
 						BlockStream = new BlockAlignReductionStream(pcm);
 					}
 					else if (Path.GetExtension(Audiofile).ToLower() == ".mp3")//mp3인 경우
 					{
-						WaveStream pcm = new WaveChannel32(new Mp3FileReader(Audiofile));
+						WaveStream pcm = new WaveChannel32(new Mp3FileReader(Audiofile), volume, 0);
 						BlockStream = new BlockAlignReductionStream(pcm);
 					}
 					SoundOut = new DirectSoundOut();

@@ -85,9 +85,18 @@
     <Compile Include="CustomSound.cs" />
     <Compile Include="NotifierBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Toast.cs" />
     <Compile Include="BalloonNotifier.cs" />
     <Compile Include="ToastNotifier.cs" />
+    <Compile Include="ViewModels\NotifyViewModel.cs" />
+    <Compile Include="Views\NotifyView.xaml.cs">
+      <DependentUpon>NotifyView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowsNotifier.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -128,10 +137,17 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="ViewModels\" />
-    <Folder Include="Views\" />
+    <Page Include="Views\NotifyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

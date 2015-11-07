@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="Grabacr07.KanColleViewer.Plugins.Views.NotifyView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Grabacr07.KanColleViewer.Plugins.Views"
+			 xmlns:Notifier="clr-namespace:Grabacr07.KanColleViewer.Plugins.ViewModels"
+			 xmlns:ms="clr-namespace:Grabacr07.KanColleViewer.Plugins.Properties"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+			 d:DataContext="{d:DesignInstance Notifier:NotifyViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <StackPanel Margin="5">
+		<TextBlock Text="볼륨값을 설정합니다. 기본값은 99입니다(범위 1-99)"/>
+		<metro:PromptTextBox Prompt="99"
+							 Width="60"
+							 Margin="10"
+							 VerticalAlignment="Top"
+							 HorizontalAlignment="Left">
+			<metro:PromptTextBox.Text>
+				<Binding Path="CustomVolume"
+								 UpdateSourceTrigger="PropertyChanged">
+					<Binding.ValidationRules>
+						<metro:Int32Rule Min="1"
+												 Max="99" />
+					</Binding.ValidationRules>
+				</Binding>
+			</metro:PromptTextBox.Text>
+		</metro:PromptTextBox>
+	</StackPanel>
+</UserControl>
