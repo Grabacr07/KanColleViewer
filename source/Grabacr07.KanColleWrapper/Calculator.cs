@@ -88,6 +88,22 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
+		/// 촉접 개시율을 계산합니다. 이 값은 모두 합산되서 사용됩니다. 함상정찰기와 수상정찰기 한정
+		/// </summary>
+		/// <param name="slotItem"></param>
+		/// <param name="onslot"></param>
+		/// <returns></returns>
+		private static double CalcFirstEncounterPercent(this SlotItem slotItem, int onslot)
+		{
+			if (slotItem.Info.IsFirstEncounter)
+			{
+				return slotItem.Info.ViewRange * 0.04 * Math.Sqrt(onslot);
+			}
+
+			return 0;
+		}
+
+		/// <summary>
 		/// 指定した艦の制空能力の最大値を計算します。
 		/// </summary>
 		public static double CalcMaxAirSuperiorityPotential(this Ship ship)
@@ -115,22 +131,6 @@ namespace Grabacr07.KanColleWrapper
 			return 0;// 艦戦以外は簡単に吹き飛ぶので最小値としては計算に入れない
 		}
 
-
-		/// <summary>
-		/// 촉접 개시율을 계산합니다. 이 값은 모두 합산되서 사용됩니다. 함상정찰기와 수상정찰기 한정
-		/// </summary>
-		/// <param name="slotItem"></param>
-		/// <param name="onslot"></param>
-		/// <returns></returns>
-		private static double CalcFirstEncounterPercent(this SlotItem slotItem, int onslot)
-		{
-			if (slotItem.Info.IsFirstEncounter)
-			{
-				return slotItem.Info.ViewRange * 0.04 * Math.Sqrt(onslot);
-			}
-
-			return 0;
-		}
 
 		/// <summary>
 		/// 熟練度による制空能力ボーナス最大値を計算します。
