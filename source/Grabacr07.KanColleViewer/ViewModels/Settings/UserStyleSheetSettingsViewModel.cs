@@ -12,6 +12,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 {
 	public class UserStyleSheetSettingsViewModel : ViewModel
 	{
+		private bool isBackToDefaultValue;
+
 		#region UserStyleSheet 変更通知プロパティ
 
 		private string _UserStyleSheet;
@@ -21,6 +23,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 			get { return this._UserStyleSheet; }
 			set
 			{
+				this.isBackToDefaultValue = false;
 				if (this._UserStyleSheet != value)
 				{
 					this._UserStyleSheet = value;
@@ -34,13 +37,21 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 
 		public void Initialize()
 		{
-			this.Cancel();
 			GeneralSettings.UserStyleSheet.Subscribe(x => this.UserStyleSheet = x).AddTo(this);
+			
+			if (!GeneralSettings.UserStyleSheet.Provider.IsLoaded)
+				GeneralSettings.UserStyleSheet.Provider.Load();
+			this.isBackToDefaultValue = !GeneralSettings.UserStyleSheet.Provider.TryGetValue(GeneralSettings.UserStyleSheet.Key, out this._UserStyleSheet);
+			this._UserStyleSheet = GeneralSettings.UserStyleSheet;
+			this.RaisePropertyChanged(nameof(this.UserStyleSheet));
 		}
 
 		public void Apply()
 		{
-			GeneralSettings.UserStyleSheet.Value = this.UserStyleSheet;
+			if (this.isBackToDefaultValue)
+				GeneralSettings.UserStyleSheet.Reset();
+			else
+				GeneralSettings.UserStyleSheet.Value = this.UserStyleSheet;
 		}
 
 		public void Cancel()
@@ -51,6 +62,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 		public void BackToDefaultValue()
 		{
 			this.UserStyleSheet = GeneralSettings.UserStyleSheet.Default;
+			this.isBackToDefaultValue = true;
 		}
 	}
 }
