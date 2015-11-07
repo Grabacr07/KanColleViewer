@@ -43,6 +43,8 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				switch (this.ShipType.Id)
 				{
+					case 6:
+						return true;
 					case 7:
 						return true;
 					case 10:

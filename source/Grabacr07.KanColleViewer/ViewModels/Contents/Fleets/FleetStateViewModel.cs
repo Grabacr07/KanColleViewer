@@ -30,7 +30,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			get
 			{
 				StringBuilder stbr = new StringBuilder();
-
+				stbr.Append("촉접개시율: "+this.Source.FirstEncounter.ToString("##0.##%")+" ");
 				foreach (var item in this.Source.PartEncounterPercent)
 				{
 					stbr.Append("명중률" + item.Hit + ": " + Math.Round(item.SecondEncounter * 100, 1) + "% ");

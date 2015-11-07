@@ -118,6 +118,24 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
+		#region FirstEncounter
+
+		private double _FirstEncounter;
+		public double FirstEncounter
+		{
+			get { return this._FirstEncounter; }
+			private set
+			{
+				if (this._FirstEncounter != value)
+				{
+					this._FirstEncounter = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		#region MinAirSuperiorityPotential 変更通知プロパティ
 
 		private double _MinAirSuperiorityPotential;
@@ -289,7 +307,6 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			var ships = this.source.SelectMany(x => x.Ships).WithoutEvacuated().ToArray();
 
-			var FirstEncounter = ships.Sum(s => s.CalcFirstEncounterPercent());
 			List<SecondResult> partPercent = new List<SecondResult>();
 
 			List<ShipSlot> SecondSlotList = new List<ShipSlot>(this.MakeSecondList(ships));
@@ -307,6 +324,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.MinAirSuperiorityPotential = ships.Sum(s => s.CalcMinAirSuperiorityPotential());
 			this.EncounterPercent = TotalSecond.Sum(x => x.SecondEncounter);
 			this.PartEncounterPercent = partPercent;
+			this.FirstEncounter = ships.Sum(s => s.CalcFirstEncounterPercent());
 			this.MaxAirSuperiorityPotential = ships.Sum(s => s.CalcMaxAirSuperiorityPotential());
 			this.Speed = ships.All(x => x.Info.Speed == ShipSpeed.Fast)
 				? FleetSpeed.Fast
