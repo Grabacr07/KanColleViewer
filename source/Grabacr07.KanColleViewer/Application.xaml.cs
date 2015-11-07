@@ -96,7 +96,7 @@ namespace Grabacr07.KanColleViewer
 				NotifyService.Current.AddTo(this).Initialize();
 
 				Helper.SetRegistryFeatureBrowserEmulation();
-				Helper.SetMMCSSTask();
+				if (GeneralSettings.MMCSSEnabled) Helper.SetMMCSSTask();
 
 				KanColleClient.Current.Translations.EnableTranslations = KanColleSettings.EnableTranslations;
 				KanColleClient.Current.Translations.EnableAddUntranslated = KanColleSettings.EnableAddUntranslated;

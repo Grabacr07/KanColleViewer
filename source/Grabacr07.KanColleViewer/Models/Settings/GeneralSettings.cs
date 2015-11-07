@@ -33,6 +33,8 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		public static SerializableProperty<ExitConfirmationType> RefreshConfirmationType { get; }
 			= new SerializableProperty<ExitConfirmationType>(GetKey(), Providers.Roaming, Models.ExitConfirmationType.InSortieOnly) { AutoSave = true };
 
+		public static SerializableProperty<bool> MMCSSEnabled { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true) { AutoSave = true };
 
 		/// <summary>
 		/// ブラウザーの拡大鏡を示す設定値を取得します。

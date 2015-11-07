@@ -156,7 +156,14 @@
                   IsChecked="{Binding Source={x:Static ms:KanColleSettings.EnableAircraftFilter}, Path=Value}"
                   Height="17" 
                   Margin="15,0,0,10"/>
-		
+		<Rectangle Height="1"
+				   Margin="0,10"
+				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+		<TextBlock Text="MMCSS(Multimedia Class Scheduler Service) 설정" Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+		<CheckBox Content="MMCSS를 적용합니다. 해당 설정은 어플리케이션을 재시작해야 적용됩니다." 
+                  IsChecked="{Binding Source={x:Static ms:GeneralSettings.MMCSSEnabled}, Path=Value}"
+                  Height="17" 
+                  Margin="15,0,0,10"/>
 		<Rectangle Height="1"
 				   Margin="0,10"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
