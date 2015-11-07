@@ -88,6 +88,15 @@ namespace Grabacr07.KanColleWrapper.Models
 								   || this.Type == SlotItemType.水上偵察機
 								   || this.Type == SlotItemType.水上爆撃機;
 
+		public bool IsFirstEncounter => this.Type == SlotItemType.艦上偵察機
+									   || this.Type == SlotItemType.水上偵察機;
+
+		public bool IsSecondEncounter => this.Type == SlotItemType.艦上偵察機
+								   || this.Type == SlotItemType.艦上攻撃機
+								   || this.Type == SlotItemType.水上偵察機;
+
+		public double SecondEncounter => this.ViewRange * 0.07;
+
 		public SlotItemEquipType EquipType { get; }
 
 		internal SlotItemInfo(kcsapi_mst_slotitem rawData, MasterTable<SlotItemEquipType> types) : base(rawData)

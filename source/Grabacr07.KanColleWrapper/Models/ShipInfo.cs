@@ -37,6 +37,35 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public ShipType ShipType => this.shipType ?? (this.shipType = KanColleClient.Current.Master.ShipTypes[this.RawData.api_stype]) ?? ShipType.Dummy;
 
+		public bool IsAirCraft
+		{
+			get
+			{
+				switch (this.ShipType.Id)
+				{
+					case 7:
+						return true;
+					case 10:
+						return true;
+					case 11:
+						return true;
+					case 14:
+						return true;
+					case 16:
+						return true;
+					case 18:
+						return true;
+					case 20:
+						return true;
+					case 22:
+						return true;
+
+				}
+				return false;
+			}
+		}
+
+
 		/// <summary>
 		/// 各装備スロットの最大搭載機数を取得します。
 		/// </summary>

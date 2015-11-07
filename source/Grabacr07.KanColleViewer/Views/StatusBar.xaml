@@ -61,7 +61,15 @@
 								   MinWidth="60" />
 						<TextBlock Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Fleets_AirSuperiorityPotential, StringFormat='{}{0}: '}" />
 						<TextBlock MinWidth="80">
-							<Run Text="{Binding State.MinAirSuperiorityPotential, Mode=OneWay}"/><Run Text="-"/><Run Text="{Binding State.MaxAirSuperiorityPotential, Mode=OneWay}"/>
+							<Run Text="{Binding State.MinAirSuperiorityPotential, Mode=OneWay}"/>
+							<Run Text="-"/>
+							<Run Text="{Binding State.MaxAirSuperiorityPotential, Mode=OneWay}"/>
+							<Run Text="("/>
+							<Run Text="{Binding State.EncounterPercent,Mode=OneWay}"/>
+							<Run Text=")"/>
+							<TextBlock.ToolTip>
+								<Run Text="{Binding State.PartEncounterPercent,Mode=OneWay}"/>
+							</TextBlock.ToolTip>
 						</TextBlock>
 						<TextBlock Text="{Binding State.Speed}"
 								   MinWidth="85" />
@@ -96,6 +104,12 @@
 						<TextBlock Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Fleets_AirSuperiorityPotential, StringFormat='{}{0}: '}" />
 						<TextBlock MinWidth="80">
 							<Run Text="{Binding State.MinAirSuperiorityPotential, Mode=OneWay}"/><Run Text="-"/><Run Text="{Binding State.MaxAirSuperiorityPotential, Mode=OneWay}"/>
+							<Run Text="("/>
+							<Run Text="{Binding State.EncounterPercent,Mode=OneWay}"/>
+							<Run Text=")"/>
+							<TextBlock.ToolTip>
+								<Run Text="{Binding State.PartEncounterPercent,Mode=OneWay}"/>
+							</TextBlock.ToolTip>
 						</TextBlock>
 						<TextBlock Text="{Binding State.Speed}"
 								   MinWidth="85" />

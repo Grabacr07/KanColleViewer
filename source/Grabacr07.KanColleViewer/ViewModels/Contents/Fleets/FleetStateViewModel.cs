@@ -6,6 +6,7 @@ using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleWrapper.Models;
 using Livet;
 using Livet.EventListeners;
+using System.Text;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 {
@@ -22,6 +23,22 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		public string MinAirSuperiorityPotential => this.Source.MinAirSuperiorityPotential.ToString("##0");
 
 		public string MaxAirSuperiorityPotential => this.Source.MaxAirSuperiorityPotential.ToString("##0");
+
+		public string EncounterPercent => this.Source.EncounterPercent.ToString("##0.##%");
+		public string PartEncounterPercent
+		{
+			get
+			{
+				StringBuilder stbr = new StringBuilder();
+
+				foreach (var item in this.Source.PartEncounterPercent)
+				{
+					stbr.Append("명중률" + item.Hit + ": " + Math.Round(item.SecondEncounter * 100, 1) + "% ");
+				}
+
+				return stbr.ToString();
+			}
+		}
 
 		public string ViewRange => this.Source.ViewRange.ToString("##0.##");
 
