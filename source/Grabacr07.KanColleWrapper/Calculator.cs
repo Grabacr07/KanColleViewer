@@ -79,7 +79,7 @@ namespace Grabacr07.KanColleWrapper
 					if (ship.EquippedItems[i].Item.Info.IsSecondEncounter)
 					{
 						templist.Add(ship.EquippedItems[i].Item.Info.Hit);
-                    }
+					}
 				}
 				return templist;
 			}
@@ -104,10 +104,17 @@ namespace Grabacr07.KanColleWrapper
 		/// <param name="onslot">搭載数。</param>
 		/// <returns></returns>
 		private static double CalcMinAirecraftAdeptBonus(this SlotItem slotItem, int onslot)
-			=> onslot < 1 ? 0
-			: slotItem.Info.Type == SlotItemType.艦上戦闘機
-				? slotItem.CalcAirecraftAdeptBonusOfType() + slotItem.CalcMinInternalAirecraftAdeptBonus()
-				: 0;    // 艦戦以外は簡単に吹き飛ぶので最小値としては計算に入れない
+		{
+			if (onslot >= 1 && slotItem.Info.IsAirSuperiorityFighter)
+			{
+				if (slotItem.Info.Type == SlotItemType.艦上戦闘機)
+				{
+					return slotItem.CalcAirecraftAdeptBonusOfType() + slotItem.CalcMinInternalAirecraftAdeptBonus();
+				}
+			}
+			return 0;// 艦戦以外は簡単に吹き飛ぶので最小値としては計算に入れない
+		}
+
 
 		/// <summary>
 		/// 촉접 개시율을 계산합니다. 이 값은 모두 합산되서 사용됩니다. 함상정찰기와 수상정찰기 한정
@@ -132,8 +139,13 @@ namespace Grabacr07.KanColleWrapper
 		/// <param name="onslot">搭載数。</param>
 		/// <returns></returns>
 		private static double CalcMaxAirecraftAdeptBonus(this SlotItem slotItem, int onslot)
-			=> onslot < 1 ? 0
-			: slotItem.CalcAirecraftAdeptBonusOfType() + slotItem.CalcMaxInternalAirecraftAdeptBonus();
+		{
+			if (onslot >= 1 && slotItem.Info.IsAirSuperiorityFighter)
+			{
+				return slotItem.CalcAirecraftAdeptBonusOfType() + slotItem.CalcMaxInternalAirecraftAdeptBonus();
+			}
+			return 0;
+		}
 
 		/// <summary>
 		/// 各表記熟練度に対応した機種別熟練度ボーナスを計算します。
