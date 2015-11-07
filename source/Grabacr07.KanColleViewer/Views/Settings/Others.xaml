@@ -147,9 +147,13 @@
 				   Margin="0,10"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-		<TextBlock Text="제공식 소수점 설정" Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+		<TextBlock Text="제공식 설정" Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 		<CheckBox Content="제공식의 모든 소수점 결과를 버립니다" 
                   IsChecked="{Binding Source={x:Static ms:KanColleSettings.SqrtDoubleToInt}, Path=Value}"
+                  Height="17" 
+                  Margin="15,0,0,10"/>
+		<CheckBox Content="제공식의 최소값 계산에서 함상전투기만 계산에 넣습니다." 
+                  IsChecked="{Binding Source={x:Static ms:KanColleSettings.EnableAircraftFilter}, Path=Value}"
                   Height="17" 
                   Margin="15,0,0,10"/>
 		

@@ -20,6 +20,7 @@ namespace Grabacr07.KanColleViewer.Models.Migration
 		public int ReSortieCondition { get; set; }
 		public string ViewRangeCalcType { get; set; }
 		public bool SqrtDoubleToInt { get; set; }
+		public bool EnableAircraftFilter { get; set; }
 
 		event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
 		{

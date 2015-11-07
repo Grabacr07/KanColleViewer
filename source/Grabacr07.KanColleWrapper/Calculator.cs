@@ -123,10 +123,18 @@ namespace Grabacr07.KanColleWrapper
 		{
 			if (onslot >= 1 && slotItem.Info.IsAirSuperiorityFighter)
 			{
-				if (slotItem.Info.Type == SlotItemType.艦上戦闘機)
+				if (KanColleClient.Current.Settings.EnableAircraftFilter)
+				{
+					if (slotItem.Info.Type == SlotItemType.艦上戦闘機)
+					{
+						return slotItem.CalcAirecraftAdeptBonusOfType() + slotItem.CalcMinInternalAirecraftAdeptBonus();
+					}
+				}
+				else
 				{
 					return slotItem.CalcAirecraftAdeptBonusOfType() + slotItem.CalcMinInternalAirecraftAdeptBonus();
 				}
+
 			}
 			return 0;// 艦戦以外は簡単に吹き飛ぶので最小値としては計算に入れない
 		}

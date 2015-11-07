@@ -33,6 +33,9 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		public static SerializableProperty<bool> SqrtDoubleToInt { get; }
 			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
 
+		public static SerializableProperty<bool> EnableAircraftFilter { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
+
 		/// <summary>
 		/// 업데이트 알림을 활성화합니다
 		/// </summary>
@@ -122,6 +125,7 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 			ReSortieCondition.Subscribe(_ => this.RaisePropertyChanged(nameof(ReSortieCondition)));
 			ViewRangeCalcType.Subscribe(_ => this.RaisePropertyChanged(nameof(ViewRangeCalcType)));
 			SqrtDoubleToInt.Subscribe(_ => this.RaisePropertyChanged(nameof(SqrtDoubleToInt)));
+			EnableAircraftFilter.Subscribe(_ => this.RaisePropertyChanged(nameof(EnableAircraftFilter)));
         }
 
 		protected void RaisePropertyChanged([CallerMemberName] string propertyName = null)
@@ -140,6 +144,8 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		string IKanColleClientSettings.ViewRangeCalcType => ViewRangeCalcType.Value;
 
 		bool IKanColleClientSettings.SqrtDoubleToInt => SqrtDoubleToInt.Value;
+
+		bool IKanColleClientSettings.EnableAircraftFilter => EnableAircraftFilter.Value;
 
 		#endregion
 

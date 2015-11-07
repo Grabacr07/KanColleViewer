@@ -296,6 +296,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				{ nameof(IKanColleClientSettings.ViewRangeCalcType), (sender, args) => this.Calculate() },
 				{ nameof(IKanColleClientSettings.SqrtDoubleToInt), (sender, args) => this.Calculate() },
+				{ nameof(IKanColleClientSettings.EnableAircraftFilter) , (sender,args) => this.Calculate() },
 			});
 		}
 

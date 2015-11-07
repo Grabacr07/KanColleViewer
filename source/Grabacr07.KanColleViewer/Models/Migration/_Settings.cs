@@ -64,6 +64,7 @@ namespace Grabacr07.KanColleViewer.Models.Migration
 				KanColleSettings.NotificationShorteningTime.Value = Current.KanColleClientSettings.NotificationShorteningTime;
 				KanColleSettings.ReSortieCondition.Value = Current.KanColleClientSettings.ReSortieCondition;
 				KanColleSettings.SqrtDoubleToInt.Value = Current.KanColleClientSettings.SqrtDoubleToInt;
+				KanColleSettings.EnableAircraftFilter.Value = Current.KanColleClientSettings.EnableAircraftFilter;
             }
 
 			if (Current.ProxySettings != null)

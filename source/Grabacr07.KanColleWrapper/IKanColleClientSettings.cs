@@ -24,5 +24,7 @@ namespace Grabacr07.KanColleWrapper
 		string ViewRangeCalcType { get; }
 
 		bool SqrtDoubleToInt { get; }
-	}
+		
+		bool EnableAircraftFilter { get; }
+    }
 }
