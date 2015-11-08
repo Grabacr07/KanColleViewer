@@ -6,12 +6,12 @@ using System.Windows;
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("提督業も忙しい！")]
+[assembly: AssemblyTitle("KanColleViewer!")]
 [assembly: AssemblyDescription("提督業も忙しい！")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("grabacr.net")]
+[assembly: AssemblyCompany("Smooth and Flat")]
 [assembly: AssemblyProduct("KanColleViewer")]
-[assembly: AssemblyCopyright("Copyright © 2013 Grabacr07")]
+[assembly: AssemblyCopyright("Copyright © 2015, Yuubari")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: Guid("101B49A6-7E7B-422D-95FF-500F9EF483A8")]
@@ -52,4 +52,4 @@ using System.Windows;
 // すべての値を指定するか、下のように '*' を使ってビルドおよびリビジョン番号を 
 // 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("4.1.5.0")]
+[assembly: AssemblyVersion("4.1.5.7")]
