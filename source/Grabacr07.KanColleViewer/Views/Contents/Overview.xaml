@@ -203,7 +203,7 @@
 													<RowDefinition Height="Auto" />
 													<RowDefinition Height="Auto" />
 												</Grid.RowDefinitions>
-												<TextBlock>
+												<TextBlock ToolTip="{Binding RepairToolTip, Mode=OneWay}">
 													<Run Text="HP:" />
 													<Run Text="{Binding Ship.HP.Current, Mode=OneWay}"
 														 Style="{DynamicResource EmphaticTextElementStyleKey}" />

@@ -334,7 +334,8 @@
 											   Grid.Column="4"
 											   Grid.Row="0"
 											   Margin="10,0,10,10"
-											   Grid.RowSpan="2">
+											   Grid.RowSpan="2"
+											   ToolTip="{Binding RepairToolTip, Mode=OneWay}">
 										<Run Text="HP:" />
 										<Run Text="{Binding Ship.HP.Current, Mode=OneWay}"
 											 Style="{DynamicResource EmphaticTextElementStyleKey}" />

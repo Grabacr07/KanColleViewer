@@ -61,6 +61,12 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public int ExpForLevelMax => Experience.GetShipExpForSpecifiedLevel(this.Exp, 150);
 
+		public TimeSpan RepairTimeDock => 
+			TimeSpan.FromSeconds(Math.Floor(BaseRepairTime(this.Level) * (this.HP.Maximum - this.HP.Current) * this.Info.ShipType.RepairMultiplier) + 30);
+
+		public TimeSpan RepairTimeFacility => 
+			(BaseRepairTime() < 1200) ? this.RepairTimeDock : TimeSpan.FromMinutes((this.HP.Maximum - this.HP.Current) * 20);
+
 		#region HP 変更通知プロパティ
 
 		private LimitedValue _HP;
@@ -386,6 +392,9 @@ namespace Grabacr07.KanColleWrapper.Models
 			var max = this.HP.Maximum;
 			this.HP = this.HP.Update(max);
 		}
+
+		private double BaseRepairTime(double level = 1.0) => 
+			(Math.Min(level, 150) * ((level < 12) ? 10 : 5) + ((level < 12) ? 0 : (Math.Floor(Math.Sqrt(level - 11) * 10 + 50))));
 
 		public override string ToString()
 		{

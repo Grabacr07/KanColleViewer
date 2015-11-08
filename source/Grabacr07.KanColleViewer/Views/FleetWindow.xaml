@@ -403,7 +403,7 @@
 														</MultiBinding>
 													</Run>-->
 												</TextBlock>
-												<Viewbox>
+												<Viewbox Height="12">
 													<kcvc:AircraftProficiencyIcon Level="{Binding Path=Item.Adept, Mode=OneWay}" />
 												</Viewbox>
 											</StackPanel>
