@@ -65,7 +65,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			TimeSpan.FromSeconds(Math.Floor(BaseRepairTime(this.Level) * (this.HP.Maximum - this.HP.Current) * this.Info.ShipType.RepairMultiplier) + 30);
 
 		public TimeSpan RepairTimeFacility => 
-			(BaseRepairTime(this.Level) < 1200) ? this.RepairTimeDock : TimeSpan.FromMinutes((this.HP.Maximum - this.HP.Current) * 20);
+			((BaseRepairTime(this.Level) * this.Info.ShipType.RepairMultiplier + 30) < 1200) ? this.RepairTimeDock : TimeSpan.FromMinutes((this.HP.Maximum - this.HP.Current) * 20);
 
 		#region HP 変更通知プロパティ
 
