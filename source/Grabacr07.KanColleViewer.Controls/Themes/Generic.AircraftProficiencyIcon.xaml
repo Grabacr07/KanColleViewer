@@ -8,6 +8,7 @@
 		<Setter Property="Margin" Value="3,3,3,3" />
 		<Setter Property="HorizontalAlignment" Value="Center" />
 		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="SnapsToDevicePixels" Value="False" />
 	</Style>
 	<Style x:Key="PilotBeginnerProficiency" TargetType="{x:Type Rectangle}">
 		<Setter Property="Stroke" Value="#D1D3D5" />
