@@ -534,6 +534,7 @@
 						  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}"
 						  ScrollViewer.PanningMode="Both">
 					<ListView.Resources>
+						<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverterKey" />
 						<Style TargetType="{x:Type TextBlock}">
 							<Setter Property="Margin"
 									Value="5,4" />
@@ -786,7 +787,49 @@
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
-							
+
+							<controls:CollapsibleGridViewColumn Width="64" Visibility="Visible">
+								<GridViewColumnHeader>
+								<!-- <GridViewColumnHeader Visibility="{Binding ShowMoreStats, Converter={StaticResource BooleanToVsibilityConverterKey}}"> -->
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.EvasionColumn}">
+										<TextBlock Text="{Binding Resources.ShipCatalog_Column_Evasion, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+									</metro2:SortButton>
+								</GridViewColumnHeader>
+								<controls:CollapsibleGridViewColumn.CellTemplate>
+									<DataTemplate>
+										<TextBlock FontSize="9">
+											<Run Text="{Binding Ship.Evasion.Current, Mode=OneWay}" 
+												 FontSize="12"
+												 Foreground="{DynamicResource ActiveForegroundBrushKey}"/>
+											<Run Text="" />
+											<Run Text="{Binding Ship.Evasion.Minimum, StringFormat=({0}), Mode=OneWay}" />
+										</TextBlock>
+									</DataTemplate>
+								</controls:CollapsibleGridViewColumn.CellTemplate>
+							</controls:CollapsibleGridViewColumn>
+
+							<controls:CollapsibleGridViewColumn Width="64" Visibility="Visible">
+								<GridViewColumnHeader>
+									<!-- <GridViewColumnHeader Visibility="{Binding ShowMoreStats, Converter={StaticResource BooleanToVsibilityConverterKey}}"> -->
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.AntiSubColumn}">
+										<TextBlock Text="{Binding Resources.ShipCatalog_Column_ASW, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+									</metro2:SortButton>
+								</GridViewColumnHeader>
+								<controls:CollapsibleGridViewColumn.CellTemplate>
+									<DataTemplate>
+										<TextBlock FontSize="9">
+											<Run Text="{Binding Ship.AntiSub.Current, Mode=OneWay}" 
+												 FontSize="12"
+												 Foreground="{DynamicResource ActiveForegroundBrushKey}"/>
+											<Run Text="" />
+											<Run Text="{Binding Ship.AntiSub.Minimum, StringFormat=({0}), Mode=OneWay}" />
+										</TextBlock>
+									</DataTemplate>
+								</controls:CollapsibleGridViewColumn.CellTemplate>
+							</controls:CollapsibleGridViewColumn>
+
 							<!--
 							<GridViewColumn Width="65">
 								<GridViewColumn.Header>

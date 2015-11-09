@@ -55,6 +55,21 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#endregion
 
+		private bool showStats;
+
+		public bool ShowStats
+		{
+			get { return this.showStats; }
+			set
+			{
+				if (this.showStats != value)
+				{
+					this.showStats = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
 		public SlotItemCatalogViewModel()
 		{
 			this.Title = Resources.SlotItemCatalog_WindowTitle;

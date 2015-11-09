@@ -3266,6 +3266,51 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 中.
+        /// </summary>
+        public static string SlotItemCatalog_AttackRange_Long {
+            get {
+                return ResourceManager.GetString("SlotItemCatalog_AttackRange_Long", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 超長.
+        /// </summary>
+        public static string SlotItemCatalog_AttackRange_Medium {
+            get {
+                return ResourceManager.GetString("SlotItemCatalog_AttackRange_Medium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 長.
+        /// </summary>
+        public static string SlotItemCatalog_AttackRange_Short {
+            get {
+                return ResourceManager.GetString("SlotItemCatalog_AttackRange_Short", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to N/A.
+        /// </summary>
+        public static string SlotItemCatalog_AttackRange_Unknown {
+            get {
+                return ResourceManager.GetString("SlotItemCatalog_AttackRange_Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 短.
+        /// </summary>
+        public static string SlotItemCatalog_AttackRange_VeryLong {
+            get {
+                return ResourceManager.GetString("SlotItemCatalog_AttackRange_VeryLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 装備している艦娘.
         /// </summary>
         public static string SlotItemCatalog_Equipped {

@@ -71,10 +71,17 @@
 		<DockPanel Grid.Row="1">
 			<Border DockPanel.Dock="Top"
 					Margin="8,8,8,0">
-				<metro2:CallMethodButton Content="{Binding Resources.SlotItemCatalog_Refresh, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-										 Padding="40,6"
-										 MethodName="Update"
-										 HorizontalAlignment="Left" />
+				<StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+					<metro2:CallMethodButton Content="{Binding Resources.SlotItemCatalog_Refresh, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+											 Padding="40,6"
+											 MethodName="Update"
+											 HorizontalAlignment="Left" 
+											 Margin="0,0,3,0" />
+					<CheckBox IsChecked="{Binding ShowStats, Mode=TwoWay}" 
+							  Content="{Binding Resources.SlotItemCatalog_ShowStats, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" 
+							  Margin="3,0,0,0" 
+							  VerticalAlignment="Center" />
+				</StackPanel>
 			</Border>
 
 			<Border BorderBrush="{DynamicResource BorderBrushKey}"
@@ -84,6 +91,7 @@
 						  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}"
 						  ScrollViewer.PanningMode="Both">
 					<ListView.Resources>
+						<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverterKey" />
 						<Style TargetType="{x:Type TextBlock}"
 							   BasedOn="{StaticResource DefaultTextStyleKey}">
 							<Setter Property="Margin"
@@ -148,6 +156,22 @@
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
+
+							<controls:CollapsibleGridViewColumn Width="120"
+																Visibility="{Binding ShowStats, Converter={StaticResource BooleanToVisibilityConverterKey}, Mode=OneWay}">
+								<GridViewColumnHeader Visibility="{Binding ShowStats, Converter={StaticResource BooleanToVisibilityConverterKey}, Mode=OneWay}">
+									<TextBlock Text="{Binding Resources.SlotItemCatalog_Stats, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+								</GridViewColumnHeader>
+								<controls:CollapsibleGridViewColumn.CellTemplate>
+									<DataTemplate DataType="{x:Type viewModels:SlotItemCounter}">
+										<TextBlock Margin="0,4"
+												   TextWrapping="Wrap">
+											<Run Text="{Binding Stats, Mode=OneWay}"
+												 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+										</TextBlock>
+									</DataTemplate>
+								</controls:CollapsibleGridViewColumn.CellTemplate>
+							</controls:CollapsibleGridViewColumn>
 
 							<GridViewColumn Width="52">
 								<GridViewColumn.Header>
