@@ -2,40 +2,45 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
 					xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Controls">
+	<Style x:Key="IconGridSize" TargetType="{x:Type Grid}">
+		<Setter Property="Height" Value="50" />
+		<Setter Property="Width" Value="50" />
+		<Setter Property="Margin" Value="3,3,3,3" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+	</Style>
 	<Style x:Key="PilotBeginnerProficiency" TargetType="{x:Type Rectangle}">
 		<Setter Property="Stroke" Value="#D1D3D5" />
 		<Setter Property="Fill" Value="#9AB5D0" />
-		<Setter Property="StrokeThickness" Value="0.5" />
-		<Setter Property="RadiusX" Value="0.5" />
-		<Setter Property="RadiusY" Value="0.5" />
-		<Setter Property="Height" Value="25" />
-		<Setter Property="Width" Value="4" />
-		<Setter Property="Canvas.Top" Value="0" />
-		<Setter Property="Canvas.Left" Value="0" />
+		<Setter Property="StrokeThickness" Value="1" />
+		<Setter Property="RadiusX" Value="1" />
+		<Setter Property="RadiusY" Value="1" />
+		<Setter Property="Height" Value="50" />
+		<Setter Property="Width" Value="8" />
+		<Setter Property="Stretch" Value="Fill" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
 	</Style>
-	<Style x:Key="PilotIntermediateProficiency" TargetType="{x:Type Path}">
-		<Setter Property="Data" Value="F1 M 0.666666,3.8147e-006L 4.66666,3.8147e-006C 5.03485,3.8147e-006 5.33333,0.298477 5.33333,0.666668L 13.5893,32.6667C 13.5893,33.0349 13.2909,33.3333 12.9227,33.3333L 8.92268,33.3333C 8.55449,33.3333 8.25602,33.0349 8.25602,32.6667L -2.95851e-007,0.666668C -2.95851e-007,0.298477 0.298476,3.8147e-006 0.666666,3.8147e-006 Z " />
-		<Setter Property="StrokeThickness" Value="0.5" />
+	<Style x:Key="PilotIntermediateProficiency" TargetType="{x:Type Polygon}">
+		<Setter Property="Points" Value="0 0, 12 50, 20 50, 8 0" />
+		<Setter Property="StrokeThickness" Value="1" />
 		<Setter Property="Stroke" Value="#C2B789" />
 		<Setter Property="Fill" Value="#D59C08" />
-		<Setter Property="Height" Value="25" />
-		<Setter Property="Width" Value="10" />
-		<Setter Property="Canvas.Top" Value="0" />
-		<Setter Property="Canvas.Left" Value="0" />
+		<Setter Property="Height" Value="50" />
+		<Setter Property="Width" Value="20" />
 		<Setter Property="StrokeLineJoin" Value="Round" />
-		<Setter Property="Stretch" Value="Uniform" />
+		<Setter Property="Stretch" Value="Fill" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
 	</Style>
-	<Style x:Key="PilotMasterProficiency" TargetType="{x:Type Path}">
-		<Setter Property="Data" Value="M 11.8449,17.0962L 17.1782,17.0962L 26.7456,33.7612L 17.1782,50.4296L 11.8449,50.4296L 21.4123,33.7612L 11.8449,17.0962 Z " />
+	<Style x:Key="PilotMasterProficiency" TargetType="{x:Type Polygon}">
+		<Setter Property="Points" Value="0 0, 8 25, 0 50, 8 50, 16 25, 8 0" />
 		<Setter Property="StrokeThickness" Value="0.5" />
 		<Setter Property="Stroke" Value="#C1B996" />
 		<Setter Property="Fill" Value="#D49B0E" />
-		<Setter Property="Height" Value="25" />
-		<Setter Property="Width" Value="12" />
-		<Setter Property="Canvas.Top" Value="0" />
-		<Setter Property="Canvas.Left" Value="0" />
+		<Setter Property="Height" Value="50" />
+		<Setter Property="Width" Value="24" />
 		<Setter Property="StrokeLineJoin" Value="Round" />
 		<Setter Property="Stretch" Value="Uniform" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
 	</Style>
 	<Style TargetType="{x:Type controls:AircraftProficiencyIcon}">
 		<Setter Property="Width"
@@ -45,8 +50,8 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type controls:AircraftProficiencyIcon}">
-					<Canvas>
-					</Canvas>
+					<Viewbox>
+					</Viewbox>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
@@ -56,9 +61,11 @@
 				<Setter Property="Template">
 					<Setter.Value>
 						<ControlTemplate TargetType="{x:Type controls:AircraftProficiencyIcon}">
-							<Canvas>
-								<Rectangle Style="{StaticResource PilotBeginnerProficiency}" />
-							</Canvas>
+							<Viewbox>
+								<Grid Style="{StaticResource IconGridSize}">
+									<Rectangle Style="{StaticResource PilotBeginnerProficiency}" Margin="0,0,0,0"/>
+								</Grid>
+							</Viewbox>
 						</ControlTemplate>
 					</Setter.Value>
 				</Setter>
@@ -68,10 +75,12 @@
 				<Setter Property="Template">
 					<Setter.Value>
 						<ControlTemplate TargetType="{x:Type controls:AircraftProficiencyIcon}">
-							<Canvas>
-								<Rectangle Style="{StaticResource PilotBeginnerProficiency}" />
-								<Rectangle Style="{StaticResource PilotBeginnerProficiency}" Canvas.Left="6" />
-							</Canvas>
+							<Viewbox>
+								<Grid Style="{StaticResource IconGridSize}">
+									<Rectangle Style="{StaticResource PilotBeginnerProficiency}" Margin="-12,0,0,0"/>
+									<Rectangle Style="{StaticResource PilotBeginnerProficiency}" Margin="12,0,0,0" />
+								</Grid>
+							</Viewbox>
 						</ControlTemplate>
 					</Setter.Value>
 				</Setter>
@@ -81,11 +90,13 @@
 				<Setter Property="Template">
 					<Setter.Value>
 						<ControlTemplate TargetType="{x:Type controls:AircraftProficiencyIcon}">
-							<Canvas>
-								<Rectangle Style="{StaticResource PilotBeginnerProficiency}" />
-								<Rectangle Style="{StaticResource PilotBeginnerProficiency}" Canvas.Left="6" />
-								<Rectangle Style="{StaticResource PilotBeginnerProficiency}" Canvas.Left="11.5" />
-							</Canvas>
+							<Viewbox>
+								<Grid Style="{StaticResource IconGridSize}">
+									<Rectangle Style="{StaticResource PilotBeginnerProficiency}" Margin="-24,0,0,0" />
+									<Rectangle Style="{StaticResource PilotBeginnerProficiency}" Margin="0,0,0,0" />
+									<Rectangle Style="{StaticResource PilotBeginnerProficiency}" Margin="24,0,0,0" />
+								</Grid>
+							</Viewbox>
 						</ControlTemplate>
 					</Setter.Value>
 				</Setter>
@@ -95,9 +106,11 @@
 				<Setter Property="Template">
 					<Setter.Value>
 						<ControlTemplate TargetType="{x:Type controls:AircraftProficiencyIcon}">
-							<Canvas>
-								<Path Style="{StaticResource PilotIntermediateProficiency}" />
-							</Canvas>
+							<Viewbox>
+								<Grid Style="{StaticResource IconGridSize}">
+									<Polygon Style="{StaticResource PilotIntermediateProficiency}" Margin="0,0,0,0" />
+								</Grid>
+							</Viewbox>
 						</ControlTemplate>
 					</Setter.Value>
 				</Setter>
@@ -107,10 +120,12 @@
 				<Setter Property="Template">
 					<Setter.Value>
 						<ControlTemplate TargetType="{x:Type controls:AircraftProficiencyIcon}">
-							<Canvas>
-								<Path Style="{StaticResource PilotIntermediateProficiency}" />
-								<Path Style="{StaticResource PilotIntermediateProficiency}" Canvas.Left="6" />
-							</Canvas>
+							<Viewbox>
+								<Grid Style="{StaticResource IconGridSize}">
+									<Polygon Style="{StaticResource PilotIntermediateProficiency}" Margin="-12,0,0,0" />
+									<Polygon Style="{StaticResource PilotIntermediateProficiency}" Margin="12,0,0,0" />
+								</Grid>
+							</Viewbox>
 						</ControlTemplate>
 					</Setter.Value>
 				</Setter>
@@ -120,11 +135,13 @@
 				<Setter Property="Template">
 					<Setter.Value>
 						<ControlTemplate TargetType="{x:Type controls:AircraftProficiencyIcon}">
-							<Canvas>
-								<Path Style="{StaticResource PilotIntermediateProficiency}" />
-								<Path Style="{StaticResource PilotIntermediateProficiency}" Canvas.Left="6" />
-								<Path Style="{StaticResource PilotIntermediateProficiency}" Canvas.Left="11.5" />
-							</Canvas>
+							<Viewbox>
+								<Grid Style="{StaticResource IconGridSize}">
+									<Polygon Style="{StaticResource PilotIntermediateProficiency}" Margin="-24,0,0,0" />
+									<Polygon Style="{StaticResource PilotIntermediateProficiency}" Margin="0,0,0,0" />
+									<Polygon Style="{StaticResource PilotIntermediateProficiency}" Margin="24,0,0,0" />
+								</Grid>
+							</Viewbox>
 						</ControlTemplate>
 					</Setter.Value>
 				</Setter>
@@ -134,10 +151,12 @@
 				<Setter Property="Template">
 					<Setter.Value>
 						<ControlTemplate TargetType="{x:Type controls:AircraftProficiencyIcon}">
-							<Canvas>
-								<Path Style="{StaticResource PilotMasterProficiency}" />
-								<Path Style="{StaticResource PilotMasterProficiency}" Canvas.Left="6" />
-							</Canvas>
+							<Viewbox>
+								<Grid Style="{StaticResource IconGridSize}">
+									<Polygon Style="{StaticResource PilotMasterProficiency}" Margin="-14,0,0,0" />
+									<Polygon Style="{StaticResource PilotMasterProficiency}" Margin="14,0,0,0" />
+								</Grid>
+							</Viewbox>
 						</ControlTemplate>
 					</Setter.Value>
 				</Setter>
