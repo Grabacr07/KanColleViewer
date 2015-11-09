@@ -255,8 +255,8 @@
 																	</Style>
 																</TextBlock.Style>
 															</TextBlock>-->
-															<Viewbox Width="53" Height="12" VerticalAlignment="Top">
-																<kcvc:AircraftProficiencyIcon Level="{Binding CounterKey.Adept}"/>
+															<Viewbox Width="53" VerticalAlignment="Center">
+																<kcvc:AircraftProficiencyIcon Height="10" Level="{Binding CounterKey.Adept}"/>
 																<Viewbox.ToolTip>
 																	<TextBlock>
 																		<TextBlock.Style>
