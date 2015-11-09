@@ -22,6 +22,7 @@ namespace Grabacr07.KanColleViewer.Models
 			new Library("Livet", new Uri("http://ugaya40.hateblo.jp/entry/Livet")),
 			new Library("StatefulModel", new Uri("http://ugaya40.hateblo.jp/entry/StatefulModel")),
 			new Library("DynamicJson", new Uri("http://dynamicjson.codeplex.com/")),
+			new Library("JSON.NET", new Uri("http://www.newtonsoft.com/json")),
 			new Library("Nekoxy", new Uri("https://github.com/veigr/Nekoxy")),
 			new Library("Desktop Toast", new Uri("https://github.com/emoacht/DesktopToast")),
 			new Library(".NET Core Audio APIs", new Uri("https://netcoreaudio.codeplex.com/")),
