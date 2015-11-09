@@ -293,6 +293,12 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public int ViewRange => this.RawData.api_sakuteki.Get(0) ?? 0;
 
+		public LimitedValue AntiSub { get; private set; }
+
+		public LimitedValue Evasion { get; private set; }
+
+		public LimitedValue LineOfSight { get; private set; }
+
 		/// <summary>
 		/// 火力・雷装・対空・装甲のすべてのステータス値が最大値に達しているかどうかを示す値を取得します。
 		/// </summary>
@@ -358,6 +364,10 @@ namespace Grabacr07.KanColleWrapper.Models
 			}
 
 			this.UpdateSlots();
+
+			this.AntiSub = new LimitedValue(this.RawData.api_taisen[0], this.RawData.api_taisen[1], this.RawData.api_taisen[0] - this.EquippedItems.Sum(s => s.Item.Info.RawData.api_tais));
+			this.Evasion = new LimitedValue(this.RawData.api_kaihi[0], this.RawData.api_kaihi[1], this.RawData.api_kaihi[0] - this.EquippedItems.Sum(s => s.Item.Info.RawData.api_houk));
+			this.LineOfSight = new LimitedValue(this.RawData.api_sakuteki[0], this.RawData.api_sakuteki[1], this.RawData.api_sakuteki[0] - this.EquippedItems.Sum(s => s.Item.Info.RawData.api_saku));
 		}
 
 		public void UpdateSlots()
