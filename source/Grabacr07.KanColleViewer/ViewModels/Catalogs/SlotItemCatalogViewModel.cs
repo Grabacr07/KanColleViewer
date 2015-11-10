@@ -55,16 +55,14 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#endregion
 
-		private bool showStats;
-
 		public bool ShowStats
 		{
-			get { return this.showStats; }
+			get { return this.Settings.ShowEquipmentStats.Value; }
 			set
 			{
-				if (this.showStats != value)
+				if (this.Settings.ShowEquipmentStats.Value != value)
 				{
-					this.showStats = value;
+					this.Settings.ShowEquipmentStats.Value = value;
 					this.RaisePropertyChanged();
 				}
 			}

@@ -115,6 +115,19 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#endregion
 
+		public bool ShowAdditionalStats
+		{
+			get { return this.Settings.ShowAdditionalStats.Value; }
+			set
+			{
+				if (this.Settings.ShowAdditionalStats.Value != value)
+				{
+					this.Settings.ShowAdditionalStats.Value = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
 		public ShipCatalogWindowViewModel()
 		{
 			this.Title = Resources.ShipCatalog_WindowTitle;

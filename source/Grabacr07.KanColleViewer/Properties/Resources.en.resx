@@ -1295,7 +1295,7 @@ HTTP proxy settings are applied immediately. Settings for all other protocols ar
     <value>Refreshing the list…</value>
   </data>
   <data name="SlotItemCatalog_SkillLevel" xml:space="preserve">
-    <value>Skill</value>
+    <value>Rank</value>
   </data>
   <data name="SlotItemCatalog_Stats" xml:space="preserve">
     <value>Stats</value>

@@ -56,6 +56,12 @@
 						Orientation="Horizontal"
 						VerticalAlignment="Top"
 						WindowChrome.IsHitTestVisibleInChrome="True">
+				<CheckBox IsChecked="{Binding ShowStats, Mode=TwoWay}" 
+						  Content="{Binding Resources.SlotItemCatalog_ShowStats, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" 
+						  Margin="0,0,5,0" 
+						  Height="26"
+						  VerticalAlignment="Top"
+						  HorizontalAlignment="Right"/>
 				<metro:CaptionButton IsChecked="{Binding Settings.TopMost.Value, Mode=TwoWay}"
 									 ToolTip="{Binding Resources.Settings_Window_TopMost, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 Style="{DynamicResource PinButtonStyleKey}" />
@@ -71,17 +77,11 @@
 		<DockPanel Grid.Row="1">
 			<Border DockPanel.Dock="Top"
 					Margin="8,8,8,0">
-				<StackPanel VerticalAlignment="Center" Orientation="Horizontal">
-					<metro2:CallMethodButton Content="{Binding Resources.SlotItemCatalog_Refresh, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-											 Padding="40,6"
-											 MethodName="Update"
-											 HorizontalAlignment="Left" 
-											 Margin="0,0,3,0" />
-					<CheckBox IsChecked="{Binding ShowStats, Mode=TwoWay}" 
-							  Content="{Binding Resources.SlotItemCatalog_ShowStats, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" 
-							  Margin="3,0,0,0" 
-							  VerticalAlignment="Center" />
-				</StackPanel>
+				<metro2:CallMethodButton Content="{Binding Resources.SlotItemCatalog_Refresh, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+											Padding="40,6"
+											MethodName="Update"
+											HorizontalAlignment="Left" 
+											Margin="0,0,3,0" />
 			</Border>
 
 			<Border BorderBrush="{DynamicResource BorderBrushKey}"
@@ -89,7 +89,7 @@
 					Margin="8">
 				<ListView ItemsSource="{Binding SlotItems}"
 						  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}"
-						  ScrollViewer.PanningMode="Both">
+						  ScrollViewer.PanningMode="Both" DataContext="{Binding}">
 					<ListView.Resources>
 						<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverterKey" />
 						<Style TargetType="{x:Type TextBlock}"
@@ -175,13 +175,15 @@
 
 							<GridViewColumn Width="52">
 								<GridViewColumn.Header>
-									<TextBlock Text="{Binding Resources.SlotItemCatalog_Total, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+									<TextBlock Text="{Binding Resources.SlotItemCatalog_Total, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+											   HorizontalAlignment="Center"/>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate DataType="{x:Type viewModels:SlotItemCounter}">
 										<TextBlock Text="{Binding Count, Mode=OneWay}"
 												   Margin="0,4"
-												   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+												   Foreground="{DynamicResource ActiveForegroundBrushKey}" 
+												   HorizontalAlignment="Right"/>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
@@ -192,17 +194,20 @@
 										<Border Width="52"
 												BorderThickness="0,0,1,0"
 												BorderBrush="{DynamicResource BorderBrushKey}">
-											<TextBlock Text="{Binding Resources.SlotItemCatalog_ImprovementLevel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+											<TextBlock Text="{Binding Resources.SlotItemCatalog_ImprovementLevel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+													   HorizontalAlignment="Center"/>
 										</Border>
 										<Border Width="52"
 												BorderThickness="0,0,1,0"
 												BorderBrush="{DynamicResource BorderBrushKey}">
-											<TextBlock Text="{Binding Resources.SlotItemCatalog_SkillLevel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+											<TextBlock Text="{Binding Resources.SlotItemCatalog_SkillLevel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" 
+													   HorizontalAlignment="Center"/>
 										</Border>
 										<Border Width="82"
 												BorderThickness="0,0,1,0"
 												BorderBrush="{DynamicResource BorderBrushKey}">
-											<TextBlock>
+											<TextBlock HorizontalAlignment="Center"
+													   TextAlignment="Center">
 												<Run Text="{Binding Resources.SlotItemCatalog_Owned, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 												<Run Text="{Binding Resources.SlotItemCatalog_Extra, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 													 FontSize="11" />
@@ -216,7 +221,7 @@
 								<GridViewColumn.CellTemplate>
 									<DataTemplate DataType="{x:Type viewModels:SlotItemCounter}">
 										<ItemsControl ItemsSource="{Binding Levels}"
-													  Margin="0,0,0,-1">
+													  Margin="-4,0,0,-1">
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
 													<DataTemplate.Resources>
@@ -225,8 +230,10 @@
 													<Border BorderThickness="0,0,0,1"
 															BorderBrush="{DynamicResource BorderBrushKey}">
 														<DockPanel>
-															<TextBlock Width="53"
-																	   Margin="0,4">
+															<TextBlock Width="51"
+																	   Margin="0,4,1,0"
+																	   HorizontalAlignment="Center"
+																	   TextAlignment="Center">
 																<TextBlock.Style>
 																	<Style TargetType="{x:Type TextBlock}">
 																		<Setter Property="Text"
@@ -252,7 +259,7 @@
 																	</Style>
 																</TextBlock.Style>
 															</TextBlock>
-															<!--<TextBlock Width="53"
+															<!--<TextBlock Width="52"
 																	   Margin="0,4">
 																<TextBlock.Style>
 																	<Style TargetType="{x:Type TextBlock}">
@@ -279,8 +286,9 @@
 																	</Style>
 																</TextBlock.Style>
 															</TextBlock>-->
-															<Viewbox Width="53" VerticalAlignment="Center">
-																<kcvc:AircraftProficiencyIcon Height="10" Level="{Binding CounterKey.Adept}"/>
+															<Viewbox Width="51"
+																	 Margin="0,0,1,0">
+																<kcvc:AircraftProficiencyIcon Height="10" Level="{Binding CounterKey.Adept}" HorizontalAlignment="Center" />
 																<Viewbox.ToolTip>
 																	<TextBlock>
 																		<TextBlock.Style>
@@ -311,7 +319,8 @@
 																</Viewbox.ToolTip>
 															</Viewbox>
 															<TextBlock Width="83"
-																	   Margin="0,4">
+																	   Margin="0,4"
+																	   TextAlignment="Center">
 																<Run Text="{Binding Count, Mode=OneWay}"
 																	 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 																<Run Text="{Binding Remainder, StringFormat=({0}), Mode=OneWay}"
