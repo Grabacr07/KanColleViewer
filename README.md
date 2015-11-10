@@ -30,8 +30,8 @@ This project is a localisation of [@Grabacr07](https://twitter.com/Grabacr07)'s 
 * One-click screenshotting
 * And more!
 
-
-
+### Frequently Asked Questions
+Please refer to the [FAQ](https://github.com/Yuubari/KanColleViewer/wiki/Frequently-Asked-Questions).
 
 ### System Requirements
 
