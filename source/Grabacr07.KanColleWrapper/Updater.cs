@@ -160,7 +160,7 @@ namespace Grabacr07.KanColleWrapper
 				}
 				catch (Exception ex)
 				{
-					Debug.WriteLine("Updater: Could not access the API.");
+					Debug.WriteLine("Updater: Could not access the API, reason: " + ex.Message + ".");
 					return false;
 				}
 
