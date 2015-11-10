@@ -182,8 +182,8 @@
 									<DataTemplate DataType="{x:Type viewModels:SlotItemCounter}">
 										<TextBlock Text="{Binding Count, Mode=OneWay}"
 												   Margin="0,4"
-												   Foreground="{DynamicResource ActiveForegroundBrushKey}" 
-												   HorizontalAlignment="Right"/>
+												   TextAlignment="Right"
+												   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
@@ -318,14 +318,22 @@
 																	</TextBlock>
 																</Viewbox.ToolTip>
 															</Viewbox>
-															<TextBlock Width="83"
-																	   Margin="0,4"
-																	   TextAlignment="Center">
-																<Run Text="{Binding Count, Mode=OneWay}"
-																	 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
-																<Run Text="{Binding Remainder, StringFormat=({0}), Mode=OneWay}"
-																	 FontSize="11" />
-															</TextBlock>
+															<Grid Width="81"
+																  Margin="0,4,1,4">
+																<Grid.ColumnDefinitions>
+																	<ColumnDefinition Width="*" />
+																	<ColumnDefinition Width="*" />
+																</Grid.ColumnDefinitions>
+																<TextBlock TextAlignment="Right"
+																		   Margin="2,0,8,0"
+																		   Text="{Binding Count, Mode=OneWay}"
+																		   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+																<TextBlock Grid.Column="1" 
+																		   TextAlignment="Left"
+																		   Margin="-2,0,2,0"
+																		   Text="{Binding Remainder, StringFormat=({0}), Mode=OneWay}"
+																		   FontSize="11" />
+															</Grid>
 															<ItemsControl ItemsSource="{Binding Ships}">
 																<ItemsControl.Template>
 																	<ControlTemplate TargetType="{x:Type ItemsControl}">
@@ -335,7 +343,7 @@
 																</ItemsControl.Template>
 																<ItemsControl.ItemTemplate>
 																	<DataTemplate>
-																		<TextBlock Margin="0,4,18,0">
+																		<TextBlock Margin="4,4,18,0">
 																			<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
 																				 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 																			<Run Text="{Binding Ship.Level, StringFormat=Lv.{0}, Mode=OneWay}"
