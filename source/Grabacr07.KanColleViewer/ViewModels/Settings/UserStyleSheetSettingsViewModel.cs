@@ -66,7 +66,16 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 
 		public void Apply()
 		{
-			GeneralSettings.UserStyleSheet.Value = this.UserStyleSheet;
+			if (this.UserStyleSheet == GeneralSettings.UserStyleSheet.Default)
+			{
+				// User CSS の場合は、既定値と同じ設定をあえて保持したいケースはないでしょう
+				// (むしろ下手に残して既定値が変わったときに追従できないトラブルのほうが問題)
+				GeneralSettings.UserStyleSheet.Reset();
+			}
+			else
+			{
+				GeneralSettings.UserStyleSheet.Value = this.UserStyleSheet;
+			}
 		}
 
 		public void Cancel()
