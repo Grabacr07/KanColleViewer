@@ -1,11 +1,9 @@
-﻿using Grabacr07.KanColleViewer.Models.Settings;
-using Grabacr07.KanColleWrapper;
-using Livet;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Grabacr07.KanColleViewer.Models.Settings;
+using Livet;
 using MetroTrilithon.Mvvm;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Settings
@@ -24,6 +22,26 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 				if (this._UserStyleSheet != value)
 				{
 					this._UserStyleSheet = value;
+					this.IsEditing = true;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region IsEditing 変更通知プロパティ
+
+		private bool _IsEditing;
+
+		public bool IsEditing
+		{
+			get { return this._IsEditing; }
+			set
+			{
+				if (this._IsEditing != value)
+				{
+					this._IsEditing = value;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -34,18 +52,36 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 
 		public void Initialize()
 		{
-			this.Cancel();
-			GeneralSettings.UserStyleSheet.Subscribe(x => this.UserStyleSheet = x).AddTo(this);
+			GeneralSettings.UserStyleSheet
+				.Subscribe(x =>
+				{
+					this.UserStyleSheet = x;
+					this.IsEditing = false;
+				})
+				.AddTo(this);
+
+			this._UserStyleSheet = GeneralSettings.UserStyleSheet;
+			this.RaisePropertyChanged(nameof(this.UserStyleSheet));
 		}
 
 		public void Apply()
 		{
-			GeneralSettings.UserStyleSheet.Value = this.UserStyleSheet;
+			if (this.UserStyleSheet == GeneralSettings.UserStyleSheet.Default)
+			{
+				// User CSS の場合は、既定値と同じ設定をあえて保持したいケースはないでしょう
+				// (むしろ下手に残して既定値が変わったときに追従できないトラブルのほうが問題)
+				GeneralSettings.UserStyleSheet.Reset();
+			}
+			else
+			{
+				GeneralSettings.UserStyleSheet.Value = this.UserStyleSheet;
+			}
 		}
 
 		public void Cancel()
 		{
 			this.UserStyleSheet = GeneralSettings.UserStyleSheet;
+			this.IsEditing = false;
 		}
 
 		public void BackToDefaultValue()

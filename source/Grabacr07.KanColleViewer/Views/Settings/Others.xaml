@@ -11,8 +11,6 @@
 			 xmlns:ms="clr-namespace:Grabacr07.KanColleViewer.Models.Settings"
 			 xmlns:vms="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Settings"
 			 mc:Ignorable="d"
-			 d:DesignWidth="500"
-			 d:DesignHeight="600"
 			 d:DataContext="{d:DesignInstance vms:SettingsViewModel}">
 	<UserControl.Resources>
 		<ResourceDictionary>
@@ -171,47 +169,45 @@
 		<TextBlock Text="유저 스타일 시트"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
 				   Margin="0,10" />
+		<StackPanel Margin="20,0,0,0">
+			<metro:PromptTextBox Text="{Binding UserStyleSheetSettings.UserStyleSheet, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+								 Height="100"
+								 AcceptsReturn="True"
+								 TextWrapping="NoWrap"
+								 VerticalContentAlignment="Top"
+								 VerticalScrollBarVisibility="Auto"
+								 Prompt="CSS" />
 
-		<metro:PromptTextBox Text="{Binding UserStyleSheetSettings.UserStyleSheet, Mode=TwoWay}"
-							 Margin="20,0,0,10"
-							 Height="100"
-							 AcceptsReturn="True"
-							 TextWrapping="NoWrap"
-							 VerticalContentAlignment="Top"
-							 VerticalScrollBarVisibility="Auto"
-							 Prompt="CSS"/>
-
-		<Grid Margin="20,0,0,10"
-			  DataContext="{Binding UserStyleSheetSettings}">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition/>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="Auto"/>
-			</Grid.ColumnDefinitions>
-			<metro2:CallMethodButton MethodTarget="{Binding}"
-									 MethodName="BackToDefaultValue"
-									 Content="기본값으로 설정"
-									 MinWidth="110"
-									 Padding="16,6"
-									 Margin="0,2"
-									 Grid.Column="0"/>
-			<metro2:CallMethodButton MethodTarget="{Binding}"
-									 MethodName="Apply"
-									 Content="적용"
-									 MinWidth="110"
-									 Padding="16,6"
-									 Margin="4,2"
-									 Grid.Column="2"/>
-			<metro2:CallMethodButton MethodTarget="{Binding}"
-									 MethodName="Cancel"
-									 Content="취소"
-									 MinWidth="110"
-									 Padding="16,6"
-									 Margin="4,2,0,4"
-									 Grid.Column="3"/>
-		</Grid>
-
+			<DockPanel Margin="-4,4"
+					   DataContext="{Binding UserStyleSheetSettings}"
+					   LastChildFill="False">
+				<Panel.Resources>
+					<Style TargetType="{x:Type metro2:CallMethodButton}"
+						   BasedOn="{StaticResource {x:Type metro2:CallMethodButton}}">
+						<Setter Property="MinWidth"
+								Value="100" />
+						<Setter Property="Margin"
+								Value="4" />
+						<Setter Property="Padding"
+								Value="16,4" />
+					</Style>
+				</Panel.Resources>
+				<metro2:CallMethodButton DockPanel.Dock="Left"
+										 MethodTarget="{Binding}"
+										 MethodName="BackToDefaultValue"
+										 Content="초기값으로 설정" />
+				<metro2:CallMethodButton DockPanel.Dock="Right"
+										 MethodTarget="{Binding}"
+										 MethodName="Cancel"
+										 Content="취소"
+										 IsEnabled="{Binding IsEditing}" />
+				<metro2:CallMethodButton DockPanel.Dock="Right"
+										 MethodTarget="{Binding}"
+										 MethodName="Apply"
+										 Content="적용"
+										 IsEnabled="{Binding IsEditing}" />
+			</DockPanel>
+		</StackPanel>
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 		

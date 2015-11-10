@@ -121,7 +121,7 @@ namespace Grabacr07.KanColleWrapper
 		/// <returns></returns>
 		private static double CalcMinAirecraftAdeptBonus(this SlotItem slotItem, int onslot)
 		{
-			if (onslot >= 1 && slotItem.Info.IsAirSuperiorityFighter)
+			if (onslot >= 1)
 			{
 				if (KanColleClient.Current.Settings.EnableAircraftFilter)
 				{
@@ -147,13 +147,8 @@ namespace Grabacr07.KanColleWrapper
 		/// <param name="onslot">搭載数。</param>
 		/// <returns></returns>
 		private static double CalcMaxAirecraftAdeptBonus(this SlotItem slotItem, int onslot)
-		{
-			if (onslot >= 1 && slotItem.Info.IsAirSuperiorityFighter)
-			{
-				return slotItem.CalcAirecraftAdeptBonusOfType() + slotItem.CalcMaxInternalAirecraftAdeptBonus();
-			}
-			return 0;
-		}
+			=> onslot < 1 ? 0
+			: slotItem.CalcAirecraftAdeptBonusOfType() + slotItem.CalcMaxInternalAirecraftAdeptBonus();
 
 		/// <summary>
 		/// 各表記熟練度に対応した機種別熟練度ボーナスを計算します。
@@ -188,11 +183,14 @@ namespace Grabacr07.KanColleWrapper
 		/// <returns></returns>
 		private static double CalcMinInternalAirecraftAdeptBonus(this SlotItem slotItem)
 		{
-			if (KanColleClient.Current.Settings.SqrtDoubleToInt)
-			{
-				return Math.Truncate(Math.Sqrt((slotItem.Adept != 0 ? (slotItem.Adept - 1) * 15 + 10 : 0) / 10));
-			}
-			else return Math.Sqrt((slotItem.Adept != 0 ? (slotItem.Adept - 1) * 15 + 10 : 0) / 10);
+			double temp;
+			temp= slotItem.Info.IsAirSuperiorityFighter
+				   ? Math.Sqrt((slotItem.Adept != 0 ? (slotItem.Adept - 1) * 15 + 10 : 0) / 10d)
+				   : 0;
+
+			if (KanColleClient.Current.Settings.SqrtDoubleToInt) temp = Math.Truncate(temp);
+				
+			return temp;
 		}
 
 		/// <summary>
@@ -202,11 +200,25 @@ namespace Grabacr07.KanColleWrapper
 		/// <returns></returns>
 		private static double CalcMaxInternalAirecraftAdeptBonus(this SlotItem slotItem)
 		{
-			if (KanColleClient.Current.Settings.SqrtDoubleToInt)
+			if (!slotItem.Info.IsAirSuperiorityFighter)
+				return 0;
+			double temp;
+
+			switch (slotItem.Adept)
 			{
-				return Math.Truncate(Math.Sqrt((slotItem.Adept != 0 ? (slotItem.Adept - 1) * 15 + 24 : 9) / 10));
+				case 0:
+					temp = Math.Sqrt(9d / 10);
+					break;
+				case 7:
+					temp = Math.Sqrt(120d / 10);
+					break;
+				default:
+					temp= Math.Sqrt((slotItem.Adept * 15 + 9) / 10d);
+					break;
 			}
-			else return Math.Sqrt((slotItem.Adept != 0 ? (slotItem.Adept - 1) * 15 + 24 : 9) / 10);
+			if (KanColleClient.Current.Settings.SqrtDoubleToInt) temp = Math.Truncate(temp);
+
+			return temp;
 		}
 
 		#endregion
