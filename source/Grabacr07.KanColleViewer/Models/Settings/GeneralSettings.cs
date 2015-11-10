@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -10,31 +10,31 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 	public static class GeneralSettings
 	{
 		/// <summary>
-		/// ƒJƒ‹ƒ`ƒƒİ’è‚ğæ“¾‚µ‚Ü‚·B
+		/// ã‚«ãƒ«ãƒãƒ£è¨­å®šã‚’å–å¾—ã—ã¾ã™ã€‚
 		/// </summary>
 		public static SerializableProperty<string> Culture { get; }
 			= new SerializableProperty<string>(GetKey(), Providers.Roaming) { AutoSave = true };
 
 		/// <summary>
-		/// ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ªƒvƒƒLƒV ƒ‚[ƒh (ƒuƒ‰ƒEƒU[‚ğ•\¦‚¹‚¸AƒvƒƒLƒV‚Æ‚µ‚Ä‚Ì‚İg—p‚·‚éƒ‚[ƒh) ‚Å“®ì‚·‚é‚©‚Ç‚¤‚©‚ğ¦‚·İ’è’l‚ğæ“¾‚µ‚Ü‚·B
+		/// ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ãŒãƒ—ãƒ­ã‚­ã‚· ãƒ¢ãƒ¼ãƒ‰ (ãƒ–ãƒ©ã‚¦ã‚¶ãƒ¼ã‚’è¡¨ç¤ºã›ãšã€ãƒ—ãƒ­ã‚­ã‚·ã¨ã—ã¦ã®ã¿ä½¿ç”¨ã™ã‚‹ãƒ¢ãƒ¼ãƒ‰) ã§å‹•ä½œã™ã‚‹ã‹ã©ã†ã‹ã‚’ç¤ºã™è¨­å®šå€¤ã‚’å–å¾—ã—ã¾ã™ã€‚
 		/// </summary>
 		public static SerializableProperty<bool> IsProxyMode { get; }
 			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, false);
 
 		/// <summary>
-		/// ƒAƒvƒŠƒP[ƒVƒ‡ƒ“I—¹‚ÌŠm”F“®ì‚ğ¦‚·İ’è’l‚ğæ“¾‚µ‚Ü‚·B
+		/// ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³çµ‚äº†æ™‚ã®ç¢ºèªå‹•ä½œã‚’ç¤ºã™è¨­å®šå€¤ã‚’å–å¾—ã—ã¾ã™ã€‚
 		/// </summary>
 		public static SerializableProperty<ExitConfirmationType> ExitConfirmationType { get; }
 			= new SerializableProperty<ExitConfirmationType>(GetKey(), Providers.Roaming, Models.ExitConfirmationType.None) { AutoSave = true };
 
 		/// <summary>
-		/// ƒuƒ‰ƒEƒU[‚ÌŠg‘å‹¾‚ğ¦‚·İ’è’l‚ğæ“¾‚µ‚Ü‚·B
+		/// ãƒ–ãƒ©ã‚¦ã‚¶ãƒ¼ã®æ‹¡å¤§é¡ã‚’ç¤ºã™è¨­å®šå€¤ã‚’å–å¾—ã—ã¾ã™ã€‚
 		/// </summary>
 		public static SerializableProperty<double> BrowserZoomFactor { get; }
 			= new SerializableProperty<double>(GetKey(), Providers.Local, 1.0);
 
 		/// <summary>
-		/// ƒ†[ƒU[ ƒXƒ^ƒCƒ‹ ƒV[ƒgİ’è‚ğæ“¾‚µ‚Ü‚·B
+		/// ãƒ¦ãƒ¼ã‚¶ãƒ¼ ã‚¹ã‚¿ã‚¤ãƒ« ã‚·ãƒ¼ãƒˆè¨­å®šã‚’å–å¾—ã—ã¾ã™ã€‚
 		/// </summary>
 		public static SerializableProperty<string> UserStyleSheet { get; }
 			= new SerializableProperty<string>(GetKey(), Providers.Roaming, Properties.Settings.Default.OverrideStyleSheet) { AutoSave = true };

@@ -130,45 +130,45 @@
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
 				   Margin="0,10" />
 
-		<metro:PromptTextBox Text="{Binding UserStyleSheetSettings.UserStyleSheet, Mode=TwoWay}"
-							 Margin="20,0,0,10"
-							 Height="100"
-							 AcceptsReturn="True"
-							 TextWrapping="NoWrap"
-							 VerticalContentAlignment="Top"
-							 VerticalScrollBarVisibility="Auto"
-							 Prompt="CSS"/>
+		<StackPanel Margin="20,0,0,0">
+			<metro:PromptTextBox Text="{Binding UserStyleSheetSettings.UserStyleSheet, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+								 Height="100"
+								 AcceptsReturn="True"
+								 TextWrapping="NoWrap"
+								 VerticalContentAlignment="Top"
+								 VerticalScrollBarVisibility="Auto"
+								 Prompt="CSS" />
 
-		<Grid Margin="20,0,0,10"
-			  DataContext="{Binding UserStyleSheetSettings}">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition/>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="Auto"/>
-			</Grid.ColumnDefinitions>
-			<metro2:CallMethodButton MethodTarget="{Binding}"
-									 MethodName="BackToDefaultValue"
-									 Content="既定値に戻す"
-									 MinWidth="110"
-									 Padding="16,6"
-									 Margin="0,2"
-									 Grid.Column="0"/>
-			<metro2:CallMethodButton MethodTarget="{Binding}"
-									 MethodName="Apply"
-									 Content="適用"
-									 MinWidth="110"
-									 Padding="16,6"
-									 Margin="4,2"
-									 Grid.Column="2"/>
-			<metro2:CallMethodButton MethodTarget="{Binding}"
-									 MethodName="Cancel"
-									 Content="キャンセル"
-									 MinWidth="110"
-									 Padding="16,6"
-									 Margin="4,2,0,4"
-									 Grid.Column="3"/>
-		</Grid>
+			<DockPanel Margin="-4,4"
+					   DataContext="{Binding UserStyleSheetSettings}"
+					   LastChildFill="False">
+				<Panel.Resources>
+					<Style TargetType="{x:Type metro2:CallMethodButton}"
+						   BasedOn="{StaticResource {x:Type metro2:CallMethodButton}}">
+						<Setter Property="MinWidth"
+								Value="100" />
+						<Setter Property="Margin"
+								Value="4" />
+						<Setter Property="Padding"
+								Value="16,4" />
+					</Style>
+				</Panel.Resources>
+				<metro2:CallMethodButton DockPanel.Dock="Left"
+										 MethodTarget="{Binding}"
+										 MethodName="BackToDefaultValue"
+										 Content="既定値に戻す" />
+				<metro2:CallMethodButton DockPanel.Dock="Right"
+										 MethodTarget="{Binding}"
+										 MethodName="Cancel"
+										 Content="キャンセル"
+										 IsEnabled="{Binding IsEditing}" />
+				<metro2:CallMethodButton DockPanel.Dock="Right"
+										 MethodTarget="{Binding}"
+										 MethodName="Apply"
+										 Content="適用"
+										 IsEnabled="{Binding IsEditing}" />
+			</DockPanel>
+		</StackPanel>
 
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
