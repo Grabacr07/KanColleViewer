@@ -33,7 +33,40 @@
 						Content="{Binding}">
 			<ContentControl.Resources>
 				<DataTemplate DataType="{x:Type vm:StartContentViewModel}" />
-				<DataTemplate DataType="{x:Type vmContents:OverviewViewModel}" />
+				<DataTemplate DataType="{x:Type vmContents:OverviewViewModel}">
+					<StackPanel Orientation="Horizontal"
+								DataContext="{Binding Content.Fleets.SelectedFleet}">
+						<StackPanel.Resources>
+							<Style TargetType="{x:Type TextBlock}">
+								<Setter Property="Foreground"
+										Value="{DynamicResource AccentForegroundBrushKey}" />
+								<Setter Property="FontFamily"
+										Value="{DynamicResource DefaultFontFamilyKey}" />
+								<Setter Property="FontSize"
+										Value="{DynamicResource DefaultFontSizeKey}" />
+								<Setter Property="VerticalAlignment"
+										Value="Center" />
+							</Style>
+						</StackPanel.Resources>
+
+						<TextBlock Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Fleets_Level, StringFormat='{}{0} '}" />
+						<TextBlock Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Fleets_Total, StringFormat='{}{0}: '}" />
+						<TextBlock Text="{Binding State.TotalLevel}"
+								   MinWidth="45" />
+						<TextBlock Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Fleets_Average, StringFormat='{}{0}: '}" />
+						<TextBlock Text="{Binding State.AverageLevel}"
+								   MinWidth="65" />
+						<TextBlock Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Fleets_ViewRange, StringFormat='{}{0}: '}" />
+						<TextBlock Text="{Binding State.ViewRange}"
+								   MinWidth="60" />
+						<TextBlock Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Fleets_AirSuperiorityPotential, StringFormat='{}{0}: '}" />
+						<TextBlock MinWidth="80">
+							<Run Text="{Binding State.MinAirSuperiorityPotential, Mode=OneWay}"/><Run Text="-"/><Run Text="{Binding State.MaxAirSuperiorityPotential, Mode=OneWay}"/>
+						</TextBlock>
+						<TextBlock Text="{Binding State.Speed}"
+								   MinWidth="85" />
+					</StackPanel>
+				</DataTemplate>
 				<DataTemplate DataType="{x:Type vmFleets:FleetsViewModel}">
 					<StackPanel Orientation="Horizontal"
 								DataContext="{Binding SelectedFleet}">
