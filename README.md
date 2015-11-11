@@ -1,73 +1,76 @@
-﻿提督業も忙しい！ (KanColleViewer)
+﻿KanColleViewer!
 --
 
-[![Build status (master)](https://img.shields.io/appveyor/ci/Yuubari/KanColleViewer.svg?style=flat-square)](https://ci.appveyor.com/project/Yuubari/kancolleviewer)
 [![Release](https://img.shields.io/github/release/Yuubari/KanColleViewer.svg?style=flat-square)](https://github.com/Yuubari/KanColleViewer/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/Yuubari/KanColleViewer/latest/total.svg?style=flat-square)](https://github.com/Yuubari/KanColleViewer/releases/latest)
-[![NuGet (KanColleWrapper)](https://img.shields.io/nuget/v/KanColleWrapper.svg?style=flat-square)](https://www.nuget.org/packages/KanColleWrapper/)
 [![License](https://img.shields.io/github/license/Yuubari/KanColleViewer.svg?style=flat-square)](https://github.com/Yuubari/KanColleViewer/blob/develop/LICENSE.txt)
 
 
-提督業も忙しい！ (KanColleViewer) は、DMM.com が配信しているブラウザゲーム「艦隊これくしょん ～艦これ～」をより遊びやすくするためのツールです。
+KanColleViewer! is a Windows-only browser tool that provides a more informative interface for DMM.com's Kantai Collection ~KanColle~ browser game.
 
-詳しくは、[特設ページ](http://grabacr.net/kancolleviewer) をご覧ください。
+### About This Project
 
+KanColleViewer! uses the Microsoft Internet Explorer components in WPF, WebBrowser, to display the game; [Nekoxy](https://github.com/veigr/Nekoxy) is used to capture communications between the game's Flash client and the DMM servers.
+Therefore, from the game servers' point of view, using KCV is basically the same as using IE.
+**Of course KanColleViewer! does not modify any game data nor implements any sort of macro cheating.**
 
+This project is a localisation of [@Grabacr07](https://twitter.com/Grabacr07)'s [original application](http://grabacr.net/kancolleviewer) maintained by [@Xiatian](https://twitter.com/Xiatian). The features added in this fork are based on previous work done by [@Zharay](http://twitter.com/Zharay), [@silfumus](http://twitter.com/silfumus) and [@southro_p](https://twitter.com/southro_p); this particular fork, however, does not carry over any legacy code from Zharay's 2.x builds, much unlike my previous 3.x branch, and is a complete re-implementation.
 
-### このプロジェクトについて
+### Features
 
-IE コンポーネント (WPF の WebBrowser コントロール) 上で艦これを表示し、[Nekoxy](https://github.com/veigr/Nekoxy) で通信内容をキャプチャしています。
-艦これの動作は、Internet Explorer 上で動作しているものと同じです。
-**当然ですが、通信内容の変更や、DMM/艦これのサーバーに対する情報の送信等 (マクロ・チート行為) は一切行っていません。**
+* Real-time display for instant repair, instant construction, and other materials
+* Real-time counters for shipgirls and equipment
+* Fleet status, including equipment in use
+* Complete list of all shipgirls stationed at your naval base with various filters
+* Complete list of your equipment (including which shipgirls have it equipped) grouped by type and by upgrade and proficiency levels
+* Notifications for morale recovery
+* Repair and construction docks status, including notifications on repair and construction completion
+* Quests display, showing both currently active quests and available daily and weekly quests
+* Expedition status display, including notifications on expedition completion
+* One-click screenshotting
+* And more!
 
+### Frequently Asked Questions
+Please refer to the [FAQ](https://github.com/Yuubari/KanColleViewer/wiki/Frequently-Asked-Questions).
 
-### 主な機能
+### System Requirements
 
-* 高速修復材や高速建造材 (ゲーム内で確認しにくいやつ) のリアルタイム表示
-* 所属している艦娘の数、保有している装備の数のリアルタイム表示
-* 艦隊と、艦隊に属する艦娘の一覧表示
-* 装備と、それぞれを装備している艦娘の一覧表示
-* コンディションが回復し艦隊が出撃可能になったタイミングでのトースト通知
-* 入渠ドック・建造ドックの使用状況と、整備・建造終了時のトースト通知
-* 現在遂行中の任務の一覧表示と、残っているデイリー/ウィークリー任務の一覧表示
-* 遠征の状況と、終了時のトースト通知
-* スクリーンショット保存
-* ミュート
-
-
-
-### 動作環境
-
-* Windows 8 以降
+* Windows 8 or later
 * Windows 7
 
-開発者 ([@Grabacr07](https://twitter.com/Grabacr07)) は Windows 8.1 Pro でのみ動作確認を行っております。
-Windows 7 では、遠征や建造の終了時のトースト通知が動作しません (代わりに、タスクトレイからのバルーン通知になります)。 Windows 8 以降での使用を推奨します。
+The original developer, ([@Grabacr07](https://twitter.com/Grabacr07)), uses Windows 8.1 Pro to build and test this application.
+The toast notification system from Windows 8 is not supported on Windows 7 (although you will still get the good old tray icon notifications). It's recommended to run KCV in Windows 8.
 
-* [.NET Framework 4.5](http://www.microsoft.com/ja-jp/download/details.aspx?id=30653)
+* [.NET Framework 4.5](http://www.microsoft.com/en-us/download/details.aspx?id=30653)
 
-Windows 7 で使用する場合、.NET Framework 4.5 のインストールが必要です。  
-Windows 8 以降の場合は標準でインストールされています。
+Windows 7 requires that you install .NET Framework 4.5.
+Windows 8 comes with it pre-installed.
 
-IE コンポーネントを使用しており、ブラウザー部分は Internet Explorer の設定に依存します。 また、ゲームが正しく表示されない等の現象が発生した場合は、IE の設定や、IE 上で Flash が表示できるかどうかをご確認ください。
+KCV uses IE to display the game's web page, so it depends on IE settings. If you're experiencing issues accessing the game, please verify that Flash works in Internet Explorer. It's also recommended to install the latest version of [Adobe Flash Player](https://get.adobe.com/flashplayer/).
 
-なお、艦これゲーム部分のサイズ (800 x 480) と Internet Explorer (WebBrowser コントロール) のサイズをぴったり合わせて表示しているだけで、Flash 抽出等も行っていません。
+KCV does not perform Flash extraction and instead provides a viewport of sorts to display the game's 800x480 frame.
 
 
 
-### 開発環境・言語
+### Development Environment and Language
 
-C# + WPF で開発しています。開発環境は Windows 8.1 Pro + Visual Studio Enterprise 2015 です。
+Developed in C# + WPF on Windows 8.1 Pro using Visual Studio Enterprise 2015.
 
-### ライセンス
+### License
 
 * [The MIT License (MIT)](LICENSE.txt)
 
-MIT ライセンスの下で公開する、オープンソース / フリーソフトウェアです。
+Released under the MIT License as open source software.
 
-### 使用ライブラリ
+### Libraries Used
 
-以下のライブラリを使用しています。
+The following libraries are used in this project:
+
+#### [JSON.NET](http://www.newtonsoft.com/json)
+
+* **Used for:** JSON serialisation and deserialisation
+* **License:** The MIT License (MIT)
+* **License, full text:** [licenses/JSON.NET.md](licenses/JSON.NET.md)
 
 #### [DynamicJson](http://dynamicjson.codeplex.com/)
 
@@ -79,14 +82,14 @@ MIT ライセンスの下で公開する、オープンソース / フリーソ�
 > http://neue.cc/  
 > http://dynamicjson.codeplex.com/
 
-* **用途 :** JSON デシリアライズ
-* **ライセンス :** Ms-PL
-* **ライセンス全文 :** [licenses/Ms-PL.txt](licenses/Ms-PL.txt)
+* **Used for:** JSON deserialisation
+* **License:** Ms-PL
+* **License, full text:** [licenses/Ms-PL.txt](licenses/Ms-PL.txt)
 
 #### [Livet](http://ugaya40.hateblo.jp/entry/Livet)
 
-* **用途 :** MVVM(Model/View/ViewModel)パターン用インフラストラクチャ
-* **ライセンス :** zlib/libpng
+* **Used for:** MVVM (Model/View/ViewModel) infrastructure pattern
+* **License:** zlib/libpng
 
 #### [StatefulModel](http://ugaya40.hateblo.jp/entry/StatefulModel)
 
@@ -94,9 +97,9 @@ MIT ライセンスの下で公開する、オープンソース / フリーソ�
 >
 > Copyright (c) 2015 Masanori Onoue
 
-* **用途 :** M-V-Whatever の Model 向けインフラストラクチャ
-* **ライセンス :** The MIT License (MIT)
-* **ライセンス全文 :** [licenses/StatefulModel.txt](licenses/StatefulModel.txt)
+* **Used for:** M-V-Whatever model infrastructure
+* **License:** The MIT License (MIT)
+* **License, full text:** [licenses/StatefulModel.txt](licenses/StatefulModel.txt)
 
 #### [Nekoxy](https://github.com/veigr/Nekoxy)
 
@@ -104,9 +107,9 @@ MIT ライセンスの下で公開する、オープンソース / フリーソ�
 >
 > Copyright (c) 2015 veigr
 
-* **用途 :** HTTP通信キャプチャ
-* **ライセンス :** The MIT License (MIT)
-* **ライセンス全文 :** [licenses/Nekoxy.txt](licenses/Nekoxy.txt)
+* **Used for:** HTTP traffic capture
+* **License:** The MIT License (MIT)
+* **License, full text:** [licenses/Nekoxy.txt](licenses/Nekoxy.txt)
 
 #### [TrotiNet](https://github.com/krys-g/TrotiNet)
 
@@ -116,22 +119,22 @@ MIT ライセンスの下で公開する、オープンソース / フリーソ�
 > TrotiNet is distributed under the GNU Lesser General Public License v3.0  
 > (LGPL). See: http://www.gnu.org/licenses/lgpl.html
 
-* **用途 :** ローカル HTTP Proxy
-* **ライセンス :** GNU LESSER GENERAL PUBLIC LICENSE Version 3
-* **ライセンス全文 :** [licenses/LGPL.txt](licenses/LGPL.txt) , [licenses/GPL.txt](licenses/GPL.txt)
-* **ソースコード :** [externals/TrotiNet-master.zip](externals/TrotiNet-master.zip)
+* **Used for:** Local HTTP proxy
+* **License:** GNU LESSER GENERAL PUBLIC LICENSE Version 3
+* **License, full text:** [licenses/LGPL.txt](licenses/LGPL.txt) , [licenses/GPL.txt](licenses/GPL.txt)
+* **Source code:** [externals/TrotiNet-master.zip](externals/TrotiNet-master.zip)
 
 #### [Apache log4net](https://logging.apache.org/log4net/)
 
-* **用途 :** TrotiNet の依存ライブラリ (ログ出力用/未使用)
-* **ライセンス :** Apache License Version 2.0
-* **ライセンス全文 :** [licenses/Apache.txt](licenses/Apache.txt)
+* **Used for:** TrotiNet dependency (log output; unused)
+* **License:** Apache License Version 2.0
+* **License, full text:** [licenses/Apache.txt](licenses/Apache.txt)
 
 #### [Rx (Reactive Extensions)](https://rx.codeplex.com/)
 
-* **用途 :** 非同期処理
-* **ライセンス :** Apache License Version 2.0
-* **ライセンス全文 :** [licenses/Apache.txt](licenses/Apache.txt)
+* **Used for:** Asynchronous processing
+* **License:** Apache License Version 2.0
+* **License, full text:** [licenses/Apache.txt](licenses/Apache.txt)
 
 #### [Desktop Toast](https://github.com/emoacht/DesktopToast)
 
@@ -139,9 +142,9 @@ MIT ライセンスの下で公開する、オープンソース / フリーソ�
 >
 > Copyright (c) 2014-2015 EMO
 
-* **用途 :** トースト通知
-* **ライセンス :** The MIT License (MIT)
-* **ライセンス全文 :** [licenses/DesktopToast.txt](licenses/DesktopToast.txt)
+* **Used for:** Toast notifications
+* **License:** The MIT License (MIT)
+* **License, full text:** [licenses/DesktopToast.txt](licenses/DesktopToast.txt)
 
 #### [.NET Core Audio APIs](https://netcoreaudio.codeplex.com/)
 
@@ -149,6 +152,26 @@ MIT ライセンスの下で公開する、オープンソース / フリーソ�
 >
 > Copyright (c) 2011 Vannatech
 
-* **用途 :** 音量操作
-* **ライセンス :** The MIT License (MIT)
-* **ライセンス全文 :** [licenses/NETCoreAudioAPIs.txt](licenses/NETCoreAudioAPIs.txt)
+* **Used for:** Audio volume control
+* **License:** The MIT License (MIT)
+* **License, full text:** [licenses/NETCoreAudioAPIs.txt](licenses/NETCoreAudioAPIs.txt)
+
+### Acknowledgements and Credits
+
+#### Development
+* [@Grabacr07](https://twitter.com/Grabacr07) and [@veigr](https://twitter.com/veigr) — original application
+* [@southro_p](https://twitter.com/southro_p) — initial localisation implementation
+* [@silfumus](http://twitter.com/silfumus) — continued localisation, translations support
+* [@Zharay](http://twitter.com/Zharay) — continued localisation and translations support
+
+#### Translations
+
+##### English
+* [@silfumus](http://twitter.com/silfumus)
+* [@Zharay](http://twitter.com/Zharay)
+* [@southro_p](https://twitter.com/southro_p)
+* [gakada](https://github.com/gakada/)
+
+##### German
+* [@xshunin](https://twitter.com/xshunin)
+* [@hawcy](https://twitter.com/halcy)
