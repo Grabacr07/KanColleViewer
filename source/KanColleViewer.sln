@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24627.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanColleViewer", "Grabacr07.KanColleViewer\KanColleViewer.csproj", "{C5F0111F-3F68-4A74-BB20-BB762564D080}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -62,6 +62,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanColleViewer.PluginAnalyzer", "Analyzers\KanColleViewer.PluginAnalyzer\KanColleViewer.PluginAnalyzer.csproj", "{B84F1251-4042-4ADC-955E-415469947538}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanColleViewer.PluginAnalyzer.Test", "Analyzers\KanColleViewer.PluginAnalyzer.Test\KanColleViewer.PluginAnalyzer.Test.csproj", "{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudibleNotifications", "Plugins\AudibleNotifications\AudibleNotifications.csproj", "{AAEE6607-3FB2-438F-913F-F853467DD40B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -211,6 +213,18 @@ Global
 		{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A}.Release|x86.ActiveCfg = Release|Any CPU
 		{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A}.Release|x86.Build.0 = Release|Any CPU
+		{AAEE6607-3FB2-438F-913F-F853467DD40B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAEE6607-3FB2-438F-913F-F853467DD40B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAEE6607-3FB2-438F-913F-F853467DD40B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AAEE6607-3FB2-438F-913F-F853467DD40B}.Debug|x86.Build.0 = Debug|Any CPU
+		{AAEE6607-3FB2-438F-913F-F853467DD40B}.Release (beta)|Any CPU.ActiveCfg = Release|Any CPU
+		{AAEE6607-3FB2-438F-913F-F853467DD40B}.Release (beta)|Any CPU.Build.0 = Release|Any CPU
+		{AAEE6607-3FB2-438F-913F-F853467DD40B}.Release (beta)|x86.ActiveCfg = Release|Any CPU
+		{AAEE6607-3FB2-438F-913F-F853467DD40B}.Release (beta)|x86.Build.0 = Release|Any CPU
+		{AAEE6607-3FB2-438F-913F-F853467DD40B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAEE6607-3FB2-438F-913F-F853467DD40B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAEE6607-3FB2-438F-913F-F853467DD40B}.Release|x86.ActiveCfg = Release|Any CPU
+		{AAEE6607-3FB2-438F-913F-F853467DD40B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -226,5 +240,6 @@ Global
 		{4E2EB2E0-E5FE-4FEB-A3E5-5F2F05CD1A67} = {5E122478-836E-4B7D-B0A4-F5EAA40BBE2A}
 		{B84F1251-4042-4ADC-955E-415469947538} = {0F9AEBCF-F2ED-4D4D-8E58-CAFED5D965C2}
 		{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A} = {0F9AEBCF-F2ED-4D4D-8E58-CAFED5D965C2}
+		{AAEE6607-3FB2-438F-913F-F853467DD40B} = {D844E42C-9406-43BF-9681-4F06F6CB3AD9}
 	EndGlobalSection
 EndGlobal
