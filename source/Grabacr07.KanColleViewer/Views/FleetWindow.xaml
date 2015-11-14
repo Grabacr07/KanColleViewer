@@ -388,20 +388,25 @@
 															   Type="{Binding Item.Info.IconType, Mode=OneWay}"
 															   Width="14"
 															   Height="14" />
-											<TextBlock Grid.Column="2"
-													   Foreground="{DynamicResource ActiveForegroundBrushKey}"
-													   Style="{DynamicResource DefaultTextStyleKey}"
-													   Margin="5,1">
-												<Run Text="{Binding Item.Info.Name, Mode=OneWay}" />
-												<Run Text="{Binding Item.LevelText, Mode=OneWay}"
-													 Foreground="#FF45A9A5" />
-												<Run Foreground="{DynamicResource ForegroundBrushKey}">
-													<MultiBinding StringFormat="{}({0} {1})">
-														<Binding Source="{x:Static models:ResourceService.Current}" Path="Resources.Ship_Text_Adept" Mode="OneWay" />
-														<Binding Path="Item.Adept" Mode="OneWay" />
-													</MultiBinding>
-												</Run>
-											</TextBlock>
+											<StackPanel Grid.Column="2"
+														Orientation="Horizontal" >
+												<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}"
+														   Style="{DynamicResource DefaultTextStyleKey}"
+														   Margin="5,1">
+													<Run Text="{Binding Item.Info.Name, Mode=OneWay}" />
+													<Run Text="{Binding Item.LevelText, Mode=OneWay}"
+														 Foreground="#FF45A9A5" />
+													<!--<Run Foreground="{DynamicResource ForegroundBrushKey}">
+														<MultiBinding StringFormat="{}({0} {1})">
+															<Binding Source="{x:Static models:ResourceService.Current}" Path="Resources.Ship_Text_Adept" Mode="OneWay" />
+															<Binding Path="Item.Adept" Mode="OneWay" />
+														</MultiBinding>
+													</Run>-->
+												</TextBlock>
+												<Viewbox Height="12pt">
+													<kcvc:AircraftProficiencyIcon Level="{Binding Path=Item.Adept, Mode=OneWay}" />
+												</Viewbox>
+											</StackPanel>
 										</Grid>
 										<DataTemplate.Triggers>
 											<DataTrigger Binding="{Binding Equipped}"

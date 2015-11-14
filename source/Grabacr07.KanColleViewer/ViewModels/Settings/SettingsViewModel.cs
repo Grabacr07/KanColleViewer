@@ -88,7 +88,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 				new List<BindableTextViewModel>(),
 				(list, lib) =>
 				{
-					list.Add(new BindableTextViewModel { Text = list.Count == 0 ? "Build with " : ", " });
+					list.Add(new BindableTextViewModel { Text = list.Count == 0 ? "Built with " : ", " });
 					list.Add(new HyperlinkViewModel { Text = lib.Name.Replace(' ', Convert.ToChar(160)), Uri = lib.Url });
 					// ☝プロダクト名の途中で改行されないように、space を non-break space に置き換えてあげてるんだからねっっ
 					return list;

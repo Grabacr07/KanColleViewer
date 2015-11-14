@@ -195,6 +195,11 @@
 								<Run Text="@veigr" />
 							</metro2:HyperlinkEx>
 							<LineBreak />
+							<Run Text="Localisation:" />
+							<metro2:HyperlinkEx Uri="https://twitter.com/Xiatian">
+								<Run Text="@Xiatian" />
+							</metro2:HyperlinkEx>
+							<LineBreak />
 							<Run Text="Icon design:" />
 							<metro2:HyperlinkEx Uri="https://twitter.com/Nrtwd/">
 								<Run Text="@Nrtwd" />
@@ -243,15 +248,15 @@
 						<Paragraph>
 							<Run Foreground="White"
 								 FontSize="20"
-								 Text="ようこそ" />
+								 Text="Welcome" />
 						</Paragraph>
-						<Paragraph Language="ja-jp">
-							<Run Text="「提督業も忙しい！」は、艦これを遊びやすくするためのツールです。" />
+						<Paragraph Language="en-GB">
+							<Run Text="KanColleViewer! is a tool to play Kantai Collection." />
 							<LineBreak />
-							<Run Text="艦これは、内蔵された Internet Explorer (IE) 上で動作します。艦これのサーバーに対し一切の負荷をかけないように設計・開発しており、通信内容の変更やサーバーに対する情報の送信、Flash 抽出、マクロ・チートの類は一切行っていません。" />
+							<Run Text="This program uses the Internet Explorer component; no data modification or Flash extraction is performed, and no macro cheats are implemented." />
 						</Paragraph>
-						<Paragraph Language="ja-jp">
-							<Run Text="ゲームが正しく表示されない場合や、スクリプトエラーが頻発する場合は、IE のキャッシュを削除してみてください。改善されない場合は、IE の設定や、通常の IE 上で Flash が表示できるかどうか等をご確認ください。" />
+						<Paragraph Language="en-GB">
+							<Run Text="If there are problems displaying the game, try clearing Internet Explorer cache. If that does not help, verify that the game works fine in Internet Explorer." />
 						</Paragraph>
 						<Paragraph>
 							<InlineUIContainer>
@@ -283,8 +288,8 @@
 										   SnapsToDevicePixels="True" />
 							</InlineUIContainer>
 						</Paragraph>
-						<Paragraph Language="ja-jp">
-							<Run Text="ツールは不定期に更新されています。適宜、更新の確認をお願いします。" />
+						<Paragraph Language="en-GB">
+							<Run Text="This program is updated on an irregular basis." />
 							<LineBreak />
 							<LineBreak />
 							<Run Text="Project home:" />
@@ -293,8 +298,8 @@
 							</metro2:HyperlinkEx>
 							<LineBreak />
 							<Run Text="Source code:" />
-							<metro2:HyperlinkEx Uri="https://github.com/Grabacr07/KanColleViewer">
-								<Run Text="https://github.com/Grabacr07/KanColleViewer" />
+							<metro2:HyperlinkEx Uri="https://github.com/Yuubari/KanColleViewer">
+								<Run Text="https://github.com/Yuubari/KanColleViewer" />
 							</metro2:HyperlinkEx>
 						</Paragraph>
 					</FlowDocument>

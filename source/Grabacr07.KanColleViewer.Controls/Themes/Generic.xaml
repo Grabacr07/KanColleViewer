@@ -9,6 +9,7 @@
 		<ResourceDictionary Source="/KanColleViewer.Controls;component/Themes/Generic.Modernizable.xaml" />
 		<ResourceDictionary Source="/KanColleViewer.Controls;component/Themes/Generic.Quest.xaml" />
 		<ResourceDictionary Source="/KanColleViewer.Controls;component/Themes/Generic.SlotItemIcon.xaml" />
+		<ResourceDictionary Source="/KanColleViewer.Controls;component/Themes/Generic.AircraftProficiencyIcon.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

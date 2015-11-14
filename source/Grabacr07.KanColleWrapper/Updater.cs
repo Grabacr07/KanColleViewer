@@ -30,7 +30,7 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// Currently selected culture.
 		/// </summary>
-		public string CurrentCulture { get; private set; }
+		public string CurrentCulture => TranslationDataProvider.CurrentCulture;
 
 		/// <summary>
 		/// KCV updates API version for requests.
@@ -93,22 +93,15 @@ namespace Grabacr07.KanColleWrapper
 			this.autosubmitTimer.Interval = new TimeSpan(0, 15, 0);
 
 			this.apiVersionCheckUrl = apiurl;
-			this.ChangeCulture(culture);
+			this.ChangeCulture();
 		}
 
 		/// <summary>
 		/// Changes the default culture.
 		/// </summary>
-		/// <param name="culture">New culture to switch to.</param>
-		public void ChangeCulture(string culture)
+		public void ChangeCulture()
 		{
-			if ((culture == null) || (culture == CurrentCulture))
-				return;
-
-			Debug.WriteLine("{0}: switching culture to {1}.", nameof(Updater), culture);
-
-			CurrentCulture = culture;
-			TranslationDataProvider.LoadLocalTranslations(culture);
+			Debug.WriteLine("{0}: switching culture to {1}.", nameof(Updater), CurrentCulture);
 			this.CheckForUpdates();
 			this.UpdateAsNeeded();
 		}
@@ -167,7 +160,7 @@ namespace Grabacr07.KanColleWrapper
 				}
 				catch (Exception ex)
 				{
-					Debug.WriteLine("Updater: Could not access the API.");
+					Debug.WriteLine("Updater: Could not access the API, reason: " + ex.Message + ".");
 					return false;
 				}
 

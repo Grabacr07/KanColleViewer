@@ -1361,4 +1361,19 @@ HTTP プロトコルの通信は自動構成も含め「インターネット �
   <data name="Ship_Evacuating" xml:space="preserve">
     <value>退避済</value>
   </data>
+  <data name="SlotItemCatalog_AttackRange_Long" xml:space="preserve">
+    <value>中</value>
+  </data>
+  <data name="SlotItemCatalog_AttackRange_Medium" xml:space="preserve">
+    <value>超長</value>
+  </data>
+  <data name="SlotItemCatalog_AttackRange_Short" xml:space="preserve">
+    <value>長</value>
+  </data>
+  <data name="SlotItemCatalog_AttackRange_Unknown" xml:space="preserve">
+    <value>N/A</value>
+  </data>
+  <data name="SlotItemCatalog_AttackRange_VeryLong" xml:space="preserve">
+    <value>短</value>
+  </data>
 </root>

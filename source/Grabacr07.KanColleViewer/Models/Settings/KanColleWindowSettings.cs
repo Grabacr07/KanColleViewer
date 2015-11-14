@@ -26,7 +26,13 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 
 	}
 
-	public class ShipCatalogWindowSettings : WindowSettings { }
+	public class ShipCatalogWindowSettings : WindowSettings
+	{
+		public SerializableProperty<bool> ShowAdditionalStats => this.Cache(key => new SerializableProperty<bool>(key, Providers.Roaming, false));
+	}
 
-	public class SlotItemCatalogWindowSettings : WindowSettings { }
+	public class SlotItemCatalogWindowSettings : WindowSettings
+	{
+		public SerializableProperty<bool> ShowEquipmentStats => this.Cache(key => new SerializableProperty<bool>(key, Providers.Roaming, false));
+	}
 }

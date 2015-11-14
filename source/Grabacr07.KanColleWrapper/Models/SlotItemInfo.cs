@@ -81,6 +81,11 @@ namespace Grabacr07.KanColleWrapper.Models
 		public int ViewRange => this.RawData.api_saku;
 
 		/// <summary>
+		/// 射程を取得します。
+		/// </summary>
+		public int AttackRange => this.RawData.api_leng;
+
+		/// <summary>
 		/// 制空戦に参加できる戦闘機または水上機かどうかを示す値を取得します。
 		/// </summary>
 		public bool IsAirSuperiorityFighter => this.Type == SlotItemType.艦上戦闘機

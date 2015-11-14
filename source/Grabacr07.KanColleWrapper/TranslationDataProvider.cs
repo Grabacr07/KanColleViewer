@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -20,6 +21,24 @@ namespace Grabacr07.KanColleWrapper
 	/// </summary>
 	public static class TranslationDataProvider
 	{
+		/// <summary>
+		/// Currently selected culture.
+		/// </summary>
+		private static string currentCulture;
+
+		public static string CurrentCulture
+		{
+			get { return currentCulture; }
+			private set
+			{
+				currentCulture = value ?? CultureInfo.CurrentCulture.Name;
+				currentCulture = (currentCulture.StartsWith("en")) ? "en" : currentCulture;
+				currentCulture = (currentCulture.StartsWith("ja")) ? "ja" : currentCulture;
+				// If culture is set to "(auto)", check if we support the translations for current the system-wide culture.
+				if ((value == null) && !IsCultureSupported(CultureInfo.CurrentCulture.Name)) currentCulture = "en";
+			}
+		}
+
 		private static string translationsPath;
 
 		private static TranslationDatabase translationSets = new TranslationDatabase();
@@ -31,6 +50,7 @@ namespace Grabacr07.KanColleWrapper
 		static TranslationDataProvider()
 		{
 			translationsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Smooth and Flat", "KanColleViewer", "Translations");
+			CurrentCulture = KanColleClient.Current?.Settings?.Culture;
 		}
 
 		//private static string FilePath(TranslationProviderType type, string culture)
@@ -38,6 +58,26 @@ namespace Grabacr07.KanColleWrapper
 
 		private static string SerialisationPath(TranslationProviderType type, string culture)
 			=> Path.Combine(translationsPath, culture, type.ToString() + ".xml");
+
+		/// <summary>
+		/// Changes culture and loads or re-loads translation files.
+		/// </summary>
+		/// <param name="culture">The culture to use for translations.</param>
+		public static void ChangeCulture(string culture)
+		{
+			if (culture == null) culture = CultureInfo.CurrentCulture.Name;
+			culture = (culture.StartsWith("en")) ? "en" : culture;
+			culture = (culture.StartsWith("ja")) ? "ja" : culture;
+			if (culture == CurrentCulture)
+				return;
+
+			Debug.WriteLine("TranslationDataProvider: got <" + culture + "> in a culture change request.");
+
+			CurrentCulture = culture;
+			LoadLocalTranslations(culture);
+			KanColleClient.Current.Translations.ChangeCulture();
+			KanColleClient.Current.Updater.ChangeCulture();
+		}
 
 		/// <summary>
 		/// Parses JSON received from the server
@@ -263,6 +303,17 @@ namespace Grabacr07.KanColleWrapper
 			}
 		}
 
+		/// <summary>
+		/// Are translations for the given culture supported?
+		/// Currently a stub.
+		/// TODO: Updater should provide a list of supported cultures.
+		/// </summary>
+		/// <param name="culture">Culture to check translation availability for</param>
+		/// <returns>True if translations are supported</returns>
+		public static bool IsCultureSupported(string culture)
+		{
+			return culture.StartsWith("ja") || (culture == "zh-CN") || (culture == "ko-KR") || culture.StartsWith("en");
+		}
 
 		public class TranslationDatabase : Dictionary<Tuple<TranslationProviderType, string>, BaseTranslationSet>
 		{

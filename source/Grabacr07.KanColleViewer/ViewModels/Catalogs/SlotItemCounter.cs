@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleWrapper.Models;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
@@ -55,6 +56,46 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public void AddShip(Ship ship, int itemLevel, int adept)
 		{
 			this.itemsByLevel[new SlotItemCounterKey(itemLevel, adept)].AddShip(ship);
+		}
+
+		public string Stats
+		{
+			get
+			{
+				var addDetail = "";
+
+				if (this.Target.Firepower != 0) addDetail += " " + ToSignedString(this.Target.Firepower) + " " + Resources.Stats_Firepower;
+				if (this.Target.AA != 0) addDetail += (addDetail != "" ? "\n" : "") + " " + ToSignedString(this.Target.AA) + " " + Resources.Stats_AntiAir;
+				if (this.Target.Torpedo != 0) addDetail += (addDetail != "" ? "\n" : "") + " " + ToSignedString(this.Target.Torpedo) + " " + Resources.Stats_Torpedo;
+				if (this.Target.ASW != 0) addDetail += (addDetail != "" ? "\n" : "") + " " + ToSignedString(this.Target.ASW) + " " + Resources.Stats_AntiSub;
+				if (this.Target.ViewRange != 0) addDetail += (addDetail != "" ? "\n" : "") + " " + ToSignedString(this.Target.ViewRange) + " " + Resources.Stats_SightRange;
+				if (this.Target.Armer != 0) addDetail += (addDetail != "" ? "\n" : "") + " " + ToSignedString(this.Target.Armer) + " " + Resources.Stats_Armor;
+				if (this.Target.Evade != 0) addDetail += (addDetail != "" ? "\n" : "") + " " + ToSignedString(this.Target.Evade) + " " + Resources.Stats_Evasion;
+				if (this.Target.Hit != 0) addDetail += (addDetail != "" ? "\n" : "") + " " + ToSignedString(this.Target.Hit) + " " + Resources.Stats_Accuracy;
+				if (this.Target.Bomb != 0) addDetail += (addDetail != "" ? "\n" : "") + " " + ToSignedString(this.Target.Bomb) + " " + Resources.Stats_DiveBomb;
+				if (this.Target.AttackRange != 0) addDetail += (addDetail != "" ? "\n" : "") + " " + IntToRange(this.Target.AttackRange) + " " + Resources.Stats_AttackRange;
+
+				return addDetail;
+			}
+		}
+
+		private string ToSignedString(int value) => value.ToString("+#;-#;#");
+
+		private string IntToRange(int value)
+		{
+			switch (value)
+			{
+				case 1:
+					return Resources.SlotItemCatalog_AttackRange_Short;
+				case 2:
+					return Resources.SlotItemCatalog_AttackRange_Medium;
+				case 3:
+					return Resources.SlotItemCatalog_AttackRange_Long;
+				case 4:
+					return Resources.SlotItemCatalog_AttackRange_VeryLong;
+				default:
+					return Resources.SlotItemCatalog_AttackRange_Unknown;
+			}
 		}
 	}
 

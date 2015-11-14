@@ -25,7 +25,8 @@
     z-index:1
 }
 
-.area-pickupgame
+.area-pickupgame,
+.area-menu
 {
     display:none!important;
 }</Value>

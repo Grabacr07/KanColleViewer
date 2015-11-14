@@ -1088,7 +1088,7 @@ GPU: Slow! GPU optimization for tablets.</value>
     <value>Armor</value>
   </data>
   <data name="Stats_AttackRange" xml:space="preserve">
-    <value>Attack Rng</value>
+    <value>Range</value>
   </data>
   <data name="Stats_DiveBomb" xml:space="preserve">
     <value>Dive Bomb</value>
@@ -1295,7 +1295,7 @@ HTTP proxy settings are applied immediately. Settings for all other protocols ar
     <value>Refreshing the list…</value>
   </data>
   <data name="SlotItemCatalog_SkillLevel" xml:space="preserve">
-    <value>Skill</value>
+    <value>Rank</value>
   </data>
   <data name="SlotItemCatalog_Stats" xml:space="preserve">
     <value>Stats</value>
@@ -1350,5 +1350,20 @@ HTTP proxy settings are applied immediately. Settings for all other protocols ar
   </data>
   <data name="Ship_Evacuating" xml:space="preserve">
     <value>Evac</value>
+  </data>
+  <data name="SlotItemCatalog_AttackRange_Long" xml:space="preserve">
+    <value>Long</value>
+  </data>
+  <data name="SlotItemCatalog_AttackRange_Medium" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="SlotItemCatalog_AttackRange_Short" xml:space="preserve">
+    <value>Short</value>
+  </data>
+  <data name="SlotItemCatalog_AttackRange_Unknown" xml:space="preserve">
+    <value>N/A</value>
+  </data>
+  <data name="SlotItemCatalog_AttackRange_VeryLong" xml:space="preserve">
+    <value>Very long</value>
   </data>
 </root>
