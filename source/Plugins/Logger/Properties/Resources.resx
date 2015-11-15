@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -109,9 +112,87 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Settings_Browse" xml:space="preserve">
+    <value>Browse…</value>
+  </data>
+  <data name="Settings_GeneralSettings_Title" xml:space="preserve">
+    <value>General Settings</value>
+  </data>
+  <data name="Settings_Location" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="Settings_LogFormat" xml:space="preserve">
+    <value>Log Format</value>
+  </data>
+  <data name="Settings_LoggerEnable" xml:space="preserve">
+    <value>Enable</value>
+  </data>
+  <data name="Settings_LogSample" xml:space="preserve">
+    <value>Sample log line:</value>
+  </data>
+  <data name="Settings_OpenFolder" xml:space="preserve">
+    <value>Open Folder</value>
+  </data>
+  <data name="Settings_TimestampFormat" xml:space="preserve">
+    <value>Date/time format</value>
+  </data>
+  <data name="Settings_TimestampFormat_Description" xml:space="preserve">
+    <value>※ More information:</value>
+  </data>
+  <data name="Settings_TimestampFormat_URI" xml:space="preserve">
+    <value>https://msdn.microsoft.com/en-us/library/8kb3ddd4(v=vs.110).aspx</value>
+  </data>
+  <data name="Settings_TimestampFormat_URI_Description" xml:space="preserve">
+    <value>date/time format strings</value>
+  </data>
+  <data name="Settings_Tooltip_BattleResult" xml:space="preserve">
+    <value>{0}: ISO timestamp (UTC)
+{1}: Timestamp (local time or JST)
+{2}: Drop name
+{3}: Map name
+{4}: Map node name
+{5}: Victory rank</value>
+  </data>
+  <data name="Settings_Tooltip_Construction" xml:space="preserve">
+    <value>{0}: ISO timestamp (UTC)
+{1}: Timestamp (local time or JST)
+{2}: Result
+{3}: Fuel
+{4}: Ammo
+{5}: Steel
+{6}: Bauxite
+{7}: Secretary name
+{8}: Secretary hull code</value>
+  </data>
+  <data name="Settings_Tooltip_Development" xml:space="preserve">
+    <value>{0}: ISO timestamp (UTC)
+{1}: Timestamp (local time or JST)
+{2}: Result
+{3}: Secretary class
+{4}: Fuel
+{5}: Ammo
+{6}: Steel
+{7}: Bauxite
+{8}: Secretary hull code</value>
+  </data>
+  <data name="Settings_Tooltip_Materials" xml:space="preserve">
+    <value>{0}: ISO timestamp (UTC)
+{1}: Timestamp (local time or JST)
+{2}: Fuel
+{3}: Ammo
+{4}: Steel
+{5}: Bauxite
+{6}: Development kits
+{7}: Instant repair
+{8}: Instant construction
+{9}: Improvement materials</value>
+  </data>
+  <data name="Settings_UseJST" xml:space="preserve">
+    <value>Use Japanese Standard Time (UTC+0900)</value>
+  </data>
 </root>

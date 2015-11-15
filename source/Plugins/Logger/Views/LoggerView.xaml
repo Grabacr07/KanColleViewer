@@ -1,0 +1,180 @@
+﻿<UserControl x:Class="Logger.Views.LoggerView"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:logger="clr-namespace:Logger"
+			 xmlns:viewModels="clr-namespace:Logger.ViewModels"
+			 xmlns:models="clr-namespace:Logger.Models"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+			 xmlns:metro2="http://schemes.grabacr.net/winfx/2015/personal/controls"
+			 xmlns:messaging="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 mc:Ignorable="d"
+			 d:DataContext="{d:DesignInstance viewModels:LoggerViewModel}"
+			 d:DesignHeight="300"
+			 d:DesignWidth="300">
+
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="Common.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+
+	<i:Interaction.Triggers>
+		<messaging:InteractionMessageTrigger Messenger="{Binding Messenger}"
+										 MessageKey="FolderDialog.Logger.Open">
+			<messaging:FolderBrowserDialogInteractionMessageAction />
+		</messaging:InteractionMessageTrigger>
+	</i:Interaction.Triggers>
+
+	<ScrollViewer VerticalScrollBarVisibility="Auto">
+		<StackPanel Margin="10" CanVerticallyScroll="True">
+			<TextBlock Text="{Binding Resources.Settings_GeneralSettings_Title, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+					   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+			<Border/>
+			<Grid Margin="0,0,0,6">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<TextBlock Margin="0,6">
+					<Run Text="{Binding Resources.Settings_Location, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" /><Run Text=": " />
+				</TextBlock>
+				<metro:PromptTextBox Grid.Row="0"
+								 Grid.Column="1"
+								 Grid.ColumnSpan="3"
+								 Text="{Binding Location, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+								 Prompt="{Binding Resources.Settings_Location, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+				<metro2:CallMethodButton Grid.Row="1"
+										 Grid.Column="2"
+										 Content="{Binding Resources.Settings_Browse, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+										 MethodName="OpenDestinationSelectionDialog"
+										 Margin="6,6,0,0" 
+										 Padding="8,4" />
+				<metro2:CallMethodButton Grid.Row="1"
+										 Grid.Column="3"
+										 Content="{Binding Resources.Settings_OpenFolder, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+										 IsEnabled="{Binding CanOpenDestination}"
+										 MethodName="OpenLogsFolder"
+										 Margin="6,6,0,0"
+ 										 Padding="8,4" />
+			</Grid>
+
+			<Grid Margin="0,0,0,10">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<TextBlock>
+					<Run Text="{Binding Resources.Settings_TimestampFormat, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" /><Run Text=": " />
+				</TextBlock>
+
+				<metro:PromptTextBox Grid.Row="0" 
+									 Grid.Column="1" 
+									 Grid.ColumnSpan="2"
+									 Text="{Binding TimestampFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+									 Prompt="{Binding DefaultTimestampFormat, Mode=OneWay}" />
+
+				<TextBlock Style="{DynamicResource DetailTextStyleKey}"
+						   Grid.Row="1"
+						   Grid.Column="0"
+						   Grid.ColumnSpan="3"
+						   Margin="6,6,0,6" >
+
+				<Run Text="{Binding Resources.Settings_TimestampFormat_Description, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"/>
+					
+				<metro2:HyperlinkEx Uri="{Binding Resources.Settings_TimestampFormat_URI, Source={x:Static models:ResourceService.Current}, Mode=OneWay}">
+					<Run Text="{Binding Resources.Settings_TimestampFormat_URI_Description, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"/>
+				</metro2:HyperlinkEx><Run Text="."/>
+					
+				</TextBlock>
+
+				<CheckBox Grid.Row="2" 
+						  Grid.Column="0"
+						  Grid.ColumnSpan="3"
+						  Margin="6,0,0,0"
+						  IsChecked="{Binding UseJapaneseTime}" Content="{Binding Resources.Settings_UseJST, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+			</Grid>
+
+			<Rectangle Height="1"
+				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+			<ItemsControl ItemsSource="{Binding Loggers}"
+					  Grid.IsSharedSizeScope="True">
+				<ItemsControl.Template>
+					<ControlTemplate TargetType="{x:Type ItemsControl}">
+						<ScrollViewer HorizontalScrollBarVisibility="Disabled"
+								  VerticalScrollBarVisibility="Auto">
+							<StackPanel IsItemsHost="True"
+									Margin="4" />
+						</ScrollViewer>
+					</ControlTemplate>
+				</ItemsControl.Template>
+
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<Border Padding="0,0,0,8"
+								BorderThickness="0,0,0,1"
+								BorderBrush="{DynamicResource BorderBrushKey}">
+							<StackPanel>
+								<TextBlock Margin="0,0,0,6"
+										   Text="{Binding Text, Mode=OneWay}"
+										   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+
+								<CheckBox Margin="0,0,0,6"
+										  IsChecked="{Binding Enabled, Mode=TwoWay}" 
+										  Content="{Binding Resources.Settings_LoggerEnable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+
+								<Grid Margin="0,0,0,6">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="Auto" />
+									</Grid.ColumnDefinitions>
+
+									<TextBlock Margin="0,6">
+										<Run Text="{Binding Resources.Settings_LogFormat, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" /><Run Text=": " />
+									</TextBlock>
+
+									<metro:PromptTextBox Grid.Column="1" 
+														 Grid.ColumnSpan="2"
+														 Text="{Binding Format, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+														 ToolTip="{Binding FormatToolTip, Mode=OneWay}" />
+								</Grid>
+
+								<TextBlock Margin="0,0,0,6"
+										   Text="{Binding Resources.Settings_LogSample, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"/>
+
+								<Grid Margin="0,0,0,6">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*"/>
+									</Grid.ColumnDefinitions>
+									
+									<metro:PromptTextBox Text="{Binding LogSample, Mode=OneWay}"
+														 FontFamily="Consolas, Lucida Console, Courier New"
+														 IsReadOnly="True" />
+								</Grid>
+
+							</StackPanel>
+						</Border>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</StackPanel>
+	</ScrollViewer>
+</UserControl>
