@@ -198,4 +198,16 @@
   <data name="Settings_FormatChange_Hint" xml:space="preserve">
     <value>Important note: if you change the log format you will need to delete or rename/move your existing log files to allow KCV to create new files with appropriate CSV headers.</value>
   </data>
+  <data name="Logger_BattleLog" xml:space="preserve">
+    <value>Ships Obtained as Drops</value>
+  </data>
+  <data name="Logger_ConstructionLog" xml:space="preserve">
+    <value>Construction</value>
+  </data>
+  <data name="Logger_ItemLog" xml:space="preserve">
+    <value>Development</value>
+  </data>
+  <data name="Logger_MaterialsLog" xml:space="preserve">
+    <value>Materials</value>
+  </data>
 </root>

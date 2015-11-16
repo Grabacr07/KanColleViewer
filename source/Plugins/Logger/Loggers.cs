@@ -4,16 +4,14 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
-using System.Threading.Tasks;
 using System.Collections.Specialized;
-using Microsoft.Win32;
+using System.Reflection;
 using Grabacr07.KanColleWrapper;
-using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
-using Grabacr07.KanColleWrapper.Models.Translations;
 using Livet;
 using Logger.Models;
 using Logger.Properties;
+using MetroTrilithon.Mvvm;
 
 namespace Logger
 {
@@ -59,24 +57,17 @@ namespace Logger
 
 		#endregion
 
-		#region Text 変更通知プロパティ
-
-		private string _Text;
-
-		public string Text
+		public string Title
 		{
-			get { return this._Text; }
-			set
+			get
 			{
-				if (this._Text != value)
-				{
-					this._Text = value;
-					this.RaisePropertyChanged();
-				}
+				PropertyInfo pInfo = typeof(Resources).GetProperty("Logger_" + this.GetType().Name);
+
+				if ((pInfo == null) || (pInfo.PropertyType != typeof(string))) return this.GetType().Name;
+
+				return (string)pInfo.GetValue(typeof(Resources), null);
 			}
 		}
-
-		#endregion
 
 		private string _DefaultFormat;
 
@@ -138,6 +129,7 @@ namespace Logger
 		{
 			Settings.DateTimeUseJapanese.Subscribe(x => this.RaisePropertyChanged(nameof(LogSample)));
 			Settings.DateTimeFormat.Subscribe(x => this.RaisePropertyChanged(nameof(LogSample)));
+			ResourceService.Current.Subscribe(x => this.RaisePropertyChanged(nameof(Title)));
 		}
 
 		public void Log(params object[] args)
@@ -213,7 +205,6 @@ namespace Logger
 		public ItemLog(KanColleProxy proxy)
 		{
 			proxy.api_req_kousyou_createitem.TryParse<kcsapi_createitem>().Subscribe(x => this.CreateItem(x.Data, x.Request));
-			this.Text = "Development";
 			this.Filename = "DevelopmentLog.csv";
 			this.LoggerName = "Development";
 			this.DefaultFormat = "{0},{2},{3},{4},{5},{6},{7}";
@@ -247,7 +238,6 @@ namespace Logger
 			this.shipmats = new int[5];
 			proxy.api_req_kousyou_createship.TryParse<kcsapi_createship>().Subscribe(x => this.CreateShip(x.Request));
 			proxy.api_get_member_kdock.TryParse<kcsapi_kdock[]>().Subscribe(x => this.KDock(x.Data));
-			this.Text = "Construction";
 			this.Filename = "ConstructionLog.csv";
 			this.LoggerName = "Construction";
 			this.DefaultFormat = "{0},{2},{3},{4},{5},{6},{7}";
@@ -291,7 +281,6 @@ namespace Logger
 		{
 			proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => this.BattleResult(x.Data));
 			proxy.api_req_combined_battle_battleresult.TryParse<kcsapi_combined_battle_battleresult>().Subscribe(x => this.BattleResult(x.Data));
-			this.Text = "Ships obtained as drops";
 			this.Filename = "BattleLog.csv";
 			this.LoggerName = "BattleResults";
 			this.DefaultFormat = "{0},{2},{3},{4},{5}";
@@ -341,7 +330,6 @@ namespace Logger
 			proxy.api_get_member_material.TryParse<kcsapi_material[]>().Subscribe(x => this.MaterialsHistory(x.Data));
 			proxy.api_req_hokyu_charge.TryParse<kcsapi_charge>().Subscribe(x => this.MaterialsHistory(x.Data.api_material));
 			proxy.api_req_kousyou_destroyship.TryParse<kcsapi_destroyship>().Subscribe(x => this.MaterialsHistory(x.Data.api_material));
-			this.Text = "Materials";
 			this.Filename = "MaterialsExpenditureLog.csv";
 			this.LoggerName = "Materials";
 			this.DefaultFormat = "{0},{2},{3},{4},{5},{6},{7},{8}";

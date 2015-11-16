@@ -61,6 +61,42 @@ namespace Logger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ships Obtained as Drops.
+        /// </summary>
+        public static string Logger_BattleLog {
+            get {
+                return ResourceManager.GetString("Logger_BattleLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Construction.
+        /// </summary>
+        public static string Logger_ConstructionLog {
+            get {
+                return ResourceManager.GetString("Logger_ConstructionLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Development.
+        /// </summary>
+        public static string Logger_ItemLog {
+            get {
+                return ResourceManager.GetString("Logger_ItemLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Materials.
+        /// </summary>
+        public static string Logger_MaterialsLog {
+            get {
+                return ResourceManager.GetString("Logger_MaterialsLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Browse….
         /// </summary>
         public static string Settings_Browse {

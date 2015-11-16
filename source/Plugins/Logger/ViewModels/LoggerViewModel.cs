@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleViewer.Properties;
 using Livet;
 using Livet.Messaging.IO;
 using Logger.Models;
 using MetroTrilithon.Mvvm;
-using MetroTrilithon.Serialization;
 
 namespace Logger.ViewModels
 {

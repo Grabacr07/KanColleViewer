@@ -122,14 +122,11 @@
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
 			<ItemsControl ItemsSource="{Binding Loggers}"
-					  Grid.IsSharedSizeScope="True">
+						  Grid.IsSharedSizeScope="True">
 				<ItemsControl.Template>
 					<ControlTemplate TargetType="{x:Type ItemsControl}">
-						<ScrollViewer HorizontalScrollBarVisibility="Disabled"
-								  VerticalScrollBarVisibility="Auto">
-							<StackPanel IsItemsHost="True"
+						<StackPanel IsItemsHost="True"
 									Margin="4" />
-						</ScrollViewer>
 					</ControlTemplate>
 				</ItemsControl.Template>
 
@@ -140,7 +137,7 @@
 								BorderBrush="{DynamicResource BorderBrushKey}">
 							<StackPanel>
 								<TextBlock Margin="0,0,0,6"
-										   Text="{Binding Text, Mode=OneWay}"
+										   Text="{Binding Title, Mode=OneWay}"
 										   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 								<CheckBox Margin="0,0,0,6"
