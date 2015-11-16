@@ -17,13 +17,13 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 {
 	public class AudibleNotificationsSettingsViewModel : ViewModel
 	{
-		#region CanOpenDestination 変更通知プロパティ
-
-		private bool _CanOpenDestination;
-
 		private static bool IsWindows8OrGreater => AudibleNotifications.IsWindows8OrGreater;
 
 		private static AudibleNotifierSettings Settings => AudibleNotifications.Settings;
+
+		#region CanOpenDestination 変更通知プロパティ
+
+		private bool _CanOpenDestination;
 
 		public bool CanOpenDestination
 		{
@@ -142,8 +142,6 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 
 		public class NotificationType : NotificationObject
 		{
-			private static AudibleNotifierSettings Settings => AudibleNotifications.Settings;
-
 			public string Type { get; set; }
 
 			private bool enabled;

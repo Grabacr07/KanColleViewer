@@ -23,7 +23,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 	[ExportMetadata("Guid", "E1F5EF36-18F5-42D5-896F-9476CD2F3128")]
 	[ExportMetadata("Title", "AudibleNotifications")]
 	[ExportMetadata("Description", "Audible notifications for KanColleViewer!; does not provide visual notifications.")]
-	[ExportMetadata("Version", "1.0")]
+	[ExportMetadata("Version", "1.1")]
 	[ExportMetadata("Author", "@Xiatian")]
 
 	public class AudibleNotifications : IPlugin, ISettings
