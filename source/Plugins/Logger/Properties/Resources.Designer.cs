@@ -70,6 +70,15 @@ namespace Logger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Important note: if you change the log format you will need to delete or rename/move your existing log files to allow KCV to create new files with appropriate CSV headers..
+        /// </summary>
+        public static string Settings_FormatChange_Hint {
+            get {
+                return ResourceManager.GetString("Settings_FormatChange_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to General Settings.
         /// </summary>
         public static string Settings_GeneralSettings_Title {

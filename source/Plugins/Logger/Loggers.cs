@@ -132,6 +132,8 @@ namespace Logger
 
 		public abstract string FormatToolTip { get; }
 
+		public abstract List<string> ColumnHeaders { get; }
+
 		public void Initialize()
 		{
 			Settings.DateTimeUseJapanese.Subscribe(x => this.RaisePropertyChanged(nameof(LogSample)));
@@ -142,8 +144,25 @@ namespace Logger
 		{
 			if (!this.Enabled) return;
 
+			if (!Directory.Exists(Settings.Location))
+			{
+				try
+				{
+					Directory.CreateDirectory(Settings.Location);
+				}
+				catch { }
+			}
+
 			try
 			{
+				if (!File.Exists(Path.Combine(Settings.Location, this.Filename)))
+				{
+					// Create and add the CSV header
+					using (var w = File.CreateText(Path.Combine(Settings.Location, this.Filename)))
+					{
+						w.WriteLine(string.Format(Format, (new List<object> { "UTC Time", Settings.DateTimeUseJapanese ? "JST Time" : "Local Time" }).Concat(ColumnHeaders).ToArray()));
+					}
+				}
 				using (var w = File.AppendText(Path.Combine(Settings.Location, this.Filename)))
 				{
 					w.WriteLine(FormatForLog(args));
@@ -189,6 +208,7 @@ namespace Logger
 		public override string LogSample => FormatForLog("Yamato Wave Motion Gun", "CVB", "6000", "9001", "9001", "10", "Yamato Kai4");
 
 		public override string FormatToolTip => Resources.Settings_Tooltip_Development;
+		public override List<string> ColumnHeaders { get; } = new List<string> { "Item", "Secretary Type", "Fuel", "Ammo", "Steel", "Bauxite", "Secretary Name" };
 
 		public ItemLog(KanColleProxy proxy)
 		{
@@ -216,6 +236,7 @@ namespace Logger
 		public override string LogSample => FormatForLog("Yamato Kai4", "9001", "9001", "9001", "7000", "100", "Iona", "SS");
 
 		public override string FormatToolTip => Resources.Settings_Tooltip_Construction;
+		public override List<string> ColumnHeaders { get; } = new List<string> { "Ship Name", "Fuel", "Ammo", "Steel", "Bauxite", "Development Materials", "Secretary Name", "Secretary Type"};
 
 		private readonly int[] shipmats;
 		private bool waitingForShip;
@@ -264,6 +285,7 @@ namespace Logger
 	{
 		public override string LogSample => FormatForLog("Takao", "The Fortress Port of Yokosuka", "Haruna and Kirishima", "B");
 		public override string FormatToolTip => Resources.Settings_Tooltip_BattleResult;
+		public override List<string> ColumnHeaders { get; } = new List<string> { "Ship Name", "Map Name", "Node Name", "Victory Rank" };
 
 		public BattleLog(KanColleProxy proxy)
 		{
@@ -310,6 +332,7 @@ namespace Logger
 	{
 		public override string LogSample => FormatForLog("24500", "20247", "36102", "14322", "1405", "790", "1109", "3");
 		public override string FormatToolTip => Resources.Settings_Tooltip_Materials;
+		public override List<string> ColumnHeaders { get; } = new List<string> { "Fuel", "Ammo", "Steel", "Bauxite", "Development Kits", "Instant Repair", "Instant Construction", "Improvement Materials" };
 
 		private int[] materials = new int[8];
 
