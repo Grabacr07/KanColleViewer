@@ -268,6 +268,7 @@ namespace Logger
 		public BattleLog(KanColleProxy proxy)
 		{
 			proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => this.BattleResult(x.Data));
+			proxy.api_req_combined_battle_battleresult.TryParse<kcsapi_combined_battle_battleresult>().Subscribe(x => this.BattleResult(x.Data));
 			this.Text = "Ships obtained as drops";
 			this.Filename = "BattleLog.csv";
 			this.LoggerName = "BattleResults";
@@ -276,13 +277,32 @@ namespace Logger
 
 		private void BattleResult(kcsapi_battleresult br)
 		{
-			if (br.api_get_ship == null)
+			try
+			{
+				if (br.api_get_ship == null)
 				return;
 
-			Log(br.api_get_ship.api_ship_name,
-				br.api_quest_name,
-				br.api_enemy_info.api_deck_name,
-				br.api_win_rank);
+				Log(br.api_get_ship.api_ship_name,
+					br.api_quest_name,
+					br.api_enemy_info.api_deck_name,
+					br.api_win_rank);
+			}
+			catch { }
+		}
+
+		private void BattleResult(kcsapi_combined_battle_battleresult br)
+		{
+			try
+			{
+				if (br.api_get_ship == null)
+					return;
+
+				Log(br.api_get_ship.api_ship_name,
+					br.api_quest_name,
+					br.api_enemy_info.api_deck_name,
+					br.api_win_rank);
+			}
+			catch { }
 		}
 	}
 
