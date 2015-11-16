@@ -1366,4 +1366,7 @@ HTTP proxy settings are applied immediately. Settings for all other protocols ar
   <data name="SlotItemCatalog_AttackRange_VeryLong" xml:space="preserve">
     <value>Very long</value>
   </data>
+  <data name="Settings_Plugins_PluginSettingsTitle" xml:space="preserve">
+    <value>Settings for {0}</value>
+  </data>
 </root>
