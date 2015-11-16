@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleWrapper;
 using Logger.Models;
@@ -26,6 +27,8 @@ namespace Logger
 		public static LoggerSettings Settings { get; private set; }
 
 		public static ObservableCollection<LoggerBase> Loggers { get; set; }
+
+		public Size SettingsSize => new Size(450, 800);
 
 		private LoggerViewModel viewmodel;
 
