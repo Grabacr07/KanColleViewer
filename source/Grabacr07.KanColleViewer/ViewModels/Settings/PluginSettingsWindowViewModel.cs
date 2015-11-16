@@ -19,15 +19,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 
 		public object Content => this.settings.View;
 
-		public double Height
+		public Size Size
 		{
-			get { return GetSize().Height; }
-			set { }
-		}
-
-		public double Width
-		{
-			get { return GetSize().Width; }
+			get { return GetSize(); }
 			set { }
 		}
 
