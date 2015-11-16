@@ -22,8 +22,8 @@
 				   Style="{DynamicResource MetroDialogStyleKey}"
 				   ResizeMode="CanResize"
 				   IsRestoringWindowPlacement="False"
-				   Width="400"
-				   Height="250">
+				   Width="{Binding Width, Mode=TwoWay}"
+				   Height="{Binding Height, Mode=TwoWay}">
 
 	<i:Interaction.Triggers>
 		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
