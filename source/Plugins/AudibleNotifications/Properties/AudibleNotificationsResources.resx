@@ -139,7 +139,7 @@
     <value>Open Folder</value>
   </data>
   <data name="Settings_Title" xml:space="preserve">
-    <value>Audible Alerts</value>
+    <value>General Settings</value>
   </data>
   <data name="Settings_Types_Description" xml:space="preserve">
     <value>Audible alerts will be enabled for the following notifications:</value>

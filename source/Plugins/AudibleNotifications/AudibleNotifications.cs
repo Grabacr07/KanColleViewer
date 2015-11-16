@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using System.Windows;
 using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleViewer.Plugins.Models;
@@ -28,6 +29,8 @@ namespace Grabacr07.KanColleViewer.Plugins
 	public class AudibleNotifications : IPlugin, ISettings
 	{
 		private AudibleNotificationsSettingsViewModel viewModel;
+
+		public Size SettingsSize => new Size(400, 575);
 
 		public static List<string> Types { get; } = new List<string>();
 

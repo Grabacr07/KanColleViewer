@@ -124,7 +124,7 @@ namespace Grabacr07.KanColleViewer.Plugins.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Audible Alerts.
+        ///   Looks up a localized string similar to General Settings.
         /// </summary>
         public static string Settings_Title {
             get {
