@@ -167,6 +167,7 @@
 													   ToolTipService.HorizontalOffset="-9"
 													   ToolTipService.VerticalOffset="-3">
 												<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
+													 FontFamily="{DynamicResource ShipNames}"
 													 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 												<LineBreak />
 												<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
@@ -175,6 +176,7 @@
 												<TextBlock.ToolTip>
 													<TextBlock Margin="0,-2,0,0">
 													<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
+														 FontFamily="{DynamicResource ShipNames}"
 														 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 													<LineBreak />
 													<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"

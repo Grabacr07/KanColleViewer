@@ -172,11 +172,17 @@
 				Value="{DynamicResource ForegroundBrushKey}" />
 	</Style>
 
+	<FontFamily xmlns="http://schemas.microsoft.com/winfx/2006/xaml/composite-font"
+				LineSpacing="1.2"
+				x:Key="ShipNames">
 
-
-
-
-
-
-
+		<FontFamily.FamilyMaps>
+			<FontFamilyMap Unicode="3000-303F, 3040-309F, 30A0-30FF, FF00-FFEF, 4E00-9FAF"
+						   Target="Meiryo"
+						   Scale="1.0" />
+			<FontFamilyMap Unicode="0000-FFFF"
+						   Target="Calibri, Segoe UI"
+						   Scale="1.2" />
+		</FontFamily.FamilyMaps>
+	</FontFamily>
 </ResourceDictionary>

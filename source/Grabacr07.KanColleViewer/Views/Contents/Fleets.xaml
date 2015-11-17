@@ -303,11 +303,12 @@
 											   Margin="4,0,10,0">
 										<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
 											 FontSize="22"
+											 FontFamily="{DynamicResource ShipNames}"
 											 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 										<TextBlock.ToolTip>
 											<TextBlock Margin="0,-2,0,0">
 											<Run Text="{Binding StatsToolTip, Mode=OneWay}"
-													FontSize="11" />
+												 FontSize="11" />
 											</TextBlock>
 										</TextBlock.ToolTip>
 									</TextBlock>
