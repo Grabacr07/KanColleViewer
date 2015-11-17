@@ -1376,4 +1376,25 @@ HTTP プロトコルの通信は自動構成も含め「インターネット �
   <data name="SlotItemCatalog_AttackRange_VeryLong" xml:space="preserve">
     <value>短</value>
   </data>
+  <data name="ViewRangeLogic_Type1_Desc" xml:space="preserve">
+    <value>艦娘と装備の索敵値の単純な合計値</value>
+  </data>
+  <data name="ViewRangeLogic_Type1_Name" xml:space="preserve">
+    <value>単純計算</value>
+  </data>
+  <data name="ViewRangeLogic_Type2_Desc" xml:space="preserve">
+    <value>(偵察機 × 2) + (電探) + √(装備込みの艦隊索敵値合計 - 偵察機 - 電探)</value>
+  </data>
+  <data name="ViewRangeLogic_Type2_Name" xml:space="preserve">
+    <value>2-5 式 (旧)</value>
+  </data>
+  <data name="ViewRangeLogic_Type3_Desc" xml:space="preserve">
+    <value>(艦上爆撃機 × 1.04) + (艦上攻撃機 × 1.37) + (艦上偵察機 × 1.66)
++ (水上偵察機 × 2.00) + (水上爆撃機 × 1.78) + (探照灯 × 0.91)
++ (小型電探 × 1.00) + (大型電探 × 0.99) + (√各艦毎の素索敵 × 1.69)
++ (司令部レベルを 5 の倍数に切り上げ × -0.61)</value>
+  </data>
+  <data name="ViewRangeLogic_Type3_Name" xml:space="preserve">
+    <value>2-5 式 (秋)</value>
+  </data>
 </root>

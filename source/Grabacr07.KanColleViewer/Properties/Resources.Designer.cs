@@ -3780,6 +3780,63 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 艦娘と装備の索敵値の単純な合計値.
+        /// </summary>
+        public static string ViewRangeLogic_Type1_Desc {
+            get {
+                return ResourceManager.GetString("ViewRangeLogic_Type1_Desc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 単純計算.
+        /// </summary>
+        public static string ViewRangeLogic_Type1_Name {
+            get {
+                return ResourceManager.GetString("ViewRangeLogic_Type1_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (偵察機 × 2) + (電探) + √(装備込みの艦隊索敵値合計 - 偵察機 - 電探).
+        /// </summary>
+        public static string ViewRangeLogic_Type2_Desc {
+            get {
+                return ResourceManager.GetString("ViewRangeLogic_Type2_Desc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2-5 式 (旧).
+        /// </summary>
+        public static string ViewRangeLogic_Type2_Name {
+            get {
+                return ResourceManager.GetString("ViewRangeLogic_Type2_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (艦上爆撃機 × 1.04) + (艦上攻撃機 × 1.37) + (艦上偵察機 × 1.66)
+        ///+ (水上偵察機 × 2.00) + (水上爆撃機 × 1.78) + (探照灯 × 0.91)
+        ///+ (小型電探 × 1.00) + (大型電探 × 0.99) + (√各艦毎の素索敵 × 1.69)
+        ///+ (司令部レベルを 5 の倍数に切り上げ × -0.61).
+        /// </summary>
+        public static string ViewRangeLogic_Type3_Desc {
+            get {
+                return ResourceManager.GetString("ViewRangeLogic_Type3_Desc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2-5 式 (秋).
+        /// </summary>
+        public static string ViewRangeLogic_Type3_Name {
+            get {
+                return ResourceManager.GetString("ViewRangeLogic_Type3_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ズーム {0} % はサポートされていません。.
         /// </summary>
         public static string ZoomAction_OutOfRange {

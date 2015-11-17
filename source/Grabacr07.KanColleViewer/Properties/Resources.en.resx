@@ -713,7 +713,7 @@ GPU: Slow! GPU optimization for tablets.</value>
     <value>Give a notification for ships in critical condition</value>
   </data>
   <data name="Settings_Operation_LoSCalculation" xml:space="preserve">
-    <value>Settings_Plugins_PluginInfo_Features</value>
+    <value>Line of Sight Formula</value>
   </data>
   <data name="Settings_Operation_LoS_CarrierBasedRecon" xml:space="preserve">
     <value>Carrier-based Recon Aircraft</value>
@@ -1368,5 +1368,29 @@ HTTP proxy settings are applied immediately. Settings for all other protocols ar
   </data>
   <data name="Settings_Plugins_PluginSettingsTitle" xml:space="preserve">
     <value>Settings for {0}</value>
+  </data>
+  <data name="ViewRangeLogic_Type1_Desc" xml:space="preserve">
+    <value>Simple sum of ship and equipment LoS</value>
+  </data>
+  <data name="ViewRangeLogic_Type1_Name" xml:space="preserve">
+    <value>Simple sum</value>
+  </data>
+  <data name="ViewRangeLogic_Type2_Desc" xml:space="preserve">
+    <value>(Recon planes × 2) + (Radar) + 
+√(Total LoS with equip LoS included - Recon planes - Radar)</value>
+  </data>
+  <data name="ViewRangeLogic_Type2_Name" xml:space="preserve">
+    <value>2-5 formula (old)</value>
+  </data>
+  <data name="ViewRangeLogic_Type3_Desc" xml:space="preserve">
+    <value>Dive Bomber LoS × (1.04) + Torpedo Bomber LoS × (1.37) + 
+Carrier-based Recon LoS × (1.66) + Recon Seaplane LoS × (2.00) + 
+Seaplane Bomber LoS × (1.78) + Searchlight LoS × (0.91) + 
+Small Radar LoS × (1.00) + Large Radar LoS × (0.99) + 
+√(base LoS of each ship) × (1.69) + 
+(HQ Lv. rounded up to the next multiple of 5) × (-0.61)</value>
+  </data>
+  <data name="ViewRangeLogic_Type3_Name" xml:space="preserve">
+    <value>2-5 formula (new)</value>
   </data>
 </root>

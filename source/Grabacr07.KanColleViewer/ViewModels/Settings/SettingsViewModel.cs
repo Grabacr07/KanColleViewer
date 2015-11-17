@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Composition;
@@ -9,6 +10,7 @@ using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleViewer.ViewModels.Composition;
 using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
+using Livet;
 using Livet.EventListeners;
 using MetroTrilithon.Mvvm;
 
@@ -119,11 +121,15 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 		}
 
 
-		public class ViewRangeSettingsViewModel
+		public class ViewRangeSettingsViewModel : ViewModel
 		{
 			private bool selected;
 
 			public ICalcViewRange Logic { get; set; }
+
+			public string Name => GetLocalisedStrings(Logic.Id);
+
+			public string Description => GetLocalisedStrings(Logic.Id, true);
 
 			public bool Selected
 			{
@@ -142,6 +148,26 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 			{
 				this.Logic = logic;
 				this.selected = KanColleSettings.ViewRangeCalcType == logic.Id;
+				ResourceService.Current.Subscribe(x =>
+				{
+					this.RaisePropertyChanged(nameof(Name));
+					this.RaisePropertyChanged(nameof(Description));
+				});
+			}
+
+			private string GetLocalisedStrings(string type, bool desc = false)
+			{
+				switch (type)
+				{
+					case "KanColleViewer.Type1":
+						return !desc ? Resources.ViewRangeLogic_Type1_Name : Resources.ViewRangeLogic_Type1_Desc;
+					case "KanColleViewer.Type2":
+						return !desc ? Resources.ViewRangeLogic_Type2_Name : Resources.ViewRangeLogic_Type2_Desc;
+					case "KanColleViewer.Type3":
+						return !desc ? Resources.ViewRangeLogic_Type3_Name : Resources.ViewRangeLogic_Type3_Desc;
+				}
+
+				return !desc ? Logic.Name : Logic.Description;
 			}
 		}
 	}

@@ -73,10 +73,10 @@
 									 GroupName="ViewRangeCalcLogicSelection">
 							<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
 									   LineHeight="18">
-								<Run Text="{Binding Logic.Name, Mode=OneWay}"
+								<Run Text="{Binding Name, Mode=OneWay}"
 									 Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}" />
 								<LineBreak />
-								<Run Text="{Binding Logic.Description, Mode=OneWay}" />
+								<Run Text="{Binding Description, Mode=OneWay}" />
 							</TextBlock>
 						</RadioButton>
 					</DataTemplate>
