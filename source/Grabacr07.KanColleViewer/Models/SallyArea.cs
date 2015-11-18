@@ -3,26 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using Codeplex.Data;
-using Livet;
-using Nekoxy;
 
 namespace Grabacr07.KanColleViewer.Models
 {
 	public class SallyArea
 	{
-		public int Area { get; set; }
+		public int Area { get; private set; }
 
-		public string Name { get; set; }
+		public string Name { get; private set; }
 
-		public Color Color { get; set; } = Colors.Transparent;
+		public Color Color { get; private set; } = Colors.Transparent;
+
+		private SallyArea() { }
 
 		public static SallyArea Default { get; } = new SallyArea();
 
-		public static async Task<SallyArea[]> GetSallyArea()
+		public static async Task<SallyArea[]> GetAsync()
 		{
 			using (var client = new HttpClient(Helper.GetProxyConfiguredHandler()))
 			{

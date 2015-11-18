@@ -144,8 +144,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 			this.updateSource
 				.Do(_ => this.IsReloading = true)
-				.SelectMany(_ => this.GetSallyArea())
-				.SelectMany(x => this.UpdateCore(x))
+				.SelectMany(_ => this.GetSallyAreaAsync())
+				.SelectMany(x => this.UpdateAsync(x))
 				.Do(_ => this.IsReloading = false)
 				.Subscribe()
 				.AddTo(this);
@@ -163,7 +163,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			this.updateSource.OnNext(Unit.Default);
 		}
 
-		private IObservable<Unit> UpdateCore(SallyArea[] areas)
+		private IObservable<Unit> UpdateAsync(SallyArea[] areas)
 		{
 			return Observable.Start(() =>
 			{
@@ -184,10 +184,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			});
 		}
 
-		private IObservable<SallyArea[]> GetSallyArea()
+		private IObservable<SallyArea[]> GetSallyAreaAsync()
 		{
 			return this.sallyAreas == null
-				? SallyArea.GetSallyArea()
+				? SallyArea.GetAsync()
 					.ToObservable()
 					.Do(x =>
 					{
