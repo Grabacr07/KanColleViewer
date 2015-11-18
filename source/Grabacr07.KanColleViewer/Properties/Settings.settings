@@ -31,5 +31,8 @@
     display:none!important;
 }</Value>
     </Setting>
+    <Setting Name="SallyAreaSource" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://shatteredskies.blob.core.windows.net/kancolle/sally.json</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

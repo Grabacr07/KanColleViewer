@@ -778,49 +778,13 @@
 									<DataTemplate>
 										<Border x:Name="Border"
 												Margin="-2,0">
-											<TextBlock x:Name="Text"
-													   Text=""
-													   Foreground="{DynamicResource ActiveForegroundBrushKey}"
-													   Margin="5,3" />
+											<TextBlock Text="{Binding SallyArea.Name}"
+													   Margin="5,3">
+												<TextBlock.Foreground>
+													<SolidColorBrush Color="{Binding SallyArea.Color}" />
+												</TextBlock.Foreground>
+											</TextBlock>
 										</Border>
-										<DataTemplate.Triggers>
-											<DataTrigger Binding="{Binding Ship.SallyArea}"
-														 Value="1">
-												<Setter TargetName="Text"
-														Property="Text"
-														Value="初動作戦" />
-												<Setter TargetName="Border"
-														Property="Background"
-														Value="#FF3C677F" />
-											</DataTrigger>
-											<DataTrigger Binding="{Binding Ship.SallyArea}"
-														 Value="2">
-												<Setter TargetName="Text"
-														Property="Text"
-														Value="機動部隊" />
-												<Setter TargetName="Border"
-														Property="Background"
-														Value="#FF3B662A" />
-											</DataTrigger>
-											<DataTrigger Binding="{Binding Ship.SallyArea}"
-														 Value="3">
-												<Setter TargetName="Text"
-														Property="Text"
-														Value="挺身部隊" />
-												<Setter TargetName="Border"
-														Property="Background"
-														Value="#FF839842" />
-											</DataTrigger>
-											<DataTrigger Binding="{Binding Ship.SallyArea}"
-														 Value="4">
-												<Setter TargetName="Text"
-														Property="Text"
-														Value="西部方面" />
-												<Setter TargetName="Border"
-														Property="Background"
-														Value="#FF906736" />
-											</DataTrigger>
-										</DataTemplate.Triggers>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
