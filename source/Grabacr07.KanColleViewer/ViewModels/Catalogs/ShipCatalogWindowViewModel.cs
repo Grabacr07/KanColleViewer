@@ -187,7 +187,14 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		private IObservable<SallyArea[]> GetSallyArea()
 		{
 			return this.sallyAreas == null
-				? SallyArea.GetSallyArea().ToObservable().Do(x => this.sallyAreas = x) // これはひどい
+				? SallyArea.GetSallyArea()
+					.ToObservable()
+					.Do(x =>
+					{
+						// これはひどい
+						this.sallyAreas = x;
+						this.ShipSallyAreaFilter.SetSallyArea(x);
+					})
 				: Observable.Return(this.sallyAreas);
 		}
 

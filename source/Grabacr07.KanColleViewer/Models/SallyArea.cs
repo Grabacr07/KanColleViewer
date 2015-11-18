@@ -39,8 +39,8 @@ namespace Grabacr07.KanColleViewer.Models
 							.Select(x =>
 								new SallyArea
 								{
-									Area = x.area,
-									Name = x.name,
+									Area = (int)x.area,
+									Name = (string)x.name,
 									Color = Helper.StringToColor(x.color)
 								})
 							.ToArray();

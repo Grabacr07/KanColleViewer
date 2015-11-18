@@ -155,18 +155,18 @@ namespace Grabacr07.KanColleViewer.Models
 					{
 						// #rrggbb style
 						return Color.FromRgb(
-							byte.Parse(colorCode.Substring(1, 2)),
-							byte.Parse(colorCode.Substring(3, 2)),
-							byte.Parse(colorCode.Substring(5, 2)));
+							Convert.ToByte(colorCode.Substring(1, 2), 16),
+							Convert.ToByte(colorCode.Substring(3, 2), 16),
+							Convert.ToByte(colorCode.Substring(5, 2), 16));
 					}
 					if (colorCode.Length == 9)
 					{
 						// #aarrggbb style
 						return Color.FromArgb(
-							byte.Parse(colorCode.Substring(1, 2)),
-							byte.Parse(colorCode.Substring(3, 2)),
-							byte.Parse(colorCode.Substring(5, 2)),
-							byte.Parse(colorCode.Substring(7, 2)));
+							Convert.ToByte(colorCode.Substring(1, 2), 16),
+							Convert.ToByte(colorCode.Substring(3, 2), 16),
+							Convert.ToByte(colorCode.Substring(5, 2), 16),
+							Convert.ToByte(colorCode.Substring(7, 2), 16));
 					}
 				}
 			}
