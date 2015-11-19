@@ -298,7 +298,7 @@ namespace Grabacr07.KanColleWrapper
 		public void ProcessUnknown(object sender, ProcessUnknownEventArgs args)
 		{
 			Debug.WriteLine("Updater: received unknown translation data, type {0}, culture <{1}>, data type <{2}>, JSON <{3}>.", args.TranslationProvider.ToString(), args.Culture, args.RawData.GetType().ToString(), JsonConvert.SerializeObject(args.RawData));
-			if ((args.TranslationProvider == TranslationProviderType.Equipment) && (args.RawData is kcsapi_mst_slotitem) && (((kcsapi_mst_slotitem)args.RawData).api_name == "？？？")) return;
+			if ((args.TranslationProvider == TranslationProviderType.Equipment) && (args.RawData is kcsapi_mst_slotitem) && ((((kcsapi_mst_slotitem)args.RawData).api_name == "？？？") || (((kcsapi_mst_slotitem)args.RawData).api_sortno == 0) )) return;
 			unknownStrings.Add(new UnknownStringItem(args.TranslationProvider, args.Culture, args.RawData));
 		}
 
