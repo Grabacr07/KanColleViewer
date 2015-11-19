@@ -327,12 +327,13 @@ namespace Logger
 
 		public MaterialsLog(KanColleProxy proxy)
 		{
+			proxy.api_port.TryParse<kcsapi_port>().Subscribe(x => this.MaterialsHistory(x.Data.api_material));
 			proxy.api_get_member_material.TryParse<kcsapi_material[]>().Subscribe(x => this.MaterialsHistory(x.Data));
 			proxy.api_req_hokyu_charge.TryParse<kcsapi_charge>().Subscribe(x => this.MaterialsHistory(x.Data.api_material));
 			proxy.api_req_kousyou_destroyship.TryParse<kcsapi_destroyship>().Subscribe(x => this.MaterialsHistory(x.Data.api_material));
 			this.Filename = "MaterialsExpenditureLog.csv";
 			this.LoggerName = "Materials";
-			this.DefaultFormat = "{0},{2},{3},{4},{5},{6},{7},{8}";
+			this.DefaultFormat = "{0},{2},{3},{4},{5},{6},{7},{8},{9}";
 
 			for (int i = 0; i < 8; i++)
 				materials[i] = 0;
@@ -424,9 +425,9 @@ namespace Logger
 			Ammo = 1,
 			Steel = 2,
 			Bauxite = 3,
-			DevelopmentKits = 4,
+			InstantBuild = 4,
 			InstantRepair = 5,
-			InstantBuild = 6,
+			DevelopmentKits = 6,
 			ImprovementMaterials = 7,
 		}
 	}
