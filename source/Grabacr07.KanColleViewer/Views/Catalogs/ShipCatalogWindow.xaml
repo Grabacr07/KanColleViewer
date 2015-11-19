@@ -407,7 +407,6 @@
 						</WrapPanel>
 					</Border>
 
-					<!--
 					<Border BorderThickness="1"
 							BorderBrush="{DynamicResource BorderBrushKey}"
 							Margin="0,8,0,0"
@@ -434,7 +433,6 @@
 							</ItemsControl>
 						</DockPanel>
 					</Border>
-					-->
 					
 				</StackPanel>
 			</Expander>

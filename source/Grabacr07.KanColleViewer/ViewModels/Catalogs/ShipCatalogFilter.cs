@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Models;
+using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Livet;
@@ -594,7 +595,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			{
 				this.model = area ?? SallyArea.Default;
 				this.owner = owner;
-				this.Name = area?.Name ?? "出撃海域なし";
+				this.Name = area?.Name ?? Resources.ShipCatalog_Operation_Neither;
 			}
 
 			public bool Predicate(Ship ship)
