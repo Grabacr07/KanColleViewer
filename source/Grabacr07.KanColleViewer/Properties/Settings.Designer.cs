@@ -78,5 +78,15 @@ namespace Grabacr07.KanColleViewer.Properties {
                 return ((global::System.Uri)(this["XMLTransUrl"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://raw.githubusercontent.com/FreyYa/KCVKrTranslation/master/resources/sail.j" +
+            "son")]
+        public string SallyAreaSource {
+            get {
+                return ((string)(this["SallyAreaSource"]));
+            }
+        }
     }
 }

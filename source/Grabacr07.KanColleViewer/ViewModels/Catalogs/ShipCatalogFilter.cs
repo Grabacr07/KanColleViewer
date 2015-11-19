@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Livet;
@@ -459,120 +460,58 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 	public class ShipSallyAreaFilter : ShipCatalogFilter
 	{
-		#region None 変更通知プロパティ
+		#region IsEnabled 変更通知プロパティ
 
-		private bool _None = true;
+		private bool _IsEnabled;
 
-		public bool None
+		public bool IsEnabled
 		{
-			get { return this._None; }
+			get { return this._IsEnabled; }
 			set
 			{
-				if (this._None != value)
+				if (this._IsEnabled != value)
 				{
-					this._None = value;
+					this._IsEnabled = value;
+					this.ColumnWidth = value ? 65.0 : .0;
 					this.RaisePropertyChanged();
-					this.Update();
 				}
 			}
 		}
 
 		#endregion
 
-		#region FirstMap 変更通知プロパティ
+		#region SallyAreas 変更通知プロパティ
 
-		private bool _FirstMap = true;
+		private SallyAreaFilterChild[] _SallyAreas;
 
-		public bool FirstMap
+		public SallyAreaFilterChild[] SallyAreas
 		{
-			get { return this._FirstMap; }
+			get { return this._SallyAreas; }
 			set
 			{
-				if (this._FirstMap != value)
+				if (this._SallyAreas != value)
 				{
-					this._FirstMap = value;
+					this._SallyAreas = value;
 					this.RaisePropertyChanged();
-					this.Update();
 				}
 			}
 		}
 
 		#endregion
 
-		#region SecondMap 変更通知プロパティ
+		#region ColumnWidth 変更通知プロパティ
 
-		private bool _SecondMap = true;
+		private double _ColumnWidth;
 
-		public bool SecondMap
+		public double ColumnWidth
 		{
-			get { return this._SecondMap; }
+			get { return this._ColumnWidth; }
 			set
 			{
-				if (this._SecondMap != value)
+				if (this._ColumnWidth != value)
 				{
-					this._SecondMap = value;
+					this._ColumnWidth = value;
 					this.RaisePropertyChanged();
-					this.Update();
-				}
-			}
-		}
-
-		#endregion
-
-		#region ThirdMap 変更通知プロパティ
-
-		private bool _ThirdMap = true;
-
-		public bool ThirdMap
-		{
-			get { return this._ThirdMap; }
-			set
-			{
-				if (this._ThirdMap != value)
-				{
-					this._ThirdMap = value;
-					this.RaisePropertyChanged();
-					this.Update();
-				}
-			}
-		}
-
-		#endregion
-
-		#region FourthMap 変更通知プロパティ
-
-		private bool _FourthMap = true;
-
-		public bool FourthMap
-		{
-			get { return this._FourthMap; }
-			set
-			{
-				if (this._FourthMap != value)
-				{
-					this._FourthMap = value;
-					this.RaisePropertyChanged();
-					this.Update();
-				}
-			}
-		}
-
-		#endregion
-
-		#region FifthMap 変更通知プロパティ
-
-		private bool _FifthMap = true;
-
-		public bool FifthMap
-		{
-			get { return this._FifthMap; }
-			set
-			{
-				if (this._FifthMap != value)
-				{
-					this._FifthMap = value;
-					this.RaisePropertyChanged();
-					this.Update();
 				}
 			}
 		}
@@ -584,16 +523,85 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		public override bool Predicate(Ship ship)
 		{
-			if (this.None && ship.SallyArea == 0) return true;
-			if (this.FirstMap && ship.SallyArea == 1) return true;
-			if (this.SecondMap && ship.SallyArea == 2) return true;
-			if (this.ThirdMap && ship.SallyArea == 3) return true;
-			if (this.FourthMap && ship.SallyArea == 4) return true;
-			if (this.FifthMap && ship.SallyArea == 5) return true;
+			// 出撃海域がない or 取得できなかったときは全艦通す
+			return !this.IsEnabled || this.SallyAreas.Any(x => x.Predicate(ship));
+		}
 
-			return false;
+		public void SetSallyArea(SallyArea[] areas)
+		{
+			if (areas == null || areas.Length == 0)
+			{
+				this.IsEnabled = false;
+				this.SallyAreas = new SallyAreaFilterChild[0];
+			}
+			else
+			{
+				this.SallyAreas = EnumerableEx
+					.Return<SallyArea>(null)
+					.Concat(areas)
+					.Select(x => new SallyAreaFilterChild(x, this))
+					.ToArray();
+				this.IsEnabled = true;
+			}
 
-			//return true;
+			this.Update();
+		}
+
+		public class SallyAreaFilterChild : ViewModel
+		{
+			private readonly SallyArea model;
+			private readonly ShipSallyAreaFilter owner;
+
+			#region Name 変更通知プロパティ
+
+			private string _Name;
+
+			public string Name
+			{
+				get { return this._Name; }
+				set
+				{
+					if (this._Name != value)
+					{
+						this._Name = value;
+						this.RaisePropertyChanged();
+					}
+				}
+			}
+
+			#endregion
+
+			#region IsChecked 変更通知プロパティ
+
+			private bool _IsChecked = true;
+
+			public bool IsChecked
+			{
+				get { return this._IsChecked; }
+				set
+				{
+					if (this._IsChecked != value)
+					{
+						this._IsChecked = value;
+						this.RaisePropertyChanged();
+						this.owner.Update();
+					}
+				}
+			}
+
+			#endregion
+
+			public SallyAreaFilterChild(SallyArea area, ShipSallyAreaFilter owner)
+			{
+				this.model = area ?? SallyArea.Default;
+				this.owner = owner;
+				this.Name = area?.Name ?? "출격해역없음";
+			}
+
+			public bool Predicate(Ship ship)
+			{
+				return this.IsChecked && this.model.Area == ship.SallyArea;
+			}
 		}
 	}
 
