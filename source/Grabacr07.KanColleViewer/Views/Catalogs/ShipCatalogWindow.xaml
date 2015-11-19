@@ -404,29 +404,28 @@
 					<Border BorderThickness="1"
 							BorderBrush="{DynamicResource BorderBrushKey}"
 							Margin="0,8,0,0"
-							Padding="5">
-						<WrapPanel DataContext="{Binding ShipSallyAreaFilter}">
+							Padding="5"
+							Visibility="{Binding ShipSallyAreaFilter.IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
+						<DockPanel>
 							<TextBlock Margin="0,2">
 								<Run Text="{Binding Resources.ShipCatalog_SortieWaters, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 								<Run Text=":" />
 							</TextBlock>
-
-							<CheckBox Content="{Binding Resources.ShipCatalog_Operation_Neither, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-									  IsChecked="{Binding None}"
-									  Margin="10,0" />
-							<CheckBox Content="初動作戦 E1 E2"
-									  IsChecked="{Binding E1And2}"
-									  Margin="10,0" />
-							<CheckBox Content="機動部隊 E3 E6"
-									  IsChecked="{Binding E3And6}"
-									  Margin="10,0" />
-							<CheckBox Content="挺身部隊 E4"
-									  IsChecked="{Binding E4}"
-									  Margin="10,0" />
-							<CheckBox Content="西部方面 E5"
-									  IsChecked="{Binding E5}"
-									  Margin="10,0" />
-						</WrapPanel>
+							<ItemsControl ItemsSource="{Binding ShipSallyAreaFilter.SallyAreas}">
+								<ItemsControl.ItemsPanel>
+									<ItemsPanelTemplate>
+										<WrapPanel />
+									</ItemsPanelTemplate>
+								</ItemsControl.ItemsPanel>
+								<ItemsControl.ItemTemplate>
+									<DataTemplate>
+										<CheckBox Content="{Binding Name}"
+												  IsChecked="{Binding IsChecked}"
+												  Margin="10,2,10,0" />
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
+						</DockPanel>
 					</Border>
 				</StackPanel>
 			</Expander>
@@ -784,7 +783,7 @@
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
 
-							<GridViewColumn Width="65">
+							<GridViewColumn Width="{Binding ShipSallyAreaFilter.ColumnWidth}">
 								<GridViewColumn.Header>
 									<TextBlock Text="{Binding Resources.ShipCatalog_SortieWaters, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 								</GridViewColumn.Header>
@@ -792,49 +791,13 @@
 									<DataTemplate>
 										<Border x:Name="Border"
 												Margin="-2,0">
-											<TextBlock x:Name="Text"
-													   Text=""
+											<Border.Background>
+												<SolidColorBrush Color="{Binding SallyArea.Color}" />
+											</Border.Background>
+											<TextBlock Text="{Binding SallyArea.Name}"
 													   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 													   Margin="5,3" />
 										</Border>
-										<DataTemplate.Triggers>
-											<DataTrigger Binding="{Binding Ship.SallyArea}"
-														 Value="1">
-												<Setter TargetName="Text"
-														Property="Text"
-														Value="初動作戦 E1 E2" />
-												<Setter TargetName="Border"
-														Property="Background"
-														Value="#FF3C677F" />
-											</DataTrigger>
-											<DataTrigger Binding="{Binding Ship.SallyArea}"
-														 Value="2">
-												<Setter TargetName="Text"
-														Property="Text"
-														Value="機動部隊 E3 E6" />
-												<Setter TargetName="Border"
-														Property="Background"
-														Value="#FF3B662A" />
-											</DataTrigger>
-											<DataTrigger Binding="{Binding Ship.SallyArea}"
-														 Value="3">
-												<Setter TargetName="Text"
-														Property="Text"
-														Value="挺身部隊 E4" />
-												<Setter TargetName="Border"
-														Property="Background"
-														Value="#FF839842" />
-											</DataTrigger>
-											<DataTrigger Binding="{Binding Ship.SallyArea}"
-														 Value="4">
-												<Setter TargetName="Text"
-														Property="Text"
-														Value="西部方面 E5" />
-												<Setter TargetName="Border"
-														Property="Background"
-														Value="#FF906736" />
-											</DataTrigger>
-										</DataTemplate.Triggers>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>

@@ -4,13 +4,17 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 using Grabacr07.KanColleViewer.Win32;
 using Microsoft.Win32;
+using Nekoxy;
 
 namespace Grabacr07.KanColleViewer.Models
 {
@@ -141,69 +145,62 @@ namespace Grabacr07.KanColleViewer.Models
 		}
 
 
-		/// <summary>
-		/// 指定した文字列を暗号化します。
-		/// </summary>
-		/// <param name="source">暗号化する文字列。</param>
-		/// <param name="password">暗号化に使用するパスワード。</param>
-		/// <returns>暗号化された文字列。</returns>
-		public static string EncryptString(string source, string password)
-		{
-			using (var rijndael = new RijndaelManaged())
-			{
-				byte[] key, iv;
-				GenerateKeyFromPassword(password, rijndael.KeySize, out key, rijndael.BlockSize, out iv);
-				rijndael.Key = key;
-				rijndael.IV = iv;
-
-				using (var encryptor = rijndael.CreateEncryptor())
-				{
-					var strBytes = Encoding.UTF8.GetBytes(source);
-					var encBytes = encryptor.TransformFinalBlock(strBytes, 0, strBytes.Length);
-					return Convert.ToBase64String(encBytes);
-				}
-			}
-		}
-
-		/// <summary>
-		/// 指定された文字列を複合化します。
-		/// </summary>
-		/// <param name="source">暗号化された文字列。</param>
-		/// <param name="password">暗号化に使用したパスワード。</param>
-		/// <returns>復号化された文字列。</returns>
-		public static string DecryptString(string source, string password)
+		public static Color StringToColor(string colorCode)
 		{
 			try
 			{
-				using (var rijndael = new RijndaelManaged())
+				if (colorCode.StartsWith("#"))
 				{
-					byte[] key, iv;
-					GenerateKeyFromPassword(password, rijndael.KeySize, out key, rijndael.BlockSize, out iv);
-					rijndael.Key = key;
-					rijndael.IV = iv;
-
-					using (var decryptor = rijndael.CreateDecryptor())
+					if (colorCode.Length == 7)
 					{
-						var strBytes = Convert.FromBase64String(source);
-						var decBytes = decryptor.TransformFinalBlock(strBytes, 0, strBytes.Length);
-						return Encoding.UTF8.GetString(decBytes);
+						// #rrggbb style
+						return Color.FromRgb(
+							Convert.ToByte(colorCode.Substring(1, 2), 16),
+							Convert.ToByte(colorCode.Substring(3, 2), 16),
+							Convert.ToByte(colorCode.Substring(5, 2), 16));
+					}
+					if (colorCode.Length == 9)
+					{
+						// #aarrggbb style
+						return Color.FromArgb(
+							Convert.ToByte(colorCode.Substring(1, 2), 16),
+							Convert.ToByte(colorCode.Substring(3, 2), 16),
+							Convert.ToByte(colorCode.Substring(5, 2), 16),
+							Convert.ToByte(colorCode.Substring(7, 2), 16));
 					}
 				}
 			}
 			catch (Exception ex)
 			{
-				Debug.WriteLine(ex);
-				return null;
+				// 雑
+				System.Diagnostics.Debug.WriteLine(ex);
 			}
+
+			return Colors.Transparent;
 		}
 
-		private static void GenerateKeyFromPassword(string password, int keySize, out byte[] key, int blockSize, out byte[] iv)
+		public static HttpClientHandler GetProxyConfiguredHandler()
 		{
-			var salt = Encoding.UTF8.GetBytes("C98534F6-7286-4BED-83A6-10FD5052ABA6");
-			using (var deriveBytes = new Rfc2898DeriveBytes(password, salt) { IterationCount = 1000 })
+			switch (HttpProxy.UpstreamProxyConfig.Type)
 			{
-				key = deriveBytes.GetBytes(keySize / 8);
-				iv = deriveBytes.GetBytes(blockSize / 8);
+				case ProxyConfigType.DirectAccess:
+					return new HttpClientHandler
+					{
+						UseProxy = false,
+					};
+
+				case ProxyConfigType.SpecificProxy:
+					return new HttpClientHandler
+					{
+						UseProxy = true,
+						Proxy = new WebProxy($"{HttpProxy.UpstreamProxyConfig.SpecificProxyHost}:{HttpProxy.UpstreamProxyConfig.SpecificProxyPort}"),
+					};
+
+				case ProxyConfigType.SystemProxy:
+					return new HttpClientHandler();
+
+				default:
+					return new HttpClientHandler();
 			}
 		}
 	}
