@@ -4,6 +4,8 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using System.Reactive.Threading.Tasks;
+using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleWrapper;
@@ -15,6 +17,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 	{
 		private readonly Subject<Unit> updateSource = new Subject<Unit>();
 		private readonly Homeport homeport = KanColleClient.Current.Homeport;
+		private SallyArea[] sallyAreas;
 
 		public ShipCatalogWindowSettings Settings { get; }
 
@@ -155,18 +158,16 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 			this.updateSource
 				.Do(_ => this.IsReloading = true)
-				// ☟ 連続で艦種選択できるように猶予を設けるつもりだったけど、
-				// 　 ソートだけしたいケースとかだと遅くてイラ壁なので迷う
-				.Throttle(TimeSpan.FromMilliseconds(7.0))
-				.Do(_ => this.UpdateCore())
-				.Subscribe(_ => this.IsReloading = false)
+				.SelectMany(_ => this.GetSallyAreaAsync())
+				.SelectMany(x => this.UpdateAsync(x))
+				.Do(_ => this.IsReloading = false)
+				.Subscribe()
 				.AddTo(this);
 
 			this.homeport.Organization
 				.Subscribe(nameof(Organization.Ships), this.Update)
 				.AddTo(this);
 		}
-
 
 		public void Update()
 		{
@@ -176,24 +177,40 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			this.updateSource.OnNext(Unit.Default);
 		}
 
-		private void UpdateCore()
+		private IObservable<Unit> UpdateAsync(SallyArea[] areas)
 		{
-			var list = this.homeport.Organization.Ships
-				.Select(kvp => kvp.Value)
-				.Where(x => this.ShipTypes.Where(t => t.IsSelected).Any(t => x.Info.ShipType.Id == t.Id))
-				.Where(this.ShipLevelFilter.Predicate)
-				.Where(this.ShipLockFilter.Predicate)
-				.Where(this.ShipSpeedFilter.Predicate)
-				.Where(this.ShipModernizeFilter.Predicate)
-				.Where(this.ShipRemodelingFilter.Predicate)
-				.Where(this.ShipExpeditionFilter.Predicate)
-				.Where(this.ShipSallyAreaFilter.Predicate);
+			return Observable.Start(() =>
+			{
+				var list = this.homeport.Organization.Ships
+					.Select(kvp => kvp.Value)
+					.Where(x => this.ShipTypes.Where(t => t.IsSelected).Any(t => x.Info.ShipType.Id == t.Id))
+					.Where(this.ShipLevelFilter.Predicate)
+					.Where(this.ShipLockFilter.Predicate)
+					.Where(this.ShipSpeedFilter.Predicate)
+					.Where(this.ShipModernizeFilter.Predicate)
+					.Where(this.ShipRemodelingFilter.Predicate)
+					.Where(this.ShipExpeditionFilter.Predicate)
+					.Where(this.ShipSallyAreaFilter.Predicate);
 
-			this.Ships = this.SortWorker.Sort(list)
-				.Select((x, i) => new ShipViewModel(i + 1, x))
-				.ToList();
+				this.Ships = this.SortWorker.Sort(list)
+					.Select((x, i) => new ShipViewModel(i + 1, x, areas.FirstOrDefault(y => y.Area == x.SallyArea)))
+					.ToList();
+			});
 		}
 
+		private IObservable<SallyArea[]> GetSallyAreaAsync()
+		{
+			return this.sallyAreas == null
+				? SallyArea.GetAsync()
+					.ToObservable()
+					.Do(x =>
+					{
+						// これはひどい
+						this.sallyAreas = x;
+						this.ShipSallyAreaFilter.SetSallyArea(x);
+					})
+				: Observable.Return(this.sallyAreas);
+		}
 
 		public void SetShipType(int[] ids)
 		{

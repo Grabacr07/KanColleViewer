@@ -63,6 +63,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://shatteredskies.blob.core.windows.net/kancolle/sally.json")]
+        public string SallyAreaSource {
+            get {
+                return ((string)(this["SallyAreaSource"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("http://kcvapi.koumakan.jp/version/")]
         public string KcvApiUrl {
             get {
