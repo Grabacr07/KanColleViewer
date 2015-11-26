@@ -9,9 +9,23 @@ namespace Grabacr07.KanColleWrapper
 	{
 		ProxyType Type { get; }
 
-		string Host { get; }
+		string HttpHost { get; }
 
-		ushort Port { get; }
+		ushort HttpPort { get; }
+
+		string HttpsHost { get; }
+
+		ushort HttpsPort { get; }
+
+		string FtpHost { get; }
+
+		ushort FtpPort { get; }
+
+		string SocksHost { get; }
+
+		ushort SocksPort { get; }
+
+		bool IsUseHttpProxyForAllProtocols { get; }
 
         bool SendDb { get; }
 

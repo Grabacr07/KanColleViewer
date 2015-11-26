@@ -27,30 +27,36 @@ namespace Grabacr07.KanColleViewer.Plugins
 			if (streamResourceInfo == null)
 				return;
 
-			using (var stream = streamResourceInfo.Stream)
+			System.Windows.Application.Current.Dispatcher.Invoke(() =>
 			{
-				this.notifyIcon = new NotifyIcon
+				using (var stream = streamResourceInfo.Stream)
 				{
-					Text = ProductInfo.Title,
-					Icon = new Icon(stream),
-					Visible = true,
-				};
-			}
+					this.notifyIcon = new NotifyIcon
+					{
+						Text = ProductInfo.Title,
+						Icon = new Icon(stream),
+						Visible = true,
+					};
+				}
+			});
 		}
 
 		protected override void NotifyCore(string header, string body, Action activated, Action<Exception> failed)
 		{
 			if (this.notifyIcon == null) return;
 
-			if (activated != null)
+			System.Windows.Application.Current.Dispatcher.Invoke(() =>
 			{
-				this.notifyIcon.BalloonTipClicked -= this.activatedAction;
+				if (activated != null)
+				{
+					this.notifyIcon.BalloonTipClicked -= this.activatedAction;
 
-				this.activatedAction = (sender, args) => activated();
-				this.notifyIcon.BalloonTipClicked += this.activatedAction;
-			}
+					this.activatedAction = (sender, args) => activated();
+					this.notifyIcon.BalloonTipClicked += this.activatedAction;
+				}
 
-			this.notifyIcon.ShowBalloonTip(1000, header, body, ToolTipIcon.None);
+				this.notifyIcon.ShowBalloonTip(1000, header, body, ToolTipIcon.None);
+			});
 		}
 
 		public override void Dispose()

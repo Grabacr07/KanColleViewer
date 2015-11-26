@@ -21,27 +21,62 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 			public static SerializableProperty<ushort> Port { get; }
 				= new SerializableProperty<ushort>(GetKey(), Providers.Local, 80);
 
-            public static SerializableProperty<bool> SendDb { get; }
-                = new SerializableProperty<bool>(GetKey(), Providers.Local, false);
+			public static SerializableProperty<string> HttpsHost { get; }
+				= new SerializableProperty<string>(GetKey(), Providers.Local, null);
 
-            public static SerializableProperty<string> DbAccessKey { get; }
-                = new SerializableProperty<string>(GetKey(), Providers.Local, null);
+			public static SerializableProperty<ushort> HttpsPort { get; }
+				= new SerializableProperty<ushort>(GetKey(), Providers.Local, 443);
+
+			public static SerializableProperty<string> FtpHost { get; }
+				= new SerializableProperty<string>(GetKey(), Providers.Local, null);
+
+			public static SerializableProperty<ushort> FtpPort { get; }
+				= new SerializableProperty<ushort>(GetKey(), Providers.Local, 21);
+
+			public static SerializableProperty<string> SocksHost { get; }
+				= new SerializableProperty<string>(GetKey(), Providers.Local, null);
+
+			public static SerializableProperty<ushort> SocksPort { get; }
+				= new SerializableProperty<ushort>(GetKey(), Providers.Local, 1080);
+
+			public static SerializableProperty<bool> IsUseHttpProxyForAllProtocols { get; }
+				= new SerializableProperty<bool>(GetKey(), Providers.Local, true);
+
+			public static SerializableProperty<bool> SendDb { get; }
+				= new SerializableProperty<bool>(GetKey(), Providers.Local, false);
+
+			public static SerializableProperty<string> DbAccessKey { get; }
+				= new SerializableProperty<string>(GetKey(), Providers.Local, null);
 
             #region IProxySettings members
 
             ProxyType IProxySettings.Type => Type.Value;
 
-			string IProxySettings.Host => Host.Value;
+            string IProxySettings.HttpHost => Host.Value;
 
-			ushort IProxySettings.Port => Port.Value;
+			ushort IProxySettings.HttpPort => Port.Value;
 
-            bool IProxySettings.SendDb => SendDb.Value;
+			string IProxySettings.HttpsHost => HttpsHost.Value;
 
-            string IProxySettings.DbAccessKey => DbAccessKey.Value;
+
+			ushort IProxySettings.HttpsPort => HttpsPort.Value;
+
+			string IProxySettings.FtpHost => FtpHost.Value;
+
+			ushort IProxySettings.FtpPort => FtpPort.Value;
+
+			string IProxySettings.SocksHost => SocksHost.Value;
+
+			ushort IProxySettings.SocksPort => SocksPort.Value;
+
+			bool IProxySettings.IsUseHttpProxyForAllProtocols => IsUseHttpProxyForAllProtocols;
+
+			bool IProxySettings.SendDb => SendDb.Value;
+
+			string IProxySettings.DbAccessKey => DbAccessKey.Value;
 
 			#endregion
-
-
+			
 			private static string GetKey([CallerMemberName] string propertyName = "")
 			{
 				return nameof(NetworkSettings) + "." + nameof(Proxy) + "." + propertyName;
