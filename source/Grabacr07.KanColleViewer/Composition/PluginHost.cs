@@ -54,6 +54,9 @@ namespace Grabacr07.KanColleViewer.Composition
 		[ImportMany(RequiredCreationPolicy = CreationPolicy.Shared)]
 		private IEnumerable<Lazy<ITool, IPluginGuid>> importedTools;
 
+		[ImportMany(RequiredCreationPolicy = CreationPolicy.Shared)]
+		private IEnumerable<Lazy<ILocalizable, IPluginGuid>> importedLocalizables;
+
 #pragma warning restore 649
 
 		private static class Cache<TContract>
@@ -145,6 +148,7 @@ namespace Grabacr07.KanColleViewer.Composition
 			this.Load(this.importedNotifiers);
 			this.Load(this.importedNotifyRequesters);
 			this.Load(this.importedTools);
+			this.Load(this.importedLocalizables);
 		}
 
 		/// <summary>
