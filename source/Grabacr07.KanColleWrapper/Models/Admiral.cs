@@ -86,7 +86,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 司令部が保有できる装備アイテムの最大値を取得します。
 		/// </summary>
-		public int MaxSlotItemCount => this.RawData.api_max_slotitem;
+		public int MaxSlotItemCount => this.RawData.api_max_slotitem + 3;
 
 
 		internal Admiral(kcsapi_basic rawData)
