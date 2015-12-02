@@ -116,9 +116,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		public event EventHandler GoForwardRequested;
 		public event EventHandler RefreshRequested;
 		public event EventHandler<Uri> UriRequested;
-
-		private bool IsCookieEdit;
-
+		
 		public void GoBack()
 		{
 			this.GoBackRequested?.Invoke(this, new EventArgs());
@@ -140,11 +138,9 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		}
 		public void CookieNavigate()
 		{
-			if (this.IsCookieEdit) return;
 			if (this.SourceString.Contains("error/area/") && this.SourceString.Contains("dmm.com"))
 			{
 				GoKanColle();
-				this.IsCookieEdit = true;
 			}
 		}
 
@@ -159,8 +155,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		public void GoKanColle()
 		{
 			Uri uri;
-			string SauceCookie;
-			SauceCookie = "javascript:void(eval(\"document.cookie = 'cklg=ja;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=dmm.com;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=osapi.dmm.com;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=203.104.209.7;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=www.dmm.com;path=/netgame/';\"));location.href=\"http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/\";";
+			string SauceCookie = "javascript:void(eval(\"document.cookie = 'cklg=ja;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=dmm.com;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=osapi.dmm.com;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=203.104.209.7;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=www.dmm.com;path=/netgame/';\"));location.href=\"http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/\";";
 			if (this.UriRequested != null && Uri.TryCreate(SauceCookie, UriKind.Absolute, out uri))
 			{
 				this.UriRequested(this, uri);
