@@ -1,6 +1,6 @@
 [
     {
-        "id": "KanColleViewer.PluginAnalyzer.InvalidGuidMetadata",
+        "id": "KanColleViewer_PluginAnalyzer_InvalidGuidMetadata",
         "sevirity": "Warning",
         "line": 7,
         "column": 2,
