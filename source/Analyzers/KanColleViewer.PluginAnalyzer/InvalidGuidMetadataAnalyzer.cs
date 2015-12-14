@@ -17,7 +17,7 @@ namespace Grabacr07.KanColleViewer.PluginAnalyzer
 	public class InvalidGuidMetadataAnalyzer : DiagnosticAnalyzer
 	{
 		public static readonly string DiagnosticId
-			= "KanColleViewer.PluginAnalyzer.InvalidGuidMetadata";
+			= "KanColleViewer_PluginAnalyzer_InvalidGuidMetadata";
 
 		internal static readonly LocalizableString InvalidGuidMetadataMessageFormat
 			= new LocalizableResourceString(nameof(Resources.InvalidGuidMetadataMessageFormat), Resources.ResourceManager, typeof(Resources));

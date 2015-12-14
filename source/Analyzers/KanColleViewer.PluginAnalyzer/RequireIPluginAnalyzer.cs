@@ -17,7 +17,7 @@ namespace Grabacr07.KanColleViewer.PluginAnalyzer
 	public class RequireIPluginAnalyzer : DiagnosticAnalyzer
 	{
 		public static readonly string DiagnosticId
-			= "KanColleViewer.PluginAnalyzer.RequireIPlugin";
+			= "KanColleViewer_PluginAnalyzer_RequireIPlugin";
 
 		internal static readonly LocalizableString RequireIPluginMessageFormat
 			= new LocalizableResourceString(nameof(Resources.RequireIPluginMessageFormat), Resources.ResourceManager, typeof(Resources));
