@@ -12,7 +12,7 @@ using Grabacr07.KanColleViewer.Views;
 using Grabacr07.KanColleWrapper;
 using Livet;
 using Livet.Messaging;
-using MetroRadiance;
+using MetroRadiance.UI;
 using MetroTrilithon.Lifetime;
 using MetroTrilithon.Mvvm;
 
