@@ -14,7 +14,7 @@ namespace Grabacr07.KanColleWrapper
 	{
 		private readonly IConnectableObservable<Session> connectableSessionSource;
 		private readonly IConnectableObservable<Session> apiSource;
-		private readonly CompositeDisposable compositeDisposable;
+		private readonly MultipleDisposable compositeDisposable;
 
 		public IObservable<Session> SessionSource => this.connectableSessionSource.AsObservable();
 
@@ -40,7 +40,7 @@ namespace Grabacr07.KanColleWrapper
 
 		public KanColleProxy()
 		{
-			this.compositeDisposable = new CompositeDisposable();
+			this.compositeDisposable = new MultipleDisposable();
 
 			this.connectableSessionSource = Observable
 				.FromEvent<Action<Session>, Session>(
