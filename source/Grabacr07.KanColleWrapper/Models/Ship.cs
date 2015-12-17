@@ -59,7 +59,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// この艦娘がLv150になるために必要な経験値を取得します。
 		/// </summary>
-		public int ExpForLevelMax => Experience.GetShipExpForSpecifiedLevel(this.Exp, 150);
+		public int ExpForLevelMax => Experience.GetShipExpForSpecifiedLevel(this.Exp, 155);
 
 		#region HP 変更通知プロパティ
 
