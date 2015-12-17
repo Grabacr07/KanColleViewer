@@ -16,8 +16,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		public SallyArea SallyArea { get; }
 
-		public string TimeToRepair
-			=> $"{(int)this.Ship.TimeToRepair.TotalHours:D2}:{this.Ship.TimeToRepair.ToString(@"mm\:ss")}";
+		public string TimeToRepair => this.Ship.TimeToRepair != TimeSpan.Zero
+			? $"{(int)this.Ship.TimeToRepair.TotalHours:D2}:{this.Ship.TimeToRepair.ToString(@"mm\:ss")}"
+			: "";
 
 		public ShipViewModel(int index, Ship ship, SallyArea sallyArea)
 		{

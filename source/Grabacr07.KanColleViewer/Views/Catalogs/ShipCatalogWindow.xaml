@@ -27,7 +27,7 @@
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:ShipCatalogWindowViewModel}"
 				   Title="{Binding Title}"
-				   Width="1030"
+				   Width="1020"
 				   Height="800"
 				   FontSize="12"
 				   Topmost="{Binding Settings.TopMost.Value}"
@@ -395,7 +395,7 @@
 									</Grid.ColumnDefinitions>
 									<TextBlock Margin="0,2"
 											   HorizontalAlignment="Right">
-										<Run Text="損傷艦" />
+										<Run Text="損傷" />
 										<Run Text=":" />
 									</TextBlock>
 									<WrapPanel Grid.Column="2">
