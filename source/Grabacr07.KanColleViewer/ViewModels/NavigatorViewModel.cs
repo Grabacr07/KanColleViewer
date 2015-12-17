@@ -138,7 +138,11 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		}
 		public void CookieNavigate()
 		{
-			if (this.SourceString.Contains("error/area/") && this.SourceString.Contains("dmm.com"))
+			if (this.SourceString.Contains("error/area") && this.SourceString.Contains("dmm.com"))
+			{
+				GoKanColle();
+			}
+			else if(this.SourceString.Contains("foreign")&& this.SourceString.Contains("dmm.com"))
 			{
 				GoKanColle();
 			}
