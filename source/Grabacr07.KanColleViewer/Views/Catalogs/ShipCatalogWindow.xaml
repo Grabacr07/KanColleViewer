@@ -822,7 +822,7 @@
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<TextBlock Text="{Binding Ship.TimeToRepair, Mode=OneWay}"
+										<TextBlock Text="{Binding TimeToRepair, Mode=OneWay}"
 												   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 												   Margin="0,3" />
 									</DataTemplate>
