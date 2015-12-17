@@ -27,6 +27,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public static readonly SortableColumn LuckColumn = new SortableColumn { Name = "運", KeySelector = x => x.Luck.Current, DefaultIsDescending = true, };
 		public static readonly SortableColumn HPColumn = new SortableColumn { Name = "耐久", KeySelector = x => x.HP.Maximum, DefaultIsDescending = true, };
 		public static readonly SortableColumn ViewRangeColumn = new SortableColumn { Name = "索敵", KeySelector = x => x.ViewRange, DefaultIsDescending = true, };
+		public static readonly SortableColumn TimeToRepairColumn = new SortableColumn { Name = "修復時間", KeySelector = x => x.TimeToRepair.Ticks, DefaultIsDescending = true, };
 
 		public static SortableColumn[] Columns { get; set; }
 
@@ -47,6 +48,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				LuckColumn,
 				HPColumn,
 				ViewRangeColumn,
+				TimeToRepairColumn,
 			};
 		}
 
@@ -264,6 +266,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 	{
 		public string Name { get; set; }
 		public bool DefaultIsDescending { get; set; }
-		public Func<Ship, int> KeySelector { get; set; }
+		public Func<Ship, long> KeySelector { get; set; }
 	}
 }
