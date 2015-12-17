@@ -282,6 +282,25 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
+		#region TimeToRepair 変更通知プロパティ
+
+		private TimeSpan _TimeToRepair;
+
+		public TimeSpan TimeToRepair
+		{
+			get { return this._TimeToRepair; }
+			set
+			{
+				if (this._TimeToRepair != value)
+				{
+					this._TimeToRepair = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		/// <summary>
 		/// 装備によるボーナスを含めた索敵ステータス値を取得します。
 		/// </summary>
@@ -350,6 +369,8 @@ namespace Grabacr07.KanColleWrapper.Models
 				this.Armer = new ModernizableStatus(this.Info.RawData.api_souk, this.RawData.api_kyouka[3]);
 				this.Luck = new ModernizableStatus(this.Info.RawData.api_luck, this.RawData.api_kyouka[4]);
 			}
+
+			this.TimeToRepair = TimeSpan.FromMilliseconds(this.RawData.api_ndock_time);
 
 			this.UpdateSlots();
 		}
