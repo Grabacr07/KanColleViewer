@@ -86,7 +86,7 @@ namespace Grabacr07.KanColleViewer
 				GeneralSettings.Culture.Subscribe(x => ResourceService.Current.ChangeCulture(x)).AddTo(this);
 				KanColleClient.Current.Settings = new KanColleSettings();
 
-				ThemeService.Current.Initialize(this, Theme.Dark, Accent.Purple);
+				ThemeService.Current.Register(this, Theme.Dark, Accent.Purple);
 				WindowService.Current.AddTo(this).Initialize();
 				PluginService.Current.AddTo(this).Initialize();
 				NotifyService.Current.AddTo(this).Initialize();
