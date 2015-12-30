@@ -11,7 +11,7 @@ using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.ViewModels;
 using mshtml;
 using MetroRadiance.Interop;
-using MetroTrilithon.Controls;
+using MetroTrilithon.UI.Controls;
 using SHDocVw;
 using IServiceProvider = Grabacr07.KanColleViewer.Win32.IServiceProvider;
 using WebBrowser = System.Windows.Controls.WebBrowser;

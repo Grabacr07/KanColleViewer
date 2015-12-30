@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Grabacr07.KanColleViewer.Models.Settings;
 using Livet;
-using MetroTrilithon.Controls;
+using MetroTrilithon.UI.Controls;
 using MetroTrilithon.Lifetime;
 
 namespace Grabacr07.KanColleViewer.Views
