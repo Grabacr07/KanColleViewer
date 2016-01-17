@@ -126,6 +126,12 @@
 									Property="Fill"
 									Value="#FFA987BA" />
 						</Trigger>
+						<Trigger Property="Category"
+								 Value="Sortie2">
+							<Setter TargetName="Icon"
+									Property="Fill"
+									Value="#FFB53B36" />
+						</Trigger>
 						<Trigger Property="IsDetailView"
 								 Value="False">
 							<Setter TargetName="DetailView"

@@ -95,6 +95,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Annotations\DarkAttribute.cs" />
+    <Compile Include="Annotations\ElementalAttribute.cs" />
+    <Compile Include="Annotations\LightAttribute.cs" />
     <Compile Include="Calculator.cs" />
     <Compile Include="Counter.cs" />
     <Compile Include="DisposableNotifier.cs" />
