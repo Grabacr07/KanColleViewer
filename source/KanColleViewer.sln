@@ -10,13 +10,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanColleViewer", "Grabacr07
 		{0AF0B9FF-D981-4D0F-A41F-C3AB6FE2F16D} = {0AF0B9FF-D981-4D0F-A41F-C3AB6FE2F16D}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B8B36616-103B-4D8B-A752-A7C07FE1BA70}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanColleWrapper", "Grabacr07.KanColleWrapper\KanColleWrapper.csproj", "{0BC8CF79-76D9-46AD-867F-FEC6C6AD4594}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".settings", ".settings", "{4CB2D693-E4DB-447F-816E-C4F3EF36FD70}"
