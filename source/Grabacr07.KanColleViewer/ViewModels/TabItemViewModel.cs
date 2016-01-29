@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Livet;
-using MetroRadiance.Controls;
 using Grabacr07.KanColleViewer.Models;
+using Livet;
 using Livet.EventListeners;
+using MetroRadiance.UI.Controls;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {

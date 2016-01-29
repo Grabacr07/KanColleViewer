@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Grabacr07.KanColleViewer.Models.Settings;
 using Livet;
-using MetroTrilithon.Controls;
+using MetroTrilithon.UI.Controls;
 using MetroTrilithon.Lifetime;
 
 namespace Grabacr07.KanColleViewer.Views
@@ -67,7 +67,7 @@ namespace Grabacr07.KanColleViewer.Views
 				}
 			}
 
-			this.MinWidth = browserSize.Width;
+			this.MinWidth = browserSize.Width + this.BorderThickness.Left + this.BorderThickness.Right;
 			this.MinHeight = browserSize.Height + this.toolbarArea.ActualHeight + this.captionBar.ActualHeight + this.statusBar.ActualHeight;
 
 			this.previousBrowserSize = browserSize;
