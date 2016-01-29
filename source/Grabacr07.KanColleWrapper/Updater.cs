@@ -37,6 +37,14 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		private const string apiVersion = "1";
 
+		private readonly TimeSpan updateCheckFrequency = new TimeSpan(0, 120, 0);
+
+#if !DEBUG
+		private readonly TimeSpan submissionFrequency = new TimeSpan(0, 15, 0);
+#else
+		private readonly TimeSpan submissionFrequency = new TimeSpan(0, 1, 0);
+#endif
+
 		/// <summary>
 		/// URL for version checks.
 		/// </summary>
@@ -87,10 +95,10 @@ namespace Grabacr07.KanColleWrapper
 			TranslationDataProvider.ProcessUnknown += ProcessUnknown;
 
 			this.updateCheckTimer.Tick += this.dispatcherTimerHandler;
-			this.updateCheckTimer.Interval = new TimeSpan(0, 120, 0);
+			this.updateCheckTimer.Interval = updateCheckFrequency;
 
 			this.autosubmitTimer.Tick += this.autosubmitTimerHandler;
-			this.autosubmitTimer.Interval = new TimeSpan(0, 15, 0);
+			this.autosubmitTimer.Interval = submissionFrequency;
 
 			this.apiVersionCheckUrl = apiurl;
 			this.ChangeCulture();
@@ -204,8 +212,8 @@ namespace Grabacr07.KanColleWrapper
 			{
 				if (!this.IsUpToDate(version.Key))
 				{
-					Debug.WriteLine("Updater: {0} needs update; local version: {1}, remote: {2}.", version.Key, (version.Key != TranslationProviderType.App) ? TranslationDataProvider.Version(version.Key, CurrentCulture) : Assembly.GetEntryAssembly().GetName().Version.ToString(), string.IsNullOrEmpty(version.Value) ? "N/A" : version.Value);
-					if ((version.Key != TranslationProviderType.App) && this.FetchTranslations(version.Key)) TranslationDataProvider.SaveXml(version.Key, CurrentCulture);
+					Debug.WriteLine("Updater: {0} needs update; local version: {1}, remote: {2}.", version.Key, (version.Key != TranslationProviderType.App) ? TranslationDataProvider.Version(version.Key) : Assembly.GetEntryAssembly().GetName().Version.ToString(), string.IsNullOrEmpty(version.Value) ? "N/A" : version.Value);
+					if ((version.Key != TranslationProviderType.App) && this.FetchTranslations(version.Key)) TranslationDataProvider.SaveXml(version.Key);
 				}
 			}
 		}
@@ -232,7 +240,7 @@ namespace Grabacr07.KanColleWrapper
 					int verRemote, verLocal;
 
 					if (!int.TryParse(versions[type], out verRemote)) return true;
-					if (!int.TryParse(TranslationDataProvider.Version(type, CurrentCulture), out verLocal)) return false;
+					if (!int.TryParse(TranslationDataProvider.Version(type), out verLocal)) return false;
 
 					return (verRemote <= verLocal);
 			}
@@ -267,7 +275,7 @@ namespace Grabacr07.KanColleWrapper
 					return false;
 				}
 
-				return TranslationDataProvider.LoadJson(type, CurrentCulture, responseBytes);
+				return TranslationDataProvider.LoadJson(type, responseBytes);
 			}
 		}
 

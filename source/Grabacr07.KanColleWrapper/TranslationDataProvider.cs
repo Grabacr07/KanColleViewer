@@ -4,15 +4,10 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.Serialization.Json;
-using System.Web.Configuration;
-using System.Xml.Linq;
 using System.Xml.Serialization;
-using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
 using Grabacr07.KanColleWrapper.Models.Translations;
-using Livet;
 
 namespace Grabacr07.KanColleWrapper
 {
@@ -34,7 +29,7 @@ namespace Grabacr07.KanColleWrapper
 				currentCulture = value ?? CultureInfo.CurrentCulture.Name;
 				currentCulture = (currentCulture.StartsWith("en")) ? "en" : currentCulture;
 				currentCulture = (currentCulture.StartsWith("ja")) ? "ja" : currentCulture;
-				// If culture is set to "(auto)", check if we support the translations for current the system-wide culture.
+				// If culture is set to "(auto)", check if we support the translations for the current system-wide culture.
 				if ((value == null) && !IsCultureSupported(CultureInfo.CurrentCulture.Name)) currentCulture = "en";
 			}
 		}
@@ -53,11 +48,11 @@ namespace Grabacr07.KanColleWrapper
 			CurrentCulture = KanColleClient.Current?.Settings?.Culture;
 		}
 
-		//private static string FilePath(TranslationProviderType type, string culture)
-		//	=> Path.Combine(translationsPath, culture, type.ToString() + ".xml");
-
 		private static string SerialisationPath(TranslationProviderType type, string culture)
 			=> Path.Combine(translationsPath, culture, type.ToString() + ".xml");
+
+		private static string SerialisationPath(TranslationProviderType type)
+			=> SerialisationPath(type, CurrentCulture);
 
 		/// <summary>
 		/// Changes culture and loads or re-loads translation files.
@@ -74,7 +69,7 @@ namespace Grabacr07.KanColleWrapper
 			Debug.WriteLine("TranslationDataProvider: got <" + culture + "> in a culture change request.");
 
 			CurrentCulture = culture;
-			LoadLocalTranslations(culture);
+			LoadLocalTranslations();
 			KanColleClient.Current.Translations.ChangeCulture();
 			KanColleClient.Current.Updater.ChangeCulture();
 		}
@@ -86,7 +81,7 @@ namespace Grabacr07.KanColleWrapper
 		/// <param name="culture">Culture</param>
 		/// <param name="jsonBytes">JSON data</param>
 		/// <returns></returns>
-		public static bool LoadJson(TranslationProviderType type, string culture, byte[] jsonBytes)
+		private static bool LoadJson(TranslationProviderType type, string culture, byte[] jsonBytes)
 		{
 			Debug.WriteLine("TranslationDataProvider: Provider {0}: JSON parsing was requested for culture <{1}>.", type, culture);
 
@@ -121,7 +116,10 @@ namespace Grabacr07.KanColleWrapper
 			return false;
 		}
 
-		public static string Lookup(TranslationType type, string culture, object rawData)
+		public static bool LoadJson(TranslationProviderType type, byte[] jsonBytes)
+			=> LoadJson(type, CurrentCulture, jsonBytes);
+
+		private static string Lookup(TranslationType type, string culture, object rawData)
 		{
 			string lookupData;
 
@@ -152,7 +150,7 @@ namespace Grabacr07.KanColleWrapper
 					return null;
 			}
 
-			var result = LookupInsideProvider(type, culture, lookupData);
+			var result = LookupInsideProvider(type, lookupData);
 			if ((result == null) && EnableSubmission)
 			{
 				ProcessUnknown?.Invoke(null, new ProcessUnknownEventArgs(TypeToProviderType(type), culture, rawData));
@@ -160,7 +158,10 @@ namespace Grabacr07.KanColleWrapper
 			return result;
 		}
 
-		public static string LookupInsideProvider(TranslationType type, string culture, string key)
+		public static string Lookup(TranslationType type, object rawData)
+			=> Lookup(type, CurrentCulture, rawData);
+
+		private static string LookupInsideProvider(TranslationType type, string culture, string key)
 		{
 			var accessor = Tuple.Create(TypeToProviderType(type), culture);
 
@@ -201,19 +202,25 @@ namespace Grabacr07.KanColleWrapper
 			return !string.IsNullOrEmpty(result) ? result: null;
 		}
 
-		public static string Version(TranslationProviderType type, string culture)
+		public static string LookupInsideProvider(TranslationType type, string key)
+			=> LookupInsideProvider(type, CurrentCulture, key);
+
+		private static string Version(TranslationProviderType type, string culture)
 		{
 			var accessor = Tuple.Create(type, culture);
 			if (!translationSets.ContainsKey(accessor)) return null;
 			return translationSets[accessor]?.version;
 		}
 
+		public static string Version(TranslationProviderType type)
+			=> Version(type, CurrentCulture);
+
 		/// <summary>
 		/// Serialise data to local storage
 		/// </summary>
 		/// <param name="type"></param>
 		/// <param name="culture"></param>
-		public static void SaveXml(TranslationProviderType type, string culture)
+		private static void SaveXml(TranslationProviderType type, string culture)
 		{
 			if (culture.StartsWith("ja")) return;
 
@@ -252,7 +259,10 @@ namespace Grabacr07.KanColleWrapper
 			}
 		}
 
-		public static bool LoadXml(TranslationProviderType type, string culture)
+		public static void SaveXml(TranslationProviderType type)
+			=> SaveXml(type, CurrentCulture);
+
+		private static bool LoadXml(TranslationProviderType type, string culture)
 		{
 			if (!File.Exists(SerialisationPath(type, culture)) || culture.StartsWith("ja"))
 				return false;
@@ -288,10 +298,13 @@ namespace Grabacr07.KanColleWrapper
 			}
 		}
 
+		public static bool LoadXml(TranslationProviderType type)
+			=> LoadXml(type, CurrentCulture);
+
 		/// <summary>
 		/// Deserialises translations from local storage. Should only be called during culture change requests.
 		/// </summary>
-		public static void LoadLocalTranslations(string culture)
+		private static void LoadLocalTranslations(string culture)
 		{
 			if (culture.StartsWith("ja")) return;
 
@@ -302,6 +315,9 @@ namespace Grabacr07.KanColleWrapper
 				LoadXml(type, culture);
 			}
 		}
+
+		public static void LoadLocalTranslations()
+			=> LoadLocalTranslations(CurrentCulture);
 
 		/// <summary>
 		/// Are translations for the given culture supported?

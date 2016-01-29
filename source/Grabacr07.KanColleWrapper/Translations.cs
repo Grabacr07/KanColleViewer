@@ -72,7 +72,7 @@ namespace Grabacr07.KanColleWrapper
 				return null;
 			}
 
-			return TranslationDataProvider.Lookup(type, CurrentCulture, rawData);
+			return TranslationDataProvider.Lookup(type, rawData);
 		}
 	}
 }
