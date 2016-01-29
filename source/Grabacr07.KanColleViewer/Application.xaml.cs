@@ -14,7 +14,7 @@ using Grabacr07.KanColleViewer.ViewModels;
 using Grabacr07.KanColleViewer.Views;
 using Grabacr07.KanColleWrapper;
 using Livet;
-using MetroRadiance;
+using MetroRadiance.UI;
 using MetroTrilithon.Lifetime;
 
 namespace Grabacr07.KanColleViewer
@@ -86,7 +86,7 @@ namespace Grabacr07.KanColleViewer
 				GeneralSettings.Culture.Subscribe(x => ResourceService.Current.ChangeCulture(x)).AddTo(this);
 				KanColleClient.Current.Settings = new KanColleSettings();
 
-				ThemeService.Current.Initialize(this, Theme.Dark, Accent.Purple);
+				ThemeService.Current.Register(this, Theme.Dark, Accent.Purple);
 				WindowService.Current.AddTo(this).Initialize();
 				PluginService.Current.AddTo(this).Initialize();
 				NotifyService.Current.AddTo(this).Initialize();

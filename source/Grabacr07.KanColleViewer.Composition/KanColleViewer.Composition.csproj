@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Composition\ILocalizable.cs" />
     <Compile Include="Composition\INotifier.cs" />
     <Compile Include="Composition\INotification.cs" />
     <Compile Include="Composition\IPlugin.cs" />

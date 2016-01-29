@@ -17,7 +17,7 @@ namespace Grabacr07.KanColleViewer.PluginAnalyzer
 	public class DuplicateAttributeAnalyzer : DiagnosticAnalyzer
 	{
 		public static readonly string DiagnosticId
-			= "KanColleViewer.PluginAnalyzer.DuplicateAttribute";
+			= "KanColleViewer_PluginAnalyzer_DuplicateAttribute";
 
 		internal static readonly LocalizableString DuplicateExportAttributeMessageFormat
 			= new LocalizableResourceString(nameof(Resources.DuplicateExportAttributeMessageFormat), Resources.ResourceManager, typeof(Resources));

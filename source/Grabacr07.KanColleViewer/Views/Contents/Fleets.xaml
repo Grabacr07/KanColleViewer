@@ -414,7 +414,7 @@
 										<ItemsControl.ItemTemplate>
 											<DataTemplate>
 												<Border x:Name="Elements"
-													Background="Transparent">
+														Background="Transparent">
 														<Border.ToolTip>
 															<MultiBinding Converter="{StaticResource NameWithLevelConverter}">
 																<Binding Path="Item.Info.Name" Mode="OneWay" />

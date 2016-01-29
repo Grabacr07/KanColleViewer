@@ -1,22 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-    <metadata>
-        <id>$id$</id>
-        <title>$title$</title>
-        <version>$version$</version>
-        <authors>$author$</authors>
-        <owners>$author$</owners>
-        <licenseUrl>https://github.com/Grabacr07/KanColleViewer/blob/master/LICENSE.txt</licenseUrl>
-        <projectUrl>https://github.com/Grabacr07/KanColleViewer</projectUrl>
-        <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>$description$</description>
-        <language>ja-JP</language>
-        <tags>KanColle</tags>
-        <dependencies>
-            <dependency id="Nekoxy" version="1.2.0.13" />
-            <dependency id="Rx-Main" version="2.2.5" />
-            <dependency id="StatefulModel" version="0.1.2" />
-            <dependency id="MetroTrilithon" version="0.1.0" />
-        </dependencies>
-    </metadata>
+  <metadata>
+    <id>$id$</id>
+    <title>$title$</title>
+    <version>$version$</version>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/Grabacr07/KanColleViewer/blob/master/LICENSE.txt</licenseUrl>
+    <projectUrl>https://github.com/Grabacr07/KanColleViewer</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <language>ja-JP</language>
+    <tags>KanColle</tags>
+    <dependencies>
+      <dependency id="Nekoxy" version="1.5.2" />
+      <dependency id="Rx-Main" version="2.2.5" />
+      <dependency id="StatefulModel" version="0.5.0" />
+      <dependency id="MetroTrilithon" version="0.1.7" />
+    </dependencies>
+  </metadata>
 </package>
