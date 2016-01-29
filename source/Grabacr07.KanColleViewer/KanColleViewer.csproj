@@ -85,8 +85,8 @@
       <HintPath>..\..\assemblies\mshtml.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="Nekoxy, Version=1.5.1.19, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Nekoxy.1.5.1.19\lib\net45\Nekoxy.dll</HintPath>
+    <Reference Include="Nekoxy, Version=1.5.2.20, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nekoxy.1.5.2.20\lib\net45\Nekoxy.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -128,7 +128,7 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="TrotiNet, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Nekoxy.1.5.1.19\lib\net45\TrotiNet.dll</HintPath>
+      <HintPath>..\packages\Nekoxy.1.5.2.20\lib\net45\TrotiNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Vannatech.CoreAudio">
