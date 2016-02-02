@@ -21,7 +21,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 	[ExportMetadata("Description", "遠征の状況をタスク バー インジケーターに報告します。")]
 	[ExportMetadata("Version", "1.0")]
 	[ExportMetadata("Author", "@Grabacr07")]
-	public class ExpeditionProgress : IPlugin, ITaskbarProgress, IDisposableHolder
+	public class ExpeditionProgress : IPlugin, ITaskbarProgress, ISettings, IDisposableHolder
 	{
 		private readonly MultipleDisposable compositDisposable = new MultipleDisposable();
 		private ExpeditionWrapper[] wrappers;
@@ -32,6 +32,19 @@ namespace Grabacr07.KanColleViewer.Plugins
 		public TaskbarItemProgressState State { get; private set; }
 
 		public double Value { get; private set; }
+
+		public bool ErrorIfAllWaiting
+		{
+			get { return Settings.Default.ErrorIfAllWaiting; }
+			set
+			{
+				Settings.Default.ErrorIfAllWaiting = value;
+				Settings.Default.Save();
+				this.Update();
+			}
+		}
+
+		object ISettings.View => new ExpeditionProgressSettings { DataContext = this, };
 
 		public event EventHandler Updated;
 
@@ -44,25 +57,29 @@ namespace Grabacr07.KanColleViewer.Plugins
 			var timer = new DispatcherTimer(DispatcherPriority.Normal) { Interval = TimeSpan.FromMilliseconds(Settings.Default.Interval), };
 			timer.Tick += (sender, e) => this.Update();
 			timer.Start();
+
+			Disposable.Create(() => Settings.Default.Save());
 		}
 
-		public void InitializeCore()
+		private void InitializeCore()
 		{
 			if (this.initialized) return;
 
 			var homeport = KanColleClient.Current.Homeport;
 			if (homeport != null)
 			{
+				this.initialized = true;
+
 				homeport.Organization
 					.Subscribe(nameof(Organization.Fleets), this.UpdateExpeditions)
 					.AddTo(this);
-
-				this.initialized = true;
 			}
 		}
 
 		public void UpdateExpeditions()
 		{
+			if (!this.initialized) return;
+
 			if (this.wrappers != null)
 			{
 				foreach (var wrapper in this.wrappers) wrapper.Dispose();
@@ -81,6 +98,8 @@ namespace Grabacr07.KanColleViewer.Plugins
 
 		public void Update()
 		{
+			if (!this.initialized) return;
+
 			if (this.wrappers.Length == 0)
 			{
 				this.State = TaskbarItemProgressState.None;
@@ -108,7 +127,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 				else
 				{
 					this.State = TaskbarItemProgressState.Error;
-					this.Value = .0;
+					this.Value = this.ErrorIfAllWaiting ? 1.0 : .0;
 				}
 			}
 

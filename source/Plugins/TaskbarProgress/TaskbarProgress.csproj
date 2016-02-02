@@ -67,6 +67,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExpeditionProgress.cs" />
+    <Compile Include="ExpeditionProgressSettings.xaml.cs">
+      <DependentUpon>ExpeditionProgressSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ExpeditionState.cs" />
     <Compile Include="ExpeditionWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -104,6 +107,12 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="ExpeditionProgressSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
