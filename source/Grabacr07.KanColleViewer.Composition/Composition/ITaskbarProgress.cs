@@ -14,9 +14,14 @@ namespace Grabacr07.KanColleViewer.Composition
 	public interface ITaskbarProgress
 	{
 		/// <summary>
+		/// この機能をシステムが識別するための ID を取得します。
+		/// </summary>
+		string Id { get; }
+
+		/// <summary>
 		/// この機能をユーザーが選択するときに識別するための名前を取得します。
 		/// </summary>
-		string Name { get; }
+		string DisplayName { get; }
 
 		/// <summary>
 		/// プログレス インジケーターに報告する現在の状態を取得します。

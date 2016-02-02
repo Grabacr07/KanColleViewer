@@ -15,7 +15,15 @@ namespace Grabacr07.KanColleViewer.Models
 
 		private ITaskbarProgress current;
 
-		string ITaskbarProgress.Name => "AggregateTaskbarProgress";
+		string ITaskbarProgress.Id
+		{
+			get { throw new NotSupportedException(); }
+		}
+
+		string ITaskbarProgress.DisplayName
+		{
+			get { throw new NotSupportedException(); }
+		}
 
 		#region State 変更通知プロパティ
 
@@ -62,9 +70,9 @@ namespace Grabacr07.KanColleViewer.Models
 			GeneralSettings.TaskbarProgressSource.Subscribe(x => this.Change(x));
 		}
 
-		public void Change(string name)
+		public void Change(string id)
 		{
-			this.Change(Features.FirstOrDefault(x => x.Name == name));
+			this.Change(Features.FirstOrDefault(x => x.Id == id));
 		}
 
 		public void Change(ITaskbarProgress progress)

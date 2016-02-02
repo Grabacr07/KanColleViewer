@@ -16,18 +16,22 @@ namespace Grabacr07.KanColleViewer.Plugins
 {
 	[Export(typeof(IPlugin))]
 	[Export(typeof(ITaskbarProgress))]
-	[ExportMetadata("Guid", "C8BF00A6-9FD4-4CC4-8FC5-ECCC5675CDEB")]
+	[ExportMetadata("Guid", guid)]
 	[ExportMetadata("Title", "ExpeditionProgressIndicator")]
 	[ExportMetadata("Description", "遠征の状況をタスク バー インジケーターに報告します。")]
 	[ExportMetadata("Version", "1.0")]
 	[ExportMetadata("Author", "@Grabacr07")]
 	public class ExpeditionProgress : IPlugin, ITaskbarProgress, ISettings, IDisposableHolder
 	{
+		private const string guid = "C8BF00A6-9FD4-4CC4-8FC5-ECCC5675CDEB";
+
 		private readonly MultipleDisposable compositDisposable = new MultipleDisposable();
 		private ExpeditionWrapper[] wrappers;
 		private bool initialized;
 
-		public string Name => "遠征状況";
+		public string Id => guid + "-1";
+
+		public string DisplayName => "遠征状況";
 
 		public TaskbarItemProgressState State { get; private set; }
 
