@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Shell;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleViewer.Properties;
@@ -111,7 +112,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
-
 		public KanColleWindowViewModel(bool isMainWindow) : base(isMainWindow)
 		{
 			this.Settings = SettingsHost.Instance<KanColleWindowSettings>();
@@ -131,7 +131,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 			this.taskbarProgress = new TaskbarProgress();
 			this.taskbarProgress
-				.Subscribe(nameof(TaskbarProgress), () => this.UpdateTaskbar(this.taskbarProgress.State, this.taskbarProgress.Value))
+				.Subscribe(nameof(TaskbarProgress), () => this.UpdateTaskbar())
 				.AddTo(this);
 		}
 
@@ -146,6 +146,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				// ウィンドウ表示時点で既に分割設定されていた場合、このタイミングで分割ウィンドウも一緒に表示
 				this.Transition(this.splitWindow, typeof(InformationWindow), TransitionMode.NewOrActive, false);
 			}
+
+			this.UpdateTaskbar();
 		}
 
 
@@ -181,6 +183,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 				this.ContentVisibility = Visibility.Collapsed;
 				this.Settings.IsSplit.Value = true;
+				this.UpdateTaskbar();
 			}
 		}
 
@@ -202,6 +205,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					this.ContentVisibility = Visibility.Visible;
 					this.Settings.IsSplit.Value = false;
 				}
+
+				this.UpdateTaskbar();
 			}
 		}
 
@@ -232,6 +237,21 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					return KanColleHost.KanColleSize.Width;
 				default:
 					return double.PositiveInfinity;
+			}
+		}
+
+		private void UpdateTaskbar()
+		{
+			// 分割ウィンドウがいなかったら、自身のタスク バーを設定する
+			// 分割ウィンドウがいる場合はそっちに任せる
+
+			if (this.splitWindow == null)
+			{
+				this.UpdateTaskbar(this.taskbarProgress.State, this.taskbarProgress.Value);
+			}
+			else
+			{
+				this.UpdateTaskbar(TaskbarItemProgressState.None, .0);
 			}
 		}
 	}
