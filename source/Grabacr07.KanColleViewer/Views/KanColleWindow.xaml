@@ -125,6 +125,7 @@
 					<WebBrowser Source="about:blank">
 						<i:Interaction.Behaviors>
 							<behaviors:NavigatorBehavior Navigator="{Binding Navigator}" />
+							<behaviors:TaskbarThumbnailBehavior />
 						</i:Interaction.Behaviors>
 						<i:Interaction.Triggers>
 							<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
