@@ -24,6 +24,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 	{
 		// 分割されたやつ
 		private InformationWindowViewModel splitWindow;
+		private readonly TaskbarProgress taskbarProgress;
 
 		public NavigatorViewModel Navigator { get; }
 
@@ -127,6 +128,11 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				.AddTo(this);
 
 			GeneralSettings.BrowserZoomFactor.Subscribe(x => this.ZoomFactor.Current = x).AddTo(this);
+
+			this.taskbarProgress = new TaskbarProgress();
+			this.taskbarProgress
+				.Subscribe(nameof(TaskbarProgress), () => this.UpdateTaskbar(this.taskbarProgress.State, this.taskbarProgress.Value))
+				.AddTo(this);
 		}
 
 

@@ -68,6 +68,10 @@
 			<livet:TransitionInteractionMessageAction InvokeActionOnlyWhenWindowIsActive="False"
 													  IsOwned="True" />
 		</livet:InteractionMessageTrigger>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+										 MessageKey="Window.UpdateTaskbar">
+			<mtti:TaskbarMessageAction InvokeActionOnlyWhenWindowIsActive="False" />
+		</livet:InteractionMessageTrigger>
 	</i:Interaction.Triggers>
 
 	<Grid>
