@@ -170,6 +170,7 @@
     <Compile Include="Models\StatusService.cs" />
     <Compile Include="Models\Migration\_Settings.cs" />
     <Compile Include="Models\SupportedImageFormat.cs" />
+    <Compile Include="Models\TaskbarProgress.cs" />
     <Compile Include="Models\Volume.cs" />
     <Compile Include="Models\Migration\_KanColleClientSettings.cs" />
     <Compile Include="ViewModels\Composition\LoadFailedPluginViewModel.cs" />

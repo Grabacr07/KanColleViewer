@@ -87,8 +87,8 @@ namespace Grabacr07.KanColleViewer
 				KanColleClient.Current.Settings = new KanColleSettings();
 
 				ThemeService.Current.Register(this, Theme.Dark, Accent.Purple);
-				WindowService.Current.AddTo(this).Initialize();
 				PluginService.Current.AddTo(this).Initialize();
+				WindowService.Current.AddTo(this).Initialize();
 				NotifyService.Current.AddTo(this).Initialize();
 
 				Helper.SetRegistryFeatureBrowserEmulation();
