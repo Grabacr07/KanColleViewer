@@ -43,6 +43,24 @@
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
+		<TextBlock Text="タスク バー設定"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
+				   Margin="0,10" />
+		<StackPanel Orientation="Horizontal"
+					Margin="20,0,0,10">
+			<TextBlock Text="インジケーターの動作"
+					   Margin="0,0,10,0" />
+			<metro:PromptComboBox ItemsSource="{Binding TaskbarProgressFeatures}"
+								  DisplayMemberPath="Display"
+								  SelectedValuePath="Value"
+								  SelectedValue="{Binding Source={x:Static ms:GeneralSettings.TaskbarProgressSource}, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+								  Prompt=""
+								  MinWidth="140" />
+		</StackPanel>
+
+		<Rectangle Height="1"
+				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
 		<TextBlock Text="{Binding Resources.Settings_WindowControl, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
 				   Margin="0,10" />

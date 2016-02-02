@@ -13,7 +13,7 @@
     <language>ja-JP</language>
     <tags>KanColle</tags>
     <frameworkAssemblies>
-      <frameworkAssembly assemblyName="System.ComponentModel.Composition"  />
+      <frameworkAssembly assemblyName="System.ComponentModel.Composition" />
     </frameworkAssemblies>
   </metadata>
 </package>

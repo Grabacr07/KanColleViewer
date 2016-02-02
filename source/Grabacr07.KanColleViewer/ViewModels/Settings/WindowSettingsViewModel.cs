@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleViewer.Models.Settings;
 using Livet;
+using MetroTrilithon.Linq;
 using MetroTrilithon.Mvvm;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Settings
@@ -16,6 +18,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 		private KanColleWindowSettings settings;
 
 		public IReadOnlyCollection<DisplayViewModel<ExitConfirmationType>> ExitConfirmationTypes { get; }
+
+		public IReadOnlyCollection<DisplayViewModel<string>> TaskbarProgressFeatures { get; }
 
 		#region IsSplit 変更通知プロパティ
 
@@ -30,7 +34,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 				{
 					this._IsSplit = value;
 					this.RaisePropertyChanged();
-
 				}
 			}
 		}
@@ -74,6 +77,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 				DisplayViewModel.Create(ExitConfirmationType.InSortieOnly, Resources.Settings_Window_ConfirmExit_InSortieOnly),
 				DisplayViewModel.Create(ExitConfirmationType.Always, Resources.Settings_Window_ConfirmExit_Always),
 			};
+			this.TaskbarProgressFeatures = EnumerableEx
+				.Return(DisplayViewModel.Create(GeneralSettings.TaskbarProgressSource.Default, "使用しない"))
+				.Concat(TaskbarProgress.Features.Select(x => DisplayViewModel.Create(x.Name, x.Name)))
+				.ToList();
 		}
 
 		public void Initialize()
