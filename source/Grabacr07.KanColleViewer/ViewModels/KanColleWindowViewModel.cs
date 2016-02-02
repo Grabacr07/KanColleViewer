@@ -185,7 +185,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		{
 			if (this.splitWindow != null)
 			{
-				this.splitWindow.PropertyChanged -= this.HandleSplitWindowClosed;
+				this.splitWindow.Closed -= this.HandleSplitWindowClosed;
 				this.splitWindow.Close();
 				this.splitWindow = null;
 
