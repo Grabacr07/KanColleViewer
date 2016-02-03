@@ -135,6 +135,40 @@ class Fuga : ITool
 			this.VerifyCSharpDiagnostic(test, expected);
 		}
 
+
+		[TestMethod]
+		public void NullGuidValue()
+		{
+			Utility.NewGuidValueForTest = Const.NewGuidValueForTest;
+
+			var test = new[] {
+@"
+using System;
+using System.ComponentModel.Composition;
+using Grabacr07.KanColleViewer.Composition;
+
+[Export(typeof(IPlugin))]
+[ExportMetadata(""Guid"", guid)]
+[ExportMetadata(""Title"", ""MastarData"")]
+[ExportMetadata(""Description"", ""start2 で取得される、艦これのマスター データを閲覧するためのビュー機能を提供します。"")]
+[ExportMetadata(""Version"", ""1.0"")]
+[ExportMetadata(""Author"", ""@Grabacr07"")]
+class Hoge : IPlugin
+{
+	private const string guid = null;
+	public void Initialize() { }
+}",
+			};
+			var expected = new DiagnosticResult
+			{
+				Id = InvalidGuidMetadataAnalyzer.DiagnosticId,
+				Severity = DiagnosticSeverity.Warning,
+				Message = invalidGuidMessage,
+				Locations = new[] { new DiagnosticResultLocation("Test0.cs", 6, 1) }
+			};
+			this.VerifyCSharpDiagnostic(test, expected);
+		}
+
 		[TestMethod]
 		public void DifferentFromIPluginGuid()
 		{
