@@ -175,6 +175,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\Analyzers\KanColleViewer.PluginAnalyzer\bin\Debug\KanColleViewer.Composition.dll" />
+    <Analyzer Include="..\..\Analyzers\KanColleViewer.PluginAnalyzer\bin\Debug\KanColleViewer.PluginAnalyzer.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
