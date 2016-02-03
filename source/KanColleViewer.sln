@@ -19,9 +19,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".settings", ".settings", "{
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{D844E42C-9406-43BF-9681-4F06F6CB3AD9}"
-	ProjectSection(SolutionItems) = preProject
-		MetroTrilithon\source\MetroTrilithon.Desktop\packages.config = MetroTrilithon\source\MetroTrilithon.Desktop\packages.config
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsNotifier", "Plugins\WindowsNotifier\WindowsNotifier.csproj", "{55C0036D-3206-4C63-A2C0-447C41CAFAF5}"
 EndProject
