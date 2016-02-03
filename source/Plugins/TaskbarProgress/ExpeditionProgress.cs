@@ -62,7 +62,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 			timer.Tick += (sender, e) => this.Update();
 			timer.Start();
 
-			Disposable.Create(() => Settings.Default.Save());
+			Disposable.Create(() => Settings.Default.Save()).AddTo(this);
 		}
 
 		private void InitializeCore()
