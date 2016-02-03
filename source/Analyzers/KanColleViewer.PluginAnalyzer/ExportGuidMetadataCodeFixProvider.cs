@@ -54,12 +54,12 @@ namespace Grabacr07.KanColleViewer.PluginAnalyzer
 				context.RegisterCodeFix(codeAction, diagnostic);
 
 				//他のIPluginで使われてないGUIDを持ってるPluginFeatureがいたらそのGUIDを候補に
-				var candidates = features.Where(x => plugins.All(y => x.GetGuidMetadataValue() != y.GetGuidMetadataValue()));
+				var candidates = features.Where(x => plugins.All(y => x.GetGuidMetadataValue(model) != y.GetGuidMetadataValue(model)));
 				foreach (var candidate in candidates)
 				{
 					var additionalAction = CodeAction.Create(
 						$"Add Guid of {candidate.Identifier}",
-						_ => AddGuidExportMetadata(context.Document, root, classDeclaration, candidate.GetGuidMetadataValue()),
+						_ => AddGuidExportMetadata(context.Document, root, classDeclaration, candidate.GetGuidMetadataValue(model).ToString().ToUpper()),
 						$"{ExportGuidMetadataAnalyzer.DiagnosticId} Add Guid of {candidate.Identifier}");
 					context.RegisterCodeFix(additionalAction, diagnostic);
 				}
@@ -71,7 +71,7 @@ namespace Grabacr07.KanColleViewer.PluginAnalyzer
 				{
 					var additionalAction = CodeAction.Create(
 						$"Add Guid of {plugin.Identifier}",
-						_ => AddGuidExportMetadata(context.Document, root, classDeclaration, plugin.GetGuidMetadataValue()),
+						_ => AddGuidExportMetadata(context.Document, root, classDeclaration, plugin.GetGuidMetadataValue(model).ToString().ToUpper()),
 						$"{ExportGuidMetadataAnalyzer.DiagnosticId} Add Guid of {plugin.Identifier}");
 					context.RegisterCodeFix(additionalAction, diagnostic);
 				}
