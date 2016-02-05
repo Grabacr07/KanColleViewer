@@ -4,7 +4,6 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
-using Grabacr07.KanColleWrapper.Internal;
 
 namespace Grabacr07.KanColleWrapper
 {

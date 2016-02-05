@@ -19,13 +19,13 @@
 	</UserControl.Resources>
 
 	<StackPanel>
-		<TextBlock Text="出撃コンディション"
+		<TextBlock Text="艦隊ステータス"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 		<StackPanel Margin="20,0,0,0">
 			<TextBlock Text="艦隊内の全艦のコンディションが次の数値以上になったとき、出撃可能と判断する" />
 
-			<Grid Margin="0,10">
+			<Grid Margin="0,5,0,10">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="Auto" />
 					<ColumnDefinition Width="10" />
@@ -50,6 +50,10 @@
 					<Run Text="※通常は、間宮アイコンが消灯する 40 か、自然回復上限の 49 に設定します。" />
 				</TextBlock>
 			</Grid>
+
+			<CheckBox Content="旗艦に工作艦が編成されているときは出撃可能と判断しない"
+					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.CheckFlagshipIsNotRepairShip}, Path=Value}"
+					  Margin="0,10" />
 		</StackPanel>
 
 		<Rectangle Height="1"
