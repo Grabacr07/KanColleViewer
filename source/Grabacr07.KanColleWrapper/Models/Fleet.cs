@@ -75,7 +75,24 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
-		public bool IsInSortie { get; private set; }
+		#region IsInSortie 変更通知プロパティ
+
+		private bool _IsInSortie;
+
+		public bool IsInSortie
+		{
+			get { return this._IsInSortie; }
+			set
+			{
+				if (this._IsInSortie != value)
+				{
+					this._IsInSortie = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
 
 		public FleetState State { get; }
 

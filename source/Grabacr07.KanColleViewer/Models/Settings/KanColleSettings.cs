@@ -81,6 +81,18 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		public static SerializableProperty<bool> CheckFlagshipIsNotRepairShip { get; }
 			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
 
+		/// <summary>
+		/// 艦隊の編成が変更されたときに、その艦隊を自動的に選択状態にするかどうかを表す設定値を取得します。
+		/// </summary>
+		public static SerializableProperty<bool> AutoFleetSelectWhenShipsChanged { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, false); 
+
+		/// <summary>
+		/// 艦隊が出撃・帰投したときに、その艦隊を自動的に選択状態にするかどうかを表す設定値を取得します。
+		/// </summary>
+		public static SerializableProperty<bool> AutoFleetSelectWhenSortie { get; } 
+			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
+
 		#region instance members
 
 		public event PropertyChangedEventHandler PropertyChanged;
