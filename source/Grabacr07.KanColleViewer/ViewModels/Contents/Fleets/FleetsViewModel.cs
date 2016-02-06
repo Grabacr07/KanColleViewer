@@ -97,7 +97,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		private FleetViewModel ToViewModel(Fleet fleet)
 		{
 			var vm = new FleetViewModel(fleet).AddTo(this.fleetListeners);
-			fleet.Subscribe(nameof(Fleet.Ships), () => { if (KanColleSettings.AutoFleetSelectWhenShipsChanged) this.SelectedFleet = vm; }, false).AddTo(this.fleetListeners);
+			fleet.Subscribe(nameof(Fleet.ShipsUpdated), () => { if (KanColleSettings.AutoFleetSelectWhenShipsChanged) this.SelectedFleet = vm; }, false).AddTo(this.fleetListeners);
 			fleet.Subscribe(nameof(Fleet.IsInSortie), () => { if (KanColleSettings.AutoFleetSelectWhenSortie) this.SelectedFleet = vm; }, false).AddTo(this.fleetListeners);
 
 			return vm;

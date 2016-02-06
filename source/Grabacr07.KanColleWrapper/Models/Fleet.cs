@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Grabacr07.KanColleWrapper.Annotations;
 using Grabacr07.KanColleWrapper.Models.Raw;
 
 namespace Grabacr07.KanColleWrapper.Models
@@ -72,6 +74,10 @@ namespace Grabacr07.KanColleWrapper.Models
 				}
 			}
 		}
+
+		[Dark("INotifyPropertyChanged が便利すぎる")]
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public object ShipsUpdated { get; set; }
 
 		#endregion
 
@@ -219,6 +225,11 @@ namespace Grabacr07.KanColleWrapper.Models
 
 			this.State.Calculate();
 			this.State.Update();
+		}
+
+		internal void RaiseShipsUpdated()
+		{
+			this.RaisePropertyChanged(nameof(this.ShipsUpdated));
 		}
 
 		public override string ToString()
