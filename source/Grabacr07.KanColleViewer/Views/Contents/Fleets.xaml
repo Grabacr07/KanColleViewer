@@ -26,7 +26,7 @@
 
 	<i:Interaction.Triggers>
 		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
-										 MessageKey="Show/FleetWindow">
+										 MessageKey="FleetWindow.Show">
 			<livet:TransitionInteractionMessageAction Mode="NewOrActive"
 													  WindowType="views:FleetWindow"
 													  IsOwned="False" />

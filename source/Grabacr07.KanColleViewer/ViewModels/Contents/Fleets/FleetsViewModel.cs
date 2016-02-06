@@ -78,7 +78,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		public void ShowFleetWindow()
 		{
 			var fleetwd = new FleetWindowViewModel();
-			var message = new TransitionMessage(fleetwd, TransitionMode.Normal, "Show/FleetWindow");
+			var message = new TransitionMessage(fleetwd, TransitionMode.Normal, "FleetWindow.Show");
 			this.Messenger.Raise(message);
 		}
 

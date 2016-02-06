@@ -23,24 +23,20 @@
 		<TextBlock Text="通知設定"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
-		<StackPanel Margin="20,-5,0,10">
+		<StackPanel Margin="20,0,0,0">
 			<CheckBox Content="建造完了時に通知する"
-					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.NotifyBuildingCompleted}, Path=Value}"
-					  Margin="0,5" />
+					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.NotifyBuildingCompleted}, Path=Value}" />
 
-			<Border Height="1"
-					Background="{DynamicResource ActiveBorderBrushKey}"
-					Margin="0,5" />
+			<Rectangle Style="{DynamicResource SeparatorStyleKey}"
+					   Margin="0,8" />
 
 			<DockPanel>
 				<StackPanel VerticalAlignment="Center">
 					<CheckBox Content="遠征帰投時に通知する"
-							  IsChecked="{Binding Source={x:Static ms:KanColleSettings.NotifyExpeditionReturned}, Path=Value}"
-							  Margin="0,5" />
-
+							  IsChecked="{Binding Source={x:Static ms:KanColleSettings.NotifyExpeditionReturned}, Path=Value}" />
+					<Border Height="8" />
 					<CheckBox Content="入渠完了時に通知する"
-							  IsChecked="{Binding Source={x:Static ms:KanColleSettings.NotifyRepairingCompleted}, Path=Value}"
-							  Margin="0,5" />
+							  IsChecked="{Binding Source={x:Static ms:KanColleSettings.NotifyRepairingCompleted}, Path=Value}" />
 				</StackPanel>
 
 				<Border Width="1"
@@ -76,28 +72,29 @@
 						   Style="{DynamicResource DetailTextStyleKey}" />
 			</DockPanel>
 
-			<Border Height="1"
-					Background="{DynamicResource ActiveBorderBrushKey}"
-					Margin="0,5" />
+			<Rectangle Style="{DynamicResource SeparatorStyleKey}"
+					   Margin="0,8" />
 
 			<CheckBox Content="艦隊に編成されている艦娘の疲労が回復したら通知する"
-					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.NotifyFleetRejuvenated}, Path=Value}"
-					  Margin="0,5" />
+					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.NotifyFleetRejuvenated}, Path=Value}" />
 
 			<StackPanel Margin="20,0,0,0">
-				<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}"
-						   Margin="0,3,0,1">
+				<Border Height="8" />
+				<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}">
 					<Run Text="再出撃可能とするコンディション値" />
 					<Run Text=":" />
 					<Run Text="{Binding Source={x:Static ms:KanColleSettings.ReSortieCondition}, Path=Value}" />
 				</TextBlock>
+				<Border Height="2" />
 				<TextBlock Text="※[動作設定] > [出撃コンディション] から設定できます。"
 						   Style="{DynamicResource DetailTextStyleKey}"
-						   FontSize="10.5"
-						   Margin="0,0,0,8" />
+						   FontSize="10.5" />
+				<Border Height="8" />
 				<TextBlock Text="艦隊に編成されているすべて艦娘のコンディション値が上記の値以上になったときに通知されます。コンディション値は 3 分間で 3 ずつ回復しますが、KanColleViewer 実装の仕様により、通知タイミングは数秒 ～ 最大 3 分程度遅れる可能性があること予めご了承ください。"
 						   Style="{DynamicResource DetailTextStyleKey}" />
 			</StackPanel>
 		</StackPanel>
+
+		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 	</StackPanel>
 </UserControl>

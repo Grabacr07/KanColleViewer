@@ -25,7 +25,8 @@
 		<StackPanel Margin="20,0,0,0">
 			<TextBlock Text="艦隊内の全艦のコンディションが次の数値以上になったとき、出撃可能と判断する" />
 
-			<Grid Margin="0,5,0,10">
+			<Border Height="4" />
+			<Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="Auto" />
 					<ColumnDefinition Width="10" />
@@ -51,17 +52,15 @@
 				</TextBlock>
 			</Grid>
 
+			<Border Height="12" />
 			<CheckBox Content="旗艦に工作艦が編成されているときは出撃可能と判断しない"
-					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.CheckFlagshipIsNotRepairShip}, Path=Value}"
-					  Margin="0,10" />
+					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.CheckFlagshipIsNotRepairShip}, Path=Value}" />
 		</StackPanel>
 
-		<Rectangle Height="1"
-				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
 		<TextBlock Text="索敵値計算"
-				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
-				   Margin="0,10" />
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 		<StackPanel Margin="20,0,0,0">
 			<TextBlock Text="艦隊の索敵値の算出に使用する計算式は、以下を使用する" />
@@ -86,23 +85,20 @@
 			</ItemsControl>
 		</StackPanel>
 
-		<Rectangle Height="1"
-				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
 		<TextBlock Text="艦隊自動選択"
-				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
-				   Margin="0,10" />
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 		<StackPanel Margin="20,0,0,0">
 			<CheckBox Content="艦隊が出撃したとき、その艦隊を自動的に選択する "
 					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.AutoFleetSelectWhenSortie}, Path=Value}" />
 
+			<Border Height="8" />
 			<CheckBox Content="艦隊の編成を変更したとき、その艦隊を自動的に選択する"
-					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.AutoFleetSelectWhenShipsChanged}, Path=Value}"
-					  Margin="0,10" />
+					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.AutoFleetSelectWhenShipsChanged}, Path=Value}" />
 		</StackPanel>
 
-		<Rectangle Height="1"
-				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 	</StackPanel>
 </UserControl>

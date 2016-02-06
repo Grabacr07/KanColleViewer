@@ -29,7 +29,7 @@
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 		<StackPanel Orientation="Horizontal"
-					Margin="20,0,0,10">
+					Margin="20,0,0,00">
 			<TextBlock Text="アプリケーション終了時の確認動作"
 					   Margin="0,0,10,0" />
 			<metro:PromptComboBox ItemsSource="{Binding ExitConfirmationTypes}"
@@ -40,14 +40,13 @@
 								  MinWidth="140" />
 		</StackPanel>
 
-		<Rectangle Height="1"
-				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
 		<TextBlock Text="タスク バー設定"
-				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
-				   Margin="0,10" />
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+
 		<StackPanel Orientation="Horizontal"
-					Margin="20,0,0,10">
+					Margin="20,0,0,00">
 			<TextBlock Text="インジケーターの動作"
 					   Margin="0,0,10,0" />
 			<metro:PromptComboBox ItemsSource="{Binding TaskbarProgressFeatures}"
@@ -58,16 +57,15 @@
 								  MinWidth="140" />
 		</StackPanel>
 
-		<Rectangle Height="1"
-				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
 		<TextBlock Text="{Binding Resources.Settings_WindowControl, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
-				   Margin="0,10" />
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+
 		<metro2:CallMethodButton MethodTarget="{Binding Source={x:Static root:WindowService.Current}}"
 								 MethodName="SetLocationLeft"
 								 Padding="20,4"
-								 Margin="20,0,0,10"
+								 Margin="20,0,0,0"
 								 HorizontalAlignment="Left">
 			<StackPanel>
 				<TextBlock Text="{Binding Resources.Settings_WindowControl_LocationLeftButton, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
@@ -82,12 +80,10 @@
 		</metro2:CallMethodButton>
 
 		<StackPanel Visibility="{Binding Source={x:Static ms:GeneralSettings.IsProxyMode}, Path=Value, Converter={StaticResource UniversalBooleanToVisibilityConverter}, ConverterParameter=Colappsed:Visible}">
-			<Rectangle Height="1"
-					   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
 			<TextBlock Text="ウィンドウ レイアウト"
-					   Style="{DynamicResource SettingsHeaderTextStyleKey}"
-					   Margin="0,10" />
+					   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 			<StackPanel HorizontalAlignment="Left">
 				<UniformGrid Rows="1"
@@ -353,7 +349,7 @@
 
 				<StackPanel Orientation="Horizontal"
 							HorizontalAlignment="Center"
-							Margin="16,0,0,8">
+							Margin="16,0,0,-2">
 					<metro2:CallMethodButton MethodTarget="{Binding}"
 											 MethodName="Apply"
 											 Content="適用"
@@ -368,11 +364,10 @@
 											 Margin="4,2" />
 				</StackPanel>
 			</StackPanel>
-
-			<Rectangle Height="1"
-					   Margin="0,0"
-					   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-
 		</StackPanel>
+
+		<Rectangle Height="1"
+				   Style="{DynamicResource SeparatorStyleKey}" />
+
 	</StackPanel>
 </UserControl>
