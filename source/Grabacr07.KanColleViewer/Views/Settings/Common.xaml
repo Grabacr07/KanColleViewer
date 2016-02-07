@@ -20,7 +20,7 @@
 		   TargetType="{x:Type Rectangle}"
 		   BasedOn="{StaticResource SeparatorRectangleStyleKey}">
 		<Setter Property="Height"
-				Value="1" />
+				Value="0.99" />
 		<Setter Property="Margin"
 				Value="0,12" />
 	</Style>

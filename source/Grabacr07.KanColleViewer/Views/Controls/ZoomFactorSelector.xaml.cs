@@ -51,7 +51,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 			public void Select()
 			{
-				if (this.SelectAction != null) this.SelectAction();
+				this.SelectAction?.Invoke();
 			}
 		}
 
