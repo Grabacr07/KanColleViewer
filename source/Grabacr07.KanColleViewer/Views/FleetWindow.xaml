@@ -579,6 +579,7 @@
 							<RowDefinition Height="4" />
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
 							<RowDefinition Height="4" />
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="Auto" />
@@ -640,7 +641,9 @@
 								   HorizontalAlignment="Right"
 								   VerticalAlignment="Bottom"
 								   Margin="1,2">
-							<Run Text="制空戦力" />
+							<Run Text="制空値" />
+							<Run Text="(最小)"
+								 Style="{DynamicResource DetailTextElementStyleKey}" />
 							<Run Text=":" />
 						</TextBlock>
 						<TextBlock Grid.Row="4"
@@ -648,13 +651,41 @@
 								   Style="{DynamicResource EmphaticTextStyleKey}"
 								   VerticalAlignment="Bottom"
 								   Margin="4,2">
+							<FrameworkElement.ToolTip>
+								<TextBlock Text="艦戦のみで、内部熟練度を最小として計算しています。"
+										   Style="{DynamicResource DefaultTextStyleKey}" />
+							</FrameworkElement.ToolTip>
 							<Run Text="{Binding State.MinAirSuperiorityPotential, Mode=OneWay}" />
-							<Run Text="-" />
-							<Run Text="{Binding State.MaxAirSuperiorityPotential, Mode=OneWay}" />
-							<Run Text="" />
+							<Run Text="※"
+								 Style="{DynamicResource DefaultTextElementStyleKey}" />
 						</TextBlock>
 
-						<TextBlock Grid.Row="6"
+						<TextBlock Grid.Row="5"
+								   Grid.Column="0"
+								   Style="{DynamicResource DefaultTextStyleKey}"
+								   HorizontalAlignment="Right"
+								   VerticalAlignment="Bottom"
+								   Margin="1,2">
+							<Run Text="制空値" />
+							<Run Text="(最大)"
+								 Style="{DynamicResource DetailTextElementStyleKey}" />
+							<Run Text=":" />
+						</TextBlock>
+						<TextBlock Grid.Row="5"
+								   Grid.Column="1"
+								   Style="{DynamicResource EmphaticTextStyleKey}"
+								   VerticalAlignment="Bottom"
+								   Margin="4,2">
+							<FrameworkElement.ToolTip>
+								<TextBlock Text="全艦載機で、内部熟練度を最大として計算しています。"
+										   Style="{DynamicResource DefaultTextStyleKey}" />
+							</FrameworkElement.ToolTip>
+							<Run Text="{Binding State.MaxAirSuperiorityPotential, Mode=OneWay}" />
+							<Run Text="※"
+								 Style="{DynamicResource DefaultTextElementStyleKey}" />
+						</TextBlock>
+
+						<TextBlock Grid.Row="7"
 								   Grid.Column="0"
 								   Grid.ColumnSpan="2"
 								   Text="{Binding State.Speed}"
@@ -663,7 +694,7 @@
 								   VerticalAlignment="Bottom"
 								   Margin="4,2" />
 
-						<TextBlock Grid.Row="7"
+						<TextBlock Grid.Row="8"
 								   Grid.Column="0"
 								   Style="{DynamicResource DefaultTextStyleKey}"
 								   HorizontalAlignment="Right"
@@ -673,7 +704,7 @@
 							<Run Text="ステータス" />
 							<Run Text=":" />
 						</TextBlock>
-						<TextBlock Grid.Row="7"
+						<TextBlock Grid.Row="8"
 								   Grid.Column="1"
 								   Text="9999"
 								   Style="{DynamicResource EmphaticTextStyleKey}"
