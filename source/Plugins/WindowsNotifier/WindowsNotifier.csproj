@@ -91,8 +91,8 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\..\Analyzers\KanColleViewer.PluginAnalyzer\bin\Debug\KanColleViewer.Composition.dll" />
-    <Analyzer Include="..\..\Analyzers\KanColleViewer.PluginAnalyzer\bin\Debug\KanColleViewer.PluginAnalyzer.dll" />
+    <Analyzer Include="$(SolutionDir)\Analyzers\KanColleViewer.PluginAnalyzer\bin\$(Configuration)\KanColleViewer.Composition.dll" />
+    <Analyzer Include="$(SolutionDir)\Analyzers\KanColleViewer.PluginAnalyzer\bin\$(Configuration)\KanColleViewer.PluginAnalyzer.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
