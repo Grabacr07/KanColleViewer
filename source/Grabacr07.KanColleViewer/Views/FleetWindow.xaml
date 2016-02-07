@@ -568,7 +568,7 @@
 				<Border DockPanel.Dock="Top"
 						DataContext="{Binding SelectedFleet}"
 						d:DataContext="{d:DesignInstance fleetsVm:FleetViewModel}"
-						BorderThickness="1"
+						BorderThickness=".99"
 						BorderBrush="{DynamicResource BorderBrushKey}"
 						Margin="4"
 						Padding="8,4">
@@ -986,7 +986,7 @@
 					</Grid.RowDefinitions>
 
 					<Border Grid.Row="2"
-							BorderThickness="1"
+							BorderThickness=".99"
 							BorderBrush="{DynamicResource BorderBrushKey}">
 						<ScrollViewer HorizontalScrollBarVisibility="Auto"
 									  VerticalScrollBarVisibility="Auto"
@@ -1036,7 +1036,7 @@
 
 					<!-- ☟☟☟ デザイン時に使うやつ ☟☟☟ -->
 					<Border Grid.Row="2"
-							BorderThickness="1"
+							BorderThickness=".99"
 							BorderBrush="{DynamicResource BorderBrushKey}"
 							IsEnabled="{Binding Source={x:Static models:Helper.IsInDesignMode}, Mode=OneWay}"
 							Visibility="{Binding Source={x:Static models:Helper.IsInDesignMode}, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">

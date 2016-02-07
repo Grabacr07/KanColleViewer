@@ -154,7 +154,7 @@
 
 			<Border Grid.Column="0"
 					BorderBrush="{DynamicResource BorderBrushKey}"
-					BorderThickness="1,0,1,0">
+					BorderThickness=".99,0,.99,0">
 				<ScrollViewer VerticalScrollBarVisibility="Auto"
 							  PanningMode="Both"
 							  Padding="10,0,20,14">
@@ -176,7 +176,7 @@
 								 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 						</TextBlock>
 
-						<Rectangle Height="1"
+						<Rectangle Height=".99"
 								   Margin="0,12"
 								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
@@ -201,7 +201,7 @@
 							</metro2:HyperlinkEx>
 						</TextBlock>
 
-						<Rectangle Height="1"
+						<Rectangle Height=".99"
 								   Margin="0,12"
 								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
@@ -265,7 +265,7 @@
 							<LineBreak />
 							<InlineUIContainer>
 								<Rectangle Width="{Binding ElementName=Dummy, Path=ActualWidth}"
-										   Height="1"
+										   Height=".99"
 										   Style="{DynamicResource SeparatorRectangleStyleKey}"
 										   Margin="0,16,0,0"
 										   SnapsToDevicePixels="True" />
@@ -343,7 +343,7 @@
 									   Style="{DynamicResource TabHeaderTextStyleKey}" />
 						</TabItem.Header>
 						<settings:Network Margin="10,9"
-										  DataContext="{Binding NetworkSettings}"/>
+										  DataContext="{Binding NetworkSettings}" />
 					</TabItem>
 
 					<TabItem>

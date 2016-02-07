@@ -55,7 +55,7 @@
 
 			<Border Height="12" />
 
-			<Rectangle Height="1"
+			<Rectangle Height=".99"
 					   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 		</StackPanel>
 

@@ -67,10 +67,10 @@
 					</Rectangle>
 					<Border Background="{DynamicResource ThemeBrushKey}"
 							BorderBrush="{DynamicResource AccentBrushKey}"
-							BorderThickness="0.99">
+							BorderThickness=".99">
 						<StackPanel Margin="8">
 							<TextBlock Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.ZoomFactorSelector}" />
-							<Rectangle Height="0.99"
+							<Rectangle Height=".99"
 									   Fill="{DynamicResource InactiveForegroundBrushKey}"
 									   Margin="0,8" />
 							<ListBox x:Name="SupportedList"

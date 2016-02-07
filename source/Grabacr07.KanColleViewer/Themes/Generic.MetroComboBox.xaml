@@ -145,7 +145,7 @@
 								<Border x:Name="dropdown"
 										Background="{DynamicResource BackgroundBrushKey}"
 										BorderBrush="{TemplateBinding BorderBrush}"
-										BorderThickness="1"
+										BorderThickness=".99"
 										Padding="3">
 									<ScrollViewer VerticalScrollBarVisibility="Auto">
 										<ItemsPresenter />
@@ -233,7 +233,7 @@
 					<DockPanel>
 						<StackPanel DockPanel.Dock="Bottom"
 									HorizontalAlignment="Left">
-							<Path Data="M35.749999,0.5 L70.999998,48.5 L0.49999973,48.5 z"
+							<Path Data="M35.749999,0.5 L7.999998,48.5 L0.49999973,48.5 z"
 								  Fill="{DynamicResource ValidationErrorBrushKey}"
 								  Stretch="Fill"
 								  Width="10"
@@ -253,7 +253,7 @@
 								</ItemsControl>
 							</Border>
 						</StackPanel>
-						<Border BorderThickness="1"
+						<Border BorderThickness=".99"
 								BorderBrush="{DynamicResource ValidationErrorBrushKey}"
 								HorizontalAlignment="Left">
 							<AdornedElementPlaceholder x:Name="Placeholder" />

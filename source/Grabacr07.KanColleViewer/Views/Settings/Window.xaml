@@ -94,7 +94,7 @@
 							<Setter Property="Content"
 									Value="情報" />
 							<Setter Property="BorderThickness"
-									Value="1" />
+									Value=".99" />
 							<Setter Property="Background"
 									Value="{DynamicResource SemiactiveBackgroundBrushKey}" />
 							<Setter Property="BorderBrush"
@@ -232,7 +232,7 @@
 						<Border.Style>
 							<Style TargetType="{x:Type Border}">
 								<Setter Property="BorderThickness"
-										Value="1" />
+										Value=".99" />
 								<Setter Property="BorderBrush"
 										Value="{DynamicResource ActiveBackgroundBrushKey}" />
 								<Style.Triggers>
@@ -288,7 +288,7 @@
 						<Border.Style>
 							<Style TargetType="{x:Type Border}">
 								<Setter Property="BorderThickness"
-										Value="1" />
+										Value=".99" />
 								<Setter Property="BorderBrush"
 										Value="{DynamicResource ActiveBackgroundBrushKey}" />
 								<Style.Triggers>
