@@ -45,17 +45,38 @@
 		<TextBlock Text="タスク バー設定"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
-		<StackPanel Orientation="Horizontal"
-					Margin="20,0,0,00">
-			<TextBlock Text="インジケーターの動作"
-					   Margin="0,0,10,0" />
-			<metro:PromptComboBox ItemsSource="{Binding TaskbarProgressFeatures}"
+		<Grid Margin="20,0,0,00">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="4" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="10" />
+				<ColumnDefinition Width="160" />
+			</Grid.ColumnDefinitions>
+			<TextBlock Grid.Row="0"
+					   Grid.Column="0"
+					   Text="インジケーターの動作" />
+			<metro:PromptComboBox Grid.Row="0"
+								  Grid.Column="2"
+								  ItemsSource="{Binding TaskbarProgressFeatures}"
 								  DisplayMemberPath="Display"
 								  SelectedValuePath="Value"
 								  SelectedValue="{Binding Source={x:Static ms:GeneralSettings.TaskbarProgressSource}, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-								  Prompt=""
-								  MinWidth="140" />
-		</StackPanel>
+								  Prompt="" />
+			<TextBlock Grid.Row="2"
+					   Grid.Column="0"
+					   Text="インジケーターの動作 (出撃中)" />
+			<metro:PromptComboBox Grid.Row="2"
+								  Grid.Column="2"
+								  ItemsSource="{Binding TaskbarProgressFeatures}"
+								  DisplayMemberPath="Display"
+								  SelectedValuePath="Value"
+								  SelectedValue="{Binding Source={x:Static ms:GeneralSettings.TaskbarProgressSourceWhenSortie}, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+								  Prompt="" />
+		</Grid>
 
 		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 

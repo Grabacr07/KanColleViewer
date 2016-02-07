@@ -5,14 +5,19 @@ using System.Threading.Tasks;
 using System.Windows.Shell;
 using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.Models.Settings;
+using Grabacr07.KanColleWrapper;
 using Livet;
+using MetroTrilithon.Lifetime;
+using MetroTrilithon.Mvvm;
+using StatefulModel;
 
 namespace Grabacr07.KanColleViewer.Models
 {
-	public class TaskbarProgress : NotificationObject, ITaskbarProgress
+	public class TaskbarProgress : NotificationObject, ITaskbarProgress, IDisposable
 	{
 		public static ITaskbarProgress[] Features => PluginService.Current.Get<ITaskbarProgress>();
 
+		private readonly MultipleDisposable compositDisposable = new MultipleDisposable();
 		private ITaskbarProgress current;
 
 		string ITaskbarProgress.Id
@@ -67,12 +72,27 @@ namespace Grabacr07.KanColleViewer.Models
 
 		public TaskbarProgress()
 		{
-			GeneralSettings.TaskbarProgressSource.Subscribe(x => this.Change(x));
+			GeneralSettings.TaskbarProgressSource
+				.Subscribe(x => this.Change(normalSource: x))
+				.AddTo(this.compositDisposable);
+
+			GeneralSettings.TaskbarProgressSourceWhenSortie
+				.Subscribe(x => this.Change(sortieSource: x))
+				.AddTo(this.compositDisposable);
+
+			KanColleClient.Current
+				.Subscribe(nameof(KanColleClient.IsInSortie), () => this.Change())
+				.AddTo(this.compositDisposable);
 		}
 
-		public void Change(string id)
+		public void Change(string normalSource = null, string sortieSource = null)
 		{
-			this.Change(Features.FirstOrDefault(x => x.Id == id));
+			var id = KanColleClient.Current.IsInSortie
+				? (sortieSource ?? GeneralSettings.TaskbarProgressSourceWhenSortie)
+				: (normalSource ?? GeneralSettings.TaskbarProgressSource);
+			var progress = Features.FirstOrDefault(x => x.Id == id);
+
+			this.Change(progress);
 		}
 
 		public void Change(ITaskbarProgress progress)
@@ -98,7 +118,7 @@ namespace Grabacr07.KanColleViewer.Models
 			}
 
 			this.Updated?.Invoke(this, EventArgs.Empty);
-			this.RaisePropertyChanged(nameof(TaskbarProgress));
+			this.RaisePropertyChanged(nameof(this.Updated));
 		}
 
 		private void CurrentOnUpdated(object sender, EventArgs eventArgs)
@@ -109,7 +129,9 @@ namespace Grabacr07.KanColleViewer.Models
 			this.Value = progress.Value;
 
 			this.Updated?.Invoke(this, EventArgs.Empty);
-			this.RaisePropertyChanged(nameof(TaskbarProgress));
+			this.RaisePropertyChanged(nameof(this.Updated));
 		}
+
+		public void Dispose() => this.compositDisposable.Dispose();
 	}
 }
