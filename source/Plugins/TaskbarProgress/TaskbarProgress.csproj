@@ -72,6 +72,7 @@
     </Compile>
     <Compile Include="ExpeditionState.cs" />
     <Compile Include="ExpeditionWrapper.cs" />
+    <Compile Include="HpProgress.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
