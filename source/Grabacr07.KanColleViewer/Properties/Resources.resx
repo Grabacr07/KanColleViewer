@@ -1400,4 +1400,19 @@ HTTP プロトコルの通信は自動構成も含め「インターネット �
   <data name="ShipCatalog_Filter_Misc_DamageYes" xml:space="preserve">
     <value>損傷あり</value>
   </data>
+  <data name="Common_Maximum" xml:space="preserve">
+    <value>最大</value>
+  </data>
+  <data name="FleetWindow_AirSuperiority_Max_ToolTip" xml:space="preserve">
+    <value>全艦載機で、内部熟練度を最大として計算しています。</value>
+  </data>
+  <data name="FleetWindow_AirSuperiority_Min_ToolTip" xml:space="preserve">
+    <value>艦戦のみで、内部熟練度を最小として計算しています。</value>
+  </data>
+  <data name="FleetWindow_Status_Organisation_AR_Flagship" xml:space="preserve">
+    <value>工作艦が旗艦として編成されています</value>
+  </data>
+  <data name="FleetWindow_Status_Organisation_Normal" xml:space="preserve">
+    <value>艦隊編成は正常です</value>
+  </data>
 </root>

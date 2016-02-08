@@ -659,8 +659,7 @@
 									   Margin="1,2">
 							<Run Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.FleetWindow_AirSuperiority, StringFormat='{}{0}', Mode=OneWay}" />
 							<Run Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Common_Minimum, StringFormat='{}({0})', Mode=OneWay}"
-								 Style="{DynamicResource DetailTextElementStyleKey}" />
-							<Run Text=":" />
+								 Style="{DynamicResource DetailTextElementStyleKey}" /><Run Text=":" />
 							</TextBlock>
 							<TextBlock Grid.Row="4"
 									   Grid.Column="1"
@@ -668,7 +667,7 @@
 									   VerticalAlignment="Bottom"
 									   Margin="4,2">
 							<FrameworkElement.ToolTip>
-								<TextBlock Text="艦戦のみで、内部熟練度を最小として計算しています。"
+								<TextBlock Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.FleetWindow_AirSuperiority_Min_ToolTip, StringFormat='{}{0}', Mode=OneWay}"
 										   Style="{DynamicResource DefaultTextStyleKey}" />
 							</FrameworkElement.ToolTip>
 								<Run Text="{Binding State.MinAirSuperiorityPotential, Mode=OneWay}" />
@@ -682,10 +681,9 @@
 								   HorizontalAlignment="Right"
 								   VerticalAlignment="Bottom"
 								   Margin="1,2">
-							<Run Text="制空値" />
-							<Run Text="(最大)"
-								 Style="{DynamicResource DetailTextElementStyleKey}" />
-							<Run Text=":" />
+							<Run Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.FleetWindow_AirSuperiority, StringFormat='{}{0}', Mode=OneWay}" />
+							<Run Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Common_Maximum, StringFormat='{}({0})', Mode=OneWay}"
+								 Style="{DynamicResource DetailTextElementStyleKey}" /><Run Text=":" />
 						</TextBlock>
 						<TextBlock Grid.Row="5"
 								   Grid.Column="1"
@@ -693,7 +691,7 @@
 								   VerticalAlignment="Bottom"
 								   Margin="4,2">
 							<FrameworkElement.ToolTip>
-								<TextBlock Text="全艦載機で、内部熟練度を最大として計算しています。"
+								<TextBlock Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.FleetWindow_AirSuperiority_Max_ToolTip, StringFormat='{}{0}', Mode=OneWay}"
 										   Style="{DynamicResource DefaultTextStyleKey}" />
 							</FrameworkElement.ToolTip>
 								<Run Text="{Binding State.MaxAirSuperiorityPotential, Mode=OneWay}" />
@@ -999,7 +997,7 @@
 									<Style TargetType="{x:Type TextBlock}"
 										   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
 										<Setter Property="Text"
-												Value="艦隊編成は正常です" />
+												Value="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.FleetWindow_Status_Organisation_Normal, StringFormat='{}{0}', Mode=OneWay}" />
 										<Style.Triggers>
 											<MultiDataTrigger>
 												<MultiDataTrigger.Conditions>
@@ -1007,7 +1005,7 @@
 															   Value="True" />
 												</MultiDataTrigger.Conditions>
 												<Setter Property="Text"
-														Value="工作艦が旗艦として編成されています" />
+														Value="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.FleetWindow_Status_Organisation_AR_Flagship, StringFormat='{}{0}', Mode=OneWay}" />
 												<Setter Property="Foreground"
 														Value="{DynamicResource ActiveForegroundBrushKey}" />
 												<Setter Property="Background"
