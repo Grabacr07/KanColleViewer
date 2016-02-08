@@ -28,7 +28,10 @@ artifacts:
 - path: source\Grabacr07.KanColleViewer\bin\Release
   name: KanColleViewer
 deploy:
-- provider: NuGet
-  api_key:
-    secure: GrOjr849MkxFz3v7VSIvDNd0ZNZDaUTDeHqRF0InDLzMSuFoDmrqiMaKtIz0MxG8
+- provider: FTP
+  protocol: ftps
+  host: koumakan.jp
+  username: $(ftpuser)
+  password: $(ftppassword)
+  folder: $(appveyor_build_version)
   artifact: /KanColle.*\.nupkg/
