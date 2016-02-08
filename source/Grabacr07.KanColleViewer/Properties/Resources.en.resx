@@ -1393,4 +1393,19 @@ HTTP proxy settings are applied immediately. Settings for all other protocols ar
   <data name="TaskbarIndicator_DoNotUse" xml:space="preserve">
     <value>Disable</value>
   </data>
+  <data name="ShipCatalog_Column_TTR" xml:space="preserve">
+    <value>Repairs</value>
+  </data>
+  <data name="ShipCatalog_Column_TTR_ToolTip" xml:space="preserve">
+    <value>Time until the repairs finish.</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_Damage" xml:space="preserve">
+    <value>Damage</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_DamageNo" xml:space="preserve">
+    <value>Not damaged</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_DamageYes" xml:space="preserve">
+    <value>Damaged</value>
+  </data>
 </root>

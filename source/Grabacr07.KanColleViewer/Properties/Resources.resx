@@ -1385,4 +1385,19 @@ HTTP プロトコルの通信は自動構成も含め「インターネット �
   <data name="TaskbarIndicator_DoNotUse" xml:space="preserve">
     <value>使用しない</value>
   </data>
+  <data name="ShipCatalog_Column_TTR" xml:space="preserve">
+    <value>修復時間</value>
+  </data>
+  <data name="ShipCatalog_Column_TTR_ToolTip" xml:space="preserve">
+    <value>入渠にかかる時間です</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_Damage" xml:space="preserve">
+    <value>損傷</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_DamageNo" xml:space="preserve">
+    <value>損傷なし</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_DamageYes" xml:space="preserve">
+    <value>損傷あり</value>
+  </data>
 </root>

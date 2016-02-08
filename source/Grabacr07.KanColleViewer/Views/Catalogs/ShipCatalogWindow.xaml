@@ -80,6 +80,12 @@
 						HorizontalAlignment="Right"
 						VerticalAlignment="Top"
 						WindowChrome.IsHitTestVisibleInChrome="True">
+				<CheckBox IsChecked="{Binding ShowAdditionalStats, Mode=TwoWay}" 
+					  Content="{Binding Resources.ShipCatalog_AdditionalStats, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" 
+					  Margin="0,0,5,0" 
+					  Height="26"
+					  VerticalAlignment="Top"
+					  HorizontalAlignment="Right"/>
 				<metro:CaptionButton IsChecked="{Binding Settings.TopMost.Value, Mode=TwoWay}"
 									 ToolTip="{Binding Resources.Settings_Window_TopMost, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 Style="{DynamicResource PinButtonStyleKey}" />
@@ -409,17 +415,17 @@
 									</Grid.ColumnDefinitions>
 									<TextBlock Margin="0,2"
 											   HorizontalAlignment="Right">
-										<Run Text="損傷" />
+										<Run Text="{Binding Resources.ShipCatalog_Filter_Misc_Damage, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 										<Run Text=":" />
 									</TextBlock>
 									<WrapPanel Grid.Column="2">
-										<RadioButton Content="すべて"
+										<RadioButton Content="{Binding Resources.ShipCatalog_Filter_Misc_All, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 													 IsChecked="{Binding Both, Mode=TwoWay}" />
-										<RadioButton Content="損傷あり"
+										<RadioButton Content="{Binding Resources.ShipCatalog_Filter_Misc_DamageYes, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 													 IsChecked="{Binding Damaged, Mode=TwoWay}" />
-										<RadioButton Content="損傷なし"
+										<RadioButton Content="{Binding Resources.ShipCatalog_Filter_Misc_DamageNo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 													 IsChecked="{Binding Undamaged, Mode=TwoWay}" />
-									</WrapPanel>
+						</WrapPanel>
 								</Grid>
 							</StackPanel>
 						</WrapPanel>
@@ -451,6 +457,7 @@
 							</ItemsControl>
 						</DockPanel>
 					</Border>
+					
 				</StackPanel>
 			</Expander>
 
@@ -554,6 +561,7 @@
 						  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}"
 						  ScrollViewer.PanningMode="Both">
 					<ListView.Resources>
+						<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverterKey" />
 						<Style TargetType="{x:Type TextBlock}">
 							<Setter Property="Margin"
 									Value="5,4" />
@@ -830,8 +838,8 @@
 								<GridViewColumn.Header>
 									<metro2:SortButton MethodName="Sort"
 													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.TimeToRepairColumn}">
-										<TextBlock Text="修復時間"
-												   ToolTip="入渠にかかる時間です" />
+										<TextBlock Text="{Binding Resources.ShipCatalog_Column_TTR, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+												   ToolTip="{Binding Resources.ShipCatalog_Column_TTR_ToolTip, Source={x:Static models:ResourceService.Current}}" />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
