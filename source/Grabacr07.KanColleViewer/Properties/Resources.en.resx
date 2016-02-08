@@ -1435,4 +1435,19 @@ Small Radar LoS × (1.00) + Large Radar LoS × (0.99) +
   <data name="ShipCatalog_Filter_Misc_DamageYes" xml:space="preserve">
     <value>Damaged</value>
   </data>
+  <data name="Common_Maximum" xml:space="preserve">
+    <value>max</value>
+  </data>
+  <data name="FleetWindow_AirSuperiority_Max_ToolTip" xml:space="preserve">
+    <value>Maximum skill level for all aircraft.</value>
+  </data>
+  <data name="FleetWindow_AirSuperiority_Min_ToolTip" xml:space="preserve">
+    <value>Minimum skill level; AS is only calculated for carrier-based aircraft.</value>
+  </data>
+  <data name="FleetWindow_Status_Organisation_AR_Flagship" xml:space="preserve">
+    <value>Flagship is a repair ship</value>
+  </data>
+  <data name="FleetWindow_Status_Organisation_Normal" xml:space="preserve">
+    <value>Fleet composition OK</value>
+  </data>
 </root>

@@ -425,7 +425,7 @@
 													 IsChecked="{Binding Damaged, Mode=TwoWay}" />
 										<RadioButton Content="{Binding Resources.ShipCatalog_Filter_Misc_DamageNo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 													 IsChecked="{Binding Undamaged, Mode=TwoWay}" />
-						</WrapPanel>
+									</WrapPanel>
 								</Grid>
 							</StackPanel>
 						</WrapPanel>

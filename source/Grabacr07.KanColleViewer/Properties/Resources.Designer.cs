@@ -133,6 +133,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 最大.
+        /// </summary>
+        public static string Common_Maximum {
+            get {
+                return ResourceManager.GetString("Common_Maximum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 最小.
         /// </summary>
         public static string Common_Minimum {
@@ -610,6 +619,24 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 全艦載機で、内部熟練度を最大として計算しています。.
+        /// </summary>
+        public static string FleetWindow_AirSuperiority_Max_ToolTip {
+            get {
+                return ResourceManager.GetString("FleetWindow_AirSuperiority_Max_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦戦のみで、内部熟練度を最小として計算しています。.
+        /// </summary>
+        public static string FleetWindow_AirSuperiority_Min_ToolTip {
+            get {
+                return ResourceManager.GetString("FleetWindow_AirSuperiority_Min_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 平均レベル.
         /// </summary>
         public static string FleetWindow_LevelAverage {
@@ -741,6 +768,24 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string FleetWindow_Status_NotSortied {
             get {
                 return ResourceManager.GetString("FleetWindow_Status_NotSortied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 工作艦が旗艦として編成されています.
+        /// </summary>
+        public static string FleetWindow_Status_Organisation_AR_Flagship {
+            get {
+                return ResourceManager.GetString("FleetWindow_Status_Organisation_AR_Flagship", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦隊編成は正常です.
+        /// </summary>
+        public static string FleetWindow_Status_Organisation_Normal {
+            get {
+                return ResourceManager.GetString("FleetWindow_Status_Organisation_Normal", resourceCulture);
             }
         }
         
