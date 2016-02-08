@@ -55,7 +55,7 @@
 					 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 			</TextBlock>
 
-			<Rectangle Height="1"
+			<Rectangle Height=".99"
 					   Margin="0,10"
 					   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 		</StackPanel>
@@ -101,7 +101,7 @@
 				</metro2:HyperlinkEx>
 			</TextBlock>
 
-			<Rectangle Height="1"
+			<Rectangle Height=".99"
 					   Margin="0,10"
 					   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 

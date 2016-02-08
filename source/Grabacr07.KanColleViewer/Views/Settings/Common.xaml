@@ -11,9 +11,18 @@
 		   TargetType="{x:Type TextBlock}"
 		   BasedOn="{StaticResource HeaderTextStyleKey}">
 		<Setter Property="Margin"
-				Value="0,0,0,10" />
+				Value="0,0,0,8" />
 		<Setter Property="FontSize"
 				Value="15" />
+	</Style>
+
+	<Style x:Key="SeparatorStyleKey"
+		   TargetType="{x:Type Rectangle}"
+		   BasedOn="{StaticResource SeparatorRectangleStyleKey}">
+		<Setter Property="Height"
+				Value=".99" />
+		<Setter Property="Margin"
+				Value="0,12" />
 	</Style>
 
 </ResourceDictionary>

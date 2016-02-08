@@ -23,7 +23,7 @@
 			<Setter Property="OverridesDefaultStyle"
 					Value="True" />
 			<Setter Property="BorderThickness"
-					Value="1" />
+					Value=".99" />
 			<Setter Property="BorderBrush"
 					Value="{DynamicResource BorderBrushKey}" />
 			<Setter Property="Background"
@@ -113,9 +113,8 @@
 								<TextBlock Text="{Binding Expedition.Mission.Detail}"
 										   Style="{DynamicResource DefaultTextStyleKey}" />
 
-								<Border Height="1"
-										BorderThickness="1"
-										BorderBrush="{DynamicResource BorderBrushKey}"
+								<Border Height=".99"
+										Background="{DynamicResource BorderBrushKey}"
 										Margin="0,8" />
 
 								<TextBlock Text="{Binding Resources.Expedition_TimeComplete, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
@@ -125,9 +124,8 @@
 										   Style="{DynamicResource EmphaticTextStyleKey}"
 										   Margin="8,0" />
 
-								<Border Height="1"
-										BorderThickness="1"
-										BorderBrush="{DynamicResource BorderBrushKey}"
+								<Border Height=".99"
+										Background="{DynamicResource BorderBrushKey}"
 										Margin="0,8" />
 
 								<TextBlock Text="{Binding Resources.Expedition_TimeRemaining, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
@@ -137,9 +135,8 @@
 										   Style="{DynamicResource EmphaticTextStyleKey}"
 										   Margin="8,0" />
 
-								<Border Height="1"
-										BorderThickness="1"
-										BorderBrush="{DynamicResource BorderBrushKey}"
+								<Border Height=".99"
+										Background="{DynamicResource BorderBrushKey}"
 										Margin="0,8" />
 							</StackPanel>
 						</Grid>

@@ -19,11 +19,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".settings", ".settings", "{
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{D844E42C-9406-43BF-9681-4F06F6CB3AD9}"
-	ProjectSection(SolutionItems) = preProject
-		MetroTrilithon\source\MetroTrilithon.Desktop\packages.config = MetroTrilithon\source\MetroTrilithon.Desktop\packages.config
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsNotifier", "Plugins\WindowsNotifier\WindowsNotifier.csproj", "{55C0036D-3206-4C63-A2C0-447C41CAFAF5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B84F1251-4042-4ADC-955E-415469947538} = {B84F1251-4042-4ADC-955E-415469947538}
+		{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A} = {A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MetroRadiance", "MetroRadiance", "{6FE85CE3-7479-4630-B746-EA18BCE3311D}"
 EndProject
@@ -37,8 +38,16 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroRadiance.Core", "MetroRadiance\source\MetroRadiance.Core\MetroRadiance.Core.csproj", "{A6B0A741-5BE0-479D-B813-E65672350057}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Counter", "Plugins\Counter\Counter.csproj", "{DE2400A1-2AAE-4AB0-BCD5-A88DC78033A7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B84F1251-4042-4ADC-955E-415469947538} = {B84F1251-4042-4ADC-955E-415469947538}
+		{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A} = {A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterDataViewer", "Plugins\MasterDataViewer\MasterDataViewer.csproj", "{08226BB3-A7A0-49E3-84DE-ED5B7A7D293E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B84F1251-4042-4ADC-955E-415469947538} = {B84F1251-4042-4ADC-955E-415469947538}
+		{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A} = {A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanColleViewer.Controls", "Grabacr07.KanColleViewer.Controls\KanColleViewer.Controls.csproj", "{978239D0-3129-4C54-AAC6-493F0DE48BF5}"
 EndProject
@@ -67,6 +76,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{9E1A36B1-4
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskbarProgress", "Plugins\TaskbarProgress\TaskbarProgress.csproj", "{BDE5A07D-7F83-48C7-B61B-198FD4C0BCD5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B84F1251-4042-4ADC-955E-415469947538} = {B84F1251-4042-4ADC-955E-415469947538}
+		{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A} = {A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

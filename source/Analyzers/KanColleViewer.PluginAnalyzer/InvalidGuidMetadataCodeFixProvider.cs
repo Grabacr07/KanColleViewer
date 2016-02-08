@@ -41,24 +41,25 @@ namespace Grabacr07.KanColleViewer.PluginAnalyzer
 				.ToArray();
 			var plugins = classes.Where(x => x.IsExportIPlugin()).ToArray();
 
-			var guidValue = classDeclaration.GetGuidMetadataValue();
+			var guidValue = classDeclaration.GetGuidMetadataValue(model);
 
 			// IPlugin で未定義の GUID が指定されていた場合、既存の IPlugin の GUID を全て候補に
-			if (plugins.All(x => x.GetGuidMetadataValue() != guidValue))
+			if (plugins.Select(x => x.GetGuidMetadataValue(model))
+				.Where(x => x.HasValue)
+				.All(x => x != guidValue))
 			{
 				foreach (var plugin in plugins)
 				{
 					var codeAction = CodeAction.Create(
 						$"Use Guid of {plugin.Identifier}",
-						_ => FixGuidExportMetadata(context.Document, root, classDeclaration, plugin.GetGuidMetadataValue()),
+						_ => FixGuidExportMetadata(context.Document, root, classDeclaration, plugin.GetGuidMetadataValue(model).ToString().ToUpper()),
 						$"{InvalidGuidMetadataAnalyzer.DiagnosticId} Use Guid of {plugin.Identifier}");
 					context.RegisterCodeFix(codeAction, diagnostic);
 				}
 			}
 			
-			// GUID として解釈が指定されていた場合、新 GUID を候補に
-			Guid _guid;
-			if (!Guid.TryParse(guidValue, out _guid))
+			// GUID として解釈出来ない値が指定されていた場合、新 GUID を候補に
+			if (!guidValue.HasValue)
 			{
 				var codeAction = CodeAction.Create(
 					"Use New Guid",

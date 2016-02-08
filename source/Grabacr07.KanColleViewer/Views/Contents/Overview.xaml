@@ -31,7 +31,7 @@
 				<Setter Property="BorderBrush"
 						Value="{DynamicResource BorderBrushKey}" />
 				<Setter Property="BorderThickness"
-						Value="1" />
+						Value=".99" />
 				<Setter Property="Padding"
 						Value="8" />
 				<Setter Property="Margin"
@@ -64,7 +64,7 @@
 					<Setter.Value>
 						<ControlTemplate TargetType="ToolTip">
 							<Border Name="Border"
-									BorderThickness="1"
+									BorderThickness=".99"
 									BorderBrush="{DynamicResource BorderBrushKey}"
 									Background="{DynamicResource BackgroundBrushKey}"
 									Padding="8,4"
@@ -171,16 +171,6 @@
 												<LineBreak />
 												<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
 													 FontSize="11" />
-												<!-- せっかくピッタリ合わせる Tooltip つけたけど、トリミングされなくなったから不要になったんじゃモン… -->
-												<!--<TextBlock.ToolTip>
-													<TextBlock Margin="0,-2,0,0">
-													<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
-														 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-													<LineBreak />
-													<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
-														 FontSize="11" />
-													</TextBlock>
-												</TextBlock.ToolTip>-->
 											</TextBlock>
 
 											<TextBlock Grid.Column="1"
@@ -245,7 +235,7 @@
 													 FontSize="9" />
 											</TextBlock>
 										</Grid>
-										<Rectangle Height="1"
+										<Rectangle Height=".99"
 												   Margin="0,4,0,0"
 												   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 									</StackPanel>
@@ -301,7 +291,7 @@
 					<StackPanel>
 						<TextBlock Text="データ" />
 
-						<Rectangle Height="1"
+						<Rectangle Height=".99"
 								   Margin="0,7,0,3"
 								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
@@ -324,7 +314,7 @@
 					<StackPanel DataContext="{Binding Content.Expeditions}">
 						<TextBlock Text="{Binding Name}" />
 
-						<Rectangle Height="1"
+						<Rectangle Height=".99"
 								   Margin="0,7,0,3"
 								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
@@ -368,7 +358,7 @@
 					<StackPanel DataContext="{Binding Content.Quests}">
 						<TextBlock Text="{Binding Name}" />
 
-						<Rectangle Height="1"
+						<Rectangle Height=".99"
 								   Margin="0,7,0,3"
 								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
@@ -424,7 +414,7 @@
 					<StackPanel DataContext="{Binding Content.Shipyard}">
 						<TextBlock Text="入渠ドック" />
 
-						<Rectangle Height="1"
+						<Rectangle Height=".99"
 								   Margin="0,7,0,3"
 								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
@@ -468,7 +458,7 @@
 					<StackPanel DataContext="{Binding Content.Shipyard}">
 						<TextBlock Text="建造ドック" />
 
-						<Rectangle Height="1"
+						<Rectangle Height=".99"
 								   Margin="0,7,0,3"
 								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 

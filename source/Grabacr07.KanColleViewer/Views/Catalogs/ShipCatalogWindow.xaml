@@ -107,7 +107,7 @@
 							   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 				</Expander.Header>
 				<StackPanel Grid.IsSharedSizeScope="True">
-					<Border BorderThickness="1"
+					<Border BorderThickness=".99"
 							BorderBrush="{DynamicResource BorderBrushKey}"
 							Padding="5"
 							Margin="0,8,0,0">
@@ -229,7 +229,7 @@
 						</Grid>
 					</Border>
 
-					<Border BorderThickness="1"
+					<Border BorderThickness=".99"
 							BorderBrush="{DynamicResource BorderBrushKey}"
 							Margin="0,8,0,0"
 							Padding="5">
@@ -411,7 +411,7 @@
 						</WrapPanel>
 					</Border>
 
-					<Border BorderThickness="1"
+					<Border BorderThickness=".99"
 							BorderBrush="{DynamicResource BorderBrushKey}"
 							Margin="0,8,0,0"
 							Padding="5"
@@ -450,7 +450,7 @@
 							   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 				</Expander.Header>
 
-				<Border BorderThickness="1"
+				<Border BorderThickness=".99"
 						BorderBrush="{DynamicResource BorderBrushKey}"
 						Padding="5"
 						Margin="0,8,0,0">
@@ -533,7 +533,7 @@
 
 			<Border Grid.Row="2"
 					BorderBrush="{DynamicResource BorderBrushKey}"
-					BorderThickness="1"
+					BorderThickness=".99"
 					Margin="8">
 
 				<ListView ItemsSource="{Binding Ships}"
@@ -548,7 +548,7 @@
 							<Setter Property="OverridesDefaultStyle"
 									Value="True" />
 							<Setter Property="BorderThickness"
-									Value="0,0,0,1" />
+									Value="0,0,0,.99" />
 							<Setter Property="BorderBrush"
 									Value="{DynamicResource BorderBrushKey}" />
 							<Setter Property="Background"
@@ -570,7 +570,7 @@
 													<ControlTemplate TargetType="{x:Type Thumb}">
 														<Border Background="Transparent"
 																Width="13">
-															<Rectangle Width="1"
+															<Rectangle Width=".99"
 																	   Stroke="{TemplateBinding BorderBrush}" />
 														</Border>
 													</ControlTemplate>
@@ -890,7 +890,7 @@
 			<Border Grid.Row="2"
 					Background="{DynamicResource ThemeBrushKey}"
 					BorderBrush="{DynamicResource BorderBrushKey}"
-					BorderThickness="1"
+					BorderThickness=".99"
 					Opacity="0.75"
 					Margin="8"
 					Padding="20"

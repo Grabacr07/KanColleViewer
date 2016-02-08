@@ -15,10 +15,7 @@ using MetroRadiance.Interop;
 
 namespace Grabacr07.KanColleViewer.Views.Controls
 {
-	/// <summary>
-	/// ZoomFactorSelector.xaml の相互作用ロジック
-	/// </summary>
-	public partial class ZoomFactorSelector
+	partial class ZoomFactorSelector
 	{
 		private Dpi? systemDpi;
 		private List<ZoomFactorSelectorItem> items;
@@ -51,7 +48,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 			public void Select()
 			{
-				if (this.SelectAction != null) this.SelectAction();
+				this.SelectAction?.Invoke();
 			}
 		}
 

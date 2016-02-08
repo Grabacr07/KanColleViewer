@@ -48,7 +48,7 @@ namespace Grabacr07.KanColleViewer
 		}
 
 		private readonly LivetCompositeDisposable compositeDisposable = new LivetCompositeDisposable();
-		private event PropertyChangedEventHandler PropertyChangedInternal;
+		private event PropertyChangedEventHandler propertyChangedInternal;
 
 		/// <summary>
 		/// 現在の <see cref="AppDomain"/> の <see cref="Application"/> オブジェクトを取得します。
@@ -244,13 +244,13 @@ ERROR, date = {0}, sender = {1},
 
 		event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
 		{
-			add { this.PropertyChangedInternal += value; }
-			remove { this.PropertyChangedInternal -= value; }
+			add { this.propertyChangedInternal += value; }
+			remove { this.propertyChangedInternal -= value; }
 		}
 
 		private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
 		{
-			this.PropertyChangedInternal?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+			this.propertyChangedInternal?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 
 		#endregion

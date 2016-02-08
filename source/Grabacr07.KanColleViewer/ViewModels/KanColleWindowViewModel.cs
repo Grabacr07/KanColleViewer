@@ -129,9 +129,9 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 			GeneralSettings.BrowserZoomFactor.Subscribe(x => this.ZoomFactor.Current = x).AddTo(this);
 
-			this.taskbarProgress = new TaskbarProgress();
+			this.taskbarProgress = new TaskbarProgress().AddTo(this);
 			this.taskbarProgress
-				.Subscribe(nameof(TaskbarProgress), () => this.UpdateTaskbar())
+				.Subscribe(nameof(TaskbarProgress.Updated), () => this.UpdateTaskbar())
 				.AddTo(this);
 		}
 

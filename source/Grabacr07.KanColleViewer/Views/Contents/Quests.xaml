@@ -70,7 +70,7 @@
 
 				<Rectangle Grid.Row="0"
 						   Grid.Column="1"
-						   Width="1"
+						   Width="0.99"
 						   Margin="0,3"
 						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
