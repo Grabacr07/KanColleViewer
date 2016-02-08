@@ -69,6 +69,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Plugins\Logger\Logger.csproj", "{A8969FF0-BCEA-49EA-8155-4046183410FF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudibleNotifications", "Plugins\AudibleNotifications\AudibleNotifications.csproj", "{AAEE6607-3FB2-438F-913F-F853467DD40B}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroRadiance", "MetroRadiance\source\RetroRadiance\RetroRadiance.csproj", "{7F898B3A-DA17-4CAB-B387-5629B5FACA49}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroTrilithon.Desktop", "MetroTrilithon\source\RetroTrilithon.Desktop\RetroTrilithon.Desktop.csproj", "{75A62817-2F64-4179-939C-B28914BDC566}"
