@@ -233,7 +233,7 @@
 					<DockPanel>
 						<StackPanel DockPanel.Dock="Bottom"
 									HorizontalAlignment="Left">
-							<Path Data="M35.749999,0.5 L7.999998,48.5 L0.49999973,48.5 z"
+							<Path Data="M35.749999,0.5 L70.999998,48.5 L0.49999973,48.5 z"
 								  Fill="{DynamicResource ValidationErrorBrushKey}"
 								  Stretch="Fill"
 								  Width="10"
