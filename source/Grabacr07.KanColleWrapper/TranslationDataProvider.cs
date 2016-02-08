@@ -58,18 +58,20 @@ namespace Grabacr07.KanColleWrapper
 		/// Changes culture and loads or re-loads translation files.
 		/// </summary>
 		/// <param name="culture">The culture to use for translations.</param>
-		public static void ChangeCulture(string culture)
+		public static void ChangeCulture(string culture, bool firstRun = false)
 		{
 			if (culture == null) culture = CultureInfo.CurrentCulture.Name;
 			culture = (culture.StartsWith("en")) ? "en" : culture;
 			culture = (culture.StartsWith("ja")) ? "ja" : culture;
-			if (culture == CurrentCulture)
+			if (culture == CurrentCulture && !firstRun)
 				return;
 
 			Debug.WriteLine("TranslationDataProvider: got <" + culture + "> in a culture change request.");
 
 			CurrentCulture = culture;
 			LoadLocalTranslations();
+			if (firstRun) return;
+
 			KanColleClient.Current.Translations.ChangeCulture();
 			KanColleClient.Current.Updater.ChangeCulture();
 		}

@@ -156,8 +156,10 @@ namespace Grabacr07.KanColleWrapper
 
 		public void DeferredInit(object sender, IKanColleClientSettings value)
 		{
-			this.Translations = new Translations(value.Culture);
-			this.Updater = new Updater(ApiUrl, value.Culture);
+			TranslationDataProvider.ChangeCulture(value.Culture, true);
+			this.Translations = new Translations(TranslationDataProvider.CurrentCulture);
+			this.Updater = new Updater(ApiUrl, TranslationDataProvider.CurrentCulture);
+			TranslationDataProvider.ChangeCulture(value.Culture);
 		}
 	}
 }

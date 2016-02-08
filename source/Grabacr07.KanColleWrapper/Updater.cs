@@ -175,6 +175,11 @@ namespace Grabacr07.KanColleWrapper
 				kcvapi_version rawResult;
 				if (!this.TryConvertTo(responseBytes, out rawResult)) return false;
 
+				bool cultureAvailable = rawResult.selected_culture == CurrentCulture;
+
+				if (!cultureAvailable)
+					Debug.WriteLine("Updater: server returned a different culture; expected {0}, got {1}.", CurrentCulture, rawResult.selected_culture);
+
 				Version apiRemoteVersion;
 
 				if (!Version.TryParse(rawResult.api_version, out apiRemoteVersion) && (apiRemoteVersion.CompareTo("1.0") >= 0))
@@ -192,6 +197,9 @@ namespace Grabacr07.KanColleWrapper
 					Debug.WriteLine("Updater: provider {0}: version {1}{2}.", component.type, component.version, string.IsNullOrEmpty(component.url) ? "" : " (" + component.url + ")");
 					var typeTemp = TranslationDataProvider.StringToTranslationProviderType(component.type);
 					if (typeTemp == null) continue;
+					// Enforce version = 1 for unsupported cultures
+					// versions[typeTemp.Value] = (!cultureAvailable && (typeTemp != TranslationProviderType.App)) ? "1" : component.version;
+					// If not enforced, upon adding a new culture its components' versions must be set to values greater than those for 'en'.
 					versions[typeTemp.Value] = component.version;
 					if (typeTemp == TranslationProviderType.App) downloadUrl = component.url; // TODO: proper implementation of overrides for all resource types
 				}

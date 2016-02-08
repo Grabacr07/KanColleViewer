@@ -5,6 +5,7 @@
 	{
 		public string api_version { get; set; }
 		public string api_url { get; set; }
+		public string selected_culture { get; set; }
 		public kcvapi_version_component[] components { get; set; }
 	}
 
