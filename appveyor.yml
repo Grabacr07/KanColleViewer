@@ -1,8 +1,8 @@
 version: '{build}'
 branches:
   only:
-  - master
-  - develop
+  - ui-localisation
+  - translation
 os: Visual Studio 2015
 configuration: Release
 platform: Any CPU
@@ -22,7 +22,7 @@ before_build:
     nuget restore source\KanColleViewer.sln -PackagesDirectory source\packages
 build:
   project: source\KanColleViewer.sln
-  publish_nuget: true
+#  publish_nuget: true
   verbosity: minimal
 artifacts:
 - path: source\Grabacr07.KanColleViewer\bin\Release
