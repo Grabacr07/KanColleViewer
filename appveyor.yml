@@ -33,5 +33,5 @@ deploy:
   host: koumakan.jp
   username: $(ftpuser)
   password: $(ftppassword)
-  folder: /$(appveyor_build_version)/
+  folder: /
   artifact: /KanColle.*\.nupkg/
