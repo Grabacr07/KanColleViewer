@@ -13,7 +13,7 @@
 				   xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
 				   xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
 				   xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
-				   xmlns:metro2="clr-namespace:MetroTrilithon.Controls;assembly=MetroTrilithon.Desktop"
+				   xmlns:metro2="clr-namespace:MetroTrilithon.UI.Controls;assembly=MetroTrilithon.Desktop"
 				   xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 				   xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 				   xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
@@ -28,7 +28,7 @@
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:ShipCatalogWindowViewModel}"
 				   Title="{Binding Title}"
-				   Width="970"
+				   Width="1020"
 				   Height="800"
 				   FontSize="12"
 				   Topmost="{Binding Settings.TopMost.Value}"
@@ -114,7 +114,7 @@
 							   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 				</Expander.Header>
 				<StackPanel Grid.IsSharedSizeScope="True">
-					<Border BorderThickness="1"
+					<Border BorderThickness=".99"
 							BorderBrush="{DynamicResource BorderBrushKey}"
 							Padding="5"
 							Margin="0,8,0,0">
@@ -249,7 +249,7 @@
 						</Grid>
 					</Border>
 
-					<Border BorderThickness="1"
+					<Border BorderThickness=".99"
 							BorderBrush="{DynamicResource BorderBrushKey}"
 							Margin="0,8,0,0"
 							Padding="5">
@@ -404,10 +404,34 @@
 									</WrapPanel>
 								</Grid>
 							</StackPanel>
+
+							<StackPanel>
+								<Grid DataContext="{Binding ShipDamagedFilter}">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="FilterName" />
+										<ColumnDefinition Width="10" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<TextBlock Margin="0,2"
+											   HorizontalAlignment="Right">
+										<Run Text="{Binding Resources.ShipCatalog_Filter_Misc_Damage, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+										<Run Text=":" />
+									</TextBlock>
+									<WrapPanel Grid.Column="2">
+										<RadioButton Content="{Binding Resources.ShipCatalog_Filter_Misc_All, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+													 IsChecked="{Binding Both, Mode=TwoWay}" />
+										<RadioButton Content="{Binding Resources.ShipCatalog_Filter_Misc_DamageYes, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+													 IsChecked="{Binding Damaged, Mode=TwoWay}" />
+										<RadioButton Content="{Binding Resources.ShipCatalog_Filter_Misc_DamageNo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+													 IsChecked="{Binding Undamaged, Mode=TwoWay}" />
+						</WrapPanel>
+								</Grid>
+							</StackPanel>
 						</WrapPanel>
 					</Border>
 
-					<Border BorderThickness="1"
+					<Border BorderThickness=".99"
 							BorderBrush="{DynamicResource BorderBrushKey}"
 							Margin="0,8,0,0"
 							Padding="5"
@@ -447,7 +471,7 @@
 							   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 				</Expander.Header>
 
-				<Border BorderThickness="1"
+				<Border BorderThickness=".99"
 						BorderBrush="{DynamicResource BorderBrushKey}"
 						Padding="5"
 						Margin="0,8,0,0">
@@ -530,7 +554,7 @@
 
 			<Border Grid.Row="2"
 					BorderBrush="{DynamicResource BorderBrushKey}"
-					BorderThickness="1"
+					BorderThickness=".99"
 					Margin="8">
 
 				<ListView ItemsSource="{Binding Ships}"
@@ -546,7 +570,7 @@
 							<Setter Property="OverridesDefaultStyle"
 									Value="True" />
 							<Setter Property="BorderThickness"
-									Value="0,0,0,1" />
+									Value="0,0,0,.99" />
 							<Setter Property="BorderBrush"
 									Value="{DynamicResource BorderBrushKey}" />
 							<Setter Property="Background"
@@ -568,7 +592,7 @@
 													<ControlTemplate TargetType="{x:Type Thumb}">
 														<Border Background="Transparent"
 																Width="13">
-															<Rectangle Width="1"
+															<Rectangle Width=".99"
 																	   Stroke="{TemplateBinding BorderBrush}" />
 														</Border>
 													</ControlTemplate>
@@ -627,7 +651,7 @@
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
 
-							<GridViewColumn Width="100">
+							<GridViewColumn Width="102">
 								<GridViewColumn.Header>
 									<metro2:SortButton MethodName="Sort"
 													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.NameColumn}">
@@ -643,7 +667,7 @@
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
 
-							<GridViewColumn Width="110">
+							<GridViewColumn Width="114">
 								<GridViewColumn.Header>
 									<metro2:SortButton MethodName="Sort"
 													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.LevelColumn}">
@@ -850,7 +874,24 @@
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
 
-							<GridViewColumn Width="120">
+							<GridViewColumn Width="64">
+								<GridViewColumn.Header>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.TimeToRepairColumn}">
+										<TextBlock Text="{Binding Resources.ShipCatalog_Column_TTR, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+												   ToolTip="{Binding Resources.ShipCatalog_Column_TTR_ToolTip, Source={x:Static models:ResourceService.Current}}" />
+									</metro2:SortButton>
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding TimeToRepair, Mode=OneWay}"
+												   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+												   Margin="0,3" />
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+
+							<GridViewColumn Width="96">
 								<GridViewColumn.Header>
 									<TextBlock Text="{Binding Resources.ShipCatalog_Column_Equipped, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 								</GridViewColumn.Header>
@@ -926,7 +967,7 @@
 			<Border Grid.Row="2"
 					Background="{DynamicResource ThemeBrushKey}"
 					BorderBrush="{DynamicResource BorderBrushKey}"
-					BorderThickness="1"
+					BorderThickness=".99"
 					Opacity="0.75"
 					Margin="8"
 					Padding="20"

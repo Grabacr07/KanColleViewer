@@ -39,6 +39,17 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		public static SerializableProperty<string> UserStyleSheet { get; }
 			= new SerializableProperty<string>(GetKey(), Providers.Roaming, Properties.Settings.Default.OverrideStyleSheet) { AutoSave = true };
 
+		/// <summary>
+		/// タスク バー インジケーターとして使用するプラグイン機能を識別する ID を取得します。
+		/// </summary>
+		public static SerializableProperty<string> TaskbarProgressSource { get; }
+			= new SerializableProperty<string>(GetKey(), Providers.Roaming, "") { AutoSave = true };
+
+		/// <summary>
+		/// 出撃中にタスク バー インジケーターとして使用するプラグイン機能を識別する ID を取得します。
+		/// </summary>
+		public static SerializableProperty<string> TaskbarProgressSourceWhenSortie { get; }
+			= new SerializableProperty<string>(GetKey(), Providers.Roaming, "") { AutoSave = true };
 
 		private static string GetKey([CallerMemberName] string propertyName = "")
 		{

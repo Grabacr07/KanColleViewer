@@ -1,0 +1,37 @@
+version: '{build}'
+branches:
+  only:
+  - ui-localisation
+  - translation
+os: Visual Studio 2015
+configuration: Release
+platform: Any CPU
+init:
+- cmd: git config --global core.autocrlf true
+environment:
+  PATH: C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
+nuget:
+  disable_publish_on_pr: true
+before_build:
+- cmd: >-
+    git submodule init
+
+    git submodule update
+
+
+    nuget restore source\KanColleViewer.sln -PackagesDirectory source\packages
+build:
+  project: source\KanColleViewer.sln
+#  publish_nuget: true
+  verbosity: minimal
+artifacts:
+- path: source\Grabacr07.KanColleViewer\bin\Release
+  name: KanColleViewer
+deploy:
+- provider: FTP
+  protocol: ftps
+  host: koumakan.jp
+  username: $(ftpuser)
+  password: $(ftppassword)
+  folder: /
+  artifact: /KanColle.*\.nupkg/

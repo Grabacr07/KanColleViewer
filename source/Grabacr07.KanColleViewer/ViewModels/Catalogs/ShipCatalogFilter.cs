@@ -604,4 +604,82 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			}
 		}
 	}
+
+	public class ShipDamagedFilter : ShipCatalogFilter
+	{
+		#region Both 変更通知プロパティ
+
+		private bool _Both;
+
+		public bool Both
+		{
+			get { return this._Both; }
+			set
+			{
+				if (this._Both != value)
+				{
+					this._Both = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+
+		#region Damaged 変更通知プロパティ
+
+		private bool _Damaged;
+
+		public bool Damaged
+		{
+			get { return this._Damaged; }
+			set
+			{
+				if (this._Damaged != value)
+				{
+					this._Damaged = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+
+		#region Undamaged 変更通知プロパティ
+
+		private bool _Undamaged;
+
+		public bool Undamaged
+		{
+			get { return this._Undamaged; }
+			set
+			{
+				if (this._Undamaged != value)
+				{
+					this._Undamaged = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+
+		public ShipDamagedFilter(Action updateAction)
+			: base(updateAction)
+		{
+			this._Both = true;
+		}
+
+		public override bool Predicate(Ship ship)
+		{
+			if (this.Both) return true;
+			if (this.Damaged && ship.TimeToRepair != TimeSpan.Zero) return true;
+			if (this.Undamaged && ship.TimeToRepair == TimeSpan.Zero) return true;
+
+			return false;
+		}
+	}
 }

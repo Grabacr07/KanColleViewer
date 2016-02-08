@@ -5,8 +5,8 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:metro2="http://schemes.grabacr.net/winfx/2015/personal/controls"
 			 xmlns:composition="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Composition"
-			 xmlns:controls="clr-namespace:MetroTrilithon.Controls;assembly=MetroTrilithon.Desktop"
 			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 mc:Ignorable="d"
@@ -34,9 +34,9 @@
 			<TextBlock Text="{Binding Resources.Settings_Plugins_PluginInfo_Features, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					   Style="{DynamicResource DefaultTextStyleKey}" />
 
-			<controls:RichTextView Source="{Binding Functions}">
+			<metro2:RichTextView Source="{Binding Functions}">
 				<DataTemplate DataType="{x:Type settings:SettingsText}">
-					<controls:RichTextInlinePresenter>
+					<metro2:RichTextInlinePresenter>
 						<Span Foreground="{DynamicResource ForegroundBrushKey}"
 							  FontFamily="{DynamicResource DefaultFontFamilyKey}"
 							  FontSize="{DynamicResource DetailFontSizeKey}">
@@ -52,11 +52,11 @@
 							</Hyperlink>
 							<Run Text="　" />
 						</Span>
-					</controls:RichTextInlinePresenter>
+					</metro2:RichTextInlinePresenter>
 				</DataTemplate>
 
 				<DataTemplate DataType="{x:Type settings:NotifierText}">
-					<controls:RichTextInlinePresenter>
+					<metro2:RichTextInlinePresenter>
 						<Span Foreground="{DynamicResource ForegroundBrushKey}"
 							  FontFamily="{DynamicResource DefaultFontFamilyKey}"
 							  FontSize="{DynamicResource DetailFontSizeKey}">
@@ -73,32 +73,42 @@
 							</Hyperlink>
 							<Run Text="　" />
 						</Span>
-					</controls:RichTextInlinePresenter>
+					</metro2:RichTextInlinePresenter>
 				</DataTemplate>
 
 				<DataTemplate DataType="{x:Type settings:RequestNotifyText}">
-					<controls:RichTextInlinePresenter>
+					<metro2:RichTextInlinePresenter>
 						<Span Foreground="{DynamicResource ForegroundBrushKey}"
 							  FontFamily="{DynamicResource DefaultFontFamilyKey}"
 							  FontSize="{DynamicResource DetailFontSizeKey}">
 							<Run Text="{Binding Resources.Settings_Plugins_PluginInfo_NotificationFrom, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 							<Run Text="　" />
 						</Span>
-					</controls:RichTextInlinePresenter>
+					</metro2:RichTextInlinePresenter>
 				</DataTemplate>
 
 				<DataTemplate DataType="{x:Type settings:ToolText}">
-					<controls:RichTextInlinePresenter>
+					<metro2:RichTextInlinePresenter>
 						<Span Foreground="{DynamicResource ForegroundBrushKey}"
 							  FontFamily="{DynamicResource DefaultFontFamilyKey}"
 							  FontSize="{DynamicResource DetailFontSizeKey}">
 							<Run Text="{Binding Resources.Settings_Plugins_PluginInfo_ToolWindow, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 							<Run Text="　" />
 						</Span>
-					</controls:RichTextInlinePresenter>
+					</metro2:RichTextInlinePresenter>
 				</DataTemplate>
 
-			</controls:RichTextView>
+				<DataTemplate DataType="{x:Type settings:TaskbarProgressText}">
+					<metro2:RichTextInlinePresenter>
+						<Span Foreground="{DynamicResource ForegroundBrushKey}"
+							  FontFamily="{DynamicResource DefaultFontFamilyKey}"
+							  FontSize="{DynamicResource DetailFontSizeKey}">
+							<Run Text="タスク バー インジケーター" />
+							<Run Text="　" />
+						</Span>
+					</metro2:RichTextInlinePresenter>
+				</DataTemplate>
+			</metro2:RichTextView>
 		</DockPanel>
 	</StackPanel>
 </UserControl>

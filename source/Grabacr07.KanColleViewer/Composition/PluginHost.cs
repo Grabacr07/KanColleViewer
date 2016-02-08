@@ -54,6 +54,12 @@ namespace Grabacr07.KanColleViewer.Composition
 		[ImportMany(RequiredCreationPolicy = CreationPolicy.Shared)]
 		private IEnumerable<Lazy<ITool, IPluginGuid>> importedTools;
 
+		[ImportMany(RequiredCreationPolicy = CreationPolicy.Shared)]
+		private IEnumerable<Lazy<ILocalizable, IPluginGuid>> importedLocalizables;
+
+		[ImportMany(RequiredCreationPolicy = CreationPolicy.Shared)]
+		private IEnumerable<Lazy<ITaskbarProgress, IPluginGuid>> importedTaskbarProgress;
+
 #pragma warning restore 649
 
 		private static class Cache<TContract>
@@ -145,6 +151,8 @@ namespace Grabacr07.KanColleViewer.Composition
 			this.Load(this.importedNotifiers);
 			this.Load(this.importedNotifyRequesters);
 			this.Load(this.importedTools);
+			this.Load(this.importedLocalizables);
+			this.Load(this.importedTaskbarProgress);
 		}
 
 		/// <summary>

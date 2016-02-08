@@ -14,7 +14,7 @@ using Grabacr07.KanColleViewer.ViewModels;
 using Grabacr07.KanColleViewer.Views;
 using Grabacr07.KanColleWrapper;
 using Livet;
-using MetroRadiance;
+using MetroRadiance.UI;
 using MetroTrilithon.Lifetime;
 
 namespace Grabacr07.KanColleViewer
@@ -48,7 +48,7 @@ namespace Grabacr07.KanColleViewer
 		}
 
 		private readonly LivetCompositeDisposable compositeDisposable = new LivetCompositeDisposable();
-		private event PropertyChangedEventHandler PropertyChangedInternal;
+		private event PropertyChangedEventHandler propertyChangedInternal;
 
 		/// <summary>
 		/// 現在の <see cref="AppDomain"/> の <see cref="Application"/> オブジェクトを取得します。
@@ -92,9 +92,9 @@ namespace Grabacr07.KanColleViewer
 				KanColleSettings.EnableAutosubmission.Subscribe(x => KanColleClient.Current.Updater.ToggleSubmission(x)).AddTo(this);
 				KanColleSettings.EnableTranslations.Subscribe(x => { KanColleClient.Current.Translations.EnableTranslations = x; });
 
-				ThemeService.Current.Initialize(this, Theme.Dark, Accent.Purple);
-				WindowService.Current.AddTo(this).Initialize();
+				ThemeService.Current.Register(this, Theme.Dark, Accent.Purple);
 				PluginService.Current.AddTo(this).Initialize();
+				WindowService.Current.AddTo(this).Initialize();
 				NotifyService.Current.AddTo(this).Initialize();
 
 				Helper.SetRegistryFeatureBrowserEmulation();
@@ -250,13 +250,13 @@ ERROR, date = {0}, sender = {1},
 
 		event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
 		{
-			add { this.PropertyChangedInternal += value; }
-			remove { this.PropertyChangedInternal -= value; }
+			add { this.propertyChangedInternal += value; }
+			remove { this.propertyChangedInternal -= value; }
 		}
 
 		private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
 		{
-			this.PropertyChangedInternal?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+			this.propertyChangedInternal?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 
 		#endregion

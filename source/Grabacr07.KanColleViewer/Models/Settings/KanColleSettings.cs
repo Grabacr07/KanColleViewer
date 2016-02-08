@@ -75,6 +75,12 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		public static SerializableProperty<string> DisplayMaterial2 { get; }
 			= new SerializableProperty<string>(GetKey(), Providers.Roaming, nameof(Materials.InstantBuildMaterials));
 
+		/// <summary>
+		/// 艦隊ステータスにおいて、旗艦が工作艦でないことを確認するかどうかを表す設定値を取得します。
+		/// </summary>
+		public static SerializableProperty<bool> CheckFlagshipIsNotRepairShip { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
+
 		public static SerializableProperty<bool> EnableTranslations { get; }
 			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
 
@@ -82,6 +88,18 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
 
 		public static SerializableProperty<bool> EnableAutosubmission { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
+
+		/// <summary>
+		/// 艦隊の編成が変更されたときに、その艦隊を自動的に選択状態にするかどうかを表す設定値を取得します。
+		/// </summary>
+		public static SerializableProperty<bool> AutoFleetSelectWhenShipsChanged { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, false); 
+
+		/// <summary>
+		/// 艦隊が出撃・帰投したときに、その艦隊を自動的に選択状態にするかどうかを表す設定値を取得します。
+		/// </summary>
+		public static SerializableProperty<bool> AutoFleetSelectWhenSortie { get; } 
 			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
 
 		#region instance members
@@ -118,6 +136,8 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		bool IKanColleClientSettings.EnableUpdates => EnableUpdates.Value;
 
 		bool IKanColleClientSettings.EnableAutosubmission => EnableAutosubmission.Value;
+
+		bool IKanColleClientSettings.CheckFlagshipIsRepairShip => CheckFlagshipIsNotRepairShip.Value;
 
 		#endregion
 

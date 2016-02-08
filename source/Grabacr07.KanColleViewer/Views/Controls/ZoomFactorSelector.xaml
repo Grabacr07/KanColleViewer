@@ -9,7 +9,7 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
-			 xmlns:metro2="clr-namespace:MetroTrilithon.Controls;assembly=MetroTrilithon.Desktop"
+			 xmlns:metro2="http://schemes.grabacr.net/winfx/2015/personal/controls"
 			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
 			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
@@ -33,7 +33,7 @@
 						   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 						   VerticalAlignment="Top"
 						   Margin="-2,0,0,0">
-					<Run Text="{Binding ElementName=ZoomController, Path=ZoomFactor.CurrentParcentage}"
+					<Run Text="{Binding ElementName=ZoomController, Path=ZoomFactor.CurrentParcentage, Mode=OneWay}"
 						 FontSize="15" />
 					<Run Text="%"
 						 FontSize="12" />
@@ -67,10 +67,10 @@
 					</Rectangle>
 					<Border Background="{DynamicResource ThemeBrushKey}"
 							BorderBrush="{DynamicResource AccentBrushKey}"
-							BorderThickness="1">
+							BorderThickness=".99">
 						<StackPanel Margin="8">
 							<TextBlock Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.ZoomFactorSelector}" />
-							<Rectangle Height="1"
+							<Rectangle Height=".99"
 									   Fill="{DynamicResource InactiveForegroundBrushKey}"
 									   Margin="0,8" />
 							<ListBox x:Name="SupportedList"
@@ -106,7 +106,7 @@
 																	 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 																<Run FontSize="12">
 																	<Run.Text>
-																		<MultiBinding StringFormat="  ({0} x {1})">
+																		<MultiBinding StringFormat="  ({0:F0} x {1:F0})">
 																			<Binding Path="ScreenSize.Width" />
 																			<Binding Path="ScreenSize.Height" />
 																		</MultiBinding>

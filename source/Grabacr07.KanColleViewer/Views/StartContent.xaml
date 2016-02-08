@@ -6,10 +6,10 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:metro2="http://schemes.grabacr.net/winfx/2015/personal/controls"
 			 xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
 			 xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
 			 xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
-			 xmlns:metro2="clr-namespace:MetroTrilithon.Controls;assembly=MetroTrilithon.Desktop"
 			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
@@ -154,7 +154,7 @@
 
 			<Border Grid.Column="0"
 					BorderBrush="{DynamicResource BorderBrushKey}"
-					BorderThickness="1,0,1,0">
+					BorderThickness=".99,0,.99,0">
 				<ScrollViewer VerticalScrollBarVisibility="Auto"
 							  PanningMode="Both"
 							  Padding="10,0,20,14">
@@ -176,7 +176,7 @@
 								 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 						</TextBlock>
 
-						<Rectangle Height="1"
+						<Rectangle Height=".99"
 								   Margin="0,12"
 								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
@@ -206,7 +206,7 @@
 							</metro2:HyperlinkEx>
 						</TextBlock>
 
-						<Rectangle Height="1"
+						<Rectangle Height=".99"
 								   Margin="0,12"
 								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
@@ -282,7 +282,7 @@
 							<LineBreak />
 							<InlineUIContainer>
 								<Rectangle Width="{Binding ElementName=Dummy, Path=ActualWidth}"
-										   Height="1"
+										   Height=".99"
 										   Style="{DynamicResource SeparatorRectangleStyleKey}"
 										   Margin="0,16,0,0"
 										   SnapsToDevicePixels="True" />
@@ -360,7 +360,7 @@
 									   Style="{DynamicResource TabHeaderTextStyleKey}" />
 						</TabItem.Header>
 						<settings:Network Margin="10,9"
-										  DataContext="{Binding NetworkSettings}"/>
+										  DataContext="{Binding NetworkSettings}" />
 					</TabItem>
 
 					<TabItem>

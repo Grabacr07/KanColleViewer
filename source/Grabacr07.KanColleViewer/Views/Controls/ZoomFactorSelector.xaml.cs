@@ -3,29 +3,19 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Grabacr07.KanColleViewer.Models;
 using Livet;
 using Livet.EventListeners;
-using MetroRadiance.Core;
+using MetroRadiance.Interop;
 
 namespace Grabacr07.KanColleViewer.Views.Controls
 {
-	/// <summary>
-	/// ZoomFactorSelector.xaml の相互作用ロジック
-	/// </summary>
-	public partial class ZoomFactorSelector
+	partial class ZoomFactorSelector
 	{
 		private Dpi? systemDpi;
 		private List<ZoomFactorSelectorItem> items;
@@ -58,7 +48,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 			public void Select()
 			{
-				if (this.SelectAction != null) this.SelectAction();
+				this.SelectAction?.Invoke();
 			}
 		}
 
@@ -78,10 +68,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			var source = (ZoomFactorSelector)d;
 			var newValue = (IZoomFactor)e.NewValue;
 
-			if (source.zoomFactorNotifyListener != null)
-			{
-				source.zoomFactorNotifyListener.Dispose();
-			}
+			source.zoomFactorNotifyListener?.Dispose();
 
 			if (newValue != null)
 			{
@@ -120,7 +107,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 		public ZoomFactorSelector()
 		{
-			InitializeComponent();
+			this.InitializeComponent();
 
 			this.Popup.CustomPopupPlacementCallback = this.PopupPlacementCallback;
 			this.Popup.Opened += (sender, args) => this.ChangeBackground();

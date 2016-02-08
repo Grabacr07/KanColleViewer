@@ -17,7 +17,7 @@ namespace Grabacr07.KanColleViewer.PluginAnalyzer
 	public class ExportMetadataAnalyzer : DiagnosticAnalyzer
 	{
 		public static readonly string DiagnosticId
-			= "KanColleViewer.PluginAnalyzer.ExportMetadata";
+			= "KanColleViewer_PluginAnalyzer_ExportMetadata";
 
 		internal static readonly LocalizableString ExportMetadataMessageFormat
 			= new LocalizableResourceString(nameof(Resources.ExportMetadataMessageFormat), Resources.ResourceManager, typeof(Resources));

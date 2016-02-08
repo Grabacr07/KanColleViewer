@@ -133,6 +133,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 最小.
+        /// </summary>
+        public static string Common_Minimum {
+            get {
+                return ResourceManager.GetString("Common_Minimum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 通知しない.
         /// </summary>
         public static string Common_Notifications_Disable {
@@ -1844,6 +1853,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 旗艦に工作艦が編成されているときは出撃可能と判断しない.
+        /// </summary>
+        public static string Settings_Operation_CheckFlagshipIsNotRepairShip {
+            get {
+                return ResourceManager.GetString("Settings_Operation_CheckFlagshipIsNotRepairShip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 艦上偵察機.
         /// </summary>
         public static string Settings_Operation_LoS_CarrierBasedRecon {
@@ -2753,6 +2771,24 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 修復時間.
+        /// </summary>
+        public static string ShipCatalog_Column_TTR {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Column_TTR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 入渠にかかる時間です.
+        /// </summary>
+        public static string ShipCatalog_Column_TTR_ToolTip {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Column_TTR_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 索敵.
         /// </summary>
         public static string ShipCatalog_Column_ViewRange {
@@ -2866,6 +2902,33 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string ShipCatalog_Filter_Misc_All {
             get {
                 return ResourceManager.GetString("ShipCatalog_Filter_Misc_All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 損傷.
+        /// </summary>
+        public static string ShipCatalog_Filter_Misc_Damage {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Misc_Damage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 損傷なし.
+        /// </summary>
+        public static string ShipCatalog_Filter_Misc_DamageNo {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Misc_DamageNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 損傷あり.
+        /// </summary>
+        public static string ShipCatalog_Filter_Misc_DamageYes {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Misc_DamageYes", resourceCulture);
             }
         }
         

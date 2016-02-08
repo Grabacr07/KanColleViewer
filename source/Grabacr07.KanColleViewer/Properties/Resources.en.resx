@@ -1393,4 +1393,25 @@ Small Radar LoS × (1.00) + Large Radar LoS × (0.99) +
   <data name="ViewRangeLogic_Type3_Name" xml:space="preserve">
     <value>2-5 formula (new)</value>
   </data>
+  <data name="Common_Minimum" xml:space="preserve">
+    <value>min</value>
+  </data>
+  <data name="Settings_Operation_CheckFlagshipIsNotRepairShip" xml:space="preserve">
+    <value>Check that the flagship is not a repair ship</value>
+  </data>
+  <data name="ShipCatalog_Column_TTR" xml:space="preserve">
+    <value>Repair ETA</value>
+  </data>
+  <data name="ShipCatalog_Column_TTR_ToolTip" xml:space="preserve">
+    <value>Time until the repairs finish.</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_Damage" xml:space="preserve">
+    <value>Damage</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_DamageNo" xml:space="preserve">
+    <value>Not damaged</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_DamageYes" xml:space="preserve">
+    <value>Damaged</value>
+  </data>
 </root>

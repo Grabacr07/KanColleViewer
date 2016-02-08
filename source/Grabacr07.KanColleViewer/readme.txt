@@ -1,6 +1,6 @@
 ﻿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 提督業も忙しい！ (KanColleViewer)
-                                             version 4.1.6  2015/11/10
+                                             version 4.2.0  2016/02/08
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
@@ -34,10 +34,10 @@
 Windows 7 では、遠征や建造の終了時のトースト通知が動作しません (代わりに、タスクトレイからのバルーン通知になります)。
 Windows 8 以降での使用を推奨します。
 
-・.NET Framework 4.5
+・.NET Framework 4.6
 
-Windows 7 で使用する場合、.NET Framework 4.5 のインストールが必要です。
-Windows 8 以降の場合は標準でインストールされています。
+Windows 8 またはそれ以前で使用する場合、.NET Framework 4.6 のインストールが必要です。
+Windows 10 の場合は標準でインストールされています。
 
 IE コンポーネントを使用しており、ブラウザー部分は Internet Explorer の設定に依存します。 
 艦これ本体のアップデート後などにスクリプトエラーが頻発する場合は、IE のキャッシュを削除してください。 
@@ -72,90 +72,90 @@ C# + WPF で開発しています。
 DynamicJson
 (http://dynamicjson.codeplex.com/)
 
-	DynamicJson
-	ver 1.2.0.0 (May. 21th, 2010)
+    DynamicJson
+    ver 1.2.0.0 (May. 21th, 2010)
 
-	created and maintained by neuecc ils@neue.cc
-	licensed under Microsoft Public License(Ms-PL)
-	http://neue.cc/
-	http://dynamicjson.codeplex.com/
+    created and maintained by neuecc ils@neue.cc
+    licensed under Microsoft Public License(Ms-PL)
+    http://neue.cc/
+    http://dynamicjson.codeplex.com/
 
-	・用途 : JSON デシリアライズ
-	・ライセンス : Ms-PL
-	・ライセンス全文 : Licenses/Ms-PL.txt
+    ・用途 : JSON デシリアライズ
+    ・ライセンス : Ms-PL
+    ・ライセンス全文 : Licenses/Ms-PL.txt
 
 Livet
 (http://ugaya40.hateblo.jp/entry/Livet)
 
-	・用途 : MVVM(Model/View/ViewModel)パターン用インフラストラクチャ
-	・ライセンス : zlib/libpng
+    ・用途 : MVVM(Model/View/ViewModel)パターン用インフラストラクチャ
+    ・ライセンス : zlib/libpng
 
 StatefulModel
 (http://ugaya40.hateblo.jp/entry/StatefulModel)
 
-	・用途 : M-V-Whatever の Model 向けインフラストラクチャ
-	・ライセンス : The MIT License (MIT)
+    ・用途 : M-V-Whatever の Model 向けインフラストラクチャ
+    ・ライセンス : The MIT License (MIT)
 
 Nekoxy
 (https://github.com/veigr/Nekoxy)
 
-	The MIT License (MIT)
+    The MIT License (MIT)
 
-	Copyright (c) 2015 veigr
+    Copyright (c) 2015 veigr
 
-	・用途 : HTTP通信キャプチャ
-	・ライセンス : The MIT License (MIT)
-	・ライセンス全文 : Licenses/Nekoxy.txt
+    ・用途 : HTTP通信キャプチャ
+    ・ライセンス : The MIT License (MIT)
+    ・ライセンス全文 : Licenses/Nekoxy.txt
 
 TrotiNet
 (https://github.com/krys-g/TrotiNet)
 
-	TrotiNet is a proxy library implemented in C#. It aims at delivering a simple,
-	reusable framework for developing any sort of C# proxies.
+    TrotiNet is a proxy library implemented in C#. It aims at delivering a simple,
+    reusable framework for developing any sort of C# proxies.
 
-	TrotiNet is distributed under the GNU Lesser General Public License v3.0
-	(LGPL). See: http://www.gnu.org/licenses/lgpl.html
+    TrotiNet is distributed under the GNU Lesser General Public License v3.0
+    (LGPL). See: http://www.gnu.org/licenses/lgpl.html
 
-	・用途 : ローカル HTTP Proxy
-	・ライセンス : GNU LESSER GENERAL PUBLIC LICENSE Version 3
-	・ライセンス全文 : Licenses/LGPL.txt , Licenses/GPL.txt
-	・ソースコード : https://github.com/Grabacr07/KanColleViewer/blob/master/externals/TrotiNet-master.zip
+    ・用途 : ローカル HTTP Proxy
+    ・ライセンス : GNU LESSER GENERAL PUBLIC LICENSE Version 3
+    ・ライセンス全文 : Licenses/LGPL.txt , Licenses/GPL.txt
+    ・ソースコード : https://github.com/Grabacr07/KanColleViewer/blob/master/externals/TrotiNet-master.zip
 
 Apache log4net
 (https://logging.apache.org/log4net/)
 
-	・用途 : TrotiNet の依存ライブラリ (ログ出力用/未使用)
-	・ライセンス : Apache License Version 2.0
-	・ライセンス全文 : Licenses/Apache.txt
+    ・用途 : TrotiNet の依存ライブラリ (ログ出力用/未使用)
+    ・ライセンス : Apache License Version 2.0
+    ・ライセンス全文 : Licenses/Apache.txt
 
 Rx (Reactive Extensions)
 (https://rx.codeplex.com/)
 
-	・用途 : 非同期処理
-	・ライセンス : Apache License Version 2.0
-	・ライセンス全文 : Licenses/Apache.txt
+    ・用途 : 非同期処理
+    ・ライセンス : Apache License Version 2.0
+    ・ライセンス全文 : Licenses/Apache.txt
 
 Desktop Toast
 (https://github.com/emoacht/DesktopToast)
 
-	The MIT License (MIT)
+    The MIT License (MIT)
 
-	Copyright (c) 2014-2015 EMO
+    Copyright (c) 2014-2015 EMO
 
-	・用途 : トースト通知
-	・ライセンス : The MIT License (MIT)
-	・ライセンス全文 : Licenses/DesktopToast.txt
+    ・用途 : トースト通知
+    ・ライセンス : The MIT License (MIT)
+    ・ライセンス全文 : Licenses/DesktopToast.txt
 
 .NET Core Audio APIs
 (https://netcoreaudio.codeplex.com/)
 
-	The MIT License (MIT)
+    The MIT License (MIT)
 
-	Copyright (c) 2011 Vannatech
+    Copyright (c) 2011 Vannatech
 
-	・用途 : 音量操作
-	・ライセンス : The MIT License (MIT)
-	・ライセンス全文 : Licenses/NETCoreAudioAPIs.txt
+    ・用途 : 音量操作
+    ・ライセンス : The MIT License (MIT)
+    ・ライセンス全文 : Licenses/NETCoreAudioAPIs.txt
 
 
 ■免責事項
@@ -167,6 +167,7 @@ Desktop Toast
 
 ■更新履歴
 
+2016/02/08 - version 4.2 リリース
 2015/11/10 - version 4.1.6 リリース
 2015/10/30 - version 4.1.5 リリース
 2015/08/28 - version 4.1.3 リリース

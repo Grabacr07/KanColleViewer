@@ -10,7 +10,7 @@
 			 xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
 			 xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
 			 xmlns:kcvg="clr-namespace:Grabacr07.KanColleViewer.Controls.Globalization;assembly=KanColleViewer.Controls"
-			 xmlns:metro2="clr-namespace:MetroTrilithon.Controls;assembly=MetroTrilithon.Desktop"
+			 xmlns:metro2="clr-namespace:MetroTrilithon.UI.Controls;assembly=MetroTrilithon.Desktop"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:vContents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
 			 xmlns:vmContents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
@@ -31,7 +31,7 @@
 				<Setter Property="BorderBrush"
 						Value="{DynamicResource BorderBrushKey}" />
 				<Setter Property="BorderThickness"
-						Value="1" />
+						Value=".99" />
 				<Setter Property="Padding"
 						Value="8" />
 				<Setter Property="Margin"
@@ -64,7 +64,7 @@
 					<Setter.Value>
 						<ControlTemplate TargetType="ToolTip">
 							<Border Name="Border"
-									BorderThickness="1"
+									BorderThickness=".99"
 									BorderBrush="{DynamicResource BorderBrushKey}"
 									Background="{DynamicResource BackgroundBrushKey}"
 									Padding="8,4"
@@ -250,7 +250,7 @@
 													 FontSize="9" />
 											</TextBlock>
 										</Grid>
-										<Rectangle Height="1"
+										<Rectangle Height=".99"
 												   Margin="0,4,0,0"
 												   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 									</StackPanel>
@@ -306,7 +306,7 @@
 					<StackPanel>
 						<TextBlock Text="{Binding Resources.Overview_Data, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 
-						<Rectangle Height="1"
+						<Rectangle Height=".99"
 								   Margin="0,7,0,3"
 								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
@@ -329,7 +329,7 @@
 					<StackPanel DataContext="{Binding Content.Expeditions}">
 						<TextBlock Text="{Binding Name}" />
 
-						<Rectangle Height="1"
+						<Rectangle Height=".99"
 								   Margin="0,7,0,3"
 								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
@@ -373,7 +373,7 @@
 					<StackPanel DataContext="{Binding Content.Quests}">
 						<TextBlock Text="{Binding Name}" />
 
-						<Rectangle Height="1"
+						<Rectangle Height=".99"
 								   Margin="0,7,0,3"
 								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
@@ -429,7 +429,7 @@
 					<StackPanel DataContext="{Binding Content.Shipyard}">
 						<TextBlock Text="{Binding Resources.Shipyard_RepairDock, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 
-						<Rectangle Height="1"
+						<Rectangle Height=".99"
 								   Margin="0,7,0,3"
 								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
@@ -473,7 +473,7 @@
 					<StackPanel DataContext="{Binding Content.Shipyard}">
 						<TextBlock Text="{Binding Resources.Shipyard_ConstructionDock, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 
-						<Rectangle Height="1"
+						<Rectangle Height=".99"
 								   Margin="0,7,0,3"
 								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 

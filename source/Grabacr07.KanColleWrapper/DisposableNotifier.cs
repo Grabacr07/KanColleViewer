@@ -8,11 +8,11 @@ namespace Grabacr07.KanColleWrapper
 {
 	public class DisposableNotifier : Notifier, IDisposable
 	{
-		protected CompositeDisposable CompositeDisposable { get; }
+		protected MultipleDisposable CompositeDisposable { get; }
 
 		public DisposableNotifier()
 		{
-			this.CompositeDisposable = new CompositeDisposable();
+			this.CompositeDisposable = new MultipleDisposable();
 		}
 
 		public void Dispose()

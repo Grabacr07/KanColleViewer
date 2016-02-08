@@ -33,7 +33,7 @@
 		<TextBlock Text="{Binding Resources.Settings_Screenshot, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 		<Grid DataContext="{Binding ScreenshotSettings}"
-			  Margin="20,0,0,10">
+			  Margin="20,0,0,0">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
@@ -82,8 +82,7 @@
 			</StackPanel>
 		</Grid>
 
-		<Rectangle Height="1"
-				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
 		<!--<TextBlock Text="テーマ"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
@@ -108,13 +107,10 @@
 		<Rectangle Height="1"
 				   Style="{DynamicResource SeparatorRectangleStyleKey}" />-->
 
-		<Rectangle Height="1"
-				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
 
 		<TextBlock Text="{Binding Resources.Settings_Other_UserStyleSheet, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
-				   Margin="0,10" />
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 		<StackPanel Margin="20,0,0,0">
 			<metro:PromptTextBox Text="{Binding UserStyleSheetSettings.UserStyleSheet, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -125,7 +121,8 @@
 								 VerticalScrollBarVisibility="Auto"
 								 Prompt="CSS" />
 
-			<DockPanel Margin="-4,4"
+			<Border Height="8" />
+			<DockPanel Margin="-4,0"
 					   DataContext="{Binding UserStyleSheetSettings}"
 					   LastChildFill="False">
 				<Panel.Resources>
@@ -134,7 +131,7 @@
 						<Setter Property="MinWidth"
 								Value="100" />
 						<Setter Property="Margin"
-								Value="4" />
+								Value="4,0" />
 						<Setter Property="Padding"
 								Value="16,4" />
 					</Style>
@@ -156,7 +153,6 @@
 			</DockPanel>
 		</StackPanel>
 
-		<Rectangle Height="1"
-				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 	</StackPanel>
 </UserControl>

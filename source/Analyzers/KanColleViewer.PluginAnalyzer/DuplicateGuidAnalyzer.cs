@@ -17,7 +17,7 @@ namespace Grabacr07.KanColleViewer.PluginAnalyzer
 	public class DuplicateGuidAnalyzer : DiagnosticAnalyzer
 	{
 		public static readonly string DiagnosticId
-			= "KanColleViewer.PluginAnalyzer.DuplicateGuid";
+			= "KanColleViewer_PluginAnalyzer_DuplicateGuid";
 
 		internal static readonly LocalizableString DuplicateGuidMessageFormat
 			= new LocalizableResourceString(nameof(Resources.DuplicateGuidMessageFormat), Resources.ResourceManager, typeof(Resources));
@@ -44,7 +44,7 @@ namespace Grabacr07.KanColleViewer.PluginAnalyzer
 				.ToArray();
 
 			var dupe = plugins
-				.GroupBy(x => x.GetGuidMetadataValue())
+				.GroupBy(x => x.GetGuidMetadataValue(compilation.GetSemanticModel(x.SyntaxTree)))
 				.Where(x => 1 < x.Count())
 				.ToArray();
 

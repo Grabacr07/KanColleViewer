@@ -7,6 +7,7 @@
 				   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 				   xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 				   xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+				   xmlns:mtti="http://schemes.grabacr.net/winfx/2015/personal/interactivity"
 				   xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
 				   xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
 				   xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
@@ -57,6 +58,10 @@
 										 MessageKey="Window.Transition">
 			<livet:TransitionInteractionMessageAction InvokeActionOnlyWhenWindowIsActive="False" />
 		</livet:InteractionMessageTrigger>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+										 MessageKey="Window.UpdateTaskbar">
+			<mtti:TaskbarMessageAction InvokeActionOnlyWhenWindowIsActive="False" />
+		</livet:InteractionMessageTrigger>
 	</i:Interaction.Triggers>
 
 	<Grid>
@@ -80,7 +85,7 @@
 						Orientation="Horizontal"
 						VerticalAlignment="Top"
 						WindowChrome.IsHitTestVisibleInChrome="True">
-				<metro:CaptionButton IsChecked="{Binding Settings.TopMost.Value}"
+				<metro:CaptionButton IsChecked="{Binding Settings.TopMost.Value, Mode=TwoWay}"
 									 ToolTip="{Binding Resources.Settings_Window_TopMost, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 Style="{DynamicResource PinButtonStyleKey}" />
 				<metro:SystemButtons />

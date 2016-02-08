@@ -3,8 +3,8 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:metro2="http://schemes.grabacr.net/winfx/2015/personal/controls"
 			 xmlns:wrapper="clr-namespace:Grabacr07.KanColleWrapper;assembly=KanColleWrapper"
-			 xmlns:controls="clr-namespace:MetroTrilithon.Controls;assembly=MetroTrilithon.Desktop"
 			 xmlns:counter="clr-namespace:Counter"
 			 mc:Ignorable="d"
 			 d:DataContext="{d:DesignInstance counter:CounterViewModel}"
@@ -36,7 +36,7 @@
 					<DataTemplate>
 						<Border Margin="4"
 								Padding="0,0,0,8"
-								BorderThickness="0,0,0,1"
+								BorderThickness="0,0,0,.99"
 								BorderBrush="{DynamicResource BorderBrushKey}">
 							<Grid>
 								<Grid.ColumnDefinitions>
@@ -52,9 +52,9 @@
 								<Run Text="{Binding Count}"
 									 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 								</TextBlock>
-								<controls:CallMethodButton Grid.Column="2"
-														   Content="リセット"
-														   MethodName="Reset" />
+								<metro2:CallMethodButton Grid.Column="2"
+														 Content="リセット"
+														 MethodName="Reset" />
 							</Grid>
 						</Border>
 					</DataTemplate>

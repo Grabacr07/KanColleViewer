@@ -32,6 +32,7 @@
     <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Composition\ILocalizable.cs" />
     <Compile Include="Composition\INotifier.cs" />
     <Compile Include="Composition\INotification.cs" />
     <Compile Include="Composition\IPlugin.cs" />
@@ -48,9 +50,11 @@
     <Compile Include="Composition\IPluginMetadata.cs" />
     <Compile Include="Composition\IRequestNotify.cs" />
     <Compile Include="Composition\ISettings.cs" />
+    <Compile Include="Composition\ITaskbarProgress.cs" />
     <Compile Include="Composition\ITool.cs" />
     <Compile Include="Composition\NotifyEventArgs.cs" />
     <Compile Include="Composition\PluginFeatureAttribute.cs" />
+    <Compile Include="Composition\TaskbarProgressEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,7 @@
 				   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 				   xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 				   xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+				   xmlns:mtti="http://schemes.grabacr.net/winfx/2015/personal/interactivity"
 				   xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
 				   xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
 				   xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
@@ -67,6 +68,10 @@
 			<livet:TransitionInteractionMessageAction InvokeActionOnlyWhenWindowIsActive="False"
 													  IsOwned="True" />
 		</livet:InteractionMessageTrigger>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+										 MessageKey="Window.UpdateTaskbar">
+			<mtti:TaskbarMessageAction InvokeActionOnlyWhenWindowIsActive="False" />
+		</livet:InteractionMessageTrigger>
 	</i:Interaction.Triggers>
 
 	<Grid>
@@ -125,6 +130,7 @@
 					<WebBrowser Source="about:blank">
 						<i:Interaction.Behaviors>
 							<behaviors:NavigatorBehavior Navigator="{Binding Navigator}" />
+							<mtti:TaskbarThumbnailBehavior />
 						</i:Interaction.Behaviors>
 						<i:Interaction.Triggers>
 							<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"

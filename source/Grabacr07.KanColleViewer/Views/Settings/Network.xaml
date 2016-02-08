@@ -26,70 +26,84 @@
 		<TextBlock Text="{Binding Resources.Settings_Proxy, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 		
+		<StackPanel Margin="20,0,0,0">
 		<RadioButton x:Name="CheckDirectAccess"
 					 GroupName="ProxySettings"
-					 Content="{Binding Resources.Settings_Network_ProxyDirect, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-					 IsChecked="{Binding ProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=DirectAccess}"
-					 Margin="20,10,0,0" />
+						 Content="{Binding Resources.Settings_Network_ProxyDirect, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+						 IsChecked="{Binding ProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=DirectAccess}" />
 
 		<TextBlock Style="{DynamicResource DetailTextStyleKey}"
 				   IsEnabled="{Binding ProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=DirectAccess}"
-				   Margin="40,4,0,0">
-			<Run Text="{Binding Resources.Settings_Network_ProxyDirectDesc, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+					   Margin="20,2,0,0">
+				<Run Text="{Binding Resources.Settings_Network_ProxyDirectDesc, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 		</TextBlock>
 
+			<Border Height="8" />
 		<RadioButton x:Name="CheckUseSystemProxy"
 					 GroupName="ProxySettings"
-					 Content="{Binding Resources.Settings_Network_ProxyIE, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-					 IsChecked="{Binding ProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SystemProxy}"
-					 Margin="20,10,0,0" />
+						 Content="{Binding Resources.Settings_Network_ProxyIE, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+						 IsChecked="{Binding ProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SystemProxy}" />
 
 		<TextBlock Style="{DynamicResource DetailTextStyleKey}"
 				   IsEnabled="{Binding ProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SystemProxy}"
-				   Margin="40,4,0,0">
-			<Run Text="{Binding Resources.Settings_Network_ProxyIEDesc, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+					   Margin="20,2,0,0">
+				<Run Text="{Binding Resources.Settings_Network_ProxyIEDesc, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 		</TextBlock>
 
+			<Border Height="8" />
 		<RadioButton x:Name="CheckUseSpecificProxy"
 					 GroupName="ProxySettings"
-					 Content="{Binding Resources.Settings_Network_ProxyCustom, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-					 IsChecked="{Binding ProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SpecificProxy}"
-					 Margin="20,10,0,0" />
+						 Content="{Binding Resources.Settings_Network_ProxyCustom, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+						 IsChecked="{Binding ProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SpecificProxy}" />
+
 		<StackPanel IsEnabled="{Binding ProxyType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SpecificProxy}"
-					Margin="40,0,0,6">
+						Margin="20,0,0,0"
+						Grid.IsSharedSizeScope="True">
 			<StackPanel.Resources>
 				<Style TargetType="{x:Type metro:PromptTextBox}">
 					<Setter Property="Margin"
-						Value="3"/>
+								Value="0,3" />
 				</Style>
 			</StackPanel.Resources>
 
 			<TextBlock Style="{DynamicResource DetailTextStyleKey}"
-					   Margin="0,4">
-				<Run Text="{Binding Resources.Settings_Network_ProxyCustomDesc, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+						   Margin="0,2">
+					<Run Text="{Binding Resources.Settings_Network_ProxyCustomDesc, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 			</TextBlock>
 			
 			<Grid>
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="54" />
+						<ColumnDefinition Width="Auto"
+										  SharedSizeGroup="Col0" />
 					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="15" />
-					<ColumnDefinition Width="41" />
-					<ColumnDefinition Width="60" />
+						<ColumnDefinition Width="15"
+										  SharedSizeGroup="Col2" />
+						<ColumnDefinition Width="Auto"
+										  SharedSizeGroup="Col3" />
+						<ColumnDefinition Width="60"
+										  SharedSizeGroup="Col4" />
 				</Grid.ColumnDefinitions>
-				<TextBlock Grid.Column="0"
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
+
+					<TextBlock Grid.Row="0"
+							   Grid.Column="0"
 						   TextAlignment="Right">
 					<Run Text="HTTP" /><Run Text=": " />
 				</TextBlock>
-				<metro:PromptTextBox Grid.Column="1"
+					<metro:PromptTextBox Grid.Row="0"
+										 Grid.Column="1"
 									 Text="{Binding SpecificHttpProxyHost, Mode=TwoWay}"
 									 Prompt="{Binding Resources.Settings_Proxy_Host, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-				<TextBlock Grid.Column="3">
-					<Run Text="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" /><Run Text=": " />
+					<TextBlock Grid.Row="0"
+							   Grid.Column="3">
+						<Run Text="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" /><Run Text=": " />
 				</TextBlock>
-				<metro:PromptTextBox Grid.Column="4"
+					<metro:PromptTextBox Grid.Row="0"
+										 Grid.Column="4"
 									 Prompt="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-									 Width="54"
 									 MaxLength="5">
 					<metro:PromptTextBox.Text>
 						<Binding Path="SpecificHttpProxyPort"
@@ -102,33 +116,45 @@
 						</Binding>
 					</metro:PromptTextBox.Text>
 				</metro:PromptTextBox>
-			</Grid>
 
-			<CheckBox Content="{Binding Resources.Settings_Network_Proxy_UseForAllProtos, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-					  Margin="57,3,3,3"
-					  IsChecked="{Binding IsUseHttpProxyForAllProtocols, Mode=TwoWay}"/>
+					<CheckBox Grid.Row="1"
+							  Grid.Column="1"
+							  Grid.ColumnSpan="3"
+							  Content="{Binding Resources.Settings_Network_Proxy_UseForAllProtos, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+							  Margin="-1,4"
+							  IsChecked="{Binding IsUseHttpProxyForAllProtocols, Mode=TwoWay}" />
+			</Grid>
 
 			<Grid IsEnabled="{Binding IsUseHttpProxyForAllProtocols, Converter={StaticResource ReverseBooleanConverter}}">
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="54" />
+						<ColumnDefinition SharedSizeGroup="Col0" />
 					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="15" />
-					<ColumnDefinition Width="41" />
-					<ColumnDefinition Width="60" />
+						<ColumnDefinition SharedSizeGroup="Col2" />
+						<ColumnDefinition SharedSizeGroup="Col3" />
+						<ColumnDefinition SharedSizeGroup="Col4" />
 				</Grid.ColumnDefinitions>
-				<TextBlock Grid.Column="0"
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
+
+					<TextBlock Grid.Row="0"
+							   Grid.Column="0"
 						   TextAlignment="Right">
 					<Run Text="HTTPS" /><Run Text=": " />
 				</TextBlock>
-				<metro:PromptTextBox Grid.Column="1"
+					<metro:PromptTextBox Grid.Row="0"
+										 Grid.Column="1"
 									 Text="{Binding SpecificHttpsProxyHost, Mode=TwoWay}"
 									 Prompt="{Binding Resources.Settings_Proxy_Host, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-				<TextBlock Grid.Column="3">
-					<Run Text="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" /><Run Text=": " />
+					<TextBlock Grid.Row="0"
+							   Grid.Column="3">
+						<Run Text="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" /><Run Text=": " />
 				</TextBlock>
-				<metro:PromptTextBox Grid.Column="4"
+					<metro:PromptTextBox Grid.Row="0"
+										 Grid.Column="4"
 									 Prompt="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-									 Width="54"
 									 MaxLength="5">
 					<metro:PromptTextBox.Text>
 						<Binding Path="SpecificHttpsProxyPort"
@@ -141,29 +167,23 @@
 						</Binding>
 					</metro:PromptTextBox.Text>
 				</metro:PromptTextBox>
-			</Grid>
 
-			<Grid IsEnabled="{Binding IsUseHttpProxyForAllProtocols, Converter={StaticResource ReverseBooleanConverter}}">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="54" />
-					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="15" />
-					<ColumnDefinition Width="41" />
-					<ColumnDefinition Width="60" />
-				</Grid.ColumnDefinitions>
-				<TextBlock Grid.Column="0"
+					<TextBlock Grid.Row="1"
+							   Grid.Column="0"
 						   TextAlignment="Right">
 					<Run Text="FTP" /><Run Text=": " />
 				</TextBlock>
-				<metro:PromptTextBox Grid.Column="1"
+					<metro:PromptTextBox Grid.Row="1"
+										 Grid.Column="1"
 									 Text="{Binding SpecificFtpProxyHost, Mode=TwoWay}"
 									 Prompt="{Binding Resources.Settings_Proxy_Host, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-				<TextBlock Grid.Column="3">
-					<Run Text="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" /><Run Text=": " />
+					<TextBlock Grid.Row="1"
+							   Grid.Column="3">
+						<Run Text="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" /><Run Text=": " />
 				</TextBlock>
-				<metro:PromptTextBox Grid.Column="4"
+					<metro:PromptTextBox Grid.Row="1"
+										 Grid.Column="4"
 									 Prompt="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-									 Width="54"
 									 MaxLength="5">
 					<metro:PromptTextBox.Text>
 						<Binding Path="SpecificFtpProxyPort"
@@ -176,29 +196,23 @@
 						</Binding>
 					</metro:PromptTextBox.Text>
 				</metro:PromptTextBox>
-			</Grid>
 
-			<Grid IsEnabled="{Binding IsUseHttpProxyForAllProtocols, Converter={StaticResource ReverseBooleanConverter}}">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="54" />
-					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="15" />
-					<ColumnDefinition Width="41" />
-					<ColumnDefinition Width="60" />
-				</Grid.ColumnDefinitions>
-				<TextBlock Grid.Column="0"
+					<TextBlock Grid.Row="2"
+							   Grid.Column="0"
 						   TextAlignment="Right">
 					<Run Text="SOCKS" /><Run Text=": " />
 				</TextBlock>
-				<metro:PromptTextBox Grid.Column="1"
+					<metro:PromptTextBox Grid.Row="2"
+										 Grid.Column="1"
 									 Text="{Binding SpecificSocksProxyHost, Mode=TwoWay}"
 									 Prompt="{Binding Resources.Settings_Proxy_Host, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-				<TextBlock Grid.Column="3">
-					<Run Text="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" /><Run Text=": " />
+					<TextBlock Grid.Row="2"
+							   Grid.Column="3">
+						<Run Text="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" /><Run Text=": " />
 				</TextBlock>
-				<metro:PromptTextBox Grid.Column="4"
+					<metro:PromptTextBox Grid.Row="2"
+										 Grid.Column="4"
 									 Prompt="{Binding Resources.Settings_Proxy_Port, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-									 Width="54"
 									 MaxLength="5">
 					<metro:PromptTextBox.Text>
 						<Binding Path="SpecificSocksProxyPort"
@@ -206,7 +220,7 @@
 							<Binding.ValidationRules>
 								<metro:Int32Rule Min="1"
 												 Max="65535"
-												 AllowsEmpty="True"/>
+													 AllowsEmpty="True" />
 							</Binding.ValidationRules>
 						</Binding>
 					</metro:PromptTextBox.Text>
@@ -214,40 +228,40 @@
 			</Grid>
 		</StackPanel>
 
+			<Border Height="8" />
 		<StackPanel Orientation="Horizontal"
-					HorizontalAlignment="Right"
-					Margin="0,0,3,8">
+						HorizontalAlignment="Right">
 			<metro2:CallMethodButton MethodTarget="{Binding}"
 									 MethodName="Apply"
 									 Content="{Binding Resources.Common_Apply, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 MinWidth="110"
-									 Padding="16,6"
-									 Margin="4,2" />
+										 Padding="16,6" />
+				<Border Width="8" />
 			<metro2:CallMethodButton MethodTarget="{Binding}"
 									 MethodName="Cancel"
 									 Content="{Binding Resources.Common_Cancel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 MinWidth="110"
-									 Padding="16,6"
-									 Margin="4,2,0,4" />
+										 Padding="16,6" />
+			</StackPanel>
 		</StackPanel>
 
-		<Rectangle Height="1"
-				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-
+		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
 		<TextBlock Text="{Binding Resources.Settings_Network_ListenLocally, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
-				   Margin="0,10,0,8" />
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
-		<TextBlock Text="{Binding Resources.Settings_Network_ListenLocallySubtitle, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-				   Style="{DynamicResource DetailTextStyleKey}"
-				   Margin="20,0,0,0" />
-		<CheckBox Content="{Binding Resources.Settings_Network_ListenPortTitle, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-				  IsChecked="{Binding Source={x:Static ms:NetworkSettings+LocalProxy.IsEnabled}, Path=Value}"
-				  Margin="20,10,0,0" />
+		<StackPanel Margin="20,0,0,0">
+			<TextBlock Text="{Binding Resources.Settings_Network_ListenLocallySubtitle, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+					   Style="{DynamicResource DetailTextStyleKey}" />
+
+			<Border Height="8" />
+			<CheckBox Content="{Binding Resources.Settings_Network_ListenPortTitle, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+					  IsChecked="{Binding Source={x:Static ms:NetworkSettings+LocalProxy.IsEnabled}, Path=Value}" />
+
+			<Border Height="4" />
 		<StackPanel IsEnabled="{Binding Source={x:Static ms:NetworkSettings+LocalProxy.IsEnabled}, Path=Value}"
-					Margin="40,6,0,6">
-			<Grid Margin="0,4">
+						Margin="20,0,0,0">
+				<Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="Auto" />
 					<ColumnDefinition Width="Auto" />
@@ -280,11 +294,9 @@
 				</TextBlock>
 			</Grid>
 		</StackPanel>
+		</StackPanel>
 
-
-		<Rectangle Height="1"
-				   Style="{DynamicResource SeparatorRectangleStyleKey}"
-				   Margin="0,0,0,10" />
+		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
 	</StackPanel>
 </UserControl>

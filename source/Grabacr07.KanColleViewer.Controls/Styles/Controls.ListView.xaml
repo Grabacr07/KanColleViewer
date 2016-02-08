@@ -11,9 +11,9 @@
 		<Setter Property="AlternationCount"
 				Value="2" />
 		<Setter Property="VirtualizingPanel.VirtualizationMode"
-				Value="Recycling"/>
+				Value="Recycling" />
 		<Setter Property="VirtualizingPanel.ScrollUnit"
-				Value="Pixel"/>
+				Value="Pixel" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type ListView}">
@@ -42,7 +42,7 @@
 		<Setter Property="BorderBrush"
 				Value="{DynamicResource BorderBrushKey}" />
 		<Setter Property="BorderThickness"
-				Value="0,0,0,1" />
+				Value="0,0,0,.99" />
 		<Setter Property="FocusVisualStyle"
 				Value="{x:Null}" />
 		<Setter Property="HorizontalContentAlignment"
@@ -71,7 +71,7 @@
 		<Setter Property="OverridesDefaultStyle"
 				Value="True" />
 		<Setter Property="BorderThickness"
-				Value="0,0,1,1" />
+				Value="0,0,.99,.99" />
 		<Setter Property="BorderBrush"
 				Value="{DynamicResource BorderBrushKey}" />
 		<Setter Property="Background"

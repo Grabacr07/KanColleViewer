@@ -47,5 +47,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 艦隊に入渠中の艦娘がいます。
 		/// </summary>
 		Repairing = 1 << 6,
+
+		/// <summary>
+		/// 旗艦が工作艦です。
+		/// </summary>
+		FlagshipIsRepairShip = 1 << 7,
 	}
 }

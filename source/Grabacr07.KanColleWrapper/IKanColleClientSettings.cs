@@ -30,5 +30,10 @@ namespace Grabacr07.KanColleWrapper
 		bool EnableUpdates { get; }
 
 		bool EnableAutosubmission { get; }
+
+		/// <summary>
+		/// 艦隊ステータスにおいて、旗艦が工作艦かどうかを確認するかどうかを示す値を取得します。
+		/// </summary>
+		bool CheckFlagshipIsRepairShip { get; }
 	}
 }
