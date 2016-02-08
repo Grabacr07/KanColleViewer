@@ -76,7 +76,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 				DisplayViewModel.Create(ExitConfirmationType.Always, Resources.Settings_Window_ConfirmExit_Always),
 			};
 			this.TaskbarProgressFeatures = EnumerableEx
-				.Return(GeneralSettings.TaskbarProgressSource.ToDefaultDisplay("使用しない"))
+				.Return(GeneralSettings.TaskbarProgressSource.ToDefaultDisplay(Resources.TaskbarIndicator_DoNotUse))
 				.Concat(TaskbarProgress.Features.ToDisplay(x => x.Id, x => x.DisplayName))
 				.ToList();
 		}

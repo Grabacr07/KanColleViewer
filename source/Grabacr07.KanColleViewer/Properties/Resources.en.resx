@@ -1399,8 +1399,29 @@ Small Radar LoS × (1.00) + Large Radar LoS × (0.99) +
   <data name="Settings_Operation_CheckFlagshipIsNotRepairShip" xml:space="preserve">
     <value>Check that the flagship is not a repair ship</value>
   </data>
+  <data name="Settings_Operation_AutomaticFleetSelection" xml:space="preserve">
+    <value>Automatically select fleets</value>
+  </data>
+  <data name="Settings_Operation_AutomaticFleetSelection_OnOrganisation" xml:space="preserve">
+    <value>When fleet composition is changed</value>
+  </data>
+  <data name="Settings_Operation_AutomaticFleetSelection_OnSortie" xml:space="preserve">
+    <value>When a fleet sorties</value>
+  </data>
+  <data name="Settings_Window_Taskbar" xml:space="preserve">
+    <value>Taskbar Button Settings</value>
+  </data>
+  <data name="Settings_Window_Taskbar_IndicatorBehaviour" xml:space="preserve">
+    <value>Indicator behaviour</value>
+  </data>
+  <data name="Settings_Window_Taskbar_IndicatorBehaviour_OnSortie" xml:space="preserve">
+    <value>Indicator behaviour during sortie</value>
+  </data>
+  <data name="TaskbarIndicator_DoNotUse" xml:space="preserve">
+    <value>Disable</value>
+  </data>
   <data name="ShipCatalog_Column_TTR" xml:space="preserve">
-    <value>Repair ETA</value>
+    <value>Repairs</value>
   </data>
   <data name="ShipCatalog_Column_TTR_ToolTip" xml:space="preserve">
     <value>Time until the repairs finish.</value>
