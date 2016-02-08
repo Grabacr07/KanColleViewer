@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
+using MetroTrilithon.Threading.Tasks;
 
 namespace Grabacr07.KanColleWrapper
 {

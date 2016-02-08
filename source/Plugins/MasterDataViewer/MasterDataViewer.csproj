@@ -149,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="$(SolutionDir)\Analyzers\KanColleViewer.PluginAnalyzer\bin\$(Configuration)\KanColleViewer.Composition.dll" />
+    <Analyzer Include="$(SolutionDir)\Analyzers\KanColleViewer.PluginAnalyzer\bin\$(Configuration)\KanColleViewer.PluginAnalyzer.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>mkdir "$(SolutionDir)Grabacr07.KanColleViewer\bin\$(ConfigurationName)\Plugins"

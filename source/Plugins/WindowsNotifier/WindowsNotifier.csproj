@@ -62,7 +62,6 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Xml" />
-    <Reference Include="Windows" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +88,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="$(SolutionDir)\Analyzers\KanColleViewer.PluginAnalyzer\bin\$(Configuration)\KanColleViewer.Composition.dll" />
+    <Analyzer Include="$(SolutionDir)\Analyzers\KanColleViewer.PluginAnalyzer\bin\$(Configuration)\KanColleViewer.PluginAnalyzer.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

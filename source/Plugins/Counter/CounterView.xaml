@@ -36,7 +36,7 @@
 					<DataTemplate>
 						<Border Margin="4"
 								Padding="0,0,0,8"
-								BorderThickness="0,0,0,1"
+								BorderThickness="0,0,0,.99"
 								BorderBrush="{DynamicResource BorderBrushKey}">
 							<Grid>
 								<Grid.ColumnDefinitions>

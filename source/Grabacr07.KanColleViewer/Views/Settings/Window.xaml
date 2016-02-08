@@ -29,8 +29,8 @@
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 		<StackPanel Orientation="Horizontal"
-					Margin="20,0,0,10">
-            <TextBlock Text="{Binding Resources.Settings_Window_ConfirmExit, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+					Margin="20,0,0,00">
+			<TextBlock Text="{Binding Resources.Settings_Window_ConfirmExit, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					   Margin="0,0,10,0" />
 			<metro:PromptComboBox ItemsSource="{Binding ExitConfirmationTypes}"
 								  DisplayMemberPath="Display"
@@ -40,34 +40,53 @@
 								  MinWidth="140" />
 		</StackPanel>
 
-		<Rectangle Height="1"
-				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
 		<TextBlock Text="タスク バー設定"
-				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
-				   Margin="0,10" />
-		<StackPanel Orientation="Horizontal"
-					Margin="20,0,0,10">
-			<TextBlock Text="インジケーターの動作"
-					   Margin="0,0,10,0" />
-			<metro:PromptComboBox ItemsSource="{Binding TaskbarProgressFeatures}"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+
+		<Grid Margin="20,0,0,00">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="4" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="10" />
+				<ColumnDefinition Width="160" />
+			</Grid.ColumnDefinitions>
+			<TextBlock Grid.Row="0"
+					   Grid.Column="0"
+					   Text="インジケーターの動作" />
+			<metro:PromptComboBox Grid.Row="0"
+								  Grid.Column="2"
+								  ItemsSource="{Binding TaskbarProgressFeatures}"
 								  DisplayMemberPath="Display"
 								  SelectedValuePath="Value"
 								  SelectedValue="{Binding Source={x:Static ms:GeneralSettings.TaskbarProgressSource}, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-								  Prompt=""
-								  MinWidth="140" />
-		</StackPanel>
+								  Prompt="" />
+			<TextBlock Grid.Row="2"
+					   Grid.Column="0"
+					   Text="インジケーターの動作 (出撃中)" />
+			<metro:PromptComboBox Grid.Row="2"
+								  Grid.Column="2"
+								  ItemsSource="{Binding TaskbarProgressFeatures}"
+								  DisplayMemberPath="Display"
+								  SelectedValuePath="Value"
+								  SelectedValue="{Binding Source={x:Static ms:GeneralSettings.TaskbarProgressSourceWhenSortie}, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+								  Prompt="" />
+		</Grid>
 
-		<Rectangle Height="1"
-				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
 		<TextBlock Text="{Binding Resources.Settings_WindowControl, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
-				   Margin="0,10" />
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+
 		<metro2:CallMethodButton MethodTarget="{Binding Source={x:Static root:WindowService.Current}}"
 								 MethodName="SetLocationLeft"
 								 Padding="20,4"
-								 Margin="20,0,0,10"
+								 Margin="20,0,0,0"
 								 HorizontalAlignment="Left">
 			<StackPanel>
 				<TextBlock Text="{Binding Resources.Settings_WindowControl_LocationLeftButton, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
@@ -82,12 +101,10 @@
 		</metro2:CallMethodButton>
 
 		<StackPanel Visibility="{Binding Source={x:Static ms:GeneralSettings.IsProxyMode}, Path=Value, Converter={StaticResource UniversalBooleanToVisibilityConverter}, ConverterParameter=Colappsed:Visible}">
-			<Rectangle Height="1"
-					   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
-            <TextBlock Text="{Binding Resources.Settings_Window_Layout, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-					   Style="{DynamicResource SettingsHeaderTextStyleKey}"
-					   Margin="0,10" />
+			<TextBlock Text="{Binding Resources.Settings_Window_Layout, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+					   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 			<StackPanel HorizontalAlignment="Left">
 				<UniformGrid Rows="1"
@@ -98,7 +115,7 @@
 							<Setter Property="Content"
 									Value="{Binding Resources.Settings_Window_Layout_InfoPane, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 							<Setter Property="BorderThickness"
-									Value="1" />
+									Value=".99" />
 							<Setter Property="Background"
 									Value="{DynamicResource SemiactiveBackgroundBrushKey}" />
 							<Setter Property="BorderBrush"
@@ -236,7 +253,7 @@
 						<Border.Style>
 							<Style TargetType="{x:Type Border}">
 								<Setter Property="BorderThickness"
-										Value="1" />
+										Value=".99" />
 								<Setter Property="BorderBrush"
 										Value="{DynamicResource ActiveBackgroundBrushKey}" />
 								<Style.Triggers>
@@ -292,7 +309,7 @@
 						<Border.Style>
 							<Style TargetType="{x:Type Border}">
 								<Setter Property="BorderThickness"
-										Value="1" />
+										Value=".99" />
 								<Setter Property="BorderBrush"
 										Value="{DynamicResource ActiveBackgroundBrushKey}" />
 								<Style.Triggers>
@@ -353,7 +370,7 @@
 
 				<StackPanel Orientation="Horizontal"
 							HorizontalAlignment="Center"
-							Margin="16,0,0,8">
+							Margin="16,0,0,-2">
 					<metro2:CallMethodButton MethodTarget="{Binding}"
 											 MethodName="Apply"
 											 Content="{Binding Resources.Common_Apply, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
@@ -368,11 +385,10 @@
 											 Margin="4,2" />
 				</StackPanel>
 			</StackPanel>
+		</StackPanel>
 
 			<Rectangle Height="1"
-					   Margin="0,0"
-					   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+				   Style="{DynamicResource SeparatorStyleKey}" />
 
 		</StackPanel>
-	</StackPanel>
 </UserControl>

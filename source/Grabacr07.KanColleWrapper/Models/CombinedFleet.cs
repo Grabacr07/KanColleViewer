@@ -90,7 +90,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		private void UpdateName()
 		{
-			this.Name = this.Fleets.Select(x => x.Name).JoinString(", ");
+			this.Name = this.Fleets.Select(x => x.Name).JoinString(Environment.NewLine);
 		}
 	}
 }

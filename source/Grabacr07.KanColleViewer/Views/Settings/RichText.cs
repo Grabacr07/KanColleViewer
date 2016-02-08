@@ -47,4 +47,11 @@ namespace Grabacr07.KanColleViewer.Views.Settings
 		{
 		}
 	}
+
+	public class TaskbarProgressText : FunctionLink<ITaskbarProgress>
+	{
+		public override void Click()
+		{
+		}
+	}
 }

@@ -50,12 +50,12 @@ namespace Grabacr07.KanColleViewer.PluginAnalyzer
 			context.RegisterCodeFix(codeAction, diagnostic);
 
 			//他のIPluginで使われてないGUIDを持ってるPluginFeatureがいたらそのGUIDを候補に
-			var candidates = features.Where(x => plugins.All(y => x.GetGuidMetadataValue() != y.GetGuidMetadataValue()));
+			var candidates = features.Where(x => plugins.All(y => x.GetGuidMetadataValue(model) != y.GetGuidMetadataValue(model)));
 			foreach (var candidate in candidates)
 			{
 				var additionalAction = CodeAction.Create(
 					$"Use Guid of {candidate.Identifier}",
-					_ => FixGuidExportMetadata(context.Document, root, classDeclaration, candidate.GetGuidMetadataValue()),
+					_ => FixGuidExportMetadata(context.Document, root, classDeclaration, candidate.GetGuidMetadataValue(model).ToString().ToUpper()),
 					$"{DuplicateGuidAnalyzer.DiagnosticId} Use Guid of {candidate.Identifier}");
 				context.RegisterCodeFix(additionalAction, diagnostic);
 			}

@@ -1366,4 +1366,10 @@ HTTP proxy settings are applied immediately. Settings for all other protocols ar
   <data name="Settings_Plugins_PluginSettingsTitle" xml:space="preserve">
     <value>Settings for {0}</value>
   </data>
+  <data name="Common_Minimum" xml:space="preserve">
+    <value>min</value>
+  </data>
+  <data name="Settings_Operation_CheckFlagshipIsNotRepairShip" xml:space="preserve">
+    <value>Check that the flagship is not a repair ship</value>
+  </data>
 </root>

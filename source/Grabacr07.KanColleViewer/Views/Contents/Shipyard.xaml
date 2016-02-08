@@ -19,7 +19,7 @@
             <Setter Property="OverridesDefaultStyle"
                     Value="True" />
             <Setter Property="BorderThickness"
-                    Value="1" />
+                    Value=".99" />
             <Setter Property="BorderBrush"
                     Value="{DynamicResource BorderBrushKey}" />
             <Setter Property="Background"
@@ -131,7 +131,7 @@
                                                     Value="8,2,16,0" />
                                         </Style>
                                     </DataTemplate.Resources>
-                                    <Border BorderThickness="0,1,0,0"
+                                    <Border BorderThickness="0,.99,0,0"
                                             BorderBrush="{DynamicResource ActiveBorderBrushKey}"
                                             Padding="8,6">
                                         <Grid>
@@ -266,7 +266,7 @@
                                                     Value="8,2,16,0" />
                                         </Style>
                                     </DataTemplate.Resources>
-                                    <Border BorderThickness="0,1,0,0"
+                                    <Border BorderThickness="0,.99,0,0"
                                             BorderBrush="{DynamicResource ActiveBorderBrushKey}"
                                             Padding="8,6">
                                         <Grid>
@@ -370,7 +370,7 @@
 
                     <Border Grid.Column="1"
                             BorderBrush="{DynamicResource BorderBrushKey}"
-                            BorderThickness="1,1,0,0">
+                            BorderThickness=".99,.99,0,0">
                         <DockPanel>
                             <StackPanel DockPanel.Dock="Bottom"
                                         Margin="10,6">

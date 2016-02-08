@@ -24,24 +24,20 @@
         <TextBlock Text="{Binding Resources.Settings_Notifications, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
-		<StackPanel Margin="20,-5,0,10">
-            <CheckBox Content="{Binding Resources.Settings_Notifications_Construction_Enabled, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.NotifyBuildingCompleted}, Path=Value}"
-					  Margin="0,5" />
+		<StackPanel Margin="20,0,0,0">
+			<CheckBox Content="{Binding Resources.Settings_Notifications_Construction_Enabled, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.NotifyBuildingCompleted}, Path=Value}" />
 
-			<Border Height="1"
-					Background="{DynamicResource ActiveBorderBrushKey}"
-					Margin="0,5" />
+			<Rectangle Style="{DynamicResource SeparatorStyleKey}"
+					   Margin="0,8" />
 
 			<DockPanel>
 				<StackPanel VerticalAlignment="Center">
-                    <CheckBox Content="{Binding Resources.Settings_Notifications_Expeditions_Enabled, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-							  IsChecked="{Binding Source={x:Static ms:KanColleSettings.NotifyExpeditionReturned}, Path=Value}"
-							  Margin="0,5" />
-
-                    <CheckBox Content="{Binding Resources.Settings_Notifications_Repair_Enabled, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-							  IsChecked="{Binding Source={x:Static ms:KanColleSettings.NotifyRepairingCompleted}, Path=Value}"
-							  Margin="0,5" />
+					<CheckBox Content="{Binding Resources.Settings_Notifications_Expeditions_Enabled, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+							  IsChecked="{Binding Source={x:Static ms:KanColleSettings.NotifyExpeditionReturned}, Path=Value}" />
+					<Border Height="8" />
+					<CheckBox Content="{Binding Resources.Settings_Notifications_Repair_Enabled, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+							  IsChecked="{Binding Source={x:Static ms:KanColleSettings.NotifyRepairingCompleted}, Path=Value}" />
 				</StackPanel>
 
 				<Border Width="1"
@@ -76,27 +72,28 @@
 						   Style="{DynamicResource DetailTextStyleKey}" />
 			</DockPanel>
 
-			<Border Height="1"
-					Background="{DynamicResource ActiveBorderBrushKey}"
-					Margin="0,5" />
+			<Rectangle Style="{DynamicResource SeparatorStyleKey}"
+					   Margin="0,8" />
 
-            <CheckBox Content="{Binding Resources.Settings_Notifications_FleetsMorale, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.NotifyFleetRejuvenated}, Path=Value}"
-					  Margin="0,5" />
+			<CheckBox Content="{Binding Resources.Settings_Notifications_FleetsMorale, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.NotifyFleetRejuvenated}, Path=Value}" />
 
 			<StackPanel Margin="20,0,0,0">
-				<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}"
-						   Margin="0,3,0,1">
+				<Border Height="8" />
+				<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}">
 					<Run Text="{Binding Resources.Settings_Notifications_FleetsMorale_Threshold, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" /><Run Text=":" />
 					<Run Text="{Binding Source={x:Static ms:KanColleSettings.ReSortieCondition}, Path=Value}" />
 				</TextBlock>
-                <TextBlock Text="{Binding Resources.Settings_Notifications_FleetsMorale_Reference, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+				<Border Height="2" />
+				<TextBlock Text="{Binding Resources.Settings_Notifications_FleetsMorale_Reference, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 						   Style="{DynamicResource DetailTextStyleKey}"
-						   FontSize="10.5"
-						   Margin="0,0,0,8" />
-                <TextBlock Text="{Binding Resources.Settings_Notifications_FleetsMorale_Description, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+						   FontSize="10.5" />
+				<Border Height="8" />
+				<TextBlock Text="{Binding Resources.Settings_Notifications_FleetsMorale_Description, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 						   Style="{DynamicResource DetailTextStyleKey}" />
 			</StackPanel>
 		</StackPanel>
+
+		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 	</StackPanel>
 </UserControl>

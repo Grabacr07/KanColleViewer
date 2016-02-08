@@ -22,5 +22,10 @@ namespace Grabacr07.KanColleWrapper
 		/// 索敵計算に使用するロジックを識別する文字列を取得します。
 		/// </summary>
 		string ViewRangeCalcType { get; }
+
+		/// <summary>
+		/// 艦隊ステータスにおいて、旗艦が工作艦かどうかを確認するかどうかを示す値を取得します。
+		/// </summary>
+		bool CheckFlagshipIsRepairShip { get; }
 	}
 }

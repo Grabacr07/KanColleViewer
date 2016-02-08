@@ -2,15 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleWrapper;
-using Livet.EventListeners;
+using Grabacr07.KanColleWrapper.Models;
 using Livet.Messaging;
+using MetroTrilithon.Lifetime;
 using MetroTrilithon.Mvvm;
+using StatefulModel;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 {
 	public class FleetsViewModel : TabItemViewModel
 	{
+		private MultipleDisposable fleetListeners;
+
 		public override string Name
 		{
 			get { return Properties.Resources.Fleets; }
@@ -65,20 +70,37 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			KanColleClient.Current.Homeport.Organization
 				.Subscribe(nameof(Organization.Fleets), this.UpdateFleets)
 				.AddTo(this);
+			Disposable
+				.Create(() => this.fleetListeners?.Dispose())
+				.AddTo(this);
 		}
 
 		public void ShowFleetWindow()
 		{
 			var fleetwd = new FleetWindowViewModel();
-			var message = new TransitionMessage(fleetwd, TransitionMode.Normal, "Show/FleetWindow");
+			var message = new TransitionMessage(fleetwd, TransitionMode.Normal, "FleetWindow.Show");
 			this.Messenger.Raise(message);
 		}
 
 
 		private void UpdateFleets()
 		{
-			this.Fleets = KanColleClient.Current.Homeport.Organization.Fleets.Select(kvp => new FleetViewModel(kvp.Value)).ToArray();
+			this.fleetListeners?.Dispose();
+			this.fleetListeners = new MultipleDisposable();
+
+			this.Fleets = KanColleClient.Current.Homeport.Organization.Fleets
+				.Select(kvp => this.ToViewModel(kvp.Value))
+				.ToArray();
 			this.SelectedFleet = this.Fleets.FirstOrDefault();
+		}
+
+		private FleetViewModel ToViewModel(Fleet fleet)
+		{
+			var vm = new FleetViewModel(fleet).AddTo(this.fleetListeners);
+			fleet.Subscribe(nameof(Fleet.ShipsUpdated), () => { if (KanColleSettings.AutoFleetSelectWhenShipsChanged) this.SelectedFleet = vm; }, false).AddTo(this.fleetListeners);
+			fleet.Subscribe(nameof(Fleet.IsInSortie), () => { if (KanColleSettings.AutoFleetSelectWhenSortie) this.SelectedFleet = vm; }, false).AddTo(this.fleetListeners);
+
+			return vm;
 		}
 	}
 }

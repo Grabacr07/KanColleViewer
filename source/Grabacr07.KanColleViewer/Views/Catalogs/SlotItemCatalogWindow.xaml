@@ -78,7 +78,7 @@
 			</Border>
 
 			<Border BorderBrush="{DynamicResource BorderBrushKey}"
-					BorderThickness="1"
+					BorderThickness=".99"
 					Margin="8">
 				<ListView ItemsSource="{Binding SlotItems}"
 						  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}"
@@ -93,7 +93,7 @@
 							<Setter Property="OverridesDefaultStyle"
 									Value="True" />
 							<Setter Property="BorderThickness"
-									Value="0,0,0,1" />
+									Value="0,0,0,.99" />
 							<Setter Property="BorderBrush"
 									Value="{DynamicResource BorderBrushKey}" />
 							<Setter Property="Background"
@@ -331,7 +331,7 @@
 		<Border Grid.Row="1"
 				Background="{DynamicResource ThemeBrushKey}"
 				BorderBrush="{DynamicResource BorderBrushKey}"
-				BorderThickness="1"
+				BorderThickness=".99"
 				Opacity="0.75"
 				Margin="8,0,8,8"
 				Padding="20"

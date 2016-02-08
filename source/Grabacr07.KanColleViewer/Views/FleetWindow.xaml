@@ -391,18 +391,18 @@
 											<StackPanel Grid.Column="2"
 														Orientation="Horizontal" >
 												<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}"
-														   Style="{DynamicResource DefaultTextStyleKey}"
-														   Margin="5,1">
-													<Run Text="{Binding Item.Info.Name, Mode=OneWay}" />
-													<Run Text="{Binding Item.LevelText, Mode=OneWay}"
-														 Foreground="#FF45A9A5" />
+													   Style="{DynamicResource DefaultTextStyleKey}"
+													   Margin="5,1">
+												<Run Text="{Binding Item.Info.Name, Mode=OneWay}" />
+												<Run Text="{Binding Item.LevelText, Mode=OneWay}"
+													 Foreground="#FF45A9A5" />
 													<!--<Run Foreground="{DynamicResource ForegroundBrushKey}">
 														<MultiBinding StringFormat="{}({0} {1})">
 															<Binding Source="{x:Static models:ResourceService.Current}" Path="Resources.Ship_Text_Adept" Mode="OneWay" />
 															<Binding Path="Item.Adept" Mode="OneWay" />
 														</MultiBinding>
 													</Run>-->
-												</TextBlock>
+											</TextBlock>
 												<Viewbox Height="12pt">
 													<kcvc:AircraftProficiencyIcon Level="{Binding Path=Item.Adept, Mode=OneWay}" />
 												</Viewbox>
@@ -498,23 +498,20 @@
 		</Border>
 		<!-- #endregion -->
 
-		<Grid Grid.Row="1">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto" />
-				<RowDefinition />
-			</Grid.RowDefinitions>
-
-			<Grid>
+		<Grid Grid.Row="1"
+			  Margin="4">
 				<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
 					<ColumnDefinition />
-					<ColumnDefinition Width="2.4*" />
 				</Grid.ColumnDefinitions>
 
-				<ListBox ItemsSource="{Binding Fleets}"
+			<DockPanel>
+				<ListBox DockPanel.Dock="Top"
+						 ItemsSource="{Binding Fleets}"
 						 SelectedValue="{Binding SelectedFleet}"
 						 SelectionMode="Single"
 						 Background="Transparent"
-						 Margin="8,8,0,0">
+						 Margin="4">
 					<ListBox.Template>
 						<ControlTemplate TargetType="{x:Type ListBox}">
 							<Border BorderThickness="0,1,1,1"
@@ -587,18 +584,12 @@
 					</ListBox.Resources>
 				</ListBox>
 
-				<Grid Grid.Column="1"
+				<Border DockPanel.Dock="Top"
 					  DataContext="{Binding SelectedFleet}"
-					  d:DataContext="{d:DesignInstance fleetsVm:FleetViewModel}">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="Auto" />
-						<ColumnDefinition />
-					</Grid.ColumnDefinitions>
-
-
-					<Border BorderThickness="1"
+						d:DataContext="{d:DesignInstance fleetsVm:FleetViewModel}"
+						BorderThickness=".99"
 							BorderBrush="{DynamicResource BorderBrushKey}"
-							Margin="8,8,0,0"
+						Margin="4"
 							Padding="8,4">
 						<Grid HorizontalAlignment="Center">
 							<Grid.RowDefinitions>
@@ -607,6 +598,7 @@
 								<RowDefinition Height="4" />
 								<RowDefinition Height="Auto" />
 								<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
 								<RowDefinition Height="4" />
 								<RowDefinition Height="Auto" />
 								<RowDefinition Height="Auto" />
@@ -665,20 +657,51 @@
 									   HorizontalAlignment="Right"
 									   VerticalAlignment="Bottom"
 									   Margin="1,2">
-								<Run Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.FleetWindow_AirSuperiority, StringFormat='{}{0}', Mode=OneWay}" /><Run Text=":" />
+							<Run Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.FleetWindow_AirSuperiority, StringFormat='{}{0}', Mode=OneWay}" />
+							<Run Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Common_Minimum, StringFormat='{}({0})', Mode=OneWay}"
+								 Style="{DynamicResource DetailTextElementStyleKey}" />
+							<Run Text=":" />
 							</TextBlock>
 							<TextBlock Grid.Row="4"
 									   Grid.Column="1"
 									   Style="{DynamicResource EmphaticTextStyleKey}"
 									   VerticalAlignment="Bottom"
 									   Margin="4,2">
+							<FrameworkElement.ToolTip>
+								<TextBlock Text="艦戦のみで、内部熟練度を最小として計算しています。"
+										   Style="{DynamicResource DefaultTextStyleKey}" />
+							</FrameworkElement.ToolTip>
 								<Run Text="{Binding State.MinAirSuperiorityPotential, Mode=OneWay}" />
-								<Run Text="-" />
+							<Run Text="※"
+								 Style="{DynamicResource DefaultTextElementStyleKey}" />
+						</TextBlock>
+
+						<TextBlock Grid.Row="5"
+								   Grid.Column="0"
+								   Style="{DynamicResource DefaultTextStyleKey}"
+								   HorizontalAlignment="Right"
+								   VerticalAlignment="Bottom"
+								   Margin="1,2">
+							<Run Text="制空値" />
+							<Run Text="(最大)"
+								 Style="{DynamicResource DetailTextElementStyleKey}" />
+							<Run Text=":" />
+						</TextBlock>
+						<TextBlock Grid.Row="5"
+								   Grid.Column="1"
+								   Style="{DynamicResource EmphaticTextStyleKey}"
+								   VerticalAlignment="Bottom"
+								   Margin="4,2">
+							<FrameworkElement.ToolTip>
+								<TextBlock Text="全艦載機で、内部熟練度を最大として計算しています。"
+										   Style="{DynamicResource DefaultTextStyleKey}" />
+							</FrameworkElement.ToolTip>
 								<Run Text="{Binding State.MaxAirSuperiorityPotential, Mode=OneWay}" />
-								<Run Text="" />
+							<Run Text="※"
+								 Style="{DynamicResource DefaultTextElementStyleKey}" />
 							</TextBlock>
 
-							<TextBlock Grid.Row="6"
+						<TextBlock Grid.Row="7"
 									   Grid.Column="0"
 									   Grid.ColumnSpan="2"
 									   Text="{Binding State.Speed}"
@@ -687,7 +710,7 @@
 									   VerticalAlignment="Bottom"
 									   Margin="4,2" />
 
-							<TextBlock Grid.Row="7"
+						<TextBlock Grid.Row="8"
 									   Grid.Column="0"
 									   Style="{DynamicResource DefaultTextStyleKey}"
 									   HorizontalAlignment="Right"
@@ -696,7 +719,7 @@
 									   Visibility="Collapsed">
 								<Run Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.FleetWindow_Status, StringFormat='{}{0}', Mode=OneWay}" /><Run Text=":" />
 							</TextBlock>
-							<TextBlock Grid.Row="7"
+						<TextBlock Grid.Row="8"
 									   Grid.Column="1"
 									   Text="9999"
 									   Style="{DynamicResource EmphaticTextStyleKey}"
@@ -706,8 +729,11 @@
 						</Grid>
 					</Border>
 
-					<Border Grid.Column="1"
-							Margin="6">
+				<ScrollViewer HorizontalScrollBarVisibility="Disabled"
+							  VerticalScrollBarVisibility="Auto"
+							  Margin="4,5,4,4">
+					<Border DataContext="{Binding SelectedFleet}"
+							d:DataContext="{d:DesignInstance fleetsVm:FleetViewModel}">
 						<Border.Resources>
 							<Style x:Key="IndicatorTextBlockStyleKey"
 								   TargetType="{x:Type TextBlock}">
@@ -719,10 +745,10 @@
 										Value="{DynamicResource ForegroundBrushKey}" />
 								<Setter Property="Background"
 										Value="{DynamicResource BorderBrushKey}" />
+								<Setter Property="Margin"
+										Value="0,0,0,4" />
 								<Setter Property="Padding"
 										Value="12,6" />
-								<Setter Property="Margin"
-										Value="2" />
 							</Style>
 						</Border.Resources>
 						<StackPanel>
@@ -773,7 +799,6 @@
 								</TextBlock.Style>
 							</TextBlock>
 
-							<UniformGrid Columns="2">
 								<TextBlock>
 									<TextBlock.Style>
 										<Style TargetType="{x:Type TextBlock}"
@@ -968,15 +993,39 @@
 										</Style>
 									</TextBlock.Style>
 								</TextBlock>
-							</UniformGrid>
+
+							<TextBlock>
+								<TextBlock.Style>
+									<Style TargetType="{x:Type TextBlock}"
+										   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
+										<Setter Property="Text"
+												Value="艦隊編成は正常です" />
+										<Style.Triggers>
+											<MultiDataTrigger>
+												<MultiDataTrigger.Conditions>
+													<Condition Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=FlagshipIsRepairShip}"
+															   Value="True" />
+												</MultiDataTrigger.Conditions>
+												<Setter Property="Text"
+														Value="工作艦が旗艦として編成されています" />
+												<Setter Property="Foreground"
+														Value="{DynamicResource ActiveForegroundBrushKey}" />
+												<Setter Property="Background"
+														Value="{DynamicResource FleetRepairingBrushKey}" />
+											</MultiDataTrigger>
+										</Style.Triggers>
+									</Style>
+								</TextBlock.Style>
+							</TextBlock>
 						</StackPanel>
 					</Border>
-				</Grid>
-			</Grid>
+				</ScrollViewer>
+			</DockPanel>
 
-			<Border Grid.Row="1"
+			<Border Grid.Column="1"
 					DataContext="{Binding SelectedFleet}"
-					d:DataContext="{d:DesignInstance fleetsVm:FleetViewModel}">
+					d:DataContext="{d:DesignInstance fleetsVm:FleetViewModel}"
+					Margin="4">
 				<Grid>
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto" />
@@ -985,9 +1034,8 @@
 					</Grid.RowDefinitions>
 
 					<Border Grid.Row="2"
-							BorderThickness="1"
-							BorderBrush="{DynamicResource BorderBrushKey}"
-							Margin="8">
+							BorderThickness=".99"
+							BorderBrush="{DynamicResource BorderBrushKey}">
 						<ScrollViewer HorizontalScrollBarVisibility="Auto"
 									  VerticalScrollBarVisibility="Auto"
 									  PanningMode="Both">
@@ -1036,9 +1084,8 @@
 
 					<!-- ☟☟☟ デザイン時に使うやつ ☟☟☟ -->
 					<Border Grid.Row="2"
-							BorderThickness="1"
+							BorderThickness=".99"
 							BorderBrush="{DynamicResource BorderBrushKey}"
-							Margin="8"
 							IsEnabled="{Binding Source={x:Static models:Helper.IsInDesignMode}, Mode=OneWay}"
 							Visibility="{Binding Source={x:Static models:Helper.IsInDesignMode}, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
 						<ContentControl d:DataContext="{d:DesignData /SampleData/ShipViewModelSampleData.xaml}">

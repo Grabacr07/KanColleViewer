@@ -133,6 +133,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 最小.
+        /// </summary>
+        public static string Common_Minimum {
+            get {
+                return ResourceManager.GetString("Common_Minimum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 通知しない.
         /// </summary>
         public static string Common_Notifications_Disable {
@@ -1840,6 +1849,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Settings_Operation {
             get {
                 return ResourceManager.GetString("Settings_Operation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 旗艦に工作艦が編成されているときは出撃可能と判断しない.
+        /// </summary>
+        public static string Settings_Operation_CheckFlagshipIsNotRepairShip {
+            get {
+                return ResourceManager.GetString("Settings_Operation_CheckFlagshipIsNotRepairShip", resourceCulture);
             }
         }
         

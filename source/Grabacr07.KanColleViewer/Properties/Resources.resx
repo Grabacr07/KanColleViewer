@@ -1358,4 +1358,10 @@ HTTP プロトコルの通信は自動構成も含め「インターネット �
   <data name="Ship_Evacuating" xml:space="preserve">
     <value>退避済</value>
   </data>
+  <data name="Common_Minimum" xml:space="preserve">
+    <value>最小</value>
+  </data>
+  <data name="Settings_Operation_CheckFlagshipIsNotRepairShip" xml:space="preserve">
+    <value>旗艦に工作艦が編成されているときは出撃可能と判断しない</value>
+  </data>
 </root>

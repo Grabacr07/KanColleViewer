@@ -98,6 +98,16 @@
 					</metro2:RichTextInlinePresenter>
 				</DataTemplate>
 
+				<DataTemplate DataType="{x:Type settings:TaskbarProgressText}">
+					<metro2:RichTextInlinePresenter>
+						<Span Foreground="{DynamicResource ForegroundBrushKey}"
+							  FontFamily="{DynamicResource DefaultFontFamilyKey}"
+							  FontSize="{DynamicResource DetailFontSizeKey}">
+							<Run Text="タスク バー インジケーター" />
+							<Run Text="　" />
+						</Span>
+					</metro2:RichTextInlinePresenter>
+				</DataTemplate>
 			</metro2:RichTextView>
 		</DockPanel>
 	</StackPanel>

@@ -61,6 +61,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Composition
 
 				var tool = this.Plugin.OfType<ITool>().FirstOrDefault();
 				if (tool != null) yield return new ToolText { Function = tool, };
+
+				var taskbarProgress = this.Plugin.OfType<ITaskbarProgress>().FirstOrDefault();
+				if (taskbarProgress != null) yield return new TaskbarProgressText { Function = taskbarProgress, };
 			}
 		}
 

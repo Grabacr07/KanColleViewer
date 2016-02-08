@@ -13,7 +13,7 @@
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 mc:Ignorable="d"
 			 d:DesignWidth="500"
-			 d:DesignHeight="300"
+			 d:DesignHeight="500"
 			 d:DataContext="{d:DesignInstance vms:SettingsViewModel}">
 	<UserControl.Resources>
 		<ResourceDictionary>
@@ -42,18 +42,19 @@
 			<TextBlock Text="{Binding Resources.Settings_Plugins_FailedToLoad, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
-			<TextBlock Text="{Binding Resources.Settings_Plugins_FailedToLoadDesc, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+			<StackPanel Margin="20,0,0,0">
+				<TextBlock Text="{Binding Resources.Settings_Plugins_FailedToLoadDesc, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					   Style="{DynamicResource DetailTextStyleKey}"
-					   Foreground="{DynamicResource ActiveForegroundBrushKey}"
-					   Margin="20,0,0,0" />
+						   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 
+				<Border Height="8" />
 			<ItemsControl ItemsSource="{Binding FailedPlugins}"
-						  Margin="20,5,0,5">
+							  Margin="0,-4">
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
-						<Border BorderThickness="1"
+							<Border BorderThickness=".99"
 								BorderBrush="{DynamicResource ValidationErrorBrushKey}"
-								Margin="0,5">
+									Margin="0,4">
 							<StackPanel>
 								<metro:ExpanderButton x:Name="DetailExpander"
 													  Direction="Down"
@@ -106,10 +107,9 @@
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>
 			</ItemsControl>
+			</StackPanel>
 
-			<Rectangle Height="1"
-					   Style="{DynamicResource SeparatorRectangleStyleKey}"
-					   Margin="0,0,0,12" />
+			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 		</StackPanel>
 
 		<TextBlock Text="{Binding Resources.Settings_Plugins_Loaded, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
@@ -120,13 +120,14 @@
 					   Style="{DynamicResource DetailTextStyleKey}"
 					   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 
+			<Border Height="8" />
 			<ItemsControl ItemsSource="{Binding LoadedPlugins}"
-						  Margin="0,5">
+						  Margin="0,-4">
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
-						<Border BorderThickness="1"
+						<Border BorderThickness=".99"
 								BorderBrush="{DynamicResource BorderBrushKey}"
-								Margin="0,5"
+								Margin="0,4"
 								Padding="5">
 							<settings:PluginInfo />
 						</Border>
@@ -134,5 +135,7 @@
 				</ItemsControl.ItemTemplate>
 			</ItemsControl>
 		</StackPanel>
+
+		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 	</StackPanel>
 </UserControl>

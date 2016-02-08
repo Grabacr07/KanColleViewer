@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleViewer.Models.Settings;
@@ -68,7 +67,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 
 		#endregion
 
-
 		public WindowSettingsViewModel()
 		{
 			this.ExitConfirmationTypes = new List<DisplayViewModel<ExitConfirmationType>>
@@ -78,8 +76,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 				DisplayViewModel.Create(ExitConfirmationType.Always, Resources.Settings_Window_ConfirmExit_Always),
 			};
 			this.TaskbarProgressFeatures = EnumerableEx
-				.Return(DisplayViewModel.Create(GeneralSettings.TaskbarProgressSource.Default, "使用しない"))
-				.Concat(TaskbarProgress.Features.Select(x => DisplayViewModel.Create(x.Name, x.Name)))
+				.Return(GeneralSettings.TaskbarProgressSource.ToDefaultDisplay("使用しない"))
+				.Concat(TaskbarProgress.Features.ToDisplay(x => x.Id, x => x.DisplayName))
 				.ToList();
 		}
 
