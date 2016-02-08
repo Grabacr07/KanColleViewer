@@ -42,7 +42,7 @@
 
 		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
-		<TextBlock Text="タスク バー設定"
+		<TextBlock Text="{Binding Resources.Settings_Window_Taskbar, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 		<Grid Margin="20,0,0,00">
@@ -58,7 +58,7 @@
 			</Grid.ColumnDefinitions>
 			<TextBlock Grid.Row="0"
 					   Grid.Column="0"
-					   Text="インジケーターの動作" />
+					   Text="{Binding Resources.Settings_Window_Taskbar_IndicatorBehaviour, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 			<metro:PromptComboBox Grid.Row="0"
 								  Grid.Column="2"
 								  ItemsSource="{Binding TaskbarProgressFeatures}"
@@ -68,7 +68,7 @@
 								  Prompt="" />
 			<TextBlock Grid.Row="2"
 					   Grid.Column="0"
-					   Text="インジケーターの動作 (出撃中)" />
+					   Text="{Binding Resources.Settings_Window_Taskbar_IndicatorBehaviour_OnSortie, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 			<metro:PromptComboBox Grid.Row="2"
 								  Grid.Column="2"
 								  ItemsSource="{Binding TaskbarProgressFeatures}"

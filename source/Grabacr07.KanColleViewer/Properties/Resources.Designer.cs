@@ -1853,6 +1853,33 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 艦隊自動選択.
+        /// </summary>
+        public static string Settings_Operation_AutomaticFleetSelection {
+            get {
+                return ResourceManager.GetString("Settings_Operation_AutomaticFleetSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦隊の編成を変更したとき、その艦隊を自動的に選択する.
+        /// </summary>
+        public static string Settings_Operation_AutomaticFleetSelection_OnOrganisation {
+            get {
+                return ResourceManager.GetString("Settings_Operation_AutomaticFleetSelection_OnOrganisation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 艦隊が出撃したとき、その艦隊を自動的に選択する.
+        /// </summary>
+        public static string Settings_Operation_AutomaticFleetSelection_OnSortie {
+            get {
+                return ResourceManager.GetString("Settings_Operation_AutomaticFleetSelection_OnSortie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 旗艦に工作艦が編成されているときは出撃可能と判断しない.
         /// </summary>
         public static string Settings_Operation_CheckFlagshipIsNotRepairShip {
@@ -2479,6 +2506,33 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Settings_Window_Layout_SingleWindow {
             get {
                 return ResourceManager.GetString("Settings_Window_Layout_SingleWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to タスク バー設定.
+        /// </summary>
+        public static string Settings_Window_Taskbar {
+            get {
+                return ResourceManager.GetString("Settings_Window_Taskbar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to インジケーターの動作.
+        /// </summary>
+        public static string Settings_Window_Taskbar_IndicatorBehaviour {
+            get {
+                return ResourceManager.GetString("Settings_Window_Taskbar_IndicatorBehaviour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to インジケーターの動作 (出撃中).
+        /// </summary>
+        public static string Settings_Window_Taskbar_IndicatorBehaviour_OnSortie {
+            get {
+                return ResourceManager.GetString("Settings_Window_Taskbar_IndicatorBehaviour_OnSortie", resourceCulture);
             }
         }
         
@@ -3676,6 +3730,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string System_Flash_Not_Installed_Text {
             get {
                 return ResourceManager.GetString("System_Flash_Not_Installed_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 使用しない.
+        /// </summary>
+        public static string TaskbarIndicator_DoNotUse {
+            get {
+                return ResourceManager.GetString("TaskbarIndicator_DoNotUse", resourceCulture);
             }
         }
         

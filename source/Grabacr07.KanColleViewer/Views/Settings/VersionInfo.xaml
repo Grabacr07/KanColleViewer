@@ -71,8 +71,8 @@
 				<LineBreak />
 
 				<Run Text="Source code:" />
-				<metro2:HyperlinkEx Uri="https://github.com/Grabacr07/KanColleViewer">
-					<Run Text="https://github.com/Grabacr07/KanColleViewer" />
+				<metro2:HyperlinkEx Uri="https://github.com/Yuubari/KanColleViewer">
+					<Run Text="https://github.com/Yuubari/KanColleViewer" />
 				</metro2:HyperlinkEx>
 
 				<LineBreak />
@@ -91,6 +91,9 @@
 				</metro2:HyperlinkEx>
 				<metro2:HyperlinkEx Uri="https://twitter.com/veigr">
 					<Run Text="@veigr" />
+				</metro2:HyperlinkEx>
+				<metro2:HyperlinkEx Uri="https://twitter.com/Xiatian">
+					<Run Text="@Xiatian" />
 				</metro2:HyperlinkEx>
 
 				<LineBreak />

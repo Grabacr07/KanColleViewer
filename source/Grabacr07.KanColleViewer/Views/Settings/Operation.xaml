@@ -89,15 +89,15 @@
 
 		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
-		<TextBlock Text="艦隊自動選択"
+		<TextBlock Text="{Binding Resources.Settings_Operation_AutomaticFleetSelection, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 		<StackPanel Margin="20,0,0,0">
-			<CheckBox Content="艦隊が出撃したとき、その艦隊を自動的に選択する "
+			<CheckBox Content="{Binding Resources.Settings_Operation_AutomaticFleetSelection_OnSortie, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.AutoFleetSelectWhenSortie}, Path=Value}" />
 
 			<Border Height="8" />
-			<CheckBox Content="艦隊の編成を変更したとき、その艦隊を自動的に選択する"
+			<CheckBox Content="{Binding Resources.Settings_Operation_AutomaticFleetSelection_OnOrganisation, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.AutoFleetSelectWhenShipsChanged}, Path=Value}" />
 		</StackPanel>
 

@@ -1364,4 +1364,25 @@ HTTP プロトコルの通信は自動構成も含め「インターネット �
   <data name="Settings_Operation_CheckFlagshipIsNotRepairShip" xml:space="preserve">
     <value>旗艦に工作艦が編成されているときは出撃可能と判断しない</value>
   </data>
+  <data name="Settings_Operation_AutomaticFleetSelection" xml:space="preserve">
+    <value>艦隊自動選択</value>
+  </data>
+  <data name="Settings_Operation_AutomaticFleetSelection_OnOrganisation" xml:space="preserve">
+    <value>艦隊の編成を変更したとき、その艦隊を自動的に選択する</value>
+  </data>
+  <data name="Settings_Operation_AutomaticFleetSelection_OnSortie" xml:space="preserve">
+    <value>艦隊が出撃したとき、その艦隊を自動的に選択する</value>
+  </data>
+  <data name="Settings_Window_Taskbar" xml:space="preserve">
+    <value>タスク バー設定</value>
+  </data>
+  <data name="Settings_Window_Taskbar_IndicatorBehaviour" xml:space="preserve">
+    <value>インジケーターの動作</value>
+  </data>
+  <data name="Settings_Window_Taskbar_IndicatorBehaviour_OnSortie" xml:space="preserve">
+    <value>インジケーターの動作 (出撃中)</value>
+  </data>
+  <data name="TaskbarIndicator_DoNotUse" xml:space="preserve">
+    <value>使用しない</value>
+  </data>
 </root>
