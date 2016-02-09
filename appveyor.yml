@@ -22,7 +22,7 @@ before_build:
     nuget restore source\KanColleViewer.sln -PackagesDirectory source\packages
 build:
   project: source\KanColleViewer.sln
-#  publish_nuget: true
+  publish_nuget: false
   verbosity: minimal
 artifacts:
 - path: source\Grabacr07.KanColleViewer\bin\Release
@@ -34,4 +34,4 @@ deploy:
   username: $(ftpuser)
   password: $(ftppassword)
   folder: /
-  artifact: /KanColle.*\.nupkg/
+  artifact: /KanColleViewer\.zip/
