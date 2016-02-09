@@ -22,16 +22,36 @@ before_build:
     nuget restore source\KanColleViewer.sln -PackagesDirectory source\packages
 build:
   project: source\KanColleViewer.sln
-#  publish_nuget: true
+  publish_nuget: false
   verbosity: minimal
+after_build:
+- cmd: >-
+    7z a KanColleViewer.zip 
+    %APPVEYOR_BUILD_FOLDER%\source\Grabacr07.KanColleViewer\bin\Release\*.dll
+    %APPVEYOR_BUILD_FOLDER%\source\Grabacr07.KanColleViewer\bin\Release\KanColleViewer.exe
+    %APPVEYOR_BUILD_FOLDER%\source\Grabacr07.KanColleViewer\bin\Release\KanColleViewer.exe.config
+
+    7z a KanColleViewer.zip 
+    %APPVEYOR_BUILD_FOLDER%\source\Grabacr07.KanColleViewer\bin\Release\en
+    %APPVEYOR_BUILD_FOLDER%\source\Grabacr07.KanColleViewer\bin\Release\ko-KR
+    %APPVEYOR_BUILD_FOLDER%\source\Grabacr07.KanColleViewer\bin\Release\zh-CN
+
+    7z a 
+    -xr!*.pdb 
+    -xr!*.xml
+    -xr!*.config
+    -xr!ExPlugin.*
+    KanColleViewer.zip 
+    %APPVEYOR_BUILD_FOLDER%\source\Grabacr07.KanColleViewer\bin\Release\Plugins
 artifacts:
-- path: source\Grabacr07.KanColleViewer\bin\Release
+- path: KanColleViewer.zip
   name: KanColleViewer
 deploy:
 - provider: FTP
+  beta: true
   protocol: ftps
   host: koumakan.jp
   username: $(ftpuser)
   password: $(ftppassword)
-  folder: /
-  artifact: /KanColle.*\.nupkg/
+  folder: $(appveyor_repo_branch)-$(appveyor_build_version)
+  artifact: KanColleViewer.zip
