@@ -1,8 +1,8 @@
 version: '{build}'
 branches:
   only:
-  - master
-  - develop
+  - ui-localisation
+  - translation
 os: Visual Studio 2015
 configuration: Release
 platform: Any CPU
@@ -22,13 +22,16 @@ before_build:
     nuget restore source\KanColleViewer.sln -PackagesDirectory source\packages
 build:
   project: source\KanColleViewer.sln
-  publish_nuget: true
+  publish_nuget: false
   verbosity: minimal
 artifacts:
 - path: source\Grabacr07.KanColleViewer\bin\Release
   name: KanColleViewer
 deploy:
-- provider: NuGet
-  api_key:
-    secure: GrOjr849MkxFz3v7VSIvDNd0ZNZDaUTDeHqRF0InDLzMSuFoDmrqiMaKtIz0MxG8
-  artifact: /KanColle.*\.nupkg/
+- provider: FTP
+  protocol: ftps
+  host: koumakan.jp
+  username: $(ftpuser)
+  password: $(ftppassword)
+  folder: /
+  artifact: /KanColleViewer\.zip/
