@@ -53,7 +53,7 @@ namespace Grabacr07.KanColleViewer.PluginAnalyzer
 				// GUID として解釈できない値か、IPlugin で未定義の GUID が指定されてたらアウト
 				var guidMetadata = syntax.GetGuidMetadata(semanticModel);
 				if (!guidMetadata.HasValue
-					|| plugins.All(x => x.GetGuidMetadataValueSyntax()?.GetGuidMetadata(semanticModel) != guidMetadata))
+					|| plugins.All(x => x.GetGuidMetadataValueSyntax()?.GetGuidMetadata(compilation.GetSemanticModel(x.SyntaxTree)) != guidMetadata))
 				{
 					context.ReportDiagnostic(Diagnostic.Create(InvalidGuidMetadataRule, p.GetLocation()));
 				}
