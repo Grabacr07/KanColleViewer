@@ -134,7 +134,7 @@ namespace Grabacr07.KanColleViewer.PluginAnalyzer
 		{
 			if (syntax == null) return null;
 			var constantValue = semanticModel.GetConstantValue(syntax.Expression);
-			return constantValue.Value?.ToString() ?? null;
+			return constantValue.Value?.ToString();
 		}
 
 		public static AttributeArgumentSyntax GetGuidMetadataValueSyntax(this ClassDeclarationSyntax classDeclaration)
