@@ -41,6 +41,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			new ViewRangeType1();
 			new ViewRangeType2();
 			new ViewRangeType3();
+			new ViewRangeType4();
 			// ReSharper restore ObjectCreationAsStatement
 		}
 

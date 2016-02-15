@@ -65,7 +65,7 @@
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="10" />
-				<ColumnDefinition Width="160" />
+				<ColumnDefinition Width="180" />
 			</Grid.ColumnDefinitions>
 			<TextBlock Grid.Row="0"
 					   Grid.Column="0"

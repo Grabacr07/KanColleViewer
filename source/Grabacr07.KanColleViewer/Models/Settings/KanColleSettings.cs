@@ -64,7 +64,7 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		/// 索敵計算に使用するロジックを識別する文字列の設定値を取得します。
 		/// </summary>
 		public static SerializableProperty<string> ViewRangeCalcType { get; }
-			= new SerializableProperty<string>(GetKey(), Providers.Roaming, new ViewRangeType1().Id);
+			= new SerializableProperty<string>(GetKey(), Providers.Roaming, new ViewRangeType4().Id);
 
 		/// <summary>
 		/// 建造完了時に通知するかどうかを示す設定値を取得します。
