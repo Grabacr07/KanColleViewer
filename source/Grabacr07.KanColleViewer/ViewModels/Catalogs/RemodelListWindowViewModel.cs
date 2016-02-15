@@ -207,15 +207,27 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				var Weekday = "AllWeekdays";
 				//RemodelList에서 오늘 개수공창 목록에 들어갈것들을 선별한다.
 				RemodelList = RemodelList.Where(f => WeekDaySetter(Convert.ToInt32(f.Element(Weekday).Value)).HasFlag(today));
-				//상중하 리스트를 작성
-				this.FirstList = MakeDefaultList(RemodelList, 1);
-				this.SecondList = MakeDefaultList(RemodelList, 2);
-				this.ThirdList = MakeDefaultList(RemodelList, 3);
+				//상중하 리스트를 작성->상중하의 구분을 제거
+				var list = MakeDefaultList(RemodelList).ToList();
+				this.FirstList = SortList(list);
+
 				//소모아이템 리스트를 작성
-				this.UseItemList = MakeUseItemList(RemodelList);
+				var use = MakeUseItemList(RemodelList);
+				this.UseItemList = SortList(use.ToList());
 				//개조 목록을 작성
-				this.Improvement = MakeUpgradeList(RemodelList);
+				var im = MakeUpgradeList(RemodelList);
+				this.Improvement = SortList(im.ToList());
 			}
+		}
+		private List<RemodelItemList> SortList(List<RemodelItemList> myList)
+		{
+			myList.Sort(delegate (RemodelItemList x, RemodelItemList y)
+			{
+
+				return ((int)x.IconType.Value).CompareTo((int)y.IconType.Value);
+
+			});
+			return myList;
 		}
 		private List<ShipInfo> TrimShipList(List<ShipInfo> ShipList)
 		{
@@ -351,15 +363,16 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 			return ShipList;
 		}
-		private List<RemodelItemList> MakeDefaultList(IEnumerable<XElement> List, int Position)
+		private List<RemodelItemList> MakeDefaultList(IEnumerable<XElement> List, int Position=-1)
 		{
-			var PosElement = "Position";
+			//var PosElement = "Position";
 
 			List<RemodelItemList> ItemList = new List<RemodelItemList>();
 
 
 			//리스트를 Position에 따라 필터링
-			var tempList = List.Where(f => f.Element(PosElement).Value.Equals(Position.ToString())).ToList();
+			//var tempList = List.Where(f => f.Element(PosElement).Value.Equals(Position.ToString())).ToList();
+			var tempList = List;
 			//XML리스트를 List<RemodelItemList>의 형태로 재작성
 			foreach (var item in tempList)
 			{

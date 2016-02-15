@@ -205,7 +205,7 @@
                                 <TextBlock Text="장비명+필요 칸무스" HorizontalAlignment="Center"/>
                             </Border>
                         </GroupBox>
-                        <GroupBox Header="상단" MinHeight="80">
+                        <GroupBox Header="목록" MinHeight="80">
                             <DockPanel>
                                 <ItemsControl  ItemsSource="{Binding FirstList}">
                                     <ItemsControl.Template>
@@ -249,7 +249,7 @@
                                 </ItemsControl>
                             </DockPanel>
                         </GroupBox>
-                        <GroupBox Header="중단" MinHeight="80">
+                        <!--<GroupBox Header="중단" MinHeight="80">
                             <DockPanel>
                                 <ItemsControl  ItemsSource="{Binding SecondList}">
                                     <ItemsControl.Template>
@@ -334,7 +334,7 @@
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
                             </DockPanel>
-                        </GroupBox>
+                        </GroupBox>-->
                         <GroupBox>
                             <Border Background="{DynamicResource BorderBrushKey}"
 								Padding="8,6">
