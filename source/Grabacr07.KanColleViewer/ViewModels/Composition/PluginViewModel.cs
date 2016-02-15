@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MetroTrilithon.Controls;
 using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Views.Settings;
 using Livet;
+using MetroTrilithon.UI.Controls;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Composition
 {
@@ -61,6 +61,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Composition
 
 				var tool = this.Plugin.OfType<ITool>().FirstOrDefault();
 				if (tool != null) yield return new ToolText { Function = tool, };
+
+				var taskbarProgress = this.Plugin.OfType<ITaskbarProgress>().FirstOrDefault();
+				if (taskbarProgress != null) yield return new TaskbarProgressText { Function = taskbarProgress, };
 			}
 		}
 

@@ -1,4 +1,5 @@
-﻿using Grabacr07.KanColleWrapper;
+﻿using Grabacr07.KanColleViewer.Models;
+using Grabacr07.KanColleWrapper;
 using Livet.EventListeners;
 using MetroTrilithon.Mvvm;
 using System;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using System.Reactive.Threading.Tasks;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 {
@@ -14,8 +16,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 	{
 		private readonly Subject<Unit> updateSource = new Subject<Unit>();
 		private readonly Homeport homeport = KanColleClient.Current.Homeport;
+
 		public ShipCatalogSortWorker SortWorker { get; private set; }
-		public ShipNdockTimeFilter ShipNdockTimeFilter { get; private set; }
+		public ShipDamagedFilter ShipDamagedFilter { get; }
 		#region Ships 変更通知プロパティ
 
 		private IReadOnlyCollection<ShipViewModel> _Ships;
@@ -60,13 +63,14 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			this.SortWorker = new ShipCatalogSortWorker(false);
 
 			this.Title = "입거 필요 칸무스 목록";
-			this.ShipNdockTimeFilter = new ShipNdockTimeFilter(this.Update);
+			this.ShipDamagedFilter = new ShipDamagedFilter(this.Update);
 
 			this.updateSource
 				.Do(_ => this.IsReloading = true)
-				.Throttle(TimeSpan.FromMilliseconds(7.0))
-				.Do(_ => this.UpdateCore())
-				.Subscribe(_ => this.IsReloading = false);
+				.SelectMany(x => this.UpdateAsync())
+				.Do(_ => this.IsReloading = false)
+				.Subscribe()
+				.AddTo(this);
 
 			this.CompositeDisposable.Add(this.updateSource);
 
@@ -82,15 +86,20 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			this.RaisePropertyChanged("CheckAllShipTypes");
 			this.updateSource.OnNext(Unit.Default);
 		}
-		private void UpdateCore()
+		private IObservable<Unit> UpdateAsync()
 		{
-			var list = this.homeport.Organization.Ships
-				.Select(kvp => kvp.Value)
-				.Where(this.ShipNdockTimeFilter.Predicate);
+			return Observable.Start(() =>
+			{
+				var list = this.homeport.Organization.Ships
+					.Select(kvp => kvp.Value)
+					.Where(this.ShipDamagedFilter.Predicate)
+					.Where(x => x.TimeToRepair != TimeSpan.Zero)
+					.Where(x => x.Situation != KanColleWrapper.Models.ShipSituation.Repair);
 
-			this.Ships = this.SortWorker.Sort(list)
-				.Select((x, i) => new ShipViewModel(i + 1, x))
-				.ToList();
+				this.Ships = this.SortWorker.Sort(list)
+					.Select((x, i) => new ShipViewModel(i + 1, x, null))
+					.ToList();
+			});
 		}
 		public void Sort(SortableColumn column)
 		{

@@ -60,7 +60,7 @@
 
             <DataTemplate DataType="{x:Type fleets:SortieViewModel}">
                 <Border x:Name="Border"
-							Background="Transparent"
+							Background="#FFA00000"
 							Padding="8,4">
                     <TextBlock x:Name="Text"
 								   Text="현재 출격중입니다"
@@ -72,7 +72,8 @@
                     <DataTrigger Binding="{Binding State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Sortie|HeavilyDamaged}"
 																   Value="True">
                         <Setter TargetName="Text" Property="Text" Value="대파당한 칸무스가 있습니다!!!!"/>
-                    </DataTrigger>
+						<Setter TargetName="Border" Property="Background" Value="#FFCF0000"/>
+					</DataTrigger>
                 </DataTemplate.Triggers>
             </DataTemplate>
 

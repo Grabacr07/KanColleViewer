@@ -57,13 +57,11 @@ namespace Grabacr07.KanColleWrapper.Models
 		}
 
 		public string LvName=>"[Lv." + this.Level + "]  " + this.Info.Name;
-
-		public long RepairTime => this.RawData.api_ndock_time;
 		public string RepairTimeString
 		{
 			get
 			{
-				TimeSpan? Remaining = new TimeSpan(0, 0, 0, 0, (int)this.RepairTime);
+				TimeSpan? Remaining = new TimeSpan(0, 0, 0, 0, (int)this.TimeToRepair.TotalMilliseconds);
 				return Remaining.HasValue
 			? string.Format("{0:D2}:{1}",
 				(int)Remaining.Value.TotalHours,
@@ -109,9 +107,9 @@ namespace Grabacr07.KanColleWrapper.Models
 		public int ExpForMarrige => Math.Max(Experience.GetShipExpForSpecifiedLevel(this.Exp, 99), 0);
 
 		/// <summary>
-		/// この艦娘がLv150になるために必要な経験値を取得します。
+		/// この艦娘が最大Lvになるために必要な経験値を取得します。
 		/// </summary>
-		public int ExpForLevelMax => Experience.GetShipExpForSpecifiedLevel(this.Exp, 150);
+		public int ExpForLevelMax => Experience.GetShipExpForSpecifiedLevel(this.Exp, 155);
 
 		#region HP 変更通知プロパティ
 
@@ -334,6 +332,25 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
+		#region TimeToRepair 変更通知プロパティ
+
+		private TimeSpan _TimeToRepair;
+
+		public TimeSpan TimeToRepair
+		{
+			get { return this._TimeToRepair; }
+			set
+			{
+				if (this._TimeToRepair != value)
+				{
+					this._TimeToRepair = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		/// <summary>
 		/// 装備によるボーナスを含めた索敵ステータス値を取得します。
 		/// </summary>
@@ -428,6 +445,8 @@ namespace Grabacr07.KanColleWrapper.Models
 				this.Armer = new ModernizableStatus(this.Info.RawData.api_souk, this.RawData.api_kyouka[3]);
 				this.Luck = new ModernizableStatus(this.Info.RawData.api_luck, this.RawData.api_kyouka[4]);
 			}
+
+			this.TimeToRepair = TimeSpan.FromMilliseconds(this.RawData.api_ndock_time);
 
 			this.UpdateSlots();
 		}

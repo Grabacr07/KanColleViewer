@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Shell;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleViewer.Properties;
@@ -12,10 +13,9 @@ using Grabacr07.KanColleViewer.ViewModels.Settings;
 using Grabacr07.KanColleViewer.Views;
 using Grabacr07.KanColleViewer.Views.Controls;
 using Livet.Messaging;
-using MetroTrilithon.Controls;
 using MetroTrilithon.Mvvm;
+using MetroTrilithon.UI.Controls;
 using System.Windows.Input;
-using Settings2 = Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleWrapper;
 
 namespace Grabacr07.KanColleViewer.ViewModels
@@ -27,6 +27,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 	{
 		// 分割されたやつ
 		private InformationWindowViewModel splitWindow;
+		private readonly TaskbarProgress taskbarProgress;
 
 		public NavigatorViewModel Navigator { get; }
 
@@ -141,6 +142,11 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			GeneralSettings.BrowserZoomFactor.Subscribe(x => this.ZoomFactor.Current = x).AddTo(this);
 
 			_RefreshNavigator = new RelayCommand(Navigator.ReNavigate);
+
+			this.taskbarProgress = new TaskbarProgress().AddTo(this);
+			this.taskbarProgress
+				.Subscribe(nameof(TaskbarProgress.Updated), () => this.UpdateTaskbar())
+				.AddTo(this);
 		}
 
 
@@ -154,8 +160,39 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				// ウィンドウ表示時点で既に分割設定されていた場合、このタイミングで分割ウィンドウも一緒に表示
 				this.Transition(this.splitWindow, typeof(InformationWindow), TransitionMode.NewOrActive, false);
 			}
+
+			this.UpdateTaskbar();
 		}
 
+		public void Refresh()
+		{
+			if (GeneralSettings.RefreshConfirmationType == ExitConfirmationType.None)
+			{
+				//바로 새로고침
+				RefreshNavigator.Execute(null);
+				return;
+			}
+			else if (GeneralSettings.RefreshConfirmationType == ExitConfirmationType.InSortieOnly)
+			{
+				if (!KanColleClient.Current.IsInSortie)
+				{
+					//바로 새로고침
+					RefreshNavigator.Execute(null);
+					return;
+				}
+			}
+			var vmodel = new DialogViewModel();
+			var window = new RefreshPopup
+			{
+				DataContext = vmodel,
+				Owner = Application.Current.MainWindow,
+			};
+			window.ShowDialog();
+			if(vmodel.DialogResult)
+			{
+				WindowService.Current.RefreshWindow();
+			}
+		}
 
 		public void TakeScreenshot()
 		{
@@ -189,6 +226,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 				this.ContentVisibility = Visibility.Collapsed;
 				this.Settings.IsSplit.Value = true;
+				this.UpdateTaskbar();
 			}
 		}
 
@@ -199,7 +237,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		{
 			if (this.splitWindow != null)
 			{
-				this.splitWindow.PropertyChanged -= this.HandleSplitWindowClosed;
+				this.splitWindow.Closed -= this.HandleSplitWindowClosed;
 				this.splitWindow.Close();
 				this.splitWindow = null;
 
@@ -210,6 +248,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					this.ContentVisibility = Visibility.Visible;
 					this.Settings.IsSplit.Value = false;
 				}
+
+				this.UpdateTaskbar();
 			}
 		}
 
@@ -230,28 +270,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		{
 			this.MergeWindow();
 		}
-		public void ShowRefreshPopup()
-		{
 
-			if (GeneralSettings.RefreshConfirmationType == ExitConfirmationType.None)
-			{
-				//바로 새로고침
-				RefreshNavigator.Execute(null);
-				return;
-			}
-			else if (GeneralSettings.RefreshConfirmationType == ExitConfirmationType.InSortieOnly)
-			{
-				if (!KanColleClient.Current.IsInSortie)
-				{
-					//바로 새로고침
-					RefreshNavigator.Execute(null);
-					return;
-				}
-			}
-			var window = new RefreshPopupViewModel();
-			var message = new TransitionMessage(window, "Show/RefreshPopup");
-			this.Messenger.RaiseAsync(message);
-		}
 		private double GetToolAreaWidth(Dock d)
 		{
 			switch (d)
@@ -261,6 +280,21 @@ namespace Grabacr07.KanColleViewer.ViewModels
 					return KanColleHost.KanColleSize.Width;
 				default:
 					return double.PositiveInfinity;
+			}
+		}
+
+		private void UpdateTaskbar()
+		{
+			// 分割ウィンドウがいなかったら、自身のタスク バーを設定する
+			// 分割ウィンドウがいる場合はそっちに任せる
+
+			if (this.splitWindow == null)
+			{
+				this.UpdateTaskbar(this.taskbarProgress.State, this.taskbarProgress.Value);
+			}
+			else
+			{
+				this.UpdateTaskbar(TaskbarItemProgressState.None, .0);
 			}
 		}
 	}

@@ -7,6 +7,8 @@
 				   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 				   xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 				   xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+				   xmlns:metro2="http://schemes.grabacr.net/winfx/2015/personal/controls"
+				   xmlns:mtti="http://schemes.grabacr.net/winfx/2015/personal/interactivity"
 				   xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
 				   xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
 				   xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
@@ -69,6 +71,10 @@
 			<livet:TransitionInteractionMessageAction InvokeActionOnlyWhenWindowIsActive="False"
 													  IsOwned="True" />
 		</livet:InteractionMessageTrigger>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+										 MessageKey="Window.UpdateTaskbar">
+			<mtti:TaskbarMessageAction InvokeActionOnlyWhenWindowIsActive="False" />
+		</livet:InteractionMessageTrigger>
 	</i:Interaction.Triggers>
 
 	<Grid>
@@ -96,9 +102,14 @@
 						HorizontalAlignment="Right"
 						VerticalAlignment="Top"
 						WindowChrome.IsHitTestVisibleInChrome="True">
-				<controls:RefreshButton ToolTip="새로고침을 합니다"
-											Margin="0,0,20,0"
-											Height="26"/>
+				<metro2:CallMethodButton Margin="0,0,20,0"
+										 Height="26"
+										 ToolTip="새로고침을 합니다"
+										 MethodName="Refresh"
+										 Background="Transparent"
+										 BorderThickness="0">
+					<controls:RefreshButton/>
+				</metro2:CallMethodButton>
 				<controls:ZoomFactorSelector ZoomFactor="{Binding ZoomFactor}"
 											 ToolTip="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.ZoomFactorSelector_Tooltip}"
 											 Margin="4,0" />
@@ -118,6 +129,7 @@
 		<DockPanel Grid.Row="1"
 				   x:Name="TopToolbarArea"
 				   x:FieldModifier="private">
+			<!--MaxWidth="{Binding ToolAreaMaxWidth}"-->
 
 			<views:KanColleWindowButtons DockPanel.Dock="Right"
 												 Margin="8,4,4,4" />
@@ -153,6 +165,7 @@
 					<WebBrowser Source="about:blank">
 						<i:Interaction.Behaviors>
 							<behaviors:NavigatorBehavior Navigator="{Binding Navigator}" />
+							<mtti:TaskbarThumbnailBehavior />
 						</i:Interaction.Behaviors>
 						<i:Interaction.Triggers>
 							<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"

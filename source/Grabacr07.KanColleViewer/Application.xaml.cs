@@ -14,7 +14,7 @@ using Grabacr07.KanColleViewer.ViewModels;
 using Grabacr07.KanColleViewer.Views;
 using Grabacr07.KanColleWrapper;
 using Livet;
-using MetroRadiance;
+using MetroRadiance.UI;
 using MetroTrilithon.Lifetime;
 using KanColleSettings = Grabacr07.KanColleViewer.Models.Settings.KanColleSettings;
 using AppSettings = Grabacr07.KanColleViewer.Properties.Settings;
@@ -52,7 +52,7 @@ namespace Grabacr07.KanColleViewer
 		}
 
 		private readonly LivetCompositeDisposable compositeDisposable = new LivetCompositeDisposable();
-		private event PropertyChangedEventHandler PropertyChangedInternal;
+		private event PropertyChangedEventHandler propertyChangedInternal;
 
 		/// <summary>
 		/// 現在の <see cref="AppDomain"/> の <see cref="Application"/> オブジェクトを取得します。
@@ -90,9 +90,9 @@ namespace Grabacr07.KanColleViewer
 				GeneralSettings.Culture.Subscribe(x => ResourceService.Current.ChangeCulture(x)).AddTo(this);
 				KanColleClient.Current.Settings = new KanColleSettings();
 
-				ThemeService.Current.Initialize(this, Theme.Dark, Accent.Purple);
-				WindowService.Current.AddTo(this).Initialize();
+				ThemeService.Current.Register(this, Theme.Dark, Accent.Purple);
 				PluginService.Current.AddTo(this).Initialize();
+				WindowService.Current.AddTo(this).Initialize();
 				NotifyService.Current.AddTo(this).Initialize();
 
 				Helper.SetRegistryFeatureBrowserEmulation();
@@ -103,6 +103,7 @@ namespace Grabacr07.KanColleViewer
 				// Update notification and download new translations (if enabled)
 				if (KanColleClient.Current.Updater.LoadVersion(AppSettings.Default.KCVUpdateUrl.AbsoluteUri))
 				{
+					//null error
 					if (KanColleSettings.EnableUpdateNotification && KanColleClient.Current.Updater.IsOnlineVersionGreater(0, ProductInfo.Version.ToString()))
 					{
 						if (File.Exists(Path.Combine(MainFolder, "AutoUpdater.exe")))
@@ -292,13 +293,13 @@ ERROR, date = {0}, sender = {1},
 
 		event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
 		{
-			add { this.PropertyChangedInternal += value; }
-			remove { this.PropertyChangedInternal -= value; }
+			add { this.propertyChangedInternal += value; }
+			remove { this.propertyChangedInternal -= value; }
 		}
 
 		private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
 		{
-			this.PropertyChangedInternal?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+			this.propertyChangedInternal?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 
 		#endregion

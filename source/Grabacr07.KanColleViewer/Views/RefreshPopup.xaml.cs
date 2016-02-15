@@ -9,8 +9,6 @@ namespace Grabacr07.KanColleViewer.Views
 		public RefreshPopup()
 		{
 			InitializeComponent();
-
-			Application.Instance.MainWindow.Closed += (sender, args) => this.Close();
 		}
 	}
 }

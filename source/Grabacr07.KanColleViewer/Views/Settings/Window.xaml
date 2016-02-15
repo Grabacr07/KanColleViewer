@@ -51,16 +51,53 @@
 								  MinWidth="140" />
 		</StackPanel>
 
-		<Rectangle Height="1"
-				   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
+
+		<TextBlock Text="작업표시줄 설정"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+
+		<Grid Margin="20,0,0,00">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="4" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="10" />
+				<ColumnDefinition Width="160" />
+			</Grid.ColumnDefinitions>
+			<TextBlock Grid.Row="0"
+					   Grid.Column="0"
+					   Text="인디케이터 작동" />
+			<metro:PromptComboBox Grid.Row="0"
+								  Grid.Column="2"
+								  ItemsSource="{Binding TaskbarProgressFeatures}"
+								  DisplayMemberPath="Display"
+								  SelectedValuePath="Value"
+								  SelectedValue="{Binding Source={x:Static ms:GeneralSettings.TaskbarProgressSource}, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+								  Prompt="" />
+			<TextBlock Grid.Row="2"
+					   Grid.Column="0"
+					   Text="인디케이터 작동 (출격중)" />
+			<metro:PromptComboBox Grid.Row="2"
+								  Grid.Column="2"
+								  ItemsSource="{Binding TaskbarProgressFeatures}"
+								  DisplayMemberPath="Display"
+								  SelectedValuePath="Value"
+								  SelectedValue="{Binding Source={x:Static ms:GeneralSettings.TaskbarProgressSourceWhenSortie}, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+								  Prompt="" />
+		</Grid>
+
+		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
 		<TextBlock Text="{Binding Resources.Settings_WindowControl, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
-				   Margin="0,10" />
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+
 		<metro2:CallMethodButton MethodTarget="{Binding Source={x:Static root:WindowService.Current}}"
 								 MethodName="SetLocationLeft"
 								 Padding="20,4"
-								 Margin="20,0,0,10"
+								 Margin="20,0,0,0"
 								 HorizontalAlignment="Left">
 			<StackPanel>
 				<TextBlock Text="{Binding Resources.Settings_WindowControl_LocationLeftButton, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
@@ -75,12 +112,10 @@
 		</metro2:CallMethodButton>
 
 		<StackPanel Visibility="{Binding Source={x:Static ms:GeneralSettings.IsProxyMode}, Path=Value, Converter={StaticResource UniversalBooleanToVisibilityConverter}, ConverterParameter=Colappsed:Visible}">
-			<Rectangle Height="1"
-					   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
 			<TextBlock Text="윈도우 레이아웃"
-					   Style="{DynamicResource SettingsHeaderTextStyleKey}"
-					   Margin="0,10" />
+					   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 			<StackPanel HorizontalAlignment="Left">
 				<UniformGrid Rows="1"
@@ -89,9 +124,9 @@
 						<Style x:Key="LayoutButtonStyleKey"
 							   TargetType="{x:Type metro2:CallMethodButton}">
 							<Setter Property="Content"
-									Value="情報" />
+									Value="정보" />
 							<Setter Property="BorderThickness"
-									Value="1" />
+									Value=".99" />
 							<Setter Property="Background"
 									Value="{DynamicResource SemiactiveBackgroundBrushKey}" />
 							<Setter Property="BorderBrush"
@@ -134,7 +169,7 @@
 							   TargetType="{x:Type metro2:CallMethodButton}"
 							   BasedOn="{StaticResource LayoutButtonStyleKey}">
 							<Setter Property="Content"
-									Value="艦これ" />
+									Value="칸코레" />
 							<Setter Property="Background"
 									Value="{DynamicResource AccentBrushKey}" />
 							<Setter Property="BorderBrush"
@@ -229,7 +264,7 @@
 						<Border.Style>
 							<Style TargetType="{x:Type Border}">
 								<Setter Property="BorderThickness"
-										Value="1" />
+										Value=".99" />
 								<Setter Property="BorderBrush"
 										Value="{DynamicResource ActiveBackgroundBrushKey}" />
 								<Style.Triggers>
@@ -258,24 +293,24 @@
 								<metro2:CallMethodButton MethodTarget="{Binding}"
 														 MethodName="SetDockSettings"
 														 MethodParameter="{x:Static Dock.Top}"
-														 vs:Window.IsDockMatched="{Binding DockTop}" Content="정보" />
+														 vs:Window.IsDockMatched="{Binding DockTop}" />
 								<Border />
 								<metro2:CallMethodButton MethodTarget="{Binding}"
 														 MethodName="SetDockSettings"
 														 MethodParameter="{x:Static Dock.Left}"
-														 vs:Window.IsDockMatched="{Binding DockLeft}" Content="정보" />
+														 vs:Window.IsDockMatched="{Binding DockLeft}" />
 
-                                <metro2:CallMethodButton Style="{DynamicResource KanColleMarkStyleKey}" Content="칸코레" />
+								<metro2:CallMethodButton Style="{DynamicResource KanColleMarkStyleKey}" />
 
-                                <metro2:CallMethodButton MethodTarget="{Binding}"
+								<metro2:CallMethodButton MethodTarget="{Binding}"
 														 MethodName="SetDockSettings"
 														 MethodParameter="{x:Static Dock.Right}"
-														 vs:Window.IsDockMatched="{Binding DockRight}" Content="정보" />
+														 vs:Window.IsDockMatched="{Binding DockRight}" />
 								<Border />
 								<metro2:CallMethodButton MethodTarget="{Binding}"
 														 MethodName="SetDockSettings"
 														 MethodParameter="{x:Static Dock.Bottom}"
-														 vs:Window.IsDockMatched="{Binding DockBottom}" Content="정보" />
+														 vs:Window.IsDockMatched="{Binding DockBottom}" />
 								<Border />
 							</UniformGrid>
 						</DockPanel>
@@ -285,7 +320,7 @@
 						<Border.Style>
 							<Style TargetType="{x:Type Border}">
 								<Setter Property="BorderThickness"
-										Value="1" />
+										Value=".99" />
 								<Setter Property="BorderBrush"
 										Value="{DynamicResource ActiveBackgroundBrushKey}" />
 								<Style.Triggers>
@@ -324,8 +359,7 @@
 														 Grid.ColumnSpan="2"
 														 Grid.Row="1"
 														 Grid.RowSpan="2"
-														 Margin="12"
-														 Content="정보">
+														 Margin="12">
 									<metro2:CallMethodButton.Style>
 										<Style TargetType="{x:Type metro2:CallMethodButton}"
 											   BasedOn="{StaticResource LayoutButtonStyleKey}">
@@ -339,7 +373,7 @@
 														 Grid.Row="0"
 														 Grid.RowSpan="2"
 														 Margin="12"
-														 Style="{DynamicResource KanColleMarkStyleKey}" Content="칸코레" />
+														 Style="{DynamicResource KanColleMarkStyleKey}" />
 							</Grid>
 						</DockPanel>
 					</Border>
@@ -347,7 +381,7 @@
 
 				<StackPanel Orientation="Horizontal"
 							HorizontalAlignment="Center"
-							Margin="16,0,0,8">
+							Margin="16,0,0,-2">
 					<metro2:CallMethodButton MethodTarget="{Binding}"
 											 MethodName="Apply"
 											 Content="적용"
@@ -362,11 +396,10 @@
 											 Margin="4,2" />
 				</StackPanel>
 			</StackPanel>
-
-			<Rectangle Height="1"
-					   Margin="0,0"
-					   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-
 		</StackPanel>
+
+		<Rectangle Height="1"
+				   Style="{DynamicResource SeparatorStyleKey}" />
+
 	</StackPanel>
 </UserControl>

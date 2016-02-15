@@ -6,10 +6,10 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:metro2="http://schemes.grabacr.net/winfx/2015/personal/controls"
 			 xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
 			 xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
 			 xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
-			 xmlns:metro2="clr-namespace:MetroTrilithon.Controls;assembly=MetroTrilithon.Desktop"
 			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Views.Settings"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
@@ -154,7 +154,7 @@
 
 			<Border Grid.Column="0"
 					BorderBrush="{DynamicResource BorderBrushKey}"
-					BorderThickness="1,0,1,0">
+					BorderThickness=".99,0,.99,0">
 				<ScrollViewer VerticalScrollBarVisibility="Auto"
 							  PanningMode="Both"
 							  Padding="10,0,20,14">
@@ -176,7 +176,7 @@
 								 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 						</TextBlock>
 
-						<Rectangle Height="1"
+						<Rectangle Height=".99"
 								   Margin="0,12"
 								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
@@ -200,15 +200,15 @@
 								<Run Text="@Nrtwd" />
 							</metro2:HyperlinkEx>
 						</TextBlock>
-                        <TextBlock FontFamily="Segoe UI">
+						<TextBlock FontFamily="Segoe UI">
 								<Run Text="Localization" />
 								<Run Text="(Korean)"
 									 FontSize="10" />
 								<Run Text=":" />
                                     <metro2:HyperlinkEx Uri="http://kaster.egloos.com">
 									<Run Text="Kaster" /> <LineBreak/>
-                                        
-								</metro2:HyperlinkEx>
+
+						</metro2:HyperlinkEx>
 								<metro2:HyperlinkEx Uri="http://kcvkr.tistory.com">
 									<Run Text="FreyYa" />
                                     <TextBlock Text=","/>
@@ -217,7 +217,7 @@
 									<Run Text="DaeWha" />
 								</metro2:HyperlinkEx>
                                 </TextBlock>
-                        <TextBlock FontFamily="Segoe UI">
+						<TextBlock FontFamily="Segoe UI">
 								<Run Text="Localization" />
 								<Run Text="(English)"
 									 FontSize="10" />
@@ -225,8 +225,8 @@
 								<metro2:HyperlinkEx Uri="https://twitter.com/southrop113">
 									<Run Text="@southrop113" />
 								</metro2:HyperlinkEx>
-                        </TextBlock>
-                        <Rectangle Height="1"
+						</TextBlock>
+						<Rectangle Height="1"
 								   Margin="0,12"
 								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
@@ -269,15 +269,15 @@
 							<Run Foreground="White"
 								 FontSize="20"
 								 Text="환영합니다" />
-                        </Paragraph>
-                        <Paragraph Language="ko-KR">
-                            <Run Text="「제독업무도 바빠！」는 칸코레를 편하게 즐기기 위한 툴입니다." />
-                            <LineBreak />
-                            <Run Text="칸코레는 내장되어있는 Internet Explorer (IE)로 작동합니다. 칸코레서버에 어떠한 부담도 주지않도록 설계,개발하고, 통신내용의 변경 및 서버정보의 전송, Flash추출, 매크로,치트등의 기능은 일절 포함되어 있지 않습니다." />
-                        </Paragraph>
-                        <Paragraph Language="ko-KR">
-                            <Run Text="게임이 제대로 표시되지 않거나 스크립트 오류가 반복되면 IE의 캐시를 삭제해보세요. 개선되지않으면 IE의 설정이나 'IE에서 Flash사용이 가능한가' 등의 것들을 확인하주시기 바랍니다." />
-                        </Paragraph>
+						</Paragraph>
+						<Paragraph Language="ko-KR">
+							<Run Text="「제독업무도 바빠！」는 칸코레를 편하게 즐기기 위한 툴입니다." />
+							<LineBreak />
+							<Run Text="칸코레는 내장되어있는 Internet Explorer (IE)로 작동합니다. 칸코레서버에 어떠한 부담도 주지않도록 설계,개발하고, 통신내용의 변경 및 서버정보의 전송, Flash추출, 매크로,치트등의 기능은 일절 포함되어 있지 않습니다." />
+						</Paragraph>
+						<Paragraph Language="ko-KR">
+							<Run Text="게임이 제대로 표시되지 않거나 스크립트 오류가 반복되면 IE의 캐시를 삭제해보세요. 개선되지않으면 IE의 설정이나 'IE에서 Flash사용이 가능한가' 등의 것들을 확인하주시기 바랍니다." />
+						</Paragraph>
 						<Paragraph>
 							<InlineUIContainer>
 								<metro2:CallMethodButton Content="{Binding DeleteInternetCacheButtonContent}"
@@ -290,15 +290,15 @@
 							<LineBreak />
 							<InlineUIContainer>
 								<Rectangle Width="{Binding ElementName=Dummy, Path=ActualWidth}"
-										   Height="1"
+										   Height=".99"
 										   Style="{DynamicResource SeparatorRectangleStyleKey}"
 										   Margin="0,16,0,0"
 										   SnapsToDevicePixels="True" />
 							</InlineUIContainer>
 						</Paragraph>
-						<Paragraph Language="ja-jp">
-                            <Run Text="이 툴은 비정기적으로 업데이트 되고있습니다. 자동업데이트를 제공하지만 업데이트 도중 문제가 발생하면 직접 업데이트를 수행해주시기 바랍니다." />
-                            <LineBreak />
+						<Paragraph Language="ko-kr">
+							<Run Text="이 툴은 비정기적으로 업데이트 되고있습니다. 자동업데이트를 제공하지만 업데이트 도중 문제가 발생하면 직접 업데이트를 수행해주시기 바랍니다." />
+							<LineBreak />
 							<LineBreak />
 							<Run Text="Project home:" />
 							<metro2:HyperlinkEx Uri="http://grabacr.net/kancolleviewer">
@@ -308,20 +308,20 @@
 							<Run Text="Source code:" />
 							<metro2:HyperlinkEx Uri="https://github.com/Grabacr07/KanColleViewer">
 								<Run Text="https://github.com/Grabacr07/KanColleViewer" />
-                            </metro2:HyperlinkEx>
-                            <LineBreak />
-                            <LineBreak />
-                            <Run Text="Korean Source code:" />
-                            <metro2:HyperlinkEx Uri="https://github.com/FreyYa/KanColleViewer">
-                                <Run Text="/FreyYa/KanColleViewer" />
-                            </metro2:HyperlinkEx>
-                            <LineBreak />
-                            <Run Text="Korean Version Release Page:" />
-                            <metro2:HyperlinkEx Uri="http://KCVkr.tistory.com/category/Releases">
-                                <Run Text="http://KCVkr.tistory.com" />
-                            </metro2:HyperlinkEx>
-                            <LineBreak />
-                        </Paragraph>
+							</metro2:HyperlinkEx>
+							<LineBreak />
+							<LineBreak />
+							<Run Text="Korean Source code:" />
+							<metro2:HyperlinkEx Uri="https://github.com/FreyYa/KanColleViewer">
+								<Run Text="/FreyYa/KanColleViewer" />
+							</metro2:HyperlinkEx>
+							<LineBreak />
+							<Run Text="Korean Version Release Page:" />
+							<metro2:HyperlinkEx Uri="http://KCVkr.tistory.com/category/Releases">
+								<Run Text="http://KCVkr.tistory.com" />
+							</metro2:HyperlinkEx>
+							<LineBreak />
+						</Paragraph>
 					</FlowDocument>
 				</FlowDocumentScrollViewer>
 			</Border>
@@ -380,7 +380,7 @@
 									   Style="{DynamicResource TabHeaderTextStyleKey}" />
 						</TabItem.Header>
 						<settings:Network Margin="10,9"
-										  DataContext="{Binding NetworkSettings}"/>
+										  DataContext="{Binding NetworkSettings}" />
 					</TabItem>
 
 					<TabItem>

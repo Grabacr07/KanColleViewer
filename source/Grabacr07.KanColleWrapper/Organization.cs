@@ -226,7 +226,12 @@ namespace Grabacr07.KanColleWrapper
 
 		internal void Update(kcsapi_deck source)
 		{
-			this.Fleets[source.api_id]?.Update(source);
+			var fleet = this.Fleets[source.api_id];
+			if (fleet != null)
+			{
+				fleet.Update(source);
+				fleet.RaiseShipsUpdated();
+			}
 		}
 
 
@@ -237,6 +242,8 @@ namespace Grabacr07.KanColleWrapper
 			try
 			{
 				var fleet = this.Fleets[int.Parse(data.Request["api_id"])];
+				fleet.RaiseShipsUpdated();
+
 				var index = int.Parse(data.Request["api_ship_idx"]);
 				if (index == -1)
 				{
@@ -296,7 +303,7 @@ namespace Grabacr07.KanColleWrapper
 
 				var fleet = this.Fleets.Values.FirstOrDefault(x => x.Ships.Any(y => y.Id == ship.Id));
 				if (fleet == null) return;
-				
+
 				fleet.State.Calculate();
 			}
 			catch (Exception ex)

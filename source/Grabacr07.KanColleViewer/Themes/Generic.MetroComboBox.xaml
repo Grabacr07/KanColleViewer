@@ -145,7 +145,7 @@
 								<Border x:Name="dropdown"
 										Background="{DynamicResource BackgroundBrushKey}"
 										BorderBrush="{TemplateBinding BorderBrush}"
-										BorderThickness="1"
+										BorderThickness=".99"
 										Padding="3">
 									<ScrollViewer VerticalScrollBarVisibility="Auto">
 										<ItemsPresenter />
@@ -253,7 +253,7 @@
 								</ItemsControl>
 							</Border>
 						</StackPanel>
-						<Border BorderThickness="1"
+						<Border BorderThickness=".99"
 								BorderBrush="{DynamicResource ValidationErrorBrushKey}"
 								HorizontalAlignment="Left">
 							<AdornedElementPlaceholder x:Name="Placeholder" />

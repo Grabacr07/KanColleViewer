@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Grabacr07.KanColleViewer.Models;
+using Grabacr07.KanColleViewer.ViewModels;
+using MetroRadiance.Interop;
+using MetroTrilithon.UI.Controls;
+using mshtml;
+using SHDocVw;
+using System;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Windows.Navigation;
-using Grabacr07.KanColleViewer.Models;
-using Grabacr07.KanColleViewer.ViewModels;
-using MetroRadiance.Core;
-using mshtml;
-using MetroTrilithon.Controls;
-using SHDocVw;
 using IServiceProvider = Grabacr07.KanColleViewer.Win32.IServiceProvider;
 using WebBrowser = System.Windows.Controls.WebBrowser;
 

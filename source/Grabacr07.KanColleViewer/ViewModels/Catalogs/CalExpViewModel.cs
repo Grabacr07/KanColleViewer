@@ -1,4 +1,5 @@
-﻿using Grabacr07.KanColleWrapper;
+﻿using Grabacr07.KanColleViewer.Models;
+using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Livet.EventListeners;
 using MetroTrilithon.Mvvm;
@@ -16,20 +17,20 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		/// <summary>
 		/// Completely experience table from 1 to 150. Each line = 20 levels
 		/// </summary>
-		public static int[] ExpTable = new int[] { 0, 0, 100, 300, 600, 1000, 1500, 2100, 2800, 3600, 4500, 5500, 6600, 7800, 9100, 10500, 12000, 13600, 15300, 17100, 19000, 
-			21000, 23100, 25300, 27600, 30000, 32500, 35100, 37800, 40600, 43500, 46500, 49600, 52800, 56100, 59500, 63000, 66600, 70300, 74100, 78000, 
-			82000, 86100, 90300, 94600, 99000, 103500, 108100, 112800, 117600, 122500, 127500, 132700, 138100, 143700, 149500, 155500, 161700, 168100, 174700, 181500, 
-			188500, 195800, 203400, 211300, 219500, 228000, 236800, 245900, 255300, 265000, 275000, 285400, 296200, 307400, 319000, 331000, 343400, 356200, 369400, 383000, 
-			397000, 411500, 426500, 442000, 458000, 474500, 491500, 509000, 527000, 545500, 564500, 584500, 606500, 631500, 661500, 701500, 761500, 851500, 1000000, 1000000, 
-			1010000, 1011000, 1013000, 1016000, 1020000, 1025000, 1031000, 1038000, 1046000, 1055000, 1065000, 1077000, 1091000, 1107000, 1125000, 1145000, 1168000, 1194000, 1223000, 1255000, 
-			1290000, 1329000, 1372000, 1419000, 1470000, 1525000, 1584000, 1647000, 1714000, 1785000, 1860000, 1940000, 2025000, 2115000, 2210000, 2310000, 2415000, 2525000, 2640000, 2760000, 
+		public static int[] ExpTable = new int[] { 0, 0, 100, 300, 600, 1000, 1500, 2100, 2800, 3600, 4500, 5500, 6600, 7800, 9100, 10500, 12000, 13600, 15300, 17100, 19000,
+			21000, 23100, 25300, 27600, 30000, 32500, 35100, 37800, 40600, 43500, 46500, 49600, 52800, 56100, 59500, 63000, 66600, 70300, 74100, 78000,
+			82000, 86100, 90300, 94600, 99000, 103500, 108100, 112800, 117600, 122500, 127500, 132700, 138100, 143700, 149500, 155500, 161700, 168100, 174700, 181500,
+			188500, 195800, 203400, 211300, 219500, 228000, 236800, 245900, 255300, 265000, 275000, 285400, 296200, 307400, 319000, 331000, 343400, 356200, 369400, 383000,
+			397000, 411500, 426500, 442000, 458000, 474500, 491500, 509000, 527000, 545500, 564500, 584500, 606500, 631500, 661500, 701500, 761500, 851500, 1000000, 1000000,
+			1010000, 1011000, 1013000, 1016000, 1020000, 1025000, 1031000, 1038000, 1046000, 1055000, 1065000, 1077000, 1091000, 1107000, 1125000, 1145000, 1168000, 1194000, 1223000, 1255000,
+			1290000, 1329000, 1372000, 1419000, 1470000, 1525000, 1584000, 1647000, 1714000, 1785000, 1860000, 1940000, 2025000, 2115000, 2210000, 2310000, 2415000, 2525000, 2640000, 2760000,
 			2887000, 3021000, 3162000, 3310000, 3465000, 3628000, 3799000, 3978000, 4165000, 4360000 };
 
 		/// <summary>
 		/// Sea exp table. Cannot be used properly in xaml without dumb workarounds.
 		/// </summary>
-		public IEnumerable<string> SeaList { get; private set; }
-		public static Dictionary<string, int> SeaExpTable = new Dictionary<string, int> 
+		public IEnumerable<string> SeaList { get; set; }
+		public static Dictionary<string, int> SeaExpTable = new Dictionary<string, int>
 		{
 			{"1-1", 30}, {"1-2", 50}, {"1-3", 80}, {"1-4", 100}, {"1-5", 150},
 			{"2-1", 120}, {"2-2", 150}, {"2-3", 200},{"2-4", 300},{"2-5", 250},
@@ -39,13 +40,13 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			{"6-1", 380}, {"6-2", 420}
 		};
 
-		public IEnumerable<string> ResultList { get; private set; }
+		public IEnumerable<string> ResultList { get; set; }
 		public string[] Results = { "S", "A", "B", "C", "D", "E" };
 
 		private readonly Subject<Unit> updateSource = new Subject<Unit>();
 		private readonly Homeport homeport = KanColleClient.Current.Homeport;
 
-		public ShipCatalogSortWorker SortWorker { get; private set; }
+		public ShipCatalogSortWorker SortWorker { get; set; }
 
 		#region Ships 変更通知プロパティ
 
@@ -251,7 +252,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public int CurrentExp
 		{
 			get { return this._CurrentExp; }
-			private set
+			set
 			{
 				if (this._CurrentExp != value)
 				{
@@ -270,7 +271,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public int TargetExp
 		{
 			get { return this._TargetExp; }
-			private set
+			set
 			{
 				if (this._TargetExp != value)
 				{
@@ -289,7 +290,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public int RemodelLv
 		{
 			get { return this._RemodelLv; }
-			private set
+			set
 			{
 				if (this._RemodelLv != value)
 				{
@@ -308,7 +309,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public int SortieExp
 		{
 			get { return this._SortieExp; }
-			private set
+			set
 			{
 				if (this._SortieExp != value)
 				{
@@ -327,7 +328,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public int RemainingExp
 		{
 			get { return this._RemainingExp; }
-			private set
+			set
 			{
 				if (this._RemainingExp != value)
 				{
@@ -346,7 +347,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public int RunCount
 		{
 			get { return this._RunCount; }
-			private set
+			set
 			{
 				if (this._RunCount != value)
 				{
@@ -396,7 +397,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			var list = this.homeport.Organization.Ships.Values;
 
 			this.Ships = this.SortWorker.Sort(list)
-				.Select((x, i) => new ShipViewModel(i + 1, x))
+				.Select((x, i) => new ShipViewModel(i + 1, x, null))
 				.ToList();
 		}
 

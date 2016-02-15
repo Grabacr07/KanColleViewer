@@ -12,7 +12,7 @@
 				   xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
 				   xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
 				   xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
-				   xmlns:metro2="clr-namespace:MetroTrilithon.Controls;assembly=MetroTrilithon.Desktop"
+				   xmlns:metro2="clr-namespace:MetroTrilithon.UI.Controls;assembly=MetroTrilithon.Desktop"
 				   xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 				   xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 				   xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
@@ -205,68 +205,68 @@
 										<Style TargetType="{x:Type TextBlock}"
 											   BasedOn="{StaticResource DefaultTextStyleKey}">
 											<Setter Property="Text"
-												Value="건재" />
-                                            <Setter Property="Background"
-												Value="{DynamicResource BackgroundBrushKey}" />
-                                            <Style.Triggers>
-                                                <MultiDataTrigger>
-                                                    <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=DamageControlled}"
-															   Value="True" />
-                                                    </MultiDataTrigger.Conditions>
-                                                    <Setter Property="Text"
-														Value="건재・다메콘 탑재" />
-                                                </MultiDataTrigger>
-                                                <MultiDataTrigger>
-                                                    <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged}"
-															   Value="True" />
-                                                    </MultiDataTrigger.Conditions>
-                                                    <Setter Property="Text"
-														Value="대파 (격침 가능성 있음)" />
-                                                    <Setter Property="Foreground"
-														Value="White" />
-                                                    <Setter Property="Background"
-														Value="#FFA00000" />
-                                                </MultiDataTrigger>
-                                                <MultiDataTrigger>
-                                                    <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged|DamageControlled}"
-															   Value="True" />
-                                                    </MultiDataTrigger.Conditions>
-                                                    <Setter Property="Text"
-														Value="대파 (다메콘 사용가능)" />
-                                                    <Setter Property="Background"
-														Value="{DynamicResource FleetRepairingBrushKey}" />
-                                                </MultiDataTrigger>
-                                                <MultiDataTrigger>
-                                                    <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Evacuation}"
-															   Value="True" />
-                                                    </MultiDataTrigger.Conditions>
-                                                    <Setter Property="Text"
-														Value="대파 (퇴피완료)" />
-                                                    <Setter Property="Background"
-														Value="{DynamicResource FleetRepairingBrushKey}" />
-                                                </MultiDataTrigger>
-                                                <MultiDataTrigger>
-                                                    <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow}"
-															   Value="True" />
-                                                    </MultiDataTrigger.Conditions>
-                                                    <Setter Property="Text"
-														Value="퇴피 (호위퇴피)" />
-                                                    <Setter Property="Background"
-														Value="{DynamicResource FleetRepairingBrushKey}" />
-                                                </MultiDataTrigger>
-                                                <MultiDataTrigger>
-                                                    <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
-															   Value="True" />
-                                                    </MultiDataTrigger.Conditions>
-                                                    <Setter Property="Text"
-														Value="입거중" />
-                                                    <Setter Property="Background"
+													Value="건재" />
+											<Setter Property="Background"
+													Value="{DynamicResource BackgroundBrushKey}" />
+											<Style.Triggers>
+												<MultiDataTrigger>
+													<MultiDataTrigger.Conditions>
+														<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=DamageControlled}"
+																   Value="True" />
+													</MultiDataTrigger.Conditions>
+													<Setter Property="Text"
+															Value="건재・다메콘 탑재" />
+												</MultiDataTrigger>
+												<MultiDataTrigger>
+													<MultiDataTrigger.Conditions>
+														<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged}"
+																   Value="True" />
+													</MultiDataTrigger.Conditions>
+													<Setter Property="Text"
+															Value="대파 (굉침 가능성있음)" />
+													<Setter Property="Foreground"
+															Value="White" />
+													<Setter Property="Background"
+															Value="#FFA00000" />
+												</MultiDataTrigger>
+												<MultiDataTrigger>
+													<MultiDataTrigger.Conditions>
+														<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged|DamageControlled}"
+																   Value="True" />
+													</MultiDataTrigger.Conditions>
+													<Setter Property="Text"
+															Value="대파 (다메콘 사용가능)" />
+													<Setter Property="Background"
+															Value="{DynamicResource FleetRepairingBrushKey}" />
+												</MultiDataTrigger>
+												<MultiDataTrigger>
+													<MultiDataTrigger.Conditions>
+														<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Evacuation}"
+																   Value="True" />
+													</MultiDataTrigger.Conditions>
+													<Setter Property="Text"
+															Value="대파 (퇴피완료)" />
+													<Setter Property="Background"
+															Value="{DynamicResource FleetRepairingBrushKey}" />
+												</MultiDataTrigger>
+												<MultiDataTrigger>
+													<MultiDataTrigger.Conditions>
+														<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow}"
+																   Value="True" />
+													</MultiDataTrigger.Conditions>
+													<Setter Property="Text"
+															Value="철퇴 (호위퇴피)" />
+													<Setter Property="Background"
+															Value="{DynamicResource FleetRepairingBrushKey}" />
+												</MultiDataTrigger>
+												<MultiDataTrigger>
+													<MultiDataTrigger.Conditions>
+														<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
+																   Value="True" />
+													</MultiDataTrigger.Conditions>
+													<Setter Property="Text"
+															Value="입거중" />
+													<Setter Property="Background"
 															Value="{DynamicResource FleetRepairingBrushKey}" />
 												</MultiDataTrigger>
 											</Style.Triggers>
@@ -414,23 +414,23 @@
 											   BasedOn="{StaticResource DefaultTextStyleKey}">
 											<Setter Property="Text"
 													Value="탄착관측사격" />
-                                            <Setter Property="Foreground"
+											<Setter Property="Foreground"
 													Value="{DynamicResource ActiveForegroundBrushKey}" />
-                                            <Setter Property="Background"
+											<Setter Property="Background"
 													Value="#FF084008" />
-                                        </Style>
-                                    </TextBlock.Style>
-                                </TextBlock>
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
 
-                                <TextBlock TextAlignment="Center"
+								<TextBlock TextAlignment="Center"
 										   Margin="8,0"
 										   Padding="10,6">
-                                    <TextBlock.Style>
-                                        <Style TargetType="{x:Type TextBlock}"
+									<TextBlock.Style>
+										<Style TargetType="{x:Type TextBlock}"
 											   BasedOn="{StaticResource DefaultTextStyleKey}">
-                                            <Setter Property="Text"
+											<Setter Property="Text"
 													Value="야전컷인: 30 %" />
-                                            <Setter Property="Foreground"
+											<Setter Property="Foreground"
 													Value="{DynamicResource ActiveForegroundBrushKey}" />
 											<Setter Property="Background"
 													Value="#FF101060" />
@@ -479,23 +479,20 @@
 		</Border>
 		<!-- #endregion -->
 
-		<Grid Grid.Row="1">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto" />
-				<RowDefinition />
-			</Grid.RowDefinitions>
+		<Grid Grid.Row="1"
+			  Margin="4">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
 
-			<Grid>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition />
-					<ColumnDefinition Width="2.4*" />
-				</Grid.ColumnDefinitions>
-
-				<ListBox ItemsSource="{Binding Fleets}"
+			<DockPanel>
+				<ListBox DockPanel.Dock="Top"
+						 ItemsSource="{Binding Fleets}"
 						 SelectedValue="{Binding SelectedFleet}"
 						 SelectionMode="Single"
 						 Background="Transparent"
-						 Margin="8,8,0,0">
+						 Margin="4">
 					<ListBox.Template>
 						<ControlTemplate TargetType="{x:Type ListBox}">
 							<Border BorderThickness="0,1,1,1"
@@ -555,7 +552,7 @@
 						<DataTemplate DataType="{x:Type fleetsVm:CombinedFleetViewModel}">
 							<Border Padding="16,6">
 								<StackPanel VerticalAlignment="Center">
-                                    <TextBlock Text="연합함대"
+									<TextBlock Text="연합함대"
 											   Margin="0,0,0,2"
 											   Style="{DynamicResource EmphaticTextStyleKey}"
 											   HorizontalAlignment="Center" />
@@ -568,151 +565,160 @@
 					</ListBox.Resources>
 				</ListBox>
 
-				<Grid Grid.Column="1"
-					  DataContext="{Binding SelectedFleet}"
-					  d:DataContext="{d:DesignInstance fleetsVm:FleetViewModel}">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="Auto" />
-						<ColumnDefinition />
-					</Grid.ColumnDefinitions>
+				<Border DockPanel.Dock="Top"
+						DataContext="{Binding SelectedFleet}"
+						d:DataContext="{d:DesignInstance fleetsVm:FleetViewModel}"
+						BorderThickness=".99"
+						BorderBrush="{DynamicResource BorderBrushKey}"
+						Margin="4"
+						Padding="8,4">
+					<Grid HorizontalAlignment="Center">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="4" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="4" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="Auto" />
+						</Grid.ColumnDefinitions>
 
+						<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+								   HorizontalAlignment="Right"
+								   VerticalAlignment="Bottom"
+								   Margin="1,2">
+							<Run Text="합계레벨" />
+							<Run Text=":" />
+						</TextBlock>
+						<TextBlock Grid.Row="0"
+								   Grid.Column="1"
+								   Text="{Binding State.TotalLevel}"
+								   Style="{DynamicResource EmphaticTextStyleKey}"
+								   VerticalAlignment="Bottom"
+								   Margin="4,2" />
 
-					<Border BorderThickness="1"
-							BorderBrush="{DynamicResource BorderBrushKey}"
-							Margin="8,8,0,0"
-							Padding="8,4">
-						<Grid HorizontalAlignment="Center">
-							<Grid.RowDefinitions>
-								<RowDefinition Height="Auto" />
-								<RowDefinition Height="Auto" />
-								<RowDefinition Height="4" />
-								<RowDefinition Height="Auto" />
-								<RowDefinition Height="Auto" />
-								<RowDefinition Height="Auto" />
-								<RowDefinition Height="4" />
-								<RowDefinition Height="Auto" />
-								<RowDefinition Height="Auto" />
-							</Grid.RowDefinitions>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto" />
-								<ColumnDefinition Width="Auto" />
-							</Grid.ColumnDefinitions>
+						<TextBlock Grid.Row="1"
+								   Grid.Column="0"
+								   Style="{DynamicResource DefaultTextStyleKey}"
+								   HorizontalAlignment="Right"
+								   VerticalAlignment="Bottom"
+								   Margin="1,2">
+							<Run Text="평균레벨" />
+							<Run Text=":" />
+						</TextBlock>
+						<TextBlock Grid.Row="1"
+								   Grid.Column="1"
+								   Text="{Binding State.AverageLevel}"
+								   Style="{DynamicResource EmphaticTextStyleKey}"
+								   VerticalAlignment="Bottom"
+								   Margin="4,2" />
 
-							<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
-									   HorizontalAlignment="Right"
-									   VerticalAlignment="Bottom"
-									   Margin="1,2">
-									<Run Text="합계레벨" />
-									<Run Text=":" />
-                            </TextBlock>
-                            <TextBlock Grid.Row="0"
-									   Grid.Column="1"
-									   Text="{Binding State.TotalLevel}"
-									   Style="{DynamicResource EmphaticTextStyleKey}"
-									   VerticalAlignment="Bottom"
-									   Margin="4,2" />
+						<TextBlock Grid.Row="3"
+								   Grid.Column="0"
+								   Style="{DynamicResource DefaultTextStyleKey}"
+								   HorizontalAlignment="Right"
+								   VerticalAlignment="Bottom"
+								   Margin="1,2">
+							<Run Text="색적치" />
+							<Run Text=":" />
+						</TextBlock>
+						<TextBlock Grid.Row="3"
+								   Grid.Column="1"
+								   Text="{Binding State.ViewRange}"
+								   Style="{DynamicResource EmphaticTextStyleKey}"
+								   VerticalAlignment="Bottom"
+								   Margin="4,2" />
 
-                            <TextBlock Grid.Row="1"
-									   Grid.Column="0"
-									   Style="{DynamicResource DefaultTextStyleKey}"
-									   HorizontalAlignment="Right"
-									   VerticalAlignment="Bottom"
-									   Margin="1,2">
-									<Run Text="평균레벨" />
-									<Run Text=":" />
-                            </TextBlock>
-                            <TextBlock Grid.Row="1"
-									   Grid.Column="1"
-									   Text="{Binding State.AverageLevel}"
-									   Style="{DynamicResource EmphaticTextStyleKey}"
-									   VerticalAlignment="Bottom"
-									   Margin="4,2" />
+						<TextBlock Grid.Row="4"
+								   Grid.Column="0"
+								   Style="{DynamicResource DefaultTextStyleKey}"
+								   HorizontalAlignment="Right"
+								   VerticalAlignment="Bottom"
+								   Margin="1,2">
+							<Run Text="제공권" />
+							<Run Text="(최소)"
+								 Style="{DynamicResource DetailTextElementStyleKey}" />
+							<Run Text=":" />
+						</TextBlock>
+						<TextBlock Grid.Row="4"
+								   Grid.Column="1"
+								   Style="{DynamicResource EmphaticTextStyleKey}"
+								   VerticalAlignment="Bottom"
+								   Margin="4,2">
+							<FrameworkElement.ToolTip>
+								<TextBlock Text="함전만 내부숙련도를 최소로 계산합니다"
+										   Style="{DynamicResource DefaultTextStyleKey}" />
+							</FrameworkElement.ToolTip>
+							<Run Text="{Binding State.MinAirSuperiorityPotential, Mode=OneWay}" />
+							<Run Text="※"
+								 Style="{DynamicResource DefaultTextElementStyleKey}" />
+						</TextBlock>
 
-                            <TextBlock Grid.Row="3"
-									   Grid.Column="0"
-									   Style="{DynamicResource DefaultTextStyleKey}"
-									   HorizontalAlignment="Right"
-									   VerticalAlignment="Bottom"
-									   Margin="1,2">
-									<Run Text="색적능력" />
-									<Run Text=":" />
-                            </TextBlock>
-                            <TextBlock Grid.Row="3"
-									   Grid.Column="1"
-									   Text="{Binding State.ViewRange}"
-									   Style="{DynamicResource EmphaticTextStyleKey}"
-									   VerticalAlignment="Bottom"
-									   Margin="4,2" />
+						<TextBlock Grid.Row="5"
+								   Grid.Column="0"
+								   Style="{DynamicResource DefaultTextStyleKey}"
+								   HorizontalAlignment="Right"
+								   VerticalAlignment="Bottom"
+								   Margin="1,2">
+							<Run Text="제공치" />
+							<Run Text="(최대)"
+								 Style="{DynamicResource DetailTextElementStyleKey}" />
+							<Run Text=":" />
+						</TextBlock>
+						<TextBlock Grid.Row="5"
+								   Grid.Column="1"
+								   Style="{DynamicResource EmphaticTextStyleKey}"
+								   VerticalAlignment="Bottom"
+								   Margin="4,2">
+							<FrameworkElement.ToolTip>
+								<TextBlock Text="모든 함제기에서 내부숙련도를 최대로 계산합니다"
+										   Style="{DynamicResource DefaultTextStyleKey}" />
+							</FrameworkElement.ToolTip>
+							<Run Text="{Binding State.MaxAirSuperiorityPotential, Mode=OneWay}" />
+							<Run Text="※"
+								 Style="{DynamicResource DefaultTextElementStyleKey}" />
+						</TextBlock>
 
-                            <TextBlock Grid.Row="4"
-									   Grid.Column="0"
-									   Style="{DynamicResource DefaultTextStyleKey}"
-									   HorizontalAlignment="Right"
-									   VerticalAlignment="Bottom"
-									   Margin="1,2">
-									<Run Text="제공전력" />
-								<Run Text=":" />
-							</TextBlock>
-							<TextBlock Grid.Row="4"
-									   Grid.Column="1"
-									   Style="{DynamicResource EmphaticTextStyleKey}"
-									   VerticalAlignment="Bottom"
-									   Margin="4,2">
-								<Run Text="{Binding State.MinAirSuperiorityPotential, Mode=OneWay}" />
-								<Run Text="-" />
-								<Run Text="{Binding State.MaxAirSuperiorityPotential, Mode=OneWay}" />
-								<Run Text="" />
-							</TextBlock>
-							<TextBlock Grid.Row="5"
-									   Grid.Column="0"
-									   Style="{DynamicResource DefaultTextStyleKey}"
-									   HorizontalAlignment="Right"
-									   VerticalAlignment="Bottom"
-									   Margin="1,2">
-									<Run Text="촉접률" />
-								<Run Text=":" />
-							</TextBlock>
-							<TextBlock Grid.Row="5"
-									   Grid.Column="1"
-									   Style="{DynamicResource EmphaticTextStyleKey}"
-									   VerticalAlignment="Bottom"
-									   Margin="4,2" >
-								<Run Text="{Binding State.EncounterPercent,Mode=OneWay}"/>
-								<TextBlock.ToolTip>
-									<Run Text="{Binding State.PartEncounterPercent,Mode=OneWay}"/>
-								</TextBlock.ToolTip>
-							</TextBlock>
-							<TextBlock Grid.Row="7"
-									   Grid.Column="0"
-									   Grid.ColumnSpan="2"
-									   Text="{Binding State.Speed}"
-									   Style="{DynamicResource EmphaticTextStyleKey}"
-									   HorizontalAlignment="Center"
-									   VerticalAlignment="Bottom"
-									   Margin="4,2" />
+						<TextBlock Grid.Row="7"
+								   Grid.Column="0"
+								   Grid.ColumnSpan="2"
+								   Text="{Binding State.Speed}"
+								   Style="{DynamicResource EmphaticTextStyleKey}"
+								   HorizontalAlignment="Center"
+								   VerticalAlignment="Bottom"
+								   Margin="4,2" />
 
-							<TextBlock Grid.Row="8"
-									   Grid.Column="0"
-									   Style="{DynamicResource DefaultTextStyleKey}"
-									   HorizontalAlignment="Right"
-									   VerticalAlignment="Bottom"
-									   Margin="1,2"
-									   Visibility="Collapsed">
-									<Run Text="스테이터스" />
-								<Run Text=":" />
-							</TextBlock>
-							<TextBlock Grid.Row="8"
-									   Grid.Column="1"
-									   Text="9999"
-									   Style="{DynamicResource EmphaticTextStyleKey}"
-									   VerticalAlignment="Bottom"
-									   Margin="4,2"
-									   Visibility="Collapsed" />
-						</Grid>
-					</Border>
+						<TextBlock Grid.Row="8"
+								   Grid.Column="0"
+								   Style="{DynamicResource DefaultTextStyleKey}"
+								   HorizontalAlignment="Right"
+								   VerticalAlignment="Bottom"
+								   Margin="1,2"
+								   Visibility="Collapsed">
+							<Run Text="스테이터스" />
+							<Run Text=":" />
+						</TextBlock>
+						<TextBlock Grid.Row="8"
+								   Grid.Column="1"
+								   Text="9999"
+								   Style="{DynamicResource EmphaticTextStyleKey}"
+								   VerticalAlignment="Bottom"
+								   Margin="4,2"
+								   Visibility="Collapsed" />
+					</Grid>
+				</Border>
 
-					<Border Grid.Column="1"
-							Margin="6">
+				<ScrollViewer HorizontalScrollBarVisibility="Disabled"
+							  VerticalScrollBarVisibility="Auto"
+							  Margin="4,5,4,4">
+					<Border DataContext="{Binding SelectedFleet}"
+							d:DataContext="{d:DesignInstance fleetsVm:FleetViewModel}">
 						<Border.Resources>
 							<Style x:Key="IndicatorTextBlockStyleKey"
 								   TargetType="{x:Type TextBlock}">
@@ -724,33 +730,33 @@
 										Value="{DynamicResource ForegroundBrushKey}" />
 								<Setter Property="Background"
 										Value="{DynamicResource BorderBrushKey}" />
+								<Setter Property="Margin"
+										Value="0,0,0,4" />
 								<Setter Property="Padding"
 										Value="12,6" />
-								<Setter Property="Margin"
-										Value="2" />
 							</Style>
 						</Border.Resources>
-                        <StackPanel>
-                            <TextBlock>
+						<StackPanel>
+							<TextBlock>
 								<TextBlock.Style>
 									<Style TargetType="{x:Type TextBlock}"
 										   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
 										<Setter Property="Text"
-												Value="함대 대기중..." />
-                                        <Setter Property="FontFamily"
+												Value="함대 출격대기중" />
+										<Setter Property="FontFamily"
 												Value="{DynamicResource EmphaticFontFamilyKey}" />
-                                        <Setter Property="FontSize"
+										<Setter Property="FontSize"
 												Value="{DynamicResource EmphaticFontSizeKey}" />
-                                        <Setter Property="Padding"
+										<Setter Property="Padding"
 												Value="16,8" />
-                                        <Setter Property="TextAlignment"
+										<Setter Property="TextAlignment"
 												Value="Center" />
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Sortie}"
+										<Style.Triggers>
+											<DataTrigger Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Sortie}"
 														 Value="True">
-                                                <Setter Property="Text"
-														Value="함대 출격중입니다!" />
-                                                <Setter Property="Foreground"
+												<Setter Property="Text"
+														Value="함대 출격중" />
+												<Setter Property="Foreground"
 														Value="{DynamicResource ActiveForegroundBrushKey}" />
 												<Setter Property="Background"
 														Value="#FF5A2020" />
@@ -760,204 +766,224 @@
 								</TextBlock.Style>
 							</TextBlock>
 
-							<UniformGrid Columns="2">
-								<TextBlock>
-									<TextBlock.Style>
-										<Style TargetType="{x:Type TextBlock}"
-											   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
-											<Setter Property="Text"
-													Value="함대출격준비가 아직 완료되지않았습니다" />
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Source.State.IsReady}"
-															 Value="True">
-                                                    <Setter Property="Text"
-															Value="출격준비완료!" />
-                                                    <Setter Property="Foreground"
-															Value="{DynamicResource ActiveForegroundBrushKey}" />
-                                                    <Setter Property="Background"
-															Value="{DynamicResource FleetReSortieBrushKey}" />
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Sortie}"
-															 Value="True">
-                                                    <Setter Property="Text"
-															Value="출격준비완료!" />
-                                                </DataTrigger>
-											</Style.Triggers>
-										</Style>
-									</TextBlock.Style>
-								</TextBlock>
+							<TextBlock>
+								<TextBlock.Style>
+									<Style TargetType="{x:Type TextBlock}"
+										   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
+										<Setter Property="Text"
+												Value="함대 출격준비 미비" />
+										<Style.Triggers>
+											<DataTrigger Binding="{Binding Source.State.IsReady}"
+														 Value="True">
+												<Setter Property="Text"
+														Value="출격준비완료!" />
+												<Setter Property="Foreground"
+														Value="{DynamicResource ActiveForegroundBrushKey}" />
+												<Setter Property="Background"
+														Value="{DynamicResource FleetReSortieBrushKey}" />
+											</DataTrigger>
+											<DataTrigger Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Sortie}"
+														 Value="True">
+												<Setter Property="Text"
+														Value="출격준비완료!" />
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</TextBlock.Style>
+							</TextBlock>
 
-								<ContentControl Content="{Binding}">
-									<ContentControl.Resources>
-										<DataTemplate DataType="{x:Type fleetsVm:FleetViewModel}">
-											<TextBlock>
-												<TextBlock.Style>
-													<Style TargetType="{x:Type TextBlock}"
-														   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
-														<Setter Property="Text"
-																Value="함대는 원정나가있지않습니다." />
-                                                        <Style.Triggers>
-                                                            <MultiDataTrigger>
-                                                                <MultiDataTrigger.Conditions>
-                                                                    <Condition Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Expedition}"
-																			   Value="True" />
-                                                                </MultiDataTrigger.Conditions>
-                                                                <Setter Property="Text">
-                                                                    <Setter.Value>
-                                                                        <MultiBinding StringFormat="함대는 원정중입니다: {0} - {1}">
-                                                                            <Binding Path="Expedition.Mission.Title" />
-																			<Binding Path="Expedition.Remaining" />
-																		</MultiBinding>
-																	</Setter.Value>
-																</Setter>
-																<Setter Property="Foreground"
-																		Value="{DynamicResource ActiveForegroundBrushKey}" />
-																<Setter Property="Background"
-																		Value="{DynamicResource FleetExpeditionBrushKey}" />
-															</MultiDataTrigger>
-														</Style.Triggers>
-													</Style>
-												</TextBlock.Style>
-											</TextBlock>
-										</DataTemplate>
-										<DataTemplate DataType="{x:Type fleetsVm:CombinedFleetViewModel}">
-											<TextBlock>
-												<TextBlock.Style>
-													<Style TargetType="{x:Type TextBlock}"
-														   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
-														<Setter Property="Text"
-																Value="연합함대는 원정에 참가할수 없습니다" />
-                                                    </Style>
-												</TextBlock.Style>
-											</TextBlock>
-										</DataTemplate>
-									</ContentControl.Resources>
-								</ContentControl>
-
-								<TextBlock x:Name="DamageIndicator">
-                                    
-									<TextBlock.Style>
-										<Style TargetType="{x:Type TextBlock}"
-											   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
-											<Setter Property="Text"
-													Value="칸무스 체력상태 양호" />
-                                            <Style.Triggers>
-                                                <MultiDataTrigger>
-                                                    <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Homeport|HeavilyDamaged}"
-																   Value="True" />
-                                                    </MultiDataTrigger.Conditions>
-                                                    <Setter Property="Text"
-															Value="함대에 대파당한 칸무스가 있습니다!" />
-                                                    <Setter Property="Foreground"
-															Value="{DynamicResource ActiveForegroundBrushKey}" />
-													<Setter Property="Background"
-															Value="{DynamicResource FleetRepairingBrushKey}" />
-												</MultiDataTrigger>
-												<MultiDataTrigger>
-													<MultiDataTrigger.Conditions>
-														<Condition Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Sortie|HeavilyDamaged}"
-																   Value="True" />
-													</MultiDataTrigger.Conditions>
+							<ContentControl Content="{Binding}">
+								<ContentControl.Resources>
+									<DataTemplate DataType="{x:Type fleetsVm:FleetViewModel}">
+										<TextBlock>
+											<TextBlock.Style>
+												<Style TargetType="{x:Type TextBlock}"
+													   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
 													<Setter Property="Text"
-															Value="함대에 대파당한 칸무스가 있습니다!" />
-                                                    <Setter Property="Foreground"
-															Value="{DynamicResource ActiveForegroundBrushKey}" />
-                                                    <Setter Property="Background"
-															Value="#FFB40000" />
-                                                </MultiDataTrigger>
-											</Style.Triggers>
-										</Style>
-									</TextBlock.Style>
-								</TextBlock>
+															Value="원정중이 아닙니다" />
+													<Style.Triggers>
+														<MultiDataTrigger>
+															<MultiDataTrigger.Conditions>
+																<Condition Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Expedition}"
+																		   Value="True" />
+															</MultiDataTrigger.Conditions>
+															<Setter Property="Text">
+																<Setter.Value>
+																	<MultiBinding StringFormat="원정중: {0} - {1}">
+																		<Binding Path="Expedition.Mission.Title" />
+																		<Binding Path="Expedition.Remaining" />
+																	</MultiBinding>
+																</Setter.Value>
+															</Setter>
+															<Setter Property="Foreground"
+																	Value="{DynamicResource ActiveForegroundBrushKey}" />
+															<Setter Property="Background"
+																	Value="{DynamicResource FleetExpeditionBrushKey}" />
+														</MultiDataTrigger>
+													</Style.Triggers>
+												</Style>
+											</TextBlock.Style>
+										</TextBlock>
+									</DataTemplate>
+									<DataTemplate DataType="{x:Type fleetsVm:CombinedFleetViewModel}">
+										<TextBlock>
+											<TextBlock.Style>
+												<Style TargetType="{x:Type TextBlock}"
+													   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
+													<Setter Property="Text"
+															Value="연합함대는 원정에 참가할 수 없습니다" />
+												</Style>
+											</TextBlock.Style>
+										</TextBlock>
+									</DataTemplate>
+								</ContentControl.Resources>
+							</ContentControl>
 
-								<TextBlock>
-									<TextBlock.Style>
-										<Style TargetType="{x:Type TextBlock}"
-											   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
-											<Setter Property="Text"
-													Value="함대에 입거해있는 칸무스가 없습니다" />
-                                            <Style.Triggers>
-                                                <MultiDataTrigger>
-                                                    <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repairing}"
-																   Value="True" />
-                                                    </MultiDataTrigger.Conditions>
-                                                    <Setter Property="Text"
-															Value="함대에 입거중인 칸무스가 있습니다" />
-                                                    <Setter Property="Foreground"
-															Value="{DynamicResource ActiveForegroundBrushKey}" />
-													<Setter Property="Background"
-															Value="{DynamicResource FleetRepairingBrushKey}" />
-												</MultiDataTrigger>
-											</Style.Triggers>
-										</Style>
-									</TextBlock.Style>
-								</TextBlock>
+							<TextBlock x:Name="DamageIndicator">
+								<TextBlock.Style>
+									<Style TargetType="{x:Type TextBlock}"
+										   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
+										<Setter Property="Text"
+												Value="함대의 칸무스에 큰 데미지는 없습니다" />
+										<Style.Triggers>
+											<MultiDataTrigger>
+												<MultiDataTrigger.Conditions>
+													<Condition Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Homeport|HeavilyDamaged}"
+															   Value="True" />
+												</MultiDataTrigger.Conditions>
+												<Setter Property="Text"
+														Value="함대에 대파한 칸무스가 있습니다" />
+												<Setter Property="Foreground"
+														Value="{DynamicResource ActiveForegroundBrushKey}" />
+												<Setter Property="Background"
+														Value="{DynamicResource FleetRepairingBrushKey}" />
+											</MultiDataTrigger>
+											<MultiDataTrigger>
+												<MultiDataTrigger.Conditions>
+													<Condition Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Sortie|HeavilyDamaged}"
+															   Value="True" />
+												</MultiDataTrigger.Conditions>
+												<Setter Property="Text"
+														Value="함대에 대파한 칸무스가 있습니다" />
+												<Setter Property="Foreground"
+														Value="{DynamicResource ActiveForegroundBrushKey}" />
+											</MultiDataTrigger>
+										</Style.Triggers>
+									</Style>
+								</TextBlock.Style>
+							</TextBlock>
 
-								<TextBlock>
-									<TextBlock.Style>
-										<Style TargetType="{x:Type TextBlock}"
-											   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
-											<Setter Property="Text"
-													Value="함대 보급 완료" />
-                                            <Style.Triggers>
-                                                <MultiDataTrigger>
-                                                    <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=InShortSupply}"
-																   Value="True" />
-                                                    </MultiDataTrigger.Conditions>
-                                                    <Setter Property="Text"
-															Value="함대에 보급받지 못한 칸무스가 있습니다" />
-                                                    <Setter Property="Foreground"
-															Value="{DynamicResource ActiveForegroundBrushKey}" />
-                                                    <Setter Property="Background"
-															Value="{DynamicResource FleetRepairingBrushKey}" />
-                                                </MultiDataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBlock.Style>
-                                </TextBlock>
+							<TextBlock>
+								<TextBlock.Style>
+									<Style TargetType="{x:Type TextBlock}"
+										   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
+										<Setter Property="Text"
+												Value="입거해있는 칸무스가 없습니다" />
+										<Style.Triggers>
+											<MultiDataTrigger>
+												<MultiDataTrigger.Conditions>
+													<Condition Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repairing}"
+															   Value="True" />
+												</MultiDataTrigger.Conditions>
+												<Setter Property="Text"
+														Value="입거중인 칸무스가 있습니다" />
+												<Setter Property="Foreground"
+														Value="{DynamicResource ActiveForegroundBrushKey}" />
+												<Setter Property="Background"
+														Value="{DynamicResource FleetRepairingBrushKey}" />
+											</MultiDataTrigger>
+										</Style.Triggers>
+									</Style>
+								</TextBlock.Style>
+							</TextBlock>
 
-                                <TextBlock>
-                                    <TextBlock.Style>
-                                        <Style TargetType="{x:Type TextBlock}"
-											   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
-                                            <Setter Property="Text"
-													Value="함대에 피로한 칸무스가 없습니다" />
-                                            <Style.Triggers>
-												<MultiDataTrigger>
-													<MultiDataTrigger.Conditions>
-														<Condition Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Homeport}"
-																   Value="True" />
-														<Condition Binding="{Binding State.Homeport.Condition.IsRejuvenating}"
-																   Value="True" />
-													</MultiDataTrigger.Conditions>
-													<Setter Property="Text">
-														<Setter.Value>
-                                                            <MultiBinding StringFormat="피로회복까지: {0}">
-                                                                <Binding Path="State.Homeport.Condition.Remaining" />
-															</MultiBinding>
-														</Setter.Value>
-													</Setter>
-													<Setter Property="Foreground"
-															Value="{DynamicResource ActiveForegroundBrushKey}" />
-													<Setter Property="Background"
-															Value="{DynamicResource FleetRepairingBrushKey}" />
-												</MultiDataTrigger>
-											</Style.Triggers>
-										</Style>
-									</TextBlock.Style>
-								</TextBlock>
-							</UniformGrid>
+							<TextBlock>
+								<TextBlock.Style>
+									<Style TargetType="{x:Type TextBlock}"
+										   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
+										<Setter Property="Text"
+												Value="보급완료" />
+										<Style.Triggers>
+											<MultiDataTrigger>
+												<MultiDataTrigger.Conditions>
+													<Condition Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=InShortSupply}"
+															   Value="True" />
+												</MultiDataTrigger.Conditions>
+												<Setter Property="Text"
+														Value="함대 보급준비 미비" />
+												<Setter Property="Foreground"
+														Value="{DynamicResource ActiveForegroundBrushKey}" />
+												<Setter Property="Background"
+														Value="{DynamicResource FleetRepairingBrushKey}" />
+											</MultiDataTrigger>
+										</Style.Triggers>
+									</Style>
+								</TextBlock.Style>
+							</TextBlock>
+
+							<TextBlock>
+								<TextBlock.Style>
+									<Style TargetType="{x:Type TextBlock}"
+										   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
+										<Setter Property="Text"
+												Value="함대 컨디션 정상" />
+										<Style.Triggers>
+											<MultiDataTrigger>
+												<MultiDataTrigger.Conditions>
+													<Condition Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Homeport}"
+															   Value="True" />
+													<Condition Binding="{Binding State.Homeport.Condition.IsRejuvenating}"
+															   Value="True" />
+												</MultiDataTrigger.Conditions>
+												<Setter Property="Text">
+													<Setter.Value>
+														<MultiBinding StringFormat="컨디션 회복까지: {0}">
+															<Binding Path="State.Homeport.Condition.Remaining" />
+														</MultiBinding>
+													</Setter.Value>
+												</Setter>
+												<Setter Property="Foreground"
+														Value="{DynamicResource ActiveForegroundBrushKey}" />
+												<Setter Property="Background"
+														Value="{DynamicResource FleetRepairingBrushKey}" />
+											</MultiDataTrigger>
+										</Style.Triggers>
+									</Style>
+								</TextBlock.Style>
+							</TextBlock>
+
+							<TextBlock>
+								<TextBlock.Style>
+									<Style TargetType="{x:Type TextBlock}"
+										   BasedOn="{StaticResource IndicatorTextBlockStyleKey}">
+										<Setter Property="Text"
+												Value="함대편성 정상" />
+										<Style.Triggers>
+											<MultiDataTrigger>
+												<MultiDataTrigger.Conditions>
+													<Condition Binding="{Binding Source.State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=FlagshipIsRepairShip}"
+															   Value="True" />
+												</MultiDataTrigger.Conditions>
+												<Setter Property="Text"
+														Value="공작함이 기함으로 편성되어있습니다" />
+												<Setter Property="Foreground"
+														Value="{DynamicResource ActiveForegroundBrushKey}" />
+												<Setter Property="Background"
+														Value="{DynamicResource FleetRepairingBrushKey}" />
+											</MultiDataTrigger>
+										</Style.Triggers>
+									</Style>
+								</TextBlock.Style>
+							</TextBlock>
 						</StackPanel>
 					</Border>
-				</Grid>
-			</Grid>
+				</ScrollViewer>
+			</DockPanel>
 
-			<Border Grid.Row="1"
+			<Border Grid.Column="1"
 					DataContext="{Binding SelectedFleet}"
-					d:DataContext="{d:DesignInstance fleetsVm:FleetViewModel}">
+					d:DataContext="{d:DesignInstance fleetsVm:FleetViewModel}"
+					Margin="4">
 				<Grid>
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto" />
@@ -966,9 +992,8 @@
 					</Grid.RowDefinitions>
 
 					<Border Grid.Row="2"
-							BorderThickness="1"
-							BorderBrush="{DynamicResource BorderBrushKey}"
-							Margin="8">
+							BorderThickness=".99"
+							BorderBrush="{DynamicResource BorderBrushKey}">
 						<ScrollViewer HorizontalScrollBarVisibility="Auto"
 									  VerticalScrollBarVisibility="Auto"
 									  PanningMode="Both">
@@ -1017,9 +1042,8 @@
 
 					<!-- ☟☟☟ デザイン時に使うやつ ☟☟☟ -->
 					<Border Grid.Row="2"
-							BorderThickness="1"
+							BorderThickness=".99"
 							BorderBrush="{DynamicResource BorderBrushKey}"
-							Margin="8"
 							IsEnabled="{Binding Source={x:Static models:Helper.IsInDesignMode}, Mode=OneWay}"
 							Visibility="{Binding Source={x:Static models:Helper.IsInDesignMode}, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
 						<ContentControl d:DataContext="{d:DesignData /SampleData/ShipViewModelSampleData.xaml}">

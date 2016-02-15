@@ -6,8 +6,10 @@ using System.Windows.Controls;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Models.Settings;
 using Livet;
+using MetroTrilithon.Linq;
 using MetroTrilithon.Mvvm;
 using System.Windows;
+using Grabacr07.KanColleWrapper;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Settings
 {
@@ -17,6 +19,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 
 		public IReadOnlyCollection<DisplayViewModel<ExitConfirmationType>> ExitConfirmationTypes { get; }
 		public IReadOnlyCollection<DisplayViewModel<ExitConfirmationType>> RefreshConfirmationTypes { get; }
+
+
+		public IReadOnlyCollection<DisplayViewModel<string>> TaskbarProgressFeatures { get; }
 
 		#region IsSplit 変更通知プロパティ
 
@@ -31,7 +36,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 				{
 					this._IsSplit = value;
 					this.RaisePropertyChanged();
-
 				}
 			}
 		}
@@ -66,7 +70,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 
 		#endregion
 
-
 		public WindowSettingsViewModel()
 		{
 			this.ExitConfirmationTypes = new List<DisplayViewModel<ExitConfirmationType>>
@@ -81,6 +84,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 				DisplayViewModel.Create(ExitConfirmationType.InSortieOnly, "출격중에만 확인"),
 				DisplayViewModel.Create(ExitConfirmationType.Always, "언제나 확인"),
 			};
+			this.TaskbarProgressFeatures = MetroTrilithon.Linq.EnumerableEx
+				.Return(GeneralSettings.TaskbarProgressSource.ToDefaultDisplay("사용안함"))
+				.Concat(TaskbarProgress.Features.ToDisplay(x => x.Id, x => x.DisplayName))
+				.ToList();
 		}
 
 		public void Initialize()
@@ -101,20 +108,24 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 			{
 				this.settings.IsSplit.Value = this.IsSplit;
 				this.settings.Dock.Value = this.Dock;
-				if (this.settings?.Dock == Dock.Right || this.settings?.Dock == Dock.Left || this.settings?.IsSplit)
+				try
 				{
-					WindowService.Current.Information.Vertical = Visibility.Collapsed;
-					WindowService.Current.Information.Horizontal = Visibility.Visible;
-					WindowService.Current.Information.Overview.Vertical = Visibility.Collapsed;
-					WindowService.Current.Information.Overview.Horizontal = Visibility.Visible;
+					if (this.settings?.Dock == Dock.Right || this.settings?.Dock == Dock.Left || this.settings?.IsSplit)
+					{
+						WindowService.Current.Information.Vertical = Visibility.Collapsed;
+						WindowService.Current.Information.Horizontal = Visibility.Visible;
+						WindowService.Current.Information.Overview.Vertical = Visibility.Collapsed;
+						WindowService.Current.Information.Overview.Horizontal = Visibility.Visible;
+					}
+					else
+					{
+						WindowService.Current.Information.Vertical = Visibility.Visible;
+						WindowService.Current.Information.Horizontal = Visibility.Collapsed;
+						WindowService.Current.Information.Overview.Vertical = Visibility.Visible;
+						WindowService.Current.Information.Overview.Horizontal = Visibility.Collapsed;
+					}
 				}
-				else
-				{
-					WindowService.Current.Information.Vertical = Visibility.Visible;
-					WindowService.Current.Information.Horizontal = Visibility.Collapsed;
-					WindowService.Current.Information.Overview.Vertical = Visibility.Visible;
-					WindowService.Current.Information.Overview.Horizontal = Visibility.Collapsed;
-				}
+				catch { }
 			}
 		}
 

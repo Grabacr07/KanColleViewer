@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Composition;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis;
 
 namespace Grabacr07.KanColleViewer.PluginAnalyzer
 {
@@ -111,11 +112,36 @@ namespace Grabacr07.KanColleViewer.PluginAnalyzer
 			return isRequired && !isDefined;
 		}
 
-		public static string GetGuidMetadataValue(this ClassDeclarationSyntax classDeclaration)
+		public static Guid? GetGuidMetadata(this AttributeArgumentSyntax syntax, SemanticModel semanticModel)
+		{
+			Guid guid;
+			if (Guid.TryParse(syntax.GetGuidMetadataValue(), out guid)) return guid;
+			if (Guid.TryParse(syntax.GetGuidMetadataConstantValue(semanticModel), out guid)) return guid;
+			return null;
+		}
+
+		public static Guid? GetGuidMetadataValue(this ClassDeclarationSyntax classDeclaration, SemanticModel semanticModel)
+		{
+			return classDeclaration.GetGuidMetadataValueSyntax()?.GetGuidMetadata(semanticModel);
+		}
+
+		public static string GetGuidMetadataValue(this AttributeArgumentSyntax syntax)
+		{
+			return syntax?.ToString().Replace("\"", "");
+		}
+
+		private static string GetGuidMetadataConstantValue(this AttributeArgumentSyntax syntax, SemanticModel semanticModel)
+		{
+			if (syntax == null) return null;
+			var constantValue = semanticModel.GetConstantValue(syntax.Expression);
+			return constantValue.Value?.ToString();
+		}
+
+		public static AttributeArgumentSyntax GetGuidMetadataValueSyntax(this ClassDeclarationSyntax classDeclaration)
 		{
 			return classDeclaration.GetAttributes("ExportMetadata")
 				.FirstOrDefault(a => a.ArgumentList.Arguments[0].ToString() == $"\"{nameof(IPluginGuid.Guid)}\"")
-				?.ArgumentList.Arguments[1].ToString().Replace("\"", "");
+				?.ArgumentList.Arguments[1];
 		}
 
 		public static IEnumerable<AttributeSyntax> GetAttributes(this ClassDeclarationSyntax classDeclaration, string attributeName)

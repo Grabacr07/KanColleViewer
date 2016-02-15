@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MetroTrilithon.Controls;
 using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.ViewModels.Settings;
+using MetroTrilithon.UI.Controls;
 
 namespace Grabacr07.KanColleViewer.Views.Settings
 {
@@ -42,6 +42,13 @@ namespace Grabacr07.KanColleViewer.Views.Settings
 	}
 
 	public class ToolText : FunctionLink<ITool>
+	{
+		public override void Click()
+		{
+		}
+	}
+
+	public class TaskbarProgressText : FunctionLink<ITaskbarProgress>
 	{
 		public override void Click()
 		{

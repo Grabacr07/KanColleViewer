@@ -473,6 +473,16 @@ namespace Grabacr07.KanColleWrapper.Models
 				ready = false;
 			}
 
+			var flagshipIsRepairShip = this.source
+				.Where(x => x.Ships.Length >= 1)
+				.Select(x => x.Ships[0])
+				.Any(x => x.Info.ShipType.Id == 19);
+			if (flagshipIsRepairShip)
+			{
+				state |= FleetSituation.FlagshipIsRepairShip;
+				if (KanColleClient.Current.Settings.CheckFlagshipIsRepairShip) ready = false;
+			}
+
 			this.Situation = state;
 			this.IsReady = ready;
 

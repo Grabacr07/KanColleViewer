@@ -17,7 +17,7 @@ namespace Grabacr07.KanColleViewer.PluginAnalyzer
 	public class InvalidGuidMetadataAnalyzer : DiagnosticAnalyzer
 	{
 		public static readonly string DiagnosticId
-			= "KanColleViewer.PluginAnalyzer.InvalidGuidMetadata";
+			= "KanColleViewer_PluginAnalyzer_InvalidGuidMetadata";
 
 		internal static readonly LocalizableString InvalidGuidMetadataMessageFormat
 			= new LocalizableResourceString(nameof(Resources.InvalidGuidMetadataMessageFormat), Resources.ResourceManager, typeof(Resources));
@@ -43,17 +43,20 @@ namespace Grabacr07.KanColleViewer.PluginAnalyzer
 				.Where(x => x.IsPluginClass())
 				.ToArray();
 			var plugins = allPlugins.Where(x => x.IsExportIPlugin()).ToArray();
-
+			
 			foreach (var p in allPlugins)
 			{
-				var guidVaue = p.GetGuidMetadataValue();
-				if (guidVaue == null) continue;	//GUID な Metadata がない場合はスルー
+				var semanticModel = compilation.GetSemanticModel(p.SyntaxTree);
+				var syntax = p.GetGuidMetadataValueSyntax();
+				if (syntax == null) continue;	//GUID な Metadata がない場合はスルー
 
 				// GUID として解釈できない値か、IPlugin で未定義の GUID が指定されてたらアウト
-				Guid guid;
-				if (!Guid.TryParse(guidVaue, out guid)
-					|| plugins.All(x => x.GetGuidMetadataValue().ToUpper() != guidVaue.ToUpper()))
+				var guidMetadata = syntax.GetGuidMetadata(semanticModel);
+				if (!guidMetadata.HasValue
+					|| plugins.All(x => x.GetGuidMetadataValueSyntax()?.GetGuidMetadata(compilation.GetSemanticModel(x.SyntaxTree)) != guidMetadata))
+				{
 					context.ReportDiagnostic(Diagnostic.Create(InvalidGuidMetadataRule, p.GetLocation()));
+				}
 			}
 		}
 	}

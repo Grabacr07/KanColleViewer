@@ -41,7 +41,6 @@ namespace Grabacr07.KanColleWrapper.Models
 			new ViewRangeType1();
 			new ViewRangeType2();
 			new ViewRangeType3();
-			new ViewRangeType4();
 			// ReSharper restore ObjectCreationAsStatement
 		}
 
@@ -134,7 +133,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			// > + 水上偵察機 × (2.00)
 			// > + 水上爆撃機 × (1.78)
 			// > + 小型電探 × (1.00)
-			// > + 大型電探 × (0.99)
+			// > + 大型電探 × (.99)
 			// > + 探照灯 × (0.91)
 			// > + √(各艦毎の素索敵) × (1.69)
 			// > + (司令部レベルを5の倍数に切り上げ) × (-0.61)
@@ -178,7 +177,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				case SlotItemType.小型電探:
 					return score * 1.00;
 				case SlotItemType.大型電探:
-					return score * 0.99;
+					return score * .99;
 
 				case SlotItemType.探照灯:
 					return score * 0.91;
@@ -187,7 +186,6 @@ namespace Grabacr07.KanColleWrapper.Models
 			return .0;
 		}
 	}
-
 	public class ViewRangeType4 : ViewRangeCalcLogic
 	{
 		public override sealed string Id
@@ -266,5 +264,4 @@ namespace Grabacr07.KanColleWrapper.Models
 			return .0;
 		}
 	}
-
 }

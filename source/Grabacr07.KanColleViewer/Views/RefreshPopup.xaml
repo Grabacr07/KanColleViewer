@@ -7,7 +7,7 @@
 				   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 				   xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 				   xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
-				   xmlns:metro2="clr-namespace:MetroTrilithon.Controls;assembly=MetroTrilithon.Desktop"
+				   xmlns:metro2="http://schemes.grabacr.net/winfx/2015/personal/controls"
 				   xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 				   xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
@@ -15,7 +15,7 @@
 				   xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 				   xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 				   mc:Ignorable="d"
-				   d:DataContext="{d:DesignInstance viewModels:RefreshPopupViewModel}"
+				   d:DataContext="{d:DesignInstance viewModels:DialogViewModel}"
 				   Style="{DynamicResource MetroDialogStyleKey}"
 				   Title="새로고침"
 				   WindowStartupLocation="CenterScreen"
@@ -52,12 +52,12 @@
 			<metro2:CallMethodButton Content="네"
 									 MinWidth="100"
 									 Padding="20,5"
-									 MethodName="RefreshNav"
+									 MethodName="OK"
 									 Margin="12,0,0,0" />
 			<metro2:CallMethodButton Content="아니오"
 									 MinWidth="100"
 									 Padding="20,5"
-									 MethodName="PopupClose"
+									 MethodName="Cancel"
 									 Margin="12,0,0,0" />
 		</StackPanel>
 	</Grid>
