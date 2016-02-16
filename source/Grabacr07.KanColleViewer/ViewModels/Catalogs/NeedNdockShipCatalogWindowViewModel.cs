@@ -94,7 +94,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 					.Select(kvp => kvp.Value)
 					.Where(this.ShipDamagedFilter.Predicate)
 					.Where(x => x.TimeToRepair != TimeSpan.Zero)
-					.Where(x => x.Situation != KanColleWrapper.Models.ShipSituation.Repair);
+					.Where(x => !x.Situation.HasFlag(KanColleWrapper.Models.ShipSituation.Repair));
 
 				this.Ships = this.SortWorker.Sort(list)
 					.Select((x, i) => new ShipViewModel(i + 1, x, null))
