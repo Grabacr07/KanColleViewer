@@ -38,9 +38,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 		{
 			this.Id = id;
 			this.Source = expedition;
-			this.Source
-				.Subscribe(nameof(Expedition.ReturnTime), () => this.UpdateState()).AddTo(this)
-				.Subscribe(nameof(Expedition.Remaining), () => this.UpdateState()).AddTo(this);
+			this.Source.Subscribe(nameof(Expedition.Remaining), () => this.UpdateState()).AddTo(this);
 
 		}
 
