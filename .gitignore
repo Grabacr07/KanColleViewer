@@ -147,3 +147,4 @@ $RECYCLE.BIN/
 .DS_Store
 /packaging
 /source/.vs/config
+*.dll
