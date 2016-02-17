@@ -55,10 +55,12 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
-		#region ReturnTime / IsInExecution 変更通知プロパティ
+		#region ReturnTime / Remaining / IsInExecution 変更通知プロパティ
 
 		private DateTimeOffset? _ReturnTime;
-
+		/// <summary>
+		/// 遠征から帰還する日時を取得します。
+		/// </summary>
 		public DateTimeOffset? ReturnTime
 		{
 			get { return this._ReturnTime; }
@@ -69,35 +71,24 @@ namespace Grabacr07.KanColleWrapper.Models
 					this._ReturnTime = value;
 					this.notificated = false;
 					this.RaisePropertyChanged();
+					this.RaisePropertyChanged(nameof(this.Remaining));
 					this.RaisePropertyChanged(nameof(this.IsInExecution));
 				}
 			}
 		}
 
+		/// <summary>
+		/// 遠征から帰還するまでの時間を取得します。
+		/// </summary>
+		public TimeSpan? Remaining
+			=> !this.ReturnTime.HasValue ? (TimeSpan?)null
+			: this.ReturnTime.Value < DateTimeOffset.Now ? TimeSpan.Zero
+			: this.ReturnTime.Value - DateTimeOffset.Now;
 
 		/// <summary>
 		/// 現在遠征を実行中かどうかを示す値を取得します。
 		/// </summary>
 		public bool IsInExecution => this.ReturnTime.HasValue;
-
-		#endregion
-
-		#region Remaining 変更通知プロパティ
-
-		private TimeSpan? _Remaining;
-
-		public TimeSpan? Remaining
-		{
-			get { return this._Remaining; }
-			set
-			{
-				if (this._Remaining != value)
-				{
-					this._Remaining = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
 
 		#endregion
 
@@ -119,7 +110,6 @@ namespace Grabacr07.KanColleWrapper.Models
 				this.Id = -1;
 				this.Mission = null;
 				this.ReturnTime = null;
-				this.Remaining = null;
 			}
 			else
 			{
@@ -132,24 +122,14 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		private void UpdateCore()
 		{
-			if (this.ReturnTime.HasValue)
-			{
-				var remaining = this.ReturnTime.Value - DateTimeOffset.Now;
-				if (remaining.Ticks < 0) remaining = TimeSpan.Zero;
+			this.RaisePropertyChanged(nameof(this.Remaining));
 
-				this.Remaining = remaining;
-
-				if (!this.notificated
-					&& this.Returned != null
-					&& remaining <= TimeSpan.FromSeconds(KanColleClient.Current.Settings.NotificationShorteningTime))
-				{
-					this.Returned(this, new ExpeditionReturnedEventArgs(this.fleet.Name));
-					this.notificated = true;
-				}
-			}
-			else
+			if (!this.notificated
+				&& this.Returned != null
+				&& this.Remaining <= TimeSpan.FromSeconds(KanColleClient.Current.Settings.NotificationShorteningTime))
 			{
-				this.Remaining = null;
+				this.Returned(this, new ExpeditionReturnedEventArgs(this.fleet.Name));
+				this.notificated = true;
 			}
 		}
 
