@@ -251,12 +251,13 @@ namespace Grabacr07.KanColleWrapper.Models
 		public void Calculate()
 		{
 			var ships = this.source.SelectMany(x => x.Ships).WithoutEvacuated().ToArray();
+			var firstFleetShips = this.source.FirstOrDefault()?.Ships.WithoutEvacuated().ToArray() ?? new Ship[0];
 
 			this.TotalLevel = ships.HasItems() ? ships.Sum(x => x.Level) : 0;
 			this.AverageLevel = ships.HasItems() ? (double)this.TotalLevel / ships.Length : 0.0;
-			this.AirSuperiorityPotential = ships.Sum(s => s.CalcAirSuperiorityPotential());
-			this.MinAirSuperiorityPotential = ships.Sum(s => s.CalcMinAirSuperiorityPotential());
-			this.MaxAirSuperiorityPotential = ships.Sum(s => s.CalcMaxAirSuperiorityPotential());
+			this.AirSuperiorityPotential = firstFleetShips.Sum(s => s.CalcAirSuperiorityPotential());
+			this.MinAirSuperiorityPotential = firstFleetShips.Sum(s => s.CalcMinAirSuperiorityPotential());
+			this.MaxAirSuperiorityPotential = firstFleetShips.Sum(s => s.CalcMaxAirSuperiorityPotential());
 			this.Speed = ships.All(x => x.Info.Speed == ShipSpeed.Fast)
 				? FleetSpeed.Fast
 				: ships.All(x => x.Info.Speed == ShipSpeed.Low)
