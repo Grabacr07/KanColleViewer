@@ -18,9 +18,9 @@ namespace Grabacr07.KanColleViewer.Plugins
 	[Export(typeof(ITaskbarProgress))]
 	[Export(typeof(ISettings))]
 	[ExportMetadata("Guid", guid)]
-	[ExportMetadata("Title", "ExpeditionProgressIndicator")]
+	[ExportMetadata("Title", "タスク バー遠征モニター")]
 	[ExportMetadata("Description", "遠征の状況をタスク バー インジケーターに報告します。")]
-	[ExportMetadata("Version", "1.0")]
+	[ExportMetadata("Version", "1.1")]
 	[ExportMetadata("Author", "@Grabacr07")]
 	public class ExpeditionProgress : IPlugin, ITaskbarProgress, ISettings, IDisposableHolder
 	{
