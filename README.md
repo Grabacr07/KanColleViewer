@@ -41,10 +41,10 @@ Please refer to the [FAQ](https://github.com/Yuubari/KanColleViewer/wiki/Frequen
 The original developer, ([@Grabacr07](https://twitter.com/Grabacr07)), uses Windows 8.1 Pro to build and test this application.
 The toast notification system from Windows 8 is not supported on Windows 7 (although you will still get the good old tray icon notifications). It's recommended to run KCV in Windows 8.
 
-* [.NET Framework 4.5](http://www.microsoft.com/en-us/download/details.aspx?id=30653)
+* .NET Framework 4.6 ([Web Installer](https://www.microsoft.com/en-us/download/details.aspx?id=48130) or [Offline Installer](https://www.microsoft.com/en-us/download/details.aspx?id=48137))
 
-Windows 7 requires that you install .NET Framework 4.5.
-Windows 8 comes with it pre-installed.
+Windows 7 and 8.x require that you install .NET Framework 4.6.
+Windows 10 comes with it pre-installed.
 
 KCV uses IE to display the game's web page, so it depends on IE settings. If you're experiencing issues accessing the game, please verify that Flash works in Internet Explorer. It's also recommended to install the latest version of [Adobe Flash Player](https://get.adobe.com/flashplayer/).
 
@@ -54,7 +54,7 @@ KCV does not perform Flash extraction and instead provides a viewport of sorts t
 
 ### Development Environment and Language
 
-Developed in C# + WPF on Windows 8.1 Pro using Visual Studio Enterprise 2015.
+Developed in C# + WPF on Windows 10 Pro using Visual Studio Enterprise 2015.
 
 ### License
 
