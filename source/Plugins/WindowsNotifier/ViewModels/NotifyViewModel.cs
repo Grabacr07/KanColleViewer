@@ -1,4 +1,5 @@
 ﻿using Grabacr07.KanColleViewer.Composition;
+using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Plugins.Properties;
 using Livet;
 using System;
@@ -22,6 +23,61 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 				settings.Save();
 				this.RaisePropertyChanged();
 			}
+		}
+
+		public void Critical()
+		{
+			var notification = Notification.Create(
+								"",
+								"대파알림",
+								"대파알림 테스트",
+								() => WindowService.Current.MainWindow.Activate());
+
+			NotifyService.Current.Notify(notification);
+		}
+		public void Dockyard()
+		{
+
+			var notification = Notification.Create(
+								"",
+								"건조완료",
+								"테스트",
+								() => WindowService.Current.MainWindow.Activate());
+
+			NotifyService.Current.Notify(notification);
+		}
+		public void expedition()
+		{
+
+			var notification = Notification.Create(
+								"",
+								"원정완료",
+								"테스트",
+								() => WindowService.Current.MainWindow.Activate());
+
+			NotifyService.Current.Notify(notification);
+		}
+		public void Rejuvenated()
+		{
+
+			var notification = Notification.Create(
+								"",
+								"피로회복완료",
+								"테스트",
+								() => WindowService.Current.MainWindow.Activate());
+
+			NotifyService.Current.Notify(notification);
+		}
+		public void repair()
+		{
+
+			var notification = Notification.Create(
+								"",
+								"정비완료",
+								"테스트",
+								() => WindowService.Current.MainWindow.Activate());
+
+			NotifyService.Current.Notify(notification);
 		}
 	}
 }

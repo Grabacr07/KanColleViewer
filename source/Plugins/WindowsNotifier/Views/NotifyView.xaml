@@ -7,6 +7,7 @@
 			 xmlns:Notifier="clr-namespace:Grabacr07.KanColleViewer.Plugins.ViewModels"
 			 xmlns:ms="clr-namespace:Grabacr07.KanColleViewer.Plugins.Properties"
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+			 xmlns:metro2="http://schemes.grabacr.net/winfx/2015/personal/controls"
 			 d:DataContext="{d:DesignInstance Notifier:NotifyViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
@@ -27,5 +28,32 @@
 				</Binding>
 			</metro:PromptTextBox.Text>
 		</metro:PromptTextBox>
+		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
+		<TextBlock Text="알림음을 테스트합니다" Margin="0,0,0,10"/>
+		<metro2:CallMethodButton Content="대파" 
+								 Width="150"
+								 MethodName="Critical"
+								 HorizontalAlignment="Left" 
+								 Margin="0,5"/>
+		<metro2:CallMethodButton Content="건조완료" 
+								 Width="150"
+								 MethodName="Dockyard"
+								 HorizontalAlignment="Left" 
+								 Margin="0,5"/>
+		<metro2:CallMethodButton Content="원정알림" 
+								 Width="150"
+								 MethodName="expedition"
+								 HorizontalAlignment="Left" 
+								 Margin="0,5"/>
+		<metro2:CallMethodButton Content="피로회복 알림" 
+								 Width="150"
+								 MethodName="Rejuvenated"
+								 HorizontalAlignment="Left" 
+								 Margin="0,5"/>
+		<metro2:CallMethodButton Content="수리 알림" 
+								 Width="150"
+								 MethodName="repair"
+								 HorizontalAlignment="Left" 
+								 Margin="0,5"/>
 	</StackPanel>
 </UserControl>
