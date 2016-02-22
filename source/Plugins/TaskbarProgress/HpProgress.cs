@@ -20,7 +20,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 	[ExportMetadata("Guid", guid)]
 	[ExportMetadata("Title", "HpProgressIndicator")]
 	[ExportMetadata("Description", "함대내 최대 손상된 함의 HP를 작업표시줄에 표시합니다")]
-	[ExportMetadata("Version", "1.0")]
+	[ExportMetadata("Version", "1.1")]
 	[ExportMetadata("Author", "@veigr")]
 	public class HpProgress : IPlugin, ITaskbarProgress, IDisposableHolder
 	{
@@ -86,6 +86,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 				ships = org.Fleets.Values
 					.Where(x => x.IsInSortie)
 					.SelectMany(x => x.Ships)
+					.Where(s => (s.Situation & (ShipSituation.Tow | ShipSituation.Evacuation)) == 0)
 					.ToArray();
 			}
 			else

@@ -247,7 +247,7 @@
 								</Style>
 								<Style TargetType="{x:Type StackPanel}">
 									<Setter Property="Margin"
-											Value="0,0,40,0" />
+											Value="0,0,25,0" />
 									<Setter Property="Grid.IsSharedSizeScope"
 											Value="True" />
 								</Style>
@@ -405,6 +405,28 @@
 													 IsChecked="{Binding Damaged, Mode=TwoWay}" />
 										<RadioButton Content="손상되지않음"
 													 IsChecked="{Binding Undamaged, Mode=TwoWay}" />
+									</WrapPanel>
+								</Grid>
+
+								<Grid DataContext="{Binding ShipConditionFilter}">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="FilterName" />
+										<ColumnDefinition Width="10" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<TextBlock Margin="0,2"
+											   HorizontalAlignment="Right">
+										<Run Text="컨디션" />
+										<Run Text=":" />
+									</TextBlock>
+									<WrapPanel Grid.Column="2">
+										<RadioButton Content="모두"
+													 IsChecked="{Binding Both, Mode=TwoWay}" />
+										<RadioButton Content="50이상"
+													 IsChecked="{Binding Brilliant, Mode=TwoWay}" />
+										<RadioButton Content="49이하"
+													 IsChecked="{Binding Unbrilliant, Mode=TwoWay}" />
 									</WrapPanel>
 								</Grid>
 							</StackPanel>
