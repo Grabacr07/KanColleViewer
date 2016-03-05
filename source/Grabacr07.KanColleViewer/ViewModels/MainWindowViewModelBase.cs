@@ -44,6 +44,27 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region Contents変更通知プロパティ
+		private ObservableSynchronizedCollection<ViewModel> _Contents;
+
+		/// <summary>
+		/// アタッチされたウィンドウに表示するコンテンツを特定するための <see cref="ViewModel"/> オブジェクト群を取得または設定します。
+		/// </summary>
+		public ObservableSynchronizedCollection<ViewModel> Contents
+		{
+			get
+			{ return this._Contents; }
+			set
+			{
+				if (this._Contents != value)
+				{
+					this._Contents = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
+
 		#region StatusBar 変更通知プロパティ
 
 		private ViewModel _StatusBar;

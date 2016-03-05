@@ -111,13 +111,32 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		}
 
 		#endregion
+		
+		#region InfoViewGridColumnNumber変更通知プロパティ
+		private int _InfoViewGridColumnNumber = 1;
+
+		public int InfoViewGridColumnNumber
+		{
+			get
+			{ return this._InfoViewGridColumnNumber; }
+			set
+			{ 
+				if (this._InfoViewGridColumnNumber == value)
+					return;
+				this._InfoViewGridColumnNumber = value;
+				RaisePropertyChanged();
+			}
+		}
+		#endregion
 
 		public KanColleWindowViewModel(bool isMainWindow) : base(isMainWindow)
 		{
 			this.Settings = SettingsHost.Instance<KanColleWindowSettings>();
 			this.Settings.Dock.Subscribe(x => this.BrowserDock = x.Reverse()).AddTo(this);
 			this.Settings.Dock.Subscribe(x => this.ToolAreaMaxWidth = this.GetToolAreaWidth(x)).AddTo(this);
+			this.Settings.Dock.Subscribe(this.ChangeInfoViewGridColumnNumber).AddTo(this);
 			this.Settings.IsSplit.Subscribe(this.SplitWindow).AddTo(this);
+			this.Settings.IsDivide.Subscribe(this.DivideWindow).AddTo(this);
 
 			this.Navigator = new NavigatorViewModel().AddTo(this);
 			this.Volume = new VolumeViewModel().AddTo(this);
@@ -221,6 +240,62 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			{
 				this.MergeWindow();
 			}
+		}
+
+		private void DivideWindow(bool divide)
+		{
+			if (this.Contents == null || this.Contents[0] is StartContentViewModel)
+				return;
+			
+			if (this.Settings.IsSplit)
+				return;
+
+			var infoWindowNum = divide ? 2 : 1;
+
+			if (this.Contents.Count == infoWindowNum)
+				return;
+
+			System.Windows.Application.Current.Dispatcher.Invoke(() =>
+			{
+				this.Contents.Clear();
+				this.AddInformationViewModelToContents(infoWindowNum);
+				this.Content = this.Contents[0];
+			});
+
+			this.ChangeInfoViewGridColumnNumber();
+		}
+
+		/// <summary>
+		/// Add setted number of InformationViewModel to Contents
+		/// </summary>
+		/// <param name="num">Describe how many ViewModel to be add</param>
+		private void AddInformationViewModelToContents(int num = 1)
+		{
+			for (var i = 0; i < num; i++)
+			{
+				var infoViewModel = new InformationViewModel().AddTo(this);
+				infoViewModel.IsPrimary = i == 0;	// 追加するInformationViewModelがPrimaryであるか否かを設定
+				this.Contents.Add(infoViewModel);
+			}
+		}
+
+		private void ChangeInfoViewGridColumnNumber()
+		{
+			this.ChangeInfoViewGridColumnNumber(this.Settings.Dock);
+		}
+
+		/// <summary>
+		/// Change the Grid's Column number with Dock's status
+		/// </summary>
+		private void ChangeInfoViewGridColumnNumber(Dock currentDock)
+		{
+			// DockがLeft/Rightの際には縦に並べたいので Columns を 1 に設定する
+			if (currentDock == Dock.Left || currentDock == Dock.Right)
+				this.InfoViewGridColumnNumber = 1;
+
+			// DockがTop/Bottomの際には横に並べたいので Columns を 2 に設定する
+			if (currentDock == Dock.Top || currentDock == Dock.Bottom)
+				this.InfoViewGridColumnNumber = 2;
 		}
 
 		private void HandleSplitWindowClosed(object sender, EventArgs eventArgs)

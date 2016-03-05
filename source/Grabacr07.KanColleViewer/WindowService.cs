@@ -41,10 +41,12 @@ namespace Grabacr07.KanColleViewer
 		public static WindowService Current { get; } = new WindowService();
 
 		private WindowServiceMode currentMode = (WindowServiceMode)(-1); // 初回で setter 入るように
+		private ObservableSynchronizedCollection<ViewModel> contents; 
 		private InformationViewModel information;
 		private KanColleWindowViewModel kanColleWindow;
 		private InformationWindowViewModel informationWindow;
 		private readonly LivetCompositeDisposable compositeDisposable = new LivetCompositeDisposable();
+		private KanColleWindowSettings settings;
 
 		public WindowServiceMode Mode
 		{
@@ -58,13 +60,21 @@ namespace Grabacr07.KanColleViewer
 					{
 						case WindowServiceMode.NotStarted:
 							var startContent = new StartContentViewModel(this.kanColleWindow?.Navigator);
+
+							if(this.contents == null)
+								this.contents = new ObservableSynchronizedCollection<ViewModel>();
+							this.contents.Clear();
+							this.contents.Add(startContent);
+
 							this.MainWindow.Content = startContent;
+							this.MainWindow.Contents = this.contents;
 							this.MainWindow.StatusBar = startContent;
 							StatusService.Current.Set(Resources.StatusBar_NotStarted);
 							ThemeService.Current.ChangeAccent(Accent.Purple);
 							break;
 						case WindowServiceMode.Started:
 							this.MainWindow.Content = this.Information;
+							this.MainWindow.Contents = this.Informations;
 							this.MainWindow.StatusBar = this.Information.SelectedItem;
 							StatusService.Current.Set(Resources.StatusBar_Ready);
 							ThemeService.Current.ChangeAccent(Accent.Blue);
@@ -90,7 +100,7 @@ namespace Grabacr07.KanColleViewer
 			{
 				if (this.information == null)
 				{
-					this.information = new InformationViewModel().AddTo(this);
+					this.information = (InformationViewModel)this.Informations[0];
 					this.information
 						.Subscribe(nameof(InformationViewModel.SelectedItem), () => this.MainWindow.StatusBar = this.Information.SelectedItem)
 						.AddTo(this);
@@ -99,6 +109,34 @@ namespace Grabacr07.KanColleViewer
 			}
 		}
 
+		public ObservableSynchronizedCollection<ViewModel> Informations
+		{
+			get
+			{
+				if (this.settings == null)
+					this.settings = SettingsHost.Instance<KanColleWindowSettings>();
+
+				if (this.contents == null)
+					this.contents = new ObservableSynchronizedCollection<ViewModel>();
+
+				if (this.contents.Count > 0 && this.contents[0] is InformationViewModel)
+					return this.contents;
+
+				System.Windows.Application.Current.Dispatcher.Invoke(() =>
+				{
+					this.contents.Clear();
+					var informationNum = this.settings?.IsDivide ? 2 : 1;
+					for (var i = 0; i < informationNum; i++)
+					{
+						var infoViewModel = new InformationViewModel().AddTo(this);
+						infoViewModel.IsPrimary = i == 0;
+						this.contents.Add(infoViewModel);
+					}
+				});
+
+				return this.contents;
+			}
+		}
 
 		private WindowService() { }
 

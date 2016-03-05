@@ -247,6 +247,45 @@
 								</Trigger>
 							</Style.Triggers>
 						</Style>
+
+						<Style TargetType="{x:Type CheckBox}">
+							<Setter Property="Background"
+									Value="{DynamicResource ActiveBackgroundBrushKey}" />
+							<Setter Property="Foreground"
+									Value="{DynamicResource ActiveForegroundBrushKey}" />
+							<Setter Property="Padding"
+									Value="16,8" />
+							<Setter Property="HorizontalContentAlignment"
+									Value="Center" />
+							<Setter Property="Template">
+								<Setter.Value>
+									<ControlTemplate TargetType="{x:Type CheckBox}">
+										<Border Background="{TemplateBinding Background}">
+											<ContentPresenter ContentSource="Content"
+															  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+															  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+															  Margin="{TemplateBinding Padding}" />
+										</Border>
+									</ControlTemplate>
+								</Setter.Value>
+							</Setter>
+							<Style.Triggers>
+								<Trigger Property="IsChecked"
+										 Value="True">
+									<Setter Property="Background"
+											Value="{DynamicResource AccentBrushKey}" />
+									<Setter Property="Foreground"
+											Value="{DynamicResource AccentForegroundBrushKey}" />
+								</Trigger>
+								<Trigger Property="IsMouseOver"
+										 Value="True">
+									<Setter Property="Background"
+											Value="{DynamicResource HighlightBackgroundBrushKey}" />
+									<Setter Property="Foreground"
+											Value="{DynamicResource HighlightForegroundBrushKey}" />
+								</Trigger>
+							</Style.Triggers>
+						</Style>
 					</UniformGrid.Resources>
 
 					<Border Margin="4,0">
@@ -275,6 +314,10 @@
 										 DockPanel.Dock="Top"
 										 IsChecked="{Binding IsSplit, Mode=TwoWay, Converter={StaticResource ReverseBooleanConverter}}"
 										 Content="シングル ウィンドウ" />
+							<CheckBox x:Name="DivideCheckBox"
+									  DockPanel.Dock="Bottom"
+									  IsChecked="{Binding IsDivide, Mode=TwoWay}"
+									  Content="情報分割表示" />
 							<UniformGrid Margin="4"
 										 IsEnabled="{Binding ElementName=MergedCheckBox, Path=IsChecked}">
 								<Border Width="80"

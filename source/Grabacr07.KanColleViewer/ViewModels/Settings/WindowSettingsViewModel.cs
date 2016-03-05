@@ -65,6 +65,24 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 		public bool DockBottom => this.Dock == Dock.Bottom;
 
 		#endregion
+		
+		#region IsDivide変更通知プロパティ
+		private bool _IsDivide;
+
+		public bool IsDivide
+		{
+			get
+			{ return this._IsDivide; }
+			set
+			{
+				if (this._IsDivide != value)
+				{
+					this._IsDivide = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
 
 		public WindowSettingsViewModel()
 		{
@@ -85,6 +103,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 			this.settings = SettingsHost.Instance<KanColleWindowSettings>();
 			this.settings?.IsSplit.Subscribe(x => this.IsSplit = x).AddTo(this);
 			this.settings?.Dock.Subscribe(x => this.Dock = x).AddTo(this);
+			this.settings?.IsDivide.Subscribe(x => this.IsDivide = x).AddTo(this);
 		}
 
 		public void SetDockSettings(Dock dock)
@@ -98,6 +117,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 			{
 				this.settings.IsSplit.Value = this.IsSplit;
 				this.settings.Dock.Value = this.Dock;
+				this.settings.IsDivide.Value = this.IsDivide;
 			}
 		}
 
@@ -107,6 +127,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 			{
 				this.IsSplit = this.settings.IsSplit;
 				this.Dock = this.settings.Dock;
+				this.IsDivide = this.settings.IsDivide;
 			}
 		}
 	}
