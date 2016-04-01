@@ -123,14 +123,15 @@ namespace Grabacr07.KanColleWrapper
 		public void Initialieze()
 		{
 			var proxy = this.Proxy ?? (this.Proxy = new KanColleProxy());
-			var basic = proxy.api_get_member_basic.TryParse<kcsapi_basic>().FirstAsync().ToTask();
-			var kdock = proxy.api_get_member_kdock.TryParse<kcsapi_kdock[]>().FirstAsync().ToTask();
-			var sitem = proxy.api_get_member_slot_item.TryParse<kcsapi_slotitem[]>().FirstAsync().ToTask();
+            var requireInfo = proxy.api_get_member_require_info.TryParse<kcsapi_require_info>().FirstAsync().ToTask();
+			//var basic = proxy.api_get_member_basic.TryParse<kcsapi_basic>().FirstAsync().ToTask();
+			//var kdock = proxy.api_get_member_kdock.TryParse<kcsapi_kdock[]>().FirstAsync().ToTask();
+			//var sitem = proxy.api_get_member_slot_item.TryParse<kcsapi_slotitem[]>().FirstAsync().ToTask();
 
 			proxy.api_start2.FirstAsync().Subscribe(async session =>
 			{
 				var timeout = Task.Delay(TimeSpan.FromSeconds(20));
-				var canInitialize = await Task.WhenAny(new Task[] { basic, kdock, sitem }.WhenAll(), timeout) != timeout;
+				var canInitialize = await Task.WhenAny(new Task[] { requireInfo }.WhenAll(), timeout) != timeout;
 
 				// タイムアウト仕掛けてるのは、今後のアップデートで basic, kdock, slot_item のいずれかが来なくなったときに
 				// 起動できなくなる (IsStarted を true にできなくなる) のを防ぐため
@@ -145,9 +146,10 @@ namespace Grabacr07.KanColleWrapper
 
 				if (canInitialize)
 				{
-					this.Homeport.UpdateAdmiral((await basic).Data);
-					this.Homeport.Itemyard.Update((await sitem).Data);
-					this.Homeport.Dockyard.Update((await kdock).Data);
+                    var data = await requireInfo;
+					this.Homeport.UpdateAdmiral(data.Data.api_basic);
+					this.Homeport.Itemyard.Update(data.Data.api_slot_item);
+					this.Homeport.Dockyard.Update(data.Data.api_kdock);
 				}
 
 				this.IsStarted = true;
