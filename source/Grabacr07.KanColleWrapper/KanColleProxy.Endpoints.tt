@@ -50,6 +50,7 @@
 		"/kcsapi/api_req_combined_battle/airbattle",
 		"/kcsapi/api_req_combined_battle/battleresult",
 		"/kcsapi/api_req_combined_battle/goback_port",
+		"/kcsapi/api_get_member/require_info",
 	};
 #>
 // 
