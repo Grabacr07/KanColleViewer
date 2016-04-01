@@ -97,7 +97,7 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public int api_id { get; set; }
 		public int api_sortno { get; set; }
 		public string api_filename { get; set; }
-		public string api_version { get; set; }
+		//public string api_version { get; set; }
 		public int[] api_boko_n { get; set; }
 		public int[] api_boko_d { get; set; }
 		public int[] api_kaisyu_n { get; set; }
@@ -228,7 +228,7 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public int api_type { get; set; }
 		public int api_no { get; set; }
 		public string api_filename { get; set; }
-		public string api_version { get; set; }
+		//public string api_version { get; set; }
 	}
 
 	public class Api_Mst_Useitem

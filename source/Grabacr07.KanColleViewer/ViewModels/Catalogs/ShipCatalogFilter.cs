@@ -681,4 +681,82 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			return false;
 		}
 	}
+
+	public class ShipConditionFilter : ShipCatalogFilter
+	{
+		#region Both 変更通知プロパティ
+
+		private bool _Both;
+
+		public bool Both
+		{
+			get { return this._Both; }
+			set
+			{
+				if (this._Both != value)
+				{
+					this._Both = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+
+		#region Brilliant 変更通知プロパティ
+
+		private bool _Brilliant;
+
+		public bool Brilliant
+		{
+			get { return this._Brilliant; }
+			set
+			{
+				if (this._Brilliant != value)
+				{
+					this._Brilliant = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+
+		#region Unbrilliant 変更通知プロパティ
+
+		private bool _Unbrilliant;
+
+		public bool Unbrilliant
+		{
+			get { return this._Unbrilliant; }
+			set
+			{
+				if (this._Unbrilliant != value)
+				{
+					this._Unbrilliant = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+
+		public ShipConditionFilter(Action updateAction)
+			: base(updateAction)
+		{
+			this._Both = true;
+		}
+
+		public override bool Predicate(Ship ship)
+		{
+			if (this.Both) return true;
+			if (this.Brilliant && ship.ConditionType == ConditionType.Brilliant) return true;
+			if (this.Unbrilliant && ship.ConditionType >= ConditionType.Normal) return true;
+
+			return false;
+		}
+	}
 }
