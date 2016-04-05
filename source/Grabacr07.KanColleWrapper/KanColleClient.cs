@@ -47,6 +47,11 @@ namespace Grabacr07.KanColleWrapper
 		public Updater Updater { get; private set; }
 
 		/// <summary>
+		/// 자동번역기
+		/// </summary>
+		public WebTranslator WebTranslator { get; private set; }
+
+		/// <summary>
 		/// 기록
 		/// </summary>
 		public Logger Logger { get; private set; }
@@ -115,6 +120,7 @@ namespace Grabacr07.KanColleWrapper
 		public void Initialieze()
 		{
 			this.Translations = new Translations();
+			this.WebTranslator = new WebTranslator();
 			this.Updater = new Updater();
 
 			var proxy = this.Proxy ?? (this.Proxy = new KanColleProxy());

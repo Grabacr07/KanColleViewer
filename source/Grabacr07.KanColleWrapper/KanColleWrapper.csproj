@@ -157,6 +157,7 @@
     <Compile Include="Models\SlotItemType.cs" />
     <Compile Include="Models\TranslationType.cs" />
     <Compile Include="Models\ViewRange.cs" />
+    <Compile Include="Models\WebTranslator.cs" />
     <Compile Include="Notifier.cs" />
     <Compile Include="Organization.cs" />
     <Compile Include="KanColleProxy.Endpoints.cs">
