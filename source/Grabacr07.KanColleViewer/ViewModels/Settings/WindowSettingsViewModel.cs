@@ -110,19 +110,23 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 				this.settings.Dock.Value = this.Dock;
 				try
 				{
-					if (this.settings?.Dock == Dock.Right || this.settings?.Dock == Dock.Left || this.settings?.IsSplit)
+					if (WindowService.Current != null)
 					{
-						WindowService.Current.Information.Vertical = Visibility.Collapsed;
-						WindowService.Current.Information.Horizontal = Visibility.Visible;
-						WindowService.Current.Information.Overview.Vertical = Visibility.Collapsed;
-						WindowService.Current.Information.Overview.Horizontal = Visibility.Visible;
-					}
-					else
-					{
-						WindowService.Current.Information.Vertical = Visibility.Visible;
-						WindowService.Current.Information.Horizontal = Visibility.Collapsed;
-						WindowService.Current.Information.Overview.Vertical = Visibility.Visible;
-						WindowService.Current.Information.Overview.Horizontal = Visibility.Collapsed;
+						if (this.settings?.Dock == Dock.Right || this.settings?.Dock == Dock.Left)
+						{
+							WindowService.Current.Information.Vertical = Visibility.Collapsed;
+							WindowService.Current.Information.Horizontal = Visibility.Visible;
+							WindowService.Current.Information.Overview.Vertical = Visibility.Collapsed;
+							WindowService.Current.Information.Overview.Horizontal = Visibility.Visible;
+						}
+						else
+						{
+							WindowService.Current.Information.Vertical = Visibility.Visible;
+							WindowService.Current.Information.Horizontal = Visibility.Collapsed;
+							WindowService.Current.Information.Overview.Vertical = Visibility.Visible;
+							WindowService.Current.Information.Overview.Horizontal = Visibility.Collapsed;
+						}
+						WindowService.Current.UpdateDockPattern();
 					}
 				}
 				catch { }

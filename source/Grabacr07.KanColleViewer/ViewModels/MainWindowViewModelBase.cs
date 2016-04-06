@@ -9,6 +9,7 @@ using Grabacr07.KanColleWrapper;
 using Livet;
 using Livet.Messaging;
 using MetroTrilithon.Mvvm;
+using System.Windows;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {
@@ -77,6 +78,30 @@ namespace Grabacr07.KanColleViewer.ViewModels
 												|| (GeneralSettings.ExitConfirmationType == ExitConfirmationType.None)
 												|| (GeneralSettings.ExitConfirmationType == ExitConfirmationType.InSortieOnly && !KanColleClient.Current.IsInSortie)
 												|| Application.Instance.State != ApplicationState.Running;
+
+
+		private Visibility _TopView;
+		public Visibility TopView
+		{
+			get { return this._TopView; }
+			set
+			{
+				if (this._TopView == value) return;
+				this._TopView = value;
+				this.RaisePropertyChanged();
+			}
+		}
+		private Visibility _BottomView;
+		public Visibility BottomView
+		{
+			get { return this._BottomView; }
+			set
+			{
+				if (this._BottomView == value) return;
+				this._BottomView = value;
+				this.RaisePropertyChanged();
+			}
+		}
 
 		protected MainWindowViewModelBase(bool isMainWindow)
 		{
