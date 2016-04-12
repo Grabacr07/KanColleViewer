@@ -9,7 +9,7 @@ namespace Grabacr07.KanColleViewer.Composition
 	{
 		public string FilePath { get; set; }
 
-		public string Exception { get; set; }
+		public string Message { get; set; }
 
 		public PluginMetadata Metadata { get; set; }
 	}

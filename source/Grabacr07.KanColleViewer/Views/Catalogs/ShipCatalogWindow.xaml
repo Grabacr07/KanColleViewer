@@ -417,15 +417,15 @@
 									</Grid.ColumnDefinitions>
 									<TextBlock Margin="0,2"
 											   HorizontalAlignment="Right">
-										<Run Text="condition値" />
+										<Run Text="condition" />
 										<Run Text=":" />
 									</TextBlock>
 									<WrapPanel Grid.Column="2">
 										<RadioButton Content="すべて"
 													 IsChecked="{Binding Both, Mode=TwoWay}" />
-										<RadioButton Content="50以上"
+										<RadioButton Content="50 以上"
 													 IsChecked="{Binding Brilliant, Mode=TwoWay}" />
-										<RadioButton Content="49以下"
+										<RadioButton Content="50 未満"
 													 IsChecked="{Binding Unbrilliant, Mode=TwoWay}" />
 									</WrapPanel>
 								</Grid>

@@ -71,7 +71,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Composition
 		{
 			this.Metadata = data.Metadata ?? new BlacklistedAssembly { Name = Path.GetFileName(data.FilePath) } as object;
 
-			using (var reader = new StringReader(data.Exception))
+			using (var reader = new StringReader(data.Message))
 			{
 				this.Message = reader.ReadLine();
 				this.Exception = reader.ReadToEnd();
