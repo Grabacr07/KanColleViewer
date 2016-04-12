@@ -9,7 +9,7 @@ using Grabacr07.KanColleViewer.ViewModels.Messages;
 using Grabacr07.KanColleViewer.Win32;
 using Livet.Behaviors.Messaging;
 using Livet.Messaging;
-using mshtml;
+using MSHTML;
 using SHDocVw;
 using IServiceProvider = Grabacr07.KanColleViewer.Win32.IServiceProvider;
 using WebBrowser = System.Windows.Controls.WebBrowser;
