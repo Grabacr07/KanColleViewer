@@ -3005,6 +3005,33 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to condition.
+        /// </summary>
+        public static string ShipCatalog_Filter_Misc_Condition {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Misc_Condition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 50 以上.
+        /// </summary>
+        public static string ShipCatalog_Filter_Misc_ConditionAbove50 {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Misc_ConditionAbove50", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 50 未満.
+        /// </summary>
+        public static string ShipCatalog_Filter_Misc_ConditionBelow50 {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Filter_Misc_ConditionBelow50", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 損傷.
         /// </summary>
         public static string ShipCatalog_Filter_Misc_Damage {

@@ -1450,4 +1450,13 @@ Small Radar LoS × (1.00) + Large Radar LoS × (0.99) +
   <data name="FleetWindow_Status_Organisation_Normal" xml:space="preserve">
     <value>Fleet composition OK</value>
   </data>
+  <data name="ShipCatalog_Filter_Misc_Condition" xml:space="preserve">
+    <value>Morale</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_ConditionAbove50" xml:space="preserve">
+    <value>Above 50</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_ConditionBelow50" xml:space="preserve">
+    <value>Below 50</value>
+  </data>
 </root>
