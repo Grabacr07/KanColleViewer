@@ -9,9 +9,9 @@ using System.Windows.Markup;
 using System.Windows.Navigation;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.ViewModels;
-using mshtml;
 using MetroRadiance.Interop;
 using MetroTrilithon.UI.Controls;
+using MSHTML;
 using SHDocVw;
 using IServiceProvider = Grabacr07.KanColleViewer.Win32.IServiceProvider;
 using WebBrowser = System.Windows.Controls.WebBrowser;
@@ -35,6 +35,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 		private ScrollViewer scrollViewer;
 		private bool styleSheetApplied;
 		private Dpi? systemDpi;
+		private bool firstLoaded;
 
 		#region WebBrowser 依存関係プロパティ
 
@@ -151,7 +152,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			var zoomFactor = dpi.ScaleX + (this.ZoomFactor - 1.0);
 			var percentage = (int)(zoomFactor * 100);
 
-			ApplyZoomFactor(this.WebBrowser, percentage);
+			ApplyZoomFactor(this, percentage);
 
 			var size = this.styleSheetApplied ? KanColleSize : InitialSize;
 			size = new Size(
@@ -163,8 +164,10 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			this.OwnerSizeChangeRequested?.Invoke(this, size);
 		}
 
-		private static void ApplyZoomFactor(WebBrowser target, int zoomFactor)
+		private static void ApplyZoomFactor(KanColleHost target, int zoomFactor)
 		{
+			if (!target.firstLoaded) return;
+
 			if (zoomFactor < 10 || zoomFactor > 1000)
 			{
 				StatusService.Current.Notify(string.Format(Properties.Resources.ZoomAction_OutOfRange, zoomFactor));
@@ -173,7 +176,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 			try
 			{
-				var provider = target.Document as IServiceProvider;
+				var provider = target.WebBrowser.Document as IServiceProvider;
 				if (provider == null) return;
 
 				object ppvObject;
@@ -200,6 +203,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			this.ApplyStyleSheet();
 			WebBrowserHelper.SetScriptErrorsSuppressed(this.WebBrowser, true);
 
+			this.firstLoaded = true;
 			this.Update();
 		}
 
@@ -214,6 +218,8 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 		private void ApplyStyleSheet()
 		{
+			if (!this.firstLoaded) return;
+
 			try
 			{
 				var document = this.WebBrowser.Document as HTMLDocument;

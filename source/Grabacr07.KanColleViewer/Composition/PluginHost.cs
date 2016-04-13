@@ -121,7 +121,7 @@ namespace Grabacr07.KanColleViewer.Composition
 					this.failedPlugins.Add(new LoadFailedPluginData
 					{
 						FilePath = filepath,
-						Exception = ex.LoaderExceptions.Select(x => x.Message).ToString(Environment.NewLine),
+						Message = ex.LoaderExceptions.Select(x => x.Message).ToString(Environment.NewLine),
 					});
 				}
 				catch (BadImageFormatException ex)
@@ -129,7 +129,7 @@ namespace Grabacr07.KanColleViewer.Composition
 					this.failedPlugins.Add(new LoadFailedPluginData
 					{
 						FilePath = filepath,
-						Exception = ex.ToString(),
+						Message = ex.ToString(),
 					});
 				}
 				catch (FileLoadException ex)
@@ -137,7 +137,7 @@ namespace Grabacr07.KanColleViewer.Composition
 					this.failedPlugins.Add(new LoadFailedPluginData
 					{
 						FilePath = filepath,
-						Exception = ex.ToString(),
+						Message = ex.ToString(),
 					});
 				}
 			}
@@ -177,6 +177,8 @@ namespace Grabacr07.KanColleViewer.Composition
 
 		private IEnumerable<Plugin> Load(IEnumerable<Lazy<IPlugin, IPluginMetadata>> imported)
 		{
+			var ids = new HashSet<Guid>();
+
 			foreach (var lazy in imported)
 			{
 				Guid guid;
@@ -199,7 +201,7 @@ namespace Grabacr07.KanColleViewer.Composition
 						{
 							FilePath = x?.Assembly.Location,
 							Metadata = plugin.Metadata,
-							Exception = ex.ToString(),
+							Message = ex.ToString(),
 						});
 					this.failedPlugins.AddRange(failds);
 				}
@@ -208,8 +210,18 @@ namespace Grabacr07.KanColleViewer.Composition
 					this.failedPlugins.Add(new LoadFailedPluginData
 					{
 						Metadata = plugin.Metadata,
-						Exception = ex.ToString(),
+						Message = ex.ToString(),
 					});
+				}
+
+				if (!ids.Add(plugin.Id))
+				{
+					this.failedPlugins.Add(new LoadFailedPluginData
+					{
+						Metadata = plugin.Metadata,
+						Message = "プラグインの ID が重複しています。" + Environment.NewLine + "プラグインには一意の GUID が必要です。プラグインの開発者に連絡してください。",
+					});
+					success = false;
 				}
 
 				if (success)
@@ -241,7 +253,7 @@ namespace Grabacr07.KanColleViewer.Composition
 					this.failedPlugins.Add(new LoadFailedPluginData
 					{
 						Metadata = plugin.Metadata,
-						Exception = ex.ToString(),
+						Message = ex.ToString(),
 					});
 				}
 			}
