@@ -437,15 +437,15 @@
 									</Grid.ColumnDefinitions>
 									<TextBlock Margin="0,2"
 											   HorizontalAlignment="Right">
-										<Run Text="condition" />
+										<Run Text="{Binding Resources.ShipCatalog_Filter_Misc_Condition, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 										<Run Text=":" />
 									</TextBlock>
 									<WrapPanel Grid.Column="2">
-										<RadioButton Content="すべて"
+										<RadioButton Content="{Binding Resources.ShipCatalog_Filter_Misc_All, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 													 IsChecked="{Binding Both, Mode=TwoWay}" />
-										<RadioButton Content="50 以上"
+										<RadioButton Content="{Binding Resources.ShipCatalog_Filter_Misc_ConditionAbove50, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 													 IsChecked="{Binding Brilliant, Mode=TwoWay}" />
-										<RadioButton Content="50 未満"
+										<RadioButton Content="{Binding Resources.ShipCatalog_Filter_Misc_ConditionBelow50, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 													 IsChecked="{Binding Unbrilliant, Mode=TwoWay}" />
 									</WrapPanel>
 								</Grid>

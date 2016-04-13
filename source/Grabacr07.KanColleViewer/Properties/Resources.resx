@@ -1415,4 +1415,13 @@ HTTP プロトコルの通信は自動構成も含め「インターネット �
   <data name="FleetWindow_Status_Organisation_Normal" xml:space="preserve">
     <value>艦隊編成は正常です</value>
   </data>
+  <data name="ShipCatalog_Filter_Misc_Condition" xml:space="preserve">
+    <value>condition</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_ConditionAbove50" xml:space="preserve">
+    <value>50 以上</value>
+  </data>
+  <data name="ShipCatalog_Filter_Misc_ConditionBelow50" xml:space="preserve">
+    <value>50 未満</value>
+  </data>
 </root>
