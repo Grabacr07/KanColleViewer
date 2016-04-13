@@ -1427,7 +1427,7 @@ HTTP proxy settings are applied immediately. Settings for all other protocols ar
     <value>Morale</value>
   </data>
   <data name="ShipCatalog_Filter_Misc_ConditionAbove50" xml:space="preserve">
-    <value>Above 50</value>
+    <value>50 and above</value>
   </data>
   <data name="ShipCatalog_Filter_Misc_ConditionBelow50" xml:space="preserve">
     <value>Below 50</value>
