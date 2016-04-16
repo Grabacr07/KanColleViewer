@@ -128,7 +128,8 @@
 
 		<DockPanel Grid.Row="1"
 				   x:Name="TopToolbarArea"
-				   x:FieldModifier="private">
+				   x:FieldModifier="private"
+				   Visibility="{Binding TopView}">
 			<!--MaxWidth="{Binding ToolAreaMaxWidth}"-->
 
 			<views:KanColleWindowButtons DockPanel.Dock="Right"
@@ -175,12 +176,12 @@
 						</i:Interaction.Triggers>
 					</WebBrowser>
 				</controls:KanColleHost>
+				<DockPanel x:Name="BottomToolbarArea"
+						   DockPanel.Dock="Bottom"
+				   x:FieldModifier="private"
+				   Visibility="{Binding BottomView}">
+					<!--MaxWidth="{Binding ToolAreaMaxWidth}"-->
 
-				<!--<DockPanel x:Name="BottomToolbarArea"
-						   Visibility="{Binding BottomArea}"
-						   x:FieldModifier="private"
-						   DockPanel.Dock="Top"
-						   MaxWidth="{Binding ToolAreaMaxWidth}">
 					<views:KanColleWindowButtons DockPanel.Dock="Right"
 												 Margin="8,4,4,4" />
 					<ContentControl Content="{Binding Content}">
@@ -197,7 +198,7 @@
 							</DataTemplate>
 						</ContentControl.Resources>
 					</ContentControl>
-				</DockPanel>-->
+				</DockPanel>
 
 				<Border />
 			</DockPanel>
@@ -216,7 +217,6 @@
 				</ContentControl.Resources>
 			</ContentControl>
 		</DockPanel>
-
 		<!-- region Status area -->
 		<DockPanel x:Name="statusBar"
 				   x:FieldModifier="private"

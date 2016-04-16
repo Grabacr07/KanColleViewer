@@ -16,6 +16,7 @@ using MetroRadiance.UI;
 using MetroTrilithon.Lifetime;
 using MetroTrilithon.Mvvm;
 using System.Windows.Input;
+using System.Windows.Controls;
 
 namespace Grabacr07.KanColleViewer
 {
@@ -46,7 +47,30 @@ namespace Grabacr07.KanColleViewer
 		private KanColleWindowViewModel kanColleWindow;
 		private InformationWindowViewModel informationWindow;
 		private readonly LivetCompositeDisposable compositeDisposable = new LivetCompositeDisposable();
-
+		public void UpdateDockPattern()
+		{
+			if (this.currentMode == WindowServiceMode.NotStarted) return;
+			if (this.kanColleWindow == null) return;
+			KanColleWindowSettings settings = SettingsHost.Instance<KanColleWindowSettings>();
+			if (!settings.IsSplit)//분할모드가 아닌경우
+			{
+				if (settings?.Dock == Dock.Right || settings?.Dock == Dock.Left)
+				{
+					this.kanColleWindow.TopView = Visibility.Visible;
+					this.kanColleWindow.BottomView = Visibility.Collapsed;
+				}
+				else
+				{
+					this.kanColleWindow.TopView = Visibility.Collapsed;
+					this.kanColleWindow.BottomView = Visibility.Visible;
+				}
+			}
+			else
+			{
+				this.kanColleWindow.TopView = Visibility.Collapsed;
+				this.kanColleWindow.BottomView = Visibility.Visible;
+			}
+		}
 		public WindowServiceMode Mode
 		{
 			get { return this.currentMode; }
@@ -70,10 +94,11 @@ namespace Grabacr07.KanColleViewer
 							StatusService.Current.Set(Resources.StatusBar_Ready);
 							ThemeService.Current.ChangeTheme(Theme.Dark);
 							ThemeService.Current.ChangeAccent(Accent.Blue);
+							this.UpdateDockPattern();
 							break;
-						//case WindowServiceMode.InSortie:
-						//	ThemeService.Current.ChangeAccent(Accent.Orange);
-						//	break;
+							//case WindowServiceMode.InSortie:
+							//	ThemeService.Current.ChangeAccent(Accent.Orange);
+							//	break;
 					}
 
 					this.RaisePropertyChanged();
@@ -128,7 +153,7 @@ namespace Grabacr07.KanColleViewer
 		{
 			this.kanColleWindow?.Messenger.Raise(new InteractionMessage { MessageKey = "WebBrowser.Zoom" });
 		}
-		
+
 		public void RefreshWindow()
 		{
 			this.kanColleWindow?.RefreshNavigator.Execute(null);

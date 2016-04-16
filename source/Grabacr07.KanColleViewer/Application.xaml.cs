@@ -86,8 +86,29 @@ namespace Grabacr07.KanColleViewer
 
 				SettingsHost.Load();
 				this.compositeDisposable.Add(SettingsHost.Save);
-
-				GeneralSettings.Culture.Subscribe(x => ResourceService.Current.ChangeCulture(x)).AddTo(this);
+				try
+				{
+					GeneralSettings.Culture.Subscribe(x => ResourceService.Current.ChangeCulture(x)).AddTo(this);//#1
+				}
+				catch
+				{
+					var LocalfilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "grabacr.net");
+					var RoamingfilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "grabacr.net");
+					var LocalDirs = Directory.GetDirectories(LocalfilePath).ToList();
+					var RoamingDirs = Directory.GetDirectories(RoamingfilePath).ToList();
+					for (int i = 0; i < LocalDirs.Count; i++)
+					{
+						if (LocalDirs[i] != "KanColleViewer")
+							Directory.Delete(Path.Combine(LocalfilePath, LocalDirs[i]), true);
+					}
+					for (int i = 0; i < RoamingDirs.Count; i++)
+					{
+						if (RoamingDirs[i] != "KanColleViewer")
+							Directory.Delete(Path.Combine(RoamingfilePath, RoamingDirs[i]), true);
+					}
+					MessageBox.Show("어플리케이션 기동중 문제가 발생하여 일부 설정파일을 초기화합니다.\n프로그램이 종료됩니다", "제독업무도 바빠!", MessageBoxButton.OK, MessageBoxImage.Warning);
+					this.Shutdown();
+				}
 				KanColleClient.Current.Settings = new KanColleSettings();
 
 				ThemeService.Current.Register(this, Theme.Dark, Accent.Purple);

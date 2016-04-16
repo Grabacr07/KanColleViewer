@@ -147,6 +147,18 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			this.taskbarProgress
 				.Subscribe(nameof(TaskbarProgress.Updated), () => this.UpdateTaskbar())
 				.AddTo(this);
+			if (this.Settings?.Dock == Dock.Right
+				|| this.Settings?.Dock == Dock.Left
+				|| this.Settings?.IsSplit)
+			{
+				this.TopView = Visibility.Visible;
+				this.BottomView = Visibility.Collapsed;
+			}
+			else
+			{
+				this.TopView = Visibility.Collapsed;
+				this.BottomView = Visibility.Visible;
+			}
 		}
 
 
@@ -188,7 +200,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				Owner = Application.Current.MainWindow,
 			};
 			window.ShowDialog();
-			if(vmodel.DialogResult)
+			if (vmodel.DialogResult)
 			{
 				WindowService.Current.RefreshWindow();
 			}
@@ -264,6 +276,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			{
 				this.MergeWindow();
 			}
+			WindowService.Current.UpdateDockPattern();
 		}
 
 		private void HandleSplitWindowClosed(object sender, EventArgs eventArgs)

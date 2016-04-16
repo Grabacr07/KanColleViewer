@@ -12,13 +12,13 @@ namespace Grabacr07.KanColleWrapper
 {
 	public class Translations
 	{
-		private XDocument ShipsXML;
-		private XDocument ShipTypesXML;
-		private XDocument EquipmentXML;
-		private XDocument OperationsXML;
-		private XDocument QuestsXML;
-		private XDocument ExpeditionXML;
-		private XDocument RemodelXml;
+		private XDocument ShipsXML;//0
+		private XDocument ShipTypesXML;//1
+		private XDocument EquipmentXML;//2
+		private XDocument OperationsXML;//3
+		private XDocument QuestsXML;//4
+		private XDocument ExpeditionXML;//5
+		private XDocument RemodelXml;//6
 		string MainFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
 
 		public bool EnableTranslations { get; set; }
@@ -31,19 +31,49 @@ namespace Grabacr07.KanColleWrapper
 		public string ShipsVersion { get; set; }
 		public string ShipTypesVersion { get; set; }
 		public string RemodelSlotsVersion { get; set; }
+		private void SaveXmls(int idx)
+		{
+			switch (idx)
+			{
+				case 0:
+					ShipsXML.Save(Path.Combine(MainFolder, "Translations", "Ships.xml"));
+					break;
+				case 1:
+					ShipTypesXML.Save(Path.Combine(MainFolder, "Translations", "ShipTypes.xml"));
+					break;
+				case 2:
+					EquipmentXML.Save(Path.Combine(MainFolder, "Translations", "Equipment.xml"));
+					break;
+				case 3:
+					OperationsXML.Save(Path.Combine(MainFolder, "Translations", "Operations.xml"));
+					break;
+				case 4:
+					QuestsXML.Save(Path.Combine(MainFolder, "Translations", "Quests.xml"));
+					break;
+				case 5:
+					ExpeditionXML.Save(Path.Combine(MainFolder, "Translations", "Expeditions.xml"));
+					break;
+				case 6://리모델링은 세이브가 없다
+					break;
+			}
+			LoadXmls();
+		}
+		private void LoadXmls()
+		{
+			if (File.Exists(Path.Combine(MainFolder, "Translations", "Ships.xml"))) ShipsXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "Ships.xml"));
+			if (File.Exists(Path.Combine(MainFolder, "Translations", "ShipTypes.xml"))) ShipTypesXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "ShipTypes.xml"));
+			if (File.Exists(Path.Combine(MainFolder, "Translations", "Equipment.xml"))) EquipmentXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "Equipment.xml"));
+			if (File.Exists(Path.Combine(MainFolder, "Translations", "Operations.xml"))) OperationsXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "Operations.xml"));
+			if (File.Exists(Path.Combine(MainFolder, "Translations", "Quests.xml"))) QuestsXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "Quests.xml"));
+			if (File.Exists(Path.Combine(MainFolder, "Translations", "Expeditions.xml"))) ExpeditionXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "Expeditions.xml"));
+			if (File.Exists(Path.Combine(MainFolder, "Translations", "RemodelSlots.xml"))) RemodelXml = XDocument.Load(Path.Combine(MainFolder, "Translations", "RemodelSlots.xml"));
+
+		}
 		internal Translations()
 		{
 			try
 			{
-				if (File.Exists(Path.Combine(MainFolder, "Translations", "Ships.xml"))) ShipsXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "Ships.xml"));
-				if (File.Exists(Path.Combine(MainFolder, "Translations", "ShipTypes.xml"))) ShipTypesXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "ShipTypes.xml"));
-				if (File.Exists(Path.Combine(MainFolder, "Translations", "Equipment.xml"))) EquipmentXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "Equipment.xml"));
-				if (File.Exists(Path.Combine(MainFolder, "Translations", "Operations.xml"))) OperationsXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "Operations.xml"));
-				if (File.Exists(Path.Combine(MainFolder, "Translations", "Quests.xml"))) QuestsXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "Quests.xml"));
-				if (File.Exists(Path.Combine(MainFolder, "Translations", "Expeditions.xml"))) ExpeditionXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "Expeditions.xml"));
-				if (File.Exists(Path.Combine(MainFolder, "Translations", "RemodelSlots.xml"))) RemodelXml = XDocument.Load(Path.Combine(MainFolder, "Translations", "RemodelSlots.xml"));
-
-
+				LoadXmls();
 				GetVersions();
 			}
 			catch { }
@@ -199,9 +229,11 @@ namespace Grabacr07.KanColleWrapper
 
 			return TranslationList.Where(x => x.Element("TR-Name") != null).Where(x => x.Element("FlagLv") != null).Count();
 		}
-		public string GetTranslation(string JPString, TranslationType Type, bool IsLogReader, Object RawData = null, int ID = -1)
+		public string GetTranslation(string JPString, TranslationType Type, bool IsLogReader, Object RawData = null, int ID = -1, bool IsRepeat = false)
 		{
 			if (!EnableTranslations)
+				return JPString;
+			if (IsRepeat)
 				return JPString;
 
 			try
@@ -240,8 +272,8 @@ namespace Grabacr07.KanColleWrapper
 					foreach (XElement el in FoundTranslation)
 					{
 #if DEBUG
-					if (ID >= 0 && el.Element("ID") != null && Convert.ToInt32(el.Element("ID").Value) == ID)
-						Debug.WriteLine(string.Format("Translation: {0,-20} {1,-20} {2}", JPString, el.Element(TRChildElement).Value, ID));
+						if (ID >= 0 && el.Element("ID") != null && Convert.ToInt32(el.Element("ID").Value) == ID)
+							Debug.WriteLine(string.Format("Translation: {0,-20} {1,-20} {2}", JPString, el.Element(TRChildElement).Value, ID));
 #endif
 						if (ID >= 0 && el.Element("ID") != null && Convert.ToInt32(el.Element("ID").Value) == ID)
 							return el.Element(TRChildElement).Value;
@@ -264,7 +296,17 @@ namespace Grabacr07.KanColleWrapper
 
 			if (RawData != null && !IsLogReader) AddTranslation(RawData, Type);
 			if (ID < 0 && IsLogReader) return JPString;
-			else return "[" + ID.ToString() + "] " + JPString;
+			else
+			{
+				try
+				{
+					return GetTranslation(JPString, Type, false, RawData, ID, true);
+				}
+				catch
+				{
+					return "[" + ID.ToString() + "] " + JPString;
+				}
+			}
 		}
 
 		public void AddTranslation(Object RawData, TranslationType Type)
@@ -290,10 +332,10 @@ namespace Grabacr07.KanColleWrapper
 
 						ShipsXML.Root.Add(new XElement("Ship",
 							new XElement("JP-Name", ShipData.api_name),
-							new XElement("TR-Name", ShipData.api_name)
+							new XElement("TR-Name", KanColleClient.Current.WebTranslator.RawTranslate(ShipData.api_name))
 						));
 
-						ShipsXML.Save(Path.Combine(MainFolder, "Translations", "Ships.xml"));
+						SaveXmls(0);
 						break;
 
 					case TranslationType.ShipTypes:
@@ -311,10 +353,10 @@ namespace Grabacr07.KanColleWrapper
 						ShipTypesXML.Root.Add(new XElement("Type",
 							new XElement("ID", TypeData.api_id),
 							new XElement("JP-Name", TypeData.api_name),
-							new XElement("TR-Name", TypeData.api_name)
+							new XElement("TR-Name", KanColleClient.Current.WebTranslator.RawTranslate(TypeData.api_name))
 							));
 
-						ShipTypesXML.Save(Path.Combine(MainFolder, "Translations", "ShipTypes.xml"));
+						SaveXmls(1);
 						break;
 
 					case TranslationType.Equipment:
@@ -331,10 +373,10 @@ namespace Grabacr07.KanColleWrapper
 
 						EquipmentXML.Root.Add(new XElement("Item",
 							new XElement("JP-Name", EqiupData.api_name),
-							new XElement("TR-Name", EqiupData.api_name)
+							new XElement("TR-Name", KanColleClient.Current.WebTranslator.RawTranslate(EqiupData.api_name))
 							));
 
-						EquipmentXML.Save(Path.Combine(MainFolder, "Translations", "Equipment.xml"));
+						SaveXmls(2);
 						break;
 
 					case TranslationType.OperationMaps:
@@ -354,18 +396,18 @@ namespace Grabacr07.KanColleWrapper
 						{
 							OperationsXML.Root.Add(new XElement("Map",
 								new XElement("JP-Name", OperationsData.api_quest_name),
-								new XElement("TR-Name", OperationsData.api_quest_name)
+								new XElement("TR-Name", KanColleClient.Current.WebTranslator.RawTranslate(OperationsData.api_quest_name))
 								));
 						}
 						else
 						{
 							OperationsXML.Root.Add(new XElement("Sortie",
 								new XElement("JP-Name", OperationsData.api_enemy_info.api_deck_name),
-								new XElement("TR-Name", OperationsData.api_enemy_info.api_deck_name)
+								new XElement("TR-Name", KanColleClient.Current.WebTranslator.RawTranslate(OperationsData.api_enemy_info.api_deck_name))
 								));
 						}
 
-						OperationsXML.Save(Path.Combine(MainFolder, "Translations", "Operations.xml"));
+						SaveXmls(3);
 						break;
 
 					case TranslationType.Quests:
@@ -396,13 +438,13 @@ namespace Grabacr07.KanColleWrapper
 							QuestsXML.Root.Add(new XElement("Quest",
 								new XElement("ID", QuestData.api_no),
 								new XElement("JP-Name", QuestData.api_title),
-								new XElement("TR-Name", "[" + QuestData.api_no.ToString() + "]" + QuestData.api_title),
+								new XElement("TR-Name", "[" + QuestData.api_no.ToString() + "]" + KanColleClient.Current.WebTranslator.RawTranslate(QuestData.api_title)),
 								new XElement("JP-Detail", QuestData.api_detail),
-								new XElement("TR-Detail", "[" + QuestData.api_no.ToString() + "]" + QuestData.api_detail)
+								new XElement("TR-Detail", "[" + QuestData.api_no.ToString() + "]" + KanColleClient.Current.WebTranslator.RawTranslate(QuestData.api_detail))
 								));
 						}
 
-						QuestsXML.Save(Path.Combine(MainFolder, "Translations", "Quests.xml"));
+						SaveXmls(4);
 						break;
 					case TranslationType.Expeditions:
 					case TranslationType.ExpeditionTitle:
@@ -431,13 +473,13 @@ namespace Grabacr07.KanColleWrapper
 							ExpeditionXML.Root.Add(new XElement("Expedition",
 							new XElement("ID", MissionData.api_id),
 							new XElement("JP-Name", MissionData.api_name),
-							new XElement("TR-Name", "[" + MissionData.api_id.ToString() + "]" + MissionData.api_name),
+							new XElement("TR-Name", "[" + MissionData.api_id.ToString() + "]" + KanColleClient.Current.WebTranslator.RawTranslate(MissionData.api_name)),
 							new XElement("JP-Detail", MissionData.api_details),
-							new XElement("TR-Detail", "[" + MissionData.api_id.ToString() + "]" + MissionData.api_details)
+							new XElement("TR-Detail", "[" + MissionData.api_id.ToString() + "]" + KanColleClient.Current.WebTranslator.RawTranslate(MissionData.api_details))
 							));
 						}
 
-						ExpeditionXML.Save(Path.Combine(MainFolder, "Translations", "Expeditions.xml"));
+						SaveXmls(5);
 						break;
 				}
 			}

@@ -4,10 +4,8 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
-using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
-using MetroTrilithon.Threading.Tasks;
 
 namespace Grabacr07.KanColleWrapper
 {
@@ -45,6 +43,11 @@ namespace Grabacr07.KanColleWrapper
 		/// 번역파일 및 기타 업데이트
 		/// </summary>
 		public Updater Updater { get; private set; }
+
+		/// <summary>
+		/// 자동번역기
+		/// </summary>
+		public WebTranslator WebTranslator { get; private set; }
 
 		/// <summary>
 		/// 기록
@@ -115,23 +118,19 @@ namespace Grabacr07.KanColleWrapper
 		public void Initialieze()
 		{
 			this.Translations = new Translations();
+			this.WebTranslator = new WebTranslator();
 			this.Updater = new Updater();
 
 			var proxy = this.Proxy ?? (this.Proxy = new KanColleProxy());
-            var requireInfo = proxy.api_get_member_require_info.TryParse<kcsapi_require_info>().FirstAsync().ToTask();
-			//var basic = proxy.api_get_member_basic.TryParse<kcsapi_basic>().FirstAsync().ToTask();
-			//var kdock = proxy.api_get_member_kdock.TryParse<kcsapi_kdock[]>().FirstAsync().ToTask();
-			//var sitem = proxy.api_get_member_slot_item.TryParse<kcsapi_slotitem[]>().FirstAsync().ToTask();
+			var requireInfoSource = proxy.api_get_member_require_info
+				.TryParse<kcsapi_require_info>()
+				.FirstAsync()
+				.ToTask();
 
 			proxy.api_start2.FirstAsync().Subscribe(async session =>
 			{
 				var timeout = Task.Delay(TimeSpan.FromSeconds(20));
-				var canInitialize = await Task.WhenAny(new Task[] { requireInfo }.WhenAll(), timeout) != timeout;
-
-				// タイムアウト仕掛けてるのは、今後のアップデートで basic, kdock, slot_item のいずれかが来なくなったときに
-				// 起動できなくなる (IsStarted を true にできなくなる) のを防ぐため
-				// -----
-				// ま、そんな規模の変更があったらそもそもまともに動作せんだろうがな ☝(◞‸◟)☝ 野良ツールはつらいよ
+				var canInitialize = await Task.WhenAny(requireInfoSource, timeout) != timeout;
 
 				SvData<kcsapi_start2> svd;
 				if (!SvData.TryParse(session, out svd)) return;
@@ -141,10 +140,10 @@ namespace Grabacr07.KanColleWrapper
 
 				if (canInitialize)
 				{
-                    var data = await requireInfo;
-					this.Homeport.UpdateAdmiral(data.Data.api_basic);
-					this.Homeport.Itemyard.Update(data.Data.api_slot_item);
-					this.Homeport.Dockyard.Update(data.Data.api_kdock);
+					var requireInfo = await requireInfoSource;
+					this.Homeport.UpdateAdmiral(requireInfo.Data.api_basic);
+					this.Homeport.Itemyard.Update(requireInfo.Data.api_slot_item);
+					this.Homeport.Dockyard.Update(requireInfo.Data.api_kdock);
 				}
 
 				this.IsStarted = true;

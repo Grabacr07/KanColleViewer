@@ -68,7 +68,7 @@ namespace Grabacr07.KanColleViewer.Views
 			}
 
 			this.MinWidth = browserSize.Width + this.BorderThickness.Left + this.BorderThickness.Right;
-			this.MinHeight = browserSize.Height + this.TopToolbarArea.ActualHeight + this.captionBar.ActualHeight + this.statusBar.ActualHeight;
+			this.MinHeight = browserSize.Height + this.TopToolbarArea.ActualHeight + this.BottomToolbarArea.ActualHeight + this.captionBar.ActualHeight + this.statusBar.ActualHeight;
 
 			this.previousBrowserSize = browserSize;
 		}

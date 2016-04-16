@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanColleViewer", "Grabacr07.KanColleViewer\KanColleViewer.csproj", "{C5F0111F-3F68-4A74-BB20-BB762564D080}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -68,6 +68,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleInfoPlugin", "..\..\BattleInfoPlugin\BattleInfoPlugin\BattleInfoPlugin.csproj", "{F8664ABC-AA36-421E-B3D7-287091224B1B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventMapHpViewer", "..\..\EventMapHpViewer\EventMapHpViewer\EventMapHpViewer.csproj", "{912029C5-C147-459B-A735-3D559B2F193D}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroRadiance", "MetroRadiance\source\RetroRadiance\RetroRadiance.csproj", "{7F898B3A-DA17-4CAB-B387-5629B5FACA49}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroTrilithon.Desktop", "MetroTrilithon\source\RetroTrilithon.Desktop\RetroTrilithon.Desktop.csproj", "{75A62817-2F64-4179-939C-B28914BDC566}"
@@ -83,6 +84,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskbarProgress", "Plugins\
 		{B84F1251-4042-4ADC-955E-415469947538} = {B84F1251-4042-4ADC-955E-415469947538}
 		{A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A} = {A8509D8C-9EAA-4787-AD0C-B7DD6B251F3A}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubtitlePlugin", "..\..\SubtitlePlugin\SubtitlePlugin\SubtitlePlugin\SubtitlePlugin.csproj", "{205668B6-966B-4542-B1D3-B2CD8AF23068}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -290,6 +293,18 @@ Global
 		{BDE5A07D-7F83-48C7-B61B-198FD4C0BCD5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BDE5A07D-7F83-48C7-B61B-198FD4C0BCD5}.Release|x86.ActiveCfg = Release|Any CPU
 		{BDE5A07D-7F83-48C7-B61B-198FD4C0BCD5}.Release|x86.Build.0 = Release|Any CPU
+		{205668B6-966B-4542-B1D3-B2CD8AF23068}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{205668B6-966B-4542-B1D3-B2CD8AF23068}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{205668B6-966B-4542-B1D3-B2CD8AF23068}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{205668B6-966B-4542-B1D3-B2CD8AF23068}.Debug|x86.Build.0 = Debug|Any CPU
+		{205668B6-966B-4542-B1D3-B2CD8AF23068}.Release (beta)|Any CPU.ActiveCfg = Release|Any CPU
+		{205668B6-966B-4542-B1D3-B2CD8AF23068}.Release (beta)|Any CPU.Build.0 = Release|Any CPU
+		{205668B6-966B-4542-B1D3-B2CD8AF23068}.Release (beta)|x86.ActiveCfg = Release|Any CPU
+		{205668B6-966B-4542-B1D3-B2CD8AF23068}.Release (beta)|x86.Build.0 = Release|Any CPU
+		{205668B6-966B-4542-B1D3-B2CD8AF23068}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{205668B6-966B-4542-B1D3-B2CD8AF23068}.Release|Any CPU.Build.0 = Release|Any CPU
+		{205668B6-966B-4542-B1D3-B2CD8AF23068}.Release|x86.ActiveCfg = Release|Any CPU
+		{205668B6-966B-4542-B1D3-B2CD8AF23068}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -310,5 +325,6 @@ Global
 		{7F898B3A-DA17-4CAB-B387-5629B5FACA49} = {6FE85CE3-7479-4630-B746-EA18BCE3311D}
 		{75A62817-2F64-4179-939C-B28914BDC566} = {5E122478-836E-4B7D-B0A4-F5EAA40BBE2A}
 		{BDE5A07D-7F83-48C7-B61B-198FD4C0BCD5} = {D844E42C-9406-43BF-9681-4F06F6CB3AD9}
+		{205668B6-966B-4542-B1D3-B2CD8AF23068} = {D844E42C-9406-43BF-9681-4F06F6CB3AD9}
 	EndGlobalSection
 EndGlobal
