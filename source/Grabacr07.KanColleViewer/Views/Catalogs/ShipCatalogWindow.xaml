@@ -263,16 +263,23 @@
 									</Grid.ColumnDefinitions>
 									<TextBlock Margin="0,2"
 											   HorizontalAlignment="Right">
-										<Run Text="레벨" />
+										<Run Text="레벨 범위" />
 										<Run Text=":" />
 									</TextBlock>
 									<WrapPanel Grid.Column="2">
-										<RadioButton Content="모두"
-													 IsChecked="{Binding Both, Mode=TwoWay}" />
-										<RadioButton Content="Lv.2 이상"
-													 IsChecked="{Binding Level2OrMore, Mode=TwoWay}" />
-										<RadioButton Content="Lv.1"
-													 IsChecked="{Binding Level1, Mode=TwoWay}" />
+										<metro:PromptTextBox Grid.Column="1"
+												 Text="{Binding MinLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+												 Prompt=" 최소 "
+												 VerticalAlignment="Center"
+												 VerticalContentAlignment="Center">
+										</metro:PromptTextBox>
+										<TextBlock Margin="5,3,5,5" Text="~"/>
+										<metro:PromptTextBox Grid.Column="1"
+												 Text="{Binding MaxLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+												 Prompt=" 최대 "
+												 VerticalAlignment="Center"
+												 VerticalContentAlignment="Center">
+										</metro:PromptTextBox>
 									</WrapPanel>
 								</Grid>
 
