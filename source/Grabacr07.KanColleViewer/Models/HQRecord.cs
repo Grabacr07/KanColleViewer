@@ -90,6 +90,10 @@ namespace Grabacr07.KanColleViewer.Models
 
 			using (StreamWriter sw = new StreamWriter(path, false, Encoding.UTF8))
 			{
+				//UTF-8 BOM
+				sw.Write(0xEF);
+				sw.Write(0xBB);
+				sw.Write(0xBF);
 				sw.WriteLine(RecordHeader);
 
 				var list = new List<HQRecordElement>(Record);
