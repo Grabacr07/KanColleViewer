@@ -88,7 +88,7 @@ namespace Grabacr07.KanColleViewer.Models
 
 			bool exist = File.Exists(path);
 
-			using (StreamWriter sw = new StreamWriter(path, false))
+			using (StreamWriter sw = new StreamWriter(path, false, Encoding.UTF8))
 			{
 				sw.WriteLine(RecordHeader);
 
@@ -111,7 +111,7 @@ namespace Grabacr07.KanColleViewer.Models
 			
 			if (File.Exists(path))
 			{
-				using (StreamReader sr = new StreamReader(path))
+				using (StreamReader sr = new StreamReader(path, Encoding.UTF8))
 				{
 					Record.Clear();
 
