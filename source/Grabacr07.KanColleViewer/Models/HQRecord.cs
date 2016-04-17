@@ -186,7 +186,7 @@ namespace Grabacr07.KanColleViewer.Models
 			return GetRecord(target);
 		}
 
-		/*/// <summary>
+		/// <summary>
 		/// 今日の戦果更新以降の最も古い記録を返します。
 		/// </summary>
 		public HQRecordElement GetRecordDay()
@@ -203,7 +203,7 @@ namespace Grabacr07.KanColleViewer.Models
 			}
 
 			return GetRecord(target);
-		}*/
+		}
 
 		/// <summary>
 		/// 今月の戦果更新以降の最も古い記録を返します。
