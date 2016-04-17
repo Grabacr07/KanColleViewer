@@ -806,4 +806,113 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			return false;
 		}
 	}
+
+	public class ShipFleetFilter : ShipCatalogFilter
+	{
+		#region AllFleet 변경 통지 프로퍼티
+		private bool _AllFleet;
+
+		public bool AllFleet
+		{
+			get { return this._AllFleet; }
+			set
+			{
+				if (this._AllFleet != value)
+				{
+					this._AllFleet = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+		#endregion
+
+		#region FirstFleet 변경 통지 프로퍼티
+		private bool _FirstFleet;
+
+		public bool FirstFleet
+		{
+			get { return this._FirstFleet; }
+			set
+			{
+				if (this._FirstFleet != value)
+				{
+					this._FirstFleet = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+		#endregion
+
+		#region SecondFleet 변경 통지 프로퍼티
+		private bool _SecondFleet;
+
+		public bool SecondFleet
+		{
+			get { return this._SecondFleet; }
+			set
+			{
+				if (this._SecondFleet != value)
+				{
+					this._SecondFleet = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+		#endregion
+
+		#region ThirdFleet 변경 통지 프로퍼티
+		private bool _ThirdFleet;
+
+		public bool ThirdFleet
+		{
+			get { return this._ThirdFleet; }
+			set
+			{
+				if (this._ThirdFleet != value)
+				{
+					this._ThirdFleet = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+		#endregion
+
+		#region FourthFleet 변경 통지 프로퍼티
+		private bool _FourthFleet;
+
+		public bool FourthFleet
+		{
+			get { return this._FourthFleet; }
+			set
+			{
+				if (this._FourthFleet != value)
+				{
+					this._FourthFleet = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+		#endregion
+
+		public ShipFleetFilter(Action updateAction) : base(updateAction)
+		{
+			this._AllFleet = true;
+		}
+
+		public override bool Predicate(Ship ship)
+		{
+			if (this.AllFleet) return true;
+			if (this.FirstFleet && ship.FleetId == 1) return true;
+			if (this.SecondFleet && ship.FleetId == 2) return true;
+			if (this.ThirdFleet && ship.FleetId == 3) return true;
+			if (this.FourthFleet && ship.FleetId == 4) return true;
+
+			return false;
+		}
+	}
 }

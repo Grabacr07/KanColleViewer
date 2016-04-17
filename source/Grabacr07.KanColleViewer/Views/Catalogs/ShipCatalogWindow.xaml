@@ -470,16 +470,20 @@
 							BorderBrush="{DynamicResource BorderBrushKey}"
 							Margin="0,8,0,0"
 							Padding="5">
-						<Grid DataContext="{Binding ShipNameSearchFilter}">
+						<Grid>
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="Auto"/>
 								<ColumnDefinition Width="300"/>
+								<ColumnDefinition Width="20"/>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="10"/>
+								<ColumnDefinition Width="*"/>
 							</Grid.ColumnDefinitions>
 							<TextBlock Margin="0,3">
 								<Run Text="칸무스 검색" />
 							</TextBlock>
 
-							<metro:PromptTextBox Grid.Column="1"
+							<metro:PromptTextBox DataContext="{Binding ShipNameSearchFilter}" Grid.Column="1"
 												 Text="{Binding NameString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 												 Prompt="칸무스 이름을 입력하고 Enter를 눌러 검색"
 												 VerticalAlignment="Center"
@@ -490,6 +494,24 @@
 												Command="{Binding SearchCommand}" />
 								</metro:PromptTextBox.InputBindings>
 							</metro:PromptTextBox>
+							
+							<TextBlock Grid.Column="3" Margin="0,2"
+											   HorizontalAlignment="Right">
+										<Run Text="소속 함대" />
+										<Run Text=":" />
+							</TextBlock>
+							<WrapPanel DataContext="{Binding ShipFleetFilter}" Grid.Column="5" Margin="0,2,0,0">
+								<RadioButton Margin="0,0,10,0" Content="전체"
+													 IsChecked="{Binding AllFleet, Mode=TwoWay}" />
+								<RadioButton Margin="0,0,10,0" Content="제 1함대"
+													 IsChecked="{Binding FirstFleet, Mode=TwoWay}" />
+								<RadioButton Margin="0,0,10,0" Content="제 2함대"
+													 IsChecked="{Binding SecondFleet, Mode=TwoWay}" />
+								<RadioButton Margin="0,0,10,0" Content="제 3함대"
+													 IsChecked="{Binding ThirdFleet, Mode=TwoWay}" />
+								<RadioButton Margin="0,0,10,0" Content="제 4함대"
+													 IsChecked="{Binding FourthFleet, Mode=TwoWay}" />
+							</WrapPanel>
 						</Grid>
 					</Border>
 				</StackPanel>
