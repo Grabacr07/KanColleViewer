@@ -43,7 +43,7 @@
 				<Run Text="{Binding Model.Comment, Mode=OneWay}" />
 			</TextBlock>
 
-			<TextBlock>
+			<TextBlock ToolTip="{Binding ToolTip}">
 				<Run Text="{Binding Resources.Homeport_FleetHQ, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 				<Run Text="Lv."
 					 Style="{DynamicResource EmphaticTextElementStyleKey}"

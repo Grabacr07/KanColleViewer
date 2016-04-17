@@ -230,6 +230,7 @@ namespace Grabacr07.KanColleViewer
 
 		protected override void OnExit(ExitEventArgs e)
 		{
+			ViewModels.Contents.AdmiralViewModel.Record?.Save();
 			this.ChangeState(ApplicationState.Terminate);
 			base.OnExit(e);
 
