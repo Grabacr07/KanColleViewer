@@ -29,18 +29,18 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 	public class ShipLevelFilter : ShipCatalogFilter
 	{
-		#region Both 変更通知プロパティ
+		#region MinLevel 변경 통지 프로퍼티
 
-		private bool _Both;
+		private string _MinLevel;
 
-		public bool Both
+		public string MinLevel
 		{
-			get { return this._Both; }
+			get { return this._MinLevel; }
 			set
 			{
-				if (this._Both != value)
+				if (this._MinLevel != value)
 				{
-					this._Both = value;
+					this._MinLevel = value;
 					this.RaisePropertyChanged();
 					this.Update();
 				}
@@ -49,38 +49,18 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#endregion
 
-		#region Level1 変更通知プロパティ
+		#region MaxLevel 변경 통지 프로퍼티
 
-		private bool _Level1;
+		private string _MaxLevel;
 
-		public bool Level1
+		public string MaxLevel
 		{
-			get { return this._Level1; }
+			get { return this._MaxLevel; }
 			set
 			{
-				if (this._Level1 != value)
+				if (this._MaxLevel != value)
 				{
-					this._Level1 = value;
-					this.RaisePropertyChanged();
-					this.Update();
-				}
-			}
-		}
-
-		#endregion
-
-		#region Level2OrMore 変更通知プロパティ
-
-		private bool _Level2OrMore;
-
-		public bool Level2OrMore
-		{
-			get { return this._Level2OrMore; }
-			set
-			{
-				if (this._Level2OrMore != value)
-				{
-					this._Level2OrMore = value;
+					this._MaxLevel = value;
 					this.RaisePropertyChanged();
 					this.Update();
 				}
@@ -92,14 +72,18 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public ShipLevelFilter(Action updateAction)
 			: base(updateAction)
 		{
-			this._Level2OrMore = true;
+			this._MinLevel = "2";
+			this._MaxLevel = "155";
 		}
 
 		public override bool Predicate(Ship ship)
 		{
-			if (this.Both) return true;
-			if (this.Level2OrMore && ship.Level >= 2) return true;
-			if (this.Level1 && ship.Level == 1) return true;
+			int minlevel;
+			int maxlevel;
+
+			if (int.TryParse(_MinLevel, out minlevel) && int.TryParse(_MaxLevel, out maxlevel))
+				if (ship.Level >= minlevel && ship.Level <= maxlevel)
+					return true;
 
 			return false;
 		}

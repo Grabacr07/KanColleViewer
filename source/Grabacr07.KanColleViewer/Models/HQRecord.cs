@@ -88,8 +88,12 @@ namespace Grabacr07.KanColleViewer.Models
 
 			bool exist = File.Exists(path);
 
-			using (StreamWriter sw = new StreamWriter(path, false))
+			using (StreamWriter sw = new StreamWriter(path, false, Encoding.UTF8))
 			{
+				//UTF-8 BOM
+				sw.Write(0xEF);
+				sw.Write(0xBB);
+				sw.Write(0xBF);
 				sw.WriteLine(RecordHeader);
 
 				var list = new List<HQRecordElement>(Record);
@@ -111,7 +115,7 @@ namespace Grabacr07.KanColleViewer.Models
 			
 			if (File.Exists(path))
 			{
-				using (StreamReader sr = new StreamReader(path))
+				using (StreamReader sr = new StreamReader(path, Encoding.UTF8))
 				{
 					Record.Clear();
 
@@ -186,7 +190,7 @@ namespace Grabacr07.KanColleViewer.Models
 			return GetRecord(target);
 		}
 
-		/*/// <summary>
+		/// <summary>
 		/// 今日の戦果更新以降の最も古い記録を返します。
 		/// </summary>
 		public HQRecordElement GetRecordDay()
@@ -203,7 +207,7 @@ namespace Grabacr07.KanColleViewer.Models
 			}
 
 			return GetRecord(target);
-		}*/
+		}
 
 		/// <summary>
 		/// 今月の戦果更新以降の最も古い記録を返します。
