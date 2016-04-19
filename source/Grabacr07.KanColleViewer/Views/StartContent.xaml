@@ -201,7 +201,7 @@
 							</metro2:HyperlinkEx>
 						</TextBlock>
 						<TextBlock FontFamily="Segoe UI">
-								<Run Text="Localization" />
+								<Run Text="Developer" />
 								<Run Text="(Korean)"
 									 FontSize="10" />
 								<Run Text=":" />
@@ -211,12 +211,14 @@
 						</metro2:HyperlinkEx>
 								<metro2:HyperlinkEx Uri="http://kcvkr.tistory.com">
 									<Run Text="FreyYa" />
-                                    <TextBlock Text=","/>
 								</metro2:HyperlinkEx>
                                     <metro2:HyperlinkEx Uri="https://github.com/DaeWha">
 									<Run Text="DaeWha" />
 								</metro2:HyperlinkEx>
-                                </TextBlock>
+							<metro2:HyperlinkEx Uri="https://github.com/CirnoV">
+								<Run Text="Cirno V" />
+							</metro2:HyperlinkEx>
+						</TextBlock>
 						<TextBlock FontFamily="Segoe UI">
 								<Run Text="Localization" />
 								<Run Text="(English)"
