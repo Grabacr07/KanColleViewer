@@ -293,7 +293,7 @@ namespace Grabacr07.KanColleWrapper
 				battleid,
 				DateTime.Now.ToString("yyyy/M/d H:mm"),
 				MapType,
-				$"{BattleData.SelectToken("world").ToString()}-{(int)BattleData.SelectToken("battles[0].node")}-{(int)BattleData.SelectToken("mapnum")}",
+				$"{BattleData.SelectToken("world").ToString()}-{(int)BattleData.SelectToken("mapnum")}-{(int)BattleData.SelectToken("battles[0].node")}",
 				KanColleClient.Current.Translations.GetTranslation(br.api_enemy_info.api_deck_name, TranslationType.OperationSortie, false, br, -1),
 				br.api_win_rank, 
 				ShipName);
