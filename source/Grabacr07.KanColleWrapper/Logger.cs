@@ -362,7 +362,7 @@ namespace Grabacr07.KanColleWrapper
 						}
 						using (StreamWriter w = File.AppendText(MainFolder + "\\DropLog2.csv"))
 						{
-							w.WriteLine("ID,날짜,해역이름,해역,적 함대,랭크,드랍", args);
+							w.WriteLine("날짜,해역이름,해역,적 함대,랭크,드랍", args);
 						}
 					}
 
