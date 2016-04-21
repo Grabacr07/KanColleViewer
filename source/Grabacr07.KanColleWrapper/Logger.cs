@@ -269,11 +269,16 @@ namespace Grabacr07.KanColleWrapper
 
 			JObject json;
 			if (File.Exists(Path.Combine(MainFolder, "replaydata.json")))
+			{
 				json = JObject.Parse(File.ReadAllText(Path.Combine(MainFolder, "replaydata.json")));
+				json["maxid"] = (int)json["maxid"]+1;
+			}
 			else
-				json = new JObject();
+			{
+				json = new JObject(new JProperty("maxid", 0));
+			}
 
-			int battleid = json.Count;
+			int battleid = (int)json["maxid"];
 			json.Add(new JProperty(battleid.ToString(), BattleData));
 
 			using (StreamWriter file = File.CreateText(Path.Combine(MainFolder, "replaydata.json")))
@@ -291,7 +296,7 @@ namespace Grabacr07.KanColleWrapper
 			//ID,날짜,해역이름,해역,적 함대,랭크,드랍
 			Log(LogType.ShipDrop, "{0},{1},{2},{3},{4},{5},{6}",
 				battleid,
-				DateTime.Now.ToString("yyyy/M/d H:mm"),
+				DateTime.Now.ToString("yyyy\\/MM\\/dd HH\\:mm\\:ss", System.Globalization.CultureInfo.InvariantCulture),
 				MapType,
 				$"{BattleData.SelectToken("world").ToString()}-{(int)BattleData.SelectToken("mapnum")}-{(int)BattleData.SelectToken("battles[0].node")}",
 				KanColleClient.Current.Translations.GetTranslation(br.api_enemy_info.api_deck_name, TranslationType.OperationSortie, false, br, -1),
