@@ -5,7 +5,6 @@ namespace Grabacr07.KanColleWrapper.Models
 	/// </summary>
 	public class DropStringLists
 	{
-		public int Id { get; set; }
 		public string Date { get; set; }
 		public string SeaArea { get; set; }
 		public string MapInfo { get; set; }

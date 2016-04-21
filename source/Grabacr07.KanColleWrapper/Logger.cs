@@ -257,29 +257,25 @@ namespace Grabacr07.KanColleWrapper
 			}
 			MapType = KanColleClient.Current.Translations.GetTranslation(br.api_quest_name, TranslationType.OperationMaps, false, br);
 
-			#region JSON파일 저장
-			JObject lastbattle = (JObject)BattleData["battles"][0];
+			string currentTime = DateTime.Now.ToString("yyyy\\/MM\\/dd HH\\:mm\\:ss", System.Globalization.CultureInfo.InvariantCulture);
 
-			lastbattle.Add(new JProperty("rank", br.api_win_rank));
-			lastbattle.Add(new JProperty("drop", br.api_get_ship?.api_ship_id));
-			lastbattle.Add(new JProperty("baseEXP", br.api_get_base_exp));
-			lastbattle.Add(new JProperty("hqEXP", br.api_get_exp));
+			#region JSON파일 저장
+			JObject lastBattle = (JObject)BattleData["battles"][0];
+
+			lastBattle.Add(new JProperty("rank", br.api_win_rank));
+			lastBattle.Add(new JProperty("drop", br.api_get_ship?.api_ship_id));
+			lastBattle.Add(new JProperty("baseEXP", br.api_get_base_exp));
+			lastBattle.Add(new JProperty("hqEXP", br.api_get_exp));
 
 			string MainFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
 
 			JObject json;
 			if (File.Exists(Path.Combine(MainFolder, "replaydata.json")))
-			{
 				json = JObject.Parse(File.ReadAllText(Path.Combine(MainFolder, "replaydata.json")));
-				json["maxid"] = (int)json["maxid"]+1;
-			}
 			else
-			{
-				json = new JObject(new JProperty("maxid", 0));
-			}
-
-			int battleid = (int)json["maxid"];
-			json.Add(new JProperty(battleid.ToString(), BattleData));
+				json = new JObject();
+			
+			json.Add(new JProperty(currentTime, BattleData));
 
 			using (StreamWriter file = File.CreateText(Path.Combine(MainFolder, "replaydata.json")))
 			{
@@ -293,10 +289,9 @@ namespace Grabacr07.KanColleWrapper
 			#endregion
 
 			#region CSV파일 저장
-			//ID,날짜,해역이름,해역,적 함대,랭크,드랍
-			Log(LogType.ShipDrop, "{0},{1},{2},{3},{4},{5},{6}",
-				battleid,
-				DateTime.Now.ToString("yyyy\\/MM\\/dd HH\\:mm\\:ss", System.Globalization.CultureInfo.InvariantCulture),
+			//날짜,해역이름,해역,적 함대,랭크,드랍
+			Log(LogType.ShipDrop, "{0},{1},{2},{3},{4},{5}",
+				currentTime,
 				MapType,
 				$"{BattleData.SelectToken("world").ToString()}-{(int)BattleData.SelectToken("mapnum")}-{(int)BattleData.SelectToken("battles[0].node")}",
 				KanColleClient.Current.Translations.GetTranslation(br.api_enemy_info.api_deck_name, TranslationType.OperationSortie, false, br, -1),
@@ -462,23 +457,21 @@ namespace Grabacr07.KanColleWrapper
 			#region ShipDrop
 			else if (Type == LogType.ShipDrop)
 			{
-				// ID,날짜,해역이름,해역,적 함대,랭크,드랍
+				// 날짜,해역이름,해역,적 함대,랭크,드랍
 				var binPath = Path.Combine(MainFolder, "Bin", "Drop2.bin");
 				var item = new DropStringLists();
-
-				item.Id = (int)args[0];
-				item.Date = args[1].ToString();
-				item.SeaArea = args[2].ToString();
-				item.MapInfo = args[3].ToString();
-				item.EnemyFleet = args[4].ToString();
-				item.Rank = args[5].ToString();
-				item.Drop = args[6].ToString();
+				
+				item.Date = args[0].ToString();
+				item.SeaArea = args[1].ToString();
+				item.MapInfo = args[2].ToString();
+				item.EnemyFleet = args[3].ToString();
+				item.Rank = args[4].ToString();
+				item.Drop = args[5].ToString();
 
 				using (var fileStream = new FileStream(binPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite))
 				using (var writer = new BinaryWriter(fileStream))
 				{
 					writer.Seek(0, SeekOrigin.End);
-					writer.Write(item.Id);
 					writer.Write(item.Date);
 					writer.Write(item.SeaArea);
 					writer.Write(item.MapInfo);
