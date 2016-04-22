@@ -68,7 +68,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			if (res != null)
 			{
 				int diff = Model.Experience - res.HQExp;
-				tooltip.AppendFormat("이달: +{0} exp. / 전과 {1:n2}\r", diff, diff * 7 / 10000.0);
+				tooltip.AppendFormat("이달: +{0} exp. / 전과 {1:n2}", diff, diff * 7 / 10000.0);
 			}
 			ToolTip = tooltip.ToString();
 			this.RaisePropertyChanged(nameof(this.Model));

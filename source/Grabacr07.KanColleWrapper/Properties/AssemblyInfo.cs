@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Copyright © 2015 Grabacr07")]
 
 [assembly: ComVisible(false)]
-[assembly: Guid("D3F0D951-9D9E-4B3C-923F-10E21C62E0F6")]
+[assembly: Guid("8C42F9E0-E2C9-4741-8F98-653A4D275798")]
 
 [assembly: AssemblyVersion("1.5.1")]
 [assembly: AssemblyInformationalVersion("1.5.1")]
