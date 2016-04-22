@@ -1,14 +1,14 @@
 ﻿
 namespace Grabacr07.KanColleWrapper.Models
 {   /// <summary>
-	/// ID,날짜,해역이름,해역,적 함대,랭크,드랍
+	/// 날짜,해역이름,해역,보스,적 함대,랭크,드랍
 	/// </summary>
 	public class DropStringLists
 	{
-		public int Id { get; set; }
 		public string Date { get; set; }
 		public string SeaArea { get; set; }
 		public string MapInfo { get; set; }
+		public string Boss { get; set; }
 		public string EnemyFleet { get; set; }
 		public string Rank { get; set; }
 		public string Drop { get; set; }
