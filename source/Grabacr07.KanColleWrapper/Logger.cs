@@ -88,10 +88,14 @@ namespace Grabacr07.KanColleWrapper
 
 		private void CreateItem(kcsapi_createitem source, NameValueCollection req)
 		{
-			this.Log(LogType.BuildItem, "{0},{1},{2},{3},{4},{5},{6}", DateTime.Now.ToString("yyyy/M/d H:mm"),
-				source.api_create_flag == 1 ? KanColleClient.Current.Master.SlotItems[source.api_slot_item.api_slotitem_id].Name : "NA",
+			this.Log(LogType.BuildItem, "{0},{1},{2},{3},{4},{5},{6}", 
+				DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
 				KanColleClient.Current.Homeport.Organization.Fleets[1].Ships[0].Info.ShipType.Name,
-				req["api_item1"], req["api_item2"], req["api_item3"], req["api_item4"]);
+				req["api_item1"], 
+				req["api_item2"], 
+				req["api_item3"], 
+				req["api_item4"],
+				source.api_create_flag == 1 ? KanColleClient.Current.Master.SlotItems[source.api_slot_item.api_slotitem_id].Name : "NA");
 
 		}
 
@@ -112,7 +116,15 @@ namespace Grabacr07.KanColleWrapper
 			{
 				if (waitingForShip && dock.api_id == dockid)
 				{
-					Log(LogType.BuildShip, "{0},{1},{2},{3},{4},{5},{6}", DateTime.Now.ToString("yyyy/M/d H:mm"), KanColleClient.Current.Master.Ships[dock.api_created_ship_id].Name, shipmats[0], shipmats[1], shipmats[2], shipmats[3], shipmats[4]);
+					Log(LogType.BuildShip, "{0},{1},{2},{3},{4},{5},{6},{7}", 
+						DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"), 
+						KanColleClient.Current.Homeport.Organization.Fleets[1].Ships[0].Info.Name,
+						shipmats[0], 
+						shipmats[1], 
+						shipmats[2], 
+						shipmats[3], 
+						shipmats[4],
+						KanColleClient.Current.Master.Ships[dock.api_created_ship_id].Name);
 					waitingForShip = false;
 				}
 			}
@@ -260,7 +272,7 @@ namespace Grabacr07.KanColleWrapper
 			}
 			MapType = KanColleClient.Current.Translations.GetTranslation(br.api_quest_name, TranslationType.OperationMaps, false, br);
 
-			string currentTime = DateTime.Now.ToString("yyyy\\/MM\\/dd HH\\:mm\\:ss", System.Globalization.CultureInfo.InvariantCulture);
+			string currentTime = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
 
 			#region JSON파일 저장
 			JObject lastBattle = (JObject)BattleData["battles"][0];
@@ -313,20 +325,20 @@ namespace Grabacr07.KanColleWrapper
 
 				if (Type == LogType.BuildItem)
 				{
-					if (!System.IO.File.Exists(MainFolder + "\\ItemBuildLog.csv"))
+					if (!System.IO.File.Exists(MainFolder + "\\ItemBuildLog2.csv"))
 					{
-						var csvPath = Path.Combine(MainFolder, "ItemBuildLog.csv");
+						var csvPath = Path.Combine(MainFolder, "ItemBuildLog2.csv");
 						using (var fileStream = new FileStream(csvPath, FileMode.CreateNew, FileAccess.Write, FileShare.None))
 						using (var writer = new BinaryWriter(fileStream))
 						{
 							writer.Write(utf8Bom);
 						}
-						using (StreamWriter w = File.AppendText(MainFolder + "\\ItemBuildLog.csv"))
+						using (StreamWriter w = File.AppendText(MainFolder + "\\ItemBuildLog2.csv"))
 						{
-							w.WriteLine("날짜,결과,비서함,연료,탄,강재,보크사이트", args);
+							w.WriteLine("날짜,비서함,연료,탄,강재,보크사이트,결과", args);
 						}
 					}
-					using (StreamWriter w = File.AppendText(MainFolder + "\\ItemBuildLog.csv"))
+					using (StreamWriter w = File.AppendText(MainFolder + "\\ItemBuildLog2.csv"))
 					{
 						w.WriteLine(format, args);
 					}
@@ -335,21 +347,21 @@ namespace Grabacr07.KanColleWrapper
 				}
 				else if (Type == LogType.BuildShip)
 				{
-					if (!System.IO.File.Exists(MainFolder + "\\ShipBuildLog.csv"))
+					if (!System.IO.File.Exists(MainFolder + "\\ShipBuildLog2.csv"))
 					{
-						var csvPath = Path.Combine(MainFolder, "ShipBuildLog.csv");
+						var csvPath = Path.Combine(MainFolder, "ShipBuildLog2.csv");
 						using (var fileStream = new FileStream(csvPath, FileMode.CreateNew, FileAccess.Write, FileShare.None))
 						using (var writer = new BinaryWriter(fileStream))
 						{
 							writer.Write(utf8Bom);
 						}
-						using (StreamWriter w = File.AppendText(MainFolder + "\\ShipBuildLog.csv"))
+						using (StreamWriter w = File.AppendText(MainFolder + "\\ShipBuildLog2.csv"))
 						{
-							w.WriteLine("날짜,결과,연료,탄,강재,보크사이트,개발자재", args);
+							w.WriteLine("날짜,비서함,연료,탄,강재,보크사이트,개발자재,결과", args);
 						}
 					}
 
-					using (StreamWriter w = File.AppendText(MainFolder + "\\ShipBuildLog.csv"))
+					using (StreamWriter w = File.AppendText(MainFolder + "\\ShipBuildLog2.csv"))
 					{
 						w.WriteLine(format, args);
 					}
@@ -391,17 +403,17 @@ namespace Grabacr07.KanColleWrapper
 			#region BuildItem
 			if (Type == LogType.BuildItem)
 			{
-				var binPath = Path.Combine(MainFolder, "Bin", "ItemBuild.bin");
+				var binPath = Path.Combine(MainFolder, "Bin", "ItemBuild2.bin");
 				var item = new ItemStringLists();
 
 				item.Date = args[0].ToString();
-				if (args[1].ToString() == "NA") item.Results = string.Empty;
-				else item.Results = args[1].ToString();
-				item.Assistant = args[2].ToString();
-				item.Fuel = Convert.ToInt32(args[3].ToString());
-				item.Bullet = Convert.ToInt32(args[4].ToString());
-				item.Steel = Convert.ToInt32(args[5].ToString());
-				item.bauxite = Convert.ToInt32(args[6].ToString());
+				item.Assistant = args[1].ToString();
+				item.Fuel = Convert.ToInt32(args[2].ToString());
+				item.Bullet = Convert.ToInt32(args[3].ToString());
+				item.Steel = Convert.ToInt32(args[4].ToString());
+				item.bauxite = Convert.ToInt32(args[5].ToString());
+				if (args[6].ToString() == "NA") item.Results = string.Empty;
+				else item.Results = args[6].ToString();
 
 				using (var fileStream = new FileStream(binPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite))
 				using (var writer = new BinaryWriter(fileStream))
@@ -427,28 +439,30 @@ namespace Grabacr07.KanColleWrapper
 			#region BuildShip
 			else if (Type == LogType.BuildShip)
 			{
-				var binPath = Path.Combine(MainFolder, "Bin", "ShipBuild.bin");
+				var binPath = Path.Combine(MainFolder, "Bin", "ShipBuild2.bin");
 				var item = new BuildStirngLists();
 
 				item.Date = args[0].ToString();
-				item.Results = args[1].ToString();
+				item.Assistant = args[1].ToString();
 				item.Fuel = Convert.ToInt32(args[2].ToString());
 				item.Bullet = Convert.ToInt32(args[3].ToString());
 				item.Steel = Convert.ToInt32(args[4].ToString());
 				item.bauxite = Convert.ToInt32(args[5].ToString());
 				item.UseItems = Convert.ToInt32(args[6].ToString());
+				item.Results = args[7].ToString();
 
 				using (var fileStream = new FileStream(binPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite))
 				using (var writer = new BinaryWriter(fileStream))
 				{
 					writer.Seek(0, SeekOrigin.End);
 					writer.Write(item.Date);
-					writer.Write(item.Results);
+					writer.Write(item.Assistant);
 					writer.Write(item.Fuel);
 					writer.Write(item.Bullet);
 					writer.Write(item.Steel);
 					writer.Write(item.bauxite);
 					writer.Write(item.UseItems);
+					writer.Write(item.Results);
 
 					fileStream.Dispose();
 					fileStream.Close();
@@ -461,7 +475,6 @@ namespace Grabacr07.KanColleWrapper
 			#region ShipDrop
 			else if (Type == LogType.ShipDrop)
 			{
-				// 날짜,해역이름,해역,보스,적 함대,랭크,드랍
 				var binPath = Path.Combine(MainFolder, "Bin", "Drop2.bin");
 				var item = new DropStringLists();
 				
