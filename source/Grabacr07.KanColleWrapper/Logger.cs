@@ -13,6 +13,67 @@ using System.Reactive.Linq;
 
 namespace Grabacr07.KanColleWrapper
 {
+	#region map_start_next
+	public class map_start_next
+	{
+		public int api_rashin_flg { get; set; }
+		public int api_rashin_id { get; set; }
+		public int api_maparea_id { get; set; }
+		public int api_mapinfo_no { get; set; }
+		public int api_no { get; set; }
+		public int api_color_no { get; set; }
+		public int api_event_id { get; set; }
+		public int api_event_kind { get; set; }
+		public int api_next { get; set; }
+		public int api_bosscell_no { get; set; }
+		public int api_bosscomp { get; set; }
+		public Api_Eventmap api_eventmap { get; set; }
+		public int api_comment_kind { get; set; }
+		public int api_production_kind { get; set; }
+		public Api_Enemy api_enemy { get; set; }
+		public Api_Happening api_happening { get; set; }
+		public Api_Itemget api_itemget { get; set; }
+		public Api_Select_Route api_select_route { get; set; }
+	}
+
+	public class Api_Eventmap
+	{
+		public int api_max_maphp { get; set; }
+		public int api_now_maphp { get; set; }
+		public int api_dmg { get; set; }
+	}
+
+	public class Api_Enemy
+	{
+		//public int api_enemy_id { get; set; }
+		public int api_result { get; set; }
+		public string api_result_str { get; set; }
+	}
+
+	public class Api_Happening
+	{
+		public int api_type { get; set; }
+		public int api_count { get; set; }
+		public int api_usemst { get; set; }
+		public int api_mst_id { get; set; }
+		public int api_icon_id { get; set; }
+		public int api_dentan { get; set; }
+	}
+
+	public class Api_Itemget
+	{
+		public int api_getcount { get; set; }
+		public int api_icon_id { get; set; }
+		public int api_id { get; set; }
+		public string api_name { get; set; }
+		public int api_usemst { get; set; }
+	}
+	public class Api_Select_Route
+	{
+		public int[] api_select_cells { get; set; }
+	}
+	#endregion
+
 	public class Logger : NotificationObject
 	{
 		private bool waitingForShip = false;
@@ -71,6 +132,7 @@ namespace Grabacr07.KanColleWrapper
 
 				proxy.api_req_map_start.TryParse<map_start_next>().Subscribe(x => MapStartNext(x.Data, x.Request["api_deck_id"]));
 				proxy.api_req_map_next.TryParse<map_start_next>().Subscribe(x => MapStartNext(x.Data));
+
 				proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => this.BattleResult(x.Data));
 				proxy.api_req_combined_battle_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => this.BattleResult(x.Data));
 
