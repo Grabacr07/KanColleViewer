@@ -170,8 +170,6 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 
 		bool IKanColleClientSettings.CheckFlagshipIsRepairShip => CheckFlagshipIsNotRepairShip.Value;
 
-		bool IKanColleClientSettings.UseRepairTimer => UseRepairTimer.Value;
-
 		#endregion
 
 

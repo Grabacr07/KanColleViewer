@@ -1,4 +1,5 @@
 ﻿using Grabacr07.KanColleViewer.Models;
+using Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Livet;
@@ -47,7 +48,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		private void UpdateVisibility()
 		{
-			if (KanColleClient.Current.Settings.UseRepairTimer)
+			if (KanColleSettings.UseRepairTimer)
 				TimerVisibility = Visibility.Visible;
 			else
 				TimerVisibility = Visibility.Collapsed;
