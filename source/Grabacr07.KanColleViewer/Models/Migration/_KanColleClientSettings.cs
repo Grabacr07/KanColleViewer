@@ -22,7 +22,7 @@ namespace Grabacr07.KanColleViewer.Models.Migration
 		public bool SqrtDoubleToInt { get; set; }
 		public bool EnableAircraftFilter { get; set; }
 		public bool CheckFlagshipIsRepairShip { get; set; }
-
+		public bool UseRepairTimer { get; set; }
 
 		event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
 		{

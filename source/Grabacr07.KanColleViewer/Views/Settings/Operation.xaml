@@ -55,6 +55,10 @@
 			<Border Height="12" />
 			<CheckBox Content="기함으로 공작함이 편성되어있을때 출격가능으로 판정하지않도록 설정"
 					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.CheckFlagshipIsNotRepairShip}, Path=Value}" />
+			
+			<Border Height="12" />
+			<CheckBox Content="아카시 수리 타이머를 사용"
+					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.UseRepairTimer}, Path=Value}" />
 		</StackPanel>
 
 		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />

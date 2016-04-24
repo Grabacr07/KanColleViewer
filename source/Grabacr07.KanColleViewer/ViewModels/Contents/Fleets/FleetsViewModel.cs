@@ -9,6 +9,7 @@ using Livet.Messaging;
 using MetroTrilithon.Lifetime;
 using MetroTrilithon.Mvvm;
 using StatefulModel;
+using Grabacr07.KanColleViewer.Models;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 {
@@ -65,6 +66,25 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 		#endregion
 
+		#region AkashiTimer 변경 통지 프로퍼티
+
+		private AkashiTimerViewModel _AkashiTimer;
+		
+		public AkashiTimerViewModel AkashiTimer
+		{
+			get { return this._AkashiTimer; }
+			set
+			{
+				if (this._AkashiTimer != value)
+				{
+					this._AkashiTimer = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		public FleetsViewModel()
 		{
 			KanColleClient.Current.Homeport.Organization
@@ -73,6 +93,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			Disposable
 				.Create(() => this.fleetListeners?.Dispose())
 				.AddTo(this);
+			_AkashiTimer = new AkashiTimerViewModel();
 		}
 
 		public void ShowFleetWindow()

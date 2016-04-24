@@ -30,5 +30,6 @@ namespace Grabacr07.KanColleWrapper
 		/// 艦隊ステータスにおいて、旗艦が工作艦かどうかを確認するかどうかを示す値を取得します。
 		/// </summary>
 		bool CheckFlagshipIsRepairShip { get; }
+		bool UseRepairTimer { get; }
 	}
 }
