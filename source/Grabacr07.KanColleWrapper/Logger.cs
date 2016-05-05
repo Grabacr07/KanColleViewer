@@ -13,8 +13,8 @@ using System.Reactive.Linq;
 
 namespace Grabacr07.KanColleWrapper
 {
-	#region map_start_next
-	public class map_start_next
+	#region start_next
+	public class start_next
 	{
 		public int api_rashin_flg { get; set; }
 		public int api_rashin_id { get; set; }
@@ -112,12 +112,6 @@ namespace Grabacr07.KanColleWrapper
 				proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_combined_battle/sp_midnight")
 					.Subscribe(x => this.BattleUpdate(x, true));
 
-				proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_practice/battle")
-					.Subscribe(x => this.BattleUpdate(x));
-
-				proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_practice/midnight_battle")
-					.Subscribe(x => this.BattleUpdate(x, true));
-
 				proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_sortie/airbattle")
 					.Subscribe(x => this.BattleUpdate(x));
 
@@ -130,8 +124,8 @@ namespace Grabacr07.KanColleWrapper
 				proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_combined_battle/ld_airbattle")
 					.Subscribe(x => this.BattleUpdate(x));
 
-				proxy.api_req_map_start.TryParse<map_start_next>().Subscribe(x => MapStartNext(x.Data, x.Request["api_deck_id"]));
-				proxy.api_req_map_next.TryParse<map_start_next>().Subscribe(x => MapStartNext(x.Data));
+				proxy.api_req_map_start.TryParse<start_next>().Subscribe(x => MapStartNext(x.Data, x.Request["api_deck_id"]));
+				proxy.api_req_map_next.TryParse<start_next>().Subscribe(x => MapStartNext(x.Data));
 
 				proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => this.BattleResult(x.Data));
 				proxy.api_req_combined_battle_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => this.BattleResult(x.Data));
@@ -227,7 +221,7 @@ namespace Grabacr07.KanColleWrapper
 	]
 }
 */
-		private void MapStartNext(map_start_next startnext, string api_deck_id = null)
+		private void MapStartNext(start_next startnext, string api_deck_id = null)
 		{
 			if (api_deck_id != null)
 				CurrentDeckId = int.Parse(api_deck_id);
