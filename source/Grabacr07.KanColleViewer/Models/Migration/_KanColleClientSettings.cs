@@ -23,7 +23,6 @@ namespace Grabacr07.KanColleViewer.Models.Migration
 		public bool EnableAircraftFilter { get; set; }
 		public bool CheckFlagshipIsRepairShip { get; set; }
 
-
 		event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
 		{
 			add { }

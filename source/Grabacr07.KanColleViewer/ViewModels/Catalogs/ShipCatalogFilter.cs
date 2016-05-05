@@ -69,6 +69,14 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#endregion
 
+		public void SetLevelRange(string parameter)
+		{
+			string[] parts = parameter.Split('-');
+
+			MinLevel = parts[0];
+			MaxLevel = parts[1];
+		}
+
 		public ShipLevelFilter(Action updateAction)
 			: base(updateAction)
 		{

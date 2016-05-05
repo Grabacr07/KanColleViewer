@@ -14,30 +14,31 @@ namespace Grabacr07.KanColleWrapper.Models
 		public string Drop { get; set; }
 	}
 	/// <summary>
-	/// 날짜,결과,비서함,연료,탄,강재,보크사이트
+	/// 날짜,비서함,연료,탄,강재,보크사이트,결과
 	/// </summary>
 	public class ItemStringLists
 	{
 		public string Date { get; set; }
-		public string Results { get; set; }
 		public string Assistant { get; set; }
 		public int Fuel { get; set; }
 		public int Steel { get; set; }
 		public int Bullet { get; set; }
 		public int bauxite { get; set; }
+		public string Results { get; set; }
 	}
 	/// <summary>
-	/// 날짜,결과,연료,탄,강재,보크사이트,개발자재
+	/// 날짜,결과,비서함,연료,탄,강재,보크사이트,개발자재
 	/// </summary>
 	public class BuildStirngLists
 	{
 		public string Date { get; set; }
-		public string Results { get; set; }
+		public string Assistant { get; set; }
 		public int Fuel { get; set; }
 		public int Steel { get; set; }
 		public int Bullet { get; set; }
 		public int bauxite { get; set; }
 		public int UseItems { get; set; }
+		public string Results { get; set; }
 	}
 
 }
