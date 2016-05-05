@@ -266,21 +266,28 @@
 										<Run Text="레벨 범위" />
 										<Run Text=":" />
 									</TextBlock>
-									<WrapPanel Grid.Column="2">
-										<metro:PromptTextBox Grid.Column="1"
+									<StackPanel Grid.Column="2">
+										<WrapPanel>
+											<metro:PromptTextBox Grid.Column="1"
 												 Text="{Binding MinLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 												 Prompt=" 최소 "
 												 VerticalAlignment="Center"
 												 VerticalContentAlignment="Center">
-										</metro:PromptTextBox>
-										<TextBlock Margin="5,3,5,5" Text="~"/>
-										<metro:PromptTextBox Grid.Column="1"
+											</metro:PromptTextBox>
+											<TextBlock Margin="5,3,5,5" Text="~"/>
+											<metro:PromptTextBox Grid.Column="1"
 												 Text="{Binding MaxLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 												 Prompt=" 최대 "
 												 VerticalAlignment="Center"
 												 VerticalContentAlignment="Center">
-										</metro:PromptTextBox>
-									</WrapPanel>
+											</metro:PromptTextBox>
+										</WrapPanel>
+										<WrapPanel Margin="0,3,0,0">
+											<metro2:CallMethodButton Margin="0,0,5,0" Content="모두" MethodName="SetLevelRange" MethodParameter="1-155"/>
+											<metro2:CallMethodButton Margin="0,0,5,0" Content="Lv. 1" MethodName="SetLevelRange" MethodParameter="1-1"/>
+											<metro2:CallMethodButton Margin="0,0,5,0" Content="Lv. 2 이상" MethodName="SetLevelRange" MethodParameter="2-155"/>
+										</WrapPanel>
+									</StackPanel>
 								</Grid>
 
 								<Grid DataContext="{Binding ShipLockFilter}">
