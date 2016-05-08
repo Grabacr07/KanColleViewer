@@ -121,6 +121,12 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
 
 		/// <summary>
+		/// "아카시 수리 타이머를 사용" 설정의 체크 여부를 가져옵니다.
+		/// </summary>
+		public static SerializableProperty<bool> UseRepairTimer { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
+
+		/// <summary>
 		/// 艦隊の編成が変更されたときに、その艦隊を自動的に選択状態にするかどうかを表す設定値を取得します。
 		/// </summary>
 		public static SerializableProperty<bool> AutoFleetSelectWhenShipsChanged { get; }

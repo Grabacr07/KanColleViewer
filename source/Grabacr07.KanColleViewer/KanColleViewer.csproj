@@ -148,6 +148,7 @@
     <Compile Include="Composition\Plugin.cs" />
     <Compile Include="Composition\PluginHost.cs" />
     <Compile Include="Composition\PluginMetadata.cs" />
+    <Compile Include="Models\AkashiTimer.cs" />
     <Compile Include="Models\BrowserZoomFactor.cs" />
     <Compile Include="Models\ExitConfirmationType.cs" />
     <Compile Include="Models\HQRecord.cs" />
@@ -175,6 +176,7 @@
     <Compile Include="Models\TaskbarProgress.cs" />
     <Compile Include="Models\Volume.cs" />
     <Compile Include="Models\Migration\_KanColleClientSettings.cs" />
+    <Compile Include="ViewModels\AkashiTimerViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\CalExpViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ExpeditionsCatalogWindowViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\NeedNdockShipCatalogWindowViewModel.cs" />
