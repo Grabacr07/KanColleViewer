@@ -30,6 +30,7 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		/// <summary>
 		/// 새로고침 설정 저장
 		/// </summary>
+		/// 
 		public static SerializableProperty<ExitConfirmationType> RefreshConfirmationType { get; }
 			= new SerializableProperty<ExitConfirmationType>(GetKey(), Providers.Roaming, Models.ExitConfirmationType.InSortieOnly) { AutoSave = true };
 

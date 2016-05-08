@@ -26,6 +26,7 @@ namespace Grabacr07.KanColleWrapper
 		bool SqrtDoubleToInt { get; }
 
 		bool EnableAircraftFilter { get; }
+		bool AutoTranslateEnable { get; }
 		/// <summary>
 		/// 艦隊ステータスにおいて、旗艦が工作艦かどうかを確認するかどうかを示す値を取得します。
 		/// </summary>
