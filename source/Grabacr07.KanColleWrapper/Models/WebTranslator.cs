@@ -17,6 +17,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		static int count;
 		public string RawTranslate(string orign, TranslateKind kind = TranslateKind.Naver)
 		{
+
 			if (count > 25) return orign;
 			 
 			switch (kind)

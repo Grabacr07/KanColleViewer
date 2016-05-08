@@ -65,7 +65,8 @@ namespace Grabacr07.KanColleViewer.Models.Migration
 				KanColleSettings.ReSortieCondition.Value = Current.KanColleClientSettings.ReSortieCondition;
 				KanColleSettings.SqrtDoubleToInt.Value = Current.KanColleClientSettings.SqrtDoubleToInt;
 				KanColleSettings.EnableAircraftFilter.Value = Current.KanColleClientSettings.EnableAircraftFilter;
-            }
+				KanColleSettings.AutoTranslateEnable.Value = Current.KanColleClientSettings.AutoTranslateEnable;
+			}
 
 			if (Current.ProxySettings != null)
 			{

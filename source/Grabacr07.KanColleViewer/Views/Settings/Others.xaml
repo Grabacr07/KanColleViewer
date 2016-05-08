@@ -123,6 +123,10 @@
 		<CheckBox Content="번역되지않은 데이터를 Translations 폴더에 저장합니다" 
 				  IsChecked="{Binding Source={x:Static ms:KanColleSettings.EnableAddUntranslated}, Path=Value}"
 				  Height="17" Margin="15,0,0,10"/>
+		<CheckBox Content="번역기를 이용한 자동번역 활성화" 
+                  IsChecked="{Binding Source={x:Static ms:KanColleSettings.AutoTranslateEnable}, Path=Value}"
+                  Height="17" 
+                  Margin="15,0,0,10"/>
 		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
 		<TextBlock Text="업데이트 설정" Style="{DynamicResource SettingsHeaderTextStyleKey}" />

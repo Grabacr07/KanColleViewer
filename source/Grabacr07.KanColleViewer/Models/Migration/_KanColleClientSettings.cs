@@ -21,6 +21,7 @@ namespace Grabacr07.KanColleViewer.Models.Migration
 		public string ViewRangeCalcType { get; set; }
 		public bool SqrtDoubleToInt { get; set; }
 		public bool EnableAircraftFilter { get; set; }
+		public bool AutoTranslateEnable { get; set; }
 		public bool CheckFlagshipIsRepairShip { get; set; }
 
 		event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged

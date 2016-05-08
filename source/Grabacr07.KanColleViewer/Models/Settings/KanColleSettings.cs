@@ -36,6 +36,9 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		public static SerializableProperty<bool> EnableAircraftFilter { get; }
 			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
 
+		public static SerializableProperty<bool> AutoTranslateEnable { get; }
+		= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
+
 		/// <summary>
 		/// 업데이트 알림을 활성화합니다
 		/// </summary>
@@ -167,6 +170,8 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		bool IKanColleClientSettings.SqrtDoubleToInt => SqrtDoubleToInt.Value;
 
 		bool IKanColleClientSettings.EnableAircraftFilter => EnableAircraftFilter.Value;
+
+		bool IKanColleClientSettings.AutoTranslateEnable => AutoTranslateEnable.Value;
 
 		bool IKanColleClientSettings.CheckFlagshipIsRepairShip => CheckFlagshipIsNotRepairShip.Value;
 
