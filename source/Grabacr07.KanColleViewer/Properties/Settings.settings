@@ -32,13 +32,13 @@
 }</Value>
     </Setting>
     <Setting Name="KCVUpdateUrl" Type="System.Uri" Scope="Application">
-      <Value Profile="(Default)">https://raw.github.com/FreyYa/KCVKrTranslation/master/resources/Version.xml</Value>
+      <Value Profile="(Default)">https://raw.github.com/CirnoV/KCVKrTranslation/master/resources/Version.xml</Value>
     </Setting>
     <Setting Name="XMLTransUrl" Type="System.Uri" Scope="Application">
-      <Value Profile="(Default)">https://raw.github.com/FreyYa/KCVKrTranslation/master/resources/Translations/</Value>
+      <Value Profile="(Default)">https://raw.github.com/CirnoV/KCVKrTranslation/master/resources/Translations/</Value>
     </Setting>
     <Setting Name="SallyAreaSource" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">https://raw.githubusercontent.com/FreyYa/KCVKrTranslation/master/resources/sail.json</Value>
+      <Value Profile="(Default)">https://raw.githubusercontent.com/CirnoV/KCVKrTranslation/master/resources/sail.json</Value>
     </Setting>
   </Settings>
 </SettingsFile>
