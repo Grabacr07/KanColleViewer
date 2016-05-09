@@ -476,13 +476,12 @@ namespace Grabacr07.KanColleWrapper
 				{
 					writer.Seek(0, SeekOrigin.End);
 					writer.Write(item.Date);
-					if (item.Results == "NA") writer.Write(string.Empty);
-					else writer.Write(item.Results);
 					writer.Write(item.Assistant);
 					writer.Write(item.Fuel);
 					writer.Write(item.Bullet);
 					writer.Write(item.Steel);
 					writer.Write(item.bauxite);
+					writer.Write(item.Results);
 
 					fileStream.Dispose();
 					fileStream.Close();

@@ -20,7 +20,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public int Adept => this.RawData.api_alv;
 
-		public string AdeptText => this.Adept >= 1 ? (" (熟練度 " + this.Adept + ")") : "";
+		public string AdeptText => this.Adept >= 1 ? (" (숙련도 " + this.Adept + ")") : "";
 
 		internal SlotItem(kcsapi_slotitem rawData)
 			: base(rawData)
