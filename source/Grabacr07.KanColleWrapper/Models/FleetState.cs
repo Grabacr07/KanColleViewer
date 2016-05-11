@@ -265,7 +265,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					: FleetSpeed.Hybrid;
 
 			var logic = ViewRangeCalcLogic.Get(KanColleClient.Current.Settings.ViewRangeCalcType);
-			this.ViewRange = logic.Calc(ships.ToArray());
+			this.ViewRange = logic.Calc(this.source);
 			this.ViewRangeCalcType = logic.Name;
 
 			this.Calculated?.Invoke(this, new EventArgs());
