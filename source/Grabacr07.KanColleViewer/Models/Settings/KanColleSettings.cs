@@ -28,6 +28,18 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 			= new SerializableProperty<string>(GetKey(), Providers.Roaming, new ViewRangeType1().Id);
 
 		/// <summary>
+		/// 索敵計算に第1艦隊を含めるかどうかの設定値を取得します。
+		/// </summary>
+		public static SerializableProperty<bool> IsViewRangeCalcIncludeFirstFleet { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
+
+		/// <summary>
+		/// 索敵計算に第2艦隊を含めるかどうかの設定値を取得します。
+		/// </summary>
+		public static SerializableProperty<bool> IsViewRangeCalcIncludeSecondFleet { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, false);
+
+		/// <summary>
 		/// 建造完了時に通知するかどうかを示す設定値を取得します。
 		/// </summary>
 		public static SerializableProperty<bool> NotifyBuildingCompleted { get; }
@@ -102,6 +114,8 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 			NotificationShorteningTime.Subscribe(_ => this.RaisePropertyChanged(nameof(NotificationShorteningTime)));
 			ReSortieCondition.Subscribe(_ => this.RaisePropertyChanged(nameof(ReSortieCondition)));
 			ViewRangeCalcType.Subscribe(_ => this.RaisePropertyChanged(nameof(ViewRangeCalcType)));
+			IsViewRangeCalcIncludeFirstFleet.Subscribe(_ => this.RaisePropertyChanged(nameof(IsViewRangeCalcIncludeFirstFleet)));
+			IsViewRangeCalcIncludeSecondFleet.Subscribe(_ => this.RaisePropertyChanged(nameof(IsViewRangeCalcIncludeSecondFleet)));
 		}
 
 		protected void RaisePropertyChanged([CallerMemberName] string propertyName = null)
@@ -118,6 +132,10 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		int IKanColleClientSettings.ReSortieCondition => ReSortieCondition.Value;
 
 		string IKanColleClientSettings.ViewRangeCalcType => ViewRangeCalcType.Value;
+
+		bool IKanColleClientSettings.IsViewRangeCalcIncludeFirstFleet => IsViewRangeCalcIncludeFirstFleet.Value;
+
+		bool IKanColleClientSettings.IsViewRangeCalcIncludeSecondFleet => IsViewRangeCalcIncludeSecondFleet.Value;
 
 		bool IKanColleClientSettings.CheckFlagshipIsRepairShip => CheckFlagshipIsNotRepairShip.Value;
 

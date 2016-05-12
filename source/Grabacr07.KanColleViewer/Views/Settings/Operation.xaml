@@ -65,24 +65,31 @@
 		<StackPanel Margin="20,0,0,0">
 			<TextBlock Text="艦隊の索敵値の算出に使用する計算式は、以下を使用する" />
 
-			<ItemsControl ItemsSource="{Binding ViewRangeSettingsCollection}"
-						  Margin="0,5">
-				<ItemsControl.ItemTemplate>
-					<DataTemplate>
-						<RadioButton IsChecked="{Binding Selected}"
-									 Margin="0,5"
-									 GroupName="ViewRangeCalcLogicSelection">
-							<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
-									   LineHeight="18">
-								<Run Text="{Binding Logic.Name, Mode=OneWay}"
-									 Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}" />
-								<LineBreak />
-								<Run Text="{Binding Logic.Description, Mode=OneWay}" />
-							</TextBlock>
-						</RadioButton>
-					</DataTemplate>
-				</ItemsControl.ItemTemplate>
-			</ItemsControl>
+			<metro:PromptComboBox ItemsSource="{Binding ViewRangeSettingsCollection}"
+								  Margin="0,5"
+								  DisplayMemberPath="Name"
+								  SelectedItem="{Binding SelectedViewRangeCalcType}"
+								  MinWidth="100"
+								  Prompt=""
+								  HorizontalAlignment="Left"/>
+
+			<TextBlock Text="{Binding SelectedViewRangeCalcType.Description}"
+					   Style="{DynamicResource DetailTextStyleKey}"/>
+
+
+			<TextBlock Text="連合艦隊時、以下の艦隊を索敵値計算の対象として使用する"
+					   Margin="0,12,0,5"
+					   Visibility="{Binding SelectedViewRangeCalcType.HasCombinedSettings, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+			
+			<StackPanel Orientation="Horizontal"
+						Visibility="{Binding SelectedViewRangeCalcType.HasCombinedSettings, Converter={StaticResource BooleanToVisibilityConverter}}">
+				<CheckBox Content="第1艦隊"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.IsViewRangeCalcIncludeFirstFleet}, Path=Value}"
+						  Margin="0,0,20,0"/>
+				<CheckBox Content="第2艦隊"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.IsViewRangeCalcIncludeSecondFleet}, Path=Value}"/>
+			</StackPanel>
+
 		</StackPanel>
 
 		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />

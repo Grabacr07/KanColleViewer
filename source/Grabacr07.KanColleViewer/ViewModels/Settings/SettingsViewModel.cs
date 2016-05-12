@@ -9,6 +9,7 @@ using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleViewer.ViewModels.Composition;
 using Grabacr07.KanColleWrapper.Models;
 using MetroTrilithon.Mvvm;
+using Livet;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Settings
 {
@@ -46,9 +47,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 
 		#region ViewRangeSettingsCollection 変更通知プロパティ
 
-		private List<ViewRangeSettingsViewModel> _ViewRangeSettingsCollection;
+		private List<ICalcViewRange> _ViewRangeSettingsCollection;
 
-		public List<ViewRangeSettingsViewModel> ViewRangeSettingsCollection
+		public List<ICalcViewRange> ViewRangeSettingsCollection
 		{
 			get { return this._ViewRangeSettingsCollection; }
 			set
@@ -56,6 +57,26 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 				if (this._ViewRangeSettingsCollection != value)
 				{
 					this._ViewRangeSettingsCollection = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region SelectedViewRangeCalcType 変更通知プロパティ
+
+		private ICalcViewRange _SelectedViewRangeCalcType;
+
+		public ICalcViewRange SelectedViewRangeCalcType
+		{
+			get { return this._SelectedViewRangeCalcType; }
+			set
+			{
+				if (this._SelectedViewRangeCalcType != value)
+				{
+					this._SelectedViewRangeCalcType = value;
+					KanColleSettings.ViewRangeCalcType.Value = value.Id;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -92,9 +113,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 					return list;
 				});
 
-			this.ViewRangeSettingsCollection = ViewRangeCalcLogic.Logics
-				.Select(x => new ViewRangeSettingsViewModel(x))
-				.ToList();
+			this.ViewRangeSettingsCollection = ViewRangeCalcLogic.Logics.ToList();
+			this.SelectedViewRangeCalcType = this.ViewRangeSettingsCollection
+				.FirstOrDefault(x => x.Id == KanColleSettings.ViewRangeCalcType)
+				?? this.ViewRangeSettingsCollection.First();
 
 			this.LoadedPlugins = new List<PluginViewModel>(
 				PluginService.Current.Plugins.Select(x => new PluginViewModel(x)));
@@ -109,33 +131,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 			this.WindowSettings.Initialize();
 			this.NetworkSettings.Initialize();
 			this.UserStyleSheetSettings.Initialize();
-		}
-
-
-		public class ViewRangeSettingsViewModel
-		{
-			private bool selected;
-
-			public ICalcViewRange Logic { get; set; }
-
-			public bool Selected
-			{
-				get { return this.selected; }
-				set
-				{
-					this.selected = value;
-					if (value)
-					{
-						KanColleSettings.ViewRangeCalcType.Value = this.Logic.Id;
-					}
-				}
-			}
-
-			public ViewRangeSettingsViewModel(ICalcViewRange logic)
-			{
-				this.Logic = logic;
-				this.selected = KanColleSettings.ViewRangeCalcType == logic.Id;
-			}
 		}
 	}
 }
