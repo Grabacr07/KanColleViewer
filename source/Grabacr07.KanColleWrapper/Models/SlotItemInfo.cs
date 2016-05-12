@@ -79,14 +79,16 @@ namespace Grabacr07.KanColleWrapper.Models
 		public bool IsAirSuperiorityFighter => this.Type == SlotItemType.艦上戦闘機
 											   || this.Type == SlotItemType.艦上攻撃機
 											   || this.Type == SlotItemType.艦上爆撃機
-											   || this.Type == SlotItemType.水上爆撃機;
+											   || this.Type == SlotItemType.水上爆撃機
+											   || this.Type == SlotItemType.水上戦闘機;
 
 		public bool IsNumerable => this.Type == SlotItemType.艦上偵察機
 								   || this.Type == SlotItemType.艦上戦闘機
 								   || this.Type == SlotItemType.艦上攻撃機
 								   || this.Type == SlotItemType.艦上爆撃機
 								   || this.Type == SlotItemType.水上偵察機
-								   || this.Type == SlotItemType.水上爆撃機;
+								   || this.Type == SlotItemType.水上爆撃機
+								   || this.Type == SlotItemType.水上戦闘機;
 
 		public SlotItemEquipType EquipType { get; }
 
