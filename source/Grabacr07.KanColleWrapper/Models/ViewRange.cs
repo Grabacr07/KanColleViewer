@@ -18,6 +18,8 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		string Description { get; }
 
+		bool HasCombinedSettings { get; }
+
 		double Calc(Fleet[] fleets);
 	}
 
@@ -41,15 +43,14 @@ namespace Grabacr07.KanColleWrapper.Models
 			new ViewRangeType1();
 			new ViewRangeType2();
 			new ViewRangeType3();
-			new ViewRangeType4FirstFleetOnly();
-			new ViewRangeType4SecondFleetOnly();
-			new ViewRangeType4BothFleets();
+			new ViewRangeType4();
 			// ReSharper restore ObjectCreationAsStatement
 		}
 
 		public abstract string Id { get; }
 		public abstract string Name { get; }
 		public abstract string Description { get; }
+		public virtual bool HasCombinedSettings { get; } = false;
 		public abstract double Calc(Fleet[] fleets);
 
 		protected ViewRangeCalcLogic()
@@ -193,12 +194,18 @@ namespace Grabacr07.KanColleWrapper.Models
 	}
 
 
-	public abstract class AbstractViewRangeType4 : ViewRangeCalcLogic
+	public class ViewRangeType4 : ViewRangeCalcLogic
 	{
+		public override sealed string Id => "KanColleViewer.Type4";
+
+		public override string Name => "33 式";
+
 		public override string Description =>
 			@"((各スロットの装備の索敵値 + 改修効果) × 装備タイプ係数)の和 + (√各艦の素索敵値)の和
 - (司令部レベル × 0.4)の小数点以下切り上げ + 艦隊の空き数 × 2
 ※艦隊の空き数は退避した艦を除いて算出";
+
+		public override bool HasCombinedSettings { get; } = true;
 
 		public override double Calc(Fleet[] fleets)
 		{
@@ -208,6 +215,8 @@ namespace Grabacr07.KanColleWrapper.Models
 						.Where(x => !x.Situation.HasFlag(ShipSituation.Evacuation))
 						.Where(x => !x.Situation.HasFlag(ShipSituation.Tow))
 						.ToArray();
+
+			if (!ships.Any()) return 0;
 
 			var itemScore = ships
 				.SelectMany(x => x.EquippedItems)
@@ -220,12 +229,31 @@ namespace Grabacr07.KanColleWrapper.Models
 
 			var admiralScore = Math.Ceiling(KanColleClient.Current.Homeport.Admiral.Level * 0.4);
 
-			var vacancyScore = (6 - ships.Length) * 2;
+			var isCombined = 1 < fleets.Count()
+							 && KanColleClient.Current.Settings.IsViewRangeCalcIncludeFirstFleet
+							 && KanColleClient.Current.Settings.IsViewRangeCalcIncludeSecondFleet;
+			var vacancyScore = ((isCombined ? 12 : 6) - ships.Length) * 2;
 
 			return itemScore + shipScore - admiralScore + vacancyScore;
 		}
 
-		protected abstract Ship[] GetTargetShips(Fleet[] fleets);
+		private Ship[] GetTargetShips(Fleet[] fleets)
+		{
+			if (fleets.Count() == 1)
+				return fleets.Single().Ships;
+
+			if(KanColleClient.Current.Settings.IsViewRangeCalcIncludeFirstFleet
+			&& KanColleClient.Current.Settings.IsViewRangeCalcIncludeSecondFleet)
+				return fleets.SelectMany(x => x.Ships).ToArray();
+
+			if (KanColleClient.Current.Settings.IsViewRangeCalcIncludeFirstFleet)
+				return fleets.First().Ships;
+
+			if (KanColleClient.Current.Settings.IsViewRangeCalcIncludeSecondFleet)
+				return fleets.Last().Ships;
+
+			return new Ship[0];
+		}
 
 		private static double GetAdeptCoefficient(SlotItem item)
 		{
@@ -280,35 +308,5 @@ namespace Grabacr07.KanColleWrapper.Models
 					return .0;
 			}
 		}
-	}
-
-	public class ViewRangeType4FirstFleetOnly : AbstractViewRangeType4
-	{
-		public override sealed string Id => "KanColleViewer.Type4-FirstFleetOnly";
-
-		public override string Name => "33式 (連合艦隊時の計算対象: 第1艦隊のみ)";
-
-		protected override Ship[] GetTargetShips(Fleet[] fleets)
-			=> fleets.First().Ships;
-	}
-
-	public class ViewRangeType4SecondFleetOnly : AbstractViewRangeType4
-	{
-		public override sealed string Id => "KanColleViewer.Type4-SecondFleetOnly";
-
-		public override string Name => "33式 (連合艦隊時の計算対象: 第2艦隊のみ)";
-		
-		protected override Ship[] GetTargetShips(Fleet[] fleets)
-			=> fleets.Last().Ships;
-	}
-
-	public class ViewRangeType4BothFleets : AbstractViewRangeType4
-	{
-		public override sealed string Id => "KanColleViewer.Type4-BothFleets";
-
-		public override string Name => "33式 (連合艦隊時の計算対象: 両艦隊)";
-		
-		protected override Ship[] GetTargetShips(Fleet[] fleets)
-			=> fleets.SelectMany(x => x.Ships).ToArray();
 	}
 }
