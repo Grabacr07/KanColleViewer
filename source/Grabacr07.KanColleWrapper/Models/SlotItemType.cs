@@ -16,9 +16,8 @@ namespace Grabacr07.KanColleWrapper.Models
 		水上爆撃機 = 11,
 		小型電探 = 12,
 		大型電探 = 13,
-
 		応急修理要員 = 23,
-
 		探照灯 = 29,
-	}
+        水上戦闘機 = 45,
+    }
 }
