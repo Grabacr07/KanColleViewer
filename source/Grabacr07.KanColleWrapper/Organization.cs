@@ -380,7 +380,7 @@ namespace Grabacr07.KanColleWrapper
 
         #endregion
 
-        #region 改装
+        #region 改装 (DepriveSlotItem)
 
         private void DepriveSlotItem(kcsapi_slot_deprive source)
         {
