@@ -42,6 +42,7 @@ namespace Grabacr07.KanColleWrapper
 		{
 			return ship.EquippedItems
 				.Select(x => (x.Item.Info.Type == SlotItemType.艦上戦闘機
+							|| x.Item.Info.Type == SlotItemType.水上戦闘機
 								? x.Item.CalcAirSuperiorityPotential(x.Current)
 								: 0)
 							 + x.Item.CalcMinAirecraftAdeptBonus(x.Current))
@@ -71,8 +72,9 @@ namespace Grabacr07.KanColleWrapper
 		{
 			if(onslot < 1) return 0;
 			return slotItem.Info.Type == SlotItemType.艦上戦闘機
+				|| slotItem.Info.Type == SlotItemType.水上戦闘機
 				? slotItem.CalcAirecraftAdeptBonusOfType() + slotItem.CalcMinInternalAirecraftAdeptBonus()
-				: 0; // 艦戦以外は簡単に吹き飛ぶので最小値としては計算に入れない
+				: 0; // 艦戦・水戦以外は簡単に吹き飛ぶので最小値としては計算に入れない
 		}
 
 		/// <summary>
@@ -92,6 +94,7 @@ namespace Grabacr07.KanColleWrapper
 		/// <returns></returns>
 		private static int CalcAirecraftAdeptBonusOfType(this SlotItem slotItem)
 			=> slotItem.Info.Type == SlotItemType.艦上戦闘機
+			|| slotItem.Info.Type == SlotItemType.水上戦闘機
 				? slotItem.Adept == 1 ? 0
 				: slotItem.Adept == 2 ? 2
 				: slotItem.Adept == 3 ? 5
@@ -147,7 +150,7 @@ namespace Grabacr07.KanColleWrapper
 
 		public static double CalcViewRange(this Fleet fleet)
 		{
-			return ViewRangeCalcLogic.Get(KanColleClient.Current.Settings.ViewRangeCalcType).Calc(fleet.Ships);
+			return ViewRangeCalcLogic.Get(KanColleClient.Current.Settings.ViewRangeCalcType).Calc(new[] { fleet });
 		}
 
 		public static bool IsHeavilyDamage(this LimitedValue hp)
