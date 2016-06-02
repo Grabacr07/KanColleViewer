@@ -23,6 +23,8 @@ namespace Grabacr07.KanColleViewer.Models.Migration
 		public bool EnableTranslations { get; set; }
 		public bool EnableUpdates { get; set; }
 		public bool EnableAutosubmission { get; set; }
+		public bool IsViewRangeCalcIncludeFirstFleet { get; set; }
+		public bool IsViewRangeCalcIncludeSecondFleet { get; set; }
 		public bool CheckFlagshipIsRepairShip { get; set; }
 
 		event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
