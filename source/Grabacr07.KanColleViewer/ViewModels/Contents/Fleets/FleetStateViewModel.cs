@@ -23,7 +23,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 		public string MaxAirSuperiorityPotential => this.Source.MaxAirSuperiorityPotential.ToString("##0");
 
-		public string ViewRange => this.Source.ViewRange.ToString("##0.##");
+		public string ViewRange => (Math.Floor(this.Source.ViewRange * 100) / 100).ToString("##0.##");
 
 		public string Speed
 		{
