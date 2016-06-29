@@ -4,3 +4,9 @@
 [submodule "FreyYaMT"]
 	path = source/MetroTrilithon
 	url = https://github.com/FreyYa/MetroTrilithon.git
+[submodule "source/MetroRadiance"]
+	path = source/MetroRadiance
+	url = https://github.com/CirnoV/MetroRadiance.git
+[submodule "source/MetroTrilithon"]
+	path = source/MetroTrilithon
+	url = https://github.com/CirnoV/MetroTrilithon.git
