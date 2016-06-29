@@ -124,16 +124,12 @@ namespace Grabacr07.KanColleWrapper
 			if (onslot >= 1)
 			{
 				if (KanColleClient.Current.Settings.EnableAircraftFilter)
-                {
-                    if (slotItem.Info.Type == SlotItemType.艦上戦闘機)
-                    {
-                        return slotItem.CalcAirecraftAdeptBonusOfType() + slotItem.CalcMinInternalAirecraftAdeptBonus();
-                    }
-                    if (slotItem.Info.Type == SlotItemType.水上戦闘機)
-                    {
-                        return slotItem.CalcAirecraftAdeptBonusOfType() + slotItem.CalcMinInternalAirecraftAdeptBonus();
-                    }
-                }
+				{
+					if (slotItem.Info.Type == SlotItemType.艦上戦闘機)
+					{
+						return slotItem.CalcAirecraftAdeptBonusOfType() + slotItem.CalcMinInternalAirecraftAdeptBonus();
+					}
+				}
 				else
 				{
 					return slotItem.CalcAirecraftAdeptBonusOfType() + slotItem.CalcMinInternalAirecraftAdeptBonus();
@@ -178,16 +174,7 @@ namespace Grabacr07.KanColleWrapper
 				: slotItem.Adept == 6 ? 3
 				: slotItem.Adept == 7 ? 6
 				: 0 // Adept == 0
-			: slotItem.Info.Type == SlotItemType.水上戦闘機
-                ? slotItem.Adept == 1 ? 0
-                : slotItem.Adept == 2 ? 2
-                : slotItem.Adept == 3 ? 5
-                : slotItem.Adept == 4 ? 9
-                : slotItem.Adept == 5 ? 14
-                : slotItem.Adept == 6 ? 14
-                : slotItem.Adept == 7 ? 22
-                : 0 // Adept == 0
-            : 0;
+			: 0;
 
 		/// <summary>
 		/// 各表記熟練度に対応した艦載機内部熟練度ボーナスの最小値を計算します。
