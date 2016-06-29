@@ -78,12 +78,12 @@ namespace Grabacr07.KanColleWrapper
 
 			proxy.api_port.TryParse<kcsapi_port>().Subscribe(x =>
 			{
+				this.UpdateAdmiral(x.Data.api_basic);
 				this.Organization.Update(x.Data.api_ship);
 				this.Repairyard.Update(x.Data.api_ndock);
 				this.Organization.Update(x.Data.api_deck_port);
 				this.Organization.Combined = x.Data.api_combined_flag != 0;
 				this.Materials.Update(x.Data.api_material);
-				this.UpdateAdmiral(x.Data.api_basic);
 			});
 			proxy.api_get_member_basic.TryParse<kcsapi_basic>().Subscribe(x => this.UpdateAdmiral(x.Data));
 			proxy.api_req_member_updatecomment.TryParse().Subscribe(this.UpdateComment);

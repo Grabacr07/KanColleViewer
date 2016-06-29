@@ -18,7 +18,9 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		string Description { get; }
 
-		double Calc(Ship[] ships);
+		bool HasCombinedSettings { get; }
+
+		double Calc(Fleet[] fleets);
 	}
 
 
@@ -48,7 +50,8 @@ namespace Grabacr07.KanColleWrapper.Models
 		public abstract string Id { get; }
 		public abstract string Name { get; }
 		public abstract string Description { get; }
-		public abstract double Calc(Ship[] ships);
+		public virtual bool HasCombinedSettings { get; } = false;
+		public abstract double Calc(Fleet[] fleets);
 
 		protected ViewRangeCalcLogic()
 		{
@@ -67,11 +70,11 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public override string Description => "칸무스와 장비의 색적값 단순합계";
 
-		public override double Calc(Ship[] ships)
+		public override double Calc(Fleet[] fleets)
 		{
-			if (ships == null || ships.Length == 0) return 0;
+			if (fleets == null || fleets.Length == 0) return 0;
 
-			return ships.Sum(x => x.ViewRange);
+			return fleets.SelectMany(x => x.Ships).Sum(x => x.ViewRange);
 		}
 	}
 
@@ -84,9 +87,10 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public override string Description => "(정찰기 × 2) + (전탐) + √(장비를 포함한 함대색적치 합계 - 정찰기 - 전탐)";
 
-		public override double Calc(Ship[] ships)
+		public override double Calc(Fleet[] fleets)
 		{
-			if (ships == null || ships.Length == 0) return 0;
+			if (fleets == null || fleets.Length == 0) return 0;
+			var ships = fleets.SelectMany(x => x.Ships).ToArray();
 
 			// http://wikiwiki.jp/kancolle/?%C6%EE%C0%BE%BD%F4%C5%E7%B3%A4%B0%E8#area5
 			// [索敵装備と装備例] によって示されている計算式
@@ -121,9 +125,10 @@ namespace Grabacr07.KanColleWrapper.Models
 + (소형전탐 × 1.00) + (대형전탐 × 0.99) + (√각함별 기본색적 × 1.69)
 + (진수부 레벨을 5의 배수로 올림 × -0.61)";
 
-		public override double Calc(Ship[] ships)
+		public override double Calc(Fleet[] fleets)
 		{
-			if (ships == null || ships.Length == 0) return 0;
+			if (fleets == null || fleets.Length == 0) return 0;
+			var ships = fleets.SelectMany(x => x.Ships).ToArray();
 
 			// http://wikiwiki.jp/kancolle/?%C6%EE%C0%BE%BD%F4%C5%E7%B3%A4%B0%E8#search-calc
 			// > 2-5式では説明出来ない事象を解決するため膨大な検証報告数より導き出した新式。2014年11月に改良され精度があがった。
@@ -187,82 +192,121 @@ namespace Grabacr07.KanColleWrapper.Models
 			return .0;
 		}
 	}
+
+
 	public class ViewRangeType4 : ViewRangeCalcLogic
 	{
-		public override sealed string Id
-		{
-			get { return "KanColleViewer.Type4"; }
-		}
+		public override sealed string Id => "KanColleViewer.Type4";
 
-		public override string Name
-		{
-			get { return "2-5식 (가을) 수정"; }
-		}
+		public override string Name => "33 式";
 
-		public override string Description
-		{
-			get
-			{
-				return @"(함상폭격기 × 0.62) + (함상공격기 × 0.81) + (함상정찰기 × 0.99)
-+ (수상정찰기 × 1.19) + (수상폭격기 × 1.06) + (탐조등 × 0.54)
-+ (소형전탐 × 0.60) + (대형전탐 × 0.59) + (√각함별 기본색적)
-+ (진수부 레벨 × -0.36)";
-			}
-		}
+		public override string Description =>
+			@"((각 슬롯의 장비의 색적 값 + 개수 효과) × 장비 타입 보너스)의 합 + (√ 각 함의 색적 값)의 합
+- (사령부 레벨 × 0.4)의 소수점 이하 올림 + 함대의 여유 수 × 2
+※ 대피 한 군함 제외";
 
-		public override double Calc(Ship[] ships)
-		{
-			if (ships == null || ships.Length == 0) return 0;
+		public override bool HasCombinedSettings { get; } = true;
 
-			// http://wikiwiki.jp/kancolle/?%C6%EE%C0%BE%BD%F4%C5%E7%B3%A4%B0%E8#area5
-			// 2-5 詳細2
+		public override double Calc(Fleet[] fleets)
+		{
+			if (fleets == null || fleets.Length == 0) return 0;
+
+			var ships = this.GetTargetShips(fleets)
+						.Where(x => !x.Situation.HasFlag(ShipSituation.Evacuation))
+						.Where(x => !x.Situation.HasFlag(ShipSituation.Tow))
+						.ToArray();
+
+			if (!ships.Any()) return 0;
 
 			var itemScore = ships
 				.SelectMany(x => x.EquippedItems)
-				.Select(x => x.Item.Info)
-				.GroupBy(
-					x => x.Type,
-					x => x.RawData.api_saku,
-					(type, scores) => new { type, score = scores.Sum() })
-				.Aggregate(.0, (score, item) => score + GetScore(item.type, item.score));
+				.Select(x => x.Item)
+				.Sum(x => (x.Info.ViewRange + GetLevelCoefficient(x)) * GetTypeCoefficient(x.Info.Type));
 
 			var shipScore = ships
 				.Select(x => x.ViewRange - x.EquippedItems.Sum(s => s.Item.Info.RawData.api_saku))
-				.Select(x => Math.Sqrt(x))
-				.Sum();
+				.Sum(x => Math.Sqrt(x));
 
-			//var level = (((KanColleClient.Current.Homeport.Admiral.Level + 4) / 5) * 5);
-			var admiralScore = KanColleClient.Current.Homeport.Admiral.Level * -0.36;
+			var admiralScore = Math.Ceiling(KanColleClient.Current.Homeport.Admiral.Level * 0.4);
 
-			return itemScore + shipScore + admiralScore;
+			var isCombined = 1 < fleets.Count()
+							 && KanColleClient.Current.Settings.IsViewRangeCalcIncludeFirstFleet
+							 && KanColleClient.Current.Settings.IsViewRangeCalcIncludeSecondFleet;
+			var vacancyScore = ((isCombined ? 12 : 6) - ships.Length) * 2;
+
+			return itemScore + shipScore - admiralScore + vacancyScore;
 		}
 
-		private static double GetScore(SlotItemType type, int score)
+		private Ship[] GetTargetShips(Fleet[] fleets)
+		{
+			if (fleets.Count() == 1)
+				return fleets.Single().Ships;
+
+			if(KanColleClient.Current.Settings.IsViewRangeCalcIncludeFirstFleet
+			&& KanColleClient.Current.Settings.IsViewRangeCalcIncludeSecondFleet)
+				return fleets.SelectMany(x => x.Ships).ToArray();
+
+			if (KanColleClient.Current.Settings.IsViewRangeCalcIncludeFirstFleet)
+				return fleets.First().Ships;
+
+			if (KanColleClient.Current.Settings.IsViewRangeCalcIncludeSecondFleet)
+				return fleets.Last().Ships;
+
+			return new Ship[0];
+		}
+
+		private static double GetLevelCoefficient(SlotItem item)
+		{
+			switch (item.Info.Type)
+			{
+				case SlotItemType.水上偵察機:
+					return Math.Sqrt(item.Level) * 1.2;
+
+				case SlotItemType.小型電探:
+				case SlotItemType.大型電探:
+				case SlotItemType.大型電探_II:
+					return Math.Sqrt(item.Level) * 1.25;
+
+				default:
+					return 0;
+			}
+		}
+
+		private static double GetTypeCoefficient(SlotItemType type)
 		{
 			switch (type)
 			{
+				case SlotItemType.艦上戦闘機:
 				case SlotItemType.艦上爆撃機:
-					return score * 0.62;
+				case SlotItemType.小型電探:
+				case SlotItemType.大型電探:
+				case SlotItemType.対潜哨戒機:
+				case SlotItemType.探照灯:
+				case SlotItemType.司令部施設:
+				case SlotItemType.航空要員:
+				case SlotItemType.水上艦要員:
+				case SlotItemType.大型ソナー:
+				case SlotItemType.大型飛行艇:
+				case SlotItemType.大型探照灯:
+				case SlotItemType.水上戦闘機:
+					return 0.6;
+
 				case SlotItemType.艦上攻撃機:
-					return score * 0.81;
+					return 0.8;
+
 				case SlotItemType.艦上偵察機:
-					return score * 0.99;
+				case SlotItemType.艦上偵察機_II:
+					return 1.0;
+
+				case SlotItemType.水上爆撃機:
+					return 1.1;
 
 				case SlotItemType.水上偵察機:
-					return score * 1.19;
-				case SlotItemType.水上爆撃機:
-					return score * 1.06;
+					return 1.2;
 
-				case SlotItemType.小型電探:
-					return score * 0.6;
-				case SlotItemType.大型電探:
-					return score * 0.59;
-
-				case SlotItemType.探照灯:
-					return score * 0.54;
+				default:
+					return .0;
 			}
-
-			return .0;
 		}
 	}
 }

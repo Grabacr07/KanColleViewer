@@ -175,6 +175,14 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
+		/// エンド ポイント "/kcsapi/api_req_kaisou/slot_deprive" からのセッションを配信します。
+		/// </summary>
+		public IObservable<Session> api_req_kaisou_slot_deprive
+		{
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_kaisou/slot_deprive"); }
+		}
+
+		/// <summary>
 		/// エンド ポイント "/kcsapi/api_req_kousyou/getship" からのセッションを配信します。
 		/// </summary>
 		public IObservable<Session> api_req_kousyou_getship

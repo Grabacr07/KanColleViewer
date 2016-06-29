@@ -294,9 +294,9 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.CompositeDisposable.Add(this.Condition);
 			this.CompositeDisposable.Add(new PropertyChangedWeakEventListener(KanColleClient.Current.Settings)
 			{
-				{ nameof(IKanColleClientSettings.ViewRangeCalcType), (sender, args) => this.Calculate() },
-				{ nameof(IKanColleClientSettings.SqrtDoubleToInt), (sender, args) => this.Calculate() },
-				{ nameof(IKanColleClientSettings.EnableAircraftFilter) , (sender,args) => this.Calculate() },
+				{ nameof(IKanColleClientSettings.ViewRangeCalcType), (_, __) => this.Calculate() },
+				{ nameof(IKanColleClientSettings.IsViewRangeCalcIncludeFirstFleet), (_, __) => this.Calculate() },
+				{ nameof(IKanColleClientSettings.IsViewRangeCalcIncludeSecondFleet), (_, __) => this.Calculate() },
 			});
 		}
 
@@ -335,7 +335,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					: FleetSpeed.Hybrid;
 
 			var logic = ViewRangeCalcLogic.Get(KanColleClient.Current.Settings.ViewRangeCalcType);
-			this.ViewRange = logic.Calc(ships.ToArray());
+			this.ViewRange = logic.Calc(this.source);
 			this.ViewRangeCalcType = logic.Name;
 
 			this.Calculated?.Invoke(this, new EventArgs());

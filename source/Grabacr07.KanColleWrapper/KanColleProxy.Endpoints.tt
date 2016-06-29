@@ -28,6 +28,7 @@
 		"/kcsapi/api_req_hokyu/charge",
 		"/kcsapi/api_req_kaisou/powerup",
 		"/kcsapi/api_req_kaisou/slot_exchange_index",
+		"/kcsapi/api_req_kaisou/slot_deprive",
 		"/kcsapi/api_req_kousyou/getship",
 		"/kcsapi/api_req_kousyou/createitem",
 		"/kcsapi/api_req_kousyou/createship",
