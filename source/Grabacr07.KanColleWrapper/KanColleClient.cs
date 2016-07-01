@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
-using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
-using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
 
 namespace Grabacr07.KanColleWrapper
@@ -98,32 +96,23 @@ namespace Grabacr07.KanColleWrapper
 		public void Initialieze()
 		{
 			var proxy = this.Proxy ?? (this.Proxy = new KanColleProxy());
-			var requireInfoSource = proxy.api_get_member_require_info
-				.TryParse<kcsapi_require_info>()
-				.FirstAsync()
-				.ToTask();
 
-			proxy.api_start2.FirstAsync().Subscribe(async session =>
-			{
-				var timeout = Task.Delay(TimeSpan.FromSeconds(20));
-				var canInitialize = await Task.WhenAny(requireInfoSource, timeout) != timeout;
-
-				SvData<kcsapi_start2> svd;
-				if (!SvData.TryParse(session, out svd)) return;
-
-				this.Master = new Master(svd.Data);
-				if (this.Homeport == null) this.Homeport = new Homeport(proxy);
-
-				if (canInitialize)
+			proxy.api_start2
+				.TryParse<kcsapi_start2>()
+				.Zip(
+					proxy.api_get_member_require_info.TryParse<kcsapi_require_info>(),
+					(start2, requireInfo) => new { start2 = start2.Data, requireInfo = requireInfo.Data, })
+				.Subscribe(x =>
 				{
-					var requireInfo = await requireInfoSource;
-					this.Homeport.UpdateAdmiral(requireInfo.Data.api_basic);
-					this.Homeport.Itemyard.Update(requireInfo.Data.api_slot_item);
-					this.Homeport.Dockyard.Update(requireInfo.Data.api_kdock);
-				}
+					this.Master = new Master(x.start2);
+					if (this.Homeport == null) this.Homeport = new Homeport(proxy);
 
-				this.IsStarted = true;
-			});
+					this.Homeport.UpdateAdmiral(x.requireInfo.api_basic);
+					this.Homeport.Itemyard.Update(x.requireInfo.api_slot_item);
+					this.Homeport.Dockyard.Update(x.requireInfo.api_kdock);
+
+					this.IsStarted = true;
+				});
 		}
 	}
 }
