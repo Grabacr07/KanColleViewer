@@ -82,7 +82,7 @@ namespace Grabacr07.KanColleWrapper
 
 		private int CurrentDeckId;
 		private bool IsBossCell;
-		private JObject BattleData;
+		private JObject NodeData;
 
 		enum LogType { BuildItem, BuildShip, ShipDrop };
 
@@ -91,39 +91,6 @@ namespace Grabacr07.KanColleWrapper
 			this.shipmats = new int[5];
 			try
 			{
-				proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_battle_midnight/battle")
-					.Subscribe(x => this.BattleUpdate(x, true));
-
-				proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_battle_midnight/sp_midnight")
-					.Subscribe(x => this.BattleUpdate(x, true));
-
-				proxy.api_req_combined_battle_airbattle
-					.Subscribe(x => this.BattleUpdate(x));
-
-				proxy.api_req_combined_battle_battle
-					.Subscribe(x => this.BattleUpdate(x));
-
-				proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_combined_battle/battle_water")
-					.Subscribe(x => this.BattleUpdate(x));
-
-				proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_combined_battle/midnight_battle")
-					.Subscribe(x => this.BattleUpdate(x, true));
-
-				proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_combined_battle/sp_midnight")
-					.Subscribe(x => this.BattleUpdate(x, true));
-
-				proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_sortie/airbattle")
-					.Subscribe(x => this.BattleUpdate(x));
-
-				proxy.api_req_sortie_battle
-					.Subscribe(x => this.BattleUpdate(x));
-
-				proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_sortie/ld_airbattle")
-					.Subscribe(x => this.BattleUpdate(x));
-
-				proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_combined_battle/ld_airbattle")
-					.Subscribe(x => this.BattleUpdate(x));
-
 				proxy.api_req_map_start.TryParse<start_next>().Subscribe(x => MapStartNext(x.Data, x.Request["api_deck_id"]));
 				proxy.api_req_map_next.TryParse<start_next>().Subscribe(x => MapStartNext(x.Data));
 
@@ -228,51 +195,12 @@ namespace Grabacr07.KanColleWrapper
 
 			IsBossCell = startnext.api_event_id == 5;
 
-			#region KC3 리플레이 JSON 작성
+			#region 노드 데이터 작성
 			var organization = KanColleClient.Current.Homeport.Organization;
-			BattleData = new JObject(
-				new JProperty("diff", 0),
+			NodeData = new JObject(
 				new JProperty("world", startnext.api_maparea_id),
 				new JProperty("mapnum", startnext.api_mapinfo_no),
-				new JProperty("fleetnum", CurrentDeckId),
-				new JProperty("combined", Convert.ToInt32(organization.Combined && CurrentDeckId == 1)),
-				new JProperty("support1", GetSupportingFleet(false)),
-				new JProperty("support2", GetSupportingFleet(true)),
-				new JProperty("time", (DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds),
-				new JProperty("hq", KanColleClient.Current.Homeport.Admiral.Experience.ToString()));
-
-			JProperty[] fleetdata = new JProperty[organization.Fleets.Count];
-
-			int count = 0;
-			foreach (var fleet in organization.Fleets)
-			{
-				fleetdata[count] = new JProperty($"fleet{count + 1}", 
-					new JArray(fleet.Value.Ships.Select(ship =>
-						new JObject(
-							new JProperty("mst_id", ship.Info.Id),
-							new JProperty("level", ship.Level),
-							new JProperty("kyouka",
-								new JArray(ship.Firepower.Upgraded, ship.Torpedo.Upgraded, ship.AA.Upgraded, ship.Armer.Upgraded, ship.Luck.Upgraded)),
-							new JProperty("morale", ship.Condition),
-							new JProperty("equip",
-								new JArray(ship.Slots.Select(y => y.Item.Info.Id).ToArray()))))));
-
-				count++;
-			}
-
-			foreach(var fleet in fleetdata)
-			{
-				BattleData.Add(fleet);
-			}
-
-			JProperty battles = new JProperty("battles", 
-				new JArray(
-					new JObject(
-						new JProperty("node", startnext.api_no),
-						new JProperty("data", new JObject()),
-						new JProperty("yasen", new JObject()))));
-
-			BattleData.Add(battles);
+				new JProperty("node", startnext.api_no));
 			#endregion
 		}
 
@@ -309,15 +237,6 @@ namespace Grabacr07.KanColleWrapper
 			return (w == 5 || e) && (Convert.ToBoolean(n) == bossSupport);
 		}
 
-		private void BattleUpdate(Session session, bool yasen=false)
-		{
-			string battletype = "data";
-			if (yasen)
-				battletype = "yasen";
-
-			BattleData["battles"][0][battletype] = JObject.Parse(session.Response.BodyAsString.Replace("svdata=", ""))["api_data"];
-		}
-
 		private void BattleResult(kcsapi_battleresult br)
 		{
 			string ShipName = "";
@@ -330,41 +249,12 @@ namespace Grabacr07.KanColleWrapper
 
 			string currentTime = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
 
-			#region JSON파일 저장
-			JObject lastBattle = (JObject)BattleData["battles"][0];
-
-			lastBattle.Add(new JProperty("rank", br.api_win_rank));
-			lastBattle.Add(new JProperty("drop", br.api_get_ship?.api_ship_id));
-			lastBattle.Add(new JProperty("baseEXP", br.api_get_base_exp));
-			lastBattle.Add(new JProperty("hqEXP", br.api_get_exp));
-
-			string MainFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
-
-			JObject json;
-			if (File.Exists(Path.Combine(MainFolder, "replaydata.json")))
-				json = JObject.Parse(File.ReadAllText(Path.Combine(MainFolder, "replaydata.json")));
-			else
-				json = new JObject();
-			
-			json.Add(new JProperty(currentTime, BattleData));
-
-			using (StreamWriter file = File.CreateText(Path.Combine(MainFolder, "replaydata.json")))
-			{
-				using (JsonTextWriter writer = new JsonTextWriter(file))
-				{
-					json.WriteTo(writer);
-					writer.Close();
-				}
-				file.Close();
-			}
-			#endregion
-
 			#region CSV파일 저장
 			//날짜,해역이름,해역,보스,적 함대,랭크,드랍
 			Log(LogType.ShipDrop, "{0},{1},{2},{3},{4},{5},{6}",
 				currentTime,
 				MapType,
-				$"{BattleData.SelectToken("world").ToString()}-{(int)BattleData.SelectToken("mapnum")}-{(int)BattleData.SelectToken("battles[0].node")}",
+				$"{NodeData.SelectToken("world").ToString()}-{(int)NodeData.SelectToken("mapnum")}-{(int)NodeData.SelectToken("node")}",
 				IsBossCell ? "O" : "X",
 				KanColleClient.Current.Translations.GetTranslation(br.api_enemy_info.api_deck_name, TranslationType.OperationSortie, false, br, -1),
 				br.api_win_rank, 

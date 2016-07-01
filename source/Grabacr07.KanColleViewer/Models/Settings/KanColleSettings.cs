@@ -27,15 +27,6 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		public static SerializableProperty<bool> GPURenderEnable { get; }
 			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
 
-		/// <summary>
-		/// 제공 계산식에서 소수점을 버립니다
-		/// </summary>
-		public static SerializableProperty<bool> SqrtDoubleToInt { get; }
-			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
-
-		public static SerializableProperty<bool> EnableAircraftFilter { get; }
-			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
-
 		public static SerializableProperty<bool> AutoTranslateEnable { get; }
 		= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
 
