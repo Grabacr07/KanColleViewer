@@ -19,8 +19,8 @@ namespace Grabacr07.KanColleViewer.Models.Migration
 		public int NotificationShorteningTime { get; set; }
 		public int ReSortieCondition { get; set; }
 		public string ViewRangeCalcType { get; set; }
-		public bool SqrtDoubleToInt { get; set; }
-		public bool EnableAircraftFilter { get; set; }
+		public bool IsViewRangeCalcIncludeFirstFleet { get; set; }
+		public bool IsViewRangeCalcIncludeSecondFleet { get; set; }
 		public bool AutoTranslateEnable { get; set; }
 		public bool CheckFlagshipIsRepairShip { get; set; }
 

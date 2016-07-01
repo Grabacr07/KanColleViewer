@@ -39,8 +39,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				return stbr.ToString();
 			}
 		}
-
-		public string ViewRange => this.Source.ViewRange.ToString("##0.##");
+		
+		public string ViewRange => (Math.Floor(this.Source.ViewRange * 100) / 100).ToString("##0.##");
 
 		public string Speed
 		{

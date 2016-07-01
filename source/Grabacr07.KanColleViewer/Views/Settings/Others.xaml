@@ -142,17 +142,6 @@
 
 		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
-		<TextBlock Text="제공식 설정" Style="{DynamicResource SettingsHeaderTextStyleKey}" />
-		<CheckBox Content="제공식의 모든 소수점 결과를 버립니다" 
-                  IsChecked="{Binding Source={x:Static ms:KanColleSettings.SqrtDoubleToInt}, Path=Value}"
-                  Height="17" 
-                  Margin="15,0,0,10"/>
-		<CheckBox Content="제공식의 최소값 계산에서 함상전투기만 계산에 넣습니다." 
-                  IsChecked="{Binding Source={x:Static ms:KanColleSettings.EnableAircraftFilter}, Path=Value}"
-                  Height="17" 
-                  Margin="15,0,0,10"/>
-		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
-
 		<TextBlock Text="MMCSS(Multimedia Class Scheduler Service) 설정" Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 		<CheckBox Content="MMCSS를 적용합니다. 해당 설정은 어플리케이션을 재시작해야 적용됩니다." 
                   IsChecked="{Binding Source={x:Static ms:GeneralSettings.MMCSSEnabled}, Path=Value}"

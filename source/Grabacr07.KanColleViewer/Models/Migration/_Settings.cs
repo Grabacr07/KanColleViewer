@@ -63,8 +63,6 @@ namespace Grabacr07.KanColleViewer.Models.Migration
 				KanColleSettings.ViewRangeCalcType.Value = Current.KanColleClientSettings.ViewRangeCalcType ?? KanColleSettings.ViewRangeCalcType.Default;
 				KanColleSettings.NotificationShorteningTime.Value = Current.KanColleClientSettings.NotificationShorteningTime;
 				KanColleSettings.ReSortieCondition.Value = Current.KanColleClientSettings.ReSortieCondition;
-				KanColleSettings.SqrtDoubleToInt.Value = Current.KanColleClientSettings.SqrtDoubleToInt;
-				KanColleSettings.EnableAircraftFilter.Value = Current.KanColleClientSettings.EnableAircraftFilter;
 				KanColleSettings.AutoTranslateEnable.Value = Current.KanColleClientSettings.AutoTranslateEnable;
 			}
 

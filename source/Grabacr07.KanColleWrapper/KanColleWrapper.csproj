@@ -74,8 +74,8 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="StatefulModel, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\StatefulModel.0.5.0\lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10\StatefulModel.dll</HintPath>
+    <Reference Include="StatefulModel">
+      <HintPath>..\packages\StatefulModel.0.6.0\lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10\StatefulModel.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -154,6 +154,7 @@
     <Compile Include="Models\Raw\kcsapi_powerup.cs" />
     <Compile Include="Models\Raw\kcsapi_remodel_slotlist.cs" />
     <Compile Include="Models\Raw\kcsapi_remodel_slotlist_detail.cs" />
+    <Compile Include="Models\Raw\kcsapi_slot_deprive.cs" />
     <Compile Include="Models\Raw\kcsapi_slot_exchange_index.cs" />
     <Compile Include="Models\ShipSituation.cs" />
     <Compile Include="Models\ShipSlot.cs" />

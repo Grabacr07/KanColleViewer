@@ -14,6 +14,7 @@ using Nekoxy;
 using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
+using System.Web;
 
 namespace Grabacr07.KanColleWrapper
 {
@@ -108,6 +109,7 @@ namespace Grabacr07.KanColleWrapper
 			this.All = this.Current = new List<Quest>();
 
 			proxy.api_get_member_questlist
+				.Where(x => HttpUtility.ParseQueryString(x.Request.BodyAsString)["api_tab_id"] == "0")
 				.Select(Serialize)
 				.Where(x => x != null)
 				.Subscribe(this.Update);
