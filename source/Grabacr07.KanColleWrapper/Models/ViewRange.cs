@@ -118,7 +118,7 @@ namespace Grabacr07.KanColleWrapper.Models
 	{
 		public override sealed string Id => "KanColleViewer.Type3";
 
-		public override string Name => "2-5 式 (가을)";
+		public override string Name => "2-5 식 (가을)";
 
 		public override string Description => @"(함상폭격기 × 1.04) + (함상공격기 × 1.37) + (함상정찰기 × 1.66)
 + (수상정찰기 × 2.00) + (수상폭격기 × 1.78) + (탐조등 × 0.91)
@@ -198,12 +198,12 @@ namespace Grabacr07.KanColleWrapper.Models
 	{
 		public override sealed string Id => "KanColleViewer.Type4";
 
-		public override string Name => "33 式";
+		public override string Name => "33 식";
 
 		public override string Description =>
-			@"((각 슬롯의 장비의 색적 값 + 개수 효과) × 장비 타입 보너스)의 합 + (√ 각 함의 색적 값)의 합
-- (사령부 레벨 × 0.4)의 소수점 이하 올림 + 함대의 여유 수 × 2
-※ 대피 한 군함 제외";
+			@"((각 장비의 색적값 + 개수 효과) × 장비 타입 보너스)의 합 + (√ 각 함의 색적값)의 합
+- (사령부 레벨 × 0.4)의 소수점 이하 올림 + 함대 여유 × 2
+※ 대피한 함선 제외";
 
 		public override bool HasCombinedSettings { get; } = true;
 
