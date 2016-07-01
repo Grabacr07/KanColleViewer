@@ -104,13 +104,13 @@
 
 				<Run Text="Developer(Koran):" />
 				<metro2:HyperlinkEx Uri="http://kcvkr.tistory.com">
-					<Run Text="FreyYa" />
+					<Run Text="Cirno V" />
 				</metro2:HyperlinkEx>
 				<metro2:HyperlinkEx Uri="https://github.com/DaeWha">
 					<Run Text="DaeWha" />
 				</metro2:HyperlinkEx>
-				<metro2:HyperlinkEx Uri="https://github.com/CirnoV">
-					<Run Text="Cirno V" />
+				<metro2:HyperlinkEx Uri="https://github.com/FreyYa">
+					<Run Text="FreyYa" />
 				</metro2:HyperlinkEx>
 			</TextBlock>
 

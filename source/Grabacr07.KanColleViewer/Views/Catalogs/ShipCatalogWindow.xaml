@@ -837,6 +837,22 @@
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
 									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.HPColumn}">
+										<TextBlock Text="최대 HP" />
+									</metro2:SortButton>
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<TextBlock Margin="0,3"
+												   Text="{Binding Ship.HP.Maximum, Mode=OneWay}"
+												   Foreground="{DynamicResource ActiveForegroundBrushKey}"/>
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+
+							<GridViewColumn Width="64">
+								<GridViewColumn.Header>
+									<metro2:SortButton MethodName="Sort"
 													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.FirepowerColumn}">
 										<TextBlock Text="화력" />
 									</metro2:SortButton>
@@ -868,6 +884,40 @@
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
 
+							<GridViewColumn Width="70">
+								<GridViewColumn.Header>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.YasenFpColumn}">
+										<TextBlock Text="화력+뇌장" />
+									</metro2:SortButton>
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<kcvc:Modernizable Status="{Binding Ship.YasenFp, Mode=OneWay}"
+														   Background="#663399"
+														   MinWidth="70"
+														   Margin="-5,0" />
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+
+							<GridViewColumn Width="64">
+								<GridViewColumn.Header>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.ArmerColumn}">
+										<TextBlock Text="장갑" />
+									</metro2:SortButton>
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<kcvc:Modernizable Status="{Binding Ship.Armer, Mode=OneWay}"
+														   Background="#7FD8981A"
+														   MinWidth="64"
+														   Margin="-5,0" />
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
 									<metro2:SortButton MethodName="Sort"
@@ -888,14 +938,14 @@
 							<GridViewColumn Width="64">
 								<GridViewColumn.Header>
 									<metro2:SortButton MethodName="Sort"
-													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.ArmerColumn}">
-										<TextBlock Text="장갑" />
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.ASWColumn}">
+										<TextBlock Text="대잠" />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<kcvc:Modernizable Status="{Binding Ship.Armer, Mode=OneWay}"
-														   Background="#7FD8981A"
+										<kcvc:Modernizable Status="{Binding Ship.ASW, Mode=OneWay}"
+														   Background="#8BA2B0"
 														   MinWidth="64"
 														   Margin="-5,0" />
 									</DataTemplate>

@@ -192,7 +192,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		}
 
 		#endregion
-
+		
 		#region Torpedo 変更通知プロパティ
 
 		private ModernizableStatus _Torpedo;
@@ -206,6 +206,22 @@ namespace Grabacr07.KanColleWrapper.Models
 			private set
 			{
 				this._Torpedo = value;
+				this.RaisePropertyChanged();
+			}
+		}
+
+		#endregion
+
+		#region YasenFp 変更通知プロパティ
+
+		private ModernizableStatus _YasenFp;
+		
+		public ModernizableStatus YasenFp
+		{
+			get { return this._YasenFp; }
+			private set
+			{
+				this._YasenFp = value;
 				this.RaisePropertyChanged();
 			}
 		}
@@ -244,6 +260,25 @@ namespace Grabacr07.KanColleWrapper.Models
 			private set
 			{
 				this._Armer = value;
+				this.RaisePropertyChanged();
+			}
+		}
+
+		#endregion
+
+		#region ASW 変更通知プロパティ
+
+		private ModernizableStatus _ASW;
+
+		/// <summary>
+		/// 対潜ステータス値を取得します。
+		/// </summary>
+		public ModernizableStatus ASW
+		{
+			get { return this._ASW; }
+			private set
+			{
+				this._ASW = value;
 				this.RaisePropertyChanged();
 			}
 		}
@@ -429,6 +464,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.HP = new LimitedValue(this.RawData.api_nowhp, this.RawData.api_maxhp, 0);
 			this.Fuel = new LimitedValue(this.RawData.api_fuel, this.Info.RawData.api_fuel_max, 0);
 			this.Bull = new LimitedValue(this.RawData.api_bull, this.Info.RawData.api_bull_max, 0);
+			this.ASW = new ModernizableStatus(new int[] { 0, this.RawData.api_taisen[1] }, this.RawData.api_taisen[0]);
 
 			double temp = (double)this.HP.Current / (double)this.HP.Maximum;
 
@@ -441,13 +477,17 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				this.Firepower = new ModernizableStatus(this.Info.RawData.api_houg, this.RawData.api_kyouka[0]);
 				this.Torpedo = new ModernizableStatus(this.Info.RawData.api_raig, this.RawData.api_kyouka[1]);
+				this.YasenFp = new ModernizableStatus(
+					new int[] {
+						this.Info.RawData.api_houg[0] + this.Info.RawData.api_raig[0],
+						this.Info.RawData.api_houg[1] + this.Info.RawData.api_raig[1]},
+					this.RawData.api_kyouka[0]+ this.RawData.api_kyouka[1]);
 				this.AA = new ModernizableStatus(this.Info.RawData.api_tyku, this.RawData.api_kyouka[2]);
 				this.Armer = new ModernizableStatus(this.Info.RawData.api_souk, this.RawData.api_kyouka[3]);
 				this.Luck = new ModernizableStatus(this.Info.RawData.api_luck, this.RawData.api_kyouka[4]);
 			}
 
 			this.TimeToRepair = TimeSpan.FromMilliseconds(this.RawData.api_ndock_time);
-
 			this.UpdateSlots();
 		}
 
@@ -468,6 +508,9 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				this.Situation &= ~ShipSituation.DamageControlled;
 			}
+
+			//장비의 대잠 수치 제외
+			this.ASW = this.ASW.Update(this.ASW.Upgraded - this.Slots.Sum(slot => slot.Item.Info.ASW));
 		}
 
 

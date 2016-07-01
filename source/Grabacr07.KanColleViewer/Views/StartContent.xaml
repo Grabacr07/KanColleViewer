@@ -210,13 +210,13 @@
 
 						</metro2:HyperlinkEx>
 								<metro2:HyperlinkEx Uri="http://kcvkr.tistory.com">
-									<Run Text="FreyYa" />
+									<Run Text="Cirno V" />
 								</metro2:HyperlinkEx>
                                     <metro2:HyperlinkEx Uri="https://github.com/DaeWha">
 									<Run Text="DaeWha" />
 								</metro2:HyperlinkEx>
-							<metro2:HyperlinkEx Uri="https://github.com/CirnoV">
-								<Run Text="Cirno V" />
+							<metro2:HyperlinkEx Uri="https://github.com/FreyYa">
+								<Run Text="FreyYa" />
 							</metro2:HyperlinkEx>
 						</TextBlock>
 						<TextBlock FontFamily="Segoe UI">
@@ -314,12 +314,12 @@
 							<LineBreak />
 							<LineBreak />
 							<Run Text="Korean Source code:" />
-							<metro2:HyperlinkEx Uri="https://github.com/FreyYa/KanColleViewer">
-								<Run Text="/FreyYa/KanColleViewer" />
+							<metro2:HyperlinkEx Uri="https://github.com/CirnoV/KanColleViewer">
+								<Run Text="/CirnoV/KanColleViewer" />
 							</metro2:HyperlinkEx>
 							<LineBreak />
 							<Run Text="Korean Version Release Page:" />
-							<metro2:HyperlinkEx Uri="http://KCVkr.tistory.com/category/Releases">
+							<metro2:HyperlinkEx Uri="http://kcvkr.tistory.com/category/%EC%A0%9C%EB%8F%85%EC%97%85%EB%AC%B4%EB%8F%84%20%EB%B0%94%EB%B9%A0!/%EB%A6%B4%EB%A6%AC%EC%A6%88">
 								<Run Text="http://KCVkr.tistory.com" />
 							</metro2:HyperlinkEx>
 							<LineBreak />

@@ -63,7 +63,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://raw.github.com/FreyYa/KCVKrTranslation/master/resources/Version.xml")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://raw.github.com/CirnoV/KCVKrTranslation/master/resources/Version.xml")]
         public global::System.Uri KCVUpdateUrl {
             get {
                 return ((global::System.Uri)(this["KCVUpdateUrl"]));
@@ -72,7 +72,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://raw.github.com/FreyYa/KCVKrTranslation/master/resources/Translations/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://raw.github.com/CirnoV/KCVKrTranslation/master/resources/Translations/")]
         public global::System.Uri XMLTransUrl {
             get {
                 return ((global::System.Uri)(this["XMLTransUrl"]));
@@ -81,7 +81,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://raw.githubusercontent.com/FreyYa/KCVKrTranslation/master/resources/sail.j" +
+        [global::System.Configuration.DefaultSettingValueAttribute("https://raw.githubusercontent.com/CirnoV/KCVKrTranslation/master/resources/sail.j" +
             "son")]
         public string SallyAreaSource {
             get {
