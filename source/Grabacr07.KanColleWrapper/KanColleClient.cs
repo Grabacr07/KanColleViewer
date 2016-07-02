@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive;
+using System.Reactive.Concurrency;
 using System.Reactive.Linq;
+using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Models.Raw;
 
@@ -97,22 +100,37 @@ namespace Grabacr07.KanColleWrapper
 		{
 			var proxy = this.Proxy ?? (this.Proxy = new KanColleProxy());
 
-			proxy.api_start2
-				.TryParse<kcsapi_start2>()
-				.Zip(
-					proxy.api_get_member_require_info.TryParse<kcsapi_require_info>(),
-					(start2, requireInfo) => new { start2 = start2.Data, requireInfo = requireInfo.Data, })
-				.Subscribe(x =>
-				{
-					this.Master = new Master(x.start2);
-					if (this.Homeport == null) this.Homeport = new Homeport(proxy);
+			var start2Source = proxy.api_start2.TryParse<kcsapi_start2>();
+			var requireInfoSource = proxy.api_get_member_require_info.TryParse<kcsapi_require_info>();
+			var firstTime = start2Source
+				.CombineLatest(requireInfoSource, (start2, requireInfo) => new { start2, requireInfo, })
+				.FirstAsync();
 
-					this.Homeport.UpdateAdmiral(x.requireInfo.api_basic);
-					this.Homeport.Itemyard.Update(x.requireInfo.api_slot_item);
-					this.Homeport.Dockyard.Update(x.requireInfo.api_kdock);
+			// Homeport の初期化と require_info の適用に Master のインスタンスが必要なため、初回のみ足並み揃えて実行
+			// 2 回目以降は受信したタイミングでそれぞれ更新すればよい
 
-					this.IsStarted = true;
-				});
+			firstTime.Subscribe(x =>
+			{
+				this.Master = new Master(x.start2.Data);
+				this.Homeport = new Homeport(proxy);
+				this.SetRequireInfo(x.requireInfo.Data);
+				this.IsStarted = true;
+			});
+
+			start2Source
+				.SkipUntil(firstTime)
+				.Subscribe(x => this.Master = new Master(x.Data));
+
+			requireInfoSource
+				.SkipUntil(firstTime)
+				.Subscribe(x => this.SetRequireInfo(x.Data));
+		}
+
+		private void SetRequireInfo(kcsapi_require_info data)
+		{
+			this.Homeport.UpdateAdmiral(data.api_basic);
+			this.Homeport.Itemyard.Update(data.api_slot_item);
+			this.Homeport.Dockyard.Update(data.api_kdock);
 		}
 	}
 }
