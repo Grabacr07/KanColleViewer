@@ -2,8 +2,8 @@
 --
 
 [![Build status (master)](https://img.shields.io/appveyor/ci/Grabacr07/KanColleViewer.svg?style=flat-square)](https://ci.appveyor.com/project/Grabacr07/kancolleviewer)
-[![Release](https://img.shields.io/github/release/Grabacr07/KanColleViewer.svg?style=flat-square)](https://github.com/Grabacr07/KanColleViewer/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/Grabacr07/KanColleViewer/latest/total.svg?style=flat-square)](https://github.com/Grabacr07/KanColleViewer/releases/latest)
+[![Release](https://img.shields.io/github/release/CirnoV/KanColleViewer.svg?style=flat-square)](https://github.com/CirnoV/KanColleViewer/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/CirnoV/KanColleViewer/latest/total.svg?style=flat-square)](https://github.com/CirnoV/KanColleViewer/releases/latest)
 [![NuGet (KanColleWrapper)](https://img.shields.io/nuget/v/KanColleWrapper.svg?style=flat-square)](https://www.nuget.org/packages/KanColleWrapper/)
 [![License](https://img.shields.io/github/license/Grabacr07/KanColleViewer.svg?style=flat-square)](https://github.com/Grabacr07/KanColleViewer/blob/develop/LICENSE.txt)
 
