@@ -24,14 +24,14 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>内部熟練度最小値による計算。</summary>
 		InternalProficiencyMinValue = 0x0100,
 
-		/// <summary>内部熟練度最小値による計算。</summary>
+		/// <summary>内部熟練度最大値による計算。</summary>
 		InternalProficiencyMaxValue = 0x0200,
 	}
 
 	public static class AirSuperiorityPotential
 	{
 		/// <summary>
-		/// 指定した艦の制空能力を計算します。
+		/// 艦娘の制空能力を計算します。
 		/// </summary>
 		public static int GetAirSuperiorityPotential(this Ship ship, AirSuperiorityCalculationOptions options = AirSuperiorityCalculationOptions.Default)
 		{
@@ -114,7 +114,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			protected override double GetLevelBonus(SlotItem slotItem, int onSlot)
 			{
 				return slotItem.Level >= 1
-					? slotItem.Level * .2 + Math.Sqrt(onSlot)
+					? slotItem.Level * 0.2 + Math.Sqrt(onSlot)
 					: .0;
 			}
 		}
@@ -156,6 +156,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			public static Empty Instance { get; } = new Empty();
 
 			public override AirSuperiorityCalculationOptions Options => ~AirSuperiorityCalculationOptions.Default;
+			protected override double GetAirSuperiority(SlotItem slotItem, int onslot) => .0;
 			protected override double GetProficiencyBonus(SlotItem slotItem, AirSuperiorityCalculationOptions options) => .0;
 			protected override double GetLevelBonus(SlotItem slotItem, int onSlot) => .0;
 
