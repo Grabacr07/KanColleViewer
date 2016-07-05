@@ -113,9 +113,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 			protected override double GetLevelBonus(SlotItem slotItem, int onSlot)
 			{
-				return slotItem.Level >= 1
-					? slotItem.Level * 0.2 + Math.Sqrt(onSlot)
-					: .0;
+				return slotItem.Level * 0.2;
 			}
 		}
 
