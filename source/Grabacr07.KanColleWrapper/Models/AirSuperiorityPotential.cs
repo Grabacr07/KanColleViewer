@@ -57,17 +57,17 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				case SlotItemType.艦上戦闘機:
 				case SlotItemType.水上戦闘機:
-					return new Fighter();
+					return new FighterCalculator();
 
 				case SlotItemType.艦上攻撃機:
 				case SlotItemType.艦上爆撃機:
-					return new Attacker();
+					return new AttackerCalculator();
 
 				case SlotItemType.水上爆撃機:
-					return new SeaplaneBomber();
+					return new SeaplaneBomberCalculator();
 
 				default:
-					return Empty.Instance;
+					return EmptyCalculator.Instance;
 			}
 		}
 
@@ -96,7 +96,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#region AirSuperiorityCalculator 派生型
 
-		private class Fighter : AirSuperiorityCalculator
+		private class FighterCalculator : AirSuperiorityCalculator
 		{
 			public override AirSuperiorityCalculationOptions Options => AirSuperiorityCalculationOptions.Fighter;
 
@@ -108,47 +108,47 @@ namespace Grabacr07.KanColleWrapper.Models
 
 			protected override double GetProficiencyBonus(SlotItem slotItem, AirSuperiorityCalculationOptions options)
 			{
-				var proficiencyValue = slotItem.GetProficiencyValue();
-				return Math.Sqrt(proficiencyValue.GetInternalValue(options) / 10.0) + proficiencyValue.FighterBonus;
+				var proficiency = slotItem.GetProficiency();
+				return Math.Sqrt(proficiency.GetInternalValue(options) / 10.0) + proficiency.FighterBonus;
 			}
 		}
 
-		private class Attacker : AirSuperiorityCalculator
+		private class AttackerCalculator : AirSuperiorityCalculator
 		{
 			public override AirSuperiorityCalculationOptions Options => AirSuperiorityCalculationOptions.Attacker;
 
 			protected override double GetProficiencyBonus(SlotItem slotItem, AirSuperiorityCalculationOptions options)
 			{
-				var proficiencyValue = slotItem.GetProficiencyValue();
-				return Math.Sqrt(proficiencyValue.GetInternalValue(options) / 10.0);
+				var proficiency = slotItem.GetProficiency();
+				return Math.Sqrt(proficiency.GetInternalValue(options) / 10.0);
 			}
 		}
 
-		private class SeaplaneBomber : AirSuperiorityCalculator
+		private class SeaplaneBomberCalculator : AirSuperiorityCalculator
 		{
 			public override AirSuperiorityCalculationOptions Options => AirSuperiorityCalculationOptions.SeaplaneBomber;
 
 			protected override double GetProficiencyBonus(SlotItem slotItem, AirSuperiorityCalculationOptions options)
 			{
-				var proficiencyValue = slotItem.GetProficiencyValue();
-				return Math.Sqrt(proficiencyValue.GetInternalValue(options) / 10.0) + proficiencyValue.SeaplaneBomberBonus;
+				var proficiency = slotItem.GetProficiency();
+				return Math.Sqrt(proficiency.GetInternalValue(options) / 10.0) + proficiency.SeaplaneBomberBonus;
 			}
 		}
 
-		private class Empty : AirSuperiorityCalculator
+		private class EmptyCalculator : AirSuperiorityCalculator
 		{
-			public static Empty Instance { get; } = new Empty();
+			public static EmptyCalculator Instance { get; } = new EmptyCalculator();
 
 			public override AirSuperiorityCalculationOptions Options => ~AirSuperiorityCalculationOptions.Default;
 			protected override double GetAirSuperiority(SlotItem slotItem, int onslot) => .0;
 			protected override double GetProficiencyBonus(SlotItem slotItem, AirSuperiorityCalculationOptions options) => .0;
 
-			private Empty() { }
+			private EmptyCalculator() { }
 		}
 
 		#endregion
 
-		private class ProficiencyValue
+		private class Proficiency
 		{
 			private readonly int internalMinValue;
 			private readonly int internalMaxValue;
@@ -156,7 +156,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			public int FighterBonus { get; }
 			public int SeaplaneBomberBonus { get; }
 
-			public ProficiencyValue(int internalMin, int internalMax, int fighterBonus, int seaplaneBomberBonus)
+			public Proficiency(int internalMin, int internalMax, int fighterBonus, int seaplaneBomberBonus)
 			{
 				this.internalMinValue = internalMin;
 				this.internalMaxValue = internalMax;
@@ -164,6 +164,9 @@ namespace Grabacr07.KanColleWrapper.Models
 				this.SeaplaneBomberBonus = seaplaneBomberBonus;
 			}
 
+			/// <summary>
+			/// 内部熟練度値を取得します。
+			/// </summary>
 			public int GetInternalValue(AirSuperiorityCalculationOptions options)
 			{
 				if (options.HasFlag(AirSuperiorityCalculationOptions.InternalProficiencyMinValue)) return this.internalMinValue;
@@ -172,18 +175,18 @@ namespace Grabacr07.KanColleWrapper.Models
 			}
 		}
 
-		private static readonly Dictionary<int, ProficiencyValue> proficiencyValues = new Dictionary<int, ProficiencyValue>()
+		private static readonly Dictionary<int, Proficiency> proficiencies = new Dictionary<int, Proficiency>()
 		{
-			{ 0, new ProficiencyValue(0, 9, 0, 0) },
-			{ 1, new ProficiencyValue(10, 24, 0, 0) },
-			{ 2, new ProficiencyValue(25, 39, 2, 1) },
-			{ 3, new ProficiencyValue(40, 54, 5, 1) },
-			{ 4, new ProficiencyValue(55, 69, 9, 1) },
-			{ 5, new ProficiencyValue(70, 84, 14, 3) },
-			{ 6, new ProficiencyValue(85, 99, 14, 3) },
-			{ 7, new ProficiencyValue(100, 120, 22, 6) },
+			{ 0, new Proficiency(0, 9, 0, 0) },
+			{ 1, new Proficiency(10, 24, 0, 0) },
+			{ 2, new Proficiency(25, 39, 2, 1) },
+			{ 3, new Proficiency(40, 54, 5, 1) },
+			{ 4, new Proficiency(55, 69, 9, 1) },
+			{ 5, new Proficiency(70, 84, 14, 3) },
+			{ 6, new Proficiency(85, 99, 14, 3) },
+			{ 7, new Proficiency(100, 120, 22, 6) },
 		};
 
-		private static ProficiencyValue GetProficiencyValue(this SlotItem slotItem) => proficiencyValues[Math.Max(Math.Min(slotItem.Proficiency, 7), 0)];
+		private static Proficiency GetProficiency(this SlotItem slotItem) => proficiencies[Math.Max(Math.Min(slotItem.Proficiency, 7), 0)];
 	}
 }
