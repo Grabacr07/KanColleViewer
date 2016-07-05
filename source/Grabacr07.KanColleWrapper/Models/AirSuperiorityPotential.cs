@@ -83,9 +83,6 @@ namespace Grabacr07.KanColleWrapper.Models
 				// 装備の熟練度による制空値ボーナス
 				airSuperiority += this.GetProficiencyBonus(slotItem, options);
 
-				// 装備の改修値による制空値ボーナス
-				airSuperiority += this.GetLevelBonus(slotItem, onslot);
-
 				return (int)airSuperiority;
 			}
 
@@ -95,8 +92,6 @@ namespace Grabacr07.KanColleWrapper.Models
 			}
 
 			protected abstract double GetProficiencyBonus(SlotItem slotItem, AirSuperiorityCalculationOptions options);
-
-			protected abstract double GetLevelBonus(SlotItem slotItem, int onSlot);
 		}
 
 		#region AirSuperiorityCalculator 派生型
@@ -105,15 +100,16 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			public override AirSuperiorityCalculationOptions Options => AirSuperiorityCalculationOptions.Fighter;
 
+			protected override double GetAirSuperiority(SlotItem slotItem, int onslot)
+			{
+				// 装備改修による対空値加算 (★ x 0.2)
+				return (slotItem.Info.AA + slotItem.Level * 0.2) * Math.Sqrt(onslot);
+			}
+
 			protected override double GetProficiencyBonus(SlotItem slotItem, AirSuperiorityCalculationOptions options)
 			{
 				var proficiencyValue = slotItem.GetProficiencyValue();
 				return Math.Sqrt(proficiencyValue.GetInternalValue(options) / 10.0) + proficiencyValue.FighterBonus;
-			}
-
-			protected override double GetLevelBonus(SlotItem slotItem, int onSlot)
-			{
-				return slotItem.Level * 0.2;
 			}
 		}
 
@@ -126,11 +122,6 @@ namespace Grabacr07.KanColleWrapper.Models
 				var proficiencyValue = slotItem.GetProficiencyValue();
 				return Math.Sqrt(proficiencyValue.GetInternalValue(options) / 10.0);
 			}
-
-			protected override double GetLevelBonus(SlotItem slotItem, int onSlot)
-			{
-				return .0;
-			}
 		}
 
 		private class SeaplaneBomber : AirSuperiorityCalculator
@@ -142,11 +133,6 @@ namespace Grabacr07.KanColleWrapper.Models
 				var proficiencyValue = slotItem.GetProficiencyValue();
 				return Math.Sqrt(proficiencyValue.GetInternalValue(options) / 10.0) + proficiencyValue.SeaplaneBomberBonus;
 			}
-
-			protected override double GetLevelBonus(SlotItem slotItem, int onSlot)
-			{
-				return .0;
-			}
 		}
 
 		private class Empty : AirSuperiorityCalculator
@@ -156,7 +142,6 @@ namespace Grabacr07.KanColleWrapper.Models
 			public override AirSuperiorityCalculationOptions Options => ~AirSuperiorityCalculationOptions.Default;
 			protected override double GetAirSuperiority(SlotItem slotItem, int onslot) => .0;
 			protected override double GetProficiencyBonus(SlotItem slotItem, AirSuperiorityCalculationOptions options) => .0;
-			protected override double GetLevelBonus(SlotItem slotItem, int onSlot) => .0;
 
 			private Empty() { }
 		}
