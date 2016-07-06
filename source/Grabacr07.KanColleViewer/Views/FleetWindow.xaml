@@ -385,7 +385,7 @@
 												<Run Text="{Binding Item.Info.Name, Mode=OneWay}" />
 												<Run Text="{Binding Item.LevelText, Mode=OneWay}"
 													 Foreground="#FF45A9A5" />
-												<Run Text="{Binding Item.AdeptText, Mode=OneWay}"
+												<Run Text="{Binding Item.ProficiencyText, Mode=OneWay}"
 													 Foreground="{DynamicResource ForegroundBrushKey}" />
 											</TextBlock>
 										</Grid>
