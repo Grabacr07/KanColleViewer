@@ -45,7 +45,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			this.Target = target;
 
 			this.itemsByLevel = items
-				.GroupBy(x => new SlotItemCounterKey(x.Level, x.Adept))
+				.GroupBy(x => new SlotItemCounterKey(x.Level, x.Proficiency))
 				.ToDictionary(
 					x => x.Key,
 					x => new SlotItemCounterByLevel { CounterKey = x.Key, Count = x.Count(), }
