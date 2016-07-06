@@ -29,7 +29,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public static readonly SortableColumn LuckColumn = new SortableColumn { Name = Resources.ShipCatalog_Column_Luck, KeySelector = x => x.Luck.Current, DefaultIsDescending = true, };
 		public static readonly SortableColumn HPColumn = new SortableColumn { Name = Resources.ShipCatalog_SortBy_MaxHP, KeySelector = x => x.HP.Maximum, DefaultIsDescending = true, };
 		public static readonly SortableColumn ViewRangeColumn = new SortableColumn { Name = Resources.ShipCatalog_Column_ViewRange, KeySelector = x => x.ViewRange, DefaultIsDescending = true, };
-		public static readonly SortableColumn TimeToRepairColumn = new SortableColumn { Name = Resources.ShipCatalog_Column_TTR, KeySelector = x => x.TimeToRepair.Ticks, DefaultIsDescending = true, };
+        public static readonly SortableColumn ASWColumn = new SortableColumn { Name = Resources.ShipCatalog_Column_ASW, KeySelector = x => x.ASW, DefaultIsDescending = true, };
+        public static readonly SortableColumn TimeToRepairColumn = new SortableColumn { Name = Resources.ShipCatalog_Column_TTR, KeySelector = x => x.TimeToRepair.Ticks, DefaultIsDescending = true, };
 
 		public static SortableColumn[] Columns { get; set; }
 
@@ -51,6 +52,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				LuckColumn,
 				HPColumn,
 				ViewRangeColumn,
+				ASWColumn,
 				TimeToRepairColumn,
 			};
 		}
