@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models.Raw;
@@ -94,13 +93,7 @@ namespace Grabacr07.KanColleWrapper.Models
 											   || this.Type == SlotItemType.水上爆撃機
 											   || this.Type == SlotItemType.水上戦闘機;
 
-		public bool IsNumerable => this.Type == SlotItemType.艦上偵察機
-								   || this.Type == SlotItemType.艦上戦闘機
-								   || this.Type == SlotItemType.艦上攻撃機
-								   || this.Type == SlotItemType.艦上爆撃機
-								   || this.Type == SlotItemType.水上偵察機
-								   || this.Type == SlotItemType.水上爆撃機
-								   || this.Type == SlotItemType.水上戦闘機;
+		public bool IsNumerable => this.Type.IsNumerable();
 
 		public SlotItemEquipType EquipType { get; }
 
@@ -120,12 +113,14 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#region static members
 
-	    public static SlotItemInfo Dummy { get; } = new SlotItemInfo(new kcsapi_mst_slotitem()
-		{
-		    api_id = 0,
-		    api_name = "？？？",
-		}, new MasterTable<SlotItemEquipType>());
+		public static SlotItemInfo Dummy { get; } = new SlotItemInfo(
+			new kcsapi_mst_slotitem()
+			{
+				api_id = 0,
+				api_name = "？？？",
+			},
+			new MasterTable<SlotItemEquipType>());
 
-	    #endregion
+		#endregion
 	}
 }

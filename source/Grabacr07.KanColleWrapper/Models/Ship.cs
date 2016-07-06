@@ -312,6 +312,8 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public int ViewRange => this.RawData.api_sakuteki.Get(0) ?? 0;
 
+		public int ASW => this.RawData.api_taisen.Get(0) ?? 0;
+
 		public LimitedValue AntiSub { get; private set; }
 
 		public LimitedValue Evasion { get; private set; }

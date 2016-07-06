@@ -1459,4 +1459,16 @@ Small Radar LoS × (1.00) + Large Radar LoS × (0.99) +
   <data name="ShipCatalog_Filter_Misc_ConditionBelow50" xml:space="preserve">
     <value>Below 50</value>
   </data>
+  <data name="Settings_Operation_LoS_UseFleets" xml:space="preserve">
+    <value>In a combined fleet setting, use these fleets to calculate LoS:</value>
+  </data>
+  <data name="Settings_Operation_LoS_UseFleets_Fleet1" xml:space="preserve">
+    <value>Fleet #1</value>
+  </data>
+  <data name="Settings_Operation_LoS_UseFleets_Fleet2" xml:space="preserve">
+    <value>Fleet #2</value>
+  </data>
+  <data name="ShipCatalog_Column_ASW_Tooltip" xml:space="preserve">
+    <value>Includes stat bonuses from the equipment</value>
+  </data>
 </root>

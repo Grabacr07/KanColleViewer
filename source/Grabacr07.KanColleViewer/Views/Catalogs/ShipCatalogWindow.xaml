@@ -877,6 +877,23 @@
 								</controls:CollapsibleGridViewColumn.CellTemplate>
 							</controls:CollapsibleGridViewColumn>
 
+							<!-- <GridViewColumn Width="45">
+								<GridViewColumn.Header>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.ASWColumn}">
+										<TextBlock Text="{Binding Resources.ShipCatalog_Column_ASW, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+												   ToolTip="{Binding Resources.ShipCatalog_Column_ASW_Tooltip, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+									</metro2:SortButton>
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding Ship.ASW, Mode=OneWay}"
+												   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+												   Margin="0,3" />
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn> -->
+
 							<GridViewColumn Width="{Binding ShipSallyAreaFilter.ColumnWidth}">
 								<GridViewColumn.Header>
 									<TextBlock Text="{Binding Resources.ShipCatalog_SortieWaters, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />

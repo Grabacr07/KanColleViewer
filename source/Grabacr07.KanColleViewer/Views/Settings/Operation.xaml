@@ -79,16 +79,16 @@
 					   Style="{DynamicResource DetailTextStyleKey}"/>
 
 
-			<TextBlock Text="連合艦隊時、以下の艦隊を索敵値計算の対象として使用する"
+			<TextBlock Text="{Binding Resources.Settings_Operation_LoS_UseFleets, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					   Margin="0,12,0,5"
 					   Visibility="{Binding SelectedViewRangeCalcType.HasCombinedSettings, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 			
 			<StackPanel Orientation="Horizontal"
 						Visibility="{Binding SelectedViewRangeCalcType.HasCombinedSettings, Converter={StaticResource BooleanToVisibilityConverter}}">
-				<CheckBox Content="第1艦隊"
+				<CheckBox Content="{Binding Resources.Settings_Operation_LoS_UseFleets_Fleet1, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.IsViewRangeCalcIncludeFirstFleet}, Path=Value}"
 						  Margin="0,0,20,0"/>
-				<CheckBox Content="第2艦隊"
+				<CheckBox Content="{Binding Resources.Settings_Operation_LoS_UseFleets_Fleet2, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.IsViewRangeCalcIncludeSecondFleet}, Path=Value}"/>
 			</StackPanel>
 

@@ -15,7 +15,7 @@
     <dependencies>
       <dependency id="Nekoxy" version="1.5.2" />
       <dependency id="Rx-Main" version="2.2.5" />
-      <dependency id="StatefulModel" version="0.5.0" />
+      <dependency id="StatefulModel" version="0.6.0" />
       <dependency id="MetroTrilithon" version="0.1.7" />
     </dependencies>
   </metadata>

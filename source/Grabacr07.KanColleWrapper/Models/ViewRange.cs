@@ -221,7 +221,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			var itemScore = ships
 				.SelectMany(x => x.EquippedItems)
 				.Select(x => x.Item)
-				.Sum(x => (x.Info.ViewRange + GetAdeptCoefficient(x)) * GetTypeCoefficient(x.Info.Type));
+				.Sum(x => (x.Info.ViewRange + GetLevelCoefficient(x)) * GetTypeCoefficient(x.Info.Type));
 
 			var shipScore = ships
 				.Select(x => x.ViewRange - x.EquippedItems.Sum(s => s.Item.Info.RawData.api_saku))
@@ -255,17 +255,17 @@ namespace Grabacr07.KanColleWrapper.Models
 			return new Ship[0];
 		}
 
-		private static double GetAdeptCoefficient(SlotItem item)
+		private static double GetLevelCoefficient(SlotItem item)
 		{
 			switch (item.Info.Type)
 			{
 				case SlotItemType.水上偵察機:
-					return Math.Sqrt(item.Adept) * 1.2;
+					return Math.Sqrt(item.Level) * 1.2;
 
 				case SlotItemType.小型電探:
 				case SlotItemType.大型電探:
 				case SlotItemType.大型電探_II:
-					return Math.Sqrt(item.Adept) * 1.25;
+					return Math.Sqrt(item.Level) * 1.25;
 
 				default:
 					return 0;

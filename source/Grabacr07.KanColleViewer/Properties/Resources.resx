@@ -1463,4 +1463,16 @@ HTTP プロトコルの通信は自動構成も含め「インターネット �
   <data name="ShipCatalog_Filter_Misc_ConditionBelow50" xml:space="preserve">
     <value>50 未満</value>
   </data>
+  <data name="Settings_Operation_LoS_UseFleets" xml:space="preserve">
+    <value>連合艦隊時、以下の艦隊を索敵値計算の対象として使用する</value>
+  </data>
+  <data name="Settings_Operation_LoS_UseFleets_Fleet1" xml:space="preserve">
+    <value>第1艦隊</value>
+  </data>
+  <data name="Settings_Operation_LoS_UseFleets_Fleet2" xml:space="preserve">
+    <value>第2艦隊</value>
+  </data>
+  <data name="ShipCatalog_Column_ASW_Tooltip" xml:space="preserve">
+    <value>装備によるステータス上昇を含んだ値です</value>
+  </data>
 </root>

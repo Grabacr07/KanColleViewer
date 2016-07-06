@@ -16,11 +16,11 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public string LevelText => this.Level >= 10 ? "★max" : this.Level >= 1 ? ("★+" + this.Level) : "";
 
-		public string NameWithLevel => $"{this.Info.Name}{(this.Level >= 1 ? (" " + this.LevelText) : "")}{(this.Adept >= 1 ? (" " + this.AdeptText) : "")}";
+		public string NameWithLevel => $"{this.Info.Name}{(this.Level >= 1 ? (" " + this.LevelText) : "")}{(this.Proficiency >= 1 ? (" " + this.ProficiencyText) : "")}";
 
-		public int Adept => this.RawData.api_alv;
+		public int Proficiency => this.RawData.api_alv;
 
-		public string AdeptText => this.Adept >= 1 ? (" (熟練度 " + this.Adept + ")") : "";
+		public string ProficiencyText => this.Proficiency >= 1 ? (" (熟練度 " + this.Proficiency + ")") : "";
 
 		internal SlotItem(kcsapi_slotitem rawData)
 			: base(rawData)
@@ -40,7 +40,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public override string ToString()
 		{
-			return $"ID = {this.Id}, Name = \"{this.Info.Name}\", Level = {this.Level}, Adapt = {this.Adept}";
+			return $"ID = {this.Id}, Name = \"{this.Info.Name}\", Level = {this.Level}, Proficiency = {this.Proficiency}";
 		}
 
 
