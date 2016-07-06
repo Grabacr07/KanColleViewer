@@ -2042,6 +2042,33 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 連合艦隊時、以下の艦隊を索敵値計算の対象として使用する.
+        /// </summary>
+        public static string Settings_Operation_LoS_UseFleets {
+            get {
+                return ResourceManager.GetString("Settings_Operation_LoS_UseFleets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 第1艦隊.
+        /// </summary>
+        public static string Settings_Operation_LoS_UseFleets_Fleet1 {
+            get {
+                return ResourceManager.GetString("Settings_Operation_LoS_UseFleets_Fleet1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 第2艦隊.
+        /// </summary>
+        public static string Settings_Operation_LoS_UseFleets_Fleet2 {
+            get {
+                return ResourceManager.GetString("Settings_Operation_LoS_UseFleets_Fleet2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 索敵値計算.
         /// </summary>
         public static string Settings_Operation_LoSCalculation {
@@ -2767,6 +2794,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string ShipCatalog_Column_ASW {
             get {
                 return ResourceManager.GetString("ShipCatalog_Column_ASW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 装備によるステータス上昇を含んだ値です.
+        /// </summary>
+        public static string ShipCatalog_Column_ASW_Tooltip {
+            get {
+                return ResourceManager.GetString("ShipCatalog_Column_ASW_Tooltip", resourceCulture);
             }
         }
         
