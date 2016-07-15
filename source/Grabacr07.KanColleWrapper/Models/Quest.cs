@@ -38,7 +38,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 任務の詳細を取得します。
 		/// </summary>
-		public string Detail => this.RawData.api_detail;
+		public string Detail => this.RawData.api_detail.Replace("<br>", Environment.NewLine);
 
 
 		public Quest(kcsapi_quest rawData) : base(rawData) { }
