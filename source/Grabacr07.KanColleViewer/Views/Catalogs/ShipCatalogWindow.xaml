@@ -957,7 +957,7 @@
 																<MultiBinding Converter="{StaticResource NameWithLevelConverter}">
 																	<Binding Path="Item.Info.Name" Mode="OneWay" />
 																	<Binding Path="Item.Level" Mode="OneWay" />
-																	<Binding Path="Item.Adept" Mode="OneWay" />
+																	<Binding Path="Item.Proficiency" Mode="OneWay" />
 																</MultiBinding>
 															</Border.ToolTip>
 															<Viewbox>
@@ -986,7 +986,7 @@
 														<MultiBinding Converter="{StaticResource NameWithLevelConverter}">
 															<Binding Path="Ship.ExSlot.Item.Info.Name" Mode="OneWay" />
 															<Binding Path="Ship.ExSlot.Item.Level" Mode="OneWay" />
-															<Binding Path="Ship.ExSlot.Item.Adept" Mode="OneWay" />
+															<Binding Path="Ship.ExSlot.Item.Proficiency" Mode="OneWay" />
 														</MultiBinding>
 													</Border.ToolTip>
 													<Viewbox>

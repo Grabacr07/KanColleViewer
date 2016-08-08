@@ -404,7 +404,7 @@
 													</Run>-->
 											</TextBlock>
 												<Viewbox Height="12pt">
-													<kcvc:AircraftProficiencyIcon Level="{Binding Path=Item.Adept, Mode=OneWay}" />
+													<kcvc:AircraftProficiencyIcon Level="{Binding Path=Item.Proficiency, Mode=OneWay}" />
 												</Viewbox>
 											</StackPanel>
 										</Grid>
