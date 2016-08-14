@@ -152,6 +152,8 @@
     <Compile Include="Models\AkashiTimer.cs" />
     <Compile Include="Models\BrowserZoomFactor.cs" />
     <Compile Include="Models\ExitConfirmationType.cs" />
+    <Compile Include="Models\ExpeditionPossible.cs" />
+    <Compile Include="Models\ExpeditionExtension.cs" />
     <Compile Include="Models\HQRecord.cs" />
     <Compile Include="Models\IZoomFactor.cs" />
     <Compile Include="Models\NotifierHost.cs" />
@@ -163,6 +165,7 @@
     <Compile Include="Models\RelayCommand.cs" />
     <Compile Include="Models\ResourceService.cs" />
     <Compile Include="Models\SallyArea.cs" />
+    <Compile Include="Models\Settings\ExpeditionSettings.cs" />
     <Compile Include="Models\Settings\GeneralSettings.cs" />
     <Compile Include="Models\Settings\KanColleSettings.cs" />
     <Compile Include="Models\Settings\KanColleWindowSettings.cs" />
