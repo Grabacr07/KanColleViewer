@@ -248,7 +248,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 				this.Progress = quest.Progress;
 				this.Title = WebUtility.HtmlDecode(quest.Title).Replace("<br>", Environment.NewLine);
 				this.Detail = WebUtility.HtmlDecode(quest.Detail).Replace("<br>", Environment.NewLine);
-                this.Page = quest.Page;
+                this.Page = quest.Page + 1;
 			}
 			
 		}
