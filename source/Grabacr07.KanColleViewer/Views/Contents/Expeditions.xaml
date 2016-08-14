@@ -176,7 +176,13 @@
 
                             <TextBlock x:Name="NotExcution"
                                        Grid.Row="3"
-                                       Text="원정나가있지않습니다."
+                                       Text="모항에서 대기중입니다."
+                                       Style="{DynamicResource EmphaticTextStyleKey}"
+                                       HorizontalAlignment="Center"
+                                       Visibility="Collapsed" />
+                            <TextBlock x:Name="InSortie"
+                                       Grid.Row="3"
+                                       Text="출격중입니다."
                                        Style="{DynamicResource EmphaticTextStyleKey}"
                                        HorizontalAlignment="Center"
                                        Visibility="Collapsed" />
@@ -210,7 +216,7 @@
                                                 Margin="8,0" />
                                     </StackPanel>
                                     <TextBlock x:Name="ExpeditionReturned"
-                                               Text="원정에서복귀했습니다."
+                                               Text="원정에서 복귀했습니다."
                                                Style="{DynamicResource EmphaticTextStyleKey}"
                                                HorizontalAlignment="Center"
                                                Visibility="Collapsed" />
@@ -223,8 +229,13 @@
                     <DataTemplate.Triggers>
                         <DataTrigger Binding="{Binding Expedition.IsInExecution}" Value="False">
                             <Setter TargetName="ExpeditionSelector" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="NotExcution" Property="Visibility" Value="Visible" />
                             <Setter TargetName="ExpeditionInfo" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="NotExcution" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="InSortie" Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsInSortie}" Value="True">
+                            <Setter TargetName="NotExcution" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="InSortie" Property="Visibility" Value="Visible" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Expedition.Returned}" Value="True">
                             <Setter TargetName="ExpeditionProgress" Property="Visibility" Value="Hidden" />

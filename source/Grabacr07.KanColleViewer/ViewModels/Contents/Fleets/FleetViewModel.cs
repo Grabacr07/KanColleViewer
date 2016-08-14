@@ -263,6 +263,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
             }
         }
 
+        // 출격 여부
+        public bool IsInSortie => (this.Source.State.Situation & FleetSituation.Sortie) == FleetSituation.Sortie;
+
         // 대성공 확률
         private int _GreatChance;
         public int GreatChance
@@ -366,6 +369,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
             this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet)
             {
                 { (sender,args) => this.ExpeditionId = this.ExpeditionId } // 재계산
+            });
+            // 출격 등 상태 변경
+            this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet.State)
+            {
+                { nameof(fleet.State.Situation), (sender, args) => this.RaisePropertyChanged(nameof(this.IsInSortie)) },
             });
         }
         /// <summary>
