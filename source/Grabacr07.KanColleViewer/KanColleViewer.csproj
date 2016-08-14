@@ -237,6 +237,7 @@
     <Compile Include="ViewModels\Catalogs\NeedNdockShipCatalogWindowViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\NotePadViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\RemodelListWindowViewModel.cs" />
+    <Compile Include="ViewModels\Catalogs\SlotItemEquipTypeViewModel.cs" />
     <Compile Include="ViewModels\Composition\LoadFailedPluginViewModel.cs" />
     <Compile Include="ViewModels\InformationWindowViewModel.cs" />
     <Compile Include="ViewModels\KanColleWindowViewModel.cs" />

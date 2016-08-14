@@ -1,6 +1,7 @@
 ﻿<metro:MetroWindow x:Class="Grabacr07.KanColleViewer.Views.Catalogs.SlotItemCatalogWindow"
 				   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 				   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:s="clr-namespace:System;assembly=mscorlib"
 				   xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 				   xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
 				   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -70,11 +71,202 @@
 
 		<DockPanel Grid.Row="1">
 			<Border DockPanel.Dock="Top"
-					Margin="8,8,8,0">
-				<metro2:CallMethodButton Content="새로고침"
+					Margin="8,8,8,0">				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="auto"></RowDefinition>
+						<RowDefinition Height="auto"></RowDefinition>
+					</Grid.RowDefinitions>
+					<Expander Grid.Row="0"
+					  Margin="8"
+					  IsExpanded="{Binding IsOpenFilterSettings, Mode=TwoWay}">
+						<Expander.Header>
+							<TextBlock Text="필터 설정"
+							   Style="{DynamicResource HeaderTextStyleKey}"
+							   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+						</Expander.Header>
+						<StackPanel>
+							<Border BorderThickness=".99"
+									BorderBrush="{DynamicResource BorderBrushKey}"
+									Padding="5"
+									Margin="0,8,0,0">
+								<Grid>
+									<Grid.RowDefinitions>
+										<RowDefinition Height="Auto" />
+										<RowDefinition Height="*" />
+										<RowDefinition Height="Auto" />
+									</Grid.RowDefinitions>
+									<WrapPanel Grid.Row="0">
+										<TextBlock Margin="0,2">
+										<Run Text="장비 종류" />
+										<Run Text=":" />
+										</TextBlock>
+
+										<CheckBox Content="전부 선택"
+												  IsChecked="{Binding CheckAllSlotItemEquipType, Mode=TwoWay}"
+												  Margin="0,2" />
+									</WrapPanel>
+									
+									<ItemsControl Grid.Row="1" ItemsSource="{Binding SlotItemEquipTypes}">
+										<ItemsControl.ItemsPanel>
+											<ItemsPanelTemplate>
+												<WrapPanel />
+											</ItemsPanelTemplate>
+										</ItemsControl.ItemsPanel>
+										<ItemsControl.ItemTemplate>
+											<DataTemplate>
+												<CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}"
+														  Margin="0,2,15,2">
+													<TextBlock Text="{Binding DisplayName, Mode=OneWay}" />
+												</CheckBox>
+											</DataTemplate>
+										</ItemsControl.ItemTemplate>
+									</ItemsControl>
+									<WrapPanel Grid.Row="2">
+										<WrapPanel.Resources>
+											<Style TargetType="{x:Type metro2:CallMethodButton}"
+										   BasedOn="{StaticResource {x:Type metro2:CallMethodButton}}">
+												<Setter Property="Padding"
+												Value="12,4" />
+												<Setter Property="Margin"
+												Value="0,5,5,0" />
+												<Setter Property="MethodName"
+												Value="SetSlotItemEquipType" />
+											</Style>
+										</WrapPanel.Resources>
+										<!-- これっきりボタン -->
+										<metro2:CallMethodButton Content="포">
+											<metro2:CallMethodButton.MethodParameter>
+												<x:Array Type="s:Int32">
+													<s:Int32>1</s:Int32>
+													<s:Int32>2</s:Int32>
+													<s:Int32>3</s:Int32>
+													<s:Int32>4</s:Int32>
+													<s:Int32>38</s:Int32>
+												</x:Array>
+											</metro2:CallMethodButton.MethodParameter>
+										</metro2:CallMethodButton>
+										<!-- これっきりボタン -->
+										<metro2:CallMethodButton Content="어뢰">
+											<metro2:CallMethodButton.MethodParameter>
+												<x:Array Type="s:Int32">
+													<s:Int32>5</s:Int32>
+													<s:Int32>32</s:Int32>
+												</x:Array>
+											</metro2:CallMethodButton.MethodParameter>
+										</metro2:CallMethodButton>
+										<!-- これっきりボタン -->
+										<metro2:CallMethodButton Content="전탐">
+											<metro2:CallMethodButton.MethodParameter>
+												<x:Array Type="s:Int32">
+													<s:Int32>12</s:Int32>
+													<s:Int32>13</s:Int32>
+													<s:Int32>93</s:Int32>
+												</x:Array>
+											</metro2:CallMethodButton.MethodParameter>
+										</metro2:CallMethodButton>
+										<!-- これっきりボタン -->
+										<metro2:CallMethodButton Content="함재기">
+											<metro2:CallMethodButton.MethodParameter>
+												<x:Array Type="s:Int32">
+													<s:Int32>6</s:Int32>
+													<s:Int32>7</s:Int32>
+													<s:Int32>8</s:Int32>
+													<s:Int32>9</s:Int32>
+													<s:Int32>94</s:Int32>
+												</x:Array>
+											</metro2:CallMethodButton.MethodParameter>
+										</metro2:CallMethodButton>
+										<!-- これっきりボタン -->
+										<metro2:CallMethodButton Content="강화탄">
+											<metro2:CallMethodButton.MethodParameter>
+												<x:Array Type="s:Int32">
+													<s:Int32>18</s:Int32>
+													<s:Int32>19</s:Int32>
+												</x:Array>
+											</metro2:CallMethodButton.MethodParameter>
+										</metro2:CallMethodButton>
+										<!-- これっきりボタン -->
+										<metro2:CallMethodButton Content="수상기">
+											<metro2:CallMethodButton.MethodParameter>
+												<x:Array Type="s:Int32">
+													<s:Int32>10</s:Int32>
+													<s:Int32>11</s:Int32>
+													<s:Int32>41</s:Int32>
+													<s:Int32>45</s:Int32>
+												</x:Array>
+											</metro2:CallMethodButton.MethodParameter>
+										</metro2:CallMethodButton>
+										<!-- これっきりボタン -->
+										<metro2:CallMethodButton Content="대공">
+											<metro2:CallMethodButton.MethodParameter>
+												<x:Array Type="s:Int32">
+													<s:Int32>21</s:Int32>
+													<s:Int32>36</s:Int32>
+												</x:Array>
+											</metro2:CallMethodButton.MethodParameter>
+										</metro2:CallMethodButton>
+										<!-- これっきりボタン -->
+										<metro2:CallMethodButton Content="대잠">
+											<metro2:CallMethodButton.MethodParameter>
+												<x:Array Type="s:Int32">
+													<s:Int32>14</s:Int32>
+													<s:Int32>15</s:Int32>
+													<s:Int32>25</s:Int32>
+													<s:Int32>26</s:Int32>
+													<s:Int32>40</s:Int32>
+												</x:Array>
+											</metro2:CallMethodButton.MethodParameter>
+										</metro2:CallMethodButton>
+										<!-- これっきりボタン -->
+										<metro2:CallMethodButton Content="추가장갑">
+											<metro2:CallMethodButton.MethodParameter>
+												<x:Array Type="s:Int32">
+													<s:Int32>16</s:Int32>
+													<s:Int32>27</s:Int32>
+													<s:Int32>28</s:Int32>
+												</x:Array>
+											</metro2:CallMethodButton.MethodParameter>
+										</metro2:CallMethodButton>
+										<!-- これっきりボタン -->
+                                        <metro2:CallMethodButton Content="탐조등・조명탄">
+											<metro2:CallMethodButton.MethodParameter>
+												<x:Array Type="s:Int32">
+													<s:Int32>29</s:Int32>
+													<s:Int32>33</s:Int32>
+													<s:Int32>42</s:Int32>
+												</x:Array>
+											</metro2:CallMethodButton.MethodParameter>
+										</metro2:CallMethodButton>
+										<!-- これっきりボタン -->
+										<metro2:CallMethodButton Content="주정・내화정">
+											<metro2:CallMethodButton.MethodParameter>
+												<x:Array Type="s:Int32">
+													<s:Int32>24</s:Int32>
+													<s:Int32>46</s:Int32>
+												</x:Array>
+											</metro2:CallMethodButton.MethodParameter>
+										</metro2:CallMethodButton>
+										<!-- これっきりボタン -->
+										<metro2:CallMethodButton Content="보강증설">
+											<metro2:CallMethodButton.MethodParameter>
+												<x:Array Type="s:Int32">
+													<s:Int32>23</s:Int32>
+													<s:Int32>43</s:Int32>
+													<s:Int32>44</s:Int32>
+												</x:Array>
+											</metro2:CallMethodButton.MethodParameter>
+										</metro2:CallMethodButton>
+									</WrapPanel>
+								</Grid>
+							</Border>
+						</StackPanel>
+					</Expander>
+					
+					<metro2:CallMethodButton Grid.Row="1" Content="새로고침"
 										 Padding="40,6"
 										 MethodName="Update"
 										 HorizontalAlignment="Left" />
+				</Grid>
 			</Border>
 
 			<Border BorderBrush="{DynamicResource BorderBrushKey}"

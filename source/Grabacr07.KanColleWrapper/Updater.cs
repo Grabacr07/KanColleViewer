@@ -17,6 +17,7 @@ namespace Grabacr07.KanColleWrapper
 		public bool ShipTypesUpdate { get; set; }
 		public bool ExpeditionUpdate { get; set; }
 		public bool RemodelUpdate { get; set; }
+        public bool EquipTypesUpdate { get; set; }
 		/// <summary>
 		/// 업데이트 상태를 구별한다.
 		/// bool값을 조정하며 이는 업데이트 후 바로 퀘스트 로드가 적용되지 않는 문제점을 자체 해결하기 위해 도입한것임.
@@ -51,6 +52,9 @@ namespace Grabacr07.KanColleWrapper
 					case TranslationType.RemodelSlots:
 						this.RemodelUpdate = true;
 						break;
+                    case TranslationType.EquipmentTypes:
+                        this.EquipTypesUpdate = true;
+                        break;
 				}
 			}
 		}
@@ -163,6 +167,11 @@ namespace Grabacr07.KanColleWrapper
 						Client.DownloadFile(BaseTranslationURL + "RemodelSlots.xml", Path.Combine(MainFolder, "Translations", "tmp", "RemodelSlots.xml"));
 						ReturnValue = XmlFileWizard(MainFolder, "RemodelSlots.xml", TranslationType.RemodelSlots);
 					}
+                    if (IsOnlineVersionGreater(TranslationType.EquipmentTypes, TranslationsRef.EquipmentTypesVersion))
+                    {
+                        Client.DownloadFile(BaseTranslationURL + "EquipmentTypes.xml", Path.Combine(MainFolder, "Translations", "tmp", "EquipmentTypes.xml"));
+                        ReturnValue = XmlFileWizard(MainFolder, "EquipmentTypes.xml", TranslationType.EquipmentTypes);
+                    }
 
 				}
 				catch
@@ -215,6 +224,8 @@ namespace Grabacr07.KanColleWrapper
 					return Versions.Where(x => x.Element("Name").Value.Equals("ShipTypes")).FirstOrDefault().Element(ElementName).Value;
 				case TranslationType.RemodelSlots:
 					return Versions.Where(x => x.Element("Name").Value.Equals("RemodelSlots")).FirstOrDefault().Element(ElementName).Value;
+                case TranslationType.EquipmentTypes:
+                    return Versions.Where(x => x.Element("Name").Value.Equals("EquipmentTypes")).FirstOrDefault().Element(ElementName).Value;
 			}
 			return "";
 		}
@@ -261,6 +272,8 @@ namespace Grabacr07.KanColleWrapper
 					return LocalVersion.CompareTo(new Version(Versions.Where(x => x.Element("Name").Value.Equals("ShipTypes")).FirstOrDefault().Element(ElementName).Value)) < 0;
 				case TranslationType.RemodelSlots:
 					return LocalVersion.CompareTo(new Version(Versions.Where(x => x.Element("Name").Value.Equals("RemodelSlots")).FirstOrDefault().Element(ElementName).Value)) < 0;
+                case TranslationType.EquipmentTypes:
+                    return LocalVersion.CompareTo(new Version(Versions.Where(x => x.Element("Name").Value.Equals("EquipmentTypes")).FirstOrDefault().Element(ElementName).Value)) < 0;
 			}
 
 			return false;
