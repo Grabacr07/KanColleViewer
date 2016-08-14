@@ -37,10 +37,10 @@
         </ScrollViewer>
 
         <ScrollViewer Grid.Row="1"
-                      Margin="5"
                       VerticalScrollBarVisibility="Auto"
                       PanningMode="Both">
-            <ItemsControl ItemsSource="{Binding Quests}">
+            <ItemsControl ItemsSource="{Binding Quests}"
+                          Margin="5">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="5,5,5,5">
