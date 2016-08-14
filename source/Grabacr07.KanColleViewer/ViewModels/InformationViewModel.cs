@@ -81,9 +81,28 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				RaisePropertyChanged();
 			}
 		}
-		#endregion
+        #endregion
 
-		public InformationViewModel()
+        #region AkashiTimer 변경 통지 프로퍼티
+
+        private AkashiTimerViewModel _AkashiTimer;
+
+        public AkashiTimerViewModel AkashiTimer
+        {
+            get { return this._AkashiTimer; }
+            set
+            {
+                if (this._AkashiTimer != value)
+                {
+                    this._AkashiTimer = value;
+                    this.RaisePropertyChanged();
+                }
+            }
+        }
+
+        #endregion
+
+        public InformationViewModel()
 		{
 			this.Settings = SettingsHost.Instance<KanColleWindowSettings>();
 			if (this.Settings?.Dock == Dock.Right || this.Settings?.Dock == Dock.Left || this.Settings?.IsSplit)
@@ -120,6 +139,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			this.Materials = new MaterialsViewModel().AddTo(this);
 			this.Ships = new ShipsViewModel().AddTo(this);
 			this.SlotItems = new SlotItemsViewModel().AddTo(this);
+
+			_AkashiTimer = new AkashiTimerViewModel();
 		}
 	}
 }
