@@ -6,6 +6,7 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+            xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
 			 xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
 			 xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
 			 xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
@@ -15,195 +16,245 @@
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 mc:Ignorable="d"
-			 d:DesignWidth="700"
+			 d:DesignWidth="600"
 			 d:DesignHeight="300"
 			 d:DataContext="{d:DesignInstance viewModels:QuestsViewModel}"
 			 Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}, Path=ActualWidth}">
-	<ScrollViewer VerticalScrollBarVisibility="Auto"
-				  PanningMode="Both">
-		<Grid>
-			<Grid Visibility="{Binding IsUntaken, Converter={StaticResource UniversalBooleanToVisibilityConverter}, ConverterParameter=Collapsed:Visible}">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="5*" />
-					<ColumnDefinition Width="Auto" />
-					<ColumnDefinition Width="4*" />
-				</Grid.ColumnDefinitions>
-				<Grid.RowDefinitions>
-					<RowDefinition />
-					<RowDefinition Height="Auto" />
-				</Grid.RowDefinitions>
 
-				<Grid>
-					<Grid.RowDefinitions>
-						<RowDefinition Height="Auto" />
-						<RowDefinition Height="*" />
-						<RowDefinition Height="Auto" />
-					</Grid.RowDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-					<TextBlock Text="{Binding Resources.Quests_CurrentQuestList, Source={x:Static models:ResourceService.Current}}"
-							   Style="{DynamicResource HeaderTextStyleKey}"
-							   Margin="10,0,10,10" />
+        <ScrollViewer Background="{DynamicResource ActiveBackgroundBrushKey}"
+                        VerticalScrollBarVisibility="Auto"
+                        PanningMode="Both"
+                        Grid.Column="1">
+            <metro:HorizontalTabView ItemsSource="{Binding TabItems}"
+                                        SelectedValue="{Binding SelectedItem}" />
+        </ScrollViewer>
 
-					<ItemsControl Grid.Row="1"
-								  ItemsSource="{Binding Current}"
-								  Margin="10,0">
-						<ItemsControl.ItemTemplate>
-							<DataTemplate>
-								<kcvc:Quest IsUntaken="{Binding IsUntaken}"
-											Title="{Binding Title}"
-											Detail="{Binding Detail}"
-											Category="{Binding Category}"
-											Progress="{Binding Progress}"
-											State="{Binding State}"
-											IsDetailView="True"
-											Margin="0,0,0,12" />
-							</DataTemplate>
-						</ItemsControl.ItemTemplate>
-					</ItemsControl>
+        <ScrollViewer Grid.Row="1"
+                      Margin="5"
+                      VerticalScrollBarVisibility="Auto"
+                      PanningMode="Both">
+            <ItemsControl ItemsSource="{Binding Quests}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="5,5,5,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
 
-					<TextBlock Grid.Row="1"
-							   Text="발생중인 임무가 없습니다"
-							   HorizontalAlignment="Center"
-							   Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}"
-							   Margin="10" />
-				</Grid>
+                            <Rectangle x:Name="Category"
+                                        Margin="0,0,10,0"
+                                        Width="14" Height="14"
+                                        Fill="Gray"
+                                        VerticalAlignment="Center" />
 
-				<Rectangle Grid.Row="0"
-						   Grid.Column="1"
-						   Width="0.99"
-						   Margin="0,3"
-						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+                            <TextBlock x:Name="Type"
+                                        Grid.Row="1"
+                                        Margin="0,0,10,0"
+                                        Width="14" Height="14"
+                                        LineStackingStrategy="BlockLineHeight"
+                                        LineHeight="14"
+                                        Background="Gray"
+                                        Foreground="Black"
+                                        FontSize="11"
+                                        TextAlignment="Center"
+                                        VerticalAlignment="Top" />
 
-				<TabControl Grid.Row="0"
-							Grid.Column="2">
-					<TabControl.Template>
-						<ControlTemplate TargetType="{x:Type TabControl}">
-							<Grid>
-								<Grid.RowDefinitions>
-									<RowDefinition Height="Auto" />
-									<RowDefinition Height="*" />
-								</Grid.RowDefinitions>
-								<WrapPanel IsItemsHost="True" />
-								<ContentPresenter x:Name="PART_SelectedContentHost"
-												  Grid.Row="1"
-												  ContentSource="SelectedContent" />
-							</Grid>
-						</ControlTemplate>
-					</TabControl.Template>
-					<TabControl.Resources>
-						<Style TargetType="{x:Type TabItem}">
-							<Setter Property="OverridesDefaultStyle"
-									Value="True" />
-							<Setter Property="Foreground"
-									Value="{DynamicResource InactiveForegroundBrushKey}" />
-							<Setter Property="Template">
-								<Setter.Value>
-									<ControlTemplate TargetType="{x:Type TabItem}">
-										<Border x:Name="Border"
-												Background="Transparent">
-											<ContentPresenter x:Name="ContentSite"
-															  ContentSource="Header" />
-										</Border>
-										<ControlTemplate.Triggers>
-											<Trigger Property="IsSelected"
-													 Value="True">
-												<Setter Property="Foreground"
-														Value="{DynamicResource ForegroundBrushKey}" />
-											</Trigger>
-											<Trigger SourceName="Border"
-													 Property="IsMouseOver"
-													 Value="True">
-												<Setter Property="Foreground"
-														Value="{DynamicResource AccentHighlightBrushKey}" />
-											</Trigger>
-										</ControlTemplate.Triggers>
-									</ControlTemplate>
-								</Setter.Value>
-							</Setter>
-						</Style>
 
-						<Style TargetType="{x:Type ItemsControl}">
-							<Setter Property="Margin"
-									Value="10,0,10,5" />
-							<Setter Property="ItemTemplate">
-								<Setter.Value>
-									<DataTemplate DataType="{x:Type viewModels:QuestViewModel}">
-										<ToggleButton>
-											<ToggleButton.Template>
-												<ControlTemplate TargetType="{x:Type ToggleButton}">
-													<kcvc:Quest IsUntaken="{Binding IsUntaken}"
-																Title="{Binding Title}"
-																Detail="{Binding Detail}"
-																Category="{Binding Category}"
-																Progress="{Binding Progress}"
-																State="{Binding State}"
-																IsDetailView="{TemplateBinding IsChecked}"
-																Margin="0,0,0,10" />
-												</ControlTemplate>
-											</ToggleButton.Template>
-										</ToggleButton>
-									</DataTemplate>
-								</Setter.Value>
-							</Setter>
-						</Style>
+                            <TextBlock Grid.Column="1"
+                                        Margin="0,0,5,0"
+                                        Text="{Binding Title, Mode=OneWay}"
+                                        Style="{DynamicResource EmphaticTextStyleKey}" />
 
-						<views:QuestViewSource x:Key="DailyQuestSourceKey"
-											   Source="{Binding Quests}"
-											   Type="Daily" />
-						<views:QuestViewSource x:Key="WeeklyQuestSourceKey"
-											   Source="{Binding Quests}"
-											   Type="Weekly" />
-                        <views:QuestViewSource x:Key="MonthlyQuestSourceKey"
-											   Source="{Binding Quests}"
-											   Type="Monthly" />
-                    </TabControl.Resources>
+                            <TextBlock x:Name="StateText"
+                                        Grid.Column="2"
+                                        Margin="0,0,5,0"
+                                        Background="Transparent"
+                                        Text="{Binding StateText, Mode=OneWay}"
+                                        FontSize="12"
+                                        Style="{DynamicResource EmphaticTextStyleKey}" />
 
-					<TabItem>
-						<TabItem.Header>
-							<TextBlock Text="{Binding Resources.Quests_Daily, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-									   Style="{DynamicResource HeaderTextStyleKey}"
-									   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
-									   Margin="10,0,10,10" />
-						</TabItem.Header>
-						<ItemsControl ItemsSource="{Binding Source={StaticResource DailyQuestSourceKey}}" />
-					</TabItem>
+                            <TextBlock x:Name="TakenText"
+                                        Grid.Column="3"
+                                        Margin="0,0,5,0"
+                                        Padding="4,0"
+                                        Background="#FFFF8020"
+                                        Text="진행중"
+                                        FontSize="12"
+                                        Style="{DynamicResource EmphaticTextStyleKey}" />
 
-					<TabItem>
-						<TabItem.Header>
-							<TextBlock Text="{Binding Resources.Quests_Weekly, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-									   Style="{DynamicResource HeaderTextStyleKey}"
-									   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
-									   Margin="10,0,10,10" />
-						</TabItem.Header>
-						<ItemsControl ItemsSource="{Binding Source={StaticResource WeeklyQuestSourceKey}}" />
-					</TabItem>
-					
-                    <TabItem>
-                        <TabItem.Header>
-                            <TextBlock Text="월간임무"
-								   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Foreground}"
-								   Margin="10,0,10,10"
-								   FontSize="14" />
-                        </TabItem.Header>
-                        <ItemsControl ItemsSource="{Binding Source={StaticResource MonthlyQuestSourceKey}}" />
-                    </TabItem>
-                </TabControl>
 
-				<TextBlock Grid.Row="1"
-						   Grid.Column="0"
-						   Grid.ColumnSpan="3"
-						   Text="{Binding Resources.Quests_Notice, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-						   Style="{DynamicResource DetailTextStyleKey}"
-						   Margin="10" />
-			</Grid>
+                            <Grid x:Name="QuestTracker"
+                                    Grid.Column="4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
 
-			<TextBlock Grid.ColumnSpan="3"
-					   Text="{Binding Resources.Quests_Untaken, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-					   Style="{DynamicResource EmphaticTextStyleKey}"
-					   FontSize="16"
-					   Visibility="{Binding IsUntaken, Converter={StaticResource BooleanToVisibilityConverter}}"
-					   HorizontalAlignment="Center"
-					   Margin="20,40" />
-		</Grid>
-	</ScrollViewer>
+                                <TextBlock Text="{Binding QuestIdText, Mode=OneWay}"
+                                            Margin="0,0,10,0"
+                                            Style="{DynamicResource EmphaticTextStyleKey}"
+                                            TextAlignment="Left"
+                                            FontSize="10" />
+
+                                <TextBlock Grid.Column="1"
+                                            Text="{Binding QuestProgressText, Mode=OneWay}"
+                                            Style="{DynamicResource EmphaticTextStyleKey}"
+                                            TextAlignment="Right"
+                                            FontSize="10" />
+
+                                <ProgressBar x:Name="QuestProgressBar"
+                                                Grid.Row="1"
+                                                Grid.ColumnSpan="2"
+                                                Margin="0,3,0,0"
+                                                VerticalAlignment="Center"
+                                                Value="{Binding QuestProgressValue, Mode=OneWay}"
+                                                Foreground="#FF39B74E"
+                                                BorderThickness="0"
+                                                Height="3" />
+                            </Grid>
+
+                            <TextBlock Grid.Row="1"
+                                        Grid.Column="1"
+                                        Grid.ColumnSpan="4"
+                                        Text="{Binding Detail, Mode=OneWay}"
+                                        Style="{DynamicResource DetailTextStyleKey}" />
+
+                            <Grid Grid.Row="2"
+                                    Grid.ColumnSpan="5"
+                                    Margin="0,10,0,0"
+                                    Visibility="{Binding LastOnPage, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="{Binding Page, StringFormat={}{0} Page}"
+                                            Style="{DynamicResource EmphaticTextStyleKey}"
+                                            Margin="0,0,5,0"
+                                            FontSize="10" />
+
+                                <Rectangle Grid.Column="1"
+                                            Height="1"
+                                            Margin="0,2,0,0"
+                                            Fill="#606060" />
+                            </Grid>
+                        </Grid>
+
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding QuestTrackingVisible}" Value="False">
+                                <Setter TargetName="QuestTracker" Property="Visibility" Value="Hidden" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding QuestProgressValue}" Value="100">
+                                <Setter TargetName="QuestProgressBar" Property="Foreground" Value="#FF62B5F5" />
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding State}" Value="None">
+                                <Setter TargetName="TakenText" Property="Visibility" Value="Hidden" />
+                                <Setter TargetName="QuestProgressBar" Property="Foreground" Value="#FF787878" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Progress}" Value="Progress80">
+                                <Setter TargetName="StateText" Property="Background" Value="#FF206040" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Progress}" Value="Progress50">
+                                <Setter TargetName="StateText" Property="Background" Value="#FF208040" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding State}" Value="Accomplished">
+                                <Setter TargetName="StateText" Property="Background" Value="#FF326480" />
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding Category}" Value="Composition">
+                                <Setter TargetName="Category" Property="Fill" Value="#FF2A7D46" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Category}" Value="Sortie">
+                                <Setter TargetName="Category" Property="Fill" Value="#FFB53B36" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Category}" Value="Expeditions">
+                                <Setter TargetName="Category" Property="Fill" Value="#FF3BA09D" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Category}" Value="Practice">
+                                <Setter TargetName="Category" Property="Fill" Value="#FF8DC660" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Category}" Value="Supply">
+                                <Setter TargetName="Category" Property="Fill" Value="#FFB2932E" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Category}" Value="Building">
+                                <Setter TargetName="Category" Property="Fill" Value="#FF64443B" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Category}" Value="Remodelling">
+                                <Setter TargetName="Category" Property="Fill" Value="#FFA987BA" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Category}" Value="Sortie2">
+                                <Setter TargetName="Category" Property="Fill" Value="#FFB53B36" />
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding Type}" Value="Daily">
+                                <Setter TargetName="Type" Property="Background" Value="#FF62B5F5" />
+                                <Setter TargetName="Type" Property="Text" Value="日" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Type}" Value="Weekly">
+                                <Setter TargetName="Type" Property="Background" Value="#FF7ECCD8" />
+                                <Setter TargetName="Type" Property="Text" Value="週" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Type}" Value="Monthly">
+                                <Setter TargetName="Type" Property="Background" Value="#FF79C181" />
+                                <Setter TargetName="Type" Property="Text" Value="月" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Type}" Value="OneTime">
+                                <Setter TargetName="Type" Property="Background" Value="#FFFDC313" />
+                                <Setter TargetName="Type" Property="Text" Value="単" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Type}" Value="Other">
+                                <Setter TargetName="Type" Property="Background" Value="#FFEE9103" />
+                                <Setter TargetName="Type" Property="Text" Value="他" />
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <TextBlock Grid.Row="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    Text="※진행상태 (50 %, 80 %) 는 게임내의 표시와 동일합니다."
+                    Style="{DynamicResource DetailTextStyleKey}"
+                    Margin="10" />
+        
+        <TextBlock Grid.Row="1"
+                    Text="발생중인 임무가 없습니다."
+                    Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
+                    Style="{DynamicResource EmphaticTextStyleKey}"
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Row="1"
+                   Text="{Binding Resources.Quests_Untaken, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+                   Style="{DynamicResource EmphaticTextStyleKey}"
+                   FontSize="16"
+                   Margin="20,40"
+                   Visibility="{Binding IsUntaken, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+    </Grid>
 </UserControl>

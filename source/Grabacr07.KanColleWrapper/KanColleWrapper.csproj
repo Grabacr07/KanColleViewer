@@ -135,7 +135,17 @@
     <Compile Include="Models\ConditionRejuvenatedEventArgs.cs" />
     <Compile Include="Models\CreatedSlotItem.cs" />
     <Compile Include="Models\FleetCondition.cs" />
+    <Compile Include="Models\QuestNameTable.cs" />
+    <Compile Include="Models\Raw\kcsapi_battle_midnight_battle.cs" />
+    <Compile Include="Models\Raw\kcsapi_battle_midnight_sp_midnight.cs" />
+    <Compile Include="Models\Raw\kcsapi_data_airbaseattack.cs" />
+    <Compile Include="Models\Raw\kcsapi_data_enemyinfo.cs" />
+    <Compile Include="Models\Raw\kcsapi_data_hougeki.cs" />
+    <Compile Include="Models\Raw\kcsapi_data_kouku.cs" />
+    <Compile Include="Models\Raw\kcsapi_data_raigeki.cs" />
+    <Compile Include="Models\Raw\kcsapi_data_support_info.cs" />
     <Compile Include="Models\Raw\kcsapi_mst_mapcell.cs" />
+    <Compile Include="Models\Raw\kcsapi_practice_result.cs" />
     <Compile Include="Models\Raw\kcsapi_require_info.cs" />
     <Compile Include="Models\Raw\kcsapi_ship_deck.cs" />
     <Compile Include="Models\Raw\kcsapi_mst_maparea.cs" />
@@ -157,6 +167,7 @@
     <Compile Include="Models\Raw\kcsapi_remodel_slotlist_detail.cs" />
     <Compile Include="Models\Raw\kcsapi_slot_deprive.cs" />
     <Compile Include="Models\Raw\kcsapi_slot_exchange_index.cs" />
+    <Compile Include="Models\Raw\kcsapi_sortie_battle.cs" />
     <Compile Include="Models\ShipSituation.cs" />
     <Compile Include="Models\ShipSlot.cs" />
     <Compile Include="Models\SlotItemEquipType.cs" />
