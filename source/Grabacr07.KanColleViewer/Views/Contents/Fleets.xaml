@@ -234,12 +234,14 @@
 														 Width="55"
 														 LimitedValue="{Binding Ship.Fuel, Mode=OneWay}"
 														 Height="6"
+                                                         Columns="5"
 														 Margin="0,6,0,7" />
 									<kcvc:ColorIndicator Grid.Column="6"
 														 Grid.Row="1"
 														 Width="55"
 														 LimitedValue="{Binding Ship.Bull, Mode=OneWay}"
 														 Height="6"
+                                                         Columns="5"
 														 VerticalAlignment="Top" />
 
 									<ItemsControl Grid.Column="7"
