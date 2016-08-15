@@ -125,12 +125,9 @@
 										<WrapPanel.Resources>
 											<Style TargetType="{x:Type metro2:CallMethodButton}"
 										   BasedOn="{StaticResource {x:Type metro2:CallMethodButton}}">
-												<Setter Property="Padding"
-												Value="12,4" />
-												<Setter Property="Margin"
-												Value="0,5,5,0" />
-												<Setter Property="MethodName"
-												Value="SetSlotItemEquipType" />
+												<Setter Property="Padding" Value="12,4" />
+												<Setter Property="Margin" Value="0,5,5,0" />
+												<Setter Property="MethodName" Value="SetSlotItemEquipType" />
 											</Style>
 										</WrapPanel.Resources>
 										<!-- これっきりボタン -->
@@ -141,7 +138,6 @@
 													<s:Int32>2</s:Int32>
 													<s:Int32>3</s:Int32>
 													<s:Int32>4</s:Int32>
-													<s:Int32>38</s:Int32>
 												</x:Array>
 											</metro2:CallMethodButton.MethodParameter>
 										</metro2:CallMethodButton>
@@ -150,7 +146,6 @@
 											<metro2:CallMethodButton.MethodParameter>
 												<x:Array Type="s:Int32">
 													<s:Int32>5</s:Int32>
-													<s:Int32>32</s:Int32>
 												</x:Array>
 											</metro2:CallMethodButton.MethodParameter>
 										</metro2:CallMethodButton>
@@ -158,9 +153,7 @@
 										<metro2:CallMethodButton Content="전탐">
 											<metro2:CallMethodButton.MethodParameter>
 												<x:Array Type="s:Int32">
-													<s:Int32>12</s:Int32>
-													<s:Int32>13</s:Int32>
-													<s:Int32>93</s:Int32>
+													<s:Int32>11</s:Int32>
 												</x:Array>
 											</metro2:CallMethodButton.MethodParameter>
 										</metro2:CallMethodButton>
@@ -172,12 +165,11 @@
 													<s:Int32>7</s:Int32>
 													<s:Int32>8</s:Int32>
 													<s:Int32>9</s:Int32>
-													<s:Int32>94</s:Int32>
 												</x:Array>
 											</metro2:CallMethodButton.MethodParameter>
 										</metro2:CallMethodButton>
 										<!-- これっきりボタン -->
-										<metro2:CallMethodButton Content="강화탄">
+										<metro2:CallMethodButton Content="탄">
 											<metro2:CallMethodButton.MethodParameter>
 												<x:Array Type="s:Int32">
 													<s:Int32>18</s:Int32>
@@ -190,9 +182,6 @@
 											<metro2:CallMethodButton.MethodParameter>
 												<x:Array Type="s:Int32">
 													<s:Int32>10</s:Int32>
-													<s:Int32>11</s:Int32>
-													<s:Int32>41</s:Int32>
-													<s:Int32>45</s:Int32>
 												</x:Array>
 											</metro2:CallMethodButton.MethodParameter>
 										</metro2:CallMethodButton>
@@ -200,8 +189,9 @@
 										<metro2:CallMethodButton Content="대공">
 											<metro2:CallMethodButton.MethodParameter>
 												<x:Array Type="s:Int32">
-													<s:Int32>21</s:Int32>
-													<s:Int32>36</s:Int32>
+													<s:Int32>15</s:Int32>
+													<s:Int32>16</s:Int32>
+													<s:Int32>30</s:Int32>
 												</x:Array>
 											</metro2:CallMethodButton.MethodParameter>
 										</metro2:CallMethodButton>
@@ -209,21 +199,18 @@
 										<metro2:CallMethodButton Content="대잠">
 											<metro2:CallMethodButton.MethodParameter>
 												<x:Array Type="s:Int32">
-													<s:Int32>14</s:Int32>
-													<s:Int32>15</s:Int32>
-													<s:Int32>25</s:Int32>
-													<s:Int32>26</s:Int32>
-													<s:Int32>40</s:Int32>
+                                                    <s:Int32>17</s:Int32>
+													<s:Int32>18</s:Int32>
+													<s:Int32>21</s:Int32>
+													<s:Int32>22</s:Int32>
 												</x:Array>
 											</metro2:CallMethodButton.MethodParameter>
 										</metro2:CallMethodButton>
 										<!-- これっきりボタン -->
-										<metro2:CallMethodButton Content="추가장갑">
+										<metro2:CallMethodButton Content="벌지">
 											<metro2:CallMethodButton.MethodParameter>
 												<x:Array Type="s:Int32">
-													<s:Int32>16</s:Int32>
-													<s:Int32>27</s:Int32>
-													<s:Int32>28</s:Int32>
+													<s:Int32>23</s:Int32>
 												</x:Array>
 											</metro2:CallMethodButton.MethodParameter>
 										</metro2:CallMethodButton>
@@ -231,9 +218,8 @@
                                         <metro2:CallMethodButton Content="탐조등・조명탄">
 											<metro2:CallMethodButton.MethodParameter>
 												<x:Array Type="s:Int32">
-													<s:Int32>29</s:Int32>
-													<s:Int32>33</s:Int32>
-													<s:Int32>42</s:Int32>
+													<s:Int32>24</s:Int32>
+													<s:Int32>27</s:Int32>
 												</x:Array>
 											</metro2:CallMethodButton.MethodParameter>
 										</metro2:CallMethodButton>
@@ -241,8 +227,7 @@
 										<metro2:CallMethodButton Content="주정・내화정">
 											<metro2:CallMethodButton.MethodParameter>
 												<x:Array Type="s:Int32">
-													<s:Int32>24</s:Int32>
-													<s:Int32>46</s:Int32>
+													<s:Int32>20</s:Int32>
 												</x:Array>
 											</metro2:CallMethodButton.MethodParameter>
 										</metro2:CallMethodButton>
@@ -250,9 +235,9 @@
 										<metro2:CallMethodButton Content="보강증설">
 											<metro2:CallMethodButton.MethodParameter>
 												<x:Array Type="s:Int32">
-													<s:Int32>23</s:Int32>
-													<s:Int32>43</s:Int32>
-													<s:Int32>44</s:Int32>
+													<s:Int32>14</s:Int32>
+													<s:Int32>34</s:Int32>
+													<s:Int32>35</s:Int32>
 												</x:Array>
 											</metro2:CallMethodButton.MethodParameter>
 										</metro2:CallMethodButton>
