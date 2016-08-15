@@ -149,7 +149,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				.AddTo(this);
 			if (this.Settings?.Dock == Dock.Right
 				|| this.Settings?.Dock == Dock.Left
-				|| this.Settings?.IsSplit)
+				|| this.Settings?.IsSplit
+                || this.Settings?.AlwaysTopView)
 			{
 				this.TopView = Visibility.Visible;
 				this.BottomView = Visibility.Collapsed;

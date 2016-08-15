@@ -40,6 +40,25 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 			}
 		}
 
+        #endregion
+
+        #region AlwaysTopView 変更通知プロパティ
+
+        private bool _AlwaysTopView;
+
+		public bool AlwaysTopView
+        {
+			get { return this._AlwaysTopView; }
+			set
+			{
+				if (this._AlwaysTopView != value)
+				{
+					this._AlwaysTopView = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
 		#endregion
 
 		#region Dock 変更通知プロパティ
@@ -94,6 +113,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 		{
 			this.settings = SettingsHost.Instance<KanColleWindowSettings>();
 			this.settings?.IsSplit.Subscribe(x => this.IsSplit = x).AddTo(this);
+            this.settings?.AlwaysTopView.Subscribe(x => this.AlwaysTopView = x).AddTo(this);
 			this.settings?.Dock.Subscribe(x => this.Dock = x).AddTo(this);
 		}
 
@@ -107,7 +127,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 			if (this.settings != null)
 			{
 				this.settings.IsSplit.Value = this.IsSplit;
-				this.settings.Dock.Value = this.Dock;
+                this.settings.AlwaysTopView.Value = this.AlwaysTopView;
+                this.settings.Dock.Value = this.Dock;
 				try
 				{
 					if (WindowService.Current != null)
@@ -138,6 +159,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 			if (this.settings != null)
 			{
 				this.IsSplit = this.settings.IsSplit;
+                this.AlwaysTopView = this.settings.AlwaysTopView;
 				this.Dock = this.settings.Dock;
 			}
 		}
