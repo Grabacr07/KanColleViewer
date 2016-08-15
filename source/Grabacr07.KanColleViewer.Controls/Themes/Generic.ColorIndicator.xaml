@@ -22,10 +22,11 @@
 								HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
 
                         <UniformGrid x:Name="StepGrid" Columns="4">
-                            <Rectangle Grid.Column="0" HorizontalAlignment="Right" Width="1" Fill="{DynamicResource BackgroundBrushKey}" />
-                            <Rectangle Grid.Column="1" HorizontalAlignment="Right" Width="1" Fill="{DynamicResource BackgroundBrushKey}" />
-                            <Rectangle Grid.Column="2" HorizontalAlignment="Right" Width="1" Fill="{DynamicResource BackgroundBrushKey}" />
-                            <Rectangle x:Name="Fifth_Line" Grid.Column="3" HorizontalAlignment="Right" Width="1" Fill="{DynamicResource BackgroundBrushKey}" Visibility="Collapsed" />
+                            <Rectangle Grid.Column="0" />
+                            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Width="1" Fill="{DynamicResource BackgroundBrushKey}" />
+                            <Rectangle Grid.Column="2" HorizontalAlignment="Left" Width="1" Fill="{DynamicResource BackgroundBrushKey}" />
+                            <Rectangle Grid.Column="3" HorizontalAlignment="Left" Width="1" Fill="{DynamicResource BackgroundBrushKey}" />
+                            <Rectangle x:Name="Fifth_Line" Grid.Column="4" HorizontalAlignment="Left" Width="1" Fill="{DynamicResource BackgroundBrushKey}" Visibility="Collapsed" />
                         </UniformGrid>
                     </Grid>
                     
