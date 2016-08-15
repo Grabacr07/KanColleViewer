@@ -19,6 +19,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			protected set { throw new NotImplementedException(); }
 		}
 
+        public QuestViewModel[] Current => ComputeQuestPage(this._Quests.Where(x => x.State != QuestState.None).ToArray());
+
 		#region Quests 変更通知プロパティ
 
 		private QuestViewModel[] _Quests;
@@ -62,6 +64,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 				{
 					this._Quests = value;
 					this.RaisePropertyChanged();
+                    this.RaisePropertyChanged("Current");
 				}
 			}
 		}
