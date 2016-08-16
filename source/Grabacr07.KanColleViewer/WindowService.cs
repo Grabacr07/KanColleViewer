@@ -52,7 +52,12 @@ namespace Grabacr07.KanColleViewer
 			if (this.currentMode == WindowServiceMode.NotStarted) return;
 			if (this.kanColleWindow == null) return;
 			KanColleWindowSettings settings = SettingsHost.Instance<KanColleWindowSettings>();
-			if (!settings.IsSplit)//분할모드가 아닌경우
+            if (settings.AlwaysTopView) // 항상 탑 뷰인 경우
+            {
+                this.kanColleWindow.TopView = Visibility.Visible;
+                this.kanColleWindow.BottomView = Visibility.Collapsed;
+            }
+            else if (!settings.IsSplit) // 분할모드가 아닌경우
 			{
 				if (settings?.Dock == Dock.Right || settings?.Dock == Dock.Left)
 				{

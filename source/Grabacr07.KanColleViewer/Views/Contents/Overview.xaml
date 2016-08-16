@@ -528,6 +528,11 @@
 											<ColumnDefinition Width="Auto" />
 											<ColumnDefinition Width="*" />
 										</Grid.ColumnDefinitions>
+										<Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto "/>
+                                            <RowDefinition Height="Auto "/>
+                                        </Grid.RowDefinitions>
+
 										<Rectangle Width="10"
 												   Height="10"
 												   VerticalAlignment="Center">
@@ -540,9 +545,26 @@
 												   Text="{Binding Title, Mode=OneWay}"
 												   Style="{DynamicResource DefaultTextStyleKey}"
 												   Margin="4,0,0,0" />
-									</Grid>
+
+                                        <ProgressBar x:Name="QuestProgressBar"
+                                                Grid.Row="1"
+                                                Grid.ColumnSpan="2"
+                                                Margin="0,3,0,0"
+                                                VerticalAlignment="Center"
+                                                Value="{Binding QuestProgressValue, Mode=OneWay}"
+                                                Foreground="#FF39B74E"
+                                                BorderThickness="0"
+                                                Height="2" />
+                                    </Grid>
 									<DataTemplate.Triggers>
-										<DataTrigger Binding="{Binding IsUntaken}"
+                                        <DataTrigger Binding="{Binding QuestTrackingVisible}" Value="False">
+                                            <Setter TargetName="QuestProgressBar" Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding QuestProgressValue}" Value="100">
+                                            <Setter TargetName="QuestProgressBar" Property="Foreground" Value="#FF62B5F5" />
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding IsUntaken}"
 													 Value="True">
 											<Setter TargetName="Title"
 													Property="Text"

@@ -118,7 +118,10 @@
 					   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 			<StackPanel HorizontalAlignment="Left">
-				<UniformGrid Rows="1"
+                <CheckBox Margin="0,0,0,8"
+                          Content="레이아웃과 상관 없이 정보 영역을 항상 위쪽에 배치하기"
+                          IsChecked="{Binding AlwaysTopView, Mode=TwoWay}" />
+                <UniformGrid Rows="1"
 							 Margin="16,0,0,5">
 					<UniformGrid.Resources>
 						<Style x:Key="LayoutButtonStyleKey"

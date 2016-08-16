@@ -86,7 +86,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 				ships = org.Fleets.Values
 					.Where(x => x.IsInSortie)
 					.SelectMany(x => x.Ships)
-					.Where(x => !x.Situation.HasFlag(ShipSituation.Tow) && x.Situation.HasFlag(ShipSituation.Evacuation))
+					.Where(x => !x.Situation.HasFlag(ShipSituation.Tow) && !x.Situation.HasFlag(ShipSituation.Evacuation))
 					.ToArray();
 			}
 			else

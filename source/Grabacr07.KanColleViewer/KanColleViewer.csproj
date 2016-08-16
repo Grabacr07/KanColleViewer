@@ -82,6 +82,9 @@
       <HintPath>..\packages\LivetCask.1.3.1.0\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference> 
     <Reference Include="Nekoxy, Version=1.5.2.20, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Nekoxy.1.5.2.20\lib\net45\Nekoxy.dll</HintPath>
       <Private>True</Private>
@@ -151,7 +154,10 @@
     <Compile Include="Composition\PluginMetadata.cs" />
     <Compile Include="Models\AkashiTimer.cs" />
     <Compile Include="Models\BrowserZoomFactor.cs" />
+    <Compile Include="Models\CSV.cs" />
     <Compile Include="Models\ExitConfirmationType.cs" />
+    <Compile Include="Models\ExpeditionPossible.cs" />
+    <Compile Include="Models\ExpeditionExtension.cs" />
     <Compile Include="Models\HQRecord.cs" />
     <Compile Include="Models\IZoomFactor.cs" />
     <Compile Include="Models\NotifierHost.cs" />
@@ -160,9 +166,60 @@
     <Compile Include="Models\Helper.cs" />
     <Compile Include="Models\ProxyBootstrapper.cs" />
     <Compile Include="Models\Migration\_ProxySettings.cs" />
+    <Compile Include="Models\QuestTracker\EventArgs\BattleResultEventArgs.cs" />
+    <Compile Include="Models\QuestTracker\EventArgs\MissionResultEventArgs.cs" />
+    <Compile Include="Models\QuestTracker\EventArgs\PracticeResultArgs.cs" />
+    <Compile Include="Models\QuestTracker\ITracker.cs" />
+    <Compile Include="Models\QuestTracker\Model\BattleTracker.cs" />
+    <Compile Include="Models\QuestTracker\Model\FleetDamages.cs" />
+    <Compile Include="Models\QuestTracker\Model\StorageData.cs" />
+    <Compile Include="Models\QuestTracker\Model\TrackerEnemyShip.cs" />
+    <Compile Include="Models\QuestTracker\Model\TrackerMapInfo.cs" />
+    <Compile Include="Models\QuestTracker\Raw\ModelExtension.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\Bd1.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\Bd2.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\Bd3.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\Bd4.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\Bd5.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\Bd6.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\Bd7.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\Bd8.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\Bm5.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\Bw1.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\Bw10.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\Bw2.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\Bw3.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\Bw4.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\Bw5.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\Bw6.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\Bw7.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\Bw8.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\Bw9.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\C2.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\C3.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\C4.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\C8.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\D11.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\D2.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\D3.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\D4.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\D9.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\E3.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\E4.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\F12.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\F18.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\F5.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\F6.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\F7.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\F8.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\F9.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\G2.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\G3.cs" />
+    <Compile Include="Models\QuestTracker\TrackManager.cs" />
     <Compile Include="Models\RelayCommand.cs" />
     <Compile Include="Models\ResourceService.cs" />
     <Compile Include="Models\SallyArea.cs" />
+    <Compile Include="Models\Settings\ExpeditionSettings.cs" />
     <Compile Include="Models\Settings\GeneralSettings.cs" />
     <Compile Include="Models\Settings\KanColleSettings.cs" />
     <Compile Include="Models\Settings\KanColleWindowSettings.cs" />
@@ -183,6 +240,7 @@
     <Compile Include="ViewModels\Catalogs\NeedNdockShipCatalogWindowViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\NotePadViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\RemodelListWindowViewModel.cs" />
+    <Compile Include="ViewModels\Catalogs\SlotItemEquipTypeViewModel.cs" />
     <Compile Include="ViewModels\Composition\LoadFailedPluginViewModel.cs" />
     <Compile Include="ViewModels\InformationWindowViewModel.cs" />
     <Compile Include="ViewModels\KanColleWindowViewModel.cs" />
@@ -209,6 +267,7 @@
     <Compile Include="ViewModels\Contents\OverviewViewModel.cs" />
     <Compile Include="ViewModels\Contents\QuestsViewModel.cs" />
     <Compile Include="ViewModels\Contents\QuestViewModel.cs" />
+    <Compile Include="ViewModels\KeyNameTabItemViewModel.cs" />
     <Compile Include="ViewModels\Settings\BindableTextViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipTypeViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogWindowViewModel.cs" />
@@ -699,15 +758,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="MSHTML">
-      <Guid>{3050F1C5-98B5-11CF-BB82-00AA00BDCE0B}</Guid>
-      <VersionMajor>4</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
     <COMReference Include="SHDocVw">
       <Guid>{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}</Guid>
       <VersionMajor>1</VersionMajor>

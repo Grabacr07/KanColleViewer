@@ -18,6 +18,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 		public string ReturnTime => this.source.ReturnTime?.LocalDateTime.ToString("MM/dd HH:mm") ?? "--/-- --:--";
 
+        public bool Returned => (this.source.Remaining.HasValue ? this.source.Remaining.Value == TimeSpan.Zero : false);
+
 		public string Remaining => this.source.Remaining.HasValue
 			? $"{(int)this.source.Remaining.Value.TotalHours:D2}:{this.source.Remaining.Value.ToString(@"mm\:ss")}"
 			: "--:--:--";
