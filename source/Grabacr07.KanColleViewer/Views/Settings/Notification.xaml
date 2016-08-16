@@ -24,6 +24,12 @@
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 		<StackPanel Margin="20,0,0,0">
+			<CheckBox Content="칸코레가 음소거라면 알림도 음소거"
+					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.NotifyMuteOnMute}, Path=Value}" />
+
+			<Rectangle Style="{DynamicResource SeparatorStyleKey}"
+					   Margin="0,8" />
+
 			<CheckBox Content="建造完了時に通知する"
 					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.NotifyBuildingCompleted}, Path=Value}" />
 
