@@ -14,6 +14,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 	{
 		public FleetState Source { get; }
 
+        public string NeedCharge => string.Format("연료 {0}, 탄약 {1}", this.Source.UsedFuel, this.Source.UsedBull);
+
 		public string AverageLevel => this.Source.AverageLevel.ToString("#0.##");
 
 		public string TotalLevel => this.Source.TotalLevel.ToString("###0");
@@ -67,6 +69,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(source)
 			{
 				(sender, args) => this.RaisePropertyChanged(args.PropertyName),
+			});
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(source)
+			{
+                {nameof(source.UsedFuel), (sender, args) => this.RaisePropertyChanged("NeedCharge") },
+                {nameof(source.UsedBull), (sender, args) => this.RaisePropertyChanged("NeedCharge") },
 			});
 
 			this.Sortie = new SortieViewModel(source);

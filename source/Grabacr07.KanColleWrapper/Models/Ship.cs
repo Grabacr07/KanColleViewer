@@ -153,6 +153,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				this._Fuel = value;
 				this.RaisePropertyChanged();
+                this.RaisePropertyChanged("UsedFuel");
 			}
 		}
 
@@ -169,7 +170,8 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				this._Bull = value;
 				this.RaisePropertyChanged();
-			}
+                this.RaisePropertyChanged("UsedBull");
+            }
 		}
 
 		#endregion
@@ -384,7 +386,14 @@ namespace Grabacr07.KanColleWrapper.Models
 			}
 		}
 
-		#endregion
+        #endregion
+
+        #region Used 의존변수
+
+        public int UsedFuel => this.Fuel.Maximum - this.Fuel.Current;
+        public int UsedBull => this.Bull.Maximum - this.Bull.Current;
+
+        #endregion
 
 		/// <summary>
 		/// 装備によるボーナスを含めた索敵ステータス値を取得します。

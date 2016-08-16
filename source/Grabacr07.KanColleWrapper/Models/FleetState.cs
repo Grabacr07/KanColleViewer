@@ -257,7 +257,37 @@ namespace Grabacr07.KanColleWrapper.Models
 			}
 		}
 
-		#endregion
+        #endregion
+
+        #region UsedFuel 변경통지 프로퍼티
+
+        private int _UsedFuel;
+        public int UsedFuel
+        {
+            get { return this._UsedFuel; }
+            set
+            {
+                this._UsedFuel = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region UsedBull 변경통지 프로퍼티
+
+        private int _UsedBull;
+        public int UsedBull
+        {
+            get { return this._UsedBull; }
+            set
+            {
+                this._UsedBull = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        #endregion
 
 		public event EventHandler Updated;
 		public event EventHandler Calculated;
@@ -297,6 +327,13 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				partPercent.Add(new SecondResult { Hit = HitList[i], SecondEncounter = TotalSecond.Where(x => x.Hit == HitList[i]).Sum(y => y.SecondEncounter) });
 			}
+
+            if (ships.HasItems())
+            {
+                this.UsedFuel = ships.Sum(x => x.UsedFuel);
+                this.UsedBull = ships.Sum(x => x.UsedBull);
+            }
+            else this.UsedFuel = this.UsedBull = 0;
 
 			this.TotalLevel = ships.HasItems() ? ships.Sum(x => x.Level) : 0;
 			this.AverageLevel = ships.HasItems() ? (double)this.TotalLevel / ships.Length : 0.0;
