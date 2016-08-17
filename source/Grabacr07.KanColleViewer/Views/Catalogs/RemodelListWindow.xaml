@@ -488,5 +488,15 @@
                 </Grid>
             </StackPanel>
         </ScrollViewer>
+        
+        <Grid Grid.Row="2"
+              Background="#D01B1B1C"
+              Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Foreground="White"
+                       Text="목록을 불러오는 중입니다..." />
+        </Grid>
     </Grid>
 </metro:MetroWindow>
