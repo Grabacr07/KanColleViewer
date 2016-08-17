@@ -169,6 +169,14 @@
 								<LineBreak />
 								<Run Text="Condition"
 									 FontSize="10" />
+
+                                <TextBlock.ToolTip>
+                                    <TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+                                               Foreground="White">
+                                        <Run Text="피로회복까지:" />
+                                        <Run Text="{Binding Condition.ConditionText, Mode=OneWay}" />
+                                    </TextBlock>
+                                </TextBlock.ToolTip>
 							</TextBlock>
 
 
@@ -691,7 +699,7 @@
 								   VerticalAlignment="Bottom"
 								   Margin="4,2">
 							<FrameworkElement.ToolTip>
-								<TextBlock Text="모든 함제기에서 내부숙련도를 최대로 계산합니다"
+								<TextBlock Text="모든 함재기에서 내부숙련도를 최대로 계산합니다"
 										   Style="{DynamicResource DefaultTextStyleKey}" />
 							</FrameworkElement.ToolTip>
 							<Run Text="{Binding State.MaxAirSuperiorityPotential, Mode=OneWay}" />

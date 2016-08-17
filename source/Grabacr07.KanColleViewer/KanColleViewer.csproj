@@ -84,7 +84,7 @@
     </Reference>
     <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference> 
+    </Reference>
     <Reference Include="Nekoxy, Version=1.5.2.20, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Nekoxy.1.5.2.20\lib\net45\Nekoxy.dll</HintPath>
       <Private>True</Private>
@@ -228,6 +228,7 @@
     <Compile Include="Models\Settings\NetworkSettings.cs" />
     <Compile Include="Models\Settings\SettingsHost.cs" />
     <Compile Include="Models\Settings\WindowSettings.cs" />
+    <Compile Include="Models\ShipCondition.cs" />
     <Compile Include="Models\StatusService.cs" />
     <Compile Include="Models\Migration\_Settings.cs" />
     <Compile Include="Models\SupportedImageFormat.cs" />

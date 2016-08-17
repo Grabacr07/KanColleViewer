@@ -342,6 +342,14 @@
 											   Margin="10,0,10,-1">
 										<Run Text="컨디션"
 											 FontSize="9" />
+
+                                        <TextBlock.ToolTip>
+                                            <TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+                                                       Foreground="White">
+                                                <Run Text="피로회복까지:" />
+                                                <Run Text="{Binding Condition.ConditionText, Mode=OneWay}" />
+                                            </TextBlock>
+                                        </TextBlock.ToolTip>
 									</TextBlock>
 
                                     <StackPanel Grid.Column="6"
