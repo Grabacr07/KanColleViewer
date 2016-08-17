@@ -336,12 +336,6 @@
 										</InlineUIContainer>
 										<Run Text="{Binding Ship.Condition, Mode=OneWay}"
 											 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-									</TextBlock>
-									<TextBlock Grid.Column="5"
-											   Grid.Row="1"
-											   Margin="10,0,10,-1">
-										<Run Text="컨디션"
-											 FontSize="9" />
 
                                         <TextBlock.ToolTip>
                                             <TextBlock Style="{DynamicResource DefaultTextStyleKey}"
@@ -350,6 +344,12 @@
                                                 <Run Text="{Binding Condition.ConditionText, Mode=OneWay}" />
                                             </TextBlock>
                                         </TextBlock.ToolTip>
+									</TextBlock>
+									<TextBlock Grid.Column="5"
+											   Grid.Row="1"
+											   Margin="10,0,10,-1">
+										<Run Text="컨디션"
+											 FontSize="9" />
 									</TextBlock>
 
                                     <StackPanel Grid.Column="6"
