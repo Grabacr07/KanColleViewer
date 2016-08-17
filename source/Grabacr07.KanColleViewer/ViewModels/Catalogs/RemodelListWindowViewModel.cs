@@ -23,9 +23,24 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		private XDocument RemodelXML;
 		string MainFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
 
-		#region FirstList 変更通知プロパティ
+        #region IsLoading 변경통지 프로퍼티
 
-		private List<RemodelItemList> _FirstList;
+        private bool _IsLoading;
+        public bool IsLoading
+        {
+            get { return this._IsLoading; }
+            set
+            {
+                this._IsLoading = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region FirstList 変更通知プロパティ
+
+        private List<RemodelItemList> _FirstList;
 
 		public List<RemodelItemList> FirstList
 		{
@@ -156,6 +171,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		}
 
 		#endregion
+
 		public RemodelListWindowViewModel()
 		{
 			this.Title = "개수공창 리스트";
@@ -167,56 +183,69 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		{
 			if (File.Exists(Path.Combine(MainFolder, "Translations", "RemodelSlots.xml")))
 			{
-				if (IsStart) WeekDayView = (int)DateTime.Today.DayOfWeek + 1;
-				else WeekDayView = WeekDayTable[SelectedDay];
-				today = new WeekDayFlag();
-				switch (WeekDayView)
-				{
-					case 1:
-						today |= WeekDayFlag.Sunday;
-						if (IsStart) SelectedDay = "일요일";
-						break;
-					case 2:
-						today |= WeekDayFlag.Monday;
-						if (IsStart) SelectedDay = "월요일";
-						break;
-					case 3:
-						today |= WeekDayFlag.Tuesday;
-						if (IsStart) SelectedDay = "화요일";
-						break;
-					case 4:
-						today |= WeekDayFlag.Wednesday;
-						if (IsStart) SelectedDay = "수요일";
-						break;
-					case 5:
-						today |= WeekDayFlag.Thursday;
-						if (IsStart) SelectedDay = "목요일";
-						break;
-					case 6:
-						today |= WeekDayFlag.Friday;
-						if (IsStart) SelectedDay = "금요일";
-						break;
-					case 7:
-						today |= WeekDayFlag.Saturday;
-						if (IsStart) SelectedDay = "토요일";
-						break;
-				}
-				this.RemodelXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "RemodelSlots.xml"));
-				IEnumerable<XElement> RemodelList = GetRemodelList();
+                this.IsLoading = true;
 
-				var Weekday = "AllWeekdays";
-				//RemodelList에서 오늘 개수공창 목록에 들어갈것들을 선별한다.
-				RemodelList = RemodelList.Where(f => WeekDaySetter(Convert.ToInt32(f.Element(Weekday).Value)).HasFlag(today));
-				//상중하 리스트를 작성->상중하의 구분을 제거
-				var list = MakeDefaultList(RemodelList).ToList();
-				this.FirstList = SortList(list);
+                new System.Threading.Thread(() =>
+                {
+                    if (IsStart) WeekDayView = (int)DateTime.Today.DayOfWeek + 1;
+                    else WeekDayView = WeekDayTable[SelectedDay];
+                    today = new WeekDayFlag();
+                    switch (WeekDayView)
+                    {
+                        case 1:
+                            today |= WeekDayFlag.Sunday;
+                            if (IsStart) SelectedDay = "일요일";
+                            break;
+                        case 2:
+                            today |= WeekDayFlag.Monday;
+                            if (IsStart) SelectedDay = "월요일";
+                            break;
+                        case 3:
+                            today |= WeekDayFlag.Tuesday;
+                            if (IsStart) SelectedDay = "화요일";
+                            break;
+                        case 4:
+                            today |= WeekDayFlag.Wednesday;
+                            if (IsStart) SelectedDay = "수요일";
+                            break;
+                        case 5:
+                            today |= WeekDayFlag.Thursday;
+                            if (IsStart) SelectedDay = "목요일";
+                            break;
+                        case 6:
+                            today |= WeekDayFlag.Friday;
+                            if (IsStart) SelectedDay = "금요일";
+                            break;
+                        case 7:
+                            today |= WeekDayFlag.Saturday;
+                            if (IsStart) SelectedDay = "토요일";
+                            break;
+                    }
+                    this.RemodelXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "RemodelSlots.xml"));
+                    IEnumerable<XElement> RemodelList = GetRemodelList();
 
-				//소모아이템 리스트를 작성
-				var use = MakeUseItemList(RemodelList);
-				this.UseItemList = SortList(use.ToList());
-				//개조 목록을 작성
-				var im = MakeUpgradeList(RemodelList);
-				this.Improvement = SortList(im.ToList());
+                    var Weekday = "AllWeekdays";
+                    //RemodelList에서 오늘 개수공창 목록에 들어갈것들을 선별한다.
+                    RemodelList = RemodelList.Where(f => WeekDaySetter(Convert.ToInt32(f.Element(Weekday).Value)).HasFlag(today));
+                    //상중하 리스트를 작성->상중하의 구분을 제거
+                    var list = MakeDefaultList(RemodelList).ToList();
+                    var _FirstList = SortList(list);
+
+                    //소모아이템 리스트를 작성
+                    var use = MakeUseItemList(RemodelList);
+                    var _UseItemList = SortList(use.ToList());
+                    //개조 목록을 작성
+                    var im = MakeUpgradeList(RemodelList);
+                    var _Improvement = SortList(im.ToList());
+
+                    Grabacr07.KanColleViewer.Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        this.FirstList = _FirstList;
+                        this.UseItemList = _UseItemList;
+                        this.Improvement = _Improvement;
+                        this.IsLoading = false;
+                    });
+                }).Start();
 			}
 		}
 		private List<RemodelItemList> SortList(List<RemodelItemList> myList)

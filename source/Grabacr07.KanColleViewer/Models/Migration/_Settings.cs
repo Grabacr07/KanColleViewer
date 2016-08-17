@@ -53,7 +53,8 @@ namespace Grabacr07.KanColleViewer.Models.Migration
 			ScreenshotSettings.Format.Value = Current.ScreenshotImageFormat;
 
 			KanColleSettings.CanDisplayBuildingShipName.Value = Current.CanDisplayBuildingShipName;
-			KanColleSettings.NotifyBuildingCompleted.Value = Current.NotifyBuildingCompleted;
+            KanColleSettings.NotifyMuteOnMute.Value = Current.NotifyMuteOnMute;
+            KanColleSettings.NotifyBuildingCompleted.Value = Current.NotifyBuildingCompleted;
 			KanColleSettings.NotifyExpeditionReturned.Value = Current.NotifyExpeditionReturned;
 			KanColleSettings.NotifyRepairingCompleted.Value = Current.NotifyRepairingCompleted;
 			KanColleSettings.NotifyFleetRejuvenated.Value = Current.NotifyFleetRejuvenated;
@@ -95,6 +96,8 @@ namespace Grabacr07.KanColleViewer.Models.Migration
 		public SupportedImageFormat ScreenshotImageFormat { get; set; }
 
 		public bool CanDisplayBuildingShipName { get; set; }
+
+        public bool NotifyMuteOnMute { get; set; }
 
 		public bool NotifyBuildingCompleted { get; set; }
 

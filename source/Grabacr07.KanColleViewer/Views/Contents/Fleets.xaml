@@ -342,22 +342,42 @@
 											   Margin="10,0,10,-1">
 										<Run Text="컨디션"
 											 FontSize="9" />
+
+                                        <TextBlock.ToolTip>
+                                            <TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+                                                       Foreground="White">
+                                                <Run Text="피로회복까지:" />
+                                                <Run Text="{Binding Condition.ConditionText, Mode=OneWay}" />
+                                            </TextBlock>
+                                        </TextBlock.ToolTip>
 									</TextBlock>
 
-									<kcvc:ColorIndicator Grid.Column="6"
-														 Grid.Row="0"
-														 Width="55"
-														 LimitedValue="{Binding Ship.Fuel, Mode=OneWay}"
-														 Height="6"
-                                                         Columns="5"
-														 Margin="0,6,0,7" />
-									<kcvc:ColorIndicator Grid.Column="6"
-														 Grid.Row="1"
-														 Width="55"
-														 LimitedValue="{Binding Ship.Bull, Mode=OneWay}"
-														 Height="6"
-                                                         Columns="5"
-														 VerticalAlignment="Top" />
+                                    <StackPanel Grid.Column="6"
+                                                Grid.RowSpan="2">
+                                        <kcvc:ColorIndicator Width="55"
+														     LimitedValue="{Binding Ship.Fuel, Mode=OneWay}"
+														     Height="6"
+                                                             Columns="5"
+														     Margin="0,6,0,7" />
+                                        <kcvc:ColorIndicator Width="55"
+														     LimitedValue="{Binding Ship.Bull, Mode=OneWay}"
+														     Height="6"
+                                                             Columns="5"
+														     VerticalAlignment="Top" />
+
+                                        <StackPanel.ToolTip>
+                                            <TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+                                                       Foreground="White">
+                                                <Run Text="연료:" />
+                                                <Run Text="{Binding Ship.Fuel.Current, Mode=OneWay}" /><Run Text="/" /><Run Text="{Binding Ship.Fuel.Maximum, Mode=OneWay}" />
+                                                <Run Text="{Binding Ship.UsedFuel, Mode=OneWay, StringFormat={}({0} 소모)}" Foreground="Crimson"/>
+                                                <LineBreak />
+                                                <Run Text="탄약:" />
+                                                <Run Text="{Binding Ship.Bull.Current, Mode=OneWay}" /><Run Text="/" /><Run Text="{Binding Ship.Bull.Maximum, Mode=OneWay}" />
+                                                <Run Text="{Binding Ship.UsedBull, Mode=OneWay, StringFormat={}({0} 소모)}" Foreground="Crimson"/>
+                                            </TextBlock>
+                                        </StackPanel.ToolTip>
+                                    </StackPanel>
 
 									<ItemsControl Grid.Column="7"
 												  Grid.Row="0"
