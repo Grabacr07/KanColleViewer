@@ -214,18 +214,15 @@
 
 									<TextBlock Grid.Column="5"
 											   Grid.Row="0"
-											   Margin="10,0,10,10"
+											   Margin="10,0,10,-1"
 											   Grid.RowSpan="2">
 										<InlineUIContainer>
 											<kcvc:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
 										</InlineUIContainer>
 										<Run Text="{Binding Ship.Condition, Mode=OneWay}"
 											 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-									</TextBlock>
-									<TextBlock Grid.Column="5"
-											   Grid.Row="1"
-											   Margin="10,0,10,-1">
-										<Run Text="condition"
+                                        <LineBreak />
+                                        <Run Text="condition"
 											 FontSize="9" />
 
                                         <TextBlock.ToolTip>
@@ -237,18 +234,17 @@
                                         </TextBlock.ToolTip>
 									</TextBlock>
 
-									<kcvc:ColorIndicator Grid.Column="6"
-														 Grid.Row="0"
-														 Width="55"
-														 LimitedValue="{Binding Ship.Fuel, Mode=OneWay}"
-														 Height="6"
-														 Margin="0,6,0,7" />
-									<kcvc:ColorIndicator Grid.Column="6"
-														 Grid.Row="1"
-														 Width="55"
-														 LimitedValue="{Binding Ship.Bull, Mode=OneWay}"
-														 Height="6"
-														 VerticalAlignment="Top" />
+                                    <StackPanel Grid.Column="6"
+                                                Grid.RowSpan="2">
+                                        <kcvc:ColorIndicator Width="55"
+														     LimitedValue="{Binding Ship.Fuel, Mode=OneWay}"
+														     Height="6"
+														     Margin="0,6,0,7" />
+                                        <kcvc:ColorIndicator Width="55"
+														     LimitedValue="{Binding Ship.Bull, Mode=OneWay}"
+														     Height="6"
+														     VerticalAlignment="Top" />
+                                    </StackPanel>
 
 									<ItemsControl Grid.Column="7"
 												  Grid.Row="0"
