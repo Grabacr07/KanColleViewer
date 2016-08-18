@@ -172,8 +172,8 @@
 										<metro2:CallMethodButton Content="탄">
 											<metro2:CallMethodButton.MethodParameter>
 												<x:Array Type="s:Int32">
-													<s:Int32>18</s:Int32>
-													<s:Int32>19</s:Int32>
+													<s:Int32>12</s:Int32>
+													<s:Int32>13</s:Int32>
 												</x:Array>
 											</metro2:CallMethodButton.MethodParameter>
 										</metro2:CallMethodButton>
@@ -224,7 +224,7 @@
 											</metro2:CallMethodButton.MethodParameter>
 										</metro2:CallMethodButton>
 										<!-- これっきりボタン -->
-										<metro2:CallMethodButton Content="주정・내화정">
+										<metro2:CallMethodButton Content="상륙정">
 											<metro2:CallMethodButton.MethodParameter>
 												<x:Array Type="s:Int32">
 													<s:Int32>20</s:Int32>
