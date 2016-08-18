@@ -89,10 +89,6 @@
 							</Style>
 						</StackPanel.Resources>
 
-						<TextBlock Text="보급:" />
-						<TextBlock Text="{Binding State.NeedCharge}"
-                                   Margin="0,0,36,0"/>
-
 						<TextBlock Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Fleets_Level, StringFormat='{}{0} '}" />
 						<TextBlock Text="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.Fleets_Total, StringFormat='{}{0}: '}" />
 						<TextBlock Text="{Binding State.TotalLevel}"
