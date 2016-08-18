@@ -329,13 +329,16 @@
 
 									<TextBlock Grid.Column="5"
 											   Grid.Row="0"
-											   Margin="10,0,10,10"
+											   Margin="10,0,10,-1"
 											   Grid.RowSpan="2">
 										<InlineUIContainer>
 											<kcvc:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
 										</InlineUIContainer>
 										<Run Text="{Binding Ship.Condition, Mode=OneWay}"
 											 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+                                        <LineBreak />
+                                        <Run Text="컨디션"
+											 FontSize="9" />
 
                                         <TextBlock.ToolTip>
                                             <TextBlock Style="{DynamicResource DefaultTextStyleKey}"
@@ -344,12 +347,6 @@
                                                 <Run Text="{Binding Condition.ConditionText, Mode=OneWay}" />
                                             </TextBlock>
                                         </TextBlock.ToolTip>
-									</TextBlock>
-									<TextBlock Grid.Column="5"
-											   Grid.Row="1"
-											   Margin="10,0,10,-1">
-										<Run Text="컨디션"
-											 FontSize="9" />
 									</TextBlock>
 
                                     <StackPanel Grid.Column="6"
