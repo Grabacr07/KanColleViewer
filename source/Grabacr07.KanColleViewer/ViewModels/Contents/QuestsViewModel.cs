@@ -139,7 +139,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
                     new KeyNameTabItemViewModel("Daily", "일일"),
                     new KeyNameTabItemViewModel("Weekly", "주간"),
                     new KeyNameTabItemViewModel("Monthly", "월간"),
-                    new KeyNameTabItemViewModel("Once", "단발성"),
+                    new KeyNameTabItemViewModel("Once", "일회성"),
                     new KeyNameTabItemViewModel("Others", "그 외")
                 };
             this.SelectedItem = this.TabItems.FirstOrDefault(x => x.Name == "진행중");

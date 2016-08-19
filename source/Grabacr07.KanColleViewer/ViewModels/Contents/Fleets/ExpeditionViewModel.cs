@@ -28,6 +28,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		{
 			this.source = expedition;
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(expedition, (sender, args) => this.RaisePropertyChanged(args.PropertyName)));
-		}
+            this.CompositeDisposable.Add(new PropertyChangedEventListener(expedition)
+                {
+                    {nameof(expedition.Remaining), (sender, args) => this.RaisePropertyChanged("Returned") }
+                }
+            );
+        }
 	}
 }
