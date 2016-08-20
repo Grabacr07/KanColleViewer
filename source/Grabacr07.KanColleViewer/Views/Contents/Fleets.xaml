@@ -273,6 +273,14 @@
 										<Run Text="Lv." />
 										<Run Text="{Binding Ship.Level, Mode=OneWay}"
 											 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+
+                                        <TextBlock.ToolTip>
+                                            <TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+                                                       Foreground="White">
+                                                <Run Text="다음 개장레벨:" />
+                                                <Run Text="{Binding Ship.Info.NextRemodelingLevel, Mode=OneWay}" />
+                                            </TextBlock>
+                                        </TextBlock.ToolTip>
 									</TextBlock>
 									<TextBlock Grid.Column="3"
 											   Grid.Row="1"
