@@ -6,6 +6,7 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+             xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
 			 xmlns:v="clr-namespace:Grabacr07.KanColleViewer.Views"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
@@ -95,65 +96,154 @@
 				</Style>
 			</ItemsControl.ItemContainerStyle>
 
-			<ItemsControl.ItemTemplate>
-				<DataTemplate>
-					<GroupBox Header="{Binding Name}"
-							  Margin="5,0,5,5"
-							  Padding="8">
-						<Grid>
-							<TextBlock x:Name="NotExcution"
-									   Text="원정나가있지않습니다."
-									   Style="{DynamicResource EmphaticTextStyleKey}"
-									   Visibility="Collapsed" />
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <GroupBox Header="{Binding Name, Mode=OneWay}"
+                            Margin="5"
+                            Padding="8">
 
-							<StackPanel x:Name="ExpeditionInfo">
-								<TextBlock Text="{Binding Expedition.Mission.Title}"
-										   Style="{DynamicResource EmphaticTextStyleKey}" />
-								<Border Height="4" />
-								<TextBlock Text="{Binding Expedition.Mission.Detail}"
-										   Style="{DynamicResource DefaultTextStyleKey}" />
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
 
-								<Border Height=".99"
-										Background="{DynamicResource BorderBrushKey}"
-										Margin="0,8" />
+                            <metro:PromptComboBox x:Name="ExpeditionSelector"
+                                                  Margin="0,0,0,5"
+                                                  ItemsSource="{Binding ExpeditionList, Mode=OneWay}"
+                                                  VerticalAlignment="Center"
+                                                  SelectedValue="{Binding ExpeditionId, Mode=TwoWay}"
+                                                  SelectedValuePath="Key"
+                                                  DisplayMemberPath="Value"
+                                                  Visibility="Collapsed"
+                                                  IsReadOnly="True"
+                                                  Prompt="" />
 
-								<TextBlock Text="{Binding Resources.Expedition_TimeComplete, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-										   Style="{DynamicResource HeaderTextStyleKey}" />
-								<Border Height="4" />
-								<TextBlock Text="{Binding Expedition.ReturnTime, Mode=OneWay}"
-										   Style="{DynamicResource EmphaticTextStyleKey}"
-										   Margin="8,0" />
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
 
-								<Border Height=".99"
-										Background="{DynamicResource BorderBrushKey}"
-										Margin="0,8" />
+                                <TextBlock Margin="0,0,2,0"
+                                           Foreground="White"
+                                           TextAlignment="Center"
+                                           Padding="3">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsPossible}" Value="Possible">
+                                                    <Setter Property="Background" Value="#FF5887AB"/>
+                                                    <Setter Property="Text" Value="편성완료"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding IsPossible}" Value="NotAccepted">
+                                                    <Setter Property="Background" Value="#FFCC3D3D"/>
+                                                    <Setter Property="Text" Value="편성문제"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding IsPossible}" Value="NotSupplied">
+                                                    <Setter Property="Background" Value="#FFCC3D3D"/>
+                                                    <Setter Property="Text" Value="보급안함"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Grid.Column="1"
+                                           Margin="2,0,0,0"
+                                           Foreground="White"
+                                           TextAlignment="Center"
+                                           Padding="3">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding CanGreatSuccess}" Value="False">
+                                                    <Setter Property="Background" Value="#FF787878" />
+                                                    <Setter Property="Text" Value="대성공 불가" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding CanGreatSuccess}" Value="True">
+                                                    <Setter Property="Background" Value="#FFE66915" />
+                                                    <Setter Property="Text" Value="{Binding GreatChanceText, Mode=OneWay}" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Grid>
 
-								<TextBlock Text="{Binding Resources.Expedition_TimeRemaining, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-										   Style="{DynamicResource HeaderTextStyleKey}" />
-								<Border Height="4" />
-								<TextBlock Text="{Binding Expedition.Remaining, Mode=OneWay}"
-										   Style="{DynamicResource EmphaticTextStyleKey}"
-										   Margin="8,0" />
+                            <Border Grid.Row="2" Margin="0,5" Height=".99" Background="{DynamicResource BorderBrushKey}" />
 
-								<Border Height=".99"
-										Background="{DynamicResource BorderBrushKey}"
-										Margin="0,8" />
-							</StackPanel>
-						</Grid>
-					</GroupBox>
-					<DataTemplate.Triggers>
-						<DataTrigger Binding="{Binding Expedition.IsInExecution}"
-									 Value="False">
-							<Setter TargetName="NotExcution"
-									Property="Visibility"
-									Value="Visible" />
-							<Setter TargetName="ExpeditionInfo"
-									Property="Visibility"
-									Value="Collapsed" />
-						</DataTrigger>
-					</DataTemplate.Triggers>
-				</DataTemplate>
-			</ItemsControl.ItemTemplate>
-		</ItemsControl>
+                            <TextBlock x:Name="NotExcution"
+                                       Grid.Row="3"
+                                       Text="모항에서 대기중입니다."
+                                       Style="{DynamicResource EmphaticTextStyleKey}"
+                                       HorizontalAlignment="Center"
+                                       Visibility="Collapsed" />
+                            <TextBlock x:Name="InSortie"
+                                       Grid.Row="3"
+                                       Text="출격중입니다."
+                                       Style="{DynamicResource EmphaticTextStyleKey}"
+                                       HorizontalAlignment="Center"
+                                       Visibility="Collapsed" />
+
+                            <StackPanel x:Name="ExpeditionInfo"
+                                        Grid.Row="3">
+                                <TextBlock Margin="0,0,0,4"
+                                           Text="{Binding Expedition.Mission.Title}"
+                                           Style="{DynamicResource EmphaticTextStyleKey}" />
+                                <TextBlock Text="{Binding Expedition.Mission.Detail}"
+                                           Style="{DynamicResource DefaultTextStyleKey}" />
+
+                                <Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
+
+                                <Grid>
+                                    <StackPanel x:Name="ExpeditionProgress">
+                                        <TextBlock Text="{Binding Resources.Expedition_TimeComplete, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+                                                   Margin="0,0,0,4"
+                                                   Style="{DynamicResource HeaderTextStyleKey}" />
+                                        <TextBlock Text="{Binding Expedition.ReturnTime, Mode=OneWay}"
+                                                   Style="{DynamicResource EmphaticTextStyleKey}"
+                                                   Margin="8,0" />
+
+                                        <Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
+
+                                        <TextBlock Text="{Binding Resources.Expedition_TimeRemaining, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+                                                   Margin="0,0,0,4"
+                                                   Style="{DynamicResource HeaderTextStyleKey}" />
+                                        <TextBlock Text="{Binding Expedition.Remaining, Mode=OneWay}"
+                                                Style="{DynamicResource EmphaticTextStyleKey}"
+                                                Margin="8,0" />
+                                    </StackPanel>
+                                    <TextBlock x:Name="ExpeditionReturned"
+                                               Text="원정에서 복귀했습니다."
+                                               Style="{DynamicResource EmphaticTextStyleKey}"
+                                               HorizontalAlignment="Center"
+                                               Visibility="Collapsed" />
+                                </Grid>
+
+                                <Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Expedition.IsInExecution}" Value="False">
+                            <Setter TargetName="ExpeditionSelector" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="ExpeditionInfo" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="NotExcution" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="InSortie" Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsInSortie}" Value="True">
+                            <Setter TargetName="NotExcution" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="InSortie" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Expedition.Returned}" Value="True">
+                            <Setter TargetName="ExpeditionProgress" Property="Visibility" Value="Hidden" />
+                            <Setter TargetName="ExpeditionReturned" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
 	</ScrollViewer>
 </UserControl>

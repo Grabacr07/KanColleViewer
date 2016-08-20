@@ -26,6 +26,7 @@ namespace Grabacr07.KanColleViewer.Views
 
 			this.settings = SettingsHost.Instance<KanColleWindowSettings>();
 			this.settings.IsSplit.Subscribe(_ => this.ChangeSizeByDock()).AddTo(this);
+            this.settings.AlwaysTopView.Subscribe(_ => this.ChangeSizeByDock()).AddTo(this);
 			this.settings.Dock.Subscribe(_ => this.ChangeSizeByDock()).AddTo(this);
 		}
 

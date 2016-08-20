@@ -190,6 +190,7 @@ namespace Grabacr07.KanColleWrapper
 
 				foreach (var quest in questlist.api_list.Select(x => new Quest(x)))
 				{
+                    quest.Page = page;
 					this.questPages[page].AddOrUpdate(quest.Id, quest, (_, __) => quest);
 				}
 

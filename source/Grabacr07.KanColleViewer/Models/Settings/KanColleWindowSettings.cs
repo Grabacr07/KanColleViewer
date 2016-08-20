@@ -15,6 +15,11 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		public SerializableProperty<bool> IsSplit => this.Cache(key => new SerializableProperty<bool>(key, Providers.Local, false));
 
 		/// <summary>
+		/// 레이아웃과 상관 없이 인포메이션 뷰를 항상 위쪽에 표시하는지 여부
+		/// </summary>
+		public SerializableProperty<bool> AlwaysTopView => this.Cache(key => new SerializableProperty<bool>(key, Providers.Local, false));
+
+		/// <summary>
 		/// メイン ウィンドウの情報表示部分のドック位置を示す設定値を取得します。
 		/// </summary>
 		public SerializableProperty<Dock> Dock => this.Cache(key => new SerializableProperty<Dock>(key, Providers.Local, System.Windows.Controls.Dock.Bottom));

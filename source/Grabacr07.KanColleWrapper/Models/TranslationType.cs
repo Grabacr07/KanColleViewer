@@ -66,5 +66,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		ExpeditionDetail = 12,
 
 		RemodelSlots = 13,
+
+        EquipmentTypes = 14,
 	}
 }

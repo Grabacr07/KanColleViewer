@@ -8,6 +8,7 @@ using Livet.EventListeners;
 using Grabacr07.KanColleWrapper;
 using System.Windows;
 using System.Text;
+using Grabacr07.KanColleViewer.Models;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 {
@@ -114,18 +115,30 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				this.RaisePropertyChanged();
 			}
 		}
-		#endregion
+        #endregion
 
-		#region 선택된 원정번호
-		private int _ExpeditionId;
+        #region 선택된 원정번호 (원정 탭 수정)
+        private int _ExpeditionId;
 		public int ExpeditionId
 		{
 			get { return this._ExpeditionId; }
 			set
 			{
-				if (this._ExpeditionId == value) return;
+				// if (this._ExpeditionId == value) return;
+                // 같은 값을 넣는 것으로 원정 성공 여부 등을 재계산해야함
 				this._ExpeditionId = value;
 				this.IsPassed = this.CompareExpeditionData(value, this.Ships);
+
+                this.IsPossible = !this.IsPassed
+                    ? ExpeditionPossible.NotAccepted
+                    : this.Ships.Where(x => (x.Ship.Fuel.Current != x.Ship.Fuel.Maximum) || x.Ship.Bull.Current != x.Ship.Bull.Maximum).Count() > 0
+                        ? ExpeditionPossible.NotSupplied
+                        : ExpeditionPossible.Possible;
+                this.GreatChance = this.IsPossible == ExpeditionPossible.Possible
+                    ? (int)ExpeditionExtension.CheckGreateSuccessChance(value, this.Ships.Select(x => x.Ship).ToArray())
+                    : 0;
+
+                this.RaisePropertyChanged();
 			}
 		}
 		#endregion
@@ -232,7 +245,44 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				this.RaisePropertyChanged();
 			}
 		}
-		#endregion
+        #endregion
+
+
+        #region 원정 탭 수정
+        public Dictionary<int, string> ExpeditionList => ExpeditionExtension.ExpeditionList;
+
+        // 편성 성공 여부
+        private ExpeditionPossible _IsPossible;
+        public ExpeditionPossible IsPossible
+        {
+            get { return this._IsPossible; }
+            set
+            {
+                this._IsPossible = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        // 출격 여부
+        public bool IsInSortie => (this.Source.State.Situation & FleetSituation.Sortie) == FleetSituation.Sortie;
+
+        // 대성공 확률
+        private int _GreatChance;
+        public int GreatChance
+        {
+            get { return this._GreatChance; }
+            set
+            {
+                this._GreatChance = value;
+                this.RaisePropertyChanged();
+                this.RaisePropertyChanged("CanGreatSuccess");
+                this.RaisePropertyChanged("GreateChanceText");
+            }
+        }
+        public bool CanGreatSuccess => this.GreatChance > 0;
+        public string GreatChanceText => string.Format("대성공 {0}%", this.GreatChance);
+        #endregion
+
 
 		/// <summary>
 		/// 艦隊に所属している艦娘のコレクションを取得します。
@@ -289,7 +339,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				IsFirstFleet = Visibility.Visible;
 
 				this.ResultList = this.MakeResultList();
-				this.ExpeditionId = this.ResultList.FirstOrDefault();
+				this.ExpeditionId = fleet.Expedition.IsInExecution
+                    ? fleet.Expedition.Id
+                    : this.ResultList.FirstOrDefault();
 			}
 			else IsFirstFleet = Visibility.Collapsed;
 
@@ -307,15 +359,31 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 			this.Expedition = new ExpeditionViewModel(fleet.Expedition);
 			this.CompositeDisposable.Add(this.Expedition);
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="total"></param>
-		/// <param name="MissonNum"></param>
-		/// <param name="ResourceType">0=연료 1=탄</param>
-		/// <returns></returns>
-		private int LossResource(ShipViewModel[] fleet, int MissionNum, int ResourceType = 0)
+
+            // 원정중 여부 변경
+            this.CompositeDisposable.Add(new PropertyChangedEventListener(this.Expedition)
+            {
+                {nameof(this.Expedition.IsInExecution), (sender,args) => this.ExpeditionId = (this.Expedition.IsInExecution ? this.Expedition.Mission.Id : this.ExpeditionId) }
+            });
+            // 연료/탄약량 변경
+            this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet)
+            {
+                { (sender,args) => this.ExpeditionId = this.ExpeditionId } // 재계산
+            });
+            // 출격 등 상태 변경
+            this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet.State)
+            {
+                { nameof(fleet.State.Situation), (sender, args) => this.RaisePropertyChanged(nameof(this.IsInSortie)) },
+            });
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="total"></param>
+        /// <param name="MissonNum"></param>
+        /// <param name="ResourceType">0=연료 1=탄</param>
+        /// <returns></returns>
+        private int LossResource(ShipViewModel[] fleet, int MissionNum, int ResourceType = 0)
 		{
 			double total = 0;
 

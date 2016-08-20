@@ -19,6 +19,7 @@ namespace Grabacr07.KanColleWrapper
 		private XDocument QuestsXML;//4
 		private XDocument ExpeditionXML;//5
 		private XDocument RemodelXml;//6
+        private XDocument EquipmentTypesXML;//7
 		string MainFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
 
 		public bool EnableTranslations { get; set; }
@@ -31,6 +32,7 @@ namespace Grabacr07.KanColleWrapper
 		public string ShipsVersion { get; set; }
 		public string ShipTypesVersion { get; set; }
 		public string RemodelSlotsVersion { get; set; }
+        public string EquipmentTypesVersion { get; set; }
 		private void SaveXmls(int idx)
 		{
 			switch (idx)
@@ -55,7 +57,10 @@ namespace Grabacr07.KanColleWrapper
 					break;
 				case 6://리모델링은 세이브가 없다
 					break;
-			}
+                case 7:
+                    EquipmentTypesXML.Save(Path.Combine(MainFolder, "Translations", "EquipmentTypes.xml"));
+                    break;
+            }
 			LoadXmls();
 		}
 		private void LoadXmls()
@@ -67,9 +72,10 @@ namespace Grabacr07.KanColleWrapper
 			if (File.Exists(Path.Combine(MainFolder, "Translations", "Quests.xml"))) QuestsXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "Quests.xml"));
 			if (File.Exists(Path.Combine(MainFolder, "Translations", "Expeditions.xml"))) ExpeditionXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "Expeditions.xml"));
 			if (File.Exists(Path.Combine(MainFolder, "Translations", "RemodelSlots.xml"))) RemodelXml = XDocument.Load(Path.Combine(MainFolder, "Translations", "RemodelSlots.xml"));
+            if (File.Exists(Path.Combine(MainFolder, "Translations", "EquipmentTypes.xml"))) EquipmentTypesXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "EquipmentTypes.xml"));
 
-		}
-		internal Translations()
+        }
+        internal Translations()
 		{
 			try
 			{
@@ -108,11 +114,16 @@ namespace Grabacr07.KanColleWrapper
 				else ExpeditionsVersion = "알 수 없음";
 			else
 				QuestsVersion = "없음";
-			if (ExpeditionXML != null)
+			if (RemodelXml != null)
 				if (RemodelXml.Root.Attribute("Version") != null) RemodelSlotsVersion = RemodelXml.Root.Attribute("Version").Value;
 				else RemodelSlotsVersion = "알 수 없음";
 			else
-				QuestsVersion = "없음";
+				RemodelSlotsVersion = "없음";
+            if (EquipmentTypesXML != null)
+                if (EquipmentTypesXML.Root.Attribute("Version") != null) EquipmentTypesVersion = EquipmentTypesXML.Root.Attribute("Version").Value;
+                else EquipmentTypesVersion = "알 수 없음";
+            else
+                EquipmentTypesVersion = "없음";
 		}
 
 		private IEnumerable<XElement> GetTranslationList(TranslationType Type)
@@ -152,6 +163,17 @@ namespace Grabacr07.KanColleWrapper
 						return EquipmentXML.Descendants("Item");
 					}
 					break;
+                case TranslationType.EquipmentTypes:
+                    if (EquipmentTypesXML != null)
+                    {
+                        if (KanColleClient.Current.Updater.EquipTypesUpdate)
+                        {
+                            this.EquipmentTypesXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "EquipmentTypes.xml"));
+                            KanColleClient.Current.Updater.EquipTypesUpdate = false;
+                        }
+                        return EquipmentTypesXML.Descendants("Item");
+                    }
+                    break;
 				case TranslationType.OperationMaps:
 					if (OperationsXML != null)
 					{
@@ -378,8 +400,27 @@ namespace Grabacr07.KanColleWrapper
 
 						SaveXmls(2);
 						break;
+                    case TranslationType.EquipmentTypes:
+                        if (EquipmentTypesXML == null)
+                        {
+                            EquipmentTypesXML = new XDocument();
+                            EquipmentTypesXML.Add(new XElement("EquipmentTypes"));
+                        }
 
-					case TranslationType.OperationMaps:
+                        kcsapi_mst_slotitem_equiptype EqiupTypeData = RawData as kcsapi_mst_slotitem_equiptype;
+
+                        if (EqiupTypeData == null)
+                            return;
+
+                        EquipmentTypesXML.Root.Add(new XElement("Item",
+                            new XElement("JP-Name", EqiupTypeData.api_name),
+                            new XElement("TR-Name", KanColleClient.Current.WebTranslator.RawTranslate(EqiupTypeData.api_name))
+                            ));
+
+                        SaveXmls(7);
+                        break;
+
+                    case TranslationType.OperationMaps:
 					case TranslationType.OperationSortie:
 						if (OperationsXML == null)
 						{
