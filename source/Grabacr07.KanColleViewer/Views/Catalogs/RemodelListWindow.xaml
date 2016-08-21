@@ -207,7 +207,47 @@
                         </GroupBox>
                         <GroupBox Header="목록" MinHeight="80">
                             <DockPanel>
-                                <ItemsControl  ItemsSource="{Binding FirstList}">
+                                <Grid Margin="5"
+                                      DockPanel.Dock="Top">
+                                    <Panel.Resources>
+                                        <DataTemplate DataType="{x:Type viewModels:RemodelFilterViewModel}">
+                                            <Grid Margin="0,0,4,0"
+                                                  HorizontalAlignment="Center"
+                                                  MinWidth="56">
+                                                <kcvc:SlotItemIcon x:Name="FilterIcon"
+                                                                   Type="{Binding Display, Mode=OneWay}"
+                                                  HorizontalAlignment="Center"
+                                                                   Width="20" Height="20" />
+                                                <Path x:Name="FilterIconNull"
+                                                      Stretch="Uniform"
+                                                      Width="20" Height="20"
+                                                      Data="M1,6 L4,6 4,9 1,9Z M6,6 L9,6 9,9 6,9Z M11,6 14,6 14,9 11,9Z"
+                                                      Fill="{DynamicResource InactiveForegroundBrushKey}"
+                                                  HorizontalAlignment="Center"
+                                                      Visibility="Collapsed"/>
+                                            </Grid>
+
+                                            <DataTemplate.Triggers>
+                                                <DataTrigger Binding="{Binding Display}" Value="{x:Null}">
+                                                    <Setter TargetName="FilterIcon" Property="Visibility" Value="Collapsed" />
+                                                    <Setter TargetName="FilterIconNull" Property="Visibility" Value="Visible" />
+                                                </DataTrigger>
+                                            </DataTemplate.Triggers>
+                                        </DataTemplate>
+                                    </Panel.Resources>
+
+                                    <Path Data=""
+                                          Width="15" Height="15"
+                                          Fill="Red"/>
+
+                                    <metro:PromptComboBox MinWidth="56"
+                                                          HorizontalAlignment="Right"
+                                                          Prompt=""
+                                                          IsReadOnly="True"
+                                                          ItemsSource="{Binding RemodelFilters}"
+                                                          SelectedValue="{Binding RemodelFilterSelected, Mode=TwoWay}" />
+                                </Grid>
+                                <ItemsControl ItemsSource="{Binding FirstList}">
                                     <ItemsControl.Template>
                                         <ControlTemplate TargetType="{x:Type ItemsControl}">
                                             <WrapPanel IsItemsHost="True"

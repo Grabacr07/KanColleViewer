@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using Grabacr07.KanColleViewer.ViewModels.Contents;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 {
@@ -33,6 +34,31 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
             {
                 this._IsLoading = value;
                 this.RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region RemodelFilters 변경통지 프로퍼티
+
+        public ICollection<RemodelFilterViewModel> RemodelFilters { get; }
+
+        #endregion
+
+        #region RemodelFilterSelected 변경통지 프로퍼티
+
+        private RemodelFilterViewModel _RemodelFilterSelected;
+        public RemodelFilterViewModel RemodelFilterSelected
+        {
+            get { return this._RemodelFilterSelected; }
+            set
+            {
+                if (this._RemodelFilterSelected != value)
+                {
+                    this._RemodelFilterSelected = value;
+                    this.RaisePropertyChanged();
+                    this.Update(false);
+                }
             }
         }
 
@@ -176,8 +202,21 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		{
 			this.Title = "개수공창 리스트";
 			this.WeekDayList = WeekDayTable.Keys.ToList();
+            this.SelectedDay = this.WeekDayList.FirstOrDefault();
 
-			Update();
+
+            var list = new List<RemodelFilterViewModel>();
+
+            var icons = Enum.GetNames(typeof(SlotItemIconType));
+            list.Add(new RemodelFilterViewModel("All", null));
+
+            foreach (var item in icons)
+                list.Add(new RemodelFilterViewModel(item, (SlotItemIconType)Enum.Parse(typeof(SlotItemIconType), item)));
+
+            this.RemodelFilters = list;
+            this.RemodelFilterSelected = this.RemodelFilters.FirstOrDefault();
+
+            Update();
 		}
 		private void Update(bool IsStart = true)
 		{
@@ -227,6 +266,31 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
                     var Weekday = "AllWeekdays";
                     //RemodelList에서 오늘 개수공창 목록에 들어갈것들을 선별한다.
                     RemodelList = RemodelList.Where(f => WeekDaySetter(Convert.ToInt32(f.Element(Weekday).Value)).HasFlag(today));
+
+                    // 아이콘으로 필터
+                    if (this.RemodelFilterSelected.Display.HasValue)
+                    {
+                        RemodelList = RemodelList.Where(x =>
+                        {
+                            var name = KanColleClient.Current.Translations.GetTranslation(
+                                x.Element("SlotItemName").Value,
+                                TranslationType.Equipment,
+                                false
+                            );
+                            var icon = KanColleClient.Current.Master.SlotItems
+                                .Where(y => y.Value.Name == name)
+                                .Select(y => y.Value.IconType)
+                                .FirstOrDefault();
+
+                            // Not registered icon yet (Unknown icon)
+                            if (Enum.GetName(typeof(SlotItemIconType), icon) == null)
+                                icon = SlotItemIconType.Unknown;
+
+                            return icon == this.RemodelFilterSelected.Display.Value;
+                        });
+                    }
+
+
                     //상중하 리스트를 작성->상중하의 구분을 제거
                     var list = MakeDefaultList(RemodelList).ToList();
                     var _FirstList = SortList(list);
@@ -601,5 +665,17 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		NotNeedShip = 1 << 7,
 		All = Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday,
 	}
-	#endregion
+
+    public class RemodelFilterViewModel : Livet.ViewModel
+    {
+        public string Key { get; }
+        public SlotItemIconType? Display { get; }
+
+        public RemodelFilterViewModel(string Key, SlotItemIconType? Display)
+        {
+            this.Key = Key;
+            this.Display = Display;
+        }
+    }
+    #endregion
 }
