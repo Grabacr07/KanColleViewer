@@ -728,8 +728,80 @@
 						</ControlTemplate>
 					</Setter.Value>
 				</Setter>
-			</Trigger>
-		</Style.Triggers>
+            </Trigger>
+            <Trigger Property="Type"
+					 Value="AmphibiousLandingCraft">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+                            <Path Stretch="Uniform"
+								  Data="M56,278L56 375 69 389 83 389 97 417 97 444 125 472 153 472 153 458 167 403 181 403 194 458 153 458 153 472 222 472 222 458 222 403 264 403 250 458 222 458 222 472 278 472 278 458 278 403 306 403 319 458 278 458 278 472 347 472 347 458 333 403 361 403 375 458 347 458 347 472 403 472 403 458 389 403 417 403 431 444 403 458 403 472 431 458 444 458 486 431 542 431 583 389 597 361 611 319 611 306 347 319 389 292 444 292 444 264 347 264 319 208 264 208 236 292 208 292 194 264 208 250 194 222 181 222 194 181 181 181 167 222 153 222 139 250 167 250 153 264 139 292 z"
+								  Fill="#FF9AA55D" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="Type" Value="LandBasedAttacker">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+                            <Viewbox>
+                                <Grid>
+                                    <Path Data="M0,347L28 292 69 264 42 250 83 250 14 208 14 181 153 222 194 194 194 222 208 222 208 181 222 181 250 222 278 222 306 208 306 181 375 194 417 111 431 111 431 167 444 208 472 222 500 236 500 250 458 236 444 236 361 264 333 278 347 292 500 347 500 375 486 375 333 333 264 375 236 375 236 347 250 306 83 375 14 361 z"
+										  Fill="#FF39B74E"
+										  HorizontalAlignment="Left"
+										  Height="139"
+										  Stretch="Uniform"
+										  VerticalAlignment="Top"
+										  Width="235" />
+                                    <ed:RegularPolygon PointCount="6"
+													   InnerRadius="1"
+													   Stretch="Fill"
+													   Stroke="Black"
+													   StrokeThickness="2"
+													   Fill="#FF39B74E"
+													   Width="126"
+													   Height="146"
+													   HorizontalAlignment="Left"
+													   VerticalAlignment="Top"
+													   Margin="91.033,50.606,0,0" />
+                                </Grid>
+                            </Viewbox>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="Type" Value="LandBasedFighter">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+                            <Viewbox>
+                                <Grid>
+                                    <Path Data="M28,181L28 194 14 236 42 208 56 236 83 250 125 264 167 278 181 306 139 319 181 319 236 431 264 431 278 333 264 292 319 292 361 306 403 306 458 375 472 375 472 347 444 306 500 264 500 236 472 236 431 250 417 264 375 208 361 208 375 236 347 236 333 222 361 167 319 208 278 194 236 194 208 167 181 83 153 56 125 56 139 139 111 153 74 153 83 111 56 153 42 167 0 139 z"
+										  Fill="#FF39B74E"
+										  HorizontalAlignment="Left"
+										  Height="139"
+										  Stretch="Uniform"
+										  VerticalAlignment="Top"
+										  Width="235" />
+                                    <ed:RegularPolygon PointCount="6"
+													   InnerRadius="1"
+													   Stretch="Fill"
+													   Stroke="Black"
+													   StrokeThickness="2"
+													   Fill="#FF39B74E"
+													   Width="126"
+													   Height="146"
+													   HorizontalAlignment="Left"
+													   VerticalAlignment="Top"
+													   Margin="91.033,50.606,0,0" />
+                                </Grid>
+                            </Viewbox>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
 	</Style>
 
 </ResourceDictionary>
