@@ -184,5 +184,20 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 洋上補給。
 		/// </summary>
 		OffshoreResupply = 35,
-	}
+
+        /// <summary>
+        /// 内火艇
+        /// </summary>
+        AmphibiousLandingCraft = 36,
+
+        /// <summary>
+        /// 陸上攻撃機
+        /// </summary>
+        LandBasedAttacker = 37,
+
+        /// <summary>
+        /// 局地戦闘機
+        /// </summary>
+        LandBasedFighter = 38,
+    }
 }
