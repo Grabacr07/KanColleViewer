@@ -39,7 +39,23 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
         #endregion
 
-        #region RemodelFilters 변경통지 프로퍼티
+        #region OnlyOwnSlotItems 변경통지 프로퍼티
+
+        private bool _OnlyOwnSlotItems;
+        public bool OnlyOwnSlotItems
+        {
+            get { return this._OnlyOwnSlotItems; }
+            set
+            {
+                this._OnlyOwnSlotItems = value;
+                this.RaisePropertyChanged();
+                this.Update(false);
+            }
+        }
+
+        #endregion
+
+        #region RemodelFilters 프로퍼티
 
         public ICollection<RemodelFilterViewModel> RemodelFilters { get; }
 
@@ -266,6 +282,25 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
                     var Weekday = "AllWeekdays";
                     //RemodelList에서 오늘 개수공창 목록에 들어갈것들을 선별한다.
                     RemodelList = RemodelList.Where(f => WeekDaySetter(Convert.ToInt32(f.Element(Weekday).Value)).HasFlag(today));
+
+                    // 소지 장비로 필터
+                    if (this.OnlyOwnSlotItems)
+                    {
+                        RemodelList = RemodelList.Where(x =>
+                        {
+                            var name = KanColleClient.Current.Translations.GetTranslation(
+                                x.Element("SlotItemName").Value,
+                                TranslationType.Equipment,
+                                false
+                            );
+                            var itemid = KanColleClient.Current.Master.SlotItems
+                                .Where(y => y.Value.Name == name)
+                                .Select(y => y.Value.Id)
+                                .FirstOrDefault();
+
+                            return KanColleClient.Current.Homeport.Itemyard.SlotItems.Any(y => y.Value.Info.Id == itemid);
+                        });
+                    }
 
                     // 아이콘으로 필터
                     if (this.RemodelFilterSelected.Display.HasValue)

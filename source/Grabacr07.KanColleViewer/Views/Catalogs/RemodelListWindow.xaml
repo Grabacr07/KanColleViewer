@@ -236,9 +236,7 @@
                                         </DataTemplate>
                                     </Panel.Resources>
 
-                                    <Path Data=""
-                                          Width="15" Height="15"
-                                          Fill="Red"/>
+                                    <CheckBox IsChecked="{Binding OnlyOwnSlotItems}"  Content="보유중인 장비만 보기" />
 
                                     <metro:PromptComboBox MinWidth="56"
                                                           HorizontalAlignment="Right"
