@@ -102,6 +102,16 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
         #endregion
 
+        private bool _MaterialExtended;
+        public bool MaterialExtended {
+            get { return this._MaterialExtended; }
+            set
+            {
+                this._MaterialExtended = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
         public InformationViewModel()
 		{
 			this.Settings = SettingsHost.Instance<KanColleWindowSettings>();
@@ -141,6 +151,9 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			this.SlotItems = new SlotItemsViewModel().AddTo(this);
 
 			_AkashiTimer = new AkashiTimerViewModel();
-		}
+
+            KanColleSettings.DisplayMaterialExtended.ValueChanged += (s, e) => this.MaterialExtended = e.NewValue;
+            this.MaterialExtended = KanColleSettings.DisplayMaterialExtended;
+        }
 	}
 }

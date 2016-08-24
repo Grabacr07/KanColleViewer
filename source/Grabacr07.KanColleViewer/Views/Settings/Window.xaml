@@ -28,8 +28,18 @@
 		<TextBlock Text="{Binding Resources.Settings_Display, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
+        <StackPanel Orientation="Horizontal"
+                    Margin="20,0,0,5">
+
+            <CheckBox Content="정보 영역의 자원을 확장하기"
+					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.DisplayMaterialExtended}, Path=Value}" />
+        </StackPanel>
+        
+        <Rectangle Margin="10,7,10,12"
+                   Style="{DynamicResource SeparatorStyleKey}" />
+        
 		<StackPanel Orientation="Horizontal"
-					Margin="20,0,0,10">
+					Margin="20,0,0,5">
 			<TextBlock Text="어플리케이션 종료시 확인"
 					   Margin="0,0,10,0" />
 			<metro:PromptComboBox ItemsSource="{Binding ExitConfirmationTypes}"
@@ -40,7 +50,7 @@
 								  MinWidth="140" />
 		</StackPanel>
 		<StackPanel Orientation="Horizontal"
-					Margin="20,0,0,10">
+					Margin="20,0,0,5">
 			<TextBlock Text="팝업으로 새로고침시 확인"
 					   Margin="0,0,10,0" />
 			<metro:PromptComboBox ItemsSource="{Binding RefreshConfirmationTypes}"

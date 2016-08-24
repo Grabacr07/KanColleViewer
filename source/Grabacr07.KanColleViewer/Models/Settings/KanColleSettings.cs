@@ -126,10 +126,28 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		public static SerializableProperty<string> DisplayMaterial2 { get; }
 			= new SerializableProperty<string>(GetKey(), Providers.Roaming, nameof(Materials.InstantBuildMaterials));
 
-		/// <summary>
-		/// 艦隊ステータスにおいて、旗艦が工作艦でないことを確認するかどうかを表す設定値を取得します。
-		/// </summary>
-		public static SerializableProperty<bool> CheckFlagshipIsNotRepairShip { get; }
+        /// <summary>
+        /// 画面に表示する資材 (3 つめ) を表す設定値を取得します。
+        /// </summary>
+        public static SerializableProperty<string> DisplayMaterial3 { get; }
+            = new SerializableProperty<string>(GetKey(), Providers.Roaming, nameof(Materials.Fuel));
+
+        /// <summary>
+        /// 画面に表示する資材 (4 つめ) を表す設定値を取得します。
+        /// </summary>
+        public static SerializableProperty<string> DisplayMaterial4 { get; }
+            = new SerializableProperty<string>(GetKey(), Providers.Roaming, nameof(Materials.Ammunition));
+
+        /// <summary>
+        /// 画面に表示する資材 (4 つめ) を表す設定値を取得します。
+        /// </summary>
+        public static SerializableProperty<bool> DisplayMaterialExtended { get; }
+            = new SerializableProperty<bool>(GetKey(), Providers.Roaming, false);
+
+        /// <summary>
+        /// 艦隊ステータスにおいて、旗艦が工作艦でないことを確認するかどうかを表す設定値を取得します。
+        /// </summary>
+        public static SerializableProperty<bool> CheckFlagshipIsNotRepairShip { get; }
 			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
 
 		/// <summary>
