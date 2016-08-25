@@ -37,13 +37,13 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
                                 {
                                     switch(fleetId) {
                                         case 1:
-                                            Models.Settings.ExpeditionSettings.ExpeditionId1.Value = this.Fleets.Fleets[1].ExpeditionId;
+                                            Models.Settings.ExpeditionSettings.ExpeditionId1.Value = x.ExpeditionId;
                                             break;
                                         case 2:
-                                            Models.Settings.ExpeditionSettings.ExpeditionId2.Value = this.Fleets.Fleets[2].ExpeditionId;
+                                            Models.Settings.ExpeditionSettings.ExpeditionId2.Value = x.ExpeditionId;
                                             break;
                                         case 3:
-                                            Models.Settings.ExpeditionSettings.ExpeditionId3.Value = this.Fleets.Fleets[3].ExpeditionId;
+                                            Models.Settings.ExpeditionSettings.ExpeditionId3.Value = x.ExpeditionId;
                                             break;
                                     }
                                     Properties.Settings.Default.Save();

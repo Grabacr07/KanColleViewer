@@ -19,6 +19,8 @@
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
 			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Models.Settings"
+			 xmlns:fleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
+			 xmlns:wrapper="clr-namespace:Grabacr07.KanColleWrapper.Models;assembly=KanColleWrapper"
 			 mc:Ignorable="d"
 			 d:DataContext="{d:DesignInstance vmContents:OverviewViewModel}"
 			 d:DesignWidth="680"
@@ -78,6 +80,156 @@
 
 			<Style TargetType="{x:Type TextBlock}"
 				   BasedOn="{StaticResource DefaultTextStyleKey}" />
+
+            <DataTemplate x:Key="ShipViewKey" DataType="{x:Type wrapper:Ship}">
+                <StackPanel Margin="0,2,0,0">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type TextBlock}"
+						       BasedOn="{StaticResource DefaultTextStyleKey}">
+                            <Setter Property="TextWrapping"
+							        Value="NoWrap" />
+                        </Style>
+                    </StackPanel.Resources>
+
+                    <Grid HorizontalAlignment="Left"
+						Margin="4,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="Name" />
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="Level" />
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="HP" />
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="Condition" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock ToolTipService.Placement="Relative"
+							       ToolTipService.HorizontalOffset="-9"
+							       ToolTipService.VerticalOffset="-3">
+					        <Run Text="{Binding Info.Name, Mode=OneWay}"
+							     Style="{DynamicResource EmphaticTextElementStyleKey}" 
+							     FontSize="14"/>
+					        <LineBreak />
+					        <Run Text="{Binding Info.ShipType.Name, Mode=OneWay}"
+							     FontSize="11" />
+                            <TextBlock.ToolTip>
+                                <TextBlock Margin="0,-2,0,0">
+						            <Run Text="{Binding Info.Name, Mode=OneWay}"
+								         Style="{DynamicResource EmphaticTextElementStyleKey}"
+								         FontSize="14"/>
+								        <Run Text="{Binding Info.JPName, Mode=OneWay}"
+									         Style="{DynamicResource EmphaticTextElementStyleKey}"
+									         FontSize="13"/>
+						            <LineBreak />
+						            <Run Text="{Binding Info.ShipType.Name, Mode=OneWay}"
+								         FontSize="11" />
+                                </TextBlock>
+                            </TextBlock.ToolTip>
+				        </TextBlock>
+
+                        <TextBlock Grid.Column="1"
+							   Margin="12,0,0,0">
+					        <Run Text="Lv." />
+					        <Run Text="{Binding Level, Mode=OneWay}"
+							     Style="{DynamicResource EmphaticTextElementStyleKey}" />
+					        <LineBreak />
+					        <Run Text="{Binding ExpForNextLevel, StringFormat=Next: {0}, Mode=OneWay}"
+							     FontSize="9" />
+                        </TextBlock>
+
+                        <Grid x:Name="HPIndicator"
+						      Grid.Column="2"
+						      Margin="12,1,12,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock>
+						        <Run Text="HP:" />
+						        <Run Text="{Binding HP.Current, Mode=OneWay}"
+								     Style="{DynamicResource EmphaticTextElementStyleKey}" />
+						        <Run Text="{Binding HP.Maximum, StringFormat=/{0}, Mode=OneWay}" />
+                            </TextBlock>
+
+                            <kcvc:ColorIndicator Grid.Row="1"
+											     Height="6"
+											     LimitedValue="{Binding HP, Mode=OneWay}"
+											     Margin="0,2,0,0" />
+                        </Grid>
+
+                        <Grid x:Name="RepairIndicator"
+						      Grid.Column="2"
+						      Visibility="Collapsed"
+						      Margin="8,2,8,0">
+                            <Border Background="{DynamicResource FleetRepairingBrushKey}"
+							        Opacity=".4" />
+                            <TextBlock Text="입거중"
+								       Style="{DynamicResource EmphaticTextStyleKey}"
+								       HorizontalAlignment="Center" />
+                        </Grid>
+
+                        <Grid x:Name="EvacuationIndicator"
+						        Grid.Column="2"
+						        Visibility="Collapsed"
+						        Margin="8,2,8,0">
+                            <Border Background="{DynamicResource FleetRepairingBrushKey}"
+							        Opacity=".4" />
+                            <TextBlock Text="퇴피완료"
+								        Style="{DynamicResource EmphaticTextStyleKey}"
+								        HorizontalAlignment="Center" />
+                        </Grid>
+
+                        <TextBlock Grid.Column="3">
+						    <InlineUIContainer>
+							    <kcvc:ConditionIcon ConditionType="{Binding ConditionType, Mode=OneWay}" />
+						    </InlineUIContainer>
+						    <Run Text="{Binding Condition, Mode=OneWay}"
+							     Style="{DynamicResource EmphaticTextElementStyleKey}" />
+						    <LineBreak />
+						    <Run Text="컨디션"
+							     FontSize="8" />
+
+                            <TextBlock.ToolTip>
+                                <TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+                                           Foreground="White">
+                                    <Run Text="피로회복까지:" />
+                                    <Run Text="{Binding Condition.ConditionText, Mode=OneWay}" />
+                                </TextBlock>
+                            </TextBlock.ToolTip>
+					    </TextBlock>
+                    </Grid>
+                    <Rectangle Height=".99"
+						    Margin="0,4,0,0"
+						    Style="{DynamicResource SeparatorRectangleStyleKey}" />
+                </StackPanel>
+
+                <DataTemplate.Triggers>
+				    <DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
+							    Value="True">
+					    <Setter TargetName="HPIndicator"
+						    Property="Opacity"
+						    Value=".2" />
+					    <Setter TargetName="RepairIndicator"
+						    Property="Visibility"
+						    Value="Visible" />
+				    </DataTrigger>
+				    <DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow}"
+							    Value="True">
+					    <Setter TargetName="HPIndicator"
+						    Property="Opacity"
+						    Value=".2" />
+					    <Setter TargetName="EvacuationIndicator"
+						    Property="Visibility"
+						    Value="Visible" />
+				    </DataTrigger>
+				    <DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Evacuation}"
+							    Value="True">
+					    <Setter TargetName="HPIndicator"
+						    Property="Opacity"
+						    Value=".2" />
+					    <Setter TargetName="EvacuationIndicator"
+						    Property="Visibility"
+						    Value="Visible" />
+				    </DataTrigger>
+			    </DataTemplate.Triggers>
+		    </DataTemplate>
 		</ResourceDictionary>
 	</UserControl.Resources>
 
@@ -226,34 +378,25 @@
 				<Border VerticalAlignment="Top">
 					<DockPanel DataContext="{Binding Content.Fleets}">
 						<ListBox DockPanel.Dock="Top"
-							 ItemsSource="{Binding Fleets}"
-							 SelectedValue="{Binding SelectedFleet, Mode=TwoWay}"
-							 Style="{DynamicResource HorizontalFlatListBoxStyleKey}">
-							<ItemsControl.ItemTemplate>
-								<DataTemplate>
-									<Border Padding="0,0,18,0"
-										Background="Transparent">
-										<StackPanel Orientation="Horizontal">
-											<vContents:StateIconIndicator Width="12"
-																	  Height="12"
-																	  Margin="0,2,4,1" />
-											<TextBlock x:Name="FleetName"
-												   Text="{Binding Id, StringFormat='/{0}'}"
-												   Style="{DynamicResource DefaultTextStyleKey}"
-												   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
-										</StackPanel>
-									</Border>
-									<DataTemplate.Triggers>
-										<DataTrigger Binding="{Binding IsSelected}"
-												 Value="True">
-											<Setter TargetName="FleetName"
-												Property="Text"
-												Value="{Binding Name}" />
-										</DataTrigger>
-									</DataTemplate.Triggers>
-								</DataTemplate>
-							</ItemsControl.ItemTemplate>
-						</ListBox>
+			                     ItemsSource="{Binding Fleets2}"
+					             SelectedValue="{Binding SelectedFleet, Mode=TwoWay}"
+					             Style="{DynamicResource HorizontalFlatListBoxStyleKey}">
+				            <ItemsControl.ItemTemplate>
+					            <DataTemplate>
+						            <Border Padding="10,0,10,5"
+								            Background="Transparent">
+							            <StackPanel Orientation="Horizontal">
+								            <vContents:StateIconIndicator Width="14"
+															             Height="14"
+															             Margin="0,2,4,0" />
+								            <TextBlock Text="{Binding Name}"
+										               Style="{DynamicResource HeaderTextStyleKey}"
+										               Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" />
+							            </StackPanel>
+						            </Border>
+					            </DataTemplate>
+				            </ItemsControl.ItemTemplate>
+			            </ListBox>
 
 						<vContents:StateDetailIndicator DockPanel.Dock="Top"
 													DataContext="{Binding SelectedFleet}"
@@ -261,7 +404,7 @@
 
 						<ScrollViewer HorizontalScrollBarVisibility="Auto"
 								  VerticalScrollBarVisibility="Disabled">
-							<ItemsControl ItemsSource="{Binding SelectedFleet.Ships}"
+							<ContentControl Content="{Binding SelectedFleet}"
 									  Background="Transparent"
 									  Grid.IsSharedSizeScope="True">
 								<i:Interaction.Triggers>
@@ -271,160 +414,44 @@
 																 Orientation="Horizontal" />
 									</behaviors:FlickTrigger>
 								</i:Interaction.Triggers>
-								<ItemsControl.ItemTemplate>
-									<DataTemplate>
-										<StackPanel Margin="0,2,0,0">
-											<StackPanel.Resources>
-												<Style TargetType="{x:Type TextBlock}"
-												   BasedOn="{StaticResource DefaultTextStyleKey}">
-													<Setter Property="TextWrapping"
-														Value="NoWrap" />
-												</Style>
-											</StackPanel.Resources>
+                                <ContentControl.Resources>
+                                    <DataTemplate DataType="{x:Type fleets:FleetViewModel}">
+                                        <ItemsControl ItemsSource="{Binding Source.Ships}"
+										              ItemTemplate="{DynamicResource ShipViewKey}" />
+                                    </DataTemplate>
 
-											<Grid HorizontalAlignment="Left">
-												<Grid.ColumnDefinitions>
-													<ColumnDefinition Width="Auto"
-																  SharedSizeGroup="Name" />
-													<ColumnDefinition Width="Auto"
-																  SharedSizeGroup="Level" />
-													<ColumnDefinition Width="Auto"
-																  SharedSizeGroup="HP" />
-													<ColumnDefinition Width="Auto"
-																  SharedSizeGroup="Condition" />
-												</Grid.ColumnDefinitions>
-
-												<TextBlock ToolTipService.Placement="Relative"
-													   ToolTipService.HorizontalOffset="-9"
-													   ToolTipService.VerticalOffset="-3">
-												<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
-													 Style="{DynamicResource EmphaticTextElementStyleKey}" 
-													 FontSize="14"/>
-												<LineBreak />
-												<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
-													 FontSize="11" />
-													<TextBlock.ToolTip>
-														<TextBlock Margin="0,-2,0,0">
-													<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
-														 Style="{DynamicResource EmphaticTextElementStyleKey}"
-														 FontSize="14"/>
-															<Run Text="{Binding Ship.Info.JPName, Mode=OneWay}"
-																 Style="{DynamicResource EmphaticTextElementStyleKey}"
-																 FontSize="13"/>
-													<LineBreak />
-													<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
-														 FontSize="11" />
-														</TextBlock>
-													</TextBlock.ToolTip>
-											</TextBlock>
-
-												<TextBlock Grid.Column="1"
-													   Margin="12,0,0,0">
-												<Run Text="Lv." />
-												<Run Text="{Binding Ship.Level, Mode=OneWay}"
-													 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-												<LineBreak />
-												<Run Text="{Binding Ship.ExpForNextLevel, StringFormat=Next: {0}, Mode=OneWay}"
-													 FontSize="9" />
-												</TextBlock>
-
-												<Grid x:Name="HPIndicator"
-												  Grid.Column="2"
-												  Margin="12,1,12,0">
-													<Grid.RowDefinitions>
-														<RowDefinition Height="Auto" />
-														<RowDefinition Height="Auto" />
-													</Grid.RowDefinitions>
-													<TextBlock>
-													<Run Text="HP:" />
-													<Run Text="{Binding Ship.HP.Current, Mode=OneWay}"
-														 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-													<Run Text="{Binding Ship.HP.Maximum, StringFormat=/{0}, Mode=OneWay}" />
-													</TextBlock>
-													<kcvc:ColorIndicator Grid.Row="1"
-																	 Height="6"
-																	 LimitedValue="{Binding Ship.HP, Mode=OneWay}"
-																	 Margin="0,2,0,0" />
-												</Grid>
-
-												<Grid x:Name="RepairIndicator"
-												  Grid.Column="2"
-												  Visibility="Collapsed"
-												  Margin="8,2,8,0">
-													<Border Background="{DynamicResource FleetRepairingBrushKey}"
-														Opacity=".4" />
-													<TextBlock Text="입거중"
-														   Style="{DynamicResource EmphaticTextStyleKey}"
-														   HorizontalAlignment="Center" />
-												</Grid>
-
-												<Grid x:Name="EvacuationIndicator"
-												  Grid.Column="2"
-												  Visibility="Collapsed"
-												  Margin="8,2,8,0">
-													<Border Background="{DynamicResource FleetRepairingBrushKey}"
-														Opacity=".4" />
-													<TextBlock Text="퇴피완료"
-														   Style="{DynamicResource EmphaticTextStyleKey}"
-														   HorizontalAlignment="Center" />
-												</Grid>
-
-												<TextBlock Grid.Column="3">
-												    <InlineUIContainer>
-													    <kcvc:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
-												    </InlineUIContainer>
-												    <Run Text="{Binding Ship.Condition, Mode=OneWay}"
-													     Style="{DynamicResource EmphaticTextElementStyleKey}" />
-												    <LineBreak />
-												    <Run Text="컨디션"
-													     FontSize="8" />
-                                                    
-                                                    <TextBlock.ToolTip>
-                                                        <TextBlock Style="{DynamicResource DefaultTextStyleKey}"
-                                                                   Foreground="White">
-                                                            <Run Text="피로회복까지:" />
-                                                            <Run Text="{Binding Condition.ConditionText, Mode=OneWay}" />
-                                                        </TextBlock>
-                                                    </TextBlock.ToolTip>
-												</TextBlock>
-											</Grid>
-											<Rectangle Height=".99"
-												   Margin="0,4,0,0"
-												   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-										</StackPanel>
-
-										<DataTemplate.Triggers>
-											<DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
-													 Value="True">
-												<Setter TargetName="HPIndicator"
-													Property="Opacity"
-													Value=".2" />
-												<Setter TargetName="RepairIndicator"
-													Property="Visibility"
-													Value="Visible" />
-											</DataTrigger>
-											<DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow}"
-													 Value="True">
-												<Setter TargetName="HPIndicator"
-													Property="Opacity"
-													Value=".2" />
-												<Setter TargetName="EvacuationIndicator"
-													Property="Visibility"
-													Value="Visible" />
-											</DataTrigger>
-											<DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Evacuation}"
-													 Value="True">
-												<Setter TargetName="HPIndicator"
-													Property="Opacity"
-													Value=".2" />
-												<Setter TargetName="EvacuationIndicator"
-													Property="Visibility"
-													Value="Visible" />
-											</DataTrigger>
-										</DataTemplate.Triggers>
-									</DataTemplate>
-								</ItemsControl.ItemTemplate>
-							</ItemsControl>
+                                    <DataTemplate DataType="{x:Type fleets:CombinedFleetViewModel}">
+                                        <ItemsControl ItemsSource="{Binding Source.Fleets}"
+										              Margin="0,0,0,-1">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border BorderThickness="0,0,0,1"
+												            BorderBrush="{DynamicResource BorderBrushKey}">
+                                                        <DockPanel LastChildFill="True">
+                                                            <Border Background="{DynamicResource BorderBrushKey}"
+														            Padding="8,4">
+                                                                <Border.LayoutTransform>
+                                                                    <RotateTransform Angle="-90"
+																		 CenterX="0.5"
+																		 CenterY="0.5" />
+                                                                </Border.LayoutTransform>
+                                                                <TextBlock Text="{Binding Name}"
+															               TextAlignment="Center"
+															               Foreground="{DynamicResource SemiActiveForegroundBrushKey}"
+															               Style="{DynamicResource EmphaticTextStyleKey}"
+                                                                           FontSize="13" />
+                                                            </Border>
+                                                            <ItemsControl ItemsSource="{Binding Ships}"
+															              ItemTemplate="{DynamicResource ShipViewKey}"
+															              Margin="0,0,0,-1" />
+                                                        </DockPanel>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </DataTemplate>
+                                </ContentControl.Resources>
+                            </ContentControl>
 						</ScrollViewer>
 					</DockPanel>
 				</Border>
