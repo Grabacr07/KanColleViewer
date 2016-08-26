@@ -389,11 +389,20 @@
 								            <vContents:StateIconIndicator Width="14"
 															             Height="14"
 															             Margin="0,2,4,0" />
-								            <TextBlock Text="{Binding Name}"
+                                            <TextBlock x:Name="FleetName"
+                                                       Text="{Binding Id, StringFormat='/{0}'}"
 										               Style="{DynamicResource HeaderTextStyleKey}"
 										               Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" />
 							            </StackPanel>
 						            </Border>
+									<DataTemplate.Triggers>
+										<DataTrigger Binding="{Binding IsSelected}"
+												     Value="True">
+											<Setter TargetName="FleetName"
+												    Property="Text"
+												    Value="{Binding Name}" />
+										</DataTrigger>
+									</DataTemplate.Triggers> 
 					            </DataTemplate>
 				            </ItemsControl.ItemTemplate>
 			            </ListBox>
