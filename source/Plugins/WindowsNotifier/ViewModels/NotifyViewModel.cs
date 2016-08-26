@@ -25,6 +25,18 @@ namespace Grabacr07.KanColleViewer.Plugins.ViewModels
 			}
 		}
 
+		public bool UseModern
+		{
+			get { return settings.UseModern; }
+			set
+			{
+				if (settings.UseModern == value) return;
+				settings.UseModern = value;
+				settings.Save();
+				this.RaisePropertyChanged();
+			}
+		}
+
 		public void Critical()
 		{
 			var notification = Notification.Create(

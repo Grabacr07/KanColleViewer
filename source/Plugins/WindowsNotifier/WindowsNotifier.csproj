@@ -46,6 +46,9 @@
     <Reference Include="DesktopToast">
       <HintPath>..\..\..\assemblies\DesktopToast.dll</HintPath>
     </Reference>
+    <Reference Include="ModernNotify">
+      <HintPath>..\..\..\assemblies\ModernNotify.dll</HintPath>
+    </Reference>
     <Reference Include="Livet, Version=1.3.0.0, Culture=neutral, PublicKeyToken=b0b1d3f711ef38cb, processorArchitecture=MSIL">
       <HintPath>..\..\packages\LivetCask.1.3.1.0\lib\net45\Livet.dll</HintPath>
       <Private>True</Private>
