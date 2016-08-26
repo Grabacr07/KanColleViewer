@@ -226,6 +226,19 @@
 									<kcvc:SlotItemIcon Type="{Binding Item.Info.IconType}"
 														Margin="3,0" />
 
+                                    <TextBlock x:Name="LostCount"
+                                                Background="#66000000"
+                                                VerticalAlignment="Top"
+                                                HorizontalAlignment="Left"
+                                                Text="{Binding Lost, StringFormat={}-{0}}"
+                                                Padding="1,-2,1,1"
+                                                Width="Auto"
+                                                Height="Auto"
+                                                Foreground="#FFDD3535"
+                                                FontSize="10"
+                                                FontWeight="Bold"
+                                                Panel.ZIndex="1" />
+
                                     <Grid x:Name="ItemProficiencyBlock"
                                             Background="#66000000"
                                             VerticalAlignment="Top"
@@ -294,8 +307,11 @@
 									</DataTrigger>
                                     <DataTrigger Binding="{Binding Item.Proficiency}" Value="0">
                                         <Setter TargetName="ItemProficiencyBlock" Property="Visibility" Value="Collapsed" />
-									</DataTrigger>
-								</DataTemplate.Triggers>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Lost}" Value="0">
+                                        <Setter TargetName="LostCount" Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
 							</DataTemplate>
 						</ItemsControl.ItemTemplate>
 					</ItemsControl>
