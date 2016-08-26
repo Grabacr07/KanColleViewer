@@ -376,7 +376,6 @@
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="*" />
-				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition />
@@ -416,6 +415,17 @@
 									 Padding="12,8"
 									 MethodName="ShowFleetWindow" />
 
+            <TextBlock Grid.Row="1"
+                       Grid.Column="0"
+                       Margin="18,3"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Right">
+                <Run Text="보급량:" />
+                <Run Text="연료 " /><Run Text="{Binding SelectedFleet.UsedFuel, Mode=OneWay}" />
+                <Run Text="탄약 " /><Run Text="{Binding SelectedFleet.UsedAmmo, Mode=OneWay}" />
+                <Run Text="보크사이트 " /><Run Text="{Binding SelectedFleet.UsedBauxite, Mode=OneWay}" />
+            </TextBlock>
+            
 			<Grid Grid.Row="3"
 				  Grid.Column="0"
 				  Grid.ColumnSpan="2"

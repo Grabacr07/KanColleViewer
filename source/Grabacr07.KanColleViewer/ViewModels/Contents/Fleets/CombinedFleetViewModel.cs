@@ -21,6 +21,29 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			? this.State.Sortie
 			: this.State.Homeport as QuickStateViewViewModel;
 
+        #region 보급량
+
+        public int UsedFuel => this.Source.Fleets
+            .Select(z => z.Ships.Select(x => x.UsedFuel).Sum(x => x))
+            .Sum(z => z);
+
+        public int UsedAmmo => this.Source.Fleets
+            .Select(z => z.Ships.Select(x => x.UsedBull).Sum(x => x))
+            .Sum(z => z);
+
+        public int UsedBauxite => this.Source.Fleets
+            .Select(z => z.Ships
+                .Select(x =>
+                    x.Slots
+                        .Where(y => y.Item.Info.IsNumerable)
+                        .Select(y => y.Maximum - y.Current)
+                        .Sum(y => y * 5)
+                ).Sum(x => x)
+            )
+            .Sum(z => z);
+
+        #endregion
+
         #region FleetViewModel과의 호환성
         public int Id => 1;
         public Expedition Expedition => this.Source?.Fleets[0].Expedition;
@@ -53,6 +76,15 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet)
 			{
 				{ nameof(fleet.Name), (sender, args) => this.RaisePropertyChanged(nameof(this.Name)) },
+			});
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet)
+			{
+				{ nameof(fleet.Name), (sender, args) =>
+                {
+                    this.RaisePropertyChanged("UsedFuel");
+                    this.RaisePropertyChanged("UsedAmmo");
+                    this.RaisePropertyChanged("UsedBauxite");
+                } },
 			});
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet.State)
 			{

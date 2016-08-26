@@ -283,11 +283,24 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
         public string GreatChanceText => string.Format("대성공 {0}%", this.GreatChance);
         #endregion
 
+        #region 보급량
 
-		/// <summary>
-		/// 艦隊に所属している艦娘のコレクションを取得します。
-		/// </summary>
-		public ShipViewModel[] Ships
+        public int UsedFuel => this.Ships.Select(x => x.Ship.UsedFuel).Sum(x => x);
+        public int UsedAmmo => this.Ships.Select(x => x.Ship.UsedBull).Sum(x => x);
+        public int UsedBauxite => this.Ships
+            .Select(x =>
+                x.Ship.Slots
+                    .Where(y => y.Item.Info.IsNumerable)
+                    .Select(y => y.Maximum - y.Current)
+                    .Sum(y => y * 5)
+            ).Sum(x => x);
+
+        #endregion
+
+        /// <summary>
+        /// 艦隊に所属している艦娘のコレクションを取得します。
+        /// </summary>
+        public ShipViewModel[] Ships
 		{
 			get
 			{
@@ -368,7 +381,13 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
             // 연료/탄약량 변경
             this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet)
             {
-                { (sender,args) => this.ExpeditionId = this.ExpeditionId } // 재계산
+                { (sender,args) =>
+                {
+                    this.ExpeditionId = this.ExpeditionId;
+                    this.RaisePropertyChanged("UsedFuel");
+                    this.RaisePropertyChanged("UsedAmmo");
+                    this.RaisePropertyChanged("UsedBauxite");
+                } } // 재계산
             });
             // 출격 등 상태 변경
             this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet.State)
