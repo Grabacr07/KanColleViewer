@@ -379,20 +379,24 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
                 {nameof(this.Expedition.IsInExecution), (sender,args) => this.ExpeditionId = (this.Expedition.IsInExecution ? this.Expedition.Mission.Id : this.ExpeditionId) }
             });
             // 연료/탄약량 변경
-            this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet)
-            {
-                { (sender,args) =>
-                {
-                    this.ExpeditionId = this.ExpeditionId;
-                    this.RaisePropertyChanged("UsedFuel");
-                    this.RaisePropertyChanged("UsedAmmo");
-                    this.RaisePropertyChanged("UsedBauxite");
-                } } // 재계산
-            });
             // 출격 등 상태 변경
             this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet.State)
             {
                 { nameof(fleet.State.Situation), (sender, args) => this.RaisePropertyChanged(nameof(this.IsInSortie)) },
+                {  nameof(fleet.State.UsedFuel), (sender,args) =>
+                    {
+                        this.RaisePropertyChanged("UsedFuel");
+                        this.RaisePropertyChanged("UsedAmmo");
+                        this.RaisePropertyChanged("UsedBauxite");
+                    }
+                },
+                {  nameof(fleet.State.UsedBull), (sender,args) =>
+                    {
+                        this.RaisePropertyChanged("UsedFuel");
+                        this.RaisePropertyChanged("UsedAmmo");
+                        this.RaisePropertyChanged("UsedBauxite");
+                    }
+                }
             });
         }
         /// <summary>
