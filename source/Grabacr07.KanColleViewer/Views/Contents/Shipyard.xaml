@@ -6,6 +6,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+             xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
              xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
              xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
              xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
@@ -421,6 +422,10 @@
                                         </TextBlock.Style>
                                     </TextBlock>
                                     <Border Width="4" />
+                                    <kcvc:SlotItemIcon Margin="4,0"
+                                                       Width="20"
+                                                       Height="20"
+                                                       Type="{Binding CreatedSlotItem.IconType}" />
                                     <TextBlock Margin="0,6"
                                                Text="{Binding CreatedSlotItem.Name}">
                                         <TextBlock.Style>
