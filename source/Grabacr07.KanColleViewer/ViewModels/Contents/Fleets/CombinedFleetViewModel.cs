@@ -77,19 +77,24 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			{
 				{ nameof(fleet.Name), (sender, args) => this.RaisePropertyChanged(nameof(this.Name)) },
 			});
-			this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet)
-			{
-				{ nameof(fleet.Name), (sender, args) =>
-                {
-                    this.RaisePropertyChanged("UsedFuel");
-                    this.RaisePropertyChanged("UsedAmmo");
-                    this.RaisePropertyChanged("UsedBauxite");
-                } },
-			});
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet.State)
 			{
 				{ nameof(fleet.State.Situation), (sender, args) => this.RaisePropertyChanged(nameof(this.QuickStateView)) },
-			});
+                {  nameof(fleet.State.UsedFuel), (sender,args) =>
+                    {
+                        this.RaisePropertyChanged("UsedFuel");
+                        this.RaisePropertyChanged("UsedAmmo");
+                        this.RaisePropertyChanged("UsedBauxite");
+                    }
+                },
+                {  nameof(fleet.State.UsedBull), (sender,args) =>
+                    {
+                        this.RaisePropertyChanged("UsedFuel");
+                        this.RaisePropertyChanged("UsedAmmo");
+                        this.RaisePropertyChanged("UsedBauxite");
+                    }
+                }
+            });
 
 			this.State = new FleetStateViewModel(fleet.State);
 			this.CompositeDisposable.Add(this.State);
