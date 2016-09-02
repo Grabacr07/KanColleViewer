@@ -226,9 +226,10 @@
 										<!-- これっきりボタン -->
 										<metro2:CallMethodButton Content="상륙정">
 											<metro2:CallMethodButton.MethodParameter>
-												<x:Array Type="s:Int32">
-													<s:Int32>20</s:Int32>
-												</x:Array>
+                                                <x:Array Type="s:Int32">
+                                                    <s:Int32>20</s:Int32>
+                                                    <s:Int32>36</s:Int32>
+                                                </x:Array>
 											</metro2:CallMethodButton.MethodParameter>
 										</metro2:CallMethodButton>
 										<!-- これっきりボタン -->
@@ -238,6 +239,15 @@
 													<s:Int32>14</s:Int32>
 													<s:Int32>34</s:Int32>
 													<s:Int32>35</s:Int32>
+												</x:Array>
+											</metro2:CallMethodButton.MethodParameter>
+										</metro2:CallMethodButton>
+										<!-- これっきりボタン -->
+										<metro2:CallMethodButton Content="기지항공대">
+											<metro2:CallMethodButton.MethodParameter>
+												<x:Array Type="s:Int32">
+													<s:Int32>37</s:Int32>
+													<s:Int32>38</s:Int32>
 												</x:Array>
 											</metro2:CallMethodButton.MethodParameter>
 										</metro2:CallMethodButton>
