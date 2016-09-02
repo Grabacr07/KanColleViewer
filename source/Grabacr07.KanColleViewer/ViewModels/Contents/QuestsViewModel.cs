@@ -19,7 +19,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			protected set { throw new NotImplementedException(); }
 		}
 
-        public QuestViewModel[] Current => ComputeQuestPage(this._Quests.Where(x => x.State != QuestState.None).ToArray());
+        public QuestViewModel[] Current => this._Quests.Where(x => x.State != QuestState.None).ToArray();
 
 		#region Quests 変更通知プロパティ
 
@@ -186,20 +186,21 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
         {
             if (inp.Length == 0) return inp;
 
-            int prev = -1;
-            inp = inp.Select(x => { x.LastOnPage = false; return x; }).ToArray();
+            inp = inp
+                .Select(x => { x.LastOnPage = false; return x; })
+                .OrderBy(x => x.Page)
+                .ThenBy(x => x.Id)
+                .ToArray();
 
-            for (int i = 0; i < inp.Length; i++)
-            {
-                if (inp[i].Page != prev)
-                {
-                    if (i > 0) inp[i - 1].LastOnPage = true;
-                    prev = inp[i].Page;
-                }
-            }
-            inp[inp.Length - 1].LastOnPage = true;
+            int[] pages = inp.Select(x => x.Page)
+                .Distinct()
+                .ToArray();
 
-            return inp;
+            foreach (var page in pages)
+                inp.Where(x => x.Page == page)
+                    .Last().LastOnPage = true;
+
+            return inp.ToArray();
         }
 
     }
