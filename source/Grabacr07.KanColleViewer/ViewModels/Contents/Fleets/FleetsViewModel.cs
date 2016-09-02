@@ -53,8 +53,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		{
 			get { return this._SelectedFleet; }
 			set
-			{
-				if (this._SelectedFleet != null) this.SelectedFleet.IsSelected = false;
+            {
+                if (_SelectedFleet == value) return; // 같아서 문제?
+
+                if (this._SelectedFleet != null && this.SelectedFleet != null)
+                    this.SelectedFleet.IsSelected = false;
 				if (value != null) value.IsSelected = true;
 				this._SelectedFleet = value;
 				this.RaisePropertyChanged();
@@ -133,7 +136,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
             // SelectedFleet 이 무시되는 현상. 이유는 불명.
             new System.Threading.Thread(() =>
             {
-                System.Threading.Thread.Sleep(200);
+                // System.Threading.Thread.Sleep(200);
 
                 if (this.Fleets2.All(x => x != this.SelectedFleet))
                     this.SelectedFleet = this.Fleets2.FirstOrDefault();
