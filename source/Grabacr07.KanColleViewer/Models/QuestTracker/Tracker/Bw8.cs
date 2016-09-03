@@ -55,7 +55,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
         public string GetProgressText()
         {
-            return count >= max_count ? "완료" : $"4-2 보스전 승리 {count} / {max_count}";
+            return count >= max_count ? "완료" : $"4-4 보스전 승리 {count} / {max_count}";
         }
 
         public string SerializeData()
