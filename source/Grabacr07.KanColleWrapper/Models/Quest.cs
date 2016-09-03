@@ -22,8 +22,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			get
 			{
-				if (this.RawData.api_type == 5) return (QuestType)2;
-				else return (QuestType)this.RawData.api_type;
+				return (QuestType)this.RawData.api_type;
 			}
 		}
 
