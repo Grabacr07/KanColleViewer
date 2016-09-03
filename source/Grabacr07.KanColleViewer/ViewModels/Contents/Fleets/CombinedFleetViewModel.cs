@@ -21,6 +21,18 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			? this.State.Sortie
 			: this.State.Homeport as QuickStateViewViewModel;
 
+        /// <summary>
+        /// 艦隊に所属している艦娘のコレクションを取得します。
+        /// </summary>
+        public FleetViewModel[] Fleets
+        {
+            get
+            {
+                FleetViewModel[] temps = this.Source.Fleets.Select(x => new FleetViewModel(x)).ToArray();
+                return temps;
+            }
+        }
+
         #region 보급량
 
         public int UsedFuel => this.Source.Fleets

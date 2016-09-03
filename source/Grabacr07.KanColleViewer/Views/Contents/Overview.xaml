@@ -81,7 +81,7 @@
 			<Style TargetType="{x:Type TextBlock}"
 				   BasedOn="{StaticResource DefaultTextStyleKey}" />
 
-            <DataTemplate x:Key="ShipViewKey" DataType="{x:Type wrapper:Ship}">
+            <DataTemplate x:Key="ShipViewKey">
                 <StackPanel Margin="0,2,0,0">
                     <StackPanel.Resources>
                         <Style TargetType="{x:Type TextBlock}"
@@ -103,22 +103,22 @@
                         <TextBlock ToolTipService.Placement="Relative"
 							       ToolTipService.HorizontalOffset="-9"
 							       ToolTipService.VerticalOffset="-3">
-					        <Run Text="{Binding Info.Name, Mode=OneWay}"
+					        <Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
 							     Style="{DynamicResource EmphaticTextElementStyleKey}" 
 							     FontSize="14"/>
 					        <LineBreak />
-					        <Run Text="{Binding Info.ShipType.Name, Mode=OneWay}"
+					        <Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
 							     FontSize="11" />
                             <TextBlock.ToolTip>
                                 <TextBlock Margin="0,-2,0,0">
-						            <Run Text="{Binding Info.Name, Mode=OneWay}"
+						            <Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
 								         Style="{DynamicResource EmphaticTextElementStyleKey}"
 								         FontSize="14"/>
-								        <Run Text="{Binding Info.JPName, Mode=OneWay}"
+								        <Run Text="{Binding Ship.Info.JPName, Mode=OneWay}"
 									         Style="{DynamicResource EmphaticTextElementStyleKey}"
 									         FontSize="13"/>
 						            <LineBreak />
-						            <Run Text="{Binding Info.ShipType.Name, Mode=OneWay}"
+						            <Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
 								         FontSize="11" />
                                 </TextBlock>
                             </TextBlock.ToolTip>
@@ -127,11 +127,22 @@
                         <TextBlock Grid.Column="1"
 							   Margin="12,0,0,0">
 					        <Run Text="Lv." />
-					        <Run Text="{Binding Level, Mode=OneWay}"
+					        <Run Text="{Binding Ship.Level, Mode=OneWay}"
 							     Style="{DynamicResource EmphaticTextElementStyleKey}" />
 					        <LineBreak />
-					        <Run Text="{Binding ExpForNextLevel, StringFormat=Next: {0}, Mode=OneWay}"
+					        <Run Text="{Binding Ship.ExpForNextLevel, StringFormat=Next: {0}, Mode=OneWay}"
 							     FontSize="9" />
+
+                            <TextBlock.ToolTip>
+                                <TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+                                            Foreground="White">
+                                    <Run Text="다음 개장레벨:" />
+                                    <Run Text="{Binding Ship.Info.NextRemodelingLevel, Mode=OneWay}" />
+                                    <LineBreak />
+                                    <Run Text="남은 경험치:" />
+                                    <Run Text="{Binding Ship.ExpForNextRemodelingLevel, Mode=OneWay}" />
+                                </TextBlock>
+                            </TextBlock.ToolTip>
                         </TextBlock>
 
                         <Grid x:Name="HPIndicator"
@@ -143,14 +154,14 @@
                             </Grid.RowDefinitions>
                             <TextBlock>
 						        <Run Text="HP:" />
-						        <Run Text="{Binding HP.Current, Mode=OneWay}"
+						        <Run Text="{Binding Ship.HP.Current, Mode=OneWay}"
 								     Style="{DynamicResource EmphaticTextElementStyleKey}" />
-						        <Run Text="{Binding HP.Maximum, StringFormat=/{0}, Mode=OneWay}" />
+						        <Run Text="{Binding Ship.HP.Maximum, StringFormat=/{0}, Mode=OneWay}" />
                             </TextBlock>
 
                             <kcvc:ColorIndicator Grid.Row="1"
 											     Height="6"
-											     LimitedValue="{Binding HP, Mode=OneWay}"
+											     LimitedValue="{Binding Ship.HP, Mode=OneWay}"
 											     Margin="0,2,0,0" />
                         </Grid>
 
@@ -178,9 +189,9 @@
 
                         <TextBlock Grid.Column="3">
 						    <InlineUIContainer>
-							    <kcvc:ConditionIcon ConditionType="{Binding ConditionType, Mode=OneWay}" />
+							    <kcvc:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
 						    </InlineUIContainer>
-						    <Run Text="{Binding Condition, Mode=OneWay}"
+						    <Run Text="{Binding Ship.Condition, Mode=OneWay}"
 							     Style="{DynamicResource EmphaticTextElementStyleKey}" />
 						    <LineBreak />
 						    <Run Text="컨디션"
@@ -201,7 +212,7 @@
                 </StackPanel>
 
                 <DataTemplate.Triggers>
-				    <DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
+                    <DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
 							    Value="True">
 					    <Setter TargetName="HPIndicator"
 						    Property="Opacity"
@@ -210,7 +221,7 @@
 						    Property="Visibility"
 						    Value="Visible" />
 				    </DataTrigger>
-				    <DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow}"
+                    <DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow}"
 							    Value="True">
 					    <Setter TargetName="HPIndicator"
 						    Property="Opacity"
@@ -219,7 +230,7 @@
 						    Property="Visibility"
 						    Value="Visible" />
 				    </DataTrigger>
-				    <DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Evacuation}"
+                    <DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Evacuation}"
 							    Value="True">
 					    <Setter TargetName="HPIndicator"
 						    Property="Opacity"
@@ -425,12 +436,12 @@
 								</i:Interaction.Triggers>
                                 <ContentControl.Resources>
                                     <DataTemplate DataType="{x:Type fleets:FleetViewModel}">
-                                        <ItemsControl ItemsSource="{Binding Source.Ships}"
+                                        <ItemsControl ItemsSource="{Binding Ships}"
 										              ItemTemplate="{DynamicResource ShipViewKey}" />
                                     </DataTemplate>
 
                                     <DataTemplate DataType="{x:Type fleets:CombinedFleetViewModel}">
-                                        <ItemsControl ItemsSource="{Binding Source.Fleets}"
+                                        <ItemsControl ItemsSource="{Binding Fleets}"
 										              Margin="0,0,0,-1">
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
