@@ -378,7 +378,7 @@
 				<Border VerticalAlignment="Top">
 					<DockPanel DataContext="{Binding Content.Fleets}">
 						<ListBox DockPanel.Dock="Top"
-			                     ItemsSource="{Binding Fleets2}"
+			                     ItemsSource="{Binding Fleets2, Mode=OneWay}"
 					             SelectedValue="{Binding SelectedFleet, Mode=TwoWay}"
 					             Style="{DynamicResource HorizontalFlatListBoxStyleKey}">
 				            <ItemsControl.ItemTemplate>

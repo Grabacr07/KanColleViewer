@@ -230,7 +230,7 @@
                                                 Background="#66000000"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Left"
-                                                Text="{Binding Lost, StringFormat={}-{0}}"
+                                                Text="{Binding Lost, Mode=OneWay, StringFormat={}-{0}}"
                                                 Padding="1,-2,1,1"
                                                 Width="Auto"
                                                 Height="Auto"
@@ -256,28 +256,28 @@
                                                 <Style TargetType="{x:Type Path}">
                                                     <Setter Property="Fill" Value="#FFD49C0F" />
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Item.Proficiency, Converter={StaticResource RangeToBooleanConverter}, ConverterParameter=1-3}" Value="True">
+                                                        <DataTrigger Binding="{Binding Item.Proficiency, Mode=OneWay, Converter={StaticResource RangeToBooleanConverter}, ConverterParameter=1-3}" Value="True">
                                                             <Setter Property="Fill" Value="#FF98B3CE" />
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Item.Proficiency}" Value="1">
+                                                        <DataTrigger Binding="{Binding Item.Proficiency, Mode=OneWay}" Value="1">
                                                             <Setter Property="Data" Value="M7,2 L9,2 9,14 7,14Z" />
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Item.Proficiency}" Value="2">
+                                                        <DataTrigger Binding="{Binding Item.Proficiency, Mode=OneWay}" Value="2">
                                                             <Setter Property="Data" Value="M5,2 L7,2 7,14 5,14Z M8,2 L10,2 10,14 8,14Z" />
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Item.Proficiency}" Value="3">
+                                                        <DataTrigger Binding="{Binding Item.Proficiency, Mode=OneWay}" Value="3">
                                                             <Setter Property="Data" Value="M4,2 L6,2 6,14 4,14Z M7,2 L9,2 9,14 7,14Z M10,2 L12,2 12,14 10,14Z" />
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Item.Proficiency}" Value="4">
+                                                        <DataTrigger Binding="{Binding Item.Proficiency, Mode=OneWay}" Value="4">
                                                             <Setter Property="Data" Value="M5.5,2 L7.5,2 10.5,14 8.5,14Z" />
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Item.Proficiency}" Value="5">
+                                                        <DataTrigger Binding="{Binding Item.Proficiency, Mode=OneWay}" Value="5">
                                                             <Setter Property="Data" Value="M4,2 L6,2 9,14 7,14Z M7,2 L9,2 12,14 10,14Z" />
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Item.Proficiency}" Value="6">
+                                                        <DataTrigger Binding="{Binding Item.Proficiency, Mode=OneWay}" Value="6">
                                                             <Setter Property="Data" Value="M2,2 L4,2 7,14 5,14Z M5.5,2 L7.5,2 10.5,14 8.5,14Z M9,2 L11,2 14,14 12,14Z" />
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Item.Proficiency}" Value="7">
+                                                        <DataTrigger Binding="{Binding Item.Proficiency, Mode=OneWay}" Value="7">
                                                             <Setter Property="Data" Value="M4,2 L6,2 9,8 6,14 4,14 7,8Z M8,2 L10,2 13,8 10,14 8,14 11,8Z" />
                                                         </DataTrigger>
                                                     </Style.Triggers>
@@ -324,8 +324,8 @@
 									Style="{DynamicResource SeparatorRectangleStyleKey}"
 									Margin="12,4,0,3" />
 						<kcvc:SlotItemIcon Type="{Binding ExSlot.Item.Info.IconType}"
-											ToolTip="{Binding ExSlot.Item.NameWithLevel}"
-											Margin="3,0" />
+										   ToolTip="{Binding ExSlot.Item.NameWithLevel}"
+										   Margin="3,0" />
 					</DockPanel>
 				</Grid>
 				<Rectangle Height=".99"
@@ -420,7 +420,7 @@
 
 			<contents:StateDetailIndicator Grid.Row="1"
 										   Grid.Column="0"
-										   DataContext="{Binding SelectedFleet}"
+										   DataContext="{Binding SelectedFleet, Mode=OneWay}"
 										   Margin="10,3" />
 
 			<metro2:CallMethodButton Grid.Row="0"
@@ -445,13 +445,13 @@
 			<Grid Grid.Row="3"
 				  Grid.Column="0"
 				  Grid.ColumnSpan="2"
-				  DataContext="{Binding SelectedFleet}"
+				  DataContext="{Binding SelectedFleet, Mode=OneWay}"
 				  d:DataContext="{d:DesignData /SampleData/FleetViewModelSampleData.xaml}">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto"/>
 					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
-				<Grid Visibility="{Binding IsFirstFleet}" Margin="10,3">
+                <Grid Visibility="{Binding IsFirstFleet, Mode=OneWay}" Margin="10,3">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="*"/>
 						<ColumnDefinition Width="Auto"/>
@@ -465,15 +465,15 @@
 								   FontWeight="Bold"
 							   VerticalAlignment="Center"/>
 						<StackPanel Orientation="Horizontal">
-							<TextBlock Visibility="{Binding vTotal}" Margin="0,0,3,0">
+                            <TextBlock Visibility="{Binding vTotal}" Margin="0,0,3,0">
 								<Run Text="총Lv: " FontWeight="Bold" Foreground="Gray" FontSize="11"/>
 								<Run Text="{Binding TotalLv,Mode=OneWay}"/>
 							</TextBlock>
-							<TextBlock Visibility="{Binding vFlag}" Margin="3,0">
+                            <TextBlock Visibility="{Binding vFlag}" Margin="3,0">
 								<Run Text="기함Lv: " FontWeight="Bold" Foreground="Gray" FontSize="11"/>
 								<Run Text="{Binding FlagLv,Mode=OneWay}"/>
 							</TextBlock>
-							<TextBlock Visibility="{Binding vFlagType}" Margin="0,0,3,0">
+                            <TextBlock Visibility="{Binding vFlagType}" Margin="0,0,3,0">
 								<Run Text="기함종류: " FontWeight="Bold" Foreground="Gray" FontSize="11"/>
 								<Run Text="{Binding FlagType,Mode=OneWay}"/>
 							</TextBlock>
@@ -535,12 +535,12 @@
 						<TextBlock.Style>
 							<Style TargetType="TextBlock">
 								<Style.Triggers>
-									<DataTrigger Binding="{Binding IsPassed}"
+									<DataTrigger Binding="{Binding IsPassed, Mode=OneWay}"
 												 Value="False">
 										<Setter Property="Background" Value="Red"/>
 										<Setter Property="Text" Value="부족"/>
 									</DataTrigger>
-									<DataTrigger Binding="{Binding IsPassed}"
+									<DataTrigger Binding="{Binding IsPassed, Mode=OneWay}"
 												 Value="True">
 										<Setter Property="Background" Value="#FF3A68E2"/>
 										<Setter Property="Text" Value="편성완료"/>
@@ -557,12 +557,12 @@
 							    Grid.IsSharedSizeScope="True">
                     <ContentControl.Resources>
                         <DataTemplate DataType="{x:Type fleets:FleetViewModel}">
-                            <ItemsControl ItemsSource="{Binding Source.Ships}"
+                            <ItemsControl ItemsSource="{Binding Source.Ships, Mode=OneWay}"
 										  ItemTemplate="{DynamicResource ShipViewKey}" />
                         </DataTemplate>
 
                         <DataTemplate DataType="{x:Type fleets:CombinedFleetViewModel}">
-                            <ItemsControl ItemsSource="{Binding Source.Fleets}"
+                            <ItemsControl ItemsSource="{Binding Source.Fleets, Mode=OneWay}"
 										  Margin="0,0,0,-1">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
@@ -576,13 +576,13 @@
 																		 CenterX="0.5"
 																		 CenterY="0.5" />
                                                     </Border.LayoutTransform>
-                                                    <TextBlock Text="{Binding Name}"
+                                                    <TextBlock Text="{Binding Name, Mode=OneWay}"
 															   TextAlignment="Center"
 															   Foreground="{DynamicResource SemiActiveForegroundBrushKey}"
 															   Style="{DynamicResource EmphaticTextStyleKey}"
                                                                FontSize="13"  />
                                                 </Border>
-                                                <ItemsControl ItemsSource="{Binding Ships}"
+                                                <ItemsControl ItemsSource="{Binding Ships, Mode=OneWay}"
 															  ItemTemplate="{DynamicResource ShipViewKey}"
 															  Margin="0,0,0,-1" />
                                             </DockPanel>

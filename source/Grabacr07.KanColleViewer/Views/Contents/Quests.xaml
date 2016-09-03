@@ -39,7 +39,7 @@
         <ScrollViewer Grid.Row="1"
                       VerticalScrollBarVisibility="Auto"
                       PanningMode="Both">
-            <ItemsControl ItemsSource="{Binding Quests}"
+            <ItemsControl ItemsSource="{Binding Quests, Mode=OneWay}"
                           Margin="5">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>

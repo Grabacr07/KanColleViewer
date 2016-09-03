@@ -73,10 +73,10 @@
 		</Style>
 	</UserControl.Resources>
 
-	<ScrollViewer DataContext="{Binding Fleets}"
+    <ScrollViewer DataContext="{Binding Fleets, Mode=OneWay}"
 				  VerticalScrollBarVisibility="Auto"
 				  PanningMode="Both">
-		<ItemsControl ItemsSource="{Binding Fleets}"
+        <ItemsControl ItemsSource="{Binding Fleets, Mode=OneWay}"
 					  Margin="5,0,5,5"
 					  d:DataContext="{d:DesignData /SampleData/FleetsViewModelSampleData.xaml}">
 			<ItemsControl.ItemsPanel>
@@ -134,15 +134,15 @@
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsPossible}" Value="Possible">
+                                                <DataTrigger Binding="{Binding IsPossible, Mode=OneWay}" Value="Possible">
                                                     <Setter Property="Background" Value="#FF5887AB"/>
                                                     <Setter Property="Text" Value="편성완료"/>
                                                 </DataTrigger>
-                                                <DataTrigger Binding="{Binding IsPossible}" Value="NotAccepted">
+                                                <DataTrigger Binding="{Binding IsPossible, Mode=OneWay}" Value="NotAccepted">
                                                     <Setter Property="Background" Value="#FFCC3D3D"/>
                                                     <Setter Property="Text" Value="편성문제"/>
                                                 </DataTrigger>
-                                                <DataTrigger Binding="{Binding IsPossible}" Value="NotSupplied">
+                                                <DataTrigger Binding="{Binding IsPossible, Mode=OneWay}" Value="NotSupplied">
                                                     <Setter Property="Background" Value="#FFCC3D3D"/>
                                                     <Setter Property="Text" Value="보급안함"/>
                                                 </DataTrigger>
@@ -158,11 +158,11 @@
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding CanGreatSuccess}" Value="False">
+                                                <DataTrigger Binding="{Binding CanGreatSuccess, Mode=OneWay}" Value="False">
                                                     <Setter Property="Background" Value="#FF787878" />
                                                     <Setter Property="Text" Value="대성공 불가" />
                                                 </DataTrigger>
-                                                <DataTrigger Binding="{Binding CanGreatSuccess}" Value="True">
+                                                <DataTrigger Binding="{Binding CanGreatSuccess, Mode=OneWay}" Value="True">
                                                     <Setter Property="Background" Value="#FFE66915" />
                                                     <Setter Property="Text" Value="{Binding GreatChanceText, Mode=OneWay}" />
                                                 </DataTrigger>
@@ -190,9 +190,9 @@
                             <StackPanel x:Name="ExpeditionInfo"
                                         Grid.Row="3">
                                 <TextBlock Margin="0,0,0,4"
-                                           Text="{Binding Expedition.Mission.Title}"
+                                           Text="{Binding Expedition.Mission.Title, Mode=OneWay}"
                                            Style="{DynamicResource EmphaticTextStyleKey}" />
-                                <TextBlock Text="{Binding Expedition.Mission.Detail}"
+                                <TextBlock Text="{Binding Expedition.Mission.Detail, Mode=OneWay}"
                                            Style="{DynamicResource DefaultTextStyleKey}" />
 
                                 <Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
@@ -227,17 +227,17 @@
                         </Grid>
                     </GroupBox>
                     <DataTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Expedition.IsInExecution}" Value="False">
+                        <DataTrigger Binding="{Binding Expedition.IsInExecution, Mode=OneWay}" Value="False">
                             <Setter TargetName="ExpeditionSelector" Property="Visibility" Value="Visible" />
                             <Setter TargetName="ExpeditionInfo" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="NotExcution" Property="Visibility" Value="Visible" />
                             <Setter TargetName="InSortie" Property="Visibility" Value="Collapsed" />
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding IsInSortie}" Value="True">
+                        <DataTrigger Binding="{Binding IsInSortie, Mode=OneWay}" Value="True">
                             <Setter TargetName="NotExcution" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="InSortie" Property="Visibility" Value="Visible" />
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding Expedition.Returned}" Value="True">
+                        <DataTrigger Binding="{Binding Expedition.Returned, Mode=OneWay}" Value="True">
                             <Setter TargetName="ExpeditionProgress" Property="Visibility" Value="Hidden" />
                             <Setter TargetName="ExpeditionReturned" Property="Visibility" Value="Visible" />
                         </DataTrigger>
