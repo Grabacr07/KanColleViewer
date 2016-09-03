@@ -100,37 +100,67 @@
 
 
                             <Grid x:Name="QuestTracker"
-                                    Grid.Column="4">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="auto" />
-                                </Grid.RowDefinitions>
+                                  Grid.Column="4">
+                                <Grid HorizontalAlignment="Right"
+                                      MaxWidth="280"
+                                      Width="{Binding ElementName=QuestTracker, Path=ActualWidth}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
 
-                                <TextBlock Text="{Binding QuestIdText, Mode=OneWay}"
-                                            Margin="0,0,10,0"
-                                            Style="{DynamicResource EmphaticTextStyleKey}"
-                                            TextAlignment="Left"
-                                            FontSize="10" />
+                                    <TextBlock x:Name="QuestProgressText"
+                                               Text="{Binding QuestProgressText, Mode=OneWay}"
+                                               Style="{DynamicResource EmphaticTextStyleKey}"
+                                               Margin="0,0,10,0"
+                                               TextAlignment="Left"
+                                               FontSize="10" />
 
-                                <TextBlock Grid.Column="1"
-                                            Text="{Binding QuestProgressText, Mode=OneWay}"
-                                            Style="{DynamicResource EmphaticTextStyleKey}"
-                                            TextAlignment="Right"
-                                            FontSize="10" />
+                                    <TextBlock Text="{Binding QuestIdText, Mode=OneWay}"
+                                               Grid.Column="1"
+                                               Style="{DynamicResource EmphaticTextStyleKey}"
+                                               TextAlignment="Right"
+                                               Foreground="{DynamicResource ForegroundBrushKey}"
+                                               FontSize="10" />
 
-                                <ProgressBar x:Name="QuestProgressBar"
-                                                Grid.Row="1"
-                                                Grid.ColumnSpan="2"
-                                                Margin="0,3,0,0"
-                                                VerticalAlignment="Center"
-                                                Value="{Binding QuestProgressValue, Mode=OneWay}"
-                                                Foreground="#FF39B74E"
-                                                BorderThickness="0"
-                                                Height="3" />
+                                    <ProgressBar x:Name="QuestProgressBar"
+                                                 Grid.Row="1"
+                                                 Grid.ColumnSpan="2"
+                                                 Margin="0,3,0,0"
+                                                 VerticalAlignment="Center"
+                                                 Value="{Binding QuestProgressValue, Mode=OneWay}"
+                                                 Foreground="#FF39B74E"
+                                                 BorderThickness="0"
+                                                 Height="3">
+                                        <ProgressBar.Style>
+                                            <Style TargetType="{x:Type ProgressBar}">
+                                                <Setter Property="Background" Value="#55D7D7E1" />
+                                                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type ProgressBar}">
+                                                            <Grid Background="{TemplateBinding Background}">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="*" />
+                                                                    <RowDefinition Height="*" />
+                                                                </Grid.RowDefinitions>
+
+                                                                <Border x:Name="PART_Track" />
+                                                                <Border x:Name="PART_Indicator"
+                                                                        Background="{TemplateBinding Foreground}"
+                                                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                                                            </Grid>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ProgressBar.Style>
+                                    </ProgressBar>
+                                </Grid>
                             </Grid>
 
                             <TextBlock Grid.Row="1"
@@ -162,7 +192,8 @@
 
                         <DataTemplate.Triggers>
                             <DataTrigger Binding="{Binding QuestTrackingVisible}" Value="False">
-                                <Setter TargetName="QuestTracker" Property="Visibility" Value="Hidden" />
+                                <Setter TargetName="QuestProgressBar" Property="Visibility" Value="Hidden" />
+                                <Setter TargetName="QuestProgressText" Property="Visibility" Value="Hidden" />
                             </DataTrigger>
                             <DataTrigger Binding="{Binding QuestProgressValue}" Value="100">
                                 <Setter TargetName="QuestProgressBar" Property="Foreground" Value="#FF62B5F5" />
