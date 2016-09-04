@@ -130,7 +130,7 @@
                                     <ProgressBar x:Name="QuestProgressBar"
                                                  Grid.Row="1"
                                                  Grid.ColumnSpan="2"
-                                                 Margin="0,3,0,0"
+                                                 Margin="0,1,0,2"
                                                  VerticalAlignment="Center"
                                                  Value="{Binding QuestProgressValue, Mode=OneWay}"
                                                  Foreground="#FF39B74E"
@@ -144,15 +144,11 @@
                                                     <Setter.Value>
                                                         <ControlTemplate TargetType="{x:Type ProgressBar}">
                                                             <Grid Background="{TemplateBinding Background}">
-                                                                <Grid.RowDefinitions>
-                                                                    <RowDefinition Height="*" />
-                                                                    <RowDefinition Height="*" />
-                                                                </Grid.RowDefinitions>
-
-                                                                <Border x:Name="PART_Track" />
-                                                                <Border x:Name="PART_Indicator"
+                                                                <Border x:Name="PART_Track">
+                                                                    <Border x:Name="PART_Indicator"
                                                                         Background="{TemplateBinding Foreground}"
                                                                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                                                                </Border>
                                                             </Grid>
                                                         </ControlTemplate>
                                                     </Setter.Value>
