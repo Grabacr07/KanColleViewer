@@ -175,7 +175,8 @@
     <Compile Include="Models\QuestTracker\Model\StorageData.cs" />
     <Compile Include="Models\QuestTracker\Model\TrackerEnemyShip.cs" />
     <Compile Include="Models\QuestTracker\Model\TrackerMapInfo.cs" />
-    <Compile Include="Models\QuestTracker\Raw\ModelExtension.cs" />
+    <Compile Include="Models\QuestTracker\Extensions\BasicExtension.cs" />
+    <Compile Include="Models\QuestTracker\Extensions\ModelExtension.cs" />
     <Compile Include="Models\QuestTracker\Tracker\Bd1.cs" />
     <Compile Include="Models\QuestTracker\Tracker\Bd2.cs" />
     <Compile Include="Models\QuestTracker\Tracker\Bd3.cs" />
@@ -184,7 +185,14 @@
     <Compile Include="Models\QuestTracker\Tracker\Bd6.cs" />
     <Compile Include="Models\QuestTracker\Tracker\Bd7.cs" />
     <Compile Include="Models\QuestTracker\Tracker\Bd8.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\Bm1.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\Bm2.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\Bm3.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\Bm4.cs" />
     <Compile Include="Models\QuestTracker\Tracker\Bm5.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\Bm6.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\Bm7.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\Bq1.cs" />
     <Compile Include="Models\QuestTracker\Tracker\Bw1.cs" />
     <Compile Include="Models\QuestTracker\Tracker\Bw10.cs" />
     <Compile Include="Models\QuestTracker\Tracker\Bw2.cs" />
@@ -768,6 +776,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Models\QuestTracker\QuestInfo.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

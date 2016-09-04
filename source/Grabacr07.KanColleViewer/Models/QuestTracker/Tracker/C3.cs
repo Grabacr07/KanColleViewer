@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Models;
+using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
@@ -18,6 +19,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
         public event EventHandler ProcessChanged;
 
         int ITracker.Id => 304;
+        public QuestType Type => QuestType.Daily;
         public bool IsTracking { get; set; }
 
         private System.EventArgs emptyEventArgs = new System.EventArgs();
@@ -29,7 +31,8 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
                 if (!IsTracking) return;
                 if (!args.IsSuccess) return;
 
-                count += count >= max_count ? 0 : 1;
+                count = count.Add(1).Max(max_count);
+
                 ProcessChanged?.Invoke(this, emptyEventArgs);
             };
         }

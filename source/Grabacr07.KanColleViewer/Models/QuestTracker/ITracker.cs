@@ -12,6 +12,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
     {
         int Id { get; }
         bool IsTracking { get; set; }
+        QuestType Type { get; }
 
         void RegisterEvent(TrackManager manager);
         void ResetQuest();

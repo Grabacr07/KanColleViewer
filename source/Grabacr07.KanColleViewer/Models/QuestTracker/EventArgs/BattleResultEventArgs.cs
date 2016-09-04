@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Grabacr07.KanColleViewer.Models.QuestTracker.Model;
-using Grabacr07.KanColleViewer.Models.QuestTracker.Raw;
+using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 
 using Grabacr07.KanColleWrapper.Models.Raw;
 

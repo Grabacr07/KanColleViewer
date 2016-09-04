@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Models;
+using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
@@ -18,30 +19,31 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
         public event EventHandler ProcessChanged;
 
         int ITracker.Id => 226;
+        public QuestType Type => QuestType.Daily;
         public bool IsTracking { get; set; }
 
         private System.EventArgs emptyEventArgs = new System.EventArgs();
 
         public void RegisterEvent(TrackManager manager)
         {
-            List<string> BossNameList = new List<string>
+            var BossNameList = new string[]
             {
-                "敵主力艦隊",
-                "敵通商破壊艦隊",
-                "敵主力打撃群",
-                "敵侵攻中核艦隊",
-                //"敵主力艦隊"
+                "敵主力艦隊",     // 2-1, 2-5
+                "敵通商破壊艦隊", // 2-2
+                "敵主力打撃群",   // 2-3
+                "敵侵攻中核艦隊", // 2-4
             };
 
             manager.BattleResultEvent += (sender, args) =>
             {
                 if (!IsTracking) return;
 
-                if (args.MapAreaId != 2) return; // 2해역
-                if (!BossNameList.Contains(args.EnemyName)) return;
-                if (!"SAB".Contains(args.Rank)) return;
+                if (args.MapAreaId != 2) return; // 2 해역
+                if (!BossNameList.Contains(args.EnemyName)) return; // 보스명
+                if (!"SAB".Contains(args.Rank)) return; // 승리 랭크
 
-                count += count >= max_count ? 0 : 1;
+                count = count.Add(1).Max(max_count);
+
                 ProcessChanged?.Invoke(this, emptyEventArgs);
             };
         }
