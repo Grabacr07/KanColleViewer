@@ -15,7 +15,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 	{
 		public override string Name
 		{
-			get { return Resources.Quests; }
+			get { return Resources.Quests + (this._Badge > 0 ? " (" + this._Badge + ")" : ""); }
 			protected set { throw new NotImplementedException(); }
 		}
 
@@ -110,6 +110,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
         #endregion
 
 
+        private int _Badge = 0;
+
         public IList<KeyNameTabItemViewModel> TabItems { get; set; }
 
         private KeyNameTabItemViewModel _SelectedItem;
@@ -180,6 +182,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
             this.Quests = viewList.ToArray();
             this.IsEmpty = quests.IsEmpty;
             this.IsUntaken = quests.IsUntaken;
+
+            this._Badge = questTracker.AllQuests.Count(x => x.GetProgress() == 100);
+            this.RaisePropertyChanged("Name");
         }
 
         private QuestViewModel[] ComputeQuestPage(QuestViewModel[] inp)
