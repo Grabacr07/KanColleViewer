@@ -154,32 +154,6 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
             var quests = KanColleClient.Current.Homeport.Quests;
             if (quests.All == null || quests.All.Count == 0) return;
 
-            // 페이지에 임무가 보이지 않는 경우는 무시, 임무가 다시 보일 때 체크할 것
-            /*
-            var minId = quests.All.Min(q => q.Id);
-            var maxId = quests.All.Max(q => q.Id);
-
-            if (trackingAvailable.Any(t => t.Id > minId && t.Id < maxId))
-            {
-                trackingAvailable
-                    .Where(t => t.Id > minId && t.Id < maxId)
-                    .ToList()
-                    .ForEach(t =>
-                    {
-                        if (quests.All.All(q => q.Id != t.Id))
-                        {
-                            if (t.IsTracking && !IsTrackingAvailable(t.Type, t.TrackStartTime))
-                                t.ResetQuest(); // 추적중이었고 날짜가 만료된 경우?
-
-                            t.IsTracking = false;
-
-                            if (trackingTime.ContainsKey(t.Id))
-                                trackingTime.Remove(t.Id);
-                        }
-                    });
-            }
-            */
-
             foreach (var quest in quests.All)
             {
                 var tracker = trackingAvailable.Where(t => t.Id == quest.Id);
@@ -209,9 +183,6 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 
                     case QuestState.Accomplished:
                         tracker.First().IsTracking = false;
-
-                        if (trackingTime.ContainsKey(quest.Id))
-                            trackingTime.Remove(quest.Id);
                         break;
                 }
             }

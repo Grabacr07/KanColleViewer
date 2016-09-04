@@ -183,7 +183,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
             this.IsEmpty = quests.IsEmpty;
             this.IsUntaken = quests.IsUntaken;
 
-            this._Badge = questTracker.AllQuests.Count(x => x.GetProgress() == 100);
+            this._Badge = questTracker.AllQuests.Where(x => quests.All.Any(y => y.Id == x.Id)).Count(x => x.GetProgress() == 100);
             this.RaisePropertyChanged("Name");
         }
 
