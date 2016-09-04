@@ -186,7 +186,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
                 if (!tracker.Any()) continue; // 추적할 수 없는 임무
 
                 // 만료된 경우 (임무가 갱신되었다던가)
-                if (!IsTrackingAvailable(quest.Type, trackingTime[quest.Id]))
+                if (trackingTime.ContainsKey(quest.Id) && !IsTrackingAvailable(quest.Type, trackingTime[quest.Id]))
                 {
                     // 임무 초기화
                     if(trackingTime.ContainsKey(quest.Id)) trackingTime.Remove(quest.Id); // 추적중이었으면 추적 시작시간 제거
