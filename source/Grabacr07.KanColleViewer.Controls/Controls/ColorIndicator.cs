@@ -41,10 +41,10 @@ namespace Grabacr07.KanColleViewer.Controls
 
 		#endregion
 
-		#region Columns 종속성 프로퍼티
+		#region Columns 依存関係プロパティ
 
 		public int Columns
-        {
+		{
 			get { return (int)this.GetValue(ColumnsProperty); }
 			set { this.SetValue(ColumnsProperty, value); }
 		}
