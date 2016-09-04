@@ -200,11 +200,11 @@
                             <TextBlock Style="{DynamicResource DefaultTextStyleKey}"
                                         Foreground="White">
                                 <Run Text="연료:" />
-                                <Run Text="{Binding Ship.Fuel.Current, Mode=OneWay}" /><Run Text="/" /><Run Text="{Binding Fuel.Maximum, Mode=OneWay}" />
+                                <Run Text="{Binding Ship.Fuel.Current, Mode=OneWay}" /><Run Text="/" /><Run Text="{Binding Ship.Fuel.Maximum, Mode=OneWay}" />
                                 <Run Text="{Binding Ship.UsedFuel, Mode=OneWay, StringFormat={}({0} 소모)}" Foreground="Crimson"/>
                                 <LineBreak />
                                 <Run Text="탄약:" />
-                                <Run Text="{Binding Ship.Bull.Current, Mode=OneWay}" /><Run Text="/" /><Run Text="{Binding Bull.Maximum, Mode=OneWay}" />
+                                <Run Text="{Binding Ship.Bull.Current, Mode=OneWay}" /><Run Text="/" /><Run Text="{Binding Ship.Bull.Maximum, Mode=OneWay}" />
                                 <Run Text="{Binding Ship.UsedBull, Mode=OneWay, StringFormat={}({0} 소모)}" Foreground="Crimson"/>
                             </TextBlock>
                         </StackPanel.ToolTip>

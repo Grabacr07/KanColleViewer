@@ -57,7 +57,7 @@
 			<kcvv:HasFlagConverter x:Key="HasFlagConverter" />
 
 			<DataTemplate x:Key="ShipLineViewKey"
-						  DataType="{x:Type wrapper:Ship}">
+						 >
 				<Border BorderThickness="0,0,0,1"
 						BorderBrush="{DynamicResource BorderBrushKey}"
 						VerticalAlignment="Top">
@@ -65,27 +65,27 @@
 						<Border.Style>
 							<Style TargetType="{x:Type Border}">
 								<Style.Triggers>
-									<DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged}"
+									<DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged}"
 												 Value="True">
 										<Setter Property="Background"
 												Value="#14FF0000" />
 									</DataTrigger>
-									<DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged|DamageControlled}"
+									<DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged|DamageControlled}"
 												 Value="True">
 										<Setter Property="Background"
 												Value="Transparent" />
 									</DataTrigger>
-									<DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
+									<DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
 												 Value="True">
 										<Setter Property="Background"
 												Value="Transparent" />
 									</DataTrigger>
-									<DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Evacuation}"
+									<DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Evacuation}"
 												 Value="True">
 										<Setter Property="Opacity"
 												Value="0.3" />
 									</DataTrigger>
-									<DataTrigger Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow}"
+									<DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow}"
 												 Value="True">
 										<Setter Property="Opacity"
 												Value="0.3" />
@@ -126,10 +126,10 @@
 										VerticalAlignment="Center"
 										Margin="10,0,10,0">
 								<TextBlock Style="{DynamicResource DefaultTextStyleKey}">
-									<Run Text="{Binding Info.ShipType.Name, Mode=OneWay}"
+									<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
 										 FontSize="14" />
 									<LineBreak />
-									<Run Text="{Binding Info.Name, Mode=OneWay}"
+									<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
 										 Style="{DynamicResource EmphaticTextElementStyleKey }"
 										 FontSize="18" />
 								</TextBlock>
@@ -144,14 +144,14 @@
 										   Style="{DynamicResource DefaultTextStyleKey}"
 										   VerticalAlignment="Bottom">
 									<Run Text="Lv." />
-									<Run Text="{Binding Level, Mode=OneWay}"
+									<Run Text="{Binding Ship.Level, Mode=OneWay}"
 										 FontSize="16"
 										 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 								</TextBlock>
 								<TextBlock FontSize="10"
 										   Style="{DynamicResource DefaultTextStyleKey}">
 									<Run Text="Next:" />
-									<Run Text="{Binding ExpForNextLevel, Mode=OneWay}" />
+									<Run Text="{Binding Ship.ExpForNextLevel, Mode=OneWay}" />
 								</TextBlock>
 							</StackPanel>
 
@@ -160,11 +160,11 @@
 									   Margin="10,1,10,0"
 									   Style="{DynamicResource DefaultTextStyleKey}">
 								<InlineUIContainer>
-									<kcvc:ConditionIcon ConditionType="{Binding ConditionType, Mode=OneWay}"
+									<kcvc:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}"
 														Width="11"
 														Height="11" />
 								</InlineUIContainer>
-								<Run Text="{Binding Condition, Mode=OneWay, StringFormat={} {0}}"
+								<Run Text="{Binding Ship.Condition, Mode=OneWay, StringFormat={} {0}}"
 									 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 								<LineBreak />
 								<Run Text="Condition"
@@ -186,15 +186,15 @@
 								<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
 										   VerticalAlignment="Bottom">
 									<Run Text="HP:" />
-									<Run Text="{Binding HP.Current, Mode=OneWay}"
+									<Run Text="{Binding Ship.HP.Current, Mode=OneWay}"
 										 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 									<Run Text="/" />
-									<Run Text="{Binding HP.Maximum, Mode=OneWay}" />
+									<Run Text="{Binding Ship.HP.Maximum, Mode=OneWay}" />
 								</TextBlock>
 								<kcvc:ColorIndicator Height="7"
 													 VerticalAlignment="Bottom"
 													 Margin="1,4,0,2"
-													 LimitedValue="{Binding HP, Mode=OneWay}" />
+													 LimitedValue="{Binding Ship.HP, Mode=OneWay}" />
 							</StackPanel>
 
 							<DockPanel Grid.Column="3"
@@ -203,9 +203,9 @@
 									   Margin="10,2,20,0">
 								<Viewbox Height="21"
 										 Margin="0,0,4,0"
-										 Visibility="{Binding ExSlot.Equipped, Converter={StaticResource BooleanToVisibilityConverter}}"
-										 ToolTip="{Binding ExSlot.Item.NameWithLevel}">
-									<kcvc:SlotItemIcon Type="{Binding ExSlot.Item.Info.IconType}" />
+										 Visibility="{Binding Ship.ExSlot.Equipped, Converter={StaticResource BooleanToVisibilityConverter}}"
+										 ToolTip="{Binding Ship.ExSlot.Item.NameWithLevel}">
+									<kcvc:SlotItemIcon Type="{Binding Ship.ExSlot.Item.Info.IconType}" />
 								</Viewbox>
 								<TextBlock TextAlignment="Center"
 										   Padding="4">
@@ -219,7 +219,7 @@
 											<Style.Triggers>
 												<MultiDataTrigger>
 													<MultiDataTrigger.Conditions>
-														<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=DamageControlled}"
+														<Condition Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=DamageControlled}"
 																   Value="True" />
 													</MultiDataTrigger.Conditions>
 													<Setter Property="Text"
@@ -227,7 +227,7 @@
 												</MultiDataTrigger>
 												<MultiDataTrigger>
 													<MultiDataTrigger.Conditions>
-														<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged}"
+														<Condition Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged}"
 																   Value="True" />
 													</MultiDataTrigger.Conditions>
 													<Setter Property="Text"
@@ -239,7 +239,7 @@
 												</MultiDataTrigger>
 												<MultiDataTrigger>
 													<MultiDataTrigger.Conditions>
-														<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged|DamageControlled}"
+														<Condition Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=HeavilyDamaged|DamageControlled}"
 																   Value="True" />
 													</MultiDataTrigger.Conditions>
 													<Setter Property="Text"
@@ -249,7 +249,7 @@
 												</MultiDataTrigger>
 												<MultiDataTrigger>
 													<MultiDataTrigger.Conditions>
-														<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Evacuation}"
+														<Condition Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Evacuation}"
 																   Value="True" />
 													</MultiDataTrigger.Conditions>
 													<Setter Property="Text"
@@ -259,7 +259,7 @@
 												</MultiDataTrigger>
 												<MultiDataTrigger>
 													<MultiDataTrigger.Conditions>
-														<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow}"
+														<Condition Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow}"
 																   Value="True" />
 													</MultiDataTrigger.Conditions>
 													<Setter Property="Text"
@@ -269,7 +269,7 @@
 												</MultiDataTrigger>
 												<MultiDataTrigger>
 													<MultiDataTrigger.Conditions>
-														<Condition Binding="{Binding Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
+														<Condition Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
 																   Value="True" />
 													</MultiDataTrigger.Conditions>
 													<Setter Property="Text"
@@ -297,15 +297,15 @@
 									      Margin="0,5,3,5" />
 								    <TextBlock DockPanel.Dock="Top"
 										       Style="{DynamicResource DefaultTextStyleKey}">
-									    <Run Text="{Binding Fuel.Current, Mode=OneWay}"
+									    <Run Text="{Binding Ship.Fuel.Current, Mode=OneWay}"
 										     FontSize="14" />
 									    <Run Text="/"
 										     FontSize="10" />
-									    <Run Text="{Binding Fuel.Maximum, Mode=OneWay}"
+									    <Run Text="{Binding Ship.Fuel.Maximum, Mode=OneWay}"
 										     FontSize="10" />
 								    </TextBlock>
 								    <kcvc:ColorIndicator DockPanel.Dock="Top"
-													     LimitedValue="{Binding Fuel, Mode=OneWay}"
+													     LimitedValue="{Binding Ship.Fuel, Mode=OneWay}"
 													     Height="5"
                                                          Columns="5"
 													     Margin="1,2,0,0" />
@@ -323,15 +323,15 @@
 									      Margin="0,5,3,5" />
 								    <TextBlock DockPanel.Dock="Top"
 										       Style="{DynamicResource DefaultTextStyleKey}">
-									    <Run Text="{Binding Bull.Current, Mode=OneWay}"
+									    <Run Text="{Binding Ship.Bull.Current, Mode=OneWay}"
 										     FontSize="14" />
 									    <Run Text="/"
 										     FontSize="10" />
-									    <Run Text="{Binding Bull.Maximum, Mode=OneWay}"
+									    <Run Text="{Binding Ship.Bull.Maximum, Mode=OneWay}"
 										     FontSize="10" />
 								    </TextBlock>
 								    <kcvc:ColorIndicator DockPanel.Dock="Top"
-													     LimitedValue="{Binding Bull, Mode=OneWay}"
+													     LimitedValue="{Binding Ship.Bull, Mode=OneWay}"
 													     Height="5"
                                                          Columns="5"
 													     Margin="1,2,0,0" />
@@ -342,12 +342,12 @@
                                     <TextBlock Style="{DynamicResource DefaultTextStyleKey}"
                                                        Foreground="White">
                                                 <Run Text="연료:" />
-                                                <Run Text="{Binding Fuel.Current, Mode=OneWay}" /><Run Text="/" /><Run Text="{Binding Fuel.Maximum, Mode=OneWay}" />
-                                                <Run Text="{Binding UsedFuel, Mode=OneWay, StringFormat={}({0} 소모)}" Foreground="Crimson"/>
+                                                <Run Text="{Binding Ship.Fuel.Current, Mode=OneWay}" /><Run Text="/" /><Run Text="{Binding Ship.Fuel.Maximum, Mode=OneWay}" />
+                                                <Run Text="{Binding Ship.UsedFuel, Mode=OneWay, StringFormat={}({0} 소모)}" Foreground="Crimson"/>
                                                 <LineBreak />
                                                 <Run Text="탄약:" />
-                                                <Run Text="{Binding Bull.Current, Mode=OneWay}" /><Run Text="/" /><Run Text="{Binding Bull.Maximum, Mode=OneWay}" />
-                                                <Run Text="{Binding UsedBull, Mode=OneWay, StringFormat={}({0} 소모)}" Foreground="Crimson"/>
+                                                <Run Text="{Binding Ship.Bull.Current, Mode=OneWay}" /><Run Text="/" /><Run Text="{Binding Ship.Bull.Maximum, Mode=OneWay}" />
+                                                <Run Text="{Binding Ship.UsedBull, Mode=OneWay, StringFormat={}({0} 소모)}" Foreground="Crimson"/>
                                     </TextBlock>
                                 </StackPanel.ToolTip>
                             </StackPanel>
@@ -355,7 +355,7 @@
                             <ItemsControl Grid.Column="6"
 										  Grid.Row="0"
 										  Grid.RowSpan="3"
-										  ItemsSource="{Binding Slots}"
+										  ItemsSource="{Binding Ship.Slots}"
 										  Margin="20,0">
 								<ItemsControl.ItemTemplate>
 									<DataTemplate>
@@ -1024,12 +1024,12 @@
 											d:IsHidden="True">
 								<ContentControl.Resources>
 									<DataTemplate DataType="{x:Type fleetsVm:FleetViewModel}">
-										<ItemsControl ItemsSource="{Binding Source.Ships}"
+										<ItemsControl ItemsSource="{Binding Ships}"
 													  ItemTemplate="{DynamicResource ShipLineViewKey}" />
 									</DataTemplate>
 
 									<DataTemplate DataType="{x:Type fleetsVm:CombinedFleetViewModel}">
-										<ItemsControl ItemsSource="{Binding Source.Fleets}"
+										<ItemsControl ItemsSource="{Binding Fleets}"
 													  Margin="0,0,0,-1">
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
