@@ -73,7 +73,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
         public string GetProgressText()
         {
-            return count >= max_count ? "완료" : $"구축2,공모2 포함 함대로 4-2 보스전 S 승리 {count} / {max_count}";
+            return count >= max_count ? "완료" : $"구축함 기함,구축4,중순1,경순1 함대로 2-5 보스전 S 승리 {count} / {max_count}";
         }
 
         public string SerializeData()
