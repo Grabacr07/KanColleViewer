@@ -81,7 +81,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
                     // 보스전 승리
                     if ("SAB".Contains(args.Rank))
-                        progress_boss = progress_boss.Add(1).Max(12);
+                        progress_boss_win = progress_boss_win.Add(1).Max(12);
                 }
 
                 ProcessChanged?.Invoke(this, emptyEventArgs);
