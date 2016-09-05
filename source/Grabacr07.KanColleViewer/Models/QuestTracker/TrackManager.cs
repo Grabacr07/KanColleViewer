@@ -134,7 +134,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
                     {
                         QuestsEventChanged?.Invoke(this, EmptyEventArg);
 
-                        WriteToStorage(KanColleClient.Current.Homeport.Quests);
+                        WriteToStorage();
                     });
                 }
             };
@@ -144,6 +144,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
                     .ToList().ForEach(x => trackingAvailable.Add((ITracker)Activator.CreateInstance(x)));
 
             ReadFromStorage();
+            WriteToStorage();
 
             proxy.api_get_member_questlist.Subscribe(x => new System.Threading.Thread(ProcessQuests).Start());
             QuestsEventChanged?.Invoke(this, EmptyEventArg);
@@ -188,7 +189,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
             }
 
             QuestsEventChanged?.Invoke(this, EmptyEventArg);
-            WriteToStorage(quests);
+            WriteToStorage();
         }
         private bool IsTrackingAvailable(QuestType type, DateTime time)
         {
@@ -225,7 +226,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
             }
         }
 
-        private void WriteToStorage(Quests quests)
+        private void WriteToStorage()
         {
             var baseDir = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
             var list = new List<StorageData>();
@@ -237,8 +238,11 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
                 DateTime dateTime = TrackManager.TokyoDateTime;
                 trackingTime.TryGetValue(tracker.Id, out dateTime);
 
+                if (tracker.GetProgress() == 0 && dateTime == DateTime.MinValue) continue;
+
                 item.Id = tracker.Id;
                 item.TrackTime = dateTime;
+                item.Type = tracker.Type;
                 item.Serialized = tracker.SerializeData();
                 list.Add(item);
             }
@@ -247,12 +251,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
             using (FileStream fs = new FileStream(path, FileMode.Create))
             {
                 foreach (var item in list)
-                {
-                    if (!quests.All.Any(x => x.Id == item.Id)) continue;
-
-                    var tracker = quests.All.Where(x => x.Id == item.Id);
-                    CSV.Write(fs, item.Id, item.TrackTime, tracker.First().Type, item.Serialized);
-                }
+                    CSV.Write(fs, item.Id, item.TrackTime, item.Type, item.Serialized);
 
                 fs.Flush();
             }
