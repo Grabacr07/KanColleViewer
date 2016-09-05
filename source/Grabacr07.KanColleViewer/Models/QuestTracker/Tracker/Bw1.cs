@@ -109,7 +109,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
             return
                 $"출격 {progress_combat}/36, S승리 {progress_combat_s}/6," +
-                $" 보스전 돌입 {progress_boss}/24, 보스전 승리 {progress_boss_win}/12";
+                $" 보스전 {progress_boss}/24, 보스전 승리 {progress_boss_win}/12";
         }
 
         public string SerializeData()

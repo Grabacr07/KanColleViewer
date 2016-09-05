@@ -105,8 +105,8 @@
                                       MaxWidth="280"
                                       Width="{Binding ElementName=QuestTracker, Path=ActualWidth}">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto" />
                                         <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*" />
@@ -116,12 +116,13 @@
                                     <TextBlock x:Name="QuestProgressText"
                                                Text="{Binding QuestProgressText, Mode=OneWay}"
                                                Style="{DynamicResource EmphaticTextStyleKey}"
-                                               Margin="0,0,10,0"
+                                               Margin="0,0,5,0"
                                                TextAlignment="Left"
                                                FontSize="10" />
 
                                     <TextBlock Text="{Binding QuestIdText, Mode=OneWay}"
                                                Grid.Column="1"
+                                               Margin="5,0,0,0"
                                                Style="{DynamicResource EmphaticTextStyleKey}"
                                                TextAlignment="Right"
                                                Foreground="{DynamicResource ForegroundBrushKey}"
