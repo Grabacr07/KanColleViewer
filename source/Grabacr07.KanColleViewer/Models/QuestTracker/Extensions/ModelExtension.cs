@@ -13,100 +13,66 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Extensions
     {
         private static readonly FleetDamages defaultValue = new FleetDamages();
 
+        public static FleetDamages GetEnemyDamages(this kcsapi_data_airbaseattack[] air_base)
+            => air_base?.Select(x => x?.api_stage3?.api_edam?.GetDamages() ?? defaultValue)
+                ?.Aggregate((a, b) => a.Add(b)) ?? defaultValue;
+
         public static FleetDamages GetEnemyDamages(this kcsapi_data_support_info support)
-        {
-            if (support == null) return defaultValue;
-            if (support.api_support_airatack != null && support.api_support_airatack.api_stage3 != null && support.api_support_airatack.api_stage3.api_edam != null)
-                return support.api_support_airatack.api_stage3.api_edam.GetDamages();
-
-            if (support.api_support_hourai != null && support.api_support_hourai.api_damage != null)
-                return support.api_support_hourai.api_damage.GetDamages();
-
-            return defaultValue;
-        }
+            => support?.api_support_airatack?.api_stage3?.api_edam?.GetDamages()
+                ?? support?.api_support_hourai?.api_damage?.GetDamages()
+                ?? defaultValue;
 
         public static FleetDamages GetEnemyDamages(this kcsapi_data_hougeki hougeki)
-        {
-            return hougeki != null
-                ? hougeki.api_damage != null
-                    ? hougeki.api_damage.GetEnemyDamages(hougeki.api_df_list)
-                    : defaultValue
-                : defaultValue;
-        }
+            => hougeki?.api_damage?.GetEnemyDamages(hougeki.api_df_list)
+                ?? defaultValue;
 
         public static FleetDamages GetEnemyDamages(this kcsapi_data_midnight_hougeki hougeki)
-        {
-            return hougeki != null
-                ? hougeki.api_damage != null
-                    ? hougeki.api_damage.GetEnemyDamages(hougeki.api_df_list)
-                    : defaultValue
-                : defaultValue;
-        }
+            => hougeki?.api_damage?.GetEnemyDamages(hougeki.api_df_list)
+                ?? defaultValue;
 
         public static FleetDamages GetEnemyDamages(this kcsapi_data_kouku kouku)
-        {
-            return kouku != null
-                ? kouku.api_stage3 != null
-                    ? kouku.api_stage3.api_edam != null
-                        ? kouku.api_stage3.api_edam.GetDamages()
-                        : defaultValue
-                    : defaultValue
-                : defaultValue;
-        }
+            => kouku?.api_stage3?.api_edam?.GetDamages()
+                ?? defaultValue;
 
         public static FleetDamages GetEnemyDamages(this kcsapi_data_raigeki raigeki)
-        {
-            return raigeki != null
-                ? raigeki.api_edam != null
-                    ? raigeki.api_edam.GetDamages()
-                    : defaultValue
-                : defaultValue;
-        }
+            => raigeki?.api_edam?.GetDamages()
+                ?? defaultValue;
+
 
         public static IEnumerable<T> GetFriendData<T>(this IEnumerable<T> source, int origin = 1)
-        {
-            return source.Skip(origin).Take(6);
-        }
+            => source.Skip(origin).Take(6);
+
         public static IEnumerable<T> GetEnemyData<T>(this IEnumerable<T> source, int origin = 1)
-        {
-            return source.Skip(origin + 6).Take(6);
-        }
+            => source.Skip(origin + 6).Take(6);
+
 
         public static FleetDamages GetDamages(this decimal[] damages)
-        {
-            return damages
+            => damages
                 .GetFriendData()
                 .Select(Convert.ToInt32)
                 .ToArray()
                 .ToFleetDamages();
-        }
 
         public static FleetDamages GetFriendDamages(this object[] damages, object[] df_list)
-        {
-            return damages
+            => damages
                 .ToIntArray()
                 .ToSortedDamages(df_list.ToIntArray())
                 .GetFriendData(0)
                 .ToFleetDamages();
-        }
 
         public static FleetDamages GetEnemyDamages(this object[] damages, object[] df_list)
-        {
-            return damages
+            => damages
                 .ToIntArray()
                 .ToSortedDamages(df_list.ToIntArray())
                 .GetEnemyData(0)
                 .ToFleetDamages();
-        }
 
         private static int[] ToIntArray(this object[] damages)
-        {
-            return damages
+            => damages
                 .Where(x => x is Array)
                 .Select(x => ((Array)x).Cast<object>())
                 .SelectMany(x => x.Select(Convert.ToInt32))
                 .ToArray();
-        }
 
         private static int[] ToSortedDamages(this int[] damages, int[] dfList)
         {
