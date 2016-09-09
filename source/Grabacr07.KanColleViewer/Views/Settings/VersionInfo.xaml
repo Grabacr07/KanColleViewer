@@ -103,6 +103,12 @@
 				<LineBreak />
 
 				<Run Text="Developer(Koran):" />
+				<metro2:HyperlinkEx Uri="http://kaster.egloos.com">
+					<Run Text="Kaster" />
+				</metro2:HyperlinkEx>
+				<metro2:HyperlinkEx Uri="http://swaytwig.com">
+					<Run Text="WolfgangKurz" />
+				</metro2:HyperlinkEx>
 				<metro2:HyperlinkEx Uri="http://kcvkr.tistory.com">
 					<Run Text="Cirno V" />
 				</metro2:HyperlinkEx>
