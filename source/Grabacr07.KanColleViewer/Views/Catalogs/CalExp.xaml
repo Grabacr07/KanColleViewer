@@ -315,6 +315,8 @@
             <StackPanel Visibility="{Binding TrainingExpVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TextBlock Margin="0,5,0,5">
 				    <TextBlock Text="※아군 함대는 1함대로 계산됩니다." Foreground="#FFFF6B6B"/>
+				    <LineBreak/>
+				    <TextBlock Margin="0,3,0,0" FontSize="10" Text="  계산된 경험치는 추정치입니다. 실제 경험치와 다를 수 있습니다."/>
 			    </TextBlock>
 
                 <Grid>
