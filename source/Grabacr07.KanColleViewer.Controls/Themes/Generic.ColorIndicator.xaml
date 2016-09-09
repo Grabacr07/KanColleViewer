@@ -3,7 +3,7 @@
 					xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Controls">
 
 	<Style TargetType="{x:Type controls:ColorIndicator}">
-        <Setter Property="Background" Value="{DynamicResource HighlightForegroundBrushKey}" />
+        <Setter Property="Background" Value="#55D7D7E1" />
 		<Setter Property="HorizontalContentAlignment" Value="Left" />
 		<Setter Property="Template">
 			<Setter.Value>
