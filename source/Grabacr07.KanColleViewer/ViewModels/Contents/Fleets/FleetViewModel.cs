@@ -358,10 +358,13 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			}
 			else IsFirstFleet = Visibility.Collapsed;
 
-			this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet)
-			{
-				(sender, args) => this.RaisePropertyChanged(args.PropertyName),
-			});
+            this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet)
+            {
+                (sender, args) => this.RaisePropertyChanged(args.PropertyName)
+            });
+
+            fleet.State.Updated += (sender, args) => this.ExpeditionId = this.ExpeditionId; // 편성 변경?
+
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet.State)
 			{
 				{ nameof(fleet.State.Situation), (sender, args) => this.RaisePropertyChanged(nameof(this.QuickStateView)) },
