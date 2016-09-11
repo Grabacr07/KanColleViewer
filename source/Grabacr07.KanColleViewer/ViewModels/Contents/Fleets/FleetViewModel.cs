@@ -131,11 +131,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
                 this.IsPossible = !this.IsPassed
                     ? ExpeditionPossible.NotAccepted
-                    : this.Ships.Where(x => (x.Ship.Fuel.Current != x.Ship.Fuel.Maximum) || x.Ship.Bull.Current != x.Ship.Bull.Maximum).Count() > 0
+                    : this.Source.Ships.Where(x => (x.Fuel.Current != x.Fuel.Maximum) || x.Bull.Current != x.Bull.Maximum).Count() > 0
                         ? ExpeditionPossible.NotSupplied
                         : ExpeditionPossible.Possible;
                 this.GreatChance = this.IsPossible == ExpeditionPossible.Possible
-                    ? (int)ExpeditionExtension.CheckGreateSuccessChance(value, this.Ships.Select(x => x.Ship).ToArray())
+                    ? (int)ExpeditionExtension.CheckGreateSuccessChance(value, this.Source.Ships.ToArray())
                     : 0;
 
                 this.RaisePropertyChanged();
