@@ -100,7 +100,17 @@
 
 
                             <Grid x:Name="QuestTracker"
-                                  Grid.Column="4">
+                                  Grid.Column="4"
+                                  MaxHeight="44">
+                                <Grid.ToolTip>
+                                    <TextBlock x:Name="QuestProgressTextTooltip"
+                                               Text="{Binding QuestProgressText, Mode=OneWay}"
+                                               Style="{DynamicResource EmphaticTextStyleKey}"
+                                               Margin="0,0,5,0"
+                                               TextAlignment="Left"
+                                               FontSize="10" />
+                                </Grid.ToolTip>
+                                
                                 <Grid HorizontalAlignment="Right"
                                       MaxWidth="280"
                                       Width="{Binding ElementName=QuestTracker, Path=ActualWidth}">
@@ -208,6 +218,7 @@
                             <DataTrigger Binding="{Binding QuestTrackingVisible}" Value="False">
                                 <Setter TargetName="QuestProgressBarBox" Property="Visibility" Value="Hidden" />
                                 <Setter TargetName="QuestProgressText" Property="Visibility" Value="Hidden" />
+                                <Setter TargetName="QuestProgressTextTooltip" Property="Visibility" Value="Hidden" />
                             </DataTrigger>
                             <DataTrigger Binding="{Binding QuestProgressValue}" Value="100">
                                 <Setter TargetName="QuestProgressBar" Property="Foreground" Value="#FF62B5F5" />
