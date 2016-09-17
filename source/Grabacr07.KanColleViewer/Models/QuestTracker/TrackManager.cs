@@ -261,16 +261,20 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
             }
 
             string path = Path.Combine(baseDir, "TrackingQuest.csv");
-            using (FileStream fs = new FileStream(path, FileMode.Create))
+            try
             {
-                foreach (var item in list)
+                using (FileStream fs = new FileStream(path, FileMode.Create))
                 {
-                    try { CSV.Write(fs, item.Id, item.TrackTime, item.Type, item.Serialized); }
-                    catch { }
-                }
+                    foreach (var item in list)
+                    {
+                        try { CSV.Write(fs, item.Id, item.TrackTime, item.Type, item.Serialized); }
+                        catch { }
+                    }
 
-                fs.Flush();
+                    fs.Flush();
+                }
             }
+            catch { }
         }
         private void ReadFromStorage()
         {
@@ -278,39 +282,43 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
             string path = Path.Combine(baseDir, "TrackingQuest.csv");
             if (!File.Exists(path)) return;
 
-            using (FileStream fs = new FileStream(path, FileMode.Open))
+            try
             {
-                while (fs.Position < fs.Length)
+                using (FileStream fs = new FileStream(path, FileMode.Open))
                 {
-                    string[] data = CSV.Read(fs);
-
-                    try
+                    while (fs.Position < fs.Length)
                     {
-                        int Id;
-                        DateTime trackTime;
-                        string QuestTypeText;
-                        QuestType QuestType;
-                        string Serialized;
+                        string[] data = CSV.Read(fs);
 
-                        if (!int.TryParse(data[0], out Id)) continue;
-                        DateTime.TryParse(data[1], out trackTime);
-                        QuestTypeText = data[2];
-                        Enum.TryParse<QuestType>(QuestTypeText, out QuestType);
-                        Serialized = data[3];
-
-                        if (!trackingAvailable.Any(x => x.Id == Id)) continue;
-                        if (IsTrackingAvailable(QuestType, trackTime))
+                        try
                         {
-                            var tracker = trackingAvailable.Where(x => x.Id == Id).First();
+                            int Id;
+                            DateTime trackTime;
+                            string QuestTypeText;
+                            QuestType QuestType;
+                            string Serialized;
 
-                            trackingTime.Add(Id, trackTime);
-                            tracker.IsTracking = true;
-                            tracker.DeserializeData(Serialized);
+                            if (!int.TryParse(data[0], out Id)) continue;
+                            DateTime.TryParse(data[1], out trackTime);
+                            QuestTypeText = data[2];
+                            Enum.TryParse<QuestType>(QuestTypeText, out QuestType);
+                            Serialized = data[3];
+
+                            if (!trackingAvailable.Any(x => x.Id == Id)) continue;
+                            if (IsTrackingAvailable(QuestType, trackTime))
+                            {
+                                var tracker = trackingAvailable.Where(x => x.Id == Id).First();
+
+                                trackingTime.Add(Id, trackTime);
+                                tracker.IsTracking = true;
+                                tracker.DeserializeData(Serialized);
+                            }
                         }
+                        catch { }
                     }
-                    catch { }
                 }
             }
+            catch { }
         }
     }
 }
