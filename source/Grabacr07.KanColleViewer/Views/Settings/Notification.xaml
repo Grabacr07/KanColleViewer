@@ -33,6 +33,16 @@
 			<CheckBox Content="건조알림"
 					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.NotifyBuildingCompleted}, Path=Value}" />
 
+            <DockPanel Margin="0,8,0,0">
+                <CheckBox Content="아카시알림"
+					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.AkashiTwentyMinute}, Path=Value}" />
+
+                <Border Margin="8" />
+
+                <TextBlock Text="아카시 타이머가 사용중인 경우, 타이머가 아카시 수리의 최소시간인 20분을 넘으면 알림을 표시하는 설정입니다."
+						   Style="{DynamicResource DetailTextStyleKey}" />
+            </DockPanel>
+
 			<Rectangle Style="{DynamicResource SeparatorStyleKey}"
 					   Margin="0,8" />
 

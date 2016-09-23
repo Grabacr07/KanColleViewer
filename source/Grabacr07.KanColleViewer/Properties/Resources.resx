@@ -465,4 +465,7 @@
   <data name="MessageBar_ReSortie_Wounded" xml:space="preserve">
     <value>中破以上の艦娘</value>
   </data>
+  <data name="Akashi_NotificationMessage" xml:space="preserve">
+    <value>明石が20分を修理しました。</value>
+  </data>
 </root>

@@ -102,7 +102,10 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
         #endregion
 
+        #region MaterialExtended 변경통지 프로퍼티
+
         private bool _MaterialExtended;
+
         public bool MaterialExtended {
             get { return this._MaterialExtended; }
             set
@@ -111,6 +114,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
                 this.RaisePropertyChanged();
             }
         }
+
+        #endregion
 
         public InformationViewModel()
 		{

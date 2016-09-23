@@ -11,57 +11,113 @@ namespace Grabacr07.KanColleViewer.Models
 {
 	public class AkashiTimer : TimerNotifier
 	{
-		#region CurrentTime 변경 통지 프로퍼티
-		private TimeSpan _CurrentTime;
+        #region BaseTime 변경 통지 프로퍼티
 
-		public TimeSpan CurrentTime
+        private TimeSpan _BaseTime;
+
+		public TimeSpan BaseTime
 		{
-			get { return _CurrentTime; }
+			get { return _BaseTime; }
 			private set
 			{
-				if(_CurrentTime != value)
+				if(_BaseTime != value)
 				{
-					_CurrentTime = value;
+					_BaseTime = value;
 					this.RaisePropertyChanged();
 				}
 			}
 		}
-		#endregion
 
-		public AkashiTimer()
+        #endregion
+
+        #region Available 변경통지 프로퍼티
+
+        private bool _Available;
+
+        public bool Available
+        {
+            get { return _Available; }
+            private set
+            {
+                if (_Available != value)
+                {
+                    _Available = value;
+                    this.RaisePropertyChanged();
+                }
+            }
+        }
+
+        #endregion
+
+        private bool Notified { get; set; }
+        public event EventHandler Repaired;
+        public event EventHandler TimerTick;
+
+        public AkashiTimer()
 		{
-			CurrentTime = new TimeSpan();
-		}
+			BaseTime = TimeSpan.FromTicks(DateTime.Now.Ticks);
+            Notified = false;
+            Available = false;
+        }
 
-		public void Update(NameValueCollection request)
+        public void Update(int fleetId, int shipIdx, int shipId)
 		{
-			int fleetId = int.Parse(request["api_id"]);
-			int shipIdx = int.Parse(request["api_ship_idx"]);
-			int shipId = int.Parse(request["api_ship_id"]);
+            if (shipIdx == -1) return;
 
-			bool akashiCheck = false;
-
+			var akashiCheck = false;
 			var fleets = KanColleClient.Current.Homeport.Organization.Fleets;
-			if(fleets[fleetId].Ships[0].Info.Id == 182 || fleets[fleetId].Ships[0].Info.Id == 187)
-			{
-				akashiCheck = true;
-			}
+            var firstShip = fleets[fleetId].Ships[0]?.Info.Id ?? 0;
 
-			if (shipIdx != -1 && akashiCheck == true)
-				CurrentTime = TimeSpan.FromSeconds(0);
+            Notified = false;
+            Available = false;
+
+            akashiCheck = (firstShip == 182 || firstShip == 187);
+            if (shipIdx != -1 && akashiCheck == true)
+            {
+                BaseTime = TimeSpan.FromTicks(DateTime.Now.Ticks);
+                Available = true;
+            }
 		}
+        public void Update(int fleetId)
+        {
+            if (Available) return;
 
-		public void Reset()
-		{
-			if (CurrentTime.Minutes >= 20)
-				CurrentTime = TimeSpan.FromSeconds(0);
-		}
+            var akashiCheck = false;
+            var fleets = KanColleClient.Current.Homeport.Organization.Fleets;
+            var firstShip = fleets[fleetId].Ships[0]?.Info.Id ?? 0;
 
-		protected override void Tick()
-		{
-			base.Tick();
+            Notified = false;
 
-			CurrentTime = CurrentTime.Add(TimeSpan.FromSeconds(1));
-		}
+            akashiCheck = (firstShip == 182 || firstShip == 187);
+            if (akashiCheck == true)
+            {
+                BaseTime = TimeSpan.FromTicks(DateTime.Now.Ticks);
+                Available = true;
+            }
+        }
+
+        public void Reset()
+        {
+            foreach (var i in KanColleClient.Current.Homeport.Organization.Fleets.Keys)
+                this.Update(i);
+
+            if ((TimeSpan.FromTicks(DateTime.Now.Ticks) - BaseTime).Minutes >= 20)
+            {
+                BaseTime = TimeSpan.FromTicks(DateTime.Now.Ticks);
+                Notified = false;
+            }
+        }
+
+        protected override void Tick()
+        {
+            base.Tick();
+
+            this.TimerTick?.Invoke(this, new EventArgs());
+            if ((TimeSpan.FromTicks(DateTime.Now.Ticks) - BaseTime).TotalSeconds >= 20 * 60 && !Notified && Available)
+            {
+                this.Notified = true;
+                this.Repaired?.Invoke(this, new EventArgs());
+            }
+        }
 	}
 }
