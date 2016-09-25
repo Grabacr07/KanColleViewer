@@ -207,8 +207,8 @@
                         </GroupBox>
                         <GroupBox Header="목록" MinHeight="80">
                             <DockPanel>
-                                <Grid Margin="5"
-                                      DockPanel.Dock="Top">
+                                <DockPanel Margin="5"
+                                           DockPanel.Dock="Top">
                                     <Panel.Resources>
                                         <DataTemplate DataType="{x:Type viewModels:RemodelFilterViewModel}">
                                             <Grid Margin="0,0,4,0"
@@ -240,13 +240,17 @@
                                               Content="보유중인 장비만 보기"
                                               HorizontalAlignment="Left" />
 
+                                    <CheckBox Margin="15,0,0,0"
+                                              IsChecked="{Binding OnlyRemodeledSlotItems}"
+                                              Content="개수된 장비만 보기"
+                                              HorizontalAlignment="Left" />
+
                                     <metro:PromptComboBox MinWidth="56"
-                                                          HorizontalAlignment="Right"
                                                           Prompt=""
                                                           IsReadOnly="True"
                                                           ItemsSource="{Binding RemodelFilters}"
                                                           SelectedValue="{Binding RemodelFilterSelected, Mode=TwoWay}" />
-                                </Grid>
+                                </DockPanel>
                                 <ItemsControl ItemsSource="{Binding FirstList}">
                                     <ItemsControl.Template>
                                         <ControlTemplate TargetType="{x:Type ItemsControl}">

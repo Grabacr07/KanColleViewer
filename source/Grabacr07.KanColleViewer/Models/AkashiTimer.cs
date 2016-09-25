@@ -57,7 +57,7 @@ namespace Grabacr07.KanColleViewer.Models
 		{
 			BaseTime = TimeSpan.FromTicks(DateTime.Now.Ticks);
             Notified = false;
-            Available = false;
+            Available = true;
         }
 
         public void Update(int fleetId, int shipIdx, int shipId)
@@ -69,7 +69,7 @@ namespace Grabacr07.KanColleViewer.Models
             var firstShip = fleets[fleetId].Ships[0]?.Info.Id ?? 0;
 
             Notified = false;
-            Available = false;
+            // Available = false;
 
             akashiCheck = (firstShip == 182 || firstShip == 187);
             if (shipIdx != -1 && akashiCheck == true)

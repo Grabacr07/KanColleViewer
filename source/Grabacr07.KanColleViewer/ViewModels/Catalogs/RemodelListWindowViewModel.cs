@@ -55,6 +55,22 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
         #endregion
 
+        #region OnlyRemodeledSlotItems 변경통지 프로퍼티
+
+        private bool _OnlyRemodeledSlotItems;
+        public bool OnlyRemodeledSlotItems
+        {
+            get { return this._OnlyRemodeledSlotItems; }
+            set
+            {
+                this._OnlyRemodeledSlotItems = value;
+                this.RaisePropertyChanged();
+                this.Update(false);
+            }
+        }
+
+        #endregion
+
         #region RemodelFilters 프로퍼티
 
         public ICollection<RemodelFilterViewModel> RemodelFilters { get; }
@@ -288,17 +304,28 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
                     {
                         RemodelList = RemodelList.Where(x =>
                         {
-                            var name = KanColleClient.Current.Translations.GetTranslation(
-                                x.Element("SlotItemName").Value,
-                                TranslationType.Equipment,
-                                false
-                            );
+                            var name = x.Element("SlotItemName").Value;
                             var itemid = KanColleClient.Current.Master.SlotItems
-                                .Where(y => y.Value.Name == name)
-                                .Select(y => y.Value.Id)
-                                .FirstOrDefault();
+                                .Where(y => y.Value.RawData.api_name == name)
+                                .FirstOrDefault()
+                                .Value.Id;
 
                             return KanColleClient.Current.Homeport.Itemyard.SlotItems.Any(y => y.Value.Info.Id == itemid);
+                        });
+                    }
+
+                    // 개수된 장비로 필터
+                    if(this.OnlyRemodeledSlotItems)
+                    {
+                        RemodelList = RemodelList.Where(x =>
+                        {
+                            var name = x.Element("SlotItemName").Value;
+                            var itemid = KanColleClient.Current.Master.SlotItems
+                                .Where(y => y.Value.RawData.api_name == name)
+                                .FirstOrDefault()
+                                .Value.Id;
+
+                            return KanColleClient.Current.Homeport.Itemyard.SlotItems.Any(y => y.Value.Info.Id == itemid && y.Value.Level > 0);
                         });
                     }
 
@@ -307,13 +334,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
                     {
                         RemodelList = RemodelList.Where(x =>
                         {
-                            var name = KanColleClient.Current.Translations.GetTranslation(
-                                x.Element("SlotItemName").Value,
-                                TranslationType.Equipment,
-                                false
-                            );
+                            var name = x.Element("SlotItemName").Value;
                             var icon = KanColleClient.Current.Master.SlotItems
-                                .Where(y => y.Value.Name == name)
+                                .Where(y => y.Value.RawData.api_name == name)
                                 .Select(y => y.Value.IconType)
                                 .FirstOrDefault();
 
