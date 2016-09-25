@@ -245,7 +245,8 @@
                                               Content="개수된 장비만 보기"
                                               HorizontalAlignment="Left" />
 
-                                    <metro:PromptComboBox MinWidth="56"
+                                    <metro:PromptComboBox HorizontalAlignment="Right"
+                                                          MinWidth="56"
                                                           Prompt=""
                                                           IsReadOnly="True"
                                                           ItemsSource="{Binding RemodelFilters}"
