@@ -29,6 +29,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
             manager.BattleResultEvent += (sender, args) =>
             {
                 if (!IsTracking) return;
+                if (!"SAB".Contains(args.Rank)) return; // 승리 랭크
 
                 count = count.Add(1).Max(max_count);
 
@@ -49,7 +50,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
         public string GetProgressText()
         {
-            return count >= max_count ? "완료" : $"전투 {count} / {max_count}";
+            return count >= max_count ? "완료" : $"전투 승리 {count} / {max_count}";
         }
 
         public string SerializeData()
