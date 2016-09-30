@@ -17,6 +17,7 @@ using MetroTrilithon.Mvvm;
 using MetroTrilithon.UI.Controls;
 using System.Windows.Input;
 using Grabacr07.KanColleWrapper;
+using System.Reactive.Linq;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {
@@ -160,6 +161,15 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				this.TopView = Visibility.Collapsed;
 				this.BottomView = Visibility.Visible;
 			}
+
+            KanColleClient.Current.Proxy.ApiSessionSource
+                .TryParse()
+                .Where(x => !x.IsSuccess)
+                .Subscribe(x =>
+                {
+                    var text = $"서버에서 201 오류를 전달했습니다.";
+                    StatusService.Current.Set(text);
+                });
 		}
 
 
