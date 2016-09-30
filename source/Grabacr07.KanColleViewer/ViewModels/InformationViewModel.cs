@@ -134,10 +134,10 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			{
 				(this.Overview = new OverviewViewModel(this).AddTo(this)),
 				(this.Fleets = new FleetsViewModel().AddTo(this)),
-				(this.Shipyard = new ShipyardViewModel().AddTo(this)),
-				(this.Quests = new QuestsViewModel().AddTo(this)),
+				(this.Shipyard = new ShipyardViewModel(this.Fleets).AddTo(this)),
+				(this.Quests = new QuestsViewModel(this.Fleets).AddTo(this)),
 				(this.Expeditions = new ExpeditionsViewModel(this.Fleets).AddTo(this)),
-				(this.Tools = new ToolsViewModel().AddTo(this)),
+				(this.Tools = new ToolsViewModel(this.Fleets).AddTo(this)),
 			};
 			this.SystemTabItems = new List<TabItemViewModel>
 			{

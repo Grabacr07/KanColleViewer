@@ -8,6 +8,7 @@ using Livet.EventListeners;
 
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleViewer.Models.QuestTracker;
+using Grabacr07.KanColleViewer.ViewModels.Contents.Fleets;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents
 {
@@ -132,7 +133,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
         private TrackManager questTracker { get; set; }
 
-        public QuestsViewModel()
+        public FleetsViewModel Fleets { get; }
+
+        public QuestsViewModel(FleetsViewModel fleets)
 		{
             this.TabItems = new List<KeyNameTabItemViewModel>
                 {
@@ -159,6 +162,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
             questTracker.QuestsEventChanged += (s, e) => this.UpdateQuest(quests);
 
             this.UpdateQuest(quests);
+
+
+            this.Fleets = fleets;
 		}
 
         private void UpdateQuest(Quests quests)
