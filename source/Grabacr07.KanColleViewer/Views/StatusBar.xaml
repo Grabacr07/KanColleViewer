@@ -77,10 +77,19 @@
                                          Value="True">
                                 <Setter TargetName="Border"
                                         Property="Background"
-                                        Value="#FFCF0000" />
+                                        Value="#FFC88232" />
                                 <Setter TargetName="Text"
 								        Property="Text"
 								        Value="수리중" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding State.FlagshipIsRepairShip}"
+                                         Value="True">
+                                <Setter TargetName="Border"
+                                        Property="Background"
+                                        Value="#FFC88232" />
+                                <Setter TargetName="Text"
+								        Property="Text"
+								        Value="공작함 기함" />
                             </DataTrigger>
                             <DataTrigger Binding="{Binding State.IsReady}"
 								         Value="True">

@@ -237,6 +237,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
+
 		#region IsReady 変更通知プロパティ
 
 		private bool _IsReady;
@@ -285,6 +286,16 @@ namespace Grabacr07.KanColleWrapper.Models
         public bool Repairing => this.Situation.HasFlag(FleetSituation.Repairing);
 
         #endregion
+
+        #region FlagshipIsRepairShip 変更通知プロパティ
+
+        /// <summary>
+        /// 艦隊の出撃準備ができているかどうかを示す値を取得します。
+        /// </summary>
+        public bool FlagshipIsRepairShip => this.Situation.HasFlag(FleetSituation.FlagshipIsRepairShip);
+
+        #endregion
+
 
         #region UsedFuel 변경통지 프로퍼티
 
@@ -531,6 +542,7 @@ namespace Grabacr07.KanColleWrapper.Models
             this.RaisePropertyChanged(nameof(this.InShortSupply));
             this.RaisePropertyChanged(nameof(this.HeavilyDamaged));
             this.RaisePropertyChanged(nameof(this.Repairing));
+            this.RaisePropertyChanged(nameof(this.FlagshipIsRepairShip));
 
             this.Updated?.Invoke(this, new EventArgs());
 		}
