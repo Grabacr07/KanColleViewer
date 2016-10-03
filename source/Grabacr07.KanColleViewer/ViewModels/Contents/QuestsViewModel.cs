@@ -33,7 +33,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
                 IEnumerable<QuestViewModel> temp;
                 switch (SelectedItem.Key)
                 {
-                    case "All": return ComputeQuestPage(this._Quests);
+                    case "All":
+                        temp = this._Quests;
+                        break;
                     case "Current":
                         temp = this._Quests.Where(x => x.State != QuestState.None);
                         break;
@@ -57,6 +59,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
                         break;
                 }
                 if (temp == null) return new QuestViewModel[0];
+
+                if (QuestCategorySelected.Display != CategoryToColor(QuestCategory.Other))
+                    temp = temp.Where(x => CategoryToColor(x.Category) == QuestCategorySelected.Display);
                 return ComputeQuestPage(temp.ToArray());
             }
             set
@@ -111,6 +116,32 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
         #endregion
 
 
+        #region QuestCategories 프로퍼티
+
+        public ICollection<QuestCategoryViewModel> QuestCategories { get; }
+
+        #endregion
+
+        #region QuestCategorySelected 변경통지 프로퍼티
+
+        private QuestCategoryViewModel _QuestCategorySelected;
+        public QuestCategoryViewModel QuestCategorySelected
+        {
+            get { return this._QuestCategorySelected; }
+            set
+            {
+                if (this._QuestCategorySelected != value)
+                {
+                    this._QuestCategorySelected = value;
+                    this.RaisePropertyChanged();
+                    this.RaisePropertyChanged("Quests");
+                }
+            }
+        }
+
+        #endregion
+
+
         private int _Badge = 0;
 
         public IList<KeyNameTabItemViewModel> TabItems { get; set; }
@@ -136,7 +167,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
         public FleetsViewModel Fleets { get; }
 
         public QuestsViewModel(FleetsViewModel fleets)
-		{
+        {
             this.TabItems = new List<KeyNameTabItemViewModel>
                 {
                     new KeyNameTabItemViewModel("All", "전체"),
@@ -148,6 +179,33 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
                     new KeyNameTabItemViewModel("Others", "그 외")
                 };
             this.SelectedItem = this.TabItems.FirstOrDefault(x => x.Name == "진행중");
+
+
+            var categoryTable = new Dictionary<string, string>
+            {
+                { "Composition", "편성" },
+                { "Sortie", "출격" },
+                { "Sortie2", "출격" },
+                { "Practice", "연습" },
+                { "Expeditions", "원정" },
+                { "Supply", "보급" },
+                { "Building", "공창" },
+                { "Remodelling", "근개수" },
+            };
+
+            var list = new List<QuestCategoryViewModel>();
+            var categories = Enum.GetNames(typeof(QuestCategory));
+            list.Add(new QuestCategoryViewModel("All", CategoryToColor(QuestCategory.Other), "전체"));
+
+            foreach (var item in categories)
+            {
+                var t = (QuestCategory)Enum.Parse(typeof(QuestCategory), item);
+                list.Add(new QuestCategoryViewModel(item, CategoryToColor(t), categoryTable.ContainsKey(item) ? categoryTable[item] : ""));
+            }
+            list = list.Distinct(x => x.Display).ToList();
+
+            this.QuestCategories = list;
+            this.QuestCategorySelected = this.QuestCategories.FirstOrDefault();
 
 
             var quests = KanColleClient.Current.Homeport.Quests;
@@ -192,7 +250,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
             this._Badge = questTracker.AllQuests.Where(x => quests.All.Any(y => y.Id == x.Id)).Count(x => x.GetProgress() == 100);
             this.RaisePropertyChanged("Name");
         }
-
         private QuestViewModel[] ComputeQuestPage(QuestViewModel[] inp)
         {
             if (inp.Length == 0) return inp;
@@ -214,5 +271,41 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
             return inp.ToArray();
         }
 
+        string CategoryToColor(QuestCategory category)
+        {
+            switch (category)
+            {
+                case QuestCategory.Composition:
+                    return "#FF2A7D46";
+                case QuestCategory.Sortie:
+                case QuestCategory.Sortie2:
+                    return "#FFB53B36";
+                case QuestCategory.Practice:
+                    return "#FF8DC660";
+                case QuestCategory.Expeditions:
+                    return "#FF3BA09D";
+                case QuestCategory.Supply:
+                    return "#FFB2932E";
+                case QuestCategory.Building:
+                    return "#FF64443B";
+                case QuestCategory.Remodelling:
+                    return "#FFA987BA";
+            }
+            return "#FF808080";
+        }
+    }
+
+    public class QuestCategoryViewModel : Livet.ViewModel
+    {
+        public string Key { get; }
+        public string Display { get; }
+        public string DisplayText { get; }
+
+        public QuestCategoryViewModel(string Key, string Display, string DisplayText = "")
+        {
+            this.Key = Key;
+            this.Display = Display;
+            this.DisplayText = DisplayText;
+        }
     }
 }
