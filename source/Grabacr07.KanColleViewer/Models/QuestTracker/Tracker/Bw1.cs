@@ -59,7 +59,8 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
                 "敵回航中空母",           // 6-1
                 "敵攻略部隊本体",         // 6-2
                 "留守泊地旗艦艦隊",       // 6-3
-                "離島守備隊"              // 6-4
+                "離島守備隊",             // 6-4
+                "任務部隊 主力群"         // 6-5
             };
 
             manager.BattleResultEvent += (sender, args) =>
