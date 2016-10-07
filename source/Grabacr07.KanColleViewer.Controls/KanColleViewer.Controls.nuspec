@@ -16,7 +16,7 @@
       <dependency id="MetroRadiance.Core" version="2.1.0" />
       <dependency id="MetroRadiance.Chrome" version="2.1.0" />
       <dependency id="MetroRadiance" version="2.1.1" />
-      <dependency id="KanColleWrapper" version="1.2.7" />
+      <dependency id="KanColleWrapper" version="1.6.1" />
     </dependencies>
   </metadata>
   <files>
