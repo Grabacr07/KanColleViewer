@@ -18,6 +18,7 @@
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:fleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 			 xmlns:wrapper="clr-namespace:Grabacr07.KanColleWrapper.Models;assembly=KanColleWrapper"
+			 Name="RootView"
 			 mc:Ignorable="d"
 			 d:DesignWidth="800"
 			 d:DesignHeight="400"
@@ -230,17 +231,43 @@
 														Margin="3,0" />
 
 									<TextBlock x:Name="LostCount"
-												Background="#66000000"
-												VerticalAlignment="Top"
-												HorizontalAlignment="Left"
-												Text="{Binding Lost, Mode=OneWay, StringFormat={}-{0}}"
-												Padding="1,-2,1,1"
-												Width="Auto"
-												Height="Auto"
-												Foreground="#FFDD3535"
-												FontSize="10"
-												FontWeight="Bold"
-												Panel.ZIndex="1" />
+											   Background="#66000000"
+											   VerticalAlignment="Top"
+											   HorizontalAlignment="Left"
+											   Padding="1,-2,1,1"
+											   Width="Auto"
+											   Height="Auto"
+											   FontSize="10"
+											   FontWeight="Bold"
+											   Panel.ZIndex="1" >
+
+										<TextBlock.Style>
+											<Style TargetType="TextBlock">
+												<Setter Property="Foreground" Value="#FFDD3535" />
+												<Style.Triggers>
+													<DataTrigger Binding="{Binding DataContext.ShowLostAirplane, ElementName=RootView}" Value="False">
+														<Setter Property="Text" Value="{Binding Current, Mode=OneWay}" />
+													</DataTrigger>
+													<DataTrigger Binding="{Binding DataContext.ShowLostAirplane, ElementName=RootView}" Value="True">
+														<Setter Property="Text" Value="{Binding Lost, Mode=OneWay, StringFormat={}-{0}}" />
+													</DataTrigger>
+
+													<DataTrigger Binding="{Binding Lost}" Value="0">
+														<Setter Property="Foreground" Value="#FFFFFFFF" />
+													</DataTrigger>
+													<MultiDataTrigger>
+														<MultiDataTrigger.Conditions>
+															<Condition Binding="{Binding DataContext.ShowLostAirplane, ElementName=RootView}" Value="True" />
+															<Condition Binding="{Binding Lost}" Value="0" />
+														</MultiDataTrigger.Conditions>
+														<MultiDataTrigger.Setters>
+															<Setter Property="Visibility" Value="Collapsed" />
+														</MultiDataTrigger.Setters>
+													</MultiDataTrigger>
+												</Style.Triggers>
+											</Style>
+										</TextBlock.Style>
+									</TextBlock>
 
 									<Grid x:Name="ItemProficiencyBlock"
 											Background="#66000000"
@@ -310,9 +337,6 @@
 									</DataTrigger>
 									<DataTrigger Binding="{Binding Item.Proficiency}" Value="0">
 										<Setter TargetName="ItemProficiencyBlock" Property="Visibility" Value="Collapsed" />
-									</DataTrigger>
-									<DataTrigger Binding="{Binding Lost}" Value="0">
-										<Setter TargetName="LostCount" Property="Visibility" Value="Collapsed" />
 									</DataTrigger>
 								</DataTemplate.Triggers>
 							</DataTemplate>
