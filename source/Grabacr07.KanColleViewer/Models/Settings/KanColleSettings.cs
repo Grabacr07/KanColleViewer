@@ -139,10 +139,10 @@ namespace Grabacr07.KanColleViewer.Models.Settings
             = new SerializableProperty<string>(GetKey(), Providers.Roaming, nameof(Materials.Ammunition));
 
         /// <summary>
-        /// 画面に表示する資材 (4 つめ) を表す設定値を取得します。
+        /// 화면에 표시할 자원을 4개까지 확장하는지 여부에 대한 설정.
         /// </summary>
         public static SerializableProperty<bool> DisplayMaterialExtended { get; }
-            = new SerializableProperty<bool>(GetKey(), Providers.Roaming, false);
+            = new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
 
         /// <summary>
         /// 艦隊ステータスにおいて、旗艦が工作艦でないことを確認するかどうかを表す設定値を取得します。
