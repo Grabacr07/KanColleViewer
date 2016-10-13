@@ -254,6 +254,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		{
 			if (File.Exists(Path.Combine(MainFolder, "Translations", "RemodelSlots.xml")))
 			{
+                if (this.IsLoading) return;
                 this.IsLoading = true;
 
                 new System.Threading.Thread(() =>
@@ -356,6 +357,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
                     //소모아이템 리스트를 작성
                     var use = MakeUseItemList(RemodelList);
                     var _UseItemList = SortList(use.ToList());
+
                     //개조 목록을 작성
                     var im = MakeUpgradeList(RemodelList);
                     var _Improvement = SortList(im.ToList());
@@ -374,9 +376,12 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		{
 			myList.Sort(delegate (RemodelItemList x, RemodelItemList y)
 			{
+                SlotItemIconType? a = x.IconType, b = y.IconType;
 
-				return ((int)x.IconType.Value).CompareTo((int)y.IconType.Value);
+                if (Enum.GetName(typeof(SlotItemIconType), a) == null) a = SlotItemIconType.Unknown;
+                if (Enum.GetName(typeof(SlotItemIconType), b) == null) b = SlotItemIconType.Unknown;
 
+                return ((int)a.Value).CompareTo((int)b.Value);
 			});
 			return myList;
 		}
@@ -602,24 +607,24 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 					if (slotitem.Value.Name == ItemContent.ItemName)
 						ItemContent.IconType = slotitem.Value.IconType;
 				}
-				//개수시 필요한 아이템 개수 목록을 작성
-				StringBuilder equipCombine = new StringBuilder();
-				if (item.Element("StartEquip") != null)
+				// 개수시 필요한 나사 개수 목록을 작성
+				StringBuilder screwCombine = new StringBuilder();
+				if (item.Element("StartScrew") != null)
 				{
-					equipCombine.Append(item.Element("StartEquip").Value);
+					screwCombine.Append(item.Element("StartScrew").Value);
 				}
-				if (item.Element("MidEquip") != null)
+				if (item.Element("MidScrew") != null)
 				{
-					equipCombine.Append("/");
-					equipCombine.Append(item.Element("MidEquip").Value);
+					screwCombine.Append("/");
+					screwCombine.Append(item.Element("MidScrew").Value);
 				}
-				if (item.Element("LastEquip") != null)
+				if (item.Element("LastScrew") != null)
 				{
-					equipCombine.Append("/");
-					equipCombine.Append(item.Element("LastEquip").Value);
+					screwCombine.Append("/");
+					screwCombine.Append(item.Element("LastScrew").Value);
 				}
-				if (equipCombine.ToString().Count() > 0)
-					ItemContent.UseEquip = equipCombine.ToString();
+				if (screwCombine.Length > 0)
+					ItemContent.UseScrew = screwCombine.ToString();
 
 				ItemList.Add(ItemContent);
 			}
@@ -627,51 +632,16 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		}
 		private WeekDayFlag WeekDaySetter(int weekint)
 		{
-			if (weekint.ToString().Count() == 7)
-			{
-				return WeekDayFlag.All;
-			}
+            var temp = weekint.ToString();
+            int len = temp.Length;
 
-			int var = weekint;
-			int len = 1;
-			int div;
+            if (len == 7) return WeekDayFlag.All;
 
-			while (true)
-			{
-				div = var / 10;
-				if (div == 0) break;
-				len++;
-				var = div;
-			}
 			WeekDayFlag weekday = new WeekDayFlag();
 			for (int i = 0; i < len; i++)
 			{
-				var temp = weekint.ToString();
-				int inttemp = Convert.ToInt32(temp[i].ToString());
-				switch (inttemp)
-				{
-					case 1:
-						weekday |= WeekDayFlag.Sunday;
-						break;
-					case 2:
-						weekday |= WeekDayFlag.Monday;
-						break;
-					case 3:
-						weekday |= WeekDayFlag.Tuesday;
-						break;
-					case 4:
-						weekday |= WeekDayFlag.Wednesday;
-						break;
-					case 5:
-						weekday |= WeekDayFlag.Thursday;
-						break;
-					case 6:
-						weekday |= WeekDayFlag.Friday;
-						break;
-					case 7:
-						weekday |= WeekDayFlag.Saturday;
-						break;
-				}
+				int inttemp = Convert.ToInt32(temp[i]);
+				weekday |= (WeekDayFlag)inttemp;
 			}
 			return weekday;
 		}
@@ -696,7 +666,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public WeekDayFlag TotalWeekday { get; set; }
 		public SlotItemIconType? IconType { get; set; }
 		public string ToolTipString { get; set; }
-		public string UseEquip { get; set; }
+		public string UseScrew { get; set; }
 		public SlotItemIconType? UpgradeIconType { get; set; }
 		public List<ShipInfo> Ships { get; set; }
 	}

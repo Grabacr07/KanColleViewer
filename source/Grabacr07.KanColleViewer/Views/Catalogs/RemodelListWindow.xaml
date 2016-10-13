@@ -439,7 +439,7 @@
                         <GroupBox>
                             <Border Background="{DynamicResource BorderBrushKey}"
 								Padding="8,6">
-                                <TextBlock Text="장비소모수" HorizontalAlignment="Center"/>
+                                <TextBlock Text="필요나사수" HorizontalAlignment="Center"/>
                             </Border>
                         </GroupBox>
                         <Border BorderBrush="{DynamicResource BorderBrushKey}" BorderThickness="1">
@@ -518,7 +518,7 @@
                                             </GridViewColumn.Header>
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate DataType="{x:Type CviewModels:SlotItemCounter}">
-                                                    <TextBlock Text="{Binding UseEquip}"
+                                                    <TextBlock Text="{Binding UseScrew}"
 															   HorizontalAlignment="Center"
 													   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 													   Margin="0,4" />
