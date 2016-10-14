@@ -127,6 +127,30 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 			= new SerializableProperty<string>(GetKey(), Providers.Roaming, nameof(Materials.InstantBuildMaterials));
 
 		/// <summary>
+		/// 画面に表示する資材 (3 つめ) を表す設定値を取得します。
+		/// </summary>
+		public static SerializableProperty<string> DisplayMaterial3 { get; }
+			= new SerializableProperty<string>(GetKey(), Providers.Roaming, nameof(Materials.Fuel));
+
+		/// <summary>
+		/// 画面に表示する資材 (4 つめ) を表す設定値を取得します。
+		/// </summary>
+		public static SerializableProperty<string> DisplayMaterial4 { get; }
+			= new SerializableProperty<string>(GetKey(), Providers.Roaming, nameof(Materials.Ammunition));
+
+		/// <summary>
+		/// 화면에 표시할 자원을 4개까지 확장하는지 여부에 대한 설정.
+		/// </summary>
+		public static SerializableProperty<bool> DisplayMaterialExtended { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
+
+		/// <summary>
+		/// 함재기의 슬롯수를 표시할지, 격추수를 표시할지 여부에 대한 설정.
+		/// </summary>
+		public static SerializableProperty<bool> ShowLostAirplane { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
+
+		/// <summary>
 		/// 艦隊ステータスにおいて、旗艦が工作艦でないことを確認するかどうかを表す設定値を取得します。
 		/// </summary>
 		public static SerializableProperty<bool> CheckFlagshipIsNotRepairShip { get; }
@@ -137,6 +161,12 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		/// </summary>
 		public static SerializableProperty<bool> UseRepairTimer { get; }
 			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, true);
+
+		/// <summary>
+		/// 아카시 수리 타이머가 20분을 넘었을 때 알림을 표시합니다.
+		/// </summary>
+		public static SerializableProperty<bool> AkashiTwentyMinute { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, false);
 
 		/// <summary>
 		/// 艦隊の編成が変更されたときに、その艦隊を自動的に選択状態にするかどうかを表す設定値を取得します。

@@ -5,6 +5,7 @@
 			 xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:metro2="http://schemes.grabacr.net/winfx/2015/personal/controls"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Dev"
@@ -13,6 +14,53 @@
 			 d:DesignWidth="700"
 			 d:DesignHeight="300"
 			 d:DataContext="{d:DesignInstance vm:DebugTabViewModel}">
-	<StackPanel Margin="10,0,10,10">
-	</StackPanel>
+    <Grid Margin="10,0,10,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <CheckBox IsChecked="{Binding Capture}"
+                  Content="Capture"
+                  VerticalAlignment="Center"
+                  Margin="5" />
+        <metro2:CallMethodButton Padding="8,3"
+                                 Margin="0,0,0,5"
+                                 HorizontalAlignment="Right"
+                                 MethodName="Clear"
+                                 Content="Clear" />
+
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto"
+                      PanningMode="Both">
+            <ItemsControl ItemsSource="{Binding listData, Mode=OneWay}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding PathAndQuery, Mode=OneWay}"
+                                       Margin="0,0,0,2"
+                                       FontSize="10"
+                                       Foreground="#FFE8E8E8"
+                                       TextWrapping="WrapWithOverflow" />
+
+                            <Border Grid.Row="2" Margin="5,2" Height=".99" Background="{DynamicResource BorderBrushKey}" />
+
+                            <TextBlock Text="{Binding Request, Mode=OneWay}"
+                                       Margin="0,0,0,2"
+                                       FontSize="10"
+                                       Foreground="#FFC4C4C4"
+                                       TextWrapping="WrapWithOverflow" />
+
+                            <TextBlock Text="{Binding Response, Mode=OneWay}"
+                                       FontSize="10"
+                                       Foreground="#FFE8E8E8"
+                                       TextWrapping="WrapWithOverflow" />
+
+                            <Border Grid.Row="2" Margin="0,5" Height="2" Background="{DynamicResource BorderBrushKey}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
 </UserControl>

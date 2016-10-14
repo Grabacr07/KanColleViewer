@@ -153,3 +153,13 @@ MIT 라이센스 하에 공개하는 오픈소스/프리소프트웨어입니다
 * **용도 :** 볼륨 조작
 * **라이센스 :** The MIT License (MIT)
 * **라이센스 전문 :** [licenses/NETCoreAudioAPIs.txt](licenses/NETCoreAudioAPIs.txt)
+
+#### [ModernNotify](https://github.com/WolfgangKurz/ModernNotify/)
+
+> The MIT License (MIT)
+>
+> Copyright (c) 2016 WolfgangKurz
+
+* **용도 :** 토스트 비호환 플랫폼 토스트 알림
+* **라이센스 :** The MIT License (MIT)
+* **라이센스 전문 :** [licenses/ModernNotify.txt](licenses/ModernNotify.txt)

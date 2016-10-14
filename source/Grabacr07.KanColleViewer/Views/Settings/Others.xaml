@@ -142,7 +142,12 @@
 
 		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
-		<TextBlock Text="MMCSS(Multimedia Class Scheduler Service) 설정" Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+		<TextBlock Style="{DynamicResource SettingsHeaderTextStyleKey}">
+            <Run Text="MMCSS(Multimedia Class Scheduler Service) 설정" />
+            <TextBlock.ToolTip>
+                <TextBlock Text="프로그램 내부의 타이머를 정확하게 계산하는 기능입니다." />
+            </TextBlock.ToolTip>
+        </TextBlock>
 		<CheckBox Content="MMCSS를 적용합니다. 해당 설정은 어플리케이션을 재시작해야 적용됩니다." 
                   IsChecked="{Binding Source={x:Static ms:GeneralSettings.MMCSSEnabled}, Path=Value}"
                   Height="17" 

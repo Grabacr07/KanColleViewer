@@ -27,7 +27,7 @@
 				   d:DataContext="{d:DesignInstance viewModels:CalExpViewModel}"
 				   Title="{Binding Title}"
 				   Width="400"
-				   Height="380"
+				   Height="408"
 				   FontSize="12"
 				   Background="{DynamicResource ThemeBrushKey}"
 				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
@@ -100,195 +100,411 @@
         </DockPanel>
         <!-- #endregion -->
         <StackPanel Margin="10,37,10,10" Grid.RowSpan="2">
-			<TextBlock Margin="0,5,0,5">
-				<TextBlock Text="※목표 레벨은 개조레벨로 자동설정됩니다!" Foreground="#FFFF6B6B"/>
-				<LineBreak/>
-				<TextBlock Margin="0,3,0,0" FontSize="10" Text="  개조가 모두 끝난 칸무스는 현재레벨+1로 목표가 설정됩니다."/>
-			</TextBlock>
+			<ListBox Margin="0,4,0,0"
+					 ItemsSource="{Binding TabItems}"
+					 SelectedValue="{Binding SelectedTab, Mode=TwoWay}"
+					 Style="{DynamicResource HorizontalFlatListBoxStyleKey}">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<Border Padding="10,0,10,5"
+								Background="Transparent">
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Text="{Binding}"
+										   Style="{DynamicResource HeaderTextStyleKey}"
+										   Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" />
+							</StackPanel>
+						</Border>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ListBox>
 
-			<metro:PromptComboBox Margin="0,8"
-				HorizontalAlignment="Left"
-				Prompt="칸무스를 선택하세요"
-				ItemsSource="{Binding Ships}"
-				DisplayMemberPath="Ship.LvName"
-				SelectedValuePath="Ship"
-				SelectedValue="{Binding CurrentShip, Mode=TwoWay}"
-				IsReadOnly="True"
-				MinWidth="200"/>
-			<Grid>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto"/>
-					<ColumnDefinition Width="*"/>
-				</Grid.ColumnDefinitions>
-				<Grid.RowDefinitions>
-					<RowDefinition />
-					<RowDefinition />
-					<RowDefinition />
-					<RowDefinition />
-				</Grid.RowDefinitions>
+			<Rectangle Height="1"
+				Margin="4,4,4,8"
+				Grid.Row="2"
+				Grid.ColumnSpan="2"
+				Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-				<Grid>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="Auto" />
-						<ColumnDefinition Width="Auto" />
-						<ColumnDefinition Width="*" />
-					</Grid.ColumnDefinitions>
-					<Grid.RowDefinitions>
-						<RowDefinition/>
-						<RowDefinition/>
-					</Grid.RowDefinitions>
+            <StackPanel Visibility="{Binding GoalExpVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+			    <TextBlock Margin="0,5,0,5">
+				    <TextBlock Text="※목표 레벨은 개조레벨로 자동설정됩니다!" Foreground="#FFFF6B6B"/>
+				    <LineBreak/>
+				    <TextBlock Margin="0,3,0,0" FontSize="10" Text="  개조가 모두 끝난 칸무스는 현재레벨+1로 목표가 설정됩니다."/>
+			    </TextBlock>
 
-					<TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
-						Margin="2,0,0,0"><Run Text="현재 레벨"/></TextBlock>
+			    <metro:PromptComboBox Margin="0,8"
+				    HorizontalAlignment="Left"
+				    Prompt="칸무스를 선택하세요"
+				    ItemsSource="{Binding Ships}"
+				    DisplayMemberPath="Ship.LvName"
+				    SelectedValuePath="Ship"
+				    SelectedValue="{Binding CurrentShip, Mode=TwoWay}"
+				    IsReadOnly="True"
+				    MinWidth="200"/>
+			    <Grid>
+				    <Grid.ColumnDefinitions>
+					    <ColumnDefinition Width="Auto"/>
+					    <ColumnDefinition Width="*"/>
+				    </Grid.ColumnDefinitions>
+				    <Grid.RowDefinitions>
+					    <RowDefinition />
+					    <RowDefinition />
+					    <RowDefinition />
+					    <RowDefinition />
+				    </Grid.RowDefinitions>
 
-					<metro:PromptComboBox Margin="8"
-						ItemsSource="{Binding Source={StaticResource EnumerableRange}}"
-						HorizontalAlignment="Left"
-						Prompt=""
-						SelectedValue="{Binding CurrentLevel, Mode=TwoWay}"
-						IsReadOnly="True"
-						MinWidth="50"
-						Grid.Column="1"/>
+				    <Grid>
+					    <Grid.ColumnDefinitions>
+						    <ColumnDefinition Width="Auto" />
+						    <ColumnDefinition Width="Auto" />
+						    <ColumnDefinition Width="*" />
+					    </Grid.ColumnDefinitions>
+					    <Grid.RowDefinitions>
+						    <RowDefinition/>
+						    <RowDefinition/>
+					    </Grid.RowDefinitions>
 
-					<metro:PromptTextBox x:Name="CurrentExp"
-						Grid.Column="2"
-						Text="{Binding CurrentExp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-						Prompt=""
-						Padding="2"
-						Margin="8"
-						MinWidth="70"
-						HorizontalAlignment="Left"
-						IsReadOnly="True" />
+					    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
+						    Margin="2,0,0,0"><Run Text="현재 레벨"/></TextBlock>
 
-					<TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
-						Margin="2,0,0,0"
-						Grid.Column="0"
-						Grid.Row="1"><Run Text="목표 레벨"/></TextBlock>
+					    <metro:PromptComboBox Margin="8"
+						    ItemsSource="{Binding Source={StaticResource EnumerableRange}}"
+						    HorizontalAlignment="Left"
+						    Prompt=""
+						    SelectedValue="{Binding CurrentLevel, Mode=TwoWay}"
+						    IsReadOnly="True"
+						    MinWidth="50"
+						    Grid.Column="1"/>
 
-					<metro:PromptComboBox Margin="8"
-						ItemsSource="{Binding Source={StaticResource EnumerableRange}}"
-						HorizontalAlignment="Left"
-						Prompt=""
-						SelectedValue="{Binding TargetLevel, Mode=TwoWay}"
-						IsReadOnly="True"
-						MinWidth="50"
-						Grid.Column="1"
-						Grid.Row="1"/>
+					    <metro:PromptTextBox x:Name="CurrentExp"
+						    Grid.Column="2"
+						    Text="{Binding CurrentExp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+						    Prompt=""
+						    Padding="2"
+						    Margin="8"
+						    MinWidth="70"
+						    HorizontalAlignment="Left"
+						    IsReadOnly="True" />
 
-					<metro:PromptTextBox x:Name="TargetExp"
-						Grid.Column="2"
-						Grid.Row="1"
-						Text="{Binding TargetExp}"
-						Prompt=""
-						Padding="2"
-						Margin="8"
-						MinWidth="70"
-						HorizontalAlignment="Left"
-						IsReadOnly="True" />
-				</Grid>
+					    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
+						    Margin="2,0,0,0"
+						    Grid.Column="0"
+						    Grid.Row="1"><Run Text="목표 레벨"/></TextBlock>
 
-				<Grid Grid.Row="1">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="Auto"/>
-						<ColumnDefinition Width="Auto"/>
-						<ColumnDefinition Width="Auto"/>
-						<ColumnDefinition Width="*" />
-					</Grid.ColumnDefinitions>
+					    <metro:PromptComboBox Margin="8"
+						    ItemsSource="{Binding Source={StaticResource EnumerableRange}}"
+						    HorizontalAlignment="Left"
+						    Prompt=""
+						    SelectedValue="{Binding TargetLevel, Mode=TwoWay}"
+						    IsReadOnly="True"
+						    MinWidth="50"
+						    Grid.Column="1"
+						    Grid.Row="1"/>
 
-					<TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
-						Margin="2,0,8,0"><Run Text="해역"/></TextBlock>
+					    <metro:PromptTextBox x:Name="TargetExp"
+						    Grid.Column="2"
+						    Grid.Row="1"
+						    Text="{Binding TargetExp}"
+						    Prompt=""
+						    Padding="2"
+						    Margin="8"
+						    MinWidth="70"
+						    HorizontalAlignment="Left"
+						    IsReadOnly="True" />
+				    </Grid>
 
-					<metro:PromptComboBox Margin="8"
-						ItemsSource="{Binding SeaList}"
-						HorizontalAlignment="Left"
-						Prompt=""
-						SelectedValue="{Binding SelectedSea, Mode=TwoWay}"
-						IsReadOnly="True"
-						MinWidth="50"
-						Grid.Column="1" />
+				    <Grid Grid.Row="1">
+					    <Grid.ColumnDefinitions>
+						    <ColumnDefinition Width="Auto"/>
+						    <ColumnDefinition Width="Auto"/>
+						    <ColumnDefinition Width="Auto"/>
+						    <ColumnDefinition Width="*" />
+					    </Grid.ColumnDefinitions>
 
-					<TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
-						Margin="8,0"
-						Grid.Column="2"><Run Text="랭크"/></TextBlock>
+					    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
+						    Margin="2,0,8,0"><Run Text="해역"/></TextBlock>
 
-					<metro:PromptComboBox Margin="8"
-						ItemsSource="{Binding ResultList}"
-						HorizontalAlignment="Left"
-						Prompt=""
-						SelectedValue="{Binding SelectedResult, Mode=TwoWay}"
-						IsReadOnly="True"
-						MinWidth="50"
-						Grid.Column="3" />
-				</Grid>
+					    <metro:PromptComboBox Margin="8"
+						    ItemsSource="{Binding SeaList}"
+						    HorizontalAlignment="Left"
+						    Prompt=""
+						    SelectedValue="{Binding SelectedSea, Mode=TwoWay}"
+						    IsReadOnly="True"
+						    MinWidth="50"
+						    Grid.Column="1" />
 
-				<Rectangle Height="1"
-					Margin="12,8"
-					Grid.Row="2"
-					Grid.ColumnSpan="2"
-					Style="{DynamicResource SeparatorRectangleStyleKey}" />
+					    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
+						    Margin="8,0"
+						    Grid.Column="2"><Run Text="랭크"/></TextBlock>
 
-				<Grid Grid.Row="3">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="Auto"/>
-						<ColumnDefinition Width="Auto" />
-						<ColumnDefinition Width="Auto" />
-						<ColumnDefinition Width="*" />
-					</Grid.ColumnDefinitions>
-					<Grid.RowDefinitions>
-						<RowDefinition />
-						<RowDefinition />
-					</Grid.RowDefinitions>
+					    <metro:PromptComboBox Margin="8"
+						    ItemsSource="{Binding ResultList}"
+						    HorizontalAlignment="Left"
+						    Prompt=""
+						    SelectedValue="{Binding SelectedResult, Mode=TwoWay}"
+						    IsReadOnly="True"
+						    MinWidth="50"
+						    Grid.Column="3" />
+				    </Grid>
 
-					<TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
-						Margin="8,0"><Run Text="해역 경험치"/></TextBlock>
+				    <Rectangle Height="1"
+					    Margin="12,8"
+					    Grid.Row="2"
+					    Grid.ColumnSpan="2"
+					    Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
-					<metro:PromptTextBox Grid.Column="1"
-						Text="{Binding SortieExp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-						Prompt=""
-						Padding="2"
-						Margin="8,8,0,8"
-						MinWidth="70"
-						HorizontalAlignment="Left"
-						IsReadOnly="True" />
+				    <Grid Grid.Row="3">
+					    <Grid.ColumnDefinitions>
+						    <ColumnDefinition Width="Auto"/>
+						    <ColumnDefinition Width="Auto" />
+						    <ColumnDefinition Width="Auto" />
+						    <ColumnDefinition Width="*" />
+					    </Grid.ColumnDefinitions>
+					    <Grid.RowDefinitions>
+						    <RowDefinition />
+						    <RowDefinition />
+					    </Grid.RowDefinitions>
 
-					<TextBlock Margin="5,0" VerticalAlignment="Center"
-						Grid.Column="2"><Run Text="x"/></TextBlock>
+					    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
+						    Margin="8,0"><Run Text="해역 경험치"/></TextBlock>
 
-					<metro:PromptTextBox Grid.Column="3"
-						Text="{Binding RunCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-						Prompt=""
-						Padding="2"
-						Margin="0,8"
-						MinWidth="40"
-						HorizontalAlignment="Left"
-						IsReadOnly="True" />
+					    <metro:PromptTextBox Grid.Column="1"
+						    Text="{Binding SortieExp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+						    Prompt=""
+						    Padding="2"
+						    Margin="8,8,0,8"
+						    MinWidth="70"
+						    HorizontalAlignment="Left"
+						    IsReadOnly="True" />
 
-					<TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
-						Margin="8,0"
-						Grid.Row="1"><Run Text="남은 경험치"/></TextBlock>
+					    <TextBlock Margin="5,0" VerticalAlignment="Center"
+						    Grid.Column="2"><Run Text="x"/></TextBlock>
 
-					<metro:PromptTextBox Grid.Column="1"
-						Grid.Row="1"
-						Text="{Binding RemainingExp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-						Prompt=""
-						Padding="2"
-						Margin="8,8,0,8"
-						MinWidth="70"
-						HorizontalAlignment="Left"
-						IsReadOnly="True" />
+					    <metro:PromptTextBox Grid.Column="3"
+						    Text="{Binding RunCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+						    Prompt=""
+						    Padding="2"
+						    Margin="0,8"
+						    MinWidth="40"
+						    HorizontalAlignment="Left"
+						    IsReadOnly="True" />
 
-				</Grid>
+					    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
+						    Margin="8,0"
+						    Grid.Row="1"><Run Text="남은 경험치"/></TextBlock>
 
-				<StackPanel Grid.Column="1"
-					Grid.RowSpan="2"
-					VerticalAlignment="Center">
-					<CheckBox Content="기함" IsChecked="{Binding IsFlagship}" Height="17" Margin="8,0,0,10"/>
-					<CheckBox Content="MVP" IsChecked="{Binding IsMVP}" Height="17" Margin="8,0,0,10"/>
-				</StackPanel>
+					    <metro:PromptTextBox Grid.Column="1"
+						    Grid.Row="1"
+						    Text="{Binding RemainingExp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+						    Prompt=""
+						    Padding="2"
+						    Margin="8,8,0,8"
+						    MinWidth="70"
+						    HorizontalAlignment="Left"
+						    IsReadOnly="True" />
 
-			</Grid>
+				    </Grid>
 
-		</StackPanel>
+				    <StackPanel Grid.Column="1"
+					    Grid.RowSpan="2"
+					    VerticalAlignment="Center">
+					    <CheckBox Content="기함" IsChecked="{Binding IsFlagship}" Height="17" Margin="8,0,0,10"/>
+					    <CheckBox Content="MVP" IsChecked="{Binding IsMVP}" Height="17" Margin="8,0,0,10"/>
+				    </StackPanel>
+			    </Grid>
+            </StackPanel>
+            <StackPanel Visibility="{Binding TrainingExpVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <TextBlock Margin="0,5,0,5">
+				    <TextBlock Text="※아군 함대는 1함대로 계산됩니다." Foreground="#FFFF6B6B"/>
+				    <LineBreak/>
+				    <TextBlock Margin="0,3,0,0" FontSize="10" Text="  계산된 경험치는 추정치입니다. 실제 경험치와 다를 수 있습니다."/>
+			    </TextBlock>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Margin="28,0,8,0">
+                            <Run Text="상대 기함 레벨"/>
+                        </TextBlock>
+
+                        <metro:PromptComboBox Margin="8"
+						    ItemsSource="{Binding Source={StaticResource EnumerableRange}}"
+						    HorizontalAlignment="Left"
+						    Prompt=""
+						    SelectedValue="{Binding Training_Flagship_Lv, Mode=TwoWay}"
+						    IsReadOnly="True"
+						    MinWidth="50"
+						    Grid.Column="1"/>
+
+                        <TextBlock HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+						           Margin="8,0"
+						           Grid.Column="0"
+						           Grid.Row="1">
+                            <CheckBox Content="상대 2번함 레벨" IsChecked="{Binding Training_Secondship}" Height="17" />
+                        </TextBlock>
+
+                        <metro:PromptComboBox Margin="8"
+						    ItemsSource="{Binding Source={StaticResource EnumerableRange}}"
+						    HorizontalAlignment="Left"
+						    Prompt=""
+						    SelectedValue="{Binding Training_Secondship_Lv, Mode=TwoWay}"
+                            IsEnabled="{Binding Training_Secondship}"
+						    IsReadOnly="True"
+						    MinWidth="50"
+						    Grid.Column="1"
+						    Grid.Row="1"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+						           Margin="8,0"
+						           Grid.Column="2">
+                            <Run Text="랭크"/>
+                        </TextBlock>
+
+                        <metro:PromptComboBox Margin="8"
+						    ItemsSource="{Binding ResultList}"
+						    HorizontalAlignment="Left"
+						    Prompt=""
+						    SelectedValue="{Binding SelectedExpResult, Mode=TwoWay}"
+						    IsReadOnly="True"
+						    MinWidth="50"
+						    Grid.Column="3" />
+                    </Grid>
+
+                    <Rectangle Height="1"
+					    Margin="12,8"
+					    Grid.Row="2"
+					    Grid.ColumnSpan="2"
+					    Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Margin="8,0">
+                            <Run Text="기함 경험치"/>
+                        </TextBlock>
+
+                        <metro:PromptTextBox Grid.Column="1"
+						    Text="{Binding Training_FlagshipExp, Mode=OneWay}"
+						    Prompt=""
+						    Padding="2"
+						    Margin="8,8,0,8"
+						    MinWidth="70"
+						    HorizontalAlignment="Left"
+						    IsReadOnly="True" />
+
+                        <TextBlock Margin="5,0"
+                                   VerticalAlignment="Center"
+                                   Grid.Column="2">
+                            <Run Text="/" Foreground="#FF808080"/>
+                            <Run Text="MVP" />
+                        </TextBlock>
+
+                        <metro:PromptTextBox Grid.Column="3"
+						    Text="{Binding Training_FlagshipMvpExp, Mode=OneWay}"
+						    Prompt=""
+						    Padding="2"
+						    Margin="8,8,0,8"
+						    MinWidth="70"
+						    HorizontalAlignment="Left"
+						    IsReadOnly="True" />
+
+                        <TextBlock HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+						           Margin="8,0"
+						           Grid.Row="1">
+                            <Run Text="수반함 경험치"/>
+                        </TextBlock>
+
+                        <metro:PromptTextBox Grid.Column="1"
+						    Grid.Row="1"
+						    Text="{Binding Training_AccshipExp}"
+						    Prompt=""
+						    Padding="2"
+						    Margin="8,8,0,8"
+						    MinWidth="70"
+						    HorizontalAlignment="Left"
+						    IsReadOnly="True" />
+
+                        <TextBlock Margin="5,0"
+                                   VerticalAlignment="Center"
+                                   Grid.Column="2"
+                                   Grid.Row="1">
+                            <Run Text="/" Foreground="#FF808080"/>
+                            <Run Text="MVP" />
+                        </TextBlock>
+
+                        <metro:PromptTextBox Grid.Column="3"
+                            Grid.Row="1"
+						    Text="{Binding Training_AccshipMvpExp, Mode=OneWay}"
+						    Prompt=""
+						    Padding="2"
+						    Margin="8,8,0,8"
+						    MinWidth="70"
+						    HorizontalAlignment="Left"
+						    IsReadOnly="True" />
+
+                        <TextBlock HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+						           Margin="8,0"
+						           Grid.Row="2"
+                                   Grid.ColumnSpan="2">
+                            <Run Text="연습순양함 보너스 경험치"/>
+                        </TextBlock>
+
+                        <metro:PromptTextBox Grid.Column="2"
+                            Grid.ColumnSpan="2"
+						    Grid.Row="2"
+						    Text="{Binding Training_TrainingCruiser_Bonus}"
+						    Prompt=""
+						    Padding="2"
+						    Margin="8,8,0,8"
+						    MinWidth="70"
+						    HorizontalAlignment="Left"
+						    IsReadOnly="True" />
+                    </Grid>
+                </Grid>
+            </StackPanel>
+        </StackPanel>
 		<!-- #endregion -->
 	</Grid>
 </metro:MetroWindow>

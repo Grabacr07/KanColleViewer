@@ -4,15 +4,149 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+			 xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
 			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:vmFleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 			 xmlns:vmContents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 xmlns:dev="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Dev"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
 			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Settings"
 			 mc:Ignorable="d"
 			 d:DesignHeight="25"
 			 d:DesignWidth="780">
+    <UserControl.Resources>
+        <kcvv:HasFlagConverter x:Key="HasFlagConverter" />
+        
+        <DataTemplate x:Key="FleetStatusView"
+                      DataType="{x:Type vmFleets:FleetViewModel}">
+            <ContentControl Content="{Binding QuickStateView}"
+							Margin="10,0,0,0">
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type vmFleets:HomeportViewModel}">
+                        <StackPanel Orientation="Horizontal">
+                            <Border x:Name="Border"
+                                    Width="14"
+									Height="14"
+                                    BorderBrush="{DynamicResource BackgroundBrushKey}"
+                                    BorderThickness="1"
+                                    Background="#FF40C840">
+                                <Path x:Name="LeftTop"
+                                      Width="12"
+                                      Height="12"
+                                      Stretch="UniformToFill"
+                                      Data="M0,0 L1,0 0,1Z"
+						              Fill="#FF40C840" />
+                            </Border>
+                            <TextBlock x:Name="Text"
+                                       Margin="4,4,0,0" />
+                        </StackPanel>
+
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding State.InShortSupply}"
+                                         Value="True">
+                                <Setter TargetName="LeftTop"
+                                        Property="Fill"
+                                        Value="#FFC88232" />
+                                <Setter TargetName="Text"
+								        Property="Text"
+								        Value="보급필요" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Condition.IsRejuvenating}"
+								         Value="True">
+                                <Setter TargetName="Border"
+                                        Property="Background"
+                                        Value="#FFC88232" />
+                                <Setter TargetName="Text"
+								        Property="Text"
+								        Value="{Binding Condition.Remaining, StringFormat=피로회복중 {0}}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding State.HeavilyDamaged}"
+                                         Value="True">
+                                <Setter TargetName="LeftTop"
+                                        Property="Fill"
+                                        Value="#FFCF0000" />
+                                <Setter TargetName="Border"
+                                        Property="Background"
+                                        Value="#FFCF0000" />
+                                <Setter TargetName="Text"
+								        Property="Text"
+								        Value="대파있음" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding State.Repairing}"
+                                         Value="True">
+                                <Setter TargetName="Border"
+                                        Property="Background"
+                                        Value="#FFC88232" />
+                                <Setter TargetName="Text"
+								        Property="Text"
+								        Value="수리중" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding State.FlagshipIsRepairShip}"
+                                         Value="True">
+                                <Setter TargetName="Border"
+                                        Property="Background"
+                                        Value="#FFC88232" />
+                                <Setter TargetName="Text"
+								        Property="Text"
+								        Value="공작함 기함" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding State.IsReady}"
+								         Value="True">
+                                <Setter TargetName="Text"
+								        Property="Text"
+								        Value="출격가능" />
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vmFleets:SortieViewModel}">
+                        <StackPanel Orientation="Horizontal">
+                            <Border x:Name="Border"
+                                    Width="14"
+									Height="14"
+                                    BorderBrush="{DynamicResource BackgroundBrushKey}"
+                                    BorderThickness="1"
+                                    Background="#FF7E0101" />
+                            <TextBlock x:Name="Text"
+                                       Margin="4,4,0,0"
+                                       Text="출격중" />
+                        </StackPanel>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Sortie|HeavilyDamaged}"
+										 Value="True">
+                                <Setter TargetName="Text" Property="Text" Value="대파있음" />
+                                <Setter TargetName="Border" Property="Background" Value="#FFCF0000"/>
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vmFleets:ExpeditionViewModel}">
+                        <StackPanel Orientation="Horizontal">
+                            <Border Width="14"
+									Height="14"
+                                    BorderBrush="{DynamicResource BackgroundBrushKey}"
+                                    BorderThickness="1"
+                                    Background="#FF005AFF" />
+                            <TextBlock Margin="4,4,0,0"
+                                       Text="{Binding Mission.Id, Mode=OneWay, StringFormat=[{0}]}" />
+                            <TextBlock Margin="3,4,0,0"
+                                       Text="{Binding Remaining, Mode=OneWay}" />
+                        </StackPanel>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:NullViewModel}">
+                        <StackPanel Orientation="Horizontal">
+                            <Border Width="14"
+									Height="14"
+                                    BorderBrush="{DynamicResource BackgroundBrushKey}"
+                                    BorderThickness="1"
+                                    Background="#FF686868" />
+                            <TextBlock Margin="4,4,0,0"
+                                       Text="없음" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ContentControl.Resources>
+            </ContentControl>
+        </DataTemplate>
+    </UserControl.Resources>
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" />
@@ -113,11 +247,47 @@
 								   MinWidth="85" />
 					</StackPanel>
 				</DataTemplate>
-				<DataTemplate DataType="{x:Type vmContents:ShipyardViewModel}" />
-				<DataTemplate DataType="{x:Type vmContents:QuestsViewModel}" />
-				<DataTemplate DataType="{x:Type vmContents:ExpeditionsViewModel}" />
-				<DataTemplate DataType="{x:Type vmContents:ToolsViewModel}" />
-				<DataTemplate DataType="{x:Type settings:SettingsViewModel}" />
+                <DataTemplate DataType="{x:Type vmContents:ShipyardViewModel}">
+                    <ItemsControl ItemsSource="{Binding Fleets.Fleets, Mode=OneWay}"
+								  ItemTemplate="{DynamicResource FleetStatusView}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vmContents:QuestsViewModel}">
+                    <ItemsControl ItemsSource="{Binding Fleets.Fleets, Mode=OneWay}"
+								  ItemTemplate="{DynamicResource FleetStatusView}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vmContents:ExpeditionsViewModel}">
+                    <ItemsControl ItemsSource="{Binding Fleets.Fleets, Mode=OneWay}"
+								  ItemTemplate="{DynamicResource FleetStatusView}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vmContents:ToolsViewModel}">
+                    <ItemsControl ItemsSource="{Binding Fleets.Fleets, Mode=OneWay}"
+								  ItemTemplate="{DynamicResource FleetStatusView}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type settings:SettingsViewModel}" />
 				<DataTemplate DataType="{x:Type dev:DebugTabViewModel}" />
 			</ContentControl.Resources>
 		</ContentControl>

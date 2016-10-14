@@ -18,9 +18,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public SlotItemCatalogWindowSettings Settings { get; }
 
 		public IReadOnlyCollection<SlotItemEquipTypeViewModel> SlotItemEquipTypes { get; }
-
 		public IEnumerable<SlotItemIconType> EnableSlotItemEquipTypes => SlotItemEquipTypes.Where(x => x.IsSelected).Select(y => y.Type);
-
 		public bool CheckAllSlotItemEquipType
 		{
 			get { return this.SlotItemEquipTypes.All(x => x.IsSelected); }
@@ -31,9 +29,23 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			}
 		}
 
-		#region SlotItems 変更通知プロパティ
+        private bool _OnlyRemodeledSlotItems;
+        public bool OnlyRemodeledSlotItems
+        {
+            get { return _OnlyRemodeledSlotItems; }
+            set
+            {
+                if(_OnlyRemodeledSlotItems != value)
+                {
+                    _OnlyRemodeledSlotItems = value;
+                    this.RaisePropertyChanged();
+                }
+            }
+        }
 
-		private IReadOnlyCollection<SlotItemCounter> _SlotItems;
+        #region SlotItems 変更通知プロパティ
+
+        private IReadOnlyCollection<SlotItemCounter> _SlotItems;
 
 		public IReadOnlyCollection<SlotItemCounter> SlotItems
 		{
@@ -124,11 +136,26 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			this.updateSource.OnNext(Unit.Default);
 		}
 
-		private static List<SlotItemCounter> UpdateCore(IEnumerable<SlotItemIconType> enableSlotItemEquipTypes)
+		private List<SlotItemCounter> UpdateCore(IEnumerable<SlotItemIconType> enableSlotItemEquipTypes)
 		{
 			var ships = KanColleClient.Current.Homeport.Organization.Ships.Values.ToList();
 			var items = KanColleClient.Current.Homeport.Itemyard.SlotItems.Values.ToList();
 			var master = KanColleClient.Current.Master.SlotItems;
+
+            if (OnlyRemodeledSlotItems)
+            {
+                items = items.Where(x => x.Level > 0)
+                    .ToList();
+
+                ships = ships.Select(
+                    x => {
+                        x.EquippedItems = x.EquippedItems
+                            .Where(y => y.Item.Level > 0 && items.Any(z => z.Info.Id == y.Item.Info.Id))
+                            .ToArray();
+                        return x;
+                    })
+                    .ToList();
+            }
 
 			// dic (Dictionary<TK,TV>)
 			//  Key:   装備のマスター ID
@@ -138,12 +165,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				.ToDictionary(g => g.Key, g => new SlotItemCounter(master[g.Key], g));
 
 			foreach (var ship in ships)
-			{
 				foreach (var target in ship.EquippedItems.Select(slot => new { slot, counter = dic[slot.Item.Info.Id] }))
-				{
 					target.counter.AddShip(ship, target.slot.Item.Level, target.slot.Item.Proficiency);
-				}
-			}
 
 			return dic.Values
 				.Where(w => enableSlotItemEquipTypes.Contains(GetIconTypeInRange(w.Target.IconType)))

@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using Grabacr07.KanColleViewer.ViewModels.Contents;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 {
@@ -23,24 +24,81 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		private XDocument RemodelXML;
 		string MainFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
 
-        #region IsLoading 변경통지 프로퍼티
+		#region IsLoading 변경통지 프로퍼티
 
-        private bool _IsLoading;
-        public bool IsLoading
-        {
-            get { return this._IsLoading; }
-            set
-            {
-                this._IsLoading = value;
-                this.RaisePropertyChanged();
-            }
-        }
+		private bool _IsLoading;
+		public bool IsLoading
+		{
+			get { return this._IsLoading; }
+			set
+			{
+				this._IsLoading = value;
+				this.RaisePropertyChanged();
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #region FirstList 変更通知プロパティ
+		#region OnlyOwnSlotItems 변경통지 프로퍼티
 
-        private List<RemodelItemList> _FirstList;
+		private bool _OnlyOwnSlotItems;
+		public bool OnlyOwnSlotItems
+		{
+			get { return this._OnlyOwnSlotItems; }
+			set
+			{
+				this._OnlyOwnSlotItems = value;
+				this.RaisePropertyChanged();
+				this.Update();
+			}
+		}
+
+		#endregion
+
+		#region OnlyRemodeledSlotItems 변경통지 프로퍼티
+
+		private bool _OnlyRemodeledSlotItems;
+		public bool OnlyRemodeledSlotItems
+		{
+			get { return this._OnlyRemodeledSlotItems; }
+			set
+			{
+				this._OnlyRemodeledSlotItems = value;
+				this.RaisePropertyChanged();
+				this.Update();
+			}
+		}
+
+		#endregion
+
+		#region RemodelFilters 프로퍼티
+
+		public ICollection<RemodelFilterViewModel> RemodelFilters { get; }
+
+		#endregion
+
+		#region RemodelFilterSelected 변경통지 프로퍼티
+
+		private RemodelFilterViewModel _RemodelFilterSelected;
+		public RemodelFilterViewModel RemodelFilterSelected
+		{
+			get { return this._RemodelFilterSelected; }
+			set
+			{
+				if (this._RemodelFilterSelected != value)
+				{
+					this._RemodelFilterSelected = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+
+		#region FirstList 変更通知プロパティ
+
+		private List<RemodelItemList> _FirstList;
 
 		public List<RemodelItemList> FirstList
 		{
@@ -165,96 +223,167 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				{
 					this._SelectedDay = value;
 					this.RaisePropertyChanged();
-					this.Update(false);
+					this.Update();
 				}
 			}
 		}
 
 		#endregion
 
+		private bool Initialized;
+
 		public RemodelListWindowViewModel()
 		{
+			Initialized = false;
+
 			this.Title = "개수공창 리스트";
 			this.WeekDayList = WeekDayTable.Keys.ToList();
+			this.SelectedDay = this.WeekDayList.FirstOrDefault();
 
-			Update();
+
+			var list = new List<RemodelFilterViewModel>();
+
+			var icons = Enum.GetNames(typeof(SlotItemIconType));
+			list.Add(new RemodelFilterViewModel("All", null));
+
+			foreach (var item in icons)
+				list.Add(new RemodelFilterViewModel(item, (SlotItemIconType)Enum.Parse(typeof(SlotItemIconType), item)));
+
+			this.RemodelFilters = list;
+			this.RemodelFilterSelected = this.RemodelFilters.FirstOrDefault();
+
+			Initialized = true;
+			Update(true);
 		}
-		private void Update(bool IsStart = true)
+		private void Update(bool IsStart = false)
 		{
 			if (File.Exists(Path.Combine(MainFolder, "Translations", "RemodelSlots.xml")))
 			{
-                this.IsLoading = true;
+				if (!this.Initialized || this.IsLoading) return;
+				this.IsLoading = true;
 
-                new System.Threading.Thread(() =>
-                {
-                    if (IsStart) WeekDayView = (int)DateTime.Today.DayOfWeek + 1;
-                    else WeekDayView = WeekDayTable[SelectedDay];
-                    today = new WeekDayFlag();
-                    switch (WeekDayView)
-                    {
-                        case 1:
-                            today |= WeekDayFlag.Sunday;
-                            if (IsStart) SelectedDay = "일요일";
-                            break;
-                        case 2:
-                            today |= WeekDayFlag.Monday;
-                            if (IsStart) SelectedDay = "월요일";
-                            break;
-                        case 3:
-                            today |= WeekDayFlag.Tuesday;
-                            if (IsStart) SelectedDay = "화요일";
-                            break;
-                        case 4:
-                            today |= WeekDayFlag.Wednesday;
-                            if (IsStart) SelectedDay = "수요일";
-                            break;
-                        case 5:
-                            today |= WeekDayFlag.Thursday;
-                            if (IsStart) SelectedDay = "목요일";
-                            break;
-                        case 6:
-                            today |= WeekDayFlag.Friday;
-                            if (IsStart) SelectedDay = "금요일";
-                            break;
-                        case 7:
-                            today |= WeekDayFlag.Saturday;
-                            if (IsStart) SelectedDay = "토요일";
-                            break;
-                    }
-                    this.RemodelXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "RemodelSlots.xml"));
-                    IEnumerable<XElement> RemodelList = GetRemodelList();
+				new System.Threading.Thread(() =>
+				{
+					if (IsStart) WeekDayView = (int)DateTime.Today.DayOfWeek + 1;
+					else WeekDayView = WeekDayTable[SelectedDay];
 
-                    var Weekday = "AllWeekdays";
-                    //RemodelList에서 오늘 개수공창 목록에 들어갈것들을 선별한다.
-                    RemodelList = RemodelList.Where(f => WeekDaySetter(Convert.ToInt32(f.Element(Weekday).Value)).HasFlag(today));
-                    //상중하 리스트를 작성->상중하의 구분을 제거
-                    var list = MakeDefaultList(RemodelList).ToList();
-                    var _FirstList = SortList(list);
+					today = (WeekDayFlag)(1 << (WeekDayView - 1));
+					if (IsStart)
+					{
+						switch (WeekDayView)
+						{
+							case 1:
+								SelectedDay = "일요일";
+								break;
+							case 2:
+								SelectedDay = "월요일";
+								break;
+							case 3:
+								SelectedDay = "화요일";
+								break;
+							case 4:
+								SelectedDay = "수요일";
+								break;
+							case 5:
+								SelectedDay = "목요일";
+								break;
+							case 6:
+								SelectedDay = "금요일";
+								break;
+							case 7:
+								SelectedDay = "토요일";
+								break;
+						}
+					}
+					this.RemodelXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "RemodelSlots.xml"));
+					IEnumerable<XElement> RemodelList = GetRemodelList();
 
-                    //소모아이템 리스트를 작성
-                    var use = MakeUseItemList(RemodelList);
-                    var _UseItemList = SortList(use.ToList());
-                    //개조 목록을 작성
-                    var im = MakeUpgradeList(RemodelList);
-                    var _Improvement = SortList(im.ToList());
+					var Weekday = "AllWeekdays";
+					//RemodelList에서 오늘 개수공창 목록에 들어갈것들을 선별한다.
+					RemodelList = RemodelList.Where(f => WeekDaySetter(Convert.ToInt32(f.Element(Weekday).Value)).HasFlag(today));
 
-                    Grabacr07.KanColleViewer.Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        this.FirstList = _FirstList;
-                        this.UseItemList = _UseItemList;
-                        this.Improvement = _Improvement;
-                        this.IsLoading = false;
-                    });
-                }).Start();
+					// 소지 장비로 필터
+					if (this.OnlyOwnSlotItems)
+					{
+						RemodelList = RemodelList.Where(x =>
+						{
+							var name = x.Element("SlotItemName").Value;
+							var itemid = KanColleClient.Current.Master.SlotItems
+								.Where(y => y.Value.RawData.api_name == name)
+								.FirstOrDefault()
+								.Value.Id;
+
+							return KanColleClient.Current.Homeport.Itemyard.SlotItems.Any(y => y.Value.Info.Id == itemid);
+						});
+					}
+
+					// 개수된 장비로 필터
+					if(this.OnlyRemodeledSlotItems)
+					{
+						RemodelList = RemodelList.Where(x =>
+						{
+							var name = x.Element("SlotItemName").Value;
+							var itemid = KanColleClient.Current.Master.SlotItems
+								.Where(y => y.Value.RawData.api_name == name)
+								.FirstOrDefault()
+								.Value.Id;
+
+							return KanColleClient.Current.Homeport.Itemyard.SlotItems.Any(y => y.Value.Info.Id == itemid && y.Value.Level > 0);
+						});
+					}
+
+					// 아이콘으로 필터
+					if (this.RemodelFilterSelected.Display.HasValue)
+					{
+						RemodelList = RemodelList.Where(x =>
+						{
+							var name = x.Element("SlotItemName").Value;
+							var icon = KanColleClient.Current.Master.SlotItems
+								.Where(y => y.Value.RawData.api_name == name)
+								.Select(y => y.Value.IconType)
+								.FirstOrDefault();
+
+							// Not registered icon yet (Unknown icon)
+							if (Enum.GetName(typeof(SlotItemIconType), icon) == null)
+								icon = SlotItemIconType.Unknown;
+
+							return icon == this.RemodelFilterSelected.Display.Value;
+						});
+					}
+
+
+					//상중하 리스트를 작성->상중하의 구분을 제거
+					var list = MakeDefaultList(RemodelList).ToList();
+					var _FirstList = SortList(list);
+
+					//소모아이템 리스트를 작성
+					var use = MakeUseItemList(RemodelList);
+					var _UseItemList = SortList(use.ToList());
+
+					//개조 목록을 작성
+					var im = MakeUpgradeList(RemodelList);
+					var _Improvement = SortList(im.ToList());
+
+					Grabacr07.KanColleViewer.Application.Current.Dispatcher.Invoke(() =>
+					{
+						this.FirstList = _FirstList;
+						this.UseItemList = _UseItemList;
+						this.Improvement = _Improvement;
+						this.IsLoading = false;
+					});
+				}).Start();
 			}
 		}
 		private List<RemodelItemList> SortList(List<RemodelItemList> myList)
 		{
 			myList.Sort(delegate (RemodelItemList x, RemodelItemList y)
 			{
+				SlotItemIconType? a = x.IconType, b = y.IconType;
 
-				return ((int)x.IconType.Value).CompareTo((int)y.IconType.Value);
+				if (Enum.GetName(typeof(SlotItemIconType), a) == null) a = SlotItemIconType.Unknown;
+				if (Enum.GetName(typeof(SlotItemIconType), b) == null) b = SlotItemIconType.Unknown;
 
+				return ((int)a.Value).CompareTo((int)b.Value);
 			});
 			return myList;
 		}
@@ -480,24 +609,24 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 					if (slotitem.Value.Name == ItemContent.ItemName)
 						ItemContent.IconType = slotitem.Value.IconType;
 				}
-				//개수시 필요한 아이템 개수 목록을 작성
-				StringBuilder equipCombine = new StringBuilder();
-				if (item.Element("StartEquip") != null)
+				// 개수시 필요한 나사 개수 목록을 작성
+				StringBuilder screwCombine = new StringBuilder();
+				if (item.Element("StartScrew") != null)
 				{
-					equipCombine.Append(item.Element("StartEquip").Value);
+					screwCombine.Append(item.Element("StartScrew").Value);
 				}
-				if (item.Element("MidEquip") != null)
+				if (item.Element("MidScrew") != null)
 				{
-					equipCombine.Append("/");
-					equipCombine.Append(item.Element("MidEquip").Value);
+					screwCombine.Append("/");
+					screwCombine.Append(item.Element("MidScrew").Value);
 				}
-				if (item.Element("LastEquip") != null)
+				if (item.Element("LastScrew") != null)
 				{
-					equipCombine.Append("/");
-					equipCombine.Append(item.Element("LastEquip").Value);
+					screwCombine.Append("/");
+					screwCombine.Append(item.Element("LastScrew").Value);
 				}
-				if (equipCombine.ToString().Count() > 0)
-					ItemContent.UseEquip = equipCombine.ToString();
+				if (screwCombine.Length > 0)
+					ItemContent.UseScrew = screwCombine.ToString();
 
 				ItemList.Add(ItemContent);
 			}
@@ -505,51 +634,16 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		}
 		private WeekDayFlag WeekDaySetter(int weekint)
 		{
-			if (weekint.ToString().Count() == 7)
-			{
-				return WeekDayFlag.All;
-			}
+			var temp = weekint.ToString();
+			int len = temp.Length;
 
-			int var = weekint;
-			int len = 1;
-			int div;
+			if (len == 7) return WeekDayFlag.All;
 
-			while (true)
-			{
-				div = var / 10;
-				if (div == 0) break;
-				len++;
-				var = div;
-			}
 			WeekDayFlag weekday = new WeekDayFlag();
 			for (int i = 0; i < len; i++)
 			{
-				var temp = weekint.ToString();
-				int inttemp = Convert.ToInt32(temp[i].ToString());
-				switch (inttemp)
-				{
-					case 1:
-						weekday |= WeekDayFlag.Sunday;
-						break;
-					case 2:
-						weekday |= WeekDayFlag.Monday;
-						break;
-					case 3:
-						weekday |= WeekDayFlag.Tuesday;
-						break;
-					case 4:
-						weekday |= WeekDayFlag.Wednesday;
-						break;
-					case 5:
-						weekday |= WeekDayFlag.Thursday;
-						break;
-					case 6:
-						weekday |= WeekDayFlag.Friday;
-						break;
-					case 7:
-						weekday |= WeekDayFlag.Saturday;
-						break;
-				}
+				int inttemp = int.Parse(temp[i].ToString());
+				weekday |= (WeekDayFlag)(1 << (inttemp - 1));
 			}
 			return weekday;
 		}
@@ -574,7 +668,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public WeekDayFlag TotalWeekday { get; set; }
 		public SlotItemIconType? IconType { get; set; }
 		public string ToolTipString { get; set; }
-		public string UseEquip { get; set; }
+		public string UseScrew { get; set; }
 		public SlotItemIconType? UpgradeIconType { get; set; }
 		public List<ShipInfo> Ships { get; set; }
 	}
@@ -600,6 +694,18 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		Saturday = 1 << 6,
 		NotNeedShip = 1 << 7,
 		All = Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday,
+	}
+
+	public class RemodelFilterViewModel : Livet.ViewModel
+	{
+		public string Key { get; }
+		public SlotItemIconType? Display { get; }
+
+		public RemodelFilterViewModel(string Key, SlotItemIconType? Display)
+		{
+			this.Key = Key;
+			this.Display = Display;
+		}
 	}
 	#endregion
 }

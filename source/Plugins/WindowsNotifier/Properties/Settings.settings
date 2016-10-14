@@ -5,5 +5,8 @@
     <Setting Name="CustomVolume" Type="System.Single" Scope="User">
       <Value Profile="(Default)">99</Value>
     </Setting>
+    <Setting Name="UseModern" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

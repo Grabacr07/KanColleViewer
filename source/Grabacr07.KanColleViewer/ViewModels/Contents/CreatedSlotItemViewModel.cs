@@ -47,16 +47,37 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 		#endregion
 
+		#region IconType 変更通知プロパティ
+
+		private SlotItemIconType _IconType;
+
+		public SlotItemIconType IconType
+        {
+			get { return this._IconType; }
+			set
+			{
+				if (this._IconType != value)
+				{
+					this._IconType = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		public CreatedSlotItemViewModel()
 		{
 			this.Succeed = null;
 			this.Name = "-----";
+            this.IconType = SlotItemIconType.Unknown;
 		}
 
 		public void Update(CreatedSlotItem item)
 		{
 			this.Succeed = item.Succeed;
 			this.Name = item.SlotItemInfo.Name;
-		}
+            this.IconType = item.SlotItemInfo.IconType;
+        }
 	}
 }

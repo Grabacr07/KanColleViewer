@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Models;
+using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
@@ -18,6 +19,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
         public event EventHandler ProcessChanged;
 
         int ITracker.Id => 211;
+        public QuestType Type => QuestType.Daily;
         public bool IsTracking { get; set; }
 
         private System.EventArgs emptyEventArgs = new System.EventArgs();
@@ -28,14 +30,16 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
             {
                 if (!IsTracking) return;
 
-                foreach (var ship in args.EnemyShips)
-                {
-                    // 7 = 경공모
-                    // 11 = 정규공모
-                    if (ship.Type == 7 || ship.Type == 11)
-                        if (ship.MaxHp != int.MaxValue && ship.NowHp <= 0)
-                            count += count >= max_count ? 0 : 1;
-                }
+                //  7 > 경공모
+                // 11 > 정규공모
+                // 18 > 장갑항모
+                count = count.Add(
+                        args.EnemyShips
+                            .Where(x => x.Type == 7 || x.Type == 11 || x.Type == 18)
+                            .Where(x => x.MaxHp != int.MaxValue && x.NowHp <= 0)
+                            .Count()
+                    ).Max(max_count);
+
                 ProcessChanged?.Invoke(this, emptyEventArgs);
             };
         }

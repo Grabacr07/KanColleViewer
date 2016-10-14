@@ -450,4 +450,7 @@
   <data name="Settings_Logging_Enable" xml:space="preserve">
     <value>Log drops and crafting results to file</value>
   </data>
+  <data name="Akashi_NotificationMessage" xml:space="preserve">
+    <value>Akashi has repaired 20 minutes.</value>
+  </data>
 </root>

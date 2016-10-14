@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models.Raw;
 
-using Grabacr07.KanColleViewer.Models.QuestTracker.Raw;
+using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Model
 {
@@ -32,21 +32,23 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Model
             UpdateEnemyNowHP(data.api_nowhps);
 
             CalcEnemyDamages(
-                data.api_support_info.GetEnemyDamages(),
-                data.api_kouku.GetEnemyDamages(),
-                data.api_opening_atack.GetEnemyDamages(),
-                data.api_hougeki1.GetEnemyDamages(),
-                data.api_hougeki2.GetEnemyDamages(),
-                data.api_raigeki.GetEnemyDamages()
+                data.api_air_base_attack.GetEnemyDamages(), // 기항대
+                data.api_support_info.GetEnemyDamages(),    // 지원함대
+                data.api_kouku.GetEnemyDamages(),           // 항공전
+                data.api_opening_taisen.GetEnemyDamages(),  // 선제대잠
+                data.api_opening_atack.GetEnemyDamages(),   // 선제뇌격
+                data.api_hougeki1.GetEnemyDamages(),        // 1차 포격전
+                data.api_hougeki2.GetEnemyDamages(),        // 2차 포격전
+                data.api_raigeki.GetEnemyDamages()          // 뇌격전
             );
         }
-        public void BattleProcess(kcsapi_battle_midnight_battle data)
+        public void BattleProcess(kcsapi_battle_midnight_battle data) // 야전
         {
             UpdateEnemyNowHP(data.api_nowhps);
 
             CalcEnemyDamages(data.api_hougeki.GetEnemyDamages());
         }
-        public void BattleProcess(kcsapi_battle_midnight_sp_midnight data)
+        public void BattleProcess(kcsapi_battle_midnight_sp_midnight data) // 개막야전
         {
             ResetEnemy(data.api_ship_ke);
 

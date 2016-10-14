@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Reactive.Linq;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {
@@ -33,20 +34,48 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				}
 			}
 		}
-		#endregion
+        #endregion
 
-		public string CurrentTime => $"{(int)this.source.CurrentTime.TotalHours:D2}:{this.source.CurrentTime.ToString(@"mm\:ss")}";
+        private bool Available => this.source.Available;
+        private TimeSpan ElapsedTime => TimeSpan.FromTicks(DateTime.Now.Ticks) - this.source.BaseTime;
+        public string CurrentTime => Available
+            ? $"{(int)ElapsedTime.TotalHours:D2}:{ElapsedTime.ToString(@"mm\:ss")}"
+            : "--:--:--";
 
 		public AkashiTimerViewModel()
 		{
 			this.source = new AkashiTimer();
-			this.CompositeDisposable.Add(new PropertyChangedEventListener(source, (sender, args) => this.RaisePropertyChanged(args.PropertyName)));
 
-			KanColleClient.Current.Proxy.api_req_hensei_change.TryParse().Subscribe(x => this.Update(x.Request));
+            this.source.TimerTick += this.Tick;
+            this.CompositeDisposable.Add(() => this.source.TimerTick -= this.Tick);
+
+            NotifyService.Current.UpdateAkashiTimer(this.source);
+
+            KanColleClient.Current.Proxy.api_req_hensei_change.TryParse()
+                .Where(x => x.IsSuccess)
+                .Subscribe(x => this.Update(
+                    int.Parse(x.Request["api_id"]),
+                    int.Parse(x.Request["api_ship_idx"]),
+                    int.Parse(x.Request["api_ship_id"])
+                ));
+
 			KanColleClient.Current.Proxy.api_port.TryParse().Subscribe(x => this.Reset());
-		}
+            KanColleClient.Current.Proxy.api_req_hensei_preset_select.TryParse()
+                .Where(x => x.IsSuccess)
+                .Subscribe(x => this.Update(
+                    int.Parse(x.Request["api_deck_id"])
+                ));
 
-		private void UpdateVisibility()
+            KanColleSettings.UseRepairTimer.ValueChanged += (s, e) => this.UpdateVisibility();
+            this.UpdateVisibility();
+        }
+
+        private void Tick(object sender, EventArgs args)
+        {
+            this.RaisePropertyChanged(nameof(CurrentTime));
+        }
+
+        private void UpdateVisibility()
 		{
 			if (KanColleSettings.UseRepairTimer)
 				TimerVisibility = Visibility.Visible;
@@ -54,15 +83,17 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				TimerVisibility = Visibility.Collapsed;
 		}
 
-		public void Update(NameValueCollection request)
+		public void Update(int fleetId, int shipIdx, int shipId)
 		{
-			UpdateVisibility();
-			source.Update(request);
-		}
+            source.Update(fleetId, shipIdx, shipId);
+        }
+        public void Update(int fleetId)
+        {
+            source.Update(fleetId);
+        }
 
-		public void Reset()
+        public void Reset()
 		{
-			UpdateVisibility();
 			source.Reset();
 		}
 	}

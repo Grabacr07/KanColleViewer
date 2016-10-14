@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Models;
+using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
@@ -18,26 +19,28 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
         public event EventHandler ProcessChanged;
 
         int ITracker.Id => 242;
+        public QuestType Type => QuestType.Weekly;
         public bool IsTracking { get; set; }
 
         private System.EventArgs emptyEventArgs = new System.EventArgs();
 
         public void RegisterEvent(TrackManager manager)
         {
-            List<string> BossNameList = new List<string>
+            var BossNameList = new string[]
             {
-                "敵東方中枢艦隊"
+                "敵東方中枢艦隊"   // 4-4
             };
 
             manager.BattleResultEvent += (sender, args) =>
             {
                 if (!IsTracking) return;
 
-                if (args.MapAreaId != 4) return; // 4해역
+                if (args.MapAreaId != 4) return; // 4 해역
                 if (!BossNameList.Contains(args.EnemyName)) return;
                 if (!"SAB".Contains(args.Rank)) return;
 
-                count += count >= max_count ? 0 : 1;
+                count = count.Add(1).Max(max_count);
+
                 ProcessChanged?.Invoke(this, emptyEventArgs);
             };
         }
@@ -55,7 +58,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
         public string GetProgressText()
         {
-            return count >= max_count ? "완료" : $"4-2 보스전 승리 {count} / {max_count}";
+            return count >= max_count ? "완료" : $"4-4 보스전 승리 {count} / {max_count}";
         }
 
         public string SerializeData()

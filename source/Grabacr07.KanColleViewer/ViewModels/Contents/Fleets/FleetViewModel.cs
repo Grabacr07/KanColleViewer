@@ -131,11 +131,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
                 this.IsPossible = !this.IsPassed
                     ? ExpeditionPossible.NotAccepted
-                    : this.Ships.Where(x => (x.Ship.Fuel.Current != x.Ship.Fuel.Maximum) || x.Ship.Bull.Current != x.Ship.Bull.Maximum).Count() > 0
+                    : this.Source.Ships.Where(x => (x.Fuel.Current != x.Fuel.Maximum) || x.Bull.Current != x.Bull.Maximum).Count() > 0
                         ? ExpeditionPossible.NotSupplied
                         : ExpeditionPossible.Possible;
                 this.GreatChance = this.IsPossible == ExpeditionPossible.Possible
-                    ? (int)ExpeditionExtension.CheckGreateSuccessChance(value, this.Ships.Select(x => x.Ship).ToArray())
+                    ? (int)ExpeditionExtension.CheckGreateSuccessChance(value, this.Source.Ships.ToArray())
                     : 0;
 
                 this.RaisePropertyChanged();
@@ -283,11 +283,24 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
         public string GreatChanceText => string.Format("대성공 {0}%", this.GreatChance);
         #endregion
 
+        #region 보급량
 
-		/// <summary>
-		/// 艦隊に所属している艦娘のコレクションを取得します。
-		/// </summary>
-		public ShipViewModel[] Ships
+        public int UsedFuel => this.Ships.Select(x => x.Ship.UsedFuel).Sum(x => x);
+        public int UsedAmmo => this.Ships.Select(x => x.Ship.UsedBull).Sum(x => x);
+        public int UsedBauxite => this.Ships
+            .Select(x =>
+                x.Ship.Slots
+                    .Where(y => y.Item.Info.IsNumerable)
+                    .Select(y => y.Maximum - y.Current)
+                    .Sum(y => y * 5)
+            ).Sum(x => x);
+
+        #endregion
+
+        /// <summary>
+        /// 艦隊に所属している艦娘のコレクションを取得します。
+        /// </summary>
+        public ShipViewModel[] Ships
 		{
 			get
 			{
@@ -345,10 +358,13 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			}
 			else IsFirstFleet = Visibility.Collapsed;
 
-			this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet)
-			{
-				(sender, args) => this.RaisePropertyChanged(args.PropertyName),
-			});
+            this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet)
+            {
+                (sender, args) => this.RaisePropertyChanged(args.PropertyName)
+            });
+
+            fleet.State.Updated += (sender, args) => this.ExpeditionId = this.ExpeditionId; // 편성 변경?
+
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet.State)
 			{
 				{ nameof(fleet.State.Situation), (sender, args) => this.RaisePropertyChanged(nameof(this.QuickStateView)) },
@@ -366,14 +382,24 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
                 {nameof(this.Expedition.IsInExecution), (sender,args) => this.ExpeditionId = (this.Expedition.IsInExecution ? this.Expedition.Mission.Id : this.ExpeditionId) }
             });
             // 연료/탄약량 변경
-            this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet)
-            {
-                { (sender,args) => this.ExpeditionId = this.ExpeditionId } // 재계산
-            });
             // 출격 등 상태 변경
             this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet.State)
             {
                 { nameof(fleet.State.Situation), (sender, args) => this.RaisePropertyChanged(nameof(this.IsInSortie)) },
+                {  nameof(fleet.State.UsedFuel), (sender,args) =>
+                    {
+                        this.RaisePropertyChanged("UsedFuel");
+                        this.RaisePropertyChanged("UsedAmmo");
+                        this.RaisePropertyChanged("UsedBauxite");
+                    }
+                },
+                {  nameof(fleet.State.UsedBull), (sender,args) =>
+                    {
+                        this.RaisePropertyChanged("UsedFuel");
+                        this.RaisePropertyChanged("UsedAmmo");
+                        this.RaisePropertyChanged("UsedBauxite");
+                    }
+                }
             });
         }
         /// <summary>

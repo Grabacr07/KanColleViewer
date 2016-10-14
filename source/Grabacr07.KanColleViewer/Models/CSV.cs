@@ -12,9 +12,11 @@ namespace Grabacr07.KanColleViewer.Models
         public static string[] Read(Stream stream)
         {
             List<byte> bytebuffer = new List<byte>();
-            while (true)
+            while (stream.Position < stream.Length)
             {
                 int data = stream.ReadByte();
+                if (data == -1) break;
+
                 bytebuffer.Add((byte)data);
                 if (data == 10) break;
             }

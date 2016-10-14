@@ -462,4 +462,7 @@
   <data name="ZoomFactorSelector_Tooltip" xml:space="preserve">
     <value>게임 화면 표시 크기를 조정</value>
   </data>
+  <data name="Akashi_NotificationMessage" xml:space="preserve">
+    <value>아카시가 20분을 수리했습니다.</value>
+  </data>
 </root>

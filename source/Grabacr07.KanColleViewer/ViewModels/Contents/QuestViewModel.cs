@@ -83,11 +83,26 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			}
 		}
 
-		#endregion
+        #endregion
 
-		#region Progress 変更通知プロパティ
+        #region StateText 変更通知プロパティ
 
-		private QuestProgress _Progress;
+        public string StateText
+        {
+            get
+            {
+                if (this.State == QuestState.Accomplished) return " 완료 ";
+                else if (this.Progress == QuestProgress.Progress80) return " 80% ";
+                else if (this.Progress == QuestProgress.Progress50) return " 50% ";
+                return "";
+            }
+        }
+
+        #endregion
+
+        #region Progress 変更通知プロパティ
+
+        private QuestProgress _Progress;
 
 		public QuestProgress Progress
 		{

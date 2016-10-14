@@ -6,7 +6,7 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
-            xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+             xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
 			 xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
 			 xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
 			 xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
@@ -22,6 +22,24 @@
 			 Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}, Path=ActualWidth}">
 
     <Grid>
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type viewModels:QuestCategoryViewModel}">
+                <StackPanel Margin="0,0,4,0"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Left"
+                            MinWidth="56">
+                    <Rectangle Margin="2"
+                               Width="14"
+                               Height="14"
+                               Fill="{Binding Display}"
+                               VerticalAlignment="Center" />
+
+                    <TextBlock Margin="4,0,4,0"
+                               Text="{Binding DisplayText}"
+                               VerticalAlignment="Center" />
+                </StackPanel>
+            </DataTemplate>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -36,10 +54,21 @@
                                         SelectedValue="{Binding SelectedItem}" />
         </ScrollViewer>
 
+        <metro:PromptComboBox Grid.Row="0"
+                              Margin="5"
+                              HorizontalAlignment="Right"
+                              MinWidth="72"
+                              BorderBrush="{DynamicResource BackgroundBrushKey}"
+                              BorderThickness="1"
+                              Prompt=""
+                              IsReadOnly="True"
+                              ItemsSource="{Binding QuestCategories}"
+                              SelectedValue="{Binding QuestCategorySelected, Mode=TwoWay}" />
+
         <ScrollViewer Grid.Row="1"
                       VerticalScrollBarVisibility="Auto"
                       PanningMode="Both">
-            <ItemsControl ItemsSource="{Binding Quests}"
+            <ItemsControl ItemsSource="{Binding Quests, Mode=OneWay}"
                           Margin="5">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -62,7 +91,6 @@
                                         Width="14" Height="14"
                                         Fill="Gray"
                                         VerticalAlignment="Center" />
-
                             <TextBlock x:Name="Type"
                                         Grid.Row="1"
                                         Margin="0,0,10,0"
@@ -75,12 +103,10 @@
                                         TextAlignment="Center"
                                         VerticalAlignment="Top" />
 
-
                             <TextBlock Grid.Column="1"
                                         Margin="0,0,5,0"
                                         Text="{Binding Title, Mode=OneWay}"
                                         Style="{DynamicResource EmphaticTextStyleKey}" />
-
                             <TextBlock x:Name="StateText"
                                         Grid.Column="2"
                                         Margin="0,0,5,0"
@@ -88,7 +114,6 @@
                                         Text="{Binding StateText, Mode=OneWay}"
                                         FontSize="12"
                                         Style="{DynamicResource EmphaticTextStyleKey}" />
-
                             <TextBlock x:Name="TakenText"
                                         Grid.Column="3"
                                         Margin="0,0,5,0"
@@ -98,39 +123,92 @@
                                         FontSize="12"
                                         Style="{DynamicResource EmphaticTextStyleKey}" />
 
-
                             <Grid x:Name="QuestTracker"
-                                    Grid.Column="4">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="auto" />
-                                </Grid.RowDefinitions>
+                                  Grid.Column="4"
+                                  MaxHeight="44">
+                                <Grid.ToolTip>
+                                    <TextBlock x:Name="QuestProgressTextTooltip"
+                                               Text="{Binding QuestProgressText, Mode=OneWay}"
+                                               Style="{DynamicResource EmphaticTextStyleKey}"
+                                               Margin="0,0,5,0"
+                                               TextAlignment="Left"
+                                               FontSize="10" />
+                                </Grid.ToolTip>
+                                
+                                <Grid HorizontalAlignment="Right"
+                                      MaxWidth="280"
+                                      Width="{Binding ElementName=QuestTracker, Path=ActualWidth}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
 
-                                <TextBlock Text="{Binding QuestIdText, Mode=OneWay}"
-                                            Margin="0,0,10,0"
-                                            Style="{DynamicResource EmphaticTextStyleKey}"
-                                            TextAlignment="Left"
-                                            FontSize="10" />
+                                    <TextBlock x:Name="QuestProgressText"
+                                               Text="{Binding QuestProgressText, Mode=OneWay}"
+                                               Style="{DynamicResource EmphaticTextStyleKey}"
+                                               Margin="0,0,5,0"
+                                               TextAlignment="Left"
+                                               FontSize="10" />
 
-                                <TextBlock Grid.Column="1"
-                                            Text="{Binding QuestProgressText, Mode=OneWay}"
-                                            Style="{DynamicResource EmphaticTextStyleKey}"
-                                            TextAlignment="Right"
-                                            FontSize="10" />
+                                    <TextBlock Text="{Binding QuestIdText, Mode=OneWay}"
+                                               Grid.Column="1"
+                                               Margin="5,0,0,0"
+                                               Style="{DynamicResource EmphaticTextStyleKey}"
+                                               TextAlignment="Right"
+                                               Foreground="{DynamicResource ForegroundBrushKey}"
+                                               FontSize="10" />
 
-                                <ProgressBar x:Name="QuestProgressBar"
-                                                Grid.Row="1"
-                                                Grid.ColumnSpan="2"
-                                                Margin="0,3,0,0"
-                                                VerticalAlignment="Center"
-                                                Value="{Binding QuestProgressValue, Mode=OneWay}"
-                                                Foreground="#FF39B74E"
-                                                BorderThickness="0"
-                                                Height="3" />
+                                    <Grid x:Name="QuestProgressBarBox"
+                                          Grid.Row="1"
+                                          Grid.ColumnSpan="2"
+                                          Margin="0,1,0,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="5*" />
+                                            <ColumnDefinition Width="3*" />
+                                            <ColumnDefinition Width="2*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+
+                                        <ProgressBar x:Name="QuestProgressBar"
+                                                     Grid.ColumnSpan="3"
+                                                     Grid.RowSpan="2"
+                                                     VerticalAlignment="Center"
+                                                     Value="{Binding QuestProgressValue, Mode=OneWay}"
+                                                     Foreground="#FF39B74E"
+                                                     BorderThickness="0"
+                                                     Height="3">
+                                            <ProgressBar.Style>
+                                                <Style TargetType="{x:Type ProgressBar}">
+                                                    <Setter Property="Background" Value="#55D7D7E1" />
+                                                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type ProgressBar}">
+                                                                <Grid Background="{TemplateBinding Background}">
+                                                                    <Border x:Name="PART_Track">
+                                                                        <Border x:Name="PART_Indicator"
+                                                                        Background="{TemplateBinding Foreground}"
+                                                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                                                                    </Border>
+                                                                </Grid>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </ProgressBar.Style>
+                                        </ProgressBar>
+
+                                        <Rectangle Width="1" Fill="{DynamicResource BackgroundBrushKey}" HorizontalAlignment="Right" />
+                                        <Rectangle Width="1" Fill="{DynamicResource BackgroundBrushKey}" HorizontalAlignment="Right" Grid.Column="1" />
+                                    </Grid>
+                                </Grid>
                             </Grid>
 
                             <TextBlock Grid.Row="1"
@@ -138,7 +216,6 @@
                                         Grid.ColumnSpan="4"
                                         Text="{Binding Detail, Mode=OneWay}"
                                         Style="{DynamicResource DetailTextStyleKey}" />
-
                             <Grid Grid.Row="2"
                                     Grid.ColumnSpan="5"
                                     Margin="0,10,0,0"
@@ -162,7 +239,9 @@
 
                         <DataTemplate.Triggers>
                             <DataTrigger Binding="{Binding QuestTrackingVisible}" Value="False">
-                                <Setter TargetName="QuestTracker" Property="Visibility" Value="Hidden" />
+                                <Setter TargetName="QuestProgressBarBox" Property="Visibility" Value="Hidden" />
+                                <Setter TargetName="QuestProgressText" Property="Visibility" Value="Hidden" />
+                                <Setter TargetName="QuestProgressTextTooltip" Property="Visibility" Value="Hidden" />
                             </DataTrigger>
                             <DataTrigger Binding="{Binding QuestProgressValue}" Value="100">
                                 <Setter TargetName="QuestProgressBar" Property="Foreground" Value="#FF62B5F5" />
@@ -170,7 +249,7 @@
 
                             <DataTrigger Binding="{Binding State}" Value="None">
                                 <Setter TargetName="TakenText" Property="Visibility" Value="Hidden" />
-                                <Setter TargetName="QuestProgressBar" Property="Foreground" Value="#FF787878" />
+                                <Setter TargetName="QuestProgressBar" Property="Foreground" Value="#FF959595" />
                             </DataTrigger>
                             <DataTrigger Binding="{Binding Progress}" Value="Progress80">
                                 <Setter TargetName="StateText" Property="Background" Value="#FF206040" />
@@ -247,7 +326,6 @@
                     Margin="10"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"/>
-
         <TextBlock Grid.Row="1"
                    Text="{Binding Resources.Quests_Untaken, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
                    Style="{DynamicResource EmphaticTextStyleKey}"

@@ -11,11 +11,20 @@
 			 d:DataContext="{d:DesignInstance Notifier:NotifyViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+	    <Style x:Key="SeparatorRectangleStyleKey"
+		       TargetType="{x:Type Rectangle}">
+            <Setter Property="Fill" Value="#FF787878" />
+		    <Setter Property="Opacity" Value="0.6" />
+	    </Style>
+    </UserControl.Resources>
+    
     <StackPanel Margin="5">
-		<TextBlock Text="볼륨값을 설정합니다. 기본값은 99입니다(범위 1-99)"/>
+		<TextBlock Text="볼륨값을 설정합니다. 기본값은 99입니다(범위 1-99)"
+                   Margin="5"/>
 		<metro:PromptTextBox Prompt="99"
 							 Width="60"
-							 Margin="10"
+							 Margin="10,0"
 							 VerticalAlignment="Top"
 							 HorizontalAlignment="Left">
 			<metro:PromptTextBox.Text>
@@ -28,7 +37,34 @@
 				</Binding>
 			</metro:PromptTextBox.Text>
 		</metro:PromptTextBox>
-		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
+
+		<Rectangle Height="1"
+			Margin="12,8"
+			Grid.Row="2"
+			Grid.ColumnSpan="2"
+			Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+        <CheckBox IsChecked="{Binding UseModern}"
+                  Margin="5">
+            <CheckBox.Content>
+                <TextBlock>
+                    <Run Text="토스트 알림을 사용할 수 없는 경우," />
+                    <LineBreak />
+                    <Run Text="풍선 알림 대신" />
+                    <metro2:HyperlinkEx Uri="https://github.com/WolfgangKurz/ModernNotify/">
+                        <Run Text="ModernNotify" />
+                    </metro2:HyperlinkEx>
+                    <Run Text="를 사용합니다." />
+                </TextBlock>
+            </CheckBox.Content>
+        </CheckBox>
+
+        <Rectangle Height="1"
+			Margin="12,8"
+			Grid.Row="2"
+			Grid.ColumnSpan="2"
+			Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
 		<TextBlock Text="알림음을 테스트합니다" Margin="0,0,0,10"/>
 		<metro2:CallMethodButton Content="대파" 
 								 Width="150"

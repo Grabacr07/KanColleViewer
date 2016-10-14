@@ -53,9 +53,49 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			}
 		}
 
-		#endregion
+        #endregion
 
-		public MaterialsViewModel()
+        #region SelectedItem3 変更通知プロパティ
+
+        private MaterialViewModel _SelectedItem3;
+
+        public MaterialViewModel SelectedItem3
+        {
+            get { return this._SelectedItem3; }
+            set
+            {
+                if (this._SelectedItem3 != value)
+                {
+                    this._SelectedItem3 = value;
+                    this.RaisePropertyChanged();
+                    KanColleSettings.DisplayMaterial3.Value = value?.Key;
+                }
+            }
+        }
+
+        #endregion
+
+        #region SelectedItem4 変更通知プロパティ
+
+        private MaterialViewModel _SelectedItem4;
+
+        public MaterialViewModel SelectedItem4
+        {
+            get { return this._SelectedItem4; }
+            set
+            {
+                if (this._SelectedItem4 != value)
+                {
+                    this._SelectedItem4 = value;
+                    this.RaisePropertyChanged();
+                    KanColleSettings.DisplayMaterial4.Value = value?.Key;
+                }
+            }
+        }
+
+        #endregion
+
+        public MaterialsViewModel()
 		{
 			this.Model = KanColleClient.Current.Homeport.Materials;
 
@@ -97,7 +137,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 			this._SelectedItem1 = this.Values.FirstOrDefault(x => x.Key == KanColleSettings.DisplayMaterial1) ?? repair;
 			this._SelectedItem2 = this.Values.FirstOrDefault(x => x.Key == KanColleSettings.DisplayMaterial2) ?? build;
-		}
+            this._SelectedItem3 = this.Values.FirstOrDefault(x => x.Key == KanColleSettings.DisplayMaterial3) ?? fuel;
+            this._SelectedItem4 = this.Values.FirstOrDefault(x => x.Key == KanColleSettings.DisplayMaterial4) ?? ammunition;
+        }
 
 		public class MaterialViewModel : ViewModel
 		{

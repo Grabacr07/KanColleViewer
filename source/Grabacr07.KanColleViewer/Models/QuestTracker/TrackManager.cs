@@ -15,7 +15,7 @@ using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
 
-using Grabacr07.KanColleViewer.Models.QuestTracker.Raw;
+using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 using Grabacr07.KanColleViewer.Models.QuestTracker.Model;
 using Grabacr07.KanColleViewer.Models.QuestTracker.EventArgs;
 
@@ -41,7 +41,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
             }
         }
 
-        private DateTime TokyoDateTime => TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.UtcNow, "Tokyo Standard Time");
+        internal static DateTime TokyoDateTime => TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.UtcNow, "Tokyo Standard Time");
 
         public event EventHandler<BattleResultEventArgs> BattleResultEvent;
         public event EventHandler<MissionResultEventArgs> MissionResultEvent;
@@ -58,6 +58,12 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
         public readonly System.EventArgs EmptyEventArg = new System.EventArgs();
         public event EventHandler QuestsEventChanged;
 
+        private void CatchHelper(Action action)
+        {
+            try { action(); }
+            catch { }
+        }
+
         public TrackManager()
         {
             var proxy = KanColleClient.Current.Proxy;
@@ -67,72 +73,56 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
             // 연습전 종료
             proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_practice/battle_result")
                 .TryParse<kcsapi_practice_result>().Subscribe(x =>
-                    PractiveResultEvent?.Invoke(this, new PracticeResultEventArgs(x.Data))
+                    CatchHelper(() => PractiveResultEvent?.Invoke(this, new PracticeResultEventArgs(x.Data)))
                 );
 
             // 근대화 개수
-            proxy.api_req_kaisou_powerup.TryParse<kcsapi_powerup>().Subscribe(x =>
-                    PowerUpEvent?.Invoke(this, this.EmptyEventArg)
-                );
+            proxy.api_req_kaisou_powerup.TryParse<kcsapi_powerup>().Subscribe(x => CatchHelper(() => PowerUpEvent?.Invoke(this, this.EmptyEventArg)));
 
             // 개수공창 개수
-            proxy.api_req_kousyou_remodel_slot.TryParse<kcsapi_remodel_slot>().Subscribe(x =>
-                    ReModelEvent?.Invoke(this, this.EmptyEventArg)
-                );
+            proxy.api_req_kousyou_remodel_slot.TryParse<kcsapi_remodel_slot>().Subscribe(x => CatchHelper(() => ReModelEvent?.Invoke(this, this.EmptyEventArg)));
 
             // 폐기
-            proxy.api_req_kousyou_destroyitem2.TryParse<kcsapi_destroyitem2>().Subscribe(x =>
-                    DestoryItemEvent?.Invoke(this, this.EmptyEventArg)
-                );
+            proxy.api_req_kousyou_destroyitem2.TryParse<kcsapi_destroyitem2>().Subscribe(x => CatchHelper(() => DestoryItemEvent?.Invoke(this, this.EmptyEventArg)));
 
             // 해체
-            proxy.api_req_kousyou_destroyship.TryParse<kcsapi_destroyship>().Subscribe(x =>
-                    DestoryShipEvent?.Invoke(this, this.EmptyEventArg)
-                );
+            proxy.api_req_kousyou_destroyship.TryParse<kcsapi_destroyship>().Subscribe(x => CatchHelper(() => DestoryShipEvent?.Invoke(this, this.EmptyEventArg)));
 
             // 건조
-            proxy.api_req_kousyou_createship.TryParse<kcsapi_createship>().Subscribe(x =>
-                    CreateShipEvent?.Invoke(this, this.EmptyEventArg)
-                );
+            proxy.api_req_kousyou_createship.TryParse<kcsapi_createship>().Subscribe(x => CatchHelper(() => CreateShipEvent?.Invoke(this, this.EmptyEventArg)));
 
             // 개발
-            proxy.api_req_kousyou_createitem.TryParse<kcsapi_createitem>().Subscribe(x =>
-                    CreateItemEvent?.Invoke(this, this.EmptyEventArg)
-                );
+            proxy.api_req_kousyou_createitem.TryParse<kcsapi_createitem>().Subscribe(x => CatchHelper(() => CreateItemEvent?.Invoke(this, this.EmptyEventArg)));
 
             // 보급
-            proxy.api_req_hokyu_charge.TryParse<kcsapi_charge>().Subscribe(x =>
-                    ChargeEvent?.Invoke(this, this.EmptyEventArg)
-                );
+            proxy.api_req_hokyu_charge.TryParse<kcsapi_charge>().Subscribe(x => CatchHelper(() => ChargeEvent?.Invoke(this, this.EmptyEventArg)));
 
             // 입거
             proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_nyukyo/start")
-            .Subscribe(x => RepairStartEvent?.Invoke(this, this.EmptyEventArg));
+                .Subscribe(x => CatchHelper(() => RepairStartEvent?.Invoke(this, this.EmptyEventArg)));
 
             // 원정
-            proxy.api_req_mission_result.TryParse<kcsapi_mission_result>().Subscribe(x =>
-                    MissionResultEvent?.Invoke(this, new MissionResultEventArgs(x.Data))
-                );
+            proxy.api_req_mission_result.TryParse<kcsapi_mission_result>().Subscribe(x => CatchHelper(() => MissionResultEvent?.Invoke(this, new MissionResultEventArgs(x.Data))));
 
             // 출격 (시작)
-            proxy.api_req_map_start.TryParse<kcsapi_map_start>().Subscribe(x => MapInfo.Reset(x.Data.api_maparea_id));
+            proxy.api_req_map_start.TryParse<kcsapi_map_start>().Subscribe(x => CatchHelper(() => MapInfo.Reset(x.Data.api_maparea_id)));
 
             // 통상 - 주간전
-            proxy.api_req_sortie_battle.TryParse<kcsapi_sortie_battle>().Subscribe(x => battleTracker.BattleProcess(x.Data));
+            proxy.api_req_sortie_battle.TryParse<kcsapi_sortie_battle>().Subscribe(x => CatchHelper(() => battleTracker.BattleProcess(x.Data)));
 
             // 통상 - 야전
             proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_battle_midnight/battle")
-                .TryParse<kcsapi_battle_midnight_battle>().Subscribe(x => battleTracker.BattleProcess(x.Data));
+                .TryParse<kcsapi_battle_midnight_battle>().Subscribe(x => CatchHelper(() => battleTracker.BattleProcess(x.Data)));
 
             // 통상 - 개막야전
             proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_battle_midnight/sp_midnight")
-                .TryParse<kcsapi_battle_midnight_sp_midnight>().Subscribe(x => battleTracker.BattleProcess(x.Data));
+                .TryParse<kcsapi_battle_midnight_sp_midnight>().Subscribe(x => CatchHelper(() => battleTracker.BattleProcess(x.Data)));
 
             // 전투 종료 (연합함대 포함)
             proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>()
-                .Subscribe(x => BattleResultEvent?.Invoke(this, new BattleResultEventArgs(MapInfo.AfterCombat(), battleTracker.enemyShips, x.Data)));
+                .Subscribe(x => CatchHelper(() => BattleResultEvent?.Invoke(this, new BattleResultEventArgs(MapInfo.AfterCombat(), battleTracker.enemyShips, x.Data))));
             proxy.api_req_combined_battle_battleresult.TryParse<kcsapi_combined_battle_battleresult>()
-                .Subscribe(x => BattleResultEvent?.Invoke(this, new BattleResultEventArgs(MapInfo.AfterCombat(), battleTracker.enemyShips, x.Data)));
+                .Subscribe(x => CatchHelper(() => BattleResultEvent?.Invoke(this, new BattleResultEventArgs(MapInfo.AfterCombat(), battleTracker.enemyShips, x.Data))));
 
 
             // Register all trackers
@@ -150,7 +140,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
                     {
                         QuestsEventChanged?.Invoke(this, EmptyEventArg);
 
-                        WriteToStorage(KanColleClient.Current.Homeport.Quests);
+                        WriteToStorage();
                     });
                 }
             };
@@ -160,6 +150,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
                     .ToList().ForEach(x => trackingAvailable.Add((ITracker)Activator.CreateInstance(x)));
 
             ReadFromStorage();
+            WriteToStorage();
 
             proxy.api_get_member_questlist.Subscribe(x => new System.Threading.Thread(ProcessQuests).Start());
             QuestsEventChanged?.Invoke(this, EmptyEventArg);
@@ -170,82 +161,60 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
             var quests = KanColleClient.Current.Homeport.Quests;
             if (quests.All == null || quests.All.Count == 0) return;
 
-            var minId = quests.All.Min(q => q.Id);
-            var maxId = quests.All.Max(q => q.Id);
-
-            // (Quest not visible)
-            if (trackingAvailable.Any(t => t.Id > minId && t.Id < maxId))
-            {
-                trackingAvailable
-                    .Where(t => t.Id > minId && t.Id < maxId)
-                    .ToList()
-                    .ForEach(t =>
-                    {
-                        if (quests.All.All(q => q.Id != t.Id))
-                        {
-                            t.IsTracking = false;
-                            // t.ResetQuest();
-                            if (trackingTime.ContainsKey(t.Id))
-                                trackingTime.Remove(t.Id);
-                        }
-                    });
-            }
-
             foreach (var quest in quests.All)
             {
                 var tracker = trackingAvailable.Where(t => t.Id == quest.Id);
-                if (!tracker.Any())
-                    continue;
+                if (!tracker.Any()) continue; // 추적할 수 없는 임무
 
-                switch (quest.State)
+                try
                 {
-                    case QuestState.None:
-                        tracker.First().IsTracking = false;
-                        break;
+                    // 만료된 경우 (임무가 갱신되었다던가)
+                    if (trackingTime.ContainsKey(quest.Id) && !IsTrackingAvailable(quest.Type, trackingTime[quest.Id]))
+                    {
+                        // 임무 초기화
+                        if (trackingTime.ContainsKey(quest.Id)) trackingTime.Remove(quest.Id); // 추적중이었으면 추적 시작시간 제거
+                        tracker.First().ResetQuest();
+                    }
 
-                    case QuestState.TakeOn:
-                        tracker.First().IsTracking = true; // quest taking
-                        // if it is activating but expired (e.g. new day), we should delete it.
-                        if (trackingTime.ContainsKey(quest.Id) && !IsTrackingAvailable(quest.Type, trackingTime[quest.Id]))
-                        {
-                            trackingTime.Remove(quest.Id);
-                            // tracker.First().ResetQuest();
-                        }
-                        // and then add it again.
-                        if (!trackingTime.ContainsKey(quest.Id))
-                            trackingTime.Add(quest.Id, TokyoDateTime);
-                        break;
+                    switch (quest.State)
+                    {
+                        case QuestState.None:
+                            tracker.First().IsTracking = false;
+                            break;
 
-                    case QuestState.Accomplished:
-                        tracker.First().IsTracking = false;
-                        // tracker.First().ResetQuest();
+                        case QuestState.TakeOn:
+                            tracker.First().IsTracking = true; // quest taking
 
-                        // delete tracking date
-                        if (trackingTime.ContainsKey(quest.Id))
-                            trackingTime.Remove(quest.Id);
-                        break;
-                }
+                            // 임무 추적 시작시간 등록
+                            if (!trackingTime.ContainsKey(quest.Id))
+                                trackingTime.Add(quest.Id, TrackManager.TokyoDateTime);
+                            break;
+
+                        case QuestState.Accomplished:
+                            tracker.First().IsTracking = false;
+                            break;
+                    }
+                } catch { }
             }
 
             QuestsEventChanged?.Invoke(this, EmptyEventArg);
-            WriteToStorage(quests);
+            WriteToStorage();
         }
         private bool IsTrackingAvailable(QuestType type, DateTime time)
         {
-            // The quests are refreshed everyday/week at 5AM(UTC+9).
-            // if we subtract the time by 5h, we can then say the refresh time is 0AM(UTC+4).
-            // It will be easier to check the availibility.
-            // One example is "United Arab Emirates Standard Time (ar-AE)": UTC+4, no daylight saving
+            // 임무는 오전 5시, UTC+4에 갱신됨
+            // 일광절약 없는 아랍 에미레이트 연합 표준시 (ar-AE) => UTC+4
 
             if (time == DateTime.MinValue)
                 return false;
 
-            var no = TokyoDateTime.AddHours(-5);
+            var no = TrackManager.TokyoDateTime.AddHours(-5);
             time = time.AddHours(-5);
 
             switch (type)
             {
                 case QuestType.OneTime:
+                case QuestType.Other:
                     return true;
 
                 case QuestType.Daily:
@@ -266,7 +235,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
             }
         }
 
-        private void WriteToStorage(Quests quests)
+        private void WriteToStorage()
         {
             var baseDir = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
             var list = new List<StorageData>();
@@ -275,28 +244,37 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
             {
                 var item = new StorageData();
 
-                DateTime dateTime = TokyoDateTime;
+                DateTime dateTime = TrackManager.TokyoDateTime;
                 trackingTime.TryGetValue(tracker.Id, out dateTime);
 
-                item.Id = tracker.Id;
-                item.TrackTime = dateTime;
-                item.Serialized = tracker.SerializeData();
-                list.Add(item);
+                try
+                {
+                    if (tracker.GetProgress() == 0 && dateTime == DateTime.MinValue) continue;
+
+                    item.Id = tracker.Id;
+                    item.TrackTime = dateTime;
+                    item.Type = tracker.Type;
+                    item.Serialized = tracker.SerializeData();
+                    list.Add(item);
+                }
+                catch { }
             }
 
             string path = Path.Combine(baseDir, "TrackingQuest.csv");
-            using (FileStream fs = new FileStream(path, FileMode.Create))
+            try
             {
-                foreach (var item in list)
+                using (FileStream fs = new FileStream(path, FileMode.Create))
                 {
-                    if (!quests.All.Any(x => x.Id == item.Id)) continue;
+                    foreach (var item in list)
+                    {
+                        try { CSV.Write(fs, item.Id, item.TrackTime, item.Type, item.Serialized); }
+                        catch { }
+                    }
 
-                    var tracker = quests.All.Where(x => x.Id == item.Id);
-                    CSV.Write(fs, item.Id, item.TrackTime, tracker.First().Type, item.Serialized);
+                    fs.Flush();
                 }
-
-                fs.Flush();
             }
+            catch { }
         }
         private void ReadFromStorage()
         {
@@ -304,39 +282,43 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
             string path = Path.Combine(baseDir, "TrackingQuest.csv");
             if (!File.Exists(path)) return;
 
-            using (FileStream fs = new FileStream(path, FileMode.Open))
+            try
             {
-                while (fs.Position < fs.Length)
+                using (FileStream fs = new FileStream(path, FileMode.Open))
                 {
-                    string[] data = CSV.Read(fs);
-
-                    try
+                    while (fs.Position < fs.Length)
                     {
-                        int Id;
-                        DateTime trackTime;
-                        string QuestTypeText;
-                        QuestType QuestType;
-                        string Serialized;
+                        string[] data = CSV.Read(fs);
 
-                        if (!int.TryParse(data[0], out Id)) continue;
-                        DateTime.TryParse(data[1], out trackTime);
-                        QuestTypeText = data[2];
-                        Enum.TryParse<QuestType>(QuestTypeText, out QuestType);
-                        Serialized = data[3];
-
-                        if (!trackingAvailable.Any(x => x.Id == Id)) continue;
-                        if (IsTrackingAvailable(QuestType, trackTime))
+                        try
                         {
-                            var tracker = trackingAvailable.Where(x => x.Id == Id).First();
+                            int Id;
+                            DateTime trackTime;
+                            string QuestTypeText;
+                            QuestType QuestType;
+                            string Serialized;
 
-                            trackingTime.Add(Id, trackTime);
-                            tracker.IsTracking = true;
-                            tracker.DeserializeData(Serialized);
+                            if (!int.TryParse(data[0], out Id)) continue;
+                            DateTime.TryParse(data[1], out trackTime);
+                            QuestTypeText = data[2];
+                            Enum.TryParse<QuestType>(QuestTypeText, out QuestType);
+                            Serialized = data[3];
+
+                            if (!trackingAvailable.Any(x => x.Id == Id)) continue;
+                            if (IsTrackingAvailable(QuestType, trackTime))
+                            {
+                                var tracker = trackingAvailable.Where(x => x.Id == Id).First();
+
+                                trackingTime.Add(Id, trackTime);
+                                tracker.IsTracking = true;
+                                tracker.DeserializeData(Serialized);
+                            }
                         }
+                        catch { }
                     }
-                    catch { }
                 }
             }
+            catch { }
         }
     }
 }

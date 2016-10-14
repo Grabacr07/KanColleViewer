@@ -31,6 +31,7 @@ namespace Grabacr07.KanColleViewer.Models
 		private LivetCompositeDisposable dockyardDisposables;
 		private LivetCompositeDisposable repairyardDisposables;
 		private LivetCompositeDisposable organizationDisposables;
+        private LivetCompositeDisposable akashiDisposable;
 
 		private NotifyService() { }
 
@@ -198,11 +199,37 @@ namespace Grabacr07.KanColleViewer.Models
 			this.Notify(notification);
 		}
 
-		#endregion
+        #endregion
 
-		#region IDisposable members
+        #region AkashiTimer
 
-		ICollection<IDisposable> IDisposableHolder.CompositeDisposable => this.compositeDisposable;
+        public void UpdateAkashiTimer(AkashiTimer timer)
+        {
+            this.akashiDisposable?.Dispose();
+            this.akashiDisposable = new LivetCompositeDisposable();
+
+            timer.Repaired += this.HandleAkashiTimerRepaired;
+            this.akashiDisposable.Add(() => timer.Repaired -= this.HandleAkashiTimerRepaired);
+        }
+
+        private void HandleAkashiTimerRepaired(object sender, EventArgs args)
+        {
+            if (!Settings.KanColleSettings.AkashiTwentyMinute) return;
+
+            var notification = Notification.Create(
+                Notification.Types.RepairingCompleted,
+                Resources.Repairyard_NotificationMessage_Title,
+                Resources.Akashi_NotificationMessage,
+                () => WindowService.Current.MainWindow.Activate());
+
+            this.Notify(notification);
+        }
+
+        #endregion
+
+        #region IDisposable members
+
+        ICollection<IDisposable> IDisposableHolder.CompositeDisposable => this.compositeDisposable;
 
 		public void Dispose()
 		{

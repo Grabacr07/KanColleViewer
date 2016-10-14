@@ -10,6 +10,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		public SlotItem Item { get; }
 
 		public int Maximum { get; private set; }
+        public int Lost { get; private set; }
 
 		public bool Equipped => this.Item != null && this.Item != SlotItem.Dummy;
 
@@ -37,6 +38,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.Item = item ?? SlotItem.Dummy;
 			this.Maximum = maximum;
 			this.Current = current;
-		}
+            this.Lost = Maximum - Current;
+        }
 	}
 }

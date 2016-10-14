@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Models;
+using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
@@ -18,30 +19,31 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
         public event EventHandler ProcessChanged;
 
         int ITracker.Id => 229;
+        public QuestType Type => QuestType.Weekly;
         public bool IsTracking { get; set; }
 
         private System.EventArgs emptyEventArgs = new System.EventArgs();
 
         public void RegisterEvent(TrackManager manager)
         {
-            List<string> BossNameList = new List<string>
+            var BossNameList = new string[]
             {
-                "東方派遣艦隊", //4-1
-                "東方主力艦隊",
-                // 4-3: 東方主力艦隊
-                "敵東方中枢艦隊",
-                "リランカ島港湾守備隊"
+                "東方派遣艦隊",        // 4-1
+                "東方主力艦隊",        // 4-2, 4-3
+                "敵東方中枢艦隊",      // 4-4
+                "リランカ島港湾守備隊" // 4-5
             };
 
             manager.BattleResultEvent += (sender, args) =>
             {
                 if (!IsTracking) return;
 
-                if (args.MapAreaId != 4) return; // 4해역
+                if (args.MapAreaId != 4) return; // 4 해역
                 if (!BossNameList.Contains(args.EnemyName)) return;
                 if (!"SAB".Contains(args.Rank)) return;
 
-                count += count >= max_count ? 0 : 1;
+                count = count.Add(1).Max(max_count);
+
                 ProcessChanged?.Invoke(this, emptyEventArgs);
             };
         }

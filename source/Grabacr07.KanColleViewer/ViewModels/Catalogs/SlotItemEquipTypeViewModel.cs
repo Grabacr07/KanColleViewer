@@ -122,6 +122,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
                 { SlotItemIconType.FlyingBoat, "대형비행정" },
                 { SlotItemIconType.CombatRations, "전투식량" },
                 { SlotItemIconType.OffshoreResupply, "해상보급" },
+                { SlotItemIconType.AmphibiousLandingCraft, "내화정" },
+                { SlotItemIconType.LandBasedAttacker, "육상공격기" },
+                { SlotItemIconType.LandBasedFighter, "국지전투기" },
             };
             return table.FirstOrDefault(x => x.Key == icon).Value;
         }

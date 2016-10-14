@@ -34,5 +34,17 @@ namespace Grabacr07.KanColleViewer.Plugins.Properties {
                 this["CustomVolume"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseModern {
+            get {
+                return ((bool)(this["UseModern"]));
+            }
+            set {
+                this["UseModern"] = value;
+            }
+        }
     }
 }

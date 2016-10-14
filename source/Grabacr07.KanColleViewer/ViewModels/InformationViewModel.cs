@@ -102,6 +102,21 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
         #endregion
 
+        #region MaterialExtended 변경통지 프로퍼티
+
+        private bool _MaterialExtended;
+
+        public bool MaterialExtended {
+            get { return this._MaterialExtended; }
+            set
+            {
+                this._MaterialExtended = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
         public InformationViewModel()
 		{
 			this.Settings = SettingsHost.Instance<KanColleWindowSettings>();
@@ -119,10 +134,10 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			{
 				(this.Overview = new OverviewViewModel(this).AddTo(this)),
 				(this.Fleets = new FleetsViewModel().AddTo(this)),
-				(this.Shipyard = new ShipyardViewModel().AddTo(this)),
-				(this.Quests = new QuestsViewModel().AddTo(this)),
+				(this.Shipyard = new ShipyardViewModel(this.Fleets).AddTo(this)),
+				(this.Quests = new QuestsViewModel(this.Fleets).AddTo(this)),
 				(this.Expeditions = new ExpeditionsViewModel(this.Fleets).AddTo(this)),
-				(this.Tools = new ToolsViewModel().AddTo(this)),
+				(this.Tools = new ToolsViewModel(this.Fleets).AddTo(this)),
 			};
 			this.SystemTabItems = new List<TabItemViewModel>
 			{
@@ -141,6 +156,9 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			this.SlotItems = new SlotItemsViewModel().AddTo(this);
 
 			_AkashiTimer = new AkashiTimerViewModel();
-		}
+
+            KanColleSettings.DisplayMaterialExtended.ValueChanged += (s, e) => this.MaterialExtended = e.NewValue;
+            this.MaterialExtended = KanColleSettings.DisplayMaterialExtended;
+        }
 	}
 }
