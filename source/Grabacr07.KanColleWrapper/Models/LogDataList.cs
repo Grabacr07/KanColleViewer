@@ -1,6 +1,7 @@
 ﻿
 namespace Grabacr07.KanColleWrapper.Models
-{   /// <summary>
+{
+	/// <summary>
 	/// 날짜,해역이름,해역,보스,적 함대,랭크,드랍
 	/// </summary>
 	public class DropStringLists
