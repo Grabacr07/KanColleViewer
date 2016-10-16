@@ -10,16 +10,16 @@ using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
 	/// <summary>
-	/// 콩고급으로 편성된 고속전함부대를 편성하라!
+	/// 정예 제3전대 전함 집결하라!
 	/// </summary>
-	internal class A16 : NoSerializeTracker, ITracker
+	internal class A40 : NoSerializeTracker, ITracker
 	{
 		private readonly int max_count = 4;
 		private int count;
 
 		public event EventHandler ProcessChanged;
 
-		int ITracker.Id => 118;
+		int ITracker.Id => 142;
 		public QuestType Type => QuestType.OneTime;
 		public bool IsTracking { get; set; }
 
@@ -34,14 +34,6 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 				var shipTable = new int[]
 				{
-					78,  // 金剛
-					86,  // 比叡
-					79,  // 榛名
-					85,  // 霧島
-					149, // 金剛改
-					150, // 比叡改
-					151, // 榛名改
-					152, // 霧島改
 					209, // 金剛改二
 					210, // 比叡改二
 					211, // 榛名改二
@@ -76,7 +68,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public string GetProgressText()
 		{
-			return count >= max_count ? "완료" : "콩고,히에이,하루나,키리시마 편성 (" + count.ToString() + " / " + max_count.ToString() + ")";
+			return count >= max_count ? "완료" : "콩고改2,히에이改2,하루나改2,키리시마改2 편성 (" + count.ToString() + " / " + max_count.ToString() + ")";
 		}
 	}
 }

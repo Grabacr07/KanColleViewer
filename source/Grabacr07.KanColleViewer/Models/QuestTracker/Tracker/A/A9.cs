@@ -35,9 +35,11 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				var homeport = KanColleClient.Current.Homeport;
 				foreach (var fleet in homeport.Organization.Fleets)
 				{
+					var ships = fleet.Value.Ships;
+
 					count = Math.Max(
 						count,
-						fleet.Value.Ships.Count(x => x.Info.ShipType.Id == 16).Max(1)
+						ships.Count(x => x.Info.ShipType.Id == 16).Max(1)
 					);
 				}
 

@@ -35,15 +35,15 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				var shipTable = new int[]
 				{
 					34,  // 暁
-					234, // 暁改
-					437, // 暁改二
 					35,  // 響
-					235, // 響改
-					147, // Верный
 					36,  // 雷
-					236, // 雷改
 					37,  // 電
-					237  // 電改
+					234, // 暁改
+					235, // 響改
+					236, // 雷改
+					237, // 電改
+					437, // 暁改二
+					147, // Верный
 				};
 
 				var homeport = KanColleClient.Current.Homeport;

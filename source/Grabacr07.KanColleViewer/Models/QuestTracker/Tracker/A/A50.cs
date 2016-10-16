@@ -10,16 +10,16 @@ using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
 	/// <summary>
-	/// 콩고급으로 편성된 고속전함부대를 편성하라!
+	/// 미카와 함대를 새로 편성, 진입 준비하라!
 	/// </summary>
-	internal class A16 : NoSerializeTracker, ITracker
+	internal class A50 : NoSerializeTracker, ITracker
 	{
-		private readonly int max_count = 4;
+		private readonly int max_count = 6;
 		private int count;
 
 		public event EventHandler ProcessChanged;
 
-		int ITracker.Id => 118;
+		int ITracker.Id => 152;
 		public QuestType Type => QuestType.OneTime;
 		public bool IsTracking { get; set; }
 
@@ -34,24 +34,31 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 				var shipTable = new int[]
 				{
-					78,  // 金剛
-					86,  // 比叡
-					79,  // 榛名
-					85,  // 霧島
-					149, // 金剛改
-					150, // 比叡改
-					151, // 榛名改
-					152, // 霧島改
-					209, // 金剛改二
-					210, // 比叡改二
-					211, // 榛名改二
-					212, // 霧島改二
+					427, // 鳥海改二
+					59,  // 古鷹
+					60,  // 加古
+					61,  // 青葉
+					51,  // 天龍
+					123, // 衣笠
+					115, // 夕張
+					262, // 古鷹改
+					263, // 加古改
+					264, // 青葉改
+					213, // 天龍改
+					295, // 衣笠改
+					293, // 夕張改
+					416, // 古鷹改二
+					417, // 加古改二
+					142, // 衣笠改二
 				};
 
 				var homeport = KanColleClient.Current.Homeport;
 				foreach (var fleet in homeport.Organization.Fleets)
 				{
 					var ships = fleet.Value.Ships;
+					if (ships.Length <= 0) continue;
+
+					if (ships[0].Info.Id != 427) continue; // 鳥海改二
 
 					count = Math.Max(
 						count,
@@ -76,7 +83,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public string GetProgressText()
 		{
-			return count >= max_count ? "완료" : "콩고,히에이,하루나,키리시마 편성 (" + count.ToString() + " / " + max_count.ToString() + ")";
+			return count >= max_count ? "완료" : "쵸카이改2 기함,후루타카,카코,아오바,텐류,키누가사,유바리 중 5척 편성 (" + count.ToString() + " / " + max_count.ToString() + ")";
 		}
 	}
 }

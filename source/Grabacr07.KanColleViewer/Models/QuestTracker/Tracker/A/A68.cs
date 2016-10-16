@@ -43,6 +43,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				foreach (var fleet in homeport.Organization.Fleets)
 				{
 					var ships = fleet.Value.Ships;
+					if (ships.Length <= 0) continue;
 					if (ships[0].Info.Id != 158) continue;
 
 					var y = ships.Count(x => shipTable.Contains(x.Info.Id)).Max(3);

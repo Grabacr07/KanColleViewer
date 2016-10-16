@@ -36,14 +36,14 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				{
 					26,  // 扶桑
 					27,  // 山城
+					70,  // 最上
+					43,  // 時雨
 					286, // 扶桑改
 					287, // 山城改
+					73,  // 最上改
+					243, // 時雨改
 					411, // 扶桑改二
 					412, // 山城改二
-					70,  // 最上
-					73,  // 最上改
-					43,  // 時雨
-					243, // 時雨改
 					145, // 時雨改二
 				};
 
@@ -54,7 +54,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 					count = Math.Max(
 						count,
-						ships.Count(x => shipTable.Contains(x.Id)).Max(4)
+						ships.Count(x => shipTable.Contains(x.Id))
 					);
 				}
 

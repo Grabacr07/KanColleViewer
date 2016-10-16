@@ -53,7 +53,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 					count = Math.Max(
 						count,
-						ships.Count(x => shipTable.Contains(x.Id)).Max(4)
+						ships.Count(x => shipTable.Contains(x.Id))
 					);
 				}
 

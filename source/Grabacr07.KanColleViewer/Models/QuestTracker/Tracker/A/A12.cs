@@ -36,11 +36,14 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				foreach (var fleet in homeport.Organization.Fleets)
 				{
 					var ships = fleet.Value.Ships;
+					if (ships.Length <= 0) continue;
+
+					var flagship = ships[0].Info.ShipType.Id;
 
 					// 기함 경공모/정규공모/장갑공모
 					count = Math.Max(
 						count,
-						(ships[0].Info.ShipType.Id != 7 && ships[0].Info.ShipType.Id != 11 && ships[0].Info.ShipType.Id != 18)
+						(flagship != 7 && flagship != 11 && flagship != 18)
 							? 0
 							: ships.Count(x => x.Info.ShipType.Id == 7 || x.Info.ShipType.Id == 11 || x.Info.ShipType.Id == 18).Max(1)
 								+ ships.Count(x => x.Info.ShipType.Id == 2).Max(3)

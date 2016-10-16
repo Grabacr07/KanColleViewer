@@ -35,15 +35,24 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				var homeport = KanColleClient.Current.Homeport;
 				var ships = homeport.Organization.Fleets[1].Ships;
 
-				// 기함 경공모/정규공모/장갑공모
-				if (ships[0].Info.ShipType.Id != 7 && ships[0].Info.ShipType.Id != 11 && ships[0].Info.ShipType.Id != 18)
+				if (ships.Length <= 0)
+				{
 					count = 0;
+				}
 				else
-					count = Math.Max(
-						count,
-						ships.Count(x => x.Info.ShipType.Id == 7 || x.Info.ShipType.Id == 11 || x.Info.ShipType.Id == 18).Max(1) +
-						ships.Count(x => x.Info.ShipType.Id == 2).Max(3)
-					);
+				{
+					// 기함 경공모/정규공모/장갑공모
+					var flagship = ships[0].Info.ShipType.Id;
+
+					if (flagship != 7 && flagship != 11 && flagship != 18)
+						count = 0;
+					else
+						count = Math.Max(
+							count,
+							ships.Count(x => x.Info.ShipType.Id == 7 || x.Info.ShipType.Id == 11 || x.Info.ShipType.Id == 18).Max(1)
+								+ ships.Count(x => x.Info.ShipType.Id == 2).Max(3)
+						);
+				}
 
 				ProcessChanged?.Invoke(this, emptyEventArgs);
 			};

@@ -14,7 +14,8 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 	/// </summary>
 	internal class A3 : NoSerializeTracker, ITracker
 	{
-		private readonly int max_count = 4;private int count;
+		private readonly int max_count = 4;
+		private int count;
 
 		public event EventHandler ProcessChanged;
 
@@ -31,14 +32,14 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				if (!IsTracking) return;
 
 				var homeport = KanColleClient.Current.Homeport;
-				var fleet = homeport.Organization.Fleets[0];
+				var ships = homeport.Organization.Fleets[0].Ships;
 
-				if (fleet.Ships[0].Info.ShipType.Id != 3) // 기함 경순
+				if (ships[0].Info.ShipType.Id != 3) // 기함 경순
 					count = 0;
 				else
 				{
-					count = fleet.Ships.Count(x => x.Info.ShipType.Id == 3).Max(1)
-						+ fleet.Ships.Count(x => x.Info.ShipType.Id == 2).Max(3);
+					count = ships.Count(x => x.Info.ShipType.Id == 3).Max(1)
+						+ ships.Count(x => x.Info.ShipType.Id == 2).Max(3);
 				}
 
 				ProcessChanged?.Invoke(this, emptyEventArgs);
