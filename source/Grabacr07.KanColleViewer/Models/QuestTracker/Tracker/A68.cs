@@ -10,15 +10,16 @@ using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
 	/// <summary>
-	/// 수뢰전대를 편성하라!
+	/// 강행 고속 수송부대를 편성하라!
 	/// </summary>
-	internal class A3 : NoSerializeTracker, ITracker
+	internal class A68 : NoSerializeTracker, ITracker
 	{
-		private readonly int max_count = 4;private int count;
+		private readonly int max_count = 5;
+		private int count;
 
 		public event EventHandler ProcessChanged;
 
-		int ITracker.Id => 103;
+		int ITracker.Id => 173;
 		public QuestType Type => QuestType.OneTime;
 		public bool IsTracking { get; set; }
 
@@ -29,16 +30,26 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 			manager.HenseiEvent += (sender, args) =>
 			{
 				if (!IsTracking) return;
+				count = 0;
+
+				var shipTable = new int[]
+				{
+					158, // 川内改二
+					469, // 江風改二
+					145, // 時雨改二
+				};
 
 				var homeport = KanColleClient.Current.Homeport;
-				var fleet = homeport.Organization.Fleets[0];
-
-				if (fleet.Ships[0].Info.ShipType.Id != 3) // 기함 경순
-					count = 0;
-				else
+				foreach (var fleet in homeport.Organization.Fleets)
 				{
-					count = fleet.Ships.Count(x => x.Info.ShipType.Id == 3).Max(1)
-						+ fleet.Ships.Count(x => x.Info.ShipType.Id == 2).Max(3);
+					var ships = fleet.Value.Ships;
+					if (ships[0].Info.Id != 158) continue;
+
+					var y = ships.Count(x => shipTable.Contains(x.Info.Id)).Max(3);
+					count = Math.Max(
+						count,
+						(y + (y < 3 ? 0 : ships.Count(x => x.Info.ShipType.Id == 2) - 3)).Max(5)
+					);
 				}
 
 				ProcessChanged?.Invoke(this, emptyEventArgs);
@@ -58,7 +69,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public string GetProgressText()
 		{
-			return count >= max_count ? "완료" : "경순양함 기함 1척,구축함 3척 편성 (" + count.ToString() + " / " + max_count.ToString() + ")";
+			return count >= max_count ? "완료" : "센다이改2 기함,카와카제改2,시구레改2,구축함 2척 편성 (" + count.ToString() + " / " + max_count.ToString() + ")";
 		}
 	}
 }

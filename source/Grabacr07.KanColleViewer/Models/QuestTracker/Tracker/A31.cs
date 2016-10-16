@@ -10,15 +10,16 @@ using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
 	/// <summary>
-	/// 수뢰전대를 편성하라!
+	/// 제8구축대를 편성하라!
 	/// </summary>
-	internal class A3 : NoSerializeTracker, ITracker
+	internal class A31 : NoSerializeTracker, ITracker
 	{
-		private readonly int max_count = 4;private int count;
+		private readonly int max_count = 4;
+		private int count;
 
 		public event EventHandler ProcessChanged;
 
-		int ITracker.Id => 103;
+		int ITracker.Id => 131;
 		public QuestType Type => QuestType.OneTime;
 		public bool IsTracking { get; set; }
 
@@ -29,16 +30,32 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 			manager.HenseiEvent += (sender, args) =>
 			{
 				if (!IsTracking) return;
+				count = 0;
+
+				var shipTable = new int[]
+				{
+					95,  // 朝潮
+					96,  // 大潮
+					97,  // 満潮
+					98,  // 荒潮
+					248, // 朝潮改
+					249, // 大潮改
+					250, // 満潮改
+					251, // 荒潮改
+					463, // 朝潮改二
+					199, // 大潮改二
+					468, // 朝潮改二丁
+				};
 
 				var homeport = KanColleClient.Current.Homeport;
-				var fleet = homeport.Organization.Fleets[0];
-
-				if (fleet.Ships[0].Info.ShipType.Id != 3) // 기함 경순
-					count = 0;
-				else
+				foreach (var fleet in homeport.Organization.Fleets)
 				{
-					count = fleet.Ships.Count(x => x.Info.ShipType.Id == 3).Max(1)
-						+ fleet.Ships.Count(x => x.Info.ShipType.Id == 2).Max(3);
+					var ships = fleet.Value.Ships;
+
+					count = Math.Max(
+						count,
+						ships.Length != 4 ? 0 : ships.Count(x => shipTable.Contains(x.Id))
+					);
 				}
 
 				ProcessChanged?.Invoke(this, emptyEventArgs);
@@ -58,7 +75,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public string GetProgressText()
 		{
-			return count >= max_count ? "완료" : "경순양함 기함 1척,구축함 3척 편성 (" + count.ToString() + " / " + max_count.ToString() + ")";
+			return count >= max_count ? "완료" : "아사시오,오오시오,미치시오,아라시오 만으로 편성 (" + count.ToString() + " / " + max_count.ToString() + ")";
 		}
 	}
 }

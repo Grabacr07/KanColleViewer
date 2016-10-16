@@ -73,9 +73,15 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 			var battleTracker = new BattleTracker();
 
 			// 편성 변경
-			var fleets = homeport.Organization.Fleets.Select(x => x.Value);
-			foreach(var x in fleets)
-				x.State.Updated += (s, e) => CatchHelper(() => HenseiEvent?.Invoke(this, this.EmptyEventArg));
+			homeport.Organization.PropertyChanged += (s, e) =>
+			{
+				if (e.PropertyName == nameof(homeport.Organization.Fleets))
+				{
+					var fleets = homeport.Organization.Fleets.Select(x => x.Value);
+					foreach (var x in fleets)
+						x.State.Updated += (_, _2) => CatchHelper(() => HenseiEvent?.Invoke(this, this.EmptyEventArg));
+				}
+			};
 
 			// 연습전 종료
 			proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_practice/battle_result")
@@ -174,6 +180,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 			proxy.api_get_member_questlist
 				.Subscribe(x => new System.Threading.Thread(ProcessQuests).Start());
 
+			HenseiEvent?.Invoke(this, EmptyEventArg);
 			QuestsEventChanged?.Invoke(this, EmptyEventArg);
 		}
 
@@ -218,6 +225,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 				} catch { }
 			}
 
+			HenseiEvent?.Invoke(this, EmptyEventArg);
 			QuestsEventChanged?.Invoke(this, EmptyEventArg);
 			WriteToStorage();
 		}

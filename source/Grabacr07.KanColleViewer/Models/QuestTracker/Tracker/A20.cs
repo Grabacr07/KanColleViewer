@@ -32,14 +32,13 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				if (!IsTracking) return;
 				count = 0;
 
-				// 후루타카", "카코", "아오바", "초카이", "텐류
 				var shipTable = new int[]
 				{
 					59,  // 古鷹
 					60,  // 加古
 					61,  // 青葉
 					69,  // 鳥海
-					517, // 天龍
+					51,  // 天龍
 					262, // 古鷹改
 					263, // 加古改
 					264, // 青葉改
