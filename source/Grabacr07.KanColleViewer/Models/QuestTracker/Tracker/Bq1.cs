@@ -9,74 +9,68 @@ using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
-    /// <summary>
-    /// 오키노시마 해역 영격전
-    /// </summary>
-    internal class Bq1 : ITracker
-    {
-        private readonly int max_count = 2;
-        private int count;
+	/// <summary>
+	/// 오키노시마 해역 영격전
+	/// </summary>
+	internal class Bq1 : ITracker
+	{
+		private readonly int max_count = 2;
+		private int count;
 
-        public event EventHandler ProcessChanged;
+		public event EventHandler ProcessChanged;
 
-        int ITracker.Id => 822;
-        public QuestType Type => QuestType.Other;
-        public bool IsTracking { get; set; }
+		int ITracker.Id => 822;
+		public QuestType Type => QuestType.Other;
+		public bool IsTracking { get; set; }
 
-        private System.EventArgs emptyEventArgs = new System.EventArgs();
+		private System.EventArgs emptyEventArgs = new System.EventArgs();
 
-        public void RegisterEvent(TrackManager manager)
-        {
-            var BossNameList = new string[]
-            {
-                "敵侵攻中核艦隊" // 2-4
-            };
+		public void RegisterEvent(TrackManager manager)
+		{
+			var BossNameList = new string[]
+			{
+				"敵侵攻中核艦隊" // 2-4
+			};
 
-            manager.BattleResultEvent += (sender, args) =>
-            {
-                if (!IsTracking) return;
+			manager.BattleResultEvent += (sender, args) =>
+			{
+				if (!IsTracking) return;
 
-                if (args.MapAreaId != 2) return; // 2 해역
-                if (!BossNameList.Contains(args.EnemyName)) return;
-                if (args.Rank != "S") return;
+				if (args.MapAreaId != 2) return; // 2 해역
+				if (!BossNameList.Contains(args.EnemyName)) return;
+				if (args.Rank != "S") return;
 
-                count = count.Add(1).Max(max_count);
+				count = count.Add(1).Max(max_count);
 
-                ProcessChanged?.Invoke(this, emptyEventArgs);
-            };
-        }
+				ProcessChanged?.Invoke(this, emptyEventArgs);
+			};
+		}
 
-        public void ResetQuest()
-        {
-            count = 0;
-            ProcessChanged?.Invoke(this, emptyEventArgs);
-        }
+		public void ResetQuest()
+		{
+			count = 0;
+			ProcessChanged?.Invoke(this, emptyEventArgs);
+		}
 
-        public double GetProgress()
-        {
-            return (double)count / max_count * 100;
-        }
+		public double GetProgress()
+		{
+			return (double)count / max_count * 100;
+		}
 
-        public string GetProgressText()
-        {
-            return count >= max_count ? "완료" : $"2-4 보스전 S 승리 {count} / {max_count}";
-        }
+		public string GetProgressText()
+		{
+			return count >= max_count ? "완료" : "2-4 보스전 S 승리 " + count.ToString() + " / " + max_count.ToString();
+		}
 
-        public string SerializeData()
-        {
-            return $"{count}";
-        }
+		public string SerializeData()
+		{
+			return count.ToString();
+		}
 
-        public void DeserializeData(string data)
-        {
-            try
-            {
-                count = int.Parse(data);
-            }
-            catch
-            {
-                count = 0;
-            }
-        }
-    }
+		public void DeserializeData(string data)
+		{
+			count = 0;
+			int.TryParse(data, out count);
+		}
+	}
 }

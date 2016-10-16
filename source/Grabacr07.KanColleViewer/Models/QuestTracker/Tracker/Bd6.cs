@@ -8,72 +8,66 @@ using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
-    /// <summary>
-    /// 적 수송선단을 쳐라!
-    /// </summary>
-    internal class Bd6 : ITracker
-    {
-        private readonly int max_count = 5;
-        private int count;
+	/// <summary>
+	/// 적 수송선단을 쳐라!
+	/// </summary>
+	internal class Bd6 : ITracker
+	{
+		private readonly int max_count = 5;
+		private int count;
 
-        public event EventHandler ProcessChanged;
+		public event EventHandler ProcessChanged;
 
-        int ITracker.Id => 212;
-        public QuestType Type => QuestType.Daily;
-        public bool IsTracking { get; set; }
+		int ITracker.Id => 212;
+		public QuestType Type => QuestType.Daily;
+		public bool IsTracking { get; set; }
 
-        private System.EventArgs emptyEventArgs = new System.EventArgs();
+		private System.EventArgs emptyEventArgs = new System.EventArgs();
 
-        public void RegisterEvent(TrackManager manager)
-        {
-            manager.BattleResultEvent += (sender, args) =>
-            {
-                if (!IsTracking) return;
+		public void RegisterEvent(TrackManager manager)
+		{
+			manager.BattleResultEvent += (sender, args) =>
+			{
+				if (!IsTracking) return;
 
-                // 15 > 보급선
-                // 22 > 보급선
-                count = count.Add(
-                        args.EnemyShips
-                            .Where(x => x.Type == 15 || x.Type == 22)
-                            .Where(x => x.MaxHp != int.MaxValue && x.NowHp <= 0)
-                            .Count()
-                    ).Max(max_count);
+				// 15 > 보급선
+				// 22 > 보급선
+				count = count.Add(
+						args.EnemyShips
+							.Where(x => x.Type == 15 || x.Type == 22)
+							.Where(x => x.MaxHp != int.MaxValue && x.NowHp <= 0)
+							.Count()
+					).Max(max_count);
 
-                ProcessChanged?.Invoke(this, emptyEventArgs);
-            };
-        }
+				ProcessChanged?.Invoke(this, emptyEventArgs);
+			};
+		}
 
-        public void ResetQuest()
-        {
-            count = 0;
-            ProcessChanged?.Invoke(this, emptyEventArgs);
-        }
+		public void ResetQuest()
+		{
+			count = 0;
+			ProcessChanged?.Invoke(this, emptyEventArgs);
+		}
 
-        public double GetProgress()
-        {
-            return (double)count / max_count * 100;
-        }
+		public double GetProgress()
+		{
+			return (double)count / max_count * 100;
+		}
 
-        public string GetProgressText()
-        {
-            return count >= max_count ? "완료" : $"보급함 격침 {count} / {max_count}";
-        }
+		public string GetProgressText()
+		{
+			return count >= max_count ? "완료" : "보급함 격침 " + count.ToString() + " / " + max_count.ToString();
+		}
 
-        public string SerializeData()
-        {
-            return $"{count}";
-        }
+		public string SerializeData()
+		{
+			return count.ToString();
+		}
 
-        public void DeserializeData(string data)
-        {
-            try
-            {
-                count = int.Parse(data);
-            }
-            catch
-            {
-                count = 0;
-            }
-        }
-    }
+		public void DeserializeData(string data)
+		{
+			count = 0;
+			int.TryParse(data, out count);
+		}
+	}
 }

@@ -8,21 +8,21 @@ using Grabacr07.KanColleWrapper.Models;
 
 namespace Grabacr07.KanColleViewer.Models.QuestTracker
 {
-    internal interface ITracker
-    {
-        int Id { get; }
-        bool IsTracking { get; set; }
-        QuestType Type { get; }
+	internal interface ITracker
+	{
+		int Id { get; }
+		bool IsTracking { get; set; }
+		QuestType Type { get; }
 
-        void RegisterEvent(TrackManager manager);
-        void ResetQuest();
+		void RegisterEvent(TrackManager manager);
+		void ResetQuest();
 
-        event EventHandler ProcessChanged;
+		event EventHandler ProcessChanged;
 
-        string GetProgressText();
-        double GetProgress();
+		string GetProgressText();
+		double GetProgress();
 
-        string SerializeData();
-        void DeserializeData(string data);
-    }
+		string SerializeData();
+		void DeserializeData(string data);
+	}
 }
