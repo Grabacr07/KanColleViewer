@@ -23,6 +23,8 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 {
 	class TrackManager
 	{
+		private string TrackerNamespace => "Grabacr07.KanColleViewer.Models.QuestTracker.Tracker";
+
 		private readonly Dictionary<int, DateTime> trackingTime = new Dictionary<int, DateTime>();
 		private ObservableCollection<ITracker> trackingAvailable = new ObservableCollection<ITracker>();
 
@@ -171,7 +173,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 			};
 
 			Assembly.GetExecutingAssembly().GetTypes()
-					.Where(x => x.Namespace == "Grabacr07.KanColleViewer.Models.QuestTracker.Tracker" && typeof(ITracker).IsAssignableFrom(x))
+					.Where(x => x.Namespace.StartsWith(TrackerNamespace) && typeof(ITracker).IsAssignableFrom(x))
 					.ToList().ForEach(x => trackingAvailable.Add((ITracker)Activator.CreateInstance(x)));
 
 			ReadFromStorage();
