@@ -29,7 +29,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
         {
             var BossNameList = new string[]
             {
-                "敵前線司令艦隊" // 1-4
+                "敵前線司令艦隊" // 5-1
             };
             var shipList = new int[]
             {
@@ -43,8 +43,10 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
                 276, // 陸奥改
                 26,  // 扶桑
                 286, // 扶桑改
+                411, // 扶桑改二
                 27,  // 山城
                 287, // 山城改
+                412, // 山城改二
                 77,  // 伊勢
                 82,  // 伊勢改
                 87,  // 日向
