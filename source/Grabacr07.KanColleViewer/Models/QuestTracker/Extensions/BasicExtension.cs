@@ -10,11 +10,11 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Extensions
 	{
 		public static int Min(this int i, params int[] v)
 		{
-			return Math.Min(i, v.Min());
+			return Math.Max(i, v.Min());
 		}
 		public static int Min(this int i, int v)
 		{
-			return Math.Min(i, v);
+			return Math.Max(i, v);
 		}
 		public static int Max(this int i, params int[] v)
 		{

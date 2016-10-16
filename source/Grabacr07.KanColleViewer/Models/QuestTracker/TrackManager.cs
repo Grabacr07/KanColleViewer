@@ -54,6 +54,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 		public event EventHandler DestoryItemEvent;
 		public event EventHandler PowerUpEvent;
 		public event EventHandler ReModelEvent;
+		public event EventHandler HenseiEvent;
 
 		public readonly System.EventArgs EmptyEventArg = new System.EventArgs();
 		public event EventHandler QuestsEventChanged;
@@ -66,9 +67,15 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 
 		public TrackManager()
 		{
+			var homeport = KanColleClient.Current.Homeport;
 			var proxy = KanColleClient.Current.Proxy;
 			var MapInfo = new TrackerMapInfo();
 			var battleTracker = new BattleTracker();
+
+			// 편성 변경
+			var fleets = homeport.Organization.Fleets.Select(x => x.Value);
+			foreach(var x in fleets)
+				x.State.Updated += (s, e) => CatchHelper(() => HenseiEvent?.Invoke(this, this.EmptyEventArg));
 
 			// 연습전 종료
 			proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_practice/battle_result")
