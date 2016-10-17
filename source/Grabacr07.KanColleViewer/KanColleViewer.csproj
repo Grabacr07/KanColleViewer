@@ -231,6 +231,10 @@
     <Compile Include="Models\QuestTracker\Tracker\A\A59.cs" />
     <Compile Include="Models\QuestTracker\Tracker\A\A6.cs" />
     <Compile Include="Models\QuestTracker\Tracker\A\A60.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\A\A61.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\A\A62.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\A\A63.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\A\A64.cs" />
     <Compile Include="Models\QuestTracker\Tracker\A\A68.cs" />
     <Compile Include="Models\QuestTracker\Tracker\A\A7.cs" />
     <Compile Include="Models\QuestTracker\Tracker\A\A9.cs" />

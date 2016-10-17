@@ -53,7 +53,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 						ships.Length != 4 ? 0
 							: ships.Count(x => shipTable.Contains(x.Id))
 								+ ships.Count(x => x.Info.ShipType.Id == 3 && !shipTable.Contains(x.Info.Id))
-								// 테이블 제외 구축함
+								// 테이블 제외 구축
 					);
 				}
 
@@ -74,7 +74,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public string GetProgressText()
 		{
-			return count >= max_count ? "완료" : "사츠키,후미즈키,나가츠키와 그 외 구축함 1척만으로 편성 (" + count.ToString() + " / " + max_count.ToString() + ")";
+			return count >= max_count ? "완료" : "사츠키,후미즈키,나가츠키와 그 외 구축 1척만으로 편성 (" + count.ToString() + " / " + max_count.ToString() + ")";
 		}
 	}
 }

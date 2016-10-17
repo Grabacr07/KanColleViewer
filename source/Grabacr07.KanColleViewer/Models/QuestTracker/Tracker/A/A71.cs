@@ -10,16 +10,16 @@ using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
 	/// <summary>
-	/// 중순전대를 편성하라!
+	/// 정예! 8구 제1소대!
 	/// </summary>
-	internal class A7 : NoSerializeTracker, ITracker
+	internal class A71 : NoSerializeTracker, ITracker
 	{
 		private readonly int max_count = 2;
 		private int count;
 
 		public event EventHandler ProcessChanged;
 
-		int ITracker.Id => 106;
+		int ITracker.Id => 131;
 		public QuestType Type => QuestType.OneTime;
 		public bool IsTracking { get; set; }
 
@@ -32,14 +32,22 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				if (!IsTracking) return;
 				count = 0;
 
+				var shipTable = new int[]
+				{
+					463, // 朝潮改二
+					468, // 朝潮改二丁
+					199, // 大潮改二
+				};
+
 				var homeport = KanColleClient.Current.Homeport;
 				foreach (var fleet in homeport.Organization.Fleets)
 				{
 					var ships = fleet.Value.Ships;
+					if (ships.Length <= 0) continue;
 
 					count = Math.Max(
 						count,
-						ships.Count(x => x.Info.ShipType.Id == 5).Max(2)
+						ships.Count(x => shipTable.Contains(x.Id))
 					);
 				}
 
@@ -60,7 +68,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public string GetProgressText()
 		{
-			return count >= max_count ? "완료" : "중순 " + count.ToString() + " / " + max_count.ToString() + " 척 편성";
+			return count >= max_count ? "완료" : "아사시오改2,오오시오改2 편성 (" + count.ToString() + " / " + max_count.ToString() + ")";
 		}
 	}
 }

@@ -40,7 +40,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 					var flagship = ships[0].Info.ShipType.Id;
 
-					// 기함 경공모/정규공모/장갑공모
+					// 기함 공모/장갑공모
 					count = Math.Max(
 						count,
 						(flagship != 7 && flagship != 11 && flagship != 18)
@@ -67,7 +67,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public string GetProgressText()
 		{
-			return count >= max_count ? "완료" : "경공모/정규공모 기함 1척,구축함 3척 편성 (" + count.ToString() + " / " + max_count.ToString() + ")";
+			return count >= max_count ? "완료" : "공모 기함 1척,구축 3척 편성 (" + count.ToString() + " / " + max_count.ToString() + ")";
 		}
 	}
 }

@@ -60,7 +60,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public string GetProgressText()
 		{
-			return count >= max_count ? "완료" : "경순양함 " + count.ToString() + " / " + max_count.ToString() + " 척 편성";
+			return count >= max_count ? "완료" : "경순 " + count.ToString() + " / " + max_count.ToString() + " 척 편성";
 		}
 	}
 }

@@ -64,7 +64,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 							ships.Count(x => shipTable.Contains(x.Id))
 								+ ships.Count(x => x.Info.ShipType.Id == 3).Max(1)
 								+ ships.Count(x => x.Info.ShipType.Id == 2 && !shipTable.Contains(x.Info.Id)).Max(3)
-								// 카스미 제외 구축함
+								// 카스미 제외 구축
 						).Max(5)
 					);
 				}

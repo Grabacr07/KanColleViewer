@@ -59,7 +59,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public string GetProgressText()
 		{
-			return count >= max_count ? "완료" : "경순양함 기함 1척,구축함 3척 편성 (" + count.ToString() + " / " + max_count.ToString() + ")";
+			return count >= max_count ? "완료" : "경순 기함 1척,구축 3척 편성 (" + count.ToString() + " / " + max_count.ToString() + ")";
 		}
 	}
 }

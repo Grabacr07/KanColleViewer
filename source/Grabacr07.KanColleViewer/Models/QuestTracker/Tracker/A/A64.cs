@@ -10,16 +10,16 @@ using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
 	/// <summary>
-	/// 중순전대를 편성하라!
+	/// 신편성항공전대를 편성하라!
 	/// </summary>
-	internal class A7 : NoSerializeTracker, ITracker
+	internal class A64 : NoSerializeTracker, ITracker
 	{
-		private readonly int max_count = 2;
+		private readonly int max_count = 6;
 		private int count;
 
 		public event EventHandler ProcessChanged;
 
-		int ITracker.Id => 106;
+		int ITracker.Id => 169;
 		public QuestType Type => QuestType.OneTime;
 		public bool IsTracking { get; set; }
 
@@ -39,7 +39,9 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 					count = Math.Max(
 						count,
-						ships.Count(x => x.Info.ShipType.Id == 5).Max(2)
+						ships.Count(x => x.Info.ShipType.Id == 7 || x.Info.ShipType.Id == 11 || x.Info.ShipType.Id == 18).Max(2)
+							+ ships.Count(x => x.Info.ShipType.Id == 10 || x.Info.ShipType.Id == 6).Max(2)
+							+ ships.Count(x => x.Info.ShipType.Id == 2).Max(2)
 					);
 				}
 
@@ -60,7 +62,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public string GetProgressText()
 		{
-			return count >= max_count ? "완료" : "중순 " + count.ToString() + " / " + max_count.ToString() + " 척 편성";
+			return count >= max_count ? "완료" : "공모 2척,항전/항순 2척,구축 2척 편성 (" + count.ToString() + " / " + max_count.ToString() + ")";
 		}
 	}
 }
