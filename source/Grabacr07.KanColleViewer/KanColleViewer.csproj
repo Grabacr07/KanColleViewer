@@ -323,7 +323,10 @@
     <Compile Include="Models\QuestTracker\Tracker\B\B\B45.cs" />
     <Compile Include="Models\QuestTracker\Tracker\B\B\B46.cs" />
     <Compile Include="Models\QuestTracker\Tracker\B\B\B47.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\B\B\B48.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\B\B\B49.cs" />
     <Compile Include="Models\QuestTracker\Tracker\B\B\B5.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\B\B\B50.cs" />
     <Compile Include="Models\QuestTracker\Tracker\B\B\B6.cs" />
     <Compile Include="Models\QuestTracker\Tracker\B\B\B7.cs" />
     <Compile Include="Models\QuestTracker\Tracker\B\B\B8.cs" />
