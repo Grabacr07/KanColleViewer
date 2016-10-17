@@ -18,6 +18,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.EventArgs
 
 		public int MapWorldId { get; set; }
 		public int MapAreaId { get; set; }
+		public int MapNodeId { get; set; }
 
 		public bool IsFirstCombat { get; set; }
 		public string Rank { get; set; }
@@ -27,6 +28,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.EventArgs
 			IsFirstCombat = MapInfo.IsFirstCombat;
 			MapWorldId = MapInfo.WorldId;
 			MapAreaId = MapInfo.MapId;
+			MapNodeId = MapInfo.NodeId;
 			EnemyName = data.api_enemy_info.api_deck_name;
 			EnemyShips = enemyShips;
 			Rank = data.api_win_rank;
@@ -35,6 +37,8 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.EventArgs
 		{
 			IsFirstCombat = MapInfo.IsFirstCombat;
 			MapWorldId = MapInfo.WorldId;
+			MapAreaId = MapInfo.MapId;
+			MapNodeId = MapInfo.NodeId;
 			EnemyName = data.api_enemy_info.api_deck_name;
 			EnemyShips = enemyShips;
 			Rank = data.api_win_rank;

@@ -11,6 +11,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Model
 		public bool IsFirstCombat { get; set; }
 		public int WorldId { get; set; }
 		public int MapId { get; set; }
+		public int NodeId { get; set; }
 
 		public TrackerMapInfo AfterCombat()
 		{
@@ -18,16 +19,18 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Model
 			{
 				IsFirstCombat = this.IsFirstCombat,
 				WorldId = this.WorldId,
-				MapId = this.MapId
+				MapId = this.MapId,
+				NodeId = this.NodeId
 			};
 			this.IsFirstCombat = false;
 			return prev;
 		}
-		public void Reset(int WorldId, int MapId)
+		public void Reset(int WorldId, int MapId, int NodeId)
 		{
 			this.IsFirstCombat = true;
 			this.WorldId = WorldId;
 			this.MapId = MapId;
+			this.NodeId = NodeId;
 		}
 	}
 }

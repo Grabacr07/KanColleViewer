@@ -127,9 +127,11 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 			proxy.api_req_mission_result.TryParse<kcsapi_mission_result>()
 				.Subscribe(x => CatchHelper(() => MissionResultEvent?.Invoke(this, new MissionResultEventArgs(x.Data))));
 
-			// 출격 (시작)
+			// 출격 (시작, 진격)
 			proxy.api_req_map_start.TryParse<kcsapi_map_start>()
-				.Subscribe(x => CatchHelper(() => MapInfo.Reset(x.Data.api_maparea_id, x.Data.api_mapinfo_no)));
+				.Subscribe(x => CatchHelper(() => MapInfo.Reset(x.Data.api_maparea_id, x.Data.api_mapinfo_no, x.Data.api_no)));
+			proxy.api_req_map_next.TryParse<kcsapi_map_start>()
+				.Subscribe(x => CatchHelper(() => MapInfo.Reset(x.Data.api_maparea_id, x.Data.api_mapinfo_no, x.Data.api_no)));
 
 			// 통상 - 주간전
 			proxy.api_req_sortie_battle.TryParse<kcsapi_sortie_battle>()
