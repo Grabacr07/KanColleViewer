@@ -98,9 +98,9 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 			ProcessChanged?.Invoke(this, emptyEventArgs);
 		}
 
-		public double GetProgress()
+		public int GetProgress()
 		{
-			return (double)(progress_combat + progress_combat_s + progress_boss + progress_boss_win) / (36 + 6 + 24 + 12) * 100;
+			return (progress_combat + progress_combat_s + progress_boss + progress_boss_win) * 100 / (36 + 6 + 24 + 12);
 		}
 
 		public string GetProgressText()

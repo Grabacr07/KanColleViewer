@@ -20,7 +20,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 		event EventHandler ProcessChanged;
 
 		string GetProgressText();
-		double GetProgress();
+		int GetProgress();
 
 		string SerializeData();
 		void DeserializeData(string data);
