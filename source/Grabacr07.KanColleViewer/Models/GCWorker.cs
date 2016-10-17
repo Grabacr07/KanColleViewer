@@ -15,7 +15,7 @@ namespace Grabacr07.KanColleViewer.Models
 		{
 			GCThread = new Thread(() =>
 			{
-				int cnt = 60 * 5;
+				int cnt = 60;
 				while (GCWorking)
 				{
 					Thread.Sleep(1000);
@@ -24,7 +24,7 @@ namespace Grabacr07.KanColleViewer.Models
 					cnt--;
 					if (cnt == 0)
 					{
-						cnt = 60 * 5;
+						cnt = 60;
 						GC.Collect();
 					}
 				}
