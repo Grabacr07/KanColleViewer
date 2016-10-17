@@ -10,16 +10,16 @@ using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
 	/// <summary>
-	/// 발묘! 제18전대
+	/// 함대, 3주년!
 	/// </summary>
-	internal class B43 : ITracker
+	internal class B67 : ITracker
 	{
-		private readonly int max_count = 1;
-		private int count;
+		private readonly int max_count = 2;
+		private int count1, count2;
 
 		public event EventHandler ProcessChanged;
 
-		int ITracker.Id => 275;
+		int ITracker.Id => 816;
 		public QuestType Type => QuestType.OneTime;
 		public bool IsTracking { get; set; }
 
@@ -31,22 +31,19 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 			{
 				if (!IsTracking) return;
 
-				if (args.MapWorldId != 2 || args.MapAreaId != 3) return; // 2-3
-				if (args.EnemyName != "敵主力打撃群") return; // boss
+				if (args.MapWorldId != 2 || (args.MapAreaId != 2 && args.MapAreaId != 3)) return; // 2-2 or 2-3
 				if ("S" == args.Rank) return; // S승리
 
-				var shipTable = new int[]
+				if (args.MapAreaId == 2)
 				{
-					51,  // 天龍
-					52,  // 龍田
-					213, // 天龍改
-					214, // 龍田改
-				};
-
-				var fleet = KanColleClient.Current.Homeport.Organization.Fleets.FirstOrDefault(x => x.Value.IsInSortie).Value;
-				if (fleet.Ships.Count(x => shipTable.Contains(x.Info.Id)) < 2) return;
-
-				count = count.Add(1).Max(max_count);
+					if (args.EnemyName != "敵主力艦隊") return; // boss
+					count1 = count1.Add(1).Max(1);
+				}
+				else if (args.MapAreaId == 3)
+				{
+					if (args.EnemyName != "敵通商破壊艦隊") return; // boss
+					count2 = count2.Add(1).Max(1);
+				}
 
 				ProcessChanged?.Invoke(this, emptyEventArgs);
 			};
@@ -54,29 +51,34 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public void ResetQuest()
 		{
-			count = 0;
+			count1 = count2 = 0;
 			ProcessChanged?.Invoke(this, emptyEventArgs);
 		}
 
 		public int GetProgress()
 		{
-			return count * 100 / max_count;
+			return (count1+count2) * 100 / max_count;
 		}
 
 		public string GetProgressText()
 		{
-			return count >= max_count ? "완료" : "텐류,타츠타 포함 편성 2-3 보스전 S승리 " + count.ToString() + " / " + max_count.ToString();
+			return (count1 + count2) >= max_count ? "완료" : "자유 편성 2-2 보스전 S승리 " + count1.ToString() + "/1, 2-3 보스전 S승리 " + count2.ToString() + "/1";
 		}
 
 		public string SerializeData()
 		{
-			return count.ToString();
+			return count1.ToString() + "," + count2.ToString();
 		}
 
 		public void DeserializeData(string data)
 		{
-			count = 0;
-			int.TryParse(data, out count);
+			count1 = count2 = 0;
+
+			string[] part = data.Split(',');
+			if (part.Length != 2) return;
+
+			int.TryParse(part[0], out count1);
+			int.TryParse(part[1], out count1);
 		}
 	}
 }

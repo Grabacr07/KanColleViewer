@@ -10,16 +10,16 @@ using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
 	/// <summary>
-	/// 제11구축대 출격하라!
+	/// 제16전대(제2차) 출격하라!
 	/// </summary>
-	internal class B35 : ITracker
+	internal class B55 : ITracker
 	{
 		private readonly int max_count = 1;
 		private int count;
 
 		public event EventHandler ProcessChanged;
 
-		int ITracker.Id => 267;
+		int ITracker.Id => 295;
 		public QuestType Type => QuestType.OneTime;
 		public bool IsTracking { get; set; }
 
@@ -33,26 +33,32 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 				if (args.MapWorldId != 2 || args.MapAreaId != 3) return; // 2-3
 				if (args.EnemyName != "敵主力打撃群") return; // boss
-				if ("S" != args.Rank) return; // S승리
+				if ("S" == args.Rank) return; // S승리
 
+				var flagshipTable = new int[]
+				{
+					53,  // 名取
+					221, // 名取改
+				};
 				var shipTable = new int[]
 				{
-					9,   // 吹雪
-					10,  // 白雪
-					32,  // 初雪
-					33,  // 叢雲
-					201, // 吹雪改
-					202, // 白雪改
-					203, // 初雪改
-					205, // 叢雲改
-					420, // 叢雲改二
-					426, // 吹雪改二
+					22,  // 五十鈴
+					53,  // 名取
+					113, // 鬼怒
+					123, // 衣笠
+					141, // 五十鈴改二
+					142, // 衣笠改二
+					219, // 五十鈴改
+					221, // 名取改
+					289, // 鬼怒改
+					295, // 衣笠改
 				};
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets.FirstOrDefault(x => x.Value.IsInSortie).Value;
 				var ships = fleet.Ships;
 
-				if (ships.Count(x => shipTable.Contains(x.Info.Id)) < 4) return;
+				if (!flagshipTable.Contains(ships[0].Info.Id)) return; // 나토리 기함
+				if (ships.Count(x => shipTable.Contains(x.Info.Id)) < 3) return;
 
 				count = count.Add(1).Max(max_count);
 
@@ -73,7 +79,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public string GetProgressText()
 		{
-			return count >= max_count ? "완료" : "후부키,시라유키,하츠유키,무라쿠모 포함 편성 2-3 보스전 S승리 " + count.ToString() + " / " + max_count.ToString();
+			return count >= max_count ? "완료" : "나토리 기함,이스즈,키누 포함 편성 2-3 보스전 S승리 " + count.ToString() + " / " + max_count.ToString();
 		}
 
 		public string SerializeData()

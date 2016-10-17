@@ -31,7 +31,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 			{
 				if (!IsTracking) return;
 
-				if (args.MapWorldId == 1 && args.MapAreaId == 2) // 1-2
+				if (args.MapWorldId == 1 || args.MapAreaId == 2) // 1-2
 					count = count.Add(1).Max(max_count);
 
 				ProcessChanged?.Invoke(this, emptyEventArgs);

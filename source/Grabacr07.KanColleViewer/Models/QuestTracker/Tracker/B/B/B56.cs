@@ -10,16 +10,16 @@ using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
 	/// <summary>
-	/// 제11구축대 출격하라!
+	/// 신편성항공전대, 북방에 진출하라!
 	/// </summary>
-	internal class B35 : ITracker
+	internal class B56 : ITracker
 	{
 		private readonly int max_count = 1;
 		private int count;
 
 		public event EventHandler ProcessChanged;
 
-		int ITracker.Id => 267;
+		int ITracker.Id => 296;
 		public QuestType Type => QuestType.OneTime;
 		public bool IsTracking { get; set; }
 
@@ -31,28 +31,18 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 			{
 				if (!IsTracking) return;
 
-				if (args.MapWorldId != 2 || args.MapAreaId != 3) return; // 2-3
-				if (args.EnemyName != "敵主力打撃群") return; // boss
-				if ("S" != args.Rank) return; // S승리
-
-				var shipTable = new int[]
-				{
-					9,   // 吹雪
-					10,  // 白雪
-					32,  // 初雪
-					33,  // 叢雲
-					201, // 吹雪改
-					202, // 白雪改
-					203, // 初雪改
-					205, // 叢雲改
-					420, // 叢雲改二
-					426, // 吹雪改二
-				};
+				if (args.MapWorldId != 3 || args.MapAreaId != 3) return; // 3-3
+				if (args.EnemyName != "深海棲艦泊地艦隊") return; // boss
+				if ("S" == args.Rank) return; // S승리
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets.FirstOrDefault(x => x.Value.IsInSortie).Value;
 				var ships = fleet.Ships;
 
-				if (ships.Count(x => shipTable.Contains(x.Info.Id)) < 4) return;
+				var cnt = ships.Count(x => x.Info.ShipType.Id == 7 || x.Info.ShipType.Id == 11 || x.Info.ShipType.Id == 18).Max(2);
+				cnt += ships.Count(x => x.Info.ShipType.Id == 10 || x.Info.ShipType.Id == 6).Max(2);
+				cnt += ships.Count(x => x.Info.ShipType.Id == 2).Max(2);
+
+				if (cnt < 6) return;
 
 				count = count.Add(1).Max(max_count);
 
@@ -73,7 +63,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public string GetProgressText()
 		{
-			return count >= max_count ? "완료" : "후부키,시라유키,하츠유키,무라쿠모 포함 편성 2-3 보스전 S승리 " + count.ToString() + " / " + max_count.ToString();
+			return count >= max_count ? "완료" : "공모 2척,구축 2척,항전 항순 합 2척 편성 3-3 보스전 S승리 " + count.ToString() + " / " + max_count.ToString();
 		}
 
 		public string SerializeData()

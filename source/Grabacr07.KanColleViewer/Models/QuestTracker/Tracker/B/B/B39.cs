@@ -31,7 +31,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 			{
 				if (!IsTracking) return;
 
-				if (args.MapWorldId != 1 && args.MapAreaId != 4) return; // 1-4
+				if (args.MapWorldId != 1 || args.MapAreaId != 4) return; // 1-4
 				if (args.EnemyName != "敵機動部隊") return; // boss
 				if ("S" != args.Rank) return; // S승리
 

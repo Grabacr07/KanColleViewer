@@ -10,16 +10,16 @@ using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
 	/// <summary>
-	/// 제11구축대 출격하라!
+	/// 제1항공전대 서쪽으로!
 	/// </summary>
-	internal class B35 : ITracker
+	internal class B69 : ITracker
 	{
 		private readonly int max_count = 1;
 		private int count;
 
 		public event EventHandler ProcessChanged;
 
-		int ITracker.Id => 267;
+		int ITracker.Id => 815;
 		public QuestType Type => QuestType.OneTime;
 		public bool IsTracking { get; set; }
 
@@ -31,28 +31,29 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 			{
 				if (!IsTracking) return;
 
-				if (args.MapWorldId != 2 || args.MapAreaId != 3) return; // 2-3
-				if (args.EnemyName != "敵主力打撃群") return; // boss
+				if (args.MapWorldId != 4 || args.MapAreaId != 5) return; // 4-5
+				if (args.EnemyName != "リランカ島港湾守備隊") return; // boss
 				if ("S" != args.Rank) return; // S승리
 
+				var flagshipTable = new int[]
+				{
+					83,  // 赤城
+					277, // 赤城改
+				};
 				var shipTable = new int[]
 				{
-					9,   // 吹雪
-					10,  // 白雪
-					32,  // 初雪
-					33,  // 叢雲
-					201, // 吹雪改
-					202, // 白雪改
-					203, // 初雪改
-					205, // 叢雲改
-					420, // 叢雲改二
-					426, // 吹雪改二
+					83,  // 赤城
+					277, // 赤城改
+					84,  // 加賀
+					278, // 加賀改
 				};
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets.FirstOrDefault(x => x.Value.IsInSortie).Value;
 				var ships = fleet.Ships;
 
-				if (ships.Count(x => shipTable.Contains(x.Info.Id)) < 4) return;
+				if (!flagshipTable.Contains(ships[0].Info.Id)) return; // 아카기 기함
+
+				if (ships.Count(x => shipTable.Contains(x.Info.Id)) < 2) return;
 
 				count = count.Add(1).Max(max_count);
 
@@ -73,7 +74,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public string GetProgressText()
 		{
-			return count >= max_count ? "완료" : "후부키,시라유키,하츠유키,무라쿠모 포함 편성 2-3 보스전 S승리 " + count.ToString() + " / " + max_count.ToString();
+			return count >= max_count ? "완료" : "아카기 기함,카가 포함 편성 4-5 보스전 S승리 " + count.ToString() + " / " + max_count.ToString();
 		}
 
 		public string SerializeData()

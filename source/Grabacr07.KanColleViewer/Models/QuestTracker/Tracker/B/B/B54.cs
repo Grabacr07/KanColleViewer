@@ -10,16 +10,16 @@ using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
 	/// <summary>
-	/// 제11구축대 출격하라!
+	/// 오자와 함대 출격하라!
 	/// </summary>
-	internal class B35 : ITracker
+	internal class B54 : ITracker
 	{
 		private readonly int max_count = 1;
 		private int count;
 
 		public event EventHandler ProcessChanged;
 
-		int ITracker.Id => 267;
+		int ITracker.Id => 294;
 		public QuestType Type => QuestType.OneTime;
 		public bool IsTracking { get; set; }
 
@@ -31,28 +31,37 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 			{
 				if (!IsTracking) return;
 
-				if (args.MapWorldId != 2 || args.MapAreaId != 3) return; // 2-3
-				if (args.EnemyName != "敵主力打撃群") return; // boss
-				if ("S" != args.Rank) return; // S승리
+				if (args.MapWorldId != 2 || args.MapAreaId != 4) return; // 2-4
+				if (args.EnemyName != "敵侵攻中核艦隊") return; // boss
+				if ("S" == args.Rank) return; // S승리
 
+				var flagshipTable = new int[]
+				{
+					112, // 瑞鶴改
+					462, // 瑞鶴改二
+					467, // 瑞鶴改二甲
+				};
 				var shipTable = new int[]
 				{
-					9,   // 吹雪
-					10,  // 白雪
-					32,  // 初雪
-					33,  // 叢雲
-					201, // 吹雪改
-					202, // 白雪改
-					203, // 初雪改
-					205, // 叢雲改
-					420, // 叢雲改二
-					426, // 吹雪改二
+					112, // 瑞鶴改
+					462, // 瑞鶴改二
+					467, // 瑞鶴改二甲
+					82,  // 伊勢改
+					88,  // 日向改
+					117, // 瑞鳳改
+					108, // 千歳航
+					109, // 千代田航
+					291, // 千歳航改
+					292, // 千代田航改
+					296, // 千歳航改二
+					297, // 千代田航改二
 				};
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets.FirstOrDefault(x => x.Value.IsInSortie).Value;
 				var ships = fleet.Ships;
 
-				if (ships.Count(x => shipTable.Contains(x.Info.Id)) < 4) return;
+				if (!flagshipTable.Contains(ships[0].Info.Id)) return; // 즈이카쿠改 기함
+				if (ships.Count(x => shipTable.Contains(x.Info.Id)) < 6) return;
 
 				count = count.Add(1).Max(max_count);
 
@@ -73,7 +82,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public string GetProgressText()
 		{
-			return count >= max_count ? "완료" : "후부키,시라유키,하츠유키,무라쿠모 포함 편성 2-3 보스전 S승리 " + count.ToString() + " / " + max_count.ToString();
+			return count >= max_count ? "완료" : "즈이카쿠改 기함,치토세航,치요다航,즈이호改,이세改,휴가改 편성 2-4 보스전 S승리 " + count.ToString() + " / " + max_count.ToString();
 		}
 
 		public string SerializeData()

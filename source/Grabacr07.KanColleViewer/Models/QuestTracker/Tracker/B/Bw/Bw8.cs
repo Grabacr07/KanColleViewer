@@ -30,7 +30,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 			{
 				if (!IsTracking) return;
 
-				if (args.MapWorldId != 4 && args.MapAreaId != 4) return; // 4-4
+				if (args.MapWorldId != 4 || args.MapAreaId != 4) return; // 4-4
 				if ("敵東方中枢艦隊" != args.EnemyName) return; // boss
 				if (!"SAB".Contains(args.Rank)) return;
 
