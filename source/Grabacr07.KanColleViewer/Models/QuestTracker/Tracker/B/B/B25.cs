@@ -10,17 +10,17 @@ using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
 	/// <summary>
-	/// 수뢰전대 남서쪽으로!
+	/// 새로운 제2항공전대 출격하라!
 	/// </summary>
-	internal class Bm3 : ITracker
+	internal class B25 : ITracker
 	{
 		private readonly int max_count = 1;
 		private int count;
 
 		public event EventHandler ProcessChanged;
 
-		int ITracker.Id => 257;
-		public QuestType Type => QuestType.Monthly;
+		int ITracker.Id => 250;
+		public QuestType Type => QuestType.OneTime;
 		public bool IsTracking { get; set; }
 
 		private System.EventArgs emptyEventArgs = new System.EventArgs();
@@ -31,16 +31,24 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 			{
 				if (!IsTracking) return;
 
-				if (args.MapWorldId != 1 || args.MapAreaId != 4) return; // 1-4
-				if ("敵機動部隊" != args.EnemyName) return; // boss
-				if (args.Rank != "S") return;
+				if (args.MapWorldId != 5 && args.MapAreaId != 2) return; // 5-2
+				if (args.EnemyName != "敵機動部隊本隊") return; // boss
+				if ("S" != args.Rank) return; // S승리
+
+				var shipTable = new int[]
+				{
+					196, // 飛龍改二
+					90,  // 蒼龍
+					197, // 蒼龍改二
+					279, // 蒼龍改
+				};
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets.FirstOrDefault(x => x.Value.IsInSortie).Value;
+				var ships = fleet.Ships;
 
-				if (fleet.Ships[0].Info.ShipType.Id != 3) return; // 기함 경순양함 이외
-				if (fleet.Ships.Any(x => x.Info.ShipType.Id != 2 && x.Info.ShipType.Id != 3)) return; // 구축함, 경순양함 이외 함종
-				if (fleet.Ships.Count(x => x.Info.ShipType.Id == 3) > 3) return; // 경순양함 3척 이상
-				if (fleet.Ships.Count(x => x.Info.ShipType.Id == 2) < 3) return; // 구축함 3척 미만
+				if (ships[0].Info.Id != 196) return; // 히류改2 기함
+				if (ships.Count(x => shipTable.Contains(x.Info.Id)) < 2) return; // 히류改2, 소류 필요
+				if (ships.Count(x => x.Info.ShipType.Id == 2) < 2) return; // 구축 2 필요
 
 				count = count.Add(1).Max(max_count);
 
@@ -61,7 +69,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public string GetProgressText()
 		{
-			return count >= max_count ? "완료" : "2-5 보스전 S 승리 " + count.ToString() + " / " + max_count.ToString();
+			return count >= max_count ? "완료" : "히류改2 기함,소류,구축 2척 포함 편성 5-2 보스전 S승리 " + count.ToString() + " / " + max_count.ToString();
 		}
 
 		public string SerializeData()

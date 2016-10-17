@@ -59,7 +59,6 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets.FirstOrDefault(x => x.Value.IsInSortie).Value;
 
-				// 3 > 경순양함
 				if (!fleet.Ships.Any(x => x.Info.ShipType.Id == 3)) return; // 경순양함 없음
 				if (fleet.Ships.Count(x => shipList.Contains(x.Info.Id)) < 3) return; // 야마토급, 나가토급, 후소급, 이세급 전함 합계 3척 미만
 

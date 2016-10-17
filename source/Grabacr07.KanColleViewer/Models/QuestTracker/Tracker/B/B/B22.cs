@@ -10,17 +10,17 @@ using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
 	/// <summary>
-	/// 수뢰전대 남서쪽으로!
+	/// 제30구축대(제1차) 출격하라!
 	/// </summary>
-	internal class Bm3 : ITracker
+	internal class B22 : ITracker
 	{
 		private readonly int max_count = 1;
 		private int count;
 
 		public event EventHandler ProcessChanged;
 
-		int ITracker.Id => 257;
-		public QuestType Type => QuestType.Monthly;
+		int ITracker.Id => 244;
+		public QuestType Type => QuestType.OneTime;
 		public bool IsTracking { get; set; }
 
 		private System.EventArgs emptyEventArgs = new System.EventArgs();
@@ -31,16 +31,26 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 			{
 				if (!IsTracking) return;
 
-				if (args.MapWorldId != 1 || args.MapAreaId != 4) return; // 1-4
-				if ("敵機動部隊" != args.EnemyName) return; // boss
-				if (args.Rank != "S") return;
+				if (args.MapWorldId != 3 && args.MapAreaId != 2) return; // 3-2
+				if (args.EnemyName != "敵キス島包囲艦隊") return; // boss
+				if (!"SABC".Contains(args.Rank)) return; // C패배 이상
+
+				var shipTable = new int[]
+				{
+					1,   // 睦月
+					2,   // 如月
+					31,  // 望月
+					164, // 弥生
+					254, // 睦月改
+					255, // 如月改
+					261, // 望月改
+					308, // 弥生改
+					434, // 睦月改二
+					435, // 如月改二
+				};
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets.FirstOrDefault(x => x.Value.IsInSortie).Value;
-
-				if (fleet.Ships[0].Info.ShipType.Id != 3) return; // 기함 경순양함 이외
-				if (fleet.Ships.Any(x => x.Info.ShipType.Id != 2 && x.Info.ShipType.Id != 3)) return; // 구축함, 경순양함 이외 함종
-				if (fleet.Ships.Count(x => x.Info.ShipType.Id == 3) > 3) return; // 경순양함 3척 이상
-				if (fleet.Ships.Count(x => x.Info.ShipType.Id == 2) < 3) return; // 구축함 3척 미만
+				if (fleet.Ships.Count(x => shipTable.Contains(x.Info.Id)) < 4) return;
 
 				count = count.Add(1).Max(max_count);
 
@@ -61,7 +71,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public string GetProgressText()
 		{
-			return count >= max_count ? "완료" : "2-5 보스전 S 승리 " + count.ToString() + " / " + max_count.ToString();
+			return count >= max_count ? "완료" : "무츠키,키사라기,야요이,모치즈키 포함 편성 3-2 보스전 C패배 이상 " + count.ToString() + " / " + max_count.ToString();
 		}
 
 		public string SerializeData()
