@@ -3,38 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
 	/// <summary>
-	/// 구축대를 편성하라!
+	/// 첫 출격!
 	/// </summary>
-	internal class A2 : NonSerializedAttribute, ITracker
+	internal class B1 : ITracker
 	{
-		private readonly int max_count = 4;
+		private readonly int max_count = 1;
 		private int count;
 
 		public event EventHandler ProcessChanged;
 
-		int ITracker.Id => 102;
-		public QuestType Type => QuestType.OneTime;
+		int ITracker.Id => 201;
+		public QuestType Type => QuestType.Daily;
 		public bool IsTracking { get; set; }
 
 		private System.EventArgs emptyEventArgs = new System.EventArgs();
 
 		public void RegisterEvent(TrackManager manager)
 		{
-			manager.HenseiEvent += (sender, args) =>
+			manager.BattleResultEvent += (sender, args) =>
 			{
 				if (!IsTracking) return;
 
-				var homeport = KanColleClient.Current.Homeport;
-				var fleet = homeport.Organization.Fleets.FirstOrDefault(x => x.Value.IsInSortie).Value;
-
-				count = fleet.Ships.Count(x => x.Info.ShipType.Id == 2).Max(max_count);
+				count = count.Add(1).Max(max_count);
 
 				ProcessChanged?.Invoke(this, emptyEventArgs);
 			};
@@ -53,7 +49,18 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public string GetProgressText()
 		{
-			return count >= max_count ? "완료" : "구축 " + count.ToString() + " / " + max_count.ToString() + " 척 편성";
+			return count >= max_count ? "완료" : "전투 " + count.ToString() + " / " + max_count.ToString();
+		}
+
+		public string SerializeData()
+		{
+			return count.ToString();
+		}
+
+		public void DeserializeData(string data)
+		{
+			count = 0;
+			int.TryParse(data, out count);
 		}
 	}
 }

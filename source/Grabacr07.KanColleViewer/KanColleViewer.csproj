@@ -265,6 +265,7 @@
     <Compile Include="Models\QuestTracker\Tracker\B\Bw\Bw7.cs" />
     <Compile Include="Models\QuestTracker\Tracker\B\Bw\Bw8.cs" />
     <Compile Include="Models\QuestTracker\Tracker\B\Bw\Bw9.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\B\B\B1.cs" />
     <Compile Include="Models\QuestTracker\Tracker\C\C2.cs" />
     <Compile Include="Models\QuestTracker\Tracker\C\C3.cs" />
     <Compile Include="Models\QuestTracker\Tracker\C\C4.cs" />
