@@ -175,7 +175,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 			};
 
 			Assembly.GetExecutingAssembly().GetTypes()
-					.Where(x => x.Namespace.StartsWith(TrackerNamespace) && typeof(ITracker).IsAssignableFrom(x))
+					.Where(x => (x.Namespace?.StartsWith(TrackerNamespace) ?? false) && typeof(ITracker).IsAssignableFrom(x))
 					.ToList().ForEach(x => trackingAvailable.Add((ITracker)Activator.CreateInstance(x)));
 
 			ReadFromStorage();
