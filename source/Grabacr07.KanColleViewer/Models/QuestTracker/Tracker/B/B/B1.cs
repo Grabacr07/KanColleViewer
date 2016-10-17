@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 
@@ -18,7 +19,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public event EventHandler ProcessChanged;
 
-		int ITracker.Id => 201;
+		int ITracker.Id => 202;
 		public QuestType Type => QuestType.Daily;
 		public bool IsTracking { get; set; }
 

@@ -35,7 +35,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 			{
 				if (!IsTracking) return;
 
-				if (args.MapAreaId != 6) return; // 6 해역
+				if (args.MapWorldId != 6) return; // 6 해역
 				if (!BossNameList.Contains(args.EnemyName)) return;
 				if (args.Rank != "S") return;
 

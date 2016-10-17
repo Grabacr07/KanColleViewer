@@ -11,31 +11,33 @@ using Grabacr07.KanColleWrapper.Models.Raw;
 
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.EventArgs
 {
-    internal class BattleResultEventArgs
-    {
-        public string EnemyName { get; set; }
-        public TrackerEnemyShip[] EnemyShips { get; set; }
+	internal class BattleResultEventArgs
+	{
+		public string EnemyName { get; set; }
+		public TrackerEnemyShip[] EnemyShips { get; set; }
 
-        public int MapAreaId { get; set; }
+		public int MapWorldId { get; set; }
+		public int MapAreaId { get; set; }
 
-        public bool IsFirstCombat { get; set; }
-        public string Rank { get; set; }
+		public bool IsFirstCombat { get; set; }
+		public string Rank { get; set; }
 
-        public BattleResultEventArgs(TrackerMapInfo MapInfo, TrackerEnemyShip[] enemyShips, kcsapi_battleresult data)
-        {
-            IsFirstCombat = MapInfo.IsFirstCombat;
-            MapAreaId = MapInfo.MapId;
-            EnemyName = data.api_enemy_info.api_deck_name;
-            EnemyShips = enemyShips;
-            Rank = data.api_win_rank;
-        }
-        public BattleResultEventArgs(TrackerMapInfo MapInfo, TrackerEnemyShip[] enemyShips, kcsapi_combined_battle_battleresult data)
-        {
-            IsFirstCombat = MapInfo.IsFirstCombat;
-            MapAreaId = MapInfo.MapId;
-            EnemyName = data.api_enemy_info.api_deck_name;
-            EnemyShips = enemyShips;
-            Rank = data.api_win_rank;
-        }
-    }
+		public BattleResultEventArgs(TrackerMapInfo MapInfo, TrackerEnemyShip[] enemyShips, kcsapi_battleresult data)
+		{
+			IsFirstCombat = MapInfo.IsFirstCombat;
+			MapWorldId = MapInfo.WorldId;
+			MapAreaId = MapInfo.MapId;
+			EnemyName = data.api_enemy_info.api_deck_name;
+			EnemyShips = enemyShips;
+			Rank = data.api_win_rank;
+		}
+		public BattleResultEventArgs(TrackerMapInfo MapInfo, TrackerEnemyShip[] enemyShips, kcsapi_combined_battle_battleresult data)
+		{
+			IsFirstCombat = MapInfo.IsFirstCombat;
+			MapWorldId = MapInfo.WorldId;
+			EnemyName = data.api_enemy_info.api_deck_name;
+			EnemyShips = enemyShips;
+			Rank = data.api_win_rank;
+		}
+	}
 }

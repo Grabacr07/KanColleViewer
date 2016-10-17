@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
 	/// <summary>
-	/// 남방해역 산호제도 앞바다의 제공권을 쥐어라!
+	/// 남서제도 앞바다에 출격하라!
 	/// </summary>
-	internal class Bw9 : ITracker
+	internal class B4 : ITracker
 	{
-		private readonly int max_count = 2;
+		private readonly int max_count = 1;
 		private int count;
 
 		public event EventHandler ProcessChanged;
 
-		int ITracker.Id => 243;
+		int ITracker.Id => 204;
 		public QuestType Type => QuestType.Weekly;
 		public bool IsTracking { get; set; }
 
@@ -26,20 +27,12 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public void RegisterEvent(TrackManager manager)
 		{
-			var BossNameList = new string[]
-			{
-				"敵機動部隊本隊" // 5-2
-			};
-
 			manager.BattleResultEvent += (sender, args) =>
 			{
 				if (!IsTracking) return;
 
-				if (args.MapWorldId != 5) return; // 5 해역
-				if (!BossNameList.Contains(args.EnemyName)) return;
-				if (args.Rank != "S") return;
-
-				count = count.Add(1).Max(max_count);
+				if (args.MapWorldId == 1 && args.MapAreaId == 2) // 1-2
+					count = count.Add(1).Max(max_count);
 
 				ProcessChanged?.Invoke(this, emptyEventArgs);
 			};
@@ -58,7 +51,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public string GetProgressText()
 		{
-			return count >= max_count ? "완료" : "5-2 보스전 S승 " + count.ToString() + " / " + max_count.ToString();
+			return count >= max_count ? "완료" : "1-2 출격 " + count.ToString() + " / " + max_count.ToString();
 		}
 
 		public string SerializeData()

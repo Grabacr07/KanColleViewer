@@ -12,7 +12,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 	/// <summary>
 	/// 구축대를 편성하라!
 	/// </summary>
-	internal class A2 : NonSerializedAttribute, ITracker
+	internal class A2 : NoSerializeTracker, ITracker
 	{
 		private readonly int max_count = 4;
 		private int count;
