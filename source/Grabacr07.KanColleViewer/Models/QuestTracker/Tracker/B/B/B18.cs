@@ -10,17 +10,17 @@ using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
 	/// <summary>
-	/// 항모기동부대 서쪽으로!
+	/// 항공수상타격함대 출격하라!
 	/// </summary>
-	internal class Bm6 : ITracker
+	internal class B18 : ITracker
 	{
 		private readonly int max_count = 1;
 		private int count;
 
 		public event EventHandler ProcessChanged;
 
-		int ITracker.Id => 264;
-		public QuestType Type => QuestType.Monthly;
+		int ITracker.Id => 232;
+		public QuestType Type => QuestType.OneTime;
 		public bool IsTracking { get; set; }
 
 		private System.EventArgs emptyEventArgs = new System.EventArgs();
@@ -31,14 +31,15 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 			{
 				if (!IsTracking) return;
 
-				if (args.MapWorldId != 4 || args.MapAreaId != 2) return; // 5 해역
-				if ("東方主力艦隊" != args.EnemyName) return;
-				if (args.Rank != "S") return;
+				if (args.MapWorldId != 4 && args.MapAreaId != 2) return; // 4-2
+				if (args.EnemyName != "東方主力艦隊") return; // boss
+				if (!"SAB".Contains(args.Rank)) return; // 승리
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets.FirstOrDefault(x => x.Value.IsInSortie).Value;
+				var cnt = fleet.Ships.Count(x => x.Info.ShipType.Id == 6).Max(2)
+					+ fleet.Ships.Count(x => x.Info.ShipType.Id == 10).Max(2);
 
-				if (fleet.Ships.Count(x => x.Info.ShipType.Id == 2) < 2) return; // 구축함 2척 미만
-				if (fleet.Ships.Count(x => new int[] { 7, 11, 18 }.Contains(x.Info.ShipType.Id)) < 2) return; // 공모 2척 미만
+				if (cnt < 4) return;
 
 				count = count.Add(1).Max(max_count);
 
@@ -59,7 +60,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public string GetProgressText()
 		{
-			return count >= max_count ? "완료" : "구축2,공모2 포함 함대로 4-2 보스전 S 승리 " + count.ToString() + " / " + max_count.ToString();
+			return count >= max_count ? "완료" : "항전 2척,항순 2척 포함 편성 4-2 보스전 승리 " + count.ToString() + " / " + max_count.ToString();
 		}
 
 		public string SerializeData()

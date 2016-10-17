@@ -26,17 +26,17 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public void RegisterEvent(TrackManager manager)
 		{
-			var BossNameList = new string[]
-			{
-				"敵主力艦隊",	 // 2-1, 2-5
-				"敵通商破壊艦隊", // 2-2
-				"敵主力打撃群",   // 2-3
-				"敵侵攻中核艦隊", // 2-4
-			};
-
 			manager.BattleResultEvent += (sender, args) =>
 			{
 				if (!IsTracking) return;
+
+				var BossNameList = new string[]
+				{
+					"敵主力艦隊",	 // 2-1, 2-5
+					"敵通商破壊艦隊", // 2-2
+					"敵主力打撃群",   // 2-3
+					"敵侵攻中核艦隊", // 2-4
+				};
 
 				if (args.MapWorldId != 2) return; // 2 해역
 				if (!BossNameList.Contains(args.EnemyName)) return; // 보스명

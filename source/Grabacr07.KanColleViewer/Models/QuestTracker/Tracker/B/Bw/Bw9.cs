@@ -26,17 +26,12 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public void RegisterEvent(TrackManager manager)
 		{
-			var BossNameList = new string[]
-			{
-				"敵機動部隊本隊" // 5-2
-			};
-
 			manager.BattleResultEvent += (sender, args) =>
 			{
 				if (!IsTracking) return;
 
-				if (args.MapWorldId != 5) return; // 5 해역
-				if (!BossNameList.Contains(args.EnemyName)) return;
+				if (args.MapWorldId != 5 && args.MapAreaId != 2) return; // 5-2
+				if ("敵機動部隊本隊" != args.EnemyName) return; // boss
 				if (args.Rank != "S") return;
 
 				count = count.Add(1).Max(max_count);

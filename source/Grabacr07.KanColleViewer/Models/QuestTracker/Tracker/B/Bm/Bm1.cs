@@ -27,35 +27,26 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public void RegisterEvent(TrackManager manager)
 		{
-			var BossNameList = new string[]
-			{
-				"敵主力艦隊" // 2-1, 2-5
-			};
-
-			var shipList = new int[]
-			{
-				62,  // 妙高
-				265, // 妙高改
-				319, // 妙高改二
-				63,  // 那智
-				266, // 那智改
-				192, // 那智改二
-				65,  // 羽黒
-				268, // 羽黒改
-				194, // 羽黒改二
-			};
-
 			manager.BattleResultEvent += (sender, args) =>
 			{
 				if (!IsTracking) return;
 
-				if (args.MapWorldId != 2) return; // 2 해역
-				if (!BossNameList.Contains(args.EnemyName)) return;
-				if (args.Rank != "S") return;
+				var shipList = new int[]
+				{
+					62,  // 妙高
+					265, // 妙高改
+					319, // 妙高改二
+					63,  // 那智
+					266, // 那智改
+					192, // 那智改二
+					65,  // 羽黒
+					268, // 羽黒改
+					194, // 羽黒改二
+				};
 
-				if (!args.EnemyShips.Any(x => x.Id == 542 || x.Id == 543)) return;
-				// 2-5 보스는 전함타급 엘리트 혹은 플래그십이 등장
-				// 542, 543은 각각 타급 엘리트, 플래그십 id
+				if (args.MapWorldId != 2 || args.MapAreaId != 5) return; // 2-5
+				if ("敵主力艦隊" != args.EnemyName) return; // boss
+				if (args.Rank != "S") return;
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets.FirstOrDefault(x => x.Value.IsInSortie).Value;
 				if (fleet.Ships.Count(x => shipList.Contains(x.Info?.Id ?? 0)) != 3) return; // 묘코, 나치, 하구로 없음

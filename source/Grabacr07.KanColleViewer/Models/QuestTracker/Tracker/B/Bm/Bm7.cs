@@ -27,28 +27,16 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public void RegisterEvent(TrackManager manager)
 		{
-			var BossNameList = new string[]
-			{
-				"敵主力艦隊" // 2-1, 2-5
-			};
-
 			manager.BattleResultEvent += (sender, args) =>
 			{
 				if (!IsTracking) return;
 
-				if (args.MapWorldId != 2) return; // 2 해역
-				if (!BossNameList.Contains(args.EnemyName)) return;
+				if (args.MapWorldId != 2 || args.MapAreaId != 5) return; // 2-5
+				if ("敵主力艦隊" != args.EnemyName) return; // boss
 				if (args.Rank != "S") return;
-
-				if (!args.EnemyShips.Any(x => x.Id == 542 || x.Id == 543)) return;
-				// 2-5 보스는 전함타급 엘리트 혹은 플래그십이 등장
-				// 542, 543은 각각 타급 엘리트, 플래그십 id
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets.FirstOrDefault(x => x.Value.IsInSortie).Value;
 
-				// 2 > 구축함
-				// 3 > 경순양함
-				// 5 > 중순양함
 				if (fleet.Ships[0].Info.ShipType.Id != 2) return; // 기함 구축함 이외
 				if (fleet.Ships.Count(x => x.Info.ShipType.Id == 2) != 4) return; // 구축함 4척 이외
 				if (fleet.Ships.Count(x => x.Info.ShipType.Id == 3) != 1) return; // 경순양함 1척 이외

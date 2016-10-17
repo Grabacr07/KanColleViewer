@@ -26,20 +26,20 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public void RegisterEvent(TrackManager manager)
 		{
-			var BossNameList = new string[]
-			{
-				"東方派遣艦隊",		// 4-1
-				"東方主力艦隊",		// 4-2, 4-3
-				"敵東方中枢艦隊",	  // 4-4
-				"リランカ島港湾守備隊" // 4-5
-			};
-
 			manager.BattleResultEvent += (sender, args) =>
 			{
 				if (!IsTracking) return;
 
+				var BossNameList = new string[]
+				{
+					"東方派遣艦隊",			// 4-1
+					"東方主力艦隊",			// 4-2, 4-3
+					"敵東方中枢艦隊",		// 4-4
+					"リランカ島港湾守備隊"	// 4-5
+				};
+
 				if (args.MapWorldId != 4) return; // 4 해역
-				if (!BossNameList.Contains(args.EnemyName)) return;
+				if (!BossNameList.Contains(args.EnemyName)) return; // boss
 				if (!"SAB".Contains(args.Rank)) return;
 
 				count = count.Add(1).Max(max_count);

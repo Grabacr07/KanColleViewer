@@ -27,38 +27,34 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public void RegisterEvent(TrackManager manager)
 		{
-			var BossNameList = new string[]
-			{
-				"敵前線司令艦隊" // 5-1
-			};
-			var shipList = new int[]
-			{
-				131, // 大和
-				136, // 大和改
-				143, // 武蔵
-				148, // 武蔵改
-				80,  // 長門
-				275, // 長門改
-				81,  // 陸奥
-				276, // 陸奥改
-				26,  // 扶桑
-				286, // 扶桑改
-				411, // 扶桑改二
-				27,  // 山城
-				287, // 山城改
-				412, // 山城改二
-				77,  // 伊勢
-				82,  // 伊勢改
-				87,  // 日向
-				88,  // 日向改
-			};
-
 			manager.BattleResultEvent += (sender, args) =>
 			{
 				if (!IsTracking) return;
 
-				if (args.MapWorldId != 5) return; // 5 해역
-				if (!BossNameList.Contains(args.EnemyName)) return;
+				var shipList = new int[]
+				{
+					131, // 大和
+					136, // 大和改
+					143, // 武蔵
+					148, // 武蔵改
+					80,  // 長門
+					275, // 長門改
+					81,  // 陸奥
+					276, // 陸奥改
+					26,  // 扶桑
+					286, // 扶桑改
+					411, // 扶桑改二
+					27,  // 山城
+					287, // 山城改
+					412, // 山城改二
+					77,  // 伊勢
+					82,  // 伊勢改
+					87,  // 日向
+					88,  // 日向改
+				};
+
+				if (args.MapWorldId != 5 || args.MapAreaId != 1) return; // 5-1
+				if ("敵前線司令艦隊" != args.EnemyName) return; // boss
 				if (args.Rank != "S") return;
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets.FirstOrDefault(x => x.Value.IsInSortie).Value;

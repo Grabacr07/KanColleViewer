@@ -30,8 +30,6 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 			{
 				if (!IsTracking) return;
 
-				// 13 > 잠수함
-				// 14 > 잠수항모
 				count = count.Add(
 						args.EnemyShips
 							.Where(x => x.Type == 13 || x.Type == 14)

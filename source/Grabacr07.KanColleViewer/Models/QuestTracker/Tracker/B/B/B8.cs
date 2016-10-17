@@ -9,6 +9,9 @@ using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
+	/// <summary>
+	/// 전함을 출격시켜라!
+	/// </summary>
 	internal class B8 : ITracker
 	{
 		private readonly int max_count = 1;
@@ -17,7 +20,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 		public event EventHandler ProcessChanged;
 
 		int ITracker.Id => 208;
-		public QuestType Type => QuestType.Monthly;
+		public QuestType Type => QuestType.OneTime;
 		public bool IsTracking { get; set; }
 
 		private System.EventArgs emptyEventArgs = new System.EventArgs();

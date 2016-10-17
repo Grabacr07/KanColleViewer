@@ -266,6 +266,11 @@
     <Compile Include="Models\QuestTracker\Tracker\B\Bw\Bw8.cs" />
     <Compile Include="Models\QuestTracker\Tracker\B\Bw\Bw9.cs" />
     <Compile Include="Models\QuestTracker\Tracker\B\B\B1.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\B\B\B10.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\B\B\B11.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\B\B\B12.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\B\B\B13.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\B\B\B14.cs" />
     <Compile Include="Models\QuestTracker\Tracker\B\B\B2.cs" />
     <Compile Include="Models\QuestTracker\Tracker\B\B\B3.cs" />
     <Compile Include="Models\QuestTracker\Tracker\B\B\B4.cs" />
@@ -273,6 +278,7 @@
     <Compile Include="Models\QuestTracker\Tracker\B\B\B6.cs" />
     <Compile Include="Models\QuestTracker\Tracker\B\B\B7.cs" />
     <Compile Include="Models\QuestTracker\Tracker\B\B\B8.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\B\B\B9.cs" />
     <Compile Include="Models\QuestTracker\Tracker\C\C2.cs" />
     <Compile Include="Models\QuestTracker\Tracker\C\C3.cs" />
     <Compile Include="Models\QuestTracker\Tracker\C\C4.cs" />
