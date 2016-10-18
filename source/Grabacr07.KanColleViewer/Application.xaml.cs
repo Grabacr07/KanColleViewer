@@ -42,6 +42,8 @@ namespace Grabacr07.KanColleViewer
 
 	sealed partial class Application : INotifyPropertyChanged, IDisposableHolder
 	{
+		private GCWorker bgGCWorker { get; set; }
+
 		static Application()
 		{
 			AppDomain.CurrentDomain.UnhandledException += (sender, args) => ReportException(sender, args.ExceptionObject as Exception);
@@ -64,6 +66,7 @@ namespace Grabacr07.KanColleViewer
 		protected override void OnStartup(StartupEventArgs e)
 		{
 			this.ChangeState(ApplicationState.Startup);
+			bgGCWorker = new GCWorker();
 
 			// 開発中に多重起動検知ついてると起動できなくて鬱陶しいので
 			// デバッグ時は外すんじゃもん
@@ -164,6 +167,7 @@ namespace Grabacr07.KanColleViewer
 			base.OnExit(e);
 
 			this.compositeDisposable.Dispose();
+			bgGCWorker.Dispose();
 		}
 
 		/// <summary>
