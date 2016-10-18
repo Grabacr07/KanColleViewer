@@ -10,7 +10,7 @@ using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
 	/// <summary>
-	/// 기종 전환 (영전52갑형 이와이소대)
+	/// 기종 전환 (영전52갑형 이와모토소대)
 	/// </summary>
 	internal class F29 : ITracker
 	{
@@ -43,7 +43,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				if (!flagshipTable.Any(x => x == fleet.Ships[0].Id)) return; // 즈이카쿠 비서함
 
 				var slotitems = fleet.Ships[0].Slots;
-				if (!slotitems.Any(x => x.Item.Info.Id == 155 && x.Item.Proficiency == 7)) return; // 숙련도max 영전 21형(이와이소대)
+				if (!slotitems.Any(x => x.Item.Info.Id == 155 && x.Item.Proficiency == 7)) return; // 숙련도max 영전 21형(이와모토소대)
 
 				count = count.Add(args.itemList.Count(x => x == 21)) // 영식 함전 52형
 							.Max(max_count);

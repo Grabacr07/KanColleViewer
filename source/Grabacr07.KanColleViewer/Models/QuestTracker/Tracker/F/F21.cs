@@ -10,7 +10,7 @@ using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
 	/// <summary>
-	/// 시제 의장의 준비
+	/// 시제 의장의 준비 (캐터펄트)
 	/// </summary>
 	internal class F21 : ITracker
 	{

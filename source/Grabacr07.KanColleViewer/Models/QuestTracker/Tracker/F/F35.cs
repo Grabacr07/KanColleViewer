@@ -20,7 +20,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 		public event EventHandler ProcessChanged;
 
 		int ITracker.Id => 637;
-		public QuestType Type => QuestType.Weekly;
+		public QuestType Type => QuestType.Other; // 계절
 		public bool IsTracking { get; set; }
 
 		private System.EventArgs emptyEventArgs = new System.EventArgs();

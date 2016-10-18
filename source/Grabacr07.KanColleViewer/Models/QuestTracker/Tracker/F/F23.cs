@@ -10,7 +10,7 @@ using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
 	/// <summary>
-	/// 시제 항공 의장의 추가제작
+	/// 시제 항공 의장의 추가제작 (캐터펄트)
 	/// </summary>
 	internal class F23 : ITracker
 	{

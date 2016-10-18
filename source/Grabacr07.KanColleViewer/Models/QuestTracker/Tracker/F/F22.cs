@@ -10,7 +10,7 @@ using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
 	/// <summary>
-	/// 정예 함전대의 신 편성
+	/// 정예 함전대의 신 편성 (영전21형 숙련, 월간)
 	/// </summary>
 	internal class F22 : ITracker
 	{

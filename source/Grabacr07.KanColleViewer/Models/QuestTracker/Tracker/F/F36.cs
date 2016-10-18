@@ -10,7 +10,7 @@ using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
 	/// <summary>
-	/// 신형어뢰시제의 개발
+	/// 신형어뢰장비의 개발
 	/// </summary>
 	internal class F36 : NoSerializeTracker, ITracker
 	{
@@ -20,7 +20,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 		public event EventHandler ProcessChanged;
 
 		int ITracker.Id => 639;
-		public QuestType Type => QuestType.Weekly;
+		public QuestType Type => QuestType.OneTime;
 		public bool IsTracking { get; set; }
 
 		private System.EventArgs emptyEventArgs = new System.EventArgs();

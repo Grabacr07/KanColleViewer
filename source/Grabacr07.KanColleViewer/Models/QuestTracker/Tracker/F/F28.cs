@@ -10,7 +10,7 @@ using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
 	/// <summary>
-	/// 함전대의 재편성 (영전21형 이와이소대)
+	/// 함전대의 재편성 (영전21형 이와모토소대)
 	/// </summary>
 	internal class F28 : ITracker
 	{
