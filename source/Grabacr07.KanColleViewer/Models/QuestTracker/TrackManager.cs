@@ -57,6 +57,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 		public event EventHandler<BaseEventArgs> PowerUpEvent;
 		public event EventHandler<BaseEventArgs> ReModelEvent;
 		public event EventHandler HenseiEvent;
+		public event EventHandler EquipEvent;
 
 		public readonly System.EventArgs EmptyEventArg = new System.EventArgs();
 		public event EventHandler QuestsEventChanged;
@@ -84,6 +85,11 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 						x.State.Updated += (_, _2) => CatchHelper(() => HenseiEvent?.Invoke(this, this.EmptyEventArg));
 				}
 			};
+			// 장비 변경
+			proxy.api_req_kaisou_slot_exchange_index.TryParse<kcsapi_slot_exchange_index>()
+				.Subscribe(x => EquipEvent?.Invoke(this, this.EmptyEventArg));
+			proxy.api_req_kaisou_slot_deprive.TryParse<kcsapi_slot_deprive>()
+				.Subscribe(x => EquipEvent?.Invoke(this, this.EmptyEventArg));
 
 			// 연습전 종료
 			proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_practice/battle_result")
@@ -185,6 +191,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 				.Subscribe(x => new System.Threading.Thread(ProcessQuests).Start());
 
 			HenseiEvent?.Invoke(this, EmptyEventArg);
+			EquipEvent?.Invoke(this, EmptyEventArg);
 			QuestsEventChanged?.Invoke(this, EmptyEventArg);
 		}
 
@@ -230,6 +237,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 			}
 
 			HenseiEvent?.Invoke(this, EmptyEventArg);
+			EquipEvent?.Invoke(this, EmptyEventArg);
 			QuestsEventChanged?.Invoke(this, EmptyEventArg);
 			WriteToStorage();
 		}
