@@ -1,15 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Threading;
 
 namespace Grabacr07.KanColleViewer.Models
 {
-	internal class GCWorker : IDisposable
+	internal sealed class GCWorker : IDisposable
 	{
-		protected bool GCWorking { get; set; } = false;
-		protected Thread GCThread { get; }
+		[DllImport("kernel32.dll", EntryPoint = "SetProcessWorkingSetSize", SetLastError = true, CallingConvention = CallingConvention.StdCall)]
+		private static extern bool SetProcessWorkingSetSize(IntPtr proc, int min, int max);
+
+		private bool GCWorking { get; set; } = false;
+		private Thread GCThread { get; }
 
 		public GCWorker()
 		{
@@ -25,13 +27,21 @@ namespace Grabacr07.KanColleViewer.Models
 					if (cnt == 0)
 					{
 						cnt = 60;
-						GC.Collect();
+						this.Collect();
 					}
 				}
 			});
 
 			GCWorking = true;
 			GCThread.Start();
+		}
+		private void Collect()
+		{
+			GC.Collect();
+			GC.WaitForPendingFinalizers();
+
+			if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+				SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1);
 		}
 
 		~GCWorker()
