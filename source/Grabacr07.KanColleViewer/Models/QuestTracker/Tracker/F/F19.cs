@@ -42,7 +42,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets[0];
 				if (!flagshipTable.Any(x => x == fleet.Ships[0].Info.Id)) return; // 쇼카쿠 비서함
 
-					var slotitems = fleet.Ships[0].Slots;
+				var slotitems = fleet.Ships[0].Slots;
 				if (!slotitems.Any(x => x.Item.Info.Id == 143)) return; // 97식 함상공격기(무라타대)
 
 				count = count.Add(args.itemList.Count(x => x == 17)) // 텐잔
