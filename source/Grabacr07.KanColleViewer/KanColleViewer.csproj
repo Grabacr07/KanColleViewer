@@ -420,7 +420,17 @@
     <Compile Include="Models\QuestTracker\Tracker\F\F19.cs" />
     <Compile Include="Models\QuestTracker\Tracker\F\F2.cs" />
     <Compile Include="Models\QuestTracker\Tracker\F\F20.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\F\F21.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\F\F22.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\F\F23.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\F\F24.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\F\F25.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\F\F26.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\F\F27.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\F\F28.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\F\F29.cs" />
     <Compile Include="Models\QuestTracker\Tracker\F\F3.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\F\F30.cs" />
     <Compile Include="Models\QuestTracker\Tracker\F\F4.cs" />
     <Compile Include="Models\QuestTracker\Tracker\F\F5.cs" />
     <Compile Include="Models\QuestTracker\Tracker\F\F6.cs" />

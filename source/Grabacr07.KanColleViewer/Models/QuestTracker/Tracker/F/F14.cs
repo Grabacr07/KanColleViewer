@@ -56,7 +56,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public string GetProgressText()
 		{
-			return count >= max_count ? "완료" : "비서함에 99식 함상폭격기(에구사대) 장착 후 스이세이 폐기 " + count.ToString() + " / " + max_count.ToString();
+			return count >= max_count ? "완료" : "비서함에 99식 함상폭격기(에구사대) 장착, 스이세이 폐기 " + count.ToString() + " / " + max_count.ToString();
 		}
 
 		public string SerializeData()
