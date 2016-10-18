@@ -170,13 +170,13 @@
 								<Run Text="Condition"
 									 FontSize="10" />
 
-                                <TextBlock.ToolTip>
-                                    <TextBlock Style="{DynamicResource DefaultTextStyleKey}"
-                                               Foreground="White">
-                                        <Run Text="피로회복까지:" />
-                                        <Run Text="{Binding Condition.ConditionText, Mode=OneWay}" />
-                                    </TextBlock>
-                                </TextBlock.ToolTip>
+								<TextBlock.ToolTip>
+									<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+											   Foreground="White">
+										<Run Text="疲労回復まで:" />
+										<Run Text="{Binding Condition.ConditionText, Mode=OneWay}" />
+									</TextBlock>
+								</TextBlock.ToolTip>
 							</TextBlock>
 
 
@@ -685,11 +685,7 @@
 								   VerticalAlignment="Bottom"
 								   Margin="4,2">
 							<FrameworkElement.ToolTip>
-<<<<<<< HEAD
 								<TextBlock Text="全艦載機で、内部熟練度を最大として計算しています。"
-=======
-								<TextBlock Text="모든 함재기에서 내부숙련도를 최대로 계산합니다"
->>>>>>> 6f4bff9... 종합, 함대, 함대창에서 컨디션 툴팁에 개별 컨디션 회복시간 표시
 										   Style="{DynamicResource DefaultTextStyleKey}" />
 							</FrameworkElement.ToolTip>
 							<Run Text="{Binding State.MaxAirSuperiorityPotential, Mode=OneWay}" />

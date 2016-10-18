@@ -221,30 +221,30 @@
 										</InlineUIContainer>
 										<Run Text="{Binding Ship.Condition, Mode=OneWay}"
 											 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-                                        <LineBreak />
-                                        <Run Text="condition"
+										<LineBreak />
+										<Run Text="condition"
 											 FontSize="9" />
 
-                                        <TextBlock.ToolTip>
-                                            <TextBlock Style="{DynamicResource DefaultTextStyleKey}"
-                                                       Foreground="White">
-                                                <Run Text="피로회복까지:" />
-                                                <Run Text="{Binding Condition.ConditionText, Mode=OneWay}" />
-                                            </TextBlock>
-                                        </TextBlock.ToolTip>
+										<TextBlock.ToolTip>
+											<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+													   Foreground="White">
+												<Run Text="疲労回復まで:" />
+												<Run Text="{Binding Condition.ConditionText, Mode=OneWay}" />
+											</TextBlock>
+										</TextBlock.ToolTip>
 									</TextBlock>
 
-                                    <StackPanel Grid.Column="6"
-                                                Grid.RowSpan="2">
-                                        <kcvc:ColorIndicator Width="55"
-														     LimitedValue="{Binding Ship.Fuel, Mode=OneWay}"
-														     Height="6"
-														     Margin="0,6,0,7" />
-                                        <kcvc:ColorIndicator Width="55"
-														     LimitedValue="{Binding Ship.Bull, Mode=OneWay}"
-														     Height="6"
-														     VerticalAlignment="Top" />
-                                    </StackPanel>
+									<StackPanel Grid.Column="6"
+												Grid.RowSpan="2">
+										<kcvc:ColorIndicator Width="55"
+															 LimitedValue="{Binding Ship.Fuel, Mode=OneWay}"
+															 Height="6"
+															 Margin="0,6,0,7" />
+										<kcvc:ColorIndicator Width="55"
+															 LimitedValue="{Binding Ship.Bull, Mode=OneWay}"
+															 Height="6"
+															 VerticalAlignment="Top" />
+									</StackPanel>
 
 									<ItemsControl Grid.Column="7"
 												  Grid.Row="0"
