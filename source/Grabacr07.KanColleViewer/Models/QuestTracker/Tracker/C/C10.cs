@@ -26,7 +26,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public void RegisterEvent(TrackManager manager)
 		{
-			manager.PractiveResultEvent += (sender, args) =>
+			manager.PracticeResultEvent += (sender, args) =>
 			{
 				if (!IsTracking) return;
 				if (!args.IsSuccess) return;

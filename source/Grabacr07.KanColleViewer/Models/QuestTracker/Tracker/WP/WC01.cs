@@ -9,17 +9,17 @@ using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 {
 	/// <summary>
-	/// 상륙부대연습
+	/// 식의 준비! (그 두번째)
 	/// </summary>
-	internal class C9 : ITracker
+	internal class WC01 : ITracker
 	{
-		private readonly int max_count = 4;
+		private readonly int max_count = 2;
 		private int count;
 
 		public event EventHandler ProcessChanged;
 
-		int ITracker.Id => 312;
-		public QuestType Type => QuestType.Daily; // 오전 5시에 진행도가 초기화됨
+		int ITracker.Id => 306;
+		public QuestType Type => QuestType.Daily; // 오전 5시 초기화
 		public bool IsTracking { get; set; }
 
 		private System.EventArgs emptyEventArgs = new System.EventArgs();

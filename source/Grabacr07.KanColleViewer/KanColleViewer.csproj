@@ -450,11 +450,19 @@
     <Compile Include="Models\QuestTracker\Tracker\F\F7.cs" />
     <Compile Include="Models\QuestTracker\Tracker\F\F8.cs" />
     <Compile Include="Models\QuestTracker\Tracker\F\F9.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\G\G1.cs" />
     <Compile Include="Models\QuestTracker\Tracker\G\G2.cs" />
     <Compile Include="Models\QuestTracker\Tracker\G\G3.cs" />
     <Compile Include="Models\QuestTracker\Tracker\A\A3.cs" />
     <Compile Include="Models\QuestTracker\Tracker\A\A8.cs" />
     <Compile Include="Models\QuestTracker\Tracker\A\A30.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\G\G4.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\WP\WA02.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\WP\WB01.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\WP\WB02.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\WP\WP01.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\WP\WC01.cs" />
+    <Compile Include="Models\QuestTracker\Tracker\WP\WA01.cs" />
     <Compile Include="Models\QuestTracker\TrackManager.cs" />
     <Compile Include="Models\RelayCommand.cs" />
     <Compile Include="Models\ResourceService.cs" />
@@ -1024,6 +1032,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

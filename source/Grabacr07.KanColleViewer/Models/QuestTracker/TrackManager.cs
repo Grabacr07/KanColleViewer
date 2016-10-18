@@ -47,7 +47,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 
 		public event EventHandler<BattleResultEventArgs> BattleResultEvent;
 		public event EventHandler<MissionResultEventArgs> MissionResultEvent;
-		public event EventHandler<PracticeResultEventArgs> PractiveResultEvent;
+		public event EventHandler<PracticeResultEventArgs> PracticeResultEvent;
 		public event EventHandler RepairStartEvent;
 		public event EventHandler ChargeEvent;
 		public event EventHandler<BaseEventArgs> CreateItemEvent;
@@ -94,7 +94,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 			// 연습전 종료
 			proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_practice/battle_result")
 				.TryParse<kcsapi_practice_result>().Subscribe(x =>
-					CatchHelper(() => PractiveResultEvent?.Invoke(this, new PracticeResultEventArgs(x.Data)))
+					CatchHelper(() => PracticeResultEvent?.Invoke(this, new PracticeResultEventArgs(x.Data)))
 				);
 
 			// 근대화 개수

@@ -29,6 +29,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 			manager.PowerUpEvent += (sender, args) =>
 			{
 				if (!IsTracking) return;
+				if (!args.IsSuccess) return;
 
 				count = count.Add(1).Max(max_count);
 
@@ -49,7 +50,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public string GetProgressText()
 		{
-			return count >= max_count ? "완료" : "근대화 개수 " + count.ToString() + " / " + max_count.ToString();
+			return count >= max_count ? "완료" : "근대화 개수 성공 " + count.ToString() + " / " + max_count.ToString();
 		}
 
 		public string SerializeData()
