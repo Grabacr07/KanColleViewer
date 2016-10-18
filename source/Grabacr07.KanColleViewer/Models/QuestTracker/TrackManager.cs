@@ -50,12 +50,12 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 		public event EventHandler<PracticeResultEventArgs> PractiveResultEvent;
 		public event EventHandler RepairStartEvent;
 		public event EventHandler ChargeEvent;
-		public event EventHandler CreateItemEvent;
+		public event EventHandler<BaseEventArgs> CreateItemEvent;
 		public event EventHandler CreateShipEvent;
 		public event EventHandler DestoryShipEvent;
-		public event EventHandler DestoryItemEvent;
-		public event EventHandler PowerUpEvent;
-		public event EventHandler ReModelEvent;
+		public event EventHandler<DestroyItemEventArgs> DestoryItemEvent;
+		public event EventHandler<BaseEventArgs> PowerUpEvent;
+		public event EventHandler<BaseEventArgs> ReModelEvent;
 		public event EventHandler HenseiEvent;
 
 		public readonly System.EventArgs EmptyEventArg = new System.EventArgs();
@@ -93,15 +93,15 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 
 			// 근대화 개수
 			proxy.api_req_kaisou_powerup.TryParse<kcsapi_powerup>()
-				.Subscribe(x => CatchHelper(() => PowerUpEvent?.Invoke(this, this.EmptyEventArg)));
+				.Subscribe(x => CatchHelper(() => PowerUpEvent?.Invoke(this, new BaseEventArgs(x.Data.api_powerup_flag != 0))));
 
 			// 개수공창 개수
 			proxy.api_req_kousyou_remodel_slot.TryParse<kcsapi_remodel_slot>()
-				.Subscribe(x => CatchHelper(() => ReModelEvent?.Invoke(this, this.EmptyEventArg)));
+				.Subscribe(x => CatchHelper(() => ReModelEvent?.Invoke(this, new BaseEventArgs(x.Data.api_remodel_flag != 0))));
 
 			// 폐기
 			proxy.api_req_kousyou_destroyitem2.TryParse<kcsapi_destroyitem2>()
-				.Subscribe(x => CatchHelper(() => DestoryItemEvent?.Invoke(this, this.EmptyEventArg)));
+				.Subscribe(x => CatchHelper(() => DestoryItemEvent?.Invoke(this, new DestroyItemEventArgs(x.Request, x.Data))));
 
 			// 해체
 			proxy.api_req_kousyou_destroyship.TryParse<kcsapi_destroyship>()
@@ -113,7 +113,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 
 			// 개발
 			proxy.api_req_kousyou_createitem.TryParse<kcsapi_createitem>()
-				.Subscribe(x => CatchHelper(() => CreateItemEvent?.Invoke(this, this.EmptyEventArg)));
+				.Subscribe(x => CatchHelper(() => CreateItemEvent?.Invoke(this, new BaseEventArgs(x.Data.api_create_flag != 0))));
 
 			// 보급
 			proxy.api_req_hokyu_charge.TryParse<kcsapi_charge>()
