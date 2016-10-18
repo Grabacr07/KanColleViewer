@@ -151,6 +151,7 @@
     <Compile Include="Composition\PluginMetadata.cs" />
     <Compile Include="Models\BrowserZoomFactor.cs" />
     <Compile Include="Models\ExitConfirmationType.cs" />
+    <Compile Include="Models\GCWorker.cs" />
     <Compile Include="Models\IZoomFactor.cs" />
     <Compile Include="Models\NotifierHost.cs" />
     <Compile Include="Models\ProductInfo.cs" />
