@@ -299,6 +299,7 @@
 								<kcvc:ColorIndicator DockPanel.Dock="Top"
 													 LimitedValue="{Binding Fuel, Mode=OneWay}"
 													 Height="5"
+													 Columns="5"
 													 Margin="1,2,0,0" />
 								<Border />
 							</DockPanel>
@@ -326,6 +327,7 @@
 								<kcvc:ColorIndicator DockPanel.Dock="Top"
 													 LimitedValue="{Binding Bull, Mode=OneWay}"
 													 Height="5"
+													 Columns="5"
 													 Margin="1,2,0,0" />
 								<Border />
 							</DockPanel>

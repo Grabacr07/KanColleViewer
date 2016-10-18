@@ -4,17 +4,63 @@
 
 	<Style TargetType="{x:Type controls:ColorIndicator}">
 		<Setter Property="Background"
-				Value="White" />
+				Value="{DynamicResource HighlightForegroundBrushKey}" />
 		<Setter Property="HorizontalContentAlignment"
 				Value="Left" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type controls:ColorIndicator}">
-					<Grid Background="{TemplateBinding Background}">
-						<Border x:Name="PART_Track" />
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*" />
+							<RowDefinition Height="*" />
+						</Grid.RowDefinitions>
+
+						<Border x:Name="PART_Track"
+								Grid.Row="0"
+								Grid.RowSpan="2"
+								Background="{TemplateBinding Background}"
+								Opacity="0.4" />
 						<Border x:Name="PART_Indicator"
+								Grid.Row="0"
+								Grid.RowSpan="2"
 								Background="{TemplateBinding Foreground}"
 								HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+
+						<ItemsControl Grid.Row="0"
+									  ClipToBounds="True">
+							<ItemsControl.Resources>
+								<Style TargetType="{x:Type Rectangle}">
+									<Setter Property="Width"
+											Value="1" />
+									<Setter Property="HorizontalAlignment"
+											Value="Left" />
+									<Setter Property="Fill"
+											Value="{DynamicResource BackgroundBrushKey}" />
+								</Style>
+							</ItemsControl.Resources>
+							<ItemsControl.ItemsPanel>
+								<ItemsPanelTemplate>
+									<UniformGrid Rows="1"
+												 Columns="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:ColorIndicator}}, Path=Columns}" />
+								</ItemsPanelTemplate>
+							</ItemsControl.ItemsPanel>
+							<ItemsControl.ItemsSource>
+								<x:Array Type="{x:Type Rectangle}">
+									<Rectangle Width="0" />
+									<Rectangle />
+									<Rectangle />
+									<Rectangle />
+									<Rectangle />
+									<Rectangle />
+									<Rectangle />
+									<Rectangle />
+									<Rectangle />
+									<Rectangle />
+									<!-- Columns = 10 まで対応 -->
+								</x:Array>
+							</ItemsControl.ItemsSource>
+						</ItemsControl>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>

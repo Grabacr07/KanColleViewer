@@ -13,6 +13,7 @@
 			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
+			 xmlns:converters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters"
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:fleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 			 mc:Ignorable="d"
@@ -22,6 +23,7 @@
 
 	<UserControl.Resources>
 		<kcvv:HasFlagConverter x:Key="HasFlagConverter" />
+		<converters:RangeToBooleanConverter x:Key="RangeToBooleanConverter" />
 	</UserControl.Resources>
 
 	<i:Interaction.Triggers>
@@ -234,12 +236,14 @@
 														 Width="55"
 														 LimitedValue="{Binding Ship.Fuel, Mode=OneWay}"
 														 Height="6"
+														 Columns="5"
 														 Margin="0,6,0,7" />
 									<kcvc:ColorIndicator Grid.Column="6"
 														 Grid.Row="1"
 														 Width="55"
 														 LimitedValue="{Binding Ship.Bull, Mode=OneWay}"
 														 Height="6"
+														 Columns="5"
 														 VerticalAlignment="Top" />
 
 									<ItemsControl Grid.Column="7"
@@ -255,16 +259,104 @@
 										</ItemsControl.Template>
 										<ItemsControl.ItemTemplate>
 											<DataTemplate>
-												<Border x:Name="Elements"
-														ToolTip="{Binding Item.NameWithLevel}"
-														Background="Transparent">
+												<Grid x:Name="Elements"
+													  ToolTip="{Binding Item.NameWithLevel}"
+													  Background="Transparent">
 													<kcvc:SlotItemIcon Type="{Binding Item.Info.IconType}"
 																	   Margin="3,0" />
-												</Border>
+
+													<Grid x:Name="ItemProficiencyBlock"
+														  Background="#66000000"
+														  VerticalAlignment="Top"
+														  HorizontalAlignment="Right"
+														  Panel.ZIndex="1"
+														  Width="12"
+														  Height="12">
+														<Path Stretch="Uniform"
+															  VerticalAlignment="Center"
+															  HorizontalAlignment="Center"
+															  Panel.ZIndex="1"
+															  Width="10"
+															  Height="10">
+															<Path.Style>
+																<Style TargetType="{x:Type Path}">
+																	<Setter Property="Fill"
+																			Value="#FFD49C0F" />
+																	<Style.Triggers>
+																		<DataTrigger Binding="{Binding Item.Proficiency, Converter={StaticResource RangeToBooleanConverter}, ConverterParameter=1-3}"
+																					 Value="True">
+																			<Setter Property="Fill"
+																					Value="#FF98B3CE" />
+																		</DataTrigger>
+																		<DataTrigger Binding="{Binding Item.Proficiency}"
+																					 Value="1">
+																			<Setter Property="Data"
+																					Value="M7,2 L9,2 9,14 7,14Z" />
+																		</DataTrigger>
+																		<DataTrigger Binding="{Binding Item.Proficiency}"
+																					 Value="2">
+																			<Setter Property="Data"
+																					Value="M5,2 L7,2 7,14 5,14Z M8,2 L10,2 10,14 8,14Z" />
+																		</DataTrigger>
+																		<DataTrigger Binding="{Binding Item.Proficiency}"
+																					 Value="3">
+																			<Setter Property="Data"
+																					Value="M4,2 L6,2 6,14 4,14Z M7,2 L9,2 9,14 7,14Z M10,2 L12,2 12,14 10,14Z" />
+																		</DataTrigger>
+																		<DataTrigger Binding="{Binding Item.Proficiency}"
+																					 Value="4">
+																			<Setter Property="Data"
+																					Value="M5.5,2 L7.5,2 10.5,14 8.5,14Z" />
+																		</DataTrigger>
+																		<DataTrigger Binding="{Binding Item.Proficiency}"
+																					 Value="5">
+																			<Setter Property="Data"
+																					Value="M4,2 L6,2 9,14 7,14Z M7,2 L9,2 12,14 10,14Z" />
+																		</DataTrigger>
+																		<DataTrigger Binding="{Binding Item.Proficiency}"
+																					 Value="6">
+																			<Setter Property="Data"
+																					Value="M2,2 L4,2 7,14 5,14Z M5.5,2 L7.5,2 10.5,14 8.5,14Z M9,2 L11,2 14,14 12,14Z" />
+																		</DataTrigger>
+																		<DataTrigger Binding="{Binding Item.Proficiency}"
+																					 Value="7">
+																			<Setter Property="Data"
+																					Value="M4,2 L6,2 9,8 6,14 4,14 7,8Z M8,2 L10,2 13,8 10,14 8,14 11,8Z" />
+																		</DataTrigger>
+																	</Style.Triggers>
+																</Style>
+															</Path.Style>
+														</Path>
+													</Grid>
+
+													<TextBlock x:Name="ItemLevelBlock"
+															   Foreground="White"
+															   Background="#33000000"
+															   Text="{Binding Item.LevelText}"
+															   FontSize="10"
+															   VerticalAlignment="Bottom"
+															   HorizontalAlignment="Right"
+															   Panel.ZIndex="1"
+															   Width="Auto"
+															   Height="Auto"
+															   Padding="1" />
+												</Grid>
 												<DataTemplate.Triggers>
 													<DataTrigger Binding="{Binding Equipped}"
 																 Value="False">
 														<Setter TargetName="Elements"
+																Property="Visibility"
+																Value="Collapsed" />
+													</DataTrigger>
+													<DataTrigger Binding="{Binding Item.LevelText}"
+																 Value="">
+														<Setter TargetName="ItemLevelBlock"
+																Property="Visibility"
+																Value="Collapsed" />
+													</DataTrigger>
+													<DataTrigger Binding="{Binding Item.Proficiency}"
+																 Value="0">
+														<Setter TargetName="ItemProficiencyBlock"
 																Property="Visibility"
 																Value="Collapsed" />
 													</DataTrigger>

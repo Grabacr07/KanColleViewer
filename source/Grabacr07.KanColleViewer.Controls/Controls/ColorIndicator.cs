@@ -41,6 +41,17 @@ namespace Grabacr07.KanColleViewer.Controls
 
 		#endregion
 
+		#region Columns 依存関係プロパティ
+
+		public int Columns
+		{
+			get { return (int)this.GetValue(ColumnsProperty); }
+			set { this.SetValue(ColumnsProperty, value); }
+		}
+		public static readonly DependencyProperty ColumnsProperty =
+			DependencyProperty.Register(nameof(Columns), typeof(int), typeof(ColorIndicator), new UIPropertyMetadata(4));
+
+		#endregion
 
 		private void ChangeColor(LimitedValue value)
 		{
