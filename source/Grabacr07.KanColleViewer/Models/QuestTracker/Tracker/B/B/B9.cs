@@ -32,10 +32,10 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				if (!IsTracking) return;
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets.FirstOrDefault(x => x.Value.IsInSortie).Value;
-				var flagship = fleet.Ships[0].Info.ShipType.Id;
+				var flagship = fleet?.Ships[0].Info.ShipType.Id;
 
 				if (flagship != 7 && flagship != 11 && flagship != 18) return; // 기함 공모 이외
-				if (fleet.Ships.Count(x => x.Info.ShipType.Id == 2) < 3) return; // 구축함 3척 미만
+				if (fleet?.Ships.Count(x => x.Info.ShipType.Id == 2) < 3) return; // 구축함 3척 미만
 
 				count = count.Add(1).Max(max_count);
 

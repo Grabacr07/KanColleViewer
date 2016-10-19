@@ -42,7 +42,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				};
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets[0];
-				if (!flagshipTable.Any(x => x == fleet.Ships[0].Info.Id)) return; // 쇼카쿠/아카기 비서함
+				if (!flagshipTable.Any(x => x == fleet?.Ships[0].Info.Id)) return; // 쇼카쿠/아카기 비서함
 
 				count = count.Add(args.itemList.Count(x => x == 16)) // 97식 함상공격기
 							.Max(max_count);

@@ -36,7 +36,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				if (!"SAB".Contains(args.Rank)) return; // 승리
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets.FirstOrDefault(x => x.Value.IsInSortie).Value;
-				if (fleet.Ships.Count(x => x.Info.ShipType.Id == 13 || x.Info.ShipType.Id == 14) < 2) return;
+				if (fleet?.Ships.Count(x => x.Info.ShipType.Id == 13 || x.Info.ShipType.Id == 14) < 2) return;
 
 				count = count.Add(1).Max(max_count);
 

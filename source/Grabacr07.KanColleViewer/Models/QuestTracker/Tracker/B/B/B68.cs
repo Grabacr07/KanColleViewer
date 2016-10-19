@@ -43,7 +43,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				};
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets.FirstOrDefault(x => x.Value.IsInSortie).Value;
-				var ships = fleet.Ships;
+				var ships = fleet?.Ships;
 
 				if (ships.Count(x => shipTable.Contains(x.Info.Id)) < 3) return;
 				if (ships.Count(x => x.Info.ShipType.Id == 2) < 4) return; // 카와카제,시구레 제외 구축 2척

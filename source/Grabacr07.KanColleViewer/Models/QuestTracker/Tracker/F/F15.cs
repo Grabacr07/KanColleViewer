@@ -32,7 +32,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				if (!IsTracking) return;
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets[0];
-				var slotitems = fleet.Ships[0].Slots;
+				var slotitems = fleet?.Ships[0].Slots;
 
 				if (!slotitems.Any(x => x.Item.Info.Id == 109)) return; // 영식 함상전투기 52병형(601공)
 

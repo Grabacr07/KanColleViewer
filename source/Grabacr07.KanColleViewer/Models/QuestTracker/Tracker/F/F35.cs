@@ -39,9 +39,9 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				};
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets[0];
-				if (!flagshipTable.Any(x => x == fleet.Ships[0].Info.Id)) return; // 호쇼 기함
+				if (!flagshipTable.Any(x => x == fleet?.Ships[0].Info.Id)) return; // 호쇼 기함
 
-				var slotitems = fleet.Ships[0].Slots;
+				var slotitems = fleet?.Ships[0].Slots;
 				if (!slotitems.Any(x => x.Item.Info.Id == 19 && x.Item.Level == 10 && x.Item.Proficiency == 7)) return;
 				// 숙련도max, 개수max 96식함전
 
