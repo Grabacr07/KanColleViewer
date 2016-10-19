@@ -264,6 +264,15 @@
 															<Setter Property="Visibility" Value="Collapsed" />
 														</MultiDataTrigger.Setters>
 													</MultiDataTrigger>
+													<MultiDataTrigger>
+														<MultiDataTrigger.Conditions>
+															<Condition Binding="{Binding DataContext.ShowLostAirplane, ElementName=RootView}" Value="False" />
+															<Condition Binding="{Binding IsAirplane}" Value="False" />
+														</MultiDataTrigger.Conditions>
+														<MultiDataTrigger.Setters>
+															<Setter Property="Visibility" Value="Collapsed" />
+														</MultiDataTrigger.Setters>
+													</MultiDataTrigger>
 												</Style.Triggers>
 											</Style>
 										</TextBlock.Style>

@@ -20,8 +20,8 @@
 			 d:DataContext="{d:DesignInstance viewModels:InformationViewModel}">
 	<Grid>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="Auto" />
 		</Grid.ColumnDefinitions>
 		<Grid.Resources>
@@ -33,7 +33,8 @@
 		</Grid.Resources>
 
 		<StackPanel Orientation="Horizontal"
-					DataContext="{Binding Admiral}">
+					DataContext="{Binding Admiral}"
+					ToolTip="{Binding ToolTip}">
 			<TextBlock>
 				<Run Text="{Binding Model.Nickname, Mode=OneWay}"
 					 Style="{DynamicResource EmphaticTextElementStyleKey}"
@@ -44,8 +45,7 @@
 				<LineBreak />
 				<Run Text="{Binding Model.Comment, Mode=OneWay}" />
 			</TextBlock>
-
-			<TextBlock ToolTip="{Binding ToolTip}">
+			<TextBlock>
 				<Run Text="{Binding Resources.Homeport_FleetHQ, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 				<Run Text="Lv."
 					 Style="{DynamicResource EmphaticTextElementStyleKey}"
@@ -60,91 +60,92 @@
 			</TextBlock>
 		</StackPanel>
 
-        <Grid Grid.Column="1"
-              Margin="8,0"
-              DataContext="{Binding AkashiTimer}"
-              Visibility="{Binding TimerVisibility}"
-              HorizontalAlignment="Right"
-              VerticalAlignment="Center">
+		<Grid Grid.Column="1"
+			  Margin="8,0"
+			  DataContext="{Binding AkashiTimer}"
+			  Visibility="{Binding TimerVisibility}"
+			  HorizontalAlignment="Right"
+			  VerticalAlignment="Center">
 
 
-            <TextBlock Grid.Column="1"
-                       Margin="2,0,2,0">
-                <kcvc:SlotItemIcon Type="Facility" Width="14" Height="14"/>
-                <Run Text="아카시" />
-                <Run Text="" FontSize="15" />
-                <LineBreak />
-                <Run Text="{Binding CurrentTime, Mode=OneWay}" />
-                <Run Text="" FontSize="15" />
-            </TextBlock>
-        </Grid>
+			<TextBlock Grid.Column="1"
+					   TextWrapping="NoWrap"
+					   Margin="2,0,2,0">
+				<kcvc:SlotItemIcon Type="Facility" Width="14" Height="14"/>
+				<Run Text="아카시" />
+				<Run Text="" FontSize="15" />
+				<LineBreak />
+				<Run Text="{Binding CurrentTime, Mode=OneWay}" />
+				<Run Text="" FontSize="15" />
+			</TextBlock>
+		</Grid>
 
-        <StackPanel Grid.Column="2"
+		<StackPanel Grid.Column="2"
 					Orientation="Horizontal"
 					VerticalAlignment="Center">
-            <UniformGrid Columns="1"
+			<UniformGrid Columns="1"
 						 Grid.IsSharedSizeScope="True"
 						 Margin="16,0,0,0">
-                <Panel.Resources>
-                    <DataTemplate DataType="{x:Type contentsVm:MaterialsViewModel+MaterialViewModel}">
-                        <Grid MinWidth="125"
+				<Panel.Resources>
+					<DataTemplate DataType="{x:Type contentsVm:MaterialsViewModel+MaterialViewModel}">
+						<Grid MinWidth="125"
 							  Margin="0,0,4,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+							<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
 									   VerticalAlignment="Bottom">
 								<Run Text="{Binding Display, Mode=OneWay}" />
 								<Run Text=":" />
-                            </TextBlock>
-                            <TextBlock Grid.Column="1"
+							</TextBlock>
+							<TextBlock Grid.Column="1"
 									   Text="{Binding Value, Mode=OneWay}"
 									   Style="{DynamicResource EmphaticTextStyleKey}"
 									   HorizontalAlignment="Right"
 									   VerticalAlignment="Bottom"/>
-                        </Grid>
-                    </DataTemplate>
-                </Panel.Resources>
+						</Grid>
+					</DataTemplate>
+				</Panel.Resources>
 
-                <controls:MetroComboBox ItemsSource="{Binding Materials.Values}"
+				<controls:MetroComboBox ItemsSource="{Binding Materials.Values}"
 										SelectedItem="{Binding Materials.SelectedItem1, Mode=TwoWay}" />
-                <controls:MetroComboBox ItemsSource="{Binding Materials.Values}"
+				<controls:MetroComboBox ItemsSource="{Binding Materials.Values}"
 										SelectedItem="{Binding Materials.SelectedItem2, Mode=TwoWay}" />
-            </UniformGrid>
+			</UniformGrid>
 
-            <UniformGrid Columns="1"
+			<UniformGrid Columns="1"
 						 Grid.IsSharedSizeScope="True"
 						 Margin="16,0,0,0">
-                <Panel.Resources>
-                    <DataTemplate DataType="{x:Type contentsVm:MaterialsViewModel+MaterialViewModel}">
-                        <Grid MinWidth="125"
+				<Panel.Resources>
+					<DataTemplate DataType="{x:Type contentsVm:MaterialsViewModel+MaterialViewModel}">
+						<Grid MinWidth="125"
 							Margin="0,0,4,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+							<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
 									VerticalAlignment="Bottom">
 							<Run Text="{Binding Display, Mode=OneWay}" />
 							<Run Text=":" />
-                            </TextBlock>
-                            <TextBlock Grid.Column="1"
+							</TextBlock>
+							<TextBlock Grid.Column="1"
 									Text="{Binding Value, Mode=OneWay}"
 									Style="{DynamicResource EmphaticTextStyleKey}"
 									HorizontalAlignment="Right"
 									VerticalAlignment="Bottom"/>
-                        </Grid>
-                    </DataTemplate>
-                </Panel.Resources>
+						</Grid>
+					</DataTemplate>
+				</Panel.Resources>
 
-                <controls:MetroComboBox ItemsSource="{Binding Materials.Values}"
+				<controls:MetroComboBox ItemsSource="{Binding Materials.Values}"
 									SelectedItem="{Binding Materials.SelectedItem3, Mode=TwoWay}"
-                                    Visibility="{Binding MaterialExtended, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <controls:MetroComboBox ItemsSource="{Binding Materials.Values}"
+									Visibility="{Binding MaterialExtended, Converter={StaticResource BooleanToVisibilityConverter}}" />
+				<controls:MetroComboBox ItemsSource="{Binding Materials.Values}"
 										SelectedItem="{Binding Materials.SelectedItem4, Mode=TwoWay}"
-                                        Visibility="{Binding MaterialExtended, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            </UniformGrid>
+										Visibility="{Binding MaterialExtended, Converter={StaticResource BooleanToVisibilityConverter}}" />
+			</UniformGrid>
 
 			<Grid>
 				<Grid.RowDefinitions>

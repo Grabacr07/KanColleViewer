@@ -10,15 +10,13 @@ using Grabacr07.KanColleWrapper.Models.Raw;
 
 namespace Grabacr07.KanColleViewer.Models.QuestTracker.EventArgs
 {
-    internal class MissionResultEventArgs
-    {
-        public string Name { get; set; }
-        public bool IsSuccess { get; set; }
+	internal class MissionResultEventArgs : BaseEventArgs
+	{
+		public string Name { get; set; }
 
-        public MissionResultEventArgs(kcsapi_mission_result data)
-        {
-            Name = data.api_quest_name;
-            IsSuccess = data.api_clear_result > 0;
-        }
-    }
+		public MissionResultEventArgs(kcsapi_mission_result data) : base(data.api_clear_result > 0)
+		{
+			Name = data.api_quest_name;
+		}
+	}
 }
