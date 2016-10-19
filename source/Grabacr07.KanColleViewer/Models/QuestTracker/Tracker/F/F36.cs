@@ -39,9 +39,9 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				};
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets[0];
-				if (!flagshipTable.Any(x => x == fleet.Ships[0].Info.Id)) return; // 시마카제 기함
+				if (!flagshipTable.Any(x => x == fleet?.Ships[0].Info.Id)) return; // 시마카제 기함
 
-				var slotitems = fleet.Ships[0].Slots;
+				var slotitems = fleet?.Ships[0].Slots;
 				var cnt = 0;
 
 				if (slotitems.Any(x => x.Item.Info.Id == 58 && x.Item.Level == 10)) cnt++;

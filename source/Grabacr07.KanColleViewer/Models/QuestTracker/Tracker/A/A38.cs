@@ -32,7 +32,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				if (!IsTracking) return;
 
 				var homeport = KanColleClient.Current.Homeport;
-				var flagship = homeport.Organization.Fleets[0].Ships[0];
+				var flagship = homeport.Organization.Fleets[0]?.Ships[0];
 
 				// 妙高改二
 				count = flagship.Info.Id == 319 ? 1 : 0;

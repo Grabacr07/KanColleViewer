@@ -49,7 +49,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				if (args.Rank != "S") return;
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets.FirstOrDefault(x => x.Value.IsInSortie).Value;
-				if (fleet.Ships.Count(x => shipList.Contains(x.Info?.Id ?? 0)) != 3) return; // 묘코, 나치, 하구로 없음
+				if (fleet?.Ships.Count(x => shipList.Contains(x.Info?.Id ?? 0)) != 3) return; // 묘코, 나치, 하구로 없음
 
 				count = count.Add(1).Max(max_count);
 

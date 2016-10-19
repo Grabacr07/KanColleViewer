@@ -61,10 +61,10 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				};
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets.FirstOrDefault(x => x.Value.IsInSortie).Value;
-				var ships = fleet.Ships;
+				var ships = fleet?.Ships;
 
 				if (!flagshipTable.Contains(ships[0].Info.Id)) return; // 아부쿠마 기함
-				if (fleet.Ships.Count(x => shipTable.Contains(x.Info.Id)) < 6) return;
+				if (fleet?.Ships.Count(x => shipTable.Contains(x.Info.Id)) < 6) return;
 
 				count = count.Add(1).Max(max_count);
 

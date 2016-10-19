@@ -32,7 +32,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				if (!IsTracking) return;
 
 				var homeport = KanColleClient.Current.Homeport;
-				count = homeport.Organization.Fleets[0].Ships.Length.Max(max_count);
+				count = homeport.Organization.Fleets[0]?.Ships.Length.Max(max_count);
 
 				ProcessChanged?.Invoke(this, emptyEventArgs);
 			};

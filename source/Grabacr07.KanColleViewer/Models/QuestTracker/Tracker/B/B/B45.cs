@@ -48,7 +48,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				};
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets.FirstOrDefault(x => x.Value.IsInSortie).Value;
-				var ships = fleet.Ships;
+				var ships = fleet?.Ships;
 				if (ships.Length != 4) return;
 				if (ships[0].Info.Id != 437) return; // 기함 아카츠키改2
 				if (ships.Count(x => shipTable.Contains(x.Info.Id)) < 4) return;

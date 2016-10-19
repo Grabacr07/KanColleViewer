@@ -36,7 +36,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				if ("S" != args.Rank) return; // S승리
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets.FirstOrDefault(x => x.Value.IsInSortie).Value;
-				var ships = fleet.Ships;
+				var ships = fleet?.Ships;
 				var flagship = ships[0].Info.ShipType.Id;
 
 				if (flagship != 7) return; // 기함 경모
