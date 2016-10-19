@@ -41,7 +41,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.Current = current;
 			this.Lost = Maximum - Current;
 
-			var x = item.Info.Type;
+			var x = this.Item.Info.Type;
 			this.IsAirplane = x == SlotItemType.艦上戦闘機
 				|| x == SlotItemType.艦上爆撃機
 				|| x == SlotItemType.艦上攻撃機
