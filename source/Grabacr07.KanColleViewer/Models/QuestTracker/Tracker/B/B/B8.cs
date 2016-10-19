@@ -33,7 +33,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets.FirstOrDefault(x => x.Value.IsInSortie).Value;
 
-				if (fleet.Ships[0].Info.ShipType.Id != 8 && fleet.Ships[0].Info.ShipType.Id == 9) return; // 기함 전함
+				if (fleet?.Ships[0].Info.ShipType.Id != 8 && fleet?.Ships[0].Info.ShipType.Id == 9) return; // 기함 전함
 				count = count.Add(1).Max(max_count);
 
 				ProcessChanged?.Invoke(this, emptyEventArgs);

@@ -87,9 +87,9 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 			};
 			// 장비 변경
 			proxy.api_req_kaisou_slot_exchange_index.TryParse<kcsapi_slot_exchange_index>()
-				.Subscribe(x => EquipEvent?.Invoke(this, this.EmptyEventArg));
+				.Subscribe(x => CatchHelper(() => EquipEvent?.Invoke(this, this.EmptyEventArg)));
 			proxy.api_req_kaisou_slot_deprive.TryParse<kcsapi_slot_deprive>()
-				.Subscribe(x => EquipEvent?.Invoke(this, this.EmptyEventArg));
+				.Subscribe(x => CatchHelper(() => EquipEvent?.Invoke(this, this.EmptyEventArg)));
 
 			// 연습전 종료
 			proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_practice/battle_result")

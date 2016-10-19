@@ -36,7 +36,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				if ("S" != args.Rank) return; // S승리
 
 				var fleets = KanColleClient.Current.Homeport.Organization.Fleets;
-				var flagship = fleets[0].Ships[0];
+				var flagship = Fleets[0]?.Ships[0];
 
 				if (flagship.Level >= 90 && flagship.Level <= 99) count = 1;
 				else count = 0;
