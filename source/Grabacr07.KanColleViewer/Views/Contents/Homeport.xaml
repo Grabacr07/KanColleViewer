@@ -69,6 +69,7 @@
 
 
 			<TextBlock Grid.Column="1"
+					   TextWrapping="NoWrap"
 					   Margin="2,0,2,0">
 				<kcvc:SlotItemIcon Type="Facility" Width="14" Height="14"/>
 				<Run Text="아카시" />
