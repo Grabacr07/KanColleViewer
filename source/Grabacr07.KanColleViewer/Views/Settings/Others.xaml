@@ -133,34 +133,47 @@
 			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
 			<TextBlock Text="최적화 설정" Style="{DynamicResource SettingsHeaderTextStyleKey}" />
-			<CheckBox Content="일정 시간마다 메모리를 정리합니다." 
-					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.UseMemoryOptimize}, Path=Value}"
-					  Height="17" 
-					  Margin="15,0,0,10" />
-			<StackPanel Orientation="Horizontal"
-						VerticalAlignment="Center"
-						Margin="15,0,0,10">
-				<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}">
-							<Run Text="메모리 정리 주기" />
-							<Run Text=":" />
-				</TextBlock>
-				<metro:PromptTextBox Margin="4,0"
-									 Prompt=""
-									 Width="35">
-					<metro:PromptTextBox.Text>
-						<Binding Source="{x:Static ms:KanColleSettings.MemoryOptimizePeriod}"
-										 Path="Value"
-										 UpdateSourceTrigger="PropertyChanged">
-							<Binding.ValidationRules>
-								<metro:Int32Rule Min="5" />
-							</Binding.ValidationRules>
-						</Binding>
-					</metro:PromptTextBox.Text>
-				</metro:PromptTextBox>
-				<TextBlock Text="초"
-						   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
-			</StackPanel>
+			<StackPanel Margin="15,0,0,10"
+						Orientation="Vertical"
+						DataContext="{Binding OptimizeSettings}">
+				<CheckBox Height="17"
+						  Margin="0,0,0,2"
+						  Content="일정 시간마다 메모리를 정리합니다." 
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.UseMemoryOptimize}, Path=Value}" />
 
+				<StackPanel Margin="0,0,0,10"
+							Orientation="Horizontal"
+							VerticalAlignment="Center">
+					<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}">
+						<Run Text="메모리 정리 주기" />
+						<Run Text=":" />
+					</TextBlock>
+					<metro:PromptTextBox Margin="4,0"
+										 Prompt=""
+										 Width="35">
+						<metro:PromptTextBox.Text>
+							<Binding Source="{x:Static ms:KanColleSettings.MemoryOptimizePeriod}"
+									 Path="Value"
+									 UpdateSourceTrigger="PropertyChanged">
+								<Binding.ValidationRules>
+									<metro:Int32Rule Min="5" />
+								</Binding.ValidationRules>
+							</Binding>
+						</metro:PromptTextBox.Text>
+					</metro:PromptTextBox>
+					<TextBlock Text="초"
+							   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+
+					<metro2:CallMethodButton Content="즉시 정리하기"
+											 MethodName="RequestGC"
+											 Margin="20,0,0,0" />
+				</StackPanel>
+
+				<TextBlock>
+					<Run Text="현재 메모리 사용량 :  " />
+					<Run Text="{Binding CurrentMemory}" />
+				</TextBlock>
+			</StackPanel>
 
 			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 

@@ -17,6 +17,12 @@ namespace Grabacr07.KanColleViewer.Models
 
 		private int GCCount => KanColleSettings.MemoryOptimizePeriod;
 
+		private static bool GCRequested { get; set; } = false;
+		public static void GCRequest()
+		{
+			GCWorker.GCRequested = true;
+		}
+
 		public GCWorker()
 		{
 			GCThread = new Thread(() =>
@@ -28,7 +34,7 @@ namespace Grabacr07.KanColleViewer.Models
 					if (!GCWorking) break;
 
 					cnt--;
-					if (cnt == 0)
+					if (cnt == 0 || GCWorker.GCRequested)
 					{
 						cnt = GCCount;
 						this.Collect();
@@ -41,7 +47,9 @@ namespace Grabacr07.KanColleViewer.Models
 		}
 		private void Collect()
 		{
-			if (!KanColleSettings.UseMemoryOptimize) return;
+			// GC 가 Request 되었다면 예외적으로 수행
+			if (!KanColleSettings.UseMemoryOptimize && !GCWorker.GCRequested) return;
+			GCWorker.GCRequested = false;
 
 			GC.Collect();
 			GC.WaitForPendingFinalizers();

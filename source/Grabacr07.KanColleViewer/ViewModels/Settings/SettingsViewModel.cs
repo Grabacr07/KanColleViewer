@@ -32,6 +32,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 
 		public UserStyleSheetSettingsViewModel UserStyleSheetSettings { get; }
 
+		public OptimizeSettingsViewModel OptimizeSettings { get; }
+
 		public NavigatorViewModel Navigator { get; set; }
 
 		public BrowserZoomFactor BrowserZoomFactor { get; }
@@ -89,8 +91,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 			this.WindowSettings = new WindowSettingsViewModel().AddTo(this);
 			this.NetworkSettings = new NetworkSettingsViewModel().AddTo(this);
 			this.UserStyleSheetSettings = new UserStyleSheetSettingsViewModel().AddTo(this);
+			this.OptimizeSettings = new Settings.OptimizeSettingsViewModel().AddTo(this);
 
-            this.BrowserZoomFactor = new BrowserZoomFactor { Current = GeneralSettings.BrowserZoomFactor };
+			this.BrowserZoomFactor = new BrowserZoomFactor { Current = GeneralSettings.BrowserZoomFactor };
 			this.BrowserZoomFactor
 				.Subscribe(nameof(this.BrowserZoomFactor.Current), () => GeneralSettings.BrowserZoomFactor.Value = this.BrowserZoomFactor.Current)
 				.AddTo(this);
