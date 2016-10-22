@@ -133,7 +133,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 		public KanColleHost()
 		{
 			this.Loaded += (sender, args) => this.Update();
-			KanColleSettings.FlashElementQuality.ValueChanged += (s, e) => ApplyFlashQuality();
+			KanColleSettings.FlashElementQuality.ValueChanged += (s, e) => ApplyFlashQuality(true);
 		}
 
 		public override void OnApplyTemplate()
@@ -255,7 +255,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 				StatusService.Current.Notify("failed to apply css: " + ex.Message);
 			}
 		}
-		private void ApplyFlashQuality()
+		private void ApplyFlashQuality(bool ReloadRequired = false)
 		{
 			if (!this.firstLoaded) return;
 
@@ -286,8 +286,10 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 						case FlashQuality.High: qualityString = "high"; break;
 					}
 
-					var script = "function kcsFlash_StartFlash(a){var b={id:'externalswf',width:'800',height:'480',wmode:'opaque',quality:'" + qualityString + "',bgcolor:'#000000',allowScriptAccess:'always'};document.getElementById('flashWrap').innerHTML=ConstMessageInfo.InstallFlashMessage,gadgets.flash.embedFlash(a+ConstURLInfo.MainFlashURL+'?api_token='+flashInfo.apiToken+'&api_starttime='+flashInfo.apiStartTime,document.getElementById('flashWrap'),6,b),document.getElementById('adFlashWrap').style.height='0px',document.getElementById('wsFlashWrap').style.height='0px',document.getElementById('flashWrap').style.height='480px',gadgets.window.adjustHeight(ConstGadgetInfo.height)};";
-					script += "typeof kcsLogin_StartLogin!=\"undefined\"?kcsLogin_StartLogin():0;";
+					var script = "";
+					script += "function kcsFlash_StartFlash(a){var b={id:'externalswf',width:'800',height:'480',wmode:'opaque',quality:'" + qualityString + "',bgcolor:'#000000',allowScriptAccess:'always'};document.getElementById('flashWrap').innerHTML=ConstMessageInfo.InstallFlashMessage,gadgets.flash.embedFlash(a+ConstURLInfo.MainFlashURL+'?api_token='+flashInfo.apiToken+'&api_starttime='+flashInfo.apiStartTime,document.getElementById('flashWrap'),6,b),document.getElementById('adFlashWrap').style.height='0px',document.getElementById('wsFlashWrap').style.height='0px',document.getElementById('flashWrap').style.height='480px',gadgets.window.adjustHeight(ConstGadgetInfo.height)};";
+					if(ReloadRequired) script += "kcsLogin_StartLogin();";
+
 					webBrowser.Navigate("javascript:" + script);
 
 					GCWorker.GCRequest();
