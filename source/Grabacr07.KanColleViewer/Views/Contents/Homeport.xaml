@@ -135,7 +135,7 @@
 			</StackPanel>
 			<StackPanel Grid.Column="1"
 						Orientation="Vertical"
-						Margin="5,0"
+						Margin="10,0"
 						DataContext="{Binding AkashiTimer}"
 						Visibility="{Binding TimerVisibility}"
 						HorizontalAlignment="Right"
@@ -144,13 +144,15 @@
 							HorizontalAlignment="Center">
 					<kcvc:SlotItemIcon Type="Facility"
 									   Width="14" Height="14"
-									   VerticalContentAlignment="Bottom"
-									   VerticalAlignment="Bottom" />
+									   VerticalAlignment="Center" />
 					<TextBlock Grid.Column="1"
 							   TextWrapping="NoWrap"
 							   Style="{StaticResource Emphatic13}"
-							   Margin="2,0,2,0"
-							   Text="아카시" />
+							   Margin="2,0,2,0">
+						<Run Text="아카시"
+							 Style="{StaticResource EmphaticRun14}" />
+						<Run Text="" Style="{StaticResource EmphaticRun}" />
+					</TextBlock>
 				</StackPanel>
 				<TextBlock Grid.Column="1"
 						   Margin="2,0,2,0"
@@ -158,8 +160,7 @@
 						   TextAlignment="Center"
 						   TextWrapping="NoWrap">
 					<Run Text="{Binding CurrentTime, Mode=OneWay}" />
-					<Run Text=""
-						 Style="{StaticResource EmphaticRun14}" />
+					<Run Text="" Style="{StaticResource EmphaticRun}" />
 				</TextBlock>
 			</StackPanel>
 		</Grid>
