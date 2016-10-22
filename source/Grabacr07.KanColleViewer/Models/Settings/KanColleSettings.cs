@@ -189,12 +189,17 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		public static SerializableProperty<bool> HomeportBigFont { get; }
 			= new SerializableProperty<bool>(GetKey(), Providers.Viewer, false);
 
-
 		/// <summary>
 		/// 임무 진행도 추적 사용 여부를 설정합니다.
 		/// </summary>
 		public static SerializableProperty<bool> UseQuestTracker { get; }
 			= new SerializableProperty<bool>(GetKey(), Providers.Viewer, true);
+
+		/// <summary>
+		/// 임무 진행도 추적 사용 여부를 설정합니다.
+		/// </summary>
+		public static SerializableProperty<FlashQuality> FlashElementQuality { get; }
+			= new SerializableProperty<FlashQuality>(GetKey(), Providers.Viewer, FlashQuality.High);
 
 		/// <summary>
 		/// 자동 메모리 최적화를 사용할지 여부를 설정합니다.

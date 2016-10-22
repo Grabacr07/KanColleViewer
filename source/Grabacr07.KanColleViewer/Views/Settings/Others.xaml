@@ -134,6 +134,30 @@
 
 			<TextBlock Text="최적화 설정" Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 			<StackPanel Margin="15,0,0,10"
+						Orientation="Horizontal">
+				<DockPanel Margin="0,8,0,0">
+					<TextBlock Grid.Row="1"
+							   Grid.Column="0"
+							   Margin="0,6">
+						<Run Text="플래시 퀄리티 :  " />
+					</TextBlock>
+
+					<metro:PromptComboBox Margin="0,5"
+									  DisplayMemberPath="Display"
+									  ItemsSource="{Binding FlashQualityCollection}"
+									  SelectedValuePath="Value"
+									  SelectedValue="{Binding Source={x:Static ms:KanColleSettings.FlashElementQuality}, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+									  IsReadOnly="True"
+									  MinWidth="100"
+									  Prompt="" />
+
+					<Border Margin="8" />
+
+					<TextBlock Text="변경시 게임화면이 새로고침됩니다. 모항 등 안전한 화면에서만 변경하시기 바랍니다."
+							   Style="{DynamicResource DetailTextStyleKey}" />
+				</DockPanel>
+			</StackPanel>
+			<StackPanel Margin="15,0,0,10"
 						Orientation="Vertical"
 						DataContext="{Binding OptimizeSettings}">
 				<CheckBox Height="17"

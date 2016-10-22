@@ -16,6 +16,7 @@ using SHDocVw;
 using IViewObject = Grabacr07.KanColleViewer.Win32.IViewObject;
 using IServiceProvider = Grabacr07.KanColleViewer.Win32.IServiceProvider;
 using WebBrowser = System.Windows.Controls.WebBrowser;
+using KanColleSettings = Grabacr07.KanColleViewer.Models.Settings.KanColleSettings;
 
 namespace Grabacr07.KanColleViewer.Views.Controls
 {
@@ -122,7 +123,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 		{
 			var instance = (KanColleHost)d;
 
-			instance.PostProcessor();
+			instance.ApplyStyleSheet();
 		}
 
 		#endregion
@@ -132,6 +133,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 		public KanColleHost()
 		{
 			this.Loaded += (sender, args) => this.Update();
+			KanColleSettings.FlashElementQuality.ValueChanged += (s, e) => ApplyFlashQuality();
 		}
 
 		public override void OnApplyTemplate()
@@ -201,7 +203,8 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 		private void HandleLoadCompleted(object sender, NavigationEventArgs e)
 		{
-			this.PostProcessor();
+			this.ApplyStyleSheet();
+			this.ApplyFlashQuality();
 			WebBrowserHelper.SetScriptErrorsSuppressed(this.WebBrowser, true);
 
 			this.firstLoaded = true;
@@ -217,7 +220,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			window.WebBrowser.Navigate(url);
 		}
 
-		private void PostProcessor()
+		private void ApplyStyleSheet()
 		{
 			if (!this.firstLoaded) return;
 
@@ -241,8 +244,26 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 					target.createStyleSheet().cssText = this.UserStyleSheet;
 					this.styleSheetApplied = true;
 				}
+			}
+			catch (Exception) when (Application.Instance.State == ApplicationState.Startup)
+			{
+				// about:blank だから仕方ない
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex);
+				StatusService.Current.Notify("failed to apply css: " + ex.Message);
+			}
+		}
+		private void ApplyFlashQuality()
+		{
+			if (!this.firstLoaded) return;
 
-				/*
+			try
+			{
+				var document = this.WebBrowser.Document as HTMLDocument;
+				if (document == null) return;
+
 				var frames = document.frames;
 				for (var i = 0; i < frames.length; i++)
 				{
@@ -257,13 +278,20 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 					var iframeDocument = webBrowser?.Document as HTMLDocument;
 					if (iframeDocument == null) continue;
 
-					var swf = iframeDocument.getElementById("externalswf");
-					if (swf == null) continue;
+					string qualityString = "high";
+					switch (KanColleSettings.FlashElementQuality.Value)
+					{
+						case FlashQuality.Low: qualityString = "low"; break;
+						case FlashQuality.Medium: qualityString = "medium"; break;
+						case FlashQuality.High: qualityString = "high"; break;
+					}
 
-					swf.setAttribute("quality", "low");
-					break;
+					var script = "function kcsFlash_StartFlash(a){var b={id:'externalswf',width:'800',height:'480',wmode:'opaque',quality:'" + qualityString + "',bgcolor:'#000000',allowScriptAccess:'always'};document.getElementById('flashWrap').innerHTML=ConstMessageInfo.InstallFlashMessage,gadgets.flash.embedFlash(a+ConstURLInfo.MainFlashURL+'?api_token='+flashInfo.apiToken+'&api_starttime='+flashInfo.apiStartTime,document.getElementById('flashWrap'),6,b),document.getElementById('adFlashWrap').style.height='0px',document.getElementById('wsFlashWrap').style.height='0px',document.getElementById('flashWrap').style.height='480px',gadgets.window.adjustHeight(ConstGadgetInfo.height)};";
+					script += "typeof kcsLogin_StartLogin!=\"undefined\"?kcsLogin_StartLogin():0;";
+					webBrowser.Navigate("javascript:" + script);
+
+					GCWorker.GCRequest();
 				}
-				*/
 			}
 			catch (Exception) when (Application.Instance.State == ApplicationState.Startup)
 			{
