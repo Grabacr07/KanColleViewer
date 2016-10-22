@@ -23,7 +23,8 @@
 	</UserControl.Resources>
 
 	<ScrollViewer PanningMode="Both"
-				  VerticalScrollBarVisibility="Auto">
+				  VerticalScrollBarVisibility="Auto"
+				  Padding="10">
 		<StackPanel>
 			<StackPanel>
 				<StackPanel.Style>

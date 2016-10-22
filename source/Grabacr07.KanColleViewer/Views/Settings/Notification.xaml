@@ -20,7 +20,8 @@
 	</UserControl.Resources>
 
 	<ScrollViewer PanningMode="Both"
-				  VerticalScrollBarVisibility="Auto">
+				  VerticalScrollBarVisibility="Auto"
+				  Padding="10">
 		<StackPanel>
 			<TextBlock Text="알림설정"
 					   Style="{DynamicResource SettingsHeaderTextStyleKey}" />

@@ -24,7 +24,8 @@
 			 d:DataContext="{d:DesignInstance settings:SettingsViewModel}">
 
 	<ScrollViewer PanningMode="Both"
-				  VerticalScrollBarVisibility="Auto">
+				  VerticalScrollBarVisibility="Auto"
+				  Padding="10">
 		<Grid Margin="8,0">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" />

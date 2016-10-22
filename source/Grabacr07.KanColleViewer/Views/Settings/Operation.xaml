@@ -19,7 +19,8 @@
 	</UserControl.Resources>
 
 	<ScrollViewer PanningMode="Both"
-				  VerticalScrollBarVisibility="Auto">
+				  VerticalScrollBarVisibility="Auto"
+				  Padding="10">
 		<StackPanel>
 			<TextBlock Text="함대 상태"
 					   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
