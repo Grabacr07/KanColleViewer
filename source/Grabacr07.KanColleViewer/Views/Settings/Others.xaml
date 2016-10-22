@@ -27,210 +27,213 @@
 		</livet:InteractionMessageTrigger>
 	</i:Interaction.Triggers>
 
-	<StackPanel>
-		<TextBlock Text="{Binding Resources.Settings_Screenshot, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
-		<Grid DataContext="{Binding ScreenshotSettings}"
-			  Margin="20,0,0,0">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto" />
-				<RowDefinition Height="Auto" />
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="Auto" />
-			</Grid.ColumnDefinitions>
-			<TextBlock Margin="0,6">
-				<Run Text="{Binding Resources.Settings_Screenshot_FolderTextBox_Label, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-				<Run Text=":  " />
-			</TextBlock>
-			<metro:PromptTextBox Grid.Row="0"
-								 Grid.Column="1"
-								 Text="{Binding Source={x:Static ms:ScreenshotSettings.Destination}, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-								 Prompt="{Binding Resources.Settings_Screenshot_FolderTextBox_Prompt, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-			<metro2:CallMethodButton Grid.Row="0"
-									 Grid.Column="2"
-									 Content="{Binding Resources.Settings_Screenshot_FolderSelectionDialog_OpenButton, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-									 MethodName="OpenDestinationSelectionDialog"
-									 Margin="6,0" />
-			<metro2:CallMethodButton Grid.Row="0"
-									 Grid.Column="3"
-									 Content="{Binding Resources.Settings_Screenshot_OpenFolderButton, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-									 IsEnabled="{Binding CanOpenDestination}"
-									 MethodName="OpenScreenshotFolder"
-									 Margin="0" />
+	<ScrollViewer PanningMode="Both"
+				  VerticalScrollBarVisibility="Auto">
+		<StackPanel>
+			<TextBlock Text="{Binding Resources.Settings_Screenshot, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+					   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+			<Grid DataContext="{Binding ScreenshotSettings}"
+				  Margin="20,0,0,0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<TextBlock Margin="0,6">
+					<Run Text="{Binding Resources.Settings_Screenshot_FolderTextBox_Label, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+					<Run Text=":  " />
+				</TextBlock>
+				<metro:PromptTextBox Grid.Row="0"
+									 Grid.Column="1"
+									 Text="{Binding Source={x:Static ms:ScreenshotSettings.Destination}, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+									 Prompt="{Binding Resources.Settings_Screenshot_FolderTextBox_Prompt, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+				<metro2:CallMethodButton Grid.Row="0"
+										 Grid.Column="2"
+										 Content="{Binding Resources.Settings_Screenshot_FolderSelectionDialog_OpenButton, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+										 MethodName="OpenDestinationSelectionDialog"
+										 Margin="6,0" />
+				<metro2:CallMethodButton Grid.Row="0"
+										 Grid.Column="3"
+										 Content="{Binding Resources.Settings_Screenshot_OpenFolderButton, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+										 IsEnabled="{Binding CanOpenDestination}"
+										 MethodName="OpenScreenshotFolder"
+										 Margin="0" />
 
-			<TextBlock Grid.Row="1"
-					   Grid.Column="0"
-					   Margin="0,6">
-				<Run Text="{Binding Resources.Settings_Screenshot_ImageFormat_Label, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-				<Run Text=":  " />
-			</TextBlock>
-			<StackPanel Grid.Row="1"
-						Grid.Column="1"
-						Grid.ColumnSpan="3"
-						Orientation="Horizontal">
-				<RadioButton Content="PNG"
-							 IsChecked="{Binding Source={x:Static ms:ScreenshotSettings.Format}, Path=Value, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Png}" />
-				<RadioButton Content="JPG"
-							 Margin="16,0,0,0"
-							 IsChecked="{Binding Source={x:Static ms:ScreenshotSettings.Format}, Path=Value, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Jpeg}" />
+				<TextBlock Grid.Row="1"
+						   Grid.Column="0"
+						   Margin="0,6">
+					<Run Text="{Binding Resources.Settings_Screenshot_ImageFormat_Label, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+					<Run Text=":  " />
+				</TextBlock>
+				<StackPanel Grid.Row="1"
+							Grid.Column="1"
+							Grid.ColumnSpan="3"
+							Orientation="Horizontal">
+					<RadioButton Content="PNG"
+								 IsChecked="{Binding Source={x:Static ms:ScreenshotSettings.Format}, Path=Value, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Png}" />
+					<RadioButton Content="JPG"
+								 Margin="16,0,0,0"
+								 IsChecked="{Binding Source={x:Static ms:ScreenshotSettings.Format}, Path=Value, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Jpeg}" />
+				</StackPanel>
+			</Grid>
+
+			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
+
+			<!--<TextBlock Text="テーマ"
+					   Style="{DynamicResource SettingsHeaderTextStyleKey}"
+					   Margin="0,10" />
+
+			<WrapPanel Margin="20,0,0,10">
+				<RadioButton IsChecked="{Binding IsDarkTheme, Mode=TwoWay}"
+							 Margin="0,0,24,0">
+					<TextBlock Text="Dark"
+							   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}"
+							   FontSize="13"
+							   Background="Transparent" />
+				</RadioButton>
+				<RadioButton IsChecked="{Binding IsLightTheme, Mode=TwoWay}">
+					<TextBlock Text="Light"
+							   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}"
+							   FontSize="13"
+							   Background="Transparent" />
+				</RadioButton>
+			</WrapPanel>
+
+			<Rectangle Height="1"
+					   Style="{DynamicResource SeparatorRectangleStyleKey}" />-->
+
+			<TextBlock Text="{Binding Resources.Settings_Language, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+					   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+
+			<metro:PromptComboBox Margin="20,0,0,10"
+								  HorizontalAlignment="Left"
+								  Prompt=""
+								  ItemsSource="{Binding Cultures}"
+								  DisplayMemberPath="DisplayName"
+								  SelectedValuePath="Name"
+								  SelectedValue="{Binding Source={x:Static ms:GeneralSettings.Culture}, Path=Value, Mode=TwoWay}"
+								  IsReadOnly="True"
+								  MinWidth="250" />
+			<CheckBox Content="번역기능을 활성화합니다" 
+					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.EnableTranslations}, Path=Value}"
+					  Height="17" Margin="15,0,0,10"/>
+			<CheckBox Content="번역되지않은 데이터를 Translations 폴더에 저장합니다" 
+					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.EnableAddUntranslated}, Path=Value}"
+					  Height="17" Margin="15,0,0,10"/>
+			<CheckBox Content="번역기를 이용한 자동번역 활성화" 
+					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.AutoTranslateEnable}, Path=Value}"
+					  Height="17" 
+					  Margin="15,0,0,10"/>
+
+			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
+
+			<TextBlock Text="최적화 설정" Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+			<CheckBox Content="일정 시간마다 메모리를 정리합니다." 
+					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.UseMemoryOptimize}, Path=Value}"
+					  Height="17" 
+					  Margin="15,0,0,10" />
+			<StackPanel Orientation="Horizontal"
+						VerticalAlignment="Center"
+						Margin="15,0,0,10">
+				<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}">
+							<Run Text="메모리 정리 주기" />
+							<Run Text=":" />
+				</TextBlock>
+				<metro:PromptTextBox Margin="4,0"
+									 Prompt=""
+									 Width="35">
+					<metro:PromptTextBox.Text>
+						<Binding Source="{x:Static ms:KanColleSettings.MemoryOptimizePeriod}"
+										 Path="Value"
+										 UpdateSourceTrigger="PropertyChanged">
+							<Binding.ValidationRules>
+								<metro:Int32Rule Min="5" />
+							</Binding.ValidationRules>
+						</Binding>
+					</metro:PromptTextBox.Text>
+				</metro:PromptTextBox>
+				<TextBlock Text="초"
+						   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 			</StackPanel>
-		</Grid>
 
-		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
-		<!--<TextBlock Text="テーマ"
-				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
-				   Margin="0,10" />
+			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
-		<WrapPanel Margin="20,0,0,10">
-			<RadioButton IsChecked="{Binding IsDarkTheme, Mode=TwoWay}"
-						 Margin="0,0,24,0">
-				<TextBlock Text="Dark"
-						   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}"
-						   FontSize="13"
-						   Background="Transparent" />
-			</RadioButton>
-			<RadioButton IsChecked="{Binding IsLightTheme, Mode=TwoWay}">
-				<TextBlock Text="Light"
-						   Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}"
-						   FontSize="13"
-						   Background="Transparent" />
-			</RadioButton>
-		</WrapPanel>
+			<TextBlock Text="업데이트 설정" Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+			<CheckBox Content="어플리케이션의 업데이트를 자동으로 수행하거나 알립니다" 
+					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.EnableUpdateNotification}, Path=Value}"
+					  Height="17" 
+					  Margin="15,0,0,10"/>
+			<CheckBox Content="번역파일을 자동으로 업데이트합니다" 
+					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.EnableUpdateTransOnStart}, Path=Value}"
+					  Height="17" 
+					  Margin="15,0,0,10"/>
 
-		<Rectangle Height="1"
-				   Style="{DynamicResource SeparatorRectangleStyleKey}" />-->
+			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
-		<TextBlock Text="{Binding Resources.Settings_Language, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
-
-		<metro:PromptComboBox Margin="20,0,0,10"
-							  HorizontalAlignment="Left"
-							  Prompt=""
-							  ItemsSource="{Binding Cultures}"
-							  DisplayMemberPath="DisplayName"
-							  SelectedValuePath="Name"
-							  SelectedValue="{Binding Source={x:Static ms:GeneralSettings.Culture}, Path=Value, Mode=TwoWay}"
-							  IsReadOnly="True"
-							  MinWidth="250" />
-		<CheckBox Content="번역기능을 활성화합니다" 
-				  IsChecked="{Binding Source={x:Static ms:KanColleSettings.EnableTranslations}, Path=Value}"
-				  Height="17" Margin="15,0,0,10"/>
-		<CheckBox Content="번역되지않은 데이터를 Translations 폴더에 저장합니다" 
-				  IsChecked="{Binding Source={x:Static ms:KanColleSettings.EnableAddUntranslated}, Path=Value}"
-				  Height="17" Margin="15,0,0,10"/>
-		<CheckBox Content="번역기를 이용한 자동번역 활성화" 
-				  IsChecked="{Binding Source={x:Static ms:KanColleSettings.AutoTranslateEnable}, Path=Value}"
-				  Height="17" 
-				  Margin="15,0,0,10"/>
-
-		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
-
-		<TextBlock Text="최적화 설정" Style="{DynamicResource SettingsHeaderTextStyleKey}" />
-		<CheckBox Content="일정 시간마다 메모리를 정리합니다." 
-				  IsChecked="{Binding Source={x:Static ms:KanColleSettings.UseMemoryOptimize}, Path=Value}"
-				  Height="17" 
-				  Margin="15,0,0,10" />
-		<StackPanel Orientation="Horizontal"
-					VerticalAlignment="Center"
-					Margin="15,0,0,10">
-			<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}">
-						<Run Text="메모리 정리 주기" />
-						<Run Text=":" />
+			<TextBlock Style="{DynamicResource SettingsHeaderTextStyleKey}">
+				<Run Text="MMCSS(Multimedia Class Scheduler Service) 설정" />
+				<TextBlock.ToolTip>
+					<TextBlock Text="프로그램 내부의 타이머를 정확하게 계산하는 기능입니다." />
+				</TextBlock.ToolTip>
 			</TextBlock>
-			<metro:PromptTextBox Margin="4,0"
-								 Prompt=""
-								 Width="35">
-				<metro:PromptTextBox.Text>
-					<Binding Source="{x:Static ms:KanColleSettings.MemoryOptimizePeriod}"
-									 Path="Value"
-									 UpdateSourceTrigger="PropertyChanged">
-						<Binding.ValidationRules>
-							<metro:Int32Rule Min="5" />
-						</Binding.ValidationRules>
-					</Binding>
-				</metro:PromptTextBox.Text>
-			</metro:PromptTextBox>
-			<TextBlock Text="초"
-					   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+			<CheckBox Content="MMCSS를 적용합니다. 해당 설정은 어플리케이션을 재시작해야 적용됩니다." 
+					  IsChecked="{Binding Source={x:Static ms:GeneralSettings.MMCSSEnabled}, Path=Value}"
+					  Height="17" 
+					  Margin="15,0,0,10"/>
+
+			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
+
+			<TextBlock Text="유저 스타일 시트"
+					   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+
+			<StackPanel Margin="20,0,0,0">
+				<metro:PromptTextBox Text="{Binding UserStyleSheetSettings.UserStyleSheet, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+									 Height="100"
+									 AcceptsReturn="True"
+									 TextWrapping="NoWrap"
+									 VerticalContentAlignment="Top"
+									 VerticalScrollBarVisibility="Auto"
+									 Prompt="CSS" />
+
+				<Border Height="8" />
+				<DockPanel Margin="-4,0"
+						   DataContext="{Binding UserStyleSheetSettings}"
+						   LastChildFill="False">
+					<Panel.Resources>
+						<Style TargetType="{x:Type metro2:CallMethodButton}"
+							   BasedOn="{StaticResource {x:Type metro2:CallMethodButton}}">
+							<Setter Property="MinWidth"
+									Value="100" />
+							<Setter Property="Margin"
+									Value="4,0" />
+							<Setter Property="Padding"
+									Value="16,4" />
+						</Style>
+					</Panel.Resources>
+					<metro2:CallMethodButton DockPanel.Dock="Left"
+											 MethodTarget="{Binding}"
+											 MethodName="BackToDefaultValue"
+											 Content="기본값으로 설정" />
+					<metro2:CallMethodButton DockPanel.Dock="Right"
+											 MethodTarget="{Binding}"
+											 MethodName="Cancel"
+											 Content="취소"
+											 IsEnabled="{Binding IsEditing}" />
+					<metro2:CallMethodButton DockPanel.Dock="Right"
+											 MethodTarget="{Binding}"
+											 MethodName="Apply"
+											 Content="적용"
+											 IsEnabled="{Binding IsEditing}" />
+				</DockPanel>
+			</StackPanel>
+
+			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 		</StackPanel>
-
-
-		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
-
-		<TextBlock Text="업데이트 설정" Style="{DynamicResource SettingsHeaderTextStyleKey}" />
-		<CheckBox Content="어플리케이션의 업데이트를 자동으로 수행하거나 알립니다" 
-				  IsChecked="{Binding Source={x:Static ms:KanColleSettings.EnableUpdateNotification}, Path=Value}"
-				  Height="17" 
-				  Margin="15,0,0,10"/>
-		<CheckBox Content="번역파일을 자동으로 업데이트합니다" 
-				  IsChecked="{Binding Source={x:Static ms:KanColleSettings.EnableUpdateTransOnStart}, Path=Value}"
-				  Height="17" 
-				  Margin="15,0,0,10"/>
-
-		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
-
-		<TextBlock Style="{DynamicResource SettingsHeaderTextStyleKey}">
-			<Run Text="MMCSS(Multimedia Class Scheduler Service) 설정" />
-			<TextBlock.ToolTip>
-				<TextBlock Text="프로그램 내부의 타이머를 정확하게 계산하는 기능입니다." />
-			</TextBlock.ToolTip>
-		</TextBlock>
-		<CheckBox Content="MMCSS를 적용합니다. 해당 설정은 어플리케이션을 재시작해야 적용됩니다." 
-				  IsChecked="{Binding Source={x:Static ms:GeneralSettings.MMCSSEnabled}, Path=Value}"
-				  Height="17" 
-				  Margin="15,0,0,10"/>
-
-		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
-
-		<TextBlock Text="유저 스타일 시트"
-				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
-
-		<StackPanel Margin="20,0,0,0">
-			<metro:PromptTextBox Text="{Binding UserStyleSheetSettings.UserStyleSheet, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-								 Height="100"
-								 AcceptsReturn="True"
-								 TextWrapping="NoWrap"
-								 VerticalContentAlignment="Top"
-								 VerticalScrollBarVisibility="Auto"
-								 Prompt="CSS" />
-
-			<Border Height="8" />
-			<DockPanel Margin="-4,0"
-					   DataContext="{Binding UserStyleSheetSettings}"
-					   LastChildFill="False">
-				<Panel.Resources>
-					<Style TargetType="{x:Type metro2:CallMethodButton}"
-						   BasedOn="{StaticResource {x:Type metro2:CallMethodButton}}">
-						<Setter Property="MinWidth"
-								Value="100" />
-						<Setter Property="Margin"
-								Value="4,0" />
-						<Setter Property="Padding"
-								Value="16,4" />
-					</Style>
-				</Panel.Resources>
-				<metro2:CallMethodButton DockPanel.Dock="Left"
-										 MethodTarget="{Binding}"
-										 MethodName="BackToDefaultValue"
-										 Content="기본값으로 설정" />
-				<metro2:CallMethodButton DockPanel.Dock="Right"
-										 MethodTarget="{Binding}"
-										 MethodName="Cancel"
-										 Content="취소"
-										 IsEnabled="{Binding IsEditing}" />
-				<metro2:CallMethodButton DockPanel.Dock="Right"
-										 MethodTarget="{Binding}"
-										 MethodName="Apply"
-										 Content="적용"
-										 IsEnabled="{Binding IsEditing}" />
-			</DockPanel>
-		</StackPanel>
-
-		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
-	</StackPanel>
+	</ScrollViewer>
 </UserControl>
