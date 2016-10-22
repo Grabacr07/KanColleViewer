@@ -56,7 +56,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 					var ships = fleet.Value.Ships;
 					if (ships.Length != 0) continue;
 
-					if (!flagshipTable.Contains(ships[0].Info.Id)) continue; // 기함 카스미
+					if (!flagshipTable.Contains((ships[0]?.Info.Id ?? 0))) continue; // 기함 카스미
 
 					count = Math.Max(
 						count,

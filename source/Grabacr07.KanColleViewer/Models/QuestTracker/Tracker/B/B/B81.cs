@@ -33,7 +33,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 				if (args.MapWorldId != 5 || args.MapAreaId != 3) return; // 5-3
 				if (args.EnemyName != "敵サーモン方面主力艦隊") return; // boss
-				if ("S" == args.Rank) return; // S승리
+				if (!"SA".Contains(args.Rank)) return; // S승리
 
 				count = count.Add(1).Max(max_count);
 
@@ -54,7 +54,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 		public string GetProgressText()
 		{
-			return count >= max_count ? "완료" : "5-3 보스전 S승리 " + count.ToString() + " / " + max_count.ToString();
+			return count >= max_count ? "완료" : "5-3 보스전 A승리 이상 " + count.ToString() + " / " + max_count.ToString();
 		}
 
 		public string SerializeData()

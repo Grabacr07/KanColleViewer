@@ -50,7 +50,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 					var ships = fleet.Value.Ships;
 					if (ships.Length <= 0) continue;
 
-					if (ships[0].Info.Id != 437) continue; // 暁改二
+					if ((ships[0]?.Info.Id ?? 0) != 437) continue; // 暁改二
 
 					count = Math.Max(
 						count,

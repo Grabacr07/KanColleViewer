@@ -54,7 +54,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 					var ships = fleet.Value.Ships;
 					if (ships.Length <= 0) continue;
 
-					if (!flagship.Contains(ships[0].Info.Id)) continue; // 나토리 기함
+					if (!flagship.Contains((ships[0]?.Info.Id ?? 0))) continue; // 나토리 기함
 
 					count = Math.Max(
 						count,

@@ -37,7 +37,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets.FirstOrDefault(x => x.Value.IsInSortie).Value;
 				var ships = fleet?.Ships;
-				var flagship = ships[0].Info.ShipType.Id;
+				var flagship = ships[0]?.Info.ShipType.Id;
 
 				if (flagship != 3 && flagship != 4 && flagship != 21) return; // 기함 경순/중뇌순/연순
 				if (ships.Count(x => x.Info.ShipType.Id == 2) < 4) return; // 구축 4척
