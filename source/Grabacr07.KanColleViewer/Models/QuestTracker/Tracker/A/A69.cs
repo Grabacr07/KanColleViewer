@@ -50,7 +50,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 					var ships = fleet.Value.Ships;
 					if (ships.Length <= 0) continue;
 
-					var flagship = ships[0].Info.ShipType.Id;
+					var flagship = ships[0]?.Info.ShipType.Id;
 					if (flagship != 3 && flagship != 4 && flagship != 21) continue; // 경순, 중뇌순, 연순
 
 					count = Math.Max(

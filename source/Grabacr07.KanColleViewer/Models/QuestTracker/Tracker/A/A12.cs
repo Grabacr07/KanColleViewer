@@ -38,7 +38,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 					var ships = fleet.Value.Ships;
 					if (ships.Length <= 0) continue;
 
-					var flagship = ships[0].Info.ShipType.Id;
+					var flagship = ships[0]?.Info.ShipType.Id;
 
 					// 기함 공모/장갑공모
 					count = Math.Max(

@@ -39,7 +39,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 					count = Math.Max(
 						count,
-						ships[0].Info.Id == 406 ? 1 : 0 // 雲龍改
+						(ships[0]?.Info.Id ?? 0) == 406 ? 1 : 0 // 雲龍改
 					);
 				}
 

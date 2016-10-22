@@ -38,9 +38,9 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				};
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets[0];
-				if (!flagshipTable.Any(x => x == fleet?.Ships[0].Info.Id)) return; // 호쇼 비서함
+				if (!flagshipTable.Any(x => x == (fleet?.Ships[0]?.Info.Id ?? 0))) return; // 호쇼 비서함
 
-				var slotitems = fleet?.Ships[0].Slots;
+				var slotitems = fleet?.Ships[0]?.Slots;
 				if (!slotitems.Any(x => x.Item.Info.Id == 20 && x.Item.Proficiency == 7)) return; // 숙련도max 영식함전21형
 
 				count_1 = count_1.Add(args.itemList.Count(x => x == 20)).Max(2); // 영식함전21형

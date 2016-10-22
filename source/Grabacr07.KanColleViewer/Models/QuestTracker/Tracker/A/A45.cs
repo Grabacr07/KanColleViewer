@@ -35,7 +35,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				var flagship = homeport.Organization.Fleets[0]?.Ships[0];
 
 				// 明石,明石改
-				count = flagship.Info.Id == 182 || flagship.Info.Id == 187 ? 1 : 0;
+				count = (flagship?.Info.Id ?? 0) == 182 || (flagship?.Info.Id ?? 0) == 187 ? 1 : 0;
 
 				ProcessChanged?.Invoke(this, emptyEventArgs);
 			};

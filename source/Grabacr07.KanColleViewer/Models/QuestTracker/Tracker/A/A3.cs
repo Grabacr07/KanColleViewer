@@ -34,7 +34,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				var homeport = KanColleClient.Current.Homeport;
 				var ships = homeport.Organization.Fleets[0]?.Ships;
 
-				if (ships[0].Info.ShipType.Id != 3) // 기함 경순
+				if (ships[0]?.Info.ShipType.Id != 3) // 기함 경순
 					count = 0;
 				else
 				{
