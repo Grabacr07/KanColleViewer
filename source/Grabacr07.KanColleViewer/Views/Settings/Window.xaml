@@ -28,16 +28,20 @@
 		<TextBlock Text="{Binding Resources.Settings_Display, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
-        <StackPanel Orientation="Horizontal"
-                    Margin="20,0,0,5">
-
-            <CheckBox Content="정보 영역의 자원을 확장하기"
+		<StackPanel Orientation="Vertical"
+					Margin="20,0,0,0">
+			<CheckBox Margin="0,0,0,5"
+					  Content="모항 정보 영역의 자원을 확장"
 					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.DisplayMaterialExtended}, Path=Value}" />
-        </StackPanel>
-        
-        <Rectangle Margin="10,7,10,12"
-                   Style="{DynamicResource SeparatorStyleKey}" />
-        
+
+			<CheckBox Margin="0,0,0,5"
+					  Content="모항 정보 폰트를 예전 큰 폰트로 표시"
+					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.HomeportBigFont}, Path=Value}" />
+		</StackPanel>
+		
+		<Rectangle Margin="10,7,10,12"
+				   Style="{DynamicResource SeparatorStyleKey}" />
+		
 		<StackPanel Orientation="Horizontal"
 					Margin="20,0,0,5">
 			<TextBlock Text="어플리케이션 종료시 확인"
@@ -128,10 +132,10 @@
 					   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 			<StackPanel HorizontalAlignment="Left">
-                <CheckBox Margin="0,0,0,8"
-                          Content="레이아웃과 상관 없이 정보 영역을 항상 위쪽에 배치하기"
-                          IsChecked="{Binding AlwaysTopView, Mode=TwoWay}" />
-                <UniformGrid Rows="1"
+				<CheckBox Margin="0,0,0,8"
+						  Content="레이아웃과 상관 없이 정보 영역을 항상 위쪽에 배치하기"
+						  IsChecked="{Binding AlwaysTopView, Mode=TwoWay}" />
+				<UniformGrid Rows="1"
 							 Margin="16,0,0,5">
 					<UniformGrid.Resources>
 						<Style x:Key="LayoutButtonStyleKey"

@@ -27,7 +27,7 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		/// <summary>
 		/// メイン ウィンドウを自動的にリサイズするかどうかを示す設定値を取得します。
 		/// </summary>
-		public SerializableProperty<bool> AutomaticallyResize => this.Cache(key => new SerializableProperty<bool>(key, Providers.Roaming, true));
+		public SerializableProperty<bool> AutomaticallyResize => this.Cache(key => new SerializableProperty<bool>(key, Providers.Viewer, true));
 
 	}
 

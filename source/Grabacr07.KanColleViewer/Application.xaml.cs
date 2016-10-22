@@ -99,6 +99,7 @@ namespace Grabacr07.KanColleViewer
 					var RoamingfilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "grabacr.net");
 					var LocalDirs = Directory.GetDirectories(LocalfilePath).ToList();
 					var RoamingDirs = Directory.GetDirectories(RoamingfilePath).ToList();
+					var ViewerPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.xaml");
 					for (int i = 0; i < LocalDirs.Count; i++)
 					{
 						if (LocalDirs[i] != "KanColleViewer")
@@ -109,8 +110,10 @@ namespace Grabacr07.KanColleViewer
 						if (RoamingDirs[i] != "KanColleViewer")
 							Directory.Delete(Path.Combine(RoamingfilePath, RoamingDirs[i]), true);
 					}
+					File.Delete(ViewerPath);
 					MessageBox.Show("어플리케이션 기동중 문제가 발생하여 일부 설정파일을 초기화합니다.\n프로그램이 종료됩니다", "제독업무도 바빠!", MessageBoxButton.OK, MessageBoxImage.Warning);
 					this.Shutdown();
+					return;
 				}
 				KanColleClient.Current.Settings = new KanColleSettings();
 

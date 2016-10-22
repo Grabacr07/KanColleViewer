@@ -13,6 +13,7 @@ using MetroRadiance.Interop;
 using MetroTrilithon.UI.Controls;
 using mshtml;
 using SHDocVw;
+using IViewObject = Grabacr07.KanColleViewer.Win32.IViewObject;
 using IServiceProvider = Grabacr07.KanColleViewer.Win32.IServiceProvider;
 using WebBrowser = System.Windows.Controls.WebBrowser;
 
@@ -121,7 +122,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 		{
 			var instance = (KanColleHost)d;
 
-			instance.ApplyStyleSheet();
+			instance.PostProcessor();
 		}
 
 		#endregion
@@ -200,7 +201,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 		private void HandleLoadCompleted(object sender, NavigationEventArgs e)
 		{
-			this.ApplyStyleSheet();
+			this.PostProcessor();
 			WebBrowserHelper.SetScriptErrorsSuppressed(this.WebBrowser, true);
 
 			this.firstLoaded = true;
@@ -216,7 +217,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			window.WebBrowser.Navigate(url);
 		}
 
-		private void ApplyStyleSheet()
+		private void PostProcessor()
 		{
 			if (!this.firstLoaded) return;
 
@@ -240,6 +241,29 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 					target.createStyleSheet().cssText = this.UserStyleSheet;
 					this.styleSheetApplied = true;
 				}
+
+				/*
+				var frames = document.frames;
+				for (var i = 0; i < frames.length; i++)
+				{
+					var item = frames.item(i);
+					var provider = item as IServiceProvider;
+					if (provider == null) continue;
+
+					object ppvObject;
+					provider.QueryService(typeof(IWebBrowserApp).GUID, typeof(IWebBrowser2).GUID, out ppvObject);
+					var webBrowser = ppvObject as IWebBrowser2;
+
+					var iframeDocument = webBrowser?.Document as HTMLDocument;
+					if (iframeDocument == null) continue;
+
+					var swf = iframeDocument.getElementById("externalswf");
+					if (swf == null) continue;
+
+					swf.setAttribute("quality", "low");
+					break;
+				}
+				*/
 			}
 			catch (Exception) when (Application.Instance.State == ApplicationState.Startup)
 			{

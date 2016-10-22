@@ -15,7 +15,7 @@ using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
 
-using Grabacr07.KanColleViewer.Models.QuestTracker.Extensions;
+using Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleViewer.Models.QuestTracker.Model;
 using Grabacr07.KanColleViewer.Models.QuestTracker.EventArgs;
 
@@ -62,9 +62,13 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 		public readonly System.EventArgs EmptyEventArg = new System.EventArgs();
 		public event EventHandler QuestsEventChanged;
 
-		private void CatchHelper(Action action)
+		private void Preprocess(Action action)
 		{
-			try { action(); }
+			if (!KanColleSettings.UseQuestTracker) return;
+
+			try {
+				action();
+			}
 			catch { }
 		}
 
@@ -82,82 +86,82 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 				{
 					var fleets = homeport.Organization.Fleets.Select(x => x.Value);
 					foreach (var x in fleets)
-						x.State.Updated += (_, _2) => CatchHelper(() => HenseiEvent?.Invoke(this, this.EmptyEventArg));
+						x.State.Updated += (_, _2) => Preprocess(() => HenseiEvent?.Invoke(this, this.EmptyEventArg));
 				}
 			};
 			// 장비 변경
 			proxy.api_req_kaisou_slot_exchange_index.TryParse<kcsapi_slot_exchange_index>()
-				.Subscribe(x => CatchHelper(() => EquipEvent?.Invoke(this, this.EmptyEventArg)));
+				.Subscribe(x => Preprocess(() => EquipEvent?.Invoke(this, this.EmptyEventArg)));
 			proxy.api_req_kaisou_slot_deprive.TryParse<kcsapi_slot_deprive>()
-				.Subscribe(x => CatchHelper(() => EquipEvent?.Invoke(this, this.EmptyEventArg)));
+				.Subscribe(x => Preprocess(() => EquipEvent?.Invoke(this, this.EmptyEventArg)));
 
 			// 연습전 종료
 			proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_practice/battle_result")
 				.TryParse<kcsapi_practice_result>().Subscribe(x =>
-					CatchHelper(() => PracticeResultEvent?.Invoke(this, new PracticeResultEventArgs(x.Data)))
+					Preprocess(() => PracticeResultEvent?.Invoke(this, new PracticeResultEventArgs(x.Data)))
 				);
 
 			// 근대화 개수
 			proxy.api_req_kaisou_powerup.TryParse<kcsapi_powerup>()
-				.Subscribe(x => CatchHelper(() => PowerUpEvent?.Invoke(this, new BaseEventArgs(x.Data.api_powerup_flag != 0))));
+				.Subscribe(x => Preprocess(() => PowerUpEvent?.Invoke(this, new BaseEventArgs(x.Data.api_powerup_flag != 0))));
 
 			// 개수공창 개수
 			proxy.api_req_kousyou_remodel_slot.TryParse<kcsapi_remodel_slot>()
-				.Subscribe(x => CatchHelper(() => ReModelEvent?.Invoke(this, new BaseEventArgs(x.Data.api_remodel_flag != 0))));
+				.Subscribe(x => Preprocess(() => ReModelEvent?.Invoke(this, new BaseEventArgs(x.Data.api_remodel_flag != 0))));
 
 			// 폐기
 			proxy.api_req_kousyou_destroyitem2.TryParse<kcsapi_destroyitem2>()
-				.Subscribe(x => CatchHelper(() => DestoryItemEvent?.Invoke(this, new DestroyItemEventArgs(x.Request, x.Data))));
+				.Subscribe(x => Preprocess(() => DestoryItemEvent?.Invoke(this, new DestroyItemEventArgs(x.Request, x.Data))));
 
 			// 해체
 			proxy.api_req_kousyou_destroyship.TryParse<kcsapi_destroyship>()
-				.Subscribe(x => CatchHelper(() => DestoryShipEvent?.Invoke(this, this.EmptyEventArg)));
+				.Subscribe(x => Preprocess(() => DestoryShipEvent?.Invoke(this, this.EmptyEventArg)));
 
 			// 건조
 			proxy.api_req_kousyou_createship.TryParse<kcsapi_createship>()
-				.Subscribe(x => CatchHelper(() => CreateShipEvent?.Invoke(this, this.EmptyEventArg)));
+				.Subscribe(x => Preprocess(() => CreateShipEvent?.Invoke(this, this.EmptyEventArg)));
 
 			// 개발
 			proxy.api_req_kousyou_createitem.TryParse<kcsapi_createitem>()
-				.Subscribe(x => CatchHelper(() => CreateItemEvent?.Invoke(this, new BaseEventArgs(x.Data.api_create_flag != 0))));
+				.Subscribe(x => Preprocess(() => CreateItemEvent?.Invoke(this, new BaseEventArgs(x.Data.api_create_flag != 0))));
 
 			// 보급
 			proxy.api_req_hokyu_charge.TryParse<kcsapi_charge>()
-				.Subscribe(x => CatchHelper(() => ChargeEvent?.Invoke(this, this.EmptyEventArg)));
+				.Subscribe(x => Preprocess(() => ChargeEvent?.Invoke(this, this.EmptyEventArg)));
 
 			// 입거
 			proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_nyukyo/start")
-				.Subscribe(x => CatchHelper(() => RepairStartEvent?.Invoke(this, this.EmptyEventArg)));
+				.Subscribe(x => Preprocess(() => RepairStartEvent?.Invoke(this, this.EmptyEventArg)));
 
 			// 원정
 			proxy.api_req_mission_result.TryParse<kcsapi_mission_result>()
-				.Subscribe(x => CatchHelper(() => MissionResultEvent?.Invoke(this, new MissionResultEventArgs(x.Data))));
+				.Subscribe(x => Preprocess(() => MissionResultEvent?.Invoke(this, new MissionResultEventArgs(x.Data))));
 
 			// 출격 (시작, 진격)
 			proxy.api_req_map_start.TryParse<kcsapi_map_start>()
-				.Subscribe(x => CatchHelper(() => MapInfo.Reset(x.Data.api_maparea_id, x.Data.api_mapinfo_no, x.Data.api_no)));
+				.Subscribe(x => Preprocess(() => MapInfo.Reset(x.Data.api_maparea_id, x.Data.api_mapinfo_no, x.Data.api_no)));
 			proxy.api_req_map_next.TryParse<kcsapi_map_start>()
-				.Subscribe(x => CatchHelper(() => MapInfo.Reset(x.Data.api_maparea_id, x.Data.api_mapinfo_no, x.Data.api_no)));
+				.Subscribe(x => Preprocess(() => MapInfo.Reset(x.Data.api_maparea_id, x.Data.api_mapinfo_no, x.Data.api_no)));
 
 			// 통상 - 주간전
 			proxy.api_req_sortie_battle.TryParse<kcsapi_sortie_battle>()
-				.Subscribe(x => CatchHelper(() => battleTracker.BattleProcess(x.Data)));
+				.Subscribe(x => Preprocess(() => battleTracker.BattleProcess(x.Data)));
 
 			// 통상 - 야전
 			proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_battle_midnight/battle")
 				.TryParse<kcsapi_battle_midnight_battle>()
-				.Subscribe(x => CatchHelper(() => battleTracker.BattleProcess(x.Data)));
+				.Subscribe(x => Preprocess(() => battleTracker.BattleProcess(x.Data)));
 
 			// 통상 - 개막야전
 			proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_battle_midnight/sp_midnight")
 				.TryParse<kcsapi_battle_midnight_sp_midnight>()
-				.Subscribe(x => CatchHelper(() => battleTracker.BattleProcess(x.Data)));
+				.Subscribe(x => Preprocess(() => battleTracker.BattleProcess(x.Data)));
 
 			// 전투 종료 (연합함대 포함)
 			proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>()
-				.Subscribe(x => CatchHelper(() => BattleResultEvent?.Invoke(this, new BattleResultEventArgs(MapInfo.AfterCombat(), battleTracker.enemyShips, x.Data))));
+				.Subscribe(x => Preprocess(() => BattleResultEvent?.Invoke(this, new BattleResultEventArgs(MapInfo.AfterCombat(), battleTracker.enemyShips, x.Data))));
 			proxy.api_req_combined_battle_battleresult.TryParse<kcsapi_combined_battle_battleresult>()
-				.Subscribe(x => CatchHelper(() => BattleResultEvent?.Invoke(this, new BattleResultEventArgs(MapInfo.AfterCombat(), battleTracker.enemyShips, x.Data))));
+				.Subscribe(x => Preprocess(() => BattleResultEvent?.Invoke(this, new BattleResultEventArgs(MapInfo.AfterCombat(), battleTracker.enemyShips, x.Data))));
 
 
 			// Register all trackers

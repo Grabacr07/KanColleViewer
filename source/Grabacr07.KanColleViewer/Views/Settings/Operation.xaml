@@ -104,7 +104,6 @@
 
 		<TextBlock Text="함대자동선택"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
-
 		<StackPanel Margin="20,0,0,0">
 			<CheckBox Content="함대가 출격했을때 그 함대를 자동으로 선택"
 					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.AutoFleetSelectWhenSortie}, Path=Value}" />
@@ -112,6 +111,15 @@
 			<Border Height="8" />
 			<CheckBox Content="함대의 편성이 변경되었을때 그 함대를 자동으로 선택"
 					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.AutoFleetSelectWhenShipsChanged}, Path=Value}" />
+		</StackPanel>
+
+		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
+
+		<TextBlock Text="임무"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+		<StackPanel Margin="20,0,0,0">
+			<CheckBox Content="임무 진행도 추적을 사용"
+					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.UseQuestTracker}, Path=Value}" />
 		</StackPanel>
 
 		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />

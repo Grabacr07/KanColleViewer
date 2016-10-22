@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
 
+using Grabacr07.KanColleViewer.Models.Settings;
+
 namespace Grabacr07.KanColleViewer.Models
 {
 	internal sealed class GCWorker : IDisposable
@@ -13,11 +15,13 @@ namespace Grabacr07.KanColleViewer.Models
 		private bool GCWorking { get; set; } = false;
 		private Thread GCThread { get; }
 
+		private int GCCount => KanColleSettings.MemoryOptimizePeriod;
+
 		public GCWorker()
 		{
 			GCThread = new Thread(() =>
 			{
-				int cnt = 15;
+				int cnt = GCCount;
 				while (GCWorking)
 				{
 					Thread.Sleep(1000);
@@ -26,7 +30,7 @@ namespace Grabacr07.KanColleViewer.Models
 					cnt--;
 					if (cnt == 0)
 					{
-						cnt = 15;
+						cnt = GCCount;
 						this.Collect();
 					}
 				}
@@ -37,6 +41,8 @@ namespace Grabacr07.KanColleViewer.Models
 		}
 		private void Collect()
 		{
+			if (!KanColleSettings.UseMemoryOptimize) return;
+
 			GC.Collect();
 			GC.WaitForPendingFinalizers();
 

@@ -124,34 +124,66 @@
 				  IsChecked="{Binding Source={x:Static ms:KanColleSettings.EnableAddUntranslated}, Path=Value}"
 				  Height="17" Margin="15,0,0,10"/>
 		<CheckBox Content="번역기를 이용한 자동번역 활성화" 
-                  IsChecked="{Binding Source={x:Static ms:KanColleSettings.AutoTranslateEnable}, Path=Value}"
-                  Height="17" 
-                  Margin="15,0,0,10"/>
+				  IsChecked="{Binding Source={x:Static ms:KanColleSettings.AutoTranslateEnable}, Path=Value}"
+				  Height="17" 
+				  Margin="15,0,0,10"/>
+
+		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
+
+		<TextBlock Text="최적화 설정" Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+		<CheckBox Content="일정 시간마다 메모리를 정리합니다." 
+				  IsChecked="{Binding Source={x:Static ms:KanColleSettings.UseMemoryOptimize}, Path=Value}"
+				  Height="17" 
+				  Margin="15,0,0,10" />
+		<StackPanel Orientation="Horizontal"
+					VerticalAlignment="Center"
+					Margin="15,0,0,10">
+			<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}">
+						<Run Text="메모리 정리 주기" />
+						<Run Text=":" />
+			</TextBlock>
+			<metro:PromptTextBox Margin="4,0"
+								 Prompt=""
+								 Width="35">
+				<metro:PromptTextBox.Text>
+					<Binding Source="{x:Static ms:KanColleSettings.MemoryOptimizePeriod}"
+									 Path="Value"
+									 UpdateSourceTrigger="PropertyChanged">
+						<Binding.ValidationRules>
+							<metro:Int32Rule Min="5" />
+						</Binding.ValidationRules>
+					</Binding>
+				</metro:PromptTextBox.Text>
+			</metro:PromptTextBox>
+			<TextBlock Text="초"
+					   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+		</StackPanel>
+
+
 		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
 		<TextBlock Text="업데이트 설정" Style="{DynamicResource SettingsHeaderTextStyleKey}" />
-
 		<CheckBox Content="어플리케이션의 업데이트를 자동으로 수행하거나 알립니다" 
-                  IsChecked="{Binding Source={x:Static ms:KanColleSettings.EnableUpdateNotification}, Path=Value}"
-                  Height="17" 
-                  Margin="15,0,0,10"/>
+				  IsChecked="{Binding Source={x:Static ms:KanColleSettings.EnableUpdateNotification}, Path=Value}"
+				  Height="17" 
+				  Margin="15,0,0,10"/>
 		<CheckBox Content="번역파일을 자동으로 업데이트합니다" 
-                  IsChecked="{Binding Source={x:Static ms:KanColleSettings.EnableUpdateTransOnStart}, Path=Value}"
-                  Height="17" 
-                  Margin="15,0,0,10"/>
+				  IsChecked="{Binding Source={x:Static ms:KanColleSettings.EnableUpdateTransOnStart}, Path=Value}"
+				  Height="17" 
+				  Margin="15,0,0,10"/>
 
 		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
 		<TextBlock Style="{DynamicResource SettingsHeaderTextStyleKey}">
-            <Run Text="MMCSS(Multimedia Class Scheduler Service) 설정" />
-            <TextBlock.ToolTip>
-                <TextBlock Text="프로그램 내부의 타이머를 정확하게 계산하는 기능입니다." />
-            </TextBlock.ToolTip>
-        </TextBlock>
+			<Run Text="MMCSS(Multimedia Class Scheduler Service) 설정" />
+			<TextBlock.ToolTip>
+				<TextBlock Text="프로그램 내부의 타이머를 정확하게 계산하는 기능입니다." />
+			</TextBlock.ToolTip>
+		</TextBlock>
 		<CheckBox Content="MMCSS를 적용합니다. 해당 설정은 어플리케이션을 재시작해야 적용됩니다." 
-                  IsChecked="{Binding Source={x:Static ms:GeneralSettings.MMCSSEnabled}, Path=Value}"
-                  Height="17" 
-                  Margin="15,0,0,10"/>
+				  IsChecked="{Binding Source={x:Static ms:GeneralSettings.MMCSSEnabled}, Path=Value}"
+				  Height="17" 
+				  Margin="15,0,0,10"/>
 
 		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
