@@ -42,7 +42,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				else
 				{
 					// 기함 공모/장갑공모
-					var flagship = ships[0].Info.ShipType.Id;
+					var flagship = ships[0]?.Info.ShipType.Id;
 
 					if (flagship != 7 && flagship != 11 && flagship != 18)
 						count = 0;

@@ -37,7 +37,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				{
 					var ships = fleet.Value.Ships;
 					if (ships.Length <= 0) continue;
-					if (ships[0].Info.ShipType.Id != 20) continue; // 잠수모함 기함
+					if (ships[0]?.Info.ShipType.Id != 20) continue; // 잠수모함 기함
 
 					count = Math.Max(
 						count,

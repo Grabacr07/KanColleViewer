@@ -52,7 +52,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets.FirstOrDefault(x => x.Value.IsInSortie).Value;
 				var ships = fleet?.Ships;
 
-				if (!shipTable.Contains(ships[0].Info.Id)) return; // 나가토, 무츠, 후소, 야마시로 기함
+				if (!shipTable.Contains((ships[0]?.Info.Id ?? 0))) return; // 나가토, 무츠, 후소, 야마시로 기함
 				if (ships.Count(x => shipTable.Contains(x.Info.Id)) < 4) return; // 미포함
 
 				count = count.Add(1).Max(max_count);

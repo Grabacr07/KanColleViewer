@@ -40,9 +40,9 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				};
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets[0];
-				if (!flagshipTable.Any(x => x == fleet?.Ships[0].Id)) return; // 즈이카쿠 비서함
+				if (!flagshipTable.Any(x => x == fleet?.Ships[0]?.Id)) return; // 즈이카쿠 비서함
 
-				var slotitems = fleet?.Ships[0].Slots;
+				var slotitems = fleet?.Ships[0]?.Slots;
 				if (!slotitems.Any(x => x.Item.Info.Id == 153 && x.Item.Proficiency == 7)) return; // 숙련도max 영식 함전 52형丙(이와이소대)
 
 				count = count.Add(args.itemList.Count(x => x == 60)) // 영식함전62형(폭전)

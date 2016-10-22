@@ -38,7 +38,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets.FirstOrDefault(x => x.Value.IsInSortie).Value;
 				var ships = fleet?.Ships;
 
-				if (ships[0].Info.ShipType.Id != 3) return; // 기함 경순양함 이외
+				if (ships[0]?.Info.ShipType.Id != 3) return; // 기함 경순양함 이외
 				if (ships.Any(x => x.Info.ShipType.Id != 2 && x.Info.ShipType.Id != 3)) return; // 구축함, 경순양함 이외 함종
 				if (ships.Count(x => x.Info.ShipType.Id == 3) > 3) return; // 경순양함 3척 이상
 				if (ships.Count(x => x.Info.ShipType.Id == 2) < 3) return; // 구축함 3척 미만
