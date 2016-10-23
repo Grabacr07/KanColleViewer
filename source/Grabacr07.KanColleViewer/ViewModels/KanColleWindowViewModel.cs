@@ -167,7 +167,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
                 .Where(x => !x.IsSuccess)
                 .Subscribe(x =>
                 {
-                    var text = $"서버에서 201 오류를 전달했습니다.";
+                    var text = $"서버에서 {x.RawData.api_result} 오류를 전달했습니다.";
                     StatusService.Current.Set(text);
                 });
 		}

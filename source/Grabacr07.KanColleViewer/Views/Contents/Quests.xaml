@@ -15,6 +15,7 @@
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 xmlns:ms="clr-namespace:Grabacr07.KanColleViewer.Models.Settings"
 			 mc:Ignorable="d"
 			 d:DesignWidth="600"
 			 d:DesignHeight="300"
@@ -239,6 +240,11 @@
 						</Grid>
 
 						<DataTemplate.Triggers>
+							<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.UseQuestTracker}, Path=Value}" Value="False">
+								<Setter TargetName="QuestProgressBarBox" Property="Visibility" Value="Hidden" />
+								<Setter TargetName="QuestProgressText" Property="Visibility" Value="Hidden" />
+								<Setter TargetName="QuestProgressTextTooltip" Property="Visibility" Value="Hidden" />
+							</DataTrigger>
 							<DataTrigger Binding="{Binding QuestTrackingVisible}" Value="False">
 								<Setter TargetName="QuestProgressBarBox" Property="Visibility" Value="Hidden" />
 								<Setter TargetName="QuestProgressText" Property="Visibility" Value="Hidden" />

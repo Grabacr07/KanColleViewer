@@ -55,12 +55,12 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 
 			try
 			{
-				Providers.Roaming.Load();
+				Providers.Viewer.Load();
 			}
 			catch (Exception)
 			{
 				File.Delete(Providers.RoamingFilePath);
-				Providers.Roaming.Load();
+				Providers.Viewer.Load();
 			}
 
 #pragma warning disable 612
@@ -93,7 +93,7 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 
 			try
 			{
-				Providers.Roaming.Save();
+				Providers.Viewer.Save();
 			}
 			catch (Exception ex)
 			{
