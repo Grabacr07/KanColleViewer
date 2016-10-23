@@ -15,6 +15,7 @@
 			 xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
 			 xmlns:contentsVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 xmlns:ms="clr-namespace:Grabacr07.KanColleViewer.Models.Settings"
 			 mc:Ignorable="d"
 			 d:DesignWidth="600"
 			 d:DataContext="{d:DesignInstance viewModels:InformationViewModel}">
@@ -25,10 +26,73 @@
 			<ColumnDefinition Width="Auto" />
 		</Grid.ColumnDefinitions>
 		<Grid.Resources>
+			<Style TargetType="{x:Type Grid}"
+				   x:Key="ResourceGrid">
+				<Setter Property="MinWidth" Value="125" />
+				<Style.Triggers>
+					<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.HomeportBigFont}, Path=Value}" Value="False">
+						<Setter Property="MinWidth" Value="116" />
+					</DataTrigger>
+				</Style.Triggers>
+			</Style>
 			<Style TargetType="{x:Type TextBlock}"
 				   BasedOn="{StaticResource DefaultTextStyleKey}">
-				<Setter Property="Margin"
-						Value="12,0" />
+				<Setter Property="Margin" Value="12,0" />
+				<Style.Triggers>
+					<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.HomeportBigFont}, Path=Value}" Value="False">
+						<Setter Property="FontSize" Value="11" />
+					</DataTrigger>
+				</Style.Triggers>
+			</Style>
+			<Style TargetType="{x:Type TextBlock}"
+				   x:Key="Emphatic"
+				   BasedOn="{StaticResource EmphaticTextStyleKey}">
+				<Setter Property="FontSize" Value="15" />
+				<Style.Triggers>
+					<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.HomeportBigFont}, Path=Value}" Value="False">
+						<Setter Property="FontSize" Value="13" />
+					</DataTrigger>
+				</Style.Triggers>
+			</Style>
+			<Style TargetType="{x:Type TextBlock}"
+				   x:Key="Emphatic13"
+				   BasedOn="{StaticResource EmphaticTextStyleKey}">
+				<Setter Property="FontSize" Value="13" />
+				<Style.Triggers>
+					<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.HomeportBigFont}, Path=Value}" Value="False">
+						<Setter Property="FontSize" Value="11" />
+					</DataTrigger>
+				</Style.Triggers>
+			</Style>
+			<Style TargetType="{x:Type Run}"
+				   x:Key="EmphaticRun"
+				   BasedOn="{StaticResource EmphaticTextElementStyleKey}">
+				<Setter Property="FontSize" Value="15" />
+				<Style.Triggers>
+					<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.HomeportBigFont}, Path=Value}" Value="False">
+						<Setter Property="FontSize" Value="13" />
+					</DataTrigger>
+				</Style.Triggers>
+			</Style>
+			<Style TargetType="{x:Type Run}"
+				   x:Key="EmphaticRun14"
+				   BasedOn="{StaticResource EmphaticTextElementStyleKey}">
+				<Setter Property="FontSize" Value="14" />
+				<Style.Triggers>
+					<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.HomeportBigFont}, Path=Value}" Value="False">
+						<Setter Property="FontSize" Value="12" />
+					</DataTrigger>
+				</Style.Triggers>
+			</Style>
+			<Style TargetType="{x:Type Run}"
+				   x:Key="EmphaticRun18"
+				   BasedOn="{StaticResource EmphaticTextElementStyleKey}">
+				<Setter Property="FontSize" Value="18" />
+				<Style.Triggers>
+					<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.HomeportBigFont}, Path=Value}" Value="False">
+						<Setter Property="FontSize" Value="16" />
+					</DataTrigger>
+				</Style.Triggers>
 			</Style>
 		</Grid.Resources>
 
@@ -38,11 +102,9 @@
 					ToolTip="{Binding ToolTip}">
 			<TextBlock>
 				<Run Text="{Binding Model.Nickname, Mode=OneWay}"
-					 Style="{DynamicResource EmphaticTextElementStyleKey}"
-					 FontSize="18" />
+					 Style="{StaticResource EmphaticRun18}" />
 				<Run Text="{Binding Model.Rank, Mode=OneWay}"
-					 Style="{DynamicResource EmphaticTextElementStyleKey}"
-					 FontSize="14" />
+					 Style="{StaticResource EmphaticRun14}" />
 				<LineBreak />
 				<Run Text="{Binding Model.Comment, Mode=OneWay}" />
 			</TextBlock>
@@ -62,35 +124,45 @@
 				<TextBlock>
 					<Run Text="{Binding Resources.Homeport_FleetHQ, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 					<Run Text="Lv."
-						 Style="{DynamicResource EmphaticTextElementStyleKey}"
-						 FontSize="14" />
+						 Style="{StaticResource EmphaticRun14}" />
 					<Run Text="{Binding Model.Level, Mode=OneWay}"
-						 Style="{DynamicResource EmphaticTextElementStyleKey}"
-						 FontSize="18" />
+						 Style="{StaticResource EmphaticRun18}" />
 					<LineBreak />
 					<Run Text="Next:" />
 					<Run Text="{Binding Model.ExperienceForNexeLevel, Mode=OneWay}" />
 					<Run Text="exp." />
 				</TextBlock>
 			</StackPanel>
-			<Grid Grid.Column="1"
-				  Margin="5,0"
-				  DataContext="{Binding AkashiTimer}"
-				  Visibility="{Binding TimerVisibility}"
-				  HorizontalAlignment="Right"
-				  VerticalAlignment="Center">
+			<StackPanel Grid.Column="1"
+						Orientation="Vertical"
+						Margin="10,0"
+						DataContext="{Binding AkashiTimer}"
+						Visibility="{Binding TimerVisibility}"
+						HorizontalAlignment="Right"
+						VerticalAlignment="Center">
+				<StackPanel Orientation="Horizontal"
+							HorizontalAlignment="Center">
+					<kcvc:SlotItemIcon Type="Facility"
+									   Width="14" Height="14"
+									   VerticalAlignment="Center" />
+					<TextBlock Grid.Column="1"
+							   TextWrapping="NoWrap"
+							   Style="{StaticResource Emphatic13}"
+							   Margin="2,0,2,0">
+						<Run Text="아카시"
+							 Style="{StaticResource EmphaticRun14}" />
+						<Run Text="" Style="{StaticResource EmphaticRun}" />
+					</TextBlock>
+				</StackPanel>
 				<TextBlock Grid.Column="1"
-						   TextWrapping="NoWrap"
-						   FontSize="11"
-						   Margin="2,0,2,0">
-					<kcvc:SlotItemIcon Type="Facility" Width="14" Height="14"/>
-					<Run Text="아카시" />
-					<Run Text="" FontSize="13" />
-					<LineBreak />
+						   Margin="2,0,2,0"
+						   HorizontalAlignment="Center"
+						   TextAlignment="Center"
+						   TextWrapping="NoWrap">
 					<Run Text="{Binding CurrentTime, Mode=OneWay}" />
-					<Run Text="" FontSize="13" />
+					<Run Text="" Style="{StaticResource EmphaticRun}" />
 				</TextBlock>
-			</Grid>
+			</StackPanel>
 		</Grid>
 
 		<StackPanel Grid.Column="2"
@@ -101,22 +173,19 @@
 						 Margin="4,0,0,0">
 				<Panel.Resources>
 					<DataTemplate DataType="{x:Type contentsVm:MaterialsViewModel+MaterialViewModel}">
-						<Grid MinWidth="116"
+						<Grid Style="{StaticResource ResourceGrid}"
 							  Margin="0,0,4,0">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="Auto"/>
 								<ColumnDefinition Width="*"/>
 							</Grid.ColumnDefinitions>
-							<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
-									   FontSize="11"
-									   VerticalAlignment="Bottom">
+							<TextBlock VerticalAlignment="Bottom">
 								<Run Text="{Binding Display, Mode=OneWay}" />
 								<Run Text=":" />
 							</TextBlock>
 							<TextBlock Grid.Column="1"
-									   FontSize="13"
 									   Text="{Binding Value, Mode=OneWay}"
-									   Style="{DynamicResource EmphaticTextStyleKey}"
+									   Style="{StaticResource Emphatic}"
 									   HorizontalAlignment="Right"
 									   VerticalAlignment="Bottom"/>
 						</Grid>
@@ -133,22 +202,19 @@
 						 Margin="4,0,0,0">
 				<Panel.Resources>
 					<DataTemplate DataType="{x:Type contentsVm:MaterialsViewModel+MaterialViewModel}">
-						<Grid MinWidth="116"
-							Margin="0,0,4,0">
+						<Grid Style="{StaticResource ResourceGrid}"
+							  Margin="0,0,4,0">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="Auto"/>
 								<ColumnDefinition Width="*"/>
 							</Grid.ColumnDefinitions>
-							<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
-									   FontSize="11"
-									   VerticalAlignment="Bottom">
+							<TextBlock VerticalAlignment="Bottom">
 								<Run Text="{Binding Display, Mode=OneWay}" />
 								<Run Text=":" />
 							</TextBlock>
 							<TextBlock Grid.Column="1"
-									   FontSize="13"
 									   Text="{Binding Value, Mode=OneWay}"
-									   Style="{DynamicResource EmphaticTextStyleKey}"
+									   Style="{StaticResource Emphatic}"
 									   HorizontalAlignment="Right"
 									   VerticalAlignment="Bottom"/>
 						</Grid>
@@ -173,22 +239,18 @@
 				</Grid.ColumnDefinitions>
 
 				<TextBlock Grid.Row="0"
-						   Grid.Column="1"
-						   FontSize="11">
+						   Grid.Column="1">
 					<Run Text="{Binding Resources.Homeport_NoOfShips, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 					<Run Text="{Binding Ships.Count, Mode=OneWay}"
-						 Style="{DynamicResource EmphaticTextElementStyleKey}"
-						 FontSize="13" />
+						 Style="{StaticResource EmphaticRun}" />
 					<Run Text="/" />
 					<Run Text="{Binding Admiral.Model.MaxShipCount, Mode=OneWay}" />
 				</TextBlock>
 				<TextBlock Grid.Row="1"
-						   Grid.Column="1"
-						   FontSize="11">
+						   Grid.Column="1">
 					<Run Text="{Binding Resources.Homeport_NoOfEquipment, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 					<Run Text="{Binding SlotItems.Count, Mode=OneWay}"
-						 Style="{DynamicResource EmphaticTextElementStyleKey}"
-						 FontSize="13" />
+						 Style="{StaticResource EmphaticRun}" />
 					<Run Text="/" />
 					<Run Text="{Binding Admiral.Model.MaxSlotItemCount, Mode=OneWay}" />
 				</TextBlock>
