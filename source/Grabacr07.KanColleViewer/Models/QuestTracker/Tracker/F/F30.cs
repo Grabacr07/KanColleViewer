@@ -45,7 +45,8 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				var slotitems = fleet?.Ships[0]?.Slots;
 				if (!slotitems.Any(x => x.Item.Info.Id == 156 && x.Item.Proficiency == 7)) return; // 숙련도max 영전 52갑형(이와모토소대)
 
-				count = count.Add(args.itemList.Count(x => x == 54)) // 사이운
+				var homeportSlotitems = KanColleClient.Current.Homeport.Itemyard.SlotItems;
+				count = count.Add(args.itemList.Count(x => (homeportSlotitems[x]?.Info.Id ?? 0) == 54)) // 사이운
 							.Max(max_count);
 
 				ProcessChanged?.Invoke(this, emptyEventArgs);

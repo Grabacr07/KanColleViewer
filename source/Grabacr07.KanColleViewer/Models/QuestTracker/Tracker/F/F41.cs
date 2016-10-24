@@ -52,7 +52,8 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				slotitems = slotitems.Where(x => homeport.Organization.Ships.Any(y => !y.Value.Slots.Select(z => z.Item.Id).Contains(x.Id)))
 					.Where(x => x.RawData.api_locked == 0).ToArray(); // 장비중이지 않고 잠기지 않은 장비들
 
-				count = args.itemList.Count(x => x == 35).Max(1); // 삼식탄
+				var homeportSlotitems = homeport.Itemyard.SlotItems;
+				count = args.itemList.Count(x => (homeportSlotitems[x]?.Info.Id ?? 0) == 35).Max(1); // 삼식탄
 
 				count_1 = homeport.Materials.Fuel >= 750 ? 1 : 0; // 연료
 				count_2 = homeport.Materials.Ammunition >= 750 ? 1 : 0; // 탄약

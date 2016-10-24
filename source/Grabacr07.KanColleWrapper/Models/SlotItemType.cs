@@ -4,6 +4,7 @@ namespace Grabacr07.KanColleWrapper.Models
 {
 	public enum SlotItemType
 	{
+		None = 0,
 		小口径主砲 = 1,
 		中口径主砲 = 2,
 		大口径主砲 = 3,

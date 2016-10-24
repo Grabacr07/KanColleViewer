@@ -51,7 +51,8 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				slotitems = slotitems.Where(x => homeport.Organization.Ships.Any(y => !y.Value.Slots.Select(z => z.Item.Id).Contains(x.Id)))
 					.Where(x => x.RawData.api_locked == 0).ToArray(); // 장비중이지 않고 잠기지 않은 장비들
 
-				count = args.itemList.Count(x => x == 49).Max(1); // 25mm 단장기관총
+				var homeportSlotitems = homeport.Itemyard.SlotItems;
+				count = args.itemList.Count(x => (homeportSlotitems[x]?.Info.Id ?? 0) == 49).Max(1); // 25mm 단장기관총
 
 				count_1 = homeport.Admiral.RawData.api_fcoin >= 5000 ? 1 : 0; // 가구코인
 				count_2 = slotitems.Count(x => x.Info.Id == 39).Max(2); // 25mm 연장기관총
