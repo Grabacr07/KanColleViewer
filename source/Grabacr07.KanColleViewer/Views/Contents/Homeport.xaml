@@ -75,6 +75,16 @@
 				</Style.Triggers>
 			</Style>
 			<Style TargetType="{x:Type Run}"
+				   x:Key="EmphaticRun12"
+				   BasedOn="{StaticResource EmphaticTextElementStyleKey}">
+				<Setter Property="FontSize" Value="12" />
+				<Style.Triggers>
+					<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.HomeportBigFont}, Path=Value}" Value="False">
+						<Setter Property="FontSize" Value="11" />
+					</DataTrigger>
+				</Style.Triggers>
+			</Style>
+			<Style TargetType="{x:Type Run}"
 				   x:Key="EmphaticRun14"
 				   BasedOn="{StaticResource EmphaticTextElementStyleKey}">
 				<Setter Property="FontSize" Value="14" />
@@ -139,7 +149,8 @@
 				<LineBreak />
 				<Run Text="{Binding Model.Rank, Mode=OneWay}" />
 				<Run Text="  Lv." />
-				<Run Text="{Binding Model.Level, Mode=OneWay}" />
+				<Run Text="{Binding Model.Level, Mode=OneWay}"
+					 Style="{StaticResource EmphaticRun12}"/>
 			</TextBlock>
 
 			<StackPanel.Style>
@@ -153,7 +164,8 @@
 				</Style>
 			</StackPanel.Style>
 			<StackPanel.ToolTip>
-				<StackPanel Orientation="Vertical">
+				<StackPanel Orientation="Vertical"
+							Margin="2">
 					<StackPanel Orientation="Horizontal"
 								VerticalAlignment="Center">
 						<TextBlock>
@@ -176,7 +188,12 @@
 							<Run Text="exp." />
 						</TextBlock>
 					</StackPanel>
-
+					
+					<Rectangle Height=".99"
+							   Margin="0,6,0,2"
+							   Fill="{DynamicResource InactiveForegroundBrushKey}"
+							   Opacity="0.6" />
+					
 					<TextBlock Margin="0,5,0,0"
 							   Style="{StaticResource Emphatic13}"
 							   Text="{Binding ToolTip}" />
