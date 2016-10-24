@@ -131,7 +131,6 @@
 									<TextBlock x:Name="QuestProgressTextTooltip"
 											   Text="{Binding QuestProgressText, Mode=OneWay}"
 											   Style="{DynamicResource EmphaticTextStyleKey}"
-											   Margin="0,0,5,0"
 											   TextAlignment="Left"
 											   FontSize="10" />
 								</Grid.ToolTip>
