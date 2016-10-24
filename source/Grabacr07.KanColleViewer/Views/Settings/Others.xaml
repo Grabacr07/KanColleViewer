@@ -193,11 +193,6 @@
 											 MethodName="RequestGC"
 											 Margin="20,0,0,0" />
 				</StackPanel>
-
-				<TextBlock>
-					<Run Text="현재 메모리 사용량 :  " />
-					<Run Text="{Binding CurrentMemory}" />
-				</TextBlock>
 			</StackPanel>
 
 			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
