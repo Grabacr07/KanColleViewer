@@ -42,6 +42,16 @@ namespace Grabacr07.KanColleWrapper.Models
 									.Replace("<br>", Environment.NewLine);
 
 		/// <summary>
+		/// 任務名を取得します。
+		/// </summary>
+		public string TitleJP => RawData.api_title;
+
+		/// <summary>
+		/// 任務の詳細を取得します。
+		/// </summary>
+		public string DetailJP => RawData.api_detail;
+
+		/// <summary>
 		/// 임무 화면에서의 페이지 번호
 		/// </summary>
 		public int Page { get; set; }

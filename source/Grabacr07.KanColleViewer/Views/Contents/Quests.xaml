@@ -88,41 +88,73 @@
 							</Grid.RowDefinitions>
 
 							<Rectangle x:Name="Category"
-										Margin="0,0,10,0"
-										Width="14" Height="14"
-										Fill="Gray"
-										VerticalAlignment="Center" />
+									   Margin="0,0,10,0"
+									   Width="14" Height="14"
+									   Fill="Gray"
+									   VerticalAlignment="Center" />
 							<TextBlock x:Name="Type"
-										Grid.Row="1"
-										Margin="0,0,10,0"
-										Width="14" Height="14"
-										LineStackingStrategy="BlockLineHeight"
-										LineHeight="14"
-										Background="Gray"
-										Foreground="Black"
-										FontSize="11"
-										TextAlignment="Center"
-										VerticalAlignment="Top" />
+									   Grid.Row="1"
+									   Margin="0,0,10,0"
+									   Width="14" Height="14"
+									   LineStackingStrategy="BlockLineHeight"
+									   LineHeight="14"
+									   Background="Gray"
+									   Foreground="Black"
+									   FontSize="11"
+									   TextAlignment="Center"
+									   VerticalAlignment="Top" />
 
-							<TextBlock Grid.Column="1"
-										Margin="0,0,5,0"
-										Text="{Binding Title, Mode=OneWay}"
-										Style="{DynamicResource EmphaticTextStyleKey}" />
+							<TextBlock x:Name="QuestTitle"
+									   Grid.Column="1"
+									   Margin="0,0,5,0"
+									   Text="{Binding Title, Mode=OneWay}"
+									   Style="{DynamicResource EmphaticTextStyleKey}" />
 							<TextBlock x:Name="StateText"
-										Grid.Column="2"
-										Margin="0,0,5,0"
-										Background="Transparent"
-										Text="{Binding StateText, Mode=OneWay}"
-										FontSize="12"
-										Style="{DynamicResource EmphaticTextStyleKey}" />
+									   Grid.Column="2"
+									   Margin="0,0,5,0"
+									   Background="Transparent"
+									   Text="{Binding StateText, Mode=OneWay}"
+									   FontSize="12"
+									   Style="{DynamicResource EmphaticTextStyleKey}" />
 							<TextBlock x:Name="TakenText"
-										Grid.Column="3"
-										Margin="0,0,5,0"
-										Padding="4,0"
-										Background="#FFFF8020"
-										Text="진행중"
-										FontSize="12"
-										Style="{DynamicResource EmphaticTextStyleKey}" />
+									   Grid.Column="3"
+									   Margin="0,0,5,0"
+									   Padding="4,0"
+									   Background="#FFFF8020"
+									   Text="진행중"
+									   FontSize="12"
+									   Style="{DynamicResource EmphaticTextStyleKey}" />
+
+							<TextBlock x:Name="QuestDetail"
+									   Grid.Row="1"
+									   Grid.Column="1"
+									   Grid.ColumnSpan="4"
+									   Text="{Binding Detail, Mode=OneWay}"
+									   Style="{DynamicResource DetailTextStyleKey}" />
+							<Grid Grid.Row="2"
+									Grid.ColumnSpan="5"
+									Margin="0,10,0,0"
+									Visibility="{Binding LastOnPage, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="auto" />
+									<ColumnDefinition Width="*" />
+								</Grid.ColumnDefinitions>
+
+								<TextBlock Text="{Binding Page, StringFormat={}{0} Page}"
+											Style="{DynamicResource EmphaticTextStyleKey}"
+											Margin="0,0,5,0"
+											FontSize="10" />
+
+								<Rectangle Grid.Column="1"
+											Height="1"
+											Margin="0,2,0,0"
+											Fill="#606060" />
+							</Grid>
+
+							<CheckBox Grid.ColumnSpan="5"
+									  Grid.RowSpan="3"
+									  Opacity="0"
+									  IsChecked="{Binding JPView, Mode=TwoWay}" />
 
 							<Grid x:Name="QuestTracker"
 								  Grid.Column="4"
@@ -134,7 +166,7 @@
 											   TextAlignment="Left"
 											   FontSize="10" />
 								</Grid.ToolTip>
-								
+
 								<Grid HorizontalAlignment="Right"
 									  MaxWidth="280"
 									  Width="{Binding ElementName=QuestTracker, Path=ActualWidth}">
@@ -195,8 +227,8 @@
 																<Grid Background="{TemplateBinding Background}">
 																	<Border x:Name="PART_Track">
 																		<Border x:Name="PART_Indicator"
-																		Background="{TemplateBinding Foreground}"
-																		HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+																				Background="{TemplateBinding Foreground}"
+																				HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
 																	</Border>
 																</Grid>
 															</ControlTemplate>
@@ -210,31 +242,6 @@
 										<Rectangle Width="1" Fill="{DynamicResource BackgroundBrushKey}" HorizontalAlignment="Right" Grid.Column="1" />
 									</Grid>
 								</Grid>
-							</Grid>
-
-							<TextBlock Grid.Row="1"
-										Grid.Column="1"
-										Grid.ColumnSpan="4"
-										Text="{Binding Detail, Mode=OneWay}"
-										Style="{DynamicResource DetailTextStyleKey}" />
-							<Grid Grid.Row="2"
-									Grid.ColumnSpan="5"
-									Margin="0,10,0,0"
-									Visibility="{Binding LastOnPage, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="auto" />
-									<ColumnDefinition Width="*" />
-								</Grid.ColumnDefinitions>
-
-								<TextBlock Text="{Binding Page, StringFormat={}{0} Page}"
-											Style="{DynamicResource EmphaticTextStyleKey}"
-											Margin="0,0,5,0"
-											FontSize="10" />
-
-								<Rectangle Grid.Column="1"
-											Height="1"
-											Margin="0,2,0,0"
-											Fill="#606060" />
 							</Grid>
 						</Grid>
 
@@ -251,6 +258,11 @@
 							</DataTrigger>
 							<DataTrigger Binding="{Binding QuestProgressValue}" Value="100">
 								<Setter TargetName="QuestProgressBar" Property="Foreground" Value="#FF62B5F5" />
+							</DataTrigger>
+
+							<DataTrigger Binding="{Binding JPView}" Value="True">
+								<Setter TargetName="QuestTitle" Property="Text" Value="{Binding TitleJP, Mode=OneWay}" />
+								<Setter TargetName="QuestDetail" Property="Text" Value="{Binding DetailJP, Mode=OneWay}" />
 							</DataTrigger>
 
 							<DataTrigger Binding="{Binding State}" Value="None">
@@ -319,19 +331,22 @@
 		</ScrollViewer>
 
 		<TextBlock Grid.Row="2"
-					Grid.Column="0"
-					Grid.ColumnSpan="3"
-					Text="※진행상태 (50 %, 80 %) 는 게임내의 표시와 동일합니다."
-					Style="{DynamicResource DetailTextStyleKey}"
-					Margin="10" />
-		
+				   Grid.Column="0"
+				   Grid.ColumnSpan="3"
+				   Style="{DynamicResource DetailTextStyleKey}"
+				   Margin="5">
+			<Run Text="※진행상태 (50 %, 80 %) 는 게임내의 표시와 동일합니다." />
+			<LineBreak />
+			<Run Text="※게임 내의 All 탭에서만 갱신할 수 있습니다." />
+		</TextBlock>
+
 		<TextBlock Grid.Row="1"
-					Text="발생중인 임무가 없습니다."
-					Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
-					Style="{DynamicResource EmphaticTextStyleKey}"
-					Margin="10"
-					HorizontalAlignment="Center"
-					VerticalAlignment="Center"/>
+				   Text="발생중인 임무가 없습니다."
+				   Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
+				   Style="{DynamicResource EmphaticTextStyleKey}"
+				   Margin="10"
+				   HorizontalAlignment="Center"
+				   VerticalAlignment="Center"/>
 		<TextBlock Grid.Row="1"
 				   Text="{Binding Resources.Quests_Untaken, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource EmphaticTextStyleKey}"
