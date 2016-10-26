@@ -173,6 +173,7 @@
     <Compile Include="Models\ComboBoxItemTemplateSelector.cs" />
     <Compile Include="Models\CSV.cs" />
     <Compile Include="Models\ExitConfirmationType.cs" />
+    <Compile Include="Models\ExpeditionResultData.cs" />
     <Compile Include="Models\ExpeditionPossible.cs" />
     <Compile Include="Models\ExpeditionExtension.cs" />
     <Compile Include="Models\FlashQuality.cs" />
