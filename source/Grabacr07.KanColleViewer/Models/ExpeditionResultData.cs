@@ -53,9 +53,9 @@ namespace Grabacr07.KanColleViewer.Models
 				.Select(x => x.Item)
 				.Where(x => itemtable.Contains(x.Info.Id));
 
-			decimal result = 0.0m, correction = 0.0m, max, levelAvrg;
+			decimal correction = 0.0m, max, levelAvrg;
 
-			max = items.Count(x => x.Info.Id == 193) * 2; // 특대발 갯수 * 2% 만큼 보정치 제한 확장
+			max = 20 + items.Count(x => x.Info.Id == 193) * 2; // 20% + (특대발 갯수 x 2%) 만큼 보정치 제한 확장
 			levelAvrg = items.Count() == 0 ? 0
 				: (decimal)items.Average(x => x.Level); // 대발계 장비 개수 평균치
 
@@ -64,10 +64,10 @@ namespace Grabacr07.KanColleViewer.Models
 			correction += items.Where(x => x.Info.Id == 167).Sum(x => 1); // 特二式内火艇 (내화정)
 			correction += items.Where(x => x.Info.Id == 193).Sum(x => 7); // 特大発動艇 (특대발동정)
 
-			correction = Math.Min(result, max); // 보정치 제한
+			correction = Math.Min(correction, max); // 보정치 제한
 			correction /= 100m;
 
-			return decimal.Floor(value * (1.0m + correction + (0.01m * correction * levelAvrg)));
+			return decimal.Floor(value * (1.0m + correction + (0.01m * correction * levelAvrg)) * additional);
 		}
 
 		public ExpeditionResultData(int expeditionId, ShipViewModel[] Ships)
