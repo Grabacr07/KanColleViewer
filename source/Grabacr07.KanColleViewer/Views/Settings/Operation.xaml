@@ -118,6 +118,19 @@
 
 			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
+			<TextBlock Text="원정"
+					   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+			<StackPanel Margin="20,0,0,0">
+				<CheckBox Content="원정의 예상 자원량을 표시"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.ExpeditionExpectResult}, Path=Value}" />
+
+				<Border Height="8" />
+				<CheckBox Content="함대의 피로도를 표시"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.ExpeditionConditions}, Path=Value}" />
+			</StackPanel>
+
+			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
+
 			<TextBlock Text="임무"
 					   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 			<StackPanel Margin="20,0,0,0">
