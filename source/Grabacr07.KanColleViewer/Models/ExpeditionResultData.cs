@@ -65,7 +65,7 @@ namespace Grabacr07.KanColleViewer.Models
 			correction += items.Where(x => x.Info.Id == 193).Sum(x => 7); // 特大発動艇 (특대발동정)
 
 			correction = Math.Min(correction, max); // 보정치 제한
-			correction /= 100m;
+			correction /= 100.0m;
 
 			return decimal.Floor(value * (1.0m + correction + (0.01m * correction * levelAvrg)) * additional);
 		}
