@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Grabacr07.KanColleViewer.Models;
+using Grabacr07.KanColleWrapper.Models;
+using Grabacr07.KanColleWrapper;
+using Livet;
+using Livet.EventListeners;
 using Grabacr07.KanColleViewer.ViewModels.Contents;
 
 namespace Grabacr07.KanColleViewer.Models
 {
-	public class ExpeditionData
+	public class ExpeditionResultData : ViewModel
 	{
 		public int ID { get; set; }
 		public ShipViewModel[] Ships { get; set; }
@@ -43,6 +47,41 @@ namespace Grabacr07.KanColleViewer.Models
 				result = Math.Max(result, 22);
 				return result / 100; // percent to rate
 			}
+		}
+
+		public ExpeditionResultData(int expeditionId)
+		{
+			var eid = expeditionId;
+
+			ID = eid;
+			Ships = this.Ships;
+			Fuel = ConvertToDecimal(KanColleClient.Current.Translations.GetExpeditionData("Fuel", eid));
+			Ammo = ConvertToDecimal(KanColleClient.Current.Translations.GetExpeditionData("Armo", eid));
+			Steel = ConvertToDecimal(KanColleClient.Current.Translations.GetExpeditionData("Metal", eid));
+			Bauxite = ConvertToDecimal(KanColleClient.Current.Translations.GetExpeditionData("Bo", eid));
+		}
+
+		public void RefreshProperties()
+		{
+			this.RaisePropertyChanged(nameof(this.Fuel));
+			this.RaisePropertyChanged(nameof(this.Ammo));
+			this.RaisePropertyChanged(nameof(this.Steel));
+			this.RaisePropertyChanged(nameof(this.Bauxite));
+			this.RaisePropertyChanged(nameof(this.Rate));
+			this.RaisePropertyChanged(nameof(this.ExpFuel));
+			this.RaisePropertyChanged(nameof(this.ExpAmmo));
+			this.RaisePropertyChanged(nameof(this.ExpSteel));
+			this.RaisePropertyChanged(nameof(this.ExpBauxite));
+			this.RaisePropertyChanged(nameof(this.ExpGreatFuel));
+			this.RaisePropertyChanged(nameof(this.ExpGreatAmmo));
+			this.RaisePropertyChanged(nameof(this.ExpGreatSteel));
+			this.RaisePropertyChanged(nameof(this.ExpGreatBauxite));
+		}
+
+		private decimal ConvertToDecimal(string context)
+		{
+			if (context == string.Empty) return 0;
+			return Convert.ToDecimal(context);
 		}
 	}
 }

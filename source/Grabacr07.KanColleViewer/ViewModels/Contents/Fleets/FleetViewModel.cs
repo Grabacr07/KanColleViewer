@@ -118,6 +118,18 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		#endregion
 
 		#region 선택된 원정번호 (원정 탭 수정)
+
+		private ExpeditionResultData _ResultData { get; set; }
+		public ExpeditionResultData ResultData
+		{
+			get { return this._ResultData; }
+			set
+			{
+				this._ResultData = value;
+				this.RaisePropertyChanged();
+			}
+		}
+
 		private int _ExpeditionId;
 		public int ExpeditionId
 		{
@@ -126,6 +138,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			{
 				// if (this._ExpeditionId == value) return;
 				// 같은 값을 넣는 것으로 원정 성공 여부 등을 재계산해야함
+
 				this._ExpeditionId = value;
 				this.IsPassed = this.CompareExpeditionData(value, this.Ships);
 
@@ -139,8 +152,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 					: 0;
 
 				this.RaisePropertyChanged();
+
+				this.ResultData = new ExpeditionResultData(value);
 			}
 		}
+
 		#endregion
 
 		#region Visibility
@@ -275,8 +291,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			set
 			{
 				this._GreatChance = value;
-				this.ResultData.GreatChance = value;
-
 				this.RaisePropertyChanged();
 				this.RaisePropertyChanged("CanGreatSuccess");
 				this.RaisePropertyChanged("GreateChanceText");
@@ -285,9 +299,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		public bool CanGreatSuccess => this.GreatChance > 0;
 		public string GreatChanceText => string.Format("대성공 {0}%", this.GreatChance);
 
-		public ExpeditionData ResultData { get; }
-
-	#endregion
+		#endregion
 
 		#region 보급량
 
@@ -381,17 +393,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 			this.Expedition = new ExpeditionViewModel(fleet.Expedition);
 			this.CompositeDisposable.Add(this.Expedition);
-
-			var eid = fleet.Expedition.Id;
-			this.ResultData = new ExpeditionData
-			{
-				ID = eid,
-				Ships = this.Ships,
-				Fuel = ConvertToDecimal(KanColleClient.Current.Translations.GetExpeditionData("Fuel", eid)),
-				Ammo = ConvertToDecimal(KanColleClient.Current.Translations.GetExpeditionData("Armo", eid)),
-				Steel = ConvertToDecimal(KanColleClient.Current.Translations.GetExpeditionData("Metal", eid)),
-				Bauxite = ConvertToDecimal(KanColleClient.Current.Translations.GetExpeditionData("Bo", eid)),
-			};
 
 			// 원정중 여부 변경
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(this.Expedition)
@@ -660,11 +661,5 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			return temp;
 		}
 		#endregion
-
-		private decimal ConvertToDecimal(string context)
-		{
-			if (context == string.Empty) return 0;
-			return Convert.ToDecimal(context);
-		}
 	}
 }
