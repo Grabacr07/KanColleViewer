@@ -6,7 +6,7 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
-             xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
 			 xmlns:v="clr-namespace:Grabacr07.KanColleViewer.Views"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
@@ -73,10 +73,10 @@
 		</Style>
 	</UserControl.Resources>
 
-    <ScrollViewer DataContext="{Binding Fleets, Mode=OneWay}"
+	<ScrollViewer DataContext="{Binding Fleets, Mode=OneWay}"
 				  VerticalScrollBarVisibility="Auto"
 				  PanningMode="Both">
-        <ItemsControl ItemsSource="{Binding Fleets, Mode=OneWay}"
+		<ItemsControl ItemsSource="{Binding Fleets, Mode=OneWay}"
 					  Margin="5,0,5,5"
 					  d:DataContext="{d:DesignData /SampleData/FleetsViewModelSampleData.xaml}">
 			<ItemsControl.ItemsPanel>
@@ -96,154 +96,257 @@
 				</Style>
 			</ItemsControl.ItemContainerStyle>
 
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <GroupBox Header="{Binding Name, Mode=OneWay}"
-                            Margin="5"
-                            Padding="8">
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<GroupBox Header="{Binding Name, Mode=OneWay}"
+							Margin="5"
+							Padding="8">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="auto" />
+								<RowDefinition Height="auto" />
+								<RowDefinition Height="auto" />
+								<RowDefinition Height="*" />
+							</Grid.RowDefinitions>
 
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
+							<metro:PromptComboBox x:Name="ExpeditionSelector"
+												  Margin="0,0,0,5"
+												  ItemsSource="{Binding ExpeditionList, Mode=OneWay}"
+												  VerticalAlignment="Center"
+												  SelectedValue="{Binding ExpeditionId, Mode=TwoWay}"
+												  SelectedValuePath="Key"
+												  DisplayMemberPath="Value"
+												  Visibility="Collapsed"
+												  IsReadOnly="True"
+												  Prompt="" />
+							<Grid Grid.Row="1">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="*" />
+								</Grid.ColumnDefinitions>
 
-                            <metro:PromptComboBox x:Name="ExpeditionSelector"
-                                                  Margin="0,0,0,5"
-                                                  ItemsSource="{Binding ExpeditionList, Mode=OneWay}"
-                                                  VerticalAlignment="Center"
-                                                  SelectedValue="{Binding ExpeditionId, Mode=TwoWay}"
-                                                  SelectedValuePath="Key"
-                                                  DisplayMemberPath="Value"
-                                                  Visibility="Collapsed"
-                                                  IsReadOnly="True"
-                                                  Prompt="" />
+								<TextBlock Margin="0,0,2,0"
+										   Foreground="White"
+										   TextAlignment="Center"
+										   Padding="3">
+									<TextBlock.Style>
+										<Style TargetType="TextBlock">
+											<Style.Triggers>
+												<DataTrigger Binding="{Binding IsPossible, Mode=OneWay}" Value="Possible">
+													<Setter Property="Background" Value="#FF5887AB"/>
+													<Setter Property="Text" Value="편성완료"/>
+												</DataTrigger>
+												<DataTrigger Binding="{Binding IsPossible, Mode=OneWay}" Value="NotAccepted">
+													<Setter Property="Background" Value="#FFCC3D3D"/>
+													<Setter Property="Text" Value="편성문제"/>
+												</DataTrigger>
+												<DataTrigger Binding="{Binding IsPossible, Mode=OneWay}" Value="NotSupplied">
+													<Setter Property="Background" Value="#FFCC3D3D"/>
+													<Setter Property="Text" Value="보급안함"/>
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
+								<TextBlock Grid.Column="1"
+										   Margin="2,0,0,0"
+										   Foreground="White"
+										   TextAlignment="Center"
+										   Padding="3">
+									<TextBlock.Style>
+										<Style TargetType="TextBlock">
+											<Style.Triggers>
+												<DataTrigger Binding="{Binding CanGreatSuccess, Mode=OneWay}" Value="False">
+													<Setter Property="Background" Value="#FF787878" />
+													<Setter Property="Text" Value="대성공 불가" />
+												</DataTrigger>
+												<DataTrigger Binding="{Binding CanGreatSuccess, Mode=OneWay}" Value="True">
+													<Setter Property="Background" Value="#FFE66915" />
+													<Setter Property="Text" Value="{Binding GreatChanceText, Mode=OneWay}" />
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
+							</Grid>
 
-                            <Grid Grid.Row="1">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
+							<Border Grid.Row="2" Margin="0,5" Height=".99" Background="{DynamicResource BorderBrushKey}" />
 
-                                <TextBlock Margin="0,0,2,0"
-                                           Foreground="White"
-                                           TextAlignment="Center"
-                                           Padding="3">
-                                    <TextBlock.Style>
-                                        <Style TargetType="TextBlock">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsPossible, Mode=OneWay}" Value="Possible">
-                                                    <Setter Property="Background" Value="#FF5887AB"/>
-                                                    <Setter Property="Text" Value="편성완료"/>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding IsPossible, Mode=OneWay}" Value="NotAccepted">
-                                                    <Setter Property="Background" Value="#FFCC3D3D"/>
-                                                    <Setter Property="Text" Value="편성문제"/>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding IsPossible, Mode=OneWay}" Value="NotSupplied">
-                                                    <Setter Property="Background" Value="#FFCC3D3D"/>
-                                                    <Setter Property="Text" Value="보급안함"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBlock.Style>
-                                </TextBlock>
-                                <TextBlock Grid.Column="1"
-                                           Margin="2,0,0,0"
-                                           Foreground="White"
-                                           TextAlignment="Center"
-                                           Padding="3">
-                                    <TextBlock.Style>
-                                        <Style TargetType="TextBlock">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding CanGreatSuccess, Mode=OneWay}" Value="False">
-                                                    <Setter Property="Background" Value="#FF787878" />
-                                                    <Setter Property="Text" Value="대성공 불가" />
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding CanGreatSuccess, Mode=OneWay}" Value="True">
-                                                    <Setter Property="Background" Value="#FFE66915" />
-                                                    <Setter Property="Text" Value="{Binding GreatChanceText, Mode=OneWay}" />
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBlock.Style>
-                                </TextBlock>
-                            </Grid>
+							<TextBlock x:Name="NotExcution"
+									   Grid.Row="3"
+									   Text="모항에서 대기중입니다."
+									   Style="{DynamicResource EmphaticTextStyleKey}"
+									   HorizontalAlignment="Center"
+									   Visibility="Collapsed" />
+							<TextBlock x:Name="InSortie"
+									   Grid.Row="3"
+									   Text="출격중입니다."
+									   Style="{DynamicResource EmphaticTextStyleKey}"
+									   HorizontalAlignment="Center"
+									   Visibility="Collapsed" />
 
-                            <Border Grid.Row="2" Margin="0,5" Height=".99" Background="{DynamicResource BorderBrushKey}" />
+							<StackPanel x:Name="ExpeditionInfo"
+										Grid.Row="3">
+								<TextBlock Margin="0,0,0,4"
+										   Text="{Binding Expedition.Mission.Title, Mode=OneWay}"
+										   Style="{DynamicResource EmphaticTextStyleKey}" />
+								<TextBlock Text="{Binding Expedition.Mission.Detail, Mode=OneWay}"
+										   Style="{DynamicResource DefaultTextStyleKey}" />
 
-                            <TextBlock x:Name="NotExcution"
-                                       Grid.Row="3"
-                                       Text="모항에서 대기중입니다."
-                                       Style="{DynamicResource EmphaticTextStyleKey}"
-                                       HorizontalAlignment="Center"
-                                       Visibility="Collapsed" />
-                            <TextBlock x:Name="InSortie"
-                                       Grid.Row="3"
-                                       Text="출격중입니다."
-                                       Style="{DynamicResource EmphaticTextStyleKey}"
-                                       HorizontalAlignment="Center"
-                                       Visibility="Collapsed" />
+								<Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
 
-                            <StackPanel x:Name="ExpeditionInfo"
-                                        Grid.Row="3">
-                                <TextBlock Margin="0,0,0,4"
-                                           Text="{Binding Expedition.Mission.Title, Mode=OneWay}"
-                                           Style="{DynamicResource EmphaticTextStyleKey}" />
-                                <TextBlock Text="{Binding Expedition.Mission.Detail, Mode=OneWay}"
-                                           Style="{DynamicResource DefaultTextStyleKey}" />
+								<Grid>
+									<Grid.RowDefinitions>
+										<RowDefinition Height="*" />
+										<RowDefinition Height="Auto" />
+									</Grid.RowDefinitions>
 
-                                <Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
+									<StackPanel x:Name="ExpeditionProgress">
+										<TextBlock Text="{Binding Resources.Expedition_TimeComplete, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+												   Margin="0,0,0,4"
+												   Style="{DynamicResource HeaderTextStyleKey}" />
+										<TextBlock Text="{Binding Expedition.ReturnTime, Mode=OneWay}"
+												   Style="{DynamicResource EmphaticTextStyleKey}"
+												   Margin="8,0" />
 
-                                <Grid>
-                                    <StackPanel x:Name="ExpeditionProgress">
-                                        <TextBlock Text="{Binding Resources.Expedition_TimeComplete, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-                                                   Margin="0,0,0,4"
-                                                   Style="{DynamicResource HeaderTextStyleKey}" />
-                                        <TextBlock Text="{Binding Expedition.ReturnTime, Mode=OneWay}"
-                                                   Style="{DynamicResource EmphaticTextStyleKey}"
-                                                   Margin="8,0" />
+										<Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
 
-                                        <Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
+										<TextBlock Text="{Binding Resources.Expedition_TimeRemaining, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+												   Margin="0,0,0,4"
+												   Style="{DynamicResource HeaderTextStyleKey}" />
+										<TextBlock Text="{Binding Expedition.Remaining, Mode=OneWay}"
+												Style="{DynamicResource EmphaticTextStyleKey}"
+												Margin="8,0" />
+									</StackPanel>
 
-                                        <TextBlock Text="{Binding Resources.Expedition_TimeRemaining, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-                                                   Margin="0,0,0,4"
-                                                   Style="{DynamicResource HeaderTextStyleKey}" />
-                                        <TextBlock Text="{Binding Expedition.Remaining, Mode=OneWay}"
-                                                Style="{DynamicResource EmphaticTextStyleKey}"
-                                                Margin="8,0" />
-                                    </StackPanel>
-                                    <TextBlock x:Name="ExpeditionReturned"
-                                               Text="원정에서 복귀했습니다."
-                                               Style="{DynamicResource EmphaticTextStyleKey}"
-                                               HorizontalAlignment="Center"
-                                               Visibility="Collapsed" />
-                                </Grid>
+									<StackPanel Grid.Row="1">
+										<Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
 
-                                <Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
-                            </StackPanel>
-                        </Grid>
-                    </GroupBox>
-                    <DataTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Expedition.IsInExecution, Mode=OneWay}" Value="False">
-                            <Setter TargetName="ExpeditionSelector" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="ExpeditionInfo" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="NotExcution" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="InSortie" Property="Visibility" Value="Collapsed" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding IsInSortie, Mode=OneWay}" Value="True">
-                            <Setter TargetName="NotExcution" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="InSortie" Property="Visibility" Value="Visible" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Expedition.Returned, Mode=OneWay}" Value="True">
-                            <Setter TargetName="ExpeditionProgress" Property="Visibility" Value="Hidden" />
-                            <Setter TargetName="ExpeditionReturned" Property="Visibility" Value="Visible" />
-                        </DataTrigger>
-                    </DataTemplate.Triggers>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+										<Expander Grid.Row="3"
+												  ExpandDirection="Up">
+											<Expander.Header>
+												<TextBlock Margin="0,0,0,4"
+													   Style="{DynamicResource HeaderTextStyleKey}">
+													<Run Text="예상 자원 (성공/" />
+													<Run Text="대성공" Style="{DynamicResource EmphaticTextElementStyleKey}"/><Run Text=")" />
+												</TextBlock>
+											</Expander.Header>
+											<StackPanel Margin="8, 0">
+												<Grid Margin="8,0">
+													<Grid.ColumnDefinitions>
+														<ColumnDefinition Width="*" />
+														<ColumnDefinition Width="Auto" />
+														<ColumnDefinition Width="Auto" />
+													</Grid.ColumnDefinitions>
+
+													<TextBlock Text="연료:"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+													<TextBlock Grid.Column="1"
+														   HorizontalAlignment="Right"
+														   Text="{Binding ResultData.ExpFuel, Mode=OneWay, StringFormat={}{0}/}"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+													<TextBlock Grid.Column="2"
+														   HorizontalAlignment="Right"
+														   Text="{Binding ResultData.ExpGreatFuel, Mode=OneWay}"
+														   Style="{DynamicResource EmphaticTextStyleKey}" />
+												</Grid>
+												<Grid Margin="8,0">
+													<Grid.ColumnDefinitions>
+														<ColumnDefinition Width="*" />
+														<ColumnDefinition Width="Auto" />
+														<ColumnDefinition Width="Auto" />
+													</Grid.ColumnDefinitions>
+
+													<TextBlock Grid.Row="1"
+														   Text="탄약:"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+													<TextBlock Grid.Row="1"
+														   Grid.Column="1"
+														   HorizontalAlignment="Right"
+														   Text="{Binding ResultData.ExpAmmo, Mode=OneWay, StringFormat={}{0}/}"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+													<TextBlock Grid.Row="1"
+														   Grid.Column="2"
+														   HorizontalAlignment="Right"
+														   Text="{Binding ResultData.ExpGreatAmmo, Mode=OneWay}"
+														   Style="{DynamicResource EmphaticTextStyleKey}" />
+												</Grid>
+												<Grid Margin="8,0">
+													<Grid.ColumnDefinitions>
+														<ColumnDefinition Width="*" />
+														<ColumnDefinition Width="Auto" />
+														<ColumnDefinition Width="Auto" />
+													</Grid.ColumnDefinitions>
+
+													<TextBlock Grid.Row="2"
+														   Text="강재:"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+													<TextBlock Grid.Row="2"
+														   Grid.Column="1"
+														   HorizontalAlignment="Right"
+														   Text="{Binding ResultData.ExpSteel, Mode=OneWay, StringFormat={}{0}/}"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+													<TextBlock Grid.Row="2"
+														   Grid.Column="2"
+														   HorizontalAlignment="Right"
+														   Text="{Binding ResultData.ExpGreatSteel, Mode=OneWay}"
+														   Style="{DynamicResource EmphaticTextStyleKey}" />
+												</Grid>
+												<Grid Margin="8,0">
+													<Grid.ColumnDefinitions>
+														<ColumnDefinition Width="*" />
+														<ColumnDefinition Width="Auto" />
+														<ColumnDefinition Width="Auto" />
+													</Grid.ColumnDefinitions>
+
+													<TextBlock Grid.Row="3"
+														   Text="보키:"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+													<TextBlock Grid.Row="3"
+														   Grid.Column="1"
+														   HorizontalAlignment="Right"
+														   Text="{Binding ResultData.ExpBauxire, Mode=OneWay, StringFormat={}{0}/}"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+													<TextBlock Grid.Row="3"
+														   Grid.Column="2"
+														   HorizontalAlignment="Right"
+														   Text="{Binding ResultData.ExpGreatBauxite, Mode=OneWay}"
+														   Style="{DynamicResource EmphaticTextStyleKey}" />
+												</Grid>
+											</StackPanel>
+										</Expander>
+									</StackPanel>
+
+									<TextBlock x:Name="ExpeditionReturned"
+											   Grid.RowSpan="2"
+											   Text="원정에서 복귀했습니다."
+											   Style="{DynamicResource EmphaticTextStyleKey}"
+											   HorizontalAlignment="Center"
+											   Visibility="Collapsed" />
+								</Grid>
+
+								<Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
+							</StackPanel>
+						</Grid>
+					</GroupBox>
+					<DataTemplate.Triggers>
+						<DataTrigger Binding="{Binding Expedition.IsInExecution, Mode=OneWay}" Value="True">
+							<Setter TargetName="ExpeditionSelector" Property="Visibility" Value="Visible" />
+							<Setter TargetName="ExpeditionInfo" Property="Visibility" Value="Collapsed" />
+							<Setter TargetName="NotExcution" Property="Visibility" Value="Visible" />
+							<Setter TargetName="InSortie" Property="Visibility" Value="Collapsed" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding IsInSortie, Mode=OneWay}" Value="True">
+							<Setter TargetName="NotExcution" Property="Visibility" Value="Collapsed" />
+							<Setter TargetName="InSortie" Property="Visibility" Value="Visible" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Expedition.Returned, Mode=OneWay}" Value="True">
+							<Setter TargetName="ExpeditionProgress" Property="Visibility" Value="Hidden" />
+							<Setter TargetName="ExpeditionReturned" Property="Visibility" Value="Visible" />
+						</DataTrigger>
+					</DataTemplate.Triggers>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
 	</ScrollViewer>
 </UserControl>
