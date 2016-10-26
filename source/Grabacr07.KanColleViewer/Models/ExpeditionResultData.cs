@@ -44,7 +44,7 @@ namespace Grabacr07.KanColleViewer.Models
 				result = Math.Min(result, 20);
 
 				result += items.Where(x => x.Info.Id == 193).Sum(x => 7 + 0.07m * x.Level); // 特大発動艇
-				result = Math.Min(result, 22);
+				result = Math.Min(result, 20 + items.Count(x => x.Info.Id == 193)); // +2% per 特大発動艇
 				return 1 + result / 100; // percent to rate
 			}
 		}
