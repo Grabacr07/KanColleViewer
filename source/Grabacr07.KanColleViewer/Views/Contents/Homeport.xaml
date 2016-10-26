@@ -31,10 +31,32 @@
 				<Setter Property="MinWidth" Value="125" />
 				<Style.Triggers>
 					<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.HomeportBigFont}, Path=Value}" Value="False">
-						<Setter Property="MinWidth" Value="116" />
+						<Setter Property="MinWidth" Value="120" />
+					</DataTrigger>
+					<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.MaterialValueOnly}, Path=Value}" Value="True">
+						<Setter Property="MinWidth" Value="75" />
+					</DataTrigger>
+					<MultiDataTrigger>
+						<MultiDataTrigger.Conditions>
+							<Condition Binding="{Binding Source={x:Static ms:KanColleSettings.MaterialValueOnly}, Path=Value}" Value="True" />
+							<Condition Binding="{Binding Source={x:Static ms:KanColleSettings.HomeportBigFont}, Path=Value}" Value="False" />
+						</MultiDataTrigger.Conditions>
+						<MultiDataTrigger.Setters>
+							<Setter Property="MinWidth" Value="54" />
+						</MultiDataTrigger.Setters>
+					</MultiDataTrigger>
+				</Style.Triggers>
+			</Style>
+			<Style TargetType="{x:Type Grid}"
+				   x:Key="ResourceGrid2">
+				<Setter Property="MinWidth" Value="125" />
+				<Style.Triggers>
+					<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.HomeportBigFont}, Path=Value}" Value="False">
+						<Setter Property="MinWidth" Value="120" />
 					</DataTrigger>
 				</Style.Triggers>
 			</Style>
+
 			<Style TargetType="{x:Type TextBlock}"
 				   BasedOn="{StaticResource DefaultTextStyleKey}">
 				<Setter Property="Margin" Value="12,0" />
@@ -103,6 +125,64 @@
 						<Setter Property="FontSize" Value="16" />
 					</DataTrigger>
 				</Style.Triggers>
+			</Style>
+
+			<Style TargetType="{x:Type controls:MetroComboBox}">
+				<Setter Property="ItemTemplateSelector">
+					<Setter.Value>
+						<models:ComboBoxItemTemplateSelector>
+							<models:ComboBoxItemTemplateSelector.ItemTemplate>
+								<DataTemplate DataType="{x:Type contentsVm:MaterialsViewModel+MaterialViewModel}">
+									<Grid Style="{StaticResource ResourceGrid2}"
+										  Margin="0,0,4,0">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto"/>
+											<ColumnDefinition Width="*"/>
+										</Grid.ColumnDefinitions>
+										<TextBlock VerticalAlignment="Bottom">
+											<Run Text="{Binding Display, Mode=OneWay}" />
+											<Run Text=":" />
+										</TextBlock>
+										<TextBlock Grid.Column="1"
+												   Text="{Binding Value, Mode=OneWay}"
+												   Style="{StaticResource Emphatic}"
+												   HorizontalAlignment="Right"
+												   VerticalAlignment="Bottom"/>
+									</Grid>
+								</DataTemplate>
+							</models:ComboBoxItemTemplateSelector.ItemTemplate>
+							<models:ComboBoxItemTemplateSelector.SelectedItemTemplate>
+								<DataTemplate DataType="{x:Type contentsVm:MaterialsViewModel+MaterialViewModel}">
+									<Grid Style="{StaticResource ResourceGrid}"
+										  Margin="0,0,4,0">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto"/>
+											<ColumnDefinition Width="*"/>
+										</Grid.ColumnDefinitions>
+										<TextBlock x:Name="MaterialName"
+												   VerticalAlignment="Bottom">
+											<Run Text="{Binding Display, Mode=OneWay}" />
+											<Run Text=":" />
+										</TextBlock>
+										<TextBlock x:Name="MaterialValue"
+												   Grid.Column="1"
+												   Text="{Binding Value, Mode=OneWay}"
+												   Style="{StaticResource Emphatic}"
+												   HorizontalAlignment="Right"
+												   VerticalAlignment="Bottom"/>
+									</Grid>
+									<DataTemplate.Triggers>
+										<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.MaterialValueOnly}, Path=Value}" Value="True">
+											<Setter TargetName="MaterialName" Property="Visibility" Value="Collapsed" />
+											<Setter TargetName="MaterialValue" Property="Grid.Column" Value="0" />
+											<Setter TargetName="MaterialValue" Property="Grid.ColumnSpan" Value="2" />
+										</DataTrigger>
+									</DataTemplate.Triggers>
+								</DataTemplate>
+							</models:ComboBoxItemTemplateSelector.SelectedItemTemplate>
+						</models:ComboBoxItemTemplateSelector>
+					</Setter.Value>
+				</Setter>
 			</Style>
 		</Grid.Resources>
 
@@ -238,27 +318,6 @@
 			<UniformGrid Columns="1"
 						 Margin="4,0,0,0"
 						 Grid.IsSharedSizeScope="True">
-				<Panel.Resources>
-					<DataTemplate DataType="{x:Type contentsVm:MaterialsViewModel+MaterialViewModel}">
-						<Grid Style="{StaticResource ResourceGrid}"
-							  Margin="0,0,4,0">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto"/>
-								<ColumnDefinition Width="*"/>
-							</Grid.ColumnDefinitions>
-							<TextBlock VerticalAlignment="Bottom">
-								<Run Text="{Binding Display, Mode=OneWay}" />
-								<Run Text=":" />
-							</TextBlock>
-							<TextBlock Grid.Column="1"
-									   Text="{Binding Value, Mode=OneWay}"
-									   Style="{StaticResource Emphatic}"
-									   HorizontalAlignment="Right"
-									   VerticalAlignment="Bottom"/>
-						</Grid>
-					</DataTemplate>
-				</Panel.Resources>
-
 				<controls:MetroComboBox ItemsSource="{Binding Materials.Values}"
 										SelectedItem="{Binding Materials.SelectedItem1, Mode=TwoWay}" />
 				<controls:MetroComboBox ItemsSource="{Binding Materials.Values}"
@@ -268,29 +327,8 @@
 						 Margin="4,0,0,0"
 						 Grid.IsSharedSizeScope="True"
 						 Visibility="{Binding MaterialExtended, Converter={StaticResource BooleanToVisibilityConverter}}">
-				<Panel.Resources>
-					<DataTemplate DataType="{x:Type contentsVm:MaterialsViewModel+MaterialViewModel}">
-						<Grid Style="{StaticResource ResourceGrid}"
-							  Margin="0,0,4,0">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto"/>
-								<ColumnDefinition Width="*"/>
-							</Grid.ColumnDefinitions>
-							<TextBlock VerticalAlignment="Bottom">
-								<Run Text="{Binding Display, Mode=OneWay}" />
-								<Run Text=":" />
-							</TextBlock>
-							<TextBlock Grid.Column="1"
-									   Text="{Binding Value, Mode=OneWay}"
-									   Style="{StaticResource Emphatic}"
-									   HorizontalAlignment="Right"
-									   VerticalAlignment="Bottom"/>
-						</Grid>
-					</DataTemplate>
-				</Panel.Resources>
-
 				<controls:MetroComboBox ItemsSource="{Binding Materials.Values}"
-									SelectedItem="{Binding Materials.SelectedItem3, Mode=TwoWay}" />
+										SelectedItem="{Binding Materials.SelectedItem3, Mode=TwoWay}" />
 				<controls:MetroComboBox ItemsSource="{Binding Materials.Values}"
 										SelectedItem="{Binding Materials.SelectedItem4, Mode=TwoWay}" />
 			</UniformGrid>

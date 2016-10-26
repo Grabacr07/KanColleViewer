@@ -45,6 +45,13 @@
 						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.DisplayMaterialExtended}, Path=Value}" />
 
 				<CheckBox Margin="0,0,0,5"
+						  Content="모항 정보 영역의 자원을 수치만 표시"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.MaterialValueOnly}, Path=Value}" />
+				<TextBlock Margin="20,0,0,10"
+						   Text="표시할 내용을 선택하는 드롭다운에서는 이름도 표시됩니다."
+						   Style="{DynamicResource DetailTextStyleKey}" />
+
+				<CheckBox Margin="0,0,0,5"
 						  Content="모항 정보 폰트를 예전 큰 폰트로 표시"
 						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.HomeportBigFont}, Path=Value}" />
 			</StackPanel>

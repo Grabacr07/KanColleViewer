@@ -170,6 +170,7 @@
     <Compile Include="Composition\PluginMetadata.cs" />
     <Compile Include="Models\AkashiTimer.cs" />
     <Compile Include="Models\BrowserZoomFactor.cs" />
+    <Compile Include="Models\ComboBoxItemTemplateSelector.cs" />
     <Compile Include="Models\CSV.cs" />
     <Compile Include="Models\ExitConfirmationType.cs" />
     <Compile Include="Models\ExpeditionPossible.cs" />
