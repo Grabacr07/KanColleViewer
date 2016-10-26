@@ -20,14 +20,14 @@ namespace Grabacr07.KanColleWrapper.Models
 				case 6:
 					return "중령";
 				case 7:
-					return "햅쌀중령";
+					return "신참중령";
 				case 8:
 					return "소령";
 				case 9:
 					return "중견소령";
 				case 10:
 				default:
-					return "햅쌀소령";
+					return "신참소령";
 			}
 		}
 	}

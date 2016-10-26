@@ -330,6 +330,9 @@ namespace Grabacr07.KanColleWrapper.Models
 			{290, "SB03"},
 			{291, "SB04"},
 			{292, "SB05"},
+			{831, "SB12"},
+			{832, "SB13"},
+			{833, "SB14"},
 
 			// Year End, New Year
 			{298, "SB06"},

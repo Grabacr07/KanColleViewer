@@ -36,7 +36,8 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 				if (!slotitems.Any(x => x.Item.Info.Id == 96)) return; // 영식 함전 21형(숙련)
 
-				count = count.Add(args.itemList.Count(x => x == 21)) // 영식 함전 52형
+				var homeportSlotitems = KanColleClient.Current.Homeport.Itemyard.SlotItems;
+				count = count.Add(args.itemList.Count(x => (homeportSlotitems[x]?.Info.Id ?? 0) == 21)) // 영식 함전 52형
 							.Max(max_count);
 
 				ProcessChanged?.Invoke(this, emptyEventArgs);
