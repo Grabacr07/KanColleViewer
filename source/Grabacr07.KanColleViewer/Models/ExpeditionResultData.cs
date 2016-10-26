@@ -22,20 +22,20 @@ namespace Grabacr07.KanColleViewer.Models
 		public decimal Bauxite { get; set; }
 
 		public decimal ExpFuel => decimal.Round(this.Fuel * this.Rate);
-		public decimal ExpAmmo => decimal.Round(this.Fuel * this.Rate);
-		public decimal ExpSteel => decimal.Round(this.Fuel * this.Rate);
-		public decimal ExpBauxite => decimal.Round(this.Fuel * this.Rate);
+		public decimal ExpAmmo => decimal.Round(this.Ammo * this.Rate);
+		public decimal ExpSteel => decimal.Round(this.Steel * this.Rate);
+		public decimal ExpBauxite => decimal.Round(this.Bauxite * this.Rate);
 
 		public decimal ExpGreatFuel => decimal.Round(1.5m * this.Fuel * this.Rate);
-		public decimal ExpGreatAmmo => decimal.Round(1.5m * this.Fuel * this.Rate);
-		public decimal ExpGreatSteel => decimal.Round(1.5m * this.Fuel * this.Rate);
-		public decimal ExpGreatBauxite => decimal.Round(1.5m * this.Fuel * this.Rate);
+		public decimal ExpGreatAmmo => decimal.Round(1.5m * this.Ammo * this.Rate);
+		public decimal ExpGreatSteel => decimal.Round(1.5m * this.Steel * this.Rate);
+		public decimal ExpGreatBauxite => decimal.Round(1.5m * this.Bauxite * this.Rate);
 
 		public decimal Rate
 		{
 			get
 			{
-				var items = this.Ships.SelectMany(x => x.Ship.Slots).Select(x => x.Item);
+				var items = this.Ships?.SelectMany(x => x.Ship.Slots).Select(x => x.Item);
 
 				decimal result = 0.0m;
 				result += items.Where(x => x.Info.Id == 68).Sum(x => 5 + 0.05m * x.Level); // 大発動艇
@@ -45,20 +45,22 @@ namespace Grabacr07.KanColleViewer.Models
 
 				result += items.Where(x => x.Info.Id == 193).Sum(x => 7 + 0.07m * x.Level); // 特大発動艇
 				result = Math.Max(result, 22);
-				return result / 100; // percent to rate
+				return 1 + result / 100; // percent to rate
 			}
 		}
 
-		public ExpeditionResultData(int expeditionId)
+		public ExpeditionResultData(int expeditionId, ShipViewModel[] Ships)
 		{
 			var eid = expeditionId;
 
-			ID = eid;
-			Ships = this.Ships;
-			Fuel = ConvertToDecimal(KanColleClient.Current.Translations.GetExpeditionData("Fuel", eid));
-			Ammo = ConvertToDecimal(KanColleClient.Current.Translations.GetExpeditionData("Armo", eid));
-			Steel = ConvertToDecimal(KanColleClient.Current.Translations.GetExpeditionData("Metal", eid));
-			Bauxite = ConvertToDecimal(KanColleClient.Current.Translations.GetExpeditionData("Bo", eid));
+			this.ID = eid;
+			this.Ships = Ships;
+			this.Fuel = ConvertToDecimal(KanColleClient.Current.Translations.GetExpeditionData("Fuel", eid));
+			this.Ammo = ConvertToDecimal(KanColleClient.Current.Translations.GetExpeditionData("Armo", eid));
+			this.Steel = ConvertToDecimal(KanColleClient.Current.Translations.GetExpeditionData("Metal", eid));
+			this.Bauxite = ConvertToDecimal(KanColleClient.Current.Translations.GetExpeditionData("Bo", eid));
+
+			this.RefreshProperties();
 		}
 
 		public void RefreshProperties()

@@ -237,88 +237,102 @@
 														<ColumnDefinition Width="*" />
 														<ColumnDefinition Width="Auto" />
 														<ColumnDefinition Width="Auto" />
+														<ColumnDefinition Width="Auto" />
 													</Grid.ColumnDefinitions>
 
 													<TextBlock Text="연료:"
-														   Style="{DynamicResource DefaultTextStyleKey}" />
+															   Style="{DynamicResource DefaultTextStyleKey}" />
 													<TextBlock Grid.Column="1"
-														   HorizontalAlignment="Right"
-														   Text="{Binding ResultData.ExpFuel, Mode=OneWay, StringFormat={}{0}/}"
-														   Style="{DynamicResource DefaultTextStyleKey}" />
+															   Text="{Binding ResultData.ExpFuel, Mode=OneWay}"
+															   Style="{DynamicResource DefaultTextStyleKey}" />
 													<TextBlock Grid.Column="2"
-														   HorizontalAlignment="Right"
-														   Text="{Binding ResultData.ExpGreatFuel, Mode=OneWay}"
-														   Style="{DynamicResource EmphaticTextStyleKey}" />
+															   Margin="4,0"
+															   Text="/"
+															   Style="{DynamicResource DefaultTextStyleKey}" />
+													<TextBlock Grid.Column="3"
+															   Text="{Binding ResultData.ExpGreatFuel, Mode=OneWay}"
+															   Style="{DynamicResource EmphaticTextStyleKey}" />
 												</Grid>
 												<Grid Margin="8,0">
 													<Grid.ColumnDefinitions>
 														<ColumnDefinition Width="*" />
 														<ColumnDefinition Width="Auto" />
 														<ColumnDefinition Width="Auto" />
+														<ColumnDefinition Width="Auto" />
 													</Grid.ColumnDefinitions>
 
 													<TextBlock Grid.Row="1"
-														   Text="탄약:"
-														   Style="{DynamicResource DefaultTextStyleKey}" />
+															   Text="탄약:"
+															   Style="{DynamicResource DefaultTextStyleKey}" />
 													<TextBlock Grid.Row="1"
-														   Grid.Column="1"
-														   HorizontalAlignment="Right"
-														   Text="{Binding ResultData.ExpAmmo, Mode=OneWay, StringFormat={}{0}/}"
-														   Style="{DynamicResource DefaultTextStyleKey}" />
+															   Grid.Column="1"
+															   Text="{Binding ResultData.ExpAmmo, Mode=OneWay}"
+															   Style="{DynamicResource DefaultTextStyleKey}" />
 													<TextBlock Grid.Row="1"
-														   Grid.Column="2"
-														   HorizontalAlignment="Right"
-														   Text="{Binding ResultData.ExpGreatAmmo, Mode=OneWay}"
-														   Style="{DynamicResource EmphaticTextStyleKey}" />
+															   Grid.Column="2"
+															   Margin="4,0"
+															   Text="/"
+															   Style="{DynamicResource DefaultTextStyleKey}" />
+													<TextBlock Grid.Row="1"
+															   Grid.Column="3"
+															   Text="{Binding ResultData.ExpGreatAmmo, Mode=OneWay}"
+															   Style="{DynamicResource EmphaticTextStyleKey}" />
 												</Grid>
 												<Grid Margin="8,0">
 													<Grid.ColumnDefinitions>
 														<ColumnDefinition Width="*" />
 														<ColumnDefinition Width="Auto" />
 														<ColumnDefinition Width="Auto" />
+														<ColumnDefinition Width="Auto" />
 													</Grid.ColumnDefinitions>
 
 													<TextBlock Grid.Row="2"
-														   Text="강재:"
-														   Style="{DynamicResource DefaultTextStyleKey}" />
+															   Text="강재:"
+															   Style="{DynamicResource DefaultTextStyleKey}" />
 													<TextBlock Grid.Row="2"
-														   Grid.Column="1"
-														   HorizontalAlignment="Right"
-														   Text="{Binding ResultData.ExpSteel, Mode=OneWay, StringFormat={}{0}/}"
-														   Style="{DynamicResource DefaultTextStyleKey}" />
+															   Grid.Column="1"
+															   Text="{Binding ResultData.ExpSteel, Mode=OneWay}"
+															   Style="{DynamicResource DefaultTextStyleKey}" />
 													<TextBlock Grid.Row="2"
-														   Grid.Column="2"
-														   HorizontalAlignment="Right"
-														   Text="{Binding ResultData.ExpGreatSteel, Mode=OneWay}"
-														   Style="{DynamicResource EmphaticTextStyleKey}" />
+															   Grid.Column="2"
+															   Margin="4,0"
+															   Text="/"
+															   Style="{DynamicResource DefaultTextStyleKey}" />
+													<TextBlock Grid.Row="2"
+															   Grid.Column="3"
+															   Text="{Binding ResultData.ExpGreatSteel, Mode=OneWay}"
+															   Style="{DynamicResource EmphaticTextStyleKey}" />
 												</Grid>
 												<Grid Margin="8,0">
 													<Grid.ColumnDefinitions>
 														<ColumnDefinition Width="*" />
 														<ColumnDefinition Width="Auto" />
 														<ColumnDefinition Width="Auto" />
+														<ColumnDefinition Width="Auto" />
 													</Grid.ColumnDefinitions>
 
 													<TextBlock Grid.Row="3"
-														   Text="보키:"
-														   Style="{DynamicResource DefaultTextStyleKey}" />
+															   Text="보키:"
+															   Style="{DynamicResource DefaultTextStyleKey}" />
 													<TextBlock Grid.Row="3"
-														   Grid.Column="1"
-														   HorizontalAlignment="Right"
-														   Text="{Binding ResultData.ExpBauxire, Mode=OneWay, StringFormat={}{0}/}"
-														   Style="{DynamicResource DefaultTextStyleKey}" />
+															   Grid.Column="1"
+															   Text="{Binding ResultData.ExpBauxite, Mode=OneWay}"
+															   Style="{DynamicResource DefaultTextStyleKey}" />
 													<TextBlock Grid.Row="3"
-														   Grid.Column="2"
-														   HorizontalAlignment="Right"
-														   Text="{Binding ResultData.ExpGreatBauxite, Mode=OneWay}"
-														   Style="{DynamicResource EmphaticTextStyleKey}" />
+															   Grid.Column="2"
+															   Margin="4,0"
+															   Text="/"
+															   Style="{DynamicResource DefaultTextStyleKey}" />
+													<TextBlock Grid.Row="3"
+															   Grid.Column="3"
+															   Text="{Binding ResultData.ExpGreatBauxite, Mode=OneWay}"
+															   Style="{DynamicResource EmphaticTextStyleKey}" />
 												</Grid>
 											</StackPanel>
 										</Expander>
 									</StackPanel>
 
 									<TextBlock x:Name="ExpeditionReturned"
-											   Grid.RowSpan="2"
 											   Text="원정에서 복귀했습니다."
 											   Style="{DynamicResource EmphaticTextStyleKey}"
 											   HorizontalAlignment="Center"
@@ -330,7 +344,7 @@
 						</Grid>
 					</GroupBox>
 					<DataTemplate.Triggers>
-						<DataTrigger Binding="{Binding Expedition.IsInExecution, Mode=OneWay}" Value="True">
+						<DataTrigger Binding="{Binding Expedition.IsInExecution, Mode=OneWay}" Value="False">
 							<Setter TargetName="ExpeditionSelector" Property="Visibility" Value="Visible" />
 							<Setter TargetName="ExpeditionInfo" Property="Visibility" Value="Collapsed" />
 							<Setter TargetName="NotExcution" Property="Visibility" Value="Visible" />

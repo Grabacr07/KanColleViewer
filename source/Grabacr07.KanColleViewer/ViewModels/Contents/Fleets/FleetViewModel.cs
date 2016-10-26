@@ -153,7 +153,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 				this.RaisePropertyChanged();
 
-				this.ResultData = new ExpeditionResultData(value);
+				this.ResultData = new ExpeditionResultData(value, this.Ships);
 			}
 		}
 
