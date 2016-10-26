@@ -34,8 +34,22 @@
 			<StackPanel Orientation="Vertical"
 						Margin="20,0,0,0">
 				<CheckBox Margin="0,0,0,5"
+						  Content="모항 정보 영역의 제독, 사령부를 통합하여 간략하게 표시"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.AdmiralSummaryView}, Path=Value}" />
+				<TextBlock Margin="20,0,0,10"
+						   Text="생략된 내용은 툴팁을 통해 확인할 수 있습니다."
+						   Style="{DynamicResource DetailTextStyleKey}" />
+
+				<CheckBox Margin="0,0,0,5"
 						  Content="모항 정보 영역의 자원을 확장"
 						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.DisplayMaterialExtended}, Path=Value}" />
+
+				<CheckBox Margin="0,0,0,5"
+						  Content="모항 정보 영역의 자원을 수치만 표시"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.MaterialValueOnly}, Path=Value}" />
+				<TextBlock Margin="20,0,0,10"
+						   Text="표시할 내용을 선택하는 드롭다운에서는 이름도 표시됩니다."
+						   Style="{DynamicResource DetailTextStyleKey}" />
 
 				<CheckBox Margin="0,0,0,5"
 						  Content="모항 정보 폰트를 예전 큰 폰트로 표시"

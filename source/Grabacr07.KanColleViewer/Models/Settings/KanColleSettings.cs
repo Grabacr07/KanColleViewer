@@ -213,6 +213,18 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		public static SerializableProperty<int> MemoryOptimizePeriod { get; }
 			= new SerializableProperty<int>(GetKey(), Providers.Viewer, 60);
 
+		/// <summary>
+		/// 모항 정보의 제독 정보를 간단하게 표시할지를 설정합니다. (이름, 직급, 사령부 레벨만 표시, 나머지 정보는 툴팁에)
+		/// </summary>
+		public static SerializableProperty<bool> AdmiralSummaryView { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Viewer, false);
+
+		/// <summary>
+		/// 모항 정보의 자원을 수치만 표시할지를 설정합니다. (드롭다운에는 표시됨)
+		/// </summary>
+		public static SerializableProperty<bool> MaterialValueOnly { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Viewer, false);
+
 
 		#region instance members
 

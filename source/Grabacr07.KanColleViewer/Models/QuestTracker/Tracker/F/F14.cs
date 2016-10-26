@@ -36,7 +36,8 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 
 				if (!slotitems.Any(x => x.Item.Info.Id == 99)) return; // 99식 함상폭격기 (에구사대)
 
-				count = count.Add(args.itemList.Count(x => x == 24)) // 스이세이
+				var homeportSlotitems = KanColleClient.Current.Homeport.Itemyard.SlotItems;
+				count = count.Add(args.itemList.Count(x => (homeportSlotitems[x]?.Info.Id ?? 0) == 24)) // 스이세이
 							.Max(max_count);
 
 				ProcessChanged?.Invoke(this, emptyEventArgs);

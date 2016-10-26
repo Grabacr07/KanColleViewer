@@ -45,7 +45,8 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker.Tracker
 				var slotitems = fleet?.Ships[0]?.Slots;
 				if (!slotitems.Any(x => x.Item.Info.Id == 143)) return; // 97식 함상공격기(무라타대)
 
-				count = count.Add(args.itemList.Count(x => x == 17)) // 텐잔
+				var homeportSlotitems = KanColleClient.Current.Homeport.Itemyard.SlotItems;
+				count = count.Add(args.itemList.Count(x => (homeportSlotitems[x]?.Info.Id ?? 0) == 17)) // 텐잔
 							.Max(max_count);
 
 				ProcessChanged?.Invoke(this, emptyEventArgs);
