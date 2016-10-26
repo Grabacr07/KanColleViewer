@@ -37,14 +37,16 @@ namespace Grabacr07.KanColleViewer.Models
 			{
 				var items = this.Ships?.SelectMany(x => x.Ship.Slots).Select(x => x.Item);
 
-				decimal result = 0.0m;
+				decimal result = 0.0m, max = 0.0m;
 				result += items.Where(x => x.Info.Id == 68).Sum(x => 5 + 0.05m * x.Level); // 大発動艇
 				result += items.Where(x => x.Info.Id == 166).Sum(x => 2 + 0.02m * x.Level); // 大発動艇(八九式中戦車＆陸戦隊)
 				result += items.Where(x => x.Info.Id == 167).Sum(x => 1 + 0.01m * x.Level); // 特二式内火艇
 				result = Math.Min(result, 20);
 
 				result += items.Where(x => x.Info.Id == 193).Sum(x => 7 + 0.07m * x.Level); // 特大発動艇
-				result = Math.Min(result, 20 + items.Count(x => x.Info.Id == 193)); // +2% per 特大発動艇
+
+				max = items.Count(x => x.Info.Id == 193) + items.Where(x => x.Info.Id == 193).Sum(x => x.Level * 0.1m);
+				result = Math.Min(result, 20 + max); // +2% per 特大発動艇, +0.1% per Improvement
 				return 1 + result / 100; // percent to rate
 			}
 		}
