@@ -56,7 +56,8 @@ namespace Grabacr07.KanColleViewer.Models
 			decimal result = 0.0m, correction = 0.0m, max, levelAvrg;
 
 			max = items.Count(x => x.Info.Id == 193) * 2; // 특대발 갯수 * 2% 만큼 보정치 제한 확장
-			levelAvrg = (decimal)items.Average(x => x.Level); // 대발계 장비 개수 평균치
+			levelAvrg = items.Count() == 0 ? 0
+				: (decimal)items.Average(x => x.Level); // 대발계 장비 개수 평균치
 
 			correction += items.Where(x => x.Info.Id == 68).Sum(x => 5);  // 大発動艇 (대발동정)
 			correction += items.Where(x => x.Info.Id == 166).Sum(x => 2); // 大発動艇(八九式中戦車＆陸戦隊) (중전차)
