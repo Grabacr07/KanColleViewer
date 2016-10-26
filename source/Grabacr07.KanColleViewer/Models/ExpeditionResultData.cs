@@ -41,10 +41,10 @@ namespace Grabacr07.KanColleViewer.Models
 				result += items.Where(x => x.Info.Id == 68).Sum(x => 5 + 0.05m * x.Level); // 大発動艇
 				result += items.Where(x => x.Info.Id == 166).Sum(x => 2 + 0.02m * x.Level); // 大発動艇(八九式中戦車＆陸戦隊)
 				result += items.Where(x => x.Info.Id == 167).Sum(x => 1 + 0.01m * x.Level); // 特二式内火艇
-				result = Math.Max(result, 20);
+				result = Math.Min(result, 20);
 
 				result += items.Where(x => x.Info.Id == 193).Sum(x => 7 + 0.07m * x.Level); // 特大発動艇
-				result = Math.Max(result, 22);
+				result = Math.Min(result, 22);
 				return 1 + result / 100; // percent to rate
 			}
 		}
