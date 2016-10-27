@@ -163,7 +163,14 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models
 				{
 					tracker.RegisterEvent(this);
 					tracker.ResetQuest();
-					tracker.ProcessChanged += ((x, y) => QuestsEventChanged?.Invoke(this, EmptyEventArg));
+					tracker.ProcessChanged += ((x, y) =>
+					{
+						try
+						{
+							QuestsEventChanged?.Invoke(this, EmptyEventArg);
+						}
+						catch { }
+					});
 				}
 			};
 		}
