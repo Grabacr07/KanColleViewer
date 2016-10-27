@@ -73,7 +73,7 @@
 
 				<Rectangle Grid.Column="1"
 						   Width="1"
-						   Margin="10,3"
+						   Margin="10,5"
 						   Fill="{DynamicResource InactiveForegroundBrushKey}"
 						   Opacity="0.5" />
 
