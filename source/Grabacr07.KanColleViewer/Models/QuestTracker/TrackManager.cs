@@ -42,8 +42,6 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 		{
 			trackManager = new KanColleViewer.QuestTracker.Models.TrackManager(() => KanColleSettings.UseQuestTracker);
 
-			var proxy = KanColleClient.Current.Proxy;
-
 			var trackers = trackManager.Assembly.GetTypes()
 					.Where(x => (x.Namespace?.StartsWith(TrackerNamespace) ?? false) && typeof(ITracker).IsAssignableFrom(x));
 
@@ -57,8 +55,11 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 			ReadFromStorage();
 			WriteToStorage();
 
-			proxy.api_get_member_questlist
-				.Subscribe(x => new System.Threading.Thread(ProcessQuests).Start());
+			var quests = KanColleClient.Current.Homeport.Quests;
+			quests.PropertyChanged += (s, e) => {
+				if (e.PropertyName == nameof(quests.All))
+					new System.Threading.Thread(ProcessQuests).Start();
+			};
 
 		}
 		private void ProcessQuests()
@@ -173,7 +174,16 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 				{
 					foreach (var item in list)
 					{
-						try { CSV.Write(fs, item.Id, item.TrackTime, item.Type, item.Serialized); }
+						try {
+							CSV.Write(
+								fs,
+								item.Id, item.TrackTime, item.Type,
+								item.Serialized,
+								KanColleClient.Current.Homeport.Quests.All
+									.FirstOrDefault(x => x.Id == item.Id)
+									.Title
+							);
+						}
 						catch { }
 					}
 
