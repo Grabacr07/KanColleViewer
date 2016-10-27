@@ -22,6 +22,8 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models
 {
 	public class TrackManager
 	{
+		public Assembly Assembly => Assembly.GetExecutingAssembly();
+
 		public ObservableCollection<ITracker> trackingAvailable
 		{
 			get; private set;

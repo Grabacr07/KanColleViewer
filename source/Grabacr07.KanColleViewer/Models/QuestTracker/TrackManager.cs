@@ -44,7 +44,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 
 			var proxy = KanColleClient.Current.Proxy;
 
-			var trackers = Assembly.GetExecutingAssembly().GetTypes()
+			var trackers = trackManager.Assembly.GetTypes()
 					.Where(x => (x.Namespace?.StartsWith(TrackerNamespace) ?? false) && typeof(ITracker).IsAssignableFrom(x));
 
 			foreach (var tracker in trackers)
