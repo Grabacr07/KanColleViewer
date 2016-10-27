@@ -89,8 +89,8 @@
 					  IsExpanded="{Binding IsOpenFilterSettings, Mode=TwoWay}">
 						<Expander.Header>
 							<TextBlock Text="필터 설정"
-							   Style="{DynamicResource HeaderTextStyleKey}"
-							   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+									   Style="{DynamicResource HeaderTextStyleKey}"
+									   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 						</Expander.Header>
 						<StackPanel>
 							<Border BorderThickness=".99"
@@ -506,11 +506,17 @@
 				Padding="20"
 				Visibility="{Binding IsReloading, Converter={StaticResource BooleanToVisibilityConverter}}"
 				d:IsHidden="True">
-			<TextBlock Text="목록을 불러오는 중입니다..."
-					   Style="{DynamicResource EmphaticTextStyleKey}"
+			<TextBlock Style="{DynamicResource EmphaticTextStyleKey}"
 					   FontSize="16"
 					   Background="{DynamicResource ThemeBrushKey}"
-					   HorizontalAlignment="Center" />
+					   HorizontalAlignment="Center"
+					   TextAlignment="Center">
+				<metro:ProgressRing IsActive="True"
+									Margin="3,8"
+									HorizontalAlignment="Center" />
+				<LineBreak />
+				<Run Text="목록을 불러오는 중입니다..." />
+			</TextBlock>
 		</Border>
 
 	</Grid>
