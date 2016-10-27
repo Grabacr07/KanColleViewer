@@ -53,6 +53,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 				catch { }
 			}
 
+			this.QuestsEventChanged += (s, e) => WriteToStorage();
 			ReadFromStorage();
 			WriteToStorage();
 
