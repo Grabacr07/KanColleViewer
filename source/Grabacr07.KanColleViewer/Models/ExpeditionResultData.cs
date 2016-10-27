@@ -21,32 +21,53 @@ namespace Grabacr07.KanColleViewer.Models
 		public decimal Steel { get; set; }
 		public decimal Bauxite { get; set; }
 
-		public decimal ExpFuel => decimal.Round(this.Fuel * this.Rate);
-		public decimal ExpAmmo => decimal.Round(this.Ammo * this.Rate);
-		public decimal ExpSteel => decimal.Round(this.Steel * this.Rate);
-		public decimal ExpBauxite => decimal.Round(this.Bauxite * this.Rate);
+		public decimal ExpFuel => Calculate(this.Fuel);
+		public decimal ExpAmmo => Calculate(this.Ammo);
+		public decimal ExpSteel => Calculate(this.Steel);
+		public decimal ExpBauxite => Calculate(this.Bauxite);
 
-		public decimal ExpGreatFuel => decimal.Round(1.5m * this.Fuel * this.Rate);
-		public decimal ExpGreatAmmo => decimal.Round(1.5m * this.Ammo * this.Rate);
-		public decimal ExpGreatSteel => decimal.Round(1.5m * this.Steel * this.Rate);
-		public decimal ExpGreatBauxite => decimal.Round(1.5m * this.Bauxite * this.Rate);
+		public decimal ExpGreatFuel => Calculate(this.Fuel, 1.5m);
+		public decimal ExpGreatAmmo => Calculate(this.Ammo, 1.5m);
+		public decimal ExpGreatSteel => Calculate(this.Steel, 1.5m);
+		public decimal ExpGreatBauxite => Calculate(this.Bauxite, 1.5m);
 
-		public decimal Rate
+		/// <summary>
+		/// 대발계 장비 보정치를 포함한 예상 자원량 계산
+		/// </summary>
+		/// <param name="value">원본 취득량</param>
+		/// <param name="additional">성공 1.0, 대성공 1.5</param>
+		/// <returns></returns>
+		public decimal Calculate(decimal value, decimal additional = 1.0m)
 		{
-			get
+			// 계산공식 수정
+			// http://gall.dcinside.com/board/view/?id=kancolle&no=4857830
+
+			int[] itemtable = new int[]
 			{
-				var items = this.Ships?.SelectMany(x => x.Ship.Slots).Select(x => x.Item);
+				68,  // 大発動艇 (대발동정)
+				166, // 大発動艇(八九式中戦車＆陸戦隊) (중전차)
+				167, // 特二式内火艇 (내화정)
+				193  // 特大発動艇 (특대발동정)
+			};
+			var items = this.Ships?.SelectMany(x => x.Ship.Slots)
+				.Select(x => x.Item)
+				.Where(x => itemtable.Contains(x.Info.Id));
 
-				decimal result = 0.0m;
-				result += items.Where(x => x.Info.Id == 68).Sum(x => 5 + 0.05m * x.Level); // 大発動艇
-				result += items.Where(x => x.Info.Id == 166).Sum(x => 2 + 0.02m * x.Level); // 大発動艇(八九式中戦車＆陸戦隊)
-				result += items.Where(x => x.Info.Id == 167).Sum(x => 1 + 0.01m * x.Level); // 特二式内火艇
-				result = Math.Min(result, 20);
+			decimal correction = 0.0m, max, levelAvrg;
 
-				result += items.Where(x => x.Info.Id == 193).Sum(x => 7 + 0.07m * x.Level); // 特大発動艇
-				result = Math.Min(result, 22);
-				return 1 + result / 100; // percent to rate
-			}
+			max = 20 + items.Count(x => x.Info.Id == 193) * 2; // 20% + (특대발 갯수 x 2%) 만큼 보정치 제한 확장
+			levelAvrg = items.Count() == 0 ? 0
+				: (decimal)items.Average(x => x.Level); // 대발계 장비 개수 평균치
+
+			correction += items.Where(x => x.Info.Id == 68).Sum(x => 5);  // 大発動艇 (대발동정)
+			correction += items.Where(x => x.Info.Id == 166).Sum(x => 2); // 大発動艇(八九式中戦車＆陸戦隊) (중전차)
+			correction += items.Where(x => x.Info.Id == 167).Sum(x => 1); // 特二式内火艇 (내화정)
+			correction += items.Where(x => x.Info.Id == 193).Sum(x => 7); // 特大発動艇 (특대발동정)
+
+			correction = Math.Min(correction, max); // 보정치 제한
+			correction /= 100.0m;
+
+			return decimal.Floor(value * (1.0m + correction + (0.01m * correction * levelAvrg)) * additional);
 		}
 
 		public ExpeditionResultData(int expeditionId, ShipViewModel[] Ships)
@@ -69,7 +90,6 @@ namespace Grabacr07.KanColleViewer.Models
 			this.RaisePropertyChanged(nameof(this.Ammo));
 			this.RaisePropertyChanged(nameof(this.Steel));
 			this.RaisePropertyChanged(nameof(this.Bauxite));
-			this.RaisePropertyChanged(nameof(this.Rate));
 			this.RaisePropertyChanged(nameof(this.ExpFuel));
 			this.RaisePropertyChanged(nameof(this.ExpAmmo));
 			this.RaisePropertyChanged(nameof(this.ExpSteel));

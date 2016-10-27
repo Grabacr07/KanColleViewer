@@ -15,9 +15,11 @@
 			 xmlns:vmContents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
+			 xmlns:ms="clr-namespace:Grabacr07.KanColleViewer.Models.Settings"
 			 mc:Ignorable="d"
 			 d:DesignWidth="700"
-			 d:DesignHeight="300"
+			 d:DesignHeight="500"
 			 d:DataContext="{d:DesignInstance vmContents:ExpeditionsViewModel}">
 	<UserControl.Resources>
 		<Style TargetType="{x:Type GroupBox}">
@@ -199,6 +201,7 @@
 									<Grid.RowDefinitions>
 										<RowDefinition Height="*" />
 										<RowDefinition Height="Auto" />
+										<RowDefinition Height="Auto" />
 									</Grid.RowDefinitions>
 
 									<StackPanel x:Name="ExpeditionProgress">
@@ -215,121 +218,145 @@
 												   Margin="0,0,0,4"
 												   Style="{DynamicResource HeaderTextStyleKey}" />
 										<TextBlock Text="{Binding Expedition.Remaining, Mode=OneWay}"
-												Style="{DynamicResource EmphaticTextStyleKey}"
-												Margin="8,0" />
+												   Style="{DynamicResource EmphaticTextStyleKey}"
+												   Margin="8,0" />
 									</StackPanel>
 
-									<StackPanel Grid.Row="1">
+									<StackPanel x:Name="ShipsCondition"
+												Grid.Row="1">
 										<Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
 
-										<Expander Grid.Row="3"
-												  ExpandDirection="Up">
-											<Expander.Header>
-												<TextBlock Margin="0,0,0,4"
-													   Style="{DynamicResource HeaderTextStyleKey}">
-													<Run Text="예상 자원 (성공/" />
-													<Run Text="대성공" Style="{DynamicResource EmphaticTextElementStyleKey}"/><Run Text=")" />
-												</TextBlock>
-											</Expander.Header>
-											<StackPanel Margin="8, 0">
-												<Grid Margin="8,0">
-													<Grid.ColumnDefinitions>
-														<ColumnDefinition Width="*" />
-														<ColumnDefinition Width="Auto" />
-														<ColumnDefinition Width="Auto" />
-														<ColumnDefinition Width="Auto" />
-													</Grid.ColumnDefinitions>
+										<TextBlock Margin="0,0,0,4"
+												   Text="칸무스 피로도"
+												   Style="{DynamicResource HeaderTextStyleKey}" />
 
-													<TextBlock Text="연료:"
-															   Style="{DynamicResource DefaultTextStyleKey}" />
-													<TextBlock Grid.Column="1"
-															   Text="{Binding ResultData.ExpFuel, Mode=OneWay}"
-															   Style="{DynamicResource DefaultTextStyleKey}" />
-													<TextBlock Grid.Column="2"
-															   Margin="4,0"
-															   Text="/"
-															   Style="{DynamicResource DefaultTextStyleKey}" />
-													<TextBlock Grid.Column="3"
-															   Text="{Binding ResultData.ExpGreatFuel, Mode=OneWay}"
-															   Style="{DynamicResource EmphaticTextStyleKey}" />
-												</Grid>
-												<Grid Margin="8,0">
-													<Grid.ColumnDefinitions>
-														<ColumnDefinition Width="*" />
-														<ColumnDefinition Width="Auto" />
-														<ColumnDefinition Width="Auto" />
-														<ColumnDefinition Width="Auto" />
-													</Grid.ColumnDefinitions>
+										<ItemsControl ItemsSource="{Binding Ships}">
+											<ItemsControl.ItemsPanel>
+												<ItemsPanelTemplate>
+													<UniformGrid Columns="3" />
+												</ItemsPanelTemplate>
+											</ItemsControl.ItemsPanel>
+											<ItemsControl.ItemTemplate>
+												<DataTemplate>
+													<StackPanel Orientation="Horizontal"
+																Margin="5,3">
+														<kcvc:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
 
-													<TextBlock Grid.Row="1"
-															   Text="탄약:"
-															   Style="{DynamicResource DefaultTextStyleKey}" />
-													<TextBlock Grid.Row="1"
-															   Grid.Column="1"
-															   Text="{Binding ResultData.ExpAmmo, Mode=OneWay}"
-															   Style="{DynamicResource DefaultTextStyleKey}" />
-													<TextBlock Grid.Row="1"
-															   Grid.Column="2"
-															   Margin="4,0"
-															   Text="/"
-															   Style="{DynamicResource DefaultTextStyleKey}" />
-													<TextBlock Grid.Row="1"
-															   Grid.Column="3"
-															   Text="{Binding ResultData.ExpGreatAmmo, Mode=OneWay}"
-															   Style="{DynamicResource EmphaticTextStyleKey}" />
-												</Grid>
-												<Grid Margin="8,0">
-													<Grid.ColumnDefinitions>
-														<ColumnDefinition Width="*" />
-														<ColumnDefinition Width="Auto" />
-														<ColumnDefinition Width="Auto" />
-														<ColumnDefinition Width="Auto" />
-													</Grid.ColumnDefinitions>
+														<TextBlock Margin="4,0,0,0"
+																   Text="{Binding Ship.Condition, Mode=OneWay}"
+																   Style="{DynamicResource DeafultTextStyleKey}" />
+													</StackPanel>
+												</DataTemplate>
+											</ItemsControl.ItemTemplate>
+										</ItemsControl>
+									</StackPanel>
 
-													<TextBlock Grid.Row="2"
-															   Text="강재:"
-															   Style="{DynamicResource DefaultTextStyleKey}" />
-													<TextBlock Grid.Row="2"
-															   Grid.Column="1"
-															   Text="{Binding ResultData.ExpSteel, Mode=OneWay}"
-															   Style="{DynamicResource DefaultTextStyleKey}" />
-													<TextBlock Grid.Row="2"
-															   Grid.Column="2"
-															   Margin="4,0"
-															   Text="/"
-															   Style="{DynamicResource DefaultTextStyleKey}" />
-													<TextBlock Grid.Row="2"
-															   Grid.Column="3"
-															   Text="{Binding ResultData.ExpGreatSteel, Mode=OneWay}"
-															   Style="{DynamicResource EmphaticTextStyleKey}" />
-												</Grid>
-												<Grid Margin="8,0">
-													<Grid.ColumnDefinitions>
-														<ColumnDefinition Width="*" />
-														<ColumnDefinition Width="Auto" />
-														<ColumnDefinition Width="Auto" />
-														<ColumnDefinition Width="Auto" />
-													</Grid.ColumnDefinitions>
+									<StackPanel x:Name="ResultMaterial"
+												Grid.Row="2">
+										<Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
 
-													<TextBlock Grid.Row="3"
-															   Text="보키:"
-															   Style="{DynamicResource DefaultTextStyleKey}" />
-													<TextBlock Grid.Row="3"
-															   Grid.Column="1"
-															   Text="{Binding ResultData.ExpBauxite, Mode=OneWay}"
-															   Style="{DynamicResource DefaultTextStyleKey}" />
-													<TextBlock Grid.Row="3"
-															   Grid.Column="2"
-															   Margin="4,0"
-															   Text="/"
-															   Style="{DynamicResource DefaultTextStyleKey}" />
-													<TextBlock Grid.Row="3"
-															   Grid.Column="3"
-															   Text="{Binding ResultData.ExpGreatBauxite, Mode=OneWay}"
-															   Style="{DynamicResource EmphaticTextStyleKey}" />
-												</Grid>
-											</StackPanel>
-										</Expander>
+										<TextBlock Margin="0,0,0,4"
+												   Style="{DynamicResource HeaderTextStyleKey}">
+											<Run Text="예상 자원 (성공/" />
+											<Run Text="대성공" Style="{DynamicResource EmphaticTextElementStyleKey}"/><Run Text=")" />
+										</TextBlock>
+
+										<Grid Margin="8,0">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="*" />
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="Auto" />
+											</Grid.ColumnDefinitions>
+
+											<TextBlock Text="연료:"
+													   Style="{DynamicResource DefaultTextStyleKey}" />
+											<TextBlock Grid.Column="1"
+													   Text="{Binding ResultData.ExpFuel, Mode=OneWay}"
+													   Style="{DynamicResource DefaultTextStyleKey}" />
+											<TextBlock Grid.Column="2"
+													   Margin="4,0"
+													   Text="/"
+													   Style="{DynamicResource DefaultTextStyleKey}" />
+											<TextBlock Grid.Column="3"
+													   Text="{Binding ResultData.ExpGreatFuel, Mode=OneWay}"
+													   Style="{DynamicResource EmphaticTextStyleKey}" />
+										</Grid>
+										<Grid Margin="8,0">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="*" />
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="Auto" />
+											</Grid.ColumnDefinitions>
+
+											<TextBlock Grid.Row="1"
+													   Text="탄약:"
+													   Style="{DynamicResource DefaultTextStyleKey}" />
+											<TextBlock Grid.Row="1"
+													   Grid.Column="1"
+													   Text="{Binding ResultData.ExpAmmo, Mode=OneWay}"
+													   Style="{DynamicResource DefaultTextStyleKey}" />
+											<TextBlock Grid.Row="1"
+													   Grid.Column="2"
+													   Margin="4,0"
+													   Text="/"
+													   Style="{DynamicResource DefaultTextStyleKey}" />
+											<TextBlock Grid.Row="1"
+													   Grid.Column="3"
+													   Text="{Binding ResultData.ExpGreatAmmo, Mode=OneWay}"
+													   Style="{DynamicResource EmphaticTextStyleKey}" />
+										</Grid>
+										<Grid Margin="8,0">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="*" />
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="Auto" />
+											</Grid.ColumnDefinitions>
+
+											<TextBlock Grid.Row="2"
+													   Text="강재:"
+													   Style="{DynamicResource DefaultTextStyleKey}" />
+											<TextBlock Grid.Row="2"
+													   Grid.Column="1"
+													   Text="{Binding ResultData.ExpSteel, Mode=OneWay}"
+													   Style="{DynamicResource DefaultTextStyleKey}" />
+											<TextBlock Grid.Row="2"
+													   Grid.Column="2"
+													   Margin="4,0"
+													   Text="/"
+													   Style="{DynamicResource DefaultTextStyleKey}" />
+											<TextBlock Grid.Row="2"
+													   Grid.Column="3"
+													   Text="{Binding ResultData.ExpGreatSteel, Mode=OneWay}"
+													   Style="{DynamicResource EmphaticTextStyleKey}" />
+										</Grid>
+										<Grid Margin="8,0">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="*" />
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="Auto" />
+											</Grid.ColumnDefinitions>
+
+											<TextBlock Grid.Row="3"
+													   Text="보크사이트:"
+													   Style="{DynamicResource DefaultTextStyleKey}" />
+											<TextBlock Grid.Row="3"
+													   Grid.Column="1"
+													   Text="{Binding ResultData.ExpBauxite, Mode=OneWay}"
+													   Style="{DynamicResource DefaultTextStyleKey}" />
+											<TextBlock Grid.Row="3"
+													   Grid.Column="2"
+													   Margin="4,0"
+													   Text="/"
+													   Style="{DynamicResource DefaultTextStyleKey}" />
+											<TextBlock Grid.Row="3"
+													   Grid.Column="3"
+													   Text="{Binding ResultData.ExpGreatBauxite, Mode=OneWay}"
+													   Style="{DynamicResource EmphaticTextStyleKey}" />
+										</Grid>
 									</StackPanel>
 
 									<TextBlock x:Name="ExpeditionReturned"
@@ -344,6 +371,12 @@
 						</Grid>
 					</GroupBox>
 					<DataTemplate.Triggers>
+						<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.ExpeditionExpectResult}, Path=Value}" Value="False">
+							<Setter TargetName="ResultMaterial" Property="Visibility" Value="Collapsed" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.ExpeditionConditions}, Path=Value}" Value="False">
+							<Setter TargetName="ShipsCondition" Property="Visibility" Value="Collapsed" />
+						</DataTrigger>
 						<DataTrigger Binding="{Binding Expedition.IsInExecution, Mode=OneWay}" Value="False">
 							<Setter TargetName="ExpeditionSelector" Property="Visibility" Value="Visible" />
 							<Setter TargetName="ExpeditionInfo" Property="Visibility" Value="Collapsed" />
@@ -357,6 +390,7 @@
 						<DataTrigger Binding="{Binding Expedition.Returned, Mode=OneWay}" Value="True">
 							<Setter TargetName="ExpeditionProgress" Property="Visibility" Value="Hidden" />
 							<Setter TargetName="ExpeditionReturned" Property="Visibility" Value="Visible" />
+							<Setter TargetName="ShipsCondition" Property="Visibility" Value="Collapsed" />
 						</DataTrigger>
 					</DataTemplate.Triggers>
 				</DataTemplate>
