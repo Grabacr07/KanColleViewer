@@ -237,6 +237,18 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		public static SerializableProperty<bool> ExpeditionConditions { get; }
 			= new SerializableProperty<bool>(GetKey(), Providers.Viewer, false);
 
+		/// <summary>
+		/// 완료된 임무 갯수를 뱃지로 탭에 표시할지를 설정합니다.
+		/// </summary>
+		public static SerializableProperty<bool> ShowQuestBadge { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Viewer, true);
+
+		/// <summary>
+		/// 완료된 원정 갯수를 뱃지로 탭에 표시할지를 설정합니다.
+		/// </summary>
+		public static SerializableProperty<bool> ShowExpeditionBadge { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Viewer, false);
+
 
 		#region instance members
 
