@@ -225,26 +225,28 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 		private void UpdateQuest(Quests quests)
 		{
 			var viewList = quests.All
-				.Select(x => new QuestViewModel(x)).Distinct(x => x.Id)
+				.Select(x => new QuestViewModel(x))
+				.Distinct(x => x.Id)
 				.ToList();
 
-			questTracker.AllQuests.ForEach(x =>
-			{
-				foreach (var y in viewList)
+			try
+			{ // QuestTracker 어디서 문제가 생길지 모름
+				questTracker.AllQuests.ForEach(x =>
 				{
-					if (y.Id == x.Id)
-					{
-						y.QuestProgressValue = x.GetProgress();
-						y.QuestProgressText = x.GetProgressText();
-					}
-				}
-			});
+					var y = viewList.Where(z => z.Id == x.Id).FirstOrDefault();
+					if (y == null) return;
+
+					y.QuestProgressValue = x.GetProgress();
+					y.QuestProgressText = x.GetProgressText();
+				});
+			}
+			catch { }
 
 			this.Quests = viewList.ToArray();
 			this.IsEmpty = quests.IsEmpty;
 			this.IsUntaken = quests.IsUntaken;
 
-			var badge = questTracker.AllQuests.Where(x => quests.All.Any(y => y.Id == x.Id)).Count(x => x.GetProgress() == 100);
+			var badge = Quests.Count(x => x.QuestProgressValue == 100);
 			this.Badge = (badge == 0) ? null : (int?)badge;
 			this.RaisePropertyChanged("Name");
 		}

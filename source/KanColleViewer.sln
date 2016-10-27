@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanColleViewer", "Grabacr07.KanColleViewer\KanColleViewer.csproj", "{C5F0111F-3F68-4A74-BB20-BB762564D080}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -79,6 +79,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroRadiance", "MetroRadiance\source\MetroRadiance\MetroRadiance.csproj", "{0AF0B9FF-D981-4D0F-A41F-C3AB6FE2F16D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroRadiance.Chrome", "MetroRadiance\source\MetroRadiance.Chrome\MetroRadiance.Chrome.csproj", "{21B4AD15-D9FA-4873-BFAD-1EEEFBC6C264}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanColleViewer.QuestTracker", "Grabacr07.KanColleViewer.QuestTracker\KanColleViewer.QuestTracker.csproj", "{039E4D88-DECD-494D-92D2-407C6403A010}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -370,6 +372,22 @@ Global
 		{21B4AD15-D9FA-4873-BFAD-1EEEFBC6C264}.Release|Any CPU.Build.0 = Release|Any CPU
 		{21B4AD15-D9FA-4873-BFAD-1EEEFBC6C264}.Release|x86.ActiveCfg = Release|Any CPU
 		{21B4AD15-D9FA-4873-BFAD-1EEEFBC6C264}.Release|x86.Build.0 = Release|Any CPU
+		{039E4D88-DECD-494D-92D2-407C6403A010}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{039E4D88-DECD-494D-92D2-407C6403A010}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{039E4D88-DECD-494D-92D2-407C6403A010}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{039E4D88-DECD-494D-92D2-407C6403A010}.Debug|x86.Build.0 = Debug|Any CPU
+		{039E4D88-DECD-494D-92D2-407C6403A010}.Release (beta)|Any CPU.ActiveCfg = Release|Any CPU
+		{039E4D88-DECD-494D-92D2-407C6403A010}.Release (beta)|Any CPU.Build.0 = Release|Any CPU
+		{039E4D88-DECD-494D-92D2-407C6403A010}.Release (beta)|x86.ActiveCfg = Release|Any CPU
+		{039E4D88-DECD-494D-92D2-407C6403A010}.Release (beta)|x86.Build.0 = Release|Any CPU
+		{039E4D88-DECD-494D-92D2-407C6403A010}.Release RETRO|Any CPU.ActiveCfg = Release|Any CPU
+		{039E4D88-DECD-494D-92D2-407C6403A010}.Release RETRO|Any CPU.Build.0 = Release|Any CPU
+		{039E4D88-DECD-494D-92D2-407C6403A010}.Release RETRO|x86.ActiveCfg = Release|Any CPU
+		{039E4D88-DECD-494D-92D2-407C6403A010}.Release RETRO|x86.Build.0 = Release|Any CPU
+		{039E4D88-DECD-494D-92D2-407C6403A010}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{039E4D88-DECD-494D-92D2-407C6403A010}.Release|Any CPU.Build.0 = Release|Any CPU
+		{039E4D88-DECD-494D-92D2-407C6403A010}.Release|x86.ActiveCfg = Release|Any CPU
+		{039E4D88-DECD-494D-92D2-407C6403A010}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

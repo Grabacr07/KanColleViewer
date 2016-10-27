@@ -1088,11 +1088,17 @@
 					Margin="8"
 					Padding="20"
 					Visibility="{Binding IsReloading, Converter={StaticResource BooleanToVisibilityConverter}}">
-				<TextBlock Text="화면을 갱신중입니다..."
-						   Style="{DynamicResource EmphaticTextStyleKey}"
+				<TextBlock Style="{DynamicResource EmphaticTextStyleKey}"
 						   FontSize="16"
 						   Background="{DynamicResource ThemeBrushKey}"
-						   HorizontalAlignment="Center" />
+						   HorizontalAlignment="Center"
+						   TextAlignment="Center">
+					<metro:ProgressRing IsActive="True"
+										Margin="3,8"
+										HorizontalAlignment="Center" />
+					<LineBreak />
+					<Run Text="화면을 갱신중입니다..." />
+				</TextBlock>
 			</Border>
 		</Grid>
 	</Grid>
