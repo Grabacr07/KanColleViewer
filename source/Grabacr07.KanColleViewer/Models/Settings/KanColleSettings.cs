@@ -225,6 +225,18 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		public static SerializableProperty<bool> MaterialValueOnly { get; }
 			= new SerializableProperty<bool>(GetKey(), Providers.Viewer, false);
 
+		/// <summary>
+		/// 원정의 기대자원량을 표시할지를 설정합니다.
+		/// </summary>
+		public static SerializableProperty<bool> ExpeditionExpectResult { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Viewer, true);
+
+		/// <summary>
+		/// 원정 함대의 키라 상황을 표시합니다.
+		/// </summary>
+		public static SerializableProperty<bool> ExpeditionConditions { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Viewer, false);
+
 
 		#region instance members
 
