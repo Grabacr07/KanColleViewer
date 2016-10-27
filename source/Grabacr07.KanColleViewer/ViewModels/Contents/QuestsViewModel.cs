@@ -6,6 +6,7 @@ using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleWrapper;
 using Livet.EventListeners;
 
+using Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleViewer.Models.QuestTracker;
 using Grabacr07.KanColleViewer.ViewModels.Contents.Fleets;
@@ -19,6 +20,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			get { return Resources.Quests; }
 			protected set { throw new NotImplementedException(); }
 		}
+
+		private int? _badge = null;
 
 		public QuestViewModel[] Current => this._Quests.Where(x => x.State != QuestState.None).ToArray();
 
@@ -216,10 +219,20 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			questTracker = new TrackManager();
 			questTracker.QuestsEventChanged += (s, e) => this.UpdateQuest(quests);
 
+
+			KanColleSettings.ShowQuestBadge.ValueChanged += (s, e) => this.UpdateBadge();
 			this.UpdateQuest(quests);
 
-
 			this.Fleets = fleets;
+		}
+
+		private void UpdateBadge()
+		{
+			if (KanColleSettings.ShowQuestBadge)
+			{
+				this.Badge = _badge == 0 ? null : (int?)_badge;
+			}
+			else this.Badge = null;
 		}
 
 		private void UpdateQuest(Quests quests)
@@ -246,9 +259,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			this.IsEmpty = quests.IsEmpty;
 			this.IsUntaken = quests.IsUntaken;
 
-			var badge = Quests.Count(x => x.QuestProgressValue == 100);
-			this.Badge = (badge == 0) ? null : (int?)badge;
-			this.RaisePropertyChanged("Name");
+			_badge = Quests.Count(x => x.QuestProgressValue == 100);
+			this.UpdateBadge();
 		}
 		private QuestViewModel[] ComputeQuestPage(QuestViewModel[] inp)
 		{
@@ -271,7 +283,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			return inp.ToArray();
 		}
 
-		string CategoryToColor(QuestCategory category)
+		private string CategoryToColor(QuestCategory category)
 		{
 			switch (category)
 			{

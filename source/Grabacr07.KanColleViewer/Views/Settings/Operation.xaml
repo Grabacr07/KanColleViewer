@@ -8,7 +8,7 @@
 			 xmlns:vms="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Settings"
 			 mc:Ignorable="d"
 			 d:DesignWidth="500"
-			 d:DesignHeight="500"
+			 d:DesignHeight="680"
 			 d:DataContext="{d:DesignInstance vms:SettingsViewModel}">
 	<UserControl.Resources>
 		<ResourceDictionary>
@@ -127,6 +127,10 @@
 				<Border Height="8" />
 				<CheckBox Content="함대의 피로도를 표시"
 						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.ExpeditionConditions}, Path=Value}" />
+
+				<Border Height="8" />
+				<CheckBox Content="완료된 원정 갯수를 탭에 뱃지로 표현"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.ShowExpeditionBadge}, Path=Value}" />
 			</StackPanel>
 
 			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
@@ -136,6 +140,10 @@
 			<StackPanel Margin="20,0,0,0">
 				<CheckBox Content="임무 진행도 추적을 사용"
 						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.UseQuestTracker}, Path=Value}" />
+
+				<Border Height="8" />
+				<CheckBox Content="완료된 임무 갯수를 탭에 뱃지로 표현"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.ShowQuestBadge}, Path=Value}" />
 			</StackPanel>
 
 			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />

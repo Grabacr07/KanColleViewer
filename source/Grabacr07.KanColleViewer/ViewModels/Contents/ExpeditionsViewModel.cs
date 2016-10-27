@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.ViewModels.Contents.Fleets;
 using Livet.EventListeners;
 
+using Grabacr07.KanColleViewer.Models.Settings;
+
 namespace Grabacr07.KanColleViewer.ViewModels.Contents
 {
 	public class ExpeditionsViewModel : TabItemViewModel
@@ -21,6 +23,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 		public ExpeditionsViewModel(FleetsViewModel fleets)
 		{
 			this.Fleets = fleets;
+
+			KanColleSettings.ShowExpeditionBadge.ValueChanged += (s, e) => this.UpdateBadge();
+			this.UpdateBadge();
 
 			this.Fleets.CompositeDisposable.Add(new PropertyChangedEventListener(this.Fleets)
 			{
@@ -62,10 +67,14 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 		private void UpdateBadge()
 		{
-			var ExpeditionFleets = this.Fleets.Fleets.Where(x => x.Id != 1);
-			var badge = ExpeditionFleets.Count(x => x.Expedition.Returned);
+			if (KanColleSettings.ShowExpeditionBadge)
+			{
+				var ExpeditionFleets = this.Fleets.Fleets.Where(x => x.Id != 1);
+				var badge = ExpeditionFleets.Count(x => x.Expedition.Returned);
 
-			this.Badge = badge == 0 ? null : (int?)badge;
+				this.Badge = badge == 0 ? null : (int?)badge;
+			}
+			else this.Badge = null;
 		}
 	}
 }
