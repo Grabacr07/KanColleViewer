@@ -57,12 +57,13 @@ namespace Grabacr07.KanColleViewer.Models
 
 			decimal correction = 0.0m, max, levelAvrg;
 
-			// 20% + (특대발 갯수 or 키누改2 x 2%) 만큼 보정치 제한 확장, 확장량 5% 한계
-			max = 20 + Math.Min(5, (items.Count(x => x.Info.Id == 193) + kinu_kai_ni) * 2);
+			// 20% + (특대발 갯수 x 2%) 만큼 보정치 제한 확장, 확장량 5% 한계
+			max = 20 + Math.Min(5, items.Count(x => x.Info.Id == 193) * 2);
 
 			levelAvrg = items.Count() == 0 ? 0
 				: (decimal)items.Average(x => x.Level); // 대발계 장비 개수 평균치
 
+			correction += kinu_kai_ni * 5; // 키누改2 는 대발동정처럼 작동한다?
 			correction += items.Where(x => x.Info.Id == 68).Sum(x => 5);  // 大発動艇 (대발동정)
 			correction += items.Where(x => x.Info.Id == 166).Sum(x => 2); // 大発動艇(八九式中戦車＆陸戦隊) (중전차)
 			correction += items.Where(x => x.Info.Id == 167).Sum(x => 1); // 特二式内火艇 (내화정)
