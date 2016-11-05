@@ -37,7 +37,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 					285, // 鳳翔改
 				};
 
-				var fleet = KanColleClient.Current.Homeport.Organization.Fleets[0];
+				var fleet = KanColleClient.Current.Homeport.Organization.Fleets[1];
 				if (!flagshipTable.Any(x => x == (fleet?.Ships[0]?.Info.Id ?? 0))) return; // 호쇼 비서함
 
 				var slotitems = fleet?.Ships[0]?.Slots;
