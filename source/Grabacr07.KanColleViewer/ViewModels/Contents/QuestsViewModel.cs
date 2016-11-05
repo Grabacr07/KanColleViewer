@@ -259,7 +259,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			this.IsEmpty = quests.IsEmpty;
 			this.IsUntaken = quests.IsUntaken;
 
-			_badge = Quests.Count(x => x.QuestProgressValue == 100);
+			// Quests 멤버는 필터 적용된걸 get으로 반환해서 문제가 있음
+			_badge = viewList.Count(x => x.QuestProgressValue == 100);
 			this.UpdateBadge();
 		}
 		private QuestViewModel[] ComputeQuestPage(QuestViewModel[] inp)

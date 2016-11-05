@@ -53,9 +53,13 @@ namespace Grabacr07.KanColleViewer.Models
 				.Select(x => x.Item)
 				.Where(x => itemtable.Contains(x.Info.Id));
 
+			var kinu_kai_ni = this.Ships?.Count(x => x.Ship.Info.Id == 487) ?? 0; // 키누改2
+
 			decimal correction = 0.0m, max, levelAvrg;
 
-			max = 20 + items.Count(x => x.Info.Id == 193) * 2; // 20% + (특대발 갯수 x 2%) 만큼 보정치 제한 확장
+			// 20% + (특대발 갯수 or 키누改2 x 2%) 만큼 보정치 제한 확장, 확장량 5% 한계
+			max = 20 + Math.Min(5, (items.Count(x => x.Info.Id == 193) + kinu_kai_ni) * 2);
+
 			levelAvrg = items.Count() == 0 ? 0
 				: (decimal)items.Average(x => x.Level); // 대발계 장비 개수 평균치
 

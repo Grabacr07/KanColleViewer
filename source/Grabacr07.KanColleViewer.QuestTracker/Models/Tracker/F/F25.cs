@@ -31,7 +31,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 			{
 				if (!IsTracking) return;
 
-				var fleet = KanColleClient.Current.Homeport.Organization.Fleets[0];
+				var fleet = KanColleClient.Current.Homeport.Organization.Fleets[1];
 				var slotitems = fleet?.Ships[0]?.Slots;
 
 				if (!slotitems.Any(x => x.Item.Info.Id == 96 && x.Item.Proficiency == 7)) return; // 숙련도max 영식 함전 21형(숙련)

@@ -35,7 +35,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 				var fleets = homeport.Organization.Fleets;
 
 				if (fleets.Count < 2) return;
-				if (fleets[1].IsInSortie) count = count.Add(1).Max(max_count);
+				if (fleets[2].IsInSortie) count = count.Add(1).Max(max_count);
 
 				ProcessChanged?.Invoke(this, emptyEventArgs);
 			};

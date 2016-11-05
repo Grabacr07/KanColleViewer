@@ -205,7 +205,7 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		/// 자동 메모리 최적화를 사용할지 여부를 설정합니다.
 		/// </summary>
 		public static SerializableProperty<bool> UseMemoryOptimize { get; }
-			= new SerializableProperty<bool>(GetKey(), Providers.Viewer, true);
+			= new SerializableProperty<bool>(GetKey(), Providers.Viewer, false);
 
 		/// <summary>
 		/// 자동 메모리 최적화의 주기를 설정합니다. (초)
