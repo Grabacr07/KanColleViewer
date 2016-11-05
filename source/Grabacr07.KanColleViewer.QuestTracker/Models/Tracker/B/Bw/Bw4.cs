@@ -32,7 +32,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 
 				count = count.Add(
 						args.EnemyShips
-							.Where(x => x.Type == 15 || x.Type == 22)
+							.Where(x => x.Type == 15)
 							.Where(x => x.MaxHp != int.MaxValue && x.NowHp <= 0)
 							.Count()
 					).Max(max_count);

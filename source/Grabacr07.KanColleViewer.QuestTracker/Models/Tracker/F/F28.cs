@@ -39,7 +39,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 					467, // 瑞鶴改二甲
 				};
 
-				var fleet = KanColleClient.Current.Homeport.Organization.Fleets[0];
+				var fleet = KanColleClient.Current.Homeport.Organization.Fleets[1];
 				if (!flagshipTable.Any(x => x == fleet?.Ships[0]?.Id)) return; // 즈이카쿠 비서함
 
 				var slotitems = fleet?.Ships[0]?.Slots;

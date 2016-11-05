@@ -177,8 +177,8 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models
 
 		public void RefreshTrackers()
 		{
-			HenseiEvent?.Invoke(this, EmptyEventArg);
-			EquipEvent?.Invoke(this, EmptyEventArg);
+			Preprocess(() => HenseiEvent?.Invoke(this, EmptyEventArg));
+			Preprocess(() => EquipEvent?.Invoke(this, EmptyEventArg));
 			QuestsEventChanged?.Invoke(this, EmptyEventArg);
 		}
 	}
