@@ -32,7 +32,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 				if (!IsTracking) return;
 
 				if (args.MapWorldId != 2 || (args.MapAreaId != 2 && args.MapAreaId != 3)) return; // 2-2 or 2-3
-				if ("S" == args.Rank) return; // S승리
+				if ("S" != args.Rank) return; // S승리
 
 				if (args.MapAreaId == 2)
 				{
