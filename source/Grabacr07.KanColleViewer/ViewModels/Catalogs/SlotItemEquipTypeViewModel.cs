@@ -62,7 +62,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				{
 					this._IsSelected = value;
 					this.RaisePropertyChanged();
-					if (this.SelectionChangedAction != null) this.SelectionChangedAction();
+					SelectionChangedAction?.Invoke();
 				}
 			}
 		}

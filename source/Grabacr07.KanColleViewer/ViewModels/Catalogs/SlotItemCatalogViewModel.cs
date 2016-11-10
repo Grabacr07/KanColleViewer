@@ -116,7 +116,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				.ToList();
 			*/
 			this.SlotItemEquipTypes = Enum.GetNames(typeof(SlotItemIconType))
-				.Select(x => new SlotItemEquipTypeViewModel((SlotItemIconType)Enum.Parse(typeof(SlotItemIconType), x)))
+				.Select(x => new SlotItemEquipTypeViewModel((SlotItemIconType)Enum.Parse(typeof(SlotItemIconType), x))
+				{
+					IsSelected = true,
+					SelectionChangedAction = () => this.Update()
+				})
 				.ToList();
 
 			this.updateSource
