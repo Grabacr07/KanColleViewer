@@ -59,7 +59,7 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 			}
 			catch (Exception)
 			{
-				File.Delete(Providers.RoamingFilePath);
+				// File.Delete(Providers.RoamingFilePath);
 				Providers.Viewer.Load();
 			}
 
@@ -90,7 +90,7 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 				MessageBox.Show(string.Format(message, Providers.LocalFilePath, ex.Message), "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
 				throw;
 			}
-
+			/*
 			try
 			{
 				Providers.Viewer.Save();
@@ -100,6 +100,7 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 				MessageBox.Show(string.Format(message, Providers.RoamingFilePath, ex.Message), "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
 				throw;
 			}
+			*/
 		}
 
 		#endregion

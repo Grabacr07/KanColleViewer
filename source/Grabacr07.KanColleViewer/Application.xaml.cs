@@ -95,23 +95,14 @@ namespace Grabacr07.KanColleViewer
 				}
 				catch
 				{
-					var LocalfilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "grabacr.net");
-					var RoamingfilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "grabacr.net");
-					var LocalDirs = Directory.GetDirectories(LocalfilePath).ToList();
-					var RoamingDirs = Directory.GetDirectories(RoamingfilePath).ToList();
-					var ViewerPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.xaml");
-					for (int i = 0; i < LocalDirs.Count; i++)
+					try
 					{
-						if (LocalDirs[i] != "KanColleViewer")
-							Directory.Delete(Path.Combine(LocalfilePath, LocalDirs[i]), true);
+						File.Delete(Providers.LocalFilePath);
+						File.Delete(Providers.ViewerDirectoryPath);
 					}
-					for (int i = 0; i < RoamingDirs.Count; i++)
-					{
-						if (RoamingDirs[i] != "KanColleViewer")
-							Directory.Delete(Path.Combine(RoamingfilePath, RoamingDirs[i]), true);
-					}
-					File.Delete(ViewerPath);
-					MessageBox.Show("어플리케이션 기동중 문제가 발생하여 일부 설정파일을 초기화합니다.\n프로그램이 종료됩니다", "제독업무도 바빠!", MessageBoxButton.OK, MessageBoxImage.Warning);
+					catch { }
+
+					MessageBox.Show("어플리케이션 기동중 문제가 발생하여 일부 설정파일을 초기화합니다.\n프로그램이 종료되며, 재시작 해주시기 바랍니다.", "제독업무도 바빠!", MessageBoxButton.OK, MessageBoxImage.Warning);
 					this.Shutdown();
 					return;
 				}
