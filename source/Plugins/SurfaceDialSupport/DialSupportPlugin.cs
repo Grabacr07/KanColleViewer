@@ -10,6 +10,7 @@ using Windows.UI.Input;
 using Grabacr07.KanColleViewer;
 using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.ViewModels;
+using Grabacr07.KanColleViewer.ViewModels.Contents;
 using Application = System.Windows.Application;
 
 namespace SurfaceDialSupport
@@ -25,6 +26,8 @@ namespace SurfaceDialSupport
 		private bool initialized;
 		private RadialController controller;
 		private RadialControllerConfiguration configuration;
+		private Action[] activateActions;
+		private int index;
 
 		public void Initialize()
 		{
@@ -49,21 +52,52 @@ namespace SurfaceDialSupport
 
 			this.configuration.SetDefaultMenuItems(new[] { RadialControllerSystemMenuItemKind.Volume, });
 			this.controller.Menu.Items.Add(RadialControllerMenuItem.CreateFromKnownIcon("Tab", RadialControllerMenuKnownIcon.Scroll));
-			this.controller.RotationChanged += (sender, args) => this.ChangeTab(args.RotationDeltaInDegrees < 0);
+			this.controller.RotationChanged += (sender, args) => this.Action(args.RotationDeltaInDegrees < 0);
 
 			this.initialized = true;
 		}
 
-		private void ChangeTab(bool prev)
+		private IEnumerable<Action> CreateActivateActions(InformationViewModel vm)
 		{
-			var vm = WindowService.Current.Information;
-			var oldIndex = vm.TabItems.IndexOf(vm.SelectedItem);
-			var newIndex = oldIndex + (prev ? -1 : 1);
+			foreach (var item in vm.TabItems)
+			{
+				var tools = item as ToolsViewModel;
+				if (tools != null)
+				{
+					foreach (var tool in tools.Tools)
+					{
+						yield return () =>
+						{
+							vm.SelectedItem = item;
+							tools.SelectedTool = tool;
+						};
+					}
+					continue;
+				}
 
-			if (newIndex < 0) newIndex = vm.TabItems.Count - 1;
-			else if (newIndex >= vm.TabItems.Count) newIndex = 0;
+				yield return () => vm.SelectedItem = item;
+			}
 
-			vm.SelectedItem = vm.TabItems[newIndex];
+			foreach (var item in vm.SystemTabItems)
+			{
+				yield return () => vm.SelectedItem = item;
+			}
+		}
+
+		private void Action(bool prev)
+		{
+			if (this.activateActions == null)
+			{
+				this.activateActions = this.CreateActivateActions(WindowService.Current.Information).ToArray();
+			}
+
+			if (prev) this.index--;
+			else this.index++;
+
+			if (this.index < 0) this.index = this.activateActions.Length - 1;
+			else if (this.index >= this.activateActions.Length) this.index = 0;
+
+			this.activateActions[this.index]();
 		}
 	}
 
