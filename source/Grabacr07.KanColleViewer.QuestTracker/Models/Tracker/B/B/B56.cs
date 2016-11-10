@@ -33,7 +33,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 
 				if (args.MapWorldId != 3 || args.MapAreaId != 3) return; // 3-3
 				if (args.EnemyName != "深海棲艦泊地艦隊") return; // boss
-				if ("S" == args.Rank) return; // S승리
+				if ("S" != args.Rank) return; // S승리
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets.FirstOrDefault(x => x.Value.IsInSortie).Value;
 				var ships = fleet?.Ships;

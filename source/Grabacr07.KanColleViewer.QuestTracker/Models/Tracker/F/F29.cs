@@ -40,7 +40,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 				};
 
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets[1];
-				if (!flagshipTable.Any(x => x == fleet?.Ships[0]?.Id)) return; // 즈이카쿠 비서함
+				if (!flagshipTable.Any(x => x == fleet?.Ships[0]?.Info.Id)) return; // 즈이카쿠 비서함
 
 				var slotitems = fleet?.Ships[0]?.Slots;
 				if (!slotitems.Any(x => x.Item.Info.Id == 155 && x.Item.Proficiency == 7)) return; // 숙련도max 영전 21형(이와모토소대)
