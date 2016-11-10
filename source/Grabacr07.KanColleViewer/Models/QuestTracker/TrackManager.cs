@@ -97,7 +97,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 							break;
 
 						case QuestState.Accomplished:
-							tracker.First().IsTracking = false;
+							tracker.First().IsTracking = true;
 							break;
 					}
 				}
