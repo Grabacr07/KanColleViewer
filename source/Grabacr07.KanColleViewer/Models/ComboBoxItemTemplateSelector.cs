@@ -16,20 +16,14 @@ namespace Grabacr07.KanColleViewer.Models
 
 		public override DataTemplate SelectTemplate(object item, DependencyObject container)
 		{
-			bool selected = false;
 			FrameworkElement fe = container as FrameworkElement;
+			if (fe == null) return ItemTemplate;
 
-			if (fe != null)
-			{
-				DependencyObject parent = fe.TemplatedParent;
-				if (parent != null)
-				{
-					ComboBox cbo = parent as ComboBox;
-					if (cbo != null) selected = true;
-				}
-			}
+			DependencyObject parent = fe.TemplatedParent;
+			if (parent == null) return ItemTemplate;
 
-			if (selected) return SelectedItemTemplate;
+			ComboBox cbo = parent as ComboBox;
+			if (cbo != null) return SelectedItemTemplate;
 			return ItemTemplate;
 		}
 	}

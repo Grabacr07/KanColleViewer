@@ -51,7 +51,7 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 		/// <param name="path"></param>
 		private void SaveCore(string path)
 		{
-			const string notFoundMessage = "艦これの Flash 要素が見つかりません。";
+			const string notFoundMessage = "칸코레 Flash를 찾을 수 없습니다.";
 
 			var document = this.AssociatedObject.Document as HTMLDocument;
 			if (document == null)
