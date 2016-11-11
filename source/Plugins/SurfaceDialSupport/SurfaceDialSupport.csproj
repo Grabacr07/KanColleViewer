@@ -7,8 +7,8 @@
     <ProjectGuid>{18DE8065-CD0B-41E7-855B-83FC26E0B6D8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SurfaceDialSupport</RootNamespace>
-    <AssemblyName>SurfaceDialSupport</AssemblyName>
+    <RootNamespace>Grabacr07.KanColleViewer.Plugins.DialSupport</RootNamespace>
+    <AssemblyName>ExPlugin.SurfaceDialSupport</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
     <FileAlignment>512</FileAlignment>
@@ -62,6 +62,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DesktopRadialController.cs" />
     <Compile Include="DialSupportPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

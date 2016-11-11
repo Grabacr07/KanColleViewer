@@ -2,18 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows;
 using System.Windows.Interop;
-using Windows.UI.Input;
-using Grabacr07.KanColleViewer;
 using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.ViewModels;
 using Grabacr07.KanColleViewer.ViewModels.Contents;
-using Application = System.Windows.Application;
+using Windows.UI.Input;
 
-namespace SurfaceDialSupport
+namespace Grabacr07.KanColleViewer.Plugins.DialSupport
 {
 	[Export(typeof(IPlugin))]
 	[ExportMetadata("Guid", "F8BFF484-1894-4881-9720-8907265511FD")]
@@ -31,9 +27,9 @@ namespace SurfaceDialSupport
 
 		public void Initialize()
 		{
-			Application.Current.Startup += (sender, args) =>
+			System.Windows.Application.Current.Startup += (sender, args) =>
 			{
-				var window = Application.Current.MainWindow;
+				var window = System.Windows.Application.Current.MainWindow;
 				window.SourceInitialized += (s, e) => this.InitializeCore();
 				this.InitializeCore();
 			};
@@ -43,7 +39,7 @@ namespace SurfaceDialSupport
 		{
 			if (this.initialized) return;
 
-			var window = Application.Current.MainWindow;
+			var window = System.Windows.Application.Current.MainWindow;
 			var source = PresentationSource.FromVisual(window) as HwndSource;
 			if (source == null) return;
 
@@ -99,43 +95,5 @@ namespace SurfaceDialSupport
 
 			this.activateActions[this.index]();
 		}
-	}
-
-
-	public static class DesktopRadialController
-	{
-		public static RadialController Create(IntPtr hWnd)
-		{
-			// ReSharper disable once SuspiciousTypeConversion.Global
-			var controller = (IDesktopRadialController)WindowsRuntimeMarshal.GetActivationFactory(typeof(RadialController));
-			var iid = typeof(RadialController).GetInterface("IRadialController").GUID;
-
-			return controller.CreateForWindow(hWnd, ref iid);
-		}
-	}
-
-	public static class DesktopRadialControllerConfiguration
-	{
-		public static RadialControllerConfiguration Create(IntPtr hWnd)
-		{
-			var configration = (IDesktopRadialControllerConfiguration)WindowsRuntimeMarshal.GetActivationFactory(typeof(RadialControllerConfiguration));
-			var iid = typeof(RadialControllerConfiguration).GetInterface("IRadialControllerConfiguration").GUID;
-
-			return configration.GetForWindow(hWnd, ref iid);
-		}
-	}
-
-	[Guid("1b0535c9-57ad-45c1-9d79-ad5c34360513")]
-	[InterfaceType(ComInterfaceType.InterfaceIsIInspectable)]
-	public interface IDesktopRadialController
-	{
-		RadialController CreateForWindow(IntPtr hWnd, [In] ref Guid iid);
-	}
-
-	[Guid("787cdaac-3186-476d-87e4-b9374a7b9970")]
-	[InterfaceType(ComInterfaceType.InterfaceIsIInspectable)]
-	public interface IDesktopRadialControllerConfiguration
-	{
-		RadialControllerConfiguration GetForWindow(IntPtr hWnd, [In] ref Guid iid);
 	}
 }
