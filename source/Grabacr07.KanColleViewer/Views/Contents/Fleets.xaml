@@ -223,7 +223,7 @@
 						<ItemsControl.ItemTemplate>
 							<DataTemplate>
 								<Grid x:Name="Elements"
-									  ToolTip="{Binding Item.NameWithLevel}"
+									  ToolTip="{Binding Tooltip}"
 									  Background="Transparent">
 									<kcvc:SlotItemIcon x:Name="ItemIcon"
 													   Type="{Binding Item.Info.IconType}"
@@ -387,6 +387,7 @@
 									<MultiDataTrigger>
 										<MultiDataTrigger.Conditions>
 											<Condition Binding="{Binding DataContext.ShowAirplaneAlways, ElementName=RootView}" Value="True" />
+											<Condition Binding="{Binding Equipped}" Value="False" />
 											<Condition Binding="{Binding Maximum}" Value="0" />
 										</MultiDataTrigger.Conditions>
 										<MultiDataTrigger.Setters>
