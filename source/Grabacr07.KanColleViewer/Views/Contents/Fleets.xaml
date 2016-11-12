@@ -225,7 +225,8 @@
 								<Grid x:Name="Elements"
 									  ToolTip="{Binding Item.NameWithLevel}"
 									  Background="Transparent">
-									<kcvc:SlotItemIcon Type="{Binding Item.Info.IconType}"
+									<kcvc:SlotItemIcon x:Name="ItemIcon"
+													   Type="{Binding Item.Info.IconType}"
 													   Margin="3,0" />
 
 									<TextBlock x:Name="LostCount"
@@ -370,6 +371,21 @@
 									<DataTrigger Binding="{Binding Equipped}" Value="False">
 										<Setter TargetName="Elements" Property="Visibility" Value="Collapsed" />
 									</DataTrigger>
+
+									<DataTrigger Binding="{Binding DataContext.ShowAirplaneAlways, ElementName=RootView}" Value="True">
+										<Setter TargetName="Elements" Property="Visibility" Value="Visible" />
+										<Setter TargetName="ItemIcon" Property="Visibility" Value="Collapsed" />
+									</DataTrigger>
+									<MultiDataTrigger>
+										<MultiDataTrigger.Conditions>
+											<Condition Binding="{Binding DataContext.ShowAirplaneAlways, ElementName=RootView}" Value="True" />
+											<Condition Binding="{Binding Maximum}" Value="0" />
+										</MultiDataTrigger.Conditions>
+										<MultiDataTrigger.Setters>
+											<Setter TargetName="Elements" Property="Visibility" Value="Collapsed" />
+										</MultiDataTrigger.Setters>
+									</MultiDataTrigger>
+
 									<DataTrigger Binding="{Binding Item.LevelText}" Value="">
 										<Setter TargetName="ItemLevelBlock" Property="Visibility" Value="Collapsed" />
 									</DataTrigger>
