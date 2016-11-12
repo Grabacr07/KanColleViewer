@@ -385,6 +385,9 @@
 									<DataTrigger Binding="{Binding FitValue}" Value="1">
 										<Setter TargetName="Elements" Property="Background" Value="#4862B5F5" />
 									</DataTrigger>
+									<DataTrigger Binding="{Binding FitValue}" Value="2">
+										<Setter TargetName="Elements" Property="Background" Value="#6062B5F5" />
+									</DataTrigger>
 								</DataTemplate.Triggers>
 							</DataTemplate>
 						</ItemsControl.ItemTemplate>
