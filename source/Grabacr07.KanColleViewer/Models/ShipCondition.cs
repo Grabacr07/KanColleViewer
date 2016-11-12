@@ -48,7 +48,7 @@ namespace Grabacr07.KanColleViewer.Models
 
 				// 3분 기준 컨디션 3이므로 공식 간소화
 				var value = (goal - condition + 2) / 3 * 3; // 정수 나누기
-				rejuvenate = rejuvenate.AddMilliseconds(value);
+				rejuvenate = rejuvenate.AddMinutes(value);
 
 				/*
 				// 기존 루프
