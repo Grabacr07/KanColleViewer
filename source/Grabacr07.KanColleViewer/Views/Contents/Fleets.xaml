@@ -374,8 +374,16 @@
 
 									<DataTrigger Binding="{Binding DataContext.ShowAirplaneAlways, ElementName=RootView}" Value="True">
 										<Setter TargetName="Elements" Property="Visibility" Value="Visible" />
-										<Setter TargetName="ItemIcon" Property="Visibility" Value="Collapsed" />
 									</DataTrigger>
+									<MultiDataTrigger>
+										<MultiDataTrigger.Conditions>
+											<Condition Binding="{Binding DataContext.ShowAirplaneAlways, ElementName=RootView}" Value="True" />
+											<Condition Binding="{Binding Equipped}" Value="False" />
+										</MultiDataTrigger.Conditions>
+										<MultiDataTrigger.Setters>
+											<Setter TargetName="ItemIcon" Property="Visibility" Value="Hidden" />
+										</MultiDataTrigger.Setters>
+									</MultiDataTrigger>
 									<MultiDataTrigger>
 										<MultiDataTrigger.Conditions>
 											<Condition Binding="{Binding DataContext.ShowAirplaneAlways, ElementName=RootView}" Value="True" />
