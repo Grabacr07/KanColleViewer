@@ -154,6 +154,12 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 			= new SerializableProperty<bool>(GetKey(), Providers.Viewer, true);
 
 		/// <summary>
+		/// 함재기를 장착하지 않아도 슬롯수를 표시할지 여부에 대한 설정.
+		/// </summary>
+		public static SerializableProperty<bool> ShowAirplaneAlways { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Viewer, true);
+
+		/// <summary>
 		/// 공작함이 기함일 때 출격가능으로 판정하지 않을지 설정합니다.
 		/// </summary>
 		public static SerializableProperty<bool> CheckFlagshipIsNotRepairShip { get; }

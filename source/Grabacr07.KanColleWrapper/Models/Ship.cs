@@ -504,9 +504,9 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			this.Slots = this.RawData.api_slot
 				.Select(id => this.homeport.Itemyard.SlotItems[id])
-				.Select((t, i) => new ShipSlot(t, this.Info.RawData.api_maxeq.Get(i) ?? 0, this.RawData.api_onslot.Get(i) ?? 0))
+				.Select((t, i) => new ShipSlot(this, t, this.Info.RawData.api_maxeq.Get(i) ?? 0, this.RawData.api_onslot.Get(i) ?? 0))
 				.ToArray();
-			this.ExSlot = new ShipSlot(this.homeport.Itemyard.SlotItems[this.RawData.api_slot_ex], 0, 0);
+			this.ExSlot = new ShipSlot(this, this.homeport.Itemyard.SlotItems[this.RawData.api_slot_ex], 0, 0);
 			this.EquippedItems = this.EnumerateAllEquippedItems().ToArray();
 
 			if (this.EquippedItems.Any(x => x.Item.Info.Type == SlotItemType.応急修理要員))
