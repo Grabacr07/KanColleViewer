@@ -377,13 +377,13 @@
 										<Setter TargetName="ItemProficiencyBlock" Property="Visibility" Value="Collapsed" />
 									</DataTrigger>
 									<DataTrigger Binding="{Binding FitValue}" Value="-1">
-										<Setter TargetName="Elements" Property="Background" Value="#30D15B5B" />
+										<Setter TargetName="Elements" Property="Background" Value="#48D15B5B" />
 									</DataTrigger>
 									<DataTrigger Binding="{Binding FitValue}" Value="-2">
-										<Setter TargetName="Elements" Property="Background" Value="#30C22222" />
+										<Setter TargetName="Elements" Property="Background" Value="#48C22222" />
 									</DataTrigger>
 									<DataTrigger Binding="{Binding FitValue}" Value="1">
-										<Setter TargetName="Elements" Property="Background" Value="#3062B5F5" />
+										<Setter TargetName="Elements" Property="Background" Value="#4862B5F5" />
 									</DataTrigger>
 								</DataTemplate.Triggers>
 							</DataTemplate>
