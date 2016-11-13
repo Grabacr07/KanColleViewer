@@ -50,7 +50,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		private int CalculateFit()
 		{
-			ShipFitClass shipClass = ShipFitClassUtil.FromShipId(this.Owner.Id);
+			ShipFitClass shipClass = ShipFitClassUtil.FromShipInfo(this.Owner);
 			if (shipClass == ShipFitClass.NA) return 0;
 
 			var itemInfo = this.Item.Info;
