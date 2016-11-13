@@ -77,9 +77,19 @@ namespace Grabacr07.KanColleWrapper.Models
 		SendaiClass,
 
 		/// <summary>
-		/// 쿠마급 (球磨, 多摩, 北上-改X, 大井-改X, 木曾-改二X)
+		/// 텐류급 (天龍, 龍田)
+		/// </summary>
+		TenryuuClass,
+
+		/// <summary>
+		/// 쿠마급 (球磨, 多摩)
 		/// </summary>
 		KumaClass,
+
+		/// <summary>
+		/// 나가라급 (長良, 五十鈴, 名取, 由良, 鬼怒, 阿武隈)
+		/// </summary>
+		NagaraClass,
 
 		/// <summary>
 		/// 유바리급 (夕張)
@@ -97,7 +107,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		AganoClass,
 
 		/// <summary>
-		/// 쿠마급 중뇌장순양함 (北上改, 大井改, 木曾改二)
+		/// 쿠마급 중뇌장순양함 (北上, 大井, 木曾)
 		/// </summary>
 		KumaTorpedoClass,
 
@@ -176,31 +186,32 @@ namespace Grabacr07.KanColleWrapper.Models
 			 * 2호포 및 해외 20.3cm/203mm에 과적이 있다는 이야기는 없으므로 무보정으로 가정
 			 * ---------------------------------------------------------------------------------------
 			 * 쿠마급은 쿠마, 타마만 선택, 중뇌장순양함은 개장 전의 키타카미, 오오이, 키소 전체 선택함
+			 * 텐류급 및 나가라급이 없어서 평균 데이터인 유바리/오요도/아가노급/센다이급 데이터에 맞춤
 			 * 20.3 시리즈가 일제 주포 20.3cm 인지, 해외 20.3cm/203mm 도 포함인지 모르지만 일단 포함
 			 * 14cm단장포/연장포 및 15.2cm 부포도 피트에 포함된다는 일본 블로그 정보 - http://rankasan.hatenadiary.com/entry/2016/06/13/163132
 			 * 15.2cm 주포 피트에 15.2cm 부포 피트이므로 (동구경이므로), 15.5cm 부포도 노패널티로 가정
 			 * OTO 152mm가 해외 부포여서 보정이 없다고 가정하고, 15cm 연장부포 또한 무보정으로 가정
 			 */
 
-			FitTable_Medium.Add(6,   ShipFitClassUtil.ParseMedium("-1,0 ,-1,-1,-1,-1,+1")); // 20.3cm連装砲
-			FitTable_Medium.Add(90,  ShipFitClassUtil.ParseMedium("-1,0 ,-1,-1,-1,-1, 0")); // 20.3cm(2号)連装砲
-			FitTable_Medium.Add(50,  ShipFitClassUtil.ParseMedium("-1,0 ,-1,-1,-1,-1,+1")); // 20.3cm(3号)連装砲
-			FitTable_Medium.Add(123, ShipFitClassUtil.ParseMedium("-1,0 ,-1,-1,-1,-1, 0")); // SKC34 20.3cm連装砲
-			FitTable_Medium.Add(162, ShipFitClassUtil.ParseMedium("-1,0 ,-1,-1,-1,-1, 0")); // 203mm/53 連装砲
+			FitTable_Medium.Add(6,   ShipFitClassUtil.ParseMedium("-1,0 ,-1,-1,-1,-1,-1,-1,+1")); // 20.3cm連装砲
+			FitTable_Medium.Add(90,  ShipFitClassUtil.ParseMedium("-1,0 ,-1,-1,-1,-1,-1,-1, 0")); // 20.3cm(2号)連装砲
+			FitTable_Medium.Add(50,  ShipFitClassUtil.ParseMedium("-1,0 ,-1,-1,-1,-1,-1,-1,+1")); // 20.3cm(3号)連装砲
+			FitTable_Medium.Add(123, ShipFitClassUtil.ParseMedium("-1,0 ,-1,-1,-1,-1,-1,-1, 0")); // SKC34 20.3cm連装砲
+			FitTable_Medium.Add(162, ShipFitClassUtil.ParseMedium("-1,0 ,-1,-1,-1,-1,-1,-1, 0")); // 203mm/53 連装砲
 
-			FitTable_Medium.Add(5,   ShipFitClassUtil.ParseMedium(" 0, 0, 0, 0, 0, 0, 0")); // 15.5cm三連装砲 (主砲)
-			FitTable_Medium.Add(12,  ShipFitClassUtil.ParseMedium(" 0, 0, 0, 0, 0, 0, 0")); // 15.5cm三連装副砲 (副砲)
+			FitTable_Medium.Add(5,   ShipFitClassUtil.ParseMedium(" 0, 0, 0, 0, 0, 0, 0, 0, 0")); // 15.5cm三連装砲 (主砲)
+			FitTable_Medium.Add(12,  ShipFitClassUtil.ParseMedium(" 0, 0, 0, 0, 0, 0, 0, 0, 0")); // 15.5cm三連装副砲 (副砲)
 
-			FitTable_Medium.Add(4,   ShipFitClassUtil.ParseMedium("+1,+1,+1,+1, 0,+1, 0")); // 14cm単装砲
-			FitTable_Medium.Add(119, ShipFitClassUtil.ParseMedium("+1,+1,+1,+1, 0,+1, 0")); // 14cm連装砲
-			FitTable_Medium.Add(11,  ShipFitClassUtil.ParseMedium("+1,+1,+1,+1, 0,+1, 0")); // 15.2cm単装砲 (副砲)
-			FitTable_Medium.Add(65,  ShipFitClassUtil.ParseMedium("+1,+1,+1,+1, 0,+1, 0")); // 15.2cm連装砲
-			FitTable_Medium.Add(139, ShipFitClassUtil.ParseMedium("+1,+1,+1,+1, 0,+1, 0")); // 15.2cm連装砲改
+			FitTable_Medium.Add(4,   ShipFitClassUtil.ParseMedium("+1,+1,+1,+1,+1,+1, 0,+1, 0")); // 14cm単装砲
+			FitTable_Medium.Add(119, ShipFitClassUtil.ParseMedium("+1,+1,+1,+1,+1,+1, 0,+1, 0")); // 14cm連装砲
+			FitTable_Medium.Add(11,  ShipFitClassUtil.ParseMedium("+1,+1,+1,+1,+1,+1, 0,+1, 0")); // 15.2cm単装砲 (副砲)
+			FitTable_Medium.Add(65,  ShipFitClassUtil.ParseMedium("+1,+1,+1,+1,+1,+1, 0,+1, 0")); // 15.2cm連装砲
+			FitTable_Medium.Add(139, ShipFitClassUtil.ParseMedium("+1,+1,+1,+1,+1,+1, 0,+1, 0")); // 15.2cm連装砲改
 
-			FitTable_Medium.Add(77,  ShipFitClassUtil.ParseMedium(" 0, 0, 0, 0, 0, 0, 0")); // 15cm連装副砲
-			FitTable_Medium.Add(134, ShipFitClassUtil.ParseMedium(" 0, 0, 0, 0, 0, 0, 0")); // OTO 152mm三連装速射砲
+			FitTable_Medium.Add(77,  ShipFitClassUtil.ParseMedium(" 0, 0, 0, 0, 0, 0, 0, 0, 0")); // 15cm連装副砲
+			FitTable_Medium.Add(134, ShipFitClassUtil.ParseMedium(" 0, 0, 0, 0, 0, 0, 0, 0, 0")); // OTO 152mm三連装速射砲
 
-			// FitTable_Medium.Add(0,   ShipFitClassUtil.ParseMedium("- ,- ,- ,- ,- ,- ")); // NAME
+			// FitTable_Medium.Add(0,   ShipFitClassUtil.ParseMedium("- ,- ,- ,- ,- ,- ,- ,- ,- ,- ")); // NAME
 			#endregion
 		}
 
@@ -236,14 +247,14 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 중구경 주포/부포 피트 테이블 생성
 		/// </summary>
-		/// <param name="Table">센다이급, 쿠마급 경순, 유바리급&amp;오요도급, 아가노급, 쿠마급 중뇌순, 카토리급, 중순양함</param>
+		/// <param name="Table">센다이급, 쿠마급 경순, 텐류급, 나가라급, 유바리급&amp;오요도급, 아가노급, 쿠마급 중뇌순, 카토리급, 중순양함</param>
 		/// <returns>생성된 피트 테이블</returns>
 		private static Dictionary<ShipFitClass, int> ParseMedium(string Table)
 		{
 			string[] part = Table.Replace(" ", "").Replace("+", "")
 				.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-			int[] values = new int[7] { 0, 0, 0, 0, 0, 0, 0 };
+			int[] values = new int[10] { 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 };
 			int len = Math.Min(values.Length, part.Length);
 			for (var i = 0; i < len; i++)
 				int.TryParse(part[i], out values[i]);
@@ -252,12 +263,14 @@ namespace Grabacr07.KanColleWrapper.Models
 				{
 					{ ShipFitClass.SendaiClass,      values[0] },
 					{ ShipFitClass.KumaClass,        values[1] },
-					{ ShipFitClass.YuubariClass,     values[2] },
-					{ ShipFitClass.OyodoClass,       values[2] },
-					{ ShipFitClass.AganoClass,       values[3] },
-					{ ShipFitClass.KumaTorpedoClass, values[4] },
-					{ ShipFitClass.KatoriClass,      values[5] },
-					{ ShipFitClass.HeavyCruiser,     values[6] },
+					{ ShipFitClass.TenryuuClass,     values[2] },
+					{ ShipFitClass.NagaraClass,      values[3] },
+					{ ShipFitClass.YuubariClass,     values[4] },
+					{ ShipFitClass.OyodoClass,       values[5] },
+					{ ShipFitClass.AganoClass,       values[6] },
+					{ ShipFitClass.KumaTorpedoClass, values[7] },
+					{ ShipFitClass.KatoriClass,      values[8] },
+					{ ShipFitClass.HeavyCruiser,     values[9] },
 				};
 		}
 
@@ -347,11 +360,34 @@ namespace Grabacr07.KanColleWrapper.Models
 				case 160: // 那珂改二
 					return ShipFitClass.SendaiClass;
 
+				case 51:  // 天龍
+				case 213: // 天龍改
+				case 52:  // 龍田
+				case 214: // 龍田改
+					return ShipFitClass.TenryuuClass;
+
 				case 99:  // 球磨
 				case 215: // 球磨改
 				case 100: // 多摩
 				case 216: // 多摩改
 					return ShipFitClass.KumaClass;
+
+				case 21:  // 長良
+				case 218: // 長良改
+				case 22:  // 五十鈴
+				case 219: // 五十鈴改
+				case 141: // 五十鈴改二
+				case 53:  // 名取
+				case 221: // 名取改
+				case 23:  // 由良
+				case 220: // 由良改
+				case 113: // 鬼怒
+				case 289: // 鬼怒改
+				case 487: // 鬼怒改二
+				case 114: // 阿武隈
+				case 290: // 阿武隈改
+				case 200: // 阿武隈改二
+					return ShipFitClass.NagaraClass;
 
 				case 115: // 夕張
 				case 293: // 夕張改
