@@ -58,7 +58,7 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 			= new SerializableProperty<bool>(GetKey(), Providers.Viewer, true);
 
 		/// <summary>
-		/// 색석 계산에 사용하는 공식을 설정합니다.
+		/// 색적 계산에 사용하는 공식을 설정합니다.
 		/// </summary>
 		public static SerializableProperty<string> ViewRangeCalcType { get; }
 			= new SerializableProperty<string>(GetKey(), Providers.Viewer, new ViewRangeType4().Id);
