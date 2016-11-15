@@ -84,7 +84,7 @@ namespace Grabacr07.KanColleViewer.Models
 
 			var akashiCheck = false;
 			var fleets = KanColleClient.Current.Homeport.Organization.Fleets;
-			var firstShip = fleets[fleetId].Ships[0]?.Info.Id ?? 0;
+			var firstShip = fleets[fleetId]?.Ships[0]?.Info.Id ?? 0;
 
 			Notified = false;
 
