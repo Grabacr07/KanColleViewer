@@ -26,9 +26,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public int RequiredDefeatCount { get; }
 
-		public MasterTable<MapCell> MapCells { get; }
-
-		public MapInfo(kcsapi_mst_mapinfo mapinfo, MasterTable<MapCell> mapCells)
+		public MapInfo(kcsapi_mst_mapinfo mapinfo)
 			: base(mapinfo)
 		{
 			this.Id = mapinfo.api_id;
@@ -39,9 +37,6 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.OperationName = mapinfo.api_opetext;
 			this.OperationSummary = mapinfo.api_infotext;
 			this.RequiredDefeatCount = mapinfo.api_required_defeat_count ?? 1;
-			this.MapCells = new MasterTable<MapCell>(mapCells.Values.Where(x => x.MapInfoId == mapinfo.api_id));
-			foreach (var cell in this.MapCells.Values)
-				cell.MapInfo = this;
 		}
 
 		public override string ToString()
@@ -58,7 +53,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		    api_maparea_id = 0,
 		    api_no = 0,
 		    api_level = 0,
-		}, new MasterTable<MapCell>())
+		})
 	    {
 		    MapArea = MapArea.Dummy,
 	    };
