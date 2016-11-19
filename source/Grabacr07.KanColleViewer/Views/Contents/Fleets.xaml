@@ -414,16 +414,16 @@
 									</DataTrigger>
 									
 									<DataTrigger Binding="{Binding FitValue}" Value="-2">
-										<Setter TargetName="Elements" Property="Background" Value="#48C22222" />
+										<Setter TargetName="Elements" Property="Background" Value="#34C22222" />
 									</DataTrigger>
 									<DataTrigger Binding="{Binding FitValue}" Value="-1">
-										<Setter TargetName="Elements" Property="Background" Value="#34D15B5B" />
+										<Setter TargetName="Elements" Property="Background" Value="#34c88232" />
 									</DataTrigger>
 									<DataTrigger Binding="{Binding FitValue}" Value="1">
 										<Setter TargetName="Elements" Property="Background" Value="#345887AB" />
 									</DataTrigger>
 									<DataTrigger Binding="{Binding FitValue}" Value="2">
-										<Setter TargetName="Elements" Property="Background" Value="#4862B5F5" />
+										<Setter TargetName="Elements" Property="Background" Value="#3440c840" />
 									</DataTrigger>
 								</DataTemplate.Triggers>
 							</DataTemplate>
