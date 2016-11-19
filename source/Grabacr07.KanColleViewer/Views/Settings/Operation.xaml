@@ -60,12 +60,23 @@
 						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.CheckFlagshipIsNotRepairShip}, Path=Value}" />
 
 				<Border Height="12" />
+				<CheckBox Content="아카시 수리 타이머를 사용"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.UseRepairTimer}, Path=Value}" />
+			</StackPanel>
+
+			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
+
+			<TextBlock Text="장비 표시"
+					   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+
+			<StackPanel Margin="20,0,0,0">
+				<Border Height="12" />
 				<CheckBox Content="함재기 슬롯 수 대신 격추 수를 표시"
 						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.ShowLostAirplane}, Path=Value}" />
 
 				<Border Height="12" />
-				<CheckBox Content="아카시 수리 타이머를 사용"
-						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.UseRepairTimer}, Path=Value}" />
+				<CheckBox Content="함재기를 운용 가능한 경우 항상 슬롯 수를 표시"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.ShowAirplaneAlways}, Path=Value}" />
 			</StackPanel>
 
 			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />

@@ -101,6 +101,22 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 		#endregion
 
+		#region ShowAirplaneAlways 변경통지 프로퍼티
+
+		private bool _ShowAirplaneAlways;
+
+		public bool ShowAirplaneAlways
+		{
+			get { return this._ShowAirplaneAlways; }
+			set
+			{
+				this._ShowAirplaneAlways = value;
+				this.RaisePropertyChanged();
+			}
+		}
+
+		#endregion
+
 		public FleetsViewModel()
 		{
 			this.Fleets2 = new ItemViewModel[0];
@@ -116,7 +132,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				.AddTo(this);
 
 			KanColleSettings.ShowLostAirplane.ValueChanged += (s, e) => this.ShowLostAirplane = e.NewValue;
+			KanColleSettings.ShowAirplaneAlways.ValueChanged += (s, e) => this.ShowAirplaneAlways = e.NewValue;
 			this.ShowLostAirplane = KanColleSettings.ShowLostAirplane;
+			this.ShowAirplaneAlways = KanColleSettings.ShowAirplaneAlways;
 		}
 
 		public void ShowFleetWindow()

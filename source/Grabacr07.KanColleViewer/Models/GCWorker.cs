@@ -43,8 +43,10 @@ namespace Grabacr07.KanColleViewer.Models
 			});
 
 			GCWorking = true;
+			GCThread.Priority = ThreadPriority.BelowNormal;
 			GCThread.Start();
 		}
+
 		private void Collect()
 		{
 			// GC 가 Request 되었다면 예외적으로 수행

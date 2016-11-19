@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace Grabacr07.KanColleWrapper.Models.Raw
 {
+	// ReSharper disable InconsistentNaming
 	public class kcsapi_mst_mapinfo
 	{
 		public int api_id { get; set; }
@@ -19,4 +20,5 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public int? api_required_defeat_count { get; set; }
 		public int[] api_sally_flag { get; set; }
 	}
+	// ReSharper restore InconsistentNaming
 }

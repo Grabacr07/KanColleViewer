@@ -11,9 +11,9 @@ namespace Grabacr07.KanColleViewer.Models
 {
 	public class AkashiTimer : TimerNotifier
 	{
-        #region BaseTime 변경 통지 프로퍼티
+		#region BaseTime 변경 통지 프로퍼티
 
-        private TimeSpan _BaseTime;
+		private TimeSpan _BaseTime;
 
 		public TimeSpan BaseTime
 		{
@@ -28,96 +28,96 @@ namespace Grabacr07.KanColleViewer.Models
 			}
 		}
 
-        #endregion
+		#endregion
 
-        #region Available 변경통지 프로퍼티
+		#region Available 변경통지 프로퍼티
 
-        private bool _Available;
+		private bool _Available;
 
-        public bool Available
-        {
-            get { return _Available; }
-            private set
-            {
-                if (_Available != value)
-                {
-                    _Available = value;
-                    this.RaisePropertyChanged();
-                }
-            }
-        }
+		public bool Available
+		{
+			get { return _Available; }
+			private set
+			{
+				if (_Available != value)
+				{
+					_Available = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
 
-        #endregion
+		#endregion
 
-        private bool Notified { get; set; }
-        public event EventHandler Repaired;
-        public event EventHandler TimerTick;
+		private bool Notified { get; set; }
+		public event EventHandler Repaired;
+		public event EventHandler TimerTick;
 
-        public AkashiTimer()
+		public AkashiTimer()
 		{
 			BaseTime = TimeSpan.FromTicks(DateTime.Now.Ticks);
-            Notified = false;
-            Available = true;
-        }
+			Notified = false;
+			Available = true;
+		}
 
-        public void Update(int fleetId, int shipIdx, int shipId)
+		public void Update(int fleetId, int shipIdx, int shipId)
 		{
-            if (shipIdx == -1) return;
+			if (shipIdx == -1) return;
 
 			var akashiCheck = false;
 			var fleets = KanColleClient.Current.Homeport.Organization.Fleets;
-            var firstShip = fleets[fleetId]?.Ships[0]?.Info.Id ?? 0;
+			var firstShip = fleets[fleetId]?.Ships[0]?.Info.Id ?? 0;
 
-            Notified = false;
-            // Available = false;
+			Notified = false;
+			// Available = false;
 
-            akashiCheck = (firstShip == 182 || firstShip == 187);
-            if (shipIdx != -1 && akashiCheck == true)
-            {
-                BaseTime = TimeSpan.FromTicks(DateTime.Now.Ticks);
-                Available = true;
-            }
+			akashiCheck = (firstShip == 182 || firstShip == 187);
+			if (shipIdx != -1 && akashiCheck == true)
+			{
+				BaseTime = TimeSpan.FromTicks(DateTime.Now.Ticks);
+				Available = true;
+			}
 		}
-        public void Update(int fleetId)
-        {
-            if (Available) return;
+		public void Update(int fleetId)
+		{
+			if (Available) return;
 
-            var akashiCheck = false;
-            var fleets = KanColleClient.Current.Homeport.Organization.Fleets;
-            var firstShip = fleets[fleetId].Ships[0]?.Info.Id ?? 0;
+			var akashiCheck = false;
+			var fleets = KanColleClient.Current.Homeport.Organization.Fleets;
+			var firstShip = fleets[fleetId]?.Ships[0]?.Info.Id ?? 0;
 
-            Notified = false;
+			Notified = false;
 
-            akashiCheck = (firstShip == 182 || firstShip == 187);
-            if (akashiCheck == true)
-            {
-                BaseTime = TimeSpan.FromTicks(DateTime.Now.Ticks);
-                Available = true;
-            }
-        }
+			akashiCheck = (firstShip == 182 || firstShip == 187);
+			if (akashiCheck == true)
+			{
+				BaseTime = TimeSpan.FromTicks(DateTime.Now.Ticks);
+				Available = true;
+			}
+		}
 
-        public void Reset()
-        {
-            foreach (var i in KanColleClient.Current.Homeport.Organization.Fleets.Keys)
-                this.Update(i);
+		public void Reset()
+		{
+			foreach (var i in KanColleClient.Current.Homeport.Organization.Fleets.Keys)
+				this.Update(i);
 
-            if ((TimeSpan.FromTicks(DateTime.Now.Ticks) - BaseTime).Minutes >= 20)
-            {
-                BaseTime = TimeSpan.FromTicks(DateTime.Now.Ticks);
-                Notified = false;
-            }
-        }
+			if ((TimeSpan.FromTicks(DateTime.Now.Ticks) - BaseTime).Minutes >= 20)
+			{
+				BaseTime = TimeSpan.FromTicks(DateTime.Now.Ticks);
+				Notified = false;
+			}
+		}
 
-        protected override void Tick()
-        {
-            base.Tick();
+		protected override void Tick()
+		{
+			base.Tick();
 
-            this.TimerTick?.Invoke(this, new EventArgs());
-            if ((TimeSpan.FromTicks(DateTime.Now.Ticks) - BaseTime).TotalSeconds >= 20 * 60 && !Notified && Available)
-            {
-                this.Notified = true;
-                this.Repaired?.Invoke(this, new EventArgs());
-            }
-        }
+			this.TimerTick?.Invoke(this, new EventArgs());
+			if ((TimeSpan.FromTicks(DateTime.Now.Ticks) - BaseTime).TotalSeconds >= 20 * 60 && !Notified && Available)
+			{
+				this.Notified = true;
+				this.Repaired?.Invoke(this, new EventArgs());
+			}
+		}
 	}
 }

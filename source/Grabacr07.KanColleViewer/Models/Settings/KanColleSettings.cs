@@ -58,7 +58,7 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 			= new SerializableProperty<bool>(GetKey(), Providers.Viewer, true);
 
 		/// <summary>
-		/// 색석 계산에 사용하는 공식을 설정합니다.
+		/// 색적 계산에 사용하는 공식을 설정합니다.
 		/// </summary>
 		public static SerializableProperty<string> ViewRangeCalcType { get; }
 			= new SerializableProperty<string>(GetKey(), Providers.Viewer, new ViewRangeType4().Id);
@@ -151,6 +151,12 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		/// 함재기의 슬롯수를 표시할지, 격추수를 표시할지 여부에 대한 설정.
 		/// </summary>
 		public static SerializableProperty<bool> ShowLostAirplane { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Viewer, true);
+
+		/// <summary>
+		/// 함재기를 장착하지 않아도 슬롯수를 표시할지 여부에 대한 설정.
+		/// </summary>
+		public static SerializableProperty<bool> ShowAirplaneAlways { get; }
 			= new SerializableProperty<bool>(GetKey(), Providers.Viewer, true);
 
 		/// <summary>

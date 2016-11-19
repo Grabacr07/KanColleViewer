@@ -11,12 +11,12 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 	public class ShipViewModel : ViewModel
 	{
 		public Ship Ship { get; }
-        public ShipCondition Condition { get; }
+		public ShipCondition Condition { get; }
 
 		public ShipViewModel(Ship ship)
 		{
 			this.Ship = ship;
-            this.Condition = new ShipCondition(ship);
+			this.Condition = new ShipCondition(ship);
 		}
 	}
 }

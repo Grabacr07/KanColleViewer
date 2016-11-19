@@ -35,6 +35,8 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public int[] api_broken { get; set; }
 		public string api_info { get; set; }
 		public string api_usebull { get; set; }
+		public int api_cost { get; set; }
+		public int api_distance { get; set; }
 	}
 	// ReSharper restore InconsistentNaming
 }
