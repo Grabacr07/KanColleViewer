@@ -33,7 +33,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 
 				if (args.MapWorldId != 5 || args.MapAreaId != 1) return; // 5-1
 				if (args.EnemyName != "敵前線司令艦隊") return; // boss
-				if ("S" == args.Rank) return; // S승리
+				if ("S" != args.Rank) return; // S승리
 
 				var shipTable = new int[]
 				{

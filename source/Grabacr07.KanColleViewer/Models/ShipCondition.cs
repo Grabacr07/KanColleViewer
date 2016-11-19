@@ -9,60 +9,76 @@ using Livet;
 
 namespace Grabacr07.KanColleViewer.Models
 {
-    public class ShipCondition : TimerNotifier
-    {
-        private DateTimeOffset? RejuvenateTime { get; }
+	public class ShipCondition : TimerNotifier
+	{
+		private DateTimeOffset? RejuvenateTime { get; }
 
-        private TimeSpan? _Remaining;
-        public TimeSpan? Remaining
-        {
-            get { return this._Remaining; }
-            private set
-            {
-                if (this._Remaining != value)
-                {
-                    this._Remaining = value;
-                    this.RaisePropertyChanged();
-                    this.RaisePropertyChanged("ConditionText");
-                }
-            }
-        }
+		private TimeSpan? _Remaining;
+		public TimeSpan? Remaining
+		{
+			get { return this._Remaining; }
+			private set
+			{
+				if (this._Remaining != value)
+				{
+					this._Remaining = value;
+					this.RaisePropertyChanged();
+					this.RaisePropertyChanged("ConditionText");
+				}
+			}
+		}
 
-        public string ConditionText => this.Remaining.HasValue
-            ? $"{(int)this.Remaining.Value.TotalHours:D2}:{this.Remaining.Value.ToString(@"mm\:ss")}"
-            : "--:--:--";
+		public string ConditionText => this.Remaining.HasValue
+			? $"{(int)this.Remaining.Value.TotalHours:D2}:{this.Remaining.Value.ToString(@"mm\:ss")}"
+			: "--:--:--";
 
-        public ShipCondition(Ship ship)
-        {
-            var condition = ship.Condition;
-            var rejuvenate = DateTimeOffset.Now; // 회복완료예상시각
+		public ShipCondition(Ship ship)
+		{
+			// 함선 컨디션, 목표 출격 가능 컨디션
+			var condition = ship.Condition;
+			var goal = Math.Min(49, KanColleClient.Current.Settings.ReSortieCondition);
 
-            while (condition < Math.Min(49, KanColleClient.Current.Settings.ReSortieCondition))
-            {
-                rejuvenate = rejuvenate.AddMinutes(3);
-                condition += 3;
-                if (condition > 49) condition = 49;
-            }
-            this.RejuvenateTime = rejuvenate <= DateTimeOffset.Now
-                ? (DateTimeOffset?)null
-                : rejuvenate;
-        }
+			if (condition >= goal)
+			{
+				this.RejuvenateTime = (DateTimeOffset?)null;
+			}
+			else
+			{
+				var rejuvenate = DateTimeOffset.Now; // 회복 완료 예상시각 기준은 현재부터
 
-        protected override void Tick()
-        {
-            base.Tick();
+				// 3분 기준 컨디션 3이므로 공식 간소화
+				var value = (goal - condition + 2) / 3 * 3; // 정수 나누기
+				rejuvenate = rejuvenate.AddMinutes(value);
 
-            if (this.RejuvenateTime.HasValue)
-            {
-                var remaining = this.RejuvenateTime.Value.Subtract(DateTimeOffset.Now);
-                if (remaining.Ticks < 0) remaining = TimeSpan.Zero;
+				/*
+				// 기존 루프
+				while (condition < goal)
+				{
+					rejuvenate = rejuvenate.AddMinutes(3);
+					condition += 3;
+					if (condition > 49) condition = 49;
+				}
+				*/
 
-                this.Remaining = remaining;
-            }
-            else
-            {
-                this.Remaining = null;
-            }
-        }
-    }
+				this.RejuvenateTime = rejuvenate;
+			}
+		}
+
+		protected override void Tick()
+		{
+			base.Tick();
+
+			if (this.RejuvenateTime.HasValue)
+			{
+				var remaining = this.RejuvenateTime.Value.Subtract(DateTimeOffset.Now);
+				if (remaining.Ticks < 0) remaining = TimeSpan.Zero;
+
+				this.Remaining = remaining;
+			}
+			else
+			{
+				this.Remaining = null;
+			}
+		}
+	}
 }

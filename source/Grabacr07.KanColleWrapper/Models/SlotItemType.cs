@@ -74,6 +74,8 @@ namespace Grabacr07.KanColleWrapper.Models
 				case SlotItemType.オートジャイロ:
 				case SlotItemType.対潜哨戒機:
 				case SlotItemType.大型飛行艇:
+				case SlotItemType.陸上攻撃機:
+				case SlotItemType.局地戦闘機:
 					return true;
 
 				default:

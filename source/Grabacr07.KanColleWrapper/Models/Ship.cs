@@ -153,7 +153,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				this._Fuel = value;
 				this.RaisePropertyChanged();
-                this.RaisePropertyChanged("UsedFuel");
+				this.RaisePropertyChanged("UsedFuel");
 			}
 		}
 
@@ -170,8 +170,8 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				this._Bull = value;
 				this.RaisePropertyChanged();
-                this.RaisePropertyChanged("UsedBull");
-            }
+				this.RaisePropertyChanged("UsedBull");
+			}
 		}
 
 		#endregion
@@ -386,14 +386,14 @@ namespace Grabacr07.KanColleWrapper.Models
 			}
 		}
 
-        #endregion
+		#endregion
 
-        #region Used 의존변수
+		#region Used 의존변수
 
-        public int UsedFuel => this.Fuel.Maximum - this.Fuel.Current;
-        public int UsedBull => this.Bull.Maximum - this.Bull.Current;
+		public int UsedFuel => (int)((this.Level > 99 ? 1.0f : 0.85f) * (this.Fuel.Maximum - this.Fuel.Current));
+		public int UsedBull => (int)((this.Level > 99 ? 1.0f : 0.85f) * (this.Bull.Maximum - this.Bull.Current));
 
-        #endregion
+		#endregion
 
 		/// <summary>
 		/// 装備によるボーナスを含めた索敵ステータス値を取得します。
@@ -504,9 +504,9 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			this.Slots = this.RawData.api_slot
 				.Select(id => this.homeport.Itemyard.SlotItems[id])
-				.Select((t, i) => new ShipSlot(t, this.Info.RawData.api_maxeq.Get(i) ?? 0, this.RawData.api_onslot.Get(i) ?? 0))
+				.Select((t, i) => new ShipSlot(this, t, this.Info.RawData.api_maxeq.Get(i) ?? 0, this.RawData.api_onslot.Get(i) ?? 0))
 				.ToArray();
-			this.ExSlot = new ShipSlot(this.homeport.Itemyard.SlotItems[this.RawData.api_slot_ex], 0, 0);
+			this.ExSlot = new ShipSlot(this, this.homeport.Itemyard.SlotItems[this.RawData.api_slot_ex], 0, 0);
 			this.EquippedItems = this.EnumerateAllEquippedItems().ToArray();
 
 			if (this.EquippedItems.Any(x => x.Item.Info.Type == SlotItemType.応急修理要員))

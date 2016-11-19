@@ -334,7 +334,6 @@
     <Compile Include="Views\Contents\Quests.xaml.cs">
       <DependentUpon>Quests.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Contents\QuestViewSource.cs" />
     <Compile Include="Views\Contents\Shipyard.xaml.cs">
       <DependentUpon>Shipyard.xaml</DependentUpon>
     </Compile>

@@ -129,7 +129,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models
 			proxy.api_req_map_start.TryParse<kcsapi_map_start>()
 				.Subscribe(x => Preprocess(() => MapInfo.Reset(x.Data.api_maparea_id, x.Data.api_mapinfo_no, x.Data.api_no)));
 			proxy.api_req_map_next.TryParse<kcsapi_map_start>()
-				.Subscribe(x => Preprocess(() => MapInfo.Reset(x.Data.api_maparea_id, x.Data.api_mapinfo_no, x.Data.api_no)));
+				.Subscribe(x => Preprocess(() => MapInfo.Next(x.Data.api_maparea_id, x.Data.api_mapinfo_no, x.Data.api_no)));
 
 			// 통상 - 주간전
 			proxy.api_req_sortie_battle.TryParse<kcsapi_sortie_battle>()

@@ -23,17 +23,17 @@ namespace Grabacr07.KanColleViewer
 	public enum WindowServiceMode
 	{
 		/// <summary>
-		/// 艦これが起動されていません。
+		/// 칸코레가 기동되지 않은 경우
 		/// </summary>
 		NotStarted,
 
 		/// <summary>
-		/// 艦これが起動されています。
+		/// 칸코레가 기동된 경우
 		/// </summary>
 		Started,
 
 		/// <summary>
-		/// 艦これが起動されており、艦隊が出撃中です。
+		/// 칸코레가 기동되었고, 함대가 출격중인 경우
 		/// </summary>
 		InSortie,
 	}
@@ -42,95 +42,13 @@ namespace Grabacr07.KanColleViewer
 	{
 		public static WindowService Current { get; } = new WindowService();
 
-		private WindowServiceMode currentMode = (WindowServiceMode)(-1); // 初回で setter 入るように
-		private InformationViewModel information;
-		private KanColleWindowViewModel kanColleWindow;
-		private InformationWindowViewModel informationWindow;
+		private WindowServiceMode currentMode = (WindowServiceMode)(-1); // 처음에 Setter에 진입하기 위해
+
+		private KanColleWindowViewModel kanColleWindow; // 메인 윈도우
+		private InformationViewModel information; // 정보 영역
+		private InformationWindowViewModel informationWindow; // 시작 전 정보 영역
+
 		private readonly LivetCompositeDisposable compositeDisposable = new LivetCompositeDisposable();
-		public void UpdateDockPattern()
-		{
-			if (this.currentMode == WindowServiceMode.NotStarted) return;
-			if (this.kanColleWindow == null) return;
-			KanColleWindowSettings settings = SettingsHost.Instance<KanColleWindowSettings>();
-            if (settings.AlwaysTopView) // 항상 탑 뷰인 경우
-            {
-                this.kanColleWindow.TopView = Visibility.Visible;
-                this.kanColleWindow.BottomView = Visibility.Collapsed;
-            }
-            else if (!settings.IsSplit) // 분할모드가 아닌경우
-			{
-				if (settings?.Dock == Dock.Right || settings?.Dock == Dock.Left)
-				{
-					this.kanColleWindow.TopView = Visibility.Visible;
-					this.kanColleWindow.BottomView = Visibility.Collapsed;
-				}
-				else
-				{
-					this.kanColleWindow.TopView = Visibility.Collapsed;
-					this.kanColleWindow.BottomView = Visibility.Visible;
-				}
-			}
-			else
-			{
-				this.kanColleWindow.TopView = Visibility.Collapsed;
-				this.kanColleWindow.BottomView = Visibility.Visible;
-			}
-		}
-		public WindowServiceMode Mode
-		{
-			get { return this.currentMode; }
-			set
-			{
-				if (this.currentMode != value)
-				{
-					this.currentMode = value;
-					switch (value)
-					{
-						case WindowServiceMode.NotStarted:
-							var startContent = new StartContentViewModel(this.kanColleWindow?.Navigator);
-							this.MainWindow.Content = startContent;
-							this.MainWindow.StatusBar = startContent;
-							StatusService.Current.Set(Resources.StatusBar_NotStarted);
-							ThemeService.Current.ChangeAccent(Accent.Purple);
-							break;
-						case WindowServiceMode.Started:
-							this.MainWindow.Content = this.Information;
-							this.MainWindow.StatusBar = this.Information.SelectedItem;
-							StatusService.Current.Set(Resources.StatusBar_Ready);
-							ThemeService.Current.ChangeTheme(Theme.Dark);
-							ThemeService.Current.ChangeAccent(Accent.Blue);
-							this.UpdateDockPattern();
-							break;
-							//case WindowServiceMode.InSortie:
-							//	ThemeService.Current.ChangeAccent(Accent.Orange);
-							//	break;
-					}
-
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		/// <summary>
-		/// 現在のメイン ウィンドウに提供されるデータを取得します。
-		/// </summary>
-		public MainWindowViewModelBase MainWindow { get; private set; }
-
-		public InformationViewModel Information
-		{
-			get
-			{
-				if (this.information == null)
-				{
-					this.information = new InformationViewModel().AddTo(this);
-					this.information
-						.Subscribe(nameof(InformationViewModel.SelectedItem), () => this.MainWindow.StatusBar = this.Information.SelectedItem)
-						.AddTo(this);
-				}
-				return this.information;
-			}
-		}
-
 
 		private WindowService() { }
 
@@ -154,37 +72,145 @@ namespace Grabacr07.KanColleViewer
 			KanColleClient.Current.Subscribe(nameof(KanColleClient.IsInSortie), this.UpdateMode).AddTo(this);
 		}
 
+		// 정보 영역 위치 패턴을 갱신
+		public void UpdateDockPattern()
+		{
+			// 기동 전 혹은 메인 윈도우가 없다면 무시
+			if (this.currentMode == WindowServiceMode.NotStarted) return;
+			if (this.kanColleWindow == null) return;
+
+			KanColleWindowSettings settings = SettingsHost.Instance<KanColleWindowSettings>();
+			if (settings.AlwaysTopView) // 항상 탑 뷰인 경우
+			{
+				this.kanColleWindow.TopView = Visibility.Visible;
+				this.kanColleWindow.BottomView = Visibility.Collapsed;
+			}
+			else if (!settings.IsSplit) // 분할 모드가 아닌 경우
+			{
+				if (settings?.Dock == Dock.Right || settings?.Dock == Dock.Left)
+				{
+					this.kanColleWindow.TopView = Visibility.Visible;
+					this.kanColleWindow.BottomView = Visibility.Collapsed;
+				}
+				else
+				{
+					this.kanColleWindow.TopView = Visibility.Collapsed;
+					this.kanColleWindow.BottomView = Visibility.Visible;
+				}
+			}
+			else
+			{
+				this.kanColleWindow.TopView = Visibility.Collapsed;
+				this.kanColleWindow.BottomView = Visibility.Visible;
+			}
+		}
+
+		/// <summary>
+		/// 현재 기동 상태
+		/// </summary>
+		public WindowServiceMode Mode
+		{
+			get { return this.currentMode; }
+			set
+			{
+				if (this.currentMode != value)
+				{
+					this.currentMode = value;
+					switch (value)
+					{
+						case WindowServiceMode.NotStarted:
+							var startContent = new StartContentViewModel(this.kanColleWindow?.Navigator);
+							this.MainWindow.Content = startContent;
+							this.MainWindow.StatusBar = startContent;
+							StatusService.Current.Set(Resources.StatusBar_NotStarted);
+							ThemeService.Current.ChangeAccent(Accent.Purple);
+							break;
+						case WindowServiceMode.Started:
+							this.MainWindow.Content = this.Information;
+							this.MainWindow.StatusBar = this.Information.SelectedItem;
+							StatusService.Current.Set(Resources.StatusBar_Ready);
+							ThemeService.Current.ChangeTheme(Theme.Dark);
+							ThemeService.Current.ChangeAccent(Accent.Blue);
+
+							this.UpdateDockPattern();
+							break;
+					}
+
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		/// <summary>
+		/// 현재 메인 윈도우에 표시되는 뷰 모델
+		/// </summary>
+		public MainWindowViewModelBase MainWindow { get; private set; }
+
+		/// <summary>
+		/// Information 뷰 모델
+		/// </summary>
+		public InformationViewModel Information
+		{
+			get
+			{
+				if (this.information == null)
+				{
+					this.information = new InformationViewModel().AddTo(this);
+					this.information
+						.Subscribe(
+							nameof(InformationViewModel.SelectedItem),
+							() => this.MainWindow.StatusBar = this.Information.SelectedItem
+						)
+						.AddTo(this);
+				}
+				return this.information;
+			}
+		}
+
+		/// <summary>
+		/// 게임 페이지 확대 100%로 초기화
+		/// </summary>
 		public void ClearZoomFactor()
 		{
 			this.kanColleWindow?.Messenger.Raise(new InteractionMessage { MessageKey = "WebBrowser.Zoom" });
 		}
 
+		/// <summary>
+		/// 게임 페이지 새로고침
+		/// </summary>
 		public void RefreshWindow()
 		{
 			this.kanColleWindow?.RefreshNavigator.Execute(null);
 		}
 		public ICommand RefreshRemote() => this.kanColleWindow?.RefreshNavigator;
+
+		/// <summary>
+		/// 화면의 제일 왼쪽으로 이동
+		/// </summary>
 		public void SetLocationLeft()
 		{
 			this.kanColleWindow?.Messenger.Raise(new SetWindowLocationMessage { MessageKey = "Window.Location", Left = 0.0 });
 		}
 
-
+		/// <summary>
+		/// 표시중인 내용 윈도우를 반환
+		/// </summary>
+		/// <returns></returns>
 		public Window GetMainWindow()
 		{
+			// 표시중인 뷰에 따라 반환
 			if (this.MainWindow == this.kanColleWindow)
-			{
 				return new KanColleWindow { DataContext = this.kanColleWindow, };
-			}
-			if (this.MainWindow == this.informationWindow)
-			{
+
+			else if (this.MainWindow == this.informationWindow)
 				return new InformationWindow { DataContext = this.informationWindow, };
-			}
 
 			throw new InvalidOperationException();
 		}
 
-
+		/// <summary>
+		/// 이 객체의 Mode 를 알아서 설정
+		/// </summary>
 		private void UpdateMode()
 		{
 			this.Mode = KanColleClient.Current.IsStarted
@@ -192,10 +218,9 @@ namespace Grabacr07.KanColleViewer
 				: WindowServiceMode.NotStarted;
 		}
 
-		#region disposable members
+		#region Disposable 멤버
 
 		ICollection<IDisposable> IDisposableHolder.CompositeDisposable => this.compositeDisposable;
-
 		public void Dispose()
 		{
 			this.compositeDisposable.Dispose();

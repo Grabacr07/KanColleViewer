@@ -98,35 +98,50 @@
 									Padding="5"
 									Margin="0,8,0,0">
 								<StackPanel>
-									<WrapPanel Grid.Row="0">
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto"
+																SharedSizeGroup="FilterName" />
+											<ColumnDefinition Width="10" />
+											<ColumnDefinition Width="*" />
+										</Grid.ColumnDefinitions>
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto" />
+											<RowDefinition Height="*" />
+											<RowDefinition Height="Auto" />
+										</Grid.RowDefinitions>
+
 										<TextBlock Margin="0,2">
-										<Run Text="장비 종류" />
-										<Run Text=":" />
+											<Run Text="장비 종류 :" />
 										</TextBlock>
 
-										<CheckBox Content="전부 선택"
-												  IsChecked="{Binding CheckAllSlotItemEquipType, Mode=TwoWay}"
-												  Margin="0,2" />
-									</WrapPanel>
-									<ItemsControl Grid.Row="1" ItemsSource="{Binding SlotItemEquipTypes}">
-										<ItemsControl.ItemsPanel>
-											<ItemsPanelTemplate>
-												<WrapPanel />
-											</ItemsPanelTemplate>
-										</ItemsControl.ItemsPanel>
-										<ItemsControl.ItemTemplate>
-											<DataTemplate>
-												<CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}"
-														  Margin="0,2,15,2">
-													<TextBlock Text="{Binding DisplayName, Mode=OneWay}" />
-												</CheckBox>
-											</DataTemplate>
-										</ItemsControl.ItemTemplate>
-									</ItemsControl>
-									<WrapPanel Grid.Row="2">
+										<CheckBox Grid.Column="2"
+													Content="모두선택"
+													IsChecked="{Binding CheckAllSlotItemEquipType, Mode=TwoWay}"
+													Margin="0,2" />
+
+										<ItemsControl Grid.Row="1"
+														Grid.Column="2"
+														ItemsSource="{Binding SlotItemEquipTypes}">
+											<ItemsControl.ItemsPanel>
+												<ItemsPanelTemplate>
+													<WrapPanel />
+												</ItemsPanelTemplate>
+											</ItemsControl.ItemsPanel>
+											<ItemsControl.ItemTemplate>
+												<DataTemplate>
+													<CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}"
+															Margin="0,2,15,2">
+														<TextBlock Text="{Binding DisplayName, Mode=OneWay}" />
+													</CheckBox>
+												</DataTemplate>
+											</ItemsControl.ItemTemplate>
+										</ItemsControl>
+									</Grid>
+									<WrapPanel>
 										<WrapPanel.Resources>
 											<Style TargetType="{x:Type metro2:CallMethodButton}"
-										   BasedOn="{StaticResource {x:Type metro2:CallMethodButton}}">
+												   BasedOn="{StaticResource {x:Type metro2:CallMethodButton}}">
 												<Setter Property="Padding" Value="12,4" />
 												<Setter Property="Margin" Value="0,5,5,0" />
 												<Setter Property="MethodName" Value="SetSlotItemEquipType" />

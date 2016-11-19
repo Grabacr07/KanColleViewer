@@ -32,5 +32,11 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Model
 			this.MapId = MapId;
 			this.NodeId = NodeId;
 		}
+		public void Next(int WorldId, int MapId, int NodeId)
+		{
+			this.WorldId = WorldId;
+			this.MapId = MapId;
+			this.NodeId = NodeId;
+		}
 	}
 }

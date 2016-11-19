@@ -14,24 +14,19 @@ namespace Grabacr07.KanColleViewer.Views.Converters
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			if (value == null) return false;
-			try
-			{
-				var v = (int)value;
-				var p = parameter as string;
+			if (value.GetType() != typeof(int)) return false;
+			if (parameter == null) return false;
 
-				var range = p?.Split(new[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
-				if (range?.Length != 2) return false;
+			var v = (int)value;
+			var p = parameter as string;
 
-				var min = int.Parse(range[0]);
-				var max = int.Parse(range[1]);
-				return min <= v && v <= max;
-			}
-			catch (Exception ex)
-			{
-				System.Diagnostics.Debug.Write(ex);
-			}
+			var range = p.Split(new[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+			if (range.Length != 2) return false;
 
-			return false;
+			int min, max;
+			if (!int.TryParse(range[0], out min)) return false;
+			if (!int.TryParse(range[1], out max)) return false;
+			return min <= v && v <= max;
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

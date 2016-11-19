@@ -109,6 +109,7 @@
 								<RowDefinition Height="auto" />
 								<RowDefinition Height="auto" />
 								<RowDefinition Height="*" />
+								<RowDefinition Height="auto" />
 							</Grid.RowDefinitions>
 
 							<metro:PromptComboBox x:Name="ExpeditionSelector"
@@ -222,143 +223,6 @@
 												   Margin="8,0" />
 									</StackPanel>
 
-									<StackPanel x:Name="ShipsCondition"
-												Grid.Row="1">
-										<Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
-
-										<TextBlock Margin="0,0,0,4"
-												   Text="칸무스 피로도"
-												   Style="{DynamicResource HeaderTextStyleKey}" />
-
-										<ItemsControl ItemsSource="{Binding Ships}">
-											<ItemsControl.ItemsPanel>
-												<ItemsPanelTemplate>
-													<UniformGrid Columns="3" />
-												</ItemsPanelTemplate>
-											</ItemsControl.ItemsPanel>
-											<ItemsControl.ItemTemplate>
-												<DataTemplate>
-													<StackPanel Orientation="Horizontal"
-																Margin="5,3">
-														<kcvc:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
-
-														<TextBlock Margin="4,0,0,0"
-																   Text="{Binding Ship.Condition, Mode=OneWay}"
-																   Style="{DynamicResource DeafultTextStyleKey}" />
-													</StackPanel>
-												</DataTemplate>
-											</ItemsControl.ItemTemplate>
-										</ItemsControl>
-									</StackPanel>
-
-									<StackPanel x:Name="ResultMaterial"
-												Grid.Row="2">
-										<Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
-
-										<TextBlock Margin="0,0,0,4"
-												   Style="{DynamicResource HeaderTextStyleKey}">
-											<Run Text="예상 자원 (성공/" />
-											<Run Text="대성공" Style="{DynamicResource EmphaticTextElementStyleKey}"/><Run Text=")" />
-										</TextBlock>
-
-										<Grid Margin="8,0">
-											<Grid.ColumnDefinitions>
-												<ColumnDefinition Width="*" />
-												<ColumnDefinition Width="Auto" />
-												<ColumnDefinition Width="Auto" />
-												<ColumnDefinition Width="Auto" />
-											</Grid.ColumnDefinitions>
-
-											<TextBlock Text="연료:"
-													   Style="{DynamicResource DefaultTextStyleKey}" />
-											<TextBlock Grid.Column="1"
-													   Text="{Binding ResultData.ExpFuel, Mode=OneWay}"
-													   Style="{DynamicResource DefaultTextStyleKey}" />
-											<TextBlock Grid.Column="2"
-													   Margin="4,0"
-													   Text="/"
-													   Style="{DynamicResource DefaultTextStyleKey}" />
-											<TextBlock Grid.Column="3"
-													   Text="{Binding ResultData.ExpGreatFuel, Mode=OneWay}"
-													   Style="{DynamicResource EmphaticTextStyleKey}" />
-										</Grid>
-										<Grid Margin="8,0">
-											<Grid.ColumnDefinitions>
-												<ColumnDefinition Width="*" />
-												<ColumnDefinition Width="Auto" />
-												<ColumnDefinition Width="Auto" />
-												<ColumnDefinition Width="Auto" />
-											</Grid.ColumnDefinitions>
-
-											<TextBlock Grid.Row="1"
-													   Text="탄약:"
-													   Style="{DynamicResource DefaultTextStyleKey}" />
-											<TextBlock Grid.Row="1"
-													   Grid.Column="1"
-													   Text="{Binding ResultData.ExpAmmo, Mode=OneWay}"
-													   Style="{DynamicResource DefaultTextStyleKey}" />
-											<TextBlock Grid.Row="1"
-													   Grid.Column="2"
-													   Margin="4,0"
-													   Text="/"
-													   Style="{DynamicResource DefaultTextStyleKey}" />
-											<TextBlock Grid.Row="1"
-													   Grid.Column="3"
-													   Text="{Binding ResultData.ExpGreatAmmo, Mode=OneWay}"
-													   Style="{DynamicResource EmphaticTextStyleKey}" />
-										</Grid>
-										<Grid Margin="8,0">
-											<Grid.ColumnDefinitions>
-												<ColumnDefinition Width="*" />
-												<ColumnDefinition Width="Auto" />
-												<ColumnDefinition Width="Auto" />
-												<ColumnDefinition Width="Auto" />
-											</Grid.ColumnDefinitions>
-
-											<TextBlock Grid.Row="2"
-													   Text="강재:"
-													   Style="{DynamicResource DefaultTextStyleKey}" />
-											<TextBlock Grid.Row="2"
-													   Grid.Column="1"
-													   Text="{Binding ResultData.ExpSteel, Mode=OneWay}"
-													   Style="{DynamicResource DefaultTextStyleKey}" />
-											<TextBlock Grid.Row="2"
-													   Grid.Column="2"
-													   Margin="4,0"
-													   Text="/"
-													   Style="{DynamicResource DefaultTextStyleKey}" />
-											<TextBlock Grid.Row="2"
-													   Grid.Column="3"
-													   Text="{Binding ResultData.ExpGreatSteel, Mode=OneWay}"
-													   Style="{DynamicResource EmphaticTextStyleKey}" />
-										</Grid>
-										<Grid Margin="8,0">
-											<Grid.ColumnDefinitions>
-												<ColumnDefinition Width="*" />
-												<ColumnDefinition Width="Auto" />
-												<ColumnDefinition Width="Auto" />
-												<ColumnDefinition Width="Auto" />
-											</Grid.ColumnDefinitions>
-
-											<TextBlock Grid.Row="3"
-													   Text="보크사이트:"
-													   Style="{DynamicResource DefaultTextStyleKey}" />
-											<TextBlock Grid.Row="3"
-													   Grid.Column="1"
-													   Text="{Binding ResultData.ExpBauxite, Mode=OneWay}"
-													   Style="{DynamicResource DefaultTextStyleKey}" />
-											<TextBlock Grid.Row="3"
-													   Grid.Column="2"
-													   Margin="4,0"
-													   Text="/"
-													   Style="{DynamicResource DefaultTextStyleKey}" />
-											<TextBlock Grid.Row="3"
-													   Grid.Column="3"
-													   Text="{Binding ResultData.ExpGreatBauxite, Mode=OneWay}"
-													   Style="{DynamicResource EmphaticTextStyleKey}" />
-										</Grid>
-									</StackPanel>
-
 									<TextBlock x:Name="ExpeditionReturned"
 											   Text="원정에서 복귀했습니다."
 											   Style="{DynamicResource EmphaticTextStyleKey}"
@@ -367,6 +231,145 @@
 								</Grid>
 
 								<Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
+							</StackPanel>
+
+							<StackPanel Grid.Row="4">
+								<StackPanel x:Name="ShipsCondition"
+											Grid.Row="1">
+									<Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
+
+									<TextBlock Margin="0,0,0,4"
+													   Text="칸무스 피로도"
+													   Style="{DynamicResource HeaderTextStyleKey}" />
+
+									<ItemsControl ItemsSource="{Binding Ships}">
+										<ItemsControl.ItemsPanel>
+											<ItemsPanelTemplate>
+												<UniformGrid Columns="3" />
+											</ItemsPanelTemplate>
+										</ItemsControl.ItemsPanel>
+										<ItemsControl.ItemTemplate>
+											<DataTemplate>
+												<StackPanel Orientation="Horizontal"
+																	Margin="5,3">
+													<kcvc:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
+
+													<TextBlock Margin="4,0,0,0"
+																	   Text="{Binding Ship.Condition, Mode=OneWay}"
+																	   Style="{DynamicResource DeafultTextStyleKey}" />
+												</StackPanel>
+											</DataTemplate>
+										</ItemsControl.ItemTemplate>
+									</ItemsControl>
+								</StackPanel>
+
+								<StackPanel x:Name="ResultMaterial"
+											Grid.Row="2">
+									<Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
+
+									<TextBlock Margin="0,0,0,4"
+													   Style="{DynamicResource HeaderTextStyleKey}">
+												<Run Text="예상 자원 (성공/" />
+												<Run Text="대성공" Style="{DynamicResource EmphaticTextElementStyleKey}"/><Run Text=")" />
+									</TextBlock>
+
+									<Grid Margin="8,0">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="Auto" />
+										</Grid.ColumnDefinitions>
+
+										<TextBlock Text="연료:"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+										<TextBlock Grid.Column="1"
+														   Text="{Binding ResultData.ExpFuel, Mode=OneWay}"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+										<TextBlock Grid.Column="2"
+														   Margin="4,0"
+														   Text="/"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+										<TextBlock Grid.Column="3"
+														   Text="{Binding ResultData.ExpGreatFuel, Mode=OneWay}"
+														   Style="{DynamicResource EmphaticTextStyleKey}" />
+									</Grid>
+									<Grid Margin="8,0">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="Auto" />
+										</Grid.ColumnDefinitions>
+
+										<TextBlock Grid.Row="1"
+														   Text="탄약:"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+										<TextBlock Grid.Row="1"
+														   Grid.Column="1"
+														   Text="{Binding ResultData.ExpAmmo, Mode=OneWay}"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+										<TextBlock Grid.Row="1"
+														   Grid.Column="2"
+														   Margin="4,0"
+														   Text="/"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+										<TextBlock Grid.Row="1"
+														   Grid.Column="3"
+														   Text="{Binding ResultData.ExpGreatAmmo, Mode=OneWay}"
+														   Style="{DynamicResource EmphaticTextStyleKey}" />
+									</Grid>
+									<Grid Margin="8,0">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="Auto" />
+										</Grid.ColumnDefinitions>
+
+										<TextBlock Grid.Row="2"
+														   Text="강재:"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+										<TextBlock Grid.Row="2"
+														   Grid.Column="1"
+														   Text="{Binding ResultData.ExpSteel, Mode=OneWay}"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+										<TextBlock Grid.Row="2"
+														   Grid.Column="2"
+														   Margin="4,0"
+														   Text="/"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+										<TextBlock Grid.Row="2"
+														   Grid.Column="3"
+														   Text="{Binding ResultData.ExpGreatSteel, Mode=OneWay}"
+														   Style="{DynamicResource EmphaticTextStyleKey}" />
+									</Grid>
+									<Grid Margin="8,0">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="Auto" />
+										</Grid.ColumnDefinitions>
+
+										<TextBlock Grid.Row="3"
+														   Text="보크사이트:"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+										<TextBlock Grid.Row="3"
+														   Grid.Column="1"
+														   Text="{Binding ResultData.ExpBauxite, Mode=OneWay}"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+										<TextBlock Grid.Row="3"
+														   Grid.Column="2"
+														   Margin="4,0"
+														   Text="/"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+										<TextBlock Grid.Row="3"
+														   Grid.Column="3"
+														   Text="{Binding ResultData.ExpGreatBauxite, Mode=OneWay}"
+														   Style="{DynamicResource EmphaticTextStyleKey}" />
+									</Grid>
+								</StackPanel>
 							</StackPanel>
 						</Grid>
 					</GroupBox>

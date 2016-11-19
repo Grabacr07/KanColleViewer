@@ -19,6 +19,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		public IReadOnlyCollection<SlotItemEquipTypeViewModel> SlotItemEquipTypes { get; }
 		public IEnumerable<SlotItemIconType> EnableSlotItemEquipTypes => SlotItemEquipTypes.Where(x => x.IsSelected).Select(y => y.Type);
+
 		public bool CheckAllSlotItemEquipType
 		{
 			get { return this.SlotItemEquipTypes.All(x => x.IsSelected); }
@@ -116,7 +117,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				.ToList();
 			*/
 			this.SlotItemEquipTypes = Enum.GetNames(typeof(SlotItemIconType))
-				.Select(x => new SlotItemEquipTypeViewModel((SlotItemIconType)Enum.Parse(typeof(SlotItemIconType), x)))
+				.Select(x => new SlotItemEquipTypeViewModel((SlotItemIconType)Enum.Parse(typeof(SlotItemIconType), x))
+				{
+					IsSelected = true,
+					SelectionChangedAction = () => this.Update()
+				})
 				.ToList();
 
 			this.updateSource
@@ -133,6 +138,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		public void Update()
 		{
+			this.RaisePropertyChanged(nameof(this.CheckAllSlotItemEquipType));
 			this.updateSource.OnNext(Unit.Default);
 		}
 
@@ -185,10 +191,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public void SetSlotItemEquipType(int[] ids)
 		{
 			foreach (var type in this.SlotItemEquipTypes)
-				type.Set(
-					ids.Any(y => y == (int)type.Type)
-				);
-			this.RaisePropertyChanged("CheckAllSlotItemEquipType");
+				type.Set(ids.Any(y => y == (int)type.Type));
 			this.Update();
 		}
 	}
