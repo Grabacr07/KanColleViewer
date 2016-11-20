@@ -173,9 +173,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			// SelectedFleet 이 무시되는 현상. 이유는 불명.
 			new System.Threading.Thread(() =>
 			{
-				// System.Threading.Thread.Sleep(200);
+				System.Threading.Thread.Sleep(200);
 
-				if (this.Fleets2.All(x => x != this.SelectedFleet))
+				if (!this.Fleets2.Any(x => x == this.SelectedFleet))
 					this.SelectedFleet = this.Fleets2.FirstOrDefault();
 			}).Start();
 		}
