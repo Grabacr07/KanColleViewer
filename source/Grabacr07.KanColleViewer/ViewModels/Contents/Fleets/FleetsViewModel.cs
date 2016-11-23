@@ -133,6 +133,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 			KanColleSettings.ShowLostAirplane.ValueChanged += (s, e) => this.ShowLostAirplane = e.NewValue;
 			KanColleSettings.ShowAirplaneAlways.ValueChanged += (s, e) => this.ShowAirplaneAlways = e.NewValue;
+			KanColleSettings.MergeCombinedFleet.ValueChanged += (s, e) => this.UpdateFleets();
 			this.ShowLostAirplane = KanColleSettings.ShowLostAirplane;
 			this.ShowAirplaneAlways = KanColleSettings.ShowAirplaneAlways;
 		}
@@ -154,7 +155,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				.Select(x => this.ToViewModel(x.Value))
 				.ToArray();
 
-			if (KanColleClient.Current.Homeport.Organization.Combined)
+			if (KanColleClient.Current.Homeport.Organization.Combined && KanColleSettings.MergeCombinedFleet)
 			{
 				var cfvm = MakeCombinedFleetViewModel(KanColleClient.Current.Homeport.Organization.CombinedFleet);
 				var fleets = this.Fleets.Where(x => cfvm.Source.Fleets.All(f => f != x.Source));

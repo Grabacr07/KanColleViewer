@@ -255,6 +255,12 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		public static SerializableProperty<bool> ShowExpeditionBadge { get; }
 			= new SerializableProperty<bool>(GetKey(), Providers.Viewer, false);
 
+		/// <summary>
+		/// 함대 탭에서 연합함대를 합쳐서 표시할지를 설정합니다.
+		/// </summary>
+		public static SerializableProperty<bool> MergeCombinedFleet { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Viewer, false);
+
 
 		#region instance members
 
