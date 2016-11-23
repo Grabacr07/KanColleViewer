@@ -66,10 +66,14 @@
 
 			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
-			<TextBlock Text="장비 표시"
+			<TextBlock Text="함대 표시"
 					   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 			<StackPanel Margin="20,0,0,0">
+				<Border Height="12" />
+				<CheckBox Content="연합함대를 한 그룹으로 표시"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.MergeCombinedFleet}, Path=Value}" />
+
 				<Border Height="12" />
 				<CheckBox Content="함재기 슬롯 수 대신 격추 수를 표시"
 						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.ShowLostAirplane}, Path=Value}" />
