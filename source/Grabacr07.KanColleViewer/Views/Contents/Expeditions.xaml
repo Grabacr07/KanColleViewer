@@ -137,15 +137,15 @@
 											<Style.Triggers>
 												<DataTrigger Binding="{Binding IsPossible, Mode=OneWay}" Value="Possible">
 													<Setter Property="Background" Value="#FF5887AB"/>
-													<Setter Property="Text" Value="편성완료"/>
+													<Setter Property="Text" Value="{Binding Resources.Expedition_OrganizeOK, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"/>
 												</DataTrigger>
 												<DataTrigger Binding="{Binding IsPossible, Mode=OneWay}" Value="NotAccepted">
 													<Setter Property="Background" Value="#FFCC3D3D"/>
-													<Setter Property="Text" Value="편성문제"/>
+													<Setter Property="Text" Value="{Binding Resources.Expedition_OrganizeNo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"/>
 												</DataTrigger>
 												<DataTrigger Binding="{Binding IsPossible, Mode=OneWay}" Value="NotSupplied">
 													<Setter Property="Background" Value="#FFCC3D3D"/>
-													<Setter Property="Text" Value="보급안함"/>
+													<Setter Property="Text" Value="{Binding Resources.Expedition_NoSupply, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"/>
 												</DataTrigger>
 											</Style.Triggers>
 										</Style>
@@ -161,7 +161,7 @@
 											<Style.Triggers>
 												<DataTrigger Binding="{Binding CanGreatSuccess, Mode=OneWay}" Value="False">
 													<Setter Property="Background" Value="#FF787878" />
-													<Setter Property="Text" Value="대성공 불가" />
+													<Setter Property="Text" Value="{Binding Resources.Expedition_GreatSuccessNo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 												</DataTrigger>
 												<DataTrigger Binding="{Binding CanGreatSuccess, Mode=OneWay}" Value="True">
 													<Setter Property="Background" Value="#FFE66915" />
@@ -177,13 +177,13 @@
 
 							<TextBlock x:Name="NotExcution"
 									   Grid.Row="3"
-									   Text="모항에서 대기중입니다."
+									   Text="{Binding Resources.Expedition_OnHomeport, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									   Style="{DynamicResource EmphaticTextStyleKey}"
 									   HorizontalAlignment="Center"
 									   Visibility="Collapsed" />
 							<TextBlock x:Name="InSortie"
 									   Grid.Row="3"
-									   Text="출격중입니다."
+									   Text="{Binding Resources.Expedition_OnSortie, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									   Style="{DynamicResource EmphaticTextStyleKey}"
 									   HorizontalAlignment="Center"
 									   Visibility="Collapsed" />
@@ -224,7 +224,7 @@
 									</StackPanel>
 
 									<TextBlock x:Name="ExpeditionReturned"
-											   Text="원정에서 복귀했습니다."
+											   Text="{Binding Resources.Expedition_Returned, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 											   Style="{DynamicResource EmphaticTextStyleKey}"
 											   HorizontalAlignment="Center"
 											   Visibility="Collapsed" />
@@ -239,7 +239,7 @@
 									<Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
 
 									<TextBlock Margin="0,0,0,4"
-													   Text="칸무스 피로도"
+													   Text="{Binding Resources.Expedition_Conditions, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 													   Style="{DynamicResource HeaderTextStyleKey}" />
 
 									<ItemsControl ItemsSource="{Binding Ships}">
@@ -269,8 +269,8 @@
 
 									<TextBlock Margin="0,0,0,4"
 													   Style="{DynamicResource HeaderTextStyleKey}">
-												<Run Text="예상 자원 (성공/" />
-												<Run Text="대성공" Style="{DynamicResource EmphaticTextElementStyleKey}"/><Run Text=")" />
+												<Run Text="{Binding Resources.Expedition_ExpectRes, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+												<Run Text="{Binding Resources.Expedition_ExpectResGreat, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" Style="{DynamicResource EmphaticTextElementStyleKey}"/><Run Text=")" />
 									</TextBlock>
 
 									<Grid Margin="8,0">
@@ -281,7 +281,7 @@
 											<ColumnDefinition Width="Auto" />
 										</Grid.ColumnDefinitions>
 
-										<TextBlock Text="연료:"
+										<TextBlock Text="{Binding Resources.Expedition_Expect_Fuel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 														   Style="{DynamicResource DefaultTextStyleKey}" />
 										<TextBlock Grid.Column="1"
 														   Text="{Binding ResultData.ExpFuel, Mode=OneWay}"
@@ -303,7 +303,7 @@
 										</Grid.ColumnDefinitions>
 
 										<TextBlock Grid.Row="1"
-														   Text="탄약:"
+														   Text="{Binding Resources.Expedition_Expect_Ammo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 														   Style="{DynamicResource DefaultTextStyleKey}" />
 										<TextBlock Grid.Row="1"
 														   Grid.Column="1"
@@ -328,7 +328,7 @@
 										</Grid.ColumnDefinitions>
 
 										<TextBlock Grid.Row="2"
-														   Text="강재:"
+														   Text="{Binding Resources.Expedition_Expect_Steel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 														   Style="{DynamicResource DefaultTextStyleKey}" />
 										<TextBlock Grid.Row="2"
 														   Grid.Column="1"
@@ -353,7 +353,7 @@
 										</Grid.ColumnDefinitions>
 
 										<TextBlock Grid.Row="3"
-														   Text="보크사이트:"
+														   Text="{Binding Resources.Expedition_Expect_Bauxite, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 														   Style="{DynamicResource DefaultTextStyleKey}" />
 										<TextBlock Grid.Row="3"
 														   Grid.Column="1"
