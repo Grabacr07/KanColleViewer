@@ -12,6 +12,7 @@
 			 xmlns:metro2="clr-namespace:MetroTrilithon.UI.Controls;assembly=MetroTrilithon.Desktop"
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
 			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
 			 xmlns:converters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters"
@@ -143,7 +144,7 @@
 						<Border Background="{DynamicResource FleetRepairingBrushKey}"
 								Opacity=".4"
 								Margin="5,0" />
-						<TextBlock Text="입거중"
+						<TextBlock Text="{Binding Resources.Fleets_InRepair, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									Style="{DynamicResource EmphaticTextStyleKey}"
 									HorizontalAlignment="Center" />
 					</Grid>
@@ -155,7 +156,7 @@
 						<Border Background="{DynamicResource FleetRepairingBrushKey}"
 								Opacity=".4"
 								Margin="5,0" />
-						<TextBlock Text="퇴피완료"
+						<TextBlock Text="{Binding Resources.Fleets_Eva, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									Style="{DynamicResource EmphaticTextStyleKey}"
 									HorizontalAlignment="Center" />
 					</Grid>
@@ -170,13 +171,13 @@
 						<Run Text="{Binding Ship.Condition, Mode=OneWay}"
 								Style="{DynamicResource EmphaticTextElementStyleKey}" />
 						<LineBreak />
-						<Run Text="컨디션"
+						<Run Text="{Binding Resources.Fleets_Condition, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 								FontSize="9" />
 
 						<TextBlock.ToolTip>
 							<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
 										Foreground="White">
-								<Run Text="피로회복까지:" />
+								<Run Text="{Binding Resources.Fleets_ConditionTo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 								<Run Text="{Binding Condition.ConditionText, Mode=OneWay}" />
 							</TextBlock>
 						</TextBlock.ToolTip>
@@ -198,11 +199,11 @@
 						<StackPanel.ToolTip>
 							<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
 										Foreground="White">
-								<Run Text="연료:" />
+								<Run Text="{Binding Resources.Expedition_Except_Fuel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 								<Run Text="{Binding Ship.Fuel.Current, Mode=OneWay}" /><Run Text="/" /><Run Text="{Binding Ship.Fuel.Maximum, Mode=OneWay}" />
 								<Run Text="{Binding Ship.UsedFuel, Mode=OneWay, StringFormat={}({0} 소모)}" Foreground="Crimson"/>
 								<LineBreak />
-								<Run Text="탄약:" />
+								<Run Text="{Binding Resources.Expedition_Except_Ammo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 								<Run Text="{Binding Ship.Bull.Current, Mode=OneWay}" /><Run Text="/" /><Run Text="{Binding Ship.Bull.Maximum, Mode=OneWay}" />
 								<Run Text="{Binding Ship.UsedBull, Mode=OneWay, StringFormat={}({0} 소모)}" Foreground="Crimson"/>
 							</TextBlock>
@@ -550,10 +551,13 @@
 					   Margin="18,3"
 					   VerticalAlignment="Center"
 					   HorizontalAlignment="Right">
-				<Run Text="보급량:" />
-				<Run Text="연료 " /><Run Text="{Binding SelectedFleet.UsedFuel, Mode=OneWay}" />
-				<Run Text="탄약 " /><Run Text="{Binding SelectedFleet.UsedAmmo, Mode=OneWay}" />
-				<Run Text="보크사이트 " /><Run Text="{Binding SelectedFleet.UsedBauxite, Mode=OneWay}" />
+				<Run Text="{Binding Resources.Fleets_Supplys, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+				<Run Text="{Binding Resources.Fleets_Fuel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+				<Run Text="{Binding SelectedFleet.UsedFuel, Mode=OneWay}" />
+				<Run Text="{Binding Resources.Fleets_Ammo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+				<Run Text="{Binding SelectedFleet.UsedAmmo, Mode=OneWay}" />
+				<Run Text="{Binding Resources.Fleets_Bauxite, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+				<Run Text="{Binding SelectedFleet.UsedBauxite, Mode=OneWay}" />
 			</TextBlock>
 			
 			<Grid Grid.Row="3"

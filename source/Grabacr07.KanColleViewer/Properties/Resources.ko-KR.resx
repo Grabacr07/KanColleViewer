@@ -465,4 +465,73 @@
   <data name="Akashi_NotificationMessage" xml:space="preserve">
     <value>아카시가 20분을 수리했습니다.</value>
   </data>
+  <data name="Expedition_Conditions" xml:space="preserve">
+    <value>칸무스 피로도</value>
+  </data>
+  <data name="Expedition_ExpectRes" xml:space="preserve">
+    <value>예상 자원 (성공/</value>
+  </data>
+  <data name="Expedition_ExpectResGreat" xml:space="preserve">
+    <value>대성공</value>
+  </data>
+  <data name="Expedition_Expect_Ammo" xml:space="preserve">
+    <value>탄약:</value>
+  </data>
+  <data name="Expedition_Expect_Bauxite" xml:space="preserve">
+    <value>보크사이트:</value>
+  </data>
+  <data name="Expedition_Expect_Fuel" xml:space="preserve">
+    <value>연료:</value>
+  </data>
+  <data name="Expedition_Expect_Steel" xml:space="preserve">
+    <value>강재:</value>
+  </data>
+  <data name="Expedition_GreatSuccessNo" xml:space="preserve">
+    <value>대성공 불가</value>
+  </data>
+  <data name="Expedition_NoSupply" xml:space="preserve">
+    <value>보급안됨</value>
+  </data>
+  <data name="Expedition_OnHomeport" xml:space="preserve">
+    <value>모항에서 대기중입니다.</value>
+  </data>
+  <data name="Expedition_OnSortie" xml:space="preserve">
+    <value>출격중입니다.</value>
+  </data>
+  <data name="Expedition_OrganizeNo" xml:space="preserve">
+    <value>편성문제</value>
+  </data>
+  <data name="Expedition_OrganizeOK" xml:space="preserve">
+    <value>편성완료</value>
+  </data>
+  <data name="Expedition_Returned" xml:space="preserve">
+    <value>원정에서 복귀했습니다.</value>
+  </data>
+  <data name="Fleets_Ammo" xml:space="preserve">
+    <value>탄약</value>
+  </data>
+  <data name="Fleets_Bauxite" xml:space="preserve">
+    <value>보크사이트</value>
+  </data>
+  <data name="Fleets_ConditionTo" xml:space="preserve">
+    <value>피로회복까지:</value>
+  </data>
+  <data name="Fleets_Eva" xml:space="preserve">
+    <value>퇴피완료</value>
+  </data>
+  <data name="Fleets_Fuel" xml:space="preserve">
+    <value>연료</value>
+  </data>
+  <data name="Fleets_InRepair" xml:space="preserve">
+    <value>입거중</value>
+  </data>
+  <data name="Fleets_Supplys" xml:space="preserve">
+    <value>보급량:</value>
+  </data>
+  <data name="Shipyard" xml:space="preserve">
+    <value>공창</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>툴</value>
+  </data>
 </root>

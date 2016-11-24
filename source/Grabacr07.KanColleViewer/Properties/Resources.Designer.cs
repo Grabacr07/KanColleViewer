@@ -277,11 +277,92 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   艦娘コンディション과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Expedition_Conditions {
+            get {
+                return ResourceManager.GetString("Expedition_Conditions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   弾薬:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Expedition_Expect_Ammo {
+            get {
+                return ResourceManager.GetString("Expedition_Expect_Ammo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ボーキサイト:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Expedition_Expect_Bauxite {
+            get {
+                return ResourceManager.GetString("Expedition_Expect_Bauxite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   燃料:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Expedition_Expect_Fuel {
+            get {
+                return ResourceManager.GetString("Expedition_Expect_Fuel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   鋼材:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Expedition_Expect_Steel {
+            get {
+                return ResourceManager.GetString("Expedition_Expect_Steel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   予想資源 (成功/과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Expedition_ExpectRes {
+            get {
+                return ResourceManager.GetString("Expedition_ExpectRes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   大成功과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Expedition_ExpectResGreat {
+            get {
+                return ResourceManager.GetString("Expedition_ExpectResGreat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   大成功不可과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Expedition_GreatSuccessNo {
+            get {
+                return ResourceManager.GetString("Expedition_GreatSuccessNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   遠征に出ていません。과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Expedition_NoExpedition {
             get {
                 return ResourceManager.GetString("Expedition_NoExpedition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   補給なし과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Expedition_NoSupply {
+            get {
+                return ResourceManager.GetString("Expedition_NoSupply", resourceCulture);
             }
         }
         
@@ -322,6 +403,51 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   母港で待機中です。과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Expedition_OnHomeport {
+            get {
+                return ResourceManager.GetString("Expedition_OnHomeport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   出撃中です。과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Expedition_OnSortie {
+            get {
+                return ResourceManager.GetString("Expedition_OnSortie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   編成問題과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Expedition_OrganizeNo {
+            get {
+                return ResourceManager.GetString("Expedition_OrganizeNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   編成完了과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Expedition_OrganizeOK {
+            get {
+                return ResourceManager.GetString("Expedition_OrganizeOK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   遠征から戻りました。과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Expedition_Returned {
+            get {
+                return ResourceManager.GetString("Expedition_Returned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   終了時刻과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Expedition_TimeComplete {
@@ -358,11 +484,65 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   弾薬과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Fleets_Ammo {
+            get {
+                return ResourceManager.GetString("Fleets_Ammo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   平均과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Fleets_Average {
             get {
                 return ResourceManager.GetString("Fleets_Average", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ボーキサイト과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Fleets_Bauxite {
+            get {
+                return ResourceManager.GetString("Fleets_Bauxite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   疲労回復まで:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Fleets_ConditionTo {
+            get {
+                return ResourceManager.GetString("Fleets_ConditionTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   退避完了과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Fleets_Eva {
+            get {
+                return ResourceManager.GetString("Fleets_Eva", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   燃料과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Fleets_Fuel {
+            get {
+                return ResourceManager.GetString("Fleets_Fuel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   入渠中과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Fleets_InRepair {
+            get {
+                return ResourceManager.GetString("Fleets_InRepair", resourceCulture);
             }
         }
         
@@ -390,6 +570,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Fleets_Speed_Slow {
             get {
                 return ResourceManager.GetString("Fleets_Speed_Slow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   補給量:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Fleets_Supplys {
+            get {
+                return ResourceManager.GetString("Fleets_Supplys", resourceCulture);
             }
         }
         
@@ -1024,6 +1213,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   工廠과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Shipyard {
+            get {
+                return ResourceManager.GetString("Shipyard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   キャッシュの削除과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string StartContent_ClearCacheButton {
@@ -1074,6 +1272,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string StatusBar_Ready {
             get {
                 return ResourceManager.GetString("StatusBar_Ready", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ツール과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Tools {
+            get {
+                return ResourceManager.GetString("Tools", resourceCulture);
             }
         }
         
