@@ -534,4 +534,7 @@
   <data name="Tools" xml:space="preserve">
     <value>툴</value>
   </data>
+  <data name="Fleets_Condition" xml:space="preserve">
+    <value>피로도</value>
+  </data>
 </root>

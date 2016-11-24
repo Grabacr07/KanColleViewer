@@ -457,10 +457,10 @@
     <value>Ship conditions</value>
   </data>
   <data name="Expedition_ExpectRes" xml:space="preserve">
-    <value>Except Res (Success/</value>
+    <value>Expect Res (Suc/</value>
   </data>
   <data name="Expedition_ExpectResGreat" xml:space="preserve">
-    <value>G.Success</value>
+    <value>G.Suc</value>
   </data>
   <data name="Expedition_Expect_Ammo" xml:space="preserve">
     <value>Ammo:</value>
@@ -474,7 +474,7 @@
   <data name="Expedition_Expect_Steel" xml:space="preserve">
     <value>Steel:</value>
   </data>
-  <data name="Expedition_GreateSuccessNo" xml:space="preserve">
+  <data name="Expedition_GreatSuccessNo" xml:space="preserve">
     <value>No G.Success</value>
   </data>
   <data name="Expedition_NoSupply" xml:space="preserve">
@@ -521,5 +521,8 @@
   </data>
   <data name="Tools" xml:space="preserve">
     <value>Tools</value>
+  </data>
+  <data name="Fleets_Condition" xml:space="preserve">
+    <value>Cond.</value>
   </data>
 </root>

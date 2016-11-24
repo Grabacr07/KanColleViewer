@@ -511,6 +511,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   疲労度과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Fleets_Condition {
+            get {
+                return ResourceManager.GetString("Fleets_Condition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   疲労回復まで:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Fleets_ConditionTo {
