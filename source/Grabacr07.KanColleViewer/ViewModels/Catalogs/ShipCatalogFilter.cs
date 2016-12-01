@@ -815,6 +815,74 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		}
 	}
 
+	public class ShipExSlotFilter : ShipCatalogFilter
+	{
+		#region Both 変更通知プロパティ
+		private bool _Both;
+		public bool Both
+		{
+			get { return this._Both; }
+			set
+			{
+				if (this._Both != value)
+				{
+					this._Both = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+		#endregion
+
+		#region Unequiped 変更通知プロパティ
+		private bool _Unequiped;
+		public bool Unequiped
+		{
+			get { return this._Unequiped; }
+			set
+			{
+				if (this._Unequiped != value)
+				{
+					this._Unequiped = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+		#endregion
+
+		#region Equiped 変更通知プロパティ
+		private bool _Equiped;
+		public bool Equiped
+		{
+			get { return this._Equiped; }
+			set
+			{
+				if (this._Equiped != value)
+				{
+					this._Equiped = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+		#endregion
+
+		public ShipExSlotFilter(Action updateAction) : base(updateAction)
+		{
+			this._Both = true;
+		}
+
+		public override bool Predicate(Ship ship)
+		{
+			if (this.Both) return true;
+			if (this.Unequiped && (!ship.ExSlotExists || !ship.ExSlot.Equipped)) return true;
+			if (this.Equiped && ship.ExSlotExists && ship.ExSlot.Equipped) return true;
+
+			return false;
+		}
+	}
+
 	public class ShipFleetFilter : ShipCatalogFilter
 	{
 		#region AllFleet 변경 통지 프로퍼티
