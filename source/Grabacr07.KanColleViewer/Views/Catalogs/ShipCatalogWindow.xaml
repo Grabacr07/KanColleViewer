@@ -305,9 +305,9 @@
 									<WrapPanel Grid.Column="2">
 										<RadioButton Content="모두"
 													 IsChecked="{Binding Both, Mode=TwoWay}" />
-										<RadioButton Content="채워져있음"
+										<RadioButton Content="채움"
 													 IsChecked="{Binding Locked, Mode=TwoWay}" />
-										<RadioButton Content="안채워져있음"
+										<RadioButton Content="안채움"
 													 IsChecked="{Binding Unlocked, Mode=TwoWay}" />
 									</WrapPanel>
 								</Grid>
@@ -441,6 +441,28 @@
 													 IsChecked="{Binding Brilliant, Mode=TwoWay}" />
 										<RadioButton Content="49이하"
 													 IsChecked="{Binding Unbrilliant, Mode=TwoWay}" />
+									</WrapPanel>
+								</Grid>
+
+								<Grid DataContext="{Binding ShipExSlotFilter}">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="FilterName" />
+										<ColumnDefinition Width="10" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<TextBlock Margin="0,2"
+											   HorizontalAlignment="Right">
+										<Run Text="확장슬롯" />
+										<Run Text=":" />
+									</TextBlock>
+									<WrapPanel Grid.Column="2">
+										<RadioButton Content="전부"
+													 IsChecked="{Binding Both, Mode=TwoWay}" />
+										<RadioButton Content="장착안됨"
+													 IsChecked="{Binding Unequiped, Mode=TwoWay}" />
+										<RadioButton Content="장착됨"
+													 IsChecked="{Binding Equiped, Mode=TwoWay}" />
 									</WrapPanel>
 								</Grid>
 							</StackPanel>
@@ -756,6 +778,12 @@
 												 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 											<Run Text="" />
 											<Run Text="{Binding Ship.ExpForNextLevel, StringFormat=Next:{0}, Mode=OneWay}" />
+											<TextBlock.ToolTip>
+												<TextBlock>
+													<Run Text="누적 경험치:" />
+													<Run Text="{Binding Ship.Exp}" />
+												</TextBlock>
+											</TextBlock.ToolTip>
 										</TextBlock>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
