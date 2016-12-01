@@ -111,6 +111,11 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public int ExpForLevelMax => Experience.GetShipExpForSpecifiedLevel(this.Exp, 155);
 
+		/// <summary>
+		/// ExSlot 이 존재하는지 여부
+		/// </summary>
+		public bool ExSlotExists => this.RawData.api_slot_ex != 0;
+
 		#region HP 変更通知プロパティ
 
 		private LimitedValue _HP;

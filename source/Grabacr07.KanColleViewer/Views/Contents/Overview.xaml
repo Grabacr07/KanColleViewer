@@ -141,6 +141,9 @@
 									<LineBreak />
 									<Run Text="남은 경험치:" />
 									<Run Text="{Binding Ship.ExpForNextRemodelingLevel, Mode=OneWay}" />
+									<LineBreak />
+									<Run Text="누적 경험치:" />
+									<Run Text="{Binding Ship.Exp, Mode=OneWay}" />
 								</TextBlock>
 							</TextBlock.ToolTip>
 						</TextBlock>

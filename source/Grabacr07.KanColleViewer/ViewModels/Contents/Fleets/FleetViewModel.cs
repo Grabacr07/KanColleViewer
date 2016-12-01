@@ -378,7 +378,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet)
 			{
-				(sender, args) => this.RaisePropertyChanged(args.PropertyName)
+				(sender, args) => this.RaisePropertyChanged(args.PropertyName),
+				{ nameof(fleet.ShipsUpdated), (sender,args)=>this.ExpeditionId = this.ExpeditionId }
 			});
 
 			fleet.State.Updated += (sender, args) => this.ExpeditionId = this.ExpeditionId; // 편성 변경?
