@@ -18,18 +18,16 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 		public Admiral Model => KanColleClient.Current.Homeport.Admiral;
 
 		#endregion
-		
+
 		#region ToolTip 변경 통지 프로퍼티
 		private string _ToolTip;
 
 		public string ToolTip
 		{
-			get
-			{ return this._ToolTip; }
+			get { return this._ToolTip; }
 			set
 			{
-				if (this._ToolTip == value)
-					return;
+				if (this._ToolTip == value) return;
 				this._ToolTip = value;
 				this.RaisePropertyChanged();
 			}

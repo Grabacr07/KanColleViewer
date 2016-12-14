@@ -69,22 +69,12 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#endregion
 
+		public static Dictionary<SlotItemIconType, string> IconNameTable { get; }
+		public static Dictionary<SlotItemIconType, SlotItemIconType> IconAliasNameable { get; }
 
-		public SlotItemEquipTypeViewModel(SlotItemIconType stype)
+		static SlotItemEquipTypeViewModel()
 		{
-			this.Type = stype;
-			this.DisplayName = GetIconName(stype);
-		}
-
-		public void Set(bool selected)
-		{
-			this._IsSelected = selected;
-			this.RaisePropertyChanged(nameof(this.IsSelected));
-		}
-
-		private string GetIconName(SlotItemIconType icon)
-		{
-			var table = new Dictionary<SlotItemIconType, string>
+			SlotItemEquipTypeViewModel.IconNameTable = new Dictionary<SlotItemIconType, string>
 			{
 				{ SlotItemIconType.Unknown, "*분류안됨" },
 				{ SlotItemIconType.MainCanonLight, "소구경주포" },
@@ -125,8 +115,26 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				{ SlotItemIconType.AmphibiousLandingCraft, "내화정" },
 				{ SlotItemIconType.LandBasedAttacker, "육상공격기" },
 				{ SlotItemIconType.LandBasedFighter, "국지전투기" },
+				{ SlotItemIconType.JetbombFighter_A, "분식폭격전투기" },
+				{ SlotItemIconType.JetBombFighter_B, "분식폭격전투기" },
 			};
-			return table.FirstOrDefault(x => x.Key == icon).Value;
+			SlotItemEquipTypeViewModel.IconAliasNameable = new Dictionary<SlotItemIconType, SlotItemIconType>
+			{
+				{ SlotItemIconType.JetBombFighter_B, SlotItemIconType.JetbombFighter_A }
+			};
+		}
+
+		public SlotItemEquipTypeViewModel(SlotItemIconType stype)
+		{
+			this.Type = stype;
+			this.DisplayName = SlotItemEquipTypeViewModel.IconNameTable[stype]
+				?? SlotItemEquipTypeViewModel.IconNameTable[SlotItemIconType.Unknown];
+		}
+
+		public void Set(bool selected)
+		{
+			this._IsSelected = selected;
+			this.RaisePropertyChanged(nameof(this.IsSelected));
 		}
 	}
 }

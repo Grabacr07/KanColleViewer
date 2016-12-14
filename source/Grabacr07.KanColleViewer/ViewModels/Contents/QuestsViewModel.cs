@@ -27,51 +27,57 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 		#region Quests 変更通知プロパティ
 
-		private QuestViewModel[] _Quests;
+		/// <summary>
+		/// Filtered Quest List
+		/// </summary>
+		private QuestViewModel[] _OriginalQuests;
 
+		/// <summary>
+		/// Original Quest List
+		/// </summary>
+		private QuestViewModel[] _Quests;
 		public QuestViewModel[] Quests
 		{
-			get
-			{
-				IEnumerable<QuestViewModel> temp;
-				switch (SelectedItem.Key)
-				{
-					case "All":
-						temp = this._Quests;
-						break;
-					case "Current":
-						temp = this._Quests.Where(x => x.State != QuestState.None);
-						break;
-					case "Daily":
-						temp = this._Quests.Where(x => x.Type == QuestType.Daily);
-						break;
-					case "Weekly":
-						temp = this._Quests.Where(x => x.Type == QuestType.Weekly);
-						break;
-					case "Monthly":
-						temp = this._Quests.Where(x => x.Type == QuestType.Monthly);
-						break;
-					case "Once":
-						temp = this._Quests.Where(x => x.Type == QuestType.OneTime);
-						break;
-					case "Others":
-						temp = this._Quests.Where(x => x.Type == QuestType.Other);
-						break;
-					default:
-						temp = null;
-						break;
-				}
-				if (temp == null) return new QuestViewModel[0];
-
-				if (QuestCategorySelected.Display != CategoryToColor(QuestCategory.Other))
-					temp = temp.Where(x => CategoryToColor(x.Category) == QuestCategorySelected.Display);
-				return ComputeQuestPage(temp.ToArray());
-			}
+			get { return _Quests; }
 			set
 			{
 				if (this._Quests != value)
 				{
-					this._Quests = value;
+					this._OriginalQuests = value;
+
+					IEnumerable<QuestViewModel> temp;
+					switch (SelectedItem.Key)
+					{
+						case "All":
+							temp = _OriginalQuests;
+							break;
+						case "Current":
+							temp = _OriginalQuests.Where(x => x.State != QuestState.None);
+							break;
+						case "Daily":
+							temp = _OriginalQuests.Where(x => x.Type == QuestType.Daily);
+							break;
+						case "Weekly":
+							temp = _OriginalQuests.Where(x => x.Type == QuestType.Weekly);
+							break;
+						case "Monthly":
+							temp = _OriginalQuests.Where(x => x.Type == QuestType.Monthly);
+							break;
+						case "Once":
+							temp = _OriginalQuests.Where(x => x.Type == QuestType.OneTime);
+							break;
+						case "Others":
+							temp = _OriginalQuests.Where(x => x.Type == QuestType.Other);
+							break;
+						default:
+							temp = this._OriginalQuests = new QuestViewModel[0];
+							break;
+					}
+					if (QuestCategorySelected.Display != CategoryToColor(QuestCategory.Other))
+						temp = temp.Where(x => CategoryToColor(x.Category) == QuestCategorySelected.Display);
+
+					this._Quests = ComputeQuestPage(temp.ToArray());
+
 					this.RaisePropertyChanged();
 					this.RaisePropertyChanged("Current");
 				}
@@ -260,7 +266,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			this.IsUntaken = quests.IsUntaken;
 
 			// Quests 멤버는 필터 적용된걸 get으로 반환해서 문제가 있음
-			_badge = viewList.Count(x => x.QuestProgressValue == 100);
+			_badge = _OriginalQuests.Count(x => x.QuestProgressValue == 100);
 			this.UpdateBadge();
 		}
 		private QuestViewModel[] ComputeQuestPage(QuestViewModel[] inp)

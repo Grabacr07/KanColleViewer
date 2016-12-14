@@ -125,8 +125,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			get { return this._ResultData; }
 			set
 			{
-				this._ResultData = value;
-				this.RaisePropertyChanged();
+				if (this._ResultData != value)
+				{
+					this._ResultData = value;
+					this.RaisePropertyChanged();
+				}
 			}
 		}
 
@@ -305,13 +308,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 		public int UsedFuel => this.Ships.Select(x => x.Ship.UsedFuel).Sum(x => x);
 		public int UsedAmmo => this.Ships.Select(x => x.Ship.UsedBull).Sum(x => x);
-		public int UsedBauxite => this.Ships
-			.Select(x =>
-				x.Ship.Slots
-					.Where(y => y.Item.Info.IsNumerable)
-					.Select(y => y.Maximum - y.Current)
-					.Sum(y => y * 5)
-			).Sum(x => x);
+		public int UsedBauxite => this.Ships.Sum(x => x.Ship.Slots.Sum(y => y.Lost * 5));
 
 		#endregion
 

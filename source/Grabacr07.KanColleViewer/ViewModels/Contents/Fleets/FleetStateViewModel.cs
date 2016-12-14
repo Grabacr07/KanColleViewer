@@ -15,11 +15,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		public FleetState Source { get; }
 
 		public string AverageLevel => this.Source.AverageLevel.ToString("#0.##");
-
 		public string TotalLevel => this.Source.TotalLevel.ToString("###0");
 
 		public string MinAirSuperiorityPotential => this.Source.MinAirSuperiorityPotential.ToString("##0");
-
 		public string MaxAirSuperiorityPotential => this.Source.MaxAirSuperiorityPotential.ToString("##0");
 
 		public string EncounterPercent => this.Source.EncounterPercent.ToString("##0.##%");
