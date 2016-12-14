@@ -56,7 +56,8 @@ namespace Grabacr07.KanColleWrapper
 		/// <summary>
 		/// すべてのセルの定義を取得します。
 		/// </summary>
-		public MasterTable<MapCell> MapCells { get; }
+		[Obsolete("マスター データから削除されました。")]
+		public MasterTable<MapCell> MapCells { get; } = new MasterTable<MapCell>();
 
 
 		internal Master(kcsapi_start2 start2)
@@ -67,8 +68,7 @@ namespace Grabacr07.KanColleWrapper
 			this.SlotItems = new MasterTable<SlotItemInfo>(start2.api_mst_slotitem.Select(x => new SlotItemInfo(x, this.SlotItemEquipTypes)));
 			this.UseItems = new MasterTable<UseItemInfo>(start2.api_mst_useitem.Select(x => new UseItemInfo(x)));
 			this.Missions = new MasterTable<Mission>(start2.api_mst_mission.Select(x => new Mission(x)));
-			this.MapCells = new MasterTable<MapCell>(start2.api_mst_mapcell.Select(x => new MapCell(x)));
-			this.MapInfos = new MasterTable<MapInfo>(start2.api_mst_mapinfo.Select(x => new MapInfo(x, this.MapCells)));
+			this.MapInfos = new MasterTable<MapInfo>(start2.api_mst_mapinfo.Select(x => new MapInfo(x)));
 			this.MapAreas = new MasterTable<MapArea>(start2.api_mst_maparea.Select(x => new MapArea(x, this.MapInfos)));
 		}
 	}
