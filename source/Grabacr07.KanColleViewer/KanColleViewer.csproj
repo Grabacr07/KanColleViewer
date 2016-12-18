@@ -251,6 +251,7 @@
       <DependentUpon>Tools.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\MetroComboBox.cs" />
+    <Compile Include="Views\Controls\PowerShellConsole.cs" />
     <Compile Include="Views\Converters\RangeToBooleanConverter.cs" />
     <Compile Include="Views\InformationWindow.xaml.cs">
       <DependentUpon>InformationWindow.xaml</DependentUpon>
@@ -363,6 +364,10 @@
       <DependentUpon>Generic.xaml</DependentUpon>
     </Page>
     <Page Include="Themes\Generic.MetroComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.PowerShellConsole.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -639,7 +644,7 @@
       <VersionMajor>4</VersionMajor>
       <VersionMinor>0</VersionMinor>
       <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
+      <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>

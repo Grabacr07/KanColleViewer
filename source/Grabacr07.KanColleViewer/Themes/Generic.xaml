@@ -2,8 +2,9 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/KanColleViewer;component/Themes/Generic.KanColleHost.xaml" />
-        <ResourceDictionary Source="/KanColleViewer;component/Themes/Generic.MetroComboBox.xaml" />
-    </ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="/KanColleViewer;component/Themes/Generic.KanColleHost.xaml" />
+		<ResourceDictionary Source="/KanColleViewer;component/Themes/Generic.MetroComboBox.xaml" />
+		<ResourceDictionary Source="/KanColleViewer;component/Themes/Generic.PowerShellConsole.xaml" />
+	</ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

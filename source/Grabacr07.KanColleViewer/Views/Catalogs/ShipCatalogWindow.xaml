@@ -95,11 +95,12 @@
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
 				<RowDefinition />
 			</Grid.RowDefinitions>
 
 			<Expander Grid.Row="0"
-					  Margin="8"
+					  Margin="8,4"
 					  IsExpanded="{Binding IsOpenFilterSettings, Mode=TwoWay}">
 				<Expander.Header>
 					<TextBlock Text="フィルター設定"
@@ -464,7 +465,7 @@
 
 			<Expander Grid.Row="1"
 					  DockPanel.Dock="Top"
-					  Margin="8,0"
+					  Margin="8,4"
 					  IsExpanded="{Binding IsOpenSortSettings, Mode=TwoWay}">
 				<Expander.Header>
 					<TextBlock Text="並べ替え設定"
@@ -553,7 +554,24 @@
 				</Border>
 			</Expander>
 
-			<Border Grid.Row="2"
+			<Expander x:Name="PowerShellExpander"
+					  x:FieldModifier="private"
+					  Grid.Row="2"
+					  DockPanel.Dock="Top"
+					  Margin="8,4"
+					  IsExpanded="{Binding IsOpenPowerShell, Mode=TwoWay}">
+				<Expander.Header>
+					<TextBlock Text="PowerShell"
+							   Style="{DynamicResource HeaderTextStyleKey}"
+							   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+				</Expander.Header>
+				<controls:PowerShellConsole PowerShellHost="{Binding ShipScriptFilter}"
+											Background="{DynamicResource BackgroundBrushKey}"
+											Height="200"
+											Margin="0,8,0,0" />
+			</Expander>
+
+			<Border Grid.Row="3"
 					BorderBrush="{DynamicResource BorderBrushKey}"
 					BorderThickness=".99"
 					Margin="8">
@@ -926,7 +944,7 @@
 				</ListView>
 			</Border>
 
-			<Border Grid.Row="2"
+			<Border Grid.Row="3"
 					Background="{DynamicResource ThemeBrushKey}"
 					BorderBrush="{DynamicResource BorderBrushKey}"
 					BorderThickness=".99"

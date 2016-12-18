@@ -12,6 +12,7 @@ using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleViewer.ViewModels;
 using Grabacr07.KanColleViewer.Views;
+using Grabacr07.KanColleViewer.Views.Controls;
 using Grabacr07.KanColleWrapper;
 using Livet;
 using MetroRadiance.UI;
@@ -98,6 +99,9 @@ namespace Grabacr07.KanColleViewer
 				// Application.MainWindow を設定しておく。これ大事
 				// 後に設定した場合、Views.Settings.ProxyBootstrapper が閉じると共にアプリも終了してしまう。
 				this.MainWindow = WindowService.Current.GetMainWindow();
+
+				//var test = new PowerShellTestWindow();
+				//test.ShowDialog();
 
 				if (BootstrapProxy())
 				{

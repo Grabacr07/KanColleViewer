@@ -19,6 +19,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public int Id => this.RawData.api_id;
 
+		public string Name => this.Info?.Name;
+
+		public string ShipType => this.Info.ShipType.Name;
+
 		/// <summary>
 		/// 艦娘の種類に基づく情報を取得します。
 		/// </summary>
@@ -412,7 +416,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public override string ToString()
 		{
-			return $"ID = {this.Id}, Name = \"{this.Info.Name}\", ShipType = \"{this.Info.ShipType.Name}\", Level = {this.Level}";
+			return $"ID = {this.Id}, Name = \"{this.Name}\", ShipType = \"{this.Info.ShipType.Name}\", Level = {this.Level}";
 		}
 
 

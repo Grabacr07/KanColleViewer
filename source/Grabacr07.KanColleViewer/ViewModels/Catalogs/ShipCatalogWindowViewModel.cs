@@ -8,6 +8,7 @@ using System.Reactive.Threading.Tasks;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleWrapper;
+using Grabacr07.KanColleWrapper.PowerShellSupport;
 using MetroTrilithon.Mvvm;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
@@ -32,6 +33,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public ShipSallyAreaFilter ShipSallyAreaFilter { get; }
 		public ShipDamagedFilter ShipDamagedFilter { get; }
 		public ShipConditionFilter ShipConditionFilter { get; }
+		public ShipFilter ShipScriptFilter { get; private set; }
 
 		public bool CheckAllShipTypes
 		{
@@ -94,6 +96,30 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				{
 					this._IsOpenSortSettings = value;
 					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region IsOpenPowerShell 変更通知プロパティ
+
+		private bool _IsOpenPowerShell;
+
+		public bool IsOpenPowerShell
+		{
+			get { return this._IsOpenPowerShell; }
+			set
+			{
+				if (this._IsOpenPowerShell != value)
+				{
+					this._IsOpenPowerShell = value;
+					this.RaisePropertyChanged();
+
+					if (this.ShipScriptFilter == null)
+					{
+						this.SetupScriptFilter();
+					}
 				}
 			}
 		}
@@ -214,6 +240,18 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		{
 			this.SortWorker.SetFirst(column);
 			this.Update();
+		}
+
+		private void SetupScriptFilter()
+		{
+			this.ShipScriptFilter = new ShipFilter()
+				.AddTo(this);
+			this.ShipScriptFilter.FilterRequested += (sender, ships) => this.Ships = ships
+				.Select((x, i) => new ShipViewModel(i + 1, x, this.sallyAreas.FirstOrDefault(y => y.Area == x.SallyArea)))
+				.ToList();
+
+			this.RaisePropertyChanged(nameof(this.ShipScriptFilter));
+			this.ShipScriptFilter.Open();
 		}
 	}
 }
