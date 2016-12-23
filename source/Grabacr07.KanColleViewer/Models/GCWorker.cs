@@ -41,6 +41,7 @@ namespace Grabacr07.KanColleViewer.Models
 					}
 				}
 			});
+			GCThread.Priority = ThreadPriority.BelowNormal;
 
 			GCWorking = true;
 			GCThread.Priority = ThreadPriority.BelowNormal;

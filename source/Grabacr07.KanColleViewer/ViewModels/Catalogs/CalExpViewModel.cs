@@ -48,152 +48,182 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		public ShipCatalogSortWorker SortWorker { get; set; }
 
-        #region TabItems 변경통지 프로퍼티
+		#region TabItems 변경통지 프로퍼티
 
-        private string[] _TabItems;
-        public string[] TabItems
-        {
-            get { return this._TabItems; }
-            set
-            {
-                this._TabItems = value;
-                this.RaisePropertyChanged();
-            }
-        }
+		private string[] _TabItems;
+		public string[] TabItems
+		{
+			get { return this._TabItems; }
+			set
+			{
+				if (this._TabItems != value)
+				{
+					this._TabItems = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
 
-        private string _SelectedTab;
-        public string SelectedTab
-        {
-            get { return this._SelectedTab; }
-            set
-            {
-                this._SelectedTab = value;
-                this.RaisePropertyChanged();
-                this.RaisePropertyChanged("SelectedTabIdx");
-                this.RaisePropertyChanged("GoalExpVisible");
-                this.RaisePropertyChanged("TrainingExpVisible");
-                this.UpdateExpCalculator();
-            }
-        }
+		private string _SelectedTab;
+		public string SelectedTab
+		{
+			get { return this._SelectedTab; }
+			set
+			{
+				if (this._SelectedTab != value)
+				{
+					this._SelectedTab = value;
+					this.RaisePropertyChanged();
+					this.RaisePropertyChanged("SelectedTabIdx");
+					this.RaisePropertyChanged("GoalExpVisible");
+					this.RaisePropertyChanged("TrainingExpVisible");
+					this.UpdateExpCalculator();
+				}
+			}
+		}
 
-        public int SelectedTabIdx => this.SelectedTab == null ? 0 : (this.TabItems?.ToList().IndexOf(this.SelectedTab) ?? 0);
+		public int SelectedTabIdx => this.SelectedTab == null ? 0 : (this.TabItems?.ToList().IndexOf(this.SelectedTab) ?? 0);
 
-        public bool GoalExpVisible => this.SelectedTabIdx == 0;
-        public bool TrainingExpVisible => this.SelectedTabIdx == 1;
+		public bool GoalExpVisible => this.SelectedTabIdx == 0;
+		public bool TrainingExpVisible => this.SelectedTabIdx == 1;
 
-        #endregion
+		#endregion
 
-        #region 연습전 경험치 프로퍼티
+		#region 연습전 경험치 프로퍼티
 
-        private int _Training_FlagshipExp;
-        private int _Training_FlagshipMvpExp;
-        private int _Training_AccshipExp;
-        private int _Training_AccshipMvpExp;
-        private int _Training_TrainingCruiser_Bonus;
+		private int _Training_FlagshipExp;
+		private int _Training_FlagshipMvpExp;
+		private int _Training_AccshipExp;
+		private int _Training_AccshipMvpExp;
+		private int _Training_TrainingCruiser_Bonus;
 
-        private int _Training_Flagship_Lv;
-        private int _Training_Secondship_Lv;
-        private bool _Training_Secondship;
+		private int _Training_Flagship_Lv;
+		private int _Training_Secondship_Lv;
+		private bool _Training_Secondship;
 
-        public int Training_FlagshipExp
-        {
-            get { return this._Training_FlagshipExp; }
-            set
-            {
-                this._Training_FlagshipExp = value;
-                this.RaisePropertyChanged();
-            }
-        }
-        public int Training_FlagshipMvpExp
-        {
-            get { return this._Training_FlagshipMvpExp; }
-            set
-            {
-                this._Training_FlagshipMvpExp = value;
-                this.RaisePropertyChanged();
-            }
-        }
-        public int Training_AccshipExp
-        {
-            get { return this._Training_AccshipExp; }
-            set
-            {
-                this._Training_AccshipExp = value;
-                this.RaisePropertyChanged();
-            }
-        }
-        public int Training_AccshipMvpExp
-        {
-            get { return this._Training_AccshipMvpExp; }
-            set
-            {
-                this._Training_AccshipMvpExp = value;
-                this.RaisePropertyChanged();
-            }
-        }
-        public int Training_TrainingCruiser_Bonus
-        {
-            get { return this._Training_TrainingCruiser_Bonus; }
-            set
-            {
-                this._Training_TrainingCruiser_Bonus = value;
-                this.RaisePropertyChanged();
-            }
-        }
+		public int Training_FlagshipExp
+		{
+			get { return this._Training_FlagshipExp; }
+			set
+			{
+				if (this._Training_FlagshipExp != value)
+				{
+					this._Training_FlagshipExp = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		public int Training_FlagshipMvpExp
+		{
+			get { return this._Training_FlagshipMvpExp; }
+			set
+			{
+				if (this._Training_FlagshipMvpExp != value)
+				{
+					this._Training_FlagshipMvpExp = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		public int Training_AccshipExp
+		{
+			get { return this._Training_AccshipExp; }
+			set
+			{
+				if (this._Training_AccshipExp != value)
+				{
+					this._Training_AccshipExp = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		public int Training_AccshipMvpExp
+		{
+			get { return this._Training_AccshipMvpExp; }
+			set
+			{
+				if (this._Training_AccshipMvpExp != value)
+				{
+					this._Training_AccshipMvpExp = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		public int Training_TrainingCruiser_Bonus
+		{
+			get { return this._Training_TrainingCruiser_Bonus; }
+			set
+			{
+				if (this._Training_TrainingCruiser_Bonus != value)
+				{
+					this._Training_TrainingCruiser_Bonus = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
 
-        public int Training_Flagship_Lv
-        {
-            get { return this._Training_Flagship_Lv; }
-            set
-            {
-                this._Training_Flagship_Lv = value;
-                this.RaisePropertyChanged();
-                this.UpdateExpCalculator();
-            }
-        }
-        public int Training_Secondship_Lv
-        {
-            get { return this._Training_Secondship_Lv; }
-            set
-            {
-                this._Training_Secondship_Lv = value;
-                this.RaisePropertyChanged();
-                this.UpdateExpCalculator();
-            }
-        }
-        public bool Training_Secondship
-        {
-            get { return this._Training_Secondship; }
-            set
-            {
-                this._Training_Secondship = value;
-                this.RaisePropertyChanged();
-                this.UpdateExpCalculator();
-            }
-        }
+		public int Training_Flagship_Lv
+		{
+			get { return this._Training_Flagship_Lv; }
+			set
+			{
+				if (this._Training_Flagship_Lv != value)
+				{
+					this._Training_Flagship_Lv = value;
+					this.RaisePropertyChanged();
+					this.UpdateExpCalculator();
+				}
+			}
+		}
+		public int Training_Secondship_Lv
+		{
+			get { return this._Training_Secondship_Lv; }
+			set
+			{
+				if (this._Training_Secondship_Lv != value)
+				{
+					this._Training_Secondship_Lv = value;
+					this.RaisePropertyChanged();
+					this.UpdateExpCalculator();
+				}
+			}
+		}
+		public bool Training_Secondship
+		{
+			get { return this._Training_Secondship; }
+			set
+			{
+				if (this._Training_Secondship != value)
+				{
+					this._Training_Secondship = value;
+					this.RaisePropertyChanged();
+					this.UpdateExpCalculator();
+				}
+			}
+		}
 
-        private string _SelectedExpResult;
+		private string _SelectedExpResult;
 
-        public string SelectedExpResult
-        {
-            get { return this._SelectedExpResult; }
-            set
-            {
-                if (this._SelectedExpResult != value)
-                {
-                    this._SelectedExpResult = value;
-                    this.RaisePropertyChanged();
-                    this.UpdateExpCalculator();
-                }
-            }
-        }
+		public string SelectedExpResult
+		{
+			get { return this._SelectedExpResult; }
+			set
+			{
+				if (this._SelectedExpResult != value)
+				{
+					this._SelectedExpResult = value;
+					this.RaisePropertyChanged();
+					this.UpdateExpCalculator();
+				}
+			}
+		}
 
-        #endregion
+		#endregion
 
 
-        #region Ships 変更通知プロパティ
+		#region Ships 変更通知プロパティ
 
-        private IReadOnlyCollection<ShipViewModel> _Ships;
+		private IReadOnlyCollection<ShipViewModel> _Ships;
 
 		public IReadOnlyCollection<ShipViewModel> Ships
 		{
@@ -525,16 +555,16 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 			SelectedSea = SeaExpTable.Keys.FirstOrDefault();
 			SelectedResult = Results.FirstOrDefault();
-            SelectedExpResult = Results.FirstOrDefault();
+			SelectedExpResult = Results.FirstOrDefault();
 
-            this.TabItems = new string[]
-            {
-                "목표 경험치",
-                "연습전 경험치"
-            };
-            this.SelectedTab = this.TabItems.FirstOrDefault();
+			this.TabItems = new string[]
+			{
+				"목표 경험치",
+				"연습전 경험치"
+			};
+			this.SelectedTab = this.TabItems.FirstOrDefault();
 
-            this.Update();
+			this.Update();
 		}
 
 		public void Update()
@@ -557,97 +587,97 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		/// </summary>
 		public void UpdateExpCalculator()
 		{
-            if (this.SelectedTabIdx == 0)
-            {
-			    if (this.TargetLevel < this.CurrentLevel || this.TargetExp < this.CurrentExp ||
-                    this.SelectedResult == null || this.SelectedSea == null)
-				    return;
+			if (this.SelectedTabIdx == 0)
+			{
+				if (this.TargetLevel < this.CurrentLevel || this.TargetExp < this.CurrentExp ||
+					this.SelectedResult == null || this.SelectedSea == null)
+					return;
 
-                var RankTable = new Dictionary<string, double>
-                {
-                    {"S", 1.2 },
-                    {"A", 1.0 },
-                    {"B", 1.0 },
-                    {"C", 0.8 },
-                    {"D", 0.7 },
-                    {"E", 0.5 }
-                };
+				var RankTable = new Dictionary<string, double>
+				{
+					{"S", 1.2 },
+					{"A", 1.0 },
+					{"B", 1.0 },
+					{"C", 0.8 },
+					{"D", 0.7 },
+					{"E", 0.5 }
+				};
 
-                // Lawl at that this inline conditional.
-                double Multiplier = (this.IsFlagship ? 1.5 : 1) * (this.IsMVP ? 2 : 1) * RankTable[this.SelectedResult];
+				// Lawl at that this inline conditional.
+				double Multiplier = (this.IsFlagship ? 1.5 : 1) * (this.IsMVP ? 2 : 1) * RankTable[this.SelectedResult];
 
-                this.SortieExp = (int)Math.Round(SeaExpTable[this.SelectedSea] * Multiplier, 0, MidpointRounding.AwayFromZero);
-			    this.RemainingExp = this.TargetExp - this.CurrentExp;
-			    this.RunCount = Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(this.RemainingExp) / Convert.ToDecimal(this.SortieExp)));
-            }
-            else if (this.SelectedTabIdx == 1)
-            {
-                if (this.SelectedExpResult == null)
-                    return;
+				this.SortieExp = (int)Math.Round(SeaExpTable[this.SelectedSea] * Multiplier, 0, MidpointRounding.AwayFromZero);
+				this.RemainingExp = this.TargetExp - this.CurrentExp;
+				this.RunCount = Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(this.RemainingExp) / Convert.ToDecimal(this.SortieExp)));
+			}
+			else if (this.SelectedTabIdx == 1)
+			{
+				if (this.SelectedExpResult == null)
+					return;
 
-                var RankTable = new Dictionary<string, double>
-                {
-                    {"S", 1.2 },
-                    {"A", 1.0 },
-                    {"B", 1.0 },
-                    {"C", 0.64 },
-                    {"D", 0.56 },
-                    {"E", 0.4 }
-                };
-                var rankRate = RankTable[this.SelectedExpResult];
-                var flagshipRate = 1.5;
-                var mvpRate = 2.0;
-                var tRate = 0.0;
-                var tExp = 0;
+				var RankTable = new Dictionary<string, double>
+				{
+					{"S", 1.2 },
+					{"A", 1.0 },
+					{"B", 1.0 },
+					{"C", 0.64 },
+					{"D", 0.56 },
+					{"E", 0.4 }
+				};
+				var rankRate = RankTable[this.SelectedExpResult];
+				var flagshipRate = 1.5;
+				var mvpRate = 2.0;
+				var tRate = 0.0;
+				var tExp = 0;
 
-                int baseExp = ExpTable[this.Training_Flagship_Lv] / 100;
-                if (this.Training_Secondship) baseExp += ExpTable[this.Training_Secondship_Lv] / 300;
+				int baseExp = ExpTable[this.Training_Flagship_Lv] / 100;
+				if (this.Training_Secondship) baseExp += ExpTable[this.Training_Secondship_Lv] / 300;
 
-                if (baseExp > 500) baseExp = 500 + (int)Math.Floor(Math.Sqrt(baseExp - 500));
-                baseExp = (int)(baseExp * rankRate);
+				if (baseExp > 500) baseExp = 500 + (int)Math.Floor(Math.Sqrt(baseExp - 500));
+				baseExp = (int)(baseExp * rankRate);
 
-                var FirstFleet = this.homeport.Organization.Fleets.FirstOrDefault().Value.Ships;
-                var tShip = FirstFleet.Where(x => x.Info.ShipType.Id == 21).ToArray(); // 21 is Training Cruiser
+				var FirstFleet = this.homeport.Organization.Fleets.FirstOrDefault().Value.Ships;
+				var tShip = FirstFleet.Where(x => x.Info.ShipType.Id == 21).ToArray(); // 21 is Training Cruiser
 
-                if (tShip.Length > 0)
-                {
-                    if (tShip.Length == 1 && FirstFleet.FirstOrDefault().Info.ShipType.Id == 21)
-                        tRate = TrainingRate(tShip[0].Level, 0); // Flagship only
-                    else if (tShip.Length == 1 && FirstFleet.FirstOrDefault().Info.ShipType.Id != 21)
-                        tRate = TrainingRate(tShip[0].Level, 1); // One at Accompanies
-                    else if (tShip.Length > 1 && FirstFleet.FirstOrDefault().Info.ShipType.Id == 21)
-                        tRate = TrainingRate(FirstFleet.FirstOrDefault().Level, 2); // Flagship and Accompany
-                    else if (tShip.Length > 1 && FirstFleet.FirstOrDefault().Info.ShipType.Id != 21)
-                        tRate = TrainingRate(Math.Max(tShip[0].Level, tShip[1].Level), 3); // Two at Accompanies
-                }
-                tExp = (int)Math.Floor(tRate * baseExp / 100);
+				if (tShip.Length > 0)
+				{
+					if (tShip.Length == 1 && FirstFleet.FirstOrDefault().Info.ShipType.Id == 21)
+						tRate = TrainingRate(tShip[0].Level, 0); // Flagship only
+					else if (tShip.Length == 1 && FirstFleet.FirstOrDefault().Info.ShipType.Id != 21)
+						tRate = TrainingRate(tShip[0].Level, 1); // One at Accompanies
+					else if (tShip.Length > 1 && FirstFleet.FirstOrDefault().Info.ShipType.Id == 21)
+						tRate = TrainingRate(FirstFleet.FirstOrDefault().Level, 2); // Flagship and Accompany
+					else if (tShip.Length > 1 && FirstFleet.FirstOrDefault().Info.ShipType.Id != 21)
+						tRate = TrainingRate(Math.Max(tShip[0].Level, tShip[1].Level), 3); // Two at Accompanies
+				}
+				tExp = (int)Math.Floor(tRate * baseExp / 100);
 
-                this.Training_FlagshipExp = (int)(baseExp * flagshipRate);
-                this.Training_FlagshipMvpExp = (int)(baseExp * flagshipRate * mvpRate);
-                this.Training_AccshipExp = (int)(baseExp);
-                this.Training_AccshipMvpExp = (int)(baseExp * mvpRate);
-                this.Training_TrainingCruiser_Bonus = tExp;
-            }
+				this.Training_FlagshipExp = (int)(baseExp * flagshipRate);
+				this.Training_FlagshipMvpExp = (int)(baseExp * flagshipRate * mvpRate);
+				this.Training_AccshipExp = (int)(baseExp);
+				this.Training_AccshipMvpExp = (int)(baseExp * mvpRate);
+				this.Training_TrainingCruiser_Bonus = tExp;
+			}
 		}
 
-        private double TrainingRate(int tLevel, int rateType)
-        {
-            var rateIdx = 0;
-            if (tLevel <= 9) rateIdx = 0;
-            else if (tLevel <= 29) rateIdx = 1;
-            else if (tLevel <= 59) rateIdx = 2;
-            else if (tLevel <= 99) rateIdx = 3;
-            else rateIdx = 4;
+		private double TrainingRate(int tLevel, int rateType)
+		{
+			var rateIdx = 0;
+			if (tLevel <= 9) rateIdx = 0;
+			else if (tLevel <= 29) rateIdx = 1;
+			else if (tLevel <= 59) rateIdx = 2;
+			else if (tLevel <= 99) rateIdx = 3;
+			else rateIdx = 4;
 
-            double[][] rateTable = new double[][]
-            {
-                new double[] {5,  8,  12, 15, 20},  // Flagship only
-                new double[] {3,  5,  7,  10, 15},  // One at Accompanies
-                new double[] {10, 13, 16, 20, 25},  // Flagship and Accompany
-                new double[] {4,  6,  8,  12, 17.5} // Two at Accompanies
-            };
-            return rateTable[rateType][rateIdx];
-        }
+			double[][] rateTable = new double[][]
+			{
+				new double[] {5,  8,  12, 15, 20},  // Flagship only
+				new double[] {3,  5,  7,  10, 15},  // One at Accompanies
+				new double[] {10, 13, 16, 20, 25},  // Flagship and Accompany
+				new double[] {4,  6,  8,  12, 17.5} // Two at Accompanies
+			};
+			return rateTable[rateType][rateIdx];
+		}
 
 	}
 }
