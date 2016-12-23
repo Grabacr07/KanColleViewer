@@ -94,8 +94,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			get { return this._ShowLostAirplane; }
 			set
 			{
-				this._ShowLostAirplane = value;
-				this.RaisePropertyChanged();
+				if (this._ShowLostAirplane != value)
+				{
+					this._ShowLostAirplane = value;
+					this.RaisePropertyChanged();
+				}
 			}
 		}
 
@@ -110,8 +113,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			get { return this._ShowAirplaneAlways; }
 			set
 			{
-				this._ShowAirplaneAlways = value;
-				this.RaisePropertyChanged();
+				if (this._ShowAirplaneAlways != value)
+				{
+					this._ShowAirplaneAlways = value;
+					this.RaisePropertyChanged();
+				}
 			}
 		}
 

@@ -18,7 +18,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public SlotItemCatalogWindowSettings Settings { get; }
 
 		public IReadOnlyCollection<SlotItemEquipTypeViewModel> SlotItemEquipTypes { get; }
-		public IEnumerable<SlotItemIconType> EnableSlotItemEquipTypes => SlotItemEquipTypes.Where(x => x.IsSelected).Select(y => y.Type);
+		public IEnumerable<SlotItemIconType> EnableSlotItemEquipTypes => SlotItemEquipTypes
+			.Where(x => x.IsSelected)
+			.Select(y => y.Type);
 
 		public bool CheckAllSlotItemEquipType
 		{
@@ -122,6 +124,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 					IsSelected = true,
 					SelectionChangedAction = () => this.Update()
 				})
+				.Distinct(x => x.DisplayName)
 				.ToList();
 
 			this.updateSource
@@ -183,7 +186,13 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		private static SlotItemIconType GetIconTypeInRange(SlotItemIconType source)
 		{
 			var y = (Enum.GetValues(typeof(SlotItemIconType)) as int[])
-				.Any(x => x == (int)source);
+				.Any(x =>
+					x == (int) (
+						SlotItemEquipTypeViewModel.IconAliasNameable.ContainsKey(source)
+							? SlotItemEquipTypeViewModel.IconAliasNameable[source]
+							: source
+					)
+				);
 			if (!y) return SlotItemIconType.Unknown;
 			return source;
 		}

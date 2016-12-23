@@ -283,9 +283,12 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			get { return this._QuestProgressText; }
 			set
 			{
-				this._QuestProgressText = value;
-				this.RaisePropertyChanged();
-				this.RaisePropertyChanged("QuestTrackingVisible");
+				if (this._QuestProgressText != value)
+				{
+					this._QuestProgressText = value;
+					this.RaisePropertyChanged();
+					this.RaisePropertyChanged("QuestTrackingVisible");
+				}
 			}
 		}
 
@@ -299,9 +302,12 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			get { return this._QuestProgressValue; }
 			set
 			{
-				this._QuestProgressValue = value;
-				this.RaisePropertyChanged();
-				this.RaisePropertyChanged("QuestTrackingVisible");
+				if (this._QuestProgressValue != value)
+				{
+					this._QuestProgressValue = value;
+					this.RaisePropertyChanged();
+					this.RaisePropertyChanged("QuestTrackingVisible");
+				}
 			}
 		}
 
