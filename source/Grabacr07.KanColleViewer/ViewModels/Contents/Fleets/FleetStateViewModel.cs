@@ -44,6 +44,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			{
 				switch (this.Source.Speed)
 				{
+					case FleetSpeed.SuperFast:
+						return "초고속함대";
+					case FleetSpeed.FastPlus:
+						return "고속+함대";
 					case FleetSpeed.Fast:
 						return Resources.Fleets_Speed_Fast;
 					case FleetSpeed.Low:

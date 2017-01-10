@@ -57,7 +57,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 
 					count = Math.Max(
 						count,
-						y + (y < 5 ? 0 : (fleet.Value.State.Speed == FleetSpeed.Fast ? 1 : 0))
+						y + (y < 5 ? 0 : (fleet.Value.State.Speed.IsFast() ? 1 : 0))
 					);
 				}
 
