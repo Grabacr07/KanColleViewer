@@ -398,11 +398,24 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.EncounterPercent = TotalSecond.Sum(x => x.SecondEncounter);
 			this.PartEncounterPercent = partPercent;
 			this.FirstEncounter = ships.Sum(s => s.CalcFirstEncounterPercent());
-			this.Speed = ships.All(x => x.Info.Speed == ShipSpeed.Fast)
-				? FleetSpeed.Fast
-				: ships.All(x => x.Info.Speed == ShipSpeed.Low)
-					? FleetSpeed.Low
-					: FleetSpeed.Hybrid;
+
+			{
+				if (ships.All(x => x.Speed == ShipSpeed.SuperFast)) // 최속으로만 구성
+					this.Speed = FleetSpeed.SuperFast;
+				else if (ships.All(x => x.Speed == ShipSpeed.FastPlus)) // 고속+로만 구성
+					this.Speed = FleetSpeed.FastPlus;
+				else if (ships.All(x => x.Speed == ShipSpeed.Fast)) // 고속으로만 구성
+					this.Speed = FleetSpeed.Fast;
+				else if (ships.All(x => x.Speed == ShipSpeed.Low)) // 저속으로만 구성
+					this.Speed = FleetSpeed.Low;
+
+				else if (!ships.Any(x => x.Speed == ShipSpeed.Fast || x.Speed == ShipSpeed.Low)) // 최속&고속+ 구성
+					this.Speed = FleetSpeed.Hybrid_FastPlus;
+				else if (!ships.Any(x => x.Speed == ShipSpeed.Low)) // 최속&고속+&고속 구성
+					this.Speed = FleetSpeed.Hybrid_Fast;
+				else
+					this.Speed = FleetSpeed.Hybrid_Low; // 저속 포함 구성
+			}
 
 			var logic = ViewRangeCalcLogic.Get(KanColleClient.Current.Settings.ViewRangeCalcType);
 			this.ViewRange = logic.Calc(this.source);
