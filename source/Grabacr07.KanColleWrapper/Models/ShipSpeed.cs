@@ -25,5 +25,15 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 高速。
 		/// </summary>
 		Fast = 10,
+
+		/// <summary>
+		/// 高速+。
+		/// </summary>
+		FastPlus = 15,
+
+		/// <summary>
+		/// 最速。
+		/// </summary>
+		SuperFast = 20,
 	}
 }

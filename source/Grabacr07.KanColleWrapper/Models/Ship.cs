@@ -144,6 +144,11 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
+		/// <summary>
+		/// 함선 속도
+		/// </summary>
+		public ShipSpeed Speed => (ShipSpeed)this.RawData.api_soku;
+
 		#region Fuel 変更通知プロパティ
 
 		private LimitedValue _Fuel;
