@@ -52,8 +52,16 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 						return Resources.Fleets_Speed_Fast;
 					case FleetSpeed.Low:
 						return Resources.Fleets_Speed_Slow;
+
+					case FleetSpeed.Hybrid_FastPlus:
+						return "고속+혼성함대";
+					case FleetSpeed.Hybrid_Fast:
+						return "고속혼성함대";
+					case FleetSpeed.Hybrid_Low:
+						return "저속혼성함대";
+
 					default:
-						return "속도혼성함대";
+						return "알수없음";
 				}
 			}
 		}
