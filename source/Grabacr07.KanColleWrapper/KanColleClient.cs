@@ -153,7 +153,7 @@ namespace Grabacr07.KanColleWrapper
 				.Subscribe(x => this.SetRequireInfo(x.Data));
 			
 			this.Logger = new Logger(proxy);
-			this.ResourceLogger = new ResourceLogManager();
+			this.ResourceLogger = new ResourceLogManager(this);
 		}
 
 		private void SetRequireInfo(kcsapi_require_info data)

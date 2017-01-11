@@ -67,147 +67,180 @@
 		</livet:InteractionMessageTrigger>
 	</i:Interaction.Triggers>
 
-	<Grid Margin="5">
+	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="auto" />
-				<ColumnDefinition Width="auto" />
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="auto" />
-			</Grid.ColumnDefinitions>
+		<!-- #region Caption area -->
+		<DockPanel metro:MetroWindow.IsCaptionBar="True">
+			<Border DockPanel.Dock="Bottom"
+					Height="4" />
+			<kcvc:AppIcon Width="36"
+						  Height="36"
+						  Background="Transparent"
+						  AnchorVisibility="Collapsed"
+						  BandVisibility="Collapsed" />
 
-			<TextBlock Margin="5,5,5,5"
-					   Style="{DynamicResource DetailTextStyleKey}">
-				<Run Text="최근" />
-			</TextBlock>
+			<StackPanel DockPanel.Dock="Right"
+						Orientation="Horizontal"
+						VerticalAlignment="Top"
+						WindowChrome.IsHitTestVisibleInChrome="True">
+				<metro:CaptionButton IsChecked="{Binding Settings.TopMost.Value, Mode=TwoWay}"
+									 ToolTip="{Binding Resources.Settings_Window_TopMost, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+									 Style="{DynamicResource PinButtonStyleKey}" />
+				<metro:SystemButtons />
+			</StackPanel>
 
-			<metro:PromptComboBox
-				Margin="8"
-				Grid.Column="1"
-				HorizontalAlignment="Left"
-				Prompt=""
-				ItemsSource="{Binding DisplayPeriods}"
-				SelectedValue="{Binding DisplayPeriod, Mode=TwoWay}"
-				IsReadOnly="True"
-				MinWidth="64"/>
+			<TextBlock Text="{Binding Title}"
+					   Style="{DynamicResource CaptionTextStyleKey}"
+					   Margin="2,0,8,0" />
+		</DockPanel>
+		<!-- #endregion -->
 
-			<Grid Grid.Column="2">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="*" />
-				</Grid.ColumnDefinitions>
-				<Grid.RowDefinitions>
-					<RowDefinition Height="*" />
-					<RowDefinition Height="*" />
-				</Grid.RowDefinitions>
+		<Grid Margin="5" Grid.Row="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
 
-				<CheckBox							  Content="연료" />
-				<CheckBox Grid.Column="1"			  Content="탄약" />
-				<CheckBox Grid.Column="2"			  Content="강재" />
-				<CheckBox Grid.Column="3"			  Content="보크사이트" />
-				<CheckBox				 Grid.Row="1" Content="고속수복재" />
-				<CheckBox Grid.Column="1" Grid.Row="1" Content="고속건조재" />
-				<CheckBox Grid.Column="2" Grid.Row="1" Content="개발자재" />
-				<CheckBox Grid.Column="3" Grid.Row="1" Content="개수자재" />
-			</Grid>
-
-			<metro2:CallMethodButton
-						Grid.Column="3"
-						Margin="5,5,5,5"
-						MethodName="Refresh"
-						Content="새로고침" />
-		</Grid>
-
-		<ScrollViewer Grid.Row="1"
-					  VerticalScrollBarVisibility="Auto"
-					  PanningMode="Both" >
 			<Grid>
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="*"/>
-					<RowDefinition Height="15"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="*"/>
-				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="auto" />
+					<ColumnDefinition Width="auto" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="auto" />
+				</Grid.ColumnDefinitions>
 
 				<TextBlock Margin="5,5,5,5"
 						   Style="{DynamicResource DetailTextStyleKey}">
-					<Image Source="{Binding icon_fuel, Mode=OneWay}" Width="12" Height="12" />
-					<Run Text="연료" Foreground="#FF60C060" />
-					<Run Text="{Binding CurrentFuel, Mode=OneWay}" Foreground="#FF60C060" />
-
-					<Run Text="/" Foreground="#40FFFFFF" />
-
-					<Image Source="{Binding icon_ammo, Mode=OneWay}" Width="12" Height="12" />
-					<Run Text="탄약" Foreground="#FF908060" />
-					<Run Text="{Binding CurrentAmmo, Mode=OneWay}" Foreground="#FF908060" />
-
-					<Run Text="/" Foreground="#40FFFFFF" />
-
-					<Image Source="{Binding icon_steel, Mode=OneWay}" Width="12" Height="12" />
-					<Run Text="강재" Foreground="#FFDCDCDC" />
-					<Run Text="{Binding CurrentSteel, Mode=OneWay}" Foreground="#FFDCDCDC" />
-
-					<Run Text="/" Foreground="#40FFFFFF" />
-
-					<Image Source="{Binding icon_bauxite, Mode=OneWay}" Width="12" Height="12" />
-					<Run Text="보크사이트" Foreground="#FFD0AC54" />
-					<Run Text="{Binding CurrentBauxite, Mode=OneWay}" Foreground="#FFD0AC54" />
+					<Run Text="최근" />
 				</TextBlock>
 
-				<Grid Grid.Row="1"
-					  MinHeight="80"
-					  Margin="5,5,5,5">
-					<controls:GraphControl Width="{Binding ElementName=root, Path=ActualWidth}" 
-												Height="{Binding ElementName=root, Path=ActualHeight}"
-												ElementToDraw="{Binding ElementToDraw1, Mode=OneWay}"
-												Data="{Binding ResourceList, Mode=OneWay}"
-												BeginDate="{Binding BeginDate, Mode=OneWay}"
-												EndDate="{Binding EndDate, Mode=OneWay}"
-												YMin="{Binding YMin1, Mode=OneWay}"
-												YMax="{Binding YMax1, Mode=OneWay}" />
+				<metro:PromptComboBox
+					Margin="8"
+					Grid.Column="1"
+					HorizontalAlignment="Left"
+					Prompt=""
+					ItemsSource="{Binding DisplayPeriods}"
+					SelectedValue="{Binding DisplayPeriod, Mode=TwoWay}"
+					IsReadOnly="True"
+					MinWidth="64"/>
+
+				<Grid Grid.Column="2">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*" />
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
+
+					<CheckBox							   Content="연료" Foreground="#FF60C060" IsChecked="{Binding FuelVisible}" />
+					<CheckBox Grid.Column="1"			   Content="탄약" Foreground="#FF908060" IsChecked="{Binding AmmoVisible}" />
+					<CheckBox Grid.Column="2"			   Content="강재" Foreground="#FFDCDCDC" IsChecked="{Binding SteelVisible}" />
+					<CheckBox Grid.Column="3"			   Content="보크사이트" Foreground="#FFD0AC54" IsChecked="{Binding BauxiteVisible}" />
+					<CheckBox				  Grid.Row="1" Content="고속수복재" Foreground="#FFA0D0A0" IsChecked="{Binding RepairBucketVisible}" />
+					<CheckBox Grid.Column="1" Grid.Row="1" Content="고속건조재" Foreground="#FFD8C060" IsChecked="{Binding InstantConstructionVisible}" />
+					<CheckBox Grid.Column="2" Grid.Row="1" Content="개발자재" Foreground="#FF44A098" IsChecked="{Binding DevelopmentMaterialVisible}" />
+					<CheckBox Grid.Column="3" Grid.Row="1" Content="개수자재" Foreground="#FFCCCCCC" IsChecked="{Binding ImprovementMaterialVisible}" />
 				</Grid>
 
-				<TextBlock Grid.Row="3"
-						   Margin="5,5,5,5"
-						   Style="{DynamicResource DetailTextStyleKey}">
-					<Image Source="{Binding icon_repair, Mode=OneWay}" Width="12" Height="12" />
-					<Run Text="고속수복재" Foreground="#FFA0D0A0" />
-					<Run Text="{Binding CurrentRepairBucket, Mode=OneWay}" Foreground="#FFA0D0A0" />
-					<Run Text="/" Foreground="#40FFFFFF" />
-					<Image Source="{Binding icon_construction, Mode=OneWay}" Width="12" Height="12" />
-					<Run Text="고속건조재" Foreground="#FFD8C060" />
-					<Run Text="{Binding CurrentInstantConstruction, Mode=OneWay}" Foreground="#FFD8C060" />
-					<Run Text="/" Foreground="#40FFFFFF" />
-					<Image Source="{Binding icon_development, Mode=OneWay}" Width="12" Height="12" />
-					<Run Text="개발자재" Foreground="#FF44A098" />
-					<Run Text="{Binding CurrentDevelopmentMaterial, Mode=OneWay}" Foreground="#FF44A098" />
-					<Run Text="/" Foreground="#40FFFFFF" />
-					<Image Source="{Binding icon_improvement, Mode=OneWay}" Width="12" Height="12" />
-					<Run Text="개수자재" Foreground="#FFCCCCCC" />
-					<Run Text="{Binding CurrentImprovementMaterial, Mode=OneWay}" Foreground="#FFCCCCCC" />
-				</TextBlock>
-
-				<Grid Grid.Row="4"
-					  MinHeight="80"
-					  Margin="5,5,5,5">
-					<controls:GraphControl Width="{Binding ElementName=root, Path=ActualWidth}" 
-												Height="{Binding ElementName=root, Path=ActualHeight}"
-												ElementToDraw="{Binding ElementToDraw2, Mode=OneWay}"
-												Data="{Binding ResourceList, Mode=OneWay}"
-												BeginDate="{Binding BeginDate, Mode=OneWay}"
-												EndDate="{Binding EndDate, Mode=OneWay}"
-												YMin="{Binding YMin2, Mode=OneWay}"
-												YMax="{Binding YMax2, Mode=OneWay}" />
-				</Grid>
+				<metro2:CallMethodButton
+							Grid.Column="3"
+							Margin="5,5,5,5"
+							MethodName="Refresh"
+							Content="새로고침" />
 			</Grid>
-		</ScrollViewer>
+
+			<ScrollViewer Grid.Row="1"
+						  VerticalScrollBarVisibility="Auto"
+						  PanningMode="Both" >
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="15"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+
+					<TextBlock Margin="5,5,5,5"
+							   Style="{DynamicResource DetailTextStyleKey}">
+						<Image Source="{Binding icon_fuel, Mode=OneWay}" Width="12" Height="12" />
+						<Run Text="연료" Foreground="#FF60C060" />
+						<Run Text="{Binding CurrentFuel, Mode=OneWay}" Foreground="#FF60C060" />
+
+						<Run Text="/" Foreground="#40FFFFFF" />
+
+						<Image Source="{Binding icon_ammo, Mode=OneWay}" Width="12" Height="12" />
+						<Run Text="탄약" Foreground="#FF908060" />
+						<Run Text="{Binding CurrentAmmo, Mode=OneWay}" Foreground="#FF908060" />
+
+						<Run Text="/" Foreground="#40FFFFFF" />
+
+						<Image Source="{Binding icon_steel, Mode=OneWay}" Width="12" Height="12" />
+						<Run Text="강재" Foreground="#FFDCDCDC" />
+						<Run Text="{Binding CurrentSteel, Mode=OneWay}" Foreground="#FFDCDCDC" />
+
+						<Run Text="/" Foreground="#40FFFFFF" />
+
+						<Image Source="{Binding icon_bauxite, Mode=OneWay}" Width="12" Height="12" />
+						<Run Text="보크사이트" Foreground="#FFD0AC54" />
+						<Run Text="{Binding CurrentBauxite, Mode=OneWay}" Foreground="#FFD0AC54" />
+					</TextBlock>
+
+					<Grid Grid.Row="1"
+						  MinHeight="80"
+						  Margin="5,5,5,5">
+						<controls:GraphControl Width="{Binding ElementName=root, Path=ActualWidth}" 
+													Height="{Binding ElementName=root, Path=ActualHeight}"
+													ElementToDraw="{Binding ElementToDraw1, Mode=OneWay}"
+													Data="{Binding ResourceList, Mode=OneWay}"
+													BeginDate="{Binding BeginDate, Mode=OneWay}"
+													EndDate="{Binding EndDate, Mode=OneWay}"
+													YMin="{Binding YMin1, Mode=OneWay}"
+													YMax="{Binding YMax1, Mode=OneWay}" />
+					</Grid>
+
+					<TextBlock Grid.Row="3"
+							   Margin="5,5,5,5"
+							   Style="{DynamicResource DetailTextStyleKey}">
+						<Image Source="{Binding icon_repair, Mode=OneWay}" Width="12" Height="12" />
+						<Run Text="고속수복재" Foreground="#FFA0D0A0" />
+						<Run Text="{Binding CurrentRepairBucket, Mode=OneWay}" Foreground="#FFA0D0A0" />
+						<Run Text="/" Foreground="#40FFFFFF" />
+						<Image Source="{Binding icon_construction, Mode=OneWay}" Width="12" Height="12" />
+						<Run Text="고속건조재" Foreground="#FFD8C060" />
+						<Run Text="{Binding CurrentInstantConstruction, Mode=OneWay}" Foreground="#FFD8C060" />
+						<Run Text="/" Foreground="#40FFFFFF" />
+						<Image Source="{Binding icon_development, Mode=OneWay}" Width="12" Height="12" />
+						<Run Text="개발자재" Foreground="#FF44A098" />
+						<Run Text="{Binding CurrentDevelopmentMaterial, Mode=OneWay}" Foreground="#FF44A098" />
+						<Run Text="/" Foreground="#40FFFFFF" />
+						<Image Source="{Binding icon_improvement, Mode=OneWay}" Width="12" Height="12" />
+						<Run Text="개수자재" Foreground="#FFCCCCCC" />
+						<Run Text="{Binding CurrentImprovementMaterial, Mode=OneWay}" Foreground="#FFCCCCCC" />
+					</TextBlock>
+
+					<Grid Grid.Row="4"
+						  MinHeight="80"
+						  Margin="5,5,5,5">
+						<controls:GraphControl Width="{Binding ElementName=root, Path=ActualWidth}" 
+													Height="{Binding ElementName=root, Path=ActualHeight}"
+													ElementToDraw="{Binding ElementToDraw2, Mode=OneWay}"
+													Data="{Binding ResourceList, Mode=OneWay}"
+													BeginDate="{Binding BeginDate, Mode=OneWay}"
+													EndDate="{Binding EndDate, Mode=OneWay}"
+													YMin="{Binding YMin2, Mode=OneWay}"
+													YMax="{Binding YMax2, Mode=OneWay}" />
+					</Grid>
+				</Grid>
+			</ScrollViewer>
+		</Grid>
 	</Grid>
 </metro:MetroWindow>

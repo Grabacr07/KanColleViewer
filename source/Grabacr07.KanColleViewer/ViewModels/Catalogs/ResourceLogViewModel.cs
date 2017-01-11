@@ -38,6 +38,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		private Dictionary<string, DisplayedPeriod> PeriodTable { get; set; }
 		public IEnumerable<string> DisplayPeriods { get; set; }
 
+		private Random RandomInstance { get; } = new Random();
+		private double ListenerEventID { get; set; }
+
 		#region DisplayPeriod 프로퍼티
 		private string _DisplayPeriod;
 		public string DisplayPeriod
@@ -430,6 +433,55 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			CurrentDevelopmentMaterial = 0;
 			CurrentImprovementMaterial = 0;
 
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(client)
+			{
+				{ nameof(client.IsStarted), (sender, args) => {
+					var materials = KanColleClient.Current.Homeport.Materials;
+
+					this.CompositeDisposable.Add(new PropertyChangedEventListener(materials)
+					{
+						{ nameof(materials.Fuel),                   (s, a) => { CurrentFuel = materials.Fuel; Task.Run(() => ListenerEventWorker()); } },
+						{ nameof(materials.Ammunition),             (s, a) => { CurrentAmmo = materials.Ammunition; Task.Run(() => ListenerEventWorker()); } },
+						{ nameof(materials.Steel),                  (s, a) => { CurrentSteel = materials.Steel; Task.Run(() => ListenerEventWorker()); } },
+						{ nameof(materials.Bauxite),                (s, a) => { CurrentBauxite = materials.Bauxite; Task.Run(() => ListenerEventWorker()); } },
+						{ nameof(materials.InstantRepairMaterials), (s, a) => { CurrentRepairBucket = materials.InstantRepairMaterials; Task.Run(() => ListenerEventWorker()); } },
+						{ nameof(materials.InstantBuildMaterials),  (s, a) => { CurrentInstantConstruction = materials.InstantBuildMaterials; Task.Run(() => ListenerEventWorker()); } },
+						{ nameof(materials.DevelopmentMaterials),   (s, a) => { CurrentDevelopmentMaterial = materials.DevelopmentMaterials; Task.Run(() => ListenerEventWorker()); } },
+						{ nameof(materials.ImprovementMaterials),   (s, a) => { CurrentImprovementMaterial = materials.ImprovementMaterials; Task.Run(() => ListenerEventWorker()); } },
+					});
+				}}
+			});
+
+			LoadChart();
+			ResetChart(GetDaysFromPeriod());
+		}
+		private async void ListenerEventWorker()
+		{
+			var EventID = RandomInstance.Next();
+			ListenerEventID = EventID;
+
+			await Task.Delay(500);
+			if (EventID != ListenerEventID) return; // Another event called
+
+			var res = new ResourceModel
+			{
+				Date = DateTime.Now,
+
+				Fuel = CurrentFuel,
+				Ammo = CurrentAmmo,
+				Steel = CurrentSteel,
+				Bauxite = CurrentBauxite,
+
+				RepairBucket = CurrentRepairBucket,
+				DevelopmentMaterial = CurrentDevelopmentMaterial,
+				InstantConstruction = CurrentInstantConstruction,
+				ImprovementMaterial = CurrentImprovementMaterial
+			};
+
+			var x = ResourceList.ToList();
+			x.Add(res);
+			ResourceList = x.ToArray();
+
 			ResetChart(GetDaysFromPeriod());
 		}
 
@@ -452,37 +504,40 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			return 7;
 		}
 
-		private void LoadChart()
+		private async void LoadChart()
 		{
 			var _ResourceList = new List<ResourceModel>();
 			string zItemsPath = ResourceCachePath;
 			if (File.Exists(zItemsPath))
 			{
-				using (FileStream fs = File.OpenRead(zItemsPath))
+				await Task.Run(() =>
 				{
-					while (fs.Position < fs.Length)
+					using (FileStream fs = File.OpenRead(zItemsPath))
 					{
-						string[] data = CSV.Read(fs);
-						if (data.Length != 9) continue;
-
-						DateTime dt;
-						if (!DateTime.TryParse(data[0], out dt)) continue;
-
-						ResourceModel model = new ResourceModel
+						while (fs.Position < fs.Length)
 						{
-							Date = dt,
-							Fuel = int.Parse(data[1]),
-							Ammo = int.Parse(data[2]),
-							Steel = int.Parse(data[3]),
-							Bauxite = int.Parse(data[4]),
-							RepairBucket = int.Parse(data[5]),
-							DevelopmentMaterial = int.Parse(data[6]),
-							InstantConstruction = int.Parse(data[7]),
-							ImprovementMaterial = int.Parse(data[8]),
-						};
-						_ResourceList.Add(model);
+							string[] data = CSV.Read(fs);
+							if (data.Length != 9) continue;
+
+							DateTime dt;
+							if (!DateTime.TryParse(data[0], out dt)) continue;
+
+							ResourceModel model = new ResourceModel
+							{
+								Date = dt,
+								Fuel = int.Parse(data[1]),
+								Ammo = int.Parse(data[2]),
+								Steel = int.Parse(data[3]),
+								Bauxite = int.Parse(data[4]),
+								RepairBucket = int.Parse(data[5]),
+								DevelopmentMaterial = int.Parse(data[6]),
+								InstantConstruction = int.Parse(data[7]),
+								ImprovementMaterial = int.Parse(data[8]),
+							};
+							_ResourceList.Add(model);
+						}
 					}
-				}
+				});
 			}
 			ResourceList = _ResourceList.ToArray();
 		}
@@ -491,8 +546,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			if (!FuelVisible && !AmmoVisible && !SteelVisible && !BauxiteVisible &&
 				!RepairBucketVisible && !InstantConstructionVisible &&
 				!DevelopmentMaterialVisible && !ImprovementMaterialVisible) return;
-
-			LoadChart();
 
 			var _ElementToDraw = new List<int>();
 			if (FuelVisible) _ElementToDraw.Add(1);

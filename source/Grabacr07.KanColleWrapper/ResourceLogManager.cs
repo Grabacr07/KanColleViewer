@@ -28,7 +28,7 @@ namespace Grabacr07.KanColleWrapper
 		private double ListenerEventID { get; set; }
 
 
-		public ResourceLogManager()
+		public ResourceLogManager(KanColleClient client)
 		{
 			CurrentFuel = 0;
 			CurrentAmmo = 0;
@@ -39,7 +39,6 @@ namespace Grabacr07.KanColleWrapper
 			CurrentDevelopmentMaterial = 0;
 			CurrentImprovementMaterial = 0;
 
-			var client = KanColleClient.Current;
 			client.PropertyChanged+=(_, __) =>
 			{
 				if (__.PropertyName != nameof(client.IsStarted)) return;
