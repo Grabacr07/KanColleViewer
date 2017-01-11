@@ -19,6 +19,9 @@ using System.Windows.Input;
 using Grabacr07.KanColleWrapper;
 using System.Reactive.Linq;
 
+using Grabacr07.KanColleViewer.Views.Catalogs;
+using Grabacr07.KanColleViewer.ViewModels.Catalogs;
+
 namespace Grabacr07.KanColleViewer.ViewModels
 {
 	/// <summary>
@@ -187,6 +190,11 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			this.UpdateTaskbar();
 		}
 
+		public void ResourceLog()
+		{
+			var catalog = new ResourceLogViewModel();
+			WindowService.Current.MainWindow.Transition(catalog, typeof(ResourceLogWindow));
+		}
 		public void Refresh()
 		{
 			if (GeneralSettings.RefreshConfirmationType == ExitConfirmationType.None)

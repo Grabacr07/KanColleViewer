@@ -188,6 +188,7 @@
     <Compile Include="Models\Migration\_ProxySettings.cs" />
     <Compile Include="Models\QuestTracker\TrackManager.cs" />
     <Compile Include="Models\RelayCommand.cs" />
+    <Compile Include="Models\ResourceLogManager.cs" />
     <Compile Include="Models\ResourceService.cs" />
     <Compile Include="Models\SallyArea.cs" />
     <Compile Include="Models\Settings\ExpeditionSettings.cs" />
@@ -212,6 +213,7 @@
     <Compile Include="ViewModels\Catalogs\NeedNdockShipCatalogWindowViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\NotePadViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\RemodelListWindowViewModel.cs" />
+    <Compile Include="ViewModels\Catalogs\ResourceLogViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\SlotItemEquipTypeViewModel.cs" />
     <Compile Include="ViewModels\Composition\LoadFailedPluginViewModel.cs" />
     <Compile Include="ViewModels\InformationWindowViewModel.cs" />
@@ -297,6 +299,9 @@
     <Compile Include="Views\Catalogs\RemodelListWindow.xaml.cs">
       <DependentUpon>RemodelListWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Catalogs\ResourceLogWindow.xaml.cs">
+      <DependentUpon>ResourceLogWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Contents\StateDetailIndicator.xaml.cs">
       <DependentUpon>StateDetailIndicator.xaml</DependentUpon>
     </Compile>
@@ -306,6 +311,10 @@
     <Compile Include="Views\Contents\Tools.xaml.cs">
       <DependentUpon>Tools.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Controls\GraphButton.xaml.cs">
+      <DependentUpon>GraphButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\GraphControl.cs" />
     <Compile Include="Views\Controls\MetroComboBox.cs" />
     <Compile Include="Views\Controls\RefreshButton.xaml.cs">
       <DependentUpon>RefreshButton.xaml</DependentUpon>
@@ -459,6 +468,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Catalogs\ResourceLogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Catalogs\ShipCatalogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -492,6 +505,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Contents\Tools.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\GraphButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -756,7 +773,30 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\icon_ammo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_bauxite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_construction.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_development.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_fuel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_improvement.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_repair.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_steel.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
