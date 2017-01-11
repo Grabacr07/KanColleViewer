@@ -53,6 +53,11 @@ namespace Grabacr07.KanColleWrapper
 		/// </summary>
 		public Logger Logger { get; private set; }
 
+		/// <summary>
+		/// 자원 기록
+		/// </summary>
+		public ResourceLogManager ResourceLogger { get; private set; }
+
 		#region IsStarted 変更通知プロパティ
 
 		private bool _IsStarted;
@@ -148,6 +153,7 @@ namespace Grabacr07.KanColleWrapper
 				.Subscribe(x => this.SetRequireInfo(x.Data));
 			
 			this.Logger = new Logger(proxy);
+			this.ResourceLogger = new ResourceLogManager(this);
 		}
 
 		private void SetRequireInfo(kcsapi_require_info data)

@@ -7,7 +7,7 @@ using System.IO;
 
 namespace Grabacr07.KanColleViewer.Models
 {
-	class CSV
+	internal class CSV
 	{
 		public static string[] Read(Stream stream)
 		{

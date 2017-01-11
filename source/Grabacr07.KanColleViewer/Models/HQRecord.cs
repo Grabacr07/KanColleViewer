@@ -66,10 +66,16 @@ namespace Grabacr07.KanColleViewer.Models
 				_initialFlag = false;
 
 				var admiral = KanColleClient.Current.Homeport.Admiral;
-				Record.Add(new HQRecordElement(
-					admiral.Level,
-					admiral.Experience));
+				if (admiral == null) return;
+				if (admiral.Level == 0) return;
+				if (admiral.Experience == 0) return;
 
+				Record.Add(
+					new HQRecordElement(
+						admiral.Level,
+						admiral.Experience
+					)
+				);
 				Save();
 			}
 		}
@@ -80,11 +86,14 @@ namespace Grabacr07.KanColleViewer.Models
 		public void Save()
 		{
 			
-			string path = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "Record");
+			string path = Path.Combine(
+				Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location),
+				"Record"
+			);
 			if (!Directory.Exists(path))
 				Directory.CreateDirectory(path);
 
-			path += @"\HQRecord.csv";
+			path = Path.Combine(path, "HQRecord.csv");
 
 			bool exist = File.Exists(path);
 
@@ -96,22 +105,30 @@ namespace Grabacr07.KanColleViewer.Models
 				sw.Write(0xBF);
 				sw.WriteLine(RecordHeader);
 
-				var list = new List<HQRecordElement>(Record);
-				list.Sort((e1, e2) => e1.Date.CompareTo(e2.Date));
+				var list = Record
+					.Where(x => x.HQLevel > 0 || x.HQExp > 0)
+					.OrderBy(x => x.Date);
 
 				foreach (var elem in list)
-				{
-					sw.WriteLine($"{TimeToCSVString(elem.Date)},{elem.HQLevel},{elem.HQExp}");
-				}
+					sw.WriteLine(
+						string.Format(
+							"{0},{1},{2}",
+							TimeToCSVString(elem.Date),
+							elem.HQLevel,
+							elem.HQExp
+						)
+					);
 			}
 		}
 		
 
 		public void Load()
 		{
-
-			string path = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "Record");
-			path += @"\HQRecord.csv";
+			string path = Path.Combine(
+				Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location),
+				"Record",
+				"HQRecord.csv"
+			);
 			
 			if (File.Exists(path))
 			{
@@ -121,20 +138,26 @@ namespace Grabacr07.KanColleViewer.Models
 
 					string line;
 					int linecount = 1;
-					sr.ReadLine();          //ヘッダを読み飛ばす
+					sr.ReadLine();
 
 					while ((line = sr.ReadLine()) != null)
 					{
 						if (line.Trim().StartsWith("#"))
 							continue;
 
-						string[] elem = line.Split(",".ToCharArray());
+						string[] elem = line.Split(',');
+						DateTime? time;
+						int level, exp;
 
-						Record.Add(new HQRecordElement(CSVStringToTime(elem[0]), int.Parse(elem[1]), int.Parse(elem[2])));
+						time = CSVStringToTime(elem[0]);
+						if (!time.HasValue) continue;
+						if (!int.TryParse(elem[1], out level)) continue;
+						if (!int.TryParse(elem[2], out exp)) continue;
+						if (level <= 0 || exp <= 0) continue;
 
+						Record.Add(new HQRecordElement(time.Value, level, exp));
 						linecount++;
 					}
-
 				}
 			}
 		}
@@ -143,49 +166,23 @@ namespace Grabacr07.KanColleViewer.Models
 		/// 指定した日時以降の最も古い記録を返します。
 		/// </summary>
 		public HQRecordElement GetRecord(DateTime target)
-		{
-
-			int i;
-			for (i = Record.Count - 1; i >= 0; i--)
-			{
-				if (Record[i].Date < target)
-				{
-					i++;
-					break;
-				}
-			}
-			// Record内の全ての記録がtarget以降だった
-			if (i < 0)
-				i = 0;
-
-			if (0 <= i && i < Record.Count)
-			{
-				return Record[i];
-			}
-			else {
-				return null;
-			}
-		}
+			=> Record.OrderBy(x => x.Date).FirstOrDefault(x => x.Date >= target)
+			?? new HQRecordElement(DateTime.MinValue, 0, 0);
 
 		/// <summary>
 		/// 前回の戦果更新以降の最も古い記録を返します。
 		/// </summary>
 		public HQRecordElement GetRecordPrevious()
 		{
-
 			DateTime now = DateTime.Now;
 			DateTime target;
+
 			if (now.TimeOfDay.Hours < 2)
-			{
 				target = new DateTime(now.Year, now.Month, now.Day, 14, 0, 0).Subtract(TimeSpan.FromDays(1));
-			}
 			else if (now.TimeOfDay.Hours < 14)
-			{
 				target = new DateTime(now.Year, now.Month, now.Day, 2, 0, 0);
-			}
-			else {
+			else
 				target = new DateTime(now.Year, now.Month, now.Day, 14, 0, 0);
-			}
 
 			return GetRecord(target);
 		}
@@ -195,16 +192,12 @@ namespace Grabacr07.KanColleViewer.Models
 		/// </summary>
 		public HQRecordElement GetRecordDay()
 		{
-
 			DateTime now = DateTime.Now;
 			DateTime target;
 			if (now.TimeOfDay.Hours < 2)
-			{
 				target = new DateTime(now.Year, now.Month, now.Day, 2, 0, 0).Subtract(TimeSpan.FromDays(1));
-			}
-			else {
+			else
 				target = new DateTime(now.Year, now.Month, now.Day, 2, 0, 0);
-			}
 
 			return GetRecord(target);
 		}
@@ -215,7 +208,6 @@ namespace Grabacr07.KanColleViewer.Models
 		public HQRecordElement GetRecordMonth()
 		{
 			DateTime now = DateTime.Now;
-
 			return GetRecord(new DateTime(now.Year, now.Month, 1));
 		}
 
@@ -226,28 +218,18 @@ namespace Grabacr07.KanColleViewer.Models
 		/// <returns>またいでいるか。</returns>
 		public static bool IsCrossedHour(DateTime prev)
 		{
-
 			DateTime nexthour = prev.Date.AddHours(prev.Hour + 1);
 			return nexthour <= DateTime.Now;
 		}
 
 		public static string TimeToCSVString(DateTime time)
-		{
-			return time.ToString("yyyy\\/MM\\/dd HH\\:mm\\:ss", System.Globalization.CultureInfo.InvariantCulture);
-		}
+			=> time.ToString("yyyy\\/MM\\/dd HH\\:mm\\:ss", System.Globalization.CultureInfo.InvariantCulture);
 
-		public static DateTime CSVStringToTime(string str)
+		public static DateTime? CSVStringToTime(string str)
 		{
-			string[] elem = str.Split("/ :".ToCharArray());
-
-			// Excel様が *うっかり* データを破損させることがあるので対応
-			return new DateTime(
-				elem.Length > 0 ? int.Parse(elem[0]) : 1970,
-				elem.Length > 1 ? int.Parse(elem[1]) : 1,
-				elem.Length > 2 ? int.Parse(elem[2]) : 1,
-				elem.Length > 3 ? int.Parse(elem[3]) : 0,
-				elem.Length > 4 ? int.Parse(elem[4]) : 0,
-				elem.Length > 5 ? int.Parse(elem[5]) : 0);
+			DateTime time;
+			if (!DateTime.TryParse(str, out time)) return null;
+			return time;
 		}
 	}
 }
