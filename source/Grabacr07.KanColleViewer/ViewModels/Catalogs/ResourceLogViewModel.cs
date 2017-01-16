@@ -557,7 +557,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			if (ImprovementMaterialVisible) flag = 1;
 
 			if (flag == 0) return;
-			if (ResourceList == null) return;
+			if (ResourceList == null || ResourceList.Count() == 0) return;
 
 			var _ElementToDraw = new List<int>();
 			if (FuelVisible) _ElementToDraw.Add(1);
