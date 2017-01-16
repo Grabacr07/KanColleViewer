@@ -507,6 +507,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		private async void LoadChart()
 		{
 			var _ResourceList = new List<ResourceModel>();
+			ResourceList = new ResourceModel[0];
+
 			string zItemsPath = ResourceCachePath;
 			if (File.Exists(zItemsPath))
 			{
@@ -540,12 +542,20 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				});
 			}
 			ResourceList = _ResourceList.ToArray();
+			ResetChart(GetDaysFromPeriod());
 		}
 		private void ResetChart(int days)
 		{
-			if (!FuelVisible && !AmmoVisible && !SteelVisible && !BauxiteVisible &&
-				!RepairBucketVisible && !InstantConstructionVisible &&
-				!DevelopmentMaterialVisible && !ImprovementMaterialVisible) return;
+			if (!FuelVisible) return;
+			if (!AmmoVisible) return;
+			if (!SteelVisible) return;
+			if (!BauxiteVisible) return;
+			if (!RepairBucketVisible) return;
+			if (!InstantConstructionVisible) return;
+			if (!DevelopmentMaterialVisible) return;
+			if (!ImprovementMaterialVisible) return;
+
+			if (ResourceList == null) return;
 
 			var _ElementToDraw = new List<int>();
 			if (FuelVisible) _ElementToDraw.Add(1);
