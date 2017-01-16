@@ -95,5 +95,183 @@
 					   Margin="2,0,8,0" />
 		</DockPanel>
 		<!-- #endregion -->
+
+		<Grid Grid.Row="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+
+			<StackPanel Orientation="Horizontal"
+						Margin="6">
+				<metro:PromptComboBox HorizontalAlignment="Left"
+									  Prompt="프리셋을 선택하세요"
+									  ItemsSource="{Binding Fleets}"
+									  DisplayMemberPath="FleetName"
+									  SelectedValue="{Binding SelectedFleet, Mode=TwoWay}"
+									  IsReadOnly="True"
+									  MinWidth="160"/>
+
+				<metro2:CallMethodButton Padding="2"
+										 Margin="5,0,0,0"
+										 Content="함대 추가"
+										 MethodName="ShowAddFleetWindow"/>
+				<metro2:CallMethodButton Padding="2"
+										 Margin="5,0,0,0"
+										 Content="함대 수정"
+										 MethodName="ShowFleetSettingWindow"/>
+				<CheckBox Margin="10,0,0,0"
+						  Content="확장슬롯의 장비 표시"
+						  IsChecked="{Binding ExSlotChecked}"/>
+			</StackPanel>
+
+			<ScrollViewer Grid.Row="1"
+						  HorizontalScrollBarVisibility="Auto"
+						  VerticalScrollBarVisibility="Auto">
+				<Grid Background="{DynamicResource BackgroundBrushKey}">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
+					<StackPanel>
+						<Grid HorizontalAlignment="Left" Margin="0,5,0,0">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="Auto"/>
+							</Grid.ColumnDefinitions>
+						</Grid>
+						<ItemsControl  ItemsSource="{Binding SelectedFleet.Ships}"
+									  Background="Transparent"
+									  Grid.IsSharedSizeScope="True">
+							<ItemsControl.ItemsPanel>
+								<ItemsPanelTemplate>
+									<UniformGrid Columns="2" Margin="0,0,10,0"/>
+								</ItemsPanelTemplate>
+							</ItemsControl.ItemsPanel>
+							<ItemsControl.ItemTemplate>
+								<DataTemplate>
+									<StackPanel Margin="10,10,0,0">
+										<StackPanel.Resources>
+											<Style TargetType="{x:Type TextBlock}"
+												   BasedOn="{StaticResource DefaultTextStyleKey}">
+												<Setter Property="TextWrapping"
+														Value="NoWrap" />
+											</Style>
+										</StackPanel.Resources>
+
+										<Grid HorizontalAlignment="Left">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="Auto"
+																  SharedSizeGroup="Name" />
+												<ColumnDefinition Width="Auto"
+																  SharedSizeGroup="Level" />
+												<ColumnDefinition Width="Auto"
+																  SharedSizeGroup="HP" />
+												<ColumnDefinition Width="Auto"
+																  SharedSizeGroup="Condition" />
+											</Grid.ColumnDefinitions>
+
+											<TextBlock ToolTipService.Placement="Relative"
+													   ToolTipService.HorizontalOffset="-9"
+													   ToolTipService.VerticalOffset="-3">
+												<Run Text="{Binding Name, Mode=OneWay}"
+													 Style="{DynamicResource EmphaticTextElementStyleKey}" 
+													 FontSize="13"/>
+												<LineBreak />
+												<Run Text="{Binding TypeName, Mode=OneWay}"
+													 FontSize="9" />
+											</TextBlock>
+
+											<TextBlock Grid.Column="1"
+													   Margin="12,0,0,0">
+												<Run Text="Lv." FontSize="10"/>
+												<Run Text="{Binding Level, Mode=OneWay}"
+													 Style="{DynamicResource EmphaticTextElementStyleKey}" 
+													 FontSize="13"/>
+											</TextBlock>
+
+											<TextBlock Grid.Column="2" Margin="12,1,0,0">
+												<Run Text="{Binding Condition, Mode=OneWay}"
+													 Style="{DynamicResource EmphaticTextElementStyleKey}" 
+													 FontSize="13"/>
+												<LineBreak />
+												<Run Text="컨디션"
+													 FontSize="9" />
+											</TextBlock>
+
+											<Border x:Name="Elements"
+													ToolTip="{Binding ExSlot.NameWithLevel}"
+													Background="Transparent"
+													Grid.Column="3"
+													Margin="6,0,0,0"
+													Visibility="{Binding ExSlotExist, Converter={StaticResource BooleanToVisibilityConverter}}">
+												<Grid>
+													<Grid.ColumnDefinitions>
+														<ColumnDefinition Width="Auto"/>
+														<ColumnDefinition Width="Auto"/>
+													</Grid.ColumnDefinitions>
+
+													<Rectangle Width="1"
+															   Style="{DynamicResource SeparatorRectangleStyleKey}"
+															   Margin="0,4,0,3"/>
+
+													<kcvc:SlotItemIcon Grid.Column="1"
+																	   Margin="5,3"
+																	   Type="{Binding ExSlot.IconType}"/>
+												</Grid>
+											</Border>
+										</Grid>
+										<Grid>
+											<Grid.RowDefinitions>
+												<RowDefinition Height="Auto" SharedSizeGroup="ShipSlot"/>
+											</Grid.RowDefinitions>
+
+											<ItemsControl ItemsSource="{Binding Slots}"
+														  Margin="7,0">
+												<ItemsControl.Template>
+													<ControlTemplate TargetType="{x:Type ItemsControl}">
+														<StackPanel IsItemsHost="True"/>
+													</ControlTemplate>
+												</ItemsControl.Template>
+												<ItemsControl.ItemTemplate>
+													<DataTemplate>
+														<Border x:Name="Elements"
+																ToolTip="{Binding Description}"
+																Background="Transparent">
+															<Grid>
+																<Grid.ColumnDefinitions>
+																	<ColumnDefinition Width="Auto" SharedSizeGroup="SlotIcon" />
+																	<ColumnDefinition Width="Auto" SharedSizeGroup="SlotName" />
+																</Grid.ColumnDefinitions>
+
+																<kcvc:SlotItemIcon Grid.Column="0" Type="{Binding IconType}" Margin="0,3"/>
+																<TextBlock Grid.Column="1" Margin="5,7,0,0">
+																	<Run Style="{DynamicResource EmphaticTextElementStyleKey}"
+																		 Text="{Binding NameWithLevel}"
+																		 FontSize="13"/>
+																</TextBlock>
+																<TextBlock Grid.Column="1"
+																		   Margin="5,25,0,0"
+																		   Text="{Binding EquippedShipName}"
+																		   Visibility="{Binding EquippedShipExist, Converter={StaticResource BooleanToVisibilityConverter}}"
+																		   FontSize="10"
+																		   Foreground="#FFFFD384"/>
+															</Grid>
+														</Border>
+													</DataTemplate>
+												</ItemsControl.ItemTemplate>
+											</ItemsControl>
+										</Grid>
+										<Rectangle Height=".99"
+												   Margin="0,4,0,0"
+												   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+									</StackPanel>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+						</ItemsControl>
+					</StackPanel>
+				</Grid>
+			</ScrollViewer>
+		</Grid>
 	</Grid>
 </metro:MetroWindow>

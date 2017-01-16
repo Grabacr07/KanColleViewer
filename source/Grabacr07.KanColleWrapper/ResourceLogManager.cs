@@ -22,7 +22,11 @@ namespace Grabacr07.KanColleWrapper
 		private int CurrentImprovementMaterial { get; set; }
 		#endregion
 
-		private string ResourceCachePath => Path.Combine("Record", "resourcelog.csv");
+		private string ResourceCachePath => Path.Combine(
+			Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location),
+			"Record",
+			"resourcelog.csv"
+		);
 
 		private Random RandomInstance { get; } = new Random();
 		private double ListenerEventID { get; set; }
