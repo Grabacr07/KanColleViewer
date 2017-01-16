@@ -212,6 +212,7 @@
     <Compile Include="ViewModels\Catalogs\ExpeditionsCatalogWindowViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\NeedNdockShipCatalogWindowViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\NotePadViewModel.cs" />
+    <Compile Include="ViewModels\Catalogs\PresetViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\RemodelListWindowViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ResourceLogViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\SlotItemEquipTypeViewModel.cs" />
@@ -295,6 +296,9 @@
     </Compile>
     <Compile Include="Views\Catalogs\NotePad.xaml.cs">
       <DependentUpon>NotePad.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Catalogs\PresetWindow.xaml.cs">
+      <DependentUpon>PresetWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Catalogs\RemodelListWindow.xaml.cs">
       <DependentUpon>RemodelListWindow.xaml</DependentUpon>
@@ -463,6 +467,10 @@
     <Page Include="Views\Catalogs\NotePad.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Catalogs\PresetWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Catalogs\RemodelListWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
