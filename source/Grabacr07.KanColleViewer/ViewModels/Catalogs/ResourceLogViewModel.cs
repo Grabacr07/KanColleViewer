@@ -546,15 +546,17 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		}
 		private void ResetChart(int days)
 		{
-			if (!FuelVisible) return;
-			if (!AmmoVisible) return;
-			if (!SteelVisible) return;
-			if (!BauxiteVisible) return;
-			if (!RepairBucketVisible) return;
-			if (!InstantConstructionVisible) return;
-			if (!DevelopmentMaterialVisible) return;
-			if (!ImprovementMaterialVisible) return;
+			var flag = 0;
+			if (FuelVisible) flag = 1;
+			if (AmmoVisible) flag = 1;
+			if (SteelVisible) flag = 1;
+			if (BauxiteVisible) flag = 1;
+			if (RepairBucketVisible) flag = 1;
+			if (InstantConstructionVisible) flag = 1;
+			if (DevelopmentMaterialVisible) flag = 1;
+			if (ImprovementMaterialVisible) flag = 1;
 
+			if (flag == 0) return;
 			if (ResourceList == null) return;
 
 			var _ElementToDraw = new List<int>();
