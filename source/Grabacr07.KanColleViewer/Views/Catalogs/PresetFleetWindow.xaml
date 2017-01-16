@@ -1,4 +1,4 @@
-﻿<metro:MetroWindow x:Class="Grabacr07.KanColleViewer.Views.Catalogs.PresetWindow"
+﻿<metro:MetroWindow x:Class="Grabacr07.KanColleViewer.Views.Catalogs.PresetFleetWindow"
 				   x:Name="GlowMetroWindow"
 				   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 				   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -24,7 +24,7 @@
 				   xmlns:catalogs="clr-namespace:Grabacr07.KanColleViewer.Views.Catalogs"
 				   xmlns:contentsVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 				   mc:Ignorable="d"
-				   d:DataContext="{d:DesignInstance viewModels:PresetViewModel}"
+				   d:DataContext="{d:DesignInstance viewModels:PresetFleetWindowViewModel}"
 				   Title="{Binding Title}"
 				   Width="520"
 				   Height="400"
@@ -112,14 +112,24 @@
 									  IsReadOnly="True"
 									  MinWidth="160"/>
 
-				<metro2:CallMethodButton Padding="2"
+				<metro2:CallMethodButton Padding="5,3"
 										 Margin="5,0,0,0"
 										 Content="함대 추가"
-										 MethodName="ShowAddFleetWindow"/>
-				<metro2:CallMethodButton Padding="2"
+										 MethodName="ShowPresetAddWindow" />
+				<metro2:CallMethodButton Padding="5,3"
 										 Margin="5,0,0,0"
-										 Content="함대 수정"
-										 MethodName="ShowFleetSettingWindow"/>
+										 Content="함대 삭제"
+										 MethodName="ShowPresetDeleteWindow">
+					<metro2:CallMethodButton.Style>
+						<Style TargetType="metro2:CallMethodButton">
+							<Style.Triggers>
+								<DataTrigger Binding="{Binding SelectedFleet}" Value="{x:Null}">
+									<Setter Property="IsEnabled" Value="False" />
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</metro2:CallMethodButton.Style>
+				</metro2:CallMethodButton>
 				<CheckBox Margin="10,0,0,0"
 						  Content="확장슬롯의 장비 표시"
 						  IsChecked="{Binding ExSlotChecked}"/>

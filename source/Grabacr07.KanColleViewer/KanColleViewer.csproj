@@ -212,7 +212,9 @@
     <Compile Include="ViewModels\Catalogs\ExpeditionsCatalogWindowViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\NeedNdockShipCatalogWindowViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\NotePadViewModel.cs" />
-    <Compile Include="ViewModels\Catalogs\PresetViewModel.cs" />
+    <Compile Include="ViewModels\Catalogs\PresetFleetAddWindowViewModel.cs" />
+    <Compile Include="ViewModels\Catalogs\PresetFleetWindowViewModel.cs" />
+    <Compile Include="ViewModels\Catalogs\PresetFleetDeleteWindowViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\RemodelListWindowViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ResourceLogViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\SlotItemEquipTypeViewModel.cs" />
@@ -298,8 +300,14 @@
     <Compile Include="Views\Catalogs\NotePad.xaml.cs">
       <DependentUpon>NotePad.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Catalogs\PresetWindow.xaml.cs">
-      <DependentUpon>PresetWindow.xaml</DependentUpon>
+    <Compile Include="Views\Catalogs\PresetFleetAddWindow.xaml.cs">
+      <DependentUpon>PresetFleetAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Catalogs\PresetFleetDeleteWindow.xaml.cs">
+      <DependentUpon>PresetFleetDeleteWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Catalogs\PresetFleetWindow.xaml.cs">
+      <DependentUpon>PresetFleetWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Catalogs\RemodelListWindow.xaml.cs">
       <DependentUpon>RemodelListWindow.xaml</DependentUpon>
@@ -469,7 +477,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Catalogs\PresetWindow.xaml">
+    <Page Include="Views\Catalogs\PresetFleetAddWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Catalogs\PresetFleetDeleteWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Catalogs\PresetFleetWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -10,6 +10,8 @@ using MetroTrilithon.Lifetime;
 using MetroTrilithon.Mvvm;
 using StatefulModel;
 using Grabacr07.KanColleViewer.Models;
+using Grabacr07.KanColleViewer.ViewModels.Catalogs;
+using Grabacr07.KanColleViewer.Views.Catalogs;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 {
@@ -144,6 +146,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			this.ShowAirplaneAlways = KanColleSettings.ShowAirplaneAlways;
 		}
 
+		public void ShowPresetWindow()
+		{
+			var catalog = new PresetFleetWindowViewModel();
+			WindowService.Current.MainWindow.Transition(catalog, typeof(PresetFleetWindow));
+		}
 		public void ShowFleetWindow()
 		{
 			var fleetwd = new FleetWindowViewModel();

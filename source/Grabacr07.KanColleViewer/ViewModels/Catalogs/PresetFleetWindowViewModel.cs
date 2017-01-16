@@ -2,6 +2,7 @@
 using Grabacr07.KanColleWrapper.Models;
 using MetroTrilithon.Mvvm;
 using Livet;
+using Livet.Messaging;
 using Livet.EventListeners;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ using Grabacr07.KanColleViewer.ViewModels.Contents.Fleets;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 {
-	public class PresetViewModel : WindowViewModel
+	public class PresetFleetWindowViewModel : WindowViewModel
 	{
 		#region Fleets 변경 통지 프로퍼티
 		private IReadOnlyCollection<PresetFleetData> _Fleets { get; set; }
@@ -71,7 +72,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			"fleets.txt"
 		);
 
-		public PresetViewModel()
+		public PresetFleetWindowViewModel()
 		{
 			this.Title = "함대 프리셋";
 			this.ExSlotChecked = true;
@@ -114,6 +115,22 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				File.WriteAllText(RecordPath, string.Join(Environment.NewLine, datas));
 			}
 			catch { }
+		}
+
+		public void ShowPresetAddWindow()
+		{
+			var fleetwd = new PresetFleetAddWindowViewModel(this);
+			var message = new TransitionMessage(fleetwd, TransitionMode.Normal, "AddFleetWindow.Show");
+			this.Messenger.Raise(message);
+		}
+		public void ShowPresetDeleteWindow()
+		{
+			var fleet = this.SelectedFleet;
+			if (fleet == null) return;
+
+			var fleetwd = new PresetFleetDeleteWindowViewModel(this, fleet);
+			var message = new TransitionMessage(fleetwd, TransitionMode.Normal, "DeleteFleetWindow.Show");
+			this.Messenger.Raise(message);
 		}
 
 		public void AddFleet(PresetFleetData fleet)

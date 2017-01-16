@@ -514,6 +514,7 @@
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition />
 				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
 			</Grid.ColumnDefinitions>
 
 			<ListBox ItemsSource="{Binding Fleets2}"
@@ -542,10 +543,18 @@
 										   Margin="10,3" />
 
 			<metro2:CallMethodButton Grid.Row="0"
-									 Grid.RowSpan="2"
 									 Grid.Column="1"
+									 Grid.RowSpan="2"
+									 Content="함대 프리셋"
+									 Margin="0,0,4,3"
+									 Padding="12,8"
+									 MethodName="ShowPresetWindow" />
+
+			<metro2:CallMethodButton Grid.Row="0"
+									 Grid.Column="2"
+									 Grid.RowSpan="2"
 									 Content="상세정보"
-									 Margin="0,0,10,3"
+									 Margin="0,0,4,3"
 									 Padding="12,8"
 									 MethodName="ShowFleetWindow" />
 

@@ -17,9 +17,9 @@ namespace Grabacr07.KanColleViewer.Views.Catalogs
 	/// <summary>
 	/// Interaction logic for PresetWindow.xaml
 	/// </summary>
-	public partial class PresetWindow
+	public partial class PresetFleetWindow
 	{
-		public PresetWindow()
+		public PresetFleetWindow()
 		{
 			InitializeComponent();
 
