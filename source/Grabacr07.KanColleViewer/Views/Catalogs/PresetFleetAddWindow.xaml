@@ -12,13 +12,15 @@
 				   xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Controls;assembly=KanColleViewer.Controls"
 				   xmlns:metro2="clr-namespace:MetroTrilithon.UI.Controls;assembly=MetroTrilithon.Desktop"
 				   mc:Ignorable="d" 
-				   Title="프리셋 삭제"
+				   Title="프리셋 추가"
 				   FontSize="12"
+				   Width="320"
+				   Height="192"
 				   Background="{DynamicResource ThemeBrushKey}"
 				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 				   d:DataContext="{d:DesignInstance vm:PresetFleetAddWindowViewModel}"
-				   metro:ThemeHelper.HasThemeResources="True"
-				   SizeToContent="WidthAndHeight">
+				   Style="{DynamicResource MetroDialogStyleKey}"
+				   WindowStartupLocation="CenterScreen">
 	<metro:MetroWindow.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
@@ -46,41 +48,11 @@
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
-		<!-- #region CaptionBar -->
-		<Border Grid.Row="0"
-				metro:MetroWindow.IsCaptionBar="True"
-				Panel.ZIndex="100">
-
-			<Grid>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto" />
-					<ColumnDefinition />
-					<ColumnDefinition Width="Auto" />
-				</Grid.ColumnDefinitions>
-
-				<controls:AppIcon Width="36"
-								  Height="36"
-								  Background="Transparent"
-								  AnchorVisibility="Collapsed"
-								  BandVisibility="Collapsed" />
-
-				<TextBlock Grid.Column="1"
-						   Text="프리셋 추가"
-						   Style="{DynamicResource CaptionTextStyleKey}"
-						   Margin="2,0,8,0" />
-
-				<metro:SystemButtons Grid.Column="2"
-									 HorizontalAlignment="Right"
-									 VerticalAlignment="Top" />
-			</Grid>
-		</Border>
-		<!-- #endregion -->
-
-		<Grid Grid.Row="1" Margin="10,5">
+		<Grid Grid.Row="0" Margin="10,5">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition Width="*"/>
@@ -98,27 +70,55 @@
 					 Foreground="White"/>
 		</Grid>
 
-		<StackPanel Grid.Row="2" Margin="6">
-			<metro2:CallMethodButton Margin="0,0,0,5"
-									 Padding="3"
-									 Content="제 1함대에서 설정"
+		<Grid Grid.Row="1"
+			  Margin="6"
+			  VerticalAlignment="Bottom">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+
+			<metro2:CallMethodButton Grid.Column="0"
+									 Grid.Row="0"
+									 Margin="2"
+									 Padding="3,8"
+									 Content="제1함대"
 									 MethodName="AddByFleet"
 									 MethodParameter="1"/>
-			<metro2:CallMethodButton Margin="0,0,0,5"
-									 Padding="3"
-									 Content="제 2함대에서 설정"
+			<metro2:CallMethodButton Grid.Column="1"
+									 Grid.Row="0"
+									 Margin="2"
+									 Padding="3,8"
+									 Content="제2함대"
 									 MethodName="AddByFleet"
 									 MethodParameter="2"/>
-			<metro2:CallMethodButton Margin="0,0,0,5"
-									 Padding="3"
-									 Content="제 3함대에서 설정"
+			<metro2:CallMethodButton Grid.Column="0"
+									 Grid.Row="1"
+									 Margin="2"
+									 Padding="3,8"
+									 Content="제3함대"
 									 MethodName="AddByFleet"
 									 MethodParameter="3"/>
-			<metro2:CallMethodButton Margin="0,0,0,5"
-									 Padding="3"
-									 Content="제 4함대에서 설정"
+			<metro2:CallMethodButton Grid.Column="1"
+									 Grid.Row="1"
+									 Margin="2"
+									 Padding="3,8"
+									 Content="제4함대"
 									 MethodName="AddByFleet"
 									 MethodParameter="4"/>
-		</StackPanel>
+		</Grid>
+
+		<Grid Grid.Row="2">
+			<metro2:CallMethodButton Grid.Column="1"
+									 HorizontalAlignment="Right"
+									 Content="취소"
+									 Margin="8,2,8,8"
+									 Padding="20,5"
+									 MethodName="Cancel" />
+		</Grid>
 	</Grid>
 </metro:MetroWindow>

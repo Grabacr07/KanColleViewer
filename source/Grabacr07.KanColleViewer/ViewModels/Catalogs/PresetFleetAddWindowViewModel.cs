@@ -75,5 +75,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
 			}
 		}
+
+		public void Cancel()
+		{
+			Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
+		}
 	}
 }

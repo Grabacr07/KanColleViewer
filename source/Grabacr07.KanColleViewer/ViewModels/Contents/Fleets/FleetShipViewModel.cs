@@ -11,6 +11,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 {
 	public class PresetShipData : NotificationObject
 	{
+		private Ship ship => KanColleClient.Current.Homeport.Organization.Ships.Where(x => x.Value.Id == this.ShipId).SingleOrDefault().Value ?? null;
+		public string Name => ship?.Info?.Name ?? "？？？";
+		public string TypeName => ship?.Info?.ShipType?.Name ?? "？？？";
+		public int Level => ship?.Level ?? 0;
+
 		public int[] SlotsId { get; set; }
 		public int ExSlotId { get; set; }
 
@@ -64,10 +69,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		public bool ExSlotExist => this.ExSlot != null && this.ExSlot.Id > 0;
 		#endregion
 
-		public Ship ShipData => this.ShipId > 0
-			? KanColleClient.Current.Homeport.Organization.Ships.SingleOrDefault(x => x.Value.Id == this.ShipId).Value
-			: null;
-
 		public PresetShipData()
 		{
 			this.ShipId = -1;
@@ -88,7 +89,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			return string.Format(
 				"{0}\t{1}\t{2}",
 				this.ShipId,
-				string.Join(",", this.Slots),
+				string.Join(",", this.SlotsId),
 				this.ExSlotId
 			);
 		}
@@ -126,9 +127,14 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		{
 			var homeport = KanColleClient.Current.Homeport;
 
-			this.Slots = homeport.Itemyard.SlotItems
-				.Select(x => this.SlotsId.Contains(x.Value.Id) ? x.Value : SlotItem.Dummy)
-				.ToArray();
+			var slots = new List<SlotItem>();
+			foreach(var id in this.SlotsId)
+			{
+				var item = homeport.Itemyard.SlotItems.SingleOrDefault(x => x.Value.Id == id).Value;
+				if (item == null) continue;
+
+				slots.Add(item);
+			}
 			this.ExSlot = homeport.Itemyard.SlotItems
 				.SingleOrDefault(x => x.Value.Id == ExSlotId)
 				.Value ?? null;
@@ -154,8 +160,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		#endregion
 
 		#region Ships 프로퍼티
-		private IEnumerable<PresetShipData> _Ships;
-		public IEnumerable<PresetShipData> Ships
+		private IReadOnlyCollection<PresetShipData> _Ships;
+		public IReadOnlyCollection<PresetShipData> Ships
 		{
 			get { return this._Ships; }
 			set

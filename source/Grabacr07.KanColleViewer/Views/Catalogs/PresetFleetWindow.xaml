@@ -106,7 +106,7 @@
 						Margin="6">
 				<metro:PromptComboBox HorizontalAlignment="Left"
 									  Prompt="프리셋을 선택하세요"
-									  ItemsSource="{Binding Fleets}"
+									  ItemsSource="{Binding Fleets, Mode=OneWay}"
 									  DisplayMemberPath="FleetName"
 									  SelectedValue="{Binding SelectedFleet, Mode=TwoWay}"
 									  IsReadOnly="True"
@@ -132,7 +132,7 @@
 				</metro2:CallMethodButton>
 				<CheckBox Margin="10,0,0,0"
 						  Content="확장슬롯의 장비 표시"
-						  IsChecked="{Binding ExSlotChecked}"/>
+						  IsChecked="{Binding ExSlotChecked, Mode=TwoWay}"/>
 			</StackPanel>
 
 			<ScrollViewer Grid.Row="1"
@@ -171,46 +171,26 @@
 
 										<Grid HorizontalAlignment="Left">
 											<Grid.ColumnDefinitions>
-												<ColumnDefinition Width="Auto"
-																  SharedSizeGroup="Name" />
-												<ColumnDefinition Width="Auto"
-																  SharedSizeGroup="Level" />
-												<ColumnDefinition Width="Auto"
-																  SharedSizeGroup="HP" />
-												<ColumnDefinition Width="Auto"
-																  SharedSizeGroup="Condition" />
+												<ColumnDefinition Width="Auto" SharedSizeGroup="Name" />
+												<ColumnDefinition Width="Auto" SharedSizeGroup="Level" />
 											</Grid.ColumnDefinitions>
 
 											<TextBlock ToolTipService.Placement="Relative"
 													   ToolTipService.HorizontalOffset="-9"
 													   ToolTipService.VerticalOffset="-3">
+												<Run Text="{Binding TypeName, Mode=OneWay}"
+													 FontSize="9" />
 												<Run Text="{Binding Name, Mode=OneWay}"
 													 Style="{DynamicResource EmphaticTextElementStyleKey}" 
 													 FontSize="13"/>
-												<LineBreak />
-												<Run Text="{Binding TypeName, Mode=OneWay}"
-													 FontSize="9" />
-											</TextBlock>
 
-											<TextBlock Grid.Column="1"
-													   Margin="12,0,0,0">
-												<Run Text="Lv." FontSize="10"/>
+												<Run Text="  Lv." FontSize="10" />
 												<Run Text="{Binding Level, Mode=OneWay}"
 													 Style="{DynamicResource EmphaticTextElementStyleKey}" 
-													 FontSize="13"/>
-											</TextBlock>
-
-											<TextBlock Grid.Column="2" Margin="12,1,0,0">
-												<Run Text="{Binding Condition, Mode=OneWay}"
-													 Style="{DynamicResource EmphaticTextElementStyleKey}" 
-													 FontSize="13"/>
-												<LineBreak />
-												<Run Text="컨디션"
-													 FontSize="9" />
+													 FontSize="13" />
 											</TextBlock>
 
 											<Border x:Name="Elements"
-													ToolTip="{Binding ExSlot.NameWithLevel}"
 													Background="Transparent"
 													Grid.Column="3"
 													Margin="6,0,0,0"
@@ -227,8 +207,16 @@
 
 													<kcvc:SlotItemIcon Grid.Column="1"
 																	   Margin="5,3"
-																	   Type="{Binding ExSlot.IconType}"/>
+																	   Type="{Binding ExSlot.Info.IconType, Mode=OneWay}"/>
 												</Grid>
+
+												<Border.ToolTip>
+													<TextBlock Style="{DynamicResource EmphaticTextStyleKey}">
+														<Run Text="{Binding ExSlot.NameWithLevel, Mode=OneWay}" />
+														<LineBreak />
+														<Run Text="{Binding ExSlot.Description, Mode=OneWay}" />
+													</TextBlock>
+												</Border.ToolTip>
 											</Border>
 										</Grid>
 										<Grid>
@@ -246,7 +234,7 @@
 												<ItemsControl.ItemTemplate>
 													<DataTemplate>
 														<Border x:Name="Elements"
-																ToolTip="{Binding Description}"
+																ToolTip="{Binding Description, Mode=OneWay}"
 																Background="Transparent">
 															<Grid>
 																<Grid.ColumnDefinitions>
@@ -254,18 +242,14 @@
 																	<ColumnDefinition Width="Auto" SharedSizeGroup="SlotName" />
 																</Grid.ColumnDefinitions>
 
-																<kcvc:SlotItemIcon Grid.Column="0" Type="{Binding IconType}" Margin="0,3"/>
-																<TextBlock Grid.Column="1" Margin="5,7,0,0">
-																	<Run Style="{DynamicResource EmphaticTextElementStyleKey}"
-																		 Text="{Binding NameWithLevel}"
-																		 FontSize="13"/>
-																</TextBlock>
+																<kcvc:SlotItemIcon Grid.Column="0"
+																				   Type="{Binding Info.IconType, Mode=OneWay}"
+																				   Margin="0,3"/>
 																<TextBlock Grid.Column="1"
-																		   Margin="5,25,0,0"
-																		   Text="{Binding EquippedShipName}"
-																		   Visibility="{Binding EquippedShipExist, Converter={StaticResource BooleanToVisibilityConverter}}"
-																		   FontSize="10"
-																		   Foreground="#FFFFD384"/>
+																		   Margin="5,7,0,0"
+																		   Style="{DynamicResource EmphaticTextStyleKey}"
+																		   Text="{Binding NameWithLevel, Mode=OneWay}"
+																		   FontSize="13" />
 															</Grid>
 														</Border>
 													</DataTemplate>

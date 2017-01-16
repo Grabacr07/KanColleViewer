@@ -14,11 +14,13 @@
 				   mc:Ignorable="d" 
 				   Title="프리셋 삭제"
 				   FontSize="12"
+				   Width="300"
+				   Height="108"
 				   Background="{DynamicResource ThemeBrushKey}"
 				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 				   d:DataContext="{d:DesignInstance vm:PresetFleetDeleteWindowViewModel}"
-				   metro:ThemeHelper.HasThemeResources="True"
-				   SizeToContent="WidthAndHeight">
+				   Style="{DynamicResource MetroDialogStyleKey}"
+				   WindowStartupLocation="CenterScreen">
 
 	<metro:MetroWindow.Resources>
 		<ResourceDictionary>
@@ -48,24 +50,25 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 
 		<TextBlock Grid.Row="0"
-				   Margin="10,10,10,0"
-				   Text="삭제한 프리셋은 복구할 수 없습니다."
-				   HorizontalAlignment="Center"
-				   VerticalAlignment="Top"
-				   Foreground="Red"/>
+				Margin="10,10,10,0"
+				Text="삭제한 프리셋은 복구할 수 없습니다."
+				HorizontalAlignment="Center"
+				VerticalAlignment="Top"
+				Foreground="Red"/>
 		<TextBlock Grid.Row="1"
-				   Margin="10,5,10,0"
-				   Text="삭제하시겠습니까?"
-				   HorizontalAlignment="Center"
-				   VerticalAlignment="Top"
-				   Foreground="White"
-				   FontSize="10"/>
+				Margin="10,5,10,0"
+				Text="삭제하시겠습니까?"
+				HorizontalAlignment="Center"
+				VerticalAlignment="Top"
+				Foreground="White"
+				FontSize="10"/>
 
-		<Grid Grid.Row="2">
+		<Grid Grid.Row="2"
+				VerticalAlignment="Bottom">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition />
 				<ColumnDefinition />
@@ -74,11 +77,13 @@
 			<metro2:CallMethodButton Grid.Column="0"
 									 Content="예"
 									 Margin="20,10"
+									 Padding="6"
 									 MethodName="DeleteFleet"
 									 MethodParameter="True"/>
 			<metro2:CallMethodButton Grid.Column="1"
 									 Content="아니오"
 									 Margin="20,10"
+									 Padding="6"
 									 MethodName="DeleteFleet"
 									 MethodParameter="False"/>
 		</Grid>

@@ -10,8 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using Grabacr07.KanColleViewer.ViewModels.Contents;
-
+using Grabacr07.KanColleViewer.Views.Catalogs;
 using Grabacr07.KanColleViewer.ViewModels.Contents.Fleets;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
@@ -78,6 +77,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			this.ExSlotChecked = true;
 
 			this.LoadFleets();
+			this.SelectedFleet = this.Fleets.FirstOrDefault();
 		}
 
 		public void LoadFleets()
@@ -119,18 +119,16 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		public void ShowPresetAddWindow()
 		{
-			var fleetwd = new PresetFleetAddWindowViewModel(this);
-			var message = new TransitionMessage(fleetwd, TransitionMode.Normal, "AddFleetWindow.Show");
-			this.Messenger.Raise(message);
+			var catalog = new PresetFleetAddWindowViewModel(this);
+			WindowService.Current.MainWindow.Transition(catalog, typeof(PresetFleetAddWindow));
 		}
 		public void ShowPresetDeleteWindow()
 		{
 			var fleet = this.SelectedFleet;
 			if (fleet == null) return;
 
-			var fleetwd = new PresetFleetDeleteWindowViewModel(this, fleet);
-			var message = new TransitionMessage(fleetwd, TransitionMode.Normal, "DeleteFleetWindow.Show");
-			this.Messenger.Raise(message);
+			var catalog = new PresetFleetDeleteWindowViewModel(this, fleet);
+			WindowService.Current.MainWindow.Transition(catalog, typeof(PresetFleetDeleteWindow));
 		}
 
 		public void AddFleet(PresetFleetData fleet)
@@ -139,11 +137,13 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			list.Add(fleet);
 
 			this.Fleets = list.ToArray();
+			if (this.SelectedFleet == null) this.SelectedFleet = this.Fleets.FirstOrDefault();
 			SaveFleets();
 		}
 		public void DeleteFleet(PresetFleetData fleet)
 		{
 			this.Fleets = this.Fleets.Where(x => x != fleet).ToArray();
+			this.SelectedFleet = this.Fleets.FirstOrDefault();
 			SaveFleets();
 		}
 	}
