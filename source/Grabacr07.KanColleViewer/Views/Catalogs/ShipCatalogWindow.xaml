@@ -79,9 +79,6 @@
 						HorizontalAlignment="Right"
 						VerticalAlignment="Top"
 						WindowChrome.IsHitTestVisibleInChrome="True">
-				<metro:CaptionButton IsChecked="{Binding Settings.TopMost.Value, Mode=TwoWay}"
-									 ToolTip="{Binding Resources.Settings_Window_TopMost, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-									 Style="{DynamicResource PinButtonStyleKey}" />
 				<metro:SystemButtons />
 			</StackPanel>
 
@@ -305,9 +302,9 @@
 									<WrapPanel Grid.Column="2">
 										<RadioButton Content="모두"
 													 IsChecked="{Binding Both, Mode=TwoWay}" />
-										<RadioButton Content="채워져있음"
+										<RadioButton Content="채움"
 													 IsChecked="{Binding Locked, Mode=TwoWay}" />
-										<RadioButton Content="안채워져있음"
+										<RadioButton Content="안채움"
 													 IsChecked="{Binding Unlocked, Mode=TwoWay}" />
 									</WrapPanel>
 								</Grid>
@@ -345,12 +342,11 @@
 										<Run Text=":" />
 									</TextBlock>
 									<WrapPanel Grid.Column="2">
-										<RadioButton Content="모두"
-													 IsChecked="{Binding Both, Mode=TwoWay}" />
-										<RadioButton Content="고속"
-													 IsChecked="{Binding Fast, Mode=TwoWay}" />
-										<RadioButton Content="저속"
-													 IsChecked="{Binding Low, Mode=TwoWay}" />
+										<RadioButton Content="모두" IsChecked="{Binding All, Mode=TwoWay}" />
+										<RadioButton Content="초고속" IsChecked="{Binding SuperFast, Mode=TwoWay}" />
+										<RadioButton Content="고속+" IsChecked="{Binding FastPlus, Mode=TwoWay}" />
+										<RadioButton Content="고속" IsChecked="{Binding Fast, Mode=TwoWay}" />
+										<RadioButton Content="저속" IsChecked="{Binding Low, Mode=TwoWay}" />
 									</WrapPanel>
 								</Grid>
 
@@ -441,6 +437,28 @@
 													 IsChecked="{Binding Brilliant, Mode=TwoWay}" />
 										<RadioButton Content="49이하"
 													 IsChecked="{Binding Unbrilliant, Mode=TwoWay}" />
+									</WrapPanel>
+								</Grid>
+
+								<Grid DataContext="{Binding ShipExSlotFilter}">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="FilterName" />
+										<ColumnDefinition Width="10" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<TextBlock Margin="0,2"
+											   HorizontalAlignment="Right">
+										<Run Text="확장슬롯" />
+										<Run Text=":" />
+									</TextBlock>
+									<WrapPanel Grid.Column="2">
+										<RadioButton Content="전부"
+													 IsChecked="{Binding Both, Mode=TwoWay}" />
+										<RadioButton Content="장착안됨"
+													 IsChecked="{Binding Unequiped, Mode=TwoWay}" />
+										<RadioButton Content="장착됨"
+													 IsChecked="{Binding Equiped, Mode=TwoWay}" />
 									</WrapPanel>
 								</Grid>
 							</StackPanel>
@@ -756,6 +774,12 @@
 												 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 											<Run Text="" />
 											<Run Text="{Binding Ship.ExpForNextLevel, StringFormat=Next:{0}, Mode=OneWay}" />
+											<TextBlock.ToolTip>
+												<TextBlock>
+													<Run Text="누적 경험치:" />
+													<Run Text="{Binding Ship.Exp, Mode=OneWay}" />
+												</TextBlock>
+											</TextBlock.ToolTip>
 										</TextBlock>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
@@ -1088,11 +1112,17 @@
 					Margin="8"
 					Padding="20"
 					Visibility="{Binding IsReloading, Converter={StaticResource BooleanToVisibilityConverter}}">
-				<TextBlock Text="화면을 갱신중입니다..."
-						   Style="{DynamicResource EmphaticTextStyleKey}"
+				<TextBlock Style="{DynamicResource EmphaticTextStyleKey}"
 						   FontSize="16"
 						   Background="{DynamicResource ThemeBrushKey}"
-						   HorizontalAlignment="Center" />
+						   HorizontalAlignment="Center"
+						   TextAlignment="Center">
+					<metro:ProgressRing IsActive="True"
+										Margin="3,8"
+										HorizontalAlignment="Center" />
+					<LineBreak />
+					<Run Text="화면을 갱신중입니다..." />
+				</TextBlock>
 			</Border>
 		</Grid>
 	</Grid>

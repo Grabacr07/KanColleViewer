@@ -55,12 +55,12 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 
 			try
 			{
-				Providers.Roaming.Load();
+				Providers.Viewer.Load();
 			}
 			catch (Exception)
 			{
-				File.Delete(Providers.RoamingFilePath);
-				Providers.Roaming.Load();
+				// File.Delete(Providers.RoamingFilePath);
+				Providers.Viewer.Load();
 			}
 
 #pragma warning disable 612
@@ -90,16 +90,17 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 				MessageBox.Show(string.Format(message, Providers.LocalFilePath, ex.Message), "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
 				throw;
 			}
-
+			/*
 			try
 			{
-				Providers.Roaming.Save();
+				Providers.Viewer.Save();
 			}
 			catch (Exception ex)
 			{
 				MessageBox.Show(string.Format(message, Providers.RoamingFilePath, ex.Message), "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
 				throw;
 			}
+			*/
 		}
 
 		#endregion

@@ -32,8 +32,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			get { return this._IsLoading; }
 			set
 			{
-				this._IsLoading = value;
-				this.RaisePropertyChanged();
+				if (this._IsLoading != value)
+				{
+					this._IsLoading = value;
+					this.RaisePropertyChanged();
+				}
 			}
 		}
 
@@ -47,9 +50,12 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			get { return this._OnlyOwnSlotItems; }
 			set
 			{
-				this._OnlyOwnSlotItems = value;
-				this.RaisePropertyChanged();
-				this.Update();
+				if (this._OnlyOwnSlotItems != value)
+				{
+					this._OnlyOwnSlotItems = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
 			}
 		}
 
@@ -63,9 +69,12 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			get { return this._OnlyRemodeledSlotItems; }
 			set
 			{
-				this._OnlyRemodeledSlotItems = value;
-				this.RaisePropertyChanged();
-				this.Update();
+				if (this._OnlyRemodeledSlotItems != value)
+				{
+					this._OnlyRemodeledSlotItems = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
 			}
 		}
 

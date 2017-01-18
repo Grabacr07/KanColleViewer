@@ -57,10 +57,14 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				case SlotItemType.艦上戦闘機:
 				case SlotItemType.水上戦闘機:
+				case SlotItemType.噴式戦闘機:
 					return new FighterCalculator();
 
 				case SlotItemType.艦上攻撃機:
 				case SlotItemType.艦上爆撃機:
+				case SlotItemType.噴式攻撃機:
+				case SlotItemType.噴式戦闘爆撃機:
+					// case SlotItemType.噴式偵察機: ??
 					return new AttackerCalculator();
 
 				case SlotItemType.水上爆撃機:

@@ -19,14 +19,13 @@ namespace Grabacr07.KanColleViewer.Views
 		private Size? previousBrowserSize;
 		private Dock? previousDock;
 
-
 		public KanColleWindow()
 		{
 			this.InitializeComponent();
 
 			this.settings = SettingsHost.Instance<KanColleWindowSettings>();
 			this.settings.IsSplit.Subscribe(_ => this.ChangeSizeByDock()).AddTo(this);
-            this.settings.AlwaysTopView.Subscribe(_ => this.ChangeSizeByDock()).AddTo(this);
+			this.settings.AlwaysTopView.Subscribe(_ => this.ChangeSizeByDock()).AddTo(this);
 			this.settings.Dock.Subscribe(_ => this.ChangeSizeByDock()).AddTo(this);
 		}
 
@@ -35,22 +34,23 @@ namespace Grabacr07.KanColleViewer.Views
 			this.ChangeSizeByBrowser(size);
 		}
 
+		// 줌 크기 변경에 의한 윈도우 크기 재계산
 		private void ChangeSizeByBrowser(Size browserSize)
 		{
 			if (!this.settings.AutomaticallyResize) return;
 
-			// サイズ計算のためにいったんリミット外す
+			// 사이즈 계산을 위해 일단 제한을 푼다.
 			this.MinWidth = .0;
 			this.MinHeight = .0;
 
 			if (this.previousBrowserSize != null)
 			{
-				if (this.previousDock == Dock.Top || this.previousDock == Dock.Bottom)
+				if (this.previousDock == Dock.Top || this.previousDock == Dock.Bottom) // 정보 영역 위 혹은 아래
 				{
 					var diffW = this.previousBrowserSize.Value.Width - browserSize.Width;
 					if (Math.Abs(diffW) > 0.00001) this.Width -= diffW;
 				}
-				else if (this.previousDock == Dock.Left || this.previousDock == Dock.Right)
+				else if (this.previousDock == Dock.Left || this.previousDock == Dock.Right) // 정보영역 왼쪽 혹은 오른쪽
 				{
 					var diffH = this.previousBrowserSize.Value.Height - browserSize.Height;
 					if (Math.Abs(diffH) > 0.00001) this.Height -= diffH;
@@ -74,11 +74,13 @@ namespace Grabacr07.KanColleViewer.Views
 			this.previousBrowserSize = browserSize;
 		}
 
+		// 정보 영역 변경에 의한 윈도우 크기 재계산
 		private void ChangeSizeByDock()
 		{
 			this.ChangeSizeByDock(this.settings.IsSplit ? (Dock?)null : this.settings.Dock.Value.Reverse());
 		}
 
+		// 정보 영역 변경에 의한 윈도우 크기 재계산 (실제 수행)
 		private void ChangeSizeByDock(Dock? dock)
 		{
 			if (!this.settings.AutomaticallyResize) return;

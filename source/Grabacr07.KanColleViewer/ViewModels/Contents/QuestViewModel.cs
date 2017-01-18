@@ -10,27 +10,27 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 {
 	public class QuestViewModel : ViewModel
 	{
-        #region Id 변경통지 프로퍼티
+		#region Id 변경통지 프로퍼티
 
-        private int _Id;
-        public int Id
-        {
-            get { return this._Id; }
-            set
-            {
-                if (this._Id != value)
-                {
-                    this._Id = value;
-                    this.RaisePropertyChanged();
-                }
-            }
-        }
+		private int _Id;
+		public int Id
+		{
+			get { return this._Id; }
+			set
+			{
+				if (this._Id != value)
+				{
+					this._Id = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #region Type 変更通知プロパティ
+		#region Type 変更通知プロパティ
 
-        private QuestType _Type;
+		private QuestType _Type;
 
 		public QuestType Type
 		{
@@ -83,26 +83,26 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			}
 		}
 
-        #endregion
+		#endregion
 
-        #region StateText 変更通知プロパティ
+		#region StateText 変更通知プロパティ
 
-        public string StateText
-        {
-            get
-            {
-                if (this.State == QuestState.Accomplished) return " 완료 ";
-                else if (this.Progress == QuestProgress.Progress80) return " 80% ";
-                else if (this.Progress == QuestProgress.Progress50) return " 50% ";
-                return "";
-            }
-        }
+		public string StateText
+		{
+			get
+			{
+				if (this.State == QuestState.Accomplished) return " 완료 ";
+				else if (this.Progress == QuestProgress.Progress80) return " 80% ";
+				else if (this.Progress == QuestProgress.Progress50) return " 50% ";
+				return "";
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #region Progress 変更通知プロパティ
+		#region Progress 変更通知プロパティ
 
-        private QuestProgress _Progress;
+		private QuestProgress _Progress;
 
 		public QuestProgress Progress
 		{
@@ -157,6 +157,44 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 		#endregion
 
+		#region TitleJP 変更通知プロパティ
+
+		private string _TitleJP;
+
+		public string TitleJP
+		{
+			get { return this._TitleJP; }
+			set
+			{
+				if (this._TitleJP != value)
+				{
+					this._TitleJP = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region DetailJP 変更通知プロパティ
+
+		private string _DetailJP;
+
+		public string DetailJP
+		{
+			get { return this._DetailJP; }
+			set
+			{
+				if (this._DetailJP != value)
+				{
+					this._DetailJP = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		#region IsUntaken 変更通知プロパティ
 
 		private bool _IsUntaken;
@@ -174,96 +212,136 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			}
 		}
 
-        #endregion
+		#endregion
 
+		#region JPView 変更通知プロパティ
 
-        public string QuestIdText =>
-            QuestNameTable.IdNameTable.ContainsKey(this.Id)
-                ? QuestNameTable.IdNameTable[this.Id]
-                : string.Format("[{0}]", this.Id);
+		private bool _JPView;
 
-        private int _Page { get; set; }
-        public int Page
-        {
-            get { return this._Page; }
-            set
-            {
-                if (this._Page != value)
-                {
-                    this._Page = value;
-                    this.RaisePropertyChanged();
-                }
-            }
-        }
-
-        private bool _LastOnPage { get; set; }
-        public bool LastOnPage
-        {
-            get { return this._LastOnPage; }
-            set
-            {
-                if (this._LastOnPage != value)
-                {
-                    this._LastOnPage = value;
-                    this.RaisePropertyChanged();
-                }
-            }
-        }
-
-
-        private string _QuestProgressText { get; set; }
-        public string QuestProgressText
-        {
-            get { return this._QuestProgressText; }
-            set
-            {
-                this._QuestProgressText = value;
-                this.RaisePropertyChanged();
-                this.RaisePropertyChanged("QuestTrackingVisible");
-            }
-        }
-
-        private double _QuestProgressValue { get; set; }
-        public double QuestProgressValue
-        {
-            get { return this._QuestProgressValue; }
-            set
-            {
-                this._QuestProgressValue = value;
-                this.RaisePropertyChanged();
-                this.RaisePropertyChanged("QuestTrackingVisible");
-            }
-        }
-
-        public bool QuestTrackingVisible
-        {
-            get
-            {
-                return (
-                    (this.QuestProgressText?.Length > 0) &&
-                    (this.State != QuestState.None || this.QuestProgressValue > 0)
-                );
-            }
-        }
-
-
-        public QuestViewModel(Quest quest)
+		public bool JPView
 		{
+			get { return this._JPView; }
+			set
+			{
+				if (this._JPView != value)
+				{
+					this._JPView = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+
+		public string QuestIdText =>
+			QuestNameTable.IdNameTable.ContainsKey(this.Id)
+				? QuestNameTable.IdNameTable[this.Id]
+				: string.Format("[{0}]", this.Id);
+
+		#region Page 변경통지 프로퍼티
+
+		private int _Page { get; set; }
+		public int Page
+		{
+			get { return this._Page; }
+			set
+			{
+				if (this._Page != value)
+				{
+					this._Page = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region LastOnPage 변경통지 프로퍼티
+
+		private bool _LastOnPage { get; set; }
+		public bool LastOnPage
+		{
+			get { return this._LastOnPage; }
+			set
+			{
+				if (this._LastOnPage != value)
+				{
+					this._LastOnPage = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region QuestProgressText 변경통지 프로퍼티
+
+		private string _QuestProgressText { get; set; }
+		public string QuestProgressText
+		{
+			get { return this._QuestProgressText; }
+			set
+			{
+				if (this._QuestProgressText != value)
+				{
+					this._QuestProgressText = value;
+					this.RaisePropertyChanged();
+					this.RaisePropertyChanged("QuestTrackingVisible");
+				}
+			}
+		}
+
+		#endregion
+
+		#region QuestProgressValue 변경통지 프로퍼티
+
+		private double _QuestProgressValue { get; set; }
+		public double QuestProgressValue
+		{
+			get { return this._QuestProgressValue; }
+			set
+			{
+				if (this._QuestProgressValue != value)
+				{
+					this._QuestProgressValue = value;
+					this.RaisePropertyChanged();
+					this.RaisePropertyChanged("QuestTrackingVisible");
+				}
+			}
+		}
+
+		#endregion
+
+		public bool QuestTrackingVisible => (this.QuestProgressText?.Length > 0) && (this.State != QuestState.None || this.QuestProgressValue > 0);
+
+
+		public QuestViewModel(Quest quest)
+		{
+			this.JPView = false;
+
 			if (quest == null)
 			{
 				this.IsUntaken = true;
 			}
 			else
 			{
-                this.Id = quest.Id;
+				this.Id = quest.Id;
 				this.IsUntaken = false;
+
 				this.Type = quest.Type;
 				this.Category = quest.Category;
+
 				this.State = quest.State;
 				this.Progress = quest.Progress;
+
 				this.Title = WebUtility.HtmlDecode(quest.Title).Replace("<br>", Environment.NewLine);
 				this.Detail = WebUtility.HtmlDecode(quest.Detail).Replace("<br>", Environment.NewLine);
-                this.Page = quest.Page + 1;
+
+				this.TitleJP = WebUtility.HtmlDecode(quest.TitleJP).Replace("<br>", Environment.NewLine);
+				this.DetailJP = WebUtility.HtmlDecode(quest.DetailJP).Replace("<br>", Environment.NewLine);
+
+				this.Page = quest.Page + 1;
 			}
 			
 		}

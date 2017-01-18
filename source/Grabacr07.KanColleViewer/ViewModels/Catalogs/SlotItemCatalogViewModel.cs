@@ -18,7 +18,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public SlotItemCatalogWindowSettings Settings { get; }
 
 		public IReadOnlyCollection<SlotItemEquipTypeViewModel> SlotItemEquipTypes { get; }
-		public IEnumerable<SlotItemIconType> EnableSlotItemEquipTypes => SlotItemEquipTypes.Where(x => x.IsSelected).Select(y => y.Type);
+		public IEnumerable<SlotItemIconType> EnableSlotItemEquipTypes => SlotItemEquipTypes
+			.Where(x => x.IsSelected)
+			.Select(y => y.Type);
+
 		public bool CheckAllSlotItemEquipType
 		{
 			get { return this.SlotItemEquipTypes.All(x => x.IsSelected); }
@@ -29,23 +32,23 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			}
 		}
 
-        private bool _OnlyRemodeledSlotItems;
-        public bool OnlyRemodeledSlotItems
-        {
-            get { return _OnlyRemodeledSlotItems; }
-            set
-            {
-                if(_OnlyRemodeledSlotItems != value)
-                {
-                    _OnlyRemodeledSlotItems = value;
-                    this.RaisePropertyChanged();
-                }
-            }
-        }
+		private bool _OnlyRemodeledSlotItems;
+		public bool OnlyRemodeledSlotItems
+		{
+			get { return _OnlyRemodeledSlotItems; }
+			set
+			{
+				if(_OnlyRemodeledSlotItems != value)
+				{
+					_OnlyRemodeledSlotItems = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
 
-        #region SlotItems 変更通知プロパティ
+		#region SlotItems 変更通知プロパティ
 
-        private IReadOnlyCollection<SlotItemCounter> _SlotItems;
+		private IReadOnlyCollection<SlotItemCounter> _SlotItems;
 
 		public IReadOnlyCollection<SlotItemCounter> SlotItems
 		{
@@ -106,20 +109,25 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			this.Title = "소유 장비 목록";
 			this.Settings = new SlotItemCatalogWindowSettings();
 
-            /*
-            this.SlotItemEquipTypes = KanColleClient.Current.Master.SlotItemEquipTypes
+			/*
+			this.SlotItemEquipTypes = KanColleClient.Current.Master.SlotItemEquipTypes
 				.Select(kvp => new SlotItemEquipTypeViewModel(kvp.Value)
 				{
 					IsSelected = true,
 					SelectionChangedAction = () => this.Update()
 				})
 				.ToList();
-            */
-            this.SlotItemEquipTypes = Enum.GetNames(typeof(SlotItemIconType))
-                .Select(x => new SlotItemEquipTypeViewModel((SlotItemIconType)Enum.Parse(typeof(SlotItemIconType), x)))
-                .ToList();
+			*/
+			this.SlotItemEquipTypes = Enum.GetNames(typeof(SlotItemIconType))
+				.Select(x => new SlotItemEquipTypeViewModel((SlotItemIconType)Enum.Parse(typeof(SlotItemIconType), x))
+				{
+					IsSelected = true,
+					SelectionChangedAction = () => this.Update()
+				})
+				.Distinct(x => x.DisplayName)
+				.ToList();
 
-            this.updateSource
+			this.updateSource
 				.Do(_ => this.IsReloading = true)
 				.Throttle(TimeSpan.FromMilliseconds(100))
 				.Select(_ => UpdateCore(EnableSlotItemEquipTypes))
@@ -128,11 +136,12 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				.Subscribe(x => this.SlotItems = x)
 				.AddTo(this);
 
-            CheckAllSlotItemEquipType = true;
-        }
+			CheckAllSlotItemEquipType = true;
+		}
 
 		public void Update()
 		{
+			this.RaisePropertyChanged(nameof(this.CheckAllSlotItemEquipType));
 			this.updateSource.OnNext(Unit.Default);
 		}
 
@@ -142,20 +151,20 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			var items = KanColleClient.Current.Homeport.Itemyard.SlotItems.Values.ToList();
 			var master = KanColleClient.Current.Master.SlotItems;
 
-            if (OnlyRemodeledSlotItems)
-            {
-                items = items.Where(x => x.Level > 0)
-                    .ToList();
+			if (OnlyRemodeledSlotItems)
+			{
+				items = items.Where(x => x.Level > 0)
+					.ToList();
 
-                ships = ships.Select(
-                    x => {
-                        x.EquippedItems = x.EquippedItems
-                            .Where(y => y.Item.Level > 0 && items.Any(z => z.Info.Id == y.Item.Info.Id))
-                            .ToArray();
-                        return x;
-                    })
-                    .ToList();
-            }
+				ships = ships.Select(
+					x => {
+						x.EquippedItems = x.EquippedItems
+							.Where(y => y.Item.Level > 0 && items.Any(z => z.Info.Id == y.Item.Info.Id))
+							.ToArray();
+						return x;
+					})
+					.ToList();
+			}
 
 			// dic (Dictionary<TK,TV>)
 			//  Key:   装備のマスター ID
@@ -174,21 +183,24 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				.ThenBy(x => x.Target.Id)
 				.ToList();
 		}
-        private static SlotItemIconType GetIconTypeInRange(SlotItemIconType source)
-        {
-            var y = (Enum.GetValues(typeof(SlotItemIconType)) as int[])
-                .Any(x => x == (int)source);
-            if (!y) return SlotItemIconType.Unknown;
-            return source;
-        }
-
-        public void SetSlotItemEquipType(int[] ids)
+		private static SlotItemIconType GetIconTypeInRange(SlotItemIconType source)
 		{
-            foreach (var type in this.SlotItemEquipTypes)
-                type.Set(
-                    ids.Any(y => y == (int)type.Type)
-                );
-            this.RaisePropertyChanged("CheckAllSlotItemEquipType");
+			var y = (Enum.GetValues(typeof(SlotItemIconType)) as int[])
+				.Any(x =>
+					x == (int) (
+						SlotItemEquipTypeViewModel.IconAliasNameable.ContainsKey(source)
+							? SlotItemEquipTypeViewModel.IconAliasNameable[source]
+							: source
+					)
+				);
+			if (!y) return SlotItemIconType.Unknown;
+			return source;
+		}
+
+		public void SetSlotItemEquipType(int[] ids)
+		{
+			foreach (var type in this.SlotItemEquipTypes)
+				type.Set(ids.Any(y => y == (int)type.Type));
 			this.Update();
 		}
 	}

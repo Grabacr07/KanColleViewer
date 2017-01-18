@@ -13,7 +13,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 	{
 		public override string Name
 		{
-			get { return "공창"; }
+			get { return Properties.Resources.Shipyard; }
 			protected set { throw new NotImplementedException(); }
 		}
 

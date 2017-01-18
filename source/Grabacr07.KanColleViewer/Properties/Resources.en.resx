@@ -453,4 +453,76 @@
   <data name="Akashi_NotificationMessage" xml:space="preserve">
     <value>Akashi has repaired 20 minutes.</value>
   </data>
+  <data name="Expedition_Conditions" xml:space="preserve">
+    <value>Ship conditions</value>
+  </data>
+  <data name="Expedition_ExpectRes" xml:space="preserve">
+    <value>Expect Res (Suc/</value>
+  </data>
+  <data name="Expedition_ExpectResGreat" xml:space="preserve">
+    <value>G.Suc</value>
+  </data>
+  <data name="Expedition_Expect_Ammo" xml:space="preserve">
+    <value>Ammo:</value>
+  </data>
+  <data name="Expedition_Expect_Bauxite" xml:space="preserve">
+    <value>Bauxite:</value>
+  </data>
+  <data name="Expedition_Expect_Fuel" xml:space="preserve">
+    <value>Fuel:</value>
+  </data>
+  <data name="Expedition_Expect_Steel" xml:space="preserve">
+    <value>Steel:</value>
+  </data>
+  <data name="Expedition_GreatSuccessNo" xml:space="preserve">
+    <value>No G.Success</value>
+  </data>
+  <data name="Expedition_NoSupply" xml:space="preserve">
+    <value>No Supply</value>
+  </data>
+  <data name="Expedition_OnHomeport" xml:space="preserve">
+    <value>Waiting on Homeport.</value>
+  </data>
+  <data name="Expedition_OnSortie" xml:space="preserve">
+    <value>On sortie.</value>
+  </data>
+  <data name="Expedition_OrganizeNo" xml:space="preserve">
+    <value>Organize</value>
+  </data>
+  <data name="Expedition_OrganizeOK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Expedition_Returned" xml:space="preserve">
+    <value>Returned from expedition.</value>
+  </data>
+  <data name="Fleets_Ammo" xml:space="preserve">
+    <value>Ammo</value>
+  </data>
+  <data name="Fleets_Bauxite" xml:space="preserve">
+    <value>Bauxite</value>
+  </data>
+  <data name="Fleets_ConditionTo" xml:space="preserve">
+    <value>Rejuvenate in:</value>
+  </data>
+  <data name="Fleets_Eva" xml:space="preserve">
+    <value>Eva</value>
+  </data>
+  <data name="Fleets_Fuel" xml:space="preserve">
+    <value>Fuel</value>
+  </data>
+  <data name="Fleets_InRepair" xml:space="preserve">
+    <value>In Repair</value>
+  </data>
+  <data name="Fleets_Supplys" xml:space="preserve">
+    <value>Supplys:</value>
+  </data>
+  <data name="Shipyard" xml:space="preserve">
+    <value>Arsenal</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="Fleets_Condition" xml:space="preserve">
+    <value>Cond.</value>
+  </data>
 </root>

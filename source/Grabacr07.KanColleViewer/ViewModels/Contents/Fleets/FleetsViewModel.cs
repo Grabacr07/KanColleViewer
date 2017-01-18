@@ -10,6 +10,8 @@ using MetroTrilithon.Lifetime;
 using MetroTrilithon.Mvvm;
 using StatefulModel;
 using Grabacr07.KanColleViewer.Models;
+using Grabacr07.KanColleViewer.ViewModels.Catalogs;
+using Grabacr07.KanColleViewer.Views.Catalogs;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 {
@@ -94,8 +96,30 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			get { return this._ShowLostAirplane; }
 			set
 			{
-				this._ShowLostAirplane = value;
-				this.RaisePropertyChanged();
+				if (this._ShowLostAirplane != value)
+				{
+					this._ShowLostAirplane = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region ShowAirplaneAlways 변경통지 프로퍼티
+
+		private bool _ShowAirplaneAlways;
+
+		public bool ShowAirplaneAlways
+		{
+			get { return this._ShowAirplaneAlways; }
+			set
+			{
+				if (this._ShowAirplaneAlways != value)
+				{
+					this._ShowAirplaneAlways = value;
+					this.RaisePropertyChanged();
+				}
 			}
 		}
 
@@ -116,9 +140,17 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				.AddTo(this);
 
 			KanColleSettings.ShowLostAirplane.ValueChanged += (s, e) => this.ShowLostAirplane = e.NewValue;
+			KanColleSettings.ShowAirplaneAlways.ValueChanged += (s, e) => this.ShowAirplaneAlways = e.NewValue;
+			KanColleSettings.MergeCombinedFleet.ValueChanged += (s, e) => this.UpdateFleets();
 			this.ShowLostAirplane = KanColleSettings.ShowLostAirplane;
+			this.ShowAirplaneAlways = KanColleSettings.ShowAirplaneAlways;
 		}
 
+		public void ShowPresetWindow()
+		{
+			var catalog = new PresetFleetWindowViewModel();
+			WindowService.Current.MainWindow.Transition(catalog, typeof(PresetFleetWindow));
+		}
 		public void ShowFleetWindow()
 		{
 			var fleetwd = new FleetWindowViewModel();
@@ -136,7 +168,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				.Select(x => this.ToViewModel(x.Value))
 				.ToArray();
 
-			if (KanColleClient.Current.Homeport.Organization.Combined)
+			if (KanColleClient.Current.Homeport.Organization.Combined && KanColleSettings.MergeCombinedFleet)
 			{
 				var cfvm = MakeCombinedFleetViewModel(KanColleClient.Current.Homeport.Organization.CombinedFleet);
 				var fleets = this.Fleets.Where(x => cfvm.Source.Fleets.All(f => f != x.Source));
@@ -155,9 +187,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			// SelectedFleet 이 무시되는 현상. 이유는 불명.
 			new System.Threading.Thread(() =>
 			{
-				// System.Threading.Thread.Sleep(200);
+				System.Threading.Thread.Sleep(200);
 
-				if (this.Fleets2.All(x => x != this.SelectedFleet))
+				if (!this.Fleets2.Any(x => x == this.SelectedFleet))
 					this.SelectedFleet = this.Fleets2.FirstOrDefault();
 			}).Start();
 		}

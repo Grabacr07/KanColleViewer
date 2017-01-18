@@ -81,43 +81,45 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				RaisePropertyChanged();
 			}
 		}
-        #endregion
+		#endregion
 
-        #region AkashiTimer 변경 통지 프로퍼티
+		#region AkashiTimer 변경 통지 프로퍼티
 
-        private AkashiTimerViewModel _AkashiTimer;
+		private AkashiTimerViewModel _AkashiTimer;
 
-        public AkashiTimerViewModel AkashiTimer
-        {
-            get { return this._AkashiTimer; }
-            set
-            {
-                if (this._AkashiTimer != value)
-                {
-                    this._AkashiTimer = value;
-                    this.RaisePropertyChanged();
-                }
-            }
-        }
+		public AkashiTimerViewModel AkashiTimer
+		{
+			get { return this._AkashiTimer; }
+			set
+			{
+				if (this._AkashiTimer != value)
+				{
+					this._AkashiTimer = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #region MaterialExtended 변경통지 프로퍼티
+		#region MaterialExtended 변경통지 프로퍼티
 
-        private bool _MaterialExtended;
+		private bool _MaterialExtended;
+		public bool MaterialExtended {
+			get { return this._MaterialExtended; }
+			set
+			{
+				if (this._MaterialExtended != value)
+				{
+					this._MaterialExtended = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
 
-        public bool MaterialExtended {
-            get { return this._MaterialExtended; }
-            set
-            {
-                this._MaterialExtended = value;
-                this.RaisePropertyChanged();
-            }
-        }
+		#endregion
 
-        #endregion
-
-        public InformationViewModel()
+		public InformationViewModel()
 		{
 			this.Settings = SettingsHost.Instance<KanColleWindowSettings>();
 			if (this.Settings?.Dock == Dock.Right || this.Settings?.Dock == Dock.Left || this.Settings?.IsSplit)
@@ -157,8 +159,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 			_AkashiTimer = new AkashiTimerViewModel();
 
-            KanColleSettings.DisplayMaterialExtended.ValueChanged += (s, e) => this.MaterialExtended = e.NewValue;
-            this.MaterialExtended = KanColleSettings.DisplayMaterialExtended;
-        }
+			KanColleSettings.DisplayMaterialExtended.ValueChanged += (s, e) => this.MaterialExtended = e.NewValue;
+			this.MaterialExtended = KanColleSettings.DisplayMaterialExtended;
+		}
 	}
 }
