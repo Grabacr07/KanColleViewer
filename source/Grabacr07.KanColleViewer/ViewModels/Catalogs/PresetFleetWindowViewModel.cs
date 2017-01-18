@@ -50,7 +50,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		#endregion
 
 		#region ExSlotChecked 변경 통지 프로퍼티
-		public static bool _ExSlotChecked { get; set; }
+		private bool _ExSlotChecked { get; set; }
 		public bool ExSlotChecked
 		{
 			get { return _ExSlotChecked; }
