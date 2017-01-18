@@ -102,8 +102,12 @@
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
 
-			<StackPanel Orientation="Horizontal"
-						Margin="6">
+			<Grid Margin="10,4,10,10">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
 				<metro:PromptComboBox HorizontalAlignment="Left"
 									  Prompt="프리셋을 선택하세요"
 									  ItemsSource="{Binding Fleets, Mode=OneWay}"
@@ -112,11 +116,13 @@
 									  IsReadOnly="True"
 									  MinWidth="160"/>
 
-				<metro2:CallMethodButton Padding="5,3"
+				<metro2:CallMethodButton Grid.Column="1"
+										 Padding="5,3"
 										 Margin="5,0,0,0"
 										 Content="함대 추가"
 										 MethodName="ShowPresetAddWindow" />
-				<metro2:CallMethodButton Padding="5,3"
+				<metro2:CallMethodButton Grid.Column="2"
+										 Padding="5,3"
 										 Margin="5,0,0,0"
 										 Content="함대 삭제"
 										 MethodName="ShowPresetDeleteWindow">
@@ -130,10 +136,7 @@
 						</Style>
 					</metro2:CallMethodButton.Style>
 				</metro2:CallMethodButton>
-				<CheckBox Margin="10,0,0,0"
-						  Content="확장슬롯의 장비 표시"
-						  IsChecked="{Binding ExSlotChecked, Mode=TwoWay}"/>
-			</StackPanel>
+			</Grid>
 
 			<ScrollViewer Grid.Row="1"
 						  HorizontalScrollBarVisibility="Auto"
@@ -150,7 +153,7 @@
 								<ColumnDefinition Width="Auto"/>
 							</Grid.ColumnDefinitions>
 						</Grid>
-						<ItemsControl  ItemsSource="{Binding SelectedFleet.Ships}"
+						<ItemsControl ItemsSource="{Binding SelectedFleet.Ships}"
 									  Background="Transparent"
 									  Grid.IsSharedSizeScope="True">
 							<ItemsControl.ItemsPanel>
@@ -162,10 +165,8 @@
 								<DataTemplate>
 									<StackPanel Margin="10,10,0,0">
 										<StackPanel.Resources>
-											<Style TargetType="{x:Type TextBlock}"
-												   BasedOn="{StaticResource DefaultTextStyleKey}">
-												<Setter Property="TextWrapping"
-														Value="NoWrap" />
+											<Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource DefaultTextStyleKey}">
+												<Setter Property="TextWrapping" Value="NoWrap" />
 											</Style>
 										</StackPanel.Resources>
 
@@ -193,8 +194,7 @@
 											<Border x:Name="Elements"
 													Background="Transparent"
 													Grid.Column="3"
-													Margin="6,0,0,0"
-													Visibility="{Binding ExSlotExist, Converter={StaticResource BooleanToVisibilityConverter}}">
+													Margin="10,0,0,0">
 												<Grid>
 													<Grid.ColumnDefinitions>
 														<ColumnDefinition Width="Auto"/>
@@ -208,6 +208,16 @@
 													<kcvc:SlotItemIcon Grid.Column="1"
 																	   Margin="5,3"
 																	   Type="{Binding ExSlot.Info.IconType, Mode=OneWay}"/>
+
+													<Grid.Style>
+														<Style TargetType="{x:Type Grid}">
+															<Style.Triggers>
+																<DataTrigger Binding="{Binding ExSlotExist, Mode=OneWay}" Value="False">
+																	<Setter Property="Visibility" Value="Collapsed" />
+																</DataTrigger>
+															</Style.Triggers>
+														</Style>
+													</Grid.Style>
 												</Grid>
 
 												<Border.ToolTip>

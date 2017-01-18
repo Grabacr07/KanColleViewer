@@ -62,6 +62,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				{
 					this._ExSlot = value;
 					this.RaisePropertyChanged();
+					this.RaisePropertyChanged(nameof(this.ExSlotExist));
 				}
 			}
 		}
@@ -135,6 +136,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 				slots.Add(item);
 			}
+			this.Slots = slots.ToArray();
 			this.ExSlot = homeport.Itemyard.SlotItems
 				.SingleOrDefault(x => x.Value.Id == ExSlotId)
 				.Value ?? null;
