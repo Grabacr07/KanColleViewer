@@ -258,74 +258,89 @@ namespace Grabacr07.KanColleWrapper.Models
 			}
 		}
 
-        #endregion
+		#endregion
 
-        #region InShortSupply 変更通知プロパティ
+		#region InShortSupply 変更通知プロパティ
 
-        /// <summary>
-        /// 艦隊の出撃準備ができているかどうかを示す値を取得します。
-        /// </summary>
-        public bool InShortSupply => this.Situation.HasFlag(FleetSituation.InShortSupply);
+		/// <summary>
+		/// 艦隊の出撃準備ができているかどうかを示す値を取得します。
+		/// </summary>
+		public bool InShortSupply => this.Situation.HasFlag(FleetSituation.InShortSupply);
 
-        #endregion
+		#endregion
 
-        #region HeavilyDamaged 変更通知プロパティ
+		#region HeavilyDamaged 変更通知プロパティ
 
-        /// <summary>
-        /// 艦隊の出撃準備ができているかどうかを示す値を取得します。
-        /// </summary>
-        public bool HeavilyDamaged => this.Situation.HasFlag(FleetSituation.HeavilyDamaged);
+		/// <summary>
+		/// 艦隊の出撃準備ができているかどうかを示す値を取得します。
+		/// </summary>
+		public bool HeavilyDamaged => this.Situation.HasFlag(FleetSituation.HeavilyDamaged);
 
-        #endregion
+		#endregion
 
-        #region Repairing 変更通知プロパティ
+		#region Repairing 変更通知プロパティ
 
-        /// <summary>
-        /// 艦隊の出撃準備ができているかどうかを示す値を取得します。
-        /// </summary>
-        public bool Repairing => this.Situation.HasFlag(FleetSituation.Repairing);
+		/// <summary>
+		/// 艦隊の出撃準備ができているかどうかを示す値を取得します。
+		/// </summary>
+		public bool Repairing => this.Situation.HasFlag(FleetSituation.Repairing);
 
-        #endregion
+		#endregion
 
-        #region FlagshipIsRepairShip 変更通知プロパティ
+		#region FlagshipIsRepairShip 変更通知プロパティ
 
-        /// <summary>
-        /// 艦隊の出撃準備ができているかどうかを示す値を取得します。
-        /// </summary>
-        public bool FlagshipIsRepairShip => this.Situation.HasFlag(FleetSituation.FlagshipIsRepairShip);
+		/// <summary>
+		/// 艦隊の出撃準備ができているかどうかを示す値を取得します。
+		/// </summary>
+		public bool FlagshipIsRepairShip => this.Situation.HasFlag(FleetSituation.FlagshipIsRepairShip);
 
-        #endregion
+		#endregion
 
 
-        #region UsedFuel 변경통지 프로퍼티
+		#region UsedFuel 변경통지 프로퍼티
 
-        private int _UsedFuel;
-        public int UsedFuel
-        {
-            get { return this._UsedFuel; }
-            set
-            {
-                this._UsedFuel = value;
-                this.RaisePropertyChanged();
-            }
-        }
+		private int _UsedFuel;
+		public int UsedFuel
+		{
+			get { return this._UsedFuel; }
+			set
+			{
+				this._UsedFuel = value;
+				this.RaisePropertyChanged();
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #region UsedBull 변경통지 프로퍼티
+		#region UsedBull 변경통지 프로퍼티
 
-        private int _UsedBull;
-        public int UsedBull
-        {
-            get { return this._UsedBull; }
-            set
-            {
-                this._UsedBull = value;
-                this.RaisePropertyChanged();
-            }
-        }
+		private int _UsedBull;
+		public int UsedBull
+		{
+			get { return this._UsedBull; }
+			set
+			{
+				this._UsedBull = value;
+				this.RaisePropertyChanged();
+			}
+		}
 
-        #endregion
+		#endregion
+
+		#region UsedBauxite 변경통지 프로퍼티
+
+		private int _UsedBauxite;
+		public int UsedBauxite
+		{
+			get { return this._UsedBauxite; }
+			set
+			{
+				this._UsedBauxite= value;
+				this.RaisePropertyChanged();
+			}
+		}
+
+		#endregion
 
 		public event EventHandler Updated;
 		public event EventHandler Calculated;
@@ -366,12 +381,15 @@ namespace Grabacr07.KanColleWrapper.Models
 				partPercent.Add(new SecondResult { Hit = HitList[i], SecondEncounter = TotalSecond.Where(x => x.Hit == HitList[i]).Sum(y => y.SecondEncounter) });
 			}
 
-            if (ships.HasItems())
-            {
-                this.UsedFuel = ships.Sum(x => x.UsedFuel);
-                this.UsedBull = ships.Sum(x => x.UsedBull);
-            }
-            else this.UsedFuel = this.UsedBull = 0;
+			if (ships.HasItems())
+			{
+				this.UsedFuel = ships.Sum(x => x.UsedFuel);
+				this.UsedBull = ships.Sum(x => x.UsedBull);
+				this.UsedBauxite = ships.Sum(x =>
+					x.Slots.Sum(y => y.Lost * 5)
+				);
+			}
+			else this.UsedFuel = this.UsedBull = this.UsedBauxite = 0;
 
 			this.TotalLevel = ships.HasItems() ? ships.Sum(x => x.Level) : 0;
 			this.AverageLevel = ships.HasItems() ? (double)this.TotalLevel / ships.Length : 0.0;
@@ -380,11 +398,24 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.EncounterPercent = TotalSecond.Sum(x => x.SecondEncounter);
 			this.PartEncounterPercent = partPercent;
 			this.FirstEncounter = ships.Sum(s => s.CalcFirstEncounterPercent());
-			this.Speed = ships.All(x => x.Info.Speed == ShipSpeed.Fast)
-				? FleetSpeed.Fast
-				: ships.All(x => x.Info.Speed == ShipSpeed.Low)
-					? FleetSpeed.Low
-					: FleetSpeed.Hybrid;
+
+			{
+				if (ships.All(x => x.Speed == ShipSpeed.SuperFast)) // 최속으로만 구성
+					this.Speed = FleetSpeed.SuperFast;
+				else if (ships.All(x => x.Speed == ShipSpeed.FastPlus)) // 고속+로만 구성
+					this.Speed = FleetSpeed.FastPlus;
+				else if (ships.All(x => x.Speed == ShipSpeed.Fast)) // 고속으로만 구성
+					this.Speed = FleetSpeed.Fast;
+				else if (ships.All(x => x.Speed == ShipSpeed.Low)) // 저속으로만 구성
+					this.Speed = FleetSpeed.Low;
+
+				else if (!ships.Any(x => x.Speed == ShipSpeed.Fast || x.Speed == ShipSpeed.Low)) // 최속&고속+ 구성
+					this.Speed = FleetSpeed.Hybrid_FastPlus;
+				else if (!ships.Any(x => x.Speed == ShipSpeed.Low)) // 최속&고속+&고속 구성
+					this.Speed = FleetSpeed.Hybrid_Fast;
+				else
+					this.Speed = FleetSpeed.Hybrid_Low; // 저속 포함 구성
+			}
 
 			var logic = ViewRangeCalcLogic.Get(KanColleClient.Current.Settings.ViewRangeCalcType);
 			this.ViewRange = logic.Calc(this.source);
@@ -539,12 +570,12 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.Situation = state;
 			this.IsReady = ready;
 
-            this.RaisePropertyChanged(nameof(this.InShortSupply));
-            this.RaisePropertyChanged(nameof(this.HeavilyDamaged));
-            this.RaisePropertyChanged(nameof(this.Repairing));
-            this.RaisePropertyChanged(nameof(this.FlagshipIsRepairShip));
+			this.RaisePropertyChanged(nameof(this.InShortSupply));
+			this.RaisePropertyChanged(nameof(this.HeavilyDamaged));
+			this.RaisePropertyChanged(nameof(this.Repairing));
+			this.RaisePropertyChanged(nameof(this.FlagshipIsRepairShip));
 
-            this.Updated?.Invoke(this, new EventArgs());
+			this.Updated?.Invoke(this, new EventArgs());
 		}
 	}
 	public class SecondResult

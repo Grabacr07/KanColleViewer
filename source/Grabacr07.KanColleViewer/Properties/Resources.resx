@@ -468,4 +468,101 @@
   <data name="Akashi_NotificationMessage" xml:space="preserve">
     <value>明石が20分を修理しました。</value>
   </data>
+  <data name="Expedition_Conditions" xml:space="preserve">
+    <value>艦娘コンディション</value>
+  </data>
+  <data name="Expedition_ExpectRes" xml:space="preserve">
+    <value>予想資源 (成功/</value>
+  </data>
+  <data name="Expedition_ExpectResGreat" xml:space="preserve">
+    <value>大成功</value>
+  </data>
+  <data name="Expedition_Expect_Ammo" xml:space="preserve">
+    <value>弾薬:</value>
+  </data>
+  <data name="Expedition_Expect_Bauxite" xml:space="preserve">
+    <value>ボーキサイト:</value>
+  </data>
+  <data name="Expedition_Expect_Fuel" xml:space="preserve">
+    <value>燃料:</value>
+  </data>
+  <data name="Expedition_Expect_Steel" xml:space="preserve">
+    <value>鋼材:</value>
+  </data>
+  <data name="Expedition_GreatSuccessNo" xml:space="preserve">
+    <value>大成功不可</value>
+  </data>
+  <data name="Expedition_NoSupply" xml:space="preserve">
+    <value>補給なし</value>
+  </data>
+  <data name="Expedition_OnHomeport" xml:space="preserve">
+    <value>母港で待機中です。</value>
+  </data>
+  <data name="Expedition_OnSortie" xml:space="preserve">
+    <value>出撃中です。</value>
+  </data>
+  <data name="Expedition_OrganizeNo" xml:space="preserve">
+    <value>編成問題</value>
+  </data>
+  <data name="Expedition_OrganizeOK" xml:space="preserve">
+    <value>編成完了</value>
+  </data>
+  <data name="Expedition_Returned" xml:space="preserve">
+    <value>遠征から戻りました。</value>
+  </data>
+  <data name="Fleets_Ammo" xml:space="preserve">
+    <value>弾薬</value>
+  </data>
+  <data name="Fleets_Bauxite" xml:space="preserve">
+    <value>ボーキサイト</value>
+  </data>
+  <data name="Fleets_ConditionTo" xml:space="preserve">
+    <value>疲労回復まで:</value>
+  </data>
+  <data name="Fleets_Eva" xml:space="preserve">
+    <value>退避完了</value>
+  </data>
+  <data name="Fleets_Fuel" xml:space="preserve">
+    <value>燃料</value>
+  </data>
+  <data name="Fleets_InRepair" xml:space="preserve">
+    <value>入渠中</value>
+  </data>
+  <data name="Fleets_Supplys" xml:space="preserve">
+    <value>補給量:</value>
+  </data>
+  <data name="Shipyard" xml:space="preserve">
+    <value>工廠</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>ツール</value>
+  </data>
+  <data name="Fleets_Condition" xml:space="preserve">
+    <value>疲労度</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="icon_ammo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_ammo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_bauxite" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_bauxite.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_construction" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_construction.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_development" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_development.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_fuel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_fuel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_improvement" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_improvement.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_repair" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_repair.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_steel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_steel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

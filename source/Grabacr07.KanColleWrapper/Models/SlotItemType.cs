@@ -4,6 +4,7 @@ namespace Grabacr07.KanColleWrapper.Models
 {
 	public enum SlotItemType
 	{
+		None = 0,
 		小口径主砲 = 1,
 		中口径主砲 = 2,
 		大口径主砲 = 3,
@@ -52,6 +53,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		特型内火艇 = 46,
 		陸上攻撃機 = 47,
 		局地戦闘機 = 48,
+		噴式戦闘機 = 56,
+		噴式戦闘爆撃機 = 57,
+		噴式攻撃機 = 58,
+		噴式偵察機 = 59,
 		大型電探_II = 93,
 		艦上偵察機_II = 94,
 	}
@@ -73,6 +78,12 @@ namespace Grabacr07.KanColleWrapper.Models
 				case SlotItemType.オートジャイロ:
 				case SlotItemType.対潜哨戒機:
 				case SlotItemType.大型飛行艇:
+				case SlotItemType.陸上攻撃機:
+				case SlotItemType.局地戦闘機:
+				case SlotItemType.噴式戦闘機:
+				case SlotItemType.噴式戦闘爆撃機:
+				case SlotItemType.噴式攻撃機:
+				case SlotItemType.噴式偵察機:
 					return true;
 
 				default:

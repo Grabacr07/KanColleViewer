@@ -12,10 +12,12 @@
 			 xmlns:metro2="clr-namespace:MetroTrilithon.UI.Controls;assembly=MetroTrilithon.Desktop"
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
 			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
 			 xmlns:converters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters"
 			 xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
+			 xmlns:contentsvm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 xmlns:fleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 			 xmlns:wrapper="clr-namespace:Grabacr07.KanColleWrapper.Models;assembly=KanColleWrapper"
 			 Name="RootView"
@@ -28,7 +30,7 @@
 		<kcvv:HasFlagConverter x:Key="HasFlagConverter" />
 		<converters:RangeToBooleanConverter x:Key="RangeToBooleanConverter" />
 
-		<DataTemplate x:Key="ShipViewKey">
+		<DataTemplate x:Key="ShipViewKey" DataType="{x:Type contentsvm:ShipViewModel}">
 			<StackPanel>
 				<StackPanel.Resources>
 					<Style TargetType="{x:Type TextBlock}"
@@ -69,7 +71,6 @@
 								FontSize="22"
 								Style="{DynamicResource EmphaticTextElementStyleKey}" />
 					</TextBlock>
-
 					<TextBlock Grid.Column="2"
 								Grid.Row="0"
 								Grid.RowSpan="2"
@@ -104,6 +105,9 @@
 								<LineBreak />
 								<Run Text="남은 경험치:" />
 								<Run Text="{Binding Ship.ExpForNextRemodelingLevel, Mode=OneWay}" />
+								<LineBreak />
+								<Run Text="누적 경험치:" />
+								<Run Text="{Binding Ship.Exp, Mode=OneWay}" />
 							</TextBlock>
 						</TextBlock.ToolTip>
 					</TextBlock>
@@ -135,7 +139,6 @@
 											VerticalAlignment="Bottom"
 											Margin="10,0,10,2"
 											LimitedValue="{Binding Ship.HP, Mode=OneWay}" />
-
 					<Grid x:Name="RepairIndicator"
 							Grid.Column="4"
 							Grid.Row="0"
@@ -144,11 +147,10 @@
 						<Border Background="{DynamicResource FleetRepairingBrushKey}"
 								Opacity=".4"
 								Margin="5,0" />
-						<TextBlock Text="입거중"
+						<TextBlock Text="{Binding Resources.Fleets_InRepair, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									Style="{DynamicResource EmphaticTextStyleKey}"
 									HorizontalAlignment="Center" />
 					</Grid>
-
 					<Grid x:Name="EvacuationIndicator"
 							Grid.Column="4"
 							Grid.Row="0"
@@ -157,7 +159,7 @@
 						<Border Background="{DynamicResource FleetRepairingBrushKey}"
 								Opacity=".4"
 								Margin="5,0" />
-						<TextBlock Text="퇴피완료"
+						<TextBlock Text="{Binding Resources.Fleets_Eva, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									Style="{DynamicResource EmphaticTextStyleKey}"
 									HorizontalAlignment="Center" />
 					</Grid>
@@ -172,13 +174,13 @@
 						<Run Text="{Binding Ship.Condition, Mode=OneWay}"
 								Style="{DynamicResource EmphaticTextElementStyleKey}" />
 						<LineBreak />
-						<Run Text="컨디션"
+						<Run Text="{Binding Resources.Fleets_Condition, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 								FontSize="9" />
 
 						<TextBlock.ToolTip>
 							<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
 										Foreground="White">
-								<Run Text="피로회복까지:" />
+								<Run Text="{Binding Resources.Fleets_ConditionTo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 								<Run Text="{Binding Condition.ConditionText, Mode=OneWay}" />
 							</TextBlock>
 						</TextBlock.ToolTip>
@@ -200,11 +202,11 @@
 						<StackPanel.ToolTip>
 							<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
 										Foreground="White">
-								<Run Text="연료:" />
+								<Run Text="{Binding Resources.Expedition_Except_Fuel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 								<Run Text="{Binding Ship.Fuel.Current, Mode=OneWay}" /><Run Text="/" /><Run Text="{Binding Ship.Fuel.Maximum, Mode=OneWay}" />
 								<Run Text="{Binding Ship.UsedFuel, Mode=OneWay, StringFormat={}({0} 소모)}" Foreground="Crimson"/>
 								<LineBreak />
-								<Run Text="탄약:" />
+								<Run Text="{Binding Resources.Expedition_Except_Ammo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 								<Run Text="{Binding Ship.Bull.Current, Mode=OneWay}" /><Run Text="/" /><Run Text="{Binding Ship.Bull.Maximum, Mode=OneWay}" />
 								<Run Text="{Binding Ship.UsedBull, Mode=OneWay, StringFormat={}({0} 소모)}" Foreground="Crimson"/>
 							</TextBlock>
@@ -225,10 +227,11 @@
 						<ItemsControl.ItemTemplate>
 							<DataTemplate>
 								<Grid x:Name="Elements"
-										ToolTip="{Binding Item.NameWithLevel}"
-										Background="Transparent">
-									<kcvc:SlotItemIcon Type="{Binding Item.Info.IconType}"
-														Margin="3,0" />
+									  ToolTip="{Binding Tooltip}"
+									  Background="Transparent">
+									<kcvc:SlotItemIcon x:Name="ItemIcon"
+													   Type="{Binding Item.Info.IconType}"
+													   Margin="3,0" />
 
 									<TextBlock x:Name="LostCount"
 											   Background="#66000000"
@@ -245,6 +248,10 @@
 											<Style TargetType="TextBlock">
 												<Setter Property="Foreground" Value="#FFDD3535" />
 												<Style.Triggers>
+													<DataTrigger Binding="{Binding Lost}" Value="0">
+														<Setter Property="Foreground" Value="#FFFFFFFF" />
+													</DataTrigger>
+													
 													<DataTrigger Binding="{Binding DataContext.ShowLostAirplane, ElementName=RootView}" Value="False">
 														<Setter Property="Text" Value="{Binding Current, Mode=OneWay}" />
 													</DataTrigger>
@@ -252,11 +259,9 @@
 														<Setter Property="Text" Value="{Binding Lost, Mode=OneWay, StringFormat={}-{0}}" />
 													</DataTrigger>
 
-													<DataTrigger Binding="{Binding Lost}" Value="0">
-														<Setter Property="Foreground" Value="#FFFFFFFF" />
-													</DataTrigger>
 													<MultiDataTrigger>
 														<MultiDataTrigger.Conditions>
+															<Condition Binding="{Binding DataContext.ShowAirplaneAlways, ElementName=RootView}" Value="False" />
 															<Condition Binding="{Binding DataContext.ShowLostAirplane, ElementName=RootView}" Value="True" />
 															<Condition Binding="{Binding Lost}" Value="0" />
 														</MultiDataTrigger.Conditions>
@@ -264,6 +269,55 @@
 															<Setter Property="Visibility" Value="Collapsed" />
 														</MultiDataTrigger.Setters>
 													</MultiDataTrigger>
+													<MultiDataTrigger>
+														<MultiDataTrigger.Conditions>
+															<Condition Binding="{Binding DataContext.ShowAirplaneAlways, ElementName=RootView}" Value="False" />
+															<Condition Binding="{Binding DataContext.ShowLostAirplane, ElementName=RootView}" Value="False" />
+															<Condition Binding="{Binding IsAirplane}" Value="False" />
+														</MultiDataTrigger.Conditions>
+														<MultiDataTrigger.Setters>
+															<Setter Property="Visibility" Value="Collapsed" />
+														</MultiDataTrigger.Setters>
+													</MultiDataTrigger>
+
+													<!-- 함재기 항상 표시인 경우 (반투명으로) -->
+													<MultiDataTrigger>
+														<MultiDataTrigger.Conditions>
+															<Condition Binding="{Binding DataContext.ShowAirplaneAlways, ElementName=RootView}" Value="True" />
+															<Condition Binding="{Binding IsAirplane}" Value="False" />
+														</MultiDataTrigger.Conditions>
+														<MultiDataTrigger.Setters>
+															<Setter Property="Visibility" Value="Visible" />
+															<Setter Property="Foreground" Value="#80DD3535" />
+															<Setter Property="Background" Value="#33000000" />
+														</MultiDataTrigger.Setters>
+													</MultiDataTrigger>
+													<MultiDataTrigger>
+														<MultiDataTrigger.Conditions>
+															<Condition Binding="{Binding DataContext.ShowAirplaneAlways, ElementName=RootView}" Value="True" />
+															<Condition Binding="{Binding DataContext.ShowLostAirplane, ElementName=RootView}" Value="False" />
+															<Condition Binding="{Binding IsAirplane}" Value="False" />
+															<Condition Binding="{Binding Lost}" Value="0" />
+														</MultiDataTrigger.Conditions>
+														<MultiDataTrigger.Setters>
+															<Setter Property="Foreground" Value="#80FFFFFF" />
+														</MultiDataTrigger.Setters>
+													</MultiDataTrigger>
+													<MultiDataTrigger>
+														<MultiDataTrigger.Conditions>
+															<Condition Binding="{Binding DataContext.ShowAirplaneAlways, ElementName=RootView}" Value="True" />
+															<Condition Binding="{Binding DataContext.ShowLostAirplane, ElementName=RootView}" Value="True" />
+															<Condition Binding="{Binding Lost}" Value="0" />
+														</MultiDataTrigger.Conditions>
+														<MultiDataTrigger.Setters>
+															<Setter Property="Visibility" Value="Collapsed" />
+														</MultiDataTrigger.Setters>
+													</MultiDataTrigger>
+
+													<!-- Maximum==0 이면 무조건 안보이게 -->
+													<DataTrigger Binding="{Binding Maximum}" Value="0">
+														<Setter Property="Visibility" Value="Collapsed" />
+													</DataTrigger>
 												</Style.Triggers>
 											</Style>
 										</TextBlock.Style>
@@ -332,11 +386,48 @@
 									<DataTrigger Binding="{Binding Equipped}" Value="False">
 										<Setter TargetName="Elements" Property="Visibility" Value="Collapsed" />
 									</DataTrigger>
+
+									<DataTrigger Binding="{Binding DataContext.ShowAirplaneAlways, ElementName=RootView}" Value="True">
+										<Setter TargetName="Elements" Property="Visibility" Value="Visible" />
+									</DataTrigger>
+									<MultiDataTrigger>
+										<MultiDataTrigger.Conditions>
+											<Condition Binding="{Binding DataContext.ShowAirplaneAlways, ElementName=RootView}" Value="True" />
+											<Condition Binding="{Binding Equipped}" Value="False" />
+										</MultiDataTrigger.Conditions>
+										<MultiDataTrigger.Setters>
+											<Setter TargetName="ItemIcon" Property="Visibility" Value="Hidden" />
+										</MultiDataTrigger.Setters>
+									</MultiDataTrigger>
+									<MultiDataTrigger>
+										<MultiDataTrigger.Conditions>
+											<Condition Binding="{Binding DataContext.ShowAirplaneAlways, ElementName=RootView}" Value="True" />
+											<Condition Binding="{Binding Equipped}" Value="False" />
+											<Condition Binding="{Binding Maximum}" Value="0" />
+										</MultiDataTrigger.Conditions>
+										<MultiDataTrigger.Setters>
+											<Setter TargetName="Elements" Property="Visibility" Value="Collapsed" />
+										</MultiDataTrigger.Setters>
+									</MultiDataTrigger>
+
 									<DataTrigger Binding="{Binding Item.LevelText}" Value="">
 										<Setter TargetName="ItemLevelBlock" Property="Visibility" Value="Collapsed" />
 									</DataTrigger>
 									<DataTrigger Binding="{Binding Item.Proficiency}" Value="0">
 										<Setter TargetName="ItemProficiencyBlock" Property="Visibility" Value="Collapsed" />
+									</DataTrigger>
+									
+									<DataTrigger Binding="{Binding FitValue}" Value="-2">
+										<Setter TargetName="Elements" Property="Background" Value="#34C22222" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding FitValue}" Value="-1">
+										<Setter TargetName="Elements" Property="Background" Value="#34c88232" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding FitValue}" Value="1">
+										<Setter TargetName="Elements" Property="Background" Value="#345887AB" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding FitValue}" Value="2">
+										<Setter TargetName="Elements" Property="Background" Value="#3440c840" />
 									</DataTrigger>
 								</DataTemplate.Triggers>
 							</DataTemplate>
@@ -423,6 +514,7 @@
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition />
 				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
 			</Grid.ColumnDefinitions>
 
 			<ListBox ItemsSource="{Binding Fleets2}"
@@ -451,10 +543,18 @@
 										   Margin="10,3" />
 
 			<metro2:CallMethodButton Grid.Row="0"
-									 Grid.RowSpan="2"
 									 Grid.Column="1"
+									 Grid.RowSpan="2"
+									 Content="함대 프리셋"
+									 Margin="0,0,4,3"
+									 Padding="12,8"
+									 MethodName="ShowPresetWindow" />
+
+			<metro2:CallMethodButton Grid.Row="0"
+									 Grid.Column="2"
+									 Grid.RowSpan="2"
 									 Content="상세정보"
-									 Margin="0,0,10,3"
+									 Margin="0,0,4,3"
 									 Padding="12,8"
 									 MethodName="ShowFleetWindow" />
 
@@ -463,10 +563,13 @@
 					   Margin="18,3"
 					   VerticalAlignment="Center"
 					   HorizontalAlignment="Right">
-				<Run Text="보급량:" />
-				<Run Text="연료 " /><Run Text="{Binding SelectedFleet.UsedFuel, Mode=OneWay}" />
-				<Run Text="탄약 " /><Run Text="{Binding SelectedFleet.UsedAmmo, Mode=OneWay}" />
-				<Run Text="보크사이트 " /><Run Text="{Binding SelectedFleet.UsedBauxite, Mode=OneWay}" />
+				<Run Text="{Binding Resources.Fleets_Supplys, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+				<Run Text="{Binding Resources.Fleets_Fuel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+				<Run Text="{Binding SelectedFleet.UsedFuel, Mode=OneWay}" />
+				<Run Text="{Binding Resources.Fleets_Ammo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+				<Run Text="{Binding SelectedFleet.UsedAmmo, Mode=OneWay}" />
+				<Run Text="{Binding Resources.Fleets_Bauxite, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+				<Run Text="{Binding SelectedFleet.UsedBauxite, Mode=OneWay}" />
 			</TextBlock>
 			
 			<Grid Grid.Row="3"
@@ -593,7 +696,8 @@
 										  Margin="0,0,0,-1">
 								<ItemsControl.ItemTemplate>
 									<DataTemplate>
-										<Border BorderThickness="0,0,0,1"
+										<Border Margin="0,0,0,4"
+												BorderThickness="0,0,0,1"
 												BorderBrush="{DynamicResource BorderBrushKey}">
 											<DockPanel LastChildFill="True">
 												<Border Background="{DynamicResource BorderBrushKey}"

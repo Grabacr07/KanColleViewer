@@ -7,12 +7,12 @@ using System.Windows.Controls;
 namespace Grabacr07.KanColleViewer.Views
 {
 	/// <summary>
-	/// Web ブラウザーを表示するためのサブ ウィンドウを表します。
+	/// Web 브라우저를 표시하기 위한 서브 윈도우를 정의합니다.
 	/// </summary>
 	partial class BrowserWindow
 	{
 		/// <summary>
-		/// このウィンドウにホストされている <see cref="System.Windows.Controls.WebBrowser"/> オブジェクトを取得します。
+		/// 이 윈도우에 호스트되어있는 <see cref="System.Windows.Controls.WebBrowser"/> 객체를 반환합니다.
 		/// </summary>
 		public WebBrowser WebBrowser => this.webBrowser;
 

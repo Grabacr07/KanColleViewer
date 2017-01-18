@@ -19,6 +19,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		public ShipCatalogSortWorker SortWorker { get; private set; }
 		public ShipDamagedFilter ShipDamagedFilter { get; }
+
 		#region Ships 変更通知プロパティ
 
 		private IReadOnlyCollection<ShipViewModel> _Ships;

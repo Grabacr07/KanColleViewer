@@ -1033,7 +1033,8 @@
 													  Margin="0,0,0,-1">
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
-													<Border BorderThickness="0,0,0,1"
+													<Border Margin="0,0,0,4"
+															BorderThickness="0,0,0,1"
 															BorderBrush="{DynamicResource BorderBrushKey}">
 														<DockPanel LastChildFill="True">
 															<Border Background="{DynamicResource BorderBrushKey}"

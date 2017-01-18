@@ -15,11 +15,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		public FleetState Source { get; }
 
 		public string AverageLevel => this.Source.AverageLevel.ToString("#0.##");
-
 		public string TotalLevel => this.Source.TotalLevel.ToString("###0");
 
 		public string MinAirSuperiorityPotential => this.Source.MinAirSuperiorityPotential.ToString("##0");
-
 		public string MaxAirSuperiorityPotential => this.Source.MaxAirSuperiorityPotential.ToString("##0");
 
 		public string EncounterPercent => this.Source.EncounterPercent.ToString("##0.##%");
@@ -46,12 +44,24 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			{
 				switch (this.Source.Speed)
 				{
+					case FleetSpeed.SuperFast:
+						return "초고속함대";
+					case FleetSpeed.FastPlus:
+						return "고속+함대";
 					case FleetSpeed.Fast:
 						return Resources.Fleets_Speed_Fast;
 					case FleetSpeed.Low:
 						return Resources.Fleets_Speed_Slow;
+
+					case FleetSpeed.Hybrid_FastPlus:
+						return "고속+혼성함대";
+					case FleetSpeed.Hybrid_Fast:
+						return "고속혼성함대";
+					case FleetSpeed.Hybrid_Low:
+						return "저속혼성함대";
+
 					default:
-						return "속도혼성함대";
+						return "알수없음";
 				}
 			}
 		}

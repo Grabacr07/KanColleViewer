@@ -63,6 +63,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			}
 		}
 		#endregion
+
 		public KanColleWindowSettings Settings { get; }
 
 		public OverviewViewModel(InformationViewModel owner)
