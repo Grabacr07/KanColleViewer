@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -289,9 +289,12 @@ namespace Grabacr07.KanColleWrapper.Models
 				case SlotItemType.大型飛行艇:
 				case SlotItemType.大型探照灯:
 				case SlotItemType.水上戦闘機:
+				case SlotItemType.噴式戦闘機: // 未実装なのでﾃｷﾄｰ
+				case SlotItemType.噴式戦闘爆撃機:
 					return 0.6;
 
 				case SlotItemType.艦上攻撃機:
+				case SlotItemType.噴式攻撃機: // 未実装なのでﾃｷﾄｰ
 					return 0.8;
 
 				case SlotItemType.艦上偵察機:
@@ -302,6 +305,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					return 1.1;
 
 				case SlotItemType.水上偵察機:
+				case SlotItemType.噴式偵察機: // 未実装なのでﾃｷﾄｰ
 					return 1.2;
 
 				default:
