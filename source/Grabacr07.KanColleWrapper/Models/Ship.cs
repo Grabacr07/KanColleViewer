@@ -1,7 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models.Raw;
 
@@ -300,6 +299,11 @@ namespace Grabacr07.KanColleWrapper.Models
 		}
 
 		#endregion
+
+		/// <summary>
+		/// 装備によるボーナスを含めた艦の速力を取得します。
+		/// </summary>
+		public ShipSpeed Speed => ShipSpeedConverter.FromInt32(this.RawData.api_soku);
 
 		/// <summary>
 		/// 装備によるボーナスを含めた索敵ステータス値を取得します。
