@@ -50,12 +50,19 @@ namespace Grabacr07.KanColleViewer.Models
 
 		public void Notify(INotification notify)
 		{
-			if (this.notifier == null)
+			if (System.Windows.Application.Current.Dispatcher.CheckAccess())
 			{
-				this.notifier = PluginService.Current.GetNotifier();
-			}
+				if (this.notifier == null)
+				{
+					this.notifier = PluginService.Current.GetNotifier();
+				}
 
-			this.notifier.Notify(notify);
+				this.notifier.Notify(notify);
+			}
+			else
+			{
+				System.Windows.Application.Current.Dispatcher.BeginInvoke(new System.Action(() => this.Notify(notify)));
+			}
 		}
 
 		public INotification CreateTest(string header = "テスト通知", string body = "これは「提督業も忙しい！」のテスト通知です。", Action activated = null, Action<Exception> failed = null)
