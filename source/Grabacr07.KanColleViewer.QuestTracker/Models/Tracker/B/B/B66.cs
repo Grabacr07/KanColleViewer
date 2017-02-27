@@ -14,7 +14,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 	/// </summary>
 	internal class B66 : ITracker
 	{
-		private readonly int max_count = 3;
+		private readonly int max_count = 1;
 		private int count;
 
 		public event EventHandler ProcessChanged;

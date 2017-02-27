@@ -54,25 +54,60 @@ namespace Grabacr07.KanColleViewer.Models
 				.Where(x => itemtable.Contains(x.Info.Id));
 
 			var kinu_kai_ni = this.Ships?.Count(x => x.Ship.Info.Id == 487) ?? 0; // 키누改2
+			var daihatsu = items.Count(x => x.Info.Id == 68); // 대발동정
+			var tokudaihatsu = items.Count(x => x.Info.Id == 193); // 특대발동정
 
-			decimal correction = 0.0m, max, levelAvrg;
-
-			// 20% + (특대발 갯수 x 2%) 만큼 보정치 제한 확장, 확장량 5% 한계
-			max = 20 + Math.Min(5, items.Count(x => x.Info.Id == 193) * 2);
+			/// correction_A: 대발계 보정
+			/// correction_B: 특대발 보정
+			decimal correction_A = 0.0m, correction_B = 0.0m, levelAvrg;
 
 			levelAvrg = items.Count() == 0 ? 0
 				: (decimal)items.Average(x => x.Level); // 대발계 장비 개수 평균치
 
-			correction += kinu_kai_ni * 5; // 키누改2 는 대발동정처럼 작동한다?
-			correction += items.Where(x => x.Info.Id == 68).Sum(x => 5);  // 大発動艇 (대발동정)
-			correction += items.Where(x => x.Info.Id == 166).Sum(x => 2); // 大発動艇(八九式中戦車＆陸戦隊) (중전차)
-			correction += items.Where(x => x.Info.Id == 167).Sum(x => 1); // 特二式内火艇 (내화정)
-			correction += items.Where(x => x.Info.Id == 193).Sum(x => 7); // 特大発動艇 (특대발동정)
+			#region 대발계 보정 계산
+			correction_A += kinu_kai_ni * 5; // 키누改2 는 대발동정처럼 작동한다?
+			correction_A += items.Where(x => x.Info.Id == 68).Sum(x => 5);  // 大発動艇 (대발동정)
+			correction_A += items.Where(x => x.Info.Id == 193).Sum(x => 5); // 特大発動艇 (특대발동정)
+			correction_A += items.Where(x => x.Info.Id == 166).Sum(x => 2); // 大発動艇(八九式中戦車＆陸戦隊) (중전차)
+			correction_A += items.Where(x => x.Info.Id == 167).Sum(x => 1); // 特二式内火艇 (내화정)
+			correction_A = Math.Min(correction_A, 20) / 100.0m;
+			#endregion
 
-			correction = Math.Min(correction, max); // 보정치 제한
-			correction /= 100.0m;
+			#region 특대발 보정 계산
+			if (tokudaihatsu <= 2)
+				correction_B = 0.02m * tokudaihatsu;
+			else if (tokudaihatsu == 3)
+			{
+				if (daihatsu == 0)
+					correction_B = 0.05m;
+				else if (daihatsu == 1)
+					correction_B = 0.05m;
+				else if (daihatsu == 2)
+					correction_B = 0.052m;
+				else if (daihatsu == 3)
+					correction_B = 0.054m;
+				else
+					correction_B = 0.054m;
+			}
+			else
+			{
+				if (daihatsu == 0)
+					correction_B = 0.054m;
+				else if (daihatsu == 1)
+					correction_B = 0.056m;
+				else if (daihatsu == 2)
+					correction_B = 0.058m;
+				else if (daihatsu == 3)
+					correction_B = 0.059m;
+				else
+					correction_B = 0.06m;
+			}
+			#endregion
 
-			return decimal.Floor(value * (1.0m + correction + (0.01m * correction * levelAvrg)) * additional);
+			return decimal.Floor(
+				(value * (1.0m + correction_A + (0.01m * correction_A * levelAvrg)) * additional)
+				+ (value * correction_B * additional)
+			);
 		}
 
 		public ExpeditionResultData(int expeditionId, ShipViewModel[] Ships)
