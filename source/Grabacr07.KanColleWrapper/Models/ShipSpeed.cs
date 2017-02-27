@@ -1,8 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
@@ -19,7 +17,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 低速。
 		/// </summary>
-		Low = 5,
+		Slow = 5,
 
 		/// <summary>
 		/// 高速。
@@ -35,5 +33,31 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 最速。
 		/// </summary>
 		SuperFast = 20,
+	}
+
+	public static class ShipSpeedConverter
+	{
+		// ReSharper disable once InconsistentNaming
+		public static ShipSpeed FromInt32(int api_soku)
+		{
+			if (api_soku > 15)
+			{
+				return ShipSpeed.Fastest;
+			}
+			if (api_soku > 10)
+			{
+				return ShipSpeed.Faster;
+			}
+			if (api_soku > 5)
+			{
+				return ShipSpeed.Fast;
+			}
+			if (api_soku > 0)
+			{
+				return ShipSpeed.Slow;
+			}
+
+			return ShipSpeed.Immovable;
+		}
 	}
 }

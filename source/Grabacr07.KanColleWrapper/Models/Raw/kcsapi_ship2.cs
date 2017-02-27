@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -30,6 +30,7 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public int[] api_karyoku { get; set; }
 		public int[] api_raisou { get; set; }
 		public int[] api_taiku { get; set; }
+		public int api_soku { get; set; }
 		public int[] api_soukou { get; set; }
 		public int[] api_kaihi { get; set; }
 		public int[] api_taisen { get; set; }

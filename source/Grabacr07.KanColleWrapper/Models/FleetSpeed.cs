@@ -1,11 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
-	public enum FleetSpeed
+	/// <summary>
+	/// 艦隊の速度を表します。
+	/// </summary>
+	public class FleetSpeed
 	{
 		SuperFast,
 		FastPlus,
@@ -24,5 +26,19 @@ namespace Grabacr07.KanColleWrapper.Models
 			return (speed == FleetSpeed.Low || speed == FleetSpeed.Hybrid_Low)
 				? false : true;
 		}
+
+		// Original branch added
+		/*
+		private readonly ShipSpeed[] speeds;
+
+		public ShipSpeed? Min => this.speeds.Cast<ShipSpeed?>().Min();
+		public ShipSpeed? Max => this.speeds.Cast<ShipSpeed?>().Max();
+		public bool IsMixed => this.speeds.Distinct().Count() > 1;
+
+		public FleetSpeed(ShipSpeed[] speeds)
+		{
+			this.speeds = speeds;
+		}
+		*/
 	}
 }

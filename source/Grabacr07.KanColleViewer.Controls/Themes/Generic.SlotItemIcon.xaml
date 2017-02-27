@@ -821,7 +821,7 @@
 				</Setter>
 			</Trigger>
 			<Trigger Property="Type"
-					 Value="JetbombFighter_A">
+					 Value="JetPowerededBomber1">
 				<Setter Property="Template">
 					<Setter.Value>
 						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
@@ -852,7 +852,7 @@
 				</Setter>
 			</Trigger>
 			<Trigger Property="Type"
-					 Value="JetbombFighter_B">
+					 Value="JetPowerededBomber2">
 				<Setter Property="Template">
 					<Setter.Value>
 						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
