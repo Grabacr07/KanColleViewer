@@ -117,6 +117,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				{ SlotItemIconType.LandBasedFighter, "국지전투기" },
 				{ SlotItemIconType.JetPowerededBomber1, "분식폭격전투기" },
 				{ SlotItemIconType.JetPowerededBomber2, "분식폭격전투기" },
+				{ SlotItemIconType.TransportEquipment, "운송자재" },
+				{ SlotItemIconType.SubmarineEquipment, "잠수함장비" },
 			};
 			SlotItemEquipTypeViewModel.IconAliasNamable = new Dictionary<SlotItemIconType, SlotItemIconType>
 			{
