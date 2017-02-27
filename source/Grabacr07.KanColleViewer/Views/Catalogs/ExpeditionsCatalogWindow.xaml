@@ -75,10 +75,7 @@
 						Orientation="Horizontal"
 						VerticalAlignment="Top"
 						WindowChrome.IsHitTestVisibleInChrome="True">
-                <metro:CaptionButton IsChecked="{Binding Settings.TopMost.Value, Mode=TwoWay}"
-									 ToolTip="{Binding Resources.Settings_Window_TopMost, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-									 Style="{DynamicResource PinButtonStyleKey}" />
-                <metro:SystemButtons />
+				<metro:SystemButtons />
             </StackPanel>
 
             <TextBlock Text="{Binding Title}"

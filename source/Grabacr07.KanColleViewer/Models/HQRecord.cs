@@ -85,7 +85,6 @@ namespace Grabacr07.KanColleViewer.Models
 		/// </summary>
 		public void Save()
 		{
-			
 			string path = Path.Combine(
 				Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location),
 				"Record"

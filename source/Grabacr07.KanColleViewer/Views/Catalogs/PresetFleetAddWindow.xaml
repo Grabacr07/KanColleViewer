@@ -1,0 +1,124 @@
+﻿<metro:MetroWindow x:Class="Grabacr07.KanColleViewer.Views.Catalogs.PresetFleetAddWindow"
+				   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+				   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+				   xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+				   xmlns:local="clr-namespace:Grabacr07.KanColleViewer.Views.Catalogs"
+				   xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Catalogs"
+				   xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+				   xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+				   xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+				   xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
+				   xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Controls;assembly=KanColleViewer.Controls"
+				   xmlns:metro2="clr-namespace:MetroTrilithon.UI.Controls;assembly=MetroTrilithon.Desktop"
+				   mc:Ignorable="d" 
+				   Title="프리셋 추가"
+				   FontSize="12"
+				   Width="320"
+				   Height="192"
+				   Background="{DynamicResource ThemeBrushKey}"
+				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+				   d:DataContext="{d:DesignInstance vm:PresetFleetAddWindowViewModel}"
+				   Style="{DynamicResource MetroDialogStyleKey}"
+				   WindowStartupLocation="CenterScreen">
+	<metro:MetroWindow.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Styles/Controls.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Styles/Icons.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Themes/Dark.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Themes/Accents/Blue.xaml" />
+
+				<ResourceDictionary Source="pack://application:,,,/MetroTrilithon.Desktop;component/Styles/Controls.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/KanColleViewer.Controls;component/Styles/Colors.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/KanColleViewer.Controls;component/Styles/Controls.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/KanColleViewer;component/Styles/Controls.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+
+			<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+		</ResourceDictionary>
+	</metro:MetroWindow.Resources>
+
+	<i:Interaction.Triggers>
+		<l:InteractionMessageTrigger MessageKey="Close" Messenger="{Binding Messenger}">
+			<l:WindowInteractionMessageAction InvokeActionOnlyWhenWindowIsActive="False" />
+		</l:InteractionMessageTrigger>
+	</i:Interaction.Triggers>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<Grid Grid.Row="0" Margin="10,5">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+			<TextBlock Grid.Column="0"
+					   Text="프리셋 이름:"
+					   HorizontalAlignment="Left"
+					   Style="{StaticResource DefaultTextStyleKey}"/>
+			<TextBox Grid.Column="1"
+					 Margin="10,0,0,0"
+					 Padding="2"
+					 Text="{Binding FleetName}"
+					 Background="{DynamicResource ActiveBackgroundBrushKey}"
+					 Foreground="White"/>
+		</Grid>
+
+		<Grid Grid.Row="1"
+			  Margin="6"
+			  VerticalAlignment="Bottom">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+
+			<metro2:CallMethodButton Grid.Column="0"
+									 Grid.Row="0"
+									 Margin="2"
+									 Padding="3,8"
+									 Content="제1함대"
+									 MethodName="AddByFleet"
+									 MethodParameter="1"/>
+			<metro2:CallMethodButton Grid.Column="1"
+									 Grid.Row="0"
+									 Margin="2"
+									 Padding="3,8"
+									 Content="제2함대"
+									 MethodName="AddByFleet"
+									 MethodParameter="2"/>
+			<metro2:CallMethodButton Grid.Column="0"
+									 Grid.Row="1"
+									 Margin="2"
+									 Padding="3,8"
+									 Content="제3함대"
+									 MethodName="AddByFleet"
+									 MethodParameter="3"/>
+			<metro2:CallMethodButton Grid.Column="1"
+									 Grid.Row="1"
+									 Margin="2"
+									 Padding="3,8"
+									 Content="제4함대"
+									 MethodName="AddByFleet"
+									 MethodParameter="4"/>
+		</Grid>
+
+		<Grid Grid.Row="2">
+			<metro2:CallMethodButton Grid.Column="1"
+									 HorizontalAlignment="Right"
+									 Content="취소"
+									 Margin="8,2,8,8"
+									 Padding="20,5"
+									 MethodName="Cancel" />
+		</Grid>
+	</Grid>
+</metro:MetroWindow>

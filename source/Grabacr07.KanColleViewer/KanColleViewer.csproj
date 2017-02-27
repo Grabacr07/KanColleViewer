@@ -100,7 +100,7 @@
     </Reference>
     <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
+    </Reference> 
     <Reference Include="Nekoxy, Version=1.5.2.20, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Nekoxy.1.5.2.20\lib\net45\Nekoxy.dll</HintPath>
       <Private>True</Private>
@@ -212,10 +212,14 @@
     <Compile Include="ViewModels\Catalogs\ExpeditionsCatalogWindowViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\NeedNdockShipCatalogWindowViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\NotePadViewModel.cs" />
+    <Compile Include="ViewModels\Catalogs\PresetFleetAddWindowViewModel.cs" />
+    <Compile Include="ViewModels\Catalogs\PresetFleetWindowViewModel.cs" />
+    <Compile Include="ViewModels\Catalogs\PresetFleetDeleteWindowViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\RemodelListWindowViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ResourceLogViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\SlotItemEquipTypeViewModel.cs" />
     <Compile Include="ViewModels\Composition\LoadFailedPluginViewModel.cs" />
+    <Compile Include="ViewModels\Contents\Fleets\FleetShipViewModel.cs" />
     <Compile Include="ViewModels\InformationWindowViewModel.cs" />
     <Compile Include="ViewModels\KanColleWindowViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogFilter.cs" />
@@ -295,6 +299,15 @@
     </Compile>
     <Compile Include="Views\Catalogs\NotePad.xaml.cs">
       <DependentUpon>NotePad.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Catalogs\PresetFleetAddWindow.xaml.cs">
+      <DependentUpon>PresetFleetAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Catalogs\PresetFleetDeleteWindow.xaml.cs">
+      <DependentUpon>PresetFleetDeleteWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Catalogs\PresetFleetWindow.xaml.cs">
+      <DependentUpon>PresetFleetWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Catalogs\RemodelListWindow.xaml.cs">
       <DependentUpon>RemodelListWindow.xaml</DependentUpon>
@@ -463,6 +476,18 @@
     <Page Include="Views\Catalogs\NotePad.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Catalogs\PresetFleetAddWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Catalogs\PresetFleetDeleteWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Catalogs\PresetFleetWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Catalogs\RemodelListWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
