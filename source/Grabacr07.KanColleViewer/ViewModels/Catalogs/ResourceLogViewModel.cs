@@ -33,7 +33,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public ImageSource icon_development => BitmapToImageSource(Properties.Resources.icon_development);
 		public ImageSource icon_improvement => BitmapToImageSource(Properties.Resources.icon_improvement);
 
-		private string ResourceCachePath => Path.Combine("Record", "resourcelog.csv");
+		private string ResourceCachePath => Path.Combine(
+			Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location),
+			"Record",
+			"resourcelog.csv"
+		);
 
 		private Dictionary<string, DisplayedPeriod> PeriodTable { get; set; }
 		public IEnumerable<string> DisplayPeriods { get; set; }
