@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -245,36 +245,59 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		}
 		#endregion
 
+<<<<<<< HEAD
 		#region Low 変更通知プロパティ
 		private bool _Low;
 		public bool Low
+=======
+		#region Slow 変更通知プロパティ
+
+		private bool _Slow;
+
+		public bool Slow
+>>>>>>> 685a70da63e48e75a723c4c6c896ae687763ec31
 		{
-			get { return this._Low; }
+			get { return this._Slow; }
 			set
 			{
-				if (this._Low != value)
+				if (this._Slow != value)
 				{
-					this._Low = value;
+					this._Slow = value;
 					this.RaisePropertyChanged();
+					this.Update();
 				}
 			}
 		}
 		#endregion
 
-
 		public ShipSpeedFilter(Action updateAction)
 			: base(updateAction)
 		{
+<<<<<<< HEAD
 			this._All = true;
+=======
+			this._Fastest = true;
+			this._Faster = true;
+			this._Fast = true;
+			this._Slow = true;
+>>>>>>> 685a70da63e48e75a723c4c6c896ae687763ec31
 		}
 
 		public override bool Predicate(Ship ship)
 		{
+<<<<<<< HEAD
 			if (this.All) return true;
 			if (this.SuperFast && ship.Speed == ShipSpeed.SuperFast) return true;
 			if (this.FastPlus && ship.Speed == ShipSpeed.FastPlus) return true;
 			if (this.Fast && ship.Speed == ShipSpeed.Fast) return true;
 			if (this.Low && ship.Speed == ShipSpeed.Low) return true;
+=======
+			if (this.Fastest && ship.Speed == ShipSpeed.Fastest) return true;
+			if (this.Faster && ship.Speed == ShipSpeed.Faster) return true;
+			if (this.Fast && ship.Speed == ShipSpeed.Fast) return true;
+			if (this.Slow && ship.Speed == ShipSpeed.Slow) return true;
+
+>>>>>>> 685a70da63e48e75a723c4c6c896ae687763ec31
 			return false;
 		}
 	}
