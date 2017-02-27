@@ -146,7 +146,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 함선 속도
 		/// </summary>
-		public ShipSpeed Speed => (ShipSpeed)this.RawData.api_soku;
+		public ShipSpeed Speed => ShipSpeedConverter.FromInt32(this.RawData.api_soku);
 
 		#region Fuel 変更通知プロパティ
 
@@ -403,11 +403,6 @@ namespace Grabacr07.KanColleWrapper.Models
 		public int UsedBull => (int)((this.Level <= 99 ? 1.0f : 0.85f) * (this.Bull.Maximum - this.Bull.Current));
 
 		#endregion
-
-		/// <summary>
-		/// 装備によるボーナスを含めた艦の速力を取得します。
-		/// </summary>
-		public ShipSpeed Speed => ShipSpeedConverter.FromInt32(this.RawData.api_soku);
 
 		/// <summary>
 		/// 装備によるボーナスを含めた索敵ステータス値を取得します。

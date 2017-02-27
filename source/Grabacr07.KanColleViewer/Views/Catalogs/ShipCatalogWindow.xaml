@@ -342,11 +342,10 @@
 										<Run Text=":" />
 									</TextBlock>
 									<WrapPanel Grid.Column="2">
-										<RadioButton Content="모두" IsChecked="{Binding All, Mode=TwoWay}" />
-										<RadioButton Content="초고속" IsChecked="{Binding SuperFast, Mode=TwoWay}" />
-										<RadioButton Content="고속+" IsChecked="{Binding FastPlus, Mode=TwoWay}" />
-										<RadioButton Content="고속" IsChecked="{Binding Fast, Mode=TwoWay}" />
-										<RadioButton Content="저속" IsChecked="{Binding Low, Mode=TwoWay}" />
+										<CheckBox Content="초고속" IsChecked="{Binding Fastest, Mode=TwoWay}" />
+										<CheckBox Content="고속+" IsChecked="{Binding Faster, Mode=TwoWay}" />
+										<CheckBox Content="고속" IsChecked="{Binding Fast, Mode=TwoWay}" />
+										<CheckBox Content="저속" IsChecked="{Binding Low, Mode=TwoWay}" />
 									</WrapPanel>
 								</Grid>
 

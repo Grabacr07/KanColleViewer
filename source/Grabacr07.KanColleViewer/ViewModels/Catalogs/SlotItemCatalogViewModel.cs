@@ -188,8 +188,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			var y = (Enum.GetValues(typeof(SlotItemIconType)) as int[])
 				.Any(x =>
 					x == (int) (
-						SlotItemEquipTypeViewModel.IconAliasNameable.ContainsKey(source)
-							? SlotItemEquipTypeViewModel.IconAliasNameable[source]
+						SlotItemEquipTypeViewModel.IconAliasNamable.ContainsKey(source)
+							? SlotItemEquipTypeViewModel.IconAliasNamable[source]
 							: source
 					)
 				);

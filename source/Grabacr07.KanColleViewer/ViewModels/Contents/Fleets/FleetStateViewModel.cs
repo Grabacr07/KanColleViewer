@@ -5,6 +5,7 @@ using Grabacr07.KanColleWrapper.Models;
 using Livet;
 using Livet.EventListeners;
 using System.Text;
+using Grabacr07.KanColleViewer.Properties;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 {
@@ -42,16 +43,16 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			{
 				switch (this.Source.Speed)
 				{
-					case FleetSpeed.SuperFast:
+					case FleetSpeed.Fastest:
 						return "초고속함대";
-					case FleetSpeed.FastPlus:
+					case FleetSpeed.Faster:
 						return "고속+함대";
 					case FleetSpeed.Fast:
 						return Resources.Fleets_Speed_Fast;
 					case FleetSpeed.Low:
 						return Resources.Fleets_Speed_Slow;
 
-					case FleetSpeed.Hybrid_FastPlus:
+					case FleetSpeed.Hybrid_Faster:
 						return "고속+혼성함대";
 					case FleetSpeed.Hybrid_Fast:
 						return "고속혼성함대";

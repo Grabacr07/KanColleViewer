@@ -7,16 +7,16 @@ namespace Grabacr07.KanColleWrapper.Models
 	/// <summary>
 	/// 艦隊の速度を表します。
 	/// </summary>
-	public class FleetSpeed
+	public enum FleetSpeed
 	{
-		SuperFast,
-		FastPlus,
+		Fastest,
+		Faster,
 		Fast,
 		Low,
 
 		Hybrid_Low, // 저속 혼성
 		Hybrid_Fast, // 고속 혼성
-		Hybrid_FastPlus, // 고속+ 혼성
+		Hybrid_Faster, // 고속+ 혼성
 	}
 
 	public static class FleetSpeedExtension

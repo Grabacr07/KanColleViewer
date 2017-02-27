@@ -70,7 +70,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		#endregion
 
 		public static Dictionary<SlotItemIconType, string> IconNameTable { get; }
-		public static Dictionary<SlotItemIconType, SlotItemIconType> IconAliasNameable { get; }
+		public static Dictionary<SlotItemIconType, SlotItemIconType> IconAliasNamable { get; }
 
 		static SlotItemEquipTypeViewModel()
 		{
@@ -115,12 +115,12 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				{ SlotItemIconType.AmphibiousLandingCraft, "내화정" },
 				{ SlotItemIconType.LandBasedAttacker, "육상공격기" },
 				{ SlotItemIconType.LandBasedFighter, "국지전투기" },
-				{ SlotItemIconType.JetbombFighter_A, "분식폭격전투기" },
-				{ SlotItemIconType.JetBombFighter_B, "분식폭격전투기" },
+				{ SlotItemIconType.JetPowerededBomber1, "분식폭격전투기" },
+				{ SlotItemIconType.JetPowerededBomber2, "분식폭격전투기" },
 			};
-			SlotItemEquipTypeViewModel.IconAliasNameable = new Dictionary<SlotItemIconType, SlotItemIconType>
+			SlotItemEquipTypeViewModel.IconAliasNamable = new Dictionary<SlotItemIconType, SlotItemIconType>
 			{
-				{ SlotItemIconType.JetBombFighter_B, SlotItemIconType.JetbombFighter_A }
+				{ SlotItemIconType.JetPowerededBomber2, SlotItemIconType.JetPowerededBomber1 }
 			};
 		}
 
