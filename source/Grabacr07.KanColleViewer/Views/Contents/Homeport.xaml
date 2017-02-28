@@ -186,100 +186,125 @@
 			</Style>
 		</Grid.Resources>
 
-		<StackPanel Orientation="Horizontal"
-					VerticalAlignment="Center"
-					DataContext="{Binding Admiral}"
-					ToolTip="{Binding ToolTip}">
-			<TextBlock>
-				<Run Text="{Binding Model.Nickname, Mode=OneWay}"
-					 Style="{StaticResource EmphaticRun18}" />
-				<Run Text="{Binding Model.Rank, Mode=OneWay}"
-					 Style="{StaticResource EmphaticRun14}" />
-				<LineBreak />
-				<Run Text="{Binding Model.Comment, Mode=OneWay}" />
-			</TextBlock>
-			<TextBlock>
-				<Run Text="{Binding Resources.Homeport_FleetHQ, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-				<Run Text="Lv."
-						Style="{StaticResource EmphaticRun14}" />
-				<Run Text="{Binding Model.Level, Mode=OneWay}"
-						Style="{StaticResource EmphaticRun18}" />
-				<LineBreak />
-				<Run Text="Next:" />
-				<Run Text="{Binding Model.ExperienceForNexeLevel, Mode=OneWay}" />
-				<Run Text="exp." />
-			</TextBlock>
+		<Grid DataContext="{Binding Admiral}">
+			<StackPanel Orientation="Horizontal"
+						VerticalAlignment="Center">
+				<TextBlock>
+					<Run Text="{Binding Model.Nickname, Mode=OneWay}"
+						 Style="{StaticResource EmphaticRun18}" />
+					<Run Text="{Binding Model.Rank, Mode=OneWay}"
+						 Style="{StaticResource EmphaticRun14}" />
+					<LineBreak />
+					<Run Text="{Binding Model.Comment, Mode=OneWay}" />
+				</TextBlock>
+				<TextBlock>
+					<Run Text="{Binding Resources.Homeport_FleetHQ, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+					<Run Text="Lv."
+							Style="{StaticResource EmphaticRun14}" />
+					<Run Text="{Binding Model.Level, Mode=OneWay}"
+							Style="{StaticResource EmphaticRun18}" />
+					<LineBreak />
+					<Run Text="Next:" />
+					<Run Text="{Binding Model.ExperienceForNexeLevel, Mode=OneWay}" />
+					<Run Text="exp." />
+				</TextBlock>
 
-			<StackPanel.Style>
-				<Style TargetType="{x:Type StackPanel}">
-					<Style.Triggers>
-						<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.AdmiralSummaryView}, Path=Value}" Value="True">
-							<Setter Property="Visibility" Value="Collapsed" />
-						</DataTrigger>
-					</Style.Triggers>
-				</Style>
-			</StackPanel.Style>
-		</StackPanel>
-		<StackPanel Orientation="Horizontal"
-					VerticalAlignment="Center"
-					DataContext="{Binding Admiral}">
-			<TextBlock>
-				<Run Text="{Binding Model.Nickname, Mode=OneWay}"
-					 Style="{StaticResource EmphaticRun18}" />
-				<LineBreak />
-				<Run Text="{Binding Model.Rank, Mode=OneWay}" />
-				<Run Text="  Lv." />
-				<Run Text="{Binding Model.Level, Mode=OneWay}"
-					 Style="{StaticResource EmphaticRun12}"/>
-			</TextBlock>
+				<StackPanel.Style>
+					<Style TargetType="{x:Type StackPanel}">
+						<Style.Triggers>
+							<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.AdmiralSummaryView}, Path=Value}" Value="True">
+								<Setter Property="Visibility" Value="Collapsed" />
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</StackPanel.Style>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal"
+						VerticalAlignment="Center">
+				<TextBlock>
+					<Run Text="{Binding Model.Nickname, Mode=OneWay}"
+						 Style="{StaticResource EmphaticRun18}" />
+					<LineBreak />
+					<Run Text="{Binding Model.Rank, Mode=OneWay}" />
+					<Run Text="  Lv." />
+					<Run Text="{Binding Model.Level, Mode=OneWay}"
+						 Style="{StaticResource EmphaticRun12}"/>
+				</TextBlock>
 
-			<StackPanel.Style>
-				<Style TargetType="{x:Type StackPanel}">
-					<Setter Property="Visibility" Value="Collapsed" />
-					<Style.Triggers>
-						<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.AdmiralSummaryView}, Path=Value}" Value="True">
-							<Setter Property="Visibility" Value="Visible" />
-						</DataTrigger>
-					</Style.Triggers>
-				</Style>
-			</StackPanel.Style>
-			<StackPanel.ToolTip>
+				<StackPanel.Style>
+					<Style TargetType="{x:Type StackPanel}">
+						<Setter Property="Visibility" Value="Collapsed" />
+						<Style.Triggers>
+							<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.AdmiralSummaryView}, Path=Value}" Value="True">
+								<Setter Property="Visibility" Value="Visible" />
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</StackPanel.Style>
+			</StackPanel>
+
+			<Grid.ToolTip>
 				<StackPanel Orientation="Vertical"
 							Margin="2">
 					<StackPanel Orientation="Horizontal"
 								VerticalAlignment="Center">
 						<TextBlock>
-							<Run Text="{Binding Model.Nickname, Mode=OneWay}"
-								 Style="{StaticResource EmphaticRun18}" />
-							<Run Text="{Binding Model.Rank, Mode=OneWay}"
-								 Style="{StaticResource EmphaticRun14}" />
-							<LineBreak />
-							<Run Text="{Binding Model.Comment, Mode=OneWay}" />
-									</TextBlock>
-									<TextBlock>
-							<Run Text="{Binding Resources.Homeport_FleetHQ, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-							<Run Text="Lv."
-									Style="{StaticResource EmphaticRun14}" />
-							<Run Text="{Binding Model.Level, Mode=OneWay}"
-									Style="{StaticResource EmphaticRun18}" />
-							<LineBreak />
-							<Run Text="Next:" />
-							<Run Text="{Binding Model.ExperienceForNexeLevel, Mode=OneWay}" />
-							<Run Text="exp." />
+								<Run Text="{Binding Model.Nickname, Mode=OneWay}"
+									 Style="{StaticResource EmphaticRun18}" />
+								<Run Text="{Binding Model.Rank, Mode=OneWay}"
+									 Style="{StaticResource EmphaticRun14}" />
+								<LineBreak />
+								<Run Text="{Binding Model.Comment, Mode=OneWay}" />
+						</TextBlock>
+						<TextBlock>
+								<Run Text="{Binding Resources.Homeport_FleetHQ, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+								<Run Text="Lv."
+									 Style="{StaticResource EmphaticRun14}" />
+								<Run Text="{Binding Model.Level, Mode=OneWay}"
+									 Style="{StaticResource EmphaticRun18}" />
+								<LineBreak />
+								<Run Text="Next:" />
+								<Run Text="{Binding Model.ExperienceForNexeLevel, Mode=OneWay}" />
+								<Run Text="exp." />
 						</TextBlock>
 					</StackPanel>
-					
+
 					<Rectangle Height=".99"
 							   Margin="0,6,0,2"
 							   Fill="{DynamicResource InactiveForegroundBrushKey}"
 							   Opacity="0.6" />
-					
-					<TextBlock Margin="0,5,0,0"
+
+					<StackPanel Orientation="Horizontal"
+								VerticalAlignment="Center">
+						<TextBlock>
+								<Run Text="자연회복한계:" />
+								<Run Text="{Binding Model.ResourceLimit, Mode=OneWay}"
+									 Style="{StaticResource EmphaticRun14}" />
+								<Run Text="까지" />
+								<LineBreak />
+								<Run Text="가구코인:" />
+								<Run Text="{Binding Model.FurnitureCoins, Mode=OneWay}"
+									 Style="{StaticResource EmphaticRun14}" />
+								<Run Text="개" />
+								<LineBreak />
+								<Run Text="갑훈장:" />
+								<Run Text="{Binding Model.Medals, Mode=OneWay}"
+									 Style="{StaticResource EmphaticRun14}" />
+								<Run Text="개" />
+						</TextBlock>
+					</StackPanel>
+
+					<Rectangle Height=".99"
+							   Margin="0,6,0,2"
+							   Fill="{DynamicResource InactiveForegroundBrushKey}"
+							   Opacity="0.6" />
+
+					<TextBlock Margin="12,5"
 							   Style="{StaticResource Emphatic13}"
 							   Text="{Binding ToolTip}" />
 				</StackPanel>
-			</StackPanel.ToolTip>
-		</StackPanel>
+			</Grid.ToolTip>
+		</Grid>
 
 		<StackPanel Grid.Column="1"
 					Orientation="Vertical"
