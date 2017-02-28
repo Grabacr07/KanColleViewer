@@ -345,7 +345,7 @@
 										<CheckBox Content="초고속" IsChecked="{Binding Fastest, Mode=TwoWay}" />
 										<CheckBox Content="고속+" IsChecked="{Binding Faster, Mode=TwoWay}" />
 										<CheckBox Content="고속" IsChecked="{Binding Fast, Mode=TwoWay}" />
-										<CheckBox Content="저속" IsChecked="{Binding Low, Mode=TwoWay}" />
+										<CheckBox Content="저속" IsChecked="{Binding Slow, Mode=TwoWay}" />
 									</WrapPanel>
 								</Grid>
 
