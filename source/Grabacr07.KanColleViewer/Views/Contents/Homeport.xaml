@@ -270,7 +270,7 @@
 					</StackPanel>
 
 					<Rectangle Height=".99"
-							   Margin="0,6,0,2"
+							   Margin="0,10,0,6"
 							   Fill="{DynamicResource InactiveForegroundBrushKey}"
 							   Opacity="0.6" />
 
