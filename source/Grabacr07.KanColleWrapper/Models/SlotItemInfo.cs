@@ -93,15 +93,24 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			get
 			{
-				var tooltip = (this.RawData.api_houg != 0 ? "화력:" + this.RawData.api_houg : "")
-					   + (this.RawData.api_raig != 0 ? " 뇌장:" + this.RawData.api_raig : "")
-					   + (this.AA != 0 ? " 대공:" + this.AA : "")
-					   + (this.RawData.api_souk != 0 ? " 장갑:" + this.RawData.api_souk : "")
-					   + (this.RawData.api_baku != 0 ? " 폭장:" + this.RawData.api_baku : "")
-					   + (this.RawData.api_tais != 0 ? " 대잠:" + this.RawData.api_tais : "")
-					   + (this.RawData.api_houm != 0 ? " 명중:" + this.RawData.api_houm : "")
-					   + (this.RawData.api_houk != 0 ? " 회피:" + this.RawData.api_houk : "")
-					   + (this.RawData.api_saku != 0 ? " 색적:" + this.RawData.api_saku : "");
+				var tooltip =
+						(this.RawData.api_houg != 0 ? "화력:" + this.RawData.api_houg : "")
+					  + (this.RawData.api_raig != 0 ? " 뇌장:" + this.RawData.api_raig : "")
+					  + (this.RawData.api_tyku != 0 ? " 대공:" + this.RawData.api_tyku : "")
+					  + (this.RawData.api_souk != 0 ? " 장갑:" + this.RawData.api_souk : "")
+					  + (this.RawData.api_baku != 0 ? " 폭장:" + this.RawData.api_baku : "")
+					  + (this.RawData.api_tais != 0 ? " 대잠:" + this.RawData.api_tais : "")
+					  + (
+						  this.Type == SlotItemType.局地戦闘機
+							? (this.RawData.api_houm != 0 ? " 대폭:" + this.RawData.api_houm : "")
+							: (this.RawData.api_houm != 0 ? " 명중:" + this.RawData.api_houm : "")
+						)
+					  + (
+						  this.Type == SlotItemType.局地戦闘機
+							? (this.RawData.api_houk != 0 ? " 영격:" + this.RawData.api_houk : "")
+							: (this.RawData.api_houk != 0 ? " 회피:" + this.RawData.api_houk : "")
+						)
+					  + (this.RawData.api_saku != 0 ? " 색적:" + this.RawData.api_saku : "");
 				if (tooltip.Length < 1) tooltip = "스테이터스 없음";
 				return tooltip;
 			}
