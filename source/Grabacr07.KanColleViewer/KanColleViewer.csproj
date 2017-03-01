@@ -175,6 +175,7 @@
     <Compile Include="Models\Volume.cs" />
     <Compile Include="Models\Migration\_KanColleClientSettings.cs" />
     <Compile Include="ViewModels\Composition\LoadFailedPluginViewModel.cs" />
+    <Compile Include="ViewModels\Contents\ShipSpeedExtensions.cs" />
     <Compile Include="ViewModels\InformationWindowViewModel.cs" />
     <Compile Include="ViewModels\KanColleWindowViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ShipCatalogFilter.cs" />

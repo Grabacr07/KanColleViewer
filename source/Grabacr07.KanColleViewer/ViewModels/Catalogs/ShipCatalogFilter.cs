@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -184,18 +184,38 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 	public class ShipSpeedFilter : ShipCatalogFilter
 	{
-		#region Both 変更通知プロパティ
+		#region Fastest 変更通知プロパティ
 
-		private bool _Both;
+		private bool _Fastest;
 
-		public bool Both
+		public bool Fastest
 		{
-			get { return this._Both; }
+			get { return this._Fastest; }
 			set
 			{
-				if (this._Both != value)
+				if (this._Fastest != value)
 				{
-					this._Both = value;
+					this._Fastest = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+
+		#region Faster 変更通知プロパティ
+
+		private bool _Faster;
+
+		public bool Faster
+		{
+			get { return this._Faster; }
+			set
+			{
+				if (this._Faster != value)
+				{
+					this._Faster = value;
 					this.RaisePropertyChanged();
 					this.Update();
 				}
@@ -224,37 +244,41 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#endregion
 
-		#region Low 変更通知プロパティ
+		#region Slow 変更通知プロパティ
 
-		private bool _Low;
+		private bool _Slow;
 
-		public bool Low
+		public bool Slow
 		{
-			get { return this._Low; }
+			get { return this._Slow; }
 			set
 			{
-				if (this._Low != value)
+				if (this._Slow != value)
 				{
-					this._Low = value;
+					this._Slow = value;
 					this.RaisePropertyChanged();
+					this.Update();
 				}
 			}
 		}
 
 		#endregion
 
-
 		public ShipSpeedFilter(Action updateAction)
 			: base(updateAction)
 		{
-			this._Both = true;
+			this._Fastest = true;
+			this._Faster = true;
+			this._Fast = true;
+			this._Slow = true;
 		}
 
 		public override bool Predicate(Ship ship)
 		{
-			if (this.Both) return true;
-			if (this.Fast && ship.Info.Speed == ShipSpeed.Fast) return true;
-			if (this.Low && ship.Info.Speed == ShipSpeed.Low) return true;
+			if (this.Fastest && ship.Speed == ShipSpeed.Fastest) return true;
+			if (this.Faster && ship.Speed == ShipSpeed.Faster) return true;
+			if (this.Fast && ship.Speed == ShipSpeed.Fast) return true;
+			if (this.Slow && ship.Speed == ShipSpeed.Slow) return true;
 
 			return false;
 		}

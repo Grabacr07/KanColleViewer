@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -95,11 +95,6 @@ namespace Grabacr07.KanColleWrapper.Models
 		public int SlotCount => this.RawData.api_slot_num;
 
 		#endregion
-
-		/// <summary>
-		/// 速力を取得します。
-		/// </summary>
-		public ShipSpeed Speed => (ShipSpeed)this.RawData.api_soku;
 
 		/// <summary>
 		/// 次の改造が実施できるレベルを取得します。

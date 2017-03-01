@@ -1,4 +1,4 @@
-﻿// ReSharper disable InconsistentNaming
+// ReSharper disable InconsistentNaming
 
 namespace Grabacr07.KanColleWrapper.Models
 {
@@ -52,6 +52,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		特型内火艇 = 46,
 		陸上攻撃機 = 47,
 		局地戦闘機 = 48,
+		噴式戦闘機 = 56,
+		噴式戦闘爆撃機 = 57,
+		噴式攻撃機 = 58,
+		噴式偵察機 = 59,
 		大型電探_II = 93,
 		艦上偵察機_II = 94,
 	}
@@ -73,6 +77,10 @@ namespace Grabacr07.KanColleWrapper.Models
 				case SlotItemType.オートジャイロ:
 				case SlotItemType.対潜哨戒機:
 				case SlotItemType.大型飛行艇:
+				case SlotItemType.噴式戦闘機:
+				case SlotItemType.噴式戦闘爆撃機:
+				case SlotItemType.噴式攻撃機:
+				case SlotItemType.噴式偵察機:
 					return true;
 
 				default:

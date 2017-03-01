@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -237,11 +237,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.AverageLevel = ships.HasItems() ? (double)this.TotalLevel / ships.Length : 0.0;
 			this.MinAirSuperiorityPotential = firstFleetShips.Sum(x => x.GetAirSuperiorityPotential(AirSuperiorityCalculationOptions.Minimum));
 			this.MaxAirSuperiorityPotential = firstFleetShips.Sum(x => x.GetAirSuperiorityPotential(AirSuperiorityCalculationOptions.Maximum));
-			this.Speed = ships.All(x => x.Info.Speed == ShipSpeed.Fast)
-				? FleetSpeed.Fast
-				: ships.All(x => x.Info.Speed == ShipSpeed.Low)
-					? FleetSpeed.Low
-					: FleetSpeed.Hybrid;
+			this.Speed = new FleetSpeed(Array.ConvertAll(ships, x => x.Speed));
 
 			var logic = ViewRangeCalcLogic.Get(KanColleClient.Current.Settings.ViewRangeCalcType);
 			this.ViewRange = logic.Calc(this.source);

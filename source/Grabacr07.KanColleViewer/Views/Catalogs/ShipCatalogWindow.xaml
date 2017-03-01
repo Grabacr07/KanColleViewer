@@ -1,4 +1,4 @@
-﻿<metro:MetroWindow x:Class="Grabacr07.KanColleViewer.Views.Catalogs.ShipCatalogWindow"
+<metro:MetroWindow x:Class="Grabacr07.KanColleViewer.Views.Catalogs.ShipCatalogWindow"
 				   x:Name="GlowMetroWindow"
 				   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 				   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -331,12 +331,14 @@
 										<Run Text=":" />
 									</TextBlock>
 									<WrapPanel Grid.Column="2">
-										<RadioButton Content="すべて"
-													 IsChecked="{Binding Both, Mode=TwoWay}" />
-										<RadioButton Content="高速"
-													 IsChecked="{Binding Fast, Mode=TwoWay}" />
-										<RadioButton Content="低速"
-													 IsChecked="{Binding Low, Mode=TwoWay}" />
+										<CheckBox Content="最速"
+												  IsChecked="{Binding Fastest, Mode=TwoWay}" />
+										<CheckBox Content="高速+"
+												  IsChecked="{Binding Faster, Mode=TwoWay}" />
+										<CheckBox Content="高速"
+												  IsChecked="{Binding Fast, Mode=TwoWay}" />
+										<CheckBox Content="低速"
+												  IsChecked="{Binding Slow, Mode=TwoWay}" />
 									</WrapPanel>
 								</Grid>
 
@@ -828,6 +830,46 @@
 										<TextBlock Text="{Binding Ship.ASW, Mode=OneWay}"
 												   Foreground="{DynamicResource ActiveForegroundBrushKey}"
 												   Margin="0,3" />
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+
+							<GridViewColumn Width="45">
+								<GridViewColumn.Header>
+									<metro2:SortButton MethodName="Sort"
+													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.ASWColumn}">
+										<TextBlock Text="速力"
+												   ToolTip="装備によるステータス上昇を含んだ値です" />
+									</metro2:SortButton>
+								</GridViewColumn.Header>
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<TextBlock x:Name="Text"
+												   Text="{Binding Speed, Mode=OneWay}"
+												   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+												   Margin="-5,0"
+												   Padding="5,3"
+												   MinWidth="45" />
+										<DataTemplate.Triggers>
+											<DataTrigger Binding="{Binding Ship.Speed}"
+														 Value="Fastest">
+												<Setter TargetName="Text"
+														Property="Background"
+														Value="RoyalBlue" />
+											</DataTrigger>
+											<DataTrigger Binding="{Binding Ship.Speed}"
+														 Value="Faster">
+												<Setter TargetName="Text"
+														Property="Background"
+														Value="SteelBlue" />
+											</DataTrigger>
+											<DataTrigger Binding="{Binding Ship.Speed}"
+														 Value="Slow">
+												<Setter TargetName="Text"
+														Property="Opacity"
+														Value="0.5" />
+											</DataTrigger>
+										</DataTemplate.Triggers>
 									</DataTemplate>
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>

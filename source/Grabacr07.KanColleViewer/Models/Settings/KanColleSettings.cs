@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -25,7 +25,7 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		/// 索敵計算に使用するロジックを識別する文字列の設定値を取得します。
 		/// </summary>
 		public static SerializableProperty<string> ViewRangeCalcType { get; }
-			= new SerializableProperty<string>(GetKey(), Providers.Roaming, new ViewRangeType1().Id);
+			= new SerializableProperty<string>(GetKey(), Providers.Roaming, new ViewRangeType4().Id);
 
 		/// <summary>
 		/// 索敵計算に第1艦隊を含めるかどうかの設定値を取得します。

@@ -199,5 +199,15 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 局地戦闘機。
 		/// </summary>
 		LandBasedFighter = 38,
+
+		/// <summary>
+		/// 噴式戦闘爆撃機
+		/// </summary>
+		JetPowerededBomber1 = 39,
+
+		/// <summary>
+		/// 噴式戦闘爆撃機
+		/// </summary>
+		JetPowerededBomber2 = 40,
 	}
 }
