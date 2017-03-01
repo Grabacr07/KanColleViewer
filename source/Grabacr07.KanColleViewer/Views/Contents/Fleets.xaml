@@ -574,7 +574,7 @@
 			
 			<Grid Grid.Row="3"
 				  Grid.Column="0"
-				  Grid.ColumnSpan="2"
+				  Grid.ColumnSpan="3"
 				  DataContext="{Binding SelectedFleet, Mode=OneWay}"
 				  d:DataContext="{d:DesignData /SampleData/FleetViewModelSampleData.xaml}">
 				<Grid.RowDefinitions>

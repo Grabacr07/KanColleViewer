@@ -76,7 +76,8 @@
 
 		<DockPanel Grid.Row="1">
 			<Border DockPanel.Dock="Top"
-					Margin="8,8,8,0">				<Grid>
+					Margin="8,8,8,0">
+				<Grid>
 					<Grid.RowDefinitions>
 						<RowDefinition Height="auto"></RowDefinition>
 						<RowDefinition Height="auto"></RowDefinition>
@@ -179,23 +180,26 @@
 													<s:Int32>7</s:Int32>
 													<s:Int32>8</s:Int32>
 													<s:Int32>9</s:Int32>
+
+													<s:Int32>39</s:Int32>
+													<s:Int32>40</s:Int32>
 												</x:Array>
 											</metro2:CallMethodButton.MethodParameter>
 										</metro2:CallMethodButton>
 										<!-- これっきりボタン -->
-										<metro2:CallMethodButton Content="탄">
-											<metro2:CallMethodButton.MethodParameter>
-												<x:Array Type="s:Int32">
-													<s:Int32>12</s:Int32>
-													<s:Int32>13</s:Int32>
-												</x:Array>
-											</metro2:CallMethodButton.MethodParameter>
-										</metro2:CallMethodButton>
 										<!-- これっきりボタン -->
 										<metro2:CallMethodButton Content="수상기">
 											<metro2:CallMethodButton.MethodParameter>
 												<x:Array Type="s:Int32">
 													<s:Int32>10</s:Int32>
+												</x:Array>
+											</metro2:CallMethodButton.MethodParameter>
+										</metro2:CallMethodButton>
+										<metro2:CallMethodButton Content="탄">
+											<metro2:CallMethodButton.MethodParameter>
+												<x:Array Type="{x:Type s:Int32}">
+													<s:Int32>12</s:Int32>
+													<s:Int32>13</s:Int32>
 												</x:Array>
 											</metro2:CallMethodButton.MethodParameter>
 										</metro2:CallMethodButton>
@@ -279,7 +283,7 @@
 							</Border>
 						</StackPanel>
 					</Expander>
-					
+
 					<metro2:CallMethodButton Grid.Row="1" Content="새로고침"
 										 Padding="40,6"
 										 MethodName="Update"

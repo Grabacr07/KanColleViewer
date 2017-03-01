@@ -40,6 +40,7 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public int api_firstflag { get; set; }
 		public int api_tutorial_progress { get; set; }
 		public int[] api_pvp { get; set; }
+		public int api_medals { get; set; }
 	}
 	// ReSharper restore InconsistentNaming
 }

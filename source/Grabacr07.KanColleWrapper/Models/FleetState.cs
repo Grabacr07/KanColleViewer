@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -395,27 +395,29 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.AverageLevel = ships.HasItems() ? (double)this.TotalLevel / ships.Length : 0.0;
 			this.MinAirSuperiorityPotential = firstFleetShips.Sum(x => x.GetAirSuperiorityPotential(AirSuperiorityCalculationOptions.Minimum));
 			this.MaxAirSuperiorityPotential = firstFleetShips.Sum(x => x.GetAirSuperiorityPotential(AirSuperiorityCalculationOptions.Maximum));
+
 			this.EncounterPercent = TotalSecond.Sum(x => x.SecondEncounter);
 			this.PartEncounterPercent = partPercent;
 			this.FirstEncounter = ships.Sum(s => s.CalcFirstEncounterPercent());
 
 			{
-				if (ships.All(x => x.Speed == ShipSpeed.SuperFast)) // 최속으로만 구성
-					this.Speed = FleetSpeed.SuperFast;
-				else if (ships.All(x => x.Speed == ShipSpeed.FastPlus)) // 고속+로만 구성
-					this.Speed = FleetSpeed.FastPlus;
+				if (ships.All(x => x.Speed == ShipSpeed.Fastest)) // 최속으로만 구성
+					this.Speed = FleetSpeed.Fastest;
+				else if (ships.All(x => x.Speed == ShipSpeed.Faster)) // 고속+로만 구성
+					this.Speed = FleetSpeed.Faster;
 				else if (ships.All(x => x.Speed == ShipSpeed.Fast)) // 고속으로만 구성
 					this.Speed = FleetSpeed.Fast;
-				else if (ships.All(x => x.Speed == ShipSpeed.Low)) // 저속으로만 구성
+				else if (ships.All(x => x.Speed == ShipSpeed.Slow)) // 저속으로만 구성
 					this.Speed = FleetSpeed.Low;
 
-				else if (!ships.Any(x => x.Speed == ShipSpeed.Fast || x.Speed == ShipSpeed.Low)) // 최속&고속+ 구성
-					this.Speed = FleetSpeed.Hybrid_FastPlus;
-				else if (!ships.Any(x => x.Speed == ShipSpeed.Low)) // 최속&고속+&고속 구성
+				else if (!ships.Any(x => x.Speed == ShipSpeed.Fast || x.Speed == ShipSpeed.Slow)) // 최속&고속+ 구성
+					this.Speed = FleetSpeed.Hybrid_Faster;
+				else if (!ships.Any(x => x.Speed == ShipSpeed.Slow)) // 최속&고속+&고속 구성
 					this.Speed = FleetSpeed.Hybrid_Fast;
 				else
 					this.Speed = FleetSpeed.Hybrid_Low; // 저속 포함 구성
 			}
+			// this.Speed = new FleetSpeed(Array.ConvertAll(ships, x => x.Speed));
 
 			var logic = ViewRangeCalcLogic.Get(KanColleClient.Current.Settings.ViewRangeCalcType);
 			this.ViewRange = logic.Calc(this.source);

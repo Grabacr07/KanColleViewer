@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -177,16 +177,16 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 	public class ShipSpeedFilter : ShipCatalogFilter
 	{
-		#region All 変更通知プロパティ
-		private bool _All;
-		public bool All
+		#region Fastest 変更通知プロパティ
+		private bool _Fastest;
+		public bool Fastest
 		{
-			get { return this._All; }
+			get { return this._Fastest; }
 			set
 			{
-				if (this._All != value)
+				if (this._Fastest != value)
 				{
-					this._All = value;
+					this._Fastest = value;
 					this.RaisePropertyChanged();
 					this.Update();
 				}
@@ -194,33 +194,16 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		}
 		#endregion
 
-		#region SuperFast 変更通知プロパティ
-		private bool _SuperFast;
-		public bool SuperFast
+		#region Faster 変更通知プロパティ
+		private bool _Faster;
+		public bool Faster
 		{
-			get { return this._SuperFast; }
+			get { return this._Faster; }
 			set
 			{
-				if (this._SuperFast != value)
+				if (this._Faster != value)
 				{
-					this._SuperFast = value;
-					this.RaisePropertyChanged();
-					this.Update();
-				}
-			}
-		}
-		#endregion
-
-		#region FastPlus 変更通知プロパティ
-		private bool _FastPlus;
-		public bool FastPlus
-		{
-			get { return this._FastPlus; }
-			set
-			{
-				if (this._FastPlus != value)
-				{
-					this._FastPlus = value;
+					this._Faster = value;
 					this.RaisePropertyChanged();
 					this.Update();
 				}
@@ -245,36 +228,38 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		}
 		#endregion
 
-		#region Low 変更通知プロパティ
-		private bool _Low;
-		public bool Low
+		#region Slow 変更通知プロパティ
+		private bool _Slow;
+		public bool Slow
 		{
-			get { return this._Low; }
+			get { return this._Slow; }
 			set
 			{
-				if (this._Low != value)
+				if (this._Slow != value)
 				{
-					this._Low = value;
+					this._Slow = value;
 					this.RaisePropertyChanged();
+					this.Update();
 				}
 			}
 		}
 		#endregion
 
-
-		public ShipSpeedFilter(Action updateAction)
-			: base(updateAction)
+		public ShipSpeedFilter(Action updateAction) : base(updateAction)
 		{
-			this._All = true;
+			this._Fastest = true;
+			this._Faster = true;
+			this._Fast = true;
+			this._Slow = true;
 		}
 
 		public override bool Predicate(Ship ship)
 		{
-			if (this.All) return true;
-			if (this.SuperFast && ship.Speed == ShipSpeed.SuperFast) return true;
-			if (this.FastPlus && ship.Speed == ShipSpeed.FastPlus) return true;
+			if (this.Fastest && ship.Speed == ShipSpeed.Fastest) return true;
+			if (this.Faster && ship.Speed == ShipSpeed.Faster) return true;
 			if (this.Fast && ship.Speed == ShipSpeed.Fast) return true;
-			if (this.Low && ship.Speed == ShipSpeed.Low) return true;
+			if (this.Slow && ship.Speed == ShipSpeed.Slow) return true;
+
 			return false;
 		}
 	}

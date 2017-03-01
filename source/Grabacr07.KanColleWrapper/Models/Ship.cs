@@ -1,7 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models.Raw;
 using System.Diagnostics;
@@ -147,7 +146,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 함선 속도
 		/// </summary>
-		public ShipSpeed Speed => (ShipSpeed)this.RawData.api_soku;
+		public ShipSpeed Speed => ShipSpeedConverter.FromInt32(this.RawData.api_soku);
 
 		#region Fuel 変更通知プロパティ
 

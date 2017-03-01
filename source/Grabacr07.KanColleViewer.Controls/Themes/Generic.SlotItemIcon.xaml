@@ -821,7 +821,7 @@
 				</Setter>
 			</Trigger>
 			<Trigger Property="Type"
-					 Value="JetbombFighter_A">
+					 Value="JetPowerededBomber1">
 				<Setter Property="Template">
 					<Setter.Value>
 						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
@@ -852,7 +852,7 @@
 				</Setter>
 			</Trigger>
 			<Trigger Property="Type"
-					 Value="JetbombFighter_B">
+					 Value="JetPowerededBomber2">
 				<Setter Property="Template">
 					<Setter.Value>
 						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
@@ -877,6 +877,46 @@
 													   VerticalAlignment="Top"
 													   Margin="61.033,60.606,0,0" />
 									<!-- Margin="91.033,50.606,0,0" /> -->
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="TransportEquipment">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Data="M15,22v3l-4.437,2.719L12.153,28.3,15,27h1l2.773,1.7,1.057-.64L16,25V22H15Zm5-2.016a2.487,2.487,0,0,1,2.5,2.557v1.31A2.639,2.639,0,0,1,20,26.532a2.487,2.487,0,0,1-2.5-2.557V22.665A2.639,2.639,0,0,1,20,19.984ZM6.843,14.757L5.8,19.3l2.219,1.213L12,21l1.75-.219L15,20l1,1h1l1.3-1.725,3.457,0.009,1.969,2.648,0.541,1.187L29,23l1-1-1-2H28l-2.767-2.185-10.092.114L14,19l-3.25-.333L9,17l-0.583-.833L8,15ZM7,13l2.583-1.167L12,12l2,1,2,2-5.417.25L9,14H8Zm4.583-2.917L14,12l1.712,0.463L17,14l1.083,1.167L28,15V13l-2-1H25l-3-1-1.833-.167L20,12l-1,1-1.74-1.218L15.845,9.593Z"
+										  Fill="#FF428358"
+										  HorizontalAlignment="Left"
+										  Width="241"
+										  Height="190"
+										  Stretch="Uniform"
+										  VerticalAlignment="Top" />
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="SubmarineEquipment">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Data="M20.214,12.714L22.28,9.96l0.868,0.651Zm-0.4.286-0.785.563L16,13.654V13l-4-3-0.294.177,0.221-.885,0.963,0.3L15,9l1,2-1,1h3l3.5-2.625,0.071,0.054L19,12v1h0.816ZM13,15H12.225l0.631-1.556,2.019,1.024L15,16.594l1,0.156V13.844l0.375,1.125,0.352,0.455L17,16l1,1h1l-2,1v2h1l2-1H19V17h1l1,1,1-2h2l-1,6h1l6.05,0.864A12.988,12.988,0,0,1,6.71,24.428L13,25V15Zm9,7V21l-2.562.531Zm0-2V19l-2.562.531Zm-4.032,5.667L19,25.344V21H17l-0.031,4.344ZM15,25l1,0.3,0.031-4.8L15,20.556V25Zm0-5.49,1,0.084V18H15v1.51Z"
+										  Fill="#FF9FBCE3"
+										  HorizontalAlignment="Left"
+										  Width="233"
+										  Height="220"
+										  Stretch="Uniform"
+										  VerticalAlignment="Top" />
 								</Grid>
 							</Viewbox>
 						</ControlTemplate>
