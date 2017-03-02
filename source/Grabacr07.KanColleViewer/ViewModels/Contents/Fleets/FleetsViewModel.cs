@@ -203,7 +203,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				list.Add(this.AirBase);
 				result = list;
 			}
-
 			this.Fleets2 = result.ToArray();
 
 			// SelectedFleet 이 무시되는 현상. 이유는 불명.
