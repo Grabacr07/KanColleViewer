@@ -701,6 +701,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			items.AddRange(
 				list.Where(x => x.Info.IsNumerable)
 					.OrderBy(x => x.Info.Id)
+					.Distinct(x => x.NameWithLevel)
 					.Select((x, i) => new SlotItemViewModel(x.Id, x))
 			);
 			this.LandBased_Slots = items;
