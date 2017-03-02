@@ -46,8 +46,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		private readonly Subject<Unit> updateSource = new Subject<Unit>();
 		private readonly Homeport homeport = KanColleClient.Current.Homeport;
 
-		public ShipCatalogSortWorker SortWorker { get; set; }
-
 		#region TabItems 변경통지 프로퍼티
 
 		private string[] _TabItems;
@@ -77,7 +75,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 					this.RaisePropertyChanged("SelectedTabIdx");
 					this.RaisePropertyChanged("GoalExpVisible");
 					this.RaisePropertyChanged("TrainingExpVisible");
-					this.UpdateExpCalculator();
+					this.UpdateCalculator();
 				}
 			}
 		}
@@ -171,7 +169,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				{
 					this._Training_Flagship_Lv = value;
 					this.RaisePropertyChanged();
-					this.UpdateExpCalculator();
+					this.UpdateCalculator();
 				}
 			}
 		}
@@ -184,7 +182,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				{
 					this._Training_Secondship_Lv = value;
 					this.RaisePropertyChanged();
-					this.UpdateExpCalculator();
+					this.UpdateCalculator();
 				}
 			}
 		}
@@ -197,7 +195,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				{
 					this._Training_Secondship = value;
 					this.RaisePropertyChanged();
-					this.UpdateExpCalculator();
+					this.UpdateCalculator();
 				}
 			}
 		}
@@ -213,7 +211,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				{
 					this._SelectedExpResult = value;
 					this.RaisePropertyChanged();
-					this.UpdateExpCalculator();
+					this.UpdateCalculator();
 				}
 			}
 		}
@@ -265,7 +263,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 							}
 						}
 						this.CurrentExp = this.CurrentShip.Exp;
-						this.UpdateExpCalculator();
+						this.UpdateCalculator();
 						this.RaisePropertyChanged();
 					}
 				}
@@ -289,7 +287,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 					this.CurrentExp = ExpTable[value];
 					this.TargetLevel = Math.Max(this.TargetLevel, Math.Min(value + 1, 155));
 					this.RaisePropertyChanged();
-					this.UpdateExpCalculator();
+					this.UpdateCalculator();
 				}
 			}
 		}
@@ -311,7 +309,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 					this.TargetExp = ExpTable[value];
 					this.CurrentLevel = Math.Min(this.CurrentLevel, Math.Max(value - 1, 1));
 					this.RaisePropertyChanged();
-					this.UpdateExpCalculator();
+					this.UpdateCalculator();
 				}
 			}
 		}
@@ -331,7 +329,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				{
 					this._SelectedSea = value;
 					this.RaisePropertyChanged();
-					this.UpdateExpCalculator();
+					this.UpdateCalculator();
 				}
 			}
 		}
@@ -351,7 +349,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				{
 					this._SelectedResult = value;
 					this.RaisePropertyChanged();
-					this.UpdateExpCalculator();
+					this.UpdateCalculator();
 				}
 			}
 		}
@@ -371,7 +369,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				{
 					this._IsFlagship = value;
 					this.RaisePropertyChanged();
-					this.UpdateExpCalculator();
+					this.UpdateCalculator();
 				}
 			}
 		}
@@ -391,7 +389,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				{
 					this._IsMVP = value;
 					this.RaisePropertyChanged();
-					this.UpdateExpCalculator();
+					this.UpdateCalculator();
 				}
 			}
 		}
@@ -411,7 +409,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				{
 					this._IsReloading = value;
 					this.RaisePropertyChanged();
-					this.UpdateExpCalculator();
+					this.UpdateCalculator();
 				}
 			}
 		}
@@ -535,16 +533,22 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		public CalculatorViewModel()
 		{
-			this.Title = "경험치 계산기";
+			this.Title = "수치 계산기";
+			this.TabItems = new string[]
+			{
+				"목표 경험치",
+				"연습전 경험치",
+				"기항대 계산기"
+			};
+			this.SelectedTab = this.TabItems.FirstOrDefault();
+
 			this.SeaList = SeaExpTable.Keys.ToList();
 			this.ResultList = Results.ToList();
-
-			this.SortWorker = new ShipCatalogSortWorker();
 
 			this.updateSource
 				.Do(_ => this.IsReloading = true)
 				.Throttle(TimeSpan.FromMilliseconds(7.0))
-				.Do(_ => this.UpdateCore())
+				.Do(_ => this.UpdateShipList())
 				.Subscribe(_ => this.IsReloading = false);
 			this.CompositeDisposable.Add(this.updateSource);
 
@@ -557,43 +561,52 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			SelectedResult = Results.FirstOrDefault();
 			SelectedExpResult = Results.FirstOrDefault();
 
-			this.TabItems = new string[]
-			{
-				"목표 경험치",
-				"연습전 경험치"
-			};
-			this.SelectedTab = this.TabItems.FirstOrDefault();
-
 			this.Update();
 		}
 
-		public void Update()
-		{
-			this.RaisePropertyChanged("AllShipTypes");
-			this.updateSource.OnNext(Unit.Default);
-		}
+		public void Update() => this.updateSource.OnNext(Unit.Default);
 
-		private void UpdateCore()
+		/// <summary>
+		/// Update ship list for calculator
+		/// </summary>
+		private void UpdateShipList()
 		{
 			var list = this.homeport.Organization.Ships.Values;
 
-			this.Ships = this.SortWorker.Sort(list)
+			this.Ships = list.OrderByDescending(x => x.Exp)
+				.ThenBy(x => x.Id)
 				.Select((x, i) => new ShipViewModel(i + 1, x, null))
 				.ToList();
 		}
 
 		/// <summary>
-		/// Calculates experience given parameters. Requires levels and experience to work with.
+		/// Update Calculator Display Values
 		/// </summary>
-		public void UpdateExpCalculator()
+		public void UpdateCalculator()
 		{
-			if (this.SelectedTabIdx == 0)
+			switch (this.SelectedTabIdx)
 			{
-				if (this.TargetLevel < this.CurrentLevel || this.TargetExp < this.CurrentExp ||
-					this.SelectedResult == null || this.SelectedSea == null)
-					return;
+				case 0:
+					CalculateRemainingExp();
+					break;
 
-				var RankTable = new Dictionary<string, double>
+				case 1:
+					CalculateTrainingExp();
+					break;
+			}
+		}
+
+		/// <summary>
+		/// Calculates experience with given parameters.
+		/// Requires levels and experience to work with.
+		/// </summary>
+		private void CalculateRemainingExp()
+		{
+			if (this.TargetLevel < this.CurrentLevel || this.TargetExp < this.CurrentExp ||
+				this.SelectedResult == null || this.SelectedSea == null)
+				return;
+
+			var RankTable = new Dictionary<string, double>
 				{
 					{"S", 1.2 },
 					{"A", 1.0 },
@@ -603,19 +616,23 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 					{"E", 0.5 }
 				};
 
-				// Lawl at that this inline conditional.
-				double Multiplier = (this.IsFlagship ? 1.5 : 1) * (this.IsMVP ? 2 : 1) * RankTable[this.SelectedResult];
+			// Lawl at that this inline conditional.
+			double Multiplier = (this.IsFlagship ? 1.5 : 1) * (this.IsMVP ? 2 : 1) * RankTable[this.SelectedResult];
 
-				this.SortieExp = (int)Math.Round(SeaExpTable[this.SelectedSea] * Multiplier, 0, MidpointRounding.AwayFromZero);
-				this.RemainingExp = this.TargetExp - this.CurrentExp;
-				this.RunCount = Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(this.RemainingExp) / Convert.ToDecimal(this.SortieExp)));
-			}
-			else if (this.SelectedTabIdx == 1)
-			{
-				if (this.SelectedExpResult == null)
-					return;
+			this.SortieExp = (int)Math.Round(SeaExpTable[this.SelectedSea] * Multiplier, 0, MidpointRounding.AwayFromZero);
+			this.RemainingExp = this.TargetExp - this.CurrentExp;
+			this.RunCount = Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(this.RemainingExp) / Convert.ToDecimal(this.SortieExp)));
+		}
 
-				var RankTable = new Dictionary<string, double>
+		/// <summary>
+		/// Calculates expected exp for training with given parameters.
+		/// </summary>
+		private void CalculateTrainingExp()
+		{
+			if (this.SelectedExpResult == null)
+				return;
+
+			var RankTable = new Dictionary<string, double>
 				{
 					{"S", 1.2 },
 					{"A", 1.0 },
@@ -624,43 +641,45 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 					{"D", 0.56 },
 					{"E", 0.4 }
 				};
-				var rankRate = RankTable[this.SelectedExpResult];
-				var flagshipRate = 1.5;
-				var mvpRate = 2.0;
-				var tRate = 0.0;
-				var tExp = 0;
+			var rankRate = RankTable[this.SelectedExpResult];
+			var flagshipRate = 1.5;
+			var mvpRate = 2.0;
+			var tRate = 0.0;
+			var tExp = 0;
 
-				int baseExp = ExpTable[this.Training_Flagship_Lv] / 100;
-				if (this.Training_Secondship) baseExp += ExpTable[this.Training_Secondship_Lv] / 300;
+			int baseExp = ExpTable[this.Training_Flagship_Lv] / 100;
+			if (this.Training_Secondship) baseExp += ExpTable[this.Training_Secondship_Lv] / 300;
 
-				if (baseExp > 500) baseExp = 500 + (int)Math.Floor(Math.Sqrt(baseExp - 500));
-				baseExp = (int)(baseExp * rankRate);
+			if (baseExp > 500) baseExp = 500 + (int)Math.Floor(Math.Sqrt(baseExp - 500));
+			baseExp = (int)(baseExp * rankRate);
 
-				var FirstFleet = this.homeport.Organization.Fleets.FirstOrDefault().Value.Ships;
-				var tShip = FirstFleet.Where(x => x.Info.ShipType.Id == 21).ToArray(); // 21 is Training Cruiser
+			var FirstFleet = this.homeport.Organization.Fleets.FirstOrDefault().Value.Ships;
+			var tShip = FirstFleet.Where(x => x.Info.ShipType.Id == 21).ToArray(); // 21 is Training Cruiser
 
-				if (tShip.Length > 0)
-				{
-					if (tShip.Length == 1 && FirstFleet.FirstOrDefault().Info.ShipType.Id == 21)
-						tRate = TrainingRate(tShip[0].Level, 0); // Flagship only
-					else if (tShip.Length == 1 && FirstFleet.FirstOrDefault().Info.ShipType.Id != 21)
-						tRate = TrainingRate(tShip[0].Level, 1); // One at Accompanies
-					else if (tShip.Length > 1 && FirstFleet.FirstOrDefault().Info.ShipType.Id == 21)
-						tRate = TrainingRate(FirstFleet.FirstOrDefault().Level, 2); // Flagship and Accompany
-					else if (tShip.Length > 1 && FirstFleet.FirstOrDefault().Info.ShipType.Id != 21)
-						tRate = TrainingRate(Math.Max(tShip[0].Level, tShip[1].Level), 3); // Two at Accompanies
-				}
-				tExp = (int)Math.Floor(tRate * baseExp / 100);
-
-				this.Training_FlagshipExp = (int)(baseExp * flagshipRate);
-				this.Training_FlagshipMvpExp = (int)(baseExp * flagshipRate * mvpRate);
-				this.Training_AccshipExp = (int)(baseExp);
-				this.Training_AccshipMvpExp = (int)(baseExp * mvpRate);
-				this.Training_TrainingCruiser_Bonus = tExp;
+			if (tShip.Length > 0)
+			{
+				if (tShip.Length == 1 && FirstFleet.FirstOrDefault().Info.ShipType.Id == 21)
+					tRate = GetTrainingBonus(tShip[0].Level, 0); // Flagship only
+				else if (tShip.Length == 1 && FirstFleet.FirstOrDefault().Info.ShipType.Id != 21)
+					tRate = GetTrainingBonus(tShip[0].Level, 1); // One at Accompanies
+				else if (tShip.Length > 1 && FirstFleet.FirstOrDefault().Info.ShipType.Id == 21)
+					tRate = GetTrainingBonus(FirstFleet.FirstOrDefault().Level, 2); // Flagship and Accompany
+				else if (tShip.Length > 1 && FirstFleet.FirstOrDefault().Info.ShipType.Id != 21)
+					tRate = GetTrainingBonus(Math.Max(tShip[0].Level, tShip[1].Level), 3); // Two at Accompanies
 			}
+			tExp = (int)Math.Floor(tRate * baseExp / 100);
+
+			this.Training_FlagshipExp = (int)(baseExp * flagshipRate);
+			this.Training_FlagshipMvpExp = (int)(baseExp * flagshipRate * mvpRate);
+			this.Training_AccshipExp = (int)(baseExp);
+			this.Training_AccshipMvpExp = (int)(baseExp * mvpRate);
+			this.Training_TrainingCruiser_Bonus = tExp;
 		}
 
-		private double TrainingRate(int tLevel, int rateType)
+		/// <summary>
+		/// Calculates training ship's bonus exp rate
+		/// </summary>
+		private double GetTrainingBonus(int tLevel, int rateType)
 		{
 			var rateIdx = 0;
 			if (tLevel <= 9) rateIdx = 0;
