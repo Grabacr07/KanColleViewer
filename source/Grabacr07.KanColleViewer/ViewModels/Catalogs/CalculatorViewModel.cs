@@ -700,7 +700,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			items.Add(new SlotItemViewModel(0, null));
 			items.AddRange(
 				list.Where(x => x.Info.IsNumerable)
-					.OrderBy(x => x.Info.Id)
+					.OrderBy(x => x.Info.IconType)
+					.ThenBy(x => x.Info.Id)
 					.Distinct(x => x.NameWithLevel)
 					.Select((x, i) => new SlotItemViewModel(x.Id, x))
 			);
@@ -922,16 +923,18 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 						case SlotItemType.艦上戦闘機:
 						case SlotItemType.水上戦闘機:
 						case SlotItemType.噴式戦闘機:
+						case SlotItemType.局地戦闘機:
 							aa += item.Level * 0.2;
 							bonus = Math.Sqrt(proficiency.GetInternalValue(def) / 10.0)
 								+ proficiency.FighterBonus;
 							break;
 
-						// 뇌격기, 폭격기
+						// 공격기 (뇌격기, 폭격기)
 						case SlotItemType.艦上攻撃機:
 						case SlotItemType.艦上爆撃機:
 						case SlotItemType.噴式攻撃機:
 						case SlotItemType.噴式戦闘爆撃機:
+						case SlotItemType.陸上攻撃機:
 							bonus = Math.Sqrt(proficiency.GetInternalValue(def) / 10.0);
 							break;
 
