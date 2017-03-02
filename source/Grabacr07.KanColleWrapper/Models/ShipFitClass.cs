@@ -159,7 +159,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			FitTable_Heavy.Add(137, ShipFitClassUtil.ParseHeavy(" 0,+1, 0,+1, 0, 0, 0, 0,-1")); // 381mm/50 三連装砲改
 
 			// FitTable_Heavy.Add(76, ShipFitClassUtil.ParseHeavy(" ?, ?, ?, ?, ?, ?, ?, ?, ?")); // 38cm連装砲
-			FitTable_Heavy.Add(76, ShipFitClassUtil.ParseHeavy(" 0, 0,+1,+1,+1,+1,+2,+1,+1")); // 38cm連装砲
+			FitTable_Heavy.Add(76,  ShipFitClassUtil.ParseHeavy(" 0, 0,+1,+1,+1,+1,+2,+1,+1")); // 38cm連装砲
 			FitTable_Heavy.Add(114, ShipFitClassUtil.ParseHeavy(" 0, 0,+1,+1,+1,+1,+2,+1,+1")); // 38cm連装砲改
 
 			FitTable_Heavy.Add(7,   ShipFitClassUtil.ParseHeavy(" 0, 0,+1,+1,+1,+1,+2, 0,+1")); // 35.6cm連装砲

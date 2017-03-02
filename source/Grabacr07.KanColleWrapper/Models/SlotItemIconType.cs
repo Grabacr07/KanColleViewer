@@ -201,13 +201,23 @@ namespace Grabacr07.KanColleWrapper.Models
 		LandBasedFighter = 38,
 
 		/// <summary>
-		/// 噴式戦闘爆撃機 A (Jet Keiun Kai)
+		/// 噴式戦闘爆撃機
 		/// </summary>
-		JetbombFighter_A = 39,
+		JetPowerededBomber1 = 39,
 
 		/// <summary>
-		/// 噴式戦闘爆撃機 B (Kikka Kai)
+		/// 噴式戦闘爆撃機
 		/// </summary>
-		JetBombFighter_B = 40,
+		JetPowerededBomber2 = 40,
+
+		/// <summary>
+		/// 輸送機材
+		/// </summary>
+		TransportEquipment = 41,
+
+		/// <summary>
+		/// 潜水艦装備
+		/// </summary>
+		SubmarineEquipment = 42,
 	}
 }

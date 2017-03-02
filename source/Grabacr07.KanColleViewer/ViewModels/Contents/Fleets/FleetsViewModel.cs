@@ -26,9 +26,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		}
 
 		#region Fleets 変更通知プロパティ
-
 		private FleetViewModel[] _Fleets;
-
 		public FleetViewModel[] Fleets
 		{
 			get { return this._Fleets; }
@@ -41,11 +39,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				}
 			}
 		}
-
 		#endregion
 
 		#region SelectedFleet 変更通知プロパティ
-
 		private ItemViewModel _SelectedFleet;
 
 		/// <summary>
@@ -58,20 +54,20 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			{
 				if (_SelectedFleet == value) return; // 같아서 문제?
 
-				if (this._SelectedFleet != null && this.SelectedFleet != null)
+				if (this.SelectedFleet != null)
 					this.SelectedFleet.IsSelected = false;
-				if (value != null) value.IsSelected = true;
+
+				if (value != null)
+					value.IsSelected = true;
+
 				this._SelectedFleet = value;
 				this.RaisePropertyChanged();
 			}
 		}
-
 		#endregion
 
 		#region Fleets2 변경통지 프로퍼티 (연합함대를 포함하는 리스트)
-
 		private ItemViewModel[] _Fleets2;
-
 		public ItemViewModel[] Fleets2
 		{
 			get { return this._Fleets2; }
@@ -84,7 +80,22 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				}
 			}
 		}
+		#endregion
 
+		#region AirBase 変更通知プロパティ
+		private AirBaseTroopViewModel _AirBase;
+		public AirBaseTroopViewModel AirBase
+		{
+			get { return this._AirBase; }
+			set
+			{
+				if (this._AirBase != value)
+				{
+					this._AirBase = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
 		#endregion
 
 		#region ShowLostAirplane 변경통지 프로퍼티
@@ -135,6 +146,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				.Subscribe(nameof(Organization.CombinedFleet), this.UpdateFleets)
 				.AddTo(this);
 
+			AirBase = new AirBaseTroopViewModel(KanColleClient.Current.Proxy);
+
 			Disposable
 				.Create(() => this.fleetListeners?.Dispose())
 				.AddTo(this);
@@ -168,21 +181,29 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				.Select(x => this.ToViewModel(x.Value))
 				.ToArray();
 
+			IEnumerable<ItemViewModel> result;
+
 			if (KanColleClient.Current.Homeport.Organization.Combined && KanColleSettings.MergeCombinedFleet)
 			{
 				var cfvm = MakeCombinedFleetViewModel(KanColleClient.Current.Homeport.Organization.CombinedFleet);
 				var fleets = this.Fleets.Where(x => cfvm.Source.Fleets.All(f => f != x.Source));
 
-				this.Fleets2 = EnumerableEx.Return<ItemViewModel>(cfvm)
-					.Concat(fleets.Select(x => new FleetViewModel(x.Source)))
-					.ToArray();
+				result = EnumerableEx.Return<ItemViewModel>(cfvm)
+					.Concat(fleets.Select(x => new FleetViewModel(x.Source)));
 			}
 			else
 			{
-				this.Fleets2 = this.Fleets.Select(x => new FleetViewModel(x.Source))
-					.OfType<ItemViewModel>()
-					.ToArray();
+				result = this.Fleets
+					.Select(x => new FleetViewModel(x.Source))
+					.OfType<ItemViewModel>();
 			}
+
+			{
+				var list = result.ToList();
+				list.Add(this.AirBase);
+				result = list;
+			}
+			this.Fleets2 = result.ToArray();
 
 			// SelectedFleet 이 무시되는 현상. 이유는 불명.
 			new System.Threading.Thread(() =>

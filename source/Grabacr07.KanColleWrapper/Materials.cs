@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Models.Raw;
+using System.Reactive.Linq;
 
 namespace Grabacr07.KanColleWrapper
 {
@@ -195,6 +196,18 @@ namespace Grabacr07.KanColleWrapper
 		{
 			proxy.api_get_member_material.TryParse<kcsapi_material[]>().Subscribe(x => this.Update(x.Data));
 			proxy.api_req_hokyu_charge.TryParse<kcsapi_charge>().Subscribe(x => this.Update(x.Data.api_material));
+			proxy.api_req_kousyou_destroyship.TryParse<kcsapi_destroyship>().Subscribe(x => this.Update(x.Data.api_material));
+
+			proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_air_corps/supply")
+				.TryParse<kcsapi_airbase_corps_supply>()
+				.Where(x => x.IsSuccess)
+				.Subscribe(x => this.Update(new int[] { x.Data.api_after_fuel, this.Ammunition, this.Steel, x.Data.api_after_bauxite }));
+
+			proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_air_corps/set_plane")
+				.TryParse<kcsapi_airbase_corps_set_plane>()
+				.Where(x => x.IsSuccess)
+				.Subscribe(x => this.Update(new int[] { this.Fuel, this.Ammunition, this.Steel, x.Data.api_after_bauxite }));
+
 			proxy.api_req_kousyou_destroyship.TryParse<kcsapi_destroyship>().Subscribe(x => this.Update(x.Data.api_material));
 		}
 

@@ -344,11 +344,11 @@
 
 							<metro2:CallMethodButton Content="계산기"
 												 Grid.Column="4"
-												 ToolTip="경험치 계산기입니다. 바로 다음 개조레벨조회도 가능"
+												 ToolTip="각종 수치 계산기입니다. 목표 경험치, 연습전 경험치, 기항대 계산기"
 												 Padding="10,4"
 												 MinWidth="70"
 												 Margin="0,0,7,0"
-												 MethodName="CalExp" />
+												 MethodName="Calculator" />
 
 							<metro2:CallMethodButton Content="원정목록"
 												 Grid.Column="5"
@@ -401,8 +401,8 @@
 											Background="Transparent">
 										<StackPanel Orientation="Horizontal">
 											<vContents:StateIconIndicator Width="14"
-																		 Height="14"
-																		 Margin="0,2,4,0" />
+																		  Height="14"
+																		  Margin="0,2,4,0" />
 											<TextBlock x:Name="FleetName"
 													   Text="{Binding Id, StringFormat='/{0}'}"
 													   Style="{DynamicResource HeaderTextStyleKey}"
@@ -410,31 +410,55 @@
 										</StackPanel>
 									</Border>
 									<DataTemplate.Triggers>
-										<DataTrigger Binding="{Binding IsSelected}"
-													 Value="True">
-											<Setter TargetName="FleetName"
-													Property="Text"
-													Value="{Binding Name}" />
+										<DataTrigger Binding="{Binding IsSelected}" Value="True">
+											<Setter TargetName="FleetName" Property="Text" Value="{Binding Name}" />
 										</DataTrigger>
 									</DataTemplate.Triggers> 
 								</DataTemplate>
 							</ItemsControl.ItemTemplate>
 						</ListBox>
 
-						<vContents:StateDetailIndicator DockPanel.Dock="Top"
-													DataContext="{Binding SelectedFleet}"
-													Margin="0,7,0,3" />
+						<Grid DockPanel.Dock="Top">
+							<vContents:StateDetailIndicator DataContext="{Binding SelectedFleet, Mode=OneWay}"
+															VerticalAlignment="Center"
+															Margin="0,3" />
+
+							<TextBlock Margin="8,4"
+									   VerticalAlignment="Center"
+									   HorizontalAlignment="Right"
+									   Style="{StaticResource EmphaticTextStyleKey}"
+									   FontSize="{StaticResource DefaultFontSizeKey}">
+								<Run Text="{Binding Resources.Fleets_Supplys, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+								<Run Text="{Binding Resources.Fleets_Fuel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+								<Run Text="{Binding SelectedFleet.UsedFuel, Mode=OneWay}" />
+								<Run Text="{Binding Resources.Fleets_Ammo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+								<Run Text="{Binding SelectedFleet.UsedAmmo, Mode=OneWay}" />
+								<Run Text="{Binding Resources.Fleets_Bauxite, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+								<Run Text="{Binding SelectedFleet.UsedBauxite, Mode=OneWay}" />
+							</TextBlock>
+
+							<Grid.Style>
+								<Style TargetType="{x:Type Grid}">
+									<Style.Triggers>
+										<DataTrigger Binding="{Binding SelectedFleet.IsNotFleet}" Value="True">
+											<Setter Property="Visibility" Value="Collapsed" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Grid.Style>
+						</Grid>
+
 
 						<ScrollViewer HorizontalScrollBarVisibility="Auto"
-								  VerticalScrollBarVisibility="Disabled">
+									  VerticalScrollBarVisibility="Disabled">
 							<ContentControl Content="{Binding SelectedFleet}"
-									  Background="Transparent"
-									  Grid.IsSharedSizeScope="True">
+											Background="Transparent"
+											Grid.IsSharedSizeScope="True">
 								<i:Interaction.Triggers>
 									<behaviors:FlickTrigger>
 										<behaviors:FlickFleetsAction TargetObject="{Binding}"
-																 IsCyclic="True"
-																 Orientation="Horizontal" />
+																	 IsCyclic="True"
+																	 Orientation="Horizontal" />
 									</behaviors:FlickTrigger>
 								</i:Interaction.Triggers>
 								<ContentControl.Resources>
@@ -472,6 +496,14 @@
 												</DataTemplate>
 											</ItemsControl.ItemTemplate>
 										</ItemsControl>
+									</DataTemplate>
+
+									<DataTemplate DataType="{x:Type fleets:AirBaseTroopViewModel}">
+										<TextBlock Margin="10"
+												   TextAlignment="Center">
+											<Run Text="기지항공대는 함대 탭에서 확인할 수 있습니다."
+												 Style="{StaticResource DefaultTextElementStyleKey}" />
+										</TextBlock>
 									</DataTemplate>
 								</ContentControl.Resources>
 							</ContentControl>
@@ -515,12 +547,12 @@
 												 Margin="2,0,2,4"
 												 MethodName="ExpeditionsCatalogWindow" />
 						<metro2:CallMethodButton Content="계산기"
-												 ToolTip="경험치 계산기입니다. 바로 다음 개조레벨조회도 가능"
+												 ToolTip="각종 수치 계산기입니다. 목표 경험치, 연습전 경험치, 기항대 계산기"
 												 Padding="10,4"
 												 Grid.Row="3"
 												 MinWidth="70"
 												 Margin="2,0,2,4"
-												 MethodName="CalExp" />
+												 MethodName="Calculator" />
 						<metro2:CallMethodButton Content="개수공창"
 												 Padding="10,4"
 												 MinWidth="70"

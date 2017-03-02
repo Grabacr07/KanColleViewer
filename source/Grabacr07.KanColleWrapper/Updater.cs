@@ -110,7 +110,6 @@ namespace Grabacr07.KanColleWrapper
 		/// Updates any translation files that differ from that found online.
 		/// </summary>
 		/// <param name="BaseTranslationURL">String URL folder that contains all the translation XML files.</param>
-		/// <param name="Culture">Language version to download</param>
 		/// <param name="TranslationsRef">Link to the translation engine to obtain current translation versions.</param>
 		/// <returns>Returns a state code depending on how it ran. [-1: Error, 0: Nothing to update, 1: Update Successful]</returns>
 		public int UpdateTranslations(string BaseTranslationURL, Translations TranslationsRef)
