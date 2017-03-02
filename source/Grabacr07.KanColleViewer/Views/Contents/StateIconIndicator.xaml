@@ -34,8 +34,8 @@
 				<Border Background="#FF686868" />
 			</DataTemplate>
 
-			<DataTemplate DataType="{x:Type fleets:AirBaseTroopViewModel}">
-				<Border Background="#FF40C840" />
+			<DataTemplate DataType="{x:Type fleets:AirBaseStateViewModel}">
+				<Border Background="#FF949494" />
 			</DataTemplate>
 		</ContentControl.Resources>
 	</ContentControl>

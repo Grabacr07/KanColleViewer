@@ -801,13 +801,19 @@
 
 												<TextBlock Margin="0,2,0,2"
 														   Style="{DynamicResource DefaultTextStyleKey}">
-													<Run Text="제공수치:" />
-													<Run Text="{Binding AirSuperiorityPotential, Mode=OneWay}" />
+													<Run Text="기대 피해:" />
+													<Run Text="{Binding AttackPowerText, Mode=OneWay}" />
+												</TextBlock>
+
+												<TextBlock Margin="0,2,0,2"
+														   Style="{DynamicResource DefaultTextStyleKey}">
+													<Run Text="제공 수치:" />
+													<Run Text="{Binding AirSuperiorityPotentialText, Mode=OneWay}" />
 												</TextBlock>
 
 												<Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
 
-												<ItemsControl ItemsSource="{Binding PlanesInfo}">
+												<ItemsControl ItemsSource="{Binding Planes}">
 													<ItemsControl.ItemsPanel>
 														<ItemsPanelTemplate>
 															<StackPanel />
@@ -823,19 +829,19 @@
 
 																		<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}"
 																				   Style="{DynamicResource DefaultTextStyleKey}"
-																				   Text="{Binding Source.Name, Mode=OneWay}"
+																				   Text="{Binding Source.Info.Name, Mode=OneWay}"
 																				   Margin="5,1"/>
 
 																		<TextBlock Margin="0,1,5,1"
-																								Foreground="#FF45A9A5">
+																				   Foreground="#FF45A9A5">
 																			<TextBlock.Style>
 																				<Style TargetType="{x:Type TextBlock}">
 																					<Setter Property="Text" Value="{Binding Source.Level, StringFormat=★+{0}}" />
 																					<Style.Triggers>
-																						<DataTrigger Binding="{Binding ExSlot.Level}" Value="0">
+																						<DataTrigger Binding="{Binding Source.Level}" Value="0">
 																							<Setter Property="Visibility" Value="Collapsed" />
 																						</DataTrigger>
-																						<DataTrigger Binding="{Binding ExSlot.Level}" Value="10">
+																						<DataTrigger Binding="{Binding Source.Level}" Value="10">
 																							<Setter Property="Text" Value="★max" />
 																						</DataTrigger>
 																					</Style.Triggers>
@@ -844,8 +850,8 @@
 																		</TextBlock>
 
 																		<TextBlock Margin="0,1,5,1"
-																								Text="{Binding ExSlot.Proficiency, StringFormat=+{0}}"
-																								Foreground="#FFD49C0F">
+																				   Text="{Binding Source.Proficiency, StringFormat=+{0}}"
+																				   Foreground="#FFD49C0F">
 																			<TextBlock.Style>
 																				<Style TargetType="{x:Type TextBlock}">
 																					<Style.Triggers>
@@ -860,7 +866,8 @@
 
 																	<StackPanel Orientation="Horizontal">
 																		<TextBlock Margin="5,1"
-																				   Text="{Binding Source.Info.}"></TextBlock>
+																				   Text="{Binding Source.Info.Type}"
+																				   Style="{StaticResource DetailTextStyleKey}" />
 
 																		<TextBlock Margin="5,1"
 																				   HorizontalAlignment="Right">

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Models.Raw;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper;
+using Livet;
 using System.Reactive.Linq;
 using System.Windows;
 
@@ -29,6 +30,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 		// FleetViewModel과의 호환성
 		public Visibility IsFirstFleet => Visibility.Collapsed;
+
+		public ViewModel QuickStateView => AirBaseStateViewModel.Instance;
 
 
 		public AirBaseTroopViewModel(KanColleProxy proxy)
@@ -62,6 +65,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 					if (!int.TryParse(x.Request["api_action_kind"], out actionKind)) return;
 
 					this.AirBases[base_id].UpdateActionKind((AirBaseAction)actionKind);
+					this.RaisePropertyChanged(nameof(this.AirBases));
 				});
 
 			// 기항대 보급
@@ -76,6 +80,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 					base_id--;
 
 					this.AirBases[base_id].Update(x.Data);
+					this.RaisePropertyChanged(nameof(this.AirBases));
 				});
 
 			// 기항대 변경
@@ -90,6 +95,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 					base_id--;
 
 					this.AirBases[base_id].Update(x.Data);
+					this.RaisePropertyChanged(nameof(this.AirBases));
 				});
 		}
 	}
