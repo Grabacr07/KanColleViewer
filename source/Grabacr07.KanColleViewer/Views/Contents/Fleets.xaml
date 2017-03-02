@@ -583,10 +583,32 @@
 				</ItemsControl.ItemTemplate>
 			</ListBox>
 
-			<contents:StateDetailIndicator Grid.Row="1"
-										   Grid.Column="0"
-										   DataContext="{Binding SelectedFleet, Mode=OneWay}"
-										   Margin="10,3" />
+			<Grid Grid.Row="1" Grid.Column="0">
+				<contents:StateDetailIndicator DataContext="{Binding SelectedFleet, Mode=OneWay}"
+											   Margin="10,3" />
+
+				<TextBlock Margin="18,3"
+						   VerticalAlignment="Center"
+						   HorizontalAlignment="Right">
+					<Run Text="{Binding Resources.Fleets_Supplys, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+					<Run Text="{Binding Resources.Fleets_Fuel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+					<Run Text="{Binding SelectedFleet.UsedFuel, Mode=OneWay}" />
+					<Run Text="{Binding Resources.Fleets_Ammo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+					<Run Text="{Binding SelectedFleet.UsedAmmo, Mode=OneWay}" />
+					<Run Text="{Binding Resources.Fleets_Bauxite, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+					<Run Text="{Binding SelectedFleet.UsedBauxite, Mode=OneWay}" />
+				</TextBlock>
+
+				<Grid.Style>
+					<Style TargetType="{x:Type Grid}">
+						<Style.Triggers>
+							<DataTrigger Binding="{Binding SelectedFleet.IsNotFleet}" Value="True">
+								<Setter Property="Visibility" Value="Collapsed" />
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</Grid.Style>
+			</Grid>
 
 			<metro2:CallMethodButton Grid.Row="0"
 									 Grid.Column="1"
@@ -604,19 +626,6 @@
 									 Padding="12,8"
 									 MethodName="ShowFleetWindow" />
 
-			<TextBlock Grid.Row="1"
-					   Grid.Column="0"
-					   Margin="18,3"
-					   VerticalAlignment="Center"
-					   HorizontalAlignment="Right">
-				<Run Text="{Binding Resources.Fleets_Supplys, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-				<Run Text="{Binding Resources.Fleets_Fuel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-				<Run Text="{Binding SelectedFleet.UsedFuel, Mode=OneWay}" />
-				<Run Text="{Binding Resources.Fleets_Ammo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-				<Run Text="{Binding SelectedFleet.UsedAmmo, Mode=OneWay}" />
-				<Run Text="{Binding Resources.Fleets_Bauxite, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-				<Run Text="{Binding SelectedFleet.UsedBauxite, Mode=OneWay}" />
-			</TextBlock>
 			
 			<Grid Grid.Row="3"
 				  Grid.Column="0"
@@ -821,11 +830,15 @@
 													</ItemsControl.ItemsPanel>
 													<ItemsControl.ItemTemplate>
 														<DataTemplate>
-															<Grid Margin="2">
+															<Grid Margin="5,10">
 																<StackPanel x:Name="PlaneInfo">
 																	<StackPanel Orientation="Horizontal">
 																		<kcvc:ConditionIcon ConditionType="{Binding Condition, Mode=OneWay}"
 																							Margin="0,0,4,0"/>
+
+																		<kcvc:SlotItemIcon Type="{Binding Source.Info.IconType, Mode=OneWay}"
+																						   Width="14"
+																						   Height="14" />
 
 																		<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}"
 																				   Style="{DynamicResource DefaultTextStyleKey}"
@@ -864,9 +877,9 @@
 																		</TextBlock>
 																	</StackPanel>
 
-																	<StackPanel Orientation="Horizontal">
+																	<Grid>
 																		<TextBlock Margin="5,1"
-																				   Text="{Binding Source.Info.Type}"
+																				   Text="{Binding Source.Info.TypeName}"
 																				   Style="{StaticResource DetailTextStyleKey}" />
 
 																		<TextBlock Margin="5,1"
@@ -891,7 +904,7 @@
 																				</Style>
 																			</TextBlock.Style>
 																		</TextBlock>
-																	</StackPanel>
+																	</Grid>
 																</StackPanel>
 
 																<Grid x:Name="PlaneStatus"

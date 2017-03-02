@@ -28,8 +28,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		}
 		#endregion
 
-		// FleetViewModel과의 호환성
 		public Visibility IsFirstFleet => Visibility.Collapsed;
+		public bool IsNotFleet => true;
 
 		public ViewModel QuickStateView => AirBaseStateViewModel.Instance;
 

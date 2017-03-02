@@ -22,8 +22,8 @@ namespace Grabacr07.KanColleWrapper.Models
 		public string Name => KanColleClient.Current.Translations.GetTranslation(this.RawData.api_name, TranslationType.Equipment, false, this.RawData);
 
 		public SlotItemType Type => this.type ?? (SlotItemType)(this.type = (SlotItemType)(this.RawData.api_type.Get(2) ?? 0));
-
 		public SlotItemIconType IconType => this.iconType ?? (SlotItemIconType)(this.iconType = (SlotItemIconType)(this.RawData.api_type.Get(3) ?? 0));
+		public string TypeName => KanColleClient.Current.Translations.GetTranslation(this.Type.ToString(), TranslationType.EquipmentTypes, false, this.RawData);
 
 		public int CategoryId => this.categoryId ?? (int)(this.categoryId = this.RawData.api_type.Get(2) ?? int.MaxValue);
 
