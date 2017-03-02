@@ -520,8 +520,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		#endregion
 
 		#region LandBased_AirSuperiorityPotential 変更通知プロパティ
-		private int _LandBased_AirSuperiorityPotential;
-		public int LandBased_AirSuperiorityPotential
+		private double _LandBased_AirSuperiorityPotential;
+		public double LandBased_AirSuperiorityPotential
 		{
 			get { return this._LandBased_AirSuperiorityPotential; }
 			set
@@ -530,10 +530,30 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				{
 					this._LandBased_AirSuperiorityPotential = value;
 					this.RaisePropertyChanged();
-					this.UpdateCalculator();
+					this.RaisePropertyChanged(nameof(LandBased_AirSuperiorityPotentialText));
 				}
 			}
 		}
+
+		public string LandBased_AirSuperiorityPotentialText => this.LandBased_AirSuperiorityPotential.ToString("0.#");
+		#endregion
+		#region LandBased_AttackPower 変更通知プロパティ
+		private double _LandBased_AttackPower;
+		public double LandBased_AttackPower
+		{
+			get { return this._LandBased_AttackPower; }
+			set
+			{
+				if (this._LandBased_AttackPower != value)
+				{
+					this._LandBased_AttackPower = value;
+					this.RaisePropertyChanged();
+					this.RaisePropertyChanged(nameof(LandBased_AttackPowerText));
+				}
+			}
+		}
+
+		public string LandBased_AttackPowerText => this.LandBased_AttackPower.ToString("0.#");
 		#endregion
 		#region LandBased_Distance 変更通知プロパティ
 		private int _LandBased_Distance;
@@ -546,7 +566,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				{
 					this._LandBased_Distance = value;
 					this.RaisePropertyChanged();
-					this.UpdateCalculator();
 				}
 			}
 		}
@@ -878,6 +897,52 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				.Where(x => x.Display != null)
 				.Select(x => x.Display);
 
+
+			LandBased_AttackPower = 0;
+			LandBased_AirSuperiorityPotential = 0;
+			LandBased_Distance = 0;
+			if (items.Count() == 0) return;
+
+			#region Attack Power calculating
+			var attackers = new SlotItemType[]
+			{
+				SlotItemType.艦上攻撃機,
+				SlotItemType.艦上爆撃機,
+				SlotItemType.噴式攻撃機,
+				SlotItemType.噴式戦闘爆撃機,
+				SlotItemType.陸上攻撃機,
+				SlotItemType.水上爆撃機
+			};
+			var power_sum = items
+				.Where(x => attackers.Contains(x.Info.Type))
+				.Sum(item =>
+				{
+					var proficiency = proficiencies[item.Proficiency];
+					double damage = 0;
+
+					if (item.Info.Type == SlotItemType.陸上攻撃機)
+					{
+						damage = (item.Info.Torpedo + item.Info.Bomb) / 2; // P
+						damage *= Math.Sqrt(1.8 * 18); // root 1.8N
+						damage += 25;
+						damage = Math.Floor(damage * 0.8);
+						// Critical modifier skip
+						// Contact multiplier skip
+					}
+					else
+					{
+						damage = (item.Info.Torpedo + item.Info.Bomb) / 2; // P
+						damage *= Math.Sqrt(1.8 * 18); // root 1.8N
+						damage += 25;
+						damage = Math.Floor(damage * 0.8);
+						// Critical modifier skip
+						// Contact multiplier skip
+						damage *= 1.8;
+					}
+					return damage;
+				});
+			#endregion
+
 			#region Bonus rate calculate when Air Defence Mode
 			var bonusRate = 1.0;
 			if (this.SelectedLandBasedType == "방공")
@@ -935,7 +1000,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 						case SlotItemType.噴式攻撃機:
 						case SlotItemType.噴式戦闘爆撃機:
 						case SlotItemType.陸上攻撃機:
-							bonus = Math.Sqrt(proficiency.GetInternalValue(def) / 10.0);
+							bonus = Math.Sqrt(proficiency.GetInternalValue(def) / 10.0)
+								+ 0;
 							break;
 
 						// 수상폭격기
@@ -960,23 +1026,26 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 							break;
 						case "방공":
 							if (item.Info.Type == SlotItemType.局地戦闘機)
-								aa += item.Info.Hit * 2 + (int)(item.Info.Evade * 1.5);
+								aa += item.Info.Hit * 2 +item.Info.Evade;
 							break;
 					}
-					return Math.Floor(Math.Sqrt(18) * aa + bonus) * bonusRate;
+					return Math.Floor(Math.Sqrt(18) * aa) * bonusRate + Math.Floor(bonus);
 				});
 			#endregion
-			LandBased_AirSuperiorityPotential = (int)air_sum;
 
 			int distance = items.Min(x => x.Info.Distance);
 			#region Bonus Distance
 			if (items.Any(x => distanceBonus.ContainsKey(x.Info.Id)))
 			{
 				var dist = Math.Max(0, Math.Min(7, distance - 2));
-				distance += items.Max(x => distanceBonus[x.Info.Id][dist]);
+				distance += items
+					.Where(x => distanceBonus.ContainsKey(x.Info.Id))
+					.Max(x => distanceBonus[x.Info.Id][dist]);
 			}
 			#endregion
 
+			LandBased_AttackPower = power_sum;
+			LandBased_AirSuperiorityPotential = air_sum;
 			LandBased_Distance = distance;
 		}
 

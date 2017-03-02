@@ -646,8 +646,14 @@
 						<TextBlock HorizontalAlignment="Left"
 								   VerticalAlignment="Center"
 								   Margin="8,4">
+							<Run Text="기대 피해:" />
+							<Run Text="{Binding LandBased_AttackPowerText, Mode=OneWay}" />
+						</TextBlock>
+						<TextBlock HorizontalAlignment="Left"
+								   VerticalAlignment="Center"
+								   Margin="8,4">
 							<Run Text="제공 수치:" />
-							<Run Text="{Binding LandBased_AirSuperiorityPotential, Mode=OneWay}" />
+							<Run Text="{Binding LandBased_AirSuperiorityPotentialText, Mode=OneWay}" />
 						</TextBlock>
 						<TextBlock HorizontalAlignment="Left"
 								   VerticalAlignment="Center"
