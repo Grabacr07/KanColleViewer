@@ -867,12 +867,13 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		{
 			Dictionary<int, int[]> distanceBonus = new Dictionary<int, int[]>()
 			{
-				{ 138, new int[] { 3, 3, 3, 3, 3, 3, 3, 3 } },
-				{ 178, new int[] { 3, 3, 2, 2, 2, 2, 1, 1 } },
-				{ 151, new int[] { 2, 2, 2, 2, 1, 1, 0, 0 } },
-				{  54, new int[] { 2, 2, 2, 2, 1, 1, 0, 0 } },
-				{  25, new int[] { 2, 2, 2, 1, 1, 0, 0, 0 } },
-				{  61, new int[] { 2, 1, 1, 0, 0, 0, 0, 0 } },
+				{ 138, new int[] { 3, 3, 3, 3, 3, 3, 3, 3 } }, // 이식대정
+				{ 178, new int[] { 3, 3, 2, 2, 2, 2, 1, 1 } }, // 카탈리나
+				{ 151, new int[] { 2, 2, 2, 2, 1, 1, 0, 0 } }, // 시제케이운
+				{  54, new int[] { 2, 2, 2, 2, 1, 1, 0, 0 } }, // 사이운
+				{  25, new int[] { 2, 2, 2, 1, 1, 0, 0, 0 } }, // 영식수상정찰기
+				{  59, new int[] { 2, 2, 2, 1, 1, 0, 0, 0 } }, // 영식수상관측기
+				{  61, new int[] { 2, 1, 1, 0, 0, 0, 0, 0 } }, // 2식함상정찰기
 			};
 			Dictionary<int, Proficiency> proficiencies = new Dictionary<int, Proficiency>()
 			{
