@@ -124,10 +124,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			var catalog = new SlotItemCatalogViewModel();
 			WindowService.Current.MainWindow.Transition(catalog, typeof(SlotItemCatalogWindow));
 		}
-		public void CalExp()
+		public void Calculator()
 		{
-			var catalog = new CalExpViewModel();
-			WindowService.Current.MainWindow.Transition(catalog, typeof(CalExp));
+			var catalog = new CalculatorViewModel();
+			WindowService.Current.MainWindow.Transition(catalog, typeof(Calculator));
 		}
 		public void ExpeditionsCatalogWindow()
 		{

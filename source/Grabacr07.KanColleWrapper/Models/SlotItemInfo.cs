@@ -22,8 +22,8 @@ namespace Grabacr07.KanColleWrapper.Models
 		public string Name => KanColleClient.Current.Translations.GetTranslation(this.RawData.api_name, TranslationType.Equipment, false, this.RawData);
 
 		public SlotItemType Type => this.type ?? (SlotItemType)(this.type = (SlotItemType)(this.RawData.api_type.Get(2) ?? 0));
-
 		public SlotItemIconType IconType => this.iconType ?? (SlotItemIconType)(this.iconType = (SlotItemIconType)(this.RawData.api_type.Get(3) ?? 0));
+		public string TypeName => KanColleClient.Current.Translations.GetTranslation(this.Type.ToString(), TranslationType.EquipmentTypes, false, this.RawData);
 
 		public int CategoryId => this.categoryId ?? (int)(this.categoryId = this.RawData.api_type.Get(2) ?? int.MaxValue);
 
@@ -71,6 +71,11 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 索敵値を取得します。
 		/// </summary>
 		public int ViewRange => this.RawData.api_saku;
+
+		/// <summary>
+		/// 基地航空隊の航続距離値を取得します。
+		/// </summary>
+		public int Distance => this.RawData.api_distance;
 
 		public bool IsNumerable => this.Type.IsNumerable();
 
