@@ -100,7 +100,7 @@
     </Reference>
     <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference> 
+    </Reference>
     <Reference Include="Nekoxy, Version=1.5.2.20, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Nekoxy.1.5.2.20\lib\net45\Nekoxy.dll</HintPath>
       <Private>True</Private>
@@ -208,7 +208,7 @@
     <Compile Include="Models\Volume.cs" />
     <Compile Include="Models\Migration\_KanColleClientSettings.cs" />
     <Compile Include="ViewModels\AkashiTimerViewModel.cs" />
-    <Compile Include="ViewModels\Catalogs\CalExpViewModel.cs" />
+    <Compile Include="ViewModels\Catalogs\CalculatorViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ExpeditionsCatalogWindowViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\NeedNdockShipCatalogWindowViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\NotePadViewModel.cs" />
@@ -289,8 +289,8 @@
     <Compile Include="Views\BrowserWindow.xaml.cs">
       <DependentUpon>BrowserWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Catalogs\CalExp.xaml.cs">
-      <DependentUpon>CalExp.xaml</DependentUpon>
+    <Compile Include="Views\Catalogs\Calculator.xaml.cs">
+      <DependentUpon>Calculator.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Catalogs\ExpeditionsCatalogWindow.xaml.cs">
       <DependentUpon>ExpeditionsCatalogWindow.xaml</DependentUpon>
@@ -462,7 +462,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Catalogs\CalExp.xaml">
+    <Page Include="Views\Catalogs\Calculator.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

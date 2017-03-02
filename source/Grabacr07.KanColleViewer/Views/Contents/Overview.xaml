@@ -348,7 +348,7 @@
 												 Padding="10,4"
 												 MinWidth="70"
 												 Margin="0,0,7,0"
-												 MethodName="CalExp" />
+												 MethodName="Calculator" />
 
 							<metro2:CallMethodButton Content="원정목록"
 												 Grid.Column="5"
@@ -520,7 +520,7 @@
 												 Grid.Row="3"
 												 MinWidth="70"
 												 Margin="2,0,2,4"
-												 MethodName="CalExp" />
+												 MethodName="Calculator" />
 						<metro2:CallMethodButton Content="개수공창"
 												 Padding="10,4"
 												 MinWidth="70"
