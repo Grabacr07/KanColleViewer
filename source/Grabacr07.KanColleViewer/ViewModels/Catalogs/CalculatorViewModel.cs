@@ -877,6 +877,38 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				.Where(x => x.Display != null)
 				.Select(x => x.Display);
 
+			#region Bonus rate calculate when Air Defence Mode
+			var bonusRate = 1.0;
+			if (this.SelectedLandBasedType == "방공")
+			{
+				if (items.Any(x => x.Info.Type == SlotItemType.艦上偵察機))
+				{
+					var viewrange = items
+						.Where(x => x.Info.Type == SlotItemType.艦上偵察機)
+						.Max(x => x.Info.ViewRange);
+
+					if (viewrange <= 7)
+						bonusRate = 1.2;
+					else if (viewrange == 8)
+						bonusRate = 1.25; // Maybe?
+					else
+						bonusRate = 1.3;
+				}
+				else if (items.Any(x => x.Info.Type == SlotItemType.水上偵察機))
+				{
+					var viewrange = items
+						.Where(x => x.Info.Type == SlotItemType.水上偵察機)
+						.Max(x => x.Info.ViewRange);
+
+					if (viewrange <= 7)
+						bonusRate = 1.1;
+					else if (viewrange == 8)
+						bonusRate = 1.13;
+					else
+						bonusRate = 1.16;
+				}
+			}
+			#endregion
 			#region AA calculating
 			var air_sum = items.Sum(item =>
 				{
@@ -921,53 +953,25 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 					{
 						case "출격":
 							if (item.Info.Type == SlotItemType.局地戦闘機)
-								aa += item.Info.Evade * 1.5;
+								aa += (int)(item.Info.Evade * 1.5);
 							break;
 						case "방공":
 							if (item.Info.Type == SlotItemType.局地戦闘機)
-								aa += item.Info.Hit * 2 + item.Info.Evade * 1.5;
+								aa += item.Info.Hit * 2 + (int)(item.Info.Evade * 1.5);
 							break;
 					}
-					return (int)(aa * Math.Sqrt(18) + bonus);
+					return Math.Floor(Math.Sqrt(18) * aa + bonus) * bonusRate;
 				});
 			#endregion
-			#region Bonus rate calculate when Air Defence Mode
-			if (this.SelectedLandBasedType == "방공")
-			{
-				if (items.Any(x => x.Info.Type == SlotItemType.艦上偵察機))
-				{
-					var viewrange = items
-						.Where(x => x.Info.Type == SlotItemType.艦上偵察機)
-						.Max(x => x.Info.ViewRange);
-
-					if (viewrange <= 7)
-						air_sum = (int)(1.2 * air_sum);
-					else if (viewrange == 8)
-						air_sum = (int)(1.25 * air_sum); // Maybe?
-					else
-						air_sum = (int)(1.3 * air_sum);
-				}
-				else if (items.Any(x => x.Info.Type == SlotItemType.水上偵察機))
-				{
-					var viewrange = items
-						.Where(x => x.Info.Type == SlotItemType.水上偵察機)
-						.Max(x => x.Info.ViewRange);
-
-					if (viewrange <= 7)
-						air_sum = (int)(1.1 * air_sum);
-					else if (viewrange == 8)
-						air_sum = (int)(1.13 * air_sum);
-					else
-						air_sum = (int)(1.16 * air_sum);
-				}
-			}
-			#endregion
-			LandBased_AirSuperiorityPotential = air_sum;
+			LandBased_AirSuperiorityPotential = (int)air_sum;
 
 			int distance = items.Min(x => x.Info.Distance);
 			#region Bonus Distance
 			if (items.Any(x => distanceBonus.ContainsKey(x.Info.Id)))
-				distance += items.Max(x => distanceBonus[x.Info.Id][distance]);
+			{
+				var dist = Math.Max(0, Math.Min(7, distance - 2));
+				distance += items.Max(x => distanceBonus[x.Info.Id][dist]);
+			}
 			#endregion
 
 			LandBased_Distance = distance;
