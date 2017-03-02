@@ -344,7 +344,7 @@
 
 							<metro2:CallMethodButton Content="계산기"
 												 Grid.Column="4"
-												 ToolTip="경험치 계산기입니다. 바로 다음 개조레벨조회도 가능"
+												 ToolTip="각종 수치 계산기입니다. 목표 경험치, 연습전 경험치, 기항대 계산기"
 												 Padding="10,4"
 												 MinWidth="70"
 												 Margin="0,0,7,0"
@@ -515,7 +515,7 @@
 												 Margin="2,0,2,4"
 												 MethodName="ExpeditionsCatalogWindow" />
 						<metro2:CallMethodButton Content="계산기"
-												 ToolTip="경험치 계산기입니다. 바로 다음 개조레벨조회도 가능"
+												 ToolTip="각종 수치 계산기입니다. 목표 경험치, 연습전 경험치, 기항대 계산기"
 												 Padding="10,4"
 												 Grid.Row="3"
 												 MinWidth="70"

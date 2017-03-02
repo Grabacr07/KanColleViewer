@@ -29,7 +29,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		/// <summary>
 		/// Sea exp table. Cannot be used properly in xaml without dumb workarounds.
 		/// </summary>
-		public IEnumerable<string> SeaList { get; set; }
 		public static Dictionary<string, int> SeaExpTable = new Dictionary<string, int>
 		{
 			{"1-1", 30}, {"1-2", 50}, {"1-3", 80}, {"1-4", 100}, {"1-5", 150},
@@ -39,15 +38,20 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			{"5-1", 360}, {"5-2", 380}, {"5-3", 400}, {"5-4", 420}, {"5-5", 450},
 			{"6-1", 380}, {"6-2", 420}
 		};
+		public IEnumerable<string> SeaList => CalculatorViewModel.SeaExpTable.Keys.ToList();
 
-		public IEnumerable<string> ResultList { get; set; }
-		public string[] Results = { "S", "A", "B", "C", "D", "E" };
+		public string[] ResultRanks { get; } = new string[] { "S", "A", "B", "C", "D", "E" };
+		public IEnumerable<string> ResultList => this.ResultRanks.ToList();
 
-		private readonly Subject<Unit> updateSource = new Subject<Unit>();
+		public string[] LandBasedType { get; } = new string[] { "출격", "방공" };
+		public IEnumerable<string> LandBasedTypeList => this.LandBasedType.ToList();
+
+
+		private readonly Subject<Unit> UpdateSourceShipList = new Subject<Unit>();
+		private readonly Subject<Unit> UpdateSourceSlotitemList = new Subject<Unit>();
 		private readonly Homeport homeport = KanColleClient.Current.Homeport;
 
 		#region TabItems 변경통지 프로퍼티
-
 		private string[] _TabItems;
 		public string[] TabItems
 		{
@@ -73,22 +77,287 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 					this._SelectedTab = value;
 					this.RaisePropertyChanged();
 					this.RaisePropertyChanged("SelectedTabIdx");
-					this.RaisePropertyChanged("GoalExpVisible");
-					this.RaisePropertyChanged("TrainingExpVisible");
 					this.UpdateCalculator();
 				}
 			}
 		}
 
-		public int SelectedTabIdx => this.SelectedTab == null ? 0 : (this.TabItems?.ToList().IndexOf(this.SelectedTab) ?? 0);
-
-		public bool GoalExpVisible => this.SelectedTabIdx == 0;
-		public bool TrainingExpVisible => this.SelectedTabIdx == 1;
-
+		public int SelectedTabIdx => this.SelectedTab == null
+			? 0
+			: (this.TabItems?.ToList().IndexOf(this.SelectedTab) ?? 0);
 		#endregion
 
-		#region 연습전 경험치 프로퍼티
+		#region Ships 変更通知プロパティ
+		private IReadOnlyCollection<ShipViewModel> _Ships;
+		public IReadOnlyCollection<ShipViewModel> Ships
+		{
+			get { return this._Ships; }
+			set
+			{
+				if (this._Ships != value)
+				{
+					this._Ships = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
 
+		#region IsReloading 変更通知プロパティ
+		private int _Reloading;
+		public int Reloading
+		{
+			get { return this._Reloading; }
+			set
+			{
+				if (this._Reloading != value)
+				{
+					this._Reloading = value;
+					this.RaisePropertyChanged();
+					this.RaisePropertyChanged(nameof(IsReloading));
+				}
+			}
+		}
+
+		public bool IsReloading => this.Reloading > 0;
+		#endregion
+
+
+		#region CurrentShip 変更通知プロパティ
+		private Ship _CurrentShip;
+		public Ship CurrentShip
+		{
+			get { return this._CurrentShip; }
+			set
+			{
+				if (this._CurrentShip != value)
+				{
+					this._CurrentShip = value;
+					if (value != null)
+					{
+						this.CurrentLevel = this.CurrentShip.Level;
+						this.TargetLevel = Math.Min(this.CurrentShip.Level + 1, 155);
+						if (this.CurrentShip.Info.NextRemodelingLevel.HasValue)
+						{
+							if (this.CurrentShip.Info.NextRemodelingLevel.Value > this.CurrentLevel)
+							{
+								this.RemodelLv = this.CurrentShip.Info.NextRemodelingLevel.Value;
+								this.TargetLevel = RemodelLv;
+							}
+						}
+						this.CurrentExp = this.CurrentShip.Exp;
+						this.UpdateCalculator();
+						this.RaisePropertyChanged();
+					}
+				}
+			}
+		}
+		#endregion
+
+		#region CurrentLevel 変更通知プロパティ
+		private int _CurrentLevel;
+		public int CurrentLevel
+		{
+			get { return this._CurrentLevel; }
+			set
+			{
+				if (this._CurrentLevel != value && value >= 1 && value <= 155)
+				{
+					this._CurrentLevel = value;
+					this.CurrentExp = ExpTable[value];
+					this.TargetLevel = Math.Max(this.TargetLevel, Math.Min(value + 1, 155));
+					this.RaisePropertyChanged();
+					this.UpdateCalculator();
+				}
+			}
+		}
+		#endregion
+
+		#region TargetLevel 変更通知プロパティ
+		private int _TargetLevel;
+		public int TargetLevel
+		{
+			get { return this._TargetLevel; }
+			set
+			{
+				if (this._TargetLevel != value && value >= 1 && value <= 155)
+				{
+					this._TargetLevel = value;
+					this.TargetExp = ExpTable[value];
+					this.CurrentLevel = Math.Min(this.CurrentLevel, Math.Max(value - 1, 1));
+					this.RaisePropertyChanged();
+					this.UpdateCalculator();
+				}
+			}
+		}
+		#endregion
+
+		#region SelectedSea 変更通知プロパティ
+		private string _SelectedSea;
+		public string SelectedSea
+		{
+			get { return this._SelectedSea; }
+			set
+			{
+				if (_SelectedSea != value)
+				{
+					this._SelectedSea = value;
+					this.RaisePropertyChanged();
+					this.UpdateCalculator();
+				}
+			}
+		}
+		#endregion
+
+		#region SelectedResult 変更通知プロパティ
+		private string _SelectedResult;
+		public string SelectedResult
+		{
+			get { return this._SelectedResult; }
+			set
+			{
+				if (this._SelectedResult != value)
+				{
+					this._SelectedResult = value;
+					this.RaisePropertyChanged();
+					this.UpdateCalculator();
+				}
+			}
+		}
+		#endregion
+
+		#region IsFlagship 変更通知プロパティ
+		private bool _IsFlagship;
+		public bool IsFlagship
+		{
+			get { return this._IsFlagship; }
+			set
+			{
+				if (this._IsFlagship != value)
+				{
+					this._IsFlagship = value;
+					this.RaisePropertyChanged();
+					this.UpdateCalculator();
+				}
+			}
+		}
+		#endregion
+
+		#region IsMVP 変更通知プロパティ
+		private bool _IsMVP;
+		public bool IsMVP
+		{
+			get { return this._IsMVP; }
+			set
+			{
+				if (this._IsMVP != value)
+				{
+					this._IsMVP = value;
+					this.RaisePropertyChanged();
+					this.UpdateCalculator();
+				}
+			}
+		}
+		#endregion
+
+		#region CurrentExp 変更通知プロパティ
+		private int _CurrentExp;
+		public int CurrentExp
+		{
+			get { return this._CurrentExp; }
+			set
+			{
+				if (this._CurrentExp != value)
+				{
+					this._CurrentExp = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
+
+		#region TargetExp 変更通知プロパティ
+		private int _TargetExp;
+		public int TargetExp
+		{
+			get { return this._TargetExp; }
+			set
+			{
+				if (this._TargetExp != value)
+				{
+					this._TargetExp = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
+
+		#region RemodelLv 変更通知プロパティ
+		private int _RemodelLv;
+		public int RemodelLv
+		{
+			get { return this._RemodelLv; }
+			set
+			{
+				if (this._RemodelLv != value)
+				{
+					this._RemodelLv = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
+
+		#region SortieExp 変更通知プロパティ
+		private int _SortieExp;
+		public int SortieExp
+		{
+			get { return this._SortieExp; }
+			set
+			{
+				if (this._SortieExp != value)
+				{
+					this._SortieExp = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
+
+		#region RemainingExp 変更通知プロパティ
+		private int _RemainingExp;
+		public int RemainingExp
+		{
+			get { return this._RemainingExp; }
+			set
+			{
+				if (this._RemainingExp != value)
+				{
+					this._RemainingExp = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
+
+		#region RunCount 変更通知プロパティ
+		private int _RunCount;
+		public int RunCount
+		{
+			get { return this._RunCount; }
+			set
+			{
+				if (this._RunCount != value)
+				{
+					this._RunCount = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
+
+
+		#region 연습전 경험치 프로퍼티
 		private int _Training_FlagshipExp;
 		private int _Training_FlagshipMvpExp;
 		private int _Training_AccshipExp;
@@ -201,7 +470,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		}
 
 		private string _SelectedExpResult;
-
 		public string SelectedExpResult
 		{
 			get { return this._SelectedExpResult; }
@@ -215,319 +483,138 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				}
 			}
 		}
-
 		#endregion
 
 
-		#region Ships 変更通知プロパティ
-
-		private IReadOnlyCollection<ShipViewModel> _Ships;
-
-		public IReadOnlyCollection<ShipViewModel> Ships
+		#region LandBased_Slots 변경통지 프로퍼티
+		public ICollection<SlotItemViewModel> _LandBased_Slots;
+		public ICollection<SlotItemViewModel> LandBased_Slots
 		{
-			get { return this._Ships; }
-			set
+			get { return this._LandBased_Slots; }
+			private set
 			{
-				if (this._Ships != value)
+				if (this._LandBased_Slots != value)
 				{
-					this._Ships = value;
+					this._LandBased_Slots = value;
 					this.RaisePropertyChanged();
 				}
 			}
 		}
-
 		#endregion
 
-		#region CurrentShip 変更通知プロパティ
-
-		private Ship _CurrentShip;
-
-		public Ship CurrentShip
+		#region SelectedLandBasedType 変更通知プロパティ
+		private string _SelectedLandBasedType;
+		public string SelectedLandBasedType
 		{
-			get { return this._CurrentShip; }
+			get { return this._SelectedLandBasedType; }
 			set
 			{
-				if (this._CurrentShip != value)
+				if (this._SelectedLandBasedType != value)
 				{
-					this._CurrentShip = value;
-					if (value != null)
-					{
-						this.CurrentLevel = this.CurrentShip.Level;
-						this.TargetLevel = Math.Min(this.CurrentShip.Level + 1, 155);
-						if (this.CurrentShip.Info.NextRemodelingLevel.HasValue)
-						{
-							if (this.CurrentShip.Info.NextRemodelingLevel.Value > this.CurrentLevel)
-							{
-								this.RemodelLv = this.CurrentShip.Info.NextRemodelingLevel.Value;
-								this.TargetLevel = RemodelLv;
-							}
-						}
-						this.CurrentExp = this.CurrentShip.Exp;
-						this.UpdateCalculator();
-						this.RaisePropertyChanged();
-					}
-				}
-			}
-		}
-
-		#endregion
-
-		#region CurrentLevel 変更通知プロパティ
-
-		private int _CurrentLevel;
-
-		public int CurrentLevel
-		{
-			get { return this._CurrentLevel; }
-			set
-			{
-				if (this._CurrentLevel != value && value >= 1 && value <= 155)
-				{
-					this._CurrentLevel = value;
-					this.CurrentExp = ExpTable[value];
-					this.TargetLevel = Math.Max(this.TargetLevel, Math.Min(value + 1, 155));
+					this._SelectedLandBasedType = value;
 					this.RaisePropertyChanged();
 					this.UpdateCalculator();
 				}
 			}
 		}
-
 		#endregion
 
-		#region TargetLevel 変更通知プロパティ
-
-		private int _TargetLevel;
-
-		public int TargetLevel
+		#region LandBased_AirSuperiorityPotential 変更通知プロパティ
+		private int _LandBased_AirSuperiorityPotential;
+		public int LandBased_AirSuperiorityPotential
 		{
-			get { return this._TargetLevel; }
+			get { return this._LandBased_AirSuperiorityPotential; }
 			set
 			{
-				if (this._TargetLevel != value && value >= 1 && value <= 155)
+				if (this._LandBased_AirSuperiorityPotential != value)
 				{
-					this._TargetLevel = value;
-					this.TargetExp = ExpTable[value];
-					this.CurrentLevel = Math.Min(this.CurrentLevel, Math.Max(value - 1, 1));
+					this._LandBased_AirSuperiorityPotential = value;
 					this.RaisePropertyChanged();
 					this.UpdateCalculator();
 				}
 			}
 		}
-
 		#endregion
-
-		#region SelectedSea 変更通知プロパティ
-
-		private string _SelectedSea;
-
-		public string SelectedSea
+		#region LandBased_Distance 変更通知プロパティ
+		private int _LandBased_Distance;
+		public int LandBased_Distance
 		{
-			get { return this._SelectedSea; }
+			get { return this._LandBased_Distance; }
 			set
 			{
-				if (_SelectedSea != value)
+				if (this._LandBased_Distance != value)
 				{
-					this._SelectedSea = value;
+					this._LandBased_Distance = value;
 					this.RaisePropertyChanged();
 					this.UpdateCalculator();
 				}
 			}
 		}
-
 		#endregion
 
-		#region SelectedResult 変更通知プロパティ
-
-		private string _SelectedResult;
-
-		public string SelectedResult
+		#region LandBased_Slot1 変更通知プロパティ
+		private SlotItemViewModel _LandBased_Slot1;
+		public SlotItemViewModel LandBased_Slot1
 		{
-			get { return this._SelectedResult; }
+			get { return this._LandBased_Slot1; }
 			set
 			{
-				if (this._SelectedResult != value)
+				if (this._LandBased_Slot1 != value)
 				{
-					this._SelectedResult = value;
+					this._LandBased_Slot1 = value;
 					this.RaisePropertyChanged();
 					this.UpdateCalculator();
 				}
 			}
 		}
-
 		#endregion
-
-		#region IsFlagship 変更通知プロパティ
-
-		private bool _IsFlagship;
-
-		public bool IsFlagship
+		#region LandBased_Slot2 変更通知プロパティ
+		private SlotItemViewModel _LandBased_Slot2;
+		public SlotItemViewModel LandBased_Slot2
 		{
-			get { return this._IsFlagship; }
+			get { return this._LandBased_Slot2; }
 			set
 			{
-				if (this._IsFlagship != value)
+				if (this._LandBased_Slot2 != value)
 				{
-					this._IsFlagship = value;
+					this._LandBased_Slot2 = value;
 					this.RaisePropertyChanged();
 					this.UpdateCalculator();
 				}
 			}
 		}
-
 		#endregion
-
-		#region IsMVP 変更通知プロパティ
-
-		private bool _IsMVP;
-
-		public bool IsMVP
+		#region LandBased_Slot3 変更通知プロパティ
+		private SlotItemViewModel _LandBased_Slot3;
+		public SlotItemViewModel LandBased_Slot3
 		{
-			get { return this._IsMVP; }
+			get { return this._LandBased_Slot3; }
 			set
 			{
-				if (this._IsMVP != value)
+				if (this._LandBased_Slot3 != value)
 				{
-					this._IsMVP = value;
+					this._LandBased_Slot3 = value;
 					this.RaisePropertyChanged();
 					this.UpdateCalculator();
 				}
 			}
 		}
-
 		#endregion
-
-		#region IsReloading 変更通知プロパティ
-
-		private bool _IsReloading;
-
-		public bool IsReloading
+		#region LandBased_Slot4 変更通知プロパティ
+		private SlotItemViewModel _LandBased_Slot4;
+		public SlotItemViewModel LandBased_Slot4
 		{
-			get { return this._IsReloading; }
+			get { return this._LandBased_Slot4; }
 			set
 			{
-				if (this._IsReloading != value)
+				if (this._LandBased_Slot4 != value)
 				{
-					this._IsReloading = value;
+					this._LandBased_Slot4 = value;
 					this.RaisePropertyChanged();
 					this.UpdateCalculator();
 				}
 			}
 		}
-
-		#endregion
-
-		#region CurrentExp 変更通知プロパティ
-
-		private int _CurrentExp;
-
-		public int CurrentExp
-		{
-			get { return this._CurrentExp; }
-			set
-			{
-				if (this._CurrentExp != value)
-				{
-					this._CurrentExp = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region TargetExp 変更通知プロパティ
-
-		private int _TargetExp;
-
-		public int TargetExp
-		{
-			get { return this._TargetExp; }
-			set
-			{
-				if (this._TargetExp != value)
-				{
-					this._TargetExp = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region RemodelLv 変更通知プロパティ
-
-		private int _RemodelLv;
-
-		public int RemodelLv
-		{
-			get { return this._RemodelLv; }
-			set
-			{
-				if (this._RemodelLv != value)
-				{
-					this._RemodelLv = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region SortieExp 変更通知プロパティ
-
-		private int _SortieExp;
-
-		public int SortieExp
-		{
-			get { return this._SortieExp; }
-			set
-			{
-				if (this._SortieExp != value)
-				{
-					this._SortieExp = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region RemainingExp 変更通知プロパティ
-
-		private int _RemainingExp;
-
-		public int RemainingExp
-		{
-			get { return this._RemainingExp; }
-			set
-			{
-				if (this._RemainingExp != value)
-				{
-					this._RemainingExp = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region RunCount 変更通知プロパティ
-
-		private int _RunCount;
-
-		public int RunCount
-		{
-			get { return this._RunCount; }
-			set
-			{
-				if (this._RunCount != value)
-				{
-					this._RunCount = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
 		#endregion
 
 
@@ -542,29 +629,52 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			};
 			this.SelectedTab = this.TabItems.FirstOrDefault();
 
-			this.SeaList = SeaExpTable.Keys.ToList();
-			this.ResultList = Results.ToList();
-
-			this.updateSource
-				.Do(_ => this.IsReloading = true)
+			#region Update Sources
+			this.UpdateSourceShipList
+				.Do(_ => this.Reloading++)
 				.Throttle(TimeSpan.FromMilliseconds(7.0))
 				.Do(_ => this.UpdateShipList())
-				.Subscribe(_ => this.IsReloading = false);
-			this.CompositeDisposable.Add(this.updateSource);
+				.Do(_ => this.Reloading--)
+				.Subscribe(_ => this.UpdateCalculator());
+			this.CompositeDisposable.Add(this.UpdateSourceShipList);
+
+			this.UpdateSourceSlotitemList
+				.Do(_ => this.Reloading++)
+				.Throttle(TimeSpan.FromMilliseconds(7.0))
+				.Do(_ => this.UpdateSlotItemList())
+				.Do(_ => this.Reloading--)
+				.Subscribe(_ => this.UpdateCalculator());
+			this.CompositeDisposable.Add(this.UpdateSourceShipList);
 
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(this.homeport)
 			{
-				{ () => this.homeport.Organization.Ships, (sender, args) => this.Update() },
+				{ () => this.homeport.Organization, (_, __) => {
+					this.CompositeDisposable.Add(new PropertyChangedEventListener(this.homeport.Organization)
+					{
+						{ () => this.homeport.Organization.Ships, (sender, args) => this.RequestUpdateShipList() },
+					});
+				} },
+				{ () => this.homeport.Itemyard, (_, __) => {
+					this.CompositeDisposable.Add(new PropertyChangedEventListener(this.homeport.Itemyard)
+					{
+						{ () => this.homeport.Itemyard.SlotItems, (sender, args) => this.RequestUpdateSlotitemList() },
+					});
+				} },
 			});
+			#endregion
 
 			SelectedSea = SeaExpTable.Keys.FirstOrDefault();
-			SelectedResult = Results.FirstOrDefault();
-			SelectedExpResult = Results.FirstOrDefault();
+			SelectedResult = ResultRanks.FirstOrDefault();
+			SelectedExpResult = ResultRanks.FirstOrDefault();
 
-			this.Update();
+			SelectedLandBasedType = LandBasedType.FirstOrDefault();
+
+			this.RequestUpdateShipList();
+			this.RequestUpdateSlotitemList();
 		}
 
-		public void Update() => this.updateSource.OnNext(Unit.Default);
+		public void RequestUpdateShipList() => this.UpdateSourceShipList.OnNext(Unit.Default);
+		public void RequestUpdateSlotitemList() => this.UpdateSourceSlotitemList.OnNext(Unit.Default);
 
 		/// <summary>
 		/// Update ship list for calculator
@@ -580,6 +690,33 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		}
 
 		/// <summary>
+		/// Update slotitem list for calculator
+		/// </summary>
+		private void UpdateSlotItemList()
+		{
+			var list = this.homeport.Itemyard.SlotItems.Values;
+
+			var items = new List<SlotItemViewModel>();
+			items.Add(new SlotItemViewModel(0, null));
+			items.AddRange(
+				list.Where(x => x.Info.IsNumerable)
+					.OrderBy(x => x.Info.Id)
+					.Select((x, i) => new SlotItemViewModel(x.Id, x))
+			);
+			this.LandBased_Slots = items;
+
+			if (this.LandBased_Slot1 == null || !this.LandBased_Slots.Contains(this.LandBased_Slot1))
+				this.LandBased_Slot1 = this.LandBased_Slots.FirstOrDefault();
+			if (this.LandBased_Slot2 == null || !this.LandBased_Slots.Contains(this.LandBased_Slot1))
+				this.LandBased_Slot2 = this.LandBased_Slots.FirstOrDefault();
+			if (this.LandBased_Slot3 == null || !this.LandBased_Slots.Contains(this.LandBased_Slot1))
+				this.LandBased_Slot3 = this.LandBased_Slots.FirstOrDefault();
+			if (this.LandBased_Slot4 == null || !this.LandBased_Slots.Contains(this.LandBased_Slot1))
+				this.LandBased_Slot4 = this.LandBased_Slots.FirstOrDefault();
+		}
+
+
+		/// <summary>
 		/// Update Calculator Display Values
 		/// </summary>
 		public void UpdateCalculator()
@@ -592,6 +729,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 				case 1:
 					CalculateTrainingExp();
+					break;
+
+				case 2:
+					CalculateLandBased();
 					break;
 			}
 		}
@@ -698,5 +839,176 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			return rateTable[rateType][rateIdx];
 		}
 
+		/// <summary>
+		/// Calculates land-base aerial support's air superiority potential
+		/// </summary>
+		private void CalculateLandBased()
+		{
+			Dictionary<int, int[]> distanceBonus = new Dictionary<int, int[]>()
+			{
+				{ 138, new int[] { 3, 3, 3, 3, 3, 3, 3, 3 } },
+				{ 178, new int[] { 3, 3, 2, 2, 2, 2, 1, 1 } },
+				{ 151, new int[] { 2, 2, 2, 2, 1, 1, 0, 0 } },
+				{  54, new int[] { 2, 2, 2, 2, 1, 1, 0, 0 } },
+				{  25, new int[] { 2, 2, 2, 1, 1, 0, 0, 0 } },
+				{  61, new int[] { 2, 1, 1, 0, 0, 0, 0, 0 } },
+			};
+			Dictionary<int, Proficiency> proficiencies = new Dictionary<int, Proficiency>()
+			{
+				{ 0, new Proficiency(  0,   9,  0,  0) },
+				{ 1, new Proficiency( 10,  24,  0,  1) },
+				{ 2, new Proficiency( 25,  39,  2,  2) },
+				{ 3, new Proficiency( 40,  54,  5,  3) },
+				{ 4, new Proficiency( 55,  69,  9,  4) },
+				{ 5, new Proficiency( 70,  84, 14,  5) },
+				{ 6, new Proficiency( 85,  99, 14,  7) },
+				{ 7, new Proficiency(100, 120, 22,  9) },
+			};
+			var def = AirSuperiorityCalculationOptions.Default;
+
+			var items = new SlotItemViewModel[]
+				{
+					this.LandBased_Slot1,
+					this.LandBased_Slot2,
+					this.LandBased_Slot3,
+					this.LandBased_Slot4
+				}
+				.Where(x => x.Display != null)
+				.Select(x => x.Display);
+
+			#region AA calculating
+			var air_sum = items.Sum(item =>
+				{
+					var proficiency = proficiencies[item.Proficiency];
+					double aa = item.Info.AA;
+					double bonus = 0;
+
+					switch (item.Info.Type)
+					{
+						// 전투기
+						case SlotItemType.艦上戦闘機:
+						case SlotItemType.水上戦闘機:
+						case SlotItemType.噴式戦闘機:
+							aa += item.Level * 0.2;
+							bonus = Math.Sqrt(proficiency.GetInternalValue(def) / 10.0)
+								+ proficiency.FighterBonus;
+							break;
+
+						// 뇌격기, 폭격기
+						case SlotItemType.艦上攻撃機:
+						case SlotItemType.艦上爆撃機:
+						case SlotItemType.噴式攻撃機:
+						case SlotItemType.噴式戦闘爆撃機:
+							bonus = Math.Sqrt(proficiency.GetInternalValue(def) / 10.0);
+							break;
+
+						// 수상폭격기
+						case SlotItemType.水上爆撃機:
+							bonus = Math.Sqrt(proficiency.GetInternalValue(def) / 10.0)
+								+ proficiency.SeaplaneBomberBonus;
+							break;
+
+						// 정찰기, 수상정찰기, (분식정찰기?)
+						// 본래는 제공치에 포함되지 않으나 기항대에는 포함되나?
+						// 다만 어차피 대공이 안붙어있음
+						default:
+							break;
+					}
+					bonus = Math.Min(22, bonus) + Math.Sqrt(12);
+
+					switch (this.SelectedLandBasedType)
+					{
+						case "출격":
+							if (item.Info.Type == SlotItemType.局地戦闘機)
+								aa += item.Info.Evade * 1.5;
+							break;
+						case "방공":
+							if (item.Info.Type == SlotItemType.局地戦闘機)
+								aa += item.Info.Hit * 2 + item.Info.Evade * 1.5;
+							break;
+					}
+					return (int)(aa * Math.Sqrt(18) + bonus);
+				});
+			#endregion
+			#region Bonus rate calculate when Air Defence Mode
+			if (this.SelectedLandBasedType == "방공")
+			{
+				if (items.Any(x => x.Info.Type == SlotItemType.艦上偵察機))
+				{
+					var viewrange = items
+						.Where(x => x.Info.Type == SlotItemType.艦上偵察機)
+						.Max(x => x.Info.ViewRange);
+
+					if (viewrange <= 7)
+						air_sum = (int)(1.2 * air_sum);
+					else if (viewrange == 8)
+						air_sum = (int)(1.25 * air_sum); // Maybe?
+					else
+						air_sum = (int)(1.3 * air_sum);
+				}
+				else if (items.Any(x => x.Info.Type == SlotItemType.水上偵察機))
+				{
+					var viewrange = items
+						.Where(x => x.Info.Type == SlotItemType.水上偵察機)
+						.Max(x => x.Info.ViewRange);
+
+					if (viewrange <= 7)
+						air_sum = (int)(1.1 * air_sum);
+					else if (viewrange == 8)
+						air_sum = (int)(1.13 * air_sum);
+					else
+						air_sum = (int)(1.16 * air_sum);
+				}
+			}
+			#endregion
+			LandBased_AirSuperiorityPotential = air_sum;
+
+			int distance = items.Min(x => x.Info.Distance);
+			#region Bonus Distance
+			if (items.Any(x => distanceBonus.ContainsKey(x.Info.Id)))
+				distance += items.Max(x => distanceBonus[x.Info.Id][distance]);
+			#endregion
+
+			LandBased_Distance = distance;
+		}
+
+		private class Proficiency
+		{
+			private int internalMinValue { get; }
+			private int internalMaxValue { get; }
+
+			public int FighterBonus { get; }
+			public int SeaplaneBomberBonus { get; }
+
+			public Proficiency(int internalMin, int internalMax, int fighterBonus, int seaplaneBomberBonus)
+			{
+				this.internalMinValue = internalMin;
+				this.internalMaxValue = internalMax;
+				this.FighterBonus = fighterBonus;
+				this.SeaplaneBomberBonus = seaplaneBomberBonus;
+			}
+
+			/// <summary>
+			/// 内部熟練度値を取得します。
+			/// </summary>
+			public int GetInternalValue(AirSuperiorityCalculationOptions options)
+			{
+				if (options.HasFlag(AirSuperiorityCalculationOptions.InternalProficiencyMinValue)) return this.internalMinValue;
+				if (options.HasFlag(AirSuperiorityCalculationOptions.InternalProficiencyMaxValue)) return this.internalMaxValue;
+				return (this.internalMaxValue + this.internalMinValue) / 2; // <- めっちゃ適当
+			}
+		}
+	}
+
+	public class SlotItemViewModel : Livet.ViewModel
+	{
+		public int Key { get; }
+		public SlotItem Display { get; }
+
+		public SlotItemViewModel(int Key, SlotItem Display)
+		{
+			this.Key = Key;
+			this.Display = Display;
+		}
 	}
 }

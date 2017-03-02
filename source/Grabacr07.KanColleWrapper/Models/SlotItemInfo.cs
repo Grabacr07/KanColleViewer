@@ -72,6 +72,11 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public int ViewRange => this.RawData.api_saku;
 
+		/// <summary>
+		/// 基地航空隊の航続距離値を取得します。
+		/// </summary>
+		public int Distance => this.RawData.api_distance;
+
 		public bool IsNumerable => this.Type.IsNumerable();
 
 		public bool IsFirstEncounter => this.Type == SlotItemType.艦上偵察機
