@@ -111,6 +111,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\AirBase.cs" />
     <Compile Include="Models\AirSuperiorityPotential.cs" />
     <Compile Include="Annotations\DarkAttribute.cs" />
     <Compile Include="Annotations\ElementalAttribute.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="Models\CreatedSlotItem.cs" />
     <Compile Include="Models\FleetCondition.cs" />
     <Compile Include="Models\QuestNameTable.cs" />
+    <Compile Include="Models\Raw\kcsapi_airbase_corps.cs" />
     <Compile Include="Models\Raw\kcsapi_battle_midnight_battle.cs" />
     <Compile Include="Models\Raw\kcsapi_battle_midnight_sp_midnight.cs" />
     <Compile Include="Models\Raw\kcsapi_data_airbaseattack.cs" />
@@ -144,6 +146,7 @@
     <Compile Include="Models\Raw\kcsapi_data_kouku.cs" />
     <Compile Include="Models\Raw\kcsapi_data_raigeki.cs" />
     <Compile Include="Models\Raw\kcsapi_data_support_info.cs" />
+    <Compile Include="Models\Raw\kcsapi_empty_result.cs" />
     <Compile Include="Models\Raw\kcsapi_mst_mapcell.cs" />
     <Compile Include="Models\Raw\kcsapi_practice_result.cs" />
     <Compile Include="Models\Raw\kcsapi_require_info.cs" />

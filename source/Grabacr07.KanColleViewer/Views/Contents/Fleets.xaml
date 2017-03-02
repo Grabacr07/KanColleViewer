@@ -490,6 +490,52 @@
 				</DataTrigger>
 			</DataTemplate.Triggers>
 		</DataTemplate>
+		<Style TargetType="{x:Type GroupBox}">
+			<Setter Property="OverridesDefaultStyle" Value="True" />
+			<Setter Property="BorderThickness" Value=".99" />
+			<Setter Property="BorderBrush" Value="{DynamicResource BorderBrushKey}" />
+			<Setter Property="Background" Value="{DynamicResource BorderBrushKey}" />
+			<Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type GroupBox}">
+						<Border BorderThickness="{TemplateBinding BorderThickness}"
+									BorderBrush="{TemplateBinding BorderBrush}">
+							<Grid>
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto" />
+									<RowDefinition />
+								</Grid.RowDefinitions>
+
+								<Border Background="{TemplateBinding Background}">
+									<ContentPresenter Content="{TemplateBinding Header}"
+														  ContentTemplate="{TemplateBinding HeaderTemplate}"
+														  ContentStringFormat="{TemplateBinding HeaderStringFormat}" />
+								</Border>
+
+								<ContentPresenter Grid.Row="1"
+												Content="{TemplateBinding Content}"
+												ContentTemplate="{TemplateBinding ContentTemplate}"
+												ContentStringFormat="{TemplateBinding ContentStringFormat}"
+												Margin="{TemplateBinding Padding}" />
+							</Grid>
+						</Border>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+
+			<Setter Property="HeaderTemplate">
+				<Setter.Value>
+					<DataTemplate>
+						<Border Margin="9,5">
+							<TextBlock Text="{Binding}"
+									FontSize="{DynamicResource EmphaticFontSizeKey}"
+									Foreground="{DynamicResource ForegroundBrushKey}" />
+						</Border>
+					</DataTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
 	</UserControl.Resources>
 
 	<i:Interaction.Triggers>
@@ -684,6 +730,7 @@
 				<ContentControl Content="{Binding}"
 								Margin="10,0,10,10"
 								Grid.Row="1"
+								Visibility="Collapsed"
 								Grid.IsSharedSizeScope="True">
 					<ContentControl.Resources>
 						<DataTemplate DataType="{x:Type fleets:FleetViewModel}">
@@ -722,6 +769,154 @@
 								</ItemsControl.ItemTemplate>
 							</ItemsControl>
 						</DataTemplate>
+
+						<DataTemplate DataType="{x:Type fleets:AirBaseTroopViewModel}">
+							<ItemsControl ItemsSource="{Binding AirBases}"
+										  Grid.Row="1"
+										  Grid.IsSharedSizeScope="True">
+								<ItemsControl.ItemsPanel>
+									<ItemsPanelTemplate>
+										<UniformGrid Rows="1" />
+									</ItemsPanelTemplate>
+								</ItemsControl.ItemsPanel>
+								<ItemsControl.ItemTemplate>
+									<DataTemplate>
+										<GroupBox Header="{Binding Name, Mode=OneWay}"
+												  Margin="5"
+												  Padding="8">
+											<StackPanel>
+												<TextBlock Margin="0,2,0,2"
+														   Style="{DynamicResource DefaultTextStyleKey}">
+													<Run Text="행동 반경:" />
+													<Run Text="{Binding Distance, Mode=OneWay}" />
+												</TextBlock>
+
+												<TextBlock Margin="0,2,0,2"
+														   Style="{DynamicResource DefaultTextStyleKey}">
+													<Run Text="행동 종류:" />
+													<Run Text="{Binding ActionKind, Mode=OneWay}" />
+												</TextBlock>
+
+												<Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
+
+												<TextBlock Margin="0,2,0,2"
+														   Style="{DynamicResource DefaultTextStyleKey}">
+													<Run Text="제공수치:" />
+													<Run Text="{Binding AirSuperiorityPotential, Mode=OneWay}" />
+												</TextBlock>
+
+												<Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
+
+												<ItemsControl ItemsSource="{Binding PlanesInfo}">
+													<ItemsControl.ItemsPanel>
+														<ItemsPanelTemplate>
+															<StackPanel />
+														</ItemsPanelTemplate>
+													</ItemsControl.ItemsPanel>
+													<ItemsControl.ItemTemplate>
+														<DataTemplate>
+															<Grid Margin="2">
+																<StackPanel x:Name="PlaneInfo">
+																	<StackPanel Orientation="Horizontal">
+																		<kcvc:ConditionIcon ConditionType="{Binding Condition, Mode=OneWay}"
+																							Margin="0,0,4,0"/>
+
+																		<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}"
+																				   Style="{DynamicResource DefaultTextStyleKey}"
+																				   Text="{Binding Source.Name, Mode=OneWay}"
+																				   Margin="5,1"/>
+
+																		<TextBlock Margin="0,1,5,1"
+																								Foreground="#FF45A9A5">
+																			<TextBlock.Style>
+																				<Style TargetType="{x:Type TextBlock}">
+																					<Setter Property="Text" Value="{Binding Source.Level, StringFormat=★+{0}}" />
+																					<Style.Triggers>
+																						<DataTrigger Binding="{Binding ExSlot.Level}" Value="0">
+																							<Setter Property="Visibility" Value="Collapsed" />
+																						</DataTrigger>
+																						<DataTrigger Binding="{Binding ExSlot.Level}" Value="10">
+																							<Setter Property="Text" Value="★max" />
+																						</DataTrigger>
+																					</Style.Triggers>
+																				</Style>
+																			</TextBlock.Style>
+																		</TextBlock>
+
+																		<TextBlock Margin="0,1,5,1"
+																								Text="{Binding ExSlot.Proficiency, StringFormat=+{0}}"
+																								Foreground="#FFD49C0F">
+																			<TextBlock.Style>
+																				<Style TargetType="{x:Type TextBlock}">
+																					<Style.Triggers>
+																						<DataTrigger Binding="{Binding Source.Proficiency}" Value="0">
+																							<Setter Property="Visibility" Value="Collapsed" />
+																						</DataTrigger>
+																					</Style.Triggers>
+																				</Style>
+																			</TextBlock.Style>
+																		</TextBlock>
+																	</StackPanel>
+
+																	<StackPanel Orientation="Horizontal">
+																		<TextBlock Margin="5,1"
+																				   Text="{Binding Source.Info.}"></TextBlock>
+
+																		<TextBlock Margin="5,1"
+																				   HorizontalAlignment="Right">
+																			<Run Text="(" />
+																			<Run Text="{Binding CurrentCount, Mode=OneWay}" />
+																			<Run Text="/" />
+																			<Run Text="{Binding MaximumCount, Mode=OneWay}" />
+																			<Run Text=")" />
+
+																			<TextBlock.Style>
+																				<Style TargetType="{x:Type TextBlock}">
+																					<Setter Property="Foreground" Value="#FFDD3535" />
+																					<Style.Triggers>
+																						<DataTrigger Binding="{Binding LostCount}" Value="0">
+																							<Setter Property="Foreground" Value="#FFFFFFFF" />
+																						</DataTrigger>
+																						<DataTrigger Binding="{Binding CurrentCount}" Value="0">
+																							<Setter Property="Foreground" Value="#80FFFFFF" />
+																						</DataTrigger>
+																					</Style.Triggers>
+																				</Style>
+																			</TextBlock.Style>
+																		</TextBlock>
+																	</StackPanel>
+																</StackPanel>
+
+																<Grid x:Name="PlaneStatus"
+																	  Visibility="Collapsed">
+																	<Rectangle Fill="{DynamicResource BackgroundBrushKey}"
+																			   Opacity=".6" />
+
+																	<TextBlock Text="배치전환중"
+																			   Style="{DynamicResource DefaultTextStyleKey}"
+																			   Foreground="White"
+																			   HorizontalAlignment="Center"
+																			   VerticalAlignment="Center" />
+																</Grid>
+															</Grid>
+															<DataTemplate.Triggers>
+																<DataTrigger Binding="{Binding SquadronId}" Value="0">
+																	<Setter TargetName="PlaneInfo" Property="Visibility" Value="Hidden" />
+																</DataTrigger>
+																<DataTrigger Binding="{Binding State}" Value="2">
+																	<Setter TargetName="PlaneStatus" Property="Visibility" Value="Visible" />
+																</DataTrigger>
+															</DataTemplate.Triggers>
+														</DataTemplate>
+													</ItemsControl.ItemTemplate>
+												</ItemsControl>
+											</StackPanel>
+										</GroupBox>
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
+						</DataTemplate>
+						
 					</ContentControl.Resources>
 				</ContentControl>
 			</Grid>

@@ -219,6 +219,7 @@
     <Compile Include="ViewModels\Catalogs\ResourceLogViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\SlotItemEquipTypeViewModel.cs" />
     <Compile Include="ViewModels\Composition\LoadFailedPluginViewModel.cs" />
+    <Compile Include="ViewModels\Contents\Fleets\AirBaseTroopViewModel.cs" />
     <Compile Include="ViewModels\Contents\Fleets\FleetShipViewModel.cs" />
     <Compile Include="ViewModels\Contents\ShipSpeedExtensions.cs" />
     <Compile Include="ViewModels\InformationWindowViewModel.cs" />
