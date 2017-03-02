@@ -627,7 +627,8 @@
 					<RowDefinition Height="Auto"/>
 					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
-				<Grid Visibility="{Binding IsFirstFleet, Mode=OneWay}" Margin="10,3">
+				<Grid Visibility="{Binding IsFirstFleet, Mode=OneWay}"
+					  Margin="10,3">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="*"/>
 						<ColumnDefinition Width="Auto"/>
@@ -730,7 +731,6 @@
 				<ContentControl Content="{Binding}"
 								Margin="10,0,10,10"
 								Grid.Row="1"
-								Visibility="Collapsed"
 								Grid.IsSharedSizeScope="True">
 					<ContentControl.Resources>
 						<DataTemplate DataType="{x:Type fleets:FleetViewModel}">

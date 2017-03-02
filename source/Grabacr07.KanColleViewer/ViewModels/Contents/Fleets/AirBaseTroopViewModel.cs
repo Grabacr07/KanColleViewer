@@ -6,6 +6,7 @@ using Grabacr07.KanColleWrapper.Models.Raw;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper;
 using System.Reactive.Linq;
+using System.Windows;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 {
@@ -13,6 +14,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 	{
 		public string Name => "기지항공대";
 
+		#region AirBases 변경통지 프로퍼티
 		private AirBase[] _AirBases;
 		public AirBase[] AirBases
 		{
@@ -23,6 +25,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				this.RaisePropertyChanged();
 			}
 		}
+		#endregion
+
+		// FleetViewModel과의 호환성
+		public Visibility IsFirstFleet => Visibility.Collapsed;
+
 
 		public AirBaseTroopViewModel(KanColleProxy proxy)
 		{

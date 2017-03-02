@@ -33,6 +33,10 @@
 			<DataTemplate DataType="{x:Type vm:NullViewModel}">
 				<Border Background="#FF686868" />
 			</DataTemplate>
+
+			<DataTemplate DataType="{x:Type fleets:AirBaseTroopViewModel}">
+				<Border Background="#FF40C840" />
+			</DataTemplate>
 		</ContentControl.Resources>
 	</ContentControl>
 </UserControl>
