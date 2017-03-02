@@ -420,9 +420,10 @@
 
 						<Grid DockPanel.Dock="Top">
 							<vContents:StateDetailIndicator DataContext="{Binding SelectedFleet, Mode=OneWay}"
-															Margin="0,7,0,3" />
+															VerticalAlignment="Center"
+															Margin="0,3" />
 
-							<TextBlock Margin="18,3"
+							<TextBlock Margin="8,4"
 									   VerticalAlignment="Center"
 									   HorizontalAlignment="Right"
 									   Style="{StaticResource EmphaticTextStyleKey}"
