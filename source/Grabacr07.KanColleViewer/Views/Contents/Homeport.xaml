@@ -143,12 +143,19 @@
 											<Run Text="{Binding Display, Mode=OneWay}" />
 											<Run Text=":" />
 										</TextBlock>
-										<TextBlock Grid.Column="1"
+										<TextBlock x:Name="MaterialValue"
+												   Grid.Column="1"
 												   Text="{Binding Value, Mode=OneWay}"
 												   Style="{StaticResource Emphatic}"
 												   HorizontalAlignment="Right"
 												   VerticalAlignment="Bottom"/>
 									</Grid>
+
+									<DataTemplate.Triggers>
+										<DataTrigger Binding="{Binding IsOvered, Mode=OneWay}" Value="False">
+											<Setter TargetName="MaterialValue" Property="Foreground" Value="#FFFFFFC4" />
+										</DataTrigger>
+									</DataTemplate.Triggers>
 								</DataTemplate>
 							</models:ComboBoxItemTemplateSelector.ItemTemplate>
 							<models:ComboBoxItemTemplateSelector.SelectedItemTemplate>
@@ -171,7 +178,11 @@
 												   HorizontalAlignment="Right"
 												   VerticalAlignment="Bottom"/>
 									</Grid>
+
 									<DataTemplate.Triggers>
+										<DataTrigger Binding="{Binding IsOvered, Mode=OneWay}" Value="False">
+											<Setter TargetName="MaterialValue" Property="Foreground" Value="#FFFFFFC4" />
+										</DataTrigger>
 										<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.MaterialValueOnly}, Path=Value}" Value="True">
 											<Setter TargetName="MaterialName" Property="Visibility" Value="Collapsed" />
 											<Setter TargetName="MaterialValue" Property="Grid.Column" Value="0" />
