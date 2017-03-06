@@ -62,6 +62,10 @@
 				<Border Height="12" />
 				<CheckBox Content="아카시 수리 타이머를 사용"
 						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.UseRepairTimer}, Path=Value}" />
+
+				<Border Height="12" />
+				<CheckBox Content="함대 보급량 미리보기를 사용"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.UseSupplyPreview}, Path=Value}" />
 			</StackPanel>
 
 			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
