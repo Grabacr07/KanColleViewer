@@ -164,7 +164,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			}
 			#endregion
 
-			public bool IsOvered => isMaterial && (this.Value >= KanColleClient.Current?.Homeport?.Admiral?.ResourceLimit);
+			public bool IsOvered => !isMaterial && (this.Value >= KanColleClient.Current?.Homeport?.Admiral?.ResourceLimit);
 
 			public MaterialViewModel(string Key, string Display, bool isMaterial)
 			{
