@@ -170,6 +170,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			{
 				this.Key = Key;
 				this.Display = Display;
+				this.isMaterial = isMaterial;
 			}
 		}
 	}
