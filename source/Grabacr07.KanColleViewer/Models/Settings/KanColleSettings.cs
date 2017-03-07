@@ -267,6 +267,12 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		public static SerializableProperty<bool> StatusbarFleetStatus { get; }
 			= new SerializableProperty<bool>(GetKey(), Providers.Viewer, false);
 
+		/// <summary>
+		/// 함대 보급량 미리보기를 표시할지를 설정합니다.
+		/// </summary>
+		public static SerializableProperty<bool> UseSupplyPreview { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Viewer, true);
+
 
 		#region instance members
 
