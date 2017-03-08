@@ -153,7 +153,7 @@
 
 									<DataTemplate.Triggers>
 										<DataTrigger Binding="{Binding IsOvered, Mode=OneWay}" Value="False">
-											<Setter TargetName="MaterialValue" Property="Foreground" Value="#FFFFFFC4" />
+											<Setter TargetName="MaterialValue" Property="Foreground" Value="#FFFFEFA2" />
 										</DataTrigger>
 									</DataTemplate.Triggers>
 								</DataTemplate>
@@ -181,7 +181,7 @@
 
 									<DataTemplate.Triggers>
 										<DataTrigger Binding="{Binding IsOvered, Mode=OneWay}" Value="False">
-											<Setter TargetName="MaterialValue" Property="Foreground" Value="#FFFFFFC4" />
+											<Setter TargetName="MaterialValue" Property="Foreground" Value="#FFFFEFA2" />
 										</DataTrigger>
 										<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.MaterialValueOnly}, Path=Value}" Value="True">
 											<Setter TargetName="MaterialName" Property="Visibility" Value="Collapsed" />

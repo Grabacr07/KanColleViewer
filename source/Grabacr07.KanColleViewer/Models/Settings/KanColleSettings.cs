@@ -273,6 +273,12 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		public static SerializableProperty<bool> UseSupplyPreview { get; }
 			= new SerializableProperty<bool>(GetKey(), Providers.Viewer, true);
 
+		/// <summary>
+		/// 전체 탭이 아닌 일간, 주간 등의 탭에서도 갱신되도록 합니다.
+		/// </summary>
+		public static SerializableProperty<bool> QuestOnAllTabs { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Viewer, false);
+
 
 		#region instance members
 
@@ -309,6 +315,8 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		bool IKanColleClientSettings.AutoTranslateEnable => AutoTranslateEnable.Value;
 
 		bool IKanColleClientSettings.CheckFlagshipIsRepairShip => CheckFlagshipIsNotRepairShip.Value;
+
+		bool IKanColleClientSettings.QuestOnAllTabs => QuestOnAllTabs.Value;
 
 		#endregion
 

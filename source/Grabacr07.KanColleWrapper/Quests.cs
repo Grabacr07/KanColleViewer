@@ -21,6 +21,8 @@ namespace Grabacr07.KanColleWrapper
 	public class Quests : Notifier
 	{
 		private readonly List<ConcurrentDictionary<int, Quest>> questPages;
+		private int last_tab_id = -1;
+		private static int cur_tab_id = -1;
 
 		#region All 変更通知プロパティ
 
@@ -109,7 +111,7 @@ namespace Grabacr07.KanColleWrapper
 			this.All = this.Current = new List<Quest>();
 
 			proxy.api_get_member_questlist
-				.Where(x => HttpUtility.ParseQueryString(x.Request.BodyAsString)["api_tab_id"] == "0")
+				// .Where(x => HttpUtility.ParseQueryString(x.Request.BodyAsString)["api_tab_id"] == "0")
 				.Select(Serialize)
 				.Where(x => x != null)
 				.Subscribe(this.Update);
@@ -117,6 +119,16 @@ namespace Grabacr07.KanColleWrapper
 
 		private static kcsapi_questlist Serialize(Session session)
 		{
+			string s_tab_id = HttpUtility.ParseQueryString(session.Request.BodyAsString)["api_tab_id"];
+			int tab_id;
+
+			if (!int.TryParse(s_tab_id, out tab_id)) return null;
+
+			if (!KanColleClient.Current.Settings.QuestOnAllTabs && tab_id != 0)
+				return null;
+
+			Quests.cur_tab_id = tab_id;
+
 			try
 			{
 				var djson = DynamicJson.Parse(session.GetResponseAsJson());
@@ -160,6 +172,11 @@ namespace Grabacr07.KanColleWrapper
 		private void Update(kcsapi_questlist questlist)
 		{
 			this.IsUntaken = false;
+
+			if(this.last_tab_id != Quests.cur_tab_id)
+				this.questPages.Clear();
+
+			this.last_tab_id = Quests.cur_tab_id;
 
 			// キャッシュしてるページの数が、取得したページ数 (api_page_count) より大きいとき
 			// 取得したページ数と同じ数になるようにキャッシュしてるページを減らす
