@@ -28,6 +28,19 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		}
 		#endregion
 
+		#region IsNotinitialized 변경통지 프로퍼티
+		private bool _IsNotinitialized;
+		public bool IsNotinitialized
+		{
+			get { return this._IsNotinitialized; }
+			private set
+			{
+				this._IsNotinitialized = value;
+				this.RaisePropertyChanged();
+			}
+		}
+		#endregion
+
 		public Visibility IsFirstFleet => Visibility.Collapsed;
 		public bool IsNotFleet => true;
 
@@ -37,6 +50,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		public AirBaseTroopViewModel(KanColleProxy proxy)
 		{
 			var homeport = KanColleClient.Current.Homeport;
+			this.IsNotinitialized = true;
 
 			// 기항대 정보를 불러옴
 			proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_get_member/mapinfo")
@@ -44,6 +58,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				.Where(x => x.IsSuccess)
 				.Subscribe(x =>
 				{
+					this.IsNotinitialized = false;
+
 					this.AirBases = x.Data.api_air_base
 						.Select(y => new AirBase(y, homeport))
 						.ToArray();
