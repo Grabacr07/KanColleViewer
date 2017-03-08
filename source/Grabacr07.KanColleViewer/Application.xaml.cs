@@ -119,6 +119,14 @@ namespace Grabacr07.KanColleViewer
 					return;
 				}
 
+				// 기존 설정 불러오기..?
+				if (KanColleViewer.Properties.Settings.Default.UpdateSettings)
+				{
+					KanColleViewer.Properties.Settings.Default.Upgrade();
+					KanColleViewer.Properties.Settings.Default.UpdateSettings = false;
+					KanColleViewer.Properties.Settings.Default.Save();
+				}
+
 				// 설정들 초기화
 				KanColleClient.Current.Settings = new KanColleSettings();
 
