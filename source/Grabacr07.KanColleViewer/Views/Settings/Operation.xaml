@@ -8,7 +8,7 @@
 			 xmlns:vms="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Settings"
 			 mc:Ignorable="d"
 			 d:DesignWidth="500"
-			 d:DesignHeight="680"
+			 d:DesignHeight="800"
 			 d:DataContext="{d:DesignInstance vms:SettingsViewModel}">
 	<UserControl.Resources>
 		<ResourceDictionary>
@@ -163,6 +163,10 @@
 				<Border Height="8" />
 				<CheckBox Content="완료된 임무 갯수를 탭에 뱃지로 표현"
 						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.ShowQuestBadge}, Path=Value}" />
+
+				<Border Height="8" />
+				<CheckBox Content="전체 탭만이 아닌 모든 탭에서 임무를 갱신"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.QuestOnAllTabs}, Path=Value}" />
 			</StackPanel>
 
 			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />

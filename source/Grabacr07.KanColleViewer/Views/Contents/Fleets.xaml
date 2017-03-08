@@ -589,6 +589,7 @@
 											   Margin="10,3" />
 
 				<TextBlock Margin="18,3"
+						   FontSize="{StaticResource DefaultFontSizeKey}"
 						   VerticalAlignment="Center"
 						   HorizontalAlignment="Right">
 					<Run Text="{Binding Resources.Fleets_Supplys, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
@@ -792,164 +793,174 @@
 						</DataTemplate>
 
 						<DataTemplate DataType="{x:Type fleets:AirBaseTroopViewModel}">
-							<ItemsControl ItemsSource="{Binding AirBases}"
-										  Grid.Row="1"
-										  Grid.IsSharedSizeScope="True">
-								<ItemsControl.ItemsPanel>
-									<ItemsPanelTemplate>
-										<UniformGrid Rows="1" />
-									</ItemsPanelTemplate>
-								</ItemsControl.ItemsPanel>
-								<ItemsControl.ItemTemplate>
-									<DataTemplate>
-										<GroupBox Header="{Binding Name, Mode=OneWay}"
-												  Margin="5"
-												  Padding="8">
-											<StackPanel>
-												<TextBlock Margin="0,2,0,2"
-														   Style="{DynamicResource DefaultTextStyleKey}">
-													<Run Text="행동 반경:" />
-													<Run Text="{Binding Distance, Mode=OneWay}" />
-												</TextBlock>
+							<Grid>
+								<ItemsControl ItemsSource="{Binding AirBases}"
+											  Grid.Row="1"
+											  Grid.IsSharedSizeScope="True">
+									<ItemsControl.ItemsPanel>
+										<ItemsPanelTemplate>
+											<UniformGrid Rows="1" />
+										</ItemsPanelTemplate>
+									</ItemsControl.ItemsPanel>
+									<ItemsControl.ItemTemplate>
+										<DataTemplate>
+											<GroupBox Header="{Binding Name, Mode=OneWay}"
+													  Margin="5"
+													  Padding="8">
+												<StackPanel>
+													<TextBlock Margin="0,2,0,2"
+															   Style="{DynamicResource DefaultTextStyleKey}">
+														<Run Text="행동 반경:" />
+														<Run Text="{Binding Distance, Mode=OneWay}" />
+													</TextBlock>
 
-												<TextBlock Margin="0,2,0,2"
-														   Style="{DynamicResource DefaultTextStyleKey}">
-													<Run Text="행동 종류:" />
-													<Run Text="{Binding ActionKind, Mode=OneWay}" />
-												</TextBlock>
+													<TextBlock Margin="0,2,0,2"
+															   Style="{DynamicResource DefaultTextStyleKey}">
+														<Run Text="행동 종류:" />
+														<Run Text="{Binding ActionKind, Mode=OneWay}" />
+													</TextBlock>
 
-												<Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
+													<Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
 
-												<TextBlock Margin="0,2,0,2"
-														   Style="{DynamicResource DefaultTextStyleKey}">
-													<Run Text="기대 피해:" />
-													<Run Text="{Binding AttackPowerText, Mode=OneWay}" />
-												</TextBlock>
+													<TextBlock Margin="0,2,0,2"
+															   Style="{DynamicResource DefaultTextStyleKey}">
+														<Run Text="기대 피해:" />
+														<Run Text="{Binding AttackPowerText, Mode=OneWay}" />
+													</TextBlock>
 
-												<TextBlock Margin="0,2,0,2"
-														   Style="{DynamicResource DefaultTextStyleKey}">
-													<Run Text="제공 수치:" />
-													<Run Text="{Binding AirSuperiorityPotentialText, Mode=OneWay}" />
-												</TextBlock>
+													<TextBlock Margin="0,2,0,2"
+															   Style="{DynamicResource DefaultTextStyleKey}">
+														<Run Text="제공 수치:" />
+														<Run Text="{Binding AirSuperiorityPotentialText, Mode=OneWay}" />
+													</TextBlock>
 
-												<Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
+													<Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
 
-												<ItemsControl ItemsSource="{Binding Planes}">
-													<ItemsControl.ItemsPanel>
-														<ItemsPanelTemplate>
-															<StackPanel />
-														</ItemsPanelTemplate>
-													</ItemsControl.ItemsPanel>
-													<ItemsControl.ItemTemplate>
-														<DataTemplate>
-															<Grid Margin="3,6">
-																<StackPanel x:Name="PlaneInfo">
-																	<StackPanel Orientation="Horizontal"
-																				ToolTip="{Binding Source.Info.ToolTipData}">
-																		<kcvc:ConditionIcon ConditionType="{Binding Condition, Mode=OneWay}"
-																							Margin="0,0,10,0"/>
+													<ItemsControl ItemsSource="{Binding Planes}">
+														<ItemsControl.ItemsPanel>
+															<ItemsPanelTemplate>
+																<StackPanel />
+															</ItemsPanelTemplate>
+														</ItemsControl.ItemsPanel>
+														<ItemsControl.ItemTemplate>
+															<DataTemplate>
+																<Grid Margin="3,6">
+																	<StackPanel x:Name="PlaneInfo">
+																		<StackPanel Orientation="Horizontal"
+																					ToolTip="{Binding Source.Info.ToolTipData}">
+																			<kcvc:ConditionIcon ConditionType="{Binding Condition, Mode=OneWay}"
+																								Margin="0,0,10,0"/>
 
-																		<kcvc:SlotItemIcon Type="{Binding Source.Info.IconType, Mode=OneWay}"
-																						   Width="14"
-																						   Height="14" />
+																			<kcvc:SlotItemIcon Type="{Binding Source.Info.IconType, Mode=OneWay}"
+																							   Width="14"
+																							   Height="14" />
 
-																		<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}"
-																				   Style="{DynamicResource DefaultTextStyleKey}"
-																				   Text="{Binding Source.Info.Name, Mode=OneWay}"
-																				   Margin="5,1"/>
+																			<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}"
+																					   Style="{DynamicResource DefaultTextStyleKey}"
+																					   Text="{Binding Source.Info.Name, Mode=OneWay}"
+																					   Margin="5,1"/>
 
-																		<TextBlock Margin="0,1,5,1"
-																				   Foreground="#FF45A9A5">
-																			<TextBlock.Style>
-																				<Style TargetType="{x:Type TextBlock}">
-																					<Setter Property="Text" Value="{Binding Source.Level, StringFormat=★+{0}}" />
-																					<Style.Triggers>
-																						<DataTrigger Binding="{Binding Source.Level}" Value="0">
-																							<Setter Property="Visibility" Value="Collapsed" />
-																						</DataTrigger>
-																						<DataTrigger Binding="{Binding Source.Level}" Value="10">
-																							<Setter Property="Text" Value="★max" />
-																						</DataTrigger>
-																					</Style.Triggers>
-																				</Style>
-																			</TextBlock.Style>
-																		</TextBlock>
+																			<TextBlock Margin="0,1,5,1"
+																					   Foreground="#FF45A9A5">
+																				<TextBlock.Style>
+																					<Style TargetType="{x:Type TextBlock}">
+																						<Setter Property="Text" Value="{Binding Source.Level, StringFormat=★+{0}}" />
+																						<Style.Triggers>
+																							<DataTrigger Binding="{Binding Source.Level}" Value="0">
+																								<Setter Property="Visibility" Value="Collapsed" />
+																							</DataTrigger>
+																							<DataTrigger Binding="{Binding Source.Level}" Value="10">
+																								<Setter Property="Text" Value="★max" />
+																							</DataTrigger>
+																						</Style.Triggers>
+																					</Style>
+																				</TextBlock.Style>
+																			</TextBlock>
 
-																		<TextBlock Margin="0,1,5,1"
-																				   Text="{Binding Source.Proficiency, StringFormat=+{0}}"
-																				   Foreground="#FFD49C0F">
-																			<TextBlock.Style>
-																				<Style TargetType="{x:Type TextBlock}">
-																					<Style.Triggers>
-																						<DataTrigger Binding="{Binding Source.Proficiency}" Value="0">
-																							<Setter Property="Visibility" Value="Collapsed" />
-																						</DataTrigger>
-																					</Style.Triggers>
-																				</Style>
-																			</TextBlock.Style>
-																		</TextBlock>
+																			<TextBlock Margin="0,1,5,1"
+																					   Text="{Binding Source.Proficiency, StringFormat=+{0}}"
+																					   Foreground="#FFD49C0F">
+																				<TextBlock.Style>
+																					<Style TargetType="{x:Type TextBlock}">
+																						<Style.Triggers>
+																							<DataTrigger Binding="{Binding Source.Proficiency}" Value="0">
+																								<Setter Property="Visibility" Value="Collapsed" />
+																							</DataTrigger>
+																						</Style.Triggers>
+																					</Style>
+																				</TextBlock.Style>
+																			</TextBlock>
+																		</StackPanel>
+
+																		<Grid>
+																			<TextBlock Margin="5,1"
+																					   Text="{Binding Source.Info.TypeName}"
+																					   Style="{StaticResource DetailTextStyleKey}" />
+
+																			<TextBlock Margin="5,1"
+																					   HorizontalAlignment="Right">
+																				<Run Text="(" />
+																				<Run Text="{Binding CurrentCount, Mode=OneWay}" />
+																				<Run Text="/" />
+																				<Run Text="{Binding MaximumCount, Mode=OneWay}" />
+																				<Run Text=")" />
+
+																				<TextBlock.Style>
+																					<Style TargetType="{x:Type TextBlock}">
+																						<Setter Property="Foreground" Value="#FFDD3535" />
+																						<Style.Triggers>
+																							<DataTrigger Binding="{Binding LostCount}" Value="0">
+																								<Setter Property="Foreground" Value="#FFFFFFFF" />
+																							</DataTrigger>
+																							<DataTrigger Binding="{Binding CurrentCount}" Value="0">
+																								<Setter Property="Foreground" Value="#80FFFFFF" />
+																							</DataTrigger>
+																						</Style.Triggers>
+																					</Style>
+																				</TextBlock.Style>
+																			</TextBlock>
+																		</Grid>
 																	</StackPanel>
 
-																	<Grid>
-																		<TextBlock Margin="5,1"
-																				   Text="{Binding Source.Info.TypeName}"
-																				   Style="{StaticResource DetailTextStyleKey}" />
+																	<Grid x:Name="PlaneStatus"
+																		  Visibility="Collapsed">
+																		<Rectangle Fill="{DynamicResource BackgroundBrushKey}"
+																				   Opacity=".6" />
 
-																		<TextBlock Margin="5,1"
-																				   HorizontalAlignment="Right">
-																			<Run Text="(" />
-																			<Run Text="{Binding CurrentCount, Mode=OneWay}" />
-																			<Run Text="/" />
-																			<Run Text="{Binding MaximumCount, Mode=OneWay}" />
-																			<Run Text=")" />
-
-																			<TextBlock.Style>
-																				<Style TargetType="{x:Type TextBlock}">
-																					<Setter Property="Foreground" Value="#FFDD3535" />
-																					<Style.Triggers>
-																						<DataTrigger Binding="{Binding LostCount}" Value="0">
-																							<Setter Property="Foreground" Value="#FFFFFFFF" />
-																						</DataTrigger>
-																						<DataTrigger Binding="{Binding CurrentCount}" Value="0">
-																							<Setter Property="Foreground" Value="#80FFFFFF" />
-																						</DataTrigger>
-																					</Style.Triggers>
-																				</Style>
-																			</TextBlock.Style>
-																		</TextBlock>
+																		<TextBlock Text="배치전환중"
+																				   Style="{DynamicResource DefaultTextStyleKey}"
+																				   Foreground="White"
+																				   HorizontalAlignment="Center"
+																				   VerticalAlignment="Center" />
 																	</Grid>
-																</StackPanel>
-
-																<Grid x:Name="PlaneStatus"
-																	  Visibility="Collapsed">
-																	<Rectangle Fill="{DynamicResource BackgroundBrushKey}"
-																			   Opacity=".6" />
-
-																	<TextBlock Text="배치전환중"
-																			   Style="{DynamicResource DefaultTextStyleKey}"
-																			   Foreground="White"
-																			   HorizontalAlignment="Center"
-																			   VerticalAlignment="Center" />
 																</Grid>
-															</Grid>
-															<DataTemplate.Triggers>
-																<DataTrigger Binding="{Binding SquadronId}" Value="0">
-																	<Setter TargetName="PlaneInfo" Property="Visibility" Value="Hidden" />
-																</DataTrigger>
-																<DataTrigger Binding="{Binding State}" Value="2">
-																	<Setter TargetName="PlaneStatus" Property="Visibility" Value="Visible" />
-																</DataTrigger>
-															</DataTemplate.Triggers>
-														</DataTemplate>
-													</ItemsControl.ItemTemplate>
-												</ItemsControl>
-											</StackPanel>
-										</GroupBox>
-									</DataTemplate>
-								</ItemsControl.ItemTemplate>
-							</ItemsControl>
+																<DataTemplate.Triggers>
+																	<DataTrigger Binding="{Binding SquadronId}" Value="0">
+																		<Setter TargetName="PlaneInfo" Property="Visibility" Value="Hidden" />
+																	</DataTrigger>
+																	<DataTrigger Binding="{Binding State}" Value="2">
+																		<Setter TargetName="PlaneStatus" Property="Visibility" Value="Visible" />
+																	</DataTrigger>
+																</DataTemplate.Triggers>
+															</DataTemplate>
+														</ItemsControl.ItemTemplate>
+													</ItemsControl>
+												</StackPanel>
+											</GroupBox>
+										</DataTemplate>
+									</ItemsControl.ItemTemplate>
+								</ItemsControl>
+
+								<TextBlock Text="게임안에서 [출격 해역 선택] 화면을 열어서, 기지항공대 정보를 갱신해 주십시오."
+										   Style="{DynamicResource EmphaticTextStyleKey}"
+										   FontSize="16"
+										   Margin="20,40"
+										   Visibility="{Binding IsNotinitialized, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
+										   HorizontalAlignment="Center"
+										   VerticalAlignment="Center"/>
+							</Grid>
 						</DataTemplate>
-						
+
 					</ContentControl.Resources>
 				</ContentControl>
 			</Grid>
