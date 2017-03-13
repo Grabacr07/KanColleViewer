@@ -1013,8 +1013,8 @@
 								<GridViewColumn.Header>
 									<metro2:SortButton MethodName="Sort"
 													   MethodParameter="{x:Static viewModels:ShipCatalogSortWorker.ASWColumn}">
-										<TextBlock Text="速力"
-												   ToolTip="装備によるステータス上昇を含んだ値です" />
+										<TextBlock Text="속력"
+												   ToolTip="장비에 의한 스테이터스 상승을 포함한 수치" />
 									</metro2:SortButton>
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
@@ -1026,23 +1026,14 @@
 												   Padding="5,3"
 												   MinWidth="45" />
 										<DataTemplate.Triggers>
-											<DataTrigger Binding="{Binding Ship.Speed}"
-														 Value="Fastest">
-												<Setter TargetName="Text"
-														Property="Background"
-														Value="RoyalBlue" />
+											<DataTrigger Binding="{Binding Ship.Speed}" Value="Fastest">
+												<Setter TargetName="Text" Property="Background" Value="RoyalBlue" />
 											</DataTrigger>
-											<DataTrigger Binding="{Binding Ship.Speed}"
-														 Value="Faster">
-												<Setter TargetName="Text"
-														Property="Background"
-														Value="SteelBlue" />
+											<DataTrigger Binding="{Binding Ship.Speed}" Value="Faster">
+												<Setter TargetName="Text" Property="Background" Value="SteelBlue" />
 											</DataTrigger>
-											<DataTrigger Binding="{Binding Ship.Speed}"
-														 Value="Slow">
-												<Setter TargetName="Text"
-														Property="Opacity"
-														Value="0.5" />
+											<DataTrigger Binding="{Binding Ship.Speed}" Value="Slow">
+												<Setter TargetName="Text" Property="Opacity" Value="0.5" />
 											</DataTrigger>
 										</DataTemplate.Triggers>
 									</DataTemplate>
