@@ -924,7 +924,7 @@
 				</Setter>
 			</Trigger>
 			<Trigger Property="Type"
-					 Value="SubmarineEquipment">
+					 Value="SeaplaneFighter">
 				<Setter Property="Template">
 					<Setter.Value>
 						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
