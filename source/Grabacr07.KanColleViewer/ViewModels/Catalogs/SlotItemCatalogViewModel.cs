@@ -42,6 +42,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				{
 					_OnlyRemodeledSlotItems = value;
 					this.RaisePropertyChanged();
+					this.Update();
 				}
 			}
 		}

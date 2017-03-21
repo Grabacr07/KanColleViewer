@@ -74,7 +74,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		static SlotItemEquipTypeViewModel()
 		{
-			SlotItemEquipTypeViewModel.IconNameTable = new Dictionary<SlotItemIconType, string>
+			IconNameTable = new Dictionary<SlotItemIconType, string>
 			{
 				{ SlotItemIconType.Unknown, "*분류안됨" },
 				{ SlotItemIconType.MainCanonLight, "소구경주포" },
@@ -119,8 +119,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				{ SlotItemIconType.JetPowerededBomber2, "분식폭격전투기" },
 				{ SlotItemIconType.TransportEquipment, "운송자재" },
 				{ SlotItemIconType.SubmarineEquipment, "잠수함장비" },
+				{ SlotItemIconType.SeaplaneFighter, "수상전투기" },
 			};
-			SlotItemEquipTypeViewModel.IconAliasNamable = new Dictionary<SlotItemIconType, SlotItemIconType>
+			IconAliasNamable = new Dictionary<SlotItemIconType, SlotItemIconType>
 			{
 				{ SlotItemIconType.JetPowerededBomber2, SlotItemIconType.JetPowerededBomber1 }
 			};
@@ -129,8 +130,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public SlotItemEquipTypeViewModel(SlotItemIconType stype)
 		{
 			this.Type = stype;
-			this.DisplayName = SlotItemEquipTypeViewModel.IconNameTable[stype]
-				?? SlotItemEquipTypeViewModel.IconNameTable[SlotItemIconType.Unknown];
+			this.DisplayName = (IconNameTable?.ContainsKey(stype) ?? false)
+				? IconNameTable[stype]
+				: IconNameTable[SlotItemIconType.Unknown];
 		}
 
 		public void Set(bool selected)
