@@ -56,7 +56,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		ReconPlane = 9,
 
 		/// <summary>
-		/// 水上機。
+		/// 水上爆撃機, 水上偵察機。
 		/// </summary>
 		ReconSeaplane = 10,
 
@@ -219,5 +219,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 潜水艦装備
 		/// </summary>
 		SubmarineEquipment = 42,
+
+		/// <summary>
+		/// 水上戦闘爆機
+		/// </summary>
+		SeaplaneFighter = 43,
 	}
 }

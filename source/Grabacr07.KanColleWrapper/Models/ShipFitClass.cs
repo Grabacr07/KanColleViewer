@@ -127,8 +127,8 @@ namespace Grabacr07.KanColleWrapper.Models
 
 	public class ShipFitClassUtil
 	{
-		public static Dictionary<int, Dictionary<ShipFitClass, int>> FitTable_Heavy { get; }
-		public static Dictionary<int, Dictionary<ShipFitClass, int>> FitTable_Medium { get; }
+		public static readonly Dictionary<int, Dictionary<ShipFitClass, int>> FitTable_Heavy;
+		public static readonly Dictionary<int, Dictionary<ShipFitClass, int>> FitTable_Medium;
 
 		static ShipFitClassUtil()
 		{
@@ -254,7 +254,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			string[] part = Table.Replace(" ", "").Replace("+", "")
 				.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-			int[] values = new int[10] { 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 };
+			int[] values = new int[9] { 0, 0, 0, 0, 0, 0, 0, 0 ,0 };
 			int len = Math.Min(values.Length, part.Length);
 			for (var i = 0; i < len; i++)
 				int.TryParse(part[i], out values[i]);
@@ -266,11 +266,11 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ ShipFitClass.TenryuuClass,     values[2] },
 					{ ShipFitClass.NagaraClass,      values[3] },
 					{ ShipFitClass.YuubariClass,     values[4] },
-					{ ShipFitClass.OyodoClass,       values[5] },
-					{ ShipFitClass.AganoClass,       values[6] },
-					{ ShipFitClass.KumaTorpedoClass, values[7] },
-					{ ShipFitClass.KatoriClass,      values[8] },
-					{ ShipFitClass.HeavyCruiser,     values[9] },
+					{ ShipFitClass.OyodoClass,       values[4] },
+					{ ShipFitClass.AganoClass,       values[5] },
+					{ ShipFitClass.KumaTorpedoClass, values[6] },
+					{ ShipFitClass.KatoriClass,      values[7] },
+					{ ShipFitClass.HeavyCruiser,     values[8] },
 				};
 		}
 

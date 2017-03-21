@@ -236,13 +236,19 @@
 										</DataTemplate>
 									</Panel.Resources>
 
-									<CheckBox IsChecked="{Binding OnlyOwnSlotItems}"
-											  Content="보유중인 장비만 보기"
+									<CheckBox Margin="0,0,10,0"
+											  IsChecked="{Binding OnlyOwnSlotItems}"
+											  Content="보유중인 장비만"
 											  HorizontalAlignment="Left" />
 
-									<CheckBox Margin="15,0,0,0"
+									<CheckBox Margin="0,0,10,0"
 											  IsChecked="{Binding OnlyRemodeledSlotItems}"
-											  Content="개수된 장비만 보기"
+											  Content="개수된 장비만"
+											  HorizontalAlignment="Left" />
+
+									<CheckBox Margin="0,0,10,0"
+											  IsChecked="{Binding OnlyOwnShips}"
+											  Content="칸무스가 있는 장비만"
 											  HorizontalAlignment="Left" />
 
 									<metro:PromptComboBox HorizontalAlignment="Right"
@@ -252,7 +258,7 @@
 														  ItemsSource="{Binding RemodelFilters}"
 														  SelectedValue="{Binding RemodelFilterSelected, Mode=TwoWay}" />
 								</DockPanel>
-								<ItemsControl ItemsSource="{Binding FirstList}">
+								<ItemsControl ItemsSource="{Binding RemodelItemList}">
 									<ItemsControl.Template>
 										<ControlTemplate TargetType="{x:Type ItemsControl}">
 											<WrapPanel IsItemsHost="True"
@@ -388,38 +394,52 @@
 						</GroupBox>
 						<Border MinHeight="80" BorderBrush="{DynamicResource BorderBrushKey}" BorderThickness="1">
 							<DockPanel Margin="4">
-								<ItemsControl  ItemsSource="{Binding Improvement}">
+								<ItemsControl ItemsSource="{Binding RemodelItemList}">
 									<ItemsControl.Template>
 										<ControlTemplate TargetType="{x:Type ItemsControl}">
-											<WrapPanel IsItemsHost="True"
-										   Margin="4,0,0,4" />
+											<WrapPanel IsItemsHost="True" Margin="4,0,0,4" />
 										</ControlTemplate>
 									</ItemsControl.Template>
 									<ItemsControl.ItemTemplate>
 										<DataTemplate>
-											<Grid Margin="0,6,20,0" Background="{DynamicResource BackgroundBrushKey}" VerticalAlignment="Center">
+											<Grid Margin="0,6,20,0"
+												  Background="{DynamicResource BackgroundBrushKey}"
+												  VerticalAlignment="Center">
 												<Grid.ColumnDefinitions>
-													<ColumnDefinition/>
-													<ColumnDefinition/>
-													<ColumnDefinition/>
+													<ColumnDefinition />
+													<ColumnDefinition />
+													<ColumnDefinition />
 												</Grid.ColumnDefinitions>
+
 												<TextBlock VerticalAlignment="Center">
-													<Viewbox Width="20" VerticalAlignment="Center">
+													<Viewbox Width="20"
+															 VerticalAlignment="Center">
 														<kcvc:SlotItemIcon Type="{Binding IconType}" />
 													</Viewbox>
-													<Run Text="{Binding ItemName}"
-													 Foreground="{DynamicResource ActiveForegroundBrushKey}" BaselineAlignment="Center"/>
+													<Run BaselineAlignment="Center"
+														 Foreground="{DynamicResource ActiveForegroundBrushKey}"
+														 Text="{Binding ItemName}" />
 												</TextBlock>
-												<TextBlock VerticalAlignment="Center" Grid.Column="1" Text="⇒" Foreground="#FF45A9A5"/>
-												<StackPanel Grid.Column="2" VerticalAlignment="Center" >
-													<ItemsControl ItemsSource="{Binding Ships}">
+
+												<TextBlock Grid.Column="1"
+														   Foreground="#FF45A9A5"
+														   VerticalAlignment="Center"
+														   Text="⇒" />
+
+												<StackPanel Grid.Column="2"
+															VerticalAlignment="Center" >
+													<ItemsControl ItemsSource="{Binding UpgradeShips}">
 														<ItemsControl.ItemTemplate>
 															<DataTemplate>
 																<TextBlock Padding="1">
-																	<Viewbox Width="20" VerticalAlignment="Center">
+																	<Viewbox Width="20"
+																			 VerticalAlignment="Center">
 																		<kcvc:SlotItemIcon Type="{Binding UpgradeIconType}" />
 																	</Viewbox>
-																	<Run Text="{Binding Upgrade}" BaselineAlignment="Center"/>
+
+																	<Run BaselineAlignment="Center"
+																		 Text="{Binding Upgrade}" />
+
 																	<TextBlock.ToolTip>
 																		<TextBlock Text="{Binding ShipName, StringFormat='필요 칸무스: {0}', TargetNullValue='필요 칸무스: 없음'}"/>
 																	</TextBlock.ToolTip>
@@ -428,6 +448,16 @@
 														</ItemsControl.ItemTemplate>
 													</ItemsControl>
 												</StackPanel>
+
+												<Grid.Style>
+													<Style TargetType="{x:Type Grid}">
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding Upgradable}" Value="False">
+																<Setter Property="Visibility" Value="Collapsed" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</Grid.Style>
 											</Grid>
 										</DataTemplate>
 									</ItemsControl.ItemTemplate>
@@ -443,7 +473,7 @@
 							</Border>
 						</GroupBox>
 						<Border BorderBrush="{DynamicResource BorderBrushKey}" BorderThickness="1">
-							<ListView ItemsSource="{Binding UseItemList}"
+							<ListView ItemsSource="{Binding RemodelItemList}"
 									  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}"
 									  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
 									  ScrollViewer.VerticalScrollBarVisibility="Disabled">

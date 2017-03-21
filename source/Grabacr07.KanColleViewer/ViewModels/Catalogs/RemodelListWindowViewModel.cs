@@ -43,7 +43,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		#endregion
 
 		#region OnlyOwnSlotItems 변경통지 프로퍼티
-
 		private bool _OnlyOwnSlotItems;
 		public bool OnlyOwnSlotItems
 		{
@@ -58,11 +57,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				}
 			}
 		}
-
 		#endregion
 
 		#region OnlyRemodeledSlotItems 변경통지 프로퍼티
-
 		private bool _OnlyRemodeledSlotItems;
 		public bool OnlyRemodeledSlotItems
 		{
@@ -77,7 +74,23 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				}
 			}
 		}
+		#endregion
 
+		#region OnlyOwnShips 변경통지 프로퍼티
+		private bool _OnlyOwnShips;
+		public bool OnlyOwnShips
+		{
+			get { return this._OnlyOwnShips; }
+			set
+			{
+				if (this._OnlyOwnShips != value)
+				{
+					this._OnlyOwnShips = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
 		#endregion
 
 		#region RemodelFilters 프로퍼티
@@ -105,99 +118,20 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#endregion
 
-		#region FirstList 変更通知プロパティ
-
-		private List<RemodelItemList> _FirstList;
-
-		public List<RemodelItemList> FirstList
+		#region RemodelItemList 変更通知プロパティ
+		private List<RemodelItemList> _RemodelItemList;
+		public List<RemodelItemList> RemodelItemList
 		{
-			get { return _FirstList; }
+			get { return _RemodelItemList; }
 			set
 			{
-				if (_FirstList != value)
+				if (_RemodelItemList != value)
 				{
-					_FirstList = value;
+					_RemodelItemList = value;
 					this.RaisePropertyChanged();
 				}
 			}
 		}
-
-		#endregion
-
-		#region SecondList 変更通知プロパティ
-
-		private List<RemodelItemList> _SecondList;
-
-		public List<RemodelItemList> SecondList
-		{
-			get { return _SecondList; }
-			set
-			{
-				if (_SecondList != value)
-				{
-					_SecondList = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region ThirdList 変更通知プロパティ
-
-		private List<RemodelItemList> _ThirdList;
-
-		public List<RemodelItemList> ThirdList
-		{
-			get { return _ThirdList; }
-			set
-			{
-				if (_ThirdList != value)
-				{
-					_ThirdList = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region Improvement 変更通知プロパティ
-
-		private List<RemodelItemList> _Improvement;
-
-		public List<RemodelItemList> Improvement
-		{
-			get { return _Improvement; }
-			set
-			{
-				if (_Improvement != value)
-				{
-					_Improvement = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
-		#endregion
-
-		#region UseItemList 変更通知プロパティ
-
-		private List<RemodelItemList> _UseItemList;
-
-		public List<RemodelItemList> UseItemList
-		{
-			get { return _UseItemList; }
-			set
-			{
-				if (_UseItemList != value)
-				{
-					_UseItemList = value;
-					this.RaisePropertyChanged();
-				}
-			}
-		}
-
 		#endregion
 
 		#region WeekDayView 変更通知プロパティ
@@ -304,6 +238,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 								break;
 						}
 					}
+
+					var homeport = KanColleClient.Current.Homeport;
+
 					this.RemodelXML = XDocument.Load(Path.Combine(MainFolder, "Translations", "RemodelSlots.xml"));
 					IEnumerable<XElement> RemodelList = GetRemodelList();
 
@@ -322,7 +259,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 								.FirstOrDefault()
 								.Value.Id;
 
-							return KanColleClient.Current.Homeport.Itemyard.SlotItems.Any(y => y.Value.Info.Id == itemid);
+							return homeport.Itemyard.SlotItems.Any(y => y.Value.Info.Id == itemid);
 						});
 					}
 
@@ -337,7 +274,44 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 								.FirstOrDefault()
 								.Value.Id;
 
-							return KanColleClient.Current.Homeport.Itemyard.SlotItems.Any(y => y.Value.Info.Id == itemid && y.Value.Level > 0);
+							return homeport.Itemyard.SlotItems.Any(y => y.Value.Info.Id == itemid && y.Value.Level > 0);
+						});
+					}
+
+					// 보유중인 함선으로 필터
+					if (this.OnlyOwnShips)
+					{
+						string[] assume =
+						{
+							"改二", "改三",
+							"改二甲","改二乙","改二丙","改二丁",
+							"改二戊","改二己","改二庚","改二辛",
+							"改二壬","改二癸",
+							"zwei","drei","due",
+							"改"
+						};
+
+						RemodelList = RemodelList.Where(x =>
+						{
+							List<string> ships = new List<string>();
+
+							for (int i = 0; ; i++)
+							{
+								string element = string.Format("ShipName{0}", i + 1);
+								string name = x.Element(element)?.Value ?? null;
+								if (name == null) break;
+
+								ships.Add(name);
+							}
+							return homeport.Organization.Ships.Any(y =>
+							{
+								var name = y.Value.Info.JPName;
+								if (ships.Contains(name)) return true;
+
+								foreach (var z in assume)
+									name = name.Replace(z, string.Empty).Trim();
+								return ships.Contains(name);
+							});
 						});
 					}
 
@@ -361,28 +335,24 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 					}
 
 
-					//상중하 리스트를 작성->상중하의 구분을 제거
+					// 개수 가능 장비 목록을 작성
 					var list = MakeDefaultList(RemodelList).ToList();
-					var _FirstList = SortList(list);
+					var _RemodelItemList = SortList(list);
 
-					//소모아이템 리스트를 작성
-					var use = MakeUseItemList(RemodelList);
-					var _UseItemList = SortList(use.ToList());
-
-					//개조 목록을 작성
-					var im = MakeUpgradeList(RemodelList);
-					var _Improvement = SortList(im.ToList());
-
-					Grabacr07.KanColleViewer.Application.Current.Dispatcher.Invoke(() =>
+					Application.Current.Dispatcher.Invoke(() =>
 					{
-						this.FirstList = _FirstList;
-						this.UseItemList = _UseItemList;
-						this.Improvement = _Improvement;
+						this.RemodelItemList = _RemodelItemList;
 						this.IsLoading = false;
 					});
 				}).Start();
 			}
 		}
+
+		/// <summary>
+		/// 장비 목록 결과를 정렬
+		/// </summary>
+		/// <param name="myList"></param>
+		/// <returns></returns>
 		private List<RemodelItemList> SortList(List<RemodelItemList> myList)
 		{
 			myList.Sort(delegate (RemodelItemList x, RemodelItemList y)
@@ -396,150 +366,105 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			});
 			return myList;
 		}
+
 		private List<ShipInfo> TrimShipList(List<ShipInfo> ShipList)
 		{
-			for (int i = 0; i < ShipList.Count; i++)
-			{
-				for (int j = i + 1; j < ShipList.Count; j++)
+			return ShipList
+				.GroupBy(x => x.Upgrade)
+				.Select(x =>
 				{
-					if (ShipList[i].Upgrade == ShipList[j].Upgrade)
+					var y = x.First();
+					return new ShipInfo
 					{
-						ShipList[i].IsSameUpgradeExist = true;
-						ShipList[j].IsSameUpgradeExist = true;
-					}
-				}
-			}
-			var RemoveSameShip = ShipList.Where(x => !x.IsSameUpgradeExist).ToList();
-			var SameShipList = ShipList.Where(x => x.IsSameUpgradeExist).ToList();
-
-			if (SameShipList.Count > 1)
-			{
-				ShipInfo mergedShip = new ShipInfo();
-				string MergedName = SameShipList[0].ShipName;
-
-				for (int i = 1; i < SameShipList.Count; i++)
-				{
-					MergedName = MergedName + ", " + SameShipList[i].ShipName;
-				}
-
-				mergedShip = SameShipList[0];
-				mergedShip.ShipName = MergedName;
-				RemoveSameShip.Add(mergedShip);
-			}
-
-
-			return RemoveSameShip;
+						ShipName = string.Join(", ", x.Select(z => z.ShipName)),
+						Upgrade = y.Upgrade,
+						UpgradeIconType = y.UpgradeIconType,
+						Weekday = y.Weekday
+					};
+				})
+				.Distinct(x => x.Upgrade)
+				.ToList();
 		}
-		private List<ShipInfo> MakeShipList(XElement Context, bool IsImprovementList = false)
+
+		/// <summary>
+		/// 개수 가능 함선 목록 작성
+		/// </summary>
+		private List<ShipInfo> MakeShipList(XElement Context)
 		{
 			List<ShipInfo> ShipList = new List<ShipInfo>();
 
-			bool Checker = true;
-			int ShipCount = 1;
-
-			while (Checker)
+			for (int ShipCount = 1; ; ShipCount++)
 			{
-				//이름작성
-				string ShipElement = "ShipName";
-				var temp = ShipElement + ShipCount.ToString();
+				// 이름작성
+				string ShipElement;
 
 				ShipInfo Ship = new ShipInfo();
-				Ship.IsSameUpgradeExist = false;
-				if (Context.Element(temp) != null)
-				{
-					Ship.ShipName = Context.Element(temp).Value;
-					Ship.ShipName = KanColleClient.Current.Translations.GetTranslation(Ship.ShipName, TranslationType.Ships, false);
-				}
-				else Ship.ShipName = string.Empty;
-				//업그레이드 부분
-				ShipElement = "Upgrade";
-				temp = ShipElement + ShipCount.ToString();
 
-				if (Context.Element(temp) != null)
+				// 함선명
+				ShipElement = string.Format("ShipName{0}", ShipCount);
+				Ship.ShipName = Context.Element(ShipElement)?.Value ?? null;
+				if (Ship.ShipName != null)
 				{
-					Ship.Upgrade = Context.Element(temp).Value;
+					Ship.ShipName = Ship.ShipName.StartsWith("※")
+						? Ship.ShipName
+						: KanColleClient.Current.Translations.GetTranslation(Ship.ShipName, TranslationType.Ships, false);
+				}
+				else break;
+
+				// 업그레이드 부분
+				ShipElement = string.Format("Upgrade{0}", ShipCount);
+				Ship.Upgrade = Context.Element(ShipElement)?.Value ?? null;
+				if (Ship.Upgrade != null)
+				{
 					Ship.Upgrade = KanColleClient.Current.Translations.GetTranslation(Ship.Upgrade, TranslationType.Equipment, false);
 
 					//슬롯 아이템 Master목록에서 해당되는 아이콘을 찾아 삽입
-					foreach (var slotitem in KanColleClient.Current.Master.SlotItems)
-					{
-						if (slotitem.Value.Name == Ship.Upgrade)
-							Ship.UpgradeIconType = slotitem.Value.IconType;
-					}
+					Ship.UpgradeIconType = KanColleClient.Current.Master.SlotItems
+						.Where(x => x.Value.Name == Ship.Upgrade)
+						.Select(x => x.Value.IconType)
+						.FirstOrDefault();
 				}
-				else
+
+				// 개수 가능일
+				ShipElement = string.Format("WeekDays{0}", ShipCount);
+				var weekDays = Context.Element(ShipElement)?.Value ?? null;
+				if (weekDays != null)
 				{
-					Ship.Upgrade = null;
-					Ship.UpgradeIconType = null;
-				}
-				ShipElement = "WeekDays";
-				temp = ShipElement + ShipCount.ToString();
-				if (Context.Element(temp) != null)
-				{
-					int weekday = Convert.ToInt32(Context.Element(temp).Value);
+					int weekday = Convert.ToInt32(weekDays);
 					Ship.Weekday = WeekDaySetter(weekday);
 				}
-				else Ship.Weekday = WeekDayFlag.None;
 
-				if (Ship.Weekday == WeekDayFlag.None && Ship.Upgrade == null && Ship.ShipName == string.Empty)
+				if (Ship.Weekday == WeekDayFlag.None && Ship.Upgrade == null && Ship.ShipName == null)
+					break;
+
+				if (Ship.Weekday.HasFlag(today))
+					ShipList.Add(Ship);
+
+				/* Upgrade 항목은 있지만 ShipName 은 없는 경우. 존재하지 않을테니 주석으로
+				// * 사용한다면 상단 함선명의 else continue; 를 주석으로
+				else if (IsImprovementList && Ship.Upgrade != null)
 				{
-					Checker = false;
+					Ship.ShipName = "없음";
+					ShipList.Add(Ship);
 				}
-				else
-				{
-					if (Ship.ShipName != string.Empty)
-					{
-						if (Ship.Weekday.HasFlag(today))
-						{
-							if (IsImprovementList)
-							{
-								if (Ship.Upgrade != null)
-								{
-									ShipList.Add(Ship);
-									ShipCount++;
-								}
-								else ShipCount++;
-							}
-							else
-							{
-								ShipList.Add(Ship);
-								ShipCount++;
-							}
-						}
-						else
-						{
-							ShipCount++;
-						}
-					}
-					else
-					{
-						if (IsImprovementList)
-						{
-							if (Ship.Upgrade != null)
-							{
-								Ship.ShipName = "없음";
-								ShipList.Add(Ship);
-								ShipCount++;
-							}
-							else ShipCount++;
-						}
-						else ShipCount++;
-					}
-				}
-			}//while구문 종료
+				// */
+			} // while구문 종료
 
 			return ShipList;
 		}
+
+		/// <summary>
+		/// 개수 가능 장비 목록 작성
+		/// </summary>
 		private List<RemodelItemList> MakeDefaultList(IEnumerable<XElement> List, int Position=-1)
 		{
 			//var PosElement = "Position";
-
 			List<RemodelItemList> ItemList = new List<RemodelItemList>();
-
 
 			//리스트를 Position에 따라 필터링
 			//var tempList = List.Where(f => f.Element(PosElement).Value.Equals(Position.ToString())).ToList();
 			var tempList = List;
+
 			//XML리스트를 List<RemodelItemList>의 형태로 재작성
 			foreach (var item in tempList)
 			{
@@ -548,99 +473,48 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				{
 					ItemName = item.Element("SlotItemName").Value
 				};
+
 				//우선 장비명을 번역
-				ItemContent.ItemName = KanColleClient.Current.Translations.GetTranslation(ItemContent.ItemName, TranslationType.Equipment, false);
+				ItemContent.ItemName =
+					ItemContent.ItemName.StartsWith("※") // 얘는 번역 X
+					? ItemContent.ItemName
+					: KanColleClient.Current.Translations.GetTranslation(ItemContent.ItemName, TranslationType.Equipment, false);
+
 				//슬롯 아이템 Master목록에서 해당되는 아이콘을 찾아 삽입
-				foreach (var slotitem in KanColleClient.Current.Master.SlotItems)
-				{
-					if (slotitem.Value.Name == ItemContent.ItemName)
-						ItemContent.IconType = slotitem.Value.IconType;
-				}
+				ItemContent.IconType = KanColleClient.Current.Master.SlotItems
+					.Where(x => x.Value.Name == ItemContent.ItemName)
+					.Select(x => x.Value.IconType)
+					.FirstOrDefault();
+
+				// 개수시 필요한 나사 개수 목록을 작성
+				List<string> screwCombine = new List<string>();
+				if (item.Element("StartScrew") != null) screwCombine.Add(item.Element("StartScrew").Value);
+				if (item.Element("MidScrew") != null) screwCombine.Add(item.Element("MidScrew").Value);
+				if (item.Element("LastScrew") != null) screwCombine.Add(item.Element("LastScrew").Value);
+				ItemContent.UseScrew = string.Join("/", screwCombine);
+
+				// 툴팁을 선택
 				if (item.Element("ToolTip") != null)
 					ItemContent.ToolTipString = item.Element("ToolTip").Value;
 				else
-				{
 					ItemContent.ToolTipString = "특이사항 없음";
-				}
-				ItemContent.Ships = new List<ShipInfo>(MakeShipList(item));
 
+				// 개수시 필요한 칸무스 작성
+				ItemContent.Ships = MakeShipList(item);
 
-				ItemList.Add(ItemContent);
-			}
+				// 장비변환이 가능한지 여부 판단
+				ItemContent.Upgradable = ItemContent.Ships.Any(x => x.Upgrade != null);
 
-			return ItemList;
-		}
-		private List<RemodelItemList> MakeUpgradeList(IEnumerable<XElement> List)
-		{
-			var tempList = List;
-			List<RemodelItemList> ItemList = new List<RemodelItemList>();
-			foreach (var item in tempList)
-			{
-				//초기화
-				RemodelItemList ItemContent = new RemodelItemList
-				{
-					ItemName = item.Element("SlotItemName").Value
-				};
-				//우선 장비명을 번역
-				ItemContent.ItemName = KanColleClient.Current.Translations.GetTranslation(ItemContent.ItemName, TranslationType.Equipment, false);
-				//슬롯 아이템 Master목록에서 해당되는 아이콘을 찾아 삽입
-				foreach (var slotitem in KanColleClient.Current.Master.SlotItems)
-				{
-					if (slotitem.Value.Name == ItemContent.ItemName)
-						ItemContent.IconType = slotitem.Value.IconType;
-				}
-
-
-				ItemContent.Ships = new List<ShipInfo>(TrimShipList(MakeShipList(item, true)));
-
-				if (ItemContent.Ships.Count > 0) ItemList.Add(ItemContent);
-			}
-			return ItemList;
-		}
-		private List<RemodelItemList> MakeUseItemList(IEnumerable<XElement> List)
-		{
-			var tempList = List;
-
-			List<RemodelItemList> ItemList = new List<RemodelItemList>();
-
-			foreach (var item in tempList)
-			{
-				//초기화
-				RemodelItemList ItemContent = new RemodelItemList
-				{
-					ItemName = item.Element("SlotItemName").Value
-				};
-				//우선 장비명을 번역
-				ItemContent.ItemName = KanColleClient.Current.Translations.GetTranslation(ItemContent.ItemName, TranslationType.Equipment, false);
-				//슬롯 아이템 Master목록에서 해당되는 아이콘을 찾아 삽입
-				foreach (var slotitem in KanColleClient.Current.Master.SlotItems)
-				{
-					if (slotitem.Value.Name == ItemContent.ItemName)
-						ItemContent.IconType = slotitem.Value.IconType;
-				}
-				// 개수시 필요한 나사 개수 목록을 작성
-				StringBuilder screwCombine = new StringBuilder();
-				if (item.Element("StartScrew") != null)
-				{
-					screwCombine.Append(item.Element("StartScrew").Value);
-				}
-				if (item.Element("MidScrew") != null)
-				{
-					screwCombine.Append("/");
-					screwCombine.Append(item.Element("MidScrew").Value);
-				}
-				if (item.Element("LastScrew") != null)
-				{
-					screwCombine.Append("/");
-					screwCombine.Append(item.Element("LastScrew").Value);
-				}
-				if (screwCombine.Length > 0)
-					ItemContent.UseScrew = screwCombine.ToString();
+				// 장비변환 가능한 경우 칸무스 목록 작성
+				if(ItemContent.Upgradable)
+					ItemContent.UpgradeShips = TrimShipList(ItemContent.Ships);
 
 				ItemList.Add(ItemContent);
 			}
+
 			return ItemList;
 		}
+
 		private WeekDayFlag WeekDaySetter(int weekint)
 		{
 			var temp = weekint.ToString();
@@ -673,21 +547,73 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 	#region 목록
 	public class RemodelItemList
 	{
+		/// <summary>
+		/// 장비명
+		/// </summary>
 		public string ItemName { get; set; }
+
+		/// <summary>
+		/// 개수 가능 요일 전체
+		/// </summary>
 		public WeekDayFlag TotalWeekday { get; set; }
+
+		/// <summary>
+		/// 아이콘 종류
+		/// </summary>
 		public SlotItemIconType? IconType { get; set; }
-		public string ToolTipString { get; set; }
+
+		/// <summary>
+		/// 소모 나사량
+		/// </summary>
 		public string UseScrew { get; set; }
-		public SlotItemIconType? UpgradeIconType { get; set; }
+
+		/// <summary>
+		/// 툴팁 내용
+		/// </summary>
+		public string ToolTipString { get; set; }
+
+		/// <summary>
+		/// 개수 함선들
+		/// </summary>
 		public List<ShipInfo> Ships { get; set; }
+
+		/// <summary>
+		/// 장비 변환 가능 여부
+		/// </summary>
+		public bool Upgradable { get; set; }
+
+		/// <summary>
+		/// 장비변환 후 장비 아이콘
+		/// </summary>
+		public SlotItemIconType? UpgradeIconType { get; set; }
+
+		/// <summary>
+		/// 장비변환 함선들
+		/// </summary>
+		public List<ShipInfo> UpgradeShips { get; set; }
 	}
+
 	public class ShipInfo
 	{
+		/// <summary>
+		/// 개수 가능 요일
+		/// </summary>
 		public WeekDayFlag Weekday { get; set; }
-		public string Upgrade { get; set; }
+
+		/// <summary>
+		/// 함선 이름
+		/// </summary>
 		public string ShipName { get; set; }
+
+		/// <summary>
+		/// 장비 변환 후 장비
+		/// </summary>
+		public string Upgrade { get; set; }
+
+		/// <summary>
+		/// 장비 변환 후 장비 아이콘
+		/// </summary>
 		public SlotItemIconType? UpgradeIconType { get; set; }
-		public bool IsSameUpgradeExist { get; set; }
 	}
 
 	[Flags]
