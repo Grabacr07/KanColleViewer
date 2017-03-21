@@ -219,5 +219,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 潜水艦装備
 		/// </summary>
 		SubmarineEquipment = 42,
+
+		/// <summary>
+		/// 水上戦闘機
+		/// </summary>
+		SeaplaneFighter = 43,
 	}
 }
