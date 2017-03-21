@@ -933,8 +933,8 @@
 									<Path Data="M2,3L3,5,6,6V7L5,10,4,11,2,12v1l3,1,3-1V12L6,11,7,7,8,8v2l2,4V11l3,1V11h2l-2,5L1,17,0,18l5,3,6,1,8-1,6-2,5-2V16H18l-2,1V15l4-4,9,2h3v2l-1,4-3,1v1l2,1h3l2-2H33l-1-1,1-2V14h4l4,1h2l-2-2H39L29,11l4-2h6l3,1L41,8H38L36,7l1-7H36L33,4,32,6H28L22,4,20,3H18L16,5,11,4,10,5H8L7,2H6V4L3,3H2Z"
 										  Fill="#FF8BC595"
 										  HorizontalAlignment="Left"
-										  Width="233"
-										  Height="220"
+										  Width="215"
+										  Height="110"
 										  Stretch="Uniform"
 										  VerticalAlignment="Top" />
 								</Grid>
