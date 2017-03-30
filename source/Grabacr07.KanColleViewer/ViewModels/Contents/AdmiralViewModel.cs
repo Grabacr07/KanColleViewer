@@ -89,7 +89,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			servers.Add("203.104.209.55", "사이키만 정박지");
 			servers.Add("203.104.209.102", "하시라지마 정박지");
 
-			KanColleClient.Current.Proxy.api_start2
+			KanColleClient.Current.Proxy.api_port
 				.Subscribe(x =>
 				{
 					var server = x.Request.Headers.Host;
