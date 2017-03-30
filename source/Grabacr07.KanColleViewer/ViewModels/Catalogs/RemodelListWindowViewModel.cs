@@ -248,6 +248,25 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 					//RemodelList에서 오늘 개수공창 목록에 들어갈것들을 선별한다.
 					RemodelList = RemodelList.Where(f => WeekDaySetter(Convert.ToInt32(f.Element(Weekday).Value)).HasFlag(today));
 
+					// 아이콘으로 필터
+					if (this.RemodelFilterSelected.Display.HasValue)
+					{
+						RemodelList = RemodelList.Where(x =>
+						{
+							var name = x.Element("SlotItemName").Value;
+							var icon = KanColleClient.Current.Master.SlotItems
+								.Where(y => y.Value.RawData.api_name == name)
+								.Select(y => y.Value.IconType)
+								.FirstOrDefault();
+
+							// Not registered icon yet (Unknown icon)
+							if (Enum.GetName(typeof(SlotItemIconType), icon) == null)
+								icon = SlotItemIconType.Unknown;
+
+							return icon == this.RemodelFilterSelected.Display.Value;
+						});
+					}
+
 					// 소지 장비로 필터
 					if (this.OnlyOwnSlotItems)
 					{
@@ -264,7 +283,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 					}
 
 					// 개수된 장비로 필터
-					if(this.OnlyRemodeledSlotItems)
+					if (this.OnlyRemodeledSlotItems)
 					{
 						RemodelList = RemodelList.Where(x =>
 						{
@@ -298,10 +317,14 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 							for (int i = 0; ; i++)
 							{
 								string element = string.Format("ShipName{0}", i + 1);
+								string element2 = string.Format("WeekDays{0}", i + 1);
 								string name = x.Element(element)?.Value ?? null;
-								if (name == null) break;
+								string week = x.Element(element2)?.Value ?? null;
+								if (name == null || week == null) break;
 
-								ships.Add(name);
+								var today = WeekDayTable[SelectedDay];
+								if (week.Contains(today.ToString()))
+									ships.Add(name);
 							}
 							return homeport.Organization.Ships.Any(y =>
 							{
@@ -312,25 +335,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 									name = name.Replace(z, string.Empty).Trim();
 								return ships.Contains(name);
 							});
-						});
-					}
-
-					// 아이콘으로 필터
-					if (this.RemodelFilterSelected.Display.HasValue)
-					{
-						RemodelList = RemodelList.Where(x =>
-						{
-							var name = x.Element("SlotItemName").Value;
-							var icon = KanColleClient.Current.Master.SlotItems
-								.Where(y => y.Value.RawData.api_name == name)
-								.Select(y => y.Value.IconType)
-								.FirstOrDefault();
-
-							// Not registered icon yet (Unknown icon)
-							if (Enum.GetName(typeof(SlotItemIconType), icon) == null)
-								icon = SlotItemIconType.Unknown;
-
-							return icon == this.RemodelFilterSelected.Display.Value;
 						});
 					}
 
