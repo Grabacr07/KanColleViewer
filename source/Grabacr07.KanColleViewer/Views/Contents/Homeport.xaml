@@ -302,6 +302,11 @@
 								<Run Text="{Binding Model.Medals, Mode=OneWay}"
 									 Style="{StaticResource EmphaticRun14}" />
 								<Run Text="개" />
+								<LineBreak />
+								<Run Text="서버:" />
+								<Run Text="{Binding ServerName, Mode=OneWay}"
+									 Style="{StaticResource EmphaticRun14}" />
+								<Run Text="개" />
 						</TextBlock>
 					</StackPanel>
 
