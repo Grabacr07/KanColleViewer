@@ -222,8 +222,7 @@
 												   Style="{DynamicResource EmphaticTextStyleKey}"
 												   Margin="8,0" />
 
-										<kcvc:ColorIndicator x:Name="HPIndicator"
-															 Height="5"
+										<kcvc:ColorIndicator Height="5"
 															 VerticalAlignment="Bottom"
 															 Margin="10,8,10,4"
 											LimitedValue="{Binding Expedition.Progress, Mode=OneWay}" />
