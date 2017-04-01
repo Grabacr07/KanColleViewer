@@ -225,7 +225,7 @@
 										<kcvc:ColorIndicator Height="5"
 															 VerticalAlignment="Bottom"
 															 Margin="10,8,10,4"
-											LimitedValue="{Binding Expedition.Progress, Mode=OneWay}" />
+															 LimitedValue="{Binding Expedition.Progress, Mode=OneWay}" />
 									</StackPanel>
 
 									<TextBlock x:Name="ExpeditionReturned"
