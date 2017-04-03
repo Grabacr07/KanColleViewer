@@ -149,9 +149,9 @@
 											 FontSize="9" />
 									</TextBlock>
 
-									<TextBlock x:Name="NextRemodelInfo"
-											   Style="{DynamicResource DefaultTextStyleKey}"
-											   Margin="0,4,0,0"
+									<ContentControl x:Name="NextRemodelInfo"
+												Margin="0,8,0,0">
+										<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
 											   Foreground="White">
 										<Run Text="다음 개장레벨:" />
 										<Run Text="{Binding Ship.Info.NextRemodelingLevel, Mode=OneWay}" />
@@ -161,27 +161,54 @@
 										<LineBreak />
 										<Run Text="누적 경험치:" />
 										<Run Text="{Binding Ship.Exp, Mode=OneWay}" />
-									</TextBlock>
-									<TextBlock x:Name="NextRemodelable"
-											   Style="{DynamicResource DefaultTextStyleKey}"
-											   Margin="0,4,0,0"
-											   Foreground="White">
-										<Run Text="개장 가능합니다" />
-										<LineBreak />
-										<LineBreak />
-										<Run Text="누적 경험치:" />
-										<Run Text="{Binding Ship.Exp, Mode=OneWay}" />
-									</TextBlock>
-									<TextBlock x:Name="NextRemodelNone"
-											   Style="{DynamicResource DefaultTextStyleKey}"
-											   Margin="0,4,0,0"
-											   Foreground="White">
-										<Run Text="다음 개장이 없습니다" />
-										<LineBreak />
-										<LineBreak />
-										<Run Text="누적 경험치:" />
-										<Run Text="{Binding Ship.Exp, Mode=OneWay}" />
-									</TextBlock>
+										</TextBlock>
+
+										<ContentControl.Style>
+											<Style TargetType="{x:Type ContentControl}">
+												<Style.Triggers>
+													<DataTrigger Binding="{Binding Ship.Info.NextRemodelingLevel}" Value="{x:Null}">
+														<Setter Property="Template">
+															<Setter.Value>
+																<ControlTemplate TargetType="{x:Type ContentControl}">
+																	<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+																			Foreground="White">
+																	<Run Text="다음 개장이 없습니다" />
+																	<LineBreak />
+																	<LineBreak />
+																	<Run Text="누적 경험치:" />
+																	<Run Text="{Binding Ship.Exp, Mode=OneWay}" />
+																	</TextBlock>
+																</ControlTemplate>
+															</Setter.Value>
+														</Setter>
+													</DataTrigger>
+
+													<MultiDataTrigger>
+														<MultiDataTrigger.Conditions>
+															<Condition Binding="{Binding Ship.Info.RemodelingExists}" Value="True" />
+															<Condition Binding="{Binding Ship.ExpForNextRemodelingLevel}" Value="0" />
+														</MultiDataTrigger.Conditions>
+														<MultiDataTrigger.Setters>
+															<Setter Property="Template">
+																<Setter.Value>
+																	<ControlTemplate TargetType="{x:Type ContentControl}">
+																		<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+																			Foreground="White">
+																		<Run Text="개장 가능합니다" />
+																		<LineBreak />
+																		<LineBreak />
+																		<Run Text="누적 경험치:" />
+																		<Run Text="{Binding Ship.Exp, Mode=OneWay}" />
+																		</TextBlock>
+																	</ControlTemplate>
+																</Setter.Value>
+															</Setter>
+														</MultiDataTrigger.Setters>
+													</MultiDataTrigger>
+												</Style.Triggers>
+											</Style>
+										</ContentControl.Style>
+									</ContentControl>
 								</StackPanel>
 							</TextBlock.ToolTip>
 						</TextBlock>
