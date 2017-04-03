@@ -125,7 +125,10 @@
 						</TextBlock>
 
 						<TextBlock Grid.Column="1"
-							   Margin="12,0,0,0">
+								   ToolTipService.Placement="Relative"
+								   ToolTipService.HorizontalOffset="-9"
+								   ToolTipService.VerticalOffset="-3"
+								   Margin="12,0,0,0">
 							<Run Text="Lv." />
 							<Run Text="{Binding Ship.Level, Mode=OneWay}"
 								 Style="{DynamicResource EmphaticTextElementStyleKey}" />
@@ -134,17 +137,52 @@
 								 FontSize="9" />
 
 							<TextBlock.ToolTip>
-								<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
-											Foreground="White">
-									<Run Text="다음 개장레벨:" />
-									<Run Text="{Binding Ship.Info.NextRemodelingLevel, Mode=OneWay}" />
-									<LineBreak />
-									<Run Text="남은 경험치:" />
-									<Run Text="{Binding Ship.ExpForNextRemodelingLevel, Mode=OneWay}" />
-									<LineBreak />
-									<Run Text="누적 경험치:" />
-									<Run Text="{Binding Ship.Exp, Mode=OneWay}" />
-								</TextBlock>
+								<StackPanel Margin="0,-2,0,0"
+											Orientation="Vertical">
+									<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+											   Foreground="White">
+										<Run Text="Lv." />
+										<Run Text="{Binding Ship.Level, Mode=OneWay}"
+											 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+										<LineBreak />
+										<Run Text="{Binding Ship.ExpForNextLevel, StringFormat=Next: {0}, Mode=OneWay}"
+											 FontSize="9" />
+									</TextBlock>
+
+									<TextBlock x:Name="NextRemodelInfo"
+											   Style="{DynamicResource DefaultTextStyleKey}"
+											   Margin="0,4,0,0"
+											   Foreground="White">
+										<Run Text="다음 개장레벨:" />
+										<Run Text="{Binding Ship.Info.NextRemodelingLevel, Mode=OneWay}" />
+										<LineBreak />
+										<Run Text="남은 경험치:" />
+										<Run Text="{Binding Ship.ExpForNextRemodelingLevel, Mode=OneWay}" />
+										<LineBreak />
+										<Run Text="누적 경험치:" />
+										<Run Text="{Binding Ship.Exp, Mode=OneWay}" />
+									</TextBlock>
+									<TextBlock x:Name="NextRemodelable"
+											   Style="{DynamicResource DefaultTextStyleKey}"
+											   Margin="0,4,0,0"
+											   Foreground="White">
+										<Run Text="개장 가능합니다" />
+										<LineBreak />
+										<LineBreak />
+										<Run Text="누적 경험치:" />
+										<Run Text="{Binding Ship.Exp, Mode=OneWay}" />
+									</TextBlock>
+									<TextBlock x:Name="NextRemodelNone"
+											   Style="{DynamicResource DefaultTextStyleKey}"
+											   Margin="0,4,0,0"
+											   Foreground="White">
+										<Run Text="다음 개장이 없습니다" />
+										<LineBreak />
+										<LineBreak />
+										<Run Text="누적 경험치:" />
+										<Run Text="{Binding Ship.Exp, Mode=OneWay}" />
+									</TextBlock>
+								</StackPanel>
 							</TextBlock.ToolTip>
 						</TextBlock>
 

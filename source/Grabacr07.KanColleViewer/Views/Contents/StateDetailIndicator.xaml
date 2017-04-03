@@ -31,7 +31,7 @@
 								   Style="{DynamicResource DefaultTextStyleKey}"
 								   Foreground="{DynamicResource ActiveForegroundBrushKey}">
 							<TextBlock.Text>
-                                <MultiBinding StringFormat="피로회복까지: {0}">
+								<MultiBinding StringFormat="피로회복까지: {0}">
 									<Binding Path="Condition.Remaining" />
 								</MultiBinding>
 							</TextBlock.Text>
