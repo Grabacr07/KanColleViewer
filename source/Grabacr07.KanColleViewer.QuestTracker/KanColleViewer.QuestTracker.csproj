@@ -78,6 +78,7 @@
     <Compile Include="Models\NoOverUnderTracker.cs" />
     <Compile Include="Models\NoSerializeTracker.cs" />
     <Compile Include="Models\NoSerializeOverUnderTracker.cs" />
+    <Compile Include="Models\SlotItemTracker.cs" />
     <Compile Include="Models\Tracker\A\A1.cs" />
     <Compile Include="Models\Tracker\A\A10.cs" />
     <Compile Include="Models\Tracker\A\A11.cs" />
