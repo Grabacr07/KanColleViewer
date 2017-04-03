@@ -237,7 +237,6 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 			catch { }
 		}
 
-		private bool trackersRefreshing = false;
 		public void CallCheckOverUnder(IdProgressPair[] questList)
 		{
 			foreach (var x in questList)
@@ -246,13 +245,6 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 				if (z == null) continue;
 
 				z.CheckOverUnder(x.State == QuestState.Accomplished ? QuestProgressType.Complete : (QuestProgressType)x.Progress);
-			}
-
-			if (!trackersRefreshing)
-			{
-				trackersRefreshing = true;
-				this.trackManager.RefreshTrackers();
-				trackersRefreshing = false;
 			}
 		}
 	}
