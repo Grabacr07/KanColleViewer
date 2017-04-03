@@ -25,6 +25,10 @@
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="Auto" />
 		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
 		<Grid.Resources>
 			<Style TargetType="{x:Type Grid}"
 				   x:Key="ResourceGrid">
@@ -302,6 +306,10 @@
 								<Run Text="{Binding Model.Medals, Mode=OneWay}"
 									 Style="{StaticResource EmphaticRun14}" />
 								<Run Text="개" />
+								<LineBreak />
+								<Run Text="서버:" />
+								<Run Text="{Binding ServerName, Mode=OneWay}"
+									 Style="{StaticResource EmphaticRun14}" />
 						</TextBlock>
 					</StackPanel>
 
@@ -396,5 +404,71 @@
 				</TextBlock>
 			</Grid>
 		</StackPanel>
+
+		<ItemsControl ItemsSource="{Binding Fleets.Fleets, Mode=OneWay}"
+					  Grid.Row="1"
+					  Grid.ColumnSpan="3">
+			<ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<Grid Margin="10,4,10,0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="0" /> <!-- there is no 0 index -->
+							<ColumnDefinition Width="0" /> <!-- 1 is not expeditionable -->
+							<ColumnDefinition Width="*" MaxWidth="120" />
+							<ColumnDefinition Width="*" MaxWidth="120" />
+							<ColumnDefinition Width="*" MaxWidth="120" />
+						</Grid.ColumnDefinitions>
+					</Grid>
+				</ItemsPanelTemplate>
+			</ItemsControl.ItemsPanel>
+			<ItemsControl.ItemContainerStyle>
+				<Style TargetType="{x:Type ContentPresenter}">
+					<Setter Property="Grid.Column" Value="{Binding Id}"/>
+
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Id, Mode=OneWay}" Value="1">
+							<Setter Property="Visibility" Value="Collapsed" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Expedition.IsInExecution, Mode=OneWay}" Value="False">
+							<Setter Property="Visibility" Value="Hidden" />
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</ItemsControl.ItemContainerStyle>
+
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<kcvc:ColorIndicator Height="4"
+										 VerticalAlignment="Bottom"
+										 Margin="0,0,8,0"
+										 LimitedValue="{Binding Expedition.Progress, Mode=OneWay}">
+						<kcvc:ColorIndicator.ToolTip>
+							<ToolTip>
+								<StackPanel Orientation="Vertical">
+									<TextBlock>
+										<Run Text="{Binding Expedition.Mission.Id, Mode=OneWay, StringFormat=[{0}]}" />
+										<Run Text="{Binding Expedition.Mission.Title, Mode=OneWay}" />
+									</TextBlock>
+									<TextBlock Margin="0,6,0,0">
+										<Run Text="함대복귀까지" />
+										<Run Text="{Binding Expedition.Remaining, Mode=OneWay}" />
+									</TextBlock>
+								</StackPanel>
+							</ToolTip>
+						</kcvc:ColorIndicator.ToolTip>
+					</kcvc:ColorIndicator>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+
+			<ItemsControl.Style>
+				<Style TargetType="{x:Type ItemsControl}">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.AdmiralExpeditionBars}, Path=Value}" Value="False">
+							<Setter Property="Visibility" Value="Collapsed" />
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</ItemsControl.Style>
+		</ItemsControl>
 	</Grid>
 </UserControl>

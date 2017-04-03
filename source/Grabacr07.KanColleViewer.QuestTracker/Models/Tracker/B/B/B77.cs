@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleViewer.QuestTracker.Models.Extensions;
+using Grabacr07.KanColleViewer.QuestTracker.Models.Model;
 
 namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 {
 	/// <summary>
 	///  수뢰전대, 남서제도해역을 초계하라!
 	/// </summary>
-	internal class B77 : ITracker
+	internal class B77 : NoOverUnderTracker, ITracker
 	{
 		private readonly int max_count = 2;
 		private int count1, count2;

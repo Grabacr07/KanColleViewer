@@ -12,7 +12,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 	/// <summary>
 	/// 경쾌한 수상반격부대를 재편성하라!
 	/// </summary>
-	internal class A65 : NoSerializeTracker, ITracker
+	internal class A65 : NoSerializeOverUnderTracker, ITracker
 	{
 		private readonly int max_count = 5;
 		private int count;

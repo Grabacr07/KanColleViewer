@@ -15,7 +15,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		public bool IsAirplane => this.Item.Info.Type.IsNumerable();
 
 		public int FitValue => this.CalculateFit();
-		public string Tooltip => this.Item.Info.Id == 0 ? null : this.Item.NameWithLevel;
+		public string Tooltip => this.Item.Info.Id == 0 ? null : this.Item.NameWithLevel + "\n\n" + this.Item.Info.ToolTipData;
 
 		public bool Equipped => this.Item != null && this.Item != SlotItem.Dummy;
 

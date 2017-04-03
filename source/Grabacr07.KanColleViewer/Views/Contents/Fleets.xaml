@@ -91,35 +91,93 @@
 					</TextBlock>
 
 					<TextBlock Grid.Column="3"
-								Grid.Row="0"
-								Margin="10,0,10,10"
-								Grid.RowSpan="2">
-						<Run Text="Lv." />
-						<Run Text="{Binding Ship.Level, Mode=OneWay}"
-								Style="{DynamicResource EmphaticTextElementStyleKey}" />
+							   Grid.Row="1"
+							   Margin="10,0,10,-1"
+							   ToolTipService.Placement="Relative"
+							   ToolTipService.HorizontalOffset="-7"
+							   ToolTipService.VerticalOffset="-3">
+							<Run Text="Lv." />
+							<Run Text="{Binding Ship.Level, Mode=OneWay}"
+								 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+							<LineBreak />
+							<Run Text="{Binding Ship.ExpForNextLevel, StringFormat=Next: {0}, Mode=OneWay}"
+								 FontSize="9" />
 
 						<TextBlock.ToolTip>
-							<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
-										Foreground="White">
-								<Run Text="다음 개장레벨:" />
-								<Run Text="{Binding Ship.Info.NextRemodelingLevel, Mode=OneWay}" />
-								<LineBreak />
-								<Run Text="남은 경험치:" />
-								<Run Text="{Binding Ship.ExpForNextRemodelingLevel, Mode=OneWay}" />
-								<LineBreak />
-								<Run Text="누적 경험치:" />
-								<Run Text="{Binding Ship.Exp, Mode=OneWay}" />
-							</TextBlock>
+							<StackPanel Margin="0,-2,0,0"
+											Orientation="Vertical">
+								<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+											   Foreground="White">
+										<Run Text="Lv." />
+										<Run Text="{Binding Ship.Level, Mode=OneWay}"
+											 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+										<LineBreak />
+										<Run Text="{Binding Ship.ExpForNextLevel, StringFormat=Next: {0}, Mode=OneWay}"
+											 FontSize="9" />
+								</TextBlock>
+
+								<ContentControl x:Name="NextRemodelInfo"
+												Margin="0,8,0,0">
+									<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+											   Foreground="White">
+										<Run Text="다음 개장레벨:" />
+										<Run Text="{Binding Ship.Info.NextRemodelingLevel, Mode=OneWay}" />
+										<LineBreak />
+										<Run Text="남은 경험치:" />
+										<Run Text="{Binding Ship.ExpForNextRemodelingLevel, Mode=OneWay}" />
+										<LineBreak />
+										<Run Text="누적 경험치:" />
+										<Run Text="{Binding Ship.Exp, Mode=OneWay}" />
+									</TextBlock>
+
+									<ContentControl.Style>
+										<Style TargetType="{x:Type ContentControl}">
+											<Style.Triggers>
+												<DataTrigger Binding="{Binding Ship.Info.NextRemodelingLevel}" Value="{x:Null}">
+													<Setter Property="Template">
+														<Setter.Value>
+															<ControlTemplate TargetType="{x:Type ContentControl}">
+																<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+																			Foreground="White">
+																	<Run Text="다음 개장이 없습니다" />
+																	<LineBreak />
+																	<LineBreak />
+																	<Run Text="누적 경험치:" />
+																	<Run Text="{Binding Ship.Exp, Mode=OneWay}" />
+																</TextBlock>
+															</ControlTemplate>
+														</Setter.Value>
+													</Setter>
+												</DataTrigger>
+
+												<MultiDataTrigger>
+													<MultiDataTrigger.Conditions>
+														<Condition Binding="{Binding Ship.Info.RemodelingExists}" Value="True" />
+														<Condition Binding="{Binding Ship.ExpForNextRemodelingLevel}" Value="0" />
+													</MultiDataTrigger.Conditions>
+													<MultiDataTrigger.Setters>
+														<Setter Property="Template">
+															<Setter.Value>
+																<ControlTemplate TargetType="{x:Type ContentControl}">
+																	<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+																			Foreground="White">
+																		<Run Text="개장 가능합니다" />
+																		<LineBreak />
+																		<LineBreak />
+																		<Run Text="누적 경험치:" />
+																		<Run Text="{Binding Ship.Exp, Mode=OneWay}" />
+																	</TextBlock>
+																</ControlTemplate>
+															</Setter.Value>
+														</Setter>
+													</MultiDataTrigger.Setters>
+												</MultiDataTrigger>
+											</Style.Triggers>
+										</Style>
+									</ContentControl.Style>
+								</ContentControl>
+							</StackPanel>
 						</TextBlock.ToolTip>
-					</TextBlock>
-					<TextBlock Grid.Column="3"
-								Grid.Row="1"
-								Margin="10,0,10,-1">
-						<Run Text="Next:"
-								FontSize="9" />
-						<Run Text="{Binding Ship.ExpForNextLevel, Mode=OneWay}"
-								FontSize="9" />
-						<!--<Run Text="&#x9;" />-->
 					</TextBlock>
 
 					<TextBlock x:Name="HPText"

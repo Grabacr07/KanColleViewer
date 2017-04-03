@@ -105,6 +105,14 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 			}
 
 			trackManager?.RefreshTrackers();
+			CallCheckOverUnder(
+				quests.All.Select(x => new IdProgressPair
+				{
+					Id = x.Id,
+					Progress = x.Progress,
+					State = x.State
+				}).ToArray()
+			);
 			WriteToStorage();
 		}
 		private bool IsTrackingAvailable(QuestType type, DateTime time)
@@ -235,6 +243,17 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 				}
 			}
 			catch { }
+		}
+
+		public void CallCheckOverUnder(IdProgressPair[] questList)
+		{
+			foreach (var x in questList)
+			{
+				var z = this.TrackingQuests.FirstOrDefault(y => y.Id == x.Id);
+				if (z == null) continue;
+
+				z.CheckOverUnder(x.State == QuestState.Accomplished ? QuestProgressType.Complete : (QuestProgressType)x.Progress);
+			}
 		}
 	}
 }

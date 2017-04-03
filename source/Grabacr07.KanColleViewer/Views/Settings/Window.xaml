@@ -56,6 +56,10 @@
 				<CheckBox Margin="0,0,0,5"
 						  Content="창 하단 상태표시줄에 함대 상태를 표시"
 						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.StatusbarFleetStatus}, Path=Value}" />
+
+				<CheckBox Margin="0,0,0,5"
+						  Content="모항 정보에 원정 진행도를 표시"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.AdmiralExpeditionBars}, Path=Value}" />
 			</StackPanel>
 
 			<Rectangle Margin="10,7,10,12"

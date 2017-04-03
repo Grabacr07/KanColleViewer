@@ -135,8 +135,12 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 次の改造が実施できるレベルを取得します。
 		/// </summary>
-		public int? NextRemodelingLevel => this.RawData.api_afterlv == 0 ? null : (int?)this.RawData.api_afterlv;
+		public int? NextRemodelingLevel => !this.RemodelingExists ? null : (int?)this.RawData.api_afterlv;
 
+		/// <summary>
+		/// 개장이 존재하는지 여부
+		/// </summary>
+		public bool RemodelingExists => this.RawData.api_afterlv > 0;
 
 		internal ShipInfo(kcsapi_mst_ship rawData) : base(rawData) { }
 

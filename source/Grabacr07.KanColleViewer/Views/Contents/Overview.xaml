@@ -125,7 +125,10 @@
 						</TextBlock>
 
 						<TextBlock Grid.Column="1"
-							   Margin="12,0,0,0">
+								   ToolTipService.Placement="Relative"
+								   ToolTipService.HorizontalOffset="-9"
+								   ToolTipService.VerticalOffset="-3"
+								   Margin="12,0,0,0">
 							<Run Text="Lv." />
 							<Run Text="{Binding Ship.Level, Mode=OneWay}"
 								 Style="{DynamicResource EmphaticTextElementStyleKey}" />
@@ -134,17 +137,79 @@
 								 FontSize="9" />
 
 							<TextBlock.ToolTip>
-								<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
-											Foreground="White">
-									<Run Text="다음 개장레벨:" />
-									<Run Text="{Binding Ship.Info.NextRemodelingLevel, Mode=OneWay}" />
-									<LineBreak />
-									<Run Text="남은 경험치:" />
-									<Run Text="{Binding Ship.ExpForNextRemodelingLevel, Mode=OneWay}" />
-									<LineBreak />
-									<Run Text="누적 경험치:" />
-									<Run Text="{Binding Ship.Exp, Mode=OneWay}" />
-								</TextBlock>
+								<StackPanel Margin="0,-2,0,0"
+											Orientation="Vertical">
+									<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+											   Foreground="White">
+										<Run Text="Lv." />
+										<Run Text="{Binding Ship.Level, Mode=OneWay}"
+											 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+										<LineBreak />
+										<Run Text="{Binding Ship.ExpForNextLevel, StringFormat=Next: {0}, Mode=OneWay}"
+											 FontSize="9" />
+									</TextBlock>
+
+									<ContentControl x:Name="NextRemodelInfo"
+												Margin="0,8,0,0">
+										<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+											   Foreground="White">
+										<Run Text="다음 개장레벨:" />
+										<Run Text="{Binding Ship.Info.NextRemodelingLevel, Mode=OneWay}" />
+										<LineBreak />
+										<Run Text="남은 경험치:" />
+										<Run Text="{Binding Ship.ExpForNextRemodelingLevel, Mode=OneWay}" />
+										<LineBreak />
+										<Run Text="누적 경험치:" />
+										<Run Text="{Binding Ship.Exp, Mode=OneWay}" />
+										</TextBlock>
+
+										<ContentControl.Style>
+											<Style TargetType="{x:Type ContentControl}">
+												<Style.Triggers>
+													<DataTrigger Binding="{Binding Ship.Info.NextRemodelingLevel}" Value="{x:Null}">
+														<Setter Property="Template">
+															<Setter.Value>
+																<ControlTemplate TargetType="{x:Type ContentControl}">
+																	<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+																			Foreground="White">
+																	<Run Text="다음 개장이 없습니다" />
+																	<LineBreak />
+																	<LineBreak />
+																	<Run Text="누적 경험치:" />
+																	<Run Text="{Binding Ship.Exp, Mode=OneWay}" />
+																	</TextBlock>
+																</ControlTemplate>
+															</Setter.Value>
+														</Setter>
+													</DataTrigger>
+
+													<MultiDataTrigger>
+														<MultiDataTrigger.Conditions>
+															<Condition Binding="{Binding Ship.Info.RemodelingExists}" Value="True" />
+															<Condition Binding="{Binding Ship.ExpForNextRemodelingLevel}" Value="0" />
+														</MultiDataTrigger.Conditions>
+														<MultiDataTrigger.Setters>
+															<Setter Property="Template">
+																<Setter.Value>
+																	<ControlTemplate TargetType="{x:Type ContentControl}">
+																		<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+																			Foreground="White">
+																		<Run Text="개장 가능합니다" />
+																		<LineBreak />
+																		<LineBreak />
+																		<Run Text="누적 경험치:" />
+																		<Run Text="{Binding Ship.Exp, Mode=OneWay}" />
+																		</TextBlock>
+																	</ControlTemplate>
+																</Setter.Value>
+															</Setter>
+														</MultiDataTrigger.Setters>
+													</MultiDataTrigger>
+												</Style.Triggers>
+											</Style>
+										</ContentControl.Style>
+									</ContentControl>
+								</StackPanel>
 							</TextBlock.ToolTip>
 						</TextBlock>
 
@@ -646,35 +711,53 @@
 												   Style="{DynamicResource DefaultTextStyleKey}"
 												   Margin="4,0,0,0" />
 
-										<ProgressBar x:Name="QuestProgressBar"
-												Grid.Row="1"
-												Grid.ColumnSpan="2"
-												Margin="0,3,0,0"
-												VerticalAlignment="Center"
-												Value="{Binding QuestProgressValue, Mode=OneWay}"
-												Foreground="#FF39B74E"
-												BorderThickness="0"
-												Height="2">
-											<ProgressBar.Style>
-												<Style TargetType="{x:Type ProgressBar}">
-													<Setter Property="Background" Value="#55D7D7E1" />
-													<Setter Property="HorizontalContentAlignment" Value="Left" />
-													<Setter Property="Template">
-														<Setter.Value>
-															<ControlTemplate TargetType="{x:Type ProgressBar}">
-																<Grid Background="{TemplateBinding Background}">
-																	<Border x:Name="PART_Track">
-																		<Border x:Name="PART_Indicator"
-																		Background="{TemplateBinding Foreground}"
-																		HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
-																	</Border>
-																</Grid>
-															</ControlTemplate>
-														</Setter.Value>
-													</Setter>
-												</Style>
-											</ProgressBar.Style>
-										</ProgressBar>
+										<Grid x:Name="QuestProgressBarBox"
+											  Grid.Row="1"
+											  Grid.ColumnSpan="2"
+											  Margin="0,3,0,0"
+											  VerticalAlignment="Center">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="5*" />
+												<ColumnDefinition Width="3*" />
+												<ColumnDefinition Width="2*" />
+											</Grid.ColumnDefinitions>
+											<Grid.RowDefinitions>
+												<RowDefinition Height="*" />
+												<RowDefinition Height="*" />
+											</Grid.RowDefinitions>
+
+											<ProgressBar x:Name="QuestProgressBar"
+														 Grid.ColumnSpan="3"
+														 Grid.RowSpan="2"
+														 VerticalAlignment="Center"
+														 Value="{Binding QuestProgressValue, Mode=OneWay}"
+														 Foreground="#FF39B74E"
+														 BorderThickness="0"
+														 Height="3">
+												<ProgressBar.Style>
+													<Style TargetType="{x:Type ProgressBar}">
+														<Setter Property="Background" Value="#55D7D7E1" />
+														<Setter Property="HorizontalContentAlignment" Value="Left" />
+														<Setter Property="Template">
+															<Setter.Value>
+																<ControlTemplate TargetType="{x:Type ProgressBar}">
+																	<Grid Background="{TemplateBinding Background}">
+																		<Border x:Name="PART_Track">
+																			<Border x:Name="PART_Indicator"
+																					Background="{TemplateBinding Foreground}"
+																					HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+																		</Border>
+																	</Grid>
+																</ControlTemplate>
+															</Setter.Value>
+														</Setter>
+													</Style>
+												</ProgressBar.Style>
+											</ProgressBar>
+
+											<Rectangle Width="1" Fill="{DynamicResource BackgroundBrushKey}" HorizontalAlignment="Right" />
+											<Rectangle Width="1" Fill="{DynamicResource BackgroundBrushKey}" HorizontalAlignment="Right" Grid.Column="1" />
+										</Grid>
 									</Grid>
 									<DataTemplate.Triggers>
 										<DataTrigger Binding="{Binding QuestTrackingVisible}" Value="False">

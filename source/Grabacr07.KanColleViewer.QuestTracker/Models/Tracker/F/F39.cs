@@ -12,7 +12,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 	/// <summary>
 	/// 주력 육공의 조달
 	/// </summary>
-	internal class F39 : ITracker
+	internal class F39 : NoOverUnderTracker, ITracker
 	{
 		private readonly int max_count = 5;
 		private int count, count_1, count_2;

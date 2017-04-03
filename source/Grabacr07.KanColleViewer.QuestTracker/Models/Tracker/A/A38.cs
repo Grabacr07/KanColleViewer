@@ -12,7 +12,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 	/// <summary>
 	/// 신형 전탐을 배치하라!
 	/// </summary>
-	internal class A38 : NoSerializeTracker, ITracker
+	internal class A38 : NoSerializeOverUnderTracker, ITracker
 	{
 		private readonly int max_count = 1;
 		private int count;

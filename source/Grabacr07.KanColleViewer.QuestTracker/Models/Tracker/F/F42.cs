@@ -12,7 +12,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 	/// <summary>
 	/// 특주가구의 조달
 	/// </summary>
-	internal class F42 : ITracker
+	internal class F42 : NoOverUnderTracker, ITracker
 	{
 		private readonly int max_count = 6;
 		private int count, count_1, count_2, count_3;
