@@ -12,7 +12,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 	/// <summary>
 	/// 상륙전용신장비의 조달
 	/// </summary>
-	internal class F33 : ITracker
+	internal class F33 : NoOverUnderTracker, ITracker
 	{
 		private readonly int max_count = 4;
 		private int count_1, count_2;

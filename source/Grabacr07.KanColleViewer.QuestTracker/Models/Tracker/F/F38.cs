@@ -12,7 +12,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 	/// <summary>
 	/// 육공대의 증세
 	/// </summary>
-	internal class F38 : NoSerializeTracker, ITracker
+	internal class F38 : NoSerializeOverUnderTracker, ITracker
 	{
 		private readonly int max_count = 4;
 		private int count_1, count_2;

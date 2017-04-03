@@ -12,7 +12,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 	/// <summary>
 	/// 1식육공 성능향상형의 조달
 	/// </summary>
-	internal class F40 : NoSerializeTracker, ITracker
+	internal class F40 : NoSerializeOverUnderTracker, ITracker
 	{
 		private readonly int max_count = 3;
 		private int count_1, count_2;

@@ -11,7 +11,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 	/// <summary>
 	/// 아호작전
 	/// </summary>
-	internal class Bw1 : ITracker
+	internal class Bw1 : NoOverUnderTracker, ITracker
 	{
 		private int progress_boss;
 		private int progress_boss_win;

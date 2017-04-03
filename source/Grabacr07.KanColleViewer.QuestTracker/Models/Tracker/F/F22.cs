@@ -12,7 +12,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 	/// <summary>
 	/// 정예 함전대의 신 편성 (영전21형 숙련, 월간)
 	/// </summary>
-	internal class F22 : ITracker
+	internal class F22 : NoOverUnderTracker, ITracker
 	{
 		private readonly int max_count = 3;
 		private int count_1, count_2;

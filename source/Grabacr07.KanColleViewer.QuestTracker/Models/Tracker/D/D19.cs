@@ -11,7 +11,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 	/// <summary>
 	/// 기동부대의 운용을 강화하라
 	/// </summary>
-	internal class D19 : ITracker
+	internal class D19 : NoOverUnderTracker, ITracker
 	{
 		private readonly int max_count = 2;
 		private int count_1, count_2;
