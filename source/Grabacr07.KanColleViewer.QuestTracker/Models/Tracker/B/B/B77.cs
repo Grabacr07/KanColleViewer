@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleViewer.QuestTracker.Models.Extensions;
+using Grabacr07.KanColleViewer.QuestTracker.Models.Model;
 
 namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 {

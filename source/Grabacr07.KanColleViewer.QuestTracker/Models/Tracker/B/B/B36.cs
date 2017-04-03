@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleViewer.QuestTracker.Models.Extensions;
+using Grabacr07.KanColleViewer.QuestTracker.Models.Model;
 
 namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 {
@@ -14,6 +15,8 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 	/// </summary>
 	internal class B36 : ITracker
 	{
+		private int lastCount = 0;
+		private QuestProgressType lastProgress = QuestProgressType.None;
 		private readonly int max_count = 1;
 		private int count;
 
@@ -87,22 +90,29 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 			int.TryParse(data, out count);
 		}
 
-		public void CheckOverUnder(QuestProgress progress)
+		public void CheckOverUnder(QuestProgressType progress)
 		{
+			if (lastCount == count && lastProgress == progress) return;
+			lastCount = count;
+			lastProgress = progress;
+
 			int cut50 = (int)Math.Ceiling(max_count * 0.5);
 			int cut80 = (int)Math.Ceiling(max_count * 0.8);
 
 			switch (progress)
 			{
-				case QuestProgress.None:
+				case QuestProgressType.None:
 					if (count >= cut50) count = cut50 - 1;
 					break;
-				case QuestProgress.Progress50:
+				case QuestProgressType.Progress50:
 					if (count >= cut80) count = cut80 - 1;
 					else if (count < cut50) count = cut50;
 					break;
-				case QuestProgress.Progress80:
+				case QuestProgressType.Progress80:
 					if (count < cut80) count = cut80;
+					break;
+				case QuestProgressType.Complete:
+					count = max_count;
 					break;
 			}
 		}

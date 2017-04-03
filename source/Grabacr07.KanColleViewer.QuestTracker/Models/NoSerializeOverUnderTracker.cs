@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Models;
+using Grabacr07.KanColleViewer.QuestTracker.Models.Model;
 
 namespace Grabacr07.KanColleViewer.QuestTracker.Models
 {
@@ -16,7 +17,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models
 		public void DeserializeData(string data)
 		{
 		}
-		public void CheckOverUnder(QuestProgress progress)
+		public void CheckOverUnder(QuestProgressType progress)
 		{
 			// Do nothing
 		}

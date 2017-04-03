@@ -10,5 +10,6 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Model
 	{
 		public int Id { get; set; }
 		public QuestProgress Progress { get; set; }
+		public QuestState State { get; set; }
 	}
 }

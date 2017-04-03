@@ -245,7 +245,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 				var z = this.TrackingQuests.FirstOrDefault(y => y.Id == x.Id);
 				if (z == null) continue;
 
-				z.CheckOverUnder(x.Progress);
+				z.CheckOverUnder(x.State == QuestState.Accomplished ? QuestProgressType.Complete : (QuestProgressType)x.Progress);
 			}
 
 			if (!trackersRefreshing)

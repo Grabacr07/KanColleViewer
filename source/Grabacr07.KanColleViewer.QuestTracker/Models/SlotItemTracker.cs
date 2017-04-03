@@ -37,6 +37,9 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models
 				this.RemoveFromRemodel(x.Data);
 				this.RemodelSlotItem(x.Data);
 			});
+
+			foreach (var item in this.homeport.Itemyard.SlotItems)
+				this.SlotItems.Add(new SlotItem(item.Value.RawData));
 		}
 
 
@@ -59,7 +62,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models
 		{
 			if (source.api_create_flag == 1 && source.api_slot_item != null)
 			{
-				CreateItemEvent?.Invoke(this, new BaseEventArgs(source.api_create_flag != 0));
+				CreateItemEvent?.Invoke(this, new BaseEventArgs(source.api_create_flag == 1));
 
 				this.SlotItems.Add(new SlotItem(source.api_slot_item));
 			}
@@ -169,8 +172,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models
 			public int Proficiency => this.RawData.api_alv;
 			public string ProficiencyText => this.Proficiency >= 1 ? (" (숙련도 " + this.Proficiency + ")") : "";
 
-			internal SlotItem(kcsapi_slotitem rawData)
-				: base(rawData)
+			internal SlotItem(kcsapi_slotitem rawData) : base(rawData)
 			{
 				this.Info = KanColleClient.Current.Master.SlotItems[this.RawData.api_slotitem_id] ?? SlotItemInfo.Dummy;
 			}

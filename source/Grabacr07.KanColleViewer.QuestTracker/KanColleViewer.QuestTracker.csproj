@@ -72,6 +72,7 @@
     <Compile Include="Models\Model\BattleTracker.cs" />
     <Compile Include="Models\Model\FleetDamages.cs" />
     <Compile Include="Models\Model\IdProgressPair.cs" />
+    <Compile Include="Models\Model\QuestProgressType.cs" />
     <Compile Include="Models\Model\StorageData.cs" />
     <Compile Include="Models\Model\TrackerEnemyShip.cs" />
     <Compile Include="Models\Model\TrackerMapInfo.cs" />
