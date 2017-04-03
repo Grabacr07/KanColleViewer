@@ -227,7 +227,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			
 			// set Quest Tarcker
 			questTracker = new TrackManager();
-			questTracker.QuestsEventChanged += (s, e) => this.UpdateQuest(quests);
+			questTracker.QuestsEventChanged += (s, e) => this.UpdateQuest(quests, true);
 
 
 			KanColleSettings.ShowQuestBadge.ValueChanged += (s, e) => this.UpdateBadge();
@@ -245,7 +245,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			else this.Badge = null;
 		}
 
-		private void UpdateQuest(Quests quests)
+		private void UpdateQuest(Quests quests, bool fromTracker = false)
 		{
 			var viewList = quests.All
 				.Select(x => new QuestViewModel(x))
@@ -269,7 +269,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			this.IsEmpty = quests.IsEmpty;
 			this.IsUntaken = quests.IsUntaken;
 
-			questTracker.CallCheckOverUnder(OriginalQuests.Select(x => new IdProgressPair { Id = x.Id, Progress = x.Progress }).ToArray());
+			if(!fromTracker) // Only updated from Quest screen
+				questTracker.CallCheckOverUnder(OriginalQuests.Select(x => new IdProgressPair { Id = x.Id, Progress = x.Progress }).ToArray());
 
 			// Quests 멤버는 필터 적용된걸 get으로 반환해서 문제가 있음
 			_badge = OriginalQuests.Count(x => x.QuestProgressValue == 100);

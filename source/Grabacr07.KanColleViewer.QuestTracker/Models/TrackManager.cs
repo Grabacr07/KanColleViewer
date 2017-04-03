@@ -69,7 +69,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models
 			var MapInfo = new TrackerMapInfo();
 			var battleTracker = new BattleTracker();
 
-			slotitemTracker = new Models.SlotItemTracker(homeport, proxy);
+			slotitemTracker = new SlotItemTracker(homeport, proxy);
 
 			// 편성 변경
 			homeport.Organization.PropertyChanged += (s, e) =>
