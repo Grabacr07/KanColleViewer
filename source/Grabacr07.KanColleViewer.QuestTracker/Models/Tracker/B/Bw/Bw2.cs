@@ -14,7 +14,6 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 	/// </summary>
 	internal class Bw2 : ITracker
 	{
-		private int lastCount = 0;
 		private QuestProgressType lastProgress = QuestProgressType.None;
 		private readonly int max_count = 20;
 		private int count;
@@ -73,7 +72,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 
 		public void CheckOverUnder(QuestProgressType progress)
 		{
-			if (lastCount == count && lastProgress == progress) return;
+			if (lastProgress == progress) return;
 			lastProgress = progress;
 
 			int cut50 = (int)Math.Ceiling(max_count * 0.5);
@@ -95,7 +94,6 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 					count = max_count;
 					break;
 			}
-			lastCount = count;
 			ProcessChanged?.Invoke(this, emptyEventArgs);
 		}
 	}

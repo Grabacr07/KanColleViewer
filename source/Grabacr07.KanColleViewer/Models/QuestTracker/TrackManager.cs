@@ -105,6 +105,14 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 			}
 
 			trackManager?.RefreshTrackers();
+			CallCheckOverUnder(
+				quests.All.Select(x => new IdProgressPair
+				{
+					Id = x.Id,
+					Progress = x.Progress,
+					State = x.State
+				}).ToArray()
+			);
 			WriteToStorage();
 		}
 		private bool IsTrackingAvailable(QuestType type, DateTime time)

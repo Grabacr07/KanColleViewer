@@ -269,16 +269,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			this.IsEmpty = quests.IsEmpty;
 			this.IsUntaken = quests.IsUntaken;
 
-			if (!fromTracker) // Only updated from Quest screen
-				questTracker.CallCheckOverUnder(
-					OriginalQuests.Select(x => new IdProgressPair
-					{
-						Id = x.Id,
-						Progress = x.Progress,
-						State = x.State
-					}).ToArray()
-				);
-
 			// Quests 멤버는 필터 적용된걸 get으로 반환해서 문제가 있음
 			_badge = OriginalQuests.Count(x => x.QuestProgressValue == 100);
 			this.UpdateBadge();
