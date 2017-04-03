@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Grabacr07.KanColleViewer.QuestTracker.Models
 {
-	internal class NoSerializeTracker
+	internal partial class NoSerializeTracker
 	{
 		public string SerializeData()
 		{

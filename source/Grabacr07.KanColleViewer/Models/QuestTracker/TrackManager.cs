@@ -236,5 +236,16 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 			}
 			catch { }
 		}
+
+		public void CallCheckOverUnder(IdProgressPair[] questList)
+		{
+			foreach (var x in questList)
+			{
+				var z = this.TrackingQuests.FirstOrDefault(y => y.Id == x.Id);
+				if (z == null) continue;
+
+				z.CheckOverUnder(x.Progress);
+			}
+		}
 	}
 }

@@ -12,7 +12,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 	/// <summary>
 	/// 제22구축대를 편성하라!
 	/// </summary>
-	internal class A49 : NoSerializeTracker, ITracker
+	internal class A49 : NoSerializeOverUnderTracker, ITracker
 	{
 		private readonly int max_count = 4;
 		private int count;

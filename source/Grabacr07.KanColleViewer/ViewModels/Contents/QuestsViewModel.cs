@@ -10,6 +10,7 @@ using Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleViewer.Models.QuestTracker;
 using Grabacr07.KanColleViewer.ViewModels.Contents.Fleets;
+using IdProgresPair =  Grabacr07.KanColleViewer.QuestTracker.Models.IdProgressPair;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents
 {
@@ -267,6 +268,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			this.OriginalQuests = viewList.ToArray();
 			this.IsEmpty = quests.IsEmpty;
 			this.IsUntaken = quests.IsUntaken;
+
+			questTracker.CallCheckOverUnder(OriginalQuests.Select(x => new IdProgressPair { Id = x.Id, Progress = x.Progress }).ToArray());
 
 			// Quests 멤버는 필터 적용된걸 get으로 반환해서 문제가 있음
 			_badge = OriginalQuests.Count(x => x.QuestProgressValue == 100);

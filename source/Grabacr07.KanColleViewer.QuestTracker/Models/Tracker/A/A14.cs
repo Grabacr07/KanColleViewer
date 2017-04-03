@@ -12,7 +12,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 	/// <summary>
 	/// 센다이급 경순 자매 전 3척을 편성하라!
 	/// </summary>
-	internal class A14 : NoSerializeTracker, ITracker
+	internal class A14 : NoSerializeOverUnderTracker, ITracker
 	{
 		private readonly int max_count = 3;
 		private int count;

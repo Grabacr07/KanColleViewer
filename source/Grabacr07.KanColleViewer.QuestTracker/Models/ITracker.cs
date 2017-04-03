@@ -25,5 +25,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models
 
 		string SerializeData();
 		void DeserializeData(string data);
+
+		void CheckOverUnder(QuestProgress progress);
 	}
 }

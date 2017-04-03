@@ -12,7 +12,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 	/// <summary>
 	/// 신 미카와 함대를 편성하라!
 	/// </summary>
-	internal class A24 : NoSerializeTracker, ITracker
+	internal class A24 : NoSerializeOverUnderTracker, ITracker
 	{
 		private readonly int max_count = 6;
 		private int count;
