@@ -75,5 +75,25 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 			count = 0;
 			int.TryParse(data, out count);
 		}
+
+		public void CheckOverUnder(QuestProgress progress)
+		{
+			int cut50 = (int)Math.Ceiling(max_count * 0.5);
+			int cut80 = (int)Math.Ceiling(max_count * 0.8);
+
+			switch (progress)
+			{
+				case QuestProgress.None:
+					if (count >= cut50) count = cut50 - 1;
+					break;
+				case QuestProgress.Progress50:
+					if (count >= cut80) count = cut80 - 1;
+					else if (count < cut50) count = cut50;
+					break;
+				case QuestProgress.Progress80:
+					if (count < cut80) count = cut80;
+					break;
+			}
+		}
 	}
 }
