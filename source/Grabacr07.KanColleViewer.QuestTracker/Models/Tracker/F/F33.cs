@@ -31,7 +31,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 			{
 				if (!IsTracking) return;
 
-				var slotitems = KanColleClient.Current.Homeport.Itemyard.SlotItems;
+				var slotitems = manager.slotitemTracker.SlotItems;
 				count_1 = count_1.Add(args.itemList.Count(x => (slotitems[x]?.Info.Id ?? 0) == 37)).Max(2);
 				count_2 = count_2.Add(args.itemList.Count(x => (slotitems[x]?.Info.Id ?? 0) == 38)).Max(2);
 

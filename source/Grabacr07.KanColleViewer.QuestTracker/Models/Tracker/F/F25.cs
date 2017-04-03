@@ -36,7 +36,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 
 				if (!slotitems.Any(x => x.Item.Info.Id == 96 && x.Item.Proficiency == 7)) return; // 숙련도max 영식 함전 21형(숙련)
 
-				var homeportSlotitems = KanColleClient.Current.Homeport.Itemyard.SlotItems;
+				var homeportSlotitems = manager.slotitemTracker.SlotItems;
 				count = count.Add(args.itemList.Count(x => (homeportSlotitems[x]?.Info.Id ?? 0) == 21)) // 영식 함전 52형
 							.Max(max_count);
 

@@ -20,7 +20,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models
 		private readonly Homeport homeport;
 
 		public int SlotItemsCount => this.SlotItems.Count;
-		private MemberTable<SlotItem> SlotItems;
+		internal MemberTable<SlotItem> SlotItems { get; private set; }
 
 		internal SlotItemTracker(Homeport parent, KanColleProxy proxy)
 		{
@@ -90,7 +90,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models
 				?.Remodel(source.api_after_slot.api_level, source.api_after_slot.api_slotitem_id);
 		}
 
-		private class MemberTable<TValue> : IReadOnlyDictionary<int, TValue> where TValue : class, IIdentifiable
+		internal class MemberTable<TValue> : IReadOnlyDictionary<int, TValue> where TValue : class, IIdentifiable
 		{
 			private readonly IDictionary<int, TValue> dictionary;
 
@@ -155,7 +155,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models
 			#endregion
 		}
 
-		private class SlotItem : RawDataWrapper<kcsapi_slotitem>, IIdentifiable
+		internal class SlotItem : RawDataWrapper<kcsapi_slotitem>, IIdentifiable
 		{
 			public int Id => this.RawData.api_id;
 

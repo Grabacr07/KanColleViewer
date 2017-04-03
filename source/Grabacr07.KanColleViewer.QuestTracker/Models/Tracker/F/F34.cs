@@ -32,7 +32,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 				if (!IsTracking) return;
 
 				var master = KanColleClient.Current.Master.SlotItems;
-				var homeportSlotitems = KanColleClient.Current.Homeport.Itemyard.SlotItems;
+				var homeportSlotitems = manager.slotitemTracker.SlotItems;
 				var cnt = args.itemList.Count(x => (homeportSlotitems[x]?.Info.Type ?? SlotItemType.None) == SlotItemType.対空機銃);
 
 				count = count.Add(cnt).Max(max_count);

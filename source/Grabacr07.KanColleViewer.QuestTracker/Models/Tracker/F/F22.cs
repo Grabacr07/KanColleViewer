@@ -43,7 +43,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 				var slotitems = fleet?.Ships[0]?.Slots;
 				if (!slotitems.Any(x => x.Item.Info.Id == 20 && x.Item.Proficiency == 7)) return; // 숙련도max 영식함전21형
 
-				var homeportSlotitems = KanColleClient.Current.Homeport.Itemyard.SlotItems;
+				var homeportSlotitems = manager.slotitemTracker.SlotItems;
 				count_1 = count_1.Add(args.itemList.Count(x => (homeportSlotitems[x]?.Info.Id ?? 0) == 20)).Max(2); // 영식함전21형
 				count_2 = count_2.Add(args.itemList.Count(x => (homeportSlotitems[x]?.Info.Id ?? 0) == 19)).Max(1); // 96식함전
 

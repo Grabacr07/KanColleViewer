@@ -46,7 +46,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models
 		internal event EventHandler HenseiEvent;
 		internal event EventHandler EquipEvent;
 
-		private SlotItemTracker slotitemTracker { get; }
+		internal SlotItemTracker slotitemTracker { get; }
 
 		public readonly System.EventArgs EmptyEventArg = new System.EventArgs();
 		public event EventHandler QuestsEventChanged;

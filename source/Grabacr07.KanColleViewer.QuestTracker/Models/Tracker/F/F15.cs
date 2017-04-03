@@ -36,7 +36,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 
 				if (!slotitems.Any(x => x.Item.Info.Id == 109)) return; // 영식 함상전투기 52병형(601공)
 
-				var homeportSlotitems = KanColleClient.Current.Homeport.Itemyard.SlotItems;
+				var homeportSlotitems = manager.slotitemTracker.SlotItems;
 				count = count.Add(args.itemList.Count(x => (homeportSlotitems[x]?.Info.Id ?? 0) == 22)) // 렛푸
 							.Max(max_count);
 

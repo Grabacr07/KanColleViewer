@@ -246,6 +246,7 @@ namespace Grabacr07.KanColleViewer.Models.QuestTracker
 
 				z.CheckOverUnder(x.Progress);
 			}
+			this.trackManager.RefreshTrackers();
 		}
 	}
 }
