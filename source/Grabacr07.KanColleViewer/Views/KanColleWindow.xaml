@@ -248,52 +248,6 @@
 												</Style>
 											</ContentControl.Style>
 										</ContentControl>
-
-										<Grid.ToolTip>
-											<StackPanel Orientation="Vertical">
-												<TextBlock>
-													<Run Text="{Binding Expedition.Mission.Id, Mode=OneWay, StringFormat=[{0}]}" />
-													<Run Text="{Binding Expedition.Mission.Title, Mode=OneWay}" />
-												</TextBlock>
-
-												<ContentControl Margin="0,6,0,0">
-													<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
-															   Foreground="White">
-														<Run Text="함대복귀까지" />
-														<Run Text="{Binding Expedition.Remaining, Mode=OneWay}" />
-													</TextBlock>
-
-													<ContentControl.Style>
-														<Style TargetType="{x:Type ContentControl}">
-															<Style.Triggers>
-																<DataTrigger Binding="{Binding Expedition.Returned}" Value="True">
-																	<Setter Property="Template">
-																		<Setter.Value>
-																			<ControlTemplate TargetType="{x:Type ContentControl}">
-																				<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
-																							Foreground="White"
-																						   Text="원정에서 복귀했습니다" />
-																			</ControlTemplate>
-																		</Setter.Value>
-																	</Setter>
-																</DataTrigger>
-																<DataTrigger Binding="{Binding Expedition.IsInExecution}" Value="False">
-																	<Setter Property="Template">
-																		<Setter.Value>
-																			<ControlTemplate TargetType="{x:Type ContentControl}">
-																				<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
-																							Foreground="White"
-																						   Text="원정중이 아닙니다" />
-																			</ControlTemplate>
-																		</Setter.Value>
-																	</Setter>
-																</DataTrigger>
-															</Style.Triggers>
-														</Style>
-													</ContentControl.Style>
-												</ContentControl>
-											</StackPanel>
-										</Grid.ToolTip>
 									</Grid>
 								</DataTemplate>
 							</ItemsControl.ItemTemplate>
