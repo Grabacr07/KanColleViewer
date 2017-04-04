@@ -104,7 +104,7 @@
 						VerticalAlignment="Top"
 						WindowChrome.IsHitTestVisibleInChrome="True">
 
-				<metro2:CallMethodButton Margin="0,0,20,0"
+				<metro2:CallMethodButton Margin="0,0,8,0"
 										 Height="26"
 										 ToolTip="자원 기록 그래프를 엽니다"
 										 MethodName="ResourceLog"
@@ -113,7 +113,7 @@
 					<controls:GraphButton/>
 				</metro2:CallMethodButton>
 
-				<metro2:CallMethodButton Margin="0,0,20,0"
+				<metro2:CallMethodButton Margin="0,0,8,0"
 										 Height="26"
 										 ToolTip="새로고침을 합니다"
 										 MethodName="Refresh"
@@ -124,7 +124,8 @@
 
 				<controls:ZoomFactorSelector ZoomFactor="{Binding ZoomFactor}"
 											 ToolTip="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.ZoomFactorSelector_Tooltip}"
-											 Margin="4,0" />
+											 Margin="0,0,8,0" />
+
 				<metro:CaptionButton IsChecked="{Binding Settings.TopMost.Value, Mode=TwoWay}"
 									 ToolTip="{Binding Resources.Settings_Window_TopMost, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 Style="{DynamicResource PinButtonStyleKey}" />
