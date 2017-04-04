@@ -117,7 +117,7 @@ namespace Grabacr07.KanColleWrapper.Models
 							? (this.RawData.api_houk != 0 ? "영격:" + this.RawData.api_houk : "")
 							: (this.RawData.api_houk != 0 ? "회피:" + this.RawData.api_houk : "")
 						),
-						(this.RawData.api_saku != 0 ? " 색적:" + this.RawData.api_saku : "")
+						(this.RawData.api_saku != 0 ? "색적:" + this.RawData.api_saku : "")
 					}.Where(x => x.Length > 0)
 				);
 				if (tooltip.Length < 1) tooltip = "스테이터스 없음";
