@@ -53,12 +53,12 @@
 						   Text="표시할 내용을 선택하는 드롭다운에서는 이름도 표시됩니다."
 						   Style="{DynamicResource DetailTextStyleKey}" />
 
-				<CheckBox Margin="0,0,0,5"
+				<CheckBox Margin="0,0,0,10"
 						  Content="창 하단 상태표시줄에 함대 상태를 표시"
 						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.StatusbarFleetStatus}, Path=Value}" />
 
 				<CheckBox Margin="0,0,0,5"
-						  Content="모항 정보에 원정 진행도를 표시"
+						  Content="제목 표시줄에 원정 진행도를 표시"
 						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.AdmiralExpeditionBars}, Path=Value}" />
 			</StackPanel>
 
