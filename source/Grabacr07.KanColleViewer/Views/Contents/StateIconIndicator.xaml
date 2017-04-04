@@ -18,8 +18,8 @@
 				<Border x:Name="Border"
 						Background="#FFC88232">
 					<Path x:Name="LeftTop"
-						  Width="12"
-						  Height="12"
+						  Width="14"
+						  Height="14"
 						  Stretch="UniformToFill"
 						  Data="M0,0 L1,0 0,1Z"
 						  Fill="#FF40C840" />

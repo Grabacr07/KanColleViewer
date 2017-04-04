@@ -261,7 +261,7 @@
 
 													<TextBlock Margin="4,0,0,0"
 																	   Text="{Binding Ship.Condition, Mode=OneWay}"
-																	   Style="{DynamicResource DeafultTextStyleKey}" />
+																	   Style="{DynamicResource DefaultTextStyleKey}" />
 												</StackPanel>
 											</DataTemplate>
 										</ItemsControl.ItemTemplate>

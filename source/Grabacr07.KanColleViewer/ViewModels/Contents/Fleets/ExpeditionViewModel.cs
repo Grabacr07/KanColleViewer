@@ -30,6 +30,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		{
 			get
 			{
+				if (!source.ReturnTime.HasValue) return new LimitedValue();
+
 				var start = source.ReturnTime.Value.Subtract(TimeSpan.FromMinutes(source.Mission.RawData.api_time));
 				var value = (int)DateTimeOffset.Now.Subtract(start).TotalSeconds;
 				return new LimitedValue(value, source.Mission.RawData.api_time * 60, 0);
