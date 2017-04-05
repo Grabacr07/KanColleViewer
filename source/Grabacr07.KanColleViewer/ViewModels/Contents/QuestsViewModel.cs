@@ -10,6 +10,7 @@ using Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleViewer.Models.QuestTracker;
 using Grabacr07.KanColleViewer.ViewModels.Contents.Fleets;
+using IdProgressPair =  Grabacr07.KanColleViewer.QuestTracker.Models.Model.IdProgressPair;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Contents
 {
@@ -226,7 +227,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			
 			// set Quest Tarcker
 			questTracker = new TrackManager();
-			questTracker.QuestsEventChanged += (s, e) => this.UpdateQuest(quests);
+			questTracker.QuestsEventChanged += (s, e) => this.UpdateQuest(quests, true);
 
 
 			KanColleSettings.ShowQuestBadge.ValueChanged += (s, e) => this.UpdateBadge();
@@ -244,7 +245,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			else this.Badge = null;
 		}
 
-		private void UpdateQuest(Quests quests)
+		private void UpdateQuest(Quests quests, bool fromTracker = false)
 		{
 			var viewList = quests.All
 				.Select(x => new QuestViewModel(x))

@@ -12,7 +12,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 	/// <summary>
 	/// 함대, 3주년!
 	/// </summary>
-	internal class B67 : ITracker
+	internal class B67 : NoOverUnderTracker, ITracker
 	{
 		private readonly int max_count = 2;
 		private int count1, count2;

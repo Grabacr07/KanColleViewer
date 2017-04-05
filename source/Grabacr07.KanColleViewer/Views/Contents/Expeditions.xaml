@@ -221,6 +221,11 @@
 										<TextBlock Text="{Binding Expedition.Remaining, Mode=OneWay}"
 												   Style="{DynamicResource EmphaticTextStyleKey}"
 												   Margin="8,0" />
+
+										<kcvc:ColorIndicator Height="5"
+															 VerticalAlignment="Bottom"
+															 Margin="10,8,10,4"
+															 LimitedValue="{Binding Expedition.Progress, Mode=OneWay}" />
 									</StackPanel>
 
 									<TextBlock x:Name="ExpeditionReturned"
@@ -256,7 +261,7 @@
 
 													<TextBlock Margin="4,0,0,0"
 																	   Text="{Binding Ship.Condition, Mode=OneWay}"
-																	   Style="{DynamicResource DeafultTextStyleKey}" />
+																	   Style="{DynamicResource DefaultTextStyleKey}" />
 												</StackPanel>
 											</DataTemplate>
 										</ItemsControl.ItemTemplate>
@@ -393,7 +398,6 @@
 						<DataTrigger Binding="{Binding Expedition.Returned, Mode=OneWay}" Value="True">
 							<Setter TargetName="ExpeditionProgress" Property="Visibility" Value="Hidden" />
 							<Setter TargetName="ExpeditionReturned" Property="Visibility" Value="Visible" />
-							<Setter TargetName="ShipsCondition" Property="Visibility" Value="Collapsed" />
 						</DataTrigger>
 					</DataTemplate.Triggers>
 				</DataTemplate>

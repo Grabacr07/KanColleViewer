@@ -12,7 +12,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 	/// <summary>
 	/// 제3항공전대를 편성하라!
 	/// </summary>
-	internal class A59 : NoSerializeTracker, ITracker
+	internal class A59 : NoSerializeOverUnderTracker, ITracker
 	{
 		private readonly int max_count = 4;
 		private int count;

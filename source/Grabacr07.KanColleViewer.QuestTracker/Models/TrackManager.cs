@@ -46,6 +46,8 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models
 		internal event EventHandler HenseiEvent;
 		internal event EventHandler EquipEvent;
 
+		internal SlotItemTracker slotitemTracker { get; }
+
 		public readonly System.EventArgs EmptyEventArg = new System.EventArgs();
 		public event EventHandler QuestsEventChanged;
 
@@ -66,6 +68,8 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models
 			var proxy = KanColleClient.Current.Proxy;
 			var MapInfo = new TrackerMapInfo();
 			var battleTracker = new BattleTracker();
+
+			slotitemTracker = new SlotItemTracker(homeport, proxy);
 
 			// 편성 변경
 			homeport.Organization.PropertyChanged += (s, e) =>
@@ -98,8 +102,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models
 				.Subscribe(x => Preprocess(() => ReModelEvent?.Invoke(this, new BaseEventArgs(x.Data.api_remodel_flag != 0))));
 
 			// 폐기
-			proxy.api_req_kousyou_destroyitem2.TryParse<kcsapi_destroyitem2>()
-				.Subscribe(x => Preprocess(() => DestoryItemEvent?.Invoke(this, new DestroyItemEventArgs(x.Request, x.Data))));
+			slotitemTracker.DestoryItemEvent += (s, e) => Preprocess(() => DestoryItemEvent?.Invoke(this, e));
 
 			// 해체
 			proxy.api_req_kousyou_destroyship.TryParse<kcsapi_destroyship>()
@@ -110,8 +113,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models
 				.Subscribe(x => Preprocess(() => CreateShipEvent?.Invoke(this, this.EmptyEventArg)));
 
 			// 개발
-			proxy.api_req_kousyou_createitem.TryParse<kcsapi_createitem>()
-				.Subscribe(x => Preprocess(() => CreateItemEvent?.Invoke(this, new BaseEventArgs(x.Data.api_create_flag != 0))));
+			slotitemTracker.CreateItemEvent += (s, e) => Preprocess(() => CreateItemEvent?.Invoke(this, e));
 
 			// 보급
 			proxy.api_req_hokyu_charge.TryParse<kcsapi_charge>()

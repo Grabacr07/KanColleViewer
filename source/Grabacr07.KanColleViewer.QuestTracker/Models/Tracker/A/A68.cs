@@ -12,7 +12,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 	/// <summary>
 	/// 강행 고속 수송부대를 편성하라!
 	/// </summary>
-	internal class A68 : NoSerializeTracker, ITracker
+	internal class A68 : NoSerializeOverUnderTracker, ITracker
 	{
 		private readonly int max_count = 5;
 		private int count;

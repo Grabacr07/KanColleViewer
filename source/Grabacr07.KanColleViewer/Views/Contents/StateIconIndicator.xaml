@@ -3,27 +3,62 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
 			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:fleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
 			 mc:Ignorable="d"
 			 d:DataContext="{d:DesignInstance fleets:FleetViewModel}">
+	<UserControl.Resources>
+		<kcvv:HasFlagConverter x:Key="HasFlagConverter" />
+	</UserControl.Resources>
+
 	<ContentControl Content="{Binding QuickStateView}">
 		<ContentControl.Resources>
 			<DataTemplate DataType="{x:Type fleets:HomeportViewModel}">
 				<Border x:Name="Border"
-						Background="#FFC88232" />
+						Background="#FFC88232">
+					<Path x:Name="LeftTop"
+						  Width="14"
+						  Height="14"
+						  Stretch="UniformToFill"
+						  Data="M0,0 L1,0 0,1Z"
+						  Fill="#FF40C840" />
+				</Border>
+
 				<DataTemplate.Triggers>
-					<DataTrigger Binding="{Binding State.IsReady}"
-								 Value="True">
-						<Setter TargetName="Border"
-								Property="Background"
-								Value="#FF40C840" />
+					<DataTrigger Binding="{Binding State.IsReady}" Value="True">
+						<Setter TargetName="Border" Property="Background" Value="#FF40C840" />
+					</DataTrigger>
+					<DataTrigger Binding="{Binding State.InShortSupply}" Value="True">
+						<Setter TargetName="LeftTop" Property="Fill" Value="#FFC88232" />
+					</DataTrigger>
+					<DataTrigger Binding="{Binding Condition.IsRejuvenating}" Value="True">
+						<Setter TargetName="Border" Property="Background" Value="#FFC88232" />
+					</DataTrigger>
+					<DataTrigger Binding="{Binding State.HeavilyDamaged}" Value="True">
+						<Setter TargetName="LeftTop" Property="Fill" Value="#FFCF0000" />
+						<Setter TargetName="Border" Property="Background" Value="#FFCF0000" />
+					</DataTrigger>
+					<DataTrigger Binding="{Binding State.Repairing}" Value="True">
+						<Setter TargetName="Border" Property="Background" Value="#FFC88232" />
+					</DataTrigger>
+					<DataTrigger Binding="{Binding State.FlagshipIsRepairShip}" Value="True">
+						<Setter TargetName="Border" Property="Background" Value="#FFC88232" />
+					</DataTrigger>
+					<DataTrigger Binding="{Binding State.IsReady}" Value="True">
+						<Setter TargetName="Border" Property="Background" Value="#FF40C840" />
 					</DataTrigger>
 				</DataTemplate.Triggers>
 			</DataTemplate>
 
 			<DataTemplate DataType="{x:Type fleets:SortieViewModel}">
-				<Border Background="#FFB40000" />
+				<Border x:Name="Border" Background="#FFB40000" />
+
+				<DataTemplate.Triggers>
+					<DataTrigger Binding="{Binding State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Sortie|HeavilyDamaged}" Value="True">
+						<Setter TargetName="Border" Property="Background" Value="#FFCF0000"/>
+					</DataTrigger>
+				</DataTemplate.Triggers>
 			</DataTemplate>
 
 			<DataTemplate DataType="{x:Type fleets:ExpeditionViewModel}">

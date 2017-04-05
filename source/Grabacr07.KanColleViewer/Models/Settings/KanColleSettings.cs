@@ -279,6 +279,12 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		public static SerializableProperty<bool> QuestOnAllTabs { get; }
 			= new SerializableProperty<bool>(GetKey(), Providers.Viewer, false);
 
+		/// <summary>
+		/// 모항 정보에 원정 진행바를 표시할지를 설정합니다.
+		/// </summary>
+		public static SerializableProperty<bool> AdmiralExpeditionBars { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Viewer, false);
+
 
 		#region instance members
 

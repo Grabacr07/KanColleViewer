@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleViewer.QuestTracker.Models.Extensions;
+using Grabacr07.KanColleViewer.QuestTracker.Models.Model;
 
 namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 {
@@ -14,6 +15,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 	/// </summary>
 	internal class F20 : ITracker
 	{
+		private QuestProgressType lastProgress = QuestProgressType.None;
 		private readonly int max_count = 3;
 		private int count;
 
@@ -44,7 +46,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets[1];
 				if (!flagshipTable.Any(x => x == (fleet?.Ships[0]?.Info.Id ?? 0))) return; // 쇼카쿠/아카기 비서함
 
-				var slotitems = KanColleClient.Current.Homeport.Itemyard.SlotItems;
+				var slotitems = manager.slotitemTracker.SlotItems;
 				count = count.Add(args.itemList.Count(x => (slotitems[x]?.Info.Id ?? 0) == 16)) // 97식 함상공격기
 							.Max(max_count);
 
@@ -77,6 +79,33 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 		{
 			count = 0;
 			int.TryParse(data, out count);
+		}
+
+		public void CheckOverUnder(QuestProgressType progress)
+		{
+			if (lastProgress == progress) return;
+			lastProgress = progress;
+
+			int cut50 = (int)Math.Ceiling(max_count * 0.5);
+			int cut80 = (int)Math.Ceiling(max_count * 0.8);
+
+			switch (progress)
+			{
+				case QuestProgressType.None:
+					if (count >= cut50) count = cut50 - 1;
+					break;
+				case QuestProgressType.Progress50:
+					if (count >= cut80) count = cut80 - 1;
+					else if (count < cut50) count = cut50;
+					break;
+				case QuestProgressType.Progress80:
+					if (count < cut80) count = cut80;
+					break;
+				case QuestProgressType.Complete:
+					count = max_count;
+					break;
+			}
+			ProcessChanged?.Invoke(this, emptyEventArgs);
 		}
 	}
 }

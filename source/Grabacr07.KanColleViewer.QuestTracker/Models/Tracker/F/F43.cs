@@ -12,7 +12,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 	/// <summary>
 	/// 중부해역 기지항공대 전개!
 	/// </summary>
-	internal class F43 : ITracker
+	internal class F43 : NoOverUnderTracker, ITracker
 	{
 		private readonly int max_count = 4;
 		private int count, count_1, count_2;

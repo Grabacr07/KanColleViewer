@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
+using Grabacr07.KanColleViewer.QuestTracker.Models.Model;
 using Grabacr07.KanColleViewer.QuestTracker.Models.Extensions;
 
 namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
@@ -14,6 +15,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 	/// </summary>
 	internal class Bm6 : ITracker
 	{
+		private QuestProgressType lastProgress = QuestProgressType.None;
 		private readonly int max_count = 1;
 		private int count;
 
@@ -71,6 +73,33 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 		{
 			count = 0;
 			int.TryParse(data, out count);
+		}
+
+		public void CheckOverUnder(QuestProgressType progress)
+		{
+			if (lastProgress == progress) return;
+			lastProgress = progress;
+
+			int cut50 = (int)Math.Ceiling(max_count * 0.5);
+			int cut80 = (int)Math.Ceiling(max_count * 0.8);
+
+			switch (progress)
+			{
+				case QuestProgressType.None:
+					if (count >= cut50) count = cut50 - 1;
+					break;
+				case QuestProgressType.Progress50:
+					if (count >= cut80) count = cut80 - 1;
+					else if (count < cut50) count = cut50;
+					break;
+				case QuestProgressType.Progress80:
+					if (count < cut80) count = cut80;
+					break;
+				case QuestProgressType.Complete:
+					count = max_count;
+					break;
+			}
+			ProcessChanged?.Invoke(this, emptyEventArgs);
 		}
 	}
 }

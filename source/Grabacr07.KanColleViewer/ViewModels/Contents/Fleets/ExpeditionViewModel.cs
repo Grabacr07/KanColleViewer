@@ -26,13 +26,28 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			? $"{(int)this.source.Remaining.Value.TotalHours:D2}:{this.source.Remaining.Value.ToString(@"mm\:ss")}"
 			: "--:--:--";
 
+		public LimitedValue Progress
+		{
+			get
+			{
+				if (!source.ReturnTime.HasValue) return new LimitedValue();
+
+				var start = source.ReturnTime.Value.Subtract(TimeSpan.FromMinutes(source.Mission.RawData.api_time));
+				var value = (int)DateTimeOffset.Now.Subtract(start).TotalSeconds;
+				return new LimitedValue(value, source.Mission.RawData.api_time * 60, 0);
+			}
+		}
+
 		public ExpeditionViewModel(Expedition expedition)
 		{
 			this.source = expedition;
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(expedition, (sender, args) => this.RaisePropertyChanged(args.PropertyName)));
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(expedition)
 				{
-					{nameof(expedition.Remaining), (sender, args) => this.RaisePropertyChanged("Returned") }
+					{nameof(expedition.Remaining), (sender, args) => {
+						this.RaisePropertyChanged("Returned");
+						this.RaisePropertyChanged("Progress");
+					} }
 				}
 			);
 		}
