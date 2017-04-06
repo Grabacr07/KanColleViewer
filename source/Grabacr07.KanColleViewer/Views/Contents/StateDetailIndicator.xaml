@@ -9,8 +9,10 @@
 			 xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
 			 xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Models.Settings"
 			 xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 			 xmlns:fleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
+			 xmlns:converters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters"
 			 mc:Ignorable="d"
 			 d:DesignWidth="300"
 			 d:DesignHeight="30"
@@ -18,16 +20,21 @@
 
 	<UserControl.Resources>
 		<kcvv:HasFlagConverter x:Key="HasFlagConverter" />
+		<converters:ObjectToTypeConverter x:Key="ObjectToTypeConverter" />
 	</UserControl.Resources>
 
-	<ContentControl Content="{Binding QuickStateView}">
-		<ContentControl.Resources>
-			<DataTemplate DataType="{x:Type fleets:HomeportViewModel}">
-				<Grid>
-					<Border x:Name="Border"
-							Background="#FF5A4020"
-							Padding="8,4">
+	<ContentControl Content="{Binding}">
+		<ContentControl.ContentTemplate>
+			<DataTemplate>
+				<Border x:Name="Border" Background="#FF5A4020" Padding="8,4">
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+
 						<TextBlock x:Name="Text"
+								   DataContext="{Binding QuickStateView}"
 								   Style="{DynamicResource DefaultTextStyleKey}"
 								   Foreground="{DynamicResource ActiveForegroundBrushKey}">
 							<TextBlock.Text>
@@ -36,69 +43,123 @@
 								</MultiBinding>
 							</TextBlock.Text>
 						</TextBlock>
-					</Border>
-				</Grid>
+						<TextBlock Grid.Column="1"
+								   Margin="6,0,0,0"
+								   VerticalAlignment="Center"
+								   HorizontalAlignment="Right"
+								   TextWrapping="NoWrap"
+								   TextTrimming="CharacterEllipsis"
+								   FontSize="{StaticResource DefaultFontSizeKey}">
+							<Run Text="{Binding Resources.Fleets_Supplys, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+							<Run Text="{Binding Resources.Fleets_Fuel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+							<Run Text="{Binding UsedFuel, Mode=OneWay}" />
+							<Run Text="{Binding Resources.Fleets_Ammo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+							<Run Text="{Binding UsedAmmo, Mode=OneWay}" />
+							<Run Text="{Binding Resources.Fleets_Bauxite, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+							<Run Text="{Binding UsedBauxite, Mode=OneWay}" />
+
+							<TextBlock.ToolTip>
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<Grid.RowDefinitions>
+										<RowDefinition Height="Auto" />
+										<RowDefinition Height="Auto" />
+										<RowDefinition Height="Auto" />
+									</Grid.RowDefinitions>
+
+									<TextBlock Text="{Binding Resources.Fleets_Fuel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+											   Grid.Column="0" Grid.Row="0" />
+									<TextBlock Text="{Binding UsedFuel, Mode=OneWay}"
+											   Grid.Column="1" Grid.Row="0" />
+
+									<TextBlock Text="{Binding Resources.Fleets_Ammo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+											   Grid.Column="0" Grid.Row="1" />
+									<TextBlock Text="{Binding UsedAmmo, Mode=OneWay}"
+											   Grid.Column="1" Grid.Row="1" />
+
+									<TextBlock Text="{Binding Resources.Fleets_Bauxite, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+											   Grid.Column="0" Grid.Row="2" />
+									<TextBlock Text="{Binding UsedBauxite, Mode=OneWay}"
+											   Grid.Column="1" Grid.Row="2" />
+
+									<Grid.Resources>
+										<Style TargetType="{x:Type TextBlock}">
+											<Setter Property="Margin" Value="2" />
+										</Style>
+									</Grid.Resources>
+								</Grid>
+							</TextBlock.ToolTip>
+
+							<TextBlock.Style>
+								<Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource EmphaticTextStyleKey}">
+									<Style.Triggers>
+										<DataTrigger Binding="{Binding Source={x:Static settings:KanColleSettings.UseSupplyPreview}, Path=Value}" Value="False">
+											<Setter Property="Visibility" Value="Collapsed" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</TextBlock.Style>
+						</TextBlock>
+					</Grid>
+				</Border>
 
 				<DataTemplate.Triggers>
-					<DataTrigger Binding="{Binding Condition.IsRejuvenating}"
-								 Value="False">
-						<Setter TargetName="Text"
-								Property="Text"
-								Value="출격준비 미비함" />
+					<MultiDataTrigger>
+						<MultiDataTrigger.Conditions>
+							<Condition Binding="{Binding QuickStateView, Converter={StaticResource ObjectToTypeConverter}}" Value="{x:Type fleets:HomeportViewModel}" />
+							<Condition Binding="{Binding QuickStateVuew.Condition.IsRejuvenating}" Value="False" />
+						</MultiDataTrigger.Conditions>
+						<MultiDataTrigger.Setters>
+							<Setter TargetName="Text" Property="Text" Value="출격준비 미비함" />
+						</MultiDataTrigger.Setters>
+					</MultiDataTrigger>
+					<MultiDataTrigger>
+						<MultiDataTrigger.Conditions>
+							<Condition Binding="{Binding QuickStateView, Converter={StaticResource ObjectToTypeConverter}}" Value="{x:Type fleets:HomeportViewModel}" />
+							<Condition Binding="{Binding QuickStateVuew.State.IsReady}" Value="True" />
+						</MultiDataTrigger.Conditions>
+						<MultiDataTrigger.Setters>
+							<Setter TargetName="Border" Property="Background" Value="#FF286414" />
+							<Setter TargetName="Text" Property="Text" Value="출격가능!" />
+						</MultiDataTrigger.Setters>
+					</MultiDataTrigger>
+
+					<DataTrigger Binding="{Binding QuickStateView, Converter={StaticResource ObjectToTypeConverter}}" Value="{x:Type fleets:SortieViewModel}">
+						<Setter TargetName="Border" Property="Background" Value="#FF7E0101" />
+						<Setter TargetName="Text" Property="Text" Value="현재 출격중입니다" />
 					</DataTrigger>
-					<DataTrigger Binding="{Binding State.IsReady}"
-								 Value="True">
-						<Setter TargetName="Border"
-								Property="Background"
-								Value="#FF286414" />
-						<Setter TargetName="Text"
-								Property="Text"
-								Value="출격가능!" />
+					<MultiDataTrigger>
+						<MultiDataTrigger.Conditions>
+							<Condition Binding="{Binding QuickStateView, Converter={StaticResource ObjectToTypeConverter}}" Value="{x:Type fleets:SortieViewModel}" />
+							<Condition Binding="{Binding State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Sortie|HeavilyDamaged}" Value="True" />
+						</MultiDataTrigger.Conditions>
+						<MultiDataTrigger.Setters>
+							<Setter TargetName="Text" Property="Text" Value="대파당한 칸무스가 있습니다!!!!"/>
+							<Setter TargetName="Border" Property="Background" Value="#FFCF0000"/>
+						</MultiDataTrigger.Setters>
+					</MultiDataTrigger>
+
+					<DataTrigger Binding="{Binding QuickStateView, Converter={StaticResource ObjectToTypeConverter}}" Value="{x:Type fleets:ExpeditionViewModel}">
+						<Setter TargetName="Border" Property="Background" Value="#FF204080" />
+						<Setter TargetName="Text" Property="Text">
+							<Setter.Value>
+								<MultiBinding StringFormat="원정중: {0} - {1}">
+									<Binding Path="Mission.Title" />
+									<Binding Path="Remaining" />
+								</MultiBinding>
+							</Setter.Value>
+						</Setter>
+					</DataTrigger>
+
+					<DataTrigger Binding="{Binding QuickStateView, Converter={StaticResource ObjectToTypeConverter}}" Value="{x:Type vm:NullViewModel}">
+						<Setter TargetName="Border" Property="Background" Value="#FF3E3E42" />
+						<Setter TargetName="Text" Property="Text" Value="함대에 칸무스가 편성되어있지 않습니다."/>
 					</DataTrigger>
 				</DataTemplate.Triggers>
 			</DataTemplate>
-
-            <DataTemplate DataType="{x:Type fleets:SortieViewModel}">
-                <Border x:Name="Border"
-							Background="#FF7E0101"
-							Padding="8,4">
-                    <TextBlock x:Name="Text"
-								   Text="현재 출격중입니다"
-								   Style="{DynamicResource DefaultTextStyleKey}"
-								   Foreground="{DynamicResource ActiveForegroundBrushKey}">
-                    </TextBlock>
-                </Border>
-                <DataTemplate.Triggers>
-                    <DataTrigger Binding="{Binding State.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Sortie|HeavilyDamaged}"
-																   Value="True">
-                        <Setter TargetName="Text" Property="Text" Value="대파당한 칸무스가 있습니다!!!!"/>
-						<Setter TargetName="Border" Property="Background" Value="#FFCF0000"/>
-					</DataTrigger>
-                </DataTemplate.Triggers>
-            </DataTemplate>
-
-			<DataTemplate DataType="{x:Type fleets:ExpeditionViewModel}">
-				<Border Padding="8,4"
-						Background="#FF204080">
-					<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
-							   Foreground="{DynamicResource ActiveForegroundBrushKey}">
-						<Run Text="원정중" />
-						<Run Text=":" />
-						<Run Text="{Binding Mission.Title, Mode=OneWay}" />
-						<Run Text="-" />
-						<Run Text="{Binding Remaining, Mode=OneWay}" />
-					</TextBlock>
-				</Border>
-			</DataTemplate>
-
-			<DataTemplate DataType="{x:Type vm:NullViewModel}">
-				<Border Padding="8,4"
-						Background="#FF3E3E42">
-                    <TextBlock Text="함대에 칸무스가 편성되어있지 않습니다."
-							   Style="{DynamicResource DefaultTextStyleKey}"
-							   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
-				</Border>
-			</DataTemplate>
-		</ContentControl.Resources>
+		</ContentControl.ContentTemplate>
 	</ContentControl>
 </UserControl>
