@@ -335,6 +335,7 @@
     <Compile Include="Views\Controls\RefreshButton.xaml.cs">
       <DependentUpon>RefreshButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Converters\ObjectToTypeConverter.cs" />
     <Compile Include="Views\Converters\RangeToBooleanConverter.cs" />
     <Compile Include="Views\InformationWindow.xaml.cs">
       <DependentUpon>InformationWindow.xaml</DependentUpon>

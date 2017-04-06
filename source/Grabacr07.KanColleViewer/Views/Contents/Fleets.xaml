@@ -496,12 +496,12 @@
 					<DockPanel Grid.Column="8"
 								Grid.Row="0"
 								Grid.RowSpan="2"
+								ToolTip="{Binding Ship.ExSlot.Tooltip}"
 								Visibility="{Binding Ship.ExSlot.Equipped, Converter={StaticResource BooleanToVisibilityConverter}}">
 						<Rectangle Width="1"
 									Style="{DynamicResource SeparatorRectangleStyleKey}"
 									Margin="12,4,0,3" />
 						<kcvc:SlotItemIcon Type="{Binding Ship.ExSlot.Item.Info.IconType}"
-										   ToolTip="{Binding Ship.ExSlot.Item.NameWithLevel}"
 										   Margin="3,0" />
 					</DockPanel>
 				</Grid>
@@ -645,31 +645,6 @@
 			<Grid Grid.Row="1" Grid.Column="0">
 				<contents:StateDetailIndicator DataContext="{Binding SelectedFleet, Mode=OneWay}"
 											   Margin="10,3" />
-
-				<TextBlock Margin="18,3"
-						   FontSize="{StaticResource DefaultFontSizeKey}"
-						   VerticalAlignment="Center"
-						   HorizontalAlignment="Right">
-					<Run Text="{Binding Resources.Fleets_Supplys, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-					<Run Text="{Binding Resources.Fleets_Fuel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-					<Run Text="{Binding SelectedFleet.UsedFuel, Mode=OneWay}" />
-					<Run Text="{Binding Resources.Fleets_Ammo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-					<Run Text="{Binding SelectedFleet.UsedAmmo, Mode=OneWay}" />
-					<Run Text="{Binding Resources.Fleets_Bauxite, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-					<Run Text="{Binding SelectedFleet.UsedBauxite, Mode=OneWay}" />
-
-					<TextBlock.Style>
-						<Style TargetType="{x:Type TextBlock}"
-										   BasedOn="{StaticResource EmphaticTextStyleKey}">
-							<Style.Triggers>
-								<DataTrigger Binding="{Binding Source={x:Static settings:KanColleSettings.UseSupplyPreview}, Path=Value}" Value="False">
-									<Setter Property="Visibility" Value="Collapsed" />
-								</DataTrigger>
-							</Style.Triggers>
-						</Style>
-					</TextBlock.Style>
-				</TextBlock>
-
 				<Grid.Style>
 					<Style TargetType="{x:Type Grid}">
 						<Style.Triggers>
