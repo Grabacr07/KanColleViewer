@@ -26,7 +26,7 @@
 	<ContentControl Content="{Binding}">
 		<ContentControl.ContentTemplate>
 			<DataTemplate>
-				<Border x:Name="Border" Background="#FF5A4020" Padding="8,4">
+				<Border x:Name="Border" Background="#00000000" Padding="8,4">
 					<Grid>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="Auto" />
@@ -36,13 +36,8 @@
 						<TextBlock x:Name="Text"
 								   DataContext="{Binding QuickStateView}"
 								   Style="{DynamicResource DefaultTextStyleKey}"
-								   Foreground="{DynamicResource ActiveForegroundBrushKey}">
-							<TextBlock.Text>
-								<MultiBinding StringFormat="피로회복까지: {0}">
-									<Binding Path="Condition.Remaining" />
-								</MultiBinding>
-							</TextBlock.Text>
-						</TextBlock>
+								   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+
 						<TextBlock Grid.Column="1"
 								   Margin="6,0,0,0"
 								   VerticalAlignment="Center"
@@ -62,6 +57,7 @@
 								<Grid>
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="4" />
 										<ColumnDefinition Width="*" />
 									</Grid.ColumnDefinitions>
 									<Grid.RowDefinitions>
@@ -73,17 +69,17 @@
 									<TextBlock Text="{Binding Resources.Fleets_Fuel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 											   Grid.Column="0" Grid.Row="0" />
 									<TextBlock Text="{Binding UsedFuel, Mode=OneWay}"
-											   Grid.Column="1" Grid.Row="0" />
+											   Grid.Column="2" Grid.Row="0" />
 
 									<TextBlock Text="{Binding Resources.Fleets_Ammo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 											   Grid.Column="0" Grid.Row="1" />
 									<TextBlock Text="{Binding UsedAmmo, Mode=OneWay}"
-											   Grid.Column="1" Grid.Row="1" />
+											   Grid.Column="2" Grid.Row="1" />
 
 									<TextBlock Text="{Binding Resources.Fleets_Bauxite, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 											   Grid.Column="0" Grid.Row="2" />
 									<TextBlock Text="{Binding UsedBauxite, Mode=OneWay}"
-											   Grid.Column="1" Grid.Row="2" />
+											   Grid.Column="2" Grid.Row="2" />
 
 									<Grid.Resources>
 										<Style TargetType="{x:Type TextBlock}">
@@ -107,10 +103,20 @@
 				</Border>
 
 				<DataTemplate.Triggers>
+					<DataTrigger Binding="{Binding QuickStateView, Converter={StaticResource ObjectToTypeConverter}}" Value="{x:Type fleets:HomeportViewModel}">
+						<Setter TargetName="Border" Property="Background" Value="#FF5A4020" />
+						<Setter TargetName="Text" Property="Text">
+							<Setter.Value>
+								<MultiBinding StringFormat="피로회복까지: {0}">
+									<Binding Path="Condition.Remaining" />
+								</MultiBinding>
+							</Setter.Value>
+						</Setter>
+					</DataTrigger>
 					<MultiDataTrigger>
 						<MultiDataTrigger.Conditions>
 							<Condition Binding="{Binding QuickStateView, Converter={StaticResource ObjectToTypeConverter}}" Value="{x:Type fleets:HomeportViewModel}" />
-							<Condition Binding="{Binding QuickStateVuew.Condition.IsRejuvenating}" Value="False" />
+							<Condition Binding="{Binding QuickStateView.Condition.IsRejuvenating}" Value="False" />
 						</MultiDataTrigger.Conditions>
 						<MultiDataTrigger.Setters>
 							<Setter TargetName="Text" Property="Text" Value="출격준비 미비함" />
@@ -119,7 +125,7 @@
 					<MultiDataTrigger>
 						<MultiDataTrigger.Conditions>
 							<Condition Binding="{Binding QuickStateView, Converter={StaticResource ObjectToTypeConverter}}" Value="{x:Type fleets:HomeportViewModel}" />
-							<Condition Binding="{Binding QuickStateVuew.State.IsReady}" Value="True" />
+							<Condition Binding="{Binding QuickStateView.State.IsReady}" Value="True" />
 						</MultiDataTrigger.Conditions>
 						<MultiDataTrigger.Setters>
 							<Setter TargetName="Border" Property="Background" Value="#FF286414" />
