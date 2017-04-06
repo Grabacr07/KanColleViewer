@@ -53,42 +53,6 @@
 							<Run Text="{Binding Resources.Fleets_Bauxite, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 							<Run Text="{Binding UsedBauxite, Mode=OneWay}" />
 
-							<TextBlock.ToolTip>
-								<Grid>
-									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="Auto" />
-										<ColumnDefinition Width="4" />
-										<ColumnDefinition Width="*" />
-									</Grid.ColumnDefinitions>
-									<Grid.RowDefinitions>
-										<RowDefinition Height="Auto" />
-										<RowDefinition Height="Auto" />
-										<RowDefinition Height="Auto" />
-									</Grid.RowDefinitions>
-
-									<TextBlock Text="{Binding Resources.Fleets_Fuel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-											   Grid.Column="0" Grid.Row="0" />
-									<TextBlock Text="{Binding UsedFuel, Mode=OneWay}"
-											   Grid.Column="2" Grid.Row="0" />
-
-									<TextBlock Text="{Binding Resources.Fleets_Ammo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-											   Grid.Column="0" Grid.Row="1" />
-									<TextBlock Text="{Binding UsedAmmo, Mode=OneWay}"
-											   Grid.Column="2" Grid.Row="1" />
-
-									<TextBlock Text="{Binding Resources.Fleets_Bauxite, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-											   Grid.Column="0" Grid.Row="2" />
-									<TextBlock Text="{Binding UsedBauxite, Mode=OneWay}"
-											   Grid.Column="2" Grid.Row="2" />
-
-									<Grid.Resources>
-										<Style TargetType="{x:Type TextBlock}">
-											<Setter Property="Margin" Value="2" />
-										</Style>
-									</Grid.Resources>
-								</Grid>
-							</TextBlock.ToolTip>
-
 							<TextBlock.Style>
 								<Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource EmphaticTextStyleKey}">
 									<Style.Triggers>
@@ -99,6 +63,42 @@
 								</Style>
 							</TextBlock.Style>
 						</TextBlock>
+
+						<Grid.ToolTip>
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="4" />
+									<ColumnDefinition Width="*" />
+								</Grid.ColumnDefinitions>
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+								</Grid.RowDefinitions>
+
+								<TextBlock Text="{Binding Resources.Fleets_Fuel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+											   Grid.Column="0" Grid.Row="0" />
+								<TextBlock Text="{Binding UsedFuel, Mode=OneWay}"
+											   Grid.Column="2" Grid.Row="0" />
+
+								<TextBlock Text="{Binding Resources.Fleets_Ammo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+											   Grid.Column="0" Grid.Row="1" />
+								<TextBlock Text="{Binding UsedAmmo, Mode=OneWay}"
+											   Grid.Column="2" Grid.Row="1" />
+
+								<TextBlock Text="{Binding Resources.Fleets_Bauxite, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+											   Grid.Column="0" Grid.Row="2" />
+								<TextBlock Text="{Binding UsedBauxite, Mode=OneWay}"
+											   Grid.Column="2" Grid.Row="2" />
+
+								<Grid.Resources>
+									<Style TargetType="{x:Type TextBlock}">
+										<Setter Property="Margin" Value="2" />
+									</Style>
+								</Grid.Resources>
+							</Grid>
+						</Grid.ToolTip>
 					</Grid>
 				</Border>
 
