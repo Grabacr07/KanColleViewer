@@ -36,11 +36,8 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		}
 		#endregion
 
-		private bool Available => this.source.Available;
-		private TimeSpan ElapsedTime => TimeSpan.FromTicks(DateTime.Now.Ticks) - this.source.BaseTime;
-		public string CurrentTime => Available
-			? $"{(int)ElapsedTime.TotalHours:D2}:{ElapsedTime.ToString(@"mm\:ss")}"
-			: "--:--:--";
+		private TimeSpan ElapsedTime => DateTimeOffset.Now.Subtract(this.source.BaseTime);
+		public string CurrentTime => $"{(int)ElapsedTime.TotalHours:D2}:{ElapsedTime.ToString(@"mm\:ss")}";
 
 		public AkashiTimerViewModel()
 		{
@@ -60,11 +57,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				));
 
 			KanColleClient.Current.Proxy.api_port.TryParse().Subscribe(x => this.Reset());
-			KanColleClient.Current.Proxy.api_req_hensei_preset_select.TryParse()
-				.Where(x => x.IsSuccess)
-				.Subscribe(x => this.Update(
-					int.Parse(x.Request["api_deck_id"])
-				));
 
 			KanColleSettings.UseRepairTimer.ValueChanged += (s, e) => this.UpdateVisibility();
 			this.UpdateVisibility();
@@ -91,15 +83,6 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			}
 			catch { }
 		}
-		public void Update(int fleetId)
-		{
-			try
-			{
-				source.Update(fleetId);
-			}
-			catch { }
-		}
-
 		public void Reset()
 		{
 			try
