@@ -276,7 +276,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 							var itemid = KanColleClient.Current.Master.SlotItems
 								.Where(y => y.Value.RawData.api_name == name)
 								.FirstOrDefault()
-								.Value.Id;
+								.Value?.Id ?? 0;
 
 							return homeport.Itemyard.SlotItems.Any(y => y.Value.Info.Id == itemid);
 						});
@@ -291,7 +291,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 							var itemid = KanColleClient.Current.Master.SlotItems
 								.Where(y => y.Value.RawData.api_name == name)
 								.FirstOrDefault()
-								.Value.Id;
+								.Value?.Id ?? 0;
 
 							return homeport.Itemyard.SlotItems.Any(y => y.Value.Info.Id == itemid && y.Value.Level > 0);
 						});
@@ -359,7 +359,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		/// <returns></returns>
 		private List<RemodelItemList> SortList(List<RemodelItemList> myList)
 		{
-			myList.Sort(delegate (RemodelItemList x, RemodelItemList y)
+			myList?.Sort(delegate (RemodelItemList x, RemodelItemList y)
 			{
 				SlotItemIconType? a = x.IconType, b = y.IconType;
 
@@ -460,7 +460,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		/// <summary>
 		/// 개수 가능 장비 목록 작성
 		/// </summary>
-		private List<RemodelItemList> MakeDefaultList(IEnumerable<XElement> List, int Position=-1)
+		private List<RemodelItemList> MakeDefaultList(IEnumerable<XElement> List, int Position = -1)
 		{
 			//var PosElement = "Position";
 			List<RemodelItemList> ItemList = new List<RemodelItemList>();
@@ -510,7 +510,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				ItemContent.Upgradable = ItemContent.Ships.Any(x => x.Upgrade != null);
 
 				// 장비변환 가능한 경우 칸무스 목록 작성
-				if(ItemContent.Upgradable)
+				if (ItemContent.Upgradable)
 					ItemContent.UpgradeShips = TrimShipList(ItemContent.Ships);
 
 				ItemList.Add(ItemContent);

@@ -60,7 +60,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				{
 					this.IsNotinitialized = false;
 
-					this.AirBases = x.Data.api_air_base
+					this.AirBases = x.Data.api_air_base?
 						.Select(y => new AirBase(y, homeport))
 						.ToArray();
 				});
