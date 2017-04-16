@@ -13,7 +13,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 {
 	public class AirBaseTroopViewModel : ItemViewModel
 	{
-		public string Name => "기지항공대";
+		public string Name => "기항대";
 
 		#region AirBases 변경통지 프로퍼티
 		private AirBase[] _AirBases;
