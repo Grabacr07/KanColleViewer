@@ -45,6 +45,24 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		#endregion
 
 
+		#region IsPrimary変更通知プロパティ
+		private bool _IsPrimary;
+
+		public bool IsPrimary
+		{
+			get
+			{ return this._IsPrimary; }
+			set
+			{ 
+				if (this._IsPrimary == value)
+					return;
+				this._IsPrimary = value;
+				this.RaisePropertyChanged();
+			}
+		}
+		#endregion
+
+
 		// ----- Other elements
 
 		public AdmiralViewModel Admiral { get; }
@@ -79,6 +97,21 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			this.Materials = new MaterialsViewModel().AddTo(this);
 			this.Ships = new ShipsViewModel().AddTo(this);
 			this.SlotItems = new SlotItemsViewModel().AddTo(this);
+
+			this.Subscribe(nameof(this.IsPrimary), this.IsPrimaryChanged);
+		}
+
+		public void IsPrimaryChanged()
+		{
+			if (this.IsPrimary)
+			{
+				if(this.SystemTabItems?.Count == 0)
+					this.SystemTabItems?.Add(SettingsViewModel.Instance);
+			}
+			else
+			{
+				this.SystemTabItems?.Clear();
+			}
 		}
 	}
 }

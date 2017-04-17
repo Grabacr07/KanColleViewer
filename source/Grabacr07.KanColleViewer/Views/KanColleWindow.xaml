@@ -166,19 +166,24 @@
 				<Border />
 			</DockPanel>
 
-			<ContentControl x:Name="informationArea"
-							x:FieldModifier="private"
-							Content="{Binding Content}"
-							Visibility="{Binding ContentVisibility}">
-				<ContentControl.Resources>
+			<ItemsControl x:Name="informationArea"
+						  x:FieldModifier="private"
+						  ItemsSource="{Binding Contents}"
+						  Visibility="{Binding ContentVisibility}">
+				<ItemsControl.Resources>
 					<DataTemplate DataType="{x:Type viewModels:StartContentViewModel}">
 						<views:StartContent />
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type viewModels:InformationViewModel}">
 						<views:Information />
 					</DataTemplate>
-				</ContentControl.Resources>
-			</ContentControl>
+				</ItemsControl.Resources>
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<UniformGrid Columns="{Binding InfoViewGridColumnNumber}" />
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+			</ItemsControl>
 		</DockPanel>
 
 		<!-- region Status area -->
