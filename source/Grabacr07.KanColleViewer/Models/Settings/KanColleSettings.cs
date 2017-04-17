@@ -40,6 +40,12 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, false);
 
 		/// <summary>
+		/// 칸코레 윈도우가 음소거인 경우 알림도 음소거합니다.
+		/// </summary>
+		public static SerializableProperty<bool> NotifyMuteOnMute { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Roaming, false);
+
+		/// <summary>
 		/// 建造完了時に通知するかどうかを示す設定値を取得します。
 		/// </summary>
 		public static SerializableProperty<bool> NotifyBuildingCompleted { get; }
