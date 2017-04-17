@@ -98,19 +98,26 @@ namespace Grabacr07.KanColleViewer
 						.Subscribe(x => ResourceService.Current.ChangeCulture(x))
 						.AddTo(this);
 				}
-				catch
+				catch(Exception ex)
 				{
+					ReportException(this, ex);
+
 					// 무언가 오류가 발생...
 					try
 					{
 						File.Delete(Providers.LocalFilePath);
 						File.Delete(Providers.ViewerDirectoryPath);
 					}
-					catch { }
+					catch (Exception ex2)
+					{
+						ReportException(this, ex2);
+					}
 
 					MessageBox.Show(
 						"어플리케이션 기동중 문제가 발생하여 일부 설정파일을 초기화합니다.\n"
-							+ "프로그램이 종료되며, 재시작 해주시기 바랍니다.",
+							+ "프로그램이 종료되며, 재시작 해주시기 바랍니다.\n\n"
+							+ ex.Message + "\n"
+							+ ex.StackTrace,
 						"제독업무도 바빠!",
 						MessageBoxButton.OK,
 						MessageBoxImage.Warning
