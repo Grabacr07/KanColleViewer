@@ -60,12 +60,10 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models
 
 		private void CreateItem(kcsapi_createitem source)
 		{
-			if (source.api_create_flag == 1 && source.api_slot_item != null)
-			{
-				CreateItemEvent?.Invoke(this, new BaseEventArgs(source.api_create_flag == 1));
+			CreateItemEvent?.Invoke(this, new BaseEventArgs(source.api_create_flag == 1));
 
+			if (source.api_create_flag == 1 && source.api_slot_item != null)
 				this.SlotItems.Add(new SlotItem(source.api_slot_item));
-			}
 		}
 
 		private void DestroyItem(SvData<kcsapi_destroyitem2> data)
