@@ -99,7 +99,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			get
 			{
 				var tooltip = string.Join(
-					"\n",
+					Environment.NewLine,
 					new string[] {
 						(this.RawData.api_houg != 0 ? "화력:" + this.RawData.api_houg : ""),
 						(this.RawData.api_raig != 0 ? "뇌장:" + this.RawData.api_raig : ""),
