@@ -15,8 +15,4 @@ using System.Windows;
 	ResourceDictionaryLocation.None,
 	ResourceDictionaryLocation.SourceAssembly)]
 
-<<<<<<< HEAD
 [assembly: AssemblyVersion("4.2.10.10")]
-=======
-[assembly: AssemblyVersion("4.2.10.9")]
->>>>>>> master
