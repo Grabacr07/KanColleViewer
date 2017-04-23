@@ -7,6 +7,7 @@ using Grabacr07.KanColleViewer.ViewModels.Contents.Fleets;
 using Grabacr07.KanColleViewer.ViewModels.Dev;
 using Grabacr07.KanColleViewer.ViewModels.Settings;
 using Livet;
+using Livet.EventListeners;
 using MetroTrilithon.Mvvm;
 using Grabacr07.KanColleViewer.Models;
 using System.Windows;
@@ -54,6 +55,9 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		public ShipsViewModel Ships { get; }
 		public SlotItemsViewModel SlotItems { get; }
 		public KanColleWindowSettings Settings { get; }
+
+		public bool ShipsCountWarning => Admiral.Model.MaxShipCount - Ships.Count <= 5;
+		public bool SlotItemsCountWarning => Admiral.Model.MaxSlotItemCount - SlotItems.Count <= 5;
 
 		#region Vertical Visibility
 		private Visibility _Vertical;
@@ -156,6 +160,27 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			this.Materials = new MaterialsViewModel().AddTo(this);
 			this.Ships = new ShipsViewModel().AddTo(this);
 			this.SlotItems = new SlotItemsViewModel().AddTo(this);
+
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(this.Ships)
+			{
+				{ nameof(this.Ships.Count), (sender, args) => this.RaisePropertyChanged(nameof(this.ShipsCountWarning)) }
+			});
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(this.SlotItems)
+			{
+				{ nameof(this.SlotItems.Count), (sender, args) => this.RaisePropertyChanged(nameof(this.SlotItemsCountWarning)) }
+			});
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleWrapper.KanColleClient.Current.Homeport)
+			{
+				{ nameof(KanColleWrapper.KanColleClient.Current.Homeport.Admiral), (sender, args) => {
+					this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleWrapper.KanColleClient.Current.Homeport.Admiral)
+					{
+						{ nameof(KanColleWrapper.KanColleClient.Current.Homeport.Admiral.MaxShipCount), (sender2, args2) => this.RaisePropertyChanged(nameof(this.ShipsCountWarning)) },
+						{ nameof(KanColleWrapper.KanColleClient.Current.Homeport.Admiral.MaxSlotItemCount), (sender2, args2) => this.RaisePropertyChanged(nameof(this.SlotItemsCountWarning)) }
+					});
+					this.RaisePropertyChanged(nameof(this.ShipsCountWarning));
+					this.RaisePropertyChanged(nameof(this.SlotItemsCountWarning));
+				} }
+			});
 
 			_AkashiTimer = new AkashiTimerViewModel();
 
