@@ -267,6 +267,7 @@
 												<x:Array Type="s:Int32">
 													<s:Int32>37</s:Int32>
 													<s:Int32>38</s:Int32>
+													<s:Int32>44</s:Int32>
 												</x:Array>
 											</metro2:CallMethodButton.MethodParameter>
 										</metro2:CallMethodButton>

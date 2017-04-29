@@ -186,16 +186,15 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		}
 		private static SlotItemIconType GetIconTypeInRange(SlotItemIconType source)
 		{
+			var z = SlotItemEquipTypeViewModel.IconAliasNamable.ContainsKey(source)
+						? SlotItemEquipTypeViewModel.IconAliasNamable[source]
+						: source;
+
 			var y = (Enum.GetValues(typeof(SlotItemIconType)) as int[])
-				.Any(x =>
-					x == (int) (
-						SlotItemEquipTypeViewModel.IconAliasNamable.ContainsKey(source)
-							? SlotItemEquipTypeViewModel.IconAliasNamable[source]
-							: source
-					)
-				);
+				.Any(x => x == (int) (z));
+
 			if (!y) return SlotItemIconType.Unknown;
-			return source;
+			return z;
 		}
 
 		public void SetSlotItemEquipType(int[] ids)

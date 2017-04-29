@@ -385,16 +385,34 @@
 				<TextBlock Grid.Row="0"
 						   Grid.Column="1">
 					<Run Text="{Binding Resources.Homeport_NoOfShips, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-					<Run Text="{Binding Ships.Count, Mode=OneWay}"
-						 Style="{StaticResource EmphaticRun}" />
+					<Run Text="{Binding Ships.Count, Mode=OneWay}">
+						<Run.Style>
+							<Style TargetType="{x:Type Run}" BasedOn="{StaticResource EmphaticRun}">
+								<Style.Triggers>
+									<DataTrigger Binding="{Binding ShipsCountWarning, Mode=OneWay}" Value="True">
+										<Setter Property="Foreground" Value="#FFCC3D3D" />
+									</DataTrigger>
+								</Style.Triggers>
+							</Style>
+						</Run.Style>
+					</Run>
 					<Run Text="/" />
 					<Run Text="{Binding Admiral.Model.MaxShipCount, Mode=OneWay}" />
 				</TextBlock>
 				<TextBlock Grid.Row="1"
 						   Grid.Column="1">
 					<Run Text="{Binding Resources.Homeport_NoOfEquipment, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-					<Run Text="{Binding SlotItems.Count, Mode=OneWay}"
-						 Style="{StaticResource EmphaticRun}" />
+					<Run Text="{Binding SlotItems.Count, Mode=OneWay}">
+						<Run.Style>
+							<Style TargetType="{x:Type Run}" BasedOn="{StaticResource EmphaticRun}">
+								<Style.Triggers>
+									<DataTrigger Binding="{Binding SlotItemsCountWarning, Mode=OneWay}" Value="True">
+										<Setter Property="Foreground" Value="#FFCC3D3D" />
+									</DataTrigger>
+								</Style.Triggers>
+							</Style>
+						</Run.Style>
+					</Run>
 					<Run Text="/" />
 					<Run Text="{Binding Admiral.Model.MaxSlotItemCount, Mode=OneWay}" />
 				</TextBlock>

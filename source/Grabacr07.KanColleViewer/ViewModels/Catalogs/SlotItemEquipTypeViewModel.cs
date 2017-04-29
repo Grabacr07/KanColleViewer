@@ -114,12 +114,13 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				{ SlotItemIconType.OffshoreResupply, "해상보급" },
 				{ SlotItemIconType.AmphibiousLandingCraft, "내화정" },
 				{ SlotItemIconType.LandBasedAttacker, "육상공격기" },
-				{ SlotItemIconType.LandBasedFighter, "국지전투기" },
+				{ SlotItemIconType.InterceptorFighter, "국지전투기" },
 				{ SlotItemIconType.JetPowerededBomber1, "분식폭격전투기" },
 				{ SlotItemIconType.JetPowerededBomber2, "분식폭격전투기" },
 				{ SlotItemIconType.TransportEquipment, "운송자재" },
 				{ SlotItemIconType.SubmarineEquipment, "잠수함장비" },
 				{ SlotItemIconType.SeaplaneFighter, "수상전투기" },
+				{ SlotItemIconType.LandBasedFighter, "육군전투기" },
 			};
 			IconAliasNamable = new Dictionary<SlotItemIconType, SlotItemIconType>
 			{

@@ -198,7 +198,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 局地戦闘機。
 		/// </summary>
-		LandBasedFighter = 38,
+		InterceptorFighter = 38,
 
 		/// <summary>
 		/// 噴式戦闘爆撃機
@@ -224,5 +224,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 水上戦闘機
 		/// </summary>
 		SeaplaneFighter = 43,
+
+		/// <summary>
+		/// 陸軍戦闘機
+		/// </summary>
+		LandBasedFighter = 44,
 	}
 }
