@@ -154,7 +154,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			if (this.Settings?.Dock == Dock.Right
 				|| this.Settings?.Dock == Dock.Left
 				|| this.Settings?.IsSplit
-                || this.Settings?.AlwaysTopView)
+				|| this.Settings?.AlwaysTopView)
 			{
 				this.TopView = Visibility.Visible;
 				this.BottomView = Visibility.Collapsed;
@@ -165,14 +165,23 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				this.BottomView = Visibility.Visible;
 			}
 
-            KanColleClient.Current.Proxy.ApiSessionSource
-                .TryParse()
-                .Where(x => !x.IsSuccess)
-                .Subscribe(x =>
-                {
-                    var text = $"서버에서 {x.RawData.api_result} 오류를 전달했습니다.";
-                    StatusService.Current.Set(text);
-                });
+			KanColleClient.Current.Proxy.api_start2
+				.TryParse()
+				.Subscribe(x => StatusService.Current.Set(Resources.StatusBar_Ready));
+
+			KanColleClient.Current.Proxy.ApiSessionSource
+				.Select(x =>
+				{
+					KanColleWrapper.Models.SvData result;
+					result = KanColleWrapper.Models.SvData.TryParse(x, out result) ? result : null;
+					return result;
+				})
+				.Where(x => x != null && !x.IsSuccess)
+				.Subscribe(x =>
+				{
+					var text = $"서버에서 {x.RawData.api_result} 오류를 전달했습니다.";
+					StatusService.Current.Set(text);
+				});
 		}
 
 
