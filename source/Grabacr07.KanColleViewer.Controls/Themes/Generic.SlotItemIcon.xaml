@@ -790,7 +790,7 @@
 				</Setter>
 			</Trigger>
 			<Trigger Property="Type"
-					 Value="LandBasedFighter">
+					 Value="InterceptorFighter">
 				<Setter Property="Template">
 					<Setter.Value>
 						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
@@ -937,6 +937,57 @@
 										  Height="110"
 										  Stretch="Uniform"
 										  VerticalAlignment="Top" />
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="SeaplaneFighter">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Data="M2,3L3,5,6,6V7L5,10,4,11,2,12v1l3,1,3-1V12L6,11,7,7,8,8v2l2,4V11l3,1V11h2l-2,5L1,17,0,18l5,3,6,1,8-1,6-2,5-2V16H18l-2,1V15l4-4,9,2h3v2l-1,4-3,1v1l2,1h3l2-2H33l-1-1,1-2V14h4l4,1h2l-2-2H39L29,11l4-2h6l3,1L41,8H38L36,7l1-7H36L33,4,32,6H28L22,4,20,3H18L16,5,11,4,10,5H8L7,2H6V4L3,3H2Z"
+										  Fill="#FF8BC595"
+										  HorizontalAlignment="Left"
+										  Width="215"
+										  Height="110"
+										  Stretch="Uniform"
+										  VerticalAlignment="Top" />
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="LandBasedFighter">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Data="M0,347L28 292 69 264 42 250 83 250 14 208 14 181 153 222 194 194 194 222 208 222 208 181 222 181 250 222 278 222 306 208 306 181 375 194 417 111 431 111 431 167 444 208 472 222 500 236 500 250 458 236 444 236 361 264 333 278 347 292 500 347 500 375 486 375 333 333 264 375 236 375 236 347 250 306 83 375 14 361 z"
+										  Fill="#FF9AEEA8"
+										  HorizontalAlignment="Left"
+										  Height="139"
+										  Stretch="Uniform"
+										  VerticalAlignment="Top"
+										  Width="235" />
+									<ed:RegularPolygon PointCount="6"
+													   InnerRadius="1"
+													   Stretch="Fill"
+													   Stroke="Black"
+													   StrokeThickness="2"
+													   Fill="#FF9AEEA8"
+													   Width="126"
+													   Height="146"
+													   HorizontalAlignment="Left"
+													   VerticalAlignment="Top"
+													   Margin="91.033,50.606,0,0" />
 								</Grid>
 							</Viewbox>
 						</ControlTemplate>
