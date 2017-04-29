@@ -57,7 +57,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		public KanColleWindowSettings Settings { get; }
 
 		public bool ShipsCountWarning => Admiral.Model.MaxShipCount - Ships.Count <= 5;
-		public bool SlotItemsCountWarning => Admiral.Model.MaxSlotItemCount - SlotItems.Count <= 5;
+		public bool SlotItemsCountWarning => Admiral.Model.MaxSlotItemCount - SlotItems.Count <= 20;
 
 		#region Vertical Visibility
 		private Visibility _Vertical;
