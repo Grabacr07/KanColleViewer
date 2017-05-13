@@ -292,6 +292,12 @@
 								<Run Text="{Binding Model.ResourceLimit, Mode=OneWay}"
 									 Style="{StaticResource EmphaticRun14}" />
 								<Run Text="까지" />
+
+								<Run Text="(" />
+								<Run Text="{Binding ResourceLimitRemaining, Mode=OneWay}"
+									 Style="{StaticResource EmphaticRun14}" />
+								<Run Text="남음" />
+								<Run Text=")" />
 								<LineBreak />
 								<Run Text="가구코인:" />
 								<Run Text="{Binding Model.FurnitureCoins, Mode=OneWay}"

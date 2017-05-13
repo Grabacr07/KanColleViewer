@@ -149,12 +149,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		public ShipSpeed Speed => ShipSpeedConverter.FromInt32(this.RawData.api_soku);
 
 		#region Fuel 変更通知プロパティ
-
 		private LimitedValue _Fuel;
-
-		/// <summary>
-		/// 燃料を取得します。
-		/// </summary>
 		public LimitedValue Fuel
 		{
 			get { return this._Fuel; }
@@ -165,13 +160,10 @@ namespace Grabacr07.KanColleWrapper.Models
 				this.RaisePropertyChanged("UsedFuel");
 			}
 		}
-
 		#endregion
 
 		#region Bull 変更通知プロパティ
-
 		private LimitedValue _Bull;
-
 		public LimitedValue Bull
 		{
 			get { return this._Bull; }
@@ -182,7 +174,6 @@ namespace Grabacr07.KanColleWrapper.Models
 				this.RaisePropertyChanged("UsedBull");
 			}
 		}
-
 		#endregion
 
 		#region Firepower 変更通知プロパティ
@@ -291,6 +282,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				this._ASW = value;
 				this.RaisePropertyChanged();
+				this.RaisePropertyChanged(nameof(this.OpeningASW));
 			}
 		}
 
@@ -466,6 +458,13 @@ namespace Grabacr07.KanColleWrapper.Models
 		}
 
 		#endregion
+
+		public int SlotsASW => this.Slots.Sum(x => x.Item.Info.ASW) + (this.ExSlot?.Item.Info.ASW ?? 0);
+		public int SumASW => this.ASW.Current + this.SlotsASW;
+
+		// 선제대잠 가능 여부
+		public bool OpeningASW => SumASW >= 100;
+
 
 		internal Ship(Homeport parent, kcsapi_ship2 rawData)
 			: base(rawData)

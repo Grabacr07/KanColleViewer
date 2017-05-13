@@ -16,8 +16,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		public string Name => "기항대";
 
 		#region AirBases 변경통지 프로퍼티
-		private AirBase[] _AirBases;
-		public AirBase[] AirBases
+		private Dictionary<int, Dictionary<int, AirBase>> _AirBases;
+		public Dictionary<int, Dictionary<int, AirBase>> AirBases
 		{
 			get { return this._AirBases; }
 			set
@@ -62,25 +62,26 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 					this.AirBases = x.Data.api_air_base?
 						.Select(y => new AirBase(y, homeport))
-						.ToArray();
+						.GroupBy(y => y.RawData.api_area_id)
+						.ToDictionary(y => y.Key, y => y.ToDictionary(z => z.RawData.api_rid, z => z));
 				});
 
 			// 기항대 상태 변경
-			proxy.ApiSessionSource
-				.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_air_corps/set_action")
+			proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_air_corps/set_action")
 				.TryParse< kcsapi_empty_result>()
 				.Where(x=>x.IsSuccess)
 				.Subscribe(x =>
 				{
 					int actionKind;
-					int base_id;
+					int area_id, base_id;
 
+					if (!int.TryParse(x.Request["api_area_id"], out area_id)) return;
 					if (!int.TryParse(x.Request["api_base_id"], out base_id)) return;
-					base_id--;
+					if (!this.AirBases.ContainsKey(area_id) || !this.AirBases[area_id].ContainsKey(base_id)) return;
 
 					if (!int.TryParse(x.Request["api_action_kind"], out actionKind)) return;
 
-					this.AirBases[base_id].UpdateActionKind((AirBaseAction)actionKind);
+					this.AirBases[area_id][base_id].UpdateActionKind((AirBaseAction)actionKind);
 					this.RaisePropertyChanged(nameof(this.AirBases));
 				});
 
@@ -90,12 +91,13 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				.Where(x => x.IsSuccess)
 				.Subscribe(x =>
 				{
-					int base_id;
+					int area_id, base_id;
 
+					if (!int.TryParse(x.Request["api_area_id"], out area_id)) return;
 					if (!int.TryParse(x.Request["api_base_id"], out base_id)) return;
-					base_id--;
+					if (!this.AirBases.ContainsKey(area_id) || !this.AirBases[area_id].ContainsKey(base_id)) return;
 
-					this.AirBases[base_id].Update(x.Data);
+					this.AirBases[area_id][base_id].Update(x.Data);
 					this.RaisePropertyChanged(nameof(this.AirBases));
 				});
 
@@ -105,12 +107,13 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				.Where(x => x.IsSuccess)
 				.Subscribe(x =>
 				{
-					int base_id;
+					int area_id, base_id;
 
+					if (!int.TryParse(x.Request["api_area_id"], out area_id)) return;
 					if (!int.TryParse(x.Request["api_base_id"], out base_id)) return;
-					base_id--;
+					if (!this.AirBases.ContainsKey(area_id) || !this.AirBases[area_id].ContainsKey(base_id)) return;
 
-					this.AirBases[base_id].Update(x.Data);
+					this.AirBases[area_id][base_id].Update(x.Data);
 					this.RaisePropertyChanged(nameof(this.AirBases));
 				});
 		}
