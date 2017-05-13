@@ -140,6 +140,9 @@
     <Compile Include="Models\Raw\kcsapi_airbase_corps.cs" />
     <Compile Include="Models\Raw\kcsapi_battle_midnight_battle.cs" />
     <Compile Include="Models\Raw\kcsapi_battle_midnight_sp_midnight.cs" />
+    <Compile Include="Models\Raw\kcsapi_combined_battle_midnight_battle.cs" />
+    <Compile Include="Models\Raw\kcsapi_combined_each_battle.cs" />
+    <Compile Include="Models\Raw\kcsapi_combined_each_midnight_battle.cs" />
     <Compile Include="Models\Raw\kcsapi_data_airbaseattack.cs" />
     <Compile Include="Models\Raw\kcsapi_data_enemyinfo.cs" />
     <Compile Include="Models\Raw\kcsapi_data_hougeki.cs" />
@@ -170,6 +173,7 @@
     <Compile Include="Models\Raw\kcsapi_remodel_slotlist_detail.cs" />
     <Compile Include="Models\Raw\kcsapi_slot_deprive.cs" />
     <Compile Include="Models\Raw\kcsapi_slot_exchange_index.cs" />
+    <Compile Include="Models\Raw\kcsapi_sortie_airbattle.cs" />
     <Compile Include="Models\Raw\kcsapi_sortie_battle.cs" />
     <Compile Include="Models\ResourceModel.cs" />
     <Compile Include="Models\ShipFitClass.cs" />
