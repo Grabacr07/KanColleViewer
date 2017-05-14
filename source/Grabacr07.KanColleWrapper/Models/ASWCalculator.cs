@@ -126,8 +126,11 @@ namespace Grabacr07.KanColleWrapper.Models
 			available_equips = master.SlotItems
 				.Where(x => x.Value.Id <= 500) // 501 부터는 심해서함 장비
 				.Where(x => available_equip_types.Contains(x.Value.Type))
-				.Select(x => x.Value);
-			require_type = require_type.Where(x => available_equip_types.Contains(x)).ToArray();
+				.Select(x => x.Value)
+				.ToArray();
+			require_type = require_type
+				.Where(x => available_equip_types.Contains(x))
+				.ToArray();
 
 			// 장착 가능 장비가 없는 경우 혹은 필수 장비가 항공기인데 탑재량이 없는 경우
 			if (available_equips.Count() == 0 || require_type.Count() == 0
@@ -148,7 +151,9 @@ namespace Grabacr07.KanColleWrapper.Models
 			else
 			{
 				// 대잠 낮은 장비순으로 (높은 순서지만 Stack 에서 Pop 되므로 거꾸로 해야한다)
-				var sorted_items = available_equips.OrderByDescending(x => x.ASW);
+				var sorted_items = available_equips
+					.OrderByDescending(x => x.ASW)
+					.ToArray();
 
 				// 장착 가능한 슬롯 수 만큼
 				Stack<SlotItemInfo>[] available_items = new Stack<SlotItemInfo>[ship.Info.SlotCount];
