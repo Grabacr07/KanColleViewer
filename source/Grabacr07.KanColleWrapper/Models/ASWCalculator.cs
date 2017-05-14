@@ -171,14 +171,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 					if (cur_asw >= require_asw)
 					{
-						if (ship.Slots.Any(x => require_type.Contains(x.Item.Info.Type)))
-							output.Add("선제 대잠 가능");
-
-						else
-						{
-							output.Add("선제 대잠 불가능");
-							output.Add("- 대잠 공격 필수 장비 누락");
-						}
+						output.Add("선제 대잠 가능");
 						output.Add("- 대잠 공격 필수 장비:");
 						for (var i = 0; i < require_type.Length; i++)
 							output.Add($"  * {require_type[i].GetName()}");
