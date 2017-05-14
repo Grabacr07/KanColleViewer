@@ -141,7 +141,9 @@ namespace Grabacr07.KanColleWrapper.Models
 				output.Add("선제 대잠 가능");
 				output.Add("- 대잠 공격 필수 장비:");
 				for (var i = 0; i < require_type.Length; i++)
-					output.Add($"  * {require_type[i].ToString()}");
+					output.Add($"  * {require_type[i].GetName()}");
+
+				goal_asw = require_asw = 0;
 			}
 			else
 			{
@@ -169,7 +171,14 @@ namespace Grabacr07.KanColleWrapper.Models
 
 					if (cur_asw >= require_asw)
 					{
-						output.Add("선제 대잠 가능");
+						if (ship.Slots.Any(x => require_type.Contains(x.Item.Info.Type)))
+							output.Add("선제 대잠 가능");
+
+						else
+						{
+							output.Add("선제 대잠 불가능");
+							output.Add("- 대잠 공격 필수 장비 누락");
+						}
 						output.Add("- 대잠 공격 필수 장비:");
 						for (var i = 0; i < require_type.Length; i++)
 							output.Add($"  * {require_type[i].GetName()}");
@@ -198,10 +207,20 @@ namespace Grabacr07.KanColleWrapper.Models
 				if (available_items[0].Count == 0)
 				{
 					output.Add("선제 대잠 불가능");
+					output.Add("- 대잠 공격 필수 장비:");
+					for (var i = 0; i < require_type.Length; i++)
+						output.Add($"  * {require_type[i].GetName()}");
 					output.Add("- 대잠 수치 부족");
 					output.Add($"- 함선 대잠 수치 {require_asw - last_asw} 증가 필요");
 				}
 			}
+
+			output.Add("");
+			output.Add("선제 대잠에 필요한 대잠 수치");
+			output.Add(" - 필요 대잠 수치");
+			output.Add($"  * {goal_asw}");
+			output.Add(" - 필요 장비 대잠 수치 합계");
+			output.Add($"  * {require_asw}");
 
 			return string.Join(Environment.NewLine, output.ToArray());
 		}
