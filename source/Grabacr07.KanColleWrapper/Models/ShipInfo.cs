@@ -130,6 +130,11 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public int SlotCount => this.RawData.api_slot_num;
 
+		/// <summary>
+		/// 함선 속도
+		/// </summary>
+		public ShipSpeed Speed => ShipSpeedConverter.FromInt32(this.RawData.api_soku);
+
 		#endregion
 
 		/// <summary>

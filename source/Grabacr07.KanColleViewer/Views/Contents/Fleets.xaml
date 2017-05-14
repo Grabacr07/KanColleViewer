@@ -65,7 +65,8 @@
 							   Grid.Row="0"
 							   Grid.RowSpan="2"
 							   HorizontalAlignment="Right"
-							   Margin="10,0,0,0">
+							   Margin="10,0,0,0"
+							   ToolTip="{Binding Ship.RequireASW, Mode=OneWay}">
 						<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
 							 FontSize="14">
 							<Run.Style>
@@ -256,7 +257,8 @@
 					</TextBlock>
 
 					<StackPanel Grid.Column="6"
-								Grid.RowSpan="2">
+								Grid.RowSpan="2"
+								Background="#01000000">
 						<kcvc:ColorIndicator Width="55"
 												LimitedValue="{Binding Ship.Fuel, Mode=OneWay}"
 												Height="6"
@@ -269,16 +271,66 @@
 												VerticalAlignment="Top" />
 
 						<StackPanel.ToolTip>
-							<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
-										Foreground="White">
-								<Run Text="{Binding Resources.Expedition_Except_Fuel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-								<Run Text="{Binding Ship.Fuel.Current, Mode=OneWay}" /><Run Text="/" /><Run Text="{Binding Ship.Fuel.Maximum, Mode=OneWay}" />
-								<Run Text="{Binding Ship.UsedFuel, Mode=OneWay, StringFormat={}({0} 소모)}" Foreground="Crimson"/>
-								<LineBreak />
-								<Run Text="{Binding Resources.Expedition_Except_Ammo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-								<Run Text="{Binding Ship.Bull.Current, Mode=OneWay}" /><Run Text="/" /><Run Text="{Binding Ship.Bull.Maximum, Mode=OneWay}" />
-								<Run Text="{Binding Ship.UsedBull, Mode=OneWay, StringFormat={}({0} 소모)}" Foreground="Crimson"/>
-							</TextBlock>
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="Auto" />
+								</Grid.ColumnDefinitions>
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+								</Grid.RowDefinitions>
+
+								<TextBlock Grid.Column="0"
+										   Grid.Row="0"
+										   Style="{DynamicResource DefaultTextStyleKey}"
+										   Text="{Binding Resources.Expedition_Expect_Fuel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+								<TextBlock Grid.Column="1"
+										   Grid.Row="0"
+										   Padding="4,0,0,0"
+										   Style="{DynamicResource DefaultTextStyleKey}">
+									<Run Text="{Binding Ship.Fuel.Current, Mode=OneWay}" />
+									<Run Text="/" />
+									<Run Text="{Binding Ship.Fuel.Maximum, Mode=OneWay}" />
+								</TextBlock>
+								<TextBlock Grid.Column="2"
+										   Grid.Row="0"
+										   Padding="4,0,0,0"
+										   Style="{DynamicResource DefaultTextStyleKey}"
+										   Foreground="Crimson"
+										   Text="{Binding Ship.UsedFuel, Mode=OneWay, StringFormat={}({0} 소모)}" />
+								<TextBlock Grid.Column="3"
+										   Grid.Row="0"
+										   Padding="8,0,0,0"
+										   Style="{DynamicResource DefaultTextStyleKey}"
+										   Text="{Binding Ship.FuelText}" />
+
+								<TextBlock Grid.Column="0"
+										   Grid.Row="1"
+										   Style="{DynamicResource DefaultTextStyleKey}"
+										   Text="{Binding Resources.Expedition_Expect_Ammo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+								<TextBlock Grid.Column="1"
+										   Grid.Row="1"
+										   Padding="4,0,0,0"
+										   Style="{DynamicResource DefaultTextStyleKey}">
+									<Run Text="{Binding Ship.Bull.Current, Mode=OneWay}" />
+									<Run Text="/" />
+									<Run Text="{Binding Ship.Bull.Maximum, Mode=OneWay}" />
+								</TextBlock>
+								<TextBlock Grid.Column="2"
+										   Grid.Row="1"
+										   Padding="4,0,0,0"
+										   Style="{DynamicResource DefaultTextStyleKey}"
+										   Foreground="Crimson"
+										   Text="{Binding Ship.UsedBull, Mode=OneWay, StringFormat={}({0} 소모)}" />
+								<TextBlock Grid.Column="3"
+										   Grid.Row="1"
+										   Padding="8,0,0,0"
+										   Style="{DynamicResource DefaultTextStyleKey}"
+										   Text="{Binding Ship.BullText}" />
+							</Grid>
 						</StackPanel.ToolTip>
 					</StackPanel>
 
@@ -297,7 +349,8 @@
 							<DataTemplate>
 								<Grid x:Name="Elements"
 									  ToolTip="{Binding Tooltip}"
-									  Background="Transparent">
+									  Background="Transparent"
+									  Margin="0,0,1,0">
 									<kcvc:SlotItemIcon x:Name="ItemIcon"
 													   Type="{Binding Item.Info.IconType}"
 													   Margin="3,0" />
@@ -438,6 +491,44 @@
 											</Path.Style>
 										</Path>
 									</Grid>
+									<TextBlock Background="#66000000"
+											   VerticalAlignment="Top"
+											   HorizontalAlignment="Right"
+											   Padding="1,-2,1,1"
+											   Width="Auto"
+											   Height="Auto"
+											   FontSize="10"
+											   FontWeight="Bold"
+											   Panel.ZIndex="1"
+											   Text="{Binding FitValueString}">
+										<TextBlock.Style>
+											<Style TargetType="{x:Type TextBlock}">
+												<Style.Triggers>
+													<DataTrigger Binding="{Binding FitValueString}" Value="">
+														<Setter Property="Visibility" Value="Collapsed" />
+													</DataTrigger>
+													<DataTrigger Binding="{Binding FitValue}" Value="-3">
+															<Setter Property="Foreground" Value="#ffa50a0a" />
+													</DataTrigger>
+													<DataTrigger Binding="{Binding FitValue}" Value="-2">
+														<Setter Property="Foreground" Value="#ffa50a0a" />
+													</DataTrigger>
+													<DataTrigger Binding="{Binding FitValue}" Value="-1">
+														<Setter Property="Foreground" Value="#ffa50a0a" />
+													</DataTrigger>
+													<DataTrigger Binding="{Binding FitValue}" Value="1">
+														<Setter Property="Foreground" Value="#ff62b5f5" />
+													</DataTrigger>
+													<DataTrigger Binding="{Binding FitValue}" Value="2">
+														<Setter Property="Foreground" Value="#ff62b5f5" />
+													</DataTrigger>
+													<DataTrigger Binding="{Binding FitValue}" Value="3">
+														<Setter Property="Foreground" Value="#ff62b5f5" />
+													</DataTrigger>
+												</Style.Triggers>
+											</Style>
+										</TextBlock.Style>
+									</TextBlock>
 
 									<TextBlock x:Name="ItemLevelBlock"
 												Foreground="White"
@@ -487,22 +578,22 @@
 									</DataTrigger>
 
 									<DataTrigger Binding="{Binding FitValue}" Value="-3">
-										<Setter TargetName="Elements" Property="Background" Value="#4Cff2020" />
+										<Setter TargetName="Elements" Property="Background" Value="#48a50a0a" />
 									</DataTrigger>
 									<DataTrigger Binding="{Binding FitValue}" Value="-2">
-										<Setter TargetName="Elements" Property="Background" Value="#3Dff6421" />
+										<Setter TargetName="Elements" Property="Background" Value="#44cc3b06" />
 									</DataTrigger>
 									<DataTrigger Binding="{Binding FitValue}" Value="-1">
-										<Setter TargetName="Elements" Property="Background" Value="#14ffda21" />
+										<Setter TargetName="Elements" Property="Background" Value="#22ffda21" />
 									</DataTrigger>
 									<DataTrigger Binding="{Binding FitValue}" Value="1">
-										<Setter TargetName="Elements" Property="Background" Value="#14575dab" />
+										<Setter TargetName="Elements" Property="Background" Value="#3D575dab" />
 									</DataTrigger>
 									<DataTrigger Binding="{Binding FitValue}" Value="2">
-										<Setter TargetName="Elements" Property="Background" Value="#3D5787ab" />
+										<Setter TargetName="Elements" Property="Background" Value="#525787ab" />
 									</DataTrigger>
 									<DataTrigger Binding="{Binding FitValue}" Value="3">
-										<Setter TargetName="Elements" Property="Background" Value="#4C57ab97" />
+										<Setter TargetName="Elements" Property="Background" Value="#5857ab7b" />
 									</DataTrigger>
 								</DataTemplate.Triggers>
 							</DataTemplate>
