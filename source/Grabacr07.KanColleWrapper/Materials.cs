@@ -206,7 +206,13 @@ namespace Grabacr07.KanColleWrapper
 			proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_air_corps/set_plane")
 				.TryParse<kcsapi_airbase_corps_set_plane>()
 				.Where(x => x.IsSuccess)
-				.Subscribe(x => this.Update(new int[] { this.Fuel, this.Ammunition, this.Steel, x.Data.api_after_bauxite }));
+				.Subscribe(x =>
+				{
+					if (x.Request["api_item_id"] == "-1") return;
+					if (x.Data.api_plane_info.Length >= 2) return;
+
+					this.Update(new int[] { this.Fuel, this.Ammunition, this.Steel, x.Data.api_after_bauxite });
+				});
 
 			proxy.api_req_kousyou_destroyship.TryParse<kcsapi_destroyship>().Subscribe(x => this.Update(x.Data.api_material));
 		}

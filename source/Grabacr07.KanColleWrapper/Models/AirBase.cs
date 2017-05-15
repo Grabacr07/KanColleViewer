@@ -36,6 +36,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				array[item.api_squadron_id - 1] = new AirBasePlane(item, homeport.Itemyard.SlotItems[item.api_slotid]);
 
 			this.Planes = array;
+			this.RaisePropertyChanged(nameof(this.Planes));
 			CalculateLandBased();
 		}
 		public void Update(kcsapi_airbase_corps_set_plane rawData)
@@ -47,6 +48,7 @@ namespace Grabacr07.KanColleWrapper.Models
 				array[item.api_squadron_id - 1] = new AirBasePlane(item, homeport.Itemyard.SlotItems[item.api_slotid]);
 
 			this.Planes = array;
+			this.RaisePropertyChanged(nameof(this.Planes));
 			CalculateLandBased();
 		}
 		public void Update(kcsapi_airbase_corps_supply rawData)
@@ -58,11 +60,14 @@ namespace Grabacr07.KanColleWrapper.Models
 				array[item.api_squadron_id - 1] = new AirBasePlane(item, homeport.Itemyard.SlotItems[item.api_slotid]);
 
 			this.Planes = array;
+			this.RaisePropertyChanged(nameof(this.Planes));
 			CalculateLandBased();
 		}
 		public void UpdateActionKind(AirBaseAction action)
 		{
 			this.RawData.api_action_kind = (int)action;
+			this.RaisePropertyChanged(nameof(this.ActionKind));
+
 			CalculateLandBased();
 		}
 
@@ -274,6 +279,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		public int LostCount => this.MaximumCount - this.CurrentCount;
 
 		public int Condition => this.RawData.api_cond;
+		public ConditionType ConditionIcon => (ConditionType)this.RawData.api_cond;
 
 		public AirBasePlane(kcsapi_plane_info rawData, SlotItem slotitem) : base(rawData)
 		{

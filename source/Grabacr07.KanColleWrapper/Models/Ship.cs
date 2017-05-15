@@ -149,12 +149,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		public ShipSpeed Speed => ShipSpeedConverter.FromInt32(this.RawData.api_soku);
 
 		#region Fuel 変更通知プロパティ
-
 		private LimitedValue _Fuel;
-
-		/// <summary>
-		/// 燃料を取得します。
-		/// </summary>
 		public LimitedValue Fuel
 		{
 			get { return this._Fuel; }
@@ -162,16 +157,14 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				this._Fuel = value;
 				this.RaisePropertyChanged();
-				this.RaisePropertyChanged("UsedFuel");
+				this.RaisePropertyChanged(nameof(this.UsedFuel));
+				this.RaisePropertyChanged(nameof(this.FuelText));
 			}
 		}
-
 		#endregion
 
 		#region Bull 変更通知プロパティ
-
 		private LimitedValue _Bull;
-
 		public LimitedValue Bull
 		{
 			get { return this._Bull; }
@@ -179,10 +172,10 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				this._Bull = value;
 				this.RaisePropertyChanged();
-				this.RaisePropertyChanged("UsedBull");
+				this.RaisePropertyChanged(nameof(this.UsedBull));
+				this.RaisePropertyChanged(nameof(this.BullText));
 			}
 		}
-
 		#endregion
 
 		#region Firepower 変更通知プロパティ
@@ -291,6 +284,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			{
 				this._ASW = value;
 				this.RaisePropertyChanged();
+				this.RaisePropertyChanged(nameof(this.OpeningASW));
 			}
 		}
 
@@ -397,11 +391,34 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
-		#region Used 의존변수
-
+		#region UsedFuel UsedBull / FuelText BullText
 		public int UsedFuel => (int)((this.Level <= 99 ? 1.0f : 0.85f) * (this.Fuel.Maximum - this.Fuel.Current));
 		public int UsedBull => (int)((this.Level <= 99 ? 1.0f : 0.85f) * (this.Bull.Maximum - this.Bull.Current));
 
+		public string FuelText
+		{
+			get
+			{
+				var perc = decimal.Ceiling((decimal)this.Fuel.Current / this.Fuel.Maximum * 10);
+				if (perc >= 8) return "패널티 없음";
+				else if (perc >= 4) return "명중·회피 감소";
+				else if (perc >= 1) return "명중·회피 격감";
+				else return "명중·회피 최소";
+			}
+		}
+		public string BullText
+		{
+			get
+			{
+				var perc = decimal.Ceiling((decimal)this.Bull.Current / this.Bull.Maximum * 10);
+				if (perc >= 5) return "패널티 없음";
+				else if (perc >= 4) return "80% 데미지";
+				else if (perc >= 3) return "60% 데미지";
+				else if (perc >= 2) return "40% 데미지";
+				else if (perc >= 1) return "20% 데미지";
+				else return "지근탄";
+			}
+		}
 		#endregion
 
 		/// <summary>
@@ -466,6 +483,20 @@ namespace Grabacr07.KanColleWrapper.Models
 		}
 
 		#endregion
+
+		public int SlotsASW => this.Slots.Sum(x => x.Item.Info.ASW) + (this.ExSlot?.Item.Info.ASW ?? 0);
+		public int SumASW => this.ASW.Current + this.SlotsASW;
+
+		// 선제대잠 가능 여부
+		public bool OpeningASW
+			=> this.Info.Id == 141 ? true // 이스즈改2
+				: this.Info.ShipType.Id == 1 ? SumASW >= 60 // 해방함
+				: this.Info.ShipType.Id == 7 && this.Speed == ShipSpeed.Slow ? SumASW >= 65 // 저속 경공모
+				: SumASW >= 100;
+
+		// 선제 대잠에 필요한 장비 추천
+		public string RequireASW
+			=> ASWCalculator.GetASWTooltip(this);
 
 		internal Ship(Homeport parent, kcsapi_ship2 rawData)
 			: base(rawData)

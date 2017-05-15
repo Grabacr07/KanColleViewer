@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace Grabacr07.KanColleWrapper.Models.Raw
 {
-    public class kcsapi_data_airbaseattack
-    {
-        public int api_base_id { get; set; }
-        public int[] api_stage_flag { get; set; }
-        public int[][] api_plane_from { get; set; }
-        public kcsapi_data_squadron_plane[] api_squadron_plane { get; set; }
-        public kcsapi_data_stage1 api_stage1 { get; set; }
-        public kcsapi_data_stage2 api_stage2 { get; set; }
-        public kcsapi_data_stage3 api_stage3 { get; set; }  // e のみのデータ
-    }
-    public class kcsapi_data_squadron_plane
-    {
-        public int api_mst_id { get; set; }
-        public int api_count { get; set; }
-    }
+	public class kcsapi_data_airbaseattack : kcsapi_data_kouku
+	{
+		public int api_base_id { get; set; }
+		public int[] api_stage_flag { get; set; }
+		public kcsapi_data_squadron_plane[] api_squadron_plane { get; set; }
+	}
+	public class kcsapi_data_airbase_injection : kcsapi_data_kouku
+	{
+		public kcsapi_data_squadron_plane[] api_air_base_data { get; set; }
+	}
+	public class kcsapi_data_squadron_plane
+	{
+		public int api_mst_id { get; set; }
+		public int api_count { get; set; }
+	}
 }

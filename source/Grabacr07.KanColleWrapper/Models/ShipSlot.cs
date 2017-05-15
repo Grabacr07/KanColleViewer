@@ -15,6 +15,16 @@ namespace Grabacr07.KanColleWrapper.Models
 		public bool IsAirplane => this.Item.Info.Type.IsNumerable();
 
 		public int FitValue => this.CalculateFit();
+		public string FitValueString
+		{
+			get
+			{
+				var fit = this.FitValue;
+				if (fit == 0) return "";
+				return (fit > 0 ? "+" : "-") + Math.Abs(fit);
+			}
+		}
+
 		public string Tooltip => this.Item.Info.Id == 0 ? null : this.Item.NameWithLevel + "\n\n" + this.Item.Info.ToolTipData;
 
 		public bool Equipped => this.Item != null && this.Item != SlotItem.Dummy;
@@ -49,23 +59,6 @@ namespace Grabacr07.KanColleWrapper.Models
 		}
 
 		private int CalculateFit()
-		{
-			ShipFitClass shipClass = ShipFitClassUtil.FromShipInfo(this.Owner);
-			if (shipClass == ShipFitClass.NA) return 0;
-
-			var itemInfo = this.Item.Info;
-			switch (itemInfo.Type)
-			{
-				case SlotItemType.大口径主砲: // 대구경주포
-					if (!ShipFitClassUtil.FitTable_Heavy.ContainsKey(itemInfo.Id)) return 0; // 데이터 없음
-					return ShipFitClassUtil.FitTable_Heavy[itemInfo.Id]
-						?[shipClass] ?? 0;
-				case SlotItemType.中口径主砲: // 중구경주포
-					if (!ShipFitClassUtil.FitTable_Medium.ContainsKey(itemInfo.Id)) return 0; // 데이터 없음
-					return ShipFitClassUtil.FitTable_Medium[itemInfo.Id]
-						?[shipClass] ?? 0;
-			}
-			return 0;
-		}
+			=> ShipFitClassUtil.GetFit(this.Owner.Id, this.Item.Info.Id);
 	}
 }

@@ -428,14 +428,18 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			RaisePropertyChanged("DisplayPeriod");
 
 			var client = KanColleClient.Current;
-			CurrentFuel = 0;
-			CurrentAmmo = 0;
-			CurrentSteel = 0;
-			CurrentBauxite = 0;
-			CurrentRepairBucket = 0;
-			CurrentInstantConstruction = 0;
-			CurrentDevelopmentMaterial = 0;
-			CurrentImprovementMaterial = 0;
+			{
+				var materials = KanColleClient.Current.Homeport?.Materials;
+
+				CurrentFuel = materials?.Fuel ?? 0;
+				CurrentAmmo = materials?.Ammunition ?? 0;
+				CurrentSteel = materials?.Steel ?? 0;
+				CurrentBauxite = materials?.Bauxite ?? 0;
+				CurrentRepairBucket = materials?.InstantRepairMaterials ?? 0;
+				CurrentInstantConstruction = materials?.InstantBuildMaterials ?? 0;
+				CurrentDevelopmentMaterial = materials?.DevelopmentMaterials ?? 0;
+				CurrentImprovementMaterial = materials?.ImprovementMaterials ?? 0;
+			}
 
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(client)
 			{

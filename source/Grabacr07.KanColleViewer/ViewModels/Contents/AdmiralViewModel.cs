@@ -14,11 +14,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 {
 	public class AdmiralViewModel : ViewModel
 	{
-		#region Model 変更通知プロパティ
+		private int MinArray(params int[] values)
+			=> values.Min();
 
 		public Admiral Model => KanColleClient.Current.Homeport.Admiral;
-
-		#endregion
 
 		#region ToolTip 변경 통지 프로퍼티
 		private string _ToolTip;
@@ -51,6 +50,22 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 		}
 		#endregion
 
+		#region ResourceLimitRemaining 변경 통지 프로퍼티
+		private string _ResourceLimitRemaining;
+		public string ResourceLimitRemaining
+		{
+			get { return this._ResourceLimitRemaining; }
+			set
+			{
+				if (this._ResourceLimitRemaining != value)
+				{
+					this._ResourceLimitRemaining = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
+
 		public static HQRecord Record;
 
 		public AdmiralViewModel()
@@ -60,12 +75,23 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			Record = new HQRecord();
 			Record.Load();
 
-			this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport)
+			var homeport = KanColleClient.Current.Homeport;
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(homeport)
 			{
-				{ nameof(Homeport.Admiral), (sender, args) => this.Update() },
-				{ nameof(Homeport.Admiral), (sender, args) => Record.Updated() },
+				{ nameof(homeport.Admiral), (sender, args) => {
+					this.Update();
+					Record.Updated();
+				} }
+			});
+			this.CompositeDisposable.Add(new PropertyChangedEventListener(homeport.Materials)
+			{
+				{ nameof(homeport.Materials.Fuel), (sender, args) => this.UpdateResource() },
+				{ nameof(homeport.Materials.Ammunition), (sender, args) => this.UpdateResource() },
+				{ nameof(homeport.Materials.Steel), (sender, args) => this.UpdateResource() },
+				{ nameof(homeport.Materials.Bauxite), (sender, args) => this.UpdateResource() },
 			});
 
+			#region Server List
 			var servers = new Dictionary<string, string>
 			{
 				{ "125.6.184.15", "(구) 구레 진수부" },
@@ -90,6 +116,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 				{ "203.104.209.55", "사이키만 정박지" },
 				{ "203.104.209.102", "하시라지마 정박지" }
 			};
+			#endregion
 
 			KanColleClient.Current.Proxy.api_port
 				.Subscribe(x =>
@@ -125,6 +152,32 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			}
 			ToolTip = tooltip.ToString();
 			this.RaisePropertyChanged(nameof(this.Model));
+		}
+		private void UpdateResource()
+		{
+			var homeport = KanColleClient.Current.Homeport;
+			var goal = this.Model.ResourceLimit;
+
+			var times = new int[]
+			{
+				(goal - homeport.Materials.Fuel + 2) / 3 * 3,
+				(goal - homeport.Materials.Ammunition + 2) / 3 * 3,
+				(goal - homeport.Materials.Steel + 2) / 3 * 3,
+				(goal - homeport.Materials.Bauxite + 2) / 3 * 1
+			};
+			if (!times.Any(x => x < 0))
+			{
+				ResourceLimitRemaining = "--일 --시간 --분"; // 자연회복 없음
+				return;
+			}
+
+			var time = times.Max();
+			ResourceLimitRemaining = string.Format(
+				"{0}일 {1:D2}시간 {2:D2}분",
+				time / 60 / 24,
+				(time / 60) % 24,
+				time % 60
+			);
 		}
 	}
 }
