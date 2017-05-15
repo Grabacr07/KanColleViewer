@@ -129,10 +129,11 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models
 
 			// 출격 (시작, 진격)
 			proxy.api_req_map_start.TryParse<kcsapi_map_start>()
-				.Subscribe(x => Preprocess(() => MapInfo.Reset(x.Data.api_maparea_id, x.Data.api_mapinfo_no, x.Data.api_no)));
+				.Subscribe(x => Preprocess(() => MapInfo.Reset(x.Data.api_maparea_id, x.Data.api_mapinfo_no, x.Data.api_no, x.Data.api_event_id == 5)));
 			proxy.api_req_map_next.TryParse<kcsapi_map_start>()
-				.Subscribe(x => Preprocess(() => MapInfo.Next(x.Data.api_maparea_id, x.Data.api_mapinfo_no, x.Data.api_no)));
+				.Subscribe(x => Preprocess(() => MapInfo.Next(x.Data.api_maparea_id, x.Data.api_mapinfo_no, x.Data.api_no, x.Data.api_event_id == 5)));
 
+			#region 전투
 			// 통상 - 주간전
 			proxy.api_req_sortie_battle.TryParse<kcsapi_sortie_battle>()
 				.Subscribe(x => Preprocess(() => battleTracker.BattleProcess(x.Data)));
@@ -146,6 +147,67 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models
 			proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_battle_midnight/sp_midnight")
 				.TryParse<kcsapi_battle_midnight_sp_midnight>()
 				.Subscribe(x => Preprocess(() => battleTracker.BattleProcess(x.Data)));
+
+			// 통상 - 항공전
+			proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_sortie/airbattle")
+				.TryParse<kcsapi_sortie_airbattle>()
+				.Subscribe(x => Preprocess(() => battleTracker.BattleProcess(x.Data)));
+
+			// 통상 - 공습전
+			proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_sortie/ld_airbattle")
+				.TryParse<kcsapi_sortie_airbattle>()
+				.Subscribe(x => Preprocess(() => battleTracker.BattleProcess(x.Data)));
+
+			// 연합 - 주간전 (기동/수송)
+			proxy.api_req_combined_battle_battle
+				.TryParse<kcsapi_combined_battle>()
+				.Subscribe(x => Preprocess(() => battleTracker.BattleProcess(x.Data)));
+
+			// 연합 - 주간전 (수상)
+			proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_combined_battle/battle_water")
+				.TryParse<kcsapi_combined_battle>()
+				.Subscribe(x => Preprocess(() => battleTracker.BattleProcess(x.Data)));
+
+			// 단일vs연합 - 주간전
+			proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_combined_battle/ec_battle")
+				.TryParse<kcsapi_combined_each_battle>()
+				.Subscribe(x => Preprocess(() => battleTracker.BattleProcess(x.Data, false)));
+
+			// 연합vs연합 - 주간전 (기동/수송)
+			proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_combined_battle/each_battle")
+				.TryParse<kcsapi_combined_each_battle>()
+				.Subscribe(x => Preprocess(() => battleTracker.BattleProcess(x.Data, true)));
+
+			// 연합vs연합 - 주간전 (수상)
+			proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_combined_battle/each_battle_water")
+				.TryParse<kcsapi_combined_each_battle>()
+				.Subscribe(x => Preprocess(() => battleTracker.BattleProcess(x.Data, true)));
+
+			// 연합 - 항공전
+			proxy.api_req_combined_battle_airbattle
+				.TryParse<kcsapi_combined_battle_airbattle>()
+				.Subscribe(x => Preprocess(() => battleTracker.BattleProcess(x.Data)));
+
+			// 연합 - 공습전
+			proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_combined_battle/ld_airbattle")
+				.TryParse<kcsapi_combined_battle_airbattle>()
+				.Subscribe(x => Preprocess(() => battleTracker.BattleProcess(x.Data)));
+
+			// 연합 - 야전
+			proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_combined_battle/midnight_battle")
+				.TryParse<kcsapi_combined_battle_midnight_battle>()
+				.Subscribe(x => Preprocess(() => battleTracker.BattleProcess(x.Data)));
+
+			// 연합 - 개막야전
+			proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_combined_battle/sp_midnight")
+				.TryParse<kcsapi_combined_battle_midnight_battle>()
+				.Subscribe(x => Preprocess(() => battleTracker.BattleProcess(x.Data)));
+
+			// 연합vs연합 - 야전
+			proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_combined_battle/ec_midnight_battle")
+				.TryParse<kcsapi_combined_each_midnight_battle>()
+				.Subscribe(x => Preprocess(() => battleTracker.BattleProcess(x.Data)));
+			#endregion
 
 			// 전투 종료 (연합함대 포함)
 			proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>()
