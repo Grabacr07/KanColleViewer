@@ -172,7 +172,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		}
 
 
-		private void UpdateFleets()
+		private async void UpdateFleets()
 		{
 			this.fleetListeners?.Dispose();
 			this.fleetListeners = new MultipleDisposable();
@@ -206,22 +206,21 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			this.Fleets2 = result.ToArray();
 
 			// SelectedFleet 이 무시되는 현상. 이유는 불명.
-			new System.Threading.Thread(() =>
-			{
-				System.Threading.Thread.Sleep(200);
+			await Task.Delay(200);
 
-				if (!this.Fleets2.Any(x => x == this.SelectedFleet))
-					this.SelectedFleet = this.Fleets2.FirstOrDefault();
-			}).Start();
+			if (!this.Fleets2.Any(x => x == this.SelectedFleet))
+				this.SelectedFleet = this.Fleets2.FirstOrDefault();
+
+			// 연합 함대인 경우 메모리 정리...
+			if (KanColleClient.Current.Homeport.Organization.Combined)
+				GCWorker.GCRequest();
 		}
 
 		private CombinedFleetViewModel combinedFleetInstance;
 		private CombinedFleetViewModel MakeCombinedFleetViewModel(CombinedFleet fleet)
 		{
 			if (combinedFleetInstance == null || combinedFleetInstance.Source != fleet)
-			{
 				combinedFleetInstance = new CombinedFleetViewModel(fleet);
-			}
 
 			return combinedFleetInstance;
 		}
