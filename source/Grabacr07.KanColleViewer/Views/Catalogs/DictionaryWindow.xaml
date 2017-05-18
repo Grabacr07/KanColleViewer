@@ -13,7 +13,6 @@
 				   xmlns:metro_controls="clr-namespace:MetroRadiance.UI.Controls;assembly=MetroRadiance"
 				   xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 				   xmlns:metro2="http://schemes.grabacr.net/winfx/2015/personal/controls"
-				   xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 				   xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
 				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Catalogs"
 				   xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
@@ -21,6 +20,8 @@
 				   xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
 				   xmlns:vm="clr-namespace:Grabacr07.KanColleViewer.ViewModels"
 				   xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
+				   xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+				   xmlns:converters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters"
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:DictionaryViewModel}"
 				   Title="{Binding Title}"
@@ -34,7 +35,18 @@
 				   TextOptions.TextFormattingMode="Display">
 	<Window.Resources>
 		<ResourceDictionary>
+			<ObjectDataProvider xmlns:sys="clr-namespace:System;assembly=mscorlib"
+								xmlns:linq="clr-namespace:System.Linq;assembly=System.Core"
+								x:Key="EnumerableRange"
+								ObjectType="{x:Type linq:Enumerable}" MethodName="Range">
+				<ObjectDataProvider.MethodParameters>
+					<sys:Int32>1</sys:Int32>
+					<sys:Int32>155</sys:Int32>
+				</ObjectDataProvider.MethodParameters>
+			</ObjectDataProvider>
+
 			<BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
+			<converters:RangeToBooleanConverter x:Key="RangeToBooleanConverter" />
 		</ResourceDictionary>
 	</Window.Resources>
 
@@ -126,13 +138,13 @@
 										 ItemsSource="{Binding ShipList}"
 										 SelectedValue="{Binding SelectedShip}"
 										 SelectionMode="Single"
+										 Grid.IsSharedSizeScope="True"
 										 ScrollViewer.IsDeferredScrollingEnabled="True"
 										 VirtualizingStackPanel.IsVirtualizing="True"
 										 VirtualizingStackPanel.VirtualizationMode="Recycling">
 									<ListBox.ItemContainerStyle>
 										<Style TargetType="{x:Type ListBoxItem}">
 											<Setter Property="Foreground" Value="{DynamicResource ActiveForegroundBrushKey}" />
-											<Setter Property="Height" Value="22" />
 											<Setter Property="IsSelected" Value="{Binding IsSelected, Mode=OneWay}" />
 											<Setter Property="Template">
 												<Setter.Value>
@@ -158,13 +170,40 @@
 									</ListBox.ItemContainerStyle>
 									<ListBox.ItemTemplate>
 										<DataTemplate DataType="{x:Type metro_controls:ITabItem}">
-											<TextBlock Margin="5,0"
-													   FontSize="13"
-													   VerticalAlignment="Center"
-													   TextTrimming="CharacterEllipsis">
-												<Run Text="{Binding Id, Mode=OneWay, StringFormat={}No.{0}}" FontSize="10" />
-												<Run Text="{Binding Name, Mode=OneWay}" />
-											</TextBlock>
+											<Grid Margin="3">
+												<Grid.ColumnDefinitions>
+													<ColumnDefinition Width="Auto" SharedSizeGroup="IdType" />
+													<ColumnDefinition Width="*" />
+												</Grid.ColumnDefinitions>
+												<Grid.RowDefinitions>
+													<RowDefinition Height="Auto" />
+													<RowDefinition Height="Auto" />
+												</Grid.RowDefinitions>
+
+												<TextBlock Grid.Column="0"
+														   Grid.Row="0"
+														   Margin="3,0"
+														   VerticalAlignment="Bottom"
+														   Style="{StaticResource DetailTextStyleKey}"
+														   FontSize="8"
+														   Text="{Binding Id, Mode=OneWay, StringFormat={}No.{0}}" />
+												<TextBlock Grid.Column="0"
+														   Grid.Row="1"
+														   Margin="3,0"
+														   VerticalAlignment="Top"
+														   Style="{StaticResource EmphaticTextStyleKey}"
+														   FontSize="10"
+														   Text="{Binding ShipType, Mode=OneWay}" />
+
+												<TextBlock Grid.Column="1"
+														   Grid.RowSpan="2"
+														   Margin="5,1,3,1"
+														   Style="{StaticResource EmphaticTextStyleKey}"
+														   FontSize="14"
+														   VerticalAlignment="Center"
+														   TextTrimming="CharacterEllipsis"
+														   Text="{Binding Name, Mode=OneWay}" />
+											</Grid>
 										</DataTemplate>
 									</ListBox.ItemTemplate>
 									<ListBox.ItemsPanel>
@@ -185,6 +224,7 @@
 							<ScrollViewer Grid.Column="1"
 										  VerticalScrollBarVisibility="Auto">
 								<StackPanel Orientation="Vertical"
+											Margin="0,0,0,10"
 											DataContext="{Binding SelectedShip, Mode=OneWay}">
 									<StackPanel.Style>
 										<Style TargetType="{x:Type StackPanel}">
@@ -229,8 +269,50 @@
 
 									<StackPanel Orientation="Vertical"
 												Margin="8,10,0,0">
-										<TextBlock Foreground="White"
-												   Text="스테이터스" />
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="*" />
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="Auto" />
+											</Grid.ColumnDefinitions>
+
+											<TextBlock Foreground="White"
+													   VerticalAlignment="Center"
+													   Text="스테이터스" />
+
+											<TextBlock Margin="0,0,4,0"
+													   Grid.Column="1"
+													   VerticalAlignment="Center"
+													   FontSize="12"
+													   Foreground="#FFF08020"
+													   Text="레벨:" />
+											<metro:PromptComboBox Grid.Column="2"
+																  Margin="8"
+																  VerticalAlignment="Center"
+																  ItemsSource="{Binding Source={StaticResource EnumerableRange}}"
+																  HorizontalAlignment="Left"
+																  SelectedValue="{Binding Level, Mode=TwoWay}"
+																  IsReadOnly="True"
+																  Prompt=""
+																  MinWidth="72">
+												<metro:PromptComboBox.ItemTemplate>
+													<DataTemplate>
+														<TextBlock Text="{Binding}">
+															<TextBlock.Style>
+																<Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource DefaultTextStyleKey}">
+																	<Style.Triggers>
+																		<DataTrigger Binding="{Binding Path=., Converter={StaticResource RangeToBooleanConverter}, ConverterParameter=100-999}" Value="True">
+																			<Setter Property="Foreground" Value="#FFFFC7D3" />
+																		</DataTrigger>
+																	</Style.Triggers>
+																</Style>
+															</TextBlock.Style>
+														</TextBlock>
+													</DataTemplate>
+												</metro:PromptComboBox.ItemTemplate>
+											</metro:PromptComboBox>
+										</Grid>
+
 										<Grid Margin="8,5,0,0">
 											<Grid.ColumnDefinitions>
 												<ColumnDefinition Width="Auto" />
@@ -269,16 +351,36 @@
 											<TextBlock Grid.Column="2"
 													   Grid.Row="0"
 													   Foreground="#5cccf8">
-												<TextBlock.Style>
-													<Style TargetType="{x:Type TextBlock}">
-														<Setter Property="Text" Value="{Binding HP, Mode=OneWay}" />
-														<Style.Triggers>
-															<DataTrigger Binding="{Binding HP, Mode=OneWay}" Value="-1">
-																<Setter Property="Text" Value="???" />
-															</DataTrigger>
-														</Style.Triggers>
-													</Style>
-												</TextBlock.Style>
+												<Run>
+													<Run.Style>
+														<Style TargetType="{x:Type Run}">
+															<Setter Property="Text" Value="{Binding CurHP, Mode=OneWay}" />
+															<Style.Triggers>
+																<DataTrigger Binding="{Binding CurHP, Mode=OneWay}" Value="-1">
+																	<Setter Property="Text" Value="???" />
+																</DataTrigger>
+															</Style.Triggers>
+														</Style>
+													</Run.Style>
+												</Run>
+
+												<InlineUIContainer>
+													<TextBlock Foreground="#FFF08020">
+														<Run Text="  (" />
+														<Run Text="{Binding MarriageHPResult, Mode=OneWay, StringFormat={}+{0}}" />
+														<Run Text=")" />
+
+														<TextBlock.Style>
+															<Style TargetType="{x:Type TextBlock}">
+																<Style.Triggers>
+																	<DataTrigger Binding="{Binding MarriageHPResult, Mode=OneWay}" Value="0">
+																		<Setter Property="Visibility" Value="Collapsed" />
+																	</DataTrigger>
+																</Style.Triggers>
+															</Style>
+														</TextBlock.Style>
+													</TextBlock>
+												</InlineUIContainer>
 											</TextBlock>
 
 											<Image Grid.Column="3"
@@ -319,6 +421,21 @@
 														</Style>
 													</Run.Style>
 												</Run>
+
+												<Run Text="  (" Foreground="#FFF08020" />
+												<Run Foreground="#FFF08020">
+													<Run.Style>
+														<Style TargetType="{x:Type Run}">
+															<Setter Property="Text" Value="{Binding CurArmor, Mode=OneWay}" />
+															<Style.Triggers>
+																<DataTrigger Binding="{Binding CurArmor, Mode=OneWay}" Value="-1">
+																	<Setter Property="Text" Value="???" />
+																</DataTrigger>
+															</Style.Triggers>
+														</Style>
+													</Run.Style>
+												</Run>
+												<Run Text=")" Foreground="#FFF08020" />
 											</TextBlock>
 
 											<Image Grid.Column="0"
@@ -361,6 +478,21 @@
 														</Style>
 													</Run.Style>
 												</Run>
+
+												<Run Text="  (" Foreground="#FFF08020" />
+												<Run Foreground="#FFF08020">
+													<Run.Style>
+														<Style TargetType="{x:Type Run}">
+															<Setter Property="Text" Value="{Binding CurEvasion, Mode=OneWay}" />
+															<Style.Triggers>
+																<DataTrigger Binding="{Binding CurEvasion, Mode=OneWay}" Value="-1">
+																	<Setter Property="Text" Value="???" />
+																</DataTrigger>
+															</Style.Triggers>
+														</Style>
+													</Run.Style>
+												</Run>
+												<Run Text=")" Foreground="#FFF08020" />
 											</TextBlock>
 
 											<Image Grid.Column="3"
@@ -437,6 +569,21 @@
 														</Style>
 													</Run.Style>
 												</Run>
+
+												<Run Text="  (" Foreground="#FFF08020" />
+												<Run Foreground="#FFF08020">
+													<Run.Style>
+														<Style TargetType="{x:Type Run}">
+															<Setter Property="Text" Value="{Binding CurFire, Mode=OneWay}" />
+															<Style.Triggers>
+																<DataTrigger Binding="{Binding CurFire, Mode=OneWay}" Value="-1">
+																	<Setter Property="Text" Value="???" />
+																</DataTrigger>
+															</Style.Triggers>
+														</Style>
+													</Run.Style>
+												</Run>
+												<Run Text=")" Foreground="#FFF08020" />
 											</TextBlock>
 
 											<Image Grid.Column="3"
@@ -477,6 +624,21 @@
 														</Style>
 													</Run.Style>
 												</Run>
+
+												<Run Text="  (" Foreground="#FFF08020" />
+												<Run Foreground="#FFF08020">
+													<Run.Style>
+														<Style TargetType="{x:Type Run}">
+															<Setter Property="Text" Value="{Binding CurTorpedo, Mode=OneWay}" />
+															<Style.Triggers>
+																<DataTrigger Binding="{Binding CurTorpedo, Mode=OneWay}" Value="-1">
+																	<Setter Property="Text" Value="???" />
+																</DataTrigger>
+															</Style.Triggers>
+														</Style>
+													</Run.Style>
+												</Run>
+												<Run Text=")" Foreground="#FFF08020" />
 											</TextBlock>
 
 											<Image Grid.Column="0"
@@ -519,6 +681,21 @@
 														</Style>
 													</Run.Style>
 												</Run>
+
+												<Run Text="  (" Foreground="#FFF08020" />
+												<Run Foreground="#FFF08020">
+													<Run.Style>
+														<Style TargetType="{x:Type Run}">
+															<Setter Property="Text" Value="{Binding CurAA, Mode=OneWay}" />
+															<Style.Triggers>
+																<DataTrigger Binding="{Binding CurAA, Mode=OneWay}" Value="-1">
+																	<Setter Property="Text" Value="???" />
+																</DataTrigger>
+															</Style.Triggers>
+														</Style>
+													</Run.Style>
+												</Run>
+												<Run Text=")" Foreground="#FFF08020" />
 											</TextBlock>
 
 											<Image Grid.Column="3"
@@ -561,6 +738,21 @@
 														</Style>
 													</Run.Style>
 												</Run>
+
+												<Run Text="  (" Foreground="#FFF08020" />
+												<Run Foreground="#FFF08020">
+													<Run.Style>
+														<Style TargetType="{x:Type Run}">
+															<Setter Property="Text" Value="{Binding CurASW, Mode=OneWay}" />
+															<Style.Triggers>
+																<DataTrigger Binding="{Binding CurASW, Mode=OneWay}" Value="-1">
+																	<Setter Property="Text" Value="???" />
+																</DataTrigger>
+															</Style.Triggers>
+														</Style>
+													</Run.Style>
+												</Run>
+												<Run Text=")" Foreground="#FFF08020" />
 											</TextBlock>
 
 											<Border Grid.ColumnSpan="6"
@@ -639,6 +831,21 @@
 														</Style>
 													</Run.Style>
 												</Run>
+
+												<Run Text="  (" Foreground="#FFF08020" />
+												<Run Foreground="#FFF08020">
+													<Run.Style>
+														<Style TargetType="{x:Type Run}">
+															<Setter Property="Text" Value="{Binding CurLOS, Mode=OneWay}" />
+															<Style.Triggers>
+																<DataTrigger Binding="{Binding CurLOS, Mode=OneWay}" Value="-1">
+																	<Setter Property="Text" Value="???" />
+																</DataTrigger>
+															</Style.Triggers>
+														</Style>
+													</Run.Style>
+												</Run>
+												<Run Text=")" Foreground="#FFF08020" />
 											</TextBlock>
 
 											<Image Grid.Column="3"
@@ -659,9 +866,9 @@
 												<Run>
 													<Run.Style>
 														<Style TargetType="{x:Type Run}">
-															<Setter Property="Text" Value="{Binding MinLuck, Mode=OneWay}" />
+															<Setter Property="Text" Value="{Binding CurLuck, Mode=OneWay}" />
 															<Style.Triggers>
-																<DataTrigger Binding="{Binding MinLuck, Mode=OneWay}" Value="-1">
+																<DataTrigger Binding="{Binding CurLuck, Mode=OneWay}" Value="-1">
 																	<Setter Property="Text" Value="???" />
 																</DataTrigger>
 															</Style.Triggers>
@@ -706,7 +913,7 @@
 													   Foreground="#ff7878">
 												<TextBlock.Style>
 													<Style TargetType="{x:Type TextBlock}">
-														<Setter Property="Text" Value="{Binding MaxFuel, Mode=OneWay}" />
+														<Setter Property="Text" Value="{Binding CurMaxFuel, Mode=OneWay}" />
 														<Style.Triggers>
 															<DataTrigger Binding="{Binding MaxFuel, Mode=OneWay}" Value="-1">
 																<Setter Property="Text" Value="???" />
@@ -733,7 +940,7 @@
 													   Foreground="#ff7878">
 												<TextBlock.Style>
 													<Style TargetType="{x:Type TextBlock}">
-														<Setter Property="Text" Value="{Binding MaxAmmo, Mode=OneWay}" />
+														<Setter Property="Text" Value="{Binding CurMaxAmmo, Mode=OneWay}" />
 														<Style.Triggers>
 															<DataTrigger Binding="{Binding MaxAmmo, Mode=OneWay}" Value="-1">
 																<Setter Property="Text" Value="???" />
@@ -789,6 +996,9 @@
 																<kcvc:SlotItemIcon.Style>
 																	<Style TargetType="{x:Type kcvc:SlotItemIcon}">
 																		<Style.Triggers>
+																			<DataTrigger Binding="{Binding Info.Id, Mode=OneWay}" Value="0">
+																				<Setter Property="Visibility" Value="Hidden" />
+																			</DataTrigger>
 																			<DataTrigger Binding="{Binding Available, Mode=OneWay}" Value="False">
 																				<Setter Property="Visibility" Value="Collapsed" />
 																			</DataTrigger>
@@ -805,9 +1015,13 @@
 																		<Setter Property="Foreground" Value="#f0f0f0" />
 
 																		<Style.Triggers>
-																			<DataTrigger Binding="{Binding Info.Name, Mode=OneWay}" Value="{x:Null}">
-																				<Setter Property="Text" Value="알 수 없는 장비입니다." />
+																			<DataTrigger Binding="{Binding Info.Id, Mode=OneWay}" Value="0">
+																				<Setter Property="Text" Value="비어있는 슬롯입니다." />
 																				<Setter Property="Foreground" Value="#c2f0f0f0" />
+																			</DataTrigger>
+																			<DataTrigger Binding="{Binding Info.Name, Mode=OneWay}" Value="{x:Null}">
+																				<Setter Property="Text" Value="알 수 없는 장비" />
+																				<Setter Property="Foreground" Value="#58f0f0f0" />
 																			</DataTrigger>
 																			<DataTrigger Binding="{Binding Available, Mode=OneWay}" Value="False">
 																				<Setter Property="Text" Value="존재하지 않는 슬롯입니다." />
@@ -832,162 +1046,336 @@
 												Margin="8,20,0,0">
 										<TextBlock Foreground="White"
 												   Text="근대화개수 / 해체" />
-										<StackPanel Margin="8,5,0,0"
-													Orientation="Horizontal">
-											<StackPanel Orientation="Horizontal">
+
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="Auto" />
+											</Grid.ColumnDefinitions>
+											<Grid.RowDefinitions>
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+											</Grid.RowDefinitions>
+
+											<StackPanel Orientation="Horizontal"
+														Margin="4,3"
+														Grid.Column="0"
+														Grid.Row="0">
 												<Image Width="18"
 													   Height="18"
 													   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/fire.png" />
 												<TextBlock Margin="3,0,15,0"
 														   Foreground="#5cccf8"
-														   Text="{Binding ModernizeFire, Mode=OneWay, StringFormat={}+{0}}" />
-
+														   Text="{Binding ModernizeFire, Mode=OneWay, StringFormat={}+{0}}">
+													<TextBlock.Style>
+														<Style TargetType="{x:Type TextBlock}">
+															<Style.Triggers>
+																<DataTrigger Binding="{Binding ModernizeFire, Mode=OneWay}" Value="0">
+																	<Setter Property="Visibility" Value="Hidden" />
+																</DataTrigger>
+															</Style.Triggers>
+														</Style>
+													</TextBlock.Style>
+												</TextBlock>
 												<StackPanel.Style>
 													<Style TargetType="{x:Type StackPanel}">
 														<Style.Triggers>
 															<DataTrigger Binding="{Binding ModernizeFire, Mode=OneWay}" Value="0">
-																<Setter Property="Visibility" Value="Collapsed" />
+																<Setter Property="Opacity" Value="0.33" />
 															</DataTrigger>
 														</Style.Triggers>
 													</Style>
 												</StackPanel.Style>
 											</StackPanel>
-
-											<StackPanel Orientation="Horizontal">
+											<StackPanel Orientation="Horizontal"
+														Margin="4,3"
+														Grid.Column="1"
+														Grid.Row="0">
 												<Image Width="18"
 													   Height="18"
 													   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/torpedo.png" />
 												<TextBlock Margin="3,0,15,0"
 														   Foreground="#5cccf8"
-														   Text="{Binding ModernizeTorpedo, Mode=OneWay, StringFormat={}+{0}}" />
-
+														   Text="{Binding ModernizeTorpedo, Mode=OneWay, StringFormat={}+{0}}">
+													<TextBlock.Style>
+														<Style TargetType="{x:Type TextBlock}">
+															<Style.Triggers>
+																<DataTrigger Binding="{Binding ModernizeTorpedo, Mode=OneWay}" Value="0">
+																	<Setter Property="Visibility" Value="Hidden" />
+																</DataTrigger>
+															</Style.Triggers>
+														</Style>
+													</TextBlock.Style>
+												</TextBlock>
 												<StackPanel.Style>
 													<Style TargetType="{x:Type StackPanel}">
 														<Style.Triggers>
 															<DataTrigger Binding="{Binding ModernizeTorpedo, Mode=OneWay}" Value="0">
-																<Setter Property="Visibility" Value="Collapsed" />
+																<Setter Property="Opacity" Value="0.33" />
 															</DataTrigger>
 														</Style.Triggers>
 													</Style>
 												</StackPanel.Style>
 											</StackPanel>
-
-											<StackPanel Orientation="Horizontal">
+											<StackPanel Orientation="Horizontal"
+														Margin="4,3"
+														Grid.Column="2"
+														Grid.Row="0">
 												<Image Width="18"
 													   Height="18"
 													   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/aa.png" />
 												<TextBlock Margin="3,0,15,0"
 														   Foreground="#5cccf8"
-														   Text="{Binding ModernizeAA, Mode=OneWay, StringFormat={}+{0}}" />
-
+														   Text="{Binding ModernizeAA, Mode=OneWay, StringFormat={}+{0}}">
+													<TextBlock.Style>
+														<Style TargetType="{x:Type TextBlock}">
+															<Style.Triggers>
+																<DataTrigger Binding="{Binding ModernizeAA, Mode=OneWay}" Value="0">
+																	<Setter Property="Visibility" Value="Hidden" />
+																</DataTrigger>
+															</Style.Triggers>
+														</Style>
+													</TextBlock.Style>
+												</TextBlock>
 												<StackPanel.Style>
 													<Style TargetType="{x:Type StackPanel}">
 														<Style.Triggers>
 															<DataTrigger Binding="{Binding ModernizeAA, Mode=OneWay}" Value="0">
-																<Setter Property="Visibility" Value="Collapsed" />
+																<Setter Property="Opacity" Value="0.33" />
 															</DataTrigger>
 														</Style.Triggers>
 													</Style>
 												</StackPanel.Style>
 											</StackPanel>
-
-											<StackPanel Orientation="Horizontal">
+											<StackPanel Orientation="Horizontal"
+														Margin="4,3"
+														Grid.Column="3"
+														Grid.Row="0">
 												<Image Width="18"
 													   Height="18"
 													   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/armor.png" />
 												<TextBlock Margin="3,0,15,0"
 														   Foreground="#5cccf8"
-														   Text="{Binding ModernizeArmor, Mode=OneWay, StringFormat={}+{0}}" />
-
+														   Text="{Binding ModernizeArmor, Mode=OneWay, StringFormat={}+{0}}">
+													<TextBlock.Style>
+														<Style TargetType="{x:Type TextBlock}">
+															<Style.Triggers>
+																<DataTrigger Binding="{Binding ModernizeArmor, Mode=OneWay}" Value="0">
+																	<Setter Property="Visibility" Value="Hidden" />
+																</DataTrigger>
+															</Style.Triggers>
+														</Style>
+													</TextBlock.Style>
+												</TextBlock>
 												<StackPanel.Style>
 													<Style TargetType="{x:Type StackPanel}">
 														<Style.Triggers>
 															<DataTrigger Binding="{Binding ModernizeArmor, Mode=OneWay}" Value="0">
-																<Setter Property="Visibility" Value="Collapsed" />
+																<Setter Property="Opacity" Value="0.33" />
 															</DataTrigger>
 														</Style.Triggers>
 													</Style>
 												</StackPanel.Style>
 											</StackPanel>
-										</StackPanel>
-										<StackPanel Margin="8,4,0,0"
-													Orientation="Horizontal">
-											<StackPanel Orientation="Horizontal">
+
+											<StackPanel Orientation="Horizontal"
+													Margin="4,3"
+													Grid.Column="0"
+													Grid.Row="1">
 												<Image Width="18"
 													   Height="18"
 													   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/fuel.png" />
 												<TextBlock Margin="3,0,15,0"
 														   Foreground="#5cccf8"
-														   Text="{Binding DestroyFuel, Mode=OneWay, StringFormat={}+{0}}" />
-
+														   Text="{Binding DestroyFuel, Mode=OneWay, StringFormat={}+{0}}">
+													<TextBlock.Style>
+														<Style TargetType="{x:Type TextBlock}">
+															<Style.Triggers>
+																<DataTrigger Binding="{Binding DestroyFuel, Mode=OneWay}" Value="0">
+																	<Setter Property="Visibility" Value="Hidden" />
+																</DataTrigger>
+															</Style.Triggers>
+														</Style>
+													</TextBlock.Style>
+												</TextBlock>
 												<StackPanel.Style>
 													<Style TargetType="{x:Type StackPanel}">
 														<Style.Triggers>
 															<DataTrigger Binding="{Binding DestroyFuel, Mode=OneWay}" Value="0">
-																<Setter Property="Visibility" Value="Collapsed" />
+																<Setter Property="Opacity" Value="0.33" />
 															</DataTrigger>
 														</Style.Triggers>
 													</Style>
 												</StackPanel.Style>
 											</StackPanel>
-
-											<StackPanel Orientation="Horizontal">
+											<StackPanel Orientation="Horizontal"
+													Margin="4,3"
+													Grid.Column="1"
+													Grid.Row="1">
 												<Image Width="18"
 													   Height="18"
 													   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/ammo.png" />
 												<TextBlock Margin="3,0,15,0"
 														   Foreground="#5cccf8"
-														   Text="{Binding DestroyAmmo, Mode=OneWay, StringFormat={}+{0}}" />
-
+														   Text="{Binding DestroyAmmo, Mode=OneWay, StringFormat={}+{0}}">
+													<TextBlock.Style>
+														<Style TargetType="{x:Type TextBlock}">
+															<Style.Triggers>
+																<DataTrigger Binding="{Binding DestroyAmmo, Mode=OneWay}" Value="0">
+																	<Setter Property="Visibility" Value="Hidden" />
+																</DataTrigger>
+															</Style.Triggers>
+														</Style>
+													</TextBlock.Style>
+												</TextBlock>
 												<StackPanel.Style>
 													<Style TargetType="{x:Type StackPanel}">
 														<Style.Triggers>
 															<DataTrigger Binding="{Binding DestroyAmmo, Mode=OneWay}" Value="0">
-																<Setter Property="Visibility" Value="Collapsed" />
+																<Setter Property="Opacity" Value="0.33" />
 															</DataTrigger>
 														</Style.Triggers>
 													</Style>
 												</StackPanel.Style>
 											</StackPanel>
-
-											<StackPanel Orientation="Horizontal">
+											<StackPanel Orientation="Horizontal"
+													Margin="4,3"
+													Grid.Column="2"
+													Grid.Row="1">
 												<Image Width="18"
 													   Height="18"
 													   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/steel.png" />
 												<TextBlock Margin="3,0,15,0"
 														   Foreground="#5cccf8"
-														   Text="{Binding DestroySteel, Mode=OneWay, StringFormat={}+{0}}" />
-
+														   Text="{Binding DestroySteel, Mode=OneWay, StringFormat={}+{0}}">
+													<TextBlock.Style>
+														<Style TargetType="{x:Type TextBlock}">
+															<Style.Triggers>
+																<DataTrigger Binding="{Binding DestroySteel, Mode=OneWay}" Value="0">
+																	<Setter Property="Visibility" Value="Hidden" />
+																</DataTrigger>
+															</Style.Triggers>
+														</Style>
+													</TextBlock.Style>
+												</TextBlock>
 												<StackPanel.Style>
 													<Style TargetType="{x:Type StackPanel}">
 														<Style.Triggers>
 															<DataTrigger Binding="{Binding DestroySteel, Mode=OneWay}" Value="0">
-																<Setter Property="Visibility" Value="Collapsed" />
+																<Setter Property="Opacity" Value="0.33" />
 															</DataTrigger>
 														</Style.Triggers>
 													</Style>
 												</StackPanel.Style>
 											</StackPanel>
-
-											<StackPanel Orientation="Horizontal">
+											<StackPanel Orientation="Horizontal"
+													Margin="4,3"
+													Grid.Column="3"
+													Grid.Row="1">
 												<Image Width="18"
 													   Height="18"
 													   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/bauxite.png" />
 												<TextBlock Margin="3,0,15,0"
 														   Foreground="#5cccf8"
-														   Text="{Binding DestroyBauxite, Mode=OneWay, StringFormat={}+{0}}" />
-
+														   Text="{Binding DestroyBauxite, Mode=OneWay, StringFormat={}+{0}}">
+													<TextBlock.Style>
+														<Style TargetType="{x:Type TextBlock}">
+															<Style.Triggers>
+																<DataTrigger Binding="{Binding DestroyBauxite, Mode=OneWay}" Value="0">
+																	<Setter Property="Visibility" Value="Hidden" />
+																</DataTrigger>
+															</Style.Triggers>
+														</Style>
+													</TextBlock.Style>
+												</TextBlock>
 												<StackPanel.Style>
 													<Style TargetType="{x:Type StackPanel}">
 														<Style.Triggers>
 															<DataTrigger Binding="{Binding DestroyBauxite, Mode=OneWay}" Value="0">
-																<Setter Property="Visibility" Value="Collapsed" />
+																<Setter Property="Opacity" Value="0.33" />
 															</DataTrigger>
 														</Style.Triggers>
 													</Style>
 												</StackPanel.Style>
 											</StackPanel>
-										</StackPanel>
+										</Grid>
+									</StackPanel>
+
+									<StackPanel Orientation="Vertical"
+												Margin="8,20,0,0">
+										<TextBlock Foreground="White"
+												   Text="개장 정보" />
+
+										<ItemsControl ItemsSource="{Binding Upgrades, Mode=OneWay}">
+											<ItemsControl.ItemsPanel>
+												<ItemsPanelTemplate>
+													<WrapPanel Orientation="Horizontal" />
+												</ItemsPanelTemplate>
+											</ItemsControl.ItemsPanel>
+											<ItemsControl.ItemTemplate>
+												<DataTemplate>
+													<metro2:CallMethodButton Padding="4"
+																			 Margin="5,3"
+																			 MethodName="SetShip"
+																			 MethodParameter="{Binding Id, Mode=OneWay}">
+														<metro2:CallMethodButton.Content>
+															<Grid Width="160"
+																  Margin="5,3">
+																<Grid.ColumnDefinitions>
+																	<ColumnDefinition Width="*" />
+																	<ColumnDefinition Width="*" />
+																</Grid.ColumnDefinitions>
+																<Grid.RowDefinitions>
+																	<RowDefinition Height="Auto" />
+																	<RowDefinition Height="Auto" />
+																	<RowDefinition Height="Auto" />
+																</Grid.RowDefinitions>
+
+																<Image Grid.ColumnSpan="2"
+																	   Width="160"
+																	   Height="40"
+																	   Source="{Binding BadgeImage, Mode=OneWay}" />
+
+																<TextBlock Grid.Column="0"
+																		   Grid.Row="1"
+																		   Margin="0,3"
+																		   HorizontalAlignment="Left"
+																		   Text="{Binding Name, Mode=OneWay}"
+																		   FontSize="10"
+																		   TextWrapping="Wrap" />
+																<TextBlock Grid.Column="1"
+																		   Grid.Row="1"
+																		   Margin="0,3"
+																		   HorizontalAlignment="Right"
+																		   Text="{Binding RequiredLevel, Mode=OneWay,StringFormat={}Lv.{0}}"
+																		   FontSize="10"
+																		   TextWrapping="Wrap" />
+
+																<TextBlock Grid.Column="0"
+																		   Grid.ColumnSpan="2"
+																		   Grid.Row="2"
+																		   HorizontalAlignment="Center"
+																		   Text="{Binding Requires, Mode=OneWay}"
+																		   FontSize="10"
+																		   TextWrapping="Wrap">
+																	<TextBlock.Style>
+																		<Style TargetType="{x:Type TextBlock}">
+																			<Style.Triggers>
+																				<DataTrigger Binding="{Binding Requires, Mode=OneWay}" Value="">
+																					<Setter Property="Visibility" Value="Collapsed" />
+																				</DataTrigger>
+																			</Style.Triggers>
+																		</Style>
+																	</TextBlock.Style>
+																</TextBlock>
+															</Grid>
+														</metro2:CallMethodButton.Content>
+													</metro2:CallMethodButton>
+												</DataTemplate>
+											</ItemsControl.ItemTemplate>
+										</ItemsControl>
 									</StackPanel>
 								</StackPanel>
 							</ScrollViewer>

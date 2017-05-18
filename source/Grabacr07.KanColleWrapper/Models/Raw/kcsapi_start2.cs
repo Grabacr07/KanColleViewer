@@ -10,6 +10,7 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 	{
 		public kcsapi_mst_ship[] api_mst_ship { get; set; }
 		public kcsapi_mst_shipgraph[] api_mst_shipgraph { get; set; }
+		public kcsapi_mst_shipupgrade[] api_mst_shipupgrade { get; set; }
 		public kcsapi_mst_slotitem_equiptype[] api_mst_slotitem_equiptype { get; set; }
 		public kcsapi_mst_stype[] api_mst_stype { get; set; }
 		public kcsapi_mst_slotitem[] api_mst_slotitem { get; set; }
