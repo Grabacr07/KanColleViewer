@@ -136,6 +136,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 		#endregion
 
+		private bool prevCombined { get; set; }
+
 		public FleetsViewModel()
 		{
 			this.Fleets2 = new ItemViewModel[0];
@@ -157,6 +159,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			KanColleSettings.MergeCombinedFleet.ValueChanged += (s, e) => this.UpdateFleets();
 			this.ShowLostAirplane = KanColleSettings.ShowLostAirplane;
 			this.ShowAirplaneAlways = KanColleSettings.ShowAirplaneAlways;
+
+			prevCombined = KanColleClient.Current.Homeport.Organization.Combined;
 		}
 
 		public void ShowPresetWindow()
@@ -211,9 +215,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			if (!this.Fleets2.Any(x => x == this.SelectedFleet))
 				this.SelectedFleet = this.Fleets2.FirstOrDefault();
 
-			// 연합 함대인 경우 메모리 정리...
-			if (KanColleClient.Current.Homeport.Organization.Combined)
-				GCWorker.GCRequest();
+			// 연합 함대 해제 혹은 설정인 경우 메모리 정리...
+			if (KanColleClient.Current.Homeport.Organization.Combined || prevCombined)
+				GCWorker.GCRequest(-1, GCWorker.GCType.GCAll);
+
+			prevCombined = KanColleClient.Current.Homeport.Organization.Combined;
 		}
 
 		private CombinedFleetViewModel combinedFleetInstance;
@@ -232,25 +238,34 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			{
 				if (KanColleSettings.AutoFleetSelectWhenShipsChanged)
 				{
-					// 연합함대에 포함된 함대인지 체크
 					var first = this.Fleets2.FirstOrDefault();
+
+					// 첫번째가 연합함대
 					if (first.GetType() == typeof(CombinedFleetViewModel))
 					{
-						if((first as CombinedFleetViewModel).Source.Fleets.Any(x => x == fleet))
+						// 연합함대에 포함
+						if ((first as CombinedFleetViewModel).Source.Fleets.Any(x => x == fleet))
 							this.SelectedFleet = first;
+						else
+							this.SelectedFleet = vm;
 					}
 					else this.SelectedFleet = vm;
 				}
 			}, false).AddTo(this.fleetListeners);
+
 			fleet.Subscribe(nameof(Fleet.IsInSortie), () => {
 				if (KanColleSettings.AutoFleetSelectWhenSortie)
 				{
-					// 연합함대에 포함된 함대인지 체크
 					var first = this.Fleets2.FirstOrDefault();
+
+					// 첫번째가 연합함대
 					if (first.GetType() == typeof(CombinedFleetViewModel))
 					{
+						// 연합함대에 포함
 						if ((first as CombinedFleetViewModel).Source.Fleets.Any(x => x == fleet))
 							this.SelectedFleet = first;
+						else
+							this.SelectedFleet = vm;
 					}
 					else this.SelectedFleet = vm;
 				}

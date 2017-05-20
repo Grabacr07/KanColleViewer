@@ -12,17 +12,26 @@ namespace Grabacr07.KanColleViewer.Models
 		[DllImport("kernel32.dll", EntryPoint = "SetProcessWorkingSetSize", SetLastError = true, CallingConvention = CallingConvention.StdCall)]
 		private static extern bool SetProcessWorkingSetSize(IntPtr proc, int min, int max);
 
+		public enum GCType
+		{
+			GCAll,
+			GCOptimized
+		}
+
 		private bool GCWorking { get; set; } = false;
 		private Thread GCThread { get; }
 
 		private int GCCount => KanColleSettings.MemoryOptimizePeriod;
 
-		private static bool GCRequested { get; set; } = false;
-		private static int GCGen { get; set; } = -1;
-		public static void GCRequest(int gen = -1)
+		private static bool _GCRequested { get; set; } = false;
+		private static int _GCGen { get; set; } = -1;
+		private static GCType _GCType { get; set; } = GCType.GCOptimized;
+
+		public static void GCRequest(int gen = -1, GCType type = GCType.GCOptimized)
 		{
-			GCWorker.GCRequested = true;
-			GCWorker.GCGen = gen;
+			GCWorker._GCRequested = true;
+			GCWorker._GCGen = gen;
+			GCWorker._GCType = type;
 		}
 
 		public GCWorker()
@@ -36,10 +45,10 @@ namespace Grabacr07.KanColleViewer.Models
 					if (!GCWorking) break;
 
 					cnt--;
-					if (cnt == 0 || GCWorker.GCRequested)
+					if (cnt == 0 || GCWorker._GCRequested)
 					{
 						cnt = GCCount;
-						this.Collect(GCWorker.GCGen);
+						this.Collect(GCWorker._GCGen, GCWorker._GCType);
 					}
 				}
 			});
@@ -50,15 +59,15 @@ namespace Grabacr07.KanColleViewer.Models
 			GCThread.Start();
 		}
 
-		private void Collect(int gen = -1)
+		private void Collect(int gen = -1, GCType type = GCType.GCOptimized)
 		{
 			if (gen == -1) gen = GC.MaxGeneration;
 
 			// GC 가 Request 되었다면 예외적으로 수행
-			if (!KanColleSettings.UseMemoryOptimize && !GCWorker.GCRequested) return;
-			GCWorker.GCRequested = false;
+			if (!KanColleSettings.UseMemoryOptimize && !GCWorker._GCRequested) return;
+			GCWorker._GCRequested = false;
 
-			GC.Collect(gen, GCCollectionMode.Optimized);
+			GC.Collect(gen, type == GCType.GCOptimized ? GCCollectionMode.Optimized : GCCollectionMode.Forced);
 			GC.WaitForPendingFinalizers();
 
 			if (Environment.OSVersion.Platform == PlatformID.Win32NT)

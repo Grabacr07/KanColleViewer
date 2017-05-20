@@ -17,6 +17,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 		{
 			this.Ship = ship;
 			this.Condition = new ShipCondition(ship);
+
+			this.CompositeDisposable.Add(this.Condition);
 		}
 	}
 }
