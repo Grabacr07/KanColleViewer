@@ -209,5 +209,20 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// 噴式戦闘爆撃機
 		/// </summary>
 		JetPowerededBomber2 = 40,
+
+		/// <summary>
+		/// 輸送機材
+		/// </summary>
+		TransportEquipment = 41,
+
+		/// <summary>
+		/// 潜水艦装備
+		/// </summary>
+		SubmarineEquipment = 42,
+
+		/// <summary>
+		/// 水上戦闘機
+		/// </summary>
+		SeaplaneFighter = 43,
 	}
 }
