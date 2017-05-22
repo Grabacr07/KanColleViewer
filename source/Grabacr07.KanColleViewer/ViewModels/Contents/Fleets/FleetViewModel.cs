@@ -361,6 +361,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		public FleetViewModel(Fleet fleet)
 		{
 			this.Source = fleet;
+			this.ShipTypeTable = MakeShipTypeTable(this.Source.Ships);
 
 			if (this.Source.Id > 1)
 			{
@@ -484,7 +485,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			if (fleet.Count() <= 0) return false;
 			if (Mission < 1) return false;
 			bool Chk = true;
-			if (this.ShipTypeTable.Count <= 0) Chk = false;
+			if (this.ShipTypeTable?.Count <= 0) Chk = false;
 			if (Mission < 1) return false;
 			this.ShipTypeTable = this.ChangeSpecialType(this.ShipTypeTable, Mission);
 
@@ -577,7 +578,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		}
 		private Dictionary<int, int> ChangeSpecialType(Dictionary<int, int> list, int MissionNum)
 		{
-			Dictionary<int, int> templist = new Dictionary<int, int>(list);
+			Dictionary<int, int> templist = new Dictionary<int, int>(list ?? new Dictionary<int, int>());
 			bool Checker = true;
 			int SpecialCount = 1;
 			while (Checker)

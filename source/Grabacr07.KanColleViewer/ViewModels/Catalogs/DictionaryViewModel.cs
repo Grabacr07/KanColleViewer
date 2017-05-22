@@ -76,7 +76,12 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			{
 				if (this._SelectedItem != value)
 				{
+					foreach (var item in this.TabItems)
+						item.IsSelected = false;
+
 					this._SelectedItem = value;
+					this._SelectedItem.IsSelected = true;
+
 					this.RaisePropertyChanged();
 				}
 			}
@@ -89,6 +94,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			this.TabItems = new List<TabItemViewModel>
 			{
 				new DictionaryShipViewModel().AddTo(this),
+				new DictionaryEquipmentViewModel().AddTo(this),
 			};
 			this.SelectedItem = this.TabItems.FirstOrDefault();
 		}
@@ -200,6 +206,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 					case 441: // Italia
 					case 442: // Roma
 						return 6;
+
+					case 541: // 長門改二
+						return 7;
 
 					case 352: // 速吸改
 						return 2;
@@ -528,6 +537,163 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		public void SetShip(int ShipId)
 			=> this.Parent.SetShip(ShipId);
+	}
+	#endregion
+
+	#region For Equipment Dictionary Tab
+	public class DictionaryEquipmentViewModel : TabItemViewModel
+	{
+		public override string Name
+		{
+			get { return "장비"; }
+			protected set { throw new NotImplementedException(); }
+		}
+
+		#region Tab (List)
+		public IList<EquipmentItemViewModel> EquipmentList { get; set; }
+
+		private EquipmentItemViewModel _SelectedEquipment;
+		public EquipmentItemViewModel SelectedEquipment
+		{
+			get { return this._SelectedEquipment; }
+			set
+			{
+				if (this._SelectedEquipment != value)
+				{
+					this._SelectedEquipment = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
+
+		public DictionaryEquipmentViewModel()
+		{
+			this.EquipmentList = KanColleClient.Current.Master.SlotItems
+				.OrderBy(x => x.Value.Id)
+				.Select(x => new EquipmentItemViewModel(x.Value))
+				.ToArray();
+		}
+	}
+
+	public class EquipmentItemViewModel : TabItemViewModel
+	{
+		public override string Name
+		{
+			get { return _Name; }
+			protected set { throw new NotImplementedException(); }
+		}
+		public string Id => this._Id;
+		public string ItemType => this._ItemType;
+
+		private string _Name { get; set; }
+		private string _Id { get; set; }
+		private string _ItemType { get; set; }
+
+		public SlotItemInfo Equipment { get; }
+
+		public string CardImage =>
+			string.Format(
+				"http://wolfgangkurz.github.io/KanColleAssets/slotitem/card/{0:D3}.png",
+				this.Equipment?.Id ?? 0
+			);
+
+		#region Status
+		public int HP => this.Equipment?.RawData.api_taik ?? -1;
+		public int Armor => this.Equipment?.RawData.api_souk ?? -1;
+		public int Evasion => this.Equipment?.RawData.api_houk ?? -1;
+		public int HitChance => this.Equipment?.RawData.api_houm ?? -1;
+
+		public string EvasionName
+			=> this.Equipment?.Type == SlotItemType.局地戦闘機
+				? "영격" : "회피";
+		public string EvasionIcon
+			=> this.Equipment?.Type == SlotItemType.局地戦闘機
+				? "http://wolfgangkurz.github.io/KanColleAssets/stats/carry.png"
+				: "http://wolfgangkurz.github.io/KanColleAssets/stats/evasion.png";
+
+		public string HitChanceName
+			=> this.Equipment?.Type == SlotItemType.局地戦闘機
+				? "대폭" : "명중";
+		public string HitChanceIcon
+			=> this.Equipment?.Type == SlotItemType.局地戦闘機
+				? "http://wolfgangkurz.github.io/KanColleAssets/stats/bomb.png"
+				: "http://wolfgangkurz.github.io/KanColleAssets/stats/hit.png";
+
+		///////////////////
+
+		public int Fire => this.Equipment?.RawData.api_houg ?? -1;
+		public int Torpedo => this.Equipment?.RawData.api_raig ?? -1;
+		public int AA => this.Equipment?.RawData.api_tyku ?? -1;
+		public int ASW => this.Equipment?.RawData.api_tais ?? -1;
+
+		///////////////////
+
+		public int Bombing => this.Equipment?.RawData.api_baku ?? -1;
+		public int TorpedoAircraft => this.Equipment?.RawData.api_taik ?? -1;
+		public int AircraftCost
+		{
+			get
+			{
+				var cost = this.Equipment?.RawData.api_cost ?? -1;
+				if (cost == -1) return cost;
+
+				var type = this.Equipment?.Type ?? SlotItemType.None;
+				if (type == SlotItemType.None) return cost;
+
+				switch (type)
+				{
+					case SlotItemType.艦上偵察機:
+					case SlotItemType.水上偵察機:
+					case SlotItemType.噴式偵察機:
+					case SlotItemType.大型飛行艇:
+						return cost * 4;
+
+					default:
+						return cost * 12;
+				}
+		}
+		}
+		public int AircraftDistance => this.Equipment?.RawData.api_distance ?? -1;
+
+		///////////////////
+
+		public ShipSpeed Speed => ShipSpeedConverter.FromInt32(this.Equipment?.RawData.api_soku ?? 0);
+		public string SpeedText
+			=> this.Speed == ShipSpeed.Immovable ? "-"
+				: this.Speed == ShipSpeed.Slow ? "저속"
+				: this.Speed == ShipSpeed.Fast ? "고속"
+				: this.Speed == ShipSpeed.Faster ? "고속+"
+				: this.Speed == ShipSpeed.Fastest ? "초고속"
+				: "???";
+
+		public int Range => this.Equipment?.RawData.api_leng ?? -1;
+		public string RangeText
+			=> this.Range == 0 ? "-"
+				: this.Range == 1 ? "단거리"
+				: this.Range == 2 ? "중거리"
+				: this.Range == 3 ? "장거리"
+				: this.Range == 4 ? "최장거리"
+				: "???";
+
+		public int LOS => this.Equipment?.RawData.api_saku ?? -1;
+		public int Luck => this.Equipment?.RawData.api_luck ?? -1;
+		#endregion
+
+		#region Modernize & Destroy
+		public int DestroyFuel => this.Equipment?.RawData.api_broken?[0] ?? 0;
+		public int DestroyAmmo => this.Equipment?.RawData.api_broken?[1] ?? 0;
+		public int DestroySteel => this.Equipment?.RawData.api_broken?[2] ?? 0;
+		public int DestroyBauxite => this.Equipment?.RawData.api_broken?[3] ?? 0;
+		#endregion
+
+		public EquipmentItemViewModel(SlotItemInfo EquipData)
+		{
+			this.Equipment = EquipData;
+			this._Name = this.Equipment?.Name ?? "???";
+			this._Id = this.Equipment?.Id.ToString() ?? "???";
+			this._ItemType = this.Equipment?.TypeName ?? "???";
+		}
 	}
 	#endregion
 

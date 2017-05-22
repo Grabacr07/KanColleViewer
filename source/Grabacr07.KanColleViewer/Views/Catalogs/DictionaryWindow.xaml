@@ -515,7 +515,7 @@
 														<Setter Property="Text" Value="{Binding TotalCarry, Mode=OneWay}" />
 														<Style.Triggers>
 															<DataTrigger Binding="{Binding TotalCarry, Mode=OneWay}" Value="0">
-																<Setter Property="Text" Value="-" />
+																<Setter Property="Text" Value="" />
 															</DataTrigger>
 															<DataTrigger Binding="{Binding TotalCarry, Mode=OneWay}" Value="-1">
 																<Setter Property="Text" Value="???" />
@@ -979,7 +979,7 @@
 																		<Setter Property="Text" Value="{Binding Carry, Mode=OneWay}" />
 																		<Style.Triggers>
 																			<DataTrigger Binding="{Binding Available, Mode=OneWay}" Value="False">
-																				<Setter Property="Text" Value="-" />
+																				<Setter Property="Text" Value="" />
 																			</DataTrigger>
 																			<DataTrigger Binding="{Binding Carry, Mode=OneWay}" Value="-1">
 																				<Setter Property="Text" Value="?" />
@@ -1376,6 +1376,774 @@
 												</DataTemplate>
 											</ItemsControl.ItemTemplate>
 										</ItemsControl>
+									</StackPanel>
+								</StackPanel>
+							</ScrollViewer>
+						</Grid>
+					</DataTemplate>
+
+					<DataTemplate DataType="{x:Type viewModels:DictionaryEquipmentViewModel}">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+
+							<ScrollViewer VerticalScrollBarVisibility="Auto"
+										  Margin="0,0,2,0">
+								<ListBox Background="{DynamicResource ActiveBackgroundBrushKey}"
+										 ItemsSource="{Binding EquipmentList}"
+										 SelectedValue="{Binding SelectedEquipment}"
+										 SelectionMode="Single"
+										 Grid.IsSharedSizeScope="True"
+										 ScrollViewer.IsDeferredScrollingEnabled="True"
+										 VirtualizingStackPanel.IsVirtualizing="True"
+										 VirtualizingStackPanel.VirtualizationMode="Recycling">
+									<ListBox.ItemContainerStyle>
+										<Style TargetType="{x:Type ListBoxItem}">
+											<Setter Property="Foreground" Value="{DynamicResource ActiveForegroundBrushKey}" />
+											<Setter Property="IsSelected" Value="{Binding IsSelected, Mode=OneWay}" />
+											<Setter Property="Template">
+												<Setter.Value>
+													<ControlTemplate TargetType="{x:Type ListBoxItem}">
+														<Border Background="{TemplateBinding Background}">
+															<ContentPresenter />
+														</Border>
+													</ControlTemplate>
+												</Setter.Value>
+											</Setter>
+											<Setter Property="FocusVisualStyle" Value="{DynamicResource {x:Static SystemParameters.FocusVisualStyleKey}}" />
+											<Style.Triggers>
+												<Trigger Property="IsMouseOver" Value="True">
+													<Setter Property="Background" Value="{DynamicResource AccentHighlightBrushKey}" />
+													<Setter Property="Foreground" Value="{DynamicResource AccentForegroundBrushKey}" />
+												</Trigger>
+												<Trigger Property="IsSelected" Value="True">
+													<Setter Property="Background" Value="{DynamicResource AccentBrushKey}" />
+													<Setter Property="Foreground" Value="{DynamicResource AccentForegroundBrushKey}" />
+												</Trigger>
+											</Style.Triggers>
+										</Style>
+									</ListBox.ItemContainerStyle>
+									<ListBox.ItemTemplate>
+										<DataTemplate DataType="{x:Type metro_controls:ITabItem}">
+											<Grid Margin="3">
+												<Grid.ColumnDefinitions>
+													<ColumnDefinition Width="Auto" SharedSizeGroup="IdType" />
+													<ColumnDefinition Width="*" />
+												</Grid.ColumnDefinitions>
+												<Grid.RowDefinitions>
+													<RowDefinition Height="Auto" />
+													<RowDefinition Height="Auto" />
+												</Grid.RowDefinitions>
+
+												<TextBlock Grid.Column="0"
+														   Grid.Row="0"
+														   Margin="3,0"
+														   VerticalAlignment="Bottom"
+														   Style="{StaticResource DetailTextStyleKey}"
+														   FontSize="8"
+														   Text="{Binding Id, Mode=OneWay, StringFormat={}No.{0}}" />
+												<TextBlock Grid.Column="0"
+														   Grid.Row="1"
+														   Margin="3,0"
+														   VerticalAlignment="Top"
+														   Style="{StaticResource EmphaticTextStyleKey}"
+														   FontSize="10"
+														   Text="{Binding ItemType, Mode=OneWay}" />
+
+												<TextBlock Grid.Column="1"
+														   Grid.RowSpan="2"
+														   Margin="5,1,3,1"
+														   Style="{StaticResource EmphaticTextStyleKey}"
+														   FontSize="14"
+														   VerticalAlignment="Center"
+														   TextTrimming="CharacterEllipsis"
+														   Text="{Binding Name, Mode=OneWay}" />
+											</Grid>
+										</DataTemplate>
+									</ListBox.ItemTemplate>
+									<ListBox.ItemsPanel>
+										<ItemsPanelTemplate>
+											<VirtualizingStackPanel />
+										</ItemsPanelTemplate>
+									</ListBox.ItemsPanel>
+									<ListBox.Template>
+										<ControlTemplate TargetType="{x:Type ListBox}">
+											<StackPanel>
+												<StackPanel IsItemsHost="True" />
+											</StackPanel>
+										</ControlTemplate>
+									</ListBox.Template>
+								</ListBox>
+							</ScrollViewer>
+
+							<ScrollViewer Grid.Column="1"
+										  VerticalScrollBarVisibility="Auto">
+								<StackPanel Orientation="Vertical"
+											Margin="0,0,0,10"
+											DataContext="{Binding SelectedEquipment, Mode=OneWay}">
+									<StackPanel.Style>
+										<Style TargetType="{x:Type StackPanel}">
+											<Style.Triggers>
+												<DataTrigger Binding="{Binding}" Value="{x:Null}">
+													<Setter Property="Visibility" Value="Collapsed" />
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</StackPanel.Style>
+
+									<Grid Background="{DynamicResource ActiveBackgroundBrushKey}"
+										  MinHeight="40">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="Auto" />
+										</Grid.ColumnDefinitions>
+
+										<TextBlock Margin="15,0,0,0"
+												   VerticalAlignment="Center"
+												   TextWrapping="NoWrap"
+												   Style="{StaticResource EmphaticTextStyleKey}"
+												   Text="{Binding Equipment.Name, Mode=OneWay}" />
+										<TextBlock Margin="8,2,0,1"
+												   Grid.Column="1"
+												   VerticalAlignment="Center"
+												   Style="{StaticResource DefaultTextStyleKey}"
+												   Text="{Binding Equipment.Id, Mode=OneWay, StringFormat={}No.{0}}" />
+										<TextBlock Margin="0,2,15,1"
+												   Grid.Column="2"
+												   VerticalAlignment="Center"
+												   Style="{StaticResource DefaultTextStyleKey}"
+												   Text="{Binding Equipment.TypeName, Mode=OneWay}" />
+									</Grid>
+
+									<Image Margin="10"
+										   Width="140"
+										   Height="140"
+										   HorizontalAlignment="Center"
+										   Source="{Binding CardImage, Mode=OneWay}" />
+
+									<StackPanel Orientation="Vertical"
+												Margin="8,10,0,0">
+										<TextBlock Foreground="White"
+												   VerticalAlignment="Center"
+												   Text="스테이터스" />
+
+										<Grid Margin="8,5,0,0">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="*" />
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="*" />
+											</Grid.ColumnDefinitions>
+											<Grid.RowDefinitions>
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+											</Grid.RowDefinitions>
+
+											<Image Grid.Column="0"
+												   Grid.Row="0"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/hp.png" />
+											<TextBlock Grid.Column="1"
+													   Grid.Row="0"
+													   Margin="4,0,10,0"
+													   Foreground="#f2f2f2"
+													   Text="내구" />
+											<TextBlock Grid.Column="2"
+													   Grid.Row="0"
+													   Foreground="#5cccf8">
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}">
+														<Setter Property="Text" Value="{Binding HP, Mode=OneWay}" />
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding HP, Mode=OneWay}" Value="0">
+																<Setter Property="Text" Value="" />
+															</DataTrigger>
+															<DataTrigger Binding="{Binding HP, Mode=OneWay}" Value="-1">
+																<Setter Property="Text" Value="???" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
+
+											<Image Grid.Column="3"
+												   Grid.Row="0"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/armor.png" />
+											<TextBlock Grid.Column="4"
+													   Grid.Row="0"
+													   Margin="4,0,6,0"
+													   Foreground="#f2f2f2"
+													   Text="장갑" />
+											<TextBlock Grid.Column="5"
+													   Grid.Row="0"
+													   Foreground="#5cccf8">
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}">
+														<Setter Property="Text" Value="{Binding Armor, Mode=OneWay}" />
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding Armor, Mode=OneWay}" Value="0">
+																<Setter Property="Text" Value="" />
+															</DataTrigger>
+															<DataTrigger Binding="{Binding Armor, Mode=OneWay}" Value="-1">
+																<Setter Property="Text" Value="???" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
+
+											<Image Grid.Column="0"
+												   Grid.Row="1"
+												   Margin="0,4,0,0"
+												   Width="18"
+												   Height="18"
+												   Source="{Binding EvasionIcon, Mode=OneWay}" />
+											<TextBlock Grid.Column="1"
+													   Grid.Row="1"
+													   Margin="4,4,10,0"
+													   Foreground="#f2f2f2"
+													   Text="{Binding EvasionName, Mode=OneWay}" />
+											<TextBlock Grid.Column="2"
+													   Grid.Row="1"
+													   Margin="0,4,0,0"
+													   Foreground="#5cccf8">
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}">
+														<Setter Property="Text" Value="{Binding Evasion, Mode=OneWay}" />
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding Evasion, Mode=OneWay}" Value="0">
+																<Setter Property="Text" Value="" />
+															</DataTrigger>
+															<DataTrigger Binding="{Binding Evasion, Mode=OneWay}" Value="-1">
+																<Setter Property="Text" Value="???" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
+
+											<Image Grid.Column="3"
+												   Grid.Row="1"
+												   Margin="0,4,0,0"
+												   Width="18"
+												   Height="18"
+												   Source="{Binding HitChanceIcon, Mode=OneWay}" />
+											<TextBlock Grid.Column="4"
+													   Grid.Row="1"
+													   Margin="4,4,10,0"
+													   Foreground="#f2f2f2"
+													   Text="{Binding HitChanceName, Mode=OneWay}" />
+											<TextBlock Grid.Column="5"
+													   Grid.Row="1"
+													   Margin="0,4,0,0"
+													   Foreground="#5cccf8">
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}">
+														<Setter Property="Text" Value="{Binding HitChance, Mode=OneWay}" />
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding HitChance, Mode=OneWay}" Value="0">
+																<Setter Property="Text" Value="" />
+															</DataTrigger>
+															<DataTrigger Binding="{Binding HitChance, Mode=OneWay}" Value="-1">
+																<Setter Property="Text" Value="???" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
+
+											<Border Grid.ColumnSpan="6"
+													Grid.Row="2"
+													Margin="0,6"
+													Height="2"
+													Background="#44ffffff" />
+
+											<Image Grid.Column="0"
+												   Grid.Row="3"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/fire.png" />
+											<TextBlock Grid.Column="1"
+													   Grid.Row="3"
+													   Margin="4,0,10,0"
+													   Foreground="#f2f2f2"
+													   Text="화력" />
+											<TextBlock Grid.Column="2"
+													   Grid.Row="3"
+													   Foreground="#5cccf8">
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}">
+														<Setter Property="Text" Value="{Binding Fire, Mode=OneWay}" />
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding Fire, Mode=OneWay}" Value="0">
+																<Setter Property="Text" Value="" />
+															</DataTrigger>
+															<DataTrigger Binding="{Binding Fire, Mode=OneWay}" Value="-1">
+																<Setter Property="Text" Value="???" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
+
+											<Image Grid.Column="3"
+												   Grid.Row="3"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/torpedo.png" />
+											<TextBlock Grid.Column="4"
+													   Grid.Row="3"
+													   Margin="4,0,6,0"
+													   Foreground="#f2f2f2"
+													   Text="뇌장" />
+											<TextBlock Grid.Column="5"
+													   Grid.Row="3"
+													   Foreground="#5cccf8">
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}">
+														<Setter Property="Text" Value="{Binding Torpedo, Mode=OneWay}" />
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding Torpedo, Mode=OneWay}" Value="0">
+																<Setter Property="Text" Value="" />
+															</DataTrigger>
+															<DataTrigger Binding="{Binding Torpedo, Mode=OneWay}" Value="-1">
+																<Setter Property="Text" Value="???" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
+
+											<Image Grid.Column="0"
+												   Grid.Row="4"
+												   Margin="0,4,0,0"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/aa.png" />
+											<TextBlock Grid.Column="1"
+													   Grid.Row="4"
+													   Margin="4,4,10,0"
+													   Foreground="#f2f2f2"
+													   Text="대공" />
+											<TextBlock Grid.Column="2"
+													   Grid.Row="4"
+													   Margin="0,4,0,0"
+													   Foreground="#5cccf8">
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}">
+														<Setter Property="Text" Value="{Binding AA, Mode=OneWay}" />
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding AA, Mode=OneWay}" Value="0">
+																<Setter Property="Text" Value="" />
+															</DataTrigger>
+															<DataTrigger Binding="{Binding AA, Mode=OneWay}" Value="-1">
+																<Setter Property="Text" Value="???" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
+
+											<Image Grid.Column="3"
+												   Grid.Row="4"
+												   Margin="0,4,0,0"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/asw.png" />
+											<TextBlock Grid.Column="4"
+													   Grid.Row="4"
+													   Margin="4,4,10,0"
+													   Foreground="#f2f2f2"
+													   Text="대잠" />
+											<TextBlock Grid.Column="5"
+													   Grid.Row="4"
+													   Margin="0,4,0,0"
+													   Foreground="#5cccf8">
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}">
+														<Setter Property="Text" Value="{Binding ASW, Mode=OneWay}" />
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding ASW, Mode=OneWay}" Value="0">
+																<Setter Property="Text" Value="" />
+															</DataTrigger>
+															<DataTrigger Binding="{Binding ASW, Mode=OneWay}" Value="-1">
+																<Setter Property="Text" Value="???" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
+
+											<Border Grid.ColumnSpan="6"
+													Grid.Row="5"
+													Margin="0,6"
+													Height="2"
+													Background="#44ffffff" />
+
+											<Image Grid.Column="0"
+												   Grid.Row="6"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/bomb.png" />
+											<TextBlock Grid.Column="1"
+													   Grid.Row="6"
+													   Margin="4,0,10,0"
+													   Foreground="#f2f2f2"
+													   Text="폭장" />
+											<TextBlock Grid.Column="2"
+													   Grid.Row="6"
+													   Foreground="#5cccf8">
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}">
+														<Setter Property="Text" Value="{Binding Bombing, Mode=OneWay}" />
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding Bombing, Mode=OneWay}" Value="0">
+																<Setter Property="Text" Value="" />
+															</DataTrigger>
+															<DataTrigger Binding="{Binding Bombing, Mode=OneWay}" Value="-1">
+																<Setter Property="Text" Value="???" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
+
+											<Image Grid.Column="3"
+												   Grid.Row="6"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/torpedo.png" />
+											<TextBlock Grid.Column="4"
+													   Grid.Row="6"
+													   Margin="4,0,6,0"
+													   Foreground="#f2f2f2"
+													   Text="뇌장 (항공)" />
+											<TextBlock Grid.Column="5"
+													   Grid.Row="6"
+													   Foreground="#5cccf8">
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}">
+														<Setter Property="Text" Value="{Binding TorpedoAircraft, Mode=OneWay}" />
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding TorpedoAircraft, Mode=OneWay}" Value="0">
+																<Setter Property="Text" Value="" />
+															</DataTrigger>
+															<DataTrigger Binding="{Binding TorpedoAircraft, Mode=OneWay}" Value="-1">
+																<Setter Property="Text" Value="???" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
+
+											<Image Grid.Column="0"
+												   Grid.Row="7"
+												   Margin="0,4,0,0"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/bauxite.png" />
+											<TextBlock Grid.Column="1"
+													   Grid.Row="7"
+													   Margin="4,4,10,0"
+													   Foreground="#f2f2f2"
+													   Text="배치 비용" />
+											<TextBlock Grid.Column="2"
+													   Grid.Row="7"
+													   Margin="0,4,0,0"
+													   Foreground="#5cccf8">
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}">
+														<Setter Property="Text" Value="{Binding AircraftCost, Mode=OneWay}" />
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding AircraftCost, Mode=OneWay}" Value="0">
+																<Setter Property="Text" Value="" />
+															</DataTrigger>
+															<DataTrigger Binding="{Binding AircraftCost, Mode=OneWay}" Value="-1">
+																<Setter Property="Text" Value="???" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
+
+											<Image Grid.Column="3"
+												   Grid.Row="7"
+												   Margin="0,4,0,0"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/carry.png" />
+											<TextBlock Grid.Column="4"
+													   Grid.Row="7"
+													   Margin="4,4,10,0"
+													   Foreground="#f2f2f2"
+													   Text="항속거리" />
+											<TextBlock Grid.Column="5"
+													   Grid.Row="7"
+													   Margin="0,4,0,0"
+													   Foreground="#5cccf8">
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}">
+														<Setter Property="Text" Value="{Binding AircraftDistance, Mode=OneWay}" />
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding AircraftDistance, Mode=OneWay}" Value="0">
+																<Setter Property="Text" Value="" />
+															</DataTrigger>
+															<DataTrigger Binding="{Binding AircraftDistance, Mode=OneWay}" Value="-1">
+																<Setter Property="Text" Value="???" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
+
+											<Border Grid.ColumnSpan="6"
+													Grid.Row="8"
+													Margin="0,6"
+													Height="2"
+													Background="#44ffffff" />
+
+											<Image Grid.Column="0"
+												   Grid.Row="9"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/speed.png" />
+											<TextBlock Grid.Column="1"
+													   Grid.Row="9"
+													   Margin="4,0,10,0"
+													   Foreground="#f2f2f2"
+													   Text="속력" />
+											<TextBlock Grid.Column="2"
+													   Grid.Row="9"
+													   Foreground="#5cccf8"
+													   Text="{Binding SpeedText, Mode=OneWay}" />
+
+											<Image Grid.Column="3"
+												   Grid.Row="9"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/range.png" />
+											<TextBlock Grid.Column="4"
+													   Grid.Row="9"
+													   Margin="4,0,6,0"
+													   Foreground="#f2f2f2"
+													   Text="사거리" />
+											<TextBlock Grid.Column="5"
+													   Grid.Row="9"
+													   Foreground="#5cccf8"
+													   Text="{Binding RangeText, Mode=OneWay}" />
+
+											<Image Grid.Column="0"
+												   Grid.Row="10"
+												   Margin="0,4,0,0"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/los.png" />
+											<TextBlock Grid.Column="1"
+													   Grid.Row="10"
+													   Margin="4,4,10,0"
+													   Foreground="#f2f2f2"
+													   Text="색적" />
+											<TextBlock Grid.Column="2"
+													   Grid.Row="10"
+													   Margin="0,4,0,0"
+													   Foreground="#5cccf8">
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}">
+														<Setter Property="Text" Value="{Binding LOS, Mode=OneWay}" />
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding LOS, Mode=OneWay}" Value="0">
+																<Setter Property="Text" Value="" />
+															</DataTrigger>
+															<DataTrigger Binding="{Binding LOS, Mode=OneWay}" Value="-1">
+																<Setter Property="Text" Value="???" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
+
+											<Image Grid.Column="3"
+												   Grid.Row="10"
+												   Margin="0,4,0,0"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/luck.png" />
+											<TextBlock Grid.Column="4"
+													   Grid.Row="10"
+													   Margin="4,4,10,0"
+													   Foreground="#f2f2f2"
+													   Text="운" />
+											<TextBlock Grid.Column="5"
+													   Grid.Row="10"
+													   Margin="0,4,0,0"
+													   Foreground="#5cccf8">
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}">
+														<Setter Property="Text" Value="{Binding Luck, Mode=OneWay}" />
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding Luck, Mode=OneWay}" Value="0">
+																<Setter Property="Text" Value="" />
+															</DataTrigger>
+															<DataTrigger Binding="{Binding Luck, Mode=OneWay}" Value="-1">
+																<Setter Property="Text" Value="???" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
+										</Grid>
+									</StackPanel>
+
+									<StackPanel Orientation="Vertical"
+												Margin="8,20,0,0">
+										<TextBlock Foreground="White"
+												   Text="폐기" />
+
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="Auto" />
+											</Grid.ColumnDefinitions>
+
+											<StackPanel Orientation="Horizontal"
+													Margin="4,3"
+													Grid.Column="0">
+												<Image Width="18"
+													   Height="18"
+													   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/fuel.png" />
+												<TextBlock Margin="3,0,15,0"
+														   Foreground="#5cccf8"
+														   Text="{Binding DestroyFuel, Mode=OneWay, StringFormat={}+{0}}">
+													<TextBlock.Style>
+														<Style TargetType="{x:Type TextBlock}">
+															<Style.Triggers>
+																<DataTrigger Binding="{Binding DestroyFuel, Mode=OneWay}" Value="0">
+																	<Setter Property="Visibility" Value="Hidden" />
+																</DataTrigger>
+															</Style.Triggers>
+														</Style>
+													</TextBlock.Style>
+												</TextBlock>
+												<StackPanel.Style>
+													<Style TargetType="{x:Type StackPanel}">
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding DestroyFuel, Mode=OneWay}" Value="0">
+																<Setter Property="Opacity" Value="0.33" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</StackPanel.Style>
+											</StackPanel>
+											<StackPanel Orientation="Horizontal"
+													Margin="4,3"
+													Grid.Column="1">
+												<Image Width="18"
+													   Height="18"
+													   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/ammo.png" />
+												<TextBlock Margin="3,0,15,0"
+														   Foreground="#5cccf8"
+														   Text="{Binding DestroyAmmo, Mode=OneWay, StringFormat={}+{0}}">
+													<TextBlock.Style>
+														<Style TargetType="{x:Type TextBlock}">
+															<Style.Triggers>
+																<DataTrigger Binding="{Binding DestroyAmmo, Mode=OneWay}" Value="0">
+																	<Setter Property="Visibility" Value="Hidden" />
+																</DataTrigger>
+															</Style.Triggers>
+														</Style>
+													</TextBlock.Style>
+												</TextBlock>
+												<StackPanel.Style>
+													<Style TargetType="{x:Type StackPanel}">
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding DestroyAmmo, Mode=OneWay}" Value="0">
+																<Setter Property="Opacity" Value="0.33" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</StackPanel.Style>
+											</StackPanel>
+											<StackPanel Orientation="Horizontal"
+													Margin="4,3"
+													Grid.Column="2">
+												<Image Width="18"
+													   Height="18"
+													   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/steel.png" />
+												<TextBlock Margin="3,0,15,0"
+														   Foreground="#5cccf8"
+														   Text="{Binding DestroySteel, Mode=OneWay, StringFormat={}+{0}}">
+													<TextBlock.Style>
+														<Style TargetType="{x:Type TextBlock}">
+															<Style.Triggers>
+																<DataTrigger Binding="{Binding DestroySteel, Mode=OneWay}" Value="0">
+																	<Setter Property="Visibility" Value="Hidden" />
+																</DataTrigger>
+															</Style.Triggers>
+														</Style>
+													</TextBlock.Style>
+												</TextBlock>
+												<StackPanel.Style>
+													<Style TargetType="{x:Type StackPanel}">
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding DestroySteel, Mode=OneWay}" Value="0">
+																<Setter Property="Opacity" Value="0.33" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</StackPanel.Style>
+											</StackPanel>
+											<StackPanel Orientation="Horizontal"
+													Margin="4,3"
+													Grid.Column="3">
+												<Image Width="18"
+													   Height="18"
+													   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/bauxite.png" />
+												<TextBlock Margin="3,0,15,0"
+														   Foreground="#5cccf8"
+														   Text="{Binding DestroyBauxite, Mode=OneWay, StringFormat={}+{0}}">
+													<TextBlock.Style>
+														<Style TargetType="{x:Type TextBlock}">
+															<Style.Triggers>
+																<DataTrigger Binding="{Binding DestroyBauxite, Mode=OneWay}" Value="0">
+																	<Setter Property="Visibility" Value="Hidden" />
+																</DataTrigger>
+															</Style.Triggers>
+														</Style>
+													</TextBlock.Style>
+												</TextBlock>
+												<StackPanel.Style>
+													<Style TargetType="{x:Type StackPanel}">
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding DestroyBauxite, Mode=OneWay}" Value="0">
+																<Setter Property="Opacity" Value="0.33" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</StackPanel.Style>
+											</StackPanel>
+										</Grid>
 									</StackPanel>
 								</StackPanel>
 							</ScrollViewer>
