@@ -25,13 +25,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		/// 艦隊に所属している艦娘のコレクションを取得します。
 		/// </summary>
 		public FleetViewModel[] Fleets
-		{
-			get
-			{
-				FleetViewModel[] temps = this.Source.Fleets.Select(x => new FleetViewModel(x)).ToArray();
-				return temps;
-			}
-		}
+			=> this.Source.Fleets
+				.Select(x => new FleetViewModel(x))
+				.ToArray();
 
 		#region 보급량
 
@@ -87,13 +83,13 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 					this.RaisePropertyChanged(nameof(this.QuickStateView))
 				},
 				{ nameof(fleet.State.UsedFuel), (sender,args) =>
-					this.RaisePropertyChanged("UsedFuel")
+					this.RaisePropertyChanged(nameof(this.UsedFuel))
 				},
 				{ nameof(fleet.State.UsedBull), (sender,args) =>
-					this.RaisePropertyChanged("UsedAmmo")
+					this.RaisePropertyChanged(nameof(this.UsedAmmo))
 				},
 				{ nameof(fleet.State.UsedBauxite), (sender,args) =>
-					this.RaisePropertyChanged("UsedBauxite")
+					this.RaisePropertyChanged(nameof(this.UsedBauxite))
 				}
 			});
 

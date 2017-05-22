@@ -22,7 +22,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 
 		public void RequestGC()
 		{
-			GCWorker.GCRequest();
+			GCWorker.GCRequest(-1, GCWorker.GCType.GCAll);
 		}
 	}
 }

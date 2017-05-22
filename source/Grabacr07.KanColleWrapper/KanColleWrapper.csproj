@@ -152,6 +152,8 @@
     <Compile Include="Models\Raw\kcsapi_data_support_info.cs" />
     <Compile Include="Models\Raw\kcsapi_empty_result.cs" />
     <Compile Include="Models\Raw\kcsapi_mst_mapcell.cs" />
+    <Compile Include="Models\Raw\kcsapi_mst_shipgraph.cs" />
+    <Compile Include="Models\Raw\kcsapi_mst_shipupgrade.cs" />
     <Compile Include="Models\Raw\kcsapi_practice_result.cs" />
     <Compile Include="Models\Raw\kcsapi_require_info.cs" />
     <Compile Include="Models\Raw\kcsapi_ship_deck.cs" />

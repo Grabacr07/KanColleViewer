@@ -4,6 +4,7 @@ using System.Linq;
 using Grabacr07.KanColleWrapper.Internal;
 using Grabacr07.KanColleWrapper.Models.Raw;
 using System.Diagnostics;
+using System.Threading;
 
 namespace Grabacr07.KanColleWrapper.Models
 {
@@ -495,8 +496,25 @@ namespace Grabacr07.KanColleWrapper.Models
 				: SumASW >= 100;
 
 		// 선제 대잠에 필요한 장비 추천
+		private string _RequireASW { get; set; } = null;
 		public string RequireASW
-			=> ASWCalculator.GetASWTooltip(this);
+		{
+			get
+			{
+				if (_RequireASW == null)
+				{
+					_RequireASW = "계산중...";
+
+					new Thread(() =>
+					{
+						this._RequireASW = ASWCalculator.GetASWTooltip(this);
+						this.RaisePropertyChanged(nameof(this.RequireASW));
+					}).Start();
+				}
+
+				return _RequireASW;
+			}
+		}
 
 		internal Ship(Homeport parent, kcsapi_ship2 rawData)
 			: base(rawData)
@@ -508,6 +526,9 @@ namespace Grabacr07.KanColleWrapper.Models
 		internal void Update(kcsapi_ship2 rawData)
 		{
 			this.UpdateRawData(rawData);
+
+			this._RequireASW = null;
+			this.RaisePropertyChanged(nameof(this.RequireASW));
 
 			this.Info = KanColleClient.Current.Master.Ships[rawData.api_ship_id] ?? ShipInfo.Dummy;
 			this.HP = new LimitedValue(this.RawData.api_nowhp, this.RawData.api_maxhp, 0);
