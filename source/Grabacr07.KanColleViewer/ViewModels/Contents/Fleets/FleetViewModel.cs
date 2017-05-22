@@ -21,7 +21,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 		public int Id => this.Source.Id;
 
-		public string Name => string.IsNullOrEmpty(this.Source.Name.Trim()) ? "(제 " + this.Source.Id + " 함대)" : this.Source.Name;
+		public string Name => string.IsNullOrEmpty(this.Source.Name.Trim())
+			? "(제 " + this.Source.Id + " 함대)"
+			: this.Source.Name;
 
 		#region string
 		private string _ShipTypeString;
@@ -143,7 +145,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				// 같은 값을 넣는 것으로 원정 성공 여부 등을 재계산해야함
 
 				this._ExpeditionId = value;
-				this.IsPassed = this.CompareExpeditionData(value, this.Ships);
+				this.IsPassed = this.CompareExpeditionData(value, this.Source.Ships);
 
 				this.IsPossible = !this.IsPassed
 					? ExpeditionPossible.NotAccepted
@@ -295,8 +297,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			{
 				this._GreatChance = value;
 				this.RaisePropertyChanged();
-				this.RaisePropertyChanged("CanGreatSuccess");
-				this.RaisePropertyChanged("GreateChanceText");
+				this.RaisePropertyChanged(nameof(this.CanGreatSuccess));
+				this.RaisePropertyChanged(nameof(this.GreatChanceText));
 			}
 		}
 		public bool CanGreatSuccess => this.GreatChance > 0;
@@ -306,8 +308,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 		#region 보급량
 
-		public int UsedFuel => this.Ships.Select(x => x.Ship.UsedFuel).Sum(x => x);
-		public int UsedAmmo => this.Ships.Select(x => x.Ship.UsedBull).Sum(x => x);
+		public int UsedFuel => this.Ships.Sum(x => x.Ship.UsedFuel);
+		public int UsedAmmo => this.Ships.Sum(x => x.Ship.UsedBull);
 		public int UsedBauxite => this.Ships.Sum(x => x.Ship.Slots.Sum(y => y.Lost * 5));
 
 		#endregion
@@ -319,13 +321,13 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		{
 			get
 			{
-				ShipViewModel[] temps = this.Source.Ships.Select(x => new ShipViewModel(x)).ToArray();
-				this.ShipTypeTable = MakeShipTypeTable(temps);
+				this.ShipTypeTable = MakeShipTypeTable(this.Source.Ships);
+				this.IsPassed = CompareExpeditionData(this.ExpeditionId, this.Source.Ships);
 
-				this.IsPassed = CompareExpeditionData(this.ExpeditionId, temps);
-				return temps;
+				return this.Source.Ships.Select(x => new ShipViewModel(x)).ToArray();
 			}
 		}
+
 		public List<int> ResultList { get; set; }
 		private Dictionary<int, int> ShipTypeTable { get; set; }
 
@@ -359,8 +361,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		public FleetViewModel(Fleet fleet)
 		{
 			this.Source = fleet;
-
-			this.IsFirstFleet = Visibility.Collapsed;
+			this.ShipTypeTable = MakeShipTypeTable(this.Source.Ships);
 
 			if (this.Source.Id > 1)
 			{
@@ -376,7 +377,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			this.CompositeDisposable.Add(new PropertyChangedEventListener(fleet)
 			{
 				(sender, args) => this.RaisePropertyChanged(args.PropertyName),
-				{ nameof(fleet.ShipsUpdated), (sender,args)=>this.ExpeditionId = this.ExpeditionId }
+				{ nameof(fleet.ShipsUpdated), (sender,args) => this.ExpeditionId = this.ExpeditionId }
 			});
 
 			fleet.State.Updated += (sender, args) => this.ExpeditionId = this.ExpeditionId; // 편성 변경?
@@ -404,16 +405,16 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 				{ nameof(fleet.State.Situation), (sender, args) => this.RaisePropertyChanged(nameof(this.IsInSortie)) },
 				{  nameof(fleet.State.UsedFuel), (sender,args) =>
 					{
-						this.RaisePropertyChanged("UsedFuel");
-						this.RaisePropertyChanged("UsedAmmo");
-						this.RaisePropertyChanged("UsedBauxite");
+						this.RaisePropertyChanged(nameof(this.UsedFuel));
+						this.RaisePropertyChanged(nameof(this.UsedAmmo));
+						this.RaisePropertyChanged(nameof(this.UsedBauxite));
 					}
 				},
 				{  nameof(fleet.State.UsedBull), (sender,args) =>
 					{
-						this.RaisePropertyChanged("UsedFuel");
-						this.RaisePropertyChanged("UsedAmmo");
-						this.RaisePropertyChanged("UsedBauxite");
+						this.RaisePropertyChanged(nameof(this.UsedFuel));
+						this.RaisePropertyChanged(nameof(this.UsedAmmo));
+						this.RaisePropertyChanged(nameof(this.UsedBauxite));
 					}
 				}
 			});
@@ -425,7 +426,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 		/// <param name="MissonNum"></param>
 		/// <param name="ResourceType">0=연료 1=탄</param>
 		/// <returns></returns>
-		private int LossResource(ShipViewModel[] fleet, int MissionNum, int ResourceType = 0)
+		private int LossResource(Ship[] fleet, int MissionNum, int ResourceType = 0)
 		{
 			double total = 0;
 
@@ -433,26 +434,27 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			if (ResourceType == 1) losstype = "ArmoLoss";
 
 			var percent = KanColleClient.Current.Translations.GetExpeditionData(losstype, MissionNum);
-			if (percent == string.Empty) return -1;
+			if (string.IsNullOrEmpty(percent)) return -1;
 
 			double LossPercent = (double)Convert.ToInt32(percent) / 100d;
 
-			for (int i = 0; i < fleet.Count(); i++)
+			total = fleet.Sum(x =>
 			{
-				double temp = 0;
-				if (ResourceType == 1) temp = Convert.ToInt32(Math.Truncate((double)fleet[i].Ship.Bull.Maximum * LossPercent));
-				else temp = Convert.ToInt32(Math.Truncate((double)fleet[i].Ship.Fuel.Maximum * LossPercent));
+				if (ResourceType == 1)
+					return (int)Math.Floor((double)x.Bull.Maximum * LossPercent);
+				else
+					return (int)Math.Floor((double)x.Fuel.Maximum * LossPercent);
+			});
 
-				total += temp;
-			}
-
-			if (ResourceType == 1) this.vArmo = Visibility.Visible;
-			else this.vFuel = Visibility.Visible;
+			if (ResourceType == 1)
+				this.vArmo = Visibility.Visible;
+			else
+				this.vFuel = Visibility.Visible;
 
 			this.vResource = Visibility.Visible;
-			return Convert.ToInt32(total);
+			return (int)total;
 		}
-		private bool DrumCount(int Mission, ShipViewModel[] fleet)
+		private bool DrumCount(int Mission, Ship[] fleet)
 		{
 			bool result = false;
 			var NeedDrumRaw = KanColleClient.Current.Translations.GetExpeditionData("DrumCount", Mission);
@@ -462,31 +464,14 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			int nHasDrumShip = Convert.ToInt32(sNeedDrumRaw[1]);
 			this.nDrum = "총" + sNeedDrumRaw[0] + "개, " + "장착칸무스 최소 " + sNeedDrumRaw[1] + "척";
 			this.vDrum = Visibility.Visible;
-			int rTotalDrum = 0;
-			int rHasDrumShip = 0;
-			bool shipCheck = false;
 
-			for (int i = 0; i < fleet.Count(); i++)
-			{
-				for (int j = 0; j < fleet[i].Ship.Slots.Count(); j++)
-				{
-					if (fleet[i].Ship.Slots[j].Equipped && fleet[i].Ship.Slots[j].Item.Info.CategoryId == 30)
-					{
-						rTotalDrum++;
-						if (!shipCheck)
-						{
-							rHasDrumShip++;
-							shipCheck = true;
-						}
-					}
-				}
-				shipCheck = false;
-			}
+			int rHasDrumShip = fleet.Count(x => x.Slots.Any(y => y.Equipped && y.Item.Info.CategoryId == 30));
+			int rTotalDrum = fleet.Sum(x => x.Slots.Count(y => y.Equipped && y.Item.Info.CategoryId == 30));
+
 			if (rTotalDrum >= nTotalDrum && rHasDrumShip >= nHasDrumShip) result = true;
-
 			return result;
 		}
-		private bool CompareExpeditionData(int Mission, ShipViewModel[] fleet)
+		private bool CompareExpeditionData(int Mission, Ship[] fleet)
 		{
 			this.vFlag = Visibility.Collapsed;
 			this.vFlagType = Visibility.Collapsed;
@@ -500,7 +485,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			if (fleet.Count() <= 0) return false;
 			if (Mission < 1) return false;
 			bool Chk = true;
-			if (this.ShipTypeTable.Count <= 0) Chk = false;
+			if (this.ShipTypeTable?.Count <= 0) Chk = false;
 			if (Mission < 1) return false;
 			this.ShipTypeTable = this.ChangeSpecialType(this.ShipTypeTable, Mission);
 
@@ -524,21 +509,21 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			if (FLv != string.Empty && FLv != "-")
 			{
 				int lv = Convert.ToInt32(FLv);
-				if (fleet[0] != null && fleet[0].Ship.Level < lv) Chk = false;
+				if (fleet[0] != null && fleet[0].Level < lv) Chk = false;
 				this.FlagLv = ("Lv" + lv);
 				this.vFlag = Visibility.Visible;
 			}
 			if (TotalLevel != string.Empty)
 			{
 				int totallv = Convert.ToInt32(TotalLevel);
-				if (fleet.Sum(x => x.Ship.Level) < totallv) Chk = false;
+				if (fleet.Sum(x => x.Level) < totallv) Chk = false;
 				this.TotalLv = ("Lv" + totallv);
 				this.vTotal = Visibility.Visible;
 			}
 			if (FlagShipType != string.Empty)
 			{
 				int flagship = Convert.ToInt32(FlagShipType);
-				if (fleet[0].Ship.Info.ShipType.Id != flagship) Chk = false;
+				if (fleet[0].Info.ShipType.Id != flagship) Chk = false;
 				this.FlagType = (KanColleClient.Current.Translations.GetTranslation("", TranslationType.ShipTypes, false, null, flagship));
 				this.vFlagType = Visibility.Visible;
 			}
@@ -583,33 +568,17 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			return Chk;
 		}
 		#region Make & Replace List
-		private Dictionary<int, int> MakeShipTypeTable(ShipViewModel[] source)
+		private Dictionary<int, int> MakeShipTypeTable(Ship[] source)
 		{
 			if (source.Count() <= 0) return new Dictionary<int, int>();
-			Dictionary<int, int> temp = new Dictionary<int, int>();
-			List<int> rawList = new List<int>();
-			List<int> DistinctList = new List<int>();
 
-			foreach (var ship in source)
-			{
-				int ID = ship.Ship.Info.ShipType.Id;
-				rawList.Add(ID);
-			}
-			for (int i = 0; i < rawList.Count; i++)
-			{
-				if (DistinctList.Contains(rawList[i]))
-					continue;
-				DistinctList.Add(rawList[i]);
-			}
-			for (int i = 0; i < DistinctList.Count; i++)
-			{
-				temp.Add(DistinctList[i], rawList.Where(x => x == DistinctList[i]).Count());
-			}
-			return temp;
+			var rawList = source.Select(x => x.Info.ShipType.Id);
+			return rawList.Distinct()
+				.ToDictionary(x => x, x => rawList.Count(y => y == x));
 		}
 		private Dictionary<int, int> ChangeSpecialType(Dictionary<int, int> list, int MissionNum)
 		{
-			Dictionary<int, int> templist = new Dictionary<int, int>(list);
+			Dictionary<int, int> templist = new Dictionary<int, int>(list ?? new Dictionary<int, int>());
 			bool Checker = true;
 			int SpecialCount = 1;
 			while (Checker)

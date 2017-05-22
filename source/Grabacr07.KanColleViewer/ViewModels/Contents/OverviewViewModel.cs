@@ -129,6 +129,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			var catalog = new CalculatorViewModel();
 			WindowService.Current.MainWindow.Transition(catalog, typeof(Calculator));
 		}
+		public void ShowDictionary()
+		{
+			var catalog = new DictionaryViewModel();
+			WindowService.Current.MainWindow.Transition(catalog, typeof(DictionaryWindow));
+		}
 		public void ExpeditionsCatalogWindow()
 		{
 			var catalog = new ExpeditionsCatalogWindowViewModel();

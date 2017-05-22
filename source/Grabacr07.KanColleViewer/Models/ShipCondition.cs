@@ -23,7 +23,7 @@ namespace Grabacr07.KanColleViewer.Models
 				{
 					this._Remaining = value;
 					this.RaisePropertyChanged();
-					this.RaisePropertyChanged("ConditionText");
+					this.RaisePropertyChanged(nameof(this.ConditionText));
 				}
 			}
 		}

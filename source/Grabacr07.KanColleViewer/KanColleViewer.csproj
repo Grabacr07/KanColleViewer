@@ -135,6 +135,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\LivetCask.1.3.1.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -209,6 +210,7 @@
     <Compile Include="Models\Migration\_KanColleClientSettings.cs" />
     <Compile Include="ViewModels\AkashiTimerViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\CalculatorViewModel.cs" />
+    <Compile Include="ViewModels\Catalogs\DictionaryViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\ExpeditionsCatalogWindowViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\NeedNdockShipCatalogWindowViewModel.cs" />
     <Compile Include="ViewModels\Catalogs\NotePadViewModel.cs" />
@@ -293,6 +295,9 @@
     </Compile>
     <Compile Include="Views\Catalogs\Calculator.xaml.cs">
       <DependentUpon>Calculator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Catalogs\DictionaryWindow.xaml.cs">
+      <DependentUpon>DictionaryWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Catalogs\ExpeditionsCatalogWindow.xaml.cs">
       <DependentUpon>ExpeditionsCatalogWindow.xaml</DependentUpon>
@@ -468,6 +473,10 @@
     <Page Include="Views\Catalogs\Calculator.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Catalogs\DictionaryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Catalogs\ExpeditionsCatalogWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
