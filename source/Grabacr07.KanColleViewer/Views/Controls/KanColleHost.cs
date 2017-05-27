@@ -58,11 +58,14 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 			if (oldBrowser != null)
 			{
+				oldBrowser.Navigated -= instance.HandleNavigated;
 				oldBrowser.LoadCompleted -= instance.HandleLoadCompleted;
 			}
 			if (newBrowser != null)
 			{
+				newBrowser.Navigated += instance.HandleNavigated;
 				newBrowser.LoadCompleted += instance.HandleLoadCompleted;
+
 				var events = WebBrowserHelper.GetAxWebbrowser2(newBrowser) as DWebBrowserEvents_Event;
 				if (events != null) events.NewWindow += instance.HandleWebBrowserNewWindow;
 			}
@@ -133,7 +136,16 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 		public KanColleHost()
 		{
 			this.Loaded += (sender, args) => this.Update();
-			KanColleSettings.FlashElementQuality.ValueChanged += (s, e) => ApplyFlashQuality(true);
+
+			FlashQuality init = KanColleSettings.FlashElementQuality;
+			KanColleSettings.FlashElementQuality.ValueChanged += (s, e) =>
+			{
+				if (KanColleSettings.FlashElementQuality != init)
+				{
+					init = KanColleSettings.FlashElementQuality;
+					ApplyFlashQuality(true);
+				}
+			};
 		}
 
 		public override void OnApplyTemplate()
@@ -201,14 +213,26 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			}
 		}
 
+		private void HandleNavigated(object sender, NavigationEventArgs e)
+		{
+			if (e.Uri.AbsoluteUri == KanColleViewer.Properties.Settings.Default.KanColleUrl.AbsoluteUri)
+			{
+				this.firstLoaded = true;
+
+				this.ApplyStyleSheet();
+				WebBrowserHelper.SetScriptErrorsSuppressed(this.WebBrowser, true);
+				this.Update();
+			}
+		}
 		private void HandleLoadCompleted(object sender, NavigationEventArgs e)
 		{
-			this.ApplyStyleSheet();
-			this.ApplyFlashQuality();
-			WebBrowserHelper.SetScriptErrorsSuppressed(this.WebBrowser, true);
-
-			this.firstLoaded = true;
-			this.Update();
+			if (KanColleSettings.FlashElementQuality != FlashQuality.High)
+				this.ApplyFlashQuality(true);
+			else
+			{
+				var script = "try{ var a=document.getElementById('game_frame'); a.style.display='block'; }catch(e){}";
+				WebBrowser.InvokeScript("eval", new object[] { script });
+			}
 		}
 
 		private void HandleWebBrowserNewWindow(string url, int flags, string targetFrameName, ref object postData, string headers, ref bool processed)
@@ -226,6 +250,18 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 			try
 			{
+				var script = string.Format(
+					"document.addEventListener('DOMContentLoaded', function(){{"
+						+ "var x=document.createElement('style');x.type='text/css';x.innerHTML='{0}';document.body.appendChild(x);"
+						+ "x=document.createElement('div');x.id='game_frame_back';document.body.appendChild(x);"
+					+ "}});",
+					this.UserStyleSheet.Replace("'", "\\'").Replace("\r\n", "\\n")
+					+ " #game_frame{display:none} #game_frame_back{position:fixed;left:0;top:0;width:800px;height:480px;z-index:0;background:#030303}"
+				);
+				WebBrowser.InvokeScript("eval", new object[] { script });
+				this.styleSheetApplied = true;
+
+				/*
 				var document = this.WebBrowser.Document as HTMLDocument;
 				if (document == null) return;
 
@@ -244,6 +280,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 					target.createStyleSheet().cssText = this.UserStyleSheet;
 					this.styleSheetApplied = true;
 				}
+				*/
 			}
 			catch (Exception) when (Application.Instance.State == ApplicationState.Startup)
 			{
@@ -286,11 +323,15 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 						case FlashQuality.High: qualityString = "high"; break;
 					}
 
-					var script = "";
-					script += "function kcsFlash_StartFlash(a){var b={id:'externalswf',width:'800',height:'480',wmode:'opaque',quality:'" + qualityString + "',bgcolor:'#000000',allowScriptAccess:'always'};document.getElementById('flashWrap').innerHTML=ConstMessageInfo.InstallFlashMessage,gadgets.flash.embedFlash(a+ConstURLInfo.MainFlashURL+'?api_token='+flashInfo.apiToken+'&api_starttime='+flashInfo.apiStartTime,document.getElementById('flashWrap'),6,b),document.getElementById('adFlashWrap').style.height='0px',document.getElementById('wsFlashWrap').style.height='0px',document.getElementById('flashWrap').style.height='480px',gadgets.window.adjustHeight(ConstGadgetInfo.height)};";
-					if(ReloadRequired) script += "kcsLogin_StartLogin();";
+					var script = "function kcsFlash_StartFlash(a){var b={id:'externalswf',width:'800',height:'480',wmode:'opaque',quality:'" + qualityString + "',bgcolor:'#000000',allowScriptAccess:'always'};"
+						+ "document.getElementById('flashWrap').innerHTML=ConstMessageInfo.InstallFlashMessage,gadgets.flash.embedFlash(a+ConstURLInfo.MainFlashURL+'?api_token='+flashInfo.apiToken+'&api_starttime='+flashInfo.apiStartTime,document.getElementById('flashWrap'),6,b),"
+						+ "document.getElementById('adFlashWrap').style.height='0px',document.getElementById('wsFlashWrap').style.height='0px',document.getElementById('flashWrap').style.height='480px',gadgets.window.adjustHeight(ConstGadgetInfo.height)};";
+					if (ReloadRequired) script += "kcsLogin_StartLogin();";
 
 					webBrowser.Navigate("javascript:" + script);
+
+					script = "try{ var a=document.getElementById('game_frame'); a.style.display='block'; }catch(e){}";
+					WebBrowser.InvokeScript("eval", new object[] { script });
 
 					GCWorker.GCRequest();
 				}
