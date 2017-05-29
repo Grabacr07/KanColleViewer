@@ -219,19 +219,19 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			{
 				this.firstLoaded = true;
 
-				this.ApplyStyleSheet();
 				WebBrowserHelper.SetScriptErrorsSuppressed(this.WebBrowser, true);
+				this.ApplyStyleSheet();
 				this.Update();
 			}
 		}
 		private void HandleLoadCompleted(object sender, NavigationEventArgs e)
 		{
-			if (KanColleSettings.FlashElementQuality != FlashQuality.High)
-				this.ApplyFlashQuality(true);
-			else
+			if (e.Uri.AbsoluteUri == KanColleViewer.Properties.Settings.Default.KanColleUrl.AbsoluteUri)
 			{
-				var script = "try{ var a=document.getElementById('game_frame'); a.style.display='block'; }catch(e){}";
-				WebBrowser.InvokeScript("eval", new object[] { script });
+				WebBrowserHelper.SetScriptErrorsSuppressed(this.WebBrowser, true);
+
+				if (KanColleSettings.FlashElementQuality != FlashQuality.High)
+					this.ApplyFlashQuality(true);
 			}
 		}
 
@@ -253,10 +253,8 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 				var script = string.Format(
 					"document.addEventListener('DOMContentLoaded', function(){{"
 						+ "var x=document.createElement('style');x.type='text/css';x.innerHTML='{0}';document.body.appendChild(x);"
-						+ "x=document.createElement('div');x.id='game_frame_back';document.body.appendChild(x);"
 					+ "}});",
 					this.UserStyleSheet.Replace("'", "\\'").Replace("\r\n", "\\n")
-					+ " #game_frame{display:none} #game_frame_back{position:fixed;left:0;top:0;width:800px;height:480px;z-index:0;background:#030303}"
 				);
 				WebBrowser.InvokeScript("eval", new object[] { script });
 				this.styleSheetApplied = true;
@@ -329,10 +327,6 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 					if (ReloadRequired) script += "kcsLogin_StartLogin();";
 
 					webBrowser.Navigate("javascript:" + script);
-
-					script = "try{ var a=document.getElementById('game_frame'); a.style.display='block'; }catch(e){}";
-					WebBrowser.InvokeScript("eval", new object[] { script });
-
 					GCWorker.GCRequest();
 				}
 			}
