@@ -212,9 +212,13 @@ namespace Grabacr07.KanColleWrapper.Models
 						break;
 
 					// 정찰기, 수상정찰기, (분식정찰기?)
-					// 본래는 제공치에 포함되지 않으나 기항대에는 포함되나?
-					// 다만 어차피 대공이 안붙어있음
+					// 본래는 제공치에 포함되지 않으나 기항대에는 포함되는 듯
+					// 다만 기지항공대 공격을 방공할 때에만 출격하는 듯함. 일단은 주석처리
 					default:
+						/*
+						bonus = Math.Sqrt(proficiency.GetInternalValue(def) / 10.0)
+							+ 0;
+						*/
 						break;
 				}
 				bonus = Math.Min(22, bonus) + Math.Sqrt(12);

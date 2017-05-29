@@ -131,9 +131,17 @@
 								<ColumnDefinition Width="Auto" />
 								<ColumnDefinition Width="*" />
 							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="*" />
+							</Grid.RowDefinitions>
 
+							<metro:PromptTextBox Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+												 Prompt="칸무스 검색"
+												 Padding="2" />
 							<ScrollViewer VerticalScrollBarVisibility="Auto"
-										  Margin="0,0,2,0">
+										  Margin="0,0,2,0"
+										  Grid.Row="1">
 								<ListBox Background="{DynamicResource ActiveBackgroundBrushKey}"
 										 ItemsSource="{Binding ShipList}"
 										 SelectedValue="{Binding SelectedShip}"
@@ -222,6 +230,7 @@
 							</ScrollViewer>
 
 							<ScrollViewer Grid.Column="1"
+										  Grid.RowSpan="2"
 										  VerticalScrollBarVisibility="Auto">
 								<StackPanel Orientation="Vertical"
 											Margin="0,0,0,10"
@@ -285,7 +294,17 @@
 													   VerticalAlignment="Center"
 													   FontSize="12"
 													   Foreground="#FFF08020"
-													   Text="레벨:" />
+													   Text="레벨:">
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}">
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True">
+																<Setter Property="Visibility" Value="Collapsed" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
 											<metro:PromptComboBox Grid.Column="2"
 																  Margin="8"
 																  VerticalAlignment="Center"
@@ -310,6 +329,15 @@
 														</TextBlock>
 													</DataTemplate>
 												</metro:PromptComboBox.ItemTemplate>
+												<metro:PromptComboBox.Style>
+													<Style TargetType="{x:Type metro:PromptComboBox}">
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True">
+																<Setter Property="Visibility" Value="Collapsed" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</metro:PromptComboBox.Style>
 											</metro:PromptComboBox>
 										</Grid>
 
@@ -336,6 +364,7 @@
 
 												<RowDefinition Height="Auto" />
 												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
 											</Grid.RowDefinitions>
 
 											<Image Grid.Column="0"
@@ -359,6 +388,18 @@
 																<DataTrigger Binding="{Binding CurHP, Mode=OneWay}" Value="-1">
 																	<Setter Property="Text" Value="???" />
 																</DataTrigger>
+																<DataTrigger Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True">
+																	<Setter Property="Text" Value="{Binding AbyssalHP, Mode=OneWay}" />
+																</DataTrigger>
+																<MultiDataTrigger>
+																	<MultiDataTrigger.Conditions>
+																		<Condition Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True" />
+																		<Condition Binding="{Binding AbyssalHP, Mode=OneWay}" Value="-1" />
+																	</MultiDataTrigger.Conditions>
+																	<MultiDataTrigger.Setters>
+																		<Setter Property="Text" Value="???" />
+																	</MultiDataTrigger.Setters>
+																</MultiDataTrigger>
 															</Style.Triggers>
 														</Style>
 													</Run.Style>
@@ -374,6 +415,9 @@
 															<Style TargetType="{x:Type TextBlock}">
 																<Style.Triggers>
 																	<DataTrigger Binding="{Binding MarriageHPResult, Mode=OneWay}" Value="0">
+																		<Setter Property="Visibility" Value="Collapsed" />
+																	</DataTrigger>
+																	<DataTrigger Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True">
 																		<Setter Property="Visibility" Value="Collapsed" />
 																	</DataTrigger>
 																</Style.Triggers>
@@ -404,38 +448,64 @@
 																<DataTrigger Binding="{Binding MinArmor, Mode=OneWay}" Value="-1">
 																	<Setter Property="Text" Value="???" />
 																</DataTrigger>
-															</Style.Triggers>
-														</Style>
-													</Run.Style>
-												</Run>
-												<Run Text="＞" />
-												<Run>
-													<Run.Style>
-														<Style TargetType="{x:Type Run}">
-															<Setter Property="Text" Value="{Binding MaxArmor, Mode=OneWay}" />
-															<Style.Triggers>
-																<DataTrigger Binding="{Binding MaxArmor, Mode=OneWay}" Value="-1">
-																	<Setter Property="Text" Value="???" />
+																<DataTrigger Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True">
+																	<Setter Property="Text" Value="{Binding AbyssalArmor, Mode=OneWay}" />
 																</DataTrigger>
+																<MultiDataTrigger>
+																	<MultiDataTrigger.Conditions>
+																		<Condition Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True" />
+																		<Condition Binding="{Binding AbyssalArmor, Mode=OneWay}" Value="-1" />
+																	</MultiDataTrigger.Conditions>
+																	<MultiDataTrigger.Setters>
+																		<Setter Property="Text" Value="???" />
+																	</MultiDataTrigger.Setters>
+																</MultiDataTrigger>
 															</Style.Triggers>
 														</Style>
 													</Run.Style>
 												</Run>
+												<InlineUIContainer>
+													<TextBlock Foreground="#5cccf8">
+														<Run Text="＞" />
+														<Run>
+															<Run.Style>
+																<Style TargetType="{x:Type Run}">
+																	<Setter Property="Text" Value="{Binding MaxArmor, Mode=OneWay}" />
+																	<Style.Triggers>
+																		<DataTrigger Binding="{Binding MaxArmor, Mode=OneWay}" Value="-1">
+																			<Setter Property="Text" Value="???" />
+																		</DataTrigger>
+																	</Style.Triggers>
+																</Style>
+															</Run.Style>
+														</Run>
 
-												<Run Text="  (" Foreground="#FFF08020" />
-												<Run Foreground="#FFF08020">
-													<Run.Style>
-														<Style TargetType="{x:Type Run}">
-															<Setter Property="Text" Value="{Binding CurArmor, Mode=OneWay}" />
-															<Style.Triggers>
-																<DataTrigger Binding="{Binding CurArmor, Mode=OneWay}" Value="-1">
-																	<Setter Property="Text" Value="???" />
-																</DataTrigger>
-															</Style.Triggers>
-														</Style>
-													</Run.Style>
-												</Run>
-												<Run Text=")" Foreground="#FFF08020" />
+														<Run Text="  (" Foreground="#FFF08020" />
+														<Run Foreground="#FFF08020">
+															<Run.Style>
+																<Style TargetType="{x:Type Run}">
+																	<Setter Property="Text" Value="{Binding CurArmor, Mode=OneWay}" />
+																	<Style.Triggers>
+																		<DataTrigger Binding="{Binding CurArmor, Mode=OneWay}" Value="-1">
+																			<Setter Property="Text" Value="???" />
+																		</DataTrigger>
+																	</Style.Triggers>
+																</Style>
+															</Run.Style>
+														</Run>
+														<Run Text=")" Foreground="#FFF08020" />
+
+														<TextBlock.Style>
+															<Style TargetType="{x:Type TextBlock}">
+																<Style.Triggers>
+																	<DataTrigger Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True">
+																		<Setter Property="Visibility" Value="Collapsed" />
+																	</DataTrigger>
+																</Style.Triggers>
+															</Style>
+														</TextBlock.Style>
+													</TextBlock>
+												</InlineUIContainer>
 											</TextBlock>
 
 											<Image Grid.Column="0"
@@ -461,38 +531,65 @@
 																<DataTrigger Binding="{Binding MinEvasion, Mode=OneWay}" Value="-1">
 																	<Setter Property="Text" Value="???" />
 																</DataTrigger>
-															</Style.Triggers>
-														</Style>
-													</Run.Style>
-												</Run>
-												<Run Text="＞" />
-												<Run>
-													<Run.Style>
-														<Style TargetType="{x:Type Run}">
-															<Setter Property="Text" Value="{Binding MaxEvasion, Mode=OneWay}" />
-															<Style.Triggers>
-																<DataTrigger Binding="{Binding MaxEvasion, Mode=OneWay}" Value="-1">
-																	<Setter Property="Text" Value="???" />
-																</DataTrigger>
-															</Style.Triggers>
-														</Style>
-													</Run.Style>
-												</Run>
 
-												<Run Text="  (" Foreground="#FFF08020" />
-												<Run Foreground="#FFF08020">
-													<Run.Style>
-														<Style TargetType="{x:Type Run}">
-															<Setter Property="Text" Value="{Binding CurEvasion, Mode=OneWay}" />
-															<Style.Triggers>
-																<DataTrigger Binding="{Binding CurEvasion, Mode=OneWay}" Value="-1">
-																	<Setter Property="Text" Value="???" />
+																<DataTrigger Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True">
+																	<Setter Property="Text" Value="{Binding AbyssalEvasion, Mode=OneWay}" />
 																</DataTrigger>
+																<MultiDataTrigger>
+																	<MultiDataTrigger.Conditions>
+																		<Condition Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True" />
+																		<Condition Binding="{Binding AbyssalEvasion, Mode=OneWay}" Value="-1" />
+																	</MultiDataTrigger.Conditions>
+																	<MultiDataTrigger.Setters>
+																		<Setter Property="Text" Value="???" />
+																	</MultiDataTrigger.Setters>
+																</MultiDataTrigger>
 															</Style.Triggers>
 														</Style>
 													</Run.Style>
 												</Run>
-												<Run Text=")" Foreground="#FFF08020" />
+												<InlineUIContainer>
+													<TextBlock Foreground="#5cccf8">
+														<Run Text="＞" />
+														<Run>
+															<Run.Style>
+																<Style TargetType="{x:Type Run}">
+																	<Setter Property="Text" Value="{Binding MaxEvasion, Mode=OneWay}" />
+																	<Style.Triggers>
+																		<DataTrigger Binding="{Binding MaxEvasion, Mode=OneWay}" Value="-1">
+																			<Setter Property="Text" Value="???" />
+																		</DataTrigger>
+																	</Style.Triggers>
+																</Style>
+															</Run.Style>
+														</Run>
+
+														<Run Text="  (" Foreground="#FFF08020" />
+														<Run Foreground="#FFF08020">
+															<Run.Style>
+																<Style TargetType="{x:Type Run}">
+																	<Setter Property="Text" Value="{Binding CurEvasion, Mode=OneWay}" />
+																	<Style.Triggers>
+																		<DataTrigger Binding="{Binding CurEvasion, Mode=OneWay}" Value="-1">
+																			<Setter Property="Text" Value="???" />
+																		</DataTrigger>
+																	</Style.Triggers>
+																</Style>
+															</Run.Style>
+														</Run>
+														<Run Text=")" Foreground="#FFF08020" />
+
+														<TextBlock.Style>
+															<Style TargetType="{x:Type TextBlock}">
+																<Style.Triggers>
+																	<DataTrigger Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True">
+																		<Setter Property="Visibility" Value="Collapsed" />
+																	</DataTrigger>
+																</Style.Triggers>
+															</Style>
+														</TextBlock.Style>
+													</TextBlock>
+												</InlineUIContainer>
 											</TextBlock>
 
 											<Image Grid.Column="3"
@@ -520,6 +617,27 @@
 															<DataTrigger Binding="{Binding TotalCarry, Mode=OneWay}" Value="-1">
 																<Setter Property="Text" Value="???" />
 															</DataTrigger>
+															<DataTrigger Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True">
+																<Setter Property="Text" Value="{Binding AbyssalCarry, Mode=OneWay}" />
+															</DataTrigger>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True" />
+																	<Condition Binding="{Binding AbyssalCarry, Mode=OneWay}" Value="0" />
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter Property="Text" Value="" />
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True" />
+																	<Condition Binding="{Binding AbyssalCarry, Mode=OneWay}" Value="-1" />
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter Property="Text" Value="???" />
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
 														</Style.Triggers>
 													</Style>
 												</TextBlock.Style>
@@ -552,38 +670,64 @@
 																<DataTrigger Binding="{Binding MinFire, Mode=OneWay}" Value="-1">
 																	<Setter Property="Text" Value="???" />
 																</DataTrigger>
-															</Style.Triggers>
-														</Style>
-													</Run.Style>
-												</Run>
-												<Run Text="＞" />
-												<Run>
-													<Run.Style>
-														<Style TargetType="{x:Type Run}">
-															<Setter Property="Text" Value="{Binding MaxFire, Mode=OneWay}" />
-															<Style.Triggers>
-																<DataTrigger Binding="{Binding MaxFire, Mode=OneWay}" Value="-1">
-																	<Setter Property="Text" Value="???" />
+																<DataTrigger Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True">
+																	<Setter Property="Text" Value="{Binding AbyssalFire, Mode=OneWay}" />
 																</DataTrigger>
+																<MultiDataTrigger>
+																	<MultiDataTrigger.Conditions>
+																		<Condition Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True" />
+																		<Condition Binding="{Binding AbyssalFire, Mode=OneWay}" Value="-1" />
+																	</MultiDataTrigger.Conditions>
+																	<MultiDataTrigger.Setters>
+																		<Setter Property="Text" Value="???" />
+																	</MultiDataTrigger.Setters>
+																</MultiDataTrigger>
 															</Style.Triggers>
 														</Style>
 													</Run.Style>
 												</Run>
+												<InlineUIContainer>
+													<TextBlock Foreground="#5cccf8">
+														<Run Text="＞" />
+														<Run>
+															<Run.Style>
+																<Style TargetType="{x:Type Run}">
+																	<Setter Property="Text" Value="{Binding MaxFire, Mode=OneWay}" />
+																	<Style.Triggers>
+																		<DataTrigger Binding="{Binding MaxFire, Mode=OneWay}" Value="-1">
+																			<Setter Property="Text" Value="???" />
+																		</DataTrigger>
+																	</Style.Triggers>
+																</Style>
+															</Run.Style>
+														</Run>
 
-												<Run Text="  (" Foreground="#FFF08020" />
-												<Run Foreground="#FFF08020">
-													<Run.Style>
-														<Style TargetType="{x:Type Run}">
-															<Setter Property="Text" Value="{Binding CurFire, Mode=OneWay}" />
-															<Style.Triggers>
-																<DataTrigger Binding="{Binding CurFire, Mode=OneWay}" Value="-1">
-																	<Setter Property="Text" Value="???" />
-																</DataTrigger>
-															</Style.Triggers>
-														</Style>
-													</Run.Style>
-												</Run>
-												<Run Text=")" Foreground="#FFF08020" />
+														<Run Text="  (" Foreground="#FFF08020" />
+														<Run Foreground="#FFF08020">
+															<Run.Style>
+																<Style TargetType="{x:Type Run}">
+																	<Setter Property="Text" Value="{Binding CurFire, Mode=OneWay}" />
+																	<Style.Triggers>
+																		<DataTrigger Binding="{Binding CurFire, Mode=OneWay}" Value="-1">
+																			<Setter Property="Text" Value="???" />
+																		</DataTrigger>
+																	</Style.Triggers>
+																</Style>
+															</Run.Style>
+														</Run>
+														<Run Text=")" Foreground="#FFF08020" />
+
+														<TextBlock.Style>
+															<Style TargetType="{x:Type TextBlock}">
+																<Style.Triggers>
+																	<DataTrigger Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True">
+																		<Setter Property="Visibility" Value="Collapsed" />
+																	</DataTrigger>
+																</Style.Triggers>
+															</Style>
+														</TextBlock.Style>
+													</TextBlock>
+												</InlineUIContainer>
 											</TextBlock>
 
 											<Image Grid.Column="3"
@@ -607,38 +751,64 @@
 																<DataTrigger Binding="{Binding MinTorpedo, Mode=OneWay}" Value="-1">
 																	<Setter Property="Text" Value="???" />
 																</DataTrigger>
-															</Style.Triggers>
-														</Style>
-													</Run.Style>
-												</Run>
-												<Run Text="＞" />
-												<Run>
-													<Run.Style>
-														<Style TargetType="{x:Type Run}">
-															<Setter Property="Text" Value="{Binding MaxTorpedo, Mode=OneWay}" />
-															<Style.Triggers>
-																<DataTrigger Binding="{Binding MaxTorpedo, Mode=OneWay}" Value="-1">
-																	<Setter Property="Text" Value="???" />
+																<DataTrigger Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True">
+																	<Setter Property="Text" Value="{Binding AbyssalTorpedo, Mode=OneWay}" />
 																</DataTrigger>
+																<MultiDataTrigger>
+																	<MultiDataTrigger.Conditions>
+																		<Condition Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True" />
+																		<Condition Binding="{Binding AbyssalTorpedo, Mode=OneWay}" Value="-1" />
+																	</MultiDataTrigger.Conditions>
+																	<MultiDataTrigger.Setters>
+																		<Setter Property="Text" Value="???" />
+																	</MultiDataTrigger.Setters>
+																</MultiDataTrigger>
 															</Style.Triggers>
 														</Style>
 													</Run.Style>
 												</Run>
+												<InlineUIContainer>
+													<TextBlock Foreground="#5cccf8">
+														<Run Text="＞" />
+														<Run>
+															<Run.Style>
+																<Style TargetType="{x:Type Run}">
+																	<Setter Property="Text" Value="{Binding MaxTorpedo, Mode=OneWay}" />
+																	<Style.Triggers>
+																		<DataTrigger Binding="{Binding MaxTorpedo, Mode=OneWay}" Value="-1">
+																			<Setter Property="Text" Value="???" />
+																		</DataTrigger>
+																	</Style.Triggers>
+																</Style>
+															</Run.Style>
+														</Run>
 
-												<Run Text="  (" Foreground="#FFF08020" />
-												<Run Foreground="#FFF08020">
-													<Run.Style>
-														<Style TargetType="{x:Type Run}">
-															<Setter Property="Text" Value="{Binding CurTorpedo, Mode=OneWay}" />
-															<Style.Triggers>
-																<DataTrigger Binding="{Binding CurTorpedo, Mode=OneWay}" Value="-1">
-																	<Setter Property="Text" Value="???" />
-																</DataTrigger>
-															</Style.Triggers>
-														</Style>
-													</Run.Style>
-												</Run>
-												<Run Text=")" Foreground="#FFF08020" />
+														<Run Text="  (" Foreground="#FFF08020" />
+														<Run Foreground="#FFF08020">
+															<Run.Style>
+																<Style TargetType="{x:Type Run}">
+																	<Setter Property="Text" Value="{Binding CurTorpedo, Mode=OneWay}" />
+																	<Style.Triggers>
+																		<DataTrigger Binding="{Binding CurTorpedo, Mode=OneWay}" Value="-1">
+																			<Setter Property="Text" Value="???" />
+																		</DataTrigger>
+																	</Style.Triggers>
+																</Style>
+															</Run.Style>
+														</Run>
+														<Run Text=")" Foreground="#FFF08020" />
+
+														<TextBlock.Style>
+															<Style TargetType="{x:Type TextBlock}">
+																<Style.Triggers>
+																	<DataTrigger Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True">
+																		<Setter Property="Visibility" Value="Collapsed" />
+																	</DataTrigger>
+																</Style.Triggers>
+															</Style>
+														</TextBlock.Style>
+													</TextBlock>
+												</InlineUIContainer>
 											</TextBlock>
 
 											<Image Grid.Column="0"
@@ -664,38 +834,64 @@
 																<DataTrigger Binding="{Binding MinAA, Mode=OneWay}" Value="-1">
 																	<Setter Property="Text" Value="???" />
 																</DataTrigger>
-															</Style.Triggers>
-														</Style>
-													</Run.Style>
-												</Run>
-												<Run Text="＞" />
-												<Run>
-													<Run.Style>
-														<Style TargetType="{x:Type Run}">
-															<Setter Property="Text" Value="{Binding MaxAA, Mode=OneWay}" />
-															<Style.Triggers>
-																<DataTrigger Binding="{Binding MaxAA, Mode=OneWay}" Value="-1">
-																	<Setter Property="Text" Value="???" />
+																<DataTrigger Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True">
+																	<Setter Property="Text" Value="{Binding AbyssalAA, Mode=OneWay}" />
 																</DataTrigger>
+																<MultiDataTrigger>
+																	<MultiDataTrigger.Conditions>
+																		<Condition Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True" />
+																		<Condition Binding="{Binding AbyssalAA, Mode=OneWay}" Value="-1" />
+																	</MultiDataTrigger.Conditions>
+																	<MultiDataTrigger.Setters>
+																		<Setter Property="Text" Value="???" />
+																	</MultiDataTrigger.Setters>
+																</MultiDataTrigger>
 															</Style.Triggers>
 														</Style>
 													</Run.Style>
 												</Run>
+												<InlineUIContainer>
+													<TextBlock Foreground="#5cccf8">
+														<Run Text="＞" />
+														<Run>
+															<Run.Style>
+																<Style TargetType="{x:Type Run}">
+																	<Setter Property="Text" Value="{Binding MaxAA, Mode=OneWay}" />
+																	<Style.Triggers>
+																		<DataTrigger Binding="{Binding MaxAA, Mode=OneWay}" Value="-1">
+																			<Setter Property="Text" Value="???" />
+																		</DataTrigger>
+																	</Style.Triggers>
+																</Style>
+															</Run.Style>
+														</Run>
 
-												<Run Text="  (" Foreground="#FFF08020" />
-												<Run Foreground="#FFF08020">
-													<Run.Style>
-														<Style TargetType="{x:Type Run}">
-															<Setter Property="Text" Value="{Binding CurAA, Mode=OneWay}" />
-															<Style.Triggers>
-																<DataTrigger Binding="{Binding CurAA, Mode=OneWay}" Value="-1">
-																	<Setter Property="Text" Value="???" />
-																</DataTrigger>
-															</Style.Triggers>
-														</Style>
-													</Run.Style>
-												</Run>
-												<Run Text=")" Foreground="#FFF08020" />
+														<Run Text="  (" Foreground="#FFF08020" />
+														<Run Foreground="#FFF08020">
+															<Run.Style>
+																<Style TargetType="{x:Type Run}">
+																	<Setter Property="Text" Value="{Binding CurAA, Mode=OneWay}" />
+																	<Style.Triggers>
+																		<DataTrigger Binding="{Binding CurAA, Mode=OneWay}" Value="-1">
+																			<Setter Property="Text" Value="???" />
+																		</DataTrigger>
+																	</Style.Triggers>
+																</Style>
+															</Run.Style>
+														</Run>
+														<Run Text=")" Foreground="#FFF08020" />
+
+														<TextBlock.Style>
+															<Style TargetType="{x:Type TextBlock}">
+																<Style.Triggers>
+																	<DataTrigger Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True">
+																		<Setter Property="Visibility" Value="Collapsed" />
+																	</DataTrigger>
+																</Style.Triggers>
+															</Style>
+														</TextBlock.Style>
+													</TextBlock>
+												</InlineUIContainer>
 											</TextBlock>
 
 											<Image Grid.Column="3"
@@ -721,38 +917,64 @@
 																<DataTrigger Binding="{Binding MinASW, Mode=OneWay}" Value="-1">
 																	<Setter Property="Text" Value="???" />
 																</DataTrigger>
-															</Style.Triggers>
-														</Style>
-													</Run.Style>
-												</Run>
-												<Run Text="＞" />
-												<Run>
-													<Run.Style>
-														<Style TargetType="{x:Type Run}">
-															<Setter Property="Text" Value="{Binding MaxASW, Mode=OneWay}" />
-															<Style.Triggers>
-																<DataTrigger Binding="{Binding MaxASW, Mode=OneWay}" Value="-1">
-																	<Setter Property="Text" Value="???" />
+																<DataTrigger Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True">
+																	<Setter Property="Text" Value="{Binding AbyssalASW, Mode=OneWay}" />
 																</DataTrigger>
+																<MultiDataTrigger>
+																	<MultiDataTrigger.Conditions>
+																		<Condition Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True" />
+																		<Condition Binding="{Binding AbyssalASW, Mode=OneWay}" Value="-1" />
+																	</MultiDataTrigger.Conditions>
+																	<MultiDataTrigger.Setters>
+																		<Setter Property="Text" Value="???" />
+																	</MultiDataTrigger.Setters>
+																</MultiDataTrigger>
 															</Style.Triggers>
 														</Style>
 													</Run.Style>
 												</Run>
+												<InlineUIContainer>
+													<TextBlock Foreground="#5cccf8">
+														<Run Text="＞" />
+														<Run>
+															<Run.Style>
+																<Style TargetType="{x:Type Run}">
+																	<Setter Property="Text" Value="{Binding MaxASW, Mode=OneWay}" />
+																	<Style.Triggers>
+																		<DataTrigger Binding="{Binding MaxASW, Mode=OneWay}" Value="-1">
+																			<Setter Property="Text" Value="???" />
+																		</DataTrigger>
+																	</Style.Triggers>
+																</Style>
+															</Run.Style>
+														</Run>
 
-												<Run Text="  (" Foreground="#FFF08020" />
-												<Run Foreground="#FFF08020">
-													<Run.Style>
-														<Style TargetType="{x:Type Run}">
-															<Setter Property="Text" Value="{Binding CurASW, Mode=OneWay}" />
-															<Style.Triggers>
-																<DataTrigger Binding="{Binding CurASW, Mode=OneWay}" Value="-1">
-																	<Setter Property="Text" Value="???" />
-																</DataTrigger>
-															</Style.Triggers>
-														</Style>
-													</Run.Style>
-												</Run>
-												<Run Text=")" Foreground="#FFF08020" />
+														<Run Text="  (" Foreground="#FFF08020" />
+														<Run Foreground="#FFF08020">
+															<Run.Style>
+																<Style TargetType="{x:Type Run}">
+																	<Setter Property="Text" Value="{Binding CurASW, Mode=OneWay}" />
+																	<Style.Triggers>
+																		<DataTrigger Binding="{Binding CurASW, Mode=OneWay}" Value="-1">
+																			<Setter Property="Text" Value="???" />
+																		</DataTrigger>
+																	</Style.Triggers>
+																</Style>
+															</Run.Style>
+														</Run>
+														<Run Text=")" Foreground="#FFF08020" />
+
+														<TextBlock.Style>
+															<Style TargetType="{x:Type TextBlock}">
+																<Style.Triggers>
+																	<DataTrigger Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True">
+																		<Setter Property="Visibility" Value="Collapsed" />
+																	</DataTrigger>
+																</Style.Triggers>
+															</Style>
+														</TextBlock.Style>
+													</TextBlock>
+												</InlineUIContainer>
 											</TextBlock>
 
 											<Border Grid.ColumnSpan="6"
@@ -773,8 +995,18 @@
 													   Text="속력" />
 											<TextBlock Grid.Column="2"
 													   Grid.Row="6"
-													   Foreground="#5cccf8"
-													   Text="{Binding SpeedText, Mode=OneWay}" />
+													   Foreground="#5cccf8">
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}">
+														<Setter Property="Text" Value="{Binding SpeedText, Mode=OneWay}" />
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True">
+																<Setter Property="Text" Value="{Binding AbyssalSpeedText, Mode=OneWay}" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
 
 											<Image Grid.Column="3"
 												   Grid.Row="6"
@@ -788,8 +1020,18 @@
 													   Text="사거리" />
 											<TextBlock Grid.Column="5"
 													   Grid.Row="6"
-													   Foreground="#5cccf8"
-													   Text="{Binding RangeText, Mode=OneWay}" />
+													   Foreground="#5cccf8">
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}">
+														<Setter Property="Text" Value="{Binding RangeText, Mode=OneWay}" />
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True">
+																<Setter Property="Text" Value="{Binding AbyssalRangeText, Mode=OneWay}" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
 
 											<Image Grid.Column="0"
 												   Grid.Row="7"
@@ -814,38 +1056,64 @@
 																<DataTrigger Binding="{Binding MinLOS, Mode=OneWay}" Value="-1">
 																	<Setter Property="Text" Value="???" />
 																</DataTrigger>
-															</Style.Triggers>
-														</Style>
-													</Run.Style>
-												</Run>
-												<Run Text="＞" />
-												<Run>
-													<Run.Style>
-														<Style TargetType="{x:Type Run}">
-															<Setter Property="Text" Value="{Binding MaxLOS, Mode=OneWay}" />
-															<Style.Triggers>
-																<DataTrigger Binding="{Binding MaxLOS, Mode=OneWay}" Value="-1">
-																	<Setter Property="Text" Value="???" />
+																<DataTrigger Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True">
+																	<Setter Property="Text" Value="{Binding AbyssalLOS, Mode=OneWay}" />
 																</DataTrigger>
+																<MultiDataTrigger>
+																	<MultiDataTrigger.Conditions>
+																		<Condition Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True" />
+																		<Condition Binding="{Binding AbyssalLOS, Mode=OneWay}" Value="-1" />
+																	</MultiDataTrigger.Conditions>
+																	<MultiDataTrigger.Setters>
+																		<Setter Property="Text" Value="???" />
+																	</MultiDataTrigger.Setters>
+																</MultiDataTrigger>
 															</Style.Triggers>
 														</Style>
 													</Run.Style>
 												</Run>
+												<InlineUIContainer>
+													<TextBlock Foreground="#5cccf8">
+														<Run Text="＞" />
+														<Run>
+															<Run.Style>
+																<Style TargetType="{x:Type Run}">
+																	<Setter Property="Text" Value="{Binding MaxLOS, Mode=OneWay}" />
+																	<Style.Triggers>
+																		<DataTrigger Binding="{Binding MaxLOS, Mode=OneWay}" Value="-1">
+																			<Setter Property="Text" Value="???" />
+																		</DataTrigger>
+																	</Style.Triggers>
+																</Style>
+															</Run.Style>
+														</Run>
 
-												<Run Text="  (" Foreground="#FFF08020" />
-												<Run Foreground="#FFF08020">
-													<Run.Style>
-														<Style TargetType="{x:Type Run}">
-															<Setter Property="Text" Value="{Binding CurLOS, Mode=OneWay}" />
-															<Style.Triggers>
-																<DataTrigger Binding="{Binding CurLOS, Mode=OneWay}" Value="-1">
-																	<Setter Property="Text" Value="???" />
-																</DataTrigger>
-															</Style.Triggers>
-														</Style>
-													</Run.Style>
-												</Run>
-												<Run Text=")" Foreground="#FFF08020" />
+														<Run Text="  (" Foreground="#FFF08020" />
+														<Run Foreground="#FFF08020">
+															<Run.Style>
+																<Style TargetType="{x:Type Run}">
+																	<Setter Property="Text" Value="{Binding CurLOS, Mode=OneWay}" />
+																	<Style.Triggers>
+																		<DataTrigger Binding="{Binding CurLOS, Mode=OneWay}" Value="-1">
+																			<Setter Property="Text" Value="???" />
+																		</DataTrigger>
+																	</Style.Triggers>
+																</Style>
+															</Run.Style>
+														</Run>
+														<Run Text=")" Foreground="#FFF08020" />
+
+														<TextBlock.Style>
+															<Style TargetType="{x:Type TextBlock}">
+																<Style.Triggers>
+																	<DataTrigger Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True">
+																		<Setter Property="Visibility" Value="Collapsed" />
+																	</DataTrigger>
+																</Style.Triggers>
+															</Style>
+														</TextBlock.Style>
+													</TextBlock>
+												</InlineUIContainer>
 											</TextBlock>
 
 											<Image Grid.Column="3"
@@ -871,23 +1139,49 @@
 																<DataTrigger Binding="{Binding CurLuck, Mode=OneWay}" Value="-1">
 																	<Setter Property="Text" Value="???" />
 																</DataTrigger>
+																<DataTrigger Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True">
+																	<Setter Property="Text" Value="{Binding AbyssalLuck, Mode=OneWay}" />
+																</DataTrigger>
+																<MultiDataTrigger>
+																	<MultiDataTrigger.Conditions>
+																		<Condition Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True" />
+																		<Condition Binding="{Binding AbyssalLuck, Mode=OneWay}" Value="-1" />
+																	</MultiDataTrigger.Conditions>
+																	<MultiDataTrigger.Setters>
+																		<Setter Property="Text" Value="???" />
+																	</MultiDataTrigger.Setters>
+																</MultiDataTrigger>
 															</Style.Triggers>
 														</Style>
 													</Run.Style>
 												</Run>
-												<Run Text="(max" />
-												<Run>
-													<Run.Style>
-														<Style TargetType="{x:Type Run}">
-															<Setter Property="Text" Value="{Binding MaxLuck, Mode=OneWay}" />
-															<Style.Triggers>
-																<DataTrigger Binding="{Binding MaxLuck, Mode=OneWay}" Value="-1">
-																	<Setter Property="Text" Value="???" />
-																</DataTrigger>
-															</Style.Triggers>
-														</Style>
-													</Run.Style>
-												</Run><Run Text=")" />
+												<InlineUIContainer>
+													<TextBlock Foreground="#5cccf8">
+														<Run Text="(max" />
+														<Run>
+															<Run.Style>
+																<Style TargetType="{x:Type Run}">
+																	<Setter Property="Text" Value="{Binding MaxLuck, Mode=OneWay}" />
+																	<Style.Triggers>
+																		<DataTrigger Binding="{Binding MaxLuck, Mode=OneWay}" Value="-1">
+																			<Setter Property="Text" Value="???" />
+																		</DataTrigger>
+																	</Style.Triggers>
+																</Style>
+															</Run.Style>
+														</Run><Run Text=")" />
+
+														<TextBlock.Style>
+															<Style TargetType="{x:Type TextBlock}">
+																<Style.Triggers>
+																	<DataTrigger Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True">
+																		<Setter Property="Visibility" Value="Collapsed" />
+																	</DataTrigger>
+																</Style.Triggers>
+															</Style>
+														</TextBlock.Style>
+													</TextBlock>
+												</InlineUIContainer>
 											</TextBlock>
 
 											<Border Grid.ColumnSpan="6"
@@ -950,13 +1244,92 @@
 												</TextBlock.Style>
 											</TextBlock>
 
+											<Image Grid.Column="0"
+												   Grid.Row="10"
+												   Margin="0,4,0,0"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/dev.png" />
+											<TextBlock Grid.Column="1"
+													   Grid.Row="10"
+													   Margin="4,4,10,0"
+													   Foreground="#f2f2f2"
+													   Text="건조시간" />
+											<TextBlock Grid.Column="2"
+													   Grid.Row="10"
+													   Margin="0,4,0,0"
+													   Foreground="#ff7878"
+													   Text="{Binding BuildTimeText, Mode=OneWay}" />
 										</Grid>
 									</StackPanel>
 
 									<StackPanel Orientation="Vertical"
 												Margin="8,20,0,0">
 										<TextBlock Foreground="White"
-												   Text="초기장비 및 탑재량" />
+												   Text="초기장비 및 탑재량, 제공수치" />
+
+										<Grid Margin="8,5,8,0"
+											  Background="#30000000">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="*" />
+											</Grid.ColumnDefinitions>
+											<Grid.RowDefinitions>
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+											</Grid.RowDefinitions>
+
+											<TextBlock Padding="1,1"
+													   Margin="8,5"
+													   TextAlignment="Left"
+													   Foreground="#f2f2f2"
+													   Text="제공 수치 (항공전):" />
+											<TextBlock Grid.Column="1"
+													   Margin="8,5"
+													   Padding="1,1"
+													   TextAlignment="Left"
+													   Foreground="#5cccf8">
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}">
+														<Setter Property="Text" Value="{Binding AAPower, Mode=OneWay}" />
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding AAPower, Mode=OneWay}" Value="-1">
+																<Setter Property="Text" Value="???" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
+
+											<TextBlock Grid.Row="1"
+													   Margin="8,5"
+													   Padding="1,1"
+													   TextAlignment="Left"
+													   Foreground="#f2f2f2"
+													   Text="제공 수치 (기항대):" />
+											<TextBlock Grid.Column="1"
+													   Grid.Row="1"
+													   Margin="8,5"
+													   Padding="1,1"
+													   TextAlignment="Left"
+													   Foreground="#5cccf8">
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}">
+														<Setter Property="Text" Value="{Binding AAPower2, Mode=OneWay}" />
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding AAPower2, Mode=OneWay}" Value="-1">
+																<Setter Property="Text" Value="???" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
+										</Grid>
+
+										<Border Height="1"
+												Margin="5,5,5,0"
+												Background="#20ffffff" />
+
 										<ItemsControl ItemsSource="{Binding Slots, Mode=OneWay}">
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
@@ -1009,23 +1382,55 @@
 
 															<TextBlock Grid.Column="2"
 																	   Margin="4,0,0,0">
+																<Run>
+																	<Run.Style>
+																		<Style TargetType="{x:Type Run}">
+																			<Setter Property="Text" Value="{Binding Info.Name, Mode=OneWay}" />
+																			<Setter Property="Foreground" Value="#f0f0f0" />
+
+																			<Style.Triggers>
+																				<DataTrigger Binding="{Binding Info.Id, Mode=OneWay}" Value="0">
+																					<Setter Property="Text" Value="비어있는 슬롯입니다." />
+																					<Setter Property="Foreground" Value="#c2f0f0f0" />
+																				</DataTrigger>
+																				<DataTrigger Binding="{Binding Info.Name, Mode=OneWay}" Value="{x:Null}">
+																					<Setter Property="Text" Value="알 수 없는 장비" />
+																					<Setter Property="Foreground" Value="#58f0f0f0" />
+																				</DataTrigger>
+																				<DataTrigger Binding="{Binding Available, Mode=OneWay}" Value="False">
+																					<Setter Property="Text" Value="존재하지 않는 슬롯입니다." />
+																					<Setter Property="Foreground" Value="#58f0f0f0" />
+																				</DataTrigger>
+																			</Style.Triggers>
+																		</Style>
+																	</Run.Style>
+																</Run>
+																<Run FontSize="9">
+																	<Run.Style>
+																		<Style TargetType="{x:Type Run}"
+																			   BasedOn="{StaticResource DefaultTextElementStyleKey}">
+																			<Setter Property="Text" Value="{Binding Info.Id, Mode=OneWay, StringFormat={}No.{0}}" />
+
+																			<Style.Triggers>
+																				<DataTrigger Binding="{Binding Info.Id, Mode=OneWay}" Value="0">
+																					<Setter Property="Text" Value="" />
+																				</DataTrigger>
+																				<DataTrigger Binding="{Binding Info.Name, Mode=OneWay}" Value="{x:Null}">
+																					<Setter Property="Text" Value="" />
+																				</DataTrigger>
+																				<DataTrigger Binding="{Binding Available, Mode=OneWay}" Value="False">
+																					<Setter Property="Text" Value="" />
+																				</DataTrigger>
+																			</Style.Triggers>
+																		</Style>
+																	</Run.Style>
+																</Run>
+
 																<TextBlock.Style>
 																	<Style TargetType="{x:Type TextBlock}">
-																		<Setter Property="Text" Value="{Binding Info.Name, Mode=OneWay}" />
-																		<Setter Property="Foreground" Value="#f0f0f0" />
-
+																		<Setter Property="TextAlignment" Value="Left" />
 																		<Style.Triggers>
-																			<DataTrigger Binding="{Binding Info.Id, Mode=OneWay}" Value="0">
-																				<Setter Property="Text" Value="비어있는 슬롯입니다." />
-																				<Setter Property="Foreground" Value="#c2f0f0f0" />
-																			</DataTrigger>
-																			<DataTrigger Binding="{Binding Info.Name, Mode=OneWay}" Value="{x:Null}">
-																				<Setter Property="Text" Value="알 수 없는 장비" />
-																				<Setter Property="Foreground" Value="#58f0f0f0" />
-																			</DataTrigger>
 																			<DataTrigger Binding="{Binding Available, Mode=OneWay}" Value="False">
-																				<Setter Property="Text" Value="존재하지 않는 슬롯입니다." />
-																				<Setter Property="Foreground" Value="#58f0f0f0" />
 																				<Setter Property="TextAlignment" Value="Center" />
 																			</DataTrigger>
 																		</Style.Triggers>
@@ -1301,6 +1706,16 @@
 												</StackPanel.Style>
 											</StackPanel>
 										</Grid>
+
+										<StackPanel.Style>
+											<Style TargetType="{x:Type StackPanel}">
+												<Style.Triggers>
+													<DataTrigger Binding="{Binding IsAbyssal,Mode=OneWay}" Value="True">
+														<Setter Property="Visibility" Value="Collapsed" />
+													</DataTrigger>
+												</Style.Triggers>
+											</Style>
+										</StackPanel.Style>
 									</StackPanel>
 
 									<StackPanel Orientation="Vertical"
@@ -1376,6 +1791,16 @@
 												</DataTemplate>
 											</ItemsControl.ItemTemplate>
 										</ItemsControl>
+
+										<StackPanel.Style>
+											<Style TargetType="{x:Type StackPanel}">
+												<Style.Triggers>
+													<DataTrigger Binding="{Binding IsAbyssal,Mode=OneWay}" Value="True">
+														<Setter Property="Visibility" Value="Collapsed" />
+													</DataTrigger>
+												</Style.Triggers>
+											</Style>
+										</StackPanel.Style>
 									</StackPanel>
 								</StackPanel>
 							</ScrollViewer>
@@ -1388,9 +1813,17 @@
 								<ColumnDefinition Width="Auto" />
 								<ColumnDefinition Width="*" />
 							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="*" />
+							</Grid.RowDefinitions>
 
+							<metro:PromptTextBox Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+												 Prompt="칸무스 검색"
+												 Padding="2" />
 							<ScrollViewer VerticalScrollBarVisibility="Auto"
-										  Margin="0,0,2,0">
+										  Margin="0,0,2,0"
+										  Grid.Row="1">
 								<ListBox Background="{DynamicResource ActiveBackgroundBrushKey}"
 										 ItemsSource="{Binding EquipmentList}"
 										 SelectedValue="{Binding SelectedEquipment}"
@@ -1429,6 +1862,7 @@
 										<DataTemplate DataType="{x:Type metro_controls:ITabItem}">
 											<Grid Margin="3">
 												<Grid.ColumnDefinitions>
+													<ColumnDefinition Width="20" />
 													<ColumnDefinition Width="Auto" SharedSizeGroup="IdType" />
 													<ColumnDefinition Width="*" />
 												</Grid.ColumnDefinitions>
@@ -1437,14 +1871,22 @@
 													<RowDefinition Height="Auto" />
 												</Grid.RowDefinitions>
 
-												<TextBlock Grid.Column="0"
+												<kcvc:SlotItemIcon Grid.Column="0"
+																   Grid.RowSpan="2"
+																   Margin="0,0,2,0"
+																   Type="{Binding Equipment.IconType, Mode=OneWay}"
+																   VerticalAlignment="Center"
+																   Width="18"
+																   Height="18" />
+
+												<TextBlock Grid.Column="1"
 														   Grid.Row="0"
 														   Margin="3,0"
 														   VerticalAlignment="Bottom"
 														   Style="{StaticResource DetailTextStyleKey}"
 														   FontSize="8"
 														   Text="{Binding Id, Mode=OneWay, StringFormat={}No.{0}}" />
-												<TextBlock Grid.Column="0"
+												<TextBlock Grid.Column="1"
 														   Grid.Row="1"
 														   Margin="3,0"
 														   VerticalAlignment="Top"
@@ -1452,7 +1894,7 @@
 														   FontSize="10"
 														   Text="{Binding ItemType, Mode=OneWay}" />
 
-												<TextBlock Grid.Column="1"
+												<TextBlock Grid.Column="2"
 														   Grid.RowSpan="2"
 														   Margin="5,1,3,1"
 														   Style="{StaticResource EmphaticTextStyleKey}"
@@ -1460,6 +1902,16 @@
 														   VerticalAlignment="Center"
 														   TextTrimming="CharacterEllipsis"
 														   Text="{Binding Name, Mode=OneWay}" />
+
+												<Grid.Style>
+													<Style TargetType="{x:Type Grid}">
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding IsVisible, Mode=OneWay}">
+																<Setter Property="Visibility" Value="Collapsed" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</Grid.Style>
 											</Grid>
 										</DataTemplate>
 									</ListBox.ItemTemplate>
@@ -1479,6 +1931,7 @@
 							</ScrollViewer>
 
 							<ScrollViewer Grid.Column="1"
+										  Grid.RowSpan="2"
 										  VerticalScrollBarVisibility="Auto">
 								<StackPanel Orientation="Vertical"
 											Margin="0,0,0,10"
