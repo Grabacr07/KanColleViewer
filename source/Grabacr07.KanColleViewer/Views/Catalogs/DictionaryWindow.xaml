@@ -298,7 +298,7 @@
 												<TextBlock.Style>
 													<Style TargetType="{x:Type TextBlock}">
 														<Style.Triggers>
-															<DataTrigger Binding="{Binding IsAbyssal, Mode=OneWay}">
+															<DataTrigger Binding="{Binding IsAbyssal, Mode=OneWay}" Value="True">
 																<Setter Property="Visibility" Value="Collapsed" />
 															</DataTrigger>
 														</Style.Triggers>
