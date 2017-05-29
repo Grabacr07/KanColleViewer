@@ -24,13 +24,39 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		internal static IEnumerable<kcsapi_mst_shipgraph> shipGraphics
 			=> KanColleClient.Current.Master.RawData?.api_mst_shipgraph ?? new kcsapi_mst_shipgraph[0];
 
-		internal static IEnumerable<ships_nedb> shipInfos { get; private set; }
-			= new ships_nedb[0];
+		internal static IEnumerable<ships_nedb> shipInfos { get; private set; } = new ships_nedb[0];
+		internal static IEnumerable<ships_abyssal_info> abyssalShipInfos { get; private set; } = new ships_abyssal_info[0];
 
 		static DictionaryViewModel()
 		{
 			new Thread(async () =>
 			{
+				#region Abyssal Informations
+				using (var client = new HttpClient())
+				{
+					try
+					{
+						var response = await client.GetAsync("https://wolfgangkurz.github.io/KanColleAssets/abyssal_table.json");
+						if (!response.IsSuccessStatusCode) return;
+
+						var json = await response.Content.ReadAsStringAsync();
+						var bytes = Encoding.UTF8.GetBytes(json);
+
+						DataContractJsonSerializerSettings settings = new DataContractJsonSerializerSettings();
+						settings.UseSimpleDictionaryFormat = true;
+
+						var serializer = new DataContractJsonSerializer(typeof(ships_abyssal_info[]), settings);
+						using (var stream = new MemoryStream(bytes))
+						{
+							var rawResult = serializer.ReadObject(stream) as ships_abyssal_info[];
+							abyssalShipInfos = rawResult;
+						}
+					}
+					catch (HttpRequestException) { return; }
+				}
+				#endregion
+
+				#region Ship datas (WhoCallsTheFleet)
 				using (var client = new HttpClient())
 				{
 					try
@@ -62,6 +88,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 					}
 					catch (HttpRequestException) { return; }
 				}
+				#endregion
 			}).Start();
 		}
 
@@ -125,14 +152,38 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				}
 			}
 		}
+
+		private string _SearchText { get; set; }
+		public string SearchText
+		{
+			get { return this._SearchText; }
+			set
+			{
+				if (this._SearchText != value)
+				{
+					this._SearchText = value;
+					this.RaisePropertyChanged();
+
+					this.UpdateList();
+				}
+			}
+		}
 		#endregion
 
 		public DictionaryShipViewModel()
 		{
+			UpdateList();
+		}
+
+		private void UpdateList()
+		{
 			this.ShipList = KanColleClient.Current.Master.Ships
 				.OrderBy(x => x.Value.Id)
+				.Where(x => x.Value.Name.IndexOf(this.SearchText ?? "", StringComparison.CurrentCultureIgnoreCase) >= 0)
 				.Select(x => new ShipItemViewModel(this, x.Value))
 				.ToArray();
+
+			this.RaisePropertyChanged(nameof(this.ShipList));
 		}
 	}
 
@@ -166,7 +217,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		}
 		#endregion
 
-		public bool Marriaged => this.Level > 99;
+		public bool IsAbyssal => (this.Ship?.Id ?? 0) > 1500;
+		public bool Marriaged => this.Level > 99 && (this.Ship?.Id ?? 0) <= 1500;
 
 		private string _Name { get; set; }
 		private string _Id { get; set; }
@@ -235,10 +287,12 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public int MarriageHPResult
 			=> this.Marriaged ? this.MarriageHP : 0;
 
+		public int AbyssalHP { get; set; }
 		public int HP => this.Ship?.RawData.api_taik?[0] ?? -1;
 		public int CurHP => this.HP == -1 ? -1
 			: this.HP + (this.Marriaged ? this.MarriageHP : 0);
 
+		public int AbyssalArmor { get; set; }
 		public int MinArmor => this.Ship?.RawData.api_souk?[0] ?? -1;
 		public int MaxArmor => this.Ship?.RawData.api_souk?[1] ?? -1;
 		public int CurArmor => this.Level == 1 ? this.MinArmor
@@ -246,6 +300,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			: this.MinArmor == -1 || this.MaxArmor == -1 ? -1
 			: (int)Math.Floor((double)(this.MaxArmor - this.MinArmor) * this.Level / 99 * 0.4 + this.MinArmor);
 
+		public int AbyssalEvasion { get; set; }
 		public int MinEvasion => DictionaryViewModel.shipInfos.FirstOrDefault(x => x.id == (this.Ship?.Id ?? 0))?.stat.evasion ?? -1;
 		public int MaxEvasion => DictionaryViewModel.shipInfos.FirstOrDefault(x => x.id == (this.Ship?.Id ?? 0))?.stat.evasion_max ?? -1;
 		public int CurEvasion => this.Level == 1 ? this.MinEvasion
@@ -253,10 +308,12 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			: this.MinEvasion == -1 || this.MaxEvasion == -1 ? -1
 			: (int)Math.Floor((double)(this.MaxEvasion - this.MinEvasion) * this.Level / 99 + this.MinEvasion);
 
+		public int AbyssalCarry { get; set; }
 		public int TotalCarry => this.Ship?.RawData.api_maxeq?.Sum() ?? -1;
 
 		///////////////////
 
+		public int AbyssalFire { get; set; }
 		public int MinFire => this.Ship?.RawData.api_houg?[0] ?? -1;
 		public int MaxFire => this.Ship?.RawData.api_houg?[1] ?? -1;
 		public int CurFire => this.Level == 1 ? this.MinFire
@@ -264,6 +321,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			: this.MinFire == -1 || this.MaxFire == -1 ? -1
 			: (int)Math.Floor((double)(this.MaxFire - this.MinFire) * this.Level / 99 * 0.4 + this.MinFire);
 
+		public int AbyssalTorpedo { get; set; }
 		public int MinTorpedo => this.Ship?.RawData.api_raig?[0] ?? -1;
 		public int MaxTorpedo => this.Ship?.RawData.api_raig?[1] ?? -1;
 		public int CurTorpedo => this.Level == 1 ? this.MinTorpedo
@@ -271,6 +329,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			: this.MinTorpedo == -1 || this.MaxTorpedo == -1 ? -1
 			: (int)Math.Floor((double)(this.MaxTorpedo - this.MinTorpedo) * this.Level / 99 * 0.4 + this.MinTorpedo);
 
+		public int AbyssalAA { get; set; }
 		public int MinAA => this.Ship?.RawData.api_taik?[0] ?? -1;
 		public int MaxAA => this.Ship?.RawData.api_taik?[1] ?? -1;
 		public int CurAA => this.Level == 1 ? this.MinAA
@@ -278,6 +337,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			: this.MinAA == -1 || this.MaxAA == -1 ? -1
 			: (int)Math.Floor((double)(this.MaxAA - this.MinAA) * this.Level / 99 * 0.4 + this.MinAA);
 
+		public int AbyssalASW { get; set; }
 		public int MinASW => DictionaryViewModel.shipInfos.FirstOrDefault(x => x.id == (this.Ship?.Id ?? 0))?.stat.asw ?? -1;
 		public int MaxASW => DictionaryViewModel.shipInfos.FirstOrDefault(x => x.id == (this.Ship?.Id ?? 0))?.stat.asw_max ?? -1;
 		public int CurASW => this.Level == 1 ? this.MinASW
@@ -287,7 +347,15 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		///////////////////
 
+		public ShipSpeed AbyssalSpeed { get; set; }
 		public ShipSpeed Speed => ShipSpeedConverter.FromInt32(this.Ship?.RawData.api_soku ?? 0);
+		public string AbyssalSpeedText
+			=> this.AbyssalSpeed == ShipSpeed.Immovable ? "육상기지"
+				: this.AbyssalSpeed == ShipSpeed.Slow ? "저속"
+				: this.AbyssalSpeed == ShipSpeed.Fast ? "고속"
+				: this.AbyssalSpeed == ShipSpeed.Faster ? "고속+"
+				: this.AbyssalSpeed == ShipSpeed.Fastest ? "초고속"
+				: "???";
 		public string SpeedText
 			=> this.Speed == ShipSpeed.Immovable ? "육상기지"
 				: this.Speed == ShipSpeed.Slow ? "저속"
@@ -296,14 +364,22 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				: this.Speed == ShipSpeed.Fastest ? "초고속"
 				: "???";
 
+		public int AbyssalRange { get; set; }
 		public int Range => this.Ship?.RawData.api_leng ?? -1;
+		public string AbyssalRangeText
+			=> this.AbyssalRange == 1 ? "단거리"
+				: this.AbyssalRange == 2 ? "중거리"
+				: this.AbyssalRange == 3 ? "장거리"
+				: this.AbyssalRange == 4 ? "초장거리"
+				: "???";
 		public string RangeText
 			=> this.Range == 1 ? "단거리"
 				: this.Range == 2 ? "중거리"
 				: this.Range == 3 ? "장거리"
-				: this.Range == 4 ? "최장거리"
+				: this.Range == 4 ? "초장거리"
 				: "???";
 
+		public int AbyssalLOS { get; set; }
 		public int MinLOS => DictionaryViewModel.shipInfos.FirstOrDefault(x => x.id == (this.Ship?.Id ?? 0))?.stat.los ?? -1;
 		public int MaxLOS => DictionaryViewModel.shipInfos.FirstOrDefault(x => x.id == (this.Ship?.Id ?? 0))?.stat.los_max ?? -1;
 		public int CurLOS => this.Level == 1 ? this.MinLOS
@@ -311,6 +387,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			: this.MinLOS == -1 || this.MaxLOS == -1 ? -1
 			: (int)Math.Floor((double)(this.MaxLOS - this.MinLOS) * this.Level / 99 + this.MinLOS);
 
+		public int AbyssalLuck { get; set; }
 		public int MinLuck => this.Ship?.RawData.api_luck?[0] ?? -1;
 		public int MaxLuck => this.Ship?.RawData.api_luck?[1] ?? -1;
 		public int CurLuck => this.MinLuck == -1 ? -1
@@ -328,42 +405,60 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			? Math.Floor(this.MaxAmmo * 0.85) + " (-15%)"
 			: this.MaxAmmo.ToString();
 
+		public TimeSpan? BuildTime => this.Ship != null
+			? TimeSpan.FromMinutes(this.Ship.RawData.api_buildtime)
+			: (TimeSpan?)null;
+		public string BuildTimeText =>
+			this.BuildTime != null
+			? $"{(int)this.BuildTime.Value.TotalHours:D2}:{this.BuildTime.Value.ToString(@"mm\:ss")}"
+			: "--:--:--";
+			
+
 		private void UpdateAllValues()
 		{
 			this.RaisePropertyChanged(nameof(this.MarriageHP));
 			this.RaisePropertyChanged(nameof(this.MarriageHPResult));
 
+			this.RaisePropertyChanged(nameof(this.AbyssalHP));
 			this.RaisePropertyChanged(nameof(this.HP));
 			this.RaisePropertyChanged(nameof(this.CurHP));
 
+			this.RaisePropertyChanged(nameof(this.AbyssalArmor));
 			this.RaisePropertyChanged(nameof(this.MinArmor));
 			this.RaisePropertyChanged(nameof(this.MaxArmor));
 			this.RaisePropertyChanged(nameof(this.CurArmor));
 
+			this.RaisePropertyChanged(nameof(this.AbyssalEvasion));
 			this.RaisePropertyChanged(nameof(this.MinEvasion));
 			this.RaisePropertyChanged(nameof(this.MaxEvasion));
 			this.RaisePropertyChanged(nameof(this.CurEvasion));
 
+			this.RaisePropertyChanged(nameof(this.AbyssalFire));
 			this.RaisePropertyChanged(nameof(this.MinFire));
 			this.RaisePropertyChanged(nameof(this.MaxFire));
 			this.RaisePropertyChanged(nameof(this.CurFire));
 
+			this.RaisePropertyChanged(nameof(this.AbyssalTorpedo));
 			this.RaisePropertyChanged(nameof(this.MinTorpedo));
 			this.RaisePropertyChanged(nameof(this.MaxTorpedo));
 			this.RaisePropertyChanged(nameof(this.CurTorpedo));
 
+			this.RaisePropertyChanged(nameof(this.AbyssalAA));
 			this.RaisePropertyChanged(nameof(this.MinAA));
 			this.RaisePropertyChanged(nameof(this.MaxAA));
 			this.RaisePropertyChanged(nameof(this.CurAA));
 
+			this.RaisePropertyChanged(nameof(this.AbyssalASW));
 			this.RaisePropertyChanged(nameof(this.MinASW));
 			this.RaisePropertyChanged(nameof(this.MaxASW));
 			this.RaisePropertyChanged(nameof(this.CurASW));
 
+			this.RaisePropertyChanged(nameof(this.AbyssalLOS));
 			this.RaisePropertyChanged(nameof(this.MinLOS));
 			this.RaisePropertyChanged(nameof(this.MaxLOS));
 			this.RaisePropertyChanged(nameof(this.CurLOS));
 
+			this.RaisePropertyChanged(nameof(this.AbyssalLuck));
 			this.RaisePropertyChanged(nameof(this.MinLuck));
 			this.RaisePropertyChanged(nameof(this.MaxLuck));
 			this.RaisePropertyChanged(nameof(this.CurLuck));
@@ -373,6 +468,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 			this.RaisePropertyChanged(nameof(this.MaxAmmo));
 			this.RaisePropertyChanged(nameof(this.CurMaxAmmo));
+			this.RaisePropertyChanged(nameof(this.BuildTimeText));
 		}
 		#endregion
 
@@ -381,45 +477,86 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		{
 			get
 			{
+				var shipId = (this.Ship?.Id ?? 0);
+				var slotCount = this.Ship?.SlotCount ?? 0;
 				var list = new List<SlotInfo>();
 
-				var info = DictionaryViewModel.shipInfos.FirstOrDefault(x => x.id == (this.Ship?.Id ?? 0));
-				if (info == null)
+				if (shipId > 1500) // Is abyssal?
 				{
-					while (list.Count < (this.Ship?.SlotCount ?? 0))
-						list.Add(new SlotInfo(null, true, this.Ship?.Slots?[list.Count] ?? -1));
+					var info = DictionaryViewModel.abyssalShipInfos.FirstOrDefault(x => x.id == shipId);
+					if (info == null)
+					{
+						while (list.Count < slotCount)
+							list.Add(new SlotInfo(null, true, this.Ship?.Slots?[list.Count] ?? -1));
 
-					while (list.Count < 4) list.Add(new SlotInfo(null, false, 0));
+						while (list.Count < 4) list.Add(new SlotInfo(null, false, 0));
+						return list;
+					}
 
-					return list;
+					list = info.equips
+						.Where(x => x > 0)
+						.Select((x, z) =>
+						{
+							var master = KanColleClient.Current.Master;
+							var item = master.SlotItems.FirstOrDefault(y => y.Value.Id == x).Value;
+							if (item == null) return new SlotInfo(SlotItemInfo.Dummy, true, info.carrys[z]);
+
+							return new SlotInfo(item, true, info.carrys[z]);
+						})
+						.ToList();
+
+					while (list.Count < slotCount)
+						list.Add(new SlotInfo(SlotItemInfo.Dummy, true, info.carrys[list.Count]));
+				}
+				else
+				{
+					var info = DictionaryViewModel.shipInfos.FirstOrDefault(x => x.id == shipId);
+					if (info == null)
+					{
+						while (list.Count < slotCount)
+							list.Add(new SlotInfo(null, true, this.Ship?.Slots?[list.Count] ?? -1));
+
+						while (list.Count < 4) list.Add(new SlotInfo(null, false, 0));
+						return list;
+					}
+
+					list = info.equip
+						.Where(x =>
+						{
+							int id;
+							if (x == null || x.Length == 0) return false;
+							return int.TryParse(x, out id);
+						})
+						.Select((x, z) =>
+						{
+							int id;
+							if (!int.TryParse(x, out id)) return new SlotInfo(SlotItemInfo.Dummy, true, this.Ship?.Slots[z] ?? -1);
+							var master = KanColleClient.Current.Master;
+							var item = master.SlotItems.FirstOrDefault(y => y.Value.Id == id).Value;
+							if (item == null) return new SlotInfo(SlotItemInfo.Dummy, true, this.Ship?.Slots[z] ?? -1);
+
+							return new SlotInfo(item, true, this.Ship?.Slots[z] ?? -1);
+						})
+						.ToList();
+
+					while (list.Count < slotCount)
+						list.Add(new SlotInfo(SlotItemInfo.Dummy, true, this.Ship?.Slots[list.Count] ?? -1));
 				}
 
-				list = info.equip
-					.Where(x =>
-					{
-						int id;
-						if (x == null || x.Length == 0) return false;
-						return int.TryParse(x, out id);
-					})
-					.Select((x, z) => {
-						int id;
-						if (!int.TryParse(x, out id)) return new SlotInfo(SlotItemInfo.Dummy, true, this.Ship?.Slots[z] ?? -1);
-						var master = KanColleClient.Current.Master;
-						var item = master.SlotItems.FirstOrDefault(y => y.Value.Id == id).Value;
-						if (item == null) return new SlotInfo(SlotItemInfo.Dummy, true, this.Ship?.Slots[z] ?? -1);
-
-						return new SlotInfo(item, true, this.Ship?.Slots[z] ?? -1);
-					})
-					.ToList();
-
-				while (list.Count < (this.Ship?.SlotCount ?? 0))
-					list.Add(new SlotInfo(SlotItemInfo.Dummy, true, this.Ship?.Slots[list.Count] ?? -1));
-
 				while (list.Count < 4) list.Add(new SlotInfo(null, false, 0));
-
 				return list;
 			}
 		}
+
+		public int AAPower => // 항공전
+			this.Slots?
+				.Where(x => x.Available && x.Info.IsNumerable && x.Info.IsAerialCombatable)
+				.Sum(x => (int)Math.Floor(x.Available ? (Math.Sqrt(x.Carry) * x.Info.AA) : 0)) ?? -1;
+
+		public int AAPower2 => // 기항대
+			this.Slots?
+				.Where(x => x.Available && x.Info.IsNumerable)
+				.Sum(x => (int)Math.Floor(x.Available ? (Math.Sqrt(x.Carry) * x.Info.AA) : 0)) ?? -1;
 
 		#region Modernize & Destroy
 		public int ModernizeFire => this.Ship?.RawData.api_powup?[0] ?? 0;
@@ -445,6 +582,43 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			this._Name = this.Ship?.Name ?? "???";
 			this._Id = this.Ship?.Id.ToString() ?? "???";
 			this._ShipType = this.Ship?.ShipType.Name ?? "???";
+
+			if (this.IsAbyssal)
+			{
+				var info = DictionaryViewModel.abyssalShipInfos.FirstOrDefault(x => x.id == (this.Ship?.Id ?? 0));
+				if (info == null)
+				{
+					this.AbyssalHP = -1;
+					this.AbyssalArmor = -1;
+					this.AbyssalEvasion = -1;
+					this.AbyssalCarry = -1;
+					this.AbyssalFire = -1;
+					this.AbyssalTorpedo = -1;
+					this.AbyssalAA = -1;
+					this.AbyssalASW = -1;
+					this.AbyssalSpeed = (ShipSpeed)(-1);
+					this.AbyssalRange = -1;
+					this.AbyssalLOS = -1;
+					this.AbyssalLuck = -1;
+				}
+				else
+				{
+					this.AbyssalHP = info.hp;
+					this.AbyssalArmor = info.armor;
+					this.AbyssalEvasion = info.evasion;
+					this.AbyssalCarry = info.carry;
+
+					this.AbyssalFire = info.fire;
+					this.AbyssalTorpedo = info.torpedo;
+					this.AbyssalAA = info.aa;
+					this.AbyssalASW = info.asw;
+
+					this.AbyssalSpeed = ShipSpeedConverter.FromInt32(info.speed);
+					this.AbyssalRange = info.range;
+					this.AbyssalLOS = info.los;
+					this.AbyssalLuck = info.luck;
+				}
+			}
 
 			if (this.Ship == null) this.Upgrades = new UpgradeInfo[0];
 			else
@@ -567,12 +741,36 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		}
 		#endregion
 
+		private string _SearchText { get; set; }
+		public string SearchText
+		{
+			get { return this._SearchText; }
+			set
+			{
+				if (this._SearchText != value)
+				{
+					this._SearchText = value;
+					this.RaisePropertyChanged();
+
+					this.UpdateList();
+				}
+			}
+		}
+
 		public DictionaryEquipmentViewModel()
+		{
+			UpdateList();
+		}
+
+		private void UpdateList()
 		{
 			this.EquipmentList = KanColleClient.Current.Master.SlotItems
 				.OrderBy(x => x.Value.Id)
+				.Where(x => x.Value.Name.IndexOf(this.SearchText ?? "", StringComparison.CurrentCultureIgnoreCase) >= 0)
 				.Select(x => new EquipmentItemViewModel(x.Value))
 				.ToArray();
+
+			this.RaisePropertyChanged(nameof(this.EquipmentList));
 		}
 	}
 
@@ -673,7 +871,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				: this.Range == 1 ? "단거리"
 				: this.Range == 2 ? "중거리"
 				: this.Range == 3 ? "장거리"
-				: this.Range == 4 ? "최장거리"
+				: this.Range == 4 ? "초장거리"
 				: "???";
 
 		public int LOS => this.Equipment?.RawData.api_saku ?? -1;
@@ -718,6 +916,29 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		public int los { get; set; }
 		public int los_max { get; set; }
+	}
+	public class ships_abyssal_info
+	{
+		public int id { get; set; }
+
+		public int hp { get; set; }
+		public int armor { get; set; }
+		public int evasion { get; set; }
+		public int carry { get; set; }
+
+		public int fire { get; set; }
+		public int torpedo { get; set; }
+		public int aa { get; set; }
+		public int asw { get; set; }
+
+		public int speed { get; set; }
+		public int range { get; set; }
+		public int los { get; set; }
+		public int luck { get; set; }
+
+		public int slots { get; set; }
+		public int[] equips { get; set; }
+		public int[] carrys { get; set; }
 	}
 	// ReSharper restore InconsistentNaming
 	#endregion
