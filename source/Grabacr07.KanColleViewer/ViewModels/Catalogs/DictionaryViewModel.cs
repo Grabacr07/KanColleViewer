@@ -405,42 +405,60 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			? Math.Floor(this.MaxAmmo * 0.85) + " (-15%)"
 			: this.MaxAmmo.ToString();
 
+		public TimeSpan? BuildTime => this.Ship != null
+			? TimeSpan.FromMinutes(this.Ship.RawData.api_buildtime)
+			: (TimeSpan?)null;
+		public string BuildTimeText =>
+			this.BuildTime != null
+			? $"{(int)this.BuildTime.Value.TotalHours:D2}:{this.BuildTime.Value.ToString(@"mm\:ss")}"
+			: "--:--:--";
+			
+
 		private void UpdateAllValues()
 		{
 			this.RaisePropertyChanged(nameof(this.MarriageHP));
 			this.RaisePropertyChanged(nameof(this.MarriageHPResult));
 
+			this.RaisePropertyChanged(nameof(this.AbyssalHP));
 			this.RaisePropertyChanged(nameof(this.HP));
 			this.RaisePropertyChanged(nameof(this.CurHP));
 
+			this.RaisePropertyChanged(nameof(this.AbyssalArmor));
 			this.RaisePropertyChanged(nameof(this.MinArmor));
 			this.RaisePropertyChanged(nameof(this.MaxArmor));
 			this.RaisePropertyChanged(nameof(this.CurArmor));
 
+			this.RaisePropertyChanged(nameof(this.AbyssalEvasion));
 			this.RaisePropertyChanged(nameof(this.MinEvasion));
 			this.RaisePropertyChanged(nameof(this.MaxEvasion));
 			this.RaisePropertyChanged(nameof(this.CurEvasion));
 
+			this.RaisePropertyChanged(nameof(this.AbyssalFire));
 			this.RaisePropertyChanged(nameof(this.MinFire));
 			this.RaisePropertyChanged(nameof(this.MaxFire));
 			this.RaisePropertyChanged(nameof(this.CurFire));
 
+			this.RaisePropertyChanged(nameof(this.AbyssalTorpedo));
 			this.RaisePropertyChanged(nameof(this.MinTorpedo));
 			this.RaisePropertyChanged(nameof(this.MaxTorpedo));
 			this.RaisePropertyChanged(nameof(this.CurTorpedo));
 
+			this.RaisePropertyChanged(nameof(this.AbyssalAA));
 			this.RaisePropertyChanged(nameof(this.MinAA));
 			this.RaisePropertyChanged(nameof(this.MaxAA));
 			this.RaisePropertyChanged(nameof(this.CurAA));
 
+			this.RaisePropertyChanged(nameof(this.AbyssalASW));
 			this.RaisePropertyChanged(nameof(this.MinASW));
 			this.RaisePropertyChanged(nameof(this.MaxASW));
 			this.RaisePropertyChanged(nameof(this.CurASW));
 
+			this.RaisePropertyChanged(nameof(this.AbyssalLOS));
 			this.RaisePropertyChanged(nameof(this.MinLOS));
 			this.RaisePropertyChanged(nameof(this.MaxLOS));
 			this.RaisePropertyChanged(nameof(this.CurLOS));
 
+			this.RaisePropertyChanged(nameof(this.AbyssalLuck));
 			this.RaisePropertyChanged(nameof(this.MinLuck));
 			this.RaisePropertyChanged(nameof(this.MaxLuck));
 			this.RaisePropertyChanged(nameof(this.CurLuck));
@@ -450,6 +468,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 			this.RaisePropertyChanged(nameof(this.MaxAmmo));
 			this.RaisePropertyChanged(nameof(this.CurMaxAmmo));
+			this.RaisePropertyChanged(nameof(this.BuildTimeText));
 		}
 		#endregion
 

@@ -364,6 +364,7 @@
 
 												<RowDefinition Height="Auto" />
 												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
 											</Grid.RowDefinitions>
 
 											<Image Grid.Column="0"
@@ -1243,6 +1244,22 @@
 												</TextBlock.Style>
 											</TextBlock>
 
+											<Image Grid.Column="0"
+												   Grid.Row="10"
+												   Margin="0,4,0,0"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/dev.png" />
+											<TextBlock Grid.Column="1"
+													   Grid.Row="9"
+													   Margin="4,4,10,0"
+													   Foreground="#f2f2f2"
+													   Text="건조시간" />
+											<TextBlock Grid.Column="2"
+													   Grid.Row="9"
+													   Margin="0,4,0,0"
+													   Foreground="#ff7878"
+													   Text="{Binding BuildTimeText, Mode=OneWay}" />
 										</Grid>
 									</StackPanel>
 
