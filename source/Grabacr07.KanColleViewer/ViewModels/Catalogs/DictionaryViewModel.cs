@@ -548,6 +548,16 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			}
 		}
 
+		public int AAPower => // 항공전
+			this.Slots?
+				.Where(x => x.Available && x.Info.IsNumerable && x.Info.IsAerialCombatable)
+				.Sum(x => (int)Math.Floor(x.Available ? (Math.Sqrt(x.Carry) * x.Info.AA) : 0)) ?? -1;
+
+		public int AAPower2 => // 기항대
+			this.Slots?
+				.Where(x => x.Available && x.Info.IsNumerable)
+				.Sum(x => (int)Math.Floor(x.Available ? (Math.Sqrt(x.Carry) * x.Info.AA) : 0)) ?? -1;
+
 		#region Modernize & Destroy
 		public int ModernizeFire => this.Ship?.RawData.api_powup?[0] ?? 0;
 		public int ModernizeTorpedo => this.Ship?.RawData.api_powup?[1] ?? 0;

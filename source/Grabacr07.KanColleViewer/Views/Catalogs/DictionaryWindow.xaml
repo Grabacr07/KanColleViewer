@@ -1266,7 +1266,70 @@
 									<StackPanel Orientation="Vertical"
 												Margin="8,20,0,0">
 										<TextBlock Foreground="White"
-												   Text="초기장비 및 탑재량" />
+												   Text="초기장비 및 탑재량, 제공수치" />
+
+										<Grid Margin="8,5,8,0"
+											  Background="#30000000">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="*" />
+											</Grid.ColumnDefinitions>
+											<Grid.RowDefinitions>
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+											</Grid.RowDefinitions>
+
+											<TextBlock Padding="1,1"
+													   Margin="8,5"
+													   TextAlignment="Left"
+													   Foreground="#f2f2f2"
+													   Text="제공 수치 (항공전):" />
+											<TextBlock Grid.Column="1"
+													   Margin="8,5"
+													   Padding="1,1"
+													   TextAlignment="Left"
+													   Foreground="#5cccf8">
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}">
+														<Setter Property="Text" Value="{Binding AAPower, Mode=OneWay}" />
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding AAPower, Mode=OneWay}" Value="-1">
+																<Setter Property="Text" Value="???" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
+
+											<TextBlock Grid.Row="1"
+													   Margin="8,5"
+													   Padding="1,1"
+													   TextAlignment="Left"
+													   Foreground="#f2f2f2"
+													   Text="제공 수치 (기항대):" />
+											<TextBlock Grid.Column="1"
+													   Grid.Row="1"
+													   Margin="8,5"
+													   Padding="1,1"
+													   TextAlignment="Left"
+													   Foreground="#5cccf8">
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}">
+														<Setter Property="Text" Value="{Binding AAPower2, Mode=OneWay}" />
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding AAPower2, Mode=OneWay}" Value="-1">
+																<Setter Property="Text" Value="???" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
+										</Grid>
+
+										<Border Height="1"
+												Margin="5,5,5,0"
+												Background="#20ffffff" />
+
 										<ItemsControl ItemsSource="{Binding Slots, Mode=OneWay}">
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
@@ -1319,23 +1382,55 @@
 
 															<TextBlock Grid.Column="2"
 																	   Margin="4,0,0,0">
+																<Run>
+																	<Run.Style>
+																		<Style TargetType="{x:Type Run}">
+																			<Setter Property="Text" Value="{Binding Info.Name, Mode=OneWay}" />
+																			<Setter Property="Foreground" Value="#f0f0f0" />
+
+																			<Style.Triggers>
+																				<DataTrigger Binding="{Binding Info.Id, Mode=OneWay}" Value="0">
+																					<Setter Property="Text" Value="비어있는 슬롯입니다." />
+																					<Setter Property="Foreground" Value="#c2f0f0f0" />
+																				</DataTrigger>
+																				<DataTrigger Binding="{Binding Info.Name, Mode=OneWay}" Value="{x:Null}">
+																					<Setter Property="Text" Value="알 수 없는 장비" />
+																					<Setter Property="Foreground" Value="#58f0f0f0" />
+																				</DataTrigger>
+																				<DataTrigger Binding="{Binding Available, Mode=OneWay}" Value="False">
+																					<Setter Property="Text" Value="존재하지 않는 슬롯입니다." />
+																					<Setter Property="Foreground" Value="#58f0f0f0" />
+																				</DataTrigger>
+																			</Style.Triggers>
+																		</Style>
+																	</Run.Style>
+																</Run>
+																<Run FontSize="9">
+																	<Run.Style>
+																		<Style TargetType="{x:Type Run}"
+																			   BasedOn="{StaticResource DefaultTextElementStyleKey}">
+																			<Setter Property="Text" Value="{Binding Info.Id, Mode=OneWay, StringFormat={}No.{0}}" />
+
+																			<Style.Triggers>
+																				<DataTrigger Binding="{Binding Info.Id, Mode=OneWay}" Value="0">
+																					<Setter Property="Text" Value="" />
+																				</DataTrigger>
+																				<DataTrigger Binding="{Binding Info.Name, Mode=OneWay}" Value="{x:Null}">
+																					<Setter Property="Text" Value="" />
+																				</DataTrigger>
+																				<DataTrigger Binding="{Binding Available, Mode=OneWay}" Value="False">
+																					<Setter Property="Text" Value="" />
+																				</DataTrigger>
+																			</Style.Triggers>
+																		</Style>
+																	</Run.Style>
+																</Run>
+
 																<TextBlock.Style>
 																	<Style TargetType="{x:Type TextBlock}">
-																		<Setter Property="Text" Value="{Binding Info.Name, Mode=OneWay}" />
-																		<Setter Property="Foreground" Value="#f0f0f0" />
-
+																		<Setter Property="TextAlignment" Value="Left" />
 																		<Style.Triggers>
-																			<DataTrigger Binding="{Binding Info.Id, Mode=OneWay}" Value="0">
-																				<Setter Property="Text" Value="비어있는 슬롯입니다." />
-																				<Setter Property="Foreground" Value="#c2f0f0f0" />
-																			</DataTrigger>
-																			<DataTrigger Binding="{Binding Info.Name, Mode=OneWay}" Value="{x:Null}">
-																				<Setter Property="Text" Value="알 수 없는 장비" />
-																				<Setter Property="Foreground" Value="#58f0f0f0" />
-																			</DataTrigger>
 																			<DataTrigger Binding="{Binding Available, Mode=OneWay}" Value="False">
-																				<Setter Property="Text" Value="존재하지 않는 슬롯입니다." />
-																				<Setter Property="Foreground" Value="#58f0f0f0" />
 																				<Setter Property="TextAlignment" Value="Center" />
 																			</DataTrigger>
 																		</Style.Triggers>

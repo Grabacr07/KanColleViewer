@@ -79,6 +79,28 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public bool IsNumerable => this.Type.IsNumerable();
 
+		public bool IsAerialCombatable // 항공전 참여 여부
+		{
+			get
+			{
+				switch (this.Type)
+				{
+					case SlotItemType.艦上戦闘機: // 전투기
+					case SlotItemType.水上戦闘機: // 수상전투기
+					case SlotItemType.噴式戦闘機: // 분식전투기
+					case SlotItemType.局地戦闘機: // 국지전투기
+					case SlotItemType.艦上攻撃機: // 뇌격기
+					case SlotItemType.艦上爆撃機: // 폭격기
+					case SlotItemType.噴式攻撃機: // 분식뇌격기
+					case SlotItemType.噴式戦闘爆撃機: // 분식전투폭격기
+					case SlotItemType.陸上攻撃機: // 육상공격기
+					case SlotItemType.水上爆撃機: // 수상폭격기
+						return true;
+				}
+				return false;
+			}
+		}
+
 		public bool IsFirstEncounter => this.Type == SlotItemType.艦上偵察機
 									   || this.Type == SlotItemType.水上偵察機;
 
