@@ -215,21 +215,22 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 		private void HandleNavigated(object sender, NavigationEventArgs e)
 		{
+			WebBrowserHelper.SetScriptErrorsSuppressed(this.WebBrowser, true);
+
 			if (e.Uri.AbsoluteUri == KanColleViewer.Properties.Settings.Default.KanColleUrl.AbsoluteUri)
 			{
 				this.firstLoaded = true;
 
-				WebBrowserHelper.SetScriptErrorsSuppressed(this.WebBrowser, true);
 				this.ApplyStyleSheet();
 				this.Update();
 			}
 		}
 		private void HandleLoadCompleted(object sender, NavigationEventArgs e)
 		{
+			WebBrowserHelper.SetScriptErrorsSuppressed(this.WebBrowser, true);
+
 			if (e.Uri.AbsoluteUri == KanColleViewer.Properties.Settings.Default.KanColleUrl.AbsoluteUri)
 			{
-				WebBrowserHelper.SetScriptErrorsSuppressed(this.WebBrowser, true);
-
 				if (KanColleSettings.FlashElementQuality != FlashQuality.High)
 					this.ApplyFlashQuality(true);
 			}
@@ -259,7 +260,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 				WebBrowser.InvokeScript("eval", new object[] { script });
 				this.styleSheetApplied = true;
 
-				/*
+
 				var document = this.WebBrowser.Document as HTMLDocument;
 				if (document == null) return;
 
@@ -278,7 +279,6 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 					target.createStyleSheet().cssText = this.UserStyleSheet;
 					this.styleSheetApplied = true;
 				}
-				*/
 			}
 			catch (Exception) when (Application.Instance.State == ApplicationState.Startup)
 			{
@@ -337,7 +337,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			catch (Exception ex)
 			{
 				Debug.WriteLine(ex);
-				StatusService.Current.Notify("failed to apply css: " + ex.Message);
+				StatusService.Current.Notify("failed to apply flash quality: " + ex.Message);
 			}
 		}
 	}
