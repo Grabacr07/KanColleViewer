@@ -56,7 +56,26 @@ namespace Grabacr07.KanColleWrapper.Models
 			}
 		}
 
-		public string LvName=>"[Lv." + this.Level + "]  " + this.Info.Name;
+		public bool NeedBlueprint
+		{
+			get
+			{
+				return KanColleClient.Current.Master.RawData.api_mst_shipupgrade
+					.FirstOrDefault(x => x.api_current_ship_id == this.Info.Id)
+					?.api_drawing_count > 0;
+			}
+		}
+		public bool NeedCatapult
+		{
+			get
+			{
+				return KanColleClient.Current.Master.RawData.api_mst_shipupgrade
+					.FirstOrDefault(x => x.api_current_ship_id == this.Info.Id)
+					?.api_catapult_count > 0;
+			}
+		}
+
+		public string LvName => "[Lv." + this.Level + "]  " + this.Info.Name;
 		public string RepairTimeString
 		{
 			get
@@ -197,7 +216,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		}
 
 		#endregion
-		
+
 		#region Torpedo 変更通知プロパティ
 
 		private ModernizableStatus _Torpedo;
@@ -220,7 +239,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		#region YasenFp 変更通知プロパティ
 
 		private ModernizableStatus _YasenFp;
-		
+
 		public ModernizableStatus YasenFp
 		{
 			get { return this._YasenFp; }
@@ -432,6 +451,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public bool IsMaxModernized => this.Firepower.IsMax && this.Torpedo.IsMax && this.AA.IsMax && this.Armer.IsMax;
 
+		public bool DaihatsuEquipable =>
+			(new int[] { 541, 500, 490, 487, 470, 464, 469, 435, 434, 352, 200, 468, 418, 199, 147 }.Contains(this.Info.Id)) ||
+			(!(new int[] { 491, 445 }.Contains(this.Info.Id)) && this.Info.ShipType.RawData.api_equip_type?._24 == 1);
+
 		/// <summary>
 		/// 現在のコンディション値を取得します。
 		/// </summary>
@@ -551,7 +574,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					new int[] {
 						this.Info.RawData.api_houg[0] + this.Info.RawData.api_raig[0],
 						this.Info.RawData.api_houg[1] + this.Info.RawData.api_raig[1]},
-					this.RawData.api_kyouka[0]+ this.RawData.api_kyouka[1]);
+					this.RawData.api_kyouka[0] + this.RawData.api_kyouka[1]);
 				this.AA = new ModernizableStatus(this.Info.RawData.api_tyku, this.RawData.api_kyouka[2]);
 				this.Armer = new ModernizableStatus(this.Info.RawData.api_souk, this.RawData.api_kyouka[3]);
 				this.Luck = new ModernizableStatus(this.Info.RawData.api_luck, this.RawData.api_kyouka[4]);

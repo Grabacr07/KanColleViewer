@@ -35,6 +35,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public ShipConditionFilter ShipConditionFilter { get; }
 		public ShipExSlotFilter ShipExSlotFilter { get; }
 		public ShipFleetFilter ShipFleetFilter { get; }
+		public DaihatsueFilter DaihatsueFilter { get; }
 
 		public bool CheckAllShipTypes
 		{
@@ -151,6 +152,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			this.ShipConditionFilter = new ShipConditionFilter(this.Update);
 			this.ShipExSlotFilter = new ShipExSlotFilter(this.Update);
 			this.ShipFleetFilter = new ShipFleetFilter(this.Update);
+			this.DaihatsueFilter = new DaihatsueFilter(this.Update);
 
 			this.updateSource
 				.Do(_ => this.IsReloading = true)
@@ -191,7 +193,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 					.Where(this.ShipDamagedFilter.Predicate)
 					.Where(this.ShipConditionFilter.Predicate)
 					.Where(this.ShipExSlotFilter.Predicate)
-					.Where(this.ShipFleetFilter.Predicate);
+					.Where(this.ShipFleetFilter.Predicate)
+					.Where(this.DaihatsueFilter.Predicate);
 
 				this.Ships = this.SortWorker.Sort(list)
 					.Select((x, i) => new ShipViewModel(i + 1, x, areas.FirstOrDefault(y => y.Area == x.SallyArea)))
