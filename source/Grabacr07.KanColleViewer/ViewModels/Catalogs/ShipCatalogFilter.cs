@@ -342,6 +342,83 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		}
 	}
 
+	public class DaihatsueFilter : ShipCatalogFilter
+	{
+		#region Both 変更通知プロパティ
+
+		private bool _Both;
+
+		public bool Both
+		{
+			get { return this._Both; }
+			set
+			{
+				if (this._Both != value)
+				{
+					this._Both = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+
+		#region CanEquip 変更通知プロパティ
+
+		private bool _CanEquip;
+
+		public bool CanEquip
+		{
+			get { return this._CanEquip; }
+			set
+			{
+				if (this._CanEquip != value)
+				{
+					this._CanEquip = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+
+		#region CannotEquip 変更通知プロパティ
+
+		private bool _CannotEquip;
+
+		public bool CannotEquip
+		{
+			get { return this._CannotEquip; }
+			set
+			{
+				if (this._CannotEquip != value)
+				{
+					this._CannotEquip = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+
+		public DaihatsueFilter(Action updateAction) : base(updateAction)
+		{
+			this._Both = true;
+		}
+
+		public override bool Predicate(Ship ship)
+		{
+			if (this.Both) return true;
+			if (this.CanEquip && ship.DaihatsuEquipable) return true;
+			if (this.CannotEquip && !ship.DaihatsuEquipable) return true;
+
+			return false;
+		}
+	}
+
 	public class ShipRemodelingFilter : ShipCatalogFilter
 	{
 		#region Both 変更通知プロパティ
