@@ -86,6 +86,16 @@
 					</DataTrigger>
 				</Style.Triggers>
 			</Style>
+			<Style TargetType="{x:Type TextBlock}"
+				   x:Key="Emphatic14"
+				   BasedOn="{StaticResource EmphaticTextStyleKey}">
+				<Setter Property="FontSize" Value="14" />
+				<Style.Triggers>
+					<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.HomeportBigFont}, Path=Value}" Value="False">
+						<Setter Property="FontSize" Value="12" />
+					</DataTrigger>
+				</Style.Triggers>
+			</Style>
 			<Style TargetType="{x:Type Run}"
 				   x:Key="EmphaticRun"
 				   BasedOn="{StaticResource EmphaticTextElementStyleKey}">
@@ -285,25 +295,47 @@
 							   Fill="{DynamicResource InactiveForegroundBrushKey}"
 							   Opacity="0.6" />
 
-					<StackPanel Orientation="Horizontal"
+					<StackPanel Orientation="Vertical"
 								VerticalAlignment="Center">
-						<TextBlock>
-								<Run Text="자연회복한계:" />
-								<Run Text="{Binding Model.ResourceLimit, Mode=OneWay}"
-									 Style="{StaticResource EmphaticRun14}" />
-								<Run Text="까지" />
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
 
-								<Run Text="(" />
-								<Run Text="{Binding ResourceLimitRemaining, Mode=OneWay}"
-									 Style="{StaticResource EmphaticRun14}" />
-								<Run Text="남음" />
-								<Run Text=")" />
-								<LineBreak />
-								<Run Text="가구코인:" />
-								<Run Text="{Binding Model.FurnitureCoins, Mode=OneWay}"
-									 Style="{StaticResource EmphaticRun14}" />
-								<Run Text="개" />
-								<LineBreak />
+							<TextBlock Grid.Column="0"
+									   Text="마미야:" />
+							<TextBlock Grid.Column="1"
+									   Text="{Binding MamiyaCount, Mode=OneWay, StringFormat={}{0}개}"
+									   Style="{StaticResource Emphatic14}" />
+
+							<TextBlock Grid.Column="2"
+									   Text="이라코:" />
+							<TextBlock Grid.Column="3"
+									   Text="{Binding IrakoCount, Mode=OneWay, StringFormat={}{0}개}"
+									   Style="{StaticResource Emphatic14}" />
+						</Grid>
+						<TextBlock>
+							<Run Text="자연회복한계:" />
+							<Run Text="{Binding Model.ResourceLimit, Mode=OneWay}"
+								 Style="{StaticResource EmphaticRun14}" />
+							<Run Text="까지" />
+
+							<Run Text="(" />
+							<Run Text="{Binding ResourceLimitRemaining, Mode=OneWay}"
+								 Style="{StaticResource EmphaticRun14}" />
+							<Run Text="남음" />
+							<Run Text=")" />
+							<LineBreak />
+
+							<Run Text="가구코인:" />
+							<Run Text="{Binding Model.FurnitureCoins, Mode=OneWay}"
+								 Style="{StaticResource EmphaticRun14}" />
+							<Run Text="개" />
+						</TextBlock>
+						<TextBlock>
 								<Run Text="갑훈장:" />
 								<Run Text="{Binding Model.Medals, Mode=OneWay}"
 									 Style="{StaticResource EmphaticRun14}" />
