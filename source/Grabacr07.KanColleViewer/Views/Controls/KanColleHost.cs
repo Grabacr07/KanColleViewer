@@ -234,6 +234,8 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 				if (KanColleSettings.FlashElementQuality != FlashQuality.High)
 					this.ApplyFlashQuality(true);
 			}
+			this.ApplyStyleSheet(1);
+			this.Update();
 		}
 
 		private void HandleWebBrowserNewWindow(string url, int flags, string targetFrameName, ref object postData, string headers, ref bool processed)
@@ -245,39 +247,43 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			window.WebBrowser.Navigate(url);
 		}
 
-		private void ApplyStyleSheet()
+		private void ApplyStyleSheet(int step = 0)
 		{
 			if (!this.firstLoaded) return;
 
 			try
 			{
-				var script = string.Format(
-					"document.addEventListener('DOMContentLoaded', function(){{"
-						+ "var x=document.createElement('style');x.type='text/css';x.innerHTML='{0}';document.body.appendChild(x);"
-					+ "}});",
-					this.UserStyleSheet.Replace("'", "\\'").Replace("\r\n", "\\n")
-				);
-				WebBrowser.InvokeScript("eval", new object[] { script });
-				this.styleSheetApplied = true;
-
-
-				var document = this.WebBrowser.Document as HTMLDocument;
-				if (document == null) return;
-
-				var gameFrame = document.getElementById("game_frame");
-				if (gameFrame == null)
+				if (step == 0)
 				{
-					if (document.url.Contains(".swf?"))
-					{
-						gameFrame = document.body;
-					}
-				}
-
-				var target = gameFrame?.document as HTMLDocument;
-				if (target != null)
-				{
-					target.createStyleSheet().cssText = this.UserStyleSheet;
+					var script = string.Format(
+						"document.addEventListener('DOMContentLoaded', function(){{"
+							+ "var x=document.createElement('style');x.type='text/css';x.innerHTML='{0}';document.body.appendChild(x);"
+						+ "}});",
+						this.UserStyleSheet.Replace("'", "\\'").Replace("\r\n", "\\n")
+					);
+					WebBrowser.InvokeScript("eval", new object[] { script });
 					this.styleSheetApplied = true;
+				}
+				else
+				{
+					var document = this.WebBrowser.Document as HTMLDocument;
+					if (document == null) return;
+
+					var gameFrame = document.getElementById("game_frame");
+					if (gameFrame == null)
+					{
+						if (document.url.Contains(".swf?"))
+						{
+							gameFrame = document.body;
+						}
+					}
+
+					var target = gameFrame?.document as HTMLDocument;
+					if (target != null)
+					{
+						target.createStyleSheet().cssText = this.UserStyleSheet;
+						this.styleSheetApplied = true;
+					}
 				}
 			}
 			catch (Exception) when (Application.Instance.State == ApplicationState.Startup)
