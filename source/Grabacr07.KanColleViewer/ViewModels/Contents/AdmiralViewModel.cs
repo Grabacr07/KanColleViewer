@@ -66,6 +66,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 		}
 		#endregion
 
+		public int MamiyaCount => KanColleClient.Current.Homeport?.Itemyard?.UseItems[54]?.Count ?? 0;
+		public int IrakoCount => KanColleClient.Current.Homeport?.Itemyard?.UseItems[59]?.Count ?? 0;
+
 		public static HQRecord Record;
 
 		public AdmiralViewModel()

@@ -151,16 +151,17 @@ namespace Grabacr07.KanColleWrapper
 			requireInfoSource
 				.SkipUntil(firstTime)
 				.Subscribe(x => this.SetRequireInfo(x.Data));
-			
+
 			this.Logger = new Logger(proxy);
 			this.ResourceLogger = new ResourceLogManager(this);
 		}
 
 		private void SetRequireInfo(kcsapi_require_info data)
-				{
+		{
 			this.Homeport.UpdateAdmiral(data.api_basic);
 			this.Homeport.Itemyard.Update(data.api_slot_item);
 			this.Homeport.Dockyard.Update(data.api_kdock);
+			this.Homeport.Itemyard.Update(data.api_useitem);
 		}
 	}
 }

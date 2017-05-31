@@ -392,6 +392,28 @@
 													 IsChecked="{Binding NotMaxModernized, Mode=TwoWay}" />
 									</WrapPanel>
 								</Grid>
+
+								<Grid DataContext="{Binding DaihatsueFilter}">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"
+														  SharedSizeGroup="FilterName" />
+										<ColumnDefinition Width="10" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<TextBlock Margin="0,2"
+											   HorizontalAlignment="Right">
+										<Run Text="대발동정" />
+										<Run Text=":" />
+									</TextBlock>
+									<WrapPanel Grid.Column="2">
+										<RadioButton Content="모두"
+													 IsChecked="{Binding Both, Mode=TwoWay}" />
+										<RadioButton Content="장착가능"
+													 IsChecked="{Binding CanEquip, Mode=TwoWay}" />
+										<RadioButton Content="불가능"
+													 IsChecked="{Binding CannotEquip, Mode=TwoWay}" />
+									</WrapPanel>
+								</Grid>
 							</StackPanel>
 
 							<StackPanel>
@@ -784,49 +806,59 @@
 								</GridViewColumn.CellTemplate>
 							</GridViewColumn>
 
-							<GridViewColumn>
+							<GridViewColumn Width="92">
 								<GridViewColumn.Header>
 									<TextBlock Text="개조레벨" />
 								</GridViewColumn.Header>
 								<GridViewColumn.CellTemplate>
 									<DataTemplate>
-										<Border x:Name="LvBorder"
-												Margin="-2,0">
+										<Grid x:Name="LvBorder"
+											  Margin="-2,0">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="*" />
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="Auto" />
+											</Grid.ColumnDefinitions>
+
 											<TextBlock FontSize="9"
-												   Margin="0,3"
-												  >
-											<Run Text="Lv."
-												 x:Name="Lvtext"/>
-											<Run Text="{Binding Ship.RemodelLevel, Mode=OneWay}"
-												 FontSize="12"
-												  x:Name="NextLv"
-												 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+													   Margin="0,3,3,3">
+												<Run Text="Lv."
+													 x:Name="Lvtext" />
+												<Run Text="{Binding Ship.RemodelLevel, Mode=OneWay}"
+													 FontSize="12"
+													 x:Name="NextLv"
+													 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 											</TextBlock>
-										</Border>
+
+											<Image x:Name="BlueprintImage"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/useitem/blueprint.png"
+												   Grid.Column="1"
+												   Margin="2,0"
+												   VerticalAlignment="Center"
+												   Width="18"
+												   Height="18"
+												   Visibility="{Binding Ship.NeedBlueprint, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+											<Image x:Name="CatapultImage"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/useitem/catapult.png"
+												   Grid.Column="2"
+												   Margin="2,0"
+												   VerticalAlignment="Center"
+												   Width="18"
+												   Height="18"
+												   Visibility="{Binding Ship.NeedCatapult, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+										</Grid>
 										<DataTemplate.Triggers>
-											<DataTrigger Binding="{Binding Ship.RemodelLevel}"
-															 Value="0">
-												<Setter TargetName="Lvtext"
-															Property="Text"
-															Value="" />
-												<Setter TargetName="NextLv"
-															Property="Text"
-															Value="" />
+											<DataTrigger Binding="{Binding Ship.RemodelLevel}" Value="0">
+												<Setter TargetName="Lvtext" Property="Text" Value="" />
+												<Setter TargetName="NextLv" Property="Text" Value="" />
+												<Setter TargetName="BlueprintImage" Property="Visibility" Value="Collapsed" />
+												<Setter TargetName="CatapultImage" Property="Visibility" Value="Collapsed" />
 											</DataTrigger>
-											<DataTrigger Binding="{Binding Ship.RemodelLevel}"
-															 Value="-1">
-												<Setter TargetName="Lvtext"
-															Property="Text"
-															Value="" />
-												<Setter TargetName="NextLv"
-															Property="Text"
-															Value="개조가능" />
-												<Setter TargetName="NextLv"
-															Property="Foreground"
-															Value="White" />
-												<Setter TargetName="LvBorder"
-														Property="Background"
-														Value="#FF384CD1" />
+											<DataTrigger Binding="{Binding Ship.RemodelLevel}" Value="-1">
+												<Setter TargetName="Lvtext" Property="Text" Value="" />
+												<Setter TargetName="NextLv" Property="Text" Value="개조가능" />
+												<Setter TargetName="NextLv" Property="Foreground" Value="White" />
+												<Setter TargetName="LvBorder" Property="Background" Value="#FF384CD1" />
 											</DataTrigger>
 										</DataTemplate.Triggers>
 									</DataTemplate>
