@@ -8,6 +8,7 @@ using Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleWrapper;
 using MetroTrilithon.Mvvm;
 using Grabacr07.KanColleWrapper.Models;
+using Livet;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 {
@@ -105,20 +106,15 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#endregion
 
+		public ItemLockFilter ItemLockFilter { get; }
+
 		public SlotItemCatalogViewModel()
 		{
 			this.Title = "소유 장비 목록";
 			this.Settings = new SlotItemCatalogWindowSettings();
 
-			/*
-			this.SlotItemEquipTypes = KanColleClient.Current.Master.SlotItemEquipTypes
-				.Select(kvp => new SlotItemEquipTypeViewModel(kvp.Value)
-				{
-					IsSelected = true,
-					SelectionChangedAction = () => this.Update()
-				})
-				.ToList();
-			*/
+			this.ItemLockFilter = new ItemLockFilter(this.Update);
+
 			this.SlotItemEquipTypes = Enum.GetNames(typeof(SlotItemIconType))
 				.Select(x => new SlotItemEquipTypeViewModel((SlotItemIconType)Enum.Parse(typeof(SlotItemIconType), x))
 				{
@@ -171,6 +167,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			//  Key:   装備のマスター ID
 			//  Value: Key が示す ID に該当する所有装備カウンター
 			var dic = items
+				.Where(this.ItemLockFilter.Predicate)
+
 				.GroupBy(x => x.Info.Id)
 				.ToDictionary(g => g.Key, g => new SlotItemCounter(master[g.Key], g));
 
@@ -202,6 +200,89 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			foreach (var type in this.SlotItemEquipTypes)
 				type.Set(ids.Any(y => y == (int)type.Type));
 			this.Update();
+		}
+	}
+
+	public abstract class ItemCatalogFilter : NotificationObject
+	{
+		private readonly Action action;
+
+		public abstract bool Predicate(SlotItem ship);
+
+		protected ItemCatalogFilter(Action updateAction)
+		{
+			this.action = updateAction;
+		}
+
+		protected void Update()
+		{
+			this.action?.Invoke();
+		}
+	}
+	public class ItemLockFilter : ItemCatalogFilter
+	{
+		#region Both 変更通知プロパティ
+		private bool _Both;
+		public bool Both
+		{
+			get { return this._Both; }
+			set
+			{
+				if (this._Both != value)
+				{
+					this._Both = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+		#endregion
+
+		#region Locked 変更通知プロパティ
+		private bool _Locked;
+		public bool Locked
+		{
+			get { return this._Locked; }
+			set
+			{
+				if (this._Locked != value)
+				{
+					this._Locked = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+		#endregion
+
+		#region Unlocked 変更通知プロパティ
+		private bool _Unlocked;
+		public bool Unlocked
+		{
+			get { return this._Unlocked; }
+			set
+			{
+				if (this._Unlocked != value)
+				{
+					this._Unlocked = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+		#endregion
+
+		public ItemLockFilter(Action updateAction) : base(updateAction)
+		{
+			this._Both = true;
+		}
+
+		public override bool Predicate(SlotItem item)
+		{
+			if (this.Both) return true;
+			if (this.Locked && item.Locked) return true;
+			if (this.Unlocked && !item.Locked) return true;
+			return false;
 		}
 	}
 }
