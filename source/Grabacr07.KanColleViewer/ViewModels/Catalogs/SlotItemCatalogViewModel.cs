@@ -144,37 +144,36 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		private List<SlotItemCounter> UpdateCore(IEnumerable<SlotItemIconType> enableSlotItemEquipTypes)
 		{
-			var ships = KanColleClient.Current.Homeport.Organization.Ships.Values.ToList();
-			var items = KanColleClient.Current.Homeport.Itemyard.SlotItems.Values.ToList();
+			var ships = KanColleClient.Current.Homeport.Organization.Ships.Values;
+			var items = KanColleClient.Current.Homeport.Itemyard.SlotItems.Values;
 			var master = KanColleClient.Current.Master.SlotItems;
+
+			items = items
+				.Where(this.ItemLockFilter.Predicate);
 
 			if (OnlyRemodeledSlotItems)
 			{
-				items = items.Where(x => x.Level > 0)
-					.ToList();
-
-				ships = ships.Select(
-					x => {
-						x.EquippedItems = x.EquippedItems
-							.Where(y => y.Item.Level > 0 && items.Any(z => z.Info.Id == y.Item.Info.Id))
-							.ToArray();
-						return x;
-					})
-					.ToList();
+				items = items
+					.Where(x => x.Level > 0);
 			}
 
 			// dic (Dictionary<TK,TV>)
 			//  Key:   装備のマスター ID
 			//  Value: Key が示す ID に該当する所有装備カウンター
 			var dic = items
-				.Where(this.ItemLockFilter.Predicate)
-
 				.GroupBy(x => x.Info.Id)
 				.ToDictionary(g => g.Key, g => new SlotItemCounter(master[g.Key], g));
 
 			foreach (var ship in ships)
-				foreach (var target in ship.EquippedItems.Select(slot => new { slot, counter = dic[slot.Item.Info.Id] }))
+			{
+				var u = ship.EquippedItems
+					.Where(this.ItemLockFilter.Predicate)
+					.Where(y => items.Any(z => z.Id == y.Item.Id))
+					.Select(slot => new { slot, counter = dic[slot.Item.Info.Id] });
+
+				foreach (var target in u)
 					target.counter.AddShip(ship, target.slot.Item.Level, target.slot.Item.Proficiency);
+			}
 
 			return dic.Values
 				.Where(w => enableSlotItemEquipTypes.Contains(GetIconTypeInRange(w.Target.IconType)))
@@ -207,7 +206,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 	{
 		private readonly Action action;
 
-		public abstract bool Predicate(SlotItem ship);
+		public abstract bool Predicate(SlotItem item);
+		public bool Predicate(ShipSlot item) => this.Predicate(item.Item);
 
 		protected ItemCatalogFilter(Action updateAction)
 		{
