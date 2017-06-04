@@ -232,7 +232,6 @@
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="Auto" SharedSizeGroup="ShipSlots" />
 											<RowDefinition Height="Auto" />
-											<RowDefinition Height="Auto" />
 										</Grid.RowDefinitions>
 
 										<Grid Grid.Row="0"
@@ -269,230 +268,231 @@
 													   Fill="{StaticResource AccentHighlightBrushKey}"
 													   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 										</Grid>
-										<ItemsControl Grid.Row="1"
-													  ItemsSource="{Binding Slots}">
-											<ItemsControl.Template>
-												<ControlTemplate TargetType="{x:Type ItemsControl}">
-													<StackPanel IsItemsHost="True"/>
-												</ControlTemplate>
-											</ItemsControl.Template>
-											<ItemsControl.ItemTemplate>
-												<DataTemplate>
-													<Border x:Name="Elements"
-															ToolTip="{Binding Description, Mode=OneWay}"
-															Background="Transparent">
-														<Grid Margin="2,4">
-															<Grid.Resources>
+										<StackPanel Grid.Row="1"
+													Orientation="Vertical">
+											<ItemsControl ItemsSource="{Binding Slots}">
+												<ItemsControl.Template>
+													<ControlTemplate TargetType="{x:Type ItemsControl}">
+														<StackPanel IsItemsHost="True"/>
+													</ControlTemplate>
+												</ItemsControl.Template>
+												<ItemsControl.ItemTemplate>
+													<DataTemplate>
+														<Border x:Name="Elements"
+																ToolTip="{Binding Description, Mode=OneWay}"
+																Background="Transparent">
+															<Grid Margin="2,4">
+																<Grid.Resources>
+																	<Style TargetType="{x:Type TextBlock}"
+																		   BasedOn="{StaticResource EmphaticTextStyleKey}">
+																		<Setter Property="FontSize" Value="12" />
+																	</Style>
+																	<converters:RangeToBooleanConverter x:Key="RangeToBooleanConverter" />
+																</Grid.Resources>
+																<Grid.ColumnDefinitions>
+																	<ColumnDefinition Width="Auto" SharedSizeGroup="SlotCarry" />
+																	<ColumnDefinition Width="Auto" SharedSizeGroup="SlotIcon" />
+																	<ColumnDefinition Width="Auto" SharedSizeGroup="SlotName" />
+																	<ColumnDefinition Width="Auto" SharedSizeGroup="SlotLevel" />
+																	<ColumnDefinition Width="Auto" SharedSizeGroup="SlotProficiency" />
+																</Grid.ColumnDefinitions>
+
+																<TextBlock Grid.Column="0"
+																		   Margin="8,0,0,0"
+																		   Text="{Binding Carry, Mode=OneWay}"
+																		   TextAlignment="Right"
+																		   Style="{StaticResource DetailTextStyleKey}"
+																		   Foreground="{StaticResource InactiveForegroundBrushKey}"
+																		   VerticalAlignment="Top" />
+																<kcvc:SlotItemIcon Grid.Column="1"
+																				   Margin="4,0"
+																				   Type="{Binding Item.IconType, Mode=OneWay}"
+																				   Width="16"
+																				   Height="16">
+																	<kcvc:SlotItemIcon.Style>
+																		<Style TargetType="{x:Type kcvc:SlotItemIcon}">
+																			<Style.Triggers>
+																				<DataTrigger Binding="{Binding Id}" Value="0">
+																					<Setter Property="Visibility" Value="Hidden" />
+																				</DataTrigger>
+																			</Style.Triggers>
+																		</Style>
+																	</kcvc:SlotItemIcon.Style>
+																</kcvc:SlotItemIcon>
+
+																<TextBlock Grid.Column="2"
+																		   VerticalAlignment="Center">
+																	<TextBlock.Style>
+																		<Style TargetType="{x:Type TextBlock}">
+																			<Setter Property="Text" Value="{Binding Name, Mode=OneWay}" />
+																			<Style.Triggers>
+																				<DataTrigger Binding="{Binding Id}" Value="0">
+																					<Setter Property="Foreground" Value="{StaticResource InactiveForegroundBrushKey}" />
+																					<Setter Property="Text" Value="장비하지 않았습니다" />
+																				</DataTrigger>
+																			</Style.Triggers>
+																		</Style>
+																	</TextBlock.Style>
+																</TextBlock>
+
+																<TextBlock Grid.Column="3"
+																		   Margin="8,0,2,0"
+																		   VerticalAlignment="Center">
+																	<TextBlock.Style>
+																		<Style TargetType="{x:Type TextBlock}"
+																			   BasedOn="{StaticResource EmphaticTextStyleKey}">
+																			<Setter Property="FontSize" Value="12" />
+																			<Setter Property="Foreground" Value="#FF45A9A5" />
+																			<Setter Property="Text" Value="{Binding Level, Mode=OneWay, StringFormat={}★{0}}" />
+
+																			<Style.Triggers>
+																				<DataTrigger Binding="{Binding Level, Mode=OneWay}" Value="0">
+																					<Setter Property="Opacity" Value=".5" />
+																					<Setter Property="Foreground" Value="{StaticResource InactiveForegroundBrushKey}" />
+																				</DataTrigger>
+																				<DataTrigger Binding="{Binding Level, Mode=OneWay}" Value="10">
+																					<Setter Property="Text" Value="★max" />
+																				</DataTrigger>
+																				<DataTrigger Binding="{Binding Id}" Value="0">
+																					<Setter Property="Visibility" Value="Hidden" />
+																				</DataTrigger>
+																			</Style.Triggers>
+																		</Style>
+																	</TextBlock.Style>
+																</TextBlock>
+																<TextBlock Grid.Column="4"
+																		   Margin="4,0,2,0"
+																		   VerticalAlignment="Center">
+																	<TextBlock.Style>
+																		<Style TargetType="{x:Type TextBlock}"
+																			   BasedOn="{StaticResource EmphaticTextStyleKey}">
+																			<Setter Property="FontSize" Value="12" />
+																			<Setter Property="Foreground" Value="#FFD49C0F" />
+																			<Setter Property="Text" Value="{Binding Proficiency, Mode=OneWay, StringFormat={}+{0}}" />
+
+																			<Style.Triggers>
+																				<DataTrigger Binding="{Binding Proficiency, Mode=OneWay}" Value="0">
+																					<Setter Property="Opacity" Value=".5" />
+																					<Setter Property="Foreground" Value="{StaticResource InactiveForegroundBrushKey}" />
+																				</DataTrigger>
+																				<DataTrigger Binding="{Binding Proficiency, Mode=OneWay, Converter={StaticResource RangeToBooleanConverter}, ConverterParameter=1-3}" Value="True">
+																					<Setter Property="Foreground" Value="#FF98B3CE" />
+																				</DataTrigger>
+																				<DataTrigger Binding="{Binding Id}" Value="0">
+																					<Setter Property="Visibility" Value="Hidden" />
+																				</DataTrigger>
+																			</Style.Triggers>
+																		</Style>
+																	</TextBlock.Style>
+																</TextBlock>
+															</Grid>
+														</Border>
+													</DataTemplate>
+												</ItemsControl.ItemTemplate>
+											</ItemsControl>
+											<StackPanel Orientation="Vertical">
+												<Rectangle Height=".99"
+														   Margin="0,2"
+														   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+												<Border ToolTip="{Binding ExSlot.Description, Mode=OneWay}"
+														Background="Transparent">
+													<Grid Margin="2,4">
+														<Grid.Resources>
+															<Style TargetType="{x:Type TextBlock}"
+																   BasedOn="{StaticResource EmphaticTextStyleKey}">
+																<Setter Property="FontSize" Value="12" />
+															</Style>
+															<converters:RangeToBooleanConverter x:Key="RangeToBooleanConverter" />
+														</Grid.Resources>
+														<Grid.ColumnDefinitions>
+															<ColumnDefinition Width="Auto" SharedSizeGroup="SlotCarry" />
+															<ColumnDefinition Width="Auto" SharedSizeGroup="SlotIcon" />
+															<ColumnDefinition Width="Auto" SharedSizeGroup="SlotName" />
+															<ColumnDefinition Width="Auto" SharedSizeGroup="SlotLevel" />
+															<ColumnDefinition Width="Auto" SharedSizeGroup="SlotProficiency" />
+														</Grid.ColumnDefinitions>
+
+														<TextBlock Grid.Column="0"
+																   Margin="8,0,0,0"
+																   Text="{Binding ExSlot.Carry, Mode=OneWay}"
+																   TextAlignment="Right"
+																   Style="{StaticResource DetailTextStyleKey}"
+																   Foreground="{StaticResource InactiveForegroundBrushKey}"
+																   VerticalAlignment="Top" />
+														<kcvc:SlotItemIcon Grid.Column="1"
+																		   Margin="4,0"
+																		   Type="{Binding ExSlot.Item.IconType, Mode=OneWay}"
+																		   Width="16"
+																		   Height="16" />
+
+														<TextBlock Grid.Column="2"
+																   VerticalAlignment="Center"
+																   Text="{Binding ExSlot.Name, Mode=OneWay}" />
+
+														<TextBlock Grid.Column="3"
+																   Margin="8,0,2,0"
+																   VerticalAlignment="Center">
+															<TextBlock.Style>
 																<Style TargetType="{x:Type TextBlock}"
 																	   BasedOn="{StaticResource EmphaticTextStyleKey}">
 																	<Setter Property="FontSize" Value="12" />
+																	<Setter Property="Foreground" Value="#FF45A9A5" />
+																	<Setter Property="Text" Value="{Binding ExSlot.Level, Mode=OneWay, StringFormat={}★{0}}" />
+
+																	<Style.Triggers>
+																		<DataTrigger Binding="{Binding ExSlot.Level, Mode=OneWay}" Value="0">
+																			<Setter Property="Opacity" Value=".5" />
+																			<Setter Property="Foreground" Value="{StaticResource InactiveForegroundBrushKey}" />
+																		</DataTrigger>
+																		<DataTrigger Binding="{Binding ExSlot.Level, Mode=OneWay}" Value="10">
+																			<Setter Property="Text" Value="★max" />
+																		</DataTrigger>
+																	</Style.Triggers>
 																</Style>
-																<converters:RangeToBooleanConverter x:Key="RangeToBooleanConverter" />
-															</Grid.Resources>
-															<Grid.ColumnDefinitions>
-																<ColumnDefinition Width="Auto" SharedSizeGroup="SlotCarry" />
-																<ColumnDefinition Width="Auto" SharedSizeGroup="SlotIcon" />
-																<ColumnDefinition Width="Auto" SharedSizeGroup="SlotName" />
-																<ColumnDefinition Width="Auto" SharedSizeGroup="SlotLevel" />
-																<ColumnDefinition Width="Auto" SharedSizeGroup="SlotProficiency" />
-															</Grid.ColumnDefinitions>
+															</TextBlock.Style>
+														</TextBlock>
+														<TextBlock Grid.Column="4"
+																   Margin="4,0,2,0"
+																   VerticalAlignment="Center">
+															<TextBlock.Style>
+																<Style TargetType="{x:Type TextBlock}"
+																	   BasedOn="{StaticResource EmphaticTextStyleKey}">
+																	<Setter Property="FontSize" Value="12" />
+																	<Setter Property="Foreground" Value="#FFD49C0F" />
+																	<Setter Property="Text" Value="{Binding ExSlot.Proficiency, Mode=OneWay, StringFormat={}+{0}}" />
 
-															<TextBlock Grid.Column="0"
-																	   Margin="8,0,0,0"
-																	   Text="{Binding Carry, Mode=OneWay}"
-																	   TextAlignment="Right"
-																	   Style="{StaticResource DetailTextStyleKey}"
-																	   Foreground="{StaticResource InactiveForegroundBrushKey}"
-																	   VerticalAlignment="Top" />
-															<kcvc:SlotItemIcon Grid.Column="1"
-																			   Margin="4,0"
-																			   Type="{Binding Item.IconType, Mode=OneWay}"
-																			   Width="16"
-																			   Height="16">
-																<kcvc:SlotItemIcon.Style>
-																	<Style TargetType="{x:Type kcvc:SlotItemIcon}">
-																		<Style.Triggers>
-																			<DataTrigger Binding="{Binding Id}" Value="0">
-																				<Setter Property="Visibility" Value="Hidden" />
-																			</DataTrigger>
-																		</Style.Triggers>
-																	</Style>
-																</kcvc:SlotItemIcon.Style>
-															</kcvc:SlotItemIcon>
+																	<Style.Triggers>
+																		<DataTrigger Binding="{Binding ExSlot.Proficiency, Mode=OneWay}" Value="0">
+																			<Setter Property="Opacity" Value=".5" />
+																			<Setter Property="Foreground" Value="{StaticResource InactiveForegroundBrushKey}" />
+																		</DataTrigger>
+																		<DataTrigger Binding="{Binding ExSlot.Proficiency, Mode=OneWay, Converter={StaticResource RangeToBooleanConverter}, ConverterParameter=1-3}" Value="True">
+																			<Setter Property="Foreground" Value="#FF98B3CE" />
+																		</DataTrigger>
+																	</Style.Triggers>
+																</Style>
+															</TextBlock.Style>
+														</TextBlock>
+													</Grid>
+												</Border>
 
-															<TextBlock Grid.Column="2"
-																	   VerticalAlignment="Center">
-																<TextBlock.Style>
-																	<Style TargetType="{x:Type TextBlock}">
-																		<Setter Property="Text" Value="{Binding Name, Mode=OneWay}" />
-																		<Style.Triggers>
-																			<DataTrigger Binding="{Binding Id}" Value="0">
-																				<Setter Property="Foreground" Value="{StaticResource InactiveForegroundBrushKey}" />
-																				<Setter Property="Text" Value="장비하지 않았습니다" />
-																			</DataTrigger>
-																		</Style.Triggers>
-																	</Style>
-																</TextBlock.Style>
-															</TextBlock>
-
-															<TextBlock Grid.Column="3"
-																	   Margin="8,0,2,0"
-																	   VerticalAlignment="Center">
-																<TextBlock.Style>
-																	<Style TargetType="{x:Type TextBlock}"
-																		   BasedOn="{StaticResource EmphaticTextStyleKey}">
-																		<Setter Property="FontSize" Value="12" />
-																		<Setter Property="Foreground" Value="#FF45A9A5" />
-																		<Setter Property="Text" Value="{Binding Level, Mode=OneWay, StringFormat={}★{0}}" />
-
-																		<Style.Triggers>
-																			<DataTrigger Binding="{Binding Level, Mode=OneWay}" Value="0">
-																				<Setter Property="Opacity" Value=".5" />
-																				<Setter Property="Foreground" Value="{StaticResource InactiveForegroundBrushKey}" />
-																			</DataTrigger>
-																			<DataTrigger Binding="{Binding Level, Mode=OneWay}" Value="10">
-																				<Setter Property="Text" Value="★max" />
-																			</DataTrigger>
-																			<DataTrigger Binding="{Binding Id}" Value="0">
-																				<Setter Property="Visibility" Value="Hidden" />
-																			</DataTrigger>
-																		</Style.Triggers>
-																	</Style>
-																</TextBlock.Style>
-															</TextBlock>
-															<TextBlock Grid.Column="4"
-																	   Margin="4,0,2,0"
-																	   VerticalAlignment="Center">
-																<TextBlock.Style>
-																	<Style TargetType="{x:Type TextBlock}"
-																		   BasedOn="{StaticResource EmphaticTextStyleKey}">
-																		<Setter Property="FontSize" Value="12" />
-																		<Setter Property="Foreground" Value="#FFD49C0F" />
-																		<Setter Property="Text" Value="{Binding Proficiency, Mode=OneWay, StringFormat={}+{0}}" />
-
-																		<Style.Triggers>
-																			<DataTrigger Binding="{Binding Proficiency, Mode=OneWay}" Value="0">
-																				<Setter Property="Opacity" Value=".5" />
-																				<Setter Property="Foreground" Value="{StaticResource InactiveForegroundBrushKey}" />
-																			</DataTrigger>
-																			<DataTrigger Binding="{Binding Proficiency, Mode=OneWay, Converter={StaticResource RangeToBooleanConverter}, ConverterParameter=1-3}" Value="True">
-																				<Setter Property="Foreground" Value="#FF98B3CE" />
-																			</DataTrigger>
-																			<DataTrigger Binding="{Binding Id}" Value="0">
-																				<Setter Property="Visibility" Value="Hidden" />
-																			</DataTrigger>
-																		</Style.Triggers>
-																	</Style>
-																</TextBlock.Style>
-															</TextBlock>
-														</Grid>
-													</Border>
-												</DataTemplate>
-											</ItemsControl.ItemTemplate>
-										</ItemsControl>
-										<StackPanel Grid.Row="2"
-													Orientation="Vertical">
-											<Rectangle Height=".99"
-													   Margin="0,2"
-													   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-
-											<Border ToolTip="{Binding ExSlot.Description, Mode=OneWay}"
-													Background="Transparent">
-												<Grid Margin="2,4">
-													<Grid.Resources>
-														<Style TargetType="{x:Type TextBlock}"
-															   BasedOn="{StaticResource EmphaticTextStyleKey}">
-															<Setter Property="FontSize" Value="12" />
-														</Style>
-														<converters:RangeToBooleanConverter x:Key="RangeToBooleanConverter" />
-													</Grid.Resources>
-													<Grid.ColumnDefinitions>
-														<ColumnDefinition Width="Auto" SharedSizeGroup="SlotCarry" />
-														<ColumnDefinition Width="Auto" SharedSizeGroup="SlotIcon" />
-														<ColumnDefinition Width="Auto" SharedSizeGroup="SlotName" />
-														<ColumnDefinition Width="Auto" SharedSizeGroup="SlotLevel" />
-														<ColumnDefinition Width="Auto" SharedSizeGroup="SlotProficiency" />
-													</Grid.ColumnDefinitions>
-
-													<TextBlock Grid.Column="0"
-															   Margin="8,0,0,0"
-															   Text="{Binding ExSlot.Carry, Mode=OneWay}"
-															   TextAlignment="Right"
-															   Style="{StaticResource DetailTextStyleKey}"
-															   Foreground="{StaticResource InactiveForegroundBrushKey}"
-															   VerticalAlignment="Top" />
-													<kcvc:SlotItemIcon Grid.Column="1"
-																	   Margin="4,0"
-																	   Type="{Binding ExSlot.Item.IconType, Mode=OneWay}"
-																	   Width="16"
-																	   Height="16" />
-
-													<TextBlock Grid.Column="2"
-															   VerticalAlignment="Center"
-															   Text="{Binding ExSlot.Name, Mode=OneWay}" />
-
-													<TextBlock Grid.Column="3"
-															   Margin="8,0,2,0"
-															   VerticalAlignment="Center">
-														<TextBlock.Style>
-															<Style TargetType="{x:Type TextBlock}"
-																   BasedOn="{StaticResource EmphaticTextStyleKey}">
-																<Setter Property="FontSize" Value="12" />
-																<Setter Property="Foreground" Value="#FF45A9A5" />
-																<Setter Property="Text" Value="{Binding ExSlot.Level, Mode=OneWay, StringFormat={}★{0}}" />
-
-																<Style.Triggers>
-																	<DataTrigger Binding="{Binding ExSlot.Level, Mode=OneWay}" Value="0">
-																		<Setter Property="Opacity" Value=".5" />
-																		<Setter Property="Foreground" Value="{StaticResource InactiveForegroundBrushKey}" />
-																	</DataTrigger>
-																	<DataTrigger Binding="{Binding ExSlot.Level, Mode=OneWay}" Value="10">
-																		<Setter Property="Text" Value="★max" />
-																	</DataTrigger>
-																</Style.Triggers>
-															</Style>
-														</TextBlock.Style>
-													</TextBlock>
-													<TextBlock Grid.Column="4"
-															   Margin="4,0,2,0"
-															   VerticalAlignment="Center">
-														<TextBlock.Style>
-															<Style TargetType="{x:Type TextBlock}"
-																   BasedOn="{StaticResource EmphaticTextStyleKey}">
-																<Setter Property="FontSize" Value="12" />
-																<Setter Property="Foreground" Value="#FFD49C0F" />
-																<Setter Property="Text" Value="{Binding ExSlot.Proficiency, Mode=OneWay, StringFormat={}+{0}}" />
-
-																<Style.Triggers>
-																	<DataTrigger Binding="{Binding ExSlot.Proficiency, Mode=OneWay}" Value="0">
-																		<Setter Property="Opacity" Value=".5" />
-																		<Setter Property="Foreground" Value="{StaticResource InactiveForegroundBrushKey}" />
-																	</DataTrigger>
-																	<DataTrigger Binding="{Binding ExSlot.Proficiency, Mode=OneWay, Converter={StaticResource RangeToBooleanConverter}, ConverterParameter=1-3}" Value="True">
-																		<Setter Property="Foreground" Value="#FF98B3CE" />
-																	</DataTrigger>
-																</Style.Triggers>
-															</Style>
-														</TextBlock.Style>
-													</TextBlock>
-												</Grid>
-											</Border>
-
-											<StackPanel.Style>
-												<Style TargetType="{x:Type StackPanel}">
-													<Style.Triggers>
-														<DataTrigger Binding="{Binding ExSlot, Mode=OneWay}" Value="{x:Null}">
-															<Setter Property="Visibility" Value="Collapsed" />
-														</DataTrigger>
-														<DataTrigger Binding="{Binding ExSlot.Id, Mode=OneWay}" Value="0">
-															<Setter Property="Visibility" Value="Collapsed" />
-														</DataTrigger>
-													</Style.Triggers>
-												</Style>
-											</StackPanel.Style>
+												<StackPanel.Style>
+													<Style TargetType="{x:Type StackPanel}">
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding ExSlot, Mode=OneWay}" Value="{x:Null}">
+																<Setter Property="Visibility" Value="Collapsed" />
+															</DataTrigger>
+															<DataTrigger Binding="{Binding ExSlot.Id, Mode=OneWay}" Value="0">
+																<Setter Property="Visibility" Value="Collapsed" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</StackPanel.Style>
+											</StackPanel>
 										</StackPanel>
 
-										<Grid Grid.Row="3"
+										<Grid Grid.Row="2"
 											  Margin="0,5,0,0">
 											<Grid.ColumnDefinitions>
 												<ColumnDefinition Width="Auto" />

@@ -92,7 +92,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 			else
 			{
 				// return string.Empty;//해당되는 헤더가 없을 경우 empty을 반환
-				SelFolder = "\\" + header;
+				SelFolder = header;
 			}
 
 			var path = Path.Combine(Main_folder, SelFolder);
