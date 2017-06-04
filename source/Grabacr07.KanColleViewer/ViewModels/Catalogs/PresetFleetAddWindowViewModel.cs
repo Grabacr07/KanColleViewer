@@ -48,30 +48,18 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				var KanColleFleets = KanColleClient.Current.Homeport.Organization.Fleets;
 				if (KanColleClient.Current.IsStarted == false || KanColleFleets.Count < deckid || KanColleFleets[deckid].Ships.Count() < 1) return;
 
-				var fleet = KanColleClient.Current.Homeport.Organization.Fleets.Where(x => x.Value.Id == deckid).Single().Value;
-				var ships = fleet.Ships;
+				var fleet = KanColleClient.Current.Homeport.Organization.Fleets
+					.Where(x => x.Value.Id == deckid)
+					.SingleOrDefault().Value;
 
-				var item = new PresetFleetData();
+				var item = new PresetFleetModel();
+				item.Name = string.IsNullOrEmpty(this.FleetName) ? fleet.Name : this.FleetName;
+				item.Ships = fleet.Ships
+					.Select(x => new PresetShipData(x).Source)
+					.Where(x => x.Id > 0)
+					.ToArray();
 
-				List<string> shipDataList = new List<string>();
-				foreach(var ship in ships)
-				{
-					shipDataList.Add(string.Format(
-						"{0}\t{1}\t{2}",
-						ship.Id,
-						string.Join(",", ship.Slots.Where(x => x.Equipped).Select(x => x.Item.Id)),
-						(ship.ExSlotExists && ship.ExSlot.Equipped) ? ship.ExSlot.Item.Id : -1
-					));
-				}
-
-				item.Deserialize(
-					string.Format(
-						"{0}\t{1}",
-						string.IsNullOrEmpty(this.FleetName) ? fleet.Name : this.FleetName,
-						string.Join("\t", shipDataList)
-					)
-				);
-				this._ViewModel.AddFleet(item);
+				this._ViewModel.AddFleet(new PresetFleetData(item));
 				Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
 			}
 		}

@@ -13,6 +13,7 @@ using System.Xml.Linq;
 using Grabacr07.KanColleViewer.Views.Catalogs;
 using Grabacr07.KanColleViewer.ViewModels.Contents.Fleets;
 using System.Runtime.Serialization.Json;
+using kcsapi_mst_shipgraph = Grabacr07.KanColleWrapper.Models.Raw.kcsapi_mst_shipgraph;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 {
@@ -137,19 +138,38 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 	{
 		public PresetFleetModel Source { get; private set; }
 
-		public double AirSuperiorityMinimum
-			=> this.Source?.Ships
-				.Sum(x => x.GetAirSuperiorityPotential(AirSuperiorityCalculationOptions.Minimum))
-				?? 0;
+		public string Name => this.Source?.Name;
 
-		public double AirSuperiorityMaximum
-			=> this.Source?.Ships
-				.Sum(x => x.GetAirSuperiorityPotential(AirSuperiorityCalculationOptions.Maximum))
-				?? 0;
+		public string AirSuperiorityMinimum
+			=> (
+				this.Source?.Ships
+					.Sum(x => x.GetAirSuperiorityPotential(AirSuperiorityCalculationOptions.Minimum))
+					?? 0
+			).ToString("##0");
+
+		public string AirSuperiorityMaximum
+			=> (
+				this.Source?.Ships
+					.Sum(x => x.GetAirSuperiorityPotential(AirSuperiorityCalculationOptions.Maximum))
+					?? 0
+			).ToString("##0");
 
 		private ICalcViewRange logic = ViewRangeCalcLogic.Get(KanColleClient.Current.Settings.ViewRangeCalcType);
-		public double ViewRange
-			=> this.Source?.Ships.GetViewRange() ?? 0;
+		public string ViewRange
+			=> (this.Source?.Ships.GetViewRange() ?? 0)
+				.ToString("##0.##");
+
+		public PresetShipData[] Ships
+			=> this.Source?.Ships
+				.Select((x, y) =>
+				{
+					var z = new PresetShipData(x);
+					z.Index = y + 1;
+					return z;
+				})
+				.Where(x => x.Id > 0)
+				.ToArray();
+
 
 		public PresetFleetData()
 		{
@@ -162,6 +182,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public PresetFleetData(string Name) : this()
 		{
 			this.Source.Name = Name;
+		}
+		public PresetFleetData(PresetFleetModel fleet)
+		{
+			this.Source = fleet;
 		}
 
 		public string Serialize()
@@ -179,8 +203,54 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		public PresetShipModel Source { get; private set; }
 
-		public string Name => Ship?.Name ?? "？？？";
-		public string TypeName => Ship?.ShipType?.Name ?? "？？？";
+		#region Index Property
+		private int _Index { get; set; }
+		public int Index {
+			get { return this._Index; }
+			set
+			{
+				if (this._Index != value)
+				{
+					this._Index = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+		#endregion
+
+		public int Id => this.Source?.Id ?? 0;
+		public string Name => this.Ship?.Name ?? "？？？";
+		public string TypeName => this.Ship?.ShipType?.Name ?? "？？？";
+		public int Level => this.Source?.Level ?? 0;
+
+		public string Speed
+			=> (ShipSpeed?)this.Source?.Speed == ShipSpeed.Immovable ? "육상기지"
+				: (ShipSpeed?)this.Source?.Speed == ShipSpeed.Slow ? "저속"
+				: (ShipSpeed?)this.Source?.Speed == ShipSpeed.Fast ? "고속"
+				: (ShipSpeed?)this.Source?.Speed == ShipSpeed.Faster ? "고속+"
+				: (ShipSpeed?)this.Source?.Speed == ShipSpeed.Fastest ? "초고속"
+				: "？？？";
+
+		public string Range
+			=> this.Source?.Range == 0 ? "없음"
+				: this.Source?.Range == 1 ? "단거리"
+				: this.Source?.Range == 2 ? "중거리"
+				: this.Source?.Range == 3 ? "장거리"
+				: this.Source?.Range == 4 ? "초장거리"
+				: "？？？";
+
+		public PresetSlotData[] Slots
+			=> this.Source.Slots?
+				.Select(x => new PresetSlotData(x))
+				.Take(Ship.SlotCount)
+				.Select((x, y) =>
+				{
+					x.Carry = Ship.Slots[y];
+					return x;
+				})
+				.ToArray();
+		public PresetSlotData ExSlot
+			=> new PresetSlotData(this.Source?.ExSlot);
 
 		public PresetShipData()
 		{
@@ -193,8 +263,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		}
 		public PresetShipData(Ship ship)
 		{
-			this.Source = new PresetShipModel {
+			this.Source = new PresetShipModel
+			{
 				Id = ship.Info.Id,
+				Level = ship.Level,
 
 				Slots = ship.Slots
 					.Select(x => new PresetSlotModel
@@ -203,6 +275,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 						Level = x.Item.Level,
 						Proficiency = x.Item.Proficiency
 					})
+					.Take(ship.Info.SlotCount)
 					.ToArray(),
 
 				ExSlot = ship.ExSlot != null
@@ -249,7 +322,19 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		public PresetSlotModel Source { get; private set; }
 
-		public string Name => Item?.Name ?? "？？？";
+		public int Id => this.Source?.Id ?? 0;
+		public int Carry { get; set; }
+
+		public string Name => this.Item?.Name ?? "？？？";
+		public int Level => this.Source?.Level ?? 0;
+		public int Proficiency => this.Source?.Proficiency ?? 0;
+
+		public string Description =>
+			this.Name
+			+ (this.Level > 0 ? (this.Level == 10 ? " ★max" : $" ★+{this.Level}") : "")
+			+ (this.Proficiency > 0 ? $" +{this.Proficiency}" : "")
+			+ Environment.NewLine + Environment.NewLine
+			+ this.Item?.ToolTipData ?? "";
 
 		public PresetSlotData()
 		{
@@ -373,6 +458,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 	internal static class PresetUtil
 	{
+		internal static IEnumerable<kcsapi_mst_shipgraph> ShipGraphics
+			=> KanColleClient.Current.Master.RawData?.api_mst_shipgraph ?? new kcsapi_mst_shipgraph[0];
+
 		public static T ParseJson<T>(string Json) where T : class
 		{
 			var bytes = Encoding.UTF8.GetBytes(Json);
@@ -391,7 +479,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			return ship.Slots
 				.Select((x, y) =>
 				{
-					var calc = new PresetSlotData(x).Item.Type.GetCalculator();
+					var calc = new PresetSlotData(x).Item?.Type.GetCalculator() ?? EmptyCalculator.Instance;
 
 					if (slots[y] <= 0) return 0;
 					if (!option.HasFlag(calc.Options)) return 0;
@@ -462,7 +550,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				return Math.Sqrt(proficiency.GetInternalValue(options) / 10.0) + proficiency.FighterBonus;
 			}
 		}
-
 		private class AttackerCalculator : AirSuperiorityCalculator
 		{
 			public override AirSuperiorityCalculationOptions Options => AirSuperiorityCalculationOptions.Attacker;
@@ -473,7 +560,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				return Math.Sqrt(proficiency.GetInternalValue(options) / 10.0);
 			}
 		}
-
 		private class SeaplaneBomberCalculator : AirSuperiorityCalculator
 		{
 			public override AirSuperiorityCalculationOptions Options => AirSuperiorityCalculationOptions.SeaplaneBomber;
@@ -484,7 +570,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				return Math.Sqrt(proficiency.GetInternalValue(options) / 10.0) + proficiency.SeaplaneBomberBonus;
 			}
 		}
-
 		private class EmptyCalculator : AirSuperiorityCalculator
 		{
 			public static EmptyCalculator Instance { get; } = new EmptyCalculator();
@@ -543,15 +628,17 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				.SelectMany(x => x.Slots)
 				.Sum(x => {
 					var y = new PresetSlotData(x).Item;
-					return y.ViewRange + GetLevelCoefficient(y.Type, x.Level) + GetTypeCoefficient(y.Type);
+					if (y == null) return 0;
+
+					return (y.ViewRange + GetLevelCoefficient(y.Type, x.Level)) * GetTypeCoefficient(y.Type);
 				});
 
 			var shipLOS = ships
-				.Select(x => x.LOS - x.Slots.Sum(y => new PresetSlotData(y).Item.RawData.api_saku))
+				.Select(x => x.LOS - x.Slots.Sum(y => new PresetSlotData(y).Item?.RawData.api_saku ?? 0))
 				.Sum(x => Math.Sqrt(x));
 
 			var admiralLOS = Math.Ceiling(KanColleClient.Current.Homeport.Admiral.Level * 0.4);
-			var vacancyScore = (6 - ships.Length) * 2;
+			var vacancyScore = (6 - ships.Count(x => x.Id > 0)) * 2;
 
 			return itemLOS + shipLOS - admiralLOS + vacancyScore;
 		}
