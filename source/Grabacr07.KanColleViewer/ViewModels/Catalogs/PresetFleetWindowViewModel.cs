@@ -137,6 +137,20 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 	{
 		public PresetFleetModel Source { get; private set; }
 
+		public double AirSuperiorityMinimum
+			=> this.Source?.Ships
+				.Sum(x => x.GetAirSuperiorityPotential(AirSuperiorityCalculationOptions.Minimum))
+				?? 0;
+
+		public double AirSuperiorityMaximum
+			=> this.Source?.Ships
+				.Sum(x => x.GetAirSuperiorityPotential(AirSuperiorityCalculationOptions.Maximum))
+				?? 0;
+
+		private ICalcViewRange logic = ViewRangeCalcLogic.Get(KanColleClient.Current.Settings.ViewRangeCalcType);
+		public double ViewRange
+			=> this.Source?.Ships.GetViewRange() ?? 0;
+
 		public PresetFleetData()
 		{
 			this.Source = new PresetFleetModel
@@ -158,15 +172,15 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 	}
 	public class PresetShipData : NotificationObject
 	{
-		private ShipInfo ship =>
+		public ShipInfo Ship =>
 				KanColleClient.Current.Master.Ships
 					.SingleOrDefault(x => x.Value.Id == this.Source.Id).Value
 					?? null;
 
 		public PresetShipModel Source { get; private set; }
 
-		public string Name => ship?.Name ?? "？？？";
-		public string TypeName => ship?.ShipType?.Name ?? "？？？";
+		public string Name => Ship?.Name ?? "？？？";
+		public string TypeName => Ship?.ShipType?.Name ?? "？？？";
 
 		public PresetShipData()
 		{
@@ -215,6 +229,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				Luck = ship.Luck.Current
 			};
 		}
+		public PresetShipData(PresetShipModel ship)
+		{
+			this.Source = ship;
+		}
 
 		public string Serialize()
 			=> this.Source?.Serialize();
@@ -224,14 +242,14 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 	}
 	public class PresetSlotData : NotificationObject
 	{
-		private SlotItemInfo item =>
+		public SlotItemInfo Item =>
 			KanColleClient.Current.Master.SlotItems
 				.SingleOrDefault(x => x.Value.Id == this.Source?.Id).Value
 				?? null;
 
 		public PresetSlotModel Source { get; private set; }
 
-		public string Name => item?.Name ?? "？？？";
+		public string Name => Item?.Name ?? "？？？";
 
 		public PresetSlotData()
 		{
@@ -250,6 +268,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				Level = item.Level,
 				Proficiency = item.Proficiency
 			};
+		}
+		public PresetSlotData(PresetSlotModel item)
+		{
+			this.Source = item;
 		}
 
 		public string Serialize()
@@ -349,7 +371,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 	}
 	#endregion
 
-	internal class PresetUtil
+	internal static class PresetUtil
 	{
 		public static T ParseJson<T>(string Json) where T : class
 		{
@@ -359,6 +381,234 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			{
 				var rawResult = serializer.ReadObject(stream) as T;
 				return rawResult;
+			}
+		}
+
+		public static double GetAirSuperiorityPotential(this PresetShipModel ship, AirSuperiorityCalculationOptions option)
+		{
+			var slots = new PresetShipData(ship).Ship.RawData.api_maxeq;
+
+			return ship.Slots
+				.Select((x, y) =>
+				{
+					var calc = new PresetSlotData(x).Item.Type.GetCalculator();
+
+					if (slots[y] <= 0) return 0;
+					if (!option.HasFlag(calc.Options)) return 0;
+
+					return calc.GetAirSuperiority(x, slots[y], option);
+				})
+				.Sum();
+		}
+		private static AirSuperiorityCalculator GetCalculator(this SlotItemType type)
+		{
+			switch (type)
+			{
+				case SlotItemType.艦上戦闘機:
+				case SlotItemType.水上戦闘機:
+				case SlotItemType.噴式戦闘機:
+					return new FighterCalculator();
+
+				case SlotItemType.艦上攻撃機:
+				case SlotItemType.艦上爆撃機:
+				case SlotItemType.噴式攻撃機:
+				case SlotItemType.噴式戦闘爆撃機:
+					// case SlotItemType.噴式偵察機: ??
+					return new AttackerCalculator();
+
+				case SlotItemType.水上爆撃機:
+					return new SeaplaneBomberCalculator();
+
+				default:
+					return EmptyCalculator.Instance;
+			}
+		}
+		private abstract class AirSuperiorityCalculator
+		{
+			public abstract AirSuperiorityCalculationOptions Options { get; }
+
+			public int GetAirSuperiority(PresetSlotModel slotItem, int onslot, AirSuperiorityCalculationOptions options)
+			{
+				// 装備の対空値とスロットの搭載数による制空値
+				var airSuperiority = this.GetAirSuperiority(slotItem, onslot);
+
+				// 装備の熟練度による制空値ボーナス
+				airSuperiority += this.GetProficiencyBonus(slotItem, options);
+
+				return (int)airSuperiority;
+			}
+
+			protected virtual double GetAirSuperiority(PresetSlotModel slotItem, int onslot)
+			{
+				return new PresetSlotData(slotItem).Item.AA * Math.Sqrt(onslot);
+			}
+
+			protected abstract double GetProficiencyBonus(PresetSlotModel slotItem, AirSuperiorityCalculationOptions options);
+		}
+		#region AirSuperiority Calculators
+		private class FighterCalculator : AirSuperiorityCalculator
+		{
+			public override AirSuperiorityCalculationOptions Options => AirSuperiorityCalculationOptions.Fighter;
+
+			protected override double GetAirSuperiority(PresetSlotModel slotItem, int onslot)
+			{
+				// 装備改修による対空値加算 (★ x 0.2)
+				return (new PresetSlotData(slotItem).Item.AA + slotItem.Level * 0.2) * Math.Sqrt(onslot);
+			}
+
+			protected override double GetProficiencyBonus(PresetSlotModel slotItem, AirSuperiorityCalculationOptions options)
+			{
+				var proficiency = slotItem.GetProficiency();
+				return Math.Sqrt(proficiency.GetInternalValue(options) / 10.0) + proficiency.FighterBonus;
+			}
+		}
+
+		private class AttackerCalculator : AirSuperiorityCalculator
+		{
+			public override AirSuperiorityCalculationOptions Options => AirSuperiorityCalculationOptions.Attacker;
+
+			protected override double GetProficiencyBonus(PresetSlotModel slotItem, AirSuperiorityCalculationOptions options)
+			{
+				var proficiency = slotItem.GetProficiency();
+				return Math.Sqrt(proficiency.GetInternalValue(options) / 10.0);
+			}
+		}
+
+		private class SeaplaneBomberCalculator : AirSuperiorityCalculator
+		{
+			public override AirSuperiorityCalculationOptions Options => AirSuperiorityCalculationOptions.SeaplaneBomber;
+
+			protected override double GetProficiencyBonus(PresetSlotModel slotItem, AirSuperiorityCalculationOptions options)
+			{
+				var proficiency = slotItem.GetProficiency();
+				return Math.Sqrt(proficiency.GetInternalValue(options) / 10.0) + proficiency.SeaplaneBomberBonus;
+			}
+		}
+
+		private class EmptyCalculator : AirSuperiorityCalculator
+		{
+			public static EmptyCalculator Instance { get; } = new EmptyCalculator();
+
+			public override AirSuperiorityCalculationOptions Options => ~AirSuperiorityCalculationOptions.Default;
+			protected override double GetAirSuperiority(PresetSlotModel slotItem, int onslot) => .0;
+			protected override double GetProficiencyBonus(PresetSlotModel slotItem, AirSuperiorityCalculationOptions options) => .0;
+
+			private EmptyCalculator() { }
+		}
+		#endregion
+		#region Proficiency Bonus
+		private class Proficiency
+		{
+			private readonly int internalMinValue;
+			private readonly int internalMaxValue;
+
+			public int FighterBonus { get; }
+			public int SeaplaneBomberBonus { get; }
+
+			public Proficiency(int internalMin, int internalMax, int fighterBonus, int seaplaneBomberBonus)
+			{
+				this.internalMinValue = internalMin;
+				this.internalMaxValue = internalMax;
+				this.FighterBonus = fighterBonus;
+				this.SeaplaneBomberBonus = seaplaneBomberBonus;
+			}
+
+			/// <summary>
+			/// 内部熟練度値を取得します。
+			/// </summary>
+			public int GetInternalValue(AirSuperiorityCalculationOptions options)
+			{
+				if (options.HasFlag(AirSuperiorityCalculationOptions.InternalProficiencyMinValue)) return this.internalMinValue;
+				if (options.HasFlag(AirSuperiorityCalculationOptions.InternalProficiencyMaxValue)) return this.internalMaxValue;
+				return (this.internalMaxValue + this.internalMinValue) / 2; // <- めっちゃ適当
+			}
+		}
+		private static readonly Dictionary<int, Proficiency> proficiencies = new Dictionary<int, Proficiency>()
+		{
+			{ 0, new Proficiency(0, 9, 0, 0) },
+			{ 1, new Proficiency(10, 24, 0, 0) },
+			{ 2, new Proficiency(25, 39, 2, 1) },
+			{ 3, new Proficiency(40, 54, 5, 1) },
+			{ 4, new Proficiency(55, 69, 9, 1) },
+			{ 5, new Proficiency(70, 84, 14, 3) },
+			{ 6, new Proficiency(85, 99, 14, 3) },
+			{ 7, new Proficiency(100, 120, 22, 6) },
+		};
+		private static Proficiency GetProficiency(this PresetSlotModel slotItem) => proficiencies[Math.Max(Math.Min(slotItem.Proficiency, 7), 0)];
+		#endregion
+
+		public static double GetViewRange(this PresetShipModel[] ships)
+		{
+			var itemLOS = ships
+				.SelectMany(x => x.Slots)
+				.Sum(x => {
+					var y = new PresetSlotData(x).Item;
+					return y.ViewRange + GetLevelCoefficient(y.Type, x.Level) + GetTypeCoefficient(y.Type);
+				});
+
+			var shipLOS = ships
+				.Select(x => x.LOS - x.Slots.Sum(y => new PresetSlotData(y).Item.RawData.api_saku))
+				.Sum(x => Math.Sqrt(x));
+
+			var admiralLOS = Math.Ceiling(KanColleClient.Current.Homeport.Admiral.Level * 0.4);
+			var vacancyScore = (6 - ships.Length) * 2;
+
+			return itemLOS + shipLOS - admiralLOS + vacancyScore;
+		}
+		private static double GetLevelCoefficient(SlotItemType type, int Level)
+		{
+			switch (type)
+			{
+				case SlotItemType.水上偵察機:
+					return Math.Sqrt(Level) * 1.2;
+
+				case SlotItemType.小型電探:
+				case SlotItemType.大型電探:
+				case SlotItemType.大型電探_II:
+					return Math.Sqrt(Level) * 1.25;
+
+				default:
+					return 0;
+			}
+		}
+		private static double GetTypeCoefficient(SlotItemType type)
+		{
+			switch (type)
+			{
+				case SlotItemType.艦上戦闘機:
+				case SlotItemType.艦上爆撃機:
+				case SlotItemType.小型電探:
+				case SlotItemType.大型電探:
+				case SlotItemType.対潜哨戒機:
+				case SlotItemType.探照灯:
+				case SlotItemType.司令部施設:
+				case SlotItemType.航空要員:
+				case SlotItemType.水上艦要員:
+				case SlotItemType.大型ソナー:
+				case SlotItemType.大型飛行艇:
+				case SlotItemType.大型探照灯:
+				case SlotItemType.水上戦闘機:
+				case SlotItemType.噴式戦闘機: // 未実装なのでﾃｷﾄｰ
+				case SlotItemType.噴式戦闘爆撃機:
+					return 0.6;
+
+				case SlotItemType.艦上攻撃機:
+				case SlotItemType.噴式攻撃機: // 未実装なのでﾃｷﾄｰ
+					return 0.8;
+
+				case SlotItemType.艦上偵察機:
+				case SlotItemType.艦上偵察機_II:
+					return 1.0;
+
+				case SlotItemType.水上爆撃機:
+					return 1.1;
+
+				case SlotItemType.水上偵察機:
+				case SlotItemType.噴式偵察機: // 未実装なのでﾃｷﾄｰ
+					return 1.2;
+
+				default:
+					return .0;
 			}
 		}
 	}

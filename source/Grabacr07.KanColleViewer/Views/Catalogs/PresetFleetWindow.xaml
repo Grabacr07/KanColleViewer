@@ -129,7 +129,7 @@
 					<metro2:CallMethodButton.Style>
 						<Style TargetType="metro2:CallMethodButton">
 							<Style.Triggers>
-								<DataTrigger Binding="{Binding SelectedFleet}" Value="{x:Null}">
+								<DataTrigger Binding="{Binding SelectedFleet, Mode=OneWay}" Value="{x:Null}">
 									<Setter Property="IsEnabled" Value="False" />
 								</DataTrigger>
 							</Style.Triggers>
@@ -146,14 +146,25 @@
 						<RowDefinition Height="Auto"/>
 						<RowDefinition/>
 					</Grid.RowDefinitions>
-					<StackPanel>
+					<StackPanel DataContext="{Binding SelectedFleet, Mode=OneWay}">
 						<Grid HorizontalAlignment="Left" Margin="0,5,0,0">
 							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="*"/>
 								<ColumnDefinition Width="Auto"/>
 							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+							</Grid.RowDefinitions>
+
+							<TextBlock Margin="4"
+									   Grid.RowSpan="2"
+									   FontSize="24"
+									   Foreground="White"
+									   Text="{Binding Name, Mode=OneWay}" />
 						</Grid>
-						<ItemsControl ItemsSource="{Binding SelectedFleet.Ships}"
+
+						<ItemsControl ItemsSource="{Binding Ships}"
 									  Background="Transparent"
 									  Grid.IsSharedSizeScope="True">
 							<ItemsControl.ItemsPanel>
