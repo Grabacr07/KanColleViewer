@@ -75,20 +75,36 @@ namespace Grabacr07.KanColleViewer.Plugins
 			 * 
 			**/
 			string SelFolder = "";
-			if (header == Resources.Expedition_NotificationMessage_Title) SelFolder = "\\expedition";//원정
-			else if (header == Resources.Repairyard_NotificationMessage_Title) SelFolder = "\\repair";//수리
-			else if (header == Resources.ReSortie_NotificationMessage_Title) SelFolder = "\\Rejuvenated";//피로회복
-			else if (header == "대파알림") SelFolder = "\\critical";//대파
-			else if (header == Resources.Dockyard_NotificationMessage_Title) SelFolder = "\\Dockyard";//건조
-			else return string.Empty;//해당되는 헤더가 없을 경우 empty을 반환
-			if (!Directory.Exists(Main_folder + SelFolder)) return string.Empty;//폴더검사해서 폴더가 없으면 empty 출력
+			var table = new Dictionary<string, string>{
+				{ Resources.Expedition_NotificationMessage_Title, "expedition" }, // 원정
+				{ Resources.Repairyard_NotificationMessage_Title, "repair" }, // 수리
+				{ Resources.ReSortie_NotificationMessage_Title, "Rejuvenated" }, // 피로회복
+				{ "대파알림", "critical" }, // 대파
+				{ Resources.Dockyard_NotificationMessage_Title, "Dockyard" }, // 건조
+				{ "추격확인", "Yasen" }, // 야전 돌입 여부 선택
+				{ "전투종료", "BattleEnd" } // 전투 종료
+			};
+
+			if (table.ContainsKey(header))
+			{
+				SelFolder = table[header];
+			}
+			else
+			{
+				// return string.Empty;//해당되는 헤더가 없을 경우 empty을 반환
+				SelFolder = "\\" + header;
+			}
+
+			var path = Path.Combine(Main_folder, SelFolder);
+			if (!Directory.Exists(path)) return string.Empty;//폴더검사해서 폴더가 없으면 empty 출력
 
 			VolumeViewModel checkVolume = new VolumeViewModel();
 
 			if (!checkVolume.IsExistSoundDevice()) return string.Empty;
 
-			List<string> FileList = Directory.GetFiles(Main_folder + SelFolder, "*.wav", SearchOption.AllDirectories)
-	.Concat(Directory.GetFiles(Main_folder + SelFolder, "*.mp3", SearchOption.AllDirectories)).ToList();
+			List<string> FileList = Directory.GetFiles(path, "*.wav", SearchOption.AllDirectories)
+				.Concat(Directory.GetFiles(path, "*.mp3", SearchOption.AllDirectories))
+				.ToList();
 
 			if (!checkVolume.IsMute && FileList.Count > 0)
 			{
