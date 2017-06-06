@@ -20,6 +20,8 @@ namespace Grabacr07.KanColleWrapper.Models
 		public int Proficiency => this.RawData.api_alv;
 		public string ProficiencyText => this.Proficiency >= 1 ? (" (숙련도 " + this.Proficiency + ")") : "";
 
+		public bool Locked => this.RawData.api_locked == 1;
+
 		internal SlotItem(kcsapi_slotitem rawData)
 			: base(rawData)
 		{

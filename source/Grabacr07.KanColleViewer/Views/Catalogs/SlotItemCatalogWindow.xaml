@@ -277,9 +277,69 @@
 											   Margin="0,8" />
 
 									<WrapPanel>
-										<CheckBox IsChecked="{Binding OnlyRemodeledSlotItems}"
-												  Content="개수된 장비만 보기"
-												  HorizontalAlignment="Left" />
+										<WrapPanel.Resources>
+											<Style TargetType="{x:Type RadioButton}"
+												   BasedOn="{StaticResource {x:Type RadioButton}}">
+												<Setter Property="Margin"
+														Value="0,2,12,2" />
+											</Style>
+											<Style TargetType="{x:Type CheckBox}"
+												   BasedOn="{StaticResource {x:Type CheckBox}}">
+												<Setter Property="Margin"
+														Value="0,2,12,2" />
+											</Style>
+											<Style TargetType="{x:Type StackPanel}">
+												<Setter Property="Margin"
+														Value="0,0,25,0" />
+												<Setter Property="Grid.IsSharedSizeScope"
+														Value="True" />
+											</Style>
+										</WrapPanel.Resources>
+
+										<StackPanel>
+											<Grid DataContext="{Binding ItemLockFilter}">
+												<Grid.ColumnDefinitions>
+													<ColumnDefinition Width="Auto"
+																	  SharedSizeGroup="FilterName" />
+													<ColumnDefinition Width="10" />
+													<ColumnDefinition Width="*" />
+												</Grid.ColumnDefinitions>
+												<TextBlock Margin="0,2"
+														   HorizontalAlignment="Right">
+													<Run Text="자물쇠" />
+													<Run Text=":" />
+												</TextBlock>
+												<WrapPanel Grid.Column="2">
+													<RadioButton Content="모두"
+														 IsChecked="{Binding Both, Mode=TwoWay}" />
+													<RadioButton Content="채움"
+														 IsChecked="{Binding Locked, Mode=TwoWay}" />
+													<RadioButton Content="안채움"
+														 IsChecked="{Binding Unlocked, Mode=TwoWay}" />
+												</WrapPanel>
+											</Grid>
+										</StackPanel>
+
+										<StackPanel>
+											<Grid>
+												<Grid.ColumnDefinitions>
+													<ColumnDefinition Width="Auto"
+																	  SharedSizeGroup="FilterName" />
+													<ColumnDefinition Width="10" />
+													<ColumnDefinition Width="*" />
+												</Grid.ColumnDefinitions>
+												<TextBlock Margin="0,2"
+														   HorizontalAlignment="Right">
+													<Run Text="개수" />
+													<Run Text=":" />
+												</TextBlock>
+												<WrapPanel Grid.Column="2">
+													<CheckBox IsChecked="{Binding OnlyRemodeledSlotItems}"
+															  Content="개수된 장비만 보기"
+															  HorizontalAlignment="Left" />
+												</WrapPanel>
+											</Grid>
+										</StackPanel>
 									</WrapPanel>
 								</StackPanel>
 							</Border>

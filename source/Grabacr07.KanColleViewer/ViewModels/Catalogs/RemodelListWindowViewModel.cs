@@ -13,6 +13,93 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 {
 	public class RemodelListWindowViewModel : WindowViewModel
 	{
+		public class RemodelItemListItem
+		{
+			/// <summary>
+			/// 장비명
+			/// </summary>
+			public string ItemName { get; set; }
+
+			/// <summary>
+			/// 개수 가능 요일 전체
+			/// </summary>
+			public WeekDayFlag TotalWeekday { get; set; }
+
+			/// <summary>
+			/// 아이콘 종류
+			/// </summary>
+			public SlotItemIconType? IconType { get; set; }
+
+			/// <summary>
+			/// 소모 나사량
+			/// </summary>
+			public string UseScrew { get; set; }
+
+			/// <summary>
+			/// 툴팁 내용
+			/// </summary>
+			public string ToolTipString { get; set; }
+
+			/// <summary>
+			/// 개수 함선들
+			/// </summary>
+			public List<ShipInfo> Ships { get; set; }
+
+			/// <summary>
+			/// 장비 변환 가능 여부
+			/// </summary>
+			public bool Upgradable { get; set; }
+
+			/// <summary>
+			/// 장비변환 후 장비 아이콘
+			/// </summary>
+			public SlotItemIconType? UpgradeIconType { get; set; }
+
+			/// <summary>
+			/// 장비변환 함선들
+			/// </summary>
+			public List<ShipInfo> UpgradeShips { get; set; }
+		}
+
+		public class ShipInfo
+		{
+			/// <summary>
+			/// 개수 가능 요일
+			/// </summary>
+			public WeekDayFlag Weekday { get; set; }
+
+			/// <summary>
+			/// 함선 이름
+			/// </summary>
+			public string ShipName { get; set; }
+
+			/// <summary>
+			/// 장비 변환 후 장비
+			/// </summary>
+			public string Upgrade { get; set; }
+
+			/// <summary>
+			/// 장비 변환 후 장비 아이콘
+			/// </summary>
+			public SlotItemIconType? UpgradeIconType { get; set; }
+		}
+
+		[Flags]
+		public enum WeekDayFlag
+		{
+			None = 0,
+			Sunday = 1,
+			Monday = 1 << 1,
+			Tuesday = 1 << 2,
+			Wednesday = 1 << 3,
+			Thursday = 1 << 4,
+			Friday = 1 << 5,
+			Saturday = 1 << 6,
+			NotNeedShip = 1 << 7,
+			All = Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday,
+		}
+
+
 		public IEnumerable<string> WeekDayList { get; private set; }
 		public static Dictionary<string, int> WeekDayTable = new Dictionary<string, int>
 		{
@@ -119,8 +206,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		#endregion
 
 		#region RemodelItemList 変更通知プロパティ
-		private List<RemodelItemList> _RemodelItemList;
-		public List<RemodelItemList> RemodelItemList
+		private List<RemodelItemListItem> _RemodelItemList;
+		public List<RemodelItemListItem> RemodelItemList
 		{
 			get { return _RemodelItemList; }
 			set
@@ -357,9 +444,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		/// </summary>
 		/// <param name="myList"></param>
 		/// <returns></returns>
-		private List<RemodelItemList> SortList(List<RemodelItemList> myList)
+		private List<RemodelItemListItem> SortList(List<RemodelItemListItem> myList)
 		{
-			myList?.Sort(delegate (RemodelItemList x, RemodelItemList y)
+			myList?.Sort((x, y) =>
 			{
 				SlotItemIconType? a = x.IconType, b = y.IconType;
 
@@ -460,10 +547,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		/// <summary>
 		/// 개수 가능 장비 목록 작성
 		/// </summary>
-		private List<RemodelItemList> MakeDefaultList(IEnumerable<XElement> List, int Position = -1)
+		private List<RemodelItemListItem> MakeDefaultList(IEnumerable<XElement> List, int Position = -1)
 		{
 			//var PosElement = "Position";
-			List<RemodelItemList> ItemList = new List<RemodelItemList>();
+			List<RemodelItemListItem> ItemList = new List<RemodelItemListItem>();
 
 			//리스트를 Position에 따라 필터링
 			//var tempList = List.Where(f => f.Element(PosElement).Value.Equals(Position.ToString())).ToList();
@@ -473,7 +560,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			foreach (var item in tempList)
 			{
 				//초기화
-				RemodelItemList ItemContent = new RemodelItemList
+				RemodelItemListItem ItemContent = new RemodelItemListItem
 				{
 					ItemName = item.Element("SlotItemName").Value
 				};
@@ -548,92 +635,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			return null;
 		}
 	}
-	#region 목록
-	public class RemodelItemList
-	{
-		/// <summary>
-		/// 장비명
-		/// </summary>
-		public string ItemName { get; set; }
-
-		/// <summary>
-		/// 개수 가능 요일 전체
-		/// </summary>
-		public WeekDayFlag TotalWeekday { get; set; }
-
-		/// <summary>
-		/// 아이콘 종류
-		/// </summary>
-		public SlotItemIconType? IconType { get; set; }
-
-		/// <summary>
-		/// 소모 나사량
-		/// </summary>
-		public string UseScrew { get; set; }
-
-		/// <summary>
-		/// 툴팁 내용
-		/// </summary>
-		public string ToolTipString { get; set; }
-
-		/// <summary>
-		/// 개수 함선들
-		/// </summary>
-		public List<ShipInfo> Ships { get; set; }
-
-		/// <summary>
-		/// 장비 변환 가능 여부
-		/// </summary>
-		public bool Upgradable { get; set; }
-
-		/// <summary>
-		/// 장비변환 후 장비 아이콘
-		/// </summary>
-		public SlotItemIconType? UpgradeIconType { get; set; }
-
-		/// <summary>
-		/// 장비변환 함선들
-		/// </summary>
-		public List<ShipInfo> UpgradeShips { get; set; }
-	}
-
-	public class ShipInfo
-	{
-		/// <summary>
-		/// 개수 가능 요일
-		/// </summary>
-		public WeekDayFlag Weekday { get; set; }
-
-		/// <summary>
-		/// 함선 이름
-		/// </summary>
-		public string ShipName { get; set; }
-
-		/// <summary>
-		/// 장비 변환 후 장비
-		/// </summary>
-		public string Upgrade { get; set; }
-
-		/// <summary>
-		/// 장비 변환 후 장비 아이콘
-		/// </summary>
-		public SlotItemIconType? UpgradeIconType { get; set; }
-	}
-
-	[Flags]
-	public enum WeekDayFlag
-	{
-		None = 0,
-		Sunday = 1,
-		Monday = 1 << 1,
-		Tuesday = 1 << 2,
-		Wednesday = 1 << 3,
-		Thursday = 1 << 4,
-		Friday = 1 << 5,
-		Saturday = 1 << 6,
-		NotNeedShip = 1 << 7,
-		All = Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday,
-	}
 
 	public class RemodelFilterViewModel : Livet.ViewModel
 	{
@@ -646,5 +647,4 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			this.Display = Display;
 		}
 	}
-	#endregion
 }

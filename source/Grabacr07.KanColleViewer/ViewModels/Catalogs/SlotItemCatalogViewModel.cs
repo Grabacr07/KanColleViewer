@@ -8,6 +8,7 @@ using Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleWrapper;
 using MetroTrilithon.Mvvm;
 using Grabacr07.KanColleWrapper.Models;
+using Livet;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 {
@@ -105,20 +106,15 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#endregion
 
+		public ItemLockFilter ItemLockFilter { get; }
+
 		public SlotItemCatalogViewModel()
 		{
 			this.Title = "소유 장비 목록";
 			this.Settings = new SlotItemCatalogWindowSettings();
 
-			/*
-			this.SlotItemEquipTypes = KanColleClient.Current.Master.SlotItemEquipTypes
-				.Select(kvp => new SlotItemEquipTypeViewModel(kvp.Value)
-				{
-					IsSelected = true,
-					SelectionChangedAction = () => this.Update()
-				})
-				.ToList();
-			*/
+			this.ItemLockFilter = new ItemLockFilter(this.Update);
+
 			this.SlotItemEquipTypes = Enum.GetNames(typeof(SlotItemIconType))
 				.Select(x => new SlotItemEquipTypeViewModel((SlotItemIconType)Enum.Parse(typeof(SlotItemIconType), x))
 				{
@@ -148,23 +144,17 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		private List<SlotItemCounter> UpdateCore(IEnumerable<SlotItemIconType> enableSlotItemEquipTypes)
 		{
-			var ships = KanColleClient.Current.Homeport.Organization.Ships.Values.ToList();
-			var items = KanColleClient.Current.Homeport.Itemyard.SlotItems.Values.ToList();
+			var ships = KanColleClient.Current.Homeport.Organization.Ships.Values;
+			var items = KanColleClient.Current.Homeport.Itemyard.SlotItems.Values;
 			var master = KanColleClient.Current.Master.SlotItems;
+
+			items = items
+				.Where(this.ItemLockFilter.Predicate);
 
 			if (OnlyRemodeledSlotItems)
 			{
-				items = items.Where(x => x.Level > 0)
-					.ToList();
-
-				ships = ships.Select(
-					x => {
-						x.EquippedItems = x.EquippedItems
-							.Where(y => y.Item.Level > 0 && items.Any(z => z.Info.Id == y.Item.Info.Id))
-							.ToArray();
-						return x;
-					})
-					.ToList();
+				items = items
+					.Where(x => x.Level > 0);
 			}
 
 			// dic (Dictionary<TK,TV>)
@@ -175,8 +165,15 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				.ToDictionary(g => g.Key, g => new SlotItemCounter(master[g.Key], g));
 
 			foreach (var ship in ships)
-				foreach (var target in ship.EquippedItems.Select(slot => new { slot, counter = dic[slot.Item.Info.Id] }))
+			{
+				var u = ship.EquippedItems
+					.Where(this.ItemLockFilter.Predicate)
+					.Where(y => items.Any(z => z.Id == y.Item.Id))
+					.Select(slot => new { slot, counter = dic[slot.Item.Info.Id] });
+
+				foreach (var target in u)
 					target.counter.AddShip(ship, target.slot.Item.Level, target.slot.Item.Proficiency);
+			}
 
 			return dic.Values
 				.Where(w => enableSlotItemEquipTypes.Contains(GetIconTypeInRange(w.Target.IconType)))
@@ -202,6 +199,90 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			foreach (var type in this.SlotItemEquipTypes)
 				type.Set(ids.Any(y => y == (int)type.Type));
 			this.Update();
+		}
+	}
+
+	public abstract class ItemCatalogFilter : NotificationObject
+	{
+		private readonly Action action;
+
+		public abstract bool Predicate(SlotItem item);
+		public bool Predicate(ShipSlot item) => this.Predicate(item.Item);
+
+		protected ItemCatalogFilter(Action updateAction)
+		{
+			this.action = updateAction;
+		}
+
+		protected void Update()
+		{
+			this.action?.Invoke();
+		}
+	}
+	public class ItemLockFilter : ItemCatalogFilter
+	{
+		#region Both 変更通知プロパティ
+		private bool _Both;
+		public bool Both
+		{
+			get { return this._Both; }
+			set
+			{
+				if (this._Both != value)
+				{
+					this._Both = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+		#endregion
+
+		#region Locked 変更通知プロパティ
+		private bool _Locked;
+		public bool Locked
+		{
+			get { return this._Locked; }
+			set
+			{
+				if (this._Locked != value)
+				{
+					this._Locked = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+		#endregion
+
+		#region Unlocked 変更通知プロパティ
+		private bool _Unlocked;
+		public bool Unlocked
+		{
+			get { return this._Unlocked; }
+			set
+			{
+				if (this._Unlocked != value)
+				{
+					this._Unlocked = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+		#endregion
+
+		public ItemLockFilter(Action updateAction) : base(updateAction)
+		{
+			this._Both = true;
+		}
+
+		public override bool Predicate(SlotItem item)
+		{
+			if (this.Both) return true;
+			if (this.Locked && item.Locked) return true;
+			if (this.Unlocked && !item.Locked) return true;
+			return false;
 		}
 	}
 }

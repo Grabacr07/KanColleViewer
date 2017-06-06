@@ -148,6 +148,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				if (this._SelectedShip != value)
 				{
 					this._SelectedShip = value;
+					this._SelectedShip.Update();
 					this.RaisePropertyChanged();
 				}
 			}
@@ -583,6 +584,51 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			this._Id = this.Ship?.Id.ToString() ?? "???";
 			this._ShipType = this.Ship?.ShipType.Name ?? "???";
 
+			if (this.Ship == null) this.Upgrades = new UpgradeInfo[0];
+			else
+			{
+				// Find root
+				var master = KanColleClient.Current.Master;
+				var root = this.Ship;
+
+				while (master.Ships.Any(x => x.Value.RawData.api_aftershipid == root.Id.ToString()))
+					root = master.Ships.FirstOrDefault(x => x.Value.RawData.api_aftershipid == root.Id.ToString()).Value;
+
+				List<UpgradeInfo> list = new List<UpgradeInfo>();
+				var reqLv = 1;
+
+				while (!list.Any(x => x.Id == root.Id))
+				{
+					bool NeedPaper, NeedCatapult;
+					NeedPaper = master.RawData.api_mst_shipupgrade
+						.FirstOrDefault(x => x.api_id == root.Id)
+						?.api_drawing_count > 0;
+					NeedCatapult = master.RawData.api_mst_shipupgrade
+						.FirstOrDefault(x => x.api_id == root.Id)
+						?.api_catapult_count > 0;
+
+					list.Add(new UpgradeInfo(this, root, reqLv, NeedPaper, NeedCatapult));
+					if (!root.RemodelingExists) break;
+
+					int after;
+					if (!int.TryParse(root.RawData.api_aftershipid, out after)) break;
+					if (after == 0) break;
+
+					reqLv = root.NextRemodelingLevel ?? 1;
+					root = master.Ships.FirstOrDefault(x => x.Value.Id == after).Value;
+				}
+				this.Upgrades = list.ToArray();
+			}
+
+			this.Update();
+		}
+		public void SetShip(int ShipId)
+		{
+			this.Parent.SelectedShip = this.Parent.ShipList.FirstOrDefault(x => x.Ship?.Id == ShipId) ?? this;
+		}
+
+		public void Update()
+		{
 			if (this.IsAbyssal)
 			{
 				var info = DictionaryViewModel.abyssalShipInfos.FirstOrDefault(x => x.id == (this.Ship?.Id ?? 0));
@@ -620,45 +666,23 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				}
 			}
 
-			if (this.Ship == null) this.Upgrades = new UpgradeInfo[0];
-			else
-			{
-				// Find root
-				var master = KanColleClient.Current.Master;
-				var root = this.Ship;
+			this.UpdateAllValues();
 
-				while (master.Ships.Any(x => x.Value.RawData.api_aftershipid == root.Id.ToString()))
-					root = master.Ships.FirstOrDefault(x => x.Value.RawData.api_aftershipid == root.Id.ToString()).Value;
+			this.RaisePropertyChanged(nameof(this.Slots));
+			this.RaisePropertyChanged(nameof(this.AAPower));
+			this.RaisePropertyChanged(nameof(this.AAPower2));
 
-				List<UpgradeInfo> list = new List<UpgradeInfo>();
-				var reqLv = 1;
+			this.RaisePropertyChanged(nameof(this.ModernizeFire));
+			this.RaisePropertyChanged(nameof(this.ModernizeTorpedo));
+			this.RaisePropertyChanged(nameof(this.ModernizeAA));
+			this.RaisePropertyChanged(nameof(this.ModernizeArmor));
 
-				while (!list.Any(x => x.Id == root.Id))
-				{
-					bool NeedPaper, NeedCatapult;
-					NeedPaper = master.RawData.api_mst_shipupgrade
-						.FirstOrDefault(x => x.api_id == root.Id)
-						?.api_drawing_count > 0;
-					NeedCatapult = master.RawData.api_mst_shipupgrade
-						.FirstOrDefault(x => x.api_id == root.Id)
-						?.api_catapult_count > 0;
+			this.RaisePropertyChanged(nameof(this.DestroyFuel));
+			this.RaisePropertyChanged(nameof(this.DestroyAmmo));
+			this.RaisePropertyChanged(nameof(this.DestroySteel));
+			this.RaisePropertyChanged(nameof(this.DestroyBauxite));
 
-					list.Add(new UpgradeInfo(this, root, reqLv, NeedPaper, NeedCatapult));
-					if (!root.RemodelingExists) break;
-
-					int after;
-					if (!int.TryParse(root.RawData.api_aftershipid, out after)) break;
-					if (after == 0) break;
-
-					reqLv = root.NextRemodelingLevel ?? 1;
-					root = master.Ships.FirstOrDefault(x => x.Value.Id == after).Value;
-				}
-				this.Upgrades = list.ToArray();
-			}
-		}
-		public void SetShip(int ShipId)
-		{
-			this.Parent.SelectedShip = this.Parent.ShipList.FirstOrDefault(x => x.Ship?.Id == ShipId) ?? this;
+			this.RaisePropertyChanged(nameof(this.Upgrades));
 		}
 	}
 	public class SlotInfo
