@@ -72,8 +72,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 			this.Settings = SettingsHost.Instance<KanColleWindowSettings>();
 
-			if (this.Settings?.Dock == Dock.Right 
-				|| this.Settings?.Dock == Dock.Left 
+			if (this.Settings?.Dock == Dock.Right
+				|| this.Settings?.Dock == Dock.Left
 				|| this.Settings?.IsSplit)
 			{
 				this.Vertical = Visibility.Collapsed;
@@ -139,10 +139,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			var catalog = new ExpeditionsCatalogWindowViewModel();
 			WindowService.Current.MainWindow.Transition(catalog, typeof(ExpeditionsCatalogWindow));
 		}
-		public void ShowNotePad()
+		public void ShowPresetWindow()
 		{
-			var catalog = new NotePadViewModel();
-			WindowService.Current.MainWindow.Transition(catalog, typeof(NotePad));
+			var catalog = new PresetFleetWindowViewModel();
+			WindowService.Current.MainWindow.Transition(catalog, typeof(PresetFleetWindow));
 		}
 		public void ShowLogViewer()
 		{
@@ -179,7 +179,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 				}
 			}
 		}
-        public void ShowNdockShipCatalog()
+		public void ShowNdockShipCatalog()
 		{
 			var catalog = new NeedNdockShipCatalogWindowViewModel();
 			WindowService.Current.MainWindow.Transition(catalog, typeof(NeedNdockShipCatalogWindow));
@@ -188,6 +188,11 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 		{
 			var catalog = new RemodelListWindowViewModel();
 			WindowService.Current.MainWindow.Transition(catalog, typeof(RemodelListWindow));
+		}
+		public void ShowNotePad()
+		{
+			var catalog = new NotePadViewModel();
+			WindowService.Current.MainWindow.Transition(catalog, typeof(NotePad));
 		}
 	}
 }

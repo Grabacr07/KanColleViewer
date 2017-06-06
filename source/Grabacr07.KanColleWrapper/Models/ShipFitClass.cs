@@ -32,7 +32,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -51,7 +51,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -70,7 +70,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -89,7 +89,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -108,7 +108,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -127,7 +127,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -146,7 +146,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 133, 0 },
 					{ 104, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -165,7 +165,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -184,7 +184,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -203,7 +203,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -222,7 +222,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -241,7 +241,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -260,7 +260,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -279,7 +279,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -298,7 +298,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -317,7 +317,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -336,7 +336,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -355,7 +355,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -374,7 +374,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -393,7 +393,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -412,7 +412,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -431,7 +431,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -450,7 +450,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -469,7 +469,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -488,7 +488,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -507,7 +507,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -526,7 +526,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -545,7 +545,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -564,7 +564,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -583,7 +583,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -602,7 +602,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -621,7 +621,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -640,7 +640,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -659,7 +659,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -679,7 +679,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -699,7 +699,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -719,7 +719,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -739,7 +739,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -759,7 +759,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -779,7 +779,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -799,7 +799,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			},
 			{
@@ -819,7 +819,7 @@ namespace Grabacr07.KanColleWrapper.Models
 					{ 76, 0 },
 					{ 133, 0 },
 					{ 183, 0 },
-					{ 192, 0 },
+					{ 192, 0 }
 				}
 			}
 		};

@@ -245,6 +245,9 @@ namespace Grabacr07.KanColleWrapper.Models
 			{418, "D17"},
 			{419, "D18"},
 			{420, "D19"},
+			{422, "D20"},
+			{423, "D21"},
+			{424, "D22"},
 
 			// Supply
 			{501, "E1"},

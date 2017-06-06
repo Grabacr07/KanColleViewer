@@ -163,11 +163,6 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 			prevCombined = KanColleClient.Current.Homeport.Organization.Combined;
 		}
 
-		public void ShowPresetWindow()
-		{
-			var catalog = new PresetFleetWindowViewModel();
-			WindowService.Current.MainWindow.Transition(catalog, typeof(PresetFleetWindow));
-		}
 		public void ShowFleetWindow()
 		{
 			var fleetwd = new FleetWindowViewModel();
