@@ -223,12 +223,49 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		public string TypeName => this.Ship?.ShipType?.Name ?? "？？？";
 		public int Level => this.Source?.Level ?? 0;
 
+		public int SumArmor
+			=> (this.Source?.Armor ?? 0)
+				+ (this.Slots?.Sum(x => x.Item?.Armer) ?? 0)
+				+ (this.ExSlot?.Item?.Armer ?? 0);
+
+		public int SumEvasion
+			=> (this.Source?.Evasion ?? 0)
+				+ (this.Slots?.Sum(x => x.Item?.Evade) ?? 0)
+				+ (this.ExSlot?.Item?.Evade ?? 0);
+
+		public int SumFirepower
+			=> (this.Source?.Firepower ?? 0)
+				+ (this.Slots?.Sum(x => x.Item?.Firepower) ?? 0)
+				+ (this.ExSlot?.Item?.Firepower ?? 0);
+
+		public int SumTorpedo
+			=> (this.Source?.Torpedo ?? 0)
+				+ (this.Slots?.Sum(x => x.Item?.Torpedo) ?? 0)
+				+ (this.ExSlot?.Item?.Torpedo ?? 0);
+
+		public int SumAA
+			=> (this.Source?.AA ?? 0)
+				+ (this.Slots?.Sum(x => x.Item?.AA) ?? 0)
+				+ (this.ExSlot?.Item?.AA ?? 0);
+
+		public int SumASW
+			=> (this.Source?.ASW ?? 0)
+				+ (this.Slots?.Sum(x => x.Item?.ASW) ?? 0)
+				+ (this.ExSlot?.Item?.ASW ?? 0);
+
+		public int SumLOS
+			=> (this.Source?.LOS ?? 0)
+				+ (this.Slots?.Sum(x => x.Item?.ViewRange) ?? 0)
+				+ (this.ExSlot?.Item?.ViewRange ?? 0);
+
+		public ShipSpeed SumSpeed
+			=> ShipSpeedConverter.FromInt32(this.Source?.Speed ?? 0);
 		public string Speed
-			=> (ShipSpeed?)this.Source?.Speed == ShipSpeed.Immovable ? "육상기지"
-				: (ShipSpeed?)this.Source?.Speed == ShipSpeed.Slow ? "저속"
-				: (ShipSpeed?)this.Source?.Speed == ShipSpeed.Fast ? "고속"
-				: (ShipSpeed?)this.Source?.Speed == ShipSpeed.Faster ? "고속+"
-				: (ShipSpeed?)this.Source?.Speed == ShipSpeed.Fastest ? "초고속"
+			=> this.SumSpeed == ShipSpeed.Immovable ? "육상기지"
+				: this.SumSpeed == ShipSpeed.Slow ? "저속"
+				: this.SumSpeed == ShipSpeed.Fast ? "고속"
+				: this.SumSpeed == ShipSpeed.Faster ? "고속+"
+				: this.SumSpeed == ShipSpeed.Fastest ? "초고속"
 				: "？？？";
 
 		public string Range

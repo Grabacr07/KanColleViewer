@@ -562,7 +562,7 @@
 													   Style="{StaticResource EmphaticTextStyleKey}"
 													   FontSize="12"
 													   TextAlignment="Right"
-													   Text="{Binding Source.Firepower}" />
+													   Text="{Binding SumFirepower}" />
 
 											<Image Grid.Column="0"
 												   Grid.Row="2"
@@ -584,7 +584,7 @@
 													   Style="{StaticResource EmphaticTextStyleKey}"
 													   FontSize="12"
 													   TextAlignment="Right"
-													   Text="{Binding Source.Armor}" />
+													   Text="{Binding SumArmor}" />
 
 											<Image Grid.Column="3"
 												   Grid.Row="2"
@@ -606,7 +606,7 @@
 													   Style="{StaticResource EmphaticTextStyleKey}"
 													   FontSize="12"
 													   TextAlignment="Right"
-													   Text="{Binding Source.Torpedo}" />
+													   Text="{Binding SumTorpedo}" />
 
 											<Image Grid.Column="0"
 												   Grid.Row="3"
@@ -628,7 +628,7 @@
 													   Style="{StaticResource EmphaticTextStyleKey}"
 													   FontSize="12"
 													   TextAlignment="Right"
-													   Text="{Binding Source.Evasion}" />
+													   Text="{Binding SumEvasion}" />
 
 											<Image Grid.Column="3"
 												   Grid.Row="3"
@@ -650,7 +650,7 @@
 													   Style="{StaticResource EmphaticTextStyleKey}"
 													   FontSize="12"
 													   TextAlignment="Right"
-													   Text="{Binding Source.AA}" />
+													   Text="{Binding SumAA}" />
 
 											<Image Grid.Column="0"
 												   Grid.Row="4"
@@ -694,7 +694,7 @@
 													   Style="{StaticResource EmphaticTextStyleKey}"
 													   FontSize="12"
 													   TextAlignment="Right"
-													   Text="{Binding Source.ASW}" />
+													   Text="{Binding SumASW}" />
 
 											<Image Grid.Column="0"
 												   Grid.Row="5"
@@ -738,7 +738,7 @@
 													   Style="{StaticResource EmphaticTextStyleKey}"
 													   FontSize="12"
 													   TextAlignment="Right"
-													   Text="{Binding Source.LOS}" />
+													   Text="{Binding SumLOS}" />
 
 											<Image Grid.Column="0"
 												   Grid.Row="6"
