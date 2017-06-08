@@ -165,9 +165,11 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				this.BottomView = Visibility.Visible;
 			}
 
+			/*
 			KanColleClient.Current.Proxy.api_start2
 				.TryParse()
 				.Subscribe(x => StatusService.Current.Set(Resources.StatusBar_Ready));
+			*/
 
 			KanColleClient.Current.Proxy.ApiSessionSource
 				.Select(x =>
