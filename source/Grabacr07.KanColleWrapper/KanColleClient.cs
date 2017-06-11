@@ -134,15 +134,14 @@ namespace Grabacr07.KanColleWrapper
 			// 2 回目以降は受信したタイミングでそれぞれ更新すればよい
 
 			var firstTime = start2Source
-				// .CombineLatest(requireInfoSource, (start2, requireInfo) => new { start2, requireInfo, })
+				.CombineLatest(requireInfoSource, (start2, requireInfo) => new { start2, requireInfo })
 				.FirstAsync();
 
 			firstTime.Subscribe(x =>
 			{
-				this.Master = new Master(x.Data);
-				// this.Master = new Master(x.start2.Data);
+				this.Master = new Master(x.start2.Data);
 				this.Homeport = new Homeport(proxy);
-				// this.SetRequireInfo(x.requireInfo.Data);
+				this.SetRequireInfo(x.requireInfo.Data);
 				this.IsStarted = true;
 			});
 
@@ -163,7 +162,9 @@ namespace Grabacr07.KanColleWrapper
 			this.Homeport.UpdateAdmiral(data.api_basic);
 			this.Homeport.Itemyard.Update(data.api_slot_item);
 			this.Homeport.Dockyard.Update(data.api_kdock);
-			this.Homeport.Itemyard.Update(data.api_useitem);
+
+			try { this.Homeport.Itemyard.Update(data.api_useitem); }
+			catch { }
 		}
 	}
 }
