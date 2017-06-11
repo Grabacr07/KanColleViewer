@@ -214,7 +214,8 @@ namespace Grabacr07.KanColleViewer
 		private void UpdateMode()
 		{
 			this.Mode = KanColleClient.Current.IsStarted
-				? KanColleClient.Current.IsInSortie ? WindowServiceMode.InSortie : WindowServiceMode.Started
+				? KanColleClient.Current.IsInSortie
+					? WindowServiceMode.InSortie : WindowServiceMode.Started
 				: WindowServiceMode.NotStarted;
 		}
 
