@@ -71,7 +71,6 @@ namespace Grabacr07.KanColleViewer
 		protected override void OnStartup(StartupEventArgs e)
 		{
 			this.ChangeState(ApplicationState.Startup);
-			bgGCWorker = new GCWorker();
 
 			// 개발중에 다중 실행이 감지되어서 실행되지 않으면 불편하니 디버그 때에는 예외로 처리
 #if !DEBUG
@@ -144,6 +143,8 @@ namespace Grabacr07.KanColleViewer
 				PluginService.Current.AddTo(this).Initialize();
 				WindowService.Current.AddTo(this).Initialize();
 				NotifyService.Current.AddTo(this).Initialize();
+
+				GCWorker.Current.AddTo(this).Startup();
 
 				// WebBrowser 컨트롤 IE 버전 레지스트리 패치, MMCSS 설정
 				Helper.SetRegistryFeatureBrowserEmulation();
@@ -287,7 +288,6 @@ namespace Grabacr07.KanColleViewer
 			base.OnExit(e);
 
 			this.compositeDisposable.Dispose();
-			bgGCWorker.Dispose();
 		}
 
 		/// <summary>

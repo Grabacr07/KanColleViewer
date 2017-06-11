@@ -12,6 +12,8 @@ namespace Grabacr07.KanColleViewer.Models
 		[DllImport("kernel32.dll", EntryPoint = "SetProcessWorkingSetSize", SetLastError = true, CallingConvention = CallingConvention.StdCall)]
 		private static extern bool SetProcessWorkingSetSize(IntPtr proc, int min, int max);
 
+		public static GCWorker Current { get; } = new GCWorker();
+
 		public enum GCType
 		{
 			GCAll,
@@ -19,7 +21,7 @@ namespace Grabacr07.KanColleViewer.Models
 		}
 
 		private bool GCWorking { get; set; } = false;
-		private Thread GCThread { get; }
+		private Thread GCThread { get; set; }
 
 		private int GCCount => KanColleSettings.MemoryOptimizePeriod;
 
@@ -35,6 +37,16 @@ namespace Grabacr07.KanColleViewer.Models
 		}
 
 		public GCWorker()
+		{
+			GCThread = null;
+			GCWorking = false;
+
+			GCWorker._GCRequested = false;
+			GCWorker._GCGen = -1;
+			GCWorker._GCType = GCType.GCOptimized;
+		}
+
+		public void Startup()
 		{
 			GCThread = new Thread(() =>
 			{
@@ -52,7 +64,6 @@ namespace Grabacr07.KanColleViewer.Models
 					}
 				}
 			});
-			GCThread.Priority = ThreadPriority.BelowNormal;
 
 			GCWorking = true;
 			GCThread.Priority = ThreadPriority.BelowNormal;
@@ -80,8 +91,9 @@ namespace Grabacr07.KanColleViewer.Models
 		}
 		public void Dispose()
 		{
-			GC.SuppressFinalize(this);
 			GCWorking = false;
+			GCThread.Join();
+			GC.SuppressFinalize(this);
 		}
 	}
 }

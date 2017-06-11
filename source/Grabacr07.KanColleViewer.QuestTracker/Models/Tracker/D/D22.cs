@@ -13,7 +13,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 	/// </summary>
 	internal class D22 : NoOverUnderTracker, ITracker
 	{
-		private readonly int max_count = 2;
+		private readonly int max_count = 4;
 		private int count;
 
 		public event EventHandler ProcessChanged;
@@ -31,7 +31,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 				if (!IsTracking) return;
 				if (!args.IsSuccess) return;
 
-				if (args.Name == "海上護衛任務") count = count.Add(1).Max(5);
+				if (args.Name == "海上護衛任務") count = count.Add(1).Max(4);
 
 				ProcessChanged?.Invoke(this, emptyEventArgs);
 			};
@@ -51,7 +51,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 		public string GetProgressText()
 		{
 			return count >= max_count ? "완료" :
-				"해상호위임무(5) 원정 성공 " + count.ToString() + "/1";
+				"해상호위임무(5) 원정 성공 " + count.ToString() + "/4";
 		}
 
 		public string SerializeData()

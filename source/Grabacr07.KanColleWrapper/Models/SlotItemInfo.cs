@@ -110,6 +110,30 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public double SecondEncounter => this.ViewRange * 0.07;
 
+		public int AirBaseCost
+		{
+			get
+			{
+				var cost = this.RawData.api_cost;
+				if (cost == -1) return cost;
+
+				var type = this.Type;
+				if (type == SlotItemType.None) return cost;
+
+				switch (type)
+				{
+					case SlotItemType.艦上偵察機:
+					case SlotItemType.水上偵察機:
+					case SlotItemType.噴式偵察機:
+					case SlotItemType.大型飛行艇:
+						return cost * 4;
+
+					default:
+						return cost * 12;
+				}
+			}
+		}
+
 		public SlotItemEquipType EquipType { get; }
 
 		internal SlotItemInfo(kcsapi_mst_slotitem rawData, MasterTable<SlotItemEquipType> types) : base(rawData)
@@ -123,23 +147,26 @@ namespace Grabacr07.KanColleWrapper.Models
 				var tooltip = string.Join(
 					Environment.NewLine,
 					new string[] {
-						(this.RawData.api_houg != 0 ? "화력:" + this.RawData.api_houg : ""),
-						(this.RawData.api_raig != 0 ? "뇌장:" + this.RawData.api_raig : ""),
-						(this.RawData.api_tyku != 0 ? "대공:" + this.RawData.api_tyku : ""),
-						(this.RawData.api_souk != 0 ? "장갑:" + this.RawData.api_souk : ""),
-						(this.RawData.api_baku != 0 ? "폭장:" + this.RawData.api_baku : ""),
-						(this.RawData.api_tais != 0 ? "대잠:" + this.RawData.api_tais : ""),
+						(this.RawData.api_houg != 0 ? "화력: " + this.RawData.api_houg : ""),
+						(this.RawData.api_raig != 0 ? "뇌장: " + this.RawData.api_raig : ""),
+						(this.RawData.api_tyku != 0 ? "대공: " + this.RawData.api_tyku : ""),
+						(this.RawData.api_souk != 0 ? "장갑: " + this.RawData.api_souk : ""),
+						(this.RawData.api_baku != 0 ? "폭장: " + this.RawData.api_baku : ""),
+						(this.RawData.api_tais != 0 ? "대잠: " + this.RawData.api_tais : ""),
 						(
 							this.Type == SlotItemType.局地戦闘機
-							? (this.RawData.api_houm != 0 ? "대폭:" + this.RawData.api_houm : "")
-							: (this.RawData.api_houm != 0 ? "명중:" + this.RawData.api_houm : "")
+							? (this.RawData.api_houm != 0 ? "대폭: " + this.RawData.api_houm : "")
+							: (this.RawData.api_houm != 0 ? "명중: " + this.RawData.api_houm : "")
 						),
 						(
 							this.Type == SlotItemType.局地戦闘機
-							? (this.RawData.api_houk != 0 ? "영격:" + this.RawData.api_houk : "")
-							: (this.RawData.api_houk != 0 ? "회피:" + this.RawData.api_houk : "")
+							? (this.RawData.api_houk != 0 ? "영격: " + this.RawData.api_houk : "")
+							: (this.RawData.api_houk != 0 ? "회피: " + this.RawData.api_houk : "")
 						),
-						(this.RawData.api_saku != 0 ? "색적:" + this.RawData.api_saku : "")
+						(this.RawData.api_saku != 0 ? "색적: " + this.RawData.api_saku : ""),
+						(this.IsNumerable ? " " : ""),
+						(this.IsNumerable ? "항속거리: " + this.RawData.api_distance : ""),
+						(this.IsNumerable ? "배치비용: " + this.AirBaseCost : "")
 					}.Where(x => x.Length > 0)
 				);
 				if (tooltip.Length < 1) tooltip = "스테이터스 없음";

@@ -129,18 +129,20 @@ namespace Grabacr07.KanColleWrapper
 
 			var start2Source = proxy.api_start2.TryParse<kcsapi_start2>();
 			var requireInfoSource = proxy.api_get_member_require_info.TryParse<kcsapi_require_info>();
-			var firstTime = start2Source
-				.CombineLatest(requireInfoSource, (start2, requireInfo) => new { start2, requireInfo, })
-				.FirstAsync();
 
 			// Homeport の初期化と require_info の適用に Master のインスタンスが必要なため、初回のみ足並み揃えて実行
 			// 2 回目以降は受信したタイミングでそれぞれ更新すればよい
 
+			var firstTime = start2Source
+				// .CombineLatest(requireInfoSource, (start2, requireInfo) => new { start2, requireInfo, })
+				.FirstAsync();
+
 			firstTime.Subscribe(x =>
 			{
-				this.Master = new Master(x.start2.Data);
+				this.Master = new Master(x.Data);
+				// this.Master = new Master(x.start2.Data);
 				this.Homeport = new Homeport(proxy);
-				this.SetRequireInfo(x.requireInfo.Data);
+				// this.SetRequireInfo(x.requireInfo.Data);
 				this.IsStarted = true;
 			});
 
