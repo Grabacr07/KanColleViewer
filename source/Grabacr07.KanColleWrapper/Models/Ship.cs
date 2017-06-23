@@ -452,7 +452,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		public bool IsMaxModernized => this.Firepower.IsMax && this.Torpedo.IsMax && this.AA.IsMax && this.Armer.IsMax;
 
 		public bool DaihatsuEquipable =>
-			(new int[] { 541, 500, 490, 487, 470, 464, 469, 435, 434, 352, 200, 468, 418, 199, 147 }.Contains(this.Info.Id)) ||
+			(new int[] { 541, 500, 490, 487, 470, 464, 469, 435, 434, 352, 200, 468, 418, 199, 147, 488 }.Contains(this.Info.Id)) ||
 			(!(new int[] { 491, 445 }.Contains(this.Info.Id)) && this.Info.ShipType.RawData.api_equip_type?._24 == 1);
 
 		/// <summary>
