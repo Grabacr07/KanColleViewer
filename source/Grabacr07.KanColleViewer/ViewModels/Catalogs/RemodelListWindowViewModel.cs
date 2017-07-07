@@ -163,6 +163,23 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		}
 		#endregion
 
+		#region ExcludeMaxRemodeledSlotItems 변경통지 프로퍼티
+		private bool _ExcludeMaxRemodeledSlotItems;
+		public bool ExcludeMaxRemodeledSlotItems
+		{
+			get { return this._ExcludeMaxRemodeledSlotItems; }
+			set
+			{
+				if (this._ExcludeMaxRemodeledSlotItems != value)
+				{
+					this._ExcludeMaxRemodeledSlotItems = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+		#endregion
+
 		#region OnlyOwnShips 변경통지 프로퍼티
 		private bool _OnlyOwnShips;
 		public bool OnlyOwnShips
@@ -380,23 +397,14 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 								.FirstOrDefault()
 								.Value?.Id ?? 0;
 
-							return homeport.Itemyard.SlotItems.Any(y => y.Value.Info.Id == itemid && y.Value.Level > 0);
+							return homeport.Itemyard.SlotItems.Where(y => y.Value.Info.Id == itemid)
+								.Any(y => y.Value.Level > 0 && (!ExcludeMaxRemodeledSlotItems || y.Value.Level < 10));
 						});
 					}
 
 					// 보유중인 함선으로 필터
 					if (this.OnlyOwnShips)
 					{
-						string[] assume =
-						{
-							"改二", "改三",
-							"改二甲","改二乙","改二丙","改二丁",
-							"改二戊","改二己","改二庚","改二辛",
-							"改二壬","改二癸",
-							"zwei","drei","due",
-							"改"
-						};
-
 						RemodelList = RemodelList.Where(x =>
 						{
 							List<string> ships = new List<string>();
@@ -413,14 +421,34 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 								if (week.Contains(today.ToString()))
 									ships.Add(name);
 							}
-							return homeport.Organization.Ships.Any(y =>
+							return ships.Any(y =>
 							{
-								var name = y.Value.Info.JPName;
-								if (ships.Contains(name)) return true;
+								var info = KanColleClient.Current.Master.Ships
+									.Select(z => z.Value)
+									.SingleOrDefault(z => z.JPName == y);
 
-								foreach (var z in assume)
-									name = name.Replace(z, string.Empty).Trim();
-								return ships.Contains(name);
+								var having = homeport.Organization.Ships;
+
+								HashSet<int> history = new HashSet<int>();
+								while(info != null)
+								{
+									if (history.Contains(info.Id)) break;
+									history.Add(info.Id);
+
+									if (having.Any(z => z.Value.Info.Id == info.Id))
+										return true;
+
+									info = KanColleClient.Current.Master.Ships
+										.Select(z => z.Value)
+										.SingleOrDefault(z =>
+										{
+											int _;
+											if (!int.TryParse(info.RawData.api_aftershipid, out _)) return false;
+											return z.Id == _;
+										});
+								}
+
+								return false;
 							});
 						});
 					}
@@ -461,6 +489,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		private List<ShipInfo> TrimShipList(List<ShipInfo> ShipList)
 		{
 			return ShipList
+				.Where(x => x.Upgrade != null)
 				.GroupBy(x => x.Upgrade)
 				.Select(x =>
 				{

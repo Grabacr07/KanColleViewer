@@ -16,7 +16,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 	internal class B71 : ITracker
 	{
 		private QuestProgressType lastProgress = QuestProgressType.None;
-		private readonly int max_count = 2;
+		private readonly int max_count = 1;
 		private int count;
 
 		public event EventHandler ProcessChanged;
@@ -36,18 +36,12 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 				if (args.MapWorldId != 1 || args.MapAreaId != 6) return; // 1-6
 				if (args.MapNodeId != 14 && args.MapNodeId != 17) return; // 1-6-N node
 
-				var shipTable = new int[]
-				{
-					141, // 五十鈴改二
-					309, // 卯月改
-					418, // 皐月改二
-				};
-
 				var fleet = KanColleClient.Current.Homeport.Organization.Fleets.FirstOrDefault(x => x.Value.IsInSortie).Value;
 				var ships = fleet?.Ships;
+				var flagship = ships[0]?.Info.ShipType.Id;
 
-				if ((ships[0]?.Info.Id ?? 0) != 141) return; // 이스즈改2 기함
-				if (ships.Count(x => shipTable.Contains(x.Info.Id)) < 3) return;
+				if (flagship != 3) return; // 기함 경순
+				if (ships.Count(x => x.Info.ShipType.Id == 2) < 4) return; // 구축 4척
 
 				count = count.Add(1).Max(max_count);
 
@@ -68,7 +62,7 @@ namespace Grabacr07.KanColleViewer.QuestTracker.Models.Tracker
 
 		public string GetProgressText()
 		{
-			return count >= max_count ? "완료" : "이스즈改2 기함,사츠키改2,우즈키改 포함 편성 1-6 클리어 " + count.ToString() + " / " + max_count.ToString();
+			return count >= max_count ? "완료" : "경순 기함, 구축 4척 편성 1-6 클리어 " + count.ToString() + " / " + max_count.ToString();
 		}
 
 		public string SerializeData()

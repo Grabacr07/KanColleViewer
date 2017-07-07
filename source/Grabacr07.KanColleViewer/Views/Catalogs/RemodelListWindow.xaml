@@ -137,8 +137,15 @@
 		</Border>
 		<StackPanel Margin="10,0" Grid.Row="1">
 			<TextBlock Foreground="#FFF50000" Text="※갱신시간은 0:00이지만 실제로는 약간 늦게 갱신됩니다."/>
-			<TextBlock Foreground="#FFF50000" Text="※특이사항이 있는 장비의 경우 툴팁으로 특이사항을 확인할 수 있습니다."/>
-			<TextBlock/>
+			<TextBlock Foreground="#FFF50000" Text="※필요한 재료 장비 및 개수변환 정보는 툴팁으로 확인할 수 있습니다."/>
+			<TextBlock>
+				<Run>※개수공창 정보는</Run>
+				<metro2:HyperlinkEx Uri="http://akashi-list.me/">
+					<Run Text="http://akashi-list.me/" />
+				</metro2:HyperlinkEx>
+				<Run>를 참조하여 작성되었습니다.</Run>
+			</TextBlock>
+			<TextBlock />
 			<Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="Auto"/>
@@ -236,17 +243,38 @@
 										</DataTemplate>
 									</Panel.Resources>
 
-									<CheckBox Margin="0,0,10,0"
+									<CheckBox Margin="0,0,12,0"
 											  IsChecked="{Binding OnlyOwnSlotItems}"
 											  Content="보유중인 장비만"
 											  HorizontalAlignment="Left" />
 
-									<CheckBox Margin="0,0,10,0"
+									<CheckBox Margin="0,0,12,0"
 											  IsChecked="{Binding OnlyRemodeledSlotItems}"
 											  Content="개수된 장비만"
 											  HorizontalAlignment="Left" />
 
-									<CheckBox Margin="0,0,10,0"
+									<CheckBox Margin="0,0,12,0"
+											  IsEnabled="{Binding OnlyRemodeledSlotItems, Mode=OneWay}"
+											  IsChecked="{Binding ExcludeMaxRemodeledSlotItems}"
+											  HorizontalAlignment="Left">
+										<CheckBox.Content>
+											<TextBlock>
+												<Run Text="★max" Foreground="#FF45A9A5" />
+												<Run Text="제외" Foreground="{StaticResource ActiveForegroundBrushKey}" />
+												<TextBlock.Style>
+													<Style TargetType="{x:Type TextBlock}">
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding OnlyRemodeledSlotItems}" Value="False">
+																<Setter Property="Opacity" Value="0.3" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</TextBlock.Style>
+											</TextBlock>
+										</CheckBox.Content>
+									</CheckBox>
+
+									<CheckBox Margin="0,0,12,0"
 											  IsChecked="{Binding OnlyOwnShips}"
 											  Content="칸무스가 있는 장비만"
 											  HorizontalAlignment="Left" />
