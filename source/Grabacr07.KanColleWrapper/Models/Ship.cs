@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Grabacr07.KanColleWrapper.Internal;
@@ -128,7 +128,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// この艦娘が最大Lvになるために必要な経験値を取得します。
 		/// </summary>
-		public int ExpForLevelMax => Experience.GetShipExpForSpecifiedLevel(this.Exp, 155);
+		public int ExpForLevelMax => Experience.GetShipExpForSpecifiedLevel(this.Exp, 165);
 
 		/// <summary>
 		/// ExSlot 이 존재하는지 여부
