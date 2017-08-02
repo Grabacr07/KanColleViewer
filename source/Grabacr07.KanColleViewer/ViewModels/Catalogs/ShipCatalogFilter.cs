@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -81,7 +81,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			: base(updateAction)
 		{
 			this._MinLevel = "2";
-			this._MaxLevel = "155";
+			this._MaxLevel = "165";
 		}
 
 		public override bool Predicate(Ship ship)
