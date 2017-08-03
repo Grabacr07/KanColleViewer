@@ -24,14 +24,15 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 			protected set { throw new NotImplementedException(); }
 		}
 
-
-		public ScreenshotSettingsViewModel ScreenshotSettings { get; }
+        public ScreenshotSettingsViewModel ScreenshotSettings { get; }
 
 		public WindowSettingsViewModel WindowSettings { get; }
 
-		public NetworkSettingsViewModel NetworkSettings { get; }
+        public NetworkSettingsViewModel NetworkSettings { get; }
 
 		public UserStyleSheetSettingsViewModel UserStyleSheetSettings { get; }
+
+		public OptimizeSettingsViewModel OptimizeSettings { get; }
 
 		public NavigatorViewModel Navigator { get; set; }
 
@@ -84,18 +85,29 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 
 		#endregion
 
+
+		public IReadOnlyCollection<DisplayViewModel<FlashQuality>> FlashQualityCollection { get; }
+
 		private SettingsViewModel()
 		{
 			this.ScreenshotSettings = new ScreenshotSettingsViewModel().AddTo(this);
 			this.WindowSettings = new WindowSettingsViewModel().AddTo(this);
 			this.NetworkSettings = new NetworkSettingsViewModel().AddTo(this);
 			this.UserStyleSheetSettings = new UserStyleSheetSettingsViewModel().AddTo(this);
+			this.OptimizeSettings = new Settings.OptimizeSettingsViewModel().AddTo(this);
 
 			this.BrowserZoomFactor = new BrowserZoomFactor { Current = GeneralSettings.BrowserZoomFactor };
 			this.BrowserZoomFactor
 				.Subscribe(nameof(this.BrowserZoomFactor.Current), () => GeneralSettings.BrowserZoomFactor.Value = this.BrowserZoomFactor.Current)
 				.AddTo(this);
 			GeneralSettings.BrowserZoomFactor.Subscribe(x => this.BrowserZoomFactor.Current = x).AddTo(this);
+
+			this.FlashQualityCollection = new List<DisplayViewModel<FlashQuality>>
+			{
+				DisplayViewModel.Create(FlashQuality.Low,    "낮음"),
+				DisplayViewModel.Create(FlashQuality.Medium, "중간"),
+				DisplayViewModel.Create(FlashQuality.High,   "높음"),
+			};
 
 			this.Cultures = new[] { new CultureViewModel { DisplayName = "(auto)" } }
 				.Concat(ResourceService.Current.SupportedCultures

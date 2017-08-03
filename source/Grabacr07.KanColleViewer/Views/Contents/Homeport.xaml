@@ -6,6 +6,7 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
 			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
 			 xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
 			 xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
@@ -14,88 +15,404 @@
 			 xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
 			 xmlns:contentsVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 xmlns:ms="clr-namespace:Grabacr07.KanColleViewer.Models.Settings"
 			 mc:Ignorable="d"
 			 d:DesignWidth="600"
 			 d:DataContext="{d:DesignInstance viewModels:InformationViewModel}">
 	<Grid>
 		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto" />
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="Auto" />
 		</Grid.ColumnDefinitions>
 		<Grid.Resources>
+			<Style TargetType="{x:Type Grid}"
+				   x:Key="ResourceGrid">
+				<Setter Property="MinWidth" Value="125" />
+				<Style.Triggers>
+					<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.HomeportBigFont}, Path=Value}" Value="False">
+						<Setter Property="MinWidth" Value="120" />
+					</DataTrigger>
+					<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.MaterialValueOnly}, Path=Value}" Value="True">
+						<Setter Property="MinWidth" Value="75" />
+					</DataTrigger>
+					<MultiDataTrigger>
+						<MultiDataTrigger.Conditions>
+							<Condition Binding="{Binding Source={x:Static ms:KanColleSettings.MaterialValueOnly}, Path=Value}" Value="True" />
+							<Condition Binding="{Binding Source={x:Static ms:KanColleSettings.HomeportBigFont}, Path=Value}" Value="False" />
+						</MultiDataTrigger.Conditions>
+						<MultiDataTrigger.Setters>
+							<Setter Property="MinWidth" Value="54" />
+						</MultiDataTrigger.Setters>
+					</MultiDataTrigger>
+				</Style.Triggers>
+			</Style>
+			<Style TargetType="{x:Type Grid}"
+				   x:Key="ResourceGrid2">
+				<Setter Property="MinWidth" Value="125" />
+				<Style.Triggers>
+					<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.HomeportBigFont}, Path=Value}" Value="False">
+						<Setter Property="MinWidth" Value="120" />
+					</DataTrigger>
+				</Style.Triggers>
+			</Style>
+
 			<Style TargetType="{x:Type TextBlock}"
 				   BasedOn="{StaticResource DefaultTextStyleKey}">
-				<Setter Property="Margin"
-						Value="12,0" />
+				<Setter Property="Margin" Value="12,0" />
+				<Style.Triggers>
+					<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.HomeportBigFont}, Path=Value}" Value="False">
+						<Setter Property="FontSize" Value="11" />
+					</DataTrigger>
+				</Style.Triggers>
+			</Style>
+			<Style TargetType="{x:Type TextBlock}"
+				   x:Key="Emphatic"
+				   BasedOn="{StaticResource EmphaticTextStyleKey}">
+				<Setter Property="FontSize" Value="15" />
+				<Style.Triggers>
+					<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.HomeportBigFont}, Path=Value}" Value="False">
+						<Setter Property="FontSize" Value="13" />
+					</DataTrigger>
+				</Style.Triggers>
+			</Style>
+			<Style TargetType="{x:Type TextBlock}"
+				   x:Key="Emphatic13"
+				   BasedOn="{StaticResource EmphaticTextStyleKey}">
+				<Setter Property="FontSize" Value="13" />
+				<Style.Triggers>
+					<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.HomeportBigFont}, Path=Value}" Value="False">
+						<Setter Property="FontSize" Value="11" />
+					</DataTrigger>
+				</Style.Triggers>
+			</Style>
+			<Style TargetType="{x:Type TextBlock}"
+				   x:Key="Emphatic14"
+				   BasedOn="{StaticResource EmphaticTextStyleKey}">
+				<Setter Property="FontSize" Value="14" />
+				<Style.Triggers>
+					<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.HomeportBigFont}, Path=Value}" Value="False">
+						<Setter Property="FontSize" Value="12" />
+					</DataTrigger>
+				</Style.Triggers>
+			</Style>
+			<Style TargetType="{x:Type Run}"
+				   x:Key="EmphaticRun"
+				   BasedOn="{StaticResource EmphaticTextElementStyleKey}">
+				<Setter Property="FontSize" Value="15" />
+				<Style.Triggers>
+					<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.HomeportBigFont}, Path=Value}" Value="False">
+						<Setter Property="FontSize" Value="13" />
+					</DataTrigger>
+				</Style.Triggers>
+			</Style>
+			<Style TargetType="{x:Type Run}"
+				   x:Key="EmphaticRun12"
+				   BasedOn="{StaticResource EmphaticTextElementStyleKey}">
+				<Setter Property="FontSize" Value="12" />
+				<Style.Triggers>
+					<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.HomeportBigFont}, Path=Value}" Value="False">
+						<Setter Property="FontSize" Value="11" />
+					</DataTrigger>
+				</Style.Triggers>
+			</Style>
+			<Style TargetType="{x:Type Run}"
+				   x:Key="EmphaticRun14"
+				   BasedOn="{StaticResource EmphaticTextElementStyleKey}">
+				<Setter Property="FontSize" Value="14" />
+				<Style.Triggers>
+					<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.HomeportBigFont}, Path=Value}" Value="False">
+						<Setter Property="FontSize" Value="12" />
+					</DataTrigger>
+				</Style.Triggers>
+			</Style>
+			<Style TargetType="{x:Type Run}"
+				   x:Key="EmphaticRun18"
+				   BasedOn="{StaticResource EmphaticTextElementStyleKey}">
+				<Setter Property="FontSize" Value="18" />
+				<Style.Triggers>
+					<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.HomeportBigFont}, Path=Value}" Value="False">
+						<Setter Property="FontSize" Value="16" />
+					</DataTrigger>
+				</Style.Triggers>
+			</Style>
+
+			<Style TargetType="{x:Type controls:MetroComboBox}">
+				<Setter Property="ItemTemplateSelector">
+					<Setter.Value>
+						<models:ComboBoxItemTemplateSelector>
+							<models:ComboBoxItemTemplateSelector.ItemTemplate>
+								<DataTemplate DataType="{x:Type contentsVm:MaterialsViewModel+MaterialViewModel}">
+									<Grid Style="{StaticResource ResourceGrid2}"
+										  Margin="0,0,4,0">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto"/>
+											<ColumnDefinition Width="*"/>
+										</Grid.ColumnDefinitions>
+										<TextBlock VerticalAlignment="Bottom">
+											<Run Text="{Binding Display, Mode=OneWay}" />
+											<Run Text=":" />
+										</TextBlock>
+										<TextBlock x:Name="MaterialValue"
+												   Grid.Column="1"
+												   Text="{Binding Value, Mode=OneWay}"
+												   Style="{StaticResource Emphatic}"
+												   HorizontalAlignment="Right"
+												   VerticalAlignment="Bottom"/>
+									</Grid>
+
+									<DataTemplate.Triggers>
+										<DataTrigger Binding="{Binding IsOvered, Mode=OneWay}" Value="False">
+											<Setter TargetName="MaterialValue" Property="Foreground" Value="#FFFFEFA2" />
+										</DataTrigger>
+									</DataTemplate.Triggers>
+								</DataTemplate>
+							</models:ComboBoxItemTemplateSelector.ItemTemplate>
+							<models:ComboBoxItemTemplateSelector.SelectedItemTemplate>
+								<DataTemplate DataType="{x:Type contentsVm:MaterialsViewModel+MaterialViewModel}">
+									<Grid Style="{StaticResource ResourceGrid}"
+										  Margin="0,0,4,0">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto"/>
+											<ColumnDefinition Width="*"/>
+										</Grid.ColumnDefinitions>
+										<TextBlock x:Name="MaterialName"
+												   VerticalAlignment="Bottom">
+											<Run Text="{Binding Display, Mode=OneWay}" />
+											<Run Text=":" />
+										</TextBlock>
+										<TextBlock x:Name="MaterialValue"
+												   Grid.Column="1"
+												   Text="{Binding Value, Mode=OneWay}"
+												   Style="{StaticResource Emphatic}"
+												   HorizontalAlignment="Right"
+												   VerticalAlignment="Bottom"/>
+									</Grid>
+
+									<DataTemplate.Triggers>
+										<DataTrigger Binding="{Binding IsOvered, Mode=OneWay}" Value="False">
+											<Setter TargetName="MaterialValue" Property="Foreground" Value="#FFFFEFA2" />
+										</DataTrigger>
+										<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.MaterialValueOnly}, Path=Value}" Value="True">
+											<Setter TargetName="MaterialName" Property="Visibility" Value="Collapsed" />
+											<Setter TargetName="MaterialValue" Property="Grid.Column" Value="0" />
+											<Setter TargetName="MaterialValue" Property="Grid.ColumnSpan" Value="2" />
+										</DataTrigger>
+									</DataTemplate.Triggers>
+								</DataTemplate>
+							</models:ComboBoxItemTemplateSelector.SelectedItemTemplate>
+						</models:ComboBoxItemTemplateSelector>
+					</Setter.Value>
+				</Setter>
 			</Style>
 		</Grid.Resources>
 
-		<StackPanel Orientation="Horizontal"
-					DataContext="{Binding Admiral}">
-			<TextBlock>
-				<Run Text="{Binding Model.Nickname, Mode=OneWay}"
-					 Style="{DynamicResource EmphaticTextElementStyleKey}"
-					 FontSize="18" />
-				<Run Text="{Binding Model.Rank, Mode=OneWay}"
-					 Style="{DynamicResource EmphaticTextElementStyleKey}"
-					 FontSize="14" />
-				<LineBreak />
-				<Run Text="{Binding Model.Comment, Mode=OneWay}" />
-			</TextBlock>
+		<Grid DataContext="{Binding Admiral}">
+			<StackPanel Orientation="Horizontal"
+						VerticalAlignment="Center">
+				<TextBlock>
+					<Run Text="{Binding Model.Nickname, Mode=OneWay}"
+						 Style="{StaticResource EmphaticRun18}" />
+					<Run Text="{Binding Model.Rank, Mode=OneWay}"
+						 Style="{StaticResource EmphaticRun14}" />
+					<LineBreak />
+					<Run Text="{Binding Model.Comment, Mode=OneWay}" />
+				</TextBlock>
+				<TextBlock>
+					<Run Text="{Binding Resources.Homeport_FleetHQ, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+					<Run Text="Lv."
+							Style="{StaticResource EmphaticRun14}" />
+					<Run Text="{Binding Model.Level, Mode=OneWay}"
+							Style="{StaticResource EmphaticRun18}" />
+					<LineBreak />
+					<Run Text="Next:" />
+					<Run Text="{Binding Model.ExperienceForNexeLevel, Mode=OneWay}" />
+					<Run Text="exp." />
+				</TextBlock>
 
-			<TextBlock>
-				<Run Text="{Binding Resources.Homeport_FleetHQ, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-				<Run Text="Lv."
-					 Style="{DynamicResource EmphaticTextElementStyleKey}"
-					 FontSize="14" />
-				<Run Text="{Binding Model.Level, Mode=OneWay}"
-					 Style="{DynamicResource EmphaticTextElementStyleKey}"
-					 FontSize="18" />
-				<LineBreak />
-				<Run Text="Next:" />
-				<Run Text="{Binding Model.ExperienceForNexeLevel, Mode=OneWay}" />
-				<Run Text="exp." />
+				<StackPanel.Style>
+					<Style TargetType="{x:Type StackPanel}">
+						<Style.Triggers>
+							<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.AdmiralSummaryView}, Path=Value}" Value="True">
+								<Setter Property="Visibility" Value="Collapsed" />
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</StackPanel.Style>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal"
+						VerticalAlignment="Center">
+				<TextBlock>
+					<Run Text="{Binding Model.Nickname, Mode=OneWay}"
+						 Style="{StaticResource EmphaticRun18}" />
+					<LineBreak />
+					<Run Text="{Binding Model.Rank, Mode=OneWay}" />
+					<Run Text="  Lv." />
+					<Run Text="{Binding Model.Level, Mode=OneWay}"
+						 Style="{StaticResource EmphaticRun12}"/>
+				</TextBlock>
+
+				<StackPanel.Style>
+					<Style TargetType="{x:Type StackPanel}">
+						<Setter Property="Visibility" Value="Collapsed" />
+						<Style.Triggers>
+							<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.AdmiralSummaryView}, Path=Value}" Value="True">
+								<Setter Property="Visibility" Value="Visible" />
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</StackPanel.Style>
+			</StackPanel>
+
+			<Grid.ToolTip>
+				<StackPanel Orientation="Vertical"
+							Margin="2">
+					<StackPanel Orientation="Horizontal"
+								VerticalAlignment="Center">
+						<TextBlock>
+								<Run Text="{Binding Model.Nickname, Mode=OneWay}"
+									 Style="{StaticResource EmphaticRun18}" />
+								<Run Text="{Binding Model.Rank, Mode=OneWay}"
+									 Style="{StaticResource EmphaticRun14}" />
+								<LineBreak />
+								<Run Text="{Binding Model.Comment, Mode=OneWay}" />
+						</TextBlock>
+						<TextBlock>
+								<Run Text="{Binding Resources.Homeport_FleetHQ, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+								<Run Text="Lv."
+									 Style="{StaticResource EmphaticRun14}" />
+								<Run Text="{Binding Model.Level, Mode=OneWay}"
+									 Style="{StaticResource EmphaticRun18}" />
+								<LineBreak />
+								<Run Text="Next:" />
+								<Run Text="{Binding Model.ExperienceForNexeLevel, Mode=OneWay}" />
+								<Run Text="exp." />
+						</TextBlock>
+					</StackPanel>
+
+					<Rectangle Height=".99"
+							   Margin="0,10,0,6"
+							   Fill="{DynamicResource InactiveForegroundBrushKey}"
+							   Opacity="0.6" />
+
+					<StackPanel Orientation="Vertical"
+								VerticalAlignment="Center">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+
+							<TextBlock Grid.Column="0"
+									   Text="마미야:" />
+							<TextBlock Grid.Column="1"
+									   Text="{Binding MamiyaCount, Mode=OneWay, StringFormat={}{0}개}"
+									   Style="{StaticResource Emphatic14}" />
+
+							<TextBlock Grid.Column="2"
+									   Text="이라코:" />
+							<TextBlock Grid.Column="3"
+									   Text="{Binding IrakoCount, Mode=OneWay, StringFormat={}{0}개}"
+									   Style="{StaticResource Emphatic14}" />
+						</Grid>
+						<TextBlock>
+							<Run Text="자연회복한계:" />
+							<Run Text="{Binding Model.ResourceLimit, Mode=OneWay}"
+								 Style="{StaticResource EmphaticRun14}" />
+							<Run Text="까지" />
+
+							<Run Text="(" />
+							<Run Text="{Binding ResourceLimitRemaining, Mode=OneWay}"
+								 Style="{StaticResource EmphaticRun14}" />
+							<Run Text="남음" />
+							<Run Text=")" />
+							<LineBreak />
+
+							<Run Text="가구코인:" />
+							<Run Text="{Binding Model.FurnitureCoins, Mode=OneWay}"
+								 Style="{StaticResource EmphaticRun14}" />
+							<Run Text="개" />
+						</TextBlock>
+						<TextBlock>
+								<Run Text="갑훈장:" />
+								<Run Text="{Binding Model.Medals, Mode=OneWay}"
+									 Style="{StaticResource EmphaticRun14}" />
+								<Run Text="개" />
+								<LineBreak />
+								<Run Text="서버:" />
+								<Run Text="{Binding ServerName, Mode=OneWay}"
+									 Style="{StaticResource EmphaticRun14}" />
+						</TextBlock>
+					</StackPanel>
+
+					<Rectangle Height=".99"
+							   Margin="0,6,0,2"
+							   Fill="{DynamicResource InactiveForegroundBrushKey}"
+							   Opacity="0.6" />
+
+					<TextBlock Margin="12,5"
+							   Style="{StaticResource Emphatic13}"
+							   Text="{Binding ToolTip}" />
+				</StackPanel>
+			</Grid.ToolTip>
+		</Grid>
+
+		<StackPanel Grid.Column="1"
+					Orientation="Vertical"
+					Margin="10,0"
+					DataContext="{Binding AkashiTimer}"
+					Visibility="{Binding TimerVisibility}"
+					HorizontalAlignment="Right"
+					VerticalAlignment="Center">
+			<StackPanel Orientation="Horizontal"
+						HorizontalAlignment="Center">
+				<kcvc:SlotItemIcon Type="Facility"
+									Width="14" Height="14"
+									VerticalAlignment="Center" />
+				<TextBlock Grid.Column="1"
+							TextWrapping="NoWrap"
+							Style="{StaticResource Emphatic13}"
+							Margin="2,0,2,0">
+					<Run Text="아카시"
+							Style="{StaticResource EmphaticRun14}" />
+					<Run Text="" Style="{StaticResource EmphaticRun}" />
+				</TextBlock>
+			</StackPanel>
+			<TextBlock Grid.Column="1"
+						Margin="2,0,2,0"
+						HorizontalAlignment="Center"
+						TextAlignment="Center"
+						TextWrapping="NoWrap">
+				<Run Text="{Binding CurrentTime, Mode=OneWay}" />
+				<Run Text="" Style="{StaticResource EmphaticRun}" />
 			</TextBlock>
 		</StackPanel>
 
-
-		<StackPanel Grid.Column="1"
+		<StackPanel Grid.Column="2"
 					Orientation="Horizontal"
 					VerticalAlignment="Center">
 			<UniformGrid Columns="1"
-						 Grid.IsSharedSizeScope="True"
-						 Margin="16,0,0,0">
-				<Panel.Resources>
-					<DataTemplate DataType="{x:Type contentsVm:MaterialsViewModel+MaterialViewModel}">
-						<Grid MinWidth="125"
-							  Margin="0,0,4,0">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto"/>
-								<ColumnDefinition Width="*"/>
-							</Grid.ColumnDefinitions>
-							<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
-									   VerticalAlignment="Bottom">
-								<Run Text="{Binding Display, Mode=OneWay}" />
-								<Run Text=":" />
-							</TextBlock>
-							<TextBlock Grid.Column="1"
-									   Text="{Binding Value, Mode=OneWay}"
-									   Style="{DynamicResource EmphaticTextStyleKey}"
-									   HorizontalAlignment="Right"
-									   VerticalAlignment="Bottom"/>
-						</Grid>
-					</DataTemplate>
-				</Panel.Resources>
-
+						 Margin="4,0,0,0"
+						 Grid.IsSharedSizeScope="True">
 				<controls:MetroComboBox ItemsSource="{Binding Materials.Values}"
 										SelectedItem="{Binding Materials.SelectedItem1, Mode=TwoWay}" />
 				<controls:MetroComboBox ItemsSource="{Binding Materials.Values}"
 										SelectedItem="{Binding Materials.SelectedItem2, Mode=TwoWay}" />
 			</UniformGrid>
-
+			<UniformGrid Columns="1"
+						 Margin="4,0,0,0"
+						 Grid.IsSharedSizeScope="True"
+						 Visibility="{Binding MaterialExtended, Converter={StaticResource BooleanToVisibilityConverter}}">
+				<controls:MetroComboBox ItemsSource="{Binding Materials.Values}"
+										SelectedItem="{Binding Materials.SelectedItem3, Mode=TwoWay}" />
+				<controls:MetroComboBox ItemsSource="{Binding Materials.Values}"
+										SelectedItem="{Binding Materials.SelectedItem4, Mode=TwoWay}" />
+			</UniformGrid>
 			<Grid>
 				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto" />
+					<RowDefinition Height="*" />
 					<RowDefinition Height="*" />
 				</Grid.RowDefinitions>
 				<Grid.ColumnDefinitions>
@@ -106,14 +423,34 @@
 				<TextBlock Grid.Row="0"
 						   Grid.Column="1">
 					<Run Text="{Binding Resources.Homeport_NoOfShips, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-					<Run Text="{Binding Ships.Count, Mode=OneWay}"
-						 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+					<Run Text="{Binding Ships.Count, Mode=OneWay}">
+						<Run.Style>
+							<Style TargetType="{x:Type Run}" BasedOn="{StaticResource EmphaticRun}">
+								<Style.Triggers>
+									<DataTrigger Binding="{Binding ShipsCountWarning, Mode=OneWay}" Value="True">
+										<Setter Property="Foreground" Value="#FFCC3D3D" />
+									</DataTrigger>
+								</Style.Triggers>
+							</Style>
+						</Run.Style>
+					</Run>
 					<Run Text="/" />
 					<Run Text="{Binding Admiral.Model.MaxShipCount, Mode=OneWay}" />
-					<LineBreak />
+				</TextBlock>
+				<TextBlock Grid.Row="1"
+						   Grid.Column="1">
 					<Run Text="{Binding Resources.Homeport_NoOfEquipment, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
-					<Run Text="{Binding SlotItems.Count, Mode=OneWay}"
-						 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+					<Run Text="{Binding SlotItems.Count, Mode=OneWay}">
+						<Run.Style>
+							<Style TargetType="{x:Type Run}" BasedOn="{StaticResource EmphaticRun}">
+								<Style.Triggers>
+									<DataTrigger Binding="{Binding SlotItemsCountWarning, Mode=OneWay}" Value="True">
+										<Setter Property="Foreground" Value="#FFCC3D3D" />
+									</DataTrigger>
+								</Style.Triggers>
+							</Style>
+						</Run.Style>
+					</Run>
 					<Run Text="/" />
 					<Run Text="{Binding Admiral.Model.MaxSlotItemCount, Mode=OneWay}" />
 				</TextBlock>

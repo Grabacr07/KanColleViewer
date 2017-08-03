@@ -59,7 +59,7 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -134,12 +134,6 @@
   </data>
   <data name="Common_ShipGirl" xml:space="preserve">
     <value>칸무스</value>
-  </data>
-  <data name="Debug" xml:space="preserve">
-    <value>디버그</value>
-  </data>
-  <data name="Debug_NotificationMessage" xml:space="preserve">
-    <value>테스트 알림입니다.</value>
   </data>
   <data name="Debug_NotificationMessage_Title" xml:space="preserve">
     <value>테스트</value>
@@ -414,17 +408,8 @@
   <data name="StartContent_ClearCacheButtonMessage" xml:space="preserve">
     <value>캐시를 삭제했습니다</value>
   </data>
-  <data name="StartContent_Introduction1" xml:space="preserve">
-    <value>「提督業も忙しい！」は、艦これを遊びやすくするためのツールです。</value>
-  </data>
   <data name="StartContent_Welcom" xml:space="preserve">
-    <value>ようこそ</value>
-  </data>
-  <data name="StatusBar_AirSuperiorityPotential" xml:space="preserve">
-    <value>제공전력:</value>
-  </data>
-  <data name="StatusBar_AverageLevel" xml:space="preserve">
-    <value>평균레벨: </value>
+    <value>환영합니다</value>
   </data>
   <data name="StatusBar_NotStarted" xml:space="preserve">
     <value>칸코레의 기동을 기다리고 있습니다</value>
@@ -432,16 +417,124 @@
   <data name="StatusBar_Ready" xml:space="preserve">
     <value>준비 완료</value>
   </data>
-  <data name="StatusBar_Speed_Fast" xml:space="preserve">
-    <value>고속함대</value>
-  </data>
-  <data name="StatusBar_Speed_Slow" xml:space="preserve">
-    <value>저속함대</value>
-  </data>
   <data name="ZoomAction_OutOfRange" xml:space="preserve">
     <value>줌 {0} % 은 지원되지 않습니다</value>
   </data>
   <data name="ZoomAction_ZoomFailed" xml:space="preserve">
     <value>줌에 실패했습니다: {0}</value>
+  </data>
+  <data name="Debug" xml:space="preserve">
+    <value>디버그</value>
+  </data>
+  <data name="Debug_NotificationMessage" xml:space="preserve">
+    <value>테스트 알림입니다.</value>
+  </data>
+  <data name="Fleets_AirSuperiorityPotential" xml:space="preserve">
+    <value>제공전력</value>
+  </data>
+  <data name="Fleets_Average" xml:space="preserve">
+    <value>평균</value>
+  </data>
+  <data name="Fleets_Level" xml:space="preserve">
+    <value>레벨</value>
+  </data>
+  <data name="Fleets_Speed_Fast" xml:space="preserve">
+    <value>고속함대</value>
+  </data>
+  <data name="Fleets_Speed_Slow" xml:space="preserve">
+    <value>저속함대</value>
+  </data>
+  <data name="Fleets_Total" xml:space="preserve">
+    <value>합계</value>
+  </data>
+  <data name="Fleets_ViewRange" xml:space="preserve">
+    <value>색적능력</value>
+  </data>
+  <data name="Settings_Logging" xml:space="preserve">
+    <value>로그</value>
+  </data>
+  <data name="Settings_Logging_Enable" xml:space="preserve">
+    <value>드롭・건조・개발로그 기록</value>
+  </data>
+  <data name="ZoomFactorSelector" xml:space="preserve">
+    <value>게임 화면 표시 크기</value>
+  </data>
+  <data name="ZoomFactorSelector_Tooltip" xml:space="preserve">
+    <value>게임 화면 표시 크기를 조정</value>
+  </data>
+  <data name="Akashi_NotificationMessage" xml:space="preserve">
+    <value>아카시가 20분을 수리했습니다.</value>
+  </data>
+  <data name="Expedition_Conditions" xml:space="preserve">
+    <value>칸무스 피로도</value>
+  </data>
+  <data name="Expedition_ExpectRes" xml:space="preserve">
+    <value>예상 자원 (성공/</value>
+  </data>
+  <data name="Expedition_ExpectResGreat" xml:space="preserve">
+    <value>대성공</value>
+  </data>
+  <data name="Expedition_Expect_Ammo" xml:space="preserve">
+    <value>탄약:</value>
+  </data>
+  <data name="Expedition_Expect_Bauxite" xml:space="preserve">
+    <value>보크사이트:</value>
+  </data>
+  <data name="Expedition_Expect_Fuel" xml:space="preserve">
+    <value>연료:</value>
+  </data>
+  <data name="Expedition_Expect_Steel" xml:space="preserve">
+    <value>강재:</value>
+  </data>
+  <data name="Expedition_GreatSuccessNo" xml:space="preserve">
+    <value>대성공 불가</value>
+  </data>
+  <data name="Expedition_NoSupply" xml:space="preserve">
+    <value>보급안됨</value>
+  </data>
+  <data name="Expedition_OnHomeport" xml:space="preserve">
+    <value>모항에서 대기중입니다.</value>
+  </data>
+  <data name="Expedition_OnSortie" xml:space="preserve">
+    <value>출격중입니다.</value>
+  </data>
+  <data name="Expedition_OrganizeNo" xml:space="preserve">
+    <value>편성문제</value>
+  </data>
+  <data name="Expedition_OrganizeOK" xml:space="preserve">
+    <value>편성완료</value>
+  </data>
+  <data name="Expedition_Returned" xml:space="preserve">
+    <value>원정에서 복귀했습니다.</value>
+  </data>
+  <data name="Fleets_Ammo" xml:space="preserve">
+    <value>탄약</value>
+  </data>
+  <data name="Fleets_Bauxite" xml:space="preserve">
+    <value>보크사이트</value>
+  </data>
+  <data name="Fleets_ConditionTo" xml:space="preserve">
+    <value>피로회복까지:</value>
+  </data>
+  <data name="Fleets_Eva" xml:space="preserve">
+    <value>퇴피완료</value>
+  </data>
+  <data name="Fleets_Fuel" xml:space="preserve">
+    <value>연료</value>
+  </data>
+  <data name="Fleets_InRepair" xml:space="preserve">
+    <value>입거중</value>
+  </data>
+  <data name="Fleets_Supplys" xml:space="preserve">
+    <value>보급량:</value>
+  </data>
+  <data name="Shipyard" xml:space="preserve">
+    <value>공창</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>툴</value>
+  </data>
+  <data name="Fleets_Condition" xml:space="preserve">
+    <value>피로도</value>
   </data>
 </root>

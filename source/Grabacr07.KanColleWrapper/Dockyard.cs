@@ -96,7 +96,7 @@ namespace Grabacr07.KanColleWrapper
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine("高速建造材使用の解析に失敗しました: {0}", ex);
+				System.Diagnostics.Debug.WriteLine("고속수복제 사용 해석 실패: {0}", ex);
 			}
 		}
 

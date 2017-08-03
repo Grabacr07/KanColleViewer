@@ -31,6 +31,7 @@ namespace Grabacr07.KanColleViewer.Models
 		private LivetCompositeDisposable dockyardDisposables;
 		private LivetCompositeDisposable repairyardDisposables;
 		private LivetCompositeDisposable organizationDisposables;
+        private LivetCompositeDisposable akashiDisposable;
 
 		private NotifyService() { }
 
@@ -58,7 +59,7 @@ namespace Grabacr07.KanColleViewer.Models
 			this.notifier.Notify(notify);
 		}
 
-		public INotification CreateTest(string header = "テスト通知", string body = "これは「提督業も忙しい！」のテスト通知です。", Action activated = null, Action<Exception> failed = null)
+		public INotification CreateTest(string header = "테스트알림", string body = "「제독업무도 바빠！」의 테스트 알림입니다.", Action activated = null, Action<Exception> failed = null)
 		{
 			return Notification.Create(Notification.Types.Test, header, body, activated ?? WindowService.Current.MainWindow.Activate, failed);
 		}
@@ -191,18 +192,44 @@ namespace Grabacr07.KanColleViewer.Models
 
 			var notification = Notification.Create(
 				Notification.Types.FleetRejuvenated,
-				"疲労回復完了",
-				$"「{args.FleetName}」に編成されている艦娘の疲労が回復しました。",
+				"피로회복완료",
+				$"「{args.FleetName}」의 피로회복이 완료되었습니다",
 				() => WindowService.Current.MainWindow.Activate());
 
 			this.Notify(notification);
 		}
 
-		#endregion
+        #endregion
 
-		#region IDisposable members
+        #region AkashiTimer
 
-		ICollection<IDisposable> IDisposableHolder.CompositeDisposable => this.compositeDisposable;
+        public void UpdateAkashiTimer(AkashiTimer timer)
+        {
+            this.akashiDisposable?.Dispose();
+            this.akashiDisposable = new LivetCompositeDisposable();
+
+            timer.Repaired += this.HandleAkashiTimerRepaired;
+            this.akashiDisposable.Add(() => timer.Repaired -= this.HandleAkashiTimerRepaired);
+        }
+
+        private void HandleAkashiTimerRepaired(object sender, EventArgs args)
+        {
+            if (!Settings.KanColleSettings.AkashiTwentyMinute) return;
+
+            var notification = Notification.Create(
+                Notification.Types.RepairingCompleted,
+                Resources.Repairyard_NotificationMessage_Title,
+                Resources.Akashi_NotificationMessage,
+                () => WindowService.Current.MainWindow.Activate());
+
+            this.Notify(notification);
+        }
+
+        #endregion
+
+        #region IDisposable members
+
+        ICollection<IDisposable> IDisposableHolder.CompositeDisposable => this.compositeDisposable;
 
 		public void Dispose()
 		{

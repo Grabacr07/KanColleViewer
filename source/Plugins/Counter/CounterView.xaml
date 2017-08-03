@@ -15,7 +15,7 @@
 				  PanningMode="Both">
 		<DockPanel Margin="8,0,8,8">
 			<TextBlock DockPanel.Dock="Bottom"
-					   Text="※アプリケーションが起動している間に発生した回数のみをカウントしています。"
+					   Text="※어플리케이션이 작동하고 있는동안의 것들만 계산합니다. 종료시 보존되지않습니다."
 					   Style="{DynamicResource DefaultTextStyleKey}"
 					   Margin="4"
 					   Padding="0,8,0,0" />
@@ -53,7 +53,7 @@
 									 Style="{DynamicResource EmphaticTextElementStyleKey}" />
 								</TextBlock>
 								<metro2:CallMethodButton Grid.Column="2"
-														 Content="リセット"
+														 Content="리셋"
 														 MethodName="Reset" />
 							</Grid>
 						</Border>

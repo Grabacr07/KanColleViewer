@@ -81,7 +81,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		public async void Retry()
 		{
 			this.IsEditable = false;
-			this.Status = "再試行中...";
+			this.Status = "재시도중...";
 
 			// ToDo: async void なので刺されそう
 			await Task.WhenAll(Task.Run(() => this.Bootstrapper.Try()), Task.Delay(TimeSpan.FromMilliseconds(1500)));
@@ -110,9 +110,9 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		{
 			#region messages (const)
 			// いつか多言語リソースに移す… いつか…
-			const string message10048 = @"既にポート {0} で通信を待ち受けているアプリケーションが存在するため、開始に失敗しました。
-アプリケーションを終了するか、以下で待ち受けポートを変更できます。";
-			const string messageUnexpectedException = @"だめだった :;(∩´﹏`∩);:
+			const string message10048 = @"이미 포트 {0} 에서 통신을 대기하고있는 어플리케이션이 있기때문에 시작에 실패했습니다.
+어플리케이션을 종료하거나 아래에서 포트를 변경할수있습니다.";
+			const string messageUnexpectedException = @"소용없었다 :;(∩´﹏`∩);:
 {0}";
 			#endregion
 

@@ -12,15 +12,15 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public SlotItemInfo Info { get; private set; }
 
-		public int Level => this.RawData.api_level;
-
-		public string LevelText => this.Level >= 10 ? "★max" : this.Level >= 1 ? ("★+" + this.Level) : "";
-
 		public string NameWithLevel => $"{this.Info.Name}{(this.Level >= 1 ? (" " + this.LevelText) : "")}{(this.Proficiency >= 1 ? (" " + this.ProficiencyText) : "")}";
 
-		public int Proficiency => this.RawData.api_alv;
+		public int Level => this.RawData.api_level;
+		public string LevelText => this.Level >= 10 ? "★max" : this.Level >= 1 ? ("★+" + this.Level) : "";
 
-		public string ProficiencyText => this.Proficiency >= 1 ? (" (熟練度 " + this.Proficiency + ")") : "";
+		public int Proficiency => this.RawData.api_alv;
+		public string ProficiencyText => this.Proficiency >= 1 ? (" (숙련도 " + this.Proficiency + ")") : "";
+
+		public bool Locked => this.RawData.api_locked == 1;
 
 		internal SlotItem(kcsapi_slotitem rawData)
 			: base(rawData)

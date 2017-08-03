@@ -77,6 +77,8 @@ namespace Grabacr07.KanColleWrapper
 			proxy.api_req_kousyou_destroyitem2.TryParse<kcsapi_destroyitem2>().Subscribe(this.DestroyItem);
 			// 出撃中の装備数調整は諦め！
 
+			proxy.api_req_kaisou_lock.TryParse<kcsapi_slotitem>().Subscribe(x => this.UpdateLock(x.Request["api_slotitem_id"], x.Data));
+
 			proxy.api_get_member_useitem.TryParse<kcsapi_useitem[]>().Subscribe(x => this.Update(x.Data));
 
 			proxy.api_req_kousyou_remodel_slot.TryParse<kcsapi_remodel_slot>().Subscribe(x =>
@@ -87,6 +89,14 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 
+		internal void UpdateLock(string id, kcsapi_slotitem data)
+		{
+			int _id;
+			if (!int.TryParse(id, out _id)) return;
+
+			if (this.SlotItems.ContainsKey(_id))
+				this.SlotItems[_id].RawData.api_locked = data.api_locked;
+		}
 		internal void Update(kcsapi_slotitem[] source)
 		{
 			this.SlotItems = new MemberTable<SlotItem>(source.Select(x => new SlotItem(x)));

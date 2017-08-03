@@ -11,10 +11,12 @@ using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.ViewModels;
 using MetroRadiance.Interop;
 using MetroTrilithon.UI.Controls;
-using MSHTML;
+using mshtml;
 using SHDocVw;
+using IViewObject = Grabacr07.KanColleViewer.Win32.IViewObject;
 using IServiceProvider = Grabacr07.KanColleViewer.Win32.IServiceProvider;
 using WebBrowser = System.Windows.Controls.WebBrowser;
+using KanColleSettings = Grabacr07.KanColleViewer.Models.Settings.KanColleSettings;
 
 namespace Grabacr07.KanColleViewer.Views.Controls
 {
@@ -25,7 +27,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 		private const string PART_ContentHost = "PART_ContentHost";
 
 		public static Size KanColleSize { get; } = new Size(800.0, 480.0);
-		public static Size InitialSize { get; } = new Size(960.0, 572.0);
+		public static Size InitialSize { get; } = new Size(800.0, 480.0);
 
 		static KanColleHost()
 		{
@@ -56,11 +58,14 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 			if (oldBrowser != null)
 			{
+				oldBrowser.Navigated -= instance.HandleNavigated;
 				oldBrowser.LoadCompleted -= instance.HandleLoadCompleted;
 			}
 			if (newBrowser != null)
 			{
+				newBrowser.Navigated += instance.HandleNavigated;
 				newBrowser.LoadCompleted += instance.HandleLoadCompleted;
+
 				var events = WebBrowserHelper.GetAxWebbrowser2(newBrowser) as DWebBrowserEvents_Event;
 				if (events != null) events.NewWindow += instance.HandleWebBrowserNewWindow;
 			}
@@ -131,6 +136,16 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 		public KanColleHost()
 		{
 			this.Loaded += (sender, args) => this.Update();
+
+			FlashQuality init = KanColleSettings.FlashElementQuality;
+			KanColleSettings.FlashElementQuality.ValueChanged += (s, e) =>
+			{
+				if (KanColleSettings.FlashElementQuality != init)
+				{
+					init = KanColleSettings.FlashElementQuality;
+					ApplyFlashQuality(true);
+				}
+			};
 		}
 
 		public override void OnApplyTemplate()
@@ -198,12 +213,28 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			}
 		}
 
-		private void HandleLoadCompleted(object sender, NavigationEventArgs e)
+		private void HandleNavigated(object sender, NavigationEventArgs e)
 		{
-			this.ApplyStyleSheet();
 			WebBrowserHelper.SetScriptErrorsSuppressed(this.WebBrowser, true);
 
-			this.firstLoaded = true;
+			if (e.Uri.AbsoluteUri == KanColleViewer.Properties.Settings.Default.KanColleUrl.AbsoluteUri)
+			{
+				this.firstLoaded = true;
+
+				this.ApplyStyleSheet();
+				this.Update();
+			}
+		}
+		private void HandleLoadCompleted(object sender, NavigationEventArgs e)
+		{
+			WebBrowserHelper.SetScriptErrorsSuppressed(this.WebBrowser, true);
+
+			if (e.Uri.AbsoluteUri == KanColleViewer.Properties.Settings.Default.KanColleUrl.AbsoluteUri)
+			{
+				if (KanColleSettings.FlashElementQuality != FlashQuality.High)
+					this.ApplyFlashQuality(true);
+			}
+			this.ApplyStyleSheet(1);
 			this.Update();
 		}
 
@@ -216,29 +247,43 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			window.WebBrowser.Navigate(url);
 		}
 
-		private void ApplyStyleSheet()
+		private void ApplyStyleSheet(int step = 0)
 		{
 			if (!this.firstLoaded) return;
 
 			try
 			{
-				var document = this.WebBrowser.Document as HTMLDocument;
-				if (document == null) return;
-
-				var gameFrame = document.getElementById("game_frame");
-				if (gameFrame == null)
+				if (step == 0)
 				{
-					if (document.url.Contains(".swf?"))
-					{
-						gameFrame = document.body;
-					}
-				}
-
-				var target = gameFrame?.document as HTMLDocument;
-				if (target != null)
-				{
-					target.createStyleSheet().cssText = this.UserStyleSheet;
+					var script = string.Format(
+						"document.addEventListener('DOMContentLoaded', function(){{"
+							+ "var x=document.createElement('style');x.type='text/css';x.innerHTML='{0}';document.body.appendChild(x);"
+						+ "}});",
+						this.UserStyleSheet.Replace("'", "\\'").Replace("\r\n", "\\n")
+					);
+					WebBrowser.InvokeScript("eval", new object[] { script });
 					this.styleSheetApplied = true;
+				}
+				else
+				{
+					var document = this.WebBrowser.Document as HTMLDocument;
+					if (document == null) return;
+
+					var gameFrame = document.getElementById("game_frame");
+					if (gameFrame == null)
+					{
+						if (document.url.Contains(".swf?"))
+						{
+							gameFrame = document.body;
+						}
+					}
+
+					var target = gameFrame?.document as HTMLDocument;
+					if (target != null)
+					{
+						target.createStyleSheet().cssText = this.UserStyleSheet;
+						this.styleSheetApplied = true;
+					}
 				}
 			}
 			catch (Exception) when (Application.Instance.State == ApplicationState.Startup)
@@ -249,6 +294,56 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			{
 				Debug.WriteLine(ex);
 				StatusService.Current.Notify("failed to apply css: " + ex.Message);
+			}
+		}
+		private void ApplyFlashQuality(bool ReloadRequired = false)
+		{
+			if (!this.firstLoaded) return;
+
+			try
+			{
+				var document = this.WebBrowser.Document as HTMLDocument;
+				if (document == null) return;
+
+				var frames = document.frames;
+				for (var i = 0; i < frames.length; i++)
+				{
+					var item = frames.item(i);
+					var provider = item as IServiceProvider;
+					if (provider == null) continue;
+
+					object ppvObject;
+					provider.QueryService(typeof(IWebBrowserApp).GUID, typeof(IWebBrowser2).GUID, out ppvObject);
+					var webBrowser = ppvObject as IWebBrowser2;
+
+					var iframeDocument = webBrowser?.Document as HTMLDocument;
+					if (iframeDocument == null) continue;
+
+					string qualityString = "high";
+					switch (KanColleSettings.FlashElementQuality.Value)
+					{
+						case FlashQuality.Low: qualityString = "low"; break;
+						case FlashQuality.Medium: qualityString = "medium"; break;
+						case FlashQuality.High: qualityString = "high"; break;
+					}
+
+					var script = "function kcsFlash_StartFlash(a){var b={id:'externalswf',width:'800',height:'480',wmode:'opaque',quality:'" + qualityString + "',bgcolor:'#000000',allowScriptAccess:'always'};"
+						+ "document.getElementById('flashWrap').innerHTML=ConstMessageInfo.InstallFlashMessage,gadgets.flash.embedFlash(a+ConstURLInfo.MainFlashURL+'?api_token='+flashInfo.apiToken+'&api_starttime='+flashInfo.apiStartTime,document.getElementById('flashWrap'),6,b),"
+						+ "document.getElementById('adFlashWrap').style.height='0px',document.getElementById('wsFlashWrap').style.height='0px',document.getElementById('flashWrap').style.height='480px',gadgets.window.adjustHeight(ConstGadgetInfo.height)};";
+					if (ReloadRequired) script += "kcsLogin_StartLogin();";
+
+					webBrowser.Navigate("javascript:" + script);
+					GCWorker.GCRequest();
+				}
+			}
+			catch (Exception) when (Application.Instance.State == ApplicationState.Startup)
+			{
+				// about:blank だから仕方ない
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex);
+				StatusService.Current.Notify("failed to apply flash quality: " + ex.Message);
 			}
 		}
 	}

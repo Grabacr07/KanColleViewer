@@ -9,7 +9,7 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 	public class WindowSettings : SettingsHost
 	{
 		/// <summary>
-		/// ウィンドウを常に最前面に表示するかどうかを示す設定値を取得します。
+		/// 윈도우를 항상 위에 표시할지 여부를 설정합니다.
 		/// </summary>
 		public SerializableProperty<bool> TopMost => this.Cache(key => new SerializableProperty<bool>(key, Providers.Local, false));
 

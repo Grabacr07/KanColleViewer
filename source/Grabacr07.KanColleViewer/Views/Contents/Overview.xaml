@@ -19,6 +19,8 @@
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
 			 xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Models.Settings"
+			 xmlns:fleets="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents.Fleets"
+			 xmlns:wrapper="clr-namespace:Grabacr07.KanColleWrapper.Models;assembly=KanColleWrapper"
 			 mc:Ignorable="d"
 			 d:DataContext="{d:DesignInstance vmContents:OverviewViewModel}"
 			 d:DesignWidth="680"
@@ -33,9 +35,9 @@
 				<Setter Property="BorderThickness"
 						Value=".99" />
 				<Setter Property="Padding"
-						Value="8" />
+						Value="6" />
 				<Setter Property="Margin"
-						Value="5,0,5,10" />
+						Value="3,0,3,7" />
 			</Style>
 
 			<Style x:Key="JumbButtonStyleKey"
@@ -44,13 +46,13 @@
 				<Setter Property="Background"
 						Value="Transparent" />
 				<Setter Property="Padding"
-						Value="8" />
+						Value="6" />
 				<Setter Property="HorizontalContentAlignment"
 						Value="Stretch" />
 				<Setter Property="VerticalContentAlignment"
 						Value="Stretch" />
 				<Setter Property="Margin"
-						Value="5,0,5,10" />
+						Value="3,0,3,7" />
 			</Style>
 
 			<Style TargetType="{x:Type ToolTip}">
@@ -78,6 +80,235 @@
 
 			<Style TargetType="{x:Type TextBlock}"
 				   BasedOn="{StaticResource DefaultTextStyleKey}" />
+
+			<DataTemplate x:Key="ShipViewKey">
+				<StackPanel Margin="0,2,0,0">
+					<StackPanel.Resources>
+						<Style TargetType="{x:Type TextBlock}"
+							   BasedOn="{StaticResource DefaultTextStyleKey}">
+							<Setter Property="TextWrapping"
+									Value="NoWrap" />
+						</Style>
+					</StackPanel.Resources>
+
+					<Grid HorizontalAlignment="Left"
+						Margin="4,0,0,0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" SharedSizeGroup="Name" />
+							<ColumnDefinition Width="Auto" SharedSizeGroup="Level" />
+							<ColumnDefinition Width="Auto" SharedSizeGroup="HP" />
+							<ColumnDefinition Width="Auto" SharedSizeGroup="Condition" />
+						</Grid.ColumnDefinitions>
+
+						<TextBlock ToolTipService.Placement="Relative"
+								   ToolTipService.HorizontalOffset="-9"
+								   ToolTipService.VerticalOffset="-3">
+							<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
+								 Style="{DynamicResource EmphaticTextElementStyleKey}" 
+								 FontSize="14"/>
+							<LineBreak />
+							<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
+								 FontSize="11" />
+							<TextBlock.ToolTip>
+								<TextBlock Margin="0,-2,0,0">
+									<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
+										 Style="{DynamicResource EmphaticTextElementStyleKey}"
+										 FontSize="14"/>
+										<Run Text="{Binding Ship.Info.JPName, Mode=OneWay}"
+											 Style="{DynamicResource EmphaticTextElementStyleKey}"
+											 FontSize="13"/>
+									<LineBreak />
+									<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
+										 FontSize="11" />
+								</TextBlock>
+							</TextBlock.ToolTip>
+						</TextBlock>
+
+						<TextBlock Grid.Column="1"
+								   ToolTipService.Placement="Relative"
+								   ToolTipService.HorizontalOffset="-9"
+								   ToolTipService.VerticalOffset="-3"
+								   Margin="12,0,0,0">
+							<Run Text="Lv." />
+							<Run Text="{Binding Ship.Level, Mode=OneWay}"
+								 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+							<LineBreak />
+							<Run Text="{Binding Ship.ExpForNextLevel, StringFormat=Next: {0}, Mode=OneWay}"
+								 FontSize="9" />
+
+							<TextBlock.ToolTip>
+								<StackPanel Margin="0,-2,0,0"
+											Orientation="Vertical">
+									<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+											   Foreground="White">
+										<Run Text="Lv." />
+										<Run Text="{Binding Ship.Level, Mode=OneWay}"
+											 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+										<LineBreak />
+										<Run Text="{Binding Ship.ExpForNextLevel, StringFormat=Next: {0}, Mode=OneWay}"
+											 FontSize="9" />
+									</TextBlock>
+
+									<ContentControl x:Name="NextRemodelInfo"
+												Margin="0,8,0,0">
+										<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+											   Foreground="White">
+										<Run Text="다음 개장레벨:" />
+										<Run Text="{Binding Ship.Info.NextRemodelingLevel, Mode=OneWay}" />
+										<LineBreak />
+										<Run Text="남은 경험치:" />
+										<Run Text="{Binding Ship.ExpForNextRemodelingLevel, Mode=OneWay}" />
+										<LineBreak />
+										<Run Text="누적 경험치:" />
+										<Run Text="{Binding Ship.Exp, Mode=OneWay}" />
+										</TextBlock>
+
+										<ContentControl.Style>
+											<Style TargetType="{x:Type ContentControl}">
+												<Style.Triggers>
+													<DataTrigger Binding="{Binding Ship.Info.NextRemodelingLevel}" Value="{x:Null}">
+														<Setter Property="Template">
+															<Setter.Value>
+																<ControlTemplate TargetType="{x:Type ContentControl}">
+																	<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+																			Foreground="White">
+																	<Run Text="다음 개장이 없습니다" />
+																	<LineBreak />
+																	<LineBreak />
+																	<Run Text="누적 경험치:" />
+																	<Run Text="{Binding Ship.Exp, Mode=OneWay}" />
+																	</TextBlock>
+																</ControlTemplate>
+															</Setter.Value>
+														</Setter>
+													</DataTrigger>
+
+													<MultiDataTrigger>
+														<MultiDataTrigger.Conditions>
+															<Condition Binding="{Binding Ship.Info.RemodelingExists}" Value="True" />
+															<Condition Binding="{Binding Ship.ExpForNextRemodelingLevel}" Value="0" />
+														</MultiDataTrigger.Conditions>
+														<MultiDataTrigger.Setters>
+															<Setter Property="Template">
+																<Setter.Value>
+																	<ControlTemplate TargetType="{x:Type ContentControl}">
+																		<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+																			Foreground="White">
+																		<Run Text="개장 가능합니다" />
+																		<LineBreak />
+																		<LineBreak />
+																		<Run Text="누적 경험치:" />
+																		<Run Text="{Binding Ship.Exp, Mode=OneWay}" />
+																		</TextBlock>
+																	</ControlTemplate>
+																</Setter.Value>
+															</Setter>
+														</MultiDataTrigger.Setters>
+													</MultiDataTrigger>
+												</Style.Triggers>
+											</Style>
+										</ContentControl.Style>
+									</ContentControl>
+								</StackPanel>
+							</TextBlock.ToolTip>
+						</TextBlock>
+
+						<Grid x:Name="HPIndicator"
+							  Grid.Column="2"
+							  Margin="12,1,12,0">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+							</Grid.RowDefinitions>
+							<TextBlock>
+								<Run Text="HP:" />
+								<Run Text="{Binding Ship.HP.Current, Mode=OneWay}"
+									 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+								<Run Text="{Binding Ship.HP.Maximum, StringFormat=/{0}, Mode=OneWay}" />
+							</TextBlock>
+
+							<kcvc:ColorIndicator Grid.Row="1"
+												 Height="6"
+												 LimitedValue="{Binding Ship.HP, Mode=OneWay}"
+												 Margin="0,2,0,0" />
+						</Grid>
+
+						<Grid x:Name="RepairIndicator"
+							  Grid.Column="2"
+							  Visibility="Collapsed"
+							  Margin="8,2,8,0">
+							<Border Background="{DynamicResource FleetRepairingBrushKey}"
+									Opacity=".4" />
+							<TextBlock Text="입거중"
+									   Style="{DynamicResource EmphaticTextStyleKey}"
+									   HorizontalAlignment="Center" />
+						</Grid>
+
+						<Grid x:Name="EvacuationIndicator"
+								Grid.Column="2"
+								Visibility="Collapsed"
+								Margin="8,2,8,0">
+							<Border Background="{DynamicResource FleetRepairingBrushKey}"
+									Opacity=".4" />
+							<TextBlock Text="퇴피완료"
+										Style="{DynamicResource EmphaticTextStyleKey}"
+										HorizontalAlignment="Center" />
+						</Grid>
+
+						<TextBlock Grid.Column="3">
+							<InlineUIContainer>
+								<kcvc:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
+							</InlineUIContainer>
+							<Run Text="{Binding Ship.Condition, Mode=OneWay}"
+								 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+							<LineBreak />
+							<Run Text="컨디션"
+								 FontSize="8" />
+
+							<TextBlock.ToolTip>
+								<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+										   Foreground="White">
+									<Run Text="피로회복까지:" />
+									<Run Text="{Binding Condition.ConditionText, Mode=OneWay}" />
+								</TextBlock>
+							</TextBlock.ToolTip>
+						</TextBlock>
+					</Grid>
+					<Rectangle Height=".99"
+							Margin="0,4,0,0"
+							Style="{DynamicResource SeparatorRectangleStyleKey}" />
+				</StackPanel>
+
+				<DataTemplate.Triggers>
+					<DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
+								Value="True">
+						<Setter TargetName="HPIndicator"
+							Property="Opacity"
+							Value=".2" />
+						<Setter TargetName="RepairIndicator"
+							Property="Visibility"
+							Value="Visible" />
+					</DataTrigger>
+					<DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow}"
+								Value="True">
+						<Setter TargetName="HPIndicator"
+							Property="Opacity"
+							Value=".2" />
+						<Setter TargetName="EvacuationIndicator"
+							Property="Visibility"
+							Value="Visible" />
+					</DataTrigger>
+					<DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Evacuation}"
+								Value="True">
+						<Setter TargetName="HPIndicator"
+							Property="Opacity"
+							Value=".2" />
+						<Setter TargetName="EvacuationIndicator"
+							Property="Visibility"
+							Value="Visible" />
+					</DataTrigger>
+				</DataTemplate.Triggers>
+			</DataTemplate>
 		</ResourceDictionary>
 	</UserControl.Resources>
 
@@ -85,273 +316,305 @@
 	<ScrollViewer VerticalScrollBarVisibility="Auto"
 				  PanningMode="Both">
 		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="220" />
-				<ColumnDefinition Width="Auto"
-								  MinWidth="140" />
 			</Grid.ColumnDefinitions>
+			<metro2:CallMethodButton Grid.Row="0"
+									 Grid.ColumnSpan="3"
+									 Style="{StaticResource JumbButtonStyleKey}"
+									 MethodName="Jump"
+									 MethodParameter="Expeditions">
+				<StackPanel DataContext="{Binding Content.Expeditions}"
+								Orientation="Horizontal">
+					<TextBlock Text="{Binding Name}" Margin="2" 
+								   VerticalAlignment="Center"/>
 
-			<Border VerticalAlignment="Top">
-				<DockPanel DataContext="{Binding Content.Fleets}">
-					<ListBox DockPanel.Dock="Top"
-							 ItemsSource="{Binding Fleets}"
-							 SelectedValue="{Binding SelectedFleet, Mode=TwoWay}"
-							 Style="{DynamicResource HorizontalFlatListBoxStyleKey}">
+					<Rectangle Width="1"
+								   Margin="7,4"
+								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+					<ItemsControl ItemsSource="{Binding Fleets.Fleets}">
+						<ItemsControl.ItemsPanel>
+							<ItemsPanelTemplate>
+								<StackPanel Orientation="Horizontal"/>
+							</ItemsPanelTemplate>
+						</ItemsControl.ItemsPanel>
 						<ItemsControl.ItemTemplate>
 							<DataTemplate>
-								<Border Padding="0,0,18,0"
-										Background="Transparent">
-									<StackPanel Orientation="Horizontal">
-										<vContents:StateIconIndicator Width="12"
-																	  Height="12"
-																	  Margin="0,2,4,1" />
-										<TextBlock x:Name="FleetName"
-												   Text="{Binding Id, StringFormat='/{0}'}"
-												   Style="{DynamicResource DefaultTextStyleKey}"
-												   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
-									</StackPanel>
-								</Border>
+								<TextBlock x:Name="Expedition"
+											   Style="{DynamicResource DefaultTextStyleKey}"
+											   Margin="0,0,4,0"
+											   VerticalAlignment="Center">
+										<Run Text="{Binding Id, Mode=OneWay, StringFormat=/{0}}"
+											 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+										<Run x:Name="Remaining"
+											 Text="{Binding Expedition.Remaining, StringFormat=- {0}, Mode=OneWay}" />
+								</TextBlock>
 								<DataTemplate.Triggers>
-									<DataTrigger Binding="{Binding IsSelected}"
-												 Value="True">
-										<Setter TargetName="FleetName"
-												Property="Text"
-												Value="{Binding Name}" />
+									<DataTrigger Binding="{Binding Id, Mode=OneWay}"
+													 Value="1">
+										<Setter TargetName="Expedition"
+													Property="Visibility"
+													Value="Collapsed" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding Expedition.IsInExecution}"
+													 Value="False">
+										<Setter TargetName="Remaining"
+													Property="Text"
+													Value="" />
 									</DataTrigger>
 								</DataTemplate.Triggers>
 							</DataTemplate>
 						</ItemsControl.ItemTemplate>
-					</ListBox>
+					</ItemsControl>
+				</StackPanel>
+			</metro2:CallMethodButton>
+			<StackPanel Grid.Row="1">
+				<Border Visibility="{Binding Horizontal}">
+					<ScrollViewer VerticalScrollBarVisibility="Disabled"
+								  HorizontalScrollBarVisibility="Auto">
+						<UniformGrid Rows="2">
+							<metro2:CallMethodButton Content="함선목록"
+													 Padding="10,4"
+													 MinWidth="70"
+													 Margin="2"
+													 MethodName="ShowShipCatalog" />
+							<metro2:CallMethodButton Content="개수공창"
+													 Padding="10,4"
+													 MinWidth="70"
+													 Margin="2"
+													 MethodName="ShowRemodelWindow" />
+							<metro2:CallMethodButton Content="계산기"
+													 ToolTip="각종 수치 계산기입니다. 목표 경험치, 연습전 경험치, 기항대 계산기"
+													 Padding="10,4"
+													 MinWidth="70"
+													 Margin="2"
+													 MethodName="Calculator" />
+							<metro2:CallMethodButton Content="원정목록"
+													 Padding="10,4"
+													 MinWidth="70"
+													 Margin="2"
+													 MethodName="ExpeditionsCatalogWindow" />
+							<metro2:CallMethodButton Content="사전열람"
+													 Padding="10,4"
+													 MinWidth="70"
+													 Margin="2"
+													 MethodName="ShowDictionary"/>
 
-					<vContents:StateDetailIndicator DockPanel.Dock="Top"
-													DataContext="{Binding SelectedFleet}"
-													Margin="0,7,0,3" />
+							<metro2:CallMethodButton Content="장비목록"
+													 Padding="10,4"
+													 MinWidth="70"
+													 Margin="2"
+													 MethodName="ShowSlotItemCatalog" />
+							<metro2:CallMethodButton Content="수리목록" 
+													 Padding="10,4"
+													 MinWidth="70"
+													 Margin="2"
+													 MethodName="ShowNdockShipCatalog"/>
+							<metro2:CallMethodButton Content="함대 프리셋"
+													 Padding="10,4"
+													 MinWidth="70"
+													 Margin="2"
+													 MethodName="ShowPresetWindow" />
+							<metro2:CallMethodButton Content="기록열람"
+													 Padding="10,4"
+													 MinWidth="70"
+													 Margin="2"
+													 MethodName="ShowLogViewer"/>
+							<metro2:CallMethodButton Content="메모장" 
+													 Padding="10,4"
+													 MinWidth="70"
+													 Margin="2"
+													 MethodName="ShowNotePad"/>
 
-					<ScrollViewer HorizontalScrollBarVisibility="Auto"
-								  VerticalScrollBarVisibility="Disabled">
-						<ItemsControl ItemsSource="{Binding SelectedFleet.Ships}"
-									  Background="Transparent"
-									  Grid.IsSharedSizeScope="True">
-							<i:Interaction.Triggers>
-								<behaviors:FlickTrigger>
-									<behaviors:FlickFleetsAction TargetObject="{Binding}"
-																 IsCyclic="True"
-																 Orientation="Horizontal" />
-								</behaviors:FlickTrigger>
-							</i:Interaction.Triggers>
+						</UniformGrid>
+					</ScrollViewer>
+				</Border>
+				<Border VerticalAlignment="Top">
+					<DockPanel DataContext="{Binding Content.Fleets}">
+						<ListBox DockPanel.Dock="Top"
+								 ItemsSource="{Binding Fleets2, Mode=OneWay}"
+								 SelectedValue="{Binding SelectedFleet, Mode=TwoWay}"
+								 Style="{DynamicResource HorizontalFlatListBoxStyleKey}">
 							<ItemsControl.ItemTemplate>
 								<DataTemplate>
-									<StackPanel Margin="0,2,0,0">
-										<StackPanel.Resources>
-											<Style TargetType="{x:Type TextBlock}"
-												   BasedOn="{StaticResource DefaultTextStyleKey}">
-												<Setter Property="TextWrapping"
-														Value="NoWrap" />
-											</Style>
-										</StackPanel.Resources>
-
-										<Grid HorizontalAlignment="Left">
-											<Grid.ColumnDefinitions>
-												<ColumnDefinition Width="Auto"
-																  SharedSizeGroup="Name" />
-												<ColumnDefinition Width="Auto"
-																  SharedSizeGroup="Level" />
-												<ColumnDefinition Width="Auto"
-																  SharedSizeGroup="HP" />
-												<ColumnDefinition Width="Auto"
-																  SharedSizeGroup="Condition" />
-											</Grid.ColumnDefinitions>
-
-											<TextBlock ToolTipService.Placement="Relative"
-													   ToolTipService.HorizontalOffset="-9"
-													   ToolTipService.VerticalOffset="-3">
-												<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
-													 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-												<LineBreak />
-												<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
-													 FontSize="11" />
-											</TextBlock>
-
-											<TextBlock Grid.Column="1"
-													   Margin="12,0,0,0">
-												<Run Text="Lv." />
-												<Run Text="{Binding Ship.Level, Mode=OneWay}"
-													 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-												<LineBreak />
-												<Run Text="{Binding Ship.ExpForNextLevel, StringFormat=Next: {0}, Mode=OneWay}"
-													 FontSize="9" />
-											</TextBlock>
-
-											<Grid x:Name="HPIndicator"
-												  Grid.Column="2"
-												  Margin="12,1,12,0">
-												<Grid.RowDefinitions>
-													<RowDefinition Height="Auto" />
-													<RowDefinition Height="Auto" />
-												</Grid.RowDefinitions>
-												<TextBlock>
-													<Run Text="HP:" />
-													<Run Text="{Binding Ship.HP.Current, Mode=OneWay}"
-														 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-													<Run Text="{Binding Ship.HP.Maximum, StringFormat=/{0}, Mode=OneWay}" />
-												</TextBlock>
-												<kcvc:ColorIndicator Grid.Row="1"
-																	 Height="6"
-																	 LimitedValue="{Binding Ship.HP, Mode=OneWay}"
-																	 Margin="0,2,0,0" />
-											</Grid>
-
-											<Grid x:Name="RepairIndicator"
-												  Grid.Column="2"
-												  Visibility="Collapsed"
-												  Margin="8,2,8,0">
-												<Border Background="{DynamicResource FleetRepairingBrushKey}"
-														Opacity=".4" />
-												<TextBlock Text="入渠中"
-														   Style="{DynamicResource EmphaticTextStyleKey}"
-														   HorizontalAlignment="Center" />
-											</Grid>
-
-											<Grid x:Name="EvacuationIndicator"
-												  Grid.Column="2"
-												  Visibility="Collapsed"
-												  Margin="8,2,8,0">
-												<Border Background="{DynamicResource FleetRepairingBrushKey}"
-														Opacity=".4" />
-												<TextBlock Text="退避済"
-														   Style="{DynamicResource EmphaticTextStyleKey}"
-														   HorizontalAlignment="Center" />
-											</Grid>
-
-											<TextBlock Grid.Column="3">
-												<InlineUIContainer>
-													<kcvc:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
-												</InlineUIContainer>
-												<Run Text="{Binding Ship.Condition, Mode=OneWay}"
-													 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-												<LineBreak />
-												<Run Text="condition"
-													 FontSize="9" />
-											</TextBlock>
-										</Grid>
-										<Rectangle Height=".99"
-												   Margin="0,4,0,0"
-												   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-									</StackPanel>
-
+									<Border Padding="10,0,10,5"
+											Background="Transparent">
+										<StackPanel Orientation="Horizontal">
+											<vContents:StateIconIndicator Width="14"
+																		  Height="14"
+																		  Margin="0,2,4,0" />
+											<TextBlock x:Name="FleetName"
+													   Text="{Binding Id, StringFormat='/{0}'}"
+													   Style="{DynamicResource HeaderTextStyleKey}"
+													   Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" />
+										</StackPanel>
+									</Border>
 									<DataTemplate.Triggers>
-										<DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
-													 Value="True">
-											<Setter TargetName="HPIndicator"
-													Property="Opacity"
-													Value=".2" />
-											<Setter TargetName="RepairIndicator"
-													Property="Visibility"
-													Value="Visible" />
+										<DataTrigger Binding="{Binding IsSelected}" Value="True">
+											<Setter TargetName="FleetName" Property="Text" Value="{Binding Name}" />
 										</DataTrigger>
-										<DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow}"
-													 Value="True">
-											<Setter TargetName="HPIndicator"
-													Property="Opacity"
-													Value=".2" />
-											<Setter TargetName="EvacuationIndicator"
-													Property="Visibility"
-													Value="Visible" />
-										</DataTrigger>
-										<DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Evacuation}"
-													 Value="True">
-											<Setter TargetName="HPIndicator"
-													Property="Opacity"
-													Value=".2" />
-											<Setter TargetName="EvacuationIndicator"
-													Property="Visibility"
-													Value="Visible" />
-										</DataTrigger>
-									</DataTemplate.Triggers>
+									</DataTemplate.Triggers> 
 								</DataTemplate>
 							</ItemsControl.ItemTemplate>
-						</ItemsControl>
-					</ScrollViewer>
-				</DockPanel>
-			</Border>
+						</ListBox>
 
-			<Grid Grid.Column="1">
+						<Grid DockPanel.Dock="Top">
+							<vContents:StateDetailIndicator DataContext="{Binding SelectedFleet, Mode=OneWay}"
+															VerticalAlignment="Center"
+															Margin="0,3" />
+							<Grid.Style>
+								<Style TargetType="{x:Type Grid}">
+									<Style.Triggers>
+										<DataTrigger Binding="{Binding SelectedFleet.IsNotFleet}" Value="True">
+											<Setter Property="Visibility" Value="Collapsed" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Grid.Style>
+						</Grid>
+
+
+						<ScrollViewer HorizontalScrollBarVisibility="Auto"
+									  VerticalScrollBarVisibility="Disabled">
+							<ContentControl Content="{Binding SelectedFleet}"
+											Background="Transparent"
+											Grid.IsSharedSizeScope="True">
+								<i:Interaction.Triggers>
+									<behaviors:FlickTrigger>
+										<behaviors:FlickFleetsAction TargetObject="{Binding}"
+																	 IsCyclic="True"
+																	 Orientation="Horizontal" />
+									</behaviors:FlickTrigger>
+								</i:Interaction.Triggers>
+								<ContentControl.Resources>
+									<DataTemplate DataType="{x:Type fleets:FleetViewModel}">
+										<ItemsControl ItemsSource="{Binding Ships}"
+													  ItemTemplate="{DynamicResource ShipViewKey}" />
+									</DataTemplate>
+
+									<DataTemplate DataType="{x:Type fleets:CombinedFleetViewModel}">
+										<ItemsControl ItemsSource="{Binding Fleets}"
+													  Margin="0,0,0,-1">
+											<ItemsControl.ItemTemplate>
+												<DataTemplate>
+													<Border BorderThickness="0,0,0,1"
+															BorderBrush="{DynamicResource BorderBrushKey}">
+														<DockPanel LastChildFill="True">
+															<Border Background="{DynamicResource BorderBrushKey}"
+																	Padding="8,4">
+																<Border.LayoutTransform>
+																	<RotateTransform Angle="-90"
+																		 CenterX="0.5"
+																		 CenterY="0.5" />
+																</Border.LayoutTransform>
+																<TextBlock Text="{Binding Name}"
+																		   TextAlignment="Center"
+																		   Foreground="{DynamicResource SemiActiveForegroundBrushKey}"
+																		   Style="{DynamicResource EmphaticTextStyleKey}"
+																		   FontSize="13" />
+															</Border>
+															<ItemsControl ItemsSource="{Binding Ships}"
+																		  ItemTemplate="{DynamicResource ShipViewKey}"
+																		  Margin="0,0,0,-1" />
+														</DockPanel>
+													</Border>
+												</DataTemplate>
+											</ItemsControl.ItemTemplate>
+										</ItemsControl>
+									</DataTemplate>
+
+									<DataTemplate DataType="{x:Type fleets:AirBaseTroopViewModel}">
+										<TextBlock Margin="10"
+												   TextAlignment="Center">
+											<Run Text="기지항공대는 함대 탭에서 확인할 수 있습니다."
+												 Style="{StaticResource DefaultTextElementStyleKey}" />
+										</TextBlock>
+									</DataTemplate>
+								</ContentControl.Resources>
+							</ContentControl>
+						</ScrollViewer>
+					</DockPanel>
+				</Border>
+			</StackPanel>
+			<Border Visibility="{Binding Vertical}"
+					Grid.Column="1"
+					Grid.Row="1"
+					Grid.RowSpan="3">
+				<ScrollViewer VerticalScrollBarVisibility="Disabled"
+								  HorizontalScrollBarVisibility="Auto">
+					<StackPanel Orientation="Vertical">
+						<metro2:CallMethodButton Content="함선목록"
+												 Padding="10,4"
+												 MinWidth="70"
+												 Margin="2,4"
+												 MethodName="ShowShipCatalog" />
+						<metro2:CallMethodButton Content="장비목록"
+												 Padding="10,4"
+												 MinWidth="70"
+												 Margin="2,0,2,4"
+												 MethodName="ShowSlotItemCatalog"/>
+						<metro2:CallMethodButton Content="원정목록"
+												 Padding="10,4"
+												 MinWidth="70"
+												 Margin="2,0,2,4"
+												 MethodName="ExpeditionsCatalogWindow" />
+						<metro2:CallMethodButton Content="계산기"
+												 ToolTip="각종 수치 계산기입니다. 목표 경험치, 연습전 경험치, 기항대 계산기"
+												 Padding="10,4"
+												 MinWidth="70"
+												 Margin="2,0,2,4"
+												 MethodName="Calculator" />
+						<metro2:CallMethodButton Content="개수공창"
+												 Padding="10,4"
+												 MinWidth="70"
+												 Margin="2,0,2,4"
+												 MethodName="ShowRemodelWindow" />
+						<metro2:CallMethodButton Content="수리목록"
+												 Padding="10,4"
+												 Margin="2,0,2,4"
+												 MinWidth="70"
+												 MethodName="ShowNdockShipCatalog"/>
+						<metro2:CallMethodButton Content="함대 프리셋"
+												 Padding="10,4"
+												 MinWidth="70"
+												 Margin="2,0,2,4"
+												 MethodName="ShowPresetWindow" />
+						<metro2:CallMethodButton Content="기록열람"
+												 Padding="10,4"
+												 MinWidth="70"
+												 Margin="2,0,2,4"
+												 MethodName="ShowLogViewer"/>
+						<metro2:CallMethodButton Content="사전열람"
+												 Padding="10,4"
+												 MinWidth="70"
+												 Margin="2,0,2,4"
+												 MethodName="ShowDictionary"/>
+						<metro2:CallMethodButton Content="메모장"
+												 Padding="10,4"
+												 Margin="2,0,2,4"
+												 MinWidth="70"
+												 MethodName="ShowNotePad"/>
+					</StackPanel>
+				</ScrollViewer>
+			</Border>
+			<Grid Grid.Column="2" Grid.Row="1">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto" />
 					<RowDefinition Height="Auto" />
 				</Grid.RowDefinitions>
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto" />
-					<ColumnDefinition Width="*" />
+					<ColumnDefinition/>
+					<ColumnDefinition/>
 				</Grid.ColumnDefinitions>
 
-				<Border Grid.Row="0"
-						Grid.Column="0">
-					<StackPanel>
-						<TextBlock Text="データ" />
-
-						<Rectangle Height=".99"
-								   Margin="0,7,0,3"
-								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-
-						<metro2:CallMethodButton Content="艦娘一覧"
-												 Padding="12,8"
-												 Margin="0,5,0,8"
-												 MethodName="ShowShipCatalog" />
-
-						<metro2:CallMethodButton Content="装備一覧"
-												 Padding="12,8"
-												 MethodName="ShowSlotItemCatalog" />
-					</StackPanel>
-				</Border>
-
-				<metro2:CallMethodButton Grid.Row="0"
-										 Grid.Column="1"
-										 Style="{StaticResource JumbButtonStyleKey}"
-										 MethodName="Jump"
-										 MethodParameter="Expeditions">
-					<StackPanel DataContext="{Binding Content.Expeditions}">
-						<TextBlock Text="{Binding Name}" />
-
-						<Rectangle Height=".99"
-								   Margin="0,7,0,3"
-								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-
-						<ItemsControl ItemsSource="{Binding Fleets.Fleets}">
-							<ItemsControl.ItemTemplate>
-								<DataTemplate>
-									<TextBlock x:Name="Expedition"
-											   Style="{DynamicResource DefaultTextStyleKey}"
-											   Margin="0,4,0,0">
-										<Run Text="{Binding Id, Mode=OneWay, StringFormat=/{0}}"
-											 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-										<Run x:Name="Remaining"
-											 Text="{Binding Expedition.Remaining, StringFormat=- {0}, Mode=OneWay}" />
-									</TextBlock>
-									<DataTemplate.Triggers>
-										<DataTrigger Binding="{Binding Id, Mode=OneWay}"
-													 Value="1">
-											<Setter TargetName="Expedition"
-													Property="Visibility"
-													Value="Collapsed" />
-										</DataTrigger>
-										<DataTrigger Binding="{Binding Expedition.IsInExecution}"
-													 Value="False">
-											<Setter TargetName="Remaining"
-													Property="Text"
-													Value="" />
-										</DataTrigger>
-									</DataTemplate.Triggers>
-								</DataTemplate>
-							</ItemsControl.ItemTemplate>
-						</ItemsControl>
-					</StackPanel>
-				</metro2:CallMethodButton>
-
-				<metro2:CallMethodButton Grid.Row="1"
-										 Grid.Column="0"
-										 Grid.ColumnSpan="2"
+				<metro2:CallMethodButton Grid.ColumnSpan="2"
 										 Style="{StaticResource JumbButtonStyleKey}"
 										 MethodName="Jump"
 										 MethodParameter="Quests">
@@ -379,6 +642,11 @@
 											<ColumnDefinition Width="Auto" />
 											<ColumnDefinition Width="*" />
 										</Grid.ColumnDefinitions>
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto "/>
+											<RowDefinition Height="Auto "/>
+										</Grid.RowDefinitions>
+
 										<Rectangle Width="10"
 												   Height="10"
 												   VerticalAlignment="Center">
@@ -391,8 +659,63 @@
 												   Text="{Binding Title, Mode=OneWay}"
 												   Style="{DynamicResource DefaultTextStyleKey}"
 												   Margin="4,0,0,0" />
+
+										<Grid x:Name="QuestProgressBarBox"
+											  Grid.Row="1"
+											  Grid.ColumnSpan="2"
+											  Margin="0,3,0,0"
+											  VerticalAlignment="Center">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="5*" />
+												<ColumnDefinition Width="3*" />
+												<ColumnDefinition Width="2*" />
+											</Grid.ColumnDefinitions>
+											<Grid.RowDefinitions>
+												<RowDefinition Height="*" />
+												<RowDefinition Height="*" />
+											</Grid.RowDefinitions>
+
+											<ProgressBar x:Name="QuestProgressBar"
+														 Grid.ColumnSpan="3"
+														 Grid.RowSpan="2"
+														 VerticalAlignment="Center"
+														 Value="{Binding QuestProgressValue, Mode=OneWay}"
+														 Foreground="#FF39B74E"
+														 BorderThickness="0"
+														 Height="3">
+												<ProgressBar.Style>
+													<Style TargetType="{x:Type ProgressBar}">
+														<Setter Property="Background" Value="#55D7D7E1" />
+														<Setter Property="HorizontalContentAlignment" Value="Left" />
+														<Setter Property="Template">
+															<Setter.Value>
+																<ControlTemplate TargetType="{x:Type ProgressBar}">
+																	<Grid Background="{TemplateBinding Background}">
+																		<Border x:Name="PART_Track">
+																			<Border x:Name="PART_Indicator"
+																					Background="{TemplateBinding Foreground}"
+																					HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+																		</Border>
+																	</Grid>
+																</ControlTemplate>
+															</Setter.Value>
+														</Setter>
+													</Style>
+												</ProgressBar.Style>
+											</ProgressBar>
+
+											<Rectangle Width="1" Fill="{DynamicResource BackgroundBrushKey}" HorizontalAlignment="Right" />
+											<Rectangle Width="1" Fill="{DynamicResource BackgroundBrushKey}" HorizontalAlignment="Right" Grid.Column="1" />
+										</Grid>
 									</Grid>
 									<DataTemplate.Triggers>
+										<DataTrigger Binding="{Binding QuestTrackingVisible}" Value="False">
+											<Setter TargetName="QuestProgressBar" Property="Visibility" Value="Collapsed" />
+										</DataTrigger>
+										<DataTrigger Binding="{Binding QuestProgressValue}" Value="100">
+											<Setter TargetName="QuestProgressBar" Property="Foreground" Value="#FF62B5F5" />
+										</DataTrigger>
+
 										<DataTrigger Binding="{Binding IsUntaken}"
 													 Value="True">
 											<Setter TargetName="Title"
@@ -405,14 +728,13 @@
 						</ItemsControl>
 					</StackPanel>
 				</metro2:CallMethodButton>
-			</Grid>
-
-			<StackPanel Grid.Column="2">
 				<metro2:CallMethodButton Style="{StaticResource JumbButtonStyleKey}"
 										 MethodName="Jump"
-										 MethodParameter="Repairyard">
+										 MethodParameter="Repairyard"
+										 Grid.Row="1"
+										 Grid.Column="0">
 					<StackPanel DataContext="{Binding Content.Shipyard}">
-						<TextBlock Text="入渠ドック" />
+						<TextBlock Text="입거도크" />
 
 						<Rectangle Height=".99"
 								   Margin="0,7,0,3"
@@ -451,12 +773,14 @@
 						</ItemsControl>
 					</StackPanel>
 				</metro2:CallMethodButton>
-
 				<metro2:CallMethodButton Style="{StaticResource JumbButtonStyleKey}"
 										 MethodName="Jump"
-										 MethodParameter="Dockyard">
+										 MethodParameter="Dockyard"
+										 Grid.Row="1"
+										 Grid.Column="1"
+										 >
 					<StackPanel DataContext="{Binding Content.Shipyard}">
-						<TextBlock Text="建造ドック" />
+						<TextBlock Text="건조도크" />
 
 						<Rectangle Height=".99"
 								   Margin="0,7,0,3"
@@ -510,7 +834,7 @@
 						</ItemsControl>
 					</StackPanel>
 				</metro2:CallMethodButton>
-			</StackPanel>
+			</Grid>
 		</Grid>
 	</ScrollViewer>
 </UserControl>

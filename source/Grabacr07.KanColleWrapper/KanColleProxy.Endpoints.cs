@@ -183,6 +183,14 @@ namespace Grabacr07.KanColleWrapper
 		}
 
 		/// <summary>
+		/// エンド ポイント "/kcsapi/api_req_kaisou/lock" からのセッションを配信します。
+		/// </summary>
+		public IObservable<Session> api_req_kaisou_lock
+		{
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_kaisou/lock"); }
+		}
+
+		/// <summary>
 		/// エンド ポイント "/kcsapi/api_req_kousyou/getship" からのセッションを配信します。
 		/// </summary>
 		public IObservable<Session> api_req_kousyou_getship
@@ -276,6 +284,14 @@ namespace Grabacr07.KanColleWrapper
 		public IObservable<Session> api_req_map_start
 		{
 			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_map/start"); }
+		}
+
+		/// <summary>
+		/// エンド ポイント "/kcsapi/api_req_map/next" からのセッションを配信します。
+		/// </summary>
+		public IObservable<Session> api_req_map_next
+		{
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_req_map/next"); }
 		}
 
 		/// <summary>

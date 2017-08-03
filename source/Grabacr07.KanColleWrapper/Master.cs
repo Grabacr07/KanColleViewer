@@ -13,6 +13,8 @@ namespace Grabacr07.KanColleWrapper
 	/// </summary>
 	public class Master
 	{
+		public kcsapi_start2 RawData { get; }
+
 		/// <summary>
 		/// すべての艦娘の定義を取得します。
 		/// </summary>
@@ -62,6 +64,8 @@ namespace Grabacr07.KanColleWrapper
 
 		internal Master(kcsapi_start2 start2)
 		{
+			this.RawData = start2;
+
 			this.ShipTypes = new MasterTable<ShipType>(start2.api_mst_stype.Select(x => new ShipType(x)));
 			this.Ships = new MasterTable<ShipInfo>(start2.api_mst_ship.Select(x => new ShipInfo(x)));
 			this.SlotItemEquipTypes = new MasterTable<SlotItemEquipType>(start2.api_mst_slotitem_equiptype.Select(x => new SlotItemEquipType(x)));

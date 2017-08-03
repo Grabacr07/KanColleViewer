@@ -63,7 +63,7 @@
 			<Rectangle Style="{DynamicResource SeparatorStyleKey}"
 					   Margin="0,0,0,12" />
 
-			<CheckBox Content="待ち受けポートを変更する"
+			<CheckBox Content="대기 포트를 변경"
 					  IsChecked="{Binding Source={x:Static settings:NetworkSettings+LocalProxy.IsEnabled}, Path=Value}" />
 			<StackPanel IsEnabled="{Binding Source={x:Static settings:NetworkSettings+LocalProxy.IsEnabled}, Path=Value}"
 						Margin="20,6,0,6">
@@ -96,12 +96,12 @@
 					<TextBlock Grid.Column="2"
 							   Style="{DynamicResource DetailTextStyleKey}"
 							   Margin="5">
-						<Run Text="(既定値:" />
+						<Run Text="(기본값:" />
 						<Run Text="{Binding Source={x:Static settings:NetworkSettings+LocalProxy.Port}, Path=Default, Mode=OneWay}" />
 						<Run Text=")" />
 					</TextBlock>
 				</Grid>
-				<TextBlock Text="※設定を変更したら [再試行] ボタンを押してください。"
+				<TextBlock Text="※설정을 변경 후 [다시실행] 버튼을 눌러주세요"
 						   Style="{DynamicResource DetailTextStyleKey}"
 						   Margin="0,4" />
 			</StackPanel>
@@ -111,13 +111,13 @@
 				   IsEnabled="{Binding IsEditable}"
 				   Margin="6,0,6,6">
 			<metro2:CallMethodButton DockPanel.Dock="Right"
-									 Content="キャンセル"
+									 Content="취소"
 									 MethodName="Cancel"
 									 MinWidth="110"
 									 Padding="30,6"
 									 Margin="6" />
 			<metro2:CallMethodButton DockPanel.Dock="Right"
-									 Content="再試行"
+									 Content="다시실행"
 									 MethodName="Retry"
 									 MinWidth="110"
 									 Padding="30,6"

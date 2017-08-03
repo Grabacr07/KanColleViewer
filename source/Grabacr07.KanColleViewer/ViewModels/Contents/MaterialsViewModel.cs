@@ -55,32 +55,72 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 		#endregion
 
+		#region SelectedItem3 変更通知プロパティ
+
+		private MaterialViewModel _SelectedItem3;
+
+		public MaterialViewModel SelectedItem3
+		{
+			get { return this._SelectedItem3; }
+			set
+			{
+				if (this._SelectedItem3 != value)
+				{
+					this._SelectedItem3 = value;
+					this.RaisePropertyChanged();
+					KanColleSettings.DisplayMaterial3.Value = value?.Key;
+				}
+			}
+		}
+
+		#endregion
+
+		#region SelectedItem4 変更通知プロパティ
+
+		private MaterialViewModel _SelectedItem4;
+
+		public MaterialViewModel SelectedItem4
+		{
+			get { return this._SelectedItem4; }
+			set
+			{
+				if (this._SelectedItem4 != value)
+				{
+					this._SelectedItem4 = value;
+					this.RaisePropertyChanged();
+					KanColleSettings.DisplayMaterial4.Value = value?.Key;
+				}
+			}
+		}
+
+		#endregion
+
 		public MaterialsViewModel()
 		{
 			this.Model = KanColleClient.Current.Homeport.Materials;
 
-			var fuel = new MaterialViewModel(nameof(Materials.Fuel), "燃料").AddTo(this);
+			var fuel = new MaterialViewModel(nameof(Materials.Fuel), "연료", true).AddTo(this);
 			this.Model.Subscribe(fuel.Key, () => fuel.Value = this.Model.Fuel).AddTo(this);
 
-			var ammunition = new MaterialViewModel(nameof(Materials.Ammunition), "弾薬").AddTo(this);
+			var ammunition = new MaterialViewModel(nameof(Materials.Ammunition), "탄약", true).AddTo(this);
 			this.Model.Subscribe(ammunition.Key, () => ammunition.Value = this.Model.Ammunition).AddTo(this);
 
-			var steel = new MaterialViewModel(nameof(Materials.Steel), "鋼鉄").AddTo(this);
+			var steel = new MaterialViewModel(nameof(Materials.Steel), "강재", true).AddTo(this);
 			this.Model.Subscribe(steel.Key, () => steel.Value = this.Model.Steel).AddTo(this);
 
-			var bauxite = new MaterialViewModel(nameof(Materials.Bauxite), "ボーキサイト").AddTo(this);
+			var bauxite = new MaterialViewModel(nameof(Materials.Bauxite), "보크사이트", true).AddTo(this);
 			this.Model.Subscribe(bauxite.Key, () => bauxite.Value = this.Model.Bauxite).AddTo(this);
 
-			var develop = new MaterialViewModel(nameof(Materials.DevelopmentMaterials), "開発資材").AddTo(this);
+			var develop = new MaterialViewModel(nameof(Materials.DevelopmentMaterials), "개발자재", false).AddTo(this);
 			this.Model.Subscribe(develop.Key, () => develop.Value = this.Model.DevelopmentMaterials).AddTo(this);
 
-			var repair = new MaterialViewModel(nameof(Materials.InstantRepairMaterials), "高速修復材").AddTo(this);
+			var repair = new MaterialViewModel(nameof(Materials.InstantRepairMaterials), "고속수복재", false).AddTo(this);
 			this.Model.Subscribe(repair.Key, () => repair.Value = this.Model.InstantRepairMaterials).AddTo(this);
 
-			var build = new MaterialViewModel(nameof(Materials.InstantBuildMaterials), "高速建造材").AddTo(this);
+			var build = new MaterialViewModel(nameof(Materials.InstantBuildMaterials), "고속건조재", false).AddTo(this);
 			this.Model.Subscribe(build.Key, () => build.Value = this.Model.InstantBuildMaterials).AddTo(this);
 
-			var improvement = new MaterialViewModel(nameof(Materials.ImprovementMaterials), "改修資材").AddTo(this);
+			var improvement = new MaterialViewModel(nameof(Materials.ImprovementMaterials), "개수자재", false).AddTo(this);
 			this.Model.Subscribe(improvement.Key, () => improvement.Value = this.Model.ImprovementMaterials).AddTo(this);
 
 			this.Values = new List<MaterialViewModel>
@@ -97,18 +137,18 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 
 			this._SelectedItem1 = this.Values.FirstOrDefault(x => x.Key == KanColleSettings.DisplayMaterial1) ?? repair;
 			this._SelectedItem2 = this.Values.FirstOrDefault(x => x.Key == KanColleSettings.DisplayMaterial2) ?? build;
+			this._SelectedItem3 = this.Values.FirstOrDefault(x => x.Key == KanColleSettings.DisplayMaterial3) ?? fuel;
+			this._SelectedItem4 = this.Values.FirstOrDefault(x => x.Key == KanColleSettings.DisplayMaterial4) ?? ammunition;
 		}
 
 		public class MaterialViewModel : ViewModel
 		{
 			public string Key { get; }
-
 			public string Display { get; }
+			public bool isMaterial { get; }
 
 			#region Value 変更通知プロパティ
-
 			private int _Value;
-
 			public int Value
 			{
 				get { return this._Value; }
@@ -118,16 +158,19 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 					{
 						this._Value = value;
 						this.RaisePropertyChanged();
+						this.RaisePropertyChanged(nameof(this.IsOvered));
 					}
 				}
 			}
-
 			#endregion
 
-			public MaterialViewModel(string key, string display)
+			public bool IsOvered => !isMaterial || (this.Value >= KanColleClient.Current?.Homeport?.Admiral?.ResourceLimit);
+
+			public MaterialViewModel(string Key, string Display, bool isMaterial)
 			{
-				this.Key = key;
-				this.Display = display;
+				this.Key = Key;
+				this.Display = Display;
+				this.isMaterial = isMaterial;
 			}
 		}
 	}

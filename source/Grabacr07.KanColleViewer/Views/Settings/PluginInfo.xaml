@@ -30,7 +30,7 @@
 		<Border Height="4" />
 
 		<DockPanel>
-			<TextBlock Text="機能:　"
+			<TextBlock Text="기능:　"
 					   Style="{DynamicResource DefaultTextStyleKey}" />
 
 			<metro2:RichTextView Source="{Binding Functions}">
@@ -47,7 +47,7 @@
 																	 MethodTarget="{Binding}" />
 									</i:EventTrigger>
 								</i:Interaction.Triggers>
-								<Run Text="設定" />
+								<Run Text="설정" />
 							</Hyperlink>
 							<Run Text="　" />
 						</Span>
@@ -59,7 +59,7 @@
 						<Span Foreground="{DynamicResource ForegroundBrushKey}"
 							  FontFamily="{DynamicResource DefaultFontFamilyKey}"
 							  FontSize="{DynamicResource DetailFontSizeKey}">
-							<Run Text="通知機能" />
+							<Run Text="알림기능" />
 							<Hyperlink Foreground="{DynamicResource LinkForegroundBrushKey}"
 									   Cursor="Hand">
 								<i:Interaction.Triggers>
@@ -68,7 +68,7 @@
 																	 MethodTarget="{Binding}" />
 									</i:EventTrigger>
 								</i:Interaction.Triggers>
-								<Run Text="(テスト)" />
+								<Run Text="(테스트)" />
 							</Hyperlink>
 							<Run Text="　" />
 						</Span>
@@ -80,7 +80,7 @@
 						<Span Foreground="{DynamicResource ForegroundBrushKey}"
 							  FontFamily="{DynamicResource DefaultFontFamilyKey}"
 							  FontSize="{DynamicResource DetailFontSizeKey}">
-							<Run Text="プラグインからの通知" />
+							<Run Text="플러그인 통지" />
 							<Run Text="　" />
 						</Span>
 					</metro2:RichTextInlinePresenter>
@@ -91,7 +91,7 @@
 						<Span Foreground="{DynamicResource ForegroundBrushKey}"
 							  FontFamily="{DynamicResource DefaultFontFamilyKey}"
 							  FontSize="{DynamicResource DetailFontSizeKey}">
-							<Run Text="ツール表示" />
+							<Run Text="툴 표시" />
 							<Run Text="　" />
 						</Span>
 					</metro2:RichTextInlinePresenter>
@@ -102,7 +102,7 @@
 						<Span Foreground="{DynamicResource ForegroundBrushKey}"
 							  FontFamily="{DynamicResource DefaultFontFamilyKey}"
 							  FontSize="{DynamicResource DetailFontSizeKey}">
-							<Run Text="タスク バー インジケーター" />
+							<Run Text="작업표시줄 인디케이터" />
 							<Run Text="　" />
 						</Span>
 					</metro2:RichTextInlinePresenter>

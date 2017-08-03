@@ -16,7 +16,7 @@
 			 xmlns:svm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Settings"
 			 mc:Ignorable="d"
 			 d:DesignWidth="800"
-			 d:DesignHeight="350"
+			 d:DesignHeight="500"
 			 d:DataContext="{d:DesignInstance vm:StartContentViewModel}"
 			 Background="{DynamicResource ThemeBrushKey}">
 	<UserControl.Resources>
@@ -196,12 +196,41 @@
 							</metro2:HyperlinkEx>
 							<LineBreak />
 							<Run Text="Icon design:" />
-							<metro2:HyperlinkEx Uri="https://twitter.com/Nrtwd/">
+							<metro2:HyperlinkEx Uri="https://twitter.com/Nrtwd">
 								<Run Text="@Nrtwd" />
 							</metro2:HyperlinkEx>
 						</TextBlock>
-
-						<Rectangle Height=".99"
+						<TextBlock FontFamily="Segoe UI">
+								<Run Text="Developer" />
+								<Run Text="(Korean)"
+									 FontSize="10" />
+								<Run Text=":" />
+								<metro2:HyperlinkEx Uri="http://kaster.egloos.com">
+									<Run Text="Kaster" />
+								</metro2:HyperlinkEx>
+								<metro2:HyperlinkEx Uri="http://swaytwig.com">
+									<Run Text="WolfgangKurz" />
+								</metro2:HyperlinkEx>
+								<metro2:HyperlinkEx Uri="http://kcvkr.tistory.com">
+									<Run Text="Cirno V" />
+								</metro2:HyperlinkEx>
+                                    <metro2:HyperlinkEx Uri="https://github.com/DaeWha">
+									<Run Text="DaeWha" />
+								</metro2:HyperlinkEx>
+							<metro2:HyperlinkEx Uri="https://github.com/FreyYa">
+								<Run Text="FreyYa" />
+							</metro2:HyperlinkEx>
+						</TextBlock>
+						<TextBlock FontFamily="Segoe UI">
+								<Run Text="Localization" />
+								<Run Text="(English)"
+									 FontSize="10" />
+								<Run Text=":" />
+								<metro2:HyperlinkEx Uri="https://twitter.com/southrop113">
+									<Run Text="@southrop113" />
+								</metro2:HyperlinkEx>
+						</TextBlock>
+						<Rectangle Height="1"
 								   Margin="0,12"
 								   Style="{DynamicResource SeparatorRectangleStyleKey}" />
 
@@ -243,15 +272,15 @@
 						<Paragraph>
 							<Run Foreground="White"
 								 FontSize="20"
-								 Text="ようこそ" />
+								 Text="환영합니다" />
 						</Paragraph>
-						<Paragraph Language="ja-jp">
-							<Run Text="「提督業も忙しい！」は、艦これを遊びやすくするためのツールです。" />
+						<Paragraph Language="ko-KR">
+							<Run Text="「제독업무도 바빠！」는 칸코레를 편하게 즐기기 위한 툴입니다." />
 							<LineBreak />
-							<Run Text="艦これは、内蔵された Internet Explorer (IE) 上で動作します。艦これのサーバーに対し一切の負荷をかけないように設計・開発しており、通信内容の変更やサーバーに対する情報の送信、Flash 抽出、マクロ・チートの類は一切行っていません。" />
+							<Run Text="칸코레는 내장되어있는 Internet Explorer (IE)로 작동합니다. 칸코레서버에 어떠한 부담도 주지않도록 설계,개발하고, 통신내용의 변경 및 서버정보의 전송, Flash추출, 매크로,치트등의 기능은 일절 포함되어 있지 않습니다." />
 						</Paragraph>
-						<Paragraph Language="ja-jp">
-							<Run Text="ゲームが正しく表示されない場合や、スクリプトエラーが頻発する場合は、IE のキャッシュを削除してみてください。改善されない場合は、IE の設定や、通常の IE 上で Flash が表示できるかどうか等をご確認ください。" />
+						<Paragraph Language="ko-KR">
+							<Run Text="게임이 제대로 표시되지 않거나 스크립트 오류가 반복되면 IE의 캐시를 삭제해보세요. 개선되지않으면 IE의 설정이나 'IE에서 Flash사용이 가능한가' 등의 것들을 확인하주시기 바랍니다." />
 						</Paragraph>
 						<Paragraph>
 							<InlineUIContainer>
@@ -271,8 +300,8 @@
 										   SnapsToDevicePixels="True" />
 							</InlineUIContainer>
 						</Paragraph>
-						<Paragraph Language="ja-jp">
-							<Run Text="ツールは不定期に更新されています。適宜、更新の確認をお願いします。" />
+						<Paragraph Language="ko-kr">
+							<Run Text="이 툴은 비정기적으로 업데이트 되고있습니다. 자동업데이트를 제공하지만 업데이트 도중 문제가 발생하면 직접 업데이트를 수행해주시기 바랍니다." />
 							<LineBreak />
 							<LineBreak />
 							<Run Text="Project home:" />
@@ -284,6 +313,18 @@
 							<metro2:HyperlinkEx Uri="https://github.com/Grabacr07/KanColleViewer">
 								<Run Text="https://github.com/Grabacr07/KanColleViewer" />
 							</metro2:HyperlinkEx>
+							<LineBreak />
+							<LineBreak />
+							<Run Text="Korean Source code:" />
+							<metro2:HyperlinkEx Uri="https://github.com/CirnoV/KanColleViewer">
+								<Run Text="/CirnoV/KanColleViewer" />
+							</metro2:HyperlinkEx>
+							<LineBreak />
+							<Run Text="Korean Version Release Page:" />
+							<metro2:HyperlinkEx Uri="http://kcvkr.tistory.com/category/%EC%A0%9C%EB%8F%85%EC%97%85%EB%AC%B4%EB%8F%84%20%EB%B0%94%EB%B9%A0!/%EB%A6%B4%EB%A6%AC%EC%A6%88">
+								<Run Text="http://KCVkr.tistory.com" />
+							</metro2:HyperlinkEx>
+							<LineBreak />
 						</Paragraph>
 					</FlowDocument>
 				</FlowDocumentScrollViewer>
@@ -331,7 +372,7 @@
 
 					<TabItem>
 						<TabItem.Header>
-							<TextBlock Text="通知設定"
+							<TextBlock Text="알림설정"
 									   Style="{DynamicResource TabHeaderTextStyleKey}" />
 						</TabItem.Header>
 						<settings:Notification Margin="10,9" />
@@ -348,7 +389,7 @@
 
 					<TabItem>
 						<TabItem.Header>
-							<TextBlock Text="プラグイン"
+							<TextBlock Text="플러그인"
 									   Style="{StaticResource TabHeaderTextStyleKey}" />
 						</TabItem.Header>
 						<settings:Plugins Margin="10,9" />

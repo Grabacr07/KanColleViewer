@@ -74,12 +74,14 @@ namespace Grabacr07.KanColleWrapper.Models
 					h => new EventHandler(h),
 					h => source.State.Updated += h,
 					h => source.State.Updated -= h,
-					(sender, args) => this.State.Update()));
+					(sender, args) => this.State.Update()
+				));
 				this.CompositeDisposable.Add(new WeakEventListener<EventHandler, EventArgs>(
 					h => new EventHandler(h),
 					h => source.State.Calculated += h,
 					h => source.State.Calculated -= h,
-					(sender, args) => this.State.Calculate()));
+					(sender, args) => this.State.Calculate()
+				));
 			}
 
 			this.UpdateName();

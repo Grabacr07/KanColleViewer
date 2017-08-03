@@ -66,6 +66,21 @@ namespace Grabacr07.KanColleWrapper.Models
 		public int SortieLoses => this.RawData.api_st_lose;
 
 		/// <summary>
+		/// 자원 자연회복 한계 수치
+		/// </summary>
+		public int ResourceLimit => (this.Level + 3) * 250;
+
+		/// <summary>
+		/// 갑훈장 갯수
+		/// </summary>
+		public int Medals => this.RawData.api_medals;
+
+		/// <summary>
+		/// 가구코인 갯수
+		/// </summary>
+		public int FurnitureCoins => this.RawData.api_fcoin;
+
+		/// <summary>
 		/// 出撃時の勝率を取得します。
 		/// </summary>
 		public double SortieWinningRate
@@ -86,7 +101,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 司令部が保有できる装備アイテムの最大値を取得します。
 		/// </summary>
-		public int MaxSlotItemCount => this.RawData.api_max_slotitem;
+		public int MaxSlotItemCount => this.RawData.api_max_slotitem + 3;
 
 
 		internal Admiral(kcsapi_basic rawData)

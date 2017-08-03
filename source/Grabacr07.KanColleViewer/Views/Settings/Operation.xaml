@@ -8,7 +8,7 @@
 			 xmlns:vms="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Settings"
 			 mc:Ignorable="d"
 			 d:DesignWidth="500"
-			 d:DesignHeight="500"
+			 d:DesignHeight="800"
 			 d:DataContext="{d:DesignInstance vms:SettingsViewModel}">
 	<UserControl.Resources>
 		<ResourceDictionary>
@@ -18,94 +18,158 @@
 		</ResourceDictionary>
 	</UserControl.Resources>
 
-	<StackPanel>
-		<TextBlock Text="艦隊ステータス"
-				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+	<ScrollViewer PanningMode="Both"
+				  VerticalScrollBarVisibility="Auto"
+				  Padding="10">
+		<StackPanel>
+			<TextBlock Text="함대 상태"
+					   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
-		<StackPanel Margin="20,0,0,0">
-			<TextBlock Text="艦隊内の全艦のコンディションが次の数値以上になったとき、出撃可能と判断する" />
+			<StackPanel Margin="20,0,0,0">
+				<TextBlock Text="칸무스가 출격 가능하다고 판단되는 컨디션으로 설정" />
 
-			<Border Height="4" />
-			<Grid>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto" />
-					<ColumnDefinition Width="10" />
-					<ColumnDefinition />
-				</Grid.ColumnDefinitions>
+				<Border Height="4" />
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="10" />
+						<ColumnDefinition />
+					</Grid.ColumnDefinitions>
 
-				<metro:PromptTextBox Prompt="例: 40"
-									 Width="60">
-					<metro:PromptTextBox.Text>
-						<Binding Source="{x:Static ms:KanColleSettings.ReSortieCondition}"
-								 Path="Value"
-								 UpdateSourceTrigger="PropertyChanged">
-							<Binding.ValidationRules>
-								<metro:Int32Rule Min="0"
-												 Max="49" />
-							</Binding.ValidationRules>
-						</Binding>
-					</metro:PromptTextBox.Text>
-				</metro:PromptTextBox>
-				<TextBlock Grid.Column="2"
-						   Style="{DynamicResource DetailTextStyleKey}">
-					<Run Text="※通常は、間宮アイコンが消灯する 40 か、自然回復上限の 49 に設定します。" />
-				</TextBlock>
-			</Grid>
+					<metro:PromptTextBox Prompt="예: 40"
+										 Width="60">
+						<metro:PromptTextBox.Text>
+							<Binding Source="{x:Static ms:KanColleSettings.ReSortieCondition}"
+									 Path="Value"
+									 UpdateSourceTrigger="PropertyChanged">
+								<Binding.ValidationRules>
+									<metro:Int32Rule Min="0"
+													 Max="49" />
+								</Binding.ValidationRules>
+							</Binding>
+						</metro:PromptTextBox.Text>
+					</metro:PromptTextBox>
+					<TextBlock Grid.Column="2"
+							   Style="{DynamicResource DetailTextStyleKey}">
+						<Run Text="※보통 마미야 점등이 꺼지는 40이나 최대 자연회복치인 49로 설정합니다." />
+					</TextBlock>
+				</Grid>
 
-			<Border Height="12" />
-			<CheckBox Content="旗艦に工作艦が編成されているときは出撃可能と判断しない"
-					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.CheckFlagshipIsNotRepairShip}, Path=Value}" />
-		</StackPanel>
+				<Border Height="12" />
+				<CheckBox Content="기함으로 공작함이 편성되어있을때 출격가능으로 판정하지않도록 설정"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.CheckFlagshipIsNotRepairShip}, Path=Value}" />
 
-		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
+				<Border Height="12" />
+				<CheckBox Content="아카시 수리 타이머를 사용"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.UseRepairTimer}, Path=Value}" />
 
-		<TextBlock Text="索敵値計算"
-				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
-
-		<StackPanel Margin="20,0,0,0">
-			<TextBlock Text="艦隊の索敵値の算出に使用する計算式は、以下を使用する" />
-
-			<metro:PromptComboBox ItemsSource="{Binding ViewRangeSettingsCollection}"
-								  Margin="0,5"
-								  DisplayMemberPath="Name"
-								  SelectedItem="{Binding SelectedViewRangeCalcType}"
-								  MinWidth="100"
-								  Prompt=""
-								  HorizontalAlignment="Left"/>
-
-			<TextBlock Text="{Binding SelectedViewRangeCalcType.Description}"
-					   Style="{DynamicResource DetailTextStyleKey}"/>
-
-
-			<TextBlock Text="連合艦隊時、以下の艦隊を索敵値計算の対象として使用する"
-					   Margin="0,12,0,5"
-					   Visibility="{Binding SelectedViewRangeCalcType.HasCombinedSettings, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-			
-			<StackPanel Orientation="Horizontal"
-						Visibility="{Binding SelectedViewRangeCalcType.HasCombinedSettings, Converter={StaticResource BooleanToVisibilityConverter}}">
-				<CheckBox Content="第1艦隊"
-						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.IsViewRangeCalcIncludeFirstFleet}, Path=Value}"
-						  Margin="0,0,20,0"/>
-				<CheckBox Content="第2艦隊"
-						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.IsViewRangeCalcIncludeSecondFleet}, Path=Value}"/>
+				<Border Height="12" />
+				<CheckBox Content="함대 보급량 미리보기를 사용"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.UseSupplyPreview}, Path=Value}" />
 			</StackPanel>
 
+			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
+
+			<TextBlock Text="함대 표시"
+					   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+
+			<StackPanel Margin="20,0,0,0">
+				<Border Height="12" />
+				<CheckBox Content="연합함대를 한 그룹으로 표시"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.MergeCombinedFleet}, Path=Value}" />
+
+				<Border Height="12" />
+				<CheckBox Content="함재기 슬롯 수 대신 격추 수를 표시"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.ShowLostAirplane}, Path=Value}" />
+
+				<Border Height="12" />
+				<CheckBox Content="함재기를 운용 가능한 경우 항상 슬롯 수를 표시"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.ShowAirplaneAlways}, Path=Value}" />
+			</StackPanel>
+
+			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
+
+			<TextBlock Text="색적값계산"
+					   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+
+			<StackPanel Margin="20,0,0,0">
+				<TextBlock Text="함대의 색적값 계산에 이하의 계산식을 사용" />
+
+				<metro:PromptComboBox ItemsSource="{Binding ViewRangeSettingsCollection}"
+									  Margin="0,5"
+									  DisplayMemberPath="Name"
+									  SelectedItem="{Binding SelectedViewRangeCalcType}"
+									  MinWidth="100"
+									  Prompt=""
+									  HorizontalAlignment="Left"/>
+
+				<TextBlock Text="{Binding SelectedViewRangeCalcType.Description}"
+						   Style="{DynamicResource DetailTextStyleKey}"/>
+
+
+				<TextBlock Text="연합 함대시 해당 함대를 색적 값 계산 대상으로 사용"
+						   Margin="0,12,0,5"
+						   Visibility="{Binding SelectedViewRangeCalcType.HasCombinedSettings, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+				<StackPanel Orientation="Horizontal"
+							Visibility="{Binding SelectedViewRangeCalcType.HasCombinedSettings, Converter={StaticResource BooleanToVisibilityConverter}}">
+					<CheckBox Content="제1함대"
+							  IsChecked="{Binding Source={x:Static ms:KanColleSettings.IsViewRangeCalcIncludeFirstFleet}, Path=Value}"
+							  Margin="0,0,20,0"/>
+					<CheckBox Content="제2함대"
+							  IsChecked="{Binding Source={x:Static ms:KanColleSettings.IsViewRangeCalcIncludeSecondFleet}, Path=Value}"/>
+				</StackPanel>
+
+			</StackPanel>
+
+			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
+
+			<TextBlock Text="함대자동선택"
+					   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+			<StackPanel Margin="20,0,0,0">
+				<CheckBox Content="함대가 출격했을때 그 함대를 자동으로 선택"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.AutoFleetSelectWhenSortie}, Path=Value}" />
+
+				<Border Height="8" />
+				<CheckBox Content="함대의 편성이 변경되었을때 그 함대를 자동으로 선택"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.AutoFleetSelectWhenShipsChanged}, Path=Value}" />
+			</StackPanel>
+
+			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
+
+			<TextBlock Text="원정"
+					   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+			<StackPanel Margin="20,0,0,0">
+				<CheckBox Content="원정의 예상 자원량을 표시"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.ExpeditionExpectResult}, Path=Value}" />
+
+				<Border Height="8" />
+				<CheckBox Content="함대의 피로도를 표시"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.ExpeditionConditions}, Path=Value}" />
+
+				<Border Height="8" />
+				<CheckBox Content="완료된 원정 갯수를 탭에 뱃지로 표현"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.ShowExpeditionBadge}, Path=Value}" />
+			</StackPanel>
+
+			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
+
+			<TextBlock Text="임무"
+					   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
+			<StackPanel Margin="20,0,0,0">
+				<CheckBox Content="임무 진행도 추적을 사용"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.UseQuestTracker}, Path=Value}" />
+
+				<Border Height="8" />
+				<CheckBox Content="완료된 임무 갯수를 탭에 뱃지로 표현"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.ShowQuestBadge}, Path=Value}" />
+
+				<Border Height="8" />
+				<CheckBox Content="전체 탭만이 아닌 모든 탭에서 임무를 갱신"
+						  IsChecked="{Binding Source={x:Static ms:KanColleSettings.QuestOnAllTabs}, Path=Value}" />
+			</StackPanel>
+
+			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 		</StackPanel>
-
-		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
-
-		<TextBlock Text="艦隊自動選択"
-				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
-
-		<StackPanel Margin="20,0,0,0">
-			<CheckBox Content="艦隊が出撃したとき、その艦隊を自動的に選択する "
-					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.AutoFleetSelectWhenSortie}, Path=Value}" />
-
-			<Border Height="8" />
-			<CheckBox Content="艦隊の編成を変更したとき、その艦隊を自動的に選択する"
-					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.AutoFleetSelectWhenShipsChanged}, Path=Value}" />
-		</StackPanel>
-
-		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
-	</StackPanel>
+	</ScrollViewer>
 </UserControl>

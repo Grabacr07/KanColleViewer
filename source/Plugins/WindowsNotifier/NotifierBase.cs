@@ -8,7 +8,7 @@ using Grabacr07.KanColleViewer.Composition;
 namespace Grabacr07.KanColleViewer.Plugins
 {
 	[InheritedExport(typeof(INotifier))]
-	[ExportMetadata("Guid", "6EDE38C8-412D-4A73-8FE3-A9D20EB9F0D2")]
+	[ExportMetadata("Guid", "65E061E7-8A82-4CC6-835B-BC7E7DC233D2")]
 	public abstract class NotifierBase : INotifier, IDisposable
 	{
 		public bool Initialized { get; private set; }

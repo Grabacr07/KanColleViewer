@@ -1,18 +1,18 @@
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 
-[assembly: AssemblyTitle("提督業も忙しい！")]
-[assembly: AssemblyDescription("提督業も忙しい！")]
+[assembly: AssemblyTitle("제독업무도 바빠！")]
+[assembly: AssemblyDescription("제독업무도 바빠！")]
 [assembly: AssemblyCompany("grabacr.net")]
 [assembly: AssemblyProduct("KanColleViewer")]
 [assembly: AssemblyCopyright("Copyright © 2013 Grabacr07")]
 
 [assembly: ComVisible(false)]
-[assembly: Guid("101B49A6-7E7B-422D-95FF-500F9EF483A8")]
+[assembly: Guid("840DA151-B153-41CE-8EC6-5D8270DF7CFA")]
 
 [assembly: ThemeInfo(
 	ResourceDictionaryLocation.None,
 	ResourceDictionaryLocation.SourceAssembly)]
 
-[assembly: AssemblyVersion("4.2.10.0")]
+[assembly: AssemblyVersion("4.2.10.23")]

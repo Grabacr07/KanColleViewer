@@ -7,6 +7,7 @@
 				   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 				   xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 				   xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+				   xmlns:metro2="http://schemes.grabacr.net/winfx/2015/personal/controls"
 				   xmlns:mtti="http://schemes.grabacr.net/winfx/2015/personal/interactivity"
 				   xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
 				   xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
@@ -19,6 +20,7 @@
 				   xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 				   xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
 				   xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Models.Settings"
+				   xmlns:ms="clr-namespace:Grabacr07.KanColleViewer.Models.Settings"
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:KanColleWindowViewModel}"
 				   Title="{Binding Title}"
@@ -35,13 +37,15 @@
 				   TextOptions.TextFormattingMode="Display"
 				   UseLayoutRounding="True">
 
-	<i:Interaction.Behaviors>
-		<livet:WindowCloseCancelBehavior CloseCanceledCallbackMethodTarget="{Binding}"
+    <i:Interaction.Behaviors>
+        <livet:WindowCloseCancelBehavior CloseCanceledCallbackMethodTarget="{Binding}"
 										 CloseCanceledCallbackMethodName="CloseCanceledCallback"
 										 CanClose="{Binding CanClose}" />
-	</i:Interaction.Behaviors>
-
-	<i:Interaction.Triggers>
+    </i:Interaction.Behaviors>
+    <Window.InputBindings>
+        <KeyBinding Key="F5" Command="{Binding RefreshNavigator}" />
+    </Window.InputBindings>
+    <i:Interaction.Triggers>
 		<i:EventTrigger EventName="ContentRendered">
 			<livet:LivetCallMethodAction MethodTarget="{Binding}"
 										 MethodName="Initialize" />
@@ -77,6 +81,7 @@
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
 			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
@@ -98,22 +103,197 @@
 						HorizontalAlignment="Right"
 						VerticalAlignment="Top"
 						WindowChrome.IsHitTestVisibleInChrome="True">
+
+				<metro2:CallMethodButton Margin="0,0,8,0"
+										 Height="26"
+										 ToolTip="자원 기록 그래프를 엽니다"
+										 MethodName="ResourceLog"
+										 Background="Transparent"
+										 BorderThickness="0">
+					<controls:GraphButton/>
+				</metro2:CallMethodButton>
+
+				<metro2:CallMethodButton Margin="0,0,8,0"
+										 Height="26"
+										 ToolTip="새로고침을 합니다"
+										 MethodName="Refresh"
+										 Background="Transparent"
+										 BorderThickness="0">
+					<controls:RefreshButton/>
+				</metro2:CallMethodButton>
+
 				<controls:ZoomFactorSelector ZoomFactor="{Binding ZoomFactor}"
 											 ToolTip="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.ZoomFactorSelector_Tooltip}"
-											 Margin="4,0" />
+											 Margin="0,0,8,0" />
+
 				<metro:CaptionButton IsChecked="{Binding Settings.TopMost.Value, Mode=TwoWay}"
 									 ToolTip="{Binding Resources.Settings_Window_TopMost, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 Style="{DynamicResource PinButtonStyleKey}" />
 				<metro:SystemButtons />
 			</StackPanel>
+
 			<TextBlock Text="{Binding Title}"
 					   Style="{DynamicResource CaptionTextStyleKey}"
 					   Margin="2,0,8,0" />
+
+			<ContentControl Content="{Binding Content}"
+							Margin="2,0,0,0">
+				<ContentControl.Resources>
+					<DataTemplate DataType="{x:Type viewModels:StartContentViewModel}">
+						<TextBlock />
+					</DataTemplate>
+
+					<DataTemplate DataType="{x:Type viewModels:InformationViewModel}">
+						<ItemsControl ItemsSource="{Binding Fleets.Fleets, Mode=OneWay}">
+							<ItemsControl.ItemsPanel>
+								<ItemsPanelTemplate>
+									<Grid Margin="10,4,10,0">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="0" /> <!-- there is no 0 index -->
+											<ColumnDefinition Width="0" /> <!-- 1 is not expeditionable -->
+											<ColumnDefinition Width="*" MaxWidth="120" />
+											<ColumnDefinition Width="*" MaxWidth="120" />
+											<ColumnDefinition Width="*" MaxWidth="120" />
+										</Grid.ColumnDefinitions>
+									</Grid>
+								</ItemsPanelTemplate>
+							</ItemsControl.ItemsPanel>
+							<ItemsControl.ItemContainerStyle>
+								<Style TargetType="{x:Type ContentPresenter}">
+									<Setter Property="Grid.Column" Value="{Binding Id}"/>
+
+									<Style.Triggers>
+										<DataTrigger Binding="{Binding Id, Mode=OneWay}" Value="1">
+											<Setter Property="Visibility" Value="Collapsed" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</ItemsControl.ItemContainerStyle>
+
+							<ItemsControl.ItemTemplate>
+								<DataTemplate>
+									<Grid Height="18"
+										  VerticalAlignment="Center"
+										  Background="#55D7D7E1"
+										  Margin="0,0,8,0">
+										<ProgressBar Height="18"
+													 Minimum="{Binding Expedition.Progress.Minimum, Mode=OneWay}"
+													 Maximum="{Binding Expedition.Progress.Maximum, Mode=OneWay}"
+													 Value="{Binding Expedition.Progress.Current, Mode=OneWay}"
+													 BorderThickness="0">
+											<ProgressBar.Style>
+												<Style TargetType="{x:Type ProgressBar}">
+													<Setter Property="Background" Value="Transparent" />
+													<Setter Property="HorizontalContentAlignment" Value="Left" />
+													<Setter Property="Template">
+														<Setter.Value>
+															<ControlTemplate TargetType="{x:Type ProgressBar}">
+																<Grid Background="{TemplateBinding Background}">
+																	<Border x:Name="PART_Track">
+																		<Border x:Name="PART_Indicator"
+																				Background="{TemplateBinding Foreground}"
+																				HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+																	</Border>
+																</Grid>
+															</ControlTemplate>
+														</Setter.Value>
+													</Setter>
+													<Setter Property="Foreground" Value="#FFCC3D3D" />
+
+													<Style.Triggers>
+														<DataTrigger Binding="{Binding IsPossible, Mode=OneWay}" Value="Possible">
+															<Setter Property="Foreground" Value="#FF5887AB"/>
+														</DataTrigger>
+														<DataTrigger Binding="{Binding Expedition.IsInExecution, Mode=OneWay}" Value="False">
+															<Setter Property="Visibility" Value="Hidden" />
+														</DataTrigger>
+													</Style.Triggers>
+												</Style>
+											</ProgressBar.Style>
+										</ProgressBar>
+										<ContentControl VerticalAlignment="Center"
+														HorizontalAlignment="Center">
+											<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+													   Foreground="White">
+												<Run Text="{Binding Expedition.Mission.Id, Mode=OneWay, StringFormat={}[{0}]}" />
+												<Run Text="{Binding Expedition.Remaining, Mode=OneWay}" />
+											</TextBlock>
+												
+											<ContentControl.Style>
+												<Style TargetType="{x:Type ContentControl}">
+													<Style.Triggers>
+														<DataTrigger Binding="{Binding Expedition.Returned, Mode=OneWay}" Value="True">
+															<Setter Property="Template">
+																<Setter.Value>
+																	<ControlTemplate TargetType="{x:Type ContentControl}">
+																		<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+																				   Foreground="White"
+																				   Text="원정 종료" />
+																	</ControlTemplate>
+																</Setter.Value>
+															</Setter>
+														</DataTrigger>
+														<DataTrigger Binding="{Binding Expedition.IsInExecution, Mode=OneWay}" Value="False">
+															<Setter Property="Template">
+																<Setter.Value>
+																	<ControlTemplate TargetType="{x:Type ContentControl}">
+																		<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+																				   Foreground="White"
+																				   Text="원정중이 아님" />
+																	</ControlTemplate>
+																</Setter.Value>
+															</Setter>
+														</DataTrigger>
+													</Style.Triggers>
+												</Style>
+											</ContentControl.Style>
+										</ContentControl>
+									</Grid>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+
+							<ItemsControl.Style>
+								<Style TargetType="{x:Type ItemsControl}">
+									<Style.Triggers>
+										<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.AdmiralExpeditionBars}, Path=Value}" Value="False">
+											<Setter Property="Visibility" Value="Collapsed" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</ItemsControl.Style>
+						</ItemsControl>
+					</DataTemplate>
+				</ContentControl.Resources>
+			</ContentControl>
 		</DockPanel>
 		<!-- #endregion -->
 
 
-		<DockPanel Grid.Row="1">
+
+		<DockPanel Grid.Row="1"
+				   x:Name="TopToolbarArea"
+				   x:FieldModifier="private"
+				   Visibility="{Binding TopView}">
+			<!--MaxWidth="{Binding ToolAreaMaxWidth}"-->
+
+			<views:KanColleWindowButtons DockPanel.Dock="Right"
+										 Margin="8,4,4,4" />
+			<ContentControl Content="{Binding Content}">
+				<ContentControl.Resources>
+					<DataTemplate DataType="{x:Type viewModels:StartContentViewModel}">
+						<views:BrowserNavigator DataContext="{Binding Navigator}"
+														Margin="6,-5,6,10"
+														VerticalAlignment="Top" />
+					</DataTemplate>
+					<DataTemplate DataType="{x:Type viewModels:InformationViewModel}">
+						<DockPanel>
+							<contents:Homeport Margin="0,8" />
+						</DockPanel>
+					</DataTemplate>
+				</ContentControl.Resources>
+			</ContentControl>
+		</DockPanel>
+		<DockPanel Grid.Row="2">
 			<DockPanel DockPanel.Dock="{Binding BrowserDock}">
 				<controls:KanColleHost x:Name="kanColleHost"
 									   x:FieldModifier="private"
@@ -140,11 +320,12 @@
 						</i:Interaction.Triggers>
 					</WebBrowser>
 				</controls:KanColleHost>
+				<DockPanel x:Name="BottomToolbarArea"
+						   DockPanel.Dock="Bottom"
+				   x:FieldModifier="private"
+				   Visibility="{Binding BottomView}">
+					<!--MaxWidth="{Binding ToolAreaMaxWidth}"-->
 
-				<DockPanel x:Name="toolbarArea"
-						   x:FieldModifier="private"
-						   DockPanel.Dock="Top"
-						   MaxWidth="{Binding ToolAreaMaxWidth}">
 					<views:KanColleWindowButtons DockPanel.Dock="Right"
 												 Margin="8,4,4,4" />
 					<ContentControl Content="{Binding Content}">
@@ -180,11 +361,10 @@
 				</ContentControl.Resources>
 			</ContentControl>
 		</DockPanel>
-
 		<!-- region Status area -->
 		<DockPanel x:Name="statusBar"
 				   x:FieldModifier="private"
-				   Grid.Row="2"
+				   Grid.Row="3"
 				   Height="{DynamicResource StatusbarHeight}"
 				   Background="{DynamicResource AccentBrushKey}"
 				   Visibility="{Binding IsMainWindow, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -195,7 +375,7 @@
 		<!-- endregion -->
 
 		<metro:ResizeGrip Grid.Row="1"
-						  Grid.RowSpan="2"
+						  Grid.RowSpan="3"
 						  x:Name="resizeGrip"
 						  x:FieldModifier="private"
 						  HorizontalAlignment="Right"

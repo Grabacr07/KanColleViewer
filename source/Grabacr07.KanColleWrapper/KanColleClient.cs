@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Grabacr07.KanColleWrapper.Models.Raw;
+using Grabacr07.KanColleWrapper.Models;
 
 namespace Grabacr07.KanColleWrapper
 {
@@ -31,6 +32,31 @@ namespace Grabacr07.KanColleWrapper
 		/// 母港の情報を取得します。
 		/// </summary>
 		public Homeport Homeport { get; private set; }
+
+		/// <summary>
+		/// 번역
+		/// </summary>
+		public Translations Translations { get; private set; }
+
+		/// <summary>
+		/// 번역파일 및 기타 업데이트
+		/// </summary>
+		public Updater Updater { get; private set; }
+
+		/// <summary>
+		/// 자동번역기
+		/// </summary>
+		public WebTranslator WebTranslator { get; private set; }
+
+		/// <summary>
+		/// 기록
+		/// </summary>
+		public Logger Logger { get; private set; }
+
+		/// <summary>
+		/// 자원 기록
+		/// </summary>
+		public ResourceLogManager ResourceLogger { get; private set; }
 
 		#region IsStarted 変更通知プロパティ
 
@@ -95,16 +121,21 @@ namespace Grabacr07.KanColleWrapper
 
 		public void Initialieze()
 		{
+			this.Translations = new Translations();
+			this.WebTranslator = new WebTranslator();
+			this.Updater = new Updater();
+
 			var proxy = this.Proxy ?? (this.Proxy = new KanColleProxy());
 
 			var start2Source = proxy.api_start2.TryParse<kcsapi_start2>();
 			var requireInfoSource = proxy.api_get_member_require_info.TryParse<kcsapi_require_info>();
-			var firstTime = start2Source
-				.CombineLatest(requireInfoSource, (start2, requireInfo) => new { start2, requireInfo, })
-				.FirstAsync();
 
 			// Homeport の初期化と require_info の適用に Master のインスタンスが必要なため、初回のみ足並み揃えて実行
 			// 2 回目以降は受信したタイミングでそれぞれ更新すればよい
+
+			var firstTime = start2Source
+				.CombineLatest(requireInfoSource, (start2, requireInfo) => new { start2, requireInfo })
+				.FirstAsync();
 
 			firstTime.Subscribe(x =>
 			{
@@ -121,13 +152,26 @@ namespace Grabacr07.KanColleWrapper
 			requireInfoSource
 				.SkipUntil(firstTime)
 				.Subscribe(x => this.SetRequireInfo(x.Data));
+
+			this.Logger = new Logger(proxy);
+			this.ResourceLogger = new ResourceLogManager(this);
 		}
 
 		private void SetRequireInfo(kcsapi_require_info data)
 		{
-			this.Homeport.UpdateAdmiral(data.api_basic);
-			this.Homeport.Itemyard.Update(data.api_slot_item);
-			this.Homeport.Dockyard.Update(data.api_kdock);
+			if (this.Homeport == null) return;
+
+			if (data.api_basic != null)
+				this.Homeport.UpdateAdmiral(data.api_basic);
+
+			if (data.api_slot_item != null)
+				this.Homeport.Itemyard.Update(data.api_slot_item);
+
+			if (data.api_kdock != null)
+				this.Homeport.Dockyard.Update(data.api_kdock);
+
+			if (data.api_useitem != null)
+				this.Homeport.Itemyard.Update(data.api_useitem);
 		}
 	}
 }

@@ -15,6 +15,12 @@ using Grabacr07.KanColleViewer.Views.Controls;
 using Livet.Messaging;
 using MetroTrilithon.Mvvm;
 using MetroTrilithon.UI.Controls;
+using System.Windows.Input;
+using Grabacr07.KanColleWrapper;
+using System.Reactive.Linq;
+
+using Grabacr07.KanColleViewer.Views.Catalogs;
+using Grabacr07.KanColleViewer.ViewModels.Catalogs;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {
@@ -112,6 +118,16 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		#endregion
 
+		#region RefreshNavigator
+
+		private ICommand _RefreshNavigator;
+		public ICommand RefreshNavigator
+		{
+			get { return _RefreshNavigator; }
+		}
+
+		#endregion
+
 		public KanColleWindowViewModel(bool isMainWindow) : base(isMainWindow)
 		{
 			this.Settings = SettingsHost.Instance<KanColleWindowSettings>();
@@ -129,10 +145,45 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 			GeneralSettings.BrowserZoomFactor.Subscribe(x => this.ZoomFactor.Current = x).AddTo(this);
 
+			_RefreshNavigator = new RelayCommand(Navigator.ReNavigate);
+
 			this.taskbarProgress = new TaskbarProgress().AddTo(this);
 			this.taskbarProgress
 				.Subscribe(nameof(TaskbarProgress.Updated), () => this.UpdateTaskbar())
 				.AddTo(this);
+			if (this.Settings?.Dock == Dock.Right
+				|| this.Settings?.Dock == Dock.Left
+				|| this.Settings?.IsSplit
+				|| this.Settings?.AlwaysTopView)
+			{
+				this.TopView = Visibility.Visible;
+				this.BottomView = Visibility.Collapsed;
+			}
+			else
+			{
+				this.TopView = Visibility.Collapsed;
+				this.BottomView = Visibility.Visible;
+			}
+
+			/*
+			KanColleClient.Current.Proxy.api_start2
+				.TryParse()
+				.Subscribe(x => StatusService.Current.Set(Resources.StatusBar_Ready));
+			*/
+
+			KanColleClient.Current.Proxy.ApiSessionSource
+				.Select(x =>
+				{
+					KanColleWrapper.Models.SvData result;
+					result = KanColleWrapper.Models.SvData.TryParse(x, out result) ? result : null;
+					return result;
+				})
+				.Where(x => x != null && !x.IsSuccess)
+				.Subscribe(x =>
+				{
+					var text = $"서버에서 {x.RawData.api_result} 오류를 전달했습니다.";
+					StatusService.Current.Set(text);
+				});
 		}
 
 
@@ -150,6 +201,40 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			this.UpdateTaskbar();
 		}
 
+		public void ResourceLog()
+		{
+			var catalog = new ResourceLogViewModel();
+			WindowService.Current.MainWindow.Transition(catalog, typeof(ResourceLogWindow));
+		}
+		public void Refresh()
+		{
+			if (GeneralSettings.RefreshConfirmationType == ExitConfirmationType.None)
+			{
+				//바로 새로고침
+				RefreshNavigator.Execute(null);
+				return;
+			}
+			else if (GeneralSettings.RefreshConfirmationType == ExitConfirmationType.InSortieOnly)
+			{
+				if (!KanColleClient.Current.IsInSortie)
+				{
+					//바로 새로고침
+					RefreshNavigator.Execute(null);
+					return;
+				}
+			}
+			var vmodel = new DialogViewModel();
+			var window = new RefreshPopup
+			{
+				DataContext = vmodel,
+				Owner = Application.Current.MainWindow,
+			};
+			window.ShowDialog();
+			if (vmodel.DialogResult)
+			{
+				WindowService.Current.RefreshWindow();
+			}
+		}
 
 		public void TakeScreenshot()
 		{
@@ -221,6 +306,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			{
 				this.MergeWindow();
 			}
+			WindowService.Current.UpdateDockPattern();
 		}
 
 		private void HandleSplitWindowClosed(object sender, EventArgs eventArgs)

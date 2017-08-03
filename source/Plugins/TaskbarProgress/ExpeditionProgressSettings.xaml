@@ -9,7 +9,7 @@
 			 d:DesignHeight="300"
 			 d:DataContext="{d:DesignInstance local:ExpeditionProgress}">
 	<StackPanel Margin="12">
-		<CheckBox Content="全艦隊が遠征に出ていないときにエラー扱いにする"
+		<CheckBox Content="모든 함대가 원정에 나가있지않는경우를 실수로 취급"
 				  IsChecked="{Binding ErrorIfAllWaiting}" />
 	</StackPanel>
 </UserControl>

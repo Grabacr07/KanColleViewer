@@ -30,7 +30,9 @@
 				   SnapsToDevicePixels="True"
 				   TextOptions.TextFormattingMode="Display"
 				   UseLayoutRounding="True">
-
+	<Window.InputBindings>
+		<KeyBinding Key="F5" Command="{Binding RefreshNavigator}" />
+	</Window.InputBindings>
 	<i:Interaction.Behaviors>
 		<livet:WindowCloseCancelBehavior CloseCanceledCallbackMethodTarget="{Binding}"
 										 CloseCanceledCallbackMethodName="CloseCanceledCallback"

@@ -13,13 +13,13 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 			switch (speed)
 			{
 				case ShipSpeed.Fastest:
-					return "最速";
+					return "초고속";
 				case ShipSpeed.Faster:
-					return "高速+";
+					return "고속+";
 				case ShipSpeed.Fast:
-					return "高速";
+					return "고속";
 				case ShipSpeed.Slow:
-					return "低速";
+					return "저속";
 				default:
 					return "";
 			}
