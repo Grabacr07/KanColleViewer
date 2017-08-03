@@ -59,11 +59,28 @@ namespace Grabacr07.KanColleViewer.Models
 		public static void SetRegistryFeatureBrowserEmulation()
 		{
 			const string key = @"HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION";
+			const string GPUkey = @"HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_GPU_RENDERING";
+
+			int GPUSettingValue = 0;
+
+			if (Settings.KanColleSettings.GPURenderEnable) GPUSettingValue = 1;
 
 			try
 			{
 				var valueName = Process.GetCurrentProcess().ProcessName + ".exe";
 				Registry.SetValue(key, valueName, Properties.Settings.Default.FeatureBrowserEmulation, RegistryValueKind.DWord);
+
+				if (Registry.GetValue(GPUkey, valueName, null) == null)
+				{
+					Registry.SetValue(GPUkey, valueName, GPUSettingValue, RegistryValueKind.DWord);
+				}
+				else
+				{
+					var rgv = Convert.ToInt32(Registry.GetValue(GPUkey, valueName, null));
+
+					if (rgv == GPUSettingValue) return;
+					else Registry.SetValue(GPUkey, valueName, GPUSettingValue, RegistryValueKind.DWord);
+				}
 			}
 			catch (Exception ex)
 			{

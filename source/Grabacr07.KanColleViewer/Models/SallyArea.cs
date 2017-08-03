@@ -50,7 +50,7 @@ namespace Grabacr07.KanColleViewer.Models
 				catch (Exception ex)
 				{
 					System.Diagnostics.Debug.WriteLine(ex);
-					StatusService.Current.Notify("出撃海域の取得に失敗しました: " + ex);
+					StatusService.Current.Notify("출격해역 취득에 실패하였습니다: " + ex);
 				}
 			}
 

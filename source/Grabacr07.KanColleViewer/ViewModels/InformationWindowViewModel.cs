@@ -6,6 +6,7 @@ using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleViewer.Views;
 using MetroTrilithon.Mvvm;
+using System.Windows.Input;
 
 namespace Grabacr07.KanColleViewer.ViewModels
 {
@@ -15,8 +16,13 @@ namespace Grabacr07.KanColleViewer.ViewModels
 	public class InformationWindowViewModel : MainWindowViewModelBase
 	{
 		private readonly TaskbarProgress taskbarProgress;
-
 		public WindowSettings Settings { get; }
+
+		#region RefreshNavigator
+
+		public ICommand RefreshNavigator => WindowService.Current.RefreshRemote();
+
+		#endregion
 
 		/// <summary>
 		/// アタッチされたウィンドウが閉じられたときに発生します。

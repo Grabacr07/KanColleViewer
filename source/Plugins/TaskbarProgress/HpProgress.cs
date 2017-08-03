@@ -19,7 +19,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 	[Export(typeof(ITaskbarProgress))]
 	[ExportMetadata("Guid", guid)]
 	[ExportMetadata("Title", "HpProgressIndicator")]
-	[ExportMetadata("Description", "艦隊内の最大損害艦 HP をタスク バー インジケーターに報告します。")]
+	[ExportMetadata("Description", "함대내 최대 손상된 함의 HP를 작업표시줄에 표시합니다")]
 	[ExportMetadata("Version", "1.1")]
 	[ExportMetadata("Author", "@veigr")]
 	public class HpProgress : IPlugin, ITaskbarProgress, IDisposableHolder
@@ -32,7 +32,7 @@ namespace Grabacr07.KanColleViewer.Plugins
 
 		public string Id => guid + "-1";
 
-		public string DisplayName => "艦隊内の最大損害艦 HP";
+		public string DisplayName => "함대 내의 최대 손상함 HP";
 
 		public TaskbarItemProgressState State { get; private set; }
 

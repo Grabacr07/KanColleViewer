@@ -14,6 +14,7 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public int[] api_exp { get; set; }
 		public int api_nowhp { get; set; }
 		public int api_maxhp { get; set; }
+		public int api_soku { get; set; }
 		public int api_leng { get; set; }
 		public int[] api_slot { get; set; }
 		public int[] api_onslot { get; set; }
@@ -29,7 +30,6 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
 		public int[] api_karyoku { get; set; }
 		public int[] api_raisou { get; set; }
 		public int[] api_taiku { get; set; }
-		public int api_soku { get; set; }
 		public int[] api_soukou { get; set; }
 		public int[] api_kaihi { get; set; }
 		public int[] api_taisen { get; set; }

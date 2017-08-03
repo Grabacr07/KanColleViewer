@@ -219,7 +219,7 @@ namespace Grabacr07.KanColleViewer.Composition
 					this.failedPlugins.Add(new LoadFailedPluginData
 					{
 						Metadata = plugin.Metadata,
-						Message = "プラグインの ID が重複しています。" + Environment.NewLine + "プラグインには一意の GUID が必要です。プラグインの開発者に連絡してください。",
+						Message = "플러그인의 ID가 중복되었습니다." + Environment.NewLine + "플러그인에는 유일한 GUID가 필요합니다. 플러그인의 개발자에게 문의하시기 바랍니다.",
 					});
 					success = false;
 				}

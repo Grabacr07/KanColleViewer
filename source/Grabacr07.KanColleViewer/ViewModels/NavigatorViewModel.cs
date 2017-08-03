@@ -21,6 +21,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 			{
 				this._Source = value;
 				this.SourceString = value.ToString();
+
 				this.RaisePropertyChanged();
 			}
 		}
@@ -115,7 +116,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		public event EventHandler GoForwardRequested;
 		public event EventHandler RefreshRequested;
 		public event EventHandler<Uri> UriRequested;
-
+		
 		public void GoBack()
 		{
 			this.GoBackRequested?.Invoke(this, new EventArgs());
@@ -135,11 +136,41 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		{
 			this.UriRequested?.Invoke(this, this.Source);
 		}
+		public void CookieNavigate()
+		{
+			if (this.SourceString.Contains("error/area") && this.SourceString.Contains("dmm.com"))
+			{
+				GoKanColle();
+			}
+			else if(this.SourceString.Contains("foreign")&& this.SourceString.Contains("dmm.com"))
+			{
+				GoKanColle();
+			}
+		}
 
 		public void Navigate()
 		{
 			Uri uri;
 			if (this.UriRequested != null && Uri.TryCreate(this.SourceString, UriKind.Absolute, out uri))
+			{
+				this.UriRequested(this, uri);
+			}
+		}
+		public void GoKanColle()
+		{
+			Uri uri;
+			string SauceCookie = "javascript:void(eval(\"document.cookie = 'cklg=ja;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=dmm.com;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=osapi.dmm.com;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=203.104.209.7;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=www.dmm.com;path=/netgame/';\"));location.href=\"http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/\";";
+			if (this.UriRequested != null && Uri.TryCreate(SauceCookie, UriKind.Absolute, out uri))
+			{
+				this.UriRequested(this, uri);
+			}
+		}
+		public void Logout()
+		{
+			Uri uri;
+			string LogoutUrl;
+			LogoutUrl = "http://www.dmm.com/my/-/login/logout/=/path=Sg__/";
+			if (this.UriRequested != null && Uri.TryCreate(LogoutUrl, UriKind.Absolute, out uri))
 			{
 				this.UriRequested(this, uri);
 			}

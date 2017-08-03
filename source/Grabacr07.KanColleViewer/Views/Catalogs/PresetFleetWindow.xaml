@@ -1,0 +1,796 @@
+﻿<metro:MetroWindow x:Class="Grabacr07.KanColleViewer.Views.Catalogs.PresetFleetWindow"
+				   x:Name="GlowMetroWindow"
+				   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+				   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				   xmlns:s="clr-namespace:System;assembly=mscorlib"
+				   xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+				   xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+				   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+				   xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+				   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+				   xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+				   xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+				   xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
+				   xmlns:metro2="http://schemes.grabacr.net/winfx/2015/personal/controls"
+				   xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
+				   xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views"
+				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Catalogs"
+				   xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+				   xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
+				   xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
+				   xmlns:kcvi="http://schemes.grabacr.net/winfx/2015/kancolleviewer/interactivity"
+				   xmlns:kcvv="http://schemes.grabacr.net/winfx/2015/kancolleviewer/converters"
+				   xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
+				   xmlns:catalogs="clr-namespace:Grabacr07.KanColleViewer.Views.Catalogs"
+				   xmlns:contentsVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
+				   xmlns:converters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters"
+				   mc:Ignorable="d"
+				   d:DataContext="{d:DesignInstance viewModels:PresetFleetWindowViewModel}"
+				   Title="{Binding Title}"
+				   Width="600"
+				   Height="640"
+				   FontSize="12"
+				   Background="{DynamicResource ThemeBrushKey}"
+				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+				   IsRestoringWindowPlacement="True"
+				   SnapsToDevicePixels="True"
+				   TextOptions.TextFormattingMode="Display">
+	<metro:MetroWindow.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Styles/Controls.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Styles/Icons.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Themes/Dark.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MetroRadiance;component/Themes/Accents/Blue.xaml" />
+
+				<ResourceDictionary Source="pack://application:,,,/MetroTrilithon.Desktop;component/Styles/Controls.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/KanColleViewer.Controls;component/Styles/Colors.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/KanColleViewer.Controls;component/Styles/Controls.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/KanColleViewer;component/Styles/Controls.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+
+			<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+		</ResourceDictionary>
+	</metro:MetroWindow.Resources>
+
+	<i:Interaction.Triggers>
+		<i:EventTrigger EventName="ContentRendered">
+			<livet:LivetCallMethodAction MethodTarget="{Binding}" MethodName="Initialize" />
+		</i:EventTrigger>
+		<i:EventTrigger EventName="Closed">
+			<livet:DataContextDisposeAction />
+		</i:EventTrigger>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger}" MessageKey="Window.Location">
+			<behaviors:SetWindowLocationAction />
+		</livet:InteractionMessageTrigger>
+		<livet:InteractionMessageTrigger Messenger="{Binding Messenger, Mode=OneWay}" MessageKey="Window.Activate">
+			<livet:WindowInteractionMessageAction InvokeActionOnlyWhenWindowIsActive="False" />
+		</livet:InteractionMessageTrigger>
+	</i:Interaction.Triggers>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<!-- #region Caption area -->
+		<DockPanel metro:MetroWindow.IsCaptionBar="True">
+			<Border DockPanel.Dock="Bottom"
+					Height="4" />
+			<kcvc:AppIcon Width="36"
+						  Height="36"
+						  Background="Transparent"
+						  AnchorVisibility="Collapsed"
+						  BandVisibility="Collapsed" />
+
+			<StackPanel DockPanel.Dock="Right"
+						Orientation="Horizontal"
+						VerticalAlignment="Top"
+						WindowChrome.IsHitTestVisibleInChrome="True">
+				<metro:SystemButtons />
+			</StackPanel>
+
+			<TextBlock Text="{Binding Title}"
+					   Style="{DynamicResource CaptionTextStyleKey}"
+					   Margin="2,0,8,0" />
+		</DockPanel>
+		<!-- #endregion -->
+
+		<Grid Grid.Row="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+
+			<Grid Margin="10,4,10,10">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<metro:PromptComboBox HorizontalAlignment="Left"
+									  Prompt="프리셋을 선택하세요"
+									  ItemsSource="{Binding Fleets, Mode=OneWay}"
+									  DisplayMemberPath="Name"
+									  SelectedValue="{Binding SelectedFleet, Mode=TwoWay}"
+									  IsReadOnly="True"
+									  MinWidth="160"/>
+
+				<metro2:CallMethodButton Grid.Column="1"
+										 Padding="5,3"
+										 Margin="5,0,0,0"
+										 Content="함대 추가"
+										 MethodName="ShowPresetAddWindow" />
+				<metro2:CallMethodButton Grid.Column="2"
+										 Padding="5,3"
+										 Margin="5,0,0,0"
+										 Content="함대 삭제"
+										 MethodName="ShowPresetDeleteWindow">
+					<metro2:CallMethodButton.Style>
+						<Style TargetType="metro2:CallMethodButton">
+							<Style.Triggers>
+								<DataTrigger Binding="{Binding SelectedFleet, Mode=OneWay}" Value="{x:Null}">
+									<Setter Property="IsEnabled" Value="False" />
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</metro2:CallMethodButton.Style>
+				</metro2:CallMethodButton>
+			</Grid>
+
+			<ScrollViewer Grid.Row="1"
+						  HorizontalScrollBarVisibility="Disabled"
+						  VerticalScrollBarVisibility="Auto">
+				<Grid Background="{DynamicResource BackgroundBrushKey}">
+					<StackPanel DataContext="{Binding SelectedFleet, Mode=OneWay}"
+								Orientation="Vertical">
+						<Grid Margin="10,5">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="Auto"/>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+							</Grid.RowDefinitions>
+
+							<TextBlock Margin="2"
+									   Grid.RowSpan="2"
+									   FontSize="28"
+									   Foreground="White"
+									   Text="{Binding Name, Mode=OneWay}" />
+
+							<kcvc:SlotItemIcon Margin="2,0"
+											   Grid.Column="1"
+											   VerticalAlignment="Center"
+											   Type="Fighter"
+											   Width="16"
+											   Height="16" />
+							<TextBlock Margin="2"
+									   Grid.Column="2"
+									   VerticalAlignment="Center"
+									   Style="{StaticResource DefaultTextStyleKey}"
+									   Text="제공수치" />
+							<TextBlock Margin="10,2,2,2"
+									   Grid.Column="3"
+									   VerticalAlignment="Center"
+									   Style="{StaticResource EmphaticTextStyleKey}"
+									   FontSize="12">
+								<Run Text="{Binding AirSuperiorityMinimum, Mode=OneWay}" />
+								<Run Text="-" />
+								<Run Text="{Binding AirSuperiorityMaximum, Mode=OneWay}" />
+							</TextBlock>
+
+							<kcvc:SlotItemIcon Margin="2,0"
+											   Grid.Column="1"
+											   Grid.Row="1"
+											   VerticalAlignment="Center"
+											   Type="ReconPlane"
+											   Width="16"
+											   Height="16" />
+							<TextBlock Margin="2"
+									   Grid.Column="2"
+									   Grid.Row="1"
+									   VerticalAlignment="Center"
+									   Style="{StaticResource DefaultTextStyleKey}"
+									   Text="색적수치" />
+							<TextBlock Margin="10,2,2,2"
+									   Grid.Column="3"
+									   Grid.Row="1"
+									   VerticalAlignment="Center"
+									   Style="{StaticResource EmphaticTextStyleKey}"
+									   FontSize="12"
+									   Text="{Binding ViewRange, Mode=OneWay}" />
+						</Grid>
+
+						<Border Background="{StaticResource AccentHighlightBrushKey}"
+								Margin="5,2,5,4"
+								Height="2" />
+
+						<ItemsControl ItemsSource="{Binding Ships}"
+									  Background="Transparent"
+									  Grid.IsSharedSizeScope="True">
+							<ItemsControl.ItemsPanel>
+								<ItemsPanelTemplate>
+									<UniformGrid Columns="2"
+												 Margin="0,0,10,0" />
+								</ItemsPanelTemplate>
+							</ItemsControl.ItemsPanel>
+							<ItemsControl.ItemTemplate>
+								<DataTemplate>
+									<Grid Margin="5,5,5,10">
+										<Grid.Resources>
+											<Style TargetType="{x:Type TextBlock}"
+												   BasedOn="{StaticResource DefaultTextStyleKey}">
+												<Setter Property="TextWrapping" Value="NoWrap" />
+											</Style>
+										</Grid.Resources>
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto" />
+											<RowDefinition Height="Auto" SharedSizeGroup="ShipSlots" />
+											<RowDefinition Height="Auto" />
+										</Grid.RowDefinitions>
+
+										<Grid Grid.Row="0"
+											  Margin="2,0,2,5">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="*" />
+												<ColumnDefinition Width="Auto" />
+											</Grid.ColumnDefinitions>
+											<Grid.RowDefinitions>
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+											</Grid.RowDefinitions>
+
+											<TextBlock>
+												<Run Text="{Binding Index, Mode=OneWay, StringFormat={}#{0}}"
+													 FontSize="11" />
+												<Run Text="{Binding Name, Mode=OneWay}"
+													 Style="{DynamicResource EmphaticTextElementStyleKey}" 
+													 FontSize="13"/>
+											</TextBlock>
+
+											<TextBlock Grid.Column="1"
+													   Margin="8,0,4,0">
+												<Run Text="Lv." FontSize="10" />
+												<Run Text="{Binding Level, Mode=OneWay}"
+													 Style="{DynamicResource EmphaticTextElementStyleKey}" 
+													 FontSize="13" />
+											</TextBlock>
+											
+											<Rectangle Grid.Row="1"
+													   Grid.ColumnSpan="2"
+													   Height=".99"
+													   Margin="0,4,0,0"
+													   Fill="{StaticResource AccentHighlightBrushKey}"
+													   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+										</Grid>
+										<StackPanel Grid.Row="1"
+													Orientation="Vertical">
+											<ItemsControl ItemsSource="{Binding Slots}">
+												<ItemsControl.Template>
+													<ControlTemplate TargetType="{x:Type ItemsControl}">
+														<StackPanel IsItemsHost="True"/>
+													</ControlTemplate>
+												</ItemsControl.Template>
+												<ItemsControl.ItemTemplate>
+													<DataTemplate>
+														<Border x:Name="Elements"
+																ToolTip="{Binding Description, Mode=OneWay}"
+																Background="Transparent">
+															<Grid Margin="2,4">
+																<Grid.Resources>
+																	<Style TargetType="{x:Type TextBlock}"
+																		   BasedOn="{StaticResource EmphaticTextStyleKey}">
+																		<Setter Property="FontSize" Value="12" />
+																	</Style>
+																	<converters:RangeToBooleanConverter x:Key="RangeToBooleanConverter" />
+																</Grid.Resources>
+																<Grid.ColumnDefinitions>
+																	<ColumnDefinition Width="Auto" SharedSizeGroup="SlotCarry" />
+																	<ColumnDefinition Width="Auto" SharedSizeGroup="SlotIcon" />
+																	<ColumnDefinition Width="Auto" SharedSizeGroup="SlotName" />
+																	<ColumnDefinition Width="Auto" SharedSizeGroup="SlotLevel" />
+																	<ColumnDefinition Width="Auto" SharedSizeGroup="SlotProficiency" />
+																</Grid.ColumnDefinitions>
+
+																<TextBlock Grid.Column="0"
+																		   Margin="8,0,0,0"
+																		   Text="{Binding Carry, Mode=OneWay}"
+																		   TextAlignment="Right"
+																		   Style="{StaticResource DetailTextStyleKey}"
+																		   Foreground="{StaticResource InactiveForegroundBrushKey}"
+																		   VerticalAlignment="Top" />
+																<kcvc:SlotItemIcon Grid.Column="1"
+																				   Margin="4,0"
+																				   Type="{Binding Item.IconType, Mode=OneWay}"
+																				   Width="16"
+																				   Height="16">
+																	<kcvc:SlotItemIcon.Style>
+																		<Style TargetType="{x:Type kcvc:SlotItemIcon}">
+																			<Style.Triggers>
+																				<DataTrigger Binding="{Binding Id}" Value="0">
+																					<Setter Property="Visibility" Value="Hidden" />
+																				</DataTrigger>
+																			</Style.Triggers>
+																		</Style>
+																	</kcvc:SlotItemIcon.Style>
+																</kcvc:SlotItemIcon>
+
+																<TextBlock Grid.Column="2"
+																		   VerticalAlignment="Center">
+																	<TextBlock.Style>
+																		<Style TargetType="{x:Type TextBlock}">
+																			<Setter Property="Text" Value="{Binding Name, Mode=OneWay}" />
+																			<Style.Triggers>
+																				<DataTrigger Binding="{Binding Id}" Value="0">
+																					<Setter Property="Foreground" Value="{StaticResource InactiveForegroundBrushKey}" />
+																					<Setter Property="Text" Value="장비하지 않았습니다" />
+																				</DataTrigger>
+																			</Style.Triggers>
+																		</Style>
+																	</TextBlock.Style>
+																</TextBlock>
+
+																<TextBlock Grid.Column="3"
+																		   Margin="8,0,2,0"
+																		   VerticalAlignment="Center">
+																	<TextBlock.Style>
+																		<Style TargetType="{x:Type TextBlock}"
+																			   BasedOn="{StaticResource EmphaticTextStyleKey}">
+																			<Setter Property="FontSize" Value="12" />
+																			<Setter Property="Foreground" Value="#FF45A9A5" />
+																			<Setter Property="Text" Value="{Binding Level, Mode=OneWay, StringFormat={}★{0}}" />
+
+																			<Style.Triggers>
+																				<DataTrigger Binding="{Binding Level, Mode=OneWay}" Value="0">
+																					<Setter Property="Opacity" Value=".5" />
+																					<Setter Property="Foreground" Value="{StaticResource InactiveForegroundBrushKey}" />
+																				</DataTrigger>
+																				<DataTrigger Binding="{Binding Level, Mode=OneWay}" Value="10">
+																					<Setter Property="Text" Value="★max" />
+																				</DataTrigger>
+																				<DataTrigger Binding="{Binding Id}" Value="0">
+																					<Setter Property="Visibility" Value="Hidden" />
+																				</DataTrigger>
+																			</Style.Triggers>
+																		</Style>
+																	</TextBlock.Style>
+																</TextBlock>
+																<TextBlock Grid.Column="4"
+																		   Margin="4,0,2,0"
+																		   VerticalAlignment="Center">
+																	<TextBlock.Style>
+																		<Style TargetType="{x:Type TextBlock}"
+																			   BasedOn="{StaticResource EmphaticTextStyleKey}">
+																			<Setter Property="FontSize" Value="12" />
+																			<Setter Property="Foreground" Value="#FFD49C0F" />
+																			<Setter Property="Text" Value="{Binding Proficiency, Mode=OneWay, StringFormat={}+{0}}" />
+
+																			<Style.Triggers>
+																				<DataTrigger Binding="{Binding Proficiency, Mode=OneWay}" Value="0">
+																					<Setter Property="Opacity" Value=".5" />
+																					<Setter Property="Foreground" Value="{StaticResource InactiveForegroundBrushKey}" />
+																				</DataTrigger>
+																				<DataTrigger Binding="{Binding Proficiency, Mode=OneWay, Converter={StaticResource RangeToBooleanConverter}, ConverterParameter=1-3}" Value="True">
+																					<Setter Property="Foreground" Value="#FF98B3CE" />
+																				</DataTrigger>
+																				<DataTrigger Binding="{Binding Id}" Value="0">
+																					<Setter Property="Visibility" Value="Hidden" />
+																				</DataTrigger>
+																			</Style.Triggers>
+																		</Style>
+																	</TextBlock.Style>
+																</TextBlock>
+															</Grid>
+														</Border>
+													</DataTemplate>
+												</ItemsControl.ItemTemplate>
+											</ItemsControl>
+											<StackPanel Orientation="Vertical">
+												<Rectangle Height=".99"
+														   Margin="0,2"
+														   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+												<Border ToolTip="{Binding ExSlot.Description, Mode=OneWay}"
+														Background="Transparent">
+													<Grid Margin="2,4">
+														<Grid.Resources>
+															<Style TargetType="{x:Type TextBlock}"
+																   BasedOn="{StaticResource EmphaticTextStyleKey}">
+																<Setter Property="FontSize" Value="12" />
+															</Style>
+															<converters:RangeToBooleanConverter x:Key="RangeToBooleanConverter" />
+														</Grid.Resources>
+														<Grid.ColumnDefinitions>
+															<ColumnDefinition Width="Auto" SharedSizeGroup="SlotCarry" />
+															<ColumnDefinition Width="Auto" SharedSizeGroup="SlotIcon" />
+															<ColumnDefinition Width="Auto" SharedSizeGroup="SlotName" />
+															<ColumnDefinition Width="Auto" SharedSizeGroup="SlotLevel" />
+															<ColumnDefinition Width="Auto" SharedSizeGroup="SlotProficiency" />
+														</Grid.ColumnDefinitions>
+
+														<TextBlock Grid.Column="0"
+																   Margin="8,0,0,0"
+																   Text="{Binding ExSlot.Carry, Mode=OneWay}"
+																   TextAlignment="Right"
+																   Style="{StaticResource DetailTextStyleKey}"
+																   Foreground="{StaticResource InactiveForegroundBrushKey}"
+																   VerticalAlignment="Top" />
+														<kcvc:SlotItemIcon Grid.Column="1"
+																		   Margin="4,0"
+																		   Type="{Binding ExSlot.Item.IconType, Mode=OneWay}"
+																		   Width="16"
+																		   Height="16" />
+
+														<TextBlock Grid.Column="2"
+																   VerticalAlignment="Center"
+																   Text="{Binding ExSlot.Name, Mode=OneWay}" />
+
+														<TextBlock Grid.Column="3"
+																   Margin="8,0,2,0"
+																   VerticalAlignment="Center">
+															<TextBlock.Style>
+																<Style TargetType="{x:Type TextBlock}"
+																	   BasedOn="{StaticResource EmphaticTextStyleKey}">
+																	<Setter Property="FontSize" Value="12" />
+																	<Setter Property="Foreground" Value="#FF45A9A5" />
+																	<Setter Property="Text" Value="{Binding ExSlot.Level, Mode=OneWay, StringFormat={}★{0}}" />
+
+																	<Style.Triggers>
+																		<DataTrigger Binding="{Binding ExSlot.Level, Mode=OneWay}" Value="0">
+																			<Setter Property="Opacity" Value=".5" />
+																			<Setter Property="Foreground" Value="{StaticResource InactiveForegroundBrushKey}" />
+																		</DataTrigger>
+																		<DataTrigger Binding="{Binding ExSlot.Level, Mode=OneWay}" Value="10">
+																			<Setter Property="Text" Value="★max" />
+																		</DataTrigger>
+																	</Style.Triggers>
+																</Style>
+															</TextBlock.Style>
+														</TextBlock>
+														<TextBlock Grid.Column="4"
+																   Margin="4,0,2,0"
+																   VerticalAlignment="Center">
+															<TextBlock.Style>
+																<Style TargetType="{x:Type TextBlock}"
+																	   BasedOn="{StaticResource EmphaticTextStyleKey}">
+																	<Setter Property="FontSize" Value="12" />
+																	<Setter Property="Foreground" Value="#FFD49C0F" />
+																	<Setter Property="Text" Value="{Binding ExSlot.Proficiency, Mode=OneWay, StringFormat={}+{0}}" />
+
+																	<Style.Triggers>
+																		<DataTrigger Binding="{Binding ExSlot.Proficiency, Mode=OneWay}" Value="0">
+																			<Setter Property="Opacity" Value=".5" />
+																			<Setter Property="Foreground" Value="{StaticResource InactiveForegroundBrushKey}" />
+																		</DataTrigger>
+																		<DataTrigger Binding="{Binding ExSlot.Proficiency, Mode=OneWay, Converter={StaticResource RangeToBooleanConverter}, ConverterParameter=1-3}" Value="True">
+																			<Setter Property="Foreground" Value="#FF98B3CE" />
+																		</DataTrigger>
+																	</Style.Triggers>
+																</Style>
+															</TextBlock.Style>
+														</TextBlock>
+													</Grid>
+												</Border>
+
+												<StackPanel.Style>
+													<Style TargetType="{x:Type StackPanel}">
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding ExSlot, Mode=OneWay}" Value="{x:Null}">
+																<Setter Property="Visibility" Value="Collapsed" />
+															</DataTrigger>
+															<DataTrigger Binding="{Binding ExSlot.Id, Mode=OneWay}" Value="0">
+																<Setter Property="Visibility" Value="Collapsed" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</StackPanel.Style>
+											</StackPanel>
+										</StackPanel>
+
+										<Grid Grid.Row="2"
+											  Margin="0,5,0,0">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="*" />
+
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="*" />
+											</Grid.ColumnDefinitions>
+											<Grid.RowDefinitions>
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+											</Grid.RowDefinitions>
+
+											<Rectangle Grid.Row="0"
+													   Grid.ColumnSpan="6"
+													   Height=".99"
+													   Margin="0,0,0,6"
+													   Fill="{StaticResource AccentHighlightBrushKey}"
+													   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+											<Image Grid.Column="0"
+												   Grid.Row="1"
+												   Margin="10,0,4,2"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/hp.png" />
+											<TextBlock Grid.Column="1"
+													   Grid.Row="1"
+													   Margin="0,0,10,0"
+													   FontSize="11"
+													   VerticalAlignment="Top"
+													   HorizontalAlignment="Right"
+													   Text="체력" />
+											<TextBlock Grid.Column="2"
+													   Grid.Row="1"
+													   Margin="0,0,10,0"
+													   VerticalAlignment="Top"
+													   Style="{StaticResource EmphaticTextStyleKey}"
+													   FontSize="12"
+													   TextAlignment="Right"
+													   Text="{Binding Source.HP}" />
+
+											<Image Grid.Column="3"
+												   Grid.Row="1"
+												   Margin="10,0,4,2"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/fire.png" />
+											<TextBlock Grid.Column="4"
+													   Grid.Row="1"
+													   Margin="0,0,10,0"
+													   FontSize="11"
+													   VerticalAlignment="Top"
+													   HorizontalAlignment="Right"
+													   Text="화력" />
+											<TextBlock Grid.Column="5"
+													   Grid.Row="1"
+													   Margin="0,0,10,0"
+													   VerticalAlignment="Top"
+													   Style="{StaticResource EmphaticTextStyleKey}"
+													   FontSize="12"
+													   TextAlignment="Right"
+													   Text="{Binding SumFirepower}" />
+
+											<Image Grid.Column="0"
+												   Grid.Row="2"
+												   Margin="10,0,4,2"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/armor.png" />
+											<TextBlock Grid.Column="1"
+													   Grid.Row="2"
+													   Margin="0,0,10,0"
+													   FontSize="11"
+													   VerticalAlignment="Top"
+													   HorizontalAlignment="Right"
+													   Text="장갑" />
+											<TextBlock Grid.Column="2"
+													   Grid.Row="2"
+													   Margin="0,0,10,0"
+													   VerticalAlignment="Top"
+													   Style="{StaticResource EmphaticTextStyleKey}"
+													   FontSize="12"
+													   TextAlignment="Right"
+													   Text="{Binding SumArmor}" />
+
+											<Image Grid.Column="3"
+												   Grid.Row="2"
+												   Margin="10,0,4,2"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/torpedo.png" />
+											<TextBlock Grid.Column="4"
+													   Grid.Row="2"
+													   Margin="0,0,10,0"
+													   FontSize="11"
+													   VerticalAlignment="Top"
+													   HorizontalAlignment="Right"
+													   Text="뇌장" />
+											<TextBlock Grid.Column="5"
+													   Grid.Row="2"
+													   Margin="0,0,10,0"
+													   VerticalAlignment="Top"
+													   Style="{StaticResource EmphaticTextStyleKey}"
+													   FontSize="12"
+													   TextAlignment="Right"
+													   Text="{Binding SumTorpedo}" />
+
+											<Image Grid.Column="0"
+												   Grid.Row="3"
+												   Margin="10,0,4,2"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/evasion.png" />
+											<TextBlock Grid.Column="1"
+													   Grid.Row="3"
+													   Margin="0,0,10,0"
+													   FontSize="11"
+													   VerticalAlignment="Top"
+													   HorizontalAlignment="Right"
+													   Text="회피" />
+											<TextBlock Grid.Column="2"
+													   Grid.Row="3"
+													   Margin="0,0,10,0"
+													   VerticalAlignment="Top"
+													   Style="{StaticResource EmphaticTextStyleKey}"
+													   FontSize="12"
+													   TextAlignment="Right"
+													   Text="{Binding SumEvasion}" />
+
+											<Image Grid.Column="3"
+												   Grid.Row="3"
+												   Margin="10,0,4,2"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/aa.png" />
+											<TextBlock Grid.Column="4"
+													   Grid.Row="3"
+													   Margin="0,0,10,0"
+													   FontSize="11"
+													   VerticalAlignment="Top"
+													   HorizontalAlignment="Right"
+													   Text="대공" />
+											<TextBlock Grid.Column="5"
+													   Grid.Row="3"
+													   Margin="0,0,10,0"
+													   VerticalAlignment="Top"
+													   Style="{StaticResource EmphaticTextStyleKey}"
+													   FontSize="12"
+													   TextAlignment="Right"
+													   Text="{Binding SumAA}" />
+
+											<Image Grid.Column="0"
+												   Grid.Row="4"
+												   Margin="10,0,4,2"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/carry.png" />
+											<TextBlock Grid.Column="1"
+													   Grid.Row="4"
+													   Margin="0,0,10,0"
+													   FontSize="11"
+													   VerticalAlignment="Top"
+													   HorizontalAlignment="Right"
+													   Text="탑재량" />
+											<TextBlock Grid.Column="2"
+													   Grid.Row="4"
+													   Margin="0,0,10,0"
+													   VerticalAlignment="Top"
+													   Style="{StaticResource EmphaticTextStyleKey}"
+													   FontSize="12"
+													   TextAlignment="Right"
+													   Text="{Binding Source.Carries}" />
+
+											<Image Grid.Column="3"
+												   Grid.Row="4"
+												   Margin="10,0,4,2"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/asw.png" />
+											<TextBlock Grid.Column="4"
+													   Grid.Row="4"
+													   Margin="0,0,10,0"
+													   FontSize="11"
+													   VerticalAlignment="Top"
+													   HorizontalAlignment="Right"
+													   Text="대잠" />
+											<TextBlock Grid.Column="5"
+													   Grid.Row="4"
+													   Margin="0,0,10,0"
+													   VerticalAlignment="Top"
+													   Style="{StaticResource EmphaticTextStyleKey}"
+													   FontSize="12"
+													   TextAlignment="Right"
+													   Text="{Binding SumASW}" />
+
+											<Image Grid.Column="0"
+												   Grid.Row="5"
+												   Margin="10,0,4,2"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/speed.png" />
+											<TextBlock Grid.Column="1"
+													   Grid.Row="5"
+													   Margin="0,0,10,0"
+													   FontSize="11"
+													   VerticalAlignment="Top"
+													   HorizontalAlignment="Right"
+													   Text="속력" />
+											<TextBlock Grid.Column="2"
+													   Grid.Row="5"
+													   Margin="0,0,10,0"
+													   VerticalAlignment="Top"
+													   Style="{StaticResource EmphaticTextStyleKey}"
+													   FontSize="12"
+													   TextAlignment="Right"
+													   Text="{Binding Speed}" />
+
+											<Image Grid.Column="3"
+												   Grid.Row="5"
+												   Margin="10,0,4,2"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/los.png" />
+											<TextBlock Grid.Column="4"
+													   Grid.Row="5"
+													   Margin="0,0,10,0"
+													   FontSize="11"
+													   VerticalAlignment="Top"
+													   HorizontalAlignment="Right"
+													   Text="색적" />
+											<TextBlock Grid.Column="5"
+													   Grid.Row="5"
+													   Margin="0,0,10,0"
+													   VerticalAlignment="Top"
+													   Style="{StaticResource EmphaticTextStyleKey}"
+													   FontSize="12"
+													   TextAlignment="Right"
+													   Text="{Binding SumLOS}" />
+
+											<Image Grid.Column="0"
+												   Grid.Row="6"
+												   Margin="10,0,4,2"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/range.png" />
+											<TextBlock Grid.Column="1"
+													   Grid.Row="6"
+													   Margin="0,0,10,0"
+													   FontSize="11"
+													   VerticalAlignment="Top"
+													   HorizontalAlignment="Right"
+													   Text="사거리" />
+											<TextBlock Grid.Column="2"
+													   Grid.Row="6"
+													   Margin="0,0,10,0"
+													   VerticalAlignment="Top"
+													   Style="{StaticResource EmphaticTextStyleKey}"
+													   FontSize="12"
+													   TextAlignment="Right"
+													   Text="{Binding Range}" />
+
+											<Image Grid.Column="3"
+												   Grid.Row="6"
+												   Margin="10,0,4,2"
+												   Width="18"
+												   Height="18"
+												   Source="http://wolfgangkurz.github.io/KanColleAssets/stats/luck.png" />
+											<TextBlock Grid.Column="4"
+													   Grid.Row="6"
+													   Margin="0,0,10,0"
+													   FontSize="11"
+													   VerticalAlignment="Top"
+													   HorizontalAlignment="Right"
+													   Text="운" />
+											<TextBlock Grid.Column="5"
+													   Grid.Row="6"
+													   Margin="0,0,10,0"
+													   VerticalAlignment="Top"
+													   Style="{StaticResource EmphaticTextStyleKey}"
+													   FontSize="12"
+													   TextAlignment="Right"
+													   Text="{Binding Source.Luck}" />
+										</Grid>
+									</Grid>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+						</ItemsControl>
+					</StackPanel>
+				</Grid>
+			</ScrollViewer>
+		</Grid>
+	</Grid>
+</metro:MetroWindow>

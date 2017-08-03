@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,6 +6,7 @@ using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleWrapper;
 using Grabacr07.KanColleWrapper.Models;
 using Livet;
+using Livet.Commands;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 {
@@ -28,18 +29,18 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 	public class ShipLevelFilter : ShipCatalogFilter
 	{
-		#region Both 変更通知プロパティ
+		#region MinLevel 변경 통지 프로퍼티
 
-		private bool _Both;
+		private string _MinLevel;
 
-		public bool Both
+		public string MinLevel
 		{
-			get { return this._Both; }
+			get { return this._MinLevel; }
 			set
 			{
-				if (this._Both != value)
+				if (this._MinLevel != value)
 				{
-					this._Both = value;
+					this._MinLevel = value;
 					this.RaisePropertyChanged();
 					this.Update();
 				}
@@ -48,18 +49,18 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#endregion
 
-		#region Level1 変更通知プロパティ
+		#region MaxLevel 변경 통지 프로퍼티
 
-		private bool _Level1;
+		private string _MaxLevel;
 
-		public bool Level1
+		public string MaxLevel
 		{
-			get { return this._Level1; }
+			get { return this._MaxLevel; }
 			set
 			{
-				if (this._Level1 != value)
+				if (this._MaxLevel != value)
 				{
-					this._Level1 = value;
+					this._MaxLevel = value;
 					this.RaisePropertyChanged();
 					this.Update();
 				}
@@ -68,37 +69,29 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		#endregion
 
-		#region Level2OrMore 変更通知プロパティ
-
-		private bool _Level2OrMore;
-
-		public bool Level2OrMore
+		public void SetLevelRange(string parameter)
 		{
-			get { return this._Level2OrMore; }
-			set
-			{
-				if (this._Level2OrMore != value)
-				{
-					this._Level2OrMore = value;
-					this.RaisePropertyChanged();
-					this.Update();
-				}
-			}
-		}
+			string[] parts = parameter.Split('-');
 
-		#endregion
+			MinLevel = parts[0];
+			MaxLevel = parts[1];
+		}
 
 		public ShipLevelFilter(Action updateAction)
 			: base(updateAction)
 		{
-			this._Level2OrMore = true;
+			this._MinLevel = "2";
+			this._MaxLevel = "165";
 		}
 
 		public override bool Predicate(Ship ship)
 		{
-			if (this.Both) return true;
-			if (this.Level2OrMore && ship.Level >= 2) return true;
-			if (this.Level1 && ship.Level == 1) return true;
+			int minlevel;
+			int maxlevel;
+
+			if (int.TryParse(_MinLevel, out minlevel) && int.TryParse(_MaxLevel, out maxlevel))
+				if (ship.Level >= minlevel && ship.Level <= maxlevel)
+					return true;
 
 			return false;
 		}
@@ -185,9 +178,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 	public class ShipSpeedFilter : ShipCatalogFilter
 	{
 		#region Fastest 変更通知プロパティ
-
 		private bool _Fastest;
-
 		public bool Fastest
 		{
 			get { return this._Fastest; }
@@ -201,13 +192,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				}
 			}
 		}
-
 		#endregion
 
 		#region Faster 変更通知プロパティ
-
 		private bool _Faster;
-
 		public bool Faster
 		{
 			get { return this._Faster; }
@@ -221,13 +209,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				}
 			}
 		}
-
 		#endregion
 
 		#region Fast 変更通知プロパティ
-
 		private bool _Fast;
-
 		public bool Fast
 		{
 			get { return this._Fast; }
@@ -241,13 +226,10 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				}
 			}
 		}
-
 		#endregion
 
 		#region Slow 変更通知プロパティ
-
 		private bool _Slow;
-
 		public bool Slow
 		{
 			get { return this._Slow; }
@@ -261,11 +243,9 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				}
 			}
 		}
-
 		#endregion
 
-		public ShipSpeedFilter(Action updateAction)
-			: base(updateAction)
+		public ShipSpeedFilter(Action updateAction) : base(updateAction)
 		{
 			this._Fastest = true;
 			this._Faster = true;
@@ -357,6 +337,83 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			if (this.Both) return true;
 			if (this.MaxModernized && ship.IsMaxModernized) return true;
 			if (this.NotMaxModernized && !ship.IsMaxModernized) return true;
+
+			return false;
+		}
+	}
+
+	public class DaihatsueFilter : ShipCatalogFilter
+	{
+		#region Both 変更通知プロパティ
+
+		private bool _Both;
+
+		public bool Both
+		{
+			get { return this._Both; }
+			set
+			{
+				if (this._Both != value)
+				{
+					this._Both = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+
+		#region CanEquip 変更通知プロパティ
+
+		private bool _CanEquip;
+
+		public bool CanEquip
+		{
+			get { return this._CanEquip; }
+			set
+			{
+				if (this._CanEquip != value)
+				{
+					this._CanEquip = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+
+		#region CannotEquip 変更通知プロパティ
+
+		private bool _CannotEquip;
+
+		public bool CannotEquip
+		{
+			get { return this._CannotEquip; }
+			set
+			{
+				if (this._CannotEquip != value)
+				{
+					this._CannotEquip = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+
+		#endregion
+
+		public DaihatsueFilter(Action updateAction) : base(updateAction)
+		{
+			this._Both = true;
+		}
+
+		public override bool Predicate(Ship ship)
+		{
+			if (this.Both) return true;
+			if (this.CanEquip && ship.DaihatsuEquipable) return true;
+			if (this.CannotEquip && !ship.DaihatsuEquipable) return true;
 
 			return false;
 		}
@@ -618,7 +675,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			{
 				this.model = area ?? SallyArea.Default;
 				this.owner = owner;
-				this.Name = area?.Name ?? "出撃海域なし";
+				this.Name = area?.Name ?? "출격해역없음";
 			}
 
 			public bool Predicate(Ship ship)
@@ -626,6 +683,68 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				return this.IsChecked && this.model.Area == ship.SallyArea;
 			}
 		}
+	}
+
+	public class ShipNameSearchFilter : ShipCatalogFilter
+	{
+		#region SearchCommand コマンド
+
+		private ViewModelCommand _SearchCommand;
+
+		public ViewModelCommand SearchCommand
+		{
+			get
+			{
+				if (this._SearchCommand == null)
+				{
+					this._SearchCommand = new ViewModelCommand(this.Update);
+				}
+				return this._SearchCommand;
+			}
+		}
+
+		#endregion
+
+		#region NameString 変更通知プロパティ
+
+		private string _NameString;
+
+		public string NameString
+		{
+			get { return this._NameString; }
+			set
+			{
+				if (this._NameString != value)
+				{
+					this._NameString = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		public ShipNameSearchFilter(Action updateAction) : base(updateAction) { }
+
+		public override bool Predicate(Ship ship)
+		{
+			if (this.NameString == null) return true;
+			if (ship.Info.Name.Contains(this.NameString)) return true;
+			return false;
+		}
+	}
+
+	public class TimeToRepairFilter : ShipCatalogFilter
+	{
+		public TimeToRepairFilter(Action updateAction) : base(updateAction) { }
+
+		public override bool Predicate(Ship ship)
+		{
+			if (ship.Situation.HasFlag(ShipSituation.Repair)) return false;
+			if (ship.TimeToRepair != TimeSpan.Zero) return true;
+			return false;
+		}
+
 	}
 
 	public class ShipDamagedFilter : ShipCatalogFilter
@@ -779,6 +898,183 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			if (this.Both) return true;
 			if (this.Brilliant && ship.ConditionType == ConditionType.Brilliant) return true;
 			if (this.Unbrilliant && ship.ConditionType >= ConditionType.Normal) return true;
+
+			return false;
+		}
+	}
+
+	public class ShipExSlotFilter : ShipCatalogFilter
+	{
+		#region Both 変更通知プロパティ
+		private bool _Both;
+		public bool Both
+		{
+			get { return this._Both; }
+			set
+			{
+				if (this._Both != value)
+				{
+					this._Both = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+		#endregion
+
+		#region Unequiped 変更通知プロパティ
+		private bool _Unequiped;
+		public bool Unequiped
+		{
+			get { return this._Unequiped; }
+			set
+			{
+				if (this._Unequiped != value)
+				{
+					this._Unequiped = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+		#endregion
+
+		#region Equiped 変更通知プロパティ
+		private bool _Equiped;
+		public bool Equiped
+		{
+			get { return this._Equiped; }
+			set
+			{
+				if (this._Equiped != value)
+				{
+					this._Equiped = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+		#endregion
+
+		public ShipExSlotFilter(Action updateAction) : base(updateAction)
+		{
+			this._Both = true;
+		}
+
+		public override bool Predicate(Ship ship)
+		{
+			if (this.Both) return true;
+			if (this.Unequiped && (!ship.ExSlotExists || !ship.ExSlot.Equipped)) return true;
+			if (this.Equiped && ship.ExSlotExists && ship.ExSlot.Equipped) return true;
+
+			return false;
+		}
+	}
+
+	public class ShipFleetFilter : ShipCatalogFilter
+	{
+		#region AllFleet 변경 통지 프로퍼티
+		private bool _AllFleet;
+
+		public bool AllFleet
+		{
+			get { return this._AllFleet; }
+			set
+			{
+				if (this._AllFleet != value)
+				{
+					this._AllFleet = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+		#endregion
+
+		#region FirstFleet 변경 통지 프로퍼티
+		private bool _FirstFleet;
+
+		public bool FirstFleet
+		{
+			get { return this._FirstFleet; }
+			set
+			{
+				if (this._FirstFleet != value)
+				{
+					this._FirstFleet = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+		#endregion
+
+		#region SecondFleet 변경 통지 프로퍼티
+		private bool _SecondFleet;
+
+		public bool SecondFleet
+		{
+			get { return this._SecondFleet; }
+			set
+			{
+				if (this._SecondFleet != value)
+				{
+					this._SecondFleet = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+		#endregion
+
+		#region ThirdFleet 변경 통지 프로퍼티
+		private bool _ThirdFleet;
+
+		public bool ThirdFleet
+		{
+			get { return this._ThirdFleet; }
+			set
+			{
+				if (this._ThirdFleet != value)
+				{
+					this._ThirdFleet = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+		#endregion
+
+		#region FourthFleet 변경 통지 프로퍼티
+		private bool _FourthFleet;
+
+		public bool FourthFleet
+		{
+			get { return this._FourthFleet; }
+			set
+			{
+				if (this._FourthFleet != value)
+				{
+					this._FourthFleet = value;
+					this.RaisePropertyChanged();
+					this.Update();
+				}
+			}
+		}
+		#endregion
+
+		public ShipFleetFilter(Action updateAction) : base(updateAction)
+		{
+			this._AllFleet = true;
+		}
+
+		public override bool Predicate(Ship ship)
+		{
+			if (this.AllFleet) return true;
+			if (this.FirstFleet && ship.FleetId == 1) return true;
+			if (this.SecondFleet && ship.FleetId == 2) return true;
+			if (this.ThirdFleet && ship.FleetId == 3) return true;
+			if (this.FourthFleet && ship.FleetId == 4) return true;
 
 			return false;
 		}

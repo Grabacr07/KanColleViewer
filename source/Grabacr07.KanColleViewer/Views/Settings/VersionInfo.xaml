@@ -22,134 +22,158 @@
 			 d:DesignWidth="550"
 			 d:DesignHeight="300"
 			 d:DataContext="{d:DesignInstance settings:SettingsViewModel}">
-	<Grid Margin="8,0">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="Auto" />
-		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="*" />
-		</Grid.RowDefinitions>
 
-		<StackPanel Grid.ColumnSpan="2"
-					TextOptions.TextFormattingMode="Ideal">
-			<TextBlock Text="{Binding Source={x:Static models:ProductInfo.Product}, Mode=OneWay}"
-					   FontFamily="Segoe UI Light"
-					   FontSize="44"
-					   Foreground="{DynamicResource ActiveForegroundBrushKey}"
-					   Margin="-3,-14,0,0" />
-			<TextBlock Text="tool of the admiral, by the admiral, for the admiral"
-					   FontFamily="Segoe UI Light"
-					   FontSize="16"
-					   Margin="0,-9,0,0" />
-			<TextBlock Margin="-1,0,0,-4">
-				<Run Text="{Binding Source={x:Static models:ProductInfo.Title}, Mode=OneWay}"
-					 FontFamily="Yu Gothic Light"
-					 FontSize="20"
-					 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
-				<Run Text="  " />
-				<Run Text="{Binding Source={x:Static models:ProductInfo.VersionString}, StringFormat=Version {0}, Mode=OneWay}"
-					 FontFamily="Segoe UI Light"
-					 FontSize="20"
-					 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+	<ScrollViewer PanningMode="Both"
+				  VerticalScrollBarVisibility="Auto"
+				  Padding="10">
+		<Grid Margin="8,0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+
+			<StackPanel Grid.ColumnSpan="2"
+						TextOptions.TextFormattingMode="Ideal">
+				<TextBlock Text="{Binding Source={x:Static models:ProductInfo.Product}, Mode=OneWay}"
+						   FontFamily="Segoe UI Light"
+						   FontSize="44"
+						   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+						   Margin="-3,-14,0,0" />
+				<TextBlock Text="tool of the admiral, by the admiral, for the admiral"
+						   FontFamily="Segoe UI Light"
+						   FontSize="16"
+						   Margin="0,-9,0,0" />
+				<TextBlock Margin="-1,0,0,-4">
+					<Run Text="{Binding Source={x:Static models:ProductInfo.Title}, Mode=OneWay}"
+						 FontFamily="Yu Gothic Light"
+						 FontSize="20"
+						 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+					<Run Text="  " />
+					<Run Text="{Binding Source={x:Static models:ProductInfo.VersionString}, StringFormat=Version {0}, Mode=OneWay}"
+						 FontFamily="Segoe UI Light"
+						 FontSize="20"
+						 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+				</TextBlock>
+
+				<Rectangle Height=".99"
+						   Margin="0,10"
+						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+			</StackPanel>
+
+			<StackPanel Grid.Row="1"
+						Grid.Column="0">
+				<TextBlock FontFamily="Segoe UI">
+					<Run Text="Project home:" />
+					<metro2:HyperlinkEx Uri="http://grabacr.net/kancolleviewer">
+						<Run Text="http://grabacr.net/kancolleviewer" />
+					</metro2:HyperlinkEx>
+
+					<LineBreak />
+
+					<Run Text="Source code:" />
+					<metro2:HyperlinkEx Uri="https://github.com/Grabacr07/KanColleViewer">
+						<Run Text="https://github.com/Grabacr07/KanColleViewer" />
+					</metro2:HyperlinkEx>
+
+					<LineBreak />
+
+					<Run Text="Author:" />
+					<metro2:HyperlinkEx Uri="https://twitter.com/Grabacr07">
+						<Run Text="@Grabacr07" />
+					</metro2:HyperlinkEx>
+
+					<LineBreak />
+					<LineBreak />
+
+					<Run Text="Developer:" />
+					<metro2:HyperlinkEx Uri="https://twitter.com/Grabacr07">
+						<Run Text="@Grabacr07" />
+					</metro2:HyperlinkEx>
+					<metro2:HyperlinkEx Uri="https://twitter.com/veigr">
+						<Run Text="@veigr" />
+					</metro2:HyperlinkEx>
+
+					<LineBreak />
+
+					<Run Text="Icon design:" />
+					<metro2:HyperlinkEx Uri="https://twitter.com/Nrtwd/">
+						<Run Text="@Nrtwd" />
+					</metro2:HyperlinkEx>
+
+					<LineBreak />
+
+					<Run Text="Developer(Koran):" />
+					<metro2:HyperlinkEx Uri="http://kaster.egloos.com">
+						<Run Text="Kaster" />
+					</metro2:HyperlinkEx>
+					<metro2:HyperlinkEx Uri="http://swaytwig.com">
+						<Run Text="WolfgangKurz" />
+					</metro2:HyperlinkEx>
+					<metro2:HyperlinkEx Uri="http://kcvkr.tistory.com">
+						<Run Text="Cirno V" />
+					</metro2:HyperlinkEx>
+					<metro2:HyperlinkEx Uri="https://github.com/DaeWha">
+						<Run Text="DaeWha" />
+					</metro2:HyperlinkEx>
+					<metro2:HyperlinkEx Uri="https://github.com/FreyYa">
+						<Run Text="FreyYa" />
+					</metro2:HyperlinkEx>
+				</TextBlock>
+
+				<Rectangle Height=".99"
+						   Margin="0,10"
+						   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+
+				<metro:BindableTextBlock TextSource="{Binding Libraries}"
+										 TextWrapping="Wrap"
+										 FontFamily="Segoe UI"
+										 FontSize="11">
+					<metro:BindableTextBlock.TextTemplates>
+						<DataTemplate DataType="{x:Type settings:HyperlinkViewModel}">
+							<metro:InlineHolder>
+								<metro2:HyperlinkEx Uri="{Binding Uri}">
+									<Run Text="{Binding Text, Mode=OneWay}" />
+								</metro2:HyperlinkEx>
+							</metro:InlineHolder>
+						</DataTemplate>
+						<DataTemplate DataType="{x:Type settings:BindableTextViewModel}">
+							<metro:InlineHolder>
+								<Run Text="{Binding Text, Mode=OneWay}"
+									 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+							</metro:InlineHolder>
+						</DataTemplate>
+					</metro:BindableTextBlock.TextTemplates>
+				</metro:BindableTextBlock>
+			</StackPanel>
+
+			<TextBlock Grid.Row="1"
+					   Grid.Column="0"
+					   FontFamily="Segoe UI"
+					   VerticalAlignment="Bottom"
+					   Margin="0,0,0,16"
+					   TextWrapping="Wrap">
+				<Run Text="{Binding Source={x:Static models:ProductInfo.Copyright}, Mode=OneWay}" />
+				<LineBreak />
+				<Run Text="{Binding Source={x:Static models:ProductInfo.Product}, Mode=OneWay}" />
+				<Run Text="is" />
+				<Run Text="OSS"
+					 ToolTip="Open Source Software" />
+				<Run Text="released under" />
+				<metro2:HyperlinkEx Uri="https://github.com/Grabacr07/KanColleViewer/blob/master/LICENSE.txt">
+					<Run Text="The MIT License." />
+				</metro2:HyperlinkEx>
 			</TextBlock>
 
-			<Rectangle Height=".99"
-					   Margin="0,10"
-					   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-		</StackPanel>
-
-		<StackPanel Grid.Row="1"
-					Grid.Column="0">
-			<TextBlock FontFamily="Segoe UI">
-				<Run Text="Project home:" />
-				<metro2:HyperlinkEx Uri="http://grabacr.net/kancolleviewer">
-					<Run Text="http://grabacr.net/kancolleviewer" />
-				</metro2:HyperlinkEx>
-
-				<LineBreak />
-
-				<Run Text="Source code:" />
-				<metro2:HyperlinkEx Uri="https://github.com/Grabacr07/KanColleViewer">
-					<Run Text="https://github.com/Grabacr07/KanColleViewer" />
-				</metro2:HyperlinkEx>
-
-				<LineBreak />
-
-				<Run Text="Author:" />
-				<metro2:HyperlinkEx Uri="https://twitter.com/Grabacr07">
-					<Run Text="@Grabacr07" />
-				</metro2:HyperlinkEx>
-
-				<LineBreak />
-				<LineBreak />
-
-				<Run Text="Developer:" />
-				<metro2:HyperlinkEx Uri="https://twitter.com/Grabacr07">
-					<Run Text="@Grabacr07" />
-				</metro2:HyperlinkEx>
-				<metro2:HyperlinkEx Uri="https://twitter.com/veigr">
-					<Run Text="@veigr" />
-				</metro2:HyperlinkEx>
-
-				<LineBreak />
-
-				<Run Text="Icon design:" />
-				<metro2:HyperlinkEx Uri="https://twitter.com/Nrtwd/">
-					<Run Text="@Nrtwd" />
-				</metro2:HyperlinkEx>
-			</TextBlock>
-
-			<Rectangle Height=".99"
-					   Margin="0,10"
-					   Style="{DynamicResource SeparatorRectangleStyleKey}" />
-
-			<metro:BindableTextBlock TextSource="{Binding Libraries}"
-									 TextWrapping="Wrap"
-									 FontFamily="Segoe UI"
-									 FontSize="11">
-				<metro:BindableTextBlock.TextTemplates>
-					<DataTemplate DataType="{x:Type settings:HyperlinkViewModel}">
-						<metro:InlineHolder>
-							<metro2:HyperlinkEx Uri="{Binding Uri}">
-								<Run Text="{Binding Text, Mode=OneWay}" />
-							</metro2:HyperlinkEx>
-						</metro:InlineHolder>
-					</DataTemplate>
-					<DataTemplate DataType="{x:Type settings:BindableTextViewModel}">
-						<metro:InlineHolder>
-							<Run Text="{Binding Text, Mode=OneWay}"
-								 Foreground="{DynamicResource ActiveForegroundBrushKey}" />
-						</metro:InlineHolder>
-					</DataTemplate>
-				</metro:BindableTextBlock.TextTemplates>
-			</metro:BindableTextBlock>
-		</StackPanel>
-
-		<TextBlock Grid.Row="1"
-				   Grid.Column="0"
-				   FontFamily="Segoe UI"
-				   VerticalAlignment="Bottom"
-				   Margin="0,0,0,16"
-				   TextWrapping="Wrap">
-			<Run Text="{Binding Source={x:Static models:ProductInfo.Copyright}, Mode=OneWay}" />
-			<LineBreak />
-			<Run Text="{Binding Source={x:Static models:ProductInfo.Product}, Mode=OneWay}" />
-			<Run Text="is" />
-			<Run Text="OSS"
-				 ToolTip="Open Source Software" />
-			<Run Text="released under" />
-			<metro2:HyperlinkEx Uri="https://github.com/Grabacr07/KanColleViewer/blob/master/LICENSE.txt">
-				<Run Text="The MIT License." />
-			</metro2:HyperlinkEx>
-		</TextBlock>
-
-		<kcvc:AppIcon Grid.Row="1"
-					  Grid.Column="1"
-					  Width="210"
-					  HorizontalAlignment="Right"
-					  Background="{DynamicResource ThemeBrushKey}"
-					  VerticalAlignment="Bottom" />
-	</Grid>
+			<kcvc:AppIcon Grid.Row="1"
+						  Grid.Column="1"
+						  Width="210"
+						  HorizontalAlignment="Right"
+						  Background="{DynamicResource ThemeBrushKey}"
+						  VerticalAlignment="Bottom" />
+		</Grid>
+	</ScrollViewer>
 </UserControl>

@@ -60,6 +60,60 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
+		#region EncounterPercent
+
+		private double _EncounterPercent;
+		public double EncounterPercent
+		{
+			get { return this._EncounterPercent; }
+			private set
+			{
+				if (this._EncounterPercent != value)
+				{
+					this._EncounterPercent = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region PartEncounterPercent
+
+		private List<SecondResult> _PartEncounterPercent;
+		public List<SecondResult> PartEncounterPercent
+		{
+			get { return this._PartEncounterPercent; }
+			private set
+			{
+				if (this._PartEncounterPercent != value)
+				{
+					this._PartEncounterPercent = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
+		#region FirstEncounter
+
+		private double _FirstEncounter;
+		public double FirstEncounter
+		{
+			get { return this._FirstEncounter; }
+			private set
+			{
+				if (this._FirstEncounter != value)
+				{
+					this._FirstEncounter = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+		#endregion
+
 		#region MinAirSuperiorityPotential 変更通知プロパティ
 
 		private double _MinAirSuperiorityPotential;
@@ -183,6 +237,7 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		#endregion
 
+
 		#region IsReady 変更通知プロパティ
 
 		private bool _IsReady;
@@ -200,6 +255,88 @@ namespace Grabacr07.KanColleWrapper.Models
 					this._IsReady = value;
 					this.RaisePropertyChanged();
 				}
+			}
+		}
+
+		#endregion
+
+		#region InShortSupply 変更通知プロパティ
+
+		/// <summary>
+		/// 艦隊の出撃準備ができているかどうかを示す値を取得します。
+		/// </summary>
+		public bool InShortSupply => this.Situation.HasFlag(FleetSituation.InShortSupply);
+
+		#endregion
+
+		#region HeavilyDamaged 変更通知プロパティ
+
+		/// <summary>
+		/// 艦隊の出撃準備ができているかどうかを示す値を取得します。
+		/// </summary>
+		public bool HeavilyDamaged => this.Situation.HasFlag(FleetSituation.HeavilyDamaged);
+
+		#endregion
+
+		#region Repairing 変更通知プロパティ
+
+		/// <summary>
+		/// 艦隊の出撃準備ができているかどうかを示す値を取得します。
+		/// </summary>
+		public bool Repairing => this.Situation.HasFlag(FleetSituation.Repairing);
+
+		#endregion
+
+		#region FlagshipIsRepairShip 変更通知プロパティ
+
+		/// <summary>
+		/// 艦隊の出撃準備ができているかどうかを示す値を取得します。
+		/// </summary>
+		public bool FlagshipIsRepairShip => this.Situation.HasFlag(FleetSituation.FlagshipIsRepairShip);
+
+		#endregion
+
+
+		#region UsedFuel 변경통지 프로퍼티
+
+		private int _UsedFuel;
+		public int UsedFuel
+		{
+			get { return this._UsedFuel; }
+			set
+			{
+				this._UsedFuel = value;
+				this.RaisePropertyChanged();
+			}
+		}
+
+		#endregion
+
+		#region UsedBull 변경통지 프로퍼티
+
+		private int _UsedBull;
+		public int UsedBull
+		{
+			get { return this._UsedBull; }
+			set
+			{
+				this._UsedBull = value;
+				this.RaisePropertyChanged();
+			}
+		}
+
+		#endregion
+
+		#region UsedBauxite 변경통지 프로퍼티
+
+		private int _UsedBauxite;
+		public int UsedBauxite
+		{
+			get { return this._UsedBauxite; }
+			set
+			{
+				this._UsedBauxite= value;
+				this.RaisePropertyChanged();
 			}
 		}
 
@@ -233,17 +370,110 @@ namespace Grabacr07.KanColleWrapper.Models
 			var ships = this.source.SelectMany(x => x.Ships).WithoutEvacuated().ToArray();
 			var firstFleetShips = this.source.FirstOrDefault()?.Ships.WithoutEvacuated().ToArray() ?? new Ship[0];
 
+			List<SecondResult> partPercent = new List<SecondResult>();
+
+			List<ShipSlot> SecondSlotList = new List<ShipSlot>(this.MakeSecondList(ships));
+			List<SecondResult> TotalSecond = new List<SecondResult>(MakeSecondResult(SecondSlotList));
+
+			List<int> HitList = new List<int>(this.MakeHitList(ships));
+			for (int i = 0; i < HitList.Count; i++)
+			{
+				partPercent.Add(new SecondResult { Hit = HitList[i], SecondEncounter = TotalSecond.Where(x => x.Hit == HitList[i]).Sum(y => y.SecondEncounter) });
+			}
+
+			if (ships.HasItems())
+			{
+				this.UsedFuel = ships.Sum(x => x.UsedFuel);
+				this.UsedBull = ships.Sum(x => x.UsedBull);
+				this.UsedBauxite = ships.Sum(x =>
+					x.Slots.Sum(y => y.Lost * 5)
+				);
+			}
+			else this.UsedFuel = this.UsedBull = this.UsedBauxite = 0;
+
 			this.TotalLevel = ships.HasItems() ? ships.Sum(x => x.Level) : 0;
 			this.AverageLevel = ships.HasItems() ? (double)this.TotalLevel / ships.Length : 0.0;
 			this.MinAirSuperiorityPotential = firstFleetShips.Sum(x => x.GetAirSuperiorityPotential(AirSuperiorityCalculationOptions.Minimum));
 			this.MaxAirSuperiorityPotential = firstFleetShips.Sum(x => x.GetAirSuperiorityPotential(AirSuperiorityCalculationOptions.Maximum));
-			this.Speed = new FleetSpeed(Array.ConvertAll(ships, x => x.Speed));
+
+			this.EncounterPercent = TotalSecond.Sum(x => x.SecondEncounter);
+			this.PartEncounterPercent = partPercent;
+			this.FirstEncounter = ships.Sum(s => s.CalcFirstEncounterPercent());
+
+			{
+				if (ships.All(x => x.Speed == ShipSpeed.Fastest)) // 최속으로만 구성
+					this.Speed = FleetSpeed.Fastest;
+				else if (ships.All(x => x.Speed == ShipSpeed.Faster)) // 고속+로만 구성
+					this.Speed = FleetSpeed.Faster;
+				else if (ships.All(x => x.Speed == ShipSpeed.Fast)) // 고속으로만 구성
+					this.Speed = FleetSpeed.Fast;
+				else if (ships.All(x => x.Speed == ShipSpeed.Slow)) // 저속으로만 구성
+					this.Speed = FleetSpeed.Low;
+
+				else if (!ships.Any(x => x.Speed == ShipSpeed.Fast || x.Speed == ShipSpeed.Slow)) // 최속&고속+ 구성
+					this.Speed = FleetSpeed.Hybrid_Faster;
+				else if (!ships.Any(x => x.Speed == ShipSpeed.Slow)) // 최속&고속+&고속 구성
+					this.Speed = FleetSpeed.Hybrid_Fast;
+				else
+					this.Speed = FleetSpeed.Hybrid_Low; // 저속 포함 구성
+			}
+			// this.Speed = new FleetSpeed(Array.ConvertAll(ships, x => x.Speed));
 
 			var logic = ViewRangeCalcLogic.Get(KanColleClient.Current.Settings.ViewRangeCalcType);
 			this.ViewRange = logic.Calc(this.source);
 			this.ViewRangeCalcType = logic.Name;
 
 			this.Calculated?.Invoke(this, new EventArgs());
+		}
+		private List<ShipSlot> MakeSecondList(Ship[] ships)
+		{
+
+			var aircraft = ships.Where(x => x.Info.IsAirCraft).ToList();
+			List<int> HitList = new List<int>(this.MakeHitList(ships));
+			List<ShipSlot> tempSlotList = new List<ShipSlot>();
+			for (int j = 0; j < HitList.Count; j++)
+			{
+				foreach (var item in aircraft)
+				{
+					tempSlotList = tempSlotList.Concat(item.EquippedItems.Where(x => x.Item.Info.Hit == HitList[j] && x.Item.Info.IsSecondEncounter)).ToList();
+				}
+			}
+			return tempSlotList;
+		}
+		private List<SecondResult> MakeSecondResult(List<ShipSlot> SecondSlotList)
+		{
+			List<SecondResult> templist = new List<SecondResult>();
+			for (int i = 0; i < SecondSlotList.Count; i++)
+			{
+				SecondResult temp = new SecondResult();
+				if (i == 0)
+				{
+					temp.SecondEncounter = SecondSlotList[i].Item.Info.SecondEncounter;
+					temp.Hit = SecondSlotList[i].Item.Info.Hit;
+					templist.Add(temp);
+				}
+				else
+				{
+					temp.SecondEncounter = (1 - templist.Sum(x => x.SecondEncounter)) * SecondSlotList[i].Item.Info.SecondEncounter;
+					temp.Hit = SecondSlotList[i].Item.Info.Hit;
+					templist.Add(temp);
+				}
+			}
+			return templist;
+		}
+
+		private List<int> MakeHitList(Ship[] ships)
+		{
+
+			List<int> temp = new List<int>();
+			for (int i = 0; i < ships.Count(); i++)
+			{
+				temp = temp.Concat(ships[i].HitStatusList()).ToList();
+			}
+			if (temp.Count <= 0) return new List<int>();
+			temp = temp.Distinct().ToList();
+			temp.Sort((int x, int y) => y.CompareTo(x));
+			return temp;
 		}
 
 		public void Update()
@@ -342,7 +572,17 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.Situation = state;
 			this.IsReady = ready;
 
+			this.RaisePropertyChanged(nameof(this.InShortSupply));
+			this.RaisePropertyChanged(nameof(this.HeavilyDamaged));
+			this.RaisePropertyChanged(nameof(this.Repairing));
+			this.RaisePropertyChanged(nameof(this.FlagshipIsRepairShip));
+
 			this.Updated?.Invoke(this, new EventArgs());
 		}
+	}
+	public class SecondResult
+	{
+		public int Hit { get; set; }
+		public double SecondEncounter { get; set; }
 	}
 }

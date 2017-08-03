@@ -12,7 +12,7 @@ namespace Grabacr07.KanColleViewer.Models
 
 		private static readonly double?[] zoomTable =
 		{
-			0.25, 0.50, 0.75,
+			0.25, 0.50, 0.75, 0.80, 0.85,
 			1.00, 1.25, 1.50, 1.75,
 			2.00, 2.50,
 			3.00,

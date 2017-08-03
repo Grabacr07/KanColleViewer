@@ -13,22 +13,23 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 		#region static members
 
 		private const int selectorNum = 4;
-		public static readonly SortableColumn NoneColumn = new SortableColumn { Name = "なし", KeySelector = null };
+		public static readonly SortableColumn NoneColumn = new SortableColumn { Name = "없음", KeySelector = null };
 		public static readonly SortableColumn IdColumn = new SortableColumn { Name = "ID", KeySelector = x => x.Id, };
-		public static readonly SortableColumn StypeColumn = new SortableColumn { Name = "艦種", KeySelector = x => x.Info.ShipType.SortNumber, };
-		public static readonly SortableColumn NameColumn = new SortableColumn { Name = "艦名", KeySelector = x => x.Info.SortId, };
-		public static readonly SortableColumn LevelColumn = new SortableColumn { Name = "レベル", KeySelector = x => x.Level, DefaultIsDescending = true, };
-		public static readonly SortableColumn ExpColumn = new SortableColumn { Name = "次のレベルまでの経験値", KeySelector = x => x.ExpForNextLevel, };
-		public static readonly SortableColumn CondColumn = new SortableColumn { Name = "Condition 値", KeySelector = x => x.Condition, DefaultIsDescending = true, };
-		public static readonly SortableColumn FirepowerColumn = new SortableColumn { Name = "火力", KeySelector = x => x.Firepower.Current, DefaultIsDescending = true, };
-		public static readonly SortableColumn TorpedoColumn = new SortableColumn { Name = "雷装", KeySelector = x => x.Torpedo.Current, DefaultIsDescending = true, };
-		public static readonly SortableColumn AAColumn = new SortableColumn { Name = "対空", KeySelector = x => x.AA.Current, DefaultIsDescending = true, };
-		public static readonly SortableColumn ArmerColumn = new SortableColumn { Name = "装甲", KeySelector = x => x.Armer.Current, DefaultIsDescending = true, };
-		public static readonly SortableColumn LuckColumn = new SortableColumn { Name = "運", KeySelector = x => x.Luck.Current, DefaultIsDescending = true, };
-		public static readonly SortableColumn HPColumn = new SortableColumn { Name = "耐久", KeySelector = x => x.HP.Maximum, DefaultIsDescending = true, };
-		public static readonly SortableColumn ViewRangeColumn = new SortableColumn { Name = "索敵", KeySelector = x => x.ViewRange, DefaultIsDescending = true, };
-		public static readonly SortableColumn ASWColumn = new SortableColumn { Name = "対潜", KeySelector = x => x.ASW, DefaultIsDescending = true, };
-		public static readonly SortableColumn TimeToRepairColumn = new SortableColumn { Name = "修復時間", KeySelector = x => x.TimeToRepair.Ticks, DefaultIsDescending = true, };
+		public static readonly SortableColumn StypeColumn = new SortableColumn { Name = "함종", KeySelector = x => x.Info.ShipType.SortNumber, };
+		public static readonly SortableColumn NameColumn = new SortableColumn { Name = "함명", KeySelector = x => x.Info.SortId, };
+		public static readonly SortableColumn LevelColumn = new SortableColumn { Name = "레벨", KeySelector = x => x.Level, DefaultIsDescending = true, };
+		public static readonly SortableColumn ExpColumn = new SortableColumn { Name = "다음 레벨까지 경험치", KeySelector = x => x.ExpForNextLevel, };
+		public static readonly SortableColumn CondColumn = new SortableColumn { Name = "컨디션", KeySelector = x => x.Condition, DefaultIsDescending = true, };
+		public static readonly SortableColumn HPColumn = new SortableColumn { Name = "최대HP", KeySelector = x => x.HP.Maximum, DefaultIsDescending = true, };
+		public static readonly SortableColumn FirepowerColumn = new SortableColumn { Name = "화력", KeySelector = x => x.Firepower.Current, DefaultIsDescending = true, };
+		public static readonly SortableColumn TorpedoColumn = new SortableColumn { Name = "뇌장", KeySelector = x => x.Torpedo.Current, DefaultIsDescending = true, };
+		public static readonly SortableColumn YasenFpColumn = new SortableColumn { Name = "화력+뇌장", KeySelector = x => x.YasenFp.Current, DefaultIsDescending = true, };
+		public static readonly SortableColumn ArmerColumn = new SortableColumn { Name = "장갑", KeySelector = x => x.Armer.Current, DefaultIsDescending = true, };
+		public static readonly SortableColumn AAColumn = new SortableColumn { Name = "대공", KeySelector = x => x.AA.Current, DefaultIsDescending = true, };
+		public static readonly SortableColumn ASWColumn = new SortableColumn { Name = "대잠", KeySelector = x => x.ASW.Current, DefaultIsDescending = true, };
+		public static readonly SortableColumn LuckColumn = new SortableColumn { Name = "운", KeySelector = x => x.Luck.Current, DefaultIsDescending = true, };
+		public static readonly SortableColumn ViewRangeColumn = new SortableColumn { Name = "색적", KeySelector = x => x.ViewRange, DefaultIsDescending = true, };
+		public static readonly SortableColumn TimeToRepairColumn = new SortableColumn { Name = "입거시간", KeySelector = x => x.TimeToRepair.Ticks, DefaultIsDescending = true, };
 
 		public static SortableColumn[] Columns { get; set; }
 
@@ -42,14 +43,15 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				NameColumn,
 				LevelColumn,
 				CondColumn,
+				HPColumn,
 				FirepowerColumn,
 				TorpedoColumn,
-				AAColumn,
+				YasenFpColumn,
 				ArmerColumn,
-				LuckColumn,
-				HPColumn,
-				ViewRangeColumn,
+				AAColumn,
 				ASWColumn,
+				LuckColumn,
+				ViewRangeColumn,
 				TimeToRepairColumn,
 			};
 		}
@@ -81,6 +83,13 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 			this.UpdateSelectors();
 
 			this.SetFirst(LevelColumn);
+		}
+		public ShipCatalogSortWorker(bool level)
+		{
+			this.UpdateSelectors();
+
+			if (level) this.SetFirst(LevelColumn);
+			else this.SetFirst(TimeToRepairColumn);
 		}
 
 		public IEnumerable<Ship> Sort(IEnumerable<Ship> ships)

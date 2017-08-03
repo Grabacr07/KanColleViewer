@@ -41,7 +41,7 @@
 			<Rectangle Height="1"
 					   Style="{DynamicResource SeparatorRectangleStyleKey}"
 					   Margin="0,0,0,12" />
-			<metro2:CallMethodButton Content="閉じる"
+			<metro2:CallMethodButton Content="닫기"
 									 MethodName="Close"
 									 IsCancel="True"
 									 MinWidth="110"

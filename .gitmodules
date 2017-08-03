@@ -1,6 +1,6 @@
 [submodule "source/MetroRadiance"]
 	path = source/MetroRadiance
-	url = https://github.com/Grabacr07/MetroRadiance
+	url = https://github.com/CirnoV/MetroRadiance.git
 [submodule "source/MetroTrilithon"]
 	path = source/MetroTrilithon
-	url = https://github.com/Grabacr07/MetroTrilithon
+	url = https://github.com/CirnoV/MetroTrilithon.git

@@ -4,7 +4,7 @@
 
 	<Style TargetType="{x:Type controls:ColorIndicator}">
 		<Setter Property="Background"
-				Value="{DynamicResource HighlightForegroundBrushKey}" />
+				Value="#55D7D7E1" />
 		<Setter Property="HorizontalContentAlignment"
 				Value="Left" />
 		<Setter Property="Template">
@@ -57,7 +57,7 @@
 									<Rectangle />
 									<Rectangle />
 									<Rectangle />
-									<!-- Columns = 10 まで対応 -->
+									<!-- Columns = 10 까지 대응 -->
 								</x:Array>
 							</ItemsControl.ItemsSource>
 						</ItemsControl>

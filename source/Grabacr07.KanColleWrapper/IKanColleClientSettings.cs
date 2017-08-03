@@ -24,10 +24,13 @@ namespace Grabacr07.KanColleWrapper
 		string ViewRangeCalcType { get; }
 		bool IsViewRangeCalcIncludeFirstFleet { get; }
 		bool IsViewRangeCalcIncludeSecondFleet { get; }
-
+		
+		bool AutoTranslateEnable { get; }
 		/// <summary>
 		/// 艦隊ステータスにおいて、旗艦が工作艦かどうかを確認するかどうかを示す値を取得します。
 		/// </summary>
 		bool CheckFlagshipIsRepairShip { get; }
+
+		bool QuestOnAllTabs { get; }
 	}
 }

@@ -54,7 +54,12 @@ namespace Grabacr07.KanColleWrapper.Models
             this.Upgraded = upgraded;
         }
 
-        public override string ToString()
+		public ModernizableStatus Update(int upgraded)
+		{
+			return new ModernizableStatus(new int[] { this.Default, this.Max }, upgraded);
+		}
+
+		public override string ToString()
         {
             return $"Status = {this.Default}->{this.Max}, Current = {this.Current}{(this.IsMax ? "(max)" : "")}";
         }

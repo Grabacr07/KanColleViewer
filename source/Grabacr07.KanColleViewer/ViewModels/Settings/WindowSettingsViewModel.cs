@@ -8,6 +8,8 @@ using Grabacr07.KanColleViewer.Models.Settings;
 using Livet;
 using MetroTrilithon.Linq;
 using MetroTrilithon.Mvvm;
+using System.Windows;
+using Grabacr07.KanColleWrapper;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Settings
 {
@@ -16,6 +18,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 		private KanColleWindowSettings settings;
 
 		public IReadOnlyCollection<DisplayViewModel<ExitConfirmationType>> ExitConfirmationTypes { get; }
+		public IReadOnlyCollection<DisplayViewModel<ExitConfirmationType>> RefreshConfirmationTypes { get; }
+
 
 		public IReadOnlyCollection<DisplayViewModel<string>> TaskbarProgressFeatures { get; }
 
@@ -31,6 +35,25 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 				if (this._IsSplit != value)
 				{
 					this._IsSplit = value;
+					this.RaisePropertyChanged();
+				}
+			}
+		}
+
+        #endregion
+
+        #region AlwaysTopView 変更通知プロパティ
+
+        private bool _AlwaysTopView;
+
+		public bool AlwaysTopView
+        {
+			get { return this._AlwaysTopView; }
+			set
+			{
+				if (this._AlwaysTopView != value)
+				{
+					this._AlwaysTopView = value;
 					this.RaisePropertyChanged();
 				}
 			}
@@ -70,12 +93,18 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 		{
 			this.ExitConfirmationTypes = new List<DisplayViewModel<ExitConfirmationType>>
 			{
-				DisplayViewModel.Create(ExitConfirmationType.None, "確認しない"),
-				DisplayViewModel.Create(ExitConfirmationType.InSortieOnly, "出撃中のみ確認する"),
-				DisplayViewModel.Create(ExitConfirmationType.Always, "常に確認する"),
+				DisplayViewModel.Create(ExitConfirmationType.None,"확인하지않음"),
+				DisplayViewModel.Create(ExitConfirmationType.InSortieOnly, "출격중에만 확인"),
+				DisplayViewModel.Create(ExitConfirmationType.Always, "언제나 확인"),
 			};
-			this.TaskbarProgressFeatures = EnumerableEx
-				.Return(GeneralSettings.TaskbarProgressSource.ToDefaultDisplay("使用しない"))
+			this.RefreshConfirmationTypes = new List<DisplayViewModel<ExitConfirmationType>>
+			{
+				DisplayViewModel.Create(ExitConfirmationType.None,"확인하지않음"),
+				DisplayViewModel.Create(ExitConfirmationType.InSortieOnly, "출격중에만 확인"),
+				DisplayViewModel.Create(ExitConfirmationType.Always, "언제나 확인"),
+			};
+			this.TaskbarProgressFeatures = MetroTrilithon.Linq.EnumerableEx
+				.Return(GeneralSettings.TaskbarProgressSource.ToDefaultDisplay("사용안함"))
 				.Concat(TaskbarProgress.Features.ToDisplay(x => x.Id, x => x.DisplayName))
 				.ToList();
 		}
@@ -84,6 +113,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 		{
 			this.settings = SettingsHost.Instance<KanColleWindowSettings>();
 			this.settings?.IsSplit.Subscribe(x => this.IsSplit = x).AddTo(this);
+            this.settings?.AlwaysTopView.Subscribe(x => this.AlwaysTopView = x).AddTo(this);
 			this.settings?.Dock.Subscribe(x => this.Dock = x).AddTo(this);
 		}
 
@@ -97,7 +127,30 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 			if (this.settings != null)
 			{
 				this.settings.IsSplit.Value = this.IsSplit;
-				this.settings.Dock.Value = this.Dock;
+                this.settings.AlwaysTopView.Value = this.AlwaysTopView;
+                this.settings.Dock.Value = this.Dock;
+				try
+				{
+					if (WindowService.Current != null)
+					{
+						if (this.settings?.Dock == Dock.Right || this.settings?.Dock == Dock.Left)
+						{
+							WindowService.Current.Information.Vertical = Visibility.Collapsed;
+							WindowService.Current.Information.Horizontal = Visibility.Visible;
+							WindowService.Current.Information.Overview.Vertical = Visibility.Collapsed;
+							WindowService.Current.Information.Overview.Horizontal = Visibility.Visible;
+						}
+						else
+						{
+							WindowService.Current.Information.Vertical = Visibility.Visible;
+							WindowService.Current.Information.Horizontal = Visibility.Collapsed;
+							WindowService.Current.Information.Overview.Vertical = Visibility.Visible;
+							WindowService.Current.Information.Overview.Horizontal = Visibility.Collapsed;
+						}
+						WindowService.Current.UpdateDockPattern();
+					}
+				}
+				catch { }
 			}
 		}
 
@@ -106,6 +159,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 			if (this.settings != null)
 			{
 				this.IsSplit = this.settings.IsSplit;
+                this.AlwaysTopView = this.settings.AlwaysTopView;
 				this.Dock = this.settings.Dock;
 			}
 		}

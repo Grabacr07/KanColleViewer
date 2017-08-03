@@ -6,6 +6,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+             xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
              xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties"
              xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
              xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
@@ -79,7 +80,7 @@
                   Grid.IsSharedSizeScope="True">
         <StackPanel VerticalAlignment="Top"
                     d:DataContext="{d:DesignData /SampleData/ShipyardViewModelSampleData.xaml}">
-            <GroupBox Header="入渠"
+            <GroupBox Header="입거"
                       Margin="10,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -109,6 +110,8 @@
                                                       SharedSizeGroup="RemainingTime" />
                                 </Grid.ColumnDefinitions>
 
+                                <TextBlock x:Name="Level" 
+											   Text="Lv." />
                                 <TextBlock Grid.Row="0"
                                            Grid.Column="1"
                                            Text="{Binding Resources.Repairyard_ShipName, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
@@ -146,7 +149,8 @@
                                                                   SharedSizeGroup="RemainingTime" />
                                             </Grid.ColumnDefinitions>
 
-                                            <TextBlock Text="{Binding Id, Mode=OneWay}" />
+                                            <TextBlock x:Name="Level" 
+													   Text="{Binding Level, Mode=OneWay}" />
                                             <TextBlock x:Name="ShipName"
                                                        Grid.Column="1"
                                                        Text="{Binding Ship, Mode=OneWay}"
@@ -214,7 +218,7 @@
                 </Grid>
             </GroupBox>
 
-            <GroupBox Header="建造"
+            <GroupBox Header="건조"
                       Margin="10">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -235,8 +239,6 @@
                                 </Grid.Resources>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"
-                                                      SharedSizeGroup="Number" />
-                                    <ColumnDefinition Width="Auto"
                                                       SharedSizeGroup="ShipName" />
                                     <ColumnDefinition Width="Auto"
                                                       SharedSizeGroup="CompleteTime" />
@@ -245,13 +247,13 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Grid.Row="0"
-                                           Grid.Column="1"
+                                           Grid.Column="0"
                                            Text="{Binding Resources.Dockyard_ShipName, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
                                 <TextBlock Grid.Row="0"
-                                           Grid.Column="2"
+                                           Grid.Column="1"
                                            Text="{Binding Resources.Dockyard_TimeComplete, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
                                 <TextBlock Grid.Row="0"
-                                           Grid.Column="3"
+                                           Grid.Column="2"
                                            Text="{Binding Resources.Dockyard_TimeRemaining, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
                             </Grid>
                         </Border>
@@ -272,30 +274,26 @@
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto"
-                                                                  SharedSizeGroup="Number" />
-                                                <ColumnDefinition Width="Auto"
                                                                   SharedSizeGroup="ShipName" />
                                                 <ColumnDefinition Width="Auto"
                                                                   SharedSizeGroup="CompleteTime" />
                                                 <ColumnDefinition Width="Auto"
                                                                   SharedSizeGroup="RemainingTime" />
                                             </Grid.ColumnDefinitions>
-
-                                            <TextBlock Text="{Binding Id, Mode=OneWay}" />
+											
                                             <TextBlock x:Name="ShipName"
-                                                       Grid.Column="1"
                                                        Text="{Binding Ship, Mode=OneWay}"
                                                        Style="{DynamicResource EmphaticTextStyleKey}"
                                                        Margin="8,0" />
                                             <TextBlock x:Name="CompleteTime"
-                                                       Grid.Column="2"
+                                                       Grid.Column="1"
                                                        Text="{Binding CompleteTime, Mode=OneWay}" />
                                             <TextBlock x:Name="RemainingTime"
-                                                       Grid.Column="3"
+                                                       Grid.Column="2"
                                                        Text="{Binding Remaining, Mode=OneWay}" />
 
                                             <TextBlock x:Name="Message"
-                                                       Grid.Column="2"
+                                                       Grid.Column="1"
                                                        Grid.ColumnSpan="2"
                                                        Text="{Binding Resources.Dockyard_Unused, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
                                                        Style="{DynamicResource EmphaticTextStyleKey}"
@@ -384,7 +382,7 @@
                             <StackPanel>
                                 <Border Background="{DynamicResource BorderBrushKey}"
                                         Padding="8,6">
-                                    <TextBlock Text="装備開発"
+                                    <TextBlock Text="장비개발"
                                                Style="{DynamicResource HeaderTextStyleKey}" />
                                 </Border>
                                 <DockPanel HorizontalAlignment="Left"
@@ -395,7 +393,7 @@
                                             <Style TargetType="{x:Type TextBlock}"
                                                    BasedOn="{StaticResource DefaultTextStyleKey}">
                                                 <Setter Property="Text"
-                                                        Value="成功" />
+                                                        Value="성공" />
                                                 <Setter Property="Foreground"
                                                         Value="{DynamicResource AccentForegroundBrushKey}" />
                                                 <Setter Property="Background"
@@ -404,7 +402,7 @@
                                                     <DataTrigger Binding="{Binding CreatedSlotItem.Succeed}"
                                                                  Value="False">
                                                         <Setter Property="Text"
-                                                                Value="失敗" />
+                                                                Value="실패" />
                                                         <Setter Property="Foreground"
                                                                 Value="{DynamicResource ForegroundBrushKey}" />
                                                         <Setter Property="Background"
@@ -413,7 +411,7 @@
                                                     <DataTrigger Binding="{Binding CreatedSlotItem.Succeed}"
                                                                  Value="{x:Null}">
                                                         <Setter Property="Text"
-                                                                Value="結果なし" />
+                                                                Value="결과없음" />
                                                         <Setter Property="Foreground"
                                                                 Value="{DynamicResource ForegroundBrushKey}" />
                                                         <Setter Property="Background"
@@ -424,6 +422,10 @@
                                         </TextBlock.Style>
                                     </TextBlock>
                                     <Border Width="4" />
+                                    <kcvc:SlotItemIcon Margin="4,0"
+                                                       Width="20"
+                                                       Height="20"
+                                                       Type="{Binding CreatedSlotItem.IconType}" />
                                     <TextBlock Margin="0,6"
                                                Text="{Binding CreatedSlotItem.Name}">
                                         <TextBlock.Style>

@@ -8,24 +8,24 @@ using MetroTrilithon.Serialization;
 namespace Grabacr07.KanColleViewer.Models.Settings
 {
 	/// <summary>
-	/// ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒg‚ÉŠÖ˜A‚·‚éÝ’è‚ð•\‚·Ã“IƒvƒƒpƒeƒB‚ðŒöŠJ‚µ‚Ü‚·B
+	/// ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆã«é–¢é€£ã™ã‚‹è¨­å®šã‚’è¡¨ã™é™çš„ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’å…¬é–‹ã—ã¾ã™ã€‚
 	/// </summary>
 	public static class ScreenshotSettings
 	{
 		/// <summary>
-		/// ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒg‚Ì•Û‘¶æƒtƒHƒ‹ƒ_[‚ð•\‚·Ý’è’l‚ðŽæ“¾‚µ‚Ü‚·B
+		/// ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆã®ä¿å­˜å…ˆãƒ•ã‚©ãƒ«ãƒ€ãƒ¼ã‚’è¡¨ã™è¨­å®šå€¤ã‚’å–å¾—ã—ã¾ã™ã€‚
 		/// </summary>
 		public static SerializableProperty<string> Destination { get; }
 			= new SerializableProperty<string>(GetKey(), Providers.Local, Environment.GetFolderPath(Environment.SpecialFolder.MyPictures));
 
 		/// <summary>
-		/// ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒg‚Ìƒtƒ@ƒCƒ‹–¼‚ð•\‚·Ý’è’l‚ðŽæ“¾‚µ‚Ü‚·B
+		/// ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆã®ãƒ•ã‚¡ã‚¤ãƒ«åã‚’è¡¨ã™è¨­å®šå€¤ã‚’å–å¾—ã—ã¾ã™ã€‚
 		/// </summary>
 		public static SerializableProperty<string> Filename { get; }
 			= new SerializableProperty<string>(GetKey(), Providers.Local, "KanColle-{0:d04}.png");
 
 		/// <summary>
-		/// ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒg‚ÌƒCƒ[ƒWŒ`Ž®‚ð•\‚·Ý’è’l‚ðŽæ“¾‚µ‚Ü‚·B
+		/// ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆã®ã‚¤ãƒ¡ãƒ¼ã‚¸å½¢å¼ã‚’è¡¨ã™è¨­å®šå€¤ã‚’å–å¾—ã—ã¾ã™ã€‚
 		/// </summary>
 		public static SerializableProperty<SupportedImageFormat> Format { get; }
 			= new SerializableProperty<SupportedImageFormat>(GetKey(), Providers.Local, SupportedImageFormat.Png);

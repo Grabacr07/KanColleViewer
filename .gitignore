@@ -145,3 +145,5 @@ $RECYCLE.BIN/
 
 # Mac crap
 .DS_Store
+/packaging
+/source/.vs/config

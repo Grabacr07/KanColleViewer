@@ -41,7 +41,7 @@ namespace Grabacr07.KanColleViewer.Controls
 
 		#endregion
 
-		#region Columns 依存関係プロパティ
+		#region Columns 종속성 프로퍼티
 
 		public int Columns
 		{
@@ -72,7 +72,10 @@ namespace Grabacr07.KanColleViewer.Controls
 			else if (percentage <= 0.75) color = Color.FromRgb(240, 240, 0);
 
 			// 0.75 より大きいとき、「小破未満」
-			else color = Color.FromRgb(64, 200, 32);
+			else if (percentage < 1.0) color = Color.FromRgb(64, 200, 32);
+
+			// 1 (100%)
+			else color = Color.FromRgb(40, 160, 240);
 
 			this.Foreground = new SolidColorBrush(color);
 		}

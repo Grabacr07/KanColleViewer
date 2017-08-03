@@ -6,6 +6,7 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
 			 xmlns:v="clr-namespace:Grabacr07.KanColleViewer.Views"
 			 xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls"
 			 xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors"
@@ -14,9 +15,11 @@
 			 xmlns:vmContents="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents"
 			 xmlns:root="clr-namespace:Grabacr07.KanColleViewer"
 			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
+			 xmlns:kcvc="http://schemes.grabacr.net/winfx/2015/kancolleviewer/controls"
+			 xmlns:ms="clr-namespace:Grabacr07.KanColleViewer.Models.Settings"
 			 mc:Ignorable="d"
 			 d:DesignWidth="700"
-			 d:DesignHeight="300"
+			 d:DesignHeight="500"
 			 d:DataContext="{d:DesignInstance vmContents:ExpeditionsViewModel}">
 	<UserControl.Resources>
 		<Style TargetType="{x:Type GroupBox}">
@@ -72,10 +75,10 @@
 		</Style>
 	</UserControl.Resources>
 
-	<ScrollViewer DataContext="{Binding Fleets}"
+	<ScrollViewer DataContext="{Binding Fleets, Mode=OneWay}"
 				  VerticalScrollBarVisibility="Auto"
 				  PanningMode="Both">
-		<ItemsControl ItemsSource="{Binding Fleets}"
+		<ItemsControl ItemsSource="{Binding Fleets, Mode=OneWay}"
 					  Margin="5,0,5,5"
 					  d:DataContext="{d:DesignData /SampleData/FleetsViewModelSampleData.xaml}">
 			<ItemsControl.ItemsPanel>
@@ -97,59 +100,304 @@
 
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
-					<GroupBox Header="{Binding Name}"
-							  Margin="5,0,5,5"
-							  Padding="8">
+					<GroupBox Header="{Binding Name, Mode=OneWay}"
+							Margin="5"
+							Padding="8">
 						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="auto" />
+								<RowDefinition Height="auto" />
+								<RowDefinition Height="auto" />
+								<RowDefinition Height="*" />
+								<RowDefinition Height="auto" />
+							</Grid.RowDefinitions>
+
+							<metro:PromptComboBox x:Name="ExpeditionSelector"
+												  Margin="0,0,0,5"
+												  ItemsSource="{Binding ExpeditionList, Mode=OneWay}"
+												  VerticalAlignment="Center"
+												  SelectedValue="{Binding ExpeditionId, Mode=TwoWay}"
+												  SelectedValuePath="Key"
+												  DisplayMemberPath="Value"
+												  Visibility="Collapsed"
+												  IsReadOnly="True"
+												  Prompt="" />
+							<Grid Grid.Row="1">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="*" />
+								</Grid.ColumnDefinitions>
+
+								<TextBlock Margin="0,0,2,0"
+										   Foreground="White"
+										   TextAlignment="Center"
+										   Padding="3">
+									<TextBlock.Style>
+										<Style TargetType="TextBlock">
+											<Style.Triggers>
+												<DataTrigger Binding="{Binding IsPossible, Mode=OneWay}" Value="Possible">
+													<Setter Property="Background" Value="#FF5887AB"/>
+													<Setter Property="Text" Value="{Binding Resources.Expedition_OrganizeOK, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"/>
+												</DataTrigger>
+												<DataTrigger Binding="{Binding IsPossible, Mode=OneWay}" Value="NotAccepted">
+													<Setter Property="Background" Value="#FFCC3D3D"/>
+													<Setter Property="Text" Value="{Binding Resources.Expedition_OrganizeNo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"/>
+												</DataTrigger>
+												<DataTrigger Binding="{Binding IsPossible, Mode=OneWay}" Value="NotSupplied">
+													<Setter Property="Background" Value="#FFCC3D3D"/>
+													<Setter Property="Text" Value="{Binding Resources.Expedition_NoSupply, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"/>
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
+								<TextBlock Grid.Column="1"
+										   Margin="2,0,0,0"
+										   Foreground="White"
+										   TextAlignment="Center"
+										   Padding="3">
+									<TextBlock.Style>
+										<Style TargetType="TextBlock">
+											<Style.Triggers>
+												<DataTrigger Binding="{Binding CanGreatSuccess, Mode=OneWay}" Value="False">
+													<Setter Property="Background" Value="#FF787878" />
+													<Setter Property="Text" Value="{Binding Resources.Expedition_GreatSuccessNo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+												</DataTrigger>
+												<DataTrigger Binding="{Binding CanGreatSuccess, Mode=OneWay}" Value="True">
+													<Setter Property="Background" Value="#FFE66915" />
+													<Setter Property="Text" Value="{Binding GreatChanceText, Mode=OneWay}" />
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
+							</Grid>
+
+							<Border Grid.Row="2" Margin="0,5" Height=".99" Background="{DynamicResource BorderBrushKey}" />
+
 							<TextBlock x:Name="NotExcution"
-									   Text="遠征に出ていません。"
+									   Grid.Row="3"
+									   Text="{Binding Resources.Expedition_OnHomeport, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									   Style="{DynamicResource EmphaticTextStyleKey}"
+									   HorizontalAlignment="Center"
+									   Visibility="Collapsed" />
+							<TextBlock x:Name="InSortie"
+									   Grid.Row="3"
+									   Text="{Binding Resources.Expedition_OnSortie, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+									   Style="{DynamicResource EmphaticTextStyleKey}"
+									   HorizontalAlignment="Center"
 									   Visibility="Collapsed" />
 
-							<StackPanel x:Name="ExpeditionInfo">
-								<TextBlock Text="{Binding Expedition.Mission.Title}"
+							<StackPanel x:Name="ExpeditionInfo"
+										Grid.Row="3">
+								<TextBlock Margin="0,0,0,4"
+										   Text="{Binding Expedition.Mission.Title, Mode=OneWay}"
 										   Style="{DynamicResource EmphaticTextStyleKey}" />
-								<Border Height="4" />
-								<TextBlock Text="{Binding Expedition.Mission.Detail}"
+								<TextBlock Text="{Binding Expedition.Mission.Detail, Mode=OneWay}"
 										   Style="{DynamicResource DefaultTextStyleKey}" />
 
-								<Border Height=".99"
-										Background="{DynamicResource BorderBrushKey}"
-										Margin="0,8" />
+								<Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
 
-								<TextBlock Text="{Binding Resources.Expedition_TimeComplete, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-										   Style="{DynamicResource HeaderTextStyleKey}" />
-								<Border Height="4" />
-								<TextBlock Text="{Binding Expedition.ReturnTime, Mode=OneWay}"
-										   Style="{DynamicResource EmphaticTextStyleKey}"
-										   Margin="8,0" />
+								<Grid>
+									<Grid.RowDefinitions>
+										<RowDefinition Height="*" />
+										<RowDefinition Height="Auto" />
+										<RowDefinition Height="Auto" />
+									</Grid.RowDefinitions>
 
-								<Border Height=".99"
-										Background="{DynamicResource BorderBrushKey}"
-										Margin="0,8" />
+									<StackPanel x:Name="ExpeditionProgress">
+										<TextBlock Text="{Binding Resources.Expedition_TimeComplete, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+												   Margin="0,0,0,4"
+												   Style="{DynamicResource HeaderTextStyleKey}" />
+										<TextBlock Text="{Binding Expedition.ReturnTime, Mode=OneWay}"
+												   Style="{DynamicResource EmphaticTextStyleKey}"
+												   Margin="8,0" />
 
-								<TextBlock Text="{Binding Resources.Expedition_TimeRemaining, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
-										   Style="{DynamicResource HeaderTextStyleKey}" />
-								<Border Height="4" />
-								<TextBlock Text="{Binding Expedition.Remaining, Mode=OneWay}"
-										   Style="{DynamicResource EmphaticTextStyleKey}"
-										   Margin="8,0" />
+										<Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
 
-								<Border Height=".99"
-										Background="{DynamicResource BorderBrushKey}"
-										Margin="0,8" />
+										<TextBlock Text="{Binding Resources.Expedition_TimeRemaining, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+												   Margin="0,0,0,4"
+												   Style="{DynamicResource HeaderTextStyleKey}" />
+										<TextBlock Text="{Binding Expedition.Remaining, Mode=OneWay}"
+												   Style="{DynamicResource EmphaticTextStyleKey}"
+												   Margin="8,0" />
+
+										<kcvc:ColorIndicator Height="5"
+															 VerticalAlignment="Bottom"
+															 Margin="10,8,10,4"
+															 LimitedValue="{Binding Expedition.Progress, Mode=OneWay}" />
+									</StackPanel>
+
+									<TextBlock x:Name="ExpeditionReturned"
+											   Text="{Binding Resources.Expedition_Returned, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+											   Style="{DynamicResource EmphaticTextStyleKey}"
+											   HorizontalAlignment="Center"
+											   Visibility="Collapsed" />
+								</Grid>
+
+								<Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
+							</StackPanel>
+
+							<StackPanel Grid.Row="4">
+								<StackPanel x:Name="ShipsCondition"
+											Grid.Row="1">
+									<Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
+
+									<TextBlock Margin="0,0,0,4"
+													   Text="{Binding Resources.Expedition_Conditions, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+													   Style="{DynamicResource HeaderTextStyleKey}" />
+
+									<ItemsControl ItemsSource="{Binding Ships}">
+										<ItemsControl.ItemsPanel>
+											<ItemsPanelTemplate>
+												<UniformGrid Columns="3" />
+											</ItemsPanelTemplate>
+										</ItemsControl.ItemsPanel>
+										<ItemsControl.ItemTemplate>
+											<DataTemplate>
+												<StackPanel Orientation="Horizontal"
+																	Margin="5,3">
+													<kcvc:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
+
+													<TextBlock Margin="4,0,0,0"
+																	   Text="{Binding Ship.Condition, Mode=OneWay}"
+																	   Style="{DynamicResource DefaultTextStyleKey}" />
+												</StackPanel>
+											</DataTemplate>
+										</ItemsControl.ItemTemplate>
+									</ItemsControl>
+								</StackPanel>
+
+								<StackPanel x:Name="ResultMaterial"
+											Grid.Row="2">
+									<Border Margin="0,8" Height=".99" Background="{DynamicResource BorderBrushKey}" />
+
+									<TextBlock Margin="0,0,0,4"
+													   Style="{DynamicResource HeaderTextStyleKey}">
+												<Run Text="{Binding Resources.Expedition_ExpectRes, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+												<Run Text="{Binding Resources.Expedition_ExpectResGreat, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" Style="{DynamicResource EmphaticTextElementStyleKey}"/><Run Text=")" />
+									</TextBlock>
+
+									<Grid Margin="8,0">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="Auto" />
+										</Grid.ColumnDefinitions>
+
+										<TextBlock Text="{Binding Resources.Expedition_Expect_Fuel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+										<TextBlock Grid.Column="1"
+														   Text="{Binding ResultData.ExpFuel, Mode=OneWay}"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+										<TextBlock Grid.Column="2"
+														   Margin="4,0"
+														   Text="/"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+										<TextBlock Grid.Column="3"
+														   Text="{Binding ResultData.ExpGreatFuel, Mode=OneWay}"
+														   Style="{DynamicResource EmphaticTextStyleKey}" />
+									</Grid>
+									<Grid Margin="8,0">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="Auto" />
+										</Grid.ColumnDefinitions>
+
+										<TextBlock Grid.Row="1"
+														   Text="{Binding Resources.Expedition_Expect_Ammo, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+										<TextBlock Grid.Row="1"
+														   Grid.Column="1"
+														   Text="{Binding ResultData.ExpAmmo, Mode=OneWay}"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+										<TextBlock Grid.Row="1"
+														   Grid.Column="2"
+														   Margin="4,0"
+														   Text="/"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+										<TextBlock Grid.Row="1"
+														   Grid.Column="3"
+														   Text="{Binding ResultData.ExpGreatAmmo, Mode=OneWay}"
+														   Style="{DynamicResource EmphaticTextStyleKey}" />
+									</Grid>
+									<Grid Margin="8,0">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="Auto" />
+										</Grid.ColumnDefinitions>
+
+										<TextBlock Grid.Row="2"
+														   Text="{Binding Resources.Expedition_Expect_Steel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+										<TextBlock Grid.Row="2"
+														   Grid.Column="1"
+														   Text="{Binding ResultData.ExpSteel, Mode=OneWay}"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+										<TextBlock Grid.Row="2"
+														   Grid.Column="2"
+														   Margin="4,0"
+														   Text="/"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+										<TextBlock Grid.Row="2"
+														   Grid.Column="3"
+														   Text="{Binding ResultData.ExpGreatSteel, Mode=OneWay}"
+														   Style="{DynamicResource EmphaticTextStyleKey}" />
+									</Grid>
+									<Grid Margin="8,0">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="Auto" />
+										</Grid.ColumnDefinitions>
+
+										<TextBlock Grid.Row="3"
+														   Text="{Binding Resources.Expedition_Expect_Bauxite, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+										<TextBlock Grid.Row="3"
+														   Grid.Column="1"
+														   Text="{Binding ResultData.ExpBauxite, Mode=OneWay}"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+										<TextBlock Grid.Row="3"
+														   Grid.Column="2"
+														   Margin="4,0"
+														   Text="/"
+														   Style="{DynamicResource DefaultTextStyleKey}" />
+										<TextBlock Grid.Row="3"
+														   Grid.Column="3"
+														   Text="{Binding ResultData.ExpGreatBauxite, Mode=OneWay}"
+														   Style="{DynamicResource EmphaticTextStyleKey}" />
+									</Grid>
+								</StackPanel>
 							</StackPanel>
 						</Grid>
 					</GroupBox>
 					<DataTemplate.Triggers>
-						<DataTrigger Binding="{Binding Expedition.IsInExecution}"
-									 Value="False">
-							<Setter TargetName="NotExcution"
-									Property="Visibility"
-									Value="Visible" />
-							<Setter TargetName="ExpeditionInfo"
-									Property="Visibility"
-									Value="Collapsed" />
+						<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.ExpeditionExpectResult}, Path=Value}" Value="False">
+							<Setter TargetName="ResultMaterial" Property="Visibility" Value="Collapsed" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Source={x:Static ms:KanColleSettings.ExpeditionConditions}, Path=Value}" Value="False">
+							<Setter TargetName="ShipsCondition" Property="Visibility" Value="Collapsed" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Expedition.IsInExecution, Mode=OneWay}" Value="False">
+							<Setter TargetName="ExpeditionSelector" Property="Visibility" Value="Visible" />
+							<Setter TargetName="ExpeditionInfo" Property="Visibility" Value="Collapsed" />
+							<Setter TargetName="NotExcution" Property="Visibility" Value="Visible" />
+							<Setter TargetName="InSortie" Property="Visibility" Value="Collapsed" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding IsInSortie, Mode=OneWay}" Value="True">
+							<Setter TargetName="NotExcution" Property="Visibility" Value="Collapsed" />
+							<Setter TargetName="InSortie" Property="Visibility" Value="Visible" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Expedition.Returned, Mode=OneWay}" Value="True">
+							<Setter TargetName="ExpeditionProgress" Property="Visibility" Value="Hidden" />
+							<Setter TargetName="ExpeditionReturned" Property="Visibility" Value="Visible" />
 						</DataTrigger>
 					</DataTemplate.Triggers>
 				</DataTemplate>

@@ -11,6 +11,8 @@ namespace Grabacr07.KanColleViewer.Plugins
 	/// </summary>
 	public class Toast
 	{
+		private CustomSound sound = new CustomSound();
+
 		#region static members
 
 		/// <summary>
@@ -49,13 +51,27 @@ namespace Grabacr07.KanColleViewer.Plugins
 				ToastHeadline = header,
 				ToastBody = body,
 #if DEBUG
-				ShortcutFileName = "提督業も忙しい！ (debug).lnk",
+				ShortcutFileName = "제독업무도 바빠！ (debug).lnk",
 #else
-				ShortcutFileName = "提督業も忙しい！.lnk", 
+				ShortcutFileName = "제독업무도 바빠！.lnk", 
 #endif
 				ShortcutTargetFilePath = Assembly.GetEntryAssembly().Location,
 				AppId = AppId,
 			};
+
+			if (!string.IsNullOrEmpty(sound.FileCheck(header)))
+			{
+				this.request.ToastAudio = ToastAudio.Silent;
+			}
+
+            if (KanColleViewer.Models.Settings.KanColleSettings.NotifyMuteOnMute)
+            {
+                if (KanColleViewer.Models.Volume.GetInstance().IsMute)
+                {
+                    // 칸코레 뷰어가 음소거 상태라면 알람도 음소거
+                    this.request.ToastAudio = ToastAudio.Silent;
+                }
+            }
 		}
 
 		public void Show()

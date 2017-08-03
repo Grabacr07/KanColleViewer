@@ -25,7 +25,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		Fast = 10,
 
 		/// <summary>
-		/// 高速＋。
+		/// 高速+。
 		/// </summary>
 		Faster = 15,
 
@@ -40,23 +40,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		// ReSharper disable once InconsistentNaming
 		public static ShipSpeed FromInt32(int api_soku)
 		{
-			if (api_soku > 15)
-			{
-				return ShipSpeed.Fastest;
-			}
-			if (api_soku > 10)
-			{
-				return ShipSpeed.Faster;
-			}
-			if (api_soku > 5)
-			{
-				return ShipSpeed.Fast;
-			}
-			if (api_soku > 0)
-			{
-				return ShipSpeed.Slow;
-			}
-
+			if (api_soku > 15) return ShipSpeed.Fastest;
+			if (api_soku > 10) return ShipSpeed.Faster;
+			if (api_soku > 5) return ShipSpeed.Fast;
+			if (api_soku > 0) return ShipSpeed.Slow;
 			return ShipSpeed.Immovable;
 		}
 	}

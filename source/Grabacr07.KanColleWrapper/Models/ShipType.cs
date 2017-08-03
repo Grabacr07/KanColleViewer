@@ -15,7 +15,7 @@ namespace Grabacr07.KanColleWrapper.Models
 	{
 		public int Id => this.RawData.api_id;
 
-		public string Name => this.RawData.api_name;
+		public string Name => KanColleClient.Current.Translations.GetTranslation(RawData.api_name, TranslationType.ShipTypes, false, this.RawData, this.Id);
 
 		public int SortNumber => this.RawData.api_sortno;
 

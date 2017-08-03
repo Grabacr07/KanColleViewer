@@ -16,5 +16,6 @@ namespace Grabacr07.KanColleViewer.Models
 		event EventHandler GoForwardRequested;
 		event EventHandler RefreshRequested;
 		event EventHandler<Uri> UriRequested;
-	}
+		void CookieNavigate();
+    }
 }

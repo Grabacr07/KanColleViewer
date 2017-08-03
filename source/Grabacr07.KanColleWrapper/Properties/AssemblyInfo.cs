@@ -1,4 +1,4 @@
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("KanColleWrapper")]
@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Copyright © 2015 Grabacr07")]
 
 [assembly: ComVisible(false)]
-[assembly: Guid("8A13AB28-4E9F-423D-80AD-23EEF2821959")]
+[assembly: Guid("8C42F9E0-E2C9-4741-8F98-653A4D275798")]
 
-[assembly: AssemblyVersion("1.7.0")]
-[assembly: AssemblyInformationalVersion("1.7.0")]
+[assembly: AssemblyVersion("1.7.12")]
+[assembly: AssemblyInformationalVersion("1.7.12")]

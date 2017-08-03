@@ -16,7 +16,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 
 		public PluginSettingsWindowViewModel(ISettings settings, string title)
 		{
-			this.Title = $"{title} プラグイン設定";
+			this.Title = $"{title} 플러그인 설정";
 			this.settings = settings;
 		}
 	}
