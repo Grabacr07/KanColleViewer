@@ -308,6 +308,16 @@ namespace Grabacr07.KanColleWrapper.Models
 			{ 153, new Experience(153, 222000, 4999000) },
 			{ 154, new Experience(154, 231000, 5230000) },
 			{ 155, new Experience(155, 240000, 5470000) },
+			{ 156, new Experience(156, 250000, 5720000) },
+			{ 157, new Experience(157, 60000,  5780000) },
+			{ 158, new Experience(158, 80000,  5860000) },
+			{ 159, new Experience(159, 110000, 5970000) },
+			{ 160, new Experience(160, 150000, 6120000) },
+			{ 161, new Experience(161, 200000, 6320000) },
+			{ 162, new Experience(162, 260000, 6580000) },
+			{ 163, new Experience(163, 330000, 6910000) },
+			{ 164, new Experience(164, 410000, 7320000) },
+			{ 165, new Experience(165, 500000, 7820000) },
 		};
 
 		#endregion
