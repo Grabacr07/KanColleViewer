@@ -1005,6 +1005,68 @@
 					</Setter.Value>
 				</Setter>
 			</Trigger>
+			<Trigger Property="Type"
+					 Value="NightAttacker">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Data="M699,293 L652,300 620,314 581,288 551,285 548,299 578,319 578,335 570,336 556,315 548,319 560,336 556,354 569,362 580,391 589,386 579,364 600,364 613,350 648,379 672,391 681,371 662,348 727,316&#xD;&#xA;737,304 751,307 761,317 783,312 755,291 764,258 746,252 735,284 711,275 699,277 z"
+										  Fill="#FF39B74E"
+										  HorizontalAlignment="Left"
+										  Height="139"
+										  Stretch="Uniform"
+										  VerticalAlignment="Top"
+										  Width="235" />
+									<ed:RegularPolygon PointCount="6"
+													   InnerRadius="1"
+													   Stretch="Fill"
+													   Stroke="Black"
+													   StrokeThickness="2"
+													   Fill="#FF827DB0"
+													   Width="126"
+													   Height="146"
+													   HorizontalAlignment="Left"
+													   VerticalAlignment="Top"
+													   Margin="91.033,50.606,0,0" />
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="LandBasedAntiSubmarineAttacker">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Data="m16756,14823c-709,985 3399,3945 3945,4249s485,1213 546,1821s-1274,2549 -910,2913s3582,-1396 4006,-1396s-1092,2003 363,3399s4855,-242 5341,0s-1213,3581 -667,4067s3399,-1578 4431,-1882s10744,4430 12566,2670c1400,-1353 -7410,-6180 -7717,-6511s406,-980 225,-1104s-684,537 -1113,514s-602,-400 -742,-623c-1092,-1744 3338,-4051 4552,-4172s3217,1760 3641,1031s-2913,-1760 -3217,-2549s667,-3035 -363,-2974s-485,2549 -1760,2427s-2306,-1638 -3399,-1153s2913,1881 2306,1941s-5524,2549 -8013,2367s-910,-1396 -1396,-1396s-424,910 -910,667s-10622,-5825 -11715,-4308z"
+										  Fill="#FF39B74E"
+										  HorizontalAlignment="Left"
+										  Height="139"
+										  Stretch="Uniform"
+										  VerticalAlignment="Top"
+										  Width="235" />
+									<ed:RegularPolygon PointCount="6"
+													   InnerRadius="1"
+													   Stretch="Fill"
+													   Stroke="Black"
+													   StrokeThickness="2"
+													   Fill="#FF5B71D2"
+													   Width="126"
+													   Height="146"
+													   HorizontalAlignment="Left"
+													   VerticalAlignment="Top"
+													   Margin="91.033,50.606,0,0" />
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
 		</Style.Triggers>
 	</Style>
 
