@@ -10,7 +10,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		Default = Maximum,
 
 		Minimum = InternalProficiencyMinValue | Fighter,
-		Maximum = InternalProficiencyMaxValue | Fighter | Attacker | SeaplaneBomber,
+		Maximum = InternalProficiencyMaxValue | Fighter | Attacker | SeaplaneBomber | JetFightingBomber,
 
 		/// <summary>艦上戦闘機、水上戦闘機。</summary>
 		Fighter = 0x0001,
@@ -20,6 +20,9 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		/// <summary>水上爆撃機。</summary>
 		SeaplaneBomber = 0x0004,
+
+		/// <summary>噴式戦闘爆撃機。</summary>
+		JetFightingBomber = 0x0008,
 
 		/// <summary>内部熟練度最小値による計算。</summary>
 		InternalProficiencyMinValue = 0x0100,
@@ -65,6 +68,9 @@ namespace Grabacr07.KanColleWrapper.Models
 
 				case SlotItemType.水上爆撃機:
 					return new SeaplaneBomberCalculator();
+
+				case SlotItemType.噴式戦闘爆撃機:
+					return new JetFightingBomberCaluculator();
 
 				default:
 					return EmptyCalculator.Instance;
@@ -134,6 +140,18 @@ namespace Grabacr07.KanColleWrapper.Models
 				return Math.Sqrt(proficiency.GetInternalValue(options) / 10.0) + proficiency.SeaplaneBomberBonus;
 			}
 		}
+
+		private class JetFightingBomberCaluculator : AirSuperiorityCalculator
+		{
+			public override AirSuperiorityCalculationOptions Options => AirSuperiorityCalculationOptions.JetFightingBomber;
+
+			protected override double GetProficiencyBonus(SlotItem slotItem, AirSuperiorityCalculationOptions options)
+			{
+				var proficiency = slotItem.GetProficiency();
+				return Math.Sqrt(proficiency.GetInternalValue(options) / 10.0);
+			}
+		}
+
 
 		private class EmptyCalculator : AirSuperiorityCalculator
 		{
