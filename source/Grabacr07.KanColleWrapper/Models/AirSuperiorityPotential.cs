@@ -123,6 +123,12 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			public override AirSuperiorityCalculationOptions Options => AirSuperiorityCalculationOptions.Attacker;
 
+			protected override double GetAirSuperiority(SlotItem slotItem, int onslot)
+			{
+				// 爆戦の装備改修による対空値加算 (★ x 0.25)
+				return (slotItem.Info.AA + slotItem.Level * 0.25) * Math.Sqrt(onslot);
+			}
+
 			protected override double GetProficiencyBonus(SlotItem slotItem, AirSuperiorityCalculationOptions options)
 			{
 				var proficiency = slotItem.GetProficiency();
