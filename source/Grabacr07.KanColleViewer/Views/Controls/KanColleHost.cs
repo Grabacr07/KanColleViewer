@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -7,6 +7,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Windows.Navigation;
+using CefSharp;
+using CefSharp.Wpf;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.ViewModels;
 using MetroRadiance.Interop;
@@ -14,18 +16,18 @@ using MetroTrilithon.UI.Controls;
 using MSHTML;
 using SHDocVw;
 using IServiceProvider = Grabacr07.KanColleViewer.Win32.IServiceProvider;
-using WebBrowser = System.Windows.Controls.WebBrowser;
+//using WebBrowser = System.Windows.Controls.WebBrowser;
 
 namespace Grabacr07.KanColleViewer.Views.Controls
 {
-	[ContentProperty(nameof(WebBrowser))]
+	[ContentProperty(nameof(CWebBrowser))]
 	[TemplatePart(Name = PART_ContentHost, Type = typeof(ScrollViewer))]
 	public class KanColleHost : Control
 	{
 		private const string PART_ContentHost = "PART_ContentHost";
 
-		public static Size KanColleSize { get; } = new Size(800.0, 480.0);
-		public static Size InitialSize { get; } = new Size(960.0, 572.0);
+		public static Size KanColleSize { get; } = new Size(1200.0, 720.0);
+		public static Size InitialSize { get; } = new Size(1200.0, 720.0);
 
 		static KanColleHost()
 		{
@@ -37,39 +39,37 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 		private Dpi? systemDpi;
 		private bool firstLoaded;
 
-		#region WebBrowser 依存関係プロパティ
+		#region CWebBrowser 依存関係プロパティ
 
-		public WebBrowser WebBrowser
+		public ChromiumWebBrowser CWebBrowser
 		{
-			get { return (WebBrowser)this.GetValue(WebBrowserProperty); }
-			set { this.SetValue(WebBrowserProperty, value); }
+			get { return (ChromiumWebBrowser)this.GetValue(CWebBrowserProperty); }
+			set { this.SetValue(CWebBrowserProperty, value); }
 		}
 
-		public static readonly DependencyProperty WebBrowserProperty =
-			DependencyProperty.Register(nameof(WebBrowser), typeof(WebBrowser), typeof(KanColleHost), new UIPropertyMetadata(null, WebBrowserPropertyChangedCallback));
+		public static readonly DependencyProperty CWebBrowserProperty =
+			DependencyProperty.Register(nameof(CWebBrowser), typeof(ChromiumWebBrowser), typeof(KanColleHost), new UIPropertyMetadata(null, CWebBrowserPropertyChangedCallback));
 
-		private static void WebBrowserPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		private static void CWebBrowserPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
 			var instance = (KanColleHost)d;
-			var newBrowser = (WebBrowser)e.NewValue;
-			var oldBrowser = (WebBrowser)e.OldValue;
+			var newBrowser = (ChromiumWebBrowser)e.NewValue;
+			var oldBrowser = (ChromiumWebBrowser)e.OldValue;
 
 			if (oldBrowser != null)
 			{
-				oldBrowser.LoadCompleted -= instance.HandleLoadCompleted;
+				oldBrowser.LoadingStateChanged -= instance.HandleLoadingStateChanged;
 			}
 			if (newBrowser != null)
 			{
-				newBrowser.LoadCompleted += instance.HandleLoadCompleted;
-				var events = WebBrowserHelper.GetAxWebbrowser2(newBrowser) as DWebBrowserEvents_Event;
-				if (events != null) events.NewWindow += instance.HandleWebBrowserNewWindow;
+				newBrowser.LoadingStateChanged += instance.HandleLoadingStateChanged;
+				//var events = WebBrowserHelper.GetAxWebbrowser2(newBrowser) as DWebBrowserEvents_Event;
+				//if (events != null) events.NewWindow += instance.HandleWebBrowserNewWindow;
 			}
 			if (instance.scrollViewer != null)
 			{
 				instance.scrollViewer.Content = newBrowser;
-			}
-
-			WebBrowserHelper.SetAllowWebBrowserDrop(newBrowser, false);
+			}			
 		}
 
 		#endregion
@@ -140,13 +140,13 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			this.scrollViewer = this.GetTemplateChild(PART_ContentHost) as ScrollViewer;
 			if (this.scrollViewer != null)
 			{
-				this.scrollViewer.Content = this.WebBrowser;
+				this.scrollViewer.Content = this.CWebBrowser;
 			}
 		}
 
 		public void Update()
 		{
-			if (this.WebBrowser == null) return;
+			if (this.CWebBrowser == null) return;
 
 			var dpi = this.systemDpi ?? (this.systemDpi = this.GetSystemDpi()) ?? Dpi.Default;
 			var zoomFactor = dpi.ScaleX + (this.ZoomFactor - 1.0);
@@ -158,8 +158,8 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			size = new Size(
 				(size.Width * (zoomFactor / dpi.ScaleX)) / dpi.ScaleX,
 				(size.Height * (zoomFactor / dpi.ScaleY)) / dpi.ScaleY);
-			this.WebBrowser.Width = size.Width;
-			this.WebBrowser.Height = size.Height;
+			this.CWebBrowser.Width = size.Width;
+			this.CWebBrowser.Height = size.Height;
 
 			this.OwnerSizeChangeRequested?.Invoke(this, size);
 		}
@@ -176,6 +176,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 			try
 			{
+				/*
 				var provider = target.WebBrowser.Document as IServiceProvider;
 				if (provider == null) return;
 
@@ -186,6 +187,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 				object pvaIn = zoomFactor;
 				webBrowser.ExecWB(OLECMDID.OLECMDID_OPTICAL_ZOOM, OLECMDEXECOPT.OLECMDEXECOPT_DODEFAULT, ref pvaIn);
+				*/
 			}
 			catch (Exception) when (Application.Instance.State == ApplicationState.Startup)
 			{
@@ -198,10 +200,22 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			}
 		}
 
-		private void HandleLoadCompleted(object sender, NavigationEventArgs e)
+		private void HandleLoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
+		{
+			if (e.IsLoading == false)
+			{
+				Dispatcher.Invoke(() => {
+					ApplyStyleSheet();
+					firstLoaded = true;
+					Update();
+				});
+			}
+		}
+
+		private void HandleLoadCompleted(object sender, RoutedEventArgs e)
 		{
 			this.ApplyStyleSheet();
-			WebBrowserHelper.SetScriptErrorsSuppressed(this.WebBrowser, true);
+			//WebBrowserHelper.SetScriptErrorsSuppressed(this.WebBrowser, true);
 
 			this.firstLoaded = true;
 			this.Update();
@@ -222,6 +236,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 			try
 			{
+				/*
 				var document = this.WebBrowser.Document as HTMLDocument;
 				if (document == null) return;
 
@@ -240,6 +255,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 					target.createStyleSheet().cssText = this.UserStyleSheet;
 					this.styleSheetApplied = true;
 				}
+				*/
 			}
 			catch (Exception) when (Application.Instance.State == ApplicationState.Startup)
 			{

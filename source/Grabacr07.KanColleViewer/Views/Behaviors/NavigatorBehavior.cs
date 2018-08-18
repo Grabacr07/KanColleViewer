@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,11 +6,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interactivity;
 using System.Windows.Navigation;
+using CefSharp;
+using CefSharp.Wpf;
 using Grabacr07.KanColleViewer.Models;
 
 namespace Grabacr07.KanColleViewer.Views.Behaviors
 {
-	public class NavigatorBehavior : Behavior<WebBrowser>
+	public class NavigatorBehavior : Behavior<ChromiumWebBrowser>
 	{
 		#region Navigator 依存関係プロパティ
 
@@ -50,13 +52,28 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 		protected override void OnAttached()
 		{
 			base.OnAttached();
-			this.AssociatedObject.LoadCompleted += this.AssociatedObjectOnLoadCompleted;
+			this.AssociatedObject.LoadingStateChanged += this.HandleLoadingStateChanged;
 		}
 
 		protected override void OnDetaching()
 		{
 			base.OnDetaching();
-			this.AssociatedObject.LoadCompleted -= this.AssociatedObjectOnLoadCompleted;
+			this.AssociatedObject.LoadingStateChanged -= this.HandleLoadingStateChanged;
+		}
+
+		private void HandleLoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
+		{
+			if (e.IsLoading == false)
+			{
+				Dispatcher.Invoke(() => {
+					if (this.Navigator != null)
+					{
+						this.Navigator.Source = new Uri(e.Browser.MainFrame.Url);
+						this.Navigator.CanGoBack = this.AssociatedObject.CanGoBack;
+						this.Navigator.CanGoForward = this.AssociatedObject.CanGoForward;
+					}
+				});
+			}
 		}
 
 		private void AssociatedObjectOnLoadCompleted(object sender, NavigationEventArgs navigationEventArgs)
@@ -71,14 +88,14 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 
 		private void NavigatorOnUriRequested(object sender, Uri uri)
 		{
-			this.AssociatedObject.Navigate(uri);
+			this.AssociatedObject.Load(uri.AbsoluteUri);
 		}
 
 		private void NavigatorOnGoBackRequested(object sender, EventArgs eventArgs)
 		{
 			if (this.AssociatedObject.CanGoBack)
 			{
-				this.AssociatedObject.GoBack();
+				this.AssociatedObject.Back();
 			}
 		}
 
@@ -86,13 +103,13 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 		{
 			if (this.AssociatedObject.CanGoForward)
 			{
-				this.AssociatedObject.GoForward();
+				this.AssociatedObject.Forward();
 			}
 		}
 
 		private void NavigatorOnRefreshRequested(object sender, EventArgs eventArgs)
 		{
-			this.AssociatedObject.Refresh();
+			this.AssociatedObject.Reload();
 		}
 
 	}
