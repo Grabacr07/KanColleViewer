@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -64,6 +64,8 @@ namespace Grabacr07.KanColleWrapper
 #endif
 			#endregion
 				.Publish();
+
+			connectableSessionSource.Subscribe(x => Debug.WriteLine("Proxy " + x.Request.PathAndQuery));
 		}
 
 

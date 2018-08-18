@@ -31,6 +31,9 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 		static KanColleHost()
 		{
+			CefSettings cefSettings = new CefSettings();
+			cefSettings.CefCommandLineArgs.Add("proxy-server", "http=127.0.0.1:37564");
+			Cef.Initialize(cefSettings);
 			DefaultStyleKeyProperty.OverrideMetadata(typeof(KanColleHost), new FrameworkPropertyMetadata(typeof(KanColleHost)));
 		}
 

@@ -128,8 +128,7 @@
 							<behaviors:ZoomAction />
 						</livet:InteractionMessageTrigger>
 					</i:Interaction.Triggers>
-					<cefSharp:ChromiumWebBrowser x:Name="browser" Address="http://www.dmm.com/netgame/social/application/-/detail/=/app_id=854854/"
-												 AllowDrop="True">
+					<cefSharp:ChromiumWebBrowser x:Name="browser" AllowDrop="True">
 						<i:Interaction.Behaviors>
 							<behaviors:NavigatorBehavior Navigator="{Binding Navigator}" />
 							<mtti:TaskbarThumbnailBehavior />
