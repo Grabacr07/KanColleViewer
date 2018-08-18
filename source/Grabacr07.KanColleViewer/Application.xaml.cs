@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -91,7 +91,6 @@ namespace Grabacr07.KanColleViewer
 				WindowService.Current.AddTo(this).Initialize();
 				NotifyService.Current.AddTo(this).Initialize();
 
-				Helper.SetRegistryFeatureBrowserEmulation();
 				Helper.SetMMCSSTask();
 
 				// BootstrapProxy() で Views.Settings.ProxyBootstrapper.Show() が呼ばれるより前に

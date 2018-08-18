@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -89,58 +89,16 @@ namespace Grabacr07.KanColleViewer.Models
 
 		private static bool DeleteInternetCacheCore()
 		{
-			// ReSharper disable InconsistentNaming
-			const int CACHEGROUP_SEARCH_ALL = 0x0;
-			const int ERROR_NO_MORE_ITEMS = 259;
-			const uint CacheEntryType_Cookie = 1048577;
-			const uint CacheEntryType_History = 2097153;
-			// ReSharper restore InconsistentNaming
-
-			long groupId = 0;
-			var cacheEntryInfoBufferSizeInitial = 0;
-
-			var enumHandle = WinInet.FindFirstUrlCacheGroup(0, CACHEGROUP_SEARCH_ALL, IntPtr.Zero, 0, ref groupId, IntPtr.Zero);
-			if (enumHandle != IntPtr.Zero && ERROR_NO_MORE_ITEMS == Marshal.GetLastWin32Error()) return false;
-
-			enumHandle = WinInet.FindFirstUrlCacheEntry(null, IntPtr.Zero, ref cacheEntryInfoBufferSizeInitial);
-			if (enumHandle != IntPtr.Zero && ERROR_NO_MORE_ITEMS == Marshal.GetLastWin32Error()) return false;
-
-			var cacheEntryInfoBufferSize = cacheEntryInfoBufferSizeInitial;
-			var cacheEntryInfoBuffer = Marshal.AllocHGlobal(cacheEntryInfoBufferSize);
-			enumHandle = WinInet.FindFirstUrlCacheEntry(null, cacheEntryInfoBuffer, ref cacheEntryInfoBufferSizeInitial);
-
-			while (true)
+			try
 			{
-				var internetCacheEntry = (INTERNET_CACHE_ENTRY_INFOA)Marshal.PtrToStructure(
-					cacheEntryInfoBuffer, typeof(INTERNET_CACHE_ENTRY_INFOA));
-				cacheEntryInfoBufferSizeInitial = cacheEntryInfoBufferSize;
-
-				var type = internetCacheEntry.CacheEntryType;
-				var result = false;
-
-				if (type != CacheEntryType_Cookie && type != CacheEntryType_History)
-				{
-					result = WinInet.DeleteUrlCacheEntry(internetCacheEntry.lpszSourceUrlName);
-				}
-
-				if (!result)
-				{
-					result = WinInet.FindNextUrlCacheEntry(enumHandle, cacheEntryInfoBuffer, ref cacheEntryInfoBufferSizeInitial);
-				}
-				if (!result && ERROR_NO_MORE_ITEMS == Marshal.GetLastWin32Error())
-				{
-					break;
-				}
-				if (!result && cacheEntryInfoBufferSizeInitial > cacheEntryInfoBufferSize)
-				{
-					cacheEntryInfoBufferSize = cacheEntryInfoBufferSizeInitial;
-					cacheEntryInfoBuffer = Marshal.ReAllocHGlobal(cacheEntryInfoBuffer, (IntPtr)cacheEntryInfoBufferSize);
-					WinInet.FindNextUrlCacheEntry(enumHandle, cacheEntryInfoBuffer, ref cacheEntryInfoBufferSizeInitial);
-				}
+				// TODO Chromiumを止めて、キャッシュをフォルダごと消す。プレイ中に止めるのはまずいので、終了時に削除とか…？
+				// Directory.Delete(Path.Combine(Views.Controls.KanColleHost.CachePath, "Cache"), true);
 			}
-
-			Marshal.FreeHGlobal(cacheEntryInfoBuffer);
-
+			catch (Exception e)
+			{
+				Debug.WriteLine(e.ToString());
+				return false;
+			}
 			return true;
 		}
 

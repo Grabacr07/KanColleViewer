@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,6 +12,7 @@ using CefSharp;
 using CefSharp.Wpf;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.ViewModels;
+using Grabacr07.KanColleWrapper;
 using MetroRadiance.Interop;
 using MetroTrilithon.UI.Controls;
 using MSHTML;
@@ -26,14 +28,18 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 	{
 		private const string PART_ContentHost = "PART_ContentHost";
 
+		public static string CachePath = Path.Combine(
+				Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+				"grabacr.net",
+				"KanColleViewer",
+				"BrowserCache"
+				).ToString();
+
 		public static Size KanColleSize { get; } = new Size(1200.0, 720.0);
 		public static Size InitialSize { get; } = new Size(1200.0, 720.0);
 
 		static KanColleHost()
 		{
-			CefSettings cefSettings = new CefSettings();
-			cefSettings.CefCommandLineArgs.Add("proxy-server", "http=127.0.0.1:37564");
-			Cef.Initialize(cefSettings);
 			DefaultStyleKeyProperty.OverrideMetadata(typeof(KanColleHost), new FrameworkPropertyMetadata(typeof(KanColleHost)));
 		}
 
@@ -66,8 +72,6 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			if (newBrowser != null)
 			{
 				newBrowser.LoadingStateChanged += instance.HandleLoadingStateChanged;
-				//var events = WebBrowserHelper.GetAxWebbrowser2(newBrowser) as DWebBrowserEvents_Event;
-				//if (events != null) events.NewWindow += instance.HandleWebBrowserNewWindow;
 			}
 			if (instance.scrollViewer != null)
 			{
@@ -133,6 +137,13 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 		public KanColleHost()
 		{
+			CefSettings cefSettings = new CefSettings();
+			cefSettings.CefCommandLineArgs.Add("proxy-server", "http=127.0.0.1:" + KanColleClient.Current.Proxy.ListeningPort.ToString());
+			cefSettings.CachePath = CachePath;
+#if DEBUG
+			cefSettings.RemoteDebuggingPort = 28088;
+#endif
+			Cef.Initialize(cefSettings);
 			this.Loaded += (sender, args) => this.Update();
 		}
 
@@ -179,18 +190,16 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 			try
 			{
-				/*
-				var provider = target.WebBrowser.Document as IServiceProvider;
-				if (provider == null) return;
-
-				object ppvObject;
-				provider.QueryService(typeof(IWebBrowserApp).GUID, typeof(IWebBrowser2).GUID, out ppvObject);
-				var webBrowser = ppvObject as IWebBrowser2;
-				if (webBrowser == null) return;
-
-				object pvaIn = zoomFactor;
-				webBrowser.ExecWB(OLECMDID.OLECMDID_OPTICAL_ZOOM, OLECMDEXECOPT.OLECMDEXECOPT_DODEFAULT, ref pvaIn);
-				*/
+				if (zoomFactor == 100)
+				{
+					target.CWebBrowser.GetBrowser().SetZoomLevel(0);
+				}
+				else
+				{
+					target.CWebBrowser.GetBrowser().SetZoomLevel(
+						Math.Log(zoomFactor / 100.0) / Math.Log(1.2)
+					);
+				}
 			}
 			catch (Exception) when (Application.Instance.State == ApplicationState.Startup)
 			{
@@ -218,8 +227,6 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 		private void HandleLoadCompleted(object sender, RoutedEventArgs e)
 		{
 			this.ApplyStyleSheet();
-			//WebBrowserHelper.SetScriptErrorsSuppressed(this.WebBrowser, true);
-
 			this.firstLoaded = true;
 			this.Update();
 		}
@@ -239,26 +246,12 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 			try
 			{
-				/*
-				var document = this.WebBrowser.Document as HTMLDocument;
-				if (document == null) return;
-
-				var gameFrame = document.getElementById("game_frame");
-				if (gameFrame == null)
-				{
-					if (document.url.Contains(".swf?"))
-					{
-						gameFrame = document.body;
-					}
-				}
-
-				var target = gameFrame?.document as HTMLDocument;
-				if (target != null)
-				{
-					target.createStyleSheet().cssText = this.UserStyleSheet;
-					this.styleSheetApplied = true;
-				}
-				*/
+				var mainFrame = CWebBrowser.GetMainFrame();
+				if (mainFrame == null)
+					return;
+				var css = UserStyleSheet.Replace("'", "\\'").Replace("\r", "").Replace("\n", "");
+				mainFrame.ExecuteJavaScriptAsync("var css = document.createElement('style');css.type='text/css';css.innerHTML='" + css + "';document.body.appendChild(css);");
+				styleSheetApplied = true;
 			}
 			catch (Exception) when (Application.Instance.State == ApplicationState.Startup)
 			{
