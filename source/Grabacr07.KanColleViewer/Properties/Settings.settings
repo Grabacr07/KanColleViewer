@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="KanColleUrl" Type="System.Uri" Scope="Application">
-      <Value Profile="(Default)">http://www.dmm.com/netgame/social/application/-/detail/=/app_id=854854/</Value>
+      <Value Profile="(Default)">http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/</Value>
     </Setting>
     <Setting Name="UIContentHight" Type="System.Double" Scope="Application">
       <Value Profile="(Default)">333</Value>
@@ -21,7 +21,7 @@
     position:fixed;
     left:50%;
     top:-16px;
-    margin-left:-450px;
+    margin-left:-600px;
     z-index:1
 }
 
@@ -32,7 +32,7 @@
 }</Value>
     </Setting>
     <Setting Name="SallyAreaSource" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">http://shatteredskies.blob.core.windows.net/kancolle/sally.json</Value>
+      <Value Profile="(Default)">http://kctadil.devcussion.net/viewer/sally.json</Value>
     </Setting>
   </Settings>
 </SettingsFile>

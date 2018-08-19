@@ -12,7 +12,7 @@ namespace Grabacr07.KanColleViewer.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.8.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,7 +25,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://www.dmm.com/netgame/social/application/-/detail/=/app_id=854854/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/")]
         public global::System.Uri KanColleUrl {
             get {
                 return ((global::System.Uri)(this["KanColleUrl"]));
@@ -53,7 +53,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("body {\r\n    margin:0;\r\n    overflow:hidden\r\n}\r\n\r\n#game_frame {\r\n    position:fixe" +
-            "d;\r\n    left:50%;\r\n    top:-16px;\r\n    margin-left:-450px;\r\n    z-index:1\r\n}\r\n\r\n" +
+            "d;\r\n    left:50%;\r\n    top:-16px;\r\n    margin-left:-600px;\r\n    z-index:1\r\n}\r\n\r\n" +
             ".area-pickupgame,\r\n.area-menu\r\n{\r\n    display:none!important;\r\n}")]
         public string OverrideStyleSheet {
             get {
@@ -63,7 +63,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://shatteredskies.blob.core.windows.net/kancolle/sally.json")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://kctadil.devcussion.net/viewer/sally.json")]
         public string SallyAreaSource {
             get {
                 return ((string)(this["SallyAreaSource"]));

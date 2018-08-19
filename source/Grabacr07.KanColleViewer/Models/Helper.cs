@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -36,8 +36,7 @@ namespace Grabacr07.KanColleViewer.Models
 		/// デザイナーのコンテキストで実行されているかどうかを取得します。
 		/// </summary>
 		public static bool IsInDesignMode => DesignerProperties.GetIsInDesignMode(new DependencyObject());
-
-
+		
 		public static string CreateScreenshotFilePath()
 		{
 			var filePath = Path.Combine(

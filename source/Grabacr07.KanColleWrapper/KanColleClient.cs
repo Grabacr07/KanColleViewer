@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
@@ -97,7 +97,7 @@ namespace Grabacr07.KanColleWrapper
 		{
 			var proxy = this.Proxy ?? (this.Proxy = new KanColleProxy());
 
-			var start2Source = proxy.api_start2.TryParse<kcsapi_start2>();
+			var start2Source = proxy.api_start2_getData.TryParse<kcsapi_start2>();
 			var requireInfoSource = proxy.api_get_member_require_info.TryParse<kcsapi_require_info>();
 			var firstTime = start2Source
 				.CombineLatest(requireInfoSource, (start2, requireInfo) => new { start2, requireInfo, })

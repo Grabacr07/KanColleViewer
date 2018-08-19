@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -6,15 +6,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
-using System.Windows.Navigation;
+using CefSharp;
+using CefSharp.Wpf;
 using Grabacr07.KanColleViewer.Models;
-using Grabacr07.KanColleViewer.ViewModels;
 using MetroRadiance.Interop;
-using MetroTrilithon.UI.Controls;
-using MSHTML;
-using SHDocVw;
-using IServiceProvider = Grabacr07.KanColleViewer.Win32.IServiceProvider;
-using WebBrowser = System.Windows.Controls.WebBrowser;
 
 namespace Grabacr07.KanColleViewer.Views.Controls
 {
@@ -24,8 +19,8 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 	{
 		private const string PART_ContentHost = "PART_ContentHost";
 
-		public static Size KanColleSize { get; } = new Size(800.0, 480.0);
-		public static Size InitialSize { get; } = new Size(960.0, 572.0);
+		public static Size KanColleSize { get; } = new Size(1200.0, 720.0);
+		public static Size InitialSize { get; } = new Size(1200.0, 720.0);
 
 		static KanColleHost()
 		{
@@ -39,37 +34,33 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 		#region WebBrowser 依存関係プロパティ
 
-		public WebBrowser WebBrowser
+		public ChromiumWebBrowser WebBrowser
 		{
-			get { return (WebBrowser)this.GetValue(WebBrowserProperty); }
+			get { return (ChromiumWebBrowser)this.GetValue(WebBrowserProperty); }
 			set { this.SetValue(WebBrowserProperty, value); }
 		}
 
 		public static readonly DependencyProperty WebBrowserProperty =
-			DependencyProperty.Register(nameof(WebBrowser), typeof(WebBrowser), typeof(KanColleHost), new UIPropertyMetadata(null, WebBrowserPropertyChangedCallback));
+			DependencyProperty.Register(nameof(WebBrowser), typeof(ChromiumWebBrowser), typeof(KanColleHost), new UIPropertyMetadata(null, WebBrowserPropertyChangedCallback));
 
 		private static void WebBrowserPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
 			var instance = (KanColleHost)d;
-			var newBrowser = (WebBrowser)e.NewValue;
-			var oldBrowser = (WebBrowser)e.OldValue;
+			var newBrowser = (ChromiumWebBrowser)e.NewValue;
+			var oldBrowser = (ChromiumWebBrowser)e.OldValue;
 
 			if (oldBrowser != null)
 			{
-				oldBrowser.LoadCompleted -= instance.HandleLoadCompleted;
+				oldBrowser.FrameLoadEnd -= instance.HandleLoadEnd;
 			}
 			if (newBrowser != null)
 			{
-				newBrowser.LoadCompleted += instance.HandleLoadCompleted;
-				var events = WebBrowserHelper.GetAxWebbrowser2(newBrowser) as DWebBrowserEvents_Event;
-				if (events != null) events.NewWindow += instance.HandleWebBrowserNewWindow;
+				newBrowser.FrameLoadEnd += instance.HandleLoadEnd;
 			}
 			if (instance.scrollViewer != null)
 			{
 				instance.scrollViewer.Content = newBrowser;
 			}
-
-			WebBrowserHelper.SetAllowWebBrowserDrop(newBrowser, false);
 		}
 
 		#endregion
@@ -176,16 +167,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 			try
 			{
-				var provider = target.WebBrowser.Document as IServiceProvider;
-				if (provider == null) return;
-
-				object ppvObject;
-				provider.QueryService(typeof(IWebBrowserApp).GUID, typeof(IWebBrowser2).GUID, out ppvObject);
-				var webBrowser = ppvObject as IWebBrowser2;
-				if (webBrowser == null) return;
-
-				object pvaIn = zoomFactor;
-				webBrowser.ExecWB(OLECMDID.OLECMDID_OPTICAL_ZOOM, OLECMDEXECOPT.OLECMDEXECOPT_DODEFAULT, ref pvaIn);
+				target.WebBrowser.ZoomLevel = Math.Log(zoomFactor / 100.0) / Math.Log(1.2);
 			}
 			catch (Exception) when (Application.Instance.State == ApplicationState.Startup)
 			{
@@ -198,22 +180,15 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			}
 		}
 
-		private void HandleLoadCompleted(object sender, NavigationEventArgs e)
+		private void HandleLoadEnd(object sender, FrameLoadEndEventArgs e)
 		{
-			this.ApplyStyleSheet();
-			WebBrowserHelper.SetScriptErrorsSuppressed(this.WebBrowser, true);
+			this.Dispatcher.Invoke(() =>
+			{
+				this.ApplyStyleSheet();
 
-			this.firstLoaded = true;
-			this.Update();
-		}
-
-		private void HandleWebBrowserNewWindow(string url, int flags, string targetFrameName, ref object postData, string headers, ref bool processed)
-		{
-			processed = true;
-
-			var window = new BrowserWindow { DataContext = new NavigatorViewModel(), };
-			window.Show();
-			window.WebBrowser.Navigate(url);
+				this.firstLoaded = true;
+				this.Update();
+			});
 		}
 
 		private void ApplyStyleSheet()
@@ -222,24 +197,13 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 			try
 			{
-				var document = this.WebBrowser.Document as HTMLDocument;
-				if (document == null) return;
+				var frame = this.WebBrowser.GetMainFrame();
+				if (frame == null) return;
 
-				var gameFrame = document.getElementById("game_frame");
-				if (gameFrame == null)
-				{
-					if (document.url.Contains(".swf?"))
-					{
-						gameFrame = document.body;
-					}
-				}
+				var js = $"var style = document.createElement(\"style\"); style.innerHTML = \"{this.UserStyleSheet.Replace("\r\n", " ")}\"; document.body.appendChild(style);";
+				frame.ExecuteJavaScriptAsync(js);
 
-				var target = gameFrame?.document as HTMLDocument;
-				if (target != null)
-				{
-					target.createStyleSheet().cssText = this.UserStyleSheet;
-					this.styleSheetApplied = true;
-				}
+				this.styleSheetApplied = true;
 			}
 			catch (Exception) when (Application.Instance.State == ApplicationState.Startup)
 			{

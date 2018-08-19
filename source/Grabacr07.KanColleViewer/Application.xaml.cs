@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -7,6 +7,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
+using CefSharp;
+using CefSharp.Wpf;
 using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Models.Settings;
@@ -55,6 +57,12 @@ namespace Grabacr07.KanColleViewer
 		/// </summary>
 		public static Application Instance => Current as Application;
 
+		public DirectoryInfo LocalAppData = new DirectoryInfo(
+			Path.Combine(
+				Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+				"grabacr.net",
+				"KanColleViewer"));
+
 		/// <summary>
 		/// アプリケーションの現在の状態を示す識別子を取得します。
 		/// </summary>
@@ -93,6 +101,13 @@ namespace Grabacr07.KanColleViewer
 
 				Helper.SetRegistryFeatureBrowserEmulation();
 				Helper.SetMMCSSTask();
+
+				var cefSettings = new CefSettings()
+				{
+					CachePath = Path.Combine(this.LocalAppData.FullName, "Chromium", "Cache"),
+				};
+				cefSettings.CefCommandLineArgs.Add("proxy-server", "http=127.0.0.1:37564");
+				Cef.Initialize(cefSettings);
 
 				// BootstrapProxy() で Views.Settings.ProxyBootstrapper.Show() が呼ばれるより前に
 				// Application.MainWindow を設定しておく。これ大事
@@ -160,6 +175,8 @@ namespace Grabacr07.KanColleViewer
 
 		protected override void OnExit(ExitEventArgs e)
 		{
+			Cef.Shutdown();
+
 			this.ChangeState(ApplicationState.Terminate);
 			base.OnExit(e);
 

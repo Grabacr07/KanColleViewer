@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,9 +13,7 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 			Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
 			"grabacr.net", "KanColleViewer", "Settings.xaml");
 
-		public static string LocalFilePath { get; } = Path.Combine(
-			Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-			"grabacr.net", "KanColleViewer", "Settings.xaml");
+		public static string LocalFilePath { get; } = Path.Combine(Application.Instance.LocalAppData.FullName, "Settings.xaml");
 
 		public static ISerializationProvider Roaming { get; } = new FileSettingsProvider(RoamingFilePath);
 
