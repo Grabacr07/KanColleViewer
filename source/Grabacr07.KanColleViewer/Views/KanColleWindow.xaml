@@ -1,4 +1,4 @@
-﻿<metro:MetroWindow x:Class="Grabacr07.KanColleViewer.Views.KanColleWindow"
+<metro:MetroWindow x:Class="Grabacr07.KanColleViewer.Views.KanColleWindow"
 				   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 				   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 				   xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -19,6 +19,7 @@
 				   xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 				   xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
 				   xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Models.Settings"
+				   xmlns:cefSharp="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:KanColleWindowViewModel}"
 				   Title="{Binding Title}"
@@ -126,19 +127,17 @@
 														 MessageKey="WebBrowser.Zoom">
 							<behaviors:ZoomAction />
 						</livet:InteractionMessageTrigger>
+						<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
+															 MessageKey="Screenshot.Save">
+							<behaviors:ScreenshotAction />
+						</livet:InteractionMessageTrigger>
 					</i:Interaction.Triggers>
-					<WebBrowser Source="about:blank">
+					<cefSharp:ChromiumWebBrowser x:Name="browser" AllowDrop="True">
 						<i:Interaction.Behaviors>
 							<behaviors:NavigatorBehavior Navigator="{Binding Navigator}" />
 							<mtti:TaskbarThumbnailBehavior />
 						</i:Interaction.Behaviors>
-						<i:Interaction.Triggers>
-							<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
-															 MessageKey="Screenshot.Save">
-								<behaviors:ScreenshotAction />
-							</livet:InteractionMessageTrigger>
-						</i:Interaction.Triggers>
-					</WebBrowser>
+					</cefSharp:ChromiumWebBrowser>
 				</controls:KanColleHost>
 
 				<DockPanel x:Name="toolbarArea"
