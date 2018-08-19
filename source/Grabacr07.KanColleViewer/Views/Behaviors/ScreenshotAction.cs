@@ -52,7 +52,7 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 			var list = (List<object>)response.Result;
 			var size = new Size((int)list[0], (int)list[1]);
 
-			var bitmap = await this.AssociatedObject.TakeScreenshot(size);
+			var bitmap = await this.AssociatedObject.TakeScreenshot(size, timeout: TimeSpan.FromSeconds(5));
 			using (var stream = new FileStream(path, FileMode.Create))
 			{
 				var encoder = Path.GetExtension(path) == ".jpg"

@@ -108,6 +108,7 @@ namespace Grabacr07.KanColleViewer
 				};
 				cefSettings.CefCommandLineArgs.Add("proxy-server", "http=127.0.0.1:37564");
 				Cef.Initialize(cefSettings);
+				Cef.EnableHighDPISupport();
 
 				// BootstrapProxy() で Views.Settings.ProxyBootstrapper.Show() が呼ばれるより前に
 				// Application.MainWindow を設定しておく。これ大事

@@ -16,7 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CefSharp.Internals;
 using CefSharp.Structs;
-
+using MetroRadiance.Interop;
 using Size = System.Windows.Size;
 
 namespace CefSharp.Wpf
@@ -37,6 +37,7 @@ namespace CefSharp.Wpf
 		private int oldFrameRate;
 		private int ignoreFrames = 0;
 		private TaskCompletionSource<InteropBitmap> screenshotTaskCompletionSource;
+		private Dpi currentDpi;
 
 		public Task<InteropBitmap> TakeScreenshot(Size screenshotSize, int? frameRate = 1, int? ignoreFrames = 0, TimeSpan? timeout = null)
 		{
@@ -82,6 +83,8 @@ namespace CefSharp.Wpf
 			//The resulting bitmap will never be rendered to the screen
 			browserHost.WasResized();
 
+			this.currentDpi = this.GetSystemDpi() ?? Dpi.Default;
+
 			return screenshotTaskCompletionSource.Task;
 		}
 
@@ -107,7 +110,7 @@ namespace CefSharp.Wpf
 				}
 
 				//Wait until we have a frame that matches the updated size we requested
-				if (screenshotSize.HasValue && screenshotSize.Value.Width == width && screenshotSize.Value.Height == height)
+				//if (screenshotSize.HasValue && screenshotSize.Value.Width == width / currentDpi.ScaleX && screenshotSize.Value.Height == height / currentDpi.ScaleY)
 				{
 					var stride = width * BytesPerPixel;
 					var numberOfBytes = stride * height;
@@ -152,61 +155,6 @@ namespace CefSharp.Wpf
 			{
 				base.OnPaint(isPopup, dirtyRect, buffer, width, height);
 			}
-		}
-
-		private void TakeScreenshot()
-		{
-			var uiThreadTaskScheduler = TaskScheduler.FromCurrentSynchronizationContext();
-
-			const string script = "[document.body.scrollWidth, document.body.scrollHeight]";
-			this.EvaluateScriptAsync(script).ContinueWith((scriptTask) =>
-			{
-				var javascriptResponse = scriptTask.Result;
-
-				if (javascriptResponse.Success)
-				{
-					var widthAndHeight = (List<object>)javascriptResponse.Result;
-
-					var screenshotSize = new Size((int)widthAndHeight[0], (int)widthAndHeight[1]);
-
-					TakeScreenshot(screenshotSize, ignoreFrames: 0).ContinueWith((screenshotTask) =>
-					{
-						if (screenshotTask.Status == TaskStatus.RanToCompletion)
-						{
-							try
-							{
-								var bitmap = screenshotTask.Result;
-								var tempFile = Path.GetTempFileName().Replace(".tmp", ".png");
-								using (var stream = new FileStream(tempFile, FileMode.Create))
-								{
-									var encoder = new PngBitmapEncoder();
-									encoder.Frames.Add(BitmapFrame.Create(bitmap));
-									encoder.Save(stream);
-								}
-
-								Process.Start(new ProcessStartInfo
-								{
-									UseShellExecute = true,
-									FileName = tempFile
-								});
-							}
-							catch (Exception ex)
-							{
-								var msg = ex.ToString();
-							}
-						}
-						else
-						{
-							MessageBox.Show("Unable to capture screenshot");
-						}
-					}, uiThreadTaskScheduler); //Make sure continuation runs on UI thread
-
-				}
-				else
-				{
-					MessageBox.Show("Unable to obtain size of screenshot");
-				}
-			}, uiThreadTaskScheduler);
 		}
 	}
 }

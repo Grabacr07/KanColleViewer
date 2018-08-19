@@ -140,15 +140,14 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			if (this.WebBrowser == null) return;
 
 			var dpi = this.systemDpi ?? (this.systemDpi = this.GetSystemDpi()) ?? Dpi.Default;
-			var zoomFactor = dpi.ScaleX + (this.ZoomFactor - 1.0);
-			var percentage = (int)(zoomFactor * 100);
+			var percentage = (int)(this.ZoomFactor * 100);
 
 			ApplyZoomFactor(this, percentage);
 
 			var size = this.styleSheetApplied ? KanColleSize : InitialSize;
 			size = new Size(
-				(size.Width * (zoomFactor / dpi.ScaleX)) / dpi.ScaleX,
-				(size.Height * (zoomFactor / dpi.ScaleY)) / dpi.ScaleY);
+				(size.Width * this.ZoomFactor),
+				(size.Height * this.ZoomFactor));
 			this.WebBrowser.Width = size.Width;
 			this.WebBrowser.Height = size.Height;
 
