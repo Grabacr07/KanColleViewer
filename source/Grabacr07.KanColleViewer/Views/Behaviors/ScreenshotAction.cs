@@ -40,6 +40,11 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 				var frame = AssociatedObject.CWebBrowser.GetBrowser().GetFrame(AssociatedObject.InnermostFrameID);
 				var encodedImage = (string)(frame.EvaluateScriptAsync(@"document.getElementsByTagName('canvas')[0].toDataURL('image/png')").Result).Result;
 				System.Diagnostics.Debug.WriteLine("image = " + encodedImage);
+				byte[] image = Convert.FromBase64String(encodedImage.Split(',')[1]);
+				using (var fs = new FileStream(screenshotMessage.Path, FileMode.Create, FileAccess.Write))
+				{
+					fs.Write(image, 0, image.Length);
+				}
 				screenshotMessage.Response = new Processing();
 			}
 			catch (Exception ex)
@@ -47,7 +52,6 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 				screenshotMessage.Response = new Processing(ex);
 			}
 		}
-
 
 		///// <summary>
 		///// <see cref="WebBrowser.Document"/> (<see cref="HTMLDocument"/>) から艦これの Flash 要素を特定し、指定したパスにスクリーンショットを保存します。
