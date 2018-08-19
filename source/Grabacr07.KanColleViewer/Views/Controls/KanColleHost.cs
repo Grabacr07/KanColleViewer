@@ -144,7 +144,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			CefSettings cefSettings = new CefSettings();
 			cefSettings.CefCommandLineArgs.Add("proxy-server", "http=127.0.0.1:" + KanColleClient.Current.Proxy.ListeningPort.ToString());
 			cefSettings.CachePath = CachePath;
-			cefSettings.CefCommandLineArgs.Add("disable-webgl", "true");
+			cefSettings.CefCommandLineArgs.Add("disable-webgl", "1");
 #if DEBUG
 			cefSettings.RemoteDebuggingPort = 28088;
 #endif
