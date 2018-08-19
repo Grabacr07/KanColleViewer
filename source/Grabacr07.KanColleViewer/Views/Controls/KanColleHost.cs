@@ -48,6 +48,8 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 		private Dpi? systemDpi;
 		private bool firstLoaded;
 
+		public long InnermostFrameID { get; private set; } = -1;
+
 		#region CWebBrowser 依存関係プロパティ
 
 		public ChromiumWebBrowser CWebBrowser
@@ -68,15 +70,17 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			if (oldBrowser != null)
 			{
 				oldBrowser.LoadingStateChanged -= instance.HandleLoadingStateChanged;
+				newBrowser.FrameLoadEnd -= instance.HandleFrameLoadEnd;
 			}
 			if (newBrowser != null)
 			{
 				newBrowser.LoadingStateChanged += instance.HandleLoadingStateChanged;
+				newBrowser.FrameLoadEnd += instance.HandleFrameLoadEnd;
 			}
 			if (instance.scrollViewer != null)
 			{
 				instance.scrollViewer.Content = newBrowser;
-			}			
+			}
 		}
 
 		#endregion
@@ -216,7 +220,8 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 		{
 			if (e.IsLoading == false)
 			{
-				Dispatcher.Invoke(() => {
+				Dispatcher.Invoke(() =>
+				{
 					ApplyStyleSheet();
 					firstLoaded = true;
 					Update();
@@ -224,11 +229,13 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			}
 		}
 
-		private void HandleLoadCompleted(object sender, RoutedEventArgs e)
+		private void HandleFrameLoadEnd(object sender, FrameLoadEndEventArgs e)
 		{
-			this.ApplyStyleSheet();
-			this.firstLoaded = true;
-			this.Update();
+			Uri uri = new Uri(e.Url);
+			if (uri.PathAndQuery.StartsWith("/kcs2/index.php"))
+			{
+				InnermostFrameID = e.Frame.Identifier;
+			}
 		}
 
 		private void HandleWebBrowserNewWindow(string url, int flags, string targetFrameName, ref object postData, string headers, ref bool processed)

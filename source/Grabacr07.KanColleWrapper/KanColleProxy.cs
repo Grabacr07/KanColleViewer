@@ -52,9 +52,9 @@ namespace Grabacr07.KanColleWrapper
 			this.apiSource = this.connectableSessionSource
 				.Where(s => s.Request.PathAndQuery.StartsWith("/kcsapi"))
 				.Where(s => s.Response.MimeType.Equals("text/plain"))
-				#region .Do(debug)
+			#region .Do(debug)
 #if DEBUG
-.Do(session =>
+				.Do(session =>
 				{
 					Debug.WriteLine("==================================================");
 					Debug.WriteLine("Nekoxy session: ");
@@ -64,15 +64,13 @@ namespace Grabacr07.KanColleWrapper
 #endif
 			#endregion
 				.Publish();
-
-			connectableSessionSource.Subscribe(x => Debug.WriteLine("Proxy " + x.Request.PathAndQuery));
 		}
 
 
 		public void Startup(int proxy = 37564)
 		{
 			this.ListeningPort = proxy;
-			
+
 			HttpProxy.Startup(proxy, false, false);
 			this.ApplyProxySettings();
 
