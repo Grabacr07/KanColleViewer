@@ -58,7 +58,7 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 			using (var stream = new FileStream(path, FileMode.Create))
 			{
 				var encoder = format.ToBitmapEncoder();
-				if (encoder == null) throw new NotSupportedException($"{format} 形式はサポートされていません。");
+				if (encoder == null) throw new ArgumentException($"{format} 形式はサポートされていません。");
 
 				encoder.Frames.Add(BitmapFrame.Create(bitmap));
 				encoder.Save(stream);
@@ -76,23 +76,29 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 			if (target == null) throw new Exception("艦これの Canvas 要素が見つかりません。");
 
 			var mimeType = format.ToMimeType();
-			if (string.IsNullOrEmpty(mimeType)) throw new NotSupportedException($"{format} 形式はサポートされていません。");
+			if (string.IsNullOrEmpty(mimeType)) throw new ArgumentException($"{format} 形式はサポートされていません。");
 
 			var check = await target.EvaluateScriptAsync("PIXI.settings.RENDER_OPTIONS.preserveDrawingBuffer");
-
-			var toDataUrl = await target.EvaluateScriptAsync($"document.getElementsByTagName('canvas')[0].toDataURL('{mimeType}')");
-			if (!toDataUrl.Success || !(toDataUrl.Result is string dataUrl)) throw new Exception(toDataUrl.Message);
-
-			var array = dataUrl.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-			if (array.Length != 2) throw new Exception($"無効な形式: {dataUrl}");
-
-			var base64 = array[1];
-			var bytes = Convert.FromBase64String(base64);
-
-			using (var ms = new MemoryStream(bytes))
+			if (check.Success && check.Result is bool b && b)
 			{
-				var image = System.Drawing.Image.FromStream(ms);
-				image.Save(path, ImageFormat.Png);
+				var toDataUrl = await target.EvaluateScriptAsync($"document.getElementsByTagName('canvas')[0].toDataURL('{mimeType}')");
+				if (!toDataUrl.Success || !(toDataUrl.Result is string dataUrl)) throw new Exception(toDataUrl.Message);
+
+				var array = dataUrl.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+				if (array.Length != 2) throw new Exception($"無効な形式: {dataUrl}");
+
+				var base64 = array[1];
+				var bytes = Convert.FromBase64String(base64);
+
+				using (var ms = new MemoryStream(bytes))
+				{
+					var image = System.Drawing.Image.FromStream(ms);
+					image.Save(path, ImageFormat.Png);
+				}
+			}
+			else
+			{
+				await this.TakeScreenshotFromCef(path, format);
 			}
 		}
 	}
