@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
@@ -68,6 +69,21 @@ namespace Grabacr07.KanColleViewer.Models
 
 				case SupportedImageFormat.Jpeg:
 					return new JpegBitmapEncoder();
+
+				default:
+					return null;
+			}
+		}
+
+		public static ImageFormat ToImageFormat(this SupportedImageFormat format)
+		{
+			switch (format)
+			{
+				case SupportedImageFormat.Png:
+					return ImageFormat.Png;
+
+				case SupportedImageFormat.Jpeg:
+					return ImageFormat.Jpeg;
 
 				default:
 					return null;

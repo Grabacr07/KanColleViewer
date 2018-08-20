@@ -1,13 +1,15 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Reactive;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using CefSharp;
 using CefSharp.Wpf;
 using Grabacr07.KanColleViewer.Models;
+using Grabacr07.KanColleViewer.Models.Cef;
 using Grabacr07.KanColleViewer.Properties;
 using Grabacr07.KanColleViewer.ViewModels.Messages;
 using Livet.Behaviors.Messaging;
@@ -21,6 +23,8 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 	/// </summary>
 	internal class ScreenshotAction : InteractionMessageAction<ChromiumWebBrowserWithScreenshotSupport>
 	{
+		private IFrame targetCanvas;
+
 		protected override async void InvokeAction(InteractionMessage message)
 		{
 			var screenshotMessage = message as ScreenshotMessage;
@@ -65,41 +69,35 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 			}
 		}
 
-		private async Task TakeScreenshotFromCanvas(string path, SupportedImageFormat format)
+		private Task TakeScreenshotFromCanvas(string path, SupportedImageFormat format)
 		{
-			var browser = this.AssociatedObject.GetBrowser();
-			var gameFrame = browser.GetFrame("game_frame");
-			var target = browser.GetFrameIdentifiers()
-				.Select(x => browser.GetFrame(x))
-				.Where(x => x.Parent?.Identifier == gameFrame.Identifier)
-				.FirstOrDefault(x => x.Url.Contains("/kcs2/index.php"));
-			if (target == null) throw new Exception("艦これの Canvas 要素が見つかりません。");
+			var source = new TaskCompletionSource<Unit>();
 
-			var mimeType = format.ToMimeType();
-			if (string.IsNullOrEmpty(mimeType)) throw new ArgumentException($"{format} 形式はサポートされていません。");
-
-			var check = await target.EvaluateScriptAsync("PIXI.settings.RENDER_OPTIONS.preserveDrawingBuffer");
-			if (check.Success && check.Result is bool b && b)
+			if (this.targetCanvas == null && !this.AssociatedObject.TryGetKanColleCanvas(out this.targetCanvas))
 			{
-				var toDataUrl = await target.EvaluateScriptAsync($"document.getElementsByTagName('canvas')[0].toDataURL('{mimeType}')");
-				if (!toDataUrl.Success || !(toDataUrl.Result is string dataUrl)) throw new Exception(toDataUrl.Message);
-
-				var array = dataUrl.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-				if (array.Length != 2) throw new Exception($"無効な形式: {dataUrl}");
-
-				var base64 = array[1];
-				var bytes = Convert.FromBase64String(base64);
-
-				using (var ms = new MemoryStream(bytes))
-				{
-					var image = System.Drawing.Image.FromStream(ms);
-					image.Save(path, ImageFormat.Png);
-				}
+				source.SetException(new Exception("艦これの Canvas 要素が見つかりません。"));
+				return source.Task;
 			}
-			else
-			{
-				await this.TakeScreenshotFromCef(path, format);
-			}
+
+			var request = new ScreenshotRequest(path, format, source);
+			var script = $@"
+(async function()
+{{
+	await CefSharp.BindObjectAsync('{request.Id}');
+
+	var canvas = document.querySelector('canvas');
+	requestAnimationFrame(() =>
+	{{
+		var dataUrl = canvas.toDataURL('{format.ToMimeType()}');
+		{request.Id}.complete(dataUrl);
+	}});
+}})();
+";
+			this.AssociatedObject.JavascriptObjectRepository.Register(request.Id, request, true);
+			this.targetCanvas.ExecuteJavaScriptAsync(script);
+
+			return source.Task;
 		}
 	}
+
 }

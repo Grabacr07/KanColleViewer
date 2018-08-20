@@ -184,6 +184,8 @@
     <Compile Include="Models\BrowserZoomFactor.cs" />
     <Compile Include="Models\Cef\PixiSettingsRewriteFilter.cs" />
     <Compile Include="Models\Cef\ResourceHandler.cs" />
+    <Compile Include="Models\Cef\CefBridge.cs" />
+    <Compile Include="Models\Cef\ScreenshotRequest.cs" />
     <Compile Include="Models\ExitConfirmationType.cs" />
     <Compile Include="Models\IZoomFactor.cs" />
     <Compile Include="Models\NotifierHost.cs" />

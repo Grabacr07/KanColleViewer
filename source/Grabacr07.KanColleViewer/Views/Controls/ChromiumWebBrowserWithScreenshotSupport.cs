@@ -49,7 +49,7 @@ namespace CefSharp.Wpf
 
 		public ChromiumWebBrowserWithScreenshotSupport()
 		{
-			this.RequestHandler = new RequestHandler();
+			//this.RequestHandler = new RequestHandler();
 		}
 
 		public Task<InteropBitmap> TakeScreenshot(Size screenshotSize, int? frameRate = 1, int? ignoreFrames = 0, TimeSpan? timeout = null)
