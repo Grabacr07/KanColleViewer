@@ -15,6 +15,12 @@ namespace Grabacr07.KanColleViewer.Models.Cef
 		{
 			var browser = webBrowser.GetBrowser();
 			var gameFrame = browser.GetFrame("game_frame");
+			if (gameFrame == null)
+			{
+				canvas = null;
+				return false;
+			}
+
 			canvas = browser.GetFrameIdentifiers()
 				.Select(x => browser.GetFrame(x))
 				.Where(x => x.Parent?.Identifier == gameFrame.Identifier)

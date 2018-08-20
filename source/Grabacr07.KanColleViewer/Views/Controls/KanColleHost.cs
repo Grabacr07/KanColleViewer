@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -9,7 +8,7 @@ using System.Windows.Markup;
 using CefSharp;
 using CefSharp.Wpf;
 using Grabacr07.KanColleViewer.Models;
-using MetroRadiance.Interop;
+using Grabacr07.KanColleViewer.Models.Cef;
 
 namespace Grabacr07.KanColleViewer.Views.Controls
 {
@@ -29,15 +28,13 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 		private ScrollViewer scrollViewer;
 		private bool styleSheetApplied;
-		private Dpi? systemDpi;
-		private bool firstLoaded;
 
 		#region WebBrowser 依存関係プロパティ
 
 		public ChromiumWebBrowser WebBrowser
 		{
-			get { return (ChromiumWebBrowser)this.GetValue(WebBrowserProperty); }
-			set { this.SetValue(WebBrowserProperty, value); }
+			get => (ChromiumWebBrowser)this.GetValue(WebBrowserProperty);
+			set => this.SetValue(WebBrowserProperty, value);
 		}
 
 		public static readonly DependencyProperty WebBrowserProperty =
@@ -72,8 +69,8 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 		/// </summary>
 		public double ZoomFactor
 		{
-			get { return (double)this.GetValue(ZoomFactorProperty); }
-			set { this.SetValue(ZoomFactorProperty, value); }
+			get => (double)this.GetValue(ZoomFactorProperty);
+			set => this.SetValue(ZoomFactorProperty, value);
 		}
 
 		/// <summary>
@@ -86,7 +83,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 		{
 			var instance = (KanColleHost)d;
 
-			instance.Update();
+			instance.ApplySize();
 		}
 
 		#endregion
@@ -98,8 +95,8 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 		/// </summary>
 		public string UserStyleSheet
 		{
-			get { return (string)this.GetValue(UserStyleSheetProperty); }
-			set { this.SetValue(UserStyleSheetProperty, value); }
+			get => (string)this.GetValue(UserStyleSheetProperty);
+			set => this.SetValue(UserStyleSheetProperty, value);
 		}
 
 		/// <summary>
@@ -121,7 +118,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 		public KanColleHost()
 		{
-			this.Loaded += (sender, args) => this.Update();
+			this.Loaded += (sender, args) => this.ApplySize();
 		}
 
 		public override void OnApplyTemplate()
@@ -135,29 +132,25 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			}
 		}
 
-		public void Update()
+		public void ApplySize()
 		{
 			if (this.WebBrowser == null) return;
 
-			var dpi = this.systemDpi ?? (this.systemDpi = this.GetSystemDpi()) ?? Dpi.Default;
-			var percentage = (int)(this.ZoomFactor * 100);
+			this.ApplyZoomFactor((int)(this.ZoomFactor * 100));
 
-			ApplyZoomFactor(this, percentage);
+			var baseSize = this.styleSheetApplied ? KanColleSize : InitialSize;
+			var size = new Size(
+				(baseSize.Width * this.ZoomFactor),
+				(baseSize.Height * this.ZoomFactor));
 
-			var size = this.styleSheetApplied ? KanColleSize : InitialSize;
-			size = new Size(
-				(size.Width * this.ZoomFactor),
-				(size.Height * this.ZoomFactor));
 			this.WebBrowser.Width = size.Width;
 			this.WebBrowser.Height = size.Height;
 
 			this.OwnerSizeChangeRequested?.Invoke(this, size);
 		}
 
-		private static void ApplyZoomFactor(KanColleHost target, int zoomFactor)
+		private void ApplyZoomFactor(int zoomFactor)
 		{
-			if (!target.firstLoaded) return;
-
 			if (zoomFactor < 10 || zoomFactor > 1000)
 			{
 				StatusService.Current.Notify(string.Format(Properties.Resources.ZoomAction_OutOfRange, zoomFactor));
@@ -166,7 +159,8 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 			try
 			{
-				target.WebBrowser.ZoomLevel = Math.Log(zoomFactor / 100.0) / Math.Log(1.2);
+				this.WebBrowser.ZoomLevel = 0;
+				this.WebBrowser.ZoomLevel = Math.Log(zoomFactor / 100.0) / Math.Log(1.2);
 			}
 			catch (Exception) when (Application.Instance.State == ApplicationState.Startup)
 			{
@@ -181,28 +175,28 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 		private void HandleLoadEnd(object sender, FrameLoadEndEventArgs e)
 		{
-			this.Dispatcher.Invoke(() =>
+			if (e.Frame.IsMain)
 			{
-				this.ApplyStyleSheet();
+				this.Dispatcher.Invoke(() => this.ApplySize());
+			}
 
-				this.firstLoaded = true;
-				this.Update();
-			});
+			if (e.Url.Contains("/kcs2/index.php"))
+			{
+				this.Dispatcher.Invoke(() => this.ApplyStyleSheet());
+			}
 		}
 
 		private void ApplyStyleSheet()
 		{
-			if (!this.firstLoaded) return;
-
 			try
 			{
-				var frame = this.WebBrowser.GetMainFrame();
-				if (frame == null) return;
+				if (this.WebBrowser.TryGetKanColleCanvas(out _))
+				{
+					var js = $"var style = document.createElement(\"style\"); style.innerHTML = \"{this.UserStyleSheet.Replace("\r\n", " ")}\"; document.body.appendChild(style);";
+					this.WebBrowser.GetMainFrame().ExecuteJavaScriptAsync(js);
 
-				var js = $"var style = document.createElement(\"style\"); style.innerHTML = \"{this.UserStyleSheet.Replace("\r\n", " ")}\"; document.body.appendChild(style);";
-				frame.ExecuteJavaScriptAsync(js);
-
-				this.styleSheetApplied = true;
+					this.styleSheetApplied = true;
+				}
 			}
 			catch (Exception) when (Application.Instance.State == ApplicationState.Startup)
 			{

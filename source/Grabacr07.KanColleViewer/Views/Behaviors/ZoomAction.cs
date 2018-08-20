@@ -13,7 +13,7 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 	{
 		protected override void InvokeAction(InteractionMessage message)
 		{
-			this.AssociatedObject.Update();
+			this.AssociatedObject.ApplySize();
 		}
 	}
 }
