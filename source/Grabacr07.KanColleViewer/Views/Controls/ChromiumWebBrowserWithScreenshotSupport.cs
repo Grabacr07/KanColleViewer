@@ -5,18 +5,26 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.IO.MemoryMappedFiles;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using CefSharp.Handler;
 using CefSharp.Internals;
 using CefSharp.Structs;
+using Grabacr07.KanColleViewer.Models.Cef;
 using MetroRadiance.Interop;
+using PixelFormat = System.Windows.Media.PixelFormat;
 using Size = System.Windows.Size;
 
 namespace CefSharp.Wpf
@@ -39,19 +47,24 @@ namespace CefSharp.Wpf
 		private TaskCompletionSource<InteropBitmap> screenshotTaskCompletionSource;
 		private Dpi currentDpi;
 
+		public ChromiumWebBrowserWithScreenshotSupport()
+		{
+			this.RequestHandler = new RequestHandler();
+		}
+
 		public Task<InteropBitmap> TakeScreenshot(Size screenshotSize, int? frameRate = 1, int? ignoreFrames = 0, TimeSpan? timeout = null)
 		{
-			if (screenshotTaskCompletionSource != null && screenshotTaskCompletionSource.Task.Status == TaskStatus.Running)
+			if (this.screenshotTaskCompletionSource != null && this.screenshotTaskCompletionSource.Task.Status == TaskStatus.Running)
 			{
 				throw new Exception("Screenshot already in progress, you must wait for the previous screenshot to complete");
 			}
 
-			if (IsBrowserInitialized == false)
+			if (this.IsBrowserInitialized == false)
 			{
 				throw new Exception("Browser has not yet finished initializing or is being disposed");
 			}
 
-			if (IsLoading)
+			if (this.IsLoading)
 			{
 				throw new Exception("Unable to take screenshot while browser is loading");
 			}
@@ -63,16 +76,16 @@ namespace CefSharp.Wpf
 				throw new Exception("IBrowserHost is null");
 			}
 
-			screenshotTaskCompletionSource = new TaskCompletionSource<InteropBitmap>(TaskCreationOptions.RunContinuationsAsynchronously);
+			this.screenshotTaskCompletionSource = new TaskCompletionSource<InteropBitmap>(TaskCreationOptions.RunContinuationsAsynchronously);
 
 			if (timeout.HasValue)
 			{
-				screenshotTaskCompletionSource = screenshotTaskCompletionSource.WithTimeout(timeout.Value);
+				this.screenshotTaskCompletionSource = this.screenshotTaskCompletionSource.WithTimeout(timeout.Value);
 			}
 
 			if (frameRate.HasValue)
 			{
-				oldFrameRate = browserHost.WindowlessFrameRate;
+				this.oldFrameRate = browserHost.WindowlessFrameRate;
 				browserHost.WindowlessFrameRate = frameRate.Value;
 			}
 
@@ -85,14 +98,14 @@ namespace CefSharp.Wpf
 
 			this.currentDpi = this.GetSystemDpi() ?? Dpi.Default;
 
-			return screenshotTaskCompletionSource.Task;
+			return this.screenshotTaskCompletionSource.Task;
 		}
 
-		protected override CefSharp.Structs.Rect? GetViewRect()
+		protected override Structs.Rect? GetViewRect()
 		{
-			if (isTakingScreenshot)
+			if (this.isTakingScreenshot)
 			{
-				return new CefSharp.Structs.Rect(0, 0, (int)Math.Ceiling(screenshotSize.Value.Width), (int)Math.Ceiling(screenshotSize.Value.Height));
+				return new Structs.Rect(0, 0, (int)Math.Ceiling(this.screenshotSize.Value.Width), (int)Math.Ceiling(this.screenshotSize.Value.Height));
 			}
 
 			return base.GetViewRect();
@@ -100,12 +113,12 @@ namespace CefSharp.Wpf
 
 		protected override void OnPaint(bool isPopup, Structs.Rect dirtyRect, IntPtr buffer, int width, int height)
 		{
-			if (isTakingScreenshot)
+			if (this.isTakingScreenshot)
 			{
 				//We ignore the first n number of frames
-				if (ignoreFrames > 0)
+				if (this.ignoreFrames > 0)
 				{
-					ignoreFrames--;
+					this.ignoreFrames--;
 					return;
 				}
 
@@ -124,18 +137,18 @@ namespace CefSharp.Wpf
 					CopyMemory(viewAccessor.SafeMemoryMappedViewHandle.DangerousGetHandle(), buffer, (uint)numberOfBytes);
 
 					//Bitmaps need to be created on the UI thread
-					Dispatcher.BeginInvoke((Action)(() =>
+					this.Dispatcher.BeginInvoke((Action)(() =>
 					{
 						var backBuffer = mappedFile.SafeMemoryMappedFileHandle.DangerousGetHandle();
 						//NOTE: Interopbitmap is not capable of supporting DPI scaling
 						var bitmap = (InteropBitmap)Imaging.CreateBitmapSourceFromMemorySection(backBuffer,
 							width, height, PixelFormats.Bgra32, stride, 0);
-						screenshotTaskCompletionSource.TrySetResult(bitmap);
+						this.screenshotTaskCompletionSource.TrySetResult(bitmap);
 
-						isTakingScreenshot = false;
-						var browserHost = GetBrowser().GetHost();
+						this.isTakingScreenshot = false;
+						var browserHost = this.GetBrowser().GetHost();
 						//Return the framerate to the previous value
-						browserHost.WindowlessFrameRate = oldFrameRate;
+						browserHost.WindowlessFrameRate = this.oldFrameRate;
 						//Let the browser know the size changes so normal rendering can continue
 						browserHost.WasResized();
 

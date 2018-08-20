@@ -107,6 +107,7 @@ namespace Grabacr07.KanColleViewer
 					CachePath = Path.Combine(this.LocalAppData.FullName, "Chromium", "Cache"),
 				};
 				cefSettings.CefCommandLineArgs.Add("proxy-server", "http=127.0.0.1:37564");
+				//cefSettings.CefCommandLineArgs.Add("disable-webgl", "1");
 				Cef.Initialize(cefSettings);
 				Cef.EnableHighDPISupport();
 

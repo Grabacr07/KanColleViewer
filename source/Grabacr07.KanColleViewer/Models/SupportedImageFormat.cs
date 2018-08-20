@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace Grabacr07.KanColleViewer.Models
 {
@@ -24,5 +25,53 @@ namespace Grabacr07.KanColleViewer.Models
 		/// JPEG (Joint Photographic Experts Group) イメージ形式。
 		/// </summary>
 		Jpeg,
+	}
+
+	public static class SupportedImageFormatExtensions
+	{
+		public static string ToExtension(this SupportedImageFormat format)
+		{
+			switch (format)
+			{
+				case SupportedImageFormat.Png:
+					return ".png";
+
+				case SupportedImageFormat.Jpeg:
+					return ".jpg";
+
+				default:
+					return "";
+			}
+		}
+
+		public static string ToMimeType(this SupportedImageFormat format)
+		{
+			switch (format)
+			{
+				case SupportedImageFormat.Png:
+					return "image/png";
+
+				case SupportedImageFormat.Jpeg:
+					return "image/jpeg";
+
+				default:
+					return "";
+			}
+		}
+
+		public static BitmapEncoder ToBitmapEncoder(this SupportedImageFormat format)
+		{
+			switch (format)
+			{
+				case SupportedImageFormat.Png:
+					return new PngBitmapEncoder();
+
+				case SupportedImageFormat.Jpeg:
+					return new JpegBitmapEncoder();
+
+				default:
+					return null;
+			}
+		}
 	}
 }

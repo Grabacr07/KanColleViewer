@@ -7,8 +7,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.InteropServices;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
@@ -37,17 +35,13 @@ namespace Grabacr07.KanColleViewer.Models
 		/// </summary>
 		public static bool IsInDesignMode => DesignerProperties.GetIsInDesignMode(new DependencyObject());
 		
-		public static string CreateScreenshotFilePath()
+		public static string CreateScreenshotFilePath(SupportedImageFormat format)
 		{
 			var filePath = Path.Combine(
 				Settings.ScreenshotSettings.Destination,
 				$"KanColle-{DateTimeOffset.Now.LocalDateTime.ToString("yyMMdd-HHmmssff")}");
 
-			filePath = Path.ChangeExtension(
-				filePath,
-				Settings.ScreenshotSettings.Format == SupportedImageFormat.Png ? ".png" : ".jpg");
-
-			return filePath;
+			return Path.ChangeExtension(filePath, format.ToExtension());
 		}
 
 
