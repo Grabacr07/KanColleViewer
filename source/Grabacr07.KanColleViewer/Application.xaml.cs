@@ -108,6 +108,7 @@ namespace Grabacr07.KanColleViewer
 				};
 				cefSettings.CefCommandLineArgs.Add("proxy-server", "http=127.0.0.1:37564");
 				//cefSettings.CefCommandLineArgs.Add("disable-webgl", "1");
+				CefSharpSettings.SubprocessExitIfParentProcessClosed = true;
 				Cef.Initialize(cefSettings);
 				Cef.EnableHighDPISupport();
 
