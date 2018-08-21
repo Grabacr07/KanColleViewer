@@ -152,3 +152,19 @@ MIT ライセンスの下で公開する、オープンソース / フリーソ�
 * **用途 :** 音量操作
 * **ライセンス :** The MIT License (MIT)
 * **ライセンス全文 :** [licenses/NETCoreAudioAPIs.txt](licenses/NETCoreAudioAPIs.txt)
+
+### [CefSharp.Wpf](http://cefsharp.github.io/)
+
+* **用途 :** 内蔵 Web ブラウザー
+* **ライセンス :** The 3-Clause BSD License
+* **ライセンス全文 :** [licenses/CefSharp.txt](licenses/CefSharp.txt)
+
+### [Application Insights](https://azure.microsoft.com/ja-jp/services/application-insights/)
+
+> The MIT License (MIT)
+> 
+> Copyright (c) Microsoft Corporation
+
+* **用途 :** クラッシュ ログ収集
+* **ライセンス :** The MIT License (MIT)
+* **ライセンス全文 :** [licenses/Application Insights.txt](licenses/Application Insights.txt)

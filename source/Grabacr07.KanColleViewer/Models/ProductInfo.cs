@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -25,6 +25,8 @@ namespace Grabacr07.KanColleViewer.Models
 			new Library("Nekoxy", new Uri("https://github.com/veigr/Nekoxy")),
 			new Library("Desktop Toast", new Uri("https://github.com/emoacht/DesktopToast")),
 			new Library(".NET Core Audio APIs", new Uri("https://netcoreaudio.codeplex.com/")),
+			new Library("CefSharp.Wpf", new Uri("http://cefsharp.github.io/")),
+			new Library("Application Insights", new Uri("https://azure.microsoft.com/ja-jp/services/application-insights/"))
 		});
 
 
