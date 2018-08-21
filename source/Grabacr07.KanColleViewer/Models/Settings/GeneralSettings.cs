@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -50,6 +50,12 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		/// </summary>
 		public static SerializableProperty<string> TaskbarProgressSourceWhenSortie { get; }
 			= new SerializableProperty<string>(GetKey(), Providers.Roaming, "") { AutoSave = true };
+
+		/// <summary>
+		/// 次回起動時にブラウザー キャッシュを削除するかどうかを示す設定値を取得します。
+		/// </summary>
+		public static SerializableProperty<bool> ClearCacheOnNextStartup { get; }
+			= new SerializableProperty<bool>(GetKey(), Providers.Local) { AutoSave = true, };
 
 		private static string GetKey([CallerMemberName] string propertyName = "")
 		{

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Settings.Network"
+<UserControl x:Class="Grabacr07.KanColleViewer.Views.Settings.Network"
 			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -48,8 +48,6 @@
 					   IsEnabled="{Binding ProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SystemProxy}"
 					   Margin="20,2,0,0">
 				<Run Text="「インターネット オプション」の設定を用いて通信を行います。" />
-				<LineBreak />
-				<Run Text="HTTP プロトコルの通信は自動構成も含め「インターネット オプション」の設定がリアルタイムに反映されますが、HTTP プロトコル以外の通信はアプリケーション起動時および「適用」時の設定が使用されます。" />
 			</TextBlock>
 
 			<Border Height="8" />
@@ -243,9 +241,13 @@
 			<Border Height="8" />
 			<StackPanel Orientation="Horizontal"
 						HorizontalAlignment="Right">
+				<TextBlock Text="※反映にはアプリケーションの再起動が必要です。"
+						   Style="{DynamicResource DetailTextStyleKey}"
+						   Margin="16,8" />
+
 				<metro2:CallMethodButton MethodTarget="{Binding}"
 										 MethodName="Apply"
-										 Content="適用"
+										 Content="保存"
 										 MinWidth="110"
 										 Padding="16,6" />
 				<Border Width="8" />

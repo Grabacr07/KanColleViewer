@@ -1,12 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Windows;
+using CefSharp;
 using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Models.Settings;
@@ -42,24 +42,19 @@ namespace Grabacr07.KanColleViewer
 
 	sealed partial class Application : INotifyPropertyChanged, IDisposableHolder
 	{
-		static Application()
-		{
-			AppDomain.CurrentDomain.UnhandledException += (sender, args) => ReportException(sender, args.ExceptionObject as Exception);
-		}
-
 		private readonly LivetCompositeDisposable compositeDisposable = new LivetCompositeDisposable();
 		private event PropertyChangedEventHandler propertyChangedInternal;
 
-		/// <summary>
-		/// 現在の <see cref="AppDomain"/> の <see cref="Application"/> オブジェクトを取得します。
-		/// </summary>
-		public static Application Instance => Current as Application;
+		public DirectoryInfo LocalAppData = new DirectoryInfo(
+			Path.Combine(
+				Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+				ProductInfo.Company,
+				ProductInfo.Product));
 
 		/// <summary>
 		/// アプリケーションの現在の状態を示す識別子を取得します。
 		/// </summary>
 		public ApplicationState State { get; private set; }
-
 
 		protected override void OnStartup(StartupEventArgs e)
 		{
@@ -91,8 +86,10 @@ namespace Grabacr07.KanColleViewer
 				WindowService.Current.AddTo(this).Initialize();
 				NotifyService.Current.AddTo(this).Initialize();
 
-				Helper.SetRegistryFeatureBrowserEmulation();
 				Helper.SetMMCSSTask();
+				Helper.DeleteCacheIfRequested();
+
+				CefInitialize();
 
 				// BootstrapProxy() で Views.Settings.ProxyBootstrapper.Show() が呼ばれるより前に
 				// Application.MainWindow を設定しておく。これ大事
@@ -160,6 +157,9 @@ namespace Grabacr07.KanColleViewer
 
 		protected override void OnExit(ExitEventArgs e)
 		{
+			Cef.Shutdown();
+			
+
 			this.ChangeState(ApplicationState.Terminate);
 			base.OnExit(e);
 
@@ -186,59 +186,6 @@ namespace Grabacr07.KanColleViewer
 			// けど今やることがない
 		}
 
-		/// <summary>
-		/// <see cref="ProxyBootstrapper"/> を使用し、<see cref="KanColleProxy"/> を起動することを試みます。
-		/// 必要に応じて、ユーザーに操作を求めるダイアログを表示します。
-		/// </summary>
-		/// <returns><see cref="KanColleProxy"/> の起動に成功した場合は true、それ以外の場合は false。</returns>
-		private static bool BootstrapProxy()
-		{
-			var bootstrapper = new ProxyBootstrapper();
-			bootstrapper.Try();
-
-			if (bootstrapper.Result == ProxyBootstrapResult.Success)
-			{
-				return true;
-			}
-
-			var vmodel = new ProxyBootstrapperViewModel(bootstrapper) { Title = ProductInfo.Title, };
-			var window = new Views.Settings.ProxyBootstrapper { DataContext = vmodel, };
-			window.ShowDialog();
-
-			return vmodel.DialogResult;
-		}
-
-		private static void ReportException(object sender, Exception exception)
-		{
-			#region const
-
-			const string messageFormat = @"
-===========================================================
-ERROR, date = {0}, sender = {1},
-{2}
-";
-			const string path = "error.log";
-
-			#endregion
-
-			// ToDo: 例外ダイアログ
-
-			try
-			{
-				var message = string.Format(messageFormat, DateTimeOffset.Now, sender, exception);
-
-				Debug.WriteLine(message);
-				File.AppendAllText(path, message);
-			}
-			catch (Exception ex)
-			{
-				Debug.WriteLine(ex);
-			}
-
-			// とりあえずもう終了させるしかないもじゃ
-			// 救えるパターンがあるなら救いたいけど方法わからんもじゃ
-			Current.Shutdown();
-		}
 
 		#region INotifyPropertyChanged members
 

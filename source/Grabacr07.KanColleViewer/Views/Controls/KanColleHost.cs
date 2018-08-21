@@ -1,20 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
-using System.Windows.Navigation;
+using CefSharp;
+using CefSharp.Wpf;
 using Grabacr07.KanColleViewer.Models;
-using Grabacr07.KanColleViewer.ViewModels;
-using MetroRadiance.Interop;
-using MetroTrilithon.UI.Controls;
-using MSHTML;
-using SHDocVw;
-using IServiceProvider = Grabacr07.KanColleViewer.Win32.IServiceProvider;
-using WebBrowser = System.Windows.Controls.WebBrowser;
+using Grabacr07.KanColleViewer.Models.Cef;
 
 namespace Grabacr07.KanColleViewer.Views.Controls
 {
@@ -24,8 +18,8 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 	{
 		private const string PART_ContentHost = "PART_ContentHost";
 
-		public static Size KanColleSize { get; } = new Size(800.0, 480.0);
-		public static Size InitialSize { get; } = new Size(960.0, 572.0);
+		public static Size KanColleSize { get; } = new Size(1200.0, 720.0);
+		public static Size InitialSize { get; } = new Size(1200.0, 720.0);
 
 		static KanColleHost()
 		{
@@ -34,42 +28,37 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 		private ScrollViewer scrollViewer;
 		private bool styleSheetApplied;
-		private Dpi? systemDpi;
-		private bool firstLoaded;
 
 		#region WebBrowser 依存関係プロパティ
 
-		public WebBrowser WebBrowser
+		public ChromiumWebBrowser WebBrowser
 		{
-			get { return (WebBrowser)this.GetValue(WebBrowserProperty); }
-			set { this.SetValue(WebBrowserProperty, value); }
+			get => (ChromiumWebBrowser)this.GetValue(WebBrowserProperty);
+			set => this.SetValue(WebBrowserProperty, value);
 		}
 
 		public static readonly DependencyProperty WebBrowserProperty =
-			DependencyProperty.Register(nameof(WebBrowser), typeof(WebBrowser), typeof(KanColleHost), new UIPropertyMetadata(null, WebBrowserPropertyChangedCallback));
+			DependencyProperty.Register(nameof(WebBrowser), typeof(ChromiumWebBrowser), typeof(KanColleHost), new UIPropertyMetadata(null, WebBrowserPropertyChangedCallback));
 
 		private static void WebBrowserPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
 			var instance = (KanColleHost)d;
-			var newBrowser = (WebBrowser)e.NewValue;
-			var oldBrowser = (WebBrowser)e.OldValue;
+			var newBrowser = (ChromiumWebBrowser)e.NewValue;
+			var oldBrowser = (ChromiumWebBrowser)e.OldValue;
 
 			if (oldBrowser != null)
 			{
-				oldBrowser.LoadCompleted -= instance.HandleLoadCompleted;
+				oldBrowser.FrameLoadEnd -= instance.HandleLoadEnd;
 			}
 			if (newBrowser != null)
 			{
-				newBrowser.LoadCompleted += instance.HandleLoadCompleted;
-				var events = WebBrowserHelper.GetAxWebbrowser2(newBrowser) as DWebBrowserEvents_Event;
-				if (events != null) events.NewWindow += instance.HandleWebBrowserNewWindow;
+				newBrowser.FrameLoadEnd += instance.HandleLoadEnd;
+				newBrowser.MenuHandler = new ContextMenuHandler();
 			}
 			if (instance.scrollViewer != null)
 			{
 				instance.scrollViewer.Content = newBrowser;
 			}
-
-			WebBrowserHelper.SetAllowWebBrowserDrop(newBrowser, false);
 		}
 
 		#endregion
@@ -81,8 +70,8 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 		/// </summary>
 		public double ZoomFactor
 		{
-			get { return (double)this.GetValue(ZoomFactorProperty); }
-			set { this.SetValue(ZoomFactorProperty, value); }
+			get => (double)this.GetValue(ZoomFactorProperty);
+			set => this.SetValue(ZoomFactorProperty, value);
 		}
 
 		/// <summary>
@@ -95,7 +84,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 		{
 			var instance = (KanColleHost)d;
 
-			instance.Update();
+			instance.ApplySize();
 		}
 
 		#endregion
@@ -107,8 +96,8 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 		/// </summary>
 		public string UserStyleSheet
 		{
-			get { return (string)this.GetValue(UserStyleSheetProperty); }
-			set { this.SetValue(UserStyleSheetProperty, value); }
+			get => (string)this.GetValue(UserStyleSheetProperty);
+			set => this.SetValue(UserStyleSheetProperty, value);
 		}
 
 		/// <summary>
@@ -130,7 +119,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 		public KanColleHost()
 		{
-			this.Loaded += (sender, args) => this.Update();
+			this.Loaded += (sender, args) => this.ApplySize();
 		}
 
 		public override void OnApplyTemplate()
@@ -144,48 +133,35 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			}
 		}
 
-		public void Update()
+		public void ApplySize()
 		{
 			if (this.WebBrowser == null) return;
 
-			var dpi = this.systemDpi ?? (this.systemDpi = this.GetSystemDpi()) ?? Dpi.Default;
-			var zoomFactor = dpi.ScaleX + (this.ZoomFactor - 1.0);
-			var percentage = (int)(zoomFactor * 100);
+			this.ApplyZoomFactor(this.ZoomFactor);
 
-			ApplyZoomFactor(this, percentage);
+			var baseSize = this.styleSheetApplied ? KanColleSize : InitialSize;
+			var size = new Size(
+				(baseSize.Width * this.ZoomFactor),
+				(baseSize.Height * this.ZoomFactor));
 
-			var size = this.styleSheetApplied ? KanColleSize : InitialSize;
-			size = new Size(
-				(size.Width * (zoomFactor / dpi.ScaleX)) / dpi.ScaleX,
-				(size.Height * (zoomFactor / dpi.ScaleY)) / dpi.ScaleY);
 			this.WebBrowser.Width = size.Width;
 			this.WebBrowser.Height = size.Height;
 
 			this.OwnerSizeChangeRequested?.Invoke(this, size);
 		}
 
-		private static void ApplyZoomFactor(KanColleHost target, int zoomFactor)
+		private void ApplyZoomFactor(double zoomFactor)
 		{
-			if (!target.firstLoaded) return;
-
-			if (zoomFactor < 10 || zoomFactor > 1000)
+			if (zoomFactor < 0.1 || zoomFactor > 10)
 			{
-				StatusService.Current.Notify(string.Format(Properties.Resources.ZoomAction_OutOfRange, zoomFactor));
+				StatusService.Current.Notify(string.Format(Properties.Resources.ZoomAction_OutOfRange, (int)(zoomFactor * 100)));
 				return;
 			}
 
 			try
 			{
-				var provider = target.WebBrowser.Document as IServiceProvider;
-				if (provider == null) return;
-
-				object ppvObject;
-				provider.QueryService(typeof(IWebBrowserApp).GUID, typeof(IWebBrowser2).GUID, out ppvObject);
-				var webBrowser = ppvObject as IWebBrowser2;
-				if (webBrowser == null) return;
-
-				object pvaIn = zoomFactor;
-				webBrowser.ExecWB(OLECMDID.OLECMDID_OPTICAL_ZOOM, OLECMDEXECOPT.OLECMDEXECOPT_DODEFAULT, ref pvaIn);
+				this.WebBrowser.ZoomLevel = 0;
+				this.WebBrowser.ZoomLevel = Math.Log(zoomFactor) / Math.Log(1.2);
 			}
 			catch (Exception) when (Application.Instance.State == ApplicationState.Startup)
 			{
@@ -193,51 +169,33 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			}
 			catch (Exception ex)
 			{
-				Debug.WriteLine(ex);
 				StatusService.Current.Notify(string.Format(Properties.Resources.ZoomAction_ZoomFailed, ex.Message));
+				Application.TelemetryClient.TrackException(ex);
 			}
 		}
 
-		private void HandleLoadCompleted(object sender, NavigationEventArgs e)
+		private void HandleLoadEnd(object sender, FrameLoadEndEventArgs e)
 		{
-			this.ApplyStyleSheet();
-			WebBrowserHelper.SetScriptErrorsSuppressed(this.WebBrowser, true);
+			if (e.Frame.IsMain)
+			{
+				this.Dispatcher.Invoke(() => this.ApplySize());
+			}
 
-			this.firstLoaded = true;
-			this.Update();
-		}
-
-		private void HandleWebBrowserNewWindow(string url, int flags, string targetFrameName, ref object postData, string headers, ref bool processed)
-		{
-			processed = true;
-
-			var window = new BrowserWindow { DataContext = new NavigatorViewModel(), };
-			window.Show();
-			window.WebBrowser.Navigate(url);
+			if (e.Url.Contains("/kcs2/index.php"))
+			{
+				this.Dispatcher.Invoke(() => this.ApplyStyleSheet());
+			}
 		}
 
 		private void ApplyStyleSheet()
 		{
-			if (!this.firstLoaded) return;
-
 			try
 			{
-				var document = this.WebBrowser.Document as HTMLDocument;
-				if (document == null) return;
-
-				var gameFrame = document.getElementById("game_frame");
-				if (gameFrame == null)
+				if (this.WebBrowser.TryGetKanColleCanvas(out _))
 				{
-					if (document.url.Contains(".swf?"))
-					{
-						gameFrame = document.body;
-					}
-				}
+					var js = $"var style = document.createElement(\"style\"); style.innerHTML = \"{this.UserStyleSheet.Replace("\r\n", " ")}\"; document.body.appendChild(style);";
+					this.WebBrowser.GetMainFrame().ExecuteJavaScriptAsync(js);
 
-				var target = gameFrame?.document as HTMLDocument;
-				if (target != null)
-				{
-					target.createStyleSheet().cssText = this.UserStyleSheet;
 					this.styleSheetApplied = true;
 				}
 			}
@@ -247,8 +205,8 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			}
 			catch (Exception ex)
 			{
-				Debug.WriteLine(ex);
 				StatusService.Current.Notify("failed to apply css: " + ex.Message);
+				Application.TelemetryClient.TrackException(ex);
 			}
 		}
 	}

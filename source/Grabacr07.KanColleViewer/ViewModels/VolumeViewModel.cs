@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -61,7 +61,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 				}
 				catch (Exception ex)
 				{
-					Debug.WriteLine(ex);
+					Application.TelemetryClient.TrackException(ex);
 					return false;
 				}
 			}

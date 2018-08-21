@@ -15,11 +15,11 @@ namespace Grabacr07.KanColleWrapper
 	partial class KanColleProxy
 	{
 		/// <summary>
-		/// エンド ポイント "/kcsapi/api_start2" からのセッションを配信します。
+		/// エンド ポイント "/kcsapi/api_start2/getData" からのセッションを配信します。
 		/// </summary>
-		public IObservable<Session> api_start2
+		public IObservable<Session> api_start2_getData
 		{
-			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_start2"); }
+			get { return this.ApiSessionSource.Where(x => x.Request.PathAndQuery == "/kcsapi/api_start2/getData"); }
 		}
 
 		/// <summary>

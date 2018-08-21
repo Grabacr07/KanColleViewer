@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -153,15 +153,15 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		public void TakeScreenshot()
 		{
-			var path = Helper.CreateScreenshotFilePath();
-			var message = new ScreenshotMessage("Screenshot.Save") { Path = path, };
+			var format = ScreenshotSettings.Format.Value;
+			var path = Helper.CreateScreenshotFilePath(format);
 
+			var message = new ScreenshotMessage("Screenshot.Save")
+			{
+				Path = path,
+				Format = format,
+			};
 			this.Messenger.Raise(message);
-
-			var notify = message.Response.IsSuccess
-				? Resources.Screenshot_Saved + Path.GetFileName(path)
-				: Resources.Screenshot_Failed + message.Response.Exception.Message;
-			StatusService.Current.Notify(notify);
 		}
 
 
