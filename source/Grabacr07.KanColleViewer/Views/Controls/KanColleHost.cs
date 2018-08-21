@@ -153,7 +153,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 		{
 			if (zoomFactor < 0.1 || zoomFactor > 10)
 			{
-				StatusService.Current.Notify(string.Format(Properties.Resources.ZoomAction_OutOfRange, zoomFactor));
+				StatusService.Current.Notify(string.Format(Properties.Resources.ZoomAction_OutOfRange, (int)(zoomFactor * 100)));
 				return;
 			}
 
