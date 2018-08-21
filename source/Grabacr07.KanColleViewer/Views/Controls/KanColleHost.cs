@@ -136,7 +136,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 		{
 			if (this.WebBrowser == null) return;
 
-			this.ApplyZoomFactor((int)(this.ZoomFactor * 100));
+			this.ApplyZoomFactor(this.ZoomFactor);
 
 			var baseSize = this.styleSheetApplied ? KanColleSize : InitialSize;
 			var size = new Size(
@@ -149,9 +149,9 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			this.OwnerSizeChangeRequested?.Invoke(this, size);
 		}
 
-		private void ApplyZoomFactor(int zoomFactor)
+		private void ApplyZoomFactor(double zoomFactor)
 		{
-			if (zoomFactor < 10 || zoomFactor > 1000)
+			if (zoomFactor < 0.1 || zoomFactor > 10)
 			{
 				StatusService.Current.Notify(string.Format(Properties.Resources.ZoomAction_OutOfRange, zoomFactor));
 				return;
@@ -160,7 +160,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			try
 			{
 				this.WebBrowser.ZoomLevel = 0;
-				this.WebBrowser.ZoomLevel = Math.Log(zoomFactor / 100.0) / Math.Log(1.2);
+				this.WebBrowser.ZoomLevel = Math.Log(zoomFactor) / Math.Log(1.2);
 			}
 			catch (Exception) when (Application.Instance.State == ApplicationState.Startup)
 			{
