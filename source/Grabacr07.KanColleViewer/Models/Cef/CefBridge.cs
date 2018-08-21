@@ -11,6 +11,8 @@ namespace Grabacr07.KanColleViewer.Models.Cef
 {
 	public static class CefBridge
 	{
+		public static string CachePath => Path.Combine(Application.Instance.LocalAppData.FullName, "Chromium");
+
 		public static bool TryGetKanColleCanvas(this ChromiumWebBrowser webBrowser, out IFrame canvas)
 		{
 			var browser = webBrowser.GetBrowser();

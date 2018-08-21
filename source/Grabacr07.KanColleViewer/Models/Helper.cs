@@ -1,17 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using Grabacr07.KanColleViewer.Models.Cef;
+using Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleViewer.Win32;
-using Microsoft.Win32;
 using Nekoxy;
 
 namespace Grabacr07.KanColleViewer.Models
@@ -38,8 +37,8 @@ namespace Grabacr07.KanColleViewer.Models
 		public static string CreateScreenshotFilePath(SupportedImageFormat format)
 		{
 			var filePath = Path.Combine(
-				Settings.ScreenshotSettings.Destination,
-				$"KanColle-{DateTimeOffset.Now.LocalDateTime.ToString("yyMMdd-HHmmssff")}");
+				ScreenshotSettings.Destination,
+				$"KanColle-{DateTimeOffset.Now.LocalDateTime:yyMMdd-HHmmssff}");
 
 			return Path.ChangeExtension(filePath, format.ToExtension());
 		}
@@ -50,70 +49,20 @@ namespace Grabacr07.KanColleViewer.Models
 			NativeMethods.AvSetMmThreadCharacteristics("Games", ref index);
 		}
 
-		/// <summary>
-		/// キャッシュを削除します。
-		/// </summary>
-		/// <seealso cref="http://support.microsoft.com/kb/326201/ja"/>
-		public static Task<bool> DeleteInternetCache()
+		public static void DeleteCacheIfRequested()
 		{
-			return Task.Run(() => DeleteInternetCacheCore());
-		}
-
-		private static bool DeleteInternetCacheCore()
-		{
-			// ReSharper disable InconsistentNaming
-			const int CACHEGROUP_SEARCH_ALL = 0x0;
-			const int ERROR_NO_MORE_ITEMS = 259;
-			const uint CacheEntryType_Cookie = 1048577;
-			const uint CacheEntryType_History = 2097153;
-			// ReSharper restore InconsistentNaming
-
-			long groupId = 0;
-			var cacheEntryInfoBufferSizeInitial = 0;
-
-			var enumHandle = WinInet.FindFirstUrlCacheGroup(0, CACHEGROUP_SEARCH_ALL, IntPtr.Zero, 0, ref groupId, IntPtr.Zero);
-			if (enumHandle != IntPtr.Zero && ERROR_NO_MORE_ITEMS == Marshal.GetLastWin32Error()) return false;
-
-			enumHandle = WinInet.FindFirstUrlCacheEntry(null, IntPtr.Zero, ref cacheEntryInfoBufferSizeInitial);
-			if (enumHandle != IntPtr.Zero && ERROR_NO_MORE_ITEMS == Marshal.GetLastWin32Error()) return false;
-
-			var cacheEntryInfoBufferSize = cacheEntryInfoBufferSizeInitial;
-			var cacheEntryInfoBuffer = Marshal.AllocHGlobal(cacheEntryInfoBufferSize);
-			enumHandle = WinInet.FindFirstUrlCacheEntry(null, cacheEntryInfoBuffer, ref cacheEntryInfoBufferSizeInitial);
-
-			while (true)
+			if (GeneralSettings.ClearCacheOnNextStartup)
 			{
-				var internetCacheEntry = (INTERNET_CACHE_ENTRY_INFOA)Marshal.PtrToStructure(
-					cacheEntryInfoBuffer, typeof(INTERNET_CACHE_ENTRY_INFOA));
-				cacheEntryInfoBufferSizeInitial = cacheEntryInfoBufferSize;
-
-				var type = internetCacheEntry.CacheEntryType;
-				var result = false;
-
-				if (type != CacheEntryType_Cookie && type != CacheEntryType_History)
+				try
 				{
-					result = WinInet.DeleteUrlCacheEntry(internetCacheEntry.lpszSourceUrlName);
+					Directory.Delete(CefBridge.CachePath, true);
+					GeneralSettings.ClearCacheOnNextStartup.Value = false;
 				}
-
-				if (!result)
+				catch (Exception ex)
 				{
-					result = WinInet.FindNextUrlCacheEntry(enumHandle, cacheEntryInfoBuffer, ref cacheEntryInfoBufferSizeInitial);
-				}
-				if (!result && ERROR_NO_MORE_ITEMS == Marshal.GetLastWin32Error())
-				{
-					break;
-				}
-				if (!result && cacheEntryInfoBufferSizeInitial > cacheEntryInfoBufferSize)
-				{
-					cacheEntryInfoBufferSize = cacheEntryInfoBufferSizeInitial;
-					cacheEntryInfoBuffer = Marshal.ReAllocHGlobal(cacheEntryInfoBuffer, (IntPtr)cacheEntryInfoBufferSize);
-					WinInet.FindNextUrlCacheEntry(enumHandle, cacheEntryInfoBuffer, ref cacheEntryInfoBufferSizeInitial);
+					Application.TelemetryClient.TrackException(ex);
 				}
 			}
-
-			Marshal.FreeHGlobal(cacheEntryInfoBuffer);
-
-			return true;
 		}
 
 

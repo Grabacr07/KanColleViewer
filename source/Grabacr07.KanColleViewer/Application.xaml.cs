@@ -87,6 +87,8 @@ namespace Grabacr07.KanColleViewer
 				NotifyService.Current.AddTo(this).Initialize();
 
 				Helper.SetMMCSSTask();
+				Helper.DeleteCacheIfRequested();
+
 				CefInitialize();
 
 				// BootstrapProxy() で Views.Settings.ProxyBootstrapper.Show() が呼ばれるより前に

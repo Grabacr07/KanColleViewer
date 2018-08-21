@@ -6,6 +6,7 @@ using System.Linq;
 using CefSharp;
 using CefSharp.Wpf;
 using Grabacr07.KanColleViewer.Models;
+using Grabacr07.KanColleViewer.Models.Cef;
 using Grabacr07.KanColleViewer.ViewModels;
 using Grabacr07.KanColleWrapper;
 using MetroTrilithon.Desktop;
@@ -40,7 +41,7 @@ namespace Grabacr07.KanColleViewer
 		{
 			var cefSettings = new CefSettings()
 			{
-				CachePath = Path.Combine(Instance.LocalAppData.FullName, "Chromium"),
+				CachePath = CefBridge.CachePath,
 			};
 			cefSettings.CefCommandLineArgs.Add("proxy-server", "http=127.0.0.1:37564");
 			//cefSettings.CefCommandLineArgs.Add("disable-webgl", "1");

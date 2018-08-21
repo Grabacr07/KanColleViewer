@@ -121,7 +121,8 @@
 									   DockPanel.Dock="{Binding BrowserDock2}"
 									   ZoomFactor="{Binding ZoomFactor.Current}"
 									   UserStyleSheet="{Binding Source={x:Static settings:GeneralSettings.UserStyleSheet}, Path=Value}"
-									   OwnerSizeChangeRequested="HandleKanColleHostSizeChangeRequested">
+									   OwnerSizeChangeRequested="HandleKanColleHostSizeChangeRequested"
+									   Panel.ZIndex="1">
 					<i:Interaction.Triggers>
 						<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
 														 MessageKey="WebBrowser.Zoom">
