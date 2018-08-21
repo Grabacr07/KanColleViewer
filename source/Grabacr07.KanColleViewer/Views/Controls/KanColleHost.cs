@@ -53,6 +53,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			if (newBrowser != null)
 			{
 				newBrowser.FrameLoadEnd += instance.HandleLoadEnd;
+				newBrowser.MenuHandler = new ContextMenuHandler();
 			}
 			if (instance.scrollViewer != null)
 			{

@@ -189,6 +189,7 @@
     <Compile Include="Composition\PluginHost.cs" />
     <Compile Include="Composition\PluginMetadata.cs" />
     <Compile Include="Models\BrowserZoomFactor.cs" />
+    <Compile Include="Models\Cef\ContextMenuHandler.cs" />
     <Compile Include="Models\Cef\PixiSettingsRewriteFilter.cs" />
     <Compile Include="Models\Cef\ResourceHandler.cs" />
     <Compile Include="Models\Cef\CefBridge.cs" />
