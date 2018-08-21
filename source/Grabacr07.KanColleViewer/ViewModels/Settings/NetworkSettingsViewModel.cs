@@ -1,4 +1,4 @@
-﻿using Grabacr07.KanColleViewer.Models.Settings;
+using Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleWrapper;
 using Livet;
 using System;
@@ -241,7 +241,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 			NetworkSettings.Proxy.SocksPort.Value = ushort.TryParse(this.SpecificSocksProxyPort, out port) ? port : NetworkSettings.Proxy.SocksPort.Default;
 			NetworkSettings.Proxy.IsUseHttpProxyForAllProtocols.Value = this.IsUseHttpProxyForAllProtocols;
 			this.RevertToSavedSettings();    // Parse 結果書き戻し
-
+			System.Diagnostics.Debug.WriteLine($"##### LocapProxyString: {NetworkSettings.LocalProxySettingsString}");
 			KanColleClient.Current.Proxy.UpstreamProxySettings = new NetworkSettings.Proxy();
 		}
 
