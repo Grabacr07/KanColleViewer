@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
@@ -404,8 +404,12 @@ namespace Grabacr07.KanColleWrapper
         {
             try
             {
-                var ship = this.Ships[int.Parse(svd.Request["api_ship_id"])];
-                if (ship != null)
+                var ships = svd.Request["api_ship_id"]
+                    .Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(x => int.Parse(x))
+                    .Select(x => this.Ships[x]);
+                    
+                foreach(var ship in ships)
                 {
                     this.homeport.Itemyard.RemoveFromShip(ship);
 
