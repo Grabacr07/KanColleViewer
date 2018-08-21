@@ -27,11 +27,6 @@
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 		<StackPanel Margin="20,0,0,0">
-			<TextBlock Text="※反映にはアプリケーションの再起動が必要です。"
-					   Style="{DynamicResource DetailTextStyleKey}" />
-			
-			<Border Height="8" />
-			
 			<RadioButton x:Name="CheckDirectAccess"
 						 GroupName="ProxySettings"
 						 Content="プロキシ サーバーを使用しない"
@@ -246,9 +241,13 @@
 			<Border Height="8" />
 			<StackPanel Orientation="Horizontal"
 						HorizontalAlignment="Right">
+				<TextBlock Text="※反映にはアプリケーションの再起動が必要です。"
+						   Style="{DynamicResource DetailTextStyleKey}"
+						   Margin="16,8" />
+
 				<metro2:CallMethodButton MethodTarget="{Binding}"
 										 MethodName="Apply"
-										 Content="適用"
+										 Content="保存"
 										 MinWidth="110"
 										 Padding="16,6" />
 				<Border Width="8" />
