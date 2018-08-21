@@ -1,4 +1,4 @@
-﻿using Grabacr07.KanColleViewer.Models.Settings;
+using Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleWrapper;
 using Livet;
 using System;

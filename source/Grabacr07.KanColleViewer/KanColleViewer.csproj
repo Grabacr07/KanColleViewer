@@ -357,6 +357,7 @@
       <DependentUpon>StatusBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Win32\INTERNET_CACHE_ENTRY_INFOA.cs" />
+    <Compile Include="Win32\WinHttp.cs" />
     <Compile Include="Win32\WinInet.cs" />
     <Compile Include="Win32\DVTARGETDEVICE.cs" />
     <Compile Include="Win32\IServiceProvider.cs" />
