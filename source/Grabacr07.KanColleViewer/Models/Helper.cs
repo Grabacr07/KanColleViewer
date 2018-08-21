@@ -44,32 +44,11 @@ namespace Grabacr07.KanColleViewer.Models
 			return Path.ChangeExtension(filePath, format.ToExtension());
 		}
 
-
-		/// <summary>
-		/// HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION
-		/// に WebBrowser コントロールの動作バージョンを設定します。
-		/// </summary>
-		public static void SetRegistryFeatureBrowserEmulation()
-		{
-			const string key = @"HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION";
-
-			try
-			{
-				var valueName = Process.GetCurrentProcess().ProcessName + ".exe";
-				Registry.SetValue(key, valueName, Properties.Settings.Default.FeatureBrowserEmulation, RegistryValueKind.DWord);
-			}
-			catch (Exception ex)
-			{
-				Debug.WriteLine(ex);
-			}
-		}
-
 		public static void SetMMCSSTask()
 		{
 			var index = 0u;
 			NativeMethods.AvSetMmThreadCharacteristics("Games", ref index);
 		}
-
 
 		/// <summary>
 		/// キャッシュを削除します。

@@ -29,7 +29,6 @@ namespace Grabacr07.KanColleViewer.Models.Cef
 			return canvas != null;
 		}
 
-
 		public static Image DataUrlToImage(string dataUrl)
 		{
 			var array = dataUrl.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);

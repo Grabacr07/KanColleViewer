@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
@@ -66,6 +66,7 @@ namespace Grabacr07.KanColleViewer.Models
 			{
 				this.Result = ProxyBootstrapResult.UnexpectedException;
 				this.Exception = ex;
+				Application.TelemetryClient.TrackException(ex);
 			}
 		}
 

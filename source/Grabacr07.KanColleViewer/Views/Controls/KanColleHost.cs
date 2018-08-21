@@ -168,8 +168,8 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			}
 			catch (Exception ex)
 			{
-				Debug.WriteLine(ex);
 				StatusService.Current.Notify(string.Format(Properties.Resources.ZoomAction_ZoomFailed, ex.Message));
+				Application.TelemetryClient.TrackException(ex);
 			}
 		}
 
@@ -204,8 +204,8 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			}
 			catch (Exception ex)
 			{
-				Debug.WriteLine(ex);
 				StatusService.Current.Notify("failed to apply css: " + ex.Message);
+				Application.TelemetryClient.TrackException(ex);
 			}
 		}
 	}
