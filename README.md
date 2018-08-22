@@ -16,8 +16,7 @@
 
 ### このプロジェクトについて
 
-IE コンポーネント (WPF の WebBrowser コントロール) 上で艦これを表示し、[Nekoxy](https://github.com/veigr/Nekoxy) で通信内容をキャプチャしています。
-艦これの動作は、Internet Explorer 上で動作しているものと同じです。
+Chromium ベースの内蔵 Web ブラウザー ([CefSharp.Wpf](http://cefsharp.github.io/)) 上で艦これを表示し、[Nekoxy](https://github.com/veigr/Nekoxy) で通信内容をキャプチャしています。
 **当然ですが、通信内容の変更や、DMM/艦これのサーバーに対する情報の送信等 (マクロ・チート行為) は一切行っていません。**
 
 
@@ -38,26 +37,25 @@ IE コンポーネント (WPF の WebBrowser コントロール) 上で艦これ
 
 ### 動作環境
 
-* Windows 8 以降
+* Windows 10
+* Windows 8.1
 * Windows 7
 
-開発者 ([@Grabacr07](https://twitter.com/Grabacr07)) は Windows 8.1 Pro でのみ動作確認を行っております。
+開発者 ([@Grabacr07](https://twitter.com/Grabacr07)) は Windows 10 Enterprise でのみ動作確認を行っております。
 Windows 7 では、遠征や建造の終了時のトースト通知が動作しません (代わりに、タスクトレイからのバルーン通知になります)。 Windows 8 以降での使用を推奨します。
 
-* [.NET Framework 4.5](http://www.microsoft.com/ja-jp/download/details.aspx?id=30653)
+* [.NET Framework 4.6](http://www.microsoft.com/ja-jp/download/details.aspx?id=30653)
 
-Windows 7 で使用する場合、.NET Framework 4.5 のインストールが必要です。  
-Windows 8 以降の場合は標準でインストールされています。
+Windows 8 またはそれ以前で使用する場合、.NET Framework 4.6 のインストールが必要です。
+Windows 10 の場合は標準でインストールされています。
 
-IE コンポーネントを使用しており、ブラウザー部分は Internet Explorer の設定に依存します。 また、ゲームが正しく表示されない等の現象が発生した場合は、IE の設定や、IE 上で Flash が表示できるかどうかをご確認ください。
-
-なお、艦これゲーム部分のサイズ (800 x 480) と Internet Explorer (WebBrowser コントロール) のサイズをぴったり合わせて表示しているだけで、Flash 抽出等も行っていません。
-
+現在、艦これ本体の二期への移行に伴い、Chromium エンジンで暫定対応しています。
+未検証の通信内容も多く、意図しない挙動となる可能性があることにご注意ください。
 
 
 ### 開発環境・言語
 
-C# + WPF で開発しています。開発環境は Windows 8.1 Pro + Visual Studio Enterprise 2015 です。
+C# + WPF で開発しています。開発環境は Windows 10 Enterprise + Visual Studio 2017 です。
 
 ### ライセンス
 
