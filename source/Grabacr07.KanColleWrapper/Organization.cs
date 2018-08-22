@@ -253,14 +253,15 @@ namespace Grabacr07.KanColleWrapper
                 fleet.RaiseShipsUpdated();
 
                 var index = int.Parse(data.Request["api_ship_idx"]);
-                if (index == -1)
+                var shipId = int.Parse(data.Request["api_ship_id"]);
+                if (index == 0 && shipId == -2)
                 {
                     // 旗艦以外をすべて外すケース
                     fleet.UnsetAll();
                     return;
                 }
 
-                var ship = this.Ships[int.Parse(data.Request["api_ship_id"])];
+                var ship = this.Ships[shipId];
                 if (ship == null)
                 {
                     // 艦を外すケース
