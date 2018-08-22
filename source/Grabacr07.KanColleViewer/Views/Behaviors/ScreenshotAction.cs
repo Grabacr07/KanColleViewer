@@ -49,7 +49,7 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 				return source.Task;
 			}
 
-			var request = new ScreenshotRequest(path, format, source);
+			var request = new ScreenshotRequest(path, source);
 			var script = $@"
 (async function()
 {{

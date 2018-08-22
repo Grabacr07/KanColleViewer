@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Reactive;
 using System.Threading.Tasks;
 
@@ -8,15 +9,13 @@ namespace Grabacr07.KanColleViewer.Models.Cef
 	{
 		private readonly TaskCompletionSource<Unit> source;
 		private readonly string path;
-		private readonly SupportedImageFormat format;
 
 		public string Id { get; }
 
-		public ScreenshotRequest(string path, SupportedImageFormat format, TaskCompletionSource<Unit> source)
+		public ScreenshotRequest(string path, TaskCompletionSource<Unit> source)
 		{
 			this.Id = $"ssReq{DateTimeOffset.Now.Ticks}";
 			this.path = path;
-			this.format = format;
 			this.source = source;
 		}
 
@@ -24,9 +23,15 @@ namespace Grabacr07.KanColleViewer.Models.Cef
 		{
 			try
 			{
-				using (var image = CefBridge.DataUrlToImage(dataUrl))
+				var array = dataUrl.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+				if (array.Length != 2) throw new Exception($"無効な形式: {dataUrl}");
+
+				var base64 = array[1];
+				var bytes = Convert.FromBase64String(base64);
+
+				using (var fs = new FileStream(this.path, FileMode.CreateNew))
 				{
-					image.Save(this.path, this.format.ToImageFormat());
+					fs.Write(bytes, 0, bytes.Length);
 				}
 
 				this.source.SetResult(Unit.Default);

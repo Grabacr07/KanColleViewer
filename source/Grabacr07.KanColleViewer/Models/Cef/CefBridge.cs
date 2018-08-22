@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -29,20 +28,6 @@ namespace Grabacr07.KanColleViewer.Models.Cef
 				.FirstOrDefault(x => x.Url.Contains("/kcs2/index.php"));
 
 			return canvas != null;
-		}
-
-		public static Image DataUrlToImage(string dataUrl)
-		{
-			var array = dataUrl.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-			if (array.Length != 2) throw new Exception($"無効な形式: {dataUrl}");
-
-			var base64 = array[1];
-			var bytes = Convert.FromBase64String(base64);
-
-			using (var ms = new MemoryStream(bytes))
-			{
-				return Image.FromStream(ms);
-			}
 		}
 	}
 }

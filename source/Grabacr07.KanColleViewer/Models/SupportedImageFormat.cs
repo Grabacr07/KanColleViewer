@@ -59,35 +59,5 @@ namespace Grabacr07.KanColleViewer.Models
 					return "";
 			}
 		}
-
-		public static BitmapEncoder ToBitmapEncoder(this SupportedImageFormat format)
-		{
-			switch (format)
-			{
-				case SupportedImageFormat.Png:
-					return new PngBitmapEncoder();
-
-				case SupportedImageFormat.Jpeg:
-					return new JpegBitmapEncoder();
-
-				default:
-					return null;
-			}
-		}
-
-		public static ImageFormat ToImageFormat(this SupportedImageFormat format)
-		{
-			switch (format)
-			{
-				case SupportedImageFormat.Png:
-					return ImageFormat.Png;
-
-				case SupportedImageFormat.Jpeg:
-					return ImageFormat.Jpeg;
-
-				default:
-					return null;
-			}
-		}
 	}
 }
