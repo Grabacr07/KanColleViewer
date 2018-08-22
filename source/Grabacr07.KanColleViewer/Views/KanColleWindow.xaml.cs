@@ -57,20 +57,23 @@ namespace Grabacr07.KanColleViewer.Views
 			}
 			else
 			{
-				if (this.previousDock == Dock.Top || this.previousDock == Dock.Bottom)
+				if (this.previousBrowserSize != browserSize)
 				{
-					this.Height += browserSize.Height;
-				}
-				else if (this.previousDock == Dock.Left || this.previousDock == Dock.Right)
-				{
-					this.Width += browserSize.Width;
+					this.previousBrowserSize = browserSize;
+
+					if (this.previousDock == Dock.Top || this.previousDock == Dock.Bottom)
+					{
+						this.Height += browserSize.Height;
+					}
+					else if (this.previousDock == Dock.Left || this.previousDock == Dock.Right)
+					{
+						this.Width += browserSize.Width;
+					}
 				}
 			}
 
 			this.MinWidth = browserSize.Width + this.BorderThickness.Left + this.BorderThickness.Right;
 			this.MinHeight = browserSize.Height + this.toolbarArea.ActualHeight + this.captionBar.ActualHeight + this.statusBar.ActualHeight;
-
-			this.previousBrowserSize = browserSize;
 		}
 
 		private void ChangeSizeByDock()

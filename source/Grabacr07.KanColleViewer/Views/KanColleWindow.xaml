@@ -24,7 +24,7 @@
 				   d:DataContext="{d:DesignInstance viewModels:KanColleWindowViewModel}"
 				   Title="{Binding Title}"
 				   Width="960"
-				   Height="945"
+				   Height="600"
 				   FontSize="12"
 				   Topmost="{Binding Settings.TopMost.Value, Mode=TwoWay}"
 				   WindowState="{Binding WindowState, Mode=OneWayToSource}"
