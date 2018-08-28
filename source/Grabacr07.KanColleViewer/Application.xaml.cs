@@ -69,7 +69,7 @@ namespace Grabacr07.KanColleViewer
 			{
 				this.DispatcherUnhandledException += (sender, args) =>
 				{
-					ReportException(sender, args.Exception);
+					ReportException("Dispatcher", sender, args.Exception);
 					args.Handled = true;
 				};
 

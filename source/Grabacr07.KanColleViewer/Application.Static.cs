@@ -19,7 +19,7 @@ namespace Grabacr07.KanColleViewer
 	{
 		static Application()
 		{
-			AppDomain.CurrentDomain.UnhandledException += (sender, args) => ReportException(sender, args.ExceptionObject as Exception);
+			AppDomain.CurrentDomain.UnhandledException += (sender, args) => ReportException("AppDomain", sender, args.ExceptionObject as Exception);
 
 			TelemetryClient = new TelemetryClient();
 			TelemetryClient.Context.Session.Id = Guid.NewGuid().ToString();
@@ -73,29 +73,29 @@ namespace Grabacr07.KanColleViewer
 			return vmodel.DialogResult;
 		}
 
-		private static void ReportException(object sender, Exception exception)
+		private static void ReportException(string caller, object sender, Exception exception)
 		{
-			var now = DateTimeOffset.Now;
-			var path = Path.Combine(
-				Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-				ProductInfo.Company,
-				ProductInfo.Product,
-				"ErrorReports",
-				$"ErrorReport-{now:yyyyMMdd-HHmmss}-{now.Millisecond:000}.log");
+			try
+			{
+				var now = DateTimeOffset.Now;
+				var path = Path.Combine(
+					Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+					ProductInfo.Company,
+					ProductInfo.Product,
+					"ErrorReports",
+					$"ErrorReport-{now:yyyyMMdd-HHmmss}-{now.Millisecond:000}.log");
 
-			var message = $@"*** Error Report ***
+				var message = $@"*** Error Report ({caller}) ***
 {ProductInfo.Product} ver.{ProductInfo.VersionString}
-{DateTimeOffset.Now}
+{now}
 
 {new SystemEnvironment()}
 
-Sender:    {sender.GetType().FullName}
-Exception: {exception.GetType().FullName}
+Sender:    {(sender is Type t ? t : sender?.GetType())?.FullName}
+Exception: {exception?.GetType().FullName}
 
 {exception}
 ";
-			try
-			{
 				// ReSharper disable once AssignNullToNotNullAttribute
 				Directory.CreateDirectory(Path.GetDirectoryName(path));
 				File.AppendAllText(path, message);

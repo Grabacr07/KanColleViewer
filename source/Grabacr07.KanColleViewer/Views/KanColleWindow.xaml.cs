@@ -47,12 +47,12 @@ namespace Grabacr07.KanColleViewer.Views
 				if (this.previousDock == Dock.Top || this.previousDock == Dock.Bottom)
 				{
 					var diffW = this.previousBrowserSize.Value.Width - browserSize.Width;
-					if (Math.Abs(diffW) > 0.00001) this.Width -= diffW;
+					if (Math.Abs(diffW) > 0.00001 && this.Width - diffW > 0) this.Width -= diffW;
 				}
 				else if (this.previousDock == Dock.Left || this.previousDock == Dock.Right)
 				{
 					var diffH = this.previousBrowserSize.Value.Height - browserSize.Height;
-					if (Math.Abs(diffH) > 0.00001) this.Height -= diffH;
+					if (Math.Abs(diffH) > 0.00001 && this.Height - diffH > 0) this.Height -= diffH;
 				}
 			}
 			else
