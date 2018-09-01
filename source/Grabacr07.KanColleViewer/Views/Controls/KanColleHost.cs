@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -197,8 +198,9 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			{
 				if (this.WebBrowser.TryGetKanColleCanvas(out var canvas))
 				{
-					var js = $"var style = document.createElement(\"style\"); style.innerHTML = \"{this.UserStyleSheet.Replace("\r\n", " ")}\"; document.body.appendChild(style);";
+					var js = $"var style = document.createElement(\"style\"); style.innerHTML = \"{Regex.Replace(this.UserStyleSheet, "\r|\n", " ")}\"; document.body.appendChild(style);";
 					this.WebBrowser.GetMainFrame().ExecuteJavaScriptAsync(js);
+					canvas.ExecuteJavaScriptAsync(js);
 
 					this.styleSheetApplied = true;
 
