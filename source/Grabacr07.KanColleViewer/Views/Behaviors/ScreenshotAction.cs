@@ -20,8 +20,6 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 	/// </summary>
 	internal class ScreenshotAction : InteractionMessageAction<ChromiumWebBrowser>
 	{
-		private IFrame targetCanvas;
-
 		protected override async void InvokeAction(InteractionMessage message)
 		{
 			if (message is ScreenshotMessage screenshotMessage)
@@ -43,7 +41,7 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 		{
 			var source = new TaskCompletionSource<Unit>();
 
-			if (this.targetCanvas == null && !this.AssociatedObject.TryGetKanColleCanvas(out this.targetCanvas))
+			if (!this.AssociatedObject.TryGetKanColleCanvas(out var targetCanvas))
 			{
 				source.SetException(new Exception("艦これの Canvas 要素が見つかりません。"));
 				return source.Task;
@@ -64,7 +62,7 @@ namespace Grabacr07.KanColleViewer.Views.Behaviors
 }})();
 ";
 			this.AssociatedObject.JavascriptObjectRepository.Register(request.Id, request, true);
-			this.targetCanvas.ExecuteJavaScriptAsync(script);
+			targetCanvas.ExecuteJavaScriptAsync(script);
 
 			return source.Task;
 		}
