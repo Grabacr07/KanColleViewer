@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanColleViewer", "Grabacr07.KanColleViewer\KanColleViewer.csproj", "{C5F0111F-3F68-4A74-BB20-BB762564D080}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -91,15 +91,17 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Release (beta)|Any CPU.ActiveCfg = Release (beta)|Any CPU
-		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Release (beta)|Any CPU.Build.0 = Release (beta)|Any CPU
-		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Release (beta)|x86.ActiveCfg = Release (beta)|Any CPU
-		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Release|x86.ActiveCfg = Release|Any CPU
+		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Debug|Any CPU.Build.0 = Debug|x86
+		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Debug|x86.ActiveCfg = Debug|x86
+		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Debug|x86.Build.0 = Debug|x86
+		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Release (beta)|Any CPU.ActiveCfg = Release (beta)|x86
+		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Release (beta)|x86.ActiveCfg = Release (beta)|x86
+		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Release (beta)|x86.Build.0 = Release (beta)|x86
+		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Release|Any CPU.ActiveCfg = Release|x86
+		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Release|Any CPU.Build.0 = Release|x86
+		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Release|x86.ActiveCfg = Release|x86
+		{C5F0111F-3F68-4A74-BB20-BB762564D080}.Release|x86.Build.0 = Release|x86
 		{0BC8CF79-76D9-46AD-867F-FEC6C6AD4594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0BC8CF79-76D9-46AD-867F-FEC6C6AD4594}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BC8CF79-76D9-46AD-867F-FEC6C6AD4594}.Debug|x86.ActiveCfg = Debug|Any CPU
@@ -281,5 +283,8 @@ Global
 		{7F898B3A-DA17-4CAB-B387-5629B5FACA49} = {6FE85CE3-7479-4630-B746-EA18BCE3311D}
 		{75A62817-2F64-4179-939C-B28914BDC566} = {5E122478-836E-4B7D-B0A4-F5EAA40BBE2A}
 		{BDE5A07D-7F83-48C7-B61B-198FD4C0BCD5} = {D844E42C-9406-43BF-9681-4F06F6CB3AD9}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3B6BE3CB-AA99-4DDE-BEE3-CA6BE9D9059B}
 	EndGlobalSection
 EndGlobal

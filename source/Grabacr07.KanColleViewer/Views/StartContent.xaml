@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.StartContent"
+<UserControl x:Class="Grabacr07.KanColleViewer.Views.StartContent"
 			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -248,19 +248,16 @@
 						<Paragraph Language="ja-jp">
 							<Run Text="「提督業も忙しい！」は、艦これを遊びやすくするためのツールです。" />
 							<LineBreak />
-							<Run Text="艦これは、内蔵された Internet Explorer (IE) 上で動作します。艦これのサーバーに対し一切の負荷をかけないように設計・開発しており、通信内容の変更やサーバーに対する情報の送信、Flash 抽出、マクロ・チートの類は一切行っていません。" />
+							<LineBreak />
+							<Run Text="艦これ本体は内蔵された Web ブラウザー (Chromium) 上で動作します。艦これのサーバーに対して一切の負荷をかけないように設計・開発しており、通信内容の変更やサーバーに対する情報の送信、マクロ・チートの類は一切行っていません。" />
 						</Paragraph>
 						<Paragraph Language="ja-jp">
-							<Run Text="ゲームが正しく表示されない場合や、スクリプトエラーが頻発する場合は、IE のキャッシュを削除してみてください。改善されない場合は、IE の設定や、通常の IE 上で Flash が表示できるかどうか等をご確認ください。" />
+							<Run Text="現在、艦これ本体の第二期への移行に伴い、Chromium エンジンで暫定対応しています。また、未検証の通信内容も多く、意図しない挙動となる可能性があることをご了承ください。" />
 						</Paragraph>
 						<Paragraph>
 							<InlineUIContainer>
-								<metro2:CallMethodButton Content="{Binding DeleteInternetCacheButtonContent}"
-														 MethodName="DeleteInternetCache"
-														 IsEnabled="{Binding CanDeleteInternetCache}"
-														 HorizontalAlignment="Left"
-														 Padding="30,5"
-														 SnapsToDevicePixels="True" />
+								<CheckBox IsChecked="{Binding ClearCacheOnNextStartup}"
+										  Content="次回起動時にキャッシュを削除する" />
 							</InlineUIContainer>
 							<LineBreak />
 							<InlineUIContainer>

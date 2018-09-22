@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,7 +26,8 @@ namespace Grabacr07.KanColleWrapper
 
 		public MemberTable(IEnumerable<TValue> source)
 		{
-			this.dictionary = source.ToDictionary(x => x.Id);
+			this.dictionary = new ConcurrentDictionary<int, TValue>(
+				source.Select(x => new KeyValuePair<int, TValue>(x.Id, x)));
 		}
 
 

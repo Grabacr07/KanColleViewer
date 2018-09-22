@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
 					xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Controls">
@@ -790,7 +790,7 @@
 				</Setter>
 			</Trigger>
 			<Trigger Property="Type"
-					 Value="LandBasedFighter">
+					 Value="InterceptorFighter">
 				<Setter Property="Template">
 					<Setter.Value>
 						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
@@ -877,6 +877,190 @@
 													   VerticalAlignment="Top"
 													   Margin="61.033,60.606,0,0" />
 									<!-- Margin="91.033,50.606,0,0" /> -->
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="TransportEquipment">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Data="M15,22v3l-4.437,2.719L12.153,28.3,15,27h1l2.773,1.7,1.057-.64L16,25V22H15Zm5-2.016a2.487,2.487,0,0,1,2.5,2.557v1.31A2.639,2.639,0,0,1,20,26.532a2.487,2.487,0,0,1-2.5-2.557V22.665A2.639,2.639,0,0,1,20,19.984ZM6.843,14.757L5.8,19.3l2.219,1.213L12,21l1.75-.219L15,20l1,1h1l1.3-1.725,3.457,0.009,1.969,2.648,0.541,1.187L29,23l1-1-1-2H28l-2.767-2.185-10.092.114L14,19l-3.25-.333L9,17l-0.583-.833L8,15ZM7,13l2.583-1.167L12,12l2,1,2,2-5.417.25L9,14H8Zm4.583-2.917L14,12l1.712,0.463L17,14l1.083,1.167L28,15V13l-2-1H25l-3-1-1.833-.167L20,12l-1,1-1.74-1.218L15.845,9.593Z"
+										  Fill="#FF428358"
+										  HorizontalAlignment="Left"
+										  Width="241"
+										  Height="190"
+										  Stretch="Uniform"
+										  VerticalAlignment="Top" />
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="SubmarineEquipment">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Data="M45,31V42l13.77,2.374a22.977,22.977,0,0,1-42.731,2.06L27,48V31l1-3H26c-1.437,0-1.375,2.188-2,1s2.469-2.969,3-3-0.375.875,0,1a2.483,2.483,0,0,0,1,0s0.156-5.375,0-6a1.589,1.589,0,0,0-1-1,2.452,2.452,0,0,0-2,0c-0.687.313-.437,1.5-1,1s0.75-2.875,2-3a0.8,0.8,0,0,1,1,1,2.08,2.08,0,0,0,1.136.674A1.254,1.254,0,0,0,29,19s3.313-.094,4,0c0.344,2.344-3,2-3,2l-1,6h1l1,1V24h1l3-1h1l1,1V18s1.906-.187,2,1-1,14-1,14h2s0.125-12.25,0-14a1.2,1.2,0,0,1,2,1c-0.031,1.375-1,13-1,13l2,1s0.375-13.969,1-14a1.155,1.155,0,0,1,1,1c0.063,0.313-.83,7.963-0.722,8.5A6.573,6.573,0,0,0,45,31ZM30,48h2l-0.5-3.614L32,41V40l-2-1v9Zm0-10,2-1V35l-1-1-1,1v3Zm0-9v3l2,1V31l1-2H32V28Zm3-3V25l-1,1v1h2Zm4,0H36l-2,2v2l1,3h2V26Zm0,9-1-1-0.988.468L35,38h2V35Zm0,12-0.5-3.386L37,40H35v8l2,1V47Zm3-12H39v3l1,1V35Zm0,5H39l-1,1,2,1V40Zm3-5H42v4h1V35Zm0,6-1-1v2h1V41Z"
+										  Fill="#FF9FBCE3"
+										  HorizontalAlignment="Left"
+										  Width="428"
+										  Height="420"
+										  Stretch="Uniform"
+										  VerticalAlignment="Top" />
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="SeaplaneFighter">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Data="M2,3L3,5,6,6V7L5,10,4,11,2,12v1l3,1,3-1V12L6,11,7,7,8,8v2l2,4V11l3,1V11h2l-2,5L1,17,0,18l5,3,6,1,8-1,6-2,5-2V16H18l-2,1V15l4-4,9,2h3v2l-1,4-3,1v1l2,1h3l2-2H33l-1-1,1-2V14h4l4,1h2l-2-2H39L29,11l4-2h6l3,1L41,8H38L36,7l1-7H36L33,4,32,6H28L22,4,20,3H18L16,5,11,4,10,5H8L7,2H6V4L3,3H2Z"
+										  Fill="#FF8BC595"
+										  HorizontalAlignment="Left"
+										  Width="215"
+										  Height="110"
+										  Stretch="Uniform"
+										  VerticalAlignment="Top" />
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="LandBasedFighter">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Data="M699,293 L652,300 620,314 581,288 551,285 548,299 578,319 578,335 570,336 556,315 548,319 560,336 556,354 569,362 580,391 589,386 579,364 600,364 613,350 648,379 672,391 681,371 662,348 727,316&#xD;&#xA;737,304 751,307 761,317 783,312 755,291 764,258 746,252 735,284 711,275 699,277 z"
+										  Fill="#FF9AEEA8"
+										  HorizontalAlignment="Left"
+										  Height="139"
+										  Stretch="Uniform"
+										  VerticalAlignment="Top"
+										  Width="235" />
+									<ed:RegularPolygon PointCount="6"
+													   InnerRadius="1"
+													   Stretch="Fill"
+													   Stroke="Black"
+													   StrokeThickness="2"
+													   Fill="#FF9AEEA8"
+													   Width="126"
+													   Height="146"
+													   HorizontalAlignment="Left"
+													   VerticalAlignment="Top"
+													   Margin="91.033,50.606,0,0" />
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="NightFighter">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Data="M699,293 L652,300 620,314 581,288 551,285 548,299 578,319 578,335 570,336 556,315 548,319 560,336 556,354 569,362 580,391 589,386 579,364 600,364 613,350 648,379 672,391 681,371 662,348 727,316&#xD;&#xA;737,304 751,307 761,317 783,312 755,291 764,258 746,252 735,284 711,275 699,277 z"
+										  Fill="#FF39B74E"
+										  HorizontalAlignment="Left"
+										  Height="139"
+										  Stretch="Uniform"
+										  VerticalAlignment="Top"
+										  Width="235" />
+									<ed:RegularPolygon PointCount="6"
+													   InnerRadius="1"
+													   Stretch="Fill"
+													   Stroke="Black"
+													   StrokeThickness="2"
+													   Fill="#FF827DB0"
+													   Width="126"
+													   Height="146"
+													   HorizontalAlignment="Left"
+													   VerticalAlignment="Top"
+													   Margin="91.033,50.606,0,0" />
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="NightAttacker">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Data="M699,293 L652,300 620,314 581,288 551,285 548,299 578,319 578,335 570,336 556,315 548,319 560,336 556,354 569,362 580,391 589,386 579,364 600,364 613,350 648,379 672,391 681,371 662,348 727,316&#xD;&#xA;737,304 751,307 761,317 783,312 755,291 764,258 746,252 735,284 711,275 699,277 z"
+										  Fill="#FF39B74E"
+										  HorizontalAlignment="Left"
+										  Height="139"
+										  Stretch="Uniform"
+										  VerticalAlignment="Top"
+										  Width="235" />
+									<ed:RegularPolygon PointCount="6"
+													   InnerRadius="1"
+													   Stretch="Fill"
+													   Stroke="Black"
+													   StrokeThickness="2"
+													   Fill="#FF827DB0"
+													   Width="126"
+													   Height="146"
+													   HorizontalAlignment="Left"
+													   VerticalAlignment="Top"
+													   Margin="91.033,50.606,0,0" />
+								</Grid>
+							</Viewbox>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+			<Trigger Property="Type"
+					 Value="LandBasedAntiSubmarineAttacker">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type controls:SlotItemIcon}">
+							<Viewbox>
+								<Grid>
+									<Path Data="m16756,14823c-709,985 3399,3945 3945,4249s485,1213 546,1821s-1274,2549 -910,2913s3582,-1396 4006,-1396s-1092,2003 363,3399s4855,-242 5341,0s-1213,3581 -667,4067s3399,-1578 4431,-1882s10744,4430 12566,2670c1400,-1353 -7410,-6180 -7717,-6511s406,-980 225,-1104s-684,537 -1113,514s-602,-400 -742,-623c-1092,-1744 3338,-4051 4552,-4172s3217,1760 3641,1031s-2913,-1760 -3217,-2549s667,-3035 -363,-2974s-485,2549 -1760,2427s-2306,-1638 -3399,-1153s2913,1881 2306,1941s-5524,2549 -8013,2367s-910,-1396 -1396,-1396s-424,910 -910,667s-10622,-5825 -11715,-4308z"
+										  Fill="#FF39B74E"
+										  HorizontalAlignment="Left"
+										  Height="139"
+										  Stretch="Uniform"
+										  VerticalAlignment="Top"
+										  Width="235" />
+									<ed:RegularPolygon PointCount="6"
+													   InnerRadius="1"
+													   Stretch="Fill"
+													   Stroke="Black"
+													   StrokeThickness="2"
+													   Fill="#FF5B71D2"
+													   Width="126"
+													   Height="146"
+													   HorizontalAlignment="Left"
+													   VerticalAlignment="Top"
+													   Margin="91.033,50.606,0,0" />
 								</Grid>
 							</Viewbox>
 						</ControlTemplate>

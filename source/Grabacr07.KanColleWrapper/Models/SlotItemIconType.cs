@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -56,7 +56,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		ReconPlane = 9,
 
 		/// <summary>
-		/// 水上機。
+		/// 水上爆撃機, 水上偵察機。
 		/// </summary>
 		ReconSeaplane = 10,
 
@@ -198,16 +198,51 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// <summary>
 		/// 局地戦闘機。
 		/// </summary>
-		LandBasedFighter = 38,
+		InterceptorFighter = 38,
 
 		/// <summary>
-		/// 噴式戦闘爆撃機
+		/// 噴式戦闘爆撃機。
 		/// </summary>
 		JetPowerededBomber1 = 39,
 
 		/// <summary>
-		/// 噴式戦闘爆撃機
+		/// 噴式戦闘爆撃機。
 		/// </summary>
 		JetPowerededBomber2 = 40,
+
+		/// <summary>
+		/// 輸送機材。
+		/// </summary>
+		TransportEquipment = 41,
+
+		/// <summary>
+		/// 潜水艦装備。
+		/// </summary>
+		SubmarineEquipment = 42,
+
+		/// <summary>
+		/// 水上戦闘機。
+		/// </summary>
+		SeaplaneFighter = 43,
+
+		/// <summary>
+		/// 陸軍戦闘機。
+		/// </summary>
+		LandBasedFighter = 44,
+
+		/// <summary>
+		/// 夜間戦闘機。
+		/// </summary>
+		NightFighter = 45,
+
+		/// <summary>
+		/// 夜間攻撃機。
+		/// </summary>
+		NightAttacker = 46,
+
+		/// <summary>
+		/// 陸上対潜機。
+		/// </summary>
+		LandBasedAntiSubmarineAttacker = 47,
 	}
 }

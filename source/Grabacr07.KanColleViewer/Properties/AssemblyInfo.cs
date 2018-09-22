@@ -6,7 +6,7 @@ using System.Windows;
 [assembly: AssemblyDescription("提督業も忙しい！")]
 [assembly: AssemblyCompany("grabacr.net")]
 [assembly: AssemblyProduct("KanColleViewer")]
-[assembly: AssemblyCopyright("Copyright © 2013 Grabacr07")]
+[assembly: AssemblyCopyright("Copyright © 2013 - 2018 Grabacr07")]
 
 [assembly: ComVisible(false)]
 [assembly: Guid("101B49A6-7E7B-422D-95FF-500F9EF483A8")]
@@ -15,4 +15,4 @@ using System.Windows;
 	ResourceDictionaryLocation.None,
 	ResourceDictionaryLocation.SourceAssembly)]
 
-[assembly: AssemblyVersion("4.2.10.0")]
+[assembly: AssemblyVersion("4.5.1")]

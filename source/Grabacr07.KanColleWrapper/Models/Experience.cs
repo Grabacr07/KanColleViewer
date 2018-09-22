@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -308,6 +308,26 @@ namespace Grabacr07.KanColleWrapper.Models
 			{ 153, new Experience(153, 222000, 4999000) },
 			{ 154, new Experience(154, 231000, 5230000) },
 			{ 155, new Experience(155, 240000, 5470000) },
+			{ 156, new Experience(156, 250000, 5720000) },
+			{ 157, new Experience(157, 60000,  5780000) },
+			{ 158, new Experience(158, 80000,  5860000) },
+			{ 159, new Experience(159, 110000, 5970000) },
+			{ 160, new Experience(160, 150000, 6120000) },
+			{ 161, new Experience(161, 200000, 6320000) },
+			{ 162, new Experience(162, 260000, 6580000) },
+			{ 163, new Experience(163, 330000, 6910000) },
+			{ 164, new Experience(164, 410000, 7320000) },
+			{ 165, new Experience(165, 500000, 7820000) },
+			{ 166, new Experience(166, 100000, 7920000) },
+			{ 167, new Experience(167, 113000, 8033000) },
+			{ 168, new Experience(168, 139000, 8172000) },
+			{ 169, new Experience(169, 178000, 8350000) },
+			{ 170, new Experience(170, 230000, 8580000) },
+			{ 171, new Experience(171, 295000, 8875000) },
+			{ 172, new Experience(172, 373000, 9248000) },
+			{ 173, new Experience(173, 457000, 9705000) },
+			{ 174, new Experience(174, 561000, 10266000) },
+			{ 175, new Experience(175, 684000, 10950000) },
 		};
 
 		#endregion

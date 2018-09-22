@@ -1,7 +1,7 @@
-﻿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+﻿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 提督業も忙しい！ (KanColleViewer)
-                                             version 4.2.6  2016/06/20
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                             version 4.5.0  2018/08/22
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
 ■このソフトウェアについて
@@ -30,7 +30,7 @@
 ・Windows 8
 ・Windows 7
 
-開発者は Windows 10 Pro でのみ動作確認を行っております。 
+開発者は Windows 10 Enterprise でのみ動作確認を行っております。 
 Windows 7 では、遠征や建造の終了時のトースト通知が動作しません (代わりに、タスクトレイからのバルーン通知になります)。
 Windows 8 以降での使用を推奨します。
 
@@ -39,11 +39,8 @@ Windows 8 以降での使用を推奨します。
 Windows 8 またはそれ以前で使用する場合、.NET Framework 4.6 のインストールが必要です。
 Windows 10 の場合は標準でインストールされています。
 
-IE コンポーネントを使用しており、ブラウザー部分は Internet Explorer の設定に依存します。 
-艦これ本体のアップデート後などにスクリプトエラーが頻発する場合は、IE のキャッシュを削除してください。 
-また、ゲームが正しく表示されない等の現象が発生した場合は、IE の設定や、IE 上で Flash が表示できるかどうかをご確認ください。
-
-なお、艦これゲーム部分のサイズ (800 x 480) と Internet Explorer (WebBrowser control) のサイズをぴったり合わせて表示しているだけで、Flash 抽出等も行っていません。
+現在、艦これ本体の二期への移行に伴い、Chromium エンジンで暫定対応しています。
+未検証の通信内容も多く、意図しない挙動となる可能性があることにご注意ください。
 
 
 ■使用条件
@@ -157,6 +154,25 @@ Desktop Toast
     ・ライセンス : The MIT License (MIT)
     ・ライセンス全文 : Licenses/NETCoreAudioAPIs.txt
 
+CefSharp.Wpf
+(http://cefsharp.github.io/)
+
+    ・用途 : 内蔵 Web ブラウザー
+    ・ライセンス : The 3-Clause BSD License
+    ・ライセンス全文 : Licenses/CefSharp.txt
+
+Application Insights
+(https://azure.microsoft.com/ja-jp/services/application-insights/)
+
+    The MIT License (MIT)
+    
+    Copyright (c) Microsoft Corporation
+
+    ・用途 : クラッシュ ログ収集
+    ・ライセンス : The MIT License (MIT)
+    ・ライセンス全文 : Licenses/Application Insights.txt
+
+
 
 ■免責事項
 
@@ -167,8 +183,8 @@ Desktop Toast
 
 ■更新履歴
 
+2018/08/17 - version 4.5 リリース
 2016/06/20 - version 4.2.6 リリース
- (わすれました)
 2016/02/12 - version 4.2.1 リリース
 2016/02/08 - version 4.2 リリース
 2015/11/10 - version 4.1.6 リリース

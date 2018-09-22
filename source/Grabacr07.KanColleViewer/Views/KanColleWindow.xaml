@@ -1,4 +1,4 @@
-﻿<metro:MetroWindow x:Class="Grabacr07.KanColleViewer.Views.KanColleWindow"
+<metro:MetroWindow x:Class="Grabacr07.KanColleViewer.Views.KanColleWindow"
 				   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 				   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 				   xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -19,11 +19,12 @@
 				   xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 				   xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents"
 				   xmlns:settings="clr-namespace:Grabacr07.KanColleViewer.Models.Settings"
+				   xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
 				   mc:Ignorable="d"
 				   d:DataContext="{d:DesignInstance viewModels:KanColleWindowViewModel}"
 				   Title="{Binding Title}"
 				   Width="960"
-				   Height="945"
+				   Height="600"
 				   FontSize="12"
 				   Topmost="{Binding Settings.TopMost.Value, Mode=TwoWay}"
 				   WindowState="{Binding WindowState, Mode=OneWayToSource}"
@@ -120,14 +121,15 @@
 									   DockPanel.Dock="{Binding BrowserDock2}"
 									   ZoomFactor="{Binding ZoomFactor.Current}"
 									   UserStyleSheet="{Binding Source={x:Static settings:GeneralSettings.UserStyleSheet}, Path=Value}"
-									   OwnerSizeChangeRequested="HandleKanColleHostSizeChangeRequested">
+									   OwnerSizeChangeRequested="HandleKanColleHostSizeChangeRequested"
+									   Panel.ZIndex="1">
 					<i:Interaction.Triggers>
 						<livet:InteractionMessageTrigger Messenger="{Binding Messenger}"
 														 MessageKey="WebBrowser.Zoom">
 							<behaviors:ZoomAction />
 						</livet:InteractionMessageTrigger>
 					</i:Interaction.Triggers>
-					<WebBrowser Source="about:blank">
+					<cef:ChromiumWebBrowser>
 						<i:Interaction.Behaviors>
 							<behaviors:NavigatorBehavior Navigator="{Binding Navigator}" />
 							<mtti:TaskbarThumbnailBehavior />
@@ -138,7 +140,7 @@
 								<behaviors:ScreenshotAction />
 							</livet:InteractionMessageTrigger>
 						</i:Interaction.Triggers>
-					</WebBrowser>
+					</cef:ChromiumWebBrowser>
 				</controls:KanColleHost>
 
 				<DockPanel x:Name="toolbarArea"

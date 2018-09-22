@@ -8,7 +8,7 @@
 <#
 	var endpoints = new[]
 	{
-		"/kcsapi/api_start2",
+		"/kcsapi/api_start2/getData",
 		"/kcsapi/api_port/port",
 		"/kcsapi/api_get_member/basic",
 		"/kcsapi/api_get_member/ship",
