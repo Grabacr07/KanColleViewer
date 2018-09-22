@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -88,6 +88,10 @@ namespace Grabacr07.KanColleWrapper.Models
 		/// </summary>
 		public int MaxSlotItemCount => this.RawData.api_max_slotitem;
 
+		/// <summary>
+		/// 家具コインの数を取得します。
+		/// </summary>
+		public int Coin => this.RawData.api_fcoin;
 
 		internal Admiral(kcsapi_basic rawData)
 			: base(rawData)
