@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -22,6 +22,7 @@ namespace Grabacr07.KanColleWrapper
 		/// 索敵計算に使用するロジックを識別する文字列を取得します。
 		/// </summary>
 		string ViewRangeCalcType { get; }
+		int ViewRangeCalcNodeFactor { get; }
 		bool IsViewRangeCalcIncludeFirstFleet { get; }
 		bool IsViewRangeCalcIncludeSecondFleet { get; }
 

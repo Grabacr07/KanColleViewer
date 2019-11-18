@@ -26,6 +26,12 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		/// </summary>
 		public static SerializableProperty<string> ViewRangeCalcType { get; }
 			= new SerializableProperty<string>(GetKey(), Providers.Roaming, new ViewRangeType4().Id);
+		
+		/// <summary>
+		/// 索敵計算に分岐点係数の設定値を取得します。
+		/// </summary>
+		public static SerializableProperty<int> ViewRangeCalcNodeFactor { get; }
+			= new SerializableProperty<int>(GetKey(), Providers.Roaming, 1);
 
 		/// <summary>
 		/// 索敵計算に第1艦隊を含めるかどうかの設定値を取得します。
@@ -114,6 +120,7 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 			NotificationShorteningTime.Subscribe(_ => this.RaisePropertyChanged(nameof(NotificationShorteningTime)));
 			ReSortieCondition.Subscribe(_ => this.RaisePropertyChanged(nameof(ReSortieCondition)));
 			ViewRangeCalcType.Subscribe(_ => this.RaisePropertyChanged(nameof(ViewRangeCalcType)));
+			ViewRangeCalcNodeFactor.Subscribe(_ => this.RaisePropertyChanged(nameof(ViewRangeCalcNodeFactor)));
 			IsViewRangeCalcIncludeFirstFleet.Subscribe(_ => this.RaisePropertyChanged(nameof(IsViewRangeCalcIncludeFirstFleet)));
 			IsViewRangeCalcIncludeSecondFleet.Subscribe(_ => this.RaisePropertyChanged(nameof(IsViewRangeCalcIncludeSecondFleet)));
 		}
@@ -132,6 +139,8 @@ namespace Grabacr07.KanColleViewer.Models.Settings
 		int IKanColleClientSettings.ReSortieCondition => ReSortieCondition.Value;
 
 		string IKanColleClientSettings.ViewRangeCalcType => ViewRangeCalcType.Value;
+
+		int IKanColleClientSettings.ViewRangeCalcNodeFactor => ViewRangeCalcNodeFactor.Value;
 
 		bool IKanColleClientSettings.IsViewRangeCalcIncludeFirstFleet => IsViewRangeCalcIncludeFirstFleet.Value;
 

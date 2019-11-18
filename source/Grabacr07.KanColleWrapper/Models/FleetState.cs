@@ -219,6 +219,7 @@ namespace Grabacr07.KanColleWrapper.Models
 			this.CompositeDisposable.Add(new PropertyChangedWeakEventListener(KanColleClient.Current.Settings)
 			{
 				{ nameof(IKanColleClientSettings.ViewRangeCalcType), (_, __) => this.Calculate() },
+				{ nameof(IKanColleClientSettings.ViewRangeCalcNodeFactor), (_,__) => this.Calculate() },
 				{ nameof(IKanColleClientSettings.IsViewRangeCalcIncludeFirstFleet), (_, __) => this.Calculate() },
 				{ nameof(IKanColleClientSettings.IsViewRangeCalcIncludeSecondFleet), (_, __) => this.Calculate() },
 			});

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Settings.Operation"
+<UserControl x:Class="Grabacr07.KanColleViewer.Views.Settings.Operation"
 			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -72,6 +72,32 @@
 								  MinWidth="100"
 								  Prompt=""
 								  HorizontalAlignment="Left"/>
+			
+			<Grid Visibility="{Binding SelectedViewRangeCalcType.HasCombinedSettings, Converter={StaticResource BooleanToVisibilityConverter}}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="10" />
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+
+				<metro:PromptTextBox Prompt="例: 1"
+									 Width="60">
+					<metro:PromptTextBox.Text>
+						<Binding Source="{x:Static ms:KanColleSettings.ViewRangeCalcNodeFactor}"
+								 Path="Value"
+								 UpdateSourceTrigger="PropertyChanged">
+							<Binding.ValidationRules>
+								<metro:Int32Rule Min="0"
+												 Max="5" />
+							</Binding.ValidationRules>
+						</Binding>
+					</metro:PromptTextBox.Text>
+				</metro:PromptTextBox>
+				<TextBlock Grid.Column="2"
+						   Style="{DynamicResource DetailTextStyleKey}">
+					<Run Text="※分岐点係数：2-5ボス前(H,Iマス)＝1、6-2(F,Hマス)・6-3ボス前(Hマス)＝3、3-5(Gマス)・6-1(E、Fマス)＝4。" />
+				</TextBlock>
+			</Grid>
 
 			<TextBlock Text="{Binding SelectedViewRangeCalcType.Description}"
 					   Style="{DynamicResource DetailTextStyleKey}"/>
