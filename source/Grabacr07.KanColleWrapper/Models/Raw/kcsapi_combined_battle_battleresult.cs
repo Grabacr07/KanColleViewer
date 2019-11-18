@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,9 +33,11 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
         public int api_get_exmap_useitem_id { get; set; }
         public int api_escape_flag { get; set; }
         public Api_Escape api_escape { get; set; }
-    }
+		public Api_Get_UseItem api_get_useitem { get; set; }
 
-    public class Api_Enemy_Info
+	}
+
+	public class Api_Enemy_Info
     {
         public string api_level { get; set; }
         public string api_rank { get; set; }
@@ -56,5 +58,11 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
         public int[] api_tow_idx { get; set; }
     }
 
-    // ReSharper restore InconsistentNaming
+	public class Api_Get_UseItem
+	{
+		public int api_useitem_id { get; set; }
+		public string api_useitem_name { get; set; }
+	}
+
+	// ReSharper restore InconsistentNaming
 }
