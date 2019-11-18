@@ -167,6 +167,13 @@
 									</Style>
 								</WrapPanel.Resources>
 								<!-- これっきりボタン -->
+								<metro2:CallMethodButton Content="海防艦">
+									<metro2:CallMethodButton.MethodParameter>
+										<x:Array Type="s:Int32">
+											<s:Int32>1</s:Int32>
+										</x:Array>
+									</metro2:CallMethodButton.MethodParameter>
+								</metro2:CallMethodButton>
 								<metro2:CallMethodButton Content="駆逐艦">
 									<metro2:CallMethodButton.MethodParameter>
 										<x:Array Type="s:Int32">
