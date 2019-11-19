@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Contents.Fleets"
+<UserControl x:Class="Grabacr07.KanColleViewer.Views.Contents.Fleets"
 			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -372,9 +372,22 @@
 										<Rectangle Width="1"
 												   Style="{DynamicResource SeparatorRectangleStyleKey}"
 												   Margin="12,4,0,3" />
-										<kcvc:SlotItemIcon Type="{Binding Ship.ExSlot.Item.Info.IconType}"
-														   ToolTip="{Binding Ship.ExSlot.Item.NameWithLevel}"
+										<Grid ToolTip="{Binding Ship.ExSlot.Item.NameWithLevel}"
+											  Background="Transparent">
+											<kcvc:SlotItemIcon Type="{Binding Ship.ExSlot.Item.Info.IconType}"														   
 														   Margin="3,0" />
+											<TextBlock Visibility="{Binding Ship.ExSlot.Item.LevelText, Converter={StaticResource StringToVisiblityConverter}}"
+													   Foreground="White"
+													   Background="#33000000"
+													   Text="{Binding Ship.ExSlot.Item.LevelText}"
+													   FontSize="10"
+													   VerticalAlignment="Bottom"
+													   HorizontalAlignment="Right"
+													   Panel.ZIndex="1"
+													   Width="Auto"
+													   Height="Auto"
+													   Padding="1" />
+										</Grid>
 									</DockPanel>
 								</Grid>
 								<Rectangle Height=".99"
