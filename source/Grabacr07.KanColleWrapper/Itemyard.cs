@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -132,9 +132,9 @@ namespace Grabacr07.KanColleWrapper
 
 		private void CreateItem(kcsapi_createitem source)
 		{
-			if (source.api_create_flag == 1 && source.api_slot_item != null)
+			if (source.api_create_flag == 1 && source.api_get_items != null)
 			{
-				this.SlotItems.Add(new SlotItem(source.api_slot_item));
+				this.SlotItems.Add(new SlotItem(source.api_get_items));
 			}
 			this.RaiseSlotItemsChanged();
 		}
