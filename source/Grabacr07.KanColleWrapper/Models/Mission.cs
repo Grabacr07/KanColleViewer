@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -21,7 +21,7 @@ namespace Grabacr07.KanColleWrapper.Models
 		{
 			this.Id = mission.api_id;
 			this.Title = mission.api_name;
-			this.Detail = mission.api_details;
+			this.Detail = mission.api_details.Replace("<br>","");
 		}
 	}
 }
