@@ -20,8 +20,6 @@ namespace Grabacr07.KanColleWrapper
 {
 	public class Quests : Notifier
 	{
-		private readonly List<ConcurrentDictionary<int, Quest>> questPages;
-
 		#region All 変更通知プロパティ
 
 		private IReadOnlyCollection<Quest> _All;
@@ -104,7 +102,6 @@ namespace Grabacr07.KanColleWrapper
 
 		internal Quests(KanColleProxy proxy)
 		{
-			this.questPages = new List<ConcurrentDictionary<int, Quest>>();
 			this.IsUntaken = true;
 			this.All = this.Current = new List<Quest>();
 
@@ -123,9 +120,9 @@ namespace Grabacr07.KanColleWrapper
 				var questlist = new kcsapi_questlist
 				{
 					api_count = Convert.ToInt32(djson.api_data.api_count),
-					api_disp_page = Convert.ToInt32(djson.api_data.api_disp_page),
-					api_page_count = Convert.ToInt32(djson.api_data.api_page_count),
+					api_completed_kind = Convert.ToInt32(djson.api_data.api_completed_kind),
 					api_exec_count = Convert.ToInt32(djson.api_data.api_exec_count),
+					api_exec_type = Convert.ToInt32(djson.api_data.api_exec_type),
 				};
 
 				if (djson.api_data.api_list != null)
@@ -161,19 +158,6 @@ namespace Grabacr07.KanColleWrapper
 		{
 			this.IsUntaken = false;
 
-			// キャッシュしてるページの数が、取得したページ数 (api_page_count) より大きいとき
-			// 取得したページ数と同じ数になるようにキャッシュしてるページを減らす
-			if (this.questPages.Count > questlist.api_page_count)
-			{
-				while (this.questPages.Count > questlist.api_page_count) this.questPages.RemoveAt(this.questPages.Count - 1);
-			}
-
-			// 小さいときは、キャッシュしたページ数と同じ数になるようにページを増やす
-			else if (this.questPages.Count < questlist.api_page_count)
-			{
-				while (this.questPages.Count < questlist.api_page_count) this.questPages.Add(null);
-			}
-
 			if (questlist.api_list == null)
 			{
 				this.IsEmpty = true;
@@ -181,23 +165,9 @@ namespace Grabacr07.KanColleWrapper
 			}
 			else
 			{
-				var page = questlist.api_disp_page - 1;
-				if (page >= this.questPages.Count) page = this.questPages.Count - 1;
-
-				this.questPages[page] = new ConcurrentDictionary<int, Quest>();
-
 				this.IsEmpty = false;
 
-				foreach (var quest in questlist.api_list.Select(x => new Quest(x)))
-				{
-					this.questPages[page].AddOrUpdate(quest.Id, quest, (_, __) => quest);
-				}
-
-				this.All = this.questPages.Where(x => x != null)
-					.SelectMany(x => x.Select(kvp => kvp.Value))
-					.Distinct(x => x.Id)
-					.OrderBy(x => x.Id)
-					.ToList();
+				this.All = questlist.api_list.Select(x => new Quest(x)).ToList();
 
 				var current = this.All.Where(x => x.State == QuestState.TakeOn || x.State == QuestState.Accomplished)
 					.OrderBy(x => x.Id)
