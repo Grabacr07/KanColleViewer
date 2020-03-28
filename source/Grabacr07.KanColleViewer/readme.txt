@@ -183,6 +183,7 @@ Application Insights
 
 ■更新履歴
 
+2020/03/28 - version 4.5.2 リリース
 2018/08/17 - version 4.5 リリース
 2016/06/20 - version 4.2.6 リリース
 2016/02/12 - version 4.2.1 リリース
