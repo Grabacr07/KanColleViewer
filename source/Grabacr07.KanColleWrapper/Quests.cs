@@ -20,8 +20,6 @@ namespace Grabacr07.KanColleWrapper
 {
 	public class Quests : Notifier
 	{
-		private readonly List<ConcurrentDictionary<int, Quest>> questPages;
-
 		#region All 変更通知プロパティ
 
 		private IReadOnlyCollection<Quest> _All;
@@ -104,12 +102,10 @@ namespace Grabacr07.KanColleWrapper
 
 		internal Quests(KanColleProxy proxy)
 		{
-			this.questPages = new List<ConcurrentDictionary<int, Quest>>();
 			this.IsUntaken = true;
 			this.All = this.Current = new List<Quest>();
 
 			proxy.api_get_member_questlist
-				.Where(x => HttpUtility.ParseQueryString(x.Request.BodyAsString)["api_tab_id"] == "0")
 				.Select(Serialize)
 				.Where(x => x != null)
 				.Subscribe(this.Update);
@@ -123,9 +119,9 @@ namespace Grabacr07.KanColleWrapper
 				var questlist = new kcsapi_questlist
 				{
 					api_count = Convert.ToInt32(djson.api_data.api_count),
-					api_disp_page = Convert.ToInt32(djson.api_data.api_disp_page),
-					api_page_count = Convert.ToInt32(djson.api_data.api_page_count),
+					api_completed_kind = Convert.ToInt32(djson.api_data.api_completed_kind),
 					api_exec_count = Convert.ToInt32(djson.api_data.api_exec_count),
+					api_exec_type = Convert.ToInt32(djson.api_data.api_exec_type),
 				};
 
 				if (djson.api_data.api_list != null)
@@ -141,6 +137,7 @@ namespace Grabacr07.KanColleWrapper
 						catch (SerializationException ex)
 						{
 							// 最後のページで任務数が 5 に満たないとき、api_list が -1 で埋められるというクソ API のせい
+							// (2020/3/27のアップデートでapi_listのページングは廃止されたので必要なくなったかもしれない)
 							Debug.WriteLine(ex.Message);
 						}
 					}
@@ -161,19 +158,6 @@ namespace Grabacr07.KanColleWrapper
 		{
 			this.IsUntaken = false;
 
-			// キャッシュしてるページの数が、取得したページ数 (api_page_count) より大きいとき
-			// 取得したページ数と同じ数になるようにキャッシュしてるページを減らす
-			if (this.questPages.Count > questlist.api_page_count)
-			{
-				while (this.questPages.Count > questlist.api_page_count) this.questPages.RemoveAt(this.questPages.Count - 1);
-			}
-
-			// 小さいときは、キャッシュしたページ数と同じ数になるようにページを増やす
-			else if (this.questPages.Count < questlist.api_page_count)
-			{
-				while (this.questPages.Count < questlist.api_page_count) this.questPages.Add(null);
-			}
-
 			if (questlist.api_list == null)
 			{
 				this.IsEmpty = true;
@@ -181,20 +165,9 @@ namespace Grabacr07.KanColleWrapper
 			}
 			else
 			{
-				var page = questlist.api_disp_page - 1;
-				if (page >= this.questPages.Count) page = this.questPages.Count - 1;
-
-				this.questPages[page] = new ConcurrentDictionary<int, Quest>();
-
 				this.IsEmpty = false;
 
-				foreach (var quest in questlist.api_list.Select(x => new Quest(x)))
-				{
-					this.questPages[page].AddOrUpdate(quest.Id, quest, (_, __) => quest);
-				}
-
-				this.All = this.questPages.Where(x => x != null)
-					.SelectMany(x => x.Select(kvp => kvp.Value))
+				this.All = questlist.api_list.Select(x => new Quest(x))
 					.Distinct(x => x.Id)
 					.OrderBy(x => x.Id)
 					.ToList();
