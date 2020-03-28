@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\CefSharp.Wpf.67.0.0-pre01\build\CefSharp.Wpf.props" Condition="Exists('..\packages\CefSharp.Wpf.67.0.0-pre01\build\CefSharp.Wpf.props')" />
-  <Import Project="..\packages\CefSharp.Common.67.0.0-pre01\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.67.0.0-pre01\build\CefSharp.Common.props')" />
+  <Import Project="..\packages\CefSharp.Wpf.67.0.0\build\CefSharp.Wpf.props" Condition="Exists('..\packages\CefSharp.Wpf.67.0.0\build\CefSharp.Wpf.props')" />
+  <Import Project="..\packages\CefSharp.Common.67.0.0\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.67.0.0\build\CefSharp.Common.props')" />
   <Import Project="..\packages\cef.redist.x86.3.3396.1786\build\cef.redist.x86.props" Condition="Exists('..\packages\cef.redist.x86.3.3396.1786\build\cef.redist.x86.props')" />
   <Import Project="..\packages\cef.redist.x64.3.3396.1786\build\cef.redist.x64.props" Condition="Exists('..\packages\cef.redist.x64.3.3396.1786\build\cef.redist.x64.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -18,49 +18,43 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile />
     <ExpressionBlendVersion>12.0.50716.0</ExpressionBlendVersion>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <CefSharpAnyCpuSupport>true</CefSharpAnyCpuSupport>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Assets\app.ico</ApplicationIcon>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>TRACE;DEBUG;BETA</DefineConstants>
     <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release %28beta%29|x86'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release %28beta%29|AnyCPU'">
     <OutputPath>bin\x86\Release %28beta%29\</OutputPath>
     <DefineConstants>TRACE;BETA</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -661,13 +655,13 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\cef.redist.x64.3.3396.1786\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x64.3.3396.1786\build\cef.redist.x64.props'))" />
     <Error Condition="!Exists('..\packages\cef.redist.x86.3.3396.1786\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x86.3.3396.1786\build\cef.redist.x86.props'))" />
-    <Error Condition="!Exists('..\packages\CefSharp.Common.67.0.0-pre01\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.67.0.0-pre01\build\CefSharp.Common.props'))" />
-    <Error Condition="!Exists('..\packages\CefSharp.Common.67.0.0-pre01\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.67.0.0-pre01\build\CefSharp.Common.targets'))" />
-    <Error Condition="!Exists('..\packages\CefSharp.Wpf.67.0.0-pre01\build\CefSharp.Wpf.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Wpf.67.0.0-pre01\build\CefSharp.Wpf.props'))" />
-    <Error Condition="!Exists('..\packages\CefSharp.Wpf.67.0.0-pre01\build\CefSharp.Wpf.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Wpf.67.0.0-pre01\build\CefSharp.Wpf.targets'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.67.0.0\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.67.0.0\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.67.0.0\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.67.0.0\build\CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Wpf.67.0.0\build\CefSharp.Wpf.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Wpf.67.0.0\build\CefSharp.Wpf.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Wpf.67.0.0\build\CefSharp.Wpf.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Wpf.67.0.0\build\CefSharp.Wpf.targets'))" />
   </Target>
-  <Import Project="..\packages\CefSharp.Common.67.0.0-pre01\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.67.0.0-pre01\build\CefSharp.Common.targets')" />
-  <Import Project="..\packages\CefSharp.Wpf.67.0.0-pre01\build\CefSharp.Wpf.targets" Condition="Exists('..\packages\CefSharp.Wpf.67.0.0-pre01\build\CefSharp.Wpf.targets')" />
+  <Import Project="..\packages\CefSharp.Common.67.0.0\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.67.0.0\build\CefSharp.Common.targets')" />
+  <Import Project="..\packages\CefSharp.Wpf.67.0.0\build\CefSharp.Wpf.targets" Condition="Exists('..\packages\CefSharp.Wpf.67.0.0\build\CefSharp.Wpf.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

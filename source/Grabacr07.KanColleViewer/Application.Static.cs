@@ -20,6 +20,7 @@ namespace Grabacr07.KanColleViewer
 		static Application()
 		{
 			AppDomain.CurrentDomain.UnhandledException += (sender, args) => ReportException("AppDomain", sender, args.ExceptionObject as Exception);
+			AppDomain.CurrentDomain.AssemblyResolve += CefBridge.ResolveCefSharpAssembly;
 
 			TelemetryClient = new TelemetryClient();
 			TelemetryClient.Context.Session.Id = Guid.NewGuid().ToString();
@@ -36,20 +37,6 @@ namespace Grabacr07.KanColleViewer
 		public static Application Instance => Current as Application;
 
 		static partial void SetInstrumentationKey();
-
-		private static void CefInitialize()
-		{
-			var cefSettings = new CefSettings()
-			{
-				CachePath = CefBridge.CachePath,
-			};
-			cefSettings.CefCommandLineArgs.Add("proxy-server", Models.Settings.NetworkSettings.LocalProxySettingsString);
-			//cefSettings.CefCommandLineArgs.Add("disable-webgl", "1");
-			CefSharpSettings.SubprocessExitIfParentProcessClosed = true;
-
-			Cef.EnableHighDPISupport();
-			Cef.Initialize(cefSettings);
-		}
 
 		/// <summary>
 		/// <see cref="ProxyBootstrapper"/> を使用し、<see cref="KanColleProxy"/> を起動することを試みます。

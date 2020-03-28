@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Markup;
 using CefSharp;
 using CefSharp.Wpf;
+using CefSharp.Wpf.Internals;
 using Grabacr07.KanColleViewer.Models;
 using Grabacr07.KanColleViewer.Models.Cef;
 
@@ -28,6 +31,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 
 		private ScrollViewer scrollViewer;
 		private bool styleSheetApplied;
+		private bool focusInInputbox;
 
 		#region WebBrowser 依存関係プロパティ
 
@@ -54,6 +58,7 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 			{
 				newBrowser.FrameLoadEnd += instance.HandleLoadEnd;
 				newBrowser.MenuHandler = new ContextMenuHandler();
+				newBrowser.WpfKeyboardHandler = new InhibitTabKeyHandler(newBrowser);
 			}
 			if (instance.scrollViewer != null)
 			{
@@ -191,12 +196,15 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 		{
 			try
 			{
-				if (this.WebBrowser.TryGetKanColleCanvas(out _))
+				if (this.WebBrowser.TryGetKanColleCanvas(out var canvas))
 				{
-					var js = $"var style = document.createElement(\"style\"); style.innerHTML = \"{this.UserStyleSheet.Replace("\r\n", " ")}\"; document.body.appendChild(style);";
+					var js = $"var style = document.createElement(\"style\"); style.innerHTML = \"{Regex.Replace(this.UserStyleSheet, "\r|\n", " ")}\"; document.body.appendChild(style);";
 					this.WebBrowser.GetMainFrame().ExecuteJavaScriptAsync(js);
+					canvas.ExecuteJavaScriptAsync(js);
 
 					this.styleSheetApplied = true;
+
+					this.RegisterInputFocusHandler(canvas);
 				}
 			}
 			catch (Exception) when (Application.Instance.State == ApplicationState.Startup)
@@ -208,6 +216,66 @@ namespace Grabacr07.KanColleViewer.Views.Controls
 				StatusService.Current.Notify("failed to apply css: " + ex.Message);
 				Application.TelemetryClient.TrackException(ex);
 			}
+		}
+
+
+		private void RegisterInputFocusHandler(IFrame frame)
+		{
+			var handler = new InputboxFocusHandler();
+			var script = $@"
+(async function()
+{{
+	await CefSharp.BindObjectAsync('{handler.Id}');
+
+	var input = document.getElementById('r_editbox');
+	input.onfocus = function() {{ {handler.Id}.setInputFocus(true); }};
+	input.onblur = function() {{ {handler.Id}.setInputFocus(false); }};
+}})();
+";
+			handler.FocusChanged += hasFocus =>
+			{
+				this.focusInInputbox = hasFocus;
+				System.Diagnostics.Debug.WriteLine($"focusInInputbox: {hasFocus}");
+			};
+
+			this.WebBrowser.JavascriptObjectRepository.Register(handler.Id, handler, true);
+			frame.ExecuteJavaScriptAsync(script);
+		}
+	}
+
+	public class InputboxFocusHandler
+	{
+		public event Action<bool> FocusChanged;
+
+		public string Id { get; }
+
+		public InputboxFocusHandler()
+		{
+			this.Id = $"focusHandler{DateTimeOffset.Now.Ticks}";
+		}
+
+		public void SetInputFocus(bool hasFocus)
+		{
+			this.FocusChanged?.Invoke(hasFocus);
+		}
+	}
+
+	public class InhibitTabKeyHandler : WpfKeyboardHandler
+	{
+		public InhibitTabKeyHandler(ChromiumWebBrowser owner)
+			: base(owner)
+		{
+		}
+
+		public override void HandleKeyPress(KeyEventArgs e)
+		{
+			if (e.Key == Key.Tab)
+			{
+				e.Handled = true;
+				return;
+			}
+
+			base.HandleKeyPress(e);
 		}
 	}
 }
