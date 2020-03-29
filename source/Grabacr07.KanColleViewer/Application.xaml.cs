@@ -9,6 +9,7 @@ using System.Windows;
 using CefSharp;
 using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleViewer.Models;
+using Grabacr07.KanColleViewer.Models.Cef;
 using Grabacr07.KanColleViewer.Models.Settings;
 using Grabacr07.KanColleViewer.ViewModels;
 using Grabacr07.KanColleViewer.Views;
@@ -89,7 +90,7 @@ namespace Grabacr07.KanColleViewer
 				Helper.SetMMCSSTask();
 				Helper.DeleteCacheIfRequested();
 
-				CefInitialize();
+				CefBridge.Initialize();
 
 				// BootstrapProxy() で Views.Settings.ProxyBootstrapper.Show() が呼ばれるより前に
 				// Application.MainWindow を設定しておく。これ大事
