@@ -201,8 +201,8 @@ namespace Grabacr07.KanColleWrapper.Models
 		public override string Name => "33 式";
 
 		public override string Description =>
-			@"分岐点係数 × ((各スロットの装備の索敵値 + 改修効果) × 装備タイプ係数)の和 + (√各艦の素索敵値)の和
-- (司令部レベル × 0.4)の小数点以下切り上げ + 艦隊の空き数 × 2
+			@"分岐点係数 × ((各スロットの装備の索敵値 + 改修効果) × 装備タイプ係数)の和
++ (√各艦の素索敵値)の和 - (司令部レベル × 0.4)の小数点以下切り上げ + 艦隊の空き数 × 2
 ※艦隊の空き数は退避した艦を除いて算出";
 
 		public override bool HasCombinedSettings { get; } = true;
