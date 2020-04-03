@@ -389,6 +389,8 @@ namespace Grabacr07.KanColleWrapper
 		{
 			this.Ships[source.api_ship_data.api_unset_ship.api_id]?.Update(source.api_ship_data.api_unset_ship);
 			this.Ships[source.api_ship_data.api_set_ship.api_id]?.Update(source.api_ship_data.api_set_ship);
+			
+			this.GetFleet(source.api_ship_data.api_set_ship.api_id).State.Calculate();
 		}
 
 		#endregion
