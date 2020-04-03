@@ -364,9 +364,12 @@ namespace Grabacr07.KanColleWrapper
 
 				// (改修に使った艦娘のこと item って呼ぶのどうなの…)
 
+				var dest = bool.Parse(svd.Request["api_slot_dest_flag"]);
+
 				foreach (var x in items)
 				{
-					this.homeport.Itemyard.RemoveFromShip(x);
+					if (dest) this.homeport.Itemyard.RemoveFromShip(x);
+						
 					this.Ships.Remove(x);
 				}
 
