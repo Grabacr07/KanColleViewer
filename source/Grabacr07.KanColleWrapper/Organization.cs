@@ -306,13 +306,12 @@ namespace Grabacr07.KanColleWrapper
 			{
 				var ship = this.Ships[int.Parse(data.Request["api_id"])];
 				if (ship == null) return;
-
-				ship.RawData.api_slot = data.Data.api_slot;
-				ship.UpdateSlots();
+								
+				ship.Update(data.Data.api_ship_data);
 
 				var fleet = this.Fleets.Values.FirstOrDefault(x => x.Ships.Any(y => y.Id == ship.Id));
 				if (fleet == null) return;
-
+				
 				fleet.State.Calculate();
 			}
 			catch (Exception ex)
