@@ -364,11 +364,11 @@ namespace Grabacr07.KanColleWrapper
 
 				// (改修に使った艦娘のこと item って呼ぶのどうなの…)
 
-				var dest = bool.Parse(svd.Request["api_slot_dest_flag"]);
+				var slotDest = bool.Parse(svd.Request["api_slot_dest_flag"]);
 
 				foreach (var x in items)
 				{
-					if (dest) this.homeport.Itemyard.RemoveFromShip(x);
+					if (slotDest) this.homeport.Itemyard.RemoveFromShip(x);
 						
 					this.Ships.Remove(x);
 				}
@@ -412,10 +412,12 @@ namespace Grabacr07.KanColleWrapper
 					.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries)
 					.Select(x => int.Parse(x))
 					.Select(x => this.Ships[x]);
-                    
-				foreach(var ship in ships)
+
+				var slotDest = bool.Parse(svd.Request["api_slot_dest_flag"]);
+
+				foreach (var ship in ships)
 				{
-					this.homeport.Itemyard.RemoveFromShip(ship);
+					if (slotDest) this.homeport.Itemyard.RemoveFromShip(ship);			
 
 					this.Ships.Remove(ship);
 				}
