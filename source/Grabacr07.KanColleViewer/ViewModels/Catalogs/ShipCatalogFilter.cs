@@ -552,7 +552,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 
 		public void SetSallyArea(SallyArea[] areas)
 		{
-			if (areas == null || areas.Length == 0)
+			var areasType = KanColleClient.Current.Master.MapAreas.Count() <= 7;
+			if (areas == null || areas.Length == 0 || areasType)
 			{
 				this.IsEnabled = false;
 				this.SallyAreas = new SallyAreaFilterChild[0];
