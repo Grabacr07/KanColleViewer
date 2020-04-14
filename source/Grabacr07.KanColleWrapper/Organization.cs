@@ -363,7 +363,7 @@ namespace Grabacr07.KanColleWrapper
 
 				// (改修に使った艦娘のこと item って呼ぶのどうなの…)
 
-				var slotDest = bool.Parse(svd.Request["api_slot_dest_flag"]);
+				var slotDest = Convert.ToBoolean(int.Parse(svd.Request["api_slot_dest_flag"]));
 
 				foreach (var x in items)
 				{
@@ -414,7 +414,7 @@ namespace Grabacr07.KanColleWrapper
 					.Select(x => int.Parse(x))
 					.Select(x => this.Ships[x]);
 
-				var slotDest = bool.Parse(svd.Request["api_slot_dest_flag"]);
+				var slotDest = Convert.ToBoolean(int.Parse(svd.Request["api_slot_dest_flag"]));
 
 				foreach (var ship in ships)
 				{
