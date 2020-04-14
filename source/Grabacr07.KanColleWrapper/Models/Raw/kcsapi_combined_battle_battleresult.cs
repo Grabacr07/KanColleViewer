@@ -13,7 +13,7 @@ namespace Grabacr07.KanColleWrapper.Models.Raw
         public string api_win_rank { get; set; }
         public int api_get_exp { get; set; }
         public int api_mvp { get; set; }
-        public int api_mvp_combined { get; set; }
+		public int? api_mvp_combined { get; set; }
         public int api_member_lv { get; set; }
         public int api_member_exp { get; set; }
         public int api_get_base_exp { get; set; }
