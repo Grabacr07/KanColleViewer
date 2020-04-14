@@ -39,7 +39,7 @@
 								<Run x:Name="Title"
 									 Text="{TemplateBinding Title}"
 									 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-								<Run Text=" " />
+								<Run Text="" />
 								<Run x:Name="State"
 									 Text=""
 									 FontSize="13"

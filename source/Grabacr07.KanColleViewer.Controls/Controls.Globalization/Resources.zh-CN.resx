@@ -121,13 +121,13 @@
     <value>请浏览所有的任务画面</value>
   </data>
   <data name="Quest_Progress_50" xml:space="preserve">
-    <value> 50 % </value>
+    <value>&#127;&#160;50&#160;%&#160;</value>
   </data>
   <data name="Quest_Progress_80" xml:space="preserve">
-    <value> 80 % </value>
+    <value>&#127;&#160;80&#160;%&#160;</value>
   </data>
   <data name="Quest_State_Accomplished" xml:space="preserve">
-    <value>完成</value>
+    <value>&#127;&#160;完&#8288;成&#160;</value>
   </data>
   <data name="Quest_Title_Untaken" xml:space="preserve">
     <value>(未接受的任务)</value>
