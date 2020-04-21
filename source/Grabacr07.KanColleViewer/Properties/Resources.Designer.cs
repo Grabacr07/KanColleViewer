@@ -349,6 +349,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   查找类似 対潜 的本地化字符串。
+        /// </summary>
+        public static string Fleets_ASW {
+            get {
+                return ResourceManager.GetString("Fleets_ASW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 平均 的本地化字符串。
         /// </summary>
         public static string Fleets_Average {
