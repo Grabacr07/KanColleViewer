@@ -465,4 +465,7 @@
   <data name="MessageBar_ReSortie_Wounded" xml:space="preserve">
     <value>中破以上の艦娘</value>
   </data>
+  <data name="Fleets_Karyoku" xml:space="preserve">
+    <value>火力</value>
+  </data>
 </root>

@@ -312,6 +312,8 @@ namespace Grabacr07.KanColleWrapper.Models
 
 		public int ASW => this.RawData.api_taisen.Get(0) ?? 0;
 
+		public int Karyoku => this.RawData.api_karyoku.Get(0) ?? 0;
+
 		/// <summary>
 		/// 火力・雷装・対空・装甲のすべてのステータス値が最大値に達しているかどうかを示す値を取得します。
 		/// </summary>

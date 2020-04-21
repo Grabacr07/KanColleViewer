@@ -15,6 +15,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents.Fleets
 
 		public string TotalLevel => this.Source.TotalLevel.ToString("###0");
 
+		public string TotalKaryoku => this.Source.TotalKaryoku.ToString("###0");
+
 		public string MinAirSuperiorityPotential => this.Source.MinAirSuperiorityPotential.ToString("##0");
 
 		public string MaxAirSuperiorityPotential => this.Source.MaxAirSuperiorityPotential.ToString("##0");
