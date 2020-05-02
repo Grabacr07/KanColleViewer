@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
@@ -11,21 +11,18 @@ namespace Counter
 {
 	[Export(typeof(IPlugin))]
 	[Export(typeof(ITool))]
-	[Export(typeof(IRequestNotify))]
 	[ExportMetadata("Guid", "65BE3E80-8EC1-41BD-85E0-78AEFD45A757")]
 	[ExportMetadata("Title", "KanColleCounter")]
 	[ExportMetadata("Description", "シンプルな回数カウント機能を提供します。")]
-	[ExportMetadata("Version", "1.1")]
+	[ExportMetadata("Version", "1.2")]
 	[ExportMetadata("Author", "@Grabacr07")]
-	public class KanColleCounter : IPlugin, ITool, IRequestNotify
+	public class KanColleCounter : IPlugin, ITool
 	{
 		private CounterViewModel viewModel;
 
 		string ITool.Name => "Counter";
 
 		object ITool.View => new CounterView { DataContext = this.viewModel, };
-
-		public event EventHandler<NotifyEventArgs> NotifyRequested;
 
 		public void Initialize()
 		{
