@@ -59,7 +59,7 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -139,10 +139,10 @@
     <value>Debug</value>
   </data>
   <data name="Debug_NotificationMessage" xml:space="preserve">
-    <value>これはテスト通知です。</value>
+    <value>此为测试通知。</value>
   </data>
   <data name="Debug_NotificationMessage_Title" xml:space="preserve">
-    <value>テスト</value>
+    <value>测试</value>
   </data>
   <data name="Dockyard" xml:space="preserve">
     <value>建造</value>
@@ -226,7 +226,7 @@
     <value>所持有的舰娘:</value>
   </data>
   <data name="IntegratedView" xml:space="preserve">
-    <value>総合</value>
+    <value>概览</value>
   </data>
   <data name="MessageBar_Expedition" xml:space="preserve">
     <value>この艦隊は遠征中です。</value>
@@ -358,10 +358,10 @@
     <value>代理设置</value>
   </data>
   <data name="Settings_Proxy_Enable" xml:space="preserve">
-    <value>使用代理来连接服务器</value>
+    <value>指定代理服务器</value>
   </data>
-  <data name="Settings_Proxy_Enable_4_SSL" xml:space="preserve">
-    <value>使用SSL时也使用代理服务器</value>
+  <data name="Settings_Proxy_Enable_ForAllProtocols" xml:space="preserve">
+    <value>将此代理应用于所有协议</value>
   </data>
   <data name="Settings_Proxy_Host" xml:space="preserve">
     <value>地址</value>
@@ -408,23 +408,11 @@
   <data name="Settings_Window_TopMost" xml:space="preserve">
     <value>永远保持在最前端</value>
   </data>
-  <data name="StartContent_ClearCacheButton" xml:space="preserve">
-    <value>キャッシュの削除</value>
-  </data>
-  <data name="StartContent_ClearCacheButtonMessage" xml:space="preserve">
-    <value>キャッシュを削除しました</value>
-  </data>
   <data name="StartContent_Introduction1" xml:space="preserve">
     <value>「提督業も忙しい！」は、艦これを遊びやすくするためのツールです。</value>
   </data>
   <data name="StartContent_Welcom" xml:space="preserve">
-    <value>ようこそ</value>
-  </data>
-  <data name="StatusBar_AirSuperiorityPotential" xml:space="preserve">
-    <value>对空战斗力:</value>
-  </data>
-  <data name="StatusBar_AverageLevel" xml:space="preserve">
-    <value>平均等级:</value>
+    <value>Welcome</value>
   </data>
   <data name="StatusBar_NotStarted" xml:space="preserve">
     <value>等待舰これ载入</value>
@@ -432,16 +420,163 @@
   <data name="StatusBar_Ready" xml:space="preserve">
     <value>准备完毕</value>
   </data>
-  <data name="StatusBar_Speed_Fast" xml:space="preserve">
-    <value>高速舰队</value>
-  </data>
-  <data name="StatusBar_Speed_Slow" xml:space="preserve">
-    <value>低速舰队</value>
-  </data>
   <data name="ZoomAction_OutOfRange" xml:space="preserve">
     <value>无法在 {0} %范围内缩放</value>
   </data>
   <data name="ZoomAction_ZoomFailed" xml:space="preserve">
     <value>缩放失败: {0}</value>
+  </data>
+  <data name="Fleets_Level" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="Settings_Logging" xml:space="preserve">
+    <value>日志</value>
+  </data>
+  <data name="ZoomFactorSelector" xml:space="preserve">
+    <value>游戏分辨率调整</value>
+  </data>
+  <data name="ZoomFactorSelector_Tooltip" xml:space="preserve">
+    <value>调整游戏分辨率</value>
+  </data>
+  <data name="StartContent_ClearCacheCheckBox" xml:space="preserve">
+    <value>下次启动时清理缓存</value>
+  </data>
+  <data name="Settings_Plugin" xml:space="preserve">
+    <value>插件</value>
+  </data>
+  <data name="Common_Button_Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Settings_WindowLayout" xml:space="preserve">
+    <value>窗口布局</value>
+  </data>
+  <data name="Settings_WindowLayout_MultiWindow" xml:space="preserve">
+    <value>多窗口显示</value>
+  </data>
+  <data name="Settings_WindowLayout_SingleWindow" xml:space="preserve">
+    <value>单一窗口显示</value>
+  </data>
+  <data name="Common_Button_Back" xml:space="preserve">
+    <value>后退</value>
+  </data>
+  <data name="Common_Button_Forward" xml:space="preserve">
+    <value>前进</value>
+  </data>
+  <data name="Common_Button_Refresh" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="Common_Button_Reset2Default" xml:space="preserve">
+    <value>重置为默认值</value>
+  </data>
+  <data name="Settings_Display_ExitConfirmation" xml:space="preserve">
+    <value>关闭时的确认操作</value>
+  </data>
+  <data name="Settings_StyleSheets" xml:space="preserve">
+    <value>样式表编辑</value>
+  </data>
+  <data name="Settings_Taskbar" xml:space="preserve">
+    <value>任务栏设置</value>
+  </data>
+  <data name="Settings_Taskbar_ProgressIndicator" xml:space="preserve">
+    <value>进度指示器行为设置</value>
+  </data>
+  <data name="Tool" xml:space="preserve">
+    <value>工具</value>
+  </data>
+  <data name="Common_Button_Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="Common_NavigateCommand" xml:space="preserve">
+    <value>请输入网址</value>
+  </data>
+  <data name="Common_Button_OK" xml:space="preserve">
+    <value>确认</value>
+  </data>
+  <data name="ExitDialog_Description" xml:space="preserve">
+    <value>是否确认退出「提督業も忙しい！」</value>
+  </data>
+  <data name="ExitDialog_Title" xml:space="preserve">
+    <value>退出确认</value>
+  </data>
+  <data name="Common_Button_Retry" xml:space="preserve">
+    <value>重试</value>
+  </data>
+  <data name="Common_Confirmation_Always" xml:space="preserve">
+    <value>总是确认</value>
+  </data>
+  <data name="Common_Confirmation_Disable" xml:space="preserve">
+    <value>从不确认</value>
+  </data>
+  <data name="Common_Confirmation_InSortie" xml:space="preserve">
+    <value>仅出撃中确认</value>
+  </data>
+  <data name="Common_DefaultValue" xml:space="preserve">
+    <value>默认值</value>
+  </data>
+  <data name="Common_Needless" xml:space="preserve">
+    <value>不使用</value>
+  </data>
+  <data name="Plugin_Failed" xml:space="preserve">
+    <value>加载失败的插件</value>
+  </data>
+  <data name="Plugin_Failed_Description" xml:space="preserve">
+    <value>下列插件加载失败，无法正常运行。请确认相关错误的详细信息。</value>
+  </data>
+  <data name="Plugin_Function_Request2Notify" xml:space="preserve">
+    <value>通知推送</value>
+  </data>
+  <data name="Plugin_Function_TaskbarIndicator" xml:space="preserve">
+    <value>任务栏指示器</value>
+  </data>
+  <data name="Plugin_Function_Tool" xml:space="preserve">
+    <value>在[工具]中显示</value>
+  </data>
+  <data name="Plugin_Loaded" xml:space="preserve">
+    <value>已加载的插件</value>
+  </data>
+  <data name="Plugin_Loaded_Description" xml:space="preserve">
+    <value>下列插件已加载。可在此对更改各插件的设置。</value>
+  </data>
+  <data name="ProxyBootstrapper_Set2Retry" xml:space="preserve">
+    <value>※请更改设置后，单击[重试]按钮。</value>
+  </data>
+  <data name="Settings_LocalListeningPort" xml:space="preserve">
+    <value>本地监听端口设置</value>
+  </data>
+  <data name="Settings_LocalProxy_IsEnabled" xml:space="preserve">
+    <value>修改监听端口号</value>
+  </data>
+  <data name="Settings_Operation_FleetsStatus" xml:space="preserve">
+    <value>舰队状态</value>
+  </data>
+  <data name="Settings_Proxy_Disable" xml:space="preserve">
+    <value>不使用代理服务器</value>
+  </data>
+  <data name="Settings_Proxy_Disable_Description" xml:space="preserve">
+    <value>所有协议直接与服务器通信，不通过代理服务器中继</value>
+  </data>
+  <data name="Settings_Proxy_Enable_Description1" xml:space="preserve">
+    <value>由代理服务器中继进行通信。</value>
+  </data>
+  <data name="Settings_Proxy_Enable_Description2" xml:space="preserve">
+    <value>建议通过IP地址指定代理，由主机名指定可能存在响应缓慢等问题。</value>
+  </data>
+  <data name="Settings_Proxy_IESettings" xml:space="preserve">
+    <value>使用Internet Explorer代理设置</value>
+  </data>
+  <data name="Settings_Proxy_IESettings_Description" xml:space="preserve">
+    <value>使用「Internet选项」设置进行通信。</value>
+  </data>
+  <data name="Settings_Proxy_Restart2Apply" xml:space="preserve">
+    <value>※重启程序以使设置生效</value>
+  </data>
+  <data name="Common_NoResult" xml:space="preserve">
+    <value>无结果</value>
+  </data>
+  <data name="Data" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="SlotItemType_DamageControl" xml:space="preserve">
+    <value>応急修理</value>
   </data>
 </root>

@@ -4,6 +4,7 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+			 xmlns:models="clr-namespace:Grabacr07.KanColleViewer.Models"
 			 xmlns:ms="clr-namespace:Grabacr07.KanColleViewer.Models.Settings"
 			 xmlns:vms="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Settings"
 			 mc:Ignorable="d"
@@ -19,7 +20,7 @@
 	</UserControl.Resources>
 
 	<StackPanel>
-		<TextBlock Text="艦隊ステータス"
+		<TextBlock Text="{Binding Resources.Settings_Operation_FleetsStatus, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 		<StackPanel Margin="20,0,0,0">

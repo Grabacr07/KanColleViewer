@@ -123,7 +123,7 @@
 		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
 
-		<TextBlock Text="ユーザー スタイル シート"
+		<TextBlock Text="{Binding Resources.Settings_StyleSheets, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 		<StackPanel Margin="20,0,0,0">
@@ -153,11 +153,11 @@
 				<metro2:CallMethodButton DockPanel.Dock="Left"
 										 MethodTarget="{Binding}"
 										 MethodName="BackToDefaultValue"
-										 Content="既定値に戻す" />
+										 Content="{Binding Resources.Common_Button_Reset2Default, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 				<metro2:CallMethodButton DockPanel.Dock="Right"
 										 MethodTarget="{Binding}"
 										 MethodName="Cancel"
-										 Content="キャンセル"
+										 Content="{Binding Resources.Common_Button_Cancel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 										 IsEnabled="{Binding IsEditing}" />
 				<metro2:CallMethodButton DockPanel.Dock="Right"
 										 MethodTarget="{Binding}"

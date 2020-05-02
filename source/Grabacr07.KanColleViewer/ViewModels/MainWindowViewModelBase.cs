@@ -108,7 +108,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 
 		protected override void CloseCanceledCallbackCore()
 		{
-			var dialog = new DialogViewModel { Title = "終了確認", };
+			var dialog = new DialogViewModel { Title = Properties.Resources.ExitDialog_Title };
 
 			this.Dialog(dialog, typeof(ExitDialog));
 

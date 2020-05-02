@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Contents.Overview"
+<UserControl x:Class="Grabacr07.KanColleViewer.Views.Contents.Overview"
 			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -289,7 +289,7 @@
 				<Border Grid.Row="0"
 						Grid.Column="0">
 					<StackPanel>
-						<TextBlock Text="データ" />
+						<TextBlock Text="{Binding Resources.Data, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 
 						<Rectangle Height=".99"
 								   Margin="0,7,0,3"
@@ -412,7 +412,7 @@
 										 MethodName="Jump"
 										 MethodParameter="Repairyard">
 					<StackPanel DataContext="{Binding Content.Shipyard}">
-						<TextBlock Text="入渠ドック" />
+						<TextBlock Text="{Binding Resources.Repairyard, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 
 						<Rectangle Height=".99"
 								   Margin="0,7,0,3"
@@ -456,7 +456,7 @@
 										 MethodName="Jump"
 										 MethodParameter="Dockyard">
 					<StackPanel DataContext="{Binding Content.Shipyard}">
-						<TextBlock Text="建造ドック" />
+						<TextBlock Text="{Binding Name}" />
 
 						<Rectangle Height=".99"
 								   Margin="0,7,0,3"

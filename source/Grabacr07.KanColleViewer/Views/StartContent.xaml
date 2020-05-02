@@ -243,7 +243,7 @@
 						<Paragraph>
 							<Run Foreground="White"
 								 FontSize="20"
-								 Text="ようこそ" />
+								 Text="{Binding Resources.StartContent_Welcom,Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 						</Paragraph>
 						<Paragraph Language="ja-jp">
 							<Run Text="「提督業も忙しい！」は、艦これを遊びやすくするためのツールです。" />
@@ -257,7 +257,7 @@
 						<Paragraph>
 							<InlineUIContainer>
 								<CheckBox IsChecked="{Binding ClearCacheOnNextStartup}"
-										  Content="次回起動時にキャッシュを削除する" />
+										  Content="{Binding Source={x:Static models:ResourceService.Current}, Path=Resources.StartContent_ClearCacheCheckBox}" />
 							</InlineUIContainer>
 							<LineBreak />
 							<InlineUIContainer>
@@ -328,7 +328,7 @@
 
 					<TabItem>
 						<TabItem.Header>
-							<TextBlock Text="通知設定"
+							<TextBlock Text="{Binding Resources.Common_Notifications_Title, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									   Style="{DynamicResource TabHeaderTextStyleKey}" />
 						</TabItem.Header>
 						<settings:Notification Margin="10,9" />
@@ -345,7 +345,7 @@
 
 					<TabItem>
 						<TabItem.Header>
-							<TextBlock Text="プラグイン"
+							<TextBlock Text="{Binding Resources.Settings_Plugin, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									   Style="{StaticResource TabHeaderTextStyleKey}" />
 						</TabItem.Header>
 						<settings:Plugins Margin="10,9" />

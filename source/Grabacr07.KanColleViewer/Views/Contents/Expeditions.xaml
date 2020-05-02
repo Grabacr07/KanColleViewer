@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Contents.Expeditions"
+<UserControl x:Class="Grabacr07.KanColleViewer.Views.Contents.Expeditions"
 			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -102,7 +102,7 @@
 							  Padding="8">
 						<Grid>
 							<TextBlock x:Name="NotExcution"
-									   Text="遠征に出ていません。"
+									   Text="{Binding Resources.Expedition_NoExpedition, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									   Style="{DynamicResource EmphaticTextStyleKey}"
 									   Visibility="Collapsed" />
 

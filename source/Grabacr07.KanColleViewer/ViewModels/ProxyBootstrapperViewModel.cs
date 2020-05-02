@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -81,7 +81,7 @@ namespace Grabacr07.KanColleViewer.ViewModels
 		public async void Retry()
 		{
 			this.IsEditable = false;
-			this.Status = "再試行中...";
+			this.Status = Properties.Resources.Common_Button_Retry + "中...";
 
 			// ToDo: async void なので刺されそう
 			await Task.WhenAll(Task.Run(() => this.Bootstrapper.Try()), Task.Delay(TimeSpan.FromMilliseconds(1500)));

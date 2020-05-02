@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Composition;
+using Grabacr07.KanColleViewer.Properties;
 using MetroTrilithon.Mvvm;
 
 namespace Grabacr07.KanColleViewer.ViewModels.Settings
@@ -16,7 +17,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 
 		public PluginSettingsWindowViewModel(ISettings settings, string title)
 		{
-			this.Title = $"{title} プラグイン設定";
+			this.Title = $"{title} " + Resources.Settings_Plugin + "設定";
 			this.settings = settings;
 		}
 	}

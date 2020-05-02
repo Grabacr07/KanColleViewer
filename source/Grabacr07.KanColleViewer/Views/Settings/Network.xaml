@@ -29,31 +29,31 @@
 		<StackPanel Margin="20,0,0,0">
 			<RadioButton x:Name="CheckDirectAccess"
 						 GroupName="ProxySettings"
-						 Content="プロキシ サーバーを使用しない"
+						 Content="{Binding Resources.Settings_Proxy_Disable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 						 IsChecked="{Binding ProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=DirectAccess}" />
 
 			<TextBlock Style="{DynamicResource DetailTextStyleKey}"
 					   IsEnabled="{Binding ProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=DirectAccess}"
 					   Margin="20,2,0,0">
-				<Run Text="全てのプロトコルでプロキシ サーバーを中継せずに直接サーバーと通信を行います。" />
+				<Run Text="{Binding Resources.Settings_Proxy_Disable_Description, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 			</TextBlock>
 
 			<Border Height="8" />
 			<RadioButton x:Name="CheckUseSystemProxy"
 						 GroupName="ProxySettings"
-						 Content="Internet Explorer のプロキシ設定を使用する"
+						 Content="{Binding Resources.Settings_Proxy_IESettings, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 						 IsChecked="{Binding ProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SystemProxy}" />
 
 			<TextBlock Style="{DynamicResource DetailTextStyleKey}"
 					   IsEnabled="{Binding ProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SystemProxy}"
 					   Margin="20,2,0,0">
-				<Run Text="「インターネット オプション」の設定を用いて通信を行います。" />
+				<Run Text="{Binding Resources.Settings_Proxy_IESettings_Description, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 			</TextBlock>
 
 			<Border Height="8" />
 			<RadioButton x:Name="CheckUseSpecificProxy"
 						 GroupName="ProxySettings"
-						 Content="プロキシ サーバーを指定する"
+						 Content="{Binding Resources.Settings_Proxy_Enable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 						 IsChecked="{Binding ProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SpecificProxy}" />
 
 			<StackPanel IsEnabled="{Binding ProxyType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SpecificProxy}"
@@ -68,9 +68,9 @@
 
 				<TextBlock Style="{DynamicResource DetailTextStyleKey}"
 						   Margin="0,2">
-					<Run Text="指定したプロキシ サーバーを中継して通信を行います。" />
+					<Run Text="{Binding Resources.Settings_Proxy_Enable_Description1, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 					<LineBreak />
-					<Run Text="サーバーをホスト名で指定した場合、動作が遅くなることがあるため、IP アドレスでの指定を推奨します。" />
+					<Run Text="{Binding Resources.Settings_Proxy_Enable_Description2, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 				</TextBlock>
 
 				<Grid>
@@ -124,7 +124,7 @@
 					<CheckBox Grid.Row="1"
 							  Grid.Column="1"
 							  Grid.ColumnSpan="3"
-							  Content="全てのプロトコルでこのプロキシ サーバーを使用する"
+							  Content="{Binding Resources.Settings_Proxy_Enable_ForAllProtocols, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 							  Margin="-1,4"
 							  IsChecked="{Binding IsUseHttpProxyForAllProtocols, Mode=TwoWay}" />
 				</Grid>
@@ -241,7 +241,7 @@
 			<Border Height="8" />
 			<StackPanel Orientation="Horizontal"
 						HorizontalAlignment="Right">
-				<TextBlock Text="※反映にはアプリケーションの再起動が必要です。"
+				<TextBlock Text="{Binding Resources.Settings_Proxy_Restart2Apply, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 						   Style="{DynamicResource DetailTextStyleKey}"
 						   Margin="16,8" />
 
@@ -253,7 +253,7 @@
 				<Border Width="8" />
 				<metro2:CallMethodButton MethodTarget="{Binding}"
 										 MethodName="Cancel"
-										 Content="キャンセル"
+										 Content="{Binding Resources.Common_Button_Cancel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 										 MinWidth="110"
 										 Padding="16,6" />
 			</StackPanel>
@@ -261,15 +261,15 @@
 
 		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
-		<TextBlock Text="ローカル待ち受けポート設定"
+		<TextBlock Text="{Binding Resources.Settings_LocalListeningPort, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 		<StackPanel Margin="20,0,0,0">
-			<TextBlock Text="※反映にはアプリケーションの再起動が必要です。"
+			<TextBlock Text="{Binding Resources.Settings_Proxy_Restart2Apply, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					   Style="{DynamicResource DetailTextStyleKey}" />
 
 			<Border Height="8" />
-			<CheckBox Content="待ち受けポートを変更する"
+			<CheckBox Content="{Binding Resources.Settings_LocalProxy_IsEnabled, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					  IsChecked="{Binding Source={x:Static ms:NetworkSettings+LocalProxy.IsEnabled}, Path=Value}" />
 
 			<Border Height="4" />
@@ -304,7 +304,7 @@
 					<TextBlock Grid.Column="2"
 							   Style="{DynamicResource DetailTextStyleKey}"
 							   Margin="5">
-						<Run Text="(既定値:" />
+						<Run Text="{Binding Resources.Common_DefaultValue, Source={x:Static models:ResourceService.Current}, Mode=OneWay, StringFormat='(\{0\}:'}" />
 						<Run Text="{Binding Source={x:Static ms:NetworkSettings+LocalProxy.Port}, Path=Default, Mode=OneWay}" />
 						<Run Text=")" />
 					</TextBlock>

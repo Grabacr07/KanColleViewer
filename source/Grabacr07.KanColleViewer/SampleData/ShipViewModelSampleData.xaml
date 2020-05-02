@@ -7,8 +7,8 @@
 					 Exp="99887766"
 					 ExpForNextLevel="129800"
 					 Condition="80"
-					 ConditionType="Brilliant"
-					 Situation="DamageControlled"
+					 ConditionType="Brilliant"					 
+					 Situation="HeavilyDamaged"
 					 Speed="Fast">
 			<models:Ship.Info>
 				<models:ShipInfo Id="987"
@@ -29,9 +29,9 @@
 					<models:ShipSlot.Item>
 						<models:SlotItem Level="1"
 										 LevelText="★max"
-										 NameWithLevel="応急修理女神 ★max">
+										 NameWithLevel="応急修理女神 Mk.3k ★max">
 							<models:SlotItem.Info>
-								<models:SlotItemInfo Name="応急修理女神"
+								<models:SlotItemInfo Name="応急修理女神 Mk.3k"
 													 IsNumerable="False"
 													 IconType="DamageControl" />
 							</models:SlotItem.Info>

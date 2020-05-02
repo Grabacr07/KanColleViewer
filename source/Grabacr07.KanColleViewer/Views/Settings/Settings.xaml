@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Grabacr07.KanColleViewer.Views.Settings.Settings"
+<UserControl x:Class="Grabacr07.KanColleViewer.Views.Settings.Settings"
 			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -68,7 +68,7 @@
 
 			<TabItem>
 				<TabItem.Header>
-					<TextBlock Text="通知設定"
+					<TextBlock Text="{Binding Resources.Common_Notifications_Title, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 							   Style="{StaticResource TabHeaderTextStyleKey}" />
 				</TabItem.Header>
 				<settings:Notification Margin="10,0" />
@@ -85,7 +85,7 @@
 
 			<TabItem>
 				<TabItem.Header>
-					<TextBlock Text="プラグイン"
+					<TextBlock Text="{Binding Resources.Settings_Plugin, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 							   Style="{StaticResource TabHeaderTextStyleKey}" />
 				</TabItem.Header>
 				<settings:Plugins Margin="10,0" />
