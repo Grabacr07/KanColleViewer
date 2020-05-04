@@ -1019,17 +1019,24 @@
 										  Stretch="Uniform"
 										  VerticalAlignment="Top"
 										  Width="235" />
-									<ed:RegularPolygon PointCount="6"
-													   InnerRadius="1"
-													   Stretch="Fill"
-													   Stroke="Black"
-													   StrokeThickness="2"
-													   Fill="#FF827DB0"
-													   Width="126"
-													   Height="146"
-													   HorizontalAlignment="Left"
-													   VerticalAlignment="Top"
-													   Margin="91.033,50.606,0,0" />
+									<Border CornerRadius="35"
+											Background="#FF827DB0"
+											BorderBrush="Black"
+											Height="59"
+											Width="180"
+											Margin="55,70.606,0,0"
+											BorderThickness="2"
+											VerticalAlignment="Top"
+											HorizontalAlignment="Left" />
+									<Border CornerRadius="35"
+											Background="#FF827DB0"
+											BorderBrush="Black"
+											Height="56"
+											Width="180"
+											Margin="55,140.606,0,0"
+											BorderThickness="2"
+											VerticalAlignment="Top"
+											HorizontalAlignment="Left" />
 								</Grid>
 							</Viewbox>
 						</ControlTemplate>
