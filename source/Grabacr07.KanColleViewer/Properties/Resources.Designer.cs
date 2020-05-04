@@ -403,15 +403,6 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   查找类似  的本地化字符串。
-        /// </summary>
-        public static string Equipment_DamageControl {
-            get {
-                return ResourceManager.GetString("Equipment_DamageControl", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 「提督業も忙しい！」 を終了します。よろしいですか？ 的本地化字符串。
         /// </summary>
         public static string ExitDialog_Description {
@@ -1434,6 +1425,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Settings_WindowLayout_SingleWindow {
             get {
                 return ResourceManager.GetString("Settings_WindowLayout_SingleWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ダメコン 的本地化字符串。
+        /// </summary>
+        public static string SlotItemType_DamageControl {
+            get {
+                return ResourceManager.GetString("SlotItemType_DamageControl", resourceCulture);
             }
         }
         
