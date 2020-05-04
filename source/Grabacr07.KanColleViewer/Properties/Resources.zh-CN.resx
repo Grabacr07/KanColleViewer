@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -187,7 +187,7 @@
     <value>远征</value>
   </data>
   <data name="Expedition_NoExpedition" xml:space="preserve">
-    <value>该舰队没有在远征中</value>
+    <value>该舰队没有在远征中。</value>
   </data>
   <data name="Expedition_NotificationMessage" xml:space="preserve">
     <value>「{0}」远征归来。</value>
@@ -274,10 +274,10 @@
     <value>每日任务</value>
   </data>
   <data name="Quests_Notice" xml:space="preserve">
-    <value>※任务完成状况(50 %, 80 %) 和游戏内显示的相同。敌方舰队击破数和远征成功数等不能被显示</value>
+    <value>※任务完成状况(50 %, 80 %) 和游戏内显示的相同。敌方舰队击破数和远征成功数等不能被显示。</value>
   </data>
   <data name="Quests_Untaken" xml:space="preserve">
-    <value>请点击游戏中的 [任務 (クエスト)]，以便取得任务信息</value>
+    <value>请点击游戏中的 [任務 (クエスト)]，以便取得任务信息。</value>
   </data>
   <data name="Quests_Weekly" xml:space="preserve">
     <value>每周任务</value>
@@ -403,7 +403,7 @@
     <value>将窗口放在屏幕左端</value>
   </data>
   <data name="Settings_WindowControl_LocationLeftButton_Sub" xml:space="preserve">
-    <value>8英寸屏使用(800 x 1280) </value>
+    <value>8英寸屏使用(800 x 1280)</value>
   </data>
   <data name="Settings_Window_TopMost" xml:space="preserve">
     <value>永远保持在最前端</value>
@@ -421,7 +421,7 @@
     <value>准备完毕</value>
   </data>
   <data name="ZoomAction_OutOfRange" xml:space="preserve">
-    <value>无法在 {0} %范围内缩放</value>
+    <value>无法在 {0} %范围内缩放。</value>
   </data>
   <data name="ZoomAction_ZoomFailed" xml:space="preserve">
     <value>缩放失败: {0}</value>
@@ -493,7 +493,7 @@
     <value>确认</value>
   </data>
   <data name="ExitDialog_Description" xml:space="preserve">
-    <value>是否确认退出「提督業も忙しい！」</value>
+    <value>是否确认退出「提督業も忙しい！」？</value>
   </data>
   <data name="ExitDialog_Title" xml:space="preserve">
     <value>退出确认</value>
@@ -553,7 +553,7 @@
     <value>不使用代理服务器</value>
   </data>
   <data name="Settings_Proxy_Disable_Description" xml:space="preserve">
-    <value>所有协议直接与服务器通信，不通过代理服务器中继</value>
+    <value>所有协议直接与服务器通信，不通过代理服务器中继。</value>
   </data>
   <data name="Settings_Proxy_Enable_Description1" xml:space="preserve">
     <value>由代理服务器中继进行通信。</value>
@@ -568,7 +568,7 @@
     <value>使用「Internet选项」设置进行通信。</value>
   </data>
   <data name="Settings_Proxy_Restart2Apply" xml:space="preserve">
-    <value>※重启程序以使设置生效</value>
+    <value>※重启程序以使设置生效。</value>
   </data>
   <data name="Common_NoResult" xml:space="preserve">
     <value>无结果</value>
