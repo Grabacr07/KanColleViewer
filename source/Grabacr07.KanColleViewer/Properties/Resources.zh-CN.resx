@@ -196,7 +196,7 @@
     <value>远征结束</value>
   </data>
   <data name="Expedition_Notifications_Enable" xml:space="preserve">
-    <value>舰队远征结束时通知</value>
+    <value>远征结束时通知</value>
   </data>
   <data name="Expedition_Notifications_Individual" xml:space="preserve">
     <value>仅通知指定的舰队</value>
@@ -295,7 +295,7 @@
     <value>整备完毕</value>
   </data>
   <data name="Repairyard_Notifications_Enable" xml:space="preserve">
-    <value>整备完成时提示</value>
+    <value>修理完成时通知</value>
   </data>
   <data name="Repairyard_Notifications_Individual" xml:space="preserve">
     <value>仅通知指定的船坞</value>
@@ -578,5 +578,86 @@
   </data>
   <data name="SlotItemType_DamageControl" xml:space="preserve">
     <value>応急修理</value>
+  </data>
+  <data name="Settings_Operation_FleetsAutoSelection_Changing" xml:space="preserve">
+    <value>更改舰队编成时，自动切换至该舰队</value>
+  </data>
+  <data name="Settings_Operation_FleetsAutoSelection_InSortie" xml:space="preserve">
+    <value>出撃时，自动切换至该舰队</value>
+  </data>
+  <data name="Settings_Operation_RepairShipCheckBox" xml:space="preserve">
+    <value>当旗舰为工作艦时，判定该舰队不可出撃</value>
+  </data>
+  <data name="Settings_Operation_ReSortieCondition" xml:space="preserve">
+    <value>当同一舰队中全舰的condition值大于等于如下所示值时，判定该舰队可出撃</value>
+  </data>
+  <data name="Settings_Operation_ReSortieCondition_Description" xml:space="preserve">
+    <value>※通常设定为「給」按钮常亮值40或自然恢复上限值49。</value>
+  </data>
+  <data name="Settings_Operation_ViewRange_CombinedEnable" xml:space="preserve">
+    <value>组成連合艦隊时，索敵值由以下舰队的索敵值表征</value>
+  </data>
+  <data name="Settings_Operation_ViewRange_Selection" xml:space="preserve">
+    <value>使用以下公式计算舰队的索敵值</value>
+  </data>
+  <data name="Notification_ShorteningTime" xml:space="preserve">
+    <value>通知时间提前</value>
+  </data>
+  <data name="Notification_ShorteningTime_Description" xml:space="preserve">
+    <value>基于艦これ的机制，最多可以缩短1分钟的时间。考虑到与服务器间存在的时间差异，建议设定在40~50秒左右。</value>
+  </data>
+  <data name="ReSortie_Notifications_Enable" xml:space="preserve">
+    <value>疲劳恢复完毕时通知</value>
+  </data>
+  <data name="ReSortie_Condition" xml:space="preserve">
+    <value>判定舰队可出撃的condition值</value>
+  </data>
+  <data name="ReSortie_Condition_Description2" xml:space="preserve">
+    <value>当同一舰队中全舰的condition值大于等于上述值时进行通知。condition值每3分钟恢复3点，另外由于KanColleViewer实现机制的关系，通知时间与实际情况相比可能会有至多3分钟的延迟。</value>
+  </data>
+  <data name="ReSortie_Condition_Description1" xml:space="preserve">
+    <value>※可在[行为设置] &gt; [舰队状态] 中进行更改。</value>
+  </data>
+  <data name="ShipCataWin_FilterSettings" xml:space="preserve">
+    <value>筛选</value>
+  </data>
+  <data name="Common_SelectAll" xml:space="preserve">
+    <value>全选</value>
+  </data>
+  <data name="Common_AllShips" xml:space="preserve">
+    <value>所有舰娘</value>
+  </data>
+  <data name="ShipCataWin_Lock" xml:space="preserve">
+    <value>锁定状态</value>
+  </data>
+  <data name="ShipCataWin_Lock_Locked" xml:space="preserve">
+    <value>已锁定</value>
+  </data>
+  <data name="ShipCataWin_Lock_Unlocked" xml:space="preserve">
+    <value>未锁定</value>
+  </data>
+  <data name="ShipCataWin_WithoutExped" xml:space="preserve">
+    <value>远征中的舰娘除外</value>
+  </data>
+  <data name="ShipCataWin_Damaged" xml:space="preserve">
+    <value>未满血</value>
+  </data>
+  <data name="ShipCataWin_Undamaged" xml:space="preserve">
+    <value>满血</value>
+  </data>
+  <data name="ShipCataWin_SortSettings" xml:space="preserve">
+    <value>排序规则</value>
+  </data>
+  <data name="ShipCataWin_SortSettings_Description" xml:space="preserve">
+    <value>按以下规则对舰娘进行排序。</value>
+  </data>
+  <data name="Common_Button_Clear" xml:space="preserve">
+    <value>清除</value>
+  </data>
+  <data name="Common_Null" xml:space="preserve">
+    <value>无</value>
+  </data>
+  <data name="Fleets_ExpForNextLevel" xml:space="preserve">
+    <value>升至下一级所需经验值</value>
   </data>
 </root>

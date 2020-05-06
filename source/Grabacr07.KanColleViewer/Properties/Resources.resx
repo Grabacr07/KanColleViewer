@@ -166,7 +166,7 @@
     <value>建造完了</value>
   </data>
   <data name="Dockyard_Notifications_Enable" xml:space="preserve">
-    <value>建造完了時に通知を表示する</value>
+    <value>建造完了時に通知する</value>
   </data>
   <data name="Dockyard_Notifications_Individual" xml:space="preserve">
     <value>ドックごとに個別に設定する</value>
@@ -196,7 +196,7 @@
     <value>遠征完了</value>
   </data>
   <data name="Expedition_Notifications_Enable" xml:space="preserve">
-    <value>遠征帰投時に通知を表示する</value>
+    <value>遠征帰投時に通知する</value>
   </data>
   <data name="Expedition_Notifications_Individual" xml:space="preserve">
     <value>艦隊ごとに個別に設定する</value>
@@ -292,7 +292,7 @@
     <value>整備完了</value>
   </data>
   <data name="Repairyard_Notifications_Enable" xml:space="preserve">
-    <value>整備完了時に通知を表示する</value>
+    <value>入渠完了時に通知する</value>
   </data>
   <data name="Repairyard_Notifications_Individual" xml:space="preserve">
     <value>ドックごとに個別に設定する</value>
@@ -605,5 +605,86 @@
   </data>
   <data name="SlotItemType_DamageControl" xml:space="preserve">
     <value>ダメコン</value>
+  </data>
+  <data name="Settings_Operation_FleetsAutoSelection_Changing" xml:space="preserve">
+    <value>艦隊の編成を変更したとき、その艦隊を自動的に選択する</value>
+  </data>
+  <data name="Settings_Operation_FleetsAutoSelection_InSortie" xml:space="preserve">
+    <value>艦隊が出撃したとき、その艦隊を自動的に選択する</value>
+  </data>
+  <data name="Settings_Operation_RepairShipCheckBox" xml:space="preserve">
+    <value>旗艦に工作艦が編成されているときは出撃可能と判断しない</value>
+  </data>
+  <data name="Settings_Operation_ReSortieCondition" xml:space="preserve">
+    <value>艦隊内の全艦のコンディションが次の数値以上になったとき、出撃可能と判断する</value>
+  </data>
+  <data name="Settings_Operation_ReSortieCondition_Description" xml:space="preserve">
+    <value>※通常は、間宮アイコンが消灯する 40 か、自然回復上限の 49 に設定します。</value>
+  </data>
+  <data name="Settings_Operation_ViewRange_CombinedEnable" xml:space="preserve">
+    <value>連合艦隊時、以下の艦隊を索敵値計算の対象として使用する</value>
+  </data>
+  <data name="Settings_Operation_ViewRange_Selection" xml:space="preserve">
+    <value>艦隊の索敵値の算出に使用する計算式は、以下を使用する</value>
+  </data>
+  <data name="Notification_ShorteningTime" xml:space="preserve">
+    <value>通知を早める</value>
+  </data>
+  <data name="Notification_ShorteningTime_Description" xml:space="preserve">
+    <value>艦これ本体の仕様により、最大 1 分間短縮できます。サーバー時刻とのずれを加味し、40 ～ 50 秒に設定することを推奨します。</value>
+  </data>
+  <data name="ReSortie_Notifications_Enable" xml:space="preserve">
+    <value>艦隊に編成されている艦娘の疲労が回復したら通知する</value>
+  </data>
+  <data name="ReSortie_Condition" xml:space="preserve">
+    <value>再出撃可能とするコンディション値</value>
+  </data>
+  <data name="ReSortie_Condition_Description2" xml:space="preserve">
+    <value>艦隊に編成されているすべて艦娘のコンディション値が上記の値以上になったときに通知されます。コンディション値は 3 分間で 3 ずつ回復しますが、KanColleViewer 実装の仕様により、通知タイミングは数秒 ～ 最大 3 分程度遅れる可能性があること予めご了承ください。</value>
+  </data>
+  <data name="ReSortie_Condition_Description1" xml:space="preserve">
+    <value>※[動作設定] &gt; [艦隊ステータス] から設定できます。</value>
+  </data>
+  <data name="ShipCataWin_FilterSettings" xml:space="preserve">
+    <value>フィルター設定</value>
+  </data>
+  <data name="Common_SelectAll" xml:space="preserve">
+    <value>すべて選択</value>
+  </data>
+  <data name="Common_AllShips" xml:space="preserve">
+    <value>すべて</value>
+  </data>
+  <data name="ShipCataWin_Lock" xml:space="preserve">
+    <value>ロック</value>
+  </data>
+  <data name="ShipCataWin_Lock_Locked" xml:space="preserve">
+    <value>ロックしている</value>
+  </data>
+  <data name="ShipCataWin_Lock_Unlocked" xml:space="preserve">
+    <value>ロックしていない</value>
+  </data>
+  <data name="ShipCataWin_WithoutExped" xml:space="preserve">
+    <value>遠征中の艦を除外する</value>
+  </data>
+  <data name="ShipCataWin_Damaged" xml:space="preserve">
+    <value>損傷あり</value>
+  </data>
+  <data name="ShipCataWin_Undamaged" xml:space="preserve">
+    <value>損傷なし</value>
+  </data>
+  <data name="ShipCataWin_SortSettings" xml:space="preserve">
+    <value>並べ替え設定</value>
+  </data>
+  <data name="ShipCataWin_SortSettings_Description" xml:space="preserve">
+    <value>艦娘を以下の順序で並べ替えます。</value>
+  </data>
+  <data name="Common_Button_Clear" xml:space="preserve">
+    <value>クリア</value>
+  </data>
+  <data name="Common_Null" xml:space="preserve">
+    <value>なし</value>
+  </data>
+  <data name="Fleets_ExpForNextLevel" xml:space="preserve">
+    <value>次のレベルまでの経験値</value>
   </data>
 </root>

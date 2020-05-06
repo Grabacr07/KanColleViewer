@@ -61,6 +61,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   查找类似 すべて 的本地化字符串。
+        /// </summary>
+        public static string Common_AllShips {
+            get {
+                return ResourceManager.GetString("Common_AllShips", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 前のページに戻る 的本地化字符串。
         /// </summary>
         public static string Common_Button_Back {
@@ -75,6 +84,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Common_Button_Cancel {
             get {
                 return ResourceManager.GetString("Common_Button_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 クリア 的本地化字符串。
+        /// </summary>
+        public static string Common_Button_Clear {
+            get {
+                return ResourceManager.GetString("Common_Button_Clear", resourceCulture);
             }
         }
         
@@ -241,6 +259,24 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   查找类似 なし 的本地化字符串。
+        /// </summary>
+        public static string Common_Null {
+            get {
+                return ResourceManager.GetString("Common_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 すべて選択 的本地化字符串。
+        /// </summary>
+        public static string Common_SelectAll {
+            get {
+                return ResourceManager.GetString("Common_SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 艦娘 的本地化字符串。
         /// </summary>
         public static string Common_ShipGirl {
@@ -349,7 +385,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   查找类似 建造完了時に通知を表示する 的本地化字符串。
+        ///   查找类似 建造完了時に通知する 的本地化字符串。
         /// </summary>
         public static string Dockyard_Notifications_Enable {
             get {
@@ -457,7 +493,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   查找类似 遠征帰投時に通知を表示する 的本地化字符串。
+        ///   查找类似 遠征帰投時に通知する 的本地化字符串。
         /// </summary>
         public static string Expedition_Notifications_Enable {
             get {
@@ -525,6 +561,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Fleets_Average {
             get {
                 return ResourceManager.GetString("Fleets_Average", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 次のレベルまでの経験値 的本地化字符串。
+        /// </summary>
+        public static string Fleets_ExpForNextLevel {
+            get {
+                return ResourceManager.GetString("Fleets_ExpForNextLevel", resourceCulture);
             }
         }
         
@@ -745,6 +790,24 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   查找类似 通知を早める 的本地化字符串。
+        /// </summary>
+        public static string Notification_ShorteningTime {
+            get {
+                return ResourceManager.GetString("Notification_ShorteningTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 艦これ本体の仕様により、最大 1 分間短縮できます。サーバー時刻とのずれを加味し、40 ～ 50 秒に設定することを推奨します。 的本地化字符串。
+        /// </summary>
+        public static string Notification_ShorteningTime_Description {
+            get {
+                return ResourceManager.GetString("Notification_ShorteningTime_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 読み込みに失敗したプラグイン 的本地化字符串。
         /// </summary>
         public static string Plugin_Failed {
@@ -907,7 +970,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   查找类似 整備完了時に通知を表示する 的本地化字符串。
+        ///   查找类似 入渠完了時に通知する 的本地化字符串。
         /// </summary>
         public static string Repairyard_Notifications_Enable {
             get {
@@ -961,6 +1024,33 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   查找类似 再出撃可能とするコンディション値 的本地化字符串。
+        /// </summary>
+        public static string ReSortie_Condition {
+            get {
+                return ResourceManager.GetString("ReSortie_Condition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ※[動作設定] &gt; [艦隊ステータス] から設定できます。 的本地化字符串。
+        /// </summary>
+        public static string ReSortie_Condition_Description1 {
+            get {
+                return ResourceManager.GetString("ReSortie_Condition_Description1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 艦隊に編成されているすべて艦娘のコンディション値が上記の値以上になったときに通知されます。コンディション値は 3 分間で 3 ずつ回復しますが、KanColleViewer 実装の仕様により、通知タイミングは数秒 ～ 最大 3 分程度遅れる可能性があること予めご了承ください。 的本地化字符串。
+        /// </summary>
+        public static string ReSortie_Condition_Description2 {
+            get {
+                return ResourceManager.GetString("ReSortie_Condition_Description2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 「{0}」の全艦娘の疲労が回復しました。 的本地化字符串。
         /// </summary>
         public static string ReSortie_NotificationMessage {
@@ -975,6 +1065,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string ReSortie_NotificationMessage_Title {
             get {
                 return ResourceManager.GetString("ReSortie_NotificationMessage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 艦隊に編成されている艦娘の疲労が回復したら通知する 的本地化字符串。
+        /// </summary>
+        public static string ReSortie_Notifications_Enable {
+            get {
+                return ResourceManager.GetString("ReSortie_Notifications_Enable", resourceCulture);
             }
         }
         
@@ -1123,11 +1222,74 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   查找类似 艦隊の編成を変更したとき、その艦隊を自動的に選択する 的本地化字符串。
+        /// </summary>
+        public static string Settings_Operation_FleetsAutoSelection_Changing {
+            get {
+                return ResourceManager.GetString("Settings_Operation_FleetsAutoSelection_Changing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 艦隊が出撃したとき、その艦隊を自動的に選択する 的本地化字符串。
+        /// </summary>
+        public static string Settings_Operation_FleetsAutoSelection_InSortie {
+            get {
+                return ResourceManager.GetString("Settings_Operation_FleetsAutoSelection_InSortie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 艦隊ステータス 的本地化字符串。
         /// </summary>
         public static string Settings_Operation_FleetsStatus {
             get {
                 return ResourceManager.GetString("Settings_Operation_FleetsStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 旗艦に工作艦が編成されているときは出撃可能と判断しない 的本地化字符串。
+        /// </summary>
+        public static string Settings_Operation_RepairShipCheckBox {
+            get {
+                return ResourceManager.GetString("Settings_Operation_RepairShipCheckBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 艦隊内の全艦のコンディションが次の数値以上になったとき、出撃可能と判断する 的本地化字符串。
+        /// </summary>
+        public static string Settings_Operation_ReSortieCondition {
+            get {
+                return ResourceManager.GetString("Settings_Operation_ReSortieCondition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ※通常は、間宮アイコンが消灯する 40 か、自然回復上限の 49 に設定します。 的本地化字符串。
+        /// </summary>
+        public static string Settings_Operation_ReSortieCondition_Description {
+            get {
+                return ResourceManager.GetString("Settings_Operation_ReSortieCondition_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 連合艦隊時、以下の艦隊を索敵値計算の対象として使用する 的本地化字符串。
+        /// </summary>
+        public static string Settings_Operation_ViewRange_CombinedEnable {
+            get {
+                return ResourceManager.GetString("Settings_Operation_ViewRange_CombinedEnable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 艦隊の索敵値の算出に使用する計算式は、以下を使用する 的本地化字符串。
+        /// </summary>
+        public static string Settings_Operation_ViewRange_Selection {
+            get {
+                return ResourceManager.GetString("Settings_Operation_ViewRange_Selection", resourceCulture);
             }
         }
         
@@ -1425,6 +1587,87 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Settings_WindowLayout_SingleWindow {
             get {
                 return ResourceManager.GetString("Settings_WindowLayout_SingleWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 損傷あり 的本地化字符串。
+        /// </summary>
+        public static string ShipCataWin_Damaged {
+            get {
+                return ResourceManager.GetString("ShipCataWin_Damaged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 フィルター設定 的本地化字符串。
+        /// </summary>
+        public static string ShipCataWin_FilterSettings {
+            get {
+                return ResourceManager.GetString("ShipCataWin_FilterSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ロック 的本地化字符串。
+        /// </summary>
+        public static string ShipCataWin_Lock {
+            get {
+                return ResourceManager.GetString("ShipCataWin_Lock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ロックしている 的本地化字符串。
+        /// </summary>
+        public static string ShipCataWin_Lock_Locked {
+            get {
+                return ResourceManager.GetString("ShipCataWin_Lock_Locked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ロックしていない 的本地化字符串。
+        /// </summary>
+        public static string ShipCataWin_Lock_Unlocked {
+            get {
+                return ResourceManager.GetString("ShipCataWin_Lock_Unlocked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 並べ替え設定 的本地化字符串。
+        /// </summary>
+        public static string ShipCataWin_SortSettings {
+            get {
+                return ResourceManager.GetString("ShipCataWin_SortSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 艦娘を以下の順序で並べ替えます。 的本地化字符串。
+        /// </summary>
+        public static string ShipCataWin_SortSettings_Description {
+            get {
+                return ResourceManager.GetString("ShipCataWin_SortSettings_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 損傷なし 的本地化字符串。
+        /// </summary>
+        public static string ShipCataWin_Undamaged {
+            get {
+                return ResourceManager.GetString("ShipCataWin_Undamaged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 遠征中の艦を除外する 的本地化字符串。
+        /// </summary>
+        public static string ShipCataWin_WithoutExped {
+            get {
+                return ResourceManager.GetString("ShipCataWin_WithoutExped", resourceCulture);
             }
         }
         

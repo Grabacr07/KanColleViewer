@@ -24,7 +24,7 @@
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 		<StackPanel Margin="20,0,0,0">
-			<TextBlock Text="艦隊内の全艦のコンディションが次の数値以上になったとき、出撃可能と判断する" />
+			<TextBlock Text="{Binding Resources.Settings_Operation_ReSortieCondition, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 
 			<Border Height="4" />
 			<Grid>
@@ -49,12 +49,12 @@
 				</metro:PromptTextBox>
 				<TextBlock Grid.Column="2"
 						   Style="{DynamicResource DetailTextStyleKey}">
-					<Run Text="※通常は、間宮アイコンが消灯する 40 か、自然回復上限の 49 に設定します。" />
+					<Run Text="{Binding Resources.Settings_Operation_ReSortieCondition_Description, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 				</TextBlock>
 			</Grid>
 
 			<Border Height="12" />
-			<CheckBox Content="旗艦に工作艦が編成されているときは出撃可能と判断しない"
+			<CheckBox Content="{Binding Resources.Settings_Operation_RepairShipCheckBox, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.CheckFlagshipIsNotRepairShip}, Path=Value}" />
 		</StackPanel>
 
@@ -64,7 +64,7 @@
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 		<StackPanel Margin="20,0,0,0">
-			<TextBlock Text="艦隊の索敵値の算出に使用する計算式は、以下を使用する" />
+			<TextBlock Text="{Binding Resources.Settings_Operation_ViewRange_Selection, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 
 			<metro:PromptComboBox ItemsSource="{Binding ViewRangeSettingsCollection}"
 								  Margin="0,5"
@@ -104,7 +104,7 @@
 					   Style="{DynamicResource DetailTextStyleKey}"/>
 
 
-			<TextBlock Text="連合艦隊時、以下の艦隊を索敵値計算の対象として使用する"
+			<TextBlock Text="{Binding Resources.Settings_Operation_ViewRange_CombinedEnable, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					   Margin="0,12,0,5"
 					   Visibility="{Binding SelectedViewRangeCalcType.HasCombinedSettings, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 			
@@ -125,11 +125,11 @@
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 		<StackPanel Margin="20,0,0,0">
-			<CheckBox Content="艦隊が出撃したとき、その艦隊を自動的に選択する "
+			<CheckBox Content="{Binding Resources.Settings_Operation_FleetsAutoSelection_InSortie, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.AutoFleetSelectWhenSortie}, Path=Value}" />
 
 			<Border Height="8" />
-			<CheckBox Content="艦隊の編成を変更したとき、その艦隊を自動的に選択する"
+			<CheckBox Content="{Binding Resources.Settings_Operation_FleetsAutoSelection_Changing, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.AutoFleetSelectWhenShipsChanged}, Path=Value}" />
 		</StackPanel>
 
