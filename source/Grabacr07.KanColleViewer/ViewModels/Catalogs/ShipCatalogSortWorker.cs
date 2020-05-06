@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -199,7 +199,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Catalogs
 				if (this._Current != value)
 				{
 					this._Current = value;
-					this.SafeUpdate(!value.DefaultIsDescending);
+					this.SafeUpdate((value == null) ? true : !value.DefaultIsDescending);
 					this.Updated(this);
 					this.RaisePropertyChanged();
 				}
