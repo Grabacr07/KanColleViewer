@@ -11,7 +11,7 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 	{
 		public override string Name
 		{
-			get { return Properties.Resources.Tool; }
+			get { return Properties.Resources.Tools; }
 			protected set { throw new NotImplementedException(); }
 		}
 

@@ -24,7 +24,7 @@
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 		<StackPanel Margin="20,0,0,0">
-			<TextBlock Text="{Binding Resources.Settings_Operation_ReSortieCondition, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+			<TextBlock Text="{Binding Resources.Settings_Operation_FleetsStatus_ReSortieCondition, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 
 			<Border Height="4" />
 			<Grid>
@@ -49,12 +49,12 @@
 				</metro:PromptTextBox>
 				<TextBlock Grid.Column="2"
 						   Style="{DynamicResource DetailTextStyleKey}">
-					<Run Text="{Binding Resources.Settings_Operation_ReSortieCondition_Description, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+					<Run Text="{Binding Resources.Settings_Operation_FleetsStatus_ReSortieCondition_Description, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 				</TextBlock>
 			</Grid>
 
 			<Border Height="12" />
-			<CheckBox Content="{Binding Resources.Settings_Operation_RepairShipCheckBox, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+			<CheckBox Content="{Binding Resources.Settings_Operation_FleetsStatus_RepairShipCheckBox, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					  IsChecked="{Binding Source={x:Static ms:KanColleSettings.CheckFlagshipIsNotRepairShip}, Path=Value}" />
 		</StackPanel>
 
@@ -64,7 +64,7 @@
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 		<StackPanel Margin="20,0,0,0">
-			<TextBlock Text="{Binding Resources.Settings_Operation_ViewRange_Selection, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+			<TextBlock Text="{Binding Resources.Settings_Operation_ViewRange_Title, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 
 			<metro:PromptComboBox ItemsSource="{Binding ViewRangeSettingsCollection}"
 								  Margin="0,5"

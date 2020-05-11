@@ -42,7 +42,7 @@
 
 		<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
-		<TextBlock Text="{Binding Resources.Settings_Taskbar, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+		<TextBlock Text="{Binding Resources.Settings_Window_Taskbar, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 		<Grid Margin="20,0,0,00">
@@ -58,7 +58,7 @@
 			</Grid.ColumnDefinitions>
 			<TextBlock Grid.Row="0"
 					   Grid.Column="0"
-					   Text="{Binding Resources.Settings_Taskbar_ProgressIndicator, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+					   Text="{Binding Resources.Settings_Window_Taskbar_ProgressIndicator, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 			<metro:PromptComboBox Grid.Row="0"
 								  Grid.Column="2"
 								  ItemsSource="{Binding TaskbarProgressFeatures}"
@@ -68,7 +68,7 @@
 								  Prompt="" />
 			<TextBlock Grid.Row="2"
 					   Grid.Column="0"
-					   Text="{Binding Resources.Settings_Taskbar_ProgressIndicator, Source={x:Static models:ResourceService.Current}, Mode=OneWay,StringFormat='\{0\}(出撃中)'}" />
+					   Text="{Binding Resources.Settings_Window_Taskbar_ProgressIndicator, Source={x:Static models:ResourceService.Current}, Mode=OneWay,StringFormat='{}{0}(出撃中)'}" />
 			<metro:PromptComboBox Grid.Row="2"
 								  Grid.Column="2"
 								  ItemsSource="{Binding TaskbarProgressFeatures}"
@@ -103,7 +103,7 @@
 		<StackPanel Visibility="{Binding Source={x:Static ms:GeneralSettings.IsProxyMode}, Path=Value, Converter={StaticResource UniversalBooleanToVisibilityConverter}, ConverterParameter=Colappsed:Visible}">
 			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 
-			<TextBlock Text="{Binding Resources.Settings_WindowLayout, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+			<TextBlock Text="{Binding Resources.Settings_Window_Layout, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 			<StackPanel HorizontalAlignment="Left">
@@ -274,7 +274,7 @@
 							<RadioButton x:Name="MergedCheckBox"
 										 DockPanel.Dock="Top"
 										 IsChecked="{Binding IsSplit, Mode=TwoWay, Converter={StaticResource ReverseBooleanConverter}}"
-										 Content="{Binding Resources.Settings_WindowLayout_SingleWindow, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+										 Content="{Binding Resources.Settings_Window_Layout_Merged, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 							<UniformGrid Margin="4"
 										 IsEnabled="{Binding ElementName=MergedCheckBox, Path=IsChecked}">
 								<Border Width="80"
@@ -330,7 +330,7 @@
 							<RadioButton x:Name="SplitCheckBox"
 										 DockPanel.Dock="Top"
 										 IsChecked="{Binding IsSplit, Mode=TwoWay}"
-										 Content="{Binding Resources.Settings_WindowLayout_MultiWindow, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+										 Content="{Binding Resources.Settings_Window_Layout_Split, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 							<Grid Margin="4"
 								  IsEnabled="{Binding ElementName=SplitCheckBox, Path=IsChecked}">
 								<Grid.ColumnDefinitions>
@@ -379,7 +379,7 @@
 											 Margin="4,2" />
 					<metro2:CallMethodButton MethodTarget="{Binding}"
 											 MethodName="Cancel"
-											 Content="{Binding Resources.Common_Button_Cancel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+											 Content="{Binding Resources.Button_Cancel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 											 MinWidth="110"
 											 Padding="16,6"
 											 Margin="4,2" />

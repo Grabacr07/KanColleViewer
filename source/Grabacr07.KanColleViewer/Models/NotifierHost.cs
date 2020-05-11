@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -58,9 +58,14 @@ namespace Grabacr07.KanColleViewer.Models
 			this.notifier.Notify(notify);
 		}
 
-		public INotification CreateTest(string header = "テスト通知", string body = "これは「提督業も忙しい！」のテスト通知です。", Action activated = null, Action<Exception> failed = null)
+		public INotification CreateTest(Action activated = null, Action<Exception> failed = null)
 		{
-			return Notification.Create(Notification.Types.Test, header, body, activated ?? WindowService.Current.MainWindow.Activate, failed);
+			return Notification.Create(
+				Notification.Types.Test,
+				Resources.Debug_NotificationMessage_Title+"通知",
+				Resources.Debug_NotificationMessage,
+				activated ?? WindowService.Current.MainWindow.Activate,
+				failed);
 		}
 
 		#region Initialize() method parts
@@ -191,8 +196,8 @@ namespace Grabacr07.KanColleViewer.Models
 
 			var notification = Notification.Create(
 				Notification.Types.FleetRejuvenated,
-				"疲労回復完了",
-				$"「{args.FleetName}」に編成されている艦娘の疲労が回復しました。",
+				Resources.ReSortie_NotificationMessage_Title,
+				string.Format(Resources.ReSortie_NotificationMessage, args.FleetName),
 				() => WindowService.Current.MainWindow.Activate());
 
 			this.Notify(notification);

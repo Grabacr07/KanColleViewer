@@ -42,7 +42,7 @@
 			<Rectangle Height="1"
 					   Style="{DynamicResource SeparatorRectangleStyleKey}"
 					   Margin="0,0,0,12" />
-			<metro2:CallMethodButton Content="{Binding Resources.Common_Button_Close, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+			<metro2:CallMethodButton Content="{Binding Resources.Button_Close, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 MethodName="Close"
 									 IsCancel="True"
 									 MinWidth="110"

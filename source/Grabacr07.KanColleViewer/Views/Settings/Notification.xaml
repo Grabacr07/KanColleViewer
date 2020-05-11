@@ -21,7 +21,7 @@
 	</UserControl.Resources>
 
 	<StackPanel>
-		<TextBlock Text="{Binding Resources.Common_Notifications_Title, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+		<TextBlock Text="{Binding Resources.Settings_Notifications, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 		<StackPanel Margin="20,0,0,0">
@@ -47,7 +47,7 @@
 				<StackPanel Orientation="Horizontal"
 							VerticalAlignment="Center">
 					<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}">
-						<Run Text="{Binding Resources.Notification_ShorteningTime, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+						<Run Text="{Binding Resources.Settings_Notifications_ShorteningTime, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 						<Run Text=":" />
 					</TextBlock>
 					<metro:PromptTextBox Margin="4,0"
@@ -69,7 +69,7 @@
 
 				<Border Margin="8" />
 
-				<TextBlock Text="{Binding Resources.Notification_ShorteningTime_Description, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+				<TextBlock Text="{Binding Resources.Settings_Notifications_ShorteningTime_Description, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 						   Style="{DynamicResource DetailTextStyleKey}" />
 			</DockPanel>
 
@@ -82,16 +82,16 @@
 			<StackPanel Margin="20,0,0,0">
 				<Border Height="8" />
 				<TextBlock Foreground="{DynamicResource ActiveForegroundBrushKey}">
-					<Run Text="{Binding Resources.ReSortie_Condition, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+					<Run Text="{Binding Resources.Settings_Notifications_ReSortieCondition_Title, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 					<Run Text=":" />
 					<Run Text="{Binding Source={x:Static ms:KanColleSettings.ReSortieCondition}, Path=Value}" />
 				</TextBlock>
 				<Border Height="2" />
-				<TextBlock Text="{Binding Resources.ReSortie_Condition_Description1, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+				<TextBlock Text="{Binding Resources.Settings_Notifications_ReSortieCondition_Title_Description1, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 						   Style="{DynamicResource DetailTextStyleKey}"
 						   FontSize="10.5" />
 				<Border Height="8" />
-				<TextBlock Text="{Binding Resources.ReSortie_Condition_Description2, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+				<TextBlock Text="{Binding Resources.Settings_Notifications_ReSortieCondition_Title_Description2, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 						   Style="{DynamicResource DetailTextStyleKey}" />
 			</StackPanel>
 		</StackPanel>

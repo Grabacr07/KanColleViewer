@@ -63,7 +63,7 @@
 			<Rectangle Style="{DynamicResource SeparatorStyleKey}"
 					   Margin="0,0,0,12" />
 
-			<CheckBox Content="{Binding Resources.Settings_LocalProxy_IsEnabled, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+			<CheckBox Content="{Binding Resources.Settings_LocalProxy_CheckBox, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					  IsChecked="{Binding Source={x:Static settings:NetworkSettings+LocalProxy.IsEnabled}, Path=Value}" />
 			<StackPanel IsEnabled="{Binding Source={x:Static settings:NetworkSettings+LocalProxy.IsEnabled}, Path=Value}"
 						Margin="20,6,0,6">
@@ -96,7 +96,7 @@
 					<TextBlock Grid.Column="2"
 							   Style="{DynamicResource DetailTextStyleKey}"
 							   Margin="5">
-						<Run Text="{Binding Resources.Common_DefaultValue, Source={x:Static models:ResourceService.Current}, Mode=OneWay, StringFormat='(\{0\}:'}" />
+						<Run Text="{Binding Resources.Common_DefaultValue, Source={x:Static models:ResourceService.Current}, Mode=OneWay, StringFormat='({0}:'}" />
 						<Run Text="{Binding Source={x:Static settings:NetworkSettings+LocalProxy.Port}, Path=Default, Mode=OneWay}" />
 						<Run Text=")" />
 					</TextBlock>
@@ -111,13 +111,13 @@
 				   IsEnabled="{Binding IsEditable}"
 				   Margin="6,0,6,6">
 			<metro2:CallMethodButton DockPanel.Dock="Right"
-									 Content="{Binding Resources.Common_Button_Cancel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+									 Content="{Binding Resources.Button_Cancel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 MethodName="Cancel"
 									 MinWidth="110"
 									 Padding="30,6"
 									 Margin="6" />
 			<metro2:CallMethodButton DockPanel.Dock="Right"
-									 Content="{Binding Resources.Common_Button_Retry, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+									 Content="{Binding Resources.Button_Retry, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 MethodName="Retry"
 									 MinWidth="110"
 									 Padding="30,6"

@@ -39,11 +39,11 @@
 				</Style>
 			</StackPanel.Style>
 
-			<TextBlock Text="{Binding Resources.Plugin_Failed, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+			<TextBlock Text="{Binding Resources.Settings_Plugins_Failed, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 			<StackPanel Margin="20,0,0,0">
-				<TextBlock Text="{Binding Resources.Plugin_Failed_Description, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+				<TextBlock Text="{Binding Resources.Settings_Plugins_Failed_Description, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 						   Style="{DynamicResource DetailTextStyleKey}"
 						   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 
@@ -112,11 +112,11 @@
 			<Rectangle Style="{DynamicResource SeparatorStyleKey}" />
 		</StackPanel>
 
-		<TextBlock Text="{Binding Resources.Plugin_Loaded, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+		<TextBlock Text="{Binding Resources.Settings_Plugins_Loaded, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 				   Style="{DynamicResource SettingsHeaderTextStyleKey}" />
 
 		<StackPanel Margin="20,0,0,0">
-			<TextBlock Text="{Binding Resources.Plugin_Loaded_Description, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+			<TextBlock Text="{Binding Resources.Settings_Plugins_Loaded_Description, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 					   Style="{DynamicResource DetailTextStyleKey}"
 					   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
 

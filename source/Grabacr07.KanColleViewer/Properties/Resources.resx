@@ -119,18 +119,22 @@
   </resheader>
   <data name="Common_Implement_Oncoming" xml:space="preserve">
     <value>※近日実装予定</value>
+    <comment>NoLongerExist</comment>
   </data>
   <data name="Common_Notifications_Disable" xml:space="preserve">
     <value>通知しない</value>
+    <comment>NoLongerExist</comment>
   </data>
   <data name="Common_Notifications_NotImplemented" xml:space="preserve">
     <value>(未実装)</value>
+    <comment>NoLongerExist</comment>
   </data>
-  <data name="Common_Notifications_Title" xml:space="preserve">
+  <data name="Settings_Notifications" xml:space="preserve">
     <value>通知設定</value>
   </data>
   <data name="Common_Notifications_Windows8" xml:space="preserve">
     <value>(Windows 8 以降)</value>
+    <comment>NoLongerExist</comment>
   </data>
   <data name="Common_ShipGirl" xml:space="preserve">
     <value>艦娘</value>
@@ -139,7 +143,7 @@
     <value>Debug</value>
   </data>
   <data name="Debug_NotificationMessage" xml:space="preserve">
-    <value>これはテスト通知です。</value>
+    <value>これは「提督業も忙しい！」のテスト通知です。</value>
   </data>
   <data name="Debug_NotificationMessage_Title" xml:space="preserve">
     <value>テスト</value>
@@ -170,6 +174,7 @@
   </data>
   <data name="Dockyard_Notifications_Individual" xml:space="preserve">
     <value>ドックごとに個別に設定する</value>
+    <comment>NoLongerExist</comment>
   </data>
   <data name="Dockyard_ShipName" xml:space="preserve">
     <value>建造中の艦</value>
@@ -200,6 +205,7 @@
   </data>
   <data name="Expedition_Notifications_Individual" xml:space="preserve">
     <value>艦隊ごとに個別に設定する</value>
+    <comment>NoLongerExist</comment>
   </data>
   <data name="Expedition_TimeComplete" xml:space="preserve">
     <value>終了時刻</value>
@@ -228,38 +234,44 @@
   <data name="IntegratedView" xml:space="preserve">
     <value>総合</value>
   </data>
-  <data name="MessageBar_Expedition" xml:space="preserve">
-    <value>この艦隊は遠征中です。</value>
+  <data name="FleetWindow_Situation_Expedition" xml:space="preserve">
+    <value>艦隊は遠征中です</value>
   </data>
   <data name="MessageBar_Expedition_TimeCompletion" xml:space="preserve">
     <value> 完了時刻:</value>
+    <comment>NoLongerExist</comment>
   </data>
   <data name="MessageBar_Expedition_TimeRemaining" xml:space="preserve">
     <value> 帰投まで:</value>
+    <comment>NoLongerExist</comment>
   </data>
-  <data name="MessageBar_Repairing" xml:space="preserve">
-    <value>艦隊に入渠中の艦娘がいます。 完了時刻: {0:MM/dd HH\:mm} 完了まで: {1}:{2:mm\:ss}</value>
+  <data name="FleetWindow_Situation_Repairing" xml:space="preserve">
+    <value>艦隊に入渠中の艦娘がいます</value>
   </data>
-  <data name="MessageBar_Repairing_Null" xml:space="preserve">
-    <value>艦隊に入渠中の艦娘がいます。</value>
+  <data name="FleetWindow_Situation_NoRepairing" xml:space="preserve">
+    <value>艦隊の艦娘は入渠していません</value>
   </data>
-  <data name="MessageBar_ReSortie_BadCondition" xml:space="preserve">
-    <value>疲労中の艦娘</value>
+  <data name="Fleets_Condition_Rejuvenating" xml:space="preserve">
+    <value>疲労回復まで</value>
   </data>
   <data name="MessageBar_ReSortie_CanNotReSortie" xml:space="preserve">
     <value>艦隊に{0}がいます。</value>
+    <comment>NoLongerExist</comment>
   </data>
   <data name="MessageBar_ReSortie_CanReSortie" xml:space="preserve">
     <value>出撃可能！</value>
+    <comment>NoLongerExist</comment>
   </data>
-  <data name="MessageBar_ReSortie_LackForResources" xml:space="preserve">
-    <value>未補給の艦娘</value>
+  <data name="FleetWindow_Situation_InShortSupply" xml:space="preserve">
+    <value>艦隊に未補給の艦娘がいます</value>
   </data>
   <data name="MessageBar_ReSortie_Remaining" xml:space="preserve">
     <value>再出撃までの目安: </value>
+    <comment>NoLongerExist</comment>
   </data>
   <data name="MessageBar_ReSortie_Separator" xml:space="preserve">
     <value>・</value>
+    <comment>NoLongerExist</comment>
   </data>
   <data name="Quests" xml:space="preserve">
     <value>任務</value>
@@ -286,16 +298,17 @@
     <value>ロックされています</value>
   </data>
   <data name="Repairyard_NotificationMessage" xml:space="preserve">
-    <value>入渠第 {0} ドックでの「{1}」の整備が完了しました。</value>
+    <value>入渠第 {0} ドックでの「{1}」の修理が完了しました。</value>
   </data>
   <data name="Repairyard_NotificationMessage_Title" xml:space="preserve">
-    <value>整備完了</value>
+    <value>修理完了</value>
   </data>
   <data name="Repairyard_Notifications_Enable" xml:space="preserve">
     <value>入渠完了時に通知する</value>
   </data>
   <data name="Repairyard_Notifications_Individual" xml:space="preserve">
     <value>ドックごとに個別に設定する</value>
+    <comment>NoLongerExist</comment>
   </data>
   <data name="Repairyard_ShipName" xml:space="preserve">
     <value>入渠中の艦</value>
@@ -310,7 +323,7 @@
     <value>未使用</value>
   </data>
   <data name="ReSortie_NotificationMessage" xml:space="preserve">
-    <value>「{0}」の全艦娘の疲労が回復しました。</value>
+    <value>「{0}」に編成されている艦娘の疲労が回復しました。</value>
   </data>
   <data name="ReSortie_NotificationMessage_Title" xml:space="preserve">
     <value>疲労回復完了</value>
@@ -329,9 +342,11 @@
   </data>
   <data name="Settings_BrowserControl_ClearZoomFactorButton" xml:space="preserve">
     <value>ズーム倍率を 100 % に戻す</value>
+    <comment>NoLongerExist</comment>
   </data>
   <data name="Settings_BrowserControl_Display" xml:space="preserve">
     <value>(表示)</value>
+    <comment>NoLongerExist</comment>
   </data>
   <data name="Settings_BrowserControl_Notice" xml:space="preserve">
     <value>※ゲームのページから移動します。ご注意ください</value>
@@ -354,10 +369,10 @@
   <data name="Settings_Proxy" xml:space="preserve">
     <value>プロキシ設定</value>
   </data>
-  <data name="Settings_Proxy_Enable" xml:space="preserve">
+  <data name="Settings_Proxy_SpecificProxy" xml:space="preserve">
     <value>プロキシ サーバーを指定する</value>
   </data>
-  <data name="Settings_Proxy_Enable_ForAllProtocols" xml:space="preserve">
+  <data name="Settings_Proxy_SpecificProxy_ForAllProtocols" xml:space="preserve">
     <value>全てのプロトコルでこのプロキシ サーバーを使用する</value>
   </data>
   <data name="Settings_Proxy_Host" xml:space="preserve">
@@ -416,6 +431,7 @@
   </data>
   <data name="Fleets_Average" xml:space="preserve">
     <value>平均</value>
+    <comment>NoLongerExist</comment>
   </data>
   <data name="StatusBar_NotStarted" xml:space="preserve">
     <value>艦これの起動を待っています</value>
@@ -449,15 +465,17 @@
   </data>
   <data name="Settings_Logging" xml:space="preserve">
     <value>ログ</value>
+    <comment>NoLongerExist</comment>
   </data>
   <data name="Settings_Logging_Enable" xml:space="preserve">
     <value>ドロップ・建造・開発ログを記録する</value>
+    <comment>NoLongerExist</comment>
   </data>
   <data name="Fleets_ViewRange" xml:space="preserve">
     <value>索敵能力</value>
   </data>
-  <data name="MessageBar_ReSortie_Wounded" xml:space="preserve">
-    <value>中破以上の艦娘</value>
+  <data name="Fleets_Situation_HeavilyDamaged" xml:space="preserve">
+    <value>大破した艦娘がいます</value>
   </data>
   <data name="Fleets_ASW" xml:space="preserve">
     <value>対潜</value>
@@ -465,58 +483,59 @@
   <data name="Fleets_Karyoku" xml:space="preserve">
     <value>火力</value>
   </data>
-  <data name="Settings_Plugin" xml:space="preserve">
+  <data name="Settings_Plugins" xml:space="preserve">
     <value>プラグイン</value>
   </data>
   <data name="StartContent_ClearCacheCheckBox" xml:space="preserve">
     <value>次回起動時にキャッシュを削除する</value>
   </data>
-  <data name="Common_Button_Cancel" xml:space="preserve">
+  <data name="Button_Cancel" xml:space="preserve">
     <value>キャンセル</value>
   </data>
-  <data name="Settings_WindowLayout" xml:space="preserve">
+  <data name="Settings_Window_Layout" xml:space="preserve">
     <value>ウィンドウ レイアウト</value>
   </data>
-  <data name="Settings_WindowLayout_MultiWindow" xml:space="preserve">
+  <data name="Settings_Window_Layout_Split" xml:space="preserve">
     <value>マルチ ウィンドウ</value>
   </data>
-  <data name="Settings_WindowLayout_SingleWindow" xml:space="preserve">
+  <data name="Settings_Window_Layout_Merged" xml:space="preserve">
     <value>シングル ウィンドウ</value>
   </data>
-  <data name="Common_Button_Back" xml:space="preserve">
+  <data name="BrowserNavigator_BackButton_Tooltip" xml:space="preserve">
     <value>前のページに戻る</value>
   </data>
-  <data name="Common_Button_Forward" xml:space="preserve">
+  <data name="BrowserNavigator_ForwardButton_Tooltip" xml:space="preserve">
     <value>次のページに進む</value>
   </data>
-  <data name="Common_Button_Refresh" xml:space="preserve">
+  <data name="BrowserNavigator_RefreshButton_Tooltip" xml:space="preserve">
     <value>ページを更新する</value>
   </data>
-  <data name="Common_Button_Reset2Default" xml:space="preserve">
+  <data name="Button_Reset2Default" xml:space="preserve">
     <value>既定値に戻す</value>
   </data>
   <data name="Settings_Display_ExitConfirmation" xml:space="preserve">
     <value>アプリケーション終了時の確認動作</value>
   </data>
-  <data name="Settings_StyleSheets" xml:space="preserve">
+  <data name="Settings_Others_UserStyleSheet" xml:space="preserve">
     <value>ユーザー スタイル シート</value>
   </data>
-  <data name="Settings_Taskbar" xml:space="preserve">
+  <data name="Settings_Window_Taskbar" xml:space="preserve">
     <value>タスク バー設定</value>
   </data>
-  <data name="Settings_Taskbar_ProgressIndicator" xml:space="preserve">
+  <data name="Settings_Window_Taskbar_ProgressIndicator" xml:space="preserve">
     <value>インジケーターの動作</value>
   </data>
-  <data name="Tool" xml:space="preserve">
+  <data name="Tools" xml:space="preserve">
     <value>ツール</value>
   </data>
-  <data name="Common_Button_Close" xml:space="preserve">
+  <data name="Button_Close" xml:space="preserve">
     <value>閉じる</value>
   </data>
-  <data name="Common_NavigateCommand" xml:space="preserve">
+  <data name="BrowserNavigator_NavigationBar_Prompt" xml:space="preserve">
     <value>URL を入力し、Enter キーで移動します。</value>
+    <comment>@MutedRule(PunctuationTail)</comment>
   </data>
-  <data name="Common_Button_OK" xml:space="preserve">
+  <data name="Button_OK" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="ExitDialog_Description" xml:space="preserve">
@@ -525,22 +544,22 @@
   <data name="ExitDialog_Title" xml:space="preserve">
     <value>終了確認</value>
   </data>
-  <data name="Common_Confirmation_Always" xml:space="preserve">
+  <data name="ExitConfirmation_Always" xml:space="preserve">
     <value>常に確認する</value>
   </data>
-  <data name="Common_Confirmation_Disable" xml:space="preserve">
+  <data name="ExitConfirmation_Never" xml:space="preserve">
     <value>確認しない</value>
   </data>
-  <data name="Common_Confirmation_InSortie" xml:space="preserve">
+  <data name="ExitConfirmation_InSortieOnly" xml:space="preserve">
     <value>出撃中のみ確認する</value>
   </data>
-  <data name="Common_Needless" xml:space="preserve">
+  <data name="TaskBarProgress_DisplayName_NotUsed" xml:space="preserve">
     <value>使用しない</value>
   </data>
-  <data name="Settings_Proxy_Disable" xml:space="preserve">
+  <data name="Settings_Proxy_DirectAccess" xml:space="preserve">
     <value>プロキシ サーバーを使用しない</value>
   </data>
-  <data name="Settings_Proxy_Disable_Description" xml:space="preserve">
+  <data name="Settings_Proxy_DirectAccess_Description" xml:space="preserve">
     <value>全てのプロトコルでプロキシ サーバーを中継せずに直接サーバーと通信を行います。</value>
   </data>
   <data name="Common_DefaultValue" xml:space="preserve">
@@ -549,49 +568,49 @@
   <data name="Settings_LocalListeningPort" xml:space="preserve">
     <value>ローカル待ち受けポート設定</value>
   </data>
-  <data name="Settings_LocalProxy_IsEnabled" xml:space="preserve">
+  <data name="Settings_LocalProxy_CheckBox" xml:space="preserve">
     <value>待ち受けポートを変更する</value>
   </data>
   <data name="Settings_Operation_FleetsStatus" xml:space="preserve">
     <value>艦隊ステータス</value>
   </data>
-  <data name="Settings_Proxy_Enable_Description1" xml:space="preserve">
+  <data name="Settings_Proxy_SpecificProxy_Description1" xml:space="preserve">
     <value>指定したプロキシ サーバーを中継して通信を行います。</value>
   </data>
-  <data name="Settings_Proxy_Enable_Description2" xml:space="preserve">
+  <data name="Settings_Proxy_SpecificProxy_Description2" xml:space="preserve">
     <value>サーバーをホスト名で指定した場合、動作が遅くなることがあるため、IP アドレスでの指定を推奨します。</value>
   </data>
-  <data name="Settings_Proxy_IESettings" xml:space="preserve">
+  <data name="Settings_Proxy_SystemProxy" xml:space="preserve">
     <value>Internet Explorer のプロキシ設定を使用する</value>
   </data>
-  <data name="Settings_Proxy_IESettings_Description" xml:space="preserve">
+  <data name="Settings_Proxy_SystemProxy_Description" xml:space="preserve">
     <value>「インターネット オプション」の設定を用いて通信を行います。</value>
   </data>
   <data name="Settings_Proxy_Restart2Apply" xml:space="preserve">
     <value>※反映にはアプリケーションの再起動が必要です。</value>
   </data>
-  <data name="Common_Button_Retry" xml:space="preserve">
+  <data name="Button_Retry" xml:space="preserve">
     <value>再試行</value>
   </data>
-  <data name="Plugin_Failed" xml:space="preserve">
+  <data name="Settings_Plugins_Failed" xml:space="preserve">
     <value>読み込みに失敗したプラグイン</value>
   </data>
-  <data name="Plugin_Failed_Description" xml:space="preserve">
+  <data name="Settings_Plugins_Failed_Description" xml:space="preserve">
     <value>以下のプラグインは、読み込みに失敗し動作していません。発生したエラーの詳細を確認できます。</value>
   </data>
-  <data name="Plugin_Function_Request2Notify" xml:space="preserve">
+  <data name="PluginInfo_Functions_Request2Notify" xml:space="preserve">
     <value>プラグインからの通知</value>
   </data>
-  <data name="Plugin_Function_TaskbarIndicator" xml:space="preserve">
+  <data name="PluginInfo_Functions_TaskbarIndicator" xml:space="preserve">
     <value>タスク バー インジケーター</value>
   </data>
-  <data name="Plugin_Function_Tool" xml:space="preserve">
+  <data name="PluginInfo_Functions_Tool" xml:space="preserve">
     <value>ツール表示</value>
   </data>
-  <data name="Plugin_Loaded" xml:space="preserve">
+  <data name="Settings_Plugins_Loaded" xml:space="preserve">
     <value>読み込み済みのプラグイン</value>
   </data>
-  <data name="Plugin_Loaded_Description" xml:space="preserve">
+  <data name="Settings_Plugins_Loaded_Description" xml:space="preserve">
     <value>以下のプラグインが読み込まれています。各プラグインの設定を変更できます。</value>
   </data>
   <data name="ProxyBootstrapper_Set2Retry" xml:space="preserve">
@@ -600,10 +619,10 @@
   <data name="Common_NoResult" xml:space="preserve">
     <value>結果なし</value>
   </data>
-  <data name="Data" xml:space="preserve">
+  <data name="Common_Data" xml:space="preserve">
     <value>データ</value>
   </data>
-  <data name="SlotItemType_DamageControl" xml:space="preserve">
+  <data name="SlotItem_DamageControl" xml:space="preserve">
     <value>ダメコン</value>
   </data>
   <data name="Settings_Operation_FleetsAutoSelection_Changing" xml:space="preserve">
@@ -612,79 +631,146 @@
   <data name="Settings_Operation_FleetsAutoSelection_InSortie" xml:space="preserve">
     <value>艦隊が出撃したとき、その艦隊を自動的に選択する</value>
   </data>
-  <data name="Settings_Operation_RepairShipCheckBox" xml:space="preserve">
+  <data name="Settings_Operation_FleetsStatus_RepairShipCheckBox" xml:space="preserve">
     <value>旗艦に工作艦が編成されているときは出撃可能と判断しない</value>
   </data>
-  <data name="Settings_Operation_ReSortieCondition" xml:space="preserve">
+  <data name="Settings_Operation_FleetsStatus_ReSortieCondition" xml:space="preserve">
     <value>艦隊内の全艦のコンディションが次の数値以上になったとき、出撃可能と判断する</value>
   </data>
-  <data name="Settings_Operation_ReSortieCondition_Description" xml:space="preserve">
+  <data name="Settings_Operation_FleetsStatus_ReSortieCondition_Description" xml:space="preserve">
     <value>※通常は、間宮アイコンが消灯する 40 か、自然回復上限の 49 に設定します。</value>
   </data>
   <data name="Settings_Operation_ViewRange_CombinedEnable" xml:space="preserve">
     <value>連合艦隊時、以下の艦隊を索敵値計算の対象として使用する</value>
   </data>
-  <data name="Settings_Operation_ViewRange_Selection" xml:space="preserve">
+  <data name="Settings_Operation_ViewRange_Title" xml:space="preserve">
     <value>艦隊の索敵値の算出に使用する計算式は、以下を使用する</value>
   </data>
-  <data name="Notification_ShorteningTime" xml:space="preserve">
+  <data name="Settings_Notifications_ShorteningTime" xml:space="preserve">
     <value>通知を早める</value>
   </data>
-  <data name="Notification_ShorteningTime_Description" xml:space="preserve">
+  <data name="Settings_Notifications_ShorteningTime_Description" xml:space="preserve">
     <value>艦これ本体の仕様により、最大 1 分間短縮できます。サーバー時刻とのずれを加味し、40 ～ 50 秒に設定することを推奨します。</value>
   </data>
   <data name="ReSortie_Notifications_Enable" xml:space="preserve">
     <value>艦隊に編成されている艦娘の疲労が回復したら通知する</value>
   </data>
-  <data name="ReSortie_Condition" xml:space="preserve">
+  <data name="Settings_Notifications_ReSortieCondition_Title" xml:space="preserve">
     <value>再出撃可能とするコンディション値</value>
   </data>
-  <data name="ReSortie_Condition_Description2" xml:space="preserve">
+  <data name="Settings_Notifications_ReSortieCondition_Title_Description2" xml:space="preserve">
     <value>艦隊に編成されているすべて艦娘のコンディション値が上記の値以上になったときに通知されます。コンディション値は 3 分間で 3 ずつ回復しますが、KanColleViewer 実装の仕様により、通知タイミングは数秒 ～ 最大 3 分程度遅れる可能性があること予めご了承ください。</value>
   </data>
-  <data name="ReSortie_Condition_Description1" xml:space="preserve">
+  <data name="Settings_Notifications_ReSortieCondition_Title_Description1" xml:space="preserve">
     <value>※[動作設定] &gt; [艦隊ステータス] から設定できます。</value>
   </data>
-  <data name="ShipCataWin_FilterSettings" xml:space="preserve">
+  <data name="ShipCatalogWindow_FilterSettings" xml:space="preserve">
     <value>フィルター設定</value>
   </data>
   <data name="Common_SelectAll" xml:space="preserve">
     <value>すべて選択</value>
   </data>
-  <data name="Common_AllShips" xml:space="preserve">
+  <data name="ShipCatalogWindow_FilterSettings_AllShips" xml:space="preserve">
     <value>すべて</value>
   </data>
-  <data name="ShipCataWin_Lock" xml:space="preserve">
+  <data name="ShipCatalogWindow_FilterSettings_IsLocked" xml:space="preserve">
     <value>ロック</value>
   </data>
-  <data name="ShipCataWin_Lock_Locked" xml:space="preserve">
+  <data name="ShipCatalogWindow_FilterSettings_Locked" xml:space="preserve">
     <value>ロックしている</value>
   </data>
-  <data name="ShipCataWin_Lock_Unlocked" xml:space="preserve">
+  <data name="ShipCatalogWindow_FilterSettings_Unlocked" xml:space="preserve">
     <value>ロックしていない</value>
   </data>
-  <data name="ShipCataWin_WithoutExped" xml:space="preserve">
+  <data name="ShipCatalogWindow_FilterSettings_WithoutExpedition" xml:space="preserve">
     <value>遠征中の艦を除外する</value>
   </data>
-  <data name="ShipCataWin_Damaged" xml:space="preserve">
+  <data name="ShipCatalogWindow_FilterSettings_Damaged" xml:space="preserve">
     <value>損傷あり</value>
   </data>
-  <data name="ShipCataWin_Undamaged" xml:space="preserve">
+  <data name="ShipCatalogWindow_FilterSettings_Undamaged" xml:space="preserve">
     <value>損傷なし</value>
   </data>
-  <data name="ShipCataWin_SortSettings" xml:space="preserve">
+  <data name="ShipCatalogWindow_SortSettings" xml:space="preserve">
     <value>並べ替え設定</value>
   </data>
-  <data name="ShipCataWin_SortSettings_Description" xml:space="preserve">
+  <data name="ShipCatalogWindow_SortSettings_Description" xml:space="preserve">
     <value>艦娘を以下の順序で並べ替えます。</value>
   </data>
-  <data name="Common_Button_Clear" xml:space="preserve">
+  <data name="Button_Clear" xml:space="preserve">
     <value>クリア</value>
   </data>
   <data name="Common_Null" xml:space="preserve">
     <value>なし</value>
+    <comment>NotImplemented</comment>
   </data>
   <data name="Fleets_ExpForNextLevel" xml:space="preserve">
     <value>次のレベルまでの経験値</value>
+    <comment>NotImplemented</comment>
+  </data>
+  <data name="ShipCatalogWindow_ColumnHeader_Tooltip" xml:space="preserve">
+    <value>装備によるステータス上昇を含んだ値です</value>
+  </data>
+  <data name="Button_Update" xml:space="preserve">
+    <value>表示の更新</value>
+  </data>
+  <data name="SlotItemCatalogWindow_ColumnHeaderEquippedShips" xml:space="preserve">
+    <value>装備している艦娘</value>
+  </data>
+  <data name="SlotItemCatalogWindow_ColumnHeaderRemainder" xml:space="preserve">
+    <value>余り</value>
+  </data>
+  <data name="CatalogWindow_GeneratingList" xml:space="preserve">
+    <value>一覧を生成しています...</value>
+    
+    <comment>@MutedRule(PunctuationTail)</comment>
+  </data>
+  <data name="FleetWindow_Situation_NotInSortie" xml:space="preserve">
+    <value>艦隊は出撃していません</value>
+  </data>
+  <data name="Fleets_Situation_InSortie" xml:space="preserve">
+    <value>艦隊は出撃中です！</value>
+  </data>
+  <data name="FleetWindow_Situation_NotReSortie" xml:space="preserve">
+    <value>艦隊の出撃準備は完了していません</value>
+  </data>
+  <data name="FleetWindow_Situation_NoExpedition" xml:space="preserve">
+    <value>艦隊は遠征中ではありません</value>
+  </data>
+  <data name="FleetWindow_Situation_InCombined" xml:space="preserve">
+    <value>連合艦隊は遠征に参加できません</value>
+  </data>
+  <data name="FleetWindow_Situation_NoHeavilyDamaged" xml:space="preserve">
+    <value>艦隊の艦娘に大きなダメージはありません</value>
+  </data>
+  <data name="FleetWindow_Situation_SupplyAlready" xml:space="preserve">
+    <value>艦隊は補給済みです</value>
+  </data>
+  <data name="FleetWindow_Situation_RemainingNull" xml:space="preserve">
+    <value>艦隊の艦娘は疲労していません</value>
+  </data>
+  <data name="FleetWindow_Situation_FlagshipIsNotRepairShip" xml:space="preserve">
+    <value>艦隊編成は正常です</value>
+  </data>
+  <data name="FleetWindow_Situation_FlagshipIsRepairShip" xml:space="preserve">
+    <value>工作艦が旗艦として編成されています</value>
+  </data>
+  <data name="StateDetail_Condition_Rejuvenated" xml:space="preserve">
+    <value>疲労回復済み</value>
+  </data>
+  <data name="StateDetail_FleetSituation_Empty" xml:space="preserve">
+    <value>艦隊に艦娘が編成されていません。</value>
+  </data>
+  <data name="Settings_Proxy_Enable_4_SSL" xml:space="preserve">
+    <value></value>
+    <comment>NoLongerExist</comment>
+  </data>
+  <data name="StartContent_ClearCacheButton" xml:space="preserve">
+    <value></value>
+    <comment>NoLongerExist</comment>
+  </data>
+  <data name="StartContent_ClearCacheButtonMessage" xml:space="preserve">
+    <value></value>
+    <comment>NoLongerExist</comment>
   </data>
 </root>

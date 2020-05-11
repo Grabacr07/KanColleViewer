@@ -70,12 +70,12 @@ namespace Grabacr07.KanColleViewer.ViewModels.Settings
 		{
 			this.ExitConfirmationTypes = new List<DisplayViewModel<ExitConfirmationType>>
 			{
-				DisplayViewModel.Create(ExitConfirmationType.None, Properties.Resources.Common_Confirmation_Disable),
-				DisplayViewModel.Create(ExitConfirmationType.InSortieOnly, Properties.Resources.Common_Confirmation_InSortie),
-				DisplayViewModel.Create(ExitConfirmationType.Always, Properties.Resources.Common_Confirmation_Always),
+				DisplayViewModel.Create(ExitConfirmationType.None, Properties.Resources.ExitConfirmation_Never),
+				DisplayViewModel.Create(ExitConfirmationType.InSortieOnly, Properties.Resources.ExitConfirmation_InSortieOnly),
+				DisplayViewModel.Create(ExitConfirmationType.Always, Properties.Resources.ExitConfirmation_Always),
 			};
 			this.TaskbarProgressFeatures = EnumerableEx
-				.Return(GeneralSettings.TaskbarProgressSource.ToDefaultDisplay(Properties.Resources.Common_Needless))
+				.Return(GeneralSettings.TaskbarProgressSource.ToDefaultDisplay(Properties.Resources.TaskBarProgress_DisplayName_NotUsed))
 				.Concat(TaskbarProgress.Features.ToDisplay(x => x.Id, x => x.DisplayName))
 				.ToList();
 		}

@@ -63,13 +63,13 @@
 		<WrapPanel Grid.Row="1"
 				   HorizontalAlignment="Right"
 				   Margin="6,-6,6,6">
-			<metro2:CallMethodButton Content="{Binding Resources.Common_Button_OK, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+			<metro2:CallMethodButton Content="{Binding Resources.Button_OK, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 MethodName="OK"
 									 IsDefault="True"
 									 MinWidth="110"
 									 Padding="30,6"
 									 Margin="6" />
-			<metro2:CallMethodButton Content="{Binding Resources.Common_Button_Cancel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
+			<metro2:CallMethodButton Content="{Binding Resources.Button_Cancel, Source={x:Static models:ResourceService.Current}, Mode=OneWay}"
 									 MethodName="Cancel"
 									 IsCancel="True"
 									 MinWidth="110"

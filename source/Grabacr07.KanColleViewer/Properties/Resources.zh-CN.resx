@@ -126,7 +126,7 @@
   <data name="Common_Notifications_NotImplemented" xml:space="preserve">
     <value>(未实现)</value>
   </data>
-  <data name="Common_Notifications_Title" xml:space="preserve">
+  <data name="Settings_Notifications" xml:space="preserve">
     <value>通知设置</value>
   </data>
   <data name="Common_Notifications_Windows8" xml:space="preserve">
@@ -139,7 +139,7 @@
     <value>Debug</value>
   </data>
   <data name="Debug_NotificationMessage" xml:space="preserve">
-    <value>此为测试通知。</value>
+    <value>此为「提督業も忙しい！」测试通知。</value>
   </data>
   <data name="Debug_NotificationMessage_Title" xml:space="preserve">
     <value>测试</value>
@@ -166,7 +166,7 @@
     <value>建造完毕</value>
   </data>
   <data name="Dockyard_Notifications_Enable" xml:space="preserve">
-    <value>建造完成时通知</value>
+    <value>建造完毕时通知</value>
   </data>
   <data name="Dockyard_Notifications_Individual" xml:space="preserve">
     <value>仅通知指定的建造坞</value>
@@ -228,8 +228,8 @@
   <data name="IntegratedView" xml:space="preserve">
     <value>概览</value>
   </data>
-  <data name="MessageBar_Expedition" xml:space="preserve">
-    <value>この艦隊は遠征中です。</value>
+  <data name="FleetWindow_Situation_Expedition" xml:space="preserve">
+    <value>远征中</value>
   </data>
   <data name="MessageBar_Expedition_TimeCompletion" xml:space="preserve">
     <value> 完了時刻:</value>
@@ -237,14 +237,11 @@
   <data name="MessageBar_Expedition_TimeRemaining" xml:space="preserve">
     <value> 帰投まで:</value>
   </data>
-  <data name="MessageBar_Repairing" xml:space="preserve">
-    <value>艦隊に入渠中の艦娘がいます。 完了時刻: {0:MM/dd HH\:mm} 完了まで: {1}:{2:mm\:ss}</value>
+  <data name="FleetWindow_Situation_Repairing" xml:space="preserve">
+    <value>存在入渠修理的舰娘</value>
   </data>
-  <data name="MessageBar_Repairing_Null" xml:space="preserve">
-    <value>艦隊に入渠中の艦娘がいます。</value>
-  </data>
-  <data name="MessageBar_ReSortie_BadCondition" xml:space="preserve">
-    <value>疲労中の艦娘</value>
+  <data name="FleetWindow_Situation_NoRepairing" xml:space="preserve">
+    <value>没有舰娘正在入渠修理</value>
   </data>
   <data name="MessageBar_ReSortie_CanNotReSortie" xml:space="preserve">
     <value>艦隊に{0}がいます。</value>
@@ -252,8 +249,8 @@
   <data name="MessageBar_ReSortie_CanReSortie" xml:space="preserve">
     <value>出撃可能！</value>
   </data>
-  <data name="MessageBar_ReSortie_LackForResources" xml:space="preserve">
-    <value>未補給の艦娘</value>
+  <data name="FleetWindow_Situation_InShortSupply" xml:space="preserve">
+    <value>存在未完成补给的舰娘</value>
   </data>
   <data name="MessageBar_ReSortie_Remaining" xml:space="preserve">
     <value>再出撃までの目安: </value>
@@ -261,8 +258,8 @@
   <data name="MessageBar_ReSortie_Separator" xml:space="preserve">
     <value>・</value>
   </data>
-  <data name="MessageBar_ReSortie_Wounded" xml:space="preserve">
-    <value>中破以上の艦娘</value>
+  <data name="Fleets_Situation_HeavilyDamaged" xml:space="preserve">
+    <value>存在大破的舰娘</value>
   </data>
   <data name="Quests" xml:space="preserve">
     <value>任务</value>
@@ -289,13 +286,13 @@
     <value>该船坞被锁定</value>
   </data>
   <data name="Repairyard_NotificationMessage" xml:space="preserve">
-    <value>修理渠的第 {0} 修理坞的「{1}」整备完毕。</value>
+    <value>修理渠的第 {0} 船坞的「{1}」修理完毕。</value>
   </data>
   <data name="Repairyard_NotificationMessage_Title" xml:space="preserve">
-    <value>整备完毕</value>
+    <value>修理完毕</value>
   </data>
   <data name="Repairyard_Notifications_Enable" xml:space="preserve">
-    <value>修理完成时通知</value>
+    <value>修理完毕时通知</value>
   </data>
   <data name="Repairyard_Notifications_Individual" xml:space="preserve">
     <value>仅通知指定的船坞</value>
@@ -357,10 +354,10 @@
   <data name="Settings_Proxy" xml:space="preserve">
     <value>代理设置</value>
   </data>
-  <data name="Settings_Proxy_Enable" xml:space="preserve">
+  <data name="Settings_Proxy_SpecificProxy" xml:space="preserve">
     <value>指定代理服务器</value>
   </data>
-  <data name="Settings_Proxy_Enable_ForAllProtocols" xml:space="preserve">
+  <data name="Settings_Proxy_SpecificProxy_ForAllProtocols" xml:space="preserve">
     <value>将此代理应用于所有协议</value>
   </data>
   <data name="Settings_Proxy_Host" xml:space="preserve">
@@ -441,55 +438,52 @@
   <data name="StartContent_ClearCacheCheckBox" xml:space="preserve">
     <value>下次启动时清理缓存</value>
   </data>
-  <data name="Settings_Plugin" xml:space="preserve">
+  <data name="Settings_Plugins" xml:space="preserve">
     <value>插件</value>
   </data>
-  <data name="Common_Button_Cancel" xml:space="preserve">
+  <data name="Button_Cancel" xml:space="preserve">
     <value>取消</value>
   </data>
-  <data name="Settings_WindowLayout" xml:space="preserve">
+  <data name="Settings_Window_Layout" xml:space="preserve">
     <value>窗口布局</value>
   </data>
-  <data name="Settings_WindowLayout_MultiWindow" xml:space="preserve">
-    <value>多窗口显示</value>
+  <data name="Settings_Window_Layout_Split" xml:space="preserve">
+    <value>拆分显示</value>
   </data>
-  <data name="Settings_WindowLayout_SingleWindow" xml:space="preserve">
-    <value>单一窗口显示</value>
-  </data>
-  <data name="Common_Button_Back" xml:space="preserve">
+  <data name="BrowserNavigator_BackButton_Tooltip" xml:space="preserve">
     <value>后退</value>
   </data>
-  <data name="Common_Button_Forward" xml:space="preserve">
+  <data name="BrowserNavigator_ForwardButton_Tooltip" xml:space="preserve">
     <value>前进</value>
   </data>
-  <data name="Common_Button_Refresh" xml:space="preserve">
+  <data name="BrowserNavigator_RefreshButton_Tooltip" xml:space="preserve">
     <value>刷新</value>
   </data>
-  <data name="Common_Button_Reset2Default" xml:space="preserve">
+  <data name="Button_Reset2Default" xml:space="preserve">
     <value>重置为默认值</value>
   </data>
   <data name="Settings_Display_ExitConfirmation" xml:space="preserve">
     <value>关闭时的确认操作</value>
   </data>
-  <data name="Settings_StyleSheets" xml:space="preserve">
+  <data name="Settings_Others_UserStyleSheet" xml:space="preserve">
     <value>样式表编辑</value>
   </data>
-  <data name="Settings_Taskbar" xml:space="preserve">
+  <data name="Settings_Window_Taskbar" xml:space="preserve">
     <value>任务栏设置</value>
   </data>
-  <data name="Settings_Taskbar_ProgressIndicator" xml:space="preserve">
+  <data name="Settings_Window_Taskbar_ProgressIndicator" xml:space="preserve">
     <value>进度指示器行为设置</value>
   </data>
-  <data name="Tool" xml:space="preserve">
+  <data name="Tools" xml:space="preserve">
     <value>工具</value>
   </data>
-  <data name="Common_Button_Close" xml:space="preserve">
+  <data name="Button_Close" xml:space="preserve">
     <value>关闭</value>
   </data>
-  <data name="Common_NavigateCommand" xml:space="preserve">
+  <data name="BrowserNavigator_NavigationBar_Prompt" xml:space="preserve">
     <value>请输入网址</value>
   </data>
-  <data name="Common_Button_OK" xml:space="preserve">
+  <data name="Button_OK" xml:space="preserve">
     <value>确认</value>
   </data>
   <data name="ExitDialog_Description" xml:space="preserve">
@@ -498,43 +492,43 @@
   <data name="ExitDialog_Title" xml:space="preserve">
     <value>退出确认</value>
   </data>
-  <data name="Common_Button_Retry" xml:space="preserve">
+  <data name="Button_Retry" xml:space="preserve">
     <value>重试</value>
   </data>
-  <data name="Common_Confirmation_Always" xml:space="preserve">
+  <data name="ExitConfirmation_Always" xml:space="preserve">
     <value>总是确认</value>
   </data>
-  <data name="Common_Confirmation_Disable" xml:space="preserve">
+  <data name="ExitConfirmation_Never" xml:space="preserve">
     <value>从不确认</value>
   </data>
-  <data name="Common_Confirmation_InSortie" xml:space="preserve">
-    <value>仅出撃中确认</value>
+  <data name="ExitConfirmation_InSortieOnly" xml:space="preserve">
+    <value>仅出击中确认</value>
   </data>
   <data name="Common_DefaultValue" xml:space="preserve">
     <value>默认值</value>
   </data>
-  <data name="Common_Needless" xml:space="preserve">
+  <data name="TaskBarProgress_DisplayName_NotUsed" xml:space="preserve">
     <value>不使用</value>
   </data>
-  <data name="Plugin_Failed" xml:space="preserve">
+  <data name="Settings_Plugins_Failed" xml:space="preserve">
     <value>加载失败的插件</value>
   </data>
-  <data name="Plugin_Failed_Description" xml:space="preserve">
+  <data name="Settings_Plugins_Failed_Description" xml:space="preserve">
     <value>下列插件加载失败，无法正常运行。请确认相关错误的详细信息。</value>
   </data>
-  <data name="Plugin_Function_Request2Notify" xml:space="preserve">
+  <data name="PluginInfo_Functions_Request2Notify" xml:space="preserve">
     <value>通知推送</value>
   </data>
-  <data name="Plugin_Function_TaskbarIndicator" xml:space="preserve">
+  <data name="PluginInfo_Functions_TaskbarIndicator" xml:space="preserve">
     <value>任务栏指示器</value>
   </data>
-  <data name="Plugin_Function_Tool" xml:space="preserve">
+  <data name="PluginInfo_Functions_Tool" xml:space="preserve">
     <value>在[工具]中显示</value>
   </data>
-  <data name="Plugin_Loaded" xml:space="preserve">
+  <data name="Settings_Plugins_Loaded" xml:space="preserve">
     <value>已加载的插件</value>
   </data>
-  <data name="Plugin_Loaded_Description" xml:space="preserve">
+  <data name="Settings_Plugins_Loaded_Description" xml:space="preserve">
     <value>下列插件已加载。可在此对更改各插件的设置。</value>
   </data>
   <data name="ProxyBootstrapper_Set2Retry" xml:space="preserve">
@@ -543,115 +537,115 @@
   <data name="Settings_LocalListeningPort" xml:space="preserve">
     <value>本地监听端口设置</value>
   </data>
-  <data name="Settings_LocalProxy_IsEnabled" xml:space="preserve">
+  <data name="Settings_LocalProxy_CheckBox" xml:space="preserve">
     <value>修改监听端口号</value>
   </data>
   <data name="Settings_Operation_FleetsStatus" xml:space="preserve">
     <value>舰队状态</value>
   </data>
-  <data name="Settings_Proxy_Disable" xml:space="preserve">
+  <data name="Settings_Proxy_DirectAccess" xml:space="preserve">
     <value>不使用代理服务器</value>
   </data>
-  <data name="Settings_Proxy_Disable_Description" xml:space="preserve">
+  <data name="Settings_Proxy_DirectAccess_Description" xml:space="preserve">
     <value>所有协议直接与服务器通信，不通过代理服务器中继。</value>
   </data>
-  <data name="Settings_Proxy_Enable_Description1" xml:space="preserve">
+  <data name="Settings_Proxy_SpecificProxy_Description1" xml:space="preserve">
     <value>由代理服务器中继进行通信。</value>
   </data>
-  <data name="Settings_Proxy_Enable_Description2" xml:space="preserve">
-    <value>建议通过IP地址指定代理，由主机名指定可能存在响应缓慢等问题。</value>
+  <data name="Settings_Proxy_SpecificProxy_Description2" xml:space="preserve">
+    <value>建议通过IP地址指定代理，由主机名指定可能存在解析缓慢等问题。</value>
   </data>
-  <data name="Settings_Proxy_IESettings" xml:space="preserve">
+  <data name="Settings_Proxy_SystemProxy" xml:space="preserve">
     <value>使用Internet Explorer代理设置</value>
   </data>
-  <data name="Settings_Proxy_IESettings_Description" xml:space="preserve">
+  <data name="Settings_Proxy_SystemProxy_Description" xml:space="preserve">
     <value>使用「Internet选项」设置进行通信。</value>
   </data>
   <data name="Settings_Proxy_Restart2Apply" xml:space="preserve">
     <value>※重启程序以使设置生效。</value>
   </data>
   <data name="Common_NoResult" xml:space="preserve">
-    <value>无结果</value>
+    <value>尚无结果</value>
   </data>
-  <data name="Data" xml:space="preserve">
+  <data name="Common_Data" xml:space="preserve">
     <value>Data</value>
   </data>
-  <data name="SlotItemType_DamageControl" xml:space="preserve">
+  <data name="SlotItem_DamageControl" xml:space="preserve">
     <value>応急修理</value>
   </data>
   <data name="Settings_Operation_FleetsAutoSelection_Changing" xml:space="preserve">
     <value>更改舰队编成时，自动切换至该舰队</value>
   </data>
   <data name="Settings_Operation_FleetsAutoSelection_InSortie" xml:space="preserve">
-    <value>出撃时，自动切换至该舰队</value>
+    <value>出击时，自动切换至该舰队</value>
   </data>
-  <data name="Settings_Operation_RepairShipCheckBox" xml:space="preserve">
+  <data name="Settings_Operation_FleetsStatus_RepairShipCheckBox" xml:space="preserve">
     <value>当旗舰为工作艦时，判定该舰队不可出撃</value>
   </data>
-  <data name="Settings_Operation_ReSortieCondition" xml:space="preserve">
-    <value>当同一舰队中全舰的condition值大于等于如下所示值时，判定该舰队可出撃</value>
+  <data name="Settings_Operation_FleetsStatus_ReSortieCondition" xml:space="preserve">
+    <value>当同一舰队中全舰的condition值不小于如下设定值时，判定该舰队可出击</value>
   </data>
-  <data name="Settings_Operation_ReSortieCondition_Description" xml:space="preserve">
+  <data name="Settings_Operation_FleetsStatus_ReSortieCondition_Description" xml:space="preserve">
     <value>※通常设定为「給」按钮常亮值40或自然恢复上限值49。</value>
   </data>
   <data name="Settings_Operation_ViewRange_CombinedEnable" xml:space="preserve">
-    <value>组成連合艦隊时，索敵值由以下舰队的索敵值表征</value>
+    <value>组成联合舰队时，索敵值由以下舰队的索敵值表征</value>
   </data>
-  <data name="Settings_Operation_ViewRange_Selection" xml:space="preserve">
+  <data name="Settings_Operation_ViewRange_Title" xml:space="preserve">
     <value>使用以下公式计算舰队的索敵值</value>
   </data>
-  <data name="Notification_ShorteningTime" xml:space="preserve">
+  <data name="Settings_Notifications_ShorteningTime" xml:space="preserve">
     <value>通知时间提前</value>
   </data>
-  <data name="Notification_ShorteningTime_Description" xml:space="preserve">
+  <data name="Settings_Notifications_ShorteningTime_Description" xml:space="preserve">
     <value>基于艦これ的机制，最多可以缩短1分钟的时间。考虑到与服务器间存在的时间差异，建议设定在40~50秒左右。</value>
   </data>
   <data name="ReSortie_Notifications_Enable" xml:space="preserve">
     <value>疲劳恢复完毕时通知</value>
   </data>
-  <data name="ReSortie_Condition" xml:space="preserve">
-    <value>判定舰队可出撃的condition值</value>
+  <data name="Settings_Notifications_ReSortieCondition_Title" xml:space="preserve">
+    <value>判定舰队可出击的condition值</value>
   </data>
-  <data name="ReSortie_Condition_Description2" xml:space="preserve">
-    <value>当同一舰队中全舰的condition值大于等于上述值时进行通知。condition值每3分钟恢复3点，另外由于KanColleViewer实现机制的关系，通知时间与实际情况相比可能会有至多3分钟的延迟。</value>
+  <data name="Settings_Notifications_ReSortieCondition_Title_Description2" xml:space="preserve">
+    <value>当同一舰队中全舰的condition值不小于上述值时进行通知。Condition值每3分钟恢复3点，另外由于KanColleViewer实现机制的关系，通知时间与实际情况相比可能会有至多3分钟的延迟。</value>
   </data>
-  <data name="ReSortie_Condition_Description1" xml:space="preserve">
+  <data name="Settings_Notifications_ReSortieCondition_Title_Description1" xml:space="preserve">
     <value>※可在[行为设置] &gt; [舰队状态] 中进行更改。</value>
   </data>
-  <data name="ShipCataWin_FilterSettings" xml:space="preserve">
+  <data name="ShipCatalogWindow_FilterSettings" xml:space="preserve">
     <value>筛选</value>
   </data>
   <data name="Common_SelectAll" xml:space="preserve">
     <value>全选</value>
   </data>
-  <data name="Common_AllShips" xml:space="preserve">
+  <data name="ShipCatalogWindow_FilterSettings_AllShips" xml:space="preserve">
     <value>所有舰娘</value>
   </data>
-  <data name="ShipCataWin_Lock" xml:space="preserve">
+  <data name="ShipCatalogWindow_FilterSettings_IsLocked" xml:space="preserve">
     <value>锁定状态</value>
   </data>
-  <data name="ShipCataWin_Lock_Locked" xml:space="preserve">
+  <data name="ShipCatalogWindow_FilterSettings_Locked" xml:space="preserve">
     <value>已锁定</value>
   </data>
-  <data name="ShipCataWin_Lock_Unlocked" xml:space="preserve">
+  <data name="ShipCatalogWindow_FilterSettings_Unlocked" xml:space="preserve">
     <value>未锁定</value>
   </data>
-  <data name="ShipCataWin_WithoutExped" xml:space="preserve">
+  <data name="ShipCatalogWindow_FilterSettings_WithoutExpedition" xml:space="preserve">
     <value>远征中的舰娘除外</value>
   </data>
-  <data name="ShipCataWin_Damaged" xml:space="preserve">
+  <data name="ShipCatalogWindow_FilterSettings_Damaged" xml:space="preserve">
     <value>未满血</value>
   </data>
-  <data name="ShipCataWin_Undamaged" xml:space="preserve">
+  <data name="ShipCatalogWindow_FilterSettings_Undamaged" xml:space="preserve">
     <value>满血</value>
   </data>
-  <data name="ShipCataWin_SortSettings" xml:space="preserve">
+  <data name="ShipCatalogWindow_SortSettings" xml:space="preserve">
     <value>排序规则</value>
   </data>
-  <data name="ShipCataWin_SortSettings_Description" xml:space="preserve">
+  <data name="ShipCatalogWindow_SortSettings_Description" xml:space="preserve">
     <value>按以下规则对舰娘进行排序。</value>
   </data>
-  <data name="Common_Button_Clear" xml:space="preserve">
+  <data name="Button_Clear" xml:space="preserve">
     <value>清除</value>
   </data>
   <data name="Common_Null" xml:space="preserve">
@@ -659,5 +653,62 @@
   </data>
   <data name="Fleets_ExpForNextLevel" xml:space="preserve">
     <value>升至下一级所需经验值</value>
+  </data>
+  <data name="ShipCatalogWindow_ColumnHeader_Tooltip" xml:space="preserve">
+    <value>包含了携带装备引起的属性值改变</value>
+  </data>
+  <data name="Button_Update" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="SlotItemCatalogWindow_ColumnHeaderEquippedShips" xml:space="preserve">
+    <value>携带该装备的舰娘</value>
+  </data>
+  <data name="SlotItemCatalogWindow_ColumnHeaderRemainder" xml:space="preserve">
+    <value>未装备</value>
+  </data>
+  <data name="CatalogWindow_GeneratingList" xml:space="preserve">
+    <value>生成中…</value>
+  </data>
+  <data name="FleetWindow_Situation_NotInSortie" xml:space="preserve">
+    <value>舰队未出击</value>
+  </data>
+  <data name="Fleets_Situation_InSortie" xml:space="preserve">
+    <value>舰队出击中！</value>
+  </data>
+  <data name="FleetWindow_Situation_NotReSortie" xml:space="preserve">
+    <value>还没准备好出击</value>
+  </data>
+  <data name="FleetWindow_Situation_NoExpedition" xml:space="preserve">
+    <value>未在远征中</value>
+  </data>
+  <data name="FleetWindow_Situation_InCombined" xml:space="preserve">
+    <value>在联合舰队编制中，无法远征</value>
+  </data>
+  <data name="FleetWindow_Situation_NoHeavilyDamaged" xml:space="preserve">
+    <value>没有大破的舰娘</value>
+  </data>
+  <data name="FleetWindow_Situation_SupplyAlready" xml:space="preserve">
+    <value>已完成补给</value>
+  </data>
+  <data name="FleetWindow_Situation_RemainingNull" xml:space="preserve">
+    <value>没有处于疲劳状态的舰娘</value>
+  </data>
+  <data name="Fleets_Condition_Rejuvenating" xml:space="preserve">
+    <value>疲劳恢复中</value>
+  </data>
+  <data name="FleetWindow_Situation_FlagshipIsNotRepairShip" xml:space="preserve">
+    <value>旗舰非工作艦</value>
+  </data>
+  <data name="FleetWindow_Situation_FlagshipIsRepairShip" xml:space="preserve">
+    <value>旗舰为工作艦</value>
+  </data>
+  <data name="StateDetail_Condition_Rejuvenated" xml:space="preserve">
+    <value>疲劳已恢复</value>
+  </data>
+  <data name="StateDetail_FleetSituation_Empty" xml:space="preserve">
+    <value>舰队为空。</value>
+  </data>
+  <data name="Settings_Window_Layout_Merged" xml:space="preserve">
+    <value>合并显示</value>
   </data>
 </root>

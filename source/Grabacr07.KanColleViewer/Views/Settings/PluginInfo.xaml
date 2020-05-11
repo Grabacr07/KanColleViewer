@@ -69,7 +69,7 @@
 																	 MethodTarget="{Binding}" />
 									</i:EventTrigger>
 								</i:Interaction.Triggers>
-								<Run Text="{Binding Resources.Debug_NotificationMessage_Title, Source={x:Static models:ResourceService.Current}, Mode=OneWay, StringFormat='(\{0\})'}" />
+								<Run Text="{Binding Resources.Debug_NotificationMessage_Title, Source={x:Static models:ResourceService.Current}, Mode=OneWay, StringFormat='({0})'}" />
 							</Hyperlink>
 							<Run Text="　" />
 						</Span>
@@ -81,7 +81,7 @@
 						<Span Foreground="{DynamicResource ForegroundBrushKey}"
 							  FontFamily="{DynamicResource DefaultFontFamilyKey}"
 							  FontSize="{DynamicResource DetailFontSizeKey}">
-							<Run Text="{Binding Resources.Plugin_Function_Request2Notify, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+							<Run Text="{Binding Resources.PluginInfo_Functions_Request2Notify, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 							<Run Text="　" />
 						</Span>
 					</metro2:RichTextInlinePresenter>
@@ -92,7 +92,7 @@
 						<Span Foreground="{DynamicResource ForegroundBrushKey}"
 							  FontFamily="{DynamicResource DefaultFontFamilyKey}"
 							  FontSize="{DynamicResource DetailFontSizeKey}">
-							<Run Text="{Binding Resources.Plugin_Function_Tool, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+							<Run Text="{Binding Resources.PluginInfo_Functions_Tool, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 							<Run Text="　" />
 						</Span>
 					</metro2:RichTextInlinePresenter>
@@ -103,7 +103,7 @@
 						<Span Foreground="{DynamicResource ForegroundBrushKey}"
 							  FontFamily="{DynamicResource DefaultFontFamilyKey}"
 							  FontSize="{DynamicResource DetailFontSizeKey}">
-							<Run Text="{Binding Resources.Plugin_Function_TaskbarIndicator, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+							<Run Text="{Binding Resources.PluginInfo_Functions_TaskbarIndicator, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 							<Run Text="　" />
 						</Span>
 					</metro2:RichTextInlinePresenter>

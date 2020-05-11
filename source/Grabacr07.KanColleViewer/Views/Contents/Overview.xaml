@@ -289,7 +289,7 @@
 				<Border Grid.Row="0"
 						Grid.Column="0">
 					<StackPanel>
-						<TextBlock Text="{Binding Resources.Data, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
+						<TextBlock Text="{Binding Resources.Common_Data, Source={x:Static models:ResourceService.Current}, Mode=OneWay}" />
 
 						<Rectangle Height=".99"
 								   Margin="0,7,0,3"

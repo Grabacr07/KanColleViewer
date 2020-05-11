@@ -126,7 +126,7 @@
   <data name="Common_Notifications_NotImplemented" xml:space="preserve">
     <value>(planned)</value>
   </data>
-  <data name="Common_Notifications_Title" xml:space="preserve">
+  <data name="Settings_Notifications" xml:space="preserve">
     <value>Notifications</value>
   </data>
   <data name="Common_Notifications_Windows8" xml:space="preserve">
@@ -228,7 +228,7 @@
   <data name="IntegratedView" xml:space="preserve">
     <value>Overview</value>
   </data>
-  <data name="MessageBar_Expedition" xml:space="preserve">
+  <data name="FleetWindow_Situation_Expedition" xml:space="preserve">
     <value>This fleet is on an expedition.</value>
   </data>
   <data name="MessageBar_Expedition_TimeCompletion" xml:space="preserve">
@@ -237,13 +237,13 @@
   <data name="MessageBar_Expedition_TimeRemaining" xml:space="preserve">
     <value> Remaining Time:</value>
   </data>
-  <data name="MessageBar_Repairing" xml:space="preserve">
+  <data name="FleetWindow_Situation_Repairing" xml:space="preserve">
     <value>There are ships in your fleet currently docked for repairs. Completion Time: {0:MM/dd HH\:mm}  Remaining Time: {1}:{2:mm\:ss}</value>
   </data>
-  <data name="MessageBar_Repairing_Null" xml:space="preserve">
+  <data name="FleetWindow_Situation_NoRepairing" xml:space="preserve">
     <value>There are ships in your fleet currently docked for repairs.</value>
   </data>
-  <data name="MessageBar_ReSortie_BadCondition" xml:space="preserve">
+  <data name="Fleets_Condition_Rejuvenating" xml:space="preserve">
     <value>are fatigued</value>
   </data>
   <data name="MessageBar_ReSortie_CanNotReSortie" xml:space="preserve">
@@ -252,7 +252,7 @@
   <data name="MessageBar_ReSortie_CanReSortie" xml:space="preserve">
     <value>Ready to sortie!</value>
   </data>
-  <data name="MessageBar_ReSortie_LackForResources" xml:space="preserve">
+  <data name="FleetWindow_Situation_InShortSupply" xml:space="preserve">
     <value>need resupplying</value>
   </data>
   <data name="MessageBar_ReSortie_Remaining" xml:space="preserve">
@@ -261,7 +261,7 @@
   <data name="MessageBar_ReSortie_Separator" xml:space="preserve">
     <value>, </value>
   </data>
-  <data name="MessageBar_ReSortie_Wounded" xml:space="preserve">
+  <data name="Fleets_Situation_HeavilyDamaged" xml:space="preserve">
     <value>are heavily damaged</value>
   </data>
   <data name="Quests" xml:space="preserve">
@@ -357,7 +357,7 @@
   <data name="Settings_Proxy" xml:space="preserve">
     <value>Proxy Settings</value>
   </data>
-  <data name="Settings_Proxy_Enable" xml:space="preserve">
+  <data name="Settings_Proxy_SpecificProxy" xml:space="preserve">
     <value>Use a proxy to connect the server</value>
   </data>
   <data name="Settings_Proxy_Enable_4_SSL" xml:space="preserve">
@@ -420,23 +420,11 @@
   <data name="StartContent_Welcom" xml:space="preserve">
     <value>Welcome</value>
   </data>
-  <data name="StatusBar_AirSuperiorityPotential" xml:space="preserve">
-    <value>Air Superiority Potential:</value>
-  </data>
-  <data name="StatusBar_AverageLevel" xml:space="preserve">
-    <value>Average Level:</value>
-  </data>
   <data name="StatusBar_NotStarted" xml:space="preserve">
     <value>Waiting for KanColle to start</value>
   </data>
   <data name="StatusBar_Ready" xml:space="preserve">
     <value>Ready</value>
-  </data>
-  <data name="StatusBar_Speed_Fast" xml:space="preserve">
-    <value>Fast Fleet</value>
-  </data>
-  <data name="StatusBar_Speed_Slow" xml:space="preserve">
-    <value>Slow Fleet</value>
   </data>
   <data name="ZoomAction_OutOfRange" xml:space="preserve">
     <value>{0}% zoom is not supported.</value>
@@ -449,5 +437,17 @@
   </data>
   <data name="Settings_Logging_Enable" xml:space="preserve">
     <value>Log drops and crafting results to file</value>
+  </data>
+  <data name="Fleets_Speed_Fast" xml:space="preserve">
+    <value>Fast Fleet</value>
+  </data>
+  <data name="Fleets_Speed_Slow" xml:space="preserve">
+    <value>Slow Fleet</value>
+  </data>
+  <data name="Fleets_Average" xml:space="preserve">
+    <value>Average Level:</value>
+  </data>
+  <data name="Fleets_AirSuperiorityPotential" xml:space="preserve">
+    <value>Air Superiority Potential:</value>
   </data>
 </root>

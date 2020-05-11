@@ -126,7 +126,7 @@
   <data name="Common_Notifications_NotImplemented" xml:space="preserve">
     <value>(미실장)</value>
   </data>
-  <data name="Common_Notifications_Title" xml:space="preserve">
+  <data name="Settings_Notifications" xml:space="preserve">
     <value>알리미설정</value>
   </data>
   <data name="Common_Notifications_Windows8" xml:space="preserve">
@@ -228,7 +228,7 @@
   <data name="IntegratedView" xml:space="preserve">
     <value>종합</value>
   </data>
-  <data name="MessageBar_Expedition" xml:space="preserve">
+  <data name="FleetWindow_Situation_Expedition" xml:space="preserve">
     <value>이 함대는 원정중입니다.</value>
   </data>
   <data name="MessageBar_Expedition_TimeCompletion" xml:space="preserve">
@@ -237,13 +237,13 @@
   <data name="MessageBar_Expedition_TimeRemaining" xml:space="preserve">
     <value> 귀환까지:</value>
   </data>
-  <data name="MessageBar_Repairing" xml:space="preserve">
+  <data name="FleetWindow_Situation_Repairing" xml:space="preserve">
     <value>함대에 입거중인 칸무스가 있습니다. 완료시각: {0:MM/dd HH\:mm} 완료까지: {1}:{2:mm\:ss}</value>
   </data>
-  <data name="MessageBar_Repairing_Null" xml:space="preserve">
+  <data name="FleetWindow_Situation_NoRepairing" xml:space="preserve">
     <value>함대에 입거중인 칸무스가 있습니다.</value>
   </data>
-  <data name="MessageBar_ReSortie_BadCondition" xml:space="preserve">
+  <data name="Fleets_Condition_Rejuvenating" xml:space="preserve">
     <value>피로한 칸무스</value>
   </data>
   <data name="MessageBar_ReSortie_CanNotReSortie" xml:space="preserve">
@@ -252,7 +252,7 @@
   <data name="MessageBar_ReSortie_CanReSortie" xml:space="preserve">
     <value>출격가능!</value>
   </data>
-  <data name="MessageBar_ReSortie_LackForResources" xml:space="preserve">
+  <data name="FleetWindow_Situation_InShortSupply" xml:space="preserve">
     <value>보급 못받은 칸무스</value>
   </data>
   <data name="MessageBar_ReSortie_Remaining" xml:space="preserve">
@@ -261,7 +261,7 @@
   <data name="MessageBar_ReSortie_Separator" xml:space="preserve">
     <value>, </value>
   </data>
-  <data name="MessageBar_ReSortie_Wounded" xml:space="preserve">
+  <data name="Fleets_Situation_HeavilyDamaged" xml:space="preserve">
     <value>중파이상인 칸무스</value>
   </data>
   <data name="Quests" xml:space="preserve">
@@ -357,7 +357,7 @@
   <data name="Settings_Proxy" xml:space="preserve">
     <value>프록시설정</value>
   </data>
-  <data name="Settings_Proxy_Enable" xml:space="preserve">
+  <data name="Settings_Proxy_SpecificProxy" xml:space="preserve">
     <value>통신에 프록시 서버를 사용한다</value>
   </data>
   <data name="Settings_Proxy_Enable_4_SSL" xml:space="preserve">
@@ -420,28 +420,28 @@
   <data name="StartContent_Welcom" xml:space="preserve">
     <value>ようこそ</value>
   </data>
-  <data name="StatusBar_AirSuperiorityPotential" xml:space="preserve">
-    <value>제공전력:</value>
-  </data>
-  <data name="StatusBar_AverageLevel" xml:space="preserve">
-    <value>평균레벨: </value>
-  </data>
   <data name="StatusBar_NotStarted" xml:space="preserve">
     <value>칸코레의 기동을 기다리고 있습니다</value>
   </data>
   <data name="StatusBar_Ready" xml:space="preserve">
     <value>준비 완료</value>
   </data>
-  <data name="StatusBar_Speed_Fast" xml:space="preserve">
-    <value>고속함대</value>
-  </data>
-  <data name="StatusBar_Speed_Slow" xml:space="preserve">
-    <value>저속함대</value>
-  </data>
   <data name="ZoomAction_OutOfRange" xml:space="preserve">
     <value>줌 {0} % 은 지원되지 않습니다</value>
   </data>
   <data name="ZoomAction_ZoomFailed" xml:space="preserve">
     <value>줌에 실패했습니다: {0}</value>
+  </data>
+  <data name="Fleets_Speed_Fast" xml:space="preserve">
+    <value>고속함대</value>
+  </data>
+  <data name="Fleets_Speed_Slow" xml:space="preserve">
+    <value>저속함대</value>
+  </data>
+  <data name="Fleets_Average" xml:space="preserve">
+    <value>평균레벨: </value>
+  </data>
+  <data name="Fleets_AirSuperiorityPotential" xml:space="preserve">
+    <value>제공전력:</value>
   </data>
 </root>

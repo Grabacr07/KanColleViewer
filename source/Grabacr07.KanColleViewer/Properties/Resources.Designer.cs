@@ -61,119 +61,119 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   查找类似 すべて 的本地化字符串。
-        /// </summary>
-        public static string Common_AllShips {
-            get {
-                return ResourceManager.GetString("Common_AllShips", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 前のページに戻る 的本地化字符串。
         /// </summary>
-        public static string Common_Button_Back {
+        public static string BrowserNavigator_BackButton_Tooltip {
             get {
-                return ResourceManager.GetString("Common_Button_Back", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 キャンセル 的本地化字符串。
-        /// </summary>
-        public static string Common_Button_Cancel {
-            get {
-                return ResourceManager.GetString("Common_Button_Cancel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 クリア 的本地化字符串。
-        /// </summary>
-        public static string Common_Button_Clear {
-            get {
-                return ResourceManager.GetString("Common_Button_Clear", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 閉じる 的本地化字符串。
-        /// </summary>
-        public static string Common_Button_Close {
-            get {
-                return ResourceManager.GetString("Common_Button_Close", resourceCulture);
+                return ResourceManager.GetString("BrowserNavigator_BackButton_Tooltip", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 次のページに進む 的本地化字符串。
         /// </summary>
-        public static string Common_Button_Forward {
+        public static string BrowserNavigator_ForwardButton_Tooltip {
             get {
-                return ResourceManager.GetString("Common_Button_Forward", resourceCulture);
+                return ResourceManager.GetString("BrowserNavigator_ForwardButton_Tooltip", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 OK 的本地化字符串。
+        ///   查找类似 URL を入力し、Enter キーで移動します。 的本地化字符串。
         /// </summary>
-        public static string Common_Button_OK {
+        public static string BrowserNavigator_NavigationBar_Prompt {
             get {
-                return ResourceManager.GetString("Common_Button_OK", resourceCulture);
+                return ResourceManager.GetString("BrowserNavigator_NavigationBar_Prompt", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 ページを更新する 的本地化字符串。
         /// </summary>
-        public static string Common_Button_Refresh {
+        public static string BrowserNavigator_RefreshButton_Tooltip {
             get {
-                return ResourceManager.GetString("Common_Button_Refresh", resourceCulture);
+                return ResourceManager.GetString("BrowserNavigator_RefreshButton_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 キャンセル 的本地化字符串。
+        /// </summary>
+        public static string Button_Cancel {
+            get {
+                return ResourceManager.GetString("Button_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 クリア 的本地化字符串。
+        /// </summary>
+        public static string Button_Clear {
+            get {
+                return ResourceManager.GetString("Button_Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 閉じる 的本地化字符串。
+        /// </summary>
+        public static string Button_Close {
+            get {
+                return ResourceManager.GetString("Button_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 OK 的本地化字符串。
+        /// </summary>
+        public static string Button_OK {
+            get {
+                return ResourceManager.GetString("Button_OK", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 既定値に戻す 的本地化字符串。
         /// </summary>
-        public static string Common_Button_Reset2Default {
+        public static string Button_Reset2Default {
             get {
-                return ResourceManager.GetString("Common_Button_Reset2Default", resourceCulture);
+                return ResourceManager.GetString("Button_Reset2Default", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 再試行 的本地化字符串。
         /// </summary>
-        public static string Common_Button_Retry {
+        public static string Button_Retry {
             get {
-                return ResourceManager.GetString("Common_Button_Retry", resourceCulture);
+                return ResourceManager.GetString("Button_Retry", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 常に確認する 的本地化字符串。
+        ///   查找类似 表示の更新 的本地化字符串。
         /// </summary>
-        public static string Common_Confirmation_Always {
+        public static string Button_Update {
             get {
-                return ResourceManager.GetString("Common_Confirmation_Always", resourceCulture);
+                return ResourceManager.GetString("Button_Update", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 確認しない 的本地化字符串。
+        ///   查找类似 一覧を生成しています... 的本地化字符串。
         /// </summary>
-        public static string Common_Confirmation_Disable {
+        public static string CatalogWindow_GeneratingList {
             get {
-                return ResourceManager.GetString("Common_Confirmation_Disable", resourceCulture);
+                return ResourceManager.GetString("CatalogWindow_GeneratingList", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 出撃中のみ確認する 的本地化字符串。
+        ///   查找类似 データ 的本地化字符串。
         /// </summary>
-        public static string Common_Confirmation_InSortie {
+        public static string Common_Data {
             get {
-                return ResourceManager.GetString("Common_Confirmation_InSortie", resourceCulture);
+                return ResourceManager.GetString("Common_Data", resourceCulture);
             }
         }
         
@@ -192,24 +192,6 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Common_Implement_Oncoming {
             get {
                 return ResourceManager.GetString("Common_Implement_Oncoming", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 URL を入力し、Enter キーで移動します。 的本地化字符串。
-        /// </summary>
-        public static string Common_NavigateCommand {
-            get {
-                return ResourceManager.GetString("Common_NavigateCommand", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 使用しない 的本地化字符串。
-        /// </summary>
-        public static string Common_Needless {
-            get {
-                return ResourceManager.GetString("Common_Needless", resourceCulture);
             }
         }
         
@@ -237,15 +219,6 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Common_Notifications_NotImplemented {
             get {
                 return ResourceManager.GetString("Common_Notifications_NotImplemented", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 通知設定 的本地化字符串。
-        /// </summary>
-        public static string Common_Notifications_Title {
-            get {
-                return ResourceManager.GetString("Common_Notifications_Title", resourceCulture);
             }
         }
         
@@ -286,15 +259,6 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   查找类似 データ 的本地化字符串。
-        /// </summary>
-        public static string Data {
-            get {
-                return ResourceManager.GetString("Data", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 Debug 的本地化字符串。
         /// </summary>
         public static string Debug {
@@ -304,7 +268,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   查找类似 これはテスト通知です。 的本地化字符串。
+        ///   查找类似 これは「提督業も忙しい！」のテスト通知です。 的本地化字符串。
         /// </summary>
         public static string Debug_NotificationMessage {
             get {
@@ -439,6 +403,33 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   查找类似 常に確認する 的本地化字符串。
+        /// </summary>
+        public static string ExitConfirmation_Always {
+            get {
+                return ResourceManager.GetString("ExitConfirmation_Always", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 出撃中のみ確認する 的本地化字符串。
+        /// </summary>
+        public static string ExitConfirmation_InSortieOnly {
+            get {
+                return ResourceManager.GetString("ExitConfirmation_InSortieOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 確認しない 的本地化字符串。
+        /// </summary>
+        public static string ExitConfirmation_Never {
+            get {
+                return ResourceManager.GetString("ExitConfirmation_Never", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 「提督業も忙しい！」 を終了します。よろしいですか？ 的本地化字符串。
         /// </summary>
         public static string ExitDialog_Description {
@@ -565,6 +556,15 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   查找类似 疲労回復まで 的本地化字符串。
+        /// </summary>
+        public static string Fleets_Condition_Rejuvenating {
+            get {
+                return ResourceManager.GetString("Fleets_Condition_Rejuvenating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 次のレベルまでの経験値 的本地化字符串。
         /// </summary>
         public static string Fleets_ExpForNextLevel {
@@ -588,6 +588,24 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Fleets_Level {
             get {
                 return ResourceManager.GetString("Fleets_Level", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 大破した艦娘がいます 的本地化字符串。
+        /// </summary>
+        public static string Fleets_Situation_HeavilyDamaged {
+            get {
+                return ResourceManager.GetString("Fleets_Situation_HeavilyDamaged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 艦隊は出撃中です！ 的本地化字符串。
+        /// </summary>
+        public static string Fleets_Situation_InSortie {
+            get {
+                return ResourceManager.GetString("Fleets_Situation_InSortie", resourceCulture);
             }
         }
         
@@ -624,6 +642,123 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Fleets_ViewRange {
             get {
                 return ResourceManager.GetString("Fleets_ViewRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 艦隊は遠征中です 的本地化字符串。
+        /// </summary>
+        public static string FleetWindow_Situation_Expedition {
+            get {
+                return ResourceManager.GetString("FleetWindow_Situation_Expedition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 艦隊編成は正常です 的本地化字符串。
+        /// </summary>
+        public static string FleetWindow_Situation_FlagshipIsNotRepairShip {
+            get {
+                return ResourceManager.GetString("FleetWindow_Situation_FlagshipIsNotRepairShip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 工作艦が旗艦として編成されています 的本地化字符串。
+        /// </summary>
+        public static string FleetWindow_Situation_FlagshipIsRepairShip {
+            get {
+                return ResourceManager.GetString("FleetWindow_Situation_FlagshipIsRepairShip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 連合艦隊は遠征に参加できません 的本地化字符串。
+        /// </summary>
+        public static string FleetWindow_Situation_InCombined {
+            get {
+                return ResourceManager.GetString("FleetWindow_Situation_InCombined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 艦隊に未補給の艦娘がいます 的本地化字符串。
+        /// </summary>
+        public static string FleetWindow_Situation_InShortSupply {
+            get {
+                return ResourceManager.GetString("FleetWindow_Situation_InShortSupply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 艦隊は遠征中ではありません 的本地化字符串。
+        /// </summary>
+        public static string FleetWindow_Situation_NoExpedition {
+            get {
+                return ResourceManager.GetString("FleetWindow_Situation_NoExpedition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 艦隊の艦娘に大きなダメージはありません 的本地化字符串。
+        /// </summary>
+        public static string FleetWindow_Situation_NoHeavilyDamaged {
+            get {
+                return ResourceManager.GetString("FleetWindow_Situation_NoHeavilyDamaged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 艦隊の艦娘は入渠していません 的本地化字符串。
+        /// </summary>
+        public static string FleetWindow_Situation_NoRepairing {
+            get {
+                return ResourceManager.GetString("FleetWindow_Situation_NoRepairing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 艦隊は出撃していません 的本地化字符串。
+        /// </summary>
+        public static string FleetWindow_Situation_NotInSortie {
+            get {
+                return ResourceManager.GetString("FleetWindow_Situation_NotInSortie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 艦隊の出撃準備は完了していません 的本地化字符串。
+        /// </summary>
+        public static string FleetWindow_Situation_NotReSortie {
+            get {
+                return ResourceManager.GetString("FleetWindow_Situation_NotReSortie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 艦隊の艦娘は疲労していません 的本地化字符串。
+        /// </summary>
+        public static string FleetWindow_Situation_RemainingNull {
+            get {
+                return ResourceManager.GetString("FleetWindow_Situation_RemainingNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 艦隊に入渠中の艦娘がいます 的本地化字符串。
+        /// </summary>
+        public static string FleetWindow_Situation_Repairing {
+            get {
+                return ResourceManager.GetString("FleetWindow_Situation_Repairing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 艦隊は補給済みです 的本地化字符串。
+        /// </summary>
+        public static string FleetWindow_Situation_SupplyAlready {
+            get {
+                return ResourceManager.GetString("FleetWindow_Situation_SupplyAlready", resourceCulture);
             }
         }
         
@@ -682,15 +817,6 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   查找类似 この艦隊は遠征中です。 的本地化字符串。
-        /// </summary>
-        public static string MessageBar_Expedition {
-            get {
-                return ResourceManager.GetString("MessageBar_Expedition", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似  完了時刻: 的本地化字符串。
         /// </summary>
         public static string MessageBar_Expedition_TimeCompletion {
@@ -705,33 +831,6 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string MessageBar_Expedition_TimeRemaining {
             get {
                 return ResourceManager.GetString("MessageBar_Expedition_TimeRemaining", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 艦隊に入渠中の艦娘がいます。 完了時刻: {0:MM/dd HH\:mm} 完了まで: {1}:{2:mm\:ss} 的本地化字符串。
-        /// </summary>
-        public static string MessageBar_Repairing {
-            get {
-                return ResourceManager.GetString("MessageBar_Repairing", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 艦隊に入渠中の艦娘がいます。 的本地化字符串。
-        /// </summary>
-        public static string MessageBar_Repairing_Null {
-            get {
-                return ResourceManager.GetString("MessageBar_Repairing_Null", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 疲労中の艦娘 的本地化字符串。
-        /// </summary>
-        public static string MessageBar_ReSortie_BadCondition {
-            get {
-                return ResourceManager.GetString("MessageBar_ReSortie_BadCondition", resourceCulture);
             }
         }
         
@@ -754,15 +853,6 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   查找类似 未補給の艦娘 的本地化字符串。
-        /// </summary>
-        public static string MessageBar_ReSortie_LackForResources {
-            get {
-                return ResourceManager.GetString("MessageBar_ReSortie_LackForResources", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 再出撃までの目安:  的本地化字符串。
         /// </summary>
         public static string MessageBar_ReSortie_Remaining {
@@ -781,92 +871,29 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   查找类似 中破以上の艦娘 的本地化字符串。
-        /// </summary>
-        public static string MessageBar_ReSortie_Wounded {
-            get {
-                return ResourceManager.GetString("MessageBar_ReSortie_Wounded", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 通知を早める 的本地化字符串。
-        /// </summary>
-        public static string Notification_ShorteningTime {
-            get {
-                return ResourceManager.GetString("Notification_ShorteningTime", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 艦これ本体の仕様により、最大 1 分間短縮できます。サーバー時刻とのずれを加味し、40 ～ 50 秒に設定することを推奨します。 的本地化字符串。
-        /// </summary>
-        public static string Notification_ShorteningTime_Description {
-            get {
-                return ResourceManager.GetString("Notification_ShorteningTime_Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 読み込みに失敗したプラグイン 的本地化字符串。
-        /// </summary>
-        public static string Plugin_Failed {
-            get {
-                return ResourceManager.GetString("Plugin_Failed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 以下のプラグインは、読み込みに失敗し動作していません。発生したエラーの詳細を確認できます。 的本地化字符串。
-        /// </summary>
-        public static string Plugin_Failed_Description {
-            get {
-                return ResourceManager.GetString("Plugin_Failed_Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 プラグインからの通知 的本地化字符串。
         /// </summary>
-        public static string Plugin_Function_Request2Notify {
+        public static string PluginInfo_Functions_Request2Notify {
             get {
-                return ResourceManager.GetString("Plugin_Function_Request2Notify", resourceCulture);
+                return ResourceManager.GetString("PluginInfo_Functions_Request2Notify", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 タスク バー インジケーター 的本地化字符串。
         /// </summary>
-        public static string Plugin_Function_TaskbarIndicator {
+        public static string PluginInfo_Functions_TaskbarIndicator {
             get {
-                return ResourceManager.GetString("Plugin_Function_TaskbarIndicator", resourceCulture);
+                return ResourceManager.GetString("PluginInfo_Functions_TaskbarIndicator", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 ツール表示 的本地化字符串。
         /// </summary>
-        public static string Plugin_Function_Tool {
+        public static string PluginInfo_Functions_Tool {
             get {
-                return ResourceManager.GetString("Plugin_Function_Tool", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 読み込み済みのプラグイン 的本地化字符串。
-        /// </summary>
-        public static string Plugin_Loaded {
-            get {
-                return ResourceManager.GetString("Plugin_Loaded", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 以下のプラグインが読み込まれています。各プラグインの設定を変更できます。 的本地化字符串。
-        /// </summary>
-        public static string Plugin_Loaded_Description {
-            get {
-                return ResourceManager.GetString("Plugin_Loaded_Description", resourceCulture);
+                return ResourceManager.GetString("PluginInfo_Functions_Tool", resourceCulture);
             }
         }
         
@@ -952,7 +979,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   查找类似 入渠第 {0} ドックでの「{1}」の整備が完了しました。 的本地化字符串。
+        ///   查找类似 入渠第 {0} ドックでの「{1}」の修理が完了しました。 的本地化字符串。
         /// </summary>
         public static string Repairyard_NotificationMessage {
             get {
@@ -961,7 +988,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   查找类似 整備完了 的本地化字符串。
+        ///   查找类似 修理完了 的本地化字符串。
         /// </summary>
         public static string Repairyard_NotificationMessage_Title {
             get {
@@ -1024,34 +1051,7 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   查找类似 再出撃可能とするコンディション値 的本地化字符串。
-        /// </summary>
-        public static string ReSortie_Condition {
-            get {
-                return ResourceManager.GetString("ReSortie_Condition", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 ※[動作設定] &gt; [艦隊ステータス] から設定できます。 的本地化字符串。
-        /// </summary>
-        public static string ReSortie_Condition_Description1 {
-            get {
-                return ResourceManager.GetString("ReSortie_Condition_Description1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 艦隊に編成されているすべて艦娘のコンディション値が上記の値以上になったときに通知されます。コンディション値は 3 分間で 3 ずつ回復しますが、KanColleViewer 実装の仕様により、通知タイミングは数秒 ～ 最大 3 分程度遅れる可能性があること予めご了承ください。 的本地化字符串。
-        /// </summary>
-        public static string ReSortie_Condition_Description2 {
-            get {
-                return ResourceManager.GetString("ReSortie_Condition_Description2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 「{0}」の全艦娘の疲労が回復しました。 的本地化字符串。
+        ///   查找类似 「{0}」に編成されている艦娘の疲労が回復しました。 的本地化字符串。
         /// </summary>
         public static string ReSortie_NotificationMessage {
             get {
@@ -1179,9 +1179,9 @@ namespace Grabacr07.KanColleViewer.Properties {
         /// <summary>
         ///   查找类似 待ち受けポートを変更する 的本地化字符串。
         /// </summary>
-        public static string Settings_LocalProxy_IsEnabled {
+        public static string Settings_LocalProxy_CheckBox {
             get {
-                return ResourceManager.GetString("Settings_LocalProxy_IsEnabled", resourceCulture);
+                return ResourceManager.GetString("Settings_LocalProxy_CheckBox", resourceCulture);
             }
         }
         
@@ -1209,6 +1209,60 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Settings_Network {
             get {
                 return ResourceManager.GetString("Settings_Network", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 通知設定 的本地化字符串。
+        /// </summary>
+        public static string Settings_Notifications {
+            get {
+                return ResourceManager.GetString("Settings_Notifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 再出撃可能とするコンディション値 的本地化字符串。
+        /// </summary>
+        public static string Settings_Notifications_ReSortieCondition_Title {
+            get {
+                return ResourceManager.GetString("Settings_Notifications_ReSortieCondition_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ※[動作設定] &gt; [艦隊ステータス] から設定できます。 的本地化字符串。
+        /// </summary>
+        public static string Settings_Notifications_ReSortieCondition_Title_Description1 {
+            get {
+                return ResourceManager.GetString("Settings_Notifications_ReSortieCondition_Title_Description1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 艦隊に編成されているすべて艦娘のコンディション値が上記の値以上になったときに通知されます。コンディション値は 3 分間で 3 ずつ回復しますが、KanColleViewer 実装の仕様により、通知タイミングは数秒 ～ 最大 3 分程度遅れる可能性があること予めご了承ください。 的本地化字符串。
+        /// </summary>
+        public static string Settings_Notifications_ReSortieCondition_Title_Description2 {
+            get {
+                return ResourceManager.GetString("Settings_Notifications_ReSortieCondition_Title_Description2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 通知を早める 的本地化字符串。
+        /// </summary>
+        public static string Settings_Notifications_ShorteningTime {
+            get {
+                return ResourceManager.GetString("Settings_Notifications_ShorteningTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 艦これ本体の仕様により、最大 1 分間短縮できます。サーバー時刻とのずれを加味し、40 ～ 50 秒に設定することを推奨します。 的本地化字符串。
+        /// </summary>
+        public static string Settings_Notifications_ShorteningTime_Description {
+            get {
+                return ResourceManager.GetString("Settings_Notifications_ShorteningTime_Description", resourceCulture);
             }
         }
         
@@ -1251,27 +1305,27 @@ namespace Grabacr07.KanColleViewer.Properties {
         /// <summary>
         ///   查找类似 旗艦に工作艦が編成されているときは出撃可能と判断しない 的本地化字符串。
         /// </summary>
-        public static string Settings_Operation_RepairShipCheckBox {
+        public static string Settings_Operation_FleetsStatus_RepairShipCheckBox {
             get {
-                return ResourceManager.GetString("Settings_Operation_RepairShipCheckBox", resourceCulture);
+                return ResourceManager.GetString("Settings_Operation_FleetsStatus_RepairShipCheckBox", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 艦隊内の全艦のコンディションが次の数値以上になったとき、出撃可能と判断する 的本地化字符串。
         /// </summary>
-        public static string Settings_Operation_ReSortieCondition {
+        public static string Settings_Operation_FleetsStatus_ReSortieCondition {
             get {
-                return ResourceManager.GetString("Settings_Operation_ReSortieCondition", resourceCulture);
+                return ResourceManager.GetString("Settings_Operation_FleetsStatus_ReSortieCondition", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 ※通常は、間宮アイコンが消灯する 40 か、自然回復上限の 49 に設定します。 的本地化字符串。
         /// </summary>
-        public static string Settings_Operation_ReSortieCondition_Description {
+        public static string Settings_Operation_FleetsStatus_ReSortieCondition_Description {
             get {
-                return ResourceManager.GetString("Settings_Operation_ReSortieCondition_Description", resourceCulture);
+                return ResourceManager.GetString("Settings_Operation_FleetsStatus_ReSortieCondition_Description", resourceCulture);
             }
         }
         
@@ -1287,9 +1341,9 @@ namespace Grabacr07.KanColleViewer.Properties {
         /// <summary>
         ///   查找类似 艦隊の索敵値の算出に使用する計算式は、以下を使用する 的本地化字符串。
         /// </summary>
-        public static string Settings_Operation_ViewRange_Selection {
+        public static string Settings_Operation_ViewRange_Title {
             get {
-                return ResourceManager.GetString("Settings_Operation_ViewRange_Selection", resourceCulture);
+                return ResourceManager.GetString("Settings_Operation_ViewRange_Title", resourceCulture);
             }
         }
         
@@ -1303,11 +1357,56 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   查找类似 ユーザー スタイル シート 的本地化字符串。
+        /// </summary>
+        public static string Settings_Others_UserStyleSheet {
+            get {
+                return ResourceManager.GetString("Settings_Others_UserStyleSheet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 プラグイン 的本地化字符串。
         /// </summary>
-        public static string Settings_Plugin {
+        public static string Settings_Plugins {
             get {
-                return ResourceManager.GetString("Settings_Plugin", resourceCulture);
+                return ResourceManager.GetString("Settings_Plugins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 読み込みに失敗したプラグイン 的本地化字符串。
+        /// </summary>
+        public static string Settings_Plugins_Failed {
+            get {
+                return ResourceManager.GetString("Settings_Plugins_Failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 以下のプラグインは、読み込みに失敗し動作していません。発生したエラーの詳細を確認できます。 的本地化字符串。
+        /// </summary>
+        public static string Settings_Plugins_Failed_Description {
+            get {
+                return ResourceManager.GetString("Settings_Plugins_Failed_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 読み込み済みのプラグイン 的本地化字符串。
+        /// </summary>
+        public static string Settings_Plugins_Loaded {
+            get {
+                return ResourceManager.GetString("Settings_Plugins_Loaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 以下のプラグインが読み込まれています。各プラグインの設定を変更できます。 的本地化字符串。
+        /// </summary>
+        public static string Settings_Plugins_Loaded_Description {
+            get {
+                return ResourceManager.GetString("Settings_Plugins_Loaded_Description", resourceCulture);
             }
         }
         
@@ -1323,54 +1422,27 @@ namespace Grabacr07.KanColleViewer.Properties {
         /// <summary>
         ///   查找类似 プロキシ サーバーを使用しない 的本地化字符串。
         /// </summary>
-        public static string Settings_Proxy_Disable {
+        public static string Settings_Proxy_DirectAccess {
             get {
-                return ResourceManager.GetString("Settings_Proxy_Disable", resourceCulture);
+                return ResourceManager.GetString("Settings_Proxy_DirectAccess", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 全てのプロトコルでプロキシ サーバーを中継せずに直接サーバーと通信を行います。 的本地化字符串。
         /// </summary>
-        public static string Settings_Proxy_Disable_Description {
+        public static string Settings_Proxy_DirectAccess_Description {
             get {
-                return ResourceManager.GetString("Settings_Proxy_Disable_Description", resourceCulture);
+                return ResourceManager.GetString("Settings_Proxy_DirectAccess_Description", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 プロキシ サーバーを指定する 的本地化字符串。
+        ///   查找类似  的本地化字符串。
         /// </summary>
-        public static string Settings_Proxy_Enable {
+        public static string Settings_Proxy_Enable_4_SSL {
             get {
-                return ResourceManager.GetString("Settings_Proxy_Enable", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 指定したプロキシ サーバーを中継して通信を行います。 的本地化字符串。
-        /// </summary>
-        public static string Settings_Proxy_Enable_Description1 {
-            get {
-                return ResourceManager.GetString("Settings_Proxy_Enable_Description1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 サーバーをホスト名で指定した場合、動作が遅くなることがあるため、IP アドレスでの指定を推奨します。 的本地化字符串。
-        /// </summary>
-        public static string Settings_Proxy_Enable_Description2 {
-            get {
-                return ResourceManager.GetString("Settings_Proxy_Enable_Description2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 全てのプロトコルでこのプロキシ サーバーを使用する 的本地化字符串。
-        /// </summary>
-        public static string Settings_Proxy_Enable_ForAllProtocols {
-            get {
-                return ResourceManager.GetString("Settings_Proxy_Enable_ForAllProtocols", resourceCulture);
+                return ResourceManager.GetString("Settings_Proxy_Enable_4_SSL", resourceCulture);
             }
         }
         
@@ -1380,24 +1452,6 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Settings_Proxy_Host {
             get {
                 return ResourceManager.GetString("Settings_Proxy_Host", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Internet Explorer のプロキシ設定を使用する 的本地化字符串。
-        /// </summary>
-        public static string Settings_Proxy_IESettings {
-            get {
-                return ResourceManager.GetString("Settings_Proxy_IESettings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 「インターネット オプション」の設定を用いて通信を行います。 的本地化字符串。
-        /// </summary>
-        public static string Settings_Proxy_IESettings_Description {
-            get {
-                return ResourceManager.GetString("Settings_Proxy_IESettings_Description", resourceCulture);
             }
         }
         
@@ -1416,6 +1470,60 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Settings_Proxy_Restart2Apply {
             get {
                 return ResourceManager.GetString("Settings_Proxy_Restart2Apply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 プロキシ サーバーを指定する 的本地化字符串。
+        /// </summary>
+        public static string Settings_Proxy_SpecificProxy {
+            get {
+                return ResourceManager.GetString("Settings_Proxy_SpecificProxy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 指定したプロキシ サーバーを中継して通信を行います。 的本地化字符串。
+        /// </summary>
+        public static string Settings_Proxy_SpecificProxy_Description1 {
+            get {
+                return ResourceManager.GetString("Settings_Proxy_SpecificProxy_Description1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 サーバーをホスト名で指定した場合、動作が遅くなることがあるため、IP アドレスでの指定を推奨します。 的本地化字符串。
+        /// </summary>
+        public static string Settings_Proxy_SpecificProxy_Description2 {
+            get {
+                return ResourceManager.GetString("Settings_Proxy_SpecificProxy_Description2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 全てのプロトコルでこのプロキシ サーバーを使用する 的本地化字符串。
+        /// </summary>
+        public static string Settings_Proxy_SpecificProxy_ForAllProtocols {
+            get {
+                return ResourceManager.GetString("Settings_Proxy_SpecificProxy_ForAllProtocols", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Internet Explorer のプロキシ設定を使用する 的本地化字符串。
+        /// </summary>
+        public static string Settings_Proxy_SystemProxy {
+            get {
+                return ResourceManager.GetString("Settings_Proxy_SystemProxy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 「インターネット オプション」の設定を用いて通信を行います。 的本地化字符串。
+        /// </summary>
+        public static string Settings_Proxy_SystemProxy_Description {
+            get {
+                return ResourceManager.GetString("Settings_Proxy_SystemProxy_Description", resourceCulture);
             }
         }
         
@@ -1483,33 +1591,6 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   查找类似 ユーザー スタイル シート 的本地化字符串。
-        /// </summary>
-        public static string Settings_StyleSheets {
-            get {
-                return ResourceManager.GetString("Settings_StyleSheets", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 タスク バー設定 的本地化字符串。
-        /// </summary>
-        public static string Settings_Taskbar {
-            get {
-                return ResourceManager.GetString("Settings_Taskbar", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 インジケーターの動作 的本地化字符串。
-        /// </summary>
-        public static string Settings_Taskbar_ProgressIndicator {
-            get {
-                return ResourceManager.GetString("Settings_Taskbar_ProgressIndicator", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 バージョン情報 的本地化字符串。
         /// </summary>
         public static string Settings_VersionInfo {
@@ -1524,6 +1605,51 @@ namespace Grabacr07.KanColleViewer.Properties {
         public static string Settings_Window {
             get {
                 return ResourceManager.GetString("Settings_Window", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ウィンドウ レイアウト 的本地化字符串。
+        /// </summary>
+        public static string Settings_Window_Layout {
+            get {
+                return ResourceManager.GetString("Settings_Window_Layout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 シングル ウィンドウ 的本地化字符串。
+        /// </summary>
+        public static string Settings_Window_Layout_Merged {
+            get {
+                return ResourceManager.GetString("Settings_Window_Layout_Merged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 マルチ ウィンドウ 的本地化字符串。
+        /// </summary>
+        public static string Settings_Window_Layout_Split {
+            get {
+                return ResourceManager.GetString("Settings_Window_Layout_Split", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 タスク バー設定 的本地化字符串。
+        /// </summary>
+        public static string Settings_Window_Taskbar {
+            get {
+                return ResourceManager.GetString("Settings_Window_Taskbar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 インジケーターの動作 的本地化字符串。
+        /// </summary>
+        public static string Settings_Window_Taskbar_ProgressIndicator {
+            get {
+                return ResourceManager.GetString("Settings_Window_Taskbar_ProgressIndicator", resourceCulture);
             }
         }
         
@@ -1564,119 +1690,146 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
-        ///   查找类似 ウィンドウ レイアウト 的本地化字符串。
+        ///   查找类似 装備によるステータス上昇を含んだ値です 的本地化字符串。
         /// </summary>
-        public static string Settings_WindowLayout {
+        public static string ShipCatalogWindow_ColumnHeader_Tooltip {
             get {
-                return ResourceManager.GetString("Settings_WindowLayout", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 マルチ ウィンドウ 的本地化字符串。
-        /// </summary>
-        public static string Settings_WindowLayout_MultiWindow {
-            get {
-                return ResourceManager.GetString("Settings_WindowLayout_MultiWindow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 シングル ウィンドウ 的本地化字符串。
-        /// </summary>
-        public static string Settings_WindowLayout_SingleWindow {
-            get {
-                return ResourceManager.GetString("Settings_WindowLayout_SingleWindow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 損傷あり 的本地化字符串。
-        /// </summary>
-        public static string ShipCataWin_Damaged {
-            get {
-                return ResourceManager.GetString("ShipCataWin_Damaged", resourceCulture);
+                return ResourceManager.GetString("ShipCatalogWindow_ColumnHeader_Tooltip", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 フィルター設定 的本地化字符串。
         /// </summary>
-        public static string ShipCataWin_FilterSettings {
+        public static string ShipCatalogWindow_FilterSettings {
             get {
-                return ResourceManager.GetString("ShipCataWin_FilterSettings", resourceCulture);
+                return ResourceManager.GetString("ShipCatalogWindow_FilterSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 すべて 的本地化字符串。
+        /// </summary>
+        public static string ShipCatalogWindow_FilterSettings_AllShips {
+            get {
+                return ResourceManager.GetString("ShipCatalogWindow_FilterSettings_AllShips", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 損傷あり 的本地化字符串。
+        /// </summary>
+        public static string ShipCatalogWindow_FilterSettings_Damaged {
+            get {
+                return ResourceManager.GetString("ShipCatalogWindow_FilterSettings_Damaged", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 ロック 的本地化字符串。
         /// </summary>
-        public static string ShipCataWin_Lock {
+        public static string ShipCatalogWindow_FilterSettings_IsLocked {
             get {
-                return ResourceManager.GetString("ShipCataWin_Lock", resourceCulture);
+                return ResourceManager.GetString("ShipCatalogWindow_FilterSettings_IsLocked", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 ロックしている 的本地化字符串。
         /// </summary>
-        public static string ShipCataWin_Lock_Locked {
+        public static string ShipCatalogWindow_FilterSettings_Locked {
             get {
-                return ResourceManager.GetString("ShipCataWin_Lock_Locked", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 ロックしていない 的本地化字符串。
-        /// </summary>
-        public static string ShipCataWin_Lock_Unlocked {
-            get {
-                return ResourceManager.GetString("ShipCataWin_Lock_Unlocked", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 並べ替え設定 的本地化字符串。
-        /// </summary>
-        public static string ShipCataWin_SortSettings {
-            get {
-                return ResourceManager.GetString("ShipCataWin_SortSettings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 艦娘を以下の順序で並べ替えます。 的本地化字符串。
-        /// </summary>
-        public static string ShipCataWin_SortSettings_Description {
-            get {
-                return ResourceManager.GetString("ShipCataWin_SortSettings_Description", resourceCulture);
+                return ResourceManager.GetString("ShipCatalogWindow_FilterSettings_Locked", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 損傷なし 的本地化字符串。
         /// </summary>
-        public static string ShipCataWin_Undamaged {
+        public static string ShipCatalogWindow_FilterSettings_Undamaged {
             get {
-                return ResourceManager.GetString("ShipCataWin_Undamaged", resourceCulture);
+                return ResourceManager.GetString("ShipCatalogWindow_FilterSettings_Undamaged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ロックしていない 的本地化字符串。
+        /// </summary>
+        public static string ShipCatalogWindow_FilterSettings_Unlocked {
+            get {
+                return ResourceManager.GetString("ShipCatalogWindow_FilterSettings_Unlocked", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 遠征中の艦を除外する 的本地化字符串。
         /// </summary>
-        public static string ShipCataWin_WithoutExped {
+        public static string ShipCatalogWindow_FilterSettings_WithoutExpedition {
             get {
-                return ResourceManager.GetString("ShipCataWin_WithoutExped", resourceCulture);
+                return ResourceManager.GetString("ShipCatalogWindow_FilterSettings_WithoutExpedition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 並べ替え設定 的本地化字符串。
+        /// </summary>
+        public static string ShipCatalogWindow_SortSettings {
+            get {
+                return ResourceManager.GetString("ShipCatalogWindow_SortSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 艦娘を以下の順序で並べ替えます。 的本地化字符串。
+        /// </summary>
+        public static string ShipCatalogWindow_SortSettings_Description {
+            get {
+                return ResourceManager.GetString("ShipCatalogWindow_SortSettings_Description", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 ダメコン 的本地化字符串。
         /// </summary>
-        public static string SlotItemType_DamageControl {
+        public static string SlotItem_DamageControl {
             get {
-                return ResourceManager.GetString("SlotItemType_DamageControl", resourceCulture);
+                return ResourceManager.GetString("SlotItem_DamageControl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 装備している艦娘 的本地化字符串。
+        /// </summary>
+        public static string SlotItemCatalogWindow_ColumnHeaderEquippedShips {
+            get {
+                return ResourceManager.GetString("SlotItemCatalogWindow_ColumnHeaderEquippedShips", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 余り 的本地化字符串。
+        /// </summary>
+        public static string SlotItemCatalogWindow_ColumnHeaderRemainder {
+            get {
+                return ResourceManager.GetString("SlotItemCatalogWindow_ColumnHeaderRemainder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string StartContent_ClearCacheButton {
+            get {
+                return ResourceManager.GetString("StartContent_ClearCacheButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string StartContent_ClearCacheButtonMessage {
+            get {
+                return ResourceManager.GetString("StartContent_ClearCacheButtonMessage", resourceCulture);
             }
         }
         
@@ -1708,6 +1861,24 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   查找类似 疲労回復済み 的本地化字符串。
+        /// </summary>
+        public static string StateDetail_Condition_Rejuvenated {
+            get {
+                return ResourceManager.GetString("StateDetail_Condition_Rejuvenated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 艦隊に艦娘が編成されていません。 的本地化字符串。
+        /// </summary>
+        public static string StateDetail_FleetSituation_Empty {
+            get {
+                return ResourceManager.GetString("StateDetail_FleetSituation_Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 艦これの起動を待っています 的本地化字符串。
         /// </summary>
         public static string StatusBar_NotStarted {
@@ -1726,11 +1897,20 @@ namespace Grabacr07.KanColleViewer.Properties {
         }
         
         /// <summary>
+        ///   查找类似 使用しない 的本地化字符串。
+        /// </summary>
+        public static string TaskBarProgress_DisplayName_NotUsed {
+            get {
+                return ResourceManager.GetString("TaskBarProgress_DisplayName_NotUsed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 ツール 的本地化字符串。
         /// </summary>
-        public static string Tool {
+        public static string Tools {
             get {
-                return ResourceManager.GetString("Tool", resourceCulture);
+                return ResourceManager.GetString("Tools", resourceCulture);
             }
         }
         
