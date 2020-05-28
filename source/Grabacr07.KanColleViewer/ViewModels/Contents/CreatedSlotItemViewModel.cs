@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -56,7 +56,8 @@ namespace Grabacr07.KanColleViewer.ViewModels.Contents
 		public void Update(CreatedSlotItem item)
 		{
 			this.Succeed = item.Succeed;
-			this.Name = item.SlotItemInfo.Name;
+			this.Name = !item.Succeed ? "-----"
+				: string.Join(Environment.NewLine, item.SlotItemInfos.Select(x => x.Name).ToArray());
 		}
 	}
 }
