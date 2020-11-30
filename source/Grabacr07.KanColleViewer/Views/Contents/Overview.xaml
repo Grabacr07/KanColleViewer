@@ -233,6 +233,14 @@
 												<LineBreak />
 												<Run Text="condition"
 													 FontSize="9" />
+
+												<TextBlock.ToolTip>
+													<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+															   Foreground="White">
+														<Run Text="疲労回復まで:" />
+														<Run Text="{Binding Condition.ConditionText, Mode=OneWay}" />
+													</TextBlock>
+												</TextBlock.ToolTip>
 											</TextBlock>
 										</Grid>
 										<Rectangle Height=".99"

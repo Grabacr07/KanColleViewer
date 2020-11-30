@@ -223,12 +223,17 @@
 										</InlineUIContainer>
 										<Run Text="{Binding Ship.Condition, Mode=OneWay}"
 											 Style="{DynamicResource EmphaticTextElementStyleKey}" />
-									</TextBlock>
-									<TextBlock Grid.Column="5"
-											   Grid.Row="1"
-											   Margin="10,0,10,-1">
+										<LineBreak />
 										<Run Text="condition"
 											 FontSize="9" />
+
+										<TextBlock.ToolTip>
+											<TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+													   Foreground="White">
+												<Run Text="疲労回復まで:" />
+												<Run Text="{Binding Condition.ConditionText, Mode=OneWay}" />
+											</TextBlock>
+										</TextBlock.ToolTip>
 									</TextBlock>
 
 									<kcvc:ColorIndicator Grid.Column="6"

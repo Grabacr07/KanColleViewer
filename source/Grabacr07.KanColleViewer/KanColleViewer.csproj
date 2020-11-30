@@ -172,6 +172,7 @@
     <Compile Include="Models\Settings\NetworkSettings.cs" />
     <Compile Include="Models\Settings\SettingsHost.cs" />
     <Compile Include="Models\Settings\WindowSettings.cs" />
+    <Compile Include="Models\ShipCondition.cs" />
     <Compile Include="Models\StatusService.cs" />
     <Compile Include="Models\Migration\_Settings.cs" />
     <Compile Include="Models\SupportedImageFormat.cs" />
